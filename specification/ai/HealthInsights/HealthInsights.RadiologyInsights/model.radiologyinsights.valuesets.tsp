@@ -3,7 +3,9 @@ import "../HealthInsights.Common/model.common.fhir.elements.tsp";
 namespace AzureHealthInsights;
 
 @doc("A Radiology Insights inference types.")
-enum RadiologyInsightsInferenceType {
+union RadiologyInsightsInferenceType {
+  string,
+
   @doc("Age mismatch inference type")
   AgeMismatch: "ageMismatch",
 
@@ -36,7 +38,9 @@ enum RadiologyInsightsInferenceType {
 }
 
 @doc("Laterality discrepancy type")
-enum LateralityDiscrepancyType {
+union LateralityDiscrepancyType {
+  string,
+
   @doc("Mismatch between order and text")
   OrderLateralityMismatch: "orderLateralityMismatch",
 
@@ -48,7 +52,9 @@ enum LateralityDiscrepancyType {
 }
 
 @doc("consider using ClinicalCodeableConcept system: http://unitsofmeasure.org")
-enum MeasureUnitType {
+union MeasureUnitType {
+  string,
+
   @doc("Undefined measure unit type")
   Undefined: "undefined",
 
@@ -99,7 +105,9 @@ enum MeasureUnitType {
 }
 
 @doc("Medical Professional Type")
-enum MedicalProfessionalType {
+union MedicalProfessionalType {
+  string,
+
   @doc("Unknown medical professional type")
   Unknown: "unknown",
 
@@ -117,7 +125,9 @@ enum MedicalProfessionalType {
 }
 
 @doc("Laterality type")
-enum LateralityType {
+union LateralityType {
+  string,
+
   @doc("Left laterality type")
   Left: "left",
 
@@ -132,7 +142,9 @@ enum LateralityType {
 }
 
 @doc("Recommendation finding status")
-enum RecommendationFindingStatusType {
+union RecommendationFindingStatusType {
+  string,
+
   @doc("Present finding status")
   Present: "present",
 
@@ -150,7 +162,9 @@ enum RecommendationFindingStatusType {
 DiseaseCourseType value set system url = http://github.com/Azure/HealthInsights/RadiologyInsights/ValueSet/condition-course
 The below values can be used for binding in DiseaseCourseExtension.valueCodeableConcept
 """)
-enum DiseaseCourseType {
+union DiseaseCourseType {
+  string,
+
   @doc("Acute")
   Acute: "acute",
 

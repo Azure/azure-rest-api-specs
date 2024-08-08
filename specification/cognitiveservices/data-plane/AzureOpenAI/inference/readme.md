@@ -175,3 +175,10 @@ directive:
   - suppress: RequiredReadOnlyProperties
     reason: Parameter is read only
 ```
+
+## AzureOpenAI 2024-02-15-preview (generated)
+These settings apply only when `--tag=release_2024_02_15_preview_autogen` is specified on the command line.
+
+``` yaml $(tag) == 'release_2024_02_15_preview_autogen'
+input-file: preview/2024-02-15-preview/generated.json
+```

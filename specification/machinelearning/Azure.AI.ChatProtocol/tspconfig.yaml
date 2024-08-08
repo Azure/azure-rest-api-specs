@@ -2,7 +2,7 @@ parameters:
   "service-dir":
     default: "sdk/machinelearning"
 emit:
-   - "@azure-tools/typespec-autorest"
+  - "@azure-tools/typespec-autorest"
 #  - "@typespec/openapi3"
 linter:
   extends:
@@ -19,15 +19,19 @@ options:
     namespace: "Azure.AI.ChatProtocol"
     clear-output-folder: true
     model-namespace: false
+    flavor: azure
   "@azure-tools/typespec-python":
     package-dir: "azure-ai-chatprotocol"
     package-name: "{package-dir}"
     package-mode: dataplane
+    flavor: azure
   "@azure-tools/typespec-ts":
     package-dir: "ai-chat-protocol"
     isModularLibrary: true
     packageDetails:
       name: "@azure/ai-chat-protocol"
+    flavor: azure
   "@azure-tools/typespec-java":
     package-dir: "azure-ai-chatprotocol"
     namespace: "com.azure.ai.chatprotocol"
+    flavor: azure

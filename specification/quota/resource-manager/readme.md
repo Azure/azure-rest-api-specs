@@ -26,25 +26,29 @@ These are the global settings for the Quota API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2023-02-01
+tag: package-2023-06-01-preview
 ```
 
+``` yaml
+modelerfour:
+    flatten-models: false
+```
 
 ### Tag: package-2023-06-01-preview
 
 These settings apply only when `--tag=package-2023-06-01-preview` is specified on the command line.
 
-```yaml $(tag) == 'package-2023-06-01-preview'
+``` yaml $(tag) == 'package-2023-06-01-preview'
 input-file:
   - Microsoft.Quota/preview/2023-06-01-preview/groupquota.json
-  - Microsoft.Quota/stable/2023-02-01/quota.json
+  - Microsoft.Quota/preview/2023-06-01-preview/quota.json
 ```
 
 ### Tag: package-2023-02-01
 
 These settings apply only when `--tag=package-2023-02-01` is specified on the command line.
 
-```yaml $(tag) == 'package-2023-02-01'
+``` yaml $(tag) == 'package-2023-02-01'
 input-file:
   - Microsoft.Quota/stable/2023-02-01/quota.json
 ```
@@ -53,7 +57,7 @@ input-file:
 
 These settings apply only when `--tag=package-2021-03-15-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-2021-03-15-preview'
+``` yaml $(tag) == 'package-2023-02-01'
 input-file:
   - Microsoft.Quota/preview/2021-03-15-preview/quota.json
 ```
@@ -76,6 +80,18 @@ suppressions:
     reason: This API is a Management Group level API.
   - code: TopLevelResourcesListBySubscription
     reason: This API is a Management Group level API.
+  - code: TenantLevelAPIsNotAllowed 
+    from: groupquota.json
+    where: $.paths["/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Quota/groupQuotas/{groupQuotaName}"]
+    reason: This API is a Management Group level API.
+  - code: AllProxyResourcesShouldHaveDelete
+    from: groupquota.json
+    where: $.paths["/providers/Microsoft.Management/managementGroups/{managementGroupId}/subscriptions/{subscriptionId}/providers/Microsoft.Quota/groupQuotas/{groupQuotaName}/quotaAllocations/{resourceName}"].delete
+    reason: Quota cannot be deleted or reduced. It is not supported by any resource provider.
+  - code: AllProxyResourcesShouldHaveDelete
+    from: groupquota.json
+    where: $.paths["/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Quota/groupQuotas/{groupQuotaName}/groupQuotaLimits/{resourceName}".delete
+    reason: Quota cannot be deleted or reduced. It is not supported by any resource provider.
 ```
 
 ---
@@ -92,7 +108,7 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-net-track2
-  - repo: azure-sdk-for-python-track2
+  - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js

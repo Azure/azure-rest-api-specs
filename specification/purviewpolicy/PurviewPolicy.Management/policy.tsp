@@ -39,24 +39,28 @@ model SkipTokenParameter {
 }
 
 /** The objectType of the member. */
-enum ObjectType {
+union ObjectType {
+  string,
+
   /** AAD User object type. */
-  User,
+  "User",
 
   /** AAD Group object type. */
-  Group,
+  "Group",
 
   /** Service Principal object type. */
-  ServicePrincipal,
+  "ServicePrincipal",
 }
 
 /** The effect for rule */
-enum Decision {
+union Decision {
+  string,
+
   /** Access permitted */
-  Permit,
+  "Permit",
 
   /** Access denied */
-  Deny,
+  "Deny",
 }
 
 /** A paginated list of purview RBAC policies */
@@ -83,6 +87,7 @@ model Policy extends Azure.ResourceManager.Foundations.ProxyResourceBase {
   members: PolicyMembers;
 
   /** Array of decision rules for the policy */
+  @extension("x-ms-identifiers", [])
   decisionRules: PolicyDecisionRule[];
 
   /** The timestamp of the expiry time of the policy (UTC). */
@@ -96,9 +101,11 @@ model Policy extends Azure.ResourceManager.Foundations.ProxyResourceBase {
 /** Policy member */
 model PolicyMembers {
   /** Array of azure active directory members */
+  @extension("x-ms-identifiers", [])
   fabricItemMembers?: FabricItemMember[];
 
   /** Array of azure active directory members */
+  @extension("x-ms-identifiers", [])
   aadMembers?: AadMember[];
 }
 
@@ -129,6 +136,7 @@ model PolicyDecisionRule {
   effect: Decision;
 
   /** Array of attribute predicates */
+  @extension("x-ms-identifiers", [])
   permission?: AttributePredicate[];
 }
 

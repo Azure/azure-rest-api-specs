@@ -1,4 +1,4 @@
-parameters:  
+parameters:
   "service-dir":
     default: "sdk/translation"
   "dependencies":
@@ -20,15 +20,19 @@ options:
     namespace: Azure.AI.Translator.Document
     clear-output-folder: true
     model-namespace: false
-  "@azure-tools/typespec-python":    
+    flavor: azure
+  "@azure-tools/typespec-python":
     package-dir: "azure-ai-translator-document"
     package-name: "azure-ai-translator-document"
     package-mode: dataplane
+    flavor: azure
   "@azure-tools/typespec-java":
     package-dir: "azure-ai-translator-document"
     namespace: com.azure.ai.translator.document
+    flavor: azure
   "@azure-tools/typespec-ts":
     package-dir: "azure-ai-translator-document"
     packageDetails:
       name: "@azure-rest/azure-ai-translator-document"
       description: "Azure.AI.Translator.Document"
+    flavor: azure

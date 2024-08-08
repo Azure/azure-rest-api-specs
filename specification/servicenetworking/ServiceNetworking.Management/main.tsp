@@ -1,19 +1,23 @@
 import "@typespec/http";
 import "@typespec/rest";
 import "@typespec/versioning";
-import "@azure-tools/typespec-providerhub";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
 @armProviderNamespace
 @service({
   title: "TrafficController",
-  version: "2023-11-01",
 })
 @doc("Traffic Controller Provider management API.")
-@useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-@useDependency(Azure.Core.Versions.v1_0_Preview_1)
+@versioned(Versions)
 namespace Microsoft.ServiceNetworking;
+
+/** Api versions */
+enum Versions {
+  /** 2023-11-01 preview version */
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  `2023-11-01`,
+}
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
@@ -72,8 +76,9 @@ model AssociationProperties {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next update"
-enum AssociationType {
-  subnets,
+union AssociationType {
+  string,
+  "subnets",
 }
 
 @doc("Association Subnet.")
@@ -114,14 +119,15 @@ model TrafficControllerProperties {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next update"
 @lroStatus
-enum ProvisioningState {
-  Provisioning,
-  Updating,
-  Deleting,
-  Accepted,
-  Succeeded,
-  Failed,
-  Canceled,
+union ProvisioningState {
+  string,
+  Provisioning: "Provisioning",
+  Updating: "Updating",
+  Deleting: "Deleting",
+  Accepted: "Accepted",
+  Succeeded: "Succeeded",
+  Failed: "Failed",
+  Canceled: "Canceled",
 }
 
 @doc("Resource ID definition used by parent to reference child resources.")

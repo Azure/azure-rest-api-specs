@@ -20,7 +20,7 @@ model OpenAIFile {
   @doc("The name of the file.")
   filename: string;
 
-  @projectedName("json", "created_at")
+  @encodedName("application/json", "created_at")
   @encode(DateTimeKnownEncoding.unixTimestamp, int32)
   @doc("The Unix timestamp, in seconds, representing when this object was created.")
   createdAt: utcDateTime;
@@ -31,7 +31,9 @@ model OpenAIFile {
 
 @doc("The possible values denoting the intended usage of a file.")
 @added(ServiceApiVersions.v2024_02_15_preview)
-enum FilePurpose {
+union FilePurpose {
+  string,
+
   @doc("Indicates a file is used for fine tuning input.")
   fineTune: "fine-tune",
 

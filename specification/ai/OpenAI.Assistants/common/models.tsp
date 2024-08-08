@@ -8,7 +8,9 @@ namespace Azure.AI.OpenAI.Assistants;
 
 @doc("The possible values for roles attributed to messages in a thread.")
 @added(ServiceApiVersions.v2024_02_15_preview)
-enum MessageRole {
+union MessageRole {
+  string,
+
   @doc("The role representing the end-user.")
   user: "user",
 
@@ -17,7 +19,9 @@ enum MessageRole {
 }
 
 @doc("The available sorting options when requesting a list of response objects.")
-enum ListSortOrder {
+union ListSortOrder {
+  string,
+
   @doc("Specifies an ascending sort order.")
   ascending: "asc",
 
@@ -52,15 +56,15 @@ model OpenAIPageableListOf<T> {
   @doc("The requested list of items.")
   data: T[];
 
-  @projectedName("json", "first_id")
+  @encodedName("application/json", "first_id")
   @doc("The first ID represented in this list.")
   firstId: string;
 
-  @projectedName("json", "last_id")
+  @encodedName("application/json", "last_id")
   @doc("The last ID represented in this list.")
   lastId: string;
 
-  @projectedName("json", "has_more")
+  @encodedName("application/json", "has_more")
   @doc("A value indicating whether there are additional values available not captured in this list.")
   hasMore: boolean;
 }

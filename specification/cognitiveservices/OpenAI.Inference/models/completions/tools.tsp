@@ -10,9 +10,11 @@ using TypeSpec.Versioning;
 #suppress "@azure-tools/typespec-autorest/union-unsupported" "External API shape is defined in OpenAPI 3.0 as oneOf."
 alias ChatCompletionsToolSelection = ChatCompletionsToolSelectionPreset | ChatCompletionsNamedToolSelection;
 
-@added(ServiceApiVersions.v2023_12_01_Preview)
+@added(ServiceApiVersions.v2024_02_15_Preview)
 @doc("Represents a generic policy for how a chat completions tool may be selected.")
-enum ChatCompletionsToolSelectionPreset {
+union ChatCompletionsToolSelectionPreset {
+  string,
+
   @doc("""
   Specifies that the model may either use any of the tools provided in this chat completions request or
   instead return a standard chat completions response as if no tools were provided.
@@ -33,7 +35,7 @@ model ChatCompletionsNamedToolSelection {
   type: string;
 }
 
-@added(ServiceApiVersions.v2023_12_01_Preview)
+@added(ServiceApiVersions.v2024_02_15_Preview)
 @doc("A tool selection of a specific, named function tool that will limit chat completions to using the named function.")
 model ChatCompletionsNamedFunctionToolSelection
   extends ChatCompletionsNamedToolSelection {
@@ -44,7 +46,7 @@ model ChatCompletionsNamedFunctionToolSelection
   function: ChatCompletionsFunctionToolSelection;
 }
 
-@added(ServiceApiVersions.v2023_12_01_Preview)
+@added(ServiceApiVersions.v2024_02_15_Preview)
 @doc("A tool selection of a specific, named function tool that will limit chat completions to using the named function.")
 model ChatCompletionsFunctionToolSelection {
   @doc("The name of the function that should be called.")
@@ -55,13 +57,13 @@ model ChatCompletionsFunctionToolSelection {
 
 @discriminator("type")
 @doc("An abstract representation of a tool that can be used by the model to improve a chat completions response.")
-@added(ServiceApiVersions.v2023_12_01_Preview)
+@added(ServiceApiVersions.v2024_02_15_Preview)
 model ChatCompletionsToolDefinition {
   @doc("The object type.")
   type: string;
 }
 
-@added(ServiceApiVersions.v2023_12_01_Preview)
+@added(ServiceApiVersions.v2024_02_15_Preview)
 @doc("""
 The definition information for a chat completions function tool that can call a function in response to a tool call.
 """)
@@ -81,7 +83,7 @@ model ChatCompletionsFunctionToolDefinition
 An abstract representation of a tool call that must be resolved in a subsequent request to perform the requested
 chat completion.
 """)
-@added(ServiceApiVersions.v2023_12_01_Preview)
+@added(ServiceApiVersions.v2024_02_15_Preview)
 model ChatCompletionsToolCall {
   @doc("The object type.")
   type: string;
@@ -90,7 +92,7 @@ model ChatCompletionsToolCall {
   id: string;
 }
 
-@added(ServiceApiVersions.v2023_12_01_Preview)
+@added(ServiceApiVersions.v2024_02_15_Preview)
 @doc("""
 A tool call to a function tool, issued by the model in evaluation of a configured function tool, that represents
 a function invocation needed for a subsequent chat completions request to resolve.

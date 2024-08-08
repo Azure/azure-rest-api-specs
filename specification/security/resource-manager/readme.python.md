@@ -36,11 +36,17 @@ Generate all API versions currently shipped for this package
 
 ```yaml $(python)
 clear-output-folder: true
-default-api-version: "2023-01-01"
+default-api-version: "2024-01-01"
 multiapi: true
 batch:
+  - tag: package-2024-01
   - tag: package-2023-11-15
+  - tag: package-preview-2023-10
+  - tag: package-preview-2023-09
+  - tag: package-2023-05
+  - tag: package-preview-2023-05
   - tag: package-preview-2023-03-only
+  - tag: package-preview-2023-02-15-only
   - tag: package-preview-2023-02-only
   - tag: package-preview-2023-01-only
   - tag: package-2023-01
@@ -76,6 +82,16 @@ batch:
 output-folder: $(python-sdks-folder)/security/azure-mgmt-security/azure/mgmt/security/
 perform-load: false
 clear-output-folder: false
+```
+
+### Tag: package-2024-01 and python
+
+These settings apply only when `--tag=package-2024-01 --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-2024-01' && $(python)
+namespace: azure.mgmt.security.v2024_01_01
+output-folder: $(python-sdks-folder)/security/azure-mgmt-security/azure/mgmt/security/v2024_01_01
 ```
 
 ### Tag: package-2023-11-15 and python

@@ -1,158 +1,158 @@
-import "@typespec/rest";
-import "@typespec/openapi";
-import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
+import "@typespec/rest";
+import "./models.tsp";
 
+using TypeSpec.Rest;
+using Azure.ResourceManager;
+using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
-using TypeSpec.Rest;
-using TypeSpec.Versioning;
-using Azure.ResourceManager.Foundations;
-using Azure.Core;
-using Azure.ResourceManager;
 
 namespace Microsoft.AzureSphere;
-
-//Catalogs
-@doc("An Azure Sphere catalog")
+/**
+ * An Azure Sphere catalog
+ */
 model Catalog is TrackedResource<CatalogProperties> {
-  @doc("Name of catalog")
+  /**
+   * Name of catalog
+   */
   @pattern("^[A-Za-z0-9_-]{1,50}$")
-  @key("catalogName")
   @path
+  @key("catalogName")
   @segment("catalogs")
+  @visibility("read")
   name: string;
 }
 
-@doc("Catalog properties")
-model CatalogProperties {
-  @visibility("read")
-  @doc("The Azure Sphere tenant ID associated with the catalog.")
-  @added(Microsoft.AzureSphere.Versions.v2024_04_01)
-  tenantId?: string;
-
-  @visibility("read")
-  @doc("The status of the last operation.")
-  provisioningState?: ProvisioningState;
-}
-
-@doc("Request of the action to list device groups for a catalog.")
-model ListDeviceGroupsRequest {
-  @doc("Device Group name.")
-  deviceGroupName?: string;
-}
-@doc("Device insight report.")
-model DeviceInsight {
-  @doc("Device ID")
-  deviceId: string;
-
-  @doc("Event description")
-  description: string;
-
-  @doc("Event start timestamp")
-  startTimestampUtc: utcDateTime;
-
-  @doc("Event end timestamp")
-  endTimestampUtc: utcDateTime;
-
-  @doc("Event category")
-  eventCategory: string;
-
-  @doc("Event class")
-  eventClass: string;
-
-  @doc("Event type")
-  eventType: string;
-
-  @doc("Event count")
-  eventCount: int32;
-}
-
 @armResourceOperations
-interface Catalogs
-  extends Azure.ResourceManager.TrackedResourceOperations<
-      Catalog,
-      CatalogProperties
-    > {
-  @removed(Versions.v2024_04_01)
-  @autoRoute
-  @doc("Counts devices in catalog.")
-  @armResourceAction(Catalog)
-  @action("countDevices")
-  @renamedFrom(Versions.v2024_04_01, "countDevices")
-  @post
-  deprecated(
-    ...ResourceInstanceParameters<Catalog>,
-  ): ArmResponse<CountDeviceResponse> | ErrorResponse;
+interface Catalogs {
+  /**
+   * Get a Catalog
+   */
+  get is ArmResourceRead<Catalog>;
 
-  #suppress "@azure-tools/typespec-providerhub/non-breaking-versioning" "preview api"
-  @added(Versions.v2024_04_01)
-  @sharedRoute
-  @autoRoute
-  @doc("Counts devices in catalog.")
-  @armResourceAction(Catalog)
-  @post
-  countDevices(
-    ...ResourceInstanceParameters<Catalog>,
-  ): ArmResponse<CountDevicesResponse> | ErrorResponse;
+  /**
+   * Create a Catalog
+   */
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<Catalog>;
 
-  @autoRoute
-  @doc("Lists device insights for catalog.")
-  @armResourceAction(Catalog)
-  @post
-  listDeviceInsights(
-    ...ResourceInstanceParameters<Catalog>,
-    ...ListQueryParameters,
-  ): ArmResponse<Page<DeviceInsight>> | ErrorResponse;
+  /**
+   * Update a Catalog
+   */
+  @parameterVisibility("read")
+  update is ArmCustomPatchSync<Catalog, CatalogUpdate>;
 
-  @autoRoute
-  @doc("Lists devices for catalog.")
-  @armResourceAction(Catalog)
-  @post
-  listDevices(
-    ...ResourceInstanceParameters<Catalog>,
-    ...ListQueryParameters,
-  ): ArmResponse<ResourceListResult<Device>> | ErrorResponse;
+  /**
+   * Delete a Catalog
+   */
+  #suppress "deprecated" "For backward compatible"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatible"
+  delete is ArmResourceDeleteAsync<Catalog>;
 
-  @autoRoute
-  @doc("Lists deployments for catalog.")
-  @armResourceAction(Catalog)
-  @post
-  listDeployments(
-    ...ResourceInstanceParameters<Catalog>,
-    ...ListQueryParameters,
-  ): ArmResponse<ResourceListResult<Deployment>> | ErrorResponse;
+  /**
+   * List Catalog resources by resource group
+   */
+  listByResourceGroup is ArmResourceListByParent<Catalog>;
 
-  @autoRoute
-  @armResourceAction(Catalog)
-  @doc("List the device groups for the catalog.")
-  @post
-  listDeviceGroups(
-    ...ResourceInstanceParameters<Catalog>,
-    ...ListQueryParameters,
+  /**
+   * List Catalog resources by subscription ID
+   */
+  listBySubscription is ArmListBySubscription<Catalog>;
 
-    @doc("List device groups for catalog.")
-    @body
-    listDeviceGroupsRequest: ListDeviceGroupsRequest,
-  ): ArmResponse<ResourceListResult<DeviceGroup>> | ErrorResponse;
+  /**
+   * Counts devices in catalog.
+   */
+  countDevices is ArmResourceActionSync<Catalog, void, CountDevicesResponse>;
 
-  @autoRoute
-  @armResourceAction(Catalog)
-  @added(Versions.v2024_04_01)
-  @doc("Creates an image. Use this action when the image ID is unknown.")
-  @extension("x-ms-long-running-operation", true)
-  @extension(
-    "x-ms-long-running-operation-options",
+  /**
+   * Lists deployments for catalog.
+   */
+  listDeployments is ArmResourceActionSync<
+    Catalog,
+    void,
+    ResourceListResult<Deployment>,
     {
-      `final-state-via`: "location",
+      ...BaseParameters<Catalog>;
+      ...CustomFilterQueryParameter;
+      ...CustomTopQueryParameter;
+      ...CustomSkipQueryParameter;
+      ...CustomMaxPageSizeQueryParameter;
     }
-  )
-  uploadImage(
-    ...ResourceInstanceParameters<Catalog>,
+  >;
 
-    @doc("Image upload request body.")
-    @body
-    uploadImageRequest: Image,
-  ): ArmAcceptedLroResponse | ErrorResponse;
+  /**
+   * List the device groups for the catalog.
+   */
+  listDeviceGroups is ArmResourceActionSync<
+    Catalog,
+    ListDeviceGroupsRequest,
+    ResourceListResult<DeviceGroup>,
+    {
+      ...BaseParameters<Catalog>;
+      ...CustomFilterQueryParameter;
+      ...CustomTopQueryParameter;
+      ...CustomSkipQueryParameter;
+      ...CustomMaxPageSizeQueryParameter;
+    }
+  >;
+
+  /**
+   * Lists device insights for catalog.
+   */
+  listDeviceInsights is ArmResourceActionSync<
+    Catalog,
+    void,
+    PagedDeviceInsight,
+    {
+      ...BaseParameters<Catalog>;
+      ...CustomFilterQueryParameter;
+      ...CustomTopQueryParameter;
+      ...CustomSkipQueryParameter;
+      ...CustomMaxPageSizeQueryParameter;
+    }
+  >;
+
+  /**
+   * Lists devices for catalog.
+   */
+  listDevices is ArmResourceActionSync<
+    Catalog,
+    void,
+    ResourceListResult<Device>,
+    {
+      ...BaseParameters<Catalog>;
+      ...CustomFilterQueryParameter;
+      ...CustomTopQueryParameter;
+      ...CustomSkipQueryParameter;
+      ...CustomMaxPageSizeQueryParameter;
+    }
+  >;
+
+  /**
+   * Creates an image. Use this action when the image ID is unknown.
+   */
+  uploadImage is ArmResourceActionNoResponseContentAsync<Catalog, Image>;
 }
+
+@@doc(Catalogs.listDeviceGroups::parameters.body,
+  "List device groups for catalog."
+);
+@@encodedName(Catalogs.listDeviceGroups::parameters.body,
+  "application/json",
+  "listDeviceGroupsRequest"
+);
+@@extension(Catalogs.listDeviceGroups::parameters.body,
+  "x-ms-client-name",
+  "listDeviceGroupsRequest"
+);
+@@doc(Catalogs.uploadImage::parameters.body, "Image upload request body.");
+@@encodedName(Catalogs.uploadImage::parameters.body,
+  "application/json",
+  "uploadImageRequest"
+);
+@@extension(Catalogs.uploadImage::parameters.body,
+  "x-ms-client-name",
+  "uploadImageRequest"
+);

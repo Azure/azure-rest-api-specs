@@ -94,7 +94,7 @@ op deleteAssistant(@path assistantId: string): AssistantDeletionStatus;
 @added(ServiceApiVersions.v2024_02_15_preview)
 op createAssistantFile(
   @path assistantId: string,
-  @projectedName("json", "file_id") fileId: string,
+  @encodedName("application/json", "file_id") fileId: string,
 ): AssistantFile;
 
 /**

@@ -14,12 +14,14 @@ scalar pem extends string;
 
 /// Member types
 @doc("Possible states for a CCF governing member.")
-enum MemberStatus {
+union MemberStatus {
+  string,
+
   @doc("Member has been approved to join the service, but have not yet submitted an ACK to indicate their participation. These members should not be considered by constitutions in quorum calculations, and their signed requests will be rejected until they become Active.")
-  Accepted,
+  "Accepted",
 
   @doc("Member has submitted a valid ACK and is a full voting participant.")
-  Active,
+  "Active",
 }
 
 @doc("Information on individual members within a consortium.")
@@ -43,15 +45,17 @@ model Member {
 
 /// Node types
 @doc("Lifecycle state of a CCF node. Nodes will generally start as Pending, then transition to Trusted, then to Retired. They are only full participants in the service while they are Trusted.")
-enum NodeStatus {
+union NodeStatus {
+  string,
+
   @doc("Indicates a node which has successfully completed a join request to the service (including attestation checks), but has not yet been approved by governance.")
-  Pending,
+  "Pending",
 
   @doc("Indicates a node which has been approved by governance, and is a full participant in the service.")
-  Trusted,
+  "Trusted",
 
   @doc("Indicates a node which has been removed from a service by a reconfiguration.")
-  Retired,
+  "Retired",
 }
 
 @doc("Common type for attestation information, describing the cryptographically-endorsed claim of what code is executing, and what platform it is executing on. Derived types contain platform-specific details.")
@@ -134,27 +138,31 @@ model ConstitutionResponse {
 
 /// JS app types
 @doc("Describes the forwarding behavior of a specific endpoint. Write requests cannot be executed on a backup, so will generally be forwarded by any backup node which receives them to the current primary. Future requests on the same session may then be forwarded to maintain session consistency.")
-enum ForwardingRequired {
+union ForwardingRequired {
+  string,
+
   @doc("Indicates that this request should be forwarded if-and-only-if it is needed to maintain session consistency. If stale reads are acceptable then they can be completed on a backup, and the request will not be forwarded. This should be the default behavior for read-only endpoints.")
-  Sometimes,
+  "Sometimes",
 
   @doc("Indicates that this request should always be forwarded. This will trigger forwarding of any additional requests on the same session, even those marked ForwardRequired::Sometimes. This should be the default behavior for any endpoint which writes to the Key-Value store.")
-  Always,
+  "Always",
 
   @doc("Indicates endpoints which will never be forwarded, even when this will result in a break of session consistency. This should be used only to access node-local information, or when weaker consistency is acceptable.")
-  Never,
+  "Never",
 }
 
 @doc("Describes the execution requirements of a specific endpoint.")
-enum JsExecMode {
+union JsExecMode {
+  string,
+
   @doc("Indicates that the endpoint does (or may) produces writes to the Key-Value store.")
-  ReadWrite,
+  "ReadWrite",
 
   @doc("Indicates that the endpoint is a pure read, and will never write to the Key-Value store. Note that this includes endpoints which only access node-local state, and do not read from the Key-Value store at all.")
-  ReadOnly,
+  "ReadOnly",
 
   @doc("Indicates that the endpoint operates over a historical write to the Key-Value store rather than the latest, current state. These endpoints are also read-only, and may not produce writes.")
-  Historical,
+  "Historical",
 }
 
 @doc("Describes an endpoint implemented by a Javascript handler.")
@@ -237,12 +245,14 @@ model JoinPolicies {
 
 /// JWK/JWT types
 @doc("Possible restrictions on what keys will be accepted from a JWT issuer.")
-enum JwtIssuerKeyFilter {
+union JwtIssuerKeyFilter {
+  string,
+
   @doc("Accepts any JWT issuer.")
-  All,
+  "All",
 
   @doc("Only accepts JWTs issued by a token provider running in SGX, which provides a suitable attestation and additional claims.")
-  Sgx,
+  "Sgx",
 }
 
 @doc("Description of a JWT issuer or identity provider that the current service will trust tokens from.")
@@ -280,18 +290,20 @@ model JwkInfo {
 
 /// Service info types
 @doc("State machine values for current service lifetime. New services start in Opening, and transition to Open via a governance proposal. They will only accept user transactions on the `/app` endpoints once they are Open. Recovery services have additional states where they must wait for members to submit sufficient recovery shares to access the previous ledger secrets, and while they are decrypting and replaying the previous ledger contents.")
-enum ServiceStatus {
+union ServiceStatus {
+  string,
+
   @doc("Services which have not yet passed a `transition_service_to_open` proposal.")
-  Opening,
+  "Opening",
 
   @doc("Services which are operating normally and accepting user transactions.")
-  Open,
+  "Open",
 
   @doc("Recovered services which cannot yet access private state.")
-  WaitingForRecoveryShares,
+  "WaitingForRecoveryShares",
 
   @doc("Recovered services which are actively replaying transactions from previous service, to reach the same state.")
-  Recovering,
+  "Recovering",
 }
 
 @doc("General information about the current service.")

@@ -21,22 +21,22 @@ namespace Azure.OpenAI;
 @doc("""
 Gets English language transcribed text and associated metadata from provided spoken audio data.
 """)
-@added(ServiceApiVersions.v2023_09_01_Preview)
+@added(ServiceApiVersions.v2024_02_15_Preview)
 @actionSeparator("/")
 @action("audio/translations")
 @sharedRoute
-op getAudioTranslationAsPlainText is Azure.Core.Foundations.ResourceOperation<
+op getAudioTranslationAsPlainText is Azure.Core.ResourceAction<
   Deployment,
   AudioTranslationOptions,  // response_format must be one of: text, srt, vtt
-  string,
-  MultipartFormDataRequestHeadersTraits
+  AudioTextResponse,
+  MultipartFormDataRequestHeadersTraits & TextPlainResponseHeadersTraits
 >;
 
 #suppress "@azure-tools/typespec-azure-core/byos" "representation of existing multipart/form-data operation"
 @doc("""
 Gets English language transcribed text and associated metadata from provided spoken audio data.
 """)
-@added(ServiceApiVersions.v2023_09_01_Preview)
+@added(ServiceApiVersions.v2024_02_15_Preview)
 @actionSeparator("/")
 @action("audio/translations")
 @sharedRoute

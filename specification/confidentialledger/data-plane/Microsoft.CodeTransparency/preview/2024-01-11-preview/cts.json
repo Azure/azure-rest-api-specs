@@ -1,0 +1,987 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft Code Transparency Service",
+    "version": "2024-01-11-preview",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{endpoint}",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "name": "endpoint",
+        "in": "path",
+        "required": true,
+        "type": "string",
+        "format": "uri",
+        "x-ms-skip-url-encoding": true
+      }
+    ]
+  },
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "tags": [],
+  "paths": {
+    "/.well-known/did.json": {
+      "get": {
+        "operationId": "GetDidConfig",
+        "description": "Get the DID configuration file.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DidDocument"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetDidConfig": {
+            "$ref": "./examples/GetDidConfig.json"
+          }
+        }
+      }
+    },
+    "/configuration": {
+      "get": {
+        "operationId": "GetCodeTransparencyConfig",
+        "description": "Get CodeTransparency configuration information.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/CodeTransparencyConfiguration"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetCodeTransparencyConfig": {
+            "$ref": "./examples/GetCodeTransparencyConfig.json"
+          }
+        }
+      }
+    },
+    "/entries": {
+      "post": {
+        "operationId": "CreateEntry",
+        "description": "Post an entry to be registered on the CodeTransparency instance.",
+        "consumes": [
+          "application/cose"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/CoseEntry.body"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/CreateEntryResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CreateEntry": {
+            "$ref": "./examples/CreateEntry.json"
+          }
+        }
+      }
+    },
+    "/entries/{entryId}": {
+      "get": {
+        "operationId": "GetEntry",
+        "description": "Get Entry with or without receipt embedded in its unprotected header",
+        "produces": [
+          "application/cose",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/EmbedReceiptParameter.embedReceipt"
+          },
+          {
+            "$ref": "#/parameters/EntryIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "An Entry in Cose format",
+            "schema": {
+              "type": "file"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetEntry": {
+            "$ref": "./examples/GetEntry.json"
+          }
+        }
+      }
+    },
+    "/entries/{entryId}/receipt": {
+      "get": {
+        "operationId": "GetEntryReceipt",
+        "description": "Get the receipt of an entry given a specific entry id.",
+        "produces": [
+          "application/cbor",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/EntryIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A Raw Entry in cbor format",
+            "schema": {
+              "type": "file"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetEntryReceipt": {
+            "$ref": "./examples/GetEntryReceipt.json"
+          }
+        }
+      }
+    },
+    "/entries/txIds": {
+      "get": {
+        "operationId": "ListEntryIds",
+        "description": "Historical query to get a list of entries of a given range",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/TransactionsRange.from"
+          },
+          {
+            "$ref": "#/parameters/TransactionsRange.to"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/EntryIds"
+            }
+          },
+          "503": {
+            "description": "Service unavailable.",
+            "schema": {
+              "$ref": "#/definitions/ServiceUnavailableError"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "string",
+                "description": "Retry the same request after a suggested number of seconds"
+              },
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            },
+            "x-ms-error-response": true
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ListEntryIds": {
+            "$ref": "./examples/ListEntryIds.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/operations": {
+      "get": {
+        "operationId": "ListEntryStatuses",
+        "description": "Get the status of all entries operations",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ListOperationResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ListEntryStatuses": {
+            "$ref": "./examples/ListEntryStatuses.json"
+          }
+        }
+      }
+    },
+    "/operations/{operationId}": {
+      "get": {
+        "operationId": "GetEntryStatus",
+        "description": "Get the status the entry operation",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/OperationIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/GetOperationResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetEntryStatus": {
+            "$ref": "./examples/GetEntryStatus.json"
+          }
+        }
+      }
+    },
+    "/parameters": {
+      "get": {
+        "operationId": "GetParameters",
+        "description": "Get service parameters",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ParametersResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetParameters": {
+            "$ref": "./examples/GetParameters.json"
+          }
+        }
+      }
+    },
+    "/version": {
+      "get": {
+        "operationId": "GetCodeTransparencyVersion",
+        "description": "Get CodeTransparency version information.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/VersionResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetCodeTransparencyVersion": {
+            "$ref": "./examples/GetCodeTransparencyVersion.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Azure.Core.Foundations.Error": {
+      "type": "object",
+      "description": "The error object.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "One of a server-defined set of error codes."
+        },
+        "message": {
+          "type": "string",
+          "description": "A human-readable representation of the error."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the error."
+        },
+        "details": {
+          "type": "array",
+          "description": "An array of details about specific errors that led to this reported error.",
+          "items": {
+            "$ref": "#/definitions/Azure.Core.Foundations.Error"
+          },
+          "x-ms-identifiers": []
+        },
+        "innererror": {
+          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
+          "description": "An object containing more specific information than the current object about the error."
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
+    "Azure.Core.Foundations.ErrorResponse": {
+      "type": "object",
+      "description": "A response containing error details.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "description": "The error object."
+        }
+      },
+      "required": [
+        "error"
+      ]
+    },
+    "Azure.Core.Foundations.InnerError": {
+      "type": "object",
+      "description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "One of a server-defined set of error codes."
+        },
+        "innererror": {
+          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
+          "description": "Inner error."
+        }
+      }
+    },
+    "CodeTransparencyConfiguration": {
+      "type": "object",
+      "description": "The Response body of the Configuration API.",
+      "properties": {
+        "policy": {
+          "$ref": "#/definitions/CodeTransparencyConfigurationPolicy"
+        },
+        "authentication": {
+          "$ref": "#/definitions/CodeTransparencyConfigurationAuthentication"
+        },
+        "service_identifier": {
+          "type": "string",
+          "description": "did:web identifier",
+          "pattern": "^did:web:.+$"
+        }
+      }
+    },
+    "CodeTransparencyConfigurationAuthentication": {
+      "type": "object",
+      "description": "Configuration of CCF authentication.",
+      "properties": {
+        "allow_unauthenticated": {
+          "type": "boolean"
+        },
+        "jwt": {
+          "$ref": "#/definitions/CodeTransparencyConfigurationAuthenticationJwt"
+        }
+      },
+      "required": [
+        "allow_unauthenticated"
+      ]
+    },
+    "CodeTransparencyConfigurationAuthenticationJwt": {
+      "type": "object",
+      "description": "Configuration of JWT claims",
+      "properties": {
+        "required_claims": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "required_claims"
+      ]
+    },
+    "CodeTransparencyConfigurationPolicy": {
+      "type": "object",
+      "description": "Configuration of CCF Authentication policies.",
+      "properties": {
+        "accepted_algorithms": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "accepted_did_issuers": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "CreateEntryResult": {
+      "type": "object",
+      "description": "Response of entry submission containing the operationId.",
+      "properties": {
+        "operationId": {
+          "type": "string",
+          "description": "String representing the operation id submitted",
+          "pattern": "^[0-9]+\\.[0-9]+$"
+        }
+      },
+      "required": [
+        "operationId"
+      ]
+    },
+    "DidDocument": {
+      "type": "object",
+      "description": "A DID document",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "String representing a DID issuer."
+        },
+        "assertionMethod": {
+          "type": "array",
+          "description": "List of public keys used for receipt endorsement verification.",
+          "items": {
+            "$ref": "#/definitions/DidDocumentKey"
+          }
+        }
+      },
+      "required": [
+        "id",
+        "assertionMethod"
+      ]
+    },
+    "DidDocumentKey": {
+      "type": "object",
+      "description": "A DID document key",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Key identifier."
+        },
+        "controller": {
+          "type": "string",
+          "description": "Key controller - similar to DID issuer."
+        },
+        "type": {
+          "type": "string",
+          "description": "Key type.",
+          "enum": [
+            "JsonWebKey2020"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
+        },
+        "publicKeyJwk": {
+          "$ref": "#/definitions/JsonWebKey",
+          "description": "Serialized public key in JWK format."
+        }
+      },
+      "required": [
+        "id",
+        "controller",
+        "type",
+        "publicKeyJwk"
+      ]
+    },
+    "DidIssuer": {
+      "type": "object",
+      "description": "A DID issuer",
+      "properties": {
+        "issuer": {
+          "type": "string",
+          "description": "String representing a DID issuer."
+        }
+      },
+      "required": [
+        "issuer"
+      ]
+    },
+    "EntryIds": {
+      "type": "object",
+      "description": "A List of Entry IDs",
+      "properties": {
+        "transactionIds": {
+          "type": "array",
+          "description": "List of entry ids",
+          "items": {
+            "type": "string"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Path to the next page of results"
+        }
+      },
+      "required": [
+        "transactionIds"
+      ]
+    },
+    "GetOperationResult": {
+      "type": "object",
+      "description": "The Response body of the GetOperationId API.",
+      "properties": {
+        "entryId": {
+          "type": "string",
+          "description": "ID of the transaction. Only if status is Succeeded.",
+          "pattern": "^[0-9]+\\.[0-9]+$"
+        },
+        "error": {
+          "type": "string",
+          "description": "Error in json format. Only if Status is Failed."
+        },
+        "operationId": {
+          "type": "string",
+          "description": "OperationId",
+          "pattern": "^[0-9]+\\.[0-9]+$"
+        },
+        "status": {
+          "$ref": "#/definitions/OperationStatus",
+          "description": "Status of the operation."
+        }
+      },
+      "required": [
+        "operationId",
+        "status"
+      ]
+    },
+    "JsonWebKey": {
+      "type": "object",
+      "description": "rfc7517 JSON Web Key representation adapted from a shared swagger definition in the common types",
+      "properties": {
+        "alg": {
+          "type": "string",
+          "description": "The \"alg\" (algorithm) parameter identifies the algorithm intended for\nuse with the key.  The values used should either be registered in the\nIANA \"JSON Web Signature and Encryption Algorithms\" registry\nestablished by [JWA] or be a value that contains a Collision-\nResistant Name."
+        },
+        "crv": {
+          "type": "string",
+          "description": "The \"crv\" (curve) parameter identifies the curve type"
+        },
+        "d": {
+          "type": "string",
+          "description": "RSA private exponent or ECC private key"
+        },
+        "dp": {
+          "type": "string",
+          "description": "RSA Private Key Parameter"
+        },
+        "dq": {
+          "type": "string",
+          "description": "RSA Private Key Parameter"
+        },
+        "e": {
+          "type": "string",
+          "description": "RSA public exponent, in Base64"
+        },
+        "k": {
+          "type": "string",
+          "description": "Symmetric key"
+        },
+        "kid": {
+          "type": "string",
+          "description": "The \"kid\" (key ID) parameter is used to match a specific key.  This\nis used, for instance, to choose among a set of keys within a JWK Set\nduring key rollover.  The structure of the \"kid\" value is\nunspecified.  When \"kid\" values are used within a JWK Set, different\nkeys within the JWK Set SHOULD use distinct \"kid\" values.  (One\nexample in which different keys might use the same \"kid\" value is if\nthey have different \"kty\" (key type) values but are considered to be\nequivalent alternatives by the application using them.)  The \"kid\"\nvalue is a case-sensitive string."
+        },
+        "kty": {
+          "type": "string",
+          "description": "The \"kty\" (key type) parameter identifies the cryptographic algorithm\nfamily used with the key, such as \"RSA\" or \"EC\". \"kty\" values should\neither be registered in the IANA \"JSON Web Key Types\" registry\nestablished by [JWA] or be a value that contains a Collision-\nResistant Name.  The \"kty\" value is a case-sensitive string."
+        },
+        "n": {
+          "type": "string",
+          "description": "RSA modulus, in Base64"
+        },
+        "p": {
+          "type": "string",
+          "description": "RSA secret prime"
+        },
+        "q": {
+          "type": "string",
+          "description": "RSA secret prime, with p < q"
+        },
+        "qi": {
+          "type": "string",
+          "description": "RSA Private Key Parameter"
+        },
+        "use": {
+          "type": "string",
+          "description": "Use (\"public key use\") identifies the intended use of\nthe public key. The \"use\" parameter is employed to indicate whether\na public key is used for encrypting data or verifying the signature\non data. Values are commonly \"sig\" (signature) or \"enc\" (encryption)."
+        },
+        "x": {
+          "type": "string",
+          "description": "X coordinate for the Elliptic Curve point"
+        },
+        "x5c": {
+          "type": "array",
+          "description": "The \"x5c\" (X.509 certificate chain) parameter contains a chain of one\nor more PKIX certificates [RFC5280].  The certificate chain is\nrepresented as a JSON array of certificate value strings.  Each\nstring in the array is a base64-encoded (Section 4 of [RFC4648] --\nnot base64url-encoded) DER [ITU.X690.1994] PKIX certificate value.\nThe PKIX certificate containing the key value MUST be the first\ncertificate.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "y": {
+          "type": "string",
+          "description": "Y coordinate for the Elliptic Curve point"
+        }
+      },
+      "required": [
+        "kty"
+      ]
+    },
+    "ListOperationResult": {
+      "type": "object",
+      "description": "The Response body of the ListOperations API",
+      "properties": {
+        "operations": {
+          "type": "array",
+          "description": "List of operations",
+          "items": {
+            "$ref": "#/definitions/GetOperationResult"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "operations"
+      ]
+    },
+    "OperationStatus": {
+      "type": "string",
+      "description": "Possible statuses of the operation.",
+      "enum": [
+        "running",
+        "failed",
+        "succeeded"
+      ],
+      "x-ms-enum": {
+        "name": "OperationStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "running",
+            "value": "running",
+            "description": "Operation is still running."
+          },
+          {
+            "name": "failed",
+            "value": "failed",
+            "description": "Operation failed."
+          },
+          {
+            "name": "succeeded",
+            "value": "succeeded",
+            "description": "Operation succeeded."
+          }
+        ]
+      }
+    },
+    "ParametersResult": {
+      "type": "object",
+      "description": "The Response body of the service parameters",
+      "properties": {
+        "serviceCertificate": {
+          "type": "string"
+        },
+        "serviceId": {
+          "type": "string"
+        },
+        "signatureAlgorithm": {
+          "type": "string"
+        },
+        "treeAlgorithm": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "serviceCertificate",
+        "serviceId",
+        "signatureAlgorithm",
+        "treeAlgorithm"
+      ]
+    },
+    "RawEntry": {
+      "type": "object",
+      "description": "A Raw Entry in cbor format",
+      "properties": {
+        "body": {
+          "type": "string",
+          "format": "byte",
+          "description": "A raw CBOR content"
+        }
+      },
+      "required": [
+        "body"
+      ]
+    },
+    "ServiceUnavailableError": {
+      "type": "object",
+      "description": "Service temporarily unavailable",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "description": "The error object."
+        }
+      },
+      "required": [
+        "error"
+      ]
+    },
+    "VersionResult": {
+      "type": "object",
+      "description": "The Response body of the Version API.",
+      "properties": {
+        "scitt_version": {
+          "type": "string",
+          "description": "Version of the CodeTransparency service"
+        }
+      },
+      "required": [
+        "scitt_version"
+      ]
+    },
+    "Versions": {
+      "type": "string",
+      "description": "The Microsoft.CodeTransparency service versions.",
+      "enum": [
+        "2024-01-11-preview"
+      ],
+      "x-ms-enum": {
+        "name": "Versions",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "2024-01-11-preview",
+            "value": "2024-01-11-preview",
+            "description": "The 2024-01-11-preview version of the Microsoft.CodeTransparency service."
+          }
+        ]
+      }
+    }
+  },
+  "parameters": {
+    "Azure.Core.Foundations.ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "description": "The API version to use for this operation.",
+      "required": true,
+      "type": "string",
+      "minLength": 1,
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "apiVersion"
+    },
+    "CoseEntry.body": {
+      "name": "body",
+      "in": "body",
+      "description": "A raw CoseSign1 signature",
+      "required": true,
+      "schema": {
+        "type": "string",
+        "format": "binary"
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "EmbedReceiptParameter.embedReceipt": {
+      "name": "embedReceipt",
+      "in": "query",
+      "description": "Embed a receipt as part of the response",
+      "required": false,
+      "type": "boolean",
+      "default": false,
+      "x-ms-parameter-location": "method"
+    },
+    "EntryIdParameter": {
+      "name": "entryId",
+      "in": "path",
+      "description": "ID of the entry to retrieve.",
+      "required": true,
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+$",
+      "x-ms-parameter-location": "method"
+    },
+    "OperationIdParameter": {
+      "name": "operationId",
+      "in": "path",
+      "description": "ID of the operation to retrieve.",
+      "required": true,
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+$",
+      "x-ms-parameter-location": "method"
+    },
+    "TransactionsRange.from": {
+      "name": "from",
+      "in": "query",
+      "description": "Starting Transaction Id",
+      "required": false,
+      "type": "integer",
+      "format": "int64",
+      "minimum": 0,
+      "x-ms-parameter-location": "method"
+    },
+    "TransactionsRange.to": {
+      "name": "to",
+      "in": "query",
+      "description": "Ending Transaction Id",
+      "required": false,
+      "type": "integer",
+      "format": "int64",
+      "minimum": 0,
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

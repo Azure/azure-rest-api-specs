@@ -1,0 +1,40 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "hiloResourceGroup",
+    "api-version": "2024-05-01",
+    "clusterPoolName": "clusterPool",
+    "clusterName": "cluster",
+    "operation": {
+      "properties": {
+        "action": "Install",
+        "libraries": [
+          {
+            "properties": {
+              "type": "pypi",
+              "name": "requests",
+              "version": "2.31.0",
+              "remarks": "PyPi packages."
+            }
+          },
+          {
+            "properties": {
+              "type": "maven",
+              "groupId": "org.apache.flink",
+              "name": "flink-connector-kafka",
+              "version": "3.0.2-1.18",
+              "remarks": "Maven packages."
+            }
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "location": "http://azure.async.operation/status"
+      }
+    }
+  }
+}

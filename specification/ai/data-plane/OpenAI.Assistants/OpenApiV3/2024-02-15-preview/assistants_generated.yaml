@@ -1,8 +1,8 @@
 openapi: 3.0.0
 info:
   title: Azure OpenAI
-  version: 2024-02-15-preview
   description: Azure OpenAI APIs for Assistants.
+  version: 2024-02-15-preview
 tags: []
 paths:
   /assistants:
@@ -375,6 +375,25 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/OpenAIFile'
+  /files/{fileId}/content:
+    get:
+      operationId: getFileContent
+      description: Returns information about a specific file. Does not retrieve file content.
+      parameters:
+        - name: fileId
+          in: path
+          required: true
+          description: The ID of the file to retrieve.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                type: string
+                format: byte
   /threads:
     post:
       operationId: createThread
@@ -1419,12 +1438,14 @@ components:
           description: The files returned for the request.
       description: The response data from a file list operation.
     FilePurpose:
-      type: string
-      enum:
-        - fine-tune
-        - fine-tune-results
-        - assistants
-        - assistants_output
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - fine-tune
+            - fine-tune-results
+            - assistants
+            - assistants_output
       description: The possible values denoting the intended usage of a file.
     FunctionDefinition:
       type: object
@@ -1460,10 +1481,12 @@ components:
         - $ref: '#/components/schemas/ToolDefinition'
       description: The input definition information for a function tool as used to configure an assistant.
     ListSortOrder:
-      type: string
-      enum:
-        - asc
-        - desc
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - asc
+            - desc
       description: The available sorting options when requesting a list of response objects.
     MessageContent:
       type: object
@@ -1527,24 +1550,16 @@ components:
         - file_id
       properties:
         file_id:
-          allOf:
-            - $ref: '#/components/schemas/MessageImageFileIdDetails'
+          type: string
           description: The ID for the file associated with this image.
       description: An image reference, as represented in thread message content.
-    MessageImageFileIdDetails:
-      type: object
-      required:
-        - file_id
-      properties:
-        file_id:
-          type: string
-          description: The ID of the specific image file.
-      description: An encapsulation of an image file ID, as used by message image content.
     MessageRole:
-      type: string
-      enum:
-        - user
-        - assistant
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - user
+            - assistant
       description: The possible values for roles attributed to messages in a thread.
     MessageTextAnnotation:
       type: object
@@ -1789,16 +1804,18 @@ components:
           description: The human-readable text associated with the error.
       description: The details of an error as encountered by an assistant thread run.
     RunStatus:
-      type: string
-      enum:
-        - queued
-        - in_progress
-        - requires_action
-        - cancelling
-        - cancelled
-        - failed
-        - completed
-        - expired
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - queued
+            - in_progress
+            - requires_action
+            - cancelling
+            - cancelled
+            - failed
+            - completed
+            - expired
       description: Possible values for the status of an assistant thread run.
     RunStep:
       type: object
@@ -1859,23 +1876,23 @@ components:
           format: unixtime
           description: The Unix timestamp, in seconds, representing when this object was created.
         expired_at:
-          type: string
-          format: date-time
+          type: integer
+          format: unixtime
           nullable: true
           description: The Unix timestamp, in seconds, representing when this item expired.
         completed_at:
-          type: string
-          format: date-time
+          type: integer
+          format: unixtime
           nullable: true
           description: The Unix timestamp, in seconds, representing when this completed.
         cancelled_at:
-          type: string
-          format: date-time
+          type: integer
+          format: unixtime
           nullable: true
           description: The Unix timestamp, in seconds, representing when this was cancelled.
         failed_at:
-          type: string
-          format: date-time
+          type: integer
+          format: unixtime
           nullable: true
           description: The Unix timestamp, in seconds, representing when this failed.
         metadata:
@@ -2008,10 +2025,12 @@ components:
           description: The human-readable text associated with this error.
       description: The error information associated with a failed run step.
     RunStepErrorCode:
-      type: string
-      enum:
-        - server_error
-        - rate_limit_exceeded
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - server_error
+            - rate_limit_exceeded
       description: Possible error code values attributable to a failed run step.
     RunStepFunctionToolCall:
       type: object
@@ -2100,13 +2119,15 @@ components:
         A record of a call to a retrieval tool, issued by the model in evaluation of a defined tool, that represents
         executed retrieval actions.
     RunStepStatus:
-      type: string
-      enum:
-        - in_progress
-        - cancelled
-        - failed
-        - completed
-        - expired
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - in_progress
+            - cancelled
+            - failed
+            - completed
+            - expired
       description: Possible values for the status of a run step.
     RunStepToolCall:
       type: object
@@ -2147,10 +2168,12 @@ components:
         - $ref: '#/components/schemas/RunStepDetails'
       description: The detailed information associated with a run step calling tools.
     RunStepType:
-      type: string
-      enum:
-        - message_creation
-        - tool_calls
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - message_creation
+            - tool_calls
       description: The possible types of run steps.
     ServiceApiVersions:
       type: string
@@ -2363,28 +2386,28 @@ components:
           format: unixtime
           description: The Unix timestamp, in seconds, representing when this object was created.
         expires_at:
-          type: string
-          format: date-time
+          type: integer
+          format: unixtime
           nullable: true
           description: The Unix timestamp, in seconds, representing when this item expires.
         started_at:
-          type: string
-          format: date-time
+          type: integer
+          format: unixtime
           nullable: true
           description: The Unix timestamp, in seconds, representing when this item was started.
         completed_at:
-          type: string
-          format: date-time
+          type: integer
+          format: unixtime
           nullable: true
           description: The Unix timestamp, in seconds, representing when this completed.
         cancelled_at:
-          type: string
-          format: date-time
+          type: integer
+          format: unixtime
           nullable: true
           description: The Unix timestamp, in seconds, representing when this was cancelled.
         failed_at:
-          type: string
-          format: date-time
+          type: integer
+          format: unixtime
           nullable: true
           description: The Unix timestamp, in seconds, representing when this failed.
         metadata:

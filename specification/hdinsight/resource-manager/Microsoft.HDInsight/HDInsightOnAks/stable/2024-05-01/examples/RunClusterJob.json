@@ -1,0 +1,47 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "hiloResourcegroup",
+    "api-version": "2024-05-01",
+    "clusterPoolName": "clusterpool1",
+    "clusterName": "cluster1",
+    "ClusterJob": {
+      "properties": {
+        "jobType": "FlinkJob",
+        "jobName": "flink-job-name",
+        "action": "START",
+        "jobJarDirectory": "abfs://flinkjob@hilosa.dfs.core.windows.net/jars",
+        "jarName": "flink-sleep-job-0.0.1-SNAPSHOT.jar",
+        "entryClass": "com.microsoft.hilo.flink.job.streaming.SleepJob",
+        "flinkConfiguration": {
+          "parallelism": "1",
+          "savepoint.directory": "abfs://flinkjob@hilosa.dfs.core.windows.net/savepoint"
+        }
+      }
+    }
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "location": "http://azure.async.operation/status"
+      }
+    },
+    "200": {
+      "body": {
+        "properties": {
+          "runId": "job-15a-4322-b32c-ea541845e911",
+          "jobType": "FlinkJob",
+          "jobName": "flink-job-name",
+          "action": "START",
+          "jobJarDirectory": "abfs://flinkjob@hilosa.dfs.core.windows.net/jars",
+          "jarName": "flink-sleep-job-0.0.1-SNAPSHOT.jar",
+          "entryClass": "com.microsoft.hilo.flink.job.streaming.SleepJob",
+          "flinkConfiguration": {
+            "parallelism": "1",
+            "savepoint.directory": "abfs://flinkjob@hilosa.dfs.core.windows.net/savepoint"
+          }
+        }
+      }
+    }
+  }
+}

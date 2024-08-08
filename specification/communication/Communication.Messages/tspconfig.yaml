@@ -1,0 +1,61 @@
+parameters:
+  "python-sdk-folder":
+    default: "{project-root}/azure-sdk-for-python/"
+  "java-sdk-folder":
+    default: "{project-root}/azure-sdk-for-java/"
+  "js-sdk-folder":
+    default: "{project-root}/azure-sdk-for-js/"
+  "csharp-sdk-folder":
+    default: "{project-root}/azure-sdk-for-net/"
+  "service-directory-name":
+    default: "communication"
+  "service-dir":
+    default: "sdk/communication"
+  "python-output-dir":
+    default: "azure/communication/messages/_generated"
+emit:
+  - "@azure-tools/typespec-autorest"
+
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-core/all"
+
+options:
+  "@azure-tools/typespec-autorest":
+    azure-resource-provider-folder: "data-plane"
+    output-file: "{azure-resource-provider-folder}/Messages/{version-status}/{version}/communicationservicesmessages.json"
+    emitter-output-dir: "{project-root}/.."
+    omit-unreachable-types: true
+    examples-directory: "{project-root}/examples"
+  "@azure-tools/typespec-csharp":
+    clear-output-folder: true
+    model-namespace: false
+    emitter-output-dir: "{csharp-sdk-folder}/sdk/{service-directory-name}/{namespace}/src"
+    namespace: Azure.Communication.Messages
+    package-dir: "Azure.Communication.Messages"
+    save-inputs: true
+    flavor: azure
+  "@azure-tools/typespec-python":
+    package-pprint-name: '"Communication Messages"'
+    emitter-output-dir: "{python-sdk-folder}/sdk/{service-directory-name}/{package-name}"
+    package-dir: "azure-communication-messages"
+    package-name: "{package-dir}"
+    package-version: 1.0.0
+    flavor: azure
+  "@azure-tools/typespec-java":
+    package-dir: "azure-communication-messages"
+    namespace: com.azure.communication.messages
+    partial-update: true
+    service-name: Messages
+    custom-types-subpackage: "models.channels"
+    custom-types: "WhatsAppMessageButtonSubType,WhatsAppMessageTemplateBindings,WhatsAppMessageTemplateBindingsButton,WhatsAppMessageTemplateBindingsComponent,WhatsAppMessageTemplateItem"
+    customization-class: customization/src/main/java/MessagesSdkCustomization.java
+    flavor: azure
+    stream-style-serialization: false
+  "@azure-tools/typespec-ts":
+    package-dir: "communication-messages-rest"
+    packageDetails:
+      name: "@azure-rest/communication-messages"
+      description: "Azure client library for Azure Communication Messages services"
+      version: "1.0.0-beta.2"
+    flavor: azure

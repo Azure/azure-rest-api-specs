@@ -11,6 +11,7 @@ using TypeSpec.Http;
 
 namespace AzureHealthInsights;
 
+@TypeSpec.Versioning.removed(AzureHealthInsights.ApiVersion.v2024_04_01)
 interface PatientTimeline {
   #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" "Service uses a jobId in the path"
   @summary("Get Patient Timeline job details")

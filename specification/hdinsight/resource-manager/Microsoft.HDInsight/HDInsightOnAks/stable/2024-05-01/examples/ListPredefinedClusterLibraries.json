@@ -1,0 +1,35 @@
+{
+  "parameters": {
+    "resourceGroupName": "hiloResourceGroup",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "api-version": "2024-05-01",
+    "clusterPoolName": "clusterPool",
+    "clusterName": "cluster",
+    "$category": "predefined"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/hiloResourceGroup/providers/Microsoft.HDInsight/clusterPools/clusterPool/clusters/cluster/libraries/pyspark",
+            "properties": {
+              "type": "pypi",
+              "name": "pyspark",
+              "version": "3.5.0"
+            }
+          },
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/hiloResourceGroup/providers/Microsoft.HDInsight/clusterPools/clusterPool/clusters/cluster/libraries/spark-sql",
+            "properties": {
+              "type": "maven",
+              "groupId": "org.apache.spark",
+              "name": "spark-sql",
+              "version": "3.5.0_2.12"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

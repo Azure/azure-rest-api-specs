@@ -1,0 +1,39 @@
+{
+  "parameters": {
+    "subscriptionId": "10e32bab-26da-4cc4-a441-52b318f824e6",
+    "resourceGroupName": "hiloResourcegroup",
+    "api-version": "2024-05-01",
+    "clusterPoolName": "clusterpool1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/10e32bab-26da-4cc4-a441-52b318f824e6/resourceGroups/hiloResourcegroup/providers/Microsoft.HDInsight/clusterpools/clusterpool1/upgradeHistories/nodeosupgrade1",
+            "name": "nodeosupgrade1",
+            "properties": {
+              "upgradeType": "NodeOsUpgrade",
+              "utcTime": "01/18/2024 03:18:47 AM",
+              "newNodeOs": "1.2.2",
+              "upgradeResult": "Succeed"
+            }
+          },
+          {
+            "id": "/subscriptions/10e32bab-26da-4cc4-a441-52b318f824e6/resourceGroups/hiloResourcegroup/providers/Microsoft.HDInsight/clusterpools/clusterpool1/upgradeHistories/akspatchupgrade1",
+            "name": "akspatchupgrade1",
+            "properties": {
+              "upgradeType": "AKSPatchUpgrade",
+              "utcTime": "01/18/2024 03:18:38 AM",
+              "upgradeClusterPool": false,
+              "upgradeAllClusterNodes": true,
+              "originalVersion": null,
+              "newVersion": "1.1.1",
+              "upgradeResult": "Succeed"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

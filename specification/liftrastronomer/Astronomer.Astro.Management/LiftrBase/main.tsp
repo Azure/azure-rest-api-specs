@@ -15,7 +15,9 @@ enum Versions {
 }
 
 @doc("Marketplace subscription status of a resource.")
-enum MarketplaceSubscriptionStatus {
+union MarketplaceSubscriptionStatus {
+  string,
+
   @doc("Purchased but not yet activated")
   PendingFulfillmentStart: "PendingFulfillmentStart",
 
@@ -121,13 +123,15 @@ model SingleSignOnProperties {
 }
 
 @doc("Various states of the SSO resource")
-enum SingleSignOnStates {
+union SingleSignOnStates {
+  string,
+
   @doc("Initial state of the SSO resource")
-  Initial,
+  "Initial",
 
   @doc("State of the SSO resource when it is enabled")
-  Enable,
+  "Enable",
 
   @doc("State of the SSO resource when it is disabled")
-  Disable,
+  "Disable",
 }

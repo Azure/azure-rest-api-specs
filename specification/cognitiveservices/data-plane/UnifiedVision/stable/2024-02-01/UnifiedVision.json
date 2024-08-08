@@ -1,0 +1,1029 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Computer Vision Client",
+    "description": "The Computer Vision API provides state-of-the-art algorithms to process images and return information. For example, it can be used to find all the people in an image.  It also has other features like categorizing the content of images, and describing an image with complete English sentences.",
+    "version": "2024-02-01"
+  },
+  "paths": {
+    "/retrieval:vectorizeText": {
+      "post": {
+        "tags": [
+          "ImageRetrieval"
+        ],
+        "summary": "Return vector from a text.",
+        "operationId": "Text_Vectorize",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "model-version",
+            "description": "Model version. Please refer https://aka.ms/image-retrieval for supported model versions.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Request of VectorizeText.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/VectorizeTextRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/SingleVectorResult"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VectorizeText_MaximumSet_Gen": {
+            "$ref": "./examples/VectorizeText_MaximumSet_Gen.json"
+          },
+          "VectorizeText_MinimumSet_Gen": {
+            "$ref": "./examples/VectorizeText_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/retrieval:vectorizeImage": {
+      "post": {
+        "tags": [
+          "ImageRetrieval"
+        ],
+        "summary": "Return vector from an image.",
+        "operationId": "Image_Vectorize",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "model-version",
+            "description": "Model version. Please refer https://aka.ms/image-retrieval for supported model versions.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "A JSON document with a URL pointing to the image that is to be analyzed.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ImageUrl"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/SingleVectorResult"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VectorizeImage_MaximumSet_Gen": {
+            "$ref": "./examples/VectorizeImage_MaximumSet_Gen.json"
+          },
+          "VectorizeImage_MinimumSet_Gen": {
+            "$ref": "./examples/VectorizeImage_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/imageanalysis:analyze": {
+      "post": {
+        "tags": [
+          "Operations"
+        ],
+        "summary": "Analyze the input image. The request either contains image stream with any content type ['image/*', 'application/octet-stream'], or a JSON payload which includes an url property to be used to retrieve the image stream.",
+        "operationId": "ImageAnalysis_Analyze",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "features",
+            "description": "The visual features requested. At least one visual feature must be specified.",
+            "type": "array",
+            "items": {
+              "enum": [
+                "tags",
+                "caption",
+                "denseCaptions",
+                "objects",
+                "read",
+                "smartCrops",
+                "people"
+              ],
+              "type": "string",
+              "x-ms-enum": {
+                "name": "VisualFeature",
+                "modelAsString": true,
+                "values": [
+                  {
+                    "value": "tags",
+                    "description": "Visual tags representing objects detected in the image."
+                  },
+                  {
+                    "value": "caption",
+                    "description": "A description or a caption summarizing the content of the image."
+                  },
+                  {
+                    "value": "denseCaptions",
+                    "description": "Detailed captions providing in-depth descriptions of the image content."
+                  },
+                  {
+                    "value": "objects",
+                    "description": "Specific objects recognized and labeled in the image."
+                  },
+                  {
+                    "value": "read",
+                    "description": "Textual content extracted from the image, such as signs or labels."
+                  },
+                  {
+                    "value": "smartCrops",
+                    "description": "Automatically generated cropped versions of the image focusing on important content."
+                  },
+                  {
+                    "value": "people",
+                    "description": "Detection and analysis of people in the image."
+                  }
+                ]
+              }
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "language",
+            "description": "The desired language for output generation. If this parameter is not specified, the default value is \"en\". See https://aka.ms/cv-languages for a list of supported languages.",
+            "type": "string",
+            "default": "en"
+          },
+          {
+            "in": "query",
+            "name": "model-version",
+            "description": "Model version.",
+            "type": "string",
+            "default": "latest"
+          },
+          {
+            "in": "query",
+            "name": "smartcrops-aspect-ratios",
+            "description": "A list of aspect ratios to use for smartCrops feature. Aspect ratios are calculated by dividing the target crop width by the height. Supported values are between 0.75 and 1.8 (inclusive). Multiple values should be comma-separated. If this parameter is not specified, the service will return one crop suggestion with an aspect ratio it sees fit between 0.5 and 2.0 (inclusive).",
+            "type": "array",
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "gender-neutral-caption",
+            "description": "Boolean flag for enabling gender-neutral captioning for caption and denseCaptions features. If this parameter is not specified, the default value is \"false\".",
+            "type": "boolean",
+            "default": false
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "A JSON document with a URL pointing to the image that is to be analyzed.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ImageUrl"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ImageAnalysisResult"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ImageAnalysis_Analyze_MaximumSet_Gen": {
+            "$ref": "./examples/ImageAnalysis_Analyze_MaximumSet_Gen.json"
+          },
+          "ImageAnalysis_Analyze_MinimumSet_Gen": {
+            "$ref": "./examples/ImageAnalysis_Analyze_MinimumSet_Gen.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "BoundingBox": {
+      "description": "A bounding box for an area inside an image.",
+      "required": [
+        "h",
+        "w",
+        "x",
+        "y"
+      ],
+      "type": "object",
+      "properties": {
+        "x": {
+          "format": "int32",
+          "description": "Left-coordinate of the top left point of the area, in pixels.",
+          "minimum": 0,
+          "type": "integer"
+        },
+        "y": {
+          "format": "int32",
+          "description": "Top-coordinate of the top left point of the area, in pixels.",
+          "minimum": 0,
+          "type": "integer"
+        },
+        "w": {
+          "format": "int32",
+          "description": "Width measured from the top-left point of the area, in pixels.",
+          "minimum": 1,
+          "type": "integer"
+        },
+        "h": {
+          "format": "int32",
+          "description": "Height measured from the top-left point of the area, in pixels.",
+          "minimum": 1,
+          "type": "integer"
+        }
+      }
+    },
+    "CaptionResult": {
+      "description": "A brief description of what the image depicts.",
+      "required": [
+        "confidence",
+        "text"
+      ],
+      "type": "object",
+      "properties": {
+        "text": {
+          "description": "The text of the caption.",
+          "minLength": 1,
+          "type": "string"
+        },
+        "confidence": {
+          "format": "double",
+          "description": "The level of confidence the service has in the caption. Confidence scores span the range of 0.0 to 1.0 (inclusive), with higher values indicating a higher confidence of a match.",
+          "maximum": 1,
+          "minimum": 0,
+          "type": "number"
+        }
+      }
+    },
+    "ContentTag": {
+      "description": "An entity observation in the image, along with the confidence score.",
+      "required": [
+        "confidence",
+        "name"
+      ],
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the entity.",
+          "minLength": 1,
+          "type": "string"
+        },
+        "confidence": {
+          "format": "double",
+          "description": "The level of confidence that the entity was observed. Confidence scores span the range of 0.0 to 1.0 (inclusive), with higher values indicating a higher confidence of a match.",
+          "maximum": 1,
+          "minimum": 0,
+          "type": "number"
+        }
+      }
+    },
+    "CropRegion": {
+      "description": "A region identified for smart cropping. There will be one region returned for each requested aspect ratio.",
+      "required": [
+        "aspectRatio",
+        "boundingBox"
+      ],
+      "type": "object",
+      "properties": {
+        "aspectRatio": {
+          "format": "double",
+          "description": "The aspect ratio of the crop region.",
+          "type": "number"
+        },
+        "boundingBox": {
+          "$ref": "#/definitions/BoundingBox"
+        }
+      }
+    },
+    "DenseCaption": {
+      "description": "A brief description of what the image depicts.",
+      "required": [
+        "confidence",
+        "text"
+      ],
+      "type": "object",
+      "properties": {
+        "text": {
+          "description": "The text of the caption.",
+          "minLength": 1,
+          "type": "string"
+        },
+        "confidence": {
+          "format": "double",
+          "description": "The level of confidence the service has in the caption. Confidence scores span the range of 0.0 to 1.0 (inclusive), with higher values indicating a higher confidence of a match.",
+          "maximum": 1,
+          "minimum": 0,
+          "type": "number"
+        },
+        "boundingBox": {
+          "$ref": "#/definitions/BoundingBox"
+        }
+      }
+    },
+    "DenseCaptionsResult": {
+      "description": "A list of captions.",
+      "required": [
+        "values"
+      ],
+      "type": "object",
+      "properties": {
+        "values": {
+          "description": "A list of captions.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DenseCaption"
+          }
+        }
+      }
+    },
+    "DetectedObject": {
+      "description": "Describes a detected object in an image.",
+      "required": [
+        "boundingBox",
+        "tags"
+      ],
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Id of the detected object.",
+          "minLength": 1,
+          "type": "string"
+        },
+        "boundingBox": {
+          "$ref": "#/definitions/BoundingBox"
+        },
+        "tags": {
+          "description": "Classification confidences of the detected object.",
+          "minItems": 1,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ContentTag"
+          }
+        }
+      }
+    },
+    "DetectedPerson": {
+      "description": "A person detected in an image.",
+      "required": [
+        "boundingBox",
+        "confidence"
+      ],
+      "type": "object",
+      "properties": {
+        "boundingBox": {
+          "$ref": "#/definitions/BoundingBox"
+        },
+        "confidence": {
+          "format": "double",
+          "description": "Confidence score of having observed the person in the image. Confidence scores span the range of 0.0 to 1.0 (inclusive), with higher values indicating a higher confidence of a match.",
+          "maximum": 1,
+          "minimum": 0,
+          "type": "number"
+        }
+      }
+    },
+    "DetectedTextBlock": {
+      "description": "A detected text block.",
+      "required": [
+        "lines"
+      ],
+      "type": "object",
+      "properties": {
+        "lines": {
+          "description": "List of text lines in the text block.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DetectedTextLine"
+          }
+        }
+      }
+    },
+    "DetectedTextLine": {
+      "description": "A detected text line.",
+      "required": [
+        "text",
+        "boundingPolygon",
+        "words"
+      ],
+      "type": "object",
+      "properties": {
+        "text": {
+          "description": "Text content of the detected text line.",
+          "minLength": 1,
+          "type": "string"
+        },
+        "boundingPolygon": {
+          "description": "Bounding polygon of the text line.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ImagePoint"
+          },
+          "minItems": 4
+        },
+        "words": {
+          "description": "List of words in the text line.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DetectedTextWord"
+          }
+        }
+      }
+    },
+    "DetectedTextWord": {
+      "description": "A detected word consisting of a contiguous sequence of characters. For non-space delimited languages,\r\nsuch as Chinese, Japanese, and Korean, each character is represented as its own word.",
+      "required": [
+        "text",
+        "boundingPolygon",
+        "confidence"
+      ],
+      "type": "object",
+      "properties": {
+        "text": {
+          "description": "Text content of the word.",
+          "minLength": 1,
+          "type": "string"
+        },
+        "boundingPolygon": {
+          "description": "Bounding polygon of the word.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ImagePoint"
+          },
+          "minItems": 4
+        },
+        "confidence": {
+          "format": "double",
+          "description": "The level of confidence that the word was detected. Confidence scores span the range of 0.0 to 1.0 (inclusive), with higher values indicating a higher confidence of a match.",
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        }
+      }
+    },
+    "ErrorResponse": {
+      "description": "Response returned when an error occurs.",
+      "required": [
+        "error"
+      ],
+      "type": "object",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ErrorResponseDetails"
+        }
+      }
+    },
+    "ErrorResponseDetails": {
+      "description": "Error info.",
+      "required": [
+        "code",
+        "message"
+      ],
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "Error code.",
+          "type": "string"
+        },
+        "message": {
+          "description": "Error message.",
+          "type": "string"
+        },
+        "target": {
+          "description": "Target of the error.",
+          "type": "string"
+        },
+        "details": {
+          "description": "List of detailed errors.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ErrorResponseDetails"
+          }
+        },
+        "innererror": {
+          "$ref": "#/definitions/ErrorResponseInnerError"
+        }
+      }
+    },
+    "ErrorResponseInnerError": {
+      "description": "Detailed error.",
+      "required": [
+        "code",
+        "message"
+      ],
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "Error code.",
+          "type": "string"
+        },
+        "message": {
+          "description": "Error message.",
+          "type": "string"
+        },
+        "innererror": {
+          "$ref": "#/definitions/ErrorResponseInnerError"
+        }
+      }
+    },
+    "ImageAnalysisResult": {
+      "description": "Describe the combined results of different types of image analysis.",
+      "required": [
+        "metadata",
+        "modelVersion"
+      ],
+      "type": "object",
+      "properties": {
+        "captionResult": {
+          "$ref": "#/definitions/CaptionResult"
+        },
+        "objectsResult": {
+          "$ref": "#/definitions/ObjectsResult"
+        },
+        "readResult": {
+          "$ref": "#/definitions/ReadResult"
+        },
+        "denseCaptionsResult": {
+          "$ref": "#/definitions/DenseCaptionsResult"
+        },
+        "modelVersion": {
+          "description": "Model Version.",
+          "minLength": 1,
+          "type": "string"
+        },
+        "metadata": {
+          "$ref": "#/definitions/ImageMetadata"
+        },
+        "tagsResult": {
+          "$ref": "#/definitions/TagsResult"
+        },
+        "smartCropsResult": {
+          "$ref": "#/definitions/SmartCropsResult"
+        },
+        "peopleResult": {
+          "$ref": "#/definitions/PeopleResult"
+        }
+      }
+    },
+    "ImageMetadata": {
+      "description": "The image metadata information such as height and width.",
+      "required": [
+        "height",
+        "width"
+      ],
+      "type": "object",
+      "properties": {
+        "width": {
+          "format": "int32",
+          "description": "The width of the image in pixels.",
+          "minimum": 1,
+          "type": "integer"
+        },
+        "height": {
+          "format": "int32",
+          "description": "The height of the image in pixels.",
+          "minimum": 1,
+          "type": "integer"
+        }
+      }
+    },
+    "ImagePoint": {
+      "description": "An object representing a point in the image.",
+      "required": [
+        "x",
+        "y"
+      ],
+      "type": "object",
+      "properties": {
+        "x": {
+          "description": "The x-coordinate of this point.",
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0
+        },
+        "y": {
+          "description": "The y-coordinate of this point.",
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0
+        }
+      }
+    },
+    "ImageUrl": {
+      "description": "A JSON document with a URL pointing to the publicly accessible image to be analyzed.",
+      "required": [
+        "url"
+      ],
+      "type": "object",
+      "properties": {
+        "url": {
+          "description": "Publicly reachable URL of an image.",
+          "type": "string",
+          "format": "uri"
+        }
+      }
+    },
+    "ObjectsResult": {
+      "description": "Describes detected objects in an image.",
+      "required": [
+        "values"
+      ],
+      "type": "object",
+      "properties": {
+        "values": {
+          "description": "An array of detected objects.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DetectedObject"
+          }
+        }
+      }
+    },
+    "PeopleResult": {
+      "description": "An object describing whether the image contains people.",
+      "required": [
+        "values"
+      ],
+      "type": "object",
+      "properties": {
+        "values": {
+          "description": "An array of detected people.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DetectedPerson"
+          }
+        }
+      }
+    },
+    "ReadResult": {
+      "description": "The results of an Read operation.",
+      "required": [
+        "blocks"
+      ],
+      "type": "object",
+      "properties": {
+        "blocks": {
+          "description": "A list of text blocks.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DetectedTextBlock"
+          }
+        }
+      }
+    },
+    "SingleVectorResult": {
+      "description": "Results of image vectorization.",
+      "type": "object",
+      "properties": {
+        "vector": {
+          "description": "Vector of the image.",
+          "type": "array",
+          "items": {
+            "format": "float",
+            "type": "number"
+          }
+        },
+        "modelVersion": {
+          "description": "Model version.",
+          "type": "string"
+        }
+      }
+    },
+    "SmartCropsResult": {
+      "description": "Smart cropping result.",
+      "required": [
+        "values"
+      ],
+      "type": "object",
+      "properties": {
+        "values": {
+          "description": "Recommended regions for cropping the image.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CropRegion"
+          }
+        }
+      }
+    },
+    "TagsResult": {
+      "description": "A list of tags with confidence level.",
+      "required": [
+        "values"
+      ],
+      "type": "object",
+      "properties": {
+        "values": {
+          "description": "A list of tags with confidence level.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ContentTag"
+          }
+        }
+      }
+    },
+    "VectorizeTextRequest": {
+      "description": "Model for VectorizeText request.",
+      "required": [
+        "text"
+      ],
+      "type": "object",
+      "properties": {
+        "text": {
+          "description": "Text for vectorization.",
+          "minLength": 1,
+          "type": "string"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "ApiVersion": {
+      "in": "query",
+      "name": "api-version",
+      "description": "Requested API version.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "client"
+    }
+  },
+  "x-ms-paths": {
+    "/retrieval:vectorizeImage?overload=stream": {
+      "post": {
+        "tags": [
+          "ImageRetrievalApi"
+        ],
+        "summary": "Return vector from an image.",
+        "operationId": "VectorizeImageFromImageStream",
+        "consumes": [
+          "application/octet-stream",
+          "image/jpeg",
+          "image/gif",
+          "image/tiff",
+          "image/bmp",
+          "image/png"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "model-version",
+            "description": "Model version. Please refer https://aka.ms/image-retrieval for supported model versions.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "An image stream.",
+            "required": true,
+            "schema": {
+              "format": "byte",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/SingleVectorResult"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VectorizeImage_Stream_MaximumSet_Gen": {
+            "$ref": "./examples/VectorizeImage_Stream_MaximumSet_Gen.json"
+          },
+          "VectorizeImage_Stream_MinimumSet_Gen": {
+            "$ref": "./examples/VectorizeImage_Stream_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/imageanalysis:analyze?overload=stream": {
+      "post": {
+        "tags": [
+          "Operations"
+        ],
+        "summary": "Analyze the input image. The request contains image stream with any content type ['image/*', 'application/octet-stream'].",
+        "operationId": "ImageAnalysis_AnalyzeFromImageStream",
+        "consumes": [
+          "application/octet-stream",
+          "image/jpeg",
+          "image/gif",
+          "image/tiff",
+          "image/bmp",
+          "image/png"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "features",
+            "description": "The visual features requested. At least one visual feature must be specified.",
+            "type": "array",
+            "items": {
+              "enum": [
+                "tags",
+                "caption",
+                "denseCaptions",
+                "objects",
+                "read",
+                "smartCrops",
+                "people"
+              ],
+              "type": "string",
+              "x-ms-enum": {
+                "name": "VisualFeature",
+                "modelAsString": true,
+                "values": [
+                  {
+                    "value": "tags",
+                    "description": "Visual tags representing objects detected in the image."
+                  },
+                  {
+                    "value": "caption",
+                    "description": "A description or a caption summarizing the content of the image."
+                  },
+                  {
+                    "value": "denseCaptions",
+                    "description": "Detailed captions providing in-depth descriptions of the image content."
+                  },
+                  {
+                    "value": "objects",
+                    "description": "Specific objects recognized and labeled in the image."
+                  },
+                  {
+                    "value": "read",
+                    "description": "Textual content extracted from the image, such as signs or labels."
+                  },
+                  {
+                    "value": "smartCrops",
+                    "description": "Automatically generated cropped versions of the image focusing on important content."
+                  },
+                  {
+                    "value": "people",
+                    "description": "Detection and analysis of people in the image."
+                  }
+                ]
+              }
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "language",
+            "description": "The desired language for output generation. If this parameter is not specified, the default value is \"en\". See https://aka.ms/cv-languages for a list of supported languages.",
+            "type": "string",
+            "default": "en"
+          },
+          {
+            "in": "query",
+            "name": "smartcrops-aspect-ratios",
+            "description": "A list of aspect ratios to use for smartCrops feature. Aspect ratios are calculated by dividing the target crop width by the height. Supported values are between 0.75 and 1.8 (inclusive). Multiple values should be comma-separated. If this parameter is not specified, the service will return one crop suggestion with an aspect ratio it sees fit between 0.5 and 2.0 (inclusive).",
+            "type": "array",
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "gender-neutral-caption",
+            "description": "Boolean flag for enabling gender-neutral captioning for caption and denseCaptions features. If this parameter is not specified, the default value is \"false\".",
+            "type": "boolean",
+            "default": false
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "An image stream.",
+            "required": true,
+            "schema": {
+              "format": "byte",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ImageAnalysisResult"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ImageAnalysis_Analyze_MaximumSet_Gen": {
+            "$ref": "./examples/ImageAnalysis_Analyze_Stream_MaximumSet_Gen.json"
+          },
+          "ImageAnalysis_Analyze_MinimumSet_Gen": {
+            "$ref": "./examples/ImageAnalysis_Analyze_Stream_MinimumSet_Gen.json"
+          }
+        }
+      }
+    }
+  }
+}

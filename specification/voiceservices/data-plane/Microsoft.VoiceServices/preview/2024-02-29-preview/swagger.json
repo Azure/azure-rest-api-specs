@@ -1,0 +1,3721 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft.VoiceServices.Provisioning",
+    "version": "2024-02-29-preview",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "OAuth2Auth": [
+        "https://func-voiceservice-rp-prod-eastuseuap.azurewebsites.net/.default"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "OAuth2Auth": {
+      "type": "oauth2",
+      "flow": "application",
+      "scopes": {
+        "https://func-voiceservice-rp-prod-eastuseuap.azurewebsites.net/.default": ""
+      },
+      "tokenUrl": "https://login.microsoftonline.com/common/oauth2/v2.0/token"
+    }
+  },
+  "tags": [
+    {
+      "name": "Account"
+    },
+    {
+      "name": "BatchNumbers"
+    },
+    {
+      "name": "Number"
+    },
+    {
+      "name": "TeamsCapabilityPlans"
+    },
+    {
+      "name": "TeamsAvailableCapabilities"
+    },
+    {
+      "name": "TeamsCivicAddresses"
+    },
+    {
+      "name": "TeamsCivicAddress"
+    },
+    {
+      "name": "TeamsRequestForInformation"
+    }
+  ],
+  "paths": {
+    "/accounts": {
+      "get": {
+        "operationId": "Accounts_List",
+        "tags": [
+          "Account"
+        ],
+        "summary": "Get list of Accounts",
+        "description": "Get list of Accounts with details. An Account represents an Enterprise or collection of users.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.TopQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.MaxPageSizeQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/FilterQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/RecordCountQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedAccountResource"
+            },
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              },
+              "x-ms-record-count": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The total number of records available for this request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get list of Accounts.": {
+            "$ref": "./examples/ListAccounts.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/accounts/{accountName}": {
+      "get": {
+        "operationId": "Accounts_Get",
+        "tags": [
+          "Account"
+        ],
+        "summary": "Get Account.",
+        "description": "Get details of a specific Account using its Name. An Account represents an Enterprise or collection of users.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "Name of the account.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100,
+            "pattern": "^([A-Za-z0-9_-]+)$"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifMatch"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifNoneMatch"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifUnmodifiedSince"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifModifiedSince"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/AccountResource"
+            },
+            "headers": {
+              "ETag": {
+                "type": "string",
+                "description": "The entity tag for the response."
+              },
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Account.": {
+            "$ref": "./examples/GetAccount.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Accounts_CreateOrReplace",
+        "tags": [
+          "Account"
+        ],
+        "summary": "Create or Replace Account.",
+        "description": "Create or replace the details of an Account.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "Name of the account.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100,
+            "pattern": "^([A-Za-z0-9_-]+)$"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.RepeatabilityRequestHeaders.repeatabilityRequestId"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.RepeatabilityRequestHeaders.repeatabilityFirstSent"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifMatch"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifNoneMatch"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifUnmodifiedSince"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifModifiedSince"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "The resource instance.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AccountResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/AccountResource"
+            },
+            "headers": {
+              "ETag": {
+                "type": "string",
+                "description": "The entity tag for the response."
+              },
+              "Repeatability-Result": {
+                "type": "string",
+                "description": "Indicates whether the repeatable request was accepted or rejected.",
+                "enum": [
+                  "accepted",
+                  "rejected"
+                ],
+                "x-ms-enum": {
+                  "name": "RepeatabilityResult",
+                  "modelAsString": false,
+                  "values": [
+                    {
+                      "name": "accepted",
+                      "value": "accepted",
+                      "description": "If the request was accepted and the server guarantees that the server state reflects a single execution of the operation."
+                    },
+                    {
+                      "name": "rejected",
+                      "value": "rejected",
+                      "description": "If the request was rejected because the combination of Repeatability-First-Sent and Repeatability-Request-ID were invalid\nor because the Repeatability-First-Sent value was outside the range of values held by the server."
+                    }
+                  ]
+                }
+              },
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "schema": {
+              "$ref": "#/definitions/AccountResource"
+            },
+            "headers": {
+              "ETag": {
+                "type": "string",
+                "description": "The entity tag for the response."
+              },
+              "Repeatability-Result": {
+                "type": "string",
+                "description": "Indicates whether the repeatable request was accepted or rejected.",
+                "enum": [
+                  "accepted",
+                  "rejected"
+                ],
+                "x-ms-enum": {
+                  "name": "RepeatabilityResult",
+                  "modelAsString": false,
+                  "values": [
+                    {
+                      "name": "accepted",
+                      "value": "accepted",
+                      "description": "If the request was accepted and the server guarantees that the server state reflects a single execution of the operation."
+                    },
+                    {
+                      "name": "rejected",
+                      "value": "rejected",
+                      "description": "If the request was rejected because the combination of Repeatability-First-Sent and Repeatability-Request-ID were invalid\nor because the Repeatability-First-Sent value was outside the range of values held by the server."
+                    }
+                  ]
+                }
+              },
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or replace Account.": {
+            "$ref": "./examples/PutAccount.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "Accounts_Delete",
+        "tags": [
+          "Account"
+        ],
+        "summary": "Delete Account.",
+        "description": "Delete a specific Account using its Name. This will fail if any Numbers are provisioned on the Account.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "Name of the account.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100,
+            "pattern": "^([A-Za-z0-9_-]+)$"
+          },
+          {
+            "$ref": "#/parameters/DeleteNumbersQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.RepeatabilityRequestHeaders.repeatabilityRequestId"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.RepeatabilityRequestHeaders.repeatabilityFirstSent"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifMatch"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifNoneMatch"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifUnmodifiedSince"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifModifiedSince"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. ",
+            "headers": {
+              "Repeatability-Result": {
+                "type": "string",
+                "description": "Indicates whether the repeatable request was accepted or rejected.",
+                "enum": [
+                  "accepted",
+                  "rejected"
+                ],
+                "x-ms-enum": {
+                  "name": "RepeatabilityResult",
+                  "modelAsString": false,
+                  "values": [
+                    {
+                      "name": "accepted",
+                      "value": "accepted",
+                      "description": "If the request was accepted and the server guarantees that the server state reflects a single execution of the operation."
+                    },
+                    {
+                      "name": "rejected",
+                      "value": "rejected",
+                      "description": "If the request was rejected because the combination of Repeatability-First-Sent and Repeatability-Request-ID were invalid\nor because the Repeatability-First-Sent value was outside the range of values held by the server."
+                    }
+                  ]
+                }
+              },
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete Account.": {
+            "$ref": "./examples/DeleteAccount.json"
+          }
+        }
+      }
+    },
+    "/accounts/{accountName}:createOrUpdateNumbers": {
+      "post": {
+        "operationId": "Accounts_CreateOrUpdateNumbers",
+        "tags": [
+          "BatchNumbers"
+        ],
+        "summary": "Create or update Numbers.",
+        "description": "Create or update up to 100 Numbers on the specified account.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "Name of the account.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100,
+            "pattern": "^([A-Za-z0-9_-]+)$"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.RepeatabilityRequestHeaders.repeatabilityRequestId"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.RepeatabilityRequestHeaders.repeatabilityFirstSent"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BatchNumbers"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/BatchNumbers"
+            },
+            "headers": {
+              "Repeatability-Result": {
+                "type": "string",
+                "description": "Indicates whether the repeatable request was accepted or rejected.",
+                "enum": [
+                  "accepted",
+                  "rejected"
+                ],
+                "x-ms-enum": {
+                  "name": "RepeatabilityResult",
+                  "modelAsString": false,
+                  "values": [
+                    {
+                      "name": "accepted",
+                      "value": "accepted",
+                      "description": "If the request was accepted and the server guarantees that the server state reflects a single execution of the operation."
+                    },
+                    {
+                      "name": "rejected",
+                      "value": "rejected",
+                      "description": "If the request was rejected because the combination of Repeatability-First-Sent and Repeatability-Request-ID were invalid\nor because the Repeatability-First-Sent value was outside the range of values held by the server."
+                    }
+                  ]
+                }
+              },
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or update Numbers.": {
+            "$ref": "./examples/PostAccountNumbersBatch.json"
+          }
+        }
+      }
+    },
+    "/accounts/{accountName}:deleteNumbers": {
+      "post": {
+        "operationId": "Accounts_DeleteNumbers",
+        "tags": [
+          "BatchNumbers"
+        ],
+        "summary": "Delete Numbers.",
+        "description": "Delete up to 100 Numbers on the specified account.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "Name of the account.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100,
+            "pattern": "^([A-Za-z0-9_-]+)$"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.RepeatabilityRequestHeaders.repeatabilityRequestId"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.RepeatabilityRequestHeaders.repeatabilityFirstSent"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BatchNumbersDelete"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. ",
+            "headers": {
+              "Repeatability-Result": {
+                "type": "string",
+                "description": "Indicates whether the repeatable request was accepted or rejected.",
+                "enum": [
+                  "accepted",
+                  "rejected"
+                ],
+                "x-ms-enum": {
+                  "name": "RepeatabilityResult",
+                  "modelAsString": false,
+                  "values": [
+                    {
+                      "name": "accepted",
+                      "value": "accepted",
+                      "description": "If the request was accepted and the server guarantees that the server state reflects a single execution of the operation."
+                    },
+                    {
+                      "name": "rejected",
+                      "value": "rejected",
+                      "description": "If the request was rejected because the combination of Repeatability-First-Sent and Repeatability-Request-ID were invalid\nor because the Repeatability-First-Sent value was outside the range of values held by the server."
+                    }
+                  ]
+                }
+              },
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete batches of numbers.": {
+            "$ref": "./examples/PostAccountNumbersDelete.json"
+          }
+        }
+      }
+    },
+    "/accounts/{accountName}:getTeamsCapabilityPlans": {
+      "post": {
+        "operationId": "Accounts_GetTeamsCapabilityPlans",
+        "tags": [
+          "TeamsCapabilityPlans"
+        ],
+        "summary": "Get Teams Usages.",
+        "description": "Get a list of Teams capability plans on the specified account.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "Name of the account.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100,
+            "pattern": "^([A-Za-z0-9_-]+)$"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.RepeatabilityRequestHeaders.repeatabilityRequestId"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.RepeatabilityRequestHeaders.repeatabilityFirstSent"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/TeamsCapabilityPlans"
+            },
+            "headers": {
+              "Repeatability-Result": {
+                "type": "string",
+                "description": "Indicates whether the repeatable request was accepted or rejected.",
+                "enum": [
+                  "accepted",
+                  "rejected"
+                ],
+                "x-ms-enum": {
+                  "name": "RepeatabilityResult",
+                  "modelAsString": false,
+                  "values": [
+                    {
+                      "name": "accepted",
+                      "value": "accepted",
+                      "description": "If the request was accepted and the server guarantees that the server state reflects a single execution of the operation."
+                    },
+                    {
+                      "name": "rejected",
+                      "value": "rejected",
+                      "description": "If the request was rejected because the combination of Repeatability-First-Sent and Repeatability-Request-ID were invalid\nor because the Repeatability-First-Sent value was outside the range of values held by the server."
+                    }
+                  ]
+                }
+              },
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get the list of capability plans available to this account.": {
+            "$ref": "./examples/PostGetAccountTeamsCapabilityPlans.json"
+          }
+        }
+      }
+    },
+    "/accounts/{accountName}:getTeamsAvailableCapabilities": {
+      "post": {
+        "operationId": "Accounts_GetTeamsAvailableCapabilities",
+        "tags": [
+          "TeamsAvailableCapabilities"
+        ],
+        "summary": "Get Teams Available Capabilities.",
+        "description": "Get a list of Teams Available Capabilities on the specified account.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "Name of the account.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100,
+            "pattern": "^([A-Za-z0-9_-]+)$"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.RepeatabilityRequestHeaders.repeatabilityRequestId"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.RepeatabilityRequestHeaders.repeatabilityFirstSent"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NumberIdentifiers"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/TeamsAvailableCapabilities"
+            },
+            "headers": {
+              "Repeatability-Result": {
+                "type": "string",
+                "description": "Indicates whether the repeatable request was accepted or rejected.",
+                "enum": [
+                  "accepted",
+                  "rejected"
+                ],
+                "x-ms-enum": {
+                  "name": "RepeatabilityResult",
+                  "modelAsString": false,
+                  "values": [
+                    {
+                      "name": "accepted",
+                      "value": "accepted",
+                      "description": "If the request was accepted and the server guarantees that the server state reflects a single execution of the operation."
+                    },
+                    {
+                      "name": "rejected",
+                      "value": "rejected",
+                      "description": "If the request was rejected because the combination of Repeatability-First-Sent and Repeatability-Request-ID were invalid\nor because the Repeatability-First-Sent value was outside the range of values held by the server."
+                    }
+                  ]
+                }
+              },
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get the teams capabilities available to the numbers provided.": {
+            "$ref": "./examples/PostGetAccountTeamsAvailableCapabilities.json"
+          }
+        }
+      }
+    },
+    "/accounts/{accountName}/numbers": {
+      "get": {
+        "operationId": "Accounts_ListNumbers",
+        "tags": [
+          "Number"
+        ],
+        "summary": "Get Numbers.",
+        "description": "Get a list of Numbers on the specified account.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "Name of the account.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100,
+            "pattern": "^([A-Za-z0-9_-]+)$"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.TopQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.MaxPageSizeQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/FilterQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/RecordCountQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedNumberResource"
+            },
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              },
+              "x-ms-record-count": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The total number of records available for this request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get list of Numbers on an Account.": {
+            "$ref": "./examples/ListAccountNumbers.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/accounts/{accountName}/numbers/{telephoneNumber}": {
+      "get": {
+        "operationId": "Accounts_GetNumber",
+        "tags": [
+          "Number"
+        ],
+        "summary": "Get Number.",
+        "description": "Get details of a specific Number using its telephone number.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "Name of the account.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100,
+            "pattern": "^([A-Za-z0-9_-]+)$"
+          },
+          {
+            "name": "telephoneNumber",
+            "in": "path",
+            "description": "Telephone number in E.164 format.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 16,
+            "pattern": "^\\+[1-9]\\d+$"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifMatch"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifNoneMatch"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifUnmodifiedSince"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifModifiedSince"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/NumberResource"
+            },
+            "headers": {
+              "ETag": {
+                "type": "string",
+                "description": "The entity tag for the response."
+              },
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a Number from an Account.": {
+            "$ref": "./examples/GetAccountNumber.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Accounts_CreateOrReplaceNumber",
+        "tags": [
+          "Number"
+        ],
+        "summary": "Create or replace Number.",
+        "description": "Create or replace the details of a Number.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "Name of the account.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100,
+            "pattern": "^([A-Za-z0-9_-]+)$"
+          },
+          {
+            "name": "telephoneNumber",
+            "in": "path",
+            "description": "Telephone number in E.164 format.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 16,
+            "pattern": "^\\+[1-9]\\d+$"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.RepeatabilityRequestHeaders.repeatabilityRequestId"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.RepeatabilityRequestHeaders.repeatabilityFirstSent"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifMatch"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifNoneMatch"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifUnmodifiedSince"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifModifiedSince"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "The resource instance.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NumberResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/NumberResource"
+            },
+            "headers": {
+              "ETag": {
+                "type": "string",
+                "description": "The entity tag for the response."
+              },
+              "Repeatability-Result": {
+                "type": "string",
+                "description": "Indicates whether the repeatable request was accepted or rejected.",
+                "enum": [
+                  "accepted",
+                  "rejected"
+                ],
+                "x-ms-enum": {
+                  "name": "RepeatabilityResult",
+                  "modelAsString": false,
+                  "values": [
+                    {
+                      "name": "accepted",
+                      "value": "accepted",
+                      "description": "If the request was accepted and the server guarantees that the server state reflects a single execution of the operation."
+                    },
+                    {
+                      "name": "rejected",
+                      "value": "rejected",
+                      "description": "If the request was rejected because the combination of Repeatability-First-Sent and Repeatability-Request-ID were invalid\nor because the Repeatability-First-Sent value was outside the range of values held by the server."
+                    }
+                  ]
+                }
+              },
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "schema": {
+              "$ref": "#/definitions/NumberResource"
+            },
+            "headers": {
+              "ETag": {
+                "type": "string",
+                "description": "The entity tag for the response."
+              },
+              "Repeatability-Result": {
+                "type": "string",
+                "description": "Indicates whether the repeatable request was accepted or rejected.",
+                "enum": [
+                  "accepted",
+                  "rejected"
+                ],
+                "x-ms-enum": {
+                  "name": "RepeatabilityResult",
+                  "modelAsString": false,
+                  "values": [
+                    {
+                      "name": "accepted",
+                      "value": "accepted",
+                      "description": "If the request was accepted and the server guarantees that the server state reflects a single execution of the operation."
+                    },
+                    {
+                      "name": "rejected",
+                      "value": "rejected",
+                      "description": "If the request was rejected because the combination of Repeatability-First-Sent and Repeatability-Request-ID were invalid\nor because the Repeatability-First-Sent value was outside the range of values held by the server."
+                    }
+                  ]
+                }
+              },
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or replace a Number.": {
+            "$ref": "./examples/PutAccountNumber.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "Accounts_DeleteNumber",
+        "tags": [
+          "Number"
+        ],
+        "summary": "Delete Number.",
+        "description": "Delete a specific Number using its telephone number.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "Name of the account.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100,
+            "pattern": "^([A-Za-z0-9_-]+)$"
+          },
+          {
+            "name": "telephoneNumber",
+            "in": "path",
+            "description": "Telephone number in E.164 format.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 16,
+            "pattern": "^\\+[1-9]\\d+$"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.RepeatabilityRequestHeaders.repeatabilityRequestId"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.RepeatabilityRequestHeaders.repeatabilityFirstSent"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifMatch"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifNoneMatch"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifUnmodifiedSince"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifModifiedSince"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. ",
+            "headers": {
+              "Repeatability-Result": {
+                "type": "string",
+                "description": "Indicates whether the repeatable request was accepted or rejected.",
+                "enum": [
+                  "accepted",
+                  "rejected"
+                ],
+                "x-ms-enum": {
+                  "name": "RepeatabilityResult",
+                  "modelAsString": false,
+                  "values": [
+                    {
+                      "name": "accepted",
+                      "value": "accepted",
+                      "description": "If the request was accepted and the server guarantees that the server state reflects a single execution of the operation."
+                    },
+                    {
+                      "name": "rejected",
+                      "value": "rejected",
+                      "description": "If the request was rejected because the combination of Repeatability-First-Sent and Repeatability-Request-ID were invalid\nor because the Repeatability-First-Sent value was outside the range of values held by the server."
+                    }
+                  ]
+                }
+              },
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete Number from Account.": {
+            "$ref": "./examples/DeleteAccountNumber.json"
+          }
+        }
+      }
+    },
+    "/accounts/{accountName}/teamsCivicAddresses": {
+      "get": {
+        "operationId": "Accounts_ListTeamsCivicAddresses",
+        "tags": [
+          "TeamsCivicAddresses"
+        ],
+        "summary": "Get Teams Civic Addresses.",
+        "description": "Get a list of Teams Civic Addresses on the specified account.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "Name of the account.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100,
+            "pattern": "^([A-Za-z0-9_-]+)$"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.TopQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.MaxPageSizeQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/FilterQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/RecordCountQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedTeamsCivicAddressResource"
+            },
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              },
+              "x-ms-record-count": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The total number of records available for this request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a list of Civic Addresses.": {
+            "$ref": "./examples/ListAccountTeamsCivicAddresses.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/accounts/{accountName}/teamsCivicAddresses/{civicAddressId}": {
+      "get": {
+        "operationId": "Accounts_GetTeamsCivicAddress",
+        "tags": [
+          "TeamsCivicAddress"
+        ],
+        "summary": "Get Teams Civic Address.",
+        "description": "Get details of a specific Teams Civic Address using its ID.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "Name of the account.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100,
+            "pattern": "^([A-Za-z0-9_-]+)$"
+          },
+          {
+            "name": "civicAddressId",
+            "in": "path",
+            "description": "The ID of the civic address.",
+            "required": true,
+            "type": "string",
+            "minLength": 1
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifMatch"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifNoneMatch"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifUnmodifiedSince"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifModifiedSince"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/TeamsCivicAddressResource"
+            },
+            "headers": {
+              "ETag": {
+                "type": "string",
+                "description": "The entity tag for the response."
+              },
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a Civic Address.": {
+            "$ref": "./examples/GetAccountTeamsCivicAddress.json"
+          }
+        }
+      }
+    },
+    "/numbers": {
+      "get": {
+        "operationId": "ListNumbers",
+        "description": "List all the Numbers associated with this Communications Gateway.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.TopQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.MaxPageSizeQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/FilterQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/RecordCountQueryParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedNumberList"
+            },
+            "headers": {
+              "x-ms-record-count": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The total number of records available for this request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get list of numbers from all accounts.": {
+            "$ref": "./examples/ListNumbers.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/teamsRequestsForInformation": {
+      "get": {
+        "operationId": "TeamsRequestsForInformation_List",
+        "tags": [
+          "TeamsRequestForInformation"
+        ],
+        "summary": "Get list of Requests for Information",
+        "description": "Get list of Requests for Information with details.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.TopQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.MaxPageSizeQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/FilterQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/RecordCountQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedRequestForInformationResource"
+            },
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              },
+              "x-ms-record-count": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The total number of records available for this request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get list of Requests for Information (Consents).": {
+            "$ref": "./examples/ListRequestsForInformation.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/teamsRequestsForInformation/{tenantId}": {
+      "get": {
+        "operationId": "TeamsRequestsForInformation_GetRequestForInformation",
+        "tags": [
+          "TeamsRequestForInformation"
+        ],
+        "summary": "Get Request for Information.",
+        "description": "Get details of a specific Request for Information using its ID.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "tenantId",
+            "in": "path",
+            "description": "The Teams tenant ID which generated this Request for Information.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 36,
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifMatch"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifNoneMatch"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifUnmodifiedSince"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifModifiedSince"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/RequestForInformationResource"
+            },
+            "headers": {
+              "ETag": {
+                "type": "string",
+                "description": "The entity tag for the response."
+              },
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get an RFI by tenant ID.": {
+            "$ref": "./examples/GetRequestForInformation.json"
+          }
+        }
+      },
+      "patch": {
+        "operationId": "TeamsRequestsForInformation_CreateOrUpdateRequestForInformation",
+        "tags": [
+          "TeamsRequestForInformation"
+        ],
+        "summary": "Create or update Request for Information.",
+        "description": "Create of update the details of a Request for Information.",
+        "consumes": [
+          "application/merge-patch+json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "tenantId",
+            "in": "path",
+            "description": "The Teams tenant ID which generated this Request for Information.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 36,
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.RepeatabilityRequestHeaders.repeatabilityRequestId"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.RepeatabilityRequestHeaders.repeatabilityFirstSent"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifMatch"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifNoneMatch"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifUnmodifiedSince"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifModifiedSince"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "The resource instance.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RequestForInformationResourceCreateOrUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/RequestForInformationResource"
+            },
+            "headers": {
+              "ETag": {
+                "type": "string",
+                "description": "The entity tag for the response."
+              },
+              "Repeatability-Result": {
+                "type": "string",
+                "description": "Indicates whether the repeatable request was accepted or rejected.",
+                "enum": [
+                  "accepted",
+                  "rejected"
+                ],
+                "x-ms-enum": {
+                  "name": "RepeatabilityResult",
+                  "modelAsString": false,
+                  "values": [
+                    {
+                      "name": "accepted",
+                      "value": "accepted",
+                      "description": "If the request was accepted and the server guarantees that the server state reflects a single execution of the operation."
+                    },
+                    {
+                      "name": "rejected",
+                      "value": "rejected",
+                      "description": "If the request was rejected because the combination of Repeatability-First-Sent and Repeatability-Request-ID were invalid\nor because the Repeatability-First-Sent value was outside the range of values held by the server."
+                    }
+                  ]
+                }
+              },
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "schema": {
+              "$ref": "#/definitions/RequestForInformationResource"
+            },
+            "headers": {
+              "ETag": {
+                "type": "string",
+                "description": "The entity tag for the response."
+              },
+              "Repeatability-Result": {
+                "type": "string",
+                "description": "Indicates whether the repeatable request was accepted or rejected.",
+                "enum": [
+                  "accepted",
+                  "rejected"
+                ],
+                "x-ms-enum": {
+                  "name": "RepeatabilityResult",
+                  "modelAsString": false,
+                  "values": [
+                    {
+                      "name": "accepted",
+                      "value": "accepted",
+                      "description": "If the request was accepted and the server guarantees that the server state reflects a single execution of the operation."
+                    },
+                    {
+                      "name": "rejected",
+                      "value": "rejected",
+                      "description": "If the request was rejected because the combination of Repeatability-First-Sent and Repeatability-Request-ID were invalid\nor because the Repeatability-First-Sent value was outside the range of values held by the server."
+                    }
+                  ]
+                }
+              },
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or update a Teams request for information.": {
+            "$ref": "./examples/PatchRequestForInformationCustomerRelationship.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AccountResource": {
+      "type": "object",
+      "description": "An account represents a group of numbers, typically associated with an enterprise.",
+      "properties": {
+        "serviceProvisioningStatus": {
+          "$ref": "#/definitions/ServiceProvisioningStatus",
+          "description": "The status of the provisioning action associated with this resource.",
+          "readOnly": true
+        },
+        "serviceProvisioningErrors": {
+          "type": "array",
+          "description": "Any errors pertaining to the provisioning of this resource.",
+          "items": {
+            "$ref": "#/definitions/Azure.Core.Foundations.Error"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the account.",
+          "minLength": 1,
+          "maxLength": 100,
+          "pattern": "^([A-Za-z0-9_-]+)$",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "correlationId": {
+          "type": "string",
+          "description": "A user defined identifier used for correlating with external systems.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "serviceDetails": {
+          "$ref": "#/definitions/AccountServiceDetails",
+          "description": "The details of the account.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
+    "AccountServiceDetails": {
+      "type": "object",
+      "description": "Details of the backend services associated with this Account.",
+      "properties": {
+        "teamsTenantId": {
+          "type": "string",
+          "description": "The Microsoft Teams Tenant ID of the Account. This can only be updated if no Operator Connect or Teams Phone Mobile numbers are configured in this account.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "teamsOperatorConnect": {
+          "$ref": "#/definitions/TeamsOperatorConnectAccountDetails",
+          "description": "Details for the Teams Operator Connect service on this Account.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "teamsDirectRouting": {
+          "$ref": "#/definitions/TeamsDirectRoutingAccountDetails",
+          "description": "Details for the Teams Direct Routing service on this Account.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "teamsPhoneMobile": {
+          "$ref": "#/definitions/TeamsPhoneMobileAccountDetails",
+          "description": "Details for the Teams Phone Mobile service on this Account.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "zoomPhoneCloudPeering": {
+          "$ref": "#/definitions/ZoomPhoneCloudPeeringAccountDetails",
+          "description": "Details for the Zoom Phone Cloud Peering service on this Account.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "azureOperatorCallProtection": {
+          "$ref": "#/definitions/AzureOperatorCallProtectionAccountDetails",
+          "description": "Details for the Azure Operator Call Protection service on this Account.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        }
+      }
+    },
+    "Azure.Core.Foundations.Error": {
+      "type": "object",
+      "description": "The error object.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "One of a server-defined set of error codes."
+        },
+        "message": {
+          "type": "string",
+          "description": "A human-readable representation of the error."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the error."
+        },
+        "details": {
+          "type": "array",
+          "description": "An array of details about specific errors that led to this reported error.",
+          "items": {
+            "$ref": "#/definitions/Azure.Core.Foundations.Error"
+          },
+          "x-ms-identifiers": []
+        },
+        "innererror": {
+          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
+          "description": "An object containing more specific information than the current object about the error."
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
+    "Azure.Core.Foundations.ErrorResponse": {
+      "type": "object",
+      "description": "A response containing error details.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "description": "The error object."
+        }
+      },
+      "required": [
+        "error"
+      ]
+    },
+    "Azure.Core.Foundations.InnerError": {
+      "type": "object",
+      "description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "One of a server-defined set of error codes."
+        },
+        "innererror": {
+          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
+          "description": "Inner error."
+        }
+      }
+    },
+    "AzureOperatorCallProtectionAccountDetails": {
+      "type": "object",
+      "description": "Account details specific to Azure Operator Call Protection.",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Boolean indicating if the service is enabled on this Account.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "numberCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The count of telephone numbers associated with this account that have this backend service enabled.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "enabled"
+      ]
+    },
+    "AzureOperatorCallProtectionNumberDetails": {
+      "type": "object",
+      "description": "Details for the Azure Operator Call Protection service on this Number.",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Boolean indicating if the service is enabled on this Number.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "enabled"
+      ]
+    },
+    "BatchNumbers": {
+      "type": "object",
+      "description": "List of telephone numbers to be uploaded to an account via a PUT request.",
+      "properties": {
+        "numbers": {
+          "type": "array",
+          "description": "The list of numbers to upload. At most 100 can be uploaded in one request.",
+          "maxItems": 100,
+          "items": {
+            "$ref": "#/definitions/NumberResource"
+          },
+          "x-ms-identifiers": [],
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "numbers"
+      ]
+    },
+    "BatchNumbersDelete": {
+      "type": "object",
+      "description": "A list of telephone numbers to delete.",
+      "properties": {
+        "numbers": {
+          "type": "array",
+          "description": "The list of number to delete. At most 100 can be deleted in one request.",
+          "maxItems": 100,
+          "items": {
+            "$ref": "#/definitions/NumberIdentifier"
+          },
+          "x-ms-identifiers": [],
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "numbers"
+      ]
+    },
+    "ContactDetails": {
+      "type": "object",
+      "description": "Contact details for an individual.",
+      "properties": {
+        "fullName": {
+          "type": "string",
+          "description": "The full name of the contact detail.",
+          "minLength": 1,
+          "readOnly": true
+        },
+        "email": {
+          "type": "string",
+          "description": "The email of the contact detail.",
+          "minLength": 1,
+          "readOnly": true
+        },
+        "telephoneNumber": {
+          "type": "string",
+          "description": "The telephone number of the contact detail.",
+          "readOnly": true
+        },
+        "companyName": {
+          "type": "string",
+          "description": "The company name of the contact detail.",
+          "readOnly": true
+        },
+        "companySize": {
+          "type": "string",
+          "description": "The company size of the contact detail.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "fullName",
+        "email"
+      ]
+    },
+    "CountOfRecordsHeader": {
+      "type": "object",
+      "description": "Provides the custom 'x-ms-record-count' header for list operations which details the total number of records available for this request."
+    },
+    "CustomerRelationship": {
+      "type": "object",
+      "description": "Details of a customer relationship.",
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "The status of the customer relationship.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "lastModifiedOn": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time (ISO8601 format) when the customer relationship is last modified.",
+          "readOnly": true
+        },
+        "comment": {
+          "type": "string",
+          "description": "The comment of the customer relationship.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        }
+      }
+    },
+    "Location": {
+      "type": "object",
+      "description": "A location used by Team Operator Connect or Teams Phone Mobile telephone numbers.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The ID of the location.",
+          "minLength": 1,
+          "readOnly": true
+        },
+        "civicAddressId": {
+          "type": "string",
+          "description": "The civic address ID of the location.",
+          "minLength": 1,
+          "readOnly": true
+        },
+        "description": {
+          "type": "string",
+          "description": "The description of the location.",
+          "readOnly": true
+        },
+        "additionalInfo": {
+          "type": "string",
+          "description": "The additional information of the location.",
+          "readOnly": true
+        },
+        "isDefault": {
+          "type": "boolean",
+          "description": "Flag indicating whether the location is default or not.",
+          "readOnly": true
+        },
+        "elin": {
+          "type": "string",
+          "description": "The elin (Emergency Location Identification Number) of the location.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "id",
+        "civicAddressId"
+      ]
+    },
+    "NumberConfiguration": {
+      "type": "object",
+      "description": "Configuration for this number.",
+      "properties": {
+        "customSipHeader": {
+          "type": "string",
+          "description": "Contents of the custom SIP header to use with this number. Can only contain letters, numbers, underscores and dashes. Can be up to 100 characters in length. The name of the custom header is set as part of the provisioning platform configuration on Azure Communications Gateway.",
+          "minLength": 1,
+          "maxLength": 100,
+          "pattern": "^([A-Za-z0-9_-])+$",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        }
+      }
+    },
+    "NumberIdentifier": {
+      "type": "object",
+      "description": "An identifier, used to identify a Number resource.",
+      "properties": {
+        "telephoneNumber": {
+          "type": "string",
+          "description": "Telephone number in E.164 format.",
+          "minLength": 3,
+          "maxLength": 16,
+          "pattern": "^\\+[1-9]\\d+$",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "telephoneNumber"
+      ]
+    },
+    "NumberIdentifiers": {
+      "type": "object",
+      "description": "A list identifiers for a Number resource.",
+      "properties": {
+        "numbers": {
+          "type": "array",
+          "description": "Array containing a list of identifiers for Number resources.",
+          "items": {
+            "$ref": "#/definitions/NumberIdentifier"
+          },
+          "x-ms-identifiers": [],
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "numbers"
+      ]
+    },
+    "NumberResource": {
+      "type": "object",
+      "description": "The configuration for a telephone number provisioned in Azure Communications Gateway.",
+      "properties": {
+        "serviceProvisioningStatus": {
+          "$ref": "#/definitions/ServiceProvisioningStatus",
+          "description": "The status of the provisioning action associated with this resource.",
+          "readOnly": true
+        },
+        "serviceProvisioningErrors": {
+          "type": "array",
+          "description": "Any errors pertaining to the provisioning of this resource.",
+          "items": {
+            "$ref": "#/definitions/Azure.Core.Foundations.Error"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "telephoneNumber": {
+          "type": "string",
+          "description": "Telephone number in E.164 format.",
+          "minLength": 1,
+          "maxLength": 16,
+          "pattern": "^\\+[1-9]\\d+$",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "accountName": {
+          "type": "string",
+          "description": "Name of the account. Can only contain letters, numbers, underscores and dashes, and is case-sensitive. Can be up to 100 characters in length.",
+          "minLength": 1,
+          "maxLength": 100,
+          "pattern": "^([A-Za-z0-9_-]+)$",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "serviceDetails": {
+          "$ref": "#/definitions/NumberServiceDetails",
+          "description": "Configuration of the individual backend services for this number.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "configuration": {
+          "$ref": "#/definitions/NumberConfiguration",
+          "description": "Configuration for this number.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "telephoneNumber",
+        "accountName",
+        "serviceDetails"
+      ]
+    },
+    "NumberServiceDetails": {
+      "type": "object",
+      "description": "Configuration of backend services for a telephone number.",
+      "properties": {
+        "teamsOperatorConnect": {
+          "$ref": "#/definitions/TeamsOperatorConnectNumberDetails",
+          "description": "Details for the Teams Operator Connect service on this Number.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "teamsDirectRouting": {
+          "$ref": "#/definitions/TeamsDirectRoutingNumberDetails",
+          "description": "Details for the Teams Direct Routing service on this Number.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "teamsPhoneMobile": {
+          "$ref": "#/definitions/TeamsPhoneMobileNumberDetails",
+          "description": "Details for the Teams Phone Mobile service on this Number.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "zoomPhoneCloudPeering": {
+          "$ref": "#/definitions/ZoomPhoneCloudPeeringNumberDetails",
+          "description": "Details for the Zoom Phone Cloud Peering service on this Number.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "azureOperatorCallProtection": {
+          "$ref": "#/definitions/AzureOperatorCallProtectionNumberDetails",
+          "description": "Details for the Azure Operator Call Protection service on this Number.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        }
+      }
+    },
+    "PagedAccountResource": {
+      "type": "object",
+      "description": "Paged collection of AccountResource items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The AccountResource items on this page",
+          "items": {
+            "$ref": "#/definitions/AccountResource"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PagedNumberList": {
+      "type": "object",
+      "description": "Paged collection of NumberResource items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The NumberResource items on this page",
+          "items": {
+            "$ref": "#/definitions/NumberResource"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PagedNumberResource": {
+      "type": "object",
+      "description": "Paged collection of NumberResource items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The NumberResource items on this page",
+          "items": {
+            "$ref": "#/definitions/NumberResource"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PagedRequestForInformationResource": {
+      "type": "object",
+      "description": "Paged collection of RequestForInformationResource items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The RequestForInformationResource items on this page",
+          "items": {
+            "$ref": "#/definitions/RequestForInformationResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PagedTeamsCivicAddressResource": {
+      "type": "object",
+      "description": "Paged collection of TeamsCivicAddressResource items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The TeamsCivicAddressResource items on this page",
+          "items": {
+            "$ref": "#/definitions/TeamsCivicAddressResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "RequestForInformationResource": {
+      "type": "object",
+      "description": "The configuration for a telephone number provisioned in ACG.",
+      "properties": {
+        "serviceProvisioningStatus": {
+          "$ref": "#/definitions/ServiceProvisioningStatus",
+          "description": "The status of the provisioning action associated with this resource.",
+          "readOnly": true
+        },
+        "serviceProvisioningErrors": {
+          "type": "array",
+          "description": "Any errors pertaining to the provisioning of this resource.",
+          "items": {
+            "$ref": "#/definitions/Azure.Core.Foundations.Error"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "id": {
+          "type": "string",
+          "description": "The ID of the Request for Information.",
+          "readOnly": true
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "The Teams tenant ID which generated this Request for Information.",
+          "minLength": 1,
+          "maxLength": 36,
+          "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+          "readOnly": true
+        },
+        "accountName": {
+          "type": "string",
+          "description": "The name of the account associated with this Request for Information.",
+          "readOnly": true
+        },
+        "productContext": {
+          "type": "string",
+          "description": "Will always be 'teams'.",
+          "readOnly": true
+        },
+        "operatorId": {
+          "type": "string",
+          "description": "The operator ID of the operator consent.",
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "#/definitions/TeamsConsentStatus",
+          "description": "The status of the operator consent.",
+          "readOnly": true
+        },
+        "consentedOn": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time (ISO8601 format) when the operator consent is created.",
+          "readOnly": true
+        },
+        "lastModifiedOn": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time (ISO8601 format) when the operator consent is last modified.",
+          "readOnly": true
+        },
+        "consentedCountries": {
+          "type": "array",
+          "description": "The list of consented countries.",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "contacts": {
+          "type": "array",
+          "description": "The list of tenant contacts.",
+          "items": {
+            "$ref": "#/definitions/ContactDetails"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "customerRelationship": {
+          "$ref": "#/definitions/CustomerRelationship",
+          "description": "The customer relationship of the operator consent.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "tenantId"
+      ]
+    },
+    "RequestForInformationResourceCreateOrUpdate": {
+      "type": "object",
+      "description": "The configuration for a telephone number provisioned in ACG.",
+      "properties": {
+        "customerRelationship": {
+          "$ref": "#/definitions/CustomerRelationship",
+          "description": "The customer relationship of the operator consent.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        }
+      }
+    },
+    "ServiceProvisioningStatus": {
+      "type": "string",
+      "description": "The provisioning states of an object on any relevant backend service.",
+      "enum": [
+        "pending",
+        "synced",
+        "failed"
+      ],
+      "x-ms-enum": {
+        "name": "ServiceProvisioningStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "pending",
+            "value": "pending",
+            "description": "The object is pending provisioning."
+          },
+          {
+            "name": "synced",
+            "value": "synced",
+            "description": "The object has been synced with the relevant backend service."
+          },
+          {
+            "name": "failed",
+            "value": "failed",
+            "description": "The object provisioning operation failed with the relevant backend service."
+          }
+        ]
+      }
+    },
+    "TeamsAvailableCapabilities": {
+      "type": "object",
+      "description": "The Teams capabilities available for numbers with Operator Connect or Teams Phone Mobile services enabled.",
+      "properties": {
+        "availableCapabilities": {
+          "type": "array",
+          "description": "The available capabilities for the numbers specified with Operator Connect or Teams Phone Mobile services enabled.",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        }
+      },
+      "required": [
+        "availableCapabilities"
+      ]
+    },
+    "TeamsCapabilityPlan": {
+      "type": "object",
+      "description": "A teams capability plan for a given usage.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The capability plan name.",
+          "readOnly": true
+        },
+        "offerTypes": {
+          "type": "array",
+          "description": "The offer types available.",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "usage": {
+          "type": "string",
+          "description": "The telephone number usage.",
+          "readOnly": true
+        },
+        "mandatoryCapabilities": {
+          "type": "array",
+          "description": "Mandatory capabilities for telephone numbers.",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "choosableCapabilities": {
+          "type": "array",
+          "description": "Choosable capabilities for telephone numbers.",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "supportsTollFree": {
+          "type": "boolean",
+          "description": "Boolean indicating if Toll free is supported.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "name",
+        "usage",
+        "supportsTollFree"
+      ]
+    },
+    "TeamsCapabilityPlans": {
+      "type": "object",
+      "description": "The Teams telephone number upload usages for this account.",
+      "properties": {
+        "capabilityPlans": {
+          "type": "array",
+          "description": "A list of telephone number upload usages.",
+          "items": {
+            "$ref": "#/definitions/TeamsCapabilityPlan"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "capabilityPlans"
+      ]
+    },
+    "TeamsCivicAddressResource": {
+      "type": "object",
+      "description": "A civic address available for Teams Operator Connect or Teams Phone Mobile users.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The ID of the civic address.",
+          "minLength": 1,
+          "readOnly": true
+        },
+        "country": {
+          "type": "string",
+          "description": "The country of the civic address.",
+          "readOnly": true
+        },
+        "houseNumber": {
+          "type": "string",
+          "description": "The house number of the civic address.",
+          "readOnly": true
+        },
+        "houseNumberSuffix": {
+          "type": "string",
+          "description": "The house number suffix of the civic address.",
+          "readOnly": true
+        },
+        "preDirectional": {
+          "type": "string",
+          "description": "The pre directional of the civic address.",
+          "readOnly": true
+        },
+        "streetName": {
+          "type": "string",
+          "description": "The street name of the civic address.",
+          "readOnly": true
+        },
+        "streetSuffix": {
+          "type": "string",
+          "description": "The street suffix of the civic address.",
+          "readOnly": true
+        },
+        "postDirectional": {
+          "type": "string",
+          "description": "The post directional of the civic address.",
+          "readOnly": true
+        },
+        "stateOrProvince": {
+          "type": "string",
+          "description": "The state or province of the civic address.",
+          "readOnly": true
+        },
+        "countyOrDistrict": {
+          "type": "string",
+          "description": "The county or district of the civic address.",
+          "readOnly": true
+        },
+        "cityOrTown": {
+          "type": "string",
+          "description": "The city or town of the civic address.",
+          "readOnly": true
+        },
+        "cityOrTownAlias": {
+          "type": "string",
+          "description": "The city or town alias of the civic address.",
+          "readOnly": true
+        },
+        "postalOrZipCode": {
+          "type": "string",
+          "description": "The postal or zip code of the civic address.",
+          "readOnly": true
+        },
+        "description": {
+          "type": "string",
+          "description": "The description of the civic address.",
+          "readOnly": true
+        },
+        "companyName": {
+          "type": "string",
+          "description": "The company name of the civic address.",
+          "readOnly": true
+        },
+        "companyId": {
+          "type": "string",
+          "description": "The company ID of the civic address.",
+          "readOnly": true
+        },
+        "defaultLocationId": {
+          "type": "string",
+          "description": "The default location ID of the civic address.",
+          "minLength": 1,
+          "readOnly": true
+        },
+        "validationStatus": {
+          "$ref": "#/definitions/ValidationStatus",
+          "description": "The validation status of the civic address.",
+          "readOnly": true
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "The customer tenant ID of the civic address.",
+          "readOnly": true
+        },
+        "partnerId": {
+          "type": "string",
+          "description": "The partner ID of the civic address.",
+          "readOnly": true
+        },
+        "locations": {
+          "type": "array",
+          "description": "The list of locations associated with the civic address.",
+          "items": {
+            "$ref": "#/definitions/Location"
+          },
+          "readOnly": true
+        },
+        "latitude": {
+          "type": "string",
+          "description": "The latitude of the civic address.",
+          "readOnly": true
+        },
+        "longitude": {
+          "type": "string",
+          "description": "The longitude of the civic address.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "id",
+        "defaultLocationId"
+      ]
+    },
+    "TeamsCommonNumberConfig": {
+      "type": "object",
+      "description": "Telephone number configuration for Teams Operator Connect and Teams Phone Mobile telephone numbers.",
+      "properties": {
+        "usage": {
+          "type": "string",
+          "description": "The usage for this telephone number.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "choosableCapabilities": {
+          "type": "array",
+          "description": "The choosable capabilities for this telephone number.",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "acquiredCapabilities": {
+          "type": "array",
+          "description": "The acquired capabilities for this telephone number.",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "availableCapabilities": {
+          "type": "array",
+          "description": "The available capabilities for this telephone number.",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "additionalUsages": {
+          "type": "array",
+          "description": "The additional usages for this telephone number.",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "civicAddressId": {
+          "type": "string",
+          "description": "The ID of the civic address to be used as the emergency address for this telephone number.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "locationId": {
+          "type": "string",
+          "description": "The ID of the location to be used as the emergency address for this telephone number.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "allowTenantAddressUpdate": {
+          "type": "boolean",
+          "description": "If the enterprise is allowed to update the address for this telephone number.",
+          "default": false,
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "displayedCountryCode": {
+          "type": "string",
+          "description": "The country code to be displayed with this telephone number",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "usage",
+        "choosableCapabilities"
+      ]
+    },
+    "TeamsConsentStatus": {
+      "type": "string",
+      "description": "The possible state for an Operator Consent.",
+      "enum": [
+        "active",
+        "suspended",
+        "removed"
+      ],
+      "x-ms-enum": {
+        "name": "TeamsConsentStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "active",
+            "value": "active",
+            "description": "The Operator Consent is active."
+          },
+          {
+            "name": "suspended",
+            "value": "suspended",
+            "description": "The Operator Consent is suspended."
+          },
+          {
+            "name": "removed",
+            "value": "removed",
+            "description": "The Operator Consent is removed."
+          }
+        ]
+      }
+    },
+    "TeamsDirectRoutingAccountConfig": {
+      "type": "object",
+      "description": "Configuration specific to Teams Direct Routing.",
+      "properties": {
+        "callScreening": {
+          "type": "boolean",
+          "description": "Enables/disables caller ID screening for the account. Caller ID screening is enabled by default.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "subdomain": {
+          "type": "string",
+          "description": "Enterprise-specific domain name label. Can only contain letters, numbers, underscores and dashes. Can be up to 10 characters in length.",
+          "minLength": 1,
+          "maxLength": 10,
+          "pattern": "^([A-Za-z0-9_-]+)$",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "subdomainTokens": {
+          "$ref": "#/definitions/TeamsDirectRoutingSubdomainTokens",
+          "description": "DNS TXT value for the Direct Routing regions, as provided by the customer from their Microsoft 365 Admin Center.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "callScreening",
+        "subdomain",
+        "subdomainTokens"
+      ]
+    },
+    "TeamsDirectRoutingAccountDetails": {
+      "type": "object",
+      "description": "Account details specific to Teams Direct Routing on this Account.",
+      "properties": {
+        "syncEnabled": {
+          "type": "boolean",
+          "description": "Boolean indicating if data is being provisioned through the backend service.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "enabled": {
+          "type": "boolean",
+          "description": "Boolean indicating if the service is enabled on this Account.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "numberCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The count of telephone numbers associated with this account that have this backend service enabled.",
+          "readOnly": true
+        },
+        "configuration": {
+          "$ref": "#/definitions/TeamsDirectRoutingAccountConfig",
+          "description": "The configuration for Teams Direct Routing on this account.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "subdomainStatus": {
+          "$ref": "#/definitions/TeamsDirectRoutingSubdomainProvisioningStatus",
+          "description": "The provisioning status of the domains.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "syncEnabled",
+        "enabled",
+        "subdomainStatus"
+      ]
+    },
+    "TeamsDirectRoutingNumberDetails": {
+      "type": "object",
+      "description": "Details for the Teams Direct Routing service on this Number.",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Boolean indicating if the service is enabled on this Number.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "enabled"
+      ]
+    },
+    "TeamsDirectRoutingSubdomainProvisioningStatus": {
+      "type": "string",
+      "description": "Possible values for DNS provisioning state of Teams Direct Routing domains",
+      "enum": [
+        "provisioned",
+        "notProvisioned",
+        "inconsistent"
+      ],
+      "x-ms-enum": {
+        "name": "TeamsDirectRoutingSubdomainProvisioningStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "provisioned",
+            "value": "provisioned",
+            "description": "The DNS provisioning state Provisioned."
+          },
+          {
+            "name": "notProvisioned",
+            "value": "notProvisioned",
+            "description": "The DNS provisioning state Not Provisioned."
+          },
+          {
+            "name": "inconsistent",
+            "value": "inconsistent",
+            "description": "The DNS provisioning state Inconsistent."
+          }
+        ]
+      }
+    },
+    "TeamsDirectRoutingSubdomainTokens": {
+      "type": "object",
+      "description": "DNS TXT value for the region, as provided by the enterprise admin from their Microsoft 365 Admin Center. Can only contain letters, numbers, underscores and dashes. Can be up to 100 characters in length.",
+      "properties": {
+        "region1Token": {
+          "type": "string",
+          "description": "DNS TXT value for the first region, as provided by the enterprise admin from their Microsoft 365 Admin Center. Can only contain letters, numbers, underscores and dashes. Can be up to 100 characters in length.",
+          "minLength": 1,
+          "maxLength": 100,
+          "pattern": "^([A-Za-z0-9=_-]+)$",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "region2Token": {
+          "type": "string",
+          "description": "DNS TXT value for the second region, as provided by the enterprise admin from their Microsoft 365 Admin Center. Can only contain letters, numbers, underscores and dashes. Can be up to 100 characters in length.",
+          "minLength": 1,
+          "maxLength": 100,
+          "pattern": "^([A-Za-z0-9=_-]+)$",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "region1Token",
+        "region2Token"
+      ]
+    },
+    "TeamsOperatorConnectAccountDetails": {
+      "type": "object",
+      "description": "Account details specific to Teams Operator Connect on this Account.",
+      "properties": {
+        "syncEnabled": {
+          "type": "boolean",
+          "description": "Boolean indicating if data is being provisioned through the backend service.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "enabled": {
+          "type": "boolean",
+          "description": "Boolean indicating if the service is enabled on this Account.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "numberCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The count of telephone numbers associated with this account that have this backend service enabled.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "syncEnabled",
+        "enabled"
+      ]
+    },
+    "TeamsOperatorConnectNumberConfig": {
+      "type": "object",
+      "description": "Telephone number configuration for Teams Operator Connect telephone numbers.",
+      "properties": {
+        "usage": {
+          "type": "string",
+          "description": "The usage for this telephone number.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "choosableCapabilities": {
+          "type": "array",
+          "description": "The choosable capabilities for this telephone number.",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "acquiredCapabilities": {
+          "type": "array",
+          "description": "The acquired capabilities for this telephone number.",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "availableCapabilities": {
+          "type": "array",
+          "description": "The available capabilities for this telephone number.",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "additionalUsages": {
+          "type": "array",
+          "description": "The additional usages for this telephone number.",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "civicAddressId": {
+          "type": "string",
+          "description": "The ID of the civic address to be used as the emergency address for this telephone number.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "locationId": {
+          "type": "string",
+          "description": "The ID of the location to be used as the emergency address for this telephone number.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "allowTenantAddressUpdate": {
+          "type": "boolean",
+          "description": "If the enterprise is allowed to update the address for this telephone number.",
+          "default": false,
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "displayedCountryCode": {
+          "type": "string",
+          "description": "The country code to be displayed with this telephone number",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "usage",
+        "choosableCapabilities"
+      ]
+    },
+    "TeamsOperatorConnectNumberDetails": {
+      "type": "object",
+      "description": "Details for the Teams Operator Connect service on this Number.",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Boolean indicating if the service is enabled on this Number.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "assignmentStatus": {
+          "$ref": "#/definitions/TelephoneNumberAssignmentStatus",
+          "description": "The assignment status of this Number.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "configuration": {
+          "$ref": "#/definitions/TeamsOperatorConnectNumberConfig",
+          "description": "The configuration for Teams Operator Connect on this number.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "enabled"
+      ]
+    },
+    "TeamsPhoneMobileAccountDetails": {
+      "type": "object",
+      "description": "Account details specific to Teams Phone Mobile.",
+      "properties": {
+        "syncEnabled": {
+          "type": "boolean",
+          "description": "Boolean indicating if data is being provisioned through the backend service.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "enabled": {
+          "type": "boolean",
+          "description": "Boolean indicating if the service is enabled on this Account.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "numberCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The count of telephone numbers associated with this account that have this backend service enabled.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "syncEnabled",
+        "enabled"
+      ]
+    },
+    "TeamsPhoneMobileNumberConfig": {
+      "type": "object",
+      "description": "Telephone number configuration for Teams Phone Mobile telephone numbers.",
+      "properties": {
+        "usage": {
+          "type": "string",
+          "description": "The usage for this telephone number.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "choosableCapabilities": {
+          "type": "array",
+          "description": "The choosable capabilities for this telephone number.",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "acquiredCapabilities": {
+          "type": "array",
+          "description": "The acquired capabilities for this telephone number.",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "availableCapabilities": {
+          "type": "array",
+          "description": "The available capabilities for this telephone number.",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "additionalUsages": {
+          "type": "array",
+          "description": "The additional usages for this telephone number.",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "civicAddressId": {
+          "type": "string",
+          "description": "The ID of the civic address to be used as the emergency address for this telephone number.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "locationId": {
+          "type": "string",
+          "description": "The ID of the location to be used as the emergency address for this telephone number.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "allowTenantAddressUpdate": {
+          "type": "boolean",
+          "description": "If the enterprise is allowed to update the address for this telephone number.",
+          "default": false,
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "displayedCountryCode": {
+          "type": "string",
+          "description": "The country code to be displayed with this telephone number",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "usage",
+        "choosableCapabilities"
+      ]
+    },
+    "TeamsPhoneMobileNumberDetails": {
+      "type": "object",
+      "description": "Details for the Teams Phone Mobile service on this Number.",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Boolean indicating if the service is enabled on this Number.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "assignmentStatus": {
+          "$ref": "#/definitions/TelephoneNumberAssignmentStatus",
+          "description": "The assignment status of this Number.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "configuration": {
+          "$ref": "#/definitions/TeamsPhoneMobileNumberConfig",
+          "description": "The configuration for Teams Phone Mobile on this number.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "enabled"
+      ]
+    },
+    "TelephoneNumberAssignmentStatus": {
+      "type": "string",
+      "description": "Indicates whether a number is assigned to a user.",
+      "enum": [
+        "assigned",
+        "unassigned"
+      ],
+      "x-ms-enum": {
+        "name": "TelephoneNumberAssignmentStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "assigned",
+            "value": "assigned",
+            "description": "The telephone number is assigned to a user."
+          },
+          {
+            "name": "unassigned",
+            "value": "unassigned",
+            "description": "The telephone number is not assigned to a user."
+          }
+        ]
+      }
+    },
+    "ValidationStatus": {
+      "type": "string",
+      "description": "The possible validation status of Teams Civic Addresses.",
+      "enum": [
+        "notValidated",
+        "validated"
+      ],
+      "x-ms-enum": {
+        "name": "ValidationStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "notValidated",
+            "value": "notValidated",
+            "description": "The civic address is not validated."
+          },
+          {
+            "name": "validated",
+            "value": "validated",
+            "description": "The civic address is validated."
+          }
+        ]
+      }
+    },
+    "Versions": {
+      "type": "string",
+      "description": "The Microsoft.VoiceServices service versions.",
+      "enum": [
+        "2024-02-29-preview"
+      ],
+      "x-ms-enum": {
+        "name": "Versions",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "v2024_02_29_preview",
+            "value": "2024-02-29-preview",
+            "description": "2024-02-29-preview"
+          }
+        ]
+      }
+    },
+    "ZoomPhoneCloudPeeringAccountDetails": {
+      "type": "object",
+      "description": "Account details specific to Zoom Phone Cloud Peering.",
+      "properties": {
+        "syncEnabled": {
+          "type": "boolean",
+          "description": "Boolean indicating if data is being provisioned through the backend service.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "enabled": {
+          "type": "boolean",
+          "description": "Boolean indicating if the service is enabled on this Account.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "numberCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The count of telephone numbers associated with this account that have this backend service enabled.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "syncEnabled",
+        "enabled"
+      ]
+    },
+    "ZoomPhoneCloudPeeringNumberDetails": {
+      "type": "object",
+      "description": "Details for the Zoom Phone Cloud Peering service on this Number.",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Boolean indicating if the service is enabled on this Number.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "enabled"
+      ]
+    }
+  },
+  "parameters": {
+    "Azure.Core.ClientRequestIdHeader": {
+      "name": "x-ms-client-request-id",
+      "in": "header",
+      "description": "An opaque, globally-unique, client-generated string identifier for the request.",
+      "required": false,
+      "type": "string",
+      "format": "uuid",
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "clientRequestId"
+    },
+    "Azure.Core.ConditionalRequestHeaders.ifMatch": {
+      "name": "If-Match",
+      "in": "header",
+      "description": "The request should only proceed if an entity matches this string.",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "ifMatch"
+    },
+    "Azure.Core.ConditionalRequestHeaders.ifModifiedSince": {
+      "name": "If-Modified-Since",
+      "in": "header",
+      "description": "The request should only proceed if the entity was modified after this time.",
+      "required": false,
+      "type": "string",
+      "format": "date-time",
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "ifModifiedSince"
+    },
+    "Azure.Core.ConditionalRequestHeaders.ifNoneMatch": {
+      "name": "If-None-Match",
+      "in": "header",
+      "description": "The request should only proceed if no entity matches this string.",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "ifNoneMatch"
+    },
+    "Azure.Core.ConditionalRequestHeaders.ifUnmodifiedSince": {
+      "name": "If-Unmodified-Since",
+      "in": "header",
+      "description": "The request should only proceed if the entity was not modified after this time.",
+      "required": false,
+      "type": "string",
+      "format": "date-time",
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "ifUnmodifiedSince"
+    },
+    "Azure.Core.Foundations.ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "description": "The API version to use for this operation.",
+      "required": true,
+      "type": "string",
+      "minLength": 1,
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "apiVersion"
+    },
+    "Azure.Core.MaxPageSizeQueryParameter": {
+      "name": "maxpagesize",
+      "in": "query",
+      "description": "The maximum number of result items per page.",
+      "required": false,
+      "type": "integer",
+      "format": "int32",
+      "x-ms-parameter-location": "method"
+    },
+    "Azure.Core.RepeatabilityRequestHeaders.repeatabilityFirstSent": {
+      "name": "Repeatability-First-Sent",
+      "in": "header",
+      "description": "Specifies the date and time at which the request was first created.",
+      "required": false,
+      "type": "string",
+      "format": "date-time",
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "repeatabilityFirstSent"
+    },
+    "Azure.Core.RepeatabilityRequestHeaders.repeatabilityRequestId": {
+      "name": "Repeatability-Request-ID",
+      "in": "header",
+      "description": "An opaque, globally-unique, client-generated string identifier for the request.",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "repeatabilityRequestId"
+    },
+    "Azure.Core.SkipQueryParameter": {
+      "name": "skip",
+      "in": "query",
+      "description": "The number of result items to skip.",
+      "required": false,
+      "type": "integer",
+      "format": "int32",
+      "default": 0,
+      "x-ms-parameter-location": "method"
+    },
+    "Azure.Core.TopQueryParameter": {
+      "name": "top",
+      "in": "query",
+      "description": "The number of result items to return.",
+      "required": false,
+      "type": "integer",
+      "format": "int32",
+      "x-ms-parameter-location": "method"
+    },
+    "DeleteNumbersQueryParameter": {
+      "name": "deleteNumbers",
+      "in": "query",
+      "description": "Whether to delete the child Number resources of the Account, defaults to false.",
+      "required": false,
+      "type": "boolean",
+      "x-ms-parameter-location": "method"
+    },
+    "FilterQueryParameter": {
+      "name": "filter",
+      "in": "query",
+      "description": "Filter the result list using the given expression",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "RecordCountQueryParameter": {
+      "name": "countRecords",
+      "in": "query",
+      "description": "Whether to return a count of the total number of records available for this request.",
+      "required": false,
+      "type": "boolean",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

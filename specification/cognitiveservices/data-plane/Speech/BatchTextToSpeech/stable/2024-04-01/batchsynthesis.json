@@ -1,0 +1,809 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Batch synthesis API",
+    "description": "Batch synthesis API for text-to-speech.",
+    "contact": {
+      "name": "Cognitive Services - Speech Services",
+      "url": "https://docs.microsoft.com/azure/cognitive-services/speech-service/support"
+    },
+    "version": "2024-04-01"
+  },
+  "paths": {
+    "/batchsyntheses": {
+      "get": {
+        "tags": [
+          "BatchSynthesis"
+        ],
+        "description": "Gets the list of batch syntheses.",
+        "operationId": "BatchSyntheses_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/QuerySkip"
+          },
+          {
+            "$ref": "#/parameters/QueryMaxPageSize"
+          },
+          {
+            "$ref": "#/parameters/QueryApiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/PaginatedBatchSynthesis"
+            }
+          },
+          "default": {
+            "description": "An error occurred.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code"
+              }
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink",
+          "itemName": "value"
+        },
+        "x-ms-examples": {
+          "Create a project": {
+            "$ref": "./examples/get_batch_syntheses.json"
+          }
+        }
+      }
+    },
+    "/batchsyntheses/{id}": {
+      "get": {
+        "tags": [
+          "BatchSynthesis"
+        ],
+        "description": "Gets the batch synthesis identified by the given ID.",
+        "operationId": "BatchSyntheses_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/PathId"
+          },
+          {
+            "$ref": "#/parameters/QueryApiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/BatchSynthesis"
+            }
+          },
+          "default": {
+            "description": "An error occurred.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "get a batch synthesis job.": {
+            "$ref": "./examples/get_batch_synthesis.json"
+          },
+          "get a batch synthesis job with ssml input and user provided container output.": {
+            "$ref": "./examples/get_batch_synthesis_ssml_with_user_provided_container.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "BatchSynthesis"
+        ],
+        "description": "Creates a batch synthesis job, the max allowed payload content length is 500KB.",
+        "operationId": "BatchSyntheses_Create",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/PathId"
+          },
+          {
+            "in": "body",
+            "name": "definition",
+            "required": true,
+            "description": "Bath synthesis task definition",
+            "schema": {
+              "$ref": "#/definitions/BatchSynthesis"
+            }
+          },
+          {
+            "in": "header",
+            "name": "Operation-Id",
+            "required": false,
+            "description": "ID of the status monitor for the operation. If the Operation-Id header matches an existing operation and the request is not identical to the prior request, it will fail with a 400 Bad Request.",
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$",
+            "minLength": 3,
+            "maxLength": 64
+          },
+          {
+            "$ref": "#/parameters/QueryApiVersion"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/BatchSynthesis"
+            },
+            "headers": {
+              "operation-id": {
+                "type": "string",
+                "description": "ID of the operation."
+              },
+              "operation-location": {
+                "description": "The location of the batch synthesis job.",
+                "type": "string",
+                "format": "uri"
+              }
+            }
+          },
+          "default": {
+            "description": "An error occurred.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code"
+              }
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Create a batch synthesis job with text input.": {
+            "$ref": "./examples/create_batch_synthesis.json"
+          },
+          "Create a batch synthesis job with ssml input and user provided container output.": {
+            "$ref": "./examples/create_batch_synthesis_ssml_with_user_provided_container.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "BatchSynthesis"
+        ],
+        "description": "Deletes the batch synthesis identified by the given ID.",
+        "operationId": "BatchSyntheses_Delete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/PathId"
+          },
+          {
+            "$ref": "#/parameters/QueryApiVersion"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "An error occurred.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "get a batch synthesis job.": {
+            "$ref": "./examples/delete_batch_synthesis.json"
+          }
+        }
+      }
+    },
+    "/operations/{id}": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "description": "Gets operation info.",
+        "operationId": "Operations_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "description": "The id of the operation",
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$",
+            "minLength": 3,
+            "maxLength": 64
+          },
+          {
+            "$ref": "#/parameters/QueryApiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/Operation"
+            }
+          },
+          "default": {
+            "description": "Error encountered.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Operation": {
+            "$ref": "./examples/get_operation.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "BatchSynthesis": {
+      "description": "Bath synthesis task.",
+      "required": [
+        "inputKind"
+      ],
+      "type": "object",
+      "properties": {
+        "inputKind": {
+          "$ref": "#/definitions/InputKind"
+        },
+        "inputs": {
+          "description": "Text or SSML inputs, it's allowed up to 10000 items.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BatchSynthesisInput"
+          }
+        },
+        "synthesisConfig": {
+          "$ref": "#/definitions/BatchSynthesisConfig"
+        },
+        "customVoices": {
+          "description": "The custom voice map of voice name and deployment ID.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$",
+            "minLength": 3,
+            "maxLength": 64
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/BatchSynthesisProperties"
+        },
+        "outputs": {
+          "$ref": "#/definitions/BatchSynthesisOutputs",
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "#/definitions/Status",
+          "readOnly": true
+        },
+        "lastActionDateTime": {
+          "description": "The time-stamp when the current status was entered.",
+          "format": "date-time",
+          "type": "string",
+          "readOnly": true
+        },
+        "id": {
+          "$ref": "#/definitions/ResourceId"
+        },
+        "description": {
+          "description": "The description of the batch synthesis task.",
+          "type": "string"
+        },
+        "createdDateTime": {
+          "description": "The time-stamp when the object was created.",
+          "format": "date-time",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "BatchSynthesisBackgroundAudioDefinition": {
+      "description": "Background audio setting.",
+      "required": [
+        "src"
+      ],
+      "type": "object",
+      "properties": {
+        "src": {
+          "format": "uri",
+          "description": "Source of audio file. Reference https://learn.microsoft.com/azure/ai-services/speech-service/speech-synthesis-markup-voice#add-background-audio.",
+          "type": "string"
+        },
+        "fadein": {
+          "format": "int64",
+          "description": "The fadein value of background audio. Reference https://learn.microsoft.com/azure/ai-services/speech-service/speech-synthesis-markup-voice#add-background-audio.",
+          "type": "integer"
+        },
+        "fadeout": {
+          "format": "int64",
+          "description": "The fadeout value of background audio. Reference https://learn.microsoft.com/azure/ai-services/speech-service/speech-synthesis-markup-voice#add-background-audio.",
+          "type": "integer"
+        },
+        "volume": {
+          "format": "double",
+          "description": "The volume value of background audio. Reference https://learn.microsoft.com/azure/ai-services/speech-service/speech-synthesis-markup-voice#add-background-audio.",
+          "type": "number"
+        }
+      }
+    },
+    "BatchSynthesisBillingDetails": {
+      "description": "Bath synthesis billing details.",
+      "type": "object",
+      "properties": {
+        "neuralCharacters": {
+          "format": "int64",
+          "description": "The number of billable characters for prebuilt neural voices in the input file.",
+          "type": "integer"
+        },
+        "customNeuralCharacters": {
+          "format": "int64",
+          "description": "The number of billable characters for custom neural voices in the input file.",
+          "type": "integer"
+        },
+        "aoaiCharacters": {
+          "format": "int64",
+          "description": "The number of billable characters for AOAI voices in the input file.",
+          "type": "integer"
+        },
+        "aoaiHDCharacters": {
+          "format": "int64",
+          "description": "The number of billable characters for AOAI HD voices in the input file.",
+          "type": "integer"
+        },
+        "personalVoiceCharacters": {
+          "format": "int64",
+          "description": "The number of billable characters for personal voices in the input file.",
+          "type": "integer"
+        }
+      }
+    },
+    "BatchSynthesisConfig": {
+      "description": "Text-to-speech configuration for plain text input.",
+      "required": [
+        "voice"
+      ],
+      "type": "object",
+      "properties": {
+        "voice": {
+          "description": "Voice name for PlainText input. You can find platform voice list here https://learn.microsoft.com/azure/ai-services/speech-service/language-support?tabs=tts.",
+          "minLength": 1,
+          "type": "string"
+        },
+        "style": {
+          "description": "Style name for PlainText input.",
+          "type": "string"
+        },
+        "rate": {
+          "description": "Speaking rate for PlainText input. For supported values, see https://learn.microsoft.com/azure/ai-services/speech-service/speech-synthesis-markup-voice#adjust-prosody.",
+          "type": "string"
+        },
+        "pitch": {
+          "description": "Pitch for PlainText input. For supported values, see https://learn.microsoft.com/azure/ai-services/speech-service/speech-synthesis-markup-voice#adjust-prosody.",
+          "type": "string"
+        },
+        "volume": {
+          "description": "Volume for PlainText input. For supported values, see https://learn.microsoft.com/azure/ai-services/speech-service/speech-synthesis-markup-voice#adjust-prosody.",
+          "type": "string"
+        },
+        "backgroundAudio": {
+          "$ref": "#/definitions/BatchSynthesisBackgroundAudioDefinition"
+        }
+      }
+    },
+    "BatchSynthesisError": {
+      "description": "Batch Synthesis Error.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "Top level error code",
+          "type": "string"
+        },
+        "message": {
+          "description": "Error message",
+          "type": "string"
+        }
+      }
+    },
+    "BatchSynthesisInput": {
+      "description": "Batch Synthesis input.",
+      "required": [
+        "content"
+      ],
+      "type": "object",
+      "properties": {
+        "content": {
+          "description": "It could be SSML or plain text.",
+          "minLength": 1,
+          "type": "string"
+        }
+      }
+    },
+    "BatchSynthesisOutputs": {
+      "description": "Batch Synthesis output.",
+      "type": "object",
+      "properties": {
+        "result": {
+          "description": "sas url of the result file. It would be relative path when \"destinationContainerUrl\" is specified.",
+          "type": "string"
+        },
+        "summary": {
+          "description": "When BatchSynthesisProperties.decompressOutputFiles is true, job summary file path will be provided here.",
+          "type": "string"
+        }
+      }
+    },
+    "BatchSynthesisProperties": {
+      "description": "Detailed properties of batch synthesis task.",
+      "type": "object",
+      "properties": {
+        "timeToLiveInHours": {
+          "description": "How long the batch task will be kept in the system after it has completed. Once the batch task reaches the time to live after completion (succeeded or failed) it will be automatically deleted. The longest supported duration is 744 hours (31 days). The default value is 744 hours. ",
+          "type": "integer",
+          "format": "int32"
+        },
+        "outputFormat": {
+          "description": "The requested audio output format. Reference https://learn.microsoft.com/azure/ai-services/speech-service/batch-synthesis-properties#batch-synthesis-properties.",
+          "type": "string"
+        },
+        "concatenateResult": {
+          "description": "Whether synthesis result is concatenated.",
+          "type": "boolean"
+        },
+        "decompressOutputFiles": {
+          "description": "Whether synthesis result is decompressed in target container. It only take effect when \"destinationContainerUrl\" is specified or \"BYOS\" is configured.",
+          "type": "boolean"
+        },
+        "wordBoundaryEnabled": {
+          "description": "Whether the word boundary output will be generated.",
+          "type": "boolean"
+        },
+        "sentenceBoundaryEnabled": {
+          "description": "Whether the sentence boundary output will be generated.",
+          "type": "boolean"
+        },
+        "destinationContainerUrl": {
+          "format": "uri",
+          "description": "The requested destination container. It is an URL with Service adhoc SAS to a writeable container in Azure Blob storage.",
+          "type": "string"
+        },
+        "destinationPath": {
+          "description": "The destination path in destination container, default to null, it only works when \"DestinationContainerUrl\" is specified, the final path prefix of outputs should be {DestinationPath}/{TaskId}/, or {TaskId} if not specified.",
+          "type": "string"
+        },
+        "sizeInBytes": {
+          "format": "int64",
+          "description": "The generated audio size in bytes.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "succeededAudioCount": {
+          "format": "int32",
+          "description": "The number of succeeded audios.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "failedAudioCount": {
+          "format": "int32",
+          "description": "The number of failed audios.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "durationInMilliseconds": {
+          "description": "The generated audio duration in milliseconds.",
+          "type": "integer",
+          "format": "int32",
+          "readOnly": true
+        },
+        "billingDetails": {
+          "$ref": "#/definitions/BatchSynthesisBillingDetails",
+          "readOnly": true
+        },
+        "error": {
+          "$ref": "#/definitions/BatchSynthesisError",
+          "readOnly": true
+        }
+      }
+    },
+    "Error": {
+      "description": "New format which conforms to the new Cognitive Services API guidelines which is available at https://microsoft.sharepoint.com/%3Aw%3A/t/CognitiveServicesPMO/EUoytcrjuJdKpeOKIK_QRC8BPtUYQpKBi8JsWyeDMRsWlQ?e=CPq8ow. This contains an outer error with error code, message, details, target and an inner error with more descriptive details.",
+      "required": [
+        "code",
+        "message"
+      ],
+      "type": "object",
+      "properties": {
+        "code": {
+          "$ref": "#/definitions/ErrorCode"
+        },
+        "target": {
+          "description": "The source of the error.",
+          "type": "string"
+        },
+        "message": {
+          "description": "High level error message.",
+          "type": "string"
+        },
+        "details": {
+          "description": "Additional supportive details regarding the error and/or expected policies.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Error"
+          }
+        },
+        "innererror": {
+          "$ref": "#/definitions/InnerError"
+        }
+      }
+    },
+    "ErrorCode": {
+      "description": "Top-level error code",
+      "enum": [
+        "BadRequest",
+        "BadArgument",
+        "Unauthorized",
+        "Forbidden",
+        "NotFound",
+        "UnsupportedMediaType",
+        "TooManyRequests",
+        "InternalServerError",
+        "ServiceUnavailable"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "ErrorCode",
+        "modelAsString": true
+      }
+    },
+    "ErrorResponse": {
+      "description": "Error response.",
+      "required": [
+        "error"
+      ],
+      "type": "object",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/Error"
+        }
+      }
+    },
+    "InnerError": {
+      "description": "New Inner Error format which conforms to Cognitive Services API Guidelines which is available at https://microsoft.sharepoint.com/%3Aw%3A/t/CognitiveServicesPMO/EUoytcrjuJdKpeOKIK_QRC8BPtUYQpKBi8JsWyeDMRsWlQ?e=CPq8ow.\r\nThis contains required properties ErrorCode, message and optional properties target, inner error(this can be nested).",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "Detailed error code to help diagnostic.",
+          "type": "string"
+        },
+        "target": {
+          "description": "The source of the error.",
+          "type": "string"
+        },
+        "message": {
+          "description": "Detailed error message.",
+          "type": "string"
+        },
+        "innererror": {
+          "$ref": "#/definitions/InnerError"
+        }
+      }
+    },
+    "OperationId": {
+      "description": "Unique operation ID.",
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$",
+      "minLength": 3,
+      "maxLength": 64
+    },
+    "Operation": {
+      "description": "Status of a long running operation.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "$ref": "#/definitions/OperationId"
+        },
+        "status": {
+          "$ref": "#/definitions/OperationStatus",
+          "readOnly": true
+        }
+      }
+    },
+    "OperationStatus": {
+      "description": "Status of an operation.",
+      "enum": [
+        "NotStarted",
+        "Running",
+        "Succeeded",
+        "Failed"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "OperationStatus",
+        "modelAsString": true
+      }
+    },
+    "PaginatedBatchSynthesis": {
+      "description": "Paginated batch synthesis task list",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Bath synthesis tasks.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BatchSynthesis"
+          }
+        },
+        "nextLink": {
+          "description": "Link to next page.",
+          "format": "uri",
+          "type": "string"
+        }
+      }
+    },
+    "ResourceId": {
+      "description": "Resource id",
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$",
+      "minLength": 3,
+      "maxLength": 64
+    },
+    "Status": {
+      "description": "Status of a resource.",
+      "enum": [
+        "NotStarted",
+        "Running",
+        "Succeeded",
+        "Failed"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "Status",
+        "modelAsString": true
+      }
+    },
+    "InputKind": {
+      "description": "Input text kind.",
+      "enum": [
+        "PlainText",
+        "SSML"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "InputKind",
+        "modelAsString": true
+      }
+    }
+  },
+  "securityDefinitions": {
+    "subscription_key": {
+      "type": "apiKey",
+      "name": "Ocp-Apim-Subscription-Key",
+      "in": "header",
+      "description": "Provide your cognitive services subscription key here."
+    },
+    "AADToken": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "These are the [Azure Active Directory OAuth2](https://docs.microsoft.com/azure/active-directory/develop/v1-overview) Flows.",
+      "scopes": {
+        "https://cognitiveservices.azure.com/.default": "https://cognitiveservices.azure.com/.default"
+      }
+    }
+  },
+  "security": [
+    {
+      "subscription_key": [],
+      "AADToken": []
+    }
+  ],
+  "schemes": [
+    "https"
+  ],
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{endpoint}/texttospeech",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "name": "endpoint",
+        "in": "path",
+        "description": "Supported Cognitive Services endpoints (protocol and hostname, for example: https://eastus.api.cognitive.microsoft.com).",
+        "required": true,
+        "type": "string"
+      }
+    ]
+  },
+  "parameters": {
+    "QueryApiVersion": {
+      "name": "api-version",
+      "in": "query",
+      "description": "The API version to use for this operation.",
+      "required": true,
+      "type": "string",
+      "minLength": 1,
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "apiVersion"
+    },
+    "QuerySkip": {
+      "name": "skip",
+      "in": "query",
+      "description": "The number of result items to skip.",
+      "required": false,
+      "type": "integer",
+      "format": "int32",
+      "default": 0,
+      "x-ms-parameter-location": "method"
+    },
+    "QueryMaxPageSize": {
+      "name": "maxpagesize",
+      "in": "query",
+      "description": "The maximum number of result items to include in a single response.",
+      "required": false,
+      "type": "integer",
+      "format": "int32",
+      "x-ms-parameter-location": "method"
+    },
+    "PathId": {
+      "name": "id",
+      "in": "path",
+      "description": "The id of resource.",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$",
+      "minLength": 3,
+      "maxLength": 64,
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

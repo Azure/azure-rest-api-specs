@@ -14,34 +14,13 @@
     "https"
   ],
   "x-ms-parameterized-host": {
-    "hostTemplate": "{endpoint}/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/workspaces/{workspaceName}",
+    "hostTemplate": "{endpoint}",
     "useSchemePrefix": false,
     "parameters": [
       {
         "name": "endpoint",
         "in": "path",
-        "description": "The endpoint hosting the requested resource. For example, https://{region}.easm.defender.microsoft.com",
-        "required": true,
-        "type": "string"
-      },
-      {
-        "name": "subscriptionId",
-        "in": "path",
-        "description": "The ID of the target subscription.",
-        "required": true,
-        "type": "string"
-      },
-      {
-        "name": "resourceGroupName",
-        "in": "path",
-        "description": "The name of the Resource Group.",
-        "required": true,
-        "type": "string"
-      },
-      {
-        "name": "workspaceName",
-        "in": "path",
-        "description": "The name of the Workspace.",
+        "description": "The endpoint hosting the requested resource. For example, https://{region}.easm.defender.microsoft.com/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/workspaces/{workspaceName}",
         "required": true,
         "type": "string"
       }
@@ -1711,6 +1690,7 @@
     },
     "AssetState": {
       "type": "string",
+      "description": "The state of assets",
       "enum": [
         "candidate",
         "confirmed",
@@ -2982,12 +2962,7 @@
           },
           "x-ms-identifiers": []
         }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/InventoryAsset"
-        }
-      ]
+      }
     },
     "DomainAssetResource": {
       "type": "object",
@@ -3461,7 +3436,8 @@
       }
     },
     "InventoryAsset": {
-      "type": "object"
+      "type": "object",
+      "description": "A inventory base model created for swagger documentation purpose"
     },
     "IpAddressAsset": {
       "type": "object",
@@ -4126,6 +4102,7 @@
     },
     "ObservedPortStateValue": {
       "type": "string",
+      "description": "state of observed port",
       "enum": [
         "open",
         "closed",
@@ -4560,6 +4537,7 @@
     },
     "PageAssetRedirectType": {
       "type": "string",
+      "description": "The redirect type of a page",
       "enum": [
         "httpHeader",
         "metaRefresh",
@@ -5421,6 +5399,7 @@
     },
     "SslCertAssetValidationType": {
       "type": "string",
+      "description": "The validation type of a Ssl certificate",
       "enum": [
         "domainValidation",
         "organizationValidation",
@@ -5579,6 +5558,7 @@
     },
     "ValidateResult": {
       "type": "object",
+      "description": "Validate result for validate action endpoints",
       "properties": {
         "error": {
           "$ref": "#/definitions/ErrorDetail",
