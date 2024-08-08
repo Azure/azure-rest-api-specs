@@ -33,4 +33,9 @@ enum Versions {
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   v2024_04_10: "2024-04-10",
+
+  @doc("Azure Large Instance api version 2024-08-01-preview.")
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
+  v2024_08_01_preview: "2024-08-01-preview",
 }

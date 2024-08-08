@@ -52,6 +52,32 @@ input-file:
   - Microsoft.AzureLargeInstance/stable/2024-04-10/azurelargeinstance.json
 ```
 
+### Tag: package-2024-08-01-preview
+
+These settings apply only when `--tag=package-2024-08-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-08-01-preview'
+input-file:
+  - Microsoft.AzureLargeInstance/preview/2024-08-01-preview/azurelargeinstance.json
+```
+
+---
+
+## Suppression
+
+```yaml
+directive:
+  - suppress: READONLY_PROPERTY_NOT_ALLOWED_IN_REQUEST
+    from: azurelargeinstance.json
+    reason: 'This property is already a part of our API, cannot remove it'
+  - suppress: READONLY_PROPERTY_NOT_ALLOWED_IN_REQUEST
+    where:
+      - $.definitions.Resource.properties.name
+      - $.definitions.Resource.properties.id
+    from: types.json
+    reason: 'This property is already a part of our API, cannot remove it'
+```
+
 ---
 
 # Code Generation
@@ -71,6 +97,7 @@ swagger-to-sdk:
   - repo: azure-cli-extensions
   - repo: azure-powershell
 ```
+
 ## Az
 
 See configuration in [readme.az.md](./readme.az.md)
@@ -97,6 +124,15 @@ These set of linting rules aren't applicable to the AzureLargeInstance RP so sup
 
 ``` yaml
 suppressions:
+  - code: PutResponseCodes
+    from: azurelargeinstance.json
+    reason: The PUT method only creates resource for the RP. The operation to update an existing instance is unsupported. This is because instances that are 'created' are simply assigned to customers, and have already been provisioned. ARM operations to change the provisioning status of a resource are unsupported.
+  - code: DeleteResponseCodes
+    from: azurelargeinstance.json
+    reason: The DELETE method either removes an instance from the DB or returns an error. Since only one successful outcome is possible, it doesn't make sense for our RP to support both 200 and 204.
+  - code: DeleteOperationResponses
+    from: azurelargeinstance.json
+    reason: Customers deleting resources don't request any new information from the operation besides its result. Therefore it makes sense to return no content when the operation succeeds.
   - code: TrackedResourcesMustHavePut
     where:
       - $.definitions.AzureLargeInstance
