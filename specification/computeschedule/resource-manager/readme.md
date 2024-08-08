@@ -38,7 +38,7 @@ These settings apply only when `--tag=package-2024-06-01-preview` is specified o
 input-file:
   - Microsoft.ComputeSchedule/preview/2024-06-01-preview/computeschedule.json
 ```
-
+ 
 ---
 
 # Code Generation
