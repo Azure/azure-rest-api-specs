@@ -42,9 +42,14 @@
             "nodeFillType": "Spread"
           },
           "deploymentConfiguration": {
-            "cloudServiceConfiguration": {
-              "osFamily": "5",
-              "osVersion": "*"
+            "virtualMachineConfiguration": {
+              "imageReference": {
+                "publisher": "MicrosoftWindowsServer",
+                "offer": "WindowsServer",
+                "sku": "2016-Datacenter-SmallDisk",
+                "version": "latest"
+              },
+              "nodeAgentSkuId": "batch.node.windows amd64"
             }
           },
           "scaleSettings": {
@@ -72,4 +77,3 @@
     }
   }
 }
-

@@ -29,9 +29,14 @@
                 "nodeFillType": "Pack"
               },
               "deploymentConfiguration": {
-                "cloudServiceConfiguration": {
-                  "osFamily": "4",
-                  "osVersion": "WA-GUEST-OS-4.45_201708-01"
+                "virtualMachineConfiguration": {
+                  "imageReference": {
+                    "publisher": "MicrosoftWindowsServer",
+                    "offer": "WindowsServer",
+                    "sku": "2016-Datacenter-SmallDisk",
+                    "version": "latest"
+                  },
+                  "nodeAgentSkuId": "batch.node.windows amd64"
                 }
               },
               "scaleSettings": {
@@ -159,4 +164,3 @@
     }
   }
 }
-
