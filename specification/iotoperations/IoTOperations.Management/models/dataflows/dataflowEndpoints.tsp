@@ -378,7 +378,7 @@ model DataflowEndpointMqttAuthentication {
   ...ManagedIdentity;
 
   @doc("Kubernetes service account token authentication. Default audience if not set is aio-mq-internal")
-  saslSettings?: DataflowEndpointAuthenticationSasl;
+  serviceAccountTokenSettings?: DataflowEndpointAuthenticationServiceAccountToken;
 
   @doc("X.509 certificate authentication.")
   x509Settings?: DataflowEndpointAuthenticationX509;
