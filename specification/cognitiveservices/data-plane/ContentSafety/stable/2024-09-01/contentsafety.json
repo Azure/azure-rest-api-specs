@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "ContentSafety Service",
-    "version": "2023-10-01",
+    "version": "2024-09-01",
     "description": "Analyze harmful content",
     "x-typespec-generated": [
       {
@@ -558,6 +558,98 @@
           }
         }
       }
+    },
+    "/text:detectProtectedMaterial": {
+      "post": {
+        "operationId": "TextOperations_DetectTextProtectedMaterial",
+        "summary": "Detect Protected Material for Text",
+        "description": "A synchronous API for detecting protected material in the given text.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The request body to be detected, which may contain protected material.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DetectTextProtectedMaterialOptions"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DetectTextProtectedMaterialResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Detect Protected Material for Text": {
+            "$ref": "./examples/DetectTextProtectedMaterial.json"
+          }
+        }
+      }
+    },
+    "/text:shieldPrompt": {
+      "post": {
+        "operationId": "TextOperations_ShieldPrompt",
+        "summary": "Shield Prompt",
+        "description": "A synchronous API for shielding prompt from direct and indirect injection attacks.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The request body to be detected, which may contain direct or indirect injection attacks.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ShieldPromptOptions"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ShieldPromptResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Shield Prompt": {
+            "$ref": "./examples/ShieldPrompt.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -794,6 +886,45 @@
         }
       }
     },
+    "DetectTextProtectedMaterialOptions": {
+      "type": "object",
+      "description": "The request of detecting potential protected material present in the given text.",
+      "properties": {
+        "text": {
+          "type": "string",
+          "description": "The text to be analyzed, which may contain protected material. The characters will be counted in Unicode code points."
+        }
+      },
+      "required": [
+        "text"
+      ]
+    },
+    "DetectTextProtectedMaterialResult": {
+      "type": "object",
+      "description": "The combined detection results of potential protected material.",
+      "properties": {
+        "protectedMaterialAnalysis": {
+          "$ref": "#/definitions/TextProtectedMaterialAnalysisResult",
+          "description": "Analysis result for the given text."
+        }
+      },
+      "required": [
+        "protectedMaterialAnalysis"
+      ]
+    },
+    "DocumentInjectionAnalysisResult": {
+      "type": "object",
+      "description": "The individual analysis result of potential injection attacks in the given documents.",
+      "properties": {
+        "attackDetected": {
+          "type": "boolean",
+          "description": "Whether a potential injection attack is detected or not."
+        }
+      },
+      "required": [
+        "attackDetected"
+      ]
+    },
     "ImageCategoriesAnalysis": {
       "type": "object",
       "description": "Image analysis result.",
@@ -924,6 +1055,41 @@
         "blocklistItemIds"
       ]
     },
+    "ShieldPromptOptions": {
+      "type": "object",
+      "description": "The request of analyzing potential direct or indirect injection attacks.",
+      "properties": {
+        "userPrompt": {
+          "type": "string",
+          "description": "The user prompt to be analyzed, which may contain direct injection attacks."
+        },
+        "documents": {
+          "type": "array",
+          "description": "The documents to be analyzed, which may contain direct or indirect injection attacks.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ShieldPromptResult": {
+      "type": "object",
+      "description": "The combined analysis results of potential direct or indirect injection attacks.",
+      "properties": {
+        "userPromptAnalysis": {
+          "$ref": "#/definitions/UserPromptInjectionAnalysisResult",
+          "description": "Direct injection attacks analysis result for the given user prompt."
+        },
+        "documentsAnalysis": {
+          "type": "array",
+          "description": "Direct and indirect injection attacks analysis result for the given documents.",
+          "items": {
+            "$ref": "#/definitions/DocumentInjectionAnalysisResult"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
     "TextBlocklist": {
       "type": "object",
       "description": "Text Blocklist.",
@@ -988,6 +1154,10 @@
           "type": "string",
           "description": "BlocklistItem content. The length is counted using Unicode code point.",
           "maxLength": 128
+        },
+        "isRegex": {
+          "type": "boolean",
+          "description": "An optional properties indicating whether this item is to be matched as a regular expression."
         }
       },
       "required": [
@@ -1074,6 +1244,32 @@
           }
         ]
       }
+    },
+    "TextProtectedMaterialAnalysisResult": {
+      "type": "object",
+      "description": "The individual detection result of potential protected material.",
+      "properties": {
+        "detected": {
+          "type": "boolean",
+          "description": "Whether potential protected material is detected or not."
+        }
+      },
+      "required": [
+        "detected"
+      ]
+    },
+    "UserPromptInjectionAnalysisResult": {
+      "type": "object",
+      "description": "The individual analysis result of potential injection attacks in the given user prompt.",
+      "properties": {
+        "attackDetected": {
+          "type": "boolean",
+          "description": "Whether a potential injection attack is detected or not."
+        }
+      },
+      "required": [
+        "attackDetected"
+      ]
     }
   },
   "parameters": {
