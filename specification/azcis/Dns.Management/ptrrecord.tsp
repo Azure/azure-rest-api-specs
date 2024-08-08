@@ -13,6 +13,7 @@ using Autorest;
 namespace Microsoft.AzureCis;
 
 @doc("PtrRecord properties")
+@added(Versions.v2024_06_24_preview)
 model PtrRecordResourceProperties {
   @doc("Gets or sets the dns name")
   dnsName: string;
@@ -29,6 +30,7 @@ model PtrRecordResourceProperties {
 }
 
 @doc("PtrRecord Resource")
+@added(Versions.v2024_06_24_preview)
 model PtrRecordResource is ProxyResource<PtrRecordResourceProperties> {
   @doc("The name of resource.")
   @pattern("^[a-zA-Z0-9-]{3,80}$")
@@ -40,6 +42,7 @@ model PtrRecordResource is ProxyResource<PtrRecordResourceProperties> {
 }
 
 @doc("Provisioning status of the resource.")
+@added(Versions.v2024_06_24_preview)
 union PtrRecordProvisioningState {
   string,
   ResourceProvisioningState,
@@ -50,6 +53,7 @@ union PtrRecordProvisioningState {
 
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "The resource must have a delete operation.TypeSpec"
 @armResourceOperations
+@added(Versions.v2024_06_24_preview)
 interface PtrRecord {
   createOrUpdate is ArmResourceCreateOrUpdateAsync<PtrRecordResource>;
   listBySubscription is ArmListBySubscription<PtrRecordResource>;

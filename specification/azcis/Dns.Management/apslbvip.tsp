@@ -13,6 +13,7 @@ using Autorest;
 namespace Microsoft.AzureCis;
 
 @doc("ApSlbVip properties")
+@added(Versions.v2024_06_24_preview)
 model ApSlbVipResourceProperties {
   @doc("Gets or sets the Ap Dns name. This is case-insensitive")
   apDnsName: string;
@@ -23,6 +24,7 @@ model ApSlbVipResourceProperties {
 }
 
 @doc("ApSlbVip Resource")
+@added(Versions.v2024_06_24_preview)
 model ApSlbVipResource is ProxyResource<ApSlbVipResourceProperties> {
   @doc("The name of resource.")
   @pattern("^[a-zA-Z0-9-]{3,80}$")
@@ -34,6 +36,7 @@ model ApSlbVipResource is ProxyResource<ApSlbVipResourceProperties> {
 }
 
 @doc("Provisioning status of the resource.")
+@added(Versions.v2024_06_24_preview)
 union ApSlbVipProvisioningState {
   string,
   ResourceProvisioningState,
@@ -44,6 +47,7 @@ union ApSlbVipProvisioningState {
 
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "The resource must have a delete operation.TypeSpec"
 @armResourceOperations
+@added(Versions.v2024_06_24_preview)
 interface ApSlbVip {
   createOrUpdate is ArmResourceCreateOrUpdateAsync<ApSlbVipResource>;
   listBySubscription is ArmListBySubscription<ApSlbVipResource>;

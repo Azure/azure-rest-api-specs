@@ -13,6 +13,7 @@ using Autorest;
 namespace Microsoft.AzureCis;
 
 @doc("ServiceRecord properties")
+@added(Versions.v2024_06_24_preview)
 model ServiceRecordResourceProperties {
   @doc("Gets or sets the dns name")
   dnsName: string;
@@ -38,6 +39,7 @@ model ServiceRecordResourceProperties {
 }
 
 @doc("ServiceRecord Resource")
+@added(Versions.v2024_06_24_preview)
 model ServiceRecordResource is ProxyResource<ServiceRecordResourceProperties> {
   @doc("The name of resource.")
   @pattern("^[a-zA-Z0-9-]{3,80}$")
@@ -49,6 +51,7 @@ model ServiceRecordResource is ProxyResource<ServiceRecordResourceProperties> {
 }
 
 @doc("Provisioning status of the resource.")
+@added(Versions.v2024_06_24_preview)
 union ServiceRecordProvisioningState {
   string,
   ResourceProvisioningState,
@@ -59,6 +62,7 @@ union ServiceRecordProvisioningState {
 
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "The resource must have a delete operation.TypeSpec"
 @armResourceOperations
+@added(Versions.v2024_06_24_preview)
 interface ServiceRecord {
   createOrUpdate is ArmResourceCreateOrUpdateAsync<ServiceRecordResource>;
   listBySubscription is ArmListBySubscription<ServiceRecordResource>;

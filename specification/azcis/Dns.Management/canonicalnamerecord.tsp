@@ -13,6 +13,7 @@ using Autorest;
 namespace Microsoft.AzureCis;
 
 @doc("CanonicalNameRecord properties")
+@added(Versions.v2024_06_24_preview)
 model CanonicalNameRecordResourceProperties {
   @doc("Gets or sets the dns name")
   dnsName: string;
@@ -29,6 +30,7 @@ model CanonicalNameRecordResourceProperties {
 }
 
 @doc("CanonicalNameRecord Resource")
+@added(Versions.v2024_06_24_preview)
 model CanonicalNameRecordResource
   is ProxyResource<CanonicalNameRecordResourceProperties> {
   @doc("The name of resource.")
@@ -41,6 +43,7 @@ model CanonicalNameRecordResource
 }
 
 @doc("Provisioning status of the resource.")
+@added(Versions.v2024_06_24_preview)
 union CanonicalNameRecordProvisioningState {
   string,
   ResourceProvisioningState,
@@ -51,6 +54,7 @@ union CanonicalNameRecordProvisioningState {
 
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "The resource must have a delete operation.TypeSpec"
 @armResourceOperations
+@added(Versions.v2024_06_24_preview)
 interface CanonicalNameRecord {
   createOrUpdate is ArmResourceCreateOrUpdateAsync<CanonicalNameRecordResource>;
   listBySubscription is ArmListBySubscription<CanonicalNameRecordResource>;
