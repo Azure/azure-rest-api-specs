@@ -60,6 +60,9 @@ for file in resource-manager/Microsoft.IoTOperations/preview/2024-08-15-preview/
     # The following Jq command chops down numbers that are greater than 10000 to 10000, the OAV generate examples tool will not respect the min/max value required by typespec
     jq 'walk(if type == "number" then . % 10000 else . end)' $file > temp.json && mv temp.json $file
 
+    # Set spanChannelCapacity to correct value for minimum.
+    jq 'walk(if type == "object" and .spanChannelCapacity? then .spanChannelCapacity = "1000" else . end)' $file > temp.json && mv temp.json $file
+    
     # Replace description strings with some Lorem Ipsum text.
     jq 'walk(if type == "object" and .description? then .description = "Lorem ipsum odor amet, consectetuer adipiscing elit." else . end)' $file > temp.json && mv temp.json $file
 
