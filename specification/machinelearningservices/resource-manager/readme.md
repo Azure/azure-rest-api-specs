@@ -27,7 +27,19 @@ These are the global settings for the Machine Learning Services API.
 
 ``` yaml
 openapi-type: arm
-tag: package-preview-2024-07
+tag: package-2024-10
+```
+
+### Tag: package-2024-10
+
+These settings apply only when `--tag=package-2024-10` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-10'
+input-file:
+  - Microsoft.MachineLearningServices/stable/2024-10-01/machineLearningServices.json
+  - Microsoft.MachineLearningServices/stable/2024-10-01/mfe.json
+  - Microsoft.MachineLearningServices/stable/2024-10-01/registries.json
+  - Microsoft.MachineLearningServices/stable/2024-10-01/workspaceFeatures.json
 ```
 
 ### Tag: package-preview-2024-07
