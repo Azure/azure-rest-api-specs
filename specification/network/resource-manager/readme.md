@@ -3530,6 +3530,11 @@ suppressions:
     reason: The resource name parameter 'bastionHostName' is not defined with a 'pattern' restriction. Suppress it for now to avoid breaking change because it is referenced by all Bastion APIs. 
   - code: LroErrorContent
     reason: CloudError does not follow required error schema. Suppress it for now to avoid breaking change because it is referenced by many files.
+  - code: BodyTopLevelProperties
+    from: virtualWan.json
+    reason: False alarm
+    where:
+    - $.definitions.ConnectionSharedKeyResultList
 ```
 
 ## Go
