@@ -3,30 +3,43 @@
   "operationId": "DataflowEndpoint_CreateOrUpdate",
   "parameters": {
     "api-version": "2024-08-15-preview",
-    "subscriptionId": "0AD14881-4121-404B-BE4E-FE64B0DBD13A",
+    "subscriptionId": "F4C7E375-43C1-402A-AC68-AE3822B29EC0",
     "resourceGroupName": "rgiotoperations",
     "instanceName": "resource-name123",
     "dataflowEndpointName": "resource-name123",
     "resource": {
       "properties": {
         "endpointType": "DataExplorer",
-        "dataExplorerSettings": {
-          "authentication": {
-            "method": "SystemAssignedManagedIdentity",
-            "systemAssignedManagedIdentitySettings": {
-              "audience": "lidtagcfq"
-            },
-            "userAssignedManagedIdentitySettings": {
-              "clientId": "fb90f267-8872-431a-a76a-a1cec5d3c4d2",
-              "scope": "ajvopawgpjhtrwfx",
-              "tenantId": "ed060aa2-71ff-4d3f-99c4-a9138356fdec"
-            }
+        "authentication": {
+          "method": "SystemAssignedManagedIdentity",
+          "systemAssignedManagedIdentitySettings": {
+            "audience": "pxdytnba"
           },
-          "database": "tgkjeplyymwhccdxdprgbgxmekpej",
+          "userAssignedManagedIdentitySettings": {
+            "clientId": "fb90f267-8872-431a-a76a-a1cec5d3c4d2",
+            "scope": "xwdojfyimfoeluckmds",
+            "tenantId": "ed060aa2-71ff-4d3f-99c4-a9138356fdec"
+          },
+          "accessTokenSettings": {
+            "secretRef": "jsougrdnmwnybevuokks"
+          },
+          "saslSettings": {
+            "saslType": "Plain",
+            "secretRef": "jfoiptwvigarzkqmxwzjktxeckd"
+          },
+          "serviceAccountTokenSettings": {
+            "audience": "mvpkaoowmlqdhtzolwlkrvvw"
+          },
+          "x509Settings": {
+            "secretRef": "ujartkovszdmnv"
+          }
+        },
+        "dataExplorerSettings": {
+          "database": "ldse",
           "host": "<cluster>.<region>.kusto.windows.net",
           "batching": {
-            "latencySeconds": 6735,
-            "maxMessages": 585
+            "latencySeconds": 2123,
+            "maxMessages": 7686
           }
         },
         "dataLakeStorageSettings": {
@@ -46,8 +59,8 @@
           },
           "host": "<account>.blob.core.windows.net",
           "batching": {
-            "latencySeconds": 6735,
-            "maxMessages": 585
+            "latencySeconds": 2123,
+            "maxMessages": 7686
           }
         },
         "fabricOneLakeSettings": {
@@ -63,42 +76,24 @@
             }
           },
           "names": {
-            "lakehouseName": "cbpdcforswqcvihvtbqwknxcjtt",
-            "workspaceName": "vkepludcrhnjzzlttzoupmxpgysj"
+            "lakehouseName": "lcvrtqftxrhknx",
+            "workspaceName": "zdqjjiibnlawgzqbtiykpwjb"
           },
           "oneLakePathType": "Files",
           "host": "https://<host>.fabric.microsoft.com",
           "batching": {
-            "latencySeconds": 6735,
-            "maxMessages": 585
+            "latencySeconds": 2123,
+            "maxMessages": 7686
           }
         },
         "kafkaSettings": {
-          "authentication": {
-            "method": "SystemAssignedManagedIdentity",
-            "systemAssignedManagedIdentitySettings": {
-              "audience": "lidtagcfq"
-            },
-            "userAssignedManagedIdentitySettings": {
-              "clientId": "fb90f267-8872-431a-a76a-a1cec5d3c4d2",
-              "scope": "ajvopawgpjhtrwfx",
-              "tenantId": "ed060aa2-71ff-4d3f-99c4-a9138356fdec"
-            },
-            "saslSettings": {
-              "saslType": "Plain",
-              "secretRef": "kurnzk"
-            },
-            "x509Settings": {
-              "secretRef": "qhecfrz"
-            }
-          },
-          "consumerGroupId": "rylqrwbcfd",
-          "host": "jqhs",
+          "consumerGroupId": "bsweppcgzv",
+          "host": "hzog",
           "batching": {
             "mode": "Enabled",
-            "latencyMs": 5892,
-            "maxBytes": 8098,
-            "maxMessages": 7243
+            "latencyMs": 5792,
+            "maxBytes": 5354,
+            "maxMessages": 770
           },
           "copyMqttProperties": "Enabled",
           "compression": "None",
@@ -106,48 +101,31 @@
           "partitionStrategy": "Default",
           "tls": {
             "mode": "Enabled",
-            "trustedCaCertificateConfigMapRef": "skxexkwbfzxpezpfhgajolqdhso"
+            "trustedCaCertificateConfigMapRef": "klhacheuyreznxpui"
           },
           "cloudEventMapping": "PassThrough"
         },
         "localStorageSettings": {
-          "persistentVolumeClaimRef": "yuppjxnwne"
+          "persistentVolumeClaimRef": "vondspmbfndydpfvmzixe"
         },
         "mqttSettings": {
-          "authentication": {
-            "method": "SystemAssignedManagedIdentity",
-            "systemAssignedManagedIdentitySettings": {
-              "audience": "lidtagcfq"
-            },
-            "userAssignedManagedIdentitySettings": {
-              "clientId": "fb90f267-8872-431a-a76a-a1cec5d3c4d2",
-              "scope": "ajvopawgpjhtrwfx",
-              "tenantId": "ed060aa2-71ff-4d3f-99c4-a9138356fdec"
-            },
-            "serviceAccountTokenSettings": {
-              "audience": "goxqxbicsjccxvnb"
-            },
-            "x509Settings": {
-              "secretRef": "qhecfrz"
-            }
-          },
-          "clientIdPrefix": "dowtppiolzvxtvsgshvabfpfu",
-          "host": "vogpblicvguevzg",
+          "clientIdPrefix": "upyvoylrslwanrsq",
+          "host": "nuldtgdbwxwuiflxguvhqjohzbblgi",
           "protocol": "Mqtt",
           "keepAliveSeconds": 0,
           "retain": "Keep",
           "maxInflightMessages": 0,
-          "qos": 0,
+          "qos": 2,
           "sessionExpirySeconds": 0,
           "tls": {
             "mode": "Enabled",
-            "trustedCaCertificateConfigMapRef": "skxexkwbfzxpezpfhgajolqdhso"
+            "trustedCaCertificateConfigMapRef": "klhacheuyreznxpui"
           },
           "cloudEventMapping": "PassThrough"
         }
       },
       "extendedLocation": {
-        "name": "kbzdxcaprarp",
+        "name": "limlgubvxdfnebxvsrformxpqrr",
         "type": "CustomLocation"
       }
     }
@@ -157,23 +135,36 @@
       "body": {
         "properties": {
           "endpointType": "DataExplorer",
-          "dataExplorerSettings": {
-            "authentication": {
-              "method": "SystemAssignedManagedIdentity",
-              "systemAssignedManagedIdentitySettings": {
-                "audience": "lidtagcfq"
-              },
-              "userAssignedManagedIdentitySettings": {
-                "clientId": "fb90f267-8872-431a-a76a-a1cec5d3c4d2",
-                "scope": "ajvopawgpjhtrwfx",
-                "tenantId": "ed060aa2-71ff-4d3f-99c4-a9138356fdec"
-              }
+          "authentication": {
+            "method": "SystemAssignedManagedIdentity",
+            "systemAssignedManagedIdentitySettings": {
+              "audience": "pxdytnba"
             },
-            "database": "tgkjeplyymwhccdxdprgbgxmekpej",
+            "userAssignedManagedIdentitySettings": {
+              "clientId": "fb90f267-8872-431a-a76a-a1cec5d3c4d2",
+              "scope": "xwdojfyimfoeluckmds",
+              "tenantId": "ed060aa2-71ff-4d3f-99c4-a9138356fdec"
+            },
+            "accessTokenSettings": {
+              "secretRef": "jsougrdnmwnybevuokks"
+            },
+            "saslSettings": {
+              "saslType": "Plain",
+              "secretRef": "jfoiptwvigarzkqmxwzjktxeckd"
+            },
+            "serviceAccountTokenSettings": {
+              "audience": "mvpkaoowmlqdhtzolwlkrvvw"
+            },
+            "x509Settings": {
+              "secretRef": "ujartkovszdmnv"
+            }
+          },
+          "dataExplorerSettings": {
+            "database": "ldse",
             "host": "<cluster>.<region>.kusto.windows.net",
             "batching": {
-              "latencySeconds": 6735,
-              "maxMessages": 585
+              "latencySeconds": 2123,
+              "maxMessages": 7686
             }
           },
           "dataLakeStorageSettings": {
@@ -193,8 +184,8 @@
             },
             "host": "<account>.blob.core.windows.net",
             "batching": {
-              "latencySeconds": 6735,
-              "maxMessages": 585
+              "latencySeconds": 2123,
+              "maxMessages": 7686
             }
           },
           "fabricOneLakeSettings": {
@@ -210,42 +201,24 @@
               }
             },
             "names": {
-              "lakehouseName": "cbpdcforswqcvihvtbqwknxcjtt",
-              "workspaceName": "vkepludcrhnjzzlttzoupmxpgysj"
+              "lakehouseName": "lcvrtqftxrhknx",
+              "workspaceName": "zdqjjiibnlawgzqbtiykpwjb"
             },
             "oneLakePathType": "Files",
             "host": "https://<host>.fabric.microsoft.com",
             "batching": {
-              "latencySeconds": 6735,
-              "maxMessages": 585
+              "latencySeconds": 2123,
+              "maxMessages": 7686
             }
           },
           "kafkaSettings": {
-            "authentication": {
-              "method": "SystemAssignedManagedIdentity",
-              "systemAssignedManagedIdentitySettings": {
-                "audience": "lidtagcfq"
-              },
-              "userAssignedManagedIdentitySettings": {
-                "clientId": "fb90f267-8872-431a-a76a-a1cec5d3c4d2",
-                "scope": "ajvopawgpjhtrwfx",
-                "tenantId": "ed060aa2-71ff-4d3f-99c4-a9138356fdec"
-              },
-              "saslSettings": {
-                "saslType": "Plain",
-                "secretRef": "kurnzk"
-              },
-              "x509Settings": {
-                "secretRef": "qhecfrz"
-              }
-            },
-            "consumerGroupId": "rylqrwbcfd",
-            "host": "jqhs",
+            "consumerGroupId": "bsweppcgzv",
+            "host": "hzog",
             "batching": {
               "mode": "Enabled",
-              "latencyMs": 5892,
-              "maxBytes": 8098,
-              "maxMessages": 7243
+              "latencyMs": 5792,
+              "maxBytes": 5354,
+              "maxMessages": 770
             },
             "copyMqttProperties": "Enabled",
             "compression": "None",
@@ -253,61 +226,44 @@
             "partitionStrategy": "Default",
             "tls": {
               "mode": "Enabled",
-              "trustedCaCertificateConfigMapRef": "skxexkwbfzxpezpfhgajolqdhso"
+              "trustedCaCertificateConfigMapRef": "klhacheuyreznxpui"
             },
             "cloudEventMapping": "PassThrough"
           },
           "localStorageSettings": {
-            "persistentVolumeClaimRef": "yuppjxnwne"
+            "persistentVolumeClaimRef": "vondspmbfndydpfvmzixe"
           },
           "mqttSettings": {
-            "authentication": {
-              "method": "SystemAssignedManagedIdentity",
-              "systemAssignedManagedIdentitySettings": {
-                "audience": "lidtagcfq"
-              },
-              "userAssignedManagedIdentitySettings": {
-                "clientId": "fb90f267-8872-431a-a76a-a1cec5d3c4d2",
-                "scope": "ajvopawgpjhtrwfx",
-                "tenantId": "ed060aa2-71ff-4d3f-99c4-a9138356fdec"
-              },
-              "serviceAccountTokenSettings": {
-                "audience": "goxqxbicsjccxvnb"
-              },
-              "x509Settings": {
-                "secretRef": "qhecfrz"
-              }
-            },
-            "clientIdPrefix": "dowtppiolzvxtvsgshvabfpfu",
-            "host": "vogpblicvguevzg",
+            "clientIdPrefix": "upyvoylrslwanrsq",
+            "host": "nuldtgdbwxwuiflxguvhqjohzbblgi",
             "protocol": "Mqtt",
             "keepAliveSeconds": 0,
             "retain": "Keep",
             "maxInflightMessages": 0,
-            "qos": 0,
+            "qos": 2,
             "sessionExpirySeconds": 0,
             "tls": {
               "mode": "Enabled",
-              "trustedCaCertificateConfigMapRef": "skxexkwbfzxpezpfhgajolqdhso"
+              "trustedCaCertificateConfigMapRef": "klhacheuyreznxpui"
             },
             "cloudEventMapping": "PassThrough"
           },
           "provisioningState": "Succeeded"
         },
         "extendedLocation": {
-          "name": "kbzdxcaprarp",
+          "name": "limlgubvxdfnebxvsrformxpqrr",
           "type": "CustomLocation"
         },
         "id": "/subscriptions/0000000-0000-0000-0000-000000000000/resourceGroups/resourceGroup123/providers/Microsoft.IoTOperations/instances/resource-name123/dataflowEndpoints/resource-name123",
-        "name": "rzeyluunzeywevaxk",
-        "type": "ybxjelxxmevqcxrotbiapan",
+        "name": "gorinquvmdbfmjfbobhr",
+        "type": "odtitoseavywh",
         "systemData": {
-          "createdBy": "rwmdqtey",
+          "createdBy": "pjrupsqyk",
           "createdByType": "User",
-          "createdAt": "2024-08-08T22:28:53.214Z",
-          "lastModifiedBy": "wtrryhgyixeshvbp",
+          "createdAt": "2024-08-08T20:32:26.801Z",
+          "lastModifiedBy": "uuaomyzlxhdnqyadbzduyai",
           "lastModifiedByType": "User",
-          "lastModifiedAt": "2024-08-08T22:28:53.214Z"
+          "lastModifiedAt": "2024-08-08T20:32:26.801Z"
         }
       }
     },
@@ -318,23 +274,36 @@
       "body": {
         "properties": {
           "endpointType": "DataExplorer",
-          "dataExplorerSettings": {
-            "authentication": {
-              "method": "SystemAssignedManagedIdentity",
-              "systemAssignedManagedIdentitySettings": {
-                "audience": "lidtagcfq"
-              },
-              "userAssignedManagedIdentitySettings": {
-                "clientId": "fb90f267-8872-431a-a76a-a1cec5d3c4d2",
-                "scope": "ajvopawgpjhtrwfx",
-                "tenantId": "ed060aa2-71ff-4d3f-99c4-a9138356fdec"
-              }
+          "authentication": {
+            "method": "SystemAssignedManagedIdentity",
+            "systemAssignedManagedIdentitySettings": {
+              "audience": "pxdytnba"
             },
-            "database": "tgkjeplyymwhccdxdprgbgxmekpej",
+            "userAssignedManagedIdentitySettings": {
+              "clientId": "fb90f267-8872-431a-a76a-a1cec5d3c4d2",
+              "scope": "xwdojfyimfoeluckmds",
+              "tenantId": "ed060aa2-71ff-4d3f-99c4-a9138356fdec"
+            },
+            "accessTokenSettings": {
+              "secretRef": "jsougrdnmwnybevuokks"
+            },
+            "saslSettings": {
+              "saslType": "Plain",
+              "secretRef": "jfoiptwvigarzkqmxwzjktxeckd"
+            },
+            "serviceAccountTokenSettings": {
+              "audience": "mvpkaoowmlqdhtzolwlkrvvw"
+            },
+            "x509Settings": {
+              "secretRef": "ujartkovszdmnv"
+            }
+          },
+          "dataExplorerSettings": {
+            "database": "ldse",
             "host": "<cluster>.<region>.kusto.windows.net",
             "batching": {
-              "latencySeconds": 6735,
-              "maxMessages": 585
+              "latencySeconds": 2123,
+              "maxMessages": 7686
             }
           },
           "dataLakeStorageSettings": {
@@ -354,8 +323,8 @@
             },
             "host": "<account>.blob.core.windows.net",
             "batching": {
-              "latencySeconds": 6735,
-              "maxMessages": 585
+              "latencySeconds": 2123,
+              "maxMessages": 7686
             }
           },
           "fabricOneLakeSettings": {
@@ -371,42 +340,24 @@
               }
             },
             "names": {
-              "lakehouseName": "cbpdcforswqcvihvtbqwknxcjtt",
-              "workspaceName": "vkepludcrhnjzzlttzoupmxpgysj"
+              "lakehouseName": "lcvrtqftxrhknx",
+              "workspaceName": "zdqjjiibnlawgzqbtiykpwjb"
             },
             "oneLakePathType": "Files",
             "host": "https://<host>.fabric.microsoft.com",
             "batching": {
-              "latencySeconds": 6735,
-              "maxMessages": 585
+              "latencySeconds": 2123,
+              "maxMessages": 7686
             }
           },
           "kafkaSettings": {
-            "authentication": {
-              "method": "SystemAssignedManagedIdentity",
-              "systemAssignedManagedIdentitySettings": {
-                "audience": "lidtagcfq"
-              },
-              "userAssignedManagedIdentitySettings": {
-                "clientId": "fb90f267-8872-431a-a76a-a1cec5d3c4d2",
-                "scope": "ajvopawgpjhtrwfx",
-                "tenantId": "ed060aa2-71ff-4d3f-99c4-a9138356fdec"
-              },
-              "saslSettings": {
-                "saslType": "Plain",
-                "secretRef": "kurnzk"
-              },
-              "x509Settings": {
-                "secretRef": "qhecfrz"
-              }
-            },
-            "consumerGroupId": "rylqrwbcfd",
-            "host": "jqhs",
+            "consumerGroupId": "bsweppcgzv",
+            "host": "hzog",
             "batching": {
               "mode": "Enabled",
-              "latencyMs": 5892,
-              "maxBytes": 8098,
-              "maxMessages": 7243
+              "latencyMs": 5792,
+              "maxBytes": 5354,
+              "maxMessages": 770
             },
             "copyMqttProperties": "Enabled",
             "compression": "None",
@@ -414,61 +365,44 @@
             "partitionStrategy": "Default",
             "tls": {
               "mode": "Enabled",
-              "trustedCaCertificateConfigMapRef": "skxexkwbfzxpezpfhgajolqdhso"
+              "trustedCaCertificateConfigMapRef": "klhacheuyreznxpui"
             },
             "cloudEventMapping": "PassThrough"
           },
           "localStorageSettings": {
-            "persistentVolumeClaimRef": "yuppjxnwne"
+            "persistentVolumeClaimRef": "vondspmbfndydpfvmzixe"
           },
           "mqttSettings": {
-            "authentication": {
-              "method": "SystemAssignedManagedIdentity",
-              "systemAssignedManagedIdentitySettings": {
-                "audience": "lidtagcfq"
-              },
-              "userAssignedManagedIdentitySettings": {
-                "clientId": "fb90f267-8872-431a-a76a-a1cec5d3c4d2",
-                "scope": "ajvopawgpjhtrwfx",
-                "tenantId": "ed060aa2-71ff-4d3f-99c4-a9138356fdec"
-              },
-              "serviceAccountTokenSettings": {
-                "audience": "goxqxbicsjccxvnb"
-              },
-              "x509Settings": {
-                "secretRef": "qhecfrz"
-              }
-            },
-            "clientIdPrefix": "dowtppiolzvxtvsgshvabfpfu",
-            "host": "vogpblicvguevzg",
+            "clientIdPrefix": "upyvoylrslwanrsq",
+            "host": "nuldtgdbwxwuiflxguvhqjohzbblgi",
             "protocol": "Mqtt",
             "keepAliveSeconds": 0,
             "retain": "Keep",
             "maxInflightMessages": 0,
-            "qos": 0,
+            "qos": 2,
             "sessionExpirySeconds": 0,
             "tls": {
               "mode": "Enabled",
-              "trustedCaCertificateConfigMapRef": "skxexkwbfzxpezpfhgajolqdhso"
+              "trustedCaCertificateConfigMapRef": "klhacheuyreznxpui"
             },
             "cloudEventMapping": "PassThrough"
           },
           "provisioningState": "Succeeded"
         },
         "extendedLocation": {
-          "name": "kbzdxcaprarp",
+          "name": "limlgubvxdfnebxvsrformxpqrr",
           "type": "CustomLocation"
         },
         "id": "/subscriptions/0000000-0000-0000-0000-000000000000/resourceGroups/resourceGroup123/providers/Microsoft.IoTOperations/instances/resource-name123/dataflowEndpoints/resource-name123",
-        "name": "rzeyluunzeywevaxk",
-        "type": "ybxjelxxmevqcxrotbiapan",
+        "name": "gorinquvmdbfmjfbobhr",
+        "type": "odtitoseavywh",
         "systemData": {
-          "createdBy": "rwmdqtey",
+          "createdBy": "pjrupsqyk",
           "createdByType": "User",
-          "createdAt": "2024-08-08T22:28:53.214Z",
-          "lastModifiedBy": "wtrryhgyixeshvbp",
+          "createdAt": "2024-08-08T20:32:26.801Z",
+          "lastModifiedBy": "uuaomyzlxhdnqyadbzduyai",
           "lastModifiedByType": "User",
-          "lastModifiedAt": "2024-08-08T22:28:53.214Z"
+          "lastModifiedAt": "2024-08-08T20:32:26.801Z"
         }
       }
     }
