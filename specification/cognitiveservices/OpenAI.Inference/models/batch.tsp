@@ -16,7 +16,7 @@ model BatchErrorList {
   @doc("""
     The object type, which is always `list`.
     """)
-  object?: "list";
+  object: "list";
 
   /** The list of Batch error data. */
   data?: BatchErrorDatum[];

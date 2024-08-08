@@ -7,7 +7,7 @@ using Azure.ClientGenerator.Core;
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "OpenAI is a case-sensitive name"
 @TypeSpec.Versioning.useDependency(
-  Azure.OpenAI.ServiceApiVersions.v2024_02_15_Preview
+  Azure.OpenAI.ServiceApiVersions.v2024_07_01_Preview
 )
 namespace Client;
 
@@ -42,16 +42,16 @@ interface OpenAIClient {
 
   getEmbeddings is Azure.OpenAI.getEmbeddings;
 
-  // listFiles is Azure.OpenAI.listFiles;
-  // uploadFile is Azure.OpenAI.uploadFile;
-  // deleteFile is Azure.OpenAI.deleteFile;
-  // getFile is Azure.OpenAI.getFile;
+  listFiles is Azure.OpenAI.listFiles;
+  uploadFile is Azure.OpenAI.uploadFile;
+  deleteFile is Azure.OpenAI.deleteFile;
+  getFile is Azure.OpenAI.getFile;
   getFileContent is Azure.OpenAI.getFileContent;
 
-  // listBatches is Azure.OpenAI.listBatches;
-  // createBatch is Azure.OpenAI.createBatch;
-  // getBatch is Azure.OpenAI.getBatch;
-  // cancelBatch is Azure.OpenAI.cancelBatch;
+  listBatches is Azure.OpenAI.listBatches;
+  createBatch is Azure.OpenAI.createBatch;
+  getBatch is Azure.OpenAI.getBatch;
+  cancelBatch is Azure.OpenAI.cancelBatch;
 
 }
 
