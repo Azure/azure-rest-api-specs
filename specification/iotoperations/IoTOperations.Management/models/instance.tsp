@@ -51,5 +51,13 @@ model InstanceProperties {
 
   @doc("The service accounts to be used for federated credentials.")
   @visibility("read")
-  serviceAccounts?: string[];
+  serviceAccounts?: ServiceAccountProperties[];
+}
+
+model ServiceAccountProperties {
+  @doc("The name of the service account.")
+  name: string;
+
+  @doc("The namespace of the service account.")
+  `namespace`: string;
 }
