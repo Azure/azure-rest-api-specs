@@ -46,6 +46,6 @@ model InstanceProperties {
   version?: string;
 
   @doc("The reference to the Schema Registry for this AIO Instance.")
-  @pattern("<will-be-provided-by-shweta>")
+  @pattern("^[a-z0-9][a-z0-9-]*[a-z0-9]$")
   schemaRegistryNamespace: string;
 }
