@@ -58,11 +58,11 @@
   "paths": {
     "/{resourceUri}/providers/Microsoft.LoadTestService/loadTestMappings": {
       "get": {
-        "operationId": "LoadTestMappings_List",
+        "operationId": "LoadTestMappings_ListByScope",
         "tags": [
           "LoadTestMappings"
         ],
-        "description": "List LoadTestMappingResource resources by parent",
+        "description": "A resource list operation, at the scope of the resource's parent",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -83,11 +83,6 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "List all Load Test Mappings by Source Resource Id": {
-            "$ref": "./examples/LoadTestMappings_List.json"
           }
         },
         "x-ms-pageable": {
@@ -291,11 +286,11 @@
     },
     "/{resourceUri}/providers/Microsoft.LoadTestService/loadTestProfileMappings": {
       "get": {
-        "operationId": "LoadTestProfileMappings_List",
+        "operationId": "LoadTestProfileMappings_ListByScope",
         "tags": [
           "LoadTestProfileMappings"
         ],
-        "description": "List LoadTestProfileMappingResource resources by parent",
+        "description": "A resource list operation, at the scope of the resource's parent",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -316,11 +311,6 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "List Load Test Profile Mappings by Source Resource Id": {
-            "$ref": "./examples/LoadTestProfileMappings_List.json"
           }
         },
         "x-ms-pageable": {
@@ -749,7 +739,7 @@
         "tags": [
           "LoadTests"
         ],
-        "description": "List LoadTestResource resources by resource group",
+        "description": "A resource list operation, at the scope of the resource's parent",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"

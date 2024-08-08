@@ -433,7 +433,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Workloads/sapDiscoverySites/{sapDiscoverySiteName}/sapInstances": {
       "get": {
-        "operationId": "SapInstances_ListBySapDiscoverySite",
+        "operationId": "SapInstances_List",
         "tags": [
           "SAPInstances"
         ],
@@ -469,11 +469,6 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Lists the SAP Instance resources for the given SAP Migration discovery site resource.": {
-            "$ref": "./examples/SAPInstances_List.json"
           }
         },
         "x-ms-pageable": {
@@ -750,7 +745,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Workloads/sapDiscoverySites/{sapDiscoverySiteName}/sapInstances/{sapInstanceName}/serverInstances": {
       "get": {
-        "operationId": "ServerInstances_ListBySapInstance",
+        "operationId": "ServerInstances_List",
         "tags": [
           "ServerInstances"
         ],
@@ -794,11 +789,6 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Lists the Server Instance resources for the given SAP Instance resource.": {
-            "$ref": "./examples/ServerInstances_List.json"
           }
         },
         "x-ms-pageable": {
