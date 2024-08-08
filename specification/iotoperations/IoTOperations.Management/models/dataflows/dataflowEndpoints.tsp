@@ -214,6 +214,9 @@ model DataflowEndpointKafka {
 
   @doc("TLS configuration.")
   tls: TlsProperties;
+
+  @doc("Cloud event mapping config.")
+  cloudEventMapping?: CloudEventMappingType;
 }
 
 @doc("Kafka endpoint Batching properties")
@@ -323,7 +326,10 @@ model DataflowEndpointMqtt {
   sessionExpirySeconds?: int32 = 3600;
 
   @doc("TLS configuration.")
-  tls?: TlsProperties;
+  tls?: TlsProperties = #{ mode: OperationalMode.Enabled };
+
+  @doc("Cloud event mapping config.")
+  cloudEventMapping?: CloudEventMappingType;
 }
 
 @doc("Broker Retain types")
@@ -334,5 +340,19 @@ union MqttRetainType {
   Keep: "Keep",
 
   @doc("Never retain messages.")
+  Never: "Never",
+}
+
+@doc("How to map events to the cloud.")
+union CloudEventMappingType {
+  string,
+
+  @doc("PassThrough")
+  PassThrough: "PassThrough",
+
+  @doc("Always")
+  Always: "Always",
+
+  @doc("Never")
   Never: "Never",
 }
