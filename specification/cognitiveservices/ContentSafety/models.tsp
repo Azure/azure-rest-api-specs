@@ -466,10 +466,11 @@ model AnalyzeTextGroundednessResult {
 @doc("Definition of an Auto Reviewer version.")
 @resource("text/autoReviewers")
 model AutoReviewerVersion {
-  @key
+  @doc("The name of the Auto Reviewer.")
   @visibility("read", "create", "update")
   @pattern("^[0-9A-Za-z._~-]+$")
-  @doc("The name of the Auto Reviewer.")
+  @maxLength(64)
+  @key
   autoReviewerName: string;
 
   @doc("The labels defined in the Auto Reviewer. There should be a label named 'Other' in the list. The 'Other' label is the default one to represent the content that does not classified as any other labels.")
@@ -604,9 +605,10 @@ union IncidentOperationStatus {
 @resource("text/incidents")
 model TextIncident {
   @doc("The name of the incident.")
-  @pattern("^(?=[a-zA-Z0-9])[a-zA-Z0-9-]*[a-zA-Z0-9]$")
-  @key("incidentName")
   @visibility("read", "create", "query")
+  @pattern("^(?=[a-zA-Z0-9])[a-zA-Z0-9-]*[a-zA-Z0-9]$")
+  @maxLength(64)
+  @key("incidentName")
   incidentName: string;
 
   @doc("The guideline to define this incident.")
@@ -627,8 +629,9 @@ model TextIncident {
 @parentResource(TextIncident)
 model TextIncidentSample {
   @doc("The name of this incident sample.")
-  @key("incidentSampleId")
   @visibility("read")
+  @maxLength(64)
+  @key("incidentSampleId")
   incidentSampleId: string;
 
   @doc("The text content of this incident sample.")
@@ -685,9 +688,10 @@ model DetectIncidentsResult {
 @resource("image/incidents")
 model ImageIncident {
   @doc("The name of the incident.")
-  @pattern("^(?=[a-zA-Z0-9])[a-zA-Z0-9-]*[a-zA-Z0-9]$")
-  @key("incidentName")
   @visibility("read", "create", "query")
+  @pattern("^(?=[a-zA-Z0-9])[a-zA-Z0-9-]*[a-zA-Z0-9]$")
+  @maxLength(64)
+  @key("incidentName")
   incidentName: string;
 
   @doc("The created time of this incident.")
@@ -705,8 +709,9 @@ model ImageIncident {
 @parentResource(ImageIncident)
 model ImageIncidentSample {
   @doc("The name of this incident sample.")
-  @key("incidentSampleId")
   @visibility("read")
+  @maxLength(64)
+  @key("incidentSampleId")
   incidentSampleId: string;
 
   @doc("The image content of this incident sample.")
@@ -905,8 +910,9 @@ union CustomCategoryOperationStatus {
 @resource("text/categories/operations")
 model CustomCategoryOperationDetail {
   @doc("The id of this operation.")
-  @key("operationId")
   @visibility("read", "create", "query")
+  @maxLength(64)
+  @key("operationId")
   id: string;
 
   @doc("The status of this operation.")
