@@ -286,6 +286,7 @@ model DetectCodeProtectedMaterialResult {
 model CodeCitation {
   @doc("The license for detected code. If the value is NOASSERTION, it means the code hasn't assertted in the repo.")
   license: string;
+
   @doc("The URLs of the source code.")
   sourceUrls: string[];
 }
@@ -299,7 +300,6 @@ model CodeProtectedMaterialAnalysisResult {
   @doc("The code citation of potential protected material for code.")
   codeCitations: CodeCitation[];
 }
-
 
 @added(ContentSafety.Versions.v2024_09_15_Preview)
 @doc("The domain supported in Text Groundedness analysis.")
@@ -364,21 +364,21 @@ model LLMResource {
 @doc("The request of text groundedness analysis.")
 model AnalyzeTextGroundednessOptions {
   @doc("""
-  The domain of the text for analysis. Allowed values: Medical, Generic.
-  This field is optional, with a default value of Generic.
-  """)
+    The domain of the text for analysis. Allowed values: Medical, Generic.
+    This field is optional, with a default value of Generic.
+    """)
   domain?: GroundednessDomain = GroundednessDomain.Generic;
 
   @doc("""
-  The task type for the text analysis. Type of task: QnA, Summarization.
-  This field is optional, with a default value of Summarization.
-  """)
+    The task type for the text analysis. Type of task: QnA, Summarization.
+    This field is optional, with a default value of Summarization.
+    """)
   task?: GroundednessTask = GroundednessTask.Summarization;
 
   @doc("""
-  The user's question input in a QnA scenario.
-  This field is optional, but cannot be omitted when task type is QnA.
-  """)
+    The user's question input in a QnA scenario.
+    This field is optional, but cannot be omitted when task type is QnA.
+    """)
   qna?: QnAOptions;
 
   @doc("The text to be analyzed. Usually, it's the LLM output and may contain ungrounded content.")
@@ -386,27 +386,27 @@ model AnalyzeTextGroundednessOptions {
   text: string;
 
   @doc("""
-  The grounding sources to be used for validating the groundedness.
-  Limit: Restrictions on the total amount of grounding sources that can be analyzed in a single request are 55K characters (in Unicode code point).
-  """)
+    The grounding sources to be used for validating the groundedness.
+    Limit: Restrictions on the total amount of grounding sources that can be analyzed in a single request are 55K characters (in Unicode code point).
+    """)
   groundingSources: string[];
 
   @doc("""
-  A value indicating if to generate mitigated content for the ungrounded content and included in the response.
-  This field is optional, with a default value of false.
-  """)
+    A value indicating if to generate mitigated content for the ungrounded content and included in the response.
+    This field is optional, with a default value of false.
+    """)
   mitigating?: boolean;
 
   @doc("""
-  A value indicating if to generate an explanation for the groundedness analysis result and included in the response.
-  This field is optional, with a default value of false.
-  """)
+    A value indicating if to generate an explanation for the groundedness analysis result and included in the response.
+    This field is optional, with a default value of false.
+    """)
   reasoning?: boolean;
 
   @doc("""
-  Connection details for the LLM resource. 
-  This field will be used only when the 'reasoning' field is set to true; otherwise, it will be ignored.
-  """)
+    Connection details for the LLM resource. 
+    This field will be used only when the 'reasoning' field is set to true; otherwise, it will be ignored.
+    """)
   llmResource?: LLMResource;
 }
 
@@ -436,9 +436,9 @@ model UngroundednessDetails {
   length: IndexDetails;
 
   @doc("""
-  The explanation for detected ungroundedness.
-  It's available only when the 'reasoning' field in the input is set to true.
-  """)
+    The explanation for detected ungroundedness.
+    It's available only when the 'reasoning' field in the input is set to true.
+    """)
   reason?: string;
 }
 
@@ -449,23 +449,21 @@ model AnalyzeTextGroundednessResult {
   ungroundedDetected: boolean;
 
   @doc("""
-  Specifies the proportion of the text identified as ungrounded, 
-  expressed as a decimal between 0 and 1,
-  where 0 indicates no ungrounded content and 1 indicates the entire given text is considered ungrounded.
-  """)
+    Specifies the proportion of the text identified as ungrounded, 
+    expressed as a decimal between 0 and 1,
+    where 0 indicates no ungrounded content and 1 indicates the entire given text is considered ungrounded.
+    """)
   ungroundedPercentage: float32;
 
   @doc("Provides insights into ungrounded content with specific examples and percentages.")
   ungroundedDetails: UngroundednessDetails[];
 
   @doc("""
-  The mitigation for detected ungroundedness.
-  It's available only when the 'mitigating' field in the input is set to true.
-  """)
+    The mitigation for detected ungroundedness.
+    It's available only when the 'mitigating' field in the input is set to true.
+    """)
   mitigatedText?: string;
 }
-
-
 
 @added(ContentSafety.Versions.v2024_09_15_Preview)
 @doc("Definition of an Auto Reviewer version.")
@@ -524,16 +522,16 @@ model AutoReviewerLabelDetails {
 @doc("The possible status of an Auto Reviewer operation.")
 union AutoReviewerOperationStatus {
   string,
-  
+
   @doc("Auto Reviewer operation status - NotStarted")
   "NotStarted",
-  
+
   @doc("Auto Reviewer operation status - Running")
   "Running",
-  
+
   @doc("Auto Reviewer operation status - Succeeded")
   "Succeeded",
-  
+
   @doc("Auto Reviewer operation status - Failed")
   "Failed",
 }
@@ -584,8 +582,6 @@ model AutoReviewerOperationDetail {
   @doc("The error details when this operation failed.")
   error?: Azure.Core.Foundations.Error;
 }
-
-
 
 @added(ContentSafety.Versions.v2024_09_15_Preview)
 @doc("The possible status of a content safety incident operation.")
@@ -695,8 +691,6 @@ model DetectIncidentsResult {
   incidentMatches: IncidentMatch[];
 }
 
-
-
 @added(ContentSafety.Versions.v2024_09_15_Preview)
 @doc("Definition of a content safety Image Incident.")
 @resource("image/incidents")
@@ -787,8 +781,6 @@ model RemoveImageIncidentSamplesOptions {
   incidentSampleIds: string[];
 }
 
-
-
 @added(ContentSafety.Versions.v2024_09_15_Preview)
 @doc("The request to analyze given image with content safety Image Incidents defined.")
 model AnalyzeImageDetectIncidentsOptions {
@@ -843,8 +835,6 @@ model IncidentOperationIdOptions {
   @pattern("^(?=[a-zA-Z0-9])[a-zA-Z0-9-]*[a-zA-Z0-9]$")
   operationId?: string;
 }
-
-
 
 @added(ContentSafety.Versions.v2024_09_15_Preview)
 @resource("text/categories")

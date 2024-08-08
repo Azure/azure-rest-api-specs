@@ -131,7 +131,7 @@ interface TextOperations {
     },
     DetectIncidentsResult
   >;
-  
+
   @added(ContentSafety.Versions.v2024_09_15_Preview)
   @summary("Analyze Text Groundedness")
   @doc("A synchronous API to analyze the language model outputs to evaluate alignment with user-provided information or to identify fictional content.")
@@ -540,7 +540,7 @@ interface TextCustomizedCategoryOperations {
 
   @summary("Custom Category - Build")
   @doc("Trigger the build process for the given Custom Category. After the build completed, the category can be used to analyze content. This will submit a long running operation.")
-  @pollingOperation(TextCustomizedCategoryOperations.getCustomCategoryOperation)  
+  @pollingOperation(TextCustomizedCategoryOperations.getCustomCategoryOperation)
   build is TextCustomizedCategoryOps.LongRunningResourceAction<
     TextCustomCategoryVersion,
     {
