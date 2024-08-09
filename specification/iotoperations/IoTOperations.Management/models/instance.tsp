@@ -35,7 +35,6 @@ model InstanceResource is TrackedResource<InstanceProperties> {
 @doc("The Instance update model.")
 model InstancePatchModel {
   ...Azure.ResourceManager.Foundations.ArmTagsProperty;
-
   ...ManagedServiceIdentityProperty;
 }
 
