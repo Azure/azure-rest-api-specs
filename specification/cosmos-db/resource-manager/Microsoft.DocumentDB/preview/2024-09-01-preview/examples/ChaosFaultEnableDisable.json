@@ -1,0 +1,43 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myResourceGroupName",
+    "accountName": "myAccountName",
+    "chaosFault": "ServiceUnavailability",
+    "api-version": "2024-09-01-preview",
+    "chaosFaultRequest": {
+      "properties": {
+        "action": "Enable",
+        "region": "EastUS",
+        "databaseName": "testDatabase",
+        "containerName": "testCollection"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.DocumentDB/databaseAccounts/ddb1/chaosFaults/ServiceUnavailability",
+        "properties": {
+          "provisioningState": "Completed",
+          "action": "Enable",
+          "region": "EastUS",
+          "databaseName": "testDatabase",
+          "containerName": "testCollection"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.DocumentDB/databaseAccounts/ddb1/chaosFaults/ServiceUnavailability",
+        "properties": {
+          "provisioningState": "Completed",
+          "action": "Enable",
+          "region": "EastUS",
+          "databaseName": "testDatabase",
+          "containerName": "testCollection"
+        }
+      }
+    }
+  }
+}

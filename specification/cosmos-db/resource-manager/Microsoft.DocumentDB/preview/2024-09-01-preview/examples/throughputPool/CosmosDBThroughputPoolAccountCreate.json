@@ -1,0 +1,39 @@
+{
+  "parameters": {
+    "api-version": "2024-09-01-preview",
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+    "resourceGroupName": "rg1",
+    "throughputPoolName": "tp1",
+    "throughputPoolAccountName": "db1",
+    "body": {
+      "properties": {
+        "accountLocation": "West US",
+        "accountResourceIdentifier": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/providers/Microsoft.DocumentDB/resourceGroup/rg1/databaseAccounts/db1/"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/rg1/providers/Microsoft.DocumentDB/throughputPools/tp1/throughputPoolAccounts/db1",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "accountResourceIdentifier": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/rg1/providers/Microsoft.DocumentDB/databaseAccounts/db1",
+          "accountLocation": "west us",
+          "accountInstanceId": "{instance-id1}"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/rg1/providers/Microsoft.DocumentDB/throughputPools/tp1/throughputPoolAccounts/db1",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "accountResourceIdentifier": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/rg1/providers/Microsoft.DocumentDB/databaseAccounts/db1",
+          "accountLocation": "west us",
+          "accountInstanceId": "{instance-id1}"
+        }
+      }
+    }
+  }
+}
