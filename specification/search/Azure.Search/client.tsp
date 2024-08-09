@@ -25,8 +25,7 @@ interface Client2 {
     DataSourcesOperationsDelete is SearchClient.DataSourcesOperations.delete;
 }
 
-// @@access(VectorSearchAlgorithmKind, Access.public);
+@@access(VectorSearchAlgorithmKind, Access.public);
 @@usage(VectorSearchAlgorithmKind, Usage.input);
 @@access(VectorSearchVectorizerKind, Access.public);
 @@usage(VectorSearchVectorizerKind, Usage.input);
-
