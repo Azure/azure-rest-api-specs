@@ -142,6 +142,15 @@ union BrokerProtocolType {
   WebSockets: "WebSockets",
 }
 
+@doc("Kubernetes reference with known type")
+model KubernetesReferenceKnownType {
+  @doc("Name is the name of resource being referenced")
+  name: string;
+
+  @doc("Namespace is the namespace of the resource being referenced. This field is required when the resource has a namespace.")
+  `namespace`?: string;
+}
+
 @doc("Kubernetes reference")
 model KubernetesReference {
   ...LocalKubernetesReference;
@@ -165,7 +174,7 @@ model LocalKubernetesReference {
 @doc("Cert-Manager issuerRef properties")
 model CertManagerIssuerRef {
   @doc("group of issuer.")
-  apiGroup: string = "cert-manager.io";
+  group: string = "cert-manager.io";
 
   @doc("kind of issuer (Issuer or ClusterIssuer).")
   kind: CertManagerIssuerKind;
@@ -183,4 +192,54 @@ union CertManagerIssuerKind {
 
   @doc("ClusterIssuer kind.")
   ClusterIssuer: "ClusterIssuer",
+}
+
+alias SystemAssignedManagedIdentity = "SystemAssignedManagedIdentity";
+alias UserAssignedManagedIdentity = "UserAssignedManagedIdentity";
+alias AccessToken = "AccessToken";
+alias Sasl = "Sasl";
+alias x509Certificate = "x509Certificate";
+alias Anonymous = "Anonymous";
+
+@doc("Managed Identity Method")
+union ManagedIdentityMethod {
+  string,
+
+  @doc("SystemAssignedManagedIdentity type")
+  SystemAssignedManagedIdentity: SystemAssignedManagedIdentity,
+
+  @doc("UserAssignedManagedIdentity type")
+  UserAssignedManagedIdentity: UserAssignedManagedIdentity,
+}
+
+@doc("Access Token Method")
+union AccessTokeMethod {
+  string,
+
+  @doc("AccessToken Option")
+  AccessToken: AccessToken,
+}
+
+@doc("Sasl Method")
+union SaslMethod {
+  string,
+
+  @doc("Sasl Option")
+  Sasl: Sasl,
+}
+
+@doc("x509 Certificate Method")
+union x509CertificateMethod {
+  string,
+
+  @doc("x509Certificate Option")
+  x509Certificate: x509Certificate,
+}
+
+@doc("x509 Certificate Method")
+union AnonymousMethod {
+  string,
+
+  @doc("Anonymous Option")
+  Anonymous: Anonymous,
 }

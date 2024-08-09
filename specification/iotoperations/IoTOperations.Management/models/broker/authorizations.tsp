@@ -85,6 +85,9 @@ model BrokerResourceRule {
   @doc("Give access for a Broker method (i.e., Connect, Subscribe, or Publish).")
   method: BrokerResourceDefinitionMethods;
 
+  @doc("A list of client IDs that match the clients. The client IDs are case-sensitive and must match the client IDs provided by the clients during connection. This subfield may be set if the method is Connect.")
+  clientIds?: string[] = #[];
+
   @doc("A list of topics or topic patterns that match the topics that the clients can publish or subscribe to. This subfield is required if the method is Publish or Subscribe.")
   topics?: string[] = #[];
 }
