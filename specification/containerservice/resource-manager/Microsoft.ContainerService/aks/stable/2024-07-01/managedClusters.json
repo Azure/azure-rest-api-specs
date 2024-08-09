@@ -2916,6 +2916,102 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedClusters/{resourceName}/agentPools/{agentPoolName}/machines": {
+      "get": {
+        "operationId": "Machines_List",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AgentPoolNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/MachineListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "summary": "Gets a list of machines in the specified agent pool.",
+        "tags": [
+          "Machines"
+        ],
+        "x-ms-examples": {
+          "List Machines in an Agentpool by Managed Cluster": {
+            "$ref": "./examples/MachineList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedClusters/{resourceName}/agentPools/{agentPoolName}/machines/{machineName}": {
+      "get": {
+        "operationId": "Machines_Get",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AgentPoolNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MachineNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Machine"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "summary": "Get a specific machine in the specified agent pool.",
+        "tags": [
+          "Machines"
+        ],
+        "x-ms-examples": {
+          "Get a Machine in an Agent Pools by Managed Cluster": {
+            "$ref": "./examples/MachineGet.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -7549,6 +7645,109 @@
       "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9]$",
       "description": "The mode of the mesh.",
       "x-ms-parameter-location": "method"
+    },
+    "Machine": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/SubResource"
+        }
+      ],
+      "description": "A machine. Contains details about the underlying virtual machine. A machine may be visible here but not in kubectl get nodes; if so it may be because the machine has not been registered with the Kubernetes API Server yet.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/MachineProperties",
+          "description": "The properties of the machine"
+        }
+      },
+      "type": "object"
+    },
+    "MachineIpAddress": {
+      "description": "The machine IP address details.",
+      "properties": {
+        "family": {
+          "description": "To determine if address belongs IPv4 or IPv6 family",
+          "enum": [
+            "IPv4",
+            "IPv6"
+          ],
+          "readOnly": true,
+          "type": "string",
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "IPFamily",
+            "values": [
+              {
+                "description": "IPv4 family",
+                "value": "IPv4"
+              },
+              {
+                "description": "IPv6 family",
+                "value": "IPv6"
+              }
+            ]
+          }
+        },
+        "ip": {
+          "description": "IPv4 or IPv6 address of the machine",
+          "readOnly": true,
+          "type": "string"
+        }
+      },
+      "readOnly": true,
+      "type": "object"
+    },
+    "MachineListResult": {
+      "description": "The response from the List Machines operation.",
+      "properties": {
+        "nextLink": {
+          "description": "The URL to get the next set of machine results.",
+          "format": "uri",
+          "readOnly": true,
+          "type": "string"
+        },
+        "value": {
+          "description": "The list of Machines in cluster.",
+          "items": {
+            "$ref": "#/definitions/Machine"
+          },
+          "type": "array",
+          "x-ms-identifiers": [
+            "id"
+          ]
+        }
+      },
+      "type": "object"
+    },
+    "MachineNetworkProperties": {
+      "description": "network properties of the machine",
+      "properties": {
+        "ipAddresses": {
+          "description": "IPv4, IPv6 addresses of the machine",
+          "items": {
+            "$ref": "#/definitions/MachineIpAddress"
+          },
+          "readOnly": true,
+          "type": "array",
+          "x-ms-identifiers": []
+        }
+      },
+      "readOnly": true,
+      "type": "object"
+    },
+    "MachineProperties": {
+      "description": "The properties of the machine",
+      "properties": {
+        "network": {
+          "$ref": "#/definitions/MachineNetworkProperties"
+        },
+        "resourceId": {
+          "description": "Arm resource id of the machine. It can be used to GET underlying VM Instance",
+          "readOnly": true,
+          "type": "string"
+        }
+      },
+      "readOnly": true,
+      "type": "object"
     }
   }
 }
