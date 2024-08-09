@@ -55,6 +55,15 @@ semantic-validator: true
 message-format: json
 ```
 
+### Tag: package-preview-2024-07
+
+These settings apply only when `--tag=package-preview-2024-07` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2024-07'
+input-file:
+  - Microsoft.RecoveryServices/preview/2024-07-30-preview/bms.json
+```
+
 ### Tag: package-preview-2024-04
 
 These settings apply only when `--tag=package-preview-2024-04` is specified on the command line.
