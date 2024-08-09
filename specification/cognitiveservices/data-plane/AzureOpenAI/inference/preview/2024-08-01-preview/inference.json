@@ -546,7 +546,14 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/createChatCompletionResponse"
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/createChatCompletionResponse"
+                    },
+                    {
+                      "$ref": "#/components/schemas/createChatCompletionStreamResponse"
+                    }
+                  ]
                 }
               }
             },
@@ -3662,13 +3669,18 @@
                 "nullable": true
               },
               "response_format": {
-                "type": "object",
-                "description": "An object specifying the format that the model must output. Used to enable JSON mode.",
-                "properties": {
-                  "type": {
-                    "$ref": "#/components/schemas/chatCompletionResponseFormat"
+                "description": "An object specifying the format that the model must output. Compatible with GPT-4o, GPT-4o mini, GPT-4 Turbo and all GPT-3.5 Turbo models newer than `gpt-3.5-turbo-1106`.\n\nSetting to `{ \"type\": \"json_schema\", \"json_schema\": {...} }` enables Structured Outputs which guarantees the model will match your supplied JSON schema.\n\nSetting to `{ \"type\": \"json_object\" }` enables JSON mode, which guarantees the message the model generates is valid JSON.\n\n**Important:** when using JSON mode, you **must** also instruct the model to produce JSON yourself via a system or user message. Without this, the model may generate an unending stream of whitespace until the generation reaches the token limit, resulting in a long-running and seemingly \"stuck\" request. Also note that the message content may be partially cut off if `finish_reason=\"length\"`, which indicates the generation exceeded `max_tokens` or the conversation exceeded the max context length.\n",
+                "oneOf": [
+                  {
+                    "$ref": "#/components/schemas/ResponseFormatText"
+                  },
+                  {
+                    "$ref": "#/components/schemas/ResponseFormatJsonObject"
+                  },
+                  {
+                    "$ref": "#/components/schemas/ResponseFormatJsonSchema"
                   }
-                }
+                ]
               },
               "tools": {
                 "description": "A list of tools the model may call. Currently, only functions are supported as a tool. Use this to provide a list of functions the model may generate JSON inputs for.",
@@ -3723,31 +3735,6 @@
           "messages"
         ]
       },
-      "chatCompletionResponseFormat": {
-        "type": "string",
-        "enum": [
-          "text",
-          "json_object"
-        ],
-        "default": "text",
-        "example": "json_object",
-        "nullable": true,
-        "description": "Setting to `json_object` enables JSON mode. This guarantees that the message the model generates is valid JSON.",
-        "x-ms-enum": {
-          "name": "ChatCompletionResponseFormat",
-          "modelAsString": true,
-          "values": [
-            {
-              "value": "text",
-              "description": "Response format is a plain text string."
-            },
-            {
-              "value": "json_object",
-              "description": "Response format is a JSON object."
-            }
-          ]
-        }
-      },
       "chatCompletionFunction": {
         "type": "object",
         "properties": {
@@ -3773,24 +3760,356 @@
         "additionalProperties": true
       },
       "chatCompletionRequestMessage": {
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/chatCompletionRequestSystemMessage"
+          },
+          {
+            "$ref": "#/components/schemas/chatCompletionRequestUserMessage"
+          },
+          {
+            "$ref": "#/components/schemas/chatCompletionRequestAssistantMessage"
+          },
+          {
+            "$ref": "#/components/schemas/chatCompletionRequestToolMessage"
+          },
+          {
+            "$ref": "#/components/schemas/chatCompletionRequestFunctionMessage"
+          }
+        ]
+      },
+      "chatCompletionRequestSystemMessage": {
         "type": "object",
+        "title": "System message",
         "properties": {
+          "content": {
+            "description": "The contents of the system message.",
+            "oneOf": [
+              {
+                "type": "string",
+                "description": "The contents of the system message.",
+                "title": "Text content"
+              },
+              {
+                "type": "array",
+                "description": "An array of content parts with a defined type. For system messages, only type `text` is supported.",
+                "title": "Array of content parts",
+                "items": {
+                  "$ref": "#/components/schemas/chatCompletionRequestSystemMessageContentPart"
+                },
+                "minItems": 1
+              }
+            ]
+          },
           "role": {
-            "$ref": "#/components/schemas/chatCompletionRequestMessageRole"
+            "type": "string",
+            "enum": [
+              "system"
+            ],
+            "description": "The role of the messages author, in this case `system`."
+          },
+          "name": {
+            "type": "string",
+            "description": "An optional name for the participant. Provides the model information to differentiate between participants of the same role."
           }
         },
-        "discriminator": {
-          "propertyName": "role",
-          "mapping": {
-            "system": "#/components/schemas/chatCompletionRequestMessageSystem",
-            "user": "#/components/schemas/chatCompletionRequestMessageUser",
-            "assistant": "#/components/schemas/chatCompletionRequestMessageAssistant",
-            "tool": "#/components/schemas/chatCompletionRequestMessageTool",
-            "function": "#/components/schemas/chatCompletionRequestMessageFunction"
+        "required": [
+          "content",
+          "role"
+        ]
+      },
+      "chatCompletionRequestUserMessage": {
+        "type": "object",
+        "title": "User message",
+        "properties": {
+          "content": {
+            "description": "The contents of the user message.\n",
+            "oneOf": [
+              {
+                "type": "string",
+                "description": "The text contents of the message.",
+                "title": "Text content"
+              },
+              {
+                "type": "array",
+                "description": "An array of content parts with a defined type, each can be of type `text` or `image_url` when passing in images. You can pass multiple images by adding multiple `image_url` content parts. Image input is only supported when using the `gpt-4o` model.",
+                "title": "Array of content parts",
+                "items": {
+                  "$ref": "#/components/schemas/chatCompletionRequestUserMessageContentPart"
+                },
+                "minItems": 1
+              }
+            ],
+            "x-oaiExpandable": true
+          },
+          "role": {
+            "type": "string",
+            "enum": [
+              "user"
+            ],
+            "description": "The role of the messages author, in this case `user`."
+          },
+          "name": {
+            "type": "string",
+            "description": "An optional name for the participant. Provides the model information to differentiate between participants of the same role."
+          }
+        },
+        "required": [
+          "content",
+          "role"
+        ]
+      },
+      "chatCompletionRequestAssistantMessage": {
+        "type": "object",
+        "title": "Assistant message",
+        "properties": {
+          "content": {
+            "nullable": true,
+            "oneOf": [
+              {
+                "type": "string",
+                "description": "The contents of the assistant message.",
+                "title": "Text content"
+              },
+              {
+                "type": "array",
+                "description": "An array of content parts with a defined type. Can be one or more of type `text`, or exactly one of type `refusal`.",
+                "title": "Array of content parts",
+                "items": {
+                  "$ref": "#/components/schemas/chatCompletionRequestAssistantMessageContentPart"
+                },
+                "minItems": 1
+              }
+            ],
+            "description": "The contents of the assistant message. Required unless `tool_calls` or `function_call` is specified.\n"
+          },
+          "refusal": {
+            "nullable": true,
+            "type": "string",
+            "description": "The refusal message by the assistant."
+          },
+          "role": {
+            "type": "string",
+            "enum": [
+              "assistant"
+            ],
+            "description": "The role of the messages author, in this case `assistant`."
+          },
+          "name": {
+            "type": "string",
+            "description": "An optional name for the participant. Provides the model information to differentiate between participants of the same role."
+          },
+          "tool_calls": {
+            "$ref": "#/components/schemas/ChatCompletionMessageToolCalls"
+          },
+          "function_call": {
+            "type": "object",
+            "deprecated": true,
+            "description": "Deprecated and replaced by `tool_calls`. The name and arguments of a function that should be called, as generated by the model.",
+            "nullable": true,
+            "properties": {
+              "arguments": {
+                "type": "string",
+                "description": "The arguments to call the function with, as generated by the model in JSON format. Note that the model does not always generate valid JSON, and may hallucinate parameters not defined by your function schema. Validate the arguments in your code before calling your function."
+              },
+              "name": {
+                "type": "string",
+                "description": "The name of the function to call."
+              }
+            },
+            "required": [
+              "arguments",
+              "name"
+            ]
           }
         },
         "required": [
           "role"
+        ]
+      },
+      "chatCompletionRequestToolMessage": {
+        "type": "object",
+        "title": "Tool message",
+        "properties": {
+          "role": {
+            "type": "string",
+            "enum": [
+              "tool"
+            ],
+            "description": "The role of the messages author, in this case `tool`."
+          },
+          "content": {
+            "oneOf": [
+              {
+                "type": "string",
+                "description": "The contents of the tool message.",
+                "title": "Text content"
+              },
+              {
+                "type": "array",
+                "description": "An array of content parts with a defined type. For tool messages, only type `text` is supported.",
+                "title": "Array of content parts",
+                "items": {
+                  "$ref": "#/components/schemas/chatCompletionRequestToolMessageContentPart"
+                },
+                "minItems": 1
+              }
+            ],
+            "description": "The contents of the tool message."
+          },
+          "tool_call_id": {
+            "type": "string",
+            "description": "Tool call that this message is responding to."
+          }
+        },
+        "required": [
+          "role",
+          "content",
+          "tool_call_id"
+        ]
+      },
+      "chatCompletionRequestFunctionMessage": {
+        "type": "object",
+        "title": "Function message",
+        "deprecated": true,
+        "properties": {
+          "role": {
+            "type": "string",
+            "enum": [
+              "function"
+            ],
+            "description": "The role of the messages author, in this case `function`."
+          },
+          "content": {
+            "nullable": true,
+            "type": "string",
+            "description": "The contents of the function message."
+          },
+          "name": {
+            "type": "string",
+            "description": "The name of the function to call."
+          }
+        },
+        "required": [
+          "role",
+          "content",
+          "name"
+        ]
+      },
+      "chatCompletionRequestSystemMessageContentPart": {
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/chatCompletionRequestMessageContentPartText"
+          }
+        ]
+      },
+      "chatCompletionRequestUserMessageContentPart": {
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/chatCompletionRequestMessageContentPartText"
+          },
+          {
+            "$ref": "#/components/schemas/chatCompletionRequestMessageContentPartImage"
+          }
+        ]
+      },
+      "chatCompletionRequestAssistantMessageContentPart": {
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/chatCompletionRequestMessageContentPartText"
+          },
+          {
+            "$ref": "#/components/schemas/chatCompletionRequestMessageContentPartRefusal"
+          }
+        ]
+      },
+      "chatCompletionRequestToolMessageContentPart": {
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/chatCompletionRequestMessageContentPartText"
+          }
+        ]
+      },
+      "chatCompletionRequestMessageContentPartText": {
+        "type": "object",
+        "title": "Text content part",
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "text"
+            ],
+            "description": "The type of the content part."
+          },
+          "text": {
+            "type": "string",
+            "description": "The text content."
+          }
+        },
+        "required": [
+          "type",
+          "text"
+        ]
+      },
+      "chatCompletionRequestMessageContentPartImage": {
+        "type": "object",
+        "title": "Image content part",
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "image_url"
+            ],
+            "description": "The type of the content part."
+          },
+          "image_url": {
+            "type": "object",
+            "properties": {
+              "url": {
+                "type": "string",
+                "description": "Either a URL of the image or the base64 encoded image data.",
+                "format": "uri"
+              },
+              "detail": {
+                "type": "string",
+                "description": "Specifies the detail level of the image. Learn more in the [Vision guide](/docs/guides/vision/low-or-high-fidelity-image-understanding).",
+                "enum": [
+                  "auto",
+                  "low",
+                  "high"
+                ],
+                "default": "auto"
+              }
+            },
+            "required": [
+              "url"
+            ]
+          }
+        },
+        "required": [
+          "type",
+          "image_url"
+        ]
+      },
+      "chatCompletionRequestMessageContentPartRefusal": {
+        "type": "object",
+        "title": "Refusal content part",
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "refusal"
+            ],
+            "description": "The type of the content part."
+          },
+          "refusal": {
+            "type": "string",
+            "description": "The refusal message generated by the model."
+          }
+        },
+        "required": [
+          "type",
+          "refusal"
         ]
       },
       "chatCompletionRequestMessageRole": {
@@ -3918,76 +4237,6 @@
             {
               "value": "image_url",
               "description": "The content part type is image_url."
-            }
-          ]
-        }
-      },
-      "chatCompletionRequestMessageContentPartText": {
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/chatCompletionRequestMessageContentPart"
-          },
-          {
-            "type": "object",
-            "properties": {
-              "text": {
-                "type": "string",
-                "description": "The text content."
-              }
-            }
-          }
-        ],
-        "required": [
-          "text"
-        ]
-      },
-      "chatCompletionRequestMessageContentPartImage": {
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/chatCompletionRequestMessageContentPart"
-          },
-          {
-            "type": "object",
-            "properties": {
-              "url": {
-                "type": "string",
-                "description": "Either a URL of the image or the base64 encoded image data.",
-                "format": "uri"
-              },
-              "detail": {
-                "$ref": "#/components/schemas/imageDetailLevel"
-              }
-            }
-          }
-        ],
-        "required": [
-          "url"
-        ]
-      },
-      "imageDetailLevel": {
-        "type": "string",
-        "description": "Specifies the detail level of the image.",
-        "enum": [
-          "auto",
-          "low",
-          "high"
-        ],
-        "default": "auto",
-        "x-ms-enum": {
-          "name": "ImageDetailLevel",
-          "modelAsString": true,
-          "values": [
-            {
-              "value": "auto",
-              "description": "The image detail level is auto."
-            },
-            {
-              "value": "low",
-              "description": "The image detail level is low."
-            },
-            {
-              "value": "high",
-              "description": "The image detail level is high."
             }
           ]
         }
@@ -5415,48 +5664,273 @@
       },
       "createChatCompletionResponse": {
         "type": "object",
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/chatCompletionsResponseCommon"
+        "description": "Represents a chat completion response returned by model, based on the provided input.",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "A unique identifier for the chat completion."
           },
-          {
-            "properties": {
-              "prompt_filter_results": {
-                "$ref": "#/components/schemas/promptFilterResults"
-              },
-              "choices": {
-                "type": "array",
-                "items": {
+          "choices": {
+            "type": "array",
+            "description": "A list of chat completion choices. Can be more than one if `n` is greater than 1.",
+            "items": {
+              "type": "object",
+              "required": [
+                "finish_reason",
+                "index",
+                "message",
+                "logprobs"
+              ],
+              "properties": {
+                "finish_reason": {
+                  "type": "string",
+                  "description": "The reason the model stopped generating tokens. This will be `stop` if the model hit a natural stop point or a provided stop sequence,\n`length` if the maximum number of tokens specified in the request was reached,\n`content_filter` if content was omitted due to a flag from our content filters,\n`tool_calls` if the model called a tool, or `function_call` (deprecated) if the model called a function.\n",
+                  "enum": [
+                    "stop",
+                    "length",
+                    "tool_calls",
+                    "content_filter",
+                    "function_call"
+                  ]
+                },
+                "index": {
+                  "type": "integer",
+                  "description": "The index of the choice in the list of choices."
+                },
+                "message": {
+                  "$ref": "#/components/schemas/chatCompletionResponseMessage"
+                },
+                "logprobs": {
+                  "description": "Log probability information for the choice.",
                   "type": "object",
-                  "allOf": [
-                    {
-                      "$ref": "#/components/schemas/chatCompletionChoiceCommon"
+                  "nullable": true,
+                  "properties": {
+                    "content": {
+                      "description": "A list of message content tokens with log probability information.",
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/chatCompletionTokenLogprob"
+                      },
+                      "nullable": true
                     },
-                    {
-                      "properties": {
-                        "message": {
-                          "$ref": "#/components/schemas/chatCompletionResponseMessage"
-                        },
-                        "content_filter_results": {
-                          "$ref": "#/components/schemas/contentFilterChoiceResults"
-                        },
-                        "logprobs": {
-                          "$ref": "#/components/schemas/chatCompletionChoiceLogProbs"
-                        }
-                      }
+                    "refusal": {
+                      "description": "A list of message refusal tokens with log probability information.",
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/chatCompletionTokenLogprob"
+                      },
+                      "nullable": true
                     }
+                  },
+                  "required": [
+                    "content",
+                    "refusal"
                   ]
                 }
               }
             }
           }
-        ],
+        }
+      },
+      "createChatCompletionStreamResponse": {
+        "type": "object",
+        "description": "Represents a streamed chunk of a chat completion response returned by model, based on the provided input.",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "A unique identifier for the chat completion. Each chunk has the same ID."
+          },
+          "choices": {
+            "type": "array",
+            "description": "A list of chat completion choices. Can contain more than one elements if `n` is greater than 1. Can also be empty for the\nlast chunk if you set `stream_options: {\"include_usage\": true}`.\n",
+            "items": {
+              "type": "object",
+              "required": [
+                "delta",
+                "finish_reason",
+                "index"
+              ],
+              "properties": {
+                "delta": {
+                  "$ref": "#/components/schemas/chatCompletionStreamResponseDelta"
+                },
+                "logprobs": {
+                  "description": "Log probability information for the choice.",
+                  "type": "object",
+                  "nullable": true,
+                  "properties": {
+                    "content": {
+                      "description": "A list of message content tokens with log probability information.",
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/chatCompletionTokenLogprob"
+                      },
+                      "nullable": true
+                    },
+                    "refusal": {
+                      "description": "A list of message refusal tokens with log probability information.",
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/chatCompletionTokenLogprob"
+                      },
+                      "nullable": true
+                    }
+                  },
+                  "required": [
+                    "content",
+                    "refusal"
+                  ]
+                },
+                "finish_reason": {
+                  "type": "string",
+                  "description": "The reason the model stopped generating tokens. This will be `stop` if the model hit a natural stop point or a provided stop sequence,\n`length` if the maximum number of tokens specified in the request was reached,\n`content_filter` if content was omitted due to a flag from our content filters,\n`tool_calls` if the model called a tool, or `function_call` (deprecated) if the model called a function.\n",
+                  "enum": [
+                    "stop",
+                    "length",
+                    "tool_calls",
+                    "content_filter",
+                    "function_call"
+                  ],
+                  "nullable": true
+                },
+                "index": {
+                  "type": "integer",
+                  "description": "The index of the choice in the list of choices."
+                }
+              }
+            }
+          },
+          "created": {
+            "type": "integer",
+            "description": "The Unix timestamp (in seconds) of when the chat completion was created. Each chunk has the same timestamp."
+          },
+          "model": {
+            "type": "string",
+            "description": "The model to generate the completion."
+          },
+          "system_fingerprint": {
+            "type": "string",
+            "description": "This fingerprint represents the backend configuration that the model runs with.\nCan be used in conjunction with the `seed` request parameter to understand when backend changes have been made that might impact determinism.\n"
+          },
+          "object": {
+            "type": "string",
+            "description": "The object type, which is always `chat.completion.chunk`.",
+            "enum": [
+              "chat.completion.chunk"
+            ]
+          },
+          "usage": {
+            "type": "object",
+            "description": "An optional field that will only be present when you set `stream_options: {\"include_usage\": true}` in your request.\nWhen present, it contains a null value except for the last chunk which contains the token usage statistics for the entire request.\n",
+            "properties": {
+              "completion_tokens": {
+                "type": "integer",
+                "description": "Number of tokens in the generated completion."
+              },
+              "prompt_tokens": {
+                "type": "integer",
+                "description": "Number of tokens in the prompt."
+              },
+              "total_tokens": {
+                "type": "integer",
+                "description": "Total number of tokens used in the request (prompt + completion)."
+              }
+            },
+            "required": [
+              "prompt_tokens",
+              "completion_tokens",
+              "total_tokens"
+            ]
+          }
+        },
         "required": [
-          "id",
-          "object",
+          "choices",
           "created",
+          "id",
           "model",
-          "choices"
+          "object"
+        ]
+      },
+      "chatCompletionStreamResponseDelta": {
+        "type": "object",
+        "description": "A chat completion delta generated by streamed model responses.",
+        "properties": {
+          "content": {
+            "type": "string",
+            "description": "The contents of the chunk message.",
+            "nullable": true
+          },
+          "function_call": {
+            "deprecated": true,
+            "type": "object",
+            "description": "Deprecated and replaced by `tool_calls`. The name and arguments of a function that should be called, as generated by the model.",
+            "properties": {
+              "arguments": {
+                "type": "string",
+                "description": "The arguments to call the function with, as generated by the model in JSON format. Note that the model does not always generate valid JSON, and may hallucinate parameters not defined by your function schema. Validate the arguments in your code before calling your function."
+              },
+              "name": {
+                "type": "string",
+                "description": "The name of the function to call."
+              }
+            }
+          },
+          "tool_calls": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/chatCompletionMessageToolCallChunk"
+            }
+          },
+          "role": {
+            "type": "string",
+            "enum": [
+              "system",
+              "user",
+              "assistant",
+              "tool"
+            ],
+            "description": "The role of the author of this message."
+          },
+          "refusal": {
+            "type": "string",
+            "description": "The refusal message generated by the model.",
+            "nullable": true
+          }
+        }
+      },
+      "chatCompletionMessageToolCallChunk": {
+        "type": "object",
+        "properties": {
+          "index": {
+            "type": "integer"
+          },
+          "id": {
+            "type": "string",
+            "description": "The ID of the tool call."
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "function"
+            ],
+            "description": "The type of the tool. Currently, only `function` is supported."
+          },
+          "function": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "The name of the function to call."
+              },
+              "arguments": {
+                "type": "string",
+                "description": "The arguments to call the function with, as generated by the model in JSON format. Note that the model does not always generate valid JSON, and may hallucinate parameters not defined by your function schema. Validate the arguments in your code before calling your function."
+              }
+            }
+          }
+        },
+        "required": [
+          "index"
         ]
       },
       "chatCompletionChoiceLogProbs": {
@@ -5466,6 +5940,14 @@
         "properties": {
           "content": {
             "description": "A list of message content tokens with log probability information.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/chatCompletionTokenLogprob"
+            },
+            "nullable": true
+          },
+          "refusal": {
+            "description": "A list of message refusal tokens with log probability information.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/chatCompletionTokenLogprob"
@@ -5541,6 +6023,11 @@
           "role": {
             "$ref": "#/components/schemas/chatCompletionResponseMessageRole"
           },
+          "refusal": {
+            "type": "string",
+            "description": "The refusal message generated by the model.",
+            "nullable": true
+          },
           "content": {
             "type": "string",
             "description": "The contents of the message.",
@@ -5559,7 +6046,12 @@
           "context": {
             "$ref": "#/components/schemas/azureChatExtensionsMessageContext"
           }
-        }
+        },
+        "required": [
+          "role",
+          "content",
+          "refusal"
+        ]
       },
       "chatCompletionResponseMessageRole": {
         "type": "string",
@@ -5756,10 +6248,93 @@
           },
           "parameters": {
             "$ref": "#/components/schemas/FunctionParameters"
+          },
+          "strict": {
+            "type": "boolean",
+            "nullable": true,
+            "default": false,
+            "description": "Whether to enable strict schema adherence when generating the function call. If set to true, the model will follow the exact schema defined in the `parameters` field. Only a subset of JSON Schema is supported when `strict` is `true`. Learn more about Structured Outputs in the [function calling guide](docs/guides/function-calling)."
           }
         },
         "required": [
           "name"
+        ]
+      },
+      "ResponseFormatText": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "The type of response format being defined: `text`",
+            "enum": [
+              "text"
+            ]
+          }
+        },
+        "required": [
+          "type"
+        ]
+      },
+      "ResponseFormatJsonObject": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "The type of response format being defined: `json_object`",
+            "enum": [
+              "json_object"
+            ]
+          }
+        },
+        "required": [
+          "type"
+        ]
+      },
+      "ResponseFormatJsonSchemaSchema": {
+        "type": "object",
+        "description": "The schema for the response format, described as a JSON Schema object.",
+        "additionalProperties": true
+      },
+      "ResponseFormatJsonSchema": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "The type of response format being defined: `json_schema`",
+            "enum": [
+              "json_schema"
+            ]
+          },
+          "json_schema": {
+            "type": "object",
+            "properties": {
+              "description": {
+                "type": "string",
+                "description": "A description of what the response format is for, used by the model to determine how to respond in the format."
+              },
+              "name": {
+                "type": "string",
+                "description": "The name of the response format. Must be a-z, A-Z, 0-9, or contain underscores and dashes, with a maximum length of 64."
+              },
+              "schema": {
+                "$ref": "#/components/schemas/ResponseFormatJsonSchemaSchema"
+              },
+              "strict": {
+                "type": "boolean",
+                "nullable": true,
+                "default": false,
+                "description": "Whether to enable strict schema adherence when generating the output. If set to true, the model will always follow the exact schema defined in the `schema` field. Only a subset of JSON Schema is supported when `strict` is `true`. To learn more, read the [Structured Outputs guide](/docs/guides/structured-outputs)."
+              }
+            },
+            "required": [
+              "type",
+              "name"
+            ]
+          }
+        },
+        "required": [
+          "type",
+          "json_schema"
         ]
       },
       "chatCompletionToolType": {
