@@ -29,7 +29,6 @@ openapi-type: arm
 tag: package-2024-08
 ```
 
-
 ### Tag: package-2024-08
 
 These settings apply only when `--tag=package-2024-08` is specified on the command line.
@@ -38,14 +37,6 @@ These settings apply only when `--tag=package-2024-08` is specified on the comma
 input-file:
   - Microsoft.Consumption/stable/2024-08-01/consumption_pricesheet.json
   - Microsoft.Consumption/stable/2024-08-01/consumption.json
-```
-
-### Tag: package-2024-08
-
-These settings apply only when `--tag=package-2024-08` is specified on the command line.
-
-```yaml $(tag) == 'package-2024-08'
-input-file:
 ```
 
 ### Tag: package-2023-11
