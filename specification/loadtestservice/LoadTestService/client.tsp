@@ -1,6 +1,8 @@
 import "./main.tsp";
 import "@azure-tools/typespec-client-generator-core";
+import "@typespec/rest";
 
+using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.ClientGenerator.Core;
 using Microsoft.LoadTestService;
@@ -8,13 +10,18 @@ using Microsoft.LoadTestService;
 @useDependency(APIVersions.v2024_05_01_preview)
 namespace Customizations;
 
+// Client customizations should be kept here only
+// Model related customizations here (Ref: https://azure.github.io/typespec-azure/docs/howtos/DataPlane%20Generation%20-%20DPG/04renaming):
+@@clientName(MetricDimensionsRequest.metricname, "metric_name", "python");
+@@clientName(MetricDimensionsRequest.timespan, "time_interval", "python");
+
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @client({
   name: "LoadTestAdministrationClient",
   service: Microsoft.LoadTestService,
 })
 interface AdministrationOperations {
-  createOrUpdateTest is LoadTestAdministration.createOrUpdateTest;
+  createOrUpdateTest is LoadTestAdministration.createOrUpdateTest;  
   createOrUpdateAppComponents is LoadTestAdministration.createOrUpdateAppComponents;
   createOrUpdateServerMetricsConfig is LoadTestAdministration.createOrUpdateServerMetricsConfig;
   getAppComponents is LoadTestAdministration.getAppComponents;
@@ -57,29 +64,4 @@ interface TestRunOperations {
   #suppress "@azure-tools/typespec-azure-core/no-operation-id"
   @clientName("stopTestRun", "javascript,python,java,csharp,go")
   stop is LoadTestRun.stop;
-}
-
-@client({
-  name: "TestProfileAdministrationClient",
-  service: Microsoft.LoadTestService,
-})
-interface TestProfileAdministrationOperations {
-  createOrUpdateTestProfile is TestProfileAdministration.createOrUpdateTestProfile;
-  deleteTestProfile is TestProfileAdministration.deleteTestProfile;
-  getTestProfile is TestProfileAdministration.getTestProfile;
-  listTestProfiles is TestProfileAdministration.listTestProfiles;
-}
-
-@client({
-  name: "TestProfileRunClient",
-  service: Microsoft.LoadTestService,
-})
-interface TestProfileRunOperations {
-  createOrUpdateTestProfileRun is TestProfileRunAdministration.createOrUpdateTestProfileRun;
-  deleteTestProfileRun is TestProfileRunAdministration.deleteTestProfileRun;
-  getTestProfileRun is TestProfileRunAdministration.getTestProfileRun;
-  listTestProfileRuns is TestProfileRunAdministration.listTestProfileRuns;
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id"
-  @clientName("stopTestProfileRun", "javascript,python,java,csharp,go")
-  stop is TestProfileRunAdministration.stop;
 }
