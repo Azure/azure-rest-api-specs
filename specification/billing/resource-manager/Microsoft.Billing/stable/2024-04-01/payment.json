@@ -223,11 +223,6 @@
             "modelAsString": true,
             "name": "paymentMethodStatus"
           }
-        },
-        "type": {
-          "description": "The type of payment method.",
-          "type": "string",
-          "readOnly": true
         }
       },
       "type": "object"
@@ -374,61 +369,6 @@
         "x-ms-examples": {
           "PaymentMethodsGetByBillingProfile": {
             "$ref": "./examples/paymentMethodsGetByBillingProfile.json"
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "PaymentMethods"
-        ],
-        "operationId": "PaymentMethods_DeleteAtBillingProfile",
-        "x-ms-long-running-operation": true,
-        "description": "Deletes a payment method link and removes the payment method from a billing profile. The operation is supported only for billing accounts with agreement type Microsoft Customer Agreement.",
-        "externalDocs": {
-          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
-        },
-        "x-ms-examples": {
-          "PaymentMethodAtBillingProfileDelete": {
-            "$ref": "./examples/paymentMethodsDeleteAtBillingProfile.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/billingAccountNameParameter"
-          },
-          {
-            "$ref": "#/parameters/billingProfileNameParameter"
-          },
-          {
-            "$ref": "#/parameters/paymentMethodNameParameter"
-          },
-          {
-            "$ref": "./types.json#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "The resource was not found."
-          },
-          "202": {
-            "description": "Accepted",
-            "headers": {
-              "Location": {
-                "description": "Location URI to poll for result",
-                "type": "string"
-              },
-              "Retry-After": {
-                "description": "Recommended time to wait before making another request to check the status of the operation. The time is specified in seconds.",
-                "type": "integer",
-                "format": "int32"
-              }
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
           }
         }
       }
