@@ -199,6 +199,7 @@ alias UserAssignedManagedIdentity = "UserAssignedManagedIdentity";
 alias AccessToken = "AccessToken";
 alias Sasl = "Sasl";
 alias x509Certificate = "x509Certificate";
+alias Anonymous = "Anonymous";
 
 @doc("Managed Identity Method")
 union ManagedIdentityMethod {
@@ -233,4 +234,12 @@ union x509CertificateMethod {
 
   @doc("x509Certificate Option")
   x509Certificate: x509Certificate,
+}
+
+@doc("x509 Certificate Method")
+union AnonymousMethod {
+  string,
+
+  @doc("Anonymous Option")
+  Anonymous: Anonymous,
 }

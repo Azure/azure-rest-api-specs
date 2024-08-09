@@ -2499,19 +2499,6 @@
         ]
       }
     },
-    "AdrProperties": {
-      "type": "object",
-      "description": "The properties of an ADR instance.",
-      "properties": {
-        "enabled": {
-          "type": "boolean",
-          "description": "This determines if the ADR service is enabled."
-        }
-      },
-      "required": [
-        "enabled"
-      ]
-    },
     "AdvancedSettings": {
       "type": "object",
       "description": "Broker Advanced Settings",
@@ -2551,18 +2538,23 @@
         }
       }
     },
-    "AkriInstanceProperties": {
-      "type": "object",
-      "description": "The properties of an AKRI instance.",
-      "properties": {
-        "enabled": {
-          "type": "boolean",
-          "description": "This determines if the AKRI service is enabled."
-        }
-      },
-      "required": [
-        "enabled"
-      ]
+    "AnonymousMethod": {
+      "type": "string",
+      "description": "x509 Certificate Method",
+      "enum": [
+        "Anonymous"
+      ],
+      "x-ms-enum": {
+        "name": "AnonymousMethod",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Anonymous",
+            "value": "Anonymous",
+            "description": "Anonymous Option"
+          }
+        ]
+      }
     },
     "AuthorizationConfig": {
       "type": "object",
@@ -3572,49 +3564,6 @@
         ]
       }
     },
-    "Components": {
-      "type": "object",
-      "description": "The configuration for components of the AIO Instance.",
-      "properties": {
-        "adr": {
-          "$ref": "#/definitions/AdrProperties",
-          "description": "The properties of the ADR instance."
-        },
-        "akri": {
-          "$ref": "#/definitions/AkriInstanceProperties",
-          "description": "The properties of the AKRI instance."
-        },
-        "connectors": {
-          "$ref": "#/definitions/ConnectorInstanceProperties",
-          "description": "The properties of the connectors instance."
-        },
-        "dataflows": {
-          "$ref": "#/definitions/DataFlowInstanceProperties",
-          "description": "The properties of the dataflows instance."
-        },
-        "mqttbroker": {
-          "$ref": "#/definitions/MqttBrokerInstanceProperties",
-          "description": "The properties of the device provisioning instance."
-        },
-        "schemaregistry": {
-          "$ref": "#/definitions/SchemaRegistryInstanceProperties",
-          "description": "The properties of the device provisioning instance."
-        }
-      }
-    },
-    "ConnectorInstanceProperties": {
-      "type": "object",
-      "description": "The properties of a  Connector instance.",
-      "properties": {
-        "enabled": {
-          "type": "boolean",
-          "description": "This determines if the Connector service is enabled."
-        }
-      },
-      "required": [
-        "enabled"
-      ]
-    },
     "DataExplorerAuthMethod": {
       "$ref": "#/definitions/ManagedIdentityMethod",
       "x-nullable": false
@@ -3660,26 +3609,13 @@
           "$ref": "#/definitions/DataflowEndpointAuthenticationSasl",
           "description": "SASL authentication."
         },
-        "x509Settings": {
+        "x509CertificateSettings": {
           "$ref": "#/definitions/DataflowEndpointAuthenticationX509",
           "description": "X.509 certificate authentication."
         }
       },
       "required": [
         "method"
-      ]
-    },
-    "DataFlowInstanceProperties": {
-      "type": "object",
-      "description": "The properties of an DataFlow instance.",
-      "properties": {
-        "enabled": {
-          "type": "boolean",
-          "description": "This determines if the DataFlow service is enabled."
-        }
-      },
-      "required": [
-        "enabled"
       ]
     },
     "DataLakeStorageAuthMethod": {
@@ -4368,6 +4304,7 @@
         }
       },
       "required": [
+        "authentication",
         "tls"
       ]
     },
@@ -4645,7 +4582,10 @@
           "$ref": "#/definitions/CloudEventMappingType",
           "description": "Cloud event mapping config."
         }
-      }
+      },
+      "required": [
+        "authentication"
+      ]
     },
     "DataflowEndpointMqttAuthentication": {
       "type": "object",
@@ -4667,7 +4607,7 @@
           "$ref": "#/definitions/DataflowEndpointAuthenticationServiceAccountToken",
           "description": "Kubernetes service account token authentication. Default audience if not set is aio-mq-internal"
         },
-        "x509Settings": {
+        "x509CertificateSettings": {
           "$ref": "#/definitions/DataflowEndpointAuthenticationX509",
           "description": "X.509 certificate authentication."
         }
@@ -5249,7 +5189,7 @@
     },
     "InstanceProperties": {
       "type": "object",
-      "description": "The properties of the Instance resource.",
+      "description": "The properties of a Instance resource.",
       "properties": {
         "description": {
           "type": "string",
@@ -5273,16 +5213,11 @@
         "serviceAccounts": {
           "type": "array",
           "description": "The service accounts to be used for federated credentials.",
-          "default": [],
           "items": {
             "$ref": "#/definitions/ServiceAccountProperties"
           },
           "readOnly": true,
           "x-ms-identifiers": []
-        },
-        "components": {
-          "$ref": "#/definitions/Components",
-          "description": "The configuration for components of the AIO Instance."
         }
       },
       "required": [
@@ -5390,7 +5325,7 @@
           {
             "name": "Anonymous",
             "value": "Anonymous",
-            "description": "Anonymous Option."
+            "description": "Anonymous Option"
           }
         ]
       }
@@ -5627,23 +5562,10 @@
           {
             "name": "Anonymous",
             "value": "Anonymous",
-            "description": "Anonymous Option."
+            "description": "Anonymous Option"
           }
         ]
       }
-    },
-    "MqttBrokerInstanceProperties": {
-      "type": "object",
-      "description": "The properties of an MQTT Broker instance.",
-      "properties": {
-        "enabled": {
-          "type": "boolean",
-          "description": "This determines if the MQTT Broker service is enabled."
-        }
-      },
-      "required": [
-        "enabled"
-      ]
     },
     "MqttRetainType": {
       "type": "string",
@@ -6030,19 +5952,6 @@
           }
         ]
       }
-    },
-    "SchemaRegistryInstanceProperties": {
-      "type": "object",
-      "description": "The properties of a Schema Registry instance.",
-      "properties": {
-        "enabled": {
-          "type": "boolean",
-          "description": "This determines if the Schema Registry service is enabled."
-        }
-      },
-      "required": [
-        "enabled"
-      ]
     },
     "SelfCheck": {
       "type": "object",
