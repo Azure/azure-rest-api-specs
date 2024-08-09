@@ -35,7 +35,12 @@ model InstanceResource is TrackedResource<InstanceProperties> {
 @doc("The Instance patch model.")
 model InstancePatchModel {
   ...Azure.ResourceManager.Foundations.ArmTagsProperty;
-  ...ManagedServiceIdentityProperty;
+  
+  // Ideally we should spread the ManagedServiceIdentityProperty here, but 
+  // the generated schema defines this as a new definition which the ARM
+  // specs don't like very much.
+  @doc("The managed service identities assigned to this resource.")
+  identity?: InstanceResource.identity;
 }
 
 @doc("The properties of the Instance resource.")
