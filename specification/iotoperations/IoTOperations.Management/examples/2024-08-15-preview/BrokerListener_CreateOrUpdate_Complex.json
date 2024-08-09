@@ -14,18 +14,18 @@
         "ports": [
           {
             "port": 8080,
-            "authenticationRef": "test-authentication",
+            "authenticationRef": "example-authentication",
             "protocol": "WebSockets"
           },
           {
             "port": 8443,
-            "authenticationRef": "test-authentication",
+            "authenticationRef": "example-authentication",
             "protocol": "WebSockets",
             "tls": {
               "mode": "Automatic",
               "certManagerCertificateSpec": {
                 "issuerRef": {
-                  "name": "test-cert-issuer",
+                  "name": "example-issuer",
                   "kind": "Issuer"
                 }
               }
@@ -33,18 +33,15 @@
           },
           {
             "port": 1883,
-            "authenticationRef": "test-authentication"
+            "authenticationRef": "example-authentication"
           },
           {
             "port": 8883,
-            "authenticationRef": "test-authentication",
+            "authenticationRef": "example-authentication",
             "tls": {
-              "mode": "Automatic",
-              "certManagerCertificateSpec": {
-                "issuerRef": {
-                  "name": "test-cert-issuer",
-                  "kind": "Issuer"
-                }
+              "mode": "Manual",
+              "manual": {
+                "secretRef": "example-secret"
               }
             }
           }
