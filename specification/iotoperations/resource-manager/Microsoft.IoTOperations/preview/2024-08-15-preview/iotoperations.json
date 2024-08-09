@@ -2538,6 +2538,24 @@
         }
       }
     },
+    "AnonymousMethod": {
+      "type": "string",
+      "description": "x509 Certificate Method",
+      "enum": [
+        "Anonymous"
+      ],
+      "x-ms-enum": {
+        "name": "AnonymousMethod",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Anonymous",
+            "value": "Anonymous",
+            "description": "Anonymous Option"
+          }
+        ]
+      }
+    },
     "AuthorizationConfig": {
       "type": "object",
       "description": "Broker AuthorizationConfig properties",
@@ -3591,7 +3609,7 @@
           "$ref": "#/definitions/DataflowEndpointAuthenticationSasl",
           "description": "SASL authentication."
         },
-        "x509Settings": {
+        "x509CertificateSettings": {
           "$ref": "#/definitions/DataflowEndpointAuthenticationX509",
           "description": "X.509 certificate authentication."
         }
@@ -4286,6 +4304,7 @@
         }
       },
       "required": [
+        "authentication",
         "tls"
       ]
     },
@@ -4563,7 +4582,10 @@
           "$ref": "#/definitions/CloudEventMappingType",
           "description": "Cloud event mapping config."
         }
-      }
+      },
+      "required": [
+        "authentication"
+      ]
     },
     "DataflowEndpointMqttAuthentication": {
       "type": "object",
@@ -4585,7 +4607,7 @@
           "$ref": "#/definitions/DataflowEndpointAuthenticationServiceAccountToken",
           "description": "Kubernetes service account token authentication. Default audience if not set is aio-mq-internal"
         },
-        "x509Settings": {
+        "x509CertificateSettings": {
           "$ref": "#/definitions/DataflowEndpointAuthenticationX509",
           "description": "X.509 certificate authentication."
         }
@@ -5303,7 +5325,7 @@
           {
             "name": "Anonymous",
             "value": "Anonymous",
-            "description": "Anonymous Option."
+            "description": "Anonymous Option"
           }
         ]
       }
@@ -5540,7 +5562,7 @@
           {
             "name": "Anonymous",
             "value": "Anonymous",
-            "description": "Anonymous Option."
+            "description": "Anonymous Option"
           }
         ]
       }
