@@ -35,6 +35,15 @@ modelerfour:
   flatten-models: false
 ```
 
+### Tag: package-preview-2024-07
+
+These settings apply only when `--tag=package-preview-2024-07` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2024-07'
+input-file:
+  - Microsoft.DevOpsInfrastructure/preview/2024-07-03-preview/devopsinfrastructure.json
+```
+
 ### Tag: package-preview-2024-04
 
 These settings apply only when `--tag=package-preview-2024-04` is specified on the command line.
@@ -43,6 +52,7 @@ These settings apply only when `--tag=package-preview-2024-04` is specified on t
 input-file:
   - Microsoft.DevOpsInfrastructure/preview/2024-04-04-preview/devopsinfrastructure.json
 ```
+
 ### Tag: package-preview-2024-03
 
 These settings apply only when `--tag=package-preview-2024-03` is specified on the command line.

@@ -21,10 +21,10 @@ namespace Microsoft.DevOpsInfrastructure;
 
 /** Api versions */
 enum Versions {
-  /** 2024-04-04-preview preview version */
+  /** 2024-07-03-preview preview version */
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @useDependency(Azure.Core.Versions.v1_0_Preview_2)
-  `2024-04-04-preview`,
+  `2024-07-03-preview`,
 }
 
 model Pool is TrackedResource<PoolProperties> {
@@ -415,6 +415,10 @@ interface Pools {
   delete is ArmResourceDeleteWithoutOkAsync<Pool>;
   listByResourceGroup is ArmResourceListByParent<Pool>;
   listBySubscription is ArmListBySubscription<Pool>;
+
+  @doc("Get the usage for a pool for the previous week")
+  @action("usage")
+  getUsage is ArmResourceActionSync<Pool, void, Record<int32>[]>;
 }
 
 @parentResource(Pool)
