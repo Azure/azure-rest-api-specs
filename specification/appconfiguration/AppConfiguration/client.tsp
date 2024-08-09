@@ -7,3 +7,5 @@ using AzureAppConfiguration;
 namespace SdkCustomizations;
 
 @@clientName(Error, "AppConfigError", "python");
+@@access(putKeyValue, Access.internal, "python");
+@@access(updateSnapshot, Access.internal, "python");
