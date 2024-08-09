@@ -54,6 +54,13 @@ directive:
       - hciCommon.json
 
     reason: Microsoft.AzureStackHCI is the correct name for our RP.
+  - from: edgeDevices.json
+    where: $.definitions
+    transform: >
+      $.HostNetwork.properties.intents.items['$ref'] = "./deploymentSettings.json#/definitions/Intents";
+      $.HciNetworkProfile.properties.hostNetwork['$ref'] = "./deploymentSettings.json#/definitions/HostNetwork";
+      $.ErrorDetail['x-ms-client-name'] = 'HciValidationFailureDetail';
+      $.Extension['x-ms-client-name'] = 'HciEdgeDeviceArcExtension';
 suppressions:
   - code: PathResourceProviderNamePascalCase
     reason: Microsoft.AzureStackHCI was chosen over Microsoft.AzureStackHci or Microsoft.AzureStackHyperConvergedInfrastructure
