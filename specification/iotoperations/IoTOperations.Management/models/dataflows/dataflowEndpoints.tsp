@@ -241,7 +241,7 @@ model DataFlowEndpointKafkaAuthentication {
   saslSettings?: DataflowEndpointAuthenticationSasl;
 
   @doc("X.509 certificate authentication.")
-  x509Settings?: DataflowEndpointAuthenticationX509;
+  x509CertificateSettings?: DataflowEndpointAuthenticationX509;
 }
 
 @doc("DataflowEndpoint Kafka Authentication Method properties")
@@ -379,7 +379,7 @@ model DataflowEndpointMqttAuthentication {
   serviceAccountTokenSettings?: DataflowEndpointAuthenticationServiceAccountToken;
 
   @doc("X.509 certificate authentication.")
-  x509Settings?: DataflowEndpointAuthenticationX509;
+  x509CertificateSettings?: DataflowEndpointAuthenticationX509;
 }
 
 @doc("DataflowEndpoint Mqtt Authentication Method properties")
