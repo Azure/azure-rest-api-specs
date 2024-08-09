@@ -2299,14 +2299,6 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "name",
-            "in": "path",
-            "description": "The name of the key-value snapshot to create.",
-            "required": true,
-            "type": "string",
-            "maxLength": 256
-          },
-          {
             "name": "Sync-Token",
             "in": "header",
             "description": "Used to guarantee real-time consistency between requests.",
@@ -2315,12 +2307,20 @@
             "x-ms-client-name": "syncToken"
           },
           {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the snapshot.",
+            "required": true,
+            "type": "string",
+            "maxLength": 256
+          },
+          {
             "name": "entity",
             "in": "body",
             "description": "The key-value snapshot to create.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Snapshot"
+              "$ref": "#/definitions/SnapshotCreateOrUpdate"
             }
           }
         ],
@@ -2945,7 +2945,8 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "The name of the snapshot."
+          "description": "The name of the snapshot.",
+          "maxLength": 256
         },
         "status": {
           "$ref": "#/definitions/SnapshotStatus",
@@ -3015,6 +3016,45 @@
       },
       "required": [
         "name",
+        "filters"
+      ]
+    },
+    "SnapshotCreateOrUpdate": {
+      "type": "object",
+      "description": "A snapshot is a named, immutable subset of an App Configuration store's key-values.",
+      "properties": {
+        "filters": {
+          "type": "array",
+          "description": "A list of filters used to filter the key-values included in the snapshot.",
+          "minItems": 1,
+          "maxItems": 3,
+          "items": {
+            "$ref": "#/definitions/KeyValueFilter"
+          },
+          "x-ms-identifiers": []
+        },
+        "composition_type": {
+          "$ref": "#/definitions/CompositionType",
+          "description": "The composition type describes how the key-values within the snapshot are\ncomposed. The 'key' composition type ensures there are no two key-values\ncontaining the same key. The 'key_label' composition type ensures there are no\ntwo key-values containing the same key and label.",
+          "x-ms-client-name": "compositionType"
+        },
+        "retention_period": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The amount of time, in seconds, that a snapshot will remain in the archived\nstate before expiring. This property is only writable during the creation of a\nsnapshot. If not specified, the default lifetime of key-value revisions will be\nused.",
+          "minimum": 3600,
+          "maximum": 7776000,
+          "x-ms-client-name": "retentionPeriod"
+        },
+        "tags": {
+          "type": "object",
+          "description": "The tags of the snapshot.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
         "filters"
       ]
     },

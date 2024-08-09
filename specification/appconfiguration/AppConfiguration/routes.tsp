@@ -587,15 +587,10 @@ op createSnapshot is Foundations.LongRunningOperation<
     @header("Content-Type")
     contentTypeHeader: "application/vnd.microsoft.appconfig.snapshot+json" | "application/json";
 
-    @doc("The name of the key-value snapshot to create.")
-    @maxLength(256)
-    @path
-    name: string;
-
     ...syncTokenHeader;
 
     @doc("The key-value snapshot to create.")
-    @body
+    @bodyRoot
     entity: Snapshot;
   },
   CreatedResponse &
