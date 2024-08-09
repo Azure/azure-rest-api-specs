@@ -1312,7 +1312,7 @@
           {
             "name": "volumeId",
             "in": "path",
-            "description": "The name of the AvsStorageContainerVolume",
+            "description": "Id of Storage Container Volume.",
             "required": true,
             "type": "string",
             "pattern": "^[a-fA-F0-9\\-]{1,64}$"
@@ -1378,7 +1378,7 @@
           {
             "name": "volumeId",
             "in": "path",
-            "description": "The name of the AvsStorageContainerVolume",
+            "description": "Id of Storage Container Volume.",
             "required": true,
             "type": "string",
             "pattern": "^[a-fA-F0-9\\-]{1,64}$"
@@ -1468,7 +1468,7 @@
           {
             "name": "volumeId",
             "in": "path",
-            "description": "The name of the AvsStorageContainerVolume",
+            "description": "Id of Storage Container Volume.",
             "required": true,
             "type": "string",
             "pattern": "^[a-fA-F0-9\\-]{1,64}$"
@@ -1595,7 +1595,7 @@
           {
             "name": "avsVmId",
             "in": "path",
-            "description": "The name of the AvsVm",
+            "description": "Id of AVS VM.",
             "required": true,
             "type": "string",
             "pattern": "^[a-fA-F0-9\\-]{1,64}$"
@@ -1650,7 +1650,7 @@
           {
             "name": "avsVmId",
             "in": "path",
-            "description": "The name of the AvsVm",
+            "description": "Id of AVS VM.",
             "required": true,
             "type": "string",
             "pattern": "^[a-fA-F0-9\\-]{1,64}$"
@@ -1732,7 +1732,7 @@
           {
             "name": "avsVmId",
             "in": "path",
-            "description": "The name of the AvsVm",
+            "description": "Id of AVS VM.",
             "required": true,
             "type": "string",
             "pattern": "^[a-fA-F0-9\\-]{1,64}$"
@@ -1804,7 +1804,7 @@
           {
             "name": "avsVmId",
             "in": "path",
-            "description": "The name of the AvsVm",
+            "description": "Id of AVS VM.",
             "required": true,
             "type": "string",
             "pattern": "^[a-fA-F0-9\\-]{1,64}$"
@@ -1864,7 +1864,7 @@
           {
             "name": "avsVmId",
             "in": "path",
-            "description": "The name of the AvsVm",
+            "description": "Id of AVS VM.",
             "required": true,
             "type": "string",
             "pattern": "^[a-fA-F0-9\\-]{1,64}$"
@@ -1872,7 +1872,7 @@
           {
             "name": "volumeId",
             "in": "path",
-            "description": "The name of the AvsVmVolume",
+            "description": "Id of AVS VM Volume.",
             "required": true,
             "type": "string",
             "pattern": "^[a-fA-F0-9\\-]{1,64}$"
@@ -1930,7 +1930,7 @@
           {
             "name": "avsVmId",
             "in": "path",
-            "description": "The name of the AvsVm",
+            "description": "Id of AVS VM.",
             "required": true,
             "type": "string",
             "pattern": "^[a-fA-F0-9\\-]{1,64}$"
@@ -1938,7 +1938,7 @@
           {
             "name": "volumeId",
             "in": "path",
-            "description": "The name of the AvsVmVolume",
+            "description": "Id of AVS VM Volume.",
             "required": true,
             "type": "string",
             "pattern": "^[a-fA-F0-9\\-]{1,64}$"
@@ -2020,7 +2020,7 @@
           {
             "name": "avsVmId",
             "in": "path",
-            "description": "The name of the AvsVm",
+            "description": "Id of AVS VM.",
             "required": true,
             "type": "string",
             "pattern": "^[a-fA-F0-9\\-]{1,64}$"
@@ -2028,7 +2028,7 @@
           {
             "name": "volumeId",
             "in": "path",
-            "description": "The name of the AvsVmVolume",
+            "description": "Id of AVS VM Volume.",
             "required": true,
             "type": "string",
             "pattern": "^[a-fA-F0-9\\-]{1,64}$"
@@ -2815,10 +2815,7 @@
             "create"
           ]
         }
-      },
-      "required": [
-        "storageName"
-      ]
+      }
     },
     "AvsStorageContainerUpdate": {
       "type": "object",
@@ -2826,6 +2823,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/AvsStorageContainerUpdateProperties",
+          "description": "The resource-specific properties for this resource.",
           "x-ms-client-flatten": true
         }
       }
@@ -2889,6 +2887,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/AvsStorageContainerVolumeUpdateProperties",
+          "description": "The resource-specific properties for this resource.",
           "x-ms-client-flatten": true
         }
       }
@@ -3032,6 +3031,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/AvsVmUpdateProperties",
+          "description": "The resource-specific properties for this resource.",
           "x-ms-client-flatten": true
         }
       }
@@ -3093,6 +3093,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/AvsVmVolumeUpdateProperties",
+          "description": "The resource-specific properties for this resource.",
           "x-ms-client-flatten": true
         }
       }
@@ -3686,6 +3687,7 @@
         },
         "properties": {
           "$ref": "#/definitions/ReservationUpdateProperties",
+          "description": "The resource-specific properties for this resource.",
           "x-ms-client-flatten": true
         }
       }
@@ -3819,7 +3821,7 @@
       "properties": {
         "vSphereIp": {
           "type": "string",
-          "description": "Storage Pool Vsphere id"
+          "description": "Storage Pool Vsphere IP"
         },
         "vSphereCertThumbprint": {
           "type": "string",
@@ -3962,6 +3964,7 @@
         },
         "properties": {
           "$ref": "#/definitions/StoragePoolUpdateProperties",
+          "description": "The resource-specific properties for this resource.",
           "x-ms-client-flatten": true
         }
       }

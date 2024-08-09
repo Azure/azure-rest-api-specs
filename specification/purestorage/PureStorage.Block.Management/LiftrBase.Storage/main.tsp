@@ -47,7 +47,13 @@ interface Reservations<
 > {
   get is ArmResourceRead<TReservation>;
   create is ArmResourceCreateOrUpdateAsync<TReservation>;
-  update is ArmResourcePatchAsync<TReservation, TReservationProperties>;
+  update is ArmCustomPatchAsync<
+    TReservation,
+    Azure.ResourceManager.Foundations.ResourceUpdateModel<
+      TReservation,
+      TReservationProperties
+    >
+  >;
   delete is ArmResourceDeleteWithoutOkAsync<TReservation>;
   listByResourceGroup is ArmResourceListByParent<TReservation>;
   listBySubscription is ArmListBySubscription<TReservation>;

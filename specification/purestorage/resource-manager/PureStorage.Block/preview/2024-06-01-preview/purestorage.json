@@ -1387,7 +1387,7 @@
           {
             "name": "volumeId",
             "in": "path",
-            "description": "The name of the AvsStorageContainerVolume",
+            "description": "Id of Storage Container Volume.",
             "required": true,
             "type": "string",
             "pattern": "^[a-fA-F0-9\\-]{1,64}$"
@@ -1453,7 +1453,7 @@
           {
             "name": "volumeId",
             "in": "path",
-            "description": "The name of the AvsStorageContainerVolume",
+            "description": "Id of Storage Container Volume.",
             "required": true,
             "type": "string",
             "pattern": "^[a-fA-F0-9\\-]{1,64}$"
@@ -1543,7 +1543,7 @@
           {
             "name": "volumeId",
             "in": "path",
-            "description": "The name of the AvsStorageContainerVolume",
+            "description": "Id of Storage Container Volume.",
             "required": true,
             "type": "string",
             "pattern": "^[a-fA-F0-9\\-]{1,64}$"
@@ -1670,7 +1670,7 @@
           {
             "name": "avsVmId",
             "in": "path",
-            "description": "The name of the AvsVm",
+            "description": "Id of AVS VM.",
             "required": true,
             "type": "string",
             "pattern": "^[a-fA-F0-9\\-]{1,64}$"
@@ -1725,7 +1725,7 @@
           {
             "name": "avsVmId",
             "in": "path",
-            "description": "The name of the AvsVm",
+            "description": "Id of AVS VM.",
             "required": true,
             "type": "string",
             "pattern": "^[a-fA-F0-9\\-]{1,64}$"
@@ -1807,7 +1807,7 @@
           {
             "name": "avsVmId",
             "in": "path",
-            "description": "The name of the AvsVm",
+            "description": "Id of AVS VM.",
             "required": true,
             "type": "string",
             "pattern": "^[a-fA-F0-9\\-]{1,64}$"
@@ -1879,7 +1879,7 @@
           {
             "name": "avsVmId",
             "in": "path",
-            "description": "The name of the AvsVm",
+            "description": "Id of AVS VM.",
             "required": true,
             "type": "string",
             "pattern": "^[a-fA-F0-9\\-]{1,64}$"
@@ -1939,7 +1939,7 @@
           {
             "name": "avsVmId",
             "in": "path",
-            "description": "The name of the AvsVm",
+            "description": "Id of AVS VM.",
             "required": true,
             "type": "string",
             "pattern": "^[a-fA-F0-9\\-]{1,64}$"
@@ -1947,7 +1947,7 @@
           {
             "name": "volumeId",
             "in": "path",
-            "description": "The name of the AvsVmVolume",
+            "description": "Id of AVS VM Volume.",
             "required": true,
             "type": "string",
             "pattern": "^[a-fA-F0-9\\-]{1,64}$"
@@ -2005,7 +2005,7 @@
           {
             "name": "avsVmId",
             "in": "path",
-            "description": "The name of the AvsVm",
+            "description": "Id of AVS VM.",
             "required": true,
             "type": "string",
             "pattern": "^[a-fA-F0-9\\-]{1,64}$"
@@ -2013,7 +2013,7 @@
           {
             "name": "volumeId",
             "in": "path",
-            "description": "The name of the AvsVmVolume",
+            "description": "Id of AVS VM Volume.",
             "required": true,
             "type": "string",
             "pattern": "^[a-fA-F0-9\\-]{1,64}$"
@@ -2095,7 +2095,7 @@
           {
             "name": "avsVmId",
             "in": "path",
-            "description": "The name of the AvsVm",
+            "description": "Id of AVS VM.",
             "required": true,
             "type": "string",
             "pattern": "^[a-fA-F0-9\\-]{1,64}$"
@@ -2103,7 +2103,7 @@
           {
             "name": "volumeId",
             "in": "path",
-            "description": "The name of the AvsVmVolume",
+            "description": "Id of AVS VM Volume.",
             "required": true,
             "type": "string",
             "pattern": "^[a-fA-F0-9\\-]{1,64}$"
@@ -2206,6 +2206,67 @@
         "x-ms-examples": {
           "StoragePools_DisableAvs": {
             "$ref": "./examples/StoragePools_DisableAvs_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/PureStorage.Block/storagePools/{storagePoolName}/disableAvsConnection": {
+      "post": {
+        "operationId": "StoragePools_DisableAvsConnection",
+        "tags": [
+          "StoragePools"
+        ],
+        "description": "Disables the AVS connection support for a specific Storage Pool",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "storagePoolName",
+            "in": "path",
+            "description": "Name of the Storage Pool.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 127,
+            "pattern": "^[a-zA-Z0-9\\-_]{1,127}$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource Operation accepted",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-long-running-operation-options": {
@@ -2347,6 +2408,76 @@
         "x-ms-examples": {
           "StoragePools_EnableAvs": {
             "$ref": "./examples/StoragePools_EnableAvs_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/PureStorage.Block/storagePools/{storagePoolName}/enableAvsConnection": {
+      "post": {
+        "operationId": "StoragePools_EnableAvsConnection",
+        "tags": [
+          "StoragePools"
+        ],
+        "description": "Enables the AVS connection support for a specific Storage Pool",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "storagePoolName",
+            "in": "path",
+            "description": "Name of the Storage Pool.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 127,
+            "pattern": "^[a-zA-Z0-9\\-_]{1,127}$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "Storage pool enable Avs connection properties",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/StoragePoolEnableAvsConnectionPost"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource Operation accepted",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-long-running-operation-options": {
@@ -2499,6 +2630,164 @@
         "x-ms-long-running-operation": true
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/PureStorage.Block/storagePools/{storagePoolName}/finalizeAvsConnection": {
+      "post": {
+        "operationId": "StoragePools_FinalizeAvsConnection",
+        "tags": [
+          "StoragePools"
+        ],
+        "description": "Finalize the AVS connection for a specific Storage Pool",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "storagePoolName",
+            "in": "path",
+            "description": "Name of the Storage Pool.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 127,
+            "pattern": "^[a-zA-Z0-9\\-_]{1,127}$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "Storage pool finalize Avs connection properties",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/StoragePoolFinalizeAvsConnectionPost"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource Operation accepted",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/PureStorage.Block/storagePools/{storagePoolName}/getAvsConnection": {
+      "post": {
+        "operationId": "StoragePools_GetAvsConnection",
+        "tags": [
+          "StoragePools"
+        ],
+        "description": "Returns the information about the on-going connection of the storage pool to AVS",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "storagePoolName",
+            "in": "path",
+            "description": "Name of the Storage Pool.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 127,
+            "pattern": "^[a-zA-Z0-9\\-_]{1,127}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AvsConnection"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/PureStorage.Block/storagePools/{storagePoolName}/getAvsConnectionStatus": {
+      "post": {
+        "operationId": "StoragePools_GetAvsConnectionStatus",
+        "tags": [
+          "StoragePools"
+        ],
+        "description": "Returns the status of the storage pool connection to AVS",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "storagePoolName",
+            "in": "path",
+            "description": "Name of the Storage Pool.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 127,
+            "pattern": "^[a-zA-Z0-9\\-_]{1,127}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AvsConnectionStatus"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/PureStorage.Block/storagePools/{storagePoolName}/getAvsParameters": {
       "post": {
         "operationId": "StoragePools_GetAvsParameters",
@@ -2598,6 +2887,67 @@
             "$ref": "./examples/StoragePools_GetHealthStatus_MaximumSet_Gen.json"
           }
         }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/PureStorage.Block/storagePools/{storagePoolName}/repairAvsConnection": {
+      "post": {
+        "operationId": "StoragePools_RepairAvsConnection",
+        "tags": [
+          "StoragePools"
+        ],
+        "description": "Make sure that all steps necessary to enable this storage pool to be connected to the AVS instance are fully working, and fix them if not",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "storagePoolName",
+            "in": "path",
+            "description": "Name of the Storage Pool.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 127,
+            "pattern": "^[a-zA-Z0-9\\-_]{1,127}$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource Operation accepted",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/PureStorage.Block/storagePools/{storagePoolName}/upgradeVspherePlugin": {
@@ -2746,6 +3096,49 @@
         "vasaIscsiEndpoints"
       ]
     },
+    "AvsConnection": {
+      "type": "object",
+      "description": "Information about the connection of the storage pool to AVS",
+      "properties": {
+        "serviceInitializationCompleted": {
+          "type": "boolean",
+          "description": "Indicates whether service initialization is complete"
+        },
+        "serviceInitializationHandleEnc": {
+          "type": "string",
+          "description": "Encoded service account credentials alongside connection information, encrypted with the ephemeral public key"
+        },
+        "serviceInitializationHandle": {
+          "$ref": "#/definitions/ServiceInitializationHandle",
+          "description": "Explicit service account credentials"
+        }
+      },
+      "required": [
+        "serviceInitializationCompleted"
+      ]
+    },
+    "AvsConnectionStatus": {
+      "type": "object",
+      "description": "The status of the storage pool connection to AVS",
+      "properties": {
+        "avsEnabled": {
+          "type": "boolean",
+          "description": "If true, a sequence of enable/finalize has been completed successfully, and disable hasn't been called successfully since."
+        },
+        "currentConnectionStatus": {
+          "type": "string",
+          "description": "Human-readable current connection status"
+        },
+        "sddcResourceId": {
+          "type": "string",
+          "description": "Resource id pointing at the AVS SDDC the pool is configured with"
+        }
+      },
+      "required": [
+        "avsEnabled",
+        "currentConnectionStatus"
+      ]
+    },
     "AvsDetails": {
       "type": "object",
       "description": "AVS (Azure VMware Solution) related properties.",
@@ -2875,6 +3268,12 @@
           "pattern": "^[a-zA-Z][a-zA-Z0-9\\-]{0,62}[a-zA-Z0-9]$",
           "readOnly": true
         },
+        "resourceName": {
+          "type": "string",
+          "description": "Name of the storage container.",
+          "pattern": "^[a-zA-Z][a-zA-Z0-9\\-]{0,62}[a-zA-Z0-9]$",
+          "readOnly": true
+        },
         "provisioningState": {
           "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
           "description": "Provisioning state of the resource.",
@@ -2892,7 +3291,7 @@
         }
       },
       "required": [
-        "storageName"
+        "resourceName"
       ]
     },
     "AvsStorageContainerUpdate": {
@@ -2901,6 +3300,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/AvsStorageContainerUpdateProperties",
+          "description": "The resource-specific properties for this resource.",
           "x-ms-client-flatten": true
         }
       }
@@ -2964,6 +3364,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/AvsStorageContainerVolumeUpdateProperties",
+          "description": "The resource-specific properties for this resource.",
           "x-ms-client-flatten": true
         }
       }
@@ -3107,6 +3508,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/AvsVmUpdateProperties",
+          "description": "The resource-specific properties for this resource.",
           "x-ms-client-flatten": true
         }
       }
@@ -3168,6 +3570,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/AvsVmVolumeUpdateProperties",
+          "description": "The resource-specific properties for this resource.",
           "x-ms-client-flatten": true
         }
       }
@@ -3302,6 +3705,11 @@
           "type": "number",
           "format": "double",
           "description": "Data reduction ratio achieved on this pool"
+        },
+        "estimatedMaxCapacity": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The estimated maximum capacity of the pool. Measured in bytes."
         }
       },
       "required": [
@@ -3309,7 +3717,8 @@
         "bandwidthUsage",
         "iopsUsage",
         "space",
-        "dataReductionRatio"
+        "dataReductionRatio",
+        "estimatedMaxCapacity"
       ]
     },
     "HealthResponse": {
@@ -3774,6 +4183,7 @@
         },
         "properties": {
           "$ref": "#/definitions/ReservationUpdateProperties",
+          "description": "The resource-specific properties for this resource.",
           "x-ms-client-flatten": true
         }
       }
@@ -3785,6 +4195,44 @@
         "user": {
           "$ref": "#/definitions/UserDetailsUpdate",
           "description": "Details of the user."
+        }
+      }
+    },
+    "ServiceInitializationData": {
+      "type": "object",
+      "description": "Explicit service account credentials",
+      "properties": {
+        "serviceAccountUsername": {
+          "type": "string",
+          "description": "Service account username"
+        },
+        "serviceAccountPassword": {
+          "type": "string",
+          "format": "password",
+          "description": "Service account password",
+          "x-ms-secret": true
+        },
+        "vSphereIp": {
+          "type": "string",
+          "description": "Storage Pool Vsphere IP"
+        },
+        "vSphereCertificate": {
+          "type": "string",
+          "description": "Storage Pool Vsphere Certificate"
+        }
+      }
+    },
+    "ServiceInitializationHandle": {
+      "type": "object",
+      "description": "Explicit service initialization payload, with no encoding or signing; may be null if completed is true, or if serviceInitializationHandleEnc is not null",
+      "properties": {
+        "sddcResourceId": {
+          "type": "string",
+          "description": "Resource id pointing at the AVS SDDC the pool is configured with."
+        },
+        "serviceAccountUsername": {
+          "type": "string",
+          "description": "Service account username"
         }
       }
     },
@@ -3901,13 +4349,26 @@
         "vasaProviderPassword"
       ]
     },
+    "StoragePoolEnableAvsConnectionPost": {
+      "type": "object",
+      "description": "Storage Pool enable AVS Connection",
+      "properties": {
+        "sddcResourceId": {
+          "type": "string",
+          "description": "Resource id pointing at the AVS SDDC the pool is configured with."
+        }
+      },
+      "required": [
+        "sddcResourceId"
+      ]
+    },
     "StoragePoolEnableVspherePlugin": {
       "type": "object",
       "description": "Storage Pool enable VSphere plugins",
       "properties": {
         "vSphereIp": {
           "type": "string",
-          "description": "Storage Pool Vsphere id"
+          "description": "Storage Pool Vsphere IP"
         },
         "vSphereCertThumbprint": {
           "type": "string",
@@ -3917,6 +4378,20 @@
       "required": [
         "vSphereIp"
       ]
+    },
+    "StoragePoolFinalizeAvsConnectionPost": {
+      "type": "object",
+      "description": "Storage Pool finalize AVS Connection",
+      "properties": {
+        "serviceInitializationDataEnc": {
+          "type": "string",
+          "description": "Encoded service account credentials alongside connection information, encrypted with the ephemeral public key"
+        },
+        "serviceInitializationData": {
+          "$ref": "#/definitions/ServiceInitializationData",
+          "description": "Explicit service account credentials"
+        }
+      }
     },
     "StoragePoolLimits": {
       "type": "object",
@@ -4050,6 +4525,7 @@
         },
         "properties": {
           "$ref": "#/definitions/StoragePoolUpdateProperties",
+          "description": "The resource-specific properties for this resource.",
           "x-ms-client-flatten": true
         }
       }

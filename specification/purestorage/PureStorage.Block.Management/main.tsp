@@ -152,7 +152,13 @@ model AzureVmwareService {
 interface StoragePools {
   get is ArmResourceRead<StoragePool>;
   create is ArmResourceCreateOrUpdateAsync<StoragePool>;
-  update is ArmResourcePatchAsync<StoragePool, StoragePoolProperties>;
+  update is ArmCustomPatchAsync<
+    StoragePool,
+    Azure.ResourceManager.Foundations.ResourceUpdateModel<
+      StoragePool,
+      StoragePoolProperties
+    >
+  >;
   delete is ArmResourceDeleteWithoutOkAsync<StoragePool>;
   listByResourceGroup is ArmResourceListByParent<StoragePool>;
   listBySubscription is ArmListBySubscription<StoragePool>;
@@ -172,6 +178,24 @@ interface StoragePools {
   getAvsParameters(
     ...ResourceInstanceParameters<StoragePool>,
   ): ArmResponse<AvsDetails> | ErrorResponse;
+
+  @added(Versions.v2_preview)
+  @doc("Returns the information about the on-going connection of the storage pool to AVS")
+  @armResourceAction(StoragePool)
+  @action("getAvsConnection")
+  @post
+  getAvsConnection(
+    ...ResourceInstanceParameters<StoragePool>,
+  ): ArmResponse<AvsConnection> | ErrorResponse;
+
+  @added(Versions.v2_preview)
+  @doc("Returns the status of the storage pool connection to AVS")
+  @armResourceAction(StoragePool)
+  @action("getAvsConnectionStatus")
+  @post
+  getAvsConnectionStatus(
+    ...ResourceInstanceParameters<StoragePool>,
+  ): ArmResponse<AvsConnectionStatus> | ErrorResponse;
 
   @doc("Enable AVS on storage pool")
   @armResourceAction(StoragePool)
@@ -195,6 +219,29 @@ interface StoragePools {
     ArmCombinedLroHeaders & Azure.Core.Foundations.RetryAfterHeader
   > | ErrorResponse;
 
+  @added(Versions.v2_preview)
+  @doc("Enables the AVS connection support for a specific Storage Pool")
+  @armResourceAction(StoragePool)
+  @action("enableAvsConnection")
+  @extension("x-ms-long-running-operation", true)
+  @extension(
+    "x-ms-long-running-operation-options",
+    {
+      `final-state-via`: "azure-async-operation",
+    }
+  )
+  @post
+  enableAvsConnection(
+    ...ResourceInstanceParameters<StoragePool>,
+
+    @doc("Storage pool enable Avs connection properties")
+    @body
+    properties: StoragePoolEnableAvsConnectionPost,
+  ): ArmAcceptedLroResponse<
+    "Resource Operation accepted",
+    ArmCombinedLroHeaders & Azure.Core.Foundations.RetryAfterHeader
+  > | ErrorResponse;
+
   @doc("Disable AVS on storage pool")
   @armResourceAction(StoragePool)
   @action("disableAvs")
@@ -213,6 +260,25 @@ interface StoragePools {
     ArmCombinedLroHeaders & Azure.Core.Foundations.RetryAfterHeader
   > | ErrorResponse;
 
+  @added(Versions.v2_preview)
+  @doc("Disables the AVS connection support for a specific Storage Pool")
+  @armResourceAction(StoragePool)
+  @action("disableAvsConnection")
+  @extension("x-ms-long-running-operation", true)
+  @extension(
+    "x-ms-long-running-operation-options",
+    {
+      `final-state-via`: "azure-async-operation",
+    }
+  )
+  @post
+  disableAvsConnection(
+    ...ResourceInstanceParameters<StoragePool>,
+  ): ArmAcceptedLroResponse<
+    "Resource Operation accepted",
+    ArmCombinedLroHeaders & Azure.Core.Foundations.RetryAfterHeader
+  > | ErrorResponse;
+
   @doc("Finalize AVS on storage pool")
   @armResourceAction(StoragePool)
   @action("finalizeAvs")
@@ -225,6 +291,48 @@ interface StoragePools {
   )
   @post
   finalizeAvs(
+    ...ResourceInstanceParameters<StoragePool>,
+  ): ArmAcceptedLroResponse<
+    "Resource Operation accepted",
+    ArmCombinedLroHeaders & Azure.Core.Foundations.RetryAfterHeader
+  > | ErrorResponse;
+
+  @added(Versions.v2_preview)
+  @doc("Finalize the AVS connection for a specific Storage Pool")
+  @armResourceAction(StoragePool)
+  @action("finalizeAvsConnection")
+  @extension("x-ms-long-running-operation", true)
+  @extension(
+    "x-ms-long-running-operation-options",
+    {
+      `final-state-via`: "azure-async-operation",
+    }
+  )
+  @post
+  finalizeAvsConnection(
+    ...ResourceInstanceParameters<StoragePool>,
+
+    @doc("Storage pool finalize Avs connection properties")
+    @body
+    properties: StoragePoolFinalizeAvsConnectionPost,
+  ): ArmAcceptedLroResponse<
+    "Resource Operation accepted",
+    ArmCombinedLroHeaders & Azure.Core.Foundations.RetryAfterHeader
+  > | ErrorResponse;
+
+  @added(Versions.v2_preview)
+  @doc("Make sure that all steps necessary to enable this storage pool to be connected to the AVS instance are fully working, and fix them if not")
+  @armResourceAction(StoragePool)
+  @action("repairAvsConnection")
+  @extension("x-ms-long-running-operation", true)
+  @extension(
+    "x-ms-long-running-operation-options",
+    {
+      `final-state-via`: "azure-async-operation",
+    }
+  )
+  @post
+  repairAvsConnection(
     ...ResourceInstanceParameters<StoragePool>,
   ): ArmAcceptedLroResponse<
     "Resource Operation accepted",
@@ -454,6 +562,10 @@ model HealthDetails {
 
   @doc("Data reduction ratio achieved on this pool")
   dataReductionRatio: float64;
+
+  @added(Versions.v2_preview)
+  @doc("The estimated maximum capacity of the pool. Measured in bytes.")
+  estimatedMaxCapacity: int64;
 }
 
 @doc("Bandwidth usage metrics reported for a given resource.")
@@ -513,9 +625,79 @@ model StoragePoolEnableAvs {
   vasaProviderPassword: string;
 }
 
+@added(Versions.v2_preview)
+@doc("Explicit service initialization payload, with no encoding or signing; may be null if completed is true, or if serviceInitializationHandleEnc is not null")
+model ServiceInitializationHandle {
+  @doc("Resource id pointing at the AVS SDDC the pool is configured with.")
+  sddcResourceId?: string;
+
+  @doc("Service account username")
+  serviceAccountUsername?: string;
+}
+
+@added(Versions.v2_preview)
+@doc("Information about the connection of the storage pool to AVS")
+model AvsConnection {
+  @doc("Indicates whether service initialization is complete")
+  serviceInitializationCompleted: boolean;
+
+  @doc("Encoded service account credentials alongside connection information, encrypted with the ephemeral public key")
+  serviceInitializationHandleEnc?: string;
+
+  @doc("Explicit service account credentials")
+  serviceInitializationHandle?: ServiceInitializationHandle;
+}
+
+@added(Versions.v2_preview)
+@doc("The status of the storage pool connection to AVS")
+model AvsConnectionStatus {
+  @doc("If true, a sequence of enable/finalize has been completed successfully, and disable hasn't been called successfully since.")
+  avsEnabled: boolean;
+
+  @doc("Human-readable current connection status")
+  currentConnectionStatus: string;
+
+  @doc("Resource id pointing at the AVS SDDC the pool is configured with")
+  sddcResourceId?: string;
+}
+
+@added(Versions.v2_preview)
+@doc("Storage Pool enable AVS Connection")
+model StoragePoolEnableAvsConnectionPost {
+  @doc("Resource id pointing at the AVS SDDC the pool is configured with.")
+  sddcResourceId: string;
+}
+
+@added(Versions.v2_preview)
+@doc("Explicit service account credentials")
+model ServiceInitializationData {
+  @doc("Service account username")
+  serviceAccountUsername?: string;
+
+  @doc("Service account password")
+  @secret
+  serviceAccountPassword?: string;
+
+  @doc("Storage Pool Vsphere IP")
+  vSphereIp?: string;
+
+  @doc("Storage Pool Vsphere Certificate")
+  vSphereCertificate?: string;
+}
+
+@added(Versions.v2_preview)
+@doc("Storage Pool finalize AVS Connection")
+model StoragePoolFinalizeAvsConnectionPost {
+  @doc("Encoded service account credentials alongside connection information, encrypted with the ephemeral public key")
+  serviceInitializationDataEnc?: string;
+
+  @doc("Explicit service account credentials")
+  serviceInitializationData?: ServiceInitializationData;
+}
+
 @doc("Storage Pool enable VSphere plugins")
 model StoragePoolEnableVspherePlugin {
-  @doc("Storage Pool Vsphere id")
+  @doc("Storage Pool Vsphere IP")
   vSphereIp: string;
 
   @doc("Storage Pool Vsphere cert thumb print")
@@ -543,7 +725,13 @@ model AvsStorageContainerProperties {
   @doc("Name of the storage used.")
   @pattern("^[a-zA-Z][a-zA-Z0-9\\-]{0,62}[a-zA-Z0-9]$")
   @visibility("read")
-  storageName: string;
+  storageName?: string;
+
+  @added(Versions.v2_preview)
+  @doc("Name of the storage container.")
+  @pattern("^[a-zA-Z][a-zA-Z0-9\\-]{0,62}[a-zA-Z0-9]$")
+  @visibility("read")
+  resourceName: string;
 
   @doc("Provisioning state of the resource.")
   @visibility("read")
@@ -559,11 +747,14 @@ interface AvsStorageContainers {
   create is ArmResourceCreateOrUpdateAsync<AvsStorageContainer>;
   get is ArmResourceRead<AvsStorageContainer>;
   delete is ArmResourceDeleteWithoutOkAsync<AvsStorageContainer>;
-  update is ArmResourcePatchAsync<
+  update is ArmCustomPatchAsync<
     AvsStorageContainer,
-    AvsStorageContainerProperties
+    Azure.ResourceManager.Foundations.ResourceUpdateModel<
+      AvsStorageContainer,
+      AvsStorageContainerProperties
+    >
   >;
-  listByParent is ArmResourceListByParent<AvsStorageContainer>;
+  listByStoragePool is ArmResourceListByParent<AvsStorageContainer>;
 }
 
 @doc("The AVS Storage Container Volume resource type.")
@@ -577,6 +768,7 @@ model AvsStorageContainerVolume is ProxyResource<VolumeProperties> {
     NamePattern = "^[a-fA-F0-9\\-]{1,64}$"
   >;
 }
+@@doc(AvsStorageContainerVolume.name, "Id of Storage Container Volume.");
 
 @doc("Volume properties.")
 model VolumeProperties {
@@ -707,10 +899,16 @@ model AzureProperties {
 
 @armResourceOperations
 interface AvsStorageContainerVolumes {
-  update is ArmResourcePatchAsync<AvsStorageContainerVolume, VolumeProperties>;
+  update is ArmCustomPatchAsync<
+    AvsStorageContainerVolume,
+    Azure.ResourceManager.Foundations.ResourceUpdateModel<
+      AvsStorageContainerVolume,
+      VolumeProperties
+    >
+  >;
   get is ArmResourceRead<AvsStorageContainerVolume>;
   delete is ArmResourceDeleteWithoutOkAsync<AvsStorageContainerVolume>;
-  listByParent is ArmResourceListByParent<AvsStorageContainerVolume>;
+  listByAvsStorageContainer is ArmResourceListByParent<AvsStorageContainerVolume>;
 }
 
 @parentResource(StoragePool)
@@ -723,6 +921,7 @@ model AvsVm is ProxyResource<AvsVmProperties> {
     NamePattern = "^[a-fA-F0-9\\-]{1,64}$"
   >;
 }
+@@doc(AvsVm.name, "Id of AVS VM.");
 
 @doc("AVS VM properties.")
 model AvsVmProperties {
@@ -814,10 +1013,16 @@ union VolumeContainerType {
 
 @armResourceOperations
 interface AvsVms {
-  update is ArmResourcePatchAsync<AvsVm, AvsVmProperties>;
+  update is ArmCustomPatchAsync<
+    AvsVm,
+    Azure.ResourceManager.Foundations.ResourceUpdateModel<
+      AvsVm,
+      AvsVmProperties
+    >
+  >;
   get is ArmResourceRead<AvsVm>;
   delete is ArmResourceDeleteWithoutOkAsync<AvsVm>;
-  listByParent is ArmResourceListByParent<AvsVm>;
+  listByStoragePool is ArmResourceListByParent<AvsVm>;
 }
 
 @doc("The AVS VM Volume resource type.")
@@ -831,11 +1036,18 @@ model AvsVmVolume is ProxyResource<VolumeProperties> {
     NamePattern = "^[a-fA-F0-9\\-]{1,64}$"
   >;
 }
+@@doc(AvsVmVolume.name, "Id of AVS VM Volume.");
 
 @armResourceOperations
 interface AvsVmVolumes {
-  update is ArmResourcePatchAsync<AvsVmVolume, VolumeProperties>;
+  update is ArmCustomPatchAsync<
+    AvsVmVolume,
+    Azure.ResourceManager.Foundations.ResourceUpdateModel<
+      AvsVmVolume,
+      VolumeProperties
+    >
+  >;
   get is ArmResourceRead<AvsVmVolume>;
   delete is ArmResourceDeleteWithoutOkAsync<AvsVmVolume>;
-  listByParent is ArmResourceListByParent<AvsVmVolume>;
+  listByAvsVm is ArmResourceListByParent<AvsVmVolume>;
 }
