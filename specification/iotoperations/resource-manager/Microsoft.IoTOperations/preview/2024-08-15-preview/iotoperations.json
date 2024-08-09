@@ -342,7 +342,7 @@
             "description": "The resource properties to be updated.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/InstanceResourceTagsUpdate"
+              "$ref": "#/definitions/InstancePatchModel"
             }
           }
         ],
@@ -5269,6 +5269,23 @@
         }
       }
     },
+    "InstancePatchModel": {
+      "type": "object",
+      "description": "The Instance update model.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The managed service identities assigned to this resource."
+        }
+      }
+    },
     "InstanceProperties": {
       "type": "object",
       "description": "The properties of the Instance resource.",
@@ -5361,19 +5378,6 @@
       "required": [
         "value"
       ]
-    },
-    "InstanceResourceTagsUpdate": {
-      "type": "object",
-      "description": "The type used for updating tags in InstanceResource resources.",
-      "properties": {
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      }
     },
     "KafkaAuthMethod": {
       "type": "string",
@@ -5578,6 +5582,16 @@
             "description": "UserAssignedManagedIdentity type"
           }
         ]
+      }
+    },
+    "ManagedServiceIdentityUpdate": {
+      "type": "object",
+      "description": "The template for adding optional properties.",
+      "properties": {
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The managed service identities assigned to this resource."
+        }
       }
     },
     "MetricProperties": {

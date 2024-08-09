@@ -5,11 +5,11 @@
 # Run this script in the /specifications/iotoperations directory to generate the specs and the examples.   #
 #                                                                                                          #
 ############################################################################################################
-cd ../..
-if [ ! -d "resource-manager" ] || [ ! -d "IoTOperations.Management" ]; then
-    echo "Please run this script in the /specifications/iotoperations/IoTOperations.Management/eng directory."
+script_dir=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
+pushd "$script_dir/../.." || {
+    echo "Could not change to the script directory. Exiting..."
     exit 1
-fi
+}
 
 echo "Deleting the examples in the resource-manager directory and the management directory..."
 rm -r resource-manager/Microsoft.IoTOperations/preview/2024-08-15-preview/examples
