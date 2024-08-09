@@ -46,11 +46,14 @@ interface Operations extends Azure.ResourceManager.Operations {}
 interface Instance {
   get is ArmResourceRead<InstanceResource>;
   createOrUpdate is ArmResourceCreateOrUpdateAsync<InstanceResource>;
-  update is ArmTagsPatchSync<InstanceResource>;
+  update is ArmCustomPatchSync<InstanceResource, InstancePatchModel>;
   delete is ArmResourceDeleteWithoutOkAsync<InstanceResource>;
   listByResourceGroup is ArmResourceListByParent<InstanceResource>;
   listBySubscription is ArmListBySubscription<InstanceResource>;
 }
+
+
+
 
 // /instances/brokers resource Operations
 @armResourceOperations

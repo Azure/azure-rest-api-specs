@@ -342,7 +342,7 @@
             "description": "The resource properties to be updated.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/InstanceResourceTagsUpdate"
+              "$ref": "#/definitions/InstancePatchModel"
             }
           }
         ],
@@ -2650,6 +2650,29 @@
         "brokerResources",
         "principals"
       ]
+    },
+    "Azure.ResourceManager.CommonTypes.ManagedServiceIdentityUpdate": {
+      "type": "object",
+      "description": "Managed service identity (system assigned and/or user assigned identities)",
+      "properties": {
+        "type": {
+          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentityType",
+          "description": "The type of managed identity assigned to this resource."
+        },
+        "userAssignedIdentities": {
+          "type": "object",
+          "description": "The identities assigned to this resource by the user.",
+          "additionalProperties": {
+            "allOf": [
+              {
+                "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/UserAssignedIdentity"
+              }
+            ],
+            "type": "object",
+            "x-nullable": true
+          }
+        }
+      }
     },
     "BackendChain": {
       "type": "object",
@@ -5269,6 +5292,23 @@
         }
       }
     },
+    "InstancePatchModel": {
+      "type": "object",
+      "description": "The Instance patch model.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "identity": {
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.ManagedServiceIdentityUpdate",
+          "description": "The managed service identities assigned to this resource."
+        }
+      }
+    },
     "InstanceProperties": {
       "type": "object",
       "description": "The properties of the Instance resource.",
@@ -5361,19 +5401,6 @@
       "required": [
         "value"
       ]
-    },
-    "InstanceResourceTagsUpdate": {
-      "type": "object",
-      "description": "The type used for updating tags in InstanceResource resources.",
-      "properties": {
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      }
     },
     "KafkaAuthMethod": {
       "type": "string",
