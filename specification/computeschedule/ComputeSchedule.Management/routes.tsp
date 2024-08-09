@@ -89,4 +89,13 @@ interface ScheduledActions {
     ...Params,
     @body @doc("The request body") requestBody: CancelOperationsRequest,
   ): ArmResponse<CancelOperationsResponse> | ErrorResponse;
+
+  /** virtualMachinesGetOperationErrors: getOperationErrors associated with an operation on a virtual machine */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "necessary to avoid standard routing"
+  @route("/subscriptions/{subscriptionId}/providers/Microsoft.ComputeSchedule/locations/{locationparameter}/virtualMachinesGetOperationErrors")
+  @post
+  virtualMachinesGetOperationErrors(
+    ...Params,
+    @body @doc("The request body") requestBody: GetOperationErrorsRequest,
+  ): ArmResponse<GetOperationErrorsResponse> | ErrorResponse;
 }
