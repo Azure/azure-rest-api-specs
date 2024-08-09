@@ -26,6 +26,12 @@ union ChatCompletionsToolSelectionPreset {
     completions response. Response content may still be influenced by the provided tool definitions.
     """)
   none: "none",
+
+  /**
+   * Specifies that the model must call one or more tools.
+   */
+  @added(ServiceApiVersions.v2024_07_01_Preview)
+  required: "required",
 }
 
 @discriminator("type")
