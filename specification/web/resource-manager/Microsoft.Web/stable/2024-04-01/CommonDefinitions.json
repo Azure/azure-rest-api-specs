@@ -3020,6 +3020,19 @@
               "description": "client certificate authentication comma-separated exclusion paths",
               "type": "string"
             },
+            "ipMode": {
+              "description": "Specifies the IP mode of the app.",
+              "enum": [
+                "IPv4",
+                "IPv6",
+                "IPv4AndIPv6"
+              ],
+              "type": "string",
+              "x-ms-enum": {
+                "name": "IPMode",
+                "modelAsString": false
+              }
+            },
             "endToEndEncryptionEnabled": {
               "description": "Whether to use end to end encryption between the FrontEnd and the Worker",
               "type": "boolean"
