@@ -32,7 +32,7 @@ model InstanceResource is TrackedResource<InstanceProperties> {
   ...ManagedServiceIdentityProperty;
 }
 
-@doc("The properties of a Instance resource.")
+@doc("The properties of the Instance resource.")
 model InstanceProperties {
   @doc("Detailed description of the Instance.")
   description?: string;
@@ -52,7 +52,31 @@ model InstanceProperties {
   @doc("The service accounts to be used for federated credentials.")
   @visibility("read")
   @OpenAPI.extension("x-ms-identifiers", [])
-  serviceAccounts?: ServiceAccountProperties[];
+  serviceAccounts?: ServiceAccountProperties[] = #[];
+
+  @doc("The configuration for components of the AIO Instance.")
+  components?: Components = #{};
+}
+
+@doc("The configuration for components of the AIO Instance.")
+model Components {
+  @doc("The properties of the ADR instance.")
+  adr?: AdrProperties = #{ enabled: true };
+
+  @doc("The properties of the AKRI instance.")
+  akri?: AkriInstanceProperties = #{ enabled: true };
+
+  @doc("The properties of the connectors instance.")
+  connectors?: ConnectorInstanceProperties = #{ enabled: true };
+
+  @doc("The properties of the dataflows instance.")
+  dataflows?: DataFlowInstanceProperties = #{ enabled: true };
+
+  @doc("The properties of the device provisioning instance.")
+  mqttbroker?: MqttBrokerInstanceProperties = #{ enabled: true };
+
+  @doc("The properties of the device provisioning instance.")
+  schemaregistry?: SchemaRegistryInstanceProperties = #{ enabled: true };
 }
 
 @doc("The properties of a Service Account.")
@@ -62,4 +86,39 @@ model ServiceAccountProperties {
 
   @doc("The namespace of the service account.")
   `namespace`: string;
+}
+
+@doc("The properties of an ADR instance.")
+model AdrProperties {
+  @doc("This determines if the ADR service is enabled.")
+  enabled: boolean;
+}
+@doc("The properties of an AKRI instance.")
+model AkriInstanceProperties {
+  @doc("This determines if the AKRI service is enabled.")
+  enabled: boolean;
+}
+
+@doc("The properties of a  Connector instance.")
+model ConnectorInstanceProperties {
+  @doc("This determines if the Connector service is enabled.")
+  enabled: boolean;
+}
+
+@doc("The properties of an DataFlow instance.")
+model DataFlowInstanceProperties {
+  @doc("This determines if the DataFlow service is enabled.")
+  enabled: boolean;
+}
+
+@doc("The properties of an MQTT Broker instance.")
+model MqttBrokerInstanceProperties {
+  @doc("This determines if the MQTT Broker service is enabled.")
+  enabled: boolean;
+}
+
+@doc("The properties of a Schema Registry instance.")
+model SchemaRegistryInstanceProperties {
+  @doc("This determines if the Schema Registry service is enabled.")
+  enabled: boolean;
 }
