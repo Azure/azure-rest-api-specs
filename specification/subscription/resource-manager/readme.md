@@ -41,6 +41,14 @@ These settings apply only when `--tag=package-2024-08-preview` is specified on t
 ``` yaml $(tag) == 'package-2024-08-preview'
 input-file:
 - Microsoft.Subscription/preview/2024-08-01-preview/subscriptions.json
+suppressions:
+- code: PutResponseCodes
+    reason: Not supposed to return 201 as the response code for the below API since existing api with new version change, got exceptions from ARM reviewer.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Subscription/changeTenantRequest/default"].put
+- code: PutRequestResponseSchemeArm
+    from: Microsoft.Subscription\preview\2024-08-01-preview\subscriptions.json
+    reason: The models designed in new version of this existing api in which put request, need not be same in response, but creating workitem - "https://msazure.visualstudio.com/One/_workitems/edit/29042001", to take this item in future ref for next set of changes.
 title: Initiate, Get and Accept Subscription Changed Directory
 description: Initiate, Get and Accept Subscription Changed Directory
 ```
