@@ -116,8 +116,9 @@ op checkKeys is appConfigOperation<
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
 @summary("Gets a list of key-values.")
 @doc("Gets a list of key-values.")
-op getKeyValues is Foundations.ResourceList<
-  KeyValue,
+@get
+@route("/kv")
+op getKeyValues is Foundations.Operation<
   {
     @doc("""
       A filter used to match keys. Syntax reference:
@@ -259,11 +260,17 @@ op checkKeyValues is appConfigOperation<
   OkResponse & AppConfigResponseHeaders
 >;
 
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
 @summary("Gets a single key-value.")
 @doc("Gets a single key-value.")
-op getKeyValue is standardOps.ResourceRead<
-  KeyValue,
-  QueryParametersTrait<{
+@get
+@route("/kv/{key}")
+op getKeyValue is Foundations.Operation<
+  {
+    @doc("The key of the key-value.")
+    @path("key")
+    key: string;
+
     @doc("The label of the key-value to retrieve.")
     @query("label")
     label?: string;
@@ -271,33 +278,39 @@ op getKeyValue is standardOps.ResourceRead<
     @doc("Used to select what fields are present in the returned resource(s).")
     @query("$Select")
     select?: KeyValueFields[];
-  }> &
-    RequestHeadersTrait<{
-      ...syncTokenHeader;
 
-      @doc("""
-        Requests the server to respond with the state of the resource at the specified
-        time.
-        """)
-      @header("Accept-Datetime")
-      acceptDatetime?: string;
+    ...syncTokenHeader;
 
-      @doc("""
-        Used to perform an operation only if the targeted resource's etag matches the
-        value provided.
-        """)
-      @header("If-Match")
-      ifMatch?: string;
+    @doc("""
+      Requests the server to respond with the state of the resource at the specified
+      time.
+      """)
+    @header("Accept-Datetime")
+    acceptDatetime?: string;
 
-      @doc("""
-        Used to perform an operation only if the targeted resource's etag does not
-        match the value provided.
-        """)
-      @header("If-None-Match")
-      ifNoneMatch?: string;
-    }> &
-    ResponseHeadersTrait<AppConfigResponseHeaders &
-      contentTypeHeader<"application/vnd.microsoft.appconfig.kv+json">>
+    @doc("""
+      Used to perform an operation only if the targeted resource's etag matches the
+      value provided.
+      """)
+    @header("If-Match")
+    ifMatch?: string;
+
+    @doc("""
+      Used to perform an operation only if the targeted resource's etag does not
+      match the value provided.
+      """)
+    @header("If-None-Match")
+    ifNoneMatch?: string;
+
+    ...ClientRequestIdHeader;
+  },
+  {
+    ...ClientRequestIdHeader;
+    ...AppConfigResponseHeaders;
+    ...contentTypeHeader<"application/vnd.microsoft.appconfig.kv+json">;
+  } & KeyValue,
+  {},
+  Error
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
@@ -433,8 +446,9 @@ op checkKeyValue is appConfigOperation<
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
 @summary("Gets a list of key-value snapshots.")
 @doc("Gets a list of key-value snapshots.")
-op getSnapshots is Foundations.ResourceList<
-  Snapshot,
+@get
+@route("/snapshots")
+op getSnapshots is Foundations.Operation<
   {
     @doc("A filter for the name of the returned snapshots.")
     @query("name")
@@ -486,39 +500,51 @@ op checkSnapshots is appConfigOperation<
   }
 >;
 
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
 @summary("Gets a single key-value snapshot.")
 @doc("Gets a single key-value snapshot.")
-op getSnapshot is standardOps.ResourceRead<
-  Snapshot,
-  QueryParametersTrait<{
+@get
+@route("/snapshots/{name}")
+op getSnapshot is Foundations.Operation<
+  {
+    @doc("The name of the snapshot.")
+    @path("name")
+    name: string;
+
     @doc("Used to select what fields are present in the returned resource(s).")
     @query("$Select")
     select?: SnapshotFields[];
-  }> &
-    RequestHeadersTrait<{
-      ...syncTokenHeader;
 
-      @doc("""
-        Used to perform an operation only if the targeted resource's etag matches the
-        value provided.
-        """)
-      @header("If-Match")
-      ifMatch?: string;
+    ...syncTokenHeader;
 
-      @doc("""
-        Used to perform an operation only if the targeted resource's etag does not
-        match the value provided.
-        """)
-      @header("If-None-Match")
-      ifNoneMatch?: string;
-    }> &
-    ResponseHeadersTrait<AppConfigResponseHeaders & {
-      @doc("Includes links to related resources.")
-      @header("Link")
-      link?: string;
+    @doc("""
+      Used to perform an operation only if the targeted resource's etag matches the
+      value provided.
+      """)
+    @header("If-Match")
+    ifMatch?: string;
 
-      ...contentTypeHeader<"application/vnd.microsoft.appconfig.snapshot+json">;
-    }>
+    @doc("""
+      Used to perform an operation only if the targeted resource's etag does not
+      match the value provided.
+      """)
+    @header("If-None-Match")
+    ifNoneMatch?: string;
+
+    ...ClientRequestIdHeader;
+  },
+  {
+    ...AppConfigResponseHeaders;
+
+    @doc("Includes links to related resources.")
+    @header("Link")
+    link?: string;
+
+    ...contentTypeHeader<"application/vnd.microsoft.appconfig.snapshot+json">;
+    ...ClientRequestIdHeader;
+  } & Snapshot,
+  {},
+  Error
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
@@ -534,15 +560,10 @@ op createSnapshot is Foundations.LongRunningOperation<
     @header("Content-Type")
     contentTypeHeader: "application/vnd.microsoft.appconfig.snapshot+json" | "application/json";
 
-    @doc("The name of the key-value snapshot to create.")
-    @maxLength(256)
-    @path
-    name: string;
-
     ...syncTokenHeader;
 
     @doc("The key-value snapshot to create.")
-    @body
+    @bodyRoot
     entity: Snapshot;
   },
   CreatedResponse &

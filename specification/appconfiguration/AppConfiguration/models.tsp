@@ -167,10 +167,7 @@ model KeyValueListResult {
 }
 
 @doc("A key-value pair representing application settings.")
-@resource("kv")
 model KeyValue {
-  @key
-  @visibility("read")
   @doc("The key of the key-value.")
   key: string;
 
@@ -212,11 +209,10 @@ model SnapshotListResult {
 }
 
 @doc("A snapshot is a named, immutable subset of an App Configuration store's key-values.")
-@resource("snapshots")
 model Snapshot {
-  @key
   @doc("The name of the snapshot.")
-  @visibility("read")
+  @path("name")
+  @maxLength(256)
   name: string;
 
   @doc("The current status of the snapshot.")
