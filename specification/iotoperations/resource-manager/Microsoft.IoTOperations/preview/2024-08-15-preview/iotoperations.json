@@ -3356,7 +3356,7 @@
         },
         "clientIds": {
           "type": "array",
-          "description": "A list of client IDs that match the clients. The client IDs are case-sensitive and must match the client IDs provided by the clients during connection.",
+          "description": "A list of client IDs that match the clients. The client IDs are case-sensitive and must match the client IDs provided by the clients during connection. This subfield may be set if the method is Connect.",
           "default": [],
           "items": {
             "type": "string"
@@ -5582,16 +5582,6 @@
             "description": "UserAssignedManagedIdentity type"
           }
         ]
-      }
-    },
-    "ManagedServiceIdentityUpdate": {
-      "type": "object",
-      "description": "The template for adding optional properties.",
-      "properties": {
-        "identity": {
-          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
-          "description": "The managed service identities assigned to this resource."
-        }
       }
     },
     "MetricProperties": {
