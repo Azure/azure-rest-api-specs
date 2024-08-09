@@ -36,6 +36,9 @@ description: Compute Client
 openapi-type: arm
 tag: package-2024-07-01
 
+modelerfour:
+  lenient-model-deduplication: true
+
 directive:
   - where:
       - $.definitions.VirtualMachine.properties
