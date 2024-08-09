@@ -2,10 +2,12 @@ import "@typespec/rest";
 import "@typespec/http";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-client-generator-core";
 import "./models/common.models.tsp";
 import "./models/pii.entity.recognition.tsp";
 import "./models/summarization.tsp";
 
+using Azure.ClientGenerator.Core;
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
@@ -61,7 +63,12 @@ op analyzeDocumentsJobStatus is languageOperations.ResourceRead<
 @route("/analyze-documents/jobs")
 @pollingOperation(analyzeDocumentsJobStatus)
 op analyzeDocumentsSubmitJob is Foundations.LongRunningOperation<
-  AnalyzeDocumentsJobsInput,
+  {
+    /** The input for the analyze documents operation. */
+    @bodyRoot
+    @clientName("AnalyzeDocumentOperationInput", "csharp")
+    body: AnalyzeDocumentJobsInput;
+  },
   AcceptedResponse,
   {},
   ErrorResponse

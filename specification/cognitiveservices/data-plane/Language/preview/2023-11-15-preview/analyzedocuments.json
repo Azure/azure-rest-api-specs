@@ -57,9 +57,10 @@
           {
             "name": "body",
             "in": "body",
+            "description": "The input for the analyze documents operation.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/AnalyzeDocumentsJobsInput"
+              "$ref": "#/definitions/AnalyzeDocumentJobsInput"
             }
           }
         ],
@@ -308,9 +309,9 @@
         "stringIndexType": {
           "type": "string",
           "description": "String index type",
-          "default": "textElements_v8",
+          "default": "TextElements_v8",
           "enum": [
-            "textElements_v8",
+            "TextElements_v8",
             "UnicodeCodePoint",
             "Utf16CodeUnit"
           ],
@@ -320,7 +321,7 @@
             "values": [
               {
                 "name": "TextElements_v8",
-                "value": "textElements_v8",
+                "value": "TextElements_v8",
                 "description": "Returned offset and length values will correspond to textElements (Graphemes and Grapheme clusters) confirming to the Unicode 8.0.0 standard. Use this option if your application is written in .Net Framework or .Net Core and you will be using StringInfo."
               },
               {
@@ -406,6 +407,36 @@
         "summaries"
       ]
     },
+    "AnalyzeDocumentJobsInput": {
+      "type": "object",
+      "description": "The input object for the analyze documents LRO.",
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "Name for the task."
+        },
+        "analysisInput": {
+          "$ref": "#/definitions/MultiLanguageAnalysisInput",
+          "description": "Contains the input to be analyzed."
+        },
+        "tasks": {
+          "type": "array",
+          "description": "List of tasks to be performed as part of the LRO.",
+          "items": {
+            "$ref": "#/definitions/AnalyzeDocumentsLROTask"
+          },
+          "x-ms-identifiers": []
+        },
+        "defaultLanguage": {
+          "type": "string",
+          "description": "Default language to use for records requesting automatic language detection."
+        }
+      },
+      "required": [
+        "analysisInput",
+        "tasks"
+      ]
+    },
     "AnalyzeDocumentsDocumentError": {
       "type": "object",
       "description": "Contains the error object with errors encountered for the processed document.",
@@ -482,36 +513,6 @@
         "jobId",
         "lastUpdatedDateTime",
         "status",
-        "tasks"
-      ]
-    },
-    "AnalyzeDocumentsJobsInput": {
-      "type": "object",
-      "description": "The input object for the analyze documents LRO.",
-      "properties": {
-        "displayName": {
-          "type": "string",
-          "description": "Name for the task."
-        },
-        "analysisInput": {
-          "$ref": "#/definitions/MultiLanguageAnalysisInput",
-          "description": "Contains the input to be analyzed."
-        },
-        "tasks": {
-          "type": "array",
-          "description": "List of tasks to be performed as part of the LRO.",
-          "items": {
-            "$ref": "#/definitions/AnalyzeDocumentsLROTask"
-          },
-          "x-ms-identifiers": []
-        },
-        "defaultLanguage": {
-          "type": "string",
-          "description": "Default language to use for records requesting automatic language detection."
-        }
-      },
-      "required": [
-        "analysisInput",
         "tasks"
       ]
     },
@@ -1097,9 +1098,9 @@
         "stringIndexType": {
           "type": "string",
           "description": "Specifies the method used to interpret string offsets.",
-          "default": "textElements_v8",
+          "default": "TextElements_v8",
           "enum": [
-            "textElements_v8",
+            "TextElements_v8",
             "UnicodeCodePoint",
             "Utf16CodeUnit"
           ],
@@ -1109,7 +1110,7 @@
             "values": [
               {
                 "name": "TextElements_v8",
-                "value": "textElements_v8",
+                "value": "TextElements_v8",
                 "description": "Returned offset and length values will correspond to textElements (Graphemes and Grapheme clusters) confirming to the Unicode 8.0.0 standard. Use this option if your application is written in .Net Framework or .Net Core and you will be using StringInfo."
               },
               {
@@ -3472,9 +3473,9 @@
         "stringIndexType": {
           "type": "string",
           "description": "StringIndexType to be used for analysis.",
-          "default": "textElements_v8",
+          "default": "TextElements_v8",
           "enum": [
-            "textElements_v8",
+            "TextElements_v8",
             "UnicodeCodePoint",
             "Utf16CodeUnit"
           ],
@@ -3484,7 +3485,7 @@
             "values": [
               {
                 "name": "TextElements_v8",
-                "value": "textElements_v8",
+                "value": "TextElements_v8",
                 "description": "Returned offset and length values will correspond to textElements (Graphemes and Grapheme clusters) confirming to the Unicode 8.0.0 standard. Use this option if your application is written in .Net Framework or .Net Core and you will be using StringInfo."
               },
               {
