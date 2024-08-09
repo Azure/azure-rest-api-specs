@@ -74,6 +74,8 @@ input-file:
   - Microsoft.Network/stable/2024-03-01/networkManagerGroup.json
   - Microsoft.Network/stable/2024-03-01/networkManagerScopeConnection.json
   - Microsoft.Network/stable/2024-03-01/networkManagerSecurityAdminConfiguration.json
+  - Microsoft.Network/stable/2024-03-01/networkManagerSecurityUserConfiguration.json
+  - Microsoft.Network/stable/2024-03-01/networkManagerRoutingConfiguration.json
   - Microsoft.Network/stable/2024-03-01/networkProfile.json
   - Microsoft.Network/stable/2024-03-01/networkSecurityGroup.json
   - Microsoft.Network/stable/2024-03-01/networkVirtualAppliance.json
@@ -3434,6 +3436,24 @@ directive:
   - suppress: RequiredPropertiesMissingInResourceModel
     from: networkManagerActiveConfiguration.json
     reason: name, id and type properties are inherited from the upper level
+  - suppress: DeleteResponseCodes
+    from: networkManagerRoutingConfiguration.json
+    reason: support response code 200 for delete operations 
+  - suppress: DeleteResponseCodes
+    from: networkManagerSecurityUserConfiguration.json
+    reason: support response code 200 for delete operations
+  - suppress: BodyTopLevelProperties
+    from: networkManagerSecurityUserConfiguration.json
+    reason: This is a false alarm for a list response. Arm documentation states 'Collection Get calls must only have "value" and "nextLink" as top level properties in its model.'
+  - suppress: BodyTopLevelProperties
+    from: networkManagerRoutingConfiguration.json
+    reason: This is a false alarm for a list response. Arm documentation states 'Collection Get calls must only have "value" and "nextLink" as top level properties in its model.'
+  - suppress: SystemDataDefinitionsCommonTypes
+    from: networkManagerSecurityUserConfiguration.json
+    reason: All microsoft.network specs reference a seperate systemData defined in networking file. If we use the common type, it causes duplicate schema error in dotnet sdk generation.
+  - suppress: SystemDataDefinitionsCommonTypes
+    from: networkManagerRoutingConfiguration.json
+    reason: All microsoft.network specs reference a seperate systemData defined in networking file. If we use the common type, it causes duplicate schema error in dotnet sdk generation.
   - suppress: RequiredPropertiesMissingInResourceModel
     from: applicationGateway.json
     reason: name, id and type properties are inherited from the upper level
