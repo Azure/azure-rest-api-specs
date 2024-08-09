@@ -1,0 +1,42 @@
+{
+  "parameters": {
+    "api-version": "2024-03-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "rg1",
+    "networkManagerName": "testNetworkManager",
+    "configurationName": "myTestRoutingConfig"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/networkManagers/testNetworkManager/routingConfigurations/myTestRoutingConfig/ruleCollections/testRuleCollection",
+            "name": "testRuleCollection",
+            "type": "Microsoft.Network/networkManagers/routingConfigurations/ruleCollections",
+            "systemData": {
+              "createdBy": "b69a9388-9488-4534-b470-7ec6d41beef5",
+              "createdByType": "User",
+              "createdAt": "2021-01-11T18:52:27Z",
+              "lastModifiedBy": "b69a9388-9488-4534-b470-7ec6d41beef5",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2021-01-11T18:52:27Z"
+            },
+            "properties": {
+              "description": "A sample rule collection",
+              "provisioningState": "Succeeded",
+              "resourceGuid": "00000000-0000-0000-0000-000000000000",
+              "disableBgpRoutePropagation": "False",
+              "appliesTo": [
+                {
+                  "networkGroupId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/networkManagers/testNetworkManager/networkGroups/testGroup"
+                }
+              ]
+            }
+          }
+        ],
+        "nextLink": "{baseurl}/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroup/rg1/providers/Microsoft.Network/networkManagers/testNetworkManager/routingConfigurations/myTestRoutingConfig/ruleCollections?api-version=2023-03-01-preview&$skipToken=10"
+      }
+    }
+  }
+}
