@@ -3572,6 +3572,36 @@
         ]
       }
     },
+    "Components": {
+      "type": "object",
+      "description": "The configuration for components of the AIO Instance.",
+      "properties": {
+        "adr": {
+          "$ref": "#/definitions/AdrProperties",
+          "description": "The properties of the ADR instance."
+        },
+        "akri": {
+          "$ref": "#/definitions/AkriInstanceProperties",
+          "description": "The properties of the AKRI instance."
+        },
+        "connectors": {
+          "$ref": "#/definitions/ConnectorInstanceProperties",
+          "description": "The properties of the connectors instance."
+        },
+        "dataflows": {
+          "$ref": "#/definitions/DataFlowInstanceProperties",
+          "description": "The properties of the dataflows instance."
+        },
+        "mqttbroker": {
+          "$ref": "#/definitions/MqttBrokerInstanceProperties",
+          "description": "The properties of the device provisioning instance."
+        },
+        "schemaregistry": {
+          "$ref": "#/definitions/SchemaRegistryInstanceProperties",
+          "description": "The properties of the device provisioning instance."
+        }
+      }
+    },
     "ConnectorInstanceProperties": {
       "type": "object",
       "description": "The properties of a  Connector instance.",
@@ -5250,29 +5280,9 @@
           "readOnly": true,
           "x-ms-identifiers": []
         },
-        "adr": {
-          "$ref": "#/definitions/AdrProperties",
-          "description": "The properties of the ADR instance."
-        },
-        "akri": {
-          "$ref": "#/definitions/AkriInstanceProperties",
-          "description": "The properties of the AKRI instance."
-        },
-        "connectors": {
-          "$ref": "#/definitions/ConnectorInstanceProperties",
-          "description": "The properties of the connectors instance."
-        },
-        "dataFlows": {
-          "$ref": "#/definitions/DataFlowInstanceProperties",
-          "description": "The properties of the dataflows instance."
-        },
-        "mqttBroker": {
-          "$ref": "#/definitions/MqttBrokerInstanceProperties",
-          "description": "The properties of the device provisioning instance."
-        },
-        "schemaRegistry": {
-          "$ref": "#/definitions/SchemaRegistryInstanceProperties",
-          "description": "The properties of the device provisioning instance."
+        "components": {
+          "$ref": "#/definitions/Components",
+          "description": "The configuration for components of the AIO Instance."
         }
       },
       "required": [

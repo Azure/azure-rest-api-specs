@@ -54,6 +54,12 @@ model InstanceProperties {
   @OpenAPI.extension("x-ms-identifiers", [])
   serviceAccounts?: ServiceAccountProperties[] = #[];
 
+  @doc("The configuration for components of the AIO Instance.")
+  components?: Components = #{};
+}
+
+@doc("The configuration for components of the AIO Instance.")
+model Components {
   @doc("The properties of the ADR instance.")
   adr?: AdrProperties = #{ enabled: true };
 
@@ -64,13 +70,13 @@ model InstanceProperties {
   connectors?: ConnectorInstanceProperties = #{ enabled: true };
 
   @doc("The properties of the dataflows instance.")
-  dataFlows?: DataFlowInstanceProperties = #{ enabled: true };
+  dataflows?: DataFlowInstanceProperties = #{ enabled: true };
 
   @doc("The properties of the device provisioning instance.")
-  mqttBroker?: MqttBrokerInstanceProperties = #{ enabled: true };
+  mqttbroker?: MqttBrokerInstanceProperties = #{ enabled: true };
 
   @doc("The properties of the device provisioning instance.")
-  schemaRegistry?: SchemaRegistryInstanceProperties = #{ enabled: true };
+  schemaregistry?: SchemaRegistryInstanceProperties = #{ enabled: true };
 }
 
 @doc("The properties of a Service Account.")
