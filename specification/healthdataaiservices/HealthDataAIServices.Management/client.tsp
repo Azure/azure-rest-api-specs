@@ -13,15 +13,15 @@ namespace Microsoft.HealthDataAIServices {
   @@access(Operations.list, Access.internal, "csharp");
 
   @@clientName(PrivateEndpointConnectionResource,
-    "HealthDataAIServicePrivateEndpointConnectionResource",
+    "HealthDataAIServicesPrivateEndpointConnectionResource",
     "csharp"
   );
   @@clientName(PublicNetworkAccess,
-    "HealthDataAIServicePublicNetworkAccess",
+    "HealthDataAIServicesPublicNetworkAccess",
     "csharp"
   );
   @@clientName(ProvisioningState,
-    "HealthDataAIServiceProvisioningState",
+    "HealthDataAIServicesProvisioningState",
     "csharp"
   );
 }
