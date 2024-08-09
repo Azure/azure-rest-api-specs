@@ -3800,6 +3800,19 @@
           "type": "object",
           "x-ms-format": "dfe-string",
           "description": "The scope of the access required. It describes what kind of access will be requested. Type: string (or Expression with resultType string)."
+        },
+        "servicePrincipalCredentialType": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "The service principal credential type to use in Server-To-Server authentication. 'ServicePrincipalKey' for key/secret, 'ServicePrincipalCert' for certificate. Type: string (or Expression with resultType string)."
+        },
+        "servicePrincipalEmbeddedCert": {
+          "description": "Specify the base64 encoded certificate of your application registered in Azure Active Directory. Type: string (or Expression with resultType string).",
+          "$ref": "../datafactory.json#/definitions/SecretBase"
+        },
+        "servicePrincipalEmbeddedCertPassword": {
+          "description": "Specify the password of your certificate if your certificate has a password and you are using AadServicePrincipal authentication. Type: string (or Expression with resultType string).",
+          "$ref": "../datafactory.json#/definitions/SecretBase"
         }
       },
       "required": [
@@ -8085,6 +8098,19 @@
           "description": "The client secret of your application registered in Azure Active Directory. Type: string (or Expression with resultType string).",
           "$ref": "../datafactory.json#/definitions/SecretBase"
         },
+        "servicePrincipalCredentialType": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "The service principal credential type to use in Server-To-Server authentication. 'ServicePrincipalKey' for key/secret, 'ServicePrincipalCert' for certificate. Type: string (or Expression with resultType string)."
+        },
+        "servicePrincipalEmbeddedCert": {
+          "description": "Specify the base64 encoded certificate of your application registered in Azure Active Directory. Type: string (or Expression with resultType string).",
+          "$ref": "../datafactory.json#/definitions/SecretBase"
+        },
+        "servicePrincipalEmbeddedCertPassword": {
+          "description": "Specify the password of your certificate if your certificate has a password and you are using AadServicePrincipal authentication. Type: string (or Expression with resultType string).",
+          "$ref": "../datafactory.json#/definitions/SecretBase"
+        },
         "encryptedCredential": {
           "type": "string",
           "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string."
@@ -8093,8 +8119,7 @@
       "required": [
         "siteUrl",
         "tenantId",
-        "servicePrincipalId",
-        "servicePrincipalKey"
+        "servicePrincipalId"
       ]
     },
     "AzureSynapseArtifactsLinkedService": {
