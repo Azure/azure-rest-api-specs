@@ -76,7 +76,7 @@ model AnalyzeDocumentJobsInput {
   /** List of tasks to be performed as part of the LRO. */
   tasks: Array<AnalyzeDocumentsLROTask>;
 
-  /** Default language to use for records requesting automatic language detection. */
+  /** Default language to use for records. */
   defaultLanguage?: string;
 }
 
