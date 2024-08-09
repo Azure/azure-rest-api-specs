@@ -3560,6 +3560,11 @@
             "example": 1,
             "nullable": true,
             "description": "An alternative to sampling with temperature, called nucleus sampling, where the model considers the results of the tokens with top_p probability mass. So 0.1 means only the tokens comprising the top 10% probability mass are considered.\n\nWe generally recommend altering this or `temperature` but not both.\n"
+          },
+          "user": {
+            "type": "string",
+            "example": "user-1234",
+            "description": "A unique identifier representing your end-user, which can help to monitor and detect abuse.\n"
           }
         },
         "required": [
@@ -3847,6 +3852,11 @@
                 "items": {
                   "$ref": "#/components/schemas/chatCompletionFunctions"
                 }
+              },
+              "user": {
+                "type": "string",
+                "example": "user-1234",
+                "description": "A unique identifier representing your end-user, which can help to monitor and detect abuse.\n"
               }
             },
             "required": [

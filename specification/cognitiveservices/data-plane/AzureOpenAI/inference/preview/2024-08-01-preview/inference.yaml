@@ -2342,6 +2342,11 @@ components:
             An alternative to sampling with temperature, called nucleus sampling, where the model considers the results of the tokens with top_p probability mass. So 0.1 means only the tokens comprising the top 10% probability mass are considered.
 
             We generally recommend altering this or `temperature` but not both.
+        user: &end_user_param_configuration
+          type: string
+          example: user-1234
+          description: |
+            A unique identifier representing your end-user, which can help to monitor and detect abuse.
       required:
         - prompt
 
@@ -2589,6 +2594,7 @@ components:
               maxItems: 128
               items:
                 $ref: "#/components/schemas/chatCompletionFunctions"
+            user: *end_user_param_configuration
 
           required:
             - messages
