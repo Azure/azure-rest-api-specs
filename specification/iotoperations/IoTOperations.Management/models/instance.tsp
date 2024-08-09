@@ -39,14 +39,14 @@ model InstancePatchModel {
   // Ideally we should spread the ManagedServiceIdentityProperty here, but
   // the generated schema defines this as a new definition which the ARM
   // specs don't like very much.
-  ...ManagedServiceIdentityUpdate;
+  ...ManagedServiceIdentityProperty;
 }
 
-model ManagedServiceIdentityUpdate
-  is OptionalProperties<UpdateableProperties<PickProperties<
-    InstanceResource,
-    "identity"
-  >>>;
+// model ManagedServiceIdentityUpdate
+//   is OptionalProperties<UpdateableProperties<PickProperties<
+//     InstanceResource,
+//     "identity"
+//   >>>;
 @doc("The properties of the Instance resource.")
 model InstanceProperties {
   @doc("Detailed description of the Instance.")
