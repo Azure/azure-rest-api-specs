@@ -102,6 +102,15 @@ input-file:
 - stable/2024-08-04/blob.json
 ```
 
+### Tag: package-2025-01
+
+These settings apply only when `--tag=package-2025-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2025-01'
+input-file:
+- stable/2025-01-05/blob.json
+```
+
 ### Suppression
 ``` yaml
 directive:
