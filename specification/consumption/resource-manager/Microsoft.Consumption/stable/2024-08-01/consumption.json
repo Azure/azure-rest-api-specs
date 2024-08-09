@@ -1088,6 +1088,9 @@
           "ReservationRecommendationsByBillingAccount-Legacy": {
             "$ref": "./examples/ReservationRecommendationsByBillingAccount.json"
           },
+          "ReservationRecommendationsByBillingAccountFilterForScope": {
+            "$ref": "./examples/ReservationRecommendationsByBillingAccountFilterByScope.json"
+          },
           "ReservationRecommendationsByBillingProfile-Modern": {
             "$ref": "./examples/ReservationRecommendationsByBillingProfile.json"
           }
@@ -3411,7 +3414,7 @@
           "readOnly": true
         },
         "reservationOrderTerm": {
-          "description": "Term period of the reservation, ex: P1Y or P3Y.",
+          "description": "Term period of the reservation. ex: P1M, P1Y or P3Y.",
           "type": "string",
           "readOnly": true
         },
@@ -3575,7 +3578,7 @@
           "readOnly": true
         },
         "term": {
-          "description": "RI recommendations in one or three year terms.",
+          "description": "Term period of the reservation. ex: P1M, P1Y or P3Y.",
           "type": "string",
           "readOnly": true
         },
@@ -3747,7 +3750,7 @@
           "readOnly": true
         },
         "term": {
-          "description": "RI recommendations in one or three year terms.",
+          "description": "Term period of the reservation. ex: P1M, P1Y or P3Y.",
           "type": "string",
           "readOnly": true
         },
@@ -5005,6 +5008,7 @@
     },
     "ErrorDetails": {
       "description": "The details of the error.",
+      "type": "object",
       "properties": {
         "code": {
           "description": "Error code.",
@@ -5044,7 +5048,7 @@
       }
     },
     "ErrorResponse": {
-      "description": "Error response indicates that the service is not able to process the incoming request. The reason is provided in the error message. \n\nSome Error responses: \n\n * 429 TooManyRequests - Request is throttled. Retry after waiting for the time specified in the \"x-ms-ratelimit-microsoft.consumption-retry-after\" header. \n\n * 503 ServiceUnavailable - Service is temporarily unavailable. Retry after waiting for the time specified in the \"Retry-After\" header.",
+      "description": "Error response indicates that the service is not able to process the incoming request. The reason is provided in the error message. \n\nSome Error responses: \n\n * 429 TooManyRequests - Request is throttled. Retry after waiting for the time specified in the \"x-ms-ratelimit-microsoft.consumption-retry-after\" header. \n\n * 503 ServiceUnavailable - Service is temporarily unavailable. Retry after waiting for the time specified in the \"Retry-After\" header. \n\n * 504 Gateway Timeout - Service timed out while processing the request. Reduce the date range in the request, if possible.",
       "type": "object",
       "properties": {
         "error": {
@@ -6011,6 +6015,7 @@
       "name": "term",
       "x-ms-parameter-location": "method",
       "enum": [
+        "P1M",
         "P1Y",
         "P3Y"
       ],
@@ -6018,6 +6023,11 @@
         "name": "term",
         "modelAsString": true,
         "values": [
+          {
+            "value": "P1M",
+            "description": "1 month reservation term",
+            "name": "P1M"
+          },
           {
             "value": "P1Y",
             "description": "1 year reservation term",
