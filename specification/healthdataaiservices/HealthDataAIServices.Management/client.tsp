@@ -20,4 +20,12 @@ namespace Microsoft.HealthDataAIServices {
     "HealthDataAIServicePrivateLinkResourceData",
     "csharp"
   );
+  @@clientName(PublicNetworkAccess,
+    "HealthDataAIServicePublicNetworkAccess",
+    "csharp"
+  );
+  @@clientName(ProvisioningState,
+    "HealthDataAIServiceProvisioningState",
+    "csharp"
+  );
 }
