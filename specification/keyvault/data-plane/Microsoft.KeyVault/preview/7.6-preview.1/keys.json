@@ -335,7 +335,6 @@
           {
             "name": "key-version",
             "in": "path",
-            "required": true,
             "type": "string",
             "description": "Adding the version parameter retrieves attestation blob for specific version of a key. This URI fragment is optional. If not specified, the latest version of the key attestation blob is returned."
           },
@@ -1479,7 +1478,7 @@
         "certificates": {
           "type": "string",
           "format": "base64url",
-          "description": "The certificates used for validating key attestation blob(s)."
+          "description": "This is a base64 url encoded certificate bundle. This bundle contains certificates used for validating key attestation blob."
         },
         "firmwareVersion": {
           "$ref": "#/definitions/FirmwareVersion",
