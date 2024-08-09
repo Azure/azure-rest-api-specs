@@ -26,9 +26,17 @@ These are the global settings for the Consumption API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2023-11
+tag: package-2024-08
 ```
 
+
+### Tag: package-2024-08
+
+These settings apply only when `--tag=package-2024-08` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-08'
+input-file:
+```
 
 ### Tag: package-2023-11
 
