@@ -52,9 +52,6 @@ interface Instance {
   listBySubscription is ArmListBySubscription<InstanceResource>;
 }
 
-
-
-
 // /instances/brokers resource Operations
 @armResourceOperations
 interface Broker {
