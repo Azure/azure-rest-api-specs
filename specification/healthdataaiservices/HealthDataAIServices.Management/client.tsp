@@ -16,10 +16,6 @@ namespace Microsoft.HealthDataAIServices {
     "HealthDataAIServicePrivateEndpointConnectionResource",
     "csharp"
   );
-  @@clientName(PrivateLinkResource,
-    "HealthDataAIServicePrivateLinkResourceData",
-    "csharp"
-  );
   @@clientName(PublicNetworkAccess,
     "HealthDataAIServicePublicNetworkAccess",
     "csharp"
