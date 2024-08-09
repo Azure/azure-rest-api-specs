@@ -197,11 +197,11 @@ interface StoragePools {
   @added(Versions.v3_preview)
   @doc("Returns the status of the storage pool connection to AVS")
   @armResourceAction(StoragePool)
-  @action("getAvsConnectionStatus")
+  @action("getAvsStatus")
   @post
-  getAvsConnectionStatus(
+  getAvsStatus(
     ...ResourceInstanceParameters<StoragePool>,
-  ): ArmResponse<AvsConnectionStatus> | ErrorResponse;
+  ): ArmResponse<AvsStatus> | ErrorResponse;
 
   @doc("Enable AVS on storage pool")
   @armResourceAction(StoragePool)
@@ -656,7 +656,7 @@ model AvsConnection {
 
 @added(Versions.v3_preview)
 @doc("The status of the storage pool connection to AVS")
-model AvsConnectionStatus {
+model AvsStatus {
   @doc("If true, a sequence of enable/finalize has been completed successfully, and disable hasn't been called successfully since.")
   avsEnabled: boolean;
 
