@@ -55,7 +55,7 @@ model BrokerAuthenticatorMethods {
   serviceAccountTokenSettings?: BrokerAuthenticatorMethodSat;
 
   @doc("X.509 authentication configuration.")
-  x509Settings?: BrokerAuthenticatorMethodX509;
+  x509CertificateSettings?: BrokerAuthenticatorMethodX509;
 }
 
 @doc("Broker Authentication Mode")
