@@ -151,10 +151,7 @@ op getKeyValues is Foundations.Operation<
     acceptDatetime?: string;
 
     @doc("Used to select what fields are present in the returned resource(s).")
-    @query({
-      name: "$Select",
-      format: "csv",
-    })
+    @query("$Select")
     select?: KeyValueFields[];
 
     @doc("""
@@ -178,15 +175,12 @@ op getKeyValues is Foundations.Operation<
     @header("If-None-Match")
     ifNoneMatch?: string;
 
-    #suppress "@azure-tools/typespec-azure-core/prefer-csv-collection-format" "Pre-existing API contract"
+    #suppress "@azure-tools/typespec-azure-core/no-query-explode" "Pre-existing API contract"
     @doc("""
       A filter used to query by tags. Syntax reference:
       https://aka.ms/azconfig/docs/keyvaluefiltering
       """)
-    @query({
-      name: "tags",
-      format: "multi",
-    })
+    @query(#{ name: "tags", explode: true })
     tags?: string[];
   },
   KeyValueListResult &
@@ -234,10 +228,7 @@ op checkKeyValues is appConfigOperation<
     acceptDatetime?: string;
 
     @doc("Used to select what fields are present in the returned resource(s).")
-    @query({
-      name: "$Select",
-      format: "csv",
-    })
+    @query("$Select")
     select?: KeyValueFields[];
 
     @doc("A filter used get key-values for a snapshot. Not valid when used with 'key' and 'label' filters.")
@@ -258,15 +249,12 @@ op checkKeyValues is appConfigOperation<
     @header("If-None-Match")
     ifNoneMatch?: string;
 
-    #suppress "@azure-tools/typespec-azure-core/prefer-csv-collection-format" "Pre-existing API contract"
+    #suppress "@azure-tools/typespec-azure-core/no-query-explode" "Pre-existing API contract"
     @doc("""
       A filter used to query by tags. Syntax reference:
       https://aka.ms/azconfig/docs/keyvaluefiltering
       """)
-    @query({
-      name: "tags",
-      format: "multi",
-    })
+    @query(#{ name: "tags", explode: true })
     tags?: string[];
   },
   OkResponse & AppConfigResponseHeaders
@@ -288,10 +276,7 @@ op getKeyValue is Foundations.Operation<
     label?: string;
 
     @doc("Used to select what fields are present in the returned resource(s).")
-    @query({
-      name: "$Select",
-      format: "csv",
-    })
+    @query("$Select")
     select?: KeyValueFields[];
 
     ...syncTokenHeader;
@@ -452,10 +437,7 @@ op checkKeyValue is appConfigOperation<
     ifNoneMatch?: string;
 
     @doc("Used to select what fields are present in the returned resource(s).")
-    @query({
-      name: "$Select",
-      format: "csv",
-    })
+    @query("$Select")
     select?: KeyValueFields[];
   },
   OkResponse & AppConfigResponseHeaders
@@ -480,17 +462,11 @@ op getSnapshots is Foundations.Operation<
     after?: string;
 
     @doc("Used to select what fields are present in the returned resource(s).")
-    @query({
-      name: "$Select",
-      format: "csv",
-    })
+    @query("$Select")
     select?: SnapshotFields[];
 
     @doc("Used to filter returned snapshots by their status property.")
-    @query({
-      name: "status",
-      format: "csv",
-    })
+    @query("status")
     status?: SnapshotStatus[];
 
     ...syncTokenHeader;
@@ -536,10 +512,7 @@ op getSnapshot is Foundations.Operation<
     name: string;
 
     @doc("Used to select what fields are present in the returned resource(s).")
-    @query({
-      name: "$Select",
-      format: "csv",
-    })
+    @query("$Select")
     select?: SnapshotFields[];
 
     ...syncTokenHeader;
@@ -717,10 +690,7 @@ op getLabels is appConfigOperation<
     acceptDatetime?: string;
 
     @doc("Used to select what fields are present in the returned resource(s).")
-    @query({
-      name: "$Select",
-      format: "csv",
-    })
+    @query("$Select")
     select?: LabelFields[];
   },
   LabelListResult & {
@@ -757,10 +727,7 @@ op checkLabels is appConfigOperation<
     acceptDatetime?: string;
 
     @doc("Used to select what fields are present in the returned resource(s).")
-    @query({
-      name: "$Select",
-      format: "csv",
-    })
+    @query("$Select")
     select?: LabelFields[];
   },
   OkResponse & {
@@ -878,21 +845,15 @@ op getRevisions is appConfigOperation<
     acceptDatetime?: string;
 
     @doc("Used to select what fields are present in the returned resource(s).")
-    @query({
-      name: "$Select",
-      format: "csv",
-    })
+    @query("$Select")
     select?: KeyValueFields[];
 
-    #suppress "@azure-tools/typespec-azure-core/prefer-csv-collection-format" "Pre-existing API contract"
+    #suppress "@azure-tools/typespec-azure-core/no-query-explode" "Pre-existing API contract"
     @doc("""
       A filter used to query by tags. Syntax reference:
       https://aka.ms/azconfig/docs/restapirevisions
       """)
-    @query({
-      name: "tags",
-      format: "multi",
-    })
+    @query(#{ name: "tags", explode: true })
     tags?: string[];
   },
   KeyValueListResult &
@@ -938,21 +899,15 @@ op checkRevisions is appConfigOperation<
     acceptDatetime?: string;
 
     @doc("Used to select what fields are present in the returned resource(s).")
-    @query({
-      name: "$Select",
-      format: "csv",
-    })
+    @query("$Select")
     select?: KeyValueFields[];
 
-    #suppress "@azure-tools/typespec-azure-core/prefer-csv-collection-format" "Pre-existing API contract"
+    #suppress "@azure-tools/typespec-azure-core/no-query-explode" "Pre-existing API contract"
     @doc("""
       A filter used to query by tags. Syntax reference:
       https://aka.ms/azconfig/docs/restapirevisions
       """)
-    @query({
-      name: "tags",
-      format: "multi",
-    })
+    @query(#{ name: "tags", explode: true })
     tags?: string[];
   },
   OkResponse & AppConfigResponseHeaders
