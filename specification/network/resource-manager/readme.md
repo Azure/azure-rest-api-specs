@@ -475,7 +475,7 @@ input-file:
 
 These settings apply only when `--tag=package-2023-03-preview` is specified on the command line.
 
-```yaml $(tag) == 'package-2023-03-preview'
+``` yaml $(tag) == 'package-2023-03-preview'
 input-file:
   - Microsoft.Network/preview/2023-03-01-preview/network.json
   - Microsoft.Network/preview/2023-03-01-preview/networkManagerRoutingConfiguration.json
