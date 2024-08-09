@@ -31,6 +31,12 @@ enum Versions {
   @useDependency(LiftrBase.Versions.v2_preview)
   @useDependency(LiftrBase.Storage.Versions.v1_preview)
   v2_preview: "2024-06-01-preview",
+
+  @doc("Version 3 preview.")
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  @useDependency(LiftrBase.Versions.v3_preview)
+  @useDependency(LiftrBase.Storage.Versions.v1_preview)
+  v3_preview: "2024-08-01-preview",
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}
@@ -179,7 +185,7 @@ interface StoragePools {
     ...ResourceInstanceParameters<StoragePool>,
   ): ArmResponse<AvsDetails> | ErrorResponse;
 
-  @added(Versions.v2_preview)
+  @added(Versions.v3_preview)
   @doc("Returns the information about the on-going connection of the storage pool to AVS")
   @armResourceAction(StoragePool)
   @action("getAvsConnection")
@@ -188,7 +194,7 @@ interface StoragePools {
     ...ResourceInstanceParameters<StoragePool>,
   ): ArmResponse<AvsConnection> | ErrorResponse;
 
-  @added(Versions.v2_preview)
+  @added(Versions.v3_preview)
   @doc("Returns the status of the storage pool connection to AVS")
   @armResourceAction(StoragePool)
   @action("getAvsConnectionStatus")
@@ -219,7 +225,7 @@ interface StoragePools {
     ArmCombinedLroHeaders & Azure.Core.Foundations.RetryAfterHeader
   > | ErrorResponse;
 
-  @added(Versions.v2_preview)
+  @added(Versions.v3_preview)
   @doc("Enables the AVS connection support for a specific Storage Pool")
   @armResourceAction(StoragePool)
   @action("enableAvsConnection")
@@ -260,7 +266,7 @@ interface StoragePools {
     ArmCombinedLroHeaders & Azure.Core.Foundations.RetryAfterHeader
   > | ErrorResponse;
 
-  @added(Versions.v2_preview)
+  @added(Versions.v3_preview)
   @doc("Disables the AVS connection support for a specific Storage Pool")
   @armResourceAction(StoragePool)
   @action("disableAvsConnection")
@@ -297,7 +303,7 @@ interface StoragePools {
     ArmCombinedLroHeaders & Azure.Core.Foundations.RetryAfterHeader
   > | ErrorResponse;
 
-  @added(Versions.v2_preview)
+  @added(Versions.v3_preview)
   @doc("Finalize the AVS connection for a specific Storage Pool")
   @armResourceAction(StoragePool)
   @action("finalizeAvsConnection")
@@ -320,7 +326,7 @@ interface StoragePools {
     ArmCombinedLroHeaders & Azure.Core.Foundations.RetryAfterHeader
   > | ErrorResponse;
 
-  @added(Versions.v2_preview)
+  @added(Versions.v3_preview)
   @doc("Make sure that all steps necessary to enable this storage pool to be connected to the AVS instance are fully working, and fix them if not")
   @armResourceAction(StoragePool)
   @action("repairAvsConnection")
@@ -563,7 +569,7 @@ model HealthDetails {
   @doc("Data reduction ratio achieved on this pool")
   dataReductionRatio: float64;
 
-  @added(Versions.v2_preview)
+  @added(Versions.v3_preview)
   @doc("The estimated maximum capacity of the pool. Measured in bytes.")
   estimatedMaxCapacity: int64;
 }
@@ -625,7 +631,7 @@ model StoragePoolEnableAvs {
   vasaProviderPassword: string;
 }
 
-@added(Versions.v2_preview)
+@added(Versions.v3_preview)
 @doc("Explicit service initialization payload, with no encoding or signing; may be null if completed is true, or if serviceInitializationHandleEnc is not null")
 model ServiceInitializationHandle {
   @doc("Resource id pointing at the AVS SDDC the pool is configured with.")
@@ -635,7 +641,7 @@ model ServiceInitializationHandle {
   serviceAccountUsername?: string;
 }
 
-@added(Versions.v2_preview)
+@added(Versions.v3_preview)
 @doc("Information about the connection of the storage pool to AVS")
 model AvsConnection {
   @doc("Indicates whether service initialization is complete")
@@ -648,7 +654,7 @@ model AvsConnection {
   serviceInitializationHandle?: ServiceInitializationHandle;
 }
 
-@added(Versions.v2_preview)
+@added(Versions.v3_preview)
 @doc("The status of the storage pool connection to AVS")
 model AvsConnectionStatus {
   @doc("If true, a sequence of enable/finalize has been completed successfully, and disable hasn't been called successfully since.")
@@ -661,14 +667,14 @@ model AvsConnectionStatus {
   sddcResourceId?: string;
 }
 
-@added(Versions.v2_preview)
+@added(Versions.v3_preview)
 @doc("Storage Pool enable AVS Connection")
 model StoragePoolEnableAvsConnectionPost {
   @doc("Resource id pointing at the AVS SDDC the pool is configured with.")
   sddcResourceId: string;
 }
 
-@added(Versions.v2_preview)
+@added(Versions.v3_preview)
 @doc("Explicit service account credentials")
 model ServiceInitializationData {
   @doc("Service account username")
@@ -685,7 +691,7 @@ model ServiceInitializationData {
   vSphereCertificate?: string;
 }
 
-@added(Versions.v2_preview)
+@added(Versions.v3_preview)
 @doc("Storage Pool finalize AVS Connection")
 model StoragePoolFinalizeAvsConnectionPost {
   @doc("Encoded service account credentials alongside connection information, encrypted with the ephemeral public key")
@@ -727,7 +733,7 @@ model AvsStorageContainerProperties {
   @visibility("read")
   storageName?: string;
 
-  @added(Versions.v2_preview)
+  @added(Versions.v3_preview)
   @doc("Name of the storage container.")
   @pattern("^[a-zA-Z][a-zA-Z0-9\\-]{0,62}[a-zA-Z0-9]$")
   @visibility("read")
