@@ -2,6 +2,7 @@ import "@typespec/rest";
 import "@typespec/http";
 import "@typespec/versioning";
 import "../models/batch.tsp";
+import "../models/common.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -26,7 +27,7 @@ namespace Azure.OpenAI;
 op listBatches(
   @query after?: string,
   @query limit?: int32,
-): ListBatchesResponse;
+): OpenAIPageableListOf<Batch>;
 
 /**
  * Creates and executes a batch from an uploaded file of requests.

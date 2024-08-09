@@ -84,7 +84,49 @@
           "200": {
             "description": "The requested list of batches.",
             "schema": {
-              "$ref": "#/definitions/ListBatchesResponse"
+              "type": "object",
+              "description": "The response data for a requested list of items.",
+              "properties": {
+                "object": {
+                  "type": "string",
+                  "description": "The object type, which is always list.",
+                  "enum": [
+                    "list"
+                  ],
+                  "x-ms-enum": {
+                    "modelAsString": false
+                  }
+                },
+                "data": {
+                  "type": "array",
+                  "description": "The requested list of items.",
+                  "items": {
+                    "$ref": "#/definitions/Batch"
+                  }
+                },
+                "first_id": {
+                  "type": "string",
+                  "description": "The first ID represented in this list.",
+                  "x-ms-client-name": "firstId"
+                },
+                "last_id": {
+                  "type": "string",
+                  "description": "The last ID represented in this list.",
+                  "x-ms-client-name": "lastId"
+                },
+                "has_more": {
+                  "type": "boolean",
+                  "description": "A value indicating whether there are additional values available not captured in this list.",
+                  "x-ms-client-name": "hasMore"
+                }
+              },
+              "required": [
+                "object",
+                "data",
+                "first_id",
+                "last_id",
+                "has_more"
+              ]
             }
           }
         },
@@ -4881,46 +4923,6 @@
       "required": [
         "created",
         "data"
-      ]
-    },
-    "ListBatchesResponse": {
-      "type": "object",
-      "description": "A list of paginated Batch objects.",
-      "properties": {
-        "data": {
-          "type": "array",
-          "description": "A human-readable error message.",
-          "items": {
-            "$ref": "#/definitions/Batch"
-          }
-        },
-        "first_id": {
-          "type": "string",
-          "description": "A human-readable error message."
-        },
-        "last_id": {
-          "type": "string",
-          "description": "A human-readable error message."
-        },
-        "has_more": {
-          "type": "boolean",
-          "description": "A human-readable error message."
-        },
-        "object": {
-          "type": "string",
-          "description": "The object type.",
-          "enum": [
-            "list"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          }
-        }
-      },
-      "required": [
-        "data",
-        "has_more",
-        "object"
       ]
     },
     "OnYourDataAccessTokenAuthenticationOptions": {

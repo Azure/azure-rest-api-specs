@@ -245,25 +245,3 @@ model BatchRequestOutput {
     message?: string;
   };
 }
-
-/** A list of paginated Batch objects. */
-@added(ServiceApiVersions.v2024_07_01_Preview)
-model ListBatchesResponse {
-  /** A human-readable error message. */
-  data: Batch[];
-
-  /** A human-readable error message. */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "OpenAI uses camel casing"
-  first_id?: string;
-
-  /** A human-readable error message. */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "OpenAI uses camel casing"
-  last_id?: string;
-
-  /** A human-readable error message. */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "OpenAI uses camel casing"
-  has_more: boolean;
-
-  /** The object type. */
-  object: "list";
-}
