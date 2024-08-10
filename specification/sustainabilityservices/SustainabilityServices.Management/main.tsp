@@ -36,6 +36,7 @@ model CalculationResource is TrackedResource<CalculationResourceProperties> {
   @key("calculationResourceName")
   @segment("calculations")
   @path
+  @visibility("read")
   name: string;
 
   ...ManagedServiceIdentityProperty;
