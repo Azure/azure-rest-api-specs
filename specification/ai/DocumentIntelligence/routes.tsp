@@ -63,15 +63,11 @@ model DocumentModelAnalyzeRequestParams {
   stringIndexType?: StringIndexType = StringIndexType.textElements;
 
   @doc("List of optional analysis features.")
-  @query({
-    format: "csv",
-  })
+  @query
   features?: DocumentAnalysisFeature[];
 
   @doc("List of additional fields to extract.  Ex. \"NumberOfGuests,StoreNumber\"")
-  @query({
-    format: "csv",
-  })
+  @query
   queryFields?: string[];
 
   @doc("Format of the analyze result top-level content.")
@@ -80,9 +76,7 @@ model DocumentModelAnalyzeRequestParams {
 
   @added(Versions.v2024_07_31_preview)
   @doc("Additional outputs to generate during analysis.")
-  @query({
-    format: "csv",
-  })
+  @query
   output?: AnalyzeOutputOption[];
 }
 
