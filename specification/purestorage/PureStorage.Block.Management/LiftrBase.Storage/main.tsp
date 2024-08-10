@@ -25,6 +25,7 @@ enum Versions {
   v1_preview: "2023-06-01-preview",
 }
 
+#suppress "@azure-tools/typespec-azure-core/friendly-name" "Legacy"
 @doc("Reservation resource type.")
 @friendlyName("Reservation")
 model Reservation<TProperties extends Model = ReservationProperties>

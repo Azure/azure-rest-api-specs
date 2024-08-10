@@ -129,6 +129,7 @@ model UserCompanyDetails {
 
 alias UserDetailsDefaultExtraProperties = UserCompanyDetails;
 
+#suppress "@azure-tools/typespec-azure-core/friendly-name" "Legacy"
 @doc("Details of the User.")
 @friendlyName("UserDetails")
 model UserDetails<TExtraProperties extends Model = UserDetailsDefaultExtraProperties> {
