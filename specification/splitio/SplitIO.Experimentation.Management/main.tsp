@@ -23,10 +23,6 @@ namespace SplitIO {
 namespace SplitIO.Experimentation {
   @doc("Supported API versions for the SplitIO.Experimentation resource provider.")
   enum Versions {
-    @doc("2024-03-01-preview api version")
-    @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-    v24_03_preview: "2024-03-01-preview",
-
     @doc("2024-07-01-preview api version")
     @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
     v24_07_preview: "2024-07-01-preview",
