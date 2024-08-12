@@ -17,7 +17,7 @@ model Fleet is TrackedResource<FleetProperties> {
   @doc("The name of the Compute Fleet")
   @key("fleetName")
   @segment("fleets")
-  @pattern("^[^_\\W][\\w-._]{0,79}(?<![-.])$")
+  @pattern("^[^_\\W][\\w\\-._]{0,79}(?<![-.])$")
   @path
   name: string;
 
@@ -109,7 +109,7 @@ model ComputeProfile {
     """)
   computeApiVersion?: string;
 
-  @added(Versions.v2024_05_01_preview)
+  @added(Versions.v2024_08_08_preview)
   @doc("""
     Specifies the number of fault domains to use when creating the underlying VMSS.
     A fault domain is a logical group of hardware within an Azure datacenter.
@@ -125,7 +125,7 @@ model VmSizeProfile {
   @doc("The Sku name (e.g. 'Standard_DS1_v2')")
   name: string;
 
-  @added(Versions.v2024_05_01_preview)
+  @added(Versions.v2024_08_08_preview)
   @doc("""
     The rank of the VM size. This is used with 'RegularPriorityAllocationStrategy.Prioritized'
     The lower the number, the higher the priority. Starting with 0.
@@ -158,7 +158,7 @@ model SpotPriorityProfile is BasePriorityProfile {
   @doc("Allocation strategy to follow when determining the VM sizes distribution for Spot VMs.")
   allocationStrategy?: SpotAllocationStrategy;
 
-  @added(Versions.v2024_05_01_preview)
+  @added(Versions.v2024_08_08_preview)
   @doc("""
     Flag to enable/disable continuous goal seeking for the desired capacity and restoration of evicted Spot VMs.
     If maintain is enabled, AzureFleetRP will use all VM sizes in vmSizesProfile to create new VMs (if VMs are evicted deleted)
@@ -195,7 +195,7 @@ union RegularPriorityAllocationStrategy {
   @doc("Default. VM sizes distribution will be determined to optimize for price.")
   LowestPrice: "LowestPrice",
 
-  @added(Versions.v2024_05_01_preview)
+  @added(Versions.v2024_08_08_preview)
   @doc("VM sizes distribution will be determined to optimize for the 'priority' as specified for each vm size.")
   Prioritized: "Prioritized",
 }
@@ -237,7 +237,7 @@ interface Fleets {
     ...ProviderNamespace<Fleet>,
     ...ResourceNameParameter<
       Fleet,
-      NamePattern = "^[^_\\W][\\w-._]{0,79}(?<![-.])$"
+      NamePattern = "^[^_\\W][\\w\\-._]{0,79}(?<![-.])$"
     >,
   ): ArmResponse<VirtualMachineScaleSetListResult> | ErrorResponse;
 }
