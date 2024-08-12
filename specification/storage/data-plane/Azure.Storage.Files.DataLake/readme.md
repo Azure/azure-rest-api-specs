@@ -25,7 +25,7 @@ These are the global settings for the StorageDataLake API.
 
 ``` yaml
 openapi-type: data-plane
-tag: package-2023-05
+tag: package-2025-01
 use-internal-constructors: true
 add-credentials: true
 ```
