@@ -22,6 +22,7 @@ import "./resourcetypes/enclaveEndpoint/enclaveEndpoint.tsp";
 import "./resourcetypes/postActions/approvalcallback.tsp";
 import "./resourcetypes/approvals/approvals.tsp";
 import "./resourcetypes/postActions/initiatorcallback.tsp";
+import "./resourcetypes/postActions/approvaldeletioncallback.tsp";
 
 using Azure.ClientGenerator.Core;
 using Azure.Core;
@@ -208,9 +209,9 @@ model CommunityEndpointResource
 
 
 @added(Microsoft.Mission.Versions.v2024_06_01_preview)
-@doc("Approvals Model Resource")
-model ApprovalsResource is ExtensionResource<ApprovalsProperties> {
-  @key("approvalsName")
+@doc("Approval Model Resource")
+model ApprovalResource is ExtensionResource<ApprovalProperties> {
+  @key("approvalName")
   @segment("approvals")
   @path
   @pattern("^[a-zA-Z][a-zA-Z0-9-]*[a-zA-Z0-9]$")
@@ -367,6 +368,14 @@ interface EnclaveConnection {
     ApprovalCallbackRequest,
     ApprovalCallbackResponse
   >;
+  @doc("Callback that triggers on approval deletion state change.")
+  @armResourceAction(EnclaveConnectionResource)
+  @added(Microsoft.Mission.Versions.v2024_06_01_preview)
+  approvalDeletionCallback is ArmResourceActionAsync<
+    EnclaveConnectionResource,
+    ApprovalDeletionCallbackRequest,
+    ApprovalDeletionCallbackResponse
+  >;
 }
 
 @added(Microsoft.Mission.Versions.v2023_08_01_preview)
@@ -420,17 +429,17 @@ interface ExternalConnections {
 }
 
 @added(Microsoft.Mission.Versions.v2024_06_01_preview)
-@doc("Approvals Interface")
+@doc("Approval Interface")
 @armResourceOperations
-interface Approvals {
-  get is ArmResourceRead<ApprovalsResource>;
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<ApprovalsResource>;
+interface Approval {
+  get is ArmResourceRead<ApprovalResource>;
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<ApprovalResource>;
   update is ArmResourcePatchAsync<
-    ApprovalsResource,
-    ApprovalsProperties
+    ApprovalResource,
+    ApprovalProperties
   >;
-  delete is ArmResourceDeleteWithoutOkAsync<ApprovalsResource>;  
-  @doc("Upon receiving approval or rejection from approver, this facilitates actions on approvals resource")
-  @armResourceAction(ApprovalsResource)
-  initiatorCallback is ArmResourceActionAsync<ApprovalsResource, InitiatorCallbackRequest, InitiatorCallbackResponse>;
+  delete is ArmResourceDeleteWithoutOkAsync<ApprovalResource>;  
+  @doc("Upon receiving approval or rejection from approver, this facilitates actions on approval resource")
+  @armResourceAction(ApprovalResource)
+  initiatorCallback is ArmResourceActionAsync<ApprovalResource, InitiatorCallbackRequest, InitiatorCallbackResponse>;
 }

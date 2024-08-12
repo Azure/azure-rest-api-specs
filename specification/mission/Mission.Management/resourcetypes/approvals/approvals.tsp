@@ -37,7 +37,7 @@ model RequestMetadata{
 }
 
 @doc("Approvals Resource Properties")
-model ApprovalsProperties {
+model ApprovalProperties {
 
     @doc("Provisioning State.")
     @visibility("read")
