@@ -28,7 +28,7 @@ These are the global settings for the Confluent API.
 title: ConfluentManagementClient
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2024-07
+tag: package-preview-2024-07
 ```
 
 ### Tag: package-preview-2024-07
