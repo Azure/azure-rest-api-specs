@@ -227,7 +227,7 @@ model DataflowEndpointKafka {
   tls?: TlsProperties = #{ mode: OperationalMode.Enabled };
 
   @doc("Cloud event mapping config.")
-  cloudEventMapping?: CloudEventMappingType;
+  cloudEventAttributes?: CloudEventAttributeType;
 }
 
 @doc("Kafka endpoint Authentication properties. NOTE - only authentication property is allowed per entry")
@@ -365,7 +365,7 @@ model DataflowEndpointMqtt {
   tls?: TlsProperties = #{ mode: OperationalMode.Enabled };
 
   @doc("Cloud event mapping config.")
-  cloudEventMapping?: CloudEventMappingType;
+  cloudEventAttributes?: CloudEventAttributeType;
 }
 
 @doc("Mqtt endpoint Authentication properties. NOTE - only authentication property is allowed per entry.")
@@ -402,15 +402,12 @@ union MqttRetainType {
 }
 
 @doc("How to map events to the cloud.")
-union CloudEventMappingType {
+union CloudEventAttributeType {
   string,
 
-  @doc("PassThrough type")
-  PassThrough: "PassThrough",
+  @doc("Propagate type")
+  Propagate: "Propagate",
 
-  @doc("Always type")
-  Always: "Always",
-
-  @doc("Never type")
-  Never: "Never",
+  @doc("CreateOrRemap type")
+  CreateOrRemap: "CreateOrRemap",
 }
