@@ -230,9 +230,9 @@ These settings apply only when `--tag=package-2024-09-01-preview` is specified o
 
 ```yaml $(tag) == 'package-2024-09-01-preview'
 input-file:
-  - Microsoft.Databricks/stable/2024-09-01-preview/databricks.json
-  - Microsoft.Databricks/stable/2024-09-01-preview/vnetpeering.json
-  - Microsoft.Databricks/stable/2024-09-01-preview/accessconnector.json
+  - Microsoft.Databricks/preview/2024-09-01-preview/databricks.json
+  - Microsoft.Databricks/preview/2024-09-01-preview/vnetpeering.json
+  - Microsoft.Databricks/preview/2024-09-01-preview/accessconnector.json
 ```
 
 
