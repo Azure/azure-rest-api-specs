@@ -30,6 +30,37 @@ description: Azure Stack HCI management service
 openapi-type: arm
 openapi-subtype: rpaas
 tag: package-2024-04
+
+directive:
+  - from: edgeDevices.json
+    where: $.definitions
+    transform: >
+      $.ErrorDetail['x-ms-client-name'] = 'HciValidationFailureDetail';
+      $.Extension['x-ms-client-name'] = 'HciEdgeDeviceArcExtension';
+      delete $.HostNetwork;
+      delete $.Intents;
+      delete $.AdapterPropertyOverrides;
+      delete $.VirtualSwitchConfigurationOverrides;
+      delete $.StorageNetworks;
+      delete $.StorageAdapterIPInfo;
+  - from: swagger-document
+    where: $.definitions.HciNetworkProfile.properties.hostNetwork
+    transform: >
+      $['$ref'] = "deploymentSettings.json#/definitions/HostNetwork";
+  - from: swagger-document
+    where: 
+      - $.definitions.Extension.allOf[0]
+      - $.definitions.Offer.allOf[0]
+      - $.definitions.Publisher.allOf[0]
+      - $.definitions.Sku.allOf[0]
+      - $.definitions.UpdateRun.allOf[0]
+      - $.definitions.Update.allOf[0]
+      - $.definitions.UpdateSummaries.allOf[0]
+    transform: >
+      $['$ref'] = "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+  - from: swagger-document
+    where: $.paths[*]..responses.default
+    transform: $.schema['$ref'] = "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
 ```
 
 ## Suppression
