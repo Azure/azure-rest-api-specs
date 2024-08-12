@@ -4,14 +4,19 @@ import "@azure-tools/typespec-azure-core";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using Azure.Core;
 
-namespace KeyVaultClient;
+namespace KeyVault;
 
 /**
  * The role definition type.
  */
 union RoleDefinitionType {
   string,
+
+  /**
+   * Microsoft-defined role definitions.
+   */
   `Microsoft.Authorization/roleDefinitions`: "Microsoft.Authorization/roleDefinitions",
 }
 
@@ -231,10 +236,18 @@ union RoleScope {
  */
 union SettingTypeEnum {
   string,
+
+  /**
+   * A boolean setting value.
+   */
   boolean: "boolean",
 }
 
-model SASTokenParameter {
+/**
+ * An authentication method and location for the operation.
+ */
+@friendlyName("SASTokenParameter")
+model SasTokenParameter {
   /**
    * Azure Blob storage container Uri
    */
@@ -254,13 +267,33 @@ model SASTokenParameter {
 }
 
 /**
+ * The status of a long-running operation.
+ */
+@lroStatus
+union OperationStatus {
+  string,
+
+  /** The operation is in progress. */
+  InProgress: "InProgress",
+
+  /** The operation successfully completed. */
+  Succeeded: "Succeeded",
+
+  /** The operation was canceled. */
+  Canceled: "Canceled",
+
+  /** The operation failed. */
+  Failed: "Failed",
+}
+
+/**
  * Full backup operation
  */
 model FullBackupOperation {
   /**
    * Status of the backup operation.
    */
-  status?: string;
+  status?: OperationStatus;
 
   /**
    * The status details of backup operation.
@@ -275,12 +308,14 @@ model FullBackupOperation {
   /**
    * The start time of the backup operation in UTC
    */
-  startTime?: plainTime;
+  @encode("unixTimestamp", int32)
+  startTime?: utcDateTime;
 
   /**
    * The end time of the backup operation in UTC
    */
-  endTime?: plainTime;
+  @encode("unixTimestamp", int32)
+  endTime?: utcDateTime;
 
   /**
    * Identifier for the full backup operation.
@@ -329,6 +364,9 @@ model KeyVaultError {
   error?: Error;
 }
 
+/**
+ * The authentication method and location for the backup operation.
+ */
 model PreBackupOperationParameters {
   /**
    * Azure Blob storage container Uri
@@ -348,8 +386,14 @@ model PreBackupOperationParameters {
   useManagedIdentity?: boolean;
 }
 
+/**
+ * The authentication method and location for the restore operation.
+ */
 model PreRestoreOperationParameters {
-  sasTokenParameters?: SASTokenParameter;
+  /**
+   * A user-provided SAS token to an Azure blob storage container.
+   */
+  sasTokenParameters?: SasTokenParameter;
 
   /**
    * The Folder name of the blob where the previous successful full backup was stored
@@ -364,7 +408,7 @@ model RestoreOperation {
   /**
    * Status of the restore operation.
    */
-  status?: string;
+  status?: OperationStatus;
 
   /**
    * The status details of restore operation.
@@ -384,16 +428,24 @@ model RestoreOperation {
   /**
    * The start time of the restore operation
    */
-  startTime?: plainTime;
+  @encode("unixTimestamp", int32)
+  startTime?: utcDateTime;
 
   /**
    * The end time of the restore operation
    */
-  endTime?: plainTime;
+  @encode("unixTimestamp", int32)
+  endTime?: utcDateTime;
 }
 
+/**
+ * The authentication method and location for the restore operation.
+ */
 model RestoreOperationParameters {
-  sasTokenParameters: SASTokenParameter;
+  /**
+   * A user-provided SAS token to an Azure blob storage container.
+   */
+  sasTokenParameters: SasTokenParameter;
 
   /**
    * The Folder name of the blob where the previous successful full backup was stored
@@ -401,8 +453,14 @@ model RestoreOperationParameters {
   folderToRestore: string;
 }
 
+/**
+ * The authentication method and location for the selective key restore operation.
+ */
 model SelectiveKeyRestoreOperationParameters {
-  sasTokenParameters: SASTokenParameter;
+  /**
+   * A user-provided SAS token to an Azure blob storage container.
+   */
+  sasTokenParameters: SasTokenParameter;
 
   /**
    * The Folder name of the blob where the previous successful full backup was stored
@@ -417,7 +475,7 @@ model SelectiveKeyRestoreOperation {
   /**
    * Status of the restore operation.
    */
-  status?: string;
+  status?: OperationStatus;
 
   /**
    * The status details of restore operation.
@@ -437,12 +495,14 @@ model SelectiveKeyRestoreOperation {
   /**
    * The start time of the restore operation
    */
-  startTime?: plainTime;
+  @encode("unixTimestamp", int32)
+  startTime?: utcDateTime;
 
   /**
    * The end time of the restore operation
    */
-  endTime?: plainTime;
+  @encode("unixTimestamp", int32)
+  endTime?: utcDateTime;
 }
 
 /**
@@ -635,6 +695,9 @@ model UpdateSettingRequest {
   value: string;
 }
 
+/**
+ * A Key Vault account setting.
+ */
 model Setting {
   /**
    * The account setting to be updated
@@ -677,25 +740,29 @@ model Attributes {
    * Not before date in UTC.
    */
   @encodedName("application/json", "nbf")
-  notBefore?: plainTime;
+  @encode("unixTimestamp", int32)
+  notBefore?: utcDateTime;
 
   /**
    * Expiry date in UTC.
    */
   @encodedName("application/json", "exp")
-  expires?: plainTime;
+  @encode("unixTimestamp", int32)
+  expires?: utcDateTime;
 
   /**
    * Creation time in UTC.
    */
   @visibility("read")
-  created?: plainTime;
+  @encode("unixTimestamp", int32)
+  created?: utcDateTime;
 
   /**
    * Last updated time in UTC.
    */
   @visibility("read")
-  updated?: plainTime;
+  @encode("unixTimestamp", int32)
+  updated?: utcDateTime;
 }
 
 /**
