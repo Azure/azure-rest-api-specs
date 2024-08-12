@@ -1,0 +1,34 @@
+{
+  "title": "Broker_CreateOrUpdate_Simple",
+  "operationId": "Broker_CreateOrUpdate",
+  "parameters": {
+    "api-version": "2024-08-15-preview",
+    "subscriptionId": "F8C729F9-DF9C-4743-848F-96EE433D8E53",
+    "resourceGroupName": "rgiotoperations",
+    "instanceName": "resource-name123",
+    "brokerName": "resource-name123",
+    "resource": {
+      "properties": {
+        "cardinality": {
+          "backendChain": {
+            "partitions": 2,
+            "redundancyFactor": 2,
+            "workers": 2
+          },
+          "frontend": {
+            "replicas": 2,
+            "workers": 2
+          }
+        },
+        "generateResourceLimits": {
+          "cpu": "Enabled"
+        },
+        "memoryProfile": "Low"
+      },
+      "extendedLocation": {
+        "name": "qmbrfwcpwwhggszhrdjv",
+        "type": "CustomLocation"
+      }
+    }
+  }
+}

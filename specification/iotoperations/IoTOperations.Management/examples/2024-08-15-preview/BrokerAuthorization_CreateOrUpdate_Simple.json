@@ -1,0 +1,59 @@
+{
+  "title": "BrokerAuthorization_CreateOrUpdate_Simple",
+  "operationId": "BrokerAuthorization_CreateOrUpdate",
+  "parameters": {
+    "api-version": "2024-08-15-preview",
+    "subscriptionId": "F8C729F9-DF9C-4743-848F-96EE433D8E53",
+    "resourceGroupName": "rgiotoperations",
+    "instanceName": "resource-name123",
+    "brokerName": "resource-name123",
+    "authorizationName": "resource-name123",
+    "resource": {
+      "properties": {
+        "authorizationPolicies": {
+          "enableCache": true,
+          "rules": [
+            {
+              "principals": {
+                "clientIds": [
+                  "my-client-id"
+                ],
+                "attributes": [
+                  {
+                    "floor": "floor1",
+                    "site": "site1"
+                  }
+                ]
+              },
+              "brokerResources": [
+                {
+                  "method": "Connect"
+                },
+                {
+                  "method": "Subscribe",
+                  "topics": [
+                    "topic",
+                    "topic/with/wildcard/#"
+                  ]
+                }
+              ],
+              "stateStoreResources": [
+                {
+                  "method": "ReadWrite",
+                  "keyType": "Pattern",
+                  "keys": [
+                    "*"
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "extendedLocation": {
+        "name": "qmbrfwcpwwhggszhrdjv",
+        "type": "CustomLocation"
+      }
+    }
+  }
+}
