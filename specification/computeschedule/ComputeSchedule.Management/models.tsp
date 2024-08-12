@@ -221,13 +221,13 @@ model OperationErrorDetails {
 }
 
 #suppress "@azure-tools/typespec-azure-core/no-offsetdatetime" "Prefer using `utcDateTime` when representing a datetime unless an offset is necessary."
-@doc("This is the first level of operation errors from the request to get errors per vm operation")
+@doc("This is the first level of operation errors from the request when clients get errors per vm operation")
 model OperationErrorsResult {
   @doc("The operationId identifying a vm operation")
-  operationId: string;
+  operationId?: string;
 
   @doc("The creation time of the error result")
-  creationTime: offsetDateTime;
+  creationTime?: offsetDateTime;
 
   @doc("The activation time of a vm operation")
   activationTime?: offsetDateTime;
