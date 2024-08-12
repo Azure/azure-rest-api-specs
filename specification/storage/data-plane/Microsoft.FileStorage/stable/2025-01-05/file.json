@@ -3286,6 +3286,9 @@
             "$ref": "#/parameters/GetRangeContentMD5"
           },
           {
+            "$ref": "#/parameters/StructuredBodyGet"
+          },
+          {
             "$ref": "#/parameters/LeaseIdOptional"
           },
           {
@@ -3495,6 +3498,17 @@
                   "name": "LeaseStatusType",
                   "modelAsString": false
                 }
+              },
+              "x-ms-structured-body": {
+                "x-ms-client-name": "StructuredBodyType",
+                "type": "string",
+                "description": "Indicates the response body contains a structured message and specifies the message schema version and properties."
+              },
+              "x-ms-structured-content-length": {
+                "x-ms-client-name": "StructuredContentLength",
+                "type": "integer",
+                "format": "int64",
+                "description": "The length of the blob/file content inside the message body when the response body is returned as a structured message. Will always be smaller than Content-Length."
               }
             },
             "schema": {
@@ -3704,6 +3718,17 @@
                   "name": "LeaseStatusType",
                   "modelAsString": false
                 }
+              },
+              "x-ms-structured-body": {
+                "x-ms-client-name": "StructuredBodyType",
+                "type": "string",
+                "description": "Indicates the response body contains a structured message and specifies the message schema version and properties."
+              },
+              "x-ms-structured-content-length": {
+                "x-ms-client-name": "StructuredContentLength",
+                "type": "integer",
+                "format": "int64",
+                "description": "The length of the blob/file content inside the message body when the response body is returned as a structured message. Will always be smaller than Content-Length."
               }
             },
             "schema": {
@@ -4845,6 +4870,12 @@
           },
           {
             "$ref": "#/parameters/FileRequestIntent"
+          },
+          {
+            "$ref": "#/parameters/StructuredBodyPut"
+          },
+          {
+            "$ref": "#/parameters/StructuredContentLength"
           }
         ],
         "responses": {
@@ -4890,6 +4921,11 @@
                 "type": "string",
                 "format": "date-time-rfc1123",
                 "description": "Last write time for the file."
+              },
+              "x-ms-structured-body": {
+                "x-ms-client-name": "StructuredBodyType",
+                "type": "string",
+                "description": "Indicates the structured message body was accepted and mirrors back the message schema version and properties."
               }
             }
           },
@@ -7200,6 +7236,34 @@
       "type": "boolean",
       "x-ms-parameter-location": "method",
       "description": "When this header is set to true and specified together with the Range header, the service returns the MD5 hash for the range, as long as the range is less than or equal to 4 MB in size."
+    },
+    "StructuredBodyGet": {
+      "name": "x-ms-structured-body",
+      "x-ms-client-name": "StructuredBodyType",
+      "in": "header",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "description": "Specifies the response content should be returned as a structured message and specifies the message schema version and properties."
+    },
+    "StructuredBodyPut": {
+      "name": "x-ms-structured-body",
+      "x-ms-client-name": "StructuredBodyType",
+      "in": "header",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "description": "Required if the request body is a structured message. Specifies the message schema version and properties."
+    },
+    "StructuredContentLength": {
+      "name": "x-ms-structured-content-length",
+      "x-ms-client-name": "StructuredContentLength",
+      "in": "header",
+      "required": false,
+      "type": "integer",
+      "format": "int64",
+      "x-ms-parameter-location": "method",
+      "description": "Required if the request body is a structured message. Specifies the length of the blob/file content inside the message body. Will always be smaller than Content-Length."
     },
     "HandleId": {
       "name": "x-ms-handle-id",
