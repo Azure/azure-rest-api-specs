@@ -34,8 +34,8 @@ interface Operations extends Azure.ResourceManager.Operations {}
 model OnboardingService
   is Azure.ResourceManager.TrackedResource<OnboardingServiceProperties> {
   @doc("The name of the Provisioning Resource.")
-  @maxLength(128)
-  @pattern("^[a-zA-Z0-9-]{3,127}[a-zA-Z0-9]$")
+  @maxLength(64)
+  @pattern("^[a-zA-Z0-9-]{3,63}[a-zA-Z0-9]$")
   @key("onboardingServiceName")
   @segment("onboardingServices")
   @path
