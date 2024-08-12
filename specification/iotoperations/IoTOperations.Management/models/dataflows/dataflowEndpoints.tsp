@@ -224,7 +224,7 @@ model DataflowEndpointKafka {
   partitionStrategy?: DataflowEndpointKafkaPartitionStrategy = DataflowEndpointKafkaPartitionStrategy.Default;
 
   @doc("TLS configuration.")
-  tls: TlsProperties;
+  tls?: TlsProperties = #{ mode: OperationalMode.Enabled };
 
   @doc("Cloud event mapping config.")
   cloudEventMapping?: CloudEventMappingType;
