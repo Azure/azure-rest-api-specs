@@ -28,7 +28,7 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ```yaml $(tag) == 'package-2024-09-01-preview' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.databricks.v2024_09_01_preview
-  output-folder: $(azure-libraries-for-java-folder)/sdk/databricks/mgmt-v2024_09-_01_preview
+  output-folder: $(azure-libraries-for-java-folder)/sdk/databricks/mgmt-v2024_09_01_preview
 regenerate-manager: true
 generate-interface: true
 ```
@@ -146,7 +146,7 @@ These are the global settings for the Databricks API.
 title: AzureDatabricksManagementClient
 description: The Microsoft Azure management APIs allow end users to operate on Azure Databricks Workspace / Access Connector resources.
 openapi-type: arm
-tag: package-preview-2024-09-01
+tag: package-2024-09-01-preview
 ```
 
 ### Tag: package-2018-04-01
