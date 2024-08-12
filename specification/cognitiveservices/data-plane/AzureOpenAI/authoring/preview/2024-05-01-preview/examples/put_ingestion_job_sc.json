@@ -5,13 +5,13 @@
     "ingestionJob": {
       "kind": "SystemCompute",
       "searchServiceConnection": {
-        "kind": "endpointMI",
+        "kind": "EndpointWithManagedIdentity",
         "endpoint": "https://aykame-dev-search.search.windows.net"
       },
       "datasource": {
-        "kind": "storage",
+        "kind": "Storage",
         "connection": {
-          "kind": "endpointMI",
+          "kind": "EndpointWithManagedIdentity",
           "endpoint": "https://mystorage.blob.core.windows.net/",
           "resourceId": "/subscriptions/1234567-abcd-1234-5678-1234abcd/resourceGroups/my-resource/providers/Microsoft.Storage/storageAccounts/mystorage"
         },
@@ -22,7 +22,7 @@
         "embeddings": [
           {
             "connection": {
-              "kind": "relativeConnection"
+              "kind": "RelativeConnection"
             },
             "deploymentName": "Ada"
           }
@@ -41,13 +41,13 @@
         "kind": "SystemCompute",
         "jobId": "ingestion-job",
         "searchServiceConnection": {
-          "kind": "endpointMI",
+          "kind": "EndpointWithManagedIdentity",
           "endpoint": "https://aykame-dev-search.search.windows.net"
         },
         "datasource": {
-          "kind": "storage",
+          "kind": "Storage",
           "connection": {
-            "kind": "endpointMI",
+            "kind": "EndpointWithManagedIdentity",
             "endpoint": "https://mystorage.blob.core.windows.net/",
             "resourceId": "/subscriptions/1234567-abcd-1234-5678-1234abcd/resourceGroups/my-resource/providers/Microsoft.Storage/storageAccounts/mystorage"
           },
@@ -58,7 +58,7 @@
           "embeddings": [
             {
               "connection": {
-                "kind": "relativeConnection"
+                "kind": "RelativeConnection"
               },
               "deploymentName": "Ada"
             }
