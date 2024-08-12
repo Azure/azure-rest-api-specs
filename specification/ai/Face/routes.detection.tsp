@@ -6,6 +6,7 @@ import "./models.detect.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
+using TypeSpec.Versioning;
 using Azure.ClientGenerator.Core;
 using Azure.Core;
 using Azure.Core.Traits;
@@ -61,5 +62,15 @@ interface FaceDetectionOperations {
     @doc("The input image binary.")
     @body
     imageContent: bytes;
+  }>;
+
+  @added(Versions.v1_2_preview_1)
+  detectFromSessionImageId is DetectOperation<{
+    @doc("The format of the HTTP payload.")
+    @header
+    contentType: "application/json";
+
+    @doc("Id of session image.")
+    sessionImageId: string;
   }>;
 }
