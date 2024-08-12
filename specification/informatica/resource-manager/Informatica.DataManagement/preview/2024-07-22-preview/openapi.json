@@ -1669,12 +1669,8 @@
       "description": "Informatica Serverless Runtime Network Interface configurations.",
       "properties": {
         "vnetId": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "Virtual network resource id",
-          "x-ms-arm-id-details": {
-            "allowedResources": []
-          }
+          "$ref": "#/definitions/VnetResourceId",
+          "description": "Virtual network resource id"
         },
         "subnetId": {
           "type": "string",
@@ -1699,12 +1695,8 @@
       "description": "The template for adding optional properties.",
       "properties": {
         "vnetId": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "Virtual network resource id",
-          "x-ms-arm-id-details": {
-            "allowedResources": []
-          }
+          "$ref": "#/definitions/VnetResourceId",
+          "description": "Virtual network resource id"
         },
         "subnetId": {
           "type": "string",
@@ -2326,6 +2318,18 @@
           "description": "Phone number of the user used by for contacting them if needed",
           "maxLength": 40
         }
+      }
+    },
+    "VnetResourceId": {
+      "type": "string",
+      "format": "arm-id",
+      "description": "A type definition that refers the id to an Azure Resource Manager resource.",
+      "x-ms-arm-id-details": {
+        "allowedResources": [
+          {
+            "type": "Microsoft.Network/virtualNetworks/subnets"
+          }
+        ]
       }
     },
     "email": {
