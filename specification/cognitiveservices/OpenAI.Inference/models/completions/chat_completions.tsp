@@ -48,17 +48,20 @@ model ChatCompletionsJsonResponseFormat extends ChatCompletionsResponseFormat {
   type: "json_object";
 }
 
-/**
- * Options for streaming response. Only set this when you set `stream: true`.
- */
-@added(ServiceApiVersions.v2024_07_01_Preview)
-model ChatCompletionStreamOptions {
-  /**
-   * If set, an additional chunk will be streamed before the `data: [DONE]` message. The `usage` field on this chunk shows the token usage statistics for the entire request, and the `choices` field will always be an empty array. All other chunks will also include a `usage` field, but with a null value.
-   */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "OpenAI uses wire-format snake_casing"
-  include_usage?: boolean;
-}
+// Deferred to a near-term future release after publish; see:
+// https://github.com/Azure/azure-rest-api-specs/pull/30087
+//
+// /**
+//  * Options for streaming response. Only set this when you set `stream: true`.
+//  */
+// @added(ServiceApiVersions.v2024_07_01_Preview)
+// model ChatCompletionStreamOptions {
+//   /**
+//    * If set, an additional chunk will be streamed before the `data: [DONE]` message. The `usage` field on this chunk shows the token usage statistics for the entire request, and the `choices` field will always be an empty array. All other chunks will also include a `usage` field, but with a null value.
+//    */
+//   #suppress "@azure-tools/typespec-azure-core/casing-style" "OpenAI uses wire-format snake_casing"
+//   include_usage?: boolean;
+// }
 
 @doc("""
   The configuration information for a chat completions request.
@@ -170,13 +173,16 @@ model ChatCompletionsOptions {
   @clientName("InternalShouldStreamResponse", "csharp")
   stream?: boolean;
 
-  /**
-   * Options for streaming response. Only set this when you set `stream: true`.
-   */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "OpenAI uses wire-format snake_casing"
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicitly required, nullable types"
-  @added(ServiceApiVersions.v2024_07_01_Preview)
-  stream_options?: ChatCompletionStreamOptions | null;
+  // Deferred to a near-term future release after publish; see:
+  // https://github.com/Azure/azure-rest-api-specs/pull/30087
+  //
+  // /**
+  //  * Options for streaming response. Only set this when you set `stream: true`.
+  //  */
+  // #suppress "@azure-tools/typespec-azure-core/casing-style" "OpenAI uses wire-format snake_casing"
+  // #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicitly required, nullable types"
+  // @added(ServiceApiVersions.v2024_07_01_Preview)
+  // stream_options?: ChatCompletionStreamOptions | null;
 
   @doc("""
     The model name to provide as part of this completions request.

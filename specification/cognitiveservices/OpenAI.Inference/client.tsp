@@ -69,7 +69,6 @@ interface OpenAIClient {
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
   cancelBatch is Azure.OpenAI.cancelBatch;
-
 }
 
 @@clientName(Azure.OpenAI.GenerateSpeechFromTextBody.body,
