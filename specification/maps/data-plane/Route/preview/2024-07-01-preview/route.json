@@ -814,7 +814,7 @@
         },
         "vehicleSpec": {
           "description": "Specifies the vehicle attributes such as size, weight, max speed, type of cargo, etc. for truck routing only. This helps avoid low bridge clearances, road restrictions, difficult right turns to provide the optimized truck route based on the vehicle specifications.\n\n`Note`: Only supported for truck travelMode",
-          "$ref": "#/definitions/VehicleSpec"
+          "$ref": "#/definitions/RouteDirectionVehicleSpec"
         }
       }
     },
@@ -2479,6 +2479,9 @@
       "allOf": [
         {
           "$ref": "#/definitions/VehicleSpec"
+        },
+        {
+          "$ref": "#/definitions/AxleCount"
         }
       ]
     },
@@ -2488,8 +2491,31 @@
       "allOf": [
         {
           "$ref": "#/definitions/VehicleSpec"
+        },
+        {
+          "$ref": "#/definitions/AxleCount"
         }
       ]
+    },
+    "RouteDirectionVehicleSpec": {
+      "type": "object",
+      "description": "Specifies the vehicle attributes such as size, weight, max speed, type of cargo, etc. for truck routing only. This helps avoid low bridge clearances, road restrictions, difficult right turns to provide the optimized truck route based on the vehicle specifications.\n\n`Note`: Only supported for truck travelMode.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/VehicleSpec"
+        }
+      ]
+    },
+    "AxleCount": {
+      "type": "object",
+      "description": "The number of axles on the vehicle.",
+      "properties": {
+        "axleCount": {
+          "description": "The number of axles on the vehicle.",
+          "format": "int64",
+          "type": "integer"
+        }
+      }
     },
     "VehicleSpec": {
       "description": "Specifies the vehicle attributes such as size, weight, max speed, type of cargo, etc. for truck routing only. This helps avoid low bridge clearances, road restrictions, difficult right turns to provide the optimized truck route based on the vehicle specifications.\n\n`Note`: Only supported for truck travelMode.",
