@@ -218,6 +218,9 @@ model OperationErrorDetails {
 
   @doc("The timestamp of the error occurence")
   timeStamp: offsetDateTime;
+
+  @doc("CRP operationid of the operation for deeper analysis")
+  crpOperationId: string;
 }
 
 #suppress "@azure-tools/typespec-azure-core/no-offsetdatetime" "Prefer using `utcDateTime` when representing a datetime unless an offset is necessary."
