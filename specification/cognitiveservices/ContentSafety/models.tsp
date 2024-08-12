@@ -944,28 +944,28 @@ model AnalyzeTextCustomCategoryResult {
 
 @added(ContentSafety.Versions.v2024_09_30_Preview)
 @doc("The image to be analyzed.")
-model ContentCredentialImageData {
+model CredentialImageData {
   @doc("The Base64 encoding of the image.")
   content: bytes;
 }
 
 @added(ContentSafety.Versions.v2024_09_30_Preview)
-@doc("The request of detecting content credential in the given image.")
-model DetectImageContentCredentialOptions {
+@doc("The request of decoding content credential in the given image.")
+model DecodeImageCredentialOptions {
   @doc("The image to be analyzed.")
-  image: ContentCredentialImageData;
+  image: CredentialImageData;
 }
 
 @added(ContentSafety.Versions.v2024_09_30_Preview)
-@doc("The detection results of content credential.")
-model DetectImageContentCredentialResult {
+@doc("The decoding results of content credential.")
+model DecodeImageCredentialResult {
   @doc("Analysis result for the given image.")
-  contentCredentialAnalysis: ImageContentCredentialAnalysisResult;
+  imageCredentialAnalysis: ImageCredentialAnalysisResult;
 }
 
 @added(ContentSafety.Versions.v2024_09_30_Preview)
-@doc("The detection result of content credential.")
-model ImageContentCredentialAnalysisResult {
+@doc("The decoding result of content credential.")
+model ImageCredentialAnalysisResult {
   @doc("The C2PA Manifest information that baked in the image.")
   imageManifest: string;
 

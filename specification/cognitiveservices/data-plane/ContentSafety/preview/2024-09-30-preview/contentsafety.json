@@ -606,11 +606,11 @@
         }
       }
     },
-    "/image:detectContentCredential": {
+    "/image:decodeCredential": {
       "post": {
-        "operationId": "ImageOperations_DetectContentCredential",
-        "summary": "Detect the content credentials from assets.",
-        "description": "A synchronous API for detecting the content credentials from assets.",
+        "operationId": "ImageOperations_DecodeCredential",
+        "summary": "Decode the content credentials from assets.",
+        "description": "A synchronous API for decoding the content credentials from assets.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -621,7 +621,7 @@
             "description": "The image to be decoded, which is in base64 string format.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/DetectImageContentCredentialOptions"
+              "$ref": "#/definitions/DecodeImageCredentialOptions"
             }
           }
         ],
@@ -629,7 +629,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/DetectImageContentCredentialResult"
+              "$ref": "#/definitions/DecodeImageCredentialResult"
             }
           },
           "default": {
@@ -3202,7 +3202,7 @@
         ]
       }
     },
-    "ContentCredentialImageData": {
+    "CredentialImageData": {
       "type": "object",
       "description": "The image to be analyzed.",
       "properties": {
@@ -3316,12 +3316,12 @@
         ]
       }
     },
-    "DetectImageContentCredentialOptions": {
+    "DecodeImageCredentialOptions": {
       "type": "object",
-      "description": "The request of detecting content credential in the given image.",
+      "description": "The request of decoding content credential in the given image.",
       "properties": {
         "image": {
-          "$ref": "#/definitions/ContentCredentialImageData",
+          "$ref": "#/definitions/CredentialImageData",
           "description": "The image to be analyzed."
         }
       },
@@ -3329,17 +3329,17 @@
         "image"
       ]
     },
-    "DetectImageContentCredentialResult": {
+    "DecodeImageCredentialResult": {
       "type": "object",
-      "description": "The detection results of content credential.",
+      "description": "The decoding results of content credential.",
       "properties": {
-        "contentCredentialAnalysis": {
-          "$ref": "#/definitions/ImageContentCredentialAnalysisResult",
+        "imageCredentialAnalysis": {
+          "$ref": "#/definitions/ImageCredentialAnalysisResult",
           "description": "Analysis result for the given image."
         }
       },
       "required": [
-        "contentCredentialAnalysis"
+        "imageCredentialAnalysis"
       ]
     },
     "DetectIncidentsResult": {
@@ -3453,9 +3453,9 @@
         ]
       }
     },
-    "ImageContentCredentialAnalysisResult": {
+    "ImageCredentialAnalysisResult": {
       "type": "object",
-      "description": "The detection result of content credential.",
+      "description": "The decoding result of content credential.",
       "properties": {
         "imageManifest": {
           "type": "string",

@@ -168,20 +168,20 @@ interface ImageOperations {
   >;
 
   @added(ContentSafety.Versions.v2024_09_30_Preview)
-  @summary("Detect the content credentials from assets.")
-  @doc("A synchronous API for detecting the content credentials from assets.")
-  @route("/image:detectContentCredential")
+  @summary("Decode the content credentials from assets.")
+  @doc("A synchronous API for decoding the content credentials from assets.")
+  @route("/image:decodeCredential")
   @post
-  detectContentCredential is Azure.Core.RpcOperation<
+  decodeCredential is Azure.Core.RpcOperation<
     {
       @bodyRoot
       @doc("The image to be decoded, which is in base64 string format.")
       @clientName("options", "csharp")
       @clientName("options", "python")
       @clientName("options", "java")
-      body: DetectImageContentCredentialOptions;
+      body: DecodeImageCredentialOptions;
     },
-    DetectImageContentCredentialResult
+    DecodeImageCredentialResult
   >;
 }
 
