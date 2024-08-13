@@ -1,3 +1,6 @@
+parameters:
+  "service-dir":
+    default: "sdk/fabric"
 emit:
   - "@azure-tools/typespec-autorest"
 options:
@@ -12,8 +15,9 @@ options:
     examples-directory: "{project-root}/examples"
   "@azure-tools/typespec-csharp":
     flavor: azure
+    package-dir: "Azure.ResourceManager.Fabric"
     clear-output-folder: true
-    namespace: "Azure.ResourceManager.Fabric"
+    namespace: "{package-dir}"
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"
