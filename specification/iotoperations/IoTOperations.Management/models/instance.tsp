@@ -67,20 +67,20 @@ model InstanceProperties {
 @doc("The configuration for components of the AIO Instance.")
 model Components {
   @doc("The properties of the ADR instance.")
-  adr?: AdrProperties = #{ mode: OperationalMode.Enabled };
+  adr?: AdrProperties = #{ state: OperationalMode.Enabled };
 
   @doc("The properties of the AKRI instance.")
-  akri?: AkriInstanceProperties = #{ mode: OperationalMode.Enabled };
+  akri?: AkriInstanceProperties = #{ state: OperationalMode.Enabled };
 
   @doc("The properties of the connectors instance.")
-  connectors?: ConnectorInstanceProperties = #{ mode: OperationalMode.Enabled };
+  connectors?: ConnectorInstanceProperties = #{ state: OperationalMode.Enabled };
 
   @doc("The properties of the dataflows instance.")
-  dataflows?: DataFlowInstanceProperties = #{ mode: OperationalMode.Enabled };
+  dataflows?: DataFlowInstanceProperties = #{ state: OperationalMode.Enabled };
 
   @doc("The properties of the device provisioning instance.")
-  schemaregistry?: SchemaRegistryInstanceProperties = #{
-    mode: OperationalMode.Enabled,
+  schemaRegistry?: SchemaRegistryInstanceProperties = #{
+    state: OperationalMode.Enabled,
   };
 }
 
@@ -97,32 +97,32 @@ model ServiceAccountProperties {
 model AdrProperties {
   @doc("This determines if the ADR service is enabled.")
   @visibility("create", "read")
-  mode: OperationalMode;
+  state: OperationalMode;
 }
 @doc("The properties of an AKRI instance.")
 model AkriInstanceProperties {
   @doc("This determines if the AKRI service is enabled.")
   @visibility("create", "read")
-  mode: OperationalMode;
+  state: OperationalMode;
 }
 
 @doc("The properties of a  Connector instance.")
 model ConnectorInstanceProperties {
   @doc("This determines if the Connector service is enabled.")
   @visibility("create", "read")
-  mode: OperationalMode;
+  state: OperationalMode;
 }
 
 @doc("The properties of an DataFlow instance.")
 model DataFlowInstanceProperties {
-  @doc("This determines if the DataFlow service is enabled.")
+  @doc("This determines if the Dataflow service is enabled.")
   @visibility("create", "read")
-  mode: OperationalMode;
+  state: OperationalMode;
 }
 
 @doc("The properties of a Schema Registry instance.")
 model SchemaRegistryInstanceProperties {
   @doc("This determines if the Schema Registry service is enabled.")
   @visibility("create", "read")
-  mode: OperationalMode;
+  state: OperationalMode;
 }
