@@ -1754,7 +1754,7 @@
       "required": true,
       "in": "path",
       "description": "The name of the Volume.",
-      "pattern": "^[a-z0-9]+(-[a-z0-9A-Z]+)*$",
+      "pattern": "^[a-z0-9]+((-|_)[a-z0-9A-Z]+)*$",
       "minLength": 3,
       "maxLength": 63,
       "x-ms-parameter-location": "method"
@@ -2473,10 +2473,6 @@
           "description": "Storage target information",
           "$ref": "#/definitions/IscsiTargetInfo"
         },
-        "softDeleteEnabled": {
-          "description": "Indicates whether delete retention is allowed on the volume.",
-          "type": "boolean"
-        },
         "managedBy": {
           "description": "Parent resource information.",
           "$ref": "#/definitions/ManagedByInfo"
@@ -2522,10 +2518,6 @@
         "managedBy": {
           "description": "Parent resource information.",
           "$ref": "#/definitions/ManagedByInfo"
-        },
-        "softDeleteEnabled": {
-          "description": "Indicates whether delete retention is allowed on the volume.",
-          "type": "boolean"
         }
       }
     },
@@ -2564,7 +2556,10 @@
         "Pending",
         "Creating",
         "Updating",
-        "Deleting"
+        "Deleting",
+        "Deleted",
+        "Restoring",
+        "SoftDeleting"
       ],
       "x-ms-enum": {
         "name": "ProvisioningStates",
