@@ -11,7 +11,7 @@ namespace Microsoft.IoTOperations;
 @doc("DataflowEndpoint Authentication SystemAssignedManagedIdentity properties")
 model DataflowEndpointAuthenticationSystemAssignedManagedIdentity {
   @doc("Audience of the service to authenticate against. Optional; defaults to the audience for Service host configuration.")
-  audience: string;
+  audience?: string;
 }
 
 @doc("DataflowEndpoint Authentication UserAssignedManagedIdentity properties")
@@ -20,7 +20,7 @@ model DataflowEndpointAuthenticationUserAssignedManagedIdentity {
   clientId: string;
 
   @doc("Resource identifier (application ID URI) of the resource, affixed with the .default suffix.")
-  scope: string;
+  scope?: string;
 
   @doc("Tenant ID.")
   tenantId: string;
@@ -103,7 +103,7 @@ model BrokerAuthenticatorCustomAuth {
 @doc("X509 Certificate Authentication properties.")
 model X509ManualCertificate {
   @doc("Kubernetes secret containing an X.509 client certificate. This is a reference to the secret through an identifying name, not the secret itself.")
-  secretRef: KubernetesReferenceKnownType;
+  secretRef: string;
 }
 
 @doc("X509 for BrokerAuthentication.")

@@ -69,5 +69,5 @@ union BrokerAuthenticationMethod {
   ServiceAccountToken: "ServiceAccountToken",
 
   @doc("X.509 authentication configuration.")
-  x509Certificate: "x509Certificate",
+  X509: "X509",
 }

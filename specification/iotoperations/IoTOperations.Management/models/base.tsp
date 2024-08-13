@@ -142,15 +142,6 @@ union BrokerProtocolType {
   WebSockets: "WebSockets",
 }
 
-@doc("Kubernetes reference with known type")
-model KubernetesReferenceKnownType {
-  @doc("Name is the name of resource being referenced")
-  name: string;
-
-  @doc("Namespace is the namespace of the resource being referenced. This field is required when the resource has a namespace.")
-  `namespace`?: string;
-}
-
 @doc("Kubernetes reference")
 model KubernetesReference {
   ...LocalKubernetesReference;

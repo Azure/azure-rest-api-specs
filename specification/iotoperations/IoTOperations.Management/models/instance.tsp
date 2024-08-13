@@ -67,22 +67,23 @@ model InstanceProperties {
 @doc("The configuration for components of the AIO Instance.")
 model Components {
   @doc("The properties of the ADR instance.")
-  adr?: AdrProperties = #{ enabled: true };
+  adr?: AdrProperties = #{ state: OperationalMode.Enabled };
 
   @doc("The properties of the AKRI instance.")
-  akri?: AkriInstanceProperties = #{ enabled: true };
+  akri?: AkriInstanceProperties = #{ state: OperationalMode.Enabled };
 
   @doc("The properties of the connectors instance.")
-  connectors?: ConnectorInstanceProperties = #{ enabled: true };
+  connectors?: ConnectorInstanceProperties = #{
+    state: OperationalMode.Enabled,
+  };
 
   @doc("The properties of the dataflows instance.")
-  dataflows?: DataFlowInstanceProperties = #{ enabled: true };
+  dataflows?: DataFlowInstanceProperties = #{ state: OperationalMode.Enabled };
 
   @doc("The properties of the device provisioning instance.")
-  mqttbroker?: MqttBrokerInstanceProperties = #{ enabled: true };
-
-  @doc("The properties of the device provisioning instance.")
-  schemaregistry?: SchemaRegistryInstanceProperties = #{ enabled: true };
+  schemaRegistry?: SchemaRegistryInstanceProperties = #{
+    state: OperationalMode.Enabled,
+  };
 }
 
 @doc("The properties of a Service Account.")
@@ -97,34 +98,33 @@ model ServiceAccountProperties {
 @doc("The properties of an ADR instance.")
 model AdrProperties {
   @doc("This determines if the ADR service is enabled.")
-  enabled: boolean;
+  @visibility("create", "read")
+  state: OperationalMode;
 }
 @doc("The properties of an AKRI instance.")
 model AkriInstanceProperties {
   @doc("This determines if the AKRI service is enabled.")
-  enabled: boolean;
+  @visibility("create", "read")
+  state: OperationalMode;
 }
 
 @doc("The properties of a  Connector instance.")
 model ConnectorInstanceProperties {
   @doc("This determines if the Connector service is enabled.")
-  enabled: boolean;
+  @visibility("create", "read")
+  state: OperationalMode;
 }
 
 @doc("The properties of an DataFlow instance.")
 model DataFlowInstanceProperties {
-  @doc("This determines if the DataFlow service is enabled.")
-  enabled: boolean;
-}
-
-@doc("The properties of an MQTT Broker instance.")
-model MqttBrokerInstanceProperties {
-  @doc("This determines if the MQTT Broker service is enabled.")
-  enabled: boolean;
+  @doc("This determines if the Dataflow service is enabled.")
+  @visibility("create", "read")
+  state: OperationalMode;
 }
 
 @doc("The properties of a Schema Registry instance.")
 model SchemaRegistryInstanceProperties {
   @doc("This determines if the Schema Registry service is enabled.")
-  enabled: boolean;
+  @visibility("create", "read")
+  state: OperationalMode;
 }
