@@ -1,0 +1,22 @@
+{
+  "parameters": {
+    "api-version": "2024-07-01",
+    "parameters": {
+      "encryptionType": "Ed25519"
+    },
+    "resourceGroupName": "myResourceGroup",
+    "sshPublicKeyName": "mySshPublicKeyName",
+    "subscriptionId": "{subscription-id}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/SshPublicKeys/mySshPublicKeyName",
+        "privateKey": "{ssh-ed25519 private key}",
+        "publicKey": "{ssh-ed25519 public key}"
+      }
+    }
+  },
+  "operationId": "SshPublicKeys_GenerateKeyPair",
+  "title": "Generate an SSH key pair with Ed25519 encryption."
+}

@@ -1,0 +1,25 @@
+{
+  "parameters": {
+    "api-version": "2024-07-01",
+    "resourceGroupName": "rgcompute",
+    "subscriptionId": "{subscription-id}",
+    "vmScaleSetName": "aaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "vmScaleSetReimageInput": {
+      "forceUpdateOSDiskForEphemeral": true,
+      "instanceIds": [
+        "aaaaaaaaaa"
+      ],
+      "tempDisk": true
+    }
+  },
+  "responses": {
+    "200": {},
+    "202": {
+      "headers": {
+        "location": "https://foo.com/operationstatus"
+      }
+    }
+  },
+  "operationId": "VirtualMachineScaleSets_Reimage",
+  "title": "VirtualMachineScaleSet_Reimage_MaximumSet_Gen"
+}

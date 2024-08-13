@@ -1,0 +1,67 @@
+{
+  "parameters": {
+    "api-version": "2024-07-01",
+    "instanceId": "0",
+    "parameters": {
+      "dataDisksToAttach": [
+        {
+          "diskId": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/vmss3176_vmss3176_0_disk2_6c4f554bdafa49baa780eb2d128ff39d"
+        }
+      ],
+      "dataDisksToDetach": [
+        {
+          "diskId": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/vmss3176_vmss3176_1_disk1_1a4e784bdafa49baa780eb2d128ff65x"
+        }
+      ]
+    },
+    "resourceGroupName": "rgcompute",
+    "subscriptionId": "{subscription-id}",
+    "vmScaleSetName": "azure-vmscaleset"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "dataDisks": [
+          {
+            "name": "vmss3176_vmss3176_0_disk2_6c4f554bdafa49baa780eb2d128ff39d",
+            "caching": "ReadWrite",
+            "createOption": "Attach",
+            "diskSizeGB": 30,
+            "lun": 0,
+            "managedDisk": {
+              "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/vmss3176_vmss3176_0_disk2_6c4f554bdafa49baa780eb2d128ff39d",
+              "storageAccountType": "Premium_LRS"
+            }
+          }
+        ],
+        "imageReference": {
+          "offer": "WindowsServer",
+          "publisher": "MicrosoftWindowsServer",
+          "sku": "2016-Datacenter",
+          "version": "latest"
+        },
+        "osDisk": {
+          "name": "myOsDisk",
+          "caching": "ReadWrite",
+          "createOption": "FromImage",
+          "diskSizeGB": 30,
+          "managedDisk": {
+            "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/myOsDisk",
+            "storageAccountType": "Premium_LRS"
+          },
+          "osType": "Windows"
+        }
+      },
+      "headers": {
+        "location": "https://foo.com/operationstatus"
+      }
+    },
+    "202": {
+      "headers": {
+        "location": "https://foo.com/operationstatus"
+      }
+    }
+  },
+  "operationId": "VirtualMachineScaleSetVMs_AttachDetachDataDisks",
+  "title": "VirtualMachineScaleSetVM_AttachDetachDataDisks_MinimumSet_Gen"
+}

@@ -34,7 +34,10 @@ These are the global settings for the Compute API.
 title: ComputeManagementClient
 description: Compute Client
 openapi-type: arm
-tag: package-2024-07-01
+tag: package-2024-07-01-only
+
+modelerfour:
+  lenient-model-deduplication: true
 
 directive:
   - where:
@@ -269,6 +272,9 @@ suppressions:
   - code: XmsPageableForListCalls
     reason: False positive error as API Path does not match ARM Lint check formatting, requesting to suppress due to approval from reviewer.
     from: diagnostic.json
+
+list-exception:
+- /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/restorePointCollections/{restorePointCollectionName}/restorePoints/{restorePointName}
 ```
 
 ### Tag: package-2024-07-01
