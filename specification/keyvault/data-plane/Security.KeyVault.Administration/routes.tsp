@@ -1,37 +1,87 @@
 import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-client-generator-core";
 import "@typespec/rest";
 import "./models.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using Azure.Core;
+using Azure.ClientGenerator.Core;
 
-namespace KeyVaultClient;
+namespace KeyVault;
 
-/**
- * Creates a full backup using a user-provided SAS token to an Azure blob storage
- * container.
- */
-@route("/backup")
-@post
-op fullBackup is Azure.Core.Foundations.Operation<
-  SASTokenParameter,
-  FullBackupOperation
->;
+alias KeyVaultOperations = StandardResourceOperations;
 
-/**
- * Pre-backup operation for checking whether the customer can perform a full
- * backup operation.
- */
-@route("/prebackup")
-@post
-op preFullBackup is Azure.Core.Foundations.Operation<
-  PreBackupOperationParameters,
-  FullBackupOperation
->;
+// alias BackupAccepted = {
+//   @statusCode _: 202;
+
+//   /**
+//    * The URI to poll for completion status.
+//    */
+//   @pollingLocation
+//   @header("Azure-AsyncOperation")
+//   azureAsyncOperation?: string;
+
+//   /**
+//    * The recommended number of seconds to wait before calling the URI specified in
+//    * Azure-AsyncOperation.
+//    */
+//   @header("Retry-After") retryAfter?: int32;
+
+//   /**
+//    * The backup operation.
+//    */
+//   @body response: FullBackupOperation;
+// };
+
+// alias RestoreAccepted = {
+//   @statusCode _: 202;
+
+//   /**
+//    * The URI to poll for completion status.
+//    */
+//   @pollingLocation
+//   @header("Azure-AsyncOperation")
+//   azureAsyncOperation?: string;
+
+//   /**
+//    * The recommended number of seconds to wait before calling the URI specified in
+//    * Azure-AsyncOperation.
+//    */
+//   @header("Retry-After") retryAfter?: int32;
+
+//   /**
+//    * The restore operation.
+//    */
+//   @body response: RestoreOperation;
+// };
+
+// alias SelectiveKeyRestoreAccepted = {
+//   @statusCode _: 202;
+
+//   /**
+//    * The URI to poll for completion status.
+//    */
+//   @pollingLocation
+//   @header("Azure-AsyncOperation")
+//   azureAsyncOperation?: string;
+
+//   /**
+//    * The recommended number of seconds to wait before calling the URI specified in
+//    * Azure-AsyncOperation.
+//    */
+//   @header("Retry-After") retryAfter?: int32;
+
+//   /**
+//    * The restore operation.
+//    */
+//   @body response: SelectiveKeyRestoreOperation;
+// };
 
 /**
  * Returns the status of full backup operation
  */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 @route("/backup/{jobId}/pending")
 @get
 op fullBackupStatus is Azure.Core.Foundations.Operation<
@@ -46,30 +96,83 @@ op fullBackupStatus is Azure.Core.Foundations.Operation<
 >;
 
 /**
- * Pre-restore operation for checking whether the customer can perform a full
- * restore operation.
+ * Creates a full backup using a user-provided SAS token to an Azure blob storage
+ * container.
  */
-@route("/prerestore")
-@put
-op preFullRestoreOperation is Azure.Core.Foundations.Operation<
-  PreRestoreOperationParameters,
-  RestoreOperation
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
+@pollingOperation(fullBackupStatus)
+@route("/backup")
+@post
+op fullBackup is Azure.Core.Foundations.LongRunningOperation<
+  {
+    /**
+     * Azure blob shared access signature token pointing to a valid Azure blob container where full backup needs to be
+     * stored. This token needs to be valid for at least next 24 hours from the time of making this call.
+     */
+    @body azureStorageBlobContainerUri?: SasTokenParameter;
+  },
+  {
+    @statusCode _: 202;
+
+    /**
+     * The URI to poll for completion status.
+     */
+    @pollingLocation
+    @header("Azure-AsyncOperation")
+    azureAsyncOperation?: string;
+
+    /**
+     * The recommended number of seconds to wait before calling the URI specified in
+     * Azure-AsyncOperation.
+     */
+    @header("Retry-After") retryAfter?: int32;
+
+    /**
+     * The backup operation.
+     */
+    @body response: FullBackupOperation;
+  }
 >;
 
 /**
- * Restores all key materials using the SAS token pointing to a previously stored
- * Azure Blob storage backup folder
+ * Pre-backup operation for checking whether the customer can perform a full
+ * backup operation.
  */
-@route("/restore")
-@put
-op fullRestoreOperation is Azure.Core.Foundations.Operation<
-  RestoreOperationParameters,
-  RestoreOperation
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
+@route("/prebackup")
+@post
+op preFullBackup is Azure.Core.Foundations.LongRunningOperation<
+  {
+    /** Optional parameters to validate prior to performing a full backup operation. */
+    @body preBackupOperationParameters?: PreBackupOperationParameters;
+  },
+  {
+    @statusCode _: 202;
+
+    /**
+     * The URI to poll for completion status.
+     */
+    @pollingLocation
+    @header("Azure-AsyncOperation")
+    azureAsyncOperation?: string;
+
+    /**
+     * The recommended number of seconds to wait before calling the URI specified in
+     * Azure-AsyncOperation.
+     */
+    @header("Retry-After") retryAfter?: int32;
+
+    /**
+     * The backup operation.
+     */
+    @body response: FullBackupOperation;
+  }
 >;
 
 /**
  * Returns the status of restore operation
  */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 @route("/restore/{jobId}/pending")
 @get
 op restoreStatus is Azure.Core.Foundations.Operation<
@@ -84,12 +187,85 @@ op restoreStatus is Azure.Core.Foundations.Operation<
 >;
 
 /**
+ * Pre-restore operation for checking whether the customer can perform a full
+ * restore operation.
+ */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
+@route("/prerestore")
+@put
+op preFullRestoreOperation is Azure.Core.Foundations.LongRunningOperation<
+  {
+    /** Optional pre restore parameters to validate prior to performing a full restore operation. */
+    @body preRestoreOperationParameters: PreRestoreOperationParameters;
+  },
+  {
+    @statusCode _: 202;
+
+    /**
+     * The URI to poll for completion status.
+     */
+    @pollingLocation
+    @header("Azure-AsyncOperation")
+    azureAsyncOperation?: string;
+
+    /**
+     * The recommended number of seconds to wait before calling the URI specified in
+     * Azure-AsyncOperation.
+     */
+    @header("Retry-After") retryAfter?: int32;
+
+    /**
+     * The restore operation.
+     */
+    @body response: RestoreOperation;
+  }
+>;
+
+/**
+ * Restores all key materials using the SAS token pointing to a previously stored
+ * Azure Blob storage backup folder
+ */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
+@pollingOperation(restoreStatus)
+@route("/restore")
+@put
+op fullRestoreOperation is Azure.Core.Foundations.LongRunningOperation<
+  {
+    /** The Azure blob SAS token pointing to a folder where the previous successful full backup was stored. */
+    @body restoreBlobDetails: RestoreOperationParameters;
+  },
+  {
+    @statusCode _: 202;
+
+    /**
+     * The URI to poll for completion status.
+     */
+    @pollingLocation
+    @header("Azure-AsyncOperation")
+    azureAsyncOperation?: string;
+
+    /**
+     * The recommended number of seconds to wait before calling the URI specified in
+     * Azure-AsyncOperation.
+     */
+    @header("Retry-After") retryAfter?: int32;
+
+    /**
+     * The restore operation.
+     */
+    @body response: RestoreOperation;
+  }
+>;
+
+/**
  * Restores all key versions of a given key using user supplied SAS token pointing
  * to a previously stored Azure Blob storage backup folder
  */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
+@pollingOperation(restoreStatus)
 @route("/keys/{keyName}/restore")
 @put
-op selectiveKeyRestoreOperation is Azure.Core.Foundations.Operation<
+op selectiveKeyRestoreOperation is Azure.Core.Foundations.LongRunningOperation<
   {
     /**
      * The name of the key to be restored from the user supplied backup
@@ -104,30 +280,47 @@ op selectiveKeyRestoreOperation is Azure.Core.Foundations.Operation<
     @body
     restoreBlobDetails?: SelectiveKeyRestoreOperationParameters;
   },
-  SelectiveKeyRestoreOperation
+  {
+    @statusCode _: 202;
+
+    /**
+     * The URI to poll for completion status.
+     */
+    @pollingLocation
+    @header("Azure-AsyncOperation")
+    azureAsyncOperation?: string;
+
+    /**
+     * The recommended number of seconds to wait before calling the URI specified in
+     * Azure-AsyncOperation.
+     */
+    @header("Retry-After") retryAfter?: int32;
+
+    /**
+     * The restore operation.
+     */
+    @body response: SelectiveKeyRestoreOperation;
+  }
 >;
 
 /**
  * Description of the pool setting to be updated
  */
-@summary("""
-  Updates key vault account setting, stores it, then returns the setting name and
-  value to the client.
-  """)
-@route("/settings/{setting-name}")
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
+@summary("Updates key vault account setting, stores it, then returns the setting name and value to the client.")
+@route("/settings/{settingName}")
 @patch
 op updateSetting is Azure.Core.Foundations.Operation<
   {
-    /**
-     * The name of the account setting. Must be a valid settings option.
-     */
-    @path
-    `setting-name`: string;
+    /** The name of the account setting. Must be a valid settings option. */
+    @path settingName: string;
 
     /**
      * The parameters to update an account setting.
      */
+    #suppress "deprecated" "Property flattening is supported for legacy scenarios like Key Vault's"
     @body
+    @flattenProperty
     parameters: UpdateSettingRequest;
   },
   Setting
@@ -136,16 +329,14 @@ op updateSetting is Azure.Core.Foundations.Operation<
 /**
  * Retrieves the setting object of a specified setting name.
  */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 @summary("Get specified account setting object.")
-@route("/settings/{setting-name}")
+@route("/settings/{settingName}")
 @get
 op getSetting is Azure.Core.Foundations.Operation<
   {
-    /**
-     * The name of the account setting. Must be a valid settings option.
-     */
-    @path
-    `setting-name`: string;
+    /** The name of the account setting. Must be a valid settings option. */
+    @path settingName: string;
   },
   Setting
 >;
@@ -153,12 +344,14 @@ op getSetting is Azure.Core.Foundations.Operation<
 /**
  * Retrieves a list of all the available account settings that can be configured.
  */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 @summary("List account settings.")
 @route("/settings")
 @get
 op getSettings is Azure.Core.Foundations.Operation<{}, SettingsListResult>;
 
-interface RoleDefinitionsOperations {
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
+interface RoleDefinitions {
   /**
    * Deletes a custom role definition.
    */
@@ -170,7 +363,7 @@ interface RoleDefinitionsOperations {
        * The scope of the role definition to delete. Managed HSM only supports '/'.
        */
       @path
-      scope: string;
+      scope: url;
 
       /**
        * The name (GUID) of the role definition to delete.
@@ -193,7 +386,7 @@ interface RoleDefinitionsOperations {
        * '/'.
        */
       @path
-      scope: string;
+      scope: url;
 
       /**
        * The name of the role definition to create or update. It can be any valid GUID.
@@ -207,7 +400,7 @@ interface RoleDefinitionsOperations {
       @body
       parameters: RoleDefinitionCreateParameters;
     },
-    RoleDefinition
+    CreatedResponse & RoleDefinition
   >;
 
   /**
@@ -221,7 +414,7 @@ interface RoleDefinitionsOperations {
        * The scope of the role definition to get. Managed HSM only supports '/'.
        */
       @path
-      scope: string;
+      scope: url;
 
       /**
        * The name of the role definition to get.
@@ -243,7 +436,7 @@ interface RoleDefinitionsOperations {
        * The scope of the role definition.
        */
       @path
-      scope: string;
+      scope: url;
 
       /**
        * The filter to apply on the operation. Use atScopeAndBelow filter to search
@@ -256,7 +449,8 @@ interface RoleDefinitionsOperations {
   >;
 }
 
-interface RoleAssignmentsOperations {
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
+interface RoleAssignments {
   /**
    * Deletes a role assignment.
    */
@@ -268,7 +462,7 @@ interface RoleAssignmentsOperations {
        * The scope of the role assignment to delete.
        */
       @path
-      scope: string;
+      scope: url;
 
       /**
        * The name of the role assignment to delete.
@@ -290,7 +484,7 @@ interface RoleAssignmentsOperations {
        * The scope of the role assignment to create.
        */
       @path
-      scope: string;
+      scope: url;
 
       /**
        * The name of the role assignment to create. It can be any valid GUID.
@@ -304,7 +498,7 @@ interface RoleAssignmentsOperations {
       @body
       parameters: RoleAssignmentCreateParameters;
     },
-    RoleAssignment
+    CreatedResponse & RoleAssignment
   >;
 
   /**
@@ -318,7 +512,7 @@ interface RoleAssignmentsOperations {
        * The scope of the role assignment.
        */
       @path
-      scope: string;
+      scope: url;
 
       /**
        * The name of the role assignment to get.
@@ -340,7 +534,7 @@ interface RoleAssignmentsOperations {
        * The scope of the role assignments.
        */
       @path
-      scope: string;
+      scope: url;
 
       /**
        * The filter to apply on the operation. Use $filter=atScope() to return all role
