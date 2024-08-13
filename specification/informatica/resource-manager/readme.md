@@ -37,7 +37,6 @@ These settings apply only when `--tag=package-2024-07-22-preview` is specified o
 ```yaml $(tag) == 'package-2024-07-22-preview'
 input-file:
   - Informatica.DataManagement/preview/2024-07-22-preview/openapi.json
-  - Informatica.DataManagement/preview/2023-03-01-preview/openapi.json
 ```
 
 ### Tag: package-2024-05-08
@@ -56,15 +55,6 @@ These settings apply only when `--tag=package-2023-08-20-preview` is specified o
 ```yaml $(tag) == 'package-2023-08-20-preview'
 input-file:
   - Informatica.DataManagement/preview/2023-08-20-preview/openapi.json
-```
-
-### Tag: package-2023-03-01-preview
-
-These settings apply only when `--tag=package-2023-03-01-preview` is specified on the command line.
-
-```yaml $(tag) == 'package-2023-03-01-preview'
-input-file:
-  - Informatica.DataManagement/preview/2023-03-01-preview/openapi.json
 ```
 
 ---
@@ -106,14 +96,6 @@ See configuration in [readme.typescript.md](./readme.typescript.md)
 ## CSharp
 
 See configuration in [readme.csharp.md](./readme.csharp.md)
-
-### AutoRest v3 Suppressions
-
-```yaml
-suppressions:
-  - code: OperationIdNounVerb
-    reason: Any changes on top of this spec may induce a breaking change as this is already getting followed in the preview version.
-```
 
 ### AutoRest v3 Suppressions
 
