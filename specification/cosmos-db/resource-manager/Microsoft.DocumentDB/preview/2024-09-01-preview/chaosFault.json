@@ -39,7 +39,7 @@
         "operationId": "ChaosFault_List",
         "description": "List Chaos Faults for CosmosDB account.",
         "x-ms-pageable": {
-          "nextLinkName": null
+          "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
           "ChaosFaultList": {
@@ -243,6 +243,11 @@
             "$ref": "#/definitions/chaosFaultResource"
           },
           "description": "List of Chaos Faults."
+        },
+        "nextLink": {
+          "description": "The link used to get the next page of results.",
+          "type": "string",
+          "readOnly": true
         }
       },
       "description": "Chaos Fault List Response."
