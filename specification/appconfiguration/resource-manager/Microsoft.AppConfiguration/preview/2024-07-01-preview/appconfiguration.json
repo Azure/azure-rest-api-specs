@@ -1490,6 +1490,149 @@
           "final-state-via": "azure-async-operation"
         }
       }
+    },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppConfiguration/configurationStores/{configStoreName}/networkSecurityPerimeterConfigurations": {
+      "get": {
+        "tags": [
+          "NetworkSecurityPerimeterConfigurations"
+        ],
+        "operationId": "NetworkSecurityPerimeterConfigurations_ListByConfigurationStore",
+        "description": "Lists all network security perimeter configurations for a configuration store.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ConfigStoreNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/networksecurityperimeter.json#/definitions/NetworkSecurityPerimeterConfigurationListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NetworkSecurityPerimeterConfiguration_List": {
+            "$ref": "./examples/ConfigurationStoresListNetworkSecurityPerimeterConfigurations.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppConfiguration/configurationStores/{configStoreName}/networkSecurityPerimeterConfigurations/{nspConfigurationName}": {
+      "get": {
+        "tags": [
+          "NetworkSecurityPerimeterConfigurations"
+        ],
+        "operationId": "NetworkSecurityPerimeterConfigurations_Get",
+        "description": "Gets the specified network security perimeter configuration associated with the configuration store.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ConfigStoreNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/networksecurityperimeter.json#/parameters/NetworkSecurityPerimeterConfigurationNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/networksecurityperimeter.json#/definitions/NetworkSecurityPerimeterConfiguration"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NetworkSecurityPerimeterConfiguration_GetConfiguration": {
+            "$ref": "./examples/ConfigurationStoresGetNetworkSecurityPerimeterConfiguration.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppConfiguration/configurationStores/{configStoreName}/networkSecurityPerimeterConfigurations/{nspConfigurationName}/reconcile": {
+      "post": {
+        "tags": [
+          "NetworkSecurityPerimeterConfigurations"
+        ],
+        "operationId": "NetworkSecurityPerimeterConfigurations_Reconcile",
+        "description": "Forces a refresh of the specified network security perimeter configuration.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ConfigStoreNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/networksecurityperimeter.json#/parameters/NetworkSecurityPerimeterConfigurationNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request was successful; the operation will complete asynchronously.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "URL to query for status of the operation.",
+                "type": "string"
+              },
+              "Location": {
+                "description": "URL to query for the operation result",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NetworkSecurityPerimeterConfiguration_Reconcile": {
+            "$ref": "./examples/ConfigurationStoresReconcileNetworkSecurityPerimeterConfiguration.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
     }
   },
   "definitions": {
@@ -1587,10 +1730,11 @@
           }
         },
         "publicNetworkAccess": {
-          "description": "Control permission for data plane traffic coming from public networks while private endpoint is enabled.",
+          "description": "Allow, disallow, or let network security perimeter configuration control public network access to the data plane.",
           "enum": [
             "Enabled",
-            "Disabled"
+            "Disabled",
+            "SecuredByPerimeter"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -1782,10 +1926,11 @@
           "description": "Disables all authentication methods other than AAD authentication."
         },
         "publicNetworkAccess": {
-          "description": "Control permission for data plane traffic coming from public networks while private endpoint is enabled.",
+          "description": "Allow, disallow, or let network security perimeter configuration control public network access to the data plane.",
           "enum": [
             "Enabled",
-            "Disabled"
+            "Disabled",
+            "SecuredByPerimeter"
           ],
           "type": "string",
           "x-ms-enum": {
