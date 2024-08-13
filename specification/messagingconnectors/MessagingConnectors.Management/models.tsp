@@ -152,11 +152,48 @@ union ConverterType {
 
 @doc("Enum of the OffsetPolicy for CosmosDB connector")
 union OffsetPolicyForCosmosDB {
-  @doc("use the latest (most recent) source offset,")
+  @doc("use the latest (most recent) source offset")
   UseLatestSourceOffset: "UseLatestSourceOffset",
 
   @doc("use the earliest recorded offset")
   UseEarliestRecordedOffset: "UseEarliestRecordedOffset",
+
+  string,
+}
+
+@doc("Enum of the SaslMechanism for Confluent connector")
+union SaslMechanismForConfluent {
+  @doc("The SASL_PLAINTEXT sasl mechanism.")
+  SaslPlainText: "SASL_PLAINTEXT",
+
+  @doc("The PLAINTEXT sasl mechanism.")
+  PlainText: "PLAINTEXT",
+
+  @doc("The SASL_SSL sasl mechanism.")
+  SaslSsl: "SASL_SSL",
+
+  @doc("The SSL sasl mechanism.")
+  Ssl: "SSL",
+
+  string,
+}
+
+@doc("Enum of the SecurityProtocol for Confluent connector")
+union SecurityProtocolForConfluent {
+  @doc("The GSSAPI security protocol.")
+  GssApi: "GSSAPI",
+
+  @doc("The PLAIN security protocol.")
+  Plain: "PLAIN",
+
+  @doc("The SCRAM-SHA-256 security protocol.")
+  ScramSha256: "SCRAM-SHA-256",
+
+  @doc("The SCRAM-SHA-512 security protocol.")
+  ScramSha512: "SCRAM-SHA-512",
+
+  @doc("The OAUTHBEARER security protocol.")
+  OAuthBearer: "OAUTHBEARER",
 
   string,
 }
@@ -172,6 +209,79 @@ model EventHubConfig {
   @doc("connectionString of the EventHub.")
   @secret
   connectionString: string;
+}
+
+@doc("Source data format Types")
+union SourceDataFormatTypes {
+  @doc("JSON format")
+  JSON: "JSON",
+
+  @doc("CSV format")
+  CSV: "CSV",
+
+  string,
+}
+
+@doc("Source data format base model")
+@discriminator("type")
+model SourceDataFormat {
+  @doc("Type of data format")
+  type: SourceDataFormatTypes;
+}
+
+@doc("JSON source data format model")
+model JsonSourceDataFormat extends SourceDataFormat {
+  @doc("Type of data format")
+  type: SourceDataFormatTypes.JSON;
+
+  @doc("Charset supported by Java language")
+  textCharset: string;
+}
+
+@doc("Delimiter for csv")
+union CsvDelimiters {
+  @doc("Pipe delimiter")
+  Pipe: "Pipe",
+
+  @doc("Comma delimiter")
+  Comma: "Comma",
+
+  @doc("SemiColon delimiter")
+  SemiColon: "SemiColon",
+
+  @doc("Space delimiter")
+  Space: "Space",
+
+  @doc("Tab delimiter")
+  Tab: "Tab",
+
+  string,
+}
+
+@doc("CsvHeader types")
+union CsvHeaderTypes {
+  @doc("include CSV header")
+  IncludeHeader: "IncludeHeader",
+
+  @doc("exclude CSV header")
+  ExcludeHeader: "ExcludeHeader",
+
+  string,
+}
+
+@doc("CSV Source data format model")
+model CsvSourceDataFormat extends SourceDataFormat {
+  @doc("Type of data format")
+  type: SourceDataFormatTypes.CSV;
+
+  @doc("CSV header type")
+  header: CsvHeaderTypes;
+
+  @doc("CSV Delimiter")
+  delimiter: CsvDelimiters;
+
+  @doc("Charset supported by Java language")
+  textCharset: string;
 }
 
 @doc("Properties of one arm resource")
@@ -201,6 +311,9 @@ model ConnectorProperties {
 
   @doc("connectionString of the EventHub.")
   eventHubConfig: EventHubConfig;
+
+  @doc("Data format of the data source")
+  sourceDataFormat?: SourceDataFormat;
 
   @doc("State of the MessagingConnector")
   connectorState?: ConnectorState;
@@ -241,6 +354,12 @@ model ConfluentSourceConnectorProperties extends ConnectorProperties {
   @doc("Password of the Confluent.")
   @secret
   password: string;
+
+  @doc("Sasl mechanism of the confluent.")
+  saslMechanism: SaslMechanismForConfluent;
+
+  @doc("Security protocol of the confluent.")
+  securityProtocol: SecurityProtocolForConfluent;
 }
 
 @doc("Configuration for CosmosDbSourceConnector")
@@ -429,7 +548,7 @@ model DataRangeLimit extends DataRangeBaseConfig {
   limit: int32;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" ""
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state"
 @doc("Properties of one DataPreview")
 model DataPreviewProperties {
   @doc("Properties of one Connector Source")
