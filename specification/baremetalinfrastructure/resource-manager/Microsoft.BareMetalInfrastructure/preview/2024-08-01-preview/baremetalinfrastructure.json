@@ -430,7 +430,7 @@
             "description": "Resource create parameters.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/AzureBareMetalInstance"
+              "$ref": "#/definitions/AssignResourceProperties"
             }
           }
         ],
@@ -438,7 +438,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/AssignResourceProperties"
+              "$ref": "#/definitions/AzureBareMetalInstance"
             }
           },
           "default": {
@@ -804,7 +804,7 @@
   "definitions": {
     "AssignResourceProperties": {
       "type": "object",
-      "description": "Defines body parameter for PUT BMI and PUT BMSI methods",
+      "description": "Defines body parameter for the create bare metal instance and bare metal storage instance methods",
       "properties": {
         "location": {
           "type": "string",
