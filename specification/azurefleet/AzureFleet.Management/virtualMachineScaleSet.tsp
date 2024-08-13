@@ -9,6 +9,7 @@ using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using TypeSpec.OpenAPI;
 using Azure.ResourceManager;
+using Azure.Core;
 
 namespace Microsoft.AzureFleet;
 
@@ -22,9 +23,9 @@ model VirtualMachineScaleSet {
   name: string;
 
   @doc("""
-  The compute RP resource id of the virtualMachineScaleSet 
-  "subscriptions/{subId}/resourceGroups/{rgName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmssName}"
-  """)
+    The compute RP resource id of the virtualMachineScaleSet 
+    "subscriptions/{subId}/resourceGroups/{rgName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmssName}"
+    """)
   @visibility("read")
   id: string;
 
@@ -49,37 +50,13 @@ model VirtualMachineScaleSet {
 }
 
 @doc("The response of a VirtualMachineScaleSet list operation.")
+@pagedResult
 model VirtualMachineScaleSetListResult {
   @doc("The VirtualMachineScaleSet items on this page")
+  @items
   value: Array<VirtualMachineScaleSet>;
 
-  #suppress "@azure-tools/typespec-azure-core/no-format" "NextLink is of uri format and need to be defined."
   @doc("The link to the next page of items")
-  @format("uri")
-  nextLink?: string;
-}
-
-@armResourceOperations
-interface VirtualMachineScaleSets {
-  @autoRoute
-  @listsResource(VirtualMachineScaleSet)
-  @armResourceList(VirtualMachineScaleSet)
-  @get
-  @doc("List VirtualMachineScaleSet resources by Fleet")
-  @extension(
-    "x-ms-pageable",
-    {
-      nextLinkName: "nextLink",
-    }
-  )
-  listByFleet(
-    ...ApiVersionParameter,
-    ...SubscriptionIdParameter,
-    ...ResourceGroupParameter,
-    ...ProviderNamespace<Fleet>,
-    ...ResourceNameParameter<
-      Fleet,
-      NamePattern = "^[^_\\W][\\w-._]{0,79}(?<![-.])$"
-    >,
-  ): ArmResponse<VirtualMachineScaleSetListResult> | ErrorResponse;
+  @nextLink
+  nextLink?: url;
 }

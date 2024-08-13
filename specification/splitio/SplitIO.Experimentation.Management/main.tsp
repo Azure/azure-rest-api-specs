@@ -119,10 +119,18 @@ namespace SplitIO.Experimentation {
   @armResourceOperations
   interface ExperimentationWorkspaces {
     get is ArmResourceRead<ExperimentationWorkspace>;
-    create is ArmResourceCreateOrUpdateAsync<ExperimentationWorkspace>;
-    update is ArmResourcePatchAsync<
+    #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "MUST CHANGE ON NEXT UPDATE"
+    @Azure.Core.useFinalStateVia("azure-async-operation")
+    create is ArmResourceCreateOrUpdateAsync<
       ExperimentationWorkspace,
-      ExperimentationWorkspaceProperties
+      LroHeaders = Azure.Core.Foundations.RetryAfterHeader
+    >;
+    update is ArmCustomPatchAsync<
+      ExperimentationWorkspace,
+      Azure.ResourceManager.Foundations.ResourceUpdateModel<
+        ExperimentationWorkspace,
+        ExperimentationWorkspaceProperties
+      >
     >;
     delete is ArmResourceDeleteWithoutOkAsync<ExperimentationWorkspace>;
     listByResourceGroup is ArmResourceListByParent<ExperimentationWorkspace>;
