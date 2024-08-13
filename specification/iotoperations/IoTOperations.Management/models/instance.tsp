@@ -79,7 +79,9 @@ model Components {
   dataflows?: DataFlowInstanceProperties = #{ mode: OperationalMode.Enabled };
 
   @doc("The properties of the device provisioning instance.")
-  schemaregistry?: SchemaRegistryInstanceProperties = #{ mode: OperationalMode.Enabled };
+  schemaregistry?: SchemaRegistryInstanceProperties = #{
+    mode: OperationalMode.Enabled,
+  };
 }
 
 @doc("The properties of a Service Account.")
