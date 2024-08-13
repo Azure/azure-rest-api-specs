@@ -88,9 +88,6 @@ input-file:
 ```yaml
 directive:
   - suppress: READONLY_PROPERTY_NOT_ALLOWED_IN_REQUEST
-    from: baremetalinfrastructure.json
-    reason: 'This property is already a part of our API, cannot remove it'
-  - suppress: READONLY_PROPERTY_NOT_ALLOWED_IN_REQUEST
     where:
       - $.definitions.Resource.properties.name
       - $.definitions.Resource.properties.id

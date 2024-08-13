@@ -430,7 +430,7 @@
             "description": "Resource create parameters.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/AssignResourceProperties"
+              "$ref": "#/definitions/AzureBareMetalInstance"
             }
           }
         ],
@@ -694,7 +694,7 @@
             "name": "requestBodyParameters",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/AssignResourceProperties"
+              "$ref": "#/definitions/AzureBareMetalInstance"
             },
             "description": "request body for put call"
           }
@@ -802,24 +802,6 @@
     }
   },
   "definitions": {
-    "AssignResourceProperties": {
-      "type": "object",
-      "description": "Defines body parameter for the create bare metal instance and bare metal storage instance methods",
-      "properties": {
-        "location": {
-          "type": "string",
-          "description": "The azure region of the requested resource."
-        },
-        "sku": {
-          "type": "string",
-          "description": "The SKU type that is provisioned."
-        }
-      },
-      "required": [
-        "location",
-        "sku"
-      ]
-    },
     "AzureBareMetalInstancesListResult": {
       "type": "object",
       "properties": {
@@ -873,7 +855,6 @@
           "description": "Specifies the network settings for the Azure Bare Metal Instance."
         },
         "azureBareMetalInstanceId": {
-          "readOnly": true,
           "type": "string",
           "description": "Specifies the Azure Bare Metal Instance unique ID."
         },
