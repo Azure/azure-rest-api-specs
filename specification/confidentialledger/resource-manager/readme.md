@@ -27,19 +27,29 @@ These are the global settings for the confidentialledger.
 ``` yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-preview-2023-06
+tag: package-preview-2024-07
 ```
 
+### Tag: package-preview-2024-07
+
+These settings apply only when `--tag=package-preview-2024-07` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2024-07'
+input-file:
+  - Microsoft.ConfidentialLedger/preview/2024-07-09-preview/confidentialledger.json
+  - Microsoft.ConfidentialLedger/preview/2024-07-09-preview/managedccf.json
+```
 
 ### Tag: package-preview-2023-06
 
 These settings apply only when `--tag=package-preview-2023-06` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2023-06'
+``` yaml $(tag) == 'package-preview-2023-06'
 input-file:
   - Microsoft.ConfidentialLedger/preview/2023-06-28-preview/confidentialledger.json
   - Microsoft.ConfidentialLedger/preview/2023-06-28-preview/managedccf.json
 ```
+
 ### Tag: package-preview-2023-01
 
 These settings apply only when `--tag=package-preview-2023-01` is specified on the command line.
