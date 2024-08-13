@@ -2735,7 +2735,7 @@
       "enum": [
         "Custom",
         "ServiceAccountToken",
-        "x509Certificate"
+        "x509"
       ],
       "x-ms-enum": {
         "name": "BrokerAuthenticationMethod",
@@ -2752,8 +2752,8 @@
             "description": "ServiceAccountToken authentication configuration."
           },
           {
-            "name": "x509Certificate",
-            "value": "x509Certificate",
+            "name": "x509",
+            "value": "x509",
             "description": "X.509 authentication configuration."
           }
         ]
@@ -3584,32 +3584,26 @@
         }
       }
     },
-    "CloudEventMappingType": {
+    "CloudEventAttributeType": {
       "type": "string",
       "description": "How to map events to the cloud.",
       "enum": [
-        "PassThrough",
-        "Always",
-        "Never"
+        "Propagate",
+        "CreateOrRemap"
       ],
       "x-ms-enum": {
-        "name": "CloudEventMappingType",
+        "name": "CloudEventAttributeType",
         "modelAsString": true,
         "values": [
           {
-            "name": "PassThrough",
-            "value": "PassThrough",
-            "description": "PassThrough type"
+            "name": "Propagate",
+            "value": "Propagate",
+            "description": "Propagate type"
           },
           {
-            "name": "Always",
-            "value": "Always",
-            "description": "Always type"
-          },
-          {
-            "name": "Never",
-            "value": "Never",
-            "description": "Never type"
+            "name": "CreateOrRemap",
+            "value": "CreateOrRemap",
+            "description": "CreateOrRemap type"
           }
         ]
       }
@@ -4037,10 +4031,7 @@
           "type": "string",
           "description": "Audience of the service to authenticate against. Optional; defaults to the audience for Service host configuration."
         }
-      },
-      "required": [
-        "audience"
-      ]
+      }
     },
     "DataflowEndpointAuthenticationUserAssignedManagedIdentity": {
       "type": "object",
@@ -4050,7 +4041,7 @@
           "type": "string",
           "description": "Client ID for the user-assigned managed identity."
         },
-        "scope": {
+        "audience": {
           "type": "string",
           "description": "Resource identifier (application ID URI) of the resource, affixed with the .default suffix."
         },
@@ -4061,7 +4052,6 @@
       },
       "required": [
         "clientId",
-        "scope",
         "tenantId"
       ]
     },
@@ -4404,14 +4394,13 @@
           "$ref": "#/definitions/TlsProperties",
           "description": "TLS configuration."
         },
-        "cloudEventMapping": {
-          "$ref": "#/definitions/CloudEventMappingType",
+        "cloudEventAttributes": {
+          "$ref": "#/definitions/CloudEventAttributeType",
           "description": "Cloud event mapping config."
         }
       },
       "required": [
-        "authentication",
-        "tls"
+        "authentication"
       ]
     },
     "DataflowEndpointKafkaAcks": {
@@ -4684,8 +4673,8 @@
           "$ref": "#/definitions/TlsProperties",
           "description": "TLS configuration."
         },
-        "cloudEventMapping": {
-          "$ref": "#/definitions/CloudEventMappingType",
+        "cloudEventAttributes": {
+          "$ref": "#/definitions/CloudEventAttributeType",
           "description": "Cloud event mapping config."
         }
       },
@@ -5468,23 +5457,6 @@
       },
       "required": [
         "kind",
-        "name"
-      ]
-    },
-    "KubernetesReferenceKnownType": {
-      "type": "object",
-      "description": "Kubernetes reference with known type",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "Name is the name of resource being referenced"
-        },
-        "namespace": {
-          "type": "string",
-          "description": "Namespace is the namespace of the resource being referenced. This field is required when the resource has a namespace."
-        }
-      },
-      "required": [
         "name"
       ]
     },
@@ -6671,7 +6643,7 @@
       "description": "X509 Certificate Authentication properties.",
       "properties": {
         "secretRef": {
-          "$ref": "#/definitions/KubernetesReferenceKnownType",
+          "type": "string",
           "description": "Kubernetes secret containing an X.509 client certificate. This is a reference to the secret through an identifying name, not the secret itself."
         }
       },
