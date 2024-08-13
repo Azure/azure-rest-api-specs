@@ -143,10 +143,7 @@ suppressions:
   - code: PutResponseCodes
     from: baremetalinfrastructure.json
     reason: The PUT method only creates resource for the RP. The operation to update an existing instance is unsupported. This is because instances that are 'created' are simply assigned to customers, and have already been provisioned. ARM operations to change the provisioning status of a resource are unsupported.
-  - code: DeleteResponseCodes
-    from: baremetalinfrastructure.json
-    reason: The DELETE method either removes an instance from the DB or returns an error. Since only one successful outcome is possible, it doesn't make sense for our RP to support both 200 and 204.
   - code: DeleteOperationResponses
     from: baremetalinfrastructure.json
-    reason: Customers deleting resources don't request any new information from the operation besides its result. Therefore it makes sense to return no content when the operation succeeds.
+    reason: Customers deleting resources don't request any new information from the operation besides its result. Therefore it makes sense to return any content when the operation succeeds.
 ```
