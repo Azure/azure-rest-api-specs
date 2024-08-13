@@ -123,17 +123,3 @@ See configuration in [readme.typescript.md](./readme.typescript.md)
 ## CSharp
 
 See configuration in [readme.csharp.md](./readme.csharp.md)
-
-## Suppress linting rules
-
-These set of linting rules aren't applicable to the AzureLargeInstance RP so suppressing them here.
-
-``` yaml
-suppressions:
-  - code: PutResponseCodes
-    from: baremetalinfrastructure.json
-    reason: The PUT method only creates resource for the RP. The operation to update an existing instance is unsupported. This is because instances that are 'created' are simply assigned to customers, and have already been provisioned. ARM operations to change the provisioning status of a resource are unsupported.
-  - code: DeleteOperationResponses
-    from: baremetalinfrastructure.json
-    reason: Customers deleting resources don't request any new information from the operation besides its result. Therefore it makes sense to return any content when the operation succeeds.
-```
