@@ -1,12 +1,13 @@
 import "@typespec/rest";
-import "../../VDI.Registration/models/registration.tsp";
+import "../../VDI.BatchRegistration/models/registration.tsp";
 
 using TypeSpec.Rest;
+using VdiBatchRegistration;
 
 namespace VdiVideoAnalysis;
 
 @doc("Video Analysis Task definition to be used with the Registration Service")
-model VideoAnalysisRegistration is VdiRegistration.AiTaskConfiguration {
+model VideoAnalysisRegistration is AiTaskConfiguration {
     @doc("Video Analysis Task definition to be used with the Registration Service")
     videoAnalysis: Record<VideoAnalysisTaskRegistrationDefinition>;
 }

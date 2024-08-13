@@ -2,10 +2,14 @@ import "@typespec/rest";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 
+import "../VDI.BatchRegistration/main.tsp";
+import "./routes/videoDescription.tsp";
+
 using TypeSpec.Http;
 using TypeSpec.Rest;
-using TypeSpec.Versioning;
 using Azure.Core;
+using Versioning;
+using VdiBatchRegistration;
 
 @useAuth(
   ApiKeyAuth<ApiKeyLocation.header, "api-key"> | OAuth2Auth<[

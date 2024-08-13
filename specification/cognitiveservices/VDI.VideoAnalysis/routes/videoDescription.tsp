@@ -1,11 +1,11 @@
 import "@azure-tools/typespec-azure-core";
 
 import "../models/videoDescription.tsp";
-import "../../VDI.Registration/models/registration.tsp";
-import "../../VDI.Registration/routes/registrations.tsp";
+import "../../VDI.BatchRegistration/main.tsp";
 
 using Azure.Core;
 using Azure.Core.Traits;
+using VdiBatchRegistration;
 
 namespace VdiVideoAnalysis;
 
@@ -16,7 +16,7 @@ alias ServiceTraits = SupportsRepeatableRequests &
 
 alias Operations = Azure.Core.ResourceOperations<ServiceTraits>;
 
-interface Registrations {
+interface VideoDescriptions {
     @doc("Fetch a registration by name.")
     getVideoDescription is Operations.ResourceRead<VideoDescriptionTask>;
 
