@@ -980,3 +980,49 @@ namespace Language.AnalyzeTextClientCustomizations;
 @@clientName(analyzeTextSubmitJob, "AnalyzeTextSubmitOperation", "csharp");
 @@clientName(analyzeTextJobStatus, "AnalyzeTextOperationStatus", "csharp");
 @@clientName(analyzeTextCancelJob, "AnalyzeTextCancelOperation", "csharp");
+
+@@clientName(EntitiesDocumentResultWithDetectedLanguage,
+  "EntityActionResult",
+  "csharp"
+);
+@@clientName(ClassificationDocumentResultWithDetectedLanguage,
+  "ClassificationActionResult",
+  "csharp"
+);
+@@clientName(EntityLinkingResultWithDetectedLanguage,
+  "EntityLinkingActionResult",
+  "csharp"
+);
+@@clientName(KeyPhrasesDocumentResultWithDetectedLanguage,
+  "KeyPhrasesActionResult",
+  "csharp"
+);
+@@clientName(PiiResultWithDetectedLanguage, "PiiActionResult", "csharp");
+@@clientName(SentimentDocumentResultWithDetectedLanguage,
+  "SentimentActionResult",
+  "csharp"
+);
+@@clientName(ExtractedSummaryDocumentResultWithDetectedLanguage,
+  "ExtractedSummaryActionResult",
+  "csharp"
+);
+@@clientName(AbstractiveSummaryDocumentResultWithDetectedLanguage,
+  "AbstractiveSummaryActionResult",
+  "csharp"
+);
+@@clientName(CustomHealthcareEntitiesDocumentResultWithDocumentDetectedLanguage,
+  "CustomHealthcareActionResult",
+  "csharp"
+);
+@@clientName(CustomLabelClassificationResultWithDocumentDetectedLanguage,
+  "CustomLabelClassificationActionResult",
+  "csharp"
+);
+@@clientName(HealthcareEntitiesDocumentResultWithDocumentDetectedLanguage,
+  "HealthcareActionResult",
+  "csharp"
+);
+@@clientName(CustomEntitiesResultWithDocumentDetectedLanguage,
+  "CustomEntitiesActionResult",
+  "csharp"
+);
