@@ -15,7 +15,7 @@ namespace Microsoft.Contoso;
 /** Desk resource */
 @parentResource(Employee)
 model Desk is TrackedResource<DeskProperties> {
-  ...ResourceNameParameter<NestedResourceType>;
+  ...ResourceNameParameter<Desk>;
 }
 
 /** Desk properties */
@@ -37,6 +37,5 @@ interface Desks {
   createOrUpdate is ArmResourceCreateOrReplaceAsync<Desk>;
   update is ArmResourcePatchSync<Desk, DeskProperties>;
   delete is ArmResourceDeleteWithoutOkAsync<Desk>;
-  listByResourceGroup is ArmResourceListByParent<Desk>;
-  listBySubscription is ArmListBySubscription<Desk>;
+  list is ArmResourceListByParent<Desk>;
 }

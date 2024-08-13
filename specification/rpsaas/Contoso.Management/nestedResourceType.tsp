@@ -66,6 +66,5 @@ interface NestedResourceTypes {
     NestedResourceTypeProperties
   >;
   delete is ArmResourceDeleteWithoutOkAsync<NestedResourceType>;
-  listByResourceGroup is ArmResourceListByParent<NestedResourceType>;
-  listBySubscription is ArmListBySubscription<NestedResourceType>;
+  list is ArmResourceListByParent<NestedResourceType>;
 }
