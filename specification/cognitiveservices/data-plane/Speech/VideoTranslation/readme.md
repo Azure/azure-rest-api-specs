@@ -22,12 +22,3 @@ These settings apply only when `--tag=release_2024_05_20_preview` is specified o
 input-file:
   - preview/2024-05-20-preview/VideoTranslation.json
 ```
-
-## VideoTranslation 2024-07-30-preview
-
-These settings apply only when `--tag=release_2024_07_30_preview` is specified on the command line.
-
-```yaml $(tag) == 'release_2024_07_30_preview'
-input-file:
-  - preview/2024-07-30-preview/VideoTranslation.json
-```

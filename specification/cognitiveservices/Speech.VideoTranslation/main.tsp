@@ -58,10 +58,6 @@ enum ApiVersions {
   @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   @doc("The 2024-05-20-preview version of the VideoTranslation service.")
   v2024_05_20_preview: "2024-05-20-preview",
-
-  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
-  @doc("The 2024-07-30-preview version of the VideoTranslation service.")
-  v2024_07_30_preview: "2024-07-30-preview",
 }
 
 @doc("Task status.")
@@ -174,10 +170,6 @@ model IterationInput {
   @doc("Subtitle max char count per segment.")
   subtitleMaxCharCountPerSegment?: int32;
 
-  @doc("Speaker consents.")
-  @added(ApiVersions.v2024_07_30_preview)
-  consents?: Array<string>;
-
   @doc("Webvtt file for content editing.")
   webvttFile?: WebvttFile;
 }
@@ -272,86 +264,6 @@ model Operation {
   status?: Status;
 }
 
-@doc("Default consent template.")
-@added(ApiVersions.v2024_07_30_preview)
-@TypeSpec.Rest.resource("defaultConsentTemplates")
-model DefaultConsentTemplate {
-  @doc("Default consent template ID, use locale as ID.")
-  @key("locale")
-  @visibility("read")
-  locale: localeName;
-
-  @doc("Default consent template content")
-  @visibility("read")
-  template: string;
-
-  @doc("Iteration input.")
-  slots: Record<DefaultConsentTemplateSlot>;
-}
-
-@doc("Consent template slot.")
-@added(ApiVersions.v2024_07_30_preview)
-model DefaultConsentTemplateSlot {
-  @doc("Localized slot name.")
-  @visibility("read")
-  localizedSlotName: string;
-
-  @doc("Localized slot example.")
-  @visibility("read")
-  localizedSlotExample: string;
-}
-
-@doc("Consent.")
-@TypeSpec.Rest.resource("consents")
-@added(ApiVersions.v2024_07_30_preview)
-model Consent {
-  @doc("Consent ID")
-  @key("consentId")
-  @visibility("read")
-  id: resourceId;
-
-  @doc("Consent locale name.")
-  input: ConsentInput;
-
-  @doc("Consent name")
-  displayName?: string;
-
-  @doc("Consent description")
-  description?: string;
-
-  @doc("Consent status")
-  @visibility("read")
-  status?: Status;
-
-  @doc("Consent failure reason")
-  @visibility("read")
-  failureReason?: string;
-
-  @doc("The timestamp when the object was created. The timestamp is encoded as ISO 8601 date and time format (\"YYYY-MM-DDThh:mm:ssZ\", see https://en.wikipedia.org/wiki/ISO_8601#Combined_date_and_time_representations).")
-  @visibility("read")
-  createdDateTime?: utcDateTime;
-
-  @doc("The timestamp when the current status was entered. The timestamp is encoded as ISO 8601 date and time format (\"YYYY-MM-DDThh:mm:ssZ\", see https://en.wikipedia.org/wiki/ISO_8601#Combined_date_and_time_representations).")
-  @visibility("read")
-  lastActionDateTime?: utcDateTime;
-}
-
-@doc("Consent input.")
-@added(ApiVersions.v2024_07_30_preview)
-model ConsentInput {
-  @doc("Consent locale name.")
-  locale: localeName;
-
-  @doc("Audio file url.")
-  audioFileUrl: url;
-
-  @doc("Voice talent name.")
-  voiceTalentName: string;
-
-  @doc("Company name.")
-  companyName: string;
-}
-
 interface TranslationOperations {
   @doc("Creates a translation.")
   @pollingOperation(OperationOperations.getOperation)
@@ -395,33 +307,4 @@ interface IterationOperations {
 interface OperationOperations {
   @doc("Fetch a operation by ID.")
   getOperation is ops.ResourceRead<Operation>;
-}
-
-@added(ApiVersions.v2024_07_30_preview)
-interface DefaultConsentTemplateOperations {
-  @doc("Fetch a default consent template by locale.")
-  getDefaultConsentTemplate is ops.ResourceRead<DefaultConsentTemplate>;
-}
-
-@added(ApiVersions.v2024_07_30_preview)
-interface ConsentOperations {
-  // Due to PR bulid need both "Create" and "Update" word in operation ID.
-  @doc("Creates an consent.")
-  @pollingOperation(OperationOperations.getOperation)
-  createOrReplaceConsent is ops.LongRunningResourceCreateOrReplace<
-    Consent,
-    RequestHeadersTrait<OperationIdHeader>
-  >;
-
-  @doc("Fetch a consent by ID.")
-  getConsent is ops.ResourceRead<Consent>;
-
-  @doc("List consent resources.")
-  listConsent is ops.ResourceList<
-    Consent,
-    ListQueryParametersTrait<StandardListQueryParameters>
-  >;
-
-  @doc("Delete a consent.")
-  deleteConsent is ops.ResourceDelete<Consent>;
 }
