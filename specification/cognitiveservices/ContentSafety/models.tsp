@@ -185,7 +185,7 @@ model TextBlocklistItem {
   description?: string;
 
   @doc("BlocklistItem content. The length is counted using Unicode code point.")
-  @maxLength(1000)
+  @maxLength(128)
   text: string;
 
   @added(ContentSafety.Versions.v2024_09_01)
@@ -215,11 +215,9 @@ model RemoveTextBlocklistItemsOptions {
 @doc("The request of analyzing potential direct or indirect injection attacks.")
 model ShieldPromptOptions {
   @doc("The user prompt to be analyzed, which may contain direct injection attacks.")
-  @maxLength(10000)
   userPrompt?: string;
 
   @doc("The documents to be analyzed, which may contain direct or indirect injection attacks.")
-  @maxItems(5)
   documents?: string[];
 }
 
@@ -251,7 +249,6 @@ model DocumentInjectionAnalysisResult {
 @doc("The request of detecting potential protected material present in the given text.")
 model DetectTextProtectedMaterialOptions {
   @doc("The text to be analyzed, which may contain protected material. The characters will be counted in Unicode code points.")
-  @maxLength(10000)
   text: string;
 }
 
@@ -269,7 +266,39 @@ model TextProtectedMaterialAnalysisResult {
   detected: boolean;
 }
 
+@added(ContentSafety.Versions.v2024_09_15_Preview)
+@doc("The request of detecting potential protected material present in the given code.")
+model DetectCodeProtectedMaterialOptions {
+  @doc("The code to be analyzed, which may contain protected material. The characters will be counted in Unicode code points.")
+  code: string;
+}
 
+@added(ContentSafety.Versions.v2024_09_15_Preview)
+@doc("The combined detection results of potential protected material for code.")
+model DetectCodeProtectedMaterialResult {
+  @doc("Analysis result for the given text.")
+  protectedMaterialAnalysis: CodeProtectedMaterialAnalysisResult;
+}
+
+@added(ContentSafety.Versions.v2024_09_15_Preview)
+@doc("The code citation of potential protected material for code.")
+model CodeCitation {
+  @doc("The license type fetched from source repository.")
+  license: string;
+
+  @doc("The repository URLs of the source code detected.")
+  sourceUrls: string[];
+}
+
+@added(ContentSafety.Versions.v2024_09_15_Preview)
+@doc("The individual detection result of potential protected material for code.")
+model CodeProtectedMaterialAnalysisResult {
+  @doc("Whether potential protected material is detected or not.")
+  detected: boolean;
+
+  @doc("The code citation of potential protected material for code.")
+  codeCitations: CodeCitation[];
+}
 
 @added(ContentSafety.Versions.v2024_09_15_Preview)
 @doc("The domain supported in Text Groundedness analysis.")
@@ -300,7 +329,6 @@ union GroundednessTask {
 @doc("The options for QnA task.")
 model QnAOptions {
   @doc("The user's question input in a QnA task.")
-  @maxLength(7500)
   query: string;
 }
 
@@ -334,49 +362,48 @@ model LLMResource {
 @doc("The request of text groundedness analysis.")
 model AnalyzeTextGroundednessOptions {
   @doc("""
-  The domain of the text for analysis. Allowed values: Medical, Generic.
-  This field is optional, with a default value of Generic.
-  """)
+    The domain of the text for analysis. Allowed values: Medical, Generic.
+    This field is optional, with a default value of Generic.
+    """)
   domain?: GroundednessDomain = GroundednessDomain.Generic;
 
   @doc("""
-  The task type for the text analysis. Type of task: QnA, Summarization.
-  This field is optional, with a default value of Summarization.
-  """)
+    The task type for the text analysis. Type of task: QnA, Summarization.
+    This field is optional, with a default value of Summarization.
+    """)
   task?: GroundednessTask = GroundednessTask.Summarization;
 
   @doc("""
-  The user's question input in a QnA scenario.
-  This field is optional, but cannot be omitted when task type is QnA.
-  """)
+    The user's question input in a QnA scenario.
+    This field is optional, but cannot be omitted when task type is QnA.
+    """)
   qna?: QnAOptions;
 
   @doc("The text to be analyzed. Usually, it's the LLM output and may contain ungrounded content.")
-  @maxLength(7500)
   text: string;
 
   @doc("""
-  The grounding sources to be used for validating the groundedness.
-  Limit: Restrictions on the total amount of grounding sources that can be analyzed in a single request are 55K characters (in Unicode code point).
-  """)
+    The grounding sources to be used for validating the groundedness.
+    Limit: Restrictions on the total amount of grounding sources that can be analyzed in a single request are 55K characters (in Unicode code point).
+    """)
   groundingSources: string[];
 
   @doc("""
-  A value indicating if to generate mitigated content for the ungrounded content and included in the response.
-  This field is optional, with a default value of false.
-  """)
+    A value indicating if to generate mitigated content for the ungrounded content and included in the response.
+    This field is optional, with a default value of false.
+    """)
   mitigating?: boolean;
 
   @doc("""
-  A value indicating if to generate an explanation for the groundedness analysis result and included in the response.
-  This field is optional, with a default value of false.
-  """)
+    A value indicating if to generate an explanation for the groundedness analysis result and included in the response.
+    This field is optional, with a default value of false.
+    """)
   reasoning?: boolean;
 
   @doc("""
-  Connection details for the LLM resource. 
-  This field will be used only when the 'reasoning' field is set to true; otherwise, it will be ignored.
-  """)
+    Connection details for the LLM resource. 
+    This field will be used only when the 'reasoning' field is set to true; otherwise, it will be ignored.
+    """)
   llmResource?: LLMResource;
 }
 
@@ -406,9 +433,9 @@ model UngroundednessDetails {
   length: IndexDetails;
 
   @doc("""
-  The explanation for detected ungroundedness.
-  It's available only when the 'reasoning' field in the input is set to true.
-  """)
+    The explanation for detected ungroundedness.
+    It's available only when the 'reasoning' field in the input is set to true.
+    """)
   reason?: string;
 }
 
@@ -419,33 +446,31 @@ model AnalyzeTextGroundednessResult {
   ungroundedDetected: boolean;
 
   @doc("""
-  Specifies the proportion of the text identified as ungrounded, 
-  expressed as a decimal between 0 and 1,
-  where 0 indicates no ungrounded content and 1 indicates the entire given text is considered ungrounded.
-  """)
+    Specifies the proportion of the text identified as ungrounded, 
+    expressed as a decimal between 0 and 1,
+    where 0 indicates no ungrounded content and 1 indicates the entire given text is considered ungrounded.
+    """)
   ungroundedPercentage: float32;
 
   @doc("Provides insights into ungrounded content with specific examples and percentages.")
   ungroundedDetails: UngroundednessDetails[];
 
   @doc("""
-  The mitigation for detected ungroundedness.
-  It's available only when the 'mitigating' field in the input is set to true.
-  """)
+    The mitigation for detected ungroundedness.
+    It's available only when the 'mitigating' field in the input is set to true.
+    """)
   mitigatedText?: string;
 }
-
-
 
 @added(ContentSafety.Versions.v2024_09_15_Preview)
 @doc("Definition of an Auto Reviewer version.")
 @resource("text/autoReviewers")
 model AutoReviewerVersion {
-  @key
+  @doc("The name of the Auto Reviewer.")
   @visibility("read", "create", "update")
   @pattern("^[0-9A-Za-z._~-]+$")
   @maxLength(64)
-  @doc("The name of the Auto Reviewer.")
+  @key
   autoReviewerName: string;
 
   @doc("The labels defined in the Auto Reviewer. There should be a label named 'Other' in the list. The 'Other' label is the default one to represent the content that does not classified as any other labels.")
@@ -494,16 +519,16 @@ model AutoReviewerLabelDetails {
 @doc("The possible status of an Auto Reviewer operation.")
 union AutoReviewerOperationStatus {
   string,
-  
+
   @doc("Auto Reviewer operation status - NotStarted")
   "NotStarted",
-  
+
   @doc("Auto Reviewer operation status - Running")
   "Running",
-  
+
   @doc("Auto Reviewer operation status - Succeeded")
   "Succeeded",
-  
+
   @doc("Auto Reviewer operation status - Failed")
   "Failed",
 }
@@ -545,7 +570,6 @@ model AutoReviewerOperationDetail {
   @doc("The id of this operation.")
   @key("operationId")
   @visibility("read", "create", "query")
-  @maxLength(64)
   id: string;
 
   @doc("The status of this operation.")
@@ -554,8 +578,6 @@ model AutoReviewerOperationDetail {
   @doc("The error details when this operation failed.")
   error?: Azure.Core.Foundations.Error;
 }
-
-
 
 @added(ContentSafety.Versions.v2024_09_15_Preview)
 @doc("The possible status of a content safety incident operation.")
@@ -583,14 +605,13 @@ union IncidentOperationStatus {
 @resource("text/incidents")
 model TextIncident {
   @doc("The name of the incident.")
-  @pattern("^(?=[a-zA-Z0-9])[a-zA-Z0-9-]*[a-zA-Z0-9]$")
-  @key("incidentName")
   @visibility("read", "create", "query")
+  @pattern("^(?=[a-zA-Z0-9])[a-zA-Z0-9-]*[a-zA-Z0-9]$")
   @maxLength(64)
+  @key("incidentName")
   incidentName: string;
 
   @doc("The guideline to define this incident.")
-  @maxLength(1024)
   incidentDefinition?: string;
 
   @doc("The created time of this incident.")
@@ -608,13 +629,12 @@ model TextIncident {
 @parentResource(TextIncident)
 model TextIncidentSample {
   @doc("The name of this incident sample.")
-  @key("incidentSampleId")
   @visibility("read")
   @maxLength(64)
+  @key("incidentSampleId")
   incidentSampleId: string;
 
   @doc("The text content of this incident sample.")
-  @maxLength(1024)
   text?: string;
 }
 
@@ -643,7 +663,6 @@ model RemoveTextIncidentSamplesOptions {
 @doc("The request to analyze given text content with content safety Text Incidents defined.")
 model AnalyzeTextDetectIncidentsOptions {
   @doc("The text to be analyzed.")
-  @maxLength(10000)
   text: string;
 
   @doc("The incidents defined.")
@@ -654,7 +673,6 @@ model AnalyzeTextDetectIncidentsOptions {
 @doc("The definition of a matched content safety incident.")
 model IncidentMatch {
   @doc("The name of the matched incident.")
-  @maxLength(64)
   incidentName: string;
 }
 
@@ -665,17 +683,15 @@ model DetectIncidentsResult {
   incidentMatches: IncidentMatch[];
 }
 
-
-
 @added(ContentSafety.Versions.v2024_09_15_Preview)
 @doc("Definition of a content safety Image Incident.")
 @resource("image/incidents")
 model ImageIncident {
   @doc("The name of the incident.")
-  @pattern("^(?=[a-zA-Z0-9])[a-zA-Z0-9-]*[a-zA-Z0-9]$")
-  @key("incidentName")
   @visibility("read", "create", "query")
+  @pattern("^(?=[a-zA-Z0-9])[a-zA-Z0-9-]*[a-zA-Z0-9]$")
   @maxLength(64)
+  @key("incidentName")
   incidentName: string;
 
   @doc("The created time of this incident.")
@@ -693,9 +709,9 @@ model ImageIncident {
 @parentResource(ImageIncident)
 model ImageIncidentSample {
   @doc("The name of this incident sample.")
-  @key("incidentSampleId")
   @visibility("read")
   @maxLength(64)
+  @key("incidentSampleId")
   incidentSampleId: string;
 
   @doc("The image content of this incident sample.")
@@ -717,7 +733,6 @@ model ListImageIncidentSampleResult {
   @doc("The name of this incident sample.")
   @key("incidentSampleId")
   @visibility("read")
-  @maxLength(64)
   incidentSampleId: string;
 }
 
@@ -743,7 +758,6 @@ model ImageIncidentSampleResult {
   @doc("The name of this incident sample.")
   @key("incidentSampleId")
   @visibility("read")
-  @maxLength(64)
   incidentSampleId: string;
 
   @doc("The image content of this incident sample.")
@@ -756,8 +770,6 @@ model RemoveImageIncidentSamplesOptions {
   @doc("Incident samples to be removed.")
   incidentSampleIds: string[];
 }
-
-
 
 @added(ContentSafety.Versions.v2024_09_15_Preview)
 @doc("The request to analyze given image with content safety Image Incidents defined.")
@@ -776,7 +788,6 @@ model TextIncidentOperationResult {
   @doc("The id of this operation.")
   @key("operationId")
   @visibility("read", "create", "query")
-  @maxLength(64)
   id: string;
 
   @doc("The status of this operation.")
@@ -794,7 +805,6 @@ model ImageIncidentOperationResult {
   @doc("The id of this operation.")
   @key("operationId")
   @visibility("read", "create", "query")
-  @maxLength(64)
   id: string;
 
   @doc("The status of this operation.")
@@ -806,23 +816,34 @@ model ImageIncidentOperationResult {
 }
 
 @added(ContentSafety.Versions.v2024_09_15_Preview)
-@doc("Incident operation id options.")
-model IncidentOperationIdOptions {
+@doc("Incident long running operation parameters.")
+model IncidentLongRunningOperationParameters {
   @doc("The operation id passed by the user, if not provided, will be automatically generated as a UUID.")
   @header("Operation-Id")
   @pattern("^(?=[a-zA-Z0-9])[a-zA-Z0-9-]*[a-zA-Z0-9]$")
+  @maxLength(64)
   operationId?: string;
 }
 
-
+@added(ContentSafety.Versions.v2024_09_15_Preview)
+@doc("Incident long running operation status result.")
+model IncidentLongRunningOperationStatusResult {
+  @doc("The operation id passed by the user in the request or a random UUID generated by server side.")
+  @header("Operation-Id")
+  @pattern("^(?=[a-zA-Z0-9])[a-zA-Z0-9-]*[a-zA-Z0-9]$")
+  @maxLength(64)
+  operationId: string;
+}
 
 @added(ContentSafety.Versions.v2024_09_15_Preview)
 @resource("text/categories")
 @doc("Definition of a Customer Category version.")
 model TextCustomCategoryVersion {
-  @key
-  @visibility("read", "create", "update")
   @doc("The name of this Custom Category")
+  @visibility("read", "create", "update")
+  @pattern("^(?=[a-zA-Z0-9])[a-zA-Z0-9-]*[a-zA-Z0-9]$")
+  @maxLength(64)
+  @key
   categoryName: string;
 
   @doc("The definition or description of this Custom Category version.")
@@ -902,9 +923,9 @@ union CustomCategoryOperationStatus {
 @resource("text/categories/operations")
 model CustomCategoryOperationDetail {
   @doc("The id of this operation.")
-  @key("operationId")
   @visibility("read", "create", "query")
   @maxLength(64)
+  @key("operationId")
   id: string;
 
   @doc("The status of this operation.")
@@ -913,6 +934,30 @@ model CustomCategoryOperationDetail {
 
   @doc("The error details when this operation failed.")
   error?: Azure.Core.Foundations.Error;
+}
+
+@added(ContentSafety.Versions.v2024_09_15_Preview)
+@doc("Custom Category long running operation parameters.")
+model CustomCategoryLongRunningOperationParameters {
+  @doc("The build will target on the given version.")
+  @query
+  version: int32;
+
+  @doc("The operation id passed by the user, if not provided, will be automatically generated as a UUID.")
+  @header("Operation-Id")
+  @pattern("^(?=[a-zA-Z0-9])[a-zA-Z0-9-]*[a-zA-Z0-9]$")
+  @maxLength(64)
+  operationId?: string;
+}
+
+@added(ContentSafety.Versions.v2024_09_15_Preview)
+@doc("Custom Category long running operation status result.")
+model CustomCategoryLongRunningOperationStatusResult {
+  @doc("The operation id passed by the user in the request or a random UUID generated by server side.")
+  @header("Operation-Id")
+  @pattern("^(?=[a-zA-Z0-9])[a-zA-Z0-9-]*[a-zA-Z0-9]$")
+  @maxLength(64)
+  operationId: string;
 }
 
 @added(ContentSafety.Versions.v2024_09_15_Preview)
@@ -940,6 +985,57 @@ model TextCustomCategoryAnalysis {
 model AnalyzeTextCustomCategoryResult {
   @doc("The analysis result with Custom Category.")
   customCategoryAnalysis: TextCustomCategoryAnalysis;
+}
+
+@added(ContentSafety.Versions.v2024_09_15_Preview)
+@doc("The harm category supported in Image-with-Text content analysis.")
+union ImageWithTextCategory {
+  string,
+
+  @doc("The harm category for Image-with-Text - Hate.")
+  "Hate",
+
+  @doc("The harm category for Image-with-Text - SelfHarm.")
+  "SelfHarm",
+
+  @doc("The harm category for Image-with-Text - Sexual.")
+  "Sexual",
+
+  @doc("The harm category for Image-with-Text - Violence.")
+  "Violence",
+}
+
+@added(ContentSafety.Versions.v2024_09_15_Preview)
+@doc("The request to analyze an image with embedded or custom text.")
+model AnalyzeImageWithTextOptions {
+  @doc("The image content to be analyzed.")
+  image: ImageData;
+
+  @doc("The text related to the given image.")
+  text?: string;
+
+  @doc("The harm categories to be detected. A default set of harm categories will be applied if omitted.")
+  categories?: ImageWithTextCategory[];
+
+  @doc("When set to true, the embedded text in given image will be recognized and concatenated with the given text for analysis.")
+  enableOcr: boolean;
+}
+
+@added(Versions.v2024_09_15_Preview)
+@doc("The definition of individual result for analyzing an image with embedded or custom text.")
+model ImageWithTextCategoriesAnalysis {
+  @doc("The harm category detected.")
+  category: ImageWithTextCategory;
+
+  @doc("It indicates the severity of the harm. 0 means the content is considered as safe in this harm category.")
+  severity?: int32;
+}
+
+@added(Versions.v2024_09_15_Preview)
+@doc("The response of analyzing an image with embedded or custom text.")
+model AnalyzeImageWithTextResult {
+  @doc("The individual analysis result for each harm category.")
+  categoriesAnalysis: ImageWithTextCategoriesAnalysis[];
 }
 
 @added(ContentSafety.Versions.v2024_09_30_Preview)
