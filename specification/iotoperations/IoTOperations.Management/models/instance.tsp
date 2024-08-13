@@ -94,40 +94,28 @@ model ServiceAccountProperties {
 @doc("The properties of an ADR instance.")
 model AdrProperties {
   @doc("This determines if the ADR service is enabled.")
-  @visibility("read")
   enabled: boolean;
 }
 @doc("The properties of an AKRI instance.")
 model AkriInstanceProperties {
   @doc("This determines if the AKRI service is enabled.")
-  @visibility("read")
   enabled: boolean;
 }
 
 @doc("The properties of a  Connector instance.")
 model ConnectorInstanceProperties {
   @doc("This determines if the Connector service is enabled.")
-  @visibility("read")
   enabled: boolean;
 }
 
 @doc("The properties of an DataFlow instance.")
 model DataFlowInstanceProperties {
   @doc("This determines if the DataFlow service is enabled.")
-  @visibility("read")
-  enabled: boolean;
-}
-
-@doc("The properties of an MQTT Broker instance.")
-model MqttBrokerInstanceProperties {
-  @doc("This determines if the MQTT Broker service is enabled.")
-  @visibility("read")
   enabled: boolean;
 }
 
 @doc("The properties of a Schema Registry instance.")
 model SchemaRegistryInstanceProperties {
   @doc("This determines if the Schema Registry service is enabled.")
-  @visibility("read")
   enabled: boolean;
 }
