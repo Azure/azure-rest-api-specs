@@ -58,3 +58,6 @@ directive:
   - suppress: PatchBodyParametersSchema
     from: splitio.json
     reason: Typespec generated update parameters include common types which contain required properties.
+  - suppress: AvoidAnonymousTypes
+    from: splitio.json
+    reason: Typespec generated definitions contain anonymous types.
