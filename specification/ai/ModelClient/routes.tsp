@@ -12,7 +12,6 @@ using TypeSpec.Rest;
 using TypeSpec.Http;
 using TypeSpec.Versioning;
 using Azure.Core;
-using Azure.Core.Traits;
 
 namespace AI.Model;
 
