@@ -962,11 +962,6 @@
       "format": "int32",
       "type": "integer"
     },
-    "PollingInterval": {
-      "description": "Interval to check each event source in seconds. Defaults to 30s",
-      "format": "int32",
-      "type": "integer"
-    },
     "JobScaleRule": {
       "description": "Scaling rule.",
       "type": "object",
@@ -1000,8 +995,10 @@
       "description": "Scaling configurations for event driven jobs.",
       "type": "object",
       "properties": {
-        "pollingInterval": {
-          "$ref": "#/definitions/PollingInterval"
+        "PollingInterval": {
+          "description": "Interval to check each event source in seconds. Defaults to 30s",
+          "format": "int32",
+          "type": "integer"
         },
         "minExecutions": {
           "format": "int32",
