@@ -1797,6 +1797,11 @@
           "default": 7,
           "description": "The amount of time in days that the configuration store will be retained when it is soft deleted."
         },
+        "revisionRetentionPeriodInSeconds": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The amount of time in seconds to retain new key value revisions. Defaults to 604800 (7 days) for Free SKU stores and 2592000 (30 days) for Standard SKU stores."
+        },
         "enablePurgeProtection": {
           "type": "boolean",
           "default": false,
@@ -1997,6 +2002,10 @@
         "experimentation": {
           "$ref": "#/definitions/ExperimentationProperties",
           "description": "Property specifying the configuration of experimentation to update for this configuration store"
+        },
+        "revisionRetentionPeriodInSeconds": {
+          "type": "integer",
+          "description": "The amount of time in seconds to retain new key value revisions. Defaults to 604800 (7 days) for Free SKU stores and 2592000 (30 days) for Standard SKU stores."
         }
       }
     },
