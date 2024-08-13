@@ -49,7 +49,6 @@ namespace Microsoft.EventGrid.SystemEvents {
     blobType?: string;
 
     /** The current tier of the blob. */
-    @madeRequired(ServiceApiVersions.v2024_01_01)
     accessTier: StorageBlobAccessTier;
 
     /** The path to the blob. */
@@ -227,11 +226,9 @@ namespace Microsoft.EventGrid.SystemEvents {
     blobType?: string;
 
     /** The current tier of the blob. */
-    @madeRequired(ServiceApiVersions.v2024_01_01)
     accessTier: StorageBlobAccessTier;
 
     /** The previous tier of the blob. */
-    @madeRequired(ServiceApiVersions.v2024_01_01)
     previousTier: StorageBlobAccessTier;
 
     /** The path to the blob. */
