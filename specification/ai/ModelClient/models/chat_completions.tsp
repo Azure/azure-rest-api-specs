@@ -120,7 +120,13 @@ model ChatCompletionsOptions {
     """)
   `model`?: string;
 
-  ...AdditionalRequestHeaders;
+  @doc("""
+    Controls what happens if extra parameters, undefined by the REST API,
+    are passed in the JSON request payload.
+    This sets the HTTP request header `extra-parameters`.
+    """)
+  @header("extra-parameters")
+  extra_params?: ExtraParameters;
 
   ...Record<unknown>;
 }
