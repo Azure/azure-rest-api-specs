@@ -32,6 +32,7 @@ tag: package-preview-2024-08
 ### Tag: package-preview-2024-08
 
 These settings apply only when `--tag=package-preview-2024-08` is specified on the command line.
+
 ```yaml $(tag) == 'package-preview-2024-08'
 input-file:
   - Microsoft.BareMetalInfrastructure/preview/2024-08-01-preview/baremetalinfrastructure.json
@@ -45,6 +46,7 @@ These settings apply only when `--tag=package-preview-2023-11` is specified on t
 input-file:
   - Microsoft.BareMetalInfrastructure/preview/2023-11-01-preview/baremetalinfrastructure.json
 ```
+
 ### Tag: package-preview-2023-08
 
 These settings apply only when `--tag=package-preview-2023-08` is specified on the command line.
@@ -82,18 +84,6 @@ input-file:
 ```
 
 ---
-
-## Suppression
-
-```yaml
-directive:
-  - suppress: READONLY_PROPERTY_NOT_ALLOWED_IN_REQUEST
-    where:
-      - $.definitions.Resource.properties.name
-      - $.definitions.Resource.properties.id
-    from: types.json
-    reason: 'This property is already a part of our API, cannot remove it'
-```
 
 # Code Generation
 
