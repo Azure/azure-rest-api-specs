@@ -62,6 +62,110 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DesktopVirtualization/workspaces": {
+      "get": {
+        "tags": [
+          "Workspace"
+        ],
+        "operationId": "Workspaces_ListBySubscription",
+        "description": "List workspaces in subscription.",
+        "x-ms-examples": {
+          "Workspace_ListBySubscription": {
+            "$ref": "./examples/Workspace_ListBySubscription.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved workspaces in subscription.",
+            "schema": {
+              "$ref": "#/definitions/WorkspaceList"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/workspaces": {
+      "get": {
+        "tags": [
+          "Workspace"
+        ],
+        "operationId": "Workspaces_ListByResourceGroup",
+        "description": "List workspaces.",
+        "x-ms-examples": {
+          "Workspace_ListByResourceGroup": {
+            "$ref": "./examples/Workspace_ListByResourceGroup.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "description": "Number of items per page."
+          },
+          {
+            "name": "isDescending",
+            "in": "query",
+            "required": false,
+            "type": "boolean",
+            "description": "Indicates whether the collection is descending."
+          },
+          {
+            "name": "initialSkip",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "description": "Initial number of items to skip."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved workspaces in resource group.",
+            "schema": {
+              "$ref": "#/definitions/WorkspaceList"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/workspaces/{workspaceName}": {
       "get": {
         "tags": [
@@ -506,16 +610,62 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/workspaces": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DesktopVirtualization/applicationGroups": {
       "get": {
         "tags": [
-          "Workspace"
+          "ApplicationGroup"
         ],
-        "operationId": "Workspaces_ListByResourceGroup",
-        "description": "List workspaces.",
+        "operationId": "ApplicationGroups_ListBySubscription",
+        "description": "List applicationGroups in subscription.",
         "x-ms-examples": {
-          "Workspace_ListByResourceGroup": {
-            "$ref": "./examples/Workspace_ListByResourceGroup.json"
+          "ApplicationGroup_List": {
+            "$ref": "./examples/ApplicationGroup_ListBySubscription.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "OData filter expression. Valid properties for filtering are applicationGroupType."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved application groups in subscription.",
+            "schema": {
+              "$ref": "#/definitions/ApplicationGroupList"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/applicationGroups": {
+      "get": {
+        "tags": [
+          "ApplicationGroup"
+        ],
+        "operationId": "ApplicationGroups_ListByResourceGroup",
+        "description": "List applicationGroups.",
+        "x-ms-examples": {
+          "ApplicationGroup_ListByResourceGroup": {
+            "$ref": "./examples/ApplicationGroup_ListByResourceGroup.json"
           }
         },
         "parameters": [
@@ -527,6 +677,13 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "OData filter expression. Valid properties for filtering are applicationGroupType."
           },
           {
             "name": "pageSize",
@@ -554,893 +711,9 @@
         ],
         "responses": {
           "200": {
-            "description": "Successfully retrieved workspaces in resource group.",
+            "description": "Successfully retrieved application groups in resource group.",
             "schema": {
-              "$ref": "#/definitions/WorkspaceList"
-            }
-          },
-          "default": {
-            "description": "Automation error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.DesktopVirtualization/workspaces": {
-      "get": {
-        "tags": [
-          "Workspace"
-        ],
-        "operationId": "Workspaces_ListBySubscription",
-        "description": "List workspaces in subscription.",
-        "x-ms-examples": {
-          "Workspace_ListBySubscription": {
-            "$ref": "./examples/Workspace_ListBySubscription.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully retrieved workspaces in subscription.",
-            "schema": {
-              "$ref": "#/definitions/WorkspaceList"
-            }
-          },
-          "default": {
-            "description": "Automation error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/scalingPlans/{scalingPlanName}": {
-      "get": {
-        "tags": [
-          "ScalingPlan"
-        ],
-        "operationId": "ScalingPlans_Get",
-        "description": "Get a scaling plan.",
-        "x-ms-examples": {
-          "ScalingPlans_Get": {
-            "$ref": "./examples/ScalingPlan_Get.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ScalingPlanNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully retrieved scaling plan.",
-            "schema": {
-              "$ref": "#/definitions/ScalingPlan"
-            }
-          },
-          "default": {
-            "description": "Automation error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        }
-      },
-      "put": {
-        "tags": [
-          "ScalingPlan"
-        ],
-        "operationId": "ScalingPlans_Create",
-        "description": "Create or update a scaling plan.",
-        "x-ms-examples": {
-          "ScalingPlans_Create": {
-            "$ref": "./examples/ScalingPlan_Create.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ScalingPlanNameParameter"
-          },
-          {
-            "name": "scalingPlan",
-            "description": "Object containing scaling plan definitions.",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ScalingPlan"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully updated scaling plan.",
-            "schema": {
-              "$ref": "#/definitions/ScalingPlan"
-            }
-          },
-          "201": {
-            "description": "Successfully created scaling plan.",
-            "schema": {
-              "$ref": "#/definitions/ScalingPlan"
-            }
-          },
-          "default": {
-            "description": "Automation error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "ScalingPlan"
-        ],
-        "operationId": "ScalingPlans_Delete",
-        "description": "Remove a scaling plan.",
-        "x-ms-examples": {
-          "ScalingPlans_Delete": {
-            "$ref": "./examples/ScalingPlan_Delete.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ScalingPlanNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully deleted scaling plan."
-          },
-          "204": {
-            "description": "Scaling plan does not exist."
-          },
-          "default": {
-            "description": "Automation error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        }
-      },
-      "patch": {
-        "tags": [
-          "ScalingPlan"
-        ],
-        "operationId": "ScalingPlans_Update",
-        "description": "Update a scaling plan.",
-        "x-ms-examples": {
-          "ScalingPlans_Update": {
-            "$ref": "./examples/ScalingPlan_Update.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ScalingPlanNameParameter"
-          },
-          {
-            "name": "scalingPlan",
-            "description": "Object containing scaling plan definitions.",
-            "in": "body",
-            "required": false,
-            "schema": {
-              "$ref": "#/definitions/ScalingPlanPatch"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully updated scaling plan.",
-            "schema": {
-              "$ref": "#/definitions/ScalingPlan"
-            }
-          },
-          "default": {
-            "description": "Automation error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/scalingPlans": {
-      "get": {
-        "tags": [
-          "ScalingPlan"
-        ],
-        "operationId": "ScalingPlans_ListByResourceGroup",
-        "description": "List scaling plans.",
-        "x-ms-examples": {
-          "ScalingPlans_ListByResourceGroup": {
-            "$ref": "./examples/ScalingPlan_ListByResourceGroup.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "pageSize",
-            "in": "query",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "description": "Number of items per page."
-          },
-          {
-            "name": "isDescending",
-            "in": "query",
-            "required": false,
-            "type": "boolean",
-            "description": "Indicates whether the collection is descending."
-          },
-          {
-            "name": "initialSkip",
-            "in": "query",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "description": "Initial number of items to skip."
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully retrieved scaling plans in resource group.",
-            "schema": {
-              "$ref": "#/definitions/ScalingPlanList"
-            }
-          },
-          "default": {
-            "description": "Automation error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/scalingPlans/{scalingPlanName}/pooledSchedules/{scalingPlanScheduleName}": {
-      "get": {
-        "tags": [
-          "ScalingPlanPooledSchedule"
-        ],
-        "operationId": "ScalingPlanPooledSchedules_Get",
-        "description": "Get a ScalingPlanPooledSchedule.",
-        "x-ms-examples": {
-          "ScalingPlanPooledSchedules_Get": {
-            "$ref": "./examples/ScalingPlanPooledSchedule_Get.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ScalingPlanNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ScalingPlanScheduleNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully retrieved ScalingPlanPooledSchedule.",
-            "schema": {
-              "$ref": "#/definitions/ScalingPlanPooledSchedule"
-            }
-          },
-          "default": {
-            "description": "Automation error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        }
-      },
-      "put": {
-        "tags": [
-          "ScalingPlanPooledSchedule"
-        ],
-        "operationId": "ScalingPlanPooledSchedules_Create",
-        "description": "Create or update a ScalingPlanPooledSchedule.",
-        "x-ms-examples": {
-          "ScalingPlanPooledSchedules_Create": {
-            "$ref": "./examples/ScalingPlanPooledSchedule_Create.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ScalingPlanNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ScalingPlanScheduleNameParameter"
-          },
-          {
-            "name": "scalingPlanSchedule",
-            "description": "Object containing ScalingPlanPooledSchedule definitions.",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ScalingPlanPooledSchedule"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully updated ScalingPlanPooledSchedule.",
-            "schema": {
-              "$ref": "#/definitions/ScalingPlanPooledSchedule"
-            }
-          },
-          "201": {
-            "description": "Successfully created ScalingPlanPooledSchedule.",
-            "schema": {
-              "$ref": "#/definitions/ScalingPlanPooledSchedule"
-            }
-          },
-          "default": {
-            "description": "Automation error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "ScalingPlanPooledSchedule"
-        ],
-        "operationId": "ScalingPlanPooledSchedules_Delete",
-        "description": "Remove a ScalingPlanPooledSchedule.",
-        "x-ms-examples": {
-          "ScalingPlanPooledSchedules_Delete": {
-            "$ref": "./examples/ScalingPlanPooledSchedule_Delete.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ScalingPlanNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ScalingPlanScheduleNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully removed ScalingPlanPooledSchedule."
-          },
-          "204": {
-            "description": "ScalingPlanPooledSchedule does not exist."
-          },
-          "default": {
-            "description": "Automation error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        }
-      },
-      "patch": {
-        "tags": [
-          "ScalingPlanPooledSchedule"
-        ],
-        "operationId": "ScalingPlanPooledSchedules_Update",
-        "description": "Update a ScalingPlanPooledSchedule.",
-        "x-ms-examples": {
-          "ScalingPlanPooledSchedules_Update": {
-            "$ref": "./examples/ScalingPlanPooledSchedule_Update.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ScalingPlanNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ScalingPlanScheduleNameParameter"
-          },
-          {
-            "name": "scalingPlanSchedule",
-            "description": "Object containing ScalingPlanPooledSchedule definitions.",
-            "in": "body",
-            "required": false,
-            "schema": {
-              "$ref": "#/definitions/ScalingPlanPooledSchedulePatch"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully updated ScalingPlanPooledSchedule.",
-            "schema": {
-              "$ref": "#/definitions/ScalingPlanPooledSchedule"
-            }
-          },
-          "default": {
-            "description": "Automation error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/scalingPlans/{scalingPlanName}/pooledSchedules": {
-      "get": {
-        "tags": [
-          "ScalingPlanPooledSchedule"
-        ],
-        "operationId": "ScalingPlanPooledSchedules_List",
-        "description": "List ScalingPlanPooledSchedules.",
-        "x-ms-examples": {
-          "ScalingPlanPooledSchedules_List": {
-            "$ref": "./examples/ScalingPlanPooledSchedule_List.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ScalingPlanNameParameter"
-          },
-          {
-            "name": "pageSize",
-            "in": "query",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "description": "Number of items per page."
-          },
-          {
-            "name": "isDescending",
-            "in": "query",
-            "required": false,
-            "type": "boolean",
-            "description": "Indicates whether the collection is descending."
-          },
-          {
-            "name": "initialSkip",
-            "in": "query",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "description": "Initial number of items to skip."
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully retrieved ScalingPlanPooledSchedules.",
-            "schema": {
-              "$ref": "#/definitions/ScalingPlanPooledScheduleList"
-            }
-          },
-          "default": {
-            "description": "Automation error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/scalingPlans/{scalingPlanName}/personalSchedules/{scalingPlanScheduleName}": {
-      "get": {
-        "tags": [
-          "ScalingPlanPersonalSchedule"
-        ],
-        "operationId": "ScalingPlanPersonalSchedules_Get",
-        "description": "Get a ScalingPlanPersonalSchedule.",
-        "x-ms-examples": {
-          "ScalingPlanPersonalSchedules_Get": {
-            "$ref": "./examples/ScalingPlanPersonalSchedule_Get.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ScalingPlanNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ScalingPlanScheduleNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully retrieved ScalingPlanPersonalSchedule.",
-            "schema": {
-              "$ref": "#/definitions/ScalingPlanPersonalSchedule"
-            }
-          },
-          "default": {
-            "description": "Automation error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        }
-      },
-      "put": {
-        "tags": [
-          "ScalingPlanPersonalSchedule"
-        ],
-        "operationId": "ScalingPlanPersonalSchedules_Create",
-        "description": "Create or update a ScalingPlanPersonalSchedule.",
-        "x-ms-examples": {
-          "ScalingPlanPersonalSchedules_Create": {
-            "$ref": "./examples/ScalingPlanPersonalSchedule_Create.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ScalingPlanNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ScalingPlanScheduleNameParameter"
-          },
-          {
-            "name": "scalingPlanSchedule",
-            "description": "Object containing ScalingPlanPersonalSchedule definitions.",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ScalingPlanPersonalSchedule"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully updated ScalingPlanPersonalSchedule.",
-            "schema": {
-              "$ref": "#/definitions/ScalingPlanPersonalSchedule"
-            }
-          },
-          "201": {
-            "description": "Successfully created ScalingPlanPersonalSchedule.",
-            "schema": {
-              "$ref": "#/definitions/ScalingPlanPersonalSchedule"
-            }
-          },
-          "default": {
-            "description": "Automation error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "ScalingPlanPersonalSchedule"
-        ],
-        "operationId": "ScalingPlanPersonalSchedules_Delete",
-        "description": "Remove a ScalingPlanPersonalSchedule.",
-        "x-ms-examples": {
-          "ScalingPlanPersonalSchedules_Delete": {
-            "$ref": "./examples/ScalingPlanPersonalSchedule_Delete.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ScalingPlanNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ScalingPlanScheduleNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully removed ScalingPlanPersonalSchedule."
-          },
-          "204": {
-            "description": "ScalingPlanPersonalSchedule does not exist."
-          },
-          "default": {
-            "description": "Automation error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        }
-      },
-      "patch": {
-        "tags": [
-          "ScalingPlanPersonalSchedule"
-        ],
-        "operationId": "ScalingPlanPersonalSchedules_Update",
-        "description": "Update a ScalingPlanPersonalSchedule.",
-        "x-ms-examples": {
-          "ScalingPlanPersonalSchedules_Update": {
-            "$ref": "./examples/ScalingPlanPersonalSchedule_Update.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ScalingPlanNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ScalingPlanScheduleNameParameter"
-          },
-          {
-            "name": "scalingPlanSchedule",
-            "description": "Object containing ScalingPlanPersonalSchedule definitions.",
-            "in": "body",
-            "required": false,
-            "schema": {
-              "$ref": "#/definitions/ScalingPlanPersonalSchedulePatch"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully updated ScalingPlanPersonalSchedule.",
-            "schema": {
-              "$ref": "#/definitions/ScalingPlanPersonalSchedule"
-            }
-          },
-          "default": {
-            "description": "Automation error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/scalingPlans/{scalingPlanName}/personalSchedules": {
-      "get": {
-        "tags": [
-          "ScalingPlanPersonalSchedule"
-        ],
-        "operationId": "ScalingPlanPersonalSchedules_List",
-        "description": "List ScalingPlanPersonalSchedules.",
-        "x-ms-examples": {
-          "ScalingPlanPersonalSchedules_List": {
-            "$ref": "./examples/ScalingPlanPersonalSchedule_List.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ScalingPlanNameParameter"
-          },
-          {
-            "name": "pageSize",
-            "in": "query",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "description": "Number of items per page."
-          },
-          {
-            "name": "isDescending",
-            "in": "query",
-            "required": false,
-            "type": "boolean",
-            "description": "Indicates whether the collection is descending."
-          },
-          {
-            "name": "initialSkip",
-            "in": "query",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "description": "Initial number of items to skip."
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully retrieved ScalingPlanPersonalSchedules.",
-            "schema": {
-              "$ref": "#/definitions/ScalingPlanPersonalScheduleList"
-            }
-          },
-          "default": {
-            "description": "Automation error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.DesktopVirtualization/scalingPlans": {
-      "get": {
-        "tags": [
-          "ScalingPlan"
-        ],
-        "operationId": "ScalingPlans_ListBySubscription",
-        "description": "List scaling plans in subscription.",
-        "x-ms-examples": {
-          "ScalingPlans_ListBySubscription": {
-            "$ref": "./examples/ScalingPlan_ListBySubscription.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "name": "pageSize",
-            "in": "query",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "description": "Number of items per page."
-          },
-          {
-            "name": "isDescending",
-            "in": "query",
-            "required": false,
-            "type": "boolean",
-            "description": "Indicates whether the collection is descending."
-          },
-          {
-            "name": "initialSkip",
-            "in": "query",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "description": "Initial number of items to skip."
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully retrieved scaling plans in subscription.",
-            "schema": {
-              "$ref": "#/definitions/ScalingPlanList"
+              "$ref": "#/definitions/ApplicationGroupList"
             }
           },
           "default": {
@@ -1638,124 +911,6 @@
               "$ref": "#/definitions/CloudError"
             }
           }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/applicationGroups": {
-      "get": {
-        "tags": [
-          "ApplicationGroup"
-        ],
-        "operationId": "ApplicationGroups_ListByResourceGroup",
-        "description": "List applicationGroups.",
-        "x-ms-examples": {
-          "ApplicationGroup_ListByResourceGroup": {
-            "$ref": "./examples/ApplicationGroup_ListByResourceGroup.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "$filter",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "description": "OData filter expression. Valid properties for filtering are applicationGroupType."
-          },
-          {
-            "name": "pageSize",
-            "in": "query",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "description": "Number of items per page."
-          },
-          {
-            "name": "isDescending",
-            "in": "query",
-            "required": false,
-            "type": "boolean",
-            "description": "Indicates whether the collection is descending."
-          },
-          {
-            "name": "initialSkip",
-            "in": "query",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "description": "Initial number of items to skip."
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully retrieved application groups in resource group.",
-            "schema": {
-              "$ref": "#/definitions/ApplicationGroupList"
-            }
-          },
-          "default": {
-            "description": "Automation error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.DesktopVirtualization/applicationGroups": {
-      "get": {
-        "tags": [
-          "ApplicationGroup"
-        ],
-        "operationId": "ApplicationGroups_ListBySubscription",
-        "description": "List applicationGroups in subscription.",
-        "x-ms-examples": {
-          "ApplicationGroup_List": {
-            "$ref": "./examples/ApplicationGroup_ListBySubscription.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "name": "$filter",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "description": "OData filter expression. Valid properties for filtering are applicationGroupType."
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully retrieved application groups in subscription.",
-            "schema": {
-              "$ref": "#/definitions/ApplicationGroupList"
-            }
-          },
-          "default": {
-            "description": "Automation error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     },
@@ -2258,6 +1413,133 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DesktopVirtualization/hostPools": {
+      "get": {
+        "tags": [
+          "HostPool"
+        ],
+        "operationId": "HostPools_List",
+        "description": "List hostPools in subscription.",
+        "x-ms-examples": {
+          "HostPool_List": {
+            "$ref": "./examples/HostPool_List.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "description": "Number of items per page."
+          },
+          {
+            "name": "isDescending",
+            "in": "query",
+            "required": false,
+            "type": "boolean",
+            "description": "Indicates whether the collection is descending."
+          },
+          {
+            "name": "initialSkip",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "description": "Initial number of items to skip."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved host pool in subscription.",
+            "schema": {
+              "$ref": "#/definitions/HostPoolList"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools": {
+      "get": {
+        "tags": [
+          "HostPool"
+        ],
+        "operationId": "HostPools_ListByResourceGroup",
+        "description": "List hostPools.",
+        "x-ms-examples": {
+          "HostPool_ListByResourceGroup": {
+            "$ref": "./examples/HostPool_ListByResourceGroup.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "description": "Number of items per page."
+          },
+          {
+            "name": "isDescending",
+            "in": "query",
+            "required": false,
+            "type": "boolean",
+            "description": "Indicates whether the collection is descending."
+          },
+          {
+            "name": "initialSkip",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "description": "Initial number of items to skip."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved host pool in resource group.",
+            "schema": {
+              "$ref": "#/definitions/HostPoolList"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}": {
       "get": {
         "tags": [
@@ -2448,133 +1730,6 @@
               "$ref": "#/definitions/CloudError"
             }
           }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools": {
-      "get": {
-        "tags": [
-          "HostPool"
-        ],
-        "operationId": "HostPools_ListByResourceGroup",
-        "description": "List hostPools.",
-        "x-ms-examples": {
-          "HostPool_ListByResourceGroup": {
-            "$ref": "./examples/HostPool_ListByResourceGroup.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "pageSize",
-            "in": "query",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "description": "Number of items per page."
-          },
-          {
-            "name": "isDescending",
-            "in": "query",
-            "required": false,
-            "type": "boolean",
-            "description": "Indicates whether the collection is descending."
-          },
-          {
-            "name": "initialSkip",
-            "in": "query",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "description": "Initial number of items to skip."
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully retrieved host pool in resource group.",
-            "schema": {
-              "$ref": "#/definitions/HostPoolList"
-            }
-          },
-          "default": {
-            "description": "Automation error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.DesktopVirtualization/hostPools": {
-      "get": {
-        "tags": [
-          "HostPool"
-        ],
-        "operationId": "HostPools_List",
-        "description": "List hostPools in subscription.",
-        "x-ms-examples": {
-          "HostPool_List": {
-            "$ref": "./examples/HostPool_List.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "name": "pageSize",
-            "in": "query",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "description": "Number of items per page."
-          },
-          {
-            "name": "isDescending",
-            "in": "query",
-            "required": false,
-            "type": "boolean",
-            "description": "Indicates whether the collection is descending."
-          },
-          {
-            "name": "initialSkip",
-            "in": "query",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "description": "Initial number of items to skip."
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully retrieved host pool in subscription.",
-            "schema": {
-              "$ref": "#/definitions/HostPoolList"
-            }
-          },
-          "default": {
-            "description": "Automation error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     },
@@ -3396,16 +2551,16 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/userSessions": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/sessionHosts": {
       "get": {
         "tags": [
-          "UserSession"
+          "SessionHost"
         ],
-        "operationId": "UserSessions_ListByHostPool",
-        "description": "List userSessions.",
+        "operationId": "SessionHosts_List",
+        "description": "List sessionHosts.",
         "x-ms-examples": {
-          "UserSession_ListByHostPool": {
-            "$ref": "./examples/UserSession_ListByHostPool.json"
+          "SessionHost_List": {
+            "$ref": "./examples/SessionHost_List.json"
           }
         },
         "parameters": [
@@ -3420,13 +2575,6 @@
           },
           {
             "$ref": "#/parameters/HostPoolNameParameter"
-          },
-          {
-            "name": "$filter",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "description": "OData filter expression. Valid properties for filtering are userprincipalname and sessionstate."
           },
           {
             "name": "pageSize",
@@ -3450,13 +2598,16 @@
             "type": "integer",
             "format": "int32",
             "description": "Initial number of items to skip."
+          },
+          {
+            "$ref": "#/parameters/vmPathParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "Successfully retrieved user sessions in host pool.",
+            "description": "Successfully retrieved session hosts in host pool.",
             "schema": {
-              "$ref": "#/definitions/UserSessionList"
+              "$ref": "#/definitions/SessionHostList"
             }
           },
           "default": {
@@ -3625,77 +2776,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/sessionHosts": {
-      "get": {
-        "tags": [
-          "SessionHost"
-        ],
-        "operationId": "SessionHosts_List",
-        "description": "List sessionHosts.",
-        "x-ms-examples": {
-          "SessionHost_List": {
-            "$ref": "./examples/SessionHost_List.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/HostPoolNameParameter"
-          },
-          {
-            "name": "pageSize",
-            "in": "query",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "description": "Number of items per page."
-          },
-          {
-            "name": "isDescending",
-            "in": "query",
-            "required": false,
-            "type": "boolean",
-            "description": "Indicates whether the collection is descending."
-          },
-          {
-            "name": "initialSkip",
-            "in": "query",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "description": "Initial number of items to skip."
-          },
-          {
-            "$ref": "#/parameters/vmPathParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully retrieved session hosts in host pool.",
-            "schema": {
-              "$ref": "#/definitions/SessionHostList"
-            }
-          },
-          "default": {
-            "description": "Automation error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/sessionHosts/{sessionHostName}/retryProvisioning": {
       "post": {
         "tags": [
@@ -3728,6 +2808,352 @@
         "responses": {
           "200": {
             "description": "Successfully started provisioning retry on the sessionHost."
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/userSessions": {
+      "get": {
+        "tags": [
+          "UserSession"
+        ],
+        "operationId": "UserSessions_ListByHostPool",
+        "description": "List userSessions.",
+        "x-ms-examples": {
+          "UserSession_ListByHostPool": {
+            "$ref": "./examples/UserSession_ListByHostPool.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/HostPoolNameParameter"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "OData filter expression. Valid properties for filtering are userprincipalname and sessionstate."
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "description": "Number of items per page."
+          },
+          {
+            "name": "isDescending",
+            "in": "query",
+            "required": false,
+            "type": "boolean",
+            "description": "Indicates whether the collection is descending."
+          },
+          {
+            "name": "initialSkip",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "description": "Initial number of items to skip."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved user sessions in host pool.",
+            "schema": {
+              "$ref": "#/definitions/UserSessionList"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/sessionHosts/{sessionHostName}/userSessions": {
+      "get": {
+        "tags": [
+          "UserSession"
+        ],
+        "operationId": "UserSessions_List",
+        "description": "List userSessions.",
+        "x-ms-examples": {
+          "UserSession_List": {
+            "$ref": "./examples/UserSession_List.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/HostPoolNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SessionHostNameParameter"
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "description": "Number of items per page."
+          },
+          {
+            "name": "isDescending",
+            "in": "query",
+            "required": false,
+            "type": "boolean",
+            "description": "Indicates whether the collection is descending."
+          },
+          {
+            "name": "initialSkip",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "description": "Initial number of items to skip."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved user sessions in session host.",
+            "schema": {
+              "$ref": "#/definitions/UserSessionList"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/sessionHosts/{sessionHostName}/userSessions/{userSessionId}": {
+      "get": {
+        "tags": [
+          "UserSession"
+        ],
+        "operationId": "UserSessions_Get",
+        "description": "Get a userSession.",
+        "x-ms-examples": {
+          "UserSession_Get": {
+            "$ref": "./examples/UserSession_Get.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/HostPoolNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SessionHostNameParameter"
+          },
+          {
+            "$ref": "#/parameters/UserSessionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved user session.",
+            "schema": {
+              "$ref": "#/definitions/UserSession"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "UserSession"
+        ],
+        "operationId": "UserSessions_Delete",
+        "description": "Remove a userSession.",
+        "x-ms-examples": {
+          "UserSession_Delete": {
+            "$ref": "./examples/UserSession_Delete.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/HostPoolNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SessionHostNameParameter"
+          },
+          {
+            "$ref": "#/parameters/UserSessionIdParameter"
+          },
+          {
+            "name": "force",
+            "in": "query",
+            "required": false,
+            "type": "boolean",
+            "description": "Force flag to login off userSession."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully removed user session."
+          },
+          "204": {
+            "description": "User session does not exist."
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/sessionHosts/{sessionHostName}/userSessions/{userSessionId}/disconnect": {
+      "post": {
+        "tags": [
+          "UserSession"
+        ],
+        "operationId": "UserSessions_Disconnect",
+        "description": "Disconnect a userSession.",
+        "x-ms-examples": {
+          "UserSession_Disconnect_Post": {
+            "$ref": "./examples/UserSession_Disconnect_Post.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/HostPoolNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SessionHostNameParameter"
+          },
+          {
+            "$ref": "#/parameters/UserSessionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully disconnected user session."
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/sessionHosts/{sessionHostName}/userSessions/{userSessionId}/sendMessage": {
+      "post": {
+        "tags": [
+          "UserSession"
+        ],
+        "operationId": "UserSessions_SendMessage",
+        "description": "Send a message to a user.",
+        "x-ms-examples": {
+          "UserSession_SendMessage_Post": {
+            "$ref": "./examples/UserSession_SendMessage_Post.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/HostPoolNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SessionHostNameParameter"
+          },
+          {
+            "$ref": "#/parameters/UserSessionIdParameter"
+          },
+          {
+            "name": "sendMessage",
+            "description": "Object containing message includes title and message body",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/SendMessage"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully sent message to user session."
           },
           "default": {
             "description": "Automation error response describing why the operation failed.",
@@ -4112,6 +3538,101 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DesktopVirtualization/appAttachPackages": {
+      "get": {
+        "tags": [
+          "AppAttachPackage"
+        ],
+        "operationId": "AppAttachPackage_ListBySubscription",
+        "description": "List App Attach packages in subscription.",
+        "x-ms-examples": {
+          "AppAttachPackage_ListBySubscription": {
+            "$ref": "./examples/AppAttachPackage_ListBySubscription.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "OData filter expression. Valid properties for filtering are package name, resource group, host pool, package owner name, and custom data."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved App Attach Packages in subscription.",
+            "schema": {
+              "$ref": "#/definitions/AppAttachPackageList"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/appAttachPackages": {
+      "get": {
+        "tags": [
+          "AppAttachPackage"
+        ],
+        "operationId": "AppAttachPackage_ListByResourceGroup",
+        "description": "List App Attach packages in resource group.",
+        "x-ms-examples": {
+          "AppAttachPackage_ListByResourceGroup": {
+            "$ref": "./examples/AppAttachPackage_ListByResourceGroup.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "OData filter expression. Valid properties for filtering are package name, host pool, package owner name, and custom data."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved App Attach Packages in resource group.",
+            "schema": {
+              "$ref": "#/definitions/AppAttachPackageList"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/appAttachPackages/{appAttachPackageName}": {
       "get": {
         "tags": [
@@ -4305,16 +3826,16 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/appAttachPackages": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DesktopVirtualization/scalingPlans": {
       "get": {
         "tags": [
-          "AppAttachPackage"
+          "ScalingPlan"
         ],
-        "operationId": "AppAttachPackage_ListByResourceGroup",
-        "description": "List App Attach packages in resource group.",
+        "operationId": "ScalingPlans_ListBySubscription",
+        "description": "List scaling plans in subscription.",
         "x-ms-examples": {
-          "AppAttachPackage_ListByResourceGroup": {
-            "$ref": "./examples/AppAttachPackage_ListByResourceGroup.json"
+          "ScalingPlans_ListBySubscription": {
+            "$ref": "./examples/ScalingPlan_ListBySubscription.json"
           }
         },
         "parameters": [
@@ -4323,211 +3844,6 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "$filter",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "description": "OData filter expression. Valid properties for filtering are package name, host pool, package owner name, and custom data."
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully retrieved App Attach Packages in resource group.",
-            "schema": {
-              "$ref": "#/definitions/AppAttachPackageList"
-            }
-          },
-          "default": {
-            "description": "Automation error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.DesktopVirtualization/appAttachPackages": {
-      "get": {
-        "tags": [
-          "AppAttachPackage"
-        ],
-        "operationId": "AppAttachPackage_ListBySubscription",
-        "description": "List App Attach packages in subscription.",
-        "x-ms-examples": {
-          "AppAttachPackage_ListBySubscription": {
-            "$ref": "./examples/AppAttachPackage_ListBySubscription.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "name": "$filter",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "description": "OData filter expression. Valid properties for filtering are package name, resource group, host pool, package owner name, and custom data."
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully retrieved App Attach Packages in subscription.",
-            "schema": {
-              "$ref": "#/definitions/AppAttachPackageList"
-            }
-          },
-          "default": {
-            "description": "Automation error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/sessionHosts/{sessionHostName}/userSessions/{userSessionId}": {
-      "get": {
-        "tags": [
-          "UserSession"
-        ],
-        "operationId": "UserSessions_Get",
-        "description": "Get a userSession.",
-        "x-ms-examples": {
-          "UserSession_Get": {
-            "$ref": "./examples/UserSession_Get.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/HostPoolNameParameter"
-          },
-          {
-            "$ref": "#/parameters/SessionHostNameParameter"
-          },
-          {
-            "$ref": "#/parameters/UserSessionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully retrieved user session.",
-            "schema": {
-              "$ref": "#/definitions/UserSession"
-            }
-          },
-          "default": {
-            "description": "Automation error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "UserSession"
-        ],
-        "operationId": "UserSessions_Delete",
-        "description": "Remove a userSession.",
-        "x-ms-examples": {
-          "UserSession_Delete": {
-            "$ref": "./examples/UserSession_Delete.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/HostPoolNameParameter"
-          },
-          {
-            "$ref": "#/parameters/SessionHostNameParameter"
-          },
-          {
-            "$ref": "#/parameters/UserSessionIdParameter"
-          },
-          {
-            "name": "force",
-            "in": "query",
-            "required": false,
-            "type": "boolean",
-            "description": "Force flag to login off userSession."
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully removed user session."
-          },
-          "204": {
-            "description": "User session does not exist."
-          },
-          "default": {
-            "description": "Automation error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/sessionHosts/{sessionHostName}/userSessions": {
-      "get": {
-        "tags": [
-          "UserSession"
-        ],
-        "operationId": "UserSessions_List",
-        "description": "List userSessions.",
-        "x-ms-examples": {
-          "UserSession_List": {
-            "$ref": "./examples/UserSession_List.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/HostPoolNameParameter"
-          },
-          {
-            "$ref": "#/parameters/SessionHostNameParameter"
           },
           {
             "name": "pageSize",
@@ -4555,9 +3871,9 @@
         ],
         "responses": {
           "200": {
-            "description": "Successfully retrieved user sessions in session host.",
+            "description": "Successfully retrieved scaling plans in subscription.",
             "schema": {
-              "$ref": "#/definitions/UserSessionList"
+              "$ref": "#/definitions/ScalingPlanList"
             }
           },
           "default": {
@@ -4572,16 +3888,16 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/sessionHosts/{sessionHostName}/userSessions/{userSessionId}/disconnect": {
-      "post": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/scalingPlans": {
+      "get": {
         "tags": [
-          "UserSession"
+          "ScalingPlan"
         ],
-        "operationId": "UserSessions_Disconnect",
-        "description": "Disconnect a userSession.",
+        "operationId": "ScalingPlans_ListByResourceGroup",
+        "description": "List scaling plans.",
         "x-ms-examples": {
-          "UserSession_Disconnect_Post": {
-            "$ref": "./examples/UserSession_Disconnect_Post.json"
+          "ScalingPlans_ListByResourceGroup": {
+            "$ref": "./examples/ScalingPlan_ListByResourceGroup.json"
           }
         },
         "parameters": [
@@ -4595,18 +3911,80 @@
             "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/HostPoolNameParameter"
+            "name": "pageSize",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "description": "Number of items per page."
           },
           {
-            "$ref": "#/parameters/SessionHostNameParameter"
+            "name": "isDescending",
+            "in": "query",
+            "required": false,
+            "type": "boolean",
+            "description": "Indicates whether the collection is descending."
           },
           {
-            "$ref": "#/parameters/UserSessionIdParameter"
+            "name": "initialSkip",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "description": "Initial number of items to skip."
           }
         ],
         "responses": {
           "200": {
-            "description": "Successfully disconnected user session."
+            "description": "Successfully retrieved scaling plans in resource group.",
+            "schema": {
+              "$ref": "#/definitions/ScalingPlanList"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/scalingPlans/{scalingPlanName}": {
+      "get": {
+        "tags": [
+          "ScalingPlan"
+        ],
+        "operationId": "ScalingPlans_Get",
+        "description": "Get a scaling plan.",
+        "x-ms-examples": {
+          "ScalingPlans_Get": {
+            "$ref": "./examples/ScalingPlan_Get.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ScalingPlanNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved scaling plan.",
+            "schema": {
+              "$ref": "#/definitions/ScalingPlan"
+            }
           },
           "default": {
             "description": "Automation error response describing why the operation failed.",
@@ -4615,18 +3993,16 @@
             }
           }
         }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/sessionHosts/{sessionHostName}/userSessions/{userSessionId}/sendMessage": {
-      "post": {
+      },
+      "put": {
         "tags": [
-          "UserSession"
+          "ScalingPlan"
         ],
-        "operationId": "UserSessions_SendMessage",
-        "description": "Send a message to a user.",
+        "operationId": "ScalingPlans_Create",
+        "description": "Create or update a scaling plan.",
         "x-ms-examples": {
-          "UserSession_SendMessage_Post": {
-            "$ref": "./examples/UserSession_SendMessage_Post.json"
+          "ScalingPlans_Create": {
+            "$ref": "./examples/ScalingPlan_Create.json"
           }
         },
         "parameters": [
@@ -4640,27 +4016,119 @@
             "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/HostPoolNameParameter"
+            "$ref": "#/parameters/ScalingPlanNameParameter"
           },
           {
-            "$ref": "#/parameters/SessionHostNameParameter"
-          },
-          {
-            "$ref": "#/parameters/UserSessionIdParameter"
-          },
-          {
-            "name": "sendMessage",
-            "description": "Object containing message includes title and message body",
+            "name": "scalingPlan",
+            "description": "Object containing scaling plan definitions.",
             "in": "body",
-            "required": false,
+            "required": true,
             "schema": {
-              "$ref": "#/definitions/SendMessage"
+              "$ref": "#/definitions/ScalingPlan"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "Successfully sent message to user session."
+            "description": "Successfully updated scaling plan.",
+            "schema": {
+              "$ref": "#/definitions/ScalingPlan"
+            }
+          },
+          "201": {
+            "description": "Successfully created scaling plan.",
+            "schema": {
+              "$ref": "#/definitions/ScalingPlan"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "ScalingPlan"
+        ],
+        "operationId": "ScalingPlans_Delete",
+        "description": "Remove a scaling plan.",
+        "x-ms-examples": {
+          "ScalingPlans_Delete": {
+            "$ref": "./examples/ScalingPlan_Delete.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ScalingPlanNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully deleted scaling plan."
+          },
+          "204": {
+            "description": "Scaling plan does not exist."
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "ScalingPlan"
+        ],
+        "operationId": "ScalingPlans_Update",
+        "description": "Update a scaling plan.",
+        "x-ms-examples": {
+          "ScalingPlans_Update": {
+            "$ref": "./examples/ScalingPlan_Update.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ScalingPlanNameParameter"
+          },
+          {
+            "name": "scalingPlan",
+            "description": "Object containing scaling plan definitions.",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/ScalingPlanPatch"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated scaling plan.",
+            "schema": {
+              "$ref": "#/definitions/ScalingPlan"
+            }
           },
           "default": {
             "description": "Automation error response describing why the operation failed.",
@@ -4725,6 +4193,538 @@
             "description": "Successfully retrieved scaling plan associated with hostpool.",
             "schema": {
               "$ref": "#/definitions/ScalingPlanList"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/scalingPlans/{scalingPlanName}/pooledSchedules/{scalingPlanScheduleName}": {
+      "get": {
+        "tags": [
+          "ScalingPlanPooledSchedule"
+        ],
+        "operationId": "ScalingPlanPooledSchedules_Get",
+        "description": "Get a ScalingPlanPooledSchedule.",
+        "x-ms-examples": {
+          "ScalingPlanPooledSchedules_Get": {
+            "$ref": "./examples/ScalingPlanPooledSchedule_Get.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ScalingPlanNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ScalingPlanScheduleNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved ScalingPlanPooledSchedule.",
+            "schema": {
+              "$ref": "#/definitions/ScalingPlanPooledSchedule"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "ScalingPlanPooledSchedule"
+        ],
+        "operationId": "ScalingPlanPooledSchedules_Create",
+        "description": "Create or update a ScalingPlanPooledSchedule.",
+        "x-ms-examples": {
+          "ScalingPlanPooledSchedules_Create": {
+            "$ref": "./examples/ScalingPlanPooledSchedule_Create.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ScalingPlanNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ScalingPlanScheduleNameParameter"
+          },
+          {
+            "name": "scalingPlanSchedule",
+            "description": "Object containing ScalingPlanPooledSchedule definitions.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ScalingPlanPooledSchedule"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated ScalingPlanPooledSchedule.",
+            "schema": {
+              "$ref": "#/definitions/ScalingPlanPooledSchedule"
+            }
+          },
+          "201": {
+            "description": "Successfully created ScalingPlanPooledSchedule.",
+            "schema": {
+              "$ref": "#/definitions/ScalingPlanPooledSchedule"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "ScalingPlanPooledSchedule"
+        ],
+        "operationId": "ScalingPlanPooledSchedules_Delete",
+        "description": "Remove a ScalingPlanPooledSchedule.",
+        "x-ms-examples": {
+          "ScalingPlanPooledSchedules_Delete": {
+            "$ref": "./examples/ScalingPlanPooledSchedule_Delete.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ScalingPlanNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ScalingPlanScheduleNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully removed ScalingPlanPooledSchedule."
+          },
+          "204": {
+            "description": "ScalingPlanPooledSchedule does not exist."
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "ScalingPlanPooledSchedule"
+        ],
+        "operationId": "ScalingPlanPooledSchedules_Update",
+        "description": "Update a ScalingPlanPooledSchedule.",
+        "x-ms-examples": {
+          "ScalingPlanPooledSchedules_Update": {
+            "$ref": "./examples/ScalingPlanPooledSchedule_Update.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ScalingPlanNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ScalingPlanScheduleNameParameter"
+          },
+          {
+            "name": "scalingPlanSchedule",
+            "description": "Object containing ScalingPlanPooledSchedule definitions.",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/ScalingPlanPooledSchedulePatch"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated ScalingPlanPooledSchedule.",
+            "schema": {
+              "$ref": "#/definitions/ScalingPlanPooledSchedule"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/scalingPlans/{scalingPlanName}/pooledSchedules": {
+      "get": {
+        "tags": [
+          "ScalingPlanPooledSchedule"
+        ],
+        "operationId": "ScalingPlanPooledSchedules_List",
+        "description": "List ScalingPlanPooledSchedules.",
+        "x-ms-examples": {
+          "ScalingPlanPooledSchedules_List": {
+            "$ref": "./examples/ScalingPlanPooledSchedule_List.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ScalingPlanNameParameter"
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "description": "Number of items per page."
+          },
+          {
+            "name": "isDescending",
+            "in": "query",
+            "required": false,
+            "type": "boolean",
+            "description": "Indicates whether the collection is descending."
+          },
+          {
+            "name": "initialSkip",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "description": "Initial number of items to skip."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved ScalingPlanPooledSchedules.",
+            "schema": {
+              "$ref": "#/definitions/ScalingPlanPooledScheduleList"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/scalingPlans/{scalingPlanName}/personalSchedules/{scalingPlanScheduleName}": {
+      "get": {
+        "tags": [
+          "ScalingPlanPersonalSchedule"
+        ],
+        "operationId": "ScalingPlanPersonalSchedules_Get",
+        "description": "Get a ScalingPlanPersonalSchedule.",
+        "x-ms-examples": {
+          "ScalingPlanPersonalSchedules_Get": {
+            "$ref": "./examples/ScalingPlanPersonalSchedule_Get.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ScalingPlanNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ScalingPlanScheduleNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved ScalingPlanPersonalSchedule.",
+            "schema": {
+              "$ref": "#/definitions/ScalingPlanPersonalSchedule"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "ScalingPlanPersonalSchedule"
+        ],
+        "operationId": "ScalingPlanPersonalSchedules_Create",
+        "description": "Create or update a ScalingPlanPersonalSchedule.",
+        "x-ms-examples": {
+          "ScalingPlanPersonalSchedules_Create": {
+            "$ref": "./examples/ScalingPlanPersonalSchedule_Create.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ScalingPlanNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ScalingPlanScheduleNameParameter"
+          },
+          {
+            "name": "scalingPlanSchedule",
+            "description": "Object containing ScalingPlanPersonalSchedule definitions.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ScalingPlanPersonalSchedule"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated ScalingPlanPersonalSchedule.",
+            "schema": {
+              "$ref": "#/definitions/ScalingPlanPersonalSchedule"
+            }
+          },
+          "201": {
+            "description": "Successfully created ScalingPlanPersonalSchedule.",
+            "schema": {
+              "$ref": "#/definitions/ScalingPlanPersonalSchedule"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "ScalingPlanPersonalSchedule"
+        ],
+        "operationId": "ScalingPlanPersonalSchedules_Delete",
+        "description": "Remove a ScalingPlanPersonalSchedule.",
+        "x-ms-examples": {
+          "ScalingPlanPersonalSchedules_Delete": {
+            "$ref": "./examples/ScalingPlanPersonalSchedule_Delete.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ScalingPlanNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ScalingPlanScheduleNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully removed ScalingPlanPersonalSchedule."
+          },
+          "204": {
+            "description": "ScalingPlanPersonalSchedule does not exist."
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "ScalingPlanPersonalSchedule"
+        ],
+        "operationId": "ScalingPlanPersonalSchedules_Update",
+        "description": "Update a ScalingPlanPersonalSchedule.",
+        "x-ms-examples": {
+          "ScalingPlanPersonalSchedules_Update": {
+            "$ref": "./examples/ScalingPlanPersonalSchedule_Update.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ScalingPlanNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ScalingPlanScheduleNameParameter"
+          },
+          {
+            "name": "scalingPlanSchedule",
+            "description": "Object containing ScalingPlanPersonalSchedule definitions.",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/ScalingPlanPersonalSchedulePatch"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated ScalingPlanPersonalSchedule.",
+            "schema": {
+              "$ref": "#/definitions/ScalingPlanPersonalSchedule"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/scalingPlans/{scalingPlanName}/personalSchedules": {
+      "get": {
+        "tags": [
+          "ScalingPlanPersonalSchedule"
+        ],
+        "operationId": "ScalingPlanPersonalSchedules_List",
+        "description": "List ScalingPlanPersonalSchedules.",
+        "x-ms-examples": {
+          "ScalingPlanPersonalSchedules_List": {
+            "$ref": "./examples/ScalingPlanPersonalSchedule_List.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ScalingPlanNameParameter"
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "description": "Number of items per page."
+          },
+          {
+            "name": "isDescending",
+            "in": "query",
+            "required": false,
+            "type": "boolean",
+            "description": "Indicates whether the collection is descending."
+          },
+          {
+            "name": "initialSkip",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "description": "Initial number of items to skip."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved ScalingPlanPersonalSchedules.",
+            "schema": {
+              "$ref": "#/definitions/ScalingPlanPersonalScheduleList"
             }
           },
           "default": {
@@ -9013,6 +9013,80 @@
         }
       }
     },
+    "ScalingPlanList": {
+      "type": "object",
+      "title": "ScalingPlanList",
+      "description": "List of scaling plan definitions.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of scaling plan definitions.",
+          "items": {
+            "$ref": "#/definitions/ScalingPlan"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Link to the next page of results."
+        }
+      }
+    },
+    "ScalingPlanPatch": {
+      "type": "object",
+      "description": "Scaling plan properties that can be patched.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "tags to be updated",
+          "x-nullable": true
+        },
+        "properties": {
+          "description": "Detailed properties for scaling plan",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ScalingPlanPatchProperties"
+        }
+      }
+    },
+    "ScalingPlanPatchProperties": {
+      "type": "object",
+      "description": "Scaling plan properties.",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "Description of scaling plan."
+        },
+        "friendlyName": {
+          "type": "string",
+          "description": "User friendly name of scaling plan."
+        },
+        "timeZone": {
+          "type": "string",
+          "description": "Timezone of the scaling plan."
+        },
+        "exclusionTag": {
+          "type": "string",
+          "description": "Exclusion tag for scaling plan."
+        },
+        "schedules": {
+          "type": "array",
+          "description": "List of ScalingSchedule definitions.",
+          "items": {
+            "$ref": "#/definitions/ScalingSchedule"
+          }
+        },
+        "hostPoolReferences": {
+          "type": "array",
+          "description": "List of ScalingHostPoolReference definitions.",
+          "items": {
+            "$ref": "#/definitions/ScalingHostPoolReference"
+          }
+        }
+      }
+    },
     "ScalingSchedule": {
       "description": "A ScalingPlanPooledSchedule.",
       "type": "object",
@@ -9153,6 +9227,44 @@
           },
           "type": "string",
           "description": "Load balancing algorithm for off-peak period."
+        }
+      }
+    },
+    "Time": {
+      "description": "The time for a scaling action to occur.",
+      "required": [
+        "hour",
+        "minute"
+      ],
+      "type": "object",
+      "properties": {
+        "hour": {
+          "format": "int32",
+          "description": "The hour.",
+          "maximum": 23,
+          "minimum": 0,
+          "type": "integer"
+        },
+        "minute": {
+          "format": "int32",
+          "description": "The minute.",
+          "maximum": 59,
+          "minimum": 0,
+          "type": "integer"
+        }
+      }
+    },
+    "ScalingHostPoolReference": {
+      "description": "Scaling plan reference to hostpool.",
+      "type": "object",
+      "properties": {
+        "hostPoolArmPath": {
+          "type": "string",
+          "description": "Arm path of referenced hostpool."
+        },
+        "scalingPlanEnabled": {
+          "type": "boolean",
+          "description": "Is the scaling plan enabled for this hostpool."
         }
       }
     },
@@ -9353,205 +9465,6 @@
           "description": "Load balancing algorithm for off-peak period."
         }
       }
-    },
-    "Time": {
-      "description": "The time for a scaling action to occur.",
-      "required": [
-        "hour",
-        "minute"
-      ],
-      "type": "object",
-      "properties": {
-        "hour": {
-          "format": "int32",
-          "description": "The hour.",
-          "maximum": 23,
-          "minimum": 0,
-          "type": "integer"
-        },
-        "minute": {
-          "format": "int32",
-          "description": "The minute.",
-          "maximum": 59,
-          "minimum": 0,
-          "type": "integer"
-        }
-      }
-    },
-    "ScalingHostPoolReference": {
-      "description": "Scaling plan reference to hostpool.",
-      "type": "object",
-      "properties": {
-        "hostPoolArmPath": {
-          "type": "string",
-          "description": "Arm path of referenced hostpool."
-        },
-        "scalingPlanEnabled": {
-          "type": "boolean",
-          "description": "Is the scaling plan enabled for this hostpool."
-        }
-      }
-    },
-    "ScalingPlanList": {
-      "type": "object",
-      "title": "ScalingPlanList",
-      "description": "List of scaling plan definitions.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "List of scaling plan definitions.",
-          "items": {
-            "$ref": "#/definitions/ScalingPlan"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Link to the next page of results."
-        }
-      }
-    },
-    "ScalingPlanPatch": {
-      "type": "object",
-      "description": "Scaling plan properties that can be patched.",
-      "properties": {
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "tags to be updated",
-          "x-nullable": true
-        },
-        "properties": {
-          "description": "Detailed properties for scaling plan",
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/ScalingPlanPatchProperties"
-        }
-      }
-    },
-    "ScalingPlanPatchProperties": {
-      "type": "object",
-      "description": "Scaling plan properties.",
-      "properties": {
-        "description": {
-          "type": "string",
-          "description": "Description of scaling plan."
-        },
-        "friendlyName": {
-          "type": "string",
-          "description": "User friendly name of scaling plan."
-        },
-        "timeZone": {
-          "type": "string",
-          "description": "Timezone of the scaling plan."
-        },
-        "exclusionTag": {
-          "type": "string",
-          "description": "Exclusion tag for scaling plan."
-        },
-        "schedules": {
-          "type": "array",
-          "description": "List of ScalingSchedule definitions.",
-          "items": {
-            "$ref": "#/definitions/ScalingSchedule"
-          }
-        },
-        "hostPoolReferences": {
-          "type": "array",
-          "description": "List of ScalingHostPoolReference definitions.",
-          "items": {
-            "$ref": "#/definitions/ScalingHostPoolReference"
-          }
-        }
-      }
-    },
-    "PrivateEndpointConnectionWithSystemData": {
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v6/privatelinks.json#/definitions/PrivateEndpointConnection"
-        }
-      ],
-      "description": "The Private Endpoint Connection resource."
-    },
-    "PrivateLinkResourceListResult": {
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "Array of private link resources",
-          "items": {
-            "$ref": "#/definitions/PrivateLinkResource"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Link to the next page of results."
-        }
-      },
-      "description": "A list of private link resources"
-    },
-    "PrivateLinkResource": {
-      "type": "object",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/PrivateLinkResourceProperties",
-          "description": "Resource properties.",
-          "x-ms-client-flatten": true
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/Resource"
-        }
-      ],
-      "description": "A private link resource"
-    },
-    "PrivateLinkResourceProperties": {
-      "type": "object",
-      "properties": {
-        "groupId": {
-          "description": "The private link resource group id.",
-          "type": "string",
-          "readOnly": true
-        },
-        "requiredMembers": {
-          "description": "The private link resource required member names.",
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "readOnly": true
-        },
-        "requiredZoneNames": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "The private link resource Private link DNS zone name."
-        }
-      },
-      "description": "Properties of a private link resource."
-    },
-    "PrivateEndpointConnectionListResultWithSystemData": {
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "Array of private endpoint connections",
-          "items": {
-            "$ref": "#/definitions/PrivateEndpointConnectionWithSystemData"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Link to the next page of results."
-        }
-      },
-      "description": "List of private endpoint connection associated with the specified storage account"
     },
     "ScalingPlanPersonalSchedulePatch": {
       "type": "object",
@@ -9875,6 +9788,93 @@
           "description": "The time in minutes to wait before performing the desired session handling action when a user logs off during the off-peak period."
         }
       }
+    },
+    "PrivateEndpointConnectionWithSystemData": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v6/privatelinks.json#/definitions/PrivateEndpointConnection"
+        }
+      ],
+      "description": "The Private Endpoint Connection resource."
+    },
+    "PrivateLinkResourceListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "Array of private link resources",
+          "items": {
+            "$ref": "#/definitions/PrivateLinkResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Link to the next page of results."
+        }
+      },
+      "description": "A list of private link resources"
+    },
+    "PrivateLinkResource": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PrivateLinkResourceProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/Resource"
+        }
+      ],
+      "description": "A private link resource"
+    },
+    "PrivateLinkResourceProperties": {
+      "type": "object",
+      "properties": {
+        "groupId": {
+          "description": "The private link resource group id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "requiredMembers": {
+          "description": "The private link resource required member names.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "requiredZoneNames": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The private link resource Private link DNS zone name."
+        }
+      },
+      "description": "Properties of a private link resource."
+    },
+    "PrivateEndpointConnectionListResultWithSystemData": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "Array of private endpoint connections",
+          "items": {
+            "$ref": "#/definitions/PrivateEndpointConnectionWithSystemData"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Link to the next page of results."
+        }
+      },
+      "description": "List of private endpoint connection associated with the specified storage account"
     }
   },
   "parameters": {
