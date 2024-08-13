@@ -142,7 +142,6 @@ union BrokerProtocolType {
   WebSockets: "WebSockets",
 }
 
-
 @doc("Kubernetes reference")
 model KubernetesReference {
   ...LocalKubernetesReference;
