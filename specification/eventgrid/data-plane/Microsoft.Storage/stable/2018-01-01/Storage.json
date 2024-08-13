@@ -107,7 +107,10 @@
           "description": "For service use only. Diagnostic data occasionally included by the Azure Storage service. This property should be ignored by event consumers.",
           "type": "object"
         }
-      }
+      },
+      "required": [
+        "accessTier"
+      ]
     },
     "StorageBlobDeletedEventData": {
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Storage.BlobDeleted event.",
@@ -395,7 +398,11 @@
           "description": "For service use only. Diagnostic data occasionally included by the Azure Storage service. This property should be ignored by event consumers.",
           "type": "object"
         }
-      }
+      },
+      "required": [
+        "accessTier",
+        "previousTier"
+      ]
     },
     "StorageAsyncOperationInitiatedEventData": {
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Storage.AsyncOperationInitiated event.",
