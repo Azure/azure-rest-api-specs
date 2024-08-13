@@ -125,7 +125,6 @@ model ChatCompletionsOptions {
     are passed in the JSON request payload.
     This sets the HTTP request header `extra-parameters`.
     """)
-  @header("extra-parameters")
   extra_params?: ExtraParameters;
 
   ...Record<unknown>;
