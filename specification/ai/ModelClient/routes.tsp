@@ -16,24 +16,6 @@ using Azure.Core.Traits;
 
 namespace AI.Model;
 
-/*
-Leaving this comment out for now as the "Goal" for how this should be formatted
-
-@doc("""
-  Gets chat completions for the provided chat messages.
-  Completions support a wide variety of tasks and generate text that continues from or "completes"
-  provided prompt data. The method makes a REST API call to the `/chat/completions` route 
-  on the given endpoint.
-  """)
-@actionSeparator("/")
-@route("chat/completions")
-op getChatCompletions is Azure.Core.RpcOperation<
-  ChatCompletionsOptions,
-  ChatCompletions,
-  RequestHeadersTrait<AdditionalRequestHeaders>
->;
-*/
-
 @doc("""
   Gets chat completions for the provided chat messages.
   Completions support a wide variety of tasks and generate text that continues from or "completes"
