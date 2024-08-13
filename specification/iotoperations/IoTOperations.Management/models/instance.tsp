@@ -73,7 +73,9 @@ model Components {
   akri?: AkriInstanceProperties = #{ state: OperationalMode.Enabled };
 
   @doc("The properties of the connectors instance.")
-  connectors?: ConnectorInstanceProperties = #{ state: OperationalMode.Enabled };
+  connectors?: ConnectorInstanceProperties = #{
+    state: OperationalMode.Enabled,
+  };
 
   @doc("The properties of the dataflows instance.")
   dataflows?: DataFlowInstanceProperties = #{ state: OperationalMode.Enabled };
