@@ -79,9 +79,6 @@ model Components {
   dataflows?: DataFlowInstanceProperties = #{ enabled: true };
 
   @doc("The properties of the device provisioning instance.")
-  mqttbroker?: MqttBrokerInstanceProperties = #{ enabled: true };
-
-  @doc("The properties of the device provisioning instance.")
   schemaregistry?: SchemaRegistryInstanceProperties = #{ enabled: true };
 }
 
