@@ -40,7 +40,7 @@ These are the global settings for the ApplicationInsights API.
 title: ApplicationInsightsManagementClient
 description: Composite Swagger for Application Insights Management Client
 openapi-type: arm
-tag: package-2023-10-01-only
+tag: package-2024-08-01-only
 ```
 
 ### Suppression
@@ -270,6 +270,7 @@ input-file:
   - Microsoft.Insights/stable/2020-11-20/workbookTemplates_API.json
   - Microsoft.Insights/stable/2023-06-01/workbooks_API.json
   - Microsoft.Insights/stable/2021-10-14/livetoken_API.json
+  - Microsoft.Insights/preview/2020-03-01-preview/componentLinkedStorageAccounts_API.json
   - Microsoft.Insights/preview/2024-02-01-preview/deletedWorkbooks_API.json
 ```
 
