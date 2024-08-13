@@ -391,7 +391,10 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded."
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -838,7 +841,10 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded."
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -1017,23 +1023,19 @@
         },
         "azureLargeInstanceId": {
           "type": "string",
-          "description": "Specifies the Azure Large Instance unique ID.",
-          "readOnly": true
+          "description": "Specifies the Azure Large Instance unique ID."
         },
         "powerState": {
           "$ref": "#/definitions/AzureLargeInstancePowerStateEnum",
-          "description": "Resource power state",
-          "readOnly": true
+          "description": "Resource power state"
         },
         "proximityPlacementGroup": {
           "type": "string",
-          "description": "Resource proximity placement group",
-          "readOnly": true
+          "description": "Resource proximity placement group"
         },
         "hwRevision": {
           "type": "string",
-          "description": "Hardware revision of an Azure Large Instance",
-          "readOnly": true
+          "description": "Hardware revision of an Azure Large Instance"
         },
         "provisioningState": {
           "$ref": "#/definitions/AzureLargeInstanceProvisioningStatesEnum",
@@ -1535,13 +1537,11 @@
       "properties": {
         "hardwareType": {
           "$ref": "#/definitions/AzureLargeInstanceHardwareTypeNamesEnum",
-          "description": "Name of the hardware type (vendor and/or their product name)",
-          "readOnly": true
+          "description": "Name of the hardware type (vendor and/or their product name)"
         },
         "azureLargeInstanceSize": {
           "$ref": "#/definitions/AzureLargeInstanceSizeNamesEnum",
-          "description": "Specifies the Azure Large Instance SKU.",
-          "readOnly": true
+          "description": "Specifies the Azure Large Instance SKU."
         }
       }
     },
@@ -1569,8 +1569,7 @@
         },
         "circuitId": {
           "type": "string",
-          "description": "Specifies the circuit id for connecting to express route.",
-          "readOnly": true
+          "description": "Specifies the circuit id for connecting to express route."
         }
       }
     },
@@ -1584,13 +1583,11 @@
         },
         "osType": {
           "type": "string",
-          "description": "This property allows you to specify the type of the OS.",
-          "readOnly": true
+          "description": "This property allows you to specify the type of the OS."
         },
         "version": {
           "type": "string",
-          "description": "Specifies version of operating system.",
-          "readOnly": true
+          "description": "Specifies version of operating system."
         },
         "sshPublicKey": {
           "type": "string",
@@ -1679,8 +1676,7 @@
       "properties": {
         "nfsIpAddress": {
           "type": "string",
-          "description": "IP Address to connect to storage.",
-          "readOnly": true
+          "description": "IP Address to connect to storage."
         },
         "osDisks": {
           "type": "array",

@@ -58,10 +58,7 @@ interface AzureLargeInstances {
     Deletes an Azure Large Instance for the specified subscription, resource group,
     and instance name.
     """)
-  @delete
-  delete(
-    ...ResourceInstanceParameters<AzureLargeInstance>,
-  ): OkResponse | ErrorResponse;
+  delete is ArmResourceDeleteSync<AzureLargeInstance>;
 
   @doc("""
     Patches the Tags field of an Azure Large Instance for the specified

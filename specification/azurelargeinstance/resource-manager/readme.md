@@ -63,23 +63,6 @@ input-file:
 
 ---
 
-## Suppression
-
-```yaml
-directive:
-  - suppress: READONLY_PROPERTY_NOT_ALLOWED_IN_REQUEST
-    from: azurelargeinstance.json
-    reason: 'This property is already a part of our API, cannot remove it'
-  - suppress: READONLY_PROPERTY_NOT_ALLOWED_IN_REQUEST
-    where:
-      - $.definitions.Resource.properties.name
-      - $.definitions.Resource.properties.id
-    from: types.json
-    reason: 'This property is already a part of our API, cannot remove it'
-```
-
----
-
 # Code Generation
 
 ## Swagger to SDK
@@ -127,15 +110,7 @@ suppressions:
   - code: PutResponseCodes
     from: azurelargeinstance.json
     reason: The PUT method only creates resource for the RP. The operation to update an existing instance is unsupported. This is because instances that are 'created' are simply assigned to customers, and have already been provisioned. ARM operations to change the provisioning status of a resource are unsupported.
-  - code: DeleteResponseCodes
-    from: azurelargeinstance.json
-    reason: The DELETE method either removes an instance from the DB or returns an error. Since only one successful outcome is possible, it doesn't make sense for our RP to support both 200 and 204.
   - code: DeleteOperationResponses
     from: azurelargeinstance.json
     reason: Customers deleting resources don't request any new information from the operation besides its result. Therefore it makes sense to return no content when the operation succeeds.
-  - code: TrackedResourcesMustHavePut
-    where:
-      - $.definitions.AzureLargeInstance
-      - $.definitions.AzureLargeStorageInstance
-    reason: All PUT actions are carried out internally by our specialized team utilizing Geneva actions. This process is not currently available for external use.
 ```

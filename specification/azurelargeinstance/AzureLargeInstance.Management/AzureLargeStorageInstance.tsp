@@ -58,17 +58,13 @@ interface AzureLargeStorageInstances {
     ErrorResponse
   >;
 
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "Legacy"
   @added(Versions.v2024_08_01_preview)
   @armResourceDelete(AzureLargeStorageInstance)
   @doc("""
     Deletes an Azure Large Storage Instance for the specified subscription,
     resource group, and instance name.
     """)
-  @delete
-  delete(
-    ...ResourceInstanceParameters<AzureLargeStorageInstance>,
-  ): OkResponse | ErrorResponse;
+  delete is ArmResourceDeleteSync<AzureLargeStorageInstance>;
 
   @doc("""
     Gets a list of AzureLargeStorageInstances in the specified subscription and
