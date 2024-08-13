@@ -27,9 +27,17 @@ These are the global settings for the hybridconnectivity.
 ``` yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2023-03
+tag: package-2024-12-01
 ```
 
+### Tag: package-2024-12-01
+
+These settings apply only when `--tag=package-2024-12-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-12-01'
+input-file:
+  - Microsoft.HybridConnectivity/PublicCloud/stable/2024-12-01/publicCloud.json
+```
 
 ### Tag: package-2023-03
 
