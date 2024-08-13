@@ -173,7 +173,8 @@
               "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
             }
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       },
       "put": {
         "x-ms-examples": {
@@ -234,7 +235,8 @@
               "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
             }
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/watchlists/{watchlistAlias}/watchlistItems": {
@@ -665,13 +667,11 @@
         },
         "itemsKeyValue": {
           "description": "key-value pairs for a watchlist item",
-          "type": "object",
-          "additionalProperties": {}
+          "type": "object"
         },
         "entityMapping": {
           "description": "key-value pairs for a watchlist item entity mapping",
-          "type": "object",
-          "additionalProperties": {}
+          "type": "object"
         }
       },
       "required": [
