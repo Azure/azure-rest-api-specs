@@ -1094,13 +1094,12 @@
           "format": "int32",
           "description": "Subtitle max char count per segment."
         },
-        "speakerConsents": {
+        "consents": {
           "type": "array",
           "description": "Speaker consents.",
           "items": {
-            "$ref": "#/definitions/SpeakerConsent"
-          },
-          "x-ms-identifiers": []
+            "type": "string"
+          }
         },
         "webvttFile": {
           "$ref": "#/definitions/WebvttFile",
@@ -1218,25 +1217,6 @@
       },
       "required": [
         "value"
-      ]
-    },
-    "SpeakerConsent": {
-      "type": "object",
-      "description": "Consent used by speaker used by iteration creation or.",
-      "properties": {
-        "consentId": {
-          "$ref": "#/definitions/resourceId",
-          "description": "Consent ID",
-          "readOnly": true
-        },
-        "speakerId": {
-          "type": "string",
-          "description": "Speaker ID."
-        }
-      },
-      "required": [
-        "consentId",
-        "speakerId"
       ]
     },
     "Status": {

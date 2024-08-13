@@ -176,7 +176,7 @@ model IterationInput {
 
   @doc("Speaker consents.")
   @added(ApiVersions.v2024_07_30_preview)
-  speakerConsents?: Array<SpeakerConsent>;
+  consents?: Array<string>;
 
   @doc("Webvtt file for content editing.")
   webvttFile?: WebvttFile;
@@ -350,17 +350,6 @@ model ConsentInput {
 
   @doc("Company name.")
   companyName: string;
-}
-
-@doc("Consent used by speaker used by iteration creation or.")
-@added(ApiVersions.v2024_07_30_preview)
-model SpeakerConsent {
-  @doc("Consent ID")
-  @visibility("read")
-  consentId: resourceId;
-
-  @doc("Speaker ID.")
-  speakerId: string;
 }
 
 interface TranslationOperations {
