@@ -7557,94 +7557,6 @@
       },
       "title": "The fully qualified resource ID of the Capacity Reservation Group to provide virtual machines from a reserved group of Virtual Machines.",
       "description": "This is of the form: '/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Compute/capacityreservationgroups/{capacityReservationGroupName}' Customers use it to create an agentpool with a specified CRG. For more information see [Capacity Reservation](https://learn.microsoft.com/en-us/azure/virtual-machines/capacity-reservation-overview)"
-    }
-  },
-  "parameters": {
-    "ResourceNameParameter": {
-      "name": "resourceName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "minLength": 1,
-      "maxLength": 63,
-      "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9]$",
-      "description": "The name of the managed cluster resource.",
-      "x-ms-parameter-location": "method"
-    },
-    "AgentPoolNameParameter": {
-      "name": "agentPoolName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "pattern": "^[a-z][a-z0-9]{0,11}$",
-      "minLength": 1,
-      "maxLength": 12,
-      "description": "The name of the agent pool.",
-      "x-ms-parameter-location": "method"
-    },
-    "ResourceTypeParameter": {
-      "name": "resource-type",
-      "in": "query",
-      "required": false,
-      "type": "string",
-      "description": "The resource type for which the OS options needs to be returned",
-      "x-ms-parameter-location": "method"
-    },
-    "ServerFqdnParameter": {
-      "name": "server-fqdn",
-      "in": "query",
-      "required": false,
-      "type": "string",
-      "description": "server fqdn type for credentials to be returned",
-      "x-ms-parameter-location": "method"
-    },
-    "TrustedAccessRoleBindingNameParameter": {
-      "name": "trustedAccessRoleBindingName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The name of trusted access role binding.",
-      "pattern": "^([A-Za-z0-9-])+$",
-      "minLength": 1,
-      "maxLength": 24,
-      "x-ms-parameter-location": "method"
-    },
-    "CredentialFormatParameter": {
-      "name": "format",
-      "in": "query",
-      "required": false,
-      "type": "string",
-      "enum": [
-        "exec",
-        "azure"
-      ],
-      "x-ms-enum": {
-        "name": "format",
-        "modelAsString": true,
-        "values": [
-          {
-            "value": "azure",
-            "description": "Return azure auth-provider kubeconfig. This format is deprecated in v1.22 and will be fully removed in v1.26. See: https://aka.ms/k8s/changes-1-26."
-          },
-          {
-            "value": "exec",
-            "description": "Return exec format kubeconfig. This format requires kubelogin binary in the path."
-          }
-        ]
-      },
-      "description": "Only apply to AAD clusters, specifies the format of returned kubeconfig. Format 'azure' will return azure auth-provider kubeconfig; format 'exec' will return exec format kubeconfig, which requires kubelogin binary in the path.",
-      "x-ms-parameter-location": "method"
-    },
-    "MeshModeParameter": {
-      "name": "mode",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "minLength": 1,
-      "maxLength": 24,
-      "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9]$",
-      "description": "The mode of the mesh.",
-      "x-ms-parameter-location": "method"
     },
     "Machine": {
       "allOf": [
@@ -7748,6 +7660,94 @@
       },
       "readOnly": true,
       "type": "object"
+    }
+  },
+  "parameters": {
+    "ResourceNameParameter": {
+      "name": "resourceName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 63,
+      "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9]$",
+      "description": "The name of the managed cluster resource.",
+      "x-ms-parameter-location": "method"
+    },
+    "AgentPoolNameParameter": {
+      "name": "agentPoolName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9]{0,11}$",
+      "minLength": 1,
+      "maxLength": 12,
+      "description": "The name of the agent pool.",
+      "x-ms-parameter-location": "method"
+    },
+    "ResourceTypeParameter": {
+      "name": "resource-type",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "description": "The resource type for which the OS options needs to be returned",
+      "x-ms-parameter-location": "method"
+    },
+    "ServerFqdnParameter": {
+      "name": "server-fqdn",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "description": "server fqdn type for credentials to be returned",
+      "x-ms-parameter-location": "method"
+    },
+    "TrustedAccessRoleBindingNameParameter": {
+      "name": "trustedAccessRoleBindingName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of trusted access role binding.",
+      "pattern": "^([A-Za-z0-9-])+$",
+      "minLength": 1,
+      "maxLength": 24,
+      "x-ms-parameter-location": "method"
+    },
+    "CredentialFormatParameter": {
+      "name": "format",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "enum": [
+        "exec",
+        "azure"
+      ],
+      "x-ms-enum": {
+        "name": "format",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "azure",
+            "description": "Return azure auth-provider kubeconfig. This format is deprecated in v1.22 and will be fully removed in v1.26. See: https://aka.ms/k8s/changes-1-26."
+          },
+          {
+            "value": "exec",
+            "description": "Return exec format kubeconfig. This format requires kubelogin binary in the path."
+          }
+        ]
+      },
+      "description": "Only apply to AAD clusters, specifies the format of returned kubeconfig. Format 'azure' will return azure auth-provider kubeconfig; format 'exec' will return exec format kubeconfig, which requires kubelogin binary in the path.",
+      "x-ms-parameter-location": "method"
+    },
+    "MeshModeParameter": {
+      "name": "mode",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 24,
+      "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9]$",
+      "description": "The mode of the mesh.",
+      "x-ms-parameter-location": "method"
     }
   }
 }
