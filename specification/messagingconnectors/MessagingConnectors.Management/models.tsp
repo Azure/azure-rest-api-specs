@@ -161,6 +161,43 @@ union OffsetPolicyForCosmosDB {
   string,
 }
 
+@doc("Enum of the SaslMechanism for Confluent connector")
+union SaslMechanismForConfluent {
+  @doc("The SASL_PLAINTEXT sasl mechanism.")
+  SaslPlainText: "SASL_PLAINTEXT",
+
+  @doc("The PLAINTEXT sasl mechanism.")
+  PlainText: "PLAINTEXT",
+
+  @doc("The SASL_SSL sasl mechanism.")
+  SaslSsl: "SASL_SSL",
+
+  @doc("The SSL sasl mechanism.")
+  Ssl: "SSL",
+
+  string,
+}
+
+@doc("Enum of the SecurityProtocol for Confluent connector")
+union SecurityProtocolForConfluent {
+  @doc("The GSSAPI security protocol.")
+  GssApi: "GSSAPI",
+
+  @doc("The PLAIN security protocol.")
+  Plain: "PLAIN",
+
+  @doc("The SCRAM-SHA-256 security protocol.")
+  ScramSha256: "SCRAM-SHA-256",
+
+  @doc("The SCRAM-SHA-512 security protocol.")
+  ScramSha512: "SCRAM-SHA-512",
+
+  @doc("The OAUTHBEARER security protocol.")
+  OAuthBearer: "OAUTHBEARER",
+
+  string,
+}
+
 @doc("Basic info for EventHub")
 model EventHubConfig {
   @doc("namespace of the EventHub.")
@@ -317,6 +354,12 @@ model ConfluentSourceConnectorProperties extends ConnectorProperties {
   @doc("Password of the Confluent.")
   @secret
   password: string;
+
+  @doc("Sasl mechanism of the confluent.")
+  saslMechanism: SaslMechanismForConfluent;
+
+  @doc("Security protocol of the confluent.")
+  securityProtocol: SecurityProtocolForConfluent;
 }
 
 @doc("Configuration for CosmosDbSourceConnector")
