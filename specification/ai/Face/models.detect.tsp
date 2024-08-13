@@ -23,9 +23,7 @@ alias FaceDetectionOptions = {
   returnFaceId?: boolean = true;
 
   @doc("Analyze and return the one or more specified face attributes in the comma-separated string like 'returnFaceAttributes=headPose,glasses'. Face attribute analysis has additional computational and time cost.")
-  @query({
-    format: "csv",
-  })
+  @query
   returnFaceAttributes?: FaceAttributeType[];
 
   @doc("Return face landmarks of the detected faces or not. The default value is false.")
