@@ -521,3 +521,13 @@ model StorageBillingProperties {
   @doc("the SKU type that is provisioned")
   sku?: string;
 }
+
+@added(Versions.v2024_08_01_preview)
+@doc("Request body that only contains the Tags and Identity Field")
+model AzureLargeStorageInstancePatchBody {
+  @doc("The identity of Azure Large Storage Instance, if configured.")
+  identity: Foundations.ManagedServiceIdentity;
+
+  @doc("Tags field of the AzureLareStorage instance.")
+  tags?: Record<string>;
+}
