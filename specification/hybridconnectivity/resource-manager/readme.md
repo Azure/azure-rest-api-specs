@@ -37,6 +37,7 @@ These settings apply only when `--tag=package-2024-12-01` is specified on the co
 ```yaml $(tag) == 'package-2024-12-01'
 input-file:
   - Microsoft.HybridConnectivity/PublicCloud/stable/2024-12-01/publicCloud.json
+  - Microsoft.HybridConnectivity/stable/2023-03-15/hybridconnectivity.json
 ```
 
 ### Tag: package-2023-03
@@ -63,6 +64,30 @@ These settings apply only when `--tag=package-2022-05-01-preview` is specified o
 ``` yaml $(tag) == 'package-2022-05-01-preview'
 input-file:
   - Microsoft.HybridConnectivity/preview/2022-05-01-preview/hybridconnectivity.json
+```
+
+## Suppression
+
+``` yaml
+directive:
+  - suppress: AvoidAdditionalProperties
+    reason: Property solutionSettings for Solution Configurations settings previously defined like this
+    from: publicCloud.json
+    where:
+      - $.definitions.SolutionConfigurationUpdateProperties.properties.solutionSettings
+      - $.definitions.SolutionConfigurationUpdate.properties.properties.properties.solutionSettings
+      - $.definitions.SolutionConfiguration.properties.properties.properties.solutionSettings
+      - $.definitions.SolutionConfigurationProperties.properties.solutionSettings
+      - $.definitions.SolutionTypeSettings.properties.solutionSettings
+
+  - suppress: BodyTopLevelProperties
+    reason: The BodyTopLevelProperties violation is a false positive which you can suppress for now
+    from: publicCloud.json
+    where:
+      - $.definitions.InventoryResourceListResult
+      - $.definitions.PublicCloudConnectorListResult
+      - $.definitions.SolutionConfigurationListResult
+      - $.definitions.SolutionTypeResourceListResult
 ```
 
 ---
