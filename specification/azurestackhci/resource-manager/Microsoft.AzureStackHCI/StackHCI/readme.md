@@ -37,6 +37,12 @@ directive:
     transform: >
       $.ErrorDetail['x-ms-client-name'] = 'HciValidationFailureDetail';
       $.Extension['x-ms-client-name'] = 'HciEdgeDeviceArcExtension';
+      $.Intents['x-ms-client-name'] = 'HciEdgeDeviceIntents';
+      $.HostNetwork['x-ms-client-name'] = 'HciEdgeDeviceHostNetwork';
+      $.StorageNetworks['x-ms-client-name'] = 'HciEdgeDeviceStorageNetworks';
+      $.StorageAdapterIPInfo['x-ms-client-name'] = 'HciEdgeDeviceStorageAdapterIPInfo';
+      $.AdapterPropertyOverrides['x-ms-client-name'] = 'HciEdgeDeviceAdapterPropertyOverrides';
+      $.VirtualSwitchConfigurationOverrides['x-ms-client-name'] = 'HciEdgeDeviceVirtualSwitchConfigurationOverrides';
   - from: deploymentSettings.json
     where: $.definitions
     transform: >
