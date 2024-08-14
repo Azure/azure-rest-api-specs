@@ -31,14 +31,6 @@ op getChatCompletions is Azure.Core.RpcOperation<
   ChatCompletions
 >;
 
-@override(AI.Model.getChatCompletions, "csharp")
-op getChatCompletions is Azure.Core.RpcOperation<
-  {
-    chatCompletionsOptions: ChatCompletionsOptions,
-  },
-  ChatCompletions
->;
-
 @doc("""
   Return the embedding vectors for given text prompts.
   The method makes a REST API call to the `/embeddings` route on the given endpoint.
