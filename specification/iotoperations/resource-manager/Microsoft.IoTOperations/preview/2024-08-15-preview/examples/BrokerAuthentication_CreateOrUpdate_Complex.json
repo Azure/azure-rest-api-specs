@@ -53,5 +53,128 @@
         "type": "CustomLocation"
       }
     }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "authenticationMethods": [
+            {
+              "method": "ServiceAccountToken",
+              "serviceAccountTokenSettings": {
+                "audiences": [
+                  "aio-mq"
+                ]
+              }
+            },
+            {
+              "method": "X509",
+              "x509Settings": {
+                "trustedClientCaCert": "my-ca",
+                "authorizationAttributes": {
+                  "root": {
+                    "subject": "CN = Contoso Root CA Cert, OU = Engineering, C = US",
+                    "attributes": {
+                      "organization": "contoso"
+                    }
+                  },
+                  "intermediate": {
+                    "subject": "CN = Contoso Intermediate CA",
+                    "attributes": {
+                      "city": "seattle",
+                      "foo": "bar"
+                    }
+                  },
+                  "smart-fan": {
+                    "subject": "CN = smart-fan",
+                    "attributes": {
+                      "building": "17"
+                    }
+                  }
+                }
+              }
+            }
+          ],
+          "provisioningState": "Succeeded"
+        },
+        "extendedLocation": {
+          "name": "qmbrfwcpwwhggszhrdjv",
+          "type": "CustomLocation"
+        },
+        "id": "/subscriptions/0000000-0000-0000-0000-000000000000/resourceGroups/resourceGroup123/providers/Microsoft.IoTOperations/instances/resource-name123/brokers/resource-name123/authentications/resource-name123",
+        "name": "lwucizfvtsdpx",
+        "type": "kvtilkgcxanlfozrd",
+        "systemData": {
+          "createdBy": "ssvaslsmudloholronopqyxjcu",
+          "createdByType": "User",
+          "createdAt": "2024-08-09T18:13:29.389Z",
+          "lastModifiedBy": "gnicpuszwd",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2024-08-09T18:13:29.389Z"
+        }
+      }
+    },
+    "201": {
+      "headers": {
+        "Azure-AsyncOperation": "https://contoso.com/operationstatus"
+      },
+      "body": {
+        "properties": {
+          "authenticationMethods": [
+            {
+              "method": "ServiceAccountToken",
+              "serviceAccountTokenSettings": {
+                "audiences": [
+                  "aio-mq"
+                ]
+              }
+            },
+            {
+              "method": "X509",
+              "x509Settings": {
+                "trustedClientCaCert": "my-ca",
+                "authorizationAttributes": {
+                  "root": {
+                    "subject": "CN = Contoso Root CA Cert, OU = Engineering, C = US",
+                    "attributes": {
+                      "organization": "contoso"
+                    }
+                  },
+                  "intermediate": {
+                    "subject": "CN = Contoso Intermediate CA",
+                    "attributes": {
+                      "city": "seattle",
+                      "foo": "bar"
+                    }
+                  },
+                  "smart-fan": {
+                    "subject": "CN = smart-fan",
+                    "attributes": {
+                      "building": "17"
+                    }
+                  }
+                }
+              }
+            }
+          ],
+          "provisioningState": "Succeeded"
+        },
+        "extendedLocation": {
+          "name": "qmbrfwcpwwhggszhrdjv",
+          "type": "CustomLocation"
+        },
+        "id": "/subscriptions/0000000-0000-0000-0000-000000000000/resourceGroups/resourceGroup123/providers/Microsoft.IoTOperations/instances/resource-name123/brokers/resource-name123/authentications/resource-name123",
+        "name": "lwucizfvtsdpx",
+        "type": "kvtilkgcxanlfozrd",
+        "systemData": {
+          "createdBy": "ssvaslsmudloholronopqyxjcu",
+          "createdByType": "User",
+          "createdAt": "2024-08-09T18:13:29.389Z",
+          "lastModifiedBy": "gnicpuszwd",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2024-08-09T18:13:29.389Z"
+        }
+      }
+    }
   }
 }

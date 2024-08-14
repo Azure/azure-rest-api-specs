@@ -52,5 +52,128 @@
         "type": "CustomLocation"
       }
     }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "serviceName": "tpfiszlapdpxktx",
+          "serviceType": "LoadBalancer",
+          "ports": [
+            {
+              "port": 8080,
+              "authenticationRef": "example-authentication",
+              "protocol": "WebSockets"
+            },
+            {
+              "port": 8443,
+              "authenticationRef": "example-authentication",
+              "protocol": "WebSockets",
+              "tls": {
+                "mode": "Automatic",
+                "certManagerCertificateSpec": {
+                  "issuerRef": {
+                    "name": "example-issuer",
+                    "kind": "Issuer"
+                  }
+                }
+              }
+            },
+            {
+              "port": 1883,
+              "authenticationRef": "example-authentication"
+            },
+            {
+              "port": 8883,
+              "authenticationRef": "example-authentication",
+              "tls": {
+                "mode": "Manual",
+                "manual": {
+                  "secretRef": "example-secret"
+                }
+              }
+            }
+          ],
+          "provisioningState": "Succeeded"
+        },
+        "extendedLocation": {
+          "name": "qmbrfwcpwwhggszhrdjv",
+          "type": "CustomLocation"
+        },
+        "id": "/subscriptions/0000000-0000-0000-0000-000000000000/resourceGroups/resourceGroup123/providers/Microsoft.IoTOperations/instances/resource-name123/brokers/resource-name123/listeners/resource-name123",
+        "name": "hoqjaachratt",
+        "type": "hizbknwegcdaeh",
+        "systemData": {
+          "createdBy": "ssvaslsmudloholronopqyxjcu",
+          "createdByType": "User",
+          "createdAt": "2024-08-09T18:13:29.389Z",
+          "lastModifiedBy": "gnicpuszwd",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2024-08-09T18:13:29.389Z"
+        }
+      }
+    },
+    "201": {
+      "headers": {
+        "Azure-AsyncOperation": "https://contoso.com/operationstatus"
+      },
+      "body": {
+        "properties": {
+          "serviceName": "tpfiszlapdpxktx",
+          "serviceType": "LoadBalancer",
+          "ports": [
+            {
+              "port": 8080,
+              "authenticationRef": "example-authentication",
+              "protocol": "WebSockets"
+            },
+            {
+              "port": 8443,
+              "authenticationRef": "example-authentication",
+              "protocol": "WebSockets",
+              "tls": {
+                "mode": "Automatic",
+                "certManagerCertificateSpec": {
+                  "issuerRef": {
+                    "name": "example-issuer",
+                    "kind": "Issuer"
+                  }
+                }
+              }
+            },
+            {
+              "port": 1883,
+              "authenticationRef": "example-authentication"
+            },
+            {
+              "port": 8883,
+              "authenticationRef": "example-authentication",
+              "tls": {
+                "mode": "Manual",
+                "manual": {
+                  "secretRef": "example-secret"
+                }
+              }
+            }
+          ],
+          "provisioningState": "Succeeded"
+        },
+        "extendedLocation": {
+          "name": "qmbrfwcpwwhggszhrdjv",
+          "type": "CustomLocation"
+        },
+        "id": "/subscriptions/0000000-0000-0000-0000-000000000000/resourceGroups/resourceGroup123/providers/Microsoft.IoTOperations/instances/resource-name123/brokers/resource-name123/listeners/resource-name123",
+        "name": "hoqjaachratt",
+        "type": "hizbknwegcdaeh",
+        "systemData": {
+          "createdBy": "ssvaslsmudloholronopqyxjcu",
+          "createdByType": "User",
+          "createdAt": "2024-08-09T18:13:29.389Z",
+          "lastModifiedBy": "gnicpuszwd",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2024-08-09T18:13:29.389Z"
+        }
+      }
+    }
   }
 }
