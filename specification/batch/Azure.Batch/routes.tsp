@@ -134,16 +134,12 @@ interface Pools {
       $filter?: string;
 
       @doc("An OData $select clause.")
-      @query({
-        format: "csv",
-      })
+      @query
       @clientName("select")
       $select?: string[];
 
       @doc("An OData $expand clause.")
-      @query({
-        format: "csv",
-      })
+      @query
       @clientName("expand")
       $expand?: string[];
     },
@@ -184,16 +180,12 @@ interface Pools {
   getPool is ReadOperation<
     BatchPoolHeaders & {
       @doc("An OData $select clause.")
-      @query({
-        format: "csv",
-      })
+      @query
       @clientName("select")
       $select?: string[];
 
       @doc("An OData $expand clause.")
-      @query({
-        format: "csv",
-      })
+      @query
       @clientName("expand")
       $expand?: string[];
     },
@@ -425,16 +417,12 @@ interface Jobs {
       jobId: string;
 
       @doc("An OData $select clause.")
-      @query({
-        format: "csv",
-      })
+      @query
       @clientName("select")
       $select?: string[];
 
       @doc("An OData $expand clause.")
-      @query({
-        format: "csv",
-      })
+      @query
       @clientName("expand")
       $expand?: string[];
     },
@@ -593,16 +581,12 @@ interface Jobs {
       $filter?: string;
 
       @doc("An OData $select clause.")
-      @query({
-        format: "csv",
-      })
+      @query
       @clientName("select")
       $select?: string[];
 
       @doc("An OData $expand clause.")
-      @query({
-        format: "csv",
-      })
+      @query
       @clientName("expand")
       $expand?: string[];
     },
@@ -628,16 +612,12 @@ interface Jobs {
       $filter?: string;
 
       @doc("An OData $select clause.")
-      @query({
-        format: "csv",
-      })
+      @query
       @clientName("select")
       $select?: string[];
 
       @doc("An OData $expand clause.")
-      @query({
-        format: "csv",
-      })
+      @query
       @clientName("expand")
       $expand?: string[];
     },
@@ -673,9 +653,7 @@ interface Jobs {
       $filter?: string;
 
       @doc("An OData $select clause.")
-      @query({
-        format: "csv",
-      })
+      @query
       @clientName("select")
       $select?: string[];
     },
@@ -751,16 +729,12 @@ interface JobSchedules {
       jobScheduleId: string;
 
       @doc("An OData $select clause.")
-      @query({
-        format: "csv",
-      })
+      @query
       @clientName("select")
       $select?: string[];
 
       @doc("An OData $expand clause.")
-      @query({
-        format: "csv",
-      })
+      @query
       @clientName("expand")
       $expand?: string[];
     },
@@ -880,16 +854,12 @@ interface JobSchedules {
       $filter?: string;
 
       @doc("An OData $select clause.")
-      @query({
-        format: "csv",
-      })
+      @query
       @clientName("select")
       $select?: string[];
 
       @doc("An OData $expand clause.")
-      @query({
-        format: "csv",
-      })
+      @query
       @clientName("expand")
       $expand?: string[];
     },
@@ -946,16 +916,12 @@ interface Tasks {
       $filter?: string;
 
       @doc("An OData $select clause.")
-      @query({
-        format: "csv",
-      })
+      @query
       @clientName("select")
       $select?: string[];
 
       @doc("An OData $expand clause.")
-      @query({
-        format: "csv",
-      })
+      @query
       @clientName("expand")
       $expand?: string[];
     },
@@ -1040,16 +1006,12 @@ interface Tasks {
       taskId: string;
 
       @doc("An OData $select clause.")
-      @query({
-        format: "csv",
-      })
+      @query
       @clientName("select")
       $select?: string[];
 
       @doc("An OData $expand clause.")
-      @query({
-        format: "csv",
-      })
+      @query
       @clientName("expand")
       $expand?: string[];
     },
@@ -1095,9 +1057,7 @@ interface Tasks {
       taskId: string;
 
       @doc("An OData $select clause.")
-      @query({
-        format: "csv",
-      })
+      @query
       @clientName("select")
       $select?: string[];
     },
@@ -1345,9 +1305,7 @@ interface Nodes {
       nodeId: string;
 
       @doc("An OData $select clause.")
-      @query({
-        format: "csv",
-      })
+      @query
       @clientName("select")
       $select?: string[];
     },
@@ -1491,9 +1449,7 @@ interface Nodes {
       $filter?: string;
 
       @doc("An OData $select clause.")
-      @query({
-        format: "csv",
-      })
+      @query
       @clientName("select")
       $select?: string[];
     },
@@ -1521,9 +1477,7 @@ interface Nodes {
       extensionName: string;
 
       @doc("An OData $select clause.")
-      @query({
-        format: "csv",
-      })
+      @query
       @clientName("select")
       $select?: string[];
     },
@@ -1545,9 +1499,7 @@ interface Nodes {
       nodeId: string;
 
       @doc("An OData $select clause.")
-      @query({
-        format: "csv",
-      })
+      @query
       @clientName("select")
       $select?: string[];
     },
