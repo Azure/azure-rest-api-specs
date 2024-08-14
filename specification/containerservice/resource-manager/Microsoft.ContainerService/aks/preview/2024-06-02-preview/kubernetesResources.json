@@ -1,0 +1,75 @@
+{
+    "swagger": "2.0",
+    "info": {
+      "title": "ContainerServiceClient",
+      "description": "The Container Service Client.",
+      "version": "2024-06-02-preview"
+    },
+    "host": "management.azure.com",
+    "schemes": [
+      "https"
+    ],
+    "consumes": [
+      "application/json"
+    ],
+    "produces": [
+      "application/json"
+    ],
+    "security": [
+      {
+        "azure_auth": [
+          "user_impersonation"
+        ]
+      }
+    ],
+    "securityDefinitions": {
+      "azure_auth": {
+        "type": "oauth2",
+        "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+        "flow": "implicit",
+        "description": "Azure Active Directory OAuth2 Flow",
+        "scopes": {
+          "user_impersonation": "impersonate your user account"
+        }
+      }
+    },
+    "paths": {},
+    "definitions": {
+      "KubernetesResource": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+          }
+        ],
+        "properties": {
+          "properties": {
+            "description": "Properties for the kubernetes object.",
+            "$ref": "#/definitions/KubernetesObject"
+          }
+        },
+        "description": "Kubernetes Resource."
+      },
+      "KubernetesObject": {
+        "type": "object",
+        "properties": {
+          "k8sApiVersion": {
+            "type": "string",
+            "description": "corev1, appsv1"
+          },
+          "k8sKind": {
+            "type": "string",
+            "description": "namespace, pod, node"
+          },
+          "properties": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "Properties for the kubernetes object."
+          }
+        }
+      }
+    }
+  }
+   
