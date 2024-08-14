@@ -55,7 +55,7 @@ model SolutionTypeSettings {
 //------------------- Test Permissions -------------------
 
 @doc("Public connector permissions.")
-model TestPermissionResponse {
+model TestPermissionResult {
   #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers"
   @doc("Solution type permissions.")
   solutionTypes: Array<SolutionTypePermissions>;
@@ -341,7 +341,7 @@ interface PublicCloudConnectors {
   testPermissions is ArmResourceActionAsync<
     PublicCloudConnector,
     void,
-    TestPermissionResponse
+    TestPermissionResult
   >;
 }
 
