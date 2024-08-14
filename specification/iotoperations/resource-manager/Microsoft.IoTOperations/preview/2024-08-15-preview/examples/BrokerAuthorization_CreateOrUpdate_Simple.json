@@ -55,5 +55,68 @@
         "type": "CustomLocation"
       }
     }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "authorizationPolicies": {
+            "enableCache": true,
+            "rules": [
+              {
+                "principals": {
+                  "clientIds": [
+                    "my-client-id"
+                  ],
+                  "attributes": [
+                    {
+                      "floor": "floor1",
+                      "site": "site1"
+                    }
+                  ]
+                },
+                "brokerResources": [
+                  {
+                    "method": "Connect"
+                  },
+                  {
+                    "method": "Subscribe",
+                    "topics": [
+                      "topic",
+                      "topic/with/wildcard/#"
+                    ]
+                  }
+                ],
+                "stateStoreResources": [
+                  {
+                    "method": "ReadWrite",
+                    "keyType": "Pattern",
+                    "keys": [
+                      "*"
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          "provisioningState": "Succeeded"
+        },
+        "extendedLocation": {
+          "name": "qmbrfwcpwwhggszhrdjv",
+          "type": "CustomLocation"
+        },
+        "id": "/subscriptions/0000000-0000-0000-0000-000000000000/resourceGroups/resourceGroup123/providers/Microsoft.IoTOperations/instances/resource-name123/brokers/resource-name123/authorizations/resource-name123",
+        "name": "anqrqsvrjmlvzkrbuav",
+        "type": "yjlsfarshqoxojvgmy",
+        "systemData": {
+          "createdBy": "ssvaslsmudloholronopqyxjcu",
+          "createdByType": "User",
+          "createdAt": "2024-08-09T18:13:29.389Z",
+          "lastModifiedBy": "gnicpuszwd",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2024-08-09T18:13:29.389Z"
+        }
+      }
+    }
   }
 }
