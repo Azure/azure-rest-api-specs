@@ -198,13 +198,17 @@
       "properties": {
         "excludeBlobsBeginningWith": {
           "type": "array",
-          "items": "string",
-          "description": "Exclude each blob that begins with ONE OF the given prefixes from On Upload malware scanning."
+          "items": {
+            "type": "array"
+          },
+          "description": "Exclude each blob that begins with ANY OF the given prefixes from On Upload malware scanning."
         },
         "excludeBlobsEndingWith": {
           "type": "array",
-          "items": "string",
-          "description": "Exclude each blob that begins with ONE OF the given suffixes from On Upload malware scanning."
+          "items": {
+            "type": "array"
+          },
+          "description": "Exclude each blob that begins with ANY OF the given suffixes from On Upload malware scanning."
         },
         "excludeBlobsLargerThan": {
           "type": "integer",
