@@ -8,6 +8,9 @@ import "./models/chat_completions.tsp";
 import "./models/embeddings.tsp";
 import "./models/image_embeddings.tsp";
 
+import "@azure-tools/typespec-client-generator-core";
+using Azure.ClientGenerator.Core;
+
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using TypeSpec.Versioning;
@@ -27,6 +30,16 @@ op getChatCompletions is Azure.Core.RpcOperation<
   {
     ...ChatCompletionsOptions;
     ...AdditionalRequestHeaders;
+  },
+  ChatCompletions
+>;
+
+@override(AI.Model.getChatCompletions, "csharp")
+op getChatCompletions is Azure.Core.RpcOperation<
+  {
+    chatCompletionsOptions: ChatCompletionsOptions,
+    @header("extra-parameters")
+    extraParams?: ExtraParameters,
   },
   ChatCompletions
 >;
