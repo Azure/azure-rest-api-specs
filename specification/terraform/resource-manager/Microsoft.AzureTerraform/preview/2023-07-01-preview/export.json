@@ -187,33 +187,45 @@
     }
   },
   "definitions": {
-    "ExportResourceParameter": {
+    "ExportResource": {
       "allOf": [
         {
-          "$ref": "#/definitions/BaseExportParameter"
+          "$ref": "#/definitions/BaseExportModel"
         }
       ],
       "description": "Export parameter for a single resource",
       "required": [
-        "resourceId"
+        "resourceIds"
       ],
       "properties": {
-        "resourceId": {
+        "resourceIds": {
           "description": "The id of the resource to be exported",
-          "type": "string"
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         },
-        "name": {
-          "description": "The Terraform resource name",
+        "resourceName": {
+          "description": "The Terraform resource name. Only works when `resourceIds` contains only one item.",
           "type": "string",
           "default": "res-0"
+        },
+        "resourceType": {
+          "description": "The Terraform resource type. Only works when `resourceIds` contains only one item.",
+          "type": "string"
+        },
+        "namePattern": {
+          "description": "The name pattern of the Terraform resources",
+          "type": "string",
+          "default": "res-"
         }
       },
       "type": "object"
     },
-    "ExportResourceGroupParameter": {
+    "ExportResourceGroup": {
       "allOf": [
         {
-          "$ref": "#/definitions/BaseExportParameter"
+          "$ref": "#/definitions/BaseExportModel"
         }
       ],
       "description": "Export parameter for a resource group",
@@ -226,17 +238,17 @@
           "type": "string"
         },
         "namePattern": {
-          "description": "The pattern of the Terraform resources",
+          "description": "The name pattern of the Terraform resources",
           "type": "string",
           "default": "res-"
         }
       },
       "type": "object"
     },
-    "ExportQueryParameter": {
+    "ExportQuery": {
       "allOf": [
         {
-          "$ref": "#/definitions/BaseExportParameter"
+          "$ref": "#/definitions/BaseExportModel"
         }
       ],
       "description": "Export parameter for resources queried by ARG (Azure Resource Graph)",
@@ -249,7 +261,7 @@
           "type": "string"
         },
         "namePattern": {
-          "description": "The pattern of the Terraform resources",
+          "description": "The name pattern of the Terraform resources",
           "type": "string",
           "default": "res-"
         },
@@ -261,7 +273,7 @@
       },
       "type": "object"
     },
-    "BaseExportParameter": {
+    "BaseExportModel": {
       "description": "The base export parameter",
       "discriminator": "type",
       "required": [
@@ -288,7 +300,12 @@
         "fullProperties": {
           "description": "Whether to output all non-computed properties in the generated Terraform configuration? This probably needs manual modifications to make it valid",
           "type": "boolean",
-          "default": false
+          "default": true
+        },
+        "maskSensitive": {
+          "description": "Mask sensitive attributes in the Terraform configuration",
+          "type": "boolean",
+          "default": true
         }
       },
       "type": "object"
@@ -297,9 +314,9 @@
       "description": "The parameter type",
       "type": "string",
       "enum": [
-        "ExportResourceParameter",
-        "ExportResourceGroupParameter",
-        "ExportQueryParameter"
+        "ExportResource",
+        "ExportResourceGroup",
+        "ExportQuery"
       ],
       "x-ms-enum": {
         "name": "parameterType",
@@ -383,7 +400,7 @@
       "name": "exportParameter",
       "required": true,
       "schema": {
-        "$ref": "#/definitions/BaseExportParameter"
+        "$ref": "#/definitions/BaseExportModel"
       },
       "x-ms-parameter-location": "method"
     }
