@@ -2767,13 +2767,21 @@
       "type": "object",
       "description": "Batching configuration",
       "properties": {
-        "latencySeconds": {
+        "latencyMs": {
           "type": "integer",
           "format": "int32",
           "description": "Batching latency in seconds.",
           "default": 60,
           "minimum": 0,
           "maximum": 65535
+        },
+        "maxBytes": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Maximum number of bytes in a batch.",
+          "default": 100000,
+          "minimum": 0,
+          "maximum": 4294967295
         },
         "maxMessages": {
           "type": "integer",
