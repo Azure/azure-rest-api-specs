@@ -132,6 +132,12 @@ suppressions:
   - code: BodyTopLevelProperties
     from: networkManagerSecurityAdminConfiguration.json
     reason: Bug.
+  - code: SystemDataDefinitionsCommonTypes
+    from: networkVerifier.json
+    reason: False alarm for common type errors.
+  - code: SystemDataDefinitionsCommonTypes
+    from: network.json
+    reason: False alarm for common type errors.
 ```
 
 ### Tag: package-2024-01
