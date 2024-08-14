@@ -37,16 +37,15 @@ directive:
     transform: >
       $.ErrorDetail['x-ms-client-name'] = 'HciValidationFailureDetail';
       $.Extension['x-ms-client-name'] = 'HciEdgeDeviceArcExtension';
-      delete $.HostNetwork;
-      delete $.Intents;
-      delete $.AdapterPropertyOverrides;
-      delete $.VirtualSwitchConfigurationOverrides;
-      delete $.StorageNetworks;
-      delete $.StorageAdapterIPInfo;
-  - from: swagger-document
-    where: $.definitions.HciNetworkProfile.properties.hostNetwork
+  - from: deploymentSettings.json
+    where: $.definitions
     transform: >
-      $['$ref'] = "deploymentSettings.json#/definitions/HostNetwork";
+      $.Intents['x-ms-client-name'] = 'DeploymentSettingIntents';
+      $.HostNetwork['x-ms-client-name'] = 'DeploymentSettingHostNetwork';
+      $.StorageNetworks['x-ms-client-name'] = 'DeploymentSettingStorageNetworks';
+      $.StorageAdapterIPInfo['x-ms-client-name'] = 'DeploymentSettingStorageAdapterIPInfo';
+      $.AdapterPropertyOverrides['x-ms-client-name'] = 'DeploymentSettingAdapterPropertyOverrides';
+      $.VirtualSwitchConfigurationOverrides['x-ms-client-name'] = 'DeploymentSettingVirtualSwitchConfigurationOverrides';
   - from: swagger-document
     where: 
       - $.definitions.Extension.allOf[0]
