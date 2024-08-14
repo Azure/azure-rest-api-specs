@@ -206,14 +206,6 @@
               }
             }
           }
-        },
-        "x-ms-examples": {
-          "maximum set chat completion": {
-            "$ref": "./examples/GetChatCompletions_MaximumSet_Gen.json"
-          },
-          "minimum set chat completion": {
-            "$ref": "./examples/GetChatCompletions_MinimumSet_Gen.json"
-          }
         }
       }
     },
@@ -316,14 +308,6 @@
                 "description": "String error code indicating what went wrong."
               }
             }
-          }
-        },
-        "x-ms-examples": {
-          "maximum set embeddings": {
-            "$ref": "./examples/GetEmbeddings_MaximumSet_Gen.json"
-          },
-          "minimum set embeddings": {
-            "$ref": "./examples/GetEmbeddings_MinimumSet_Gen.json"
           }
         }
       }
@@ -429,14 +413,6 @@
               }
             }
           }
-        },
-        "x-ms-examples": {
-          "maximum set image embeddings": {
-            "$ref": "./examples/GetImageEmbeddings_MaximumSet_Gen.json"
-          },
-          "minimum set image embeddings": {
-            "$ref": "./examples/GetImageEmbeddings_MinimumSet_Gen.json"
-          }
         }
       }
     },
@@ -467,14 +443,6 @@
                 "description": "String error code indicating what went wrong."
               }
             }
-          }
-        },
-        "x-ms-examples": {
-          "maximum set model information": {
-            "$ref": "./examples/GetModelInfo_MaximumSet_Gen.json"
-          },
-          "minimum set model information": {
-            "$ref": "./examples/GetModelInfo_MinimumSet_Gen.json"
           }
         }
       }
@@ -1187,12 +1155,7 @@
       "description": "Representation of a single embeddings relatedness comparison.",
       "properties": {
         "embedding": {
-          "type": "array",
-          "description": "List of embeddings value for the input prompt. These represent a measurement of the\nvector-based relatedness of the provided input.",
-          "items": {
-            "type": "number",
-            "format": "float"
-          }
+          "description": "List of embedding values for the input prompt. These represent a measurement of the\nvector-based relatedness of the provided input. Or a base64 encoded string of the embedding vector."
         },
         "index": {
           "type": "integer",
@@ -1209,10 +1172,6 @@
       "type": "object",
       "description": "Representation of the response data from an embeddings request.\nEmbeddings measure the relatedness of text strings and are commonly used for search, clustering,\nrecommendations, and other similar scenarios.",
       "properties": {
-        "id": {
-          "type": "string",
-          "description": "Unique identifier for the embeddings result."
-        },
         "data": {
           "type": "array",
           "description": "Embedding values for the prompts submitted in the request.",
@@ -1231,7 +1190,6 @@
         }
       },
       "required": [
-        "id",
         "data",
         "usage",
         "model"
