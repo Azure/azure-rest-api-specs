@@ -19,7 +19,7 @@ model ApSlbVipResourceProperties {
   apDnsName: string;
 
   @doc("Arm location")
-  armLocation?: string; 
+  armLocation?: string;
 
   @doc("Provisioning state")
   @visibility("read")
