@@ -514,7 +514,6 @@ input-file:
 - Microsoft.Security/preview/2022-01-01-preview/governanceAssignments.json
 - Microsoft.Security/preview/2022-01-01-preview/governanceRules.json
 - Microsoft.Security/preview/2022-07-01-preview/applications.json
-- Microsoft.Security/preview/2022-12-01-preview/defenderForStorageSettings.json
 - Microsoft.Security/preview/2023-01-01-preview/securityOperators.json
 - Microsoft.Security/preview/2023-02-01-preview/sqlVulnerabilityAssessmentsBaselineRuleOperations.json
 - Microsoft.Security/preview/2023-02-01-preview/sqlVulnerabilityAssessmentsScanOperations.json
