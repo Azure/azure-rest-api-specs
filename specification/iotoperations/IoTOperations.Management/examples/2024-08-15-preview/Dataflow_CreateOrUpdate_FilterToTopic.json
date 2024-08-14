@@ -1,5 +1,5 @@
 {
-  "title": "Dataflow_CreateOrUpdate_ComplexContetualization",
+  "title": "Dataflow_CreateOrUpdate_FilterToTopic",
   "operationId": "Dataflow_CreateOrUpdate",
   "parameters": {
     "api-version": "2024-08-15-preview",
@@ -7,7 +7,7 @@
     "resourceGroupName": "rgiotoperations",
     "instanceName": "resource-name123",
     "dataflowProfileName": "resource-name123",
-    "dataflowName": "aio-to-adx-contexualized",
+    "dataflowName": "mqtt-filter-to-topic",
     "resource": {
       "properties": {
         "mode": "Enabled",
@@ -26,28 +26,24 @@
             "operationType": "BuiltInTransformation",
             "name": "transformation1",
             "builtInTransformationSettings": {
+              "filter": [
+                {
+                  "type": "Filter",
+                  "description": "filter-datapoint",
+                  "inputs": [
+                    "temperature.Value",
+                    "\"Tag 10\".Value"
+                  ],
+                  "expression": "$1 > 9000 && $2 >= 8000"
+                }
+              ],
               "map": [
                 {
+                  "type": "passThrough",
                   "inputs": [
                     "*"
                   ],
                   "output": "*"
-                },
-                {
-                  "inputs": [
-                    "$context(quality).*"
-                  ],
-                  "output": "enriched.*"
-                }
-              ],
-              "datasets": [
-                {
-                  "key": "quality",
-                  "inputs": [
-                    "$source.country",
-                    "$context.country"
-                  ],
-                  "expression": "$1 == $2"
                 }
               ]
             }
@@ -56,8 +52,8 @@
             "operationType": "Destination",
             "name": "destination1",
             "destinationSettings": {
-              "endpointRef": "adx-endpoint",
-              "dataDestination": "mytable"
+              "endpointRef": "aio-builtin-broker-endpoint",
+              "dataDestination": "data/filtered/thermostat"
             }
           }
         ]
