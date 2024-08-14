@@ -1,0 +1,114 @@
+{
+  "parameters": {
+    "geography": "us",
+    "api-version": "2023-03-01-preview",
+    "datasetId": "218fda98-e638-0edf-5ef7-28491ff3bed4",
+    "collectionId": "unit"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "unit",
+        "title": "Unit",
+        "description": "The unit feature class defines a physical and non-overlapping area that can be occupied and traversed by a navigating agent. A unit can be a hallway, a room, a courtyard, and so on.",
+        "ontology": "Facility-2.0",
+        "geometryType": "Polygon",
+        "properties": [
+          {
+            "name": "externalId",
+            "required": false,
+            "type": "text"
+          },
+          {
+            "name": "originalId",
+            "required": false,
+            "type": "text"
+          },
+          {
+            "name": "categoryId",
+            "required": true,
+            "type": {
+              "featureId": "category"
+            }
+          },
+          {
+            "name": "isOpenArea",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "isRoutable",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "levelId",
+            "required": true,
+            "type": {
+              "featureId": "level"
+            }
+          },
+          {
+            "name": "occupants",
+            "required": false,
+            "type": {
+              "array": {
+                "featureId": "directoryInfo"
+              }
+            }
+          },
+          {
+            "name": "addressId",
+            "required": false,
+            "type": {
+              "featureId": "directoryInfo"
+            }
+          },
+          {
+            "name": "addressRoomNumber",
+            "required": false,
+            "type": "text"
+          },
+          {
+            "name": "name",
+            "required": false,
+            "type": "text"
+          },
+          {
+            "name": "nameSubtitle",
+            "required": false,
+            "type": "text"
+          },
+          {
+            "name": "nameAlt",
+            "required": false,
+            "type": "text"
+          },
+          {
+            "name": "anchorPoint",
+            "required": false,
+            "type": {
+              "geometry": [
+                "Point"
+              ],
+              "isFragmented": false,
+              "srid": 4326
+            }
+          }
+        ],
+        "links": [
+          {
+            "href": "https://us.atlas.microsoft.com/features/datasets/218fda98-e638-0edf-5ef7-28491ff3bed4/collections/unit/definition",
+            "rel": "self",
+            "title": "Metadata catalogue for unit"
+          },
+          {
+            "href": "https://us.atlas.microsoft.com/features/datasets/218fda98-e638-0edf-5ef7-28491ff3bed4/collections/unit/items",
+            "rel": "items",
+            "title": "Unit"
+          }
+        ]
+      }
+    }
+  }
+}

@@ -4048,7 +4048,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ManagedIdentityCredentialResource"
+              "$ref": "#/definitions/CredentialResource"
             }
           }
         ],
@@ -4056,7 +4056,7 @@
           "200": {
             "description": "OK.",
             "schema": {
-              "$ref": "#/definitions/ManagedIdentityCredentialResource"
+              "$ref": "#/definitions/CredentialResource"
             }
           },
           "default": {
@@ -4106,7 +4106,7 @@
           "200": {
             "description": "OK.",
             "schema": {
-              "$ref": "#/definitions/ManagedIdentityCredentialResource"
+              "$ref": "#/definitions/CredentialResource"
             }
           },
           "304": {
@@ -4754,6 +4754,337 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/adfcdcs": {
+      "get": {
+        "tags": [
+          "changeDataCapture"
+        ],
+        "operationId": "ChangeDataCapture_ListByFactory",
+        "x-ms-examples": {
+          "ChangeDataCapture_ListByFactory": {
+            "$ref": "./examples/ChangeDataCapture_ListByFactory.json"
+          }
+        },
+        "description": "Lists all resources of type change data capture.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/factoryName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/ChangeDataCaptureListResponse"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Azure Data Factory service.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/adfcdcs/{changeDataCaptureName}": {
+      "put": {
+        "tags": [
+          "changeDataCapture"
+        ],
+        "operationId": "ChangeDataCapture_CreateOrUpdate",
+        "x-ms-examples": {
+          "ChangeDataCapture_Create": {
+            "$ref": "./examples/ChangeDataCapture_Create.json"
+          },
+          "ChangeDataCapture_Update": {
+            "$ref": "./examples/ChangeDataCapture_Update.json"
+          }
+        },
+        "description": "Creates or updates a change data capture resource.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/factoryName"
+          },
+          {
+            "$ref": "#/parameters/changeDataCaptureName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "description": "ETag of the change data capture entity. Should only be specified for update, for which it should match existing entity or can be * for unconditional update."
+          },
+          {
+            "name": "changeDataCapture",
+            "description": "Change data capture resource definition.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ChangeDataCaptureResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/ChangeDataCaptureResource"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Azure Data Factory service.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "changeDataCapture"
+        ],
+        "operationId": "ChangeDataCapture_Get",
+        "x-ms-examples": {
+          "ChangeDataCapture_Get": {
+            "$ref": "./examples/ChangeDataCapture_Get.json"
+          }
+        },
+        "description": "Gets a change data capture.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/factoryName"
+          },
+          {
+            "$ref": "#/parameters/changeDataCaptureName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "If-None-Match",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "description": "ETag of the change data capture entity. Should only be specified for get. If the ETag matches the existing entity tag, or if * was provided, then no content will be returned."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/ChangeDataCaptureResource"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Azure Data Factory service.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "changeDataCapture"
+        ],
+        "operationId": "ChangeDataCapture_Delete",
+        "x-ms-examples": {
+          "ChangeDataCapture_Delete": {
+            "$ref": "./examples/ChangeDataCapture_Delete.json"
+          }
+        },
+        "description": "Deletes a change data capture.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/factoryName"
+          },
+          {
+            "$ref": "#/parameters/changeDataCaptureName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK."
+          },
+          "204": {
+            "description": "No Content."
+          },
+          "default": {
+            "description": "An error response received from the Azure Data Factory service.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/adfcdcs/{changeDataCaptureName}/start": {
+      "post": {
+        "tags": [
+          "changeDataCapture"
+        ],
+        "operationId": "ChangeDataCapture_Start",
+        "x-ms-examples": {
+          "ChangeDataCapture_Start": {
+            "$ref": "./examples/ChangeDataCapture_Start.json"
+          }
+        },
+        "description": "Starts a change data capture.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/factoryName"
+          },
+          {
+            "$ref": "#/parameters/changeDataCaptureName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Change data capture has been started successfully."
+          },
+          "default": {
+            "description": "An error response received from the Azure Data Factory service.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/adfcdcs/{changeDataCaptureName}/stop": {
+      "post": {
+        "tags": [
+          "changeDataCapture"
+        ],
+        "operationId": "ChangeDataCapture_Stop",
+        "x-ms-examples": {
+          "ChangeDataCapture_Stop": {
+            "$ref": "./examples/ChangeDataCapture_Stop.json"
+          }
+        },
+        "description": "Stops a change data capture.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/factoryName"
+          },
+          {
+            "$ref": "#/parameters/changeDataCaptureName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Change data capture has been stopped successfully."
+          },
+          "default": {
+            "description": "An error response received from the Azure Data Factory service.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/adfcdcs/{changeDataCaptureName}/status": {
+      "get": {
+        "tags": [
+          "changeDataCapture"
+        ],
+        "operationId": "ChangeDataCapture_Status",
+        "x-ms-examples": {
+          "ChangeDataCapture_Start": {
+            "$ref": "./examples/ChangeDataCapture_Status.json"
+          }
+        },
+        "description": "Gets the current status for the change data capture resource.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/factoryName"
+          },
+          {
+            "$ref": "#/parameters/changeDataCaptureName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/ChangeDataCaptureStatusResponse"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Azure Data Factory service.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -4889,10 +5220,12 @@
         },
         "secretName": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The name of the secret in Azure Key Vault. Type: string (or Expression with resultType string)."
         },
         "secretVersion": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The version of the secret in Azure Key Vault. The default value is the latest version of the secret. Type: string (or Expression with resultType string)."
         }
       },
@@ -6045,6 +6378,28 @@
         "properties"
       ]
     },
+    "ChangeDataCaptureResource": {
+      "description": "Change data capture resource type.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SubResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "./entityTypes/ChangeDataCapture.json#/definitions/ChangeDataCapture",
+          "description": "Properties of the change data capture."
+        }
+      },
+      "additionalProperties": {
+        "type": "object"
+      },
+      "required": [
+        "properties"
+      ]
+    },
     "TriggerFilterParameters": {
       "description": "Query parameters for triggers.",
       "type": "object",
@@ -6856,6 +7211,30 @@
         }
       }
     },
+    "ChangeDataCaptureListResponse": {
+      "description": "A list of change data capture resources.",
+      "type": "object",
+      "required": [
+        "value"
+      ],
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "Lists all resources of type change data capture.",
+          "items": {
+            "$ref": "#/definitions/ChangeDataCaptureResource"
+          }
+        },
+        "nextLink": {
+          "description": "The link to the next page of results, if any remaining results exist.",
+          "type": "string"
+        }
+      }
+    },
+    "ChangeDataCaptureStatusResponse": {
+      "description": "Current status of the change data capture resource.",
+      "type": "string"
+    },
     "CreateDataFlowDebugSessionRequest": {
       "description": "Request body structure for creating data flow debug session.",
       "type": "object",
@@ -6918,6 +7297,7 @@
         },
         "folderPath": {
           "description": "Folder path for staging blob. Type: string (or Expression with resultType string)",
+          "x-ms-format": "dfe-string",
           "type": "object"
         }
       }
@@ -7265,7 +7645,7 @@
           "type": "array",
           "description": "List of credentials.",
           "items": {
-            "$ref": "#/definitions/ManagedIdentityCredentialResource"
+            "$ref": "#/definitions/CredentialResource"
           }
         },
         "nextLink": {
@@ -7285,24 +7665,6 @@
         "properties": {
           "$ref": "./entityTypes/ManagedPrivateEndpoint.json#/definitions/ManagedPrivateEndpoint",
           "description": "Managed private endpoint properties."
-        }
-      },
-      "required": [
-        "properties"
-      ]
-    },
-    "ManagedIdentityCredentialResource": {
-      "description": "Credential resource type.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/SubResource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "$ref": "./entityTypes/Credential.json#/definitions/ManagedIdentityCredential",
-          "description": "Managed Identity Credential properties."
         }
       },
       "required": [
@@ -7666,6 +8028,17 @@
     "triggerName": {
       "name": "triggerName",
       "description": "The trigger name.",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[A-Za-z0-9_][^<>*#.%&:\\\\+?/]*$",
+      "minLength": 1,
+      "maxLength": 260,
+      "x-ms-parameter-location": "method"
+    },
+    "changeDataCaptureName": {
+      "name": "changeDataCaptureName",
+      "description": "The change data capture name.",
       "in": "path",
       "required": true,
       "type": "string",

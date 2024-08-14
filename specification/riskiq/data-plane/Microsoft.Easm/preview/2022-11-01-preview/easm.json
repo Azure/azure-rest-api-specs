@@ -1,0 +1,5291 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "Defender EASM discovers and maps your digital attack surface to provide an \"outside-in\" perspective using probes to discover assets. The assets are provided with detailed metadata associated, including vulnerabilities, configurations and web components, allowing customers to view and prioritize external risk. The EASM REST API enables you to develop clients that integrate with your application.",
+    "title": "Defender EASM",
+    "version": "2022-11-01-preview"
+  },
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{endpoint}",
+    "parameters": [
+      {
+        "$ref": "#/parameters/EndpointParameter"
+      }
+    ],
+    "useSchemePrefix": true
+  },
+  "schemes": [
+    "https"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/workspaces/{workspaceName}/assets": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/FilterParameter"
+          },
+          {
+            "$ref": "#/parameters/OrderByParameter"
+          },
+          {
+            "$ref": "#/parameters/SkipParameter"
+          },
+          {
+            "$ref": "#/parameters/MaxPageSizeParameter"
+          },
+          {
+            "$ref": "#/parameters/MarkParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AssetPageResponse"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "Assets"
+        ],
+        "operationId": "Assets_List",
+        "summary": "Retrieve a list of assets for the provided search parameters.",
+        "x-ms-examples": {
+          "Assets": {
+            "$ref": "./examples/Assets_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "itemName": "content",
+          "nextLinkName": "nextLink"
+        }
+      },
+      "post": {
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/FilterParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AssetUpdateRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/TaskResponse"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "Assets"
+        ],
+        "operationId": "Assets_Update",
+        "summary": "Update labels on assets matching the provided filter.",
+        "x-ms-examples": {
+          "Assets": {
+            "$ref": "./examples/Assets_Update.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/workspaces/{workspaceName}/assets/{assetId}": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AssetIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AssetResponse"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "Assets"
+        ],
+        "operationId": "Assets_Get",
+        "summary": "Retrieve an asset by assetId.",
+        "x-ms-examples": {
+          "Assets": {
+            "$ref": "./examples/Assets_Get.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/workspaces/{workspaceName}/discoGroups": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/FilterParameter"
+          },
+          {
+            "$ref": "#/parameters/SkipParameter"
+          },
+          {
+            "$ref": "#/parameters/MaxPageSizeParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DiscoGroupPageResponse"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "Discovery Groups"
+        ],
+        "operationId": "DiscoveryGroups_List",
+        "summary": "Retrieve a list of discovery group for the provided search parameters.",
+        "x-ms-examples": {
+          "DiscoveryGroups": {
+            "$ref": "./examples/DiscoveryGroups_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "itemName": "content",
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/workspaces/{workspaceName}/discoGroups/{groupName}": {
+      "delete": {
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DiscoGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error",
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "Discovery Groups"
+        ],
+        "operationId": "DiscoveryGroups_Delete",
+        "summary": "Delete a discovery group with a given groupName.",
+        "x-ms-examples": {
+          "DiscoveryGroups": {
+            "$ref": "./examples/DiscoveryGroups_Delete.json"
+          }
+        }
+      },
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DiscoGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DiscoGroupResponse"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "Discovery Groups"
+        ],
+        "operationId": "DiscoveryGroups_Get",
+        "summary": "Retrieve a discovery group with a given groupName.",
+        "x-ms-examples": {
+          "DiscoveryGroups": {
+            "$ref": "./examples/DiscoveryGroups_Get.json"
+          }
+        }
+      },
+      "put": {
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DiscoGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DiscoGroupRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DiscoGroupResponse"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "Discovery Groups"
+        ],
+        "operationId": "DiscoveryGroups_Put",
+        "summary": "Create a discovery group with a given groupName.",
+        "x-ms-examples": {
+          "DiscoveryGroups": {
+            "$ref": "./examples/DiscoveryGroups_Put.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/workspaces/{workspaceName}/discoGroups/{groupName}/runs": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DiscoGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/FilterParameter"
+          },
+          {
+            "$ref": "#/parameters/SkipParameter"
+          },
+          {
+            "$ref": "#/parameters/MaxPageSizeParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DiscoRunPageResponse"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "Discovery Groups"
+        ],
+        "operationId": "DiscoveryGroups_ListRuns",
+        "summary": "Retrieve a collection of discovery run results for a discovery group with a given groupName.",
+        "x-ms-examples": {
+          "DiscoveryGroups": {
+            "$ref": "./examples/DiscoveryGroups_ListRuns.json"
+          }
+        },
+        "x-ms-pageable": {
+          "itemName": "content",
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/workspaces/{workspaceName}/discoGroups/{groupName}:run": {
+      "post": {
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DiscoGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error",
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "Discovery Groups"
+        ],
+        "operationId": "DiscoveryGroups_Run",
+        "summary": "Run a discovery group with a given groupName.",
+        "x-ms-examples": {
+          "DiscoveryGroups": {
+            "$ref": "./examples/DiscoveryGroups_Run.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/workspaces/{workspaceName}/discoGroups/{groupName}:validate": {
+      "post": {
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DiscoGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DiscoGroupRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "If validation succeeds, an empty response object will be returned.  If validation fails, the response object will by populated with the 'errors' property containing the details for each individual validation failure.",
+            "schema": {
+              "$ref": "#/definitions/ValidateResponse"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "Discovery Groups"
+        ],
+        "operationId": "DiscoveryGroups_Validate",
+        "summary": "Validate a discovery group with a given groupName.",
+        "x-ms-examples": {
+          "DiscoveryGroups": {
+            "$ref": "./examples/DiscoveryGroups_Validate.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/workspaces/{workspaceName}/discoTemplates": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/FilterParameter"
+          },
+          {
+            "$ref": "#/parameters/SkipParameter"
+          },
+          {
+            "$ref": "#/parameters/MaxPageSizeParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DiscoTemplatePageResponse"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "Discovery Templates"
+        ],
+        "operationId": "DiscoveryTemplates_List",
+        "summary": "Retrieve a list of disco templates for the provided search parameters.",
+        "x-ms-examples": {
+          "DiscoveryTemplates": {
+            "$ref": "./examples/DiscoveryTemplates_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "itemName": "content",
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/workspaces/{workspaceName}/discoTemplates/{templateId}": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DiscoTemplateIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DiscoTemplateResponse"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "Discovery Templates"
+        ],
+        "operationId": "DiscoveryTemplates_Get",
+        "summary": "Retrieve a disco template with a given templateId.",
+        "x-ms-examples": {
+          "DiscoveryTemplates": {
+            "$ref": "./examples/DiscoveryTemplates_Get.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/workspaces/{workspaceName}/reports/assets:getBillable": {
+      "post": {
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ReportBillableAssetSummaryResponse"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "Reports"
+        ],
+        "operationId": "Reports_Billable",
+        "summary": "Get billable assets summary for the workspace.",
+        "x-ms-examples": {
+          "Reports": {
+            "$ref": "./examples/Reports_Billable.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/workspaces/{workspaceName}/reports/assets:getSnapshot": {
+      "post": {
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ReportAssetSnapshotRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ReportAssetSnapshotResponse"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "Reports"
+        ],
+        "operationId": "Reports_Snapshot",
+        "summary": "Get the most recent snapshot of asset summary values for the snapshot request.",
+        "x-ms-examples": {
+          "Reports": {
+            "$ref": "./examples/Reports_Snapshot.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/workspaces/{workspaceName}/reports/assets:getSummary": {
+      "post": {
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ReportAssetSummaryRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ReportAssetSummaryResponse"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "Reports"
+        ],
+        "operationId": "Reports_Summary",
+        "summary": "Get asset summary details for the summary request.",
+        "x-ms-examples": {
+          "Retrieve asset counts for all metrics associated with metric categories": {
+            "$ref": "./examples/Reports_Summary_MetricCategories.json"
+          },
+          "Retrieve asset counts for metrics": {
+            "$ref": "./examples/Reports_Summary_Metrics.json"
+          },
+          "Retrieve asset counts for the provided filters": {
+            "$ref": "./examples/Reports_Summary_Assets.json"
+          },
+          "Retrieve asset counts for the provided filters split by groupBy field": {
+            "$ref": "./examples/Reports_Summary_Assets_GroupBy.json"
+          },
+          "Retrieve asset counts for the provided filters split by groupBy field and segmentBy field": {
+            "$ref": "./examples/Reports_Summary_Assets_GroupBy_SegmentBy.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/workspaces/{workspaceName}/savedFilters": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/FilterParameter"
+          },
+          {
+            "$ref": "#/parameters/SkipParameter"
+          },
+          {
+            "$ref": "#/parameters/MaxPageSizeParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SavedFilterPageResponse"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "Saved Filters"
+        ],
+        "operationId": "SavedFilters_List",
+        "summary": "Retrieve a list of saved filters for the provided search parameters.",
+        "x-ms-examples": {
+          "SavedFilters": {
+            "$ref": "./examples/SavedFilters_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "itemName": "content",
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/workspaces/{workspaceName}/savedFilters/{filterName}": {
+      "delete": {
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SavedFilterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error",
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "Saved Filters"
+        ],
+        "operationId": "SavedFilters_Delete",
+        "summary": "Delete a saved filter with a given filterName.",
+        "x-ms-examples": {
+          "SavedFilters": {
+            "$ref": "./examples/SavedFilters_Delete.json"
+          }
+        }
+      },
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SavedFilterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SavedFilterResponse"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "Saved Filters"
+        ],
+        "operationId": "SavedFilters_Get",
+        "summary": "Retrieve a saved filter by filterName.",
+        "x-ms-examples": {
+          "SavedFilters": {
+            "$ref": "./examples/SavedFilters_Get.json"
+          }
+        }
+      },
+      "put": {
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SavedFilterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SavedFilterRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SavedFilterResponse"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "Saved Filters"
+        ],
+        "operationId": "SavedFilters_Put",
+        "summary": "Create or update a saved filter with a given filterName.",
+        "x-ms-examples": {
+          "SavedFilters": {
+            "$ref": "./examples/SavedFilters_Put.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/workspaces/{workspaceName}/tasks": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/FilterParameter"
+          },
+          {
+            "$ref": "#/parameters/SkipParameter"
+          },
+          {
+            "$ref": "#/parameters/MaxPageSizeParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/TaskPageResponse"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "Tasks"
+        ],
+        "operationId": "Tasks_List",
+        "summary": "Retrieve a list of tasks for the provided search parameters.",
+        "x-ms-examples": {
+          "Tasks": {
+            "$ref": "./examples/Tasks_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "itemName": "content",
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/workspaces/{workspaceName}/tasks/{taskId}": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/TaskIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/TaskResponse"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "Tasks"
+        ],
+        "operationId": "Tasks_Get",
+        "summary": "Retrieve a task by taskId.",
+        "x-ms-examples": {
+          "Tasks": {
+            "$ref": "./examples/Tasks_Get.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/workspaces/{workspaceName}/tasks/{taskId}:cancel": {
+      "post": {
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/TaskIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/TaskResponse"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "Tasks"
+        ],
+        "operationId": "Tasks_Cancel",
+        "summary": "Cancel a task by taskId.",
+        "x-ms-examples": {
+          "Tasks": {
+            "$ref": "./examples/Tasks_Cancel.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AlexaInfo": {
+      "properties": {
+        "alexaRank": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "category": {
+          "type": "string"
+        },
+        "count": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "firstSeen": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "lastSeen": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "recent": {
+          "type": "boolean"
+        }
+      },
+      "type": "object"
+    },
+    "AsAsset": {
+      "properties": {
+        "adminContacts": {
+          "items": {
+            "$ref": "#/definitions/ObservedString"
+          },
+          "type": "array"
+        },
+        "adminNames": {
+          "items": {
+            "$ref": "#/definitions/ObservedString"
+          },
+          "type": "array"
+        },
+        "adminOrgs": {
+          "items": {
+            "$ref": "#/definitions/ObservedString"
+          },
+          "type": "array"
+        },
+        "adminPhones": {
+          "items": {
+            "$ref": "#/definitions/ObservedString"
+          },
+          "type": "array"
+        },
+        "asNames": {
+          "items": {
+            "$ref": "#/definitions/ObservedString"
+          },
+          "type": "array"
+        },
+        "asn": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "count": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "countries": {
+          "items": {
+            "$ref": "#/definitions/ObservedString"
+          },
+          "type": "array"
+        },
+        "detailedFromWhoisAt": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "firstSeen": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "lastSeen": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "orgIds": {
+          "items": {
+            "$ref": "#/definitions/ObservedString"
+          },
+          "type": "array"
+        },
+        "orgNames": {
+          "items": {
+            "$ref": "#/definitions/ObservedString"
+          },
+          "type": "array"
+        },
+        "registrantContacts": {
+          "items": {
+            "$ref": "#/definitions/ObservedString"
+          },
+          "type": "array"
+        },
+        "registrantNames": {
+          "items": {
+            "$ref": "#/definitions/ObservedString"
+          },
+          "type": "array"
+        },
+        "registrantPhones": {
+          "items": {
+            "$ref": "#/definitions/ObservedString"
+          },
+          "type": "array"
+        },
+        "registrarCreatedAt": {
+          "items": {
+            "$ref": "#/definitions/ObservedLong"
+          },
+          "type": "array"
+        },
+        "registrarNames": {
+          "items": {
+            "$ref": "#/definitions/ObservedString"
+          },
+          "type": "array"
+        },
+        "registrarUpdatedAt": {
+          "items": {
+            "$ref": "#/definitions/ObservedLong"
+          },
+          "type": "array"
+        },
+        "registries": {
+          "items": {
+            "$ref": "#/definitions/ObservedString"
+          },
+          "type": "array"
+        },
+        "sources": {
+          "items": {
+            "$ref": "#/definitions/Source"
+          },
+          "type": "array"
+        },
+        "technicalContacts": {
+          "items": {
+            "$ref": "#/definitions/ObservedString"
+          },
+          "type": "array"
+        },
+        "technicalNames": {
+          "items": {
+            "$ref": "#/definitions/ObservedString"
+          },
+          "type": "array"
+        },
+        "technicalOrgs": {
+          "items": {
+            "$ref": "#/definitions/ObservedString"
+          },
+          "type": "array"
+        },
+        "technicalPhones": {
+          "items": {
+            "$ref": "#/definitions/ObservedString"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "AssetPageResponse": {
+      "description": "The page of assets that match the provided metric.",
+      "properties": {
+        "content": {
+          "description": "The items in the current page of results.",
+          "items": {
+            "$ref": "#/definitions/AssetResponse"
+          },
+          "type": "array"
+        },
+        "first": {
+          "description": "Whether or not this is the first page of results.",
+          "type": "boolean"
+        },
+        "last": {
+          "description": "Whether or not this is the last page of results.",
+          "type": "boolean"
+        },
+        "mark": {
+          "description": "The cursor mark to be used on the next request.  Not set if using paging.",
+          "type": "string"
+        },
+        "nextLink": {
+          "description": "The link to access the next page of results.  Not set if at the end of the result set.",
+          "type": "string"
+        },
+        "number": {
+          "description": "The page number requested.  Set to -1 if using a cursor.",
+          "format": "int32",
+          "type": "integer"
+        },
+        "numberOfElements": {
+          "description": "The number of items in the current page of results.",
+          "format": "int32",
+          "type": "integer"
+        },
+        "size": {
+          "description": "The page size requested.",
+          "format": "int32",
+          "type": "integer"
+        },
+        "totalElements": {
+          "description": "The total number of items available in the full result set.",
+          "format": "int64",
+          "type": "integer"
+        },
+        "totalPages": {
+          "description": "The total number of pages available in the full result set.",
+          "format": "int32",
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "AssetResponse": {
+      "description": "The items in the current page of results.",
+      "properties": {
+        "auditTrail": {
+          "description": "The history of how this asset was pulled into the workspace through the discovery process.",
+          "items": {
+            "$ref": "#/definitions/AuditTrailItem"
+          },
+          "type": "array"
+        },
+        "createdDate": {
+          "description": "The date this asset was first added to this workspace.",
+          "format": "date-time",
+          "type": "string"
+        },
+        "discoGroupName": {
+          "description": "The name of the DiscoveryGroup that brought added this asset to the workspace.",
+          "type": "string"
+        },
+        "displayName": {
+          "description": "The name that can be used for display purposes.",
+          "type": "string"
+        },
+        "externalId": {
+          "description": "An optional customer provided identifier for this asset.",
+          "type": "string"
+        },
+        "id": {
+          "description": "The system generated unique id for the resource.",
+          "type": "string"
+        },
+        "kind": {
+          "description": "The kind of asset.",
+          "enum": [
+            "as",
+            "contact",
+            "domain",
+            "host",
+            "ipAddress",
+            "ipBlock",
+            "page",
+            "sslCert"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "AssetResponseKind"
+          }
+        },
+        "labels": {
+          "description": "Customer labels assigned to this asset.",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "name": {
+          "description": "The caller provided unique name for the resource.",
+          "type": "string"
+        },
+        "reason": {
+          "type": "string"
+        },
+        "state": {
+          "enum": [
+            "candidate",
+            "confirmed",
+            "dismissed",
+            "candidateInvestigate",
+            "associatedPartner",
+            "associatedThirdparty",
+            "archived"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "AssetResponseState"
+          }
+        },
+        "updatedDate": {
+          "description": "The date this asset was last updated for this workspace.",
+          "format": "date-time",
+          "type": "string"
+        },
+        "uuid": {
+          "description": "Global UUID for the asset.",
+          "format": "uuid",
+          "type": "string"
+        },
+        "wildcard": {
+          "description": "An indicator of whether this asset represents a wildcard rollup of assets on this domain.",
+          "type": "boolean"
+        }
+      },
+      "type": "object",
+      "discriminator": "kind",
+      "required": [
+        "kind"
+      ]
+    },
+    "AssetSecurityPolicy": {
+      "properties": {
+        "count": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "description": {
+          "type": "string"
+        },
+        "firstSeen": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "isAffected": {
+          "type": "boolean"
+        },
+        "lastSeen": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "policyName": {
+          "type": "string"
+        },
+        "recent": {
+          "type": "boolean"
+        },
+        "sources": {
+          "items": {
+            "$ref": "#/definitions/Source"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "AssetSummaryResponse": {
+      "description": "The collection of asset summaries.",
+      "properties": {
+        "children": {
+          "description": "The corresponding child entities.  For metric categories this will contain metrics.  For filters with groupBy and segmentBy this will contain facets.",
+          "items": {
+            "$ref": "#/definitions/AssetSummaryResponse"
+          },
+          "type": "array"
+        },
+        "count": {
+          "description": "The count of assets matching the request parameters.",
+          "format": "int64",
+          "type": "integer"
+        },
+        "description": {
+          "description": "The description of the summary response.  Filters don't have a description.",
+          "type": "string"
+        },
+        "displayName": {
+          "description": "The name of the summary response.  Depending on the request time this will either be the asset filter, risk category, or risk metric.",
+          "type": "string"
+        },
+        "filter": {
+          "description": "If the request is for an asset filter, this will contain the corresponding filter.",
+          "type": "string"
+        },
+        "labelName": {
+          "description": "An optional label used to filter requests results.",
+          "type": "string"
+        },
+        "link": {
+          "description": "The link to the corresponding asset details.",
+          "type": "string"
+        },
+        "metric": {
+          "description": "If the request is for a metric, this will contain the requested unique metric name.",
+          "type": "string"
+        },
+        "metricCategory": {
+          "description": "If the request is for a metric category, this will contain the requested unique category name.",
+          "type": "string"
+        },
+        "updatedAt": {
+          "description": "The last time risk categories or risk metrics were captured. Set to the current time for asset filter requests, which always pull the live asset data.",
+          "format": "date-time",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "AssetUpdateRequest": {
+      "description": "A request body used to update an asset.",
+      "properties": {
+        "externalId": {
+          "description": "A string which can be used to identify the asset in external systems.",
+          "type": "string"
+        },
+        "labels": {
+          "additionalProperties": {
+            "type": "boolean"
+          },
+          "description": "Any Labels to update the asset with.",
+          "type": "object"
+        },
+        "state": {
+          "description": "The state to update the asset to.",
+          "enum": [
+            "candidate",
+            "confirmed",
+            "dismissed",
+            "candidateInvestigate",
+            "associatedPartner",
+            "associatedThirdparty"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "AssetUpdateRequestState"
+          }
+        },
+        "transfers": {
+          "description": "A list of asset types to cascade the updates to.",
+          "enum": [
+            "as",
+            "contact",
+            "domain",
+            "host",
+            "ipAddress",
+            "ipBlock",
+            "page",
+            "sslCert"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "AssetUpdateRequestTransfers"
+          }
+        }
+      },
+      "type": "object"
+    },
+    "Attribute": {
+      "properties": {
+        "attributeType": {
+          "type": "string"
+        },
+        "attributeValue": {
+          "type": "string"
+        },
+        "count": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "firstSeen": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "lastSeen": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "recent": {
+          "type": "boolean"
+        },
+        "sources": {
+          "items": {
+            "$ref": "#/definitions/Source"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "AuditTrailItem": {
+      "description": "The history of how this asset was pulled into the workspace through the discovery process.",
+      "properties": {
+        "displayName": {
+          "description": "The name that can be used for display purposes.",
+          "type": "string"
+        },
+        "id": {
+          "description": "The system generated unique id for the resource.",
+          "type": "string"
+        },
+        "kind": {
+          "description": "The kind of asset.",
+          "enum": [
+            "as",
+            "contact",
+            "domain",
+            "host",
+            "ipAddress",
+            "ipBlock",
+            "page",
+            "sslCert"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "AuditTrailItemKind"
+          }
+        },
+        "name": {
+          "description": "The caller provided unique name for the resource.",
+          "type": "string"
+        },
+        "reason": {
+          "description": "An explanation of why this audit trail node was discovered from the previous node.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "Banner": {
+      "properties": {
+        "banner": {
+          "type": "string"
+        },
+        "bannerMetadata": {
+          "type": "string"
+        },
+        "count": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "firstSeen": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "lastSeen": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "port": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "recent": {
+          "type": "boolean"
+        },
+        "scanType": {
+          "type": "string"
+        },
+        "sha256": {
+          "type": "string"
+        },
+        "sources": {
+          "items": {
+            "$ref": "#/definitions/Source"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "CVSS3Summary": {
+      "properties": {
+        "attackComplexity": {
+          "type": "string"
+        },
+        "attackVector": {
+          "type": "string"
+        },
+        "availabilityImpact": {
+          "type": "string"
+        },
+        "baseScore": {
+          "format": "float",
+          "type": "number"
+        },
+        "baseSeverity": {
+          "type": "string"
+        },
+        "confidentialityImpact": {
+          "type": "string"
+        },
+        "exploitCodeMaturity": {
+          "type": "string"
+        },
+        "exploitabilityScore": {
+          "format": "float",
+          "type": "number"
+        },
+        "impactScore": {
+          "format": "float",
+          "type": "number"
+        },
+        "integrityImpact": {
+          "type": "string"
+        },
+        "privilegesRequired": {
+          "type": "string"
+        },
+        "remediationLevel": {
+          "type": "string"
+        },
+        "reportConfidence": {
+          "type": "string"
+        },
+        "scope": {
+          "type": "string"
+        },
+        "userInteraction": {
+          "type": "string"
+        },
+        "vectorString": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "ContactAsset": {
+      "properties": {
+        "count": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "email": {
+          "type": "string"
+        },
+        "firstSeen": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "lastSeen": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "names": {
+          "items": {
+            "$ref": "#/definitions/ObservedString"
+          },
+          "type": "array"
+        },
+        "organizations": {
+          "items": {
+            "$ref": "#/definitions/ObservedString"
+          },
+          "type": "array"
+        },
+        "sources": {
+          "items": {
+            "$ref": "#/definitions/Source"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "Cookie": {
+      "properties": {
+        "cookieDomain": {
+          "type": "string"
+        },
+        "cookieExpiryDate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "cookieName": {
+          "type": "string"
+        },
+        "count": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "firstSeen": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "lastSeen": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "recent": {
+          "type": "boolean"
+        }
+      },
+      "type": "object"
+    },
+    "Cve": {
+      "properties": {
+        "cvss3Summary": {
+          "$ref": "#/definitions/CVSS3Summary"
+        },
+        "cvssScore": {
+          "format": "float",
+          "type": "number"
+        },
+        "cweId": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "DependentResource": {
+      "properties": {
+        "host": {
+          "type": "string"
+        },
+        "cached": {
+          "type": "boolean"
+        },
+        "contentType": {
+          "type": "string"
+        },
+        "count": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "firstSeen": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "firstSeenCrawlGuid": {
+          "type": "string"
+        },
+        "firstSeenPageGuid": {
+          "type": "string"
+        },
+        "firstSeenResourceGuid": {
+          "type": "string"
+        },
+        "lastObservedActualSriHash": {
+          "type": "string"
+        },
+        "lastObservedExpectedSriHash": {
+          "type": "string"
+        },
+        "lastObservedValidation": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "lastObservedViolation": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "lastSeen": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "lastSeenCrawlGuid": {
+          "type": "string"
+        },
+        "lastSeenPageGuid": {
+          "type": "string"
+        },
+        "lastSeenResourceGuid": {
+          "type": "string"
+        },
+        "md5": {
+          "type": "string"
+        },
+        "responseBodyMinhash": {
+          "items": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "type": "array"
+        },
+        "responseBodySize": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "sha256": {
+          "type": "string"
+        },
+        "sha384": {
+          "type": "string"
+        },
+        "sha512": {
+          "type": "string"
+        },
+        "sriChecks": {
+          "items": {
+            "$ref": "#/definitions/SubResourceIntegrityCheck"
+          },
+          "type": "array"
+        },
+        "url": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "DiscoGroupPageResponse": {
+      "properties": {
+        "content": {
+          "description": "The items in the current page of results.",
+          "items": {
+            "$ref": "#/definitions/DiscoGroupResponse"
+          },
+          "type": "array"
+        },
+        "first": {
+          "description": "Whether or not this is the first page of results.",
+          "type": "boolean"
+        },
+        "last": {
+          "description": "Whether or not this is the last page of results.",
+          "type": "boolean"
+        },
+        "nextLink": {
+          "description": "The link to access the next page of results.  Not set if at the end of the result set.",
+          "type": "string"
+        },
+        "number": {
+          "description": "The page number requested.",
+          "format": "int32",
+          "type": "integer"
+        },
+        "numberOfElements": {
+          "description": "The number of items in the current page of results.",
+          "format": "int32",
+          "type": "integer"
+        },
+        "size": {
+          "description": "The page size requested.",
+          "format": "int32",
+          "type": "integer"
+        },
+        "totalElements": {
+          "description": "The total number of items available in the full result set.",
+          "format": "int64",
+          "type": "integer"
+        },
+        "totalPages": {
+          "description": "The total number of pages available in the full result set.",
+          "format": "int32",
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "DiscoGroupRequest": {
+      "description": "A request body used to create a discovery group.",
+      "properties": {
+        "description": {
+          "description": "The description for a disco group.",
+          "type": "string"
+        },
+        "excludes": {
+          "description": "The list of excludes used for the disco group runs, aka assets to exclude from the discovery algorithm.",
+          "items": {
+            "$ref": "#/definitions/DiscoSource"
+          },
+          "type": "array"
+        },
+        "frequencyMilliseconds": {
+          "description": "The frequency at which the disco group is supposed to be rerun in milliseconds.",
+          "format": "int64",
+          "type": "integer"
+        },
+        "names": {
+          "description": "The list of names used for the disco group runs.",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "seeds": {
+          "description": "The list of seeds used for the disco group runs.",
+          "items": {
+            "$ref": "#/definitions/DiscoSource"
+          },
+          "type": "array"
+        },
+        "templateId": {
+          "description": "The unique identifier for the disco template used for the disco group creation.",
+          "type": "string"
+        },
+        "tier": {
+          "description": "The tier for the disco group which will affect the algorithm used for the disco runs in this group.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "DiscoGroupResponse": {
+      "properties": {
+        "createdDate": {
+          "description": "The date for the disco group was created.",
+          "format": "date-time",
+          "type": "string"
+        },
+        "description": {
+          "description": "The description for a disco group.",
+          "type": "string"
+        },
+        "displayName": {
+          "description": "The name that can be used for display purposes.",
+          "type": "string"
+        },
+        "excludes": {
+          "description": "The list of excludes used for the disco group runs, aka assets to exclude from the discovery algorithm.",
+          "items": {
+            "$ref": "#/definitions/DiscoSource"
+          },
+          "type": "array"
+        },
+        "frequencyMilliseconds": {
+          "description": "The frequency at which the disco group is supposed to be rerun in milliseconds.",
+          "format": "int64",
+          "type": "integer"
+        },
+        "id": {
+          "description": "The system generated unique id for the resource.",
+          "type": "string"
+        },
+        "latestRun": {
+          "$ref": "#/definitions/DiscoRunResponse"
+        },
+        "name": {
+          "description": "The caller provided unique name for the resource.",
+          "type": "string"
+        },
+        "names": {
+          "description": "The list of names used for the disco group runs.",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "seeds": {
+          "description": "The list of seeds used for the disco group runs.",
+          "items": {
+            "$ref": "#/definitions/DiscoSource"
+          },
+          "type": "array"
+        },
+        "templateId": {
+          "description": "The unique identifier for the disco template used for the disco group creation.",
+          "type": "string"
+        },
+        "tier": {
+          "description": "The tier for the disco group which will affect the algorithm used for the disco runs in this group.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "DiscoRunPageResponse": {
+      "properties": {
+        "content": {
+          "description": "The items in the current page of results.",
+          "items": {
+            "$ref": "#/definitions/DiscoRunResponse"
+          },
+          "type": "array"
+        },
+        "first": {
+          "description": "Whether or not this is the first page of results.",
+          "type": "boolean"
+        },
+        "last": {
+          "description": "Whether or not this is the last page of results.",
+          "type": "boolean"
+        },
+        "nextLink": {
+          "description": "The link to access the next page of results.  Not set if at the end of the result set.",
+          "type": "string"
+        },
+        "number": {
+          "description": "The page number requested.",
+          "format": "int32",
+          "type": "integer"
+        },
+        "numberOfElements": {
+          "description": "The number of items in the current page of results.",
+          "format": "int32",
+          "type": "integer"
+        },
+        "size": {
+          "description": "The page size requested.",
+          "format": "int32",
+          "type": "integer"
+        },
+        "totalElements": {
+          "description": "The total number of items available in the full result set.",
+          "format": "int64",
+          "type": "integer"
+        },
+        "totalPages": {
+          "description": "The total number of pages available in the full result set.",
+          "format": "int32",
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "DiscoRunResponse": {
+      "description": "The latest run of this disco group with some limited information, null if the group has never been run.",
+      "properties": {
+        "completedDate": {
+          "description": "The date for when the disco run was completed by the system.",
+          "format": "date-time",
+          "type": "string"
+        },
+        "excludes": {
+          "description": "The list of excludes used for the disco run, aka assets to exclude from the discovery algorithm.",
+          "items": {
+            "$ref": "#/definitions/DiscoSource"
+          },
+          "type": "array"
+        },
+        "names": {
+          "description": "The list of names used for the disco run.",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "seeds": {
+          "description": "The list of seeds used for the disco run.",
+          "items": {
+            "$ref": "#/definitions/DiscoSource"
+          },
+          "type": "array"
+        },
+        "startedDate": {
+          "description": "The date for when the disco run was actually started by the system.",
+          "format": "date-time",
+          "type": "string"
+        },
+        "state": {
+          "description": "The State of the disco run.",
+          "enum": [
+            "pending",
+            "running",
+            "completed",
+            "failed"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "DiscoRunResponseState"
+          }
+        },
+        "submittedDate": {
+          "description": "The date for when the disco run was created in the system.",
+          "format": "date-time",
+          "type": "string"
+        },
+        "tier": {
+          "description": "The tier which will affect the algorithm used for the disco run.",
+          "type": "string"
+        },
+        "totalAssetsFoundCount": {
+          "description": "The total count of assets that were found this disco run.",
+          "format": "int64",
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "DiscoSource": {
+      "description": "Source entity used to drive discovery.",
+      "properties": {
+        "kind": {
+          "description": "The kind of disco source.",
+          "enum": [
+            "as",
+            "attribute",
+            "contact",
+            "domain",
+            "host",
+            "ipBlock"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "DiscoSourceKind"
+          }
+        },
+        "name": {
+          "description": "The name for the disco source.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "DiscoTemplatePageResponse": {
+      "properties": {
+        "content": {
+          "description": "The items in the current page of results.",
+          "items": {
+            "$ref": "#/definitions/DiscoTemplateResponse"
+          },
+          "type": "array"
+        },
+        "first": {
+          "description": "Whether or not this is the first page of results.",
+          "type": "boolean"
+        },
+        "last": {
+          "description": "Whether or not this is the last page of results.",
+          "type": "boolean"
+        },
+        "nextLink": {
+          "description": "The link to access the next page of results.  Not set if at the end of the result set.",
+          "type": "string"
+        },
+        "number": {
+          "description": "The page number requested.",
+          "format": "int32",
+          "type": "integer"
+        },
+        "numberOfElements": {
+          "description": "The number of items in the current page of results.",
+          "format": "int32",
+          "type": "integer"
+        },
+        "size": {
+          "description": "The page size requested.",
+          "format": "int32",
+          "type": "integer"
+        },
+        "totalElements": {
+          "description": "The total number of items available in the full result set.",
+          "format": "int64",
+          "type": "integer"
+        },
+        "totalPages": {
+          "description": "The total number of pages available in the full result set.",
+          "format": "int32",
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "DiscoTemplateResponse": {
+      "description": "The items in the current page of results.",
+      "properties": {
+        "city": {
+          "description": "The name of the city.",
+          "type": "string"
+        },
+        "countryCode": {
+          "description": "The country code.",
+          "type": "string"
+        },
+        "displayName": {
+          "description": "The name that can be used for display purposes.",
+          "type": "string"
+        },
+        "id": {
+          "description": "The system generated unique id for the resource.",
+          "type": "string"
+        },
+        "industry": {
+          "description": "The name of the industry.",
+          "type": "string"
+        },
+        "name": {
+          "description": "The caller provided unique name for the resource.",
+          "type": "string"
+        },
+        "names": {
+          "description": "The list of disco template names.",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "region": {
+          "description": "The name of the region.",
+          "type": "string"
+        },
+        "seeds": {
+          "description": "The list of disco template seeds.",
+          "items": {
+            "$ref": "#/definitions/DiscoSource"
+          },
+          "type": "array"
+        },
+        "stateCode": {
+          "description": "The state code.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "DomainAsset": {
+      "properties": {
+        "adminContacts": {
+          "items": {
+            "$ref": "#/definitions/ObservedString"
+          },
+          "type": "array"
+        },
+        "adminNames": {
+          "items": {
+            "$ref": "#/definitions/ObservedString"
+          },
+          "type": "array"
+        },
+        "adminOrgs": {
+          "items": {
+            "$ref": "#/definitions/ObservedString"
+          },
+          "type": "array"
+        },
+        "adminPhones": {
+          "items": {
+            "$ref": "#/definitions/ObservedString"
+          },
+          "type": "array"
+        },
+        "alexaInfos": {
+          "items": {
+            "$ref": "#/definitions/AlexaInfo"
+          },
+          "type": "array"
+        },
+        "count": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "detailedFromWhoisAt": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "domain": {
+          "type": "string"
+        },
+        "domainStatuses": {
+          "items": {
+            "$ref": "#/definitions/ObservedString"
+          },
+          "type": "array"
+        },
+        "firstSeen": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "lastSeen": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "mailServers": {
+          "items": {
+            "$ref": "#/definitions/ObservedString"
+          },
+          "type": "array"
+        },
+        "nameServers": {
+          "items": {
+            "$ref": "#/definitions/ObservedString"
+          },
+          "type": "array"
+        },
+        "parkedDomain": {
+          "items": {
+            "$ref": "#/definitions/ObservedBoolean"
+          },
+          "type": "array"
+        },
+        "registrantContacts": {
+          "items": {
+            "$ref": "#/definitions/ObservedString"
+          },
+          "type": "array"
+        },
+        "registrantNames": {
+          "items": {
+            "$ref": "#/definitions/ObservedString"
+          },
+          "type": "array"
+        },
+        "registrantOrgs": {
+          "items": {
+            "$ref": "#/definitions/ObservedString"
+          },
+          "type": "array"
+        },
+        "registrantPhones": {
+          "items": {
+            "$ref": "#/definitions/ObservedString"
+          },
+          "type": "array"
+        },
+        "registrarCreatedAt": {
+          "items": {
+            "$ref": "#/definitions/ObservedLong"
+          },
+          "type": "array"
+        },
+        "registrarExpiresAt": {
+          "items": {
+            "$ref": "#/definitions/ObservedLong"
+          },
+          "type": "array"
+        },
+        "registrarIanaIds": {
+          "items": {
+            "$ref": "#/definitions/ObservedInteger"
+          },
+          "type": "array"
+        },
+        "registrarNames": {
+          "items": {
+            "$ref": "#/definitions/ObservedString"
+          },
+          "type": "array"
+        },
+        "registrarUpdatedAt": {
+          "items": {
+            "$ref": "#/definitions/ObservedLong"
+          },
+          "type": "array"
+        },
+        "soaRecords": {
+          "items": {
+            "$ref": "#/definitions/SoaRecord"
+          },
+          "type": "array"
+        },
+        "sources": {
+          "items": {
+            "$ref": "#/definitions/Source"
+          },
+          "type": "array"
+        },
+        "technicalContacts": {
+          "items": {
+            "$ref": "#/definitions/ObservedString"
+          },
+          "type": "array"
+        },
+        "technicalNames": {
+          "items": {
+            "$ref": "#/definitions/ObservedString"
+          },
+          "type": "array"
+        },
+        "technicalOrgs": {
+          "items": {
+            "$ref": "#/definitions/ObservedString"
+          },
+          "type": "array"
+        },
+        "technicalPhones": {
+          "items": {
+            "$ref": "#/definitions/ObservedString"
+          },
+          "type": "array"
+        },
+        "whoisId": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "whoisServers": {
+          "items": {
+            "$ref": "#/definitions/ObservedString"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "ErrorDetail": {
+      "description": "This is the top-level error object whose code matches the x-ms-error-code response header.",
+      "properties": {
+        "code": {
+          "description": "This is one of a server-defined set of error codes.",
+          "type": "string"
+        },
+        "details": {
+          "description": "This is an array of details about specific errors that led to this reported error.",
+          "items": {
+            "$ref": "#/definitions/ErrorDetail"
+          },
+          "type": "array"
+        },
+        "innererror": {
+          "$ref": "#/definitions/InnerError"
+        },
+        "message": {
+          "description": "This is a human-readable representation of the error.",
+          "type": "string"
+        },
+        "target": {
+          "description": "This is the error target.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ],
+      "type": "object"
+    },
+    "ErrorResponse": {
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ErrorDetail"
+        }
+      },
+      "required": [
+        "error"
+      ],
+      "type": "object"
+    },
+    "GuidPair": {
+      "properties": {
+        "crawlStateGuid": {
+          "type": "string"
+        },
+        "loadDate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "pageGuid": {
+          "type": "string"
+        },
+        "recent": {
+          "type": "boolean"
+        }
+      },
+      "type": "object"
+    },
+    "HostAsset": {
+      "properties": {
+        "host": {
+          "type": "string"
+        },
+        "asns": {
+          "items": {
+            "$ref": "#/definitions/ObservedLong"
+          },
+          "type": "array"
+        },
+        "attributes": {
+          "items": {
+            "$ref": "#/definitions/Attribute"
+          },
+          "type": "array"
+        },
+        "banners": {
+          "items": {
+            "$ref": "#/definitions/Banner"
+          },
+          "type": "array"
+        },
+        "childHosts": {
+          "items": {
+            "$ref": "#/definitions/ObservedString"
+          },
+          "type": "array"
+        },
+        "cnames": {
+          "items": {
+            "$ref": "#/definitions/ObservedString"
+          },
+          "type": "array"
+        },
+        "cookies": {
+          "items": {
+            "$ref": "#/definitions/Cookie"
+          },
+          "type": "array"
+        },
+        "count": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "domain": {
+          "type": "string"
+        },
+        "domainAsset": {
+          "$ref": "#/definitions/DomainAsset"
+        },
+        "firstSeen": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "headers": {
+          "items": {
+            "$ref": "#/definitions/ObservedHeader"
+          },
+          "type": "array"
+        },
+        "hostCore": {
+          "$ref": "#/definitions/HostCore"
+        },
+        "ipAddresses": {
+          "items": {
+            "$ref": "#/definitions/ObservedString"
+          },
+          "type": "array"
+        },
+        "ipBlocks": {
+          "items": {
+            "$ref": "#/definitions/IpBlock"
+          },
+          "type": "array"
+        },
+        "ipv4": {
+          "items": {
+            "$ref": "#/definitions/ObservedBoolean"
+          },
+          "type": "array"
+        },
+        "ipv6": {
+          "items": {
+            "$ref": "#/definitions/ObservedBoolean"
+          },
+          "type": "array"
+        },
+        "isWildcard": {
+          "items": {
+            "$ref": "#/definitions/ObservedBoolean"
+          },
+          "type": "array"
+        },
+        "lastSeen": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "location": {
+          "items": {
+            "$ref": "#/definitions/ObservedLocation"
+          },
+          "type": "array"
+        },
+        "mxRecord": {
+          "items": {
+            "$ref": "#/definitions/ObservedBoolean"
+          },
+          "type": "array"
+        },
+        "nsRecord": {
+          "items": {
+            "$ref": "#/definitions/ObservedBoolean"
+          },
+          "type": "array"
+        },
+        "nxdomain": {
+          "items": {
+            "$ref": "#/definitions/ObservedBoolean"
+          },
+          "type": "array"
+        },
+        "parentHosts": {
+          "items": {
+            "$ref": "#/definitions/ObservedString"
+          },
+          "type": "array"
+        },
+        "resourceUrls": {
+          "items": {
+            "$ref": "#/definitions/ResourceUrl"
+          },
+          "type": "array"
+        },
+        "responseBodies": {
+          "items": {
+            "$ref": "#/definitions/ObservedString"
+          },
+          "type": "array"
+        },
+        "scanMetadata": {
+          "items": {
+            "$ref": "#/definitions/ScanMetadata"
+          },
+          "type": "array"
+        },
+        "services": {
+          "items": {
+            "$ref": "#/definitions/Service"
+          },
+          "type": "array"
+        },
+        "sources": {
+          "items": {
+            "$ref": "#/definitions/Source"
+          },
+          "type": "array"
+        },
+        "sslCerts": {
+          "items": {
+            "$ref": "#/definitions/SslCertAsset"
+          },
+          "type": "array"
+        },
+        "sslServerConfig": {
+          "items": {
+            "$ref": "#/definitions/SslServerConfig"
+          },
+          "type": "array"
+        },
+        "webComponents": {
+          "items": {
+            "$ref": "#/definitions/WebComponent"
+          },
+          "type": "array"
+        },
+        "webserver": {
+          "items": {
+            "$ref": "#/definitions/ObservedBoolean"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "HostCore": {
+      "properties": {
+        "host": {
+          "type": "string"
+        },
+        "alexaRank": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "blacklistCauseCount": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "blacklistCauseFirstSeen": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "blacklistCauseLastSeen": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "blacklistResourceCount": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "blacklistResourceFirstSeen": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "blacklistResourceLastSeen": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "blacklistSequenceCount": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "blacklistSequenceFirstSeen": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "blacklistSequenceLastSeen": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "count": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "domain": {
+          "type": "string"
+        },
+        "domainMalwareReputationScore": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "domainPhishReputationScore": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "domainReputationScore": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "domainScamReputationScore": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "domainSpamReputationScore": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "firstSeen": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "hostMalwareReputationScore": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "hostPhishReputationScore": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "hostReputationScore": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "hostScamReputationScore": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "hostSpamReputationScore": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "lastSeen": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "malwareCauseCount": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "malwareResourceCount": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "malwareSequenceCount": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "phishCauseCount": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "phishResourceCount": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "phishSequenceCount": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "scamCauseCount": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "scamResourceCount": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "scamSequenceCount": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "spamCauseCount": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "spamResourceCount": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "spamSequenceCount": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "uuid": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "InnerError": {
+      "description": "This is an object containing more specific information than the current object about the error.",
+      "properties": {
+        "code": {
+          "description": "This is a more specific error code than was provided by the containing error.",
+          "type": "string"
+        },
+        "value": {
+          "description": "This is an additional field representing the value that caused the error to help with debugging.",
+          "type": "object"
+        }
+      },
+      "type": "object"
+    },
+    "IpAddressAsset": {
+      "properties": {
+        "asns": {
+          "items": {
+            "$ref": "#/definitions/ObservedLong"
+          },
+          "type": "array"
+        },
+        "attributes": {
+          "items": {
+            "$ref": "#/definitions/Attribute"
+          },
+          "type": "array"
+        },
+        "banners": {
+          "items": {
+            "$ref": "#/definitions/Banner"
+          },
+          "type": "array"
+        },
+        "cookies": {
+          "items": {
+            "$ref": "#/definitions/Cookie"
+          },
+          "type": "array"
+        },
+        "count": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "firstSeen": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "headers": {
+          "items": {
+            "$ref": "#/definitions/ObservedHeader"
+          },
+          "type": "array"
+        },
+        "hosts": {
+          "items": {
+            "$ref": "#/definitions/ObservedString"
+          },
+          "type": "array"
+        },
+        "ipAddress": {
+          "type": "string"
+        },
+        "ipBlocks": {
+          "items": {
+            "$ref": "#/definitions/IpBlock"
+          },
+          "type": "array"
+        },
+        "ipv4": {
+          "type": "boolean"
+        },
+        "ipv6": {
+          "type": "boolean"
+        },
+        "lastSeen": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "location": {
+          "items": {
+            "$ref": "#/definitions/ObservedLocation"
+          },
+          "type": "array"
+        },
+        "mxRecord": {
+          "items": {
+            "$ref": "#/definitions/ObservedBoolean"
+          },
+          "type": "array"
+        },
+        "netRanges": {
+          "items": {
+            "$ref": "#/definitions/ObservedString"
+          },
+          "type": "array"
+        },
+        "nsRecord": {
+          "items": {
+            "$ref": "#/definitions/ObservedBoolean"
+          },
+          "type": "array"
+        },
+        "nxdomain": {
+          "items": {
+            "$ref": "#/definitions/ObservedBoolean"
+          },
+          "type": "array"
+        },
+        "reputations": {
+          "items": {
+            "$ref": "#/definitions/Reputation"
+          },
+          "type": "array"
+        },
+        "scanMetadata": {
+          "items": {
+            "$ref": "#/definitions/ScanMetadata"
+          },
+          "type": "array"
+        },
+        "services": {
+          "items": {
+            "$ref": "#/definitions/Service"
+          },
+          "type": "array"
+        },
+        "sources": {
+          "items": {
+            "$ref": "#/definitions/Source"
+          },
+          "type": "array"
+        },
+        "sslCerts": {
+          "items": {
+            "$ref": "#/definitions/SslCertAsset"
+          },
+          "type": "array"
+        },
+        "sslServerConfig": {
+          "items": {
+            "$ref": "#/definitions/SslServerConfig"
+          },
+          "type": "array"
+        },
+        "webComponents": {
+          "items": {
+            "$ref": "#/definitions/WebComponent"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "IpBlock": {
+      "properties": {
+        "count": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "firstSeen": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "ipBlock": {
+          "type": "string"
+        },
+        "lastSeen": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "recent": {
+          "type": "boolean"
+        },
+        "sources": {
+          "items": {
+            "$ref": "#/definitions/Source"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "IpBlockAsset": {
+      "properties": {
+        "adminContacts": {
+          "items": {
+            "$ref": "#/definitions/ObservedString"
+          },
+          "type": "array"
+        },
+        "adminNames": {
+          "items": {
+            "$ref": "#/definitions/ObservedString"
+          },
+          "type": "array"
+        },
+        "adminOrgs": {
+          "items": {
+            "$ref": "#/definitions/ObservedString"
+          },
+          "type": "array"
+        },
+        "adminPhones": {
+          "items": {
+            "$ref": "#/definitions/ObservedString"
+          },
+          "type": "array"
+        },
+        "asns": {
+          "items": {
+            "$ref": "#/definitions/ObservedLong"
+          },
+          "type": "array"
+        },
+        "bgpPrefixes": {
+          "items": {
+            "$ref": "#/definitions/ObservedString"
+          },
+          "type": "array"
+        },
+        "count": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "detailedFromWhoisAt": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "endIp": {
+          "type": "string"
+        },
+        "firstSeen": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "ipBlock": {
+          "type": "string"
+        },
+        "ipv4": {
+          "type": "boolean"
+        },
+        "ipv6": {
+          "type": "boolean"
+        },
+        "lastSeen": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "location": {
+          "items": {
+            "$ref": "#/definitions/ObservedLocation"
+          },
+          "type": "array"
+        },
+        "netNames": {
+          "items": {
+            "$ref": "#/definitions/ObservedString"
+          },
+          "type": "array"
+        },
+        "netRanges": {
+          "items": {
+            "$ref": "#/definitions/ObservedString"
+          },
+          "type": "array"
+        },
+        "registrantContacts": {
+          "items": {
+            "$ref": "#/definitions/ObservedString"
+          },
+          "type": "array"
+        },
+        "registrantNames": {
+          "items": {
+            "$ref": "#/definitions/ObservedString"
+          },
+          "type": "array"
+        },
+        "registrantOrgs": {
+          "items": {
+            "$ref": "#/definitions/ObservedString"
+          },
+          "type": "array"
+        },
+        "registrantPhones": {
+          "items": {
+            "$ref": "#/definitions/ObservedString"
+          },
+          "type": "array"
+        },
+        "registrarCreatedAt": {
+          "items": {
+            "$ref": "#/definitions/ObservedLong"
+          },
+          "type": "array"
+        },
+        "registrarExpiresAt": {
+          "items": {
+            "$ref": "#/definitions/ObservedLong"
+          },
+          "type": "array"
+        },
+        "registrarUpdatedAt": {
+          "items": {
+            "$ref": "#/definitions/ObservedLong"
+          },
+          "type": "array"
+        },
+        "reputations": {
+          "items": {
+            "$ref": "#/definitions/Reputation"
+          },
+          "type": "array"
+        },
+        "sources": {
+          "items": {
+            "$ref": "#/definitions/Source"
+          },
+          "type": "array"
+        },
+        "startIp": {
+          "type": "string"
+        },
+        "technicalContacts": {
+          "items": {
+            "$ref": "#/definitions/ObservedString"
+          },
+          "type": "array"
+        },
+        "technicalNames": {
+          "items": {
+            "$ref": "#/definitions/ObservedString"
+          },
+          "type": "array"
+        },
+        "technicalOrgs": {
+          "items": {
+            "$ref": "#/definitions/ObservedString"
+          },
+          "type": "array"
+        },
+        "technicalPhones": {
+          "items": {
+            "$ref": "#/definitions/ObservedString"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "Location": {
+      "properties": {
+        "areaCode": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "city": {
+          "type": "string"
+        },
+        "countryCode": {
+          "type": "string"
+        },
+        "countryName": {
+          "type": "string"
+        },
+        "dmaCode": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "latitude": {
+          "format": "float",
+          "type": "number"
+        },
+        "longitude": {
+          "format": "float",
+          "type": "number"
+        },
+        "metroCodeId": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "postalCode": {
+          "type": "string"
+        },
+        "region": {
+          "type": "string"
+        },
+        "regionName": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "ObservedBoolean": {
+      "properties": {
+        "count": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "firstSeen": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "lastSeen": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "recent": {
+          "type": "boolean"
+        },
+        "sources": {
+          "items": {
+            "$ref": "#/definitions/Source"
+          },
+          "type": "array"
+        },
+        "value": {
+          "type": "boolean"
+        }
+      },
+      "type": "object"
+    },
+    "ObservedHeader": {
+      "properties": {
+        "count": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "firstSeen": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "headerName": {
+          "type": "string"
+        },
+        "headerValue": {
+          "type": "string"
+        },
+        "lastSeen": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "recent": {
+          "type": "boolean"
+        }
+      },
+      "type": "object"
+    },
+    "ObservedInteger": {
+      "properties": {
+        "count": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "firstSeen": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "lastSeen": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "recent": {
+          "type": "boolean"
+        },
+        "sources": {
+          "items": {
+            "$ref": "#/definitions/Source"
+          },
+          "type": "array"
+        },
+        "value": {
+          "format": "int32",
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "ObservedIntegers": {
+      "properties": {
+        "count": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "firstSeen": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "lastSeen": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "recent": {
+          "type": "boolean"
+        },
+        "sources": {
+          "items": {
+            "$ref": "#/definitions/Source"
+          },
+          "type": "array"
+        },
+        "values": {
+          "items": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "ObservedLocation": {
+      "properties": {
+        "count": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "firstSeen": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "lastSeen": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "recent": {
+          "type": "boolean"
+        },
+        "sources": {
+          "items": {
+            "$ref": "#/definitions/Source"
+          },
+          "type": "array"
+        },
+        "value": {
+          "$ref": "#/definitions/Location"
+        }
+      },
+      "type": "object"
+    },
+    "ObservedLong": {
+      "properties": {
+        "count": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "firstSeen": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "lastSeen": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "recent": {
+          "type": "boolean"
+        },
+        "sources": {
+          "items": {
+            "$ref": "#/definitions/Source"
+          },
+          "type": "array"
+        },
+        "value": {
+          "format": "int64",
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "ObservedPortState": {
+      "properties": {
+        "count": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "firstSeen": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "lastSeen": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "port": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "recent": {
+          "type": "boolean"
+        },
+        "value": {
+          "enum": [
+            "open",
+            "closed",
+            "filtered"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "ObservedPortStateValue"
+          }
+        }
+      },
+      "type": "object"
+    },
+    "ObservedString": {
+      "properties": {
+        "count": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "firstSeen": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "lastSeen": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "recent": {
+          "type": "boolean"
+        },
+        "sources": {
+          "items": {
+            "$ref": "#/definitions/Source"
+          },
+          "type": "array"
+        },
+        "value": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "PageAsset": {
+      "properties": {
+        "host": {
+          "type": "string"
+        },
+        "asns": {
+          "items": {
+            "$ref": "#/definitions/ObservedLong"
+          },
+          "type": "array"
+        },
+        "assetSecurityPolicies": {
+          "items": {
+            "$ref": "#/definitions/AssetSecurityPolicy"
+          },
+          "type": "array"
+        },
+        "attributes": {
+          "items": {
+            "$ref": "#/definitions/Attribute"
+          },
+          "type": "array"
+        },
+        "cause": {
+          "$ref": "#/definitions/PageCause"
+        },
+        "cdns": {
+          "items": {
+            "$ref": "#/definitions/ObservedString"
+          },
+          "type": "array"
+        },
+        "charsets": {
+          "items": {
+            "$ref": "#/definitions/ObservedString"
+          },
+          "type": "array"
+        },
+        "cnames": {
+          "items": {
+            "$ref": "#/definitions/ObservedString"
+          },
+          "type": "array"
+        },
+        "contentLengths": {
+          "items": {
+            "$ref": "#/definitions/ObservedLong"
+          },
+          "type": "array"
+        },
+        "contentTypes": {
+          "items": {
+            "$ref": "#/definitions/ObservedString"
+          },
+          "type": "array"
+        },
+        "cookies": {
+          "items": {
+            "$ref": "#/definitions/Cookie"
+          },
+          "type": "array"
+        },
+        "count": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "domain": {
+          "type": "string"
+        },
+        "domainAsset": {
+          "$ref": "#/definitions/DomainAsset"
+        },
+        "errors": {
+          "items": {
+            "$ref": "#/definitions/ObservedString"
+          },
+          "type": "array"
+        },
+        "finalAsns": {
+          "items": {
+            "$ref": "#/definitions/ObservedLong"
+          },
+          "type": "array"
+        },
+        "finalIpAddresses": {
+          "items": {
+            "$ref": "#/definitions/ObservedString"
+          },
+          "type": "array"
+        },
+        "finalIpBlocks": {
+          "items": {
+            "$ref": "#/definitions/IpBlock"
+          },
+          "type": "array"
+        },
+        "finalResponseCodes": {
+          "items": {
+            "$ref": "#/definitions/ObservedInteger"
+          },
+          "type": "array"
+        },
+        "finalUrls": {
+          "items": {
+            "$ref": "#/definitions/ObservedString"
+          },
+          "type": "array"
+        },
+        "firstSeen": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "frames": {
+          "items": {
+            "$ref": "#/definitions/ObservedBoolean"
+          },
+          "type": "array"
+        },
+        "fullDomMinhashSignatures": {
+          "items": {
+            "$ref": "#/definitions/ObservedIntegers"
+          },
+          "type": "array"
+        },
+        "gdprAssetSecurityPolicies": {
+          "items": {
+            "$ref": "#/definitions/AssetSecurityPolicy"
+          },
+          "type": "array"
+        },
+        "guids": {
+          "items": {
+            "$ref": "#/definitions/GuidPair"
+          },
+          "type": "array"
+        },
+        "httpMethod": {
+          "type": "string"
+        },
+        "httpResponseCodes": {
+          "items": {
+            "$ref": "#/definitions/ObservedInteger"
+          },
+          "type": "array"
+        },
+        "httpResponseMessages": {
+          "items": {
+            "$ref": "#/definitions/ObservedString"
+          },
+          "type": "array"
+        },
+        "ipAddresses": {
+          "items": {
+            "$ref": "#/definitions/ObservedString"
+          },
+          "type": "array"
+        },
+        "ipBlocks": {
+          "items": {
+            "$ref": "#/definitions/IpBlock"
+          },
+          "type": "array"
+        },
+        "ipv4": {
+          "items": {
+            "$ref": "#/definitions/ObservedBoolean"
+          },
+          "type": "array"
+        },
+        "ipv6": {
+          "items": {
+            "$ref": "#/definitions/ObservedBoolean"
+          },
+          "type": "array"
+        },
+        "isRootUrl": {
+          "type": "boolean"
+        },
+        "languages": {
+          "items": {
+            "$ref": "#/definitions/ObservedString"
+          },
+          "type": "array"
+        },
+        "lastSeen": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "location": {
+          "items": {
+            "$ref": "#/definitions/ObservedLocation"
+          },
+          "type": "array"
+        },
+        "nonHtmlFrames": {
+          "items": {
+            "$ref": "#/definitions/ObservedBoolean"
+          },
+          "type": "array"
+        },
+        "parkedPage": {
+          "items": {
+            "$ref": "#/definitions/ObservedBoolean"
+          },
+          "type": "array"
+        },
+        "redirectType": {
+          "enum": [
+            "httpHeader",
+            "metaRefresh",
+            "javascript",
+            "final"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "PageAssetRedirectType"
+          }
+        },
+        "redirectUrls": {
+          "items": {
+            "$ref": "#/definitions/ObservedString"
+          },
+          "type": "array"
+        },
+        "referrer": {
+          "type": "string"
+        },
+        "resourceUrls": {
+          "items": {
+            "$ref": "#/definitions/ResourceUrl"
+          },
+          "type": "array"
+        },
+        "responseBodies": {
+          "items": {
+            "$ref": "#/definitions/ObservedString"
+          },
+          "type": "array"
+        },
+        "responseBodyHashSignatures": {
+          "items": {
+            "$ref": "#/definitions/ObservedString"
+          },
+          "type": "array"
+        },
+        "responseBodyMinhashSignatures": {
+          "items": {
+            "$ref": "#/definitions/ObservedIntegers"
+          },
+          "type": "array"
+        },
+        "responseHeaders": {
+          "items": {
+            "$ref": "#/definitions/ObservedHeader"
+          },
+          "type": "array"
+        },
+        "responseTimes": {
+          "items": {
+            "$ref": "#/definitions/ObservedLong"
+          },
+          "type": "array"
+        },
+        "rootUrl": {
+          "$ref": "#/definitions/ObservedBoolean"
+        },
+        "service": {
+          "type": "string"
+        },
+        "services": {
+          "items": {
+            "$ref": "#/definitions/Service"
+          },
+          "type": "array"
+        },
+        "siteStatus": {
+          "type": "string"
+        },
+        "sources": {
+          "items": {
+            "$ref": "#/definitions/Source"
+          },
+          "type": "array"
+        },
+        "sslCerts": {
+          "items": {
+            "$ref": "#/definitions/SslCertAsset"
+          },
+          "type": "array"
+        },
+        "sslServerConfig": {
+          "items": {
+            "$ref": "#/definitions/SslServerConfig"
+          },
+          "type": "array"
+        },
+        "successful": {
+          "items": {
+            "$ref": "#/definitions/ObservedBoolean"
+          },
+          "type": "array"
+        },
+        "titles": {
+          "items": {
+            "$ref": "#/definitions/ObservedString"
+          },
+          "type": "array"
+        },
+        "undirectedContent": {
+          "items": {
+            "$ref": "#/definitions/ObservedBoolean"
+          },
+          "type": "array"
+        },
+        "url": {
+          "type": "string"
+        },
+        "webComponents": {
+          "items": {
+            "$ref": "#/definitions/WebComponent"
+          },
+          "type": "array"
+        },
+        "windowNames": {
+          "items": {
+            "$ref": "#/definitions/ObservedString"
+          },
+          "type": "array"
+        },
+        "windows": {
+          "items": {
+            "$ref": "#/definitions/ObservedBoolean"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "PageCause": {
+      "properties": {
+        "cause": {
+          "type": "string"
+        },
+        "causeElementXPath": {
+          "type": "string"
+        },
+        "domChangeIndex": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "location": {
+          "type": "string"
+        },
+        "loopDetected": {
+          "type": "boolean"
+        },
+        "possibleMatches": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "version": {
+          "format": "int32",
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "Port": {
+      "properties": {
+        "count": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "firstSeen": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "lastSeen": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "port": {
+          "format": "int32",
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "ReportAssetSnapshotRequest": {
+      "description": "A request body used to retrieve an asset report snapshot.",
+      "properties": {
+        "labelName": {
+          "description": "The name of the label to retrieve a snapshot for.",
+          "type": "string"
+        },
+        "metric": {
+          "description": "The metric to retrieve a snapshot for.",
+          "type": "string"
+        },
+        "page": {
+          "description": "The page to retrieve.",
+          "format": "int32",
+          "type": "integer"
+        },
+        "size": {
+          "description": "The number of assets per page.",
+          "format": "int32",
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "ReportAssetSnapshotResponse": {
+      "description": "A snapshot of assets captured daily for the provided metric.  Asset details only contain primary properties.  Detailed asset data can be retrieved from the asset endpoints.",
+      "properties": {
+        "assets": {
+          "$ref": "#/definitions/AssetPageResponse"
+        },
+        "description": {
+          "description": "A description of what the metric represents.",
+          "type": "string"
+        },
+        "displayName": {
+          "description": "The name of the metric.",
+          "type": "string"
+        },
+        "labelName": {
+          "description": "The customer label that was filtered on, if one was provided.",
+          "type": "string"
+        },
+        "metric": {
+          "description": "The unique metric name.",
+          "type": "string"
+        },
+        "updatedAt": {
+          "description": "The last time this asset data was updated on this metric.",
+          "format": "date-time",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "ReportAssetSummaryRequest": {
+      "description": "A request body used to retrieve summary asset information. One and only one collection of summary identifiers must be provided: filters, metrics, or metricCategories.",
+      "properties": {
+        "filters": {
+          "description": "Query filters to apply to the asset summary.",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "groupBy": {
+          "description": "A parameter to group the assets by (first level facet field), only used when the chosen summary identifier is filters.",
+          "type": "string"
+        },
+        "labelName": {
+          "description": "Currently unused.",
+          "type": "string"
+        },
+        "metricCategories": {
+          "description": "Categories to retrieve risk reporting data for.",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "metrics": {
+          "description": "Metrics to retrieve risk reporting data for.",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "segmentBy": {
+          "description": "A parameter to segment the assets by (second level facet field), only used when the chosen summary identifier is filters.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "ReportAssetSummaryResponse": {
+      "properties": {
+        "assetSummaries": {
+          "description": "The collection of asset summaries.",
+          "items": {
+            "$ref": "#/definitions/AssetSummaryResponse"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "ReportBillableAssetBreakdown": {
+      "description": "The breakdown of billable asset counts for each asset type.",
+      "properties": {
+        "count": {
+          "description": "The number of assets of this type.",
+          "format": "int64",
+          "type": "integer"
+        },
+        "kind": {
+          "description": "The kind of billable asset.",
+          "enum": [
+            "domain",
+            "host",
+            "ipAddress"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "ReportBillableAssetBreakdownKind"
+          }
+        }
+      },
+      "type": "object"
+    },
+    "ReportBillableAssetSnapshotResponse": {
+      "properties": {
+        "assetBreakdown": {
+          "description": "The breakdown of billable asset counts for each asset type.",
+          "items": {
+            "$ref": "#/definitions/ReportBillableAssetBreakdown"
+          },
+          "type": "array"
+        },
+        "date": {
+          "description": "The date these assets were billed on.",
+          "format": "date",
+          "type": "string"
+        },
+        "total": {
+          "description": "The total number of billable assets for this date.",
+          "format": "int64",
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "ReportBillableAssetSummaryResponse": {
+      "properties": {
+        "assetSummaries": {
+          "items": {
+            "$ref": "#/definitions/ReportBillableAssetSnapshotResponse"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "Reputation": {
+      "properties": {
+        "cidr": {
+          "type": "string"
+        },
+        "firstSeen": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "lastSeen": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "listName": {
+          "type": "string"
+        },
+        "listUpdatedAt": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "recent": {
+          "type": "boolean"
+        },
+        "threatType": {
+          "type": "string"
+        },
+        "trusted": {
+          "type": "boolean"
+        }
+      },
+      "type": "object"
+    },
+    "ResourceUrl": {
+      "properties": {
+        "count": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "firstSeen": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "lastSeen": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "recent": {
+          "type": "boolean"
+        },
+        "resources": {
+          "items": {
+            "$ref": "#/definitions/DependentResource"
+          },
+          "type": "array"
+        },
+        "url": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "SavedFilterPageResponse": {
+      "properties": {
+        "content": {
+          "description": "The items in the current page of results.",
+          "items": {
+            "$ref": "#/definitions/SavedFilterResponse"
+          },
+          "type": "array"
+        },
+        "first": {
+          "description": "Whether or not this is the first page of results.",
+          "type": "boolean"
+        },
+        "last": {
+          "description": "Whether or not this is the last page of results.",
+          "type": "boolean"
+        },
+        "nextLink": {
+          "description": "The link to access the next page of results.  Not set if at the end of the result set.",
+          "type": "string"
+        },
+        "number": {
+          "description": "The page number requested.",
+          "format": "int32",
+          "type": "integer"
+        },
+        "numberOfElements": {
+          "description": "The number of items in the current page of results.",
+          "format": "int32",
+          "type": "integer"
+        },
+        "size": {
+          "description": "The page size requested.",
+          "format": "int32",
+          "type": "integer"
+        },
+        "totalElements": {
+          "description": "The total number of items available in the full result set.",
+          "format": "int64",
+          "type": "integer"
+        },
+        "totalPages": {
+          "description": "The total number of pages available in the full result set.",
+          "format": "int32",
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "SavedFilterRequest": {
+      "description": "A request body used to create a saved filter.",
+      "properties": {
+        "description": {
+          "description": "A human readable description of the saved filter.",
+          "type": "string"
+        },
+        "filter": {
+          "description": "An expression on the resource type that selects the resources to be returned.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "description",
+        "filter"
+      ],
+      "type": "object"
+    },
+    "SavedFilterResponse": {
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "displayName": {
+          "description": "The name that can be used for display purposes.",
+          "type": "string"
+        },
+        "filter": {
+          "type": "string"
+        },
+        "id": {
+          "description": "The system generated unique id for the resource.",
+          "type": "string"
+        },
+        "name": {
+          "description": "The caller provided unique name for the resource.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "ScanMetadata": {
+      "properties": {
+        "bannerMetadata": {
+          "type": "string"
+        },
+        "endScan": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "port": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "startScan": {
+          "format": "date-time",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "Service": {
+      "properties": {
+        "count": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "exceptions": {
+          "items": {
+            "$ref": "#/definitions/ObservedString"
+          },
+          "type": "array"
+        },
+        "firstSeen": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "lastSeen": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "port": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "portStates": {
+          "items": {
+            "$ref": "#/definitions/ObservedPortState"
+          },
+          "type": "array"
+        },
+        "recent": {
+          "type": "boolean"
+        },
+        "scheme": {
+          "type": "string"
+        },
+        "sources": {
+          "items": {
+            "$ref": "#/definitions/Source"
+          },
+          "type": "array"
+        },
+        "sslCerts": {
+          "items": {
+            "$ref": "#/definitions/SslCertAsset"
+          },
+          "type": "array"
+        },
+        "webComponents": {
+          "items": {
+            "$ref": "#/definitions/WebComponent"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "SoaRecord": {
+      "properties": {
+        "count": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "email": {
+          "type": "string"
+        },
+        "firstSeen": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "lastSeen": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "nameServer": {
+          "type": "string"
+        },
+        "recent": {
+          "type": "boolean"
+        },
+        "serialNumber": {
+          "format": "int64",
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "Source": {
+      "properties": {
+        "count": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "firstSeen": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "lastSeen": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "reason": {
+          "type": "string"
+        },
+        "source": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "SslCertAsset": {
+      "properties": {
+        "certificateAuthority": {
+          "type": "boolean"
+        },
+        "count": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "firstSeen": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "invalidAfter": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "invalidBefore": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "issuerAlternativeNames": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "issuerCommonNames": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "issuerCountry": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "issuerLocality": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "issuerOrganizationalUnits": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "issuerOrganizations": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "issuerState": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "keyAlgorithm": {
+          "type": "string"
+        },
+        "keySize": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "lastSeen": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "organizationalUnits": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "organizations": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "recent": {
+          "type": "boolean"
+        },
+        "selfSigned": {
+          "type": "boolean"
+        },
+        "serialNumber": {
+          "type": "string"
+        },
+        "sha1": {
+          "type": "string"
+        },
+        "sigAlgName": {
+          "type": "string"
+        },
+        "sigAlgOid": {
+          "type": "string"
+        },
+        "sources": {
+          "items": {
+            "$ref": "#/definitions/Source"
+          },
+          "type": "array"
+        },
+        "subjectAlternativeNames": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "subjectCommonNames": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "subjectCountry": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "subjectLocality": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "subjectOrganizationalUnits": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "subjectOrganizations": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "subjectState": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "validationType": {
+          "enum": [
+            "domainValidation",
+            "organizationValidation",
+            "extendedValidation"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "SslCertAssetValidationType"
+          }
+        },
+        "version": {
+          "format": "int32",
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "SslServerConfig": {
+      "properties": {
+        "cipherSuites": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "count": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "firstSeen": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "lastSeen": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "sources": {
+          "items": {
+            "$ref": "#/definitions/Source"
+          },
+          "type": "array"
+        },
+        "tlsVersions": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "SubResourceIntegrityCheck": {
+      "properties": {
+        "causePageUrl": {
+          "type": "string"
+        },
+        "count": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "crawlGuid": {
+          "type": "string"
+        },
+        "expectedHash": {
+          "type": "string"
+        },
+        "firstSeen": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "lastSeen": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "pageGuid": {
+          "type": "string"
+        },
+        "resourceGuid": {
+          "type": "string"
+        },
+        "violation": {
+          "type": "boolean"
+        }
+      },
+      "type": "object"
+    },
+    "TaskPageResponse": {
+      "properties": {
+        "content": {
+          "description": "The items in the current page of results.",
+          "items": {
+            "$ref": "#/definitions/TaskResponse"
+          },
+          "type": "array"
+        },
+        "first": {
+          "description": "Whether or not this is the first page of results.",
+          "type": "boolean"
+        },
+        "last": {
+          "description": "Whether or not this is the last page of results.",
+          "type": "boolean"
+        },
+        "nextLink": {
+          "description": "The link to access the next page of results.  Not set if at the end of the result set.",
+          "type": "string"
+        },
+        "number": {
+          "description": "The page number requested.",
+          "format": "int32",
+          "type": "integer"
+        },
+        "numberOfElements": {
+          "description": "The number of items in the current page of results.",
+          "format": "int32",
+          "type": "integer"
+        },
+        "size": {
+          "description": "The page size requested.",
+          "format": "int32",
+          "type": "integer"
+        },
+        "totalElements": {
+          "description": "The total number of items available in the full result set.",
+          "format": "int64",
+          "type": "integer"
+        },
+        "totalPages": {
+          "description": "The total number of pages available in the full result set.",
+          "format": "int32",
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "TaskResponse": {
+      "properties": {
+        "completedAt": {
+          "description": "The time the task completed.",
+          "format": "date-time",
+          "type": "string"
+        },
+        "id": {
+          "description": "The unique identifier of the task.",
+          "type": "string"
+        },
+        "lastPolledAt": {
+          "description": "The last time the status of the task was updated.",
+          "format": "date-time",
+          "type": "string"
+        },
+        "metadata": {
+          "additionalProperties": {},
+          "description": "Attributes unique to the task.  This differs by task type.",
+          "type": "object"
+        },
+        "phase": {
+          "description": "The phase the task is in.",
+          "enum": [
+            "running",
+            "polling",
+            "complete"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "TaskResponsePhase"
+          }
+        },
+        "reason": {
+          "description": "The reason the task was moved into its current state, if the task wasn't completed.",
+          "type": "string"
+        },
+        "startedAt": {
+          "description": "The time the task started.",
+          "format": "date-time",
+          "type": "string"
+        },
+        "state": {
+          "description": "The state the task is in.",
+          "enum": [
+            "pending",
+            "running",
+            "paused",
+            "complete",
+            "incomplete",
+            "failed",
+            "warning"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "TaskResponseState"
+          }
+        }
+      },
+      "type": "object"
+    },
+    "ValidateResponse": {
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ErrorDetail"
+        }
+      },
+      "type": "object"
+    },
+    "WebComponent": {
+      "properties": {
+        "count": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "cve": {
+          "items": {
+            "$ref": "#/definitions/Cve"
+          },
+          "type": "array"
+        },
+        "endOfLife": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "firstSeen": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "lastSeen": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "ports": {
+          "items": {
+            "$ref": "#/definitions/Port"
+          },
+          "type": "array"
+        },
+        "recent": {
+          "type": "boolean"
+        },
+        "ruleId": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "service": {
+          "type": "string"
+        },
+        "sources": {
+          "items": {
+            "$ref": "#/definitions/Source"
+          },
+          "type": "array"
+        },
+        "type": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "AsAssetResponse": {
+      "required": [
+        "asset"
+      ],
+      "type": "object",
+      "properties": {
+        "asset": {
+          "$ref": "#/definitions/AsAsset"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/AssetResponse"
+        }
+      ],
+      "x-ms-discriminator-value": "as"
+    },
+    "ContactAssetResponse": {
+      "required": [
+        "asset"
+      ],
+      "type": "object",
+      "properties": {
+        "asset": {
+          "$ref": "#/definitions/ContactAsset"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/AssetResponse"
+        }
+      ],
+      "x-ms-discriminator-value": "contact"
+    },
+    "DomainAssetResponse": {
+      "required": [
+        "asset"
+      ],
+      "type": "object",
+      "properties": {
+        "asset": {
+          "$ref": "#/definitions/DomainAsset"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/AssetResponse"
+        }
+      ],
+      "x-ms-discriminator-value": "domain"
+    },
+    "HostAssetResponse": {
+      "required": [
+        "asset"
+      ],
+      "type": "object",
+      "properties": {
+        "asset": {
+          "$ref": "#/definitions/HostAsset"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/AssetResponse"
+        }
+      ],
+      "x-ms-discriminator-value": "host"
+    },
+    "IpAddressAssetResponse": {
+      "required": [
+        "asset"
+      ],
+      "type": "object",
+      "properties": {
+        "asset": {
+          "$ref": "#/definitions/IpAddressAsset"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/AssetResponse"
+        }
+      ],
+      "x-ms-discriminator-value": "ipAddress"
+    },
+    "IpBlockAssetResponse": {
+      "required": [
+        "asset"
+      ],
+      "type": "object",
+      "properties": {
+        "asset": {
+          "$ref": "#/definitions/IpBlockAsset"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/AssetResponse"
+        }
+      ],
+      "x-ms-discriminator-value": "ipBlock"
+    },
+    "PageAssetResponse": {
+      "required": [
+        "asset"
+      ],
+      "type": "object",
+      "properties": {
+        "asset": {
+          "$ref": "#/definitions/PageAsset"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/AssetResponse"
+        }
+      ],
+      "x-ms-discriminator-value": "page"
+    },
+    "SslCertAssetResponse": {
+      "required": [
+        "asset"
+      ],
+      "type": "object",
+      "properties": {
+        "asset": {
+          "$ref": "#/definitions/SslCertAsset"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/AssetResponse"
+        }
+      ],
+      "x-ms-discriminator-value": "sslCert"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "flow": "implicit",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      },
+      "type": "oauth2"
+    }
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "description": "Provides access to inventory assets.",
+      "name": "Assets"
+    },
+    {
+      "description": "Provides access to discovery resources.",
+      "name": "Discovery Groups"
+    },
+    {
+      "description": "Provides access to disco template resources.",
+      "name": "Discovery Templates"
+    },
+    {
+      "description": "Provides access to reporting data.",
+      "name": "Reports"
+    },
+    {
+      "description": "Provides access to saved filter resources.",
+      "name": "Saved Filters"
+    },
+    {
+      "description": "Provides access to task resources.",
+      "name": "Tasks"
+    }
+  ],
+  "parameters": {
+    "ApiVersionParameter": {
+      "description": "The API version to use for this operation.",
+      "in": "query",
+      "name": "api-version",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "client"
+    },
+    "AssetIdParameter": {
+      "description": "The unique identifier for the asset. Ids are formatted as '<kind>$$<name>' and can optionally be Base64 encoded if they contain special characters.",
+      "in": "path",
+      "name": "assetId",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "DiscoGroupNameParameter": {
+      "description": "The unique identifier for the discovery group.",
+      "in": "path",
+      "name": "groupName",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "DiscoTemplateIdParameter": {
+      "description": "The unique identifier for the disco template.",
+      "in": "path",
+      "name": "templateId",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "EndpointParameter": {
+      "name": "endpoint",
+      "description": "The endpoint hosting the requested resource. For example, {region}.easm.defender.microsoft.com.",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "client"
+    },
+    "FilterParameter": {
+      "description": "An expression on the resource type that selects the resources to be returned.",
+      "in": "query",
+      "name": "filter",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "MarkParameter": {
+      "description": "Specify this value instead of 'skip' to use cursor-based searching. Initial value is '*' and subsequent values are returned in the response.",
+      "in": "query",
+      "name": "mark",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "MaxPageSizeParameter": {
+      "default": 20,
+      "description": "The maximum number of items to include in a single response.",
+      "format": "int32",
+      "in": "query",
+      "name": "maxpagesize",
+      "required": false,
+      "type": "integer",
+      "x-ms-parameter-location": "method"
+    },
+    "OrderByParameter": {
+      "description": "A list of expressions that specify the order of the returned resources.",
+      "in": "query",
+      "name": "orderby",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "ResourceGroupNameParameter": {
+      "description": "The name of the Resource Group.",
+      "in": "path",
+      "name": "resourceGroupName",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "client"
+    },
+    "SavedFilterNameParameter": {
+      "description": "The unique identifier for the saved filter.",
+      "in": "path",
+      "name": "filterName",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "SkipParameter": {
+      "default": 0,
+      "description": "An offset into the collection of the first item to be returned.",
+      "format": "int32",
+      "in": "query",
+      "name": "skip",
+      "required": false,
+      "type": "integer",
+      "x-ms-parameter-location": "method"
+    },
+    "SubscriptionIdParameter": {
+      "description": "The ID of the target subscription.",
+      "in": "path",
+      "name": "subscriptionId",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "client"
+    },
+    "TaskIdParameter": {
+      "description": "The unique identifier for the task.",
+      "in": "path",
+      "name": "taskId",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "WorkspaceNameParameter": {
+      "description": "The name of the Workspace.",
+      "in": "path",
+      "name": "workspaceName",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "client"
+    }
+  }
+}

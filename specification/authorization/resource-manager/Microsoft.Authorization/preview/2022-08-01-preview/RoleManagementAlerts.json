@@ -738,47 +738,6 @@
           }
         }
       }
-    },
-    "/{scope}/providers/Microsoft.Authorization/roleManagementAlertOperations": {
-      "get": {
-        "tags": [
-          "AlertOperations"
-        ],
-        "operationId": "AlertOperation_ListForScope",
-        "description": "Gets alert operations for a resource scope.",
-        "parameters": [
-          {
-            "name": "scope",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The scope of the alert operation.",
-            "x-ms-skip-url-encoding": true
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK - Returns an array of the operations.",
-            "schema": {
-              "$ref": "#/definitions/AlertOperationListResult"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "GetAlertOperations": {
-            "$ref": "./examples/GetAlertOperations.json"
-          }
-        }
-      }
     }
   },
   "definitions": {
@@ -1328,6 +1287,28 @@
           "type": "string",
           "readOnly": true,
           "description": "The status of the alert operation."
+        },
+        "statusDetail": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The status detail of the alert operation."
+        },
+        "createdDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "The created date of the alert operation."
+        },
+        "lastActionDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "The last action date of the alert operation."
+        },
+        "resourceLocation": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The location of the alert associated with the operation."
         }
       },
       "type": "object",
@@ -1342,23 +1323,6 @@
       },
       "type": "object",
       "description": "An error response from the service."
-    },
-    "AlertOperationListResult": {
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/AlertOperationResult"
-          },
-          "description": "Alert operation list"
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "The URL to use for getting the next set of results."
-        }
-      },
-      "type": "object",
-      "description": "Alert operation list operation result."
     },
     "CloudErrorBody": {
       "x-ms-external": true,

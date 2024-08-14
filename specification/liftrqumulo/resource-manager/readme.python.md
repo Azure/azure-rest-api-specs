@@ -6,6 +6,7 @@ Use `--python-mode=update` if you already have a setup.py and just want to updat
 
 
 ``` yaml $(python)
+title: QumuloMgmtClient
 azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
 package-name: azure-mgmt-qumulo
@@ -17,4 +18,11 @@ clear-output-folder: true
 ``` yaml $(python)
 no-namespace-folders: true
 output-folder: $(python-sdks-folder)/qumulo/azure-mgmt-qumulo/azure/mgmt/qumulo
+```
+
+``` yaml $(python)
+directive:
+  - from: swagger-document
+    where: $["definitions"]["LiftrBase.Storage.FileSystemResourceProperties"]
+    transform: $["properties"]["privateIPs"]["x-ms-client-name"] = "private_ips"
 ```

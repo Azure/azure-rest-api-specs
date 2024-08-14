@@ -16,12 +16,6 @@ typescript:
   package-name: "@azure/arm-network"
   output-folder: "$(typescript-sdks-folder)/sdk/network/arm-network"
 
-directive:
-- from: ddosProtectionPlan.json 
-  where-model: DdosProtectionPlanPropertiesFormat
-  rename-property:
-    from: publicIPAddresses
-    to: publicIpAddresses
 ```
 
 ### Profile: profile-hybrid-2019-03-01

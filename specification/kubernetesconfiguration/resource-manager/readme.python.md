@@ -20,14 +20,16 @@ Generate all API versions currently shipped for this package
 
 ```yaml $(python)
 multiapi: true
-default-api-version: "2022-11-01"
+default-api-version: "2023-05-01"
 clear-output-folder: true
-batch: 
+batch:
+  - tag: package-preview-2024-04-only
+  - tag: package-2023-05
   - tag: package-2022-11
   - tag: package-2022-07
   - tag: package-preview-2022-04-only
   - tag: package-2022-03
-  - tag: package-preview-2022-01-15
+  - tag: package-preview-2022-01-15-only
   - tag: package-preview-2022-01
   - tag: package-preview-2021-11
   - tag: package-2021-09
@@ -41,7 +43,26 @@ batch:
 
 ``` yaml $(multiapiscript)
 output-folder: $(python-sdks-folder)/kubernetesconfiguration/azure-mgmt-kubernetesconfiguration/azure/mgmt/kubernetesconfiguration/
+clear-output-folder: false
 perform-load: false
+```
+
+### Tag: package-preview-2024-04-only and python
+
+These settings apply only when `--tag=package-preview-2024-04-only --python` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2024-04-only'
+namespace: azure.mgmt.kubernetesconfiguration.v2024_04_01_preview
+output-folder: $(python-sdks-folder)/kubernetesconfiguration/azure-mgmt-kubernetesconfiguration/azure/mgmt/kubernetesconfiguration/v2024_04_01_preview
+```
+
+### Tag: package-2023-05 and python
+
+These settings apply only when `--tag=package-2023-05 --python` is specified on the command line.
+
+``` yaml $(tag) == 'package-2023-05'
+namespace: azure.mgmt.kubernetesconfiguration.v2023_05_01
+output-folder: $(python-sdks-folder)/kubernetesconfiguration/azure-mgmt-kubernetesconfiguration/azure/mgmt/kubernetesconfiguration/v2023_05_01
 ```
 
 ### Tag: package-2022-11 and python
@@ -80,11 +101,11 @@ namespace: azure.mgmt.kubernetesconfiguration.v2022_03_01
 output-folder: $(python-sdks-folder)/kubernetesconfiguration/azure-mgmt-kubernetesconfiguration/azure/mgmt/kubernetesconfiguration/v2022_03_01
 ```
 
-### Tag: package-preview-2022-01-15 and python
+### Tag: package-preview-2022-01-15-only and python
 
-These settings apply only when `--tag=package-preview-2022-01-15 --python` is specified on the command line.
+These settings apply only when `--tag=package-preview-2022-01-15-only --python` is specified on the command line.
 
-``` yaml $(tag) == 'package-preview-2022-01-15'
+``` yaml $(tag) == 'package-preview-2022-01-15-only'
 namespace: azure.mgmt.kubernetesconfiguration.v2022_01_15_preview
 output-folder: $(python-sdks-folder)/kubernetesconfiguration/azure-mgmt-kubernetesconfiguration/azure/mgmt/kubernetesconfiguration/v2022_01_15_preview
 ```

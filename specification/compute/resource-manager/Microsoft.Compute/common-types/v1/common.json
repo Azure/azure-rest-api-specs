@@ -36,6 +36,7 @@
   "paths": {},
   "definitions": {
     "ApiErrorBase": {
+      "type": "object",
       "properties": {
         "code": {
           "type": "string",
@@ -53,6 +54,7 @@
       "description": "Api error base."
     },
     "InnerError": {
+      "type": "object",
       "properties": {
         "exceptiontype": {
           "type": "string",
@@ -66,6 +68,7 @@
       "description": "Inner error details."
     },
     "CloudError": {
+      "type": "object",
       "x-ms-external": true,
       "properties": {
         "error": {
@@ -75,6 +78,7 @@
       "description": "An error response from the Compute service."
     },
     "ApiError": {
+      "type": "object",
       "properties": {
         "details": {
           "type": "array",
@@ -107,6 +111,7 @@
       "description": "Api error."
     },
     "Resource": {
+      "type": "object",
       "description": "The Resource model definition.",
       "properties": {
         "id": {
@@ -142,23 +147,23 @@
       "x-ms-azure-resource": true
     },
     "SubResource": {
+      "type": "object",
       "properties": {
         "id": {
           "type": "string",
           "description": "Resource Id"
         }
-      },
-      "x-ms-azure-resource": true
+      }
     },
     "SubResourceReadOnly": {
+      "type": "object",
       "properties": {
         "id": {
           "readOnly": true,
           "type": "string",
           "description": "Resource Id"
         }
-      },
-      "x-ms-azure-resource": true
+      }
     },
     "ResourceWithOptionalLocation": {
       "type": "object",
@@ -205,6 +210,7 @@
       }
     },
     "ExtendedLocation": {
+      "type": "object",
       "description": "The complex type of the extended location.",
       "properties": {
         "name": {

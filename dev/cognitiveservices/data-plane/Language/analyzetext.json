@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Microsoft Cognitive Language Service - Text Analysis",
-    "description": "The language service API is a suite of natural language processing (NLP) skills built with best-in-class Microsoft machine learning algorithms.  The API can be used to analyze unstructured text for tasks such as sentiment analysis, key phrase extraction, language detection and question answering. Further documentation can be found in <a href=\"https://docs.microsoft.com/azure/cognitive-services/language-service/overview\">https://docs.microsoft.com/azure/cognitive-services/language-service/overview</a>.0",
+    "description": "The language service API is a suite of natural language processing (NLP) skills built with best-in-class Microsoft machine learning algorithms.  The API can be used to analyze unstructured text for tasks such as sentiment analysis, key phrase extraction, language detection and question answering. Further documentation can be found in <a href=\"https://docs.microsoft.com/azure/cognitive-services/language-service/overview\">https://docs.microsoft.com/azure/cognitive-services/language-service/overview</a>.",
     "version": "2023-04-01"
   },
   "securityDefinitions": {
@@ -58,7 +58,7 @@
             "$ref": "common.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "common.json#/parameters/ShowStats"
+            "$ref": "#/parameters/ShowStats"
           },
           {
             "description": "Collection of documents to analyze and a single task to execute.",
@@ -86,25 +86,22 @@
         },
         "x-ms-examples": {
           "Successful Entity Linking Request": {
-            "$ref": "./examples/text/SuccessfulEntityLinkingRequest.json"
+            "$ref": "./examples/SuccessfulEntityLinkingRequest.json"
           },
           "Successful Entity Recognition Request": {
-            "$ref": "./examples/text/SuccessfulEntityRecognitionRequest.json"
+            "$ref": "./examples/SuccessfulEntityRecognitionRequest.json"
           },
           "Successful Key Phrase Extraction Request": {
-            "$ref": "./examples/text/SuccessfulKeyPhraseExtractionRequest.json"
+            "$ref": "./examples/SuccessfulKeyPhraseExtractionRequest.json"
           },
           "Successful PII Entity Recognition Request": {
-            "$ref": "./examples/text/SuccessfulPiiEntityRecognitionRequest.json"
+            "$ref": "./examples/SuccessfulPiiEntityRecognitionRequest.json"
           },
           "Successful Language Detection Request": {
-            "$ref": "./examples/text/SuccessfulLanguageDetectionRequest.json"
+            "$ref": "./examples/SuccessfulLanguageDetectionRequest.json"
           },
           "Successful Sentiment Analysis Request": {
-            "$ref": "./examples/text/SuccessfulSentimentAnalysisRequest.json"
-          },
-          "Successful Dynamic Classification Request": {
-            "$ref": "./examples/text/SuccessfuDynamicClassificationRequest.json"
+            "$ref": "./examples/SuccessfulSentimentAnalysisRequest.json"
           }
         }
       }
@@ -152,16 +149,10 @@
         },
         "x-ms-examples": {
           "Successful Submit Analysis Job Request": {
-            "$ref": "./examples/text/SuccessfulAnalyzeTextJobsMultipleTaskSubmitRequest.json"
-          },
-          "Successful Healthcare Post Request": {
-            "$ref": "./examples/text/SuccessfulHealthcarePostRequest.json"
+            "$ref": "./examples/SuccessfulAnalyzeTextJobsMultipleTaskSubmitRequest.json"
           },
           "Successful Submit Abstractive Summarization Task": {
             "$ref": "./examples/text/SuccessfulAbstractiveSummarizationTaskSubmit.json"
-          },
-          "Successful Healthcare DocumentType Post Request": {
-            "$ref": "./examples/text/SuccessfulHealthcareDocumentTypePostRequest.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -180,10 +171,10 @@
             "$ref": "common.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "common.json#/parameters/JobId"
+            "$ref": "#/parameters/JobId"
           },
           {
-            "$ref": "common.json#/parameters/ShowStats"
+            "$ref": "#/parameters/ShowStats"
           },
           {
             "$ref": "common.json#/parameters/TopParameter"
@@ -208,16 +199,10 @@
         },
         "x-ms-examples": {
           "Successful Get Text Analysis Job Status Request": {
-            "$ref": "./examples/text/SuccessfulAnalyzeTextJobsMultipleTaskStatusRequest.json"
-          },
-          "Successful Get Text Analysis Health Request": {
-            "$ref": "./examples/text/SuccessfulHealthcareTaskStatusRequest.json"
+            "$ref": "./examples/SuccessfulAnalyzeTextJobsMultipleTaskStatusRequest.json"
           },
           "Successful Get Abstractive Summarization Result": {
             "$ref": "./examples/text/SuccessfulAbstractiveSummarizationTaskResult.json"
-          },
-          "Successful Get Text Analysis Health DocumentType Request": {
-            "$ref": "./examples/text/SuccessfulHealthcareDocumentTypeTaskStatusRequest.json"
           }
         }
       }
@@ -235,7 +220,7 @@
             "$ref": "common.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "common.json#/parameters/JobId"
+            "$ref": "#/parameters/JobId"
           }
         ],
         "responses": {
@@ -256,7 +241,7 @@
         },
         "x-ms-examples": {
           "Successful Job Delete Request": {
-            "$ref": "./examples/text/SuccessfulAnalyzeTextJobsCancelRequest.json"
+            "$ref": ".//examples//SuccessfulAnalyzeTextJobsCancelRequest.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -273,8 +258,7 @@
         "PiiEntityRecognition",
         "KeyPhraseExtraction",
         "LanguageDetection",
-        "EntityLinking",
-        "DynamicClassification"
+        "EntityLinking"
       ],
       "x-ms-enum": {
         "name": "AnalyzeTextTaskKind",
@@ -311,8 +295,7 @@
         "PiiEntityRecognitionResults",
         "KeyPhraseExtractionResults",
         "LanguageDetectionResults",
-        "EntityLinkingResults",
-        "DynamicClassificationResults"
+        "EntityLinkingResults"
       ],
       "x-ms-enum": {
         "name": "AnalyzeTextTaskResultsKind",
@@ -387,7 +370,7 @@
       },
       "allOf": [
         {
-          "$ref": "common.json#/definitions/TaskIdentifier"
+          "$ref": "#/definitions/TaskIdentifier"
         }
       ]
     },
@@ -505,32 +488,11 @@
       ],
       "x-ms-discriminator-value": "SentimentAnalysis"
     },
-    "AnalyzeTextDynamicClassificationInput": {
-      "type": "object",
-      "properties": {
-        "analysisInput": {
-          "$ref": "#/definitions/MultiLanguageAnalysisInput"
-        },
-        "parameters": {
-          "$ref": "#/definitions/DynamicClassificationTaskParameters"
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/AnalyzeTextTask"
-        }
-      ],
-      "x-ms-discriminator-value": "DynamicClassification"
-    },
     "AnalyzeTextJobsInput": {
       "type": "object",
       "properties": {
         "displayName": {
           "description": "Optional display name for the analysis job.",
-          "type": "string"
-        },
-        "defaultLanguage": {
-          "description": "Default language to use for records requesting automatic language detection.",
           "type": "string"
         },
         "analysisInput": {
@@ -549,6 +511,40 @@
         "tasks"
       ]
     },
+    "TaskIdentifier": {
+      "type": "object",
+      "description": "Base task object.",
+      "properties": {
+        "taskName": {
+          "type": "string"
+        }
+      }
+    },
+    "TaskParameters": {
+      "type": "object",
+      "description": "Base parameters object for a text analysis task.",
+      "properties": {
+        "loggingOptOut": {
+          "type": "boolean",
+          "default": false
+        }
+      }
+    },
+    "PreBuiltTaskParameters": {
+      "type": "object",
+      "description": "Parameters object for a text analysis task using pre-built models.",
+      "properties": {
+        "modelVersion": {
+          "type": "string",
+          "default": "latest"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/TaskParameters"
+        }
+      ]
+    },
     "CustomTaskParameters": {
       "type": "object",
       "description": "Parameters object for a text analysis task using custom models.",
@@ -564,7 +560,7 @@
       },
       "allOf": [
         {
-          "$ref": "common.json#/definitions/TaskParameters"
+          "$ref": "#/definitions/TaskParameters"
         }
       ],
       "required": [
@@ -579,7 +575,7 @@
           "type": "array",
           "description": "Errors by document id.",
           "items": {
-            "$ref": "#/definitions/DocumentError"
+            "$ref": "common.json#/definitions/DocumentError"
           }
         },
         "statistics": {
@@ -639,9 +635,6 @@
             "allOf": [
               {
                 "$ref": "#/definitions/EntitiesDocumentResult"
-              },
-              {
-                "$ref": "#/definitions/DocumentDetectedLanguage"
               }
             ]
           }
@@ -690,9 +683,6 @@
             "allOf": [
               {
                 "$ref": "#/definitions/ClassificationDocumentResult"
-              },
-              {
-                "$ref": "#/definitions/DocumentDetectedLanguage"
               }
             ]
           }
@@ -768,66 +758,17 @@
         "class"
       ]
     },
-    "DynamicClassificationDocumentResult": {
-      "type": "object",
-      "properties": {
-        "classifications": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ClassificationResult"
-          }
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/DocumentResult"
-        }
-      ],
-      "required": [
-        "classifications"
-      ]
-    },
     "HealthcareTaskParameters": {
       "type": "object",
       "description": "Supported parameters for a Healthcare task.",
       "properties": {
-        "fhirVersion": {
-          "type": "string",
-          "description": "The FHIR Spec version that the result will use to format the fhirBundle. For additional information see https://www.hl7.org/fhir/overview.html.",
-          "enum": [
-            "4.0.1"
-          ],
-          "x-ms-enum": {
-            "name": "fhirVersion",
-            "modelAsString": true
-          }
-        },
-        "documentType": {
-          "x-ms-enum": {
-            "name": "healthcareDocumentType",
-            "modelAsString": true
-          },
-          "type": "string",
-          "description": "Document type that can be provided as input for Fhir Documents. Expect to have fhirVersion provided when used. Behavior of using None enum is the same as not using the documentType parameter.",
-          "enum": [
-            "None",
-            "ClinicalTrial",
-            "DischargeSummary",
-            "ProgressNote",
-            "HistoryAndPhysical",
-            "Consult",
-            "Imaging",
-            "Pathology",
-            "ProcedureNote"
-          ]
-        },
         "stringIndexType": {
           "$ref": "common.json#/definitions/StringIndexType"
         }
       },
       "allOf": [
         {
-          "$ref": "common.json#/definitions/PreBuiltTaskParameters"
+          "$ref": "#/definitions/PreBuiltTaskParameters"
         }
       ]
     },
@@ -851,7 +792,11 @@
         "documents": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/HealthcareEntitiesDocumentResultWithDocumentDetectedLanguage"
+            "allOf": [
+              {
+                "$ref": "#/definitions/HealthcareEntitiesDocumentResult"
+              }
+            ]
           }
         }
       },
@@ -862,17 +807,6 @@
       ],
       "required": [
         "documents"
-      ]
-    },
-    "HealthcareEntitiesDocumentResultWithDocumentDetectedLanguage": {
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/HealthcareEntitiesDocumentResult"
-        },
-        {
-          "$ref": "#/definitions/DocumentDetectedLanguageString"
-        }
       ]
     },
     "HealthcareEntitiesDocumentResult": {
@@ -891,11 +825,6 @@
           "items": {
             "$ref": "#/definitions/HealthcareRelation"
           }
-        },
-        "fhirBundle": {
-          "type": "object",
-          "description": "JSON bundle containing a FHIR compatible object for consumption in other Healthcare tools. For additional information see https://www.hl7.org/fhir/overview.html.",
-          "additionalProperties": {}
         }
       },
       "allOf": [
@@ -926,6 +855,7 @@
             "BodyStructure",
             "Age",
             "Gender",
+            "Ethnicity",
             "ExaminationName",
             "Date",
             "Direction",
@@ -934,21 +864,30 @@
             "MeasurementUnit",
             "RelationalOperator",
             "Time",
+            "Course",
             "GeneOrProtein",
             "Variant",
+            "Expression",
+            "MutationType",
             "AdministrativeEvent",
             "CareEnvironment",
             "HealthcareProfession",
             "Diagnosis",
             "SymptomOrSign",
             "ConditionQualifier",
+            "ConditionScale",
             "MedicationClass",
             "MedicationName",
             "Dosage",
             "MedicationForm",
             "MedicationRoute",
             "FamilyRelation",
-            "TreatmentName"
+            "TreatmentName",
+            "Allergen",
+            "Employment",
+            "LivingStatus",
+            "SubstanceUse",
+            "SubstanceUseAmount"
           ]
         },
         "subcategory": {
@@ -1007,17 +946,30 @@
           "type": "string",
           "enum": [
             "Abbreviation",
+            "BodySiteOfCondition",
+            "BodySiteOfTreatment",
+            "CourseOfCondition",
+            "CourseOfExamination",
+            "CourseOfMedication",
+            "CourseOfTreatment",
             "DirectionOfBodyStructure",
             "DirectionOfCondition",
             "DirectionOfExamination",
             "DirectionOfTreatment",
             "DosageOfMedication",
+            "ExaminationFindsCondition",
+            "ExpressionOfGene",
+            "ExpressionOfVariant",
             "FormOfMedication",
+            "FrequencyOfCondition",
             "FrequencyOfMedication",
             "FrequencyOfTreatment",
+            "MutationTypeOfGene",
+            "MutationTypeOfVariant",
             "QualifierOfCondition",
             "RelationOfExamination",
             "RouteOfMedication",
+            "ScaleOfCondition",
             "TimeOfCondition",
             "TimeOfEvent",
             "TimeOfExamination",
@@ -1026,7 +978,8 @@
             "UnitOfCondition",
             "UnitOfExamination",
             "ValueOfCondition",
-            "ValueOfExamination"
+            "ValueOfExamination",
+            "VariantOfGene"
           ],
           "x-ms-enum": {
             "name": "relationType",
@@ -1139,7 +1092,7 @@
       },
       "allOf": [
         {
-          "$ref": "common.json#/definitions/PreBuiltTaskParameters"
+          "$ref": "#/definitions/PreBuiltTaskParameters"
         }
       ]
     },
@@ -1185,9 +1138,6 @@
             "allOf": [
               {
                 "$ref": "#/definitions/SentimentDocumentResult"
-              },
-              {
-                "$ref": "#/definitions/DocumentDetectedLanguage"
               }
             ]
           }
@@ -1479,7 +1429,7 @@
       },
       "allOf": [
         {
-          "$ref": "common.json#/definitions/PreBuiltTaskParameters"
+          "$ref": "#/definitions/PreBuiltTaskParameters"
         }
       ]
     },
@@ -1522,7 +1472,11 @@
           "type": "array",
           "description": "Response by document",
           "items": {
-            "$ref": "#/definitions/EntitiesResultWithDetectedLanguage"
+            "allOf": [
+              {
+                "$ref": "#/definitions/EntitiesDocumentResult"
+              }
+            ]
           }
         }
       },
@@ -1535,17 +1489,6 @@
         "documents"
       ]
     },
-    "EntitiesResultWithDetectedLanguage": {
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/EntitiesDocumentResult"
-        },
-        {
-          "$ref": "#/definitions/DocumentDetectedLanguage"
-        }
-      ]
-    },
     "EntitiesDocumentResult": {
       "type": "object",
       "properties": {
@@ -1553,7 +1496,7 @@
           "type": "array",
           "description": "Recognized entities in the document.",
           "items": {
-            "$ref": "#/definitions/EntityWithResolution"
+            "$ref": "#/definitions/Entity"
           }
         }
       },
@@ -1605,23 +1548,6 @@
         }
       }
     },
-    "EntityWithResolution": {
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Entity"
-        }
-      ],
-      "properties": {
-        "resolutions": {
-          "description": "The collection of entity resolution objects.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/BaseResolution"
-          }
-        }
-      }
-    },
     "EntityLinkingTaskParameters": {
       "type": "object",
       "description": "Supported parameters for an Entity Linking task.",
@@ -1632,7 +1558,7 @@
       },
       "allOf": [
         {
-          "$ref": "common.json#/definitions/PreBuiltTaskParameters"
+          "$ref": "#/definitions/PreBuiltTaskParameters"
         }
       ]
     },
@@ -1675,7 +1601,11 @@
           "type": "array",
           "description": "Response by document",
           "items": {
-            "$ref": "#/definitions/EntityLinkingResultWithDetectedLanguage"
+            "allOf": [
+              {
+                "$ref": "#/definitions/LinkedEntitiesDocumentResult"
+              }
+            ]
           }
         }
       },
@@ -1686,17 +1616,6 @@
       ],
       "required": [
         "documents"
-      ]
-    },
-    "EntityLinkingResultWithDetectedLanguage": {
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/LinkedEntitiesDocumentResult"
-        },
-        {
-          "$ref": "#/definitions/DocumentDetectedLanguage"
-        }
       ]
     },
     "LinkedEntitiesDocumentResult": {
@@ -1762,665 +1681,6 @@
         }
       }
     },
-    "BaseResolution": {
-      "description": "The abstract base class for entity resolutions.",
-      "type": "object",
-      "discriminator": "resolutionKind",
-      "properties": {
-        "resolutionKind": {
-          "description": "The entity resolution object kind.",
-          "type": "string",
-          "enum": [
-            "BooleanResolution",
-            "DateTimeResolution",
-            "NumberResolution",
-            "OrdinalResolution",
-            "SpeedResolution",
-            "WeightResolution",
-            "LengthResolution",
-            "VolumeResolution",
-            "AreaResolution",
-            "AgeResolution",
-            "InformationResolution",
-            "TemperatureResolution",
-            "CurrencyResolution",
-            "NumericRangeResolution",
-            "TemporalSpanResolution"
-          ],
-          "x-ms-enum": {
-            "name": "ResolutionKind",
-            "modelAsString": true
-          }
-        }
-      },
-      "required": [
-        "resolutionKind"
-      ]
-    },
-    "QuantityResolution": {
-      "description": "Represents resolutions for quantities.",
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "number",
-          "format": "double",
-          "description": "The numeric value that the extracted text denotes."
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
-    "AgeResolution": {
-      "description": "Represents the Age entity resolution model.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/BaseResolution"
-        },
-        {
-          "$ref": "#/definitions/QuantityResolution"
-        }
-      ],
-      "type": "object",
-      "x-ms-discriminator-value": "AgeResolution",
-      "properties": {
-        "unit": {
-          "type": "string",
-          "enum": [
-            "Unspecified",
-            "Year",
-            "Month",
-            "Week",
-            "Day"
-          ],
-          "x-ms-enum": {
-            "name": "AgeUnit",
-            "modelAsString": true
-          },
-          "description": "The Age Unit of measurement"
-        }
-      },
-      "required": [
-        "unit"
-      ]
-    },
-    "VolumeResolution": {
-      "description": "Represents the volume entity resolution model.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/BaseResolution"
-        },
-        {
-          "$ref": "#/definitions/QuantityResolution"
-        }
-      ],
-      "type": "object",
-      "x-ms-discriminator-value": "VolumeResolution",
-      "properties": {
-        "unit": {
-          "type": "string",
-          "enum": [
-            "Unspecified",
-            "CubicMeter",
-            "CubicCentimeter",
-            "CubicMillimeter",
-            "Hectoliter",
-            "Decaliter",
-            "Liter",
-            "Centiliter",
-            "Milliliter",
-            "CubicYard",
-            "CubicInch",
-            "CubicFoot",
-            "CubicMile",
-            "FluidOunce",
-            "Teaspoon",
-            "Tablespoon",
-            "Pint",
-            "Quart",
-            "Cup",
-            "Gill",
-            "Pinch",
-            "FluidDram",
-            "Barrel",
-            "Minim",
-            "Cord",
-            "Peck",
-            "Bushel",
-            "Hogshead"
-          ],
-          "x-ms-enum": {
-            "name": "VolumeUnit",
-            "modelAsString": true
-          },
-          "description": "The Volume Unit of measurement"
-        }
-      },
-      "required": [
-        "unit"
-      ]
-    },
-    "SpeedResolution": {
-      "description": "Represents the speed entity resolution model.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/BaseResolution"
-        },
-        {
-          "$ref": "#/definitions/QuantityResolution"
-        }
-      ],
-      "type": "object",
-      "x-ms-discriminator-value": "SpeedResolution",
-      "properties": {
-        "unit": {
-          "type": "string",
-          "enum": [
-            "Unspecified",
-            "MeterPerSecond",
-            "KilometerPerHour",
-            "KilometerPerMinute",
-            "KilometerPerSecond",
-            "MilePerHour",
-            "Knot",
-            "FootPerSecond",
-            "FootPerMinute",
-            "YardPerMinute",
-            "YardPerSecond",
-            "MeterPerMillisecond",
-            "CentimeterPerMillisecond",
-            "KilometerPerMillisecond"
-          ],
-          "x-ms-enum": {
-            "name": "SpeedUnit",
-            "modelAsString": true
-          },
-          "description": "The speed Unit of measurement"
-        }
-      },
-      "required": [
-        "unit"
-      ]
-    },
-    "AreaResolution": {
-      "description": "Represents the area entity resolution model.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/BaseResolution"
-        },
-        {
-          "$ref": "#/definitions/QuantityResolution"
-        }
-      ],
-      "type": "object",
-      "x-ms-discriminator-value": "AreaResolution",
-      "properties": {
-        "unit": {
-          "type": "string",
-          "enum": [
-            "Unspecified",
-            "SquareKilometer",
-            "SquareHectometer",
-            "SquareDecameter",
-            "SquareDecimeter",
-            "SquareMeter",
-            "SquareCentimeter",
-            "SquareMillimeter",
-            "SquareInch",
-            "SquareFoot",
-            "SquareMile",
-            "SquareYard",
-            "Acre"
-          ],
-          "x-ms-enum": {
-            "name": "AreaUnit",
-            "modelAsString": true
-          },
-          "description": "The area Unit of measurement"
-        }
-      },
-      "required": [
-        "unit"
-      ]
-    },
-    "LengthResolution": {
-      "description": "Represents the length entity resolution model.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/BaseResolution"
-        },
-        {
-          "$ref": "#/definitions/QuantityResolution"
-        }
-      ],
-      "type": "object",
-      "x-ms-discriminator-value": "LengthResolution",
-      "properties": {
-        "unit": {
-          "type": "string",
-          "enum": [
-            "Unspecified",
-            "Kilometer",
-            "Hectometer",
-            "Decameter",
-            "Meter",
-            "Decimeter",
-            "Centimeter",
-            "Millimeter",
-            "Micrometer",
-            "Nanometer",
-            "Picometer",
-            "Mile",
-            "Yard",
-            "Inch",
-            "Foot",
-            "LightYear",
-            "Pt"
-          ],
-          "x-ms-enum": {
-            "name": "LengthUnit",
-            "modelAsString": true
-          },
-          "description": "The length Unit of measurement"
-        }
-      },
-      "required": [
-        "unit"
-      ]
-    },
-    "InformationResolution": {
-      "description": "Represents the information (data) entity resolution model.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/BaseResolution"
-        },
-        {
-          "$ref": "#/definitions/QuantityResolution"
-        }
-      ],
-      "type": "object",
-      "x-ms-discriminator-value": "InformationResolution",
-      "properties": {
-        "unit": {
-          "type": "string",
-          "enum": [
-            "Unspecified",
-            "Bit",
-            "Kilobit",
-            "Megabit",
-            "Gigabit",
-            "Terabit",
-            "Petabit",
-            "Byte",
-            "Kilobyte",
-            "Megabyte",
-            "Gigabyte",
-            "Terabyte",
-            "Petabyte"
-          ],
-          "x-ms-enum": {
-            "name": "InformationUnit",
-            "modelAsString": true
-          },
-          "description": "The information (data) Unit of measurement."
-        }
-      },
-      "required": [
-        "unit"
-      ]
-    },
-    "TemperatureResolution": {
-      "description": "Represents the temperature entity resolution model.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/BaseResolution"
-        },
-        {
-          "$ref": "#/definitions/QuantityResolution"
-        }
-      ],
-      "type": "object",
-      "x-ms-discriminator-value": "TemperatureResolution",
-      "properties": {
-        "unit": {
-          "type": "string",
-          "enum": [
-            "Unspecified",
-            "Fahrenheit",
-            "Kelvin",
-            "Rankine",
-            "Celsius"
-          ],
-          "x-ms-enum": {
-            "name": "TemperatureUnit",
-            "modelAsString": true
-          },
-          "description": "The temperature Unit of measurement."
-        }
-      },
-      "required": [
-        "unit"
-      ]
-    },
-    "WeightResolution": {
-      "description": "Represents the weight entity resolution model.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/BaseResolution"
-        },
-        {
-          "$ref": "#/definitions/QuantityResolution"
-        }
-      ],
-      "type": "object",
-      "x-ms-discriminator-value": "WeightResolution",
-      "properties": {
-        "unit": {
-          "type": "string",
-          "enum": [
-            "Unspecified",
-            "Kilogram",
-            "Gram",
-            "Milligram",
-            "Gallon",
-            "MetricTon",
-            "Ton",
-            "Pound",
-            "Ounce",
-            "Grain",
-            "PennyWeight",
-            "LongTonBritish",
-            "ShortTonUS",
-            "ShortHundredWeightUS",
-            "Stone",
-            "Dram"
-          ],
-          "x-ms-enum": {
-            "name": "WeightUnit",
-            "modelAsString": true
-          },
-          "description": "The weight Unit of measurement."
-        }
-      },
-      "required": [
-        "unit"
-      ]
-    },
-    "CurrencyResolution": {
-      "description": "Represents the currency entity resolution model.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/BaseResolution"
-        },
-        {
-          "$ref": "#/definitions/QuantityResolution"
-        }
-      ],
-      "type": "object",
-      "x-ms-discriminator-value": "CurrencyResolution",
-      "properties": {
-        "iso4217": {
-          "type": "string",
-          "description": "The alphabetic code based on another ISO standard, ISO 3166, which lists the codes for country names. The first two letters of the ISO 4217 three-letter code are the same as the code for the country name, and, where possible, the third letter corresponds to the first letter of the currency name."
-        },
-        "value": {
-          "type": "number",
-          "format": "double",
-          "description": "The money amount captured in the extracted entity"
-        },
-        "unit": {
-          "type": "string",
-          "description": "The unit of the amount captured in the extracted entity"
-        }
-      },
-      "required": [
-        "value",
-        "unit"
-      ]
-    },
-    "BooleanResolution": {
-      "description": "A resolution for boolean expressions",
-      "allOf": [
-        {
-          "$ref": "#/definitions/BaseResolution"
-        }
-      ],
-      "type": "object",
-      "x-ms-discriminator-value": "BooleanResolution",
-      "properties": {
-        "value": {
-          "type": "boolean"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
-    "DateTimeResolution": {
-      "description": "A resolution for datetime entity instances.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/BaseResolution"
-        }
-      ],
-      "type": "object",
-      "x-ms-discriminator-value": "DateTimeResolution",
-      "properties": {
-        "timex": {
-          "$ref": "#/definitions/TimeExpression"
-        },
-        "dateTimeSubKind": {
-          "type": "string",
-          "enum": [
-            "Time",
-            "Date",
-            "DateTime",
-            "Duration",
-            "Set"
-          ],
-          "x-ms-enum": {
-            "name": "DateTimeSubKind",
-            "modelAsString": true
-          },
-          "description": "The DateTime SubKind"
-        },
-        "value": {
-          "type": "string",
-          "description": "The actual time that the extracted text denote."
-        },
-        "modifier": {
-          "$ref": "#/definitions/TemporalModifier"
-        }
-      },
-      "required": [
-        "timex",
-        "dateTimeSubKind",
-        "value"
-      ]
-    },
-    "NumberResolution": {
-      "description": "A resolution for numeric entity instances.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/BaseResolution"
-        }
-      ],
-      "type": "object",
-      "x-ms-discriminator-value": "NumberResolution",
-      "properties": {
-        "numberKind": {
-          "type": "string",
-          "enum": [
-            "Integer",
-            "Decimal",
-            "Power",
-            "Fraction",
-            "Percent",
-            "Unspecified"
-          ],
-          "x-ms-enum": {
-            "name": "NumberKind",
-            "modelAsString": true
-          },
-          "description": "The type of the extracted number entity."
-        },
-        "value": {
-          "type": "number",
-          "format": "double",
-          "description": "A numeric representation of what the extracted text denotes."
-        }
-      },
-      "required": [
-        "numberKind",
-        "value"
-      ]
-    },
-    "OrdinalResolution": {
-      "description": "A resolution for ordinal numbers entity instances.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/BaseResolution"
-        }
-      ],
-      "type": "object",
-      "x-ms-discriminator-value": "OrdinalResolution",
-      "properties": {
-        "offset": {
-          "type": "string",
-          "description": "The offset With respect to the reference (e.g., offset = -1 in \"show me the second to last\""
-        },
-        "relativeTo": {
-          "type": "string",
-          "enum": [
-            "Current",
-            "End",
-            "Start"
-          ],
-          "x-ms-enum": {
-            "name": "RelativeTo",
-            "modelAsString": true
-          },
-          "description": "The reference point that the ordinal number denotes."
-        },
-        "value": {
-          "type": "string",
-          "description": "A simple arithmetic expression that the ordinal denotes."
-        }
-      },
-      "required": [
-        "offset",
-        "relativeTo",
-        "value"
-      ]
-    },
-    "TemporalSpanResolution": {
-      "description": "represents the resolution of a date and/or time span.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/BaseResolution"
-        }
-      ],
-      "type": "object",
-      "x-ms-discriminator-value": "TemporalSpanResolution",
-      "properties": {
-        "begin": {
-          "$ref": "#/definitions/TimeExpression"
-        },
-        "end": {
-          "$ref": "#/definitions/TimeExpression"
-        },
-        "duration": {
-          "type": "string",
-          "description": "An optional duration value formatted based on the ISO 8601 (https://en.wikipedia.org/wiki/ISO_8601#Durations)"
-        },
-        "modifier": {
-          "$ref": "#/definitions/TemporalModifier"
-        },
-        "timex": {
-          "type": "string",
-          "description": "An optional triplet containing the beginning, the end, and the duration all stated as ISO 8601 formatted strings."
-        }
-      }
-    },
-    "NumericRangeResolution": {
-      "description": "represents the resolution of numeric intervals.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/BaseResolution"
-        }
-      ],
-      "type": "object",
-      "x-ms-discriminator-value": "NumericRangeResolution",
-      "properties": {
-        "rangeKind": {
-          "type": "string",
-          "enum": [
-            "Number",
-            "Speed",
-            "Weight",
-            "Length",
-            "Volume",
-            "Area",
-            "Age",
-            "Information",
-            "Temperature",
-            "Currency"
-          ],
-          "x-ms-enum": {
-            "name": "RangeKind",
-            "modelAsString": true
-          },
-          "description": "The kind of range that the resolution object represents."
-        },
-        "minimum": {
-          "type": "number",
-          "format": "double",
-          "description": "The beginning value of  the interval."
-        },
-        "maximum": {
-          "type": "number",
-          "format": "double",
-          "description": "The ending value of the interval."
-        }
-      },
-      "required": [
-        "rangeKind",
-        "minimum",
-        "maximum"
-      ]
-    },
-    "TemporalModifier": {
-      "type": "string",
-      "description": "An optional modifier of a date/time instance.",
-      "enum": [
-        "AfterApprox",
-        "Before",
-        "BeforeStart",
-        "Approx",
-        "ReferenceUndefined",
-        "SinceEnd",
-        "AfterMid",
-        "Start",
-        "After",
-        "BeforeEnd",
-        "Until",
-        "End",
-        "Less",
-        "Since",
-        "AfterStart",
-        "BeforeApprox",
-        "Mid",
-        "More"
-      ],
-      "x-ms-enum": {
-        "name": "TemporalModifier",
-        "modelAsString": true
-      }
-    },
-    "TimeExpression": {
-      "type": "string",
-      "description": "An extended ISO 8601 date/time representation as described in (https://github.com/Microsoft/Recognizers-Text/blob/master/Patterns/English/English-DateTime.yaml)"
-    },
     "Match": {
       "type": "object",
       "required": [
@@ -2467,7 +1727,7 @@
       },
       "allOf": [
         {
-          "$ref": "common.json#/definitions/PreBuiltTaskParameters"
+          "$ref": "#/definitions/PreBuiltTaskParameters"
         }
       ]
     },
@@ -2510,7 +1770,11 @@
           "type": "array",
           "description": "Response by document",
           "items": {
-            "$ref": "#/definitions/PIIResultWithDetectedLanguage"
+            "allOf": [
+              {
+                "$ref": "#/definitions/PiiEntitiesDocumentResult"
+              }
+            ]
           }
         }
       },
@@ -2521,17 +1785,6 @@
       ],
       "required": [
         "documents"
-      ]
-    },
-    "PIIResultWithDetectedLanguage": {
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/PiiEntitiesDocumentResult"
-        },
-        {
-          "$ref": "#/definitions/DocumentDetectedLanguage"
-        }
       ]
     },
     "PiiDomain": {
@@ -2771,6 +2024,15 @@
       "type": "array",
       "uniqueItems": true
     },
+    "KeyPhraseTaskParameters": {
+      "type": "object",
+      "description": "Supported parameters for a Key Phrase Extraction task.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/PreBuiltTaskParameters"
+        }
+      ]
+    },
     "ExtractiveSummarizationTaskParameters": {
       "type": "object",
       "description": "Supported parameters for an Extractive Summarization task.",
@@ -2814,7 +2076,7 @@
           "type": "array",
           "description": "Response by document",
           "items": {
-            "$ref": "#/definitions/ExtractedSummaryDocumentResultWithDetectedLanguage"
+            "$ref": "#/definitions/ExtractedSummaryDocumentResult"
           }
         }
       },
@@ -2851,17 +2113,6 @@
           }
         ]
       }
-    },
-    "ExtractedSummaryDocumentResultWithDetectedLanguage": {
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ExtractedSummaryDocumentResult"
-        },
-        {
-          "$ref": "#/definitions/DocumentDetectedLanguage"
-        }
-      ]
     },
     "ExtractedSummaryDocumentResult": {
       "type": "object",
@@ -2913,15 +2164,6 @@
         }
       }
     },
-    "KeyPhraseTaskParameters": {
-      "type": "object",
-      "description": "Supported parameters for a Key Phrase Extraction task.",
-      "allOf": [
-        {
-          "$ref": "common.json#/definitions/PreBuiltTaskParameters"
-        }
-      ]
-    },
     "KeyPhraseLROTask": {
       "type": "object",
       "description": "An object representing the task definition for a Key Phrase Extraction task.",
@@ -2964,9 +2206,6 @@
             "allOf": [
               {
                 "$ref": "#/definitions/KeyPhrasesDocumentResult"
-              },
-              {
-                "$ref": "#/definitions/DocumentDetectedLanguage"
               }
             ]
           }
@@ -3006,7 +2245,7 @@
       "description": "Supported parameters for a Language Detection task.",
       "allOf": [
         {
-          "$ref": "common.json#/definitions/PreBuiltTaskParameters"
+          "$ref": "#/definitions/PreBuiltTaskParameters"
         }
       ]
     },
@@ -3084,94 +2323,8 @@
           "type": "number",
           "format": "double",
           "description": "A confidence score between 0 and 1. Scores close to 1 indicate 100% certainty that the identified language is true."
-        },
-        "script": {
-          "type": "string",
-          "description": "Identifies the script of the input document.",
-          "enum": [
-            "Latin"
-          ],
-          "x-ms-enum": {
-            "name": "ScriptKind",
-            "modelAsString": true
-          }
         }
       }
-    },
-    "DynamicClassificationTaskParameters": {
-      "type": "object",
-      "description": "Supported parameters for a Zero Shot Classification task.",
-      "properties": {
-        "classificationType": {
-          "type": "string",
-          "description": "Specifies either one or multiple categories per document. Defaults to multi classification which may return more than one class for each document.",
-          "default": "Multi",
-          "enum": [
-            "Single",
-            "Multi"
-          ],
-          "x-ms-enum": {
-            "name": "ClassificationType",
-            "modelAsString": true
-          }
-        },
-        "categories": {
-          "type": "array",
-          "description": "a list of categories to which input is classified to.",
-          "items": {
-            "type": "string"
-          }
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "common.json#/definitions/PreBuiltTaskParameters"
-        }
-      ],
-      "required": [
-        "categories"
-      ]
-    },
-    "DynamicClassificationTaskResult": {
-      "type": "object",
-      "properties": {
-        "results": {
-          "$ref": "#/definitions/DynamicClassificationResult"
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/AnalyzeTextTaskResult"
-        }
-      ],
-      "required": [
-        "results"
-      ],
-      "x-ms-discriminator-value": "DynamicClassificationResults"
-    },
-    "DynamicClassificationResult": {
-      "type": "object",
-      "properties": {
-        "documents": {
-          "type": "array",
-          "description": "Response by document",
-          "items": {
-            "allOf": [
-              {
-                "$ref": "#/definitions/DynamicClassificationDocumentResult"
-              }
-            ]
-          }
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "common.json#/definitions/PreBuiltResult"
-        }
-      ],
-      "required": [
-        "documents"
-      ]
     },
     "AnalyzeTextJobState": {
       "allOf": [
@@ -3190,6 +2343,17 @@
       "properties": {
         "nextLink": {
           "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "JobErrors": {
+      "properties": {
+        "errors": {
+          "items": {
+            "$ref": "common.json#/definitions/Error"
+          },
+          "type": "array"
         }
       },
       "type": "object"
@@ -3239,6 +2403,34 @@
       ],
       "type": "object"
     },
+    "TaskState": {
+      "properties": {
+        "lastUpdateDateTime": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "notStarted",
+            "running",
+            "succeeded",
+            "failed",
+            "cancelled",
+            "cancelling"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "State"
+          }
+        }
+      },
+      "required": [
+        "status",
+        "lastUpdateDateTime"
+      ],
+      "type": "object"
+    },
     "AnalyzeTextLROResult": {
       "type": "object",
       "discriminator": "kind",
@@ -3249,10 +2441,10 @@
       },
       "allOf": [
         {
-          "$ref": "common.json#/definitions/TaskState"
+          "$ref": "#/definitions/TaskState"
         },
         {
-          "$ref": "common.json#/definitions/TaskIdentifier"
+          "$ref": "#/definitions/TaskIdentifier"
         }
       ],
       "required": [
@@ -3457,42 +2649,6 @@
         }
       }
     },
-    "DocumentDetectedLanguage": {
-      "type": "object",
-      "properties": {
-        "detectedLanguage": {
-          "$ref": "#/definitions/DetectedLanguage",
-          "description": "If 'language' is set to 'auto' for the document in the request this field will contain a 2 letter ISO 639-1 representation of the language detected for this document."
-        }
-      }
-    },
-    "DocumentDetectedLanguageString": {
-      "type": "object",
-      "properties": {
-        "detectedLanguage": {
-          "type": "string",
-          "description": "If 'language' is set to 'auto' for the document in the request this field will contain a 2 letter ISO 639-1 representation of the language detected for this document."
-        }
-      }
-    },
-    "DocumentError": {
-      "type": "object",
-      "required": [
-        "id",
-        "error"
-      ],
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Document Id."
-        },
-        "error": {
-          "type": "object",
-          "description": "Document Error.",
-          "$ref": "common.json#/definitions/Error"
-        }
-      }
-    },
     "DocumentWarning": {
       "type": "object",
       "required": [
@@ -3542,37 +2698,6 @@
       },
       "description": "if showStats=true was specified in the request this field will contain information about the document payload."
     },
-    "DocumentRequestStatistics": {
-      "type": "object",
-      "required": [
-        "documentsCount",
-        "validDocumentsCount",
-        "erroneousDocumentsCount"
-      ],
-      "properties": {
-        "documentsCount": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Number of documents submitted in the request."
-        },
-        "validDocumentsCount": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Number of valid documents. This excludes empty, over-size limit or non-supported languages documents."
-        },
-        "erroneousDocumentsCount": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Number of invalid documents. This includes empty, over-size limit or non-supported languages documents."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "common.json#/definitions/RequestStatistics"
-        }
-      ],
-      "description": "if showStats=true was specified in the request this field will contain information about the document request payload."
-    },
     "MultiLanguageInput": {
       "type": "object",
       "description": "Contains an input document to be analyzed by the service.",
@@ -3591,7 +2716,7 @@
         },
         "language": {
           "type": "string",
-          "description": "(Optional) This is the 2 letter ISO 639-1 representation of a language. For example, use \"en\" for English; \"es\" for Spanish etc. For Auto Language Detection, use \"auto\". If not set, use \"en\" for English as default."
+          "description": "(Optional) This is the 2 letter ISO 639-1 representation of a language. For example, use \"en\" for English; \"es\" for Spanish etc. If not set, use \"en\" for English as default."
         }
       }
     },
@@ -3670,24 +2795,12 @@
           "type": "array",
           "description": "Response by document",
           "items": {
-            "$ref": "#/definitions/AbstractiveSummaryDocumentResultWithDetectedLanguage"
+            "$ref": "#/definitions/AbstractiveSummaryDocumentResult"
           }
         }
       },
       "required": [
         "documents"
-      ]
-    },
-    "AbstractiveSummaryDocumentResultWithDetectedLanguage": {
-      "type": "object",
-      "description": "An object representing the summarization result of a single document with detected language.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/AbstractiveSummaryDocumentResult"
-        },
-        {
-          "$ref": "#/definitions/DocumentDetectedLanguage"
-        }
       ]
     },
     "AbstractiveSummarizationResult": {
@@ -3747,5 +2860,23 @@
       ]
     }
   },
-  "parameters": {}
+  "parameters": {
+    "ShowStats": {
+      "name": "showStats",
+      "in": "query",
+      "description": "(Optional) if set to true, response will contain request and document level statistics.",
+      "type": "boolean",
+      "required": false,
+      "x-ms-parameter-location": "method"
+    },
+    "JobId": {
+      "description": "Job ID",
+      "format": "uuid",
+      "in": "path",
+      "name": "jobId",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  }
 }

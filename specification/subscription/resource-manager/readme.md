@@ -30,7 +30,14 @@ directive:
   - suppress: PutRequestResponseSchemeArm
     from: subscriptions.json
     reason: The models designed in new version of this existing api in which put request, need not be same in response, but creating workitem - "https://msazure.visualstudio.com/One/_workitems/edit/29042001", to take this item in future ref for next set of changes.
-
+  - suppress: LroExtension
+    from: subscriptions.json
+    where: $.paths["/providers/Microsoft.Subscription/subscriptionOperations/{operationId}"].get
+    reason: Avoid Lro changes on this api to return 202.
+  - suppress: GetOperation200
+    from: subscriptions.json
+    where: $.paths["/providers/Microsoft.Subscription/subscriptionOperations/{operationId}"].get.responses["202"]
+    reason: This api will return 200 and 202 response.
 ```
 
 
@@ -160,7 +167,7 @@ This is not used by Autorest itself.
 swagger-to-sdk:
   - repo: azure-sdk-for-net-track2
   - repo: azure-sdk-for-go
-  - repo: azure-sdk-for-python-track2
+  - repo: azure-sdk-for-python
   - repo: azure-sdk-for-node
   - repo: azure-sdk-for-js
   - repo: azure-cli-extensions
@@ -168,9 +175,9 @@ swagger-to-sdk:
   - repo: azure-powershell
 ```
 
-## Pyhton
+## Python
 
-See configuration in [readme.pyhton.md](./readme.python.md)
+See configuration in [readme.Python.md](./readme.python.md)
 
 ## Go
 
