@@ -5382,16 +5382,6 @@
           "description": "The reference to the Schema Registry for this AIO Instance.",
           "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
         },
-        "serviceAccounts": {
-          "type": "array",
-          "description": "The service accounts to be used for federated credentials.",
-          "default": [],
-          "items": {
-            "$ref": "#/definitions/ServiceAccountProperties"
-          },
-          "readOnly": true,
-          "x-ms-identifiers": []
-        },
         "components": {
           "$ref": "#/definitions/Components",
           "description": "The configuration for components of the AIO Instance."
@@ -6202,24 +6192,6 @@
           "maximum": 300
         }
       }
-    },
-    "ServiceAccountProperties": {
-      "type": "object",
-      "description": "The properties of a Service Account.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "The name of the service account."
-        },
-        "namespace": {
-          "type": "string",
-          "description": "The namespace of the service account."
-        }
-      },
-      "required": [
-        "name",
-        "namespace"
-      ]
     },
     "ServiceType": {
       "type": "string",

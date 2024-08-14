@@ -55,11 +55,6 @@ model InstanceProperties {
   @pattern("^[a-z0-9][a-z0-9-]*[a-z0-9]$")
   schemaRegistryNamespace: string;
 
-  @doc("The service accounts to be used for federated credentials.")
-  @visibility("read")
-  @OpenAPI.extension("x-ms-identifiers", [])
-  serviceAccounts?: ServiceAccountProperties[] = #[];
-
   @doc("The configuration for components of the AIO Instance.")
   components?: Components = #{};
 }
@@ -84,15 +79,6 @@ model Components {
   schemaRegistry?: SchemaRegistryInstanceProperties = #{
     state: OperationalMode.Enabled,
   };
-}
-
-@doc("The properties of a Service Account.")
-model ServiceAccountProperties {
-  @doc("The name of the service account.")
-  name: string;
-
-  @doc("The namespace of the service account.")
-  `namespace`: string;
 }
 
 @doc("The properties of an ADR instance.")
