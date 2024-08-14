@@ -74,11 +74,10 @@ directive:
     reason: Property solutionSettings for Solution Configurations settings previously defined like this
     from: publicCloud.json
     where:
-      - $.definitions.SolutionConfigurationUpdateProperties.properties.solutionSettings
-      - $.definitions.SolutionConfigurationUpdate.properties.properties.properties.solutionSettings
-      - $.definitions.SolutionConfiguration.properties.properties.properties.solutionSettings
+      - $.definitions.SolutionConfigurationPropertiesUpdate.properties.solutionSettings
       - $.definitions.SolutionConfigurationProperties.properties.solutionSettings
       - $.definitions.SolutionTypeSettings.properties.solutionSettings
+      - $.definitions.SolutionSettings
 
   - suppress: BodyTopLevelProperties
     reason: The BodyTopLevelProperties violation is a false positive which you can suppress for now
