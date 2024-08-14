@@ -18,6 +18,9 @@ model ApSlbVipResourceProperties {
   @doc("Gets or sets the Ap Dns name. This is case-insensitive")
   apDnsName: string;
 
+  @doc("Arm location")
+  armLocation?: string; 
+
   @doc("Provisioning state")
   @visibility("read")
   provisioningState?: ApSlbVipProvisioningState;
