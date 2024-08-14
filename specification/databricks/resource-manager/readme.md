@@ -232,7 +232,7 @@ These settings apply only when `--tag=package-2024-09-01-preview` is specified o
 input-file:
   - Microsoft.Databricks/preview/2024-09-01-preview/databricks.json
   - Microsoft.Databricks/preview/2024-09-01-preview/vnetpeering.json
-  - Microsoft.Databricks/preview/2024-09-01-preview/accessconnector.json
+  - Microsoft.Databricks/preview/2024-05-01/accessconnector.json
 ```
 
 
