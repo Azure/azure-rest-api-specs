@@ -584,6 +584,9 @@
         "uploadStatus": {
           "description": "The status of the Watchlist upload : New, InProgress or Complete. Pls note : When a Watchlist upload status is equal to InProgress, the Watchlist cannot be deleted",
           "type": "string"
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState"
         }
       },
       "required": [
@@ -681,6 +684,18 @@
         "itemsKeyValue"
       ],
       "type": "object"
+    },
+    "ProvisioningState": {
+      "enum": [
+        "Succeeded",
+        "Failed"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true
+      },
+      "readOnly": true
     }
   },
   "parameters": {
