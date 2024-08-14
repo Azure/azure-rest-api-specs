@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2019-10-01-preview",
+    "version": "2024-08-01-preview",
     "title": "SubscriptionClient",
     "description": "Subscription client provides an interface to create and manage Azure subscriptions programmatically."
   },
@@ -738,8 +738,12 @@
       "type": "object",
       "description": "Properties of subscription Request for Changed Target Directory.",
       "properties": {
-        "destinationEmail": {
-          "description": "The destination Email id where subscription needs to be accepted",
+        "destinationOwnerId": {
+          "description": "The destination OwnerId, can be object id or email address",
+          "type": "string"
+        },
+        "destinationTenantId": {
+          "description": "The destination Tenant id where subscription needs to be accepted",
           "type": "string"
         }
       }
@@ -784,8 +788,13 @@
       "type": "object",
       "description": "Properties of subscription Response for Changed Target Directory.",
       "properties": {
-        "destinationEmailId": {
-          "description": "Destination Email Id where Subscription will be accepted.",
+        "destinationTenantId": {
+          "description": "Destination Tenant Id where Subscription will be accepted.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "destinationOwnerId": {
+          "description": "Destination Owner Id where Subscription will be accepted.",
           "readOnly": true,
           "type": "string"
         },
