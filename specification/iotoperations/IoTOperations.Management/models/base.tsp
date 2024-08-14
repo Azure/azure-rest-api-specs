@@ -114,12 +114,7 @@ model BatchingConfiguration {
   @doc("Batching latency in seconds.")
   @minValue(0)
   @maxValue(65535)
-  latencyMs?: int32 = 60;
-
-  @doc("Maximum number of bytes in a batch.")
-  @minValue(0)
-  @maxValue(4294967295)
-  maxBytes?: int32 = 100000;
+  latencySeconds?: int32 = 60;
 
   @doc("Maximum number of messages in a batch.")
   @minValue(0)
