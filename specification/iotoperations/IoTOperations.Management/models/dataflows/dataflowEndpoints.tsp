@@ -141,7 +141,7 @@ model DataflowEndpointDataLakeStorageAuthentication {
 @doc("DataflowEndpoint Data Lake Storage Authentication Method properties")
 union DataLakeStorageAuthMethod {
   ManagedIdentityMethod,
-  AccessTokeMethod,
+  AccessTokenMethod,
 }
 
 @doc("Microsoft Fabric endpoint properties")
