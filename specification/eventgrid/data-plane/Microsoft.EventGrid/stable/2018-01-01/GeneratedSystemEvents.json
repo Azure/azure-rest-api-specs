@@ -8067,6 +8067,48 @@
         "storageDiagnostics"
       ]
     },
+    "StorageBlobAccessTier": {
+      "type": "string",
+      "description": "The access tier of the blob.",
+      "enum": [
+        "Hot",
+        "Cool",
+        "Cold",
+        "Archive",
+        "Default"
+      ],
+      "x-ms-enum": {
+        "name": "StorageBlobAccessTier",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Hot",
+            "value": "Hot",
+            "description": "The blob is in access tier Hot"
+          },
+          {
+            "name": "Cool",
+            "value": "Cool",
+            "description": "The blob is in access tier Cool"
+          },
+          {
+            "name": "Cold",
+            "value": "Cold",
+            "description": "The blob is in access tier Cold"
+          },
+          {
+            "name": "Archive",
+            "value": "Archive",
+            "description": "The blob is in access tier Archive"
+          },
+          {
+            "name": "Default",
+            "value": "Default",
+            "description": "The blob is in access tier Default(Inferred)"
+          }
+        ]
+      }
+    },
     "StorageBlobCreatedEventData": {
       "type": "object",
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Storage.BlobCreated event.",
@@ -8105,6 +8147,10 @@
           "type": "string",
           "description": "The type of blob."
         },
+        "accessTier": {
+          "$ref": "#/definitions/StorageBlobAccessTier",
+          "description": "The current tier of the blob."
+        },
         "url": {
           "type": "string",
           "description": "The path to the blob."
@@ -8124,6 +8170,7 @@
         }
       },
       "required": [
+        "accessTier",
         "storageDiagnostics"
       ]
     },
@@ -8279,6 +8326,14 @@
           "type": "string",
           "description": "The type of blob."
         },
+        "accessTier": {
+          "$ref": "#/definitions/StorageBlobAccessTier",
+          "description": "The current tier of the blob."
+        },
+        "previousTier": {
+          "$ref": "#/definitions/StorageBlobAccessTier",
+          "description": "The previous tier of the blob."
+        },
         "url": {
           "type": "string",
           "description": "The path to the blob."
@@ -8298,6 +8353,8 @@
         }
       },
       "required": [
+        "accessTier",
+        "previousTier",
         "storageDiagnostics"
       ]
     },
