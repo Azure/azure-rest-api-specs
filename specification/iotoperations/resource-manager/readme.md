@@ -49,7 +49,7 @@ directive:
     reason: Temporary suppression due to failing pipeline.
   - suppress: PatchBodyParametersSchema
     reason: Type is required because it is a part of managed identity.
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IoTOperations/instances/{instanceName}"].patch.parameters[4].schema.properties.identity.properties.type
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IoTOperations/instances/{instanceName}"].patch.parameters[4].schema.properties.identity
 ```
 
 ### Basic Information
