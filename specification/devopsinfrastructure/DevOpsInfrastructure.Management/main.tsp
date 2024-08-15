@@ -12,10 +12,15 @@ using Azure.ResourceManager;
 @armProviderNamespace
 @service({
   title: "Managed DevOps Infrastructure",
-  version: "2023-10-30-preview",
 })
-@useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+@versioned(Versions)
 namespace Microsoft.DevOpsInfrastructure;
+
+enum Versions {
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  `2023-10-30-preview`,
+}
 
 model Pool is TrackedResource<PoolProperties> {
   @key("poolName")
@@ -25,12 +30,13 @@ model Pool is TrackedResource<PoolProperties> {
   @doc("Name of the pool. It needs to be globally unique.")
   name: string;
 
-  ...ManagedServiceIdentity;
+  ...Azure.ResourceManager.Legacy.ManagedServiceIdentityV4Property;
 }
 
 @doc("Pool properties")
 model PoolProperties {
   @doc("The status of the current operation.")
+  @visibility("read")
   provisioningState?: ProvisioningState;
 
   @minValue(1)
@@ -51,15 +57,25 @@ model PoolProperties {
   devCenterProjectResourceId: string;
 }
 
+/** The kinds of organization profile */
+union OrganizationProfileKind {
+  /** An ADO organization profile */
+  AzureDevOps: "AzureDevOps",
+
+  string,
+}
 @doc("Defines the organization in which the pool will be used.")
 @discriminator("kind")
-model OrganizationProfile {}
+model OrganizationProfile {
+  kind: OrganizationProfileKind;
+}
 
 @doc("Azure DevOps organization profile")
 model AzureDevOpsOrganizationProfile extends OrganizationProfile {
   @doc("Azure DevOps organization profile")
-  kind: "AzureDevOps";
+  kind: OrganizationProfileKind.AzureDevOps;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "Legacy"
   @doc("The list of Azure DevOps organizations the pool should be present in.")
   organizations: Organization[];
 }
@@ -75,17 +91,27 @@ model Organization {
   parallelism?: int32;
 }
 
+/** The kind of fabric profile */
+union FabricProfileKind {
+  string,
+
+  /** A fabric profile containing virtual machine scale sets */
+  Vmss: "Vmss",
+}
 @doc("Defines the type of fabric the agent will run on.")
 @discriminator("kind")
-model FabricProfile {}
+model FabricProfile {
+  kind: FabricProfileKind;
+}
 @doc("The agents will run on Virtual Machine Scale Sets.")
 model VmssFabricProfile extends FabricProfile {
   @doc("Virtual Machine Scale Sets")
-  kind: "Vmss";
+  kind: FabricProfileKind.Vmss;
 
   @doc("The Azure SKU of the machines in the pool.")
   sku: DevOpsAzureSku;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "Legacy"
   @doc("The VM images of the machines in the pool.")
   images: PoolImage[];
 
@@ -137,21 +163,34 @@ model NetworkProfile {
   subnetId: string;
 }
 
+/** The kinds of agents */
+union AgentProfileKind {
+  /** Machines will be cleaned up after execution */
+  Stateless: "Stateless",
+
+  /** Machines returned to the pool after execution */
+  Stateful: "Stateful",
+
+  string,
+}
+
 @doc("The agent profile of the machines in the pool.")
 @discriminator("kind")
 model AgentProfile {
+  kind: AgentProfileKind;
+
   @doc("Defines pool buffer.")
   resourcePredictions?: ResourcePredictions;
 }
 @doc("Stateless profile meaning that the machines will be cleaned up after running a job.")
 model StatelessAgentProfile extends AgentProfile {
   @doc("Stateless profile meaning that the machines will be cleaned up after running a job.")
-  kind: "Stateless";
+  kind: AgentProfileKind.Stateless;
 }
 @doc("Stateful profile meaning that the machines will be returned to the pool after running a job.")
 model Stateful extends AgentProfile {
   @doc("Stateful profile meaning that the machines will be returned to the pool after running a job.")
-  kind: "Stateful";
+  kind: AgentProfileKind.Stateful;
 
   @doc("How long should stateful machines be kept around. The maximum is one week.")
   maxAgentLifetime: string;
@@ -160,27 +199,29 @@ model Stateful extends AgentProfile {
 model ResourcePredictions {}
 
 @doc("The status of the current operation.")
-enum ProvisioningState {
+union ProvisioningState {
+  string,
+
   /** Represents a succeeded operation. */
-  Succeeded,
+  Succeeded: "Succeeded",
 
   /** Represents a failed operation. */
-  Failed,
+  Failed: "Failed",
 
   /** Represents a canceled operation. */
-  Canceled,
+  Canceled: "Canceled",
 
   /** Represents a pending operation. */
-  Provisioning,
+  Provisioning: "Provisioning",
 
   /** Represents a pending operation. */
-  Updating,
+  Updating: "Updating",
 
   /** Represents an operation under deletion. */
-  Deleting,
+  Deleting: "Deleting",
 
   /** Represents an accepted operation. */
-  Accepted,
+  Accepted: "Accepted",
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}

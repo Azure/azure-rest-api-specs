@@ -6,7 +6,6 @@ import "./models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -38,14 +37,14 @@ interface Updates {
    */
   createOrModify is ArmResourceCreateOrReplaceAsync<
     Update,
-    BaseParameters<Update>,
+    Azure.ResourceManager.Foundations.BaseParameters<Update>,
     Azure.Core.Foundations.RetryAfterHeader & ArmAsyncOperationHeader
   >;
 
   /**
    * Update a Update
    */
-  @parameterVisibility("read")
+  @parameterVisibility
   modify is ArmCustomPatchSync<Update, ModifyUpdate>;
 
   /**
