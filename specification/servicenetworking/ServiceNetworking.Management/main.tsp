@@ -109,7 +109,7 @@ model SecurityPolicy is TrackedResource<SecurityPolicyProperties> {
 model SecurityPolicyProperties {
   /** Type of the Traffic Controller Security Policy */
   @visibility("read")
-  policyType: PolicyType;
+  policyType?: PolicyType;
 
   /** Web Application Firewall Policy of the Traffic Controller Security Policy */
   wafPolicy?: WafPolicy;
