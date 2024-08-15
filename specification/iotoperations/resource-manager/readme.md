@@ -47,8 +47,9 @@ directive:
     reason: User defined properties that are not subject to any validations.
   - suppress: BodyTopLevelProperties
     reason: Temporary suppression due to failing pipeline.
-  - suppress: PatchBodyParametersSchema
-    reason: Type is required because it is a part of managed identity.
+  # - suppress: PatchBodyParametersSchema
+    # reason: Type is required because it is a part of managed identity.
+    # where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IoTOperations/instance/{iotOperationName}"].patch.parameters[0]
 ```
 
 ### Basic Information
