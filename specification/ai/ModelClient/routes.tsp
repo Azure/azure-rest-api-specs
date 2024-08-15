@@ -35,11 +35,11 @@ op getChatCompletions is Azure.Core.RpcOperation<
 >;
 
 @override(AI.Model.getChatCompletions, "csharp")
-op getChatCompletions is Azure.Core.RpcOperation<
+op getChatCompletionsOverride is Azure.Core.RpcOperation<
   {
     chatCompletionsOptions: ChatCompletionsOptions,
     @header("extra-parameters")
-    extraParams?: ExtraParameters,
+    extra_params?: ExtraParameters,
   },
   ChatCompletions
 >;
