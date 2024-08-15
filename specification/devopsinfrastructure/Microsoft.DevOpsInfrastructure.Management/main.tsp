@@ -669,7 +669,7 @@ interface SubscriptionUsages {
   usages(
     ...SubscriptionIdParameter,
     ...Azure.ResourceManager.Foundations.DefaultProviderNamespace,
-    ...LocationParameter,
+    ...LocationResourceParameter,
     ...ApiVersionParameter,
   ): ArmResponse<Page<Quota>> | ErrorResponse;
 }
