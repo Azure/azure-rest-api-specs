@@ -265,6 +265,7 @@ model Operation {
 }
 
 interface TranslationOperations {
+  // LongRunningResourceCreateOrReplace will generate PUT, to align with CNV other creation operation.
   @doc("Creates a translation.")
   @pollingOperation(OperationOperations.getOperation)
   createOrReplaceTranslation is ops.LongRunningResourceCreateOrReplace<
@@ -286,7 +287,7 @@ interface TranslationOperations {
 }
 
 interface IterationOperations {
-  // Due to PR bulid need both "Create" and "Update" word in operation ID.
+  // LongRunningResourceCreateOrReplace will generate PUT, to align with CNV other creation operation.
   @doc("Creates an iteration.")
   @pollingOperation(OperationOperations.getOperation)
   createOrReplaceIteration is ops.LongRunningResourceCreateOrReplace<
