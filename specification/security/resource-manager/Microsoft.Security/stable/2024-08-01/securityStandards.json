@@ -225,18 +225,20 @@
       "type": "object",
       "description": "Page of a Standard list",
       "properties": {
-        "value": {
-          "description": "Collection of standards in this page",
-          "readOnly": true,
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/SecurityStandard"
+        "properties":{
+            "value": {
+              "description": "Collection of standards in this page",
+              "readOnly": true,
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/SecurityStandard"
+              }
+          },
+          "nextLink": {
+            "readOnly": true,
+            "type": "string",
+            "description": "The URI to fetch the next page"
           }
-        },
-        "nextLink": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The URI to fetch the next page"
         }
       }
     },

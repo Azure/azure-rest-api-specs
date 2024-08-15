@@ -90,10 +90,10 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/StandardAssignmentName"
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceId"
           },
           {
-            "$ref": "../../../common/v1/types.json#/parameters/ResourceId"
+            "$ref": "#/parameters/StandardAssignmentName"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -207,7 +207,8 @@
       "type": "object",
       "description": "Page of a standard assignment list",
       "properties": {
-        "value": {
+        "properties": {
+          "value": {
           "description": "Collection of standardAssignments in this page",
           "readOnly": true,
           "type": "array",
@@ -220,6 +221,7 @@
             "type": "string",
             "description": "The URI to fetch the next page"
           }
+        }
       }
     },
     "StandardAssignment": {
