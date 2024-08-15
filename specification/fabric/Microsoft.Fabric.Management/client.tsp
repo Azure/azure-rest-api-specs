@@ -6,7 +6,10 @@ using Azure.ClientGenerator.Core;
 namespace Microsoft.Fabric {
   @@access(Operations.list, Access.internal, "csharp");
 
-  @@clientName(FabricCapacities.checkNameAvailability, "CheckFabricCapacityNameAvailability", "csharp");
+  @@clientName(FabricCapacities.checkNameAvailability,
+    "CheckFabricCapacityNameAvailability",
+    "csharp"
+  );
   @@clientName(Azure.ResourceManager.CommonTypes.CheckNameAvailabilityRequest,
     "FabricNameAvailabilityContent",
     "csharp"
