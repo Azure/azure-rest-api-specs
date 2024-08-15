@@ -1,72 +1,72 @@
 {
-    "parameters": {
-        "api-version": "2023-05-01-preview",
-        "scope": "subscriptions/e5d1b86c-3051-44d5-8802-aa65d45a279b",
-        "customRecommendationName": "33e7cc6e-a139-4723-a0e5-76993aee0771",
-        "customRecommendationBody": {
-            "properties": {
-                "query": "RawEntityMetadata | where Environment == 'GCP' and Identifiers.Type == 'compute.firewalls' | extend IslogConfigEnabled = tobool(Record.logConfig.enable) | extend HealthStatus = iff(IslogConfigEnabled, 'HEALTHY', 'UNHEALTHY')",
-                "cloudProviders": [
-                    "AWS"
-                ],
-                "severity": "Medium",
-                "displayName": "Password Policy",
-                "description": "organization passwords policy",
-                "remediationDescription": "Change password policy to...",
-                "securityIssue": "Vulnerability"
-            }
-        }
-    },
-    "responses": {
-        "200": {
-            "body": {
-                "id": "/subscriptions/e5d1b86c-3051-44d5-8802-aa65d45a279b/providers/Microsoft.Security/customAssessmentAutomations/33e7cc6e-a139-4723-a0e5-76993aee0771",
-                "name": "33e7cc6e-a139-4723-a0e5-76993aee0771",
-                "type": "Microsoft.Security/customAssessmentAutomations",
-                "properties": {
-                    "query": "RawEntityMetadata | where Environment == 'GCP' and Identifiers.Type == 'compute.firewalls' | extend IslogConfigEnabled = tobool(Record.logConfig.enable) | extend HealthStatus = iff(IslogConfigEnabled, 'HEALTHY', 'UNHEALTHY')",
-                    "cloudProviders": [
-                        "AWS"
-                    ],
-                    "severity": "Medium",
-                    "displayName": "Password Policy",
-                    "description": "organization passwords policy",
-                    "remediationDescription": "Change password policy to...",
-                    "assessmentKey": "d5f442f7-7e77-4bcf-a450-a9c1b9a94eeb",
-                    "securityIssue": "Vulnerability",
-                    "metadata": {
-                        "createdBy": "c23b5354-ff0a-4b2a-9f92-6f144effd936",
-                        "createdOn": "2022-11-10T08:31:26.7993124Z",
-                        "lastUpdatedBy": "c23b5354-ff0a-4b2a-9f92-6f144effd936",
-                        "lastUpdatedOn": "2022-11-10T08:31:26.7993124Z"
-                    }
-                }
-            }
-        },
-        "201": {
-            "body": {
-                "id": "/subscriptions/e5d1b86c-3051-44d5-8802-aa65d45a279b/providers/Microsoft.Security/customAssessmentAutomations/33e7cc6e-a139-4723-a0e5-76993aee0771",
-                "name": "33e7cc6e-a139-4723-a0e5-76993aee0771",
-                "type": "Microsoft.Security/customAssessmentAutomations",
-                "properties": {
-                    "query": "RawEntityMetadata | where Environment == 'GCP' and Identifiers.Type == 'compute.firewalls' | extend IslogConfigEnabled = tobool(Record.logConfig.enable) | extend HealthStatus = iff(IslogConfigEnabled, 'HEALTHY', 'UNHEALTHY')",
-                    "cloudProviders": [
-                        "AWS"
-                    ],
-                    "severity": "Medium",
-                    "displayName": "Password Policy",
-                    "description": "organization passwords policy",
-                    "remediationDescription": "Change password policy to...",
-                    "assessmentKey": "d5f442f7-7e77-4bcf-a450-a9c1b9a94eeb",
-                    "securityIssue": "Vulnerability",
-                    "metadata": {
-                        "createdBy": "c23b5354-ff0a-4b2a-9f92-6f144effd936",
-                        "createdOn": "2022-11-10T08:31:26.7993124Z",
-                        "lastUpdatedBy": "c23b5354-ff0a-4b2a-9f92-6f144effd936",
-                        "lastUpdatedOn": "2022-11-10T08:31:26.7993124Z"
-                    }
-                }
-            }
-        }
+  "parameters": {
+    "api-version": "2024-08-01",
+    "scope": "subscriptions/e5d1b86c-3051-44d5-8802-aa65d45a279b",
+    "customRecommendationName": "33e7cc6e-a139-4723-a0e5-76993aee0771",
+    "customRecommendationBody": {
+      "properties": {
+        "query": "RawEntityMetadata | where Environment == 'GCP' and Identifiers.Type == 'compute.firewalls' | extend IslogConfigEnabled = tobool(Record.logConfig.enable) | extend HealthStatus = iff(IslogConfigEnabled, 'HEALTHY', 'UNHEALTHY')",
+        "cloudProviders": [
+          "AWS"
+        ],
+        "severity": "Medium",
+        "displayName": "Password Policy",
+        "description": "organization passwords policy",
+        "remediationDescription": "Change password policy to...",
+        "securityIssue": "Vulnerability"
+      }
     }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/e5d1b86c-3051-44d5-8802-aa65d45a279b/providers/Microsoft.Security/customAssessmentAutomations/33e7cc6e-a139-4723-a0e5-76993aee0771",
+        "name": "33e7cc6e-a139-4723-a0e5-76993aee0771",
+        "type": "Microsoft.Security/customAssessmentAutomations",
+        "properties": {
+          "query": "RawEntityMetadata | where Environment == 'GCP' and Identifiers.Type == 'compute.firewalls' | extend IslogConfigEnabled = tobool(Record.logConfig.enable) | extend HealthStatus = iff(IslogConfigEnabled, 'HEALTHY', 'UNHEALTHY')",
+          "cloudProviders": [
+            "AWS"
+          ],
+          "severity": "Medium",
+          "displayName": "Password Policy",
+          "description": "organization passwords policy",
+          "remediationDescription": "Change password policy to...",
+          "assessmentKey": "d5f442f7-7e77-4bcf-a450-a9c1b9a94eeb",
+          "securityIssue": "Vulnerability",
+          "metadata": {
+            "createdBy": "c23b5354-ff0a-4b2a-9f92-6f144effd936",
+            "createdOn": "2022-11-10T08:31:26.7993124Z",
+            "lastUpdatedBy": "c23b5354-ff0a-4b2a-9f92-6f144effd936",
+            "lastUpdatedOn": "2022-11-10T08:31:26.7993124Z"
+          }
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/e5d1b86c-3051-44d5-8802-aa65d45a279b/providers/Microsoft.Security/customAssessmentAutomations/33e7cc6e-a139-4723-a0e5-76993aee0771",
+        "name": "33e7cc6e-a139-4723-a0e5-76993aee0771",
+        "type": "Microsoft.Security/customAssessmentAutomations",
+        "properties": {
+          "query": "RawEntityMetadata | where Environment == 'GCP' and Identifiers.Type == 'compute.firewalls' | extend IslogConfigEnabled = tobool(Record.logConfig.enable) | extend HealthStatus = iff(IslogConfigEnabled, 'HEALTHY', 'UNHEALTHY')",
+          "cloudProviders": [
+            "AWS"
+          ],
+          "severity": "Medium",
+          "displayName": "Password Policy",
+          "description": "organization passwords policy",
+          "remediationDescription": "Change password policy to...",
+          "assessmentKey": "d5f442f7-7e77-4bcf-a450-a9c1b9a94eeb",
+          "securityIssue": "Vulnerability",
+          "metadata": {
+            "createdBy": "c23b5354-ff0a-4b2a-9f92-6f144effd936",
+            "createdOn": "2022-11-10T08:31:26.7993124Z",
+            "lastUpdatedBy": "c23b5354-ff0a-4b2a-9f92-6f144effd936",
+            "lastUpdatedOn": "2022-11-10T08:31:26.7993124Z"
+          }
+        }
+      }
+    }
+  }
 }
