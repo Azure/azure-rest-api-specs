@@ -20,7 +20,7 @@ interface TextOperations {
   @post
   analyzeText is Azure.Core.RpcOperation<
     {
-      @body
+      @bodyRoot
       @doc("The text analysis request.")
       @clientName("options", "csharp")
       @clientName("options", "python")
@@ -30,38 +30,38 @@ interface TextOperations {
     AnalyzeTextResult
   >;
 
-  @added(ContentSafety.Versions.v2023_10_15_Preview)
-  @summary("Analyze Text Jailbreak")
-  @doc("A synchronous API for the analysis of text jailbreak.")
-  @route("/text:detectJailbreak")
+  @added(ContentSafety.Versions.v2024_09_01)
+  @summary("Shield Prompt")
+  @doc("A synchronous API for shielding prompt from direct and indirect injection attacks.")
+  @route("/text:shieldPrompt")
   @post
-  detectTextJailbreak is Azure.Core.RpcOperation<
+  shieldPrompt is Azure.Core.RpcOperation<
     {
-      @body
-      @doc("The text jailbreak analysis request.")
+      @bodyRoot
+      @doc("The request body to be detected, which may contain direct or indirect injection attacks.")
       @clientName("options", "csharp")
       @clientName("options", "python")
       @clientName("options", "java")
-      body: AnalyzeTextJailbreakOptions;
+      body: ShieldPromptOptions;
     },
-    AnalyzeTextJailbreakResult
+    ShieldPromptResult
   >;
 
-  @added(ContentSafety.Versions.v2023_10_15_Preview)
-  @summary("Analyze Protected Material")
-  @doc("A synchronous API for the analysis of protected material.")
+  @added(ContentSafety.Versions.v2024_09_01)
+  @summary("Detect Protected Material for Text")
+  @doc("A synchronous API for detecting protected material in the given text.")
   @route("/text:detectProtectedMaterial")
   @post
   detectTextProtectedMaterial is Azure.Core.RpcOperation<
     {
-      @body
-      @doc("The text protected material analysis request.")
+      @bodyRoot
+      @doc("The request body to be detected, which may contain protected material.")
       @clientName("options", "csharp")
       @clientName("options", "python")
       @clientName("options", "java")
-      body: AnalyzeTextProtectedMaterialOptions;
+      body: DetectTextProtectedMaterialOptions;
     },
-    AnalyzeTextProtectedMaterialResult
+    DetectTextProtectedMaterialResult
   >;
 }
 
@@ -73,7 +73,7 @@ interface ImageOperations {
   analyzeImage is Azure.Core.RpcOperation<
     {
       @doc("The image analysis request.")
-      @body
+      @bodyRoot
       @clientName("options", "csharp")
       @clientName("options", "python")
       @clientName("options", "java")
@@ -113,7 +113,7 @@ interface TextBlocklists {
     TextBlocklist,
     {
       @doc("Options for adding or updating blocklist items.")
-      @body
+      @bodyRoot
       @clientName("options", "csharp")
       @clientName("options", "python")
       @clientName("options", "java")
@@ -128,7 +128,7 @@ interface TextBlocklists {
     TextBlocklist,
     {
       @doc("Options for removing blocklist items.")
-      @body
+      @bodyRoot
       @clientName("options", "csharp")
       @clientName("options", "python")
       @clientName("options", "java")

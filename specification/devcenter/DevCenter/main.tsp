@@ -27,7 +27,7 @@ using TypeSpec.Http;
   "DevCenter service",
   {
     @doc("The DevCenter-specific URI to operate on.")
-    endpoint: string,
+    endpoint: url,
   }
 )
 @doc("DevCenter service")
@@ -39,4 +39,12 @@ enum APIVersions {
   @doc("The 2023-04-01 service API version")
   @useDependency(Versions.v1_0_Preview_2)
   v2023_04_01: "2023-04-01",
+
+  @doc("The 2024-02-01 service API version")
+  @useDependency(Versions.v1_0_Preview_2)
+  v2024_02_01: "2024-02-01",
+
+  @doc("The 2024-05-01-preview service API version")
+  @useDependency(Versions.v1_0_Preview_2)
+  v2024_05_01_preview: "2024-05-01-preview",
 }

@@ -3123,17 +3123,8 @@
           }
         },
         "publicNetworkAccess": {
-          "type": "string",
-          "description": "Allow, disallow, or let Network Security Perimeter configuration to evaluate public network access to Storage Account. Value is optional but if passed in, must be 'Enabled', 'Disabled' or 'SecuredByPerimeter'.",
-          "enum": [
-            "Enabled",
-            "Disabled",
-            "SecuredByPerimeter"
-          ],
-          "x-ms-enum": {
-            "name": "PublicNetworkAccess",
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/PublicNetworkAccess",
+          "description": "Allow, disallow, or let Network Security Perimeter configuration to evaluate public network access to Storage Account. Value is optional but if passed in, must be 'Enabled', 'Disabled' or 'SecuredByPerimeter'."
         },
         "sasPolicy": {
           "$ref": "#/definitions/SasPolicy",
@@ -3939,17 +3930,8 @@
           "description": "A boolean flag which indicates whether the default authentication is OAuth or not. The default interpretation is false for this property."
         },
         "publicNetworkAccess": {
-          "type": "string",
-          "enum": [
-            "Enabled",
-            "Disabled",
-            "SecuredByPerimeter"
-          ],
-          "x-ms-enum": {
-            "name": "PublicNetworkAccess",
-            "modelAsString": true
-          },
-          "description": "Allow, disallow, or let Network Security Perimeter configuration to evaluate public network access to Storage Account. Value is optional but if passed in, must be 'Enabled', 'Disabled' or 'SecuredByPerimeter'."
+          "$ref": "#/definitions/PublicNetworkAccess",
+          "description": "Allow, disallow, or let Network Security Perimeter configuration to evaluate public network access to Storage Account."
         },
         "immutableStorageWithVersioning": {
           "$ref": "#/definitions/ImmutableStorageAccount",
@@ -4257,16 +4239,8 @@
           "description": "A boolean flag which indicates whether the default authentication is OAuth or not. The default interpretation is false for this property."
         },
         "publicNetworkAccess": {
-          "type": "string",
-          "enum": [
-            "Enabled",
-            "Disabled"
-          ],
-          "x-ms-enum": {
-            "name": "PublicNetworkAccess",
-            "modelAsString": true
-          },
-          "description": "Allow or disallow public network access to Storage Account. Value is optional but if passed in, must be 'Enabled' or 'Disabled'."
+          "$ref": "#/definitions/PublicNetworkAccess",
+          "description": "Allow, disallow, or let Network Security Perimeter configuration to evaluate public network access to Storage Account. Value is optional but if passed in, must be 'Enabled', 'Disabled' or 'SecuredByPerimeter'."
         },
         "immutableStorageWithVersioning": {
           "$ref": "#/definitions/ImmutableStorageAccount",
@@ -5642,6 +5616,19 @@
         }
       },
       "description": "An error response from the storage resource provider."
+    },
+    "PublicNetworkAccess": {
+      "type": "string",
+      "description": "Allow, disallow, or let Network Security Perimeter configuration to evaluate public network access to Storage Account. Value is optional but if passed in, must be 'Enabled', 'Disabled' or 'SecuredByPerimeter'.",
+      "enum": [
+        "Enabled",
+        "Disabled",
+        "SecuredByPerimeter"
+      ],
+      "x-ms-enum": {
+        "name": "PublicNetworkAccess",
+        "modelAsString": true
+      }
     }
   },
   "parameters": {

@@ -100,15 +100,15 @@
               "$ref": "#/definitions/PagedAccountResource"
             },
             "headers": {
-              "x-ms-record-count": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The total number of records available for this request."
-              },
               "x-ms-client-request-id": {
                 "type": "string",
                 "format": "uuid",
                 "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              },
+              "x-ms-record-count": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The total number of records available for this request."
               }
             }
           },
@@ -269,6 +269,10 @@
               "$ref": "#/definitions/AccountResource"
             },
             "headers": {
+              "ETag": {
+                "type": "string",
+                "description": "The entity tag for the response."
+              },
               "Repeatability-Result": {
                 "type": "string",
                 "description": "Indicates whether the repeatable request was accepted or rejected.",
@@ -292,10 +296,6 @@
                     }
                   ]
                 }
-              },
-              "ETag": {
-                "type": "string",
-                "description": "The entity tag for the response."
               },
               "x-ms-client-request-id": {
                 "type": "string",
@@ -310,6 +310,10 @@
               "$ref": "#/definitions/AccountResource"
             },
             "headers": {
+              "ETag": {
+                "type": "string",
+                "description": "The entity tag for the response."
+              },
               "Repeatability-Result": {
                 "type": "string",
                 "description": "Indicates whether the repeatable request was accepted or rejected.",
@@ -333,10 +337,6 @@
                     }
                   ]
                 }
-              },
-              "ETag": {
-                "type": "string",
-                "description": "The entity tag for the response."
               },
               "x-ms-client-request-id": {
                 "type": "string",
@@ -499,6 +499,7 @@
           {
             "name": "body",
             "in": "body",
+            "description": "Batch of numbers to create or replace.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/BatchNumbers"
@@ -597,6 +598,7 @@
           {
             "name": "body",
             "in": "body",
+            "description": "Batch numbers to delete.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/BatchNumbersDelete"
@@ -782,6 +784,7 @@
           {
             "name": "body",
             "in": "body",
+            "description": "List identifiers for a Number resource",
             "required": true,
             "schema": {
               "$ref": "#/definitions/NumberIdentifiers"
@@ -894,15 +897,15 @@
               "$ref": "#/definitions/PagedNumberResource"
             },
             "headers": {
-              "x-ms-record-count": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The total number of records available for this request."
-              },
               "x-ms-client-request-id": {
                 "type": "string",
                 "format": "uuid",
                 "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              },
+              "x-ms-record-count": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The total number of records available for this request."
               }
             }
           },
@@ -1083,6 +1086,10 @@
               "$ref": "#/definitions/NumberResource"
             },
             "headers": {
+              "ETag": {
+                "type": "string",
+                "description": "The entity tag for the response."
+              },
               "Repeatability-Result": {
                 "type": "string",
                 "description": "Indicates whether the repeatable request was accepted or rejected.",
@@ -1106,10 +1113,6 @@
                     }
                   ]
                 }
-              },
-              "ETag": {
-                "type": "string",
-                "description": "The entity tag for the response."
               },
               "x-ms-client-request-id": {
                 "type": "string",
@@ -1124,6 +1127,10 @@
               "$ref": "#/definitions/NumberResource"
             },
             "headers": {
+              "ETag": {
+                "type": "string",
+                "description": "The entity tag for the response."
+              },
               "Repeatability-Result": {
                 "type": "string",
                 "description": "Indicates whether the repeatable request was accepted or rejected.",
@@ -1147,10 +1154,6 @@
                     }
                   ]
                 }
-              },
-              "ETag": {
-                "type": "string",
-                "description": "The entity tag for the response."
               },
               "x-ms-client-request-id": {
                 "type": "string",
@@ -1334,15 +1337,15 @@
               "$ref": "#/definitions/PagedTeamsCivicAddressResource"
             },
             "headers": {
-              "x-ms-record-count": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The total number of records available for this request."
-              },
               "x-ms-client-request-id": {
                 "type": "string",
                 "format": "uuid",
                 "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              },
+              "x-ms-record-count": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The total number of records available for this request."
               }
             }
           },
@@ -1552,15 +1555,15 @@
               "$ref": "#/definitions/PagedRequestForInformationResource"
             },
             "headers": {
-              "x-ms-record-count": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The total number of records available for this request."
-              },
               "x-ms-client-request-id": {
                 "type": "string",
                 "format": "uuid",
                 "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              },
+              "x-ms-record-count": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The total number of records available for this request."
               }
             }
           },
@@ -1724,6 +1727,10 @@
               "$ref": "#/definitions/RequestForInformationResource"
             },
             "headers": {
+              "ETag": {
+                "type": "string",
+                "description": "The entity tag for the response."
+              },
               "Repeatability-Result": {
                 "type": "string",
                 "description": "Indicates whether the repeatable request was accepted or rejected.",
@@ -1747,10 +1754,6 @@
                     }
                   ]
                 }
-              },
-              "ETag": {
-                "type": "string",
-                "description": "The entity tag for the response."
               },
               "x-ms-client-request-id": {
                 "type": "string",
@@ -1765,6 +1768,10 @@
               "$ref": "#/definitions/RequestForInformationResource"
             },
             "headers": {
+              "ETag": {
+                "type": "string",
+                "description": "The entity tag for the response."
+              },
               "Repeatability-Result": {
                 "type": "string",
                 "description": "Indicates whether the repeatable request was accepted or rejected.",
@@ -1788,10 +1795,6 @@
                     }
                   ]
                 }
-              },
-              "ETag": {
-                "type": "string",
-                "description": "The entity tag for the response."
               },
               "x-ms-client-request-id": {
                 "type": "string",
@@ -2391,8 +2394,7 @@
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items",
-          "readOnly": true
+          "description": "The link to the next page of items"
         }
       },
       "required": [
@@ -2414,8 +2416,7 @@
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items",
-          "readOnly": true
+          "description": "The link to the next page of items"
         }
       },
       "required": [
@@ -2437,8 +2438,7 @@
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items",
-          "readOnly": true
+          "description": "The link to the next page of items"
         }
       },
       "required": [
@@ -2459,8 +2459,7 @@
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items",
-          "readOnly": true
+          "description": "The link to the next page of items"
         }
       },
       "required": [
@@ -2481,8 +2480,7 @@
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items",
-          "readOnly": true
+          "description": "The link to the next page of items"
         }
       },
       "required": [
@@ -3517,24 +3515,6 @@
             "name": "validated",
             "value": "validated",
             "description": "The civic address is validated."
-          }
-        ]
-      }
-    },
-    "Versions": {
-      "type": "string",
-      "description": "The Microsoft.VoiceServices service versions.",
-      "enum": [
-        "2024-02-29-preview"
-      ],
-      "x-ms-enum": {
-        "name": "Versions",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "v2024_02_29_preview",
-            "value": "2024-02-29-preview",
-            "description": "2024-02-29-preview"
           }
         ]
       }
