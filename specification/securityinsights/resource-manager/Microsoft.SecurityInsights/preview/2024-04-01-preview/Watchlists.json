@@ -155,11 +155,14 @@
           }
         ],
         "responses": {
-          "200": {
+          "202": {
             "description": "OK",
             "headers": {
               "Azure-AsyncOperation": {
                 "description": "Contains the status URL on which clients are expected to poll the status of the delete operation.",
+                "type": "string"
+              },
+              "Location": {
                 "type": "string"
               }
             }
@@ -170,10 +173,11 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       },
       "put": {
         "x-ms-examples": {
@@ -231,10 +235,11 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/watchlists/{watchlistAlias}/watchlistItems": {
@@ -579,6 +584,9 @@
         "uploadStatus": {
           "description": "The status of the Watchlist upload : New, InProgress or Complete. Pls note : When a Watchlist upload status is equal to InProgress, the Watchlist cannot be deleted",
           "type": "string"
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState"
         }
       },
       "required": [
@@ -665,19 +673,31 @@
         },
         "itemsKeyValue": {
           "description": "key-value pairs for a watchlist item",
-          "type": "object",
-          "additionalProperties": {}
+          "type": "object"
         },
         "entityMapping": {
           "description": "key-value pairs for a watchlist item entity mapping",
-          "type": "object",
-          "additionalProperties": {}
+          "type": "object"
         }
       },
       "required": [
         "itemsKeyValue"
       ],
       "type": "object"
+    },
+    "ProvisioningState": {
+      "description": "Describes provisioning state",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true
+      },
+      "readOnly": true
     }
   },
   "parameters": {
