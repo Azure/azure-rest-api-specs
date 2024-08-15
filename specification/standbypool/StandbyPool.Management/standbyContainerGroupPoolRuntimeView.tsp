@@ -50,6 +50,10 @@ model StandbyContainerGroupPoolRuntimeViewResourceProperties {
 @added(Microsoft.StandbyPool.Versions.`2024-03-01-preview`)
 @doc("Displays the counts of container groups in each state, as known by the StandbyPool resource provider.")
 model ContainerGroupInstanceCountSummary {
+  @added(Microsoft.StandbyPool.Versions.`2024-08-01-preview`)
+  @doc("The zone that the provided counts are in. This is null if zones are not enabled.")
+  zone?: int64;
+
   @doc("The count of pooled resources in each state.")
   @extension("x-ms-identifiers", ["state"])
   instanceCountsByState: PoolResourceStateCount[];
