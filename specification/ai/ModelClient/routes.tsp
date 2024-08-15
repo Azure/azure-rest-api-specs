@@ -38,8 +38,7 @@ op getChatCompletions is Azure.Core.RpcOperation<
 op getChatCompletionsOverride is Azure.Core.RpcOperation<
   {
     chatCompletionsOptions: ChatCompletionsOptions,
-    @header("extra-parameters")
-    extra_params?: ExtraParameters,
+    ...AdditionalRequestHeaders,
   },
   ChatCompletions
 >;
