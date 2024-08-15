@@ -72,7 +72,7 @@ model EmbeddingItem {
     List of embedding values for the input prompt. These represent a measurement of the
     vector-based relatedness of the provided input. Or a base64 encoded string of the embedding vector.
     """)
-  embedding: float32[] | string;
+  embedding: string | float32[];
 
   @doc("Index of the prompt to which the EmbeddingItem corresponds.")
   index: int32;
