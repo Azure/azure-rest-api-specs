@@ -72,7 +72,8 @@
             "description": "A successful call results with an Operation-Location header used to check the status of the analysis job.",
             "headers": {
               "Operation-Location": {
-                "type": "string"
+                "type": "string",
+                "format": "uri"
               }
             }
           },
@@ -158,7 +159,8 @@
             "description": "Cancel Job request has been received.",
             "headers": {
               "Operation-Location": {
-                "type": "string"
+                "type": "string",
+                "format": "uri"
               }
             }
           },
@@ -347,19 +349,19 @@
           "properties": {
             "completed": {
               "type": "integer",
-              "format": "int64"
+              "format": "int32"
             },
             "failed": {
               "type": "integer",
-              "format": "int64"
+              "format": "int32"
             },
             "inProgress": {
               "type": "integer",
-              "format": "int64"
+              "format": "int32"
             },
             "total": {
               "type": "integer",
-              "format": "int64"
+              "format": "int32"
             },
             "items": {
               "type": "array",
