@@ -2,124 +2,101 @@ import "./main.tsp";
 import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
+using Microsoft.DevOpsInfrastructure;
 
 @@clientName(Microsoft.DevOpsInfrastructure,
   "DevOpsInfrastructureMgmt",
   "python"
 );
 
-namespace Microsoft.DevOpsInfrastructure {
-  @@access(Operations.list, Access.internal);
+@@access(Operations.list, Access.internal);
 
-  /* Modify the usage to ensure backward compatibility with the SDK generated from Swagger. */
-  @@usage(ResourceSkuProperties, Usage.input | Usage.output, "csharp");
-  @@usage(ResourceSku, Usage.input | Usage.output, "csharp");
-  @@usage(ResourceSkuZoneDetails, Usage.input | Usage.output, "csharp");
-  @@usage(ResourceSkuRestrictions, Usage.input | Usage.output, "csharp");
-  @@usage(ResourceSkuRestrictionInfo, Usage.input | Usage.output, "csharp");
-  @@usage(ResourceSkuCapabilities, Usage.input | Usage.output, "csharp");
-  @@usage(ResourceSkuLocationInfo, Usage.input | Usage.output, "csharp");
-  @@usage(ResourceDetailsObjectProperties,
-    Usage.input | Usage.output,
-    "csharp"
-  );
-  @@usage(ResourceDetailsObject, Usage.input | Usage.output, "csharp");
-  @@usage(ImageVersion, Usage.input | Usage.output, "csharp");
+/* Rename models */
+@@clientName(ImageVersion, "DevOpsImageVersion", "csharp");
 
-  /* Rename models */
-  @@clientName(ImageVersion, "DevOpsImageVersion", "csharp");
+@@clientName(ResourceSkuRestrictions.type, "RestrictionsType", "csharp");
 
-  @@clientName(Organization.url, "OrganizationUri", "csharp");
+@@clientName(StorageAccountType, "DevOpsStorageAccountType", "csharp");
+@@clientName(StorageAccountType.StandardLRS, "StandardLrs", "csharp");
+@@clientName(StorageAccountType.PremiumLRS, "PremiumLrs", "csharp");
+@@clientName(StorageAccountType.StandardSSDLRS, "StandardSsdLrs", "csharp");
+@@clientName(StorageAccountType.PremiumZRS, "PremiumZrs", "csharp");
+@@clientName(StorageAccountType.StandardSSDZRS, "StandardSsdZrs", "csharp");
 
-  @@clientName(GitHubOrganization.url, "OrganizationUri", "csharp");
+@@clientName(OsDiskStorageAccountType.StandardSSD, "StandardSsd", "csharp");
 
-  @@clientName(ResourceSkuRestrictions.type, "RestrictionsType", "csharp");
+@@clientName(Pool, "DevOpsPool", "csharp");
 
-  @@clientName(StorageAccountType, "DevOpsStorageAccountType", "csharp");
-  @@clientName(StorageAccountType.StandardLRS, "StandardLrs", "csharp");
-  @@clientName(StorageAccountType.PremiumLRS, "PremiumLrs", "csharp");
-  @@clientName(StorageAccountType.StandardSSDLRS, "StandardSsdLrs", "csharp");
-  @@clientName(StorageAccountType.PremiumZRS, "PremiumZrs", "csharp");
-  @@clientName(StorageAccountType.StandardSSDZRS, "StandardSsdZrs", "csharp");
+@@clientName(PoolProperties, "DevOpsPoolProperties", "csharp");
 
-  @@clientName(OsDiskStorageAccountType.StandardSSD, "StandardSsd", "csharp");
+@@clientName(AgentProfile, "DevOpsPoolAgentProfile", "csharp");
 
-  @@clientName(Pool, "DevOpsPool", "csharp");
+@@clientName(AzureDevOpsOrganizationProfile,
+  "DevOpsAzureOrganizationProfile",
+  "csharp"
+);
 
-  @@clientName(PoolProperties, "DevOpsPoolProperties", "csharp");
+@@clientName(AzureDevOpsPermissionProfile,
+  "DevOpsAzurePermissionProfile",
+  "csharp"
+);
 
-  @@clientName(AgentProfile, "DevOpsPoolAgentProfile", "csharp");
+@@clientName(AzureDevOpsPermissionType, "DevOpsAzurePermissionType", "csharp");
 
-  @@clientName(AzureDevOpsOrganizationProfile,
-    "DevOpsAzureOrganizationProfile",
-    "csharp"
-  );
+@@clientName(CachingType, "DevOpsDataDiskCachingType", "csharp");
 
-  @@clientName(AzureDevOpsPermissionProfile,
-    "DevOpsAzurePermissionProfile",
-    "csharp"
-  );
+@@clientName(DataDisk, "DevOpsDataDisk", "csharp");
 
-  @@clientName(AzureDevOpsPermissionType,
-    "DevOpsAzurePermissionType",
-    "csharp"
-  );
+@@clientName(FabricProfile, "DevOpsFabricProfile", "csharp");
 
-  @@clientName(CachingType, "DevOpsDataDiskCachingType", "csharp");
+@@clientName(GitHubOrganization, "DevOpsGitHubOrganization", "csharp");
 
-  @@clientName(DataDisk, "DevOpsDataDisk", "csharp");
+@@clientName(GitHubOrganizationProfile,
+  "DevOpsGitHubOrganizationProfile",
+  "csharp"
+);
 
-  @@clientName(FabricProfile, "DevOpsFabricProfile", "csharp");
+@@clientName(LogonType, "DevOpsLogonType", "csharp");
 
-  @@clientName(GitHubOrganization, "DevOpsGitHubOrganization", "csharp");
+@@clientName(NetworkProfile, "DevOpsNetworkProfile", "csharp");
 
-  @@clientName(GitHubOrganizationProfile,
-    "DevOpsGitHubOrganizationProfile",
-    "csharp"
-  );
+@@clientName(Organization, "DevOpsOrganization", "csharp");
 
-  @@clientName(LogonType, "DevOpsLogonType", "csharp");
+@@clientName(OrganizationProfile, "DevOpsOrganizationProfile", "csharp");
 
-  @@clientName(NetworkProfile, "DevOpsNetworkProfile", "csharp");
+@@clientName(OsProfile, "DevOpsOSProfile", "csharp");
 
-  @@clientName(Organization, "DevOpsOrganization", "csharp");
+@@clientName(PoolImage, "DevOpsPoolVmImage", "csharp");
 
-  @@clientName(OrganizationProfile, "DevOpsOrganizationProfile", "csharp");
+@@clientName(ProvisioningState,
+  "DevOpsInfrastructureProvisioningState",
+  "csharp"
+);
 
-  @@clientName(OsProfile, "DevOpsOSProfile", "csharp");
+@@clientName(Quota, "DevOpsResourceQuota", "csharp");
 
-  @@clientName(PoolImage, "DevOpsPoolVmImage", "csharp");
+@@clientName(QuotaName, "DevOpsResourceQuotaName", "csharp");
 
-  @@clientName(ProvisioningState,
-    "DevOpsInfrastructureProvisioningState",
-    "csharp"
-  );
+@@clientName(ResourceDetailsObject, "DevOpsResourceDetails", "csharp");
 
-  @@clientName(Quota, "DevOpsResourceQuota", "csharp");
+@@clientName(ResourceDetailsObjectProperties,
+  "DevOpsResourceDetailsProperties",
+  "csharp"
+);
 
-  @@clientName(QuotaName, "DevOpsResourceQuotaName", "csharp");
+@@clientName(ResourceStatus, "DevOpsResourceStatus", "csharp");
 
-  @@clientName(ResourceDetailsObject, "DevOpsResourceDetails", "csharp");
+@@clientName(ResourceSku, "DevOpsResourceSku", "csharp");
 
-  @@clientName(ResourceDetailsObjectProperties,
-    "DevOpsResourceDetailsProperties",
-    "csharp"
-  );
+@@clientName(ResourceSkuProperties, "DevOpsResourceSkuProperties", "csharp");
 
-  @@clientName(ResourceStatus, "DevOpsResourceStatus", "csharp");
+@@clientName(Stateful, "DevOpsStateful", "csharp");
 
-  @@clientName(ResourceSku, "DevOpsResourceSku", "csharp");
+@@clientName(StatelessAgentProfile, "DevOpsStatelessAgentProfile", "csharp");
 
-  @@clientName(ResourceSkuProperties, "DevOpsResourceSkuProperties", "csharp");
+@@clientName(StorageProfile, "DevOpsStorageProfile", "csharp");
 
-  @@clientName(Stateful, "DevOpsStateful", "csharp");
+@@clientName(VmssFabricProfile, "DevOpsVmssFabricProfile", "csharp");
 
-  @@clientName(StatelessAgentProfile, "DevOpsStatelessAgentProfile", "csharp");
-
-  @@clientName(StorageProfile, "DevOpsStorageProfile", "csharp");
-
-  @@clientName(VmssFabricProfile, "DevOpsVmssFabricProfile", "csharp");
-
-  /* Rename opeartions */
-  @@clientName(SubscriptionUsages.usages, "GetUsages", "csharp");
-}
+/* Rename opeartions */
+@@clientName(SubscriptionUsages.usages, "GetUsages", "csharp");
