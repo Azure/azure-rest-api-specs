@@ -3681,7 +3681,7 @@
           "description": "The properties of the connectors instance."
         },
         "dataflows": {
-          "$ref": "#/definitions/DataFlowInstanceProperties",
+          "$ref": "#/definitions/DataflowInstanceProperties",
           "description": "The properties of the dataflows instance."
         },
         "schemaRegistry": {
@@ -3710,73 +3710,6 @@
     "DataExplorerAuthMethod": {
       "$ref": "#/definitions/ManagedIdentityMethod",
       "x-nullable": false
-    },
-    "DataFlowEndpointFabricOneLakeAuthentication": {
-      "type": "object",
-      "description": "Microsoft Fabric endpoint. Authentication properties. NOTE - Only one method is supported for one entry",
-      "properties": {
-        "method": {
-          "$ref": "#/definitions/FabricOneLakeAuthMethod",
-          "description": "Mode of Authentication."
-        },
-        "systemAssignedManagedIdentitySettings": {
-          "$ref": "#/definitions/DataflowEndpointAuthenticationSystemAssignedManagedIdentity",
-          "description": "System-assigned managed identity authentication."
-        },
-        "userAssignedManagedIdentitySettings": {
-          "$ref": "#/definitions/DataflowEndpointAuthenticationUserAssignedManagedIdentity",
-          "description": "User-assigned managed identity authentication."
-        }
-      },
-      "required": [
-        "method"
-      ]
-    },
-    "DataFlowEndpointKafkaAuthentication": {
-      "type": "object",
-      "description": "Kafka endpoint Authentication properties. NOTE - only authentication property is allowed per entry",
-      "properties": {
-        "method": {
-          "$ref": "#/definitions/KafkaAuthMethod",
-          "description": "Mode of Authentication."
-        },
-        "systemAssignedManagedIdentitySettings": {
-          "$ref": "#/definitions/DataflowEndpointAuthenticationSystemAssignedManagedIdentity",
-          "description": "System-assigned managed identity authentication."
-        },
-        "userAssignedManagedIdentitySettings": {
-          "$ref": "#/definitions/DataflowEndpointAuthenticationUserAssignedManagedIdentity",
-          "description": "User-assigned managed identity authentication."
-        },
-        "saslSettings": {
-          "$ref": "#/definitions/DataflowEndpointAuthenticationSasl",
-          "description": "SASL authentication."
-        },
-        "x509CertificateSettings": {
-          "$ref": "#/definitions/DataflowEndpointAuthenticationX509",
-          "description": "X.509 certificate authentication."
-        }
-      },
-      "required": [
-        "method"
-      ]
-    },
-    "DataFlowInstanceProperties": {
-      "type": "object",
-      "description": "The properties of an DataFlow instance.",
-      "properties": {
-        "state": {
-          "$ref": "#/definitions/OperationalMode",
-          "description": "This determines if the Dataflow service is enabled.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        }
-      },
-      "required": [
-        "state"
-      ]
     },
     "DataLakeStorageAuthMethod": {
       "type": "string",
@@ -4230,7 +4163,7 @@
       "description": "Microsoft Fabric endpoint properties",
       "properties": {
         "authentication": {
-          "$ref": "#/definitions/DataFlowEndpointFabricOneLakeAuthentication",
+          "$ref": "#/definitions/DataflowEndpointFabricOneLakeAuthentication",
           "description": "Authentication configuration. NOTE - only one authentication property is allowed per entry."
         },
         "names": {
@@ -4256,6 +4189,27 @@
         "names",
         "oneLakePathType",
         "host"
+      ]
+    },
+    "DataflowEndpointFabricOneLakeAuthentication": {
+      "type": "object",
+      "description": "Microsoft Fabric endpoint. Authentication properties. NOTE - Only one method is supported for one entry",
+      "properties": {
+        "method": {
+          "$ref": "#/definitions/FabricOneLakeAuthMethod",
+          "description": "Mode of Authentication."
+        },
+        "systemAssignedManagedIdentitySettings": {
+          "$ref": "#/definitions/DataflowEndpointAuthenticationSystemAssignedManagedIdentity",
+          "description": "System-assigned managed identity authentication."
+        },
+        "userAssignedManagedIdentitySettings": {
+          "$ref": "#/definitions/DataflowEndpointAuthenticationUserAssignedManagedIdentity",
+          "description": "User-assigned managed identity authentication."
+        }
+      },
+      "required": [
+        "method"
       ]
     },
     "DataflowEndpointFabricOneLakeNames": {
@@ -4305,7 +4259,7 @@
       "description": "Kafka endpoint properties",
       "properties": {
         "authentication": {
-          "$ref": "#/definitions/DataFlowEndpointKafkaAuthentication",
+          "$ref": "#/definitions/DataflowEndpointKafkaAuthentication",
           "description": "Authentication configuration. NOTE - only authentication property is allowed per entry."
         },
         "consumerGroupId": {
@@ -4492,6 +4446,35 @@
           }
         ]
       }
+    },
+    "DataflowEndpointKafkaAuthentication": {
+      "type": "object",
+      "description": "Kafka endpoint Authentication properties. NOTE - only authentication property is allowed per entry",
+      "properties": {
+        "method": {
+          "$ref": "#/definitions/KafkaAuthMethod",
+          "description": "Mode of Authentication."
+        },
+        "systemAssignedManagedIdentitySettings": {
+          "$ref": "#/definitions/DataflowEndpointAuthenticationSystemAssignedManagedIdentity",
+          "description": "System-assigned managed identity authentication."
+        },
+        "userAssignedManagedIdentitySettings": {
+          "$ref": "#/definitions/DataflowEndpointAuthenticationUserAssignedManagedIdentity",
+          "description": "User-assigned managed identity authentication."
+        },
+        "saslSettings": {
+          "$ref": "#/definitions/DataflowEndpointAuthenticationSasl",
+          "description": "SASL authentication."
+        },
+        "x509CertificateSettings": {
+          "$ref": "#/definitions/DataflowEndpointAuthenticationX509",
+          "description": "X.509 certificate authentication."
+        }
+      },
+      "required": [
+        "method"
+      ]
     },
     "DataflowEndpointKafkaBatching": {
       "type": "object",
@@ -4858,6 +4841,23 @@
       },
       "required": [
         "value"
+      ]
+    },
+    "DataflowInstanceProperties": {
+      "type": "object",
+      "description": "The properties of an Dataflow instance.",
+      "properties": {
+        "state": {
+          "$ref": "#/definitions/OperationalMode",
+          "description": "This determines if the Dataflow service is enabled.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "state"
       ]
     },
     "DataflowMappingType": {

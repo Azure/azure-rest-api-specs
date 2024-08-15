@@ -73,7 +73,7 @@ model Components {
   };
 
   @doc("The properties of the dataflows instance.")
-  dataflows?: DataFlowInstanceProperties = #{ state: OperationalMode.Enabled };
+  dataflows?: DataflowInstanceProperties = #{ state: OperationalMode.Enabled };
 
   @doc("The properties of the device provisioning instance.")
   schemaRegistry?: SchemaRegistryInstanceProperties = #{
@@ -101,8 +101,8 @@ model ConnectorInstanceProperties {
   state: OperationalMode;
 }
 
-@doc("The properties of an DataFlow instance.")
-model DataFlowInstanceProperties {
+@doc("The properties of an Dataflow instance.")
+model DataflowInstanceProperties {
   @doc("This determines if the Dataflow service is enabled.")
   @visibility("create", "read")
   state: OperationalMode;
