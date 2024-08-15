@@ -147,7 +147,7 @@ union DataLakeStorageAuthMethod {
 @doc("Microsoft Fabric endpoint properties")
 model DataflowEndpointFabricOneLake {
   @doc("Authentication configuration. NOTE - only one authentication property is allowed per entry.")
-  authentication: DataFlowEndpointFabricOneLakeAuthentication;
+  authentication: DataflowEndpointFabricOneLakeAuthentication;
 
   @doc("Names of the workspace and lakehouse.")
   names: DataflowEndpointFabricOneLakeNames;
@@ -164,7 +164,7 @@ model DataflowEndpointFabricOneLake {
 }
 
 @doc("Microsoft Fabric endpoint. Authentication properties. NOTE - Only one method is supported for one entry")
-model DataFlowEndpointFabricOneLakeAuthentication {
+model DataflowEndpointFabricOneLakeAuthentication {
   @doc("Mode of Authentication.")
   method: FabricOneLakeAuthMethod;
 
@@ -200,7 +200,7 @@ union DataflowEndpointFabricPathType {
 @doc("Kafka endpoint properties")
 model DataflowEndpointKafka {
   @doc("Authentication configuration. NOTE - only authentication property is allowed per entry.")
-  authentication: DataFlowEndpointKafkaAuthentication;
+  authentication: DataflowEndpointKafkaAuthentication;
 
   @doc("Consumer group ID.")
   consumerGroupId?: string;
@@ -231,7 +231,7 @@ model DataflowEndpointKafka {
 }
 
 @doc("Kafka endpoint Authentication properties. NOTE - only authentication property is allowed per entry")
-model DataFlowEndpointKafkaAuthentication {
+model DataflowEndpointKafkaAuthentication {
   @doc("Mode of Authentication.")
   method: KafkaAuthMethod;
 
