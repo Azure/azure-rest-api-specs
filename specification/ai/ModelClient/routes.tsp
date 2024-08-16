@@ -5,6 +5,8 @@ import "@typespec/versioning";
 
 import "./models/common.tsp";
 import "./models/chat_completions.tsp";
+import "./models/embeddings.tsp";
+import "./models/image_embeddings.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
