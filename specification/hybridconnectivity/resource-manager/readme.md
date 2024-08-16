@@ -37,7 +37,7 @@ These settings apply only when `--tag=package-2024-12-01` is specified on the co
 ```yaml $(tag) == 'package-2024-12-01'
 input-file:
   - Microsoft.HybridConnectivity/PublicCloud/stable/2024-12-01/publicCloud.json
-  - Microsoft.HybridConnectivity/stable/2023-03-15/hybridconnectivity.json
+  - Microsoft.HybridConnectivity/stable/2024-12-01/hybridconnectivity.json
 ```
 
 ### Tag: package-2023-03
