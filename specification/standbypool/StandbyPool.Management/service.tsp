@@ -78,7 +78,7 @@ union PoolResourceState {
   @doc("The resource has released the lease on the underlying hardware and is powered off. This state only applies to virtual machines.")
   Deallocated: "Deallocated",
 
-  @doc("The resource is releasing the lease on the underlying hardware and is powered off. This state only applies to virtual machines.") 
+  @doc("The resource is releasing the lease on the underlying hardware and is powered off. This state only applies to virtual machines.")
   Deallocating: "Deallocating",
 
   @doc("The resource has released the lease on the underlying hardware and is powered off. Memory contents of the VM are stored in the OS disk.  When started again, applications and processes that were previously running in your VM resume from the state prior to hibernation. This state only applies to virtual machines.")
@@ -105,8 +105,7 @@ model PoolResourceStateCount {
 
 @added(Microsoft.StandbyPool.Versions.`2024-08-01-preview`)
 @doc("Displays StandbyPool status.")
-model PoolStatus
-{
+model PoolStatus {
   @doc("Displays the healthy state of the StandbyPool.")
   @visibility("read")
   code: HealthStateCode;
@@ -115,7 +114,6 @@ model PoolStatus
   @visibility("read")
   message?: string;
 }
-
 
 @added(Microsoft.StandbyPool.Versions.`2024-08-01-preview`)
 @doc("StandbyPool health state.")
