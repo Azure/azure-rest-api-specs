@@ -96,7 +96,6 @@ interface AzureMonitorWorkspaces {
   @doc("Create or update a workspace")
   createOrUpdate is ArmResourceCreateOrUpdateAsync<AzureMonitorWorkspace>;
   @doc("Updates part of a workspace")
-  @parameterVisibility
   update is ArmResourcePatchSync<
     AzureMonitorWorkspace,
     AzureMonitorWorkspaceProperties

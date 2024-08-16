@@ -613,7 +613,7 @@
             "description": "The resource properties to be updated.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/AzureMonitorWorkspace"
+              "$ref": "#/definitions/AzureMonitorWorkspaceUpdate"
             }
           }
         ],
@@ -1195,6 +1195,21 @@
           "readOnly": true
         }
       }
+    },
+    "AzureMonitorWorkspaceUpdate": {
+      "type": "object",
+      "description": "An Azure Monitor Workspace definition.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AzureMonitorWorkspaceProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
+        }
+      ]
     },
     "BatchProcessor": {
       "type": "object",
