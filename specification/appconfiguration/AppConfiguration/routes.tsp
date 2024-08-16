@@ -36,7 +36,7 @@ alias syncTokenHeader = {
 alias contentTypeHeader<T extends string> = {
   @doc("Content-Type header")
   @header("Content-Type")
-  contentTypeHeader?: T | "application/problem+json";
+  contentType?: T | "application/problem+json";
 };
 
 alias AppConfigResponseHeaders = {
@@ -259,11 +259,13 @@ op checkKeyValues is appConfigOperation<
   OkResponse & AppConfigResponseHeaders
 >;
 
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
 @summary("Gets a single key-value.")
 @doc("Gets a single key-value.")
-op getKeyValue is standardOps.ResourceRead<
-  KeyValue,
-  QueryParametersTrait<{
+@get
+op getKeyValue is Foundations.ResourceOperation<
+  Resource = KeyValue,
+  Parameters = {
     @doc("The label of the key-value to retrieve.")
     @query("label")
     label?: string;
@@ -271,33 +273,39 @@ op getKeyValue is standardOps.ResourceRead<
     @doc("Used to select what fields are present in the returned resource(s).")
     @query("$Select")
     select?: KeyValueFields[];
-  }> &
-    RequestHeadersTrait<{
-      ...syncTokenHeader;
+  } & {
+    ...syncTokenHeader;
 
-      @doc("""
-        Requests the server to respond with the state of the resource at the specified
-        time.
-        """)
-      @header("Accept-Datetime")
-      acceptDatetime?: string;
+    @doc("""
+      Requests the server to respond with the state of the resource at the specified
+      time.
+      """)
+    @header("Accept-Datetime")
+    acceptDatetime?: string;
 
-      @doc("""
-        Used to perform an operation only if the targeted resource's etag matches the
-        value provided.
-        """)
-      @header("If-Match")
-      ifMatch?: string;
+    @doc("""
+      Used to perform an operation only if the targeted resource's etag matches the
+      value provided.
+      """)
+    @header("If-Match")
+    ifMatch?: string;
 
-      @doc("""
-        Used to perform an operation only if the targeted resource's etag does not
-        match the value provided.
-        """)
-      @header("If-None-Match")
-      ifNoneMatch?: string;
-    }> &
-    ResponseHeadersTrait<AppConfigResponseHeaders &
-      contentTypeHeader<"application/vnd.microsoft.appconfig.kv+json">>
+    @doc("""
+      Used to perform an operation only if the targeted resource's etag does not
+      match the value provided.
+      """)
+    @header("If-None-Match")
+    ifNoneMatch?: string;
+
+    ...ClientRequestIdHeader;
+  },
+  Response = Body<KeyValue> & {
+    ...ClientRequestIdHeader;
+    ...AppConfigResponseHeaders;
+    ...contentTypeHeader<"application/vnd.microsoft.appconfig.kv+json">;
+  },
+  Traits = {},
+  ErrorResponse = Error
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
@@ -310,7 +318,7 @@ op putKeyValue is appConfigOperation<
     #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Needs fix: https://github.com/microsoft/typespec/issues/2853"
     @doc("Content-Type header")
     @header("Content-Type")
-    contentTypeHeader:
+    contentType:
       | "application/vnd.microsoft.appconfig.kv+json"
       | "application/vnd.microsoft.appconfig.kvset+json"
       | "application/json"
@@ -346,7 +354,7 @@ op putKeyValue is appConfigOperation<
     @body
     entity?: KeyValue;
   },
-  KeyValue &
+  Body<KeyValue> &
     AppConfigResponseHeaders &
     contentTypeHeader<"application/vnd.microsoft.appconfig.kv+json">
 >;
@@ -375,7 +383,7 @@ op deleteKeyValue is appConfigOperation<
     @header("If-Match")
     ifMatch?: string;
   },
-  (KeyValue &
+  (Body<KeyValue> &
     AppConfigResponseHeaders &
     contentTypeHeader<"application/vnd.microsoft.appconfig.kv+json">) | {
     @statusCode
@@ -532,7 +540,7 @@ op createSnapshot is Foundations.LongRunningOperation<
     #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Needs fix: https://github.com/microsoft/typespec/issues/2853"
     @doc("Content-Type header")
     @header("Content-Type")
-    contentTypeHeader: "application/vnd.microsoft.appconfig.snapshot+json" | "application/json";
+    contentType: "application/vnd.microsoft.appconfig.snapshot+json" | "application/json";
 
     @doc("The name of the key-value snapshot to create.")
     @maxLength(256)
@@ -569,7 +577,7 @@ op updateSnapshot is appConfigOperation<
     #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Needs fix: https://github.com/microsoft/typespec/issues/2853"
     @doc("Content-Type header")
     @header("Content-Type")
-    contentTypeHeader: "application/merge-patch+json" | "application/json";
+    contentType: "application/merge-patch+json" | "application/json";
 
     @doc("The name of the key-value snapshot to update.")
     @path
@@ -745,7 +753,7 @@ op putLock is appConfigOperation<
     @header("If-None-Match")
     ifNoneMatch?: string;
   },
-  KeyValue &
+  Body<KeyValue> &
     AppConfigResponseHeaders &
     contentTypeHeader<"application/vnd.microsoft.appconfig.kv+json">
 >;
@@ -781,7 +789,7 @@ op deleteLock is appConfigOperation<
     @header("If-None-Match")
     ifNoneMatch?: string;
   },
-  KeyValue &
+  Body<KeyValue> &
     AppConfigResponseHeaders &
     contentTypeHeader<"application/vnd.microsoft.appconfig.kv+json">
 >;
