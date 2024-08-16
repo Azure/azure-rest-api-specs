@@ -107,7 +107,7 @@ model PoolResourceStateCount {
 @doc("Displays StandbyPool status.")
 model PoolStatus
 {
-  @doc("Displays the healthy state of the standby pool.")
+  @doc("Displays the healthy state of the StandbyPool.")
   @visibility("read")
   code: HealthStateCode;
 
