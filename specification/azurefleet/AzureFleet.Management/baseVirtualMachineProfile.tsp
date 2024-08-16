@@ -2094,7 +2094,7 @@ union NetworkApiVersion {
   /**
    * Initial version supported. Later versions are supported as well.
    */
-  Ver2020_11_01: "2020-11-01",
+  v2020_11_01: "2020-11-01",
 }
 
 /**
