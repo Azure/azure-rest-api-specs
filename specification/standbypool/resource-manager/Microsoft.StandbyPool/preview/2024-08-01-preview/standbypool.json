@@ -1056,9 +1056,9 @@
         },
         "instanceCountsByState": {
           "type": "array",
-          "description": "The count of pooled resources in each state.",
+          "description": "The count of pooled resources in each state for the given zone.",
           "items": {
-            "$ref": "#/definitions/PoolResourceStateCount"
+            "$ref": "#/definitions/PoolContainerGroupStateCount"
           },
           "x-ms-identifiers": [
             "state"
@@ -1179,19 +1179,16 @@
         ]
       }
     },
-    "PoolResourceState": {
+    "PoolContainerGroupState": {
       "type": "string",
       "description": "The state that the pooled resources.",
       "enum": [
         "Running",
         "Creating",
-        "Deleting",
-        "Deallocated",
-        "Deallocating",
-        "Hibernated"
+        "Deleting"
       ],
       "x-ms-enum": {
-        "name": "PoolResourceState",
+        "name": "PoolContainerGroupState",
         "modelAsString": true,
         "values": [
           {
@@ -1208,31 +1205,16 @@
             "name": "Deleting",
             "value": "Deleting",
             "description": "The resource is Deleting."
-          },
-          {
-            "name": "Deallocated",
-            "value": "Deallocated",
-            "description": "The resource has released the lease on the underlying hardware and is powered off. This state only applies to virtual machines."
-          },
-          {
-            "name": "Deallocating",
-            "value": "Deallocating",
-            "description": "The resource is releasing the lease on the underlying hardware and is powered off. This state only applies to virtual machines."
-          },
-          {
-            "name": "Hibernated",
-            "value": "Hibernated",
-            "description": "The resource has released the lease on the underlying hardware and is powered off. Memory contents of the VM are stored in the OS disk.  When started again, applications and processes that were previously running in your VM resume from the state prior to hibernation. This state only applies to virtual machines."
           }
         ]
       }
     },
-    "PoolResourceStateCount": {
+    "PoolContainerGroupStateCount": {
       "type": "object",
       "description": "Displays the counts of pooled resources in each state, as known by the StandbyPool resource provider.",
       "properties": {
         "state": {
-          "$ref": "#/definitions/PoolResourceState",
+          "$ref": "#/definitions/PoolContainerGroupState",
           "description": "The state that the pooled resources count is for."
         },
         "count": {
@@ -1263,6 +1245,73 @@
       },
       "required": [
         "code"
+      ]
+    },
+    "PoolVirtualMachineState": {
+      "type": "string",
+      "description": "The state that the pooled resources.",
+      "enum": [
+        "Running",
+        "Creating",
+        "Deleting",
+        "Deallocated",
+        "Deallocating",
+        "Hibernated"
+      ],
+      "x-ms-enum": {
+        "name": "PoolVirtualMachineState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Running",
+            "value": "Running",
+            "description": "The resource is up and running."
+          },
+          {
+            "name": "Creating",
+            "value": "Creating",
+            "description": "The resource is creating."
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "The resource is Deleting."
+          },
+          {
+            "name": "Deallocated",
+            "value": "Deallocated",
+            "description": "The resource has released the lease on the underlying hardware and is powered off."
+          },
+          {
+            "name": "Deallocating",
+            "value": "Deallocating",
+            "description": "The resource is releasing the lease on the underlying hardware and is powered off."
+          },
+          {
+            "name": "Hibernated",
+            "value": "Hibernated",
+            "description": "The resource has released the lease on the underlying hardware and is powered off. Memory contents of the VM are stored in the OS disk.  When started again, applications and processes that were previously running in your VM resume from the state prior to hibernation."
+          }
+        ]
+      }
+    },
+    "PoolVirtualMachineStateCount": {
+      "type": "object",
+      "description": "Displays the counts of pooled resources in each state, as known by the StandbyPool resource provider.",
+      "properties": {
+        "state": {
+          "$ref": "#/definitions/PoolVirtualMachineState",
+          "description": "The state that the pooled resources count is for."
+        },
+        "count": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The count of pooled resources in the given state."
+        }
+      },
+      "required": [
+        "state",
+        "count"
       ]
     },
     "ProvisioningState": {
@@ -1839,7 +1888,7 @@
           "type": "array",
           "description": "The count of pooled resources in each state for the given zone.",
           "items": {
-            "$ref": "#/definitions/PoolResourceStateCount"
+            "$ref": "#/definitions/PoolVirtualMachineStateCount"
           },
           "x-ms-identifiers": [
             "state"

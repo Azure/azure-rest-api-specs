@@ -60,7 +60,48 @@ model VirtualMachineInstanceCountSummary {
 
   @doc("The count of pooled resources in each state for the given zone.")
   @extension("x-ms-identifiers", ["state"])
-  instanceCountsByState: PoolResourceStateCount[];
+  @removed(Microsoft.StandbyPool.Versions.`2024-08-01-preview`)
+  @renamedFrom(Microsoft.StandbyPool.Versions.`2024-08-01-preview`, "instanceCountsByState")
+  oldinstanceCountsByState: PoolResourceStateCount[];
+
+  @doc("The count of pooled resources in each state for the given zone.")
+  @extension("x-ms-identifiers", ["state"])
+  @added(Microsoft.StandbyPool.Versions.`2024-08-01-preview`)
+  instanceCountsByState: PoolVirtualMachineStateCount[];
+}
+
+@added(Microsoft.StandbyPool.Versions.`2024-08-01-preview`)
+@doc("The state that the pooled resources.")
+union PoolVirtualMachineState {
+  @doc("The resource is up and running.")
+  Running: "Running",
+
+  @doc("The resource is creating.")
+  Creating: "Creating",
+
+  @doc("The resource is Deleting.")
+  Deleting: "Deleting",
+
+  @doc("The resource has released the lease on the underlying hardware and is powered off.")
+  Deallocated: "Deallocated",
+
+  @doc("The resource is releasing the lease on the underlying hardware and is powered off.")
+  Deallocating: "Deallocating",
+
+  @doc("The resource has released the lease on the underlying hardware and is powered off. Memory contents of the VM are stored in the OS disk.  When started again, applications and processes that were previously running in your VM resume from the state prior to hibernation.")
+  Hibernated: "Hibernated",
+
+  string,
+}
+
+@added(Microsoft.StandbyPool.Versions.`2024-08-01-preview`)
+@doc("Displays the counts of pooled resources in each state, as known by the StandbyPool resource provider.")
+model PoolVirtualMachineStateCount {
+  @doc("The state that the pooled resources count is for.")
+  state: PoolVirtualMachineState;
+
+  @doc("The count of pooled resources in the given state.")
+  count: int64;
 }
 
 @added(Microsoft.StandbyPool.Versions.`2024-03-01-preview`)

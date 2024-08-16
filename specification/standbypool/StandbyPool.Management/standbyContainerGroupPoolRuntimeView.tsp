@@ -61,7 +61,39 @@ model ContainerGroupInstanceCountSummary {
 
   @doc("The count of pooled resources in each state.")
   @extension("x-ms-identifiers", ["state"])
-  instanceCountsByState: PoolResourceStateCount[];
+  @removed(Microsoft.StandbyPool.Versions.`2024-08-01-preview`)
+  @renamedFrom(Microsoft.StandbyPool.Versions.`2024-08-01-preview`, "instanceCountsByState")
+  oldinstanceCountsByState: PoolResourceStateCount[];
+
+  @doc("The count of pooled resources in each state for the given zone.")
+  @extension("x-ms-identifiers", ["state"])
+  @added(Microsoft.StandbyPool.Versions.`2024-08-01-preview`)
+  instanceCountsByState: PoolContainerGroupStateCount[];
+}
+
+@added(Microsoft.StandbyPool.Versions.`2024-08-01-preview`)
+@doc("The state that the pooled resources.")
+union PoolContainerGroupState {
+  @doc("The resource is up and running.")
+  Running: "Running",
+
+  @doc("The resource is creating.")
+  Creating: "Creating",
+
+  @doc("The resource is Deleting.")
+  Deleting: "Deleting",
+
+  string,
+}
+
+@added(Microsoft.StandbyPool.Versions.`2024-08-01-preview`)
+@doc("Displays the counts of pooled resources in each state, as known by the StandbyPool resource provider.")
+model PoolContainerGroupStateCount {
+  @doc("The state that the pooled resources count is for.")
+  state: PoolContainerGroupState;
+
+  @doc("The count of pooled resources in the given state.")
+  count: int64;
 }
 
 @added(Microsoft.StandbyPool.Versions.`2024-03-01-preview`)
