@@ -30,6 +30,42 @@ description: Azure Stack HCI management service
 openapi-type: arm
 openapi-subtype: rpaas
 tag: package-2024-04
+
+directive:
+  - from: edgeDevices.json
+    where: $.definitions
+    transform: >
+      $.ErrorDetail['x-ms-client-name'] = 'HciValidationFailureDetail';
+      $.Extension['x-ms-client-name'] = 'HciEdgeDeviceArcExtension';
+      $.Intents['x-ms-client-name'] = 'HciEdgeDeviceIntents';
+      $.HostNetwork['x-ms-client-name'] = 'HciEdgeDeviceHostNetwork';
+      $.StorageNetworks['x-ms-client-name'] = 'HciEdgeDeviceStorageNetworks';
+      $.StorageAdapterIPInfo['x-ms-client-name'] = 'HciEdgeDeviceStorageAdapterIPInfo';
+      $.AdapterPropertyOverrides['x-ms-client-name'] = 'HciEdgeDeviceAdapterPropertyOverrides';
+      $.VirtualSwitchConfigurationOverrides['x-ms-client-name'] = 'HciEdgeDeviceVirtualSwitchConfigurationOverrides';
+  - from: deploymentSettings.json
+    where: $.definitions
+    transform: >
+      $.Intents['x-ms-client-name'] = 'DeploymentSettingIntents';
+      $.HostNetwork['x-ms-client-name'] = 'DeploymentSettingHostNetwork';
+      $.StorageNetworks['x-ms-client-name'] = 'DeploymentSettingStorageNetworks';
+      $.StorageAdapterIPInfo['x-ms-client-name'] = 'DeploymentSettingStorageAdapterIPInfo';
+      $.AdapterPropertyOverrides['x-ms-client-name'] = 'DeploymentSettingAdapterPropertyOverrides';
+      $.VirtualSwitchConfigurationOverrides['x-ms-client-name'] = 'DeploymentSettingVirtualSwitchConfigurationOverrides';
+  - from: swagger-document
+    where: 
+      - $.definitions.Extension.allOf[0]
+      - $.definitions.Offer.allOf[0]
+      - $.definitions.Publisher.allOf[0]
+      - $.definitions.Sku.allOf[0]
+      - $.definitions.UpdateRun.allOf[0]
+      - $.definitions.Update.allOf[0]
+      - $.definitions.UpdateSummaries.allOf[0]
+    transform: >
+      $['$ref'] = "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+  - from: swagger-document
+    where: $.paths[*]..responses.default
+    transform: $.schema['$ref'] = "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
 ```
 
 ## Suppression
@@ -239,4 +275,28 @@ swagger-to-sdk:
       - node sdkauto_afterscript.js azurestackhci/resource-manager
   - repo: azure-powershell
 ```
+
+## Go
+
+See configuration in [readme.go.md](./readme.go.md)
+
+## Java
+
+See configuration in [readme.java.md](./readme.java.md)
+
+## Python
+
+See configuration in [readme.python.md](./readme.python.md)
+
+## TypeScript
+
+See configuration in [readme.typescript.md](./readme.typescript.md)
+
+## CSharp
+
+See configuration in [readme.csharp.md](./readme.csharp.md)
+
+## AzureResourceSchema
+
+See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
 
