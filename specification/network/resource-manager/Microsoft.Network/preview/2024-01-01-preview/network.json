@@ -149,17 +149,17 @@
       },
       "description": "The resource management error additional info."
     },
-    "CloudError": {
+    "CloudErrorPreview": {
       "x-ms-external": true,
       "properties": {
         "error": {
-          "$ref": "#/definitions/CloudErrorBody",
+          "$ref": "#/definitions/CloudErrorBodyPreview",
           "description": "Cloud error body."
         }
       },
       "description": "An error response from the service."
     },
-    "CloudErrorBody": {
+    "CloudErrorBodyPreview": {
       "x-ms-external": true,
       "properties": {
         "code": {
@@ -177,7 +177,7 @@
         "details": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/CloudErrorBody"
+            "$ref": "#/definitions/CloudErrorBodyPreview"
           },
           "description": "A list of additional details about the error."
         }
