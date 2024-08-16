@@ -1,0 +1,217 @@
+{
+  "parameters": {
+    "endpoint": "https://aoairesource.openai.azure.com",
+    "api-key": "{api key}",
+    "api-version": "2024-08-01-preview",
+    "body": {
+      "display_name": "GPT Comparison 5",
+      "run_type": "full-run",
+      "pipeline_config": {
+        "data_source": {
+          "type": "file-service",
+          "file_type": "jsonl",
+          "file_id": "file-181a1cbdcdcf4677ada87f63a0928099"
+        },
+        "sample_generator": {
+          "trajectory_template": [
+            {
+              "role": "system",
+              "content": "I am an awesome bot!"
+            }
+          ],
+          "model_name": "sample_model_deployment",
+          "sampling_params": {
+            "seed": 5,
+            "temperature": 0.2,
+            "max_tokens": 2000,
+            "top_p": 0.1
+          }
+        },
+        "graders": [
+          {
+            "type": "set-membership-grader",
+            "element": {
+              "type": "vref",
+              "namespace_name": "sample",
+              "variable_name": "prediction"
+            },
+            "set": [
+              {
+                "type": "const",
+                "value": "a"
+              },
+              {
+                "type": "tstr",
+                "template": "{{item.B}}"
+              },
+              {
+                "type": "vref",
+                "namespace_name": "item",
+                "variable_name": "C"
+              },
+              {
+                "type": "const",
+                "value": "d"
+              }
+            ],
+            "case_sensitive": false,
+            "present_grade": 3,
+            "absent_grade": 0,
+            "name": "Multi-Choice Set Grader",
+            "description": "set grader described"
+          },
+          {
+            "type": "string-check-grader",
+            "lhs": {
+              "type": "tstr",
+              "template": "Random template five example"
+            },
+            "rhs": {
+              "type": "vref",
+              "namespace_name": "sample",
+              "variable_name": "prediction"
+            },
+            "case_sensitive": false,
+            "operation": "contains",
+            "true_grade": 0.56,
+            "false_grade": -0.2,
+            "name": "string name",
+            "description": "This grader is for expected values"
+          }
+        ],
+        "aggregators": [
+          {
+            "type": "sum",
+            "target": {
+              "type": "vref",
+              "namespace_name": "System",
+              "variable_name": "abc"
+            },
+            "name": "sum_of_abc"
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "201": {
+      "headers": {
+        "location": "https://aoairesource.openai.azure.com/openai/evals/runs/eval-72a2792ef7d24ba7b82c7fe4a37e379f"
+      },
+      "body": {
+        "pipeline_config": {
+          "data_source": {
+            "type": "file-service",
+            "file_type": "jsonl",
+            "file_id": "file-181a1cbdcdcf4677ada87f63a0928099"
+          },
+          "sample_generator": {
+            "trajectory_template": [
+              {
+                "role": "system",
+                "content": "I am an awesome bot!"
+              }
+            ],
+            "model_name": "sample_model_deployment",
+            "sampling_params": {
+              "seed": 5,
+              "temperature": 0.2,
+              "max_tokens": 2000,
+              "top_p": 0.1
+            }
+          },
+          "graders": [
+            {
+              "type": "set-membership-grader",
+              "element": {
+                "type": "vref",
+                "namespace_name": "sample",
+                "variable_name": "prediction"
+              },
+              "set": [
+                {
+                  "type": "const",
+                  "value": "a"
+                },
+                {
+                  "type": "tstr",
+                  "template": "{{item.B}}"
+                },
+                {
+                  "type": "vref",
+                  "namespace_name": "item",
+                  "variable_name": "C"
+                },
+                {
+                  "type": "const",
+                  "value": "d"
+                }
+              ],
+              "case_sensitive": false,
+              "present_grade": 3,
+              "absent_grade": 0,
+              "name": "Multi-Choice Set Grader",
+              "description": "set grader described"
+            },
+            {
+              "type": "string-check-grader",
+              "lhs": {
+                "type": "tstr",
+                "template": "Random template five example"
+              },
+              "rhs": {
+                "type": "vref",
+                "namespace_name": "sample",
+                "variable_name": "prediction"
+              },
+              "case_sensitive": false,
+              "operation": "contains",
+              "true_grade": 0.56,
+              "false_grade": -0.2,
+              "name": "string name",
+              "description": "This grader is for expected values"
+            }
+          ],
+          "aggregators": [
+            {
+              "type": "sum",
+              "target": {
+                "type": "vref",
+                "namespace_name": "System",
+                "variable_name": "abc"
+              },
+              "name": "sum_of_abc"
+            }
+          ]
+        },
+        "run_stats": {
+          "num_errors": 1,
+          "per_model_usage": [
+            {
+              "model_name": "dummy_model",
+              "invocation_count": 5,
+              "prompt_tokens": 50,
+              "completion_tokens": 45,
+              "total_tokens": 95
+            }
+          ],
+          "num_data_source_items": 10,
+          "num_samples": 11
+        },
+        "validation_stats": {
+          "num_data_source_items": 11,
+          "num_samples": 11
+        },
+        "run_type": "full-run",
+        "status": {
+          "type": "validating"
+        },
+        "evaluated_model_name": "sample_model_deployment",
+        "display_name": "GPT Comparison 5",
+        "updated_at": 1646127311,
+        "id": "eval-72a2792ef7d24ba7b82c7fe4a37e379f",
+        "created_at": 1646126127
+      }
+    }
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "parameters": {
+    "endpoint": "https://aoairesource.openai.azure.com",
+    "api-key": "{api key}",
+    "api-version": "2024-08-01-preview",
+    "body": {
+      "file_id": "file-181a1cbdcdcf4677ada87f63a0928099"
+    }
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "file_id": "file-181a1cbdcdcf4677ada87f63a0928099",
+        "preview": [
+          {
+            "messages": "{\u0022role\u0022: \u0022system\u0022, \u0022content\u0022: \u0022You must answer true or false\u0022}, {\u0022role\u0022: \u0022user\u0022, \u0022content\u0022: \u0022Is France the capital of Australia?\u0022}",
+            "expected_answer": false
+          }
+        ],
+        "item_schema": {
+          "fields": [
+            {
+              "name": "messages",
+              "type": "string"
+            },
+            {
+              "name": "expected_answer",
+              "type": "boolean"
+            }
+          ]
+        }
+      }
+    }
+  }
+}

@@ -119,6 +119,250 @@ paths:
       x-ms-examples:
         Canceling a batch.:
           $ref: ./examples/cancel_batch.json
+  /evals/dashboard/preview_file:
+    post:
+      tags:
+        - 'Evaluation:'
+      summary: "Preview Data Source File\r\nPreview a file to be used as a data source for an eval."
+      operationId: Evaluation_EvalDashboardPreview
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - $ref: '#/parameters/apiVersionQueryParameter'
+        - in: body
+          name: evalDashboardPreviewRequest
+          description: The specification of the evaluation dashboard preview request.
+          required: true
+          schema:
+            $ref: '#/definitions/EvalDashboardPreviewFileBody'
+      responses:
+        '200':
+          description: The evaluation job has been successfully canceled.
+          schema:
+            $ref: '#/definitions/FilePreviewApiObject'
+        default:
+          description: An error occurred.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      x-ms-examples:
+        Gets the input file data prior to the execution of a evaluation job.:
+          $ref: ./examples/post_evaluation_dashboard_preview.yaml
+  /evals/runs:
+    post:
+      tags:
+        - 'Evaluation:'
+      summary: "Creates a run that evaluates a specified model from a given test file.\r\nThis will return a run_id and the initial status of the run."
+      operationId: Evaluation_Create
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - $ref: '#/parameters/apiVersionQueryParameter'
+        - in: body
+          name: evaluationRun
+          description: The specification of the evaluation.
+          required: true
+          schema:
+            $ref: '#/definitions/EvalCreateRunRequestBody'
+      responses:
+        '201':
+          description: The evaluation job has been successfully created.
+          schema:
+            $ref: '#/definitions/RunApiObject'
+          headers:
+            Location:
+              description: The location of the newly created item.
+              type: string
+              format: url
+        default:
+          description: An error occurred.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      x-ms-examples:
+        Creating an evaluation job.:
+          $ref: ./examples/post_evaluation.yaml
+    get:
+      tags:
+        - 'Evaluation:'
+      summary: "Gets details for a list of evaluation runs specified by a number of filters including status and time after, with a page limit option.\r\nThe details contain the run status, pipeline_config, and id."
+      operationId: Evaluation_GetRuns
+      produces:
+        - application/json
+      parameters:
+        - in: query
+          name: status
+          description: Optional filter on the status of the Evaluation runs to retrieve. Default to all statuses.
+        - in: query
+          name: limit
+          description: Number of Evaluation runs to retrieve. Defaults to 20.
+          type: integer
+          format: int32
+          default: 20
+        - in: query
+          name: after
+          description: Optional filter on the creation time of Evaluation runs to retrieve.
+          type: string
+        - $ref: '#/parameters/apiVersionQueryParameter'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/EvaluationRunList'
+        default:
+          description: An error occurred.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      x-ms-examples:
+        Getting all evaluation job owned by this account.:
+          $ref: ./examples/get_list_evaluation.yaml
+  /evals/runs/{run-id}:
+    get:
+      tags:
+        - 'Evaluation:'
+      summary: "Gets details for a single evaluation run specified by the given evaluation-id.\r\nThe details contain the run status, pipeline_config, and id."
+      operationId: Evaluation_Get
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: run-id
+          description: The identifier of the evaluation run.
+          required: true
+          type: string
+        - $ref: '#/parameters/apiVersionQueryParameter'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/RunApiObject'
+        default:
+          description: An error occurred.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      x-ms-examples:
+        Getting an evaluation job.:
+          $ref: ./examples/get_evaluation.yaml
+  /evals/runs/{run-id}/aggregation_outputs:
+    get:
+      tags:
+        - 'Evaluation:'
+      summary: Gets the aggregation outputs for an Evaluation run specified by the given evaluation-id.
+      operationId: Evaluation_GetAggregationOutputs
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: run-id
+          description: The identifier of the evaluation run.
+          required: true
+          type: string
+        - $ref: '#/parameters/apiVersionQueryParameter'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/EvalRunAggregationOutputsApiObject'
+        default:
+          description: An error occurred.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      x-ms-examples:
+        Getting aggregation outputs for this evaluation job.:
+          $ref: ./examples/get_aggregation_outputs_evaluation.yaml
+  /evals/runs/{run-id}/cancel:
+    post:
+      tags:
+        - 'Evaluation:'
+      summary: Cancels the processing of the evaluation run specified by the given evaluation-id.
+      operationId: Evaluation_Cancel
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: run-id
+          description: The identifier of the evaluation run.
+          required: true
+          type: string
+        - $ref: '#/parameters/apiVersionQueryParameter'
+      responses:
+        '200':
+          description: The evaluation job has been successfully canceled
+          schema:
+            $ref: '#/definitions/RunStatusPollApiObject'
+        default:
+          description: An error occurred.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      x-ms-examples:
+        Canceling an evaluation job.:
+          $ref: ./examples/post_cancel_evaluation.yaml
+  /evals/runs/{run-id}/output_data_items:
+    get:
+      tags:
+        - 'Evaluation:'
+      summary: "Gets details for a single evaluation run specified by the given evaluation-id.\r\nThe details contain the run status, pipeline_config, and id."
+      operationId: Evaluation_GetOutputDataItems
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: run-id
+          description: The identifier of the evaluation run.
+          required: true
+          type: string
+        - in: query
+          name: limit
+          description: Number of Evaluation runs to retrieve. Defaults to 20.
+          type: integer
+          format: int32
+          default: 20
+        - in: query
+          name: after
+          description: Optional filter on the creation time of Evaluation runs to retrieve.
+          type: string
+        - $ref: '#/parameters/apiVersionQueryParameter'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/OutputDataItemList'
+        default:
+          description: An error occurred.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      x-ms-examples:
+        Getting data item outputs for this evaluation job.:
+          $ref: ./examples/get_list_output_data_items_evaluation.yaml
+  /evals/runs/{run-id}/status:
+    get:
+      tags:
+        - 'Evaluation:'
+      summary: Gets status for a single evaluation run specified by the given evaluation-id.
+      operationId: Evaluation_GetStatus
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: run-id
+          description: The identifier of the evaluation run.
+          required: true
+          type: string
+        - $ref: '#/parameters/apiVersionQueryParameter'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/RunStatusPollApiObject'
+        default:
+          description: An error occurred.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      x-ms-examples:
+        Getting the status for an evaluation job.:
+          $ref: ./examples/get_status_evaluation.yaml
   /files:
     get:
       tags:
@@ -167,14 +411,11 @@ paths:
             $ref: '#/definitions/ErrorResponse'
       x-ms-examples:
         Getting all files owned by this account.:
-          $ref: ./examples/get_files.json
+          $ref: ./examples/get_files.yaml
     post:
       tags:
         - 'Files:'
-      summary: >-
-        Creates a new file entity by uploading data from a local machine.
-        Uploaded files can, for example, be used for training or evaluating
-        fine-tuned models.
+      summary: Creates a new file entity by uploading data from a local machine. Uploaded files can, for example, be used for training or evaluating fine-tuned models.
       operationId: Files_Upload
       consumes:
         - multipart/form-data
@@ -184,10 +425,7 @@ paths:
         - $ref: '#/parameters/apiVersionQueryParameter'
         - in: formData
           name: purpose
-          description: >-
-            The intended purpose of the uploaded documents. Use "fine-tune" for
-            fine-tuning. This allows us to validate the format of the uploaded
-            file.
+          description: The intended purpose of the uploaded documents. Use "fine-tune" for fine-tuning. This allows us to validate the format of the uploaded file.
           required: true
           type: string
           enum:
@@ -231,14 +469,47 @@ paths:
             $ref: '#/definitions/ErrorResponse'
       x-ms-examples:
         Upload a file.:
-          $ref: ./examples/upload_file.json
+          $ref: ./examples/upload_file.yaml
+  /files/import:
+    post:
+      tags:
+        - 'Files:'
+      summary: Creates a new file entity by importing data from a provided url. Uploaded files can, for example, be used for training or evaluating fine-tuned models.
+      operationId: Files_Import
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - $ref: '#/parameters/apiVersionQueryParameter'
+        - in: body
+          name: fileImport
+          description: The definition of the file to create including its purpose, the file name and the url of the file location.
+          required: true
+          schema:
+            $ref: '#/definitions/FileImport'
+      responses:
+        '201':
+          description: The file has been successfully created.
+          schema:
+            $ref: '#/definitions/File'
+          headers:
+            Location:
+              description: The location of the newly created item.
+              type: string
+              format: url
+        default:
+          description: An error occurred.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      x-ms-examples:
+        Importing a file with a blob url as source.:
+          $ref: ./examples/import_file.yaml
   /files/{file-id}:
     get:
       tags:
         - 'Files:'
-      summary: >-
-        Gets details for a single file specified by the given file-id including
-        status, size, purpose, etc.
+      summary: Gets details for a single file specified by the given file-id including status, size, purpose, etc.
       operationId: Files_Get
       produces:
         - application/json
@@ -260,7 +531,7 @@ paths:
             $ref: '#/definitions/ErrorResponse'
       x-ms-examples:
         Getting a file.:
-          $ref: ./examples/get_file.json
+          $ref: ./examples/get_file.yaml
     delete:
       tags:
         - 'Files:'
@@ -284,7 +555,7 @@ paths:
             $ref: '#/definitions/ErrorResponse'
       x-ms-examples:
         Deleting a file.:
-          $ref: ./examples/delete_file.json
+          $ref: ./examples/delete_file.yaml
   /files/{file-id}/content:
     get:
       tags:
@@ -312,47 +583,7 @@ paths:
             $ref: '#/definitions/ErrorResponse'
       x-ms-examples:
         Getting the file content.:
-          $ref: ./examples/get_file_content.json
-  /files/import:
-    post:
-      tags:
-        - 'Files:'
-      summary: >-
-        Creates a new file entity by importing data from a provided url.
-        Uploaded files can, for example, be used for training or evaluating
-        fine-tuned models.
-      operationId: Files_Import
-      consumes:
-        - application/json
-      produces:
-        - application/json
-      parameters:
-        - $ref: '#/parameters/apiVersionQueryParameter'
-        - in: body
-          name: fileImport
-          description: >-
-            The definition of the file to create including its purpose, the file
-            name and the url of the file location.
-          required: true
-          schema:
-            $ref: '#/definitions/FileImport'
-      responses:
-        '201':
-          description: The file has been successfully created.
-          schema:
-            $ref: '#/definitions/File'
-          headers:
-            Location:
-              description: The location of the newly created item.
-              type: string
-              format: url
-        default:
-          description: An error occurred.
-          schema:
-            $ref: '#/definitions/ErrorResponse'
-      x-ms-examples:
-        Importing a file with a blob url as source.:
-          $ref: ./examples/import_file.json
+          $ref: ./examples/get_file_content.yaml
   /fine_tuning/jobs:
     get:
       tags:
@@ -384,7 +615,7 @@ paths:
             $ref: '#/definitions/ErrorResponse'
       x-ms-examples:
         Getting all fine tuning jobs owned by this account.:
-          $ref: ./examples/get_finetuning_jobs.json
+          $ref: ./examples/get_finetuning_jobs.yaml
     post:
       tags:
         - 'Fine-tuning:'
@@ -418,7 +649,7 @@ paths:
             $ref: '#/definitions/ErrorResponse'
       x-ms-examples:
         Creating a fine tuning job.:
-          $ref: ./examples/post_finetuning_job.json
+          $ref: ./examples/post_finetuning_job.yaml
   /fine_tuning/jobs/{fine-tuning-job-id}:
     get:
       tags:
@@ -445,7 +676,7 @@ paths:
             $ref: '#/definitions/ErrorResponse'
       x-ms-examples:
         Getting a fine tuning job.:
-          $ref: ./examples/get_finetuning_job.json
+          $ref: ./examples/get_finetuning_job.yaml
     delete:
       tags:
         - 'Fine-tuning:'
@@ -469,7 +700,71 @@ paths:
             $ref: '#/definitions/ErrorResponse'
       x-ms-examples:
         Deleting a fine tuning job.:
-          $ref: ./examples/delete_finetuning_job.json
+          $ref: ./examples/delete_finetuning_job.yaml
+  /fine_tuning/jobs/{fine-tuning-job-id}/cancel:
+    post:
+      tags:
+        - 'Fine-tuning:'
+      summary: Cancels the processing of the fine-tune job specified by the given fine-tune-id.
+      operationId: FineTuning_Cancel
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: fine-tuning-job-id
+          description: The identifier of the fine-tune job.
+          required: true
+          type: string
+        - $ref: '#/parameters/apiVersionQueryParameter'
+      responses:
+        '200':
+          description: The fine tune has been successfully canceled
+          schema:
+            $ref: '#/definitions/FineTuningJob'
+        default:
+          description: An error occurred.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      x-ms-examples:
+        Canceling a fine tuning job.:
+          $ref: ./examples/cancel_finetuning_job.yaml
+  /fine_tuning/jobs/{fine-tuning-job-id}/checkpoints:
+    get:
+      tags:
+        - 'Fine-tuning:'
+      summary: "Gets the checkpoints for the fine-tune job specified by the given fine-tune-id.\r\nCheckpoints are created at the end of successful epochs during training."
+      operationId: FineTuning_GetCheckpoints
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: fine-tuning-job-id
+          description: The identifier of the fine-tune job.
+          required: true
+          type: string
+        - in: query
+          name: after
+          description: Identifier for the last checkpoint ID from the previous pagination request.
+          type: string
+        - in: query
+          name: limit
+          description: Number of checkpoints to retrieve. Defaults to 10.
+          type: integer
+          format: int32
+          default: 10
+        - $ref: '#/parameters/apiVersionQueryParameter'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/FineTuningJobCheckpointList'
+        default:
+          description: An error occurred.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      x-ms-examples:
+        Getting checkpoints of a fine tuning job.:
+          $ref: ./examples/get_finetuning_job_checkpoints.yaml
   /fine_tuning/jobs/{fine-tuning-job-id}/events:
     get:
       tags:
@@ -506,126 +801,7 @@ paths:
             $ref: '#/definitions/ErrorResponse'
       x-ms-examples:
         Getting events of a fine tuning job.:
-          $ref: ./examples/get_finetuning_job_events.json
-  /fine_tuning/jobs/{fine-tuning-job-id}/checkpoints:
-    get:
-      tags:
-        - 'Fine-tuning:'
-      summary: "Gets the checkpoints for the fine-tune job specified by the given fine-tune-id.\r\nCheckpoints are created at the end of successful epochs during training."
-      operationId: FineTuning_GetCheckpoints
-      produces:
-        - application/json
-      parameters:
-        - in: path
-          name: fine-tuning-job-id
-          description: The identifier of the fine-tune job.
-          required: true
-          type: string
-        - in: query
-          name: after
-          description: >-
-            Identifier for the last checkpoint ID from the previous pagination
-            request.
-          type: string
-        - in: query
-          name: limit
-          description: Number of checkpoints to retrieve. Defaults to 10.
-          type: integer
-          format: int32
-          default: 10
-        - $ref: '#/parameters/apiVersionQueryParameter'
-      responses:
-        '200':
-          description: Success
-          schema:
-            $ref: '#/definitions/FineTuningJobCheckpointList'
-        default:
-          description: An error occurred.
-          schema:
-            $ref: '#/definitions/ErrorResponse'
-      x-ms-examples:
-        Getting checkpoints of a fine tuning job.:
-          $ref: ./examples/get_finetuning_job_checkpoints.json
-  /fine_tuning/jobs/{fine-tuning-job-id}/cancel:
-    post:
-      tags:
-        - 'Fine-tuning:'
-      summary: >-
-        Cancels the processing of the fine-tune job specified by the given
-        fine-tune-id.
-      operationId: FineTuning_Cancel
-      produces:
-        - application/json
-      parameters:
-        - in: path
-          name: fine-tuning-job-id
-          description: The identifier of the fine-tune job.
-          required: true
-          type: string
-        - $ref: '#/parameters/apiVersionQueryParameter'
-      responses:
-        '200':
-          description: The fine tune has been successfully canceled
-          schema:
-            $ref: '#/definitions/FineTuningJob'
-        default:
-          description: An error occurred.
-          schema:
-            $ref: '#/definitions/ErrorResponse'
-      x-ms-examples:
-        Canceling a fine tuning job.:
-          $ref: ./examples/cancel_finetuning_job.json
-  /models:
-    get:
-      tags:
-        - 'Models:'
-      summary: "Gets a list of all models that are accessible by the Azure OpenAI resource.\r\nThese include base models as well as all successfully completed fine-tuned models owned by the Azure OpenAI resource."
-      operationId: Models_List
-      produces:
-        - application/json
-      parameters:
-        - $ref: '#/parameters/apiVersionQueryParameter'
-      responses:
-        '200':
-          description: Success
-          schema:
-            $ref: '#/definitions/ModelList'
-        default:
-          description: An error occurred.
-          schema:
-            $ref: '#/definitions/ErrorResponse'
-      x-ms-examples:
-        Getting all models owned by account.:
-          $ref: ./examples/get_models.json
-  /models/{model-id}:
-    get:
-      tags:
-        - 'Models:'
-      summary: Gets details for the model specified by the given modelId.
-      operationId: Models_Get
-      produces:
-        - application/json
-      parameters:
-        - in: path
-          name: model-id
-          description: The identifier of the model.
-          required: true
-          type: string
-        - $ref: '#/parameters/apiVersionQueryParameter'
-      responses:
-        '200':
-          description: Success
-          schema:
-            $ref: '#/definitions/Model'
-        default:
-          description: An error occurred.
-          schema:
-            $ref: '#/definitions/ErrorResponse'
-      x-ms-examples:
-        Getting a base model.:
-          $ref: ./examples/get_model_base.json
-        Getting a fine-tuned model.:
-          $ref: ./examples/get_model_finetune.json
+          $ref: ./examples/get_finetuning_job_events.yaml
   /ingestion/jobs:
     get:
       tags:
@@ -639,9 +815,7 @@ paths:
         - in: header
           name: mgmt-user-token
           type: string
-          description: >-
-            The token used to access the workspace (needed only for user compute
-            jobs).
+          description: The token used to access the workspace (needed only for user compute jobs).
       responses:
         '200':
           description: Success
@@ -674,15 +848,11 @@ paths:
         - in: header
           name: mgmt-user-token
           type: string
-          description: >-
-            The token used to access the workspace (needed only for user compute
-            jobs).
+          description: The token used to access the workspace (needed only for user compute jobs).
         - in: header
           name: aml-user-token
           type: string
-          description: >-
-            The token used to access the resources within the job in the
-            workspace (needed only for user compute jobs).
+          description: The token used to access the resources within the job in the workspace (needed only for user compute jobs).
         - in: body
           name: ingestionJob
           schema:
@@ -745,9 +915,7 @@ paths:
         - in: header
           name: mgmt-user-token
           type: string
-          description: >-
-            The token used to access the workspace (needed only for user compute
-            jobs).
+          description: The token used to access the workspace (needed only for user compute jobs).
       responses:
         '200':
           description: Success
@@ -764,9 +932,7 @@ paths:
     get:
       tags:
         - 'Ingestion:'
-      summary: >-
-        Gets the details of the specified run id as part of the specified job
-        id.
+      summary: Gets the details of the specified run id as part of the specified job id.
       operationId: IngestionJobRuns_Get
       produces:
         - application/json
@@ -785,9 +951,7 @@ paths:
         - in: header
           name: mgmt-user-token
           type: string
-          description: >-
-            The token used to access the workspace (needed only for user compute
-            jobs).
+          description: The token used to access the workspace (needed only for user compute jobs).
       responses:
         '200':
           description: Success
@@ -800,7 +964,411 @@ paths:
       x-ms-examples:
         Get ingestion job runs:
           $ref: ./examples/get_ingestion_job_run.json
+  /models:
+    get:
+      tags:
+        - 'Models:'
+      summary: "Gets a list of all models that are accessible by the Azure OpenAI resource.\r\nThese include base models as well as all successfully completed fine-tuned models owned by the Azure OpenAI resource."
+      operationId: Models_List
+      produces:
+        - application/json
+      parameters:
+        - $ref: '#/parameters/apiVersionQueryParameter'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ModelList'
+        default:
+          description: An error occurred.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      x-ms-examples:
+        Getting all models owned by account.:
+          $ref: ./examples/get_models.yaml
+  /models/{model-id}:
+    get:
+      tags:
+        - 'Models:'
+      summary: Gets details for the model specified by the given modelId.
+      operationId: Models_Get
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: model-id
+          description: The identifier of the model.
+          required: true
+          type: string
+        - $ref: '#/parameters/apiVersionQueryParameter'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/Model'
+        default:
+          description: An error occurred.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      x-ms-examples:
+        Getting a base model.:
+          $ref: ./examples/get_model_base.yaml
+        Getting a fine-tuned model.:
+          $ref: ./examples/get_model_finetune.yaml
+  /subscriptions/{subscription_id}/resourcegroups/{resourcegroup}/accounts/{accountName}/internal/files:
+    post:
+      tags:
+        - 'Files:'
+      summary: Creates a new file entity by creating cosmos db entry only.
+      operationId: Files_Create
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: subscription_id
+          required: true
+          type: string
+        - in: path
+          name: resourcegroup
+          required: true
+          type: string
+        - in: path
+          name: accountName
+          required: true
+          type: string
+        - $ref: '#/parameters/apiVersionQueryParameter'
+        - in: body
+          name: fileCreate
+          description: The definition of the file to create including its purpose, the file name and the url of the file location.
+          required: true
+          schema:
+            $ref: '#/definitions/FileCreate'
+      responses:
+        '201':
+          description: The file has been successfully created.
+          schema:
+            $ref: '#/definitions/FileDetails'
+          headers:
+            Location:
+              description: The location of the newly created item.
+              type: string
+              format: url
+        default:
+          description: An error occurred.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      x-ms-examples:
+        Create a file with a blob url as source.:
+          $ref: ./examples/create_file.yaml
+  /subscriptions/{subscription_id}/resourcegroups/{resourcegroup}/accounts/{accountName}/internal/files/{file-id}:
+    get:
+      tags:
+        - 'Files:'
+      summary: Gets details for a single file specified by the given file-id.
+      operationId: Files_Get_Details
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: file-id
+          description: The identifier of the file.
+          required: true
+          type: string
+        - in: path
+          name: subscription_id
+          required: true
+          type: string
+        - in: path
+          name: resourcegroup
+          required: true
+          type: string
+        - in: path
+          name: accountName
+          required: true
+          type: string
+        - $ref: '#/parameters/apiVersionQueryParameter'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/FileDetails'
+        default:
+          description: An error occurred.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      x-ms-examples:
+        Getting a file details.:
+          $ref: ./examples/get_file_details.yaml
+  /uploads:
+    post:
+      tags:
+        - 'UploadFile:'
+      summary: Creates a new file entity by uploading data from a local machine. Uploaded files can, for example, be used for training or evaluating fine-tuned models.
+      operationId: Upload_File_Start
+      consumes:
+        - application/json
+        - text/json
+        - application/*+json
+      produces:
+        - application/json
+      parameters:
+        - $ref: '#/parameters/apiVersionQueryParameter'
+        - in: body
+          name: requestBody
+          description: The definition of the file to create including its purpose and the location on the local machine.
+          required: true
+          schema:
+            $ref: '#/definitions/UploadFileStartBody'
+      responses:
+        '201':
+          description: The upload has been successfully created.
+          schema:
+            $ref: '#/definitions/UploadResource'
+          headers:
+            Location:
+              description: The location of the newly created item.
+              type: string
+              format: url
+        default:
+          description: An error occurred.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      x-ms-examples:
+        Start a large file upload operation.:
+          $ref: ./examples/upload_file_start.yaml
+  /uploads/{upload-id}/cancel:
+    post:
+      tags:
+        - 'UploadFile:'
+      summary: Creates a new file entity by uploading data from a local machine. Uploaded files can, for example, be used for training or evaluating fine-tuned models.
+      operationId: Upload_File_Cancel
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: upload-id
+          description: The identifier of the upload.
+          required: true
+          type: string
+        - $ref: '#/parameters/apiVersionQueryParameter'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UploadResource'
+        default:
+          description: An error occurred.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      x-ms-examples:
+        Cancel a large file upload operation.:
+          $ref: ./examples/upload_file_cancel.yaml
+  /uploads/{upload-id}/complete:
+    post:
+      tags:
+        - 'UploadFile:'
+      summary: Creates a new file entity by uploading data from a local machine. Uploaded files can, for example, be used for training or evaluating fine-tuned models.
+      operationId: Upload_File_Complete
+      consumes:
+        - application/json
+        - text/json
+        - application/*+json
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: upload-id
+          description: The identifier of the upload.
+          required: true
+          type: string
+        - $ref: '#/parameters/apiVersionQueryParameter'
+        - in: body
+          name: requestBody
+          description: The definition of the file to create including its purpose and the location on the local machine.
+          required: true
+          schema:
+            $ref: '#/definitions/UploadFileCompleteBody'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UploadResource'
+        default:
+          description: An error occurred.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      x-ms-examples:
+        Complete and validate a large file upload operation.:
+          $ref: ./examples/upload_file_complete.yaml
+  /uploads/{upload-id}/parts:
+    post:
+      tags:
+        - 'UploadFile:'
+      summary: Creates a new file entity by uploading data from a local machine. Uploaded files can, for example, be used for training or evaluating fine-tuned models.
+      operationId: Upload_File_Part
+      consumes:
+        - multipart/form-data
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: upload-id
+          description: The identifier of the upload.
+          required: true
+          type: string
+        - $ref: '#/parameters/apiVersionQueryParameter'
+        - in: formData
+          name: data
+          required: true
+          type: file
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UploadPartResource'
+        default:
+          description: An error occurred.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      x-ms-examples:
+        Upload a part of large file upload operation.:
+          $ref: ./examples/upload_file_part.yaml
 definitions:
+  AggregationResult:
+    title: AggregationResult
+    type: object
+    properties:
+      object:
+        $ref: '#/definitions/TypeDiscriminator'
+      identifier:
+        description: The identity of this item.
+        type: string
+        readOnly: true
+      data:
+        readOnly: true
+  AggregationResultList:
+    title: AggregationResultList
+    type: object
+    properties:
+      object:
+        $ref: '#/definitions/TypeDiscriminator'
+      data:
+        description: The list of items.
+        type: array
+        items:
+          $ref: '#/definitions/AggregationResult'
+      has_more:
+        description: A value indicating whether the list contains more elements than returned.
+        type: boolean
+    readOnly: true
+  AggregatorConfig:
+    title: AggregatorConfig
+    required:
+      - name
+      - target
+      - type
+    type: object
+    properties:
+      name:
+        minLength: 1
+        type: string
+      description:
+        type: string
+      type:
+        $ref: '#/definitions/AggregatorType'
+      target:
+        $ref: '#/definitions/VariableReferenceExpressionConfig'
+  AggregatorType:
+    title: AggregatorType
+    description: Defines the types of Aggregators.
+    enum:
+      - mean
+      - sum
+    type: string
+  AzureAISearchIndex:
+    description: Azure AI Search Index.
+    required:
+      - connectionId
+    allOf:
+      - $ref: '#/definitions/TargetIndex'
+      - type: object
+        properties:
+          connectionId:
+            type: string
+            description: The id of the connection pointing to the Azure AI Search Index.
+    x-ms-discriminator-value: AzureAISearch
+  BaseConnection:
+    title: BaseConnection
+    description: A connection to a resource.
+    type: object
+    required:
+      - kind
+    properties:
+      kind:
+        $ref: '#/definitions/ConnectionType'
+    discriminator: kind
+  BaseEvalRunStats:
+    title: BaseEvalRunStats
+    description: Defines the values of a evaluation job.
+    type: object
+    properties:
+      num_data_source_items:
+        format: int32
+        type: integer
+      num_samples:
+        format: int32
+        type: integer
+  BaseRunApiObject:
+    title: BaseRunApiObject
+    required:
+      - run_type
+      - status
+    type: object
+    properties:
+      object:
+        $ref: '#/definitions/TypeDiscriminator'
+      created_at:
+        format: unixtime
+        description: A timestamp when this job or item was created (in unix epochs).
+        type: integer
+        readOnly: true
+      id:
+        description: The identity of this item.
+        type: string
+        readOnly: true
+      org_id:
+        description: The organisation id of this evaluation run. Unused on Azure OpenAI; compatibility for OpenAI only.
+        type: string
+      user_id:
+        description: The user id of this evaluation run. Unused on Azure OpenAI; compatibility for OpenAI only.
+        type: string
+      run_type:
+        $ref: '#/definitions/RunType'
+      status:
+        title: EvalRunStatus
+        description: The status of this run or item.
+        allOf:
+          - $ref: '#/definitions/EvalRunStatusValidating'
+      evaluated_model_name:
+        type: string
+        readOnly: true
+      display_name:
+        type: string
+      updated_at:
+        format: unixtime
+        description: A timestamp when this job or item was created (in unix epochs).
+        type: integer
+        readOnly: true
+      aggregation_outputs:
+        $ref: '#/definitions/AggregationResultList'
+      aggregation_file_id:
+        type: string
+        readOnly: true
+      output_data_fileId:
+        type: string
+        readOnly: true
   Batch:
     title: Batch
     description: Defines the values of a batch.
@@ -830,9 +1398,7 @@ definitions:
       status:
         $ref: '#/definitions/BatchStatus'
       output_file_id:
-        description: >-
-          The ID of the file containing outputs of successfully executed
-          requests.
+        description: The ID of the file containing outputs of successfully executed requests.
         type: string
       error_file_id:
         description: The ID of the file containing outputs of requests with errors.
@@ -885,10 +1451,7 @@ definitions:
       request_counts:
         $ref: '#/definitions/BatchRequestCounts'
       metadata:
-        description: >-
-          A set of key-value pairs that can be attached to the batch. This can
-          be useful for storing additional infomration about the batch in a
-          structured format.
+        description: A set of key-value pairs that can be attached to the batch. This can be useful for storing additional infomration about the batch in a structured format.
         type: object
         additionalProperties:
           type: string
@@ -912,10 +1475,7 @@ definitions:
         description: The time frame within which the batch should be processed.
         type: string
       metadata:
-        description: >-
-          A set of key-value pairs that can be attached to the batch. This can
-          be useful for storing additional infomration about the batch in a
-          structured format.
+        description: A set of key-value pairs that can be attached to the batch. This can be useful for storing additional infomration about the batch in a structured format.
         type: object
         additionalProperties:
           type: string
@@ -931,20 +1491,14 @@ definitions:
         description: A human-readable message providing more details about the error.
         type: string
       param:
-        description: >-
-          The name of the parameter that caused the error, if applicable (can be
-          null).
+        description: The name of the parameter that caused the error, if applicable (can be null).
         type: string
       line:
-        description: >-
-          The line number of the input file where the error occurred, if
-          applicable (can be null).
+        description: The line number of the input file where the error occurred, if applicable (can be null).
         type: string
   BatchErrors:
     title: BatchErrors
-    description: >-
-      For batches that have failed, this will contain more information on the
-      cause of the failures.
+    description: For batches that have failed, this will contain more information on the cause of the failures.
     type: object
     properties:
       object:
@@ -952,29 +1506,6 @@ definitions:
         type: string
       data:
         $ref: '#/definitions/BatchErrorData'
-  BatchesList:
-    title: BatchList
-    description: Represents a list of batches.
-    type: object
-    properties:
-      object:
-        $ref: '#/definitions/TypeDiscriminator'
-      data:
-        description: The list of items.
-        type: array
-        items:
-          $ref: '#/definitions/Batch'
-      first_id:
-        description: The id of the first batch in the list of batches returned.
-        type: string
-      last_id:
-        description: The id of the last batch in the list of batches returned.
-        type: string
-      has_more:
-        description: >-
-          A value indicating whether the list contains more elements than
-          returned.
-        type: boolean
   BatchRequestCounts:
     title: BatchRequestCounts
     description: The request counts for different statuses within the batch.
@@ -984,9 +1515,7 @@ definitions:
         description: The total number of requests in the batch.
         type: integer
       completed:
-        description: >-
-          The number of requests in the batch that have been completed
-          successfully.
+        description: The number of requests in the batch that have been completed successfully.
         type: integer
       failed:
         description: The number of requests in the batch that have failed.
@@ -1014,9 +1543,7 @@ definitions:
         - value: failed
           description: The input file has failed the validation process.
         - value: in_progress
-          description: >-
-            The input file was successfully validated and the batch is currently
-            being executed.
+          description: The input file was successfully validated and the batch is currently being executed.
         - value: finalizing
           description: The batch has completed and the results are being prepared.
         - value: completed
@@ -1027,6 +1554,48 @@ definitions:
           description: Cancellation of the batch has been initiated.
         - value: cancelled
           description: The batch was cancelled.
+  BatchesList:
+    title: BatchList
+    description: Represents a list of batches.
+    type: object
+    properties:
+      object:
+        $ref: '#/definitions/TypeDiscriminator'
+      data:
+        description: The list of items.
+        type: array
+        items:
+          $ref: '#/definitions/Batch'
+      first_id:
+        description: The id of the first batch in the list of batches returned.
+        type: string
+      last_id:
+        description: The id of the last batch in the list of batches returned.
+        type: string
+      has_more:
+        description: A value indicating whether the list contains more elements than returned.
+        type: boolean
+  BleuScoreGraderConfig:
+    title: BleuScoreGraderConfig
+    required:
+      - hypothesis
+      - reference
+      - type
+    type: object
+    allOf:
+      - $ref: '#/definitions/NonModelGraderConfig'
+    properties:
+      type:
+        minLength: 1
+        type: string
+      reference:
+        title: ExpressionConfig
+        allOf:
+          - $ref: '#/definitions/VariableReferenceExpressionConfig'
+      hypothesis:
+        title: ExpressionConfig
+        allOf:
+          - $ref: '#/definitions/VariableReferenceExpressionConfig'
   Capabilities:
     title: Capabilities
     description: The capabilities of a base or fine tune model.
@@ -1053,6 +1622,302 @@ definitions:
       embeddings:
         description: A value indicating whether a model supports embeddings.
         type: boolean
+  ChatCriteriaModelGraderConfig:
+    title: ChatCriteriaModelGraderConfig
+    required:
+      - conversation
+      - criteria
+      - false_grade
+      - model_name
+      - response
+      - true_grade
+      - type
+    type: object
+    allOf:
+      - $ref: '#/definitions/GraderConfig'
+    properties:
+      type:
+        minLength: 1
+        type: string
+      model_name:
+        minLength: 1
+        type: string
+      conversation:
+        title: ExpressionConfig
+        allOf:
+          - $ref: '#/definitions/VariableReferenceExpressionConfig'
+      response:
+        title: ExpressionConfig
+        allOf:
+          - $ref: '#/definitions/VariableReferenceExpressionConfig'
+      criteria:
+        title: ExpressionConfig
+        allOf:
+          - $ref: '#/definitions/VariableReferenceExpressionConfig'
+      true_grade:
+        format: float
+        type: number
+      false_grade:
+        format: float
+        type: number
+  ChatMessage:
+    title: ChatMessage
+    required:
+      - content
+      - role
+    type: object
+    properties:
+      role:
+        $ref: '#/definitions/ChatMessageRole'
+      content:
+        minLength: 1
+        type: string
+  ChatMessageRole:
+    title: ChatMessageRole
+    enum:
+      - system
+      - user
+      - assistant
+    type: string
+  ChunkingSettings:
+    type: object
+    title: ChunkingSettings
+    description: Chunking settings
+    properties:
+      maxChunkSizeInTokens:
+        type: integer
+  ClosedQAModelGraderConfig:
+    title: ClosedQAModelGraderConfig
+    required:
+      - criterion
+      - false_grade
+      - model_name
+      - submission
+      - task
+      - true_grade
+      - type
+    type: object
+    allOf:
+      - $ref: '#/definitions/GraderConfig'
+    properties:
+      type:
+        minLength: 1
+        type: string
+      model_name:
+        minLength: 1
+        type: string
+      task:
+        title: ExpressionConfig
+        allOf:
+          - $ref: '#/definitions/VariableReferenceExpressionConfig'
+      submission:
+        title: ExpressionConfig
+        allOf:
+          - $ref: '#/definitions/VariableReferenceExpressionConfig'
+      criterion:
+        title: ExpressionConfig
+        allOf:
+          - $ref: '#/definitions/VariableReferenceExpressionConfig'
+      true_grade:
+        format: float
+        type: number
+      false_grade:
+        format: float
+        type: number
+  CompletionAction:
+    type: string
+    description: The completion action.
+    enum:
+      - cleanUpTempAssets
+      - keepAllAssets
+    x-ms-enum:
+      name: IngestionJobCompletionAction
+      modelAsString: true
+      values:
+        - name: keepAllAssets
+          value: keepAllAssets
+          description: Will not clean up any of the intermediate assets created during the ingestion process.
+        - name: cleanUpTempAssets
+          value: cleanUpTempAssets
+          description: Will clean up intermediate assets created during the ingestion process.
+  ComputeType:
+    type: string
+    description: The compute type.
+    enum:
+      - ServerlessCompute
+      - CustomCompute
+    x-ms-enum:
+      name: ComputeType
+      modelAsString: true
+      values:
+        - name: ServerlessCompute
+          value: ServerlessCompute
+          description: Serverless user compute.
+        - name: CustomCompute
+          value: CustomCompute
+          description: Custom user compute.
+  ConnectionStringConnection:
+    description: Connection string connection.
+    required:
+      - connectionString
+    allOf:
+      - $ref: '#/definitions/BaseConnection'
+      - type: object
+        properties:
+          connectionString:
+            type: string
+            description: Connection string
+    x-ms-discriminator-value: ConnectionString
+  ConnectionType:
+    type: string
+    description: The connection type.
+    enum:
+      - EndpointWithKey
+      - ConnectionString
+      - EndpointWithManagedIdentity
+      - WorkspaceConnection
+      - RelativeConnection
+    x-ms-enum:
+      name: ConnectionType
+      modelAsString: true
+      values:
+        - name: EndpointWithKey
+          value: EndpointWithKey
+          description: Endpoint and key connection.
+        - name: ConnectionString
+          value: ConnectionString
+          description: Connection string.
+        - name: EndpointWithManagedIdentity
+          value: EndpointWithManagedIdentity
+          description: Endpoint and managed identity.
+        - name: WorkspaceConnection
+          value: WorkspaceConnection
+          description: AML Workspace connection.
+        - name: RelativeConnection
+          value: RelativeConnection
+          description: Relative deployment
+  ConstantExpressionConfig:
+    title: ConstantExpressionConfig
+    required:
+      - type
+      - value
+    type: object
+    allOf:
+      - $ref: '#/definitions/ExpressionConfig'
+    properties:
+      type:
+        minLength: 1
+        type: string
+      value: {}
+  ConstantGraderConfig:
+    title: ConstantGraderConfig
+    required:
+      - output_grade
+      - type
+    type: object
+    allOf:
+      - $ref: '#/definitions/NonModelGraderConfig'
+    properties:
+      type:
+        minLength: 1
+        type: string
+      output_grade:
+        format: float
+        type: number
+  CosmosDBIndex:
+    description: CosmosDB Index.
+    required:
+      - connectionId
+    allOf:
+      - $ref: '#/definitions/TargetIndex'
+      - type: object
+        properties:
+          connectionId:
+            type: string
+            description: The id of the connection pointing to the cosmos DB.
+          collectionName:
+            type: string
+            description: The name of the cosmos DB collection.
+          databaseName:
+            type: string
+            description: The name of the cosmos DB database.
+    x-ms-discriminator-value: CosmosDB
+  CrawlingSettings:
+    type: object
+    title: CrawlingSettings
+    description: Crawling settings
+    properties:
+      maxCrawlDepth:
+        type: integer
+      maxCrawlTimeInMins:
+        type: integer
+      maxDownloadTimeInMins:
+        type: integer
+      maxFileSize:
+        type: integer
+      maxRedirects:
+        type: integer
+      maxFiles:
+        type: integer
+  CustomCompute:
+    description: Custom compute.
+    required:
+      - computeId
+    allOf:
+      - $ref: '#/definitions/JobCompute'
+      - type: object
+        properties:
+          computeId:
+            type: string
+            description: Id of the custom compute
+    x-ms-discriminator-value: CustomCompute
+  DataSourceConfig:
+    title: DataSourceConfig
+    required:
+      - type
+    type: object
+    properties:
+      type:
+        minLength: 1
+        type: string
+    discriminator: type
+  DataSourceConfigFileType:
+    title: DataSourceConfigFileType
+    description: The type of a file.
+    enum:
+      - jsonl
+    type: string
+  DataSourceItemSchema:
+    title: DataSourceItemSchema
+    type: object
+    properties:
+      fields:
+        title: IList`1
+        type: array
+        items:
+          $ref: '#/definitions/DataSourceSchemaField'
+  DataSourceSchemaField:
+    title: DataSourceSchemaField
+    type: object
+    properties:
+      name:
+        type: string
+      type:
+        $ref: '#/definitions/DataSourceSchemaFieldType'
+  DataSourceSchemaFieldType:
+    title: DataSourceSchemaFieldType
+    enum:
+      - string
+      - number
+      - boolean
+      - object
+      - array
+    type: string
+  DeploymentConnection:
+    description: Relative deployment connection.
+    allOf:
+      - $ref: '#/definitions/BaseConnection'
+    x-ms-discriminator-value: RelativeConnection
   Deprecation:
     title: Deprecation
     description: "Defines the dates of deprecation for the different use cases of a model.\r\nUsually base models support 1 year of fine tuning after creation. Inference is typically supported 2 years after creation of base or\r\nfine tuned models. The exact dates are specified in the properties."
@@ -1062,14 +1927,82 @@ definitions:
     properties:
       fine_tune:
         format: unixtime
-        description: >-
-          The end date of fine tune support of this model. Will be `null` for
-          fine tune models.
+        description: The end date of fine tune support of this model. Will be `null` for fine tune models.
         type: integer
       inference:
         format: unixtime
         description: The end date of inference support of this model.
         type: integer
+  DiscreteClassificationModelGraderConfig:
+    title: DiscreteClassificationModelGraderConfig
+    required:
+      - invalid_grade
+      - labels
+      - model_name
+      - prompt
+      - type
+    type: object
+    allOf:
+      - $ref: '#/definitions/GraderConfig'
+    properties:
+      type:
+        minLength: 1
+        type: string
+      model_name:
+        minLength: 1
+        type: string
+      prompt:
+        title: ExpressionConfig
+        allOf:
+          - $ref: '#/definitions/VariableReferenceExpressionConfig'
+      invalid_grade:
+        format: float
+        type: number
+      labels:
+        title: IList`1
+        type: array
+        items:
+          $ref: '#/definitions/DiscreteClassificationModelGraderLabelConfig'
+  DiscreteClassificationModelGraderLabelConfig:
+    title: DiscreteClassificationModelGraderLabelConfig
+    type: object
+    properties:
+      text:
+        type: string
+      grade:
+        format: float
+        type: number
+  EndpointKeyConnection:
+    description: Endpoint key connection.
+    required:
+      - endpoint
+      - key
+    allOf:
+      - $ref: '#/definitions/BaseConnection'
+      - type: object
+        properties:
+          endpoint:
+            type: string
+            description: Endpoint
+          key:
+            type: string
+            description: Key
+    x-ms-discriminator-value: EndpointWithKey
+  EndpointMIConnection:
+    description: Endpoint Managed Identity connection.
+    required:
+      - endpoint
+    allOf:
+      - $ref: '#/definitions/BaseConnection'
+      - type: object
+        properties:
+          endpoint:
+            type: string
+            description: Endpoint
+          resourceId:
+            type: string
+            description: Resource Id
+    x-ms-discriminator-value: EndpointWithManagedIdentity
   Error:
     title: Error
     description: "Error content as defined in the Microsoft REST guidelines\r\n(https://github.com/microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses)."
@@ -1154,6 +2087,136 @@ definitions:
     properties:
       error:
         $ref: '#/definitions/Error'
+  EvalCreateRunRequestBody:
+    title: EvalCreateRunRequestBody
+    description: Defines the values of an evaluation job.
+    required:
+      - pipeline_config
+      - run_type
+    type: object
+    properties:
+      display_name:
+        description: Display name for the run.
+        type: string
+      run_type:
+        $ref: '#/definitions/RunType'
+      pipeline_config:
+        $ref: '#/definitions/PipelineConfig'
+  EvalDashboardPreviewFileBody:
+    title: EvalDashboardPreviewFileBody
+    description: Defines the values of an evaluation job.
+    required:
+      - file_id
+    type: object
+    properties:
+      file_id:
+        description: Display name for the run.
+        minLength: 1
+        type: string
+  EvalRunAggregationOutputsApiObject:
+    title: EvalRunAggregationOutputsApiObject
+    type: object
+    properties:
+      object:
+        $ref: '#/definitions/TypeDiscriminator'
+      run_id:
+        description: The identity of this item.
+        type: string
+        readOnly: true
+      aggregation_outputs:
+        $ref: '#/definitions/AggregationResultList'
+  EvalRunStatus:
+    title: EvalRunStatus
+    required:
+      - type
+    type: object
+    properties:
+      type:
+        minLength: 1
+        type: string
+    discriminator: type
+  EvalRunStatusFailed:
+    title: EvalRunStatusFailed
+    required:
+      - failure_user_message
+      - type
+    type: object
+    allOf:
+      - $ref: '#/definitions/EvalRunStatus'
+    properties:
+      type:
+        minLength: 1
+        type: string
+      reason:
+        $ref: '#/definitions/FailureReason'
+      failure_user_message:
+        minLength: 1
+        type: string
+  EvalRunStatusRunning:
+    title: EvalRunStatusRunning
+    required:
+      - type
+    type: object
+    allOf:
+      - $ref: '#/definitions/EvalRunStatus'
+    properties:
+      type:
+        minLength: 1
+        type: string
+      approximate_percentage_complete:
+        format: float
+        type: number
+  EvalRunStatusSucceeded:
+    title: EvalRunStatusSucceeded
+    required:
+      - type
+    type: object
+    allOf:
+      - $ref: '#/definitions/EvalRunStatus'
+    properties:
+      type:
+        minLength: 1
+        type: string
+  EvalRunStatusValidating:
+    title: EvalRunStatusValidating
+    required:
+      - type
+    type: object
+    allOf:
+      - $ref: '#/definitions/EvalRunStatus'
+    properties:
+      type:
+        minLength: 1
+        type: string
+  EvalRunStatusWaiting:
+    title: EvalRunStatusWaiting
+    required:
+      - type
+    type: object
+    allOf:
+      - $ref: '#/definitions/EvalRunStatus'
+    properties:
+      type:
+        minLength: 1
+        type: string
+      approximate_start_time:
+        format: int32
+        type: integer
+  EvaluationRunList:
+    title: EvaluationRunList
+    description: Represents a list of fine tunes.
+    type: object
+    properties:
+      object:
+        $ref: '#/definitions/TypeDiscriminator'
+      data:
+        description: The list of items.
+        type: array
+        items:
+          $ref: '#/definitions/BaseRunApiObject'
+      has_more:
+        description: A value indicating whether the list contains more elements than returned.
+        type: boolean
   EventType:
     title: EventType
     description: Defines the severity of a content filter result.
@@ -1169,11 +2232,75 @@ definitions:
           description: Event only contains human readable messages.
         - value: metrics
           description: Event contains metrics.
+  ExpressionConfig:
+    title: ExpressionConfig
+    required:
+      - type
+    type: object
+    properties:
+      type:
+        minLength: 1
+        type: string
+    discriminator: type
+  FactualityModelGraderConfig:
+    title: FactualityModelGraderConfig
+    required:
+      - agreement_grade
+      - differ_but_factual_agreement_grade
+      - disagreement_grade
+      - model_name
+      - question
+      - reference
+      - submission
+      - subset_grade
+      - superset_grade
+      - type
+    type: object
+    allOf:
+      - $ref: '#/definitions/GraderConfig'
+    properties:
+      type:
+        minLength: 1
+        type: string
+      model_name:
+        minLength: 1
+        type: string
+      question:
+        title: ExpressionConfig
+        allOf:
+          - $ref: '#/definitions/VariableReferenceExpressionConfig'
+      reference:
+        title: ExpressionConfig
+        allOf:
+          - $ref: '#/definitions/VariableReferenceExpressionConfig'
+      submission:
+        title: ExpressionConfig
+        allOf:
+          - $ref: '#/definitions/VariableReferenceExpressionConfig'
+      subset_grade:
+        format: float
+        type: number
+      superset_grade:
+        format: float
+        type: number
+      agreement_grade:
+        format: float
+        type: number
+      disagreement_grade:
+        format: float
+        type: number
+      differ_but_factual_agreement_grade:
+        format: float
+        type: number
+  FailureReason:
+    title: FailureReason
+    enum:
+      - user_cancelled
+      - internal_error
+    type: string
   File:
     title: File
-    description: >-
-      A file is a document usable for training and validation. It can also be a
-      service generated document with result details.
+    description: A file is a document usable for training and validation. It can also be a service generated document with result details.
     required:
       - filename
       - purpose
@@ -1190,8 +2317,6 @@ definitions:
         description: The identity of this item.
         type: string
         readOnly: true
-      status:
-        $ref: '#/definitions/FileState'
       bytes:
         format: int64
         description: "The size of this file when available (can be null). File sizes larger than 2^53-1 are not supported to ensure compatibility\r\nwith JavaScript integers."
@@ -1203,15 +2328,55 @@ definitions:
         description: The name of the file.
         minLength: 1
         type: string
-      status_details:
-        description: The error message with details in case processing of this file failed.
+    readOnly: true
+  FileCreate:
+    title: FileCreate
+    description: Defines a document to import from an external content url to be usable with Azure OpenAI.
+    required:
+      - content_url
+      - purpose
+    type: object
+    properties:
+      purpose:
+        $ref: '#/definitions/Purpose'
+      content_url:
+        format: url
+        description: The url to download the document from (can be SAS url of a blob or any other external url accessible with a GET request).
+        type: string
+  FileDetails:
+    title: FileDetails
+    description: A file detail is a document used by batch service to fetch file blob details.
+    required:
+      - filename
+      - purpose
+    type: object
+    properties:
+      id:
+        description: The identity of this item.
         type: string
         readOnly: true
+      filename:
+        description: The name of the file.
+        minLength: 1
+        type: string
+      path:
+        description: The  the relative path to the file within the container.
+        type: string
+        readOnly: true
+      storage_account_uri:
+        format: url
+        description: The storage account url of this file.
+        type: string
+        readOnly: true
+      storage_container_name:
+        description: The Storage Container Name of this file blob.
+        type: string
+        readOnly: true
+      purpose:
+        $ref: '#/definitions/Purpose'
   FileImport:
     title: FileImport
-    description: >-
-      Defines a document to import from an external content url to be usable
-      with Azure OpenAI.
+    description: Defines a document to import from an external content url to be usable with Azure OpenAI.
     required:
       - content_url
       - filename
@@ -1226,9 +2391,7 @@ definitions:
         type: string
       content_url:
         format: url
-        description: >-
-          The url to download the document from (can be SAS url of a blob or any
-          other external url accessible with a GET request).
+        description: The url to download the document from (can be SAS url of a blob or any other external url accessible with a GET request).
         type: string
   FileList:
     title: FileList
@@ -1242,54 +2405,51 @@ definitions:
         type: array
         items:
           $ref: '#/definitions/File'
-  FileState:
-    title: FileState
-    description: The state of a file.
-    enum:
-      - uploaded
-      - pending
-      - running
-      - processed
-      - error
-      - deleting
-      - deleted
-    type: string
-    readOnly: true
-    x-ms-enum:
-      name: FileState
-      modelAsString: true
-      values:
-        - value: uploaded
-          description: >-
-            The file has been uploaded but it's not yet processed. This state is
-            not returned by Azure OpenAI and exposed only for compatibility. It
-            can be categorized as an inactive state.
-        - value: pending
-          description: >-
-            The operation was created and is not queued to be processed in the
-            future. It can be categorized as an inactive state.
-        - value: running
-          description: >-
-            The operation has started to be processed. It can be categorized as
-            an active state.
-        - value: processed
-          description: >-
-            The operation has successfully be processed and is ready for
-            consumption. It can be categorized as a terminal state.
-        - value: error
-          description: >-
-            The operation has completed processing with a failure and cannot be
-            further consumed. It can be categorized as a terminal state.
-        - value: deleting
-          description: >-
-            The entity is ni the process to be deleted. This state is not
-            returned by Azure OpenAI and exposed only for compatibility. It can
-            be categorized as an active state.
-        - value: deleted
-          description: >-
-            The entity has been deleted but may still be referenced by other
-            entities predating the deletion. It can be categorized as a terminal
-            state.
+  FilePreviewApiObject:
+    title: FilePreviewApiObject
+    required:
+      - file_id
+    type: object
+    properties:
+      object:
+        $ref: '#/definitions/TypeDiscriminator'
+      file_id:
+        minLength: 1
+        type: string
+      preview:
+        title: IList`1
+        type: array
+        items:
+          title: IDictionary`2
+          type: object
+          additionalProperties: {}
+      item_schema:
+        $ref: '#/definitions/DataSourceItemSchema'
+      error:
+        type: string
+  FileServiceDataSourceConfig:
+    title: FileServiceDataSourceConfig
+    required:
+      - file_id
+      - file_type
+      - type
+    type: object
+    allOf:
+      - $ref: '#/definitions/DataSourceConfig'
+    properties:
+      type:
+        minLength: 1
+        type: string
+      file_type:
+        $ref: '#/definitions/DataSourceConfigFileType'
+      file_id:
+        description: The file id.
+        minLength: 1
+        type: string
+      max_items:
+        format: int32
+        description: The type of file.
+        type: integer
   FineTuningHyperParameters:
     title: FineTuningHyperParameters
     description: The hyper parameter settings used in a fine tune job.
@@ -1297,9 +2457,7 @@ definitions:
     properties:
       n_epochs:
         format: int32
-        description: >-
-          The number of epochs to train the model for. An epoch refers to one
-          full cycle through the training dataset.
+        description: The number of epochs to train the model for. An epoch refers to one full cycle through the training dataset.
         type: integer
       batch_size:
         format: int32
@@ -1342,9 +2500,7 @@ definitions:
         minLength: 1
         type: string
       validation_file:
-        description: >-
-          The file which is used to evaluate the fine tuned model during
-          training.
+        description: The file which is used to evaluate the fine tuned model during training.
         type: string
       result_files:
         description: "The result file identities (file-id) containing training and evaluation metrics in csv format.\r\nThe file is only available for successfully completed fine-tune runs."
@@ -1353,15 +2509,10 @@ definitions:
           type: string
       finished_at:
         format: int32
-        description: >-
-          A timestamp when this job or item has finished successfully (in unix
-          epochs).
+        description: A timestamp when this job or item has finished successfully (in unix epochs).
         type: integer
-        readOnly: true
       organisation_id:
-        description: >-
-          The organisation id of this fine tune job. Unused on Azure OpenAI;
-          compatibility for OpenAI only.
+        description: The organisation id of this fine tune job. Unused on Azure OpenAI; compatibility for OpenAI only.
         type: string
       trained_tokens:
         format: int32
@@ -1372,18 +2523,12 @@ definitions:
         $ref: '#/definitions/FineTuningJobError'
       estimated_finish:
         format: int32
-        description: >-
-          The Unix timestamp (in seconds) for when the fine-tuning job is
-          estimated to finish. The value will be null if the fine-tuning job is
-          not running.
+        description: The Unix timestamp (in seconds) for when the fine-tuning job is estimated to finish. The value will be null if the fine-tuning job is not running.
         type: integer
       hyperparameters:
         $ref: '#/definitions/FineTuningHyperParameters'
       suffix:
-        description: >-
-          The suffix used to identify the fine-tuned model. The suffix can
-          contain up to 40 characters (a-z, A-Z, 0-9,- and _) that will be added
-          to your fine-tuned model name.
+        description: The suffix used to identify the fine-tuned model. The suffix can contain up to 40 characters (a-z, A-Z, 0-9,- and _) that will be added to your fine-tuned model name.
         type: string
       seed:
         format: int32
@@ -1425,9 +2570,7 @@ definitions:
           format: double
           type: number
       fine_tuning_job_id:
-        description: >-
-          The name of the fine-tuning job that this checkpoint was created
-          from..
+        description: The name of the fine-tuning job that this checkpoint was created from..
         minLength: 1
         type: string
   FineTuningJobCheckpointList:
@@ -1443,9 +2586,7 @@ definitions:
         items:
           $ref: '#/definitions/FineTuningJobCheckpoint'
       has_more:
-        description: >-
-          A value indicating whether the list contains more elements than
-          returned.
+        description: A value indicating whether the list contains more elements than returned.
         type: boolean
   FineTuningJobCreation:
     title: FineTuningJobCreation
@@ -1460,36 +2601,24 @@ definitions:
         minLength: 1
         type: string
       training_file:
-        description: >-
-          The file identity (file-id) that is used for training this fine tuned
-          model.
+        description: The file identity (file-id) that is used for training this fine tuned model.
         minLength: 1
         type: string
       validation_file:
-        description: >-
-          The file identity (file-id) that is used to evaluate the fine tuned
-          model during training.
+        description: The file identity (file-id) that is used to evaluate the fine tuned model during training.
         type: string
       hyperparameters:
         $ref: '#/definitions/FineTuningHyperParameters'
       suffix:
-        description: >-
-          The suffix used to identify the fine-tuned model. The suffix can
-          contain up to 40 characters (a-z, A-Z, 0-9,- and _) that will be added
-          to your fine-tuned model name.
+        description: The suffix used to identify the fine-tuned model. The suffix can contain up to 40 characters (a-z, A-Z, 0-9,- and _) that will be added to your fine-tuned model name.
         type: string
       seed:
         format: int32
-        description: >-
-          The seed used for the finetuning job. Passing in the same seed and job
-          parameters should produce the same results, but may differ in rare
-          cases. If a seed is not specified, one will be generated for you.
+        description: The seed used for the finetuning job. Passing in the same seed and job parameters should produce the same results, but may differ in rare cases. If a seed is not specified, one will be generated for you.
         type: integer
   FineTuningJobError:
     title: FineTuningJobError
-    description: >-
-      For fine-tuning jobs that have failed, this will contain more information
-      on the cause of the failure.
+    description: For fine-tuning jobs that have failed, this will contain more information on the cause of the failure.
     type: object
     properties:
       code:
@@ -1499,10 +2628,7 @@ definitions:
         description: The human-readable error message.
         type: string
       param:
-        description: >-
-          The parameter that was invalid, usually training_file or
-          validation_file. This field will be null if the failure was not
-          parameter-specific.
+        description: The parameter that was invalid, usually training_file or validation_file. This field will be null if the failure was not parameter-specific.
         type: string
   FineTuningJobEvent:
     title: FineTuningJobEvent
@@ -1526,10 +2652,7 @@ definitions:
       level:
         $ref: '#/definitions/LogLevel'
       message:
-        description: >-
-          The message describing the event. This can be a change of state, e.g.,
-          enqueued, started, failed or completed, or other events like uploaded
-          results.
+        description: The message describing the event. This can be a change of state, e.g., enqueued, started, failed or completed, or other events like uploaded results.
         minLength: 1
         type: string
       type:
@@ -1549,9 +2672,7 @@ definitions:
         items:
           $ref: '#/definitions/FineTuningJobEvent'
       has_more:
-        description: >-
-          A value indicating whether the list contains more elements than
-          returned.
+        description: A value indicating whether the list contains more elements than returned.
         type: boolean
   FineTuningJobList:
     title: FineTuningJobList
@@ -1566,9 +2687,7 @@ definitions:
         items:
           $ref: '#/definitions/FineTuningJob'
       has_more:
-        description: >-
-          A value indicating whether the list contains more elements than
-          returned.
+        description: A value indicating whether the list contains more elements than returned.
         type: boolean
   FineTuningState:
     title: FineTuningState
@@ -1587,30 +2706,212 @@ definitions:
       modelAsString: true
       values:
         - value: created
-          description: >-
-            The operation was created. This state is not returned by Azure
-            OpenAI and exposed only for compatibility. It can be categorized as
-            an inactive state.
+          description: The operation was created. This state is not returned by Azure OpenAI and exposed only for compatibility. It can be categorized as an inactive state.
         - value: pending
-          description: >-
-            The operation is not yet queued to be processed in the future. It
-            can be categorized as an inactive state.
+          description: The operation is not yet queued to be processed in the future. It can be categorized as an inactive state.
         - value: running
-          description: >-
-            The operation has started to be processed. It can be categorized as
-            an active state.
+          description: The operation has started to be processed. It can be categorized as an active state.
         - value: succeeded
-          description: >-
-            The operation has successfully be processed and is ready for
-            consumption. It can be categorized as a terminal state.
+          description: The operation has successfully be processed and is ready for consumption. It can be categorized as a terminal state.
         - value: cancelled
-          description: >-
-            The operation has been cancelled and is incomplete. It can be
-            categorized as a terminal state.
+          description: The operation has been cancelled and is incomplete. It can be categorized as a terminal state.
         - value: failed
-          description: >-
-            The operation has completed processing with a failure and cannot be
-            further consumed. It can be categorized as a terminal state.
+          description: The operation has completed processing with a failure and cannot be further consumed. It can be categorized as a terminal state.
+  GenericEmbeddingSettings:
+    title: ConnectionEmbeddingSettings
+    description: Connection Embedding Settings
+    type: object
+    properties:
+      connection:
+        $ref: '#/definitions/BaseConnection'
+      deploymentName:
+        type: string
+      modelName:
+        type: string
+  GleuScoreGraderConfig:
+    title: GleuScoreGraderConfig
+    required:
+      - hypothesis
+      - reference
+      - type
+    type: object
+    allOf:
+      - $ref: '#/definitions/NonModelGraderConfig'
+    properties:
+      type:
+        minLength: 1
+        type: string
+      reference:
+        title: ExpressionConfig
+        allOf:
+          - $ref: '#/definitions/VariableReferenceExpressionConfig'
+      hypothesis:
+        title: ExpressionConfig
+        allOf:
+          - $ref: '#/definitions/VariableReferenceExpressionConfig'
+  GraderConfig:
+    title: GraderConfig
+    required:
+      - name
+      - type
+    type: object
+    properties:
+      type:
+        minLength: 1
+        type: string
+      name:
+        minLength: 1
+        type: string
+      description:
+        type: string
+    discriminator: type
+  IngestionError:
+    title: IngestionError
+    description: The details of the ingestion error
+    type: object
+    properties:
+      message:
+        type: string
+      innerErrors:
+        type: array
+        items:
+          type: string
+  IngestionJob:
+    title: IngestionJob
+    description: Represents the details of a job.
+    type: object
+    required:
+      - kind
+    discriminator: kind
+    properties:
+      kind:
+        $ref: '#/definitions/IngestionJobType'
+      jobId:
+        type: string
+  IngestionJobList:
+    title: IngestionJobList
+    description: Represents a list of ingestion jobs.
+    type: object
+    properties:
+      nextLink:
+        description: The link to the next page.
+        type: string
+      value:
+        description: The list of items.
+        type: array
+        items:
+          $ref: '#/definitions/IngestionJob'
+  IngestionJobProgress:
+    title: IngestionJobProgress
+    type: object
+    required:
+      - stageProgress
+    properties:
+      stageProgress:
+        type: array
+        items:
+          $ref: '#/definitions/IngestionJobStageProgress'
+  IngestionJobRun:
+    title: IngestionJobRun
+    description: The details of a job run
+    type: object
+    properties:
+      jobId:
+        type: string
+      runId:
+        type: string
+      status:
+        $ref: '#/definitions/OperationState'
+      error:
+        $ref: '#/definitions/IngestionError'
+      warnings:
+        type: array
+        items:
+          type: string
+      progress:
+        $ref: '#/definitions/IngestionJobProgress'
+  IngestionJobRunList:
+    title: IngestionJobRunList
+    description: Represents a list of ingestion job runs.
+    type: object
+    properties:
+      nextLink:
+        description: The link to the next page.
+        type: string
+      value:
+        description: The list of items.
+        type: array
+        items:
+          $ref: '#/definitions/IngestionJobRun'
+  IngestionJobStageProgress:
+    title: IngestionJobStageProgress
+    type: object
+    properties:
+      name:
+        type: string
+      totalItems:
+        type: integer
+        format: int32
+      processedItems:
+        type: integer
+        format: int32
+      state:
+        $ref: '#/definitions/OperationState'
+      subStageProgress:
+        type: array
+        items:
+          $ref: '#/definitions/IngestionJobStageProgress'
+  IngestionJobSystemCompute:
+    type: object
+    allOf:
+      - $ref: '#/definitions/IngestionJob'
+      - type: object
+        properties:
+          searchServiceConnection:
+            $ref: '#/definitions/BaseConnection'
+          datasource:
+            $ref: '#/definitions/SystemComputeDatasource'
+          completionAction:
+            $ref: '#/definitions/CompletionAction'
+          dataRefreshIntervalInHours:
+            type: integer
+    x-ms-discriminator-value: SystemCompute
+  IngestionJobType:
+    title: IngestionJobType
+    type: string
+    description: The job type.
+    enum:
+      - SystemCompute
+      - UserCompute
+    x-ms-enum:
+      name: IngestionJobType
+      modelAsString: true
+      values:
+        - name: SystemCompute
+          value: SystemCompute
+          description: Jobs that run on service owned resources.
+        - name: UserCompute
+          value: UserCompute
+          description: Jobs that run on user owned workspace.
+  IngestionJobUserCompute:
+    type: object
+    required:
+      - workspaceId
+    allOf:
+      - $ref: '#/definitions/IngestionJob'
+      - type: object
+        properties:
+          workspaceId:
+            type: string
+          compute:
+            $ref: '#/definitions/JobCompute'
+          target:
+            $ref: '#/definitions/TargetIndex'
+          datasource:
+            $ref: '#/definitions/UserComputeDatasource'
+          dataRefreshIntervalInHours:
+            type: integer
+    x-ms-discriminator-value: UserCompute
   InnerError:
     title: InnerError
     description: "Inner error as defined in the Microsoft REST guidelines\r\n(https://github.com/microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses)."
@@ -1632,6 +2933,16 @@ definitions:
       values:
         - value: invalidPayload
           description: The request data is invalid for this operation.
+  JobCompute:
+    title: JobCompute
+    description: The compute settings of the job.
+    type: object
+    discriminator: kind
+    required:
+      - kind
+    properties:
+      kind:
+        $ref: '#/definitions/ComputeType'
   LifeCycleStatus:
     title: LifeCycleStatus
     description: "The life cycle status of a model.\r\nNote: A model can be promoted from \"preview\" to \"generally-available\", but never from \"generally-available\" to \"preview\"."
@@ -1665,11 +2976,30 @@ definitions:
           description: This event represents a mitigated issue.
         - value: error
           description: This message represents a non recoverable issue.
+  MeteorScoreGraderConfig:
+    title: MeteorScoreGraderConfig
+    required:
+      - hypothesis
+      - reference
+      - type
+    type: object
+    allOf:
+      - $ref: '#/definitions/NonModelGraderConfig'
+    properties:
+      type:
+        minLength: 1
+        type: string
+      reference:
+        title: ExpressionConfig
+        allOf:
+          - $ref: '#/definitions/VariableReferenceExpressionConfig'
+      hypothesis:
+        title: ExpressionConfig
+        allOf:
+          - $ref: '#/definitions/VariableReferenceExpressionConfig'
   Model:
     title: Model
-    description: >-
-      A model is either a base model or the result of a successful fine tune
-      job.
+    description: A model is either a base model or the result of a successful fine tune job.
     required:
       - capabilities
       - deprecation
@@ -1690,14 +3020,10 @@ definitions:
       status:
         $ref: '#/definitions/FineTuningState'
       model:
-        description: >-
-          The base model identity (model-id) if this is a fine tune model;
-          otherwise `null`.
+        description: The base model identity (model-id) if this is a fine tune model; otherwise `null`.
         type: string
       fine_tune:
-        description: >-
-          The fine tune job identity (fine-tune-id) if this is a fine tune
-          model; otherwise `null`.
+        description: The fine tune job identity (fine-tune-id) if this is a fine tune model; otherwise `null`.
         type: string
       capabilities:
         $ref: '#/definitions/Capabilities'
@@ -1705,6 +3031,38 @@ definitions:
         $ref: '#/definitions/LifeCycleStatus'
       deprecation:
         $ref: '#/definitions/Deprecation'
+  ModelGraderConfig:
+    title: ModelGraderConfig
+    required:
+      - model_name
+      - output_graders
+      - sampling_params
+      - trajectory_template
+      - type
+    type: object
+    allOf:
+      - $ref: '#/definitions/GraderConfig'
+    properties:
+      type:
+        minLength: 1
+        type: string
+      trajectory_template:
+        title: IList`1
+        type: array
+        items:
+          $ref: '#/definitions/ChatMessage'
+      model_name:
+        minLength: 1
+        type: string
+      sampling_params:
+        $ref: '#/definitions/ModelSamplingParams'
+      output_graders:
+        title: IList`1
+        type: array
+        items:
+          title: GraderConfig
+          allOf:
+            - $ref: '#/definitions/SetMembershipGraderConfig'
   ModelList:
     title: ModelList
     description: Represents a list of models.
@@ -1717,6 +3075,84 @@ definitions:
         type: array
         items:
           $ref: '#/definitions/Model'
+  ModelSamplingParams:
+    title: ModelSamplingParams
+    required:
+      - max_tokens
+      - temperature
+    type: object
+    properties:
+      seed:
+        format: int32
+        type: integer
+      temperature:
+        format: float
+        type: number
+      max_tokens:
+        format: int32
+        type: integer
+      top_p:
+        format: float
+        type: number
+  ModelUsage:
+    title: ModelUsage
+    type: object
+    properties:
+      model_config:
+        title: IDictionary`2
+        type: object
+        additionalProperties:
+          type: string
+      model_name:
+        type: string
+      invocation_count:
+        format: int32
+        type: integer
+      prompt_tokens:
+        format: int32
+        type: integer
+      completion_tokens:
+        format: int32
+        type: integer
+      total_tokens:
+        format: int32
+        type: integer
+  MulticlassClassificationGraderConfig:
+    title: MulticlassClassificationGraderConfig
+    required:
+      - case_sensitive
+      - hypothesis_set
+      - reference_set
+      - type
+    type: object
+    allOf:
+      - $ref: '#/definitions/NonModelGraderConfig'
+    properties:
+      type:
+        minLength: 1
+        type: string
+      reference_set:
+        $ref: '#/definitions/StringDelimitedSetExpressionConfig'
+      hypothesis_set:
+        $ref: '#/definitions/StringDelimitedSetExpressionConfig'
+      case_sensitive:
+        type: boolean
+  NonModelGraderConfig:
+    title: NonModelGraderConfig
+    required:
+      - name
+      - type
+    type: object
+    properties:
+      type:
+        minLength: 1
+        type: string
+      name:
+        minLength: 1
+        type: string
+      description:
+        type: string
+    discriminator: type
   OperationState:
     title: OperationState
     description: The state of a job or item.
@@ -1736,18 +3172,125 @@ definitions:
         - value: running
           description: The operation has started to be processed.
         - value: succeeded
-          description: >-
-            The operation has successfully be processed and is ready for
-            consumption.
+          description: The operation has successfully be processed and is ready for consumption.
         - value: failed
-          description: >-
-            The operation has completed processing with a failure and cannot be
-            further consumed.
+          description: The operation has completed processing with a failure and cannot be further consumed.
+  OutputDataItemApiObject:
+    title: OutputDataItemApiObject
+    type: object
+    properties:
+      object:
+        $ref: '#/definitions/TypeDiscriminator'
+      id:
+        description: The identity of this item.
+        type: string
+        readOnly: true
+      run_id:
+        type: string
+        readOnly: true
+      data_source_idx:
+        format: int32
+        type: integer
+        readOnly: true
+      item:
+        title: IDictionary`2
+        type: object
+        additionalProperties: {}
+        readOnly: true
+      sample:
+        $ref: '#/definitions/Sample'
+      grades:
+        title: IDictionary`2
+        type: object
+        additionalProperties:
+          format: float
+          type: number
+        readOnly: true
+      grader_samples:
+        title: IDictionary`2
+        type: object
+        additionalProperties:
+          $ref: '#/definitions/Sample'
+        readOnly: true
+  OutputDataItemList:
+    title: OutputDataItemList
+    description: Represents a list of fine tunes.
+    type: object
+    properties:
+      object:
+        $ref: '#/definitions/TypeDiscriminator'
+      data:
+        description: The list of items.
+        type: array
+        items:
+          $ref: '#/definitions/OutputDataItemApiObject'
+      has_more:
+        description: A value indicating whether the list contains more elements than returned.
+        type: boolean
+  OutputEvalRunStats:
+    title: OutputEvalRunStats
+    description: Defines the values of a evaluation job.
+    type: object
+    properties:
+      num_data_source_items:
+        format: int32
+        type: integer
+      num_samples:
+        format: int32
+        type: integer
+      num_errors:
+        format: int32
+        type: integer
+      per_model_usage:
+        title: IList`1
+        type: array
+        items:
+          $ref: '#/definitions/ModelUsage'
+  PineconeIndex:
+    description: Pinecone Index.
+    required:
+      - connectionId
+    allOf:
+      - $ref: '#/definitions/TargetIndex'
+      - type: object
+        properties:
+          connectionId:
+            type: string
+            description: The id of the connection pointing to the pinecone.
+    x-ms-discriminator-value: Pinecone
+  PipelineConfig:
+    title: PipelineConfig
+    required:
+      - aggregators
+      - data_source
+      - graders
+      - sample_generator
+    type: object
+    properties:
+      data_source:
+        title: DataSourceConfig
+        description: The data source. For now its a file-id, but needs to be changed to OpenAI data source.
+        allOf:
+          - $ref: '#/definitions/FileServiceDataSourceConfig'
+      sample_generator:
+        $ref: '#/definitions/SampleGeneratorConfig'
+      graders:
+        title: IList`1
+        description: The list of graders.
+        type: array
+        items:
+          title: GraderConfig
+          allOf:
+            - $ref: '#/definitions/SetMembershipGraderConfig'
+      aggregators:
+        title: IList`1
+        description: The list of aggregators.
+        type: array
+        items:
+          $ref: '#/definitions/AggregatorConfig'
   Purpose:
     title: Purpose
-    description: >-
-      The intended purpose of the uploaded documents. Use "fine-tune" for
-      fine-tuning. This allows us to validate the format of the uploaded file.
+    description: The intended purpose of the uploaded documents. Use "fine-tune" for fine-tuning. This allows us to validate the format of the uploaded file.
     enum:
       - fine-tune
       - fine-tune-results
@@ -1756,6 +3299,7 @@ definitions:
       - batch
       - batch_output
     type: string
+    readOnly: true
     x-ms-enum:
       name: Purpose
       modelAsString: true
@@ -1772,128 +3316,173 @@ definitions:
           description: This file contains the input data for a batch.
         - value: batch_output
           description: This file contains the results of a batch.
-  TypeDiscriminator:
-    title: TypeDiscriminator
-    description: Defines the type of an object.
-    enum:
-      - list
-      - fine_tuning.job
-      - file
-      - fine_tuning.job.event
-      - fine_tuning.job.checkpoint
-      - model
-      - batch
-    type: string
-    readOnly: true
-    x-ms-enum:
-      name: TypeDiscriminator
-      modelAsString: true
-      values:
-        - value: list
-          description: This object represents a list of other objects.
-        - value: fine_tuning.job
-          description: This object represents a fine tune job.
-        - value: file
-          description: This object represents a file.
-        - value: fine_tuning.job.event
-          description: This object represents an event of a fine tuning job.
-        - value: fine_tuning.job.checkpoint
-          description: This object represents a checkpoint of a fine tuning job.
-        - value: model
-          description: >-
-            This object represents a model (can be a base model or fine tune job
-            result).
-        - value: batch
-          description: This object represents a batch.
-  IngestionJob:
-    title: IngestionJob
-    description: Represents the details of a job.
-    type: object
+  RougeScoreGraderConfig:
+    title: RougeScoreGraderConfig
     required:
-      - kind
-    discriminator: kind
+      - hypothesis
+      - reference
+      - rouge_type
+      - type
+    type: object
+    allOf:
+      - $ref: '#/definitions/NonModelGraderConfig'
     properties:
-      kind:
-        $ref: '#/definitions/IngestionJobType'
-      jobId:
+      type:
+        minLength: 1
         type: string
-  IngestionJobType:
-    title: IngestionJobType
-    type: string
-    description: The job type.
+      reference:
+        title: ExpressionConfig
+        allOf:
+          - $ref: '#/definitions/VariableReferenceExpressionConfig'
+      hypothesis:
+        title: ExpressionConfig
+        allOf:
+          - $ref: '#/definitions/VariableReferenceExpressionConfig'
+      rouge_type:
+        $ref: '#/definitions/RougeType'
+  RougeType:
+    title: RougeType
     enum:
-      - SystemCompute
-      - UserCompute
-    x-ms-enum:
-      name: IngestionJobType
-      modelAsString: true
-      values:
-        - name: SystemCompute
-          value: SystemCompute
-          description: Jobs that run on service owned resources.
-        - name: UserCompute
-          value: UserCompute
-          description: Jobs that run on user owned workspace.
-  IngestionJobSystemCompute:
-    type: object
-    allOf:
-      - $ref: '#/definitions/IngestionJob'
-      - type: object
-        properties:
-          searchServiceConnection:
-            $ref: '#/definitions/BaseConnection'
-          datasource:
-            $ref: '#/definitions/SystemComputeDatasource'
-          completionAction:
-            $ref: '#/definitions/CompletionAction'
-          dataRefreshIntervalInHours:
-            type: integer
-    x-ms-discriminator-value: SystemCompute
-  IngestionJobUserCompute:
-    type: object
+      - rouge-1
+      - rouge-2
+      - rouge-3
+      - rouge-4
+      - rouge-5
+      - rouge-l
+    type: string
+  RunApiObject:
+    title: RunApiObject
+    description: Defines the values of a evaluation job.
     required:
-      - workspaceId
-    allOf:
-      - $ref: '#/definitions/IngestionJob'
-      - type: object
-        properties:
-          workspaceId:
-            type: string
-          compute:
-            $ref: '#/definitions/JobCompute'
-          target:
-            $ref: '#/definitions/TargetIndex'
-          datasource:
-            $ref: '#/definitions/UserComputeDatasource'
-          dataRefreshIntervalInHours:
-            type: integer
-    x-ms-discriminator-value: UserCompute
-  JobCompute:
-    title: JobCompute
-    description: The compute settings of the job.
+      - pipeline_config
+      - run_type
+      - status
     type: object
-    discriminator: kind
-    required:
-      - kind
     properties:
-      kind:
-        $ref: '#/definitions/ComputeType'
-  ComputeType:
-    type: string
-    description: The compute type.
+      object:
+        $ref: '#/definitions/TypeDiscriminator'
+      created_at:
+        format: unixtime
+        description: A timestamp when this job or item was created (in unix epochs).
+        type: integer
+        readOnly: true
+      id:
+        description: The identity of this item.
+        type: string
+        readOnly: true
+      org_id:
+        description: The organisation id of this evaluation run. Unused on Azure OpenAI; compatibility for OpenAI only.
+        type: string
+      user_id:
+        description: The user id of this evaluation run. Unused on Azure OpenAI; compatibility for OpenAI only.
+        type: string
+      run_type:
+        $ref: '#/definitions/RunType'
+      status:
+        title: EvalRunStatus
+        description: The status of this run or item.
+        allOf:
+          - $ref: '#/definitions/EvalRunStatusValidating'
+      evaluated_model_name:
+        type: string
+        readOnly: true
+      display_name:
+        type: string
+      updated_at:
+        format: unixtime
+        description: A timestamp when this job or item was created (in unix epochs).
+        type: integer
+        readOnly: true
+      aggregation_outputs:
+        $ref: '#/definitions/AggregationResultList'
+      aggregation_file_id:
+        type: string
+        readOnly: true
+      output_data_fileId:
+        type: string
+        readOnly: true
+      pipeline_config:
+        $ref: '#/definitions/PipelineConfig'
+      run_stats:
+        $ref: '#/definitions/OutputEvalRunStats'
+      validation_stats:
+        $ref: '#/definitions/BaseEvalRunStats'
+  RunStatus:
+    title: RunStatus
+    description: The state of a evaluation.
     enum:
-      - ServerlessCompute
-      - CustomCompute
-    x-ms-enum:
-      name: ComputeType
-      modelAsString: true
-      values:
-        - name: ServerlessCompute
-          value: ServerlessCompute
-          description: Serverless user compute.
-        - name: CustomCompute
-          value: CustomCompute
-          description: Custom user compute.
+      - all
+      - active
+      - complete
+      - failed
+      - success
+    type: string
+  RunStatusPollApiObject:
+    title: RunStatusPollApiObject
+    type: object
+    properties:
+      object:
+        $ref: '#/definitions/TypeDiscriminator'
+      run_id:
+        description: The identity of this item.
+        type: string
+        readOnly: true
+      status:
+        title: EvalRunStatus
+        description: The status of this run or item.
+        allOf:
+          - $ref: '#/definitions/EvalRunStatusValidating'
+        readOnly: true
+      cancel_requested_at:
+        format: int32
+        description: A timestamp when this job or item was cancelled (in unix epochs).
+        type: integer
+        readOnly: true
+  RunType:
+    title: RunType
+    description: The state of a file.
+    enum:
+      - dry-run
+      - full-run
+      - batch-run
+    type: string
+  Sample:
+    title: Sample
+    type: object
+    properties:
+      object:
+        $ref: '#/definitions/TypeDiscriminator'
+      trajectory:
+        title: IList`1
+        type: array
+        items:
+          $ref: '#/definitions/ChatMessage'
+        readOnly: true
+      outputs:
+        title: IList`1
+        type: array
+        items:
+          $ref: '#/definitions/ChatMessage'
+        readOnly: true
+    readOnly: true
+  SampleGeneratorConfig:
+    title: SampleGeneratorConfig
+    required:
+      - model_name
+      - sampling_params
+      - trajectory_template
+    type: object
+    properties:
+      trajectory_template:
+        title: IList`1
+        type: array
+        items:
+          $ref: '#/definitions/ChatMessage'
+      model_name:
+        minLength: 1
+        type: string
+      sampling_params:
+        $ref: '#/definitions/ModelSamplingParams'
   ServerlessCompute:
     description: Serverless compute.
     allOf:
@@ -1907,161 +3496,163 @@ definitions:
             type: integer
             description: The count of instances to run the job on.
     x-ms-discriminator-value: ServerlessCompute
-  CustomCompute:
-    description: Custom compute.
+  SetComparisonGraderConfig:
+    title: SetComparisonGraderConfig
     required:
-      - computeId
-    allOf:
-      - $ref: '#/definitions/JobCompute'
-      - type: object
-        properties:
-          computeId:
-            type: string
-            description: Id of the custom compute
-    x-ms-discriminator-value: CustomCompute
-  TargetIndex:
-    title: TargetIndex
-    description: Information about the index to be created.
+      - case_sensitive
+      - comparison_disjoint_grade
+      - comparison_equal_grade
+      - comparison_intersect_grade
+      - comparison_subset_grade
+      - comparison_superset_grade
+      - hypothesis_set
+      - reference_set
+      - type
     type: object
-    discriminator: kind
-    required:
-      - kind
+    allOf:
+      - $ref: '#/definitions/NonModelGraderConfig'
     properties:
-      kind:
-        $ref: '#/definitions/TargetType'
-  TargetType:
-    type: string
-    description: The target type.
-    enum:
-      - AzureAISearch
-      - CosmosDB
-      - Pinecone
-    x-ms-enum:
-      name: TargetType
-      modelAsString: true
-      values:
-        - name: AzureAISearch
-          value: AzureAISearch
-          description: Azure AI Search Index.
-        - name: CosmosDB
-          value: CosmosDB
-          description: CosmosDB Index.
-        - name: Pinecone
-          value: Pinecone
-          description: Pinecone Index.
-  AzureAISearchIndex:
-    description: Azure AI Search Index.
+      type:
+        minLength: 1
+        type: string
+      reference_set:
+        $ref: '#/definitions/StringDelimitedSetExpressionConfig'
+      hypothesis_set:
+        $ref: '#/definitions/StringDelimitedSetExpressionConfig'
+      case_sensitive:
+        type: boolean
+      comparison_equal_grade:
+        format: float
+        type: number
+      comparison_subset_grade:
+        format: float
+        type: number
+      comparison_superset_grade:
+        format: float
+        type: number
+      comparison_intersect_grade:
+        format: float
+        type: number
+      comparison_disjoint_grade:
+        format: float
+        type: number
+  SetMembershipGraderConfig:
+    title: SetMembershipGraderConfig
     required:
-      - connectionId
-    allOf:
-      - $ref: '#/definitions/TargetIndex'
-      - type: object
-        properties:
-          connectionId:
-            type: string
-            description: The id of the connection pointing to the Azure AI Search Index.
-    x-ms-discriminator-value: AzureAISearch
-  CosmosDBIndex:
-    description: CosmosDB Index.
-    required:
-      - connectionId
-    allOf:
-      - $ref: '#/definitions/TargetIndex'
-      - type: object
-        properties:
-          connectionId:
-            type: string
-            description: The id of the connection pointing to the cosmos DB.
-          collectionName:
-            type: string
-            description: The name of the cosmos DB collection.
-          databaseName:
-            type: string
-            description: The name of the cosmos DB database.
-    x-ms-discriminator-value: CosmosDB
-  PineconeIndex:
-    description: Pinecone Index.
-    required:
-      - connectionId
-    allOf:
-      - $ref: '#/definitions/TargetIndex'
-      - type: object
-        properties:
-          connectionId:
-            type: string
-            description: The id of the connection pointing to the pinecone.
-    x-ms-discriminator-value: Pinecone
-  UserComputeDatasource:
-    title: UserComputeDatasource
+      - absent_grade
+      - case_sensitive
+      - element
+      - present_grade
+      - set
+      - type
     type: object
-    discriminator: kind
-    required:
-      - kind
+    allOf:
+      - $ref: '#/definitions/NonModelGraderConfig'
     properties:
-      kind:
-        $ref: '#/definitions/UserComputeDatasourceType'
-  UserComputeDatasourceType:
-    type: string
-    description: The datasource type.
+      type:
+        minLength: 1
+        type: string
+      element:
+        title: ExpressionConfig
+        allOf:
+          - $ref: '#/definitions/VariableReferenceExpressionConfig'
+      set:
+        title: HashSet`1
+        uniqueItems: true
+        type: array
+        items:
+          title: ExpressionConfig
+          allOf:
+            - $ref: '#/definitions/VariableReferenceExpressionConfig'
+      case_sensitive:
+        type: boolean
+      present_grade:
+        format: float
+        type: number
+      absent_grade:
+        format: float
+        type: number
+  StringCheckGraderConfig:
+    title: StringCheckGraderConfig
+    required:
+      - case_sensitive
+      - false_grade
+      - lhs
+      - operation
+      - rhs
+      - true_grade
+      - type
+    type: object
+    allOf:
+      - $ref: '#/definitions/NonModelGraderConfig'
+    properties:
+      type:
+        minLength: 1
+        type: string
+      lhs:
+        title: ExpressionConfig
+        allOf:
+          - $ref: '#/definitions/VariableReferenceExpressionConfig'
+      rhs:
+        title: ExpressionConfig
+        allOf:
+          - $ref: '#/definitions/VariableReferenceExpressionConfig'
+      case_sensitive:
+        type: boolean
+      operation:
+        $ref: '#/definitions/StringCheckGraderConfigOperation'
+      true_grade:
+        format: float
+        type: number
+      false_grade:
+        format: float
+        type: number
+  StringCheckGraderConfigOperation:
+    title: StringCheckGraderConfigOperation
     enum:
-      - Dataset
-      - Urls
-    x-ms-enum:
-      name: UserComputeDatasourceType
-      modelAsString: true
-      values:
-        - name: Dataset
-          value: Dataset
-          description: Workspace Dataset.
-        - name: Urls
-          value: Urls
-          description: URLs.
-  UserComputeDataset:
-    type: object
-    title: UserComputeStorage
-    description: Storage account
+      - equals
+      - contains
+      - starts-with
+      - ends-with
+    type: string
+  StringCountGraderConfig:
+    title: StringCountGraderConfig
     required:
-      - datasetId
-      - datasetType
-    x-ms-discriminator-value: Dataset
-    allOf:
-      - $ref: '#/definitions/UserComputeDatasource'
-      - type: object
-        properties:
-          datasetId:
-            type: string
-          datasetType:
-            type: string
-          chunking:
-            $ref: '#/definitions/ChunkingSettings'
-          embeddings:
-            type: array
-            items:
-              $ref: '#/definitions/WorkspaceConnectionEmbeddingSettings'
-  UserComputeUrl:
+      - case_sensitive
+      - hypothesis
+      - reference
+      - type
     type: object
-    title: UserComputeUrl
-    description: Urls
-    required:
-      - urls
-      - embeddings
-    x-ms-discriminator-value: Urls
     allOf:
-      - $ref: '#/definitions/UserComputeDatasource'
-      - type: object
-        properties:
-          urls:
-            type: array
-            items:
-              type: string
-          crawling:
-            $ref: '#/definitions/CrawlingSettings'
-          chunking:
-            $ref: '#/definitions/ChunkingSettings'
-          embeddings:
-            type: array
-            items:
-              $ref: '#/definitions/WorkspaceConnectionEmbeddingSettings'
+      - $ref: '#/definitions/NonModelGraderConfig'
+    properties:
+      type:
+        minLength: 1
+        type: string
+      reference:
+        title: ExpressionConfig
+        allOf:
+          - $ref: '#/definitions/VariableReferenceExpressionConfig'
+      hypothesis:
+        title: ExpressionConfig
+        allOf:
+          - $ref: '#/definitions/VariableReferenceExpressionConfig'
+      case_sensitive:
+        type: boolean
+  StringDelimitedSetExpressionConfig:
+    title: StringDelimitedSetExpressionConfig
+    required:
+      - delimiter
+      - expression
+    type: object
+    properties:
+      delimiter:
+        minLength: 1
+        type: string
+      expression:
+        title: ExpressionConfig
+        allOf:
+          - $ref: '#/definitions/VariableReferenceExpressionConfig'
   SystemComputeDatasource:
     title: SystemComputeDatasource
     type: object
@@ -2140,133 +3731,273 @@ definitions:
             type: array
             items:
               $ref: '#/definitions/GenericEmbeddingSettings'
-  ChunkingSettings:
+  TargetIndex:
+    title: TargetIndex
+    description: Information about the index to be created.
     type: object
-    title: ChunkingSettings
-    description: Chunking settings
-    properties:
-      maxChunkSizeInTokens:
-        type: integer
-  CrawlingSettings:
-    type: object
-    title: CrawlingSettings
-    description: Crawling settings
-    properties:
-      maxCrawlDepth:
-        type: integer
-      maxCrawlTimeInMins:
-        type: integer
-      maxDownloadTimeInMins:
-        type: integer
-      maxFileSize:
-        type: integer
-      maxRedirects:
-        type: integer
-      maxFiles:
-        type: integer
-  GenericEmbeddingSettings:
-    title: ConnectionEmbeddingSettings
-    description: Connection Embedding Settings
-    type: object
-    properties:
-      connection:
-        $ref: '#/definitions/BaseConnection'
-      deploymentName:
-        type: string
-      modelName:
-        type: string
-  WorkspaceConnectionEmbeddingSettings:
-    title: WorkspaceConnectionEmbeddingSettings
-    description: Connection id to the embedding model
-    type: object
-    properties:
-      connectionId:
-        type: string
-      deploymentName:
-        type: string
-      modelName:
-        type: string
-  BaseConnection:
-    title: BaseConnection
-    description: A connection to a resource.
-    type: object
+    discriminator: kind
     required:
       - kind
     properties:
       kind:
-        $ref: '#/definitions/ConnectionType'
-    discriminator: kind
-  ConnectionType:
+        $ref: '#/definitions/TargetType'
+  TargetType:
     type: string
-    description: The connection type.
+    description: The target type.
     enum:
-      - EndpointWithKey
-      - ConnectionString
-      - EndpointWithManagedIdentity
-      - WorkspaceConnection
-      - RelativeConnection
+      - AzureAISearch
+      - CosmosDB
+      - Pinecone
     x-ms-enum:
-      name: ConnectionType
+      name: TargetType
       modelAsString: true
       values:
-        - name: EndpointWithKey
-          value: EndpointWithKey
-          description: Endpoint and key connection.
-        - name: ConnectionString
-          value: ConnectionString
-          description: Connection string.
-        - name: EndpointWithManagedIdentity
-          value: EndpointWithManagedIdentity
-          description: Endpoint and managed identity.
-        - name: WorkspaceConnection
-          value: WorkspaceConnection
-          description: AML Workspace connection.
-        - name: RelativeConnection
-          value: RelativeConnection
-          description: Relative deployment
-  EndpointKeyConnection:
-    description: Endpoint key connection.
+        - name: AzureAISearch
+          value: AzureAISearch
+          description: Azure AI Search Index.
+        - name: CosmosDB
+          value: CosmosDB
+          description: CosmosDB Index.
+        - name: Pinecone
+          value: Pinecone
+          description: Pinecone Index.
+  TemplateStringExpressionConfig:
+    title: TemplateStringExpressionConfig
     required:
-      - endpoint
-      - key
+      - template
+      - type
+    type: object
     allOf:
-      - $ref: '#/definitions/BaseConnection'
+      - $ref: '#/definitions/ExpressionConfig'
+    properties:
+      type:
+        minLength: 1
+        type: string
+      template:
+        minLength: 1
+        type: string
+  TypeDiscriminator:
+    title: TypeDiscriminator
+    description: Defines the type of an object.
+    enum:
+      - list
+      - fine_tuning.job
+      - file
+      - fine_tuning.job.event
+      - fine_tuning.job.checkpoint
+      - model
+      - batch
+      - upload
+      - upload.part
+    type: string
+    readOnly: true
+    x-ms-enum:
+      name: TypeDiscriminator
+      modelAsString: true
+      values:
+        - value: list
+          description: This object represents a list of other objects.
+        - value: fine_tuning.job
+          description: This object represents a fine tune job.
+        - value: file
+          description: This object represents a file.
+        - value: fine_tuning.job.event
+          description: This object represents an event of a fine tuning job.
+        - value: fine_tuning.job.checkpoint
+          description: This object represents a checkpoint of a fine tuning job.
+        - value: model
+          description: This object represents a model (can be a base model or fine tune job result).
+        - value: batch
+          description: This object represents a batch.
+        - value: upload
+          description: This object represents a file upload.
+        - value: upload.part
+          description: This object represents part of a file upload.
+  UploadFileCompleteBody:
+    title: UploadFileCompleteBody
+    required:
+      - part_ids
+    type: object
+    properties:
+      part_ids:
+        title: IList`1
+        type: array
+        items:
+          type: string
+      md5:
+        type: string
+  UploadFileStartBody:
+    title: UploadFileStartBody
+    required:
+      - bytes
+      - filename
+      - mime_type
+      - purpose
+    type: object
+    properties:
+      purpose:
+        $ref: '#/definitions/Purpose'
+      filename:
+        minLength: 1
+        type: string
+      bytes:
+        format: int64
+        type: integer
+      mime_type:
+        minLength: 1
+        type: string
+  UploadPartResource:
+    title: UploadPartResource
+    type: object
+    properties:
+      object:
+        $ref: '#/definitions/TypeDiscriminator'
+      created_at:
+        format: unixtime
+        description: A timestamp when this job or item was created (in unix epochs).
+        type: integer
+        readOnly: true
+      id:
+        description: The identity of this item.
+        type: string
+        readOnly: true
+      upload_id:
+        type: string
+        readOnly: true
+      azure_block_id:
+        type: string
+        readOnly: true
+  UploadResource:
+    title: UploadResource
+    type: object
+    properties:
+      object:
+        $ref: '#/definitions/TypeDiscriminator'
+      created_at:
+        format: unixtime
+        description: A timestamp when this job or item was created (in unix epochs).
+        type: integer
+        readOnly: true
+      id:
+        description: The identity of this item.
+        type: string
+        readOnly: true
+      bytes:
+        format: int64
+        type: integer
+        readOnly: true
+      filename:
+        type: string
+        readOnly: true
+      purpose:
+        $ref: '#/definitions/Purpose'
+      status:
+        $ref: '#/definitions/UploadStatus'
+      expires_at:
+        format: unixtime
+        type: integer
+        readOnly: true
+      file:
+        $ref: '#/definitions/File'
+  UploadStatus:
+    title: UploadStatus
+    enum:
+      - pending
+      - expired
+      - completed
+      - cancelled
+    type: string
+    readOnly: true
+  UserComputeDataset:
+    type: object
+    title: UserComputeStorage
+    description: Storage account
+    required:
+      - datasetId
+      - datasetType
+    x-ms-discriminator-value: Dataset
+    allOf:
+      - $ref: '#/definitions/UserComputeDatasource'
       - type: object
         properties:
-          endpoint:
+          datasetId:
             type: string
-            description: Endpoint
-          key:
+          datasetType:
             type: string
-            description: Key
-    x-ms-discriminator-value: EndpointWithKey
-  ConnectionStringConnection:
-    description: Connection string connection.
+          chunking:
+            $ref: '#/definitions/ChunkingSettings'
+          embeddings:
+            type: array
+            items:
+              $ref: '#/definitions/WorkspaceConnectionEmbeddingSettings'
+  UserComputeDatasource:
+    title: UserComputeDatasource
+    type: object
+    discriminator: kind
     required:
-      - connectionString
+      - kind
+    properties:
+      kind:
+        $ref: '#/definitions/UserComputeDatasourceType'
+  UserComputeDatasourceType:
+    type: string
+    description: The datasource type.
+    enum:
+      - Dataset
+      - Urls
+    x-ms-enum:
+      name: UserComputeDatasourceType
+      modelAsString: true
+      values:
+        - name: Dataset
+          value: Dataset
+          description: Workspace Dataset.
+        - name: Urls
+          value: Urls
+          description: URLs.
+  UserComputeUrl:
+    type: object
+    title: UserComputeUrl
+    description: Urls
+    required:
+      - urls
+      - embeddings
+    x-ms-discriminator-value: Urls
     allOf:
-      - $ref: '#/definitions/BaseConnection'
+      - $ref: '#/definitions/UserComputeDatasource'
       - type: object
         properties:
-          connectionString:
-            type: string
-            description: Connection string
-    x-ms-discriminator-value: ConnectionString
-  EndpointMIConnection:
-    description: Endpoint Managed Identity connection.
+          urls:
+            type: array
+            items:
+              type: string
+          crawling:
+            $ref: '#/definitions/CrawlingSettings'
+          chunking:
+            $ref: '#/definitions/ChunkingSettings'
+          embeddings:
+            type: array
+            items:
+              $ref: '#/definitions/WorkspaceConnectionEmbeddingSettings'
+  VariableReferenceExpressionConfig:
+    title: VariableReferenceExpressionConfig
     required:
-      - endpoint
+      - namespace_name
+      - type
+      - variable_name
+    type: object
     allOf:
-      - $ref: '#/definitions/BaseConnection'
-      - type: object
-        properties:
-          endpoint:
-            type: string
-            description: Endpoint
-          resourceId:
-            type: string
-            description: Resource Id
-    x-ms-discriminator-value: EndpointWithManagedIdentity
+      - $ref: '#/definitions/ExpressionConfig'
+    properties:
+      type:
+        minLength: 1
+        type: string
+      namespace_name:
+        minLength: 1
+        type: string
+      variable_name:
+        minLength: 1
+        type: string
   WorkspaceConnection:
     description: AML Workspace connection.
     required:
@@ -2279,123 +4010,22 @@ definitions:
             type: string
             description: ConnectionId
     x-ms-discriminator-value: WorkspaceConnection
-  DeploymentConnection:
-    description: Relative deployment connection.
-    allOf:
-      - $ref: '#/definitions/BaseConnection'
-    x-ms-discriminator-value: RelativeConnection
-  CompletionAction:
-    type: string
-    description: The completion action.
-    enum:
-      - cleanUpTempAssets
-      - keepAllAssets
-    x-ms-enum:
-      name: IngestionJobCompletionAction
-      modelAsString: true
-      values:
-        - name: keepAllAssets
-          value: keepAllAssets
-          description: >-
-            Will not clean up any of the intermediate assets created during the
-            ingestion process.
-        - name: cleanUpTempAssets
-          value: cleanUpTempAssets
-          description: >-
-            Will clean up intermediate assets created during the ingestion
-            process.
-  IngestionJobList:
-    title: IngestionJobList
-    description: Represents a list of ingestion jobs.
+  WorkspaceConnectionEmbeddingSettings:
+    title: WorkspaceConnectionEmbeddingSettings
+    description: Connection id to the embedding model
     type: object
     properties:
-      nextLink:
-        description: The link to the next page.
+      connectionId:
         type: string
-      value:
-        description: The list of items.
-        type: array
-        items:
-          $ref: '#/definitions/IngestionJob'
-  IngestionJobRunList:
-    title: IngestionJobRunList
-    description: Represents a list of ingestion job runs.
-    type: object
-    properties:
-      nextLink:
-        description: The link to the next page.
+      deploymentName:
         type: string
-      value:
-        description: The list of items.
-        type: array
-        items:
-          $ref: '#/definitions/IngestionJobRun'
-  IngestionJobRun:
-    title: IngestionJobRun
-    description: The details of a job run
-    type: object
-    properties:
-      jobId:
+      modelName:
         type: string
-      runId:
-        type: string
-      status:
-        $ref: '#/definitions/OperationState'
-      error:
-        $ref: '#/definitions/IngestionError'
-      warnings:
-        type: array
-        items:
-          type: string
-      progress:
-        $ref: '#/definitions/IngestionJobProgress'
-  IngestionError:
-    title: IngestionError
-    description: The details of the ingestion error
-    type: object
-    properties:
-      message:
-        type: string
-      innerErrors:
-        type: array
-        items:
-          type: string
-  IngestionJobProgress:
-    title: IngestionJobProgress
-    type: object
-    required:
-      - stageProgress
-    properties:
-      stageProgress:
-        type: array
-        items:
-          $ref: '#/definitions/IngestionJobStageProgress'
-  IngestionJobStageProgress:
-    title: IngestionJobStageProgress
-    type: object
-    properties:
-      name:
-        type: string
-      totalItems:
-        type: integer
-        format: int32
-      processedItems:
-        type: integer
-        format: int32
-      state:
-        $ref: '#/definitions/OperationState'
-      subStageProgress:
-        type: array
-        items:
-          $ref: '#/definitions/IngestionJobStageProgress'
 parameters:
   endpoint:
     in: path
     name: endpoint
-    description: >-
-      Supported Cognitive Services endpoints (protocol and hostname, for
-      example: https://aoairesource.openai.azure.com. Replace "aoairesource"
-      with your Azure OpenAI account name).
+    description: 'Supported Cognitive Services endpoints (protocol and hostname, for example: https://aoairesource.openai.azure.com. Replace "aoairesource" with your Azure OpenAI account name).'
     required: true
     type: string
     format: url

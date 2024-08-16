@@ -1,0 +1,66 @@
+{
+  "parameters": {
+    "endpoint": "https://aoairesource.openai.azure.com",
+    "api-key": "{api key}",
+    "api-version": "2024-08-01-preview",
+    "run-id": "eval-72a2792ef7d24ba7b82c7fe4a37e379f"
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "has_more": false,
+        "data": [
+          {
+            "id": "data_item_1",
+            "run_id": "eval-72a2792ef7d24ba7b82c7fe4a37e379f",
+            "data_source_idx": 2,
+            "item": {
+              "key1": "value1",
+              "key2": "value2"
+            },
+            "sample": {
+              "trajectory": [
+                {
+                  "role": "system",
+                  "content": "You are a bot."
+                },
+                {
+                  "role": "user",
+                  "content": "Who are you?"
+                }
+              ],
+              "outputs": [
+                {
+                  "role": "system",
+                  "content": "I am a bot."
+                }
+              ]
+            },
+            "grades": {
+              "foo": 1,
+              "bar": 2
+            },
+            "grader_samples": {
+              "model_grader": {
+                "trajectory": [
+                  {
+                    "role": "system",
+                    "content": "You are a dog."
+                  }
+                ],
+                "outputs": [
+                  {
+                    "role": "system",
+                    "content": "I am a dog."
+                  }
+                ]
+              }
+            }
+          }
+        ],
+        "object": "list"
+      }
+    }
+  }
+}
