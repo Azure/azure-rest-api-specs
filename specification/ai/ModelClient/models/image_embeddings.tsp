@@ -6,7 +6,7 @@ using TypeSpec.Http;
 
 namespace AI.Model;
 
-model ImageEmbeddingsOptions {
+alias ImageEmbeddingsOptions = {
   @doc("""
     Input image to embed. To embed multiple inputs in a single request, pass an array.
     The input must not exceed the max input tokens for the model.

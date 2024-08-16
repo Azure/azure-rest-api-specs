@@ -6,7 +6,7 @@ using TypeSpec.Http;
 
 namespace AI.Model;
 
-model EmbeddingsOptions {
+alias EmbeddingsOptions = {
   @doc("""
     Input text to embed, encoded as a string or array of tokens.
     To embed multiple inputs in a single request, pass an array
