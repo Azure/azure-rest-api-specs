@@ -165,7 +165,7 @@ model LocalKubernetesReference {
 @doc("Cert-Manager issuerRef properties")
 model CertManagerIssuerRef {
   @doc("group of issuer.")
-  apiGroup: string = "cert-manager.io";
+  group: string = "cert-manager.io";
 
   @doc("kind of issuer (Issuer or ClusterIssuer).")
   kind: CertManagerIssuerKind;
@@ -183,4 +183,54 @@ union CertManagerIssuerKind {
 
   @doc("ClusterIssuer kind.")
   ClusterIssuer: "ClusterIssuer",
+}
+
+alias SystemAssignedManagedIdentity = "SystemAssignedManagedIdentity";
+alias UserAssignedManagedIdentity = "UserAssignedManagedIdentity";
+alias AccessToken = "AccessToken";
+alias Sasl = "Sasl";
+alias X509Certificate = "X509Certificate";
+alias Anonymous = "Anonymous";
+
+@doc("Managed Identity Method")
+union ManagedIdentityMethod {
+  string,
+
+  @doc("SystemAssignedManagedIdentity type")
+  SystemAssignedManagedIdentity: SystemAssignedManagedIdentity,
+
+  @doc("UserAssignedManagedIdentity type")
+  UserAssignedManagedIdentity: UserAssignedManagedIdentity,
+}
+
+@doc("Access Token Method")
+union AccessTokenMethod {
+  string,
+
+  @doc("AccessToken Option")
+  AccessToken: AccessToken,
+}
+
+@doc("Sasl Method")
+union SaslMethod {
+  string,
+
+  @doc("Sasl Option")
+  Sasl: Sasl,
+}
+
+@doc("x509 Certificate Method")
+union x509CertificateMethod {
+  string,
+
+  @doc("x509Certificate Option")
+  X509Certificate: X509Certificate,
+}
+
+@doc("x509 Certificate Method")
+union AnonymousMethod {
+  string,
+
+  @doc("Anonymous Option")
+  Anonymous: Anonymous,
 }
