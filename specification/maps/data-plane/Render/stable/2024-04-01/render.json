@@ -138,6 +138,7 @@
         "microsoft.base.hybrid.road",
         "microsoft.base.hybrid.darkgrey",
         "microsoft.imagery",
+        "microsoft.imagery.hybrid",
         "microsoft.weather.radar.main",
         "microsoft.weather.infrared.main",
         "microsoft.traffic.absolute",
@@ -196,7 +197,11 @@
           },
           {
             "value": "microsoft.imagery",
-            "description": "A combination of satellite and aerial imagery. Only available in S1 pricing SKU.<br>\n\nSupports zoom levels 1 through 19. Format: raster (jpeg)."
+            "description": "A combination of satellite and aerial imagery. Only available in S1 and G2 pricing SKU.<br>\n\nSupports zoom levels 1 through 19. Format: raster (png)."
+          },
+          {
+            "value": "microsoft.imagery.hybrid",
+            "description": "A combination of satellite and aerial imagery and label data. Only available in S1 and G2 pricing SKU.<br>\n\nSupports zoom levels 1 through 19. Format: raster (png)."
           },
           {
             "value": "microsoft.weather.radar.main",
@@ -204,7 +209,7 @@
           },
           {
             "value": "microsoft.weather.infrared.main",
-            "description": "Weather infrared tiles. Latest Infrared Satellite images shows clouds by their temperature.  For more information, see [Azure Maps weather services coverage](/azure/azure-maps/weather-coverage). For more information about the satellite data returned, see [Weather services in Azure Maps](/azure-maps/weather-services-concepts#satellite-images).\n\nSupports zoom levels 0 through 15. Format: raster (png)."
+            "description": "Weather infrared tiles. Latest Infrared Satellite images shows clouds by their temperature.  For more information, see [Azure Maps weather services coverage](/azure/azure-maps/weather-coverage). For more information about the satellite data returned, see [Weather services in Azure Maps](https://learn.microsoft.com/en-us/azure/azure-maps/weather-services-concepts#satellite-images).\n\nSupports zoom levels 0 through 15. Format: raster (png)."
           },
           {
             "value": "microsoft.traffic.absolute",
@@ -535,7 +540,8 @@
             "enum": [
               "microsoft.base.road",
               "microsoft.base.darkgrey",
-              "microsoft.imagery"
+              "microsoft.imagery",
+              "microsoft.imagery.hybrid"
             ],
             "x-ms-enum": {
               "name": "TilesetId",
@@ -552,6 +558,10 @@
                 {
                   "value": "microsoft.imagery",
                   "description": "TilesetId contains a combination of satellite and aerial imagery."
+                },
+                {
+                  "value": "microsoft.imagery.hybrid",
+                  "description": "TilesetId contains a combination of satellite and aerial imagery and label data."
                 }
               ]
             }
@@ -583,7 +593,7 @@
           {
             "name": "zoom",
             "in": "query",
-            "description": "Desired zoom level of the map. Support zoom value range from 0-20 (inclusive) for tilesetId being microsoft.base.road or microsoft.base.darkgrey. Support zoom value range from 0-19 (inclusive) for tilesetId being microsoft.imagery. Default value is 12.<br><br>For more information, see [Zoom Levels and Tile Grid](https://docs.microsoft.com/azure/location-based-services/zoom-levels-and-tile-grid).",
+            "description": "Desired zoom level of the map. Support zoom value range from 0-20 (inclusive) for tilesetId being microsoft.base.road or microsoft.base.darkgrey. Support zoom value range from 0-19 (inclusive) for tilesetId being microsoft.imagery and microsoft.imagery.hybrid. Default value is 12.<br><br>For more information, see [Zoom Levels and Tile Grid](https://docs.microsoft.com/azure/location-based-services/zoom-levels-and-tile-grid).",
             "type": "integer",
             "format": "int32",
             "minimum": 0,
