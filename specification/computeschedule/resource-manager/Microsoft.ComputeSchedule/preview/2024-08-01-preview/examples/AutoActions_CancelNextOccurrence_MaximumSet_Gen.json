@@ -1,0 +1,68 @@
+{
+  "title": "AutoActions_CancelNextOccurrence",
+  "operationId": "AutoActions_CancelNextOccurrence",
+  "parameters": {
+    "api-version": "2024-08-01-preview",
+    "subscriptionId": "8F752160-46BE-46CC-A8E0-8BCCE3A5FC09",
+    "resourceGroupName": "rgcomputeschedule",
+    "autoActionName": "myAutoAction",
+    "body": [
+      {
+        "resourceId": "/subscriptions/995E403C-F0EF-4CDE-9F9E-8095229F1EEF/resourceGroups/vmRg/providers/Microsoft.Compute/virtualMachines/myVm",
+        "errorDetails": {
+          "code": "lsrcrizobvtgbxw",
+          "message": "gfeqmpbupndvkencenmojpdiw",
+          "target": "eawsabozlimlfjptzzohje",
+          "details": [],
+          "innererror": {
+            "code": "wiytisazisltcpepgenezogro"
+          }
+        }
+      }
+    ]
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "initialScheduledTime": "2024-07-30T23:12:21.181Z",
+          "resultSummary": {
+            "total": 23,
+            "statuses": [
+              {
+                "code": "yxasgjvn",
+                "count": 11,
+                "errorDetails": {
+                  "code": "lsrcrizobvtgbxw",
+                  "message": "gfeqmpbupndvkencenmojpdiw",
+                  "target": "eawsabozlimlfjptzzohje",
+                  "details": [],
+                  "innererror": {
+                    "code": "wiytisazisltcpepgenezogro"
+                  }
+                }
+              }
+            ]
+          },
+          "provisioningState": "Created"
+        },
+        "id": "/subscriptions/995E403C-F0EF-4CDE-9F9E-8095229F1EEF/resourceGroups/myRg/providers/Microsoft.ComputeSchedule/autoActions/myAutoAction/occurrences/995E403C-F0EF-4CDE-9F9E-8095229F1EEF",
+        "name": "szhfztxqmtsli",
+        "type": "huwihz",
+        "systemData": {
+          "createdBy": "uptkybsrdavxhr",
+          "createdByType": "User",
+          "createdAt": "2024-07-30T23:12:18.105Z",
+          "lastModifiedBy": "bhbvmrconddvhoktydercojmuyxi",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2024-07-30T23:12:18.105Z"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "location": "https://contoso.com/operationstatus"
+      }
+    }
+  }
+}
