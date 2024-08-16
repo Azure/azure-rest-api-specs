@@ -15,6 +15,7 @@ options:
     omit-unreachable-types: true
     output-file: "{azure-resource-provider-folder}/Microsoft.EventGrid/{version-status}/{version}/EventGrid.json"
     azure-resource-provider-folder: "data-plane"
+    emit-lro-options: "none"
   "@azure-tools/typespec-python":
     package-pprint-name: '"Azure Event Grid"'
     package-version: 4.20.0
@@ -34,10 +35,10 @@ options:
     namespace: "com.azure.messaging.eventgrid.namespaces"
     package-dir: azure-messaging-eventgrid-namespaces
     partial-update: true
-    namer: true
     generate-samples: false
     generate-tests: false
     enable-sync-stack: true
+    service-version-exclude-preview: true
     customization-class: customization/src/main/java/EventGridCustomization.java
     dev-options:
       loglevel: info

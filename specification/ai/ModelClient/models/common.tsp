@@ -6,6 +6,93 @@ using TypeSpec.Http;
 
 namespace AI.Model;
 
+@doc("Represents the input types used for embedding search.")
+union EmbeddingInputType {
+  string,
+
+  @doc("to do")
+  text: "text",
+
+  @doc("to do")
+  query: "query",
+
+  @doc("to do")
+  document: "document",
+}
+
+@doc("""
+  The format of the embeddings result.
+  Returns a 422 error if the model doesn't support the value or parameter.
+  """)
+union EmbeddingEncodingFormat {
+  string,
+
+  @doc("Base64")
+  base64: "base64",
+
+  @doc("Binary")
+  binary: "binary",
+
+  @doc("Floating point")
+  float: "float",
+
+  @doc("Signed 8-bit integer")
+  int8: "int8",
+
+  @doc("ubinary")
+  ubinary: "ubinary",
+
+  @doc("Unsigned 8-bit integer")
+  uint8: "uint8",
+}
+
+@doc("""
+  Representation of the response data from an embeddings request.
+  Embeddings measure the relatedness of text strings and are commonly used for search, clustering,
+  recommendations, and other similar scenarios.
+  """)
+model EmbeddingsResult {
+  @doc("Embedding values for the prompts submitted in the request.")
+  data: EmbeddingItem[];
+
+  @doc("Usage counts for tokens input using the embeddings API.")
+  usage: EmbeddingsUsage;
+
+  //@doc("The object type of the embeddings result. Will always be `list`.")
+  //object: string;
+
+  @doc("The model ID used to generate this result.")
+  `model`: string;
+}
+
+@doc("Representation of a single embeddings relatedness comparison.")
+model EmbeddingItem {
+  #suppress "@azure-tools/typespec-autorest/union-unsupported" "Unions with different types are not supported in OpenAPI v2."
+  @doc("""
+    List of embedding values for the input prompt. These represent a measurement of the
+    vector-based relatedness of the provided input. Or a base64 encoded string of the embedding vector.
+    """)
+  embedding: string | float32[];
+
+  @doc("Index of the prompt to which the EmbeddingItem corresponds.")
+  index: int32;
+
+  //@doc("The object type of this embeddings item. Will always be `embedding`.")
+  //object: string;
+}
+
+@doc("Measurement of the amount of tokens used in this request and response.")
+model EmbeddingsUsage {
+  @doc("Number of tokens in the request.")
+  prompt_tokens: int32;
+
+  @doc("""
+    Total number of tokens transacted in this request/response. Should equal the
+    number of tokens in the request.
+    """)
+  total_tokens: int32;
+}
+
 @doc("Represents some basic information about the AI model.")
 model ModelInfo {
   @doc("The name of the AI model. For example: `Phi21`")
@@ -43,23 +130,24 @@ union ModelType {
 
 alias AdditionalRequestHeaders = {
   @doc("""
-  Controls what happens if unknown parameters are passed in the JSON request payload.
-  This sets the HTTP request header `unknown-parameters`.
-  """)
-  @header("unknown-parameters")
-  unknown_params?: UnknownParams;
+    Controls what happens if extra parameters, undefined by the REST API,
+    are passed in the JSON request payload.
+    This sets the HTTP request header `extra-parameters`.
+    """)
+  @header("extra-parameters")
+  extra_params?: ExtraParameters;
 };
 
-@doc("Controls what happens if unknown parameters are passed in the JSON request payload.")
-union UnknownParams {
+@doc("Controls what happens if extra parameters, undefined by the REST API, are passed in the JSON request payload.")
+union ExtraParameters {
   string,
 
-  @doc("The service will error if it detected unknown parameters in the request payload. This is the service default.")
+  @doc("The service will error if it detected extra parameters in the request payload. This is the service default.")
   error: "error",
 
-  @doc("The service will ignore (drop) unknown parameters in the request payload. It will only pass the known parameters to the back-end AI model.")
+  @doc("The service will ignore (drop) extra parameters in the request payload. It will only pass the known parameters to the back-end AI model.")
   drop: "drop",
 
-  @doc("The service will pass unknown parameters to the back-end AI model.")
-  pass_through: "pass_through",
+  @doc("The service will pass extra parameters to the back-end AI model.")
+  pass_through: "pass-through",
 }

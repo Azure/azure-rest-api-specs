@@ -11,99 +11,111 @@ namespace AI.Model;
 
 alias ChatCompletionsOptions = {
   @doc("""
-  The collection of context messages associated with this chat completions request.
-  Typical usage begins with a chat message for the System role that provides instructions for
-  the behavior of the assistant, followed by alternating messages between the User and
-  Assistant roles.
-  """)
+    The collection of context messages associated with this chat completions request.
+    Typical usage begins with a chat message for the System role that provides instructions for
+    the behavior of the assistant, followed by alternating messages between the User and
+    Assistant roles.
+    """)
   @minItems(1)
   messages: ChatRequestMessage[];
 
   @doc("""
-  A value that influences the probability of generated tokens appearing based on their cumulative
-  frequency in generated text.
-  Positive values will make tokens less likely to appear as their frequency increases and
-  decrease the likelihood of the model repeating the same statements verbatim.
-  Supported range is [-2, 2].
-  """)
+    A value that influences the probability of generated tokens appearing based on their cumulative
+    frequency in generated text.
+    Positive values will make tokens less likely to appear as their frequency increases and
+    decrease the likelihood of the model repeating the same statements verbatim.
+    Supported range is [-2, 2].
+    """)
   @maxValue(2.0)
   @minValue(-2.0)
   frequency_penalty?: float32 = 0.0;
 
   @doc("""
-  A value indicating whether chat completions should be streamed for this request.
-  """)
+    A value indicating whether chat completions should be streamed for this request.
+    """)
+  @clientName("InternalShouldStreamResponse", "csharp")
   stream?: boolean;
 
   @doc("""
-  A value that influences the probability of generated tokens appearing based on their existing
-  presence in generated text.
-  Positive values will make tokens less likely to appear when they already exist and increase the
-  model's likelihood to output new topics.
-  Supported range is [-2, 2].
-  """)
+    A value that influences the probability of generated tokens appearing based on their existing
+    presence in generated text.
+    Positive values will make tokens less likely to appear when they already exist and increase the
+    model's likelihood to output new topics.
+    Supported range is [-2, 2].
+    """)
   @maxValue(2.0)
   @minValue(-2.0)
   presence_penalty?: float32 = 0.0;
 
   @doc("""
-  The sampling temperature to use that controls the apparent creativity of generated completions.
-  Higher values will make output more random while lower values will make results more focused
-  and deterministic.
-  It is not recommended to modify temperature and top_p for the same completions request as the
-  interaction of these two settings is difficult to predict.
-  Supported range is [0, 1].
-  """)
+    The sampling temperature to use that controls the apparent creativity of generated completions.
+    Higher values will make output more random while lower values will make results more focused
+    and deterministic.
+    It is not recommended to modify temperature and top_p for the same completions request as the
+    interaction of these two settings is difficult to predict.
+    Supported range is [0, 1].
+    """)
   @maxValue(1.0)
   @minValue(0.0)
   temperature?: float32 = 0.7;
 
   @doc("""
-  An alternative to sampling with temperature called nucleus sampling. This value causes the
-  model to consider the results of tokens with the provided probability mass. As an example, a
-  value of 0.15 will cause only the tokens comprising the top 15% of probability mass to be
-  considered.
-  It is not recommended to modify temperature and top_p for the same completions request as the
-  interaction of these two settings is difficult to predict.
-  Supported range is [0, 1].
-  """)
+    An alternative to sampling with temperature called nucleus sampling. This value causes the
+    model to consider the results of tokens with the provided probability mass. As an example, a
+    value of 0.15 will cause only the tokens comprising the top 15% of probability mass to be
+    considered.
+    It is not recommended to modify temperature and top_p for the same completions request as the
+    interaction of these two settings is difficult to predict.
+    Supported range is [0, 1].
+    """)
   @maxValue(1.0)
   @minValue(0.0)
+  @clientName("NucleusSamplingFactor", "csharp")
   top_p?: float32 = 1.0;
 
   @doc("The maximum number of tokens to generate.")
   @minValue(0.0)
   max_tokens?: int32;
 
-  @doc("An object specifying the format that the model must output. Used to enable JSON mode.")
+  @doc("""
+    The format that the model must output. Use this to enable JSON mode instead of the default text mode.
+    Note that to enable JSON mode, some AI models may also require you to instruct the model to produce JSON
+    via a system or user message.
+    """)
   response_format?: ChatCompletionsResponseFormat;
 
   @doc("""
     A collection of textual sequences that will end completions generation.
     """)
   @minItems(1)
+  @clientName("StopSequences", "csharp")
   stop?: string[];
 
-  @doc("The available tool definitions that the chat completions request can use, including caller-defined functions.")
+  @doc("""
+    A list of tools the model may request to call. Currently, only functions are supported as a tool. The model
+    may response with a function call request and provide the input arguments in JSON format for that function.
+    """)
   @minItems(1)
   tools?: ChatCompletionsToolDefinition[];
 
   @encodedName("application/json", "tool_choice")
   @doc("""
-  If specified, the model will configure which of the provided tools it can use for the chat completions response.
-  """)
+    If specified, the model will configure which of the provided tools it can use for the chat completions response.
+    """)
   toolChoice?: ChatCompletionsToolSelection;
 
   @doc("""
-  If specified, the system will make a best effort to sample deterministically such that repeated requests with the
-  same seed and parameters should return the same result. Determinism is not guaranteed.
-  """)
+    If specified, the system will make a best effort to sample deterministically such that repeated requests with the
+    same seed and parameters should return the same result. Determinism is not guaranteed.
+    """)
   seed?: int64;
 
   @doc("""
     ID of the specific AI model to use, if more than one model is available on the endpoint.
     """)
   `model`?: string;
+
+  ...Record<unknown>;
 };
 
 alias ChatCompletionsCommon = {
@@ -124,16 +136,16 @@ alias ChatCompletionsCommon = {
   `model`: string;
 
   @doc("""
-  Usage information for tokens processed and generated as part of this completions operation.
-  """)
+    Usage information for tokens processed and generated as part of this completions operation.
+    """)
   usage: CompletionsUsage;
 };
 
 @doc("""
-Representation of the response data from a chat completions request.
-Completions support a wide variety of tasks and generate text that continues from or "completes"
-provided prompt data.
-""")
+  Representation of the response data from a chat completions request.
+  Completions support a wide variety of tasks and generate text that continues from or "completes"
+  provided prompt data.
+  """)
 model ChatCompletions {
   ...ChatCompletionsCommon;
 
@@ -147,11 +159,11 @@ model ChatCompletions {
 }
 
 @doc("""
-Represents a response update to a chat completions request, when the service is streaming updates 
-using Server Sent Events (SSE).
-Completions support a wide variety of tasks and generate text that continues from or "completes"
-provided prompt data.
-""")
+  Represents a response update to a chat completions request, when the service is streaming updates 
+  using Server Sent Events (SSE).
+  Completions support a wide variety of tasks and generate text that continues from or "completes"
+  provided prompt data.
+  """)
 model StreamingChatCompletionsUpdate {
   ...ChatCompletionsCommon;
 
@@ -165,10 +177,10 @@ model StreamingChatCompletionsUpdate {
 }
 
 @doc("""
-Representation of the token counts processed for a completions request.
-Counts consider all tokens across prompts, choices, choice alternates, best_of generations, and
-other consumers.
-""")
+  Representation of the token counts processed for a completions request.
+  Counts consider all tokens across prompts, choices, choice alternates, best_of generations, and
+  other consumers.
+  """)
 model CompletionsUsage {
   @doc("The number of tokens generated across all completions emissions.")
   completion_tokens: int32;
@@ -181,8 +193,8 @@ model CompletionsUsage {
 }
 
 @doc("""
-Representation of the manner in which a completions response concluded.
-""")
+  Representation of the manner in which a completions response concluded.
+  """)
 union CompletionsFinishReason {
   string,
 
@@ -220,22 +232,32 @@ union ChatRole {
 }
 
 @doc("""
-An representation of a response format configuration usable by Chat Completions. Can be used to enable JSON
-mode.
-""")
-union ChatCompletionsResponseFormat {
-  string,
-
-  @doc("""
-  The standard Chat Completions response format that can freely generate text and is not guaranteed to produce response
-  content that adheres to a specific schema.
+  Represents the format that the model must output. Use this to enable JSON mode instead of the default text mode.
+  Note that to enable JSON mode, some AI models may also require you to instruct the model to produce JSON
+  via a system or user message.
   """)
-  text: "text",
+@discriminator("type")
+model ChatCompletionsResponseFormat {
+  @doc("The response format type to use for chat completions.")
+  type: string;
+}
 
-  @doc("""
+@doc("""
+  A response format for Chat Completions that emits text responses. This is the default response format.
+  """)
+model ChatCompletionsResponseFormatText extends ChatCompletionsResponseFormat {
+  @doc("Response format type: always 'text' for this object.")
+  type: "text";
+}
+
+@doc("""
   A response format for Chat Completions that restricts responses to emitting valid JSON objects.
+  Note that to enable JSON mode, some AI models may also require you to instruct the model to produce JSON
+  via a system or user message.
   """)
-  json_object: "json_object",
+model ChatCompletionsResponseFormatJSON extends ChatCompletionsResponseFormat {
+  @doc("Response format type: always 'json_object' for this object.")
+  type: "json_object";
 }
 
 alias ChatChoiceCommon = {
@@ -249,10 +271,10 @@ alias ChatChoiceCommon = {
 };
 
 @doc("""
-The representation of a single prompt completion as part of an overall chat completions request.
-Generally, `n` choices are generated per provided prompt with a default value of 1.
-Token limits and other settings may limit the number of choices generated.
-""")
+  The representation of a single prompt completion as part of an overall chat completions request.
+  Generally, `n` choices are generated per provided prompt with a default value of 1.
+  Token limits and other settings may limit the number of choices generated.
+  """)
 model ChatChoice {
   ...ChatChoiceCommon;
 
@@ -261,16 +283,16 @@ model ChatChoice {
 }
 
 @doc("""
-Represents an update to a single prompt completion when the service is streaming updates 
-using Server Sent Events (SSE).
-Generally, `n` choices are generated per provided prompt with a default value of 1.
-Token limits and other settings may limit the number of choices generated.
-""")
+  Represents an update to a single prompt completion when the service is streaming updates 
+  using Server Sent Events (SSE).
+  Generally, `n` choices are generated per provided prompt with a default value of 1.
+  Token limits and other settings may limit the number of choices generated.
+  """)
 model StreamingChatChoiceUpdate {
   ...ChatChoiceCommon;
 
   @doc("An update to the chat message for a given chat completions prompt.")
-  delta: ChatResponseMessage;
+  delta: StreamingChatResponseMessageUpdate;
 }
 
 @discriminator("role")
@@ -281,9 +303,9 @@ model ChatRequestMessage {
 }
 
 @doc("""
-A request chat message containing system instructions that influence how the model will generate a chat completions
-response.
-""")
+  A request chat message containing system instructions that influence how the model will generate a chat completions
+  response.
+  """)
 model ChatRequestSystemMessage extends ChatRequestMessage {
   @doc("The chat role associated with this message, which is always 'system' for system messages.")
   role: ChatRole.system;
@@ -313,9 +335,9 @@ model ChatRequestAssistantMessage extends ChatRequestMessage {
 
   @encodedName("application/json", "tool_calls")
   @doc("""
-  The tool calls that must be resolved and have their outputs appended to subsequent input messages for the chat
-  completions request to resolve as configured.
-  """)
+    The tool calls that must be resolved and have their outputs appended to subsequent input messages for the chat
+    completions request to resolve as configured.
+    """)
   toolCalls?: ChatCompletionsToolCall[];
 }
 
@@ -333,6 +355,23 @@ model ChatRequestToolMessage extends ChatRequestMessage {
   toolCallId: string;
 }
 
+@doc("A representation of a chat message update as received in a streaming response.")
+model StreamingChatResponseMessageUpdate {
+  @doc("The chat role associated with the message. If present, should always be 'assistant'")
+  role?: ChatRole;
+
+  //#suppress "@azure-tools/typespec-azure-core/no-nullable" "explicitly nullable in mirrored API"
+  @doc("The content of the message.")
+  content?: string;
+
+  @encodedName("application/json", "tool_calls")
+  @doc("""
+    The tool calls that must be resolved and have their outputs appended to subsequent input messages for the chat
+    completions request to resolve as configured.
+    """)
+  toolCalls?: StreamingChatResponseToolCallUpdate[];
+}
+
 @doc("A representation of a chat message as received in a response.")
 model ChatResponseMessage {
   @doc("The chat role associated with the message.")
@@ -344,13 +383,13 @@ model ChatResponseMessage {
 
   @encodedName("application/json", "tool_calls")
   @doc("""
-  The tool calls that must be resolved and have their outputs appended to subsequent input messages for the chat
-  completions request to resolve as configured.
-  """)
+    The tool calls that must be resolved and have their outputs appended to subsequent input messages for the chat
+    completions request to resolve as configured.
+    """)
   toolCalls?: ChatCompletionsToolCall[];
 }
 
-// tool_choice: "auto" | "none" | "required" | { "type": "function", "name": string }
+// tool_choice: "auto" | "none" | "required" | {"type": "function", "function": {"name": string}}
 
 #suppress "@azure-tools/typespec-autorest/union-unsupported" "External API shape is defined in OpenAPI 3.0 as oneOf."
 alias ChatCompletionsToolSelection = ChatCompletionsToolSelectionPreset | ChatCompletionsNamedToolSelection;
@@ -360,34 +399,26 @@ union ChatCompletionsToolSelectionPreset {
   string,
 
   @doc("""
-  Specifies that the model may either use any of the tools provided in this chat completions request or
-  instead return a standard chat completions response as if no tools were provided.
-  """)
+    Specifies that the model may either use any of the tools provided in this chat completions request or
+    instead return a standard chat completions response as if no tools were provided.
+    """)
   auto: "auto",
 
   @doc("""
-  Specifies that the model should not respond with a tool call and should instead provide a standard chat
-  completions response. Response content may still be influenced by the provided tool definitions.
-  """)
+    Specifies that the model should not respond with a tool call and should instead provide a standard chat
+    completions response. Response content may still be influenced by the provided tool definitions.
+    """)
   none: "none",
 
   @doc("""
-  Specifies that the model should respond with a call to one or more tools.
-  """)
+    Specifies that the model should respond with a call to one or more tools.
+    """)
   required: "required",
 }
 
-@discriminator("type")
-@doc("An abstract representation of an explicit, named tool selection to use for a chat completions request.")
-model ChatCompletionsNamedToolSelection {
-  @doc("The object type.")
-  type: string;
-}
-
 @doc("A tool selection of a specific, named function tool that will limit chat completions to using the named function.")
-model ChatCompletionsNamedFunctionToolSelection
-  extends ChatCompletionsNamedToolSelection {
-  @doc("The object type, which is always 'function'.")
+model ChatCompletionsNamedToolSelection {
+  @doc("The type of the tool. Currently, only `function` is supported.")
   type: "function";
 
   @doc("The function that should be called.")
@@ -400,19 +431,11 @@ model ChatCompletionsFunctionToolSelection {
   name: string;
 }
 
-@discriminator("type")
-@doc("An abstract representation of a tool that can be used by the model to improve a chat completions response.")
-model ChatCompletionsToolDefinition {
-  @doc("The object type.")
-  type: string;
-}
-
 @doc("""
-The definition information for a chat completions function tool that can call a function in response to a tool call.
-""")
-model ChatCompletionsFunctionToolDefinition
-  extends ChatCompletionsToolDefinition {
-  @doc("The object name, which is always 'function'.")
+  The definition of a chat completions tool that can call a function.
+  """)
+model ChatCompletionsToolDefinition {
+  @doc("The type of the tool. Currently, only `function` is supported.")
   type: "function";
 
   @doc("The function definition details for the function tool.")
@@ -420,45 +443,45 @@ model ChatCompletionsFunctionToolDefinition
 }
 
 @doc("""
-The definition of a caller-specified function that chat completions may invoke in response to matching user input.
-""")
+  The definition of a caller-specified function that chat completions may invoke in response to matching user input.
+  """)
 model FunctionDefinition {
   @doc("The name of the function to be called.")
   name: string;
 
   @doc("""
-  A description of what the function does. The model will use this description when selecting the function and
-  interpreting its parameters.
-  """)
+    A description of what the function does. The model will use this description when selecting the function and
+    interpreting its parameters.
+    """)
   description?: string;
 
-  #suppress "@azure-tools/typespec-azure-core/no-unknown" "External API shape takes an arbitrary json"
+  #suppress "@azure-tools/typespec-azure-core/bad-record-type"
   @doc("The parameters the function accepts, described as a JSON Schema object.")
-  parameters?: unknown;
+  parameters?: Record<unknown>;
 }
 
-@discriminator("type")
 @doc("""
-An abstract representation of a tool call that must be resolved in a subsequent request to perform the requested
-chat completion.
-""")
-model ChatCompletionsToolCall {
-  @doc("The object type.")
-  type: string;
-
+  An update to the function tool call information requested by the AI model.
+  """)
+model StreamingChatResponseToolCallUpdate {
   @doc("The ID of the tool call.")
   id: string;
+
+  @doc("Updates to the function call requested by the AI model.")
+  function: FunctionCall;
 }
 
 @doc("""
-A tool call to a function tool, issued by the model in evaluation of a configured function tool, that represents
-a function invocation needed for a subsequent chat completions request to resolve.
-""")
-model ChatCompletionsFunctionToolCall extends ChatCompletionsToolCall {
-  @doc("The type of tool call, in this case always 'function'.")
+  A function tool call requested by the AI model.
+  """)
+model ChatCompletionsToolCall {
+  @doc("The ID of the tool call.")
+  id: string;
+
+  @doc("The type of tool call. Currently, only `function` is supported.")
   type: "function";
 
-  @doc("The details of the function invocation requested by the tool call.")
+  @doc("The details of the function call requested by the AI model.")
   function: FunctionCall;
 }
 
@@ -468,11 +491,11 @@ model FunctionCall {
   name: string;
 
   @doc("""
-  The arguments to call the function with, as generated by the model in JSON format.
-  Note that the model does not always generate valid JSON, and may hallucinate parameters
-  not defined by your function schema. Validate the arguments in your code before calling
-  your function.
-  """)
+    The arguments to call the function with, as generated by the model in JSON format.
+    Note that the model does not always generate valid JSON, and may hallucinate parameters
+    not defined by your function schema. Validate the arguments in your code before calling
+    your function.
+    """)
   arguments: string;
 }
 
@@ -505,12 +528,12 @@ model ChatMessageImageContentItem extends ChatMessageContentItem {
 @doc("An internet location from which the model may retrieve an image.")
 model ChatMessageImageUrl {
   @doc("The URL of the image.")
-  url: url;
+  url: string;
 
   @doc("""
-  The evaluation quality setting to use, which controls relative prioritization of speed, token consumption, and
-  accuracy.
-  """)
+    The evaluation quality setting to use, which controls relative prioritization of speed, token consumption, and
+    accuracy.
+    """)
   detail?: ChatMessageImageDetailLevel;
 }
 
@@ -522,14 +545,14 @@ union ChatMessageImageDetailLevel {
   auto: "auto",
 
   @doc("""
-  Specifies that image evaluation should be constrained to the 'low-res' model that may be faster and consume fewer
-  tokens but may also be less accurate for highly detailed images.
-  """)
+    Specifies that image evaluation should be constrained to the 'low-res' model that may be faster and consume fewer
+    tokens but may also be less accurate for highly detailed images.
+    """)
   low: "low",
 
   @doc("""
-  Specifies that image evaluation should enable the 'high-res' model that may be more accurate for highly detailed
-  images but may also be slower and consume more tokens.
-  """)
+    Specifies that image evaluation should enable the 'high-res' model that may be more accurate for highly detailed
+    images but may also be slower and consume more tokens.
+    """)
   high: "high",
 }
