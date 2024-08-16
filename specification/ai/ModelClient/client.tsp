@@ -39,12 +39,12 @@ namespace Customizations; // The actual name here doesn't matter and is here for
 @@access(AI.Model.ChatRole, Access.public);
 @@access(AI.Model.CompletionsFinishReason, Access.public);
 @@access(AI.Model.CompletionsUsage, Access.public);
-@@access(AI.Model.EmbeddingEncodingFormat, Access.public, "python");
-@@access(AI.Model.EmbeddingInput, Access.public, "python");
-@@access(AI.Model.EmbeddingInputType, Access.public, "python");
-@@access(AI.Model.EmbeddingItem, Access.public, "python");
-@@access(AI.Model.EmbeddingsResult, Access.public, "python");
-@@access(AI.Model.EmbeddingsUsage, Access.public, "python");
+@@access(AI.Model.EmbeddingEncodingFormat, Access.public);
+@@access(AI.Model.EmbeddingInput, Access.public);
+@@access(AI.Model.EmbeddingInputType, Access.public);
+@@access(AI.Model.EmbeddingItem, Access.public);
+@@access(AI.Model.EmbeddingsResult, Access.public);
+@@access(AI.Model.EmbeddingsUsage, Access.public);
 @@access(AI.Model.FunctionCall, Access.public);
 @@access(AI.Model.FunctionDefinition, Access.public);
 @@access(AI.Model.ModelInfo, Access.public);
@@ -54,10 +54,10 @@ namespace Customizations; // The actual name here doesn't matter and is here for
 @@access(AI.Model.ChatMessageImageContentItem, Access.public);
 @@access(AI.Model.ChatMessageImageUrl, Access.public);
 @@access(AI.Model.ChatMessageImageDetailLevel, Access.public);
-@@access(AI.Model.StreamingChatCompletionsUpdate, Access.public, "python");
-@@access(AI.Model.StreamingChatChoiceUpdate, Access.public, "python");
-@@access(AI.Model.StreamingChatResponseMessageUpdate, Access.public, "python");
-@@access(AI.Model.StreamingChatResponseToolCallUpdate, Access.public, "python");
+@@access(AI.Model.StreamingChatCompletionsUpdate, Access.public);
+@@access(AI.Model.StreamingChatChoiceUpdate, Access.public);
+@@access(AI.Model.StreamingChatResponseMessageUpdate, Access.public);
+@@access(AI.Model.StreamingChatResponseToolCallUpdate, Access.public);
 
 // The operators need to be hidden, since we hand-write the public versions of those to
 // 1. Add chat completions streaming (to getChatCompletions operator)
