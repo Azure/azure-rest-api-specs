@@ -638,28 +638,6 @@
         "kind"
       ]
     },
-    "AgentProfileUpdate": {
-      "type": "object",
-      "description": "The agent profile of the machines in the pool.",
-      "properties": {
-        "kind": {
-          "type": "string",
-          "description": "Discriminator property for AgentProfile."
-        },
-        "resourcePredictions": {
-          "$ref": "#/definitions/ResourcePredictions",
-          "description": "Defines pool buffer/stand-by agents."
-        },
-        "resourcePredictionsProfile": {
-          "$ref": "#/definitions/ResourcePredictionsProfileUpdate",
-          "description": "Defines how the pool buffer/stand-by agents is provided."
-        }
-      },
-      "discriminator": "kind",
-      "required": [
-        "kind"
-      ]
-    },
     "AutomaticResourcePredictionsProfile": {
       "type": "object",
       "description": "The stand-by agent scheme is determined based on historical demand.",
@@ -676,21 +654,9 @@
       ],
       "x-ms-discriminator-value": "Automatic"
     },
-    "AutomaticResourcePredictionsProfileUpdate": {
-      "type": "object",
-      "description": "The stand-by agent scheme is determined based on historical demand.",
-      "properties": {
-        "predictionPreference": {
-          "$ref": "#/definitions/PredictionPreference",
-          "description": "Determines the balance between cost and performance."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/ResourcePredictionsProfileUpdate"
-        }
-      ],
-      "x-ms-discriminator-value": "Automatic"
+    "Azure.Core.azureLocation": {
+      "type": "string",
+      "description": "Represents an Azure geography region where supported resource providers live."
     },
     "AzureDevOpsOrganizationProfile": {
       "type": "object",
@@ -862,6 +828,7 @@
       "properties": {
         "url": {
           "type": "string",
+          "format": "uri",
           "description": "The GitHub organization URL in which the pool should be created."
         },
         "repositories": {
@@ -983,16 +950,6 @@
       ],
       "x-ms-discriminator-value": "Manual"
     },
-    "ManualResourcePredictionsProfileUpdate": {
-      "type": "object",
-      "description": "Customer provides the stand-by agent scheme.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ResourcePredictionsProfileUpdate"
-        }
-      ],
-      "x-ms-discriminator-value": "Manual"
-    },
     "NetworkProfile": {
       "type": "object",
       "description": "The network profile of the machines in the pool.",
@@ -1012,6 +969,7 @@
       "properties": {
         "url": {
           "type": "string",
+          "format": "uri",
           "description": "The Azure DevOps organization URL in which the pool should be created."
         },
         "projects": {
@@ -1259,7 +1217,7 @@
           "description": "Defines the organization in which the pool will be used."
         },
         "agentProfile": {
-          "$ref": "#/definitions/AgentProfileUpdate",
+          "$ref": "#/definitions/AgentProfile",
           "description": "Defines how the machine will be handled once it executed a job."
         },
         "fabricProfile": {
@@ -1520,20 +1478,6 @@
         ]
       }
     },
-    "ResourcePredictionsProfileUpdate": {
-      "type": "object",
-      "description": "Determines how the stand-by scheme should be provided.",
-      "properties": {
-        "kind": {
-          "$ref": "#/definitions/ResourcePredictionsProfileType",
-          "description": "Determines how the stand-by scheme should be provided."
-        }
-      },
-      "discriminator": "kind",
-      "required": [
-        "kind"
-      ]
-    },
     "ResourceSku": {
       "type": "object",
       "description": "A ResourceSku",
@@ -1594,7 +1538,7 @@
       "description": "Describes an available Compute SKU Location Information.",
       "properties": {
         "location": {
-          "type": "string",
+          "$ref": "#/definitions/Azure.Core.azureLocation",
           "description": "Location of the SKU"
         },
         "zones": {
@@ -1643,7 +1587,7 @@
           "type": "array",
           "description": "The set of locations that the SKU is available.",
           "items": {
-            "type": "string"
+            "$ref": "#/definitions/Azure.Core.azureLocation"
           }
         },
         "locationInfo": {
@@ -1690,7 +1634,7 @@
           "type": "array",
           "description": "Locations where the SKU is restricted",
           "items": {
-            "type": "string"
+            "$ref": "#/definitions/Azure.Core.azureLocation"
           }
         },
         "zones": {
@@ -1928,42 +1872,12 @@
       ],
       "x-ms-discriminator-value": "Stateful"
     },
-    "StatefulUpdate": {
-      "type": "object",
-      "description": "Stateful profile meaning that the machines will be returned to the pool after running a job.",
-      "properties": {
-        "maxAgentLifetime": {
-          "type": "string",
-          "description": "How long should stateful machines be kept around. The maximum is one week."
-        },
-        "gracePeriodTimeSpan": {
-          "type": "string",
-          "description": "How long should the machine be kept around after it ran a workload when there are no stand-by agents. The maximum is one week."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/AgentProfileUpdate"
-        }
-      ],
-      "x-ms-discriminator-value": "Stateful"
-    },
     "StatelessAgentProfile": {
       "type": "object",
       "description": "Stateless profile meaning that the machines will be cleaned up after running a job.",
       "allOf": [
         {
           "$ref": "#/definitions/AgentProfile"
-        }
-      ],
-      "x-ms-discriminator-value": "Stateless"
-    },
-    "StatelessAgentProfileUpdate": {
-      "type": "object",
-      "description": "Stateless profile meaning that the machines will be cleaned up after running a job.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/AgentProfileUpdate"
         }
       ],
       "x-ms-discriminator-value": "Stateless"
