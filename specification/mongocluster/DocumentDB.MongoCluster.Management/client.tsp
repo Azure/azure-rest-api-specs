@@ -8,11 +8,19 @@ using Microsoft.DocumentDB;
 @@clientName(Microsoft.DocumentDB, "MongoClusterMgmtClient", "python");
 @@access(Operations.list, Access.internal, "csharp");
 @@clientName(CheckNameAvailabilityResponse,
-  "CheckNameAvailabilityResult",
+  "MogoClusterNameAvailabilityResult",
   "csharp"
 );
 @@clientName(MongoClusterRestoreParameters,
   "MongoClusterRestoreContent",
   "csharp"
 );
+@@clientName(CheckNameAvailabilityRequest,
+  "MongoClusterNameAvailabilityContent",
+  "csharp"
+);
 @@clientName(CheckNameAvailabilityRequest.type, "ResourceType", "csharp");
+@@clientName(MongoClusters.checkNameAvailability,
+  "CheckMongoClusterNameAvailability",
+  "csharp"
+);

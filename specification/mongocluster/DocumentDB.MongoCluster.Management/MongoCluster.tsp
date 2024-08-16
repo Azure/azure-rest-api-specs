@@ -35,8 +35,13 @@ interface MongoClusters {
   >;
   /** Updates an existing mongo cluster. The request body can contain one to many of the properties present in the normal mongo cluster definition. */
   @parameterVisibility
-  update is ArmCustomPatchAsync<MongoCluster, MongoCluster>;
-
+  update is ArmCustomPatchAsync<
+    MongoCluster,
+    Azure.ResourceManager.Foundations.ResourceUpdateModel<
+      MongoCluster,
+      MongoClusterProperties
+    >
+  >;
   /** Deletes a mongo cluster. */
   delete is ArmResourceDeleteWithoutOkAsync<MongoCluster>;
   /** List all the mongo clusters in a given resource group. */
