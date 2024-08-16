@@ -6,7 +6,10 @@ using Azure.ClientGenerator.Core;
 namespace Microsoft.Fabric {
   @@access(Operations.list, Access.internal, "csharp");
 
-  // @@clientName(FabricCapacities.checkNameAvailability, "CheckFabricCapacityNameAvailability", "csharp"); // this current does not work on C# generator, temporarily remove this customization and will restore this back once the generator solves the issue
+  @@clientName(FabricCapacities.checkNameAvailability,
+    "CheckFabricCapacityNameAvailability",
+    "csharp"
+  );
   @@clientName(Azure.ResourceManager.CommonTypes.CheckNameAvailabilityRequest,
     "FabricNameAvailabilityContent",
     "csharp"
@@ -44,3 +47,5 @@ namespace Microsoft.Fabric {
     "csharp"
   );
 }
+
+@@clientName(Microsoft.Fabric, "FabricMgmtClient", "python");
