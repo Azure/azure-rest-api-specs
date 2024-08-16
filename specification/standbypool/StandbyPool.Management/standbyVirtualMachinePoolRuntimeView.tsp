@@ -61,7 +61,10 @@ model VirtualMachineInstanceCountSummary {
   @doc("The count of pooled resources in each state for the given zone.")
   @extension("x-ms-identifiers", ["state"])
   @removed(Microsoft.StandbyPool.Versions.`2024-08-01-preview`)
-  @renamedFrom(Microsoft.StandbyPool.Versions.`2024-08-01-preview`, "instanceCountsByState")
+  @renamedFrom(
+    Microsoft.StandbyPool.Versions.`2024-08-01-preview`,
+    "instanceCountsByState"
+  )
   oldinstanceCountsByState: PoolResourceStateCount[];
 
   @doc("The count of pooled resources in each state for the given zone.")
