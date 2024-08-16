@@ -62,9 +62,9 @@ async function convert(expect: ExpectStatic, readme: string) {
 }
 
 test.concurrent("Usage", async ({ expect }) => {
-  const { stdout, exitCode } = await npmExec("tsp-client");
+  const { all, exitCode } = await npmExec("tsp-client");
 
-  expect(stdout).toContain("Usage");
+  expect(all).toContain("Usage");
   expect(exitCode).not.toBe(0);
 });
 
