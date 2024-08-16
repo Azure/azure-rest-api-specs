@@ -18,10 +18,7 @@ namespace Customizations; // The actual name here doesn't matter and is here for
 // say we still want the models they use to be public.
 @@access(AI.Model.ChatChoice, Access.public);
 @@access(AI.Model.ChatCompletions, Access.public);
-@@access(AI.Model.ChatCompletionsFunctionToolCall, Access.public);
-@@access(AI.Model.ChatCompletionsFunctionToolDefinition, Access.public);
 @@access(AI.Model.ChatCompletionsNamedToolSelection, Access.public);
-@@access(AI.Model.ChatCompletionsNamedFunctionToolSelection, Access.public);
 @@access(AI.Model.ChatCompletionsFunctionToolSelection, Access.public);
 @@access(AI.Model.ChatCompletionsResponseFormat, Access.public);
 @@access(AI.Model.ChatCompletionsToolCall, Access.public);
