@@ -4284,7 +4284,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ScalingPlanPooledSchedule"
+              "$ref": "#/definitions/ScalingPlanPooledSchedulePut"
             }
           }
         ],
@@ -8999,9 +8999,9 @@
         },
         "schedules": {
           "type": "array",
-          "description": "List of ScalingPlanPooledSchedule definitions.",
+          "description": "List of ScalingPlanPooled definitions.",
           "items": {
-            "$ref": "#/definitions/ScalingSchedule"
+            "$ref": "#/definitions/ScalingPlanPooledScheduleProperties"
           }
         },
         "hostPoolReferences": {
@@ -9073,9 +9073,9 @@
         },
         "schedules": {
           "type": "array",
-          "description": "List of ScalingSchedule definitions.",
+          "description": "List of ScalingPlanPooledScheduleProperties definitions.",
           "items": {
-            "$ref": "#/definitions/ScalingSchedule"
+            "$ref": "#/definitions/ScalingPlanPooledScheduleProperties"
           }
         },
         "hostPoolReferences": {
@@ -9087,7 +9087,100 @@
         }
       }
     },
-    "ScalingSchedule": {
+    "Time": {
+      "description": "The time for a scaling action to occur.",
+      "required": [
+        "hour",
+        "minute"
+      ],
+      "type": "object",
+      "properties": {
+        "hour": {
+          "format": "int32",
+          "description": "The hour.",
+          "maximum": 23,
+          "minimum": 0,
+          "type": "integer"
+        },
+        "minute": {
+          "format": "int32",
+          "description": "The minute.",
+          "maximum": 59,
+          "minimum": 0,
+          "type": "integer"
+        }
+      }
+    },
+    "ScalingHostPoolReference": {
+      "description": "Scaling plan reference to hostpool.",
+      "type": "object",
+      "properties": {
+        "hostPoolArmPath": {
+          "type": "string",
+          "description": "Arm path of referenced hostpool."
+        },
+        "scalingPlanEnabled": {
+          "type": "boolean",
+          "description": "Is the scaling plan enabled for this hostpool."
+        }
+      }
+    },
+    "ScalingPlanPooledSchedulePatch": {
+      "type": "object",
+      "description": "ScalingPlanPooledSchedule properties that can be patched.",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "Detailed properties for ScalingPlanPooledSchedule",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ScalingPlanPooledScheduleInputProperties"
+        }
+      }
+    },
+    "ScalingPlanPooledScheduleList": {
+      "type": "object",
+      "title": "ScalingPlanPooledScheduleList",
+      "description": "List of ScalingPlanPooledSchedule definitions.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of ScalingPlanPooledSchedule definitions.",
+          "items": {
+            "$ref": "#/definitions/ScalingPlanPooledSchedule"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Link to the next page of results."
+        }
+      }
+    },
+    "ScalingPlanPooledSchedule": {
+      "type": "object",
+      "description": "Represents a ScalingPlanPooledSchedule definition.",
+      "required": [
+        "properties"
+      ],
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "Detailed properties for ScalingPlanPooledSchedule",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ScalingPlanPooledScheduleProperties",
+          "x-nullable": false
+        }
+      }
+    },
+    "ScalingPlanPooledScheduleProperties": {
       "description": "A ScalingPlanPooledSchedule.",
       "type": "object",
       "properties": {
@@ -9230,82 +9323,9 @@
         }
       }
     },
-    "Time": {
-      "description": "The time for a scaling action to occur.",
-      "required": [
-        "hour",
-        "minute"
-      ],
+    "ScalingPlanPooledSchedulePut": {
       "type": "object",
-      "properties": {
-        "hour": {
-          "format": "int32",
-          "description": "The hour.",
-          "maximum": 23,
-          "minimum": 0,
-          "type": "integer"
-        },
-        "minute": {
-          "format": "int32",
-          "description": "The minute.",
-          "maximum": 59,
-          "minimum": 0,
-          "type": "integer"
-        }
-      }
-    },
-    "ScalingHostPoolReference": {
-      "description": "Scaling plan reference to hostpool.",
-      "type": "object",
-      "properties": {
-        "hostPoolArmPath": {
-          "type": "string",
-          "description": "Arm path of referenced hostpool."
-        },
-        "scalingPlanEnabled": {
-          "type": "boolean",
-          "description": "Is the scaling plan enabled for this hostpool."
-        }
-      }
-    },
-    "ScalingPlanPooledSchedulePatch": {
-      "type": "object",
-      "description": "ScalingPlanPooledSchedule properties that can be patched.",
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/Resource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "description": "Detailed properties for ScalingPlanPooledSchedule",
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/ScalingPlanPooledScheduleProperties"
-        }
-      }
-    },
-    "ScalingPlanPooledScheduleList": {
-      "type": "object",
-      "title": "ScalingPlanPooledScheduleList",
-      "description": "List of ScalingPlanPooledSchedule definitions.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "List of ScalingPlanPooledSchedule definitions.",
-          "items": {
-            "$ref": "#/definitions/ScalingPlanPooledSchedule"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Link to the next page of results."
-        }
-      }
-    },
-    "ScalingPlanPooledSchedule": {
-      "type": "object",
-      "description": "Represents a ScalingPlanPooledSchedule definition.",
+      "description": "Represents a ScalingPlanPooledSchedule properties that can be put.",
       "required": [
         "properties"
       ],
@@ -9318,12 +9338,12 @@
         "properties": {
           "description": "Detailed properties for ScalingPlanPooledSchedule",
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/ScalingPlanPooledScheduleProperties",
+          "$ref": "#/definitions/ScalingPlanPooledScheduleInputProperties",
           "x-nullable": false
         }
       }
     },
-    "ScalingPlanPooledScheduleProperties": {
+    "ScalingPlanPooledScheduleInputProperties": {
       "description": "A ScalingPlanPooledSchedule.",
       "type": "object",
       "properties": {
@@ -9332,19 +9352,15 @@
           "description": "Set of days of the week on which this schedule is active.",
           "items": {
             "enum": [
+              "Sunday",
               "Monday",
               "Tuesday",
               "Wednesday",
               "Thursday",
               "Friday",
-              "Saturday",
-              "Sunday"
+              "Saturday"
             ],
-            "type": "string",
-            "x-ms-enum": {
-              "name": "DayOfWeek",
-              "modelAsString": true
-            }
+            "type": "string"
           }
         },
         "rampUpStartTime": {
@@ -9463,17 +9479,6 @@
           },
           "type": "string",
           "description": "Load balancing algorithm for off-peak period."
-        }
-      }
-    },
-    "ScalingPlanPersonalSchedulePatch": {
-      "type": "object",
-      "description": "ScalingPlanPersonalSchedule properties that can be patched.",
-      "properties": {
-        "properties": {
-          "description": "Detailed properties for ScalingPlanPersonalSchedule",
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/ScalingPlanPersonalScheduleProperties"
         }
       }
     },
