@@ -24,3 +24,7 @@ using Microsoft.DocumentDB;
   "CheckMongoClusterNameAvailability",
   "csharp"
 );
+@@clientName(MongoClusterReplicaParameters,
+  "MongoClusterReplicaContent",
+  "csharp"
+);
