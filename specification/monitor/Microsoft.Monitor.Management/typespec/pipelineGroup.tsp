@@ -256,7 +256,6 @@ interface PipelineGroups {
   delete is ArmResourceDeleteWithoutOkAsync<PipelineGroup>;
 
   @doc("Updates a pipeline group instance")
-  @parameterVisibility
   update is ArmResourcePatchAsync<PipelineGroup, PipelineGroupProperties>;
 
   @doc("Lists all workspaces in the specified resource group")
