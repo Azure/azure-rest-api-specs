@@ -5,3 +5,11 @@ suppressions:
         - Field `Etag`, `Tags` of struct `CreditSummary` has been removed
         - Field `MarketplaceCharges` of struct `LegacyChargeSummaryProperties` has been removed
         - Type of `ModernReservationRecommendation.Properties` has been changed from `*ModernReservationRecommendationProperties` to `ModernReservationRecommendationPropertiesClassification`
+  azure-sdk-for-js:
+    - package: '@azure/arm-consumption'
+      breaking-changes:
+        - Class ConsumptionManagementClient has a new signature
+        - Interface BudgetFilter no longer has parameter not
+        - Interface LegacyChargeSummary no longer has parameter marketplaceCharges
+        - Operation ReservationRecommendationDetails.get has a new signature
+        - Parameter scope of interface ModernReservationRecommendation is now required
