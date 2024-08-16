@@ -1,0 +1,2235 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft Cognitive Language Service - Document Analysis",
+    "description": "The language service API is a suite of natural language processing (NLP) skills built with best-in-class Microsoft machine learning algorithms.  The API can be used to analyze unstructured text for tasks such as sentiment analysis, key phrase extraction, language detection and question answering. Further documentation can be found in <a href=\"https://docs.microsoft.com/azure/cognitive-services/language-service/overview\">https://docs.microsoft.com/azure/cognitive-services/language-service/overview</a>.0",
+    "version": "2023-11-15-preview"
+  },
+  "securityDefinitions": {
+    "AADToken": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "These are the [Azure Active Directory OAuth2](https://docs.microsoft.com/azure/active-directory/develop/v1-overview) Flows. When paired with [Azure role-based access](https://docs.microsoft.com/azure/role-based-access-control/overview) control it can be used to control access to Azure Maps REST APIs. Azure role-based access controls are used to designate access to one or more Azure Maps resource account or sub-resources. Any user, group, or service principal can be granted access via a  built-in role or a custom role composed of one or more permissions to Azure Maps REST APIs.\n\nTo implement scenarios, we recommend viewing [authentication concepts](https://aka.ms/amauth). In summary, this security definition provides a solution for modeling application(s) via objects capable of access control on specific APIs and scopes.\n\n#### Notes\n* This security definition **requires** the use of the `x-ms-client-id` header to indicate which Azure Maps resource the application is requesting access to. This can be acquired from the [Maps management API](https://aka.ms/amauthdetails).\n* \nThe `Authorization URL` is specific to the Azure public cloud instance. Sovereign clouds have unique Authorization URLs and Azure Active directory configurations. \n* \nThe Azure role-based access control is configured from the [Azure management plane](https://aka.ms/amrbac) via Azure portal, PowerShell, CLI, Azure SDKs, or REST APIs.\n* \nUsage of the [Azure Maps Web SDK](https://aka.ms/amaadmc) allows for configuration based setup of an application for multiple use cases.\n* Currently, Azure Active Directory [v1.0 or v2.0](https://docs.microsoft.com/azure/active-directory/develop/azure-ad-endpoint-comparison) supports Work, School, and Guests but does not support Personal accounts.",
+      "scopes": {
+        "https://cognitiveservices.azure.com/.default": "https://cognitiveservices.azure.com/.default"
+      }
+    },
+    "apim_key": {
+      "type": "apiKey",
+      "description": "A subscription key for a Language service resource.",
+      "name": "Ocp-Apim-Subscription-Key",
+      "in": "header"
+    }
+  },
+  "security": [
+    {
+      "AADToken": [
+        "https://cognitiveservices.azure.com/.default"
+      ]
+    },
+    {
+      "apim_key": []
+    }
+  ],
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{Endpoint}/language",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "name": "Endpoint",
+        "in": "path",
+        "description": "Supported Cognitive Services endpoint (e.g., https://<resource-name>.api.cognitiveservices.azure.com).",
+        "required": true,
+        "type": "string"
+      }
+    ]
+  },
+  "paths": {
+    "/analyze-documents/jobs": {
+      "post": {
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "description": "Submit a collection of documents for analysis. Specify one or more unique tasks to be executed as a long-running operation.",
+        "operationId": "AnalyzeDocuments_SubmitJob",
+        "summary": "Submit document analysis job",
+        "parameters": [
+          {
+            "$ref": "common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "description": "Collection of documents to analyze and one or more tasks to execute.",
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/AnalyzeDocumentJobsInput"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "A successful call results with an Operation-Location header used to check the status of the analysis job.",
+            "headers": {
+              "Operation-Location": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "common.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Successful PII redaction Request": {
+            "$ref": "./examples/analyzedocuments/SuccessfulPiiTaskSubmit.json"
+          }
+        }
+      }
+    },
+    "/analyze-documents/jobs/{jobId}": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "description": "Get the status of an analysis job. A job may consist of one or more tasks. Once all tasks are succeeded, the job will transition to the succeeded state and results will be available for each task.",
+        "operationId": "AnalyzeDocuments_JobStatus",
+        "summary": "Get analysis status and results",
+        "parameters": [
+          {
+            "$ref": "common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/JobId"
+          },
+          {
+            "$ref": "#/parameters/ShowStats"
+          },
+          {
+            "$ref": "common.json#/parameters/TopParameter"
+          },
+          {
+            "$ref": "common.json#/parameters/SkipParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Analysis job status and metadata.",
+            "schema": {
+              "$ref": "#/definitions/AnalyzeDocumentsJobState"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "common.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful PII redaction Result": {
+            "$ref": "./examples/analyzedocuments/SuccessfulPiiTaskResult.json"
+          }
+        }
+      }
+    },
+    "/analyze-documents/jobs/{jobId}:cancel": {
+      "post": {
+        "produces": [
+          "application/json"
+        ],
+        "description": "Cancel a long-running Document Analysis job.",
+        "operationId": "AnalyzeDocuments_CancelJob",
+        "summary": "Cancel a long-running Document Analysis job",
+        "parameters": [
+          {
+            "$ref": "common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/JobId"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Cancel Job request has been received.",
+            "headers": {
+              "Operation-Location": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "common.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Successful job cancellation request": {
+            "$ref": "./examples/analyzedocuments/SuccessfulAnalyzeTextJobsCancelRequest.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AnalyzeDocumentJobsInput": {
+      "type": "object",
+      "properties": {
+        "displayName": {
+          "description": "Optional display name for the analysis job.",
+          "type": "string"
+        },
+        "analysisInput": {
+          "$ref": "#/definitions/MultiLanguageAnalysisInput"
+        },
+        "tasks": {
+          "description": "The set of tasks to execute on the input documents.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AnalyzeDocumentsLROTask"
+          }
+        }
+      },
+      "required": [
+        "analysisInput",
+        "tasks"
+      ]
+    },
+    "MultiLanguageAnalysisInput": {
+      "type": "object",
+      "properties": {
+        "documents": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MultiLanguageInput"
+          }
+        }
+      }
+    },
+    "MultiLanguageInput": {
+      "type": "object",
+      "description": "Contains an input document to be analyzed by the service.",
+      "required": [
+        "id",
+        "source",
+        "target"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "A unique, non-empty document identifier."
+        },
+        "source": {
+          "$ref": "#/definitions/DocumentLocation"
+        },
+        "target": {
+          "$ref": "#/definitions/DocumentLocation"
+        },
+        "language": {
+          "type": "string",
+          "description": "(Optional) This is the 2 letter ISO 639-1 representation of a language. For example, use \"en\" for English; \"es\" for Spanish etc. For Auto Language Detection, use \"auto\". If not set, use \"en\" for English as default."
+        }
+      }
+    },
+    "DocumentLocation": {
+      "type": "object",
+      "discriminator": "kind",
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/DocumentLocationKind"
+        }
+      },
+      "required": [
+        "kind"
+      ]
+    },
+    "AzureBlobDocumentLocation": {
+      "type": "object",
+      "properties": {
+        "location": {
+          "description": "Location of the file to process",
+          "type": "string",
+          "example": "https://myblob.blob.core.windows.net/Container/document.pdf"
+        },
+        "managedIdentityClientId": {
+          "description": "The managed identity client Id to use to authenticate with the storage account",
+          "type": "string"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/DocumentLocation"
+        }
+      ],
+      "required": [
+        "location"
+      ],
+      "x-ms-discriminator-value": "AzureBlob"
+    },
+    "DocumentLocationKind": {
+      "type": "string",
+      "description": "Enumeration of supported document locations.",
+      "enum": [
+        "AzureBlob"
+      ],
+      "x-ms-enum": {
+        "name": "DocumentLocationKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "AzureBlob",
+            "value": "AzureBlob",
+            "description": "The document is a URL."
+          }
+        ]
+      }
+    },
+    "AnalyzeDocumentsLROTask": {
+      "type": "object",
+      "discriminator": "kind",
+      "required": [
+        "kind"
+      ],
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/AnalyzeDocumentsLROTaskKind"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/TaskIdentifier"
+        }
+      ]
+    },
+    "AnalyzeDocumentsLROTaskKind": {
+      "type": "string",
+      "description": "Enumeration of supported long-running Document Analysis tasks.",
+      "enum": [
+        "PiiEntityRecognition",
+        "ExtractiveSummarization",
+        "AbstractiveSummarization"
+      ],
+      "x-ms-enum": {
+        "name": "AnalyzeDocumentsLROTaskKind",
+        "modelAsString": true
+      }
+    },
+    "AnalyzeDocumentsJobState": {
+      "allOf": [
+        {
+          "$ref": "common.json#/definitions/JobState"
+        },
+        {
+          "$ref": "#/definitions/TasksState"
+        },
+        {
+          "$ref": "#/definitions/AnalyzeDocumentsJobStatistics"
+        }
+      ]
+    },
+    "AnalyzeDocumentsJobStatistics": {
+      "properties": {
+        "statistics": {
+          "$ref": "common.json#/definitions/RequestStatistics"
+        }
+      },
+      "type": "object"
+    },
+    "TasksState": {
+      "properties": {
+        "tasks": {
+          "properties": {
+            "completed": {
+              "type": "integer",
+              "format": "int64"
+            },
+            "failed": {
+              "type": "integer",
+              "format": "int64"
+            },
+            "inProgress": {
+              "type": "integer",
+              "format": "int64"
+            },
+            "total": {
+              "type": "integer",
+              "format": "int64"
+            },
+            "items": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/AnalyzeDocumentsLROResult"
+              }
+            }
+          },
+          "required": [
+            "total",
+            "completed",
+            "failed",
+            "inProgress"
+          ],
+          "type": "object"
+        }
+      },
+      "required": [
+        "tasks"
+      ],
+      "type": "object"
+    },
+    "AnalyzeDocumentsLROResult": {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/AnalyzeDocumentsLROResultsKind"
+        },
+        "results": {
+          "$ref": "#/definitions/AnalyzeDocumentsLROTaskResult"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/TaskState"
+        },
+        {
+          "$ref": "#/definitions/TaskIdentifier"
+        }
+      ],
+      "required": [
+        "kind"
+      ]
+    },
+    "AnalyzeDocumentsLROResultsKind": {
+      "type": "string",
+      "description": "Enumeration of supported Document Analysis long-running operation task results.",
+      "enum": [
+        "PiiEntityRecognitionLROResults",
+        "ExtractiveSummarizationLROResults",
+        "AbstractiveSummarizationLROResults"
+      ],
+      "x-ms-enum": {
+        "name": "AnalyzeDocumentsLROResultsKind",
+        "modelAsString": true
+      }
+    },
+    "TaskState": {
+      "properties": {
+        "lastUpdateDateTime": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "notStarted",
+            "running",
+            "succeeded",
+            "failed",
+            "cancelled",
+            "cancelling"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "State"
+          }
+        }
+      },
+      "required": [
+        "status",
+        "lastUpdateDateTime"
+      ],
+      "type": "object"
+    },
+    "AnalyzeDocumentsLROTaskResult": {
+      "type": "object",
+      "properties": {
+        "documents": {
+          "type": "array",
+          "description": "Response by document",
+          "items": {
+            "$ref": "#/definitions/DocumentResultWithDetectedLanguage"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "common.json#/definitions/PreBuiltResult"
+        }
+      ],
+      "required": [
+        "documents"
+      ]
+    },
+    "DocumentResultWithDetectedLanguage": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DocumentResult"
+        },
+        {
+          "$ref": "#/definitions/DocumentDetectedLanguage"
+        }
+      ]
+    },
+    "DocumentDetectedLanguage": {
+      "type": "object",
+      "properties": {
+        "detectedLanguage": {
+          "$ref": "#/definitions/DetectedLanguage",
+          "description": "If 'language' is set to 'auto' for the document in the request this field will contain a 2 letter ISO 639-1 representation of the language detected for this document."
+        }
+      }
+    },
+    "DetectedLanguage": {
+      "type": "object",
+      "required": [
+        "name",
+        "iso6391Name",
+        "confidenceScore"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Long name of a detected language (e.g. English, French)."
+        },
+        "iso6391Name": {
+          "type": "string",
+          "description": "A two letter representation of the detected language according to the ISO 639-1 standard (e.g. en, fr)."
+        },
+        "confidenceScore": {
+          "type": "number",
+          "format": "double",
+          "description": "A confidence score between 0 and 1. Scores close to 1 indicate 100% certainty that the identified language is true."
+        }
+      }
+    },
+    "DocumentResult": {
+      "type": "object",
+      "required": [
+        "id",
+        "warnings"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique, non-empty document identifier."
+        },
+        "warnings": {
+          "type": "array",
+          "description": "Warnings encountered while processing document.",
+          "items": {
+            "$ref": "#/definitions/DocumentWarning"
+          }
+        },
+        "statistics": {
+          "description": "if showStats=true was specified in the request this field will contain information about the document payload.",
+          "$ref": "#/definitions/DocumentStatistics"
+        },
+        "source": {
+          "$ref": "#/definitions/DocumentLocation",
+          "description": "The location of the input document."
+        },
+        "target": {
+          "type": "array",
+          "description": "The location of the result files.",
+          "items": {
+            "$ref": "#/definitions/DocumentLocation"
+          }
+        }
+      }
+    },
+    "DocumentWarning": {
+      "type": "object",
+      "required": [
+        "code",
+        "message"
+      ],
+      "properties": {
+        "code": {
+          "type": "string",
+          "enum": [
+            "LongWordsInDocument",
+            "DocumentTruncated"
+          ],
+          "x-ms-enum": {
+            "name": "WarningCodeValue",
+            "modelAsString": true
+          },
+          "description": "Error code."
+        },
+        "message": {
+          "type": "string",
+          "description": "Warning message."
+        },
+        "targetRef": {
+          "type": "string",
+          "description": "A JSON pointer reference indicating the target object."
+        }
+      }
+    },
+    "DocumentStatistics": {
+      "type": "object",
+      "required": [
+        "charactersCount",
+        "transactionsCount"
+      ],
+      "properties": {
+        "charactersCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of text elements recognized in the document."
+        },
+        "transactionsCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of transactions for the document."
+        }
+      },
+      "description": "if showStats=true was specified in the request this field will contain information about the document payload."
+    },
+    "PiiLROTask": {
+      "type": "object",
+      "description": "An object representing the task definition for a PII Entities Recognition task.",
+      "properties": {
+        "parameters": {
+          "$ref": "#/definitions/PiiTaskParameters"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/AnalyzeDocumentsLROTask"
+        }
+      ],
+      "x-ms-discriminator-value": "PiiEntityRecognition"
+    },
+    "PiiCategory": {
+      "type": "string",
+      "description": "(Optional) describes the PII categories to return",
+      "enum": [
+        "ABARoutingNumber",
+        "ARNationalIdentityNumber",
+        "AUBankAccountNumber",
+        "AUDriversLicenseNumber",
+        "AUMedicalAccountNumber",
+        "AUPassportNumber",
+        "AUTaxFileNumber",
+        "AUBusinessNumber",
+        "AUCompanyNumber",
+        "ATIdentityCard",
+        "ATTaxIdentificationNumber",
+        "ATValueAddedTaxNumber",
+        "AzureDocumentDBAuthKey",
+        "AzureIAASDatabaseConnectionAndSQLString",
+        "AzureIoTConnectionString",
+        "AzurePublishSettingPassword",
+        "AzureRedisCacheString",
+        "AzureSAS",
+        "AzureServiceBusString",
+        "AzureStorageAccountKey",
+        "AzureStorageAccountGeneric",
+        "BENationalNumber",
+        "BENationalNumberV2",
+        "BEValueAddedTaxNumber",
+        "BRCPFNumber",
+        "BRLegalEntityNumber",
+        "BRNationalIDRG",
+        "BGUniformCivilNumber",
+        "CABankAccountNumber",
+        "CADriversLicenseNumber",
+        "CAHealthServiceNumber",
+        "CAPassportNumber",
+        "CAPersonalHealthIdentification",
+        "CASocialInsuranceNumber",
+        "CLIdentityCardNumber",
+        "CNResidentIdentityCardNumber",
+        "CreditCardNumber",
+        "HRIdentityCardNumber",
+        "HRNationalIDNumber",
+        "HRPersonalIdentificationNumber",
+        "HRPersonalIdentificationOIBNumberV2",
+        "CYIdentityCard",
+        "CYTaxIdentificationNumber",
+        "CZPersonalIdentityNumber",
+        "CZPersonalIdentityV2",
+        "DKPersonalIdentificationNumber",
+        "DKPersonalIdentificationV2",
+        "DrugEnforcementAgencyNumber",
+        "EEPersonalIdentificationCode",
+        "EUDebitCardNumber",
+        "EUDriversLicenseNumber",
+        "EUGPSCoordinates",
+        "EUNationalIdentificationNumber",
+        "EUPassportNumber",
+        "EUSocialSecurityNumber",
+        "EUTaxIdentificationNumber",
+        "FIEuropeanHealthNumber",
+        "FINationalID",
+        "FINationalIDV2",
+        "FIPassportNumber",
+        "FRDriversLicenseNumber",
+        "FRHealthInsuranceNumber",
+        "FRNationalID",
+        "FRPassportNumber",
+        "FRSocialSecurityNumber",
+        "FRTaxIdentificationNumber",
+        "FRValueAddedTaxNumber",
+        "DEDriversLicenseNumber",
+        "DEPassportNumber",
+        "DEIdentityCardNumber",
+        "DETaxIdentificationNumber",
+        "DEValueAddedNumber",
+        "GRNationalIDCard",
+        "GRNationalIDV2",
+        "GRTaxIdentificationNumber",
+        "HKIdentityCardNumber",
+        "HUValueAddedNumber",
+        "HUPersonalIdentificationNumber",
+        "HUTaxIdentificationNumber",
+        "INPermanentAccount",
+        "INUniqueIdentificationNumber",
+        "IDIdentityCardNumber",
+        "InternationalBankingAccountNumber",
+        "IEPersonalPublicServiceNumber",
+        "IEPersonalPublicServiceNumberV2",
+        "ILBankAccountNumber",
+        "ILNationalID",
+        "ITDriversLicenseNumber",
+        "ITFiscalCode",
+        "ITValueAddedTaxNumber",
+        "JPBankAccountNumber",
+        "JPDriversLicenseNumber",
+        "JPPassportNumber",
+        "JPResidentRegistrationNumber",
+        "JPSocialInsuranceNumber",
+        "JPMyNumberCorporate",
+        "JPMyNumberPersonal",
+        "JPResidenceCardNumber",
+        "LVPersonalCode",
+        "LTPersonalCode",
+        "LUNationalIdentificationNumberNatural",
+        "LUNationalIdentificationNumberNonNatural",
+        "MYIdentityCardNumber",
+        "MTIdentityCardNumber",
+        "MTTaxIDNumber",
+        "NLCitizensServiceNumber",
+        "NLCitizensServiceNumberV2",
+        "NLTaxIdentificationNumber",
+        "NLValueAddedTaxNumber",
+        "NZBankAccountNumber",
+        "NZDriversLicenseNumber",
+        "NZInlandRevenueNumber",
+        "NZMinistryOfHealthNumber",
+        "NZSocialWelfareNumber",
+        "NOIdentityNumber",
+        "PHUnifiedMultiPurposeIDNumber",
+        "PLIdentityCard",
+        "PLNationalID",
+        "PLNationalIDV2",
+        "PLPassportNumber",
+        "PLTaxIdentificationNumber",
+        "PLREGONNumber",
+        "PTCitizenCardNumber",
+        "PTCitizenCardNumberV2",
+        "PTTaxIdentificationNumber",
+        "ROPersonalNumericalCode",
+        "RUPassportNumberDomestic",
+        "RUPassportNumberInternational",
+        "SANationalID",
+        "SGNationalRegistrationIdentityCardNumber",
+        "SKPersonalNumber",
+        "SITaxIdentificationNumber",
+        "SIUniqueMasterCitizenNumber",
+        "ZAIdentificationNumber",
+        "KRResidentRegistrationNumber",
+        "ESDNI",
+        "ESSocialSecurityNumber",
+        "ESTaxIdentificationNumber",
+        "SQLServerConnectionString",
+        "SENationalID",
+        "SENationalIDV2",
+        "SEPassportNumber",
+        "SETaxIdentificationNumber",
+        "SWIFTCode",
+        "CHSocialSecurityNumber",
+        "TWNationalID",
+        "TWPassportNumber",
+        "TWResidentCertificate",
+        "THPopulationIdentificationCode",
+        "TRNationalIdentificationNumber",
+        "UKDriversLicenseNumber",
+        "UKElectoralRollNumber",
+        "UKNationalHealthNumber",
+        "UKNationalInsuranceNumber",
+        "UKUniqueTaxpayerNumber",
+        "USUKPassportNumber",
+        "USBankAccountNumber",
+        "USDriversLicenseNumber",
+        "USIndividualTaxpayerIdentification",
+        "USSocialSecurityNumber",
+        "UAPassportNumberDomestic",
+        "UAPassportNumberInternational",
+        "Organization",
+        "Email",
+        "URL",
+        "Age",
+        "PhoneNumber",
+        "IPAddress",
+        "Date",
+        "Person",
+        "Address",
+        "All",
+        "Default"
+      ],
+      "x-ms-enum": {
+        "name": "PiiCategory",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ABARoutingNumber",
+            "value": "ABARoutingNumber",
+            "description": "ABA Routing number"
+          },
+          {
+            "name": "ARNationalIdentityNumber",
+            "value": "ARNationalIdentityNumber",
+            "description": "AR National Identity Number"
+          },
+          {
+            "name": "AUBankAccountNumber",
+            "value": "AUBankAccountNumber",
+            "description": "AT Identity Card"
+          },
+          {
+            "name": "AUDriversLicenseNumber",
+            "value": "AUDriversLicenseNumber",
+            "description": "AU Driver's License Number"
+          },
+          {
+            "name": "AUMedicalAccountNumber",
+            "value": "AUMedicalAccountNumber",
+            "description": "AU Medical Account Number"
+          },
+          {
+            "name": "AUPassportNumber",
+            "value": "AUPassportNumber",
+            "description": "AU Passport Number"
+          },
+          {
+            "name": "AUTaxFileNumber",
+            "value": "AUTaxFileNumber",
+            "description": "AU Tax File Number"
+          },
+          {
+            "name": "AUBusinessNumber",
+            "value": "AUBusinessNumber",
+            "description": "AU Business Number"
+          },
+          {
+            "name": "AUCompanyNumber",
+            "value": "AUCompanyNumber",
+            "description": "AU Company Number"
+          },
+          {
+            "name": "ATIdentityCard",
+            "value": "ATIdentityCard",
+            "description": "AT Identity Card"
+          },
+          {
+            "name": "ATTaxIdentificationNumber",
+            "value": "ATTaxIdentificationNumber",
+            "description": "AT Tax Identification Number"
+          },
+          {
+            "name": "ATValueAddedTaxNumber",
+            "value": "ATValueAddedTaxNumber",
+            "description": "AT Value Added Tax Number"
+          },
+          {
+            "name": "AzureDocumentDBAuthKey",
+            "value": "AzureDocumentDBAuthKey",
+            "description": "Azure Document DB Auth Key"
+          },
+          {
+            "name": "AzureIAASDatabaseConnectionAndSQLString",
+            "value": "AzureIAASDatabaseConnectionAndSQLString",
+            "description": "Azure IAAS Database Connection And SQL String"
+          },
+          {
+            "name": "AzureIoTConnectionString",
+            "value": "AzureIoTConnectionString",
+            "description": "Azure IoT Connection String"
+          },
+          {
+            "name": "AzurePublishSettingPassword",
+            "value": "AzurePublishSettingPassword",
+            "description": "Azure Publish Setting Password"
+          },
+          {
+            "name": "AzureRedisCacheString",
+            "value": "AzureRedisCacheString",
+            "description": "Azure Redis Cache String"
+          },
+          {
+            "name": "AzureSAS",
+            "value": "AzureSAS",
+            "description": "Azure SAS"
+          },
+          {
+            "name": "AzureServiceBusString",
+            "value": "AzureServiceBusString",
+            "description": "Azure Service Bus String"
+          },
+          {
+            "name": "AzureStorageAccountKey",
+            "value": "AzureStorageAccountKey",
+            "description": "Azure Storage Account Key"
+          },
+          {
+            "name": "AzureStorageAccountGeneric",
+            "value": "AzureStorageAccountGeneric",
+            "description": "Azure Storage Account Generic"
+          },
+          {
+            "name": "BENationalNumber",
+            "value": "BENationalNumber",
+            "description": "BE National Number"
+          },
+          {
+            "name": "BENationalNumberV2",
+            "value": "BENationalNumberV2",
+            "description": "BE National Number V2"
+          },
+          {
+            "name": "BEValueAddedTaxNumber",
+            "value": "BEValueAddedTaxNumber",
+            "description": "BE Value Added Tax Number"
+          },
+          {
+            "name": "BRCPFNumber",
+            "value": "BRCPFNumber",
+            "description": "BR CPF Number"
+          },
+          {
+            "name": "BRLegalEntityNumber",
+            "value": "BRLegalEntityNumber",
+            "description": "BR Legal Entity Number"
+          },
+          {
+            "name": "BRNationalIDRG",
+            "value": "BRNationalIDRG",
+            "description": "BR National ID RG"
+          },
+          {
+            "name": "BGUniformCivilNumber",
+            "value": "BGUniformCivilNumber",
+            "description": "BG Uniform Civil Number"
+          },
+          {
+            "name": "CABankAccountNumber",
+            "value": "CABankAccountNumber",
+            "description": "CA Bank Account Number"
+          },
+          {
+            "name": "CADriversLicenseNumber",
+            "value": "CADriversLicenseNumber",
+            "description": "CA Driver's License Number"
+          },
+          {
+            "name": "CAHealthServiceNumber",
+            "value": "CAHealthServiceNumber",
+            "description": "CA Health Service Number"
+          },
+          {
+            "name": "CAPassportNumber",
+            "value": "CAPassportNumber",
+            "description": "CA Passport Number"
+          },
+          {
+            "name": "CAPersonalHealthIdentification",
+            "value": "CAPersonalHealthIdentification",
+            "description": "CA Personal Health Identification"
+          },
+          {
+            "name": "CASocialInsuranceNumber",
+            "value": "CASocialInsuranceNumber",
+            "description": "CA Social Insurance Number"
+          },
+          {
+            "name": "CLIdentityCardNumber",
+            "value": "CLIdentityCardNumber",
+            "description": "CL Identity Card Number"
+          },
+          {
+            "name": "CNResidentIdentityCardNumber",
+            "value": "CNResidentIdentityCardNumber",
+            "description": "CN Resident Identity Card Number"
+          },
+          {
+            "name": "CreditCardNumber",
+            "value": "CreditCardNumber",
+            "description": "Credit Card Number"
+          },
+          {
+            "name": "HRIdentityCardNumber",
+            "value": "HRIdentityCardNumber",
+            "description": "HR Identity Card Number"
+          },
+          {
+            "name": "HRNationalIDNumber",
+            "value": "HRNationalIDNumber",
+            "description": "HR National ID Number"
+          },
+          {
+            "name": "HRPersonalIdentificationNumber",
+            "value": "HRPersonalIdentificationNumber",
+            "description": "HR Personal Identification Number"
+          },
+          {
+            "name": "HRPersonalIdentificationOIBNumberV2",
+            "value": "HRPersonalIdentificationOIBNumberV2",
+            "description": "HR Personal Identification OIB Number V2"
+          },
+          {
+            "name": "CYIdentityCard",
+            "value": "CYIdentityCard",
+            "description": "CY Identity Card"
+          },
+          {
+            "name": "CYTaxIdentificationNumber",
+            "value": "CYTaxIdentificationNumber",
+            "description": "CY Tax Identification Number"
+          },
+          {
+            "name": "CZPersonalIdentityNumber",
+            "value": "CZPersonalIdentityNumber",
+            "description": "CZ Personal Identity Number"
+          },
+          {
+            "name": "CZPersonalIdentityV2",
+            "value": "CZPersonalIdentityV2",
+            "description": "CZ Personal Identity V2"
+          },
+          {
+            "name": "DKPersonalIdentificationNumber",
+            "value": "DKPersonalIdentificationNumber",
+            "description": "DK Personal Identification Number"
+          },
+          {
+            "name": "DKPersonalIdentificationV2",
+            "value": "DKPersonalIdentificationV2",
+            "description": "DK Personal Identification V2"
+          },
+          {
+            "name": "DrugEnforcementAgencyNumber",
+            "value": "DrugEnforcementAgencyNumber",
+            "description": "Drug Enforcement Agency Number"
+          },
+          {
+            "name": "EEPersonalIdentificationCode",
+            "value": "EEPersonalIdentificationCode",
+            "description": "EE Personal Identification Code"
+          },
+          {
+            "name": "EUDebitCardNumber",
+            "value": "EUDebitCardNumber",
+            "description": "EU Debit Card Number"
+          },
+          {
+            "name": "EUDriversLicenseNumber",
+            "value": "EUDriversLicenseNumber",
+            "description": "EU Driver's License Number"
+          },
+          {
+            "name": "EUGPSCoordinates",
+            "value": "EUGPSCoordinates",
+            "description": "EU GPS Coordinates"
+          },
+          {
+            "name": "EUNationalIdentificationNumber",
+            "value": "EUNationalIdentificationNumber",
+            "description": "EU National Identification Number"
+          },
+          {
+            "name": "EUPassportNumber",
+            "value": "EUPassportNumber",
+            "description": "EU Passport Number"
+          },
+          {
+            "name": "EUSocialSecurityNumber",
+            "value": "EUSocialSecurityNumber",
+            "description": "EU Social Security Number"
+          },
+          {
+            "name": "EUTaxIdentificationNumber",
+            "value": "EUTaxIdentificationNumber",
+            "description": "EU Tax Identification Number"
+          },
+          {
+            "name": "FIEuropeanHealthNumber",
+            "value": "FIEuropeanHealthNumber",
+            "description": "FI European Health Number"
+          },
+          {
+            "name": "FINationalID",
+            "value": "FINationalID",
+            "description": "FI National ID"
+          },
+          {
+            "name": "FINationalIDV2",
+            "value": "FINationalIDV2",
+            "description": "FI National ID V2"
+          },
+          {
+            "name": "FIPassportNumber",
+            "value": "FIPassportNumber",
+            "description": "FI Passport Number"
+          },
+          {
+            "name": "FRDriversLicenseNumber",
+            "value": "FRDriversLicenseNumber",
+            "description": "FR Driver's License Number"
+          },
+          {
+            "name": "FRHealthInsuranceNumber",
+            "value": "FRHealthInsuranceNumber",
+            "description": "FR Health Insurance Number"
+          },
+          {
+            "name": "FRNationalID",
+            "value": "FRNationalID",
+            "description": "FR National ID"
+          },
+          {
+            "name": "FRPassportNumber",
+            "value": "FRPassportNumber",
+            "description": "FR Passport Number"
+          },
+          {
+            "name": "FRSocialSecurityNumber",
+            "value": "FRSocialSecurityNumber",
+            "description": "FR Social Security Number"
+          },
+          {
+            "name": "FRTaxIdentificationNumber",
+            "value": "FRTaxIdentificationNumber",
+            "description": "FR Tax Identification Number"
+          },
+          {
+            "name": "FRValueAddedTaxNumber",
+            "value": "FRValueAddedTaxNumber",
+            "description": "FR Value Added Tax Number"
+          },
+          {
+            "name": "DEDriversLicenseNumber",
+            "value": "DEDriversLicenseNumber",
+            "description": "DE Driver's License Number"
+          },
+          {
+            "name": "DEPassportNumber",
+            "value": "DEPassportNumber",
+            "description": "DE Passport Number"
+          },
+          {
+            "name": "DEIdentityCardNumber",
+            "value": "DEIdentityCardNumber",
+            "description": "DE Identity Card Number"
+          },
+          {
+            "name": "DETaxIdentificationNumber",
+            "value": "DETaxIdentificationNumber",
+            "description": "DE Tax Identification Number"
+          },
+          {
+            "name": "DEValueAddedNumber",
+            "value": "DEValueAddedNumber",
+            "description": "DE Value Added Number"
+          },
+          {
+            "name": "GRNationalIDCard",
+            "value": "GRNationalIDCard",
+            "description": "GR National ID Card"
+          },
+          {
+            "name": "GRNationalIDV2",
+            "value": "GRNationalIDV2",
+            "description": "GR National ID V2"
+          },
+          {
+            "name": "GRTaxIdentificationNumber",
+            "value": "GRTaxIdentificationNumber",
+            "description": "GR Tax Identification Number"
+          },
+          {
+            "name": "HKIdentityCardNumber",
+            "value": "HKIdentityCardNumber",
+            "description": "HK Identity Card Number"
+          },
+          {
+            "name": "HUValueAddedNumber",
+            "value": "HUValueAddedNumber",
+            "description": "HU Value Added Number"
+          },
+          {
+            "name": "HUPersonalIdentificationNumber",
+            "value": "HUPersonalIdentificationNumber",
+            "description": "HU Personal Identification Number"
+          },
+          {
+            "name": "HUTaxIdentificationNumber",
+            "value": "HUTaxIdentificationNumber",
+            "description": "HU Tax Identification Number"
+          },
+          {
+            "name": "INPermanentAccount",
+            "value": "INPermanentAccount",
+            "description": "IN Permanent Account"
+          },
+          {
+            "name": "INUniqueIdentificationNumber",
+            "value": "INUniqueIdentificationNumber",
+            "description": "IN Unique Identification Number"
+          },
+          {
+            "name": "IDIdentityCardNumber",
+            "value": "IDIdentityCardNumber",
+            "description": "ID Identity Card Number"
+          },
+          {
+            "name": "InternationalBankingAccountNumber",
+            "value": "InternationalBankingAccountNumber",
+            "description": "International Banking Account Number"
+          },
+          {
+            "name": "IEPersonalPublicServiceNumber",
+            "value": "IEPersonalPublicServiceNumber",
+            "description": "IE Personal Public Service Number"
+          },
+          {
+            "name": "IEPersonalPublicServiceNumberV2",
+            "value": "IEPersonalPublicServiceNumberV2",
+            "description": "IE Personal Public Service Number V2"
+          },
+          {
+            "name": "ILBankAccountNumber",
+            "value": "ILBankAccountNumber",
+            "description": "IL Bank Account Number"
+          },
+          {
+            "name": "ILNationalID",
+            "value": "ILNationalID",
+            "description": "IL National ID"
+          },
+          {
+            "name": "ITDriversLicenseNumber",
+            "value": "ITDriversLicenseNumber",
+            "description": "IT Driver's License Number"
+          },
+          {
+            "name": "ITFiscalCode",
+            "value": "ITFiscalCode",
+            "description": "IT Fiscal Code"
+          },
+          {
+            "name": "ITValueAddedTaxNumber",
+            "value": "ITValueAddedTaxNumber",
+            "description": "IT Value Added Tax Number"
+          },
+          {
+            "name": "JPBankAccountNumber",
+            "value": "JPBankAccountNumber",
+            "description": "JP Bank Account Number"
+          },
+          {
+            "name": "JPDriversLicenseNumber",
+            "value": "JPDriversLicenseNumber",
+            "description": "JP Driver's License Number"
+          },
+          {
+            "name": "JPPassportNumber",
+            "value": "JPPassportNumber",
+            "description": "JP Passport Number"
+          },
+          {
+            "name": "JPResidentRegistrationNumber",
+            "value": "JPResidentRegistrationNumber",
+            "description": "JP Resident Registration Number"
+          },
+          {
+            "name": "JPSocialInsuranceNumber",
+            "value": "JPSocialInsuranceNumber",
+            "description": "JP Social Insurance Number"
+          },
+          {
+            "name": "JPMyNumberCorporate",
+            "value": "JPMyNumberCorporate",
+            "description": "JP My Number Corporate"
+          },
+          {
+            "name": "JPMyNumberPersonal",
+            "value": "JPMyNumberPersonal",
+            "description": "JP My Number Personal"
+          },
+          {
+            "name": "JPResidenceCardNumber",
+            "value": "JPResidenceCardNumber",
+            "description": "JP Residence Card Number"
+          },
+          {
+            "name": "LVPersonalCode",
+            "value": "LVPersonalCode",
+            "description": "LV Personal Code"
+          },
+          {
+            "name": "LTPersonalCode",
+            "value": "LTPersonalCode",
+            "description": "LT Personal Code"
+          },
+          {
+            "name": "LUNationalIdentificationNumberNatural",
+            "value": "LUNationalIdentificationNumberNatural",
+            "description": "LU National Identification Number Natural"
+          },
+          {
+            "name": "LUNationalIdentificationNumberNonNatural",
+            "value": "LUNationalIdentificationNumberNonNatural",
+            "description": "LU National Identification Number Non Natural"
+          },
+          {
+            "name": "MYIdentityCardNumber",
+            "value": "MYIdentityCardNumber",
+            "description": "MY Identity Card Number"
+          },
+          {
+            "name": "MTIdentityCardNumber",
+            "value": "MTIdentityCardNumber",
+            "description": "MT Identity Card Number"
+          },
+          {
+            "name": "MTTaxIDNumber",
+            "value": "MTTaxIDNumber",
+            "description": "MT Tax ID Number"
+          },
+          {
+            "name": "NLCitizensServiceNumber",
+            "value": "NLCitizensServiceNumber",
+            "description": "NL Citizens Service Number"
+          },
+          {
+            "name": "NLCitizensServiceNumberV2",
+            "value": "NLCitizensServiceNumberV2",
+            "description": "NL Citizens Service Number V2"
+          },
+          {
+            "name": "NLTaxIdentificationNumber",
+            "value": "NLTaxIdentificationNumber",
+            "description": "NL Tax Identification Number"
+          },
+          {
+            "name": "NLValueAddedTaxNumber",
+            "value": "NLValueAddedTaxNumber",
+            "description": "NL Value Added Tax Number"
+          },
+          {
+            "name": "NZBankAccountNumber",
+            "value": "NZBankAccountNumber",
+            "description": "NZ Bank Account Number"
+          },
+          {
+            "name": "NZDriversLicenseNumber",
+            "value": "NZDriversLicenseNumber",
+            "description": "NZ Driver's License Number"
+          },
+          {
+            "name": "NZInlandRevenueNumber",
+            "value": "NZInlandRevenueNumber",
+            "description": "NZ Inland Revenue Number"
+          },
+          {
+            "name": "NZMinistryOfHealthNumber",
+            "value": "NZMinistryOfHealthNumber",
+            "description": "NZ Ministry Of Health Number"
+          },
+          {
+            "name": "NZSocialWelfareNumber",
+            "value": "NZSocialWelfareNumber",
+            "description": "NZ Social Welfare Number"
+          },
+          {
+            "name": "NOIdentityNumber",
+            "value": "NOIdentityNumber",
+            "description": "NO Identity Number"
+          },
+          {
+            "name": "PHUnifiedMultiPurposeIDNumber",
+            "value": "PHUnifiedMultiPurposeIDNumber",
+            "description": "PH Unified Multi Purpose ID Number"
+          },
+          {
+            "name": "PLIdentityCard",
+            "value": "PLIdentityCard",
+            "description": "PL Identity Card"
+          },
+          {
+            "name": "PLNationalID",
+            "value": "PLNationalID",
+            "description": "PL National ID"
+          },
+          {
+            "name": "PLNationalIDV2",
+            "value": "PLNationalIDV2",
+            "description": "PL National ID V2"
+          },
+          {
+            "name": "PLPassportNumber",
+            "value": "PLPassportNumber",
+            "description": "PL Passport Number"
+          },
+          {
+            "name": "PLTaxIdentificationNumber",
+            "value": "PLTaxIdentificationNumber",
+            "description": "PL Tax Identification Number"
+          },
+          {
+            "name": "PLREGONNumber",
+            "value": "PLREGONNumber",
+            "description": "PL REGON Number"
+          },
+          {
+            "name": "PTCitizenCardNumber",
+            "value": "PTCitizenCardNumber",
+            "description": "PT Citizen Card Number"
+          },
+          {
+            "name": "PTCitizenCardNumberV2",
+            "value": "PTCitizenCardNumberV2",
+            "description": "PT Citizen Card Number V2"
+          },
+          {
+            "name": "PTTaxIdentificationNumber",
+            "value": "PTTaxIdentificationNumber",
+            "description": "PT Tax Identification Number"
+          },
+          {
+            "name": "ROPersonalNumericalCode",
+            "value": "ROPersonalNumericalCode",
+            "description": "RO Personal Numerical Code"
+          },
+          {
+            "name": "RUPassportNumberDomestic",
+            "value": "RUPassportNumberDomestic",
+            "description": "RU Passport Number Domestic"
+          },
+          {
+            "name": "RUPassportNumberInternational",
+            "value": "RUPassportNumberInternational",
+            "description": "RU Passport Number International"
+          },
+          {
+            "name": "SANationalID",
+            "value": "SANationalID",
+            "description": "SA National ID"
+          },
+          {
+            "name": "SGNationalRegistrationIdentityCardNumber",
+            "value": "SGNationalRegistrationIdentityCardNumber",
+            "description": "SG National Registration Identity Card Number"
+          },
+          {
+            "name": "SKPersonalNumber",
+            "value": "SKPersonalNumber",
+            "description": "SK Personal Number"
+          },
+          {
+            "name": "SITaxIdentificationNumber",
+            "value": "SITaxIdentificationNumber",
+            "description": "SI Tax Identification Number"
+          },
+          {
+            "name": "SIUniqueMasterCitizenNumber",
+            "value": "SIUniqueMasterCitizenNumber",
+            "description": "SI Unique Master Citizen Number"
+          },
+          {
+            "name": "ZAIdentificationNumber",
+            "value": "ZAIdentificationNumber",
+            "description": "ZA Identification Number"
+          },
+          {
+            "name": "KRResidentRegistrationNumber",
+            "value": "KRResidentRegistrationNumber",
+            "description": "KR Resident Registration Number"
+          },
+          {
+            "name": "ESDNI",
+            "value": "ESDNI",
+            "description": "ES DNI"
+          },
+          {
+            "name": "ESSocialSecurityNumber",
+            "value": "ESSocialSecurityNumber",
+            "description": "ES Social Security Number"
+          },
+          {
+            "name": "ESTaxIdentificationNumber",
+            "value": "ESTaxIdentificationNumber",
+            "description": "ES Tax Identification Number"
+          },
+          {
+            "name": "SQLServerConnectionString",
+            "value": "SQLServerConnectionString",
+            "description": "SQL Server Connection String"
+          },
+          {
+            "name": "SENationalID",
+            "value": "SENationalID",
+            "description": "SE National ID"
+          },
+          {
+            "name": "SENationalIDV2",
+            "value": "SENationalIDV2",
+            "description": "SE National ID V2"
+          },
+          {
+            "name": "SEPassportNumber",
+            "value": "SEPassportNumber",
+            "description": "SE Passport Number"
+          },
+          {
+            "name": "SETaxIdentificationNumber",
+            "value": "SETaxIdentificationNumber",
+            "description": "SE Tax Identification Number"
+          },
+          {
+            "name": "SWIFTCode",
+            "value": "SWIFTCode",
+            "description": "SWIFT Code"
+          },
+          {
+            "name": "CHSocialSecurityNumber",
+            "value": "CHSocialSecurityNumber",
+            "description": "CH Social Security Number"
+          },
+          {
+            "name": "TWNationalID",
+            "value": "TWNationalID",
+            "description": "TW National ID"
+          },
+          {
+            "name": "TWPassportNumber",
+            "value": "TWPassportNumber",
+            "description": "TW Passport Number"
+          },
+          {
+            "name": "TWResidentCertificate",
+            "value": "TWResidentCertificate",
+            "description": "TW Resident Certificate"
+          },
+          {
+            "name": "THPopulationIdentificationCode",
+            "value": "THPopulationIdentificationCode",
+            "description": "TH Population Identification Code"
+          },
+          {
+            "name": "TRNationalIdentificationNumber",
+            "value": "TRNationalIdentificationNumber",
+            "description": "TR National Identification Number"
+          },
+          {
+            "name": "UKDriversLicenseNumber",
+            "value": "UKDriversLicenseNumber",
+            "description": "UK Driver's License Number"
+          },
+          {
+            "name": "UKElectoralRollNumber",
+            "value": "UKElectoralRollNumber",
+            "description": "UK Electoral Roll Number"
+          },
+          {
+            "name": "UKNationalHealthNumber",
+            "value": "UKNationalHealthNumber",
+            "description": "UK National Health Number"
+          },
+          {
+            "name": "UKNationalInsuranceNumber",
+            "value": "UKNationalInsuranceNumber",
+            "description": "UK National Insurance Number"
+          },
+          {
+            "name": "UKUniqueTaxpayerNumber",
+            "value": "UKUniqueTaxpayerNumber",
+            "description": "UK Unique Taxpayer Number"
+          },
+          {
+            "name": "USUKPassportNumber",
+            "value": "USUKPassportNumber",
+            "description": "US UK Passport Number"
+          },
+          {
+            "name": "USBankAccountNumber",
+            "value": "USBankAccountNumber",
+            "description": "US Bank Account Number"
+          },
+          {
+            "name": "USDriversLicenseNumber",
+            "value": "USDriversLicenseNumber",
+            "description": "US Driver's License Number"
+          },
+          {
+            "name": "USIndividualTaxpayerIdentification",
+            "value": "USIndividualTaxpayerIdentification",
+            "description": "US Individual Taxpayer Identification"
+          },
+          {
+            "name": "USSocialSecurityNumber",
+            "value": "USSocialSecurityNumber",
+            "description": "US Social Security Number"
+          },
+          {
+            "name": "UAPassportNumberDomestic",
+            "value": "UAPassportNumberDomestic",
+            "description": "UA Passport Number Domestic"
+          },
+          {
+            "name": "UAPassportNumberInternational",
+            "value": "UAPassportNumberInternational",
+            "description": "UA Passport Number International"
+          },
+          {
+            "name": "Organization",
+            "value": "Organization",
+            "description": "Organization"
+          },
+          {
+            "name": "Email",
+            "value": "Email",
+            "description": "Email"
+          },
+          {
+            "name": "URL",
+            "value": "URL",
+            "description": "URL"
+          },
+          {
+            "name": "Age",
+            "value": "Age",
+            "description": "Age"
+          },
+          {
+            "name": "PhoneNumber",
+            "value": "PhoneNumber",
+            "description": "Phone Number"
+          },
+          {
+            "name": "IPAddress",
+            "value": "IPAddress",
+            "description": "IP Address"
+          },
+          {
+            "name": "Date",
+            "value": "Date",
+            "description": "Date"
+          },
+          {
+            "name": "Person",
+            "value": "Person",
+            "description": "Person"
+          },
+          {
+            "name": "Address",
+            "value": "Address",
+            "description": "Address"
+          },
+          {
+            "name": "All",
+            "value": "All",
+            "description": "All PII categories."
+          },
+          {
+            "name": "Default",
+            "value": "Default",
+            "description": "Default PII categories for the language."
+          }
+        ]
+      }
+    },
+    "PiiTaskParameters": {
+      "type": "object",
+      "description": "Supported parameters for a PII Entities Recognition task.",
+      "properties": {
+        "domain": {
+          "$ref": "#/definitions/PiiDomain"
+        },
+        "piiCategories": {
+          "$ref": "#/definitions/PiiCategory"
+        },
+        "excludePiiCategories": {
+          "$ref": "#/definitions/PiiCategoriesExclude"
+        },
+        "stringIndexType": {
+          "$ref": "common.json#/definitions/StringIndexType"
+        },
+        "redactionCharacter": {
+          "$ref": "#/definitions/RedactionCharacter"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "common.json#/definitions/PreBuiltTaskParameters"
+        }
+      ]
+    },
+    "PiiDomain": {
+      "type": "string",
+      "description": "The PII domain used for PII Entity Recognition.",
+      "default": "none",
+      "enum": [
+        "phi",
+        "none"
+      ],
+      "x-ms-enum": {
+        "name": "PiiDomain",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "phi",
+            "description": "Indicates that entities in the Personal Health Information domain should be redacted.",
+            "value": "phi"
+          },
+          {
+            "name": "none",
+            "description": "Indicates that no domain is specified.",
+            "value": "none"
+          }
+        ]
+      }
+    },
+    "PiiCategoriesExclude": {
+      "description": "(Optional) describes the PII categories to return",
+      "items": {
+        "type": "string",
+        "x-ms-enum": {
+          "name": "PiiCategoriesExclude",
+          "modelAsString": true
+        },
+        "enum": [
+          "ABARoutingNumber",
+          "ARNationalIdentityNumber",
+          "AUBankAccountNumber",
+          "AUDriversLicenseNumber",
+          "AUMedicalAccountNumber",
+          "AUPassportNumber",
+          "AUTaxFileNumber",
+          "AUBusinessNumber",
+          "AUCompanyNumber",
+          "ATIdentityCard",
+          "ATTaxIdentificationNumber",
+          "ATValueAddedTaxNumber",
+          "AzureDocumentDBAuthKey",
+          "AzureIAASDatabaseConnectionAndSQLString",
+          "AzureIoTConnectionString",
+          "AzurePublishSettingPassword",
+          "AzureRedisCacheString",
+          "AzureSAS",
+          "AzureServiceBusString",
+          "AzureStorageAccountKey",
+          "AzureStorageAccountGeneric",
+          "BENationalNumber",
+          "BENationalNumberV2",
+          "BEValueAddedTaxNumber",
+          "BRCPFNumber",
+          "BRLegalEntityNumber",
+          "BRNationalIDRG",
+          "BGUniformCivilNumber",
+          "CABankAccountNumber",
+          "CADriversLicenseNumber",
+          "CAHealthServiceNumber",
+          "CAPassportNumber",
+          "CAPersonalHealthIdentification",
+          "CASocialInsuranceNumber",
+          "CLIdentityCardNumber",
+          "CNResidentIdentityCardNumber",
+          "CreditCardNumber",
+          "HRIdentityCardNumber",
+          "HRNationalIDNumber",
+          "HRPersonalIdentificationNumber",
+          "HRPersonalIdentificationOIBNumberV2",
+          "CYIdentityCard",
+          "CYTaxIdentificationNumber",
+          "CZPersonalIdentityNumber",
+          "CZPersonalIdentityV2",
+          "DKPersonalIdentificationNumber",
+          "DKPersonalIdentificationV2",
+          "DrugEnforcementAgencyNumber",
+          "EEPersonalIdentificationCode",
+          "EUDebitCardNumber",
+          "EUDriversLicenseNumber",
+          "EUGPSCoordinates",
+          "EUNationalIdentificationNumber",
+          "EUPassportNumber",
+          "EUSocialSecurityNumber",
+          "EUTaxIdentificationNumber",
+          "FIEuropeanHealthNumber",
+          "FINationalID",
+          "FINationalIDV2",
+          "FIPassportNumber",
+          "FRDriversLicenseNumber",
+          "FRHealthInsuranceNumber",
+          "FRNationalID",
+          "FRPassportNumber",
+          "FRSocialSecurityNumber",
+          "FRTaxIdentificationNumber",
+          "FRValueAddedTaxNumber",
+          "DEDriversLicenseNumber",
+          "DEPassportNumber",
+          "DEIdentityCardNumber",
+          "DETaxIdentificationNumber",
+          "DEValueAddedNumber",
+          "GRNationalIDCard",
+          "GRNationalIDV2",
+          "GRTaxIdentificationNumber",
+          "HKIdentityCardNumber",
+          "HUValueAddedNumber",
+          "HUPersonalIdentificationNumber",
+          "HUTaxIdentificationNumber",
+          "INPermanentAccount",
+          "INUniqueIdentificationNumber",
+          "IDIdentityCardNumber",
+          "InternationalBankingAccountNumber",
+          "IEPersonalPublicServiceNumber",
+          "IEPersonalPublicServiceNumberV2",
+          "ILBankAccountNumber",
+          "ILNationalID",
+          "ITDriversLicenseNumber",
+          "ITFiscalCode",
+          "ITValueAddedTaxNumber",
+          "JPBankAccountNumber",
+          "JPDriversLicenseNumber",
+          "JPPassportNumber",
+          "JPResidentRegistrationNumber",
+          "JPSocialInsuranceNumber",
+          "JPMyNumberCorporate",
+          "JPMyNumberPersonal",
+          "JPResidenceCardNumber",
+          "LVPersonalCode",
+          "LTPersonalCode",
+          "LUNationalIdentificationNumberNatural",
+          "LUNationalIdentificationNumberNonNatural",
+          "MYIdentityCardNumber",
+          "MTIdentityCardNumber",
+          "MTTaxIDNumber",
+          "NLCitizensServiceNumber",
+          "NLCitizensServiceNumberV2",
+          "NLTaxIdentificationNumber",
+          "NLValueAddedTaxNumber",
+          "NZBankAccountNumber",
+          "NZDriversLicenseNumber",
+          "NZInlandRevenueNumber",
+          "NZMinistryOfHealthNumber",
+          "NZSocialWelfareNumber",
+          "NOIdentityNumber",
+          "PHUnifiedMultiPurposeIDNumber",
+          "PLIdentityCard",
+          "PLNationalID",
+          "PLNationalIDV2",
+          "PLPassportNumber",
+          "PLTaxIdentificationNumber",
+          "PLREGONNumber",
+          "PTCitizenCardNumber",
+          "PTCitizenCardNumberV2",
+          "PTTaxIdentificationNumber",
+          "ROPersonalNumericalCode",
+          "RUPassportNumberDomestic",
+          "RUPassportNumberInternational",
+          "SANationalID",
+          "SGNationalRegistrationIdentityCardNumber",
+          "SKPersonalNumber",
+          "SITaxIdentificationNumber",
+          "SIUniqueMasterCitizenNumber",
+          "ZAIdentificationNumber",
+          "KRResidentRegistrationNumber",
+          "ESDNI",
+          "ESSocialSecurityNumber",
+          "ESTaxIdentificationNumber",
+          "SQLServerConnectionString",
+          "SENationalID",
+          "SENationalIDV2",
+          "SEPassportNumber",
+          "SETaxIdentificationNumber",
+          "SWIFTCode",
+          "CHSocialSecurityNumber",
+          "TWNationalID",
+          "TWPassportNumber",
+          "TWResidentCertificate",
+          "THPopulationIdentificationCode",
+          "TRNationalIdentificationNumber",
+          "UKDriversLicenseNumber",
+          "UKElectoralRollNumber",
+          "UKNationalHealthNumber",
+          "UKNationalInsuranceNumber",
+          "UKUniqueTaxpayerNumber",
+          "USUKPassportNumber",
+          "USBankAccountNumber",
+          "USDriversLicenseNumber",
+          "USIndividualTaxpayerIdentification",
+          "USSocialSecurityNumber",
+          "UAPassportNumberDomestic",
+          "UAPassportNumberInternational",
+          "Organization",
+          "Email",
+          "URL",
+          "Age",
+          "PhoneNumber",
+          "IPAddress",
+          "Date",
+          "Person",
+          "Address"
+        ]
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "PiiEntitiesDocumentResult": {
+      "type": "object",
+      "properties": {
+        "redactedText": {
+          "type": "string",
+          "description": "Returns redacted text."
+        },
+        "entities": {
+          "type": "array",
+          "description": "Recognized entities in the document.",
+          "items": {
+            "$ref": "#/definitions/Entity"
+          }
+        }
+      },
+      "required": [
+        "redactedText",
+        "entities"
+      ]
+    },
+    "Entity": {
+      "type": "object",
+      "required": [
+        "text",
+        "category",
+        "reference-id",
+        "length",
+        "confidenceScore"
+      ],
+      "properties": {
+        "text": {
+          "type": "string",
+          "description": "Entity text as appears in the request."
+        },
+        "category": {
+          "type": "string",
+          "description": "Category of the entity detected."
+        },
+        "subcategory": {
+          "type": "string",
+          "description": "(Optional) Entity sub category."
+        },
+        "reference-id": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Reference ID is an identifier to match the detected entity to the index in the document"
+        },
+        "length": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Length for the entity text. Use of different 'stringIndexType' values can affect the length returned."
+        },
+        "confidenceScore": {
+          "type": "number",
+          "format": "double",
+          "description": "Confidence score between 0 and 1 of the extracted entity."
+        }
+      }
+    },
+    "ExtractiveSummarizationLROTask": {
+      "type": "object",
+      "description": "An object representing the task definition for an Extractive Summarization task.",
+      "properties": {
+        "parameters": {
+          "$ref": "#/definitions/ExtractiveSummarizationTaskParameters"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/AnalyzeDocumentsLROTask"
+        }
+      ],
+      "x-ms-discriminator-value": "ExtractiveSummarization"
+    },
+    "ExtractiveSummarizationTaskParameters": {
+      "type": "object",
+      "description": "Supported parameters for an Extractive Summarization task.",
+      "properties": {
+        "sentenceCount": {
+          "type": "integer",
+          "default": 3,
+          "format": "int64"
+        },
+        "sortBy": {
+          "$ref": "#/definitions/ExtractiveSummarizationSortingCriteria"
+        },
+        "stringIndexType": {
+          "$ref": "common.json#/definitions/StringIndexType"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "common.json#/definitions/PreBuiltTaskParameters"
+        }
+      ]
+    },
+    "ExtractiveSummarizationSortingCriteria": {
+      "type": "string",
+      "default": "Offset",
+      "description": "The sorting criteria to use for the results of Extractive Summarization.",
+      "enum": [
+        "Offset",
+        "Rank"
+      ],
+      "x-ms-enum": {
+        "name": "ExtractiveSummarizationSortingCriteria",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Offset",
+            "description": "Indicates that results should be sorted in order of appearance in the text.",
+            "value": "Offset"
+          },
+          {
+            "name": "Rank",
+            "description": "Indicates that results should be sorted in order of importance (i.e. rank score) according to the model.",
+            "value": "Rank"
+          }
+        ]
+      }
+    },
+    "ExtractedSummaryDocumentResult": {
+      "type": "object",
+      "properties": {
+        "sentences": {
+          "type": "array",
+          "description": "A ranked list of sentences representing the extracted summary.",
+          "items": {
+            "$ref": "#/definitions/ExtractedSummarySentence"
+          }
+        }
+      },
+      "required": [
+        "sentences"
+      ]
+    },
+    "ExtractedSummarySentence": {
+      "type": "object",
+      "required": [
+        "text",
+        "rankScore",
+        "offset",
+        "length"
+      ],
+      "properties": {
+        "text": {
+          "type": "string",
+          "description": "The extracted sentence text."
+        },
+        "rankScore": {
+          "type": "number",
+          "format": "double",
+          "description": "A double value representing the relevance of the sentence within the summary. Higher values indicate higher importance."
+        },
+        "offset": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The sentence offset from the start of the document, based on the value of the parameter StringIndexType."
+        },
+        "length": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The length of the sentence."
+        }
+      }
+    },
+    "AbstractiveSummarizationLROTask": {
+      "type": "object",
+      "description": "An object representing the task definition for an Abstractive Summarization task.",
+      "required": [
+        "parameters"
+      ],
+      "properties": {
+        "parameters": {
+          "$ref": "#/definitions/AbstractiveSummarizationTaskParameters"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/AnalyzeDocumentsLROTask"
+        }
+      ],
+      "x-ms-discriminator-value": "AbstractiveSummarization"
+    },
+    "AbstractiveSummarizationTaskParameters": {
+      "type": "object",
+      "description": "Supported parameters for the pre-build Abstractive Summarization task.",
+      "allOf": [
+        {
+          "$ref": "common.json#/definitions/AbstractiveSummarizationTaskParametersBase"
+        },
+        {
+          "$ref": "common.json#/definitions/PreBuiltTaskParameters"
+        }
+      ]
+    },
+    "AbstractiveSummaryDocumentResult": {
+      "type": "object",
+      "description": "An object representing the summarization result of a single document.",
+      "properties": {
+        "summaries": {
+          "type": "array",
+          "description": "A list of abstractive summaries.",
+          "items": {
+            "$ref": "#/definitions/AbstractiveSummary"
+          }
+        }
+      },
+      "required": [
+        "summaries"
+      ]
+    },
+    "AbstractiveSummary": {
+      "type": "object",
+      "description": "An object representing a single summary with context for given document.",
+      "properties": {
+        "text": {
+          "type": "string",
+          "description": "The text of the summary."
+        },
+        "contexts": {
+          "type": "array",
+          "description": "The context list of the summary.",
+          "items": {
+            "$ref": "common.json#/definitions/SummaryContext"
+          }
+        }
+      },
+      "required": [
+        "text"
+      ]
+    },
+    "Language": {
+      "type": "string",
+      "description": "Language of the text records. This is BCP-47 representation of a language. For example, use \"en\" for English; \"es\" for Spanish etc. If not set, use \"en\" for English as default."
+    },
+    "RedactionCharacter": {
+      "type": "string",
+      "description": "Optional parameter to use a Custom Character to be used for redaction in PII responses. Default character will be * as before. We allow specific ascii characters for redaction.",
+      "default": "*",
+      "x-ms-enum": {
+        "name": "redactionCharacter",
+        "modelAsString": true
+      },
+      "enum": [
+        "!",
+        "#",
+        "$",
+        "%",
+        "&",
+        "*",
+        "+",
+        "-",
+        "=",
+        "?",
+        "@",
+        "^",
+        "_",
+        "~"
+      ]
+    },
+    "TaskIdentifier": {
+      "type": "object",
+      "description": "Base task object.",
+      "properties": {
+        "taskName": {
+          "type": "string"
+        }
+      }
+    },
+    "TaskParameters": {
+      "type": "object",
+      "description": "Base parameters object for a text analysis task.",
+      "properties": {
+        "loggingOptOut": {
+          "type": "boolean",
+          "default": false
+        }
+      }
+    },
+    "AbstractiveSummarizationTaskParametersBase": {
+      "type": "object",
+      "description": "Supported parameters for an Abstractive Summarization task.",
+      "properties": {
+        "sentenceCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "It controls the approximate number of sentences in the output summaries."
+        },
+        "stringIndexType": {
+          "$ref": "common.json#/definitions/StringIndexType"
+        }
+      }
+    },
+    "SummaryContext": {
+      "type": "object",
+      "description": "The context of the summary.",
+      "required": [
+        "offset",
+        "length"
+      ],
+      "properties": {
+        "offset": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Start position for the context. Use of different 'stringIndexType' values can affect the offset returned."
+        },
+        "length": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The length of the context. Use of different 'stringIndexType' values can affect the length returned."
+        }
+      }
+    }
+  },
+  "parameters": {
+    "ShowStats": {
+      "name": "showStats",
+      "in": "query",
+      "description": "(Optional) if set to true, response will contain request and document level statistics.",
+      "type": "boolean",
+      "required": false,
+      "x-ms-parameter-location": "method"
+    },
+    "JobId": {
+      "description": "Job ID",
+      "format": "uuid",
+      "in": "path",
+      "name": "jobId",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

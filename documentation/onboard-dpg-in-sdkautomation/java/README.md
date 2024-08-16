@@ -16,7 +16,7 @@ See [Use SDK Automation from REST API specifications](https://github.com/Azure/a
     package-dir: "azure-ai-openai"
     flavor: azure
     namespace: "com.azure.ai.openai"
-    examples-directory: "examples"
+    examples-directory: "{project-root}/examples"
 ```
 
 ## Example for Java management-plane SDK
@@ -33,7 +33,7 @@ See [Use SDK Automation from REST API specifications](https://github.com/Azure/a
     flavor: "azure"
     namespace: "com.azure.resourcemanager.standbypool"
     service-name: "Standby Pool"
-    examples-directory: "examples"
+    examples-directory: "{project-root}/examples"
 ```
 
 # Add AutoRest Configuration for Java SDK 

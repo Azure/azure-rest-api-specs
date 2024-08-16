@@ -133,5 +133,5 @@ interface TaskHubs {
   @doc("Delete a Task Hub")
   delete is ArmResourceDeleteSync<TaskHub>;
   @doc("List Task Hubs")
-  listByParent is ArmResourceListByParent<TaskHub>;
+  listByNamespace is ArmResourceListByParent<TaskHub>;
 }

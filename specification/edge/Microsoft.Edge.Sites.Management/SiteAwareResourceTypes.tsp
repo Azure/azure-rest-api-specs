@@ -6,7 +6,6 @@ import "./models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -36,5 +35,5 @@ interface SiteAwareResourceTypes {
   get is ArmResourceRead<SiteAwareResourceType>;
 
   @doc("List operation on SiteAwareResourceType resource")
-  list is ArmResourceListByParent<SiteAwareResourceType>;
+  listByTenant is ArmResourceListByParent<SiteAwareResourceType>;
 }

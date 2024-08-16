@@ -53,5 +53,5 @@ interface DatabaseServerInstances {
   /**
    * Lists the Database resources associated with a Virtual Instance for Epic solutions resource.
    */
-  list is ArmResourceListByParent<DatabaseServerInstance>;
+  listByEpicVirtualInstance is ArmResourceListByParent<DatabaseServerInstance>;
 }
