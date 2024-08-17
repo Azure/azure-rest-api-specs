@@ -23,6 +23,7 @@ These are the global settings for the containerstorage.
 
 ```yaml
 openapi-type: arm
+openapi-subtype: providerHub
 tag: 2021-10-01-preview
 ```
 
