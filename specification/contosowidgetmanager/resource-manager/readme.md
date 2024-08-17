@@ -36,3 +36,9 @@ input-file:
 ```
 
 ---
+
+``` yaml
+suppressions:
+  - code: BodyTopLevelProperties
+    reason: This lintdiff error showing is bug, same issue raised on https://github.com/Azure/azure-openapi-validator/issues/722
+```
