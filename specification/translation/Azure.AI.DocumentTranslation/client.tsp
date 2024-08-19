@@ -179,3 +179,14 @@ interface SingleDocumentTranslationClient {
   "DocumentTranslationError",
   "python"
 );
+
+
+@@clientName(DocumentTranslation.Status.Cancelled,
+  "canceled",
+  "python"
+);
+
+@@clientName(DocumentTranslation.Status.Cancelling,
+  "canceling",
+  "python"
+);
