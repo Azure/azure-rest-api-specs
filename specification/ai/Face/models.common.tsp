@@ -120,9 +120,7 @@ model BaseFace {
 
 alias AddFaceOptions = {
   @doc("A face rectangle to specify the target face to be added to a person, in the format of 'targetFace=left,top,width,height'.")
-  @query({
-    format: "csv",
-  })
+  @query
   @maxItems(4)
   @minItems(4)
   targetFace?: int32[];
@@ -300,6 +298,7 @@ alias BodyParameter<
   TName extends valueof string = "body",
   TDoc extends valueof string = "Body parameter."
 > = {
+  #suppress "@azure-tools/typespec-azure-core/friendly-name" "Legacy"
   @doc(TDoc)
   @friendlyName(TName)
   @bodyRoot
