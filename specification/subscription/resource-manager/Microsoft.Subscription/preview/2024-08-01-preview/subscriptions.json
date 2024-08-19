@@ -1301,7 +1301,6 @@
     },
     "TargetDirectoryListResult": {
       "type": "object",
-      "x-ms-azure-resource": true,
       "description": "Subscription Response to list out Changed Target Directory.",
       "properties": {
         "value": {
@@ -1310,7 +1309,10 @@
           "readOnly": true,
           "items": {
             "$ref": "#/definitions/TargetDirectoryResult"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "nextLink": {
           "description": "The link (url) to the next page of results.",
