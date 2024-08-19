@@ -781,12 +781,12 @@
             "pattern": ".*"
           },
           {
-            "name": "azureLargeStorageInstanceBodyParameter",
+            "name": "tagsParameter",
             "in": "body",
             "description": "The resource properties to be updated.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/AzureLargeStorageInstancePatchBody"
+              "$ref": "#/definitions/Tags"
             },
             "x-ms-client-name": "properties"
           }
@@ -1408,6 +1408,10 @@
           "$ref": "#/definitions/AzureLargeStorageInstanceProperties",
           "description": "The resource-specific properties for this resource.",
           "x-ms-client-flatten": true
+        },
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The managed service identities assigned to this resource."
         }
       },
       "allOf": [
@@ -1736,6 +1740,10 @@
           "additionalProperties": {
             "type": "string"
           }
+        },
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The managed service identities assigned to this resource."
         }
       }
     }

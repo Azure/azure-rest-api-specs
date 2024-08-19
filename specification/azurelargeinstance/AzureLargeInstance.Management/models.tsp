@@ -477,7 +477,10 @@ model Tags {
   @clientName("tagsValue", "csharp")
   @doc("Tags field of the AzureLargeInstance instance.")
   tags?: Record<string>;
+
+  ...ManagedServiceIdentityProperty;
 }
+@@added(Tags.identity, Versions.v2024_08_01_preview);
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "legacy API"
 @doc("Describes the properties of an AzureLargeStorageInstance.")

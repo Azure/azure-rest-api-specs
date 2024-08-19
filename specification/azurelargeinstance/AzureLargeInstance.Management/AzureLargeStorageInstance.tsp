@@ -23,7 +23,10 @@ model AzureLargeStorageInstance
   @key("azureLargeStorageInstanceName")
   @segment("azureLargeStorageInstances")
   name: string;
+
+  ...ManagedServiceIdentityProperty;
 }
+@@added(AzureLargeStorageInstance.identity, Versions.v2024_08_01_preview);
 
 @armResourceOperations
 @clientName("AzureLargeStorageInstance")
@@ -34,25 +37,11 @@ interface AzureLargeStorageInstances {
     """)
   get is ArmResourceRead<AzureLargeStorageInstance>;
 
-  @sharedRoute
-  @removed(Versions.v2024_08_01_preview)
   @doc("""
     Patches the Tags field of a Azure Large Storage Instance for the specified
     subscription, resource group, and instance name.
     """)
-  updateOld is ArmCustomPatchSync<AzureLargeStorageInstance>;
-
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-patch" ""
-  @sharedRoute
-  @added(Versions.v2024_08_01_preview)
-  @doc("""
-    Patches the Tags field of a Azure Large Storage Instance for the specified
-    subscription, resource group, and instance name.
-    """)
-  update is ArmCustomPatchSync<
-    AzureLargeStorageInstance,
-    AzureLargeStorageInstancePatchBody
-  >;
+  update is ArmCustomPatchSync<AzureLargeStorageInstance, Tags>;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "Legacy"
   @added(Versions.v2024_08_01_preview)
@@ -94,12 +83,7 @@ interface AzureLargeStorageInstances {
   listBySubscription is ArmListBySubscription<AzureLargeStorageInstance>;
 }
 
-@@encodedName(AzureLargeStorageInstances.updateOld::parameters.properties,
-  "application/json",
-  "tagsParameter"
-);
-
 @@encodedName(AzureLargeStorageInstances.update::parameters.properties,
   "application/json",
-  "azureLargeStorageInstanceBodyParameter"
+  "tagsParameter"
 );
