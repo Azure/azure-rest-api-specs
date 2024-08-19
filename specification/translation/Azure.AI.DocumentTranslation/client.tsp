@@ -169,6 +169,11 @@ interface SingleDocumentTranslationClient {
   "python"
 );
 
+@@clientName(DocumentTranslation.TargetInput,
+  "TranslationTarget",
+  "python"
+);
+
 
 @@clientName(DocumentTranslation.TranslationError,
   "DocumentTranslationError",
