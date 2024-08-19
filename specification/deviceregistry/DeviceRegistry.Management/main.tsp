@@ -35,7 +35,6 @@ interface Operations extends Azure.ResourceManager.Operations {}
 interface OperationStatus {
   @doc("Returns the current status of an async operation.")
   @autoRoute
-  @armUpdateProviderNamespace
   get(
     ...ApiVersionParameter,
     ...SubscriptionIdParameter,

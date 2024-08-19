@@ -18,12 +18,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/Assistant'
       requestBody:
-        description: The request details to use when creating a new assistant.
         required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/AssistantCreationOptions'
+        description: The request details to use when creating a new assistant.
     get:
       operationId: listAssistants
       description: Gets a list of assistants that were previously created.
@@ -36,6 +36,7 @@ paths:
             type: integer
             format: int32
             default: 20
+          explode: false
         - name: order
           in: query
           required: false
@@ -43,18 +44,21 @@ paths:
           schema:
             $ref: '#/components/schemas/ListSortOrder'
             default: desc
+          explode: false
         - name: after
           in: query
           required: false
           description: A cursor for use in pagination. after is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include after=obj_foo in order to fetch the next page of the list.
           schema:
             type: string
+          explode: false
         - name: before
           in: query
           required: false
           description: A cursor for use in pagination. before is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include before=obj_foo in order to fetch the previous page of the list.
           schema:
             type: string
+          explode: false
       responses:
         '200':
           description: The requested list of assistants.
@@ -125,12 +129,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/Assistant'
       requestBody:
-        description: The request details to use when modifying an existing assistant.
         required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/UpdateAssistantOptions'
+        description: The request details to use when modifying an existing assistant.
     delete:
       operationId: deleteAssistant
       description: Deletes an assistant.
@@ -159,6 +163,7 @@ paths:
           description: A value that, when provided, limits list results to files matching the corresponding purpose.
           schema:
             $ref: '#/components/schemas/FilePurpose'
+          explode: false
       responses:
         '200':
           description: The requested list of files.
@@ -264,12 +269,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/AssistantThread'
       requestBody:
-        description: The details used to create a new assistant thread.
         required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/AssistantThreadCreationOptions'
+        description: The details used to create a new assistant thread.
   /threads/runs:
     post:
       operationId: createThreadAndRun
@@ -283,12 +288,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/ThreadRun'
       requestBody:
-        description: The details used when creating and immediately running a new assistant thread.
         required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/CreateAndRunThreadOptions'
+        description: The details used when creating and immediately running a new assistant thread.
   /threads/{threadId}:
     get:
       operationId: getThread
@@ -325,12 +330,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/AssistantThread'
       requestBody:
-        description: The details used to update an existing assistant thread.
         required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/UpdateAssistantThreadOptions'
+        description: The details used to update an existing assistant thread.
     delete:
       operationId: deleteThread
       description: Deletes an existing thread.
@@ -367,12 +372,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/ThreadMessage'
       requestBody:
-        description: A single message within an assistant thread, as provided during that thread's creation for its initial state.
         required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/ThreadMessageOptions'
+        description: A single message within an assistant thread, as provided during that thread's creation for its initial state.
     get:
       operationId: listMessages
       description: Gets a list of messages that exist on a thread.
@@ -391,6 +396,7 @@ paths:
             type: integer
             format: int32
             default: 20
+          explode: false
         - name: order
           in: query
           required: false
@@ -398,18 +404,21 @@ paths:
           schema:
             $ref: '#/components/schemas/ListSortOrder'
             default: desc
+          explode: false
         - name: after
           in: query
           required: false
           description: A cursor for use in pagination. after is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include after=obj_foo in order to fetch the next page of the list.
           schema:
             type: string
+          explode: false
         - name: before
           in: query
           required: false
           description: A cursor for use in pagination. before is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include before=obj_foo in order to fetch the previous page of the list.
           schema:
             type: string
+          explode: false
       responses:
         '200':
           description: The requested list of messages.
@@ -523,12 +532,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/ThreadRun'
       requestBody:
-        description: The details used when creating a new run of an assistant thread.
         required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/CreateRunOptions'
+        description: The details used when creating a new run of an assistant thread.
     get:
       operationId: listRuns
       description: Gets a list of runs for a specified thread.
@@ -547,6 +556,7 @@ paths:
             type: integer
             format: int32
             default: 20
+          explode: false
         - name: order
           in: query
           required: false
@@ -554,18 +564,21 @@ paths:
           schema:
             $ref: '#/components/schemas/ListSortOrder'
             default: desc
+          explode: false
         - name: after
           in: query
           required: false
           description: A cursor for use in pagination. after is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include after=obj_foo in order to fetch the next page of the list.
           schema:
             type: string
+          explode: false
         - name: before
           in: query
           required: false
           description: A cursor for use in pagination. before is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include before=obj_foo in order to fetch the previous page of the list.
           schema:
             type: string
+          explode: false
       responses:
         '200':
           description: The requested list of thread runs.
@@ -709,6 +722,7 @@ paths:
             type: integer
             format: int32
             default: 20
+          explode: false
         - name: order
           in: query
           required: false
@@ -716,18 +730,21 @@ paths:
           schema:
             $ref: '#/components/schemas/ListSortOrder'
             default: desc
+          explode: false
         - name: after
           in: query
           required: false
           description: A cursor for use in pagination. after is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include after=obj_foo in order to fetch the next page of the list.
           schema:
             type: string
+          explode: false
         - name: before
           in: query
           required: false
           description: A cursor for use in pagination. before is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include before=obj_foo in order to fetch the previous page of the list.
           schema:
             type: string
+          explode: false
       responses:
         '200':
           description: The requested list of run steps.

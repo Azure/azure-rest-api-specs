@@ -42,21 +42,4 @@ union ProvisioningState {
   Deleting: "Deleting",
 }
 
-@doc("The extended location info.")
-model ExtendedLocation {
-  @doc("The type of extended location.")
-  type: ExtendedLocationType;
-
-  @doc("The name of extended location.")
-  name: string;
-}
-
-@doc("The extended location type.")
-union ExtendedLocationType {
-  string,
-
-  @doc("Custom location.")
-  CustomLocation: "CustomLocation",
-}
-
 interface Operations extends Azure.ResourceManager.Operations {}
