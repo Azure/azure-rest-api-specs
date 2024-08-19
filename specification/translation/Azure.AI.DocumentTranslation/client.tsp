@@ -77,12 +77,27 @@ interface SingleDocumentTranslationClient {
   "python"
 );
 
+@@clientName(DocumentTranslation.TranslationStatus.progress,
+  "translation_progress",
+  "python"
+);
+
+@@clientName(DocumentTranslation.TranslationStatus.characterCharged,
+  "characters_charged",
+  "python"
+);
+
 
 @@clientName(DocumentTranslation.Glossary.format,
   "file_format",
   "python"
 );
 
+
+@@clientName(DocumentTranslation.Glossary.version,
+  "format_version",
+  "python"
+);
 
 @@clientName(DocumentTranslation.Glossary,
   "TranslationGlossary",
@@ -112,5 +127,28 @@ interface SingleDocumentTranslationClient {
 
 @@clientName(DocumentTranslation.DocumentStatus.to,
   "translated_to",
+  "python"
+);
+
+
+
+@@clientName(DocumentTranslation.FileFormat.format,
+  "file_format",
+  "python"
+);
+
+
+@@clientName(DocumentTranslation.FileFormat.defaultVersion,
+  "default_format_version",
+  "python"
+);
+
+@@clientName(DocumentTranslation.FileFormat.versions,
+  "format_versions",
+  "python"
+);
+
+@@clientName(DocumentTranslation.FileFormat,
+  "DocumentTranslationFileFormat",
   "python"
 );
