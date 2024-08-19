@@ -11,6 +11,10 @@ using Microsoft.DocumentDB;
   "MongoClusterNameAvailabilityResult",
   "csharp"
 );
+@@clientName(CheckNameAvailabilityResponse.nameAvailable,
+  "isNameAvailable",
+  "csharp"
+);
 @@clientName(MongoClusterRestoreParameters,
   "MongoClusterRestoreContent",
   "csharp"
@@ -42,3 +46,29 @@ using Microsoft.DocumentDB;
 );
 @@clientName(ReplicationRole, "MongoClusterReplicationRole", "csharp");
 @@clientName(ReplicationState, "MongoClusterReplicationState", "csharp");
+@@clientName(AdministratorProperties,
+  "MongoClusterAdministratorProperties",
+  "csharp"
+);
+@@clientName(CheckNameAvailabilityReason,
+  "MongoClusterNameUnavailableReason",
+  "csharp"
+);
+@@clientName(PublicNetworkAccess, "MongoClusterPublicNetworkAccess", "csharp");
+@@clientName(FirewallRule, "MongoClusterFirewallRule", "csharp");
+@@clientName(FirewallRuleProperties,
+  "MongoClusterFirewallRuleProperties",
+  "csharp"
+);
+@@clientName(PrivateEndpointConnectionResource,
+  "MongoClusterPrivateEndpointConnectionResource",
+  "csharp"
+);
+@@clientName(PrivateEndpointConnectionProperties,
+  "MongoClusterPrivateEndpointConnectionProperties",
+  "csharp"
+);
+@@clientName(ListConnectionStringsResult,
+  "MongoClusterConnectionStringsResult",
+  "csharp"
+);
