@@ -34,15 +34,17 @@ interface AzureLargeStorageInstances {
     """)
   get is ArmResourceRead<AzureLargeStorageInstance>;
 
+  @sharedRoute
   @removed(Versions.v2024_08_01_preview)
   @doc("""
-  Patches the Tags field of a Azure Large Storage Instance for the specified
-  subscription, resource group, and instance name.
-  """)
-  update is ArmCustomPatchSync<AzureLargeStorageInstance>;
+    Patches the Tags field of a Azure Large Storage Instance for the specified
+    subscription, resource group, and instance name.
+    """)
+  updateOld is ArmCustomPatchSync<AzureLargeStorageInstance>;
 
-  @added(Versions.v2024_08_01_preview)
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-patch" ""
+  @sharedRoute
+  @added(Versions.v2024_08_01_preview)
   @doc("""
     Patches the Tags field of a Azure Large Storage Instance for the specified
     subscription, resource group, and instance name.
@@ -92,13 +94,11 @@ interface AzureLargeStorageInstances {
   listBySubscription is ArmListBySubscription<AzureLargeStorageInstance>;
 }
 
-@removed(Versions.v2024_08_01_preview)
-@@encodedName(AzureLargeStorageInstances.update::parameters.properties,
+@@encodedName(AzureLargeStorageInstances.updateOld::parameters.properties,
   "application/json",
   "tagsParameter"
 );
 
-@added(Versions.v2024_08_01_preview)
 @@encodedName(AzureLargeStorageInstances.update::parameters.properties,
   "application/json",
   "azureLargeStorageInstanceBodyParameter"

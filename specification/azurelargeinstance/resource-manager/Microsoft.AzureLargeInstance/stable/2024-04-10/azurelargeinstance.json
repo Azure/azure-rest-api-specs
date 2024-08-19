@@ -604,7 +604,7 @@
         }
       },
       "patch": {
-        "operationId": "AzureLargeStorageInstance_Update",
+        "operationId": "AzureLargeStorageInstance_UpdateOld",
         "tags": [
           "AzureLargeStorageInstances"
         ],
@@ -628,12 +628,12 @@
             "pattern": ".*"
           },
           {
-            "name": "azureLargeStorageInstanceBodyParameter",
+            "name": "tagsParameter",
             "in": "body",
             "description": "The resource properties to be updated.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/AzureLargeStorageInstancePatchBody"
+              "$ref": "#/definitions/AzureLargeStorageInstanceTagsUpdate"
             },
             "x-ms-client-name": "properties"
           }
@@ -650,14 +650,6 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "AzureLargeStorageInstance_Delete_Tag": {
-            "$ref": "./examples/AzureLargeStorageInstance_PatchTags_Delete.json"
-          },
-          "AzureLargeStorageInstance_Update_Tag": {
-            "$ref": "./examples/AzureLargeStorageInstance_PatchTags.json"
           }
         }
       }
@@ -1243,23 +1235,6 @@
         "value"
       ]
     },
-    "AzureLargeStorageInstancePatchBody": {
-      "type": "object",
-      "description": "Request body that only contains the Tags and Identity Field",
-      "properties": {
-        "identity": {
-          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
-          "description": "The identity of Azure Large Storage Instance, if configured."
-        },
-        "tags": {
-          "type": "object",
-          "description": "Tags field of the AzureLareStorage instance.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      }
-    },
     "AzureLargeStorageInstanceProperties": {
       "type": "object",
       "description": "Describes the properties of an AzureLargeStorageInstance.",
@@ -1271,6 +1246,19 @@
         "storageProperties": {
           "$ref": "#/definitions/StorageProperties",
           "description": "Specifies the storage properties for the AzureLargeStorage instance."
+        }
+      }
+    },
+    "AzureLargeStorageInstanceTagsUpdate": {
+      "type": "object",
+      "description": "The type used for updating tags in AzureLargeStorageInstance resources.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       }
     },

@@ -51,7 +51,6 @@ interface AzureLargeInstances {
     ErrorResponse
   >;
 
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "Legacy"
   @added(Versions.v2024_08_01_preview)
   @armResourceDelete(AzureLargeInstance)
   @doc("""
