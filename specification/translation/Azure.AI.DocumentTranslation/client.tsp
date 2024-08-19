@@ -170,13 +170,7 @@ interface SingleDocumentTranslationClient {
 );
 
 
-@@clientName(DocumentTranslation.TargetInput,
-  "TranslationTarget",
-  "python"
-);
-
-
-@@clientName(DocumentTranslation.BatchRequest,
-  "DocumentTranslationInput",
+@@clientName(DocumentTranslation.TranslationError,
+  "DocumentTranslationError",
   "python"
 );
