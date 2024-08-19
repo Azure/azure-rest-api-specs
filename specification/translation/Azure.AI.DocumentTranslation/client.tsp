@@ -57,6 +57,27 @@ interface SingleDocumentTranslationClient {
   "csharp,java"
 );
 
+@@clientName(DocumentTranslation.getDocumentsStatus,
+  "list_document_statuses",
+  "python"
+);
+
+@@clientName(DocumentTranslation.getTranslationsStatus,
+  "list_translation_statuses",
+  "python"
+);
+
+@@clientName(DocumentTranslation.TranslationStatus.createdDateTimeUtc,
+  "created_on",
+  "python"
+);
+
+@@clientName(DocumentTranslation.TranslationStatus.lastActionDateTimeUtc,
+  "last_updated_on",
+  "python"
+);
+
+
 @@clientName(DocumentTranslation.Glossary.format,
   "file_format",
   "python"
@@ -65,5 +86,31 @@ interface SingleDocumentTranslationClient {
 
 @@clientName(DocumentTranslation.Glossary,
   "TranslationGlossary",
+  "python"
+);
+
+
+@@clientName(DocumentTranslation.DocumentStatus.createdDateTimeUtc,
+  "created_on",
+  "python"
+);
+
+@@clientName(DocumentTranslation.DocumentStatus.lastActionDateTimeUtc,
+  "last_updated_on",
+  "python"
+);
+
+@@clientName(DocumentTranslation.DocumentStatus.path,
+  "translated_document_url",
+  "python"
+);
+
+@@clientName(DocumentTranslation.DocumentStatus.sourcePath,
+  "source_document_url",
+  "python"
+);
+
+@@clientName(DocumentTranslation.DocumentStatus.to,
+  "translated_to",
   "python"
 );
