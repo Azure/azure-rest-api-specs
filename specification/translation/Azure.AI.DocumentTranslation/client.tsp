@@ -77,10 +77,6 @@ interface SingleDocumentTranslationClient {
   "python"
 );
 
-@@clientName(DocumentTranslation.TranslationStatus.progress,
-  "translation_progress",
-  "python"
-);
 
 @@clientName(DocumentTranslation.TranslationStatus.characterCharged,
   "characters_charged",
@@ -127,6 +123,11 @@ interface SingleDocumentTranslationClient {
 
 @@clientName(DocumentTranslation.DocumentStatus.to,
   "translated_to",
+  "python"
+);
+
+@@clientName(DocumentTranslation.DocumentStatus.progress,
+  "translation_progress",
   "python"
 );
 
