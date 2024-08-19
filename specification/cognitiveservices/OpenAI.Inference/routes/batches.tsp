@@ -76,7 +76,7 @@ op getBatch(
 #suppress "@azure-tools/typespec-azure-core/no-operation-id" "non-standard operations"
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
 #suppress "@azure-tools/typespec-azure-core/use-standard-names" "mirrored API name parity"
-@get
+@post
 @route("/batches/{batchId}/cancel")
 @doc("Gets details for a single batch specified by the given batchID.")
 @added(ServiceApiVersions.v2024_07_01_Preview)
