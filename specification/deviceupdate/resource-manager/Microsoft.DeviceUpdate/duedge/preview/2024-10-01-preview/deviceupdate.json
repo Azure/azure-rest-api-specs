@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "DeviceUpdate",
-    "version": "2024-04-01-preview",
+    "version": "2024-10-01-preview",
     "description": "Microsoft Device Update resource provider.",
     "x-typespec-generated": [
       {
@@ -2384,7 +2384,8 @@
       "properties": {
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
-          "description": "Provisioning state."
+          "description": "Provisioning state.",
+          "readOnly": true
         },
         "deploymentId": {
           "type": "string",
@@ -2570,7 +2571,8 @@
       "properties": {
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
-          "description": "Provisioning state."
+          "description": "Provisioning state.",
+          "readOnly": true
         },
         "agentId": {
           "type": "string",
@@ -2763,7 +2765,8 @@
       "properties": {
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
-          "description": "Provisioning state."
+          "description": "Provisioning state.",
+          "readOnly": true
         },
         "deploymentId": {
           "type": "string",
@@ -2957,7 +2960,8 @@
       "properties": {
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
-          "description": "Provisioning state."
+          "description": "Provisioning state.",
+          "readOnly": true
         },
         "deviceClassId": {
           "type": "string",
@@ -3145,6 +3149,36 @@
             "name": "Failed",
             "value": "Failed",
             "description": "Deployment has completed with failure."
+          }
+        ]
+      }
+    },
+    "DeviceType": {
+      "type": "string",
+      "description": "The type of devices managed by this account",
+      "enum": [
+        "DeviceRegistryDevice",
+        "HybridComputeMachine",
+        "AllDeviceTypes"
+      ],
+      "x-ms-enum": {
+        "name": "DeviceType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "DeviceRegistryDevice",
+            "value": "DeviceRegistryDevice",
+            "description": "Microsoft.DeviceRegistry/devices"
+          },
+          {
+            "name": "HybridComputeMachine",
+            "value": "HybridComputeMachine",
+            "description": "Microsoft.HybridCompute/machines."
+          },
+          {
+            "name": "AllDeviceTypes",
+            "value": "AllDeviceTypes",
+            "description": "All device types supported by Device Update service."
           }
         ]
       }
@@ -3681,6 +3715,10 @@
           },
           "x-ms-identifiers": []
         },
+        "deviceType": {
+          "$ref": "#/definitions/DeviceType",
+          "description": "The type of devices managed by this account."
+        },
         "deviceEnrollmentScope": {
           "type": "string",
           "description": "Subscription or resource group used for device enrollment.",
@@ -3695,7 +3733,7 @@
         }
       },
       "required": [
-        "mqttBrokers",
+        "deviceType",
         "deviceEnrollmentScope",
         "serviceManagedIdentityResourceId"
       ]
@@ -3922,6 +3960,11 @@
       "type": "object",
       "description": "Update properties.",
       "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Provisioning state.",
+          "readOnly": true
+        },
         "updateId": {
           "$ref": "#/definitions/UpdateId",
           "description": "Update identity."

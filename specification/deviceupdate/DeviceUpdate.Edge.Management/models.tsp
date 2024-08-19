@@ -1,10 +1,12 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
@@ -103,6 +105,28 @@ union BrokerType {
    * Generic MQTT Broker (non-EventGrid)
    */
   Generic: "Generic",
+}
+
+/**
+ * The type of devices managed by this account
+ */
+union DeviceType {
+  string,
+
+  /**
+   * Microsoft.DeviceRegistry/devices
+   */
+  DeviceRegistryDevice: "DeviceRegistryDevice",
+
+  /**
+   * Microsoft.HybridCompute/machines.
+   */
+  HybridComputeMachine: "HybridComputeMachine",
+
+  /**
+   * All device types supported by Device Update service.
+   */
+  AllDeviceTypes: "AllDeviceTypes",
 }
 
 /**
@@ -284,8 +308,15 @@ model UpdateAccountProperties {
   /**
    * MQTT Brokers used for device communication.
    */
+  @madeOptional(Versions.v2024_10_01_preview)
   @OpenAPI.extension("x-ms-identifiers", [])
-  mqttBrokers: MqttBroker[];
+  mqttBrokers?: MqttBroker[];
+
+  /**
+   * The type of devices managed by this account.
+   */
+  @added(Versions.v2024_10_01_preview)
+  deviceType: DeviceType;
 
   /**
    * Subscription or resource group used for device enrollment.
@@ -383,8 +414,7 @@ model ManagedServiceIdentityUpdate
 /**
  * Request payload used to update an existing Update Account.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Already approved, will be changed in new version"
-model UpdateAccountUpdate extends TagUpdate {
+model UpdateAccountUpdate is TagUpdate {
   /**
    * The type of identity used for the resource.
    */
@@ -413,7 +443,15 @@ model ActiveDeploymentProperties {
   /**
    * Provisioning state.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Provisioning State is not read-only, will be fixed in the next version."
+  @removed(Versions.v2024_10_01_preview)
+  @renamedFrom(Versions.v2024_10_01_preview, "provisioningState")
+  provisioningStateOld?: ProvisioningState;
+
+  /**
+   * Provisioning state.
+   */
+  @added(Versions.v2024_10_01_preview)
+  @visibility("read")
   provisioningState?: ProvisioningState;
 
   /**
@@ -497,7 +535,15 @@ model AgentProperties {
   /**
    * Provisioning state.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Provisioning State is not read-only, will be fixed in the next version."
+  @removed(Versions.v2024_10_01_preview)
+  @renamedFrom(Versions.v2024_10_01_preview, "provisioningState")
+  provisioningStateOld?: ProvisioningState;
+
+  /**
+   * Provisioning state.
+   */
+  @added(Versions.v2024_10_01_preview)
+  @visibility("read")
   provisioningState?: ProvisioningState;
 
   /**
@@ -560,7 +606,7 @@ model AgentInfo {
   /**
    * The compat properties of the agent. This object can be thought of as a set of key-value pairs where the key is the name of the compatibility property and the value is the value of the compatibility property. There will always be at least 1 compat property and no more than 5
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "ARM reviewed and approved."
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Tag-like, user-defined properties"
   compatibilityProperties?: Record<string>;
 
   /**
@@ -750,7 +796,15 @@ model DeploymentProperties {
   /**
    * Provisioning state.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Provisioning State is not read-only, will be fixed in the next version."
+  @removed(Versions.v2024_10_01_preview)
+  @renamedFrom(Versions.v2024_10_01_preview, "provisioningState")
+  provisioningStateOld?: ProvisioningState;
+
+  /**
+   * Provisioning state.
+   */
+  @added(Versions.v2024_10_01_preview)
+  @visibility("read")
   provisioningState?: ProvisioningState;
 
   /**
@@ -883,7 +937,15 @@ model DeviceClassProperties {
   /**
    * Provisioning state.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Provisioning State is not read-only, will be fixed in the next version."
+  @removed(Versions.v2024_10_01_preview)
+  @renamedFrom(Versions.v2024_10_01_preview, "provisioningState")
+  provisioningStateOld?: ProvisioningState;
+
+  /**
+   * Provisioning state.
+   */
+  @added(Versions.v2024_10_01_preview)
+  @visibility("read")
   provisioningState?: ProvisioningState;
 
   /**
@@ -921,7 +983,7 @@ model DeviceClassInfo {
   /**
    * The compat properties of the device class. This object can be thought of as a set of key-value pairs where the key is the name of the compatibility property and the value is the value of the compatibility property. There will always be at least 1 compat property and no more than 5
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "ARM reviewed and approved."
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Tag-like, user-defined properties"
   compatibilityProperties?: Record<string>;
 }
 
@@ -932,7 +994,7 @@ model ImportUpdateRequest {
   /**
    * Import update input metadata.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "False positive. https://github.com/Azure/autorest/issues/4999"
+  @OpenAPI.extension("x-ms-identifiers", [])
   importUpdateInput: ImportUpdateInputItem[];
 
   /**
@@ -1004,8 +1066,14 @@ model FileImportMetadata {
 /**
  * Update properties.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Missing Provisioning State, will be fixed in the next version."
 model UpdateProperties {
+  /**
+   * Provisioning state.
+   */
+  @added(Versions.v2024_10_01_preview)
+  @visibility("read")
+  provisioningState?: ProvisioningState;
+
   /**
    * Update identity.
    */
@@ -1050,7 +1118,6 @@ model UpdateProperties {
   /**
    * List of update file metadata.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "False positive. https://github.com/Azure/typespec-azure/issues/1358"
   @OpenAPI.extension("x-ms-identifiers", ["fileName"])
   files?: UpdateFile[];
 
@@ -1134,8 +1201,7 @@ model Step {
 /**
  * Update file metadata.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Already approved, will be changed in new version"
-model UpdateFile extends UpdateFileBase {
+model UpdateFile is UpdateFileBase {
   /**
    * Optional related files metadata used together DownloadHandler metadata to download payload file.
    */

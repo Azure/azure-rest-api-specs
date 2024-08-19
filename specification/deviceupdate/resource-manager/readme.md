@@ -30,6 +30,29 @@ openapi-subtype: rpaas
 tag: package-2022-10-01
 ```
 
+### Tag: package-2024-10-01-preview
+
+These settings apply only when `--tag=package-2024-10-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2024-10-01-preview'
+input-file:
+  - Microsoft.DeviceUpdate/duedge/preview/2024-10-01-preview/deviceupdate.json
+suppressions:
+  - code: AvoidAdditionalProperties
+    from: deviceupdate.json
+    reason: Hash algorithm to hashed value map. Service validates the algorithms.
+    where:
+      - $.definitions.UpdateFile.properties.hashes
+  - code: AvoidAdditionalProperties
+    from: deviceupdate.json
+    reason: Optional file properties (not consumed by service but pass-through to device).
+    where:
+      - $.definitions.UpdateFile.properties.properties
+  - code: ProvisioningStateMustBeReadOnly
+    from: deviceupdate.json
+    reason: False positive. Provisioning state is read-only.
+```
+
 ### Tag: package-2024-04-01-preview
 
 These settings apply only when `--tag=package-2024-04-01-preview` is specified on the command line.
