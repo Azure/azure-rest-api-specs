@@ -606,20 +606,7 @@
         "choices"
       ]
     },
-    "ChatCompletionsFunctionToolSelection": {
-      "type": "object",
-      "description": "A tool selection of a specific, named function tool that will limit chat completions to using the named function.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "The name of the function that should be called."
-        }
-      },
-      "required": [
-        "name"
-      ]
-    },
-    "ChatCompletionsNamedToolSelection": {
+    "ChatCompletionsNamedToolChoice": {
       "type": "object",
       "description": "A tool selection of a specific, named function tool that will limit chat completions to using the named function.",
       "properties": {
@@ -634,13 +621,26 @@
           }
         },
         "function": {
-          "$ref": "#/definitions/ChatCompletionsFunctionToolSelection",
+          "$ref": "#/definitions/ChatCompletionsNamedToolChoiceFunction",
           "description": "The function that should be called."
         }
       },
       "required": [
         "type",
         "function"
+      ]
+    },
+    "ChatCompletionsNamedToolChoiceFunction": {
+      "type": "object",
+      "description": "A tool selection of a specific, named function tool that will limit chat completions to using the named function.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the function that should be called."
+        }
+      },
+      "required": [
+        "name"
       ]
     },
     "ChatCompletionsResponseFormat": {
@@ -706,6 +706,36 @@
         "function"
       ]
     },
+    "ChatCompletionsToolChoicePreset": {
+      "type": "string",
+      "description": "Represents a generic policy for how a chat completions tool may be selected.",
+      "enum": [
+        "auto",
+        "none",
+        "required"
+      ],
+      "x-ms-enum": {
+        "name": "ChatCompletionsToolChoicePreset",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "auto",
+            "value": "auto",
+            "description": "Specifies that the model may either use any of the tools provided in this chat completions request or\ninstead return a standard chat completions response as if no tools were provided."
+          },
+          {
+            "name": "none",
+            "value": "none",
+            "description": "Specifies that the model should not respond with a tool call and should instead provide a standard chat\ncompletions response. Response content may still be influenced by the provided tool definitions."
+          },
+          {
+            "name": "required",
+            "value": "required",
+            "description": "Specifies that the model should respond with a call to one or more tools."
+          }
+        ]
+      }
+    },
     "ChatCompletionsToolDefinition": {
       "type": "object",
       "description": "The definition of a chat completions tool that can call a function.",
@@ -729,36 +759,6 @@
         "type",
         "function"
       ]
-    },
-    "ChatCompletionsToolSelectionPreset": {
-      "type": "string",
-      "description": "Represents a generic policy for how a chat completions tool may be selected.",
-      "enum": [
-        "auto",
-        "none",
-        "required"
-      ],
-      "x-ms-enum": {
-        "name": "ChatCompletionsToolSelectionPreset",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "auto",
-            "value": "auto",
-            "description": "Specifies that the model may either use any of the tools provided in this chat completions request or\ninstead return a standard chat completions response as if no tools were provided."
-          },
-          {
-            "name": "none",
-            "value": "none",
-            "description": "Specifies that the model should not respond with a tool call and should instead provide a standard chat\ncompletions response. Response content may still be influenced by the provided tool definitions."
-          },
-          {
-            "name": "required",
-            "value": "required",
-            "description": "Specifies that the model should respond with a call to one or more tools."
-          }
-        ]
-      }
     },
     "ChatMessageContentItem": {
       "type": "object",
@@ -1167,17 +1167,17 @@
           {
             "name": "text",
             "value": "text",
-            "description": "to do"
+            "description": "Indicates the input is a general text input."
           },
           {
             "name": "query",
             "value": "query",
-            "description": "to do"
+            "description": "Indicates the input represents a search query to find the most relevant documents in your vector database."
           },
           {
             "name": "document",
             "value": "document",
-            "description": "to do"
+            "description": "Indicates the input represents a document that is stored in a vector database."
           }
         ]
       }
