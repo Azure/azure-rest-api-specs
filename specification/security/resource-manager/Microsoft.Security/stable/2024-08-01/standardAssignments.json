@@ -35,16 +35,16 @@
   },
   "paths": {
     "/{resourceId}/providers/Microsoft.Security/standardAssignments/{standardAssignmentName}": {
-      "delete": {
+      "get": {
         "tags": [
           "StandardAssignments"
         ],
-        "operationId": "StandardAssignments_Delete",
-        "summary": "Deletes a standard assignment.",
-        "description": "This operation deletes a standard assignment, given its name and the scope it was created in. The scope of a standard assignment is the part of its ID preceding '/providers/Microsoft.Security/standardAssignments/{standardAssignmentName}'.",
+        "operationId": "StandardAssignments_Get",
+        "summary": "Retrieves a standard assignment.",
+        "description": "This operation retrieves a single standard assignment, given its name and the scope it was created at.",
         "x-ms-examples": {
-          "Delete a standard assignment": {
-            "$ref": "./examples/StandardAssignments/DeleteStandardAssignment.json"
+          "Retrieve a standard assignment": {
+            "$ref": "./examples/StandardAssignments/GetStandardAssignment.json"
           }
         },
         "parameters": [
@@ -60,13 +60,13 @@
         ],
         "responses": {
           "200": {
-            "description": "OK - standard assignments was deleted"
-          },
-          "204": {
-            "description": "No Content - standard assignments does not exist"
+            "description": "OK - Returns information about the standard assignment.",
+            "schema": {
+              "$ref": "#/definitions/StandardAssignment"
+            }
           },
           "default": {
-            "description": "Error response that describes why the operation failed.",
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
@@ -123,16 +123,16 @@
           }
         }
       },
-      "get": {
+      "delete": {
         "tags": [
           "StandardAssignments"
         ],
-        "operationId": "StandardAssignments_Get",
-        "summary": "Retrieves a standard assignment.",
-        "description": "This operation retrieves a single standard assignment, given its name and the scope it was created at.",
+        "operationId": "StandardAssignments_Delete",
+        "summary": "Deletes a standard assignment.",
+        "description": "This operation deletes a standard assignment, given its name and the scope it was created in. The scope of a standard assignment is the part of its ID preceding '/providers/Microsoft.Security/standardAssignments/{standardAssignmentName}'.",
         "x-ms-examples": {
-          "Retrieve a standard assignment": {
-            "$ref": "./examples/StandardAssignments/GetStandardAssignment.json"
+          "Delete a standard assignment": {
+            "$ref": "./examples/StandardAssignments/DeleteStandardAssignment.json"
           }
         },
         "parameters": [
@@ -148,13 +148,13 @@
         ],
         "responses": {
           "200": {
-            "description": "OK - Returns information about the standard assignment.",
-            "schema": {
-              "$ref": "#/definitions/StandardAssignment"
-            }
+            "description": "OK - standard assignments was deleted"
+          },
+          "204": {
+            "description": "No Content - standard assignments does not exist"
           },
           "default": {
-            "description": "Error response describing why the operation failed.",
+            "description": "Error response that describes why the operation failed.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
