@@ -62,6 +62,10 @@ model NamespaceProperties {
   @visibility("read")
   url?: string;
 
+  @doc("URL of the durable task service dashboard")
+  @visibility("read")
+  dashboardUrl?: string;
+
   @doc("IP allow list for durable task service. Values can be Pv4, IPv6 or CIDR")
   ipAllowlist?: string[];
 }

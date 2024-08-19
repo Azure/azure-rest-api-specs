@@ -259,10 +259,6 @@
               "$ref": "#/definitions/Namespace"
             },
             "headers": {
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "description": "A link to the status monitor"
-              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -716,7 +712,12 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/NamespaceProperties",
-          "description": "The resource-specific properties for this resource."
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         }
       },
       "allOf": [
@@ -758,6 +759,11 @@
         "url": {
           "type": "string",
           "description": "URL of the durable task service",
+          "readOnly": true
+        },
+        "dashboardUrl": {
+          "type": "string",
+          "description": "URL of the durable task service dashboard",
           "readOnly": true
         },
         "ipAllowlist": {
@@ -860,7 +866,12 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/TaskHubProperties",
-          "description": "The resource-specific properties for this resource."
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "tags": {
           "type": "object",
