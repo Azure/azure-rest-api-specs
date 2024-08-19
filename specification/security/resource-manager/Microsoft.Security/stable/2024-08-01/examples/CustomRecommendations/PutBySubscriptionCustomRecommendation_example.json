@@ -20,9 +20,9 @@
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/e5d1b86c-3051-44d5-8802-aa65d45a279b/providers/Microsoft.Security/customAssessmentAutomations/33e7cc6e-a139-4723-a0e5-76993aee0771",
+        "id": "/subscriptions/e5d1b86c-3051-44d5-8802-aa65d45a279b/providers/Microsoft.Security/customRecommendations/33e7cc6e-a139-4723-a0e5-76993aee0771",
         "name": "33e7cc6e-a139-4723-a0e5-76993aee0771",
-        "type": "Microsoft.Security/customAssessmentAutomations",
+        "type": "Microsoft.Security/customRecommendations",
         "properties": {
           "query": "RawEntityMetadata | where Environment == 'GCP' and Identifiers.Type == 'compute.firewalls' | extend IslogConfigEnabled = tobool(Record.logConfig.enable) | extend HealthStatus = iff(IslogConfigEnabled, 'HEALTHY', 'UNHEALTHY')",
           "cloudProviders": [
@@ -45,9 +45,9 @@
     },
     "201": {
       "body": {
-        "id": "/subscriptions/e5d1b86c-3051-44d5-8802-aa65d45a279b/providers/Microsoft.Security/customAssessmentAutomations/33e7cc6e-a139-4723-a0e5-76993aee0771",
+        "id": "/subscriptions/e5d1b86c-3051-44d5-8802-aa65d45a279b/providers/Microsoft.Security/customRecommendations/33e7cc6e-a139-4723-a0e5-76993aee0771",
         "name": "33e7cc6e-a139-4723-a0e5-76993aee0771",
-        "type": "Microsoft.Security/customAssessmentAutomations",
+        "type": "Microsoft.Security/customRecommendations",
         "properties": {
           "query": "RawEntityMetadata | where Environment == 'GCP' and Identifiers.Type == 'compute.firewalls' | extend IslogConfigEnabled = tobool(Record.logConfig.enable) | extend HealthStatus = iff(IslogConfigEnabled, 'HEALTHY', 'UNHEALTHY')",
           "cloudProviders": [
