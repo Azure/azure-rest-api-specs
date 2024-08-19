@@ -57,12 +57,12 @@ interface SingleDocumentTranslationClient {
   "csharp,java"
 );
 
-@@clientName(DocumentTranslation.getDocumentsStatus,
+@@clientName(getDocumentsStatus,
   "list_document_statuses",
   "python"
 );
 
-@@clientName(DocumentTranslation.getTranslationsStatus,
+@@clientName(getTranslationsStatus,
   "list_translation_statuses",
   "python"
 );
