@@ -29,7 +29,7 @@ title: Microsoft.AzureStackHCI
 description: Azure Stack HCI management service
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-preview-2024-02-01
+tag: package-preview-2024-05-01
 ```
 
 ## Suppression
@@ -61,9 +61,9 @@ suppressions:
 
 ### Tag: package-preview-2024-02
 
-These settings apply only when `--tag=package-preview-2024-02-01` is specified on the command line.
+These settings apply only when `--tag=package-preview-2024-05-01` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2024-02-01'
+```yaml $(tag) == 'package-preview-2024-05-01'
 input-file:
-  - preview/2024-02-01-preview/stackhcivm.json
+  - preview/2024-05-01-preview/stackhcivm.json
 ```
