@@ -11,6 +11,10 @@ using Microsoft.DocumentDB;
   "MongoClusterNameAvailabilityResult",
   "csharp"
 );
+@@clientName(CheckNameAvailabilityResponse.nameAvailable,
+  "isNameAvailable",
+  "csharp"
+);
 @@clientName(MongoClusterRestoreParameters,
   "MongoClusterRestoreContent",
   "csharp"
@@ -62,5 +66,9 @@ using Microsoft.DocumentDB;
 );
 @@clientName(PrivateEndpointConnectionProperties,
   "MongoClusterPrivateEndpointConnectionProperties",
+  "csharp"
+);
+@@clientName(ListConnectionStringsResult,
+  "MongoClusterConnectionStringsResult",
   "csharp"
 );
