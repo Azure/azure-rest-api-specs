@@ -8,7 +8,7 @@ using Microsoft.DocumentDB;
 @@clientName(Microsoft.DocumentDB, "MongoClusterMgmtClient", "python");
 @@access(Operations.list, Access.internal, "csharp");
 @@clientName(CheckNameAvailabilityResponse,
-  "MogoClusterNameAvailabilityResult",
+  "MongoClusterNameAvailabilityResult",
   "csharp"
 );
 @@clientName(MongoClusterRestoreParameters,
@@ -28,3 +28,17 @@ using Microsoft.DocumentDB;
   "MongoClusterReplicaContent",
   "csharp"
 );
+@@clientName(ConnectionString, "MongoClusterConnectionString", "csharp");
+@@clientName(CreateMode, "MongoClusterCreateMode", "csharp");
+@@clientName(NodeKind, "MongoClusterNodeKind", "csharp");
+@@clientName(PreviewFeature, "MongoClusterPreviewFeature", "csharp");
+@@clientName(PromoteMode, "MongoClusterPromoteMode", "csharp");
+@@clientName(PromoteOption, "MongoClusterPromoteOption", "csharp");
+@@clientName(ProvisioningState, "MongoClusterProvisioningState", "csharp");
+@@clientName(Replica, "MongoClusterReplica", "csharp");
+@@clientName(ReplicationProperties,
+  "MongoClusterReplicationProperties",
+  "csharp"
+);
+@@clientName(ReplicationRole, "MongoClusterReplicationRole", "csharp");
+@@clientName(ReplicationState, "MongoClusterReplicationState", "csharp");
