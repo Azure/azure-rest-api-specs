@@ -57,6 +57,12 @@ interface SingleDocumentTranslationClient {
   "csharp,java"
 );
 
+@@clientName(DocumentTranslation.Glossary.format,
+  "file_format",
+  "python"
+);
+
+
 @@clientName(DocumentTranslation.Glossary,
   "TranslationGlossary",
   "python"
