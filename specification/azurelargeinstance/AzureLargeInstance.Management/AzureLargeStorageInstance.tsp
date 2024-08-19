@@ -43,23 +43,12 @@ interface AzureLargeStorageInstances {
     """)
   update is ArmCustomPatchSync<AzureLargeStorageInstance, Tags>;
 
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "Legacy"
   @added(Versions.v2024_08_01_preview)
   @doc("""
     Creates an Azure Large Storage Instance for the specified subscription,
     resource group, and instance name.
     """)
-  @armResourceCreateOrUpdate(AzureLargeStorageInstance)
-  @put
-  create is Azure.ResourceManager.Foundations.ArmCreateOperation<
-    ResourceInstanceParameters<
-      AzureLargeStorageInstance,
-      Azure.ResourceManager.Foundations.BaseParameters<AzureLargeStorageInstance>
-    >,
-    AzureLargeStorageInstance,
-    ArmResponse<AzureLargeStorageInstance>,
-    ErrorResponse
-  >;
+  create is ArmResourceCreateOrReplaceSync<AzureLargeStorageInstance>;
 
   @added(Versions.v2024_08_01_preview)
   @armResourceDelete(AzureLargeStorageInstance)

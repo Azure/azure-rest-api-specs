@@ -33,23 +33,12 @@ interface AzureLargeInstances {
     """)
   get is ArmResourceRead<AzureLargeInstance>;
 
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "Legacy"
   @added(Versions.v2024_08_01_preview)
   @doc("""
     Creates an Azure Large Instance for the specified subscription,
     resource group, and instance name.
     """)
-  @armResourceCreateOrUpdate(AzureLargeInstance)
-  @put
-  create is Azure.ResourceManager.Foundations.ArmCreateOperation<
-    ResourceInstanceParameters<
-      AzureLargeInstance,
-      Azure.ResourceManager.Foundations.BaseParameters<AzureLargeInstance>
-    >,
-    AzureLargeInstance,
-    ArmResponse<AzureLargeInstance>,
-    ErrorResponse
-  >;
+  create is ArmResourceCreateOrReplaceSync<AzureLargeInstance>;
 
   @added(Versions.v2024_08_01_preview)
   @armResourceDelete(AzureLargeInstance)
