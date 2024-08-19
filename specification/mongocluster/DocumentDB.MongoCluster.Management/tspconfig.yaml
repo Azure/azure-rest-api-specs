@@ -8,15 +8,15 @@ options:
     use-read-only-status-schema: true
     emitter-output-dir: "{project-root}/.."
     azure-resource-provider-folder: "resource-manager"
-    emit-common-types-schema: "never"
-    # `arm-resource-flattening` is only used for back-compat for specs existed on July 2024. All new service spec should NOT use this flag
-    arm-resource-flattening: true
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/mongoCluster.json"
     examples-directory: "{project-root}/examples"
   "@azure-tools/typespec-python":
     package-dir: "azure-mgmt-mongocluster"
     package-name: "{package-dir}"
     flavor: "azure"
+    generate-test: true
+    generate-sample: true
+    examples-directory: "{project-root}/examples"
   "@azure-tools/typespec-java":
     package-dir: "azure-resourcemanager-mongocluster"
     flavor: "azure"
@@ -35,6 +35,11 @@ options:
     head-as-boolean: true
     inject-spans: true
     remove-unreferenced-types: true
+  "@azure-tools/typespec-csharp":
+    package-dir: "Azure.ResourceManager.MongoCluster"
+    flavor: azure
+    clear-output-folder: true
+    namespace: "{package-dir}"
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"
