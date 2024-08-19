@@ -42,3 +42,17 @@ using Microsoft.DocumentDB;
 );
 @@clientName(ReplicationRole, "MongoClusterReplicationRole", "csharp");
 @@clientName(ReplicationState, "MongoClusterReplicationState", "csharp");
+@@clientName(AdministratorProperties,
+  "MongoClusterAdministratorProperties",
+  "csharp"
+);
+@@clientName(CheckNameAvailabilityReason,
+  "MongoClusterNameUnavailableReason",
+  "csharp"
+);
+@@clientName(PublicNetworkAccess, "MongoClusterPublicNetworkAccess", "csharp");
+@@clientName(FirewallRule, "MongoClusterFirewallRule", "csharp");
+@@clientName(PrivateEndpointConnectionResource,
+  "MongoClusterPrivateEndpointConnectionResource",
+  "csharp"
+);
