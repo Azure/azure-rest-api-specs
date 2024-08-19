@@ -75,25 +75,25 @@ input-file:
   - Microsoft.SecurityInsights/preview/2024-04-01-preview/operations.json
 suppressions:
   - code: AvoidAdditionalProperties
-    from: Microsoft.SecurityInsights/preview/2024-04-01-preview/dataConnectors.json
+    from: dataConnectors.json
     reason: These properties are unknown and need to be specified by the customer (each request can have different values)
   - code: AvoidAdditionalProperties
-    from: Microsoft.SecurityInsights/preview/2024-04-01-preview/Entities.json
+    from: Entities.json
     reason: These properties are unknown and changed frequently (each request can have different values for each entity)
   - code: AvoidAdditionalProperties
-    from: Microsoft.SecurityInsights/preview/2024-04-01-preview/EntityQueries.json
+    from: EntityQueries.json
     reason: These properties are unknown and changed frequently (each request can have different values for each entity)
   - code: AvoidAdditionalProperties
-    from: Microsoft.SecurityInsights/preview/2024-04-01-preview/EntityQueryTemplates.json
+    from: EntityQueryTemplates.json
     reason: These properties are unknown and changed frequently (each request can have different values for each entity)
   - code: AvoidAdditionalProperties
-    from: Microsoft.SecurityInsights/preview/2024-04-01-preview/AlertRules.json
+    from: AlertRules.json
     reason: These properties are unknown and changed frequently (each request can have different values for each entity)
   - code: AvoidAdditionalProperties
-    from: Microsoft.SecurityInsights/preview/2024-04-01-preview/Recommendations.json
+    from: Recommendations.json
     reason: These properties are unknown and changed frequently (each request can have different values for each entity)
   - code: AvoidAdditionalProperties
-    from: Microsoft.SecurityInsights/preview/2024-04-01-preview/TriggeredAnalyticsRuleRuns.json
+    from: TriggeredAnalyticsRuleRuns.json
     reason: TriggeredAnalyticsRuleRun does not include a property called "additionalProperties", it is only used to mark that 'ruleRunAdditionalData' is a dictionary or string to object.
 ```
 ### Tag: package-2024-03
