@@ -131,6 +131,17 @@ interface SingleDocumentTranslationClient {
   "python"
 );
 
+@@clientName(DocumentTranslation.StatusSummary.totalCharacterCharged,
+  "total_characters_charged",
+  "python"
+);
+
+@@clientName(DocumentTranslation.StatusSummary.cancelled,
+  "canceled",
+  "python"
+);
+
+
 
 @@clientName(DocumentTranslation.FileFormat.format,
   "file_format",
@@ -150,5 +161,22 @@ interface SingleDocumentTranslationClient {
 
 @@clientName(DocumentTranslation.FileFormat,
   "DocumentTranslationFileFormat",
+  "python"
+);
+
+@@clientName(DocumentTranslation.TargetInput.category,
+  "category_id",
+  "python"
+);
+
+
+@@clientName(DocumentTranslation.TargetInput,
+  "TranslationTarget",
+  "python"
+);
+
+
+@@clientName(DocumentTranslation.BatchRequest,
+  "DocumentTranslationInput",
   "python"
 );
