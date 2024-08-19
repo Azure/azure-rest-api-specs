@@ -14,7 +14,7 @@ using Azure.Core.Traits;
 @versioned(Azure.Communication.MessagesService.Versions)
 namespace Azure.Communication.MessagesService;
 
-@doc("The type of message. Supports text, image, template.")
+@doc("The type of message.")
 union CommunicationMessageKind {
   string,
 
@@ -23,6 +23,14 @@ union CommunicationMessageKind {
 
   @doc("Image message type.")
   image: "image",
+
+  @added(Versions.c2024_08_30_Preview)
+  @doc("Document message type.")
+  document: "document",
+  
+  @added(Versions.c2024_08_30_Preview)
+  @doc("Video message type.")
+  video: "video",
 
   @doc("Template message type.")
   template: "template",
@@ -117,17 +125,59 @@ model TextNotificationContent extends NotificationContent {
   content: string;
 }
 
-@doc("A request to send a media notification.")
-model MediaNotificationContent extends NotificationContent {
-  @doc("Message notification type is image.")
-  kind: CommunicationMessageKind.image;
+// @removed(Versions.c2024_08_30_Preview)
+// @doc("A request to send a media notification.")
+// model MediaNotificationContent extends NotificationContent {
+//   @doc("Message notification type is image.")
+//   kind: CommunicationMessageKind.image;
 
+//   @doc("Optional text content.")
+//   content?: string;
+
+//   @clientName("mediaUrl", "java")
+//   @doc("A media url for the file. Required if the type is one of the supported media types, e.g. image")
+//   mediaUri: url;
+// }
+
+@added(Versions.c2024_08_30_Preview)
+@doc("A request to send a media notification. Could be an image, document or video.")
+model MediaNotificationContent {
   @doc("Optional text content.")
   content?: string;
 
   @clientName("mediaUrl", "java")
   @doc("A media url for the file. Required if the type is one of the supported media types, e.g. image")
   mediaUri: url;
+}
+
+@renamedFrom(Versions.c2024_08_30_Preview, "MediaNotificationContent")
+@doc("A request to send an image notification.")
+model ImageNotificationContent extends NotificationContent{
+  @doc("Message notification type is image.")
+  kind: CommunicationMessageKind.image;
+
+  ...MediaNotificationContent
+}
+
+@added(Versions.c2024_08_30_Preview)
+@doc("A request to send a document notification.")
+model DocumentNotificationContent extends NotificationContent{
+  @doc("Message notification type is image.")
+  kind: CommunicationMessageKind.document;
+
+  @doc("Optional name for the file.")
+  fileName?: string;
+
+  ...MediaNotificationContent
+}
+
+@added(Versions.c2024_08_30_Preview)
+@doc("A request to send a video notification.")
+model VideoNotificationContent extends NotificationContent{
+  @doc("Message notification type is image.")
+  kind: CommunicationMessageKind.video;
+
+  ...MediaNotificationContent
 }
 
 @doc("A request to send a template notification.")
@@ -368,16 +418,19 @@ alias ListTemplatesQueryParams = ListQueryParametersTrait<{
   maxpagesize?: int32;
 }>;
 
-@doc("Azure Communication Messages Versions")
-enum Versions {
-  @doc("Azure Communication Messages 2024-02-01 api version")
-  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
-  c2024_02_01: "2024-02-01",
-}
-
 @doc("Notification messages send request body.")
 model NotificationMessagesSendRequestBody {
   @doc("Details of the message to send.")
   @bodyRoot
   body: NotificationContent;
+}
+
+@doc("Azure Communication Messages Versions")
+enum Versions {
+  @doc("Azure Communication Messages 2024-02-01 api version")
+  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
+  c2024_02_01: "2024-02-01",
+  @doc("Azure Communication Messages 2024-08-30-preview api version")
+  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
+  c2024_08_30_Preview: "2024-08-30-preview",
 }
