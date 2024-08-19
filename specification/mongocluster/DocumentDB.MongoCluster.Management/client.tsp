@@ -52,7 +52,15 @@ using Microsoft.DocumentDB;
 );
 @@clientName(PublicNetworkAccess, "MongoClusterPublicNetworkAccess", "csharp");
 @@clientName(FirewallRule, "MongoClusterFirewallRule", "csharp");
+@@clientName(FirewallRuleProperties,
+  "MongoClusterFirewallRuleProperties",
+  "csharp"
+);
 @@clientName(PrivateEndpointConnectionResource,
   "MongoClusterPrivateEndpointConnectionResource",
+  "csharp"
+);
+@@clientName(PrivateEndpointConnectionProperties,
+  "MongoClusterPrivateEndpointConnectionProperties",
   "csharp"
 );
