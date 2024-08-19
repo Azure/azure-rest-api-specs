@@ -78,12 +78,6 @@ interface SingleDocumentTranslationClient {
 );
 
 
-@@clientName(DocumentTranslation.TranslationStatus.characterCharged,
-  "characters_charged",
-  "python"
-);
-
-
 @@clientName(DocumentTranslation.Glossary.format,
   "file_format",
   "python"
@@ -131,6 +125,11 @@ interface SingleDocumentTranslationClient {
   "python"
 );
 
+
+@@clientName(DocumentTranslation.DocumentStatus.characterCharged,
+  "characters_charged",
+  "python"
+);
 
 
 @@clientName(DocumentTranslation.FileFormat.format,
