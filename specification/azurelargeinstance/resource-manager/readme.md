@@ -100,3 +100,16 @@ See configuration in [readme.typescript.md](./readme.typescript.md)
 ## CSharp
 
 See configuration in [readme.csharp.md](./readme.csharp.md)
+
+### Suppress linting rules
+
+These set of linting rules aren't applicable to the AzureLargeInstance RP so suppressing them here.
+
+``` yaml
+suppressions:
+  - code: TrackedResourcesMustHavePut
+    where:
+      - $.definitions.AzureLargeInstance
+      - $.definitions.AzureLargeStorageInstance
+    reason: In previous ALI api versions, the PUT methods are not supported
+```
