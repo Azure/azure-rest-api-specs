@@ -75,12 +75,12 @@ interface FabricCapacities {
   ): RpSkuEnumerationForNewResourceResult | ErrorResponse;
 }
 
-@doc("The capacity was successfuly suspended")
+@doc("The capacity was successfully suspended")
 model SuspendOkStatusCode {
   ...OkResponse;
 }
 
-@doc("The capacity was successfuly resumed")
+@doc("The capacity was successfully resumed")
 model ResumeOkStatusCode {
   ...OkResponse;
 }
