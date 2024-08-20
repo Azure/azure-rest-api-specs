@@ -180,7 +180,7 @@ model CompositeSolutionDefinitionPropertiesUpdate
   is OptionalProperties<UpdateableProperties<CompositeSolutionDefinitionProperties>>;
 
 model ManagedServiceIdentityUpdate
-  is OptionalProperties<UpdateableProperties<Azure.ResourceManager.Foundations.ManagedServiceIdentity>>;
+  is OptionalProperties<UpdateableProperties<Azure.ResourceManager.Legacy.ManagedServiceIdentityV4>>;
 
 @doc("KeyVault Secret Reference")
 model KeyVaultSecretReference {

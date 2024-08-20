@@ -13,12 +13,16 @@ using Azure.ResourceManager;
 @armProviderNamespace
 @service({
   title: "SecurityCopilotClient",
-  version: "2023-12-01-preview",
 })
 @doc("SecurityCopilot Resource Provider management API.")
-@useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
+@versioned(Versions)
 namespace Microsoft.SecurityCopilot;
+
+enum Versions {
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
+  `2023-12-01-preview`,
+}
 
 @doc("A Capacity resource")
 model Capacity is TrackedResource<CapacityProperties> {
@@ -50,42 +54,44 @@ model CapacityProperties {
 }
 
 @doc("Enum to represent Allowed or NotAllowed")
-enum IsAllowed {
+union IsAllowed {
+  string,
+
   @doc("Allowed to do")
-  Allowed,
+  Allowed: "Allowed",
 
   @doc("Not allowed to do")
-  NotAllowed,
+  NotAllowed: "NotAllowed",
 }
 
 @doc("The provisioning state of a resource.")
 @lroStatus
-enum ProvisioningState {
-  ...ResourceProvisioningState,
+union ProvisioningState {
+  ResourceProvisioningState,
 
   @doc("The resource is in an unknown state")
-  Unknown,
+  Unknown: "Unknown",
 
   @doc("The resource is creating")
-  Creating,
+  Creating: "Creating",
 
   @doc("The resource is moving")
-  Moving,
+  Moving: "Moving",
 
   @doc("The resource is soft deleting")
-  SoftDeleting,
+  SoftDeleting: "SoftDeleting",
 
   @doc("The resource is soft deleted")
-  SoftDeleted,
+  SoftDeleted: "SoftDeleted",
 
   @doc("The resource is updating")
-  Updating,
+  Updating: "Updating",
 
   @doc("The resource is being deleted")
-  Deleting,
+  Deleting: "Deleting",
 
   @doc("The resource create request has been accepted")
-  Accepted,
+  Accepted: "Accepted",
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}
@@ -94,7 +100,13 @@ interface Operations extends Azure.ResourceManager.Operations {}
 interface Capacities {
   get is ArmResourceRead<Capacity>;
   createOrUpdate is ArmResourceCreateOrReplaceSync<Capacity>;
-  update is ArmResourcePatchSync<Capacity, CapacityProperties>;
+  update is ArmCustomPatchSync<
+    Capacity,
+    Azure.ResourceManager.Foundations.ResourceUpdateModel<
+      Capacity,
+      CapacityProperties
+    >
+  >;
   delete is ArmResourceDeleteSync<Capacity>;
   listByResourceGroup is ArmResourceListByParent<Capacity>;
   listBySubscription is ArmListBySubscription<Capacity>;
