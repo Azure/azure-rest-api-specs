@@ -20,8 +20,8 @@
         ],
         "destinations": [
           {
-            "addressPrefixType": "IPPrefix",
-            "addressPrefix": "*"
+            "addressPrefixType": "NetworkGroup",
+            "addressPrefix": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/networkManagers/testNetworkManager/networkGroups/ng1"
           }
         ],
         "sourcePortRanges": [
@@ -52,7 +52,7 @@
           "lastModifiedAt": "2021-01-11T18:52:27Z"
         },
         "properties": {
-          "description": "This is Sample Admin Rule",
+          "description": "This is Sample Admin Rule using a network group as a source and destination.",
           "protocol": "Tcp",
           "sources": [
             {
@@ -75,8 +75,7 @@
           "access": "Deny",
           "priority": 1,
           "direction": "Inbound",
-          "provisioningState": "Succeeded",
-          "resourceGuid": "00000000-0000-0000-0000-000000000000"
+          "provisioningState": "Succeeded"
         }
       }
     },
@@ -95,7 +94,7 @@
           "lastModifiedAt": "2021-01-11T18:52:27Z"
         },
         "properties": {
-          "description": "This is Sample Admin Rule",
+          "description": "This is Sample Admin Rule using a network group as a source and destination.",
           "protocol": "Tcp",
           "sources": [
             {
@@ -118,11 +117,9 @@
           "access": "Deny",
           "priority": 1,
           "direction": "Inbound",
-          "provisioningState": "Succeeded",
-          "resourceGuid": "00000000-0000-0000-0000-000000000000"
+          "provisioningState": "Succeeded"
         }
       }
     }
   }
 }
-
