@@ -52,7 +52,8 @@ enum Versions {
 }
 
 /** The object containing the list of deployments for a project */
-@resource("language/authoring/analyze-text/projects/{projectName}/deployments")
+// Todo how to use the projectName as searching parameter
+@resource("authoring/analyze-text/projects/{projectName}/deployments")
 model ProjectDeployments {
   @key projectName: string;
   deployments: DeploymentObject[];
@@ -60,10 +61,61 @@ model ProjectDeployments {
 }
 
 /** Deployment object model */
+@resource("authoring/analyze-text/projects/{projectName}/deployments/{deploymentName}")
 model DeploymentObject {
+  @key projectName: string;
+  @key deploymentName: string;
+  
+  /** The ID of the trained model associated with this deployment */
   trainedModelId: string;
-  // Add other relevant fields here...
+
+  /** The date and time when the deployment was last deployed */
+  lastDeployedDateTime: utcDateTime;
+
+  /** The date and time when the model was last trained */
+  lastTrainedDateTime: utcDateTime;
+
+  /** The expiration date of the deployment */
+  deploymentExpirationDate?: utcDateTime;
+
+  /** The version of the model training configuration */
+  modelTrainingConfigVersion: string;
 }
+
+
+/** Represents the state of a deployment job */
+model DeploymentJobState {
+  /** The current status of the job */
+  status: State;
+
+  /** The date and time when the job was created */
+  createdDateTime: utcDateTime;
+
+  /** The date and time when the job was last updated */
+  lastUpdatedDateTime: utcDateTime;
+
+  /** Any errors encountered during the job execution */
+  errors?: Array<Error>;
+
+  /** The unique identifier for the job */
+  @key
+  @visibility("read")
+  jobId: uuid;
+}
+
+// Define the relevant models
+model CreateDeploymentOptions {
+  trainedModelLabel: string;
+  // Todo add other fields as needed
+}
+
+/** Input model for swapping deployments */
+model SwapDeploymentsOptions {
+  firstDeploymentName: string;
+  secondDeploymentName: string;
+  // Todo Add other fields as necessary
+}
+
 
 alias ServiceTraits = NoRepeatableRequests &
   NoConditionalRequests &
@@ -86,9 +138,102 @@ alias ListDeploymentsQueryParameters = QueryParametersTrait<{
   maxpagesize?: int32;
 }>;
 
+alias GetDeploymentStatusPathParameters = {
+  /** The project name */
+  @path
+  projectName: string;
+
+  /** The deployment name */
+  @path
+  deploymentName: string;
+
+  /** The job ID */
+  @path
+  jobId: string;
+};
+
 /** List deployments belonging to a project */
 @summary("Lists the deployments belonging to a project.")
 op ListDeployments is languageOperations.ResourceRead<
   ProjectDeployments,
   ListDeploymentsQueryParameters
+>;
+
+
+/** Get deployment details */
+@summary("Gets the details of a deployment.")
+op GetDeployment is languageOperations.ResourceRead<
+  DeploymentObject,
+  {
+    @path projectName: string;
+    @path deploymentName: string;
+  }
+>;
+
+/** Get deployment status */
+@summary("Gets the status of an existing deployment job.")
+@route("/authoring/analyze-text/projects/{projectName}/deployments/{deploymentName}/jobs/{jobId}")
+@get
+op GetDeploymentStatus is languageOperations.ResourceRead<
+  DeploymentJobState,
+  GetDeploymentStatusPathParameters
+>;
+
+/** Update deployment */
+@summary("Creates a new deployment or replaces an existing one.")
+@pollingOperation(GetDeploymentStatus)
+@route("/authoring/analyze-text/projects/{projectName}/deployments/{deploymentName}")
+@put
+op DeployProject is Foundations.LongRunningOperation<
+  {
+    @path projectName: string;
+    @path deploymentName: string;
+    @body createDeploymentOptions: CreateDeploymentOptions;
+  },
+  AcceptedResponse,
+  {},
+  ErrorResponse
+>;
+
+
+/** Delete deployment */
+@summary("Deletes a project deployment.")
+@pollingOperation(GetDeploymentStatus)  // Link to the status-checking operation
+@route("/authoring/analyze-text/projects/{projectName}/deployments/{deploymentName}")
+@delete
+op DeleteDeployment is Foundations.LongRunningOperation<
+  {
+    @path projectName: string;
+    @path deploymentName: string;
+  },
+  AcceptedResponse,
+  {},
+  ErrorResponse
+>;
+
+/** Swap deployments */
+@summary("Swaps two existing deployments with each other.")
+@pollingOperation(GetSwapDeploymentsStatus)  // Link to the status-checking operation
+@route("/authoring/analyze-text/projects/{projectName}/deployments/swap")
+@post
+op SwapDeployments is Foundations.LongRunningOperation<
+  {
+    @path projectName: string;
+    @body swapDeploymentJobObject: SwapDeploymentsOptions;
+  },
+  AcceptedResponse,
+  {},
+  ErrorResponse
+>;
+
+/** Get swap deployment status */
+@summary("Gets the status of an existing swap deployment job.")
+@route("/authoring/analyze-text/projects/{projectName}/deployments/swap/jobs/{jobId}")
+@get
+op GetSwapDeploymentsStatus is languageOperations.ResourceRead<
+  DeploymentJobState,
+  {
+    @path projectName: string;
+    @path jobId: string;
+  }
 >;
