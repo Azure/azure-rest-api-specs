@@ -50,7 +50,7 @@ op createBatch(
   /** The specification of the batch to create and execute. */
   @body
   createBatchRequest: BatchCreateRequest,
-): Batch;
+): BatchCreateResponse;
 
 /**
  * Retrieves an existing batch job by its ID.
