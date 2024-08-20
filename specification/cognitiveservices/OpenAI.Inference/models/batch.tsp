@@ -59,7 +59,7 @@ model BatchCreateRequest {
 /** Defines the response when creating a batch. */
 @added(ServiceApiVersions.v2024_07_01_Preview)
 model BatchCreateResponse {
-  // Customization note: the status code in OpenAI is 200. 
+  // Customization note: the status code in OpenAI is 200.
   // Reference: https://github.com/openai/openai-openapi/blob/423e672461b3d17f9829711e4a858e777252f077/openapi.yaml#L6903-L6909
   /**
    * The status code indicating a successful batch creation response.

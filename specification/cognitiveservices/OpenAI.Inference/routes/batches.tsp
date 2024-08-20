@@ -27,6 +27,7 @@ namespace Azure.OpenAI;
 op listBatches(
   /** Identifier for the last event from the previous pagination request. */
   @query after?: string,
+
   /** Number of batches to retrieve. Defaults to 20. */
   @query limit?: int32,
 ): OpenAIPageableListOf<Batch>;
