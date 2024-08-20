@@ -33,8 +33,13 @@ interface LogicalNetworks {
   @doc("The operation to get a logical network.")
   get is ArmResourceRead<LogicalNetwork>;
 
+  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "MUST CHANGE ON NEXT UPDATE"
   @doc("The operation to create or update a logical network. Please note some properties can be set only during logical network creation.")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<LogicalNetwork>;
+  @Azure.Core.useFinalStateVia("azure-async-operation")
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+    LogicalNetwork,
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader
+  >;
 
   @doc("The operation to update a logical network.")
   @parameterVisibility
@@ -44,7 +49,7 @@ interface LogicalNetworks {
   delete is ArmResourceDeleteWithoutOkAsync<LogicalNetwork>;
 
   @doc("Lists all of the logical networks in the specified resource group. Use the nextLink property in the response to get the next page of logical networks.")
-  list is ArmResourceListByParent<LogicalNetwork>;
+  listByResourceGroup is ArmResourceListByParent<LogicalNetwork>;
 
   @doc("Lists all of the logical networks in the specified subscription. Use the nextLink property in the response to get the next page of logical networks.")
   listAll is ArmListBySubscription<LogicalNetwork>;

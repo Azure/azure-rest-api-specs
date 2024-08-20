@@ -31,8 +31,13 @@ interface NetworkSecurityGroups {
   @doc("Gets the specified network security group.")
   get is ArmResourceRead<NetworkSecurityGroup>;
 
+  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "MUST CHANGE ON NEXT UPDATE"
   @doc("Creates or updates a network security group in the specified resource group.")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<NetworkSecurityGroup>;
+  @Azure.Core.useFinalStateVia("azure-async-operation")
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+    NetworkSecurityGroup,
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader
+  >;
 
   @doc("Updates a network security group tags.")
   updateTags is ArmTagsPatchAsync<NetworkSecurityGroup, TagsObject>;
@@ -41,7 +46,7 @@ interface NetworkSecurityGroups {
   delete is ArmResourceDeleteWithoutOkAsync<NetworkSecurityGroup>;
 
   @doc("Gets all network security groups in a resource group.")
-  list is ArmResourceListByParent<NetworkSecurityGroup>;
+  listByResourceGroup is ArmResourceListByParent<NetworkSecurityGroup>;
 
   @doc("Gets all network security groups in a subscription.")
   listAll is ArmListBySubscription<NetworkSecurityGroup>;

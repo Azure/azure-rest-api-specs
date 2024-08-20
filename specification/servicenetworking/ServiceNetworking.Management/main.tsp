@@ -223,38 +223,79 @@ model ResourceId {
 @armResourceOperations
 interface AssociationsInterface {
   get is ArmResourceRead<Association>;
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<Association>;
-  update is ArmResourcePatchSync<Association, AssociationProperties>;
+  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "MUST CHANGE ON NEXT UPDATE"
+  @Azure.Core.useFinalStateVia("azure-async-operation")
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+    Association,
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader
+  >;
+  update is ArmCustomPatchSync<
+    Association,
+    Azure.ResourceManager.Foundations.ResourceUpdateModel<
+      Association,
+      AssociationProperties
+    >
+  >;
   delete is ArmResourceDeleteWithoutOkAsync<Association>;
-  listByResourceGroup is ArmResourceListByParent<Association>;
+  listByTrafficController is ArmResourceListByParent<Association>;
 }
 
 @armResourceOperations
 interface FrontendsInterface {
   get is ArmResourceRead<Frontend>;
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<Frontend>;
-  update is ArmResourcePatchSync<Frontend, FrontendProperties>;
+  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "MUST CHANGE ON NEXT UPDATE"
+  @Azure.Core.useFinalStateVia("azure-async-operation")
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+    Frontend,
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader
+  >;
+  update is ArmCustomPatchSync<
+    Frontend,
+    Azure.ResourceManager.Foundations.ResourceUpdateModel<
+      Frontend,
+      FrontendProperties
+    >
+  >;
   delete is ArmResourceDeleteWithoutOkAsync<Frontend>;
-  listByResourceGroup is ArmResourceListByParent<Frontend>;
+  listByTrafficController is ArmResourceListByParent<Frontend>;
 }
 
 @added(Versions.v2024_05_01_preview)
 @armResourceOperations
 interface SecurityPoliciesInterface {
   get is ArmResourceRead<SecurityPolicy>;
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<SecurityPolicy>;
-  update is ArmResourcePatchSync<SecurityPolicy, SecurityPolicyProperties>;
+  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "MUST CHANGE ON NEXT UPDATE"
+  @Azure.Core.useFinalStateVia("azure-async-operation")
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+    SecurityPolicy,
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader
+  >;
+  update is ArmCustomPatchSync<
+    SecurityPolicy,
+    Azure.ResourceManager.Foundations.ResourceUpdateModel<
+      SecurityPolicy,
+      SecurityPolicyProperties
+    >
+  >;
   delete is ArmResourceDeleteWithoutOkAsync<SecurityPolicy>;
-  listByResourceGroup is ArmResourceListByParent<SecurityPolicy>;
+  listByTrafficController is ArmResourceListByParent<SecurityPolicy>;
 }
 
 @armResourceOperations
 interface TrafficControllerInterface {
   get is ArmResourceRead<TrafficController>;
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<TrafficController>;
-  update is ArmResourcePatchSync<
+  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "MUST CHANGE ON NEXT UPDATE"
+  @Azure.Core.useFinalStateVia("azure-async-operation")
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
     TrafficController,
-    TrafficControllerProperties
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader
+  >;
+  update is ArmCustomPatchSync<
+    TrafficController,
+    Azure.ResourceManager.Foundations.ResourceUpdateModel<
+      TrafficController,
+      TrafficControllerProperties
+    >
   >;
   delete is ArmResourceDeleteWithoutOkAsync<TrafficController>;
   listByResourceGroup is ArmResourceListByParent<TrafficController>;

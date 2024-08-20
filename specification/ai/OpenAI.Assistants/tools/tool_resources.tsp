@@ -39,7 +39,7 @@ model CodeInterpreterToolResource {
    */
   @encodedName("application/json", "file_ids")
   @maxItems(20)
-  fileIds: string[] = [];
+  fileIds: string[] = #[];
 }
 
 /**
@@ -87,7 +87,7 @@ model CreateCodeInterpreterToolResourceOptions {
   /** A list of file IDs made available to the `code_interpreter` tool. */
   @maxItems(20)
   @encodedName("application/json", "file_ids")
-  fileIds?: string[] = [];
+  fileIds?: string[] = #[];
 }
 
 /**
@@ -151,6 +151,7 @@ model UpdateToolResourcesOptions {
 @added(ServiceApiVersions.v2024_05_01_preview)
 model UpdateCodeInterpreterToolResourceOptions {
   /** A list of file IDs to override the current list of the assistant. */
+  @encodedName("application/json", "file_ids")
   @maxItems(20)
   fileIds?: string[];
 }

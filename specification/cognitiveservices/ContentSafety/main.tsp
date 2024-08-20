@@ -28,9 +28,9 @@ using Azure.Core;
   "Analyze harmful content",
   {
     @doc("""
-Supported Cognitive Services endpoints (protocol and hostname, for example:
-https://<resource-name>.cognitiveservices.azure.com).
-""")
+      Supported Cognitive Services endpoints (protocol and hostname, for example:
+      https://<resource-name>.cognitiveservices.azure.com).
+      """)
     endpoint: string,
   }
 )
@@ -42,8 +42,5 @@ enum Versions {
   v2023_10_01: "2023-10-01",
 
   @useDependency(Azure.Core.Versions.v1_0_Preview_2)
-  v2023_10_15_Preview: "2023-10-15-preview",
-
-  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
-  v2024_02_15_Preview: "2024-02-15-preview",
+  v2024_09_01: "2024-09-01",
 }
