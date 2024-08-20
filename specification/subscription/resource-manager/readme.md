@@ -42,8 +42,8 @@ directive:
     from: subscriptions.json
     reason: The delete subscription changed directory expected to return 200, since it's a change on the existing api with new version.
   - suppress: DeleteOperationResponses
-  from: subscriptions.json
-  reason: The delete operation response for subscription changed directory expected to return 200, since it's a change on the existing api with new version.
+    from: subscriptions.json
+    reason: The delete operation response for subscription changed directory expected to return 200, since it's a change on the existing api with new version.
 ```
 
 
