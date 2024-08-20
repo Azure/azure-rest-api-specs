@@ -282,8 +282,6 @@ model GroupingResult {
 }
 
 alias AddFaceDescriptionInList = """
-  >
-  *
     * Higher face image quality means better recognition precision. Please consider high-quality faces: frontal, clear, and face size is 200x200 pixels (100 pixels between eyes) or bigger.
     * JPEG, PNG, GIF (the first frame), and BMP format are supported. The allowed image file size is from 1KB to 6MB.
     * "targetFace" rectangle should contain one face. Zero or multiple faces will be regarded as an error. If the provided "targetFace" rectangle is not returned from \"Detect\", there's no guarantee to detect and add the face successfully.
