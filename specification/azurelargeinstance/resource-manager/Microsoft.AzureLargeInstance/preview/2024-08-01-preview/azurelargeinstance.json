@@ -798,7 +798,7 @@
             "description": "The resource properties to be updated.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Tags"
+              "$ref": "#/definitions/AzureLargeStorageInstanceTagsUpdate"
             },
             "x-ms-client-name": "properties"
           }
@@ -1467,6 +1467,23 @@
         }
       }
     },
+    "AzureLargeStorageInstanceTagsUpdate": {
+      "type": "object",
+      "description": "The type used for updating tags in AzureLargeStorageInstance resources.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The managed service identities assigned to this resource."
+        }
+      }
+    },
     "CreatedByType": {
       "type": "string",
       "description": "The type of identity that created the resource: User, Application, ManagedIdentity",
@@ -1735,10 +1752,6 @@
           "additionalProperties": {
             "type": "string"
           }
-        },
-        "identity": {
-          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
-          "description": "The managed service identities assigned to this resource."
         }
       }
     }

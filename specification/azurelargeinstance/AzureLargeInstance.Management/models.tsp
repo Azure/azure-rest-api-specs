@@ -477,10 +477,7 @@ model Tags {
   @clientName("tagsValue", "csharp")
   @doc("Tags field of the AzureLargeInstance instance.")
   tags?: Record<string>;
-
-  ...ManagedServiceIdentityProperty;
 }
-@@added(Tags.identity, Versions.v2024_08_01_preview);
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "legacy API"
 @doc("Describes the properties of an AzureLargeStorageInstance.")
@@ -524,3 +521,17 @@ model StorageBillingProperties {
   @doc("the SKU type that is provisioned")
   sku?: string;
 }
+
+@doc("The type used for updating tags in AzureLargeStorageInstance resources.")
+model AzureLargeStorageInstanceTagsUpdate {
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Tags is an acceptable use."
+  #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "https://github.com/Azure/typespec-azure/issues/417"
+  @clientName("tagsValue", "csharp")
+  @doc("Resource tags.")
+  tags?: Record<string>;
+
+  ...ManagedServiceIdentityProperty;
+}
+@@added(AzureLargeStorageInstanceTagsUpdate.identity,
+  Versions.v2024_08_01_preview
+);
