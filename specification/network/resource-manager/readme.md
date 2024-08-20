@@ -60,6 +60,7 @@ input-file:
   - Microsoft.Network/stable/2024-03-01/expressRoutePort.json
   - Microsoft.Network/stable/2024-03-01/expressRouteProviderPort.json
   - Microsoft.Network/stable/2024-03-01/firewallPolicy.json
+  - Microsoft.Network/stable/2024-03-01/ipAddressManager.json
   - Microsoft.Network/stable/2024-03-01/ipAllocation.json
   - Microsoft.Network/stable/2024-03-01/ipGroups.json
   - Microsoft.Network/stable/2024-03-01/loadBalancer.json
@@ -78,6 +79,7 @@ input-file:
   - Microsoft.Network/stable/2024-03-01/networkManagerRoutingConfiguration.json
   - Microsoft.Network/stable/2024-03-01/networkProfile.json
   - Microsoft.Network/stable/2024-03-01/networkSecurityGroup.json
+  - Microsoft.Network/stable/2024-03-01/networkVerifier.json
   - Microsoft.Network/stable/2024-03-01/networkVirtualAppliance.json
   - Microsoft.Network/stable/2024-03-01/networkWatcher.json
   - Microsoft.Network/stable/2024-03-01/operation.json
