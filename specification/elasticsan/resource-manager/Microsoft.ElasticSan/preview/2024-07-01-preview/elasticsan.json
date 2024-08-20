@@ -474,7 +474,7 @@
           },
           {
             "name": "x-ms-access-soft-deleted-resources",
-            "description": "Optional, used to get soft deleted volumes if set to true.",
+            "description": "Optional, used to get soft deleted volume groups if set to true.",
             "in": "header",
             "required": false,
             "type": "string",
@@ -1122,13 +1122,13 @@
         ],
         "responses": {
           "200": {
-            "description": "OK -- Returned when the update operation is successfully completed.",
+            "description": "OK -- Returned when the restore operation is successfully completed.",
             "schema": {
               "$ref": "#/definitions/Volume"
             }
           },
           "202": {
-            "description": "Accepted -- Update request accepted; operation will complete asynchronously.",
+            "description": "Accepted -- Restore request accepted; operation will complete asynchronously.",
             "headers": {
               "Location": {
                 "type": "string"
@@ -2280,7 +2280,7 @@
           "description": "A boolean indicating whether or not Data Integrity Check is enabled"
         },
         "deleteRetentionPolicy": {
-          "description": "The retention policy for the deleted volumes.",
+          "description": "The retention policy for the soft deleted resources.",
           "$ref": "#/definitions/DeleteRetentionPolicy"
         }
       }
@@ -2413,7 +2413,7 @@
           "description": "A boolean indicating whether or not Data Integrity Check is enabled"
         },
         "deleteRetentionPolicy": {
-          "description": "The retention policy for the deleted volumes.",
+          "description": "The retention policy for the soft deleted resources.",
           "$ref": "#/definitions/DeleteRetentionPolicy"
         }
       }
@@ -2848,7 +2848,7 @@
           "type": "integer",
           "format": "int32",
           "minimum": 0,
-          "description": "The number of days to retain the volume after deletion."
+          "description": "The number of days to retain the resources after deletion."
         }
       }
     },
