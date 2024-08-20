@@ -1709,26 +1709,8 @@
           "description": "Disables access key authentication."
         },
         "sasAuth": {
-          "description": "This property manages if SAS token authentication is enabled or disabled.",
-          "enum": [
-            "Enabled",
-            "Disabled"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "SasAuth",
-            "modelAsString": true,
-            "values": [
-              {
-                "value": "Enabled",
-                "description": "SAS token authentication is enabled."
-              },
-              {
-                "value": "Disabled",
-                "description": "SAS token authentication is disabled."
-              }
-            ]
-          }
+          "$ref": "#/definitions/SasAuthProperties",
+          "description": "The SAS authentication settings of the configuration store."
         },
         "softDeleteRetentionInDays": {
           "type": "integer",
@@ -1870,6 +1852,58 @@
         }
       }
     },
+    "SasAuthProperties": {
+      "type": "object",
+      "description": "The SAS authentication settings of the configuration store.",
+      "properties": {
+        "status": {
+          "description": "The status of the SAS token authentication. This property manages if SAS token authentication is enabled or disabled.",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "SasAuth",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Enabled",
+                "description": "SAS token authentication is enabled."
+              },
+              {
+                "value": "Disabled",
+                "description": "SAS token authentication is disabled."
+              }
+            ]
+          }
+        },
+        "info": {
+          "description": "The information of SAS token authentication.",
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SasTokenInfo"
+          }
+        }
+      }
+    },
+    "SasTokenInfo":{
+      "type": "object",
+      "description": "The information of specific SAS token kind.",
+      "properties":{
+        "kind": {
+          "description": "The kind of the SAS token.",
+          "$ref": "#/definitions/SasTokenKind"
+        },
+        "lastResetTime":{
+          "format": "date-time",
+          "description": "The last reset datetime of SAS token.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
     "ConfigurationStoreUpdateParameters": {
       "description": "The parameters for updating a configuration store.",
       "type": "object",
@@ -1909,26 +1943,8 @@
           "description": "Disables access key authentication."
         },
         "sasAuth": {
-          "description": "This property manages if SAS token authentication is enabled or disabled.",
-          "enum": [
-            "Enabled",
-            "Disabled"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "SasAuth",
-            "modelAsString": true,
-            "values": [
-              {
-                "value": "Enabled",
-                "description": "SAS token authentication is enabled."
-              },
-              {
-                "value": "Disabled",
-                "description": "SAS token authentication is disabled."
-              }
-            ]
-          }
+          "$ref": "#/definitions/SasAuthProperties",
+          "description": "The SAS authentication settings of the configuration store."
         },
         "publicNetworkAccess": {
           "description": "Control permission for data plane traffic coming from public networks while private endpoint is enabled.",
