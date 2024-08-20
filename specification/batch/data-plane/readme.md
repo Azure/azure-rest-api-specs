@@ -27,7 +27,16 @@ These are the global settings for the Batch API.
 ``` yaml
 title: BatchServiceClient
 openapi-type: data-plane
-tag: package-2024-02
+tag: package-2024-07
+```
+
+### Tag: package-2024-07
+
+These settings apply only when `--tag=package-2024-07` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-07'
+input-file:
+  - Microsoft.Batch/stable/2024-07-01.20.0/BatchService.json
 ```
 
 ### Tag: package-2024-02.19.0-preview
@@ -232,6 +241,8 @@ directive:
       - $.paths["/pools/{poolId}/removenodes"].post
       - $.paths["/pools/{poolId}/nodes/{nodeId}/reboot"].post
       - $.paths["/pools/{poolId}/nodes/{nodeId}/reimage"].post
+      - $.paths["/pools/{poolId}/nodes/{nodeId}/start"].post
+      - $.paths["/pools/{poolId}/nodes/{nodeId}/deallocate"].post
     reason: Service does not return 200, nor supply location header.
 
   - suppress: R2017
@@ -321,6 +332,12 @@ suppressions:
  - code: OperationIdNounVerb
    from: BatchService.json
    reason: This rule is an ARM specific API validation rule and does not apply to data plane API validation.
+ - code: LroExtension
+   from: BatchService.json
+   where: 
+     - $.paths["/pools/{poolId}/nodes/{nodeId}/start"].post
+     - $.paths["/pools/{poolId}/nodes/{nodeId}/deallocate"].post
+   reason: Service does not return 200, nor supply location header.
 
 ```
 
