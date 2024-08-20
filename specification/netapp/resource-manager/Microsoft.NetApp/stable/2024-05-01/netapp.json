@@ -2192,6 +2192,249 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/capacityPools/{poolName}/volumes/{volumeName}/peerExternalCluster": {
+      "post": {
+        "summary": "Start Cluster peering",
+        "description": "Starts peering the cluster for this migration volume",
+        "tags": [
+          "Volumes OnPrem Migration"
+        ],
+        "operationId": "Volumes_PeerExternalCluster",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountName"
+          },
+          {
+            "$ref": "#/parameters/PoolName"
+          },
+          {
+            "$ref": "#/parameters/VolumeName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "description": "Cluster peer request object supplied in the body of the operation.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/peerClusterForVolumeMigrationRequest"
+            }
+          }
+        ],
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/clusterPeerCommandResponse"
+        },
+        "x-ms-examples": {
+          "Volumes_PeerExternalCluster": {
+            "$ref": "examples/Volumes_PeerExternalCluster.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/clusterPeerCommandResponse"
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/capacityPools/{poolName}/volumes/{volumeName}/authorizeExternalReplication": {
+      "post": {
+        "summary": "Start migration process",
+        "description": "Starts SVM peering and returns a command to be run on the external ONTAP to accept it.  Once the SVM's have been peered a SnapMirror will be created",
+        "tags": [
+          "Volumes OnPrem Migration"
+        ],
+        "operationId": "Volumes_AuthorizeExternalReplication",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountName"
+          },
+          {
+            "$ref": "#/parameters/PoolName"
+          },
+          {
+            "$ref": "#/parameters/VolumeName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/svmPeerCommandResponse"
+        },
+        "x-ms-examples": {
+          "Volumes_AuthorizeExternalReplication": {
+            "$ref": "examples/Volumes_AuthorizeExternalReplication.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/svmPeerCommandResponse"
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/capacityPools/{poolName}/volumes/{volumeName}/finalizeExternalReplication": {
+      "post": {
+        "summary": "Finalize migration process",
+        "description": "Finalizes the migration of a volume by performing a final sync on the replication, breaking and releasing the replication, and breaking the cluster peering if no other migration is active.",
+        "tags": [
+          "Volumes OnPrem Migration Finalize"
+        ],
+        "operationId": "Volumes_FinalizeExternalReplication",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountName"
+          },
+          {
+            "$ref": "#/parameters/PoolName"
+          },
+          {
+            "$ref": "#/parameters/VolumeName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "Volumes_FinalizeExternalReplication": {
+            "$ref": "examples/Volumes_FinalizeExternalReplication.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/capacityPools/{poolName}/volumes/{volumeName}/performReplicationTransfer": {
+      "post": {
+        "tags": [
+          "Volumes OnPrem Migration"
+        ],
+        "summary": "Perform a replication transfer",
+        "description": "Performs an adhoc replication transfer on a volume with volumeType Migration",
+        "operationId": "Volumes_PerformReplicationTransfer",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountName"
+          },
+          {
+            "$ref": "#/parameters/PoolName"
+          },
+          {
+            "$ref": "#/parameters/VolumeName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "Volumes_PerformReplicationTransfer": {
+            "$ref": "examples/Volumes_PerformReplicationTransfer.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/capacityPools/{poolName}/volumes/{volumeName}/poolChange": {
       "post": {
         "tags": [
@@ -6943,9 +7186,41 @@
           "type": "string",
           "description": "The resource ID of the remote volume."
         },
+        "remotePath": {
+          "description": "The full path to a volume that is to be migrated into ANF. Required for Migration volumes",
+          "type": "object",
+          "$ref": "#/definitions/remotePath",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
         "remoteVolumeRegion": {
           "type": "string",
           "description": "The remote region for the other end of the Volume Replication."
+        }
+      }
+    },
+    "remotePath": {
+      "description": "The full path to a volume that is to be migrated into ANF. Required for Migration volumes",
+      "type": "object",
+      "required": [
+        "externalHostName",
+        "serverName",
+        "volumeName"
+      ],
+      "properties": {
+        "externalHostName": {
+          "type": "string",
+          "description": "The Path to a ONTAP Host"
+        },
+        "serverName": {
+          "type": "string",
+          "description": "The name of a server on the ONTAP Host"
+        },
+        "volumeName": {
+          "type": "string",
+          "description": "The name of a volume on the server"
         }
       }
     },
@@ -8843,6 +9118,51 @@
       "x-ms-enum": {
         "name": "coolAccessRetrievalPolicy",
         "modelAsString": true
+      }
+    },
+    "clusterPeerCommandResponse": {
+      "description": "Information about cluster peering process",
+      "type": "object",
+      "properties": {
+        "peerAcceptCommand": {
+          "description": "A command that needs to be run on the external ONTAP to accept cluster peering.  Will only be present if <code>clusterPeeringStatus</code> is <code>pending</code>",
+          "type": "string"
+        }
+      }
+    },
+    "svmPeerCommandResponse": {
+      "description": "Information about svm peering process",
+      "type": "object",
+      "properties": {
+        "svmPeeringCommand": {
+          "description": "A command that needs to be run on the external ONTAP to accept svm peering.  Will only be present if <code>svmPeeringStatus</code> is <code>pending</code>",
+          "type": "string"
+        }
+      }
+    },
+    "peerClusterForVolumeMigrationRequest": {
+      "description": "Source Cluster properties for a cluster peer request",
+      "type": "object",
+      "required": [
+        "peerIpAddresses"
+      ],
+      "properties": {
+        "peerIpAddresses": {
+          "type": "array",
+          "minItems": 1,
+          "description": "A list of IC-LIF IPs that can be used to connect to the On-prem cluster",
+          "example": [
+            "0.0.0.1",
+            "0.0.0.2",
+            "0.0.0.3",
+            "0.0.0.4",
+            "0.0.0.5",
+            "0.0.0.6"
+          ],
+          "items": {
+            "type": "string"
+          }
+        }
       }
     },
     "smbAccessBasedEnumeration": {
