@@ -7,5 +7,6 @@ azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
 module-name: sdk/resourcemanager/migrationdiscovery/armmigrationdiscoverysap
 module: github.com/Azure/azure-sdk-for-go/$(module-name)
+description: test Configuration Client
 output-folder: $(go-sdk-folder)/$(module-name)
 ```
