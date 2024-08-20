@@ -13,12 +13,17 @@ using Azure.ResourceManager;
 @armProviderNamespace("Microsoft.VerifiedId")
 @service({
   title: "VerifiedIdMgmtClient",
-  version: "2024-01-26-preview",
 })
 @doc("VerifiedId Resource Provider management API.")
-@useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
+@versioned(Versions)
 namespace Microsoft.VerifiedId;
+
+enum Versions {
+  @doc("2024-01-26-preview")
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
+  v2024_01_26: "2024-01-26-preview",
+}
 
 interface Operations extends Azure.ResourceManager.Operations {}
 
@@ -34,20 +39,21 @@ model Authority is TrackedResource<AuthorityProperties> {
 
 @doc("The status of the current operation.")
 @Azure.Core.lroStatus
-enum ProvisioningState {
-  ...ResourceProvisioningState,
+union ProvisioningState {
+  string,
+  ResourceProvisioningState,
 
   @doc("Initial provisioning in progress")
-  Provisioning,
+  Provisioning: "Provisioning",
 
   @doc("Update in progress")
-  Updating,
+  Updating: "Updating",
 
   @doc("Deletion in progress")
-  Deleting,
+  Deleting: "Deleting",
 
   @doc("Change accepted for processing")
-  Accepted,
+  Accepted: "Accepted",
 }
 
 @doc("Details of the VerifiedId Authority.")
@@ -61,7 +67,13 @@ model AuthorityProperties {
 interface Authorities {
   get is ArmResourceRead<Authority>;
   createOrUpdate is ArmResourceCreateOrReplaceAsync<Authority>;
-  update is ArmResourcePatchSync<Authority, AuthorityProperties>;
+  update is Azure.ResourceManager.ArmCustomPatchSync<
+    Authority,
+    Azure.ResourceManager.Foundations.ResourceUpdateModel<
+      Authority,
+      AuthorityProperties
+    >
+  >;
   delete is ArmResourceDeleteSync<Authority>;
   listByResourceGroup is ArmResourceListByParent<Authority>;
   listBySubscription is ArmListBySubscription<Authority>;
