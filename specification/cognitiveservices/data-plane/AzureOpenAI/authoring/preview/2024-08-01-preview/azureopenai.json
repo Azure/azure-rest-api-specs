@@ -188,391 +188,6 @@
         }
       }
     },
-    "/evals/dashboard/preview_file": {
-      "post": {
-        "tags": [
-          "Evaluation:"
-        ],
-        "summary": "Preview Data Source File\r\nPreview a file to be used as a data source for an eval.",
-        "operationId": "Evaluation_EvalDashboardPreview",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/apiVersionQueryParameter"
-          },
-          {
-            "in": "body",
-            "name": "evalDashboardPreviewRequest",
-            "description": "The specification of the evaluation dashboard preview request.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/EvalDashboardPreviewFileBody"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The evaluation job has been successfully canceled.",
-            "schema": {
-              "$ref": "#/definitions/FilePreviewApiObject"
-            }
-          },
-          "default": {
-            "description": "An error occurred.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Gets the input file data prior to the execution of a evaluation job.": {
-            "$ref": "./examples/post_evaluation_dashboard_preview.json"
-          }
-        }
-      }
-    },
-    "/evals/runs": {
-      "post": {
-        "tags": [
-          "Evaluation:"
-        ],
-        "summary": "Creates a run that evaluates a specified model from a given test file.\r\nThis will return a run_id and the initial status of the run.",
-        "operationId": "Evaluation_Create",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/apiVersionQueryParameter"
-          },
-          {
-            "in": "body",
-            "name": "evaluationRun",
-            "description": "The specification of the evaluation.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/EvalCreateRunRequestBody"
-            }
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "The evaluation job has been successfully created.",
-            "schema": {
-              "$ref": "#/definitions/RunApiObject"
-            },
-            "headers": {
-              "Location": {
-                "description": "The location of the newly created item.",
-                "type": "string",
-                "format": "url"
-              }
-            }
-          },
-          "default": {
-            "description": "An error occurred.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Creating an evaluation job.": {
-            "$ref": "./examples/post_evaluation.json"
-          }
-        }
-      },
-      "get": {
-        "tags": [
-          "Evaluation:"
-        ],
-        "summary": "Gets details for a list of evaluation runs specified by a number of filters including status and time after, with a page limit option.\r\nThe details contain the run status, pipeline_config, and id.",
-        "operationId": "Evaluation_GetRuns",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "query",
-            "name": "status",
-            "description": "Optional filter on the status of the Evaluation runs to retrieve. Default to all statuses."
-          },
-          {
-            "in": "query",
-            "name": "limit",
-            "description": "Number of Evaluation runs to retrieve. Defaults to 20.",
-            "type": "integer",
-            "format": "int32",
-            "default": 20
-          },
-          {
-            "in": "query",
-            "name": "after",
-            "description": "Optional filter on the creation time of Evaluation runs to retrieve.",
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/apiVersionQueryParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/EvaluationRunList"
-            }
-          },
-          "default": {
-            "description": "An error occurred.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Getting all evaluation job owned by this account.": {
-            "$ref": "./examples/get_list_evaluation.json"
-          }
-        }
-      }
-    },
-    "/evals/runs/{run-id}": {
-      "get": {
-        "tags": [
-          "Evaluation:"
-        ],
-        "summary": "Gets details for a single evaluation run specified by the given evaluation-id.\r\nThe details contain the run status, pipeline_config, and id.",
-        "operationId": "Evaluation_Get",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "run-id",
-            "description": "The identifier of the evaluation run.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/apiVersionQueryParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/RunApiObject"
-            }
-          },
-          "default": {
-            "description": "An error occurred.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Getting an evaluation job.": {
-            "$ref": "./examples/get_evaluation.json"
-          }
-        }
-      }
-    },
-    "/evals/runs/{run-id}/aggregation_outputs": {
-      "get": {
-        "tags": [
-          "Evaluation:"
-        ],
-        "summary": "Gets the aggregation outputs for an Evaluation run specified by the given evaluation-id.",
-        "operationId": "Evaluation_GetAggregationOutputs",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "run-id",
-            "description": "The identifier of the evaluation run.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/apiVersionQueryParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/EvalRunAggregationOutputsApiObject"
-            }
-          },
-          "default": {
-            "description": "An error occurred.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Getting aggregation outputs for this evaluation job.": {
-            "$ref": "./examples/get_aggregation_outputs_evaluation.json"
-          }
-        }
-      }
-    },
-    "/evals/runs/{run-id}/cancel": {
-      "post": {
-        "tags": [
-          "Evaluation:"
-        ],
-        "summary": "Cancels the processing of the evaluation run specified by the given evaluation-id.",
-        "operationId": "Evaluation_Cancel",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "run-id",
-            "description": "The identifier of the evaluation run.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/apiVersionQueryParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The evaluation job has been successfully canceled",
-            "schema": {
-              "$ref": "#/definitions/RunStatusPollApiObject"
-            }
-          },
-          "default": {
-            "description": "An error occurred.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Canceling an evaluation job.": {
-            "$ref": "./examples/post_cancel_evaluation.json"
-          }
-        }
-      }
-    },
-    "/evals/runs/{run-id}/output_data_items": {
-      "get": {
-        "tags": [
-          "Evaluation:"
-        ],
-        "summary": "Gets details for a single evaluation run specified by the given evaluation-id.\r\nThe details contain the run status, pipeline_config, and id.",
-        "operationId": "Evaluation_GetOutputDataItems",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "run-id",
-            "description": "The identifier of the evaluation run.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "limit",
-            "description": "Number of Evaluation runs to retrieve. Defaults to 20.",
-            "type": "integer",
-            "format": "int32",
-            "default": 20
-          },
-          {
-            "in": "query",
-            "name": "after",
-            "description": "Optional filter on the creation time of Evaluation runs to retrieve.",
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/apiVersionQueryParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/OutputDataItemList"
-            }
-          },
-          "default": {
-            "description": "An error occurred.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Getting data item outputs for this evaluation job.": {
-            "$ref": "./examples/get_list_output_data_items_evaluation.json"
-          }
-        }
-      }
-    },
-    "/evals/runs/{run-id}/status": {
-      "get": {
-        "tags": [
-          "Evaluation:"
-        ],
-        "summary": "Gets status for a single evaluation run specified by the given evaluation-id.",
-        "operationId": "Evaluation_GetStatus",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "run-id",
-            "description": "The identifier of the evaluation run.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/apiVersionQueryParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/RunStatusPollApiObject"
-            }
-          },
-          "default": {
-            "description": "An error occurred.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Getting the status for an evaluation job.": {
-            "$ref": "./examples/get_status_evaluation.json"
-          }
-        }
-      }
-    },
     "/files": {
       "get": {
         "tags": [
@@ -593,9 +208,7 @@
               "fine-tune",
               "fine-tune-results",
               "assistants",
-              "assistants_output",
-              "batch",
-              "batch_output"
+              "assistants_output"
             ],
             "x-ms-enum": {
               "name": "Purpose",
@@ -616,14 +229,6 @@
                 {
                   "value": "assistants_output",
                   "description": "This file contains the results of an assistant."
-                },
-                {
-                  "value": "batch",
-                  "description": "This file contains the input data for a batch."
-                },
-                {
-                  "value": "batch_output",
-                  "description": "This file contains the results of a batch."
                 }
               ]
             }
@@ -678,8 +283,7 @@
               "fine-tune",
               "fine-tune-results",
               "assistants",
-              "assistants_output",
-              "batch"
+              "assistants_output"
             ],
             "x-ms-enum": {
               "name": "Purpose",
@@ -700,10 +304,6 @@
                 {
                   "value": "assistants_output",
                   "description": "This file contains the results of an assistant."
-                },
-                {
-                  "value": "batch",
-                  "description": "This file contains the input data for a batch."
                 }
               ]
             }
@@ -1948,77 +1548,6 @@
     }
   },
   "definitions": {
-    "AggregationResult": {
-      "title": "AggregationResult",
-      "type": "object",
-      "properties": {
-        "object": {
-          "$ref": "#/definitions/TypeDiscriminator"
-        },
-        "identifier": {
-          "description": "The identity of this item.",
-          "type": "string",
-          "readOnly": true
-        },
-        "data": {
-          "readOnly": true
-        }
-      }
-    },
-    "AggregationResultList": {
-      "title": "AggregationResultList",
-      "type": "object",
-      "properties": {
-        "object": {
-          "$ref": "#/definitions/TypeDiscriminator"
-        },
-        "data": {
-          "description": "The list of items.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/AggregationResult"
-          }
-        },
-        "has_more": {
-          "description": "A value indicating whether the list contains more elements than returned.",
-          "type": "boolean"
-        }
-      },
-      "readOnly": true
-    },
-    "AggregatorConfig": {
-      "title": "AggregatorConfig",
-      "required": [
-        "name",
-        "target",
-        "type"
-      ],
-      "type": "object",
-      "properties": {
-        "name": {
-          "minLength": 1,
-          "type": "string"
-        },
-        "description": {
-          "type": "string"
-        },
-        "type": {
-          "$ref": "#/definitions/AggregatorType"
-        },
-        "target": {
-          "$ref": "#/definitions/VariableReferenceExpressionConfig"
-        }
-      }
-    },
-    "AggregatorType": {
-      "title": "AggregatorType",
-      "description": "Defines the types of Aggregators.",
-      "enum": [
-        "mean",
-        "sum"
-      ],
-      "type": "string"
-    },
     "AzureAISearchIndex": {
       "description": "Azure AI Search Index.",
       "required": [
@@ -2053,89 +1582,6 @@
         }
       },
       "discriminator": "kind"
-    },
-    "BaseEvalRunStats": {
-      "title": "BaseEvalRunStats",
-      "description": "Defines the values of a evaluation job.",
-      "type": "object",
-      "properties": {
-        "num_data_source_items": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "num_samples": {
-          "format": "int32",
-          "type": "integer"
-        }
-      }
-    },
-    "BaseRunApiObject": {
-      "title": "BaseRunApiObject",
-      "required": [
-        "run_type",
-        "status"
-      ],
-      "type": "object",
-      "properties": {
-        "object": {
-          "$ref": "#/definitions/TypeDiscriminator"
-        },
-        "created_at": {
-          "format": "unixtime",
-          "description": "A timestamp when this job or item was created (in unix epochs).",
-          "type": "integer",
-          "readOnly": true
-        },
-        "id": {
-          "description": "The identity of this item.",
-          "type": "string",
-          "readOnly": true
-        },
-        "org_id": {
-          "description": "The organisation id of this evaluation run. Unused on Azure OpenAI; compatibility for OpenAI only.",
-          "type": "string"
-        },
-        "user_id": {
-          "description": "The user id of this evaluation run. Unused on Azure OpenAI; compatibility for OpenAI only.",
-          "type": "string"
-        },
-        "run_type": {
-          "$ref": "#/definitions/RunType"
-        },
-        "status": {
-          "title": "EvalRunStatus",
-          "description": "The status of this run or item.",
-          "allOf": [
-            {
-              "$ref": "#/definitions/EvalRunStatusValidating"
-            }
-          ]
-        },
-        "evaluated_model_name": {
-          "type": "string",
-          "readOnly": true
-        },
-        "display_name": {
-          "type": "string"
-        },
-        "updated_at": {
-          "format": "unixtime",
-          "description": "A timestamp when this job or item was created (in unix epochs).",
-          "type": "integer",
-          "readOnly": true
-        },
-        "aggregation_outputs": {
-          "$ref": "#/definitions/AggregationResultList"
-        },
-        "aggregation_file_id": {
-          "type": "string",
-          "readOnly": true
-        },
-        "output_data_fileId": {
-          "type": "string",
-          "readOnly": true
-        }
-      }
     },
     "Batch": {
       "title": "Batch",
@@ -2418,42 +1864,6 @@
         }
       }
     },
-    "BleuScoreGraderConfig": {
-      "title": "BleuScoreGraderConfig",
-      "required": [
-        "hypothesis",
-        "reference",
-        "type"
-      ],
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/NonModelGraderConfig"
-        }
-      ],
-      "properties": {
-        "type": {
-          "minLength": 1,
-          "type": "string"
-        },
-        "reference": {
-          "title": "ExpressionConfig",
-          "allOf": [
-            {
-              "$ref": "#/definitions/VariableReferenceExpressionConfig"
-            }
-          ]
-        },
-        "hypothesis": {
-          "title": "ExpressionConfig",
-          "allOf": [
-            {
-              "$ref": "#/definitions/VariableReferenceExpressionConfig"
-            }
-          ]
-        }
-      }
-    },
     "Capabilities": {
       "title": "Capabilities",
       "description": "The capabilities of a base or fine tune model.",
@@ -2488,92 +1898,6 @@
         }
       }
     },
-    "ChatCriteriaModelGraderConfig": {
-      "title": "ChatCriteriaModelGraderConfig",
-      "required": [
-        "conversation",
-        "criteria",
-        "false_grade",
-        "model_name",
-        "response",
-        "true_grade",
-        "type"
-      ],
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/GraderConfig"
-        }
-      ],
-      "properties": {
-        "type": {
-          "minLength": 1,
-          "type": "string"
-        },
-        "model_name": {
-          "minLength": 1,
-          "type": "string"
-        },
-        "conversation": {
-          "title": "ExpressionConfig",
-          "allOf": [
-            {
-              "$ref": "#/definitions/VariableReferenceExpressionConfig"
-            }
-          ]
-        },
-        "response": {
-          "title": "ExpressionConfig",
-          "allOf": [
-            {
-              "$ref": "#/definitions/VariableReferenceExpressionConfig"
-            }
-          ]
-        },
-        "criteria": {
-          "title": "ExpressionConfig",
-          "allOf": [
-            {
-              "$ref": "#/definitions/VariableReferenceExpressionConfig"
-            }
-          ]
-        },
-        "true_grade": {
-          "format": "float",
-          "type": "number"
-        },
-        "false_grade": {
-          "format": "float",
-          "type": "number"
-        }
-      }
-    },
-    "ChatMessage": {
-      "title": "ChatMessage",
-      "required": [
-        "content",
-        "role"
-      ],
-      "type": "object",
-      "properties": {
-        "role": {
-          "$ref": "#/definitions/ChatMessageRole"
-        },
-        "content": {
-          "minLength": 1,
-          "type": "string"
-        }
-      }
-    },
-    "ChatMessageRole": {
-      "title": "ChatMessageRole",
-      "enum": [
-        "system",
-        "user",
-        "assistant"
-      ],
-      "type": "string"
-    },
     "ChunkingSettings": {
       "type": "object",
       "title": "ChunkingSettings",
@@ -2581,66 +1905,6 @@
       "properties": {
         "maxChunkSizeInTokens": {
           "type": "integer"
-        }
-      }
-    },
-    "ClosedQAModelGraderConfig": {
-      "title": "ClosedQAModelGraderConfig",
-      "required": [
-        "criterion",
-        "false_grade",
-        "model_name",
-        "submission",
-        "task",
-        "true_grade",
-        "type"
-      ],
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/GraderConfig"
-        }
-      ],
-      "properties": {
-        "type": {
-          "minLength": 1,
-          "type": "string"
-        },
-        "model_name": {
-          "minLength": 1,
-          "type": "string"
-        },
-        "task": {
-          "title": "ExpressionConfig",
-          "allOf": [
-            {
-              "$ref": "#/definitions/VariableReferenceExpressionConfig"
-            }
-          ]
-        },
-        "submission": {
-          "title": "ExpressionConfig",
-          "allOf": [
-            {
-              "$ref": "#/definitions/VariableReferenceExpressionConfig"
-            }
-          ]
-        },
-        "criterion": {
-          "title": "ExpressionConfig",
-          "allOf": [
-            {
-              "$ref": "#/definitions/VariableReferenceExpressionConfig"
-            }
-          ]
-        },
-        "true_grade": {
-          "format": "float",
-          "type": "number"
-        },
-        "false_grade": {
-          "format": "float",
-          "type": "number"
         }
       }
     },
@@ -2755,49 +2019,6 @@
         ]
       }
     },
-    "ConstantExpressionConfig": {
-      "title": "ConstantExpressionConfig",
-      "required": [
-        "type",
-        "value"
-      ],
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ExpressionConfig"
-        }
-      ],
-      "properties": {
-        "type": {
-          "minLength": 1,
-          "type": "string"
-        },
-        "value": {}
-      }
-    },
-    "ConstantGraderConfig": {
-      "title": "ConstantGraderConfig",
-      "required": [
-        "output_grade",
-        "type"
-      ],
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/NonModelGraderConfig"
-        }
-      ],
-      "properties": {
-        "type": {
-          "minLength": 1,
-          "type": "string"
-        },
-        "output_grade": {
-          "format": "float",
-          "type": "number"
-        }
-      }
-    },
     "CosmosDBIndex": {
       "description": "CosmosDB Index.",
       "required": [
@@ -2873,64 +2094,6 @@
       ],
       "x-ms-discriminator-value": "CustomCompute"
     },
-    "DataSourceConfig": {
-      "title": "DataSourceConfig",
-      "required": [
-        "type"
-      ],
-      "type": "object",
-      "properties": {
-        "type": {
-          "minLength": 1,
-          "type": "string"
-        }
-      },
-      "discriminator": "type"
-    },
-    "DataSourceConfigFileType": {
-      "title": "DataSourceConfigFileType",
-      "description": "The type of a file.",
-      "enum": [
-        "jsonl"
-      ],
-      "type": "string"
-    },
-    "DataSourceItemSchema": {
-      "title": "DataSourceItemSchema",
-      "type": "object",
-      "properties": {
-        "fields": {
-          "title": "IList`1",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/DataSourceSchemaField"
-          }
-        }
-      }
-    },
-    "DataSourceSchemaField": {
-      "title": "DataSourceSchemaField",
-      "type": "object",
-      "properties": {
-        "name": {
-          "type": "string"
-        },
-        "type": {
-          "$ref": "#/definitions/DataSourceSchemaFieldType"
-        }
-      }
-    },
-    "DataSourceSchemaFieldType": {
-      "title": "DataSourceSchemaFieldType",
-      "enum": [
-        "string",
-        "number",
-        "boolean",
-        "object",
-        "array"
-      ],
-      "type": "string"
-    },
     "DeploymentConnection": {
       "description": "Relative deployment connection.",
       "allOf": [
@@ -2957,64 +2120,6 @@
           "format": "unixtime",
           "description": "The end date of inference support of this model.",
           "type": "integer"
-        }
-      }
-    },
-    "DiscreteClassificationModelGraderConfig": {
-      "title": "DiscreteClassificationModelGraderConfig",
-      "required": [
-        "invalid_grade",
-        "labels",
-        "model_name",
-        "prompt",
-        "type"
-      ],
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/GraderConfig"
-        }
-      ],
-      "properties": {
-        "type": {
-          "minLength": 1,
-          "type": "string"
-        },
-        "model_name": {
-          "minLength": 1,
-          "type": "string"
-        },
-        "prompt": {
-          "title": "ExpressionConfig",
-          "allOf": [
-            {
-              "$ref": "#/definitions/VariableReferenceExpressionConfig"
-            }
-          ]
-        },
-        "invalid_grade": {
-          "format": "float",
-          "type": "number"
-        },
-        "labels": {
-          "title": "IList`1",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/DiscreteClassificationModelGraderLabelConfig"
-          }
-        }
-      }
-    },
-    "DiscreteClassificationModelGraderLabelConfig": {
-      "title": "DiscreteClassificationModelGraderLabelConfig",
-      "type": "object",
-      "properties": {
-        "text": {
-          "type": "string"
-        },
-        "grade": {
-          "format": "float",
-          "type": "number"
         }
       }
     },
@@ -3116,10 +2221,7 @@
         "internalFailure",
         "quotaExceeded",
         "jsonlValidationFailed",
-        "fileImportFailed",
-        "tooManyRequests",
-        "unauthorized",
-        "contentFilter"
+        "fileImportFailed"
       ],
       "type": "string",
       "x-ms-enum": {
@@ -3169,18 +2271,6 @@
           {
             "value": "fileImportFailed",
             "description": "Import of file failed."
-          },
-          {
-            "value": "tooManyRequests",
-            "description": "Too many requests. Please retry later."
-          },
-          {
-            "value": "unauthorized",
-            "description": "The current user/api key is not authorized for the operation."
-          },
-          {
-            "value": "contentFilter",
-            "description": "Image generation failed as a result of our safety system."
           }
         ]
       }
@@ -3195,200 +2285,6 @@
       "properties": {
         "error": {
           "$ref": "#/definitions/Error"
-        }
-      }
-    },
-    "EvalCreateRunRequestBody": {
-      "title": "EvalCreateRunRequestBody",
-      "description": "Defines the values of an evaluation job.",
-      "required": [
-        "pipeline_config",
-        "run_type"
-      ],
-      "type": "object",
-      "properties": {
-        "display_name": {
-          "description": "Display name for the run.",
-          "type": "string"
-        },
-        "run_type": {
-          "$ref": "#/definitions/RunType"
-        },
-        "pipeline_config": {
-          "$ref": "#/definitions/PipelineConfig"
-        }
-      }
-    },
-    "EvalDashboardPreviewFileBody": {
-      "title": "EvalDashboardPreviewFileBody",
-      "description": "Defines the values of an evaluation job.",
-      "required": [
-        "file_id"
-      ],
-      "type": "object",
-      "properties": {
-        "file_id": {
-          "description": "Display name for the run.",
-          "minLength": 1,
-          "type": "string"
-        }
-      }
-    },
-    "EvalRunAggregationOutputsApiObject": {
-      "title": "EvalRunAggregationOutputsApiObject",
-      "type": "object",
-      "properties": {
-        "object": {
-          "$ref": "#/definitions/TypeDiscriminator"
-        },
-        "run_id": {
-          "description": "The identity of this item.",
-          "type": "string",
-          "readOnly": true
-        },
-        "aggregation_outputs": {
-          "$ref": "#/definitions/AggregationResultList"
-        }
-      }
-    },
-    "EvalRunStatus": {
-      "title": "EvalRunStatus",
-      "required": [
-        "type"
-      ],
-      "type": "object",
-      "properties": {
-        "type": {
-          "minLength": 1,
-          "type": "string"
-        }
-      },
-      "discriminator": "type"
-    },
-    "EvalRunStatusFailed": {
-      "title": "EvalRunStatusFailed",
-      "required": [
-        "failure_user_message",
-        "type"
-      ],
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/EvalRunStatus"
-        }
-      ],
-      "properties": {
-        "type": {
-          "minLength": 1,
-          "type": "string"
-        },
-        "reason": {
-          "$ref": "#/definitions/FailureReason"
-        },
-        "failure_user_message": {
-          "minLength": 1,
-          "type": "string"
-        }
-      }
-    },
-    "EvalRunStatusRunning": {
-      "title": "EvalRunStatusRunning",
-      "required": [
-        "type"
-      ],
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/EvalRunStatus"
-        }
-      ],
-      "properties": {
-        "type": {
-          "minLength": 1,
-          "type": "string"
-        },
-        "approximate_percentage_complete": {
-          "format": "float",
-          "type": "number"
-        }
-      }
-    },
-    "EvalRunStatusSucceeded": {
-      "title": "EvalRunStatusSucceeded",
-      "required": [
-        "type"
-      ],
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/EvalRunStatus"
-        }
-      ],
-      "properties": {
-        "type": {
-          "minLength": 1,
-          "type": "string"
-        }
-      }
-    },
-    "EvalRunStatusValidating": {
-      "title": "EvalRunStatusValidating",
-      "required": [
-        "type"
-      ],
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/EvalRunStatus"
-        }
-      ],
-      "properties": {
-        "type": {
-          "minLength": 1,
-          "type": "string"
-        }
-      }
-    },
-    "EvalRunStatusWaiting": {
-      "title": "EvalRunStatusWaiting",
-      "required": [
-        "type"
-      ],
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/EvalRunStatus"
-        }
-      ],
-      "properties": {
-        "type": {
-          "minLength": 1,
-          "type": "string"
-        },
-        "approximate_start_time": {
-          "format": "int32",
-          "type": "integer"
-        }
-      }
-    },
-    "EvaluationRunList": {
-      "title": "EvaluationRunList",
-      "description": "Represents a list of fine tunes.",
-      "type": "object",
-      "properties": {
-        "object": {
-          "$ref": "#/definitions/TypeDiscriminator"
-        },
-        "data": {
-          "description": "The list of items.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/BaseRunApiObject"
-          }
-        },
-        "has_more": {
-          "description": "A value indicating whether the list contains more elements than returned.",
-          "type": "boolean"
         }
       }
     },
@@ -3414,103 +2310,6 @@
           }
         ]
       }
-    },
-    "ExpressionConfig": {
-      "title": "ExpressionConfig",
-      "required": [
-        "type"
-      ],
-      "type": "object",
-      "properties": {
-        "type": {
-          "minLength": 1,
-          "type": "string"
-        }
-      },
-      "discriminator": "type"
-    },
-    "FactualityModelGraderConfig": {
-      "title": "FactualityModelGraderConfig",
-      "required": [
-        "agreement_grade",
-        "differ_but_factual_agreement_grade",
-        "disagreement_grade",
-        "model_name",
-        "question",
-        "reference",
-        "submission",
-        "subset_grade",
-        "superset_grade",
-        "type"
-      ],
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/GraderConfig"
-        }
-      ],
-      "properties": {
-        "type": {
-          "minLength": 1,
-          "type": "string"
-        },
-        "model_name": {
-          "minLength": 1,
-          "type": "string"
-        },
-        "question": {
-          "title": "ExpressionConfig",
-          "allOf": [
-            {
-              "$ref": "#/definitions/VariableReferenceExpressionConfig"
-            }
-          ]
-        },
-        "reference": {
-          "title": "ExpressionConfig",
-          "allOf": [
-            {
-              "$ref": "#/definitions/VariableReferenceExpressionConfig"
-            }
-          ]
-        },
-        "submission": {
-          "title": "ExpressionConfig",
-          "allOf": [
-            {
-              "$ref": "#/definitions/VariableReferenceExpressionConfig"
-            }
-          ]
-        },
-        "subset_grade": {
-          "format": "float",
-          "type": "number"
-        },
-        "superset_grade": {
-          "format": "float",
-          "type": "number"
-        },
-        "agreement_grade": {
-          "format": "float",
-          "type": "number"
-        },
-        "disagreement_grade": {
-          "format": "float",
-          "type": "number"
-        },
-        "differ_but_factual_agreement_grade": {
-          "format": "float",
-          "type": "number"
-        }
-      }
-    },
-    "FailureReason": {
-      "title": "FailureReason",
-      "enum": [
-        "user_cancelled",
-        "internal_error"
-      ],
-      "type": "string"
     },
     "File": {
       "title": "File",
@@ -3653,68 +2452,53 @@
         }
       }
     },
-    "FilePreviewApiObject": {
-      "title": "FilePreviewApiObject",
-      "required": [
-        "file_id"
+    "FileState": {
+      "title": "FileState",
+      "description": "The state of a file.",
+      "enum": [
+        "uploaded",
+        "pending",
+        "running",
+        "processed",
+        "error",
+        "deleting",
+        "deleted"
       ],
-      "type": "object",
-      "properties": {
-        "object": {
-          "$ref": "#/definitions/TypeDiscriminator"
-        },
-        "file_id": {
-          "minLength": 1,
-          "type": "string"
-        },
-        "preview": {
-          "title": "IList`1",
-          "type": "array",
-          "items": {
-            "title": "IDictionary`2",
-            "type": "object",
-            "additionalProperties": {}
+      "type": "string",
+      "readOnly": true,
+      "x-ms-enum": {
+        "name": "FileState",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "uploaded",
+            "description": "The file has been uploaded but it's not yet processed. This state is not returned by Azure OpenAI and exposed only for compatibility. It can be categorized as an inactive state."
+          },
+          {
+            "value": "pending",
+            "description": "The operation was created and is not queued to be processed in the future. It can be categorized as an inactive state."
+          },
+          {
+            "value": "running",
+            "description": "The operation has started to be processed. It can be categorized as an active state."
+          },
+          {
+            "value": "processed",
+            "description": "The operation has successfully be processed and is ready for consumption. It can be categorized as a terminal state."
+          },
+          {
+            "value": "error",
+            "description": "The operation has completed processing with a failure and cannot be further consumed. It can be categorized as a terminal state."
+          },
+          {
+            "value": "deleting",
+            "description": "The entity is ni the process to be deleted. This state is not returned by Azure OpenAI and exposed only for compatibility. It can be categorized as an active state."
+          },
+          {
+            "value": "deleted",
+            "description": "The entity has been deleted but may still be referenced by other entities predating the deletion. It can be categorized as a terminal state."
           }
-        },
-        "item_schema": {
-          "$ref": "#/definitions/DataSourceItemSchema"
-        },
-        "error": {
-          "type": "string"
-        }
-      }
-    },
-    "FileServiceDataSourceConfig": {
-      "title": "FileServiceDataSourceConfig",
-      "required": [
-        "file_id",
-        "file_type",
-        "type"
-      ],
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/DataSourceConfig"
-        }
-      ],
-      "properties": {
-        "type": {
-          "minLength": 1,
-          "type": "string"
-        },
-        "file_type": {
-          "$ref": "#/definitions/DataSourceConfigFileType"
-        },
-        "file_id": {
-          "description": "The file id.",
-          "minLength": 1,
-          "type": "string"
-        },
-        "max_items": {
-          "format": "int32",
-          "description": "The type of file.",
-          "type": "integer"
-        }
+        ]
       }
     },
     "FineTuningHyperParameters": {
@@ -4095,64 +2879,6 @@
         }
       }
     },
-    "GleuScoreGraderConfig": {
-      "title": "GleuScoreGraderConfig",
-      "required": [
-        "hypothesis",
-        "reference",
-        "type"
-      ],
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/NonModelGraderConfig"
-        }
-      ],
-      "properties": {
-        "type": {
-          "minLength": 1,
-          "type": "string"
-        },
-        "reference": {
-          "title": "ExpressionConfig",
-          "allOf": [
-            {
-              "$ref": "#/definitions/VariableReferenceExpressionConfig"
-            }
-          ]
-        },
-        "hypothesis": {
-          "title": "ExpressionConfig",
-          "allOf": [
-            {
-              "$ref": "#/definitions/VariableReferenceExpressionConfig"
-            }
-          ]
-        }
-      }
-    },
-    "GraderConfig": {
-      "title": "GraderConfig",
-      "required": [
-        "name",
-        "type"
-      ],
-      "type": "object",
-      "properties": {
-        "type": {
-          "minLength": 1,
-          "type": "string"
-        },
-        "name": {
-          "minLength": 1,
-          "type": "string"
-        },
-        "description": {
-          "type": "string"
-        }
-      },
-      "discriminator": "type"
-    },
     "IngestionError": {
       "title": "IngestionError",
       "description": "The details of the ingestion error",
@@ -4470,42 +3196,6 @@
         ]
       }
     },
-    "MeteorScoreGraderConfig": {
-      "title": "MeteorScoreGraderConfig",
-      "required": [
-        "hypothesis",
-        "reference",
-        "type"
-      ],
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/NonModelGraderConfig"
-        }
-      ],
-      "properties": {
-        "type": {
-          "minLength": 1,
-          "type": "string"
-        },
-        "reference": {
-          "title": "ExpressionConfig",
-          "allOf": [
-            {
-              "$ref": "#/definitions/VariableReferenceExpressionConfig"
-            }
-          ]
-        },
-        "hypothesis": {
-          "title": "ExpressionConfig",
-          "allOf": [
-            {
-              "$ref": "#/definitions/VariableReferenceExpressionConfig"
-            }
-          ]
-        }
-      }
-    },
     "Model": {
       "title": "Model",
       "description": "A model is either a base model or the result of a successful fine tune job.",
@@ -4552,54 +3242,6 @@
         }
       }
     },
-    "ModelGraderConfig": {
-      "title": "ModelGraderConfig",
-      "required": [
-        "model_name",
-        "output_graders",
-        "sampling_params",
-        "trajectory_template",
-        "type"
-      ],
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/GraderConfig"
-        }
-      ],
-      "properties": {
-        "type": {
-          "minLength": 1,
-          "type": "string"
-        },
-        "trajectory_template": {
-          "title": "IList`1",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ChatMessage"
-          }
-        },
-        "model_name": {
-          "minLength": 1,
-          "type": "string"
-        },
-        "sampling_params": {
-          "$ref": "#/definitions/ModelSamplingParams"
-        },
-        "output_graders": {
-          "title": "IList`1",
-          "type": "array",
-          "items": {
-            "title": "GraderConfig",
-            "allOf": [
-              {
-                "$ref": "#/definitions/SetMembershipGraderConfig"
-              }
-            ]
-          }
-        }
-      }
-    },
     "ModelList": {
       "title": "ModelList",
       "description": "Represents a list of models.",
@@ -4616,116 +3258,6 @@
           }
         }
       }
-    },
-    "ModelSamplingParams": {
-      "title": "ModelSamplingParams",
-      "required": [
-        "max_tokens",
-        "temperature"
-      ],
-      "type": "object",
-      "properties": {
-        "seed": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "temperature": {
-          "format": "float",
-          "type": "number"
-        },
-        "max_tokens": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "top_p": {
-          "format": "float",
-          "type": "number"
-        }
-      }
-    },
-    "ModelUsage": {
-      "title": "ModelUsage",
-      "type": "object",
-      "properties": {
-        "model_config": {
-          "title": "IDictionary`2",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "model_name": {
-          "type": "string"
-        },
-        "invocation_count": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "prompt_tokens": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "completion_tokens": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "total_tokens": {
-          "format": "int32",
-          "type": "integer"
-        }
-      }
-    },
-    "MulticlassClassificationGraderConfig": {
-      "title": "MulticlassClassificationGraderConfig",
-      "required": [
-        "case_sensitive",
-        "hypothesis_set",
-        "reference_set",
-        "type"
-      ],
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/NonModelGraderConfig"
-        }
-      ],
-      "properties": {
-        "type": {
-          "minLength": 1,
-          "type": "string"
-        },
-        "reference_set": {
-          "$ref": "#/definitions/StringDelimitedSetExpressionConfig"
-        },
-        "hypothesis_set": {
-          "$ref": "#/definitions/StringDelimitedSetExpressionConfig"
-        },
-        "case_sensitive": {
-          "type": "boolean"
-        }
-      }
-    },
-    "NonModelGraderConfig": {
-      "title": "NonModelGraderConfig",
-      "required": [
-        "name",
-        "type"
-      ],
-      "type": "object",
-      "properties": {
-        "type": {
-          "minLength": 1,
-          "type": "string"
-        },
-        "name": {
-          "minLength": 1,
-          "type": "string"
-        },
-        "description": {
-          "type": "string"
-        }
-      },
-      "discriminator": "type"
     },
     "OperationState": {
       "title": "OperationState",
@@ -4761,102 +3293,6 @@
         ]
       }
     },
-    "OutputDataItemApiObject": {
-      "title": "OutputDataItemApiObject",
-      "type": "object",
-      "properties": {
-        "object": {
-          "$ref": "#/definitions/TypeDiscriminator"
-        },
-        "id": {
-          "description": "The identity of this item.",
-          "type": "string",
-          "readOnly": true
-        },
-        "run_id": {
-          "type": "string",
-          "readOnly": true
-        },
-        "data_source_idx": {
-          "format": "int32",
-          "type": "integer",
-          "readOnly": true
-        },
-        "item": {
-          "title": "IDictionary`2",
-          "type": "object",
-          "additionalProperties": {},
-          "readOnly": true
-        },
-        "sample": {
-          "$ref": "#/definitions/Sample"
-        },
-        "grades": {
-          "title": "IDictionary`2",
-          "type": "object",
-          "additionalProperties": {
-            "format": "float",
-            "type": "number"
-          },
-          "readOnly": true
-        },
-        "grader_samples": {
-          "title": "IDictionary`2",
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/Sample"
-          },
-          "readOnly": true
-        }
-      }
-    },
-    "OutputDataItemList": {
-      "title": "OutputDataItemList",
-      "description": "Represents a list of fine tunes.",
-      "type": "object",
-      "properties": {
-        "object": {
-          "$ref": "#/definitions/TypeDiscriminator"
-        },
-        "data": {
-          "description": "The list of items.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/OutputDataItemApiObject"
-          }
-        },
-        "has_more": {
-          "description": "A value indicating whether the list contains more elements than returned.",
-          "type": "boolean"
-        }
-      }
-    },
-    "OutputEvalRunStats": {
-      "title": "OutputEvalRunStats",
-      "description": "Defines the values of a evaluation job.",
-      "type": "object",
-      "properties": {
-        "num_data_source_items": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "num_samples": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "num_errors": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "per_model_usage": {
-          "title": "IList`1",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ModelUsage"
-          }
-        }
-      }
-    },
     "PineconeIndex": {
       "description": "Pinecone Index.",
       "required": [
@@ -4878,51 +3314,6 @@
       ],
       "x-ms-discriminator-value": "Pinecone"
     },
-    "PipelineConfig": {
-      "title": "PipelineConfig",
-      "required": [
-        "aggregators",
-        "data_source",
-        "graders",
-        "sample_generator"
-      ],
-      "type": "object",
-      "properties": {
-        "data_source": {
-          "title": "DataSourceConfig",
-          "description": "The data source. For now its a file-id, but needs to be changed to OpenAI data source.",
-          "allOf": [
-            {
-              "$ref": "#/definitions/FileServiceDataSourceConfig"
-            }
-          ]
-        },
-        "sample_generator": {
-          "$ref": "#/definitions/SampleGeneratorConfig"
-        },
-        "graders": {
-          "title": "IList`1",
-          "description": "The list of graders.",
-          "type": "array",
-          "items": {
-            "title": "GraderConfig",
-            "allOf": [
-              {
-                "$ref": "#/definitions/SetMembershipGraderConfig"
-              }
-            ]
-          }
-        },
-        "aggregators": {
-          "title": "IList`1",
-          "description": "The list of aggregators.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/AggregatorConfig"
-          }
-        }
-      }
-    },
     "Purpose": {
       "title": "Purpose",
       "description": "The intended purpose of the uploaded documents. Use \"fine-tune\" for fine-tuning. This allows us to validate the format of the uploaded file.",
@@ -4930,9 +3321,7 @@
         "fine-tune",
         "fine-tune-results",
         "assistants",
-        "assistants_output",
-        "batch",
-        "batch_output"
+        "assistants_output"
       ],
       "type": "string",
       "readOnly": true,
@@ -4955,250 +3344,8 @@
           {
             "value": "assistants_output",
             "description": "This file contains the results of an assistant."
-          },
-          {
-            "value": "batch",
-            "description": "This file contains the input data for a batch."
-          },
-          {
-            "value": "batch_output",
-            "description": "This file contains the results of a batch."
           }
         ]
-      }
-    },
-    "RougeScoreGraderConfig": {
-      "title": "RougeScoreGraderConfig",
-      "required": [
-        "hypothesis",
-        "reference",
-        "rouge_type",
-        "type"
-      ],
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/NonModelGraderConfig"
-        }
-      ],
-      "properties": {
-        "type": {
-          "minLength": 1,
-          "type": "string"
-        },
-        "reference": {
-          "title": "ExpressionConfig",
-          "allOf": [
-            {
-              "$ref": "#/definitions/VariableReferenceExpressionConfig"
-            }
-          ]
-        },
-        "hypothesis": {
-          "title": "ExpressionConfig",
-          "allOf": [
-            {
-              "$ref": "#/definitions/VariableReferenceExpressionConfig"
-            }
-          ]
-        },
-        "rouge_type": {
-          "$ref": "#/definitions/RougeType"
-        }
-      }
-    },
-    "RougeType": {
-      "title": "RougeType",
-      "enum": [
-        "rouge-1",
-        "rouge-2",
-        "rouge-3",
-        "rouge-4",
-        "rouge-5",
-        "rouge-l"
-      ],
-      "type": "string"
-    },
-    "RunApiObject": {
-      "title": "RunApiObject",
-      "description": "Defines the values of a evaluation job.",
-      "required": [
-        "pipeline_config",
-        "run_type",
-        "status"
-      ],
-      "type": "object",
-      "properties": {
-        "object": {
-          "$ref": "#/definitions/TypeDiscriminator"
-        },
-        "created_at": {
-          "format": "unixtime",
-          "description": "A timestamp when this job or item was created (in unix epochs).",
-          "type": "integer",
-          "readOnly": true
-        },
-        "id": {
-          "description": "The identity of this item.",
-          "type": "string",
-          "readOnly": true
-        },
-        "org_id": {
-          "description": "The organisation id of this evaluation run. Unused on Azure OpenAI; compatibility for OpenAI only.",
-          "type": "string"
-        },
-        "user_id": {
-          "description": "The user id of this evaluation run. Unused on Azure OpenAI; compatibility for OpenAI only.",
-          "type": "string"
-        },
-        "run_type": {
-          "$ref": "#/definitions/RunType"
-        },
-        "status": {
-          "title": "EvalRunStatus",
-          "description": "The status of this run or item.",
-          "allOf": [
-            {
-              "$ref": "#/definitions/EvalRunStatusValidating"
-            }
-          ]
-        },
-        "evaluated_model_name": {
-          "type": "string",
-          "readOnly": true
-        },
-        "display_name": {
-          "type": "string"
-        },
-        "updated_at": {
-          "format": "unixtime",
-          "description": "A timestamp when this job or item was created (in unix epochs).",
-          "type": "integer",
-          "readOnly": true
-        },
-        "aggregation_outputs": {
-          "$ref": "#/definitions/AggregationResultList"
-        },
-        "aggregation_file_id": {
-          "type": "string",
-          "readOnly": true
-        },
-        "output_data_fileId": {
-          "type": "string",
-          "readOnly": true
-        },
-        "pipeline_config": {
-          "$ref": "#/definitions/PipelineConfig"
-        },
-        "run_stats": {
-          "$ref": "#/definitions/OutputEvalRunStats"
-        },
-        "validation_stats": {
-          "$ref": "#/definitions/BaseEvalRunStats"
-        }
-      }
-    },
-    "RunStatus": {
-      "title": "RunStatus",
-      "description": "The state of a evaluation.",
-      "enum": [
-        "all",
-        "active",
-        "complete",
-        "failed",
-        "success"
-      ],
-      "type": "string"
-    },
-    "RunStatusPollApiObject": {
-      "title": "RunStatusPollApiObject",
-      "type": "object",
-      "properties": {
-        "object": {
-          "$ref": "#/definitions/TypeDiscriminator"
-        },
-        "run_id": {
-          "description": "The identity of this item.",
-          "type": "string",
-          "readOnly": true
-        },
-        "status": {
-          "title": "EvalRunStatus",
-          "description": "The status of this run or item.",
-          "allOf": [
-            {
-              "$ref": "#/definitions/EvalRunStatusValidating"
-            }
-          ],
-          "readOnly": true
-        },
-        "cancel_requested_at": {
-          "format": "int32",
-          "description": "A timestamp when this job or item was cancelled (in unix epochs).",
-          "type": "integer",
-          "readOnly": true
-        }
-      }
-    },
-    "RunType": {
-      "title": "RunType",
-      "description": "The state of a file.",
-      "enum": [
-        "dry-run",
-        "full-run",
-        "batch-run"
-      ],
-      "type": "string"
-    },
-    "Sample": {
-      "title": "Sample",
-      "type": "object",
-      "properties": {
-        "object": {
-          "$ref": "#/definitions/TypeDiscriminator"
-        },
-        "trajectory": {
-          "title": "IList`1",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ChatMessage"
-          },
-          "readOnly": true
-        },
-        "outputs": {
-          "title": "IList`1",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ChatMessage"
-          },
-          "readOnly": true
-        }
-      },
-      "readOnly": true
-    },
-    "SampleGeneratorConfig": {
-      "title": "SampleGeneratorConfig",
-      "required": [
-        "model_name",
-        "sampling_params",
-        "trajectory_template"
-      ],
-      "type": "object",
-      "properties": {
-        "trajectory_template": {
-          "title": "IList`1",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ChatMessage"
-          }
-        },
-        "model_name": {
-          "minLength": 1,
-          "type": "string"
-        },
-        "sampling_params": {
-          "$ref": "#/definitions/ModelSamplingParams"
-        }
       }
     },
     "ServerlessCompute": {
@@ -5222,242 +3369,6 @@
         }
       ],
       "x-ms-discriminator-value": "ServerlessCompute"
-    },
-    "SetComparisonGraderConfig": {
-      "title": "SetComparisonGraderConfig",
-      "required": [
-        "case_sensitive",
-        "comparison_disjoint_grade",
-        "comparison_equal_grade",
-        "comparison_intersect_grade",
-        "comparison_subset_grade",
-        "comparison_superset_grade",
-        "hypothesis_set",
-        "reference_set",
-        "type"
-      ],
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/NonModelGraderConfig"
-        }
-      ],
-      "properties": {
-        "type": {
-          "minLength": 1,
-          "type": "string"
-        },
-        "reference_set": {
-          "$ref": "#/definitions/StringDelimitedSetExpressionConfig"
-        },
-        "hypothesis_set": {
-          "$ref": "#/definitions/StringDelimitedSetExpressionConfig"
-        },
-        "case_sensitive": {
-          "type": "boolean"
-        },
-        "comparison_equal_grade": {
-          "format": "float",
-          "type": "number"
-        },
-        "comparison_subset_grade": {
-          "format": "float",
-          "type": "number"
-        },
-        "comparison_superset_grade": {
-          "format": "float",
-          "type": "number"
-        },
-        "comparison_intersect_grade": {
-          "format": "float",
-          "type": "number"
-        },
-        "comparison_disjoint_grade": {
-          "format": "float",
-          "type": "number"
-        }
-      }
-    },
-    "SetMembershipGraderConfig": {
-      "title": "SetMembershipGraderConfig",
-      "required": [
-        "absent_grade",
-        "case_sensitive",
-        "element",
-        "present_grade",
-        "set",
-        "type"
-      ],
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/NonModelGraderConfig"
-        }
-      ],
-      "properties": {
-        "type": {
-          "minLength": 1,
-          "type": "string"
-        },
-        "element": {
-          "title": "ExpressionConfig",
-          "allOf": [
-            {
-              "$ref": "#/definitions/VariableReferenceExpressionConfig"
-            }
-          ]
-        },
-        "set": {
-          "title": "HashSet`1",
-          "uniqueItems": true,
-          "type": "array",
-          "items": {
-            "title": "ExpressionConfig",
-            "allOf": [
-              {
-                "$ref": "#/definitions/VariableReferenceExpressionConfig"
-              }
-            ]
-          }
-        },
-        "case_sensitive": {
-          "type": "boolean"
-        },
-        "present_grade": {
-          "format": "float",
-          "type": "number"
-        },
-        "absent_grade": {
-          "format": "float",
-          "type": "number"
-        }
-      }
-    },
-    "StringCheckGraderConfig": {
-      "title": "StringCheckGraderConfig",
-      "required": [
-        "case_sensitive",
-        "false_grade",
-        "lhs",
-        "operation",
-        "rhs",
-        "true_grade",
-        "type"
-      ],
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/NonModelGraderConfig"
-        }
-      ],
-      "properties": {
-        "type": {
-          "minLength": 1,
-          "type": "string"
-        },
-        "lhs": {
-          "title": "ExpressionConfig",
-          "allOf": [
-            {
-              "$ref": "#/definitions/VariableReferenceExpressionConfig"
-            }
-          ]
-        },
-        "rhs": {
-          "title": "ExpressionConfig",
-          "allOf": [
-            {
-              "$ref": "#/definitions/VariableReferenceExpressionConfig"
-            }
-          ]
-        },
-        "case_sensitive": {
-          "type": "boolean"
-        },
-        "operation": {
-          "$ref": "#/definitions/StringCheckGraderConfigOperation"
-        },
-        "true_grade": {
-          "format": "float",
-          "type": "number"
-        },
-        "false_grade": {
-          "format": "float",
-          "type": "number"
-        }
-      }
-    },
-    "StringCheckGraderConfigOperation": {
-      "title": "StringCheckGraderConfigOperation",
-      "enum": [
-        "equals",
-        "contains",
-        "starts-with",
-        "ends-with"
-      ],
-      "type": "string"
-    },
-    "StringCountGraderConfig": {
-      "title": "StringCountGraderConfig",
-      "required": [
-        "case_sensitive",
-        "hypothesis",
-        "reference",
-        "type"
-      ],
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/NonModelGraderConfig"
-        }
-      ],
-      "properties": {
-        "type": {
-          "minLength": 1,
-          "type": "string"
-        },
-        "reference": {
-          "title": "ExpressionConfig",
-          "allOf": [
-            {
-              "$ref": "#/definitions/VariableReferenceExpressionConfig"
-            }
-          ]
-        },
-        "hypothesis": {
-          "title": "ExpressionConfig",
-          "allOf": [
-            {
-              "$ref": "#/definitions/VariableReferenceExpressionConfig"
-            }
-          ]
-        },
-        "case_sensitive": {
-          "type": "boolean"
-        }
-      }
-    },
-    "StringDelimitedSetExpressionConfig": {
-      "title": "StringDelimitedSetExpressionConfig",
-      "required": [
-        "delimiter",
-        "expression"
-      ],
-      "type": "object",
-      "properties": {
-        "delimiter": {
-          "minLength": 1,
-          "type": "string"
-        },
-        "expression": {
-          "title": "ExpressionConfig",
-          "allOf": [
-            {
-              "$ref": "#/definitions/VariableReferenceExpressionConfig"
-            }
-          ]
-        }
-      }
     },
     "SystemComputeDatasource": {
       "title": "SystemComputeDatasource",
@@ -5620,29 +3531,6 @@
             "description": "Pinecone Index."
           }
         ]
-      }
-    },
-    "TemplateStringExpressionConfig": {
-      "title": "TemplateStringExpressionConfig",
-      "required": [
-        "template",
-        "type"
-      ],
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ExpressionConfig"
-        }
-      ],
-      "properties": {
-        "type": {
-          "minLength": 1,
-          "type": "string"
-        },
-        "template": {
-          "minLength": 1,
-          "type": "string"
-        }
       }
     },
     "TypeDiscriminator": {
@@ -5936,34 +3824,6 @@
           }
         }
       ]
-    },
-    "VariableReferenceExpressionConfig": {
-      "title": "VariableReferenceExpressionConfig",
-      "required": [
-        "namespace_name",
-        "type",
-        "variable_name"
-      ],
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ExpressionConfig"
-        }
-      ],
-      "properties": {
-        "type": {
-          "minLength": 1,
-          "type": "string"
-        },
-        "namespace_name": {
-          "minLength": 1,
-          "type": "string"
-        },
-        "variable_name": {
-          "minLength": 1,
-          "type": "string"
-        }
-      }
     },
     "WorkspaceConnection": {
       "description": "AML Workspace connection.",
