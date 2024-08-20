@@ -1,8 +1,10 @@
 import "@typespec/http";
 import "@typespec/rest";
 import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-client-generator-core";
 
 using Azure.Core;
+using Azure.ClientGenerator.Core;
 using TypeSpec.Http;
 using TypeSpec.Rest;
 
@@ -64,7 +66,8 @@ union DetectionModel {
   "detection_03",
 }
 
-alias UserDefinedFields = {
+@doc("User defined fields for object creation.")
+model UserDefinedFields {
   @doc("User defined name, maximum length is 128.")
   @maxLength(128)
   @minLength(1)
@@ -73,9 +76,10 @@ alias UserDefinedFields = {
   @doc("Optional user defined data. Length should not exceed 16K.")
   @maxLength(16384)
   userData?: string;
-};
+}
 
-alias UserDefinedFieldsForUpdate = {
+@doc("User defined fields for object update.")
+model UserDefinedFieldsForUpdate {
   @doc("User defined name, maximum length is 128.")
   @maxLength(128)
   @minLength(1)
@@ -84,7 +88,7 @@ alias UserDefinedFieldsForUpdate = {
   @doc("Optional user defined data. Length should not exceed 16K.")
   @maxLength(16384)
   userData?: string;
-};
+}
 
 @doc("Common model for face list and person group.")
 model BaseCollection {
@@ -94,18 +98,20 @@ model BaseCollection {
   recognitionModel?: RecognitionModel;
 }
 
-alias CreateCollectionOptions = {
+@doc("Model for creating face collection.")
+model CreateCollectionRequest {
   ...UserDefinedFields;
 
   @doc("The 'recognitionModel' associated with this face list. Supported 'recognitionModel' values include 'recognition_01', 'recognition_02, 'recognition_03', and 'recognition_04'. The default value is 'recognition_01'. 'recognition_04' is recommended since its accuracy is improved on faces wearing masks compared with 'recognition_03', and its overall accuracy is improved compared with 'recognition_01' and 'recognition_02'.")
   recognitionModel?: RecognitionModel = "recognition_01";
-};
+}
 
-alias FaceUserData = {
+@doc("User defined data for persisted face.")
+model FaceUserData {
   @doc("User-provided data attached to the face. The length limit is 1K.")
   @maxLength(1024)
   userData?: string;
-};
+}
 
 @doc("Common model for persisted face.")
 @resource("persistedfaces")
@@ -118,7 +124,8 @@ model BaseFace {
   ...FaceUserData;
 }
 
-alias AddFaceOptions = {
+@doc("Query parameters for add face.")
+model AddFaceOptions {
   @doc("A face rectangle to specify the target face to be added to a person, in the format of 'targetFace=left,top,width,height'.")
   @query
   @maxItems(4)
@@ -133,7 +140,25 @@ alias AddFaceOptions = {
   @doc("User-provided data attached to the face. The size limit is 1K.")
   @maxLength(1024)
   userData?: string;
-};
+}
+
+@doc("Add face from stream request.")
+model AddFaceRequest is AddFaceOptions {
+  @doc("The format of the HTTP payload.")
+  @header
+  contentType: "application/octet-stream";
+
+  @doc("The image to be analyzed")
+  @body
+  imageContent: bytes;
+}
+
+@doc("Add face from url request.")
+model AddFaceFromUrlRequest is AddFaceOptions {
+  @clientName("uri", "csharp")
+  @doc("URL of input image.")
+  url: url;
+}
 
 @doc("Response body for adding face.")
 model AddFaceResult {
@@ -257,15 +282,12 @@ model GroupingResult {
 }
 
 alias AddFaceDescriptionInList = """
-  >
-  *
     * Higher face image quality means better recognition precision. Please consider high-quality faces: frontal, clear, and face size is 200x200 pixels (100 pixels between eyes) or bigger.
-    * Each person entry can hold up to 248 faces.
     * JPEG, PNG, GIF (the first frame), and BMP format are supported. The allowed image file size is from 1KB to 6MB.
     * "targetFace" rectangle should contain one face. Zero or multiple faces will be regarded as an error. If the provided "targetFace" rectangle is not returned from \"Detect\", there's no guarantee to detect and add the face successfully.
     * Out of detectable face size (36x36 - 4096x4096 pixels), large head-pose, or large occlusions will cause failures.
     * The minimum detectable face size is 36x36 pixels in an image no larger than 1920x1080 pixels. Images with dimensions higher than 1920x1080 pixels will need a proportionally larger minimum face size.
-    * Different 'detectionModel' values can be provided. To use and compare different detection models, please refer to https://learn.microsoft.com/azure/ai-services/computer-vision/how-to/specify-detection-model
+    * Different 'detectionModel' values can be provided. To use and compare different detection models, please refer to [here](https://learn.microsoft.com/azure/ai-services/computer-vision/how-to/specify-detection-model).
   """;
 
 alias ListRequestOptionsDescriptionInList = """
