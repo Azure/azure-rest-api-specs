@@ -1864,7 +1864,7 @@
           ],
           "type": "string",
           "x-ms-enum": {
-            "name": "SasAuth",
+            "name": "SasAuthStatus",
             "modelAsString": true,
             "values": [
               {
@@ -1879,7 +1879,7 @@
           }
         },
         "info": {
-          "description": "The information of SAS token authentication.",
+          "description": "Information about SAS tokens of each kind.",
           "readOnly": true,
           "type": "array",
           "items": {
@@ -1890,13 +1890,14 @@
     },
     "SasTokenInfo":{
       "type": "object",
-      "description": "The information of specific SAS token kind.",
+      "description": "Information about SAS tokens of a specific kind.",
       "properties":{
         "kind": {
           "description": "The kind of the SAS token.",
-          "$ref": "#/definitions/SasTokenKind"
+          "$ref": "#/definitions/SasTokenKind",
+          "readOnly": true
         },
-        "lastResetTime":{
+        "lastModifiedTime":{
           "format": "date-time",
           "description": "The last reset datetime of SAS token.",
           "type": "string",
