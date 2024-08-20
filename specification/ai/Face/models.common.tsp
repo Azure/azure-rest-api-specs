@@ -282,15 +282,12 @@ model GroupingResult {
 }
 
 alias AddFaceDescriptionInList = """
-  >
-  *
     * Higher face image quality means better recognition precision. Please consider high-quality faces: frontal, clear, and face size is 200x200 pixels (100 pixels between eyes) or bigger.
-    * Each person entry can hold up to 248 faces.
     * JPEG, PNG, GIF (the first frame), and BMP format are supported. The allowed image file size is from 1KB to 6MB.
     * "targetFace" rectangle should contain one face. Zero or multiple faces will be regarded as an error. If the provided "targetFace" rectangle is not returned from \"Detect\", there's no guarantee to detect and add the face successfully.
     * Out of detectable face size (36x36 - 4096x4096 pixels), large head-pose, or large occlusions will cause failures.
     * The minimum detectable face size is 36x36 pixels in an image no larger than 1920x1080 pixels. Images with dimensions higher than 1920x1080 pixels will need a proportionally larger minimum face size.
-    * Different 'detectionModel' values can be provided. To use and compare different detection models, please refer to https://learn.microsoft.com/azure/ai-services/computer-vision/how-to/specify-detection-model
+    * Different 'detectionModel' values can be provided. To use and compare different detection models, please refer to [here](https://learn.microsoft.com/azure/ai-services/computer-vision/how-to/specify-detection-model).
   """;
 
 alias ListRequestOptionsDescriptionInList = """
