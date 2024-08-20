@@ -56,18 +56,6 @@ model BatchCreateRequest {
   metadata?: Record<string>;
 }
 
-/** Defines the response when creating a batch. */
-@added(ServiceApiVersions.v2024_07_01_Preview)
-model BatchCreateResponse {
-  /**
-   * The status code indicating a successful batch creation response.
-   */
-  @statusCode
-  statusCode: 201;
-
-  ...Batch;
-}
-
 /** The status of a batch. */
 union BatchStatus {
   /** The input file is being validated before the batch can begin. */
@@ -107,7 +95,7 @@ model Batch {
   object: "batch";
 
   /** The OpenAI API endpoint used by the batch. */
-  endpoint: string;
+  endpoint?: string;
 
   /** The list of Batch errors. */
   errors?: BatchErrorList;
@@ -119,10 +107,10 @@ model Batch {
 
   /** The time frame within which the batch should be processed. */
   @encodedName("application/json", "completion_window")
-  completionWindow: string;
+  completionWindow?: string;
 
   /** The current status of the batch. */
-  status: BatchStatus;
+  status?: BatchStatus;
 
   /** The ID of the file containing the outputs of successfully executed requests. */
   @encodedName("application/json", "output_file_id")
@@ -135,7 +123,7 @@ model Batch {
   /** The Unix timestamp (in seconds) for when the batch was created. */
   @encodedName("application/json", "created_at")
   @encode("unixTimestamp", int32)
-  createdAt: utcDateTime;
+  createdAt?: utcDateTime;
 
   /** The Unix timestamp (in seconds) for when the batch started processing. */
   @encodedName("application/json", "in_progress_at")
@@ -181,13 +169,13 @@ model Batch {
   @encodedName("application/json", "request_counts")
   requestCounts?: {
     /** Total number of requests in the batch. */
-    total: int32;
+    total?: int32;
 
     /** Number of requests that have been completed successfully. */
-    completed: int32;
+    completed?: int32;
 
     /** Number of requests that have failed. */
-    failed: int32;
+    failed?: int32;
   };
 
   /** A set of key-value pairs that can be attached to the batch. This can be useful for storing additional information about the batch in a structured format. */

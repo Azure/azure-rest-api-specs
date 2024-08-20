@@ -137,8 +137,9 @@
         "description": "Creates and executes a batch from an uploaded file of requests.\nResponse includes details of the enqueued job including job status.\nThe ID of the result file is added to the response once complete.",
         "parameters": [
           {
-            "name": "body",
+            "name": "createBatchRequest",
             "in": "body",
+            "description": "The specification of the batch to create and execute.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/BatchCreateRequest"
@@ -146,7 +147,7 @@
           }
         ],
         "responses": {
-          "201": {
+          "200": {
             "description": "The requested new batch job.",
             "schema": {
               "$ref": "#/definitions/Batch"
@@ -2768,11 +2769,6 @@
               "description": "Number of requests that have failed."
             }
           },
-          "required": [
-            "total",
-            "completed",
-            "failed"
-          ],
           "x-ms-client-name": "requestCounts"
         },
         "metadata": {
@@ -2786,11 +2782,7 @@
       "required": [
         "id",
         "object",
-        "endpoint",
-        "input_file_id",
-        "completion_window",
-        "status",
-        "created_at"
+        "input_file_id"
       ]
     },
     "BatchCreateRequest": {

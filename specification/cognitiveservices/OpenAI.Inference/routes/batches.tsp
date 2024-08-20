@@ -46,7 +46,11 @@ op listBatches(
 @post
 @added(ServiceApiVersions.v2024_07_01_Preview)
 @route("/batches")
-op createBatch(...BatchCreateRequest): BatchCreateResponse;
+op createBatch(
+  /** The specification of the batch to create and execute. */
+  @body
+  createBatchRequest: BatchCreateRequest,
+): Batch;
 
 /**
  * Retrieves an existing batch job by its ID.
