@@ -36,3 +36,11 @@ These settings apply only when `--tag=release_2024_05_01_preview_autogen` is spe
 ``` yaml $(tag) == 'release_2024_05_01_preview_autogen'
 input-file: OpenApiV2/preview/2024-05-01-preview/assistants_generated.json
 ```
+
+## OpenAI.Assistants 2024-07-01-preview (generated)
+These settings apply only when `--tag=release_2024_07_01_preview_autogen` is specified on the command line.
+
+``` yaml $(tag) == 'release_2024_07_01_preview_autogen'
+input-file: OpenApiV2/preview/2024-07-01-preview/assistants_generated.json
+```
+
