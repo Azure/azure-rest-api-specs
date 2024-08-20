@@ -74,7 +74,7 @@
           {
             "name": "limit",
             "in": "query",
-            "description": "The number of batches to retrieve. The default is 20.",
+            "description": "Number of batches to retrieve. Defaults to 20.",
             "required": false,
             "type": "integer",
             "format": "int32"
@@ -121,11 +121,7 @@
                 }
               },
               "required": [
-                "object",
-                "data",
-                "first_id",
-                "last_id",
-                "has_more"
+                "object"
               ]
             }
           }
@@ -193,7 +189,7 @@
       }
     },
     "/batches/{batchId}/cancel": {
-      "get": {
+      "post": {
         "operationId": "CancelBatch",
         "description": "Gets details for a single batch specified by the given batchID.",
         "parameters": [
@@ -3941,8 +3937,7 @@
       },
       "required": [
         "filtered",
-        "detected",
-        "license"
+        "detected"
       ]
     },
     "ContentFilterDetailedResults": {
