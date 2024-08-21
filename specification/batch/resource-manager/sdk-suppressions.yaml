@@ -18,3 +18,12 @@ suppressions:
         - Interface Resource no longer has parameter tags
         - Removed operation Location_2.listSupportedCloudServiceSkus
         - Type of parameter securityType of interface SecurityProfile is changed from "trustedLaunch" to SecurityTypes
+  azure-sdk-for-go:
+    - package: 'sdk/resourcemanager/batch/armbatch'
+      breaking-changes:
+        - Field `CloudServiceConfiguration` of struct `DeploymentConfiguration` has been removed
+        - Field `Etag` of struct `ProxyResource` has been removed
+        - Field `Location`, `Tags` of struct `Resource` has been removed
+        - Function `*LocationClient.NewListSupportedCloudServiceSKUsPager` has been removed
+        - Struct `CloudServiceConfiguration` has been removed
+        - Type of `SecurityProfile.SecurityType` has been changed from `*string` to `*SecurityTypes`
