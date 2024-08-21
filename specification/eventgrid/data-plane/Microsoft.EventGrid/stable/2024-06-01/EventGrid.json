@@ -195,12 +195,23 @@
             "type": "string"
           },
           {
-            "name": "acknowledgeOptions",
+            "name": "body",
             "in": "body",
-            "description": "AcknowledgeOptions.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/AcknowledgeOptions"
+              "type": "object",
+              "properties": {
+                "lockTokens": {
+                  "type": "array",
+                  "description": "Array of lock tokens.",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              },
+              "required": [
+                "lockTokens"
+              ]
             }
           }
         ],
@@ -299,12 +310,23 @@
             }
           },
           {
-            "name": "releaseOptions",
+            "name": "body",
             "in": "body",
-            "description": "ReleaseOptions",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ReleaseOptions"
+              "type": "object",
+              "properties": {
+                "lockTokens": {
+                  "type": "array",
+                  "description": "Array of lock tokens.",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              },
+              "required": [
+                "lockTokens"
+              ]
             }
           }
         ],
@@ -358,12 +380,23 @@
             "type": "string"
           },
           {
-            "name": "rejectOptions",
+            "name": "body",
             "in": "body",
-            "description": "RejectOptions",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/RejectOptions"
+              "type": "object",
+              "properties": {
+                "lockTokens": {
+                  "type": "array",
+                  "description": "Array of lock tokens.",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              },
+              "required": [
+                "lockTokens"
+              ]
             }
           }
         ],
@@ -417,12 +450,23 @@
             "type": "string"
           },
           {
-            "name": "renewLockOptions",
+            "name": "body",
             "in": "body",
-            "description": "RenewLockOptions",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/RenewLockOptions"
+              "type": "object",
+              "properties": {
+                "lockTokens": {
+                  "type": "array",
+                  "description": "Array of lock tokens.",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              },
+              "required": [
+                "lockTokens"
+              ]
             }
           }
         ],
@@ -515,22 +559,6 @@
     }
   },
   "definitions": {
-    "AcknowledgeOptions": {
-      "type": "object",
-      "description": "Array of lock tokens for the corresponding received Cloud Events to be acknowledged.",
-      "properties": {
-        "lockTokens": {
-          "type": "array",
-          "description": "Array of lock tokens.",
-          "items": {
-            "type": "string"
-          }
-        }
-      },
-      "required": [
-        "lockTokens"
-      ]
-    },
     "AcknowledgeResult": {
       "type": "object",
       "description": "The result of the Acknowledge operation.",
@@ -746,22 +774,6 @@
         "value"
       ]
     },
-    "RejectOptions": {
-      "type": "object",
-      "description": "Array of lock tokens for the corresponding received Cloud Events to be rejected.",
-      "properties": {
-        "lockTokens": {
-          "type": "array",
-          "description": "Array of lock tokens.",
-          "items": {
-            "type": "string"
-          }
-        }
-      },
-      "required": [
-        "lockTokens"
-      ]
-    },
     "RejectResult": {
       "type": "object",
       "description": "The result of the Reject operation.",
@@ -785,22 +797,6 @@
       "required": [
         "failedLockTokens",
         "succeededLockTokens"
-      ]
-    },
-    "ReleaseOptions": {
-      "type": "object",
-      "description": "Array of lock tokens for the corresponding received Cloud Events to be released.",
-      "properties": {
-        "lockTokens": {
-          "type": "array",
-          "description": "Array of lock tokens.",
-          "items": {
-            "type": "string"
-          }
-        }
-      },
-      "required": [
-        "lockTokens"
       ]
     },
     "ReleaseResult": {
@@ -851,22 +847,6 @@
       "required": [
         "failedLockTokens",
         "succeededLockTokens"
-      ]
-    },
-    "RenewLockOptions": {
-      "type": "object",
-      "description": "Array of lock tokens for the corresponding received Cloud Events to be renewed.",
-      "properties": {
-        "lockTokens": {
-          "type": "array",
-          "description": "Array of lock tokens.",
-          "items": {
-            "type": "string"
-          }
-        }
-      },
-      "required": [
-        "lockTokens"
       ]
     }
   },

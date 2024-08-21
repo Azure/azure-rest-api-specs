@@ -32,7 +32,12 @@ interface SAPInstances {
   /**
    * Creates the SAP Instance resource. <br><br>This will be used by service only. PUT operation on this resource by end user will return a Bad Request error.
    */
-  create is ArmResourceCreateOrReplaceAsync<SAPInstance>;
+  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "MUST CHANGE ON NEXT UPDATE"
+  @Azure.Core.useFinalStateVia("azure-async-operation")
+  create is ArmResourceCreateOrReplaceAsync<
+    SAPInstance,
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader
+  >;
 
   /**
    * Updates the SAP Instance resource.
@@ -51,5 +56,5 @@ interface SAPInstances {
    * Lists the SAP Instance resources for the given SAP Migration discovery site resource.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "SAP is a product."
-  list is ArmResourceListByParent<SAPInstance>;
+  ListBySapDiscoverySite is ArmResourceListByParent<SAPInstance>;
 }
