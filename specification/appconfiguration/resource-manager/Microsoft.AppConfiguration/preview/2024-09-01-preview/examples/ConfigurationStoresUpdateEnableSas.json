@@ -4,13 +4,12 @@
     "resourceGroupName": "myResourceGroup",
     "configStoreName": "contoso",
     "api-version": "2024-09-01-preview",
-    "configStoreCreationParameters": {
-      "location": "westus",
+    "configStoreUpdateParameters": {
       "sku": {
         "name": "Standard"
       },
       "properties": {
-        "sasAuth": {
+        "sas": {
           "status": "Enabled"
         }
       }
@@ -31,20 +30,21 @@
             }
           },
           "disableLocalAuth": false,
-          "sasAuth": {
+          "sas": {
             "status": "Enabled",
-            "info": [
+            "kinds": [
               {
-                "kind": "Primary",
-                "lastModifiedTime": "2018-04-24T16:30:55+00:00"
+                "name": "Primary",
+                "lastModifiedAt": "2018-04-24T16:30:55+00:00"
               },
               {
-                "kind": "Secondary",
-                "lastModifiedTime": "2018-04-24T16:30:55+00:00"
+                "name": "Secondary",
+                "lastModifiedAt": "2018-04-24T16:30:55+00:00"
               }
             ]
           },
           "privateEndpointConnections": [],
+          "publicNetworkAccess": "Disabled",
           "dataPlaneProxy": {
             "authenticationMode": "Local",
             "privateLinkDelegation": "Disabled"
@@ -71,8 +71,35 @@
       "body": {
         "type": "Microsoft.AppConfiguration/configurationStores",
         "properties": {
-          "provisioningState": "Creating",
-          "creationDate": "2018-04-24T16:30:55+00:00"
+          "provisioningState": "Updating",
+          "creationDate": "2018-04-24T16:30:55+00:00",
+          "endpoint": "https://contoso.azconfig.io",
+          "encryption": {
+            "keyVaultProperties": {
+              "keyIdentifier": null,
+              "identityClientId": null
+            }
+          },
+          "disableLocalAuth": false,
+          "sas": {
+            "status": "Enabled",
+            "kinds": [
+              {
+                "name": "Primary",
+                "lastModifiedAt": "2018-04-24T16:30:55+00:00"
+              },
+              {
+                "name": "Secondary",
+                "lastModifiedAt": "2018-04-24T16:30:55+00:00"
+              }
+            ]
+          },
+          "privateEndpointConnections": [],
+          "publicNetworkAccess": "Disabled",
+          "dataPlaneProxy": {
+            "authenticationMode": "Local",
+            "privateLinkDelegation": "Disabled"
+          }
         },
         "systemData": {
           "createdBy": "foo@contoso.com",

@@ -217,7 +217,7 @@
             "$ref": "./examples/ConfigurationStoresCreateWithTelemetryAndExperimentation.json"
           },
           "ConfigurationStores_Create_With_Sas_Auth_Enabled": {
-            "$ref": "./examples/ConfigurationStoresCreateWithSasAuthEnabled.json"
+            "$ref": "./examples/ConfigurationStoresCreateWithSasEnabled.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -326,7 +326,7 @@
             "$ref": "./examples/ConfigurationStoresUpdateDisableLocalAuth.json"
           },
           "ConfigurationStores_Update_Enable_Sas_Auth": {
-            "$ref": "./examples/ConfigurationStoresUpdateEnableSasAuth.json"
+            "$ref": "./examples/ConfigurationStoresUpdateEnableSas.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -540,7 +540,7 @@
           "ConfigurationStores"
         ],
         "description": "Reset all SAS tokens of a given kind (primary/secondary).",
-        "operationId": "ConfigurationStores_ResetSasTokens",
+        "operationId": "ConfigurationStores_ResetSasKind",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -576,8 +576,8 @@
           }
         },
         "x-ms-examples": {
-          "ConfigurationStores_ResetSasTokens": {
-            "$ref": "./examples/ConfigurationStoresResetSasTokens.json"
+          "ConfigurationStores_ResetSasKind": {
+            "$ref": "./examples/ConfigurationStoresResetSasKind.json"
           }
         }
       }
@@ -1708,8 +1708,8 @@
           "default": false,
           "description": "Disables access key authentication."
         },
-        "sasAuth": {
-          "$ref": "#/definitions/SasAuthProperties",
+        "sas": {
+          "$ref": "#/definitions/SasProperties",
           "description": "The SAS authentication settings of the configuration store."
         },
         "softDeleteRetentionInDays": {
@@ -1852,7 +1852,7 @@
         }
       }
     },
-    "SasAuthProperties": {
+    "SasProperties": {
       "type": "object",
       "description": "The SAS authentication settings of the configuration store.",
       "properties": {
@@ -1864,7 +1864,7 @@
           ],
           "type": "string",
           "x-ms-enum": {
-            "name": "SasAuthStatus",
+            "name": "SasStatus",
             "modelAsString": true,
             "values": [
               {
@@ -1883,12 +1883,12 @@
           "readOnly": true,
           "type": "array",
           "items": {
-            "$ref": "#/definitions/SasTokenKindInfo"
+            "$ref": "#/definitions/SasKindInfo"
           }
         }
       }
     },
-    "SasTokenKindInfo": {
+    "SasKindInfo": {
       "type": "object",
       "description": "Information about a specific kind of SAS token.",
       "properties": {
@@ -1943,8 +1943,8 @@
           "type": "boolean",
           "description": "Disables access key authentication."
         },
-        "sasAuth": {
-          "$ref": "#/definitions/SasAuthProperties",
+        "sas": {
+          "$ref": "#/definitions/SasProperties",
           "description": "The SAS authentication settings of the configuration store."
         },
         "publicNetworkAccess": {
@@ -2219,12 +2219,12 @@
     "ResetSasKindParameters": {
       "description": "Parameters used for resetting SAS kind.",
       "required": [
-        "name"
+        "kind"
       ],
       "type": "object",
       "properties": {
-        "name": {
-          "description": "The name of the SAS kind.",
+        "kind": {
+          "description": "The kind of the SAS token.",
           "$ref": "#/definitions/SasKind"
         }
       }
