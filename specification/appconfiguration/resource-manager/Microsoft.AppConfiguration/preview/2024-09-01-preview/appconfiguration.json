@@ -534,7 +534,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppConfiguration/configurationStores/{configStoreName}/resetSasTokens": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppConfiguration/configurationStores/{configStoreName}/resetSasKind": {
       "post": {
         "tags": [
           "ConfigurationStores"
@@ -555,12 +555,12 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "name": "resetSasTokensParameters",
+            "name": "resetSasKindParameters",
             "in": "body",
-            "description": "The object containing information for the SAS token reset request.",
+            "description": "The object containing information for the SAS kind reset request.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ResetSasTokensParameters"
+              "$ref": "#/definitions/ResetSasKindParameters"
             }
           }
         ],
@@ -1878,26 +1878,26 @@
             ]
           }
         },
-        "info": {
-          "description": "Information about SAS tokens of each kind.",
+        "kinds": {
+          "description": "Information about different kinds of SAS token.",
           "readOnly": true,
           "type": "array",
           "items": {
-            "$ref": "#/definitions/SasTokenInfo"
+            "$ref": "#/definitions/SasTokenKindInfo"
           }
         }
       }
     },
-    "SasTokenInfo": {
+    "SasTokenKindInfo": {
       "type": "object",
-      "description": "Information about SAS tokens of a specific kind.",
+      "description": "Information about a specific kind of SAS token.",
       "properties": {
-        "kind": {
+        "name": {
           "description": "The kind of the SAS token.",
-          "$ref": "#/definitions/SasTokenKind",
+          "$ref": "#/definitions/SasKind",
           "readOnly": true
         },
-        "lastModifiedTime": {
+        "lastModifiedAt": {
           "format": "date-time",
           "description": "The last modified datetime of SAS token.",
           "type": "string",
@@ -2091,12 +2091,13 @@
       "description": "Parameters used for generating SAS token.",
       "required": [
         "expires",
-        "kind"
+        "kind",
+        "sasTokenScope"
       ],
       "type": "object",
       "properties": {
-        "resourceParameters": {
-          "$ref": "#/definitions/ResourceParameters"
+        "sasTokenScope": {
+          "$ref": "#/definitions/SasTokenScope"
         },
         "expires": {
           "description": "The time that the SAS token expires in the Universal ISO 8601 DateTime format. Max allowed expiration is 1 year from the time of token creation.",
@@ -2109,12 +2110,12 @@
         },
         "kind": {
           "description": "The kind of the SAS token.",
-          "$ref": "#/definitions/SasTokenKind"
+          "$ref": "#/definitions/SasKind"
         }
       }
     },
-    "ResourceParameters": {
-      "description": "The parameters to define the data plane resource scope that the SAS token is authorized to access.",
+    "SasTokenScope": {
+      "description": "The data plane resource scope that the SAS token is authorized to access.",
       "type": "object",
       "discriminator": "resourceType",
       "required": [
@@ -2134,13 +2135,13 @@
         }
       }
     },
-    "KvResourceParameters": {
-      "description": "The parameters to define the key value resource scope that the SAS token is authorized to access.",
+    "KvSasTokenScope": {
+      "description": "The key value resource scope that the SAS token is authorized to access.",
       "type": "object",
       "x-ms-discriminator-value": "Kv",
       "allOf": [
         {
-          "$ref": "#/definitions/ResourceParameters"
+          "$ref": "#/definitions/SasTokenScope"
         }
       ],
       "properties": {
@@ -2162,8 +2163,8 @@
         }
       }
     },
-    "SnapshotResourceParameters": {
-      "description": "The parameters to define the snapshot resource scope that the SAS token is authorized to access.",
+    "SnapshotSasTokenScope": {
+      "description": "The snapshot resource scope that the SAS token is authorized to access.",
       "type": "object",
       "x-ms-discriminator-value": "Snapshot",
       "required": [
@@ -2171,7 +2172,7 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/ResourceParameters"
+          "$ref": "#/definitions/SasTokenScope"
         }
       ],
       "properties": {
@@ -2185,9 +2186,9 @@
       "description": "The result of a request to generate a SAS token.",
       "type": "object",
       "properties": {
-        "resourceParameters": {
-          "description": "The parameters to define the data plane resource scope.",
-          "$ref": "#/definitions/ResourceParameters",
+        "sasTokenScope": {
+          "description": "The data plane resource scope that the SAS token is authorized to access.",
+          "$ref": "#/definitions/SasTokenScope",
           "readOnly": true
         },
         "expires": {
@@ -2203,7 +2204,7 @@
         },
         "kind": {
           "description": "The kind of the SAS token.",
-          "$ref": "#/definitions/SasTokenKind",
+          "$ref": "#/definitions/SasKind",
           "readOnly": true
         },
         "value": {
@@ -2215,20 +2216,20 @@
         }
       }
     },
-    "ResetSasTokensParameters": {
-      "description": "Parameters used for resetting SAS token.",
+    "ResetSasKindParameters": {
+      "description": "Parameters used for resetting SAS kind.",
       "required": [
-        "kind"
+        "name"
       ],
       "type": "object",
       "properties": {
-        "kind": {
-          "description": "The kind of the SAS token.",
-          "$ref": "#/definitions/SasTokenKind"
+        "name": {
+          "description": "The name of the SAS kind.",
+          "$ref": "#/definitions/SasKind"
         }
       }
     },
-    "SasTokenKind": {
+    "SasKind": {
       "description": "The kind of the SAS token.",
       "enum": [
         "Primary",
@@ -2236,7 +2237,7 @@
       ],
       "type": "string",
       "x-ms-enum": {
-        "name": "SasTokenKind",
+        "name": "SasKind",
         "modelAsString": true
       }
     },
