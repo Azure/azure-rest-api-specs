@@ -163,36 +163,30 @@ union OffsetPolicyForCosmosDB {
 
 @doc("Enum of the SaslMechanism for Confluent connector")
 union SaslMechanismForConfluent {
-  @doc("The GSSAPI security protocol.")
-  GssApi: "GSSAPI",
-
-  @doc("The PLAIN security protocol.")
+  @doc("The PLAIN sasl mechanism.")
   Plain: "PLAIN",
 
-  @doc("The SCRAM-SHA-256 security protocol.")
+  @doc("The SCRAM-SHA-256 sasl mechanism.")
   ScramSha256: "SCRAM-SHA-256",
 
-  @doc("The SCRAM-SHA-512 security protocol.")
+  @doc("The SCRAM-SHA-512 sasl mechanism.")
   ScramSha512: "SCRAM-SHA-512",
-
-  @doc("The OAUTHBEARER security protocol.")
-  OAuthBearer: "OAUTHBEARER",
 
   string,
 }
 
 @doc("Enum of the SecurityProtocol for Confluent connector")
 union SecurityProtocolForConfluent {
-  @doc("The SASL_PLAINTEXT sasl mechanism.")
+  @doc("The SASL_PLAINTEXT security protocol.")
   SaslPlainText: "SASL_PLAINTEXT",
 
-  @doc("The PLAINTEXT sasl mechanism.")
+  @doc("The PLAINTEXT security protocol.")
   PlainText: "PLAINTEXT",
 
-  @doc("The SASL_SSL sasl mechanism.")
+  @doc("The SASL_SSL security protocol.")
   SaslSsl: "SASL_SSL",
 
-  @doc("The SSL sasl mechanism.")
+  @doc("The SSL security protocol.")
   Ssl: "SSL",
 
   string,
