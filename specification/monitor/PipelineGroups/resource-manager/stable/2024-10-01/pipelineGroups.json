@@ -636,11 +636,11 @@
       "properties": {
         "sourceField": {
           "$ref": "#/definitions/JsonMapperSourceField",
-          "description": "Define a source field from which a json array will be read and parsed to it's elements. The number of elements in the json array is expected to be the same as the length of keys"
+          "description": "Define a source field from which a json array will be read and parsed to it's elements. The number of elements in the json array is expected to be the same as the length of keys."
         },
         "destinationField": {
           "$ref": "#/definitions/JsonMapperDestinationField",
-          "description": "Define a destination field to which the parsed output will be written. The output is a map, it's keys is the given keys array and the matching values are the parsed json array elements"
+          "description": "Define a destination field to which the parsed output will be written. The output is a map, it's keys is the given keys array and the matching values are the parsed json array elements."
         },
         "keys": {
           "type": "array",
@@ -656,11 +656,11 @@
     },
     "JsonMapperDestinationField": {
       "type": "object",
-      "description": "JsonArrayMapper destination field used to describe the field to which the parsed output will be written",
+      "description": "JsonArrayMapper destination field used to describe the field to which the parsed output will be written.",
       "properties": {
         "destination": {
           "type": "string",
-          "description": "Define the destination's element. The element is the body or the attributes of the message, to which the json array mapper will write the output map",
+          "description": "Define the destination's element. The element is the body or the attributes of the message, to which the json array mapper will write the output map.",
           "default": "attributes",
           "enum": [
             "body",
@@ -685,17 +685,17 @@
         },
         "fieldName": {
           "type": "string",
-          "description": "Define a destination field name under the given element. Leaving this empty, means the root of the element. In case element=attributes and fieldName is empty, the object's attributes themselves will contain the key value output pairs"
+          "description": "Define a destination field name under the given element. Leaving this empty, means the root of the element. In case element=attributes and fieldName is empty, the object's attributes themselves will contain the key value output pairs."
         }
       }
     },
     "JsonMapperSourceField": {
       "type": "object",
-      "description": "JsonArrayMapper source field used to describe the field from which the json array will be read",
+      "description": "JsonArrayMapper source field used to describe the field from which the json array will be read.",
       "properties": {
         "fieldName": {
           "type": "string",
-          "description": "Define a source field name from which the json array mapper will read the json array. Leaving this empty, means reading the body of the message itself"
+          "description": "Define a source field name from which the json array mapper will read the json array. Leaving this empty, means reading the body of the message itself."
         }
       }
     },

@@ -42,10 +42,6 @@ These settings apply only when `--tag=package-2024-10-01` is specified on the co
 ``` yaml $(tag) == 'package-2024-10-01'
 input-file:
 - stable\2024-10-01\pipelineGroups.json
-
-suppressions:
-  - code: BodyTopLevelProperties
-    reason: Issue https://github.com/Azure/azure-openapi-validator/issues/722. The BodyTopLevelProperties check is failing
 ```
 
 ---
