@@ -13,7 +13,8 @@ interface Operations extends Azure.ResourceManager.Operations {}
 alias resourceNameRegex = "^[a-zA-Z0-9][a-zA-Z0-9-._]{1,58}[a-zA-Z0-9]$";
 
 @doc("Compute Device resource")
-model ComputeDeviceResource is ExtensionResource<ComputeDeviceProperties> {
+@parentResource(TenantLocationResource)
+model ComputeDeviceResource is ProxyResource<ComputeDeviceProperties> {
   @doc("The parent resource name")
   @segment("computeDevices")
   @key("deviceName")

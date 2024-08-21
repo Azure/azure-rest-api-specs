@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Microsoft.Titan management service",
-    "version": "2021-10-01-preview",
+    "version": "2024-06-24-preview",
     "description": "Microsoft.Titan Resource Provider management API.",
     "x-typespec-generated": [
       {
@@ -47,19 +47,19 @@
     }
   ],
   "paths": {
-    "/{resourceUri}/providers/Microsoft.Titan/computeDevices": {
+    "/providers/Microsoft.Titan/locations/{location}/computeDevices": {
       "get": {
         "operationId": "ComputeDevices_List",
         "tags": [
           "ComputeDevices"
         ],
-        "description": "List ComputeDeviceResource resources by parent",
+        "description": "List ComputeDeviceResource resources by TenantLocationResource",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
           }
         ],
         "responses": {
@@ -86,7 +86,7 @@
         }
       }
     },
-    "/{resourceUri}/providers/Microsoft.Titan/computeDevices/{deviceName}": {
+    "/providers/Microsoft.Titan/locations/{location}/computeDevices/{deviceName}": {
       "get": {
         "operationId": "ComputeDevices_Get",
         "tags": [
@@ -98,7 +98,7 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
           },
           {
             "name": "deviceName",
@@ -399,15 +399,5 @@
       "readOnly": true
     }
   },
-  "parameters": {
-    "Azure.ResourceManager.ResourceUriParameter": {
-      "name": "resourceUri",
-      "in": "path",
-      "description": "The fully qualified Azure Resource manager identifier of the resource.",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method",
-      "x-ms-skip-url-encoding": true
-    }
-  }
+  "parameters": {}
 }
