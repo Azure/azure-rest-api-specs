@@ -27,7 +27,7 @@ namespace AI.Model;
 @actionSeparator("/")
 @route("chat/completions")
 op getChatCompletions is Azure.Core.RpcOperation<
-  ChatCompletionsOptions,
+  chatCompletionsOptions: ChatCompletionsOptions,
   ChatCompletions
 >;
 
