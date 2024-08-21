@@ -125,45 +125,43 @@ model TextNotificationContent extends NotificationContent {
   content: string;
 }
 
-@added(Versions.c2024_08_30_Preview)
-@doc("A request to send a media notification. Could be an image, document or video.")
-model MediaNotificationContent {
+@doc("A request to send a media notification.")
+@clientName("MediaNotificationContent")
+model MediaNotificationContentBase extends NotificationContent {
   @doc("Optional text content.")
   content?: string;
 
   @clientName("mediaUrl", "java")
   @doc("A media url for the file. Required if the type is one of the supported media types, e.g. image")
   mediaUri: url;
+
+  @added(Versions.c2024_08_30_Preview)
+  @doc("The type discriminator describing a notification type.")
+  kind: CommunicationMessageKind.image | CommunicationMessageKind.document | CommunicationMessageKind.video;
 }
 
 @renamedFrom(Versions.c2024_08_30_Preview, "MediaNotificationContent")
 @doc("A request to send an image notification.")
-model ImageNotificationContent extends NotificationContent{
+model ImageNotificationContent extends MediaNotificationContentBase{
   @doc("Message notification type is image.")
   kind: CommunicationMessageKind.image;
-
-  ...MediaNotificationContent
 }
 
 @added(Versions.c2024_08_30_Preview)
 @doc("A request to send a document notification.")
-model DocumentNotificationContent extends NotificationContent{
-  @doc("Message notification type is image.")
+model DocumentNotificationContent extends MediaNotificationContentBase{
+  @doc("Message notification type is document.")
   kind: CommunicationMessageKind.document;
 
   @doc("Optional name for the file.")
   fileName?: string;
-
-  ...MediaNotificationContent
 }
 
 @added(Versions.c2024_08_30_Preview)
 @doc("A request to send a video notification.")
-model VideoNotificationContent extends NotificationContent{
-  @doc("Message notification type is image.")
+model VideoNotificationContent extends MediaNotificationContentBase{
+  @doc("Message notification type is video.")
   kind: CommunicationMessageKind.video;
-
-  ...MediaNotificationContent
 }
 
 @doc("A request to send a template notification.")

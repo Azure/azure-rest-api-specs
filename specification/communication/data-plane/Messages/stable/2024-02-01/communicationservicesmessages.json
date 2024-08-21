@@ -409,6 +409,31 @@
       "type": "object",
       "description": "A request to send an image notification.",
       "properties": {
+        "kind": {
+          "type": "string",
+          "description": "Message notification type is image.",
+          "enum": [
+            "image"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
+        }
+      },
+      "required": [
+        "kind"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/MediaNotificationContentBase"
+        }
+      ],
+      "x-ms-discriminator-value": "image"
+    },
+    "MediaNotificationContentBase": {
+      "type": "object",
+      "description": "A request to send a media notification. Could be an image, document or video.",
+      "properties": {
         "content": {
           "type": "string",
           "description": "Optional text content."
@@ -426,8 +451,7 @@
         {
           "$ref": "#/definitions/NotificationContent"
         }
-      ],
-      "x-ms-discriminator-value": "image"
+      ]
     },
     "MessageReceipt": {
       "type": "object",
