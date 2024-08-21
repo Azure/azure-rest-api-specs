@@ -9,3 +9,12 @@ suppressions:
         - The model or publicly exposed class 'ProxyResource' had its instance variable 'etag' deleted or renamed in the current version
         - The model or publicly exposed class 'Resource' had its instance variable 'location' deleted or renamed in the current version
         - The model or publicly exposed class 'Resource' had its instance variable 'tags' deleted or renamed in the current version
+  azure-sdk-for-js:
+    - package: '@azure/arm-batch'
+      breaking-changes:
+        - Interface DeploymentConfiguration no longer has parameter cloudServiceConfiguration
+        - Interface ProxyResource no longer has parameter etag
+        - Interface Resource no longer has parameter location
+        - Interface Resource no longer has parameter tags
+        - Removed operation Location_2.listSupportedCloudServiceSkus
+        - Type of parameter securityType of interface SecurityProfile is changed from "trustedLaunch" to SecurityTypes
