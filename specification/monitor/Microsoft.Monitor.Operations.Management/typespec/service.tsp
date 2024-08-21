@@ -13,11 +13,10 @@ using OpenAPI;
 
 @armProviderNamespace("Microsoft.Monitor")
 @service({
-  title: "Azure Monitor Pipelines Control Plane API",
+  title: "Azure Monitor Operations Control Plane API",
 })
-@doc("Provides operations for working with Azure Monitor Pipelines")
+@doc("Provides operations for working with Azure Monitor")
 @versioned(Microsoft.Monitor.Versions)
-#suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "Operations API was moved to its own service."
 namespace Microsoft.Monitor;
 
 @doc("Microsoft.Monitor Versions")
@@ -28,15 +27,4 @@ enum Versions {
   v2024_10_01: "2024-10-01",
 }
 
-@doc("The provisioning state of a resource.")
-@lroStatus
-union ProvisioningState {
-  string,
-  ResourceProvisioningState,
-
-  @doc("The resource is being created.")
-  Creating: "Creating",
-
-  @doc("The resource is being deleted.")
-  Deleting: "Deleting",
-}
+interface Operations extends Azure.ResourceManager.Operations {}
