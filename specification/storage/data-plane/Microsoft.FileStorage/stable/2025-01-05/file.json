@@ -543,6 +543,30 @@
                 "description": "Optional. Integer. Default if not specified is the maximum throughput the file share can support. Current maximum for a file share is 10,340 MiB/sec.",
                 "type": "integer",
                 "format": "int64"
+              },
+              "x-ms-share-included-burst-iops": {
+                "x-ms-client-name": "IncludedBurstIops",
+                "description": "Return the calculated burst IOPS of the share.",
+                "type": "integer",
+                "format": "int64"
+              },
+              "x-ms-share-max-burst-credits-for-iops": {
+                "x-ms-client-name": "MaxBurstCreditsForIops",
+                "description": "Returned the calculated maximum burst credits. This is not the current burst credit level, but the maximum burst credits the share can have.",
+                "type": "integer",
+                "format": "int64"
+              },
+              "x-ms-share-next-allowed-provisioned-iops-downgrade-time": {
+                "x-ms-client-name": "NextAllowedProvisionedIopsDowngradeTime",
+                "description": "Return timestamp for provisioned IOPS following existing rules for provisioned storage GiB.",
+                "type": "string",
+                "format": "date-time-rfc1123"
+              },
+              "x-ms-share-next-allowed-provisioned-bandwidth-downgrade-time": {
+                "x-ms-client-name": "NextAllowedProvisionedBandwidthDowngradeTime",
+                "description": "Return timestamp for provisioned throughput following existing rules for provisioned storage GiB.",
+                "type": "string",
+                "format": "date-time-rfc1123"
               }
             }
           },
