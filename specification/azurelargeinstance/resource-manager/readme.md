@@ -108,8 +108,8 @@ These set of linting rules aren't applicable to the AzureLargeInstance RP so sup
 ``` yaml
 suppressions:
   - code: TrackedResourcesMustHavePut
-    where:
-      - $.definitions.AzureLargeInstance
-      - $.definitions.AzureLargeStorageInstance
+    from:
+      - Microsoft.AzureLargeInstance/stable/2024-04-10/azurelargeinstance.json
+      - Microsoft.AzureLargeInstance/preview/2023-07-20-preview/azurelargeinstance.json
     reason: In ALI api versions prior to 2024-08-01-preview, the PUT methods are not supported. 
 ```
