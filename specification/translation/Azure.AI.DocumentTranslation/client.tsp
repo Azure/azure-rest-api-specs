@@ -57,6 +57,11 @@ interface SingleDocumentTranslationClient {
   "csharp,java"
 );
 
+@@clientName(DocumentTranslationClient.getDocumentStatus.id,
+  "translation_id",
+  "python"
+);
+
 @@clientName(DocumentTranslationClient.getDocumentsStatus,
   "list_document_statuses",
   "python"
@@ -64,6 +69,11 @@ interface SingleDocumentTranslationClient {
 
 @@clientName(DocumentTranslationClient.getTranslationsStatus,
   "list_translation_statuses",
+  "python"
+);
+
+@@clientName(DocumentTranslationClient.getTranslationStatus.id,
+  "translation_id",
   "python"
 );
 
