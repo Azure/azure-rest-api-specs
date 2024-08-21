@@ -111,5 +111,5 @@ suppressions:
     where:
       - $.definitions.AzureLargeInstance
       - $.definitions.AzureLargeStorageInstance
-    reason: In previous ALI api versions, the PUT methods are not supported
+    reason: In ALI api versions prior to 2024-08-01-preview, the PUT methods are not supported. 
 ```
