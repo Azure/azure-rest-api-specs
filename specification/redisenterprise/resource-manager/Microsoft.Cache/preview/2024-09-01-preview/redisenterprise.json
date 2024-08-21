@@ -48,20 +48,20 @@
         },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "Success. The response describes the list of operations.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
             }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -84,29 +84,29 @@
         "description": "Gets the status of operation.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/LocationParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/OperationIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/OperationIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "Success. The detailed status of the operation is in the response.",
             "schema": {
-              "$ref": "#/definitions/OperationStatus"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationStatusResult"
             }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -130,7 +130,7 @@
         },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/ClusterNameParameter"
@@ -142,13 +142,13 @@
             "schema": {
               "$ref": "#/definitions/Cluster"
             },
-            "description": "Parameters supplied to the Create RedisEnterprise operation."
+            "description": "Parameters supplied to the Create Redis Enterprise operation."
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -167,7 +167,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -186,10 +186,10 @@
             "$ref": "./examples/RedisEnterpriseUpdate.json"
           }
         },
-        "description": "Updates an existing RedisEnterprise cluster",
+        "description": "Updates an existing Redis Enterprise cluster",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/ClusterNameParameter"
@@ -201,13 +201,13 @@
             "schema": {
               "$ref": "#/definitions/ClusterUpdate"
             },
-            "description": "Parameters supplied to the Update RedisEnterprise operation."
+            "description": "Parameters supplied to the Update Redis Enterprise operation."
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -218,12 +218,24 @@
             }
           },
           "202": {
-            "description": "The cluster update operation was started. GET the URL in the Azure-AsyncOperation or Location headers to retrieve updated status."
+            "description": "The cluster update operation was started. GET the URL in the Azure-AsyncOperation or Location headers to retrieve updated status.",
+            "headers": {
+              "Location": {
+                "description": "Location URI to poll for result",
+                "type": "string",
+                "format": "uri"
+              },
+              "Azure-AsyncOperation": {
+                "description": "Azure-AsyncOperation URI to poll for result",
+                "type": "string",
+                "format": "uri"
+              }
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -242,19 +254,19 @@
             "$ref": "./examples/RedisEnterpriseDelete.json"
           }
         },
-        "description": "Deletes a RedisEnterprise cache cluster.",
+        "description": "Deletes a Redis Enterprise cache cluster.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/ClusterNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -262,7 +274,19 @@
             "description": "The cluster was successfully deleted."
           },
           "202": {
-            "description": "The cluster delete operation was successfully started. GET the URL in the Azure-AsyncOperation or Location headers to retrieve updated status."
+            "description": "The cluster delete operation was successfully started. GET the URL in the Azure-AsyncOperation or Location headers to retrieve updated status.",
+            "headers": {
+              "Location": {
+                "description": "Location URI to poll for result",
+                "type": "string",
+                "format": "uri"
+              },
+              "Azure-AsyncOperation": {
+                "description": "Azure-AsyncOperation URI to poll for result",
+                "type": "string",
+                "format": "uri"
+              }
+            }
           },
           "204": {
             "description": "The cluster was successfully deleted."
@@ -270,7 +294,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -285,19 +309,19 @@
             "$ref": "./examples/RedisEnterpriseGet.json"
           }
         },
-        "description": "Gets information about a RedisEnterprise cluster",
+        "description": "Gets information about a Redis Enterprise cluster",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/ClusterNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -310,7 +334,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -327,21 +351,21 @@
             "$ref": "./examples/RedisEnterpriseListByResourceGroup.json"
           }
         },
-        "description": "Lists all RedisEnterprise clusters in a resource group.",
+        "description": "Lists all Redis Enterprise clusters in a resource group.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "The list of RedisEnterprise clusters",
+            "description": "The list of Redis Enterprise clusters",
             "schema": {
               "$ref": "#/definitions/ClusterList"
             }
@@ -349,7 +373,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -369,18 +393,18 @@
             "$ref": "./examples/RedisEnterpriseList.json"
           }
         },
-        "description": "Gets all RedisEnterprise clusters in the specified subscription.",
+        "description": "Lists all Redis Enterprise clusters in the specified subscription.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "The list of RedisEnterprise clusters",
+            "description": "The list of Redis Enterprise clusters",
             "schema": {
               "$ref": "#/definitions/ClusterList"
             }
@@ -388,7 +412,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -404,7 +428,7 @@
           "Databases"
         ],
         "operationId": "Databases_ListByCluster",
-        "description": "Gets all databases in the specified RedisEnterprise cluster.",
+        "description": "Gets all databases in the specified Redis Enterprise cluster.",
         "x-ms-examples": {
           "RedisEnterpriseDatabasesListByCluster": {
             "$ref": "./examples/RedisEnterpriseDatabasesListByCluster.json"
@@ -412,13 +436,13 @@
         },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/ClusterNameParameter"
@@ -434,7 +458,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -465,7 +489,7 @@
         },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/ClusterNameParameter"
@@ -483,10 +507,10 @@
             "description": "Parameters supplied to the create or update database operation."
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -505,7 +529,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -528,7 +552,7 @@
         },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/ClusterNameParameter"
@@ -546,10 +570,10 @@
             "description": "Parameters supplied to the create or update database operation."
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -560,12 +584,24 @@
             }
           },
           "202": {
-            "description": "The database update operation was successfully started. GET the URL in the Azure-AsyncOperation or Location headers to retrieve updated status."
+            "description": "The database update operation was successfully started. GET the URL in the Azure-AsyncOperation or Location headers to retrieve updated status.",
+            "headers": {
+              "Location": {
+                "description": "Location URI to poll for result",
+                "type": "string",
+                "format": "uri"
+              },
+              "Azure-AsyncOperation": {
+                "description": "Azure-AsyncOperation URI to poll for result",
+                "type": "string",
+                "format": "uri"
+              }
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -576,7 +612,7 @@
           "Databases"
         ],
         "operationId": "Databases_Get",
-        "description": "Gets information about a database in a RedisEnterprise cluster.",
+        "description": "Gets information about a database in a Redis Enterprise cluster.",
         "x-ms-examples": {
           "RedisEnterpriseDatabasesGet": {
             "$ref": "./examples/RedisEnterpriseDatabasesGet.json"
@@ -584,7 +620,7 @@
         },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/ClusterNameParameter"
@@ -593,10 +629,10 @@
             "$ref": "#/parameters/DatabaseNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -609,7 +645,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -632,7 +668,7 @@
         },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/ClusterNameParameter"
@@ -641,10 +677,10 @@
             "$ref": "#/parameters/DatabaseNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -652,7 +688,19 @@
             "description": "Successfully deleted the database."
           },
           "202": {
-            "description": "The database delete operation started. GET the URL in the Azure-AsyncOperation or Location headers to retrieve updated status."
+            "description": "The database delete operation started. GET the URL in the Azure-AsyncOperation or Location headers to retrieve updated status.",
+            "headers": {
+              "Location": {
+                "description": "Location URI to poll for result",
+                "type": "string",
+                "format": "uri"
+              },
+              "Azure-AsyncOperation": {
+                "description": "Azure-AsyncOperation URI to poll for result",
+                "type": "string",
+                "format": "uri"
+              }
+            }
           },
           "204": {
             "description": "Successfully deleted the database."
@@ -660,7 +708,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -678,10 +726,10 @@
             "$ref": "./examples/RedisEnterpriseDatabasesListKeys.json"
           }
         },
-        "description": "Retrieves the access keys for the RedisEnterprise database.",
+        "description": "Retrieves the access keys for the Redis Enterprise database.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/ClusterNameParameter"
@@ -690,10 +738,10 @@
             "$ref": "#/parameters/DatabaseNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -706,7 +754,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -728,10 +776,10 @@
             "$ref": "./examples/RedisEnterpriseDatabasesRegenerateKey.json"
           }
         },
-        "description": "Regenerates the RedisEnterprise database's access keys.",
+        "description": "Regenerates the Redis Enterprise database's access keys.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/ClusterNameParameter"
@@ -749,10 +797,10 @@
             "description": "Specifies which key to regenerate."
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -763,12 +811,24 @@
             }
           },
           "202": {
-            "description": "The cluster update operation was started. GET the URL in the Azure-AsyncOperation or Location headers to retrieve updated status."
+            "description": "The cluster update operation was started. GET the URL in the Azure-AsyncOperation or Location headers to retrieve updated status.",
+            "headers": {
+              "Location": {
+                "description": "Location URI to poll for result",
+                "type": "string",
+                "format": "uri"
+              },
+              "Azure-AsyncOperation": {
+                "description": "Azure-AsyncOperation URI to poll for result",
+                "type": "string",
+                "format": "uri"
+              }
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -793,7 +853,7 @@
         "description": "Imports database files to target database.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/ClusterNameParameter"
@@ -811,10 +871,10 @@
             "description": "Storage information for importing into the cluster"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -822,12 +882,24 @@
             "description": "Import operation succeeded."
           },
           "202": {
-            "description": "The import operation was started. GET the URL in the Azure-AsyncOperation or Location headers to retrieve updated status."
+            "description": "The import operation was started. GET the URL in the Azure-AsyncOperation or Location headers to retrieve updated status.",
+            "headers": {
+              "Location": {
+                "description": "Location URI to poll for result",
+                "type": "string",
+                "format": "uri"
+              },
+              "Azure-AsyncOperation": {
+                "description": "Azure-AsyncOperation URI to poll for result",
+                "type": "string",
+                "format": "uri"
+              }
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -852,7 +924,7 @@
         "description": "Exports a database file from target database.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/ClusterNameParameter"
@@ -870,10 +942,10 @@
             "description": "Storage information for exporting into the cluster"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -881,14 +953,257 @@
             "description": "Export operation succeeded."
           },
           "202": {
-            "description": "Export operation successfully enqueued; follow the Location header to poll for final outcome."
+            "description": "Export operation successfully enqueued; follow the Location header to poll for final outcome.",
+            "headers": {
+              "Location": {
+                "description": "Location URI to poll for result",
+                "type": "string",
+                "format": "uri"
+              },
+              "Azure-AsyncOperation": {
+                "description": "Azure-AsyncOperation URI to poll for result",
+                "type": "string",
+                "format": "uri"
+              }
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cache/redisEnterprise/{clusterName}/databases/{databaseName}/accessPolicyAssignments/{accessPolicyAssignmentName}": {
+      "put": {
+        "tags": [
+          "RedisEnterprise",
+          "Databases",
+          "AccessPolicyAssignments"
+        ],
+        "operationId": "AccessPolicyAssignment_Create",
+        "description": "Creates access policy assignment for database",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "original-uri"
+        },
+        "x-ms-examples": {
+          "RedisEnterpriseAccessPolicyAssignmentCreate": {
+            "$ref": "./examples/RedisEnterpriseAccessPolicyAssignmentCreate.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DatabaseNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccessPolicyAssignmentNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AccessPolicyAssignment"
+            },
+            "description": "Parameters supplied to the create access policy assignment for database."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The database access policy assignment is being created. Check provisioningState and resourceState for detailed status.",
+            "schema": {
+              "$ref": "#/definitions/AccessPolicyAssignment"
+            }
+          },
+          "201": {
+            "description": "The database access policy assignment is being created. Check provisioningState and resourceState for detailed status.",
+            "schema": {
+              "$ref": "#/definitions/AccessPolicyAssignment"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "RedisEnterprise",
+          "Databases",
+          "AccessPolicyAssignments"
+        ],
+        "operationId": "AccessPolicyAssignment_Get",
+        "description": "Gets information about access policy assignment for database.",
+        "x-ms-examples": {
+          "RedisEnterpriseAccessPolicyAssignmentGet": {
+            "$ref": "./examples/RedisEnterpriseAccessPolicyAssignmentGet.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DatabaseNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccessPolicyAssignmentNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully found the access policy assignment",
+            "schema": {
+              "$ref": "#/definitions/AccessPolicyAssignment"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "RedisEnterprise",
+          "Databases",
+          "AccessPolicyAssignments"
+        ],
+        "operationId": "AccessPolicyAssignment_Delete",
+        "description": "Deletes a single access policy assignment.",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "RedisEnterpriseAccessPolicyAssignmentDelete": {
+            "$ref": "./examples/RedisEnterpriseAccessPolicyAssignmentDelete.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DatabaseNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccessPolicyAssignmentNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The access policy assignment delete operation started for database. GET the URL in the Azure-AsyncOperation or Location headers to retrieve updated status.",
+            "headers": {
+              "Location": {
+                "description": "Location URI to poll for result",
+                "type": "string",
+                "format": "uri"
+              },
+              "Azure-AsyncOperation": {
+                "description": "Azure-AsyncOperation URI to poll for result",
+                "type": "string",
+                "format": "uri"
+              }
+            }
+          },
+          "204": {
+            "description": "Successfully deleted the access policy assignment."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cache/redisEnterprise/{clusterName}/databases/{databaseName}/accessPolicyAssignments": {
+      "get": {
+        "tags": [
+          "RedisEnterprise",
+          "Databases",
+          "AccessPolicyAssignments"
+        ],
+        "operationId": "AccessPolicyAssignments_List",
+        "description": "Gets all databases in the specified Redis Enterprise cluster.",
+        "x-ms-examples": {
+          "RedisEnterpriseAccessPolicyAssignmentList": {
+            "$ref": "./examples/RedisEnterpriseAccessPolicyAssignmentsList.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DatabaseNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The list of access policy assignment.",
+            "schema": {
+              "$ref": "#/definitions/AccessPolicyAssignmentList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -898,7 +1213,7 @@
           "PrivateEndpointConnections"
         ],
         "operationId": "PrivateEndpointConnections_List",
-        "description": "Lists all the private endpoint connections associated with the RedisEnterprise cluster.",
+        "description": "Lists all the private endpoint connections associated with the Redis Enterprise cluster.",
         "x-ms-examples": {
           "RedisEnterpriseListPrivateEndpointConnections": {
             "$ref": "./examples/RedisEnterpriseListPrivateEndpointConnections.json"
@@ -906,29 +1221,29 @@
         },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/ClusterNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "OK -- Successfully retrieved private endpoint connections.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/privatelinks.json#/definitions/PrivateEndpointConnectionListResult"
+              "$ref": "../../../../../common-types/resource-management/v5/privatelinks.json#/definitions/PrivateEndpointConnectionListResult"
             }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -943,7 +1258,7 @@
           "PrivateEndpointConnections"
         ],
         "operationId": "PrivateEndpointConnections_Get",
-        "description": "Gets the specified private endpoint connection associated with the RedisEnterprise cluster.",
+        "description": "Gets the specified private endpoint connection associated with the Redis Enterprise cluster.",
         "x-ms-examples": {
           "RedisEnterpriseGetPrivateEndpointConnection": {
             "$ref": "./examples/RedisEnterpriseGetPrivateEndpointConnection.json"
@@ -951,32 +1266,32 @@
         },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/ClusterNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/privatelinks.json#/parameters/PrivateEndpointConnectionName"
+            "$ref": "../../../../../common-types/resource-management/v5/privatelinks.json#/parameters/PrivateEndpointConnectionName"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "OK -- Get the private endpoint connection properties successfully.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/privatelinks.json#/definitions/PrivateEndpointConnection"
+              "$ref": "../../../../../common-types/resource-management/v5/privatelinks.json#/definitions/PrivateEndpointConnection"
             }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -986,7 +1301,7 @@
           "PrivateEndpointConnections"
         ],
         "operationId": "PrivateEndpointConnections_Put",
-        "description": "Updates the state of the specified private endpoint connection associated with the RedisEnterprise cluster.",
+        "description": "Updates the state of the specified private endpoint connection associated with the Redis Enterprise cluster.",
         "x-ms-examples": {
           "RedisEnterprisePutPrivateEndpointConnection": {
             "$ref": "./examples/RedisEnterprisePutPrivateEndpointConnection.json"
@@ -995,26 +1310,26 @@
         "x-ms-long-running-operation": true,
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/ClusterNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/privatelinks.json#/parameters/PrivateEndpointConnectionName"
+            "$ref": "../../../../../common-types/resource-management/v5/privatelinks.json#/parameters/PrivateEndpointConnectionName"
           },
           {
             "name": "properties",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/privatelinks.json#/definitions/PrivateEndpointConnection"
+              "$ref": "../../../../../common-types/resource-management/v5/privatelinks.json#/definitions/PrivateEndpointConnection"
             },
             "description": "The private endpoint connection properties."
           }
@@ -1023,13 +1338,13 @@
           "201": {
             "description": "OK -- Update the private endpoint connection properties successfully.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/privatelinks.json#/definitions/PrivateEndpointConnection"
+              "$ref": "../../../../../common-types/resource-management/v5/privatelinks.json#/definitions/PrivateEndpointConnection"
             }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -1039,7 +1354,7 @@
           "PrivateEndpointConnections"
         ],
         "operationId": "PrivateEndpointConnections_Delete",
-        "description": "Deletes the specified private endpoint connection associated with the RedisEnterprise cluster.",
+        "description": "Deletes the specified private endpoint connection associated with the Redis Enterprise cluster.",
         "x-ms-examples": {
           "RedisEnterpriseDeletePrivateEndpointConnection": {
             "$ref": "./examples/RedisEnterpriseDeletePrivateEndpointConnection.json"
@@ -1051,19 +1366,19 @@
         },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/ClusterNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/privatelinks.json#/parameters/PrivateEndpointConnectionName"
+            "$ref": "../../../../../common-types/resource-management/v5/privatelinks.json#/parameters/PrivateEndpointConnectionName"
           }
         ],
         "responses": {
@@ -1075,11 +1390,13 @@
             "headers": {
               "Location": {
                 "description": "Location URI to poll for result",
-                "type": "string"
+                "type": "string",
+                "format": "uri"
               },
               "Azure-AsyncOperation": {
                 "description": "URI to poll for the operation status",
-                "type": "string"
+                "type": "string",
+                "format": "uri"
               }
             }
           },
@@ -1089,7 +1406,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -1101,7 +1418,7 @@
           "PrivateLinkResources"
         ],
         "operationId": "PrivateLinkResources_ListByCluster",
-        "description": "Gets the private link resources that need to be created for a RedisEnterprise cluster.",
+        "description": "Gets the private link resources that need to be created for a Redis Enterprise cluster.",
         "x-ms-examples": {
           "RedisEnterpriseListPrivateLinkResources": {
             "$ref": "./examples/RedisEnterpriseListPrivateLinkResources.json"
@@ -1109,29 +1426,29 @@
         },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/ClusterNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "Successfully retrieved private link resources.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/privatelinks.json#/definitions/PrivateLinkResourceListResult"
+              "$ref": "../../../../../common-types/resource-management/v5/privatelinks.json#/definitions/PrivateLinkResourceListResult"
             }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1159,7 +1476,7 @@
         "description": "Forcibly removes the link to the specified database resource.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/ClusterNameParameter"
@@ -1177,10 +1494,10 @@
             "description": "Information identifying the database to be unlinked."
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -1188,12 +1505,24 @@
             "description": "Force unlink operation succeeded. The unlinked database must be deleted before it can be recreated and linked again."
           },
           "202": {
-            "description": "Force unlink operation successfully enqueued; follow the Azure-AsyncOperation header to poll for final outcome."
+            "description": "Force unlink operation successfully enqueued; follow the Azure-AsyncOperation header to poll for final outcome.",
+            "headers": {
+              "Location": {
+                "description": "Location URI to poll for result",
+                "type": "string",
+                "format": "uri"
+              },
+              "Azure-AsyncOperation": {
+                "description": "Azure-AsyncOperation URI to poll for result",
+                "type": "string",
+                "format": "uri"
+              }
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -1261,7 +1590,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -1286,7 +1615,7 @@
         "description": "Flushes all the keys in this database and also from its linked databases.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/ClusterNameParameter"
@@ -1304,10 +1633,10 @@
             "description": "Information identifying the databases to be flushed"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -1319,18 +1648,20 @@
             "headers": {
               "Location": {
                 "description": "Location URI to poll for result",
-                "type": "string"
+                "type": "string",
+                "format": "uri"
               },
               "Azure-AsyncOperation": {
                 "description": "URI to poll for the operation status",
-                "type": "string"
+                "type": "string",
+                "format": "uri"
               }
             }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -1355,7 +1686,7 @@
         "description": "Upgrades the database Redis version to the latest available.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/ClusterNameParameter"
@@ -1364,10 +1695,10 @@
             "$ref": "#/parameters/DatabaseNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -1387,7 +1718,52 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Cache/locations/{location}/checkNameAvailability": {
+      "post": {
+        "tags": [
+          "RedisEnterprise"
+        ],
+        "operationId": "RedisEnterprise_CheckNameAvailability",
+        "x-ms-examples": {
+          "RedisEnterpriseCheckNameAvailability": {
+            "$ref": "./examples/RedisEnterpriseCheckNameAvailability.json"
+          }
+        },
+        "description": "Checks that the Redis Enterprise cache name is valid and is not already in use.",
+        "parameters": [
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CheckNameAvailabilityParameters"
+            },
+            "description": "Parameters supplied to the CheckNameAvailability Redis operation. The only supported resource type is 'Microsoft.Cache/redisenterprise'"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Name is available"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -1395,13 +1771,31 @@
     }
   },
   "definitions": {
-    "Sku": {
-      "description": "SKU parameters supplied to the create RedisEnterprise operation.",
+    "CheckNameAvailabilityParameters": {
+      "description": "Parameters body to pass for resource name availability check.",
       "type": "object",
       "properties": {
         "name": {
           "type": "string",
-          "description": "The type of RedisEnterprise cluster to deploy. Possible values: (Enterprise_E10, EnterpriseFlash_F300 etc.)",
+          "description": "Resource name."
+        },
+        "type": {
+          "type": "string",
+          "description": "Resource type. The only legal value of this property for checking redis enterprise cache name availability is 'Microsoft.Cache/redisenterprise'."
+        }
+      },
+      "required": [
+        "name",
+        "type"
+      ]
+    },
+    "Sku": {
+      "description": "SKU parameters supplied to the create Redis Enterprise cluster operation.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The level of Redis Enterprise cluster to deploy. Possible values: ('GeneralPurpose_G5', 'MemoryOptimized_M20', etc.). For more information on SKUs see the latest pricing documentation. Note that additional SKUs may become supported in the future.",
           "enum": [
             "Enterprise_E1",
             "Enterprise_E5",
@@ -1409,9 +1803,56 @@
             "Enterprise_E20",
             "Enterprise_E50",
             "Enterprise_E100",
+            "Enterprise_E200",
+            "Enterprise_E400",
             "EnterpriseFlash_F300",
             "EnterpriseFlash_F700",
-            "EnterpriseFlash_F1500"
+            "EnterpriseFlash_F1500",
+            "GeneralPurpose_G0",
+            "GeneralPurpose_G1",
+            "GeneralPurpose_G3",
+            "GeneralPurpose_G5",
+            "GeneralPurpose_G10",
+            "GeneralPurpose_G20",
+            "GeneralPurpose_G50",
+            "GeneralPurpose_G100",
+            "GeneralPurpose_G150",
+            "GeneralPurpose_G250",
+            "GeneralPurpose_G350",
+            "GeneralPurpose_G500",
+            "GeneralPurpose_G700",
+            "GeneralPurpose_G1000",
+            "MemoryOptimized_M10",
+            "MemoryOptimized_M20",
+            "MemoryOptimized_M50",
+            "MemoryOptimized_M100",
+            "MemoryOptimized_M150",
+            "MemoryOptimized_M250",
+            "MemoryOptimized_M350",
+            "MemoryOptimized_M500",
+            "MemoryOptimized_M700",
+            "MemoryOptimized_M1000",
+            "MemoryOptimized_M1500",
+            "MemoryOptimized_M2000",
+            "ComputeOptimized_X1",
+            "ComputeOptimized_X3",
+            "ComputeOptimized_X5",
+            "ComputeOptimized_X10",
+            "ComputeOptimized_X20",
+            "ComputeOptimized_X50",
+            "ComputeOptimized_X100",
+            "ComputeOptimized_X150",
+            "ComputeOptimized_X250",
+            "ComputeOptimized_X350",
+            "ComputeOptimized_X500",
+            "ComputeOptimized_X700",
+            "AutoTiering_T250",
+            "AutoTiering_T500",
+            "AutoTiering_T700",
+            "AutoTiering_T1000",
+            "AutoTiering_T1500",
+            "AutoTiering_T2000",
+            "AutoTiering_T4500"
           ],
           "x-ms-enum": {
             "name": "SkuName",
@@ -1421,7 +1862,7 @@
         "capacity": {
           "type": "integer",
           "format": "int32",
-          "description": "The size of the RedisEnterprise cluster. Defaults to 2 or 3 depending on SKU. Valid values are (2, 4, 6, ...) for Enterprise SKUs and (3, 9, 15, ...) for Flash SKUs."
+          "description": "The size of the Redis Enterprise cluster. Valid values depend upon the SKU, and are (2, 4, 6, ...) for Enterprise_E SKUs and (3, 9, 15, ...) for EnterpriseFlash_ SKUs. This parameter is not used with the other (GeneralPurpose, MemoryOptimized, ComputeOptimized) SKUs. They operate without any capacity value."
         }
       },
       "required": [
@@ -1471,7 +1912,7 @@
       }
     },
     "Cluster": {
-      "description": "Describes the RedisEnterprise cluster",
+      "description": "Describes the Redis Enterprise cluster",
       "type": "object",
       "properties": {
         "sku": {
@@ -1486,7 +1927,7 @@
           "description": "The Availability Zones where this cluster will be deployed."
         },
         "identity": {
-          "$ref": "../../../../../common-types/resource-management/v4/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
           "description": "The identity of the resource."
         },
         "properties": {
@@ -1500,12 +1941,12 @@
       ],
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
         }
       ]
     },
     "ClusterUpdate": {
-      "description": "A partial update to the RedisEnterprise cluster",
+      "description": "A partial update to the Redis Enterprise cluster",
       "type": "object",
       "properties": {
         "sku": {
@@ -1518,7 +1959,7 @@
           "description": "Other properties of the cluster."
         },
         "identity": {
-          "$ref": "../../../../../common-types/resource-management/v4/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
           "description": "The identity of the resource."
         },
         "tags": {
@@ -1536,13 +1977,25 @@
       }
     },
     "ClusterProperties": {
-      "title": "RedisEnterprise cluster properties",
-      "description": "Properties of RedisEnterprise clusters, as opposed to general resource properties like location, tags",
+      "title": "Redis Enterprise cluster properties",
+      "description": "Properties of Redis Enterprise clusters, as opposed to general resource properties like location, tags",
       "type": "object",
       "properties": {
+        "highAvailability": {
+          "type": "string",
+          "description": "Enabled by default. If highAvailability is disabled, the data set is not replicated. This affects the availability SLA, and increases the risk of data loss.",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "HighAvailability",
+            "modelAsString": true
+          }
+        },
         "minimumTlsVersion": {
           "type": "string",
-          "description": "The minimum TLS version for the cluster to support, e.g. '1.2'",
+          "description": "The minimum TLS version for the cluster to support, e.g. '1.2'. Newer versions can be added in the future. Note that TLS 1.0 and TLS 1.1 are now completely obsolete -- you cannot use them. They are mentioned only for the sake of consistency with old API versions.",
           "enum": [
             "1.0",
             "1.1",
@@ -1601,6 +2054,37 @@
           "readOnly": true,
           "description": "Current provisioning status of the cluster"
         },
+        "redundancyMode": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Explains the current redundancy strategy of the cluster, which affects the expected SLA.",
+          "enum": [
+            "None",
+            "LR",
+            "ZR"
+          ],
+          "x-ms-enum": {
+            "name": "RedundancyMode",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "None",
+                "value": "None",
+                "description": "No redundancy. Availability loss will occur."
+              },
+              {
+                "name": "LR",
+                "value": "LR",
+                "description": "Local redundancy with high availability."
+              },
+              {
+                "name": "ZR",
+                "value": "ZR",
+                "description": "Zone redundant. Higher availability."
+              }
+            ]
+          }
+        },
         "resourceState": {
           "$ref": "#/definitions/ResourceState",
           "readOnly": true,
@@ -1614,9 +2098,9 @@
         "privateEndpointConnections": {
           "type": "array",
           "readOnly": true,
-          "description": "List of private endpoint connections associated with the specified RedisEnterprise cluster",
+          "description": "List of private endpoint connections associated with the specified Redis Enterprise cluster",
           "items": {
-            "$ref": "../../../../../common-types/resource-management/v2/privatelinks.json#/definitions/PrivateEndpointConnection"
+            "$ref": "../../../../../common-types/resource-management/v5/privatelinks.json#/definitions/PrivateEndpointConnection"
           }
         }
       }
@@ -1640,7 +2124,7 @@
       "description": "The response of a list-all operation."
     },
     "Database": {
-      "description": "Describes a database on the RedisEnterprise cluster",
+      "description": "Describes a database on the Redis Enterprise cluster",
       "type": "object",
       "properties": {
         "properties": {
@@ -1651,12 +2135,12 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
       ]
     },
     "DatabaseUpdate": {
-      "description": "A partial update to the RedisEnterprise database",
+      "description": "A partial update to the Redis Enterprise database",
       "type": "object",
       "properties": {
         "properties": {
@@ -1667,8 +2151,8 @@
       }
     },
     "DatabaseProperties": {
-      "title": "RedisEnterprise database properties",
-      "description": "Properties of RedisEnterprise databases, as opposed to general resource properties like location, tags",
+      "title": "Redis Enterprise database properties",
+      "description": "Properties of Redis Enterprise databases, as opposed to general resource properties like location, tags",
       "type": "object",
       "properties": {
         "clientProtocol": {
@@ -1704,19 +2188,31 @@
         },
         "clusteringPolicy": {
           "type": "string",
-          "description": "Clustering policy - default is OSSCluster. Specified at create time.",
+          "description": "Clustering policy - default is OSSCluster. This property must be chosen at create time, and cannot be changed without deleting the database.",
           "enum": [
             "EnterpriseCluster",
             "OSSCluster"
           ],
-          "x-ms-enum": {
-            "name": "ClusteringPolicy",
-            "modelAsString": true
-          },
           "x-ms-mutability": [
             "read",
             "create"
-          ]
+          ],
+          "x-ms-enum": {
+            "name": "ClusteringPolicy",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "EnterpriseCluster",
+                "name": "EnterpriseCluster",
+                "description": "Enterprise clustering policy uses only the classic redis protocol, which does not support redis cluster commands."
+              },
+              {
+                "value": "OSSCluster",
+                "name": "OSSCluster",
+                "description": "OSS clustering policy follows the redis cluster specification, and requires all clients to support redis clustering."
+              }
+            ]
+          }
         },
         "evictionPolicy": {
           "type": "string",
@@ -1787,13 +2283,30 @@
         },
         "deferUpgrade": {
           "type": "string",
-          "description": "Option to defer upgrade when newest version is released - default is NotDeferred. Learn more:  https://aka.ms/redisversionupgrade",
+          "description": "Option to defer upgrade when newest version is released - default is NotDeferred. Learn more: https://aka.ms/redisversionupgrade",
           "enum": [
             "Deferred",
             "NotDeferred"
           ],
           "x-ms-enum": {
             "name": "DeferUpgradeSetting",
+            "modelAsString": true
+          }
+        },
+        "accessKeysAuthentication": {
+          "type": "string",
+          "description": "Access database using keys - default is enabled. This property can be Enabled/Disabled to allow or deny access with those. Can be updated even after database is created.",
+          "enum": [
+            "Disabled",
+            "Enabled"
+          ],
+          "x-ms-mutability": [
+            "read",
+            "create",
+            "update"
+          ],
+          "x-ms-enum": {
+            "name": "accessKeysAuthentication",
             "modelAsString": true
           }
         }
@@ -1817,22 +2330,94 @@
       },
       "description": "The response of a list-all operation."
     },
+    "AccessPolicyAssignmentProperties": {
+      "title": "Redis Enterprise database access policy assignment properties",
+      "description": "Properties of Redis Enterprise database access policy assignment.",
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "readOnly": true,
+          "description": "Current provisioning status of the database"
+        },
+        "resourceState": {
+          "$ref": "#/definitions/ResourceState",
+          "readOnly": true,
+          "description": "Current resource status of the database"
+        },
+        "accessPolicyName": {
+          "type": "string",
+          "description": "Name of access policy under specific access policy assignment.",
+          "default": "default",
+          "pattern": "^([a-zA-Z0-9][a-zA-Z0-9- ]*[a-zA-Z0-9]|[a-zA-Z0-9])$",
+          "x-ms-mutability": [
+            "read",
+            "update"
+          ]
+        },
+        "user": {
+          "type": "object",
+          "properties": {
+            "objectId": {
+              "type": "string",
+              "description": "The object ID of the user.",
+              "example": "6497c918-11ad-41e7-1b0f-7c518a87d0b0"
+            }
+          },
+          "description": "The user associated with the access policy."
+        }
+      }
+    },
+    "AccessPolicyAssignment": {
+      "description": "Describes the access policy assignment of Redis Enterprise database",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AccessPolicyAssignmentProperties",
+          "description": "Properties of the access policy assignment."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "AccessPolicyAssignmentList": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AccessPolicyAssignment"
+          },
+          "description": "List of access policy assignment"
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The URI to fetch the next page of results."
+        }
+      },
+      "description": "The response of a list-all operation."
+    },
     "Persistence": {
       "title": "Persistence settings",
-      "description": "Persistence-related configuration for the RedisEnterprise database",
+      "description": "Persistence-related configuration for the Redis Enterprise database",
       "type": "object",
       "properties": {
         "aofEnabled": {
           "type": "boolean",
-          "description": "Sets whether AOF is enabled."
+          "description": "Sets whether AOF is enabled. Note that at most one of AOF or RDB persistence may be enabled."
         },
         "rdbEnabled": {
           "type": "boolean",
-          "description": "Sets whether RDB is enabled."
+          "description": "Sets whether RDB is enabled. Note that at most one of AOF or RDB persistence may be enabled."
         },
         "aofFrequency": {
           "type": "string",
-          "description": "Sets the frequency at which data is written to disk.",
+          "description": "Sets the frequency at which data is written to disk. Defaults to '1s', meaning 'every second'. Note that the 'always' setting is deprecated, because of its performance impact.",
           "enum": [
             "1s",
             "always"
@@ -1999,36 +2584,6 @@
       ],
       "description": "Parameters for a Redis Enterprise export operation."
     },
-    "OperationStatus": {
-      "description": "The status of a long-running operation.",
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "The operation's unique id."
-        },
-        "name": {
-          "type": "string",
-          "description": "The operation's name."
-        },
-        "startTime": {
-          "type": "string",
-          "description": "The start time of the operation."
-        },
-        "endTime": {
-          "type": "string",
-          "description": "The end time of the operation."
-        },
-        "status": {
-          "type": "string",
-          "description": "The current status of the operation."
-        },
-        "error": {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse",
-          "description": "Error response describing why the operation failed."
-        }
-      }
-    },
     "ForceLinkParameters": {
       "type": "object",
       "description": "Parameters for reconfiguring active geo-replication, of an existing database that was previously unlinked from a replication group.",
@@ -2052,6 +2607,7 @@
     },
     "ForceUnlinkParameters": {
       "title": "Forcibly unlink another database from this database.",
+      "description": "Parameters for a redis enterprise active geo-replication force unlink operation.",
       "type": "object",
       "properties": {
         "ids": {
@@ -2072,8 +2628,7 @@
       },
       "required": [
         "ids"
-      ],
-      "description": "Parameters for a Redis Enterprise Active Geo Replication Force Unlink operation."
+      ]
     },
     "FlushParameters": {
       "title": "Flush all the keys from the current and all its linked databases.",
@@ -2116,7 +2671,15 @@
       "type": "string",
       "description": "The name of the Redis Enterprise database.",
       "x-ms-parameter-location": "method"
+    },
+    "AccessPolicyAssignmentNameParameter": {
+      "name": "accessPolicyAssignmentName",
+      "pattern": "^[A-Za-z0-9]{1,60}$",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the Redis Enterprise database access policy assignment.",
+      "x-ms-parameter-location": "method"
     }
   }
 }
-
