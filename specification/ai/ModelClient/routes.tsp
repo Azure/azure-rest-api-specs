@@ -33,7 +33,6 @@ op getChatCompletions is Azure.Core.RpcOperation<
   ChatCompletions
 >;
 
-/*
 @override(AI.Model.getChatCompletions, "csharp")
 op getChatCompletionsOverride(body: ChatCompletionsOptions): ChatCompletions;
 
