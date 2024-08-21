@@ -57,8 +57,13 @@ interface SingleDocumentTranslationClient {
   "csharp,java"
 );
 
-@@access(DocumentTranslationClient.startTranslation, Access.internal, "python");
+
 @@access(DocumentTranslationClient.getSupportedFormats, Access.internal, "python");
+
+@@clientName(DocumentTranslationClient.startTranslation,
+  "_begin_start_translation",
+  "python"
+);
 
 @@clientName(DocumentTranslationClient.getDocumentsStatus,
   "list_document_statuses",
