@@ -1,18 +1,3 @@
-/*
-
-content_endpoint_def = {
-  "get": self._endpoint_properties(js_module="test.js",
-  js_function="content")
-}
-
-self.modules = [
-  {
-    "name": "test.js",
-    "module": TESTJS
-  },
-]
-*/
-
 {
   "put": {
     "parameters": [
@@ -25,8 +10,11 @@ self.modules = [
           "description": "User defined endpoints",
           "properties": {
             "bundle": {
-              "metadata": { "endpoints": { "/content": "content_endpoint_def" } },
-              "modules": "self.modules"
+              "metadata": { "endpoints": { "/content": "" } },
+              "modules": {
+                "name": "test.js",
+                "module":  "TESTJS"
+              }
             }
           },
           "type": "object"
@@ -35,15 +23,9 @@ self.modules = [
     ],
     "responses": {
       "201": {
-        "description": "The custom endpoint.",
-        "schema": {
-          "bundle": {
-            "metadata": { "endpoints": { "/content": "content_endpoint_def" } },
-            "modules": "self.modules"
-          }
-        }
+        "description": "The custom endpoint."
       }
     }
   }
 }
-}
+
