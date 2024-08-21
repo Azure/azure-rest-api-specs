@@ -28,16 +28,14 @@ namespace AI.Model;
 @route("chat/completions")
 op getChatCompletions is Azure.Core.RpcOperation<
   {
-    ...ChatCompletionsOptions,
+    chatCompletionsOptions: ChatCompletionsOptions;
   },
   ChatCompletions
 >;
 
-@override(AI.Model.getChatCompletions, "csharp")
-op getChatCompletionsOverride(body: ChatCompletionsOptions): ChatCompletions;
-
 /*
-is Azure.Core.RpcOperation<
+@override(AI.Model.getChatCompletions, "csharp")
+op getChatCompletionsOverride is Azure.Core.RpcOperation<
   {
     chatCompletionsOptions: ChatCompletionsOptions,
     ...AdditionalRequestHeaders,
