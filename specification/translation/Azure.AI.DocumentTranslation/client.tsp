@@ -67,17 +67,17 @@ interface SingleDocumentTranslationClient {
   "python"
 );
 
-@@clientName(DocumentTranslationClient.getTranslationStatus::type.id,
+@@clientName(DocumentTranslationClient.getTranslationStatus::parameters.id,
   "translation_id",
   "python"
 );
 
-@@clientName(DocumentTranslationClient.getDocumentStatus::type.id,
+@@clientName(DocumentTranslationClient.getDocumentStatus::parameters.id,
   "translation_id",
   "python"
 );
 
-@@clientName(DocumentTranslationClient.cancelTranslation::type.id,
+@@clientName(DocumentTranslationClient.cancelTranslation::parameters.id,
   "translation_id",
   "python"
 );
