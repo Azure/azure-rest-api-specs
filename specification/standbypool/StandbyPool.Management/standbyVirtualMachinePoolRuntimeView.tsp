@@ -82,7 +82,10 @@ union PoolVirtualMachineState {
   @doc("The resource is creating.")
   Creating: "Creating",
 
-  @doc("The resource is Deleting.")
+  @doc("The resource is starting.")
+  Starting: "Starting",
+
+  @doc("The resource is deleting.")
   Deleting: "Deleting",
 
   @doc("The resource has released the lease on the underlying hardware and is powered off.")
@@ -91,8 +94,11 @@ union PoolVirtualMachineState {
   @doc("The resource is releasing the lease on the underlying hardware and is powered off.")
   Deallocating: "Deallocating",
 
-  @doc("The resource has released the lease on the underlying hardware and is powered off. Memory contents of the VM are stored in the OS disk.  When started again, applications and processes that were previously running in your VM resume from the state prior to hibernation.")
+  @doc("The resource has released the lease on the underlying hardware and is powered off. Memory contents of the VM are stored in the OS disk. When started again, applications and processes that were previously running in your VM resume from the state prior to hibernation.")
   Hibernated: "Hibernated",
+
+  @doc("The resource is hibernating.")
+  Hibernating: "Hibernating",
 
   string,
 }

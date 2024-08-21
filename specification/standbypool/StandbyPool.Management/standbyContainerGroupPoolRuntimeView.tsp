@@ -83,7 +83,7 @@ union PoolContainerGroupState {
   @doc("The resource is creating.")
   Creating: "Creating",
 
-  @doc("The resource is Deleting.")
+  @doc("The resource is deleting.")
   Deleting: "Deleting",
 
   string,

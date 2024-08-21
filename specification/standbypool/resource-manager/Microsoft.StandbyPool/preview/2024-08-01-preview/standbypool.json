@@ -1204,7 +1204,7 @@
           {
             "name": "Deleting",
             "value": "Deleting",
-            "description": "The resource is Deleting."
+            "description": "The resource is deleting."
           }
         ]
       }
@@ -1253,10 +1253,12 @@
       "enum": [
         "Running",
         "Creating",
+        "Starting",
         "Deleting",
         "Deallocated",
         "Deallocating",
-        "Hibernated"
+        "Hibernated",
+        "Hibernating"
       ],
       "x-ms-enum": {
         "name": "PoolVirtualMachineState",
@@ -1273,9 +1275,14 @@
             "description": "The resource is creating."
           },
           {
+            "name": "Starting",
+            "value": "Starting",
+            "description": "The resource is starting."
+          },
+          {
             "name": "Deleting",
             "value": "Deleting",
-            "description": "The resource is Deleting."
+            "description": "The resource is deleting."
           },
           {
             "name": "Deallocated",
@@ -1290,7 +1297,12 @@
           {
             "name": "Hibernated",
             "value": "Hibernated",
-            "description": "The resource has released the lease on the underlying hardware and is powered off. Memory contents of the VM are stored in the OS disk.  When started again, applications and processes that were previously running in your VM resume from the state prior to hibernation."
+            "description": "The resource has released the lease on the underlying hardware and is powered off. Memory contents of the VM are stored in the OS disk. When started again, applications and processes that were previously running in your VM resume from the state prior to hibernation."
+          },
+          {
+            "name": "Hibernating",
+            "value": "Hibernating",
+            "description": "The resource is hibernating."
           }
         ]
       }
