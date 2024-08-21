@@ -1,0 +1,30 @@
+/*
+
+content_endpoint_def = {
+  "get": self._endpoint_properties(js_module="test.js",
+  js_function="content")
+}
+
+self.modules = [
+  {
+    "name": "test.js",
+    "module": TESTJS
+  },
+]
+*/
+ 
+{
+  "get": {
+    "responses": {
+      "201": {
+        "description": "The custom endpoint."
+        "schema": {
+          "bundle": {
+            "metadata": { "endpoints": { "/content": "content_endpoint_def" } },
+            "modules": "self.modules"
+          }
+        }
+      }
+    }
+  }
+}
