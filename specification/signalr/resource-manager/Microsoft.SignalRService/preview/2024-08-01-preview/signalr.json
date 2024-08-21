@@ -3,7 +3,7 @@
   "info": {
     "title": "SignalRManagementClient",
     "description": "REST API for Azure SignalR Service",
-    "version": "2024-04-01-preview"
+    "version": "2024-08-01-preview"
   },
   "paths": {
     "/providers/Microsoft.SignalRService/operations": {
@@ -3130,7 +3130,6 @@
     "SharedPrivateLinkResourceProperties": {
       "description": "Describes the properties of an existing Shared Private Link Resource",
       "required": [
-        "groupId",
         "privateLinkResourceId"
       ],
       "type": "object",
@@ -3150,6 +3149,14 @@
         "requestMessage": {
           "description": "The request message for requesting approval of the shared private link resource",
           "type": "string"
+        },
+        "fqdns": {
+          "description": "A list of FQDNs for third party private link service",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-identifiers": []
         },
         "status": {
           "readOnly": true,
