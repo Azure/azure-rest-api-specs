@@ -1837,42 +1837,6 @@
       "type": "string",
       "description": "Enum of the SaslMechanism for Confluent connector",
       "enum": [
-        "SASL_PLAINTEXT",
-        "PLAINTEXT",
-        "SASL_SSL",
-        "SSL"
-      ],
-      "x-ms-enum": {
-        "name": "SaslMechanismForConfluent",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "SaslPlainText",
-            "value": "SASL_PLAINTEXT",
-            "description": "The SASL_PLAINTEXT sasl mechanism."
-          },
-          {
-            "name": "PlainText",
-            "value": "PLAINTEXT",
-            "description": "The PLAINTEXT sasl mechanism."
-          },
-          {
-            "name": "SaslSsl",
-            "value": "SASL_SSL",
-            "description": "The SASL_SSL sasl mechanism."
-          },
-          {
-            "name": "Ssl",
-            "value": "SSL",
-            "description": "The SSL sasl mechanism."
-          }
-        ]
-      }
-    },
-    "SecurityProtocolForConfluent": {
-      "type": "string",
-      "description": "Enum of the SecurityProtocol for Confluent connector",
-      "enum": [
         "GSSAPI",
         "PLAIN",
         "SCRAM-SHA-256",
@@ -1880,7 +1844,7 @@
         "OAUTHBEARER"
       ],
       "x-ms-enum": {
-        "name": "SecurityProtocolForConfluent",
+        "name": "SaslMechanismForConfluent",
         "modelAsString": true,
         "values": [
           {
@@ -1907,6 +1871,42 @@
             "name": "OAuthBearer",
             "value": "OAUTHBEARER",
             "description": "The OAUTHBEARER security protocol."
+          }
+        ]
+      }
+    },
+    "SecurityProtocolForConfluent": {
+      "type": "string",
+      "description": "Enum of the SecurityProtocol for Confluent connector",
+      "enum": [
+        "SASL_PLAINTEXT",
+        "PLAINTEXT",
+        "SASL_SSL",
+        "SSL"
+      ],
+      "x-ms-enum": {
+        "name": "SecurityProtocolForConfluent",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "SaslPlainText",
+            "value": "SASL_PLAINTEXT",
+            "description": "The SASL_PLAINTEXT sasl mechanism."
+          },
+          {
+            "name": "PlainText",
+            "value": "PLAINTEXT",
+            "description": "The PLAINTEXT sasl mechanism."
+          },
+          {
+            "name": "SaslSsl",
+            "value": "SASL_SSL",
+            "description": "The SASL_SSL sasl mechanism."
+          },
+          {
+            "name": "Ssl",
+            "value": "SSL",
+            "description": "The SSL sasl mechanism."
           }
         ]
       }
