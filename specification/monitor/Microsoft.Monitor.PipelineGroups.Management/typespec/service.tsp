@@ -11,6 +11,7 @@ using Azure.Core;
 using Azure.ResourceManager;
 using OpenAPI;
 
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "Operations API was moved to its own service."
 @armProviderNamespace("Microsoft.Monitor")
 @service({
   title: "Azure Monitor Pipelines Control Plane API",
