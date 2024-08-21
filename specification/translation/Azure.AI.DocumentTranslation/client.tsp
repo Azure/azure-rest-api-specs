@@ -67,21 +67,6 @@ interface SingleDocumentTranslationClient {
   "python"
 );
 
-@@clientName(DocumentTranslationClient.getTranslationStatus::parameters.id,
-  "translation_id",
-  "python"
-);
-
-@@clientName(DocumentTranslationClient.getDocumentStatus::parameters.id,
-  "translation_id",
-  "python"
-);
-
-@@clientName(DocumentTranslationClient.cancelTranslation::parameters.id,
-  "translation_id",
-  "python"
-);
-
 @@clientName(DocumentTranslation.TranslationStatus.createdDateTimeUtc,
   "created_on",
   "python"
