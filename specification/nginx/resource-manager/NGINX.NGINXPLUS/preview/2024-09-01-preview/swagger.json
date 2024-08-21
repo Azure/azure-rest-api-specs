@@ -26,6 +26,250 @@
     }
   },
   "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/NGINX.NGINXPLUS/nginxDeployments/{deploymentName}/apiKeys/{apiKeyName}": {
+      "put": {
+        "tags": [
+          "NginxApiKey"
+        ],
+        "summary": "Create an API Key for the Nginx deployment in order to access the dataplane API endpoint",
+        "operationId": "ApiKeys_Create",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "subscriptionId",
+            "description": "The Id of subscription",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "resourceGroupName",
+            "description": "The name of resource group",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "deploymentName",
+            "description": "The name of targeted Nginx deployment",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "apiKeyName",
+            "description": "The resource name of the API key",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "The API Key object containing necessary fields (e.g. secret text, expiration date) to upsert the key.",
+            "schema": {
+              "$ref": "#/definitions/NginxDeploymentApiKey"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/NginxDeploymentApiKey"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ApiKeys_Create": {
+            "$ref": "./examples/ApiKeys_Create.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "NginxApiKey"
+        ],
+        "summary": "Delete API key for Nginx deployment",
+        "operationId": "ApiKeys_Delete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "subscriptionId",
+            "description": "The Id of subscription",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "resourceGroupName",
+            "description": "The name of resource group",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "deploymentName",
+            "description": "The name of targeted Nginx deployment",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "apiKeyName",
+            "description": "The resource name of the API key to delete",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ApiKeys_Delete": {
+            "$ref": "./examples/ApiKeys_Delete.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "NginxApiKey"
+        ],
+        "summary": "Get the specified API Key of the given Nginx deployment",
+        "operationId": "ApiKeys_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "subscriptionId",
+            "description": "The Id of subscription",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "resourceGroupName",
+            "description": "The name of resource group",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "deploymentName",
+            "description": "The name of targeted Nginx deployment",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "apiKeyName",
+            "description": "The resource name of the API key",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/NginxDeploymentApiKey"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ApiKeys_Get": {
+            "$ref": "./examples/ApiKeys_Get.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/NGINX.NGINXPLUS/nginxDeployments/{deploymentName}/apiKeys": {
+      "get": {
+        "tags": [
+          "NginxApiKey"
+        ],
+        "summary": "List all API Keys of the given Nginx deployment",
+        "operationId": "ApiKeys_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "subscriptionId",
+            "description": "The Id of subscription",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "resourceGroupName",
+            "description": "The name of resource group",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "deploymentName",
+            "description": "The name of targeted Nginx deployment",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/NginxDeploymentApiKeyListResponse"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "ApiKeys_List": {
+            "$ref": "./examples/ApiKeys_List.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Nginx.NginxPlus/nginxDeployments/{deploymentName}/certificates/{certificateName}": {
       "get": {
         "tags": [
@@ -1375,10 +1619,6 @@
           "type": "string",
           "readOnly": true
         },
-        "managedResourceGroup": {
-          "type": "string",
-          "description": "The managed resource group to deploy VNet injection related network resources."
-        },
         "networkProfile": {
           "$ref": "#/definitions/NginxNetworkProfile"
         },
@@ -1417,6 +1657,11 @@
               "readOnly": true
             }
           }
+        },
+        "dataplaneApiEndpoint": {
+          "type": "string",
+          "description": "Dataplane API endpoint for the caller to update the NGINX state of the deployment.",
+          "readOnly": true
         }
       }
     },
@@ -1519,6 +1764,64 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/NginxDeployment"
+          }
+        },
+        "nextLink": {
+          "type": "string"
+        }
+      }
+    },
+    "NginxDeploymentApiKey": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true
+        },
+        "secretText": {
+          "type": "string",
+          "format": "password",
+          "description": "Secret text to be used as a Dataplane API Key. This is a write only property that can never be read back, but the first three characters will be returned in the 'hint' property."
+        },
+        "hint": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The first three characters of the secret text to help identify it in use. This property is read-only."
+        },
+        "endDateTime": {
+          "format": "date-time",
+          "type": "string",
+          "description": "The time after which this Dataplane API Key is no longer valid."
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState"
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "location": {
+          "type": "string"
+        }
+      }
+    },
+    "NginxDeploymentApiKeyListResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NginxDeploymentApiKey"
           }
         },
         "nextLink": {
