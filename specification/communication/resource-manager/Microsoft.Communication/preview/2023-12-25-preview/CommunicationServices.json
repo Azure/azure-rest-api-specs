@@ -614,6 +614,156 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Communication/communicationServices/{communicationServiceName}/networkSecurityPerimeterConfigurations/{networkSecurityPerimeterConfigurationName}": {
+      "get": {
+        "tags": [
+          "NetworkSecurityPerimeter"
+        ],
+        "summary": "Get a specific network security perimeter configuration.",
+        "description": "Get a specific network security perimeter configuration for a CommunicationService.",
+        "operationId": "NetworkSecurityPerimeterConfigurations_Get",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/CommunicationServiceName"
+          },
+          {
+            "$ref": "#/parameters/NetworkSecurityPerimeterConfigurationNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/networksecurityperimeter.json#/definitions/NetworkSecurityPerimeterConfiguration"
+            }
+          },
+          "default": {
+            "description": "Error response returned if request was unsuccessful.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Network Security Perimeter Configuration": {
+            "$ref": "./examples/networkSecurityPerimeterConfigurations/get.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Communication/communicationServices/{communicationServiceName}/networkSecurityPerimeterConfigurations/{networkSecurityPerimeterConfigurationName}/reconcile": {
+      "post": {
+        "tags": [
+          "NetworkSecurityPerimeter"
+        ],
+        "summary": "Reconcile a specific network security perimeter configuration for a given network security perimeter association.",
+        "description": "Reconcile a specific network security perimeter configuration for a given network security perimeter association with a CommunicationService.",
+        "operationId": "NetworkSecurityPerimeterConfigurations_Reconcile",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/CommunicationServiceName"
+          },
+          {
+            "$ref": "#/parameters/NetworkSecurityPerimeterConfigurationNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The reconcile request was completed successfully",
+            "schema": {
+              "$ref": "#/definitions/NetworkSecurityPerimeterReconcileResponse"
+            }
+          },
+          "default": {
+            "description": "Error response returned if request was unsuccessful.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Reconcile Network Security Perimeter Configuration": {
+            "$ref": "./examples/networkSecurityPerimeterConfigurations/reconcile.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Communication/communicationServices/{communicationServiceName}/networkSecurityPerimeterConfigurations": {
+      "get": {
+        "tags": [
+          "NetworkSecurityPerimeter"
+        ],
+        "summary": "Get all network security perimeter configurations for resource.",
+        "description": "Get all network security perimeter configurations associated with a topic or domain.",
+        "operationId": "NetworkSecurityPerimeterConfigurations_List",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/CommunicationServiceName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/networksecurityperimeter.json#/definitions/NetworkSecurityPerimeterConfigurationListResult"
+            }
+          },
+          "default": {
+            "description": "Error response returned if request was unsuccessful.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Network Security Perimeter Configurations": {
+            "$ref": "./examples/networkSecurityPerimeterConfigurations/list.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
     }
   },
   "definitions": {
@@ -930,6 +1080,16 @@
           "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity"
         }
       }
+    },
+    "NetworkSecurityPerimeterReconcileResponse": {
+      "description": "Response for the reconcile operation.",
+      "type": "object",
+      "properties": {
+        "resourceId": {
+          "description": "The resource ID of the network security perimeter configuration.",
+          "type": "string"
+        }
+      }
     }
   },
   "parameters": {
@@ -943,6 +1103,17 @@
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
+    },
+    "NetworkSecurityPerimeterConfigurationNameParameter": {
+      "name": "networkSecurityPerimeterConfigurationName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[-.\\w]+$",
+      "minLength": 1,
+      "maxLength": 512,
+      "x-ms-parameter-location": "method",
+      "description": "The name for a network security perimeter configuration"
     }
   }
 }
