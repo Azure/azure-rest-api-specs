@@ -208,7 +208,9 @@
               "fine-tune",
               "fine-tune-results",
               "assistants",
-              "assistants_output"
+              "assistants_output",
+              "batch",
+              "batch_output"
             ],
             "x-ms-enum": {
               "name": "Purpose",
@@ -229,6 +231,14 @@
                 {
                   "value": "assistants_output",
                   "description": "This file contains the results of an assistant."
+                },
+                {
+                  "value": "batch",
+                  "description": "This file contains the input data for a batch."
+                },
+                {
+                  "value": "batch_output",
+                  "description": "This file contains the results of a batch."
                 }
               ]
             }
@@ -283,7 +293,8 @@
               "fine-tune",
               "fine-tune-results",
               "assistants",
-              "assistants_output"
+              "assistants_output",
+              "batch"
             ],
             "x-ms-enum": {
               "name": "Purpose",
@@ -304,6 +315,10 @@
                 {
                   "value": "assistants_output",
                   "description": "This file contains the results of an assistant."
+                },
+                {
+                  "value": "batch",
+                  "description": "This file contains the input data for a batch."
                 }
               ]
             }
@@ -2221,6 +2236,10 @@
         "internalFailure",
         "quotaExceeded",
         "jsonlValidationFailed",
+        "fileImportFailed",
+        "tooManyRequests",
+        "unauthorized",
+        "contentFilter",
         "fileImportFailed"
       ],
       "type": "string",
@@ -2267,6 +2286,18 @@
           {
             "value": "jsonlValidationFailed",
             "description": "Validation of jsonl data failed."
+          },
+          {
+            "value": "tooManyRequests",
+            "description": "Too many requests. Please retry later."
+          },
+          {
+            "value": "unauthorized",
+            "description": "The current user/api key is not authorized for the operation."
+          },
+          {
+            "value": "contentFilter",
+            "description": "Image generation failed as a result of our safety system."
           },
           {
             "value": "fileImportFailed",
@@ -2450,55 +2481,6 @@
             "$ref": "#/definitions/File"
           }
         }
-      }
-    },
-    "FileState": {
-      "title": "FileState",
-      "description": "The state of a file.",
-      "enum": [
-        "uploaded",
-        "pending",
-        "running",
-        "processed",
-        "error",
-        "deleting",
-        "deleted"
-      ],
-      "type": "string",
-      "readOnly": true,
-      "x-ms-enum": {
-        "name": "FileState",
-        "modelAsString": true,
-        "values": [
-          {
-            "value": "uploaded",
-            "description": "The file has been uploaded but it's not yet processed. This state is not returned by Azure OpenAI and exposed only for compatibility. It can be categorized as an inactive state."
-          },
-          {
-            "value": "pending",
-            "description": "The operation was created and is not queued to be processed in the future. It can be categorized as an inactive state."
-          },
-          {
-            "value": "running",
-            "description": "The operation has started to be processed. It can be categorized as an active state."
-          },
-          {
-            "value": "processed",
-            "description": "The operation has successfully be processed and is ready for consumption. It can be categorized as a terminal state."
-          },
-          {
-            "value": "error",
-            "description": "The operation has completed processing with a failure and cannot be further consumed. It can be categorized as a terminal state."
-          },
-          {
-            "value": "deleting",
-            "description": "The entity is ni the process to be deleted. This state is not returned by Azure OpenAI and exposed only for compatibility. It can be categorized as an active state."
-          },
-          {
-            "value": "deleted",
-            "description": "The entity has been deleted but may still be referenced by other entities predating the deletion. It can be categorized as a terminal state."
-          }
-        ]
       }
     },
     "FineTuningHyperParameters": {
@@ -3321,7 +3303,9 @@
         "fine-tune",
         "fine-tune-results",
         "assistants",
-        "assistants_output"
+        "assistants_output",
+        "batch",
+        "batch_output"
       ],
       "type": "string",
       "readOnly": true,
@@ -3344,6 +3328,14 @@
           {
             "value": "assistants_output",
             "description": "This file contains the results of an assistant."
+          },
+          {
+            "value": "batch",
+            "description": "This file contains the input data for a batch."
+          },
+          {
+            "value": "batch_output",
+            "description": "This file contains the results of a batch."
           }
         ]
       }
