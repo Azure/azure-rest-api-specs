@@ -359,6 +359,61 @@
         }
       }
     },
+    "/files/import": {
+      "post": {
+        "tags": [
+          "Files:"
+        ],
+        "summary": "Creates a new file entity by importing data from a provided url. Uploaded files can, for example, be used for training or evaluating fine-tuned models.",
+        "operationId": "Files_Import",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionQueryParameter"
+          },
+          {
+            "in": "body",
+            "name": "fileImport",
+            "description": "The definition of the file to create including its purpose, the file name and the url of the file location.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/FileImport"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "The file has been successfully created.",
+            "schema": {
+              "$ref": "#/definitions/File"
+            },
+            "headers": {
+              "Location": {
+                "description": "The location of the newly created item.",
+                "type": "string",
+                "format": "url"
+              }
+            }
+          },
+          "default": {
+            "description": "An error occurred.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Importing a file with a blob url as source.": {
+            "$ref": "./examples/import_file.json"
+          }
+        }
+      }
+    },
     "/files/{file-id}": {
       "get": {
         "tags": [
@@ -480,61 +535,6 @@
         "x-ms-examples": {
           "Getting the file content.": {
             "$ref": "./examples/get_file_content.json"
-          }
-        }
-      }
-    },
-    "/files/import": {
-      "post": {
-        "tags": [
-          "Files:"
-        ],
-        "summary": "Creates a new file entity by importing data from a provided url. Uploaded files can, for example, be used for training or evaluating fine-tuned models.",
-        "operationId": "Files_Import",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/apiVersionQueryParameter"
-          },
-          {
-            "in": "body",
-            "name": "fileImport",
-            "description": "The definition of the file to create including its purpose, the file name and the url of the file location.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/FileImport"
-            }
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "The file has been successfully created.",
-            "schema": {
-              "$ref": "#/definitions/File"
-            },
-            "headers": {
-              "Location": {
-                "description": "The location of the newly created item.",
-                "type": "string",
-                "format": "url"
-              }
-            }
-          },
-          "default": {
-            "description": "An error occurred.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Importing a file with a blob url as source.": {
-            "$ref": "./examples/import_file.json"
           }
         }
       }
@@ -723,13 +723,13 @@
         }
       }
     },
-    "/fine_tuning/jobs/{fine-tuning-job-id}/events": {
-      "get": {
+    "/fine_tuning/jobs/{fine-tuning-job-id}/cancel": {
+      "post": {
         "tags": [
           "Fine-tuning:"
         ],
-        "summary": "Gets the events for the fine-tune job specified by the given fine-tune-id.\r\nEvents are created when the job status changes, e.g. running or complete, and when results are uploaded.",
-        "operationId": "FineTuning_GetEvents",
+        "summary": "Cancels the processing of the fine-tune job specified by the given fine-tune-id.",
+        "operationId": "FineTuning_Cancel",
         "produces": [
           "application/json"
         ],
@@ -742,28 +742,14 @@
             "type": "string"
           },
           {
-            "in": "query",
-            "name": "after",
-            "description": "Identifier for the last event from the previous pagination request.",
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "limit",
-            "description": "Number of events to retrieve. Defaults to 20.",
-            "type": "integer",
-            "format": "int32",
-            "default": 20
-          },
-          {
             "$ref": "#/parameters/apiVersionQueryParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "The fine tune has been successfully canceled",
             "schema": {
-              "$ref": "#/definitions/FineTuningJobEventList"
+              "$ref": "#/definitions/FineTuningJob"
             }
           },
           "default": {
@@ -774,8 +760,8 @@
           }
         },
         "x-ms-examples": {
-          "Getting events of a fine tuning job.": {
-            "$ref": "./examples/get_finetuning_job_events.json"
+          "Canceling a fine tuning job.": {
+            "$ref": "./examples/cancel_finetuning_job.json"
           }
         }
       }
@@ -837,13 +823,13 @@
         }
       }
     },
-    "/fine_tuning/jobs/{fine-tuning-job-id}/cancel": {
-      "post": {
+    "/fine_tuning/jobs/{fine-tuning-job-id}/events": {
+      "get": {
         "tags": [
           "Fine-tuning:"
         ],
-        "summary": "Cancels the processing of the fine-tune job specified by the given fine-tune-id.",
-        "operationId": "FineTuning_Cancel",
+        "summary": "Gets the events for the fine-tune job specified by the given fine-tune-id.\r\nEvents are created when the job status changes, e.g. running or complete, and when results are uploaded.",
+        "operationId": "FineTuning_GetEvents",
         "produces": [
           "application/json"
         ],
@@ -856,85 +842,20 @@
             "type": "string"
           },
           {
-            "$ref": "#/parameters/apiVersionQueryParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The fine tune has been successfully canceled",
-            "schema": {
-              "$ref": "#/definitions/FineTuningJob"
-            }
-          },
-          "default": {
-            "description": "An error occurred.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Canceling a fine tuning job.": {
-            "$ref": "./examples/cancel_finetuning_job.json"
-          }
-        }
-      }
-    },
-    "/models": {
-      "get": {
-        "tags": [
-          "Models:"
-        ],
-        "summary": "Gets a list of all models that are accessible by the Azure OpenAI resource.\r\nThese include base models as well as all successfully completed fine-tuned models owned by the Azure OpenAI resource.",
-        "operationId": "Models_List",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/apiVersionQueryParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/ModelList"
-            }
-          },
-          "default": {
-            "description": "An error occurred.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Getting all models owned by account.": {
-            "$ref": "./examples/get_models.json"
-          }
-        }
-      }
-    },
-    "/models/{model-id}": {
-      "get": {
-        "tags": [
-          "Models:"
-        ],
-        "summary": "Gets details for the model specified by the given modelId.",
-        "operationId": "Models_Get",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "model-id",
-            "description": "The identifier of the model.",
-            "required": true,
+            "in": "query",
+            "name": "after",
+            "description": "Identifier for the last event from the previous pagination request.",
             "type": "string"
           },
           {
+            "in": "query",
+            "name": "limit",
+            "description": "Number of events to retrieve. Defaults to 20.",
+            "type": "integer",
+            "format": "int32",
+            "default": 20
+          },
+          {
             "$ref": "#/parameters/apiVersionQueryParameter"
           }
         ],
@@ -942,7 +863,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/Model"
+              "$ref": "#/definitions/FineTuningJobEventList"
             }
           },
           "default": {
@@ -953,11 +874,8 @@
           }
         },
         "x-ms-examples": {
-          "Getting a base model.": {
-            "$ref": "./examples/get_model_base.json"
-          },
-          "Getting a fine-tuned model.": {
-            "$ref": "./examples/get_model_finetune.json"
+          "Getting events of a fine tuning job.": {
+            "$ref": "./examples/get_finetuning_job_events.json"
           }
         }
       }
@@ -1217,9 +1135,469 @@
           }
         }
       }
+    },
+    "/models": {
+      "get": {
+        "tags": [
+          "Models:"
+        ],
+        "summary": "Gets a list of all models that are accessible by the Azure OpenAI resource.\r\nThese include base models as well as all successfully completed fine-tuned models owned by the Azure OpenAI resource.",
+        "operationId": "Models_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionQueryParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ModelList"
+            }
+          },
+          "default": {
+            "description": "An error occurred.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Getting all models owned by account.": {
+            "$ref": "./examples/get_models.json"
+          }
+        }
+      }
+    },
+    "/models/{model-id}": {
+      "get": {
+        "tags": [
+          "Models:"
+        ],
+        "summary": "Gets details for the model specified by the given modelId.",
+        "operationId": "Models_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "model-id",
+            "description": "The identifier of the model.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/apiVersionQueryParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Model"
+            }
+          },
+          "default": {
+            "description": "An error occurred.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Getting a base model.": {
+            "$ref": "./examples/get_model_base.json"
+          },
+          "Getting a fine-tuned model.": {
+            "$ref": "./examples/get_model_finetune.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscription_id}/resourcegroups/{resourcegroup}/accounts/{accountName}/internal/files": {
+      "post": {
+        "tags": [
+          "Files:"
+        ],
+        "summary": "Creates a new file entity by creating cosmos db entry only.",
+        "operationId": "Files_Create",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "subscription_id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "resourcegroup",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "accountName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/apiVersionQueryParameter"
+          },
+          {
+            "in": "body",
+            "name": "fileCreate",
+            "description": "The definition of the file to create including its purpose, the file name and the url of the file location.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/FileCreate"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "The file has been successfully created.",
+            "schema": {
+              "$ref": "#/definitions/FileDetails"
+            },
+            "headers": {
+              "Location": {
+                "description": "The location of the newly created item.",
+                "type": "string",
+                "format": "url"
+              }
+            }
+          },
+          "default": {
+            "description": "An error occurred.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create a file with a blob url as source.": {
+            "$ref": "./examples/create_file.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscription_id}/resourcegroups/{resourcegroup}/accounts/{accountName}/internal/files/{file-id}": {
+      "get": {
+        "tags": [
+          "Files:"
+        ],
+        "summary": "Gets details for a single file specified by the given file-id.",
+        "operationId": "Files_Get_Details",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "file-id",
+            "description": "The identifier of the file.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "subscription_id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "resourcegroup",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "accountName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/apiVersionQueryParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/FileDetails"
+            }
+          },
+          "default": {
+            "description": "An error occurred.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Getting a file details.": {
+            "$ref": "./examples/get_file_details.json"
+          }
+        }
+      }
+    },
+    "/uploads": {
+      "post": {
+        "tags": [
+          "UploadFile:"
+        ],
+        "summary": "Creates a new file entity by uploading data from a local machine. Uploaded files can, for example, be used for training or evaluating fine-tuned models.",
+        "operationId": "Upload_File_Start",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionQueryParameter"
+          },
+          {
+            "in": "body",
+            "name": "requestBody",
+            "description": "The definition of the file to create including its purpose and the location on the local machine.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UploadFileStartBody"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "The upload has been successfully created.",
+            "schema": {
+              "$ref": "#/definitions/UploadResource"
+            },
+            "headers": {
+              "Location": {
+                "description": "The location of the newly created item.",
+                "type": "string",
+                "format": "url"
+              }
+            }
+          },
+          "default": {
+            "description": "An error occurred.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Start a large file upload operation.": {
+            "$ref": "./examples/upload_file_start.json"
+          }
+        }
+      }
+    },
+    "/uploads/{upload-id}/cancel": {
+      "post": {
+        "tags": [
+          "UploadFile:"
+        ],
+        "summary": "Creates a new file entity by uploading data from a local machine. Uploaded files can, for example, be used for training or evaluating fine-tuned models.",
+        "operationId": "Upload_File_Cancel",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "upload-id",
+            "description": "The identifier of the upload.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/apiVersionQueryParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/UploadResource"
+            }
+          },
+          "default": {
+            "description": "An error occurred.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Cancel a large file upload operation.": {
+            "$ref": "./examples/upload_file_cancel.json"
+          }
+        }
+      }
+    },
+    "/uploads/{upload-id}/complete": {
+      "post": {
+        "tags": [
+          "UploadFile:"
+        ],
+        "summary": "Creates a new file entity by uploading data from a local machine. Uploaded files can, for example, be used for training or evaluating fine-tuned models.",
+        "operationId": "Upload_File_Complete",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "upload-id",
+            "description": "The identifier of the upload.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/apiVersionQueryParameter"
+          },
+          {
+            "in": "body",
+            "name": "requestBody",
+            "description": "The definition of the file to create including its purpose and the location on the local machine.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UploadFileCompleteBody"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/UploadResource"
+            }
+          },
+          "default": {
+            "description": "An error occurred.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Complete and validate a large file upload operation.": {
+            "$ref": "./examples/upload_file_complete.json"
+          }
+        }
+      }
+    },
+    "/uploads/{upload-id}/parts": {
+      "post": {
+        "tags": [
+          "UploadFile:"
+        ],
+        "summary": "Creates a new file entity by uploading data from a local machine. Uploaded files can, for example, be used for training or evaluating fine-tuned models.",
+        "operationId": "Upload_File_Part",
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "upload-id",
+            "description": "The identifier of the upload.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/apiVersionQueryParameter"
+          },
+          {
+            "in": "formData",
+            "name": "data",
+            "required": true,
+            "type": "file"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/UploadPartResource"
+            }
+          },
+          "default": {
+            "description": "An error occurred.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Upload a part of large file upload operation.": {
+            "$ref": "./examples/upload_file_part.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
+    "AzureAISearchIndex": {
+      "description": "Azure AI Search Index.",
+      "required": [
+        "connectionId"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/TargetIndex"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "connectionId": {
+              "type": "string",
+              "description": "The id of the connection pointing to the Azure AI Search Index."
+            }
+          }
+        }
+      ],
+      "x-ms-discriminator-value": "AzureAISearch"
+    },
+    "BaseConnection": {
+      "title": "BaseConnection",
+      "description": "A connection to a resource.",
+      "type": "object",
+      "required": [
+        "kind"
+      ],
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/ConnectionType"
+        }
+      },
+      "discriminator": "kind"
+    },
     "Batch": {
       "title": "Batch",
       "description": "Defines the values of a batch.",
@@ -1399,35 +1777,6 @@
         }
       }
     },
-    "BatchesList": {
-      "title": "BatchList",
-      "description": "Represents a list of batches.",
-      "type": "object",
-      "properties": {
-        "object": {
-          "$ref": "#/definitions/TypeDiscriminator"
-        },
-        "data": {
-          "description": "The list of items.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Batch"
-          }
-        },
-        "first_id": {
-          "description": "The id of the first batch in the list of batches returned.",
-          "type": "string"
-        },
-        "last_id": {
-          "description": "The id of the last batch in the list of batches returned.",
-          "type": "string"
-        },
-        "has_more": {
-          "description": "A value indicating whether the list contains more elements than returned.",
-          "type": "boolean"
-        }
-      }
-    },
     "BatchRequestCounts": {
       "title": "BatchRequestCounts",
       "description": "The request counts for different statuses within the batch.",
@@ -1501,6 +1850,35 @@
         ]
       }
     },
+    "BatchesList": {
+      "title": "BatchList",
+      "description": "Represents a list of batches.",
+      "type": "object",
+      "properties": {
+        "object": {
+          "$ref": "#/definitions/TypeDiscriminator"
+        },
+        "data": {
+          "description": "The list of items.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Batch"
+          }
+        },
+        "first_id": {
+          "description": "The id of the first batch in the list of batches returned.",
+          "type": "string"
+        },
+        "last_id": {
+          "description": "The id of the last batch in the list of batches returned.",
+          "type": "string"
+        },
+        "has_more": {
+          "description": "A value indicating whether the list contains more elements than returned.",
+          "type": "boolean"
+        }
+      }
+    },
     "Capabilities": {
       "title": "Capabilities",
       "description": "The capabilities of a base or fine tune model.",
@@ -1535,6 +1913,211 @@
         }
       }
     },
+    "ChunkingSettings": {
+      "type": "object",
+      "title": "ChunkingSettings",
+      "description": "Chunking settings",
+      "properties": {
+        "maxChunkSizeInTokens": {
+          "type": "integer"
+        }
+      }
+    },
+    "CompletionAction": {
+      "type": "string",
+      "description": "The completion action.",
+      "enum": [
+        "cleanUpTempAssets",
+        "keepAllAssets"
+      ],
+      "x-ms-enum": {
+        "name": "IngestionJobCompletionAction",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "keepAllAssets",
+            "value": "keepAllAssets",
+            "description": "Will not clean up any of the intermediate assets created during the ingestion process."
+          },
+          {
+            "name": "cleanUpTempAssets",
+            "value": "cleanUpTempAssets",
+            "description": "Will clean up intermediate assets created during the ingestion process."
+          }
+        ]
+      }
+    },
+    "ComputeType": {
+      "type": "string",
+      "description": "The compute type.",
+      "enum": [
+        "ServerlessCompute",
+        "CustomCompute"
+      ],
+      "x-ms-enum": {
+        "name": "ComputeType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ServerlessCompute",
+            "value": "ServerlessCompute",
+            "description": "Serverless user compute."
+          },
+          {
+            "name": "CustomCompute",
+            "value": "CustomCompute",
+            "description": "Custom user compute."
+          }
+        ]
+      }
+    },
+    "ConnectionStringConnection": {
+      "description": "Connection string connection.",
+      "required": [
+        "connectionString"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseConnection"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "connectionString": {
+              "type": "string",
+              "description": "Connection string"
+            }
+          }
+        }
+      ],
+      "x-ms-discriminator-value": "ConnectionString"
+    },
+    "ConnectionType": {
+      "type": "string",
+      "description": "The connection type.",
+      "enum": [
+        "EndpointWithKey",
+        "ConnectionString",
+        "EndpointWithManagedIdentity",
+        "WorkspaceConnection",
+        "RelativeConnection"
+      ],
+      "x-ms-enum": {
+        "name": "ConnectionType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "EndpointWithKey",
+            "value": "EndpointWithKey",
+            "description": "Endpoint and key connection."
+          },
+          {
+            "name": "ConnectionString",
+            "value": "ConnectionString",
+            "description": "Connection string."
+          },
+          {
+            "name": "EndpointWithManagedIdentity",
+            "value": "EndpointWithManagedIdentity",
+            "description": "Endpoint and managed identity."
+          },
+          {
+            "name": "WorkspaceConnection",
+            "value": "WorkspaceConnection",
+            "description": "AML Workspace connection."
+          },
+          {
+            "name": "RelativeConnection",
+            "value": "RelativeConnection",
+            "description": "Relative deployment"
+          }
+        ]
+      }
+    },
+    "CosmosDBIndex": {
+      "description": "CosmosDB Index.",
+      "required": [
+        "connectionId"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/TargetIndex"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "connectionId": {
+              "type": "string",
+              "description": "The id of the connection pointing to the cosmos DB."
+            },
+            "collectionName": {
+              "type": "string",
+              "description": "The name of the cosmos DB collection."
+            },
+            "databaseName": {
+              "type": "string",
+              "description": "The name of the cosmos DB database."
+            }
+          }
+        }
+      ],
+      "x-ms-discriminator-value": "CosmosDB"
+    },
+    "CrawlingSettings": {
+      "type": "object",
+      "title": "CrawlingSettings",
+      "description": "Crawling settings",
+      "properties": {
+        "maxCrawlDepth": {
+          "type": "integer"
+        },
+        "maxCrawlTimeInMins": {
+          "type": "integer"
+        },
+        "maxDownloadTimeInMins": {
+          "type": "integer"
+        },
+        "maxFileSize": {
+          "type": "integer"
+        },
+        "maxRedirects": {
+          "type": "integer"
+        },
+        "maxFiles": {
+          "type": "integer"
+        }
+      }
+    },
+    "CustomCompute": {
+      "description": "Custom compute.",
+      "required": [
+        "computeId"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/JobCompute"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "computeId": {
+              "type": "string",
+              "description": "Id of the custom compute"
+            }
+          }
+        }
+      ],
+      "x-ms-discriminator-value": "CustomCompute"
+    },
+    "DeploymentConnection": {
+      "description": "Relative deployment connection.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseConnection"
+        }
+      ],
+      "x-ms-discriminator-value": "RelativeConnection"
+    },
     "Deprecation": {
       "title": "Deprecation",
       "description": "Defines the dates of deprecation for the different use cases of a model.\r\nUsually base models support 1 year of fine tuning after creation. Inference is typically supported 2 years after creation of base or\r\nfine tuned models. The exact dates are specified in the properties.",
@@ -1554,6 +2137,57 @@
           "type": "integer"
         }
       }
+    },
+    "EndpointKeyConnection": {
+      "description": "Endpoint key connection.",
+      "required": [
+        "endpoint",
+        "key"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseConnection"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "endpoint": {
+              "type": "string",
+              "description": "Endpoint"
+            },
+            "key": {
+              "type": "string",
+              "description": "Key"
+            }
+          }
+        }
+      ],
+      "x-ms-discriminator-value": "EndpointWithKey"
+    },
+    "EndpointMIConnection": {
+      "description": "Endpoint Managed Identity connection.",
+      "required": [
+        "endpoint"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseConnection"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "endpoint": {
+              "type": "string",
+              "description": "Endpoint"
+            },
+            "resourceId": {
+              "type": "string",
+              "description": "Resource Id"
+            }
+          }
+        }
+      ],
+      "x-ms-discriminator-value": "EndpointWithManagedIdentity"
     },
     "Error": {
       "title": "Error",
@@ -1605,7 +2239,8 @@
         "fileImportFailed",
         "tooManyRequests",
         "unauthorized",
-        "contentFilter"
+        "contentFilter",
+        "fileImportFailed"
       ],
       "type": "string",
       "x-ms-enum": {
@@ -1653,10 +2288,6 @@
             "description": "Validation of jsonl data failed."
           },
           {
-            "value": "fileImportFailed",
-            "description": "Import of file failed."
-          },
-          {
             "value": "tooManyRequests",
             "description": "Too many requests. Please retry later."
           },
@@ -1667,6 +2298,10 @@
           {
             "value": "contentFilter",
             "description": "Image generation failed as a result of our safety system."
+          },
+          {
+            "value": "fileImportFailed",
+            "description": "Import of file failed."
           }
         ]
       }
@@ -1730,9 +2365,6 @@
           "type": "string",
           "readOnly": true
         },
-        "status": {
-          "$ref": "#/definitions/FileState"
-        },
         "bytes": {
           "format": "int64",
           "description": "The size of this file when available (can be null). File sizes larger than 2^53-1 are not supported to ensure compatibility\r\nwith JavaScript integers.",
@@ -1746,11 +2378,66 @@
           "description": "The name of the file.",
           "minLength": 1,
           "type": "string"
+        }
+      },
+      "readOnly": true
+    },
+    "FileCreate": {
+      "title": "FileCreate",
+      "description": "Defines a document to import from an external content url to be usable with Azure OpenAI.",
+      "required": [
+        "content_url",
+        "purpose"
+      ],
+      "type": "object",
+      "properties": {
+        "purpose": {
+          "$ref": "#/definitions/Purpose"
         },
-        "status_details": {
-          "description": "The error message with details in case processing of this file failed.",
+        "content_url": {
+          "format": "url",
+          "description": "The url to download the document from (can be SAS url of a blob or any other external url accessible with a GET request).",
+          "type": "string"
+        }
+      }
+    },
+    "FileDetails": {
+      "title": "FileDetails",
+      "description": "A file detail is a document used by batch service to fetch file blob details.",
+      "required": [
+        "filename",
+        "purpose"
+      ],
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "The identity of this item.",
           "type": "string",
           "readOnly": true
+        },
+        "filename": {
+          "description": "The name of the file.",
+          "minLength": 1,
+          "type": "string"
+        },
+        "path": {
+          "description": "The  the relative path to the file within the container.",
+          "type": "string",
+          "readOnly": true
+        },
+        "storage_account_uri": {
+          "format": "url",
+          "description": "The storage account url of this file.",
+          "type": "string",
+          "readOnly": true
+        },
+        "storage_container_name": {
+          "description": "The Storage Container Name of this file blob.",
+          "type": "string",
+          "readOnly": true
+        },
+        "purpose": {
+          "$ref": "#/definitions/Purpose"
         }
       }
     },
@@ -1794,55 +2481,6 @@
             "$ref": "#/definitions/File"
           }
         }
-      }
-    },
-    "FileState": {
-      "title": "FileState",
-      "description": "The state of a file.",
-      "enum": [
-        "uploaded",
-        "pending",
-        "running",
-        "processed",
-        "error",
-        "deleting",
-        "deleted"
-      ],
-      "type": "string",
-      "readOnly": true,
-      "x-ms-enum": {
-        "name": "FileState",
-        "modelAsString": true,
-        "values": [
-          {
-            "value": "uploaded",
-            "description": "The file has been uploaded but it's not yet processed. This state is not returned by Azure OpenAI and exposed only for compatibility. It can be categorized as an inactive state."
-          },
-          {
-            "value": "pending",
-            "description": "The operation was created and is not queued to be processed in the future. It can be categorized as an inactive state."
-          },
-          {
-            "value": "running",
-            "description": "The operation has started to be processed. It can be categorized as an active state."
-          },
-          {
-            "value": "processed",
-            "description": "The operation has successfully be processed and is ready for consumption. It can be categorized as a terminal state."
-          },
-          {
-            "value": "error",
-            "description": "The operation has completed processing with a failure and cannot be further consumed. It can be categorized as a terminal state."
-          },
-          {
-            "value": "deleting",
-            "description": "The entity is ni the process to be deleted. This state is not returned by Azure OpenAI and exposed only for compatibility. It can be categorized as an active state."
-          },
-          {
-            "value": "deleted",
-            "description": "The entity has been deleted but may still be referenced by other entities predating the deletion. It can be categorized as a terminal state."
-          }
-        ]
       }
     },
     "FineTuningHyperParameters": {
@@ -1921,8 +2559,7 @@
         "finished_at": {
           "format": "int32",
           "description": "A timestamp when this job or item has finished successfully (in unix epochs).",
-          "type": "integer",
-          "readOnly": true
+          "type": "integer"
         },
         "organisation_id": {
           "description": "The organisation id of this fine tune job. Unused on Azure OpenAI; compatibility for OpenAI only.",
@@ -2208,6 +2845,243 @@
         ]
       }
     },
+    "GenericEmbeddingSettings": {
+      "title": "ConnectionEmbeddingSettings",
+      "description": "Connection Embedding Settings",
+      "type": "object",
+      "properties": {
+        "connection": {
+          "$ref": "#/definitions/BaseConnection"
+        },
+        "deploymentName": {
+          "type": "string"
+        },
+        "modelName": {
+          "type": "string"
+        }
+      }
+    },
+    "IngestionError": {
+      "title": "IngestionError",
+      "description": "The details of the ingestion error",
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string"
+        },
+        "innerErrors": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "IngestionJob": {
+      "title": "IngestionJob",
+      "description": "Represents the details of a job.",
+      "type": "object",
+      "required": [
+        "kind"
+      ],
+      "discriminator": "kind",
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/IngestionJobType"
+        },
+        "jobId": {
+          "type": "string"
+        }
+      }
+    },
+    "IngestionJobList": {
+      "title": "IngestionJobList",
+      "description": "Represents a list of ingestion jobs.",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The link to the next page.",
+          "type": "string"
+        },
+        "value": {
+          "description": "The list of items.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IngestionJob"
+          }
+        }
+      }
+    },
+    "IngestionJobProgress": {
+      "title": "IngestionJobProgress",
+      "type": "object",
+      "required": [
+        "stageProgress"
+      ],
+      "properties": {
+        "stageProgress": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IngestionJobStageProgress"
+          }
+        }
+      }
+    },
+    "IngestionJobRun": {
+      "title": "IngestionJobRun",
+      "description": "The details of a job run",
+      "type": "object",
+      "properties": {
+        "jobId": {
+          "type": "string"
+        },
+        "runId": {
+          "type": "string"
+        },
+        "status": {
+          "$ref": "#/definitions/OperationState"
+        },
+        "error": {
+          "$ref": "#/definitions/IngestionError"
+        },
+        "warnings": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "progress": {
+          "$ref": "#/definitions/IngestionJobProgress"
+        }
+      }
+    },
+    "IngestionJobRunList": {
+      "title": "IngestionJobRunList",
+      "description": "Represents a list of ingestion job runs.",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The link to the next page.",
+          "type": "string"
+        },
+        "value": {
+          "description": "The list of items.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IngestionJobRun"
+          }
+        }
+      }
+    },
+    "IngestionJobStageProgress": {
+      "title": "IngestionJobStageProgress",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "totalItems": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "processedItems": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "state": {
+          "$ref": "#/definitions/OperationState"
+        },
+        "subStageProgress": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IngestionJobStageProgress"
+          }
+        }
+      }
+    },
+    "IngestionJobSystemCompute": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/IngestionJob"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "searchServiceConnection": {
+              "$ref": "#/definitions/BaseConnection"
+            },
+            "datasource": {
+              "$ref": "#/definitions/SystemComputeDatasource"
+            },
+            "completionAction": {
+              "$ref": "#/definitions/CompletionAction"
+            },
+            "dataRefreshIntervalInHours": {
+              "type": "integer"
+            }
+          }
+        }
+      ],
+      "x-ms-discriminator-value": "SystemCompute"
+    },
+    "IngestionJobType": {
+      "title": "IngestionJobType",
+      "type": "string",
+      "description": "The job type.",
+      "enum": [
+        "SystemCompute",
+        "UserCompute"
+      ],
+      "x-ms-enum": {
+        "name": "IngestionJobType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "SystemCompute",
+            "value": "SystemCompute",
+            "description": "Jobs that run on service owned resources."
+          },
+          {
+            "name": "UserCompute",
+            "value": "UserCompute",
+            "description": "Jobs that run on user owned workspace."
+          }
+        ]
+      }
+    },
+    "IngestionJobUserCompute": {
+      "type": "object",
+      "required": [
+        "workspaceId"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/IngestionJob"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "workspaceId": {
+              "type": "string"
+            },
+            "compute": {
+              "$ref": "#/definitions/JobCompute"
+            },
+            "target": {
+              "$ref": "#/definitions/TargetIndex"
+            },
+            "datasource": {
+              "$ref": "#/definitions/UserComputeDatasource"
+            },
+            "dataRefreshIntervalInHours": {
+              "type": "integer"
+            }
+          }
+        }
+      ],
+      "x-ms-discriminator-value": "UserCompute"
+    },
     "InnerError": {
       "title": "InnerError",
       "description": "Inner error as defined in the Microsoft REST guidelines\r\n(https://github.com/microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses).",
@@ -2237,6 +3111,20 @@
             "description": "The request data is invalid for this operation."
           }
         ]
+      }
+    },
+    "JobCompute": {
+      "title": "JobCompute",
+      "description": "The compute settings of the job.",
+      "type": "object",
+      "discriminator": "kind",
+      "required": [
+        "kind"
+      ],
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/ComputeType"
+        }
       }
     },
     "LifeCycleStatus": {
@@ -2387,6 +3275,27 @@
         ]
       }
     },
+    "PineconeIndex": {
+      "description": "Pinecone Index.",
+      "required": [
+        "connectionId"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/TargetIndex"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "connectionId": {
+              "type": "string",
+              "description": "The id of the connection pointing to the pinecone."
+            }
+          }
+        }
+      ],
+      "x-ms-discriminator-value": "Pinecone"
+    },
     "Purpose": {
       "title": "Purpose",
       "description": "The intended purpose of the uploaded documents. Use \"fine-tune\" for fine-tuning. This allows us to validate the format of the uploaded file.",
@@ -2399,6 +3308,7 @@
         "batch_output"
       ],
       "type": "string",
+      "readOnly": true,
       "x-ms-enum": {
         "name": "Purpose",
         "modelAsString": true,
@@ -2430,193 +3340,6 @@
         ]
       }
     },
-    "TypeDiscriminator": {
-      "title": "TypeDiscriminator",
-      "description": "Defines the type of an object.",
-      "enum": [
-        "list",
-        "fine_tuning.job",
-        "file",
-        "fine_tuning.job.event",
-        "fine_tuning.job.checkpoint",
-        "model",
-        "batch"
-      ],
-      "type": "string",
-      "readOnly": true,
-      "x-ms-enum": {
-        "name": "TypeDiscriminator",
-        "modelAsString": true,
-        "values": [
-          {
-            "value": "list",
-            "description": "This object represents a list of other objects."
-          },
-          {
-            "value": "fine_tuning.job",
-            "description": "This object represents a fine tune job."
-          },
-          {
-            "value": "file",
-            "description": "This object represents a file."
-          },
-          {
-            "value": "fine_tuning.job.event",
-            "description": "This object represents an event of a fine tuning job."
-          },
-          {
-            "value": "fine_tuning.job.checkpoint",
-            "description": "This object represents a checkpoint of a fine tuning job."
-          },
-          {
-            "value": "model",
-            "description": "This object represents a model (can be a base model or fine tune job result)."
-          },
-          {
-            "value": "batch",
-            "description": "This object represents a batch."
-          }
-        ]
-      }
-    },
-    "IngestionJob": {
-      "title": "IngestionJob",
-      "description": "Represents the details of a job.",
-      "type": "object",
-      "required": [
-        "kind"
-      ],
-      "discriminator": "kind",
-      "properties": {
-        "kind": {
-          "$ref": "#/definitions/IngestionJobType"
-        },
-        "jobId": {
-          "type": "string"
-        }
-      }
-    },
-    "IngestionJobType": {
-      "title": "IngestionJobType",
-      "type": "string",
-      "description": "The job type.",
-      "enum": [
-        "SystemCompute",
-        "UserCompute"
-      ],
-      "x-ms-enum": {
-        "name": "IngestionJobType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "SystemCompute",
-            "value": "SystemCompute",
-            "description": "Jobs that run on service owned resources."
-          },
-          {
-            "name": "UserCompute",
-            "value": "UserCompute",
-            "description": "Jobs that run on user owned workspace."
-          }
-        ]
-      }
-    },
-    "IngestionJobSystemCompute": {
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/IngestionJob"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "searchServiceConnection": {
-              "$ref": "#/definitions/BaseConnection"
-            },
-            "datasource": {
-              "$ref": "#/definitions/SystemComputeDatasource"
-            },
-            "completionAction": {
-              "$ref": "#/definitions/CompletionAction"
-            },
-            "dataRefreshIntervalInHours": {
-              "type": "integer"
-            }
-          }
-        }
-      ],
-      "x-ms-discriminator-value": "SystemCompute"
-    },
-    "IngestionJobUserCompute": {
-      "type": "object",
-      "required": [
-        "workspaceId"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/IngestionJob"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "workspaceId": {
-              "type": "string"
-            },
-            "compute": {
-              "$ref": "#/definitions/JobCompute"
-            },
-            "target": {
-              "$ref": "#/definitions/TargetIndex"
-            },
-            "datasource": {
-              "$ref": "#/definitions/UserComputeDatasource"
-            },
-            "dataRefreshIntervalInHours": {
-              "type": "integer"
-            }
-          }
-        }
-      ],
-      "x-ms-discriminator-value": "UserCompute"
-    },
-    "JobCompute": {
-      "title": "JobCompute",
-      "description": "The compute settings of the job.",
-      "type": "object",
-      "discriminator": "kind",
-      "required": [
-        "kind"
-      ],
-      "properties": {
-        "kind": {
-          "$ref": "#/definitions/ComputeType"
-        }
-      }
-    },
-    "ComputeType": {
-      "type": "string",
-      "description": "The compute type.",
-      "enum": [
-        "ServerlessCompute",
-        "CustomCompute"
-      ],
-      "x-ms-enum": {
-        "name": "ComputeType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "ServerlessCompute",
-            "value": "ServerlessCompute",
-            "description": "Serverless user compute."
-          },
-          {
-            "name": "CustomCompute",
-            "value": "CustomCompute",
-            "description": "Custom user compute."
-          }
-        ]
-      }
-    },
     "ServerlessCompute": {
       "description": "Serverless compute.",
       "allOf": [
@@ -2638,252 +3361,6 @@
         }
       ],
       "x-ms-discriminator-value": "ServerlessCompute"
-    },
-    "CustomCompute": {
-      "description": "Custom compute.",
-      "required": [
-        "computeId"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/JobCompute"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "computeId": {
-              "type": "string",
-              "description": "Id of the custom compute"
-            }
-          }
-        }
-      ],
-      "x-ms-discriminator-value": "CustomCompute"
-    },
-    "TargetIndex": {
-      "title": "TargetIndex",
-      "description": "Information about the index to be created.",
-      "type": "object",
-      "discriminator": "kind",
-      "required": [
-        "kind"
-      ],
-      "properties": {
-        "kind": {
-          "$ref": "#/definitions/TargetType"
-        }
-      }
-    },
-    "TargetType": {
-      "type": "string",
-      "description": "The target type.",
-      "enum": [
-        "AzureAISearch",
-        "CosmosDB",
-        "Pinecone"
-      ],
-      "x-ms-enum": {
-        "name": "TargetType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "AzureAISearch",
-            "value": "AzureAISearch",
-            "description": "Azure AI Search Index."
-          },
-          {
-            "name": "CosmosDB",
-            "value": "CosmosDB",
-            "description": "CosmosDB Index."
-          },
-          {
-            "name": "Pinecone",
-            "value": "Pinecone",
-            "description": "Pinecone Index."
-          }
-        ]
-      }
-    },
-    "AzureAISearchIndex": {
-      "description": "Azure AI Search Index.",
-      "required": [
-        "connectionId"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/TargetIndex"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "connectionId": {
-              "type": "string",
-              "description": "The id of the connection pointing to the Azure AI Search Index."
-            }
-          }
-        }
-      ],
-      "x-ms-discriminator-value": "AzureAISearch"
-    },
-    "CosmosDBIndex": {
-      "description": "CosmosDB Index.",
-      "required": [
-        "connectionId"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/TargetIndex"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "connectionId": {
-              "type": "string",
-              "description": "The id of the connection pointing to the cosmos DB."
-            },
-            "collectionName": {
-              "type": "string",
-              "description": "The name of the cosmos DB collection."
-            },
-            "databaseName": {
-              "type": "string",
-              "description": "The name of the cosmos DB database."
-            }
-          }
-        }
-      ],
-      "x-ms-discriminator-value": "CosmosDB"
-    },
-    "PineconeIndex": {
-      "description": "Pinecone Index.",
-      "required": [
-        "connectionId"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/TargetIndex"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "connectionId": {
-              "type": "string",
-              "description": "The id of the connection pointing to the pinecone."
-            }
-          }
-        }
-      ],
-      "x-ms-discriminator-value": "Pinecone"
-    },
-    "UserComputeDatasource": {
-      "title": "UserComputeDatasource",
-      "type": "object",
-      "discriminator": "kind",
-      "required": [
-        "kind"
-      ],
-      "properties": {
-        "kind": {
-          "$ref": "#/definitions/UserComputeDatasourceType"
-        }
-      }
-    },
-    "UserComputeDatasourceType": {
-      "type": "string",
-      "description": "The datasource type.",
-      "enum": [
-        "Dataset",
-        "Urls"
-      ],
-      "x-ms-enum": {
-        "name": "UserComputeDatasourceType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Dataset",
-            "value": "Dataset",
-            "description": "Workspace Dataset."
-          },
-          {
-            "name": "Urls",
-            "value": "Urls",
-            "description": "URLs."
-          }
-        ]
-      }
-    },
-    "UserComputeDataset": {
-      "type": "object",
-      "title": "UserComputeStorage",
-      "description": "Storage account",
-      "required": [
-        "datasetId",
-        "datasetType"
-      ],
-      "x-ms-discriminator-value": "Dataset",
-      "allOf": [
-        {
-          "$ref": "#/definitions/UserComputeDatasource"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "datasetId": {
-              "type": "string"
-            },
-            "datasetType": {
-              "type": "string"
-            },
-            "chunking": {
-              "$ref": "#/definitions/ChunkingSettings"
-            },
-            "embeddings": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/WorkspaceConnectionEmbeddingSettings"
-              }
-            }
-          }
-        }
-      ]
-    },
-    "UserComputeUrl": {
-      "type": "object",
-      "title": "UserComputeUrl",
-      "description": "Urls",
-      "required": [
-        "urls",
-        "embeddings"
-      ],
-      "x-ms-discriminator-value": "Urls",
-      "allOf": [
-        {
-          "$ref": "#/definitions/UserComputeDatasource"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "urls": {
-              "type": "array",
-              "items": {
-                "type": "string"
-              }
-            },
-            "crawling": {
-              "$ref": "#/definitions/CrawlingSettings"
-            },
-            "chunking": {
-              "$ref": "#/definitions/ChunkingSettings"
-            },
-            "embeddings": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/WorkspaceConnectionEmbeddingSettings"
-              }
-            }
-          }
-        }
-      ]
     },
     "SystemComputeDatasource": {
       "title": "SystemComputeDatasource",
@@ -3004,200 +3481,341 @@
         }
       ]
     },
-    "ChunkingSettings": {
+    "TargetIndex": {
+      "title": "TargetIndex",
+      "description": "Information about the index to be created.",
       "type": "object",
-      "title": "ChunkingSettings",
-      "description": "Chunking settings",
-      "properties": {
-        "maxChunkSizeInTokens": {
-          "type": "integer"
-        }
-      }
-    },
-    "CrawlingSettings": {
-      "type": "object",
-      "title": "CrawlingSettings",
-      "description": "Crawling settings",
-      "properties": {
-        "maxCrawlDepth": {
-          "type": "integer"
-        },
-        "maxCrawlTimeInMins": {
-          "type": "integer"
-        },
-        "maxDownloadTimeInMins": {
-          "type": "integer"
-        },
-        "maxFileSize": {
-          "type": "integer"
-        },
-        "maxRedirects": {
-          "type": "integer"
-        },
-        "maxFiles": {
-          "type": "integer"
-        }
-      }
-    },
-    "GenericEmbeddingSettings": {
-      "title": "ConnectionEmbeddingSettings",
-      "description": "Connection Embedding Settings",
-      "type": "object",
-      "properties": {
-        "connection": {
-          "$ref": "#/definitions/BaseConnection"
-        },
-        "deploymentName": {
-          "type": "string"
-        },
-        "modelName": {
-          "type": "string"
-        }
-      }
-    },
-    "WorkspaceConnectionEmbeddingSettings": {
-      "title": "WorkspaceConnectionEmbeddingSettings",
-      "description": "Connection id to the embedding model",
-      "type": "object",
-      "properties": {
-        "connectionId": {
-          "type": "string"
-        },
-        "deploymentName": {
-          "type": "string"
-        },
-        "modelName": {
-          "type": "string"
-        }
-      }
-    },
-    "BaseConnection": {
-      "title": "BaseConnection",
-      "description": "A connection to a resource.",
-      "type": "object",
+      "discriminator": "kind",
       "required": [
         "kind"
       ],
       "properties": {
         "kind": {
-          "$ref": "#/definitions/ConnectionType"
+          "$ref": "#/definitions/TargetType"
         }
-      },
-      "discriminator": "kind"
+      }
     },
-    "ConnectionType": {
+    "TargetType": {
       "type": "string",
-      "description": "The connection type.",
+      "description": "The target type.",
       "enum": [
-        "EndpointWithKey",
-        "ConnectionString",
-        "EndpointWithManagedIdentity",
-        "WorkspaceConnection",
-        "RelativeConnection"
+        "AzureAISearch",
+        "CosmosDB",
+        "Pinecone"
       ],
       "x-ms-enum": {
-        "name": "ConnectionType",
+        "name": "TargetType",
         "modelAsString": true,
         "values": [
           {
-            "name": "EndpointWithKey",
-            "value": "EndpointWithKey",
-            "description": "Endpoint and key connection."
+            "name": "AzureAISearch",
+            "value": "AzureAISearch",
+            "description": "Azure AI Search Index."
           },
           {
-            "name": "ConnectionString",
-            "value": "ConnectionString",
-            "description": "Connection string."
+            "name": "CosmosDB",
+            "value": "CosmosDB",
+            "description": "CosmosDB Index."
           },
           {
-            "name": "EndpointWithManagedIdentity",
-            "value": "EndpointWithManagedIdentity",
-            "description": "Endpoint and managed identity."
-          },
-          {
-            "name": "WorkspaceConnection",
-            "value": "WorkspaceConnection",
-            "description": "AML Workspace connection."
-          },
-          {
-            "name": "RelativeConnection",
-            "value": "RelativeConnection",
-            "description": "Relative deployment"
+            "name": "Pinecone",
+            "value": "Pinecone",
+            "description": "Pinecone Index."
           }
         ]
       }
     },
-    "EndpointKeyConnection": {
-      "description": "Endpoint key connection.",
-      "required": [
-        "endpoint",
-        "key"
+    "TypeDiscriminator": {
+      "title": "TypeDiscriminator",
+      "description": "Defines the type of an object.",
+      "enum": [
+        "list",
+        "fine_tuning.job",
+        "file",
+        "fine_tuning.job.event",
+        "fine_tuning.job.checkpoint",
+        "model",
+        "upload",
+        "upload.part"
       ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/BaseConnection"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "endpoint": {
-              "type": "string",
-              "description": "Endpoint"
-            },
-            "key": {
-              "type": "string",
-              "description": "Key"
-            }
+      "type": "string",
+      "readOnly": true,
+      "x-ms-enum": {
+        "name": "TypeDiscriminator",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "list",
+            "description": "This object represents a list of other objects."
+          },
+          {
+            "value": "fine_tuning.job",
+            "description": "This object represents a fine tune job."
+          },
+          {
+            "value": "file",
+            "description": "This object represents a file."
+          },
+          {
+            "value": "fine_tuning.job.event",
+            "description": "This object represents an event of a fine tuning job."
+          },
+          {
+            "value": "fine_tuning.job.checkpoint",
+            "description": "This object represents a checkpoint of a fine tuning job."
+          },
+          {
+            "value": "model",
+            "description": "This object represents a model (can be a base model or fine tune job result)."
+          },
+          {
+            "value": "upload",
+            "description": "This object represents a file upload."
+          },
+          {
+            "value": "upload.part",
+            "description": "This object represents part of a file upload."
           }
-        }
-      ],
-      "x-ms-discriminator-value": "EndpointWithKey"
+        ]
+      }
     },
-    "ConnectionStringConnection": {
-      "description": "Connection string connection.",
+    "UploadFileCompleteBody": {
+      "title": "UploadFileCompleteBody",
       "required": [
-        "connectionString"
+        "part_ids"
       ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/BaseConnection"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "connectionString": {
-              "type": "string",
-              "description": "Connection string"
-            }
+      "type": "object",
+      "properties": {
+        "part_ids": {
+          "title": "IList`1",
+          "type": "array",
+          "items": {
+            "type": "string"
           }
+        },
+        "md5": {
+          "type": "string"
         }
-      ],
-      "x-ms-discriminator-value": "ConnectionString"
+      }
     },
-    "EndpointMIConnection": {
-      "description": "Endpoint Managed Identity connection.",
+    "UploadFileStartBody": {
+      "title": "UploadFileStartBody",
       "required": [
-        "endpoint"
+        "bytes",
+        "filename",
+        "mime_type",
+        "purpose"
       ],
+      "type": "object",
+      "properties": {
+        "purpose": {
+          "$ref": "#/definitions/Purpose"
+        },
+        "filename": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "bytes": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "mime_type": {
+          "minLength": 1,
+          "type": "string"
+        }
+      }
+    },
+    "UploadPartResource": {
+      "title": "UploadPartResource",
+      "type": "object",
+      "properties": {
+        "object": {
+          "$ref": "#/definitions/TypeDiscriminator"
+        },
+        "created_at": {
+          "format": "unixtime",
+          "description": "A timestamp when this job or item was created (in unix epochs).",
+          "type": "integer",
+          "readOnly": true
+        },
+        "id": {
+          "description": "The identity of this item.",
+          "type": "string",
+          "readOnly": true
+        },
+        "upload_id": {
+          "type": "string",
+          "readOnly": true
+        },
+        "azure_block_id": {
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "UploadResource": {
+      "title": "UploadResource",
+      "type": "object",
+      "properties": {
+        "object": {
+          "$ref": "#/definitions/TypeDiscriminator"
+        },
+        "created_at": {
+          "format": "unixtime",
+          "description": "A timestamp when this job or item was created (in unix epochs).",
+          "type": "integer",
+          "readOnly": true
+        },
+        "id": {
+          "description": "The identity of this item.",
+          "type": "string",
+          "readOnly": true
+        },
+        "bytes": {
+          "format": "int64",
+          "type": "integer",
+          "readOnly": true
+        },
+        "filename": {
+          "type": "string",
+          "readOnly": true
+        },
+        "purpose": {
+          "$ref": "#/definitions/Purpose"
+        },
+        "status": {
+          "$ref": "#/definitions/UploadStatus"
+        },
+        "expires_at": {
+          "format": "unixtime",
+          "type": "integer",
+          "readOnly": true
+        },
+        "file": {
+          "$ref": "#/definitions/File"
+        }
+      }
+    },
+    "UploadStatus": {
+      "title": "UploadStatus",
+      "enum": [
+        "pending",
+        "expired",
+        "completed",
+        "cancelled"
+      ],
+      "type": "string",
+      "readOnly": true
+    },
+    "UserComputeDataset": {
+      "type": "object",
+      "title": "UserComputeStorage",
+      "description": "Storage account",
+      "required": [
+        "datasetId",
+        "datasetType"
+      ],
+      "x-ms-discriminator-value": "Dataset",
       "allOf": [
         {
-          "$ref": "#/definitions/BaseConnection"
+          "$ref": "#/definitions/UserComputeDatasource"
         },
         {
           "type": "object",
           "properties": {
-            "endpoint": {
-              "type": "string",
-              "description": "Endpoint"
+            "datasetId": {
+              "type": "string"
             },
-            "resourceId": {
-              "type": "string",
-              "description": "Resource Id"
+            "datasetType": {
+              "type": "string"
+            },
+            "chunking": {
+              "$ref": "#/definitions/ChunkingSettings"
+            },
+            "embeddings": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/WorkspaceConnectionEmbeddingSettings"
+              }
             }
           }
         }
+      ]
+    },
+    "UserComputeDatasource": {
+      "title": "UserComputeDatasource",
+      "type": "object",
+      "discriminator": "kind",
+      "required": [
+        "kind"
       ],
-      "x-ms-discriminator-value": "EndpointWithManagedIdentity"
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/UserComputeDatasourceType"
+        }
+      }
+    },
+    "UserComputeDatasourceType": {
+      "type": "string",
+      "description": "The datasource type.",
+      "enum": [
+        "Dataset",
+        "Urls"
+      ],
+      "x-ms-enum": {
+        "name": "UserComputeDatasourceType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Dataset",
+            "value": "Dataset",
+            "description": "Workspace Dataset."
+          },
+          {
+            "name": "Urls",
+            "value": "Urls",
+            "description": "URLs."
+          }
+        ]
+      }
+    },
+    "UserComputeUrl": {
+      "type": "object",
+      "title": "UserComputeUrl",
+      "description": "Urls",
+      "required": [
+        "urls",
+        "embeddings"
+      ],
+      "x-ms-discriminator-value": "Urls",
+      "allOf": [
+        {
+          "$ref": "#/definitions/UserComputeDatasource"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "urls": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "crawling": {
+              "$ref": "#/definitions/CrawlingSettings"
+            },
+            "chunking": {
+              "$ref": "#/definitions/ChunkingSettings"
+            },
+            "embeddings": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/WorkspaceConnectionEmbeddingSettings"
+              }
+            }
+          }
+        }
+      ]
     },
     "WorkspaceConnection": {
       "description": "AML Workspace connection.",
@@ -3220,157 +3838,19 @@
       ],
       "x-ms-discriminator-value": "WorkspaceConnection"
     },
-    "DeploymentConnection": {
-      "description": "Relative deployment connection.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/BaseConnection"
-        }
-      ],
-      "x-ms-discriminator-value": "RelativeConnection"
-    },
-    "CompletionAction": {
-      "type": "string",
-      "description": "The completion action.",
-      "enum": [
-        "cleanUpTempAssets",
-        "keepAllAssets"
-      ],
-      "x-ms-enum": {
-        "name": "IngestionJobCompletionAction",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "keepAllAssets",
-            "value": "keepAllAssets",
-            "description": "Will not clean up any of the intermediate assets created during the ingestion process."
-          },
-          {
-            "name": "cleanUpTempAssets",
-            "value": "cleanUpTempAssets",
-            "description": "Will clean up intermediate assets created during the ingestion process."
-          }
-        ]
-      }
-    },
-    "IngestionJobList": {
-      "title": "IngestionJobList",
-      "description": "Represents a list of ingestion jobs.",
+    "WorkspaceConnectionEmbeddingSettings": {
+      "title": "WorkspaceConnectionEmbeddingSettings",
+      "description": "Connection id to the embedding model",
       "type": "object",
       "properties": {
-        "nextLink": {
-          "description": "The link to the next page.",
+        "connectionId": {
           "type": "string"
         },
-        "value": {
-          "description": "The list of items.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/IngestionJob"
-          }
-        }
-      }
-    },
-    "IngestionJobRunList": {
-      "title": "IngestionJobRunList",
-      "description": "Represents a list of ingestion job runs.",
-      "type": "object",
-      "properties": {
-        "nextLink": {
-          "description": "The link to the next page.",
+        "deploymentName": {
           "type": "string"
         },
-        "value": {
-          "description": "The list of items.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/IngestionJobRun"
-          }
-        }
-      }
-    },
-    "IngestionJobRun": {
-      "title": "IngestionJobRun",
-      "description": "The details of a job run",
-      "type": "object",
-      "properties": {
-        "jobId": {
+        "modelName": {
           "type": "string"
-        },
-        "runId": {
-          "type": "string"
-        },
-        "status": {
-          "$ref": "#/definitions/OperationState"
-        },
-        "error": {
-          "$ref": "#/definitions/IngestionError"
-        },
-        "warnings": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "progress": {
-          "$ref": "#/definitions/IngestionJobProgress"
-        }
-      }
-    },
-    "IngestionError": {
-      "title": "IngestionError",
-      "description": "The details of the ingestion error",
-      "type": "object",
-      "properties": {
-        "message": {
-          "type": "string"
-        },
-        "innerErrors": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "IngestionJobProgress": {
-      "title": "IngestionJobProgress",
-      "type": "object",
-      "required": [
-        "stageProgress"
-      ],
-      "properties": {
-        "stageProgress": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/IngestionJobStageProgress"
-          }
-        }
-      }
-    },
-    "IngestionJobStageProgress": {
-      "title": "IngestionJobStageProgress",
-      "type": "object",
-      "properties": {
-        "name": {
-          "type": "string"
-        },
-        "totalItems": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "processedItems": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "state": {
-          "$ref": "#/definitions/OperationState"
-        },
-        "subStageProgress": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/IngestionJobStageProgress"
-          }
         }
       }
     }

@@ -3,7 +3,7 @@
     "endpoint": "https://aoairesource.openai.azure.com",
     "api-key": "{api key}",
     "api-version": "2024-08-01-preview",
-    "fileImport": {
+    "fileCreate": {
       "purpose": "fine-tune",
       "filename": "puppy.jsonl",
       "content_url": "https://www.contoso.com/trainingdata/puppy.jsonl"
@@ -16,11 +16,12 @@
         "location": "https://aoairesource.openai.azure.com/openai/files/file-181a1cbdcdcf4677ada87f63a0928099"
       },
       "body": {
-        "purpose": "fine-tune",
-        "filename": "puppy.jsonl",
         "id": "file-181a1cbdcdcf4677ada87f63a0928099",
-        "created_at": 1646126127,
-        "object": "file"
+        "filename": "puppy.jsonl",
+        "path": "/puppy.jsonl",
+        "storage_account_uri": "https://www.contoso.com",
+        "storage_container_name": "trainingdata",
+        "purpose": "batch"
       }
     }
   }
