@@ -5,19 +5,6 @@
     "version": "2023-04-15-preview",
     "description": "The language service API is a suite of natural language processing (NLP) skills built with best-in-class Microsoft machine learning algorithms. The API can be used to analyze unstructured text for tasks such as sentiment analysis, key phrase extraction, language detection and question answering. Further documentation can be found in <a href=\"https://docs.microsoft.com/en-us/azure/cognitive-services/language-service/overview\">https://docs.microsoft.com/en-us/azure/cognitive-services/language-service/overview</a>."
   },
-  "securityDefinitions": {
-    "apim_key": {
-      "type": "apiKey",
-      "description": "A subscription key for a Language service resource.",
-      "name": "Ocp-Apim-Subscription-Key",
-      "in": "header"
-    }
-  },
-  "security": [
-    {
-      "apim_key": []
-    }
-  ],
   "x-ms-parameterized-host": {
     "hostTemplate": "{Endpoint}/language/authoring/analyze-conversations/projects",
     "useSchemePrefix": false,
@@ -27,43 +14,42 @@
       }
     ]
   },
+  "security": [
+    {
+      "apim_key": []
+    }
+  ],
+  "securityDefinitions": {
+    "apim_key": {
+      "type": "apiKey",
+      "description": "A subscription key for a Language service resource.",
+      "name": "Ocp-Apim-Subscription-Key",
+      "in": "header"
+    }
+  },
   "paths": {
-    "/": {
+    "/{projectName}": {
       "get": {
-        "summary": "List projects",
-        "description": "Lists the existing projects.",
-        "operationId": "ListProjects",
+        "operationId": "GetProject",
+        "summary": "Get project details",
+        "description": "Gets the details of a project.",
         "produces": [
           "application/json"
         ],
         "parameters": [
           {
-            "in": "query",
-            "name": "top",
-            "description": "The number of projects to be returned.",
-            "type": "integer",
-            "format": "int32"
-          },
-          {
-            "in": "query",
-            "name": "skip",
-            "description": "The offset in the response.",
-            "type": "integer",
-            "format": "int32"
-          },
-          {
-            "in": "query",
-            "name": "maxpagesize",
-            "description": "The maximum number of projects per page.",
-            "type": "integer",
-            "format": "int32"
+            "name": "projectName",
+            "in": "path",
+            "description": "The project name.",
+            "required": true,
+            "type": "string"
           }
         ],
         "responses": {
           "200": {
-            "description": "The metadata of projects.",
+            "description": "The metadata of the project.",
             "schema": {
-              "$ref": "#/definitions/ProjectsMetadata"
+              "$ref": "#/definitions/ProjectMetadata"
             }
           },
           "default": {
@@ -74,34 +60,32 @@
           }
         },
         "x-ms-examples": {
-          "Successful List Projects": {
-            "$ref": "./examples/analyzeconversations-authoring/SuccessfulListProjects.json"
+          "Successful Get Project": {
+            "$ref": "./examples/analyzeconversations-authoring/SuccessfulGetProject.json"
           }
         }
-      }
-    },
-    "/{projectName}": {
+      },
       "patch": {
+        "operationId": "CreateProject",
         "summary": "Create project",
         "description": "Creates a new project or updates an existing one.",
-        "operationId": "CreateProject",
-        "consumes": [
-          "application/merge-patch+json"
-        ],
         "produces": [
           "application/json"
         ],
+        "consumes": [
+          "application/merge-patch+json"
+        ],
         "parameters": [
           {
-            "in": "path",
             "name": "projectName",
+            "in": "path",
             "description": "The project name.",
             "required": true,
             "type": "string"
           },
           {
-            "in": "body",
             "name": "body",
+            "in": "body",
             "description": "The project parameters.",
             "required": true,
             "schema": {
@@ -135,53 +119,17 @@
           }
         }
       },
-      "get": {
-        "summary": "Get project details",
-        "description": "Gets the details of a project.",
-        "operationId": "GetProject",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "projectName",
-            "description": "The project name.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The metadata of the project.",
-            "schema": {
-              "$ref": "#/definitions/ProjectMetadata"
-            }
-          },
-          "default": {
-            "description": "Error response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Successful Get Project": {
-            "$ref": "./examples/analyzeconversations-authoring/SuccessfulGetProject.json"
-          }
-        }
-      },
       "delete": {
+        "operationId": "DeleteProject",
         "summary": "Delete project",
         "description": "Deletes a project.",
-        "operationId": "DeleteProject",
         "produces": [
           "application/json"
         ],
         "parameters": [
           {
-            "in": "path",
             "name": "projectName",
+            "in": "path",
             "description": "The project name.",
             "required": true,
             "type": "string"
@@ -192,8 +140,8 @@
             "description": "A successful call results with an Operation-Location header used to check the status of the job.",
             "headers": {
               "operation-location": {
-                "description": "The location of the status API for monitoring the created job.",
-                "type": "string"
+                "type": "string",
+                "description": "The location of the status API for monitoring the created job."
               }
             }
           },
@@ -213,26 +161,26 @@
     },
     "/{projectName}/:authorize-copy": {
       "post": {
+        "operationId": "CopyProjectAuthorization",
         "summary": "Copy project authorization",
         "description": "Generates a copy project operation authorization to the current target Azure resource.",
-        "operationId": "CopyProjectAuthorization",
-        "consumes": [
+        "produces": [
           "application/json"
         ],
-        "produces": [
+        "consumes": [
           "application/json"
         ],
         "parameters": [
           {
-            "in": "path",
             "name": "projectName",
+            "in": "path",
             "description": "The project name.",
             "required": true,
             "type": "string"
           },
           {
-            "in": "body",
             "name": "body",
+            "in": "body",
             "description": "The copy project authorization info.",
             "required": true,
             "schema": {
@@ -263,26 +211,26 @@
     },
     "/{projectName}/:copy": {
       "post": {
+        "operationId": "CopyProject",
         "summary": "Copy project",
         "description": "Copies an existing project to another Azure resource.",
-        "operationId": "CopyProject",
-        "consumes": [
+        "produces": [
           "application/json"
         ],
-        "produces": [
+        "consumes": [
           "application/json"
         ],
         "parameters": [
           {
-            "in": "path",
             "name": "projectName",
+            "in": "path",
             "description": "The project name.",
             "required": true,
             "type": "string"
           },
           {
-            "in": "body",
             "name": "body",
+            "in": "body",
             "description": "The copy project info.",
             "required": true,
             "schema": {
@@ -295,8 +243,8 @@
             "description": "A successful call results with an Operation-Location header used to check the status of the job.",
             "headers": {
               "operation-location": {
-                "description": "The location of the status API for monitoring the created job.",
-                "type": "string"
+                "type": "string",
+                "description": "The location of the status API for monitoring the created job."
               }
             }
           },
@@ -316,23 +264,23 @@
     },
     "/{projectName}/:export": {
       "post": {
+        "operationId": "Export",
         "summary": "Export project",
         "description": "Triggers a job to export a project's data.",
-        "operationId": "Export",
         "produces": [
           "application/json"
         ],
         "parameters": [
           {
-            "in": "path",
             "name": "projectName",
+            "in": "path",
             "description": "The project name.",
             "required": true,
             "type": "string"
           },
           {
-            "in": "query",
             "name": "format",
+            "in": "query",
             "description": "The format of the exported project file to use.",
             "type": "string",
             "enum": [
@@ -355,8 +303,8 @@
             }
           },
           {
-            "in": "query",
             "name": "stringIndexType",
+            "in": "query",
             "description": "Specifies the method used to interpret string offsets. For additional information see https://aka.ms/text-analytics-offsets.",
             "required": true,
             "type": "string",
@@ -375,14 +323,14 @@
             }
           },
           {
-            "in": "query",
             "name": "assetKind",
+            "in": "query",
             "description": "Kind of asset to export.",
             "type": "string"
           },
           {
-            "in": "query",
             "name": "trainedModelLabel",
+            "in": "query",
             "description": "Trained model label to export. If the trainedModelLabel is null, the default behavior is to export the current working copy.",
             "type": "string"
           }
@@ -392,8 +340,8 @@
             "description": "A successful call results with an Operation-Location header used to check the status of the job.",
             "headers": {
               "operation-location": {
-                "description": "The location of the status API for monitoring the created job.",
-                "type": "string"
+                "type": "string",
+                "description": "The location of the status API for monitoring the created job."
               }
             }
           },
@@ -413,26 +361,26 @@
     },
     "/{projectName}/:import": {
       "post": {
+        "operationId": "Import",
         "summary": "Import project",
         "description": "Triggers a job to import a project. If a project with the same name already exists, the data of that project is replaced.",
-        "operationId": "Import",
-        "consumes": [
+        "produces": [
           "application/json"
         ],
-        "produces": [
+        "consumes": [
           "application/json"
         ],
         "parameters": [
           {
-            "in": "path",
             "name": "projectName",
+            "in": "path",
             "description": "The project name.",
             "required": true,
             "type": "string"
           },
           {
-            "in": "query",
             "name": "format",
+            "in": "query",
             "description": "The format of the exported project file to use.",
             "type": "string",
             "enum": [
@@ -455,8 +403,8 @@
             }
           },
           {
-            "in": "body",
             "name": "body",
+            "in": "body",
             "description": "The project data to import.",
             "required": true,
             "schema": {
@@ -469,8 +417,8 @@
             "description": "A successful call results with an Operation-Location header used to check the status of the job.",
             "headers": {
               "operation-location": {
-                "description": "The location of the status API for monitoring the created job.",
-                "type": "string"
+                "type": "string",
+                "description": "The location of the status API for monitoring the created job."
               }
             }
           },
@@ -490,26 +438,26 @@
     },
     "/{projectName}/:train": {
       "post": {
+        "operationId": "Train",
         "summary": "Train project",
         "description": "Triggers a training job for a project.",
-        "operationId": "Train",
-        "consumes": [
+        "produces": [
           "application/json"
         ],
-        "produces": [
+        "consumes": [
           "application/json"
         ],
         "parameters": [
           {
-            "in": "path",
             "name": "projectName",
+            "in": "path",
             "description": "The project name.",
             "required": true,
             "type": "string"
           },
           {
-            "in": "body",
             "name": "body",
+            "in": "body",
             "description": "The training input parameters.",
             "required": true,
             "schema": {
@@ -522,8 +470,8 @@
             "description": "A successful call results with an Operation-Location header used to check the status of the job.",
             "headers": {
               "operation-location": {
-                "description": "The location of the status API for monitoring the created job.",
-                "type": "string"
+                "type": "string",
+                "description": "The location of the status API for monitoring the created job."
               }
             }
           },
@@ -543,23 +491,23 @@
     },
     "/{projectName}/copy/jobs/{jobId}": {
       "get": {
+        "operationId": "GetCopyProjectStatus",
         "summary": "Get copy project status",
         "description": "Gets the status of an existing copy project job.",
-        "operationId": "GetCopyProjectStatus",
         "produces": [
           "application/json"
         ],
         "parameters": [
           {
-            "in": "path",
             "name": "projectName",
+            "in": "path",
             "description": "The project name.",
             "required": true,
             "type": "string"
           },
           {
-            "in": "path",
             "name": "jobId",
+            "in": "path",
             "description": "The job ID.",
             "required": true,
             "type": "string"
@@ -588,37 +536,37 @@
     },
     "/{projectName}/deployments": {
       "get": {
+        "operationId": "ListDeployments",
         "summary": "List deployments",
         "description": "Lists the deployments belonging to a project.",
-        "operationId": "ListDeployments",
         "produces": [
           "application/json"
         ],
         "parameters": [
           {
-            "in": "path",
             "name": "projectName",
+            "in": "path",
             "description": "The project name.",
             "required": true,
             "type": "string"
           },
           {
-            "in": "query",
             "name": "top",
+            "in": "query",
             "description": "The number of deployments to be returned.",
             "type": "integer",
             "format": "int32"
           },
           {
-            "in": "query",
             "name": "skip",
+            "in": "query",
             "description": "The offset in the response.",
             "type": "integer",
             "format": "int32"
           },
           {
-            "in": "query",
             "name": "maxpagesize",
+            "in": "query",
             "description": "The maximum number of deployments per page.",
             "type": "integer",
             "format": "int32"
@@ -645,78 +593,25 @@
         }
       }
     },
-    "/{projectName}/deployments/:swap": {
-      "post": {
-        "summary": "Swap deployments",
-        "description": "Swaps two existing deployments with each other.",
-        "operationId": "SwapDeployments",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "projectName",
-            "description": "The project name.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "body",
-            "name": "body",
-            "description": "The job object to swap two deployments.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/SwapDeploymentsOptions"
-            }
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "A successful call results with an Operation-Location header used to check the status of the job.",
-            "headers": {
-              "operation-location": {
-                "description": "The location of the status API for monitoring the created job.",
-                "type": "string"
-              }
-            }
-          },
-          "default": {
-            "description": "Error response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Successful Swap Deployments": {
-            "$ref": "./examples/analyzeconversations-authoring/SuccessfulSwapDeployments.json"
-          }
-        }
-      }
-    },
     "/{projectName}/deployments/{deploymentName}": {
       "get": {
+        "operationId": "GetDeployment",
         "summary": "Get deployment details",
         "description": "Gets the details of a deployment.",
-        "operationId": "GetDeployment",
         "produces": [
           "application/json"
         ],
         "parameters": [
           {
-            "in": "path",
             "name": "projectName",
+            "in": "path",
             "description": "The project name.",
             "required": true,
             "type": "string"
           },
           {
-            "in": "path",
             "name": "deploymentName",
+            "in": "path",
             "description": "The deployment name.",
             "required": true,
             "type": "string"
@@ -743,33 +638,33 @@
         }
       },
       "put": {
+        "operationId": "DeployProject",
         "summary": "Update deployment",
         "description": "Creates a new deployment or replaces an existing one.",
-        "operationId": "DeployProject",
-        "consumes": [
+        "produces": [
           "application/json"
         ],
-        "produces": [
+        "consumes": [
           "application/json"
         ],
         "parameters": [
           {
-            "in": "path",
             "name": "projectName",
+            "in": "path",
             "description": "The project name.",
             "required": true,
             "type": "string"
           },
           {
-            "in": "path",
             "name": "deploymentName",
+            "in": "path",
             "description": "The deployment name.",
             "required": true,
             "type": "string"
           },
           {
-            "in": "body",
             "name": "body",
+            "in": "body",
             "description": "The new deployment info.",
             "required": true,
             "schema": {
@@ -782,8 +677,8 @@
             "description": "A successful call results with an Operation-Location header used to check the status of the job.",
             "headers": {
               "operation-location": {
-                "description": "The location of the status API for monitoring the created job.",
-                "type": "string"
+                "type": "string",
+                "description": "The location of the status API for monitoring the created job."
               }
             }
           },
@@ -801,23 +696,23 @@
         }
       },
       "delete": {
+        "operationId": "DeleteDeployment",
         "summary": "Delete deployment",
         "description": "Deletes a project deployment.",
-        "operationId": "DeleteDeployment",
         "produces": [
           "application/json"
         ],
         "parameters": [
           {
-            "in": "path",
             "name": "projectName",
+            "in": "path",
             "description": "The project name.",
             "required": true,
             "type": "string"
           },
           {
-            "in": "path",
             "name": "deploymentName",
+            "in": "path",
             "description": "The deployment name.",
             "required": true,
             "type": "string"
@@ -828,8 +723,8 @@
             "description": "A successful call results with an Operation-Location header used to check the status of the job.",
             "headers": {
               "operation-location": {
-                "description": "The location of the status API for monitoring the created job.",
-                "type": "string"
+                "type": "string",
+                "description": "The location of the status API for monitoring the created job."
               }
             }
           },
@@ -849,33 +744,33 @@
     },
     "/{projectName}/deployments/{deploymentName}/:delete-from-resources": {
       "post": {
+        "operationId": "DeleteDeploymentFromResources",
         "summary": "Delete deployment from resources",
         "description": "Deletes a project deployment from the specified assigned resources.",
-        "operationId": "DeleteDeploymentFromResources",
-        "consumes": [
+        "produces": [
           "application/json"
         ],
-        "produces": [
+        "consumes": [
           "application/json"
         ],
         "parameters": [
           {
-            "in": "path",
             "name": "projectName",
+            "in": "path",
             "description": "The project name.",
             "required": true,
             "type": "string"
           },
           {
-            "in": "path",
             "name": "deploymentName",
+            "in": "path",
             "description": "The deployment name.",
             "required": true,
             "type": "string"
           },
           {
-            "in": "body",
             "name": "body",
+            "in": "body",
             "description": "The options for deleting the deployment.",
             "required": true,
             "schema": {
@@ -888,8 +783,8 @@
             "description": "A successful call results with an Operation-Location header used to check the status of the job.",
             "headers": {
               "operation-location": {
-                "description": "The location of the status API for monitoring the created job.",
-                "type": "string"
+                "type": "string",
+                "description": "The location of the status API for monitoring the created job."
               }
             }
           },
@@ -909,30 +804,30 @@
     },
     "/{projectName}/deployments/{deploymentName}/delete-from-resources/jobs/{jobId}": {
       "get": {
+        "operationId": "GetDeploymentDeleteFromResourcesStatus",
         "summary": "Get deployment deletion from resources status",
         "description": "Gets the status of an existing delete deployment from specific resources job.",
-        "operationId": "GetDeploymentDeleteFromResourcesStatus",
         "produces": [
           "application/json"
         ],
         "parameters": [
           {
-            "in": "path",
             "name": "projectName",
+            "in": "path",
             "description": "The project name.",
             "required": true,
             "type": "string"
           },
           {
-            "in": "path",
             "name": "deploymentName",
+            "in": "path",
             "description": "The deployment name.",
             "required": true,
             "type": "string"
           },
           {
-            "in": "path",
             "name": "jobId",
+            "in": "path",
             "description": "The job ID.",
             "required": true,
             "type": "string"
@@ -961,30 +856,30 @@
     },
     "/{projectName}/deployments/{deploymentName}/jobs/{jobId}": {
       "get": {
+        "operationId": "GetDeploymentStatus",
         "summary": "Get deployment status",
         "description": "Gets the status of an existing deployment job.",
-        "operationId": "GetDeploymentStatus",
         "produces": [
           "application/json"
         ],
         "parameters": [
           {
-            "in": "path",
             "name": "projectName",
+            "in": "path",
             "description": "The project name.",
             "required": true,
             "type": "string"
           },
           {
-            "in": "path",
             "name": "deploymentName",
+            "in": "path",
             "description": "The deployment name.",
             "required": true,
             "type": "string"
           },
           {
-            "in": "path",
             "name": "jobId",
+            "in": "path",
             "description": "The job ID.",
             "required": true,
             "type": "string"
@@ -1011,25 +906,78 @@
         }
       }
     },
-    "/{projectName}/deployments/swap/jobs/{jobId}": {
-      "get": {
-        "summary": "Gets swap deployments status",
-        "description": "Gets the status of an existing swap deployment job.",
-        "operationId": "GetSwapDeploymentsStatus",
+    "/{projectName}/deployments/:swap": {
+      "post": {
+        "operationId": "SwapDeployments",
+        "summary": "Swap deployments",
+        "description": "Swaps two existing deployments with each other.",
         "produces": [
+          "application/json"
+        ],
+        "consumes": [
           "application/json"
         ],
         "parameters": [
           {
-            "in": "path",
             "name": "projectName",
+            "in": "path",
             "description": "The project name.",
             "required": true,
             "type": "string"
           },
           {
+            "name": "body",
+            "in": "body",
+            "description": "The job object to swap two deployments.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SwapDeploymentsOptions"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "A successful call results with an Operation-Location header used to check the status of the job.",
+            "headers": {
+              "operation-location": {
+                "type": "string",
+                "description": "The location of the status API for monitoring the created job."
+              }
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Swap Deployments": {
+            "$ref": "./examples/analyzeconversations-authoring/SuccessfulSwapDeployments.json"
+          }
+        }
+      }
+    },
+    "/{projectName}/deployments/swap/jobs/{jobId}": {
+      "get": {
+        "operationId": "GetSwapDeploymentsStatus",
+        "summary": "Gets swap deployments status",
+        "description": "Gets the status of an existing swap deployment job.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "projectName",
             "in": "path",
+            "description": "The project name.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "jobId",
+            "in": "path",
             "description": "The job ID.",
             "required": true,
             "type": "string"
@@ -1058,23 +1006,23 @@
     },
     "/{projectName}/export/jobs/{jobId}": {
       "get": {
+        "operationId": "GetExportStatus",
         "summary": "Get export status",
         "description": "Gets the status of an export job. Once job completes, returns the project metadata, and assets.",
-        "operationId": "GetExportStatus",
         "produces": [
           "application/json"
         ],
         "parameters": [
           {
-            "in": "path",
             "name": "projectName",
+            "in": "path",
             "description": "The project name.",
             "required": true,
             "type": "string"
           },
           {
-            "in": "path",
             "name": "jobId",
+            "in": "path",
             "description": "The job ID.",
             "required": true,
             "type": "string"
@@ -1103,23 +1051,23 @@
     },
     "/{projectName}/export/jobs/{jobId}/result": {
       "get": {
+        "operationId": "GetExportResult",
         "summary": "Get export result",
         "description": "Gets the result of an export job.",
-        "operationId": "GetExportResult",
         "produces": [
           "application/json"
         ],
         "parameters": [
           {
-            "in": "path",
             "name": "projectName",
+            "in": "path",
             "description": "The project name.",
             "required": true,
             "type": "string"
           },
           {
-            "in": "path",
             "name": "jobId",
+            "in": "path",
             "description": "The job ID.",
             "required": true,
             "type": "string"
@@ -1148,23 +1096,23 @@
     },
     "/{projectName}/import/jobs/{jobId}": {
       "get": {
+        "operationId": "GetImportStatus",
         "summary": "Get import status",
         "description": "Gets the status for an import.",
-        "operationId": "GetImportStatus",
         "produces": [
           "application/json"
         ],
         "parameters": [
           {
-            "in": "path",
             "name": "projectName",
+            "in": "path",
             "description": "The project name.",
             "required": true,
             "type": "string"
           },
           {
-            "in": "path",
             "name": "jobId",
+            "in": "path",
             "description": "The job ID.",
             "required": true,
             "type": "string"
@@ -1193,37 +1141,37 @@
     },
     "/{projectName}/models": {
       "get": {
+        "operationId": "ListTrainedModels",
         "summary": "List trained models",
         "description": "Lists the trained models belonging to a project.",
-        "operationId": "ListTrainedModels",
         "produces": [
           "application/json"
         ],
         "parameters": [
           {
-            "in": "path",
             "name": "projectName",
+            "in": "path",
             "description": "The project name.",
             "required": true,
             "type": "string"
           },
           {
-            "in": "query",
             "name": "top",
+            "in": "query",
             "description": "The number of trained models to be returned.",
             "type": "integer",
             "format": "int32"
           },
           {
-            "in": "query",
             "name": "skip",
+            "in": "query",
             "description": "The offset in the response.",
             "type": "integer",
             "format": "int32"
           },
           {
-            "in": "query",
             "name": "maxpagesize",
+            "in": "query",
             "description": "The maximum number of trained models per page.",
             "type": "integer",
             "format": "int32"
@@ -1252,23 +1200,23 @@
     },
     "/{projectName}/models/{trainedModelLabel}": {
       "get": {
+        "operationId": "GetTrainedModel",
         "summary": "Get trained model details",
         "description": "Gets the details of a trained model.",
-        "operationId": "GetTrainedModel",
         "produces": [
           "application/json"
         ],
         "parameters": [
           {
-            "in": "path",
             "name": "projectName",
+            "in": "path",
             "description": "The project name.",
             "required": true,
             "type": "string"
           },
           {
-            "in": "path",
             "name": "trainedModelLabel",
+            "in": "path",
             "description": "The trained model label.",
             "required": true,
             "type": "string"
@@ -1295,23 +1243,23 @@
         }
       },
       "delete": {
+        "operationId": "DeleteTrainedModel",
         "summary": "Delete trained model",
         "description": "Deletes an existing trained model.",
-        "operationId": "DeleteTrainedModel",
         "produces": [
           "application/json"
         ],
         "parameters": [
           {
-            "in": "path",
             "name": "projectName",
+            "in": "path",
             "description": "The project name.",
             "required": true,
             "type": "string"
           },
           {
-            "in": "path",
             "name": "trainedModelLabel",
+            "in": "path",
             "description": "The trained model label.",
             "required": true,
             "type": "string"
@@ -1337,33 +1285,33 @@
     },
     "/{projectName}/models/{trainedModelLabel}/:evaluate": {
       "post": {
+        "operationId": "EvaluateModel",
         "summary": "Evaluate model",
         "description": "Triggers evaluation operation on a trained model.",
-        "operationId": "EvaluateModel",
-        "consumes": [
+        "produces": [
           "application/json"
         ],
-        "produces": [
+        "consumes": [
           "application/json"
         ],
         "parameters": [
           {
-            "in": "path",
             "name": "projectName",
+            "in": "path",
             "description": "The project name.",
             "required": true,
             "type": "string"
           },
           {
-            "in": "path",
             "name": "trainedModelLabel",
+            "in": "path",
             "description": "The trained model label.",
             "required": true,
             "type": "string"
           },
           {
-            "in": "body",
             "name": "body",
+            "in": "body",
             "description": "The split kind and percentage for the testing dataset.",
             "required": true,
             "schema": {
@@ -1376,8 +1324,8 @@
             "description": "A successful call results with an Operation-Location header used to check the status of the job.",
             "headers": {
               "operation-location": {
-                "description": "The location of the status API for monitoring the created job.",
-                "type": "string"
+                "type": "string",
+                "description": "The location of the status API for monitoring the created job."
               }
             }
           },
@@ -1397,23 +1345,23 @@
     },
     "/{projectName}/models/{trainedModelLabel}/:load-snapshot": {
       "post": {
+        "operationId": "LoadSnapshot",
         "summary": "Load trained model snapshot to the working directory.",
         "description": "Restores the snapshot of this trained model to be the current working directory of the project.",
-        "operationId": "LoadSnapshot",
         "produces": [
           "application/json"
         ],
         "parameters": [
           {
-            "in": "path",
             "name": "projectName",
+            "in": "path",
             "description": "The project name.",
             "required": true,
             "type": "string"
           },
           {
-            "in": "path",
             "name": "trainedModelLabel",
+            "in": "path",
             "description": "The trained model label.",
             "required": true,
             "type": "string"
@@ -1424,8 +1372,8 @@
             "description": "A successful call results in loading the working directory with the snapshot of the model provided.",
             "headers": {
               "operation-location": {
-                "description": "The location of the status API for monitoring the created job.",
-                "type": "string"
+                "type": "string",
+                "description": "The location of the status API for monitoring the created job."
               }
             }
           },
@@ -1445,30 +1393,30 @@
     },
     "/{projectName}/models/{trainedModelLabel}/evaluate/jobs/{jobId}": {
       "get": {
+        "operationId": "GetEvaluationStatus",
         "summary": "Get evaluation status",
         "description": "Gets the status for an evaluation job.",
-        "operationId": "GetEvaluationStatus",
         "produces": [
           "application/json"
         ],
         "parameters": [
           {
-            "in": "path",
             "name": "projectName",
+            "in": "path",
             "description": "The project name.",
             "required": true,
             "type": "string"
           },
           {
-            "in": "path",
             "name": "trainedModelLabel",
+            "in": "path",
             "description": "The trained model label.",
             "required": true,
             "type": "string"
           },
           {
-            "in": "path",
             "name": "jobId",
+            "in": "path",
             "description": "The job ID.",
             "required": true,
             "type": "string"
@@ -1497,30 +1445,30 @@
     },
     "/{projectName}/models/{trainedModelLabel}/evaluation/result": {
       "get": {
+        "operationId": "GetModelEvaluationResults",
         "summary": "Get trained model evaluation result",
         "description": "Gets the detailed results of the evaluation for a trained model. This includes the raw inference results for the data included in the evaluation process.",
-        "operationId": "GetModelEvaluationResults",
         "produces": [
           "application/json"
         ],
         "parameters": [
           {
-            "in": "path",
             "name": "projectName",
+            "in": "path",
             "description": "The project name.",
             "required": true,
             "type": "string"
           },
           {
-            "in": "path",
             "name": "trainedModelLabel",
+            "in": "path",
             "description": "The trained model label.",
             "required": true,
             "type": "string"
           },
           {
-            "in": "query",
             "name": "stringIndexType",
+            "in": "query",
             "description": "Specifies the method used to interpret string offsets. For additional information see https://aka.ms/text-analytics-offsets.",
             "required": true,
             "type": "string",
@@ -1539,22 +1487,22 @@
             }
           },
           {
-            "in": "query",
             "name": "top",
+            "in": "query",
             "description": "The number of utterances to be returned.",
             "type": "integer",
             "format": "int32"
           },
           {
-            "in": "query",
             "name": "skip",
+            "in": "query",
             "description": "The offset in the response.",
             "type": "integer",
             "format": "int32"
           },
           {
-            "in": "query",
             "name": "maxpagesize",
+            "in": "query",
             "description": "The maximum number of utterances per page.",
             "type": "integer",
             "format": "int32"
@@ -1583,23 +1531,23 @@
     },
     "/{projectName}/models/{trainedModelLabel}/evaluation/summary-result": {
       "get": {
+        "operationId": "GetModelEvaluationSummary",
         "summary": "Get trained model evaluation summary",
         "description": "Gets the evaluation summary of a trained model. The summary includes high level performance measurements of the model e.g., F1, Precision, Recall, etc.",
-        "operationId": "GetModelEvaluationSummary",
         "produces": [
           "application/json"
         ],
         "parameters": [
           {
-            "in": "path",
             "name": "projectName",
+            "in": "path",
             "description": "The project name.",
             "required": true,
             "type": "string"
           },
           {
-            "in": "path",
             "name": "trainedModelLabel",
+            "in": "path",
             "description": "The trained model label.",
             "required": true,
             "type": "string"
@@ -1628,30 +1576,30 @@
     },
     "/{projectName}/models/{trainedModelLabel}/load-snapshot/jobs/{jobId}": {
       "get": {
+        "operationId": "GetLoadSnapshotStatus",
         "summary": "Get load snapshot status",
         "description": "Gets the status for loading a snapshot.",
-        "operationId": "GetLoadSnapshotStatus",
         "produces": [
           "application/json"
         ],
         "parameters": [
           {
-            "in": "path",
             "name": "projectName",
+            "in": "path",
             "description": "The project name.",
             "required": true,
             "type": "string"
           },
           {
-            "in": "path",
             "name": "trainedModelLabel",
+            "in": "path",
             "description": "The trained model label.",
             "required": true,
             "type": "string"
           },
           {
-            "in": "path",
             "name": "jobId",
+            "in": "path",
             "description": "The job ID.",
             "required": true,
             "type": "string"
@@ -1680,37 +1628,37 @@
     },
     "/{projectName}/resources": {
       "get": {
+        "operationId": "ListDeploymentResources",
         "summary": "Lists deployment resources",
         "description": "Lists the deployments resources assigned to the project.",
-        "operationId": "ListDeploymentResources",
         "produces": [
           "application/json"
         ],
         "parameters": [
           {
-            "in": "path",
             "name": "projectName",
+            "in": "path",
             "description": "The project name.",
             "required": true,
             "type": "string"
           },
           {
-            "in": "query",
             "name": "top",
+            "in": "query",
             "description": "The number of deployments to be returned.",
             "type": "integer",
             "format": "int32"
           },
           {
-            "in": "query",
             "name": "skip",
+            "in": "query",
             "description": "The offset in the response.",
             "type": "integer",
             "format": "int32"
           },
           {
-            "in": "query",
             "name": "maxpagesize",
+            "in": "query",
             "description": "The maximum number of deployments per page.",
             "type": "integer",
             "format": "int32"
@@ -1739,26 +1687,26 @@
     },
     "/{projectName}/resources/:assign": {
       "post": {
+        "operationId": "AssignDeploymentResources",
         "summary": "Assign deployment resources",
         "description": "Assign new Azure resources to a project to allow deploying new deployments to them. This API is available only via AAD authentication and not supported via subscription key authentication. For more details about AAD authentication, check here: https://learn.microsoft.com/en-us/azure/cognitive-services/authentication?tabs=powershell#authenticate-with-azure-active-directory",
-        "operationId": "AssignDeploymentResources",
-        "consumes": [
+        "produces": [
           "application/json"
         ],
-        "produces": [
+        "consumes": [
           "application/json"
         ],
         "parameters": [
           {
-            "in": "path",
             "name": "projectName",
+            "in": "path",
             "description": "The project name.",
             "required": true,
             "type": "string"
           },
           {
-            "in": "body",
             "name": "body",
+            "in": "body",
             "description": "The new project resources info.",
             "required": true,
             "schema": {
@@ -1771,8 +1719,8 @@
             "description": "A successful call results with an Operation-Location header used to check the status of the job.",
             "headers": {
               "operation-location": {
-                "description": "The location of the status API for monitoring the created job.",
-                "type": "string"
+                "type": "string",
+                "description": "The location of the status API for monitoring the created job."
               }
             }
           },
@@ -1792,26 +1740,26 @@
     },
     "/{projectName}/resources/:unassign": {
       "post": {
+        "operationId": "UnassignDeploymentResources",
         "summary": "Unassign deployment resources",
         "description": "Unassign resources from a project. This disallows deploying new deployments to these resources, and deletes existing deployments assigned to them.",
-        "operationId": "UnassignDeploymentResources",
-        "consumes": [
+        "produces": [
           "application/json"
         ],
-        "produces": [
+        "consumes": [
           "application/json"
         ],
         "parameters": [
           {
-            "in": "path",
             "name": "projectName",
+            "in": "path",
             "description": "The project name.",
             "required": true,
             "type": "string"
           },
           {
-            "in": "body",
             "name": "body",
+            "in": "body",
             "description": "The info for the deployment resources to be deleted.",
             "required": true,
             "schema": {
@@ -1824,8 +1772,8 @@
             "description": "A successful call results with an Operation-Location header used to check the status of the job.",
             "headers": {
               "operation-location": {
-                "description": "The location of the status API for monitoring the created job.",
-                "type": "string"
+                "type": "string",
+                "description": "The location of the status API for monitoring the created job."
               }
             }
           },
@@ -1845,23 +1793,23 @@
     },
     "/{projectName}/resources/assign/jobs/{jobId}": {
       "get": {
+        "operationId": "GetAssignDeploymentResourcesStatus",
         "summary": "Get assign deployment resources status",
         "description": "Gets the status of an existing assign deployment resources job.",
-        "operationId": "GetAssignDeploymentResourcesStatus",
         "produces": [
           "application/json"
         ],
         "parameters": [
           {
-            "in": "path",
             "name": "projectName",
+            "in": "path",
             "description": "The project name.",
             "required": true,
             "type": "string"
           },
           {
-            "in": "path",
             "name": "jobId",
+            "in": "path",
             "description": "The job ID.",
             "required": true,
             "type": "string"
@@ -1890,23 +1838,23 @@
     },
     "/{projectName}/resources/unassign/jobs/{jobId}": {
       "get": {
+        "operationId": "GetUnassignDeploymentResourcesStatus",
         "summary": "Get unassign deployment resources status",
         "description": "Gets the status of an existing unassign deployment resources job.",
-        "operationId": "GetUnassignDeploymentResourcesStatus",
         "produces": [
           "application/json"
         ],
         "parameters": [
           {
-            "in": "path",
             "name": "projectName",
+            "in": "path",
             "description": "The project name.",
             "required": true,
             "type": "string"
           },
           {
-            "in": "path",
             "name": "jobId",
+            "in": "path",
             "description": "The job ID.",
             "required": true,
             "type": "string"
@@ -1935,37 +1883,37 @@
     },
     "/{projectName}/train/jobs": {
       "get": {
+        "operationId": "ListTrainingJobs",
         "summary": "List training jobs",
         "description": "Lists the non-expired training jobs created for a project.",
-        "operationId": "ListTrainingJobs",
         "produces": [
           "application/json"
         ],
         "parameters": [
           {
-            "in": "path",
             "name": "projectName",
+            "in": "path",
             "description": "The project name.",
             "required": true,
             "type": "string"
           },
           {
-            "in": "query",
             "name": "top",
+            "in": "query",
             "description": "The number of training jobs to be returned.",
             "type": "integer",
             "format": "int32"
           },
           {
-            "in": "query",
             "name": "skip",
+            "in": "query",
             "description": "The offset in the response.",
             "type": "integer",
             "format": "int32"
           },
           {
-            "in": "query",
             "name": "maxpagesize",
+            "in": "query",
             "description": "The maximum number of jobs per page.",
             "type": "integer",
             "format": "int32"
@@ -1994,23 +1942,23 @@
     },
     "/{projectName}/train/jobs/{jobId}": {
       "get": {
+        "operationId": "GetTrainingStatus",
         "summary": "Get training status",
         "description": "Gets the status for a training job.",
-        "operationId": "GetTrainingStatus",
         "produces": [
           "application/json"
         ],
         "parameters": [
           {
-            "in": "path",
             "name": "projectName",
+            "in": "path",
             "description": "The project name.",
             "required": true,
             "type": "string"
           },
           {
-            "in": "path",
             "name": "jobId",
+            "in": "path",
             "description": "The job ID.",
             "required": true,
             "type": "string"
@@ -2039,23 +1987,23 @@
     },
     "/{projectName}/train/jobs/{jobId}/:cancel": {
       "post": {
+        "operationId": "CancelTrainingJob",
         "summary": "Cancel training",
         "description": "Triggers a cancellation for a running training job.",
-        "operationId": "CancelTrainingJob",
         "produces": [
           "application/json"
         ],
         "parameters": [
           {
-            "in": "path",
             "name": "projectName",
+            "in": "path",
             "description": "The project name.",
             "required": true,
             "type": "string"
           },
           {
-            "in": "path",
             "name": "jobId",
+            "in": "path",
             "description": "The job ID.",
             "required": true,
             "type": "string"
@@ -2066,8 +2014,8 @@
             "description": "A successful call results with an Operation-Location header used to check the status of the job.",
             "headers": {
               "operation-location": {
-                "description": "The location of the status API for monitoring the job cancellation.",
-                "type": "string"
+                "type": "string",
+                "description": "The location of the status API for monitoring the job cancellation."
               }
             }
           },
@@ -2085,18 +2033,70 @@
         }
       }
     },
-    "/global/deletion-jobs/{jobId}": {
+    "/": {
       "get": {
-        "summary": "Get project deletion status",
-        "description": "Gets the status for a project deletion job.",
-        "operationId": "GetProjectDeletionStatus",
+        "operationId": "ListProjects",
+        "summary": "List projects",
+        "description": "Lists the existing projects.",
         "produces": [
           "application/json"
         ],
         "parameters": [
           {
-            "in": "path",
+            "name": "top",
+            "in": "query",
+            "description": "The number of projects to be returned.",
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "skip",
+            "in": "query",
+            "description": "The offset in the response.",
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "maxpagesize",
+            "in": "query",
+            "description": "The maximum number of projects per page.",
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The metadata of projects.",
+            "schema": {
+              "$ref": "#/definitions/ProjectsMetadata"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful List Projects": {
+            "$ref": "./examples/analyzeconversations-authoring/SuccessfulListProjects.json"
+          }
+        }
+      }
+    },
+    "/global/deletion-jobs/{jobId}": {
+      "get": {
+        "operationId": "GetProjectDeletionStatus",
+        "summary": "Get project deletion status",
+        "description": "Gets the status for a project deletion job.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
             "name": "jobId",
+            "in": "path",
             "description": "The job ID.",
             "required": true,
             "type": "string"
@@ -2125,30 +2125,30 @@
     },
     "/global/deployments/resources": {
       "get": {
+        "operationId": "ListAssignedResourceDeployments",
         "summary": "Lists assigned resource deployments",
         "description": "Lists the deployments to which an Azure resource is assigned. This doesn't return deployments belonging to projects owned by this resource. It only returns deployments belonging to projects owned by other resources.",
-        "operationId": "ListAssignedResourceDeployments",
         "produces": [
           "application/json"
         ],
         "parameters": [
           {
-            "in": "query",
             "name": "top",
+            "in": "query",
             "description": "The number of deployments to be returned.",
             "type": "integer",
             "format": "int32"
           },
           {
-            "in": "query",
             "name": "skip",
+            "in": "query",
             "description": "The offset in the response.",
             "type": "integer",
             "format": "int32"
           },
           {
-            "in": "query",
             "name": "maxpagesize",
+            "in": "query",
             "description": "The maximum number of deployments per page.",
             "type": "integer",
             "format": "int32"
@@ -2177,16 +2177,16 @@
     },
     "/global/languages": {
       "get": {
+        "operationId": "GetSupportedLanguages",
         "summary": "List supported languages",
         "description": "Lists the supported languages for the given project type.",
-        "operationId": "GetSupportedLanguages",
         "produces": [
           "application/json"
         ],
         "parameters": [
           {
-            "in": "query",
             "name": "projectKind",
+            "in": "query",
             "description": "The project kind.",
             "required": true,
             "type": "string",
@@ -2215,22 +2215,22 @@
             }
           },
           {
-            "in": "query",
             "name": "top",
+            "in": "query",
             "description": "The number of languages to be returned.",
             "type": "integer",
             "format": "int32"
           },
           {
-            "in": "query",
             "name": "skip",
+            "in": "query",
             "description": "The offset in the response.",
             "type": "integer",
             "format": "int32"
           },
           {
-            "in": "query",
             "name": "maxpagesize",
+            "in": "query",
             "description": "The maximum number of languages per page.",
             "type": "integer",
             "format": "int32"
@@ -2259,42 +2259,42 @@
     },
     "/global/prebuilt-entities": {
       "get": {
+        "operationId": "GetSupportedPrebuiltEntities",
         "summary": "List supported prebuilt entities",
         "description": "Lists the supported prebuilt entities that can be used while creating composed entities.",
-        "operationId": "GetSupportedPrebuiltEntities",
         "produces": [
           "application/json"
         ],
         "parameters": [
           {
-            "in": "query",
             "name": "language",
+            "in": "query",
             "description": "The language to get supported prebuilt entities for. Required if multilingual is false. This is BCP-47 representation of a language. For example, use \"en\" for English, \"en-gb\" for English (UK), \"es\" for Spanish etc.",
             "type": "string"
           },
           {
-            "in": "query",
             "name": "multilingual",
+            "in": "query",
             "description": "Whether to get the support prebuilt entities for multilingual or monolingual projects. If true, the language parameter is ignored.",
             "type": "string"
           },
           {
-            "in": "query",
             "name": "top",
+            "in": "query",
             "description": "The number of prebuilt entities to be returned.",
             "type": "integer",
             "format": "int32"
           },
           {
-            "in": "query",
             "name": "skip",
+            "in": "query",
             "description": "The offset in the response.",
             "type": "integer",
             "format": "int32"
           },
           {
-            "in": "query",
             "name": "maxpagesize",
+            "in": "query",
             "description": "The maximum number of prebuilt entities per page.",
             "type": "integer",
             "format": "int32"
@@ -2323,16 +2323,16 @@
     },
     "/global/training-config-versions": {
       "get": {
+        "operationId": "ListTrainingConfigVersions",
         "summary": "List training config versions",
         "description": "Lists the support training config version for a given project type.",
-        "operationId": "ListTrainingConfigVersions",
         "produces": [
           "application/json"
         ],
         "parameters": [
           {
-            "in": "query",
             "name": "projectKind",
+            "in": "query",
             "description": "The project kind.",
             "required": true,
             "type": "string",
@@ -2361,22 +2361,22 @@
             }
           },
           {
-            "in": "query",
             "name": "top",
+            "in": "query",
             "description": "The number of config versions to be returned.",
             "type": "integer",
             "format": "int32"
           },
           {
-            "in": "query",
             "name": "skip",
+            "in": "query",
             "description": "The offset in the response.",
             "type": "integer",
             "format": "int32"
           },
           {
-            "in": "query",
             "name": "maxpagesize",
+            "in": "query",
             "description": "The maximum number of config versions per page.",
             "type": "integer",
             "format": "int32"
@@ -2406,135 +2406,135 @@
   },
   "definitions": {
     "AssignDeploymentResourcesOptions": {
-      "description": "Represents the options for assigning Azure resources to a project.",
-      "required": [
-        "resourcesMetadata"
-      ],
       "type": "object",
+      "description": "Represents the options for assigning Azure resources to a project.",
       "properties": {
         "resourcesMetadata": {
-          "description": "Represents the metadata for the resources to be assigned.",
           "type": "array",
+          "description": "Represents the metadata for the resources to be assigned.",
           "items": {
             "$ref": "#/definitions/ResourceMetadata"
           }
         }
-      }
+      },
+      "required": [
+        "resourcesMetadata"
+      ]
     },
     "AssignedDeploymentResource": {
+      "type": "object",
       "description": "Represents the assigned deployment resource.",
+      "properties": {
+        "azureResourceId": {
+          "type": "string",
+          "description": "The resource ID."
+        },
+        "region": {
+          "type": "string",
+          "description": "The resource region."
+        }
+      },
       "required": [
         "azureResourceId",
         "region"
-      ],
-      "type": "object",
-      "properties": {
-        "azureResourceId": {
-          "description": "The resource ID.",
-          "type": "string"
-        },
-        "region": {
-          "description": "The resource region.",
-          "type": "string"
-        }
-      }
+      ]
     },
     "AssignedDeploymentResources": {
-      "description": "Represents the assigned deployment resources.",
-      "required": [
-        "value",
-        "nextLink"
-      ],
       "type": "object",
+      "description": "Represents the assigned deployment resources.",
       "properties": {
         "value": {
-          "description": "The list of assigned deployment resources.",
           "type": "array",
+          "description": "The list of assigned deployment resources.",
           "items": {
             "$ref": "#/definitions/AssignedDeploymentResource"
           }
         },
         "nextLink": {
-          "description": "The next page link.",
-          "type": "string"
+          "type": "string",
+          "description": "The next page link."
         }
-      }
+      },
+      "required": [
+        "value",
+        "nextLink"
+      ]
     },
     "AssignedProjectDeploymentMetadata": {
+      "type": "object",
       "description": "Represents the metadata for an assigned deployment",
+      "properties": {
+        "deploymentName": {
+          "type": "string",
+          "description": "Represents the deployment name."
+        },
+        "lastDeployedDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Represents deployment last deployed time."
+        },
+        "deploymentExpirationDate": {
+          "type": "string",
+          "format": "date",
+          "description": "Represents deployment expiration date in the runtime."
+        }
+      },
       "required": [
         "deploymentName",
         "lastDeployedDateTime",
         "deploymentExpirationDate"
-      ],
-      "type": "object",
-      "properties": {
-        "deploymentName": {
-          "description": "Represents the deployment name.",
-          "type": "string"
-        },
-        "lastDeployedDateTime": {
-          "format": "date-time",
-          "description": "Represents deployment last deployed time.",
-          "type": "string"
-        },
-        "deploymentExpirationDate": {
-          "format": "date",
-          "description": "Represents deployment expiration date in the runtime.",
-          "type": "string"
-        }
-      }
+      ]
     },
     "AssignedProjectDeploymentsMetadata": {
-      "description": "Represents the metadata for assigned deployments for a project.",
-      "required": [
-        "projectName",
-        "deploymentsMetadata"
-      ],
       "type": "object",
+      "description": "Represents the metadata for assigned deployments for a project.",
       "properties": {
         "projectName": {
-          "description": "Represents the project name.",
-          "type": "string"
+          "type": "string",
+          "description": "Represents the project name."
         },
         "deploymentsMetadata": {
-          "description": "Represents the resource region.",
           "type": "array",
+          "description": "Represents the resource region.",
           "items": {
             "$ref": "#/definitions/AssignedProjectDeploymentMetadata"
           }
         }
-      }
+      },
+      "required": [
+        "projectName",
+        "deploymentsMetadata"
+      ]
     },
     "AssignedResourceDeploymentsMetadata": {
-      "description": "Represents the metadata for deployments assigned to a resource.",
-      "required": [
-        "value",
-        "nextLink"
-      ],
       "type": "object",
+      "description": "Represents the metadata for deployments assigned to a resource.",
       "properties": {
         "value": {
-          "description": "The list of retrieved assigned project deployments.",
           "type": "array",
+          "description": "The list of retrieved assigned project deployments.",
           "items": {
             "$ref": "#/definitions/AssignedProjectDeploymentsMetadata"
           }
         },
         "nextLink": {
-          "description": "The next page link.",
-          "type": "string"
+          "type": "string",
+          "description": "The next page link."
         }
-      }
+      },
+      "required": [
+        "value",
+        "nextLink"
+      ]
     },
     "CompositionSetting": {
+      "type": "string",
       "enum": [
         "returnLongestOverlap",
         "requireExactOverlap",
         "separateComponents",
         "combineComponents"
       ],
-      "type": "string",
       "x-ms-enum": {
         "name": "CompositionSetting",
         "modelAsString": true,
@@ -2565,24 +2565,24 @@
       }
     },
     "ConfusionMatrixCell": {
+      "type": "object",
       "description": "Represents a cell in a confusion matrix.",
+      "properties": {
+        "normalizedValue": {
+          "type": "number",
+          "format": "float",
+          "description": "Represents normalized value in percentages."
+        },
+        "rawValue": {
+          "type": "number",
+          "format": "float",
+          "description": "Represents raw value."
+        }
+      },
       "required": [
         "normalizedValue",
         "rawValue"
-      ],
-      "type": "object",
-      "properties": {
-        "normalizedValue": {
-          "format": "float",
-          "description": "Represents normalized value in percentages.",
-          "type": "number"
-        },
-        "rawValue": {
-          "format": "float",
-          "description": "Represents raw value.",
-          "type": "number"
-        }
-      }
+      ]
     },
     "ConfusionMatrixRow": {
       "type": "object",
@@ -2591,129 +2591,129 @@
       }
     },
     "ConversationExportedEntity": {
-      "description": "Represents an entity with its components.",
-      "required": [
-        "category"
-      ],
       "type": "object",
+      "description": "Represents an entity with its components.",
       "properties": {
         "category": {
-          "description": "The category of the entity.",
-          "type": "string"
+          "type": "string",
+          "description": "The category of the entity."
         },
         "compositionSetting": {
-          "description": "The behavior to follow when the entity's components overlap with each other.",
-          "$ref": "#/definitions/CompositionSetting"
+          "$ref": "#/definitions/CompositionSetting",
+          "description": "The behavior to follow when the entity's components overlap with each other."
         },
         "list": {
-          "description": "The list component of the entity.",
-          "$ref": "#/definitions/ExportedEntityList"
+          "$ref": "#/definitions/ExportedEntityList",
+          "description": "The list component of the entity."
         },
         "prebuilts": {
-          "description": "The prebuilt entities components.",
           "type": "array",
+          "description": "The prebuilt entities components.",
           "items": {
             "$ref": "#/definitions/ExportedPrebuiltEntity"
           }
         },
         "regex": {
-          "description": "The regex component of the entity.",
-          "$ref": "#/definitions/ExportedEntityRegex"
+          "$ref": "#/definitions/ExportedEntityRegex",
+          "description": "The regex component of the entity."
         },
         "requiredComponents": {
-          "description": "The required components. Allowed values are 'learned', 'list', 'prebuilts' and 'regex'.",
           "type": "array",
+          "description": "The required components. Allowed values are 'learned', 'list', 'prebuilts' and 'regex'.",
           "items": {
             "type": "string"
           }
         }
-      }
-    },
-    "ConversationExportedIntent": {
-      "description": "Represents an exported intent of a conversational project.",
+      },
       "required": [
         "category"
-      ],
+      ]
+    },
+    "ConversationExportedIntent": {
       "type": "object",
+      "description": "Represents an exported intent of a conversational project.",
       "properties": {
         "category": {
-          "description": "The intent category.",
-          "type": "string"
+          "type": "string",
+          "description": "The intent category."
         }
-      }
+      },
+      "required": [
+        "category"
+      ]
     },
     "ConversationExportedProjectAssets": {
-      "description": "Represents the exported assets of a conversational project.",
       "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ExportedProjectAssets"
-        }
-      ],
+      "description": "Represents the exported assets of a conversational project.",
       "properties": {
         "intents": {
-          "description": "The intents defined in the project.",
           "type": "array",
+          "description": "The intents defined in the project.",
           "items": {
             "$ref": "#/definitions/ConversationExportedIntent"
           }
         },
         "entities": {
-          "description": "The entities defined in the project.",
           "type": "array",
+          "description": "The entities defined in the project.",
           "items": {
             "$ref": "#/definitions/ConversationExportedEntity"
           }
         },
         "utterances": {
-          "description": "The utterances defined in the project.",
           "type": "array",
+          "description": "The utterances defined in the project.",
           "items": {
             "$ref": "#/definitions/ConversationExportedUtterance"
           }
         }
       },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ExportedProjectAssets"
+        }
+      ],
       "x-ms-discriminator-value": "Conversation"
     },
     "ConversationExportedUtterance": {
-      "description": "Represents an exported utterance for a conversational project.",
-      "required": [
-        "text",
-        "intent"
-      ],
       "type": "object",
+      "description": "Represents an exported utterance for a conversational project.",
       "properties": {
         "entities": {
-          "description": "Represents the entity labels of the utterance.",
           "type": "array",
+          "description": "Represents the entity labels of the utterance.",
           "items": {
             "$ref": "#/definitions/ExportedUtteranceEntityLabel"
           }
         },
         "text": {
-          "description": "The utterance text.",
-          "type": "string"
+          "type": "string",
+          "description": "The utterance text."
         },
         "language": {
-          "description": "Represents the utterance's language. This is BCP-47 representation of a language. For example, use \"en\" for English, \"en-gb\" for English (UK), \"es\" for Spanish etc.",
-          "type": "string"
+          "type": "string",
+          "description": "Represents the utterance's language. This is BCP-47 representation of a language. For example, use \"en\" for English, \"en-gb\" for English (UK), \"es\" for Spanish etc."
         },
         "intent": {
-          "description": "The intent of the utterance.",
-          "type": "string"
+          "type": "string",
+          "description": "The intent of the utterance."
         },
         "dataset": {
-          "description": "The dataset for this utterance. Allowed values are 'Train' and 'Test'.",
-          "type": "string"
+          "type": "string",
+          "description": "The dataset for this utterance. Allowed values are 'Train' and 'Test'."
         }
-      }
+      },
+      "required": [
+        "text",
+        "intent"
+      ]
     },
     "ConversationSummarizationExportedProjectAssets": {
       "type": "object",
       "properties": {
         "conversations": {
-          "description": "Represents the conversations of the project.",
           "type": "array",
+          "description": "Represents the conversations of the project.",
           "items": {
             "$ref": "#/definitions/CustomConversationSummarizationConversation"
           }
@@ -2721,29 +2721,29 @@
       }
     },
     "CopyAuthorizationOptions": {
-      "description": "Represents the options for authorizing a project copy to the current Azure resource.",
-      "required": [
-        "projectKind"
-      ],
       "type": "object",
+      "description": "Represents the options for authorizing a project copy to the current Azure resource.",
       "properties": {
         "projectKind": {
-          "description": "Represents the project kind.",
-          "$ref": "#/definitions/ProjectKind"
+          "$ref": "#/definitions/ProjectKind",
+          "description": "Represents the project kind."
         },
         "storageInputContainerName": {
-          "description": "The name of the storage container.",
-          "type": "string"
+          "type": "string",
+          "description": "The name of the storage container."
         },
         "allowOverwrite": {
-          "description": "Whether to allow an existing project to be overwritten using the resulting copy authorization.",
-          "type": "boolean"
+          "type": "boolean",
+          "description": "Whether to allow an existing project to be overwritten using the resulting copy authorization."
         }
-      }
+      },
+      "required": [
+        "projectKind"
+      ]
     },
     "CopyProjectJobState": {
-      "description": "Represents the state of a copy job.",
       "type": "object",
+      "description": "Represents the state of a copy job.",
       "allOf": [
         {
           "$ref": "#/definitions/JobState"
@@ -2751,7 +2751,35 @@
       ]
     },
     "CopyProjectOptions": {
+      "type": "object",
       "description": "Represents the options for copying an existing project to another Azure resource.",
+      "properties": {
+        "projectKind": {
+          "$ref": "#/definitions/ProjectKind",
+          "description": "Represents the project kind."
+        },
+        "targetProjectName": {
+          "type": "string",
+          "description": "The project name to be copied-into."
+        },
+        "accessToken": {
+          "type": "string",
+          "description": "The access token."
+        },
+        "expiresAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The expiration of the access token."
+        },
+        "targetResourceId": {
+          "type": "string",
+          "description": "Represents the target Azure resource ID."
+        },
+        "targetResourceRegion": {
+          "type": "string",
+          "description": "Represents the target Azure resource region."
+        }
+      },
       "required": [
         "projectKind",
         "targetProjectName",
@@ -2759,126 +2787,98 @@
         "expiresAt",
         "targetResourceId",
         "targetResourceRegion"
-      ],
-      "type": "object",
-      "properties": {
-        "projectKind": {
-          "description": "Represents the project kind.",
-          "$ref": "#/definitions/ProjectKind"
-        },
-        "targetProjectName": {
-          "description": "The project name to be copied-into.",
-          "type": "string"
-        },
-        "accessToken": {
-          "description": "The access token.",
-          "type": "string"
-        },
-        "expiresAt": {
-          "format": "date-time",
-          "description": "The expiration of the access token.",
-          "type": "string"
-        },
-        "targetResourceId": {
-          "description": "Represents the target Azure resource ID.",
-          "type": "string"
-        },
-        "targetResourceRegion": {
-          "description": "Represents the target Azure resource region.",
-          "type": "string"
-        }
-      }
+      ]
     },
     "CreateDeploymentOptions": {
-      "description": "Represents the options for creating or updating a project deployment.",
-      "required": [
-        "trainedModelLabel"
-      ],
       "type": "object",
+      "description": "Represents the options for creating or updating a project deployment.",
       "properties": {
         "trainedModelLabel": {
-          "description": "Represents the trained model label.",
-          "type": "string"
+          "type": "string",
+          "description": "Represents the trained model label."
         },
         "assignedResourceIds": {
-          "description": "Represents the resource IDs to be assigned to the deployment.\n            If provided, the deployment will be rolled out to the resources provided here as well as the original resource in which the project is created.",
           "type": "array",
+          "description": "Represents the resource IDs to be assigned to the deployment.\n            If provided, the deployment will be rolled out to the resources provided here as well as the original resource in which the project is created.",
           "items": {
             "type": "string"
           }
         }
-      }
+      },
+      "required": [
+        "trainedModelLabel"
+      ]
     },
     "CreateProjectOptions": {
+      "type": "object",
       "description": "Represents the options used to create or update a project.",
+      "properties": {
+        "projectKind": {
+          "$ref": "#/definitions/ProjectKind",
+          "description": "Represents the project kind."
+        },
+        "settings": {
+          "$ref": "#/definitions/ProjectSettings",
+          "description": "The project settings."
+        },
+        "storageInputContainerName": {
+          "type": "string",
+          "description": "The storage container name in case of conversation summarization."
+        },
+        "projectName": {
+          "type": "string",
+          "description": "The new project name."
+        },
+        "multilingual": {
+          "type": "boolean",
+          "description": "Whether the project would be used for multiple languages or not."
+        },
+        "description": {
+          "type": "string",
+          "description": "The project description."
+        },
+        "language": {
+          "type": "string",
+          "description": "The project language. This is BCP-47 representation of a language. For example, use \"en\" for English, \"en-gb\" for English (UK), \"es\" for Spanish etc."
+        }
+      },
       "required": [
         "projectKind",
         "projectName",
         "language"
-      ],
-      "type": "object",
-      "properties": {
-        "projectKind": {
-          "description": "Represents the project kind.",
-          "$ref": "#/definitions/ProjectKind"
-        },
-        "settings": {
-          "description": "The project settings.",
-          "$ref": "#/definitions/ProjectSettings"
-        },
-        "storageInputContainerName": {
-          "description": "The storage container name in case of conversation summarization.",
-          "type": "string"
-        },
-        "projectName": {
-          "description": "The new project name.",
-          "type": "string"
-        },
-        "multilingual": {
-          "description": "Whether the project would be used for multiple languages or not.",
-          "type": "boolean"
-        },
-        "description": {
-          "description": "The project description.",
-          "type": "string"
-        },
-        "language": {
-          "description": "The project language. This is BCP-47 representation of a language. For example, use \"en\" for English, \"en-gb\" for English (UK), \"es\" for Spanish etc.",
-          "type": "string"
-        }
-      }
+      ]
     },
     "CustomConversationSummarizationConversation": {
-      "description": "Represents an exported conversation for a custom conversation summarization.",
-      "required": [
-        "location"
-      ],
       "type": "object",
+      "description": "Represents an exported conversation for a custom conversation summarization.",
       "properties": {
         "summaryLocation": {
           "type": "string"
         },
         "location": {
-          "description": "Represents the conversation file location in the blob store container associated with the project.",
-          "type": "string"
+          "type": "string",
+          "description": "Represents the conversation file location in the blob store container associated with the project."
         },
         "language": {
-          "description": "Represents the language. This is BCP-47 representation of a language. For example, use \"en\" for English, \"en-gb\" for English (UK), \"es\" for Spanish etc.",
-          "type": "string"
+          "type": "string",
+          "description": "Represents the language. This is BCP-47 representation of a language. For example, use \"en\" for English, \"en-gb\" for English (UK), \"es\" for Spanish etc."
         },
         "dataset": {
-          "description": "The dataset for this conversation. Allowed values are 'Train' and 'Test'.",
-          "type": "string"
+          "type": "string",
+          "description": "The dataset for this conversation. Allowed values are 'Train' and 'Test'."
         }
-      }
+      },
+      "required": [
+        "location"
+      ]
     },
     "DeleteDeploymentOptions": {
-      "description": "Represents the options for deleting a project deployment.",
       "type": "object",
+      "description": "Represents the options for deleting a project deployment.",
       "properties": {
         "assignedResourceIds": {
-          "description": "Represents the resource IDs to delete the deployment from.\n            If not provided, the deployment will be rolled out from all the resources it is deployed to.\n            If provided, it will delete the deployment only from the specified assigned resources, and leave it for the rest.",
           "type": "array",
+          "description": "Represents the resource IDs to delete the deployment from.\n            If not provided, the deployment will be rolled out from all the resources it is deployed to.\n            If provided, it will delete the deployment only from the specified assigned resources, and leave it for the rest.",
           "items": {
             "type": "string"
           }
@@ -2886,8 +2886,8 @@
       }
     },
     "DeploymentJobState": {
-      "description": "Represents the state of a deployment job.",
       "type": "object",
+      "description": "Represents the state of a deployment job.",
       "allOf": [
         {
           "$ref": "#/definitions/JobState"
@@ -2895,26 +2895,26 @@
       ]
     },
     "DeploymentResource": {
+      "type": "object",
       "description": "Represents an Azure resource assigned to a deployment.",
+      "properties": {
+        "resourceId": {
+          "type": "string",
+          "description": "Represents the Azure resource Id."
+        },
+        "region": {
+          "type": "string",
+          "description": "Represents the resource region."
+        }
+      },
       "required": [
         "resourceId",
         "region"
-      ],
-      "type": "object",
-      "properties": {
-        "resourceId": {
-          "description": "Represents the Azure resource Id.",
-          "type": "string"
-        },
-        "region": {
-          "description": "Represents the resource region.",
-          "type": "string"
-        }
-      }
+      ]
     },
     "DeploymentResourcesJobState": {
-      "description": "Represents the state of a deployment resources job.",
       "type": "object",
+      "description": "Represents the state of a deployment resources job.",
       "allOf": [
         {
           "$ref": "#/definitions/JobState"
@@ -2922,7 +2922,51 @@
       ]
     },
     "EntitiesEvaluationSummary": {
+      "type": "object",
       "description": "Represents the evaluation result summary for the project's entities.",
+      "properties": {
+        "confusionMatrix": {
+          "$ref": "#/definitions/ConfusionMatrix",
+          "description": "Represents the confusion matrix between two entities (the two entities can be the same). The matrix is between the entity that was labelled and the entity that was predicted."
+        },
+        "entities": {
+          "type": "object",
+          "description": "Represents the entities evaluation summary.",
+          "additionalProperties": {
+            "$ref": "#/definitions/EntityEvaluationSummary"
+          }
+        },
+        "microF1": {
+          "type": "number",
+          "format": "float",
+          "description": "Represents the micro F1. Expected value is a float between 0 and 1 inclusive."
+        },
+        "microPrecision": {
+          "type": "number",
+          "format": "float",
+          "description": "Represents the micro precision. Expected value is a float between 0 and 1 inclusive."
+        },
+        "microRecall": {
+          "type": "number",
+          "format": "float",
+          "description": "Represents the micro recall. Expected value is a float between 0 and 1 inclusive."
+        },
+        "macroF1": {
+          "type": "number",
+          "format": "float",
+          "description": "Represents the macro F1. Expected value is a float between 0 and 1 inclusive."
+        },
+        "macroPrecision": {
+          "type": "number",
+          "format": "float",
+          "description": "Represents the macro precision. Expected value is a float between 0 and 1 inclusive."
+        },
+        "macroRecall": {
+          "type": "number",
+          "format": "float",
+          "description": "Represents the macro recall. Expected value is a float between 0 and 1 inclusive."
+        }
+      },
       "required": [
         "confusionMatrix",
         "entities",
@@ -2932,54 +2976,48 @@
         "macroF1",
         "macroPrecision",
         "macroRecall"
-      ],
-      "type": "object",
-      "properties": {
-        "confusionMatrix": {
-          "description": "Represents the confusion matrix between two entities (the two entities can be the same). The matrix is between the entity that was labelled and the entity that was predicted.",
-          "$ref": "#/definitions/ConfusionMatrix"
-        },
-        "entities": {
-          "description": "Represents the entities evaluation summary.",
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/EntityEvaluationSummary"
-          }
-        },
-        "microF1": {
-          "format": "float",
-          "description": "Represents the micro F1. Expected value is a float between 0 and 1 inclusive.",
-          "type": "number"
-        },
-        "microPrecision": {
-          "format": "float",
-          "description": "Represents the micro precision. Expected value is a float between 0 and 1 inclusive.",
-          "type": "number"
-        },
-        "microRecall": {
-          "format": "float",
-          "description": "Represents the micro recall. Expected value is a float between 0 and 1 inclusive.",
-          "type": "number"
-        },
-        "macroF1": {
-          "format": "float",
-          "description": "Represents the macro F1. Expected value is a float between 0 and 1 inclusive.",
-          "type": "number"
-        },
-        "macroPrecision": {
-          "format": "float",
-          "description": "Represents the macro precision. Expected value is a float between 0 and 1 inclusive.",
-          "type": "number"
-        },
-        "macroRecall": {
-          "format": "float",
-          "description": "Represents the macro recall. Expected value is a float between 0 and 1 inclusive.",
-          "type": "number"
-        }
-      }
+      ]
     },
     "EntityEvaluationSummary": {
+      "type": "object",
       "description": "Represents the evaluation result for an entity.",
+      "properties": {
+        "f1": {
+          "type": "number",
+          "format": "double",
+          "description": "Represents the model precision"
+        },
+        "precision": {
+          "type": "number",
+          "format": "double",
+          "description": "Represents the model recall"
+        },
+        "recall": {
+          "type": "number",
+          "format": "double",
+          "description": "Represents the model F1 score"
+        },
+        "truePositiveCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Represents the count of true positive"
+        },
+        "trueNegativeCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Represents the count of true negative"
+        },
+        "falsePositiveCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Represents the count of false positive"
+        },
+        "falseNegativeCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Represents the count of false negative"
+        }
+      },
       "required": [
         "f1",
         "precision",
@@ -2988,76 +3026,39 @@
         "trueNegativeCount",
         "falsePositiveCount",
         "falseNegativeCount"
-      ],
-      "type": "object",
-      "properties": {
-        "f1": {
-          "format": "double",
-          "description": "Represents the model precision",
-          "type": "number"
-        },
-        "precision": {
-          "format": "double",
-          "description": "Represents the model recall",
-          "type": "number"
-        },
-        "recall": {
-          "format": "double",
-          "description": "Represents the model F1 score",
-          "type": "number"
-        },
-        "truePositiveCount": {
-          "format": "int32",
-          "description": "Represents the count of true positive",
-          "type": "integer"
-        },
-        "trueNegativeCount": {
-          "format": "int32",
-          "description": "Represents the count of true negative",
-          "type": "integer"
-        },
-        "falsePositiveCount": {
-          "format": "int32",
-          "description": "Represents the count of false positive",
-          "type": "integer"
-        },
-        "falseNegativeCount": {
-          "format": "int32",
-          "description": "Represents the count of false negative",
-          "type": "integer"
-        }
-      }
+      ]
     },
     "Error": {
-      "description": "Represents the definition of an error that occurred.",
-      "required": [
-        "code",
-        "message"
-      ],
       "type": "object",
+      "description": "Represents the definition of an error that occurred.",
       "properties": {
         "code": {
-          "description": "The error code.",
-          "$ref": "#/definitions/ErrorCode"
+          "$ref": "#/definitions/ErrorCode",
+          "description": "The error code."
         },
         "message": {
-          "description": "The error message.",
-          "type": "string"
+          "type": "string",
+          "description": "The error message."
         },
         "target": {
-          "description": "The target that caused the error, if applicable.",
-          "type": "string"
+          "type": "string",
+          "description": "The target that caused the error, if applicable."
         },
         "details": {
-          "description": "An array of details about specific errors that led to this reported error.",
           "type": "array",
+          "description": "An array of details about specific errors that led to this reported error.",
           "items": {
             "$ref": "#/definitions/Error"
           }
         }
-      }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
     },
     "ErrorCode": {
+      "type": "string",
       "enum": [
         "InvalidRequest",
         "InvalidArgument",
@@ -3070,76 +3071,75 @@
         "Warning",
         "InternalServerError"
       ],
-      "type": "string",
       "x-ms-enum": {
         "name": "ErrorCode",
         "modelAsString": true
       }
     },
     "ErrorResponse": {
-      "description": "Represents an error that occurred.",
-      "required": [
-        "error"
-      ],
       "type": "object",
+      "description": "Represents an error that occurred.",
       "properties": {
         "error": {
           "$ref": "#/definitions/Error"
         }
-      }
+      },
+      "required": [
+        "error"
+      ]
     },
     "EvaluationJobResult": {
+      "type": "object",
+      "properties": {
+        "evaluationOptions": {
+          "$ref": "#/definitions/EvaluationOptions",
+          "description": "Represents the options used running the evaluation."
+        },
+        "modelLabel": {
+          "type": "string",
+          "description": "Represents trained model label."
+        },
+        "trainingConfigVersion": {
+          "type": "string",
+          "description": "Represents training config version."
+        },
+        "percentComplete": {
+          "type": "number",
+          "format": "double",
+          "description": "Represents progress percentage."
+        }
+      },
       "required": [
         "evaluationOptions",
         "modelLabel",
         "trainingConfigVersion",
         "percentComplete"
-      ],
-      "type": "object",
-      "properties": {
-        "evaluationOptions": {
-          "description": "Represents the options used running the evaluation.",
-          "$ref": "#/definitions/EvaluationOptions"
-        },
-        "modelLabel": {
-          "description": "Represents trained model label.",
-          "type": "string"
-        },
-        "trainingConfigVersion": {
-          "description": "Represents training config version.",
-          "type": "string"
-        },
-        "percentComplete": {
-          "format": "double",
-          "description": "Represents progress percentage.",
-          "type": "number"
-        }
-      }
+      ]
     },
     "EvaluationJobState": {
+      "type": "object",
       "description": "Represents the state of a evaluation job.",
+      "properties": {
+        "result": {
+          "$ref": "#/definitions/EvaluationJobResult",
+          "description": "Represents evaluation task detailed result."
+        }
+      },
       "required": [
         "result"
       ],
-      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/JobState"
         }
-      ],
-      "properties": {
-        "result": {
-          "description": "Represents evaluation task detailed result.",
-          "$ref": "#/definitions/EvaluationJobResult"
-        }
-      }
+      ]
     },
     "EvaluationKind": {
+      "type": "string",
       "enum": [
         "percentage",
         "manual"
       ],
-      "type": "string",
       "x-ms-enum": {
         "name": "EvaluationKind",
         "modelAsString": true,
@@ -3156,127 +3156,142 @@
       }
     },
     "EvaluationOnDemandOptions": {
-      "description": "Represents the options used running the evaluation.",
       "type": "object",
+      "description": "Represents the options used running the evaluation.",
       "properties": {
         "kind": {
-          "description": "Represents the evaluation kind. By default, the evaluation kind is set to percentage.",
-          "$ref": "#/definitions/EvaluationKind"
+          "$ref": "#/definitions/EvaluationKind",
+          "description": "Represents the evaluation kind. By default, the evaluation kind is set to percentage."
         },
         "testingSplitPercentage": {
+          "type": "integer",
           "format": "int32",
-          "description": "Represents the testing dataset split percentage. Only needed in case the evaluation kind is percentage.",
-          "type": "integer"
+          "description": "Represents the testing dataset split percentage. Only needed in case the evaluation kind is percentage."
         }
       }
     },
     "EvaluationOptions": {
-      "description": "Represents the options used running the evaluation.",
       "type": "object",
+      "description": "Represents the options used running the evaluation.",
       "properties": {
         "kind": {
-          "description": "Represents the evaluation kind. By default, the evaluation kind is set to percentage.",
-          "$ref": "#/definitions/EvaluationKind"
+          "$ref": "#/definitions/EvaluationKind",
+          "description": "Represents the evaluation kind. By default, the evaluation kind is set to percentage."
         },
         "trainingSplitPercentage": {
+          "type": "integer",
           "format": "int32",
-          "description": "Represents the training dataset split percentage. Only needed in case the evaluation kind is percentage.",
-          "type": "integer"
+          "description": "Represents the training dataset split percentage. Only needed in case the evaluation kind is percentage."
         },
         "testingSplitPercentage": {
+          "type": "integer",
           "format": "int32",
-          "description": "Represents the testing dataset split percentage. Only needed in case the evaluation kind is percentage.",
-          "type": "integer"
+          "description": "Represents the testing dataset split percentage. Only needed in case the evaluation kind is percentage."
         }
       }
     },
     "EvaluationResults": {
-      "description": "Represent a list of utterances' evaluation results.",
-      "required": [
-        "value",
-        "nextLink"
-      ],
       "type": "object",
+      "description": "Represent a list of utterances' evaluation results.",
       "properties": {
         "value": {
-          "description": "The utterances evaluation results.",
           "type": "array",
+          "description": "The utterances evaluation results.",
           "items": {
             "$ref": "#/definitions/UtteranceEvaluationResult"
           }
         },
         "nextLink": {
-          "description": "The next page link.",
-          "type": "string"
+          "type": "string",
+          "description": "The next page link."
         }
-      }
+      },
+      "required": [
+        "value",
+        "nextLink"
+      ]
     },
     "EvaluationSummary": {
+      "type": "object",
       "description": "Represents the evaluation result summary.",
+      "properties": {
+        "entitiesEvaluation": {
+          "$ref": "#/definitions/EntitiesEvaluationSummary",
+          "description": "Contains the data related to entities evaluation."
+        },
+        "intentsEvaluation": {
+          "$ref": "#/definitions/IntentsEvaluationSummary",
+          "description": "Contains the data related to intents evaluation."
+        },
+        "evaluationOptions": {
+          "$ref": "#/definitions/EvaluationOptions",
+          "description": "The options that were used while running the evaluation."
+        }
+      },
       "required": [
         "entitiesEvaluation",
         "intentsEvaluation"
-      ],
+      ]
+    },
+    "ExportProjectJobState": {
       "type": "object",
+      "description": "Represents the state of an export job.",
       "properties": {
-        "entitiesEvaluation": {
-          "description": "Contains the data related to entities evaluation.",
-          "$ref": "#/definitions/EntitiesEvaluationSummary"
-        },
-        "intentsEvaluation": {
-          "description": "Contains the data related to intents evaluation.",
-          "$ref": "#/definitions/IntentsEvaluationSummary"
-        },
-        "evaluationOptions": {
-          "description": "The options that were used while running the evaluation.",
-          "$ref": "#/definitions/EvaluationOptions"
+        "resultUrl": {
+          "type": "string",
+          "description": "The URL to use in order to download the exported project."
         }
-      }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/JobState"
+        }
+      ]
     },
     "ExportedConversationOrchestration": {
+      "type": "object",
       "description": "Defines the orchestration details for a Conversational project target.",
+      "properties": {
+        "projectName": {
+          "type": "string",
+          "description": "The name of the targeted project."
+        },
+        "deploymentName": {
+          "type": "string",
+          "description": "The name of the targeted deployment."
+        }
+      },
       "required": [
         "projectName",
         "deploymentName"
-      ],
-      "type": "object",
-      "properties": {
-        "projectName": {
-          "description": "The name of the targeted project.",
-          "type": "string"
-        },
-        "deploymentName": {
-          "description": "The name of the targeted deployment.",
-          "type": "string"
-        }
-      }
+      ]
     },
     "ExportedConversationOrchestrationOptions": {
+      "type": "object",
       "description": "Represents the orchestration options for a Conversational project target.",
+      "properties": {
+        "conversationOrchestration": {
+          "$ref": "#/definitions/ExportedConversationOrchestration",
+          "description": "The Conversational project target details."
+        }
+      },
       "required": [
         "conversationOrchestration"
       ],
-      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/ExportedOrchestrationOptions"
         }
       ],
-      "properties": {
-        "conversationOrchestration": {
-          "description": "The Conversational project target details.",
-          "$ref": "#/definitions/ExportedConversationOrchestration"
-        }
-      },
       "x-ms-discriminator-value": "Conversation"
     },
     "ExportedEntityList": {
-      "description": "Represents a list component of an entity.",
       "type": "object",
+      "description": "Represents a list component of an entity.",
       "properties": {
         "sublists": {
-          "description": "The sub-lists of the list component.",
           "type": "array",
+          "description": "The sub-lists of the list component.",
           "items": {
             "$ref": "#/definitions/ExportedEntitySublist"
           }
@@ -3284,16 +3299,16 @@
       }
     },
     "ExportedEntityListSynonym": {
-      "description": "Represents a list of synonyms inside a list component",
       "type": "object",
+      "description": "Represents a list of synonyms inside a list component",
       "properties": {
         "language": {
-          "description": "Represents the language of the synonyms. This is BCP-47 representation of a language. For example, use \"en\" for English, \"en-gb\" for English (UK), \"es\" for Spanish etc.",
-          "type": "string"
+          "type": "string",
+          "description": "Represents the language of the synonyms. This is BCP-47 representation of a language. For example, use \"en\" for English, \"en-gb\" for English (UK), \"es\" for Spanish etc."
         },
         "values": {
-          "description": "The list of synonyms.",
           "type": "array",
+          "description": "The list of synonyms.",
           "items": {
             "type": "string"
           }
@@ -3301,12 +3316,12 @@
       }
     },
     "ExportedEntityRegex": {
-      "description": "Represents a regex component of an entity.",
       "type": "object",
+      "description": "Represents a regex component of an entity.",
       "properties": {
         "expressions": {
-          "description": "The regex expressions of the regex component. These expressions follow the .NET regex syntax. For reference, check here: https://learn.microsoft.com/dotnet/standard/base-types/regular-expressions",
           "type": "array",
+          "description": "The regex expressions of the regex component. These expressions follow the .NET regex syntax. For reference, check here: https://learn.microsoft.com/dotnet/standard/base-types/regular-expressions",
           "items": {
             "$ref": "#/definitions/ExportedEntityRegexExpression"
           }
@@ -3314,34 +3329,34 @@
       }
     },
     "ExportedEntityRegexExpression": {
-      "description": "Represents a regex expression inside a regex component. This expression follows the .NET regex syntax. For reference, check here: https://learn.microsoft.com/dotnet/standard/base-types/regular-expressions",
       "type": "object",
+      "description": "Represents a regex expression inside a regex component. This expression follows the .NET regex syntax. For reference, check here: https://learn.microsoft.com/dotnet/standard/base-types/regular-expressions",
       "properties": {
         "regexKey": {
-          "description": "The key of the regex expression.",
-          "type": "string"
+          "type": "string",
+          "description": "The key of the regex expression."
         },
         "language": {
-          "description": "Represents the language of the regex expression. This is BCP-47 representation of a language. For example, use \"en\" for English, \"en-gb\" for English (UK), \"es\" for Spanish etc.",
-          "type": "string"
+          "type": "string",
+          "description": "Represents the language of the regex expression. This is BCP-47 representation of a language. For example, use \"en\" for English, \"en-gb\" for English (UK), \"es\" for Spanish etc."
         },
         "regexPattern": {
-          "description": "The regex pattern.",
-          "type": "string"
+          "type": "string",
+          "description": "The regex pattern."
         }
       }
     },
     "ExportedEntitySublist": {
-      "description": "Represents a sub-list inside a list component.",
       "type": "object",
+      "description": "Represents a sub-list inside a list component.",
       "properties": {
         "listKey": {
-          "description": "The key of the sub-list.",
-          "type": "string"
+          "type": "string",
+          "description": "The key of the sub-list."
         },
         "synonyms": {
-          "description": "The phrases of that correspond to the sub-list.",
           "type": "array",
+          "description": "The phrases of that correspond to the sub-list.",
           "items": {
             "$ref": "#/definitions/ExportedEntityListSynonym"
           }
@@ -3349,121 +3364,121 @@
       }
     },
     "ExportedLuisOrchestration": {
-      "description": "Defines the orchestration details for a LUIS application target.",
-      "required": [
-        "appId"
-      ],
       "type": "object",
+      "description": "Defines the orchestration details for a LUIS application target.",
       "properties": {
         "appId": {
+          "type": "string",
           "format": "uuid",
           "description": "The LUIS application ID.",
-          "type": "string",
           "example": "00000000-0000-0000-0000-000000000000"
         },
         "appVersion": {
-          "description": "The targeted version Id.",
-          "type": "string"
+          "type": "string",
+          "description": "The targeted version Id."
         },
         "slotName": {
-          "description": "The targeted slot name.",
-          "type": "string"
+          "type": "string",
+          "description": "The targeted slot name."
         }
-      }
+      },
+      "required": [
+        "appId"
+      ]
     },
     "ExportedLuisOrchestrationOptions": {
+      "type": "object",
       "description": "Represents the orchestration options for a LUIS application target.",
+      "properties": {
+        "luisOrchestration": {
+          "$ref": "#/definitions/ExportedLuisOrchestration",
+          "description": "The LUIS application target details."
+        }
+      },
       "required": [
         "luisOrchestration"
       ],
-      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/ExportedOrchestrationOptions"
         }
       ],
-      "properties": {
-        "luisOrchestration": {
-          "description": "The LUIS application target details.",
-          "$ref": "#/definitions/ExportedLuisOrchestration"
-        }
-      },
       "x-ms-discriminator-value": "Luis"
     },
     "ExportedOrchestrationOptions": {
-      "description": "Represents the options used to define the orchestration behavior of an intent.",
-      "required": [
-        "targetProjectKind"
-      ],
       "type": "object",
+      "description": "Represents the options used to define the orchestration behavior of an intent.",
       "properties": {
         "targetProjectKind": {
-          "description": "The kind of the target used in the orchestration flow.",
-          "$ref": "#/definitions/OrchestrationTargetProjectKind"
+          "$ref": "#/definitions/OrchestrationTargetProjectKind",
+          "description": "The kind of the target used in the orchestration flow."
         }
       },
-      "discriminator": "targetProjectKind"
+      "discriminator": "targetProjectKind",
+      "required": [
+        "targetProjectKind"
+      ]
     },
     "ExportedPrebuiltEntity": {
-      "description": "Represents an exported prebuilt entity component",
-      "required": [
-        "category"
-      ],
       "type": "object",
+      "description": "Represents an exported prebuilt entity component",
       "properties": {
         "category": {
-          "description": "The prebuilt entity category.",
-          "type": "string"
+          "type": "string",
+          "description": "The prebuilt entity category."
         }
-      }
+      },
+      "required": [
+        "category"
+      ]
     },
     "ExportedProject": {
+      "type": "object",
       "description": "Represents an exported project.",
+      "properties": {
+        "projectFileVersion": {
+          "type": "string",
+          "description": "The version of the exported file."
+        },
+        "stringIndexType": {
+          "$ref": "#/definitions/StringIndexType",
+          "description": "Specifies the method used to interpret string offsets. For additional information see https://aka.ms/text-analytics-offsets."
+        },
+        "metadata": {
+          "$ref": "#/definitions/CreateProjectOptions",
+          "description": "Represents the project metadata."
+        },
+        "assets": {
+          "$ref": "#/definitions/ExportedProjectAssets",
+          "description": "Represents the project assets."
+        }
+      },
       "required": [
         "projectFileVersion",
         "stringIndexType",
         "metadata"
-      ],
-      "type": "object",
-      "properties": {
-        "projectFileVersion": {
-          "description": "The version of the exported file.",
-          "type": "string"
-        },
-        "stringIndexType": {
-          "description": "Specifies the method used to interpret string offsets. For additional information see https://aka.ms/text-analytics-offsets.",
-          "$ref": "#/definitions/StringIndexType"
-        },
-        "metadata": {
-          "description": "Represents the project metadata.",
-          "$ref": "#/definitions/CreateProjectOptions"
-        },
-        "assets": {
-          "description": "Represents the project assets.",
-          "$ref": "#/definitions/ExportedProjectAssets"
-        }
-      }
+      ]
     },
     "ExportedProjectAssets": {
-      "description": "Represents the assets of an exported project.",
-      "required": [
-        "projectKind"
-      ],
       "type": "object",
+      "description": "Represents the assets of an exported project.",
       "properties": {
         "projectKind": {
-          "description": "The type of project containing the assets.",
-          "$ref": "#/definitions/ProjectKind"
+          "$ref": "#/definitions/ProjectKind",
+          "description": "The type of project containing the assets."
         }
       },
-      "discriminator": "projectKind"
+      "discriminator": "projectKind",
+      "required": [
+        "projectKind"
+      ]
     },
     "ExportedProjectFormat": {
+      "type": "string",
       "enum": [
         "Conversation",
         "Luis"
       ],
-      "type": "string",
       "x-ms-enum": {
         "name": "ExportedProjectFormat",
         "modelAsString": true,
@@ -3480,80 +3495,65 @@
       }
     },
     "ExportedQuestionAnsweringOrchestration": {
-      "description": "Defines the orchestration details for a Question Answering project target.",
-      "required": [
-        "projectName"
-      ],
       "type": "object",
+      "description": "Defines the orchestration details for a Question Answering project target.",
       "properties": {
         "projectName": {
-          "description": "The name of the target project.",
-          "type": "string"
+          "type": "string",
+          "description": "The name of the target project."
         }
-      }
+      },
+      "required": [
+        "projectName"
+      ]
     },
     "ExportedQuestionAnsweringOrchestrationOptions": {
+      "type": "object",
       "description": "Represents the orchestration options for a Question Answering project target.",
+      "properties": {
+        "questionAnsweringOrchestration": {
+          "$ref": "#/definitions/ExportedQuestionAnsweringOrchestration",
+          "description": "The Question Answering project details."
+        }
+      },
       "required": [
         "questionAnsweringOrchestration"
       ],
-      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/ExportedOrchestrationOptions"
         }
       ],
-      "properties": {
-        "questionAnsweringOrchestration": {
-          "description": "The Question Answering project details.",
-          "$ref": "#/definitions/ExportedQuestionAnsweringOrchestration"
-        }
-      },
       "x-ms-discriminator-value": "QuestionAnswering"
     },
     "ExportedUtteranceEntityLabel": {
+      "type": "object",
       "description": "Represents an entity label for an utterance.",
+      "properties": {
+        "category": {
+          "type": "string",
+          "description": "The category of the entity label."
+        },
+        "offset": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Start position for the entity text."
+        },
+        "length": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Length for the entity text."
+        }
+      },
       "required": [
         "category",
         "offset",
         "length"
-      ],
-      "type": "object",
-      "properties": {
-        "category": {
-          "description": "The category of the entity label.",
-          "type": "string"
-        },
-        "offset": {
-          "format": "int32",
-          "description": "Start position for the entity text.",
-          "type": "integer"
-        },
-        "length": {
-          "format": "int32",
-          "description": "Length for the entity text.",
-          "type": "integer"
-        }
-      }
-    },
-    "ExportProjectJobState": {
-      "description": "Represents the state of an export job.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/JobState"
-        }
-      ],
-      "properties": {
-        "resultUrl": {
-          "description": "The URL to use in order to download the exported project.",
-          "type": "string"
-        }
-      }
+      ]
     },
     "ImportProjectJobState": {
-      "description": "Represents the state of an import job.",
       "type": "object",
+      "description": "Represents the state of an import job.",
       "allOf": [
         {
           "$ref": "#/definitions/JobState"
@@ -3561,7 +3561,45 @@
       ]
     },
     "IntentEvaluationSummary": {
+      "type": "object",
       "description": "The evaluation summary for an intent.",
+      "properties": {
+        "f1": {
+          "type": "number",
+          "format": "double",
+          "description": "Represents the model precision"
+        },
+        "precision": {
+          "type": "number",
+          "format": "double",
+          "description": "Represents the model recall"
+        },
+        "recall": {
+          "type": "number",
+          "format": "double",
+          "description": "Represents the model F1 score"
+        },
+        "truePositiveCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Represents the count of true positive"
+        },
+        "trueNegativeCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Represents the count of true negative"
+        },
+        "falsePositiveCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Represents the count of false positive"
+        },
+        "falseNegativeCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Represents the count of false negative"
+        }
+      },
       "required": [
         "f1",
         "precision",
@@ -3570,48 +3608,54 @@
         "trueNegativeCount",
         "falsePositiveCount",
         "falseNegativeCount"
-      ],
-      "type": "object",
-      "properties": {
-        "f1": {
-          "format": "double",
-          "description": "Represents the model precision",
-          "type": "number"
-        },
-        "precision": {
-          "format": "double",
-          "description": "Represents the model recall",
-          "type": "number"
-        },
-        "recall": {
-          "format": "double",
-          "description": "Represents the model F1 score",
-          "type": "number"
-        },
-        "truePositiveCount": {
-          "format": "int32",
-          "description": "Represents the count of true positive",
-          "type": "integer"
-        },
-        "trueNegativeCount": {
-          "format": "int32",
-          "description": "Represents the count of true negative",
-          "type": "integer"
-        },
-        "falsePositiveCount": {
-          "format": "int32",
-          "description": "Represents the count of false positive",
-          "type": "integer"
-        },
-        "falseNegativeCount": {
-          "format": "int32",
-          "description": "Represents the count of false negative",
-          "type": "integer"
-        }
-      }
+      ]
     },
     "IntentsEvaluationSummary": {
+      "type": "object",
       "description": "Represents the evaluation summary for the project's intents.",
+      "properties": {
+        "confusionMatrix": {
+          "$ref": "#/definitions/ConfusionMatrix",
+          "description": "Represents the confusion matrix between two intents (the two intents can be the same). The matrix is between the intent that was labelled and the intent that was predicted."
+        },
+        "intents": {
+          "type": "object",
+          "description": "Represents the intents evaluation summary.",
+          "additionalProperties": {
+            "$ref": "#/definitions/IntentEvaluationSummary"
+          }
+        },
+        "microF1": {
+          "type": "number",
+          "format": "float",
+          "description": "Represents the micro F1. Expected value is a float between 0 and 1 inclusive."
+        },
+        "microPrecision": {
+          "type": "number",
+          "format": "float",
+          "description": "Represents the micro precision. Expected value is a float between 0 and 1 inclusive."
+        },
+        "microRecall": {
+          "type": "number",
+          "format": "float",
+          "description": "Represents the micro recall. Expected value is a float between 0 and 1 inclusive."
+        },
+        "macroF1": {
+          "type": "number",
+          "format": "float",
+          "description": "Represents the macro F1. Expected value is a float between 0 and 1 inclusive."
+        },
+        "macroPrecision": {
+          "type": "number",
+          "format": "float",
+          "description": "Represents the macro precision. Expected value is a float between 0 and 1 inclusive."
+        },
+        "macroRecall": {
+          "type": "number",
+          "format": "float",
+          "description": "Represents the macro recall. Expected value is a float between 0 and 1 inclusive."
+        }
+      },
       "required": [
         "confusionMatrix",
         "intents",
@@ -3621,102 +3665,59 @@
         "macroF1",
         "macroPrecision",
         "macroRecall"
-      ],
-      "type": "object",
-      "properties": {
-        "confusionMatrix": {
-          "description": "Represents the confusion matrix between two intents (the two intents can be the same). The matrix is between the intent that was labelled and the intent that was predicted.",
-          "$ref": "#/definitions/ConfusionMatrix"
-        },
-        "intents": {
-          "description": "Represents the intents evaluation summary.",
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/IntentEvaluationSummary"
-          }
-        },
-        "microF1": {
-          "format": "float",
-          "description": "Represents the micro F1. Expected value is a float between 0 and 1 inclusive.",
-          "type": "number"
-        },
-        "microPrecision": {
-          "format": "float",
-          "description": "Represents the micro precision. Expected value is a float between 0 and 1 inclusive.",
-          "type": "number"
-        },
-        "microRecall": {
-          "format": "float",
-          "description": "Represents the micro recall. Expected value is a float between 0 and 1 inclusive.",
-          "type": "number"
-        },
-        "macroF1": {
-          "format": "float",
-          "description": "Represents the macro F1. Expected value is a float between 0 and 1 inclusive.",
-          "type": "number"
-        },
-        "macroPrecision": {
-          "format": "float",
-          "description": "Represents the macro precision. Expected value is a float between 0 and 1 inclusive.",
-          "type": "number"
-        },
-        "macroRecall": {
-          "format": "float",
-          "description": "Represents the macro recall. Expected value is a float between 0 and 1 inclusive.",
-          "type": "number"
-        }
-      }
+      ]
     },
     "JobState": {
-      "description": "Represents a job's state.",
-      "required": [
-        "jobId",
-        "createdDateTime",
-        "lastUpdatedDateTime",
-        "status"
-      ],
       "type": "object",
+      "description": "Represents a job's state.",
       "properties": {
         "jobId": {
-          "description": "The job ID.",
-          "type": "string"
+          "type": "string",
+          "description": "The job ID."
         },
         "createdDateTime": {
+          "type": "string",
           "format": "date-time",
-          "description": "The creation date time of the job.",
-          "type": "string"
+          "description": "The creation date time of the job."
         },
         "lastUpdatedDateTime": {
+          "type": "string",
           "format": "date-time",
-          "description": "The last date time the job was updated.",
-          "type": "string"
+          "description": "The last date time the job was updated."
         },
         "expirationDateTime": {
+          "type": "string",
           "format": "date-time",
-          "description": "The expiration date time of the job.",
-          "type": "string"
+          "description": "The expiration date time of the job."
         },
         "status": {
-          "description": "The job status.",
-          "$ref": "#/definitions/JobStatus"
+          "$ref": "#/definitions/JobStatus",
+          "description": "The job status."
         },
         "warnings": {
-          "description": "The warnings that were encountered while executing the job.",
           "type": "array",
+          "description": "The warnings that were encountered while executing the job.",
           "items": {
             "$ref": "#/definitions/Warning"
           }
         },
         "errors": {
-          "description": "The errors encountered while executing the job.",
           "type": "array",
+          "description": "The errors encountered while executing the job.",
           "items": {
             "$ref": "#/definitions/Error"
           }
         }
-      }
+      },
+      "required": [
+        "jobId",
+        "createdDateTime",
+        "lastUpdatedDateTime",
+        "status"
+      ]
     },
     "JobStatus": {
+      "type": "string",
       "enum": [
         "notStarted",
         "running",
@@ -3726,15 +3727,14 @@
         "cancelling",
         "partiallyCompleted"
       ],
-      "type": "string",
       "x-ms-enum": {
         "name": "JobStatus",
         "modelAsString": true
       }
     },
     "LoadSnapshotJobState": {
-      "description": "Represents the state of loading a snapshot job.",
       "type": "object",
+      "description": "Represents the state of loading a snapshot job.",
       "allOf": [
         {
           "$ref": "#/definitions/JobState"
@@ -3742,133 +3742,133 @@
       ]
     },
     "OrchestrationExportedIntent": {
-      "description": "Represents an exported intent for an orchestration project.",
-      "required": [
-        "category"
-      ],
       "type": "object",
+      "description": "Represents an exported intent for an orchestration project.",
       "properties": {
         "orchestration": {
-          "description": "Specifies the behavior of this intent in the orchestration flow.",
-          "$ref": "#/definitions/ExportedOrchestrationOptions"
+          "$ref": "#/definitions/ExportedOrchestrationOptions",
+          "description": "Specifies the behavior of this intent in the orchestration flow."
         },
         "category": {
-          "description": "The intent category.",
-          "type": "string"
+          "type": "string",
+          "description": "The intent category."
         }
-      }
+      },
+      "required": [
+        "category"
+      ]
     },
     "OrchestrationExportedProjectAssets": {
-      "description": "Represents the assets of an orchestration project.",
       "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ExportedProjectAssets"
-        }
-      ],
+      "description": "Represents the assets of an orchestration project.",
       "properties": {
         "intents": {
-          "description": "Represents the intents of the project.",
           "type": "array",
+          "description": "Represents the intents of the project.",
           "items": {
             "$ref": "#/definitions/OrchestrationExportedIntent"
           }
         },
         "utterances": {
-          "description": "Represents the utterances of the project.",
           "type": "array",
+          "description": "Represents the utterances of the project.",
           "items": {
             "$ref": "#/definitions/OrchestrationExportedUtterance"
           }
         }
       },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ExportedProjectAssets"
+        }
+      ],
       "x-ms-discriminator-value": "Orchestration"
     },
     "OrchestrationExportedUtterance": {
+      "type": "object",
       "description": "Represents an utterance of an orchestration project.",
+      "properties": {
+        "text": {
+          "type": "string",
+          "description": "The utterance text."
+        },
+        "language": {
+          "type": "string",
+          "description": "Represents the utterance's language. This is BCP-47 representation of a language. For example, use \"en\" for English, \"en-gb\" for English (UK), \"es\" for Spanish etc."
+        },
+        "intent": {
+          "type": "string",
+          "description": "The intent of the utterance."
+        },
+        "dataset": {
+          "type": "string",
+          "description": "The dataset for this utterance. Allowed values are 'Train' and 'Test'."
+        }
+      },
       "required": [
         "text",
         "intent"
-      ],
-      "type": "object",
-      "properties": {
-        "text": {
-          "description": "The utterance text.",
-          "type": "string"
-        },
-        "language": {
-          "description": "Represents the utterance's language. This is BCP-47 representation of a language. For example, use \"en\" for English, \"en-gb\" for English (UK), \"es\" for Spanish etc.",
-          "type": "string"
-        },
-        "intent": {
-          "description": "The intent of the utterance.",
-          "type": "string"
-        },
-        "dataset": {
-          "description": "The dataset for this utterance. Allowed values are 'Train' and 'Test'.",
-          "type": "string"
-        }
-      }
+      ]
     },
     "OrchestrationTargetProjectKind": {
+      "type": "string",
       "enum": [
         "Luis",
         "Conversation",
         "QuestionAnswering"
       ],
-      "type": "string",
       "x-ms-enum": {
         "name": "OrchestrationTargetProjectKind",
         "modelAsString": true
       }
     },
     "PrebuiltEntities": {
-      "description": "Represents a list of the retrieved supported prebuilt entities.",
-      "required": [
-        "value",
-        "nextLink"
-      ],
       "type": "object",
+      "description": "Represents a list of the retrieved supported prebuilt entities.",
       "properties": {
         "value": {
-          "description": "The supported prebuilt entities.",
           "type": "array",
+          "description": "The supported prebuilt entities.",
           "items": {
             "$ref": "#/definitions/PrebuiltEntity"
           }
         },
         "nextLink": {
-          "description": "The next page link.",
-          "type": "string"
+          "type": "string",
+          "description": "The next page link."
         }
-      }
+      },
+      "required": [
+        "value",
+        "nextLink"
+      ]
     },
     "PrebuiltEntity": {
+      "type": "object",
       "description": "Represents a supported prebuilt entity.",
+      "properties": {
+        "category": {
+          "type": "string",
+          "description": "The prebuilt entity category."
+        },
+        "description": {
+          "type": "string",
+          "description": "The description."
+        },
+        "examples": {
+          "type": "string",
+          "description": "English examples for the entity."
+        }
+      },
       "required": [
         "category",
         "description",
         "examples"
-      ],
-      "type": "object",
-      "properties": {
-        "category": {
-          "description": "The prebuilt entity category.",
-          "type": "string"
-        },
-        "description": {
-          "description": "The description.",
-          "type": "string"
-        },
-        "examples": {
-          "description": "English examples for the entity.",
-          "type": "string"
-        }
-      }
+      ]
     },
     "ProjectDeletionJobState": {
-      "description": "Represents the state of a project deletion job.",
       "type": "object",
+      "description": "Represents the state of a project deletion job.",
       "allOf": [
         {
           "$ref": "#/definitions/JobState"
@@ -3876,7 +3876,44 @@
       ]
     },
     "ProjectDeployment": {
+      "type": "object",
       "description": "Represents a project deployment.",
+      "properties": {
+        "deploymentName": {
+          "type": "string",
+          "description": "Represents deployment name."
+        },
+        "modelId": {
+          "type": "string",
+          "description": "Represents deployment modelId."
+        },
+        "lastTrainedDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Represents deployment last trained time."
+        },
+        "lastDeployedDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Represents deployment last deployed time."
+        },
+        "deploymentExpirationDate": {
+          "type": "string",
+          "format": "date",
+          "description": "Represents deployment expiration date in the runtime."
+        },
+        "modelTrainingConfigVersion": {
+          "type": "string",
+          "description": "Represents model training config version."
+        },
+        "assignedResources": {
+          "type": "array",
+          "description": "Represents the metadata of the assigned Azure resources.",
+          "items": {
+            "$ref": "#/definitions/DeploymentResource"
+          }
+        }
+      },
       "required": [
         "deploymentName",
         "modelId",
@@ -3885,73 +3922,36 @@
         "deploymentExpirationDate",
         "modelTrainingConfigVersion",
         "assignedResources"
-      ],
-      "type": "object",
-      "properties": {
-        "deploymentName": {
-          "description": "Represents deployment name.",
-          "type": "string"
-        },
-        "modelId": {
-          "description": "Represents deployment modelId.",
-          "type": "string"
-        },
-        "lastTrainedDateTime": {
-          "format": "date-time",
-          "description": "Represents deployment last trained time.",
-          "type": "string"
-        },
-        "lastDeployedDateTime": {
-          "format": "date-time",
-          "description": "Represents deployment last deployed time.",
-          "type": "string"
-        },
-        "deploymentExpirationDate": {
-          "format": "date",
-          "description": "Represents deployment expiration date in the runtime.",
-          "type": "string"
-        },
-        "modelTrainingConfigVersion": {
-          "description": "Represents model training config version.",
-          "type": "string"
-        },
-        "assignedResources": {
-          "description": "Represents the metadata of the assigned Azure resources.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/DeploymentResource"
-          }
-        }
-      }
+      ]
     },
     "ProjectDeployments": {
-      "description": "Represents a list of retrieved deployments.",
-      "required": [
-        "value",
-        "nextLink"
-      ],
       "type": "object",
+      "description": "Represents a list of retrieved deployments.",
       "properties": {
         "value": {
-          "description": "The list of retrieved deployments.",
           "type": "array",
+          "description": "The list of retrieved deployments.",
           "items": {
             "$ref": "#/definitions/ProjectDeployment"
           }
         },
         "nextLink": {
-          "description": "The next page link.",
-          "type": "string"
+          "type": "string",
+          "description": "The next page link."
         }
-      }
+      },
+      "required": [
+        "value",
+        "nextLink"
+      ]
     },
     "ProjectKind": {
+      "type": "string",
       "enum": [
         "Conversation",
         "Orchestration",
         "CustomConversationSummarization"
       ],
-      "type": "string",
       "x-ms-enum": {
         "name": "ProjectKind",
         "modelAsString": true,
@@ -3972,111 +3972,124 @@
       }
     },
     "ProjectMetadata": {
+      "type": "object",
       "description": "Represents the metadata of a project.",
+      "properties": {
+        "createdDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Represents the project creation datetime."
+        },
+        "lastModifiedDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Represents the project creation datetime."
+        },
+        "lastTrainedDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Represents the project last trained datetime."
+        },
+        "lastDeployedDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Represents the project last deployed datetime."
+        },
+        "projectKind": {
+          "$ref": "#/definitions/ProjectKind",
+          "description": "Represents the project kind."
+        },
+        "settings": {
+          "$ref": "#/definitions/ProjectSettings",
+          "description": "The project settings."
+        },
+        "storageInputContainerName": {
+          "type": "string",
+          "description": "The storage container name in case of conversation summarization."
+        },
+        "projectName": {
+          "type": "string",
+          "description": "The new project name."
+        },
+        "multilingual": {
+          "type": "boolean",
+          "description": "Whether the project would be used for multiple languages or not."
+        },
+        "description": {
+          "type": "string",
+          "description": "The project description."
+        },
+        "language": {
+          "type": "string",
+          "description": "The project language. This is BCP-47 representation of a language. For example, use \"en\" for English, \"en-gb\" for English (UK), \"es\" for Spanish etc."
+        }
+      },
       "required": [
         "createdDateTime",
         "lastModifiedDateTime",
         "projectKind",
         "projectName",
         "language"
-      ],
-      "type": "object",
-      "properties": {
-        "createdDateTime": {
-          "format": "date-time",
-          "description": "Represents the project creation datetime.",
-          "type": "string"
-        },
-        "lastModifiedDateTime": {
-          "format": "date-time",
-          "description": "Represents the project creation datetime.",
-          "type": "string"
-        },
-        "lastTrainedDateTime": {
-          "format": "date-time",
-          "description": "Represents the project last trained datetime.",
-          "type": "string"
-        },
-        "lastDeployedDateTime": {
-          "format": "date-time",
-          "description": "Represents the project last deployed datetime.",
-          "type": "string"
-        },
-        "projectKind": {
-          "description": "Represents the project kind.",
-          "$ref": "#/definitions/ProjectKind"
-        },
-        "settings": {
-          "description": "The project settings.",
-          "$ref": "#/definitions/ProjectSettings"
-        },
-        "storageInputContainerName": {
-          "description": "The storage container name in case of conversation summarization.",
-          "type": "string"
-        },
-        "projectName": {
-          "description": "The new project name.",
-          "type": "string"
-        },
-        "multilingual": {
-          "description": "Whether the project would be used for multiple languages or not.",
-          "type": "boolean"
-        },
-        "description": {
-          "description": "The project description.",
-          "type": "string"
-        },
-        "language": {
-          "description": "The project language. This is BCP-47 representation of a language. For example, use \"en\" for English, \"en-gb\" for English (UK), \"es\" for Spanish etc.",
-          "type": "string"
-        }
-      }
+      ]
     },
     "ProjectSettings": {
-      "description": "Represents the settings used to define the project behavior.",
-      "required": [
-        "confidenceThreshold"
-      ],
       "type": "object",
+      "description": "Represents the settings used to define the project behavior.",
       "properties": {
         "confidenceThreshold": {
+          "type": "number",
           "format": "float",
-          "description": "The threshold of the intent with the highest confidence, at which the prediction will automatically be changed to \"None\". The value of the threshold should be between 0 and 1 inclusive.",
-          "type": "number"
+          "description": "The threshold of the intent with the highest confidence, at which the prediction will automatically be changed to \"None\". The value of the threshold should be between 0 and 1 inclusive."
         },
         "normalizeCasing": {
-          "description": "Gets or sets normalize casing flag",
-          "type": "boolean"
+          "type": "boolean",
+          "description": "Gets or sets normalize casing flag"
         },
         "augmentDiacritics": {
-          "description": "Gets or sets the augment diacritics flag.",
-          "type": "boolean"
+          "type": "boolean",
+          "description": "Gets or sets the augment diacritics flag."
         }
-      }
-    },
-    "ProjectsMetadata": {
-      "description": "Represents a list of retrieved projects' metadata.",
+      },
       "required": [
-        "value",
-        "nextLink"
-      ],
-      "type": "object",
-      "properties": {
-        "value": {
-          "description": "The list of projects.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ProjectMetadata"
-          }
-        },
-        "nextLink": {
-          "description": "The next page link.",
-          "type": "string"
-        }
-      }
+        "confidenceThreshold"
+      ]
     },
     "ProjectTrainedModel": {
+      "type": "object",
       "description": "Represents a trained model.",
+      "properties": {
+        "label": {
+          "type": "string",
+          "description": "The trained model label."
+        },
+        "modelId": {
+          "type": "string",
+          "description": "The model ID."
+        },
+        "lastTrainedDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The last trained date time of the model."
+        },
+        "lastTrainingDurationInSeconds": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The duration of the model's last training request in seconds."
+        },
+        "modelExpirationDate": {
+          "type": "string",
+          "format": "date",
+          "description": "The model expiration date."
+        },
+        "modelTrainingConfigVersion": {
+          "type": "string",
+          "description": "The model training config version."
+        },
+        "hasSnapshot": {
+          "type": "boolean",
+          "description": "The flag to indicate if the trained model has a snapshot ready."
+        }
+      },
       "required": [
         "label",
         "modelId",
@@ -4085,91 +4098,78 @@
         "modelExpirationDate",
         "modelTrainingConfigVersion",
         "hasSnapshot"
-      ],
-      "type": "object",
-      "properties": {
-        "label": {
-          "description": "The trained model label.",
-          "type": "string"
-        },
-        "modelId": {
-          "description": "The model ID.",
-          "type": "string"
-        },
-        "lastTrainedDateTime": {
-          "format": "date-time",
-          "description": "The last trained date time of the model.",
-          "type": "string"
-        },
-        "lastTrainingDurationInSeconds": {
-          "format": "int32",
-          "description": "The duration of the model's last training request in seconds.",
-          "type": "integer"
-        },
-        "modelExpirationDate": {
-          "format": "date",
-          "description": "The model expiration date.",
-          "type": "string"
-        },
-        "modelTrainingConfigVersion": {
-          "description": "The model training config version.",
-          "type": "string"
-        },
-        "hasSnapshot": {
-          "description": "The flag to indicate if the trained model has a snapshot ready.",
-          "type": "boolean"
-        }
-      }
+      ]
     },
     "ProjectTrainedModels": {
-      "description": "Represents a list of retrieved trained models.",
-      "required": [
-        "value",
-        "nextLink"
-      ],
       "type": "object",
+      "description": "Represents a list of retrieved trained models.",
       "properties": {
         "value": {
-          "description": "The list of trained models.",
           "type": "array",
+          "description": "The list of trained models.",
           "items": {
             "$ref": "#/definitions/ProjectTrainedModel"
           }
         },
         "nextLink": {
-          "description": "The next page link.",
-          "type": "string"
+          "type": "string",
+          "description": "The next page link."
         }
-      }
+      },
+      "required": [
+        "value",
+        "nextLink"
+      ]
+    },
+    "ProjectsMetadata": {
+      "type": "object",
+      "description": "Represents a list of retrieved projects' metadata.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The list of projects.",
+          "items": {
+            "$ref": "#/definitions/ProjectMetadata"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The next page link."
+        }
+      },
+      "required": [
+        "value",
+        "nextLink"
+      ]
     },
     "ResourceMetadata": {
+      "type": "object",
       "description": "Represents metadata for the Azure resource..",
+      "properties": {
+        "azureResourceId": {
+          "type": "string",
+          "description": "Represents the Azure resource ID."
+        },
+        "customDomain": {
+          "type": "string",
+          "description": "Represents the Azure resource custom domain."
+        },
+        "region": {
+          "type": "string",
+          "description": "Represents the Azure resource region."
+        }
+      },
       "required": [
         "azureResourceId",
         "customDomain",
         "region"
-      ],
-      "type": "object",
-      "properties": {
-        "azureResourceId": {
-          "description": "Represents the Azure resource ID.",
-          "type": "string"
-        },
-        "customDomain": {
-          "description": "Represents the Azure resource custom domain.",
-          "type": "string"
-        },
-        "region": {
-          "description": "Represents the Azure resource region.",
-          "type": "string"
-        }
-      }
+      ]
     },
     "StringIndexType": {
+      "type": "string",
       "enum": [
         "Utf16CodeUnit"
       ],
-      "type": "string",
       "x-ms-enum": {
         "name": "StringIndexType",
         "modelAsString": true,
@@ -4182,238 +4182,238 @@
       }
     },
     "SubTrainingJobState": {
+      "type": "object",
       "description": "Represents the detailed state of a training sub-operation.",
+      "properties": {
+        "percentComplete": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Represents progress percentage."
+        },
+        "startDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Represents the start date time."
+        },
+        "endDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Represents the end date time."
+        },
+        "status": {
+          "$ref": "#/definitions/JobStatus",
+          "description": "Represents the status of the sub-operation."
+        }
+      },
       "required": [
         "percentComplete",
         "status"
-      ],
-      "type": "object",
-      "properties": {
-        "percentComplete": {
-          "format": "int32",
-          "description": "Represents progress percentage.",
-          "type": "integer"
-        },
-        "startDateTime": {
-          "format": "date-time",
-          "description": "Represents the start date time.",
-          "type": "string"
-        },
-        "endDateTime": {
-          "format": "date-time",
-          "description": "Represents the end date time.",
-          "type": "string"
-        },
-        "status": {
-          "description": "Represents the status of the sub-operation.",
-          "$ref": "#/definitions/JobStatus"
-        }
-      }
+      ]
     },
     "SupportedLanguage": {
+      "type": "object",
       "description": "Represents a supported language.",
+      "properties": {
+        "languageName": {
+          "type": "string",
+          "description": "The language name."
+        },
+        "languageCode": {
+          "type": "string",
+          "description": "The language code. This is BCP-47 representation of a language. For example, \"en\" for English, \"en-gb\" for English (UK), \"es\" for Spanish etc."
+        }
+      },
       "required": [
         "languageName",
         "languageCode"
-      ],
-      "type": "object",
-      "properties": {
-        "languageName": {
-          "description": "The language name.",
-          "type": "string"
-        },
-        "languageCode": {
-          "description": "The language code. This is BCP-47 representation of a language. For example, \"en\" for English, \"en-gb\" for English (UK), \"es\" for Spanish etc.",
-          "type": "string"
-        }
-      }
+      ]
     },
     "SupportedLanguages": {
-      "description": "Represents a list of retrieved languages.",
-      "required": [
-        "value",
-        "nextLink"
-      ],
       "type": "object",
+      "description": "Represents a list of retrieved languages.",
       "properties": {
         "value": {
-          "description": "The list of the languages.",
           "type": "array",
+          "description": "The list of the languages.",
           "items": {
             "$ref": "#/definitions/SupportedLanguage"
           }
         },
         "nextLink": {
-          "description": "The next page link.",
-          "type": "string"
+          "type": "string",
+          "description": "The next page link."
         }
-      }
-    },
-    "SwapDeploymentsOptions": {
-      "description": "Represents the options for swapping two deployments together.",
-      "required": [
-        "firstDeploymentName",
-        "secondDeploymentName"
-      ],
-      "type": "object",
-      "properties": {
-        "firstDeploymentName": {
-          "description": "Represents the first deployment name.",
-          "type": "string"
-        },
-        "secondDeploymentName": {
-          "description": "Represents the second deployment name.",
-          "type": "string"
-        }
-      }
-    },
-    "TrainingConfigVersion": {
-      "description": "Represents a training config version.",
-      "required": [
-        "trainingConfigVersion",
-        "modelExpirationDate"
-      ],
-      "type": "object",
-      "properties": {
-        "trainingConfigVersion": {
-          "description": "Represents the version of the config.",
-          "type": "string"
-        },
-        "modelExpirationDate": {
-          "format": "date",
-          "description": "Represents the training config version expiration date.",
-          "type": "string"
-        }
-      }
-    },
-    "TrainingConfigVersions": {
-      "description": "Represents a list of training config versions.",
+      },
       "required": [
         "value",
         "nextLink"
-      ],
+      ]
+    },
+    "SwapDeploymentsOptions": {
       "type": "object",
+      "description": "Represents the options for swapping two deployments together.",
+      "properties": {
+        "firstDeploymentName": {
+          "type": "string",
+          "description": "Represents the first deployment name."
+        },
+        "secondDeploymentName": {
+          "type": "string",
+          "description": "Represents the second deployment name."
+        }
+      },
+      "required": [
+        "firstDeploymentName",
+        "secondDeploymentName"
+      ]
+    },
+    "TrainingConfigVersion": {
+      "type": "object",
+      "description": "Represents a training config version.",
+      "properties": {
+        "trainingConfigVersion": {
+          "type": "string",
+          "description": "Represents the version of the config."
+        },
+        "modelExpirationDate": {
+          "type": "string",
+          "format": "date",
+          "description": "Represents the training config version expiration date."
+        }
+      },
+      "required": [
+        "trainingConfigVersion",
+        "modelExpirationDate"
+      ]
+    },
+    "TrainingConfigVersions": {
+      "type": "object",
+      "description": "Represents a list of training config versions.",
       "properties": {
         "value": {
-          "description": "The list of the training config versions.",
           "type": "array",
+          "description": "The list of the training config versions.",
           "items": {
             "$ref": "#/definitions/TrainingConfigVersion"
           }
         },
         "nextLink": {
-          "description": "The next page link.",
-          "type": "string"
+          "type": "string",
+          "description": "The next page link."
         }
-      }
+      },
+      "required": [
+        "value",
+        "nextLink"
+      ]
     },
     "TrainingJobOptions": {
+      "type": "object",
       "description": "Represents the options for starting a new training job.",
+      "properties": {
+        "modelLabel": {
+          "type": "string",
+          "description": "Represents the output model label."
+        },
+        "trainingConfigVersion": {
+          "type": "string",
+          "description": "Represents training config version. By default, \"latest\" value is used which uses the latest released training config version."
+        },
+        "trainingMode": {
+          "$ref": "#/definitions/TrainingMode",
+          "description": "Represents the mode of the training operation."
+        },
+        "evaluationOptions": {
+          "$ref": "#/definitions/EvaluationOptions",
+          "description": "Represents the evaluation options. By default, the evaluation kind is percentage, with training split percentage as 80, and testing split percentage as 20."
+        }
+      },
       "required": [
         "modelLabel",
         "trainingMode"
-      ],
-      "type": "object",
-      "properties": {
-        "modelLabel": {
-          "description": "Represents the output model label.",
-          "type": "string"
-        },
-        "trainingConfigVersion": {
-          "description": "Represents training config version. By default, \"latest\" value is used which uses the latest released training config version.",
-          "type": "string"
-        },
-        "trainingMode": {
-          "description": "Represents the mode of the training operation.",
-          "$ref": "#/definitions/TrainingMode"
-        },
-        "evaluationOptions": {
-          "description": "Represents the evaluation options. By default, the evaluation kind is percentage, with training split percentage as 80, and testing split percentage as 20.",
-          "$ref": "#/definitions/EvaluationOptions"
-        }
-      }
+      ]
     },
     "TrainingJobResult": {
+      "type": "object",
       "description": "Represents the output of a training job.",
+      "properties": {
+        "modelLabel": {
+          "type": "string",
+          "description": "Represents trained model label."
+        },
+        "trainingConfigVersion": {
+          "type": "string",
+          "description": "Represents training config version."
+        },
+        "trainingMode": {
+          "$ref": "#/definitions/TrainingMode",
+          "description": "Represents the mode of the training operation."
+        },
+        "trainingStatus": {
+          "$ref": "#/definitions/SubTrainingJobState",
+          "description": "Represents the model training status."
+        },
+        "evaluationStatus": {
+          "$ref": "#/definitions/SubTrainingJobState",
+          "description": "Represents model evaluation status."
+        },
+        "estimatedEndDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Represents the estimated end date time for training and evaluation."
+        }
+      },
       "required": [
         "modelLabel",
         "trainingConfigVersion",
         "trainingStatus"
-      ],
+      ]
+    },
+    "TrainingJobState": {
       "type": "object",
+      "description": "Represents the state of a training job.",
       "properties": {
-        "modelLabel": {
-          "description": "Represents trained model label.",
-          "type": "string"
-        },
-        "trainingConfigVersion": {
-          "description": "Represents training config version.",
-          "type": "string"
-        },
-        "trainingMode": {
-          "description": "Represents the mode of the training operation.",
-          "$ref": "#/definitions/TrainingMode"
-        },
-        "trainingStatus": {
-          "description": "Represents the model training status.",
-          "$ref": "#/definitions/SubTrainingJobState"
-        },
-        "evaluationStatus": {
-          "description": "Represents model evaluation status.",
-          "$ref": "#/definitions/SubTrainingJobState"
-        },
-        "estimatedEndDateTime": {
-          "format": "date-time",
-          "description": "Represents the estimated end date time for training and evaluation.",
-          "type": "string"
+        "result": {
+          "$ref": "#/definitions/TrainingJobResult",
+          "description": "Represents training tasks detailed result."
         }
-      }
+      },
+      "required": [
+        "result"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/JobState"
+        }
+      ]
     },
     "TrainingJobs": {
-      "description": "Represents a list of retrieved training jobs.",
-      "required": [
-        "value",
-        "nextLink"
-      ],
       "type": "object",
+      "description": "Represents a list of retrieved training jobs.",
       "properties": {
         "value": {
-          "description": "The list of jobs.",
           "type": "array",
+          "description": "The list of jobs.",
           "items": {
             "$ref": "#/definitions/TrainingJobState"
           }
         },
         "nextLink": {
-          "description": "The next page link.",
-          "type": "string"
+          "type": "string",
+          "description": "The next page link."
         }
-      }
-    },
-    "TrainingJobState": {
-      "description": "Represents the state of a training job.",
+      },
       "required": [
-        "result"
-      ],
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/JobState"
-        }
-      ],
-      "properties": {
-        "result": {
-          "description": "Represents training tasks detailed result.",
-          "$ref": "#/definitions/TrainingJobResult"
-        }
-      }
+        "value",
+        "nextLink"
+      ]
     },
     "TrainingMode": {
+      "type": "string",
       "enum": [
         "advanced",
         "standard"
       ],
-      "type": "string",
       "x-ms-enum": {
         "name": "TrainingMode",
         "modelAsString": true,
@@ -4430,72 +4430,103 @@
       }
     },
     "UnassignDeploymentResourcesOptions": {
-      "description": "Represents the options to unassign Azure resources from a project.",
-      "required": [
-        "assignedResourceIds"
-      ],
       "type": "object",
+      "description": "Represents the options to unassign Azure resources from a project.",
       "properties": {
         "assignedResourceIds": {
-          "description": "Represents the assigned resource IDs to be unassigned.",
           "type": "array",
+          "description": "Represents the assigned resource IDs to be unassigned.",
           "items": {
             "type": "string"
           }
         }
-      }
+      },
+      "required": [
+        "assignedResourceIds"
+      ]
     },
     "UtteranceEntitiesEvaluationResult": {
-      "description": "Represents the comparison between the expected and predicted entities for an utterance.",
-      "required": [
-        "expectedEntities",
-        "predictedEntities"
-      ],
       "type": "object",
+      "description": "Represents the comparison between the expected and predicted entities for an utterance.",
       "properties": {
         "expectedEntities": {
-          "description": "Represents the expected entity labels.",
           "type": "array",
+          "description": "Represents the expected entity labels.",
           "items": {
             "$ref": "#/definitions/UtteranceEntityEvaluationResult"
           }
         },
         "predictedEntities": {
-          "description": "Represents the predicted entity labels.",
           "type": "array",
+          "description": "Represents the predicted entity labels.",
           "items": {
             "$ref": "#/definitions/UtteranceEntityEvaluationResult"
           }
         }
-      }
+      },
+      "required": [
+        "expectedEntities",
+        "predictedEntities"
+      ]
     },
     "UtteranceEntityEvaluationResult": {
+      "type": "object",
       "description": "Represents the evaluation output of an entity label or prediction.",
+      "properties": {
+        "category": {
+          "type": "string",
+          "description": "Represents the entity category."
+        },
+        "offset": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Represents the entity offset index relative to the original text."
+        },
+        "length": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Represents the entity length."
+        }
+      },
       "required": [
         "category",
         "offset",
         "length"
-      ],
-      "type": "object",
-      "properties": {
-        "category": {
-          "description": "Represents the entity category.",
-          "type": "string"
-        },
-        "offset": {
-          "format": "int32",
-          "description": "Represents the entity offset index relative to the original text.",
-          "type": "integer"
-        },
-        "length": {
-          "format": "int32",
-          "description": "Represents the entity length.",
-          "type": "integer"
-        }
-      }
+      ]
     },
     "UtteranceEvaluationResult": {
+      "type": "object",
       "description": "Represents the evaluation result for an utterance.",
+      "properties": {
+        "text": {
+          "type": "string",
+          "description": "Represents the utterance text."
+        },
+        "location": {
+          "type": "string",
+          "description": "Represents the conversation location."
+        },
+        "language": {
+          "type": "string",
+          "description": "Represents the utterance language. This is BCP-47 representation of a language. For example, use \"en\" for English, \"en-gb\" for English (UK), \"es\" for Spanish etc."
+        },
+        "entitiesResult": {
+          "$ref": "#/definitions/UtteranceEntitiesEvaluationResult",
+          "description": "Represents the entities results for the utterance."
+        },
+        "intentsResult": {
+          "$ref": "#/definitions/UtteranceIntentsEvaluationResult",
+          "description": "Represents the intents results for the utterance."
+        },
+        "labeledSummaryLocation": {
+          "type": "string",
+          "description": "Represents the location of the labeled summary."
+        },
+        "predictedSummaryLocation": {
+          "type": "string",
+          "description": "Represents the location of the predicted summary."
+        }
+      },
       "required": [
         "text",
         "location",
@@ -4504,84 +4535,53 @@
         "intentsResult",
         "labeledSummaryLocation",
         "predictedSummaryLocation"
-      ],
-      "type": "object",
-      "properties": {
-        "text": {
-          "description": "Represents the utterance text.",
-          "type": "string"
-        },
-        "location": {
-          "description": "Represents the conversation location.",
-          "type": "string"
-        },
-        "language": {
-          "description": "Represents the utterance language. This is BCP-47 representation of a language. For example, use \"en\" for English, \"en-gb\" for English (UK), \"es\" for Spanish etc.",
-          "type": "string"
-        },
-        "entitiesResult": {
-          "description": "Represents the entities results for the utterance.",
-          "$ref": "#/definitions/UtteranceEntitiesEvaluationResult"
-        },
-        "intentsResult": {
-          "description": "Represents the intents results for the utterance.",
-          "$ref": "#/definitions/UtteranceIntentsEvaluationResult"
-        },
-        "labeledSummaryLocation": {
-          "description": "Represents the location of the labeled summary.",
-          "type": "string"
-        },
-        "predictedSummaryLocation": {
-          "description": "Represents the location of the predicted summary.",
-          "type": "string"
-        }
-      }
+      ]
     },
     "UtteranceIntentsEvaluationResult": {
+      "type": "object",
       "description": "Represents the comparison between the expected and the predicted intent for an utterance.",
+      "properties": {
+        "expectedIntent": {
+          "type": "string",
+          "description": "Represents the utterance's expected intent."
+        },
+        "predictedIntent": {
+          "type": "string",
+          "description": "Represents the utterance's predicted intent."
+        }
+      },
       "required": [
         "expectedIntent",
         "predictedIntent"
-      ],
-      "type": "object",
-      "properties": {
-        "expectedIntent": {
-          "description": "Represents the utterance's expected intent.",
-          "type": "string"
-        },
-        "predictedIntent": {
-          "description": "Represents the utterance's predicted intent.",
-          "type": "string"
-        }
-      }
+      ]
     },
     "Warning": {
+      "type": "object",
       "description": "Represents a warning that was encountered while executing the request.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "The warning code."
+        },
+        "message": {
+          "type": "string",
+          "description": "The warning message."
+        }
+      },
       "required": [
         "code",
         "message"
-      ],
-      "type": "object",
-      "properties": {
-        "code": {
-          "description": "The warning code.",
-          "type": "string"
-        },
-        "message": {
-          "description": "The warning message.",
-          "type": "string"
-        }
-      }
+      ]
     }
   },
   "parameters": {
     "Endpoint": {
       "name": "Endpoint",
+      "in": "path",
       "description": "Supported Cognitive Services endpoints (protocol and hostname, for example: https://westus.api.cognitive.microsoft.com).",
-      "x-ms-parameter-location": "client",
       "required": true,
       "type": "string",
-      "in": "path",
+      "x-ms-parameter-location": "client",
       "x-ms-skip-url-encoding": true
     }
   }
