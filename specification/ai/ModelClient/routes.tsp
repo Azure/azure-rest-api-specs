@@ -27,13 +27,11 @@ namespace AI.Model;
 @actionSeparator("/")
 @route("chat/completions")
 op getChatCompletions is Azure.Core.RpcOperation<
-  {
-    ...ChatCompletionsOptions;
-    ...AdditionalRequestHeaders;
-  },
+  ChatCompletionsOptions,
   ChatCompletions
 >;
 
+/*
 @override(AI.Model.getChatCompletions, "csharp")
 op getChatCompletionsOverride is Azure.Core.RpcOperation<
   {
@@ -42,6 +40,7 @@ op getChatCompletionsOverride is Azure.Core.RpcOperation<
   },
   ChatCompletions
 >;
+*/
 
 @doc("""
   Return the embedding vectors for given text prompts.

@@ -120,6 +120,8 @@ model ChatCompletionsOptions {
     """)
   `model`?: string;
 
+  ...AdditionalRequestHeaders;
+
   ...Record<unknown>;
 }
 
