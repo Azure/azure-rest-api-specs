@@ -128,6 +128,11 @@ model VectorStoreOptions {
   @encodedName("application/json", "expires_after")
   expiresAfter?: VectorStoreExpirationPolicy;
 
+  /** The chunking strategy used to chunk the file(s). If not set, will use the auto strategy. Only applicable if file_ids is non-empty. */
+  @encodedName("application/json", "chunking_strategy")
+  @added(ServiceApiVersions.v2024_07_01_preview)
+  chunkingStrategy?: VectorStoreChunkingStrategyRequest;
+
   ...OptionalNullableMetadata;
 }
 

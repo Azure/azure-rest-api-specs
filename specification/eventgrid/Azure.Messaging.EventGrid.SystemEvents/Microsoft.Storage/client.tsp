@@ -56,6 +56,8 @@ using Azure.ClientGenerator.Core;
 @@access(Microsoft.EventGrid.SystemEvents.StorageBlobTierChangedEventData,
   Access.public
 );
+@@usage(Microsoft.EventGrid.SystemEvents.StorageBlobAccessTier, Usage.output);
+@@access(Microsoft.EventGrid.SystemEvents.StorageBlobAccessTier, Access.public);
 @@usage(Microsoft.EventGrid.SystemEvents.StorageAsyncOperationInitiatedEventData,
   Usage.output
 );
