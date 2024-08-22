@@ -44,7 +44,7 @@ op getChatCompletionsOverride is Azure.Core.RpcOperation<
 
 @actionSeparator("/")
 @route("header/test")
-op bugTest(...HeaderBugReproModel): void;
+op bugTest(HeaderBugReproModel): void;
 
 @doc("""
   Return the embedding vectors for given text prompts.
