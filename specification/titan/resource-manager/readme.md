@@ -25,7 +25,6 @@ These are the properties for a compute device resource.
 openapi-type: arm
 openapi-subtype: providerHub
 tag: package-2021-10-01-preview
-tag: package-2024-06-24-preview
 ```
 
 ### Tag: package-2024-06-24-preview
