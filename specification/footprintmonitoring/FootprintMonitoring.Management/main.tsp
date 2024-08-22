@@ -26,7 +26,7 @@ using TypeSpec.Versioning;
 @armProviderNamespace
 @useAuth(AadOauth2Auth<["user_impersonation"]>)
 @service({
-    title: "FootprintMonitoringManagementClient",
+  title: "FootprintMonitoringManagementClient",
 })
 @versioned(Versions)
 namespace Microsoft.FootprintMonitoring;
@@ -35,11 +35,11 @@ namespace Microsoft.FootprintMonitoring;
  * The available API versions.
  */
 enum Versions {
-    /**
-     * The 2024-08-21-preview API version.
-     */
-    @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-    @useDependency(Azure.Core.Versions.v1_0_Preview_1)
-    @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
-    v2024_08_21_preview: "2024-08-21-preview",
+  /**
+   * The 2024-08-21-preview API version.
+   */
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
+  v2024_08_21_preview: "2024-08-21-preview",
 }
