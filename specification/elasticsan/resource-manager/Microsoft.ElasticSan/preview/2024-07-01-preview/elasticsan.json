@@ -471,6 +471,21 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "x-ms-access-soft-deleted-resources",
+            "description": "Optional, used to get soft deleted volume groups if set to true.",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "true",
+              "false"
+            ],
+            "x-ms-enum": {
+              "name": "x-ms-access-soft-deleted-resources",
+              "modelAsString": true
+            }
           }
         ],
         "responses": {
@@ -654,6 +669,21 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "purge",
+            "description": "Optional, used to purge soft deleted volume groups if set to true.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "true",
+              "false"
+            ],
+            "x-ms-enum": {
+              "name": "purge",
+              "modelAsString": true
+            }
           }
         ],
         "responses": {
@@ -712,6 +742,21 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "x-ms-access-soft-deleted-resources",
+            "description": "Optional, used to get soft deleted volume groups if set to true.",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "true",
+              "false"
+            ],
+            "x-ms-enum": {
+              "name": "x-ms-access-soft-deleted-resources",
+              "modelAsString": true
+            }
           }
         ],
         "responses": {
@@ -931,6 +976,21 @@
               "modelAsString": true
             },
             "description": "Optional, used to delete volume if active sessions present. Allowed value are only true or false. Default value is false."
+          },
+          {
+            "name": "purge",
+            "description": "Optional, used to purge soft deleted volumes if set to true.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "true",
+              "false"
+            ],
+            "x-ms-enum": {
+              "name": "purge",
+              "modelAsString": true
+            }
           }
         ],
         "responses": {
@@ -992,6 +1052,21 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "x-ms-access-soft-deleted-resources",
+            "description": "Optional, used to get soft deleted volumes if set to true.",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "true",
+              "false"
+            ],
+            "x-ms-enum": {
+              "name": "x-ms-access-soft-deleted-resources",
+              "modelAsString": true
+            }
           }
         ],
         "responses": {
@@ -1018,6 +1093,69 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ElasticSan/elasticSans/{elasticSanName}/volumegroups/{volumeGroupName}/volumes/{volumeName}/restore": {
+      "post": {
+        "tags": [
+          "Restore Volumes"
+        ],
+        "description": "Restore Soft Deleted Volumes.",
+        "operationId": "RestoreVolume",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ElasticSanNameParameter"
+          },
+          {
+            "$ref": "#/parameters/VolumeGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/VolumeNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- Returned when the restore operation is successfully completed.",
+            "schema": {
+              "$ref": "#/definitions/Volume"
+            }
+          },
+          "202": {
+            "description": "Accepted -- Restore request accepted; operation will complete asynchronously.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error from the ElasticSan Resource Provider.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "RestoreVolume_MaximumSet_Gen": {
+            "$ref": "./examples/RestoreVolume_MaximumSet_Gen.json"
+          },
+          "RestoreVolume_MinimumSet_Gen": {
+            "$ref": "./examples/RestoreVolume_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ElasticSan/elasticSans/{elasticSanName}/volumegroups/{volumeGroupName}/volumes": {
       "get": {
         "tags": [
@@ -1040,6 +1178,21 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "x-ms-access-soft-deleted-resources",
+            "description": "Optional, used to get soft deleted volumes if set to true.",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "true",
+              "false"
+            ],
+            "x-ms-enum": {
+              "name": "x-ms-access-soft-deleted-resources",
+              "modelAsString": true
+            }
           }
         ],
         "responses": {
@@ -2125,6 +2278,10 @@
         "enforceDataIntegrityCheckForIscsi": {
           "type": "boolean",
           "description": "A boolean indicating whether or not Data Integrity Check is enabled"
+        },
+        "deleteRetentionPolicy": {
+          "description": "The retention policy for the soft deleted resources.",
+          "$ref": "#/definitions/DeleteRetentionPolicy"
         }
       }
     },
@@ -2254,6 +2411,10 @@
         "enforceDataIntegrityCheckForIscsi": {
           "type": "boolean",
           "description": "A boolean indicating whether or not Data Integrity Check is enabled"
+        },
+        "deleteRetentionPolicy": {
+          "description": "The retention policy for the soft deleted resources.",
+          "$ref": "#/definitions/DeleteRetentionPolicy"
         }
       }
     },
@@ -2403,7 +2564,10 @@
         "Pending",
         "Creating",
         "Updating",
-        "Deleting"
+        "Deleting",
+        "Deleted",
+        "Restoring",
+        "SoftDeleting"
       ],
       "x-ms-enum": {
         "name": "ProvisioningStates",
@@ -2671,6 +2835,22 @@
         }
       },
       "description": "List of private endpoint connections associated with SAN"
+    },
+    "DeleteRetentionPolicy": {
+      "type": "object",
+      "description": "Response for Delete Retention Policy object",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "The flag to enable/disable retention policy."
+        },
+        "days": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0,
+          "description": "The number of days to retain the resources after deletion."
+        }
+      }
     },
     "Snapshot": {
       "type": "object",
