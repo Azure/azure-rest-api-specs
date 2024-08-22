@@ -95,6 +95,9 @@ suppressions:
   - code: AvoidAdditionalProperties
     from: TriggeredAnalyticsRuleRuns.json
     reason: TriggeredAnalyticsRuleRun does not include a property called "additionalProperties", it is only used to mark that 'ruleRunAdditionalData' is a dictionary or string to object.
+  - code: AvoidAdditionalProperties
+    from: ThreatIntelligenceQuery.json
+    reason: These properties are required in current API. The team is working on a new version of API to resolve it in the future release.
 ```
 ### Tag: package-2024-03
 
