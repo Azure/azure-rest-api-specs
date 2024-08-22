@@ -737,6 +737,11 @@
         "computeApiVersion": {
           "type": "string",
           "description": "Specifies the Microsoft.Compute API version to use when creating underlying Virtual Machine scale sets and Virtual Machines.\nThe default value will be the latest supported computeApiVersion by Compute Fleet."
+        },
+        "platformFaultDomainCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Specifies the number of fault domains to use when creating the underlying VMSS.\nA fault domain is a logical group of hardware within an Azure datacenter.\nVMs in the same fault domain share a common power source and network switch.\nIf not specified, defaults to 1, which represents \"Max Spreading\" (using as many fault domains as possible).\nThis property cannot be updated."
         }
       },
       "required": [
@@ -1733,7 +1738,8 @@
       "type": "string",
       "description": "Regular VM Allocation strategy types for Compute Fleet",
       "enum": [
-        "LowestPrice"
+        "LowestPrice",
+        "Prioritized"
       ],
       "x-ms-enum": {
         "name": "RegularPriorityAllocationStrategy",
@@ -1743,6 +1749,11 @@
             "name": "LowestPrice",
             "value": "LowestPrice",
             "description": "Default. VM sizes distribution will be determined to optimize for price."
+          },
+          {
+            "name": "Prioritized",
+            "value": "Prioritized",
+            "description": "VM sizes distribution will be determined to optimize for the 'priority' as specified for each vm size."
           }
         ]
       }
@@ -2003,6 +2014,10 @@
         "allocationStrategy": {
           "$ref": "#/definitions/SpotAllocationStrategy",
           "description": "Allocation strategy to follow when determining the VM sizes distribution for Spot VMs."
+        },
+        "maintain": {
+          "type": "boolean",
+          "description": "Flag to enable/disable continuous goal seeking for the desired capacity and restoration of evicted Spot VMs.\nIf maintain is enabled, AzureFleetRP will use all VM sizes in vmSizesProfile to create new VMs (if VMs are evicted deleted)\nor update existing VMs with new VM sizes (if VMs are evicted deallocated or failed to allocate due to capacity constraint) in order to achieve the desired capacity.\nMaintain is enabled by default."
         }
       }
     },
@@ -2944,6 +2959,13 @@
         "name": {
           "type": "string",
           "description": "The Sku name (e.g. 'Standard_DS1_v2')"
+        },
+        "rank": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The rank of the VM size. This is used with 'RegularPriorityAllocationStrategy.Prioritized'\nThe lower the number, the higher the priority. Starting with 0.",
+          "minimum": 0,
+          "maximum": 65535
         }
       },
       "required": [
