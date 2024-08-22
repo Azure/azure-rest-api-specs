@@ -2,6 +2,26 @@ import "@typespec/versioning";
 using TypeSpec.Versioning;
 /** Describes the schema of the Azure Storage events published to Azure Event Grid. This corresponds to the Data property of an EventGridEvent. */
 namespace Microsoft.EventGrid.SystemEvents {
+  /** The access tier of the blob. */
+  union StorageBlobAccessTier {
+    /** The blob is in access tier Hot */
+    "Hot",
+
+    /** The blob is in access tier Cool */
+    "Cool",
+
+    /** The blob is in access tier Cold */
+    "Cold",
+
+    /** The blob is in access tier Archive */
+    "Archive",
+
+    /** The blob is in access tier Default(Inferred) */
+    "Default",
+
+    string,
+  }
+
   /** Schema of the Data property of an EventGridEvent for a Microsoft.Storage.BlobCreated event. */
   model StorageBlobCreatedEventData {
     /** The name of the API/operation that triggered this event. */
@@ -27,6 +47,9 @@ namespace Microsoft.EventGrid.SystemEvents {
 
     /** The type of blob. */
     blobType?: string;
+
+    /** The current tier of the blob. */
+    accessTier: StorageBlobAccessTier;
 
     /** The path to the blob. */
     url?: string;
@@ -201,6 +224,12 @@ namespace Microsoft.EventGrid.SystemEvents {
 
     /** The type of blob. */
     blobType?: string;
+
+    /** The current tier of the blob. */
+    accessTier: StorageBlobAccessTier;
+
+    /** The previous tier of the blob. */
+    previousTier: StorageBlobAccessTier;
 
     /** The path to the blob. */
     url?: string;
