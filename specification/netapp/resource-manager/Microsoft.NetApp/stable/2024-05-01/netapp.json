@@ -5704,6 +5704,13 @@
         "subnetId": {
           "type": "string",
           "description": "The Azure Resource URI for a delegated subnet. Must have the delegation Microsoft.NetApp/volumes"
+        },
+        "availabilityZone": {
+          "title": "Logical availability zone",
+          "type": "string",
+          "example": "1",
+          "x-nullable": true,
+          "description": "The Azure Resource logical availability zone which is used within zone mapping lookup for the subscription and region. The lookup will retrieve the physical zone where volume is placed."
         }
       }
     },
