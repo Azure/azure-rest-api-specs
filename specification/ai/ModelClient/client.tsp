@@ -1,6 +1,8 @@
 import "@azure-tools/typespec-client-generator-core";
 
 import "./main.tsp";
+import "./models/chat_completions.tsp";
+import "./models/common.tsp";
 
 using Azure.ClientGenerator.Core;
 using TypeSpec.Versioning;
@@ -120,6 +122,13 @@ interface Client3 {
   embed is AI.Model.getImageEmbeddings;
   getModelInfo is AI.Model.getModelInfo;
 }
+
+@override(AI.Model.getChatCompletions, "csharp")
+op getChatCompletions(
+    options: AI.Model.ChatCompletionsOptions,
+    apiVersion: Azure.Core.Foundations.ApiVersionParameter,
+    ...AI.Model.AdditionalRequestHeaders
+): AI.Model.ChatCompletions;
 
 @client(
   {

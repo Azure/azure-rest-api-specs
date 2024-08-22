@@ -31,17 +31,6 @@ op getChatCompletions is Azure.Core.RpcOperation<
   ChatCompletions
 >;
 
-/*
-@override(AI.Model.getChatCompletions, "csharp")
-op getChatCompletionsOverride is Azure.Core.RpcOperation<
-  {
-    chatCompletionsOptions: ChatCompletionsOptions,
-    ...AdditionalRequestHeaders,
-  },
-  ChatCompletions
->;
-*/
-
 @actionSeparator("/")
 @route("header/test")
 op bugTest(body: HeaderBugReproModel): void;
