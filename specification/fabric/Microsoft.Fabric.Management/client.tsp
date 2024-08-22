@@ -47,3 +47,5 @@ namespace Microsoft.Fabric {
     "csharp"
   );
 }
+
+@@clientName(Microsoft.Fabric, "FabricMgmtClient", "python");
