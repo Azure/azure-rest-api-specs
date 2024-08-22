@@ -523,19 +523,19 @@
         }
       }
     },
-    "/app/user-defined-Endpoints ": {
+    "/app/user-defined-endpoints ": {
       "get": {
         "operationId": "GetUserDefinedEndpoint",
         "x-ms-examples": {
-          " CreateCustomEndpoint ": {
+          " GetUserDefinedEndpoint ": {
             "$ref": "./examples/ledger/GetUserDefinedEndpoint.json"
           }
         },
         "summary": "Gets a custom endpoint.",
-        "description": "A Custom endpoint allows the users to create and manage their own endpoints using the API.",
+        "description": "Returns the user defined endpoint in the ACL instance",
         "responses": {
           "200": {
-            "description": "The custom endpoint is created.",
+            "description": "Gets the user defined endpoints.",
             "schema": {
               "$ref": "#/definitions/Bundle"
             }
@@ -551,12 +551,12 @@
       "put": {
         "operationId": "CreateUserDefinedEndpoint",
         "x-ms-examples": {
-          " CreateCustomEndpoint ": {
+          " CreateUserDefinedEndpoint ": {
             "$ref": "./examples/ledger/CreateUserDefinedEndpoint.json"
           }
         },
         "summary": "Creates a custom endpoint.",
-        "description": "A Custom endpoint allows the users to create and manage their own endpoints using the API.",
+        "description": "Creates the user defined endpoint in the ACL instance ",
         "requestBody": {
           "content": {
             "application/json": {
@@ -564,8 +564,7 @@
                 "$ref": "#/definitions/Bundle"
               }
             }
-          },
-          "description": "Auto-generated request body schema"
+          }
         },
         "responses": {
           "204": {
@@ -580,16 +579,16 @@
         }
       }
     },
-    "/app/user-defined-Endpoints/runtimeOptions ": {
+    "/app/user-defined-endpoints/run-time-options ": {
       "get": {
         "operationId": " GetRuntimeOptions ",
         "x-ms-examples": {
-          " RuntimeOptions ": {
+          " GetRuntimeOptions ": {
             "$ref": "./examples/ledger/GetRuntimeOptions.json"
           }
         },
         "summary": "Runtime options for custom endpoints.",
-        "description": "It specifies the runtime options needed for the custom endpoint.",
+        "description": "It returns the runtime options",
         "responses": {
           "200": {
             "content": {
@@ -612,12 +611,12 @@
       "patch": {
         "operationId": " PatchRuntimeOptions ",
         "x-ms-examples": {
-          " RuntimeOptions ": {
+          " PatchRuntimeOptions ": {
             "$ref": "./examples/ledger/PatchRuntimeOptions.json"
           }
         },
         "summary": "Runtime options for custom endpoints.",
-        "description": "It specifies the runtime options needed for the custom endpoint.",
+        "description": "Updates the runtime options.",
         "responses": {
           "200": {
             "description": " Runtime options for custom endpoints.",
@@ -634,16 +633,16 @@
         }
       }
     },
-    "/app/user-defined-Endpoints/modules ": {
+    "/app/user-defined-endpoints/modules ": {
       "get": {
-        "operationId": " RuntimeOptions ",
+        "operationId": " GetUserDefinedEndpointsModule ",
         "x-ms-examples": {
-          " RuntimeOptions ": {
+          " GetUserDefinedEndpointsModule ": {
             "$ref": "./examples/ledger/GetUserDefinedEndpointsModule.json"
           }
         },
         "summary": "Module for custom endpoints.",
-        "description": "It gets the module name for the custom endpoint.",
+        "description": "It gets the module for the custom endpoint.",
         "parameters": [
           {
             "in": "query",
@@ -676,7 +675,7 @@
           }
         },
         "summary": "Gets role actions for user defined roles",
-        "description": "A Custom role allows the users to create and manage their own role actions using the API.",
+        "description": "Custom roles allow users to define and manage app specific AuthZ policy.",
         "parameters": [
           {
             "$ref": "#/definitions/UserDefinedRoleName"
@@ -684,7 +683,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The custom endpoint is created.",
+            "description": "The roles are added.",
             "schema": {
               "$ref": "#/definitions/UserDefinedRoleActions"
             }
@@ -705,7 +704,7 @@
           }
         },
         "summary": "Creates new roles and their actions",
-        "description": "A Custom role allows the users to create and manage their own role actions using the API.",
+        "description": "Custom roles allow users to define and manage app specific AuthZ policy.",
         "parameters": [
           {
             "$ref": "#/definitions/UserDefinedRoleName"
@@ -716,7 +715,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The custom endpoint is created."
+            "description": "Succesfully added the roles."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -734,7 +733,7 @@
           }
         },
         "summary": "Patch replaces the allowed action on existing roles",
-        "description": "A Custom role allows the users to create and manage their own role actions using the API.",
+        "description": "Custom roles allow users to define and manage app specific AuthZ policy.",
         "parameters": [
           {
             "$ref": "#/definitions/UserDefinedRoleName"
@@ -745,7 +744,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The custom endpoint is created."
+            "description": "Successfully patched the roles."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -771,7 +770,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The custom endpoint is created."
+            "description": "Successfully deleted the user roles."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -1055,7 +1054,7 @@
       "type": "object"
     },
     "LedgerUserRole": {
-      "type": "string",
+      "type": "array",
       "description": "Represents an assignable role.",
       "enum": [
         "Administrator",
@@ -1454,7 +1453,7 @@
       "type": "array"
     },
     "ModuleName": {
-      "description": "Module name of the user definied endpoint",
+      "description": "Module name of the user defined endpoint",
       "type": "string"
     },
     "JSRuntimeOptions": {
@@ -1582,4 +1581,4 @@
       "x-ms-skip-url-encoding": true
     }
   }
-  }
+}

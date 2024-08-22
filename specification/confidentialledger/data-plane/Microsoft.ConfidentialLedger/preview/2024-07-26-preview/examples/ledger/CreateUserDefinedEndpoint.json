@@ -1,31 +1,31 @@
 {
-  "put": {
-    "parameters": [
-      {
-        "description": "User definied endpoint.",
-        "in": "body",
-        "name": "userDefinedEndpoint",
-        "required": true,
-        "schema": {
-          "description": "User defined endpoints",
-          "properties": {
-            "bundle": {
-              "metadata": { "endpoints": { "/content": "" } },
-              "modules": {
-                "name": "test.js",
-                "module":  "TESTJS"
-              }
+  "parameters": {
+    "api-version": "2024-07-26-preview",
+    "description": "User definied endpoint.",
+    "in": "body",
+    "name": "userDefinedEndpoint",
+    "required": true,
+    "schema": {
+      "description": "User defined endpoints",
+      "properties": {
+        "bundle": {
+          "metadata": {
+            "endpoints": {
+              "/content": ""
             }
           },
-          "type": "object"
+          "modules": {
+            "name": "test.js",
+            "module": "TESTJS"
+          }
         }
-      }
-    ],
-    "responses": {
-      "201": {
-        "description": "The custom endpoint."
-      }
+      },
+      "type": "object"
+    }
+  },
+  "responses": {
+    "201": {
+      "description": "The custom endpoint."
     }
   }
 }
-
