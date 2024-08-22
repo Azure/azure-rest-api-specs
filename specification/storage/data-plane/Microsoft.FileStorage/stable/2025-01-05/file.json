@@ -6961,7 +6961,14 @@
         },
         "AccountUsage": {
           "description": "Information about the account usage storage account.",
-          "$ref": "#/definitions/AccountUsage"
+          "properties": {
+            "LiveShares": {
+              "$ref": "#/definitions/SharesStats"
+            },
+            "SoftDeletedShares": {
+              "$ref": "#/definitions/SharesStats"
+            }
+          }
         }
       }
     },
@@ -7050,20 +7057,6 @@
         "BurstTimeframeSeconds": {
           "type": "integer",
           "format": "int64"
-        }
-      }
-    },
-    "AccountUsage": {
-      "description": "Information about the account usage storage account.",
-      "type": "object",
-      "properties": {
-        "LiveShares": {
-          "Description": "Information about the live shares in this storage account",
-          "$ref": "#/definitions/SharesStats"
-        },
-        "SoftDeletedShares": {
-          "Description": "Information about the soft-deleted shares in this storage account",
-          "$ref": "#/definitions/SharesStats"
         }
       }
     },
