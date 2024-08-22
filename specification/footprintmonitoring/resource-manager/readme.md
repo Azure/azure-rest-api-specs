@@ -28,7 +28,17 @@ These are the global settings for the Footprint Monitoring API.
 ```yaml
 title: FootprintMonitoringManagementClient
 openapi-type: arm
-tag: package-2020-02-01-preview
+openapi-subtype: rpaas
+tag: package-2024-08-21-preview
+```
+
+### Tag: package-2024-08-21-preview
+
+These settings apply only when `--tag=package-2024-08-21-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-08-21-preview'
+input-file:
+  - Microsoft.FootprintMonitoring/preview/2024-08-21-preview/footprintMonitoring.json
 ```
 
 ### Tag: package-2020-02-01-preview
@@ -38,6 +48,13 @@ These settings apply only when `--tag=package-2020-02-01-preview` is specified o
 ```yaml $(tag) == 'package-2020-02-01-preview'
 input-file:
   - Microsoft.FootprintMonitoring/preview/2020-02-01-preview/footprintProfiles.json
+```
+
+```yaml
+suppressions:
+  - code: BodyTopLevelProperties
+    from: footprintMonitoring.json
+    reason: "https://teams.microsoft.com/l/message/19:0351f5f9404446e4b4fd4eaf2c27448d@thread.skype/1721935993271?tenantId=72f988bf-86f1-41af-91ab-2d7cd011db47&groupId=3e17dcb0-4257-4a30-b843-77f47f1d4121&parentMessageId=1721901407934&teamName=Azure%20SDK&channelName=API%20Spec%20Review&createdTime=1721935993271"
 ```
 
 ---
@@ -51,9 +68,9 @@ This is not used by Autorest itself.
 
 ```yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-net
+  # - repo: azure-sdk-for-net
   - repo: azure-sdk-for-python
-  - repo: azure-sdk-for-js
+  # - repo: azure-sdk-for-js
   - repo: azure-sdk-for-go
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_footprintmonitoring']
@@ -64,14 +81,14 @@ swagger-to-sdk:
 
 See configuration in [readme.python.md](./readme.python.md)
 
-## CSharp
+<!-- ## CSharp
 
-See configuration in [readme.csharp.md](./readme.csharp.md)
+See configuration in [readme.csharp.md](./readme.csharp.md) -->
 
 ## Go
 
 See configuration in [readme.go.md](./readme.go.md)
 
-## Typescript
+<!-- ## Typescript
 
-See configuration in [readme.typescript.md](./readme.typescript.md)
+See configuration in [readme.typescript.md](./readme.typescript.md) -->
