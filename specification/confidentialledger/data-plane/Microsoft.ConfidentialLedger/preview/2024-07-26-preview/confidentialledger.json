@@ -557,7 +557,7 @@
         },
         "summary": "Creates a custom endpoint.",
         "description": "Creates the user defined endpoint in the ACL instance ",
-        "schema": {
+        "parameters": {
           "$ref": "#/definitions/Bundle"
         },
         "responses": {
@@ -1040,12 +1040,12 @@
     },
     "LedgerUserRole": {
       "description": "Represents an assignable role.",
+      "type": "array",
       "enum": [
         "Administrator",
         "Contributor",
         "Reader"
       ],
-      "type": "array",
       "x-ms-enum": {
         "name": "ConfidentialLedgerUserRoleName",
         "modelAsString": true
@@ -1301,10 +1301,10 @@
       "description": "bundle for the user defined endpoints",
       "properties": {
         "metadata": {
-          "ref": "#/definitions/Metadata"
+          "$ref": "#/definitions/Metadata"
         },
         "modules": {
-          "ref": "#/definitions/ModuleDef_array"
+          "$ref": "#/definitions/ModuleDef_array"
         }
       },
       "required": [
@@ -1402,11 +1402,11 @@
             },
             "required": [
               "key"
-            ],
-            "type": "object"
+            ]
           }
         ]
-      }
+      },
+      "type": "object"
     },
     "Mode": {
       "enum": [
@@ -1491,8 +1491,11 @@
       "type": "boolean"
     },
     "UserDefinedRoleName": {
-      "name": "RoleName",
-      "type": "string"
+      "properties": {
+        "roleName": {
+          "type": "string"
+        }
+      }
     },
     "UserDefinedRoleAction": {
       "items": {
