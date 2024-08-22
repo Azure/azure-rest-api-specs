@@ -385,7 +385,7 @@ model DataflowEndpointMqttAuthentication {
 @doc("DataflowEndpoint Mqtt Authentication Method properties")
 union MqttAuthMethod {
   ManagedIdentityMethod,
-  SaslMethod,
+  ServiceAccountTokenMethod,
   x509CertificateMethod,
   AnonymousMethod,
 }

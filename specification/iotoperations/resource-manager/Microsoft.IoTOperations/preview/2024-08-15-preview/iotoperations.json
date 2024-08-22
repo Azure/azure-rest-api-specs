@@ -5668,7 +5668,7 @@
       "enum": [
         "SystemAssignedManagedIdentity",
         "UserAssignedManagedIdentity",
-        "Sasl",
+        "ServiceAccountToken",
         "X509Certificate",
         "Anonymous"
       ],
@@ -5687,9 +5687,9 @@
             "description": "UserAssignedManagedIdentity type"
           },
           {
-            "name": "Sasl",
-            "value": "Sasl",
-            "description": "Sasl Option"
+            "name": "ServiceAccountToken",
+            "value": "ServiceAccountToken",
+            "description": "ServiceAccountToken Option"
           },
           {
             "name": "X509Certificate",
@@ -6191,6 +6191,24 @@
           "minimum": 1,
           "maximum": 300
         }
+      }
+    },
+    "ServiceAccountTokenMethod": {
+      "type": "string",
+      "description": "Service Account Token Method",
+      "enum": [
+        "ServiceAccountToken"
+      ],
+      "x-ms-enum": {
+        "name": "ServiceAccountTokenMethod",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ServiceAccountToken",
+            "value": "ServiceAccountToken",
+            "description": "ServiceAccountToken Option"
+          }
+        ]
       }
     },
     "ServiceType": {
