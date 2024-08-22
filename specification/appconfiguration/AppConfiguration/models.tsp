@@ -326,5 +326,5 @@ model OperationDetails {
     An error, available when the status is `Failed`, describing why the operation
     failed.
     """)
-  error?: Foundations.Error;
+  error?: Error;
 }
