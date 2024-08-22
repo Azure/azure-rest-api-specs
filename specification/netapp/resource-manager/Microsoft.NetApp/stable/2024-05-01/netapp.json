@@ -2195,7 +2195,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/capacityPools/{poolName}/volumes/{volumeName}/peerExternalCluster": {
       "post": {
         "summary": "Start Cluster peering",
-        "description": "Starts peering the cluster for this migration volume",
+        "description": "Starts peering the external cluster for this migration volume",
         "tags": [
           "Volumes OnPrem Migration"
         ],
@@ -2266,7 +2266,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/capacityPools/{poolName}/volumes/{volumeName}/authorizeExternalReplication": {
       "post": {
         "summary": "Start migration process",
-        "description": "Starts SVM peering and returns a command to be run on the external ONTAP to accept it.  Once the SVM's have been peered a SnapMirror will be created",
+        "description": "Starts SVM peering and returns a command to be run on the external ONTAP to accept it.  Once the SVM have been peered a SnapMirror will be created",
         "tags": [
           "Volumes OnPrem Migration"
         ],
@@ -2328,7 +2328,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/capacityPools/{poolName}/volumes/{volumeName}/finalizeExternalReplication": {
       "post": {
         "summary": "Finalize migration process",
-        "description": "Finalizes the migration of a volume by performing a final sync on the replication, breaking and releasing the replication, and breaking the cluster peering if no other migration is active.",
+        "description": "Finalizes the migration of an external volume by releasing the replication and breaking the external cluster peering if no other migration is active.",
         "tags": [
           "Volumes OnPrem Migration Finalize"
         ],
