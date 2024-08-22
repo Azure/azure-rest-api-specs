@@ -361,8 +361,8 @@
       "type": "string",
       "description": "The type of message.",
       "enum": [
-        "text",
         "image",
+        "text",
         "template"
       ],
       "x-ms-enum": {
@@ -370,14 +370,14 @@
         "modelAsString": true,
         "values": [
           {
-            "name": "text",
-            "value": "text",
-            "description": "Text message type."
-          },
-          {
             "name": "image",
             "value": "image",
             "description": "Image message type."
+          },
+          {
+            "name": "text",
+            "value": "text",
+            "description": "Text message type."
           },
           {
             "name": "template",
@@ -407,32 +407,7 @@
     },
     "MediaNotificationContent": {
       "type": "object",
-      "description": "A request to send an image notification.",
-      "properties": {
-        "kind": {
-          "type": "string",
-          "description": "Message notification type is image.",
-          "enum": [
-            "image"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          }
-        }
-      },
-      "required": [
-        "kind"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/MediaNotificationContentBase"
-        }
-      ],
-      "x-ms-discriminator-value": "image"
-    },
-    "MediaNotificationContentBase": {
-      "type": "object",
-      "description": "A request to send a media notification. Could be an image, document or video.",
+      "description": "Base model for media notification content.",
       "properties": {
         "content": {
           "type": "string",
@@ -441,17 +416,42 @@
         "mediaUri": {
           "type": "string",
           "format": "uri",
-          "description": "A media url for the file. Required if the type is one of the supported media types, e.g. image"
+          "description": "A media URL for the file."
+        },
+        "mediaKind": {
+          "$ref": "#/definitions/MediaTypeKind",
+          "description": "The type discriminator describing a media type."
         }
       },
+      "discriminator": "mediaKind",
       "required": [
-        "mediaUri"
+        "mediaUri",
+        "mediaKind"
       ],
       "allOf": [
         {
           "$ref": "#/definitions/NotificationContent"
         }
-      ]
+      ],
+      "x-ms-discriminator-value": "image"
+    },
+    "MediaTypeKind": {
+      "type": "string",
+      "description": "The type of media content. Supports image, document, video.",
+      "enum": [
+        "image"
+      ],
+      "x-ms-enum": {
+        "name": "MediaTypeKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "image",
+            "value": "image",
+            "description": "Image message type."
+          }
+        ]
+      }
     },
     "MessageReceipt": {
       "type": "object",
