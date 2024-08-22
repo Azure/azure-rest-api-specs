@@ -113,7 +113,6 @@ suppressions:
   - code: LintDiff
     from: Microsoft.Security\stable\2020-01-01\applicationWhitelistings.json
     reason: Linting difference accepted due to legacy design and the fact we are deprecating it.
-
 ```
 
 ### Basic Information
