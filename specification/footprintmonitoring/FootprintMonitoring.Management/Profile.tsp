@@ -31,7 +31,7 @@ interface Profiles {
     "x-ms-examples",
     {
       `Get a Footprint profile (max).`: {
-        $ref: "./examples/2024-08-21-preview/Profiles_Get_MaximumSet_Gen.json",
+        $ref: "./examples/Profiles_Get_MaximumSet_Gen.json",
       },
     }
   )
@@ -44,7 +44,7 @@ interface Profiles {
     "x-ms-examples",
     {
       `Create or update a Footprint profile (max).`: {
-        $ref: "./examples/2024-08-21-preview/Profiles_CreateOrUpdate_MaximumSet_Gen.json",
+        $ref: "./examples/Profiles_CreateOrUpdate_MaximumSet_Gen.json",
       },
     }
   )
@@ -57,7 +57,7 @@ interface Profiles {
     "x-ms-examples",
     {
       `Update a Footprint profile (max).`: {
-        $ref: "./examples/2024-08-21-preview/Profiles_Update_MaximumSet_Gen.json",
+        $ref: "./examples/Profiles_Update_MaximumSet_Gen.json",
       },
     }
   )
@@ -71,7 +71,7 @@ interface Profiles {
     "x-ms-examples",
     {
       `Delete a Footprint profile (max).`: {
-        $ref: "./examples/2024-08-21-preview/Profiles_Delete_MaximumSet_Gen.json",
+        $ref: "./examples/Profiles_Delete_MaximumSet_Gen.json",
       },
     }
   )
@@ -79,7 +79,7 @@ interface Profiles {
     "x-ms-examples",
     {
       `Delete a Footprint profile (min).`: {
-        $ref: "./examples/2024-08-21-preview/Profiles_Delete_MinimumSet_Gen.json",
+        $ref: "./examples/Profiles_Delete_MinimumSet_Gen.json",
       },
     }
   )
@@ -92,7 +92,7 @@ interface Profiles {
     "x-ms-examples",
     {
       `List all Footprint profiles under a resource group (max).`: {
-        $ref: "./examples/2024-08-21-preview/Profiles_ListByResourceGroup_MaximumSet_Gen.json",
+        $ref: "./examples/Profiles_ListByResourceGroup_MaximumSet_Gen.json",
       },
     }
   )
@@ -105,7 +105,7 @@ interface Profiles {
     "x-ms-examples",
     {
       `List all Footprint profiles under a subscription (max).`: {
-        $ref: "./examples/2024-08-21-preview/Profiles_ListBySubscription_MaximumSet_Gen.json",
+        $ref: "./examples/Profiles_ListBySubscription_MaximumSet_Gen.json",
       },
     }
   )

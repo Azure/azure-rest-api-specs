@@ -40,7 +40,7 @@ interface MeasurementEndpoints {
     "x-ms-examples",
     {
       `Get a Footprint measurement endpoint (max).`: {
-        $ref: "./examples/2024-08-21-preview/MeasurementEndpoints_Get_MaximumSet_Gen.json",
+        $ref: "./examples/MeasurementEndpoints_Get_MaximumSet_Gen.json",
       },
     }
   )
@@ -53,7 +53,7 @@ interface MeasurementEndpoints {
     "x-ms-examples",
     {
       `Create or update a Footprint measurement endpoint (max).`: {
-        $ref: "./examples/2024-08-21-preview/MeasurementEndpoints_CreateOrUpdate_MaximumSet_Gen.json",
+        $ref: "./examples/MeasurementEndpoints_CreateOrUpdate_MaximumSet_Gen.json",
       },
     }
   )
@@ -66,7 +66,7 @@ interface MeasurementEndpoints {
     "x-ms-examples",
     {
       `Delete a Footprint measurement endpoint (max).`: {
-        $ref: "./examples/2024-08-21-preview/MeasurementEndpoints_Delete_MaximumSet_Gen.json",
+        $ref: "./examples/MeasurementEndpoints_Delete_MaximumSet_Gen.json",
       },
     }
   )
@@ -74,7 +74,7 @@ interface MeasurementEndpoints {
     "x-ms-examples",
     {
       `Delete a Footprint measurement endpoint (min).`: {
-        $ref: "./examples/2024-08-21-preview/MeasurementEndpoints_Delete_MinimumSet_Gen.json",
+        $ref: "./examples/MeasurementEndpoints_Delete_MinimumSet_Gen.json",
       },
     }
   )
@@ -87,7 +87,7 @@ interface MeasurementEndpoints {
     "x-ms-examples",
     {
       `List all Footprint measurement endpoints (max).`: {
-        $ref: "./examples/2024-08-21-preview/MeasurementEndpoints_List_MaximumSet_Gen.json",
+        $ref: "./examples/MeasurementEndpoints_List_MaximumSet_Gen.json",
       },
     }
   )

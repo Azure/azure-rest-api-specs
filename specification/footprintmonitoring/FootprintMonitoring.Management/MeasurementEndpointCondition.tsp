@@ -40,7 +40,7 @@ interface MeasurementEndpointConditions {
     "x-ms-examples",
     {
       `Get a Footprint measurement endpoint condition (max).`: {
-        $ref: "./examples/2024-08-21-preview/MeasurementEndpointConditions_Get_MaximumSet_Gen.json",
+        $ref: "./examples/MeasurementEndpointConditions_Get_MaximumSet_Gen.json",
       },
     }
   )
@@ -53,7 +53,7 @@ interface MeasurementEndpointConditions {
     "x-ms-examples",
     {
       `Create or update a Footprint measurement endpoint condition (max).`: {
-        $ref: "./examples/2024-08-21-preview/MeasurementEndpointConditions_CreateOrUpdate_MaximumSet_Gen.json",
+        $ref: "./examples/MeasurementEndpointConditions_CreateOrUpdate_MaximumSet_Gen.json",
       },
     }
   )
@@ -66,7 +66,7 @@ interface MeasurementEndpointConditions {
     "x-ms-examples",
     {
       `Delete a Footprint measurement endpoint condition (max).`: {
-        $ref: "./examples/2024-08-21-preview/MeasurementEndpointConditions_Delete_MaximumSet_Gen.json",
+        $ref: "./examples/MeasurementEndpointConditions_Delete_MaximumSet_Gen.json",
       },
     }
   )
@@ -74,7 +74,7 @@ interface MeasurementEndpointConditions {
     "x-ms-examples",
     {
       `Delete a Footprint measurement endpoint condition (min).`: {
-        $ref: "./examples/2024-08-21-preview/MeasurementEndpointConditions_Delete_MinimumSet_Gen.json",
+        $ref: "./examples/MeasurementEndpointConditions_Delete_MinimumSet_Gen.json",
       },
     }
   )
@@ -87,7 +87,7 @@ interface MeasurementEndpointConditions {
     "x-ms-examples",
     {
       `List all Footprint measurement endpoint conditions (max).`: {
-        $ref: "./examples/2024-08-21-preview/MeasurementEndpointConditions_List_MaximumSet_Gen.json",
+        $ref: "./examples/MeasurementEndpointConditions_List_MaximumSet_Gen.json",
       },
     }
   )
