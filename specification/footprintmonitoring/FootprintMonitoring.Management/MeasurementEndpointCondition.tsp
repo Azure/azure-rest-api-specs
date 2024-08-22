@@ -87,7 +87,7 @@ interface MeasurementEndpointConditions {
     "x-ms-examples",
     {
       `List all Footprint measurement endpoint conditions (max).`: {
-        $ref: "./examples/MeasurementEndpointConditions_List_MaximumSet_Gen.json",
+        $ref: "./examples/MeasurementEndpointConditions_ListByMeasurementEndpoint_MaximumSet_Gen.json",
       },
     }
   )
