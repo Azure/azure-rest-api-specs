@@ -134,7 +134,7 @@ model HeaderBugReproModel {
   @header("x-foo")
   foo: string;
 
-  bar: int;
+  bar: int32;
 }
 
 alias AdditionalRequestHeaders = {
