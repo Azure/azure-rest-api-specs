@@ -45,6 +45,10 @@ tag: package-locks-2020-05
 tag: package-policy-2024-05-stable
 ```
 
+``` yaml $(package-databoundaries)
+tag: package-databoundaries-2024-08
+```
+
 ``` yaml $(package-resources)
 tag: package-resources-2024-03
 ```
@@ -305,6 +309,15 @@ These settings apply only when `--tag=package-snapshots-2022-11` is specified on
 ``` yaml $(tag) == 'package-snapshots-2022-11'
 input-file:
 - Microsoft.Resources/preview/2022-11-01-preview/snapshots.json
+```
+
+### Tag: package-databoundaries-2024-08
+
+These settings apply only when `--tag=package-databoundaries-2024-08` is specified on the command line.
+
+``` yaml $(tag) == 'package-databoundaries-2024-08'
+input-file:
+  - Microsoft.Resources/stable/2024-08-01/dataBoundaries.json
 ```
 
 ### Tag: package-changes-2022-05
@@ -1535,6 +1548,12 @@ directive:
   - suppress: ResourceNameRestriction
     from: policySetDefinitionVersions.json
     reason: Using common types for management group name
+  - suppress: TenantLevelAPIsNotAllowed
+    from: dataBoundaries.json
+    reason: "Have approval from the PAS team."
+  - suppress: GetCollectionResponseSchema
+    from: dataBoundaries.json
+    reason: "Do not have any list calls."
 ```
 
 ---
