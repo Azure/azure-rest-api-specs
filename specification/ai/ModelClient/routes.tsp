@@ -27,9 +27,7 @@ namespace AI.Model;
 @actionSeparator("/")
 @route("chat/completions")
 op getChatCompletions is Azure.Core.RpcOperation<
-  {
-    chatCompletionsOptions: ChatCompletionsOptions;
-  },
+  ChatCompletionsOptions,
   ChatCompletions
 >;
 
@@ -43,6 +41,10 @@ op getChatCompletionsOverride is Azure.Core.RpcOperation<
   ChatCompletions
 >;
 */
+
+@actionSeparator("/")
+@route("header/test")
+op bugTest(...HeaderBugReproModel): void;
 
 @doc("""
   Return the embedding vectors for given text prompts.

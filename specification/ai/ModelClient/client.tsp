@@ -120,3 +120,14 @@ interface Client3 {
   embed is AI.Model.getImageEmbeddings;
   getModelInfo is AI.Model.getModelInfo;
 }
+
+@client(
+  {
+    name: "HeaderBugTestClient",
+    service: AI.Model,
+  },
+  "csharp"
+)
+interface Client4 {
+  bugTest is AI.Model.bugTest;
+}

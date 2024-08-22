@@ -130,6 +130,13 @@ union ModelType {
   chat: "chat",
 }
 
+model HeaderBugReproModel {
+  @header("x-foo")
+  foo: string;
+
+  bar: int;
+}
+
 alias AdditionalRequestHeaders = {
   @doc("""
     Controls what happens if extra parameters, undefined by the REST API,
