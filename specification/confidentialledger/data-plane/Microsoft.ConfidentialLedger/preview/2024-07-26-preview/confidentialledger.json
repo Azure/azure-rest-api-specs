@@ -557,14 +557,8 @@
         },
         "summary": "Creates a custom endpoint.",
         "description": "Creates the user defined endpoint in the ACL instance ",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/definitions/Bundle"
-              }
-            }
-          }
+        "schema": {
+          "$ref": "#/definitions/Bundle"
         },
         "responses": {
           "204": {
@@ -591,13 +585,9 @@
         "description": "It returns the runtime options",
         "responses": {
           "200": {
-            "content": {
-              "application/json": {
-                "description": " Runtime options for custom endpoints.",
-                "schema": {
-                  "$ref": "#/definitions/JSRuntimeOptions"
-                }
-              }
+            "description": " Runtime options for custom endpoints.",
+            "schema": {
+              "$ref": "#/definitions/JSRuntimeOptions"
             }
           },
           "default": {
@@ -645,12 +635,7 @@
         "description": "It gets the module for the custom endpoint.",
         "parameters": [
           {
-            "in": "query",
-            "name": "module_name",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ModuleName"
-            }
+            "$ref": "#/definitions/ModuleName"
           }
         ],
         "responses": {
@@ -685,7 +670,7 @@
           "200": {
             "description": "The roles are added.",
             "schema": {
-              "$ref": "#/definitions/UserDefinedRoleActions"
+              "$ref": "#/definitions/UserDefinedRoleAction"
             }
           },
           "default": {
@@ -715,7 +700,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Succesfully added the roles."
+            "description": "Successfully added the roles."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -1054,13 +1039,13 @@
       "type": "object"
     },
     "LedgerUserRole": {
-      "type": "array",
       "description": "Represents an assignable role.",
       "enum": [
         "Administrator",
         "Contributor",
         "Reader"
       ],
+      "type": "array",
       "x-ms-enum": {
         "name": "ConfidentialLedgerUserRoleName",
         "modelAsString": true
@@ -1314,11 +1299,13 @@
     },
     "Bundle": {
       "description": "bundle for the user defined endpoints",
-      "metadata": {
-        "ref": "#/definitions/Metadata"
-      },
-      "modules": {
-        "ref": "#/definitions/ModuleDef_array"
+      "properties": {
+        "metadata": {
+          "ref": "#/definitions/Metadata"
+        },
+        "modules": {
+          "ref": "#/definitions/ModuleDef_array"
+        }
       },
       "required": [
         "modules",
@@ -1388,7 +1375,7 @@
     "json": {},
     "json_array": {
       "items": {
-        "$ref": "#/components/schemas/json"
+        "$ref": "#/definitions/json"
       },
       "type": "array"
     },
@@ -1398,22 +1385,28 @@
         "always",
         "never"
       ],
+      "x-ms-enum": {
+        "name": "ForwardingRequired",
+        "modelAsString": true
+      },
       "type": "string"
     },
     "InterpreterReusePolicy": {
-      "oneOf": [
-        {
-          "properties": {
-            "key": {
-              "type": "string"
-            }
-          },
-          "required": [
-            "key"
-          ],
-          "type": "object"
-        }
-      ]
+      "properties": {
+        "oneOf": [
+          {
+            "properties": {
+              "key": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "key"
+            ],
+            "type": "object"
+          }
+        ]
+      }
     },
     "Mode": {
       "enum": [
@@ -1421,6 +1414,10 @@
         "readonly",
         "historical"
       ],
+      "x-ms-enum": {
+        "name": "Mode",
+        "modelAsString": true
+      },
       "type": "string"
     },
     "RedirectionStrategy": {
@@ -1429,6 +1426,10 @@
         "to_primary",
         "to_backup"
       ],
+      "x-ms-enum": {
+        "name": "RedirectionStrategy",
+        "modelAsString": true
+      },
       "type": "string"
     },
     "ModuleDef": {
@@ -1483,12 +1484,14 @@
     "uint64": {
       "maximum": 18446744073709552000,
       "minimum": 0,
-      "type": "integer"
+      "type": "integer",
+      "format": "int64"
     },
     "boolean": {
       "type": "boolean"
     },
     "UserDefinedRoleName": {
+      "name": "RoleName",
       "type": "string"
     },
     "UserDefinedRoleAction": {

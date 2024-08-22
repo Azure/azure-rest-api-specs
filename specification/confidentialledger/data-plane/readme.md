@@ -12,7 +12,7 @@ Please look to the files `Microsoft.ConfidentialLedger/preview/2023-01-18-previe
 > see https://aka.ms/autorest
 
 ``` yaml
-tag: package-2024-07-26-ledger
+tag: package-2024-07-26-preview-ledger
 openapi-type: data-plane
 ```
 
