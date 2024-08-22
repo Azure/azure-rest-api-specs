@@ -22,6 +22,11 @@ model AzureMonitorWorkspace
   @path
   @segment("accounts")
   name: string;
+
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "ETag is not included in TrackedResource."
+  @doc("Resource entity tag (ETag)")
+  @visibility("read")
+  etag?: string;
 }
 
 @doc("Properties that need to be specified to create a new workspace.")
@@ -32,6 +37,10 @@ model AzureMonitorWorkspaceProperties {
 
   @doc("Information about metrics for the Azure Monitor workspace")
   metrics?: Metrics;
+
+  @doc("The provisioning state of the Azure Monitor workspace. Set to Succeeded if everything is healthy.")
+  @visibility("read")
+  provisioningState?: ProvisioningState;
 
   @doc("The Data Collection Rule and Endpoint used for ingestion by default.")
   @visibility("read")
@@ -44,10 +53,6 @@ model AzureMonitorWorkspaceProperties {
   @doc("Gets or sets allow or disallow public network access to workspace")
   @visibility("read")
   publicNetworkAccess?: PublicNetworkAccess;
-
-  @doc("The provisioning state of the Azure Monitor workspace. Set to Succeeded if everything is healthy.")
-  @visibility("read")
-  provisioningState?: ProvisioningState;
 }
 
 @doc("Information about metrics for the workspace")
@@ -95,9 +100,13 @@ interface AzureMonitorWorkspaces {
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader
   >;
   @doc("Updates part of a workspace")
-  update is ArmResourcePatchSync<
+  @parameterVisibility
+  update is ArmCustomPatchSync<
     AzureMonitorWorkspace,
-    AzureMonitorWorkspaceProperties
+    Azure.ResourceManager.Foundations.ResourceUpdateModel<
+      AzureMonitorWorkspace,
+      AzureMonitorWorkspaceProperties
+    >
   >;
   @doc("Delete a workspace")
   delete is ArmResourceDeleteWithoutOkAsync<AzureMonitorWorkspace>;

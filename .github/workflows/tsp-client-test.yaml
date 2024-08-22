@@ -5,6 +5,8 @@ on:
     branches:
       - main
   pull_request:
+    branches:
+      - main
     paths:
       - package-lock.json
       - package.json
@@ -13,7 +15,8 @@ on:
       - .github/workflows/tsp-client-test.yaml
       - eng/tools/package.json
       - eng/tools/tsconfig.json
-      - eng/tools/tsp-client/**
+      - eng/tools/tsp-client-tests/**
+      - specification/common-types
       - specification/keyvault
       - specification/sphere
 

@@ -1,9 +1,27 @@
 import "@typespec/versioning";
-
 using TypeSpec.Versioning;
-
 /** Describes the schema of the Azure Storage events published to Azure Event Grid. This corresponds to the Data property of an EventGridEvent. */
 namespace Microsoft.EventGrid.SystemEvents {
+  /** The access tier of the blob. */
+  union StorageBlobAccessTier {
+    /** The blob is in access tier Hot */
+    "Hot",
+
+    /** The blob is in access tier Cool */
+    "Cool",
+
+    /** The blob is in access tier Cold */
+    "Cold",
+
+    /** The blob is in access tier Archive */
+    "Archive",
+
+    /** The blob is in access tier Default(Inferred) */
+    "Default",
+
+    string,
+  }
+
   /** Schema of the Data property of an EventGridEvent for a Microsoft.Storage.BlobCreated event. */
   model StorageBlobCreatedEventData {
     /** The name of the API/operation that triggered this event. */
@@ -29,6 +47,9 @@ namespace Microsoft.EventGrid.SystemEvents {
 
     /** The type of blob. */
     blobType?: string;
+
+    /** The current tier of the blob. */
+    accessTier: StorageBlobAccessTier;
 
     /** The path to the blob. */
     url?: string;
@@ -204,6 +225,12 @@ namespace Microsoft.EventGrid.SystemEvents {
     /** The type of blob. */
     blobType?: string;
 
+    /** The current tier of the blob. */
+    accessTier: StorageBlobAccessTier;
+
+    /** The previous tier of the blob. */
+    previousTier: StorageBlobAccessTier;
+
     /** The path to the blob. */
     url?: string;
 
@@ -245,6 +272,7 @@ namespace Microsoft.EventGrid.SystemEvents {
   /** Schema of the Data property of an EventGridEvent for an Microsoft.Storage.BlobInventoryPolicyCompleted event. */
   model StorageBlobInventoryPolicyCompletedEventData {
     /** The time at which inventory policy was scheduled. */
+    @madeRequired(ServiceApiVersions.v2024_01_01)
     scheduleDateTime: utcDateTime;
 
     /** The account name for which inventory policy is registered. */
@@ -273,6 +301,7 @@ namespace Microsoft.EventGrid.SystemEvents {
     status: StorageTaskCompletedStatus;
 
     /** The time at which a storage task was completed. */
+    @madeRequired(ServiceApiVersions.v2024_01_01)
     completedDateTime: utcDateTime;
 
     /** The execution id for a storage task. */
@@ -288,6 +317,7 @@ namespace Microsoft.EventGrid.SystemEvents {
   /** Schema of the Data property of an EventGridEvent for an Microsoft.Storage.StorageTaskQueued event. */
   model StorageTaskQueuedEventData {
     /** The time at which a storage task was queued. */
+    @madeRequired(ServiceApiVersions.v2024_01_01)
     queuedDateTime: utcDateTime;
 
     /** The execution id for a storage task. */
@@ -298,6 +328,7 @@ namespace Microsoft.EventGrid.SystemEvents {
   model StorageTaskAssignmentQueuedEventData {
     /** The time at which a storage task was queued. */
     // @encode("ISO8601")
+    @madeRequired(ServiceApiVersions.v2024_01_01)
     queuedDateTime: utcDateTime;
 
     /** The execution id for a storage task. */
@@ -312,6 +343,7 @@ namespace Microsoft.EventGrid.SystemEvents {
 
     /** The time at which a storage task was completed. */
     // @encode("ISO8601")
+    @madeRequired(ServiceApiVersions.v2024_01_01)
     completedDateTime: utcDateTime;
 
     /** The execution id for a storage task. */

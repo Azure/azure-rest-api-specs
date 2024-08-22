@@ -11,6 +11,14 @@ on:
       sparse-checkout-paths:
         description: Paths for sparse checkout
         type: string
+      lint:
+        description: Run 'npm run lint' if true
+        required: false
+        type: boolean
+      prettier:
+        description: Run 'npm run prettier' if true
+        required: false
+        type: boolean
 
 jobs:
   test:
@@ -52,6 +60,16 @@ jobs:
       - run: npm run build
         shell: pwsh
         working-directory: ./eng/tools/${{ inputs.package }}
+
+      - run: npm run lint
+        if: inputs.lint == true
+        shell: pwsh
+        working-directory: ./eng/tools/${{ inputs.package }}
+
+      - run: npm run prettier
+        if: inputs.prettier == true
+        shell: pwsh
+        working-directory: ./eng/tools/${{ inputs.package }}        
 
       - run: npm run test:ci
         shell: pwsh

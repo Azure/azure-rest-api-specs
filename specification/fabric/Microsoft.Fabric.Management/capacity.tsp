@@ -12,7 +12,7 @@ using Azure.ResourceManager;
 namespace Microsoft.Fabric;
 
 /** Fabric Capacity resource */
-model FabricCapacity is TrackedResource<FabricCapacityProperties> {
+model FabricCapacity is TrackedResource<FabricCapacityProperties, false> {
   @doc("The name of the Microsoft Fabric capacity. It must be a minimum of 3 characters, and a maximum of 63.")
   @maxLength(63)
   @minLength(3)
@@ -32,7 +32,14 @@ model FabricCapacity is TrackedResource<FabricCapacityProperties> {
 interface FabricCapacities {
   get is ArmResourceRead<FabricCapacity>;
   createOrUpdate is ArmResourceCreateOrReplaceAsync<FabricCapacity>;
-  update is ArmResourcePatchAsync<FabricCapacity, FabricCapacityProperties>;
+  @parameterVisibility
+  update is ArmCustomPatchAsync<
+    FabricCapacity,
+    Azure.ResourceManager.Foundations.ResourceUpdateModel<
+      FabricCapacity,
+      FabricCapacityProperties
+    >
+  >;
   delete is ArmResourceDeleteWithoutOkAsync<FabricCapacity>;
   listByResourceGroup is ArmResourceListByParent<FabricCapacity>;
   listBySubscription is ArmListBySubscription<FabricCapacity>;
