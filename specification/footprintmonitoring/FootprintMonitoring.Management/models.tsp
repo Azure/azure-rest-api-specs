@@ -326,19 +326,19 @@ model MeasurementEndpointProperties {
   endTimeUTC?: utcDateTime;
 
   /**
-   * The percentual sampling rate for the hot path logging of a measurement endpoint.
+   * The sample rate, in percent, for the hot path logging of a measurement endpoint.
    */
   @maxValue(100)
   hotPathSamplingPercentageRate?: float32;
 
   /**
-   * The percentual sampling rate for the warm path logging of a measurement endpoint.
+   * The sample rate, in percent, for the warm path logging of a measurement endpoint.
    */
   @maxValue(100)
   warmPathSamplingPercentageRate?: float32;
 
   /**
-   * The percentual sampling rate for the cold path logging of a measurement endpoint.
+   * The sample rate, in percent, for the cold path logging of a measurement endpoint.
    */
   @maxValue(100)
   coldPathSamplingPercentageRateOverride?: float32;
