@@ -42,10 +42,10 @@
         "operationId": "ContainerAppsSourceControls_ListByContainerApp",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "containerAppName",
@@ -55,7 +55,7 @@
             "type": "string"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -91,10 +91,10 @@
         "operationId": "ContainerAppsSourceControls_Get",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "containerAppName",
@@ -111,7 +111,7 @@
             "type": "string"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -143,10 +143,10 @@
         "operationId": "ContainerAppsSourceControls_CreateOrUpdate",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "containerAppName",
@@ -172,7 +172,14 @@
             }
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "name": "x-ms-github-auxiliary",
+            "in": "header",
+            "description": "Github personal access token used for SourceControl.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -211,10 +218,10 @@
         "operationId": "ContainerAppsSourceControls_Delete",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "containerAppName",
@@ -231,7 +238,28 @@
             "type": "string"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "name": "x-ms-github-auxiliary",
+            "in": "header",
+            "description": "Github personal access token used for SourceControl.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "ignoreWorkflowDeletionFailure",
+            "in": "query",
+            "description": "Ignore Workflow Deletion Failure.",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "deleteWorkflow",
+            "in": "query",
+            "description": "Delete workflow.",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -320,6 +348,10 @@
         },
         "contextPath": {
           "description": "Context path",
+          "type": "string"
+        },
+        "dockerfilePath": {
+          "description": "Dockerfile path",
           "type": "string"
         },
         "githubPersonalAccessToken": {
@@ -454,4 +486,3 @@
     }
   }
 }
-
