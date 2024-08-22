@@ -6941,6 +6941,7 @@
     },
     "FileServiceUsage": {
       "description": "Usage information about this storage account",
+      "x-ms-client-name": "ShareServiceUsageProperties",
       "type": "object",
       "properties": {
         "AccountLimits": {
@@ -6949,10 +6950,12 @@
         },
         "FileShareLimits": {
           "description": "Information about the limits on shares in this storage account.",
+          "x-ms-client-name": "ShareLimits",
           "$ref": "#/definitions/FileShareLimits"
         },
         "FileShareRecommendations": {
           "description": "Information about the recommended limits to set on shares in this storage account.",
+          "x-ms-client-name": "ShareRecomendations",
           "$ref": "#/definitions/FileShareRecommendations"
         },
         "BurstingConstants": {
@@ -6974,6 +6977,7 @@
     },
     "AccountLimits": {
       "description": "Information about the limits on this storage account.",
+      "x-ms-client-name": "ShareAccountLimits",
       "properties": {
         "MaxFileShares": {
           "type": "integer",
@@ -6995,6 +6999,7 @@
     },
     "FileShareLimits": {
       "description": "Information about the limits on shares in this storage account.",
+      "x-ms-client-name": "ShareAccountShareLimits",
       "properties": {
         "MinProvisionedStorageGiB": {
           "type": "integer",
@@ -7024,6 +7029,7 @@
     },
     "FileShareRecommendations": {
       "description": "Information about the recommended limits to set on shares in this storage account.",
+      "x-ms-client-name": "ShareAccountShareRecommendations",
       "properties": {
         "BaseIOPS": {
           "type": "integer",
@@ -7045,6 +7051,7 @@
     },
     "BurstingConstants": {
       "description": "Information about the busting settings on this storage account.",
+      "x-ms-client-name": "ShareAccountBurstingConstants",
       "properties": {
         "BurstFloorIOPS": {
           "type": "integer",
