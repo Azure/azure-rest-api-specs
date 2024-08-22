@@ -30,15 +30,6 @@ openapi-subtype: rpaas
 tag: package-2024-06-01-preview
 ```
 
-### Tag: package-2023-09-01-preview
-
-These settings apply only when `--tag=package-2023-09-01-preview` is specified on the command line.
-
-```yaml $(tag) == 'package-2023-09-01-preview'
-input-file:
-  - Oracle.Database/preview/2023-09-01-preview/openapi.json
-```
-
 ### Tag: package-2023-09-01
 
 These settings apply only when `--tag=package-2023-09-01` is specified on the command line.
