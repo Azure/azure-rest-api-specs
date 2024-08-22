@@ -65,6 +65,9 @@ model OfferDetails {
 
   @doc("Plan Display Name for the marketplace offer")
   termId?: string;
+
+  @doc("Subscription auto renewal flag")
+  autoRenew?: boolean;
 }
 
 @doc("Reusable representation of an email address.")
