@@ -36,21 +36,61 @@ interface MeasurementEndpoints {
   /**
    * Retrieves the information about a single measurement endpoint under a Footprint profile.
    */
+  @OpenAPI.extension(
+    "x-ms-examples",
+    {
+      `Get a Footprint measurement endpoint (max).`: {
+        $ref: "./examples/2024-08-21-preview/MeasurementEndpoints_Get_MaximumSet_Gen.json",
+      },
+    }
+  )
   get is ArmResourceRead<MeasurementEndpoint>;
 
   /**
    * Creates or updates a single measurement endpoint under a Footprint profile with the specified properties.
    */
+  @OpenAPI.extension(
+    "x-ms-examples",
+    {
+      `Create or update a Footprint measurement endpoint (max).`: {
+        $ref: "./examples/2024-08-21-preview/MeasurementEndpoints_CreateOrUpdate_MaximumSet_Gen.json",
+      },
+    }
+  )
   createOrUpdate is ArmResourceCreateOrReplaceSync<MeasurementEndpoint>;
 
   /**
    * Deletes an existing measurement endpoint under a Footprint profile.
    */
+  @OpenAPI.extension(
+    "x-ms-examples",
+    {
+      `Delete a Footprint measurement endpoint (max).`: {
+        $ref: "./examples/2024-08-21-preview/MeasurementEndpoints_Delete_MaximumSet_Gen.json",
+      },
+    }
+  )
+  @OpenAPI.extension(
+    "x-ms-examples",
+    {
+      `Delete a Footprint measurement endpoint (min).`: {
+        $ref: "./examples/2024-08-21-preview/MeasurementEndpoints_Delete_MinimumSet_Gen.json",
+      },
+    }
+  )
   delete is ArmResourceDeleteSync<MeasurementEndpoint>;
 
   /**
    * Retrieves the information about all measurement endpoints under a Footprint profile.
    */
+  @OpenAPI.extension(
+    "x-ms-examples",
+    {
+      `List all Footprint measurement endpoints (max).`: {
+        $ref: "./examples/2024-08-21-preview/MeasurementEndpoints_List_MaximumSet_Gen.json",
+      },
+    }
+  )
   listByProfile is ArmResourceListByParent<MeasurementEndpoint>;
 }
 
