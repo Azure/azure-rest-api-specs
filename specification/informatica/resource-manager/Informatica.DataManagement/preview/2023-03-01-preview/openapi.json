@@ -197,6 +197,7 @@
             "in": "path",
             "description": "Name of the Organizations resource",
             "required": true,
+            "pattern": "^[a-z][a-z0-9]*$",
             "type": "string"
           }
         ],
@@ -377,9 +378,6 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Resource deleted successfully."
-          },
           "202": {
             "description": "Resource deletion accepted.",
             "headers": {
@@ -637,9 +635,6 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Resource deleted successfully."
-          },
           "202": {
             "description": "Resource deletion accepted.",
             "headers": {
@@ -714,6 +709,7 @@
     "InformaticaOrganizationResource": {
       "type": "object",
       "description": "A Organization Resource by Informatica",
+      "readOnly": true,
       "properties": {
         "properties": {
           "$ref": "#/definitions/OrganizationProperties",
