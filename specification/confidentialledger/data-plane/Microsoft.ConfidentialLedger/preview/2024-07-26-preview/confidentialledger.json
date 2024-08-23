@@ -557,20 +557,24 @@
         },
         "summary": "Creates a custom endpoint.",
         "description": "Creates the user defined endpoint in the ACL instance ",
-        "parameters": {
-          "$ref": "#/parameters/BundleParameter"
-        },
-        "responses": {
-          "204": {
-            "description": "The custom endpoint is created."
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "common.json#/definitions/ConfidentialLedgerError"
+        "parameters": [
+          {
+            "$ref": "#/parameters/BundleParameter"
+          }
+        ],
+          "responses"
+          :
+          {
+            "204": {
+              "description": "The custom endpoint is created."
+            },
+            "default": {
+              "description": "Error response describing why the operation failed.",
+              "schema": {
+                "$ref": "common.json#/definitions/ConfidentialLedgerError"
+              }
             }
           }
-        }
       }
     },
     "/app/user-defined-endpoints/run-time-options ": {
@@ -663,7 +667,7 @@
         "description": "Custom roles allow users to define and manage app specific AuthZ policy.",
         "parameters": [
           {
-            "$ref": "#/definitions/UserDefinedRoleName"
+            "$ref": "#/parameters/UserDefinedRoleNameParameter"
           }
         ],
         "responses": {
@@ -721,10 +725,10 @@
         "description": "Custom roles allow users to define and manage app specific AuthZ policy.",
         "parameters": [
           {
-            "$ref": "#/parameters/UserDefinedRoleName"
+            "$ref": "#/parameters/UserDefinedRoleNameParameter"
           },
           {
-            "$ref": "#/parameters/UserDefinedRoleAction"
+            "$ref": "#/parameters/UserDefinedRoleActionParameter"
           }
         ],
         "responses": {
@@ -750,7 +754,7 @@
         "description": "A Custom role allows the users to create and manage their own role actions using the API.",
         "parameters": [
           {
-            "$ref": "#/definitions/UserDefinedRoleName"
+            "$ref": "#/parameters/UserDefinedRoleNameParameter"
           }
         ],
         "responses": {
@@ -1454,10 +1458,6 @@
       },
       "type": "array"
     },
-    "ModuleName": {
-      "description": "Module name of the user defined endpoint",
-      "type": "string"
-    },
     "JSRuntimeOptions": {
       "description": "JS runtime options for custom endpoints",
       "properties": {
@@ -1583,9 +1583,7 @@
       "in": "query",
       "x-ms-parameter-location": "method",
       "x-ms-skip-url-encoding": true,
-      "schema": {
-        "$ref": "#/definitions/ModuleName"
-      }
+      "type": "string"
     },
     "BundleParameter": {
       "name": "bundle",
