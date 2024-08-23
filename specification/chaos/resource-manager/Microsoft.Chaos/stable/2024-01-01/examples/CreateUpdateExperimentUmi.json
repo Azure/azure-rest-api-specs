@@ -7,7 +7,10 @@
     "experiment": {
       "location": "eastus2euap",
       "identity": {
-        "type": "SystemAssigned"
+        "type": "UserAssigned",
+        "userAssignedIdentities": {
+          "/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/resourceGroups/exampleRG/providers/Microsoft.ManagedIdentity/userAssignedIdentities/exampleUmi": {}
+        }
       },
       "tags": {
         "key1": "value1",
@@ -98,9 +101,14 @@
         "name": "exampleExperiment",
         "location": "eastus2euap",
         "identity": {
-          "type": "SystemAssigned",
-          "principalId": "d04ab567-2c07-43ef-a7f4-4527626b7f56",
-          "tenantId": "8c3e2fb2-fe7a-4bf1-b779-d73990782fe6"
+          "type": "UserAssigned",
+          "tenantId": "00000000-0000-0000-0000-000000000000",
+          "userAssignedIdentities": {
+            "/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/resourceGroups/exampleRG/providers/Microsoft.ManagedIdentity/userAssignedIdentities/exampleUmi": {
+              "principalId": "d04ab567-2c07-43ef-a7f4-4527626b7f56",
+              "clientId": "8c3e2fb2-fe7a-4bf1-b779-d73990782fe6"
+            }
+          }
         },
         "tags": {
           "key1": "value1",
@@ -199,9 +207,14 @@
         "name": "exampleExperiment",
         "location": "eastus2euap",
         "identity": {
-          "type": "SystemAssigned",
-          "principalId": "d04ab567-2c07-43ef-a7f4-4527626b7f56",
-          "tenantId": "8c3e2fb2-fe7a-4bf1-b779-d73990782fe6"
+          "type": "UserAssigned",
+          "tenantId": "00000000-0000-0000-0000-000000000000",
+          "userAssignedIdentities": {
+            "/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/resourceGroups/exampleRG/providers/Microsoft.ManagedIdentity/userAssignedIdentities/exampleUmi": {
+              "principalId": "d04ab567-2c07-43ef-a7f4-4527626b7f56",
+              "clientId": "8c3e2fb2-fe7a-4bf1-b779-d73990782fe6"
+            }
+          }
         },
         "properties": {
           "provisioningState": "Updating",
