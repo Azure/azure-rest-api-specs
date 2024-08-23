@@ -28,6 +28,7 @@ directive:
     from: securityContacts.json
     where: $.definitions.SecurityContactProperties.properties.email.format
     reason: email format is allowed
+  - suppress: ValidFormats
     from: automations.json
     where: $.definitions.AutomationActionLogicApp.properties.uri.format
     reason: uri format is allowed
