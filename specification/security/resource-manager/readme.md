@@ -64,7 +64,7 @@ directive:
     where: $.definitions.Pricing
     from: pricings.json
     reason: It does have a LIST API, but it is wrapped with PricingList object.
- - code: LRO_RESPONSE_HEADER
+ -  code: LRO_RESPONSE_HEADER
     from: Microsoft.Security\stable\2020-01-01\applicationWhitelistings.json
     reason: Model validation issue due to legacy design and the fact we are deprecating it.
   - code: OBJECT_ADDITIONAL_PROPERTIES
@@ -168,7 +168,7 @@ directive:
     reason: Model validation issue due to legacy design and the fact we are deprecating it.
   - code: DeleteResponseCodes
     from: Microsoft.Security\preview\2015-06-01-preview\applicationWhitelistings.json
-    reason: Model validation issue due to legacy design and the fact we are deprecating it.
+    reason: Model validation issue due to legacy design and the fact we are deprecating it .
 ```
 
 ``` yaml
@@ -1098,10 +1098,8 @@ These settings apply only when `--tag=package-2020-01-only` is specified on the 
 
 ``` yaml $(tag) == 'package-2020-01-only'
 input-file:
-- Microsoft.Security/stable/2020-01-01/adaptiveNetworkHardenings.json
 - Microsoft.Security/stable/2020-01-01/alerts.json
 - Microsoft.Security/stable/2020-01-01/allowedConnections.json
-- Microsoft.Security/stable/2020-01-01/applicationWhitelistings.json
 - Microsoft.Security/stable/2020-01-01/assessmentMetadata.json
 - Microsoft.Security/stable/2020-01-01/assessments.json
 - Microsoft.Security/stable/2020-01-01/discoveredSecuritySolutions.json
