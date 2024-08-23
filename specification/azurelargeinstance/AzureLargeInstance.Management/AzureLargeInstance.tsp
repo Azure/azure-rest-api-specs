@@ -5,6 +5,7 @@ import "@azure-tools/typespec-client-generator-core";
 import "./models.tsp";
 
 using TypeSpec.Rest;
+using TypeSpec.Versioning;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using Azure.ClientGenerator.Core;
@@ -23,7 +24,6 @@ model AzureLargeInstance is TrackedResource<AzureLargeInstanceProperties> {
   name: string;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation"
 @armResourceOperations
 @clientName("AzureLargeInstance")
 interface AzureLargeInstances {
@@ -32,6 +32,21 @@ interface AzureLargeInstances {
     and instance name.
     """)
   get is ArmResourceRead<AzureLargeInstance>;
+
+  @added(Versions.v2024_08_01_preview)
+  @doc("""
+    Creates an Azure Large Instance for the specified subscription,
+    resource group, and instance name.
+    """)
+  create is ArmResourceCreateOrReplaceSync<AzureLargeInstance>;
+
+  @added(Versions.v2024_08_01_preview)
+  @armResourceDelete(AzureLargeInstance)
+  @doc("""
+    Deletes an Azure Large Instance for the specified subscription, resource group,
+    and instance name.
+    """)
+  delete is ArmResourceDeleteSync<AzureLargeInstance>;
 
   @doc("""
     Patches the Tags field of an Azure Large Instance for the specified
