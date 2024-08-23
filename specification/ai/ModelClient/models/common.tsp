@@ -52,6 +52,9 @@ union EmbeddingEncodingFormat {
   recommendations, and other similar scenarios.
   """)
 model EmbeddingsResult {
+  @doc("Unique identifier for the embeddings result.")
+  id: string;
+
   @doc("Embedding values for the prompts submitted in the request.")
   data: EmbeddingItem[];
 
