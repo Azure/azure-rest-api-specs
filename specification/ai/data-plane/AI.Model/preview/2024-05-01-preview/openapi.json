@@ -443,7 +443,7 @@
     "/info": {
       "get": {
         "operationId": "GetModelInfo",
-        "description": "Returns information about the AI model.\nThe method makes a REST API call to the `/info` route on the given endpoint.",
+        "description": "Returns information about the AI model.\nThe method makes a REST API call to the `/info` route on the given endpoint.\nThis method will only work when using Serverless API or Managed Compute endpoint.\nIt will not work for GitHub Models endpoint or Azure OpenAI endpoint.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -1204,6 +1204,10 @@
       "type": "object",
       "description": "Representation of the response data from an embeddings request.\nEmbeddings measure the relatedness of text strings and are commonly used for search, clustering,\nrecommendations, and other similar scenarios.",
       "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the embeddings result."
+        },
         "data": {
           "type": "array",
           "description": "Embedding values for the prompts submitted in the request.",
@@ -1222,6 +1226,7 @@
         }
       },
       "required": [
+        "id",
         "data",
         "usage",
         "model"
