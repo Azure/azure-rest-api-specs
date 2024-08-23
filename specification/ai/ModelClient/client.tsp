@@ -39,12 +39,12 @@ namespace Customizations; // The actual name here doesn't matter and is here for
 @@access(AI.Model.ChatRole, Access.public);
 @@access(AI.Model.CompletionsFinishReason, Access.public);
 @@access(AI.Model.CompletionsUsage, Access.public);
-@@access(AI.Model.EmbeddingEncodingFormat, Access.public, "python");
-@@access(AI.Model.EmbeddingInput, Access.public, "python");
-@@access(AI.Model.EmbeddingInputType, Access.public, "python");
-@@access(AI.Model.EmbeddingItem, Access.public, "python");
-@@access(AI.Model.EmbeddingsResult, Access.public, "python");
-@@access(AI.Model.EmbeddingsUsage, Access.public, "python");
+@@access(AI.Model.EmbeddingEncodingFormat, Access.public, "python,csharp");
+@@access(AI.Model.EmbeddingInput, Access.public, "python,csharp");
+@@access(AI.Model.EmbeddingInputType, Access.public, "python,csharp");
+@@access(AI.Model.EmbeddingItem, Access.public, "python,csharp");
+@@access(AI.Model.EmbeddingsResult, Access.public, "python,csharp");
+@@access(AI.Model.EmbeddingsUsage, Access.public, "python,csharp");
 @@access(AI.Model.FunctionCall, Access.public);
 @@access(AI.Model.FunctionDefinition, Access.public);
 @@access(AI.Model.ModelInfo, Access.public);
@@ -102,7 +102,7 @@ interface Client1 {
     name: "EmbeddingsClient",
     service: AI.Model,
   },
-  "python"
+  "python,csharp"
 )
 interface Client2 {
   embed is AI.Model.getEmbeddings;
@@ -114,7 +114,7 @@ interface Client2 {
     name: "ImageEmbeddingsClient",
     service: AI.Model,
   },
-  "python"
+  "python,csharp"
 )
 interface Client3 {
   embed is AI.Model.getImageEmbeddings;
