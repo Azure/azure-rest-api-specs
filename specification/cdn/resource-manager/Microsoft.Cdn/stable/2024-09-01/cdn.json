@@ -2728,6 +2728,177 @@
           "nextLinkName": "nextLink"
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/cdnCanMigrateToAfd": {
+      "post": {
+        "tags": [
+          "Profiles"
+        ],
+        "description": "Checks if CDN profile can be migrated to Azure Frontdoor(Standard/Premium) profile.",
+        "operationId": "CdnProfiles_CdnCanMigrateToAfd",
+        "x-ms-examples": {
+          "Profiles_CdnCanMigrate": {
+            "$ref": "./examples/CdnProfiles_CanMigrate.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/profileNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/CanMigrateResult"
+            }
+          },
+          "202": {
+            "description": "Accepted. The request has been accepted for processing and the operation will complete asynchronously.",
+            "headers": {
+              "location": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "CDN error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/cdnMigrateToAfd": {
+      "post": {
+        "tags": [
+          "Profiles"
+        ],
+        "description": "Migrate the CDN profile to Azure Frontdoor(Standard/Premium) profile. This step prepares the profile for migration and will be followed by Commit to finalize the migration.",
+        "operationId": "CdnProfiles_CdnMigrateToAfd",
+        "x-ms-examples": {
+          "Profiles_CdnMigrate": {
+            "$ref": "./examples/CdnProfiles_Migrate.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/profileNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "description": "Properties needed to migrate the profile.",
+            "in": "body",
+            "name": "migrationParameters",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CdnMigrationToAfdParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/MigrateResult"
+            }
+          },
+          "202": {
+            "description": "Accepted. The request has been accepted for processing and the operation will complete asynchronously.",
+            "headers": {
+              "location": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "CDN error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/migrationAbort": {
+      "post": {
+        "tags": [
+          "Profiles"
+        ],
+        "description": "Abort the migration to Azure Frontdoor Premium/Standard.",
+        "operationId": "Profiles_MigrationAbort",
+        "x-ms-examples": {
+          "Profiles_CdnMigrationCommit": {
+            "$ref": "./examples/Profiles_MigrationAbort.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/profileNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/MigrationResultEmpty"
+            }
+          },
+          "202": {
+            "description": "Accepted and the operation will complete asynchronously.",
+            "headers": {
+              "location": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "CDN error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      }
     }
   },
   "definitions": {
@@ -7221,6 +7392,48 @@
         }
       },
       "description": "The resource management error additional info."
+    },
+    "CdnMigrationToAfdParameters": {
+      "type": "object",
+      "description": "Request body for Migrate operation.",
+      "required": [
+        "sku"
+      ],
+      "properties": {
+        "sku": {
+          "description": "Sku for the migration",
+          "$ref": "#/definitions/Sku"
+        },
+        "migrationEndpointMappings": {
+          "description": "A name map between classic CDN endpoints and AFD Premium/Standard endpoints.",
+          "type": "array",
+          "items": {
+            "description": "List of endpoint mappings",
+            "$ref": "#/definitions/MigrationEndpointMapping"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "MigrationEndpointMapping": {
+      "description": "CDN Endpoint Mapping.",
+      "type": "object",
+      "properties": {
+        "migratedFrom": {
+          "description": "The name of the old endpoint.",
+          "type": "string"
+        },
+        "migratedTo": {
+          "description": "The name for the new endpoint.",
+          "type": "string"
+        }
+      }
+    },
+    "MigrationResultEmpty": {
+      "description": "Empty 200 response.",
+      "type": "object",
+      "properties": {}
     }
   },
   "parameters": {
@@ -7248,6 +7461,17 @@
       "maxLength": 90,
       "x-ms-parameter-location": "method",
       "description": "Name of the Resource group within the Azure subscription."
+    },
+    "profileNameParameter": {
+      "name": "profileName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9]+(-*[a-zA-Z0-9])*$",
+      "minLength": 1,
+      "maxLength": 260,
+      "x-ms-parameter-location": "method",
+      "description": "Name of the Azure Front Door Standard or Azure Front Door Premium which is unique within the resource group."
     }
   }
 }
