@@ -113,6 +113,96 @@ suppressions:
   - code: OBJECT_ADDITIONAL_PROPERTIES
     from: Microsoft.Security\stable\2020-01-01\applicationWhitelistings.json
     reason: Model validation issue due to legacy design and the fact we are deprecating it.
+  - code: ResourceNameRestriction
+    from: Microsoft.Security\preview\2015-06-01-preview\adaptiveNetworkHardenings.json
+    reason: Model validation issue due to legacy design and the fact we are deprecating it.
+  - code: ResourceNameRestriction
+    from: Microsoft.Security\preview\2015-06-01-preview\applicationWhitelistings.json
+    reason: Model validation issue due to legacy design and the fact we are deprecating it.
+  - code: PathForResourceAction
+    from: Microsoft.Security\preview\2015-06-01-preview\adaptiveNetworkHardenings.json
+    reason: Model validation issue due to legacy design and the fact we are deprecating it.
+  - code: PathForResourceAction
+    from: Microsoft.Security\preview\2015-06-01-preview\applicationWhitelistings.json
+    reason: Model validation issue due to legacy design and the fact we are deprecating it.
+  - code: PostResponseCodes
+    from: Microsoft.Security\preview\2015-06-01-preview\adaptiveNetworkHardenings.json
+    reason: Model validation issue due to legacy design and the fact we are deprecating it.
+  - code: PostResponseCodes
+    from: Microsoft.Security\preview\2015-06-01-preview\applicationWhitelistings.json
+    reason: Model validation issue due to legacy design and the fact we are deprecating it.
+  - code: LroLocationHeader
+    from: Microsoft.Security\preview\2015-06-01-preview\adaptiveNetworkHardenings.json
+    reason: Model validation issue due to legacy design and the fact we are deprecating it.
+  - code: LroLocationHeader
+    from: Microsoft.Security\preview\2015-06-01-preview\applicationWhitelistings.json
+    reason: Model validation issue due to legacy design and the fact we are deprecating it.
+  - code: LroErrorContent
+    from: Microsoft.Security\preview\2015-06-01-preview\adaptiveNetworkHardenings.json
+    reason: Model validation issue due to legacy design and the fact we are deprecating it.
+  - code: LroErrorContent
+    from: Microsoft.Security\preview\2015-06-01-preview\applicationWhitelistings.json
+    reason: Model validation issue due to legacy design and the fact we are deprecating it.
+  - code: IntegerTypeMustHaveFormat
+    from: Microsoft.Security\preview\2015-06-01-preview\adaptiveNetworkHardenings.json
+    reason: Model validation issue due to legacy design and the fact we are deprecating it.
+  - code: IntegerTypeMustHaveFormat
+    from: Microsoft.Security\preview\2015-06-01-preview\applicationWhitelistings.json
+    reason: Model validation issue due to legacy design and the fact we are deprecating it.
+  - code: MissingTypeObject
+    from: Microsoft.Security\preview\2015-06-01-preview\adaptiveNetworkHardenings.json
+    reason: Model validation issue due to legacy design and the fact we are deprecating it.
+  - code: MissingTypeObject
+    from: Microsoft.Security\preview\2015-06-01-preview\applicationWhitelistings.json
+    reason: Model validation issue due to legacy design and the fact we are deprecating it.
+  - code: BodyTopLevelProperties
+    from: Microsoft.Security\preview\2015-06-01-preview\adaptiveNetworkHardenings.json
+    reason: Model validation issue due to legacy design and the fact we are deprecating it.
+  - code: BodyTopLevelProperties
+    from: Microsoft.Security\preview\2015-06-01-preview\applicationWhitelistings.json
+    reason: Model validation issue due to legacy design and the fact we are deprecating it.
+  - code: XmsEnumValidation
+    from: Microsoft.Security\preview\2015-06-01-preview\adaptiveNetworkHardenings.json
+    reason: Model validation issue due to legacy design and the fact we are deprecating it.
+  - code: XmsEnumValidation
+    from: Microsoft.Security\preview\2015-06-01-preview\applicationWhitelistings.json
+    reason: Model validation issue due to legacy design and the fact we are deprecating it.
+  - code: XmsPageableForListCalls
+    from: Microsoft.Security\preview\2015-06-01-preview\adaptiveNetworkHardenings.json
+    reason: Model validation issue due to legacy design and the fact we are deprecating it.
+  - code: XmsPageableForListCalls
+    from: Microsoft.Security\preview\2015-06-01-preview\applicationWhitelistings.json
+    reason: Model validation issue due to legacy design and the fact we are deprecating it.
+  - code: GetCollectionOnlyHasValueAndNextLink
+    from: Microsoft.Security\preview\2015-06-01-preview\adaptiveNetworkHardenings.json
+    reason: Model validation issue due to legacy design and the fact we are deprecating it.
+  - code: GetCollectionOnlyHasValueAndNextLink
+    from: Microsoft.Security\preview\2015-06-01-preview\applicationWhitelistings.json
+    reason: Model validation issue due to legacy design and the fact we are deprecating it.
+  - code: PathForTrackedResourceTypes
+    from: Microsoft.Security\preview\2015-06-01-preview\adaptiveNetworkHardenings.json
+    reason: Model validation issue due to legacy design and the fact we are deprecating it.
+  - code: PathForTrackedResourceTypes
+    from: Microsoft.Security\preview\2015-06-01-preview\applicationWhitelistings.json
+    reason: Model validation issue due to legacy design and the fact we are deprecating it.
+  - code: PutRequestResponseSchemeArm
+    from: Microsoft.Security\preview\2015-06-01-preview\adaptiveNetworkHardenings.json
+    reason: Model validation issue due to legacy design and the fact we are deprecating it.
+  - code: PutRequestResponseSchemeArm
+    from: Microsoft.Security\preview\2015-06-01-preview\applicationWhitelistings.json
+    reason: Model validation issue due to legacy design and the fact we are deprecating it.
+  - code: PutResponseCodes
+    from: Microsoft.Security\preview\2015-06-01-preview\adaptiveNetworkHardenings.json
+    reason: Model validation issue due to legacy design and the fact we are deprecating it.
+  - code: PutResponseCodes
+    from: Microsoft.Security\preview\2015-06-01-preview\applicationWhitelistings.json
+    reason: Model validation issue due to legacy design and the fact we are deprecating it.
+  - code: DeleteResponseCodes
+    from: Microsoft.Security\preview\2015-06-01-preview\adaptiveNetworkHardenings.json
+    reason: Model validation issue due to legacy design and the fact we are deprecating it.
+  - code: DeleteResponseCodes
+    from: Microsoft.Security\preview\2015-06-01-preview\applicationWhitelistings.json
+    reason: Model validation issue due to legacy design and the fact we are deprecating it.
 ```
 
 ### Basic Information
