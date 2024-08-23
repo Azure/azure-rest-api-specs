@@ -107,7 +107,7 @@ model ChatCompletionsOptions {
   @doc("""
     If specified, the model will configure which of the provided tools it can use for the chat completions response.
     """)
-  toolChoice?: ChatCompletionsToolSelection;
+  toolChoice?: ChatCompletionsToolChoice;
 
   @doc("""
     If specified, the system will make a best effort to sample deterministically such that repeated requests with the
@@ -394,13 +394,11 @@ model ChatResponseMessage {
   toolCalls?: ChatCompletionsToolCall[];
 }
 
-// tool_choice: "auto" | "none" | "required" | {"type": "function", "function": {"name": string}}
-
 #suppress "@azure-tools/typespec-autorest/union-unsupported" "External API shape is defined in OpenAPI 3.0 as oneOf."
-alias ChatCompletionsToolSelection = ChatCompletionsToolSelectionPreset | ChatCompletionsNamedToolSelection;
+alias ChatCompletionsToolChoice = ChatCompletionsToolChoicePreset | ChatCompletionsNamedToolChoice;
 
 @doc("Represents a generic policy for how a chat completions tool may be selected.")
-union ChatCompletionsToolSelectionPreset {
+union ChatCompletionsToolChoicePreset {
   string,
 
   @doc("""
@@ -422,16 +420,16 @@ union ChatCompletionsToolSelectionPreset {
 }
 
 @doc("A tool selection of a specific, named function tool that will limit chat completions to using the named function.")
-model ChatCompletionsNamedToolSelection {
+model ChatCompletionsNamedToolChoice {
   @doc("The type of the tool. Currently, only `function` is supported.")
   type: "function";
 
   @doc("The function that should be called.")
-  function: ChatCompletionsFunctionToolSelection;
+  function: ChatCompletionsNamedToolChoiceFunction;
 }
 
 @doc("A tool selection of a specific, named function tool that will limit chat completions to using the named function.")
-model ChatCompletionsFunctionToolSelection {
+model ChatCompletionsNamedToolChoiceFunction {
   @doc("The name of the function that should be called.")
   name: string;
 }
@@ -460,7 +458,7 @@ model FunctionDefinition {
     """)
   description?: string;
 
-  #suppress "@azure-tools/typespec-azure-core/bad-record-type"
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "External API shape takes an arbitrary json"
   @doc("The parameters the function accepts, described as a JSON Schema object.")
   parameters?: unknown;
 }

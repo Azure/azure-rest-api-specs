@@ -10,13 +10,13 @@ namespace AI.Model;
 union EmbeddingInputType {
   string,
 
-  @doc("to do")
+  @doc("Indicates the input is a general text input.")
   text: "text",
 
-  @doc("to do")
+  @doc("Indicates the input represents a search query to find the most relevant documents in your vector database.")
   query: "query",
 
-  @doc("to do")
+  @doc("Indicates the input represents a document that is stored in a vector database.")
   document: "document",
 }
 
@@ -52,9 +52,6 @@ union EmbeddingEncodingFormat {
   recommendations, and other similar scenarios.
   """)
 model EmbeddingsResult {
-  @doc("Unique identifier for the embeddings result.")
-  id: string;
-
   @doc("Embedding values for the prompts submitted in the request.")
   data: EmbeddingItem[];
 
@@ -70,11 +67,12 @@ model EmbeddingsResult {
 
 @doc("Representation of a single embeddings relatedness comparison.")
 model EmbeddingItem {
+  #suppress "@azure-tools/typespec-autorest/union-unsupported" "Unions with different types are not supported in OpenAPI v2."
   @doc("""
-    List of embeddings value for the input prompt. These represent a measurement of the
-    vector-based relatedness of the provided input.
+    List of embedding values for the input prompt. These represent a measurement of the
+    vector-based relatedness of the provided input. Or a base64 encoded string of the embedding vector.
     """)
-  embedding: float32[];
+  embedding: string | float32[];
 
   @doc("Index of the prompt to which the EmbeddingItem corresponds.")
   index: int32;
