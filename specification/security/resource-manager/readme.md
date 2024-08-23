@@ -101,7 +101,6 @@ suppressions:
   - code: OBJECT_ADDITIONAL_PROPERTIES
     from: applicationWhitelistings.json
     reason: Model validation issue due to legacy design and the fact we are deprecating it.
-
 ```
 
 ### Basic Information
