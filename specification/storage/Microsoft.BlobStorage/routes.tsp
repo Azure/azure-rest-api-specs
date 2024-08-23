@@ -47,7 +47,7 @@ interface BlobServiceProperties {
     ...ClientRequestIdParameter;
   ): {
     @statusCode statusCode: 200;
-    @body body: StorageServiceProperties; // TODO: XML
+    @body body: StorageServiceProperties;
 
     ...ClientRequestIdResponseHeader;
     ...RequestIdResponseHeader;
@@ -68,7 +68,7 @@ interface BlobServiceStatistics {
     ...ClientRequestIdParameter;
   ): {
     @statusCode statusCode: 200;
-    @body body: StorageServiceStats; // TODO: XML
+    @body body: StorageServiceStats;
     ...ClientRequestIdResponseHeader;
     ...RequestIdResponseHeader;
     ...VersionResponseHeader;
@@ -318,7 +318,7 @@ interface BlobServiceContainerAccessPolicy {
     ...LeaseIdOptionalParameter;
   ): {
     @statusCode statusCode: 200;
-    @body body: SignedIdentifiers; // TODO: XML
+    @body body: SignedIdentifiers;
 
     ...PublicAccessResponseHeader;
     ...EtagResponseHeader;
@@ -452,7 +452,7 @@ interface BlobListService {
     ...ClientRequestIdParameter;
   ): {
     @statusCode statusCode: 200;
-    @body body: FilterBlobSegment; // TODO: XML
+    @body body: FilterBlobSegment;
 
     ...ClientRequestIdResponseHeader;
     ...RequestIdResponseHeader;
@@ -683,7 +683,7 @@ interface ContainerAccountInfoService {
   } | StorageError;
 }
 
-@route("/{containerName}/{blob}")
+@route("/{containerName}/{+blob}")
 interface BlobService {
   /** The Download operation reads or downloads a blob from the system, including its metadata and properties. You can also call Download to read a snapshot. */
   @get
@@ -1830,7 +1830,7 @@ interface BlobBlockListService {
     ...IfTagsParameter;
   ): {
     @statusCode statusCode: 200;
-    @body body: BlockLookupList; // TODO: XML
+    @body body: BlockLookupList;
 
     ...LastModifiedResponseHeader;
     ...EtagResponseHeader;
@@ -2051,7 +2051,7 @@ interface PageBlobDiffService {
     ...MaxResultsParameter;
   ): {
     @statusCode statusCode: 200;
-    @body body: PageList; // TODO: XML
+    @body body: PageList;
 
     ...LastModifiedResponseHeader;
     ...EtagResponseHeader;
