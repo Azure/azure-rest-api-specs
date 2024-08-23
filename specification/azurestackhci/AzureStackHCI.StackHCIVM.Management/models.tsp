@@ -1335,7 +1335,7 @@ model VirtualMachineInstancePropertiesHardwareProfileVirtualMachineGPU {
   partitionSizeMB?: int64;
 
   @doc("Name of the GPU")
-  name?: string;
+  gpuName?: string;
 }
 
 @doc("NetworkProfile - describes the network configuration the virtual machine instance")
