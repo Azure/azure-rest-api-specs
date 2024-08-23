@@ -28,7 +28,6 @@ directive:
     from: securityContacts.json
     where: $.definitions.SecurityContactProperties.properties.email.format
     reason: email format is allowed
-  - suppress: ValidFormats
     from: automations.json
     where: $.definitions.AutomationActionLogicApp.properties.uri.format
     reason: uri format is allowed
@@ -89,16 +88,16 @@ suppressions:
   - code: AvoidAdditionalProperties
     from: Microsoft.Security\preview\2024-03-01\securityConnectors.json
     reason: This is a property used across all API versions. changing it would be a breaking change, and is required for 
-  - code: ModelValidation
+  - code: LRO_RESPONSE_HEADER
     from: adaptiveNetworkHardenings.json
     reason: Model validation issue due to legacy design and the fact we are deprecating it.
-  - code: ModelValidation
+  - code: LRO_RESPONSE_HEADER
     from: applicationWhitelistings.json
     reason: Model validation issue due to legacy design and the fact we are deprecating it.
-  - code: ModelValidation
+  - code: OBJECT_ADDITIONAL_PROPERTIES
     from: adaptiveNetworkHardenings.json
     reason: Model validation issue due to legacy design and the fact we are deprecating it.
-  - code: ModelValidation
+  - code: OBJECT_ADDITIONAL_PROPERTIES
     from: applicationWhitelistings.json
     reason: Model validation issue due to legacy design and the fact we are deprecating it.
 
