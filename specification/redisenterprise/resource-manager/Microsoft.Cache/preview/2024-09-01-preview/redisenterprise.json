@@ -100,7 +100,7 @@
           "200": {
             "description": "Success. The detailed status of the operation is in the response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationStatusResult"
+              "$ref": "#/definitions/OperationStatus"
             }
           },
           "default": {
@@ -2579,6 +2579,36 @@
         "sasUri"
       ],
       "description": "Parameters for a Redis Enterprise export operation."
+    },
+    "OperationStatus": {
+      "description": "The status of a long-running operation.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The operation's unique id."
+        },
+        "name": {
+          "type": "string",
+          "description": "The operation's name."
+        },
+        "startTime": {
+          "type": "string",
+          "description": "The start time of the operation."
+        },
+        "endTime": {
+          "type": "string",
+          "description": "The end time of the operation."
+        },
+        "status": {
+          "type": "string",
+          "description": "The current status of the operation."
+        },
+        "error": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse",
+          "description": "Error response describing why the operation failed."
+        }
+      }
     },
     "ForceLinkParameters": {
       "type": "object",
