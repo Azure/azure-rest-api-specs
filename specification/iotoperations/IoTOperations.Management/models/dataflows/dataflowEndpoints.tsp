@@ -354,7 +354,7 @@ model DataflowEndpointMqtt {
 
   @doc("Qos for Broker connection.")
   @minValue(0)
-  @maxValue(2)
+  @maxValue(1)
   qos?: int32 = 1;
 
   @doc("Session expiry in seconds.")
