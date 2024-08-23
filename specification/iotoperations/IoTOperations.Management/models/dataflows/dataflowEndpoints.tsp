@@ -206,7 +206,7 @@ model DataflowEndpointKafka {
   consumerGroupId?: string;
 
   @doc("Kafka endpoint host.")
-  host?: string;
+  host: string;
 
   @doc("Batching configuration.")
   batching?: DataflowEndpointKafkaBatching;
