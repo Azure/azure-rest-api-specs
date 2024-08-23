@@ -336,7 +336,7 @@ model DataflowEndpointMqtt {
   clientIdPrefix?: string;
 
   @doc("Host of the Broker in the form of <hostname>:<port>. Optional; connects to Broker if omitted.")
-  host?: string = "aio-mq-dmqtt-frontend:8883";
+  host?: string;
 
   @doc("Enable or disable websockets.")
   protocol?: BrokerProtocolType = BrokerProtocolType.Mqtt;
