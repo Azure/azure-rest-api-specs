@@ -90,29 +90,18 @@ suppressions:
     from: Microsoft.Security\preview\2024-03-01\securityConnectors.json
     reason: This is a property used across all API versions. changing it would be a breaking change, and is required for 
   - code: ModelValidation
-    from: Microsoft.Security\preview\2015-06-01-preview\adaptiveNetworkHardenings.json
+    from: adaptiveNetworkHardenings.json
     reason: Model validation issue due to legacy design and the fact we are deprecating it.
   - code: ModelValidation
-    from: Microsoft.Security\preview\2015-06-01-preview\applicationWhitelistings.json
+    from: applicationWhitelistings.json
     reason: Model validation issue due to legacy design and the fact we are deprecating it.
   - code: ModelValidation
-    from: Microsoft.Security\stable\2020-01-01\adaptiveNetworkHardenings.json
+    from: adaptiveNetworkHardenings.json
     reason: Model validation issue due to legacy design and the fact we are deprecating it.
   - code: ModelValidation
-    from: Microsoft.Security\stable\2020-01-01\applicationWhitelistings.json
+    from: applicationWhitelistings.json
     reason: Model validation issue due to legacy design and the fact we are deprecating it.
-  - code: LintDiff
-    from: Microsoft.Security\preview\2015-06-01-preview\adaptiveNetworkHardenings.json
-    reason: Linting difference accepted due to legacy design and the fact we are deprecating it.
-  - code: LintDiff
-    from: Microsoft.Security\preview\2015-06-01-preview\applicationWhitelistings.json
-    reason: Linting difference accepted due to legacy design and the fact we are deprecating it.
-  - code: LintDiff
-    from: Microsoft.Security\stable\2020-01-01\adaptiveNetworkHardenings.json
-    reason: Linting difference accepted due to legacy design and the fact we are deprecating it.
-  - code: LintDiff
-    from: Microsoft.Security\stable\2020-01-01\applicationWhitelistings.json
-    reason: Linting difference accepted due to legacy design and the fact we are deprecating it.
+
 ```
 
 ### Basic Information
