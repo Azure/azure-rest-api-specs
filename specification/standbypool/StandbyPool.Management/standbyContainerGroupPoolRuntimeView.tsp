@@ -56,10 +56,10 @@ model StandbyContainerGroupPoolRuntimeViewResourceProperties {
 @doc("Displays the counts of container groups in each state, as known by the StandbyPool resource provider.")
 model ContainerGroupInstanceCountSummary {
   @added(Microsoft.StandbyPool.Versions.`2024-08-01-preview`)
-  @doc("The zone that the provided counts are in. This is null if zones are not enabled.")
+  @doc("The zone that the provided counts are in. It will not have a value if zones are not enabled.")
   zone?: int64;
 
-  @doc("The count of pooled resources in each state.")
+  @doc("The count of pooled container groups in each state.")
   @extension("x-ms-identifiers", ["state"])
   @removed(Microsoft.StandbyPool.Versions.`2024-08-01-preview`)
   @renamedFrom(
@@ -68,34 +68,34 @@ model ContainerGroupInstanceCountSummary {
   )
   oldinstanceCountsByState: PoolResourceStateCount[];
 
-  @doc("The count of pooled resources in each state for the given zone.")
+  @doc("The count of pooled container groups in each state for the given zone.")
   @extension("x-ms-identifiers", ["state"])
   @added(Microsoft.StandbyPool.Versions.`2024-08-01-preview`)
   instanceCountsByState: PoolContainerGroupStateCount[];
 }
 
 @added(Microsoft.StandbyPool.Versions.`2024-08-01-preview`)
-@doc("The state that the pooled resources.")
+@doc("The state of the pooled container groups.")
 union PoolContainerGroupState {
-  @doc("The resource is up and running.")
+  @doc("The container group is up and running.")
   Running: "Running",
 
-  @doc("The resource is creating.")
+  @doc("The container group is creating.")
   Creating: "Creating",
 
-  @doc("The resource is deleting.")
+  @doc("The container group is deleting.")
   Deleting: "Deleting",
 
   string,
 }
 
 @added(Microsoft.StandbyPool.Versions.`2024-08-01-preview`)
-@doc("Displays the counts of pooled resources in each state, as known by the StandbyPool resource provider.")
+@doc("Displays the counts of pooled container groups in each state, as known by the StandbyPool resource provider.")
 model PoolContainerGroupStateCount {
-  @doc("The state that the pooled resources count is for.")
+  @doc("The state that the pooled container groups count is for.")
   state: PoolContainerGroupState;
 
-  @doc("The count of pooled resources in the given state.")
+  @doc("The count of pooled container groups in the given state.")
   count: int64;
 }
 
