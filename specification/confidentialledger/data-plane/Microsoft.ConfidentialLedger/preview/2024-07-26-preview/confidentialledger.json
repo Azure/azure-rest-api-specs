@@ -558,7 +558,7 @@
         "summary": "Creates a custom endpoint.",
         "description": "Creates the user defined endpoint in the ACL instance ",
         "parameters": {
-          "$ref": "#/definitions/Bundle"
+          "$ref": "#/parameters/BundleParameter"
         },
         "responses": {
           "204": {
@@ -635,7 +635,7 @@
         "description": "It gets the module for the custom endpoint.",
         "parameters": [
           {
-            "$ref": "#/definitions/ModuleName"
+            "$ref": "#/parameters/ModuleParameter"
           }
         ],
         "responses": {
@@ -692,10 +692,10 @@
         "description": "Custom roles allow users to define and manage app specific AuthZ policy.",
         "parameters": [
           {
-            "$ref": "#/definitions/UserDefinedRoleName"
+            "$ref": "#/parameters/UserDefinedRoleNameParameter"
           },
           {
-            "$ref": "#/definitions/UserDefinedRoleAction"
+            "$ref": "#/parameters/UserDefinedRoleActionParameter"
           }
         ],
         "responses": {
@@ -721,10 +721,10 @@
         "description": "Custom roles allow users to define and manage app specific AuthZ policy.",
         "parameters": [
           {
-            "$ref": "#/definitions/UserDefinedRoleName"
+            "$ref": "#/parameters/UserDefinedRoleName"
           },
           {
-            "$ref": "#/definitions/UserDefinedRoleAction"
+            "$ref": "#/parameters/UserDefinedRoleAction"
           }
         ],
         "responses": {
@@ -1307,7 +1307,6 @@
     "Bundle": {
       "description": "bundle for the user defined endpoints",
       "properties": {
-        "name": "bundle",
         "metadata": {
           "$ref": "#/definitions/Metadata"
         },
@@ -1400,20 +1399,17 @@
       "type": "string"
     },
     "InterpreterReusePolicy": {
-      "oneOf": [
-        {
-          "properties": {
-            "key": {
-              "type": "string"
-            }
-          },
-          "required": [
-            "key"
-          ],
-          "type": "object"
+      "properties": {
+        "key": {
+          "type": "string"
         }
-      ]
-    },
+      },
+      "required": [
+        "key"
+      ],
+      "type": "object"
+    }
+   },
     "Mode": {
       "enum": [
         "readwrite",
@@ -1460,7 +1456,6 @@
       "type": "array"
     },
     "ModuleName": {
-      "name": "module-name",
       "description": "Module name of the user defined endpoint",
       "type": "string"
     },
@@ -1498,7 +1493,6 @@
       "type": "boolean"
     },
     "UserDefinedRoleName": {
-      "name": "roleName",
       "description": "Role names for user defined roles",
       "type": "string"
     },
@@ -1583,13 +1577,46 @@
       "x-ms-parameter-location": "method",
       "x-ms-skip-url-encoding": true
     },
-    "moduleParameter": {
+    "ModuleParameter": {
       "name": "module_name",
       "required": true,
       "description": "module name of the custom endpoint",
-      "type": "string",
+      "in": "query",
       "x-ms-parameter-location": "method",
-      "x-ms-skip-url-encoding": true
+      "x-ms-skip-url-encoding": true,
+      "schema": {
+        "$ref": "#/definitions/ModuleName"
+      }
+    },
+    "BundleParameter": {
+      "name": "bundle",
+      "description": "bundle parameter description",
+      "in": "body",
+      "required": true,
+      "x-ms-parameter-location": "method",
+      "schema": {
+        "$ref": "#/definitions/Bundle"
+      }
+    },
+    "UserDefinedRoleNameParameter": {
+      "name": "userDefinedRoleName",
+      "description": "user defined role name",
+      "in": "body",
+      "required": true,
+      "x-ms-parameter-location": "method",
+      "schema": {
+        "$ref": "#/definitions/UserDefinedRoleName"
+      }
+    },
+    "UserDefinedRoleActionParameter": {
+      "name": "userDefinedRoleName",
+      "description": "role actions for user defined roles",
+      "in": "body",
+      "required": true,
+      "x-ms-parameter-location": "method",
+      "schema": {
+        "$ref": "#/definitions/UserDefinedRoleAction"
+      }
     }
   }
 }
