@@ -150,3 +150,12 @@ These settings apply only when `--tag=package-2024-07-26-preview-ledger` is spec
 input-file:
   - Microsoft.ConfidentialLedger/preview/2024-07-26-preview/confidentialledger.json
 ```
+
+### Tag: package-2024-07-26-preview-identity
+
+These settings apply only when `--tag=package-2024-07-26-preview-identity` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-07-26-preview-identity'
+input-file:
+  - Microsoft.ConfidentialLedger/preview/2024-07-26-preview/identityservice.json
+```

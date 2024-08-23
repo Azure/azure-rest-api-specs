@@ -1041,14 +1041,21 @@
     "LedgerUserRole": {
       "description": "Represents an assignable role.",
       "type": "array",
+      "items": {
+        "$ref": "#/definitions/MultipleRolesList"
+      }
+    },
+    "MultipleRolesList": {
+      "description": "Represents list of roles for single user",
+      "type": "string",
       "enum": [
         "Administrator",
         "Contributor",
         "Reader"
       ],
       "x-ms-enum": {
-        "name": "ConfidentialLedgerUserRoleName",
-        "modelAsString": true
+        "modelAsString": true,
+        "name": "ConfidentialLedgerUserRoleName"
       }
     },
     "LedgerWriteResult": {
@@ -1300,6 +1307,7 @@
     "Bundle": {
       "description": "bundle for the user defined endpoints",
       "properties": {
+        "name": "bundle",
         "metadata": {
           "$ref": "#/definitions/Metadata"
         },
@@ -1392,21 +1400,19 @@
       "type": "string"
     },
     "InterpreterReusePolicy": {
-      "properties": {
-        "oneOf": [
-          {
-            "properties": {
-              "key": {
-                "type": "string"
-              }
-            },
-            "required": [
-              "key"
-            ]
-          }
-        ]
-      },
-      "type": "object"
+      "oneOf": [
+        {
+          "properties": {
+            "key": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "key"
+          ],
+          "type": "object"
+        }
+      ]
     },
     "Mode": {
       "enum": [
@@ -1454,6 +1460,7 @@
       "type": "array"
     },
     "ModuleName": {
+      "name": "module-name",
       "description": "Module name of the user defined endpoint",
       "type": "string"
     },
@@ -1491,11 +1498,9 @@
       "type": "boolean"
     },
     "UserDefinedRoleName": {
-      "properties": {
-        "roleName": {
-          "type": "string"
-        }
-      }
+      "name": "roleName",
+      "description": "Role names for user defined roles",
+      "type": "string"
     },
     "UserDefinedRoleAction": {
       "items": {
