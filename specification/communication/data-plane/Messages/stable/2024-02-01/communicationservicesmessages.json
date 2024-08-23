@@ -361,8 +361,8 @@
       "type": "string",
       "description": "The type of message.",
       "enum": [
-        "image",
         "text",
+        "image",
         "template"
       ],
       "x-ms-enum": {
@@ -370,14 +370,14 @@
         "modelAsString": true,
         "values": [
           {
-            "name": "image",
-            "value": "image",
-            "description": "Image message type."
-          },
-          {
             "name": "text",
             "value": "text",
             "description": "Text message type."
+          },
+          {
+            "name": "image",
+            "value": "image",
+            "description": "Image message type."
           },
           {
             "name": "template",
@@ -405,9 +405,9 @@
         ]
       }
     },
-    "MediaNotificationContent": {
+    "ImageNotificationContent": {
       "type": "object",
-      "description": "Base model for media notification content.",
+      "description": "A request to send an image notification.",
       "properties": {
         "content": {
           "type": "string",
@@ -417,16 +417,10 @@
           "type": "string",
           "format": "uri",
           "description": "A media URL for the file."
-        },
-        "mediaKind": {
-          "$ref": "#/definitions/MediaTypeKind",
-          "description": "The type discriminator describing a media type."
         }
       },
-      "discriminator": "mediaKind",
       "required": [
-        "mediaUri",
-        "mediaKind"
+        "mediaUri"
       ],
       "allOf": [
         {
@@ -434,24 +428,6 @@
         }
       ],
       "x-ms-discriminator-value": "image"
-    },
-    "MediaTypeKind": {
-      "type": "string",
-      "description": "The type of media content. Supports image, document, video.",
-      "enum": [
-        "image"
-      ],
-      "x-ms-enum": {
-        "name": "MediaTypeKind",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "image",
-            "value": "image",
-            "description": "Image message type."
-          }
-        ]
-      }
     },
     "MessageReceipt": {
       "type": "object",

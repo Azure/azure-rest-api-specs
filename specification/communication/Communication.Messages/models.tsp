@@ -16,20 +16,10 @@ namespace Azure.Communication.MessagesService;
 
 @doc("The type of message.")
 union CommunicationMessageKind {
+  string,
+
   @doc("Text message type.")
   text: "text",
-
-  // Spreading MediaTypeKind into CommunicationMessageKind
-  @doc("Media message types (image, document, video).")
-  mediaType: MediaTypeKind,
-
-  @doc("Template message type.")
-  template: "template",
-}
-
-@doc("The type of media content. Supports image, document, video.")
-union MediaTypeKind {
-  string,
 
   @doc("Image message type.")
   image: "image",
@@ -41,6 +31,9 @@ union MediaTypeKind {
   @added(Versions.c2024_08_30_Preview)
   @doc("Video message type.")
   video: "video",
+
+  @doc("Template message type.")
+  template: "template",
 }
 
 @doc("The WhatsApp button sub type.")
@@ -132,54 +125,45 @@ model TextNotificationContent extends NotificationContent {
   content: string;
 }
 
-@discriminator("mediaKind")
 @doc("Base model for media notification content.")
-model MediaNotificationContent extends NotificationContent {
+model MediaNotificationContentBase {
   @doc("Optional text content.")
   content?: string;
 
   @clientName("mediaUrl", "java")
   @doc("A media URL for the file.")
   mediaUri: url;
-  
-  @doc("Message notification type is image by default.")
-  kind: MediaTypeKind = MediaTypeKind.image;
-
-  
-  @doc("The type discriminator describing a media type.")
-  mediaKind: MediaTypeKind;
 }
 
-@added(Versions.c2024_08_30_Preview)
+@clientName("MediaNotificationContent")
 @doc("A request to send an image notification.")
-model ImageNotificationContent extends MediaNotificationContent {
+model ImageNotificationContent extends NotificationContent {
   @doc("Message notification type is image.")
-  kind: MediaTypeKind.image;
+  kind: CommunicationMessageKind.image;
 
-  @doc("Message notification type is image.")
-  mediaKind: MediaTypeKind.image;
+  ...MediaNotificationContentBase
 }
 
 @added(Versions.c2024_08_30_Preview)
 @doc("A request to send a document notification.")
-model DocumentNotificationContent extends MediaNotificationContent {
+model DocumentNotificationContent extends NotificationContent {
   @doc("Message notification type is document.")
-  kind: MediaTypeKind.document;
+  kind: CommunicationMessageKind.document;
 
-  @doc("Message notification type is document.")
-  mediaKind: MediaTypeKind.document;
+  @doc("Optional name for the file.")
+  fileName?: string;
+
+  ...MediaNotificationContentBase
 }
 
 @added(Versions.c2024_08_30_Preview)
 @doc("A request to send a video notification.")
-model VideoNotificationContent extends MediaNotificationContent {
+model VideoNotificationContent extends NotificationContent {
   @doc("Message notification type is video.")
-  kind: MediaTypeKind.video;
+  kind: CommunicationMessageKind.video;
 
-  @doc("Message notification type is video.")
-  mediaKind: MediaTypeKind.video;
+  ...MediaNotificationContentBase
 }
-
 
 @doc("A request to send a template notification.")
 model TemplateNotificationContent extends NotificationContent {
