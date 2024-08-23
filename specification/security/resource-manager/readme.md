@@ -90,16 +90,28 @@ suppressions:
     from: Microsoft.Security\preview\2024-03-01\securityConnectors.json
     reason: This is a property used across all API versions. changing it would be a breaking change, and is required for 
   - code: LRO_RESPONSE_HEADER
-    from: adaptiveNetworkHardenings.json
+    from: Microsoft.Security\preview\2015-06-01-preview\adaptiveNetworkHardenings.json
     reason: Model validation issue due to legacy design and the fact we are deprecating it.
   - code: LRO_RESPONSE_HEADER
-    from: applicationWhitelistings.json
+    from: Microsoft.Security\preview\2015-06-01-preview\applicationWhitelistings.json
+    reason: Model validation issue due to legacy design and the fact we are deprecating it.
+  - code: LRO_RESPONSE_HEADER
+    from: Microsoft.Security\stable\2020-01-01\adaptiveNetworkHardenings.json
+    reason: Model validation issue due to legacy design and the fact we are deprecating it.
+  - code: LRO_RESPONSE_HEADER
+    from: Microsoft.Security\stable\2020-01-01\applicationWhitelistings.json
     reason: Model validation issue due to legacy design and the fact we are deprecating it.
   - code: OBJECT_ADDITIONAL_PROPERTIES
-    from: adaptiveNetworkHardenings.json
+    from: Microsoft.Security\preview\2015-06-01-preview\adaptiveNetworkHardenings.json
     reason: Model validation issue due to legacy design and the fact we are deprecating it.
   - code: OBJECT_ADDITIONAL_PROPERTIES
-    from: applicationWhitelistings.json
+    from: Microsoft.Security\preview\2015-06-01-preview\applicationWhitelistings.json
+    reason: Model validation issue due to legacy design and the fact we are deprecating it.
+  - code: OBJECT_ADDITIONAL_PROPERTIES
+    from: Microsoft.Security\stable\2020-01-01\adaptiveNetworkHardenings.json
+    reason: Model validation issue due to legacy design and the fact we are deprecating it.
+  - code: OBJECT_ADDITIONAL_PROPERTIES
+    from: Microsoft.Security\stable\2020-01-01\applicationWhitelistings.json
     reason: Model validation issue due to legacy design and the fact we are deprecating it.
 ```
 
