@@ -603,6 +603,18 @@
       "type": "object",
       "description": "A condition of the scheduled query rule.",
       "properties": {
+        "criterionType": {
+          "type": "string",
+          "enum": [
+            "StaticThresholdCriterion",
+            "DynamicThresholdCriterion"
+          ],
+          "x-ms-enum": {
+            "name": "criterionType",
+            "modelAsString": true
+          },
+          "description": "Specifies the type of threshold criteria"
+        },
         "query": {
           "type": "string",
           "description": "Log query alert"
@@ -645,7 +657,8 @@
             "GreaterThan",
             "GreaterThanOrEqual",
             "LessThan",
-            "LessThanOrEqual"
+            "LessThanOrEqual",
+            "GreaterOrLessThan"
           ],
           "x-ms-enum": {
             "name": "conditionOperator",
@@ -656,7 +669,16 @@
         "threshold": {
           "type": "number",
           "format": "double",
-          "description": "the criteria threshold value that activates the alert. Relevant and required only for rules of the kind LogAlert."
+          "description": "the criteria threshold value that activates the alert. Relevant and required only for static threshold rules of the kind LogAlert."
+        },
+        "alertSensitivity": {
+          "type": "string",
+          "description": "The extent of deviation required to trigger an alert. Allowed values are 'Low', 'Medium' and 'High'. This will affect how tight the threshold is to the metric series pattern. Relevant and required only for dynamic threshold rules of the kind LogAlert."
+        },
+        "ignoreDataBefore": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Use this option to set the date from which to start learning the metric historical data and calculate the dynamic thresholds (in ISO8601 format). Relevant only for dynamic threshold rules of the kind LogAlert."
         },
         "failingPeriods": {
           "type": "object",
