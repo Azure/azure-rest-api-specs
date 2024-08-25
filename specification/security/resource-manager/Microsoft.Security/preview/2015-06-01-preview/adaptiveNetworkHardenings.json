@@ -165,6 +165,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceNamespace}/{resourceType}/{resourceName}/providers/Microsoft.Security/adaptiveNetworkHardenings/{adaptiveNetworkHardeningResourceName}/{adaptiveNetworkHardeningEnforceAction}": {
       "post": {
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
         "x-ms-examples": {
           "Enforces the given rules on the NSG(s) listed in the request": {
             "$ref": "./examples/AdaptiveNetworkHardenings/EnforceAdaptiveNetworkHardeningRules_example.json"
