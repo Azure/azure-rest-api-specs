@@ -98,6 +98,15 @@ suppressions:
   - code: AvoidAdditionalProperties
     from: ThreatIntelligenceQuery.json
     reason: These properties are required in current API. The team is working on a new version of API to resolve it in the future release.
+- code: GetCollectionOnlyHasValueAndNextLink
+    from: Entities.json
+    reason: This API is published to customers and we have not changed it in the past year, nor will we be able to change it without breaking changes to customers.
+- code: DefinitionsPropertiesNamesCamelCase
+    from: Entities.json
+    reason: This API is published to customers and we have not changed it in the past year, nor will we be able to change it without breaking changes to customers.
+- code: PutRequestResponseSchemeArm
+    from: Entities.json
+    reason: This API is published to customers and we have not changed it in the past year, nor will we be able to change it without breaking changes to customers.
 ```
 ### Tag: package-2024-03
 
