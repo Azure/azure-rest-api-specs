@@ -879,8 +879,10 @@ These settings apply only when `--tag=package-2020-01-only` is specified on the 
 
 ``` yaml $(tag) == 'package-2020-01-only'
 input-file:
+- Microsoft.Security/stable/2020-01-01/adaptiveNetworkHardenings.json
 - Microsoft.Security/stable/2020-01-01/alerts.json
 - Microsoft.Security/stable/2020-01-01/allowedConnections.json
+- Microsoft.Security/stable/2020-01-01/applicationWhitelistings.json
 - Microsoft.Security/stable/2020-01-01/assessmentMetadata.json
 - Microsoft.Security/stable/2020-01-01/assessments.json
 - Microsoft.Security/stable/2020-01-01/discoveredSecuritySolutions.json
