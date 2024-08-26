@@ -3,7 +3,7 @@
   "info": {
     "title": "Experimentation",
     "description": "Rest API for Experimentation Service.",
-    "version": "2023-09-30-preview"
+    "version": "2024-11-30-preview"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -394,7 +394,7 @@
       "description": "An experiment workspace.",
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/TrackedResource"
         }
       ],
       "properties": {
@@ -404,12 +404,16 @@
           "x-ms-client-flatten": true
         },
         "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData",
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/systemData",
           "readOnly": true
         },
         "identity": {
           "description": "The identity of the workspace",
           "$ref": "#/definitions/ManagedIdentity"
+        },
+        "sku": {
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/Sku",
+          "readOnly": true
         }
       }
     },
@@ -445,7 +449,37 @@
         },
         "remoteVariantAssignment": {
           "$ref": "#/definitions/RemoteVariantAssignment"
-        }
+        },
+        "logAnalyticsResourceId": {
+          "description": "The resource identifier of the Log Analytics workspace which experiment workspace uses for generating experiment analysis results.",
+          "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResourceTypes": [
+              {
+                "scopes": [
+                  "ResourceGroup"
+                ],
+                "type": "Microsoft.OperationalInsights/workspaces"
+              }
+            ]
+          }
+        },
+        "storageAccountResourceId": {
+          "description": "The resource identifier of storage account which experiment workspace uses for generating experiment analysis results.",
+          "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResourceTypes": [
+              {
+                "scopes": [
+                  "ResourceGroup"
+                ],
+                "type": "Microsoft.Storage/storageAccounts"
+              }
+            ]
+          }
+        },
       }
     },
     "ExperimentWorkspaceCreate": {
