@@ -1049,7 +1049,7 @@
     },
     "MultipleRolesList": {
       "description": "Represents list of roles for single user",
-      "type": "array",
+      "type": "string",
       "enum": [
         "Administrator",
         "Contributor",
@@ -1581,7 +1581,9 @@
       "in": "query",
       "x-ms-parameter-location": "method",
       "x-ms-skip-url-encoding": true,
-      "type": "string"
+      "schema": {
+        "$ref": "#/definitions/ModuleDef_array"
+      }
     },
     "BundleParameter": {
       "name": "bundle",
