@@ -16,21 +16,14 @@ Set-StrictMode -Version 3
 
 . $PSScriptRoot/ChangedFiles-Functions.ps1
 . $PSScriptRoot/Logging-Functions.ps1
+. $PSScriptRoot/Suppressions-Functions.ps1
 
 function Get-Suppression {
   param (
     [string]$fileInSpecFolder
   )
 
-  # -NoEnumerate to prevent single-element arrays from being collapsed to a single object
-  # -AsHashtable is closer to raw JSON than PSCustomObject
-  $suppressions = npm exec --no -- get-suppressions TypeSpecRequirement $fileInSpecFolder | ConvertFrom-Json -NoEnumerate -AsHashtable
-
-  if ($LASTEXITCODE -ne 0) {
-      LogError "Failure running 'npm exec get-suppressions'"
-      LogJobFailure
-      exit 1
-  }
+  $suppressions = Get-Suppressions TypeSpecRequirement $fileInSpecFolder
 
   # For now, we just use the first matching suppression returned by "get-suppressions" (#29003)
   $suppression = $suppressions ? $suppressions[0] : $null
@@ -78,7 +71,8 @@ else {
   # Cache responses to GitHub web requests, for efficiency and to prevent rate limiting
   $responseCache = $_ResponseCache
 
-  # - Forward slashes on both Linux and Windows
+  # - Forward slashes on both Linu
+  x and Windows
   # - May be nested 4 or 5 levels deep, perhaps even deeper
   # - Examples
   #   - specification/foo/data-plane/Foo/stable/2023-01-01/Foo.json
