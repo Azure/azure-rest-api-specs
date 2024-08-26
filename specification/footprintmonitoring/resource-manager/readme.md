@@ -50,13 +50,6 @@ input-file:
   - Microsoft.FootprintMonitoring/preview/2020-02-01-preview/footprintProfiles.json
 ```
 
-```yaml
-suppressions:
-  - code: BodyTopLevelProperties
-    from: footprintMonitoring.json
-    reason: "https://teams.microsoft.com/l/message/19:0351f5f9404446e4b4fd4eaf2c27448d@thread.skype/1721935993271?tenantId=72f988bf-86f1-41af-91ab-2d7cd011db47&groupId=3e17dcb0-4257-4a30-b843-77f47f1d4121&parentMessageId=1721901407934&teamName=Azure%20SDK&channelName=API%20Spec%20Review&createdTime=1721935993271"
-```
-
 ---
 
 # Code Generation
