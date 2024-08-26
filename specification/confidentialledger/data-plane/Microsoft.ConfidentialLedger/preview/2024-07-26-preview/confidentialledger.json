@@ -562,19 +562,17 @@
             "$ref": "#/parameters/BundleParameter"
           }
         ],
-          "responses"
-          :
-          {
-            "204": {
-              "description": "The custom endpoint is created."
-            },
-            "default": {
-              "description": "Error response describing why the operation failed.",
-              "schema": {
-                "$ref": "common.json#/definitions/ConfidentialLedgerError"
-              }
+        "responses": {
+          "204": {
+            "description": "The custom endpoint is created."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "common.json#/definitions/ConfidentialLedgerError"
             }
           }
+        }
       }
     },
     "/app/user-defined-endpoints/run-time-options ": {
@@ -1051,7 +1049,7 @@
     },
     "MultipleRolesList": {
       "description": "Represents list of roles for single user",
-      "type": "string",
+      "type": "array",
       "enum": [
         "Administrator",
         "Contributor",
@@ -1510,7 +1508,7 @@
       "required": [
         "roleAction"
       ],
-      "type": "object"
+      "type": "array"
     }
   },
   "parameters": {
@@ -1577,7 +1575,7 @@
       "x-ms-skip-url-encoding": true
     },
     "ModuleParameter": {
-      "name": "module_name",
+      "name": "module",
       "required": true,
       "description": "module name of the custom endpoint",
       "in": "query",
@@ -1596,7 +1594,7 @@
       }
     },
     "UserDefinedRoleNameParameter": {
-      "name": "userDefinedRoleName",
+      "name": "roleName",
       "description": "user defined role name",
       "in": "body",
       "required": true,
@@ -1606,7 +1604,7 @@
       }
     },
     "UserDefinedRoleActionParameter": {
-      "name": "userDefinedRoleName",
+      "name": "roleAction",
       "description": "role actions for user defined roles",
       "in": "body",
       "required": true,
