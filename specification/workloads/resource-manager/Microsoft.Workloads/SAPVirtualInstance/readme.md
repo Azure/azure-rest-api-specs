@@ -40,6 +40,10 @@ input-file:
   - stable/2024-09-01/SAPVirtualInstance.json
   - ../common-types/v1/commonTypes.json
   - ../operations/stable/2024-09-01/operations.json
+suppressions:
+  - code: BodyTopLevelProperties
+    from: SAPVirtualInstance.json
+    reason: This is an incorrect failure due to a bug in the tool
 ```
 
 ### Tag: package-preview-2023-10
