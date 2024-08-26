@@ -42,10 +42,10 @@
       "name": "Operations"
     },
     {
-      "name": "SingleSignOnOperations"
+      "name": "Organizations"
     },
     {
-      "name": "Organizations"
+      "name": "ServerlessRuntimes"
     }
   ],
   "paths": {
@@ -58,28 +58,28 @@
         "description": "List the operations for the provider",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
             }
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
-          "Operations_List1": {
+          "Operations_List": {
             "$ref": "./examples/Operations_List_MaximumSet_Gen.json"
           },
-          "Operations_List2": {
+          "Operations_List_Min": {
             "$ref": "./examples/Operations_List_MinimumSet_Gen.json"
           }
         },
@@ -97,15 +97,15 @@
         "description": "List InformaticaOrganizationResource resources by subscription ID",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/InformaticaOrganizationResourceListResult"
             }
@@ -113,15 +113,15 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
-          "Organizations_ListBySubscription1": {
+          "Organizations_ListBySubscription": {
             "$ref": "./examples/Organizations_ListBySubscription_MaximumSet_Gen.json"
           },
-          "Organizations_ListBySubscription": {
+          "Organizations_ListBySubscription_Min": {
             "$ref": "./examples/Organizations_ListBySubscription_MinimumSet_Gen.json"
           }
         },
@@ -139,18 +139,18 @@
         "description": "List InformaticaOrganizationResource resources by resource group",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/InformaticaOrganizationResourceListResult"
             }
@@ -158,15 +158,15 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
-          "Organizations_ListByResourceGroup1": {
+          "Organizations_ListByResourceGroup": {
             "$ref": "./examples/Organizations_ListByResourceGroup_MaximumSet_Gen.json"
           },
-          "Organizations_ListByResourceGroup": {
+          "Organizations_ListByResourceGroup_Min": {
             "$ref": "./examples/Organizations_ListByResourceGroup_MinimumSet_Gen.json"
           }
         },
@@ -184,26 +184,26 @@
         "description": "Get a InformaticaOrganizationResource",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "organizationName",
             "in": "path",
             "description": "Name of the Organizations resource",
             "required": true,
-            "pattern": "^[a-z][a-z0-9]*$",
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_-]*$"
           }
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/InformaticaOrganizationResource"
             }
@@ -211,15 +211,15 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
-          "Organizations_Get1": {
+          "Organizations_Get": {
             "$ref": "./examples/Organizations_Get_MaximumSet_Gen.json"
           },
-          "Organizations_Get": {
+          "Organizations_Get_Min": {
             "$ref": "./examples/Organizations_Get_MinimumSet_Gen.json"
           }
         }
@@ -232,20 +232,21 @@
         "description": "Create a InformaticaOrganizationResource",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "organizationName",
             "in": "path",
             "description": "Name of the Organizations resource",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_-]*$"
           },
           {
             "name": "resource",
@@ -280,15 +281,15 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
-          "Organizations_CreateOrUpdate1": {
+          "Organizations_CreateOrUpdate": {
             "$ref": "./examples/Organizations_CreateOrUpdate_MaximumSet_Gen.json"
           },
-          "Organizations_CreateOrUpdate": {
+          "Organizations_CreateOrUpdate_Min": {
             "$ref": "./examples/Organizations_CreateOrUpdate_MinimumSet_Gen.json"
           }
         },
@@ -305,20 +306,21 @@
         "description": "Update a InformaticaOrganizationResource",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "organizationName",
             "in": "path",
             "description": "Name of the Organizations resource",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_-]*$"
           },
           {
             "name": "properties",
@@ -326,13 +328,13 @@
             "description": "The resource properties to be updated.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/OrganizationPropertiesUpdate"
+              "$ref": "#/definitions/InformaticaOrganizationResourceUpdate"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/InformaticaOrganizationResource"
             }
@@ -340,15 +342,15 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
-          "Organizations_Update1": {
+          "Organizations_Update": {
             "$ref": "./examples/Organizations_Update_MaximumSet_Gen.json"
           },
-          "Organizations_Update": {
+          "Organizations_Update_Min": {
             "$ref": "./examples/Organizations_Update_MinimumSet_Gen.json"
           }
         }
@@ -361,52 +363,53 @@
         "description": "Delete a InformaticaOrganizationResource",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "organizationName",
             "in": "path",
             "description": "Name of the Organizations resource",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_-]*$"
           }
         ],
         "responses": {
           "202": {
             "description": "Resource deletion accepted.",
             "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
           "204": {
-            "description": "Resource deleted successfully."
+            "description": "Resource does not exist."
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
-          "Organizations_Delete1": {
+          "Organizations_Delete": {
             "$ref": "./examples/Organizations_Delete_MaximumSet_Gen.json"
           },
-          "Organizations_Delete": {
+          "Organizations_Delete_Min": {
             "$ref": "./examples/Organizations_Delete_MinimumSet_Gen.json"
           }
         },
@@ -416,51 +419,149 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Informatica.DataManagement/organizations/{organizationName}/singleSignOnConfigurations": {
-      "get": {
-        "operationId": "SingleSignOnOperations_ListByInformaticaOrganizationResource",
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Informatica.DataManagement/organizations/{organizationName}/getAllServerlessRuntimes": {
+      "post": {
+        "operationId": "Organizations_GetAllServerlessRuntimes",
         "tags": [
-          "SingleSignOnOperations"
+          "Organizations"
         ],
-        "description": "List SingleSignOn resources by InformaticaOrganizationResource",
+        "description": "Gets all serverless runtime resources in a given informatica organization resource.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "organizationName",
             "in": "path",
             "description": "Name of the Organizations resource",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_-]*$"
           }
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/SingleSignOnListResult"
+              "$ref": "#/definitions/InformaticaServerlessRuntimeResourceList"
             }
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
-          "SingleSignOnOperations_ListByInformaticaOrganizationResource1": {
-            "$ref": "./examples/SingleSignOnOperations_ListByInformaticaOrganizationResource_MaximumSet_Gen.json"
+          "Organizations_GetAllServerlessRuntimes": {
+            "$ref": "./examples/Organizations_GetAllServerlessRuntimes_MaximumSet_Gen.json"
           },
-          "SingleSignOnOperations_ListByInformaticaOrganizationResource": {
-            "$ref": "./examples/SingleSignOnOperations_ListByInformaticaOrganizationResource_MinimumSet_Gen.json"
+          "Organizations_GetAllServerlessRuntimes_Min": {
+            "$ref": "./examples/Organizations_GetAllServerlessRuntimes_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Informatica.DataManagement/organizations/{organizationName}/getServerlessMetadata": {
+      "post": {
+        "operationId": "Organizations_GetServerlessMetadata",
+        "tags": [
+          "Organizations"
+        ],
+        "description": "Gets Metadata of the serverless runtime environment.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "organizationName",
+            "in": "path",
+            "description": "Name of the Organizations resource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_-]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ServerlessMetadataResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Organizations_GetServerlessMetadata": {
+            "$ref": "./examples/Organizations_GetServerlessMetadata_MaximumSet_Gen.json"
+          },
+          "Organizations_GetServerlessMetadata_Min": {
+            "$ref": "./examples/Organizations_GetServerlessMetadata_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Informatica.DataManagement/organizations/{organizationName}/serverlessRuntimes": {
+      "get": {
+        "operationId": "ServerlessRuntimes_ListByInformaticaOrganizationResource",
+        "tags": [
+          "ServerlessRuntimes"
+        ],
+        "description": "List InformaticaServerlessRuntimeResource resources by InformaticaOrganizationResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "organizationName",
+            "in": "path",
+            "description": "Name of the Organizations resource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_-]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/InformaticaServerlessRuntimeResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ServerlessRuntimes_ListByInformaticaOrganizationResource": {
+            "$ref": "./examples/ServerlessRuntimes_ListByInformaticaOrganizationResource_MaximumSet_Gen.json"
           }
         },
         "x-ms-pageable": {
@@ -468,90 +569,94 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Informatica.DataManagement/organizations/{organizationName}/singleSignOnConfigurations/{configurationName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Informatica.DataManagement/organizations/{organizationName}/serverlessRuntimes/{serverlessRuntimeName}": {
       "get": {
-        "operationId": "SingleSignOnOperations_Get",
+        "operationId": "ServerlessRuntimes_Get",
         "tags": [
-          "SingleSignOnOperations"
+          "ServerlessRuntimes"
         ],
-        "description": "Get a SingleSignOn",
+        "description": "Get a InformaticaServerlessRuntimeResource",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "organizationName",
             "in": "path",
             "description": "Name of the Organizations resource",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_-]*$"
           },
           {
-            "name": "configurationName",
+            "name": "serverlessRuntimeName",
             "in": "path",
-            "description": "Name of the SSO Configuration",
+            "description": "Name of the Serverless Runtime resource",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_-]*$"
           }
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/SingleSignOn"
+              "$ref": "#/definitions/InformaticaServerlessRuntimeResource"
             }
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
-          "SingleSignOnOperations_Get1": {
-            "$ref": "./examples/SingleSignOnOperations_Get_MaximumSet_Gen.json"
+          "ServerlessRuntimes_Get": {
+            "$ref": "./examples/ServerlessRuntimes_Get_MaximumSet_Gen.json"
           },
-          "SingleSignOnOperations_Get": {
-            "$ref": "./examples/SingleSignOnOperations_Get_MinimumSet_Gen.json"
+          "ServerlessRuntimes_Get_Min": {
+            "$ref": "./examples/ServerlessRuntimes_Get_MinimumSet_Gen.json"
           }
         }
       },
       "put": {
-        "operationId": "SingleSignOnOperations_CreateOrUpdate",
+        "operationId": "ServerlessRuntimes_CreateOrUpdate",
         "tags": [
-          "SingleSignOnOperations"
+          "ServerlessRuntimes"
         ],
-        "description": "Create a SingleSignOn",
+        "description": "Create a InformaticaServerlessRuntimeResource",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "organizationName",
             "in": "path",
             "description": "Name of the Organizations resource",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_-]*$"
           },
           {
-            "name": "configurationName",
+            "name": "serverlessRuntimeName",
             "in": "path",
-            "description": "Name of the SSO Configuration",
+            "description": "Name of the Serverless Runtime resource",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_-]*$"
           },
           {
             "name": "resource",
@@ -559,21 +664,21 @@
             "description": "Resource create parameters.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/SingleSignOn"
+              "$ref": "#/definitions/InformaticaServerlessRuntimeResource"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "Resource 'SingleSignOn' update operation succeeded",
+            "description": "Resource 'InformaticaServerlessRuntimeResource' update operation succeeded",
             "schema": {
-              "$ref": "#/definitions/SingleSignOn"
+              "$ref": "#/definitions/InformaticaServerlessRuntimeResource"
             }
           },
           "201": {
-            "description": "Resource 'SingleSignOn' create operation succeeded",
+            "description": "Resource 'InformaticaServerlessRuntimeResource' create operation succeeded",
             "schema": {
-              "$ref": "#/definitions/SingleSignOn"
+              "$ref": "#/definitions/InformaticaServerlessRuntimeResource"
             },
             "headers": {
               "Retry-After": {
@@ -586,16 +691,16 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
-          "SingleSignOnOperations_CreateOrUpdate1": {
-            "$ref": "./examples/SingleSignOnOperations_CreateOrUpdate_MaximumSet_Gen.json"
+          "ServerlessRuntimes_CreateOrUpdate": {
+            "$ref": "./examples/ServerlessRuntimes_CreateOrUpdate_MaximumSet_Gen.json"
           },
-          "SingleSignOnOperations_CreateOrUpdate": {
-            "$ref": "./examples/SingleSignOnOperations_CreateOrUpdate_MinimumSet_Gen.json"
+          "ServerlessRuntimes_CreateOrUpdate_Min": {
+            "$ref": "./examples/ServerlessRuntimes_CreateOrUpdate_MinimumSet_Gen.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -603,68 +708,132 @@
         },
         "x-ms-long-running-operation": true
       },
-      "delete": {
-        "operationId": "SingleSignOnOperations_Delete",
+      "patch": {
+        "operationId": "ServerlessRuntimes_Update",
         "tags": [
-          "SingleSignOnOperations"
+          "ServerlessRuntimes"
         ],
-        "description": "Delete a SingleSignOn",
+        "description": "Update a InformaticaServerlessRuntimeResource",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "organizationName",
             "in": "path",
             "description": "Name of the Organizations resource",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_-]*$"
           },
           {
-            "name": "configurationName",
+            "name": "serverlessRuntimeName",
             "in": "path",
-            "description": "Name of the SSO Configuration",
+            "description": "Name of the Serverless Runtime resource",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_-]*$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/InformaticaServerlessRuntimeResourceUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/InformaticaServerlessRuntimeResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ServerlessRuntimes_Update": {
+            "$ref": "./examples/ServerlessRuntimes_Update_MaximumSet_Gen.json"
+          },
+          "ServerlessRuntimes_Update_Min": {
+            "$ref": "./examples/ServerlessRuntimes_Update_MinimumSet_Gen.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "ServerlessRuntimes_Delete",
+        "tags": [
+          "ServerlessRuntimes"
+        ],
+        "description": "Delete a InformaticaServerlessRuntimeResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "organizationName",
+            "in": "path",
+            "description": "Name of the Organizations resource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_-]*$"
+          },
+          {
+            "name": "serverlessRuntimeName",
+            "in": "path",
+            "description": "Name of the Serverless Runtime resource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_-]*$"
           }
         ],
         "responses": {
           "202": {
             "description": "Resource deletion accepted.",
             "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
           "204": {
-            "description": "Resource deleted successfully."
+            "description": "Resource does not exist."
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
-          "SingleSignOnOperations_Delete1": {
-            "$ref": "./examples/SingleSignOnOperations_Delete_MaximumSet_Gen.json"
-          },
-          "SingleSignOnOperations_Delete": {
-            "$ref": "./examples/SingleSignOnOperations_Delete_MinimumSet_Gen.json"
+          "ServerlessRuntimes_Delete": {
+            "$ref": "./examples/ServerlessRuntimes_Delete_MaximumSet_Gen.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -672,12 +841,347 @@
         },
         "x-ms-long-running-operation": true
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Informatica.DataManagement/organizations/{organizationName}/serverlessRuntimes/{serverlessRuntimeName}/checkDependencies": {
+      "post": {
+        "operationId": "ServerlessRuntimes_CheckDependencies",
+        "tags": [
+          "ServerlessRuntimes"
+        ],
+        "description": "Checks all dependencies for a serverless runtime resource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "organizationName",
+            "in": "path",
+            "description": "Name of the Organizations resource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_-]*$"
+          },
+          {
+            "name": "serverlessRuntimeName",
+            "in": "path",
+            "description": "Name of the Serverless Runtime resource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_-]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CheckDependenciesResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ServerlessRuntimes_CheckDependencies": {
+            "$ref": "./examples/ServerlessRuntimes_CheckDependencies_MaximumSet_Gen.json"
+          },
+          "ServerlessRuntimes_CheckDependencies_Min": {
+            "$ref": "./examples/ServerlessRuntimes_CheckDependencies_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Informatica.DataManagement/organizations/{organizationName}/serverlessRuntimes/{serverlessRuntimeName}/serverlessResourceById": {
+      "post": {
+        "operationId": "ServerlessRuntimes_ServerlessResourceById",
+        "tags": [
+          "ServerlessRuntimes"
+        ],
+        "description": "Returns a serverless runtime resource by ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "organizationName",
+            "in": "path",
+            "description": "Name of the Organizations resource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_-]*$"
+          },
+          {
+            "name": "serverlessRuntimeName",
+            "in": "path",
+            "description": "Name of the Serverless Runtime resource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_-]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/InformaticaServerlessRuntimeResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ServerlessRuntimes_ServerlessResourceById": {
+            "$ref": "./examples/ServerlessRuntimes_ServerlessResourceById_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Informatica.DataManagement/organizations/{organizationName}/serverlessRuntimes/{serverlessRuntimeName}/startFailedServerlessRuntime": {
+      "post": {
+        "operationId": "ServerlessRuntimes_StartFailedServerlessRuntime",
+        "tags": [
+          "ServerlessRuntimes"
+        ],
+        "description": "Starts a failed runtime resource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "organizationName",
+            "in": "path",
+            "description": "Name of the Organizations resource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_-]*$"
+          },
+          {
+            "name": "serverlessRuntimeName",
+            "in": "path",
+            "description": "Name of the Serverless Runtime resource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_-]*$"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Operation completed successfully."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ServerlessRuntimes_StartFailedServerlessRuntime": {
+            "$ref": "./examples/ServerlessRuntimes_StartFailedServerlessRuntime_MaximumSet_Gen.json"
+          },
+          "ServerlessRuntimes_StartFailedServerlessRuntime_Min": {
+            "$ref": "./examples/ServerlessRuntimes_StartFailedServerlessRuntime_MinimumSet_Gen.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
+    "AdvancedCustomProperties": {
+      "type": "object",
+      "description": "Informatica Serverless advanced custom properties",
+      "properties": {
+        "key": {
+          "type": "string",
+          "description": "advanced custom properties key"
+        },
+        "value": {
+          "type": "string",
+          "description": "advanced custom properties value"
+        }
+      }
+    },
+    "ApplicationConfigs": {
+      "type": "object",
+      "description": "Application configs",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Type of the application config."
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the application config."
+        },
+        "value": {
+          "type": "string",
+          "description": "Value of the application config."
+        },
+        "platform": {
+          "type": "string",
+          "description": "Platform type of the application config."
+        },
+        "customized": {
+          "type": "string",
+          "description": "Customized value of the application config."
+        },
+        "defaultValue": {
+          "type": "string",
+          "description": "Default value of the application config."
+        }
+      },
+      "required": [
+        "type",
+        "name",
+        "value",
+        "platform",
+        "customized",
+        "defaultValue"
+      ]
+    },
+    "ApplicationType": {
+      "type": "string",
+      "description": "Various application types of the Serverless Runtime environments",
+      "enum": [
+        "CDI",
+        "CDIE"
+      ],
+      "x-ms-enum": {
+        "name": "ApplicationType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "CDI",
+            "value": "CDI",
+            "description": "Data Integration"
+          },
+          {
+            "name": "CDIE",
+            "value": "CDIE",
+            "description": "Advanced Data Integration"
+          }
+        ]
+      }
+    },
+    "ApplicationTypeMetadata": {
+      "type": "object",
+      "description": "Informatica Serverless Runtime Application type Metadata",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Application type name"
+        },
+        "value": {
+          "type": "string",
+          "description": "Application type value"
+        }
+      }
+    },
+    "Azure.ResourceManager.CommonTypes.ManagedServiceIdentityUpdate": {
+      "type": "object",
+      "description": "Managed service identity (system assigned and/or user assigned identities)",
+      "properties": {
+        "type": {
+          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentityType",
+          "description": "The type of managed identity assigned to this resource."
+        },
+        "userAssignedIdentities": {
+          "type": "object",
+          "description": "The identities assigned to this resource by the user.",
+          "additionalProperties": {
+            "allOf": [
+              {
+                "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/UserAssignedIdentity"
+              }
+            ],
+            "type": "object",
+            "x-nullable": true
+          }
+        }
+      }
+    },
+    "CdiConfigProps": {
+      "type": "object",
+      "description": "Informatica CDI Configuration Properties.",
+      "properties": {
+        "engineName": {
+          "type": "string",
+          "description": "EngineName of the application config."
+        },
+        "engineVersion": {
+          "type": "string",
+          "description": "EngineVersion of the application config."
+        },
+        "applicationConfigs": {
+          "type": "array",
+          "description": "ApplicationConfigs of the CDI or CDIE.",
+          "items": {
+            "$ref": "#/definitions/ApplicationConfigs"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "engineName",
+        "engineVersion",
+        "applicationConfigs"
+      ]
+    },
+    "CheckDependenciesResponse": {
+      "type": "object",
+      "description": "Model for the check dependencies API for an informatica serverless runtime resource",
+      "properties": {
+        "count": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Count of dependencies"
+        },
+        "id": {
+          "type": "string",
+          "description": "id of resource"
+        },
+        "references": {
+          "type": "array",
+          "description": "List of dependencies",
+          "items": {
+            "$ref": "#/definitions/ServerlessRuntimeDependency"
+          }
+        }
+      },
+      "required": [
+        "count",
+        "id",
+        "references"
+      ]
+    },
     "CompanyDetails": {
       "type": "object",
-      "description": "Company Details",
+      "description": "Company Details.",
       "properties": {
         "companyName": {
           "type": "string",
@@ -706,23 +1210,203 @@
         }
       }
     },
+    "CompanyDetailsUpdate": {
+      "type": "object",
+      "description": "Company details of Informatica Organization resource",
+      "properties": {
+        "companyName": {
+          "type": "string",
+          "description": "company Name"
+        },
+        "officeAddress": {
+          "type": "string",
+          "description": "Office Address"
+        },
+        "country": {
+          "type": "string",
+          "description": "Country name"
+        },
+        "domain": {
+          "type": "string",
+          "description": "Domain name"
+        },
+        "business": {
+          "type": "string",
+          "description": "Business phone number"
+        },
+        "numberOfEmployees": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number Of Employees"
+        }
+      }
+    },
+    "ComputeUnitsMetadata": {
+      "type": "object",
+      "description": "Informatica Serverless Runtime Application type Metadata",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "ComputeUnit name"
+        },
+        "value": {
+          "type": "array",
+          "description": "ComputeUnit value",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "InfaRuntimeResourceFetchMetaData": {
+      "type": "object",
+      "description": "Informatica runtime resource metadata as received via the informatica fetch all runtime environments API",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Environment name"
+        },
+        "createdTime": {
+          "type": "string",
+          "description": "Created time"
+        },
+        "updatedTime": {
+          "type": "string",
+          "description": "Updated Time"
+        },
+        "createdBy": {
+          "type": "string",
+          "description": "Created by"
+        },
+        "updatedBy": {
+          "type": "string",
+          "description": "Last Updated by"
+        },
+        "id": {
+          "type": "string",
+          "description": "Informatica serverless runtime id"
+        },
+        "type": {
+          "$ref": "#/definitions/RuntimeType",
+          "description": "Environment Type"
+        },
+        "status": {
+          "type": "string",
+          "description": "Status of the environment"
+        },
+        "statusLocalized": {
+          "type": "string",
+          "description": "Display message for the given status"
+        },
+        "statusMessage": {
+          "type": "string",
+          "description": "status message"
+        },
+        "serverlessConfigProperties": {
+          "$ref": "#/definitions/InfaServerlessFetchConfigProperties",
+          "description": "Serverless Config Properties"
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the runtime resource"
+        }
+      },
+      "required": [
+        "name",
+        "createdTime",
+        "updatedTime",
+        "createdBy",
+        "updatedBy",
+        "id",
+        "type",
+        "status",
+        "statusLocalized",
+        "statusMessage",
+        "serverlessConfigProperties"
+      ]
+    },
+    "InfaServerlessFetchConfigProperties": {
+      "type": "object",
+      "description": "InfaServerlessFetchConfigProperties for the fetch all serverless API as received from informatica API response",
+      "properties": {
+        "subnet": {
+          "type": "string",
+          "description": "subnet name"
+        },
+        "applicationType": {
+          "type": "string",
+          "description": "applicationType name"
+        },
+        "resourceGroupName": {
+          "type": "string",
+          "description": "Resource group name"
+        },
+        "advancedCustomProperties": {
+          "type": "string",
+          "description": "Advanced custom properties"
+        },
+        "supplementaryFileLocation": {
+          "type": "string",
+          "description": "Supplementary File location"
+        },
+        "platform": {
+          "type": "string",
+          "description": "Serverless Account Platform"
+        },
+        "tags": {
+          "type": "string",
+          "description": "Tags for the resource"
+        },
+        "vnet": {
+          "type": "string",
+          "description": "virtual network"
+        },
+        "executionTimeout": {
+          "type": "string",
+          "description": "Execution timeout"
+        },
+        "computeUnits": {
+          "type": "string",
+          "description": "Compute Units"
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "Tenant ID"
+        },
+        "subscriptionId": {
+          "type": "string",
+          "description": "subscription ID"
+        },
+        "region": {
+          "type": "string",
+          "description": "region name for the runtime environment"
+        },
+        "serverlessArmResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Serverless Arm Resource ID",
+          "x-ms-arm-id-details": {
+            "allowedResources": []
+          }
+        }
+      }
+    },
     "InformaticaOrganizationResource": {
       "type": "object",
-      "description": "A Organization Resource by Informatica",
+      "description": "An Organization Resource by Informatica.",
       "properties": {
         "properties": {
           "$ref": "#/definitions/OrganizationProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "description": "The resource-specific properties for this resource."
+        },
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The managed service identities assigned to this resource."
         }
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
         }
       ]
     },
@@ -747,45 +1431,195 @@
         "value"
       ]
     },
+    "InformaticaOrganizationResourceUpdate": {
+      "type": "object",
+      "description": "The template for adding optional properties.",
+      "properties": {
+        "identity": {
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.ManagedServiceIdentityUpdate",
+          "description": "The managed service identities assigned to this resource."
+        },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/OrganizationPropertiesCustomUpdate",
+          "description": "Patchable PropertieInformaticaOrganizationPropertiesUpdates of the Organization observability resource"
+        }
+      }
+    },
     "InformaticaProperties": {
       "type": "object",
-      "description": "Properties of the Informatica organization",
+      "description": "Properties of the Informatica organization.",
       "properties": {
         "organizationId": {
           "type": "string",
           "description": "Organization id"
         },
-        "singleSignOnProperties": {
-          "$ref": "#/definitions/InformaticaSingleSignOnProperties",
-          "description": "The login URL specific to this Informatica Organization"
-        }
-      }
-    },
-    "InformaticaSingleSignOnProperties": {
-      "type": "object",
-      "description": "Single sign on Info of the SolarWinds account",
-      "properties": {
-        "singleSignOnState": {
-          "$ref": "#/definitions/SingleSignOnStates",
-          "description": "Single sign-on state"
-        },
-        "enterpriseAppId": {
+        "organizationName": {
           "type": "string",
-          "description": "The Id of the Enterprise App used for Single sign-on."
+          "description": "Organization name"
+        },
+        "informaticaRegion": {
+          "type": "string",
+          "description": "Informatica organization region"
         },
         "singleSignOnUrl": {
           "type": "string",
-          "description": "The login URL specific to this SolarWinds Organization"
-        },
+          "format": "uri",
+          "description": "Single sing on URL for informatica organization"
+        }
+      }
+    },
+    "InformaticaServerlessRuntimeProperties": {
+      "type": "object",
+      "description": "Serverless Runtime properties.",
+      "properties": {
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
-          "description": "Provisioning state"
+          "description": "Provisioning State of the resource.",
+          "readOnly": true
+        },
+        "description": {
+          "type": "string",
+          "description": "description of the serverless runtime."
+        },
+        "platform": {
+          "$ref": "#/definitions/PlatformType",
+          "description": "Platform type of the Serverless Runtime."
+        },
+        "applicationType": {
+          "$ref": "#/definitions/ApplicationType",
+          "description": "Application type of the Serverless Runtime environment."
+        },
+        "computeUnits": {
+          "type": "string",
+          "description": "Compute units of the serverless runtime."
+        },
+        "executionTimeout": {
+          "type": "string",
+          "description": "Serverless Execution timeout"
+        },
+        "serverlessAccountLocation": {
+          "type": "string",
+          "description": "Serverless account creation location"
+        },
+        "serverlessRuntimeNetworkProfile": {
+          "$ref": "#/definitions/ServerlessRuntimeNetworkProfile",
+          "description": "Informatica Serverless Network profile properties."
+        },
+        "advancedCustomProperties": {
+          "type": "array",
+          "description": "String KV pairs indicating Advanced custom properties.",
+          "items": {
+            "$ref": "#/definitions/AdvancedCustomProperties"
+          },
+          "x-ms-identifiers": []
+        },
+        "supplementaryFileLocation": {
+          "type": "string",
+          "description": "Supplementary file location."
+        },
+        "serverlessRuntimeConfig": {
+          "$ref": "#/definitions/ServerlessRuntimeConfigProperties",
+          "description": "Serverless config properties"
+        },
+        "serverlessRuntimeTags": {
+          "type": "array",
+          "description": "Serverless Runtime Tags",
+          "items": {
+            "$ref": "#/definitions/ServerlessRuntimeTag"
+          },
+          "x-ms-identifiers": []
+        },
+        "serverlessRuntimeUserContextProperties": {
+          "$ref": "#/definitions/ServerlessRuntimeUserContextProperties",
+          "description": "Serverless runtime user context properties"
+        }
+      },
+      "required": [
+        "serverlessAccountLocation"
+      ]
+    },
+    "InformaticaServerlessRuntimeResource": {
+      "type": "object",
+      "description": "A Serverless Runtime environment  resource by Informatica.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/InformaticaServerlessRuntimeProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "InformaticaServerlessRuntimeResourceList": {
+      "type": "object",
+      "description": "A list of serverless runtime resources as fetched using the informatica APIs",
+      "properties": {
+        "informaticaRuntimeResources": {
+          "type": "array",
+          "description": "List of runtime resources for the fetch all API",
+          "items": {
+            "$ref": "#/definitions/InfaRuntimeResourceFetchMetaData"
+          }
+        }
+      },
+      "required": [
+        "informaticaRuntimeResources"
+      ]
+    },
+    "InformaticaServerlessRuntimeResourceListResult": {
+      "type": "object",
+      "description": "The response of a InformaticaServerlessRuntimeResource list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The InformaticaServerlessRuntimeResource items on this page",
+          "items": {
+            "$ref": "#/definitions/InformaticaServerlessRuntimeResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "InformaticaServerlessRuntimeResourceUpdate": {
+      "type": "object",
+      "description": "The template for adding optional properties.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ServerlessRuntimePropertiesCustomUpdate",
+          "description": "Patchable PropertieInformaticaOrganizationPropertiesUpdates of the Organization observability resource"
+        }
+      }
+    },
+    "LinkOrganization": {
+      "type": "object",
+      "description": "Link Organization",
+      "properties": {
+        "token": {
+          "type": "string",
+          "description": "Link organization token"
         }
       }
     },
     "MarketplaceDetails": {
       "type": "object",
-      "description": "Marketplace details",
+      "description": "Marketplace details.",
       "properties": {
         "marketplaceSubscriptionId": {
           "type": "string",
@@ -797,7 +1631,6 @@
         }
       },
       "required": [
-        "marketplaceSubscriptionId",
         "offerDetails"
       ]
     },
@@ -815,6 +1648,54 @@
         }
       }
     },
+    "NetworkInterfaceConfiguration": {
+      "type": "object",
+      "description": "Informatica Serverless Runtime Network Interface configurations.",
+      "properties": {
+        "vnetId": {
+          "$ref": "#/definitions/VnetResourceId",
+          "description": "Virtual network resource id"
+        },
+        "subnetId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Virtual network subnet resource id",
+          "x-ms-arm-id-details": {
+            "allowedResources": []
+          }
+        },
+        "vnetResourceGuid": {
+          "type": "string",
+          "description": "Virtual network resource guid"
+        }
+      },
+      "required": [
+        "vnetId",
+        "subnetId"
+      ]
+    },
+    "NetworkInterfaceConfigurationUpdate": {
+      "type": "object",
+      "description": "The template for adding optional properties.",
+      "properties": {
+        "vnetId": {
+          "$ref": "#/definitions/VnetResourceId",
+          "description": "Virtual network resource id"
+        },
+        "subnetId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Virtual network subnet resource id",
+          "x-ms-arm-id-details": {
+            "allowedResources": []
+          }
+        },
+        "vnetResourceGuid": {
+          "type": "string",
+          "description": "Virtual network resource guid"
+        }
+      }
+    },
     "OfferDetails": {
       "type": "object",
       "description": "Details of the product offering.",
@@ -822,32 +1703,32 @@
         "publisherId": {
           "type": "string",
           "description": "Id of the product publisher.",
-          "maxLength": 50
+          "maxLength": 250
         },
         "offerId": {
           "type": "string",
           "description": "Id of the product offering.",
-          "maxLength": 50
+          "maxLength": 250
         },
         "planId": {
           "type": "string",
           "description": "Id of the product offer plan.",
-          "maxLength": 50
+          "maxLength": 250
         },
         "planName": {
           "type": "string",
           "description": "Name of the product offer plan.",
-          "maxLength": 50
+          "maxLength": 250
         },
         "termUnit": {
           "type": "string",
           "description": "Offer plan term unit.",
-          "maxLength": 25
+          "maxLength": 50
         },
         "termId": {
           "type": "string",
           "description": "Offer plan term id.",
-          "maxLength": 50
+          "maxLength": 250
         }
       },
       "required": [
@@ -860,56 +1741,56 @@
     },
     "OfferDetailsUpdate": {
       "type": "object",
-      "description": "Details of the product offering.",
+      "description": "Details of the product offering",
       "properties": {
         "publisherId": {
           "type": "string",
           "description": "Id of the product publisher.",
-          "maxLength": 50
+          "maxLength": 250
         },
         "offerId": {
           "type": "string",
           "description": "Id of the product offering.",
-          "maxLength": 50
+          "maxLength": 250
         },
         "planId": {
           "type": "string",
           "description": "Id of the product offer plan.",
-          "maxLength": 50
+          "maxLength": 250
         },
         "planName": {
           "type": "string",
           "description": "Name of the product offer plan.",
-          "maxLength": 50
+          "maxLength": 250
         },
         "termUnit": {
           "type": "string",
           "description": "Offer plan term unit.",
-          "maxLength": 25
+          "maxLength": 50
         },
         "termId": {
           "type": "string",
           "description": "Offer plan term id.",
-          "maxLength": 50
+          "maxLength": 250
         }
       }
     },
     "OrganizationProperties": {
       "type": "object",
-      "description": "Properties specific to the Informatica DataManagement Organization resource",
+      "description": "Properties specific to the Informatica DataManagement Organization resource.",
       "properties": {
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
-          "description": "Provisioning State of the resource",
+          "description": "Provisioning State of the resource.",
           "readOnly": true
         },
         "informaticaProperties": {
           "$ref": "#/definitions/InformaticaProperties",
-          "description": "Informatica Organization properties"
+          "description": "Informatica Organization properties."
         },
         "marketplaceDetails": {
           "$ref": "#/definitions/MarketplaceDetails",
-          "description": "Marketplace details"
+          "description": "Marketplace details."
         },
         "userDetails": {
           "$ref": "#/definitions/UserDetails",
@@ -917,16 +1798,20 @@
         },
         "companyDetails": {
           "$ref": "#/definitions/CompanyDetails",
-          "description": "Company details"
+          "description": "Company details."
+        },
+        "linkOrganization": {
+          "$ref": "#/definitions/LinkOrganization",
+          "description": "Link Organization"
         }
       }
     },
-    "OrganizationPropertiesUpdate": {
+    "OrganizationPropertiesCustomUpdate": {
       "type": "object",
-      "description": "Properties specific to the Informatica DataManagement Organization resource",
+      "description": "Patchable Properties of the Informatica Organization resource",
       "properties": {
-        "informaticaProperties": {
-          "$ref": "#/definitions/InformaticaProperties",
+        "informaticaOrganizationProperties": {
+          "$ref": "#/definitions/InformaticaOrganizationResourceUpdate",
           "description": "Informatica Organization properties"
         },
         "marketplaceDetails": {
@@ -934,18 +1819,44 @@
           "description": "Marketplace details"
         },
         "userDetails": {
-          "$ref": "#/definitions/UserDetails",
+          "$ref": "#/definitions/UserDetailsUpdate",
           "description": "User details"
         },
         "companyDetails": {
-          "$ref": "#/definitions/CompanyDetails",
-          "description": "Company details"
+          "$ref": "#/definitions/CompanyDetailsUpdate",
+          "description": "Company Details"
+        },
+        "existingResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Existing Resource Id",
+          "x-ms-arm-id-details": {
+            "allowedResources": []
+          }
         }
+      }
+    },
+    "PlatformType": {
+      "type": "string",
+      "description": "Various types of the Platform types.",
+      "enum": [
+        "AZURE"
+      ],
+      "x-ms-enum": {
+        "name": "PlatformType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "AZURE",
+            "value": "AZURE",
+            "description": "Azure platform type"
+          }
+        ]
       }
     },
     "ProvisioningState": {
       "type": "string",
-      "description": "Provisioning State of the Organization resource",
+      "description": "Provisioning State of the Organization resource.",
       "enum": [
         "Accepted",
         "Creating",
@@ -1007,86 +1918,331 @@
             "description": "Organization resource state is unknown"
           }
         ]
+      },
+      "readOnly": true
+    },
+    "RegionsMetadata": {
+      "type": "object",
+      "description": "Informatica Serverless Runtime Regions Metadata",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Region Id"
+        },
+        "name": {
+          "type": "string",
+          "description": "Region name"
+        }
       }
     },
-    "SingleSignOn": {
-      "type": "object",
-      "description": "Single sign-on configurations for a Informatica resource",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/InformaticaSingleSignOnProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
-        }
-      ]
-    },
-    "SingleSignOnListResult": {
-      "type": "object",
-      "description": "The response of a SingleSignOn list operation.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The SingleSignOn items on this page",
-          "items": {
-            "$ref": "#/definitions/SingleSignOn"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
-    "SingleSignOnStates": {
+    "RuntimeType": {
       "type": "string",
-      "description": "Various states of the SSO resource",
+      "description": "Various types of the runtime types.",
       "enum": [
-        "Initial",
-        "Enable",
-        "Disable",
-        "Existing"
+        "SERVERLESS"
       ],
       "x-ms-enum": {
-        "name": "SingleSignOnStates",
+        "name": "RuntimeType",
         "modelAsString": true,
         "values": [
           {
-            "name": "Initial",
-            "value": "Initial",
-            "description": "SSO state Initial"
-          },
-          {
-            "name": "Enable",
-            "value": "Enable",
-            "description": "SSO state Enable"
-          },
-          {
-            "name": "Disable",
-            "value": "Disable",
-            "description": "SSO state Disable"
-          },
-          {
-            "name": "Existing",
-            "value": "Existing",
-            "description": "SSO state Existing"
+            "name": "SERVERLESS",
+            "value": "SERVERLESS",
+            "description": "Serverless Runtime type"
           }
         ]
       }
     },
+    "ServerlessConfigProperties": {
+      "type": "object",
+      "description": "Metadata Serverless Config Properties",
+      "properties": {
+        "platform": {
+          "$ref": "#/definitions/PlatformType",
+          "description": "Platform types"
+        },
+        "applicationTypes": {
+          "type": "array",
+          "description": "List of application types supported by informatica",
+          "items": {
+            "$ref": "#/definitions/ApplicationTypeMetadata"
+          },
+          "x-ms-identifiers": []
+        },
+        "computeUnits": {
+          "type": "array",
+          "description": "The list of compute units with possible array of values",
+          "items": {
+            "$ref": "#/definitions/ComputeUnitsMetadata"
+          },
+          "x-ms-identifiers": []
+        },
+        "executionTimeout": {
+          "type": "string",
+          "description": "Serverless Runtime execution timeout"
+        },
+        "regions": {
+          "type": "array",
+          "description": "List of supported serverless informatica regions",
+          "items": {
+            "$ref": "#/definitions/RegionsMetadata"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "ServerlessMetadataResponse": {
+      "type": "object",
+      "description": "Serverless Runtime environment Metadata response.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/RuntimeType",
+          "description": "type of the runtime environment."
+        },
+        "serverlessConfigProperties": {
+          "$ref": "#/definitions/ServerlessConfigProperties",
+          "description": "serverless config properties"
+        },
+        "serverlessRuntimeConfigProperties": {
+          "$ref": "#/definitions/ServerlessRuntimeConfigProperties",
+          "description": "serverless runtime config properties"
+        }
+      }
+    },
+    "ServerlessRuntimeConfigProperties": {
+      "type": "object",
+      "description": "Serverless Runtime config properties.",
+      "properties": {
+        "cdiConfigProps": {
+          "type": "array",
+          "description": "The List of Informatica Serverless Runtime CDI Config Properties.",
+          "items": {
+            "$ref": "#/definitions/CdiConfigProps"
+          },
+          "x-ms-identifiers": []
+        },
+        "cdieConfigProps": {
+          "type": "array",
+          "description": "The List of Informatica Serverless Runtime CDIE Config Properties.",
+          "items": {
+            "$ref": "#/definitions/CdiConfigProps"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "ServerlessRuntimeConfigPropertiesUpdate": {
+      "type": "object",
+      "description": "The template for adding optional properties.",
+      "properties": {
+        "cdiConfigProps": {
+          "type": "array",
+          "description": "The List of Informatica Serverless Runtime CDI Config Properties.",
+          "items": {
+            "$ref": "#/definitions/CdiConfigProps"
+          },
+          "x-ms-identifiers": []
+        },
+        "cdieConfigProps": {
+          "type": "array",
+          "description": "The List of Informatica Serverless Runtime CDIE Config Properties.",
+          "items": {
+            "$ref": "#/definitions/CdiConfigProps"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "ServerlessRuntimeDependency": {
+      "type": "object",
+      "description": "Dependency reference for a serverless runtime resource",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Dependency ID"
+        },
+        "appContextId": {
+          "type": "string",
+          "description": "Application context ID"
+        },
+        "path": {
+          "type": "string",
+          "description": "Dependency path"
+        },
+        "documentType": {
+          "type": "string",
+          "description": "document type"
+        },
+        "description": {
+          "type": "string",
+          "description": "description of Dependency"
+        },
+        "lastUpdatedTime": {
+          "type": "string",
+          "description": "Last Update Time"
+        }
+      },
+      "required": [
+        "id",
+        "appContextId",
+        "path",
+        "documentType",
+        "description",
+        "lastUpdatedTime"
+      ]
+    },
+    "ServerlessRuntimeNetworkProfile": {
+      "type": "object",
+      "description": "Informatica Serverless Runtime Network Profile.",
+      "properties": {
+        "networkInterfaceConfiguration": {
+          "$ref": "#/definitions/NetworkInterfaceConfiguration",
+          "description": "Network Interface Configuration Profile"
+        }
+      },
+      "required": [
+        "networkInterfaceConfiguration"
+      ]
+    },
+    "ServerlessRuntimeNetworkProfileUpdate": {
+      "type": "object",
+      "description": "Informatica Serverless Network profile properties update.",
+      "properties": {
+        "networkInterfaceConfiguration": {
+          "$ref": "#/definitions/NetworkInterfaceConfigurationUpdate",
+          "description": "Network Interface Configuration Profile Update"
+        }
+      }
+    },
+    "ServerlessRuntimePropertiesCustomUpdate": {
+      "type": "object",
+      "description": "Patchable Properties of the Informatica Serverless Runtime resource",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "description of the serverless runtime."
+        },
+        "platform": {
+          "$ref": "#/definitions/PlatformType",
+          "description": "Platform type of the Serverless Runtime."
+        },
+        "applicationType": {
+          "$ref": "#/definitions/ApplicationType",
+          "description": "Application type of the Serverless Runtime environment."
+        },
+        "computeUnits": {
+          "type": "string",
+          "description": "Compute units of the serverless runtime."
+        },
+        "executionTimeout": {
+          "type": "string",
+          "description": "Serverless Execution timeout"
+        },
+        "serverlessAccountLocation": {
+          "type": "string",
+          "description": "Serverless account creation location"
+        },
+        "serverlessRuntimeNetworkProfile": {
+          "$ref": "#/definitions/ServerlessRuntimeNetworkProfileUpdate",
+          "description": "Informatica Serverless Network profile properties."
+        },
+        "advancedCustomProperties": {
+          "type": "array",
+          "description": "String KV pairs indicating Advanced custom properties.",
+          "items": {
+            "$ref": "#/definitions/AdvancedCustomProperties"
+          },
+          "x-ms-identifiers": []
+        },
+        "supplementaryFileLocation": {
+          "type": "string",
+          "description": "Supplementary file location."
+        },
+        "serverlessRuntimeConfig": {
+          "$ref": "#/definitions/ServerlessRuntimeConfigPropertiesUpdate",
+          "description": "Serverless config properties"
+        },
+        "serverlessRuntimeTags": {
+          "type": "array",
+          "description": "Serverless Runtime Tags",
+          "items": {
+            "$ref": "#/definitions/ServerlessRuntimeTag"
+          },
+          "x-ms-identifiers": []
+        },
+        "serverlessRuntimeUserContextProperties": {
+          "$ref": "#/definitions/ServerlessRuntimeUserContextPropertiesUpdate",
+          "description": "Serverless runtime user context properties"
+        }
+      }
+    },
+    "ServerlessRuntimeTag": {
+      "type": "object",
+      "description": "Serverless Runtime Tags",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name (also known as the key) of the tag."
+        },
+        "value": {
+          "type": "string",
+          "description": "The value of the tag."
+        }
+      }
+    },
+    "ServerlessRuntimeUserContextProperties": {
+      "type": "object",
+      "description": "Informatica Serverless Runtime User context properties",
+      "properties": {
+        "userContextToken": {
+          "type": "string",
+          "description": "User context token for OBO flow."
+        }
+      },
+      "required": [
+        "userContextToken"
+      ]
+    },
+    "ServerlessRuntimeUserContextPropertiesUpdate": {
+      "type": "object",
+      "description": "The template for adding optional properties.",
+      "properties": {
+        "userContextToken": {
+          "type": "string",
+          "description": "User context token for OBO flow."
+        }
+      }
+    },
     "UserDetails": {
+      "type": "object",
+      "description": "User Info of Informatica Organization resource.",
+      "properties": {
+        "firstName": {
+          "type": "string",
+          "description": "User first name.",
+          "maxLength": 50
+        },
+        "lastName": {
+          "type": "string",
+          "description": "User last name.",
+          "maxLength": 50
+        },
+        "emailAddress": {
+          "$ref": "#/definitions/email",
+          "description": "User email address."
+        },
+        "upn": {
+          "type": "string",
+          "description": "UPN of user"
+        },
+        "phoneNumber": {
+          "type": "string",
+          "description": "Phone number of the user used by for contacting them if needed",
+          "maxLength": 40
+        }
+      }
+    },
+    "UserDetailsUpdate": {
       "type": "object",
       "description": "User Info of Informatica Organization resource",
       "properties": {
@@ -1115,9 +2271,21 @@
         }
       }
     },
+    "VnetResourceId": {
+      "type": "string",
+      "format": "arm-id",
+      "description": "A type definition that refers the id to an Azure Resource Manager resource.",
+      "x-ms-arm-id-details": {
+        "allowedResources": [
+          {
+            "type": "Microsoft.Network/virtualNetworks/subnets"
+          }
+        ]
+      }
+    },
     "email": {
       "type": "string",
-      "description": "Reusable representation of an email address",
+      "description": "Reusable representation of an email address.",
       "pattern": "^[A-Za-z0-9._%+-]+@(?:[A-Za-z0-9-]+\\.)+[A-Za-z]{2,}$"
     }
   },
