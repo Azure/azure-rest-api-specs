@@ -2153,13 +2153,22 @@ components:
         tools:
           type: array
           items:
-            $ref: '#/components/schemas/MessageAttachmentToolDefinition'
+            $ref: '#/components/schemas/MessageAttachmentToolAssignment'
           description: The tools to add to this file.
       description: This describes to which tools a file has been attached.
-    MessageAttachmentToolDefinition:
-      anyOf:
-        - $ref: '#/components/schemas/CodeInterpreterToolDefinition'
-        - $ref: '#/components/schemas/FileSearchToolDefinition'
+    MessageAttachmentToolAssignment:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          anyOf:
+            - type: string
+              enum:
+                - file_serach
+                - code_interpreter
+            - type: string
+          description: The type of the tool being selected.
       description: The possible tools to which files will be added by this message
     MessageContent:
       type: object

@@ -3128,8 +3128,9 @@
           "type": "array",
           "description": "The tools to add to this file.",
           "items": {
-            "$ref": "#/definitions/MessageAttachmentToolDefinition"
-          }
+            "$ref": "#/definitions/MessageAttachmentToolAssignment"
+          },
+          "x-ms-identifiers": []
         }
       },
       "required": [
@@ -3137,8 +3138,25 @@
         "tools"
       ]
     },
-    "MessageAttachmentToolDefinition": {
-      "x-nullable": false
+    "MessageAttachmentToolAssignment": {
+      "type": "object",
+      "description": "The possible tools to which files will be added by this message",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The type of the tool being selected.",
+          "enum": [
+            "file_serach",
+            "code_interpreter"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true
+          }
+        }
+      },
+      "required": [
+        "type"
+      ]
     },
     "MessageContent": {
       "type": "object",

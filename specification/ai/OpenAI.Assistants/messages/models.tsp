@@ -105,14 +105,15 @@ model MessageAttachment {
   fileId: string;
 
   /** The tools to add to this file. */
-  tools: MessageAttachmentToolDefinition[];
+  tools: MessageAttachmentToolAssignment[];
 }
 
 /** The possible tools to which files will be added by this message */
 #suppress "@azure-tools/typespec-autorest/union-unsupported" "This union is defined according to the OpenAI API"
 @added(ServiceApiVersions.v2024_05_01_preview)
-union MessageAttachmentToolDefinition {
-  CodeInterpreterToolDefinition | FileSearchToolDefinition,
+model MessageAttachmentToolAssignment {
+  /** The type of the tool being selected. */
+  type: "file_serach" | "code_interpreter" | string;
 }
 
 // Message content types: "text" | "image_file"
