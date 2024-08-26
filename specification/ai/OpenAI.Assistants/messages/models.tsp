@@ -113,7 +113,7 @@ model MessageAttachment {
 @added(ServiceApiVersions.v2024_05_01_preview)
 model MessageAttachmentToolAssignment {
   /** The type of the tool being selected. */
-  type: "file_serach" | "code_interpreter" | string;
+  type: "file_search" | "code_interpreter" | string;
 }
 
 // Message content types: "text" | "image_file"
