@@ -55,6 +55,6 @@ function Get-Suppression {
     [string]$Path
   )
 
-  $suppressions = Get-Suppressions $Tool $Path
+  $suppressions = @(Get-Suppressions $Tool $Path)
   return $suppressions ? $suppressions[0] : $null;
 }
