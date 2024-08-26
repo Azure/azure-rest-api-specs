@@ -3,7 +3,6 @@
 See [Use SDK Automation from REST API specifications](https://github.com/Azure/azure-sdk-for-java/wiki/TypeSpec-Java-Quickstart#use-sdk-automation-from-rest-api-specifications) in TypeSpec Java QuickStart.
 
 `flavor` is always `azure` for Azure SDK.
-`examples-directory` is same as that in e.g. typespec-autorest emitter.
 
 ## Example for Java data-plane SDK
 
@@ -16,7 +15,6 @@ See [Use SDK Automation from REST API specifications](https://github.com/Azure/a
     package-dir: "azure-ai-openai"
     flavor: azure
     namespace: "com.azure.ai.openai"
-    examples-directory: "{project-root}/examples"
 ```
 
 ## Example for Java management-plane SDK
@@ -33,7 +31,6 @@ See [Use SDK Automation from REST API specifications](https://github.com/Azure/a
     flavor: "azure"
     namespace: "com.azure.resourcemanager.standbypool"
     service-name: "Standby Pool"
-    examples-directory: "{project-root}/examples"
 ```
 
 # Add AutoRest Configuration for Java SDK 
