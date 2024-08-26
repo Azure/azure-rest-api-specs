@@ -2409,6 +2409,24 @@
       },
       "x-ms-client-name": "AssignedResourceDeploymentsMetadata"
     },
+    "TextAnalysisAuthoringAzureOpenAIDeploymentSettings": {
+      "required": [
+        "deploymentName",
+        "resourceId"
+      ],
+      "type": "object",
+      "properties": {
+        "deploymentName": {
+          "description": "Name of the deployment of the model that the customer would like this training request to use.",
+          "type": "string"
+        },
+        "resourceId": {
+          "description": "AOAI Resource the customer would like to use to train their P2M model.\n            Looks like this: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{resourceName}.",
+          "type": "string"
+        }
+      },
+      "x-ms-client-name": "AzureOpenAIDeploymentSettings"
+    },
     "TextAnalysisAuthoringCompositionSetting": {
       "enum": [
         "separateComponents",
@@ -2799,6 +2817,17 @@
       },
       "x-ms-discriminator-value": "CustomTextSentiment",
       "x-ms-client-name": "CustomTextSentimentEvaluationSummary"
+    },
+    "TextAnalysisAuthoringDataGenerationSettings": {
+      "description": "Represents the Prompt2Model settings of an exported project.",
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "description": "Whether training data generation is enabled for this project.",
+          "type": "boolean"
+        }
+      },
+      "x-ms-client-name": "DataGenerationSettings"
     },
     "TextAnalysisAuthoringDeleteDeploymentOptions": {
       "description": "Represents the options for deleting a project deployment.",
@@ -3306,6 +3335,7 @@
           "$ref": "#/definitions/TextAnalysisAuthoringProjectKind"
         },
         "evaluationOptions": {
+          "description": "Evaluation split options.",
           "$ref": "#/definitions/TextAnalysisAuthoringEvaluationOptions"
         }
       },
@@ -3318,6 +3348,10 @@
       "properties": {
         "category": {
           "description": "The class category.",
+          "type": "string"
+        },
+        "description": {
+          "description": "The class description.",
           "type": "string"
         }
       },
@@ -3344,6 +3378,10 @@
         },
         "category": {
           "description": "The entity category.",
+          "type": "string"
+        },
+        "description": {
+          "description": "The entity description.",
           "type": "string"
         }
       },
@@ -3443,6 +3481,10 @@
           "items": {
             "$ref": "#/definitions/TextAnalysisAuthoringExportedCustomEntityRecognitionDocument"
           }
+        },
+        "dataGeneration": {
+          "description": "The prompt2model settings belonging to the project.",
+          "$ref": "#/definitions/TextAnalysisAuthoringDataGenerationSettings"
         }
       },
       "x-ms-discriminator-value": "CustomEntityRecognition",
@@ -3599,6 +3641,10 @@
           "items": {
             "$ref": "#/definitions/TextAnalysisAuthoringExportedCustomSingleLabelClassificationDocument"
           }
+        },
+        "dataGeneration": {
+          "description": "The prompt2model settings belonging to the project.",
+          "$ref": "#/definitions/TextAnalysisAuthoringDataGenerationSettings"
         }
       },
       "x-ms-discriminator-value": "CustomSingleLabelClassification",
@@ -3731,6 +3777,10 @@
       "properties": {
         "category": {
           "description": "The entity category.",
+          "type": "string"
+        },
+        "description": {
+          "description": "The entity description.",
           "type": "string"
         }
       },
@@ -5008,6 +5058,10 @@
         "evaluationOptions": {
           "description": "Represents the evaluation options. By default, the evaluation kind is percentage, with training split percentage as 80, and testing split percentage as 20.",
           "$ref": "#/definitions/TextAnalysisAuthoringEvaluationOptions"
+        },
+        "azureOpenAIDeploymentSettings": {
+          "description": "Represents the AOAI resource information required to run a P2M training job when the customer brings their own AOAI capacity.",
+          "$ref": "#/definitions/TextAnalysisAuthoringAzureOpenAIDeploymentSettings"
         }
       },
       "x-ms-client-name": "TrainingJobOptions"
