@@ -7,6 +7,7 @@ param (
 )
 
 . $PSScriptRoot/Logging-Functions.ps1
+. $PSScriptRoot/Suppressions-Functions.ps1
 
 $typespecFolders = &"$PSScriptRoot/Get-TypeSpec-Folders.ps1" -BaseCommitish:$BaseCommitish -TargetCommitish:$TargetCommitish -CheckAll:$CheckAll
 
@@ -15,6 +16,17 @@ if ($typespecFolders) {
   $typespecFolders = $typespecFolders.Split('',[System.StringSplitOptions]::RemoveEmptyEntries)
   foreach ($typespecFolder in $typespecFolders) {
     LogGroupStart "Validating $typespecFolder"
+
+    if ($CheckAll) {
+      $suppression = Get-Suppression "TypeSpecValidationAll" $typespecFolder
+      if ($suppression) {
+        $reason = $suppression["reason"] ?? "<no reason specified>"
+        LogInfo "  Suppressed: $reason"
+        LogGroupEnd
+        continue
+      }
+    }
+
     LogInfo "npm exec --no -- tsv $typespecFolder"
     npm exec --no -- tsv $typespecFolder 2>&1 | Write-Host
     if ($LASTEXITCODE) {
