@@ -542,6 +542,9 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "The capacity was successfully resumed"
+          },
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
@@ -648,6 +651,9 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "The capacity was successfully suspended"
+          },
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
@@ -717,6 +723,7 @@
         }
       },
       "required": [
+        "properties",
         "sku"
       ],
       "allOf": [
@@ -934,6 +941,10 @@
         ]
       }
     },
+    "ResumeOkStatusCode": {
+      "type": "object",
+      "description": "The capacity was successfully resumed"
+    },
     "RpSku": {
       "type": "object",
       "description": "Represents the SKU name and Azure pricing tier for Microsoft Fabric capacity resource.",
@@ -1076,6 +1087,10 @@
           }
         ]
       }
+    },
+    "SuspendOkStatusCode": {
+      "type": "object",
+      "description": "The capacity was successfully suspended"
     }
   },
   "parameters": {

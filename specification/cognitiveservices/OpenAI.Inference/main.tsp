@@ -5,9 +5,11 @@ import "./routes/common.tsp";
 import "./routes/audio_speech.tsp";
 import "./routes/audio_transcription.tsp";
 import "./routes/audio_translation.tsp";
+import "./routes/batches.tsp";
 import "./routes/completions.tsp";
 import "./routes/images.tsp";
 import "./routes/embeddings.tsp";
+import "./routes/files.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Versioning;
@@ -70,4 +72,7 @@ enum ServiceApiVersions {
 
   @useDependency(Azure.Core.Versions.v1_0_Preview_1)
   v2024_06_01: "2024-06-01",
+
+  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
+  v2024_07_01_Preview: "2024-07-01-preview",
 }
