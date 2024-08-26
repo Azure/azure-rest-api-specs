@@ -68,8 +68,7 @@ else {
   # Cache responses to GitHub web requests, for efficiency and to prevent rate limiting
   $responseCache = $_ResponseCache
 
-  # - Forward slashes on both Linu
-  x and Windows
+  # - Forward slashes on both Linux and Windows
   # - May be nested 4 or 5 levels deep, perhaps even deeper
   # - Examples
   #   - specification/foo/data-plane/Foo/stable/2023-01-01/Foo.json
