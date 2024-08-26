@@ -49,7 +49,7 @@ function Get-Suppressions {
     First suppressions matching tool and path (may be null).  See the "get-suppressions" tool for the definition
     of the suppression object.
 #>
-function Get-FirstSuppression {
+function Get-Suppression {
   param (
     [string]$Tool,
     [string]$Path

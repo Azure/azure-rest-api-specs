@@ -18,12 +18,12 @@ Set-StrictMode -Version 3
 . $PSScriptRoot/Logging-Functions.ps1
 . $PSScriptRoot/Suppressions-Functions.ps1
 
-function Get-FirstSuppression {
+function Get-Suppression {
   param (
     [string]$fileInSpecFolder
   )
 
-  $suppression = Get-FirstSuppression "TypeSpecRequirement" $fileInSpecFolder
+  $suppression = Get-Suppression "TypeSpecRequirement" $fileInSpecFolder
 
   if ($suppression) {
     # Each path must specify a single version (without wildcards) under "preview|stable"
@@ -81,7 +81,7 @@ else {
 
     $fullPath = (Join-Path $repoPath $file)
 
-    $suppression = Get-FirstSuppression $fullPath
+    $suppression = Get-Suppression $fullPath
     if ($suppression) {
       $reason = $suppression["reason"] ?? "<no reason specified>"
 
