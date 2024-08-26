@@ -180,17 +180,11 @@ interface DocumentTranslationOperations {
       maxpagesize?: int32 = 50;
 
       @doc("Ids to use in filtering")
-      @query({
-        name: "ids",
-        format: "csv",
-      })
+      @query("ids")
       ids?: uuid[];
 
       @doc("Statuses to use in filtering")
-      @query({
-        name: "statuses",
-        format: "csv",
-      })
+      @query("statuses")
       statuses?: string[];
 
       @doc("the start datetime to get items after")
@@ -202,10 +196,7 @@ interface DocumentTranslationOperations {
       createdDateTimeUtcEnd?: utcDateTime;
 
       @doc("the sorting query for the collection (ex: 'CreatedDateTimeUtc asc','CreatedDateTimeUtc desc')")
-      @query({
-        name: "orderby",
-        format: "csv",
-      })
+      @query("orderby")
       orderby?: string[];
     },
     TranslationsStatus
@@ -385,17 +376,11 @@ interface DocumentTranslationOperations {
       maxpagesize?: int32 = 50;
 
       @doc("Ids to use in filtering")
-      @query({
-        name: "ids",
-        format: "csv",
-      })
+      @query("ids")
       ids?: uuid[];
 
       @doc("Statuses to use in filtering")
-      @query({
-        name: "statuses",
-        format: "csv",
-      })
+      @query("statuses")
       statuses?: string[];
 
       @doc("the start datetime to get items after")
@@ -407,10 +392,7 @@ interface DocumentTranslationOperations {
       createdDateTimeUtcEnd?: utcDateTime;
 
       @doc("the sorting query for the collection (ex: 'CreatedDateTimeUtc asc','CreatedDateTimeUtc desc')")
-      @query({
-        name: "orderby",
-        format: "csv",
-      })
+      @query("orderby")
       orderby?: string[];
     },
     DocumentsStatus

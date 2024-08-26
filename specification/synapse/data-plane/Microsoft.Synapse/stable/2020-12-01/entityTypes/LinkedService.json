@@ -15,6 +15,10 @@
           "type": "string",
           "description": "Type of linked service."
         },
+        "version": {
+          "type": "string",
+          "description": "Version of the linked service."
+        },
         "connectVia": {
           "description": "The integration runtime reference.",
           "$ref": "../artifacts.json#/definitions/IntegrationRuntimeReference"
@@ -1353,7 +1357,6 @@
         },
         "serviceEndpoint": {
           "type": "object",
-          "x-ms-format": "dfe-string",
           "description": "File service endpoint of the Azure File Storage resource. It is mutually exclusive with connectionString, sasUri property."
         },
         "credential": {
@@ -1663,87 +1666,70 @@
       "properties": {
         "server": {
           "type": "object",
-          "x-ms-format": "dfe-string",
           "description": "Server name for connection. Type: string."
         },
         "port": {
           "type": "object",
-          "x-ms-format": "dfe-int",
           "description": "The port for the connection. Type: integer."
         },
         "username": {
           "type": "object",
-          "x-ms-format": "dfe-string",
           "description": "Username for authentication. Type: string."
         },
         "database": {
           "type": "object",
-          "x-ms-format": "dfe-string",
           "description": "Database name for connection. Type: string."
         },
         "sslMode": {
           "type": "object",
-          "x-ms-format": "dfe-int",
           "description": "SSL mode for connection. Type: integer. 0: disable, 1:allow, 2: prefer, 3: require, 4: verify-ca, 5: verify-full. Type: integer."
         },
         "schema": {
           "type": "object",
-          "x-ms-format": "dfe-string",
           "description": "Sets the schema search path. Type: string."
         },
         "pooling": {
           "type": "object",
-          "x-ms-format": "dfe-bool",
           "description": "Whether connection pooling should be used. Type: boolean."
         },
         "connectionTimeout": {
           "type": "object",
-          "x-ms-format": "dfe-int",
           "description": "The time to wait (in seconds) while trying to establish a connection before terminating the attempt and generating an error. Type: integer."
         },
         "commandTimeout": {
           "type": "object",
-          "x-ms-format": "dfe-int",
           "description": "The time to wait (in seconds) while trying to execute a command before terminating the attempt and generating an error. Set to zero for infinity. Type: integer."
         },
         "trustServerCertificate": {
           "type": "object",
-          "x-ms-format": "dfe-bool",
           "description": "Whether to trust the server certificate without validating it. Type: boolean."
         },
         "sslCertificate": {
           "type": "object",
-          "x-ms-format": "dfe-string",
           "description": "Location of a client certificate to be sent to the server. Type: string."
         },
         "sslKey": {
           "type": "object",
-          "x-ms-format": "dfe-string",
           "description": "Location of a client key for a client certificate to be sent to the server. Type: string."
         },
         "sslPassword": {
           "type": "object",
-          "x-ms-format": "dfe-string",
           "description": "Password for a key for a client certificate. Type: string."
         },
         "readBufferSize": {
           "type": "object",
-          "x-ms-format": "dfe-int",
           "description": "Determines the size of the internal buffer uses when reading. Increasing may improve performance if transferring large values from the database. Type: integer."
         },
         "logParameters": {
           "type": "object",
-          "x-ms-format": "dfe-bool",
           "description": "When enabled, parameter values are logged when commands are executed. Type: boolean."
         },
         "timezone": {
           "type": "object",
-          "x-ms-format": "dfe-string",
           "description": "Gets or sets the session timezone. Type: string."
         },
         "encoding": {
           "type": "object",
-          "x-ms-format": "dfe-string",
           "description": "Gets or sets the .NET encoding that will be used to encode/decode PostgreSQL string data. Type: string"
         },
         "password": {
@@ -3414,6 +3400,18 @@
         "scope": {
           "type": "object",
           "description": "The scope of the access required. It describes what kind of access will be requested. Type: string (or Expression with resultType string)."
+        },
+        "servicePrincipalCredentialType": {
+          "type": "object",
+          "description": "The service principal credential type to use in Server-To-Server authentication. 'ServicePrincipalKey' for key/secret, 'ServicePrincipalCert' for certificate. Type: string (or Expression with resultType string)."
+        },
+        "servicePrincipalEmbeddedCert": {
+          "description": "Specify the base64 encoded certificate of your application registered in Azure Active Directory. Type: string (or Expression with resultType string).",
+          "$ref": "../artifacts.json#/definitions/SecretBase"
+        },
+        "servicePrincipalEmbeddedCertPassword": {
+          "description": "Specify the password of your certificate if your certificate has a password and you are using AadServicePrincipal authentication. Type: string (or Expression with resultType string).",
+          "$ref": "../artifacts.json#/definitions/SecretBase"
         }
       },
       "required": [
@@ -7416,6 +7414,18 @@
           "description": "The client secret of your application registered in Azure Active Directory. Type: string (or Expression with resultType string).",
           "$ref": "../artifacts.json#/definitions/SecretBase"
         },
+        "servicePrincipalCredentialType": {
+          "type": "object",
+          "description": "The service principal credential type to use in Server-To-Server authentication. 'ServicePrincipalKey' for key/secret, 'ServicePrincipalCert' for certificate. Type: string (or Expression with resultType string)."
+        },
+        "servicePrincipalEmbeddedCert": {
+          "description": "Specify the base64 encoded certificate of your application registered in Azure Active Directory. Type: string (or Expression with resultType string).",
+          "$ref": "../artifacts.json#/definitions/SecretBase"
+        },
+        "servicePrincipalEmbeddedCertPassword": {
+          "description": "Specify the password of your certificate if your certificate has a password and you are using AadServicePrincipal authentication. Type: string (or Expression with resultType string).",
+          "$ref": "../artifacts.json#/definitions/SecretBase"
+        },
         "encryptedCredential": {
           "type": "object",
           "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string)."
@@ -7424,8 +7434,7 @@
       "required": [
         "siteUrl",
         "tenantId",
-        "servicePrincipalId",
-        "servicePrincipalKey"
+        "servicePrincipalId"
       ]
     },
     "AzureSynapseArtifactsLinkedService": {
