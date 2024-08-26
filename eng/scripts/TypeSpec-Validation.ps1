@@ -22,7 +22,7 @@ if ($typespecFolders) {
       $suppression = Get-Suppression "TypeSpecValidationAll" $typespecFolder
       if ($suppression) {
         $reason = $suppression["reason"] ?? "<no reason specified>"
-        LogInfo "  Suppressed: $reason"
+        LogInfo "Suppressed: $reason"
         LogGroupEnd
         continue
       }
