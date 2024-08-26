@@ -39,14 +39,12 @@ input-file:
 ## Suppression
 
 ``` yaml
-input-file:
-  - Microsoft.Titan/preview/2024-06-24-preview/titan.json
-
-suppressions:
-  - code: BodyTopLevelProperties
+directive:
+  - suppress: BodyTopLevelProperties
     from: titan.json
     reason: Issue https://github.com/Azure/azure-openapi-validator/issues/722. The BodyTopLevelProperties check failing.
-  - code: OBJECT_ADDITIONAL_PROPERTIES
+
+  - suppress: OBJECT_ADDITIONAL_PROPERTIES
     from: titan.json
-    reason: Adding location as top level property. Supressing tooling gap.
+    reason: Adding location and tags as top level property. Suppressing tooling gap.
 ```
