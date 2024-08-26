@@ -37,14 +37,6 @@ These settings apply only when `--tag=package-2024-12` is specified on the comma
 ```yaml $(tag) == 'package-2024-12'
 input-file:
   - Microsoft.HybridConnectivity/PublicCloud/stable/2024-12-01/publicCloud.json
-```
-
-### Tag: package-2024-12
-
-These settings apply only when `--tag=package-2024-12` is specified on the command line.
-
-```yaml $(tag) == 'package-2024-12'
-input-file:
   - Microsoft.HybridConnectivity/stable/2024-12-01/hybridconnectivity.json
 ```
 
