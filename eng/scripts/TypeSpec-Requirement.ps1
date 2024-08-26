@@ -18,7 +18,7 @@ Set-StrictMode -Version 3
 . $PSScriptRoot/Logging-Functions.ps1
 . $PSScriptRoot/Suppressions-Functions.ps1
 
-function Get-Suppression {
+function Get-FirstSuppression {
   param (
     [string]$fileInSpecFolder
   )
@@ -81,7 +81,7 @@ else {
 
     $fullPath = (Join-Path $repoPath $file)
 
-    $suppression = Get-Suppression $fullPath
+    $suppression = Get-FirstSuppression $fullPath
     if ($suppression) {
       $reason = $suppression["reason"] ?? "<no reason specified>"
 
