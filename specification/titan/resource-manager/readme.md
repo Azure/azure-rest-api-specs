@@ -46,4 +46,7 @@ suppressions:
   - code: BodyTopLevelProperties
     from: titan.json
     reason: Issue https://github.com/Azure/azure-openapi-validator/issues/722. The BodyTopLevelProperties check failing.
- ```
+  - code: OBJECT_ADDITIONAL_PROPERTIES
+    from: titan.json
+    reason: Adding location as top level property. Supressing tooling gap.
+```

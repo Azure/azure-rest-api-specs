@@ -86,10 +86,6 @@ model ComputeDeviceProperties {
   @visibility("read")
   serialNumber: string;
 
-  @doc("The Service Tree ID owner of the machine.")
-  @visibility("read")
-  serviceTreeId: string;
-
   @doc("If the machine type is a server, the environment in which workloads are run. One of: Baremetal, VM, Container.")
   @visibility("read")
   workloadType: string;
