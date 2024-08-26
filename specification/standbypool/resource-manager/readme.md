@@ -27,7 +27,7 @@ These are the global settings for the standbypool.
 ``` yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-preview-2024-03
+tag: package-2024-03
 ```
 
 ### Suppression
