@@ -7,6 +7,11 @@
   },
   "paths": {},
   "definitions": {
+    "Azure.Core.uuid": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Universally Unique Identifier"
+    },
     "ErrorResponse": {
       "type": "object",
       "description": "Error response.",
@@ -276,7 +281,9 @@
           "type": "string"
         },
         "jobId": {
-          "type": "string"
+          "$ref": "#/definitions/Azure.Core.uuid",
+          "description": "job ID",
+          "readOnly": true
         },
         "lastUpdatedDateTime": {
           "format": "date-time",
@@ -862,6 +869,10 @@
         },
         "stringIndexType": {
           "$ref": "#/definitions/StringIndexType"
+        },
+        "query": {
+          "type": "string",
+          "description": "(Optional) If provided, the query will be used to generate the summary."
         }
       }
     },
