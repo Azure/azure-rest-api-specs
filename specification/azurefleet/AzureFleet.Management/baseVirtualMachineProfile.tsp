@@ -390,7 +390,7 @@ model WinRMListener {
    * or the [Azure Key Vault virtual machine extension for
    * Windows](https://docs.microsoft.com/azure/virtual-machines/extensions/key-vault-windows).
    */
-  certificateUrl?: string;
+  certificateUrl?: url;
 }
 
 /**
@@ -558,7 +558,7 @@ model VaultCertificate {
    * or the [Azure Key Vault virtual machine extension for
    * Windows](https://docs.microsoft.com/azure/virtual-machines/extensions/key-vault-windows).
    */
-  certificateUrl?: string;
+  certificateUrl?: url;
 
   /**
    * For Windows VMs, specifies the certificate store on the Virtual Machine to
@@ -777,7 +777,7 @@ model VirtualHardDisk {
   /**
    * Specifies the virtual hard disk's uri.
    */
-  uri?: string;
+  uri?: url;
 }
 
 /**
@@ -1350,7 +1350,7 @@ model BootDiagnostics {
    * screenshot. If storageUri is not specified while enabling boot diagnostics,
    * managed storage will be used.
    */
-  storageUri?: string;
+  storageUri?: url;
 }
 
 /**
@@ -1479,7 +1479,7 @@ model KeyVaultSecretReference {
   /**
    * The URL referencing a secret in a Key Vault.
    */
-  secretUrl: string;
+  secretUrl: url;
 
   /**
    * The relative URL of the Key Vault containing the secret.
@@ -2094,7 +2094,7 @@ union NetworkApiVersion {
   /**
    * Initial version supported. Later versions are supported as well.
    */
-  `2020-11-01`: "2020-11-01",
+  v2020_11_01: "2020-11-01",
 }
 
 /**
