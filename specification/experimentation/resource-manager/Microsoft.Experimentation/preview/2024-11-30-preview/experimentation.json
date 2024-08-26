@@ -394,7 +394,7 @@
       "description": "An experiment workspace.",
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
         }
       ],
       "properties": {
@@ -404,7 +404,7 @@
           "x-ms-client-flatten": true
         },
         "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/systemData",
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData",
           "readOnly": true
         },
         "identity": {
@@ -412,8 +412,34 @@
           "$ref": "#/definitions/ManagedIdentity"
         },
         "sku": {
-          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/Sku",
+          "$ref": "#/definitions/Sku",
           "readOnly": true
+        }
+      }
+    },
+    "Sku": {
+      "type": "object",
+      "description": "Describes an experiment workspace SKU.",
+      "required": [
+        "name"
+      ],
+      "properties": {
+        "name": {
+          "description": "The SKU name of the experiment workspace. Required for the creation of a new experiment workspace.",
+          "type": "string"
+        },
+        "tier": {
+          "description": "The SKU tier based on the SKU name.",
+          "enum": [
+            "Free",
+            "Advanced"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "SkuTier",
+            "modelAsString": true
+          }
         }
       }
     },
@@ -465,8 +491,8 @@
             ]
           }
         },
-        "storageAccountResourceId": {
-          "description": "The resource identifier of storage account which experiment workspace uses for generating experiment analysis results.",
+        "logsExporterStorageResourceId": {
+          "description": "The resource identifier of storage account where logs are exported from Log Analytics workspace. Experiment workspace uses it generating experiment analysis results.",
           "type": "string",
           "format": "arm-id",
           "x-ms-arm-id-details": {

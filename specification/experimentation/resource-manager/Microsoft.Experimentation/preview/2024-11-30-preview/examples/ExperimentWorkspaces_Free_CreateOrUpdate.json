@@ -2,7 +2,7 @@
   "parameters": {
     "subscriptionId": "fa5fc227-a624-475e-b696-cdd604c735bc",
     "resourceGroupName": "res9871",
-    "experimentWorkspaceName": "expWorkspace6",
+    "experimentWorkspaceName": "expWorkspace7",
     "api-version": "2024-11-30-preview",
     "parameters": {
       "location": "eastus2euap",
@@ -10,14 +10,8 @@
         "newKey": "newVal"
       },
       "properties": {
-        "variantAssignmentConfigPublishing": {
-          "enabled": true,
-          "storageAccountResourceId": "/subscriptions/fa5fc227-a624-475e-b696-cdd604c735bc/resourceGroups/res9871/providers/Microsoft.Storage/storageAccounts/sto9871",
-          "userAssignedIdentityResourceId": "/subscriptions/fa5fc227-a624-475e-b696-cdd604c735bc/resourceGroups/eu2cgroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/id1"
-        },
-        "remoteVariantAssignment": {
-          "enabled": true
-        }
+        "logAnalyticsResourceId": "/subscriptions/fa5fc227-a624-475e-b696-cdd604c735bc/resourceGroups/res9871/providers/Microsoft.OperationalInsights/workspaces/log9871",
+        "logsExporterStorageAccountResourceId": "/subscriptions/fa5fc227-a624-475e-b696-cdd604c735bc/resourceGroups/res9871/providers/Microsoft.Storage/storageAccounts/sto9871"
       },
       "identity": {
         "type": "UserAssigned",
@@ -27,15 +21,15 @@
         }
       },
       "sku": {
-        "name": "Advanced"
+        "name": "Free"
       }
     }
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/{subscription-id}/resourceGroups/res9871/providers/Microsoft.Experimentation/experimentWorkspaces/expWorkspace6",
-        "name": "expWorkspace6",
+        "id": "/subscriptions/fa5fc227-a624-475e-b696-cdd604c735bc/resourceGroups/res9871/providers/Microsoft.Experimentation/experimentWorkspaces/expWorkspace7",
+        "name": "expWorkspace7",
         "type": "Microsoft.Experimentation/experimentWorkspaces",
         "location": "eastus2euap",
         "tags": {
@@ -43,18 +37,9 @@
         },
         "properties": {
           "expWorkspaceId": "02270d43-f68a-401b-b526-86942525c351",
-          "afdTasUrl": "https://test-exp-s2s.msedge.net/exptas194/12270d43-f68a-401b-b526-86942525c350-testanvyas6/api/v1/tas",
           "provisioningState": "Succeeded",
-          "variantAssignmentConfigPublishing": {
-            "enabled": true,
-            "storageAccountResourceId": "/subscriptions/fa5fc227-a624-475e-b696-cdd604c735bc/resourceGroups/res9871/providers/Microsoft.Storage/storageAccounts/sto9871",
-            "userAssignedIdentityResourceId": "/subscriptions/fa5fc227-a624-475e-b696-cdd604c735bc/resourceGroups/eu2cgroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/id1"
-          },
-          "remoteVariantAssignment": {
-            "enabled": true,
-            "provisioningState": "Succeeded",
-            "endpoint": "https://test-exp-s2s.msedge.net/exptas194/02270d43-f68a-401b-b526-86942525c350-testanvyas6/api/v1/tas"
-          }
+          "logAnalyticsResourceId": "/subscriptions/fa5fc227-a624-475e-b696-cdd604c735bc/resourceGroups/res9871/providers/Microsoft.OperationalInsights/workspaces/log9871",
+          "logsExporterStorageAccountResourceId": "/subscriptions/fa5fc227-a624-475e-b696-cdd604c735bc/resourceGroups/res9871/providers/Microsoft.Storage/storageAccounts/sto9871"
         },
         "identity": {
           "type": "UserAssigned",
@@ -70,15 +55,15 @@
           }
         },
         "sku": {
-          "name": "Advanced",
-          "tier": "Advanced"
+          "name": "Free",
+          "tier": "Free"
         }
       }
     },
     "201": {
       "body": {
-        "id": "/subscriptions/{subscription-id}/resourceGroups/res9871/providers/Microsoft.Experimentation/experimentWorkspaces/expWorkspace6",
-        "name": "expWorkspace6",
+        "id": "/subscriptions/fa5fc227-a624-475e-b696-cdd604c735bc/resourceGroups/res9871/providers/Microsoft.Experimentation/experimentWorkspaces/expWorkspace7",
+        "name": "expWorkspace7",
         "type": "Microsoft.Experimentation/experimentWorkspaces",
         "location": "eastus2euap",
         "tags": {
@@ -86,18 +71,9 @@
         },
         "properties": {
           "expWorkspaceId": "02270d43-f68a-401b-b526-86942525c352",
-          "afdTasUrl": "https://test-exp-s2s.msedge.net/exptas194/02270d43-f68a-401b-b526-86942525c350-testanvyas7/api/v1/tas",
           "provisioningState": "Succeeded",
-          "variantAssignmentConfigPublishing": {
-            "enabled": true,
-            "storageAccountResourceId": "/subscriptions/fa5fc227-a624-475e-b696-cdd604c735bc/resourceGroups/res9871/providers/Microsoft.Storage/storageAccounts/sto9871",
-            "userAssignedIdentityResourceId": "/subscriptions/fa5fc227-a624-475e-b696-cdd604c735bc/resourceGroups/eu2cgroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/id1"
-          },
-          "remoteVariantAssignment": {
-            "enabled": true,
-            "provisioningState": "Accepted",
-            "endpoint": "https://test-exp-s2s.msedge.net/exptas194/02270d43-f68a-401b-b526-86942525c350-testanvyas6/api/v1/tas"
-          }
+          "logAnalyticsResourceId": "/subscriptions/fa5fc227-a624-475e-b696-cdd604c735bc/resourceGroups/res9871/providers/Microsoft.OperationalInsights/workspaces/log9871",
+          "logsExporterStorageAccountResourceId": "/subscriptions/fa5fc227-a624-475e-b696-cdd604c735bc/resourceGroups/res9871/providers/Microsoft.Storage/storageAccounts/sto9871"
         },
         "identity": {
           "type": "UserAssigned",
@@ -113,8 +89,8 @@
           }
         },
         "sku": {
-          "name": "Advanced",
-          "tier": "Advanced"
+          "name": "Free",
+          "tier": "Free"
         }
       }
     }
