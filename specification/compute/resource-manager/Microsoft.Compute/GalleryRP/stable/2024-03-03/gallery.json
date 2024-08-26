@@ -1737,6 +1737,623 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/galleries/{galleryName}/inVMAccessControlProfiles/{inVMAccessControlProfileName}": {
+      "put": {
+        "tags": [
+          "GalleryInVMAccessControlProfiles"
+        ],
+        "operationId": "GalleryInVMAccessControlProfiles_CreateOrUpdate",
+        "description": "Create or update a gallery inVMAccessControlProfile.",
+        "parameters": [
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "galleryName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Shared Image Gallery in which the InVMAccessControlProfile is to be created."
+          },
+          {
+            "name": "inVMAccessControlProfileName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the gallery inVMAccessControlProfile to be created or updated. The allowed characters are alphabets and numbers with dots, dashes, and periods allowed in the middle. The maximum length is 80 characters."
+          },
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "galleryInVMAccessControlProfile",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GalleryInVMAccessControlProfile"
+            },
+            "description": "Parameters supplied to the create or update gallery inVMAccessControlProfile operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/GalleryInVMAccessControlProfile"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/GalleryInVMAccessControlProfile"
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "schema": {
+              "$ref": "#/definitions/GalleryInVMAccessControlProfile"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common-types/v1/common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Create or update a gallery inVMAccessControlProfile.": {
+            "$ref": "./examples/galleryResourceProfileExamples/GalleryInVMAccessControlProfile_Create.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "GalleryInVMAccessControlProfiles"
+        ],
+        "operationId": "GalleryInVMAccessControlProfiles_Update",
+        "description": "Update a gallery inVMAccessControlProfile.",
+        "parameters": [
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "galleryName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Shared Image Gallery in which the InVMAccessControlProfile is to be updated."
+          },
+          {
+            "name": "inVMAccessControlProfileName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the gallery inVMAccessControlProfile to be updated. The allowed characters are alphabets and numbers with dots, dashes, and periods allowed in the middle. The maximum length is 80 characters."
+          },
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "galleryInVMAccessControlProfile",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GalleryInVMAccessControlProfileUpdate"
+            },
+            "description": "Parameters supplied to the update gallery inVMAccessControlProfile operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/GalleryInVMAccessControlProfile"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common-types/v1/common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Update a gallery inVMAccessControlProfile.": {
+            "$ref": "./examples/galleryResourceProfileExamples/GalleryInVMAccessControlProfile_Update.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "GalleryInVMAccessControlProfiles"
+        ],
+        "operationId": "GalleryInVMAccessControlProfiles_Get",
+        "description": "Retrieves information about a gallery inVMAccessControlProfile.",
+        "parameters": [
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "galleryName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Shared Image Gallery from which the InVMAccessControlProfiles are to be retrieved."
+          },
+          {
+            "name": "inVMAccessControlProfileName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the gallery inVMAccessControlProfile to be retrieved."
+          },
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/GalleryInVMAccessControlProfile"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common-types/v1/common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a gallery inVMAccessControlProfile.": {
+            "$ref": "./examples/galleryResourceProfileExamples/GalleryInVMAccessControlProfile_Get.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "GalleryInVMAccessControlProfiles"
+        ],
+        "operationId": "GalleryInVMAccessControlProfiles_Delete",
+        "description": "Delete a gallery inVMAccessControlProfile.",
+        "parameters": [
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "galleryName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "he name of the Shared Image Gallery in which the InVMAccessControlProfile resides."
+          },
+          {
+            "name": "inVMAccessControlProfileName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the gallery inVMAccessControlProfile to be deleted."
+          },
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common-types/v1/common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Delete a gallery inVMAccessControlProfile.": {
+            "$ref": "./examples/galleryResourceProfileExamples/GalleryInVMAccessControlProfile_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/galleries/{galleryName}/inVMAccessControlProfiles/{inVMAccessControlProfileName}/versions/{inVMAccessControlProfileVersionName}": {
+      "put": {
+        "tags": [
+          "GalleryInVMAccessControlProfileVersions"
+        ],
+        "operationId": "GalleryInVMAccessControlProfileVersions_CreateOrUpdate",
+        "description": "Create or update a gallery inVMAccessControlProfile version.",
+        "parameters": [
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "galleryName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Shared Image Gallery in which the inVMAccessControlProfile resides."
+          },
+          {
+            "name": "inVMAccessControlProfileName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the gallery inVMAccessControlProfile in which the inVMAccessControlProfile version is to be created."
+          },
+          {
+            "name": "inVMAccessControlProfileVersionName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the gallery inVMAccessControlProfile version to be created. Needs to follow semantic version name pattern: The allowed characters are digit and period. Digits must be within the range of a 32-bit integer. Format: <MajorVersion>.<MinorVersion>.<Patch>"
+          },
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "galleryInVMAccessControlProfileVersion",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GalleryInVMAccessControlProfileVersion"
+            },
+            "description": "Parameters supplied to the create or update gallery inVMAccessControlProfile version operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/GalleryInVMAccessControlProfileVersion"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/GalleryInVMAccessControlProfileVersion"
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "schema": {
+              "$ref": "#/definitions/GalleryInVMAccessControlProfileVersion"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common-types/v1/common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Create or update a Gallery InVMAccessControlProfile Version.": {
+            "$ref": "./examples/galleryResourceProfileExamples/GalleryInVMAccessControlProfileVersion_Create.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "GalleryInVMAccessControlProfileVersions"
+        ],
+        "operationId": "GalleryInVMAccessControlProfileVersions_Update",
+        "description": "Update a gallery inVMAccessControlProfile version.",
+        "parameters": [
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "galleryName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Shared Image Gallery in which the inVMAccessControlProfile resides."
+          },
+          {
+            "name": "inVMAccessControlProfileName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the gallery inVMAccessControlProfile in which the inVMAccessControlProfile version is to be updated."
+          },
+          {
+            "name": "inVMAccessControlProfileVersionName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the gallery inVMAccessControlProfile version to be updated. Needs to follow semantic version name pattern: The allowed characters are digit and period. Digits must be within the range of a 32-bit integer. Format: <MajorVersion>.<MinorVersion>.<Patch>"
+          },
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "galleryInVMAccessControlProfileVersion",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GalleryInVMAccessControlProfileVersionUpdate"
+            },
+            "description": "Parameters supplied to the update gallery inVMAccessControlProfile version operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/GalleryInVMAccessControlProfileVersion"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common-types/v1/common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Update a Gallery InVMAccessControlProfile Version.": {
+            "$ref": "./examples/galleryResourceProfileExamples/GalleryInVMAccessControlProfileVersion_Update.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "GalleryInVMAccessControlProfileVersions"
+        ],
+        "operationId": "GalleryInVMAccessControlProfileVersions_Get",
+        "description": "Retrieves information about a gallery inVMAccessControlProfile version.",
+        "parameters": [
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "galleryName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Shared Image Gallery in which the inVMAccessControlProfile resides."
+          },
+          {
+            "name": "inVMAccessControlProfileName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the gallery inVMAccessControlProfile in which the inVMAccessControlProfile version resides."
+          },
+          {
+            "name": "inVMAccessControlProfileVersionName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the gallery inVMAccessControlProfile version to be retrieved."
+          },
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/GalleryInVMAccessControlProfileVersion"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common-types/v1/common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a gallery inVMAccessControlProfile version.": {
+            "$ref": "./examples/galleryResourceProfileExamples/GalleryInVMAccessControlProfileVersion_Get.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "GalleryInVMAccessControlProfileVersions"
+        ],
+        "operationId": "GalleryInVMAccessControlProfileVersions_Delete",
+        "description": "Delete a gallery inVMAccessControlProfile version.",
+        "parameters": [
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "galleryName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Shared Image Gallery in which the inVMAccessControlProfile resides."
+          },
+          {
+            "name": "inVMAccessControlProfileName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the gallery inVMAccessControlProfile in which the inVMAccessControlProfile version resides."
+          },
+          {
+            "name": "inVMAccessControlProfileVersionName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the gallery inVMAccessControlProfile version to be deleted."
+          },
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common-types/v1/common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Delete a gallery inVMAccessControlProfile version.": {
+            "$ref": "./examples/galleryResourceProfileExamples/GalleryInVMAccessControlProfileVersion_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/galleries/{galleryName}/inVMAccessControlProfiles": {
+      "put": {
+        "tags": [
+          "GalleryInVMAccessControlProfiles"
+        ],
+        "operationId": "GalleryInVMAccessControlProfiles_ListByGallery",
+        "description": "List gallery inVMAccessControlProfiles in a gallery.",
+        "parameters": [
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "galleryName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Shared Image Gallery from which the InVMAccessControlProfiles are to be listed."
+          },
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/GalleryInVMAccessControlProfileList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common-types/v1/common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List gallery inVMAccessControlProfiles in a gallery.": {
+            "$ref": "./examples/galleryResourceProfileExamples/GalleryInVMAccessControlProfile_ListByGallery.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/galleries/{galleryName}/inVMAccessControlProfiles/{inVMAccessControlProfileName}/versions": {
+      "put": {
+        "tags": [
+          "GalleryInVMAccessControlProfileVersions"
+        ],
+        "operationId": "GalleryInVMAccessControlProfileVersions_ListByGalleryInVMAccessControlProfile",
+        "description": "List gallery inVMAccessControlProfile versions in a gallery inVMAccessControlProfile",
+        "parameters": [
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "galleryName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Shared Image Gallery in which the inVMAccessControlProfile resides."
+          },
+          {
+            "name": "inVMAccessControlProfileName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the gallery inVMAccessControlProfile from which the inVMAccessControlProfile versions are to be listed."
+          },
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/GalleryInVMAccessControlProfileVersionList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common-types/v1/common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List gallery inVMAccessControlProfile versions in a gallery inVMAccessControlProfile.": {
+            "$ref": "./examples/galleryResourceProfileExamples/GalleryInVMAccessControlProfileVersion_ListByGalleryInVMAccessControlProfile.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
     }
   },
   "definitions": {
@@ -3256,6 +3873,347 @@
           "x-ms-identifiers": []
         }
       }
+    },
+    "GalleryInVMAccessControlProfile": {
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/GalleryInVMAccessControlProfileProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../common-types/v1/common.json#/definitions/Resource"
+        }
+      ],
+      "description": "Specifies information about the gallery inVMAccessControlProfile that you want to create or update."
+    },
+    "GalleryInVMAccessControlProfileUpdate": {
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/GalleryInVMAccessControlProfileProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/UpdateResourceDefinition"
+        }
+      ],
+      "description": "Specifies information about the gallery inVMAccessControlProfile that you want to update."
+    },
+    "GalleryInVMAccessControlProfileProperties": {
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "The description of this gallery inVMAccessControlProfile resources. This property is updatable."
+        },
+        "osType": {
+          "type": "string",
+          "description": "This property allows you to specify the OS type of the VMs/VMSS for which this profile can be used against. Possible values are: 'Windows' or 'Linux'",
+          "enum": [
+            "Windows",
+            "Linux"
+          ],
+          "x-ms-enum": {
+            "name": "OperatingSystemTypes",
+            "modelAsString": false
+          }
+        },
+        "applicableHostEndpoint": {
+          "type": "string",
+          "description": "This property allows you to specify the Endpoint type for which this profile is defining the access control for. Possible values are: 'WireServer' or 'IMDS'",
+          "enum": [
+            "WireServer",
+            "IMDS"
+          ],
+          "x-ms-enum": {
+            "name": "EndpointTypes",
+            "modelAsString": false
+          }
+        }
+      },
+      "required": [
+        "osType",
+        "applicableHostEndpoint"
+      ],
+      "description": "Describes the properties of a gallery inVMAccessControlProfile."
+    },
+    "GalleryInVMAccessControlProfileVersion": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/GalleryInVMAccessControlProfileVersionProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../common-types/v1/common.json#/definitions/Resource"
+        }
+      ],
+      "description": "Specifies information about the gallery inVMAccessControlProfile version that you want to create or update."
+    },
+    "GalleryInVMAccessControlProfileVersionUpdate": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/GalleryInVMAccessControlProfileVersionProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/UpdateResourceDefinition"
+        }
+      ],
+      "description": "Specifies information about the gallery inVMAccessControlProfile version that you want to update."
+    },
+    "GalleryInVMAccessControlProfileVersionProperties": {
+      "properties": {
+        "mode": {
+          "type": "string",
+          "description": "This property allows you to specify whether the access control rules are in Audit mode, in Enforce mode or Disabled. Possible values are: 'Audit', 'Enforce' or 'Disabled'.",
+          "enum": [
+            "Audit",
+            "Enforce",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "AccessControlRulesMode",
+            "modelAsString": true
+          }
+        },
+        "defaultAccess": {
+          "type": "string",
+          "description": "This property allows you to specify if the requests will be allowed to access the host endpoints. Possible values are: 'Allow', 'Deny'.",
+          "enum": [
+            "Allow",
+            "Deny"
+          ],
+          "x-ms-enum": {
+            "name": "EndpointAccess",
+            "modelAsString": true
+          }
+        },
+        "rules": {
+          "$ref": "#/definitions/AccessControlRules"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/GalleryResourceProfileVersionPropertiesBase"
+        }
+      ],
+      "required": [
+        "mode",
+        "defaultAccess"
+      ],
+      "description": "Describes the properties of an inVMAccessControlProfile version."
+    },
+    "AccessControlRules": {
+      "properties": {
+        "privileges": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AccessControlRulesPrivilege"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ],
+          "description": "A list of privileges."
+        },
+        "roles": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AccessControlRulesRole"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ],
+          "description": "A list of roles."
+        },
+        "identities": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AccessControlRulesIdentity"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ],
+          "description": "A list of identities."
+        },
+        "roleAssignments": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AccessControlRulesRoleAssignment"
+          },
+          "x-ms-identifiers": [
+            "role"
+          ],
+          "description": "A list of role assignments."
+        }
+      },
+      "description": "This is the Access Control Rules specification for an inVMAccessControlProfile version."
+    },
+    "AccessControlRulesPrivilege": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the privilege."
+        },
+        "path": {
+          "type": "string",
+          "description": "The HTTP path corresponding to the privilege."
+        },
+        "queryParameters": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "The query parameters to match in the path."
+        }
+      },
+      "required": [
+        "name",
+        "path"
+      ],
+      "description": "The properties of an Access Control Rule Privilege."
+    },
+    "AccessControlRulesRole": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the role."
+        },
+        "privileges": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "A list of privileges needed by this role."
+        }
+      },
+      "required": [
+        "name",
+        "privileges"
+      ],
+      "description": "The properties of an Access Control Rule Role."
+    },
+    "AccessControlRulesIdentity": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the identity."
+        },
+        "userName": {
+          "type": "string",
+          "description": "The username corresponding to this identity."
+        },
+        "groupName": {
+          "type": "string",
+          "description": "The groupName corresponding to this identity."
+        },
+        "exePath": {
+          "type": "string",
+          "description": "The path to the executable."
+        },
+        "processName": {
+          "type": "string",
+          "description": "The process name of the executable."
+        }
+      },
+      "required": [
+        "name"
+      ],
+      "description": "The properties of an Access Control Rule Identity."
+    },
+    "AccessControlRulesRoleAssignment": {
+      "properties": {
+        "role": {
+          "type": "string",
+          "description": "The name of the role."
+        },
+        "identities": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "A list of identities that can access the privileges defined by the role."
+        }
+      },
+      "required": [
+        "role",
+        "identities"
+      ],
+      "description": "The properties of an Access Control Rule RoleAssignment."
+    },
+    "GalleryResourceProfileVersionPropertiesBase": {
+      "properties": {
+        "targetLocations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TargetRegion"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ],
+          "description": "The target regions where the Resource Profile version is going to be replicated to. This property is updatable."
+        },
+        "excludeFromLatest": {
+          "type": "boolean",
+          "description": "If set to true, Virtual Machines deployed from the latest version of the Resource Profile won't use this Profile version."
+        },
+        "publishedDate": {
+          "readOnly": true,
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp for when the Resource Profile Version is published."
+        },
+        "provisioningState": {
+          "readOnly": true,
+          "$ref": "#/definitions/GalleryProvisioningState"
+        },
+        "replicationStatus": {
+          "readOnly": true,
+          "$ref": "#/definitions/ReplicationStatus"
+        }
+      },
+      "description": "The properties of a gallery ResourceProfile version."
+    },
+    "GalleryInVMAccessControlProfileList": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/GalleryInVMAccessControlProfile"
+          },
+          "description": "A list of Gallery InVMAccessControlProfiles."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The uri to fetch the next page of inVMAccessControlProfiles in the gallery. Call ListNext() with this to fetch the next page of gallery inVMAccessControlProfiles."
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "description": "The List Gallery InVMAccessControlProfiles operation response."
+    },
+    "GalleryInVMAccessControlProfileVersionList": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/GalleryInVMAccessControlProfileVersion"
+          },
+          "description": "A list of Gallery InVMAccessControlProfile Versions."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The uri to fetch the next page of inVMAccessControlProfile versions. Call ListNext() with this to fetch the next page of gallery inVMAccessControlProfile versions."
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "description": "The List Gallery InVMAccessControlProfile Versions operation response."
     }
   },
   "parameters": {
