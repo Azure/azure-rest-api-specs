@@ -22,9 +22,64 @@ output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-digitaltwins
 
 ```yaml $(java) && $(multiapi)
 batch:
+  - tag: package-2023-01
+  - tag: package-2022-05
+  - tag: package-2021-06-30-preview
   - tag: package-2020-12
   - tag: package-2020-10
   - tag: package-2020-03-01-preview
+```
+
+### Tag: package-2023-01 and java
+
+These settings apply only when `--tag=package-2023-01 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+```yaml $(tag) == 'package-2023-01' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.digitaltwins.v2023_01_31
+  output-folder: $(azure-libraries-for-java-folder)/sdk/digitaltwins/mgmt-v2023_01_31
+  regenerate-manager: true
+  generate-interface: true
+```
+
+### Tag: package-2022-05 and java
+
+These settings apply only when `--tag=package-2022-05 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+```yaml $(tag) == 'package-2022-05' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.digitaltwins.v2022_05_31
+  output-folder: $(azure-libraries-for-java-folder)/sdk/digitaltwins/mgmt-v2022_05_31
+  regenerate-manager: true
+  generate-interface: true
+```
+
+### Tag: package-2022-05 and java
+
+These settings apply only when `--tag=package-2022-05 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+```yaml $(tag) == 'package-2022-05' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.digitaltwins.v2022_05_31
+  output-folder: $(azure-libraries-for-java-folder)/sdk/digitaltwins/mgmt-v2022_05_31
+  regenerate-manager: true
+  generate-interface: true
+```
+
+### Tag: package-2021-06-30-preview and java
+
+These settings apply only when `--tag=package-2021-06-30-preview --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2021-06-30-preview' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.digitaltwins.v2021_06_30_preview
+  output-folder: $(azure-libraries-for-java-folder)/sdk/digitaltwins/mgmt-v2021_06_30_preview
+regenerate-manager: true
+generate-interface: true
 ```
 
 ### Tag: package-2020-12 and java

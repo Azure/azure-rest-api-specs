@@ -26,7 +26,61 @@ These are the global settings for the AppConfiguration API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2021-03-01-preview
+tag: package-preview-2023-09
+```
+
+
+### Tag: package-preview-2023-09
+
+These settings apply only when `--tag=package-preview-2023-09` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2023-09'
+input-file:
+  - Microsoft.AppConfiguration/preview/2023-09-01-preview/appconfiguration.json
+```
+### Tag: package-preview-2023-08
+
+These settings apply only when `--tag=package-preview-2023-08` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2023-08'
+input-file:
+  - Microsoft.AppConfiguration/preview/2023-08-01-preview/appconfiguration.json
+```
+
+### Tag: package-2023-03-01
+
+These settings apply only when `--tag=packge-2023-03-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2023-03-01'
+input-file:
+  - Microsoft.AppConfiguration/stable/2023-03-01/appconfiguration.json
+```
+
+### Tag: package-2022-05-01
+
+These settings apply only when `--tag=2022-05-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2022-05-01'
+input-file:
+- Microsoft.AppConfiguration/stable/2022-05-01/appconfiguration.json
+```
+
+### Tag: package-2022-03-01-preview
+
+These settings apply only when `--tag=2022-03-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2022-03-01-preview'
+input-file:
+- Microsoft.AppConfiguration/preview/2022-03-01-preview/appconfiguration.json
+```
+
+### Tag: package-2021-10-01-preview
+
+These settings apply only when `--tag=2021-10-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-10-01-preview'
+input-file:
+- Microsoft.AppConfiguration/preview/2021-10-01-preview/appconfiguration.json
 ```
 
 ### Tag: package-2021-03-01-preview
@@ -94,17 +148,16 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-powershell
-  - repo: azure-sdk-for-python-track2
+  - repo: azure-sdk-for-python
   - repo: azure-sdk-for-net-track2
   - repo: azure-sdk-for-java
-  - repo: azure-sdk-for-net
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-ruby
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_app_configuration']
   - repo: azure-resource-manager-schemas
+  - repo: azure-powershell
 ```
 
 ## C#
@@ -159,7 +212,30 @@ directive:
     from: appconfiguration.json
     where: $.definitions.OperationDefinition.properties.isDataAction
     reason: This is a standardized ARM API.
+  - suppress: NestedResourcesMustHaveListOperation
+    from: appconfiguration.json
+    where: $.definitions.KeyValue
+    resource: Listing is not supported in ARM templates.
+  - suppress: TrackedResourceListByImmediateParent
+    from: appconfiguration.json
+    where: $.definitions.KeyValue
+    reason: Listing is not supported in ARM templates.
+  - suppress: NestedResourcesMustHaveListOperation
+    from: appconfiguration.json
+    where: $.definitions.Snapshot
+    reason: Following KeyValue, with both being proxies for data plane resources.
+  - suppress: AllProxyResourcesShouldHaveDelete
+    from: appconfiguration.json
+    where: $.definitions.Snapshot
+    reason: This is a proxy for a data plane snapshot which doesn't support delete.
+  - suppress: RequiredReadOnlySystemData
+    from: appconfiguration.json
+    where: 
+      - '$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppConfiguration/configurationStores/{configStoreName}/snapshots/{snapshotName}"].get'
+      - '$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppConfiguration/configurationStores/{configStoreName}/snapshots/{snapshotName}"].put'
+    reason: This is a proxy for a data plane snapshot which doesn't have the info.
+  - suppress: TrackedResourcePatchOperation
+    from: appconfiguration.json
+    where: $.definitions.Replica
+    reason: Replica is a proxy resource
 ```
-
-
-

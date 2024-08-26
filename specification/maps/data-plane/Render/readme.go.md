@@ -13,7 +13,6 @@ export-clients: true
 
 ``` yaml $(go) && $(multiapi)
 batch:
-  - tag: 2.0-preview
   - tag: 2.1-preview
 ```
 

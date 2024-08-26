@@ -69,7 +69,13 @@
             "$ref": "../../../common/1.0/types.json#/parameters/ODataOrderBy"
           },
           {
-            "$ref": "../../../common/1.0/types.json#/parameters/ODataTop"
+            "in": "query",
+            "name": "$top",
+            "description": "Returns only the first n results. Optional.",
+            "type": "integer",
+            "format": "int32",
+            "maximum": 1000,
+            "x-ms-parameter-location": "method"
           },
           {
             "$ref": "../../../common/1.0/types.json#/parameters/ODataSkipToken"
@@ -2411,6 +2417,11 @@
               }
             ]
           }
+        },
+        "teamInformation": {
+          "$ref": "#/definitions/TeamInformation",
+          "description": "Describes a team for the incident",
+          "type": "object"
         },
         "title": {
           "description": "The title of the incident",

@@ -1147,14 +1147,22 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ApplicationProviderAuthorization"
-          }
+          },
+          "x-ms-identifiers": [
+            "principalId",
+            "roleDefinitionId"
+          ]
         },
         "artifacts": {
           "description": "The collection of managed application artifacts. The portal will use the files specified as artifacts to construct the user experience of creating a managed application from a managed application definition.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/ApplicationArtifact"
-          }
+          },
+          "x-ms-identifiers": [
+            "name",
+            "uri"
+          ]
         },
         "description": {
           "type": "string",
@@ -1514,6 +1522,9 @@
           "items": {
             "$ref": "#/definitions/Operation"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "description": "List of Microsoft.Solutions operations."
         },
         "nextLink": {

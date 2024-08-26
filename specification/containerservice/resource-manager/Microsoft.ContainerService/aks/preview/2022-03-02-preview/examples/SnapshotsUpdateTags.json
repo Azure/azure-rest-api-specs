@@ -1,0 +1,45 @@
+{
+  "parameters": {
+    "api-version": "2022-03-02-preview",
+    "subscriptionId": "subid1",
+    "resourceGroupName": "rg1",
+    "resourceName": "snapshot1",
+    "parameters": {
+      "tags": {
+        "key2": "new-val2",
+        "key3": "val3"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "snapshot1",
+        "id": "/subscriptions/subid1/resourcegroups/rg1/providers/Microsoft.ContainerService/snapshots/snapshot1",
+        "type": "Microsoft.ContainerService/Snapshots",
+        "location": "westus",
+        "tags": {
+          "key1": "val1",
+          "key2": "val2"
+        },
+        "systemData": {
+          "createdBy": "user1",
+          "createdByType": "User",
+          "createdAt": "2021-08-09T20:13:23.298420761Z"
+        },
+        "properties": {
+          "creationData": {
+            "sourceResourceId": "/subscriptions/subid1/resourcegroups/rg1/providers/Microsoft.ContainerService/managedClusters/cluster1/agentPools/pool0"
+          },
+          "snapshotType": "NodePool",
+          "nodeImageVersion": "AKSUbuntu-1804gen2containerd-2021.09.11",
+          "kubernetesVersion": "1.20.5",
+          "osType": "Linux",
+          "osSku": "Ubuntu",
+          "vmSize": "Standard_D2s_v3",
+          "enableFIPS": false
+        }
+      }
+    }
+  }
+}

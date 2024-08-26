@@ -6,7 +6,7 @@ Configuration for generating Translator Text SDK.
 
 The current release is `release_3_0`.
 
-The current document batch preview release is `release_1_0_preview.1'`.
+The current document batch release is `release_1_1'`.
 
 ``` yaml
 
@@ -17,13 +17,7 @@ openapi-type: data-plane
 
 ``` yaml
 
-tag: release_1_0_preview.1
-add-credentials: true
-openapi-type: data-plane
-```
-``` yaml
-
-tag: release_1_0
+tag: release_1_1
 add-credentials: true
 openapi-type: data-plane
 ```
@@ -41,6 +35,12 @@ This setting is for batch document translator and only applied when `--tag=relea
 input-file: stable/v1.0/TranslatorBatch.json
 ```
 
+### 1.1 Batch API
+This setting is for batch document translator and only applied when `--tag=release_1_1` is specified on the command line.
+``` yaml $(tag) == 'release_1_1'
+input-file: stable/v1.1/TranslatorBatch.json
+```
+
 ### Release 3.0
 These settings apply only when `--tag=release_3_0` is specified on the command line.
 
@@ -55,11 +55,7 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-python
   - repo: azure-sdk-for-net-track2
-  - repo: azure-sdk-for-java
-  - repo: azure-sdk-for-go
-  - repo: azure-sdk-for-nodejs
 ```
 
 ## CSharp Settings

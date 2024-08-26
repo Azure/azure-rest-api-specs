@@ -1,0 +1,335 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "MobileNetworkManagementClient",
+    "description": "The resources in this swagger specification will be used to manage the virtual network functions deployed using mobile network. They are standard mobile network properties defined by 3GPP in TS 29.571 v16.6.0.",
+    "version": "2022-03-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {},
+  "definitions": {
+    "Ipv4Addr": {
+      "type": "string",
+      "pattern": "^(([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])$",
+      "description": "IPv4 address.",
+      "example": "198.51.100.1"
+    },
+    "Ipv4AddrRm": {
+      "$ref": "#/definitions/Ipv4Addr",
+      "x-nullable": true,
+      "description": "IPv4 address or null."
+    },
+    "Ipv4AddrMask": {
+      "type": "string",
+      "pattern": "^(([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])(\\/([0-9]|[1-2][0-9]|3[0-2]))$",
+      "description": "IPv4 address mask.",
+      "example": "198.51.0.0/16"
+    },
+    "Ipv4AddrMaskRm": {
+      "$ref": "#/definitions/Ipv4AddrMask",
+      "x-nullable": true,
+      "description": "IPv4 address mask or null."
+    },
+    "BitRate": {
+      "type": "string",
+      "pattern": "^\\d+(\\.\\d+)? (bps|Kbps|Mbps|Gbps|Tbps)$",
+      "description": "Bit rate."
+    },
+    "BitRateRm": {
+      "$ref": "#/definitions/BitRate",
+      "x-nullable": true,
+      "description": "Bit rate or null."
+    },
+    "Ambr": {
+      "description": "Aggregate Maximum Bit Rate.",
+      "type": "object",
+      "properties": {
+        "uplink": {
+          "$ref": "#/definitions/BitRate",
+          "description": "Uplink bit rate."
+        },
+        "downlink": {
+          "$ref": "#/definitions/BitRate",
+          "description": "Downlink bit rate."
+        }
+      },
+      "required": [
+        "uplink",
+        "downlink"
+      ]
+    },
+    "AmbrRm": {
+      "$ref": "#/definitions/Ambr",
+      "x-nullable": true,
+      "description": "Aggregate Maximum Bit Rate or null."
+    },
+    "RfspIndex": {
+      "type": "integer",
+      "format": "int32",
+      "minimum": 1,
+      "maximum": 256,
+      "description": "RAT/Frequency Selection Priority Index"
+    },
+    "RfspIndexRm": {
+      "$ref": "#/definitions/RfspIndex",
+      "x-nullable": true,
+      "description": "RAT/Frequency Selection Priority Index or null"
+    },
+    "5Qi": {
+      "type": "integer",
+      "format": "int32",
+      "minimum": 0,
+      "maximum": 255,
+      "description": "5G QoS Identifier."
+    },
+    "5QiRm": {
+      "$ref": "#/definitions/5Qi",
+      "x-nullable": true,
+      "description": "5G QoS Identifier or null."
+    },
+    "5QiPriorityLevel": {
+      "type": "integer",
+      "format": "int32",
+      "minimum": 1,
+      "maximum": 127,
+      "description": "5G QoS Identifier priority level."
+    },
+    "5QiPriorityLevelRm": {
+      "$ref": "#/definitions/5QiPriorityLevel",
+      "x-nullable": true,
+      "description": "5G QoS Identifier priority level or null."
+    },
+    "ArpPriorityLevel": {
+      "type": "integer",
+      "format": "int32",
+      "minimum": 1,
+      "maximum": 15,
+      "description": "ARP priority level."
+    },
+    "ArpPriorityLevelRm": {
+      "$ref": "#/definitions/ArpPriorityLevel",
+      "x-nullable": true,
+      "description": "ARP priority level or null."
+    },
+    "PreemptionCapability": {
+      "type": "string",
+      "description": "Preemption capability.",
+      "enum": [
+        "NotPreempt",
+        "MayPreempt"
+      ],
+      "x-ms-enum": {
+        "name": "PreemptionCapability",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "NotPreempt",
+            "description": "Cannot preempt"
+          },
+          {
+            "value": "MayPreempt",
+            "description": "May preempt"
+          }
+        ]
+      }
+    },
+    "PreemptionVulnerability": {
+      "type": "string",
+      "description": "Preemption vulnerability.",
+      "enum": [
+        "NotPreemptable",
+        "Preemptable"
+      ],
+      "x-ms-enum": {
+        "name": "PreemptionVulnerability",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "NotPreemptable",
+            "description": "Cannot be preempted"
+          },
+          {
+            "value": "Preemptable",
+            "description": "May be preempted"
+          }
+        ]
+      }
+    },
+    "Arp": {
+      "description": "Allocation and Retention Priority (ARP) parameters.",
+      "type": "object",
+      "properties": {
+        "priorityLevel": {
+          "$ref": "#/definitions/ArpPriorityLevel",
+          "description": "ARP priority level."
+        },
+        "preemptCap": {
+          "$ref": "#/definitions/PreemptionCapability",
+          "description": "ARP preemption capability."
+        },
+        "preemptVuln": {
+          "$ref": "#/definitions/PreemptionVulnerability",
+          "description": "ARP preemption vulnerability"
+        }
+      },
+      "required": [
+        "priorityLevel",
+        "preemptCap",
+        "preemptVuln"
+      ]
+    },
+    "Mcc": {
+      "type": "string",
+      "pattern": "^\\d{3}$",
+      "description": "Mobile Country Code."
+    },
+    "MccRm": {
+      "$ref": "#/definitions/Mcc",
+      "x-nullable": true,
+      "description": "Mobile Country Code or null."
+    },
+    "Mnc": {
+      "type": "string",
+      "pattern": "^\\d{2,3}$",
+      "description": "Mobile Network Code."
+    },
+    "MncRm": {
+      "$ref": "#/definitions/Mnc",
+      "x-nullable": true,
+      "description": "Mobile Network Code or null."
+    },
+    "PlmnId": {
+      "description": "Public Land Mobile Network (PLMN) ID.",
+      "type": "object",
+      "properties": {
+        "mcc": {
+          "$ref": "#/definitions/Mcc",
+          "description": "Mobile Country Code (MCC)."
+        },
+        "mnc": {
+          "$ref": "#/definitions/Mnc",
+          "description": "Mobile Network Code (MNC)."
+        }
+      },
+      "required": [
+        "mcc",
+        "mnc"
+      ]
+    },
+    "PlmnIdRm": {
+      "$ref": "#/definitions/PlmnId",
+      "x-nullable": true,
+      "description": "Public Land Mobile Network ID or null."
+    },
+    "Tac": {
+      "type": "string",
+      "pattern": "(^[A-Fa-f0-9]{4}$)|(^[A-Fa-f0-9]{6}$)",
+      "description": "Tracking Area Code (TAC)."
+    },
+    "TacRm": {
+      "$ref": "#/definitions/Tac",
+      "x-nullable": true,
+      "description": "Tracking Area Code (TAC) or null."
+    },
+    "CoreNetworkType": {
+      "type": "string",
+      "description": "Core network type.",
+      "enum": [
+        "5GC",
+        "EPC"
+      ],
+      "x-ms-enum": {
+        "name": "CoreNetworkType",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "5GC",
+            "description": "5G core"
+          },
+          {
+            "value": "EPC",
+            "description": "EPC / 4G core"
+          }
+        ]
+      }
+    },
+    "CoreNetworkTypeRm": {
+      "$ref": "#/definitions/CoreNetworkType",
+      "x-nullable": true,
+      "description": "Core network type or null."
+    },
+    "PduSessionType": {
+      "type": "string",
+      "description": "PDU session type (IPv4/IPv6).",
+      "enum": [
+        "IPv4",
+        "IPv6"
+      ],
+      "x-ms-enum": {
+        "name": "PduSessionType",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "IPv4"
+          },
+          {
+            "value": "IPv6"
+          }
+        ]
+      }
+    },
+    "PduSessionTypeRm": {
+      "$ref": "#/definitions/PduSessionType",
+      "x-nullable": true,
+      "description": "PDU session type or null."
+    },
+    "Snssai": {
+      "description": "Single-Network Slice Selection Assistance Information (S-NSSAI).",
+      "type": "object",
+      "properties": {
+        "sst": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0,
+          "maximum": 255,
+          "description": "Slice/Service Type (SST)."
+        },
+        "sd": {
+          "type": "string",
+          "pattern": "^[A-Fa-f0-9]{6}$",
+          "description": "Slice Differentiator (SD)."
+        }
+      },
+      "required": [
+        "sst"
+      ]
+    }
+  }
+}

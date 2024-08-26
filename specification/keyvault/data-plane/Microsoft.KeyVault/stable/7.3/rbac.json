@@ -1,0 +1,932 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "KeyVaultClient",
+    "description": "The key vault client performs cryptographic key operations and vault operations against the Key Vault service.",
+    "version": "7.3"
+  },
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{vaultBaseUrl}",
+    "useSchemePrefix": false,
+    "positionInOperation": "first",
+    "parameters": [
+      {
+        "name": "vaultBaseUrl",
+        "description": "The vault name, for example https://myvault.vault.azure.net.",
+        "required": true,
+        "type": "string",
+        "in": "path",
+        "x-ms-skip-url-encoding": true
+      }
+    ]
+  },
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/{scope}/providers/Microsoft.Authorization/roleDefinitions/{roleDefinitionName}": {
+      "delete": {
+        "tags": [
+          "RoleDefinitions"
+        ],
+        "operationId": "RoleDefinitions_Delete",
+        "description": "Deletes a custom role definition.",
+        "parameters": [
+          {
+            "name": "scope",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The scope of the role definition to delete. Managed HSM only supports '/'.",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "roleDefinitionName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name (GUID) of the role definition to delete."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns information about the role definition that was deleted.",
+            "schema": {
+              "$ref": "#/definitions/RoleDefinition"
+            }
+          },
+          "default": {
+            "description": "Key Vault error response describing why the operation failed.",
+            "schema": {
+              "$ref": "common.json#/definitions/KeyVaultError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DeleteRoleDefinition": {
+            "$ref": "./examples/DeleteRoleDefinition-example.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "RoleDefinitions"
+        ],
+        "operationId": "RoleDefinitions_CreateOrUpdate",
+        "description": "Creates or updates a custom role definition.",
+        "parameters": [
+          {
+            "name": "scope",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The scope of the role definition to create or update. Managed HSM only supports '/'.",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "roleDefinitionName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the role definition to create or update. It can be any valid GUID."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RoleDefinitionCreateParameters"
+            },
+            "description": "Parameters for the role definition."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created - Returns information about the role definition.",
+            "schema": {
+              "$ref": "#/definitions/RoleDefinition"
+            }
+          },
+          "default": {
+            "description": "Key Vault error response describing why the operation failed.",
+            "schema": {
+              "$ref": "common.json#/definitions/KeyVaultError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PutRoleDefinition": {
+            "$ref": "./examples/PutRoleDefinition-example.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "RoleDefinitions"
+        ],
+        "operationId": "RoleDefinitions_Get",
+        "description": "Get the specified role definition.",
+        "parameters": [
+          {
+            "name": "scope",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The scope of the role definition to get. Managed HSM only supports '/'.",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "roleDefinitionName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the role definition to get."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns information about the role definition.",
+            "schema": {
+              "$ref": "#/definitions/RoleDefinition"
+            }
+          },
+          "default": {
+            "description": "Key Vault error response describing why the operation failed.",
+            "schema": {
+              "$ref": "common.json#/definitions/KeyVaultError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetRoleAssignments": {
+            "$ref": "./examples/GetRoleDefinition-example.json"
+          }
+        }
+      }
+    },
+    "/{scope}/providers/Microsoft.Authorization/roleDefinitions": {
+      "get": {
+        "tags": [
+          "RoleDefinitions"
+        ],
+        "operationId": "RoleDefinitions_List",
+        "description": "Get all role definitions that are applicable at scope and above.",
+        "parameters": [
+          {
+            "name": "scope",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The scope of the role definition.",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The filter to apply on the operation. Use atScopeAndBelow filter to search below the given scope as well."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns an array of role definitions.",
+            "schema": {
+              "$ref": "#/definitions/RoleDefinitionListResult"
+            }
+          },
+          "default": {
+            "description": "Key Vault error response describing why the operation failed.",
+            "schema": {
+              "$ref": "common.json#/definitions/KeyVaultError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "ListRoleDefinitions": {
+            "$ref": "./examples/ListRoleDefinitions-example.json"
+          }
+        },
+        "x-ms-odata": "#/definitions/RoleDefinitionFilter"
+      }
+    },
+    "/{scope}/providers/Microsoft.Authorization/roleAssignments/{roleAssignmentName}": {
+      "delete": {
+        "tags": [
+          "RoleAssignments"
+        ],
+        "operationId": "RoleAssignments_Delete",
+        "description": "Deletes a role assignment.",
+        "parameters": [
+          {
+            "name": "scope",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The scope of the role assignment to delete.",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "roleAssignmentName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the role assignment to delete."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns information about the role assignment.",
+            "schema": {
+              "$ref": "#/definitions/RoleAssignment"
+            }
+          },
+          "default": {
+            "description": "Key Vault error response describing why the operation failed.",
+            "schema": {
+              "$ref": "common.json#/definitions/KeyVaultError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DeleteRoleAssignments": {
+            "$ref": "./examples/DeleteRoleAssignments-example.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "RoleAssignments"
+        ],
+        "operationId": "RoleAssignments_Create",
+        "description": "Creates a role assignment.",
+        "parameters": [
+          {
+            "name": "scope",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The scope of the role assignment to create.",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "roleAssignmentName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the role assignment to create. It can be any valid GUID."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RoleAssignmentCreateParameters"
+            },
+            "description": "Parameters for the role assignment."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created - Returns information about the role assignment.",
+            "schema": {
+              "$ref": "#/definitions/RoleAssignment"
+            }
+          },
+          "default": {
+            "description": "Key Vault error response describing why the operation failed.",
+            "schema": {
+              "$ref": "common.json#/definitions/KeyVaultError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PutRoleAssignments": {
+            "$ref": "./examples/PutRoleAssignments-example.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "RoleAssignments"
+        ],
+        "operationId": "RoleAssignments_Get",
+        "description": "Get the specified role assignment.",
+        "parameters": [
+          {
+            "name": "scope",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The scope of the role assignment.",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "roleAssignmentName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the role assignment to get."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns information about the role assignment.",
+            "schema": {
+              "$ref": "#/definitions/RoleAssignment"
+            }
+          },
+          "default": {
+            "description": "Key Vault error response describing why the operation failed.",
+            "schema": {
+              "$ref": "common.json#/definitions/KeyVaultError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetRoleAssignments": {
+            "$ref": "./examples/GetRoleAssignments-example.json"
+          }
+        }
+      }
+    },
+    "/{scope}/providers/Microsoft.Authorization/roleAssignments": {
+      "get": {
+        "tags": [
+          "RoleAssignments"
+        ],
+        "operationId": "RoleAssignments_ListForScope",
+        "description": "Gets role assignments for a scope.",
+        "parameters": [
+          {
+            "name": "scope",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The scope of the role assignments.",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The filter to apply on the operation. Use $filter=atScope() to return all role assignments at or above the scope. Use $filter=principalId eq {id} to return all role assignments at, above or below the scope for the specified principal."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns an array of role assignments.",
+            "schema": {
+              "$ref": "#/definitions/RoleAssignmentListResult"
+            }
+          },
+          "default": {
+            "description": "Key Vault error response describing why the operation failed.",
+            "schema": {
+              "$ref": "common.json#/definitions/KeyVaultError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "ListRoleAssignments": {
+            "$ref": "./examples/ListRoleAssignments-example.json"
+          }
+        },
+        "x-ms-odata": "#/definitions/RoleAssignmentFilter"
+      }
+    }
+  },
+  "definitions": {
+    "RoleAssignmentFilter": {
+      "properties": {
+        "principalId": {
+          "type": "string",
+          "description": "Returns role assignment of the specific principal."
+        }
+      },
+      "description": "Role Assignments filter"
+    },
+    "RoleAssignmentPropertiesWithScope": {
+      "properties": {
+        "scope": {
+          "$ref": "#/definitions/RoleScope"
+        },
+        "roleDefinitionId": {
+          "type": "string",
+          "description": "The role definition ID."
+        },
+        "principalId": {
+          "type": "string",
+          "description": "The principal ID."
+        }
+      },
+      "description": "Role assignment properties with scope."
+    },
+    "RoleAssignment": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The role assignment ID."
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The role assignment name."
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The role assignment type."
+        },
+        "properties": {
+          "$ref": "#/definitions/RoleAssignmentPropertiesWithScope",
+          "description": "Role assignment properties."
+        }
+      },
+      "description": "Role Assignments"
+    },
+    "RoleAssignmentListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RoleAssignment"
+          },
+          "description": "Role assignment list."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to use for getting the next set of results."
+        }
+      },
+      "description": "Role assignment list operation result."
+    },
+    "RoleAssignmentProperties": {
+      "properties": {
+        "roleDefinitionId": {
+          "type": "string",
+          "description": "The role definition ID used in the role assignment."
+        },
+        "principalId": {
+          "type": "string",
+          "description": "The principal ID assigned to the role. This maps to the ID inside the Active Directory. It can point to a user, service principal, or security group."
+        }
+      },
+      "required": [
+        "roleDefinitionId",
+        "principalId"
+      ],
+      "description": "Role assignment properties."
+    },
+    "RoleDefinitionCreateParameters": {
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/RoleDefinitionProperties",
+          "description": "Role definition properties."
+        }
+      },
+      "required": [
+        "properties"
+      ],
+      "description": "Role definition create parameters."
+    },
+    "RoleAssignmentCreateParameters": {
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/RoleAssignmentProperties",
+          "description": "Role assignment properties."
+        }
+      },
+      "required": [
+        "properties"
+      ],
+      "description": "Role assignment create parameters."
+    },
+    "RoleDefinitionFilter": {
+      "properties": {
+        "roleName": {
+          "type": "string",
+          "description": "Returns role definition with the specific name."
+        }
+      },
+      "description": "Role Definitions filter"
+    },
+    "Permission": {
+      "properties": {
+        "actions": {
+          "type": "array",
+          "description": "Action permissions that are granted.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "notActions": {
+          "type": "array",
+          "description": "Action permissions that are excluded but not denied. They may be granted by other role definitions assigned to a principal.",
+          "items": {
+            "type": "string",
+            "description": "Not actions."
+          }
+        },
+        "dataActions": {
+          "type": "array",
+          "description": "Data action permissions that are granted.",
+          "items": {
+            "$ref": "#/definitions/DataAction"
+          }
+        },
+        "notDataActions": {
+          "type": "array",
+          "description": "Data action permissions that are excluded but not denied. They may be granted by other role definitions assigned to a principal.",
+          "items": {
+            "$ref": "#/definitions/DataAction"
+          }
+        }
+      },
+      "description": "Role definition permissions."
+    },
+    "RoleDefinitionProperties": {
+      "properties": {
+        "roleName": {
+          "type": "string",
+          "description": "The role name."
+        },
+        "description": {
+          "type": "string",
+          "description": "The role definition description."
+        },
+        "type": {
+          "type": "string",
+          "description": "The role type.",
+          "enum": [
+            "AKVBuiltInRole",
+            "CustomRole"
+          ],
+          "x-ms-enum": {
+            "name": "RoleType",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "BuiltInRole",
+                "value": "AKVBuiltInRole",
+                "description": "Built in role."
+              },
+              {
+                "value": "CustomRole",
+                "description": "Custom role."
+              }
+            ]
+          },
+          "x-ms-client-name": "roleType"
+        },
+        "permissions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Permission"
+          },
+          "description": "Role definition permissions."
+        },
+        "assignableScopes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RoleScope"
+          },
+          "description": "Role definition assignable scopes."
+        }
+      },
+      "description": "Role definition properties."
+    },
+    "RoleDefinition": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The role definition ID."
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The role definition name."
+        },
+        "type": {
+          "type": "string",
+          "description": "The role definition type.",
+          "readOnly": true,
+          "enum": [
+            "Microsoft.Authorization/roleDefinitions"
+          ],
+          "x-ms-enum": {
+            "name": "RoleDefinitionType",
+            "modelAsString": true
+          }
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/RoleDefinitionProperties",
+          "description": "Role definition properties."
+        }
+      },
+      "description": "Role definition."
+    },
+    "RoleDefinitionListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RoleDefinition"
+          },
+          "description": "Role definition list."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to use for getting the next set of results."
+        }
+      },
+      "description": "Role definition list operation result."
+    },
+    "RoleScope": {
+      "type": "string",
+      "description": "The role scope.",
+      "enum": [
+        "/",
+        "/keys"
+      ],
+      "x-ms-enum": {
+        "name": "RoleScope",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Global",
+            "value": "/",
+            "description": "Global scope"
+          },
+          {
+            "name": "Keys",
+            "value": "/keys",
+            "description": "Keys scope"
+          }
+        ]
+      }
+    },
+    "DataAction": {
+      "type": "string",
+      "description": "Supported permissions for data actions.",
+      "enum": [
+        "Microsoft.KeyVault/managedHsm/keys/read/action",
+        "Microsoft.KeyVault/managedHsm/keys/write/action",
+        "Microsoft.KeyVault/managedHsm/keys/deletedKeys/read/action",
+        "Microsoft.KeyVault/managedHsm/keys/deletedKeys/recover/action",
+        "Microsoft.KeyVault/managedHsm/keys/backup/action",
+        "Microsoft.KeyVault/managedHsm/keys/restore/action",
+        "Microsoft.KeyVault/managedHsm/roleAssignments/delete/action",
+        "Microsoft.KeyVault/managedHsm/roleAssignments/read/action",
+        "Microsoft.KeyVault/managedHsm/roleAssignments/write/action",
+        "Microsoft.KeyVault/managedHsm/roleDefinitions/read/action",
+        "Microsoft.KeyVault/managedHsm/roleDefinitions/write/action",
+        "Microsoft.KeyVault/managedHsm/roleDefinitions/delete/action",
+        "Microsoft.KeyVault/managedHsm/keys/encrypt/action",
+        "Microsoft.KeyVault/managedHsm/keys/decrypt/action",
+        "Microsoft.KeyVault/managedHsm/keys/wrap/action",
+        "Microsoft.KeyVault/managedHsm/keys/unwrap/action",
+        "Microsoft.KeyVault/managedHsm/keys/sign/action",
+        "Microsoft.KeyVault/managedHsm/keys/verify/action",
+        "Microsoft.KeyVault/managedHsm/keys/create",
+        "Microsoft.KeyVault/managedHsm/keys/delete",
+        "Microsoft.KeyVault/managedHsm/keys/export/action",
+        "Microsoft.KeyVault/managedHsm/keys/release/action",
+        "Microsoft.KeyVault/managedHsm/keys/import/action",
+        "Microsoft.KeyVault/managedHsm/keys/deletedKeys/delete",
+        "Microsoft.KeyVault/managedHsm/securitydomain/download/action",
+        "Microsoft.KeyVault/managedHsm/securitydomain/download/read",
+        "Microsoft.KeyVault/managedHsm/securitydomain/upload/action",
+        "Microsoft.KeyVault/managedHsm/securitydomain/upload/read",
+        "Microsoft.KeyVault/managedHsm/securitydomain/transferkey/read",
+        "Microsoft.KeyVault/managedHsm/backup/start/action",
+        "Microsoft.KeyVault/managedHsm/restore/start/action",
+        "Microsoft.KeyVault/managedHsm/backup/status/action",
+        "Microsoft.KeyVault/managedHsm/restore/status/action",
+        "Microsoft.KeyVault/managedHsm/rng/action"
+      ],
+      "x-ms-enum": {
+        "name": "DataAction",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ReadHsmKey",
+            "value": "Microsoft.KeyVault/managedHsm/keys/read/action",
+            "description": "Read HSM key metadata."
+          },
+          {
+            "name": "WriteHsmKey",
+            "value": "Microsoft.KeyVault/managedHsm/keys/write/action",
+            "description": "Update an HSM key."
+          },
+          {
+            "name": "ReadDeletedHsmKey",
+            "value": "Microsoft.KeyVault/managedHsm/keys/deletedKeys/read/action",
+            "description": "Read deleted HSM key."
+          },
+          {
+            "name": "RecoverDeletedHsmKey",
+            "value": "Microsoft.KeyVault/managedHsm/keys/deletedKeys/recover/action",
+            "description": "Recover deleted HSM key."
+          },
+          {
+            "name": "BackupHsmKeys",
+            "value": "Microsoft.KeyVault/managedHsm/keys/backup/action",
+            "description": "Backup HSM keys."
+          },
+          {
+            "name": "RestoreHsmKeys",
+            "value": "Microsoft.KeyVault/managedHsm/keys/restore/action",
+            "description": "Restore HSM keys."
+          },
+          {
+            "name": "DeleteRoleAssignment",
+            "value": "Microsoft.KeyVault/managedHsm/roleAssignments/delete/action",
+            "description": "Delete role assignment."
+          },
+          {
+            "name": "GetRoleAssignment",
+            "value": "Microsoft.KeyVault/managedHsm/roleAssignments/read/action",
+            "description": "Get role assignment."
+          },
+          {
+            "name": "WriteRoleAssignment",
+            "value": "Microsoft.KeyVault/managedHsm/roleAssignments/write/action",
+            "description": "Create or update role assignment."
+          },
+          {
+            "name": "ReadRoleDefinition",
+            "value": "Microsoft.KeyVault/managedHsm/roleDefinitions/read/action",
+            "description": "Get role definition."
+          },
+          {
+            "name": "WriteRoleDefinition",
+            "value": "Microsoft.KeyVault/managedHsm/roleDefinitions/write/action",
+            "description": "Create or update role definition."
+          },
+          {
+            "name": "DeleteRoleDefinition",
+            "value": "Microsoft.KeyVault/managedHsm/roleDefinitions/delete/action",
+            "description": "Delete role definition."
+          },
+          {
+            "name": "EncryptHsmKey",
+            "value": "Microsoft.KeyVault/managedHsm/keys/encrypt/action",
+            "description": "Encrypt using an HSM key."
+          },
+          {
+            "name": "DecryptHsmKey",
+            "value": "Microsoft.KeyVault/managedHsm/keys/decrypt/action",
+            "description": "Decrypt using an HSM key."
+          },
+          {
+            "name": "WrapHsmKey",
+            "value": "Microsoft.KeyVault/managedHsm/keys/wrap/action",
+            "description": "Wrap using an HSM key."
+          },
+          {
+            "name": "UnwrapHsmKey",
+            "value": "Microsoft.KeyVault/managedHsm/keys/unwrap/action",
+            "description": "Unwrap using an HSM key."
+          },
+          {
+            "name": "SignHsmKey",
+            "value": "Microsoft.KeyVault/managedHsm/keys/sign/action",
+            "description": "Sign using an HSM key."
+          },
+          {
+            "name": "VerifyHsmKey",
+            "value": "Microsoft.KeyVault/managedHsm/keys/verify/action",
+            "description": "Verify using an HSM key."
+          },
+          {
+            "name": "CreateHsmKey",
+            "value": "Microsoft.KeyVault/managedHsm/keys/create",
+            "description": "Create an HSM key."
+          },
+          {
+            "name": "DeleteHsmKey",
+            "value": "Microsoft.KeyVault/managedHsm/keys/delete",
+            "description": "Delete an HSM key."
+          },
+          {
+            "name": "ExportHsmKey",
+            "value": "Microsoft.KeyVault/managedHsm/keys/export/action",
+            "description": "Export an HSM key."
+          },
+          {
+            "name": "ReleaseKey",
+            "value": "Microsoft.KeyVault/managedHsm/keys/release/action",
+            "description": "Release an HSM key using Secure Key Release."
+          },
+          {
+            "name": "ImportHsmKey",
+            "value": "Microsoft.KeyVault/managedHsm/keys/import/action",
+            "description": "Import an HSM key."
+          },
+          {
+            "name": "PurgeDeletedHsmKey",
+            "value": "Microsoft.KeyVault/managedHsm/keys/deletedKeys/delete",
+            "description": "Purge a deleted HSM key."
+          },
+          {
+            "name": "DownloadHsmSecurityDomain",
+            "value": "Microsoft.KeyVault/managedHsm/securitydomain/download/action",
+            "description": "Download an HSM security domain."
+          },
+          {
+            "name": "DownloadHsmSecurityDomainStatus",
+            "value": "Microsoft.KeyVault/managedHsm/securitydomain/download/read",
+            "description": "Check status of HSM security domain download."
+          },
+          {
+            "name": "UploadHsmSecurityDomain",
+            "value": "Microsoft.KeyVault/managedHsm/securitydomain/upload/action",
+            "description": "Upload an HSM security domain."
+          },
+          {
+            "name": "ReadHsmSecurityDomainStatus",
+            "value": "Microsoft.KeyVault/managedHsm/securitydomain/upload/read",
+            "description": "Check the status of the HSM security domain exchange file."
+          },
+          {
+            "name": "ReadHsmSecurityDomainTransferKey",
+            "value": "Microsoft.KeyVault/managedHsm/securitydomain/transferkey/read",
+            "description": "Download an HSM security domain transfer key."
+          },
+          {
+            "name": "StartHsmBackup",
+            "value": "Microsoft.KeyVault/managedHsm/backup/start/action",
+            "description": "Start an HSM backup."
+          },
+          {
+            "name": "StartHsmRestore",
+            "value": "Microsoft.KeyVault/managedHsm/restore/start/action",
+            "description": "Start an HSM restore."
+          },
+          {
+            "name": "ReadHsmBackupStatus",
+            "value": "Microsoft.KeyVault/managedHsm/backup/status/action",
+            "description": "Read an HSM backup status."
+          },
+          {
+            "name": "ReadHsmRestoreStatus",
+            "value": "Microsoft.KeyVault/managedHsm/restore/status/action",
+            "description": "Read an HSM restore status."
+          },
+          {
+            "name": "RandomNumbersGenerate",
+            "value": "Microsoft.KeyVault/managedHsm/rng/action",
+            "description": "Generate random numbers."
+          }
+        ]
+      }
+    }
+  },
+  "parameters": {
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "Client API version."
+    }
+  }
+}

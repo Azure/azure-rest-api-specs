@@ -1,0 +1,74 @@
+{
+  "parameters": {
+    "api-version": "2022-01-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myResourceGroup",
+    "serviceName": "myservice"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "provisioningState": "Succeeded",
+          "serviceId": "12345678abcd1234abcd12345678abcd",
+          "networkProfile": {
+            "outboundIPs": {
+              "publicIPs": [
+                "20.39.3.173",
+                "40.64.67.13"
+              ]
+            },
+            "requiredTraffics": [
+              {
+                "protocol": "TCP",
+                "port": 443,
+                "ips": [
+                  "20.62.211.25",
+                  "52.188.47.226"
+                ],
+                "direction": "Outbound"
+              },
+              {
+                "protocol": "UDP",
+                "port": 1194,
+                "ips": [
+                  "20.62.211.25",
+                  "52.188.47.226"
+                ],
+                "direction": "Outbound"
+              },
+              {
+                "protocol": "TCP",
+                "port": 9000,
+                "ips": [
+                  "20.62.211.25",
+                  "52.188.47.226"
+                ],
+                "direction": "Outbound"
+              }
+            ]
+          }
+        },
+        "systemData": {
+          "createdBy": "sample-user",
+          "createdByType": "User",
+          "createdAt": "2021-08-11T03:16:03.944Z",
+          "lastModifiedBy": "sample-user",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2021-08-11T03:17:03.944Z"
+        },
+        "type": "Microsoft.AppPlatform/Spring",
+        "sku": {
+          "name": "S0",
+          "tier": "Standard"
+        },
+        "location": "eastus",
+        "tags": {
+          "key1": "value1"
+        },
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.AppPlatform/Spring/myservice",
+        "name": "myservice"
+      }
+    }
+  }
+}

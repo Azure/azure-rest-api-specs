@@ -6,20 +6,38 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 ``` yaml $(python)
 python-mode: create
 python:
-  azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
-  payload-flattening-threshold: 2
-  namespace: azure.quantum
+  namespace: azure.quantum._client
   package-name: azure-quantum
+  credential-default-policy-type: BearerTokenCredentialPolicy
+  credential-scopes: "https://quantum.microsoft.com/.default"
+  add-credential: true
   clear-output-folder: true
+  no-namespace-folders: false
+  generate-metadata: false
+  models-mode: msrest
+  version-tolerant: true
 ```
-``` yaml $(python) && $(python-mode) == 'update'
-python:
-  no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/quantum/azure-quantum/azure/quantum
-```
-``` yaml $(python) && $(python-mode) == 'create'
+
+```yaml $(python) && $(python-mode) == 'update'
 python:
   basic-setup-py: true
   output-folder: $(python-sdks-folder)/quantum/azure-quantum
+```
+
+```yaml $(python) && $(python-mode) == 'create'
+python:
+  basic-setup-py: true
+  output-folder: $(python-sdks-folder)/quantum/azure-quantum
+```
+
+```yaml $(python) && $(python-mode) == 'cli'
+python:
+  package-version: 0.0.0.1
+  no-namespace-folders: true
+```
+
+```yaml $(python) && $(python-mode) == 'pythonSdk'
+python:
+  no-namespace-folders: true
 ```

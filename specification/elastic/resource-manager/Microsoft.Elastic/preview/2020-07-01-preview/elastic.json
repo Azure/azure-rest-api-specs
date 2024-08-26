@@ -19,7 +19,7 @@
       "type": "oauth2",
       "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
       "flow": "implicit",
-      "description": "Azure Active Directory OAuth2 Flow",
+      "description": "Microsoft Entra ID OAuth2 Flow",
       "scopes": {
         "user_impersonation": "impersonate your user account"
       }
@@ -823,6 +823,7 @@
         "details": {
           "description": "Error details.",
           "type": "array",
+          "x-ms-identifiers": [],
           "items": {
             "$ref": "#/definitions/ErrorResponseBody"
           }
@@ -891,6 +892,7 @@
         "value": {
           "description": "List of operations supported by the Microsoft.Elastic provider.",
           "type": "array",
+          "x-ms-identifiers": [],
           "items": {
             "$ref": "#/definitions/OperationResult"
           }
@@ -1033,7 +1035,7 @@
         },
         "business": {
           "description": "Business of the company",
-          "maxLength": 50,
+          "maxLength": 64,
           "type": "string"
         },
         "employeesNumber": {
@@ -1043,12 +1045,12 @@
         },
         "state": {
           "description": "State of the company location.",
-          "maxLength": 50,
+          "maxLength": 64,
           "type": "string"
         },
         "country": {
           "description": "Country of the company location.",
-          "maxLength": 50,
+          "maxLength": 64,
           "type": "string"
         }
       }
@@ -1069,7 +1071,7 @@
         },
         "companyName": {
           "description": "Company name of the user",
-          "maxLength": 50,
+          "maxLength": 64,
           "type": "string"
         },
         "emailAddress": {
@@ -1225,6 +1227,7 @@
         "value": {
           "description": "Results of a list operation.",
           "type": "array",
+          "x-ms-identifiers": [],
           "items": {
             "$ref": "#/definitions/ElasticMonitorResource"
           }
@@ -1286,6 +1289,7 @@
         "value": {
           "description": "Results of a list operation.",
           "type": "array",
+          "x-ms-identifiers": [],
           "items": {
             "$ref": "#/definitions/MonitoredResource"
           }
@@ -1345,6 +1349,7 @@
         "filteringTags": {
           "description": "List of filtering tags to be used for capturing logs. This only takes effect if SendActivityLogs flag is enabled. If empty, all resources will be captured. If only Exclude action is specified, the rules will apply to the list of all available resources. If Include actions are specified, the rules will only include resources with the associated tags.",
           "type": "array",
+          "x-ms-identifiers": [],
           "items": {
             "$ref": "#/definitions/FilteringTag"
           }
@@ -1404,6 +1409,7 @@
         "value": {
           "description": "Results of a list operation.",
           "type": "array",
+          "x-ms-identifiers": [],
           "items": {
             "$ref": "#/definitions/MonitoringTagRules"
           }
@@ -1459,6 +1465,7 @@
         "value": {
           "description": "Results of a list operation.",
           "type": "array",
+          "x-ms-identifiers": [],
           "items": {
             "$ref": "#/definitions/VMResources"
           }
@@ -1529,10 +1536,7 @@
       "in": "query",
       "description": "The API version to be used with the HTTP request.",
       "required": true,
-      "type": "string",
-      "enum": [
-        "2020-07-01-preview"
-      ]
+      "type": "string"
     },
     "SubscriptionIdParameter": {
       "name": "subscriptionId",

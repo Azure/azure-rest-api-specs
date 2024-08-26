@@ -1594,7 +1594,7 @@
       "type": "object",
       "properties": {
         "type": {
-          "type": "object",
+          "type": "string",
           "description": "Copy translator type."
         }
       },
@@ -2534,6 +2534,10 @@
         "authentication": {
           "description": "Authentication method used for calling the endpoint.",
           "$ref": "#/definitions/WebActivityAuthentication"
+        },
+        "disableCertValidation": {
+          "type": "boolean",
+          "description": "When set to true, Certificate validation will be disabled."
         },
         "datasets": {
           "type": "array",

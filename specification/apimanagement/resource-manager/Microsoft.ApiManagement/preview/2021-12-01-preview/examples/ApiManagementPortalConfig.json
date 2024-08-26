@@ -1,0 +1,50 @@
+{
+  "parameters": {
+    "serviceName": "apimService1",
+    "resourceGroupName": "rg1",
+    "api-version": "2021-12-01-preview",
+    "subscriptionId": "subid",
+    "portalConfigId": "default"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/subid/resourcegroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/portalconfigs/default",
+        "type": "Microsoft.ApiManagement/service/portalconfigs",
+        "name": "default",
+        "properties": {
+          "enableBasicAuth": true,
+          "signin": {
+            "require": false
+          },
+          "signup": {
+            "termsOfService": {
+              "text": "I agree to the service terms and conditions.",
+              "requireConsent": false
+            }
+          },
+          "delegation": {
+            "delegateRegistration": false,
+            "delegateSubscription": false,
+            "delegationUrl": null,
+            "validationKey": null
+          },
+          "csp": {
+            "mode": "reportOnly",
+            "reportUri": [
+              "https://report.contoso.com"
+            ],
+            "allowedSources": [
+              "*.contoso.com"
+            ]
+          },
+          "cors": {
+            "allowedOrigins": [
+              "https://contoso.com"
+            ]
+          }
+        }
+      }
+    }
+  }
+}

@@ -26,18 +26,36 @@ These are the global settings for the ManagedServices API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2020-02-preview
+tag: package-2022-10
 ```
 
+
+### Tag: package-2022-10
+
+These settings apply only when `--tag=package-2022-10` is specified on the command line.
+
+```yaml $(tag) == 'package-2022-10'
+input-file:
+  - Microsoft.ManagedServices/stable/2022-10-01/managedservices.json
+```
+### Tag: package-preview-2022-01
+
+These settings apply only when `--tag=package-preview-2022-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2022-01'
+input-file:
+  - Microsoft.ManagedServices/preview/2022-01-01-preview/managedservices.json
+```
 
 ### Tag: package-2020-02-preview
 
 These settings apply only when `--tag=package-2020-02-preview` is specified on the command line.
 
-```yaml $(tag) == 'package-2020-02-preview'
+``` yaml $(tag) == 'package-2020-02-preview'
 input-file:
   - Microsoft.ManagedServices/preview/2020-02-01-preview/managedservices.json
 ```
+
 ### Tag: package-2019-09
 
 These settings apply only when `--tag=package-2019-09` is specified on the command line.
@@ -85,9 +103,9 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-net
+  - repo: azure-sdk-for-net-track2
   - repo: azure-sdk-for-python
-  - repo: azure-sdk-for-python-track2
+  - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
@@ -96,6 +114,7 @@ swagger-to-sdk:
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_billing']
   - repo: azure-resource-manager-schemas
+  - repo: azure-powershell
 ```
 
 ## C#
@@ -115,6 +134,3 @@ csharp:
 ## Go
 
 See configuration in [readme.go.md](./readme.go.md)
-
-
-

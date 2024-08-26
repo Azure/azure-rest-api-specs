@@ -5,7 +5,9 @@
 This is the AutoRest configuration file for IotCentral.
 
 ---
+
 ## Getting Started
+
 To build the SDK for IotCentral, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -13,16 +15,62 @@ To build the SDK for IotCentral, simply [Install AutoRest](https://aka.ms/autore
 To see additional help and options, run:
 
 > `autorest --help`
+
 ---
 
 ## Configuration
 
 ### Basic Information
+
 These are the global settings for IotCentral.
 
 ``` yaml
 openapi-type: arm
-tag: package-2018-09-01
+tag: package-preview-2021-11
+```
+
+
+### Tag: package-preview-2021-11
+
+These settings apply only when `--tag=package-preview-2021-11` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2021-11'
+input-file:
+  - Microsoft.IoTCentral/preview/2021-11-01-preview/iotcentral.json
+directive:
+  - suppress: R4009
+    from: iotcentral.json
+    reason: We do not yet support systemdata.
+  - suppress: R3018
+    from: iotcentral.json
+    reason: resource name availability needs to be boolean (available or not)
+  - suppress: R4018
+    from: iotcentral.json
+    reason: We do not yet support isDataAction, display.description and display.resource.
+  - suppress: R3026
+    from: privatelinks.json
+    reason: privateLink and privateEndpointConnection sub-resources don't have patch operations.
+  - suppress: R3010
+    from: privatelinks.json
+    reason: privateLink and privateEndpointConnection sub-resources don't have list by immediate parent apis.
+```
+### Tag: package-2021-06
+
+These settings apply only when `--tag=package-2021-06` is specified on the command line.
+
+```yaml $(tag) == 'package-2021-06'
+input-file:
+  - Microsoft.IoTCentral/stable/2021-06-01/iotcentral.json
+directive:
+  - suppress: R4009
+    from: iotcentral.json
+    reason: We do not yet support systemdata.
+  - suppress: R3018
+    from: iotcentral.json
+    reason: resource name availability needs to be boolean (available or not)
+  - suppress: R4018
+    from: iotcentral.json
+    reason: We do not yet support isDataAction, display.description and display.resource.
 ```
 
 ### Tag: package-2018-09-01
@@ -34,16 +82,8 @@ input-file:
 - Microsoft.IoTCentral/stable/2018-09-01/iotcentral.json
 ```
 
-### Tag: package-2017-07-01-privatepreview
-
-These settings apply only when `--tag=package-2017-07-01-privatepreview` is specified on the command line.
-
-``` yaml $(tag) == 'package-2017-07-01-privatepreview'
-input-file:
-- Microsoft.IoTCentral/preview/2017-07-01-privatepreview/iotcentral.json
-```
-
 ---
+
 # Code Generation
 
 ## Swagger to SDK
@@ -53,8 +93,8 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-net
-  - repo: azure-sdk-for-python-track2
+  - repo: azure-sdk-for-net-track2
+  - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
@@ -63,6 +103,7 @@ swagger-to-sdk:
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_iot_central']
   - repo: azure-resource-manager-schemas
+  - repo: azure-powershell
 ```
 
 ## C#
@@ -98,14 +139,6 @@ payload-flattening-threshold: 1
 output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-iotcentral
 ```
 
-### Java multi-api
-
-``` yaml $(java) && $(multiapi)
-batch:
-  - tag: package-2018-09-01
-  - tag: package-2017-07-01-privatepreview
-```
-
 ### Tag: package-2018-09-01 and java
 
 These settings apply only when `--tag=package-2018-09-01 --java` is specified on the command line.
@@ -118,19 +151,3 @@ java:
 regenerate-manager: true
 generate-interface: true
 ```
-
-### Tag: package-2017-07-01-privatepreview and java
-
-These settings apply only when `--tag=package-2017-07-01-privatepreview --java` is specified on the command line.
-Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
-
-``` yaml $(tag)=='package-2017-07-01-privatepreview' && $(java) && $(multiapi)
-java:
-  namespace: com.microsoft.azure.management.iotcentral.v2017_07_01_privatepreview
-  output-folder: $(azure-libraries-for-java-folder)/sdk/iotcentral/mgmt-v2017_07_01_privatepreview
-regenerate-manager: true
-generate-interface: true
-```
-
-
-

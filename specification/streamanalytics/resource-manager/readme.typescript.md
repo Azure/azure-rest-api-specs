@@ -8,6 +8,5 @@ typescript:
   azure-arm: true
   package-name: "@azure/arm-streamanalytics"
   output-folder: "$(typescript-sdks-folder)/sdk/streamanalytics/arm-streamanalytics"
-  clear-output-folder: true
   generate-metadata: true
 ```

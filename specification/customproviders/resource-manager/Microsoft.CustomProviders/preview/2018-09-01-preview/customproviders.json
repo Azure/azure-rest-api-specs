@@ -110,14 +110,14 @@
           }
         ],
         "responses": {
-          "201": {
-            "description": "Created response definition. Resource has been created",
+          "200": {
+            "description": "OK response definition. Resource already exists and the changes have been accepted",
             "schema": {
               "$ref": "#/definitions/CustomRPManifest"
             }
           },
-          "200": {
-            "description": "OK response definition. Resource already exists and the changes have been accepted",
+          "201": {
+            "description": "Created response definition. Resource has been created",
             "schema": {
               "$ref": "#/definitions/CustomRPManifest"
             }
@@ -424,14 +424,14 @@
           }
         ],
         "responses": {
-          "201": {
-            "description": "Created. Association has been created.",
+          "200": {
+            "description": "OK. Association already exists and the changes have been accepted.",
             "schema": {
               "$ref": "#/definitions/Association"
             }
           },
-          "200": {
-            "description": "OK. Association already exists and the changes have been accepted.",
+          "201": {
+            "description": "Created. Association has been created.",
             "schema": {
               "$ref": "#/definitions/Association"
             }
@@ -715,21 +715,30 @@
               "description": "A list of actions that the custom resource provider implements.",
               "items": {
                 "$ref": "#/definitions/CustomRPActionRouteDefinition"
-              }
+              },
+              "x-ms-identifiers": [
+                "name",
+                "endpoint"
+              ]
             },
             "resourceTypes": {
               "type": "array",
               "description": "A list of resource types that the custom resource provider implements.",
               "items": {
                 "$ref": "#/definitions/CustomRPResourceTypeRouteDefinition"
-              }
+              },
+              "x-ms-identifiers": [
+                "name",
+                "endpoint"
+              ]
             },
             "validations": {
               "type": "array",
               "description": "A list of validations to run on the custom resource provider's requests.",
               "items": {
                 "$ref": "#/definitions/CustomRPValidations"
-              }
+              },
+              "x-ms-identifiers": []
             },
             "provisioningState": {
               "type": "string",
@@ -766,6 +775,9 @@
           "items": {
             "$ref": "#/definitions/ResourceProviderOperation"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "description": "List of operations supported by this resource provider."
         },
         "nextLink": {
@@ -949,6 +961,7 @@
           "items": {
             "$ref": "#/definitions/ErrorDefinition"
           },
+          "x-ms-identifiers": [],
           "readOnly": true
         }
       }

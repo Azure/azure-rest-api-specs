@@ -13,7 +13,7 @@ credential-key-header-name: Ocp-Apim-Subscription-Key
 payload-flattening-threshold: 1
 namespace: azure.ai.anomalydetector
 package-name: azure-ai-anomalydetector
-package-version: 0.2.0
+package-version: 3.0.0b4
 clear-output-folder: true
 ```
 

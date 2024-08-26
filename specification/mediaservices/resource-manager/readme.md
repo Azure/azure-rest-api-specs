@@ -24,25 +24,207 @@ To see additional help and options, run:
 
 These are the global settings for the MediaServices API.
 
-```yaml
+``` yaml
 openapi-type: arm
-tag: package-2021-06
+tag: package-metadata-2023-01
 opt-in-extensible-enums: true
+```
+
+### Suppression
+
+``` yaml
+directive:
+  - suppress: R2016
+    where: $.definitions.TrackedResource.required
+    reason: we are still using PUT definition for PATCH, which has location as required property. this is existing suppression added to avoid breaking change.
+
+  - suppress: DeleteOperationResponses
+    reason: Per ARM Specs, async APIs must return 202 when a response is accepted.
+    where: '$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/mediaServices/{accountName}/assets/{assetName}/tracks/{trackName}"].delete.responses'
+    from: AssetsAndAssetFilters.json
+
+  - suppress: RequiredReadOnlySystemData
+    reason: Per ARM Specs, only top level tracked resources return systemMetadata.
+    where:
+      - '$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/mediaServices/{accountName}/assets/{assetName}/tracks/{trackName}"].put'
+      - '$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/mediaServices/{accountName}/assets/{assetName}/tracks/{trackName}"].get'
+      - '$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/mediaServices/{accountName}/assets/{assetName}/tracks/{trackName}"].patch'
+      - '$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/mediaServices/{accountName}/assets/{assetName}/tracks/{trackName}/operationResults/{operationId}"].get'
+
+    from: AssetsAndAssetFilters.json
+
+  - suppress: RequiredReadOnlySystemData
+    reason: Per ARM Specs, only top level tracked resources return systemMetadata.
+    where:
+      - '$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/mediaservices/{accountName}/privateEndpointConnections/{name}"].get'
+      - '$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/mediaservices/{accountName}/privateEndpointConnections/{name}"].put'
+      - '$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/mediaservices/{accountName}/privateLinkResources/{name}"].get'
+    from: Accounts.json
+```
+
+### Tag: package-metadata-2023-01
+
+These settings apply only when `--tag=package-metadata-2023-01` is specified on the command line.
+
+```yaml $(tag) == 'package-metadata-2023-01'
+input-file:
+  - Microsoft.Media/Metadata/stable/2023-01-01/AccountFilters.json
+  - Microsoft.Media/Accounts/stable/2023-01-01/Accounts.json
+  - Microsoft.Media/Metadata/stable/2023-01-01/AssetsAndAssetFilters.json
+  - Microsoft.Media/Metadata/stable/2023-01-01/ContentKeyPolicies.json
+  - Microsoft.Media/Encoding/stable/2022-07-01/Encoding.json
+  - Microsoft.Media/Metadata/stable/2023-01-01/StreamingPoliciesAndStreamingLocators.json
+  - Microsoft.Media/Streaming/stable/2022-11-01/streamingservice.json
+```
+
+### Tag: package-2023-01
+
+These settings apply only when `--tag=package-2023-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2023-01'
+input-file:
+  - Microsoft.Media/Metadata/stable/2023-01-01/AccountFilters.json
+  - Microsoft.Media/Accounts/stable/2023-01-01/Accounts.json
+  - Microsoft.Media/Metadata/stable/2023-01-01/AssetsAndAssetFilters.json
+  - Microsoft.Media/Metadata/stable/2023-01-01/ContentKeyPolicies.json
+  - Microsoft.Media/Encoding/stable/2022-07-01/Encoding.json
+  - Microsoft.Media/Metadata/stable/2023-01-01/StreamingPoliciesAndStreamingLocators.json
+  - Microsoft.Media/Streaming/stable/2022-08-01/streamingservice.json
+```
+
+### Tag: package-account-2023-01
+
+These settings apply only when `--tag=package-account-2023-01` is specified on the command line.
+
+```yaml $(tag) == 'package-account-2023-01'
+input-file:
+  - Microsoft.Media/Metadata/stable/2022-08-01/AccountFilters.json
+  - Microsoft.Media/Accounts/stable/2023-01-01/Accounts.json
+  - Microsoft.Media/Metadata/stable/2022-08-01/AssetsAndAssetFilters.json
+  - Microsoft.Media/Metadata/stable/2022-08-01/ContentKeyPolicies.json
+  - Microsoft.Media/Encoding/stable/2022-07-01/Encoding.json
+  - Microsoft.Media/Metadata/stable/2022-08-01/StreamingPoliciesAndStreamingLocators.json
+  - Microsoft.Media/Streaming/stable/2022-11-01/streamingservice.json
+```
+
+### Tag: package-streaming-2022-11
+
+These settings apply only when `--tag=package-streaming-2022-11` is specified on the command line.
+
+``` yaml $(tag) == 'package-streaming-2022-11'
+input-file:
+  - Microsoft.Media/Metadata/stable/2022-08-01/AccountFilters.json
+  - Microsoft.Media/Accounts/stable/2021-11-01/Accounts.json
+  - Microsoft.Media/Metadata/stable/2022-08-01/AssetsAndAssetFilters.json
+  - Microsoft.Media/Metadata/stable/2022-08-01/ContentKeyPolicies.json
+  - Microsoft.Media/Encoding/stable/2022-07-01/Encoding.json
+  - Microsoft.Media/Metadata/stable/2022-08-01/StreamingPoliciesAndStreamingLocators.json
+  - Microsoft.Media/Streaming/stable/2022-11-01/streamingservice.json
+```
+
+### Tag: package-encoding-2022-05-preview
+
+These settings apply only when `--tag=package-encoding-2022-05-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2022-05'
+input-file:
+  - Microsoft.Media/Metadata/stable/2022-08-01/AccountFilters.json
+  - Microsoft.Media/Accounts/stable/2021-11-01/Accounts.json
+  - Microsoft.Media/Metadata/stable/2022-08-01/AssetsAndAssetFilters.json
+  - Microsoft.Media/Metadata/stable/2022-08-01/ContentKeyPolicies.json
+  - Microsoft.Media/Encoding/preview/2022-05-01-preview/Encoding.json
+  - Microsoft.Media/Metadata/stable/2022-08-01/StreamingPoliciesAndStreamingLocators.json
+  - Microsoft.Media/Streaming/stable/2022-08-01/streamingservice.json
+```
+
+### Tag: package-encoding-2022-07
+
+These settings apply only when `--tag=package-encoding-2022-07` is specified on the command line.
+
+``` yaml $(tag) == 'package-encoding-2022-07'
+input-file:
+  - Microsoft.Media/Metadata/stable/2022-08-01/AccountFilters.json
+  - Microsoft.Media/Accounts/stable/2021-11-01/Accounts.json
+  - Microsoft.Media/Metadata/stable/2022-08-01/AssetsAndAssetFilters.json
+  - Microsoft.Media/Metadata/stable/2022-08-01/ContentKeyPolicies.json
+  - Microsoft.Media/Encoding/stable/2022-07-01/Encoding.json
+  - Microsoft.Media/Metadata/stable/2022-08-01/StreamingPoliciesAndStreamingLocators.json
+  - Microsoft.Media/Streaming/stable/2022-08-01/streamingservice.json
+```
+
+### Tag: package-metadata-2022-08
+
+These settings apply only when `--tag=package-metadata-2022-08` is specified on the command line.
+
+``` yaml $(tag) == 'package-metadata-2022-08'
+input-file:
+  - Microsoft.Media/Metadata/stable/2022-08-01/AccountFilters.json
+  - Microsoft.Media/Accounts/stable/2021-11-01/Accounts.json
+  - Microsoft.Media/Metadata/stable/2022-08-01/AssetsAndAssetFilters.json
+  - Microsoft.Media/Metadata/stable/2022-08-01/ContentKeyPolicies.json
+  - Microsoft.Media/Encoding/stable/2021-11-01/Encoding.json
+  - Microsoft.Media/Metadata/stable/2022-08-01/StreamingPoliciesAndStreamingLocators.json
+  - Microsoft.Media/Streaming/stable/2022-08-01/streamingservice.json
+```
+
+### Tag: package-2022-08
+
+These settings apply only when `--tag=package-2022-08` is specified on the command line.
+
+``` yaml $(tag) == 'package-2022-08'
+input-file:
+  - Microsoft.Media/Metadata/stable/2021-11-01/AccountFilters.json
+  - Microsoft.Media/Accounts/stable/2021-11-01/Accounts.json
+  - Microsoft.Media/Metadata/stable/2021-11-01/AssetsAndAssetFilters.json
+  - Microsoft.Media/Metadata/stable/2021-11-01/ContentKeyPolicies.json
+  - Microsoft.Media/Encoding/stable/2021-11-01/Encoding.json
+  - Microsoft.Media/Metadata/stable/2021-11-01/StreamingPoliciesAndStreamingLocators.json
+  - Microsoft.Media/Streaming/stable/2022-08-01/streamingservice.json
+```
+
+### Tag: package-account-2021-11
+
+These settings apply only when `--tag=package-account-2021-11` is specified on the command line.
+
+``` yaml $(tag) == 'package-account-2021-11'
+input-file:
+  - Microsoft.Media/Metadata/stable/2021-11-01/AccountFilters.json
+  - Microsoft.Media/Accounts/stable/2021-11-01/Accounts.json
+  - Microsoft.Media/Metadata/stable/2021-11-01/AssetsAndAssetFilters.json
+  - Microsoft.Media/Metadata/stable/2021-11-01/ContentKeyPolicies.json
+  - Microsoft.Media/Encoding/stable/2021-11-01/Encoding.json
+  - Microsoft.Media/Metadata/stable/2021-11-01/StreamingPoliciesAndStreamingLocators.json
+  - Microsoft.Media/Streaming/stable/2021-11-01/streamingservice.json
+```
+
+### Tag: package-2021-11
+
+These settings apply only when `--tag=package-2021-11` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-11'
+input-file:
+  - Microsoft.Media/Metadata/stable/2021-11-01/AccountFilters.json
+  - Microsoft.Media/Accounts/stable/2021-06-01/Accounts.json
+  - Microsoft.Media/Metadata/stable/2021-11-01/AssetsAndAssetFilters.json
+  - Microsoft.Media/Metadata/stable/2021-11-01/ContentKeyPolicies.json
+  - Microsoft.Media/Encoding/stable/2021-11-01/Encoding.json
+  - Microsoft.Media/Metadata/stable/2021-11-01/StreamingPoliciesAndStreamingLocators.json
+  - Microsoft.Media/Streaming/stable/2021-11-01/streamingservice.json
 ```
 
 ### Tag: package-2021-06
 
 These settings apply only when `--tag=package-2021-06` is specified on the command line.
 
-```yaml $(tag) == 'package-2021-06'
+``` yaml $(tag) == 'package-2021-06'
 input-file:
-  - Microsoft.Media/stable/2021-06-01/Accounts.json
-  - Microsoft.Media/stable/2021-06-01/AccountFilters.json
-  - Microsoft.Media/stable/2021-06-01/AssetsAndAssetFilters.json
-  - Microsoft.Media/stable/2021-06-01/ContentKeyPolicies.json
-  - Microsoft.Media/stable/2021-06-01/Encoding.json
-  - Microsoft.Media/stable/2021-06-01/StreamingPoliciesAndStreamingLocators.json
-  - Microsoft.Media/stable/2021-06-01/streamingservice.json
+  - Microsoft.Media/Accounts/stable/2021-06-01/Accounts.json
+  - Microsoft.Media/Metadata/stable/2021-06-01/AccountFilters.json
+  - Microsoft.Media/Metadata/stable/2021-06-01/AssetsAndAssetFilters.json
+  - Microsoft.Media/Metadata/stable/2021-06-01/ContentKeyPolicies.json
+  - Microsoft.Media/Encoding/stable/2021-06-01/Encoding.json
+  - Microsoft.Media/Metadata/stable/2021-06-01/StreamingPoliciesAndStreamingLocators.json
+  - Microsoft.Media/Streaming/stable/2021-06-01/streamingservice.json
 directive:
   - suppress: R2016
     where: $.definitions.TrackedResource.required
@@ -53,16 +235,16 @@ directive:
 
 These settings apply only when `--tag=package-2021-05` is specified on the command line.
 
-```yaml $(tag) == 'package-2021-05'
+``` yaml $(tag) == 'package-2021-05'
 input-file:
-  - Microsoft.Media/stable/2020-05-01/AccountFilters.json
-  - Microsoft.Media/stable/2021-05-01/Accounts.json
-  - Microsoft.Media/stable/2020-05-01/AssetsAndAssetFilters.json
-  - Microsoft.Media/stable/2020-05-01/ContentKeyPolicies.json
-  - Microsoft.Media/stable/2020-05-01/Encoding.json
-  - Microsoft.Media/stable/2020-05-01/StreamingPoliciesAndStreamingLocators.json
-  - Microsoft.Media/stable/2020-05-01/streamingservice.json
-  - Microsoft.Media/stable/2020-05-01/Common.json
+  - Microsoft.Media/Metadata/stable/2020-05-01/AccountFilters.json
+  - Microsoft.Media/Accounts/stable/2021-05-01/Accounts.json
+  - Microsoft.Media/Metadata/stable/2020-05-01/AssetsAndAssetFilters.json
+  - Microsoft.Media/Metadata/stable/2020-05-01/ContentKeyPolicies.json
+  - Microsoft.Media/Encoding/stable/2020-05-01/Encoding.json
+  - Microsoft.Media/Metadata/stable/2020-05-01/StreamingPoliciesAndStreamingLocators.json
+  - Microsoft.Media/Streaming/stable/2020-05-01/streamingservice.json
+  - Microsoft.Media/Accounts/stable/2020-05-01/Common.json
 directive:
   - suppress: R2016
     where: $.definitions.TrackedResource.required
@@ -73,16 +255,16 @@ directive:
 
 These settings apply only when `--tag=package-2020-05` is specified on the command line.
 
-```yaml $(tag) == 'package-2020-05'
+``` yaml $(tag) == 'package-2020-05'
 input-file:
-  - Microsoft.Media/stable/2020-05-01/AccountFilters.json
-  - Microsoft.Media/stable/2020-05-01/Accounts.json
-  - Microsoft.Media/stable/2020-05-01/AssetsAndAssetFilters.json
-  - Microsoft.Media/stable/2020-05-01/ContentKeyPolicies.json
-  - Microsoft.Media/stable/2020-05-01/Encoding.json
-  - Microsoft.Media/stable/2020-05-01/StreamingPoliciesAndStreamingLocators.json
-  - Microsoft.Media/stable/2020-05-01/streamingservice.json
-  - Microsoft.Media/stable/2020-05-01/Common.json
+  - Microsoft.Media/Metadata/stable/2020-05-01/AccountFilters.json
+  - Microsoft.Media/Accounts/stable/2020-05-01/Accounts.json
+  - Microsoft.Media/Metadata/stable/2020-05-01/AssetsAndAssetFilters.json
+  - Microsoft.Media/Metadata/stable/2020-05-01/ContentKeyPolicies.json
+  - Microsoft.Media/Encoding/stable/2020-05-01/Encoding.json
+  - Microsoft.Media/Metadata/stable/2020-05-01/StreamingPoliciesAndStreamingLocators.json
+  - Microsoft.Media/Streaming/stable/2020-05-01/streamingservice.json
+  - Microsoft.Media/Accounts/stable/2020-05-01/Common.json
 directive:
   - suppress: R2016
     where: $.definitions.TrackedResource.required
@@ -93,101 +275,105 @@ directive:
 
 These settings apply only when `--tag=package-2020-02-preview` is specified on the command line.
 
-```yaml $(tag) == 'package-2020-02-preview'
+``` yaml $(tag) == 'package-2020-02-preview'
 input-file:
-  - Microsoft.Media/stable/2018-07-01/AccountFilters.json
-  - Microsoft.Media/stable/2018-07-01/Accounts.json
-  - Microsoft.Media/stable/2018-07-01/AssetsAndAssetFilters.json
-  - Microsoft.Media/stable/2018-07-01/ContentKeyPolicies.json
-  - Microsoft.Media/stable/2018-07-01/Encoding.json
-  - Microsoft.Media/preview/2020-02-01-preview/MediaGraphs.json
-  - Microsoft.Media/stable/2018-07-01/StreamingPoliciesAndStreamingLocators.json
-  - Microsoft.Media/stable/2018-07-01/streamingservice.json
+  - Microsoft.Media/Metadata/stable/2018-07-01/AccountFilters.json
+  - Microsoft.Media/Accounts/stable/2018-07-01/Accounts.json
+  - Microsoft.Media/Metadata/stable/2018-07-01/AssetsAndAssetFilters.json
+  - Microsoft.Media/Metadata/stable/2018-07-01/ContentKeyPolicies.json
+  - Microsoft.Media/Encoding/stable/2018-07-01/Encoding.json
+  - Microsoft.Media/Accounts/preview/2020-02-01-preview/MediaGraphs.json
+  - Microsoft.Media/Accounts/preview/2020-02-01-preview/Common.json
+  - Microsoft.Media/Metadata/stable/2018-07-01/StreamingPoliciesAndStreamingLocators.json
+  - Microsoft.Media/Streaming/stable/2018-07-01/streamingservice.json
 ```
 
 ### Tag: package-2019-09-preview
 
 These settings apply only when `--tag=package-2019-09-preview` is specified on the command line.
 
-```yaml $(tag) == 'package-2019-09-preview'
+``` yaml $(tag) == 'package-2019-09-preview'
 input-file:
-  - Microsoft.Media/stable/2018-07-01/AccountFilters.json
-  - Microsoft.Media/stable/2018-07-01/Accounts.json
-  - Microsoft.Media/stable/2018-07-01/AssetsAndAssetFilters.json
-  - Microsoft.Media/stable/2018-07-01/ContentKeyPolicies.json
-  - Microsoft.Media/stable/2018-07-01/Encoding.json
-  - Microsoft.Media/preview/2019-09-01-preview/MediaGraphs.json
-  - Microsoft.Media/stable/2018-07-01/StreamingPoliciesAndStreamingLocators.json
-  - Microsoft.Media/stable/2018-07-01/streamingservice.json
+  - Microsoft.Media/Metadata/stable/2018-07-01/AccountFilters.json
+  - Microsoft.Media/Accounts/stable/2018-07-01/Accounts.json
+  - Microsoft.Media/Metadata/stable/2018-07-01/AssetsAndAssetFilters.json
+  - Microsoft.Media/Metadata/stable/2018-07-01/ContentKeyPolicies.json
+  - Microsoft.Media/Encoding/stable/2018-07-01/Encoding.json
+  - Microsoft.Media/Accounts/preview/2019-09-01-preview/MediaGraphs.json
+  - Microsoft.Media/Accounts/preview/2019-09-01-preview/Common.json
+  - Microsoft.Media/Metadata/stable/2018-07-01/StreamingPoliciesAndStreamingLocators.json
+  - Microsoft.Media/Streaming/stable/2018-07-01/streamingservice.json
 ```
 
 ### Tag: package-2019-05-preview
 
 These settings apply only when `--tag=package-2019-05-preview` is specified on the command line.
 
-```yaml $(tag) == 'package-2019-05-preview'
+``` yaml $(tag) == 'package-2019-05-preview'
 input-file:
-  - Microsoft.Media/preview/2019-05-01-preview/AccountFilters.json
-  - Microsoft.Media/preview/2019-05-01-preview/Accounts.json
-  - Microsoft.Media/preview/2019-05-01-preview/AssetsAndAssetFilters.json
-  - Microsoft.Media/preview/2019-05-01-preview/Common.json
-  - Microsoft.Media/preview/2019-05-01-preview/ContentKeyPolicies.json
-  - Microsoft.Media/preview/2019-05-01-preview/Encoding.json
-  - Microsoft.Media/preview/2019-05-01-preview/StreamingPoliciesAndStreamingLocators.json
-  - Microsoft.Media/preview/2019-05-01-preview/streamingservice.json
+  - Microsoft.Media/Metadata/preview/2019-05-01-preview/AccountFilters.json
+  - Microsoft.Media/Accounts/preview/2019-05-01-preview/Accounts.json
+  - Microsoft.Media/Metadata/preview/2019-05-01-preview/AssetsAndAssetFilters.json
+  - Microsoft.Media/Accounts/preview/2019-05-01-preview/Common.json
+  - Microsoft.Media/Metadata/preview/2019-05-01-preview/ContentKeyPolicies.json
+  - Microsoft.Media/Encoding/preview/2019-05-01-preview/Encoding.json
+  - Microsoft.Media/Metadata/preview/2019-05-01-preview/StreamingPoliciesAndStreamingLocators.json
+  - Microsoft.Media/Streaming/preview/2019-05-01-preview/streamingservice.json
 ```
 
 ### Tag: package-2018-07
 
 These settings apply only when `--tag=package-2018-07` is specified on the command line.
 
-```yaml $(tag) == 'package-2018-07'
+``` yaml $(tag) == 'package-2018-07'
 input-file:
-  - Microsoft.Media/stable/2018-07-01/AccountFilters.json
-  - Microsoft.Media/stable/2018-07-01/Accounts.json
-  - Microsoft.Media/stable/2018-07-01/AssetsAndAssetFilters.json
-  - Microsoft.Media/stable/2018-07-01/Common.json
-  - Microsoft.Media/stable/2018-07-01/ContentKeyPolicies.json
-  - Microsoft.Media/stable/2018-07-01/Encoding.json
-  - Microsoft.Media/stable/2018-07-01/StreamingPoliciesAndStreamingLocators.json
-  - Microsoft.Media/stable/2018-07-01/streamingservice.json
+  - Microsoft.Media/Metadata/stable/2018-07-01/AccountFilters.json
+  - Microsoft.Media/Accounts/stable/2018-07-01/Accounts.json
+  - Microsoft.Media/Metadata/stable/2018-07-01/AssetsAndAssetFilters.json
+  - Microsoft.Media/Accounts/stable/2018-07-01/Common.json
+  - Microsoft.Media/Metadata/stable/2018-07-01/ContentKeyPolicies.json
+  - Microsoft.Media/Encoding/stable/2018-07-01/Encoding.json
+  - Microsoft.Media/Metadata/stable/2018-07-01/StreamingPoliciesAndStreamingLocators.json
+  - Microsoft.Media/Streaming/stable/2018-07-01/streamingservice.json
 ```
 
 ### Tag: package-2015-10
 
 These settings apply only when `--tag=package-2015-10` is specified on the command line.
 
-```yaml $(tag) == 'package-2015-10'
+``` yaml $(tag) == 'package-2015-10'
 input-file:
-  - Microsoft.Media/stable/2015-10-01/media.json
+  - Microsoft.Media/Accounts/stable/2015-10-01/media.json
 ```
 
 ### Tag: package-2018-03-preview
 
 These settings apply only when `--tag=package-2018-03-preview` is specified on the command line.
 
-```yaml $(tag) == 'package-2018-03-preview'
+``` yaml $(tag) == 'package-2018-03-preview'
 input-file:
-  - Microsoft.Media/preview/2018-03-30-preview/Accounts.json
-  - Microsoft.Media/preview/2018-03-30-preview/Assets.json
-  - Microsoft.Media/preview/2018-03-30-preview/ContentKeyPolicies.json
-  - Microsoft.Media/preview/2018-03-30-preview/Encoding.json
-  - Microsoft.Media/preview/2018-03-30-preview/StreamingPoliciesAndStreamingLocators.json
-  - Microsoft.Media/preview/2018-03-30-preview/streamingservice.json
+  - Microsoft.Media/Accounts/preview/2018-03-30-preview/Accounts.json
+  - Microsoft.Media/Metadata/preview/2018-03-30-preview/Assets.json
+  - Microsoft.Media/Accounts/preview/2018-03-30-preview/Common.json
+  - Microsoft.Media/Metadata/preview/2018-03-30-preview/ContentKeyPolicies.json
+  - Microsoft.Media/Encoding/preview/2018-03-30-preview/Encoding.json
+  - Microsoft.Media/Metadata/preview/2018-03-30-preview/StreamingPoliciesAndStreamingLocators.json
+  - Microsoft.Media/Streaming/preview/2018-03-30-preview/streamingservice.json
 ```
 
 ### Tag: package-2018-06-preview
 
 These settings apply only when `--tag=package-2018-06-preview` is specified on the command line.
 
-```yaml $(tag) == 'package-2018-06-preview'
+``` yaml $(tag) == 'package-2018-06-preview'
 input-file:
-  - Microsoft.Media/preview/2018-06-01-preview/Accounts.json
-  - Microsoft.Media/preview/2018-06-01-preview/Assets.json
-  - Microsoft.Media/preview/2018-06-01-preview/ContentKeyPolicies.json
-  - Microsoft.Media/preview/2018-06-01-preview/Encoding.json
-  - Microsoft.Media/preview/2018-06-01-preview/StreamingPoliciesAndStreamingLocators.json
-  - Microsoft.Media/preview/2018-06-01-preview/streamingservice.json
+  - Microsoft.Media/Accounts/preview/2018-06-01-preview/Accounts.json
+  - Microsoft.Media/Metadata/preview/2018-06-01-preview/Assets.json
+  - Microsoft.Media/Accounts/preview/2018-06-01-preview/Common.json
+  - Microsoft.Media/Metadata/preview/2018-06-01-preview/ContentKeyPolicies.json
+  - Microsoft.Media/Encoding/preview/2018-06-01-preview/Encoding.json
+  - Microsoft.Media/Metadata/preview/2018-06-01-preview/StreamingPoliciesAndStreamingLocators.json
+  - Microsoft.Media/Streaming/preview/2018-06-01-preview/streamingservice.json
 ```
 
 ---
@@ -199,10 +385,10 @@ input-file:
 This section describes what SDK should be generated by the automatic system.
 This is not used by Autorest itself.
 
-```yaml $(swagger-to-sdk)
+``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-net
-  - repo: azure-sdk-for-python-track2
+  - repo: azure-sdk-for-net-track2
+  - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
@@ -211,6 +397,7 @@ swagger-to-sdk:
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_media_services']
   - repo: azure-resource-manager-schemas
+  - repo: azure-powershell
 ```
 
 ## C
@@ -218,7 +405,7 @@ swagger-to-sdk:
 These settings apply only when `--csharp` is specified on the command line.
 Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.
 
-```yaml $(csharp)
+``` yaml $(csharp)
 csharp:
   # last generated from commit 3586e2989d502434c4f607dd38d40e46aabede5c
   azure-arm: true
@@ -243,7 +430,7 @@ See configuration in [readme.java.md](./readme.java.md)
 
 ## Suppression
 
-```yaml
+``` yaml
 directive:
   - suppress: OBJECT_MISSING_REQUIRED_PROPERTY
     from: Encoding.json

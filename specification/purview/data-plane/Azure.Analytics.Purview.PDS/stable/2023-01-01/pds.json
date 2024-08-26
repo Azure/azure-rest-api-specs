@@ -1,0 +1,464 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Purview Distribution Service REST API Document",
+    "description": "Purview distribution service enables various Azure RPs to fetch the policies and attributes for data governance.",
+    "version": "2023-01-01"
+  },
+  "paths": {
+    "/datasource-preferences": {
+      "get": {
+        "tags": [
+          "DatasourcePreferences"
+        ],
+        "description": "Get Datasource Preferences for given scope.",
+        "operationId": "DatasourcePreferences_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "scope",
+            "description": "Id for any resource managed by Purview.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DatasourcePreferencesResponseUpdated"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DatasourcePreferences_List": {
+            "$ref": "./examples/DatasourcePreferences_List.json"
+          }
+        }
+      }
+    },
+    "/policy-elements": {
+      "get": {
+        "tags": [
+          "PolicyElements"
+        ],
+        "description": "Get policies for given scope.",
+        "operationId": "PolicyElements_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "scope",
+            "description": "Id for any resource managed by Purview.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "filter",
+            "description": "Filter supporting full OData syntax.",
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/PolicyResponseUpdated"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "PolicyElements_List": {
+            "$ref": "./examples/PolicyElements_List.json"
+          }
+        }
+      }
+    },
+    "/policy-events": {
+      "get": {
+        "tags": [
+          "PolicyEvents"
+        ],
+        "description": "Get policy events for given scope.",
+        "operationId": "PolicyEvents_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "scope",
+            "description": "Id for any resource managed by Purview.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "syncToken",
+            "description": "This sync token represents the latest checkpoint for policies. Client need to pass this value while fetching subsequent delta changes.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/PolicyEventsResponseUpdated"
+            }
+          },
+          "304": {
+            "description": "Not Modified"
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PolicyEvents_List": {
+            "$ref": "./examples/PolicyEvents_List.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AccountModelBase": {
+      "description": "Details of the purview account governing the requested resource.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Id of the Purview account.",
+          "type": "string"
+        },
+        "name": {
+          "description": "Name of the Purview account.",
+          "type": "string"
+        },
+        "location": {
+          "description": "Location (Region) of the Purview account.",
+          "type": "string"
+        },
+        "tenantId": {
+          "description": "Tenant Id of the Purview account.",
+          "type": "string"
+        },
+        "gatewayEndpoint": {
+          "description": "Endpoint of the Purview account. This will be used by the RPs to call Purview APIs.",
+          "type": "string"
+        }
+      }
+    },
+    "ConsentServiceModelSimplified": {
+      "description": "Consent details.",
+      "type": "object",
+      "properties": {
+        "kind": {
+          "description": "Consent kind.",
+          "type": "string"
+        },
+        "status": {
+          "description": "Consent status.",
+          "type": "string"
+        },
+        "excludedScopes": {
+          "description": "List of scopes opted out of this consent.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "DatasourcePreferencesResponseUpdated": {
+      "description": "Response model for datasource preference API.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Consent details.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ConsentServiceModelSimplified"
+          }
+        },
+        "accountInfo": {
+          "$ref": "#/definitions/AccountModelBase"
+        },
+        "frequency": {
+          "$ref": "#/definitions/TimeSpan"
+        }
+      }
+    },
+    "ErrorModel": {
+      "description": "Default error model.",
+      "required": [
+        "code",
+        "message"
+      ],
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "Error code.",
+          "minLength": 1,
+          "type": "string"
+        },
+        "message": {
+          "description": "Error message.",
+          "minLength": 1,
+          "type": "string"
+        },
+        "target": {
+          "description": "Error description.",
+          "type": "string"
+        },
+        "details": {
+          "description": "Error details.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ErrorModel"
+          }
+        }
+      }
+    },
+    "ErrorResponseModel": {
+      "description": "Default error response model.",
+      "required": [
+        "error"
+      ],
+      "type": "object",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ErrorModel"
+        }
+      }
+    },
+    "PolicyElementEventModelUpdated": {
+      "description": "Represents the policy element event model.",
+      "required": [
+        "eventType",
+        "id",
+        "kind",
+        "updatedAt",
+        "version"
+      ],
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Id of the policy element.",
+          "minLength": 1,
+          "type": "string"
+        },
+        "scopes": {
+          "description": "List of scopes included in this policy.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "version": {
+          "format": "int64",
+          "description": "Current version of policy element. This is auto incremented with each change. Starts with 1.",
+          "type": "integer"
+        },
+        "elementJson": {
+          "description": "Policy element serialized json payload.",
+          "type": "string"
+        },
+        "kind": {
+          "$ref": "#/definitions/PolicyElementKind"
+        },
+        "updatedAt": {
+          "format": "date-time",
+          "description": "Time at which this policy element was last updated.",
+          "type": "string"
+        },
+        "eventType": {
+          "description": "Type of event. Format: <RP-Name>/<Resource-Type>/<Action>. For Example: Microsoft.Purview/PolicyElements/Delete.",
+          "minLength": 1,
+          "type": "string"
+        }
+      }
+    },
+    "PolicyElementKind": {
+      "description": "Represents the kind of policy element.",
+      "enum": [
+        "Policy",
+        "PolicySet",
+        "AttributeRule"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "PolicyElementKind",
+        "modelAsString": true
+      }
+    },
+    "PolicyElementUpdated": {
+      "description": "Represents a policy, policy set or attribute rule.",
+      "required": [
+        "id",
+        "kind",
+        "updatedAt",
+        "version"
+      ],
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Id of the policy element.",
+          "minLength": 1,
+          "type": "string"
+        },
+        "scopes": {
+          "description": "List of scopes included in this policy.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "version": {
+          "format": "int64",
+          "description": "Current version of policy element. This is auto incremented with each change. Starts with 1.",
+          "type": "integer"
+        },
+        "elementJson": {
+          "description": "Policy element serialized json payload.",
+          "type": "string"
+        },
+        "kind": {
+          "$ref": "#/definitions/PolicyElementKind"
+        },
+        "updatedAt": {
+          "format": "date-time",
+          "description": "Time at which this policy element was last updated.",
+          "type": "string"
+        }
+      }
+    },
+    "PolicyEventsResponseUpdated": {
+      "description": "Response model for policy delta fetch API.",
+      "required": [
+        "syncToken"
+      ],
+      "type": "object",
+      "properties": {
+        "syncToken": {
+          "description": "This sync token represents the latest checkpoint for policies. Client need to pass this value while fetching subsequent delta changes.",
+          "minLength": 1,
+          "type": "string"
+        },
+        "value": {
+          "description": "List of policy elements.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PolicyElementEventModelUpdated"
+          }
+        }
+      }
+    },
+    "PolicyResponseUpdated": {
+      "description": "Response model for policy bulk fetch API.",
+      "type": "object",
+      "properties": {
+        "syncToken": {
+          "description": "This sync token represents the latest checkpoint for policies. Client need to pass this value while fetching subsequent delta changes using policy-events API.",
+          "type": "string"
+        },
+        "nextLink": {
+          "description": "Link to fetch next set of policy elements.",
+          "type": "string"
+        },
+        "value": {
+          "description": "List of policy elements.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PolicyElementUpdated"
+          }
+        }
+      }
+    },
+    "TimeSpan": {
+      "description": "This is an ISO8601 time span value.",
+      "type": "string"
+    }
+  },
+  "parameters": {
+    "endpoint": {
+      "in": "path",
+      "name": "endpoint",
+      "description": "The endpoint of your Purview account. Example: https://{accountName}.purview.azure.com.",
+      "required": true,
+      "type": "string",
+      "format": "url",
+      "x-ms-parameter-location": "client",
+      "x-ms-skip-url-encoding": true
+    },
+    "api-version": {
+      "in": "query",
+      "name": "api-version",
+      "description": "The api-version of the service.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "client"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      },
+      "description": "Azure Active Directory OAuth2 Flow."
+    }
+  },
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{endpoint}",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "$ref": "#/parameters/endpoint"
+      }
+    ]
+  },
+  "basePath": "/pds",
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ]
+}

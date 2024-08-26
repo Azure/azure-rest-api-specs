@@ -315,7 +315,7 @@
           "readOnly": true
         },
         "location": {
-          "description": "The location of the resource. Since Azure Activity Log Alerts is a global service, the location of the rules should always be 'global'.",
+          "description": "The location of the resource. Azure Activity Log Alert rules are supported on Global, West Europe and North Europe regions.",
           "type": "string",
           "default": "global",
           "x-ms-mutability": [
@@ -355,7 +355,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ActivityLogAlertResource"
-          }
+          },
+          "x-ms-identifiers": [
+            "id"
+          ]
         },
         "nextLink": {
           "description": "Provides the link to retrieve the next set of elements.",
@@ -407,7 +410,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/AlertRuleAnyOfOrLeafCondition"
-          }
+          },
+          "x-ms-identifiers": []
         }
       },
       "required": [
@@ -429,7 +433,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/AlertRuleLeafCondition"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -462,7 +467,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ActionGroup"
-          }
+          },
+          "x-ms-identifiers": [
+            "actionGroupId"
+          ]
         }
       }
     },

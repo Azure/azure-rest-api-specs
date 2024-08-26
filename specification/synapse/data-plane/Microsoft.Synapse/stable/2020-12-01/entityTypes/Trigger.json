@@ -29,7 +29,8 @@
           "type": "array",
           "items": {
             "type": "object"
-          }
+          },
+          "x-ms-identifiers": []
         }
       },
       "additionalProperties": {
@@ -67,7 +68,10 @@
           "items": {
             "$ref": "../artifacts.json#/definitions/TriggerPipelineReference"
           },
-          "description": "Pipelines that need to be started."
+          "description": "Pipelines that need to be started.",
+          "x-ms-identifiers": [
+            "/pipelineReference/referenceName"
+          ]
         }
       }
     },
@@ -202,7 +206,8 @@
           "items": {
             "$ref": "#/definitions/RecurrenceScheduleOccurrence"
           },
-          "description": "The monthly occurrences."
+          "description": "The monthly occurrences.",
+          "x-ms-identifiers": []
         }
       },
       "additionalProperties": {
@@ -284,6 +289,7 @@
     },
     "BlobEventsTrigger": {
       "description": "Trigger that runs every time a Blob event occurs.",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/MultiplePipelineTrigger"
@@ -342,6 +348,7 @@
     },
     "CustomEventsTrigger": {
       "description": "Trigger that runs every time a custom event is received.",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/MultiplePipelineTrigger"
@@ -365,7 +372,8 @@
               "type": "array",
               "items": {
                 "type": "object"
-              }
+              },
+              "x-ms-identifiers": []
             },
             "scope": {
               "description": "The ARM resource ID of the Azure Event Grid Topic.",
@@ -384,6 +392,7 @@
     },
     "TumblingWindowTrigger": {
       "description": "Trigger that schedules pipeline runs for all fixed time interval windows from a start time without gaps and also supports backfill scenarios (when start time is in the past).",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/Trigger"

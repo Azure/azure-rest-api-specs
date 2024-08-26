@@ -351,14 +351,20 @@
           "items": {
             "$ref": "#/definitions/Principals"
           },
-          "description": "Azure data catalog admin list."
+          "description": "Azure data catalog admin list.",
+          "x-ms-identifiers": [
+            "objectId"
+          ]
         },
         "users": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/Principals"
           },
-          "description": "Azure data catalog user list."
+          "description": "Azure data catalog user list.",
+          "x-ms-identifiers": [
+            "objectId"
+          ]
         },
         "successfullyProvisioned": {
           "type": "boolean",
@@ -392,7 +398,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/OperationEntity"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       }
     },
@@ -465,7 +474,7 @@
       "required": true,
       "type": "string",
       "description": "The name of the data catalog in the specified subscription and resource group.",
-      "x-ms-parameter-location": "client"
+      "x-ms-parameter-location": "method"
     }
   }
 }
