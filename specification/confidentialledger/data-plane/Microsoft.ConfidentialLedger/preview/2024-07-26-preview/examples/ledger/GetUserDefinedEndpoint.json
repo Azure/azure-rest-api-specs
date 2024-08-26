@@ -6,20 +6,22 @@
     "200": {
       "description": "The custom endpoint.",
       "body": {
-          "metadata": {
-            "endpoints": {
-              "/content": {
-                "get": {
-                  "js_module": "test.js",
-                  "js_function": "content"
+        "metadata": {
+          "endpoints": {
+            "/content": {
+              "get": {
+                "forwarding_required": "always",
+                "authn_policies": {
+
                 }
               }
             }
-          },
-          "modules": {
-            "name": "test.js",
-            "module": "TESTJS"
           }
+        },
+        "modules": {
+          "name": "test.js",
+          "module": "TESTJS"
+        }
       }
     }
   }
