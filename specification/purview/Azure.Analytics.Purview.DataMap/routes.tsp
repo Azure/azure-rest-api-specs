@@ -116,22 +116,20 @@ interface Entity {
         """)
       @query
       collectionId?: string;
-    } & AtlasEntityWithExtInfo,
+    } & BodyParameter<AtlasEntityWithExtInfo>,
     EntityMutationResult,
     AtlasApiVersionParameterTraits
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
-  #suppress "@azure-tools/typespec-azure-core/prefer-csv-collection-format" "This is an existing Atlas API"
   @doc("List entities in bulk identified by its GUIDs.")
   @route("/atlas/v2/entity/bulk")
   @get
   listByGuids is AtlasOperation<
     {
+      #suppress "@azure-tools/typespec-azure-core/no-query-explode" "This is an existing Atlas API"
       @doc("An array of GUIDs of entities to list.")
-      @query({
-        format: "multi",
-      })
+      @query(#{ explode: true })
       guid: string[];
 
       @doc("Whether to return minimal information for referred entities.")
@@ -174,12 +172,12 @@ interface Entity {
         """)
       @query
       businessAttributeUpdateBehavior?: BusinessAttributeUpdateBehavior;
-    } & AtlasEntitiesWithExtInfo,
+    } & BodyParameter<AtlasEntitiesWithExtInfo>,
     EntityMutationResult,
     AtlasApiVersionParameterTraits
   >;
 
-  #suppress "@azure-tools/typespec-azure-core/prefer-csv-collection-format" "This is an existing Atlas API"
+  #suppress "@azure-tools/typespec-azure-core/no-query-explode" "This is an existing Atlas API"
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "This is Atlas API, which does not require api version"
   @doc("""
@@ -191,9 +189,7 @@ interface Entity {
   bulkDelete is AtlasOperation<
     {
       @doc("An array of GUIDs of entities to delete.")
-      @query({
-        format: "multi",
-      })
+      @query(#{ explode: true })
       guid: string[];
     },
     EntityMutationResult,
@@ -205,7 +201,11 @@ interface Entity {
   @doc("Associate a classification to multiple entities in bulk.")
   @route("/atlas/v2/entity/bulk/classification")
   @post
-  addClassification is AtlasOperation<ClassificationAssociateOptions, void, {}>;
+  addClassification is AtlasOperation<
+    BodyParameter<ClassificationAssociateOptions>,
+    void,
+    {}
+  >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "This is Atlas API, which does not require api version"
@@ -447,7 +447,7 @@ interface Entity {
         """)
       @query("attr:qualifiedName")
       attribute?: string;
-    } & AtlasEntityWithExtInfo,
+    } & BodyParameter<AtlasEntityWithExtInfo>,
     EntityMutationResult,
     {}
   >;
@@ -576,7 +576,7 @@ interface Entity {
   @route("/atlas/v2/entity/bulk/setClassifications")
   @post
   bulkSetClassifications is AtlasOperation<
-    AtlasEntityHeaders,
+    BodyParameter<AtlasEntityHeaders>,
     OkResponse<string[]>,
     {}
   >;
@@ -765,7 +765,7 @@ interface Entity {
   @route("/atlas/v2/entity/businessmetadata/import")
   @post
   importBusinessMetadata is AtlasImportOperation<
-    BusinessMetadataOptions,
+    BodyParameter<BusinessMetadataOptions>,
     BulkImportResult,
     MultipartFormDataRequestHeadersTraits
   >;
@@ -966,7 +966,7 @@ interface Entity {
       @doc("The collection where entities will be moved to.")
       @query
       collectionId: string;
-    } & MoveEntitiesOptions,
+    } & BodyParameter<MoveEntitiesOptions>,
     EntityMutationResult,
     {},
     AtlasErrorResponse
@@ -978,12 +978,8 @@ interface Glossary {
   @doc("""
     Get all glossaries. Recommend using limit/offset to get pagination result.
     Recommend using 'ignoreTermsAndCategories=true' and fetch terms/categories
-    separately using 
-    
-     'GET /datamap/api/atlas/v2/glossary/{glossaryId}/terms'
-    and 
-    
-     'GET '/datamap/api/atlas/v2/glossary/{glossaryId}/categories'.
+    separately using 'GET /datamap/api/atlas/v2/glossary/{glossaryId}/terms'
+    and 'GET '/datamap/api/atlas/v2/glossary/{glossaryId}/categories'.
     """)
   @route("/atlas/v2/glossary")
   @get
@@ -1015,7 +1011,7 @@ interface Glossary {
   @doc("Create a glossary.")
   @route("/atlas/v2/glossary")
   @post
-  create is AtlasOperation<AtlasGlossary, AtlasGlossary, {}>;
+  create is AtlasOperation<BodyParameter<AtlasGlossary>, AtlasGlossary, {}>;
 
   #suppress "@azure-tools/typespec-azure-core/request-body-problem" "This is Atlas API behavior"
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
@@ -1039,7 +1035,7 @@ interface Glossary {
   @route("/atlas/v2/glossary/category")
   @post
   createCategory is AtlasOperation<
-    AtlasGlossaryCategory,
+    BodyParameter<AtlasGlossaryCategory>,
     AtlasGlossaryCategory,
     {}
   >;
@@ -1069,7 +1065,7 @@ interface Glossary {
       @doc("The globally unique identifier of the category.")
       @path
       categoryId: string;
-    } & AtlasGlossaryCategory,
+    } & BodyParameter<AtlasGlossaryCategory>,
     AtlasGlossaryCategory,
     {}
   >;
@@ -1182,7 +1178,7 @@ interface Glossary {
       @doc("Whether include term hierarchy")
       @query
       includeTermHierarchy?: boolean;
-    } & AtlasGlossaryTerm,
+    } & BodyParameter<AtlasGlossaryTerm>,
     AtlasGlossaryTerm,
     {}
   >;
@@ -1214,7 +1210,7 @@ interface Glossary {
       @doc("Whether include term hierarchy")
       @query
       includeTermHierarchy?: boolean;
-    } & AtlasGlossaryTerm,
+    } & BodyParameter<AtlasGlossaryTerm>,
     AtlasGlossaryTerm,
     AtlasApiVersionParameterTraits
   >;
@@ -1416,7 +1412,7 @@ interface Glossary {
       @doc("Whether ignore terms and categories")
       @query
       ignoreTermsAndCategories?: boolean;
-    } & AtlasGlossary,
+    } & BodyParameter<AtlasGlossary>,
     AtlasGlossary,
     AtlasApiVersionParameterTraits
   >;
@@ -1623,7 +1619,7 @@ interface Discovery {
   @route("/search/query")
   @post
   query is Azure.Core.Foundations.Operation<
-    QueryOptions,
+    BodyParameter<QueryOptions>,
     QueryResult,
     {},
     AtlasErrorResponse
@@ -1634,7 +1630,7 @@ interface Discovery {
   @route("/search/suggest")
   @post
   suggest is Azure.Core.Foundations.Operation<
-    SuggestOptions,
+    BodyParameter<SuggestOptions>,
     SuggestResult,
     {},
     AtlasErrorResponse
@@ -1645,7 +1641,7 @@ interface Discovery {
   @route("/search/autocomplete")
   @post
   autoComplete is Azure.Core.Foundations.Operation<
-    AutoCompleteOptions,
+    BodyParameter<AutoCompleteOptions>,
     AutoCompleteResult,
     {},
     AtlasErrorResponse
@@ -1677,7 +1673,7 @@ interface Lineage {
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing API"
   @doc("Return immediate next page lineage info about entity with pagination")
-  @route("/lineage/{guid}/next/")
+  @route("/lineage/{guid}/next")
   @get
   getNextPage is Azure.Core.Foundations.Operation<
     {
@@ -1756,14 +1752,22 @@ interface Relationship {
   @doc("Create a new relationship between entities.")
   @route("/atlas/v2/relationship")
   @post
-  create is AtlasOperation<AtlasRelationship, AtlasRelationship, {}>;
+  create is AtlasOperation<
+    BodyParameter<AtlasRelationship>,
+    AtlasRelationship,
+    {}
+  >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "This is Atlas API, which does not require api version"
   @doc("Update an existing relationship between entities.")
   @route("/atlas/v2/relationship")
   @put
-  update is AtlasOperation<AtlasRelationship, AtlasRelationship, {}>;
+  update is AtlasOperation<
+    BodyParameter<AtlasRelationship>,
+    AtlasRelationship,
+    {}
+  >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "This is Atlas API, which does not require api version"
@@ -2055,7 +2059,7 @@ interface Type {
     """)
   @route("/atlas/v2/types/typedefs")
   @post
-  bulkCreate is AtlasOperation<AtlasTypesDef, AtlasTypesDef, {}>;
+  bulkCreate is AtlasOperation<BodyParameter<AtlasTypesDef>, AtlasTypesDef, {}>;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "This is Atlas API, which does not require api version"
@@ -2065,14 +2069,14 @@ interface Type {
     """)
   @route("/atlas/v2/types/typedefs")
   @put
-  bulkUpdate is AtlasOperation<AtlasTypesDef, AtlasTypesDef, {}>;
+  bulkUpdate is AtlasOperation<BodyParameter<AtlasTypesDef>, AtlasTypesDef, {}>;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "This is Atlas API, which does not require api version"
   @doc("Delete API for all types in bulk.")
   @route("/atlas/v2/types/typedefs")
   @delete
-  bulkDelete is AtlasOperation<AtlasTypesDef, void, {}>;
+  bulkDelete is AtlasOperation<BodyParameter<AtlasTypesDef>, void, {}>;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
   @doc("List all type definitions returned as a list of minimal information header.")

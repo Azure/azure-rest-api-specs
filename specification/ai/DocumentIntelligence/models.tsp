@@ -249,7 +249,6 @@ union DocumentFieldType {
   @doc("Boolean value, normalized to true or false.")
   boolean: "boolean",
 
-  @added(Versions.v2024_02_29_preview)
   @doc("Array of selected string values.")
   selectionGroup: "selectionGroup",
 }
@@ -264,8 +263,16 @@ union DocumentSignatureType {
 @doc("Custom document model build mode.")
 union DocumentBuildMode {
   string,
-  @doc("Target documents with similar visual templates.") "template",
-  @doc("Support documents with diverse visual templates.") "neural",
+
+  @doc("Target documents with similar visual templates.")
+  "template",
+
+  @doc("Support documents with diverse visual templates.")
+  "neural",
+
+  @added(Versions.v2024_07_31_preview)
+  @doc("Enable documents of all types using generative AI techniques.")
+  "generative",
 }
 
 @doc("Type of operation.")
@@ -283,6 +290,13 @@ union OperationKind {
     subscription.
     """)
   documentModelCopyTo: "documentModelCopyTo",
+
+  @added(Versions.v2024_07_31_preview)
+  @doc("""
+    Copy an existing document classifier to potentially a different resource, region, or
+    subscription.
+    """)
+  documentClassifierCopyTo: "documentClassifierCopyTo",
 
   @doc("Build a new custom classifier model.")
   documentClassifierBuild: "documentClassifierBuild",
@@ -321,7 +335,6 @@ union OperationStatus {
   @lroSucceeded
   succeeded: "succeeded",
 
-  @added(Versions.v2024_02_29_preview)
   @doc("The operation has completed.")
   @lroSucceeded
   completed: "completed",
@@ -348,6 +361,18 @@ union ContentSourceKind {
   "azureBlobFileList",
 }
 
+@added(Versions.v2024_07_31_preview)
+@doc("Additional output to generate during analysis.")
+union AnalyzeOutputOption {
+  string,
+
+  @doc("Generate searchable PDF output.")
+  "pdf",
+
+  @doc("Generate cropped images of detected figures.")
+  "figures",
+}
+
 @doc("Document analysis parameters.")
 model AnalyzeDocumentRequest {
   @doc("Document URL to analyze.  Either urlSource or base64Source must be specified.")
@@ -358,6 +383,31 @@ model AnalyzeDocumentRequest {
     must be specified.
     """)
   base64Source?: bytes;
+}
+
+@added(Versions.v2024_07_31_preview)
+@doc("Batch document analysis parameters.")
+model AnalyzeBatchDocumentsRequest {
+  @doc("""
+    Azure Blob Storage location containing the batch documents.  Either
+    azureBlobSource or azureBlobFileListSource must be specified.
+    """)
+  azureBlobSource?: AzureBlobContentSource;
+
+  @doc("""
+    Azure Blob Storage file list specifying the batch documents.  Either
+    azureBlobSource or azureBlobFileListSource must be specified.
+    """)
+  azureBlobFileListSource?: AzureBlobFileListContentSource;
+
+  @doc("Azure Blob Storage container URL where analyze result files will be stored.")
+  resultContainerUrl: url;
+
+  @doc("Blob name prefix of result files.")
+  resultPrefix?: string;
+
+  @doc("Overwrite existing analyze result files?")
+  overwriteExisting?: boolean = false;
 }
 
 @doc("Error response object.")
@@ -432,6 +482,63 @@ model AnalyzeResultOperation {
   analyzeResult?: AnalyzeResult;
 }
 
+@added(Versions.v2024_07_31_preview)
+@doc("Status and result of the analyze batch operation.")
+model AnalyzeBatchResultOperation {
+  @doc("Operation status.  notStarted, running, completed, or failed")
+  status: OperationStatus;
+
+  @doc("Date and time (UTC) when the operation was submitted.")
+  createdDateTime: utcDateTime;
+
+  @doc("Date and time (UTC) when the status was last updated.")
+  lastUpdatedDateTime: utcDateTime;
+
+  @doc("Operation progress (0-100).")
+  @minValue(0)
+  @maxValue(100)
+  percentCompleted?: int32;
+
+  @doc("Encountered error during batch document analysis.")
+  error?: Error;
+
+  @lroResult
+  @doc("Batch document analysis result.")
+  result?: AnalyzeBatchResult;
+}
+
+@added(Versions.v2024_07_31_preview)
+@doc("Batch document analysis result.")
+model AnalyzeBatchResult {
+  @doc("Number of documents that completed with status succeeded.")
+  succeededCount: int32;
+
+  @doc("Number of documents that completed with status failed.")
+  failedCount: int32;
+
+  @doc("Number of documents that completed with status skipped.")
+  skippedCount: int32;
+
+  @doc("Operation detail for each document in the batch.")
+  details: AnalyzeBatchOperationDetail[];
+}
+
+@added(Versions.v2024_07_31_preview)
+@doc("Operation detail for a document in a batch analysis.")
+model AnalyzeBatchOperationDetail {
+  @doc("Analyze status.  succeeded, failed, or skipped")
+  status: OperationStatus;
+
+  @doc("URL of the source document.")
+  sourceUrl: url;
+
+  @doc("URL of the analyze result JSON.")
+  resultUrl?: url;
+
+  @doc("Encountered error.")
+  error?: Error;
+}
+
 @doc("Document analysis result.")
 model AnalyzeResult {
   @doc("API version used to produce this result.")
@@ -465,9 +572,6 @@ model AnalyzeResult {
   @doc("Extracted figures.")
   figures?: DocumentFigure[];
 
-  @doc("Extracted lists.")
-  lists?: DocumentList[];
-
   @doc("Extracted sections.")
   sections?: DocumentSection[];
 
@@ -482,6 +586,9 @@ model AnalyzeResult {
 
   @doc("Extracted documents.")
   documents?: Document[];
+
+  @doc("List of warnings encountered.")
+  warnings?: Warning[];
 }
 
 @doc("Content and layout elements extracted from a page from the input.")
@@ -778,34 +885,10 @@ model DocumentFigure {
 
   @doc("List of footnotes associated with the figure.")
   footnotes?: DocumentFootnote[];
-}
 
-@doc("An object representing a list in the document.")
-model DocumentList {
-  @doc("Location of the list in the reading order concatenated content.")
-  spans: DocumentSpan[];
-
-  @doc("Items in the list.")
-  items: DocumentListItem[];
-}
-
-@doc("An object representing a list item in the document.")
-model DocumentListItem {
-  @doc("Level of the list item (1-indexed).")
-  @minValue(1)
-  level: int32;
-
-  @doc("Content of the list item.")
-  content: string;
-
-  @doc("Bounding regions covering the list item.")
-  boundingRegions?: BoundingRegion[];
-
-  @doc("Location of the list item in the reading order concatenated content.")
-  spans: DocumentSpan[];
-
-  @doc("Child elements of the list item.")
-  elements?: DocumentElement[];
+  @added(Versions.v2024_07_31_preview)
+  @doc("Figure ID.")
+  id?: string;
 }
 
 @doc("An object representing a section in the document.")
@@ -1006,7 +1089,6 @@ model DocumentField {
   @doc("Boolean value.")
   valueBoolean?: boolean;
 
-  @added(Versions.v2024_02_29_preview)
   @doc("Selection group value.")
   valueSelectionGroup?: string[];
 
@@ -1112,6 +1194,14 @@ model BuildDocumentModelRequest {
 
   @doc("List of key-value tag attributes associated with the document model.")
   tags?: Record<string>;
+
+  @added(Versions.v2024_07_31_preview)
+  @doc("Max number of V100-equivalent GPU hours to use for model training.  Default=0.5.")
+  maxTrainingHours?: float32 = 0.5;
+
+  @added(Versions.v2024_07_31_preview)
+  @doc("Allow overwriting an existing model with the same name.")
+  allowOverwrite?: boolean = false;
 }
 
 @doc("Azure Blob Storage content.")
@@ -1142,19 +1232,17 @@ model ComposeDocumentModelRequest {
   @maxLength(4096)
   description?: string;
 
-  @doc("List of component document models to compose.")
-  componentModels: ComponentDocumentModelDetails[];
+  @doc("Custom classifier to split and classify the input file.")
+  classifierId: string;
+
+  @doc("File splitting behavior.")
+  split?: SplitMode = SplitMode.none;
+
+  @doc("Dictionary mapping supported docTypes to the corresponding document models.")
+  docTypes: Record<DocumentTypeDetails>;
 
   @doc("List of key-value tag attributes associated with the document model.")
   tags?: Record<string>;
-}
-
-@doc("A component of a composed document model.")
-model ComponentDocumentModelDetails {
-  @doc("Unique document model name.")
-  @pattern("^[a-zA-Z0-9][a-zA-Z0-9._~-]{1,63}$")
-  @maxLength(64)
-  modelId: string;
 }
 
 @doc("Request body to authorize document model copy.")
@@ -1192,6 +1280,51 @@ model CopyAuthorization {
 
   @doc("URL of the copied document model in the target account.")
   targetModelLocation: url;
+
+  @doc("Token used to authorize the request.")
+  accessToken: string;
+
+  @doc("Date/time when the access token expires.")
+  expirationDateTime: utcDateTime;
+}
+
+@added(Versions.v2024_07_31_preview)
+@doc("Request body to authorize document classifier copy.")
+model AuthorizeClassifierCopyRequest {
+  @doc("Unique document classifier name.")
+  @pattern("^[a-zA-Z0-9][a-zA-Z0-9._~-]{1,63}$")
+  classifierId: string;
+
+  @doc("Document classifier description.")
+  @maxLength(4096)
+  description?: string;
+
+  @doc("List of key-value tag attributes associated with the document classifier.")
+  tags?: Record<string>;
+}
+
+@added(Versions.v2024_07_31_preview)
+@doc("""
+  Authorization to copy a document classifier to the specified target resource and
+  classifierId.
+  """)
+model ClassifierCopyAuthorization {
+  @doc("ID of the target Azure resource where the document classifier should be copied to.")
+  @extension("x-ms-azure-resource", true)
+  targetResourceId: string;
+
+  @doc("""
+    Location of the target Azure resource where the document classifier should be copied
+    to.
+    """)
+  targetResourceRegion: string;
+
+  @doc("Identifier of the target document classifier.")
+  @pattern("^[a-zA-Z0-9][a-zA-Z0-9._~-]{1,63}$")
+  targetClassifierId: string;
+
+  @doc("URL of the copied document classifier in the target account.")
+  targetClassifierLocation: url;
 
   @doc("Token used to authorize the request.")
   accessToken: string;
@@ -1253,38 +1386,56 @@ model DocumentModelDetails {
   description?: string;
 
   @doc("Date and time (UTC) when the document model was created.")
+  @visibility("read")
   createdDateTime: utcDateTime;
 
   @doc("Date and time (UTC) when the document model will expire.")
+  @visibility("read")
   expirationDateTime?: utcDateTime;
 
   @doc("API version used to create this document model.")
+  @visibility("read")
   apiVersion?: string;
 
   @doc("List of key-value tag attributes associated with the document model.")
   tags?: Record<string>;
 
   @doc("Custom document model build mode.")
+  @visibility("read")
   buildMode?: DocumentBuildMode;
 
   @doc("""
     Azure Blob Storage location containing the training data.  Either
     azureBlobSource or azureBlobFileListSource must be specified.
     """)
+  @visibility("read")
   azureBlobSource?: AzureBlobContentSource;
 
   @doc("""
     Azure Blob Storage file list specifying the training data.  Either
     azureBlobSource or azureBlobFileListSource must be specified.
     """)
+  @visibility("read")
   azureBlobFileListSource?: AzureBlobFileListContentSource;
 
+  @doc("For composed models, the custom classifier to split and classify the input file.")
+  classifierId?: string;
+
+  @doc("For composed models, the file splitting behavior.")
+  split?: SplitMode = SplitMode.none;
+
   @doc("Supported document types.")
+  @visibility("read")
   docTypes?: Record<DocumentTypeDetails>;
 
-  @added(Versions.v2024_02_29_preview)
   @doc("List of warnings encountered while building the model.")
+  @visibility("read")
   warnings?: Warning[];
+
+  @added(Versions.v2024_07_31_preview)
+  @doc("Number of V100-equivalent GPU hours consumed for model training.")
+  @visibility("read")
+  trainingHours?: float32;
 }
 
 @doc("Document type info.")
@@ -1297,11 +1448,27 @@ model DocumentTypeDetails {
   buildMode?: DocumentBuildMode;
 
   @doc("Description of the document semantic schema using a JSON Schema style syntax.")
-  fieldSchema: Record<DocumentFieldSchema>;
+  fieldSchema?: Record<DocumentFieldSchema>;
 
   @doc("Estimated confidence for each field.")
-  // FIXME: Cannot specify range
   fieldConfidence?: Record<float32>;
+
+  @doc("Document model to use for analyzing documents with specified type.")
+  @pattern("^[a-zA-Z0-9][a-zA-Z0-9._~-]{1,63}$")
+  @maxLength(64)
+  modelId?: string;
+
+  @doc("Only perform analysis if docType confidence is above threshold.")
+  confidenceThreshold?: float32;
+
+  @doc("List of optional analysis features.")
+  features?: DocumentAnalysisFeature[];
+
+  @doc("List of additional fields to extract.  Ex. \"NumberOfGuests,StoreNumber\"")
+  queryFields?: string[];
+
+  @doc("Maximum number of documents of specified type to analyze.  Default=all.")
+  maxDocumentsToAnalyze?: int32;
 }
 
 @doc("Description of the field semantic schema using a JSON Schema style syntax.")
@@ -1333,13 +1500,16 @@ model BuildDocumentClassifierRequest {
   @maxLength(4096)
   description?: string;
 
-  @added(Versions.v2024_02_29_preview)
   @doc("Base classifierId on top of which to train the classifier.")
   @pattern("^[a-zA-Z0-9][a-zA-Z0-9._~-]{1,63}$")
   baseClassifierId?: string;
 
   @doc("List of document types to classify against.")
   docTypes: Record<ClassifierDocumentTypeDetails>;
+
+  @added(Versions.v2024_07_31_preview)
+  @doc("Allow overwriting an existing classifier with the same name.")
+  allowOverwrite?: boolean = false;
 }
 
 @doc("Classifier document type info.")
@@ -1385,7 +1555,6 @@ model DocumentClassifierDetails {
   @doc("API version used to create this document classifier.")
   apiVersion: string;
 
-  @added(Versions.v2024_02_29_preview)
   @doc("Base classifierId on top of which the classifier was trained.")
   @pattern("^[a-zA-Z0-9][a-zA-Z0-9._~-]{1,63}$")
   baseClassifierId?: string;
@@ -1393,7 +1562,6 @@ model DocumentClassifierDetails {
   @doc("List of document types to classify against.")
   docTypes: Record<ClassifierDocumentTypeDetails>;
 
-  @added(Versions.v2024_02_29_preview)
   @doc("List of warnings encountered while building the classifier.")
   warnings?: Warning[];
 }
@@ -1414,9 +1582,6 @@ model ClassifyDocumentRequest {
 model ResourceDetails {
   @doc("Details regarding custom document models.")
   customDocumentModels: CustomDocumentModelsDetails;
-
-  @doc("Quota used, limit, and next reset date/time.")
-  customNeuralDocumentModelBuilds: QuotaDetails;
 }
 
 @doc("Details regarding custom document models.")
@@ -1426,18 +1591,6 @@ model CustomDocumentModelsDetails {
 
   @doc("Maximum number of custom document models supported in the current resource.")
   limit: int32;
-}
-
-@doc("Quota used, limit, and next reset date/time.")
-model QuotaDetails {
-  @doc("Amount of the resource quota used.")
-  used: int32;
-
-  @doc("Resource quota limit.")
-  quota: int32;
-
-  @doc("Date/time when the resource quota usage will be reset.")
-  quotaResetDateTime: utcDateTime;
 }
 
 @doc("Get Operation response object.")
@@ -1468,6 +1621,17 @@ model DocumentModelCopyToOperationDetails extends OperationDetails {
 
   @doc("Type of operation.")
   kind: OperationKind.documentModelCopyTo;
+}
+
+@added(Versions.v2024_07_31_preview)
+@doc("Get Operation response object.")
+model DocumentClassifierCopyToOperationDetails extends OperationDetails {
+  @doc("Operation result upon success.")
+  @lroResult
+  result?: DocumentClassifierDetails;
+
+  @doc("Type of operation.")
+  kind: OperationKind.documentClassifierCopyTo;
 }
 
 @doc("Get Operation response object.")
