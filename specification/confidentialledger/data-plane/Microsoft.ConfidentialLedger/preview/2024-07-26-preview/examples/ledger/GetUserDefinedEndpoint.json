@@ -6,17 +6,20 @@
     "200": {
       "description": "The custom endpoint.",
       "body": {
-        "bundle": {
           "metadata": {
             "endpoints": {
-              "/content": ""
+              "/content": {
+                "get": {
+                  "js_module": "test.js",
+                  "js_function": "content"
+                }
+              }
             }
           },
           "modules": {
             "name": "test.js",
             "module": "TESTJS"
           }
-        }
       }
     }
   }
