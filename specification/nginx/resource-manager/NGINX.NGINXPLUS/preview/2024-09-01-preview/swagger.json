@@ -26,7 +26,7 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/NGINX.NGINXPLUS/nginxDeployments/{deploymentName}/apiKeys/{apiKeyName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Nginx.NginxPlus/nginxDeployments/{deploymentName}/apiKeys/{apiKeyName}": {
       "put": {
         "tags": [
           "NginxApiKey"
@@ -41,32 +41,17 @@
         ],
         "parameters": [
           {
-            "in": "path",
-            "name": "subscriptionId",
-            "description": "The Id of subscription",
-            "required": true,
-            "type": "string"
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "in": "path",
-            "name": "resourceGroupName",
-            "description": "The name of resource group",
-            "required": true,
-            "type": "string"
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "in": "path",
-            "name": "deploymentName",
-            "description": "The name of targeted Nginx deployment",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/DeploymentNameParameter"
           },
           {
-            "in": "path",
-            "name": "apiKeyName",
-            "description": "The resource name of the API key",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/ApiKeyNameParameter"
+
           },
           {
             "in": "body",
@@ -75,11 +60,20 @@
             "schema": {
               "$ref": "#/definitions/NginxDeploymentApiKey"
             }
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/NginxDeploymentApiKey"
+            }
+          },
+          "201": {
+            "description": "Created",
             "schema": {
               "$ref": "#/definitions/NginxDeploymentApiKey"
             }
@@ -108,36 +102,27 @@
         ],
         "parameters": [
           {
-            "in": "path",
-            "name": "subscriptionId",
-            "description": "The Id of subscription",
-            "required": true,
-            "type": "string"
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "in": "path",
-            "name": "resourceGroupName",
-            "description": "The name of resource group",
-            "required": true,
-            "type": "string"
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "in": "path",
-            "name": "deploymentName",
-            "description": "The name of targeted Nginx deployment",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/DeploymentNameParameter"
           },
           {
-            "in": "path",
-            "name": "apiKeyName",
-            "description": "The resource name of the API key to delete",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/ApiKeyNameParameter"
+
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "204": {
+            "description": "Success"
+          },
+          "200": {
             "description": "Success"
           },
           "default": {
@@ -164,32 +149,17 @@
         ],
         "parameters": [
           {
-            "in": "path",
-            "name": "subscriptionId",
-            "description": "The Id of subscription",
-            "required": true,
-            "type": "string"
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "in": "path",
-            "name": "resourceGroupName",
-            "description": "The name of resource group",
-            "required": true,
-            "type": "string"
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "in": "path",
-            "name": "deploymentName",
-            "description": "The name of targeted Nginx deployment",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/DeploymentNameParameter"
           },
           {
-            "in": "path",
-            "name": "apiKeyName",
-            "description": "The resource name of the API key",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/ApiKeyNameParameter"
+
           }
         ],
         "responses": {
@@ -213,7 +183,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/NGINX.NGINXPLUS/nginxDeployments/{deploymentName}/apiKeys": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Nginx.NginxPlus/nginxDeployments/{deploymentName}/apiKeys": {
       "get": {
         "tags": [
           "NginxApiKey"
@@ -225,25 +195,13 @@
         ],
         "parameters": [
           {
-            "in": "path",
-            "name": "subscriptionId",
-            "description": "The Id of subscription",
-            "required": true,
-            "type": "string"
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "in": "path",
-            "name": "resourceGroupName",
-            "description": "The name of resource group",
-            "required": true,
-            "type": "string"
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "in": "path",
-            "name": "deploymentName",
-            "description": "The name of targeted Nginx deployment",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/DeploymentNameParameter"
           }
         ],
         "responses": {
@@ -1773,6 +1731,7 @@
     },
     "NginxDeploymentApiKey": {
       "type": "object",
+      "x-ms-azure-resource": true,
       "properties": {
         "id": {
           "type": "string",
@@ -1800,18 +1759,6 @@
           "format": "date-time",
           "type": "string",
           "description": "The time after which this Dataplane API Key is no longer valid."
-        },
-        "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState"
-        },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "location": {
-          "type": "string"
         }
       }
     },
@@ -2085,6 +2032,14 @@
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
+    },
+    "ApiKeyNameParameter": {
+      "in": "path",
+      "name": "apiKeyName",
+      "description": "The resource name of the API key",
+      "pattern": "^([a-z0-9A-Z][a-z0-9A-Z-]{0,28}[a-z0-9A-Z]|[a-z0-9A-Z])$",
+      "required": true,
+      "type": "string"
     }
   }
 }
