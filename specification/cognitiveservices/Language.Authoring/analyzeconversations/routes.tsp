@@ -5,7 +5,7 @@ import "./models.tsp";
 using TypeSpec.Rest;
 using TypeSpec.Http;
 
-namespace MicrosoftCognitiveLanguageService;
+namespace Language.Authoring;
 
 /**
  * Gets the details of a project.
@@ -61,7 +61,9 @@ op deleteProject is Azure.Core.Foundations.Operation<
     @path
     projectName: string;
   },
-  void
+  void,
+    {},
+  ErrorResponse
 >;
 
 /**
@@ -268,6 +270,7 @@ op listDeployments is Azure.Core.Foundations.Operation<
 /**
  * Gets the details of a deployment.
  */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @summary("Get deployment details")
 @route("/{projectName}/deployments/{deploymentName}")
 @get

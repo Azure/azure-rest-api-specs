@@ -4,7 +4,7 @@ import "@typespec/http";
 using TypeSpec.Rest;
 using TypeSpec.Http;
 
-namespace MicrosoftCognitiveLanguageService;
+namespace Language.Authoring;
 
 union ProjectKind {
   string,
