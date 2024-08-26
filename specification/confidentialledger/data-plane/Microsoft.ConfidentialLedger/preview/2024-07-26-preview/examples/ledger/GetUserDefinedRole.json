@@ -1,18 +1,17 @@
 {
   "parameters": {
-    "roleName": "reader",
     "api-version": "2024-07-26-preview"
   },
   "responses": {
     "200": {
       "description": "Get user defined roles and actions",
       "body": {
-        "roleAction": [
-          "Microsoft.ConfidentialLedger/ledger/users/read"
+        "administrator": [
+          "Microsoft.ConfidentialLedger/ledger/users/write",
+          "Microsoft.ConfidentialLedger/ledger/users/delete"
         ],
-        "roleName": [
-          "reader",
-          "Writer"
+        "contributor": [
+          "Microsoft.ConfidentialLedger/ledger/append"
         ]
       }
     }
