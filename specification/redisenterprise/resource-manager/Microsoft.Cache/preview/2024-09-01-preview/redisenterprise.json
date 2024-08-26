@@ -1777,7 +1777,14 @@
         },
         "type": {
           "type": "string",
-          "description": "Resource type. The only legal value of this property for checking redis enterprise cache name availability is 'Microsoft.Cache/redisenterprise'."
+          "description": "Resource type. The only legal value of this property for checking redis enterprise cache name availability is 'Microsoft.Cache/redisenterprise'.",
+          "enum": [
+            "Microsoft.Cache/redisenterprise"
+          ],
+          "x-ms-enum": {
+            "name": "type",
+            "modelAsString": true
+          }
         }
       },
       "required": [
@@ -1791,7 +1798,7 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "The level of Redis Enterprise cluster to deploy. Possible values: ('GeneralPurpose_G5', 'MemoryOptimized_M20', etc.). For more information on SKUs see the latest pricing documentation. Note that additional SKUs may become supported in the future.",
+          "description": "The level of Redis Enterprise cluster to deploy. Possible values: ('GeneralPurpose_G5', 'MemoryOptimized_M10', 'ComputeOptimized_X5', etc.). For more information on SKUs see the latest pricing documentation. Note that additional SKUs may become supported in the future.",
           "enum": [
             "Enterprise_E1",
             "Enterprise_E5",
@@ -1858,7 +1865,7 @@
         "capacity": {
           "type": "integer",
           "format": "int32",
-          "description": "The size of the Redis Enterprise cluster. Valid values depend upon the SKU, and are (2, 4, 6, ...) for Enterprise_E SKUs and (3, 9, 15, ...) for EnterpriseFlash_ SKUs. This parameter is not used with the other (GeneralPurpose, MemoryOptimized, ComputeOptimized) SKUs. They operate without any capacity value."
+          "description": "The size multiple of the Redis Enterprise cluster. Valid values depend upon the SKU, and are (2, 4, 6, ...) for Enterprise_E SKUs and (3, 9, 15, ...) for EnterpriseFlash_ SKUs. This parameter is not used with the other (GeneralPurpose, MemoryOptimized, ComputeOptimized) SKUs. They operate without any capacity value."
         }
       },
       "required": [
@@ -2291,7 +2298,7 @@
         },
         "accessKeysAuthentication": {
           "type": "string",
-          "description": "Access database using keys - default is enabled. This property can be Enabled/Disabled to allow or deny access with those. Can be updated even after database is created.",
+          "description": "Access database using keys - default is enabled. This property can be Enabled/Disabled to allow or deny access with the current access keys. Can be updated even after database is created.",
           "enum": [
             "Disabled",
             "Enabled"
@@ -2345,7 +2352,7 @@
           "type": "string",
           "description": "Name of access policy under specific access policy assignment.",
           "default": "default",
-          "pattern": "^([a-zA-Z0-9][a-zA-Z0-9- ]*[a-zA-Z0-9]|[a-zA-Z0-9])$",
+          "pattern": "^([a-zA-Z0-9][a-zA-Z0-9-]*[a-zA-Z0-9]|[a-zA-Z0-9])$",
           "x-ms-mutability": [
             "read",
             "update"
