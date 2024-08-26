@@ -42,17 +42,13 @@ model ComputeDeviceProperties {
   @visibility("read")
   cloudType: string;
 
-  @doc("The geographical region of the physical device as surfaced by Network Graph Service (NGS).")
-  @visibility("read")
-  region: string;
-
   @doc("The onboarding group as surfaced by Network Graph Service (NGS). ")
   @visibility("read")
   deploymentType: string;
 
   @doc("If the NgsDeviceType is a chassis manager or rack manager, the location of the rack. Unknown otherwise. Surfaced by Network Graph Service (NGS).")
   @visibility("read")
-  location: string;
+  dcRackLocation: string;
 
   @doc("Whether the device is for production. Surfaced by Network Graph Service (NGS).")
   @visibility("read")
