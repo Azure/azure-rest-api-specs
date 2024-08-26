@@ -16,8 +16,6 @@ import "./VirtualMachineInstance.tsp";
 import "./HybridIdentityMetadata.tsp";
 import "./AttestationStatus.tsp";
 import "./GuestAgent.tsp";
-import "../Operations.Management/models.tsp";
-
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.Core;
@@ -27,6 +25,7 @@ using TypeSpec.Versioning;
  * Azure Stack HCI management service
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "HCI itself is a short form."
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "Operations API is still spec'd, but now resides in another spec in this namespace."
 @armProviderNamespace
 @service({
   title: "Microsoft.AzureStackHCI",
@@ -45,4 +44,11 @@ enum Versions {
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @useDependency(Azure.Core.Versions.v1_0_Preview_1)
   v2024_02_01_preview: "2024-02-01-preview",
+
+  /**
+   * The 2024-05-01-preview API version.
+   */
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
+  v2024_05_01_preview: "2024-05-01-preview",
 }
