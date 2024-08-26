@@ -12,6 +12,10 @@ enum Versions {
   @doc("Dependent on Azure.ResourceManager.Versions.v1_0_Preview_1")
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   v1_preview: "2023-06-01-preview",
+
+  @doc("Dependent on Azure.ResourceManager.Version.v1_0_Preview_1")
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  v2024_08_23_preview: "2024-08-23-preview"
 }
 
 @doc("Marketplace subscription status of a resource.")
@@ -66,6 +70,7 @@ model OfferDetails {
   @doc("Plan Display Name for the marketplace offer")
   termId?: string;
 
+  @added(Versions.v2024_08_23_preview)
   @doc("Subscription auto renewal flag")
   autoRenew?: boolean;
 }
