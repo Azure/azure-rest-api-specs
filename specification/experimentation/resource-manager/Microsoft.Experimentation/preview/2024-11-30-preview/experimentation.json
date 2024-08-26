@@ -82,8 +82,11 @@
           "final-state-via": "azure-async-operation"
         },
         "x-ms-examples": {
-          "GetWorkspaces": {
+          "CreateOrUpdate": {
             "$ref": "./examples/ExperimentWorkspaces_CreateOrUpdate.json"
+          },
+          "CreateOrUpdate_Free": {
+            "$ref": "./examples/ExperimentWorkspaces_Free_CreateOrUpdate.json"
           }
         },
         "description": "Create an experiment workspace, or update an existing workspace",
@@ -491,7 +494,7 @@
             ]
           }
         },
-        "logsExporterStorageResourceId": {
+        "logsExporterStorageAccountResourceId": {
           "description": "The resource identifier of storage account where logs are exported from Log Analytics workspace. Experiment workspace uses it generating experiment analysis results.",
           "type": "string",
           "format": "arm-id",
@@ -505,7 +508,7 @@
               }
             ]
           }
-        },
+        }
       }
     },
     "ExperimentWorkspaceCreate": {
