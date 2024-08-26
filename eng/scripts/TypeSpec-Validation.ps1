@@ -2,6 +2,7 @@
 param (
   [switch]$CheckAll = $false,
   [switch]$GitClean = $false,
+  [switch]$DryRun = $false,
   [string]$BaseCommitish = "HEAD^",
   [string]$TargetCommitish = "HEAD"
 )
@@ -28,6 +29,12 @@ if ($typespecFolders) {
     }
 
     LogInfo "npm exec --no -- tsv $typespecFolder"
+
+    if ($DryRun) {
+      LogGroupEnd
+      continue
+    }
+
     npm exec --no -- tsv $typespecFolder 2>&1 | Write-Host
     if ($LASTEXITCODE) {
       $typespecFoldersWithFailures += $typespecFolder
