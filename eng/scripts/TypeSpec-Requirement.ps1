@@ -23,10 +23,7 @@ function Get-Suppression {
     [string]$fileInSpecFolder
   )
 
-  $suppressions = Get-Suppressions TypeSpecRequirement $fileInSpecFolder
-
-  # For now, we just use the first matching suppression returned by "get-suppressions" (#29003)
-  $suppression = $suppressions ? $suppressions[0] : $null
+  $suppression = Get-FirstSuppression "TypeSpecRequirement" $fileInSpecFolder
 
   if ($suppression) {
     # Each path must specify a single version (without wildcards) under "preview|stable"
