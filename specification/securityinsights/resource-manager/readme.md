@@ -92,6 +92,9 @@ suppressions:
   - code: AvoidAdditionalProperties
     from: Recommendations.json
     reason: These properties are unknown and changed frequently (each request can have different values for each entity)
+  - code: AvoidAnonymousTypes
+    from: Recommendations.json
+    reason: These properties are unknown (each request can have different values for each entity)
   - code: AvoidAdditionalProperties
     from: TriggeredAnalyticsRuleRuns.json
     reason: TriggeredAnalyticsRuleRun does not include a property called "additionalProperties", it is only used to mark that 'ruleRunAdditionalData' is a dictionary or string to object.
