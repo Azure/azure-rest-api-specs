@@ -694,10 +694,7 @@
         "description": "Custom roles allow users to define and manage app specific AuthZ policy.",
         "parameters": [
           {
-            "$ref": "#/parameters/RoleNameParameter"
-          },
-          {
-            "$ref": "#/parameters/RoleActionParameter"
+            "$ref": "#/parameters/RoleParameter"
           }
         ],
         "responses": {
@@ -723,10 +720,7 @@
         "description": "Custom roles allow users to define and manage app specific AuthZ policy.",
         "parameters": [
           {
-            "$ref": "#/parameters/RoleNameParameter"
-          },
-          {
-            "$ref": "#/parameters/RoleActionParameter"
+            "$ref": "#/parameters/RoleParameter"
           }
         ],
         "responses": {
@@ -1493,127 +1487,132 @@
       "description": "Role names for user defined roles",
       "type": "string"
     },
-    "RoleAction": {
-      "items": {
-        "$ref": "#/definitions/RoleActionDef"
-      },
-      "type": "object"
+    "RoleDefinition": {
+      "properties": {
+        "roleName": {
+          "$ref": "#/definitions/RoleName"
+        },
+        "roleAction": {
+          "$ref": "#/definitions/RoleAction"
+        },
+        "required": [
+          "roleName",
+          "roleAction"
+        ],
+        "type": "object"
+      }
     },
-    "RoleActionDef": {
+    "RoleAction": {
       "properties": {
         "roleAction": {
           "type": "string"
         }
       },
-      "required": [
-        "roleAction"
-      ],
       "type": "object"
+    },
+    "parameters": {
+      "CommitParameter": {
+        "name": "commit",
+        "in": "query",
+        "required": true,
+        "x-ms-parameter-location": "method",
+        "maximum": 9007199254740991,
+        "minimum": -9007199254740991,
+        "type": "integer",
+        "format": "int64",
+        "description": "The commit in the consensus protocol."
+      },
+      "CollectionIdParameter": {
+        "name": "collectionId",
+        "in": "query",
+        "required": false,
+        "x-ms-parameter-location": "method",
+        "description": "The collection id.",
+        "type": "string"
+      },
+      "TransactionIdParameter": {
+        "name": "transactionId",
+        "in": "path",
+        "required": true,
+        "x-ms-parameter-location": "method",
+        "description": "Identifies a write transaction.",
+        "type": "string"
+      },
+      "TransactionIdFromParameter": {
+        "name": "fromTransactionId",
+        "in": "query",
+        "required": false,
+        "x-ms-parameter-location": "method",
+        "description": "Specify the first transaction ID in a range.",
+        "type": "string"
+      },
+      "TransactionIdToParameter": {
+        "name": "toTransactionId",
+        "in": "query",
+        "required": false,
+        "x-ms-parameter-location": "method",
+        "description": "Specify the last transaction ID in a range.",
+        "type": "string"
+      },
+      "UserDetailsParameter": {
+        "name": "userDetails",
+        "description": "Details about a Confidential Ledger user.",
+        "in": "body",
+        "required": true,
+        "x-ms-parameter-location": "method",
+        "schema": {
+          "$ref": "#/definitions/LedgerUser"
+        }
+      },
+      "UserIdParameter": {
+        "name": "userId",
+        "in": "path",
+        "required": true,
+        "description": "The user id, either an AAD object ID or certificate fingerprint.",
+        "type": "string",
+        "x-ms-parameter-location": "method",
+        "x-ms-skip-url-encoding": true
+      },
+      "ModuleParameter": {
+        "name": "module",
+        "required": true,
+        "description": "module name of the custom endpoint",
+        "in": "body",
+        "x-ms-parameter-location": "method",
+        "x-ms-skip-url-encoding": true,
+        "schema": {
+          "$ref": "#/definitions/ModuleDef_array"
+        }
+      },
+      "BundleParameter": {
+        "name": "bundle",
+        "description": "bundle parameter description",
+        "in": "body",
+        "required": true,
+        "x-ms-parameter-location": "method",
+        "schema": {
+          "$ref": "#/definitions/Bundle"
+        }
+      },
+      "RoleNameParameter": {
+        "name": "roleName",
+        "description": "user defined role name",
+        "in": "body",
+        "required": true,
+        "x-ms-parameter-location": "method",
+        "schema": {
+          "$ref": "#/definitions/RoleName"
+        }
+      },
+      "RoleParameter": {
+        "name": "role",
+        "description": "role actions for user defined roles",
+        "in": "body",
+        "required": true,
+        "x-ms-parameter-location": "method",
+        "schema": {
+          "$ref": "#/definitions/RoleDefinition"
+        }
+      }
     }
-  },
-  "parameters": {
-    "CommitParameter": {
-      "name": "commit",
-      "in": "query",
-      "required": true,
-      "x-ms-parameter-location": "method",
-      "maximum": 9007199254740991,
-      "minimum": -9007199254740991,
-      "type": "integer",
-      "format": "int64",
-      "description": "The commit in the consensus protocol."
-    },
-    "CollectionIdParameter": {
-      "name": "collectionId",
-      "in": "query",
-      "required": false,
-      "x-ms-parameter-location": "method",
-      "description": "The collection id.",
-      "type": "string"
-    },
-    "TransactionIdParameter": {
-      "name": "transactionId",
-      "in": "path",
-      "required": true,
-      "x-ms-parameter-location": "method",
-      "description": "Identifies a write transaction.",
-      "type": "string"
-    },
-    "TransactionIdFromParameter": {
-      "name": "fromTransactionId",
-      "in": "query",
-      "required": false,
-      "x-ms-parameter-location": "method",
-      "description": "Specify the first transaction ID in a range.",
-      "type": "string"
-    },
-    "TransactionIdToParameter": {
-      "name": "toTransactionId",
-      "in": "query",
-      "required": false,
-      "x-ms-parameter-location": "method",
-      "description": "Specify the last transaction ID in a range.",
-      "type": "string"
-    },
-    "UserDetailsParameter": {
-      "name": "userDetails",
-      "description": "Details about a Confidential Ledger user.",
-      "in": "body",
-      "required": true,
-      "x-ms-parameter-location": "method",
-      "schema": {
-        "$ref": "#/definitions/LedgerUser"
-      }
-    },
-    "UserIdParameter": {
-      "name": "userId",
-      "in": "path",
-      "required": true,
-      "description": "The user id, either an AAD object ID or certificate fingerprint.",
-      "type": "string",
-      "x-ms-parameter-location": "method",
-      "x-ms-skip-url-encoding": true
-    },
-    "ModuleParameter": {
-      "name": "module",
-      "required": true,
-      "description": "module name of the custom endpoint",
-      "in": "body",
-      "x-ms-parameter-location": "method",
-      "x-ms-skip-url-encoding": true,
-      "schema": {
-        "$ref": "#/definitions/ModuleDef_array"
-      }
-    },
-    "BundleParameter": {
-      "name": "bundle",
-      "description": "bundle parameter description",
-      "in": "body",
-      "required": true,
-      "x-ms-parameter-location": "method",
-      "schema": {
-        "$ref": "#/definitions/Bundle"
-      }
-    },
-    "RoleNameParameter": {
-      "name": "roleName",
-      "description": "user defined role name",
-      "in": "body",
-      "required": true,
-      "x-ms-parameter-location": "method",
-      "schema": {
-        "$ref": "#/definitions/RoleName"
-      }
-    },
-    "RoleActionParameter": {
-      "name": "roleAction",
-      "description": "role actions for user defined roles",
-      "in": "body",
-      "required": true,
-      "x-ms-parameter-location": "method",
-      "schema": {
-        "$ref": "#/definitions/RoleAction"
-      }
-    }
-  }
 }
