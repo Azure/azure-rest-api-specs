@@ -665,7 +665,7 @@
         "description": "Custom roles allow users to define and manage app specific AuthZ policy.",
         "parameters": [
           {
-            "$ref": "#/parameters/UserDefinedRoleNameParameter"
+            "$ref": "#/parameters/RoleNameParameter"
           }
         ],
         "responses": {
@@ -694,10 +694,10 @@
         "description": "Custom roles allow users to define and manage app specific AuthZ policy.",
         "parameters": [
           {
-            "$ref": "#/parameters/UserDefinedRoleNameParameter"
+            "$ref": "#/parameters/RoleNameParameter"
           },
           {
-            "$ref": "#/parameters/UserDefinedRoleActionParameter"
+            "$ref": "#/parameters/RoleActionParameter"
           }
         ],
         "responses": {
@@ -723,10 +723,10 @@
         "description": "Custom roles allow users to define and manage app specific AuthZ policy.",
         "parameters": [
           {
-            "$ref": "#/parameters/UserDefinedRoleNameParameter"
+            "$ref": "#/parameters/RoleNameParameter"
           },
           {
-            "$ref": "#/parameters/UserDefinedRoleActionParameter"
+            "$ref": "#/parameters/RoleActionParameter"
           }
         ],
         "responses": {
@@ -752,7 +752,7 @@
         "description": "A Custom role allows the users to create and manage their own role actions using the API.",
         "parameters": [
           {
-            "$ref": "#/parameters/UserDefinedRoleNameParameter"
+            "$ref": "#/parameters/RoleNameParameter"
           }
         ],
         "responses": {
@@ -1500,7 +1500,7 @@
       "type": "array"
     },
     "RoleActionDef": {
-      "type": "object",
+      "type": "array",
       "properties": {
         "roleAction": {
           "type": "string"
@@ -1595,7 +1595,7 @@
         "$ref": "#/definitions/Bundle"
       }
     },
-    "UserDefinedRoleNameParameter": {
+    "RoleNameParameter": {
       "name": "roleName",
       "description": "user defined role name",
       "in": "body",
@@ -1605,7 +1605,7 @@
         "$ref": "#/definitions/UserDefinedRoleName"
       }
     },
-    "UserDefinedRoleActionParameter": {
+    "RoleActionParameter": {
       "name": "roleAction",
       "description": "role actions for user defined roles",
       "in": "body",
