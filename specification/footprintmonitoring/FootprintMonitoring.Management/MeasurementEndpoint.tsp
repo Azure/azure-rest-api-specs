@@ -70,14 +70,14 @@ interface MeasurementEndpoints {
       },
     }
   )
-  @OpenAPI.extension(
-    "x-ms-examples",
-    {
-      `Delete a Footprint measurement endpoint (min).`: {
-        $ref: "./examples/MeasurementEndpoints_Delete_MinimumSet_Gen.json",
-      },
-    }
-  )
+  // @OpenAPI.extension(
+  //   "x-ms-examples",
+  //   {
+  //     `Delete a Footprint measurement endpoint (min).`: {
+  //       $ref: "./examples/MeasurementEndpoints_Delete_MinimumSet_Gen.json",
+  //     },
+  //   }
+  // )
   delete is ArmResourceDeleteSync<MeasurementEndpoint>;
 
   /**

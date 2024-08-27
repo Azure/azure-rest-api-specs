@@ -75,14 +75,14 @@ interface Profiles {
       },
     }
   )
-  @OpenAPI.extension(
-    "x-ms-examples",
-    {
-      `Delete a Footprint profile (min).`: {
-        $ref: "./examples/Profiles_Delete_MinimumSet_Gen.json",
-      },
-    }
-  )
+  // @OpenAPI.extension(
+  //   "x-ms-examples",
+  //   {
+  //     `Delete a Footprint profile (min).`: {
+  //       $ref: "./examples/Profiles_Delete_MinimumSet_Gen.json",
+  //     },
+  //   }
+  // )
   delete is ArmResourceDeleteSync<Profile>;
 
   /**
