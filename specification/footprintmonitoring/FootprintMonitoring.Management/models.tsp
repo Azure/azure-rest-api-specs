@@ -9,8 +9,38 @@ using Azure.ResourceManager.Foundations;
 
 namespace Microsoft.FootprintMonitoring;
 
-interface Operations extends Azure.ResourceManager.Operations {}
+interface Operations {
+  @tag("Operations")
+  @autoRoute
+  @doc("List the operations for the provider")
+  @segment("operations")
+  @armResourceRead(Azure.ResourceManager.Foundations.OperationListResult)
+  @OpenAPI.extension(
+    "x-ms-examples",
+    {
+      `List all operations (maximum).`: {
+        $ref: "./examples/Operations_List_MaximumSet_Gen.json",
+      },
+    }
+  )
+  @OpenAPI.extension(
+    "x-ms-examples",
+    {
+      `List all operations (maximum).`: {
+        $ref: "./examples/Operations_List_MinimumSet_Gen.json",
+      },
+    }
+  )
+  @get
+  list(
+    ...ApiVersionParameter,
 
+    @path
+    @segment("providers")
+    @doc("The provider namespace (this parameter will not show up in operations).")
+    provider: "Microsoft.ThisWillBeReplaced",
+  ): ArmResponse<Azure.ResourceManager.Foundations.OperationListResult> | ErrorResponse;
+}
 /**
  * The provisioned state of the resource.
  */
