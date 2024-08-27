@@ -38,7 +38,7 @@ These settings apply only when `--tag=package-2024-08-21-preview` is specified o
 
 ```yaml $(tag) == 'package-2024-08-21-preview'
 input-file:
-  - Microsoft.FootprintMonitoring/preview/2024-08-21-preview/footprintMonitoring.json
+  - Microsoft.FootprintMonitoring/preview/2024-08-21-preview/footprintProfiles.json
 ```
 
 ### Tag: package-2020-02-01-preview
