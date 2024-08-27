@@ -1149,6 +1149,32 @@
     }
   },
   "definitions": {
+    "DefaultErrorResponse": {
+      "type": "object",
+      "description": "The base response with an error.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ErrorDefinition",
+          "description": "The error details, if any."
+        }
+      }
+    },
+    "ErrorDefinition": {
+      "type": "object",
+      "description": "The details of an error.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Service specific error code which serves as the substatus for the HTTP error code.",
+          "readOnly": true
+        },
+        "message": {
+          "type": "string",
+          "description": "Description of the error.",
+          "readOnly": true
+        }
+      }
+    },
     "Experiment": {
       "type": "object",
       "description": "A model representing the Footprint experiment.",
@@ -1632,6 +1658,83 @@
         ]
       },
       "readOnly": true
+    },
+    "Resource": {
+      "type": "object",
+      "description": "An Azure resource.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Fully qualified resource Id for the resource.",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the resource.",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of the resource.",
+          "readOnly": true
+        },
+        "tags": {
+          "type": "object",
+          "description": "Tags for the resource.",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "location": {
+          "type": "string",
+          "description": "Region where the Azure resource is located.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      }
+    },
+    "ResourceProviderOperationDefinition": {
+      "type": "object",
+      "description": "Describes the Resource Provider Operation.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Resource provider operation name."
+        },
+        "display": {
+          "$ref": "#/definitions/ResourceProviderOperationDisplay",
+          "description": "Resource provider display properties."
+        }
+      }
+    },
+    "ResourceProviderOperationDisplay": {
+      "type": "object",
+      "description": "Describes the properties of the Operation.",
+      "properties": {
+        "provider": {
+          "type": "string",
+          "description": "Name of the resource provider."
+        },
+        "resource": {
+          "type": "string",
+          "description": "Name of the resource type."
+        },
+        "operation": {
+          "type": "string",
+          "description": "Name of the resource provider operation."
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the resource provider operation."
+        }
+      }
     },
     "SubResource": {
       "type": "object",
