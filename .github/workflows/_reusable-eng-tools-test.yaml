@@ -45,12 +45,19 @@ jobs:
             eng
             ${{ inputs.sparse-checkout-paths }}
 
+      # TODO: Merge latest from main/RPSaaSMaster after checkout
+
       - name: Use Node ${{ matrix.node-version }}.x
         uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}.x
 
-      - run: npm install --no-package-lock
+      - if: github.ref_name == 'typespec-next' || github.base_ref == 'typespec-next'
+        run: npm install --no-package-lock
+        shell: pwsh
+
+      - if: github.ref_name != 'typespec-next' && github.base_ref != 'typespec-next'
+        run: npm ci
         shell: pwsh
 
       - run: npm ls -a

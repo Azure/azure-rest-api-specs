@@ -13,6 +13,25 @@ steps:
 
   - script: npm install --no-package-lock
     displayName: npm install --no-package-lock
+    condition: |
+      and(
+        succeeded(),
+        or(
+          eq(variables['Build.SourceBranchName'], 'typespec-next'),
+          eq(variables['System.PullRequest.targetBranchName'], 'typespec-next')
+        )
+      )
+
+  - script: npm ci
+    displayName: npm ci
+    condition: |
+      and(
+        succeeded(),
+        and(
+          ne(variables['Build.SourceBranchName'], 'typespec-next'),
+          ne(variables['System.PullRequest.targetBranchName'], 'typespec-next')
+        )
+      )
 
   - script: npm ls -a
     displayName: npm ls -a

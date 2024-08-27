@@ -8,8 +8,7 @@ jobs:
     vmImage: ubuntu-22.04
 
   steps:
-  - script: git -c user.name="azure-sdk" -c user.email="azuresdk@microsoft.com" merge -Xours origin/main
-    displayName: git merge origin/main
+  - template: /eng/pipelines/templates/steps/merge-parent-if-typespec-next.yml
 
   - template: /eng/pipelines/templates/steps/npm-install.yml
 
@@ -17,3 +16,24 @@ jobs:
       $(Build.SourcesDirectory)/eng/scripts/TypeSpec-Validation.ps1 -GitClean -BaseCommitish HEAD~2 -Verbose
     displayName: Validate Impacted Specs
     ignoreLASTEXITCODE: true
+    condition: |
+      and(
+        succeeded(),
+        or(
+          eq(variables['Build.SourceBranchName'], 'typespec-next'),
+          eq(variables['System.PullRequest.targetBranchName'], 'typespec-next')
+        )
+      )
+
+  - pwsh: |
+      $(Build.SourcesDirectory)/eng/scripts/TypeSpec-Validation.ps1 -GitClean -Verbose
+    displayName: Validate Impacted Specs
+    ignoreLASTEXITCODE: true
+    condition: |
+      and(
+        succeeded(),
+        and(
+          ne(variables['Build.SourceBranchName'], 'typespec-next'),
+          ne(variables['System.PullRequest.targetBranchName'], 'typespec-next')
+        )
+      )
