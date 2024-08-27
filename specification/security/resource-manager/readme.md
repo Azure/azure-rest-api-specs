@@ -147,7 +147,6 @@ suppressions:
     reason: False positive. This check flags the the API which doesn't actually return collection but a singleton.
 ```
 
-<<<<<<< HEAD
 ### Tag: package-preview-2024-07
 
 These settings apply only when `--tag=package-preview-2024-07` is specified on the command line.
@@ -157,8 +156,6 @@ input-file:
   - Microsoft.Security/preview/2024-07-01-preview/securityConnectors.json
 ```
 
-=======
->>>>>>> upstream/main
 ### Tag: package-preview-2024-03
 
 These settings apply only when `--tag=package-preview-2024-03` is specified on the command line.
@@ -527,11 +524,7 @@ input-file:
 - Microsoft.Security/preview/2023-05-01-preview/healthReports.json
 - Microsoft.Security/preview/2023-12-01-preview/automations.json
 - Microsoft.Security/preview/2023-12-01-preview/securityContacts.json
-<<<<<<< HEAD
 - Microsoft.Security/preview/2024-07-01-preview/securityConnectors.json
-=======
-- Microsoft.Security/preview/2024-03-01-preview/securityConnectors.json
->>>>>>> upstream/main
 - Microsoft.Security/preview/2024-05-15-preview/securityConnectorsDevOps.json
 - Microsoft.Security/stable/2017-08-01/complianceResults.json
 - Microsoft.Security/stable/2019-01-01/advancedThreatProtectionSettings.json
