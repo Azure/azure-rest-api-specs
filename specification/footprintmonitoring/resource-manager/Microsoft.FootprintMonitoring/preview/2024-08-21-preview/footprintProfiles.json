@@ -28,14 +28,15 @@
     }
   ],
   "securityDefinitions": {
-    "azure_auth": {
+    "AadOauth2Auth": {
       "type": "oauth2",
+      "description": "The Azure Active Directory OAuth2 Flow",
+      "flow": "accessCode",
       "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
-      "flow": "implicit",
-      "description": "Azure Active Directory OAuth2 Flow",
       "scopes": {
-        "user_impersonation": "impersonate your user account"
-      }
+        "user_impersonation": ""
+      },
+      "tokenUrl": "https://login.microsoftonline.com/common/oauth2/token"
     }
   },
   "tags": [
