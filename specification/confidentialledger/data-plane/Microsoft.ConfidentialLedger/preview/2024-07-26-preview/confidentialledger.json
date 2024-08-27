@@ -1495,7 +1495,7 @@
           "items": {
             "$ref": "#/definitions/RoleActionDef"
           },
-          "type": "array"
+          "type": "object"
         }
       }
     },
@@ -1507,18 +1507,19 @@
       "items": {
         "$ref": "#/definitions/RoleActionDef"
       },
-      "type": "array"
+      "type": "object"
     },
     "RoleActionDef": {
       "properties": {
         "roleAction": {
-          "type": "string"
+          "description": "action of the user defined role",
+          "type": "array"
         }
       },
       "required": [
         "roleAction"
       ],
-      "type": "array"
+      "type": "object"
     }
   },
   "parameters": {
