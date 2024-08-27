@@ -59,3 +59,111 @@ union DeviceType {
 
   string,
 }
+
+@doc("Deployment type enum")
+union DeploymentType {
+  @doc("Pilotfish deployment.")
+  Pilotfish: "Pilotfish",
+
+  @doc("AzureAll deployment.")
+  AzureAll: "AzureAll",
+
+  @doc("Exchange deployment.")
+  Exchange: "Exchange",
+
+  @doc("Autopilot deployment.")
+  Autopilot: "Autopilot",
+
+  @doc("Sharepoint deployment.")
+  Sharepoint: "Sharepoint",
+
+  @doc("FOPE deployment.")
+  FOPE: "FOPE",
+
+  @doc("DatacenterServices deployment.")
+  DatacenterServices: "DatacenterServices",
+
+  @doc("MacCloud deployment.")
+  MacCloud: "MacCloud",
+
+  @doc("PreBuild deployment.")
+  PreBuild: "PreBuild",
+
+  @doc("AzureDNS deployment.")
+  AzureDNS: "AzureDNS",
+
+  @doc("CPS deployment.")
+  CPS: "CPS",
+
+  @doc("Tycoon deployment.")
+  Tycoon: "Tycoon",
+
+  @doc("AzureEngSys deployment.")
+  AzureEngSys: "AzureEngSys",
+
+  @doc("Fabric deployment.")
+  Fabric: "Fabric",
+
+  @doc("DCCE deployment.")
+  DCCE: "DCCE",
+
+  @doc("AzureKeyVault deployment.")
+  AzureKeyVault: "AzureKeyVault",
+
+  @doc("FirstPartyNetwork deployment.")
+  FirstPartyNetwork: "FirstPartyNetwork",
+
+  @doc("Unknown deployment.")
+  Unknown: "Unknown",
+
+  string,
+}
+
+@doc("Machine type enum")
+union MachineType {
+  @doc("Blade machine type.")
+  Blade: "Blade",
+
+  @doc("MachineForLogicalDevice machine type.")
+  MachineForLogicalDevice: "MachineForLogicalDevice",
+
+  @doc("SubstrateMachine machine type.")
+  SubstrateMachine: "SubstrateMachine",
+
+  @doc("LegacyMachine machine type.")
+  LegacyMachine: "LegacyMachine",
+
+  @doc("Baremetal machine type.")
+  Baremetal: "Baremetal",
+
+  @doc("LogicalNameMachine machine type.")
+  LogicalNameMachine: "LogicalNameMachine",
+
+  @doc("Server machine type.")
+  Server: "Server",
+
+  @doc("AzureHost machine type.")
+  AzureHost: "AzureHost",
+
+  @doc("LogicalMachine machine type.")
+  LogicalMachine: "LogicalMachine",
+
+  @doc("Unknown machine type.")
+  Unknown: "Unknown",
+
+  string,
+}
+
+@doc("Workload type enum")
+union WorkloadType {
+  @doc("Baremetal workload type.")
+  Baremetal: "Baremetal",
+
+  @doc("VM workload type.")
+  VM: "VM",
+
+  @doc("Unknown workload type.")
+  Unknown: "Unknown",
+
+  string,
+}

@@ -36,7 +36,7 @@ model ComputeDeviceProperties {
 
   @doc("The onboarding group as surfaced by Network Graph Service (NGS). ")
   @visibility("read")
-  deploymentType: string;
+  deploymentType: DeploymentType;
 
   @doc("If the NgsDeviceType is a chassis manager or rack manager, the location of the rack. Unknown otherwise. Surfaced by Network Graph Service (NGS).")
   @visibility("read")
@@ -68,7 +68,7 @@ model ComputeDeviceProperties {
 
   @doc("A device that connects to the network. One of: Server, ChassisManager, RackManager.")
   @visibility("read")
-  machineType: string;
+  machineType: MachineType;
 
   @doc("The name of the physical structure the machine is on.")
   @visibility("read")
@@ -80,7 +80,7 @@ model ComputeDeviceProperties {
 
   @doc("If the machine type is a server, the environment in which workloads are run. One of: Baremetal, VM, Container.")
   @visibility("read")
-  workloadType: string;
+  workloadType: WorkloadType;
 
   @doc("The status of the last operation")
   @visibility("read")

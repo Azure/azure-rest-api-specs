@@ -183,7 +183,7 @@
           "readOnly": true
         },
         "deploymentType": {
-          "type": "string",
+          "$ref": "#/definitions/DeploymentType",
           "description": "The onboarding group as surfaced by Network Graph Service (NGS). ",
           "readOnly": true
         },
@@ -223,7 +223,7 @@
           "readOnly": true
         },
         "machineType": {
-          "type": "string",
+          "$ref": "#/definitions/MachineType",
           "description": "A device that connects to the network. One of: Server, ChassisManager, RackManager.",
           "readOnly": true
         },
@@ -238,7 +238,7 @@
           "readOnly": true
         },
         "workloadType": {
-          "type": "string",
+          "$ref": "#/definitions/WorkloadType",
           "description": "If the machine type is a server, the environment in which workloads are run. One of: Baremetal, VM, Container.",
           "readOnly": true
         },
@@ -301,6 +301,126 @@
         "value"
       ]
     },
+    "DeploymentType": {
+      "type": "string",
+      "description": "Deployment type enum",
+      "enum": [
+        "Pilotfish",
+        "AzureAll",
+        "Exchange",
+        "Autopilot",
+        "Sharepoint",
+        "FOPE",
+        "DatacenterServices",
+        "MacCloud",
+        "PreBuild",
+        "AzureDNS",
+        "CPS",
+        "Tycoon",
+        "AzureEngSys",
+        "Fabric",
+        "DCCE",
+        "AzureKeyVault",
+        "FirstPartyNetwork",
+        "Unknown"
+      ],
+      "x-ms-enum": {
+        "name": "DeploymentType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Pilotfish",
+            "value": "Pilotfish",
+            "description": "Pilotfish deployment."
+          },
+          {
+            "name": "AzureAll",
+            "value": "AzureAll",
+            "description": "AzureAll deployment."
+          },
+          {
+            "name": "Exchange",
+            "value": "Exchange",
+            "description": "Exchange deployment."
+          },
+          {
+            "name": "Autopilot",
+            "value": "Autopilot",
+            "description": "Autopilot deployment."
+          },
+          {
+            "name": "Sharepoint",
+            "value": "Sharepoint",
+            "description": "Sharepoint deployment."
+          },
+          {
+            "name": "FOPE",
+            "value": "FOPE",
+            "description": "FOPE deployment."
+          },
+          {
+            "name": "DatacenterServices",
+            "value": "DatacenterServices",
+            "description": "DatacenterServices deployment."
+          },
+          {
+            "name": "MacCloud",
+            "value": "MacCloud",
+            "description": "MacCloud deployment."
+          },
+          {
+            "name": "PreBuild",
+            "value": "PreBuild",
+            "description": "PreBuild deployment."
+          },
+          {
+            "name": "AzureDNS",
+            "value": "AzureDNS",
+            "description": "AzureDNS deployment."
+          },
+          {
+            "name": "CPS",
+            "value": "CPS",
+            "description": "CPS deployment."
+          },
+          {
+            "name": "Tycoon",
+            "value": "Tycoon",
+            "description": "Tycoon deployment."
+          },
+          {
+            "name": "AzureEngSys",
+            "value": "AzureEngSys",
+            "description": "AzureEngSys deployment."
+          },
+          {
+            "name": "Fabric",
+            "value": "Fabric",
+            "description": "Fabric deployment."
+          },
+          {
+            "name": "DCCE",
+            "value": "DCCE",
+            "description": "DCCE deployment."
+          },
+          {
+            "name": "AzureKeyVault",
+            "value": "AzureKeyVault",
+            "description": "AzureKeyVault deployment."
+          },
+          {
+            "name": "FirstPartyNetwork",
+            "value": "FirstPartyNetwork",
+            "description": "FirstPartyNetwork deployment."
+          },
+          {
+            "name": "Unknown",
+            "value": "Unknown",
+            "description": "Unknown deployment."
+          }
+        ]
+      }
+    },
     "DeviceType": {
       "type": "string",
       "description": "Device type enum",
@@ -339,6 +459,78 @@
             "name": "EPMS",
             "value": "EPMS",
             "description": "The EPMS."
+          }
+        ]
+      }
+    },
+    "MachineType": {
+      "type": "string",
+      "description": "Machine type enum",
+      "enum": [
+        "Blade",
+        "MachineForLogicalDevice",
+        "SubstrateMachine",
+        "LegacyMachine",
+        "Baremetal",
+        "LogicalNameMachine",
+        "Server",
+        "AzureHost",
+        "LogicalMachine",
+        "Unknown"
+      ],
+      "x-ms-enum": {
+        "name": "MachineType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Blade",
+            "value": "Blade",
+            "description": "Blade machine type."
+          },
+          {
+            "name": "MachineForLogicalDevice",
+            "value": "MachineForLogicalDevice",
+            "description": "MachineForLogicalDevice machine type."
+          },
+          {
+            "name": "SubstrateMachine",
+            "value": "SubstrateMachine",
+            "description": "SubstrateMachine machine type."
+          },
+          {
+            "name": "LegacyMachine",
+            "value": "LegacyMachine",
+            "description": "LegacyMachine machine type."
+          },
+          {
+            "name": "Baremetal",
+            "value": "Baremetal",
+            "description": "Baremetal machine type."
+          },
+          {
+            "name": "LogicalNameMachine",
+            "value": "LogicalNameMachine",
+            "description": "LogicalNameMachine machine type."
+          },
+          {
+            "name": "Server",
+            "value": "Server",
+            "description": "Server machine type."
+          },
+          {
+            "name": "AzureHost",
+            "value": "AzureHost",
+            "description": "AzureHost machine type."
+          },
+          {
+            "name": "LogicalMachine",
+            "value": "LogicalMachine",
+            "description": "LogicalMachine machine type."
+          },
+          {
+            "name": "Unknown",
+            "value": "Unknown",
+            "description": "Unknown machine type."
           }
         ]
       }
@@ -415,6 +607,36 @@
         ]
       },
       "readOnly": true
+    },
+    "WorkloadType": {
+      "type": "string",
+      "description": "Workload type enum",
+      "enum": [
+        "Baremetal",
+        "VM",
+        "Unknown"
+      ],
+      "x-ms-enum": {
+        "name": "WorkloadType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Baremetal",
+            "value": "Baremetal",
+            "description": "Baremetal workload type."
+          },
+          {
+            "name": "VM",
+            "value": "VM",
+            "description": "VM workload type."
+          },
+          {
+            "name": "Unknown",
+            "value": "Unknown",
+            "description": "Unknown workload type."
+          }
+        ]
+      }
     }
   },
   "parameters": {}
