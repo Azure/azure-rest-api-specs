@@ -25,6 +25,8 @@ To see additional help and options, run:
 These are the global settings for the SecurityInsights API.
 
 ``` yaml
+title: MicrosoftSentinel
+description: Microsoft Sentinel is a scalable, cloud-native, SIEM, and SOAR solution.
 openapi-type: arm
 tag: package-preview-2024-04
 ```
