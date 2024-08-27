@@ -4276,7 +4276,7 @@
           "200": {
             "description": "Successfully updated ScalingPlanPooledSchedule.",
             "schema": {
-              "$ref": "#/definitions/ScalingPlanPooledSchedule"
+              "$ref": "#/definitions/ScalingPlanPooledSchedulePut"
             }
           },
           "201": {
@@ -9436,6 +9436,11 @@
         "rampUpCapacityThresholdPct"
       ],
       "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the ScalingPlanPooledSchedule.",
+          "readOnly": true
+        },
         "daysOfWeek": {
           "type": "array",
           "description": "Set of days of the week on which this schedule is active.",
