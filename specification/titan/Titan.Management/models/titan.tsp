@@ -17,7 +17,7 @@ alias resourceNameRegex = "^[a-zA-Z0-9][a-zA-Z0-9-._]{1,58}[a-zA-Z0-9]$";
 model ComputeDeviceResource is ProxyResource<ComputeDeviceProperties> {
   @doc("The parent resource name")
   @segment("computeDevices")
-  @key("deviceName")
+  @key("computeDevice")
   @visibility("read")
   @path
   @pattern(resourceNameRegex)
@@ -26,13 +26,9 @@ model ComputeDeviceResource is ProxyResource<ComputeDeviceProperties> {
 
 @doc("Compute Device Properties")
 model ComputeDeviceProperties {
-  @doc("The parent device name")
+  @doc("The device type")
   @visibility("read")
-  deviceName: string;
-
-  @doc("The parent device type")
-  @visibility("read")
-  deviceType: string;
+  deviceType: DeviceType;
 
   @doc("The short datacenter code where the physical device is located as surfaced by Network Graph Service (NGS). Ex: BN1 ")
   @visibility("read")

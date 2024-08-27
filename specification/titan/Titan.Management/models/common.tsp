@@ -39,3 +39,23 @@ union ProvisioningState {
 
   string,
 }
+
+@doc("Device type enum")
+union DeviceType {
+  @doc("The Server.")
+  Server: "Server",
+
+  @doc("The ChassisManager.")
+  ChassisManager: "ChassisManager",
+
+  @doc("The EpmsSensor.")
+  EpmsSensor: "EpmsSensor",
+
+  @doc("The RackManager.")
+  RackManager: "RackManager",
+
+  @doc("The EPMS.")
+  EPMS: "EPMS",
+
+  string,
+}

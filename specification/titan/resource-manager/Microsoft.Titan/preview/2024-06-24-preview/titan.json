@@ -86,7 +86,7 @@
         }
       }
     },
-    "/providers/Microsoft.Titan/locations/{location}/computeDevices/{deviceName}": {
+    "/providers/Microsoft.Titan/locations/{location}/computeDevices/{computeDevice}": {
       "get": {
         "operationId": "ComputeDevices_Get",
         "tags": [
@@ -101,7 +101,7 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
           },
           {
-            "name": "deviceName",
+            "name": "computeDevice",
             "in": "path",
             "description": "The parent resource name",
             "required": true,
@@ -172,14 +172,9 @@
       "type": "object",
       "description": "Compute Device Properties",
       "properties": {
-        "deviceName": {
-          "type": "string",
-          "description": "The parent device name",
-          "readOnly": true
-        },
         "deviceType": {
-          "type": "string",
-          "description": "The parent device type",
+          "$ref": "#/definitions/DeviceType",
+          "description": "The device type",
           "readOnly": true
         },
         "dcCode": {
@@ -254,7 +249,6 @@
         }
       },
       "required": [
-        "deviceName",
         "deviceType",
         "dcCode",
         "deploymentType",
@@ -306,6 +300,48 @@
       "required": [
         "value"
       ]
+    },
+    "DeviceType": {
+      "type": "string",
+      "description": "Device type enum",
+      "enum": [
+        "Server",
+        "ChassisManager",
+        "EpmsSensor",
+        "RackManager",
+        "EPMS"
+      ],
+      "x-ms-enum": {
+        "name": "DeviceType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Server",
+            "value": "Server",
+            "description": "The Server."
+          },
+          {
+            "name": "ChassisManager",
+            "value": "ChassisManager",
+            "description": "The ChassisManager."
+          },
+          {
+            "name": "EpmsSensor",
+            "value": "EpmsSensor",
+            "description": "The EpmsSensor."
+          },
+          {
+            "name": "RackManager",
+            "value": "RackManager",
+            "description": "The RackManager."
+          },
+          {
+            "name": "EPMS",
+            "value": "EPMS",
+            "description": "The EPMS."
+          }
+        ]
+      }
     },
     "ProvisioningState": {
       "type": "string",
