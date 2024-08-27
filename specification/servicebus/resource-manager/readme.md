@@ -198,17 +198,17 @@ These settings apply only when `--tag=package-2024-01` is specified on the comma
 
 ``` yaml $(tag) == 'package-2023-01-preview'
 input-file:
-- Microsoft.ServiceBus/preview/2024-01-01/namespace-preview.json
-- Microsoft.ServiceBus/preview/2024-01-01/operations.json
-- Microsoft.ServiceBus/preview/2024-01-01/DisasterRecoveryConfig.json
-- Microsoft.ServiceBus/preview/2024-01-01/migrationconfigs.json
-- Microsoft.ServiceBus/preview/2024-01-01/networksets.json
-- Microsoft.ServiceBus/preview/2024-01-01/AuthorizationRules.json
-- Microsoft.ServiceBus/preview/2024-01-01/Queue.json
-- Microsoft.ServiceBus/preview/2024-01-01/topics.json
-- Microsoft.ServiceBus/preview/2024-01-01/Rules.json
-- Microsoft.ServiceBus/preview/2024-01-01/subscriptions.json
-- Microsoft.ServiceBus/preview/2024-01-01/CheckNameAvailability.json
+- Microsoft.ServiceBus/stable/2024-01-01/namespace-preview.json
+- Microsoft.ServiceBus/stable/2024-01-01/operations.json
+- Microsoft.ServiceBus/stable/2024-01-01/DisasterRecoveryConfig.json
+- Microsoft.ServiceBus/stable/2024-01-01/migrationconfigs.json
+- Microsoft.ServiceBus/stable/2024-01-01/networksets.json
+- Microsoft.ServiceBus/stable/2024-01-01/AuthorizationRules.json
+- Microsoft.ServiceBus/stable/2024-01-01/Queue.json
+- Microsoft.ServiceBus/stable/2024-01-01/topics.json
+- Microsoft.ServiceBus/stable/2024-01-01/Rules.json
+- Microsoft.ServiceBus/stable/2024-01-01/subscriptions.json
+- Microsoft.ServiceBus/stable/2024-01-01/CheckNameAvailability.json
 ```
 
 Important notes:
