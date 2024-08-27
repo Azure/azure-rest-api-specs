@@ -354,7 +354,7 @@ interface WorkloadNetworks {
   @Azure.Core.useFinalStateVia("azure-async-operation")
   @tag("WorkloadNetworkSegments")
   @autoRoute
-  createSegments is ArmResourceCreateOrUpdateAsync<
+  createSegment is ArmResourceCreateOrUpdateAsync<
     WorkloadNetworkSegment,
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader
   >;
@@ -364,7 +364,7 @@ interface WorkloadNetworks {
   @parameterVisibility
   @tag("WorkloadNetworkSegments")
   @autoRoute
-  updateSegments is ArmCustomPatchAsync<
+  updateSegment is ArmCustomPatchAsync<
     WorkloadNetworkSegment,
     WorkloadNetworkSegment
   >;
@@ -738,27 +738,27 @@ interface WorkloadNetworks {
     | ErrorResponse;
 }
 
-@@encodedName(WorkloadNetworks.createSegments::parameters.resource,
+@@encodedName(WorkloadNetworks.createSegment::parameters.resource,
   "application/json",
   "workloadNetworkSegment"
 );
-@@clientName(WorkloadNetworks.createSegments::parameters.resource,
+@@clientName(WorkloadNetworks.createSegment::parameters.resource,
   "workloadNetworkSegment"
 );
-@@OpenAPI.extension(WorkloadNetworks.createSegments::parameters.resource,
+@@OpenAPI.extension(WorkloadNetworks.createSegment::parameters.resource,
   "x-ms-client-name",
   "workloadNetworkSegment"
 );
 
-@@encodedName(WorkloadNetworks.updateSegments::parameters.properties,
+@@encodedName(WorkloadNetworks.updateSegment::parameters.properties,
   "application/json",
   "workloadNetworkSegment"
 );
-@@clientName(WorkloadNetworks.updateSegments::parameters.properties,
+@@clientName(WorkloadNetworks.updateSegment::parameters.properties,
   "application/json",
   "workloadNetworkSegment"
 );
-@@OpenAPI.extension(WorkloadNetworks.updateSegments::parameters.properties,
+@@OpenAPI.extension(WorkloadNetworks.updateSegment::parameters.properties,
   "x-ms-client-name",
   "workloadNetworkSegment"
 );

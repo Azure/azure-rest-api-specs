@@ -68,11 +68,6 @@ using Microsoft.AVS;
 #suppress "deprecated" "property flatten for SDK backward compatibility"
 @@flattenProperty(PlacementPolicyUpdate.properties);
 
-// operation
-@@clientName(WorkloadNetworks.getPublicIP, "getPublicIp", "java");
-@@clientName(WorkloadNetworks.createPublicIP, "createPublicIp", "java");
-@@clientName(WorkloadNetworks.deletePublicIP, "deletePublicIp", "java");
-
 // model
 @@clientName(Azure.ResourceManager.CommonTypes.SystemAssignedServiceIdentity,
   "PrivateCloudIdentity"
