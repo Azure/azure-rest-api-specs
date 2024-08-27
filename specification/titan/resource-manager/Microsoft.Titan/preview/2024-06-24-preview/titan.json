@@ -168,6 +168,37 @@
     }
   },
   "definitions": {
+    "Azure.ResourceManager.ResourceProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of a resource type.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "ResourceProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          }
+        ]
+      },
+      "readOnly": true
+    },
     "ComputeDeviceProperties": {
       "type": "object",
       "description": "Compute Device Properties",
@@ -238,7 +269,7 @@
           "readOnly": true
         },
         "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
+          "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
           "description": "The status of the last operation",
           "readOnly": true
         }
@@ -456,79 +487,6 @@
           }
         ]
       }
-    },
-    "ProvisioningState": {
-      "type": "string",
-      "description": "Provisioning state enum",
-      "enum": [
-        "Provisioning",
-        "Succeeded",
-        "Failed",
-        "Canceled",
-        "Accepted",
-        "Creating",
-        "Updating",
-        "Deleting",
-        "Deleted",
-        "NotSpecified"
-      ],
-      "x-ms-enum": {
-        "name": "ProvisioningState",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Provisioning",
-            "value": "Provisioning",
-            "description": "The resource is being provisioned."
-          },
-          {
-            "name": "Succeeded",
-            "value": "Succeeded",
-            "description": "The resource action is successful."
-          },
-          {
-            "name": "Failed",
-            "value": "Failed",
-            "description": "The resource action has failed."
-          },
-          {
-            "name": "Canceled",
-            "value": "Canceled",
-            "description": "The resource action has been cancelled."
-          },
-          {
-            "name": "Accepted",
-            "value": "Accepted",
-            "description": "The resource provisioning has been accepted."
-          },
-          {
-            "name": "Creating",
-            "value": "Creating",
-            "description": "The resource is being created."
-          },
-          {
-            "name": "Updating",
-            "value": "Updating",
-            "description": "The resource is being updated."
-          },
-          {
-            "name": "Deleting",
-            "value": "Deleting",
-            "description": "The resource is being deleted."
-          },
-          {
-            "name": "Deleted",
-            "value": "Deleted",
-            "description": "The resource has been deleted."
-          },
-          {
-            "name": "NotSpecified",
-            "value": "NotSpecified",
-            "description": "The resource status is unspecified."
-          }
-        ]
-      },
-      "readOnly": true
     },
     "WorkloadType": {
       "type": "string",

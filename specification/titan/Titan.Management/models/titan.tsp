@@ -80,7 +80,7 @@ model ComputeDeviceProperties {
 
   @doc("The status of the last operation")
   @visibility("read")
-  provisioningState?: ProvisioningState;
+  provisioningState?: ResourceProvisioningState;
 }
 
 @armResourceOperations
