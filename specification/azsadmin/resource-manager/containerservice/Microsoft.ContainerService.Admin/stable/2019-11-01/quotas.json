@@ -1,0 +1,123 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2019-11-01",
+    "title": "ContainerServiceAdminClient",
+    "description": "Admin Container Service Management Client."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ContainerService.Admin/locations/{location}/quotas": {
+      "get": {
+        "x-ms-examples": {
+          "Returns a list of container service quotas at the given location.": {
+            "$ref": "./examples/Quotas/List.json"
+          }
+        },
+        "tags": [
+          "ContainerServiceQuotas"
+        ],
+        "description": "Returns a list of container service quotas at the given location.",
+        "operationId": "ContainerServiceQuota_List",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- The list of container service quotas has been returned.",
+            "schema": {
+              "$ref": "#/definitions/ContainerServiceQuotaList"
+            }
+          },
+          "default": {
+            "description": "Error Response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ContainerServiceQuotaProperties": {
+      "description": "Container service quota properties.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Container service storage capacity",
+          "type": "string",
+          "default": "unlimited"
+        }
+      }
+    },
+    "ContainerServiceQuotaList": {
+      "description": "List of container service quotas.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "List of container service quotas.",
+          "type": "array",
+          "items": {
+            "description": "Container service quota.",
+            "type": "object",
+            "properties": {
+              "properties": {
+                "description": "Container service quota properties.",
+                "x-ms-client-flatten": true,
+                "$ref": "#/definitions/ContainerServiceQuotaProperties"
+              }
+            },
+            "allOf": [
+              {
+                "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
+              }
+            ]
+          }
+        },
+        "nextLink": {
+          "description": "URI to the next page.",
+          "type": "string"
+        }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Authorization uses an Azure Active Directory OAuth2 flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ]
+}

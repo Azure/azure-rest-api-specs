@@ -1,0 +1,40 @@
+{
+  "parameters": {
+    "billingAccountName": "{billingAccountName}",
+    "billingProfileName": "{billingProfileName}",
+    "invoiceSectionName": "{invoiceSectionName}",
+    "includeBudget": true,
+    "includeRemoved": true,
+    "api-version": "2021-12-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/invoiceSections/{invoiceSectionName}/providers/Microsoft.Education/labs/default",
+        "name": "default",
+        "type": "Microsoft.Education/Labs",
+        "properties": {
+          "displayName": "example lab",
+          "budgetPerStudent": {
+            "currency": "USD",
+            "value": 100
+          },
+          "description": "example lab description",
+          "expirationDate": "2021-12-09T21:25:56.838Z",
+          "effectiveDate": "2021-11-09T21:25:56.838Z",
+          "status": "Active",
+          "totalBudget": {
+            "currency": "USD",
+            "value": 500
+          },
+          "totalAllocatedBudget": {
+            "currency": "USD",
+            "value": 500
+          },
+          "maxStudentCount": 0,
+          "invitationCode": ""
+        }
+      }
+    }
+  }
+}

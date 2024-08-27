@@ -1,0 +1,86 @@
+{
+  "parameters": {
+    "api-version": "2022-04-02-preview",
+    "subscriptionId": "86dc51d3-92ed-4d7e-947a-775ea79b4919",
+    "resourceGroupName": "my-resource-group",
+    "scopeName": "my-privatelinkscope",
+    "parameters": {
+      "location": "westus",
+      "tags": {
+        "Tag1": "Value1"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/86dc51d3-92ed-4d7e-947a-775ea79b4919/resourceGroups/my-resource-group/providers/Microsoft.KubernetesConfiguration/privateLinkScopes/my-privatelinkscope",
+        "name": "my-privatelinkscope",
+        "type": "Microsoft.KubernetesConfiguration/privateLinkScopes",
+        "location": "westus",
+        "tags": {
+          "Tag1": "Value1"
+        },
+        "properties": {
+          "privateLinkScopeId": "e5dc51d3-92ed-4d7e-947a-775ea79b4919",
+          "provisioningState": "Succeeded",
+          "publicNetworkAccess": "Disabled",
+          "clusterResourceId": "/subscriptions/e9c17b5c-b7ef-4c29-aae7-9338ed5dcb43/resourceGroups/my-resource-group/providers/Microsoft.Kubernetes/ConnectedClusters/my-clusterName",
+          "privateEndpointConnections": [
+            {
+              "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/myResourceGroup/providers/Microsoft.KubernetesConfiguration/privateLinkScopes/myPrivateLinkScope/privateEndpointConnections/private-endpoint-connection-name",
+              "name": "private-endpoint-connection-name",
+              "type": "Microsoft.KubernetesConfiguration/privateLinkScopes/privateEndpointConnections",
+              "properties": {
+                "provisioningState": "Succeeded",
+                "privateEndpoint": {
+                  "id": "/subscriptions/55555555-6666-7777-8888-999999999999/resourceGroups/Default-Network/providers/Microsoft.Network/privateEndpoints/private-endpoint-name"
+                },
+                "privateLinkServiceConnectionState": {
+                  "status": "Approved",
+                  "description": "Auto-approved",
+                  "actionsRequired": "None"
+                }
+              }
+            }
+          ]
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/86dc51d3-92ed-4d7e-947a-775ea79b4919/resourceGroups/my-resource-group/providers/Microsoft.KubernetesConfiguration/privateLinkScopes/my-privatelinkscope",
+        "name": "my-privatelinkscope",
+        "type": "Microsoft.KubernetesConfiguration/privateLinkScopes",
+        "location": "westus",
+        "tags": {
+          "Tag1": "Value1"
+        },
+        "properties": {
+          "privateLinkScopeId": "e5dc51d3-92ed-4d7e-947a-775ea79b4919",
+          "provisioningState": "Succeeded",
+          "publicNetworkAccess": "Disabled",
+          "clusterResourceId": "/subscriptions/e9c17b5c-b7ef-4c29-aae7-9338ed5dcb43/resourceGroups/my-resource-group/providers/Microsoft.Kubernetes/ConnectedClusters/my-clusterName",
+          "privateEndpointConnections": [
+            {
+              "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/myResourceGroup/providers/Microsoft.KubernetesConfiguration/privateLinkScopes/myPrivateLinkScope/privateEndpointConnections/private-endpoint-connection-name",
+              "name": "private-endpoint-connection-name",
+              "type": "Microsoft.KubernetesConfiguration/privateLinkScopes/privateEndpointConnections",
+              "properties": {
+                "provisioningState": "Succeeded",
+                "privateEndpoint": {
+                  "id": "/subscriptions/55555555-6666-7777-8888-999999999999/resourceGroups/Default-Network/providers/Microsoft.Network/privateEndpoints/private-endpoint-name"
+                },
+                "privateLinkServiceConnectionState": {
+                  "status": "Approved",
+                  "description": "Auto-approved",
+                  "actionsRequired": "None"
+                }
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+}

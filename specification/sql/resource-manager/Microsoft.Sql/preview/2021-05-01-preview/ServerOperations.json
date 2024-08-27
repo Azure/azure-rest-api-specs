@@ -1,0 +1,208 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2021-05-01-preview",
+    "title": "SqlManagementClient",
+    "description": "The Azure SQL Database management API provides a RESTful set of web APIs that interact with Azure SQL Database services to manage your databases. The API enables users to create, retrieve, update, and delete databases, servers, and other entities."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/operations": {
+      "get": {
+        "tags": [
+          "ServerOperations"
+        ],
+        "description": "Gets a list of operations performed on the server.",
+        "operationId": "ServerOperations_ListByServer",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request for getting server operations has been executed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ServerOperationListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 MissingIdentityId - No user assigned identity is provided when the identity type is set to UserAssigned\n\n * 400 InvalidPrimaryIdentityId - User provides a value for PrimaryUserIdentityId but the same is not listed in the IdentityId parameter\n\n * 400 PECsNotExistingToDenyPublicNetworkAccess - Unable to set Deny Public Network Access to Yes since there is no private endpoint enabled to access the server. Please set up private endpoints and retry the operation (https://docs.microsoft.com/azure/sql-database/sql-database-private-endpoint-overview#how-to-set-up-private-link-for-azure-sql-database).\n\n * 400 NameAlreadyExists - The provided name already exists.\n\n * 400 UmiMissingAkvPermissions - PrimaryUserAssignedIdentityId provided by user does not have access to KeyId provided\n\n * 400 MissingPrimaryIdentity - PrimaryUserAssignedIdentityId provided by user does not have access to KeyId provided\n\n * 400 ProvisioningDisabled - Displays error message from resources operation authorizer as is, without changes\n\n * 400 PrimaryIdentityMissingPermissionForKeyId - KeyId is provided by user during create but PrimaryUserAssignedIdentityId is not provided in the API call\n\n * 400 InvalidIdentityTypeForKeyId - KeyId is provided by user during create but identity type is not set to 'UserAssigned'\n\n * 400 InvalidLoginName - The provided login name is invalid.\n\n * 400 InvalidUsername - Supplied user name contains invalid characters.\n\n * 400 Ipv6FeatureNotEnabled - User tried to turn on Ipv6 support on the server without enabling feature flag on subscription, or the feature support is currently disabled in the region.\n\n * 400 PasswordTooShort - The provided password is too short\n\n * 400 AadOnlyAuthenticationIsEnabled - Azure Active Directory Only Authentication is enabled. Please contact your system administrator.\n\n * 400 RegionDoesNotSupportVersion - A user attempted to create a server of a specified version in a location where that server version isn't supported.\n\n * 400 PasswordTooLong - The provided password is too long.\n\n * 400 PasswordNotComplex - The provided password is not complex enough.\n\n * 400 InvalidParameterValue - An invalid value was given to a parameter.\n\n * 400 InvalidLocation - An invalid location was specified.\n\n * 400 InvalidServerName - Invalid server name specified.\n\n * 400 InvalidIdentifier - The identifier contains NULL or an invalid unicode character.\n\n * 400 TokenTooLong - The provided token is too long.\n\n * 400 RegionDoesNotAllowProvisioning - The selected location is not accepting new Windows Azure SQL Database servers. This may change at a later time.\n\n * 400 ServerNotFound - The requested server was not found.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 404 SubscriptionNotFound - The requested subscription was not found.\n\n * 404 SubscriptionNotFound - The requested subscription was not found.\n\n * 409 OperationCancelled - The operation has been cancelled by user.\n\n * 409 OperationInterrupted - The operation on the resource could not be completed because it was interrupted by another operation on the same resource.\n\n * 409 UpsertLogicalServerRequestAlreadyInProgress - An ongoing logical server request is already in progress, please try your request again later.\n\n * 409 ServerDisabled - Server is disabled.\n\n * 409 ConflictingServerOperation - An operation is currently in progress for the server.\n\n * 409 SubscriptionDisabled - Subscription is disabled.\n\n * 409 ServerQuotaExceeded - Server cannot be added to a subscription because it will exceed quota.\n\n * 409 ServerAlreadyExists - Duplicate server name.\n\n * 409 ServerDisabled - Server is disabled.\n\n * 409 ConflictingServerOperation - An operation is currently in progress for the server.\n\n * 409 DropLogicalServerAlreadyInProgress - Server is already being dropped.\n\n * 429 SubscriptionTooManyCreateUpdateRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 ConflictingSubscriptionOperation - An operation is currently in progress for the subscription.\n\n * 429 SubscriptionTooManyCreateUpdateRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 500 OperationTimedOut - The operation timed out and automatically rolled back. Please retry the operation.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources."
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List the server management operations": {
+            "$ref": "./examples/ListServerOperations.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ServerOperationListResult": {
+      "description": "The response to a list server operations request",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Array of results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ServerOperation"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Link to retrieve next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ServerOperationProperties": {
+      "description": "The properties of a server operation.",
+      "type": "object",
+      "properties": {
+        "operation": {
+          "description": "The name of operation.",
+          "type": "string",
+          "readOnly": true
+        },
+        "operationFriendlyName": {
+          "description": "The friendly name of operation.",
+          "type": "string",
+          "readOnly": true
+        },
+        "percentComplete": {
+          "format": "int32",
+          "description": "The percentage of the operation completed.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "serverName": {
+          "description": "The name of the server.",
+          "type": "string",
+          "readOnly": true
+        },
+        "startTime": {
+          "format": "date-time",
+          "description": "The operation start time.",
+          "type": "string",
+          "readOnly": true
+        },
+        "state": {
+          "description": "The operation state.",
+          "enum": [
+            "Pending",
+            "InProgress",
+            "Succeeded",
+            "Failed",
+            "CancelInProgress",
+            "Cancelled"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "ManagementOperationState",
+            "modelAsString": true
+          }
+        },
+        "errorCode": {
+          "format": "int32",
+          "description": "The operation error code.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "errorDescription": {
+          "description": "The operation error description.",
+          "type": "string",
+          "readOnly": true
+        },
+        "errorSeverity": {
+          "format": "int32",
+          "description": "The operation error severity.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "isUserError": {
+          "description": "Whether or not the error is a user error.",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "estimatedCompletionTime": {
+          "format": "date-time",
+          "description": "The estimated completion time of the operation.",
+          "type": "string",
+          "readOnly": true
+        },
+        "description": {
+          "description": "The operation description.",
+          "type": "string",
+          "readOnly": true
+        },
+        "isCancellable": {
+          "description": "Whether the operation can be cancelled.",
+          "type": "boolean",
+          "readOnly": true
+        }
+      }
+    },
+    "ServerOperation": {
+      "description": "A server operation.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../common/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ServerOperationProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      }
+    }
+  },
+  "parameters": {
+    "ServerNameParameter": {
+      "name": "serverName",
+      "in": "path",
+      "description": "The name of the server.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  }
+}

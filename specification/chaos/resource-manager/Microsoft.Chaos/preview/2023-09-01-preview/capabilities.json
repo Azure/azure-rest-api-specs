@@ -1,0 +1,262 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Chaos Management",
+    "description": "Azure Chaos Resource Provider REST API",
+    "version": "2023-09-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "Impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{parentProviderNamespace}/{parentResourceType}/{parentResourceName}/providers/Microsoft.Chaos/targets/{targetName}/capabilities": {
+      "get": {
+        "description": "Get a list of Capability resources that extend a Target resource..",
+        "tags": [
+          "Capabilities"
+        ],
+        "operationId": "Capabilities_List",
+        "parameters": [
+          {
+            "$ref": "./types/common.json#/parameters/apiVersion"
+          },
+          {
+            "$ref": "./types/common.json#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "./types/common.json#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "./types/common.json#/parameters/parentProviderNamespace"
+          },
+          {
+            "$ref": "./types/common.json#/parameters/parentResourceType"
+          },
+          {
+            "$ref": "./types/common.json#/parameters/parentResourceName"
+          },
+          {
+            "$ref": "./types/common.json#/parameters/targetName"
+          },
+          {
+            "$ref": "./types/common.json#/parameters/continuationToken"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of Capability resources returned if request was successful.",
+            "schema": {
+              "$ref": "./types/capabilities.json#/definitions/capabilityListResult"
+            }
+          },
+          "default": {
+            "description": "Error response returned if request was unsuccessful.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List all Capabilities that extend a virtual machine Target resource.": {
+            "$ref": "./examples/ListCapabilities.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{parentProviderNamespace}/{parentResourceType}/{parentResourceName}/providers/Microsoft.Chaos/targets/{targetName}/capabilities/{capabilityName}": {
+      "get": {
+        "description": "Get a Capability resource that extends a Target resource.",
+        "tags": [
+          "Capabilities"
+        ],
+        "operationId": "Capabilities_Get",
+        "parameters": [
+          {
+            "$ref": "./types/common.json#/parameters/apiVersion"
+          },
+          {
+            "$ref": "./types/common.json#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "./types/common.json#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "./types/common.json#/parameters/parentProviderNamespace"
+          },
+          {
+            "$ref": "./types/common.json#/parameters/parentResourceType"
+          },
+          {
+            "$ref": "./types/common.json#/parameters/parentResourceName"
+          },
+          {
+            "$ref": "./types/common.json#/parameters/targetName"
+          },
+          {
+            "$ref": "./types/common.json#/parameters/capabilityName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Capability resource returned if request was successful.",
+            "schema": {
+              "$ref": "./types/capabilities.json#/definitions/capability"
+            }
+          },
+          "default": {
+            "description": "Error response returned if request was unsuccessful.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a Capability that extends a virtual machine Target resource.": {
+            "$ref": "./examples/GetCapability.json"
+          }
+        }
+      },
+      "delete": {
+        "description": "Delete a Capability that extends a Target resource.",
+        "tags": [
+          "Capabilities"
+        ],
+        "operationId": "Capabilities_Delete",
+        "parameters": [
+          {
+            "$ref": "./types/common.json#/parameters/apiVersion"
+          },
+          {
+            "$ref": "./types/common.json#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "./types/common.json#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "./types/common.json#/parameters/parentProviderNamespace"
+          },
+          {
+            "$ref": "./types/common.json#/parameters/parentResourceType"
+          },
+          {
+            "$ref": "./types/common.json#/parameters/parentResourceName"
+          },
+          {
+            "$ref": "./types/common.json#/parameters/targetName"
+          },
+          {
+            "$ref": "./types/common.json#/parameters/capabilityName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Capability resource deletion was successful."
+          },
+          "204": {
+            "description": "Capability resource deletion was successful."
+          },
+          "default": {
+            "description": "Error response returned if request was unsuccessful.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a Capability that extends a virtual machine Target resource.": {
+            "$ref": "./examples/DeleteCapability.json"
+          }
+        }
+      },
+      "put": {
+        "description": "Create or update a Capability resource that extends a Target resource.",
+        "tags": [
+          "Capabilities"
+        ],
+        "operationId": "Capabilities_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "./types/common.json#/parameters/apiVersion"
+          },
+          {
+            "$ref": "./types/common.json#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "./types/common.json#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "./types/common.json#/parameters/parentProviderNamespace"
+          },
+          {
+            "$ref": "./types/common.json#/parameters/parentResourceType"
+          },
+          {
+            "$ref": "./types/common.json#/parameters/parentResourceName"
+          },
+          {
+            "$ref": "./types/common.json#/parameters/targetName"
+          },
+          {
+            "$ref": "./types/common.json#/parameters/capabilityName"
+          },
+          {
+            "name": "capability",
+            "description": "Capability resource to be created or updated.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "./types/capabilities.json#/definitions/capability"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Capability resource returned if request was successful.",
+            "schema": {
+              "$ref": "./types/capabilities.json#/definitions/capability"
+            }
+          },
+          "default": {
+            "description": "Error response returned if request was unsuccessful.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create/update a Capability that extends a virtual machine Target resource.": {
+            "$ref": "./examples/CreateUpdateCapability.json"
+          }
+        }
+      }
+    }
+  }
+}

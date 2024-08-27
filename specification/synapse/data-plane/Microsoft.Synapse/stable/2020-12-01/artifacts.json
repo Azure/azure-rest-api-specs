@@ -1,0 +1,902 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2020-12-01",
+    "title": "ArtifactsClient",
+    "x-ms-code-generation-settings": {
+      "useDateTimeOffset": true
+    }
+  },
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{endpoint}",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "$ref": "#/parameters/Endpoint"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {},
+  "definitions": {
+    "SubResource": {
+      "description": "Azure Synapse nested resource, which belongs to a workspace.",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/AzureEntityResource"
+        }
+      ]
+    },
+    "SubResourceDebugResource": {
+      "description": "Azure Synapse nested debug resource.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The resource name."
+        }
+      }
+    },
+    "Expression": {
+      "description": "Azure Synapse expression definition.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Expression type.",
+          "enum": [
+            "Expression"
+          ],
+          "x-ms-enum": {
+            "name": "ExpressionType",
+            "modelAsString": true
+          }
+        },
+        "value": {
+          "type": "string",
+          "description": "Expression value."
+        }
+      },
+      "required": [
+        "type",
+        "value"
+      ]
+    },
+    "SecureString": {
+      "x-ms-discriminator-value": "SecureString",
+      "description": "Azure Synapse secure string definition. The string value will be masked with asterisks '*' during Get or List API calls.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SecretBase"
+        }
+      ],
+      "properties": {
+        "value": {
+          "type": "string",
+          "description": "Value of secure string."
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "AzureKeyVaultSecretReference": {
+      "x-ms-discriminator-value": "AzureKeyVaultSecret",
+      "description": "Azure Key Vault secret reference.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SecretBase"
+        }
+      ],
+      "properties": {
+        "store": {
+          "description": "The Azure Key Vault linked service reference.",
+          "$ref": "#/definitions/LinkedServiceReference"
+        },
+        "secretName": {
+          "type": "object",
+          "description": "The name of the secret in Azure Key Vault. Type: string (or Expression with resultType string)."
+        },
+        "secretVersion": {
+          "type": "object",
+          "description": "The version of the secret in Azure Key Vault. The default value is the latest version of the secret. Type: string (or Expression with resultType string)."
+        }
+      },
+      "required": [
+        "store",
+        "secretName"
+      ]
+    },
+    "SecretBase": {
+      "description": "The base definition of a secret type.",
+      "discriminator": "type",
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Type of the secret."
+        }
+      },
+      "required": [
+        "type"
+      ]
+    },
+    "IntegrationRuntimeReference": {
+      "description": "Integration runtime reference type.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Type of integration runtime.",
+          "enum": [
+            "IntegrationRuntimeReference"
+          ],
+          "x-ms-enum": {
+            "name": "IntegrationRuntimeReferenceType",
+            "modelAsString": true
+          }
+        },
+        "referenceName": {
+          "type": "string",
+          "description": "Reference integration runtime name."
+        },
+        "parameters": {
+          "$ref": "#/definitions/ParameterValueSpecification",
+          "description": "Arguments for integration runtime."
+        }
+      },
+      "required": [
+        "type",
+        "referenceName"
+      ]
+    },
+    "TriggerDependencyProvisioningStatus": {
+      "description": "Defines the response of a provision trigger dependency operation.",
+      "type": "object",
+      "properties": {
+        "triggerName": {
+          "description": "Trigger name.",
+          "type": "string"
+        },
+        "provisioningStatus": {
+          "description": "Provisioning status.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "triggerName",
+        "provisioningStatus"
+      ]
+    },
+    "VariableDefinitionSpecification": {
+      "description": "Definition of variable for a Pipeline.",
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/definitions/VariableSpecification"
+      }
+    },
+    "VariableSpecification": {
+      "description": "Definition of a single variable for a Pipeline.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Variable type.",
+          "enum": [
+            "String",
+            "Bool",
+            "Boolean",
+            "Array"
+          ],
+          "x-ms-enum": {
+            "name": "VariableType",
+            "modelAsString": true
+          }
+        },
+        "defaultValue": {
+          "type": "object",
+          "description": "Default value of variable."
+        }
+      },
+      "required": [
+        "type"
+      ]
+    },
+    "ParameterDefinitionSpecification": {
+      "description": "Definition of all parameters for an entity.",
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/definitions/ParameterSpecification"
+      }
+    },
+    "ParameterSpecification": {
+      "description": "Definition of a single parameter for an entity.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Parameter type.",
+          "enum": [
+            "Object",
+            "String",
+            "Int",
+            "Float",
+            "Bool",
+            "Array",
+            "SecureString"
+          ],
+          "x-ms-enum": {
+            "name": "ParameterType",
+            "modelAsString": true
+          }
+        },
+        "defaultValue": {
+          "type": "object",
+          "description": "Default value of parameter."
+        }
+      },
+      "required": [
+        "type"
+      ]
+    },
+    "ParameterValueSpecification": {
+      "description": "An object mapping parameter names to argument values.",
+      "type": "object",
+      "additionalProperties": {
+        "type": "object"
+      }
+    },
+    "PipelineReference": {
+      "description": "Pipeline reference type.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Pipeline reference type.",
+          "enum": [
+            "PipelineReference"
+          ],
+          "x-ms-enum": {
+            "name": "PipelineReferenceType",
+            "modelAsString": true
+          }
+        },
+        "referenceName": {
+          "type": "string",
+          "description": "Reference pipeline name."
+        },
+        "name": {
+          "type": "string",
+          "description": "Reference name."
+        }
+      },
+      "required": [
+        "type",
+        "referenceName"
+      ]
+    },
+    "TriggerPipelineReference": {
+      "description": "Pipeline that needs to be triggered with the given parameters.",
+      "type": "object",
+      "properties": {
+        "pipelineReference": {
+          "description": "Pipeline reference.",
+          "$ref": "#/definitions/PipelineReference"
+        },
+        "parameters": {
+          "description": "Pipeline parameters.",
+          "$ref": "#/definitions/ParameterValueSpecification"
+        }
+      }
+    },
+    "WorkspaceUpdateParameters": {
+      "description": "Parameters for updating a workspace resource.",
+      "type": "object",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "The resource tags."
+        },
+        "identity": {
+          "$ref": "#/definitions/WorkspaceIdentity",
+          "description": "Managed service identity of the workspace."
+        }
+      }
+    },
+    "WorkspaceIdentity": {
+      "description": "Identity properties of the workspace resource.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The identity type. Currently the only supported type is 'SystemAssigned'.",
+          "enum": [
+            "SystemAssigned"
+          ],
+          "x-ms-enum": {
+            "name": "WorkspaceIdentityType",
+            "modelAsString": false
+          }
+        },
+        "principalId": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The principal id of the identity."
+        },
+        "tenantId": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The client tenant id of the identity."
+        }
+      },
+      "required": [
+        "type"
+      ]
+    },
+    "DatasetReference": {
+      "description": "Dataset reference type.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Dataset reference type.",
+          "enum": [
+            "DatasetReference"
+          ],
+          "x-ms-enum": {
+            "name": "DatasetReferenceType",
+            "modelAsString": true
+          }
+        },
+        "referenceName": {
+          "type": "string",
+          "description": "Reference dataset name."
+        },
+        "parameters": {
+          "$ref": "#/definitions/ParameterValueSpecification",
+          "description": "Arguments for dataset."
+        }
+      },
+      "required": [
+        "type",
+        "referenceName"
+      ]
+    },
+    "LinkedServiceReference": {
+      "description": "Linked service reference type.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Linked service reference type.",
+          "enum": [
+            "LinkedServiceReference"
+          ],
+          "x-ms-enum": {
+            "name": "Type",
+            "modelAsString": true
+          }
+        },
+        "referenceName": {
+          "type": "string",
+          "description": "Reference LinkedService name."
+        },
+        "parameters": {
+          "$ref": "#/definitions/ParameterValueSpecification",
+          "description": "Arguments for LinkedService."
+        }
+      },
+      "required": [
+        "type",
+        "referenceName"
+      ]
+    },
+    "DataFlowReference": {
+      "description": "Data flow reference type.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Data flow reference type.",
+          "enum": [
+            "DataFlowReference"
+          ],
+          "x-ms-enum": {
+            "name": "DataFlowReferenceType",
+            "modelAsString": true
+          }
+        },
+        "referenceName": {
+          "type": "string",
+          "description": "Reference data flow name."
+        },
+        "datasetParameters": {
+          "type": "object",
+          "description": "Reference data flow parameters from dataset."
+        },
+        "parameters": {
+          "$ref": "#/definitions/ParameterValueSpecification",
+          "description": "Data flow parameters"
+        }
+      },
+      "additionalProperties": {
+        "type": "object"
+      },
+      "required": [
+        "type",
+        "referenceName"
+      ]
+    },
+    "DataFlowStagingInfo": {
+      "description": "Staging info for execute data flow activity.",
+      "type": "object",
+      "properties": {
+        "linkedService": {
+          "description": "Staging linked service reference.",
+          "$ref": "#/definitions/LinkedServiceReference"
+        },
+        "folderPath": {
+          "description": "Folder path for staging blob.",
+          "type": "object"
+        }
+      }
+    },
+    "RunFilterParameters": {
+      "description": "Query parameters for listing runs.",
+      "type": "object",
+      "properties": {
+        "continuationToken": {
+          "description": "The continuation token for getting the next page of results. Null for first page.",
+          "type": "string"
+        },
+        "lastUpdatedAfter": {
+          "description": "The time at or after which the run event was updated in 'ISO 8601' format.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "lastUpdatedBefore": {
+          "description": "The time at or before which the run event was updated in 'ISO 8601' format.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "filters": {
+          "type": "array",
+          "description": "List of filters.",
+          "items": {
+            "$ref": "#/definitions/RunQueryFilter"
+          }
+        },
+        "orderBy": {
+          "type": "array",
+          "description": "List of OrderBy option.",
+          "items": {
+            "$ref": "#/definitions/RunQueryOrderBy"
+          }
+        }
+      },
+      "required": [
+        "lastUpdatedAfter",
+        "lastUpdatedBefore"
+      ]
+    },
+    "RunQueryFilter": {
+      "description": "Query filter option for listing runs.",
+      "type": "object",
+      "properties": {
+        "operand": {
+          "description": "Parameter name to be used for filter. The allowed operands to query pipeline runs are PipelineName, RunStart, RunEnd and Status; to query activity runs are ActivityName, ActivityRunStart, ActivityRunEnd, ActivityType and Status, and to query trigger runs are TriggerName, TriggerRunTimestamp and Status.",
+          "type": "string",
+          "enum": [
+            "PipelineName",
+            "Status",
+            "RunStart",
+            "RunEnd",
+            "ActivityName",
+            "ActivityRunStart",
+            "ActivityRunEnd",
+            "ActivityType",
+            "TriggerName",
+            "TriggerRunTimestamp",
+            "RunGroupId",
+            "LatestOnly"
+          ],
+          "x-ms-enum": {
+            "name": "RunQueryFilterOperand",
+            "modelAsString": true
+          }
+        },
+        "operator": {
+          "description": "Operator to be used for filter.",
+          "type": "string",
+          "enum": [
+            "Equals",
+            "NotEquals",
+            "In",
+            "NotIn"
+          ],
+          "x-ms-enum": {
+            "name": "RunQueryFilterOperator",
+            "modelAsString": true
+          }
+        },
+        "values": {
+          "type": "array",
+          "description": "List of filter values.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "operand",
+        "operator",
+        "values"
+      ]
+    },
+    "RunQueryOrderBy": {
+      "description": "An object to provide order by options for listing runs.",
+      "type": "object",
+      "properties": {
+        "orderBy": {
+          "description": "Parameter name to be used for order by. The allowed parameters to order by for pipeline runs are PipelineName, RunStart, RunEnd and Status; for activity runs are ActivityName, ActivityRunStart, ActivityRunEnd and Status; for trigger runs are TriggerName, TriggerRunTimestamp and Status.",
+          "type": "string",
+          "enum": [
+            "RunStart",
+            "RunEnd",
+            "PipelineName",
+            "Status",
+            "ActivityName",
+            "ActivityRunStart",
+            "ActivityRunEnd",
+            "TriggerName",
+            "TriggerRunTimestamp"
+          ],
+          "x-ms-enum": {
+            "name": "RunQueryOrderByField",
+            "modelAsString": true
+          }
+        },
+        "order": {
+          "description": "Sorting order of the parameter.",
+          "type": "string",
+          "enum": [
+            "ASC",
+            "DESC"
+          ],
+          "x-ms-enum": {
+            "name": "RunQueryOrder",
+            "modelAsString": true
+          }
+        }
+      },
+      "required": [
+        "orderBy",
+        "order"
+      ]
+    },
+    "RerunTumblingWindowTriggerActionParameters": {
+      "description": "Rerun tumbling window trigger Parameters.",
+      "type": "object",
+      "properties": {
+        "startTime": {
+          "description": "The start time for the time period for which restatement is initiated. Only UTC time is currently supported.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "endTime": {
+          "description": "The end time for the time period for which restatement is initiated. Only UTC time is currently supported.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "maxConcurrency": {
+          "description": "The max number of parallel time windows (ready for execution) for which a rerun is triggered.",
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 50
+        }
+      },
+      "required": [
+        "startTime",
+        "endTime",
+        "maxConcurrency"
+      ]
+    },
+    "GetSsisObjectMetadataRequest": {
+      "type": "object",
+      "description": "The request payload of get SSIS object metadata.",
+      "properties": {
+        "metadataPath": {
+          "type": "string",
+          "description": "Metadata path."
+        }
+      }
+    },
+    "SsisObjectMetadataStatusResponse": {
+      "type": "object",
+      "description": "The status of the operation.",
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "The status of the operation."
+        },
+        "name": {
+          "type": "string",
+          "description": "The operation name."
+        },
+        "properties": {
+          "type": "string",
+          "description": "The operation properties."
+        },
+        "error": {
+          "type": "string",
+          "description": "The operation error message."
+        }
+      }
+    },
+    "ExposureControlRequest": {
+      "type": "object",
+      "description": "The exposure control request.",
+      "properties": {
+        "featureName": {
+          "type": "string",
+          "description": "The feature name."
+        },
+        "featureType": {
+          "type": "string",
+          "description": "The feature type."
+        }
+      }
+    },
+    "ExposureControlResponse": {
+      "type": "object",
+      "description": "The exposure control response.",
+      "properties": {
+        "featureName": {
+          "type": "string",
+          "description": "The feature name.",
+          "readOnly": true
+        },
+        "value": {
+          "type": "string",
+          "description": "The feature value.",
+          "readOnly": true
+        }
+      }
+    },
+    "SynapseNotebookReference": {
+      "description": "Synapse notebook reference type.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Synapse notebook reference type.",
+          "enum": [
+            "NotebookReference"
+          ],
+          "x-ms-enum": {
+            "name": "NotebookReferenceType",
+            "modelAsString": true
+          }
+        },
+        "referenceName": {
+          "type": "object",
+          "description": "Reference notebook name. Type: string (or Expression with resultType string)."
+        }
+      },
+      "required": [
+        "type",
+        "referenceName"
+      ]
+    },
+    "SynapseSparkJobReference": {
+      "description": "Synapse spark job reference type.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Synapse spark job reference type.",
+          "enum": [
+            "SparkJobDefinitionReference"
+          ],
+          "x-ms-enum": {
+            "name": "SparkJobReferenceType",
+            "modelAsString": true
+          }
+        },
+        "referenceName": {
+          "type": "string",
+          "description": "Reference spark job name."
+        }
+      },
+      "required": [
+        "type",
+        "referenceName"
+      ]
+    },
+    "SqlPoolReference": {
+      "description": "SQL pool reference type.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "SQL pool reference type.",
+          "enum": [
+            "SqlPoolReference"
+          ],
+          "x-ms-enum": {
+            "name": "SqlPoolReferenceType",
+            "modelAsString": true
+          }
+        },
+        "referenceName": {
+          "type": "string",
+          "description": "Reference SQL pool name."
+        }
+      },
+      "required": [
+        "type",
+        "referenceName"
+      ]
+    },
+    "BigDataPoolParametrizationReference": {
+      "description": "Big data pool reference type.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Big data pool reference type.",
+          "enum": [
+            "BigDataPoolReference"
+          ],
+          "x-ms-enum": {
+            "name": "BigDataPoolReferenceType",
+            "modelAsString": true
+          }
+        },
+        "referenceName": {
+          "type": "object",
+          "description": "Reference big data pool name. Type: string (or Expression with resultType string)."
+        }
+      },
+      "required": [
+        "type",
+        "referenceName"
+      ]
+    },
+    "ArtifactRenameRequest": {
+      "description": "Request body structure for rename artifact.",
+      "type": "object",
+      "properties": {
+        "newName": {
+          "description": "New name of the artifact.",
+          "type": "string",
+          "pattern": "^[A-Za-z0-9_][^<>*#.%&:\\\\+?/]*$",
+          "minLength": 1,
+          "maxLength": 260
+        }
+      }
+    },
+    "CredentialReference": {
+      "description": "Credential reference type.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Credential reference type.",
+          "enum": [
+            "CredentialReference"
+          ],
+          "x-ms-enum": {
+            "name": "CredentialReferenceType",
+            "modelAsString": true
+          }
+        },
+        "referenceName": {
+          "type": "string",
+          "description": "Reference credential name."
+        }
+      },
+      "additionalProperties": {
+        "type": "object"
+      },
+      "required": [
+        "type",
+        "referenceName"
+      ]
+    }
+  },
+  "parameters": {
+    "workspaceName": {
+      "name": "workspaceName",
+      "description": "The workspace name.",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "locationId": {
+      "name": "locationId",
+      "description": "The location identifier.",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "rerunTriggerName": {
+      "name": "rerunTriggerName",
+      "description": "The rerun trigger name.",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[A-Za-z0-9_][^<>*#.%&:\\\\+?/]*$",
+      "minLength": 1,
+      "maxLength": 260,
+      "x-ms-parameter-location": "method"
+    },
+    "runId": {
+      "name": "runId",
+      "description": "The pipeline run identifier.",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "sessionId": {
+      "name": "sessionId",
+      "description": "The data flow session identifier.",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "jobVersion": {
+      "name": "jobVersion",
+      "description": "The data flow job version identifier.",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "nodeName": {
+      "name": "nodeName",
+      "description": "The integration runtime node name.",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-z0-9A-Z][a-z0-9A-Z_-]{0,149}$",
+      "minLength": 1,
+      "maxLength": 150,
+      "x-ms-parameter-location": "method"
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "The Synapse client API Version."
+    },
+    "Endpoint": {
+      "name": "endpoint",
+      "description": "The workspace development endpoint, for example `https://myworkspace.dev.azuresynapse.net`.",
+      "required": true,
+      "type": "string",
+      "in": "path",
+      "x-ms-skip-url-encoding": true,
+      "x-ms-parameter-location": "client",
+      "format": "uri"
+    }
+  }
+}

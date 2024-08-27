@@ -4,27 +4,565 @@
 
 This is the AutoRest configuration file for Machine Learning Services.
 
-
-
 ---
+
 ## Getting Started
-To build the SDK for EventHub, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
+
+To build the SDK for Azure Machine Learning, simply [Install AutoRest](https://aka.ms/autorest/install) and
+ in this folder, run:
 
 > `autorest`
 
 To see additional help and options, run:
 
 > `autorest --help`
+
 ---
 
 ## Configuration
 
 ### Basic Information
+
 These are the global settings for the Machine Learning Services API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2019-05-01
+tag: package-preview-2024-07
+```
+
+### Tag: package-preview-2024-07
+
+These settings apply only when `--tag=package-preview-2024-07` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2024-07'
+input-file:
+  - Microsoft.MachineLearningServices/preview/2024-07-01-preview/machineLearningServices.json
+  - Microsoft.MachineLearningServices/preview/2024-07-01-preview/mfe.json
+  - Microsoft.MachineLearningServices/preview/2024-07-01-preview/registries.json
+  - Microsoft.MachineLearningServices/preview/2024-07-01-preview/workspaceFeatures.json
+  - Microsoft.MachineLearningServices/preview/2024-07-01-preview/workspaceRP.json
+suppressions:
+  - code: AvoidAdditionalProperties
+    reason: As discussed In office hour this conf property is string dictionary 
+      and passed by user as per there requirements depending on runtime version. 
+      This passed to downstream and we have multiple validation on all required 
+      configuration before passing it downstream, All optional property passed as 
+      user wants and any failure due to that considered as user error.
+    where:
+      - $.definitions["SparkJob"].properties["conf"]
+  - code: AvoidAdditionalProperties
+    reason: This is for feature parity with other job type like commandjob, sweepjob etc.
+       We have one interface for all type of job and other job take environment variable like this to match with them 
+       we also pass environment variable in this format. please check existing "CommandJob" in same file.
+    where:
+      - $.definitions["SparkJob"].properties["environmentVariables"]
+  - code: PatchBodyParametersSchema
+    reason: This is already exist in preview version api version, the reason we have required mark for the property 
+       inside is those are the only format we allow user to update this whole encryption property.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}"].patch.parameters[4].schema.properties.properties
+  - code: AvoidAdditionalProperties
+    reason: These schemas are already in production use,.
+    where:
+      - $.definitions.CustomKeys.properties.keys
+      - $.definitions.WorkspaceConnectionPropertiesV2.properties.metadata
+  - code: GuidUsage
+    reason: This property has always been a GUID, we just didn't mark its format before,
+       this can't be change without breaking the customer.
+    where:
+      - $.definitions.WorkspaceConnectionOAuth2.properties.clientId.format
+  - code: AvoidAdditionalProperties
+    reason: The headers property here is meant to describe a set of request headers that the user must pass along 
+      in their inferencing API request. For that reason, this needs to be represented as an additionalProperties.
+    where:
+      - $.definitions["ServerlessEndpointInferenceEndpoint"].properties["headers"]
+  - code: ProvisioningStateSpecifiedForLROPut
+    reason: Below APIs are created for migration, the existing API contract is like this and won't able to change, 
+      got exceptions from ARM reviewer.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/connections/{connectionName}/deployments/{deploymentName}"].put
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/connections/{connectionName}/raiPolicies/{raiPolicyName}"].put
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/endpoints/{endpointName}/raiPolicies/{raiPolicyName}"].put
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/connections/{connectionName}/raiBlocklists/{raiBlocklistName}/raiBlocklistItems/{raiBlocklistItemName}"].put
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/connections/{connectionName}/raiBlocklists/{raiBlocklistName}"].put
+  - code: AvoidAdditionalProperties
+    reason: As discussed these are hyperparameters which can vary by model and fine tuning task types so cannot have strictly typed properties.
+    where:
+      - $.definitions["CustomModelFineTuning"].properties["hyperParameters"]
+  - code: AvoidAdditionalProperties
+    reason: This is coming for wrong reason, just inheriting from JobBase.
+    where:
+      - $.definitions["FineTuningJob"].allOf[0]["allOf"][0].properties["properties"]
+      - $.definitions["FineTuningJob"].allOf[0].properties["notificationSetting"].properties["webhooks"]
+      - $.definitions["FineTuningJob"].allOf[0].properties["secretsConfiguration"]
+      - $.definitions["FineTuningJob"].allOf[0].properties["services"]
+      - $.definitions["FineTuningJob"].allOf[0].properties["services"].additionalProperties["properties"].properties
+  - code: AvoidAdditionalProperties
+    reason: There is a similar usage in existing jobs.
+    where:
+      - $.definitions["FineTuningJob"].properties["outputs"]
+  - code: GuidUsage
+    reason: valid usage of UUID format since it is in the AAD objectId
+    where:
+      - $.definitions.ManagedResourceGroupAssignedIdentities
+  - code: AvoidAdditionalProperties
+    reason: This is cause by renaming some definition and already in prod use.
+    where:
+      - $.definitions.EndpointModelProperties.properties.capabilities
+      - $.definitions.EndpointModelProperties.properties.finetuneCapabilities
+  - code: AvoidAdditionalProperties
+    reason: trying to align with schema here for caller to consume https://github.com/Azure/azure-rest-api-specs/blob/2e5be0e72597c6fc8d438f20e38087d900c16427/specification/machinelearningservices/resource-manager/Microsoft.MachineLearningServices/preview/2024-04-01-preview/mfe.json#L26070
+    where:
+      - $.definitions.ManagedOnlineEndpointResourceProperties.properties.mirrorTraffic
+      - $.definitions.ManagedOnlineEndpointResourceProperties.properties.traffic
+  - code: DefinitionsPropertiesNamesCamelCase
+    reason: CMK is a short term and not violate the camel case rule.
+    where:
+      - $.definitions.WorkspaceProperties.properties.enableServiceSideCMKEncryption
+  - code: PostResponseCodes
+    reason: This API is intend to align with Cognitive service API which has the same behavior https://github.com/Azure/azure-rest-api-specs/blob/efa7e41b82e82359fc76c0cda1856eb6e44448ec/specification/cognitiveservices/resource-manager/Microsoft.CognitiveServices/preview/2024-04-01-preview/cognitiveservices.json#L2717.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/connections/{connectionName}/raiBlocklists/{raiBlocklistName}/deleteRaiBlocklistItems"].post
+  ```
+
+### Tag: package-2024-04
+
+These settings apply only when `--tag=package-2024-04` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-04'
+input-file:
+  - Microsoft.MachineLearningServices/stable/2024-04-01/machineLearningServices.json
+  - Microsoft.MachineLearningServices/stable/2024-04-01/mfe.json
+  - Microsoft.MachineLearningServices/stable/2024-04-01/registries.json
+  - Microsoft.MachineLearningServices/stable/2024-04-01/workspaceFeatures.json
+suppressions:
+  - code: ProvisioningStateMustBeReadOnly
+    reason: This provisioningState property is marked as readOnly. 
+       However, the definition of the enum is not marked as readOnly and is the reason this suppression is needed
+    where:
+      - $.definitions["ServerlessEndpoint"].properties["provisioningState"]
+  - code: AvoidAdditionalProperties
+    reason: The headers property here is meant to describe a set of request headers 
+      that the user must pass along in their inferencing API request. 
+      For that reason, this needs to be represented as an additionalProperties
+    where:
+      - $.definitions["ServerlessInferenceEndpoint"].properties["headers"]
+  - code: AvoidAdditionalProperties
+    reason: As discussed In office hour this conf property is string dictionary 
+      and passed by user as per there requirements depending on runtime version. 
+      This passed to downstream and we have multiple validation on all required configuration before passing it 
+      downstream, All optional property passed as user wants and any failure due to that considered as user error.
+    where:
+      - $.definitions["SparkJob"].properties["conf"]
+  - code: AvoidAdditionalProperties
+    reason: This is for feature parity with other job type like commandjob,
+      sweepjob etc. We have one interface for all type of job and other job 
+      take environment variable like this to match with them we also pass environment variable in this format. 
+      please check existing "CommandJob" in same file.
+    where:
+      - $.definitions["SparkJob"].properties["environmentVariables"]
+  - code: PatchBodyParametersSchema
+    reason: This is already exist in preview version api version, 
+      the reason we have required mark for the property inside is those are the only format 
+      we allow user to update this whole encryption property.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}"].patch.parameters[4].schema.properties.properties
+  - code: ProvisioningStateSpecifiedForLROPut
+    reason: Service already using 202 response code for the below APIs in preview version.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/connections/{connectionName}/deployments/{deploymentName}].put
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/connections/{connectionName}/raiPolicies/{raiPolicyName}"].put
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/connections/{connectionName}/raiBlocklists/{raiBlocklistName}/raiBlocklistItems/{raiBlocklistItemName}"].put
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/connections/{connectionName}/raiBlocklists/{raiBlocklistName}"].put
+  - code: AvoidAdditionalProperties
+    reason: These schemas are already in production use,.
+    where:
+      - $.definitions.WorkspaceUpdateParameters.properties.properties.properties.managedNetwork.properties.outboundRules
+      - $.definitions.WorkspacePropertiesUpdateParameters.properties.managedNetwork.properties.outboundRules
+      - $.definitions.EndpointModels.properties.value.items.properties.capabilities
+      - $.definitions.AccountModel.properties.finetuneCapabilities
+      - $.definitions.AccountModel.properties.capabilities
+      - $.definitions.EndpointModels.properties.value.items.properties.finetuneCapabilities
+      - $.definitions.CustomKeysWorkspaceConnectionProperties.properties.credentials.properties.keys
+      - $.definitions.CustomKeys.properties.keys
+      - $.definitions.WorkspaceConnectionPropertiesV2.properties.metadata
+      - $.definitions.PATAuthTypeWorkspaceConnectionProperties.allOf[0].properties.metadata
+      - $.definitions.SASAuthTypeWorkspaceConnectionProperties.allOf[0].properties.metadata
+      - $.definitions.UsernamePasswordAuthTypeWorkspaceConnectionProperties.allOf[0].properties.metadata
+      - $.definitions.NoneAuthTypeWorkspaceConnectionProperties.allOf[0].properties.metadata
+      - $.definitions.ManagedIdentityAuthTypeWorkspaceConnectionProperties.allOf[0].properties.metadata
+      - $.definitions.WorkspaceConnectionPropertiesV2BasicResource.properties.properties.properties.metadata
+      - $.definitions.WorkspaceConnectionPropertiesV2BasicResourceArmPaginatedResult.properties.value.items.properties.properties.properties.metadata
+      - $.definitions.AADAuthTypeWorkspaceConnectionProperties.allOf[0].properties.metadata
+      - $.definitions.AccessKeyAuthTypeWorkspaceConnectionProperties.allOf[0].properties.metadata
+      - $.definitions.AccountKeyAuthTypeWorkspaceConnectionProperties.allOf[0].properties.metadata
+      - $.definitions.ApiKeyAuthWorkspaceConnectionProperties.allOf[0].properties.metadata
+      - $.definitions.CustomKeysWorkspaceConnectionProperties.allOf[0].properties.metadata
+      - $.definitions.OAuth2AuthTypeWorkspaceConnectionProperties.allOf[0].properties.metadata
+      - $.definitions.ServicePrincipalAuthTypeWorkspaceConnectionProperties.allOf[0].properties.metadata
+  - code: GuidUsage
+    reason: This property has always been a GUID, we just didn't mark its format before, 
+      this can't be change without breaking the customer.
+    where:
+      - $.definitions.WorkspaceConnectionOAuth2.properties.clientId.format
+```
+
+### Tag: package-preview-2024-04
+
+These settings apply only when `--tag=package-preview-2024-04` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2024-04'
+input-file:
+  - Microsoft.MachineLearningServices/preview/2024-04-01-preview/machineLearningServices.json
+  - Microsoft.MachineLearningServices/preview/2024-04-01-preview/mfe.json
+  - Microsoft.MachineLearningServices/preview/2024-04-01-preview/registries.json
+  - Microsoft.MachineLearningServices/preview/2024-04-01-preview/workspaceFeatures.json
+  - Microsoft.MachineLearningServices/preview/2024-04-01-preview/workspaceRP.json
+suppressions:
+  - code: ProvisioningStateSpecifiedForLROPut
+    reason: Below APIs are created for migration, the existing API contract is like this and won't able to change, 
+      got exceptions from ARM reviewer.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/connections/{connectionName}/deployments/{deploymentName}"].put
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/connections/{connectionName}/raiPolicies/{raiPolicyName}"].put
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/endpoints/{endpointName}/raiPolicies/{raiPolicyName}"].put
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/connections/{connectionName}/raiBlocklists/{raiBlocklistName}/raiBlocklistItems/{raiBlocklistItemName}"].put
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/connections/{connectionName}/raiBlocklists/{raiBlocklistName}"].put
+```
+
+### Tag: package-preview-2024-01
+
+These settings apply only when `--tag=package-preview-2024-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2024-01'
+input-file:
+  - Microsoft.MachineLearningServices/preview/2024-01-01-preview/machineLearningServices.json
+  - Microsoft.MachineLearningServices/preview/2024-01-01-preview/mfe.json
+  - Microsoft.MachineLearningServices/preview/2024-01-01-preview/registries.json
+  - Microsoft.MachineLearningServices/preview/2024-01-01-preview/workspaceFeatures.json
+  - Microsoft.MachineLearningServices/preview/2024-01-01-preview/workspaceRP.json
+suppressions:
+  - code: PathForResourceAction
+    reason: Keep identical to stable GA version to avoid breaking changes. https://dev.azure.com/msdata/Vienna/_workitems/edit/2803196
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/registries/{registryName}/datareferences/{name}/versions/{version}"].post
+  - code: AvoidAdditionalProperties
+    reason: As discussed these are hyperparameters which can vary by model 
+      and fine tuning task types so cannot have strictly typed properties.
+    where:
+      - $.definitions["CustomModelFineTuning"].properties["hyperParameters"]
+  - code: AvoidAdditionalProperties
+    reason: This is coming for wrong reason, just inheriting from JobBase.
+    where:
+      - $.definitions["FineTuningJob"].allOf[0]["allOf"][0].properties["properties"]
+      - $.definitions["FineTuningJob"].allOf[0].properties["notificationSetting"].properties["webhooks"]
+      - $.definitions["FineTuningJob"].allOf[0].properties["secretsConfiguration"]
+      - $.definitions["FineTuningJob"].allOf[0].properties["services"]
+      - $.definitions["FineTuningJob"].allOf[0].properties["services"].additionalProperties["properties"].properties
+  - code: AvoidAdditionalProperties
+    reason: There is a similar usage in existing jobs.
+    where:
+      - $.definitions["FineTuningJob"].properties["outputs"]
+  - code: ProvisioningStateSpecifiedForLROPut
+    reason: Service already using 202 response code for the below APIs, got exceptions from ARM reviewer.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/endpoints/{endpointName}"].put
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/endpoints/{endpointName}/deployments/{deploymentName}"].put
+  - code: PutResponseCodes
+    reason: Service already using 202 response code for the below APIs, got exceptions from ARM reviewer.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/endpoints/{endpointName}"].put
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/endpoints/{endpointName}/deployments/{deploymentName}"].put
+  - code: AvoidAdditionalProperties
+    reason: This is an external reference right now, we will have full control 
+      on the schema returned in the upcoming version and will avoid this.
+    from: workspaceRP.json
+    where:
+      - $.definitions.AccountModel.properties.finetuneCapabilities
+      - $.definitions.AccountModel.properties.capabilities
+      - $.definitions.EndpointModels.properties.value.items.properties.capabilities
+      - $.definitions.EndpointModels.properties.value.items.properties.finetuneCapabilities
+  - code: GuidUsage
+    reason: This property has always been a GUID, we just didn't mark its format before, 
+       this can't be change without breaking the customer.
+    from: workspaceRP.json    
+    where:
+      - $.definitions.WorkspaceConnectionOAuth2.properties.clientId.format
+```
+
+### Tag: package-preview-2023-08
+
+These settings apply only when `--tag=package-preview-2023-08` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2023-08'
+input-file:
+  - Microsoft.MachineLearningServices/preview/2023-08-01-preview/machineLearningServices.json
+  - Microsoft.MachineLearningServices/preview/2023-08-01-preview/mfe.json
+  - Microsoft.MachineLearningServices/preview/2023-08-01-preview/registries.json
+  - Microsoft.MachineLearningServices/preview/2023-08-01-preview/workspaceFeatures.json
+  - Microsoft.MachineLearningServices/preview/2023-08-01-preview/workspaceRP.json
+suppressions:
+  - code: LroPostReturn
+    reason: LRO does not return 200 by design.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/computes/{computeName}/resize"].post
+  - code: TrackedResourcePatchOperation
+    reason: server side don't support Patch yet track with https://msdata.visualstudio.com/Vienna/_workitems/edit/2702298.
+    where:
+      - $.definitions.PrivateEndpointConnection
+```
+
+### Tag: package-2023-10
+
+These settings apply only when `--tag=package-2023-10` is specified on the command line.
+
+``` yaml $(tag) == 'package-2023-10'
+input-file:
+  - Microsoft.MachineLearningServices/stable/2023-10-01/machineLearningServices.json
+  - Microsoft.MachineLearningServices/stable/2023-10-01/mfe.json
+  - Microsoft.MachineLearningServices/stable/2023-10-01/registries.json
+  - Microsoft.MachineLearningServices/stable/2023-10-01/workspaceFeatures.json
+```
+
+### Tag: package-preview-2023-06
+
+These settings apply only when `--tag=package-preview-2023-06` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2023-06'
+input-file:
+  - Microsoft.MachineLearningServices/preview/2023-06-01-preview/machineLearningServices.json
+  - Microsoft.MachineLearningServices/preview/2023-06-01-preview/mfe.json
+  - Microsoft.MachineLearningServices/preview/2023-06-01-preview/registries.json
+  - Microsoft.MachineLearningServices/preview/2023-06-01-preview/workspaceFeatures.json
+  - Microsoft.MachineLearningServices/preview/2023-06-01-preview/workspaceRP.json
+```
+
+### Tag: package-2023-04
+
+These settings apply only when `--tag=package-2023-04` is specified on the command line.
+
+``` yaml $(tag) == 'package-2023-04'
+input-file:
+  - Microsoft.MachineLearningServices/stable/2023-04-01/machineLearningServices.json
+  - Microsoft.MachineLearningServices/stable/2023-04-01/mfe.json
+  - Microsoft.MachineLearningServices/stable/2023-04-01/registries.json
+  - Microsoft.MachineLearningServices/stable/2023-04-01/workspaceFeatures.json
+```
+
+### Tag: package-preview-2023-04
+
+These settings apply only when `--tag=package-preview-2023-04` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2023-04'
+input-file:
+  - Microsoft.MachineLearningServices/preview/2023-04-01-preview/machineLearningServices.json
+  - Microsoft.MachineLearningServices/preview/2023-04-01-preview/mfe.json
+  - Microsoft.MachineLearningServices/preview/2023-04-01-preview/registries.json
+  - Microsoft.MachineLearningServices/preview/2023-04-01-preview/workspaceFeatures.json
+```
+
+### Tag: package-preview-2023-02
+
+These settings apply only when `--tag=package-preview-2023-02` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2023-02'
+input-file:
+  - Microsoft.MachineLearningServices/preview/2023-02-01-preview/machineLearningServices.json
+  - Microsoft.MachineLearningServices/preview/2023-02-01-preview/mfe.json
+  - Microsoft.MachineLearningServices/preview/2023-02-01-preview/registries.json
+  - Microsoft.MachineLearningServices/preview/2023-02-01-preview/workspaceFeatures.json
+```
+
+### Tag: package-preview-2022-12
+
+These settings apply only when `--tag=package-preview-2022-12` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2022-12'
+input-file:
+  - Microsoft.MachineLearningServices/preview/2022-12-01-preview/machineLearningServices.json
+  - Microsoft.MachineLearningServices/preview/2022-12-01-preview/mfe.json
+  - Microsoft.MachineLearningServices/preview/2022-12-01-preview/registries.json
+  - Microsoft.MachineLearningServices/preview/2022-12-01-preview/workspaceFeatures.json
+```
+
+### Tag: package-preview-2022-10
+
+These settings apply only when `--tag=package-preview-2022-10` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2022-10'
+input-file:
+  - Microsoft.MachineLearningServices/preview/2022-10-01-preview/machineLearningServices.json
+  - Microsoft.MachineLearningServices/preview/2022-10-01-preview/mfe.json
+  - Microsoft.MachineLearningServices/preview/2022-10-01-preview/workspaceFeatures.json
+  - Microsoft.MachineLearningServices/preview/2022-10-01-preview/registries.json
+```
+
+### Tag: package-2022-10
+
+These settings apply only when `--tag=package-2022-10` is specified on the command line.
+
+``` yaml $(tag) == 'package-2022-10'
+input-file:
+  - Microsoft.MachineLearningServices/stable/2022-10-01/machineLearningServices.json
+  - Microsoft.MachineLearningServices/stable/2022-10-01/mfe.json
+  - Microsoft.MachineLearningServices/stable/2022-10-01/workspaceFeatures.json
+```
+
+### Tag: package-preview-2022-06
+
+These settings apply only when `--tag=package-preview-2022-06` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2022-06'
+input-file:
+  - Microsoft.MachineLearningServices/preview/2022-06-01-preview/machineLearningServices.json
+  - Microsoft.MachineLearningServices/preview/2022-06-01-preview/mfe.json
+  - Microsoft.MachineLearningServices/preview/2022-06-01-preview/workspaceFeatures.json
+```
+
+### Tag: package-2022-05-01
+
+These settings apply only when `--tag=package-2022-05-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2022-05-01'
+input-file:
+  - Microsoft.MachineLearningServices/stable/2022-05-01/machineLearningServices.json
+  - Microsoft.MachineLearningServices/stable/2022-05-01/mfe.json
+  - Microsoft.MachineLearningServices/stable/2022-05-01/workspaceFeatures.json
+```
+
+### Tag: package-2022-02-01-preview
+
+These settings apply only when `--tag=package-2022-02-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2022-02-01-preview'
+input-file:
+  - Microsoft.MachineLearningServices/preview/2022-02-01-preview/machineLearningServices.json
+  - Microsoft.MachineLearningServices/preview/2022-02-01-preview/mfe.json
+  - Microsoft.MachineLearningServices/preview/2022-02-01-preview/workspaceFeatures.json
+```
+
+### Tag: package-2022-01-01-preview
+
+These settings apply only when `--tag=package-2022-01-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2022-01-01-preview'
+input-file:
+  - Microsoft.MachineLearningServices/preview/2022-01-01-preview/machineLearningServices.json
+  - Microsoft.MachineLearningServices/preview/2022-01-01-preview/workspaceFeatures.json
+  - Microsoft.MachineLearningServices/preview/2022-01-01-preview/workspaceSkus.json
+```
+
+### Tag: package-2021-07-01
+
+These settings apply only when `--tag=package-2021-07` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-07-01'
+input-file:
+  - Microsoft.MachineLearningServices/stable/2021-07-01/machineLearningServices.json
+  - Microsoft.MachineLearningServices/stable/2021-07-01/workspaceFeatures.json
+  - Microsoft.MachineLearningServices/stable/2021-07-01/workspaceSkus.json
+```
+
+### Tag: package-2021-04-01
+
+These settings apply only when `--tag=package-2021-04` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-04-01'
+input-file:
+  - Microsoft.MachineLearningServices/stable/2021-04-01/machineLearningServices.json
+```
+
+### Tag: package-2021-01-01
+
+These settings apply only when `--tag=package-2021-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-01-01'
+input-file:
+  - Microsoft.MachineLearningServices/stable/2021-01-01/machineLearningServices.json
+```
+
+### Tag: package-2021-03-01-preview
+
+These settings apply only when `--tag=package-2021-03-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-03-01-preview'
+input-file:
+  - Microsoft.MachineLearningServices/preview/2021-03-01-preview/machineLearningServices.json
+  - Microsoft.MachineLearningServices/preview/2021-03-01-preview/mfe.json
+  - Microsoft.MachineLearningServices/preview/2021-03-01-preview/workspaceFeatures.json
+  - Microsoft.MachineLearningServices/preview/2021-03-01-preview/workspaceSkus.json
+```
+
+### Tag: package-2020-08-01
+
+These settings apply only when `--tag=package-2020-08` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-08-01'
+input-file:
+  - Microsoft.MachineLearningServices/stable/2020-08-01/machineLearningServices.json
+```
+
+### Tag: package-2020-06-01
+
+These settings apply only when `--tag=package-2020-06` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-06-01'
+input-file:
+  - Microsoft.MachineLearningServices/stable/2020-06-01/machineLearningServices.json
+```
+
+### Tag: package-preview-2020-05
+
+These settings apply only when `--tag=package-preview-2020-05` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2020-05'
+input-file:
+  - Microsoft.MachineLearningServices/preview/2020-05-15-preview/machineLearningServices.json
+```
+
+### Tag: package-2020-04-01
+
+These settings apply only when `--tag=package-2020-04` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-04-01'
+input-file:
+  - Microsoft.MachineLearningServices/stable/2020-04-01/machineLearningServices.json
+```
+
+### Tag: package-2020-03-01
+
+These settings apply only when `--tag=package-2020-03` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-03-01'
+input-file:
+  - Microsoft.MachineLearningServices/stable/2020-03-01/machineLearningServices.json
+```
+
+### Tag: package-2020-01-01
+
+These settings apply only when `--tag=package-2020-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-01-01'
+input-file:
+  - Microsoft.MachineLearningServices/stable/2020-01-01/machineLearningServices.json
+```
+
+### Tag: package-2019-11-01
+
+These settings apply only when `--tag=package-2019-11` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-11-01'
+input-file:
+  - Microsoft.MachineLearningServices/stable/2019-11-01/machineLearningServices.json
+```
+
+### Tag: package-2019-06-01
+
+These settings apply only when `--tag=package-2019-06-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-06-01'
+input-file:
+- Microsoft.MachineLearningServices/stable/2019-06-01/machineLearningServices.json
 ```
 
 ### Tag: package-2019-05-01
@@ -45,6 +583,43 @@ input-file:
 - Microsoft.MachineLearningServices/stable/2018-11-19/machineLearningServices.json
 ```
 
+### Tag: package-2020-09-01-preview
+
+These settings apply only when `--tag=package-2020-09-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-09-01-preview'
+input-file:
+- Microsoft.MachineLearningServices/preview/2020-09-01-preview/jobs.json
+- Microsoft.MachineLearningServices/preview/2020-09-01-preview/machineLearningServices.json
+```
+
+### Tag: package-2020-05-01-preview
+
+These settings apply only when `--tag=package-2020-05-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-05-01-preview'
+input-file:
+- Microsoft.MachineLearningServices/preview/2020-05-01-preview/machineLearningServices.json
+```
+
+### Tag: package-2020-04-01-preview
+
+These settings apply only when `--tag=package-2020-04-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-04-01-preview'
+input-file:
+- Microsoft.MachineLearningServices/preview/2020-04-01-preview/machineLearningServices.json
+```
+
+### Tag: package-2020-02-18-preview
+
+These settings apply only when `--tag=package-2020-02-18-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-02-18-preview'
+input-file:
+- Microsoft.MachineLearningServices/preview/2020-02-18-preview/machineLearningServices.json
+```
+
 ### Tag: package-2018-03-preview
 
 These settings apply only when `--tag=package-2018-03-preview` is specified on the command line.
@@ -55,8 +630,8 @@ input-file:
 ```
 
 ---
-# Code Generation
 
+# Code Generation
 
 ## Swagger to SDK
 
@@ -65,13 +640,16 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-net
+  - repo: azure-sdk-for-net-track2
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-python
+  - repo: azure-sdk-for-java
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
+  - repo: azure-cli-extensions
+  - repo: azure-resource-manager-schemas
+  - repo: azure-powershell
 ```
-
 
 ## C#
 
@@ -87,96 +665,10 @@ csharp:
   clear-output-folder: true
 ```
 
-
 ## Go
 
 See configuration in [readme.go.md](./readme.go.md)
 
 ## Java
 
-These settings apply only when `--java` is specified on the command line.
-Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
-
-``` yaml $(java)
-azure-arm: true
-fluent: true
-namespace: com.microsoft.azure.management.machinelearning.services
-license-header: MICROSOFT_MIT_NO_CODEGEN
-payload-flattening-threshold: 1
-output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-machinelearning/services
-```
-
-### Java multi-api
-
-``` yaml $(java) && $(multiapi)
-batch:
-  - tag: package-2019-05-01
-  - tag: package-2018-11-19
-  - tag: package-2018-03-preview
-```
-
-### Tag: package-2019-05-01 and java
-
-These settings apply only when `--tag=package-2019-05-01 --java` is specified on the command line.
-Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
-
-``` yaml $(tag) == 'package-2019-05-01' && $(java) && $(multiapi)
-java:
-  namespace: com.microsoft.azure.management.machinelearningservices.v2019_05_01
-  output-folder: $(azure-libraries-for-java-folder)/machinelearningservices/resource-manager/v2019_05_01
-regenerate-manager: true
-generate-interface: true
-```
-
-### Tag: package-2018-11-19 and java
-
-These settings apply only when `--tag=package-2018-11-19 --java` is specified on the command line.
-Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
-
-``` yaml $(tag) == 'package-2018-11-19' && $(java) && $(multiapi)
-java:
-  namespace: com.microsoft.azure.management.machinelearningservices.v2018_11_19
-  output-folder: $(azure-libraries-for-java-folder)/machinelearningservices/resource-manager/v2018_11_19
-regenerate-manager: true
-generate-interface: true
-```
-
-### Tag: package-2018-03-preview and java
-
-These settings apply only when `--tag=package-2018-03-preview --java` is specified on the command line.
-Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
-
-``` yaml $(tag) == 'package-2018-03-preview' && $(java) && $(multiapi)
-java:
-  namespace: com.microsoft.azure.management.machinelearningservices.v2018_03_01_preview
-  output-folder: $(azure-libraries-for-java-folder)/machinelearningservices/resource-manager/v2018_03_01_preview
-regenerate-manager: true
-generate-interface: true
-```
-
-## Multi-API/Profile support for AutoRest v3 generators 
-
-AutoRest V3 generators require the use of `--tag=all-api-versions` to select api files.
-
-This block is updated by an automatic script. Edits may be lost!
-
-``` yaml $(tag) == 'all-api-versions' /* autogenerated */
-# include the azure profile definitions from the standard location
-require: $(this-folder)/../../../profiles/readme.md
-
-# all the input files across all versions
-input-file:
-  - $(this-folder)/Microsoft.MachineLearningServices/stable/2019-05-01/machineLearningServices.json
-  - $(this-folder)/Microsoft.MachineLearningServices/stable/2018-11-19/machineLearningServices.json
-  - $(this-folder)/Microsoft.MachineLearningServices/preview/2018-03-01-preview/machineLearningServices.json
-
-```
-
-If there are files that should not be in the `all-api-versions` set, 
-uncomment the  `exclude-file` section below and add the file paths.
-
-``` yaml $(tag) == 'all-api-versions'
-#exclude-file: 
-#  - $(this-folder)/Microsoft.Example/stable/2010-01-01/somefile.json
-```
-
+See configuration in [readme.java.md](./readme.java.md)

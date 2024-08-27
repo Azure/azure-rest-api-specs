@@ -1,0 +1,155 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure Database Migration Service Resource Provider",
+    "version": "2021-06-30"
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {},
+  "definitions": {
+    "Project": {
+      "type": "object",
+      "description": "A project resource",
+      "properties": {
+        "properties": {
+          "description": "Project properties",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ProjectProperties"
+        },
+        "systemData": {
+          "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "description": "Metadata pertaining to creation and last modification of the resource.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./Common.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "ProjectList": {
+      "type": "object",
+      "description": "OData page of project resources",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of projects",
+          "items": {
+            "$ref": "#/definitions/Project"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL to load the next page of projects"
+        }
+      }
+    },
+    "ProjectProperties": {
+      "type": "object",
+      "description": "Project-specific properties",
+      "properties": {
+        "sourcePlatform": {
+          "description": "Source platform for the project",
+          "$ref": "#/definitions/ProjectSourcePlatform"
+        },
+        "targetPlatform": {
+          "description": "Target platform for the project",
+          "$ref": "#/definitions/ProjectTargetPlatform"
+        },
+        "creationTime": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "UTC Date and time when project was created"
+        },
+        "sourceConnectionInfo": {
+          "$ref": "./Common.json#/definitions/ConnectionInfo",
+          "description": "Information for connecting to source"
+        },
+        "targetConnectionInfo": {
+          "$ref": "./Common.json#/definitions/ConnectionInfo",
+          "description": "Information for connecting to target"
+        },
+        "databasesInfo": {
+          "type": "array",
+          "description": "List of DatabaseInfo",
+          "items": {
+            "$ref": "#/definitions/DatabaseInfo"
+          }
+        },
+        "provisioningState": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The project's provisioning state",
+          "enum": [
+            "Deleting",
+            "Succeeded"
+          ],
+          "x-ms-enum": {
+            "name": "ProjectProvisioningState",
+            "modelAsString": true
+          }
+        }
+      },
+      "required": [
+        "sourcePlatform",
+        "targetPlatform"
+      ]
+    },
+    "DatabaseInfo": {
+      "type": "object",
+      "description": "Project Database Details",
+      "properties": {
+        "sourceDatabaseName": {
+          "type": "string",
+          "description": "Name of the database"
+        }
+      },
+      "required": [
+        "sourceDatabaseName"
+      ]
+    },
+    "ProjectSourcePlatform": {
+      "type": "string",
+      "description": "Source platform of the project",
+      "enum": [
+        "SQL",
+        "MySQL",
+        "PostgreSql",
+        "MongoDb",
+        "Unknown"
+      ],
+      "x-ms-enum": {
+        "name": "ProjectSourcePlatform",
+        "modelAsString": true
+      }
+    },
+    "ProjectTargetPlatform": {
+      "type": "string",
+      "description": "Target platform of the project",
+      "enum": [
+        "SQLDB",
+        "SQLMI",
+        "AzureDbForMySql",
+        "AzureDbForPostgreSql",
+        "MongoDb",
+        "Unknown"
+      ],
+      "x-ms-enum": {
+        "name": "ProjectTargetPlatform",
+        "modelAsString": true
+      }
+    }
+  }
+}

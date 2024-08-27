@@ -25,6 +25,7 @@
                 "region": "WA",
                 "country": "US"
               },
+              "billingRelationshipType": "Direct",
               "currency": "USD",
               "enabledAzurePlans": [
                 {
@@ -38,7 +39,10 @@
               ],
               "invoiceDay": 5,
               "invoiceEmailOptIn": true,
-              "poNumber": "ABC12345"
+              "poNumber": "ABC12345",
+              "status": "Warned",
+              "statusReasonCode": "PastDue",
+              "spendingLimit": "On"
             }
           },
           {
@@ -59,6 +63,7 @@
                 "region": "WA",
                 "country": "US"
               },
+              "billingRelationshipType": "IndirectCustomer",
               "currency": "USD",
               "enabledAzurePlans": [
                 {
@@ -70,9 +75,17 @@
                   "skuDescription": "Microsoft Azure Standard"
                 }
               ],
+              "indirectRelationshipInfo": {
+                "billingAccountName": "30000000-0000-0000-0000-000000000001_00000000-0000-0000-0000-000000000000",
+                "billingProfileName": "33000000-0000-0000-0000-000000000001",
+                "displayName": "Partner1"
+              },
               "invoiceDay": 5,
               "invoiceEmailOptIn": true,
-              "poNumber": "ABC12345"
+              "poNumber": "ABC12345",
+              "status": "Active",
+              "spendingLimit": "Off",
+              "targetClouds": []
             }
           }
         ]

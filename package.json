@@ -1,42 +1,26 @@
 {
-  "name": "azure-rest-api-specs-tests",
-  "private": true,
-  "author": {
-    "name": "Microsoft Corporation",
-    "email": "azsdkteam@microsoft.com",
-    "url": "https://github.com/azure/azure-rest-api-specs"
-  },
-  "version": "0.1.0",
-  "description": "Tests for Azure REST API Specifications",
-  "license": "MIT",
+  "name": "azure-rest-api-specs",
   "devDependencies": {
-    "@azure/avocado": "^0.5.1",
-    "@azure/rest-api-specs-scripts": "^0.4.0",
-    "@ts-common/commonmark-to-markdown": "^1.2.0",
-    "@ts-common/fs": "0.2.0",
-    "@ts-common/iterator": "^0.3.6",
-    "@types/js-yaml": "^3.12.1",
-    "@types/mocha": "^5.2.6",
-    "cspell": "^4.0.12",
-    "js-yaml": "^3.13.1",
-    "json-schema-ref-parser": "^6.1.0",
-    "mocha": "*",
-    "ts-node": "^8.1.0",
-    "tslib": "^1.10.0",
-    "typescript": "^3.4.4"
+    "@azure-tools/typespec-apiview": "0.4.9",
+    "@azure-tools/typespec-autorest": "0.45.0",
+    "@azure-tools/typespec-azure-core": "0.45.0",
+    "@azure-tools/typespec-azure-portal-core": "0.45.0",
+    "@azure-tools/typespec-azure-resource-manager": "0.45.0",
+    "@azure-tools/typespec-azure-rulesets": "0.45.0",
+    "@azure-tools/typespec-client-generator-cli": "0.12.1",
+    "@azure-tools/typespec-client-generator-core": "0.45.0",
+    "@azure-tools/typespec-liftr-base": "0.4.0",
+    "@azure/avocado": "^0.8.4",
+    "@typespec/compiler": "0.59.1",
+    "@typespec/http": "0.59.1",
+    "@typespec/openapi": "0.59.0",
+    "@typespec/openapi3": "0.59.1",
+    "@typespec/rest": "0.59.1",
+    "@typespec/versioning": "0.59.0",
+    "azure-rest-api-specs-eng-tools": "file:eng/tools",
+    "oav": "^3.3.7",
+    "prettier": "~3.2.5",
+    "typescript": "~5.4.5"
   },
-  "homepage": "https://github.com/azure/azure-rest-api-specs",
-  "repository": {
-    "type": "git",
-    "url": "git@github.com:azure/azure-rest-api-specs.git"
-  },
-  "bugs": {
-    "url": "http://github.com/azure/azure-rest-api-specs/issues"
-  },
-  "scripts": {
-    "test": "tsc && mocha -t 500000 --reporter min",
-    "spellcheck": "cspell \"specification/**/*.json\"",
-    "tsc": "tsc",
-    "multiapi": "ts-node ./scripts/multiapi.ts"
-  }
+  "private": true
 }

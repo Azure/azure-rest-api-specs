@@ -1,0 +1,246 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure Log Analytics",
+    "description": "Azure Log Analytics API reference",
+    "version": "2020-03-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/dataCollectorLogs/{tableName}": {
+      "delete": {
+        "tags": [
+          "DataCollectorLogs"
+        ],
+        "x-ms-examples": {
+          "DataCollectorLogsDelete": {
+            "$ref": "./examples/DataCollectorLogsDelete.json"
+          }
+        },
+        "operationId": "DataCollectorLogs_Delete",
+        "description": "Deletes a specify data collector log table.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "name": "tableName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9]+[A-Za-z0-9]_CL$",
+            "minLength": 4,
+            "maxLength": 63,
+            "description": "DataCollector table name."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ForceDeletion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK response definition."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorContract"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "DataCollectorLogs"
+        ],
+        "x-ms-examples": {
+          "DataCollectorLogsDelete": {
+            "$ref": "./examples/DataCollectorLogsGet.json"
+          }
+        },
+        "operationId": "DataCollectorLogs_Get",
+        "description": "Retrieves a specify data collector log table.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "name": "tableName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9]+[A-Za-z0-9]_CL$",
+            "minLength": 4,
+            "maxLength": 63,
+            "description": "DataCollector table name."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ForceDeletion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK response definition.",
+            "schema": {
+              "$ref": "#/definitions/DataCollectorLog"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorContract"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/dataCollectorLogs": {
+      "get": {
+        "tags": [
+          "DataCollectorLogs"
+        ],
+        "description": "Listing all data collector log tables, being created via data collector endpoint and scoped to the specified workspace",
+        "operationId": "DataCollectorLogs_ListByWorkspace",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK response definition.",
+            "schema": {
+              "$ref": "#/definitions/DataCollectorLogsListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorContract"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
+        "x-ms-examples": {
+          "DataCollectorLogsListByWorkspace": {
+            "$ref": "./examples/DataCollectorLogsListByWorkspace.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "DataCollectorLogProperties": {
+      "description": "Data collector log properties.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Table's name.",
+          "type": "string"
+        }
+      }
+    },
+    "DataCollectorLog": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/DataCollectorLogProperties",
+          "description": "Data collector log properties."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "description": "Data collector log top level resource container."
+    },
+    "DataCollectorLogsListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DataCollectorLog"
+          },
+          "description": "data collector log collection."
+        }
+      },
+      "description": "Data collector log tables collection, all tables are scoped to the specified workspace."
+    },
+    "ErrorContract": {
+      "properties": {
+        "error": {
+          "description": "The details of the error.",
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
+        }
+      },
+      "description": "Contains details when the response code indicates an error."
+    }
+  },
+  "parameters": {
+    "ForceDeletion": {
+      "name": "force",
+      "in": "query",
+      "required": false,
+      "type": "boolean",
+      "description": "When true, enables bypassing retention validation.",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

@@ -449,7 +449,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/CatalogSku"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -491,6 +492,9 @@
           "items": {
             "$ref": "#/definitions/SkuCapability"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "description": "The capability information for the specified SKU."
         },
         "costs": {
@@ -499,6 +503,7 @@
           "items": {
             "$ref": "#/definitions/SkuCost"
           },
+          "x-ms-identifiers": [],
           "description": "The cost information for the specified SKU."
         },
         "restrictions": {
@@ -507,6 +512,7 @@
           "items": {
             "$ref": "#/definitions/SkuRestrictions"
           },
+          "x-ms-identifiers": [],
           "description": "Restrictions which would prevent a SKU from being used. This is empty if there are no restrictions."
         }
       }
@@ -912,7 +918,8 @@
           "description": "The set of results for this page.",
           "items": {
             "$ref": "#/definitions/PlanUsageHistory"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -985,7 +992,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/OperationEntity"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       }
     },

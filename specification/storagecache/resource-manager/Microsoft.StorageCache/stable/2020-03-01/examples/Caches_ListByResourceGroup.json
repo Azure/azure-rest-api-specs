@@ -1,0 +1,85 @@
+{
+  "parameters": {
+    "resourceGroupName": "scgroup",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "api-version": "2020-03-01"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "tags": {
+              "Dept": "ContosoAds"
+            },
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/scgroup/providers/Microsoft.StorageCache/caches/sc1",
+            "location": "westus",
+            "name": "sc1",
+            "type": "Microsoft.StorageCache/Cache",
+            "properties": {
+              "cacheSizeGB": 3072,
+              "health": {
+                "state": "Transitioning",
+                "statusDescription": "Cache is being created."
+              },
+              "mountAddresses": [
+                "192.168.1.1",
+                "192.168.1.2"
+              ],
+              "provisioningState": "Succeeded",
+              "subnet": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/scgroup/providers/Microsoft.Network/virtualNetworks/scvnet/subnets/sub1",
+              "upgradeStatus": {
+                "currentFirmwareVersion": "V5.1.12",
+                "firmwareUpdateStatus": "available",
+                "firmwareUpdateDeadline": "2019-04-21T18:25:43.511Z",
+                "lastFirmwareUpdate": "2019-01-21T18:25:43.511Z",
+                "pendingFirmwareVersion": "V5.1.15"
+              },
+              "networkSettings": {
+                "mtu": 1500
+              }
+            },
+            "sku": {
+              "name": "Standard_2G"
+            }
+          },
+          {
+            "tags": {
+              "Dept": "ContosoAds"
+            },
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/scgroup/providers/Microsoft.StorageCache/caches/sc2",
+            "location": "westus",
+            "name": "sc2",
+            "type": "Microsoft.StorageCache/Cache",
+            "properties": {
+              "cacheSizeGB": 3072,
+              "health": {
+                "state": "Transitioning",
+                "statusDescription": "Cache is being created."
+              },
+              "mountAddresses": [
+                "192.168.1.1",
+                "192.168.1.2"
+              ],
+              "provisioningState": "Updating",
+              "subnet": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/scgroup/providers/Microsoft.Network/virtualNetworks/scvnet/subnets/sub2",
+              "upgradeStatus": {
+                "currentFirmwareVersion": "V5.1.12",
+                "firmwareUpdateStatus": "available",
+                "firmwareUpdateDeadline": "2019-04-21T18:25:43.511Z",
+                "lastFirmwareUpdate": "2019-01-21T18:25:43.511Z",
+                "pendingFirmwareVersion": "V5.1.15"
+              },
+              "networkSettings": {
+                "mtu": 1500
+              }
+            },
+            "sku": {
+              "name": "Standard_2G"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

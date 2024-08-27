@@ -1,0 +1,43 @@
+{
+  "title": "Addons_CreateOrUpdate_HCX",
+  "operationId": "Addons_CreateOrUpdate",
+  "parameters": {
+    "api-version": "2023-09-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "group1",
+    "privateCloudName": "cloud1",
+    "addonName": "hcx",
+    "addon": {
+      "properties": {
+        "addonType": "HCX",
+        "offer": "VMware MaaS Cloud Provider (Enterprise)"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.AVS/privateClouds/cloud1/addons/hcx",
+        "name": "hcx",
+        "properties": {
+          "addonType": "HCX",
+          "offer": "VMware MaaS Cloud Provider (Enterprise)",
+          "provisioningState": "Succeeded"
+        },
+        "type": "Microsoft.AVS/privateClouds/addons"
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.AVS/privateClouds/cloud1/addons/hcx",
+        "name": "hcx",
+        "properties": {
+          "addonType": "HCX",
+          "offer": "VMware MaaS Cloud Provider (Enterprise)",
+          "provisioningState": "Updating"
+        },
+        "type": "Microsoft.AVS/privateClouds/addons"
+      }
+    }
+  }
+}

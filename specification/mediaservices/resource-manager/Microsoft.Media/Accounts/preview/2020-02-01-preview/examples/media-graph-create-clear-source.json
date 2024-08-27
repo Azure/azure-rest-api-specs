@@ -1,0 +1,74 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "contoso",
+    "accountName": "contosomedia",
+    "mediaGraphName": "SampleMediaGraph",
+    "api-version": "2020-02-01-preview",
+    "parameters": {
+      "properties": {
+        "description": "updated description",
+        "sources": [
+          {
+            "@odata.type": "#Microsoft.Media.MediaGraphRtspSource",
+            "name": "rtspSource",
+            "transport": "Http",
+            "endpoint": {
+              "@odata.type": "#Microsoft.Media.MediaGraphClearEndpoint",
+              "url": "rtsp://contoso.com:554/stream1",
+              "credentials": {
+                "@odata.type": "#Microsoft.Media.MediaGraphUsernamePasswordCredentials",
+                "username": "exampleusername",
+                "password": "examplepassword"
+              }
+            }
+          }
+        ],
+        "sinks": [
+          {
+            "@odata.type": "#Microsoft.Media.MediaGraphAssetSink",
+            "name": "AssetSink",
+            "inputs": [
+              "rtspSource"
+            ],
+            "assetName": "SampleAsset"
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "SampleMediaGraph",
+        "properties": {
+          "description": "",
+          "state": "Stopped",
+          "created": "2019-09-01T00:00:00Z",
+          "lastModified": "2019-09-01T00:00:00Z",
+          "sources": [
+            {
+              "@odata.type": "#Microsoft.Media.MediaGraphRtspSource",
+              "name": "RTSPSource1",
+              "transport": "Http",
+              "endpoint": {
+                "@odata.type": "#Microsoft.Media.MediaGraphClearEndpoint",
+                "url": "rtsp://contoso.com:554/stream1"
+              }
+            }
+          ],
+          "sinks": [
+            {
+              "@odata.type": "#Microsoft.Media.MediaGraphAssetSink",
+              "name": "AssetSink1",
+              "inputs": [
+                "RTSPSource1"
+              ],
+              "assetName": "SampleAsset1"
+            }
+          ]
+        }
+      }
+    }
+  }
+}

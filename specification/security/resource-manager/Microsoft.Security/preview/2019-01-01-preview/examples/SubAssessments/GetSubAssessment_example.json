@@ -1,0 +1,61 @@
+{
+  "parameters": {
+    "api-version": "2019-01-01-preview",
+    "scope": "subscriptions/212f9889-769e-45ae-ab43-6da33674bd26/resourceGroups/DEMORG/providers/Microsoft.Compute/virtualMachines/vm2",
+    "assessmentName": "1195afff-c881-495e-9bc5-1486211ae03f",
+    "subAssessmentName": "95f7da9c-a2a4-1322-0758-fcd24ef09b85"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "type": "Microsoft.Security/assessments/subAssessments",
+        "id": "/subscriptions/212f9889-769e-45ae-ab43-6da33674bd26/resourceGroups/DEMORG/providers/Microsoft.Compute/virtualMachines/vm2/providers/Microsoft.Security/assessments/1195afff-c881-495e-9bc5-1486211ae03f/subassessments/95f7da9c-a2a4-1322-0758-fcd24ef09b85",
+        "name": "95f7da9c-a2a4-1322-0758-fcd24ef09b85",
+        "properties": {
+          "id": "370361",
+          "displayName": "PuTTY ssh_agent_channel_data Function Integer Overflow Vulnerability",
+          "status": {
+            "code": "Unhealthy",
+            "severity": "Medium"
+          },
+          "remediation": "Customers are advised to upgrade toPuTTY 0.68 or later version in order to remediate this vulnerability.",
+          "impact": "Successful exploitation could allow remote attackers to have unspecified impact via a large length value in an agent protocol message.",
+          "category": "Local",
+          "description": "PuTTY ssh_agent_channel_data Function Integer Overflow Vulnerability",
+          "timeGenerated": "2021-02-02T12:36:50.779Z",
+          "resourceDetails": {
+            "source": "Azure",
+            "id": "/subscriptions/212f9889-769e-45ae-ab43-6da33674bd26/resourceGroups/DEMORG/providers/Microsoft.Compute/virtualMachines/vm2"
+          },
+          "additionalData": {
+            "assessedResourceType": "ServerVulnerability",
+            "type": "VirtualMachine",
+            "cvss": {
+              "2.0": {
+                "base": 7.5
+              },
+              "3.0": {
+                "base": 9.8
+              }
+            },
+            "patchable": true,
+            "cve": [
+              {
+                "title": "CVE-2017-6542",
+                "link": "http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-6542"
+              }
+            ],
+            "publishedTime": "2017-04-06T10:58:25",
+            "threat": "PuTTY is a client program for the SSH, Telnet and Rlogin network protocols",
+            "vendorReferences": [
+              {
+                "title": "CVE-2017-6542",
+                "link": "http://www.chiark.greenend.org.uk/~sgtatham/putty/wishlist/vuln-agent-fwd-overflow.html"
+              }
+            ]
+          }
+        }
+      }
+    }
+  }
+}

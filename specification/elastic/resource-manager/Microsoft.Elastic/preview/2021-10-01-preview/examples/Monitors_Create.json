@@ -1,0 +1,104 @@
+{
+  "parameters": {
+    "api-version": "2021-10-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myResourceGroup",
+    "monitorName": "myMonitor",
+    "requestBody": {
+      "name": "myMonitor",
+      "sku": {
+        "name": "free_Monthly"
+      },
+      "properties": {
+        "userInfo": {
+          "firstName": "Alice",
+          "lastName": "Bob",
+          "companyName": "Microsoft",
+          "emailAddress": "alice@microsoft.com",
+          "companyInfo": {
+            "domain": "microsoft.com",
+            "business": "Technology",
+            "employeeNumber": "10000",
+            "state": "WA",
+            "country": "US"
+          }
+        }
+      },
+      "tags": {
+        "Environment": "Dev"
+      },
+      "location": "West US 2"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/monitors/myMonitor",
+        "name": "myMonitor",
+        "type": "Microsoft.Elastic/monitors",
+        "sku": {
+          "name": "free_Monthly"
+        },
+        "properties": {
+          "provisioningState": "Succeeded",
+          "elasticProperties": {
+            "elasticCloudUser": {
+              "emailAddress": "alice@microsoft.com",
+              "id": "myid123",
+              "elasticCloudSsoDefaultUrl": "https://examplessourl.com"
+            },
+            "elasticCloudDeployment": {
+              "name": "deploymentname",
+              "deploymentId": "deployment_id",
+              "azureSubscriptionId": "00000000-0000-0000-0000-000000000000",
+              "elasticsearchRegion": "azure-westus2",
+              "elasticsearchServiceUrl": "https://elasticsearchendpoint.com",
+              "kibanaServiceUrl": "https://kibanaserviceurl.com",
+              "kibanaSsoUrl": "https://kibanssourl.com"
+            }
+          }
+        },
+        "tags": {
+          "Environment": "Dev"
+        },
+        "location": "West US 2"
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/monitors/myMonitor",
+        "name": "myMonitor",
+        "type": "Microsoft.Elastic/monitors",
+        "sku": {
+          "name": "free_Monthly"
+        },
+        "properties": {
+          "provisioningState": "Accepted",
+          "monitoringStatus": "Enabled",
+          "elasticProperties": {
+            "elasticCloudUser": {
+              "emailAddress": "alice@microsoft.com",
+              "id": "myid123",
+              "elasticCloudSsoDefaultUrl": "https://examplessourl.com"
+            },
+            "elasticCloudDeployment": {
+              "name": "deploymentname",
+              "deploymentId": "deployment_id",
+              "azureSubscriptionId": "00000000-0000-0000-0000-000000000000",
+              "elasticsearchRegion": "azure-westus2",
+              "elasticsearchServiceUrl": "https://elasticsearchendpoint.com",
+              "kibanaServiceUrl": "https://kibanaserviceurl.com",
+              "kibanaSsoUrl": "https://kibanssourl.com"
+            }
+          },
+          "liftrResourceCategory": "MonitorLogs",
+          "liftrResourcePreference": 0
+        },
+        "tags": {
+          "Environment": "Dev"
+        },
+        "location": "West US 2"
+      }
+    }
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "parameters": {
+    "api-version": "2021-09-30-preview",
+    "subscriptionId": "1cscb752-d7c9-463f-9731-fd31edada74a",
+    "resourceGroupName": "testrg",
+    "resourceName": "testid",
+    "$filter": "contains(name, 'test')",
+    "$orderby": "name asc",
+    "$top": 10,
+    "$skip": 1
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "totalCount": 4,
+        "value": [
+          {
+            "id": "/subscriptions/1cscb752-d7c9-463f-9731-fd31edada74a/resourceGroups/testrg/providers/Microsoft.CognitiveServices/accounts/test1",
+            "name": "test1",
+            "type": "microsoft.cognitiveservices/accounts",
+            "resourceGroup": "testrg",
+            "subscriptionId": "1cscb752-d7c9-463f-9731-fd31edada74a",
+            "subscriptionDisplayName": "TestSubscription"
+          },
+          {
+            "id": "/subscriptions/1cscb752-d7c9-463f-9731-fd31edada74a/resourceGroups/testrg/providers/Microsoft.CognitiveServices/accounts/test2",
+            "name": "test2",
+            "type": "microsoft.cognitiveservices/accounts",
+            "resourceGroup": "testrg",
+            "subscriptionId": "1cscb752-d7c9-463f-9731-fd31edada74a",
+            "subscriptionDisplayName": "TestSubscription"
+          }
+        ]
+      },
+      "nextLink": "https://management.azure.com/subscriptions/1cscb752-d7c9-463f-9731-fd31edada74a/resourceGroups/testrg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/testid?skiptoken=ew0KICAiJGlkIjogIjEiLA0KICAiTWF4Um93cyI6IDIsDQogICJSb3dzVG9Ta2lwIjogMiwNCiAgIkt1c3RvQ2x1c3RlclVybCI6ICJodHRwczovL2FybXRvcG9sb2d5Lmt1c3RvLndpbmRvd3MubmV0Ig0KfQ%253d%253d&api-version=2021-09-30"
+    }
+  }
+}

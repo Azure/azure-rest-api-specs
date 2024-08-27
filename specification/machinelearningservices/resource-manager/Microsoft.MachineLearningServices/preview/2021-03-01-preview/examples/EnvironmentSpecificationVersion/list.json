@@ -1,0 +1,82 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "resourceGroupName": "testrg123",
+    "workspaceName": "testworkspace",
+    "name": "testEnvironment",
+    "api-version": "2021-03-01-preview",
+    "$skipToken": "skiptoken"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg123/providers/Microsoft.MachineLearningServices/workspaces/testworkspace/environments/testEnvironment/versions/1",
+            "name": "1",
+            "type": "Microsoft.MachineLearningServices/workspaces/environments/versions",
+            "properties": {
+              "docker": {
+                "dockerSpecificationType": "Build",
+                "dockerfile": "FROM myimage"
+              },
+              "condaFile": "channels:\n- defaults\ndependencies:\n- python=3.7.7\nname: my-env",
+              "description": "string",
+              "tags": {
+                "additionalProp1": "string",
+                "additionalProp2": "string",
+                "additionalProp3": "string"
+              },
+              "properties": {
+                "additionalProp1": "string",
+                "additionalProp2": "string",
+                "additionalProp3": "string"
+              }
+            },
+            "systemData": {
+              "createdAt": "2020-12-08T01:15:45.909Z",
+              "createdBy": "string",
+              "createdByType": "User",
+              "lastModifiedAt": "2020-12-08T01:15:45.909Z",
+              "lastModifiedBy": "string",
+              "lastModifiedByType": "User"
+            }
+          },
+          {
+            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg123/providers/Microsoft.MachineLearningServices/workspaces/testworkspace/environments/testEnvironment/versions/1",
+            "name": "2",
+            "type": "Microsoft.MachineLearningServices/workspaces/environments/versions",
+            "properties": {
+              "environmentSpecificationType": "Curated",
+              "docker": {
+                "dockerSpecificationType": "Build",
+                "dockerfile": "FROM myimage"
+              },
+              "condaFile": "channels:\n- defaults\ndependencies:\n- python=3.7.7\nname: my-env",
+              "description": "string",
+              "tags": {
+                "additionalProp1": "string",
+                "additionalProp2": "string",
+                "additionalProp3": "string"
+              },
+              "properties": {
+                "additionalProp1": "string",
+                "additionalProp2": "string",
+                "additionalProp3": "string"
+              }
+            },
+            "systemData": {
+              "createdAt": "2020-12-08T01:15:45.909Z",
+              "createdBy": "string",
+              "createdByType": "User",
+              "lastModifiedAt": "2020-12-08T01:15:45.909Z",
+              "lastModifiedBy": "string",
+              "lastModifiedByType": "User"
+            }
+          }
+        ],
+        "nextLink": "string"
+      }
+    }
+  }
+}

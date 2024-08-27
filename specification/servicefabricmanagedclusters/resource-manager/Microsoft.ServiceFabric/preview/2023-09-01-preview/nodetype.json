@@ -1,0 +1,1964 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "ServiceFabricManagementClient",
+    "description": "Azure Service Fabric Resource Provider API Client",
+    "version": "2023-09-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "flow": "implicit",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      },
+      "type": "oauth2"
+    }
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/managedClusters/{clusterName}/nodeTypes": {
+      "get": {
+        "operationId": "NodeTypes_ListByManagedClusters",
+        "summary": "Gets the list of Node types of the specified managed cluster.",
+        "description": "Gets all Node types of the specified managed cluster.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/clusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "tags": [
+          "NodeType"
+        ],
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List node type of the specified managed cluster": {
+            "$ref": "./examples/NodeTypeListOperation_example.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/NodeTypeListResult"
+            }
+          },
+          "default": {
+            "description": "The detailed error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/managedClusters/{clusterName}/nodeTypes/{nodeTypeName}/restart": {
+      "post": {
+        "tags": [
+          "NodeType"
+        ],
+        "operationId": "NodeTypes_Restart",
+        "summary": "Restarts one or more nodes on the node type.",
+        "description": "Restarts one or more nodes on the node type. It will disable the fabric nodes, trigger a restart on the VMs and activate the nodes back again.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/clusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/nodeTypeNameParameter"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "parameters for restart action.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NodeTypeActionParameters"
+            },
+            "x-ms-parameter-location": "method"
+          }
+        ],
+        "x-ms-examples": {
+          "Restart nodes": {
+            "$ref": "./examples/RestartNodes_example.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "responses": {
+          "202": {
+            "description": "The request was accepted and the operation will complete asynchronously."
+          },
+          "200": {
+            "description": "The operation completed successfully."
+          },
+          "default": {
+            "description": "The detailed error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/managedClusters/{clusterName}/nodeTypes/{nodeTypeName}/reimage": {
+      "post": {
+        "tags": [
+          "NodeType"
+        ],
+        "operationId": "NodeTypes_Reimage",
+        "summary": "Reimages one or more nodes on the node type.",
+        "description": "Reimages one or more nodes on the node type. It will disable the fabric nodes, trigger a reimage on the VMs and activate the nodes back again.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/clusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/nodeTypeNameParameter"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "parameters for reimage action.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NodeTypeActionParameters"
+            },
+            "x-ms-parameter-location": "method"
+          }
+        ],
+        "x-ms-examples": {
+          "Reimage nodes": {
+            "$ref": "./examples/ReimageNodes_example.json"
+          },
+          "Reimage all nodes By upgrade domain": {
+            "$ref": "./examples/ReimageNodes_UD_example.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "responses": {
+          "202": {
+            "description": "The request was accepted and the operation will complete asynchronously."
+          },
+          "200": {
+            "description": "The operation completed successfully."
+          },
+          "default": {
+            "description": "The detailed error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/managedClusters/{clusterName}/nodeTypes/{nodeTypeName}/deleteNode": {
+      "post": {
+        "tags": [
+          "NodeType"
+        ],
+        "operationId": "NodeTypes_DeleteNode",
+        "summary": "Deletes one or more nodes on the node type.",
+        "description": "Deletes one or more nodes on the node type. It will disable the fabric nodes, trigger a delete on the VMs and removes the state from the cluster.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/clusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/nodeTypeNameParameter"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "parameters for delete action.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NodeTypeActionParameters"
+            },
+            "x-ms-parameter-location": "method"
+          }
+        ],
+        "x-ms-examples": {
+          "Delete nodes": {
+            "$ref": "./examples/DeleteNodes_example.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "responses": {
+          "202": {
+            "description": "The request was accepted and the operation will complete asynchronously."
+          },
+          "200": {
+            "description": "The operation completed successfully."
+          },
+          "default": {
+            "description": "The detailed error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/managedClusters/{clusterName}/nodeTypes/{nodeTypeName}/skus": {
+      "get": {
+        "tags": [
+          "NodeType"
+        ],
+        "operationId": "NodeTypeSkus_List",
+        "summary": "Gets a Service Fabric node type SKUs.",
+        "description": "Get a Service Fabric node type supported SKUs.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/clusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/nodeTypeNameParameter"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List a node type SKUs": {
+            "$ref": "./examples/NodeTypeSkusListOperation_example.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/NodeTypeListSkuResult"
+            }
+          },
+          "default": {
+            "description": "The detailed error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/managedClusters/{clusterName}/nodeTypes/{nodeTypeName}": {
+      "get": {
+        "tags": [
+          "NodeType"
+        ],
+        "operationId": "NodeTypes_Get",
+        "summary": "Gets a Service Fabric node type.",
+        "description": "Get a Service Fabric node type of a given managed cluster.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/clusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/nodeTypeNameParameter"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "x-ms-examples": {
+          "Get a node type": {
+            "$ref": "./examples/NodeTypeGetOperation_example.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/NodeType"
+            }
+          },
+          "default": {
+            "description": "The detailed error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "NodeType"
+        ],
+        "operationId": "NodeTypes_CreateOrUpdate",
+        "summary": "Creates or updates a Service Fabric node type.",
+        "description": "Create or update a Service Fabric node type of a given managed cluster.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/clusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/nodeTypeNameParameter"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The node type resource.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NodeType"
+            },
+            "x-ms-parameter-location": "method"
+          }
+        ],
+        "x-ms-examples": {
+          "Put a node type with minimum parameters": {
+            "$ref": "./examples/NodeTypePutOperation_example_min.json"
+          },
+          "Put a node type with maximum parameters": {
+            "$ref": "./examples/NodeTypePutOperation_example_max.json"
+          },
+          "Put a node type with auto-scale parameters": {
+            "$ref": "./examples/NodeTypePutOperationAutoScale_example.json"
+          },
+          "Put an stateless node type with temporary disk for service fabric": {
+            "$ref": "./examples/NodeTypePutOperationStateless_example.json"
+          },
+          "Put node type with dedicated hosts": {
+            "$ref": "./examples/NodeTypePutOperationDedicatedHost_example.json"
+          },
+          "Put node type with custom vm image": {
+            "$ref": "./examples/NodeTypePutOperationCustomImage_example.json"
+          },
+          "Put node type with shared galleries custom vm image": {
+            "$ref": "./examples/NodeTypePutOperationCustomSharedGalleriesImage_example.json"
+          },
+          "Put node type with vm image plan ": {
+            "$ref": "./examples/NodeTypePutOperationVmImagePlan_example.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "responses": {
+          "200": {
+            "description": "The operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/NodeType"
+            }
+          },
+          "202": {
+            "description": "The request was accepted and the operation will complete asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/NodeType"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "The URL to get the status of an ongoing long-running operation.",
+                "type": "string"
+              },
+              "Location": {
+                "description": "The URL to get the status of a completed long-running operation.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "The detailed error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "NodeType"
+        ],
+        "operationId": "NodeTypes_Update",
+        "summary": "Update the tags of a node type resource of a given managed cluster.",
+        "description": "Update the configuration of a node type of a given managed cluster, only updating tags.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/clusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/nodeTypeNameParameter"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The parameters to update the node type configuration.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NodeTypeUpdateParameters"
+            },
+            "x-ms-parameter-location": "method"
+          }
+        ],
+        "x-ms-examples": {
+          "Patch a node type": {
+            "$ref": "./examples/NodeTypePatchOperation_example.json"
+          },
+          "Patch a node type while auto-scaling": {
+            "$ref": "./examples/NodeTypePatchOperationAutoScale_example.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/NodeType"
+            }
+          },
+          "default": {
+            "description": "The detailed error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "NodeType"
+        ],
+        "operationId": "NodeTypes_Delete",
+        "summary": "Deletes a Service Fabric node type.",
+        "description": "Delete a Service Fabric node type of a given managed cluster.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/clusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/nodeTypeNameParameter"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "x-ms-examples": {
+          "Delete a node type": {
+            "$ref": "./examples/NodeTypeDeleteOperation_example.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "responses": {
+          "202": {
+            "description": "The request was accepted and the operation will complete asynchronously.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "The URL to get the status of an ongoing long-running operation.",
+                "type": "string"
+              },
+              "Location": {
+                "description": "The URL to get the status of a completed long-running operation.",
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "The resource was not found."
+          },
+          "200": {
+            "description": "The operation completed successfully."
+          },
+          "default": {
+            "description": "The detailed error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AdditionalNetworkInterfaceConfiguration": {
+      "type": "object",
+      "required": [
+        "name",
+        "ipConfigurations"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the network interface."
+        },
+        "enableAcceleratedNetworking": {
+          "type": "boolean",
+          "description": "Specifies whether the network interface is accelerated networking-enabled."
+        },
+        "dscpConfiguration": {
+          "$ref": "#/definitions/SubResource",
+          "description": "Specifies the DSCP configuration to apply to the network interface."
+        },
+        "ipConfigurations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IpConfiguration"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ],
+          "description": "Specifies the IP configurations of the network interface."
+        }
+      },
+      "description": "Specifies the settings for a network interface to attach to the node type."
+    },
+    "DiskType": {
+      "type": "string",
+      "description": "Managed data disk type. IOPS and throughput are given by the disk size, to see more information go to https://docs.microsoft.com/en-us/azure/virtual-machines/disks-types.\n",
+      "enum": [
+        "Standard_LRS",
+        "StandardSSD_LRS",
+        "Premium_LRS"
+      ],
+      "default": "StandardSSD_LRS",
+      "x-ms-enum": {
+        "name": "DiskType",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Standard_LRS",
+            "description": "Standard HDD locally redundant storage. Best for backup, non-critical, and infrequent access."
+          },
+          {
+            "value": "StandardSSD_LRS",
+            "description": "Standard SSD locally redundant storage. Best for web servers, lightly used enterprise applications and dev/test."
+          },
+          {
+            "value": "Premium_LRS",
+            "description": "Premium SSD locally redundant storage. Best for production and performance sensitive workloads."
+          }
+        ]
+      }
+    },
+    "EvictionPolicyType": {
+      "type": "string",
+      "description": "Specifies the eviction policy for virtual machines in a SPOT node type.",
+      "enum": [
+        "Delete",
+        "Deallocate"
+      ],
+      "x-ms-enum": {
+        "name": "EvictionPolicyType",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Delete",
+            "description": "Eviction policy will be Delete for SPOT vms."
+          },
+          {
+            "value": "Deallocate",
+            "description": "Eviction policy will be Deallocate for SPOT vms."
+          }
+        ]
+      }
+    },
+    "FrontendConfiguration": {
+      "type": "object",
+      "properties": {
+        "ipAddressType": {
+          "$ref": "#/definitions/IPAddressType",
+          "description": "The IP address type of this frontend configuration. If omitted the default value is IPv4."
+        },
+        "loadBalancerBackendAddressPoolId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The resource Id of the Load Balancer backend address pool that the VM instances of the node type are associated with. The format of the resource Id is '/subscriptions/<subscriptionId>/resourceGroups/<resourceGroupName>/providers/Microsoft.Network/loadBalancers/<loadBalancerName>/backendAddressPools/<backendAddressPoolName>'."
+        },
+        "loadBalancerInboundNatPoolId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The resource Id of the Load Balancer inbound NAT pool that the VM instances of the node type are associated with. The format of the resource Id is '/subscriptions/<subscriptionId>/resourceGroups/<resourceGroupName>/providers/Microsoft.Network/loadBalancers/<loadBalancerName>/inboundNatPools/<inboundNatPoolName>'."
+        },
+        "applicationGatewayBackendAddressPoolId": {
+          "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Network/applicationGateways/backendAddressPools"
+              }
+            ]
+          },
+          "description": "The resource Id of application gateway backend address pool. The format of the resource Id is '/subscriptions/<subscriptionId>/resourceGroups/<resourceGroupName>/providers/Microsoft.Network/applicationGateways/<applicationGatewayName>/backendAddressPools/<backendAddressPoolName>'."
+        }
+      },
+      "description": "Describes the frontend configurations for the node type."
+    },
+    "IPAddressType": {
+      "type": "string",
+      "description": "The IP address type.\n",
+      "enum": [
+        "IPv4",
+        "IPv6"
+      ],
+      "default": "IPv4",
+      "x-ms-enum": {
+        "name": "IPAddressType",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "IPv4",
+            "description": "IPv4 address type."
+          },
+          {
+            "value": "IPv6",
+            "description": "IPv6 address type."
+          }
+        ]
+      }
+    },
+    "IpConfiguration": {
+      "type": "object",
+      "required": [
+        "name"
+      ],
+      "description": "Specifies an IP configuration of the network interface.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the network interface."
+        },
+        "applicationGatewayBackendAddressPools": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SubResource"
+          },
+          "description": "Specifies an array of references to backend address pools of application gateways. A node type can reference backend address pools of multiple application gateways. Multiple node types cannot use the same application gateway."
+        },
+        "loadBalancerBackendAddressPools": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SubResource"
+          },
+          "description": "Specifies an array of references to backend address pools of load balancers. A node type can reference backend address pools of one public and one internal load balancer. Multiple node types cannot use the same basic sku load balancer.\t"
+        },
+        "loadBalancerInboundNatPools": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SubResource"
+          },
+          "description": "Specifies an array of references to inbound Nat pools of the load balancers. A node type can reference inbound nat pools of one public and one internal load balancer. Multiple node types cannot use the same basic sku load balancer."
+        },
+        "subnet": {
+          "$ref": "#/definitions/SubResource",
+          "description": "Specifies the subnet of the network interface."
+        },
+        "privateIPAddressVersion": {
+          "type": "string",
+          "description": "Specifies whether the IP configuration's private IP is IPv4 or IPv6. Default is IPv4.",
+          "enum": [
+            "IPv4",
+            "IPv6"
+          ],
+          "default": "IPv4",
+          "x-ms-enum": {
+            "name": "privateIPAddressVersion",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "IPv4"
+              },
+              {
+                "value": "IPv6"
+              }
+            ]
+          }
+        },
+        "publicIPAddressConfiguration": {
+          "type": "object",
+          "required": [
+            "name"
+          ],
+          "description": "The public IP address configuration of the network interface.",
+          "properties": {
+            "name": {
+              "type": "string",
+              "description": "Name of the network interface."
+            },
+            "ipTags": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/IpTag"
+              },
+              "x-ms-identifiers": [],
+              "description": "Specifies the list of IP tags associated with the public IP address."
+            },
+            "publicIPAddressVersion": {
+              "type": "string",
+              "description": "Specifies whether the IP configuration's public IP is IPv4 or IPv6. Default is IPv4.",
+              "enum": [
+                "IPv4",
+                "IPv6"
+              ],
+              "default": "IPv4",
+              "x-ms-enum": {
+                "name": "publicIPAddressVersion",
+                "modelAsString": true,
+                "values": [
+                  {
+                    "value": "IPv4"
+                  },
+                  {
+                    "value": "IPv6"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "IpTag": {
+      "type": "object",
+      "required": [
+        "ipTagType",
+        "tag"
+      ],
+      "properties": {
+        "ipTagType": {
+          "type": "string",
+          "description": "IP tag type. Example: FirstPartyUsage."
+        },
+        "tag": {
+          "type": "string",
+          "description": "IP tag associated with the public IP. Example: SQL, Storage etc."
+        }
+      },
+      "description": "The IP tag associated with the public IP address."
+    },
+    "ManagedProxyResource": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Azure resource identifier.",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "Azure resource name.",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "Azure resource type.",
+          "readOnly": true
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Azure resource tags.",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "systemData": {
+          "$ref": "#/definitions/SystemData"
+        }
+      },
+      "description": "The resource model definition for proxy-only resource.",
+      "x-ms-azure-resource": true
+    },
+    "NodeType": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ManagedProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/NodeTypeProperties",
+          "description": "The node type properties"
+        },
+        "sku": {
+          "$ref": "#/definitions/NodeTypeSku",
+          "description": "The node type sku."
+        }
+      },
+      "description": "Describes a node type in the cluster, each node type represents sub set of nodes in the cluster."
+    },
+    "NodeTypeActionParameters": {
+      "type": "object",
+      "properties": {
+        "nodes": {
+          "description": "List of node names from the node type.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "force": {
+          "description": "Force the action to go through.",
+          "type": "boolean"
+        },
+        "updateType": {
+          "type": "string",
+          "description": "Specifies the way the operation will be performed.",
+          "enum": [
+            "Default",
+            "ByUpgradeDomain"
+          ],
+          "x-ms-enum": {
+            "name": "updateType",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Default",
+                "description": "The operation will proceed in all specified nodes at the same time."
+              },
+              {
+                "value": "ByUpgradeDomain",
+                "description": "The operation will proceed one upgrade domain at a time, checking the health in between each to continue."
+              }
+            ]
+          }
+        }
+      },
+      "description": "Parameters for Node type action. If nodes are not specified on the parameters, the operation will be performed in all nodes of the node type one upgrade domain at a time."
+    },
+    "NodeTypeProperties": {
+      "type": "object",
+      "required": [
+        "isPrimary",
+        "vmInstanceCount"
+      ],
+      "properties": {
+        "isPrimary": {
+          "type": "boolean",
+          "description": "Indicates the Service Fabric system services for the cluster will run on this node type. This setting cannot be changed once the node type is created."
+        },
+        "vmInstanceCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of nodes in the node type. <br /><br />**Values:** <br />-1 - Use when auto scale rules are configured or sku.capacity is defined <br /> 0 - Not supported <br /> >0 - Use for manual scale.",
+          "minimum": -1,
+          "maximum": 2147483647
+        },
+        "dataDiskSizeGB": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Disk size for the managed disk attached to the vms on the node type in GBs."
+        },
+        "dataDiskType": {
+          "$ref": "#/definitions/DiskType",
+          "description": "Managed data disk type. Specifies the storage account type for the managed disk"
+        },
+        "dataDiskLetter": {
+          "type": "string",
+          "pattern": "^[a-zA-Z]{1}$",
+          "description": "Managed data disk letter. It can not use the reserved letter C or D and it can not change after created."
+        },
+        "placementProperties": {
+          "type": "object",
+          "description": "The placement tags applied to nodes in the node type, which can be used to indicate where certain services (workload) should run.",
+          "additionalProperties": {
+            "type": "string",
+            "description": "Placement tag value"
+          }
+        },
+        "capacities": {
+          "type": "object",
+          "description": "The capacity tags applied to the nodes in the node type, the cluster resource manager uses these tags to understand how much resource a node has.",
+          "additionalProperties": {
+            "type": "string",
+            "description": "Capacity tag value"
+          }
+        },
+        "applicationPorts": {
+          "$ref": "#/definitions/EndpointRangeDescription",
+          "description": "The range of ports from which cluster assigned port to Service Fabric applications."
+        },
+        "ephemeralPorts": {
+          "$ref": "#/definitions/EndpointRangeDescription",
+          "description": "The range of ephemeral ports that nodes in this node type should be configured with."
+        },
+        "vmSize": {
+          "type": "string",
+          "description": "The size of virtual machines in the pool. All virtual machines in a pool are the same size. For example, Standard_D3."
+        },
+        "vmImagePublisher": {
+          "type": "string",
+          "description": "The publisher of the Azure Virtual Machines Marketplace image. For example, Canonical or MicrosoftWindowsServer."
+        },
+        "vmImageOffer": {
+          "type": "string",
+          "description": "The offer type of the Azure Virtual Machines Marketplace image. For example, UbuntuServer or WindowsServer."
+        },
+        "vmImageSku": {
+          "type": "string",
+          "description": "The SKU of the Azure Virtual Machines Marketplace image. For example, 14.04.0-LTS or 2012-R2-Datacenter."
+        },
+        "vmImageVersion": {
+          "type": "string",
+          "description": "The version of the Azure Virtual Machines Marketplace image. A value of 'latest' can be specified to select the latest version of an image. If omitted, the default is 'latest'."
+        },
+        "vmSecrets": {
+          "type": "array",
+          "title": "virtual machine secretes.",
+          "description": "The secrets to install in the virtual machines.",
+          "items": {
+            "$ref": "#/definitions/VaultSecretGroup"
+          },
+          "x-ms-identifiers": [
+            "sourceVault"
+          ]
+        },
+        "vmExtensions": {
+          "type": "array",
+          "title": "virtual machine extensions.",
+          "description": "Set of extensions that should be installed onto the virtual machines.",
+          "items": {
+            "$ref": "#/definitions/VMSSExtension"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "vmManagedIdentity": {
+          "$ref": "#/definitions/VmManagedIdentity",
+          "description": "Identities to assign to the virtual machine scale set under the node type."
+        },
+        "isStateless": {
+          "type": "boolean",
+          "description": "Indicates if the node type can only host Stateless workloads.",
+          "default": false
+        },
+        "multiplePlacementGroups": {
+          "type": "boolean",
+          "description": "Indicates if scale set associated with the node type can be composed of multiple placement groups.",
+          "default": false
+        },
+        "frontendConfigurations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FrontendConfiguration"
+          },
+          "x-ms-identifiers": [],
+          "description": "Indicates the node type uses its own frontend configurations instead of the default one for the cluster. This setting can only be specified for non-primary node types and can not be added or removed after the node type is created."
+        },
+        "networkSecurityRules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NetworkSecurityRule"
+          },
+          "x-ms-identifiers": [],
+          "description": "The Network Security Rules for this node type. This setting can only be specified for node types that are configured with frontend configurations."
+        },
+        "additionalDataDisks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VmssDataDisk"
+          },
+          "x-ms-identifiers": [
+            "lun"
+          ],
+          "description": "Additional managed data disks."
+        },
+        "enableEncryptionAtHost": {
+          "type": "boolean",
+          "description": "Enable or disable the Host Encryption for the virtual machines on the node type. This will enable the encryption for all the disks including Resource/Temp disk at host itself. Default: The Encryption at host will be disabled unless this property is set to true for the resource.",
+          "default": false
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ManagedResourceProvisioningState",
+          "readOnly": true,
+          "description": "The provisioning state of the node type resource."
+        },
+        "enableAcceleratedNetworking": {
+          "type": "boolean",
+          "description": "Specifies whether the network interface is accelerated networking-enabled."
+        },
+        "useDefaultPublicLoadBalancer": {
+          "type": "boolean",
+          "description": "Specifies whether the use public load balancer. If not specified and the node type doesn't have its own frontend configuration, it will be attached to the default load balancer. If the node type uses its own Load balancer and useDefaultPublicLoadBalancer is true, then the frontend has to be an Internal Load Balancer. If the node type uses its own Load balancer and useDefaultPublicLoadBalancer is false or not set, then the custom load balancer must include a public load balancer to provide outbound connectivity."
+        },
+        "useTempDataDisk": {
+          "type": "boolean",
+          "description": "Specifies whether to use the temporary disk for the service fabric data root, in which case no managed data disk will be attached and the temporary disk will be used. It is only allowed for stateless node types."
+        },
+        "enableOverProvisioning": {
+          "type": "boolean",
+          "description": "Specifies whether the node type should be overprovisioned. It is only allowed for stateless node types."
+        },
+        "zones": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Specifies the availability zones where the node type would span across. If the cluster is not spanning across availability zones, initiates az migration for the cluster."
+        },
+        "isSpotVM": {
+          "type": "boolean",
+          "description": "Indicates whether the node type will be Spot Virtual Machines. Azure will allocate the VMs if there is capacity available and the VMs can be evicted at any time."
+        },
+        "hostGroupId": {
+          "type": "string",
+          "description": "Specifies the full host group resource Id. This property is used for deploying on azure dedicated hosts."
+        },
+        "useEphemeralOSDisk": {
+          "type": "boolean",
+          "description": "Indicates whether to use ephemeral os disk. The sku selected on the vmSize property needs to support this feature."
+        },
+        "spotRestoreTimeout": {
+          "type": "string",
+          "description": "Indicates the time duration after which the platform will not try to restore the VMSS SPOT instances specified as ISO 8601."
+        },
+        "evictionPolicy": {
+          "$ref": "#/definitions/EvictionPolicyType",
+          "description": "Specifies the eviction policy for virtual machines in a SPOT node type. Default is Delete."
+        },
+        "vmImageResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Compute/images"
+              },
+              {
+                "type": "Microsoft.Compute/galleries/images"
+              },
+              {
+                "type": "Microsoft.Compute/galleries/images/versions"
+              }
+            ]
+          },
+          "description": "Indicates the resource id of the vm image. This parameter is used for custom vm image."
+        },
+        "subnetId": {
+          "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Network/virtualNetworks/subnets"
+              }
+            ]
+          },
+          "description": "Indicates the resource id of the subnet for the node type."
+        },
+        "vmSetupActions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VmSetupAction"
+          },
+          "description": "Specifies the actions to be performed on the vms before bootstrapping the service fabric runtime."
+        },
+        "securityType": {
+          "type": "string",
+          "description": "Specifies the security type of the nodeType. Only TrustedLaunch is currently supported",
+          "enum": [
+            "TrustedLaunch"
+          ],
+          "x-ms-enum": {
+            "name": "securityType",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "TrustedLaunch",
+                "description": "Trusted Launch is a security type that secures generation 2 virtual machines."
+              }
+            ]
+          }
+        },
+        "secureBootEnabled": {
+          "type": "boolean",
+          "description": "Specifies whether secure boot should be enabled on the nodeType. Can only be used with TrustedLaunch SecurityType"
+        },
+        "enableNodePublicIP": {
+          "type": "boolean",
+          "description": "Specifies whether each node is allocated its own public IPv4 address. This is only supported on secondary node types with custom Load Balancers."
+        },
+        "enableNodePublicIPv6": {
+          "type": "boolean",
+          "description": "Specifies whether each node is allocated its own public IPv6 address. This is only supported on secondary node types with custom Load Balancers."
+        },
+        "vmSharedGalleryImageId": {
+          "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Compute/sharedGalleries/images"
+              },
+              {
+                "type": "Microsoft.Compute/sharedGalleries/images/versions"
+              }
+            ]
+          },
+          "description": "Indicates the resource id of the vm shared galleries image. This parameter is used for custom vm image."
+        },
+        "natGatewayId": {
+          "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Network/natGateways"
+              }
+            ]
+          },
+          "description": "Specifies the resource id of a NAT Gateway to attach to the subnet of this node type. Node type must use custom load balancer."
+        },
+        "vmImagePlan": {
+          "$ref": "#/definitions/VmImagePlan",
+          "description": "Specifies information about the marketplace image used to create the virtual machine. This element is only used for marketplace images. Before you can use a marketplace image from an API, you must enable the image for programmatic use. In the Azure portal, find the marketplace image that you want to use and then click Want to deploy programmatically, Get Started ->. Enter any required information and then click Save."
+        },
+        "serviceArtifactReferenceId": {
+          "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Compute/galleries/serviceArtifacts/vmArtifactsProfiles"
+              }
+            ]
+          },
+          "description": "Specifies the service artifact reference id used to set same image version for all virtual machines in the scale set when using 'latest' image version."
+        },
+        "dscpConfigurationId": {
+          "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Network/dscpConfigurations"
+              }
+            ]
+          },
+          "description": "Specifies the resource id of the DSCP configuration to apply to the node type network interface."
+        },
+        "additionalNetworkInterfaceConfigurations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AdditionalNetworkInterfaceConfiguration"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ],
+          "description": "Specifies the settings for any additional secondary network interfaces to attach to the node type."
+        }
+      },
+      "description": "Describes a node type in the cluster, each node type represents sub set of nodes in the cluster."
+    },
+    "NodeTypeListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "title": "node type list value.",
+          "description": "The list of node types.",
+          "items": {
+            "$ref": "#/definitions/NodeType"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to use for getting the next set of results."
+        }
+      },
+      "description": "Node type list results"
+    },
+    "NodeTypeUpdateParameters": {
+      "type": "object",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Node type update parameters",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "sku": {
+          "$ref": "#/definitions/NodeTypeSku",
+          "description": "The node type sku."
+        }
+      },
+      "description": "Node type update request"
+    },
+    "NodeTypeSku": {
+      "type": "object",
+      "required": [
+        "capacity"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The sku name. <br /><br />Name is internally generated and is used in auto-scale scenarios.<br /> Property does not allow to be changed to other values than generated.<br /> To avoid deployment errors please omit the property."
+        },
+        "tier": {
+          "type": "string",
+          "description": "Specifies the tier of the node type. <br /><br /> Possible Values:<br /> **Standard**"
+        },
+        "capacity": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of nodes in the node type.<br /><br />If present in request it will override properties.vmInstanceCount.",
+          "minimum": 1,
+          "maximum": 2147483647
+        }
+      },
+      "description": "Describes a node type sku."
+    },
+    "NodeTypeSkuCapacity": {
+      "type": "object",
+      "properties": {
+        "minimum": {
+          "type": "integer",
+          "format": "int32",
+          "readOnly": true,
+          "description": "Lowest permitted node count in a node type."
+        },
+        "maximum": {
+          "type": "integer",
+          "format": "int32",
+          "readOnly": true,
+          "description": "Highest permitted node count in a node type."
+        },
+        "default": {
+          "type": "integer",
+          "format": "int32",
+          "readOnly": true,
+          "description": "Default node count in a node type."
+        },
+        "scaleType": {
+          "$ref": "#/definitions/NodeTypeSkuScaleType",
+          "readOnly": true,
+          "description": "Node type capacity scale type."
+        }
+      },
+      "description": "Provides information about how node type can be scaled."
+    },
+    "NodeTypeSkuScaleType": {
+      "type": "string",
+      "description": "Node type capacity scale type.\n",
+      "enum": [
+        "None",
+        "Manual",
+        "Automatic"
+      ],
+      "default": "None",
+      "x-ms-enum": {
+        "name": "NodeTypeSkuScaleType",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "None",
+            "description": "Node count is not adjustable in any way (e.g. it is fixed)."
+          },
+          {
+            "value": "Manual",
+            "description": "The user must manually scale out/in."
+          },
+          {
+            "value": "Automatic",
+            "description": "Automatic scale is allowed."
+          }
+        ]
+      }
+    },
+    "NodeTypeAvailableSku": {
+      "type": "object",
+      "properties": {
+        "resourceType": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The type of resource the sku applies to.  <br /><br />Value: Microsoft.ServiceFabric/managedClusters/nodeTypes."
+        },
+        "sku": {
+          "$ref": "#/definitions/NodeTypeSupportedSku",
+          "description": "The supported SKU for a for node type.",
+          "readOnly": true
+        },
+        "capacity": {
+          "$ref": "#/definitions/NodeTypeSkuCapacity",
+          "description": "Provides information about how the node count can be scaled.",
+          "readOnly": true
+        }
+      },
+      "description": "Defines the type of sku available for a node type"
+    },
+    "NodeTypeSupportedSku": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The sku name.",
+          "readOnly": true
+        },
+        "tier": {
+          "type": "string",
+          "description": "Specifies the tier of the node type. <br /><br /> Possible Values:<br /> **Standard**",
+          "readOnly": true
+        }
+      },
+      "description": "Describes a node type supported sku."
+    },
+    "NodeTypeListSkuResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "title": "Node type sku list value.",
+          "description": "The list of available node type SKUs.",
+          "items": {
+            "$ref": "#/definitions/NodeTypeAvailableSku"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to use for getting the next set of results."
+        }
+      },
+      "description": "Node type available sku list results"
+    },
+    "SubResource": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Azure resource identifier."
+        }
+      },
+      "description": "Azure resource identifier.",
+      "x-ms-azure-resource": true
+    },
+    "VaultCertificate": {
+      "type": "object",
+      "required": [
+        "certificateUrl",
+        "certificateStore"
+      ],
+      "properties": {
+        "certificateUrl": {
+          "type": "string",
+          "description": "This is the URL of a certificate that has been uploaded to Key Vault as a secret. For adding a secret to the Key Vault, see [Add a key or secret to the key vault](https://docs.microsoft.com/azure/key-vault/key-vault-get-started/#add). In this case, your certificate needs to be It is the Base64 encoding of the following JSON Object which is encoded in UTF-8: <br><br> {<br>  \"data\":\"<Base64-encoded-certificate>\",<br>  \"dataType\":\"pfx\",<br>  \"password\":\"<pfx-file-password>\"<br>}"
+        },
+        "certificateStore": {
+          "type": "string",
+          "description": "For Windows VMs, specifies the certificate store on the Virtual Machine to which the certificate should be added. The specified certificate store is implicitly in the LocalMachine account. <br><br>For Linux VMs, the certificate file is placed under the /var/lib/waagent directory, with the file name <UppercaseThumbprint>.crt for the X509 certificate file and <UppercaseThumbprint>.prv for private key. Both of these files are .pem formatted."
+        }
+      },
+      "description": "Describes a single certificate reference in a Key Vault, and where the certificate should reside on the VM."
+    },
+    "VaultSecretGroup": {
+      "type": "object",
+      "required": [
+        "sourceVault",
+        "vaultCertificates"
+      ],
+      "properties": {
+        "sourceVault": {
+          "$ref": "#/definitions/SubResource",
+          "description": "The relative URL of the Key Vault containing all of the certificates in VaultCertificates."
+        },
+        "vaultCertificates": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VaultCertificate"
+          },
+          "x-ms-identifiers": [],
+          "description": "The list of key vault references in SourceVault which contain certificates."
+        }
+      },
+      "description": "Specifies set of certificates that should be installed onto the virtual machines."
+    },
+    "VmImagePlan": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The plan ID."
+        },
+        "product": {
+          "type": "string",
+          "description": "Specifies the product of the image from the marketplace. This is the same value as Offer under the imageReference element."
+        },
+        "promotionCode": {
+          "type": "string",
+          "description": "The promotion code."
+        },
+        "publisher": {
+          "type": "string",
+          "description": "The publisher ID."
+        }
+      },
+      "description": "Specifies information about the marketplace image used to create the virtual machine. This element is only used for marketplace images. Before you can use a marketplace image from an API, you must enable the image for programmatic use. In the Azure portal, find the marketplace image that you want to use and then click Want to deploy programmatically, Get Started ->. Enter any required information and then click Save."
+    },
+    "VmManagedIdentity": {
+      "type": "object",
+      "properties": {
+        "userAssignedIdentities": {
+          "type": "array",
+          "description": "The list of user identities associated with the virtual machine scale set under the node type. Each entry will be an ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "description": "Identities for the virtual machine scale set under the node type."
+    },
+    "VmssDataDisk": {
+      "type": "object",
+      "required": [
+        "lun",
+        "diskSizeGB",
+        "diskType",
+        "diskLetter"
+      ],
+      "properties": {
+        "lun": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 1,
+          "description": "Specifies the logical unit number of the data disk. This value is used to identify data disks within the VM and therefore must be unique for each data disk attached to a VM. Lun 0 is reserved for the service fabric data disk."
+        },
+        "diskSizeGB": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Disk size for each vm in the node type in GBs."
+        },
+        "diskType": {
+          "$ref": "#/definitions/DiskType",
+          "description": "Managed data disk type. Specifies the storage account type for the managed disk"
+        },
+        "diskLetter": {
+          "type": "string",
+          "pattern": "^[a-zA-Z]{1}$",
+          "description": "Managed data disk letter. It can not use the reserved letter C or D and it can not change after created."
+        }
+      },
+      "description": "Managed data disk description."
+    },
+    "VmSetupAction": {
+      "type": "string",
+      "description": "action to be performed on the vms before bootstrapping the service fabric runtime.",
+      "enum": [
+        "EnableContainers",
+        "EnableHyperV"
+      ],
+      "x-ms-enum": {
+        "name": "VmSetupAction",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "EnableContainers",
+            "description": "Enable windows containers feature."
+          },
+          {
+            "value": "EnableHyperV",
+            "description": "Enables windows HyperV feature."
+          }
+        ]
+      }
+    },
+    "VMSSExtension": {
+      "type": "object",
+      "required": [
+        "name",
+        "properties"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the extension."
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/VMSSExtensionProperties",
+          "description": "Describes the properties of a Virtual Machine Scale Set Extension."
+        }
+      },
+      "description": "Specifies set of extensions that should be installed onto the virtual machines."
+    },
+    "VMSSExtensionProperties": {
+      "type": "object",
+      "required": [
+        "publisher",
+        "type",
+        "typeHandlerVersion"
+      ],
+      "properties": {
+        "publisher": {
+          "type": "string",
+          "description": "The name of the extension handler publisher."
+        },
+        "type": {
+          "type": "string",
+          "description": "Specifies the type of the extension; an example is \"CustomScriptExtension\"."
+        },
+        "typeHandlerVersion": {
+          "type": "string",
+          "description": "Specifies the version of the script handler."
+        },
+        "autoUpgradeMinorVersion": {
+          "type": "boolean",
+          "description": "Indicates whether the extension should use a newer minor version if one is available at deployment time. Once deployed, however, the extension will not upgrade minor versions unless redeployed, even with this property set to true."
+        },
+        "settings": {
+          "type": "object",
+          "description": "Json formatted public settings for the extension."
+        },
+        "protectedSettings": {
+          "type": "object",
+          "description": "The extension can contain either protectedSettings or protectedSettingsFromKeyVault or no protected settings at all."
+        },
+        "forceUpdateTag": {
+          "type": "string",
+          "description": "If a value is provided and is different from the previous value, the extension handler will be forced to update even if the extension configuration has not changed."
+        },
+        "provisionAfterExtensions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Collection of extension names after which this extension needs to be provisioned."
+        },
+        "provisioningState": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The provisioning state, which only appears in the response."
+        },
+        "enableAutomaticUpgrade": {
+          "type": "boolean",
+          "description": "Indicates whether the extension should be automatically upgraded by the platform if there is a newer version of the extension available."
+        },
+        "setupOrder": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VmssExtensionSetupOrder"
+          },
+          "x-ms-identifiers": [],
+          "description": "Indicates the setup order for the extension."
+        }
+      },
+      "description": "Describes the properties of a Virtual Machine Scale Set Extension."
+    },
+    "VmssExtensionSetupOrder": {
+      "type": "string",
+      "description": "Vm extension setup order.\n",
+      "enum": [
+        "BeforeSFRuntime"
+      ],
+      "x-ms-enum": {
+        "name": "VmssExtensionSetupOrder",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "BeforeSFRuntime",
+            "description": "Indicates that the vm extension should run before the service fabric runtime starts."
+          }
+        ]
+      }
+    },
+    "AvailableOperationDisplay": {
+      "type": "object",
+      "properties": {
+        "provider": {
+          "type": "string",
+          "description": "The name of the provider."
+        },
+        "resource": {
+          "type": "string",
+          "description": "The resource on which the operation is performed"
+        },
+        "operation": {
+          "type": "string",
+          "description": "The operation that can be performed."
+        },
+        "description": {
+          "type": "string",
+          "description": "Operation description"
+        }
+      },
+      "description": "Operation supported by the Service Fabric resource provider"
+    },
+    "EndpointRangeDescription": {
+      "type": "object",
+      "required": [
+        "endPort",
+        "startPort"
+      ],
+      "properties": {
+        "startPort": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Starting port of a range of ports"
+        },
+        "endPort": {
+          "type": "integer",
+          "format": "int32",
+          "description": "End port of a range of ports"
+        }
+      },
+      "description": "Port range details"
+    },
+    "ErrorModel": {
+      "type": "object",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ErrorModelError",
+          "description": "The error details."
+        }
+      },
+      "description": "The structure of the error."
+    },
+    "ErrorModelError": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "The error code."
+        },
+        "message": {
+          "type": "string",
+          "description": "The error message."
+        }
+      },
+      "description": "The error details."
+    },
+    "ManagedResourceProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of the managed resource.",
+      "enum": [
+        "None",
+        "Creating",
+        "Created",
+        "Updating",
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Deleting",
+        "Deleted",
+        "Other"
+      ],
+      "x-ms-enum": {
+        "name": "ManagedResourceProvisioningState",
+        "modelAsString": true
+      }
+    },
+    "NetworkSecurityRule": {
+      "type": "object",
+      "required": [
+        "name",
+        "protocol",
+        "access",
+        "priority",
+        "direction"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Network security rule name."
+        },
+        "description": {
+          "type": "string",
+          "description": "Network security rule description."
+        },
+        "protocol": {
+          "type": "string",
+          "description": "Network protocol this rule applies to.",
+          "enum": [
+            "http",
+            "https",
+            "tcp",
+            "udp",
+            "icmp",
+            "ah",
+            "esp"
+          ],
+          "x-ms-enum": {
+            "name": "nsgProtocol",
+            "modelAsString": true
+          }
+        },
+        "sourceAddressPrefixes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The CIDR or source IP ranges."
+        },
+        "destinationAddressPrefixes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The destination address prefixes. CIDR or destination IP ranges."
+        },
+        "sourcePortRanges": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The source port ranges."
+        },
+        "destinationPortRanges": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The destination port ranges."
+        },
+        "sourceAddressPrefix": {
+          "type": "string",
+          "description": "The CIDR or source IP range. Asterisk '*' can also be used to match all source IPs. Default tags such as 'VirtualNetwork', 'AzureLoadBalancer' and 'Internet' can also be used. If this is an ingress rule, specifies where network traffic originates from."
+        },
+        "destinationAddressPrefix": {
+          "type": "string",
+          "description": "The destination address prefix. CIDR or destination IP range. Asterisk '*' can also be used to match all source IPs. Default tags such as 'VirtualNetwork', 'AzureLoadBalancer' and 'Internet' can also be used."
+        },
+        "sourcePortRange": {
+          "type": "string",
+          "description": "The source port or range. Integer or range between 0 and 65535. Asterisk '*' can also be used to match all ports."
+        },
+        "destinationPortRange": {
+          "type": "string",
+          "description": "he destination port or range. Integer or range between 0 and 65535. Asterisk '*' can also be used to match all ports."
+        },
+        "access": {
+          "type": "string",
+          "description": "The network traffic is allowed or denied.",
+          "enum": [
+            "allow",
+            "deny"
+          ],
+          "x-ms-enum": {
+            "name": "access",
+            "modelAsString": true
+          }
+        },
+        "priority": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The priority of the rule. The value can be in the range 1000 to 3000. Values outside this range are reserved for Service Fabric ManagerCluster Resource Provider. The priority number must be unique for each rule in the collection. The lower the priority number, the higher the priority of the rule.",
+          "minimum": 1000,
+          "maximum": 3000
+        },
+        "direction": {
+          "type": "string",
+          "description": "Network security rule direction.",
+          "enum": [
+            "inbound",
+            "outbound"
+          ],
+          "x-ms-enum": {
+            "name": "direction",
+            "modelAsString": true
+          }
+        }
+      },
+      "description": "Describes a network security rule."
+    },
+    "OperationResult": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the operation."
+        },
+        "isDataAction": {
+          "type": "boolean",
+          "description": "Indicates whether the operation is a data action"
+        },
+        "display": {
+          "$ref": "#/definitions/AvailableOperationDisplay",
+          "description": "The object that represents the operation."
+        },
+        "origin": {
+          "type": "string",
+          "description": "Origin result"
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to use for getting the next set of results."
+        }
+      },
+      "description": "Available operation list result"
+    },
+    "SystemData": {
+      "description": "Metadata pertaining to creation and last modification of the resource.",
+      "type": "object",
+      "readOnly": true,
+      "properties": {
+        "createdBy": {
+          "type": "string",
+          "description": "The identity that created the resource."
+        },
+        "createdByType": {
+          "type": "string",
+          "description": "The type of identity that created the resource."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp of resource creation (UTC)."
+        },
+        "lastModifiedBy": {
+          "type": "string",
+          "description": "The identity that last modified the resource."
+        },
+        "lastModifiedByType": {
+          "type": "string",
+          "description": "The type of identity that last modified the resource."
+        },
+        "lastModifiedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp of resource last modification (UTC)."
+        }
+      }
+    }
+  },
+  "parameters": {
+    "api-version": {
+      "name": "api-version",
+      "in": "query",
+      "description": "The version of the Service Fabric resource provider API. This is a required parameter and it's value must be \"2023-09-01-preview\" for this specification.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "client"
+    },
+    "clusterNameParameter": {
+      "name": "clusterName",
+      "in": "path",
+      "description": "The name of the cluster resource.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "nodeTypeNameParameter": {
+      "name": "nodeTypeName",
+      "in": "path",
+      "description": "The name of the node type.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "resourceGroupNameParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "description": "The name of the resource group.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "subscriptionId": {
+      "name": "subscriptionId",
+      "in": "path",
+      "description": "The customer subscription identifier.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "client"
+    }
+  }
+}

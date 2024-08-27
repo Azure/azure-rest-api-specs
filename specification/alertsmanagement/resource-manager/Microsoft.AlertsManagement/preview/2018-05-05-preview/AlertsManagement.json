@@ -116,7 +116,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/errorResponse"
+              "$ref": "#/definitions/AlertsManagementErrorResponse"
             }
           }
         },
@@ -159,7 +159,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/errorResponse"
+              "$ref": "#/definitions/AlertsManagementErrorResponse"
             }
           }
         },
@@ -198,7 +198,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/errorResponse"
+              "$ref": "#/definitions/AlertsManagementErrorResponse"
             }
           }
         },
@@ -234,7 +234,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/errorResponse"
+              "$ref": "#/definitions/AlertsManagementErrorResponse"
             }
           }
         },
@@ -273,7 +273,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/errorResponse"
+              "$ref": "#/definitions/AlertsManagementErrorResponse"
             }
           }
         },
@@ -344,7 +344,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/errorResponse"
+              "$ref": "#/definitions/AlertsManagementErrorResponse"
             }
           }
         },
@@ -390,7 +390,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/errorResponse"
+              "$ref": "#/definitions/AlertsManagementErrorResponse"
             }
           }
         },
@@ -435,7 +435,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/errorResponse"
+              "$ref": "#/definitions/AlertsManagementErrorResponse"
             }
           }
         },
@@ -471,7 +471,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/errorResponse"
+              "$ref": "#/definitions/AlertsManagementErrorResponse"
             }
           }
         },
@@ -808,7 +808,7 @@
         "value"
       ]
     },
-    "errorResponse": {
+    "AlertsManagementErrorResponse": {
       "description": "An error response from the service.",
       "x-ms-external": true,
       "properties": {
@@ -890,6 +890,16 @@
           "items": {
             "$ref": "#/definitions/alert"
           }
+        }
+      }
+    },
+    "actionStatus": {
+      "type": "object",
+      "description": "Action status",
+      "properties": {
+        "isSuppressed": {
+          "type": "boolean",
+          "description": "Value indicating whether alert is suppressed."
         }
       }
     },
@@ -995,6 +1005,11 @@
             "modelAsString": true
           }
         },
+        "alertRule": {
+          "type": "string",
+          "description": "Rule(monitor) which fired alert instance. Depending on the monitor service,  this would be ARM id or name of the rule.",
+          "readOnly": true
+        },
         "sourceCreatedId": {
           "type": "string",
           "description": "Unique Id created by monitor service",
@@ -1031,6 +1046,13 @@
           "type": "object",
           "description": "More details which are contextual to the monitor service.",
           "readOnly": true
+        },
+        "actionStatus": {
+          "$ref": "#/definitions/actionStatus"
+        },
+        "description": {
+          "type": "string",
+          "description": "Alert description."
         }
       }
     },

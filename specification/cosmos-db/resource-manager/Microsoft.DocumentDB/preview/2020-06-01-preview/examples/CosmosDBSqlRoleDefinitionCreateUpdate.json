@@ -1,0 +1,54 @@
+{
+  "parameters": {
+    "roleDefinitionId": "myRoleDefinitionId",
+    "subscriptionId": "mySubscriptionId",
+    "resourceGroupName": "myResourceGroupName",
+    "accountName": "myAccountName",
+    "api-version": "2020-06-01-preview",
+    "createUpdateSqlRoleDefinitionParameters": {
+      "properties": {
+        "roleName": "myRoleName",
+        "type": "CustomRole",
+        "assignableScopes": [
+          "/subscriptions/mySubscriptionId/resourceGroups/myResourceGroupName/providers/Microsoft.DocumentDB/databaseAccounts/myAccountName/dbs/sales",
+          "/subscriptions/mySubscriptionId/resourceGroups/myResourceGroupName/providers/Microsoft.DocumentDB/databaseAccounts/myAccountName/dbs/purchases"
+        ],
+        "permissions": [
+          {
+            "dataActions": [
+              "Microsoft.DocumentDB/databaseAccounts/sqlDatabases/containers/items/create",
+              "Microsoft.DocumentDB/databaseAccounts/sqlDatabases/containers/items/read"
+            ],
+            "notDataActions": []
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/mySubscriptionId/resourceGroups/myResourceGroupName/providers/Microsoft.DocumentDB/databaseAccounts/myAccountName/sqlRoleDefinitions/myRoleDefinitionId",
+        "name": "myRoleDefinitionId",
+        "type": "Microsoft.DocumentDB/databaseAccounts/sqlRoleDefinitions",
+        "properties": {
+          "roleName": "myRoleName",
+          "type": "CustomRole",
+          "assignableScopes": [
+            "/subscriptions/mySubscriptionId/resourceGroups/myResourceGroupName/providers/Microsoft.DocumentDB/databaseAccounts/myAccountName/dbs/sales",
+            "/subscriptions/mySubscriptionId/resourceGroups/myResourceGroupName/providers/Microsoft.DocumentDB/databaseAccounts/myAccountName/dbs/purchases"
+          ],
+          "permissions": [
+            {
+              "dataActions": [
+                "Microsoft.DocumentDB/databaseAccounts/sqlDatabases/containers/items/create",
+                "Microsoft.DocumentDB/databaseAccounts/sqlDatabases/containers/items/read"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "202": {}
+  }
+}

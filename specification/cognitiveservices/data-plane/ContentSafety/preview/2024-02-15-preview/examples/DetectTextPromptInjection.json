@@ -1,0 +1,27 @@
+{
+  "title": "Analyze text prompt injection attacks",
+  "operationId": "TextOperations_DetectTextPromptInjectionOptions",
+  "parameters": {
+    "api-version": "2024-02-15-preview",
+    "body": {
+      "userPrompt": "The sun rises from the west.",
+      "documents": [
+        "The sun rises from the east due to the visual effect caused by the Earth"
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "userPromptAnalysis": {
+          "attackDetected": true
+        },
+        "documentsAnalysis": [
+          {
+            "attackDetected": true
+          }
+        ]
+      }
+    }
+  }
+}

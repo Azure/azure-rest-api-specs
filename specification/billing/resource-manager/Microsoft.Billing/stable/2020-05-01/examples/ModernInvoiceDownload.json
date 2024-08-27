@@ -1,0 +1,21 @@
+{
+  "parameters": {
+    "api-version": "2020-05-01",
+    "billingAccountName": "{billingAccountName}",
+    "invoiceName": "{invoiceName}",
+    "downloadToken": "DRS_12345"
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/invoices/{invoiceName}/operationResults/invoiceDownload_{operationId}?api-version=2020-05-01",
+        "Retry-After": "10"
+      }
+    },
+    "200": {
+      "body": {
+        "url": "https://myaccount.blob.core.windows.net/invoices/1383724.pdf?sv=2019-02-02&sr=b&sp=r"
+      }
+    }
+  }
+}

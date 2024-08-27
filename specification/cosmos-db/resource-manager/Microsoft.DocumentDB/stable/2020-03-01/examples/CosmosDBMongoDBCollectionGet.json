@@ -1,0 +1,45 @@
+{
+  "parameters": {
+    "api-version": "2020-03-01",
+    "subscriptionId": "subid",
+    "resourceGroupName": "rgName",
+    "accountName": "ddb1",
+    "databaseName": "databaseName",
+    "collectionName": "collectionName"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.DocumentDB/databaseAccounts/ddb1/mongodbDatabases/databaseName/mongodbCollections/collectionName",
+        "name": "collectionName",
+        "type": "Microsoft.DocumentDB/databaseAccounts/mongodbDatabases/mongodbCollections",
+        "location": "West US",
+        "tags": {},
+        "properties": {
+          "resource": {
+            "id": "testcoll",
+            "indexes": [
+              {
+                "key": {
+                  "keys": [
+                    "testKey"
+                  ]
+                },
+                "options": {
+                  "expireAfterSeconds": 100,
+                  "unique": true
+                }
+              }
+            ],
+            "shardKey": {
+              "testKey": "Hash"
+            },
+            "_rid": "PD5DALigDgw=",
+            "_ts": 1459200611,
+            "_etag": "\"00005900-0000-0000-0000-56f9a2630000\""
+          }
+        }
+      }
+    }
+  }
+}

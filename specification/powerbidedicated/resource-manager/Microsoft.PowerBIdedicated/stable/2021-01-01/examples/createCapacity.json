@@ -1,0 +1,94 @@
+{
+  "parameters": {
+    "subscriptionId": "613192d7-503f-477a-9cfe-4efc3ee2bd60",
+    "resourceGroupName": "TestRG",
+    "dedicatedCapacityName": "azsdktest",
+    "api-version": "2021-01-01",
+    "capacityParameters": {
+      "sku": {
+        "name": "A1",
+        "tier": "PBIE_Azure"
+      },
+      "tags": {
+        "testKey": "testValue"
+      },
+      "location": "West US",
+      "properties": {
+        "administration": {
+          "members": [
+            "azsdktest@microsoft.com",
+            "azsdktest2@microsoft.com"
+          ]
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "id": "/subscriptions/613192d7-503f-477a-9cfe-4efc3ee2bd60/resourceGroups/TestRG/providers/Microsoft.PowerBIDedicated/capacities/azsdktest",
+        "location": "West US",
+        "name": "azsdktest",
+        "properties": {
+          "administration": {
+            "members": [
+              "azsdktest@microsoft.com",
+              "azsdktest2@microsoft.com"
+            ]
+          },
+          "provisioningState": "Provisioning",
+          "state": "Provisioning"
+        },
+        "sku": {
+          "name": "A1",
+          "tier": "PBIE_Azure"
+        },
+        "tags": {
+          "testKey": "testValue"
+        },
+        "systemData": {
+          "createdBy": "user1",
+          "createdByType": "User",
+          "createdAt": "2021-01-01T00:00:19.1234567Z",
+          "lastModifiedBy": "user2",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2021-01-01T00:00:19.1234567Z"
+        }
+      }
+    },
+    "201": {
+      "headers": {},
+      "body": {
+        "id": "/subscriptions/613192d7-503f-477a-9cfe-4efc3ee2bd60/resourceGroups/TestRG/providers/Microsoft.PowerBIDedicated/servers/azsdktest",
+        "location": "West US",
+        "name": "azsdktest",
+        "properties": {
+          "administration": {
+            "members": [
+              "azsdktest@microsoft.com",
+              "azsdktest2@microsoft.com"
+            ]
+          },
+          "provisioningState": "Provisioning",
+          "state": "Provisioning"
+        },
+        "sku": {
+          "name": "A1",
+          "tier": "PBIE_Azure"
+        },
+        "tags": {
+          "testKey": "testValue"
+        },
+        "systemData": {
+          "createdBy": "user1",
+          "createdByType": "User",
+          "createdAt": "2021-01-01T00:00:19.1234567Z",
+          "lastModifiedBy": "user2",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2021-01-01T00:00:19.1234567Z"
+        }
+      }
+    }
+  }
+}

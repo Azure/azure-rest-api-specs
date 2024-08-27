@@ -1,0 +1,36 @@
+{
+  "operationId": "AnalyzeTextSubmitJob",
+  "title": "SuccessfulCustomHealthcarePostRequest",
+  "parameters": {
+    "Ocp-Apim-Subscription-Key": "{API key}",
+    "api-version": "2023-11-15-preview",
+    "Endpoint": "{Endpoint}",
+    "body": {
+      "analysisInput": {
+        "documents": [
+          {
+            "text": "Prescribed 100mg ibuprofen, taken twice daily.",
+            "id": "1",
+            "language": "en"
+          }
+        ]
+      },
+      "tasks": [
+        {
+          "kind": "CustomHealthcare",
+          "parameters": {
+            "projectName": "{PROJECT-NAME}",
+            "deploymentName": "{DEPLOYMENT-NAME}"
+          }
+        }
+      ]
+    }
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "Operation-Location": "{Endpoint}/language/analyze-text/jobs/{jobId}?api-version=2023-04-01"
+      }
+    }
+  }
+}

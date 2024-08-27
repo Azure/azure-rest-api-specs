@@ -1,0 +1,36 @@
+{
+  "parameters": {
+    "api-version": "2020-05-01",
+    "address": {
+      "addressLine1": "1 Test",
+      "city": "bellevue",
+      "region": "wa",
+      "postalCode": "12345",
+      "country": "us"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "status": "Invalid",
+        "suggestedAddresses": [
+          {
+            "country": "US",
+            "region": "WA",
+            "city": "Bellevue",
+            "addressLine1": "1 Test Address",
+            "postalCode": "98052"
+          },
+          {
+            "country": "US",
+            "region": "WA",
+            "city": "Bellevue",
+            "addressLine1": "1 Test Address",
+            "postalCode": "12345-0000"
+          }
+        ],
+        "validationMessage": "Invalid address"
+      }
+    }
+  }
+}

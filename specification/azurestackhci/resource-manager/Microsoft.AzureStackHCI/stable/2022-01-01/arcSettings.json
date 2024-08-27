@@ -1,0 +1,378 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2022-01-01",
+    "title": "AzureStackHCI",
+    "description": "Azure Stack HCI management service"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/arcSettings": {
+      "get": {
+        "operationId": "ArcSettings_ListByCluster",
+        "description": "Get ArcSetting resources of HCI Cluster.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ArcSettingList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List ArcSetting resources by HCI Cluster": {
+            "$ref": "./examples/ListArcSettingsByCluster.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/arcSettings/{arcSettingName}": {
+      "get": {
+        "operationId": "ArcSettings_Get",
+        "description": "Get ArcSetting resource details of HCI Cluster.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ArcSettingNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ArcSetting"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get ArcSetting": {
+            "$ref": "./examples/GetArcSetting.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "ArcSettings_Create",
+        "description": "Create ArcSetting for HCI cluster.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ArcSettingNameParameter"
+          },
+          {
+            "name": "arcSetting",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ArcSetting"
+            },
+            "description": "Parameters supplied to the Create ArcSetting resource for this HCI cluster."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ArcSetting"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create ArcSetting": {
+            "$ref": "./examples/PutArcSetting.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "ArcSettings_Delete",
+        "description": "Delete ArcSetting resource details of HCI Cluster.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ArcSettingNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "No content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "Delete ArcSetting": {
+            "$ref": "./examples/DeleteArcSetting.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ArcSettingList": {
+      "description": "List of ArcSetting proxy resources for the HCI cluster.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "List of ArcSetting proxy resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ArcSetting"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Link to the next set of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ArcSetting": {
+      "description": "ArcSetting details.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "systemData": {
+          "description": "System data of ArcSetting resource",
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "x-ms-client-flatten": true,
+          "readOnly": true
+        },
+        "properties": {
+          "description": "ArcSetting properties.",
+          "$ref": "#/definitions/ArcSettingProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "ArcSettingProperties": {
+      "description": "ArcSetting properties.",
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "description": "Provisioning state of the ArcSetting proxy resource.",
+          "type": "string",
+          "enum": [
+            "Succeeded",
+            "Failed",
+            "Canceled",
+            "Accepted",
+            "Provisioning"
+          ],
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          },
+          "readOnly": true
+        },
+        "arcInstanceResourceGroup": {
+          "description": "The resource group that hosts the Arc agents, ie. Hybrid Compute Machine resources.",
+          "type": "string"
+        },
+        "aggregateState": {
+          "description": "Aggregate state of Arc agent across the nodes in this HCI cluster.",
+          "type": "string",
+          "enum": [
+            "NotSpecified",
+            "Error",
+            "Succeeded",
+            "Canceled",
+            "Failed",
+            "Connected",
+            "Disconnected",
+            "Deleted",
+            "Creating",
+            "Updating",
+            "Deleting",
+            "Moving",
+            "PartiallySucceeded",
+            "PartiallyConnected",
+            "InProgress"
+          ],
+          "x-ms-enum": {
+            "name": "ArcSettingAggregateState",
+            "modelAsString": true
+          },
+          "readOnly": true
+        },
+        "perNodeDetails": {
+          "description": "State of Arc agent in each of the nodes.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PerNodeState"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "PerNodeState": {
+      "description": "Status of Arc agent for a particular node in HCI Cluster.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Name of the Node in HCI Cluster"
+        },
+        "arcInstance": {
+          "description": "Fully qualified resource ID for the Arc agent of this node.",
+          "type": "string",
+          "readOnly": true
+        },
+        "state": {
+          "description": "State of Arc agent in this node.",
+          "type": "string",
+          "enum": [
+            "NotSpecified",
+            "Error",
+            "Succeeded",
+            "Canceled",
+            "Failed",
+            "Connected",
+            "Disconnected",
+            "Deleted",
+            "Creating",
+            "Updating",
+            "Deleting",
+            "Moving"
+          ],
+          "x-ms-enum": {
+            "name": "NodeArcState",
+            "modelAsString": true
+          },
+          "readOnly": true
+        }
+      }
+    }
+  },
+  "parameters": {
+    "ClusterNameParameter": {
+      "name": "clusterName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the cluster.",
+      "x-ms-parameter-location": "method"
+    },
+    "ArcSettingNameParameter": {
+      "name": "arcSettingName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the proxy resource holding details of HCI ArcSetting information.",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

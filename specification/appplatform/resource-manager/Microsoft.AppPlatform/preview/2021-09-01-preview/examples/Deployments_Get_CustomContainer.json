@@ -1,0 +1,67 @@
+{
+  "parameters": {
+    "api-version": "2021-09-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myResourceGroup",
+    "serviceName": "myservice",
+    "appName": "myapp",
+    "deploymentName": "mydeployment"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "source": {
+            "type": "Container",
+            "customContainer": {
+              "server": "myacr.azurecr.io",
+              "containerImage": "myContainerImage:v1",
+              "command": [
+                "/bin/sh"
+              ],
+              "args": [
+                "-c",
+                "while true; do echo hello; sleep 10;done"
+              ],
+              "imageRegistryCredential": {
+                "username": "myUsername",
+                "password": ""
+              }
+            }
+          },
+          "appName": "myapp",
+          "deploymentSettings": {
+            "cpu": 1,
+            "memoryInGB": 3,
+            "resourceRequests": {
+              "cpu": "1000m",
+              "memory": "3Gi"
+            },
+            "environmentVariables": {
+              "env": "test"
+            }
+          },
+          "provisioningState": "Succeeded",
+          "status": "Running",
+          "active": false,
+          "instances": [
+            {
+              "name": "instance1",
+              "status": "Running",
+              "discoveryStatus": "N/A",
+              "startTime": "2020-08-26T01:55:02Z"
+            }
+          ]
+        },
+        "sku": {
+          "name": "S0",
+          "tier": "Standard",
+          "capacity": 1
+        },
+        "type": "Microsoft.AppPlatform/Spring/apps/deployments",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.AppPlatform/Spring/myservice/apps/myapp/deployments/mydeployment",
+        "name": "mydeployment"
+      }
+    }
+  }
+}

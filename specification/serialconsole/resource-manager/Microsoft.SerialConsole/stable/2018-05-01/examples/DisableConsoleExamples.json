@@ -7,12 +7,15 @@
   "responses": {
     "200": {
       "body": {
-        "disabled": true
+        "properties": {
+          "disabled": true
+        }
       }
     },
-    "default": {
+    "404": {
       "body": {
-        "errorMessage": "This message will contain details on failure"
+        "code": "SubscriptionNotFound",
+        "message": "The subscription '00000000-00000-0000-0000-000000000000' could not be found."
       }
     }
   }

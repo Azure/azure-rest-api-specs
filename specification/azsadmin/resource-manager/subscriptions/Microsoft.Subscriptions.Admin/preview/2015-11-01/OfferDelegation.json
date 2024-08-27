@@ -5,7 +5,7 @@
     "title": "SubscriptionsManagementClient",
     "description": "The Admin Subscriptions Management Client."
   },
-  "host": "adminmanagement.local.azurestack.external",
+  "host": "management.azure.com",
   "schemes": [
     "https"
   ],
@@ -43,6 +43,12 @@
           }
         ],
         "responses": {
+          "default": {
+            "description": "Unexpected Error",
+            "schema": {
+              "$ref": "Subscriptions.json#/definitions/Error"
+            }
+          },
           "200": {
             "description": "OK",
             "schema": {
@@ -85,6 +91,12 @@
           }
         ],
         "responses": {
+          "default": {
+            "description": "Unexpected Error",
+            "schema": {
+              "$ref": "Subscriptions.json#/definitions/Error"
+            }
+          },
           "200": {
             "description": "OK",
             "schema": {
@@ -121,10 +133,16 @@
             "$ref": "Subscriptions.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/NewOfferDelegationParameter"
+            "$ref": "#/parameters/OfferDelegationDefinitionParameter"
           }
         ],
         "responses": {
+          "default": {
+            "description": "Unexpected Error",
+            "schema": {
+              "$ref": "Subscriptions.json#/definitions/Error"
+            }
+          },
           "201": {
             "description": "Created",
             "schema": {
@@ -168,6 +186,12 @@
           }
         ],
         "responses": {
+          "default": {
+            "description": "Unexpected Error",
+            "schema": {
+              "$ref": "Subscriptions.json#/definitions/Error"
+            }
+          },
           "200": {
             "description": "OK"
           },
@@ -231,9 +255,9 @@
       "type": "string",
       "x-ms-parameter-location": "method"
     },
-    "NewOfferDelegationParameter": {
+    "OfferDelegationDefinitionParameter": {
       "description": "New offer delegation parameter.",
-      "name": "newOfferDelegation",
+      "name": "offerDelegationDefinition",
       "in": "body",
       "required": true,
       "schema": {
