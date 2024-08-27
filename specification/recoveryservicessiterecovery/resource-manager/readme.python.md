@@ -23,8 +23,24 @@ directive:
   where: $.parameters.ResourceGroupName
   transform: >
     $["x-ms-parameter-location"] = "client"; 
+
 - from: swagger-document
   where: $.parameters.ResourceName
+  transform: >
+    $["x-ms-parameter-location"] = "client";
+
+- from: swagger-document
+  where: $.parameters.FabricName
+  transform: >
+    $["x-ms-parameter-location"] = "client";
+
+- from: swagger-document
+  where: $.parameters.ProtectionContainerName
+  transform: >
+    $["x-ms-parameter-location"] = "client";
+
+- from: swagger-document
+  where: $.parameters.ReplicationProtectionClusterName
   transform: >
     $["x-ms-parameter-location"] = "client";
 ```
