@@ -38,10 +38,6 @@ model ComputeDeviceProperties {
   @visibility("read")
   dcCode: string;
 
-  @doc("The cloud of physical device as surfaced by Network Graph Service (NGS).")
-  @visibility("read")
-  cloudType: string;
-
   @doc("The onboarding group as surfaced by Network Graph Service (NGS). ")
   @visibility("read")
   deploymentType: string;
