@@ -9,35 +9,37 @@
       "location": "eastus",
       "properties": {
         "githubProfile": {
-            "repositoryOwner": "qfai",
-            "repositoryName": "localtest"
+          "repositoryOwner": "qfai",
+          "repositoryName": "localtest"
         },
         "terraformProfile": {
-            "storageAccountSubscription": "586c20df-c465-4f10-8673-65aa4859e7ca",
-            "storageAccountResourceGroup": "test",
-            "storageAccountName": "iacbackend",
-            "storageContainerName": "tfbackend"
+          "storageAccountSubscription": "586c20df-c465-4f10-8673-65aa4859e7ca",
+          "storageAccountResourceGroup": "test",
+          "storageAccountName": "iacbackend",
+          "storageContainerName": "tfbackend"
         },
-        "stages":[
-            {
-		  					"stageName":"dev",
-                "dependencies":[],
-                "gitEnvironment":"Terraform"
-            },
-            {
-		  				"stageName":"qa",
-		  				"dependencies":["dev"],
-               "gitEnvironment":"Terraform"
-            }
+        "stages": [
+          {
+            "stageName": "dev",
+            "dependencies": [],
+            "gitEnvironment": "Terraform"
+          },
+          {
+            "stageName": "qa",
+            "dependencies": [
+              "dev"
+            ],
+            "gitEnvironment": "Terraform"
+          }
         ],
-        "templates":[
-		  		{
-		  			"templateName": "hciaksss",
-		  			"quickStartTemplateType": "HCIAKS",
-		  			"instanceName": "quickinstance",
-		  			"instanceStage": "dev"
-		  		}
-		  	]
+        "templates": [
+          {
+            "templateName": "hciaksss",
+            "quickStartTemplateType": "HCIAKS",
+            "instanceName": "quickinstance",
+            "instanceStage": "dev"
+          }
+        ]
       }
     }
   },
