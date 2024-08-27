@@ -32,15 +32,15 @@ directive:
 - from: swagger-document
   where: $.parameters.FabricName
   transform: >
-    $["x-ms-parameter-location"] = "client";
+    $["x-ms-parameter-location"] = "method";
 
 - from: swagger-document
   where: $.parameters.ProtectionContainerName
   transform: >
-    $["x-ms-parameter-location"] = "client";
+    $["x-ms-parameter-location"] = "method";
 
 - from: swagger-document
   where: $.parameters.ReplicationProtectionClusterName
   transform: >
-    $["x-ms-parameter-location"] = "client";
+    $["x-ms-parameter-location"] = "method";
 ```
