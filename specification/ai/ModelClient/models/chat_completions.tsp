@@ -457,7 +457,7 @@ model FunctionDefinition {
 
   #suppress "@azure-tools/typespec-azure-core/bad-record-type"
   @doc("The parameters the function accepts, described as a JSON Schema object.")
-  parameters?: Record<unknown>;
+  parameters?: unknown;
 }
 
 @doc("""
