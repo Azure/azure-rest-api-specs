@@ -6,8 +6,10 @@
     "deploymentName": "myDeployment",
     "apiKeyName": "myApiKey",
     "requestBody": {
-      "secretText": "00000000-0000-0000-0000-000000000000",
-      "endDateTime": "2024-09-01T00:00:00Z"
+      "properties": {
+        "secretText": "00000000-0000-0000-0000-000000000000",
+        "endDateTime": "2024-09-01T00:00:00Z"
+      }
     }
   },
   "responses": {
@@ -15,10 +17,22 @@
       "body": {
         "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/NGINX.NGINXPLUS/nginxDeployments/myDeployment/apiKeys/myApiKey",
         "name": "myApiKey",
-        "type": "nginx.nginxplus/nginxdeployments/apiKeys",
-        "provisioningState": "Succeeded",
-        "hint": "000",
-        "endDateTime": "2024-09-01T00:00:00Z"
+        "type": "Nginx.NginxPlus/nginxDeployments/apiKeys",
+        "properties": {
+          "hint": "000",
+          "endDateTime": "2024-09-01T00:00:00Z"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/NGINX.NGINXPLUS/nginxDeployments/myDeployment/apiKeys/myApiKey",
+        "name": "myApiKey",
+        "type": "Nginx.NginxPlus/nginxDeployments/apiKeys",
+        "properties": {
+          "hint": "000",
+          "endDateTime": "2024-09-01T00:00:00Z"
+        }
       }
     }
   }
