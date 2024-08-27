@@ -429,7 +429,15 @@
       "properties": {
         "name": {
           "description": "The SKU name of the experiment workspace. Required for the creation of a new experiment workspace.",
-          "type": "string"
+          "type": "string",
+          "enum": [
+            "F0",
+            "A0"
+          ],
+          "x-ms-enum": {
+            "name": "SkuTier",
+            "modelAsString": true
+          }
         },
         "tier": {
           "description": "The SKU tier based on the SKU name.",
