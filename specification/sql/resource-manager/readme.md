@@ -1415,7 +1415,6 @@ input-file:
 - ./Microsoft.Sql/preview/2023-02-01-preview/Databases.json
 - ./Microsoft.Sql/preview/2022-08-01-preview/ElasticPools.json
 - ./Microsoft.Sql/preview/2022-08-01-preview/ManagedDatabases.json
-- ./Microsoft.Sql/preview/2022-08-01-preview/ManagedInstances.json
 - ./Microsoft.Sql/preview/2022-08-01-preview/ManagedLedgerDigestUploads.json
 - ./Microsoft.Sql/preview/2022-08-01-preview/RecoverableDatabases.json
 - ./Microsoft.Sql/preview/2022-08-01-preview/RestorableDroppedDatabases.json
@@ -1440,6 +1439,7 @@ input-file:
 - ./Microsoft.Sql/preview/2023-05-01-preview/InstancePools.json
 - ./Microsoft.Sql/preview/2023-05-01-preview/LongTermRetentionBackups.json
 - ./Microsoft.Sql/preview/2023-05-01-preview/LongTermRetentionPolicies.json
+- ./Microsoft.Sql/preview/2023-05-01-preview/ManagedInstances.json
 - ./Microsoft.Sql/preview/2023-05-01-preview/Servers.json
 - ./Microsoft.Sql/preview/2023-05-01-preview/ReplicationLinks.json
 
