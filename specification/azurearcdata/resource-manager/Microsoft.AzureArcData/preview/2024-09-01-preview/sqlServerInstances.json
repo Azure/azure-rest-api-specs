@@ -1350,6 +1350,18 @@
           "type": "string",
           "description": "The Azure SQL Managed Instance resource ID to link with the SQL Server instance."
         },
+        "azureManagedInstanceRole": {
+          "type": "string",
+          "description": "The role of managed instance in a distributed availability group, can be Primary or Secondary.",
+          "enum": [
+            "Primary",
+            "Secondary"
+          ],
+          "x-ms-enum": {
+            "name": "azureManagedInstanceRole",
+            "modelAsString": true
+          }
+        },
         "databaseName": {
           "type": "string",
           "description": "The name of the database to be replicated to the Azure SQL Managed Instance."
