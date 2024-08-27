@@ -10,6 +10,7 @@ namespace Language.Authoring;
 /**
  * Gets the details of a project.
  */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @summary("Get project details")
 @route("/{projectName}")
 @get
@@ -27,6 +28,7 @@ op getProject is Azure.Core.Foundations.Operation<
 /**
  * Creates a new project or updates an existing one.
  */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @summary("Create project")
 @route("/{projectName}")
 @patch
@@ -50,6 +52,7 @@ op createProject is Azure.Core.Foundations.Operation<
 /**
  * Deletes a project.
  */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @summary("Delete project")
 @route("/{projectName}")
 @delete
@@ -70,6 +73,7 @@ op deleteProject is Azure.Core.Foundations.Operation<
  * Generates a copy project operation authorization to the current target Azure
  * resource.
  */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @summary("Copy project authorization")
 @route("/{projectName}/:authorize-copy")
 @post
@@ -93,6 +97,7 @@ op copyProjectAuthorization is Azure.Core.Foundations.Operation<
 /**
  * Copies an existing project to another Azure resource.
  */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @summary("Copy project")
 @route("/{projectName}/:copy")
 @post
@@ -116,6 +121,7 @@ op copyProject is Azure.Core.Foundations.Operation<
 /**
  * Triggers a job to export a project's data.
  */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @summary("Export project")
 @route("/{projectName}/:export")
 @post
@@ -160,6 +166,7 @@ op export is Azure.Core.Foundations.Operation<
  * Triggers a job to import a project. If a project with the same name already
  * exists, the data of that project is replaced.
  */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @summary("Import project")
 @route("/{projectName}/:import")
 @post
@@ -189,6 +196,7 @@ op `import` is Azure.Core.Foundations.Operation<
 /**
  * Triggers a training job for a project.
  */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @summary("Train project")
 @route("/{projectName}/:train")
 @post
@@ -212,6 +220,7 @@ op train is Azure.Core.Foundations.Operation<
 /**
  * Gets the status of an existing copy project job.
  */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @summary("Get copy project status")
 @route("/{projectName}/copy/jobs/{jobId}")
 @get
@@ -235,6 +244,7 @@ op getCopyProjectStatus is Azure.Core.Foundations.Operation<
 /**
  * Lists the deployments belonging to a project.
  */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @summary("List deployments")
 @route("/{projectName}/deployments")
 @get
@@ -294,6 +304,7 @@ op getDeployment is Azure.Core.Foundations.Operation<
 /**
  * Creates a new deployment or replaces an existing one.
  */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @summary("Update deployment")
 @route("/{projectName}/deployments/{deploymentName}")
 @put
@@ -323,6 +334,7 @@ op deployProject is Azure.Core.Foundations.Operation<
 /**
  * Deletes a project deployment.
  */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @summary("Delete deployment")
 @route("/{projectName}/deployments/{deploymentName}")
 @delete
@@ -346,6 +358,7 @@ op deleteDeployment is Azure.Core.Foundations.Operation<
 /**
  * Deletes a project deployment from the specified assigned resources.
  */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @summary("Delete deployment from resources")
 @route("/{projectName}/deployments/{deploymentName}/:delete-from-resources")
 @post
@@ -375,6 +388,7 @@ op deleteDeploymentFromResources is Azure.Core.Foundations.Operation<
 /**
  * Gets the status of an existing delete deployment from specific resources job.
  */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @summary("Get deployment deletion from resources status")
 @route("/{projectName}/deployments/{deploymentName}/delete-from-resources/jobs/{jobId}")
 @get
@@ -404,6 +418,7 @@ op getDeploymentDeleteFromResourcesStatus is Azure.Core.Foundations.Operation<
 /**
  * Gets the status of an existing deployment job.
  */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @summary("Get deployment status")
 @route("/{projectName}/deployments/{deploymentName}/jobs/{jobId}")
 @get
@@ -433,6 +448,7 @@ op getDeploymentStatus is Azure.Core.Foundations.Operation<
 /**
  * Swaps two existing deployments with each other.
  */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @summary("Swap deployments")
 @route("/{projectName}/deployments/:swap")
 @post
@@ -456,6 +472,7 @@ op swapDeployments is Azure.Core.Foundations.Operation<
 /**
  * Gets the status of an existing swap deployment job.
  */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @summary("Gets swap deployments status")
 @route("/{projectName}/deployments/swap/jobs/{jobId}")
 @get
@@ -480,6 +497,7 @@ op getSwapDeploymentsStatus is Azure.Core.Foundations.Operation<
  * Gets the status of an export job. Once job completes, returns the project
  * metadata, and assets.
  */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @summary("Get export status")
 @route("/{projectName}/export/jobs/{jobId}")
 @get
@@ -503,6 +521,7 @@ op getExportStatus is Azure.Core.Foundations.Operation<
 /**
  * Gets the result of an export job.
  */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @summary("Get export result")
 @route("/{projectName}/export/jobs/{jobId}/result")
 @get
@@ -526,6 +545,7 @@ op getExportResult is Azure.Core.Foundations.Operation<
 /**
  * Gets the status for an import.
  */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @summary("Get import status")
 @route("/{projectName}/import/jobs/{jobId}")
 @get
@@ -549,6 +569,7 @@ op getImportStatus is Azure.Core.Foundations.Operation<
 /**
  * Lists the trained models belonging to a project.
  */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @summary("List trained models")
 @route("/{projectName}/models")
 @get
@@ -584,6 +605,7 @@ op listTrainedModels is Azure.Core.Foundations.Operation<
 /**
  * Gets the details of a trained model.
  */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @summary("Get trained model details")
 @route("/{projectName}/models/{trainedModelLabel}")
 @get
@@ -607,6 +629,7 @@ op getTrainedModel is Azure.Core.Foundations.Operation<
 /**
  * Deletes an existing trained model.
  */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @summary("Delete trained model")
 @route("/{projectName}/models/{trainedModelLabel}")
 @delete
@@ -630,6 +653,7 @@ op deleteTrainedModel is Azure.Core.Foundations.Operation<
 /**
  * Triggers evaluation operation on a trained model.
  */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @summary("Evaluate model")
 @route("/{projectName}/models/{trainedModelLabel}/:evaluate")
 @post
@@ -660,6 +684,7 @@ op evaluateModel is Azure.Core.Foundations.Operation<
  * Restores the snapshot of this trained model to be the current working directory
  * of the project.
  */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @summary("Load trained model snapshot to the working directory.")
 @route("/{projectName}/models/{trainedModelLabel}/:load-snapshot")
 @post
@@ -683,6 +708,7 @@ op loadSnapshot is Azure.Core.Foundations.Operation<
 /**
  * Gets the status for an evaluation job.
  */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @summary("Get evaluation status")
 @route("/{projectName}/models/{trainedModelLabel}/evaluate/jobs/{jobId}")
 @get
@@ -713,6 +739,7 @@ op getEvaluationStatus is Azure.Core.Foundations.Operation<
  * Gets the detailed results of the evaluation for a trained model. This includes
  * the raw inference results for the data included in the evaluation process.
  */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @summary("Get trained model evaluation result")
 @route("/{projectName}/models/{trainedModelLabel}/evaluation/result")
 @get
@@ -762,6 +789,7 @@ op getModelEvaluationResults is Azure.Core.Foundations.Operation<
  * Gets the evaluation summary of a trained model. The summary includes high level
  * performance measurements of the model e.g., F1, Precision, Recall, etc.
  */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @summary("Get trained model evaluation summary")
 @route("/{projectName}/models/{trainedModelLabel}/evaluation/summary-result")
 @get
@@ -785,6 +813,7 @@ op getModelEvaluationSummary is Azure.Core.Foundations.Operation<
 /**
  * Gets the status for loading a snapshot.
  */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @summary("Get load snapshot status")
 @route("/{projectName}/models/{trainedModelLabel}/load-snapshot/jobs/{jobId}")
 @get
@@ -814,6 +843,7 @@ op getLoadSnapshotStatus is Azure.Core.Foundations.Operation<
 /**
  * Lists the deployments resources assigned to the project.
  */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @summary("Lists deployment resources")
 @route("/{projectName}/resources")
 @get
@@ -853,6 +883,7 @@ op listDeploymentResources is Azure.Core.Foundations.Operation<
  * check here:
  * https://learn.microsoft.com/en-us/azure/cognitive-services/authentication?tabs=powershell#authenticate-with-azure-active-directory
  */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @summary("Assign deployment resources")
 @route("/{projectName}/resources/:assign")
 @post
@@ -877,6 +908,7 @@ op assignDeploymentResources is Azure.Core.Foundations.Operation<
  * Unassign resources from a project. This disallows deploying new deployments to
  * these resources, and deletes existing deployments assigned to them.
  */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @summary("Unassign deployment resources")
 @route("/{projectName}/resources/:unassign")
 @post
@@ -900,6 +932,7 @@ op unassignDeploymentResources is Azure.Core.Foundations.Operation<
 /**
  * Gets the status of an existing assign deployment resources job.
  */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @summary("Get assign deployment resources status")
 @route("/{projectName}/resources/assign/jobs/{jobId}")
 @get
@@ -923,6 +956,7 @@ op getAssignDeploymentResourcesStatus is Azure.Core.Foundations.Operation<
 /**
  * Gets the status of an existing unassign deployment resources job.
  */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @summary("Get unassign deployment resources status")
 @route("/{projectName}/resources/unassign/jobs/{jobId}")
 @get
@@ -946,6 +980,7 @@ op getUnassignDeploymentResourcesStatus is Azure.Core.Foundations.Operation<
 /**
  * Lists the non-expired training jobs created for a project.
  */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @summary("List training jobs")
 @route("/{projectName}/train/jobs")
 @get
@@ -981,6 +1016,7 @@ op listTrainingJobs is Azure.Core.Foundations.Operation<
 /**
  * Gets the status for a training job.
  */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @summary("Get training status")
 @route("/{projectName}/train/jobs/{jobId}")
 @get
@@ -1004,6 +1040,7 @@ op getTrainingStatus is Azure.Core.Foundations.Operation<
 /**
  * Triggers a cancellation for a running training job.
  */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @summary("Cancel training")
 @route("/{projectName}/train/jobs/{jobId}/:cancel")
 @post
@@ -1027,6 +1064,7 @@ op cancelTrainingJob is Azure.Core.Foundations.Operation<
 /**
  * Lists the existing projects.
  */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @summary("List projects")
 @route("/")
 @get
@@ -1056,6 +1094,7 @@ op listProjects is Azure.Core.Foundations.Operation<
 /**
  * Gets the status for a project deletion job.
  */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @summary("Get project deletion status")
 @route("/global/deletion-jobs/{jobId}")
 @get
@@ -1075,6 +1114,7 @@ op getProjectDeletionStatus is Azure.Core.Foundations.Operation<
  * return deployments belonging to projects owned by this resource. It only
  * returns deployments belonging to projects owned by other resources.
  */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @summary("Lists assigned resource deployments")
 @route("/global/deployments/resources")
 @get
@@ -1104,6 +1144,7 @@ op listAssignedResourceDeployments is Azure.Core.Foundations.Operation<
 /**
  * Lists the supported languages for the given project type.
  */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @summary("List supported languages")
 @route("/global/languages")
 @get
@@ -1140,6 +1181,7 @@ op getSupportedLanguages is Azure.Core.Foundations.Operation<
  * Lists the supported prebuilt entities that can be used while creating composed
  * entities.
  */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @summary("List supported prebuilt entities")
 @route("/global/prebuilt-entities")
 @get
@@ -1184,6 +1226,7 @@ op getSupportedPrebuiltEntities is Azure.Core.Foundations.Operation<
 /**
  * Lists the support training config version for a given project type.
  */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @summary("List training config versions")
 @route("/global/training-config-versions")
 @get
