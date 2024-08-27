@@ -230,12 +230,6 @@ interface Fleets {
   @armResourceList(VirtualMachineScaleSet)
   @get
   @doc("List VirtualMachineScaleSet resources by Fleet")
-  @extension(
-    "x-ms-pageable",
-    {
-      nextLinkName: "nextLink",
-    }
-  )
   listVirtualMachineScaleSets(
     ...ApiVersionParameter,
     ...SubscriptionIdParameter,

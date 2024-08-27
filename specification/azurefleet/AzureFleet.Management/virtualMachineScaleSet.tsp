@@ -9,6 +9,7 @@ using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using TypeSpec.OpenAPI;
 using Azure.ResourceManager;
+using Azure.Core;
 
 namespace Microsoft.AzureFleet;
 
@@ -49,10 +50,13 @@ model VirtualMachineScaleSet {
 }
 
 @doc("The response of a VirtualMachineScaleSet list operation.")
+@pagedResult
 model VirtualMachineScaleSetListResult {
   @doc("The VirtualMachineScaleSet items on this page")
+  @items
   value: Array<VirtualMachineScaleSet>;
 
   @doc("The link to the next page of items")
+  @nextLink
   nextLink?: url;
 }

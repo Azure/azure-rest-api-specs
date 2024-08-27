@@ -5,6 +5,7 @@ import "./models.session.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
+using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.Core.Traits;
 using Foundations;
@@ -118,7 +119,7 @@ interface LivenessSessionOperations {
   @sharedRoute
   createLivenessWithVerifySession is FaceResourceCreateWithServiceProvidedName<
     LivenessWithVerifySession,
-    BodyParameter<CreateLivenessSessionContent>,
+    BodyParameter<CreateLivenessWithVerifySessionJsonContent>,
     CreateLivenessWithVerifySessionResult
   >;
 
@@ -143,4 +144,20 @@ interface LivenessSessionOperations {
 
   @doc(ListSessionAuditEntriesDescription)
   getLivenessWithVerifySessionAuditEntries is FaceLivenessSessionListAuditEntries<LivenessWithVerifySession>;
+
+  #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" "Does not fit in resource operation pattern."
+  @added(Versions.v1_2_preview_1)
+  @doc("Get session image stored during the liveness session.")
+  @get
+  @route("session/sessionImages/{sessionImageId}")
+  getSessionImage is Azure.Core.RpcOperation<
+    {
+      @doc("The request ID of the image to be retrieved")
+      @path
+      sessionImageId: string;
+    },
+    SessionImageStream,
+    ServiceTraits,
+    FaceErrorResponse
+  >;
 }

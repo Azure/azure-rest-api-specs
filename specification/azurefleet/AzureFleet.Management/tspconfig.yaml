@@ -35,5 +35,17 @@ options:
     package-dir: "azure-resourcemanager-computefleet"
     namespace: com.azure.resourcemanager.computefleet
     service-name: Compute Fleet
-    examples-directory: "examples"
+    examples-directory: "{project-root}/examples"
     flavor: azure
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/resourcemanager/computefleet"
+    package-dir: "armcomputefleet"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    examples-directory: "{project-root}/examples"
+    fix-const-stuttering: true
+    flavor: "azure"
+    generate-examples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
+    remove-unreferenced-types: true
