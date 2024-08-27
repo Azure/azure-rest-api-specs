@@ -24,10 +24,6 @@ using Microsoft.AVS;
 @useDependency(Microsoft.AVS.Versions.v2023_09_01)
 namespace Customization;
 
-// client
-@@clientName(Microsoft.AVS, "Avs", "java");
-@@clientName(Microsoft.AVS, "AVS", "python");
-
 // operation group per interface
 #suppress "@azure-tools/typespec-client-generator-core/client-service" "operationGroup"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "operationGroup"
@@ -221,17 +217,21 @@ interface WorkloadNetworks {
 
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Can not change existing operationId."
+  @clientName("listPublicIps", "java")
   listPublicIPs is Microsoft.AVS.WorkloadNetworkPublicIps.list;
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Can not change existing operationId."
+  @clientName("getPublicIp", "java")
   getPublicIP is Microsoft.AVS.WorkloadNetworkPublicIps.get;
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Can not change existing operationId."
   #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "MUST CHANGE ON NEXT UPDATE"
+  @clientName("createPublicIp", "java")
   createPublicIP is Microsoft.AVS.WorkloadNetworkPublicIps.create;
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Can not change existing operationId."
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation"
+  @clientName("deletePublicIp", "java")
   deletePublicIP is Microsoft.AVS.WorkloadNetworkPublicIps.delete;
 }
 
@@ -261,8 +261,6 @@ interface WorkloadNetworks {
 @@flattenProperty(WorkloadNetwork.properties);
 #suppress "deprecated" "property flatten for SDK backward compatibility"
 @@flattenProperty(WorkloadNetworkSegment.properties);
-#suppress "deprecated" "property flatten for SDK backward compatibility"
-@@flattenProperty(WorkloadNetworkDhcp.properties);
 #suppress "deprecated" "property flatten for SDK backward compatibility"
 @@flattenProperty(WorkloadNetworkGateway.properties);
 #suppress "deprecated" "property flatten for SDK backward compatibility"
