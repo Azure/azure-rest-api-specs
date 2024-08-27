@@ -1729,6 +1729,26 @@
         }
       }
     },
+    "NginxDeploymentApiKeyProperties": {
+      "type": "object",
+      "properties": {
+        "secretText": {
+          "type": "string",
+          "format": "password",
+          "description": "Secret text to be used as a Dataplane API Key. This is a write only property that can never be read back, but the first three characters will be returned in the 'hint' property."
+        },
+        "hint": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The first three characters of the secret text to help identify it in use. This property is read-only."
+        },
+        "endDateTime": {
+          "format": "date-time",
+          "type": "string",
+          "description": "The time after which this Dataplane API Key is no longer valid."
+        }
+      }
+    },
     "NginxDeploymentApiKey": {
       "type": "object",
       "x-ms-azure-resource": true,
@@ -1745,20 +1765,8 @@
           "type": "string",
           "readOnly": true
         },
-        "secretText": {
-          "type": "string",
-          "format": "password",
-          "description": "Secret text to be used as a Dataplane API Key. This is a write only property that can never be read back, but the first three characters will be returned in the 'hint' property."
-        },
-        "hint": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The first three characters of the secret text to help identify it in use. This property is read-only."
-        },
-        "endDateTime": {
-          "format": "date-time",
-          "type": "string",
-          "description": "The time after which this Dataplane API Key is no longer valid."
+        "properties": {
+          "$ref": "#/definitions/NginxDeploymentApiKeyProperties"
         }
       }
     },
