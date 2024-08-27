@@ -2779,10 +2779,52 @@
     "CopyProjectJobState": {
       "type": "object",
       "description": "Represents the state of a copy job.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/JobState"
+      "properties": {
+        "jobId": {
+          "type": "string",
+          "description": "The job ID."
+        },
+        "createdDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The creation date time of the job."
+        },
+        "lastUpdatedDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The last date time the job was updated."
+        },
+        "expirationDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The expiration date time of the job."
+        },
+        "status": {
+          "$ref": "#/definitions/JobStatus",
+          "description": "The job status."
+        },
+        "warnings": {
+          "type": "array",
+          "description": "The warnings that were encountered while executing the job.",
+          "items": {
+            "$ref": "#/definitions/Warning"
+          },
+          "x-ms-identifiers": []
+        },
+        "errors": {
+          "type": "array",
+          "description": "The errors encountered while executing the job.",
+          "items": {
+            "$ref": "#/definitions/Error"
+          },
+          "x-ms-identifiers": []
         }
+      },
+      "required": [
+        "jobId",
+        "createdDateTime",
+        "lastUpdatedDateTime",
+        "status"
       ]
     },
     "CopyProjectOptions": {
@@ -2933,10 +2975,52 @@
     "DeploymentJobState": {
       "type": "object",
       "description": "Represents the state of a deployment job.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/JobState"
+      "properties": {
+        "jobId": {
+          "type": "string",
+          "description": "The job ID."
+        },
+        "createdDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The creation date time of the job."
+        },
+        "lastUpdatedDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The last date time the job was updated."
+        },
+        "expirationDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The expiration date time of the job."
+        },
+        "status": {
+          "$ref": "#/definitions/JobStatus",
+          "description": "The job status."
+        },
+        "warnings": {
+          "type": "array",
+          "description": "The warnings that were encountered while executing the job.",
+          "items": {
+            "$ref": "#/definitions/Warning"
+          },
+          "x-ms-identifiers": []
+        },
+        "errors": {
+          "type": "array",
+          "description": "The errors encountered while executing the job.",
+          "items": {
+            "$ref": "#/definitions/Error"
+          },
+          "x-ms-identifiers": []
         }
+      },
+      "required": [
+        "jobId",
+        "createdDateTime",
+        "lastUpdatedDateTime",
+        "status"
       ]
     },
     "DeploymentResource": {
@@ -2960,10 +3044,52 @@
     "DeploymentResourcesJobState": {
       "type": "object",
       "description": "Represents the state of a deployment resources job.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/JobState"
+      "properties": {
+        "jobId": {
+          "type": "string",
+          "description": "The job ID."
+        },
+        "createdDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The creation date time of the job."
+        },
+        "lastUpdatedDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The last date time the job was updated."
+        },
+        "expirationDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The expiration date time of the job."
+        },
+        "status": {
+          "$ref": "#/definitions/JobStatus",
+          "description": "The job status."
+        },
+        "warnings": {
+          "type": "array",
+          "description": "The warnings that were encountered while executing the job.",
+          "items": {
+            "$ref": "#/definitions/Warning"
+          },
+          "x-ms-identifiers": []
+        },
+        "errors": {
+          "type": "array",
+          "description": "The errors encountered while executing the job.",
+          "items": {
+            "$ref": "#/definitions/Error"
+          },
+          "x-ms-identifiers": []
         }
+      },
+      "required": [
+        "jobId",
+        "createdDateTime",
+        "lastUpdatedDateTime",
+        "status"
       ]
     },
     "EntitiesEvaluationSummary": {
@@ -3215,18 +3341,56 @@
       "type": "object",
       "description": "Represents the state of a evaluation job.",
       "properties": {
+        "jobId": {
+          "type": "string",
+          "description": "The job ID."
+        },
+        "createdDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The creation date time of the job."
+        },
+        "lastUpdatedDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The last date time the job was updated."
+        },
+        "expirationDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The expiration date time of the job."
+        },
+        "status": {
+          "$ref": "#/definitions/JobStatus",
+          "description": "The job status."
+        },
+        "warnings": {
+          "type": "array",
+          "description": "The warnings that were encountered while executing the job.",
+          "items": {
+            "$ref": "#/definitions/Warning"
+          },
+          "x-ms-identifiers": []
+        },
+        "errors": {
+          "type": "array",
+          "description": "The errors encountered while executing the job.",
+          "items": {
+            "$ref": "#/definitions/Error"
+          },
+          "x-ms-identifiers": []
+        },
         "result": {
           "$ref": "#/definitions/EvaluationJobResult",
           "description": "Represents evaluation task detailed result."
         }
       },
       "required": [
+        "jobId",
+        "createdDateTime",
+        "lastUpdatedDateTime",
+        "status",
         "result"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/JobState"
-        }
       ]
     },
     "EvaluationKind": {
@@ -3335,15 +3499,55 @@
       "type": "object",
       "description": "Represents the state of an export job.",
       "properties": {
+        "jobId": {
+          "type": "string",
+          "description": "The job ID."
+        },
+        "createdDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The creation date time of the job."
+        },
+        "lastUpdatedDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The last date time the job was updated."
+        },
+        "expirationDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The expiration date time of the job."
+        },
+        "status": {
+          "$ref": "#/definitions/JobStatus",
+          "description": "The job status."
+        },
+        "warnings": {
+          "type": "array",
+          "description": "The warnings that were encountered while executing the job.",
+          "items": {
+            "$ref": "#/definitions/Warning"
+          },
+          "x-ms-identifiers": []
+        },
+        "errors": {
+          "type": "array",
+          "description": "The errors encountered while executing the job.",
+          "items": {
+            "$ref": "#/definitions/Error"
+          },
+          "x-ms-identifiers": []
+        },
         "resultUrl": {
           "type": "string",
           "description": "The URL to use in order to download the exported project."
         }
       },
-      "allOf": [
-        {
-          "$ref": "#/definitions/JobState"
-        }
+      "required": [
+        "jobId",
+        "createdDateTime",
+        "lastUpdatedDateTime",
+        "status"
       ]
     },
     "ExportedConversationOrchestration": {
@@ -3509,8 +3713,7 @@
       "description": "Represents the options used to define the orchestration behavior of an intent.",
       "properties": {
         "targetProjectKind": {
-          "type": "string",
-          "description": "Discriminator property for ExportedOrchestrationOptions."
+          "$ref": "#/definitions/OrchestrationTargetProjectKind"
         }
       },
       "discriminator": "targetProjectKind",
@@ -3563,8 +3766,7 @@
       "description": "Represents the assets of an exported project.",
       "properties": {
         "projectKind": {
-          "type": "string",
-          "description": "Discriminator property for ExportedProjectAssets."
+          "$ref": "#/definitions/ProjectKind"
         }
       },
       "discriminator": "projectKind",
@@ -3632,10 +3834,52 @@
     "ImportProjectJobState": {
       "type": "object",
       "description": "Represents the state of an import job.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/JobState"
+      "properties": {
+        "jobId": {
+          "type": "string",
+          "description": "The job ID."
+        },
+        "createdDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The creation date time of the job."
+        },
+        "lastUpdatedDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The last date time the job was updated."
+        },
+        "expirationDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The expiration date time of the job."
+        },
+        "status": {
+          "$ref": "#/definitions/JobStatus",
+          "description": "The job status."
+        },
+        "warnings": {
+          "type": "array",
+          "description": "The warnings that were encountered while executing the job.",
+          "items": {
+            "$ref": "#/definitions/Warning"
+          },
+          "x-ms-identifiers": []
+        },
+        "errors": {
+          "type": "array",
+          "description": "The errors encountered while executing the job.",
+          "items": {
+            "$ref": "#/definitions/Error"
+          },
+          "x-ms-identifiers": []
         }
+      },
+      "required": [
+        "jobId",
+        "createdDateTime",
+        "lastUpdatedDateTime",
+        "status"
       ]
     },
     "IntentEvaluationSummary": {
@@ -3751,57 +3995,6 @@
         "macroRecall"
       ]
     },
-    "JobState": {
-      "type": "object",
-      "description": "Represents a job's state.",
-      "properties": {
-        "jobId": {
-          "type": "string",
-          "description": "The job ID."
-        },
-        "createdDateTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The creation date time of the job."
-        },
-        "lastUpdatedDateTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The last date time the job was updated."
-        },
-        "expirationDateTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The expiration date time of the job."
-        },
-        "status": {
-          "$ref": "#/definitions/JobStatus",
-          "description": "The job status."
-        },
-        "warnings": {
-          "type": "array",
-          "description": "The warnings that were encountered while executing the job.",
-          "items": {
-            "$ref": "#/definitions/Warning"
-          },
-          "x-ms-identifiers": []
-        },
-        "errors": {
-          "type": "array",
-          "description": "The errors encountered while executing the job.",
-          "items": {
-            "$ref": "#/definitions/Error"
-          },
-          "x-ms-identifiers": []
-        }
-      },
-      "required": [
-        "jobId",
-        "createdDateTime",
-        "lastUpdatedDateTime",
-        "status"
-      ]
-    },
     "JobStatus": {
       "type": "string",
       "enum": [
@@ -3851,10 +4044,52 @@
     "LoadSnapshotJobState": {
       "type": "object",
       "description": "Represents the state of loading a snapshot job.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/JobState"
+      "properties": {
+        "jobId": {
+          "type": "string",
+          "description": "The job ID."
+        },
+        "createdDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The creation date time of the job."
+        },
+        "lastUpdatedDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The last date time the job was updated."
+        },
+        "expirationDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The expiration date time of the job."
+        },
+        "status": {
+          "$ref": "#/definitions/JobStatus",
+          "description": "The job status."
+        },
+        "warnings": {
+          "type": "array",
+          "description": "The warnings that were encountered while executing the job.",
+          "items": {
+            "$ref": "#/definitions/Warning"
+          },
+          "x-ms-identifiers": []
+        },
+        "errors": {
+          "type": "array",
+          "description": "The errors encountered while executing the job.",
+          "items": {
+            "$ref": "#/definitions/Error"
+          },
+          "x-ms-identifiers": []
         }
+      },
+      "required": [
+        "jobId",
+        "createdDateTime",
+        "lastUpdatedDateTime",
+        "status"
       ]
     },
     "OrchestrationExportedIntent": {
@@ -3928,6 +4163,32 @@
         "intent"
       ]
     },
+    "OrchestrationTargetProjectKind": {
+      "type": "string",
+      "enum": [
+        "Luis",
+        "Conversation",
+        "QuestionAnswering"
+      ],
+      "x-ms-enum": {
+        "name": "OrchestrationTargetProjectKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Luis",
+            "value": "Luis"
+          },
+          {
+            "name": "Conversation",
+            "value": "Conversation"
+          },
+          {
+            "name": "QuestionAnswering",
+            "value": "QuestionAnswering"
+          }
+        ]
+      }
+    },
     "PrebuiltEntities": {
       "type": "object",
       "description": "Represents a list of the retrieved supported prebuilt entities.",
@@ -3976,10 +4237,52 @@
     "ProjectDeletionJobState": {
       "type": "object",
       "description": "Represents the state of a project deletion job.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/JobState"
+      "properties": {
+        "jobId": {
+          "type": "string",
+          "description": "The job ID."
+        },
+        "createdDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The creation date time of the job."
+        },
+        "lastUpdatedDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The last date time the job was updated."
+        },
+        "expirationDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The expiration date time of the job."
+        },
+        "status": {
+          "$ref": "#/definitions/JobStatus",
+          "description": "The job status."
+        },
+        "warnings": {
+          "type": "array",
+          "description": "The warnings that were encountered while executing the job.",
+          "items": {
+            "$ref": "#/definitions/Warning"
+          },
+          "x-ms-identifiers": []
+        },
+        "errors": {
+          "type": "array",
+          "description": "The errors encountered while executing the job.",
+          "items": {
+            "$ref": "#/definitions/Error"
+          },
+          "x-ms-identifiers": []
         }
+      },
+      "required": [
+        "jobId",
+        "createdDateTime",
+        "lastUpdatedDateTime",
+        "status"
       ]
     },
     "ProjectDeployment": {
@@ -4406,7 +4709,7 @@
       "type": "object",
       "description": "Represents a training config version.",
       "properties": {
-        "trainingConfigVersion": {
+        "configVersion": {
           "type": "string",
           "description": "Represents the version of the config."
         },
@@ -4417,7 +4720,7 @@
         }
       },
       "required": [
-        "trainingConfigVersion",
+        "configVersion",
         "modelExpirationDate"
       ]
     },
@@ -4509,18 +4812,56 @@
       "type": "object",
       "description": "Represents the state of a training job.",
       "properties": {
+        "jobId": {
+          "type": "string",
+          "description": "The job ID."
+        },
+        "createdDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The creation date time of the job."
+        },
+        "lastUpdatedDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The last date time the job was updated."
+        },
+        "expirationDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The expiration date time of the job."
+        },
+        "status": {
+          "$ref": "#/definitions/JobStatus",
+          "description": "The job status."
+        },
+        "warnings": {
+          "type": "array",
+          "description": "The warnings that were encountered while executing the job.",
+          "items": {
+            "$ref": "#/definitions/Warning"
+          },
+          "x-ms-identifiers": []
+        },
+        "errors": {
+          "type": "array",
+          "description": "The errors encountered while executing the job.",
+          "items": {
+            "$ref": "#/definitions/Error"
+          },
+          "x-ms-identifiers": []
+        },
         "result": {
           "$ref": "#/definitions/TrainingJobResult",
           "description": "Represents training tasks detailed result."
         }
       },
       "required": [
+        "jobId",
+        "createdDateTime",
+        "lastUpdatedDateTime",
+        "status",
         "result"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/JobState"
-        }
       ]
     },
     "TrainingJobs": {

@@ -1,11 +1,19 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/versioning";
+import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-client-generator-core";
 
-using TypeSpec.Rest;
+using Azure.ClientGenerator.Core;
 using TypeSpec.Http;
+using TypeSpec.Rest;
+using TypeSpec.Versioning;
+using Azure.Core;
+using Azure.Core.Traits;
 
 namespace Language.Authoring;
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 union ProjectKind {
   string,
 
@@ -27,6 +35,7 @@ union ProjectKind {
   CustomConversationSummarization: "CustomConversationSummarization",
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 union ErrorCode {
   string,
   InvalidRequest: "InvalidRequest",
@@ -41,6 +50,7 @@ union ErrorCode {
   InternalServerError: "InternalServerError",
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 union ExportedProjectFormat {
   string,
 
@@ -55,6 +65,7 @@ union ExportedProjectFormat {
   Luis: "Luis",
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 union StringIndexType {
   string,
 
@@ -66,6 +77,7 @@ union StringIndexType {
   Utf16CodeUnit: "Utf16CodeUnit",
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 union TrainingMode {
   string,
 
@@ -81,6 +93,7 @@ union TrainingMode {
   standard: "standard",
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 union EvaluationKind {
   string,
 
@@ -96,6 +109,7 @@ union EvaluationKind {
   manual: "manual",
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 union JobStatus {
   string,
   notStarted: "notStarted",
@@ -107,6 +121,7 @@ union JobStatus {
   partiallyCompleted: "partiallyCompleted",
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 union CompositionSetting {
   string,
 
@@ -136,6 +151,7 @@ union CompositionSetting {
   combineComponents: "combineComponents",
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 union OrchestrationTargetProjectKind {
   string,
   Luis: "Luis",
@@ -396,7 +412,9 @@ model ExportedProject {
  * Represents the assets of an exported project.
  */
 @discriminator("projectKind")
-model ExportedProjectAssets {}
+model ExportedProjectAssets {
+  projectKind: ProjectKind;
+}
 
 /**
  * Represents the options for starting a new training job.
@@ -452,7 +470,9 @@ model EvaluationOptions {
 /**
  * Represents the state of a copy job.
  */
-model CopyProjectJobState extends JobState {}
+model CopyProjectJobState {
+  ...JobState;
+}
 
 /**
  * Represents a job's state.
@@ -618,7 +638,9 @@ model DeleteDeploymentOptions {
 /**
  * Represents the state of a deployment job.
  */
-model DeploymentJobState extends JobState {}
+model DeploymentJobState {
+  ...JobState;
+}
 
 /**
  * Represents the options for swapping two deployments together.
@@ -638,7 +660,9 @@ model SwapDeploymentsOptions {
 /**
  * Represents the state of an export job.
  */
-model ExportProjectJobState extends JobState {
+model ExportProjectJobState {
+  
+  ...JobState;
   /**
    * The URL to use in order to download the exported project.
    */
@@ -648,7 +672,9 @@ model ExportProjectJobState extends JobState {
 /**
  * Represents the state of an import job.
  */
-model ImportProjectJobState extends JobState {}
+model ImportProjectJobState {
+  ...JobState;
+}
 
 /**
  * Represents a list of retrieved trained models.
@@ -726,13 +752,17 @@ model EvaluationOnDemandOptions {
 /**
  * Represents the state of a evaluation job.
  */
-model EvaluationJobState extends JobState {
+model EvaluationJobState {
+
+  ...JobState;
+
   /**
    * Represents evaluation task detailed result.
    */
   result: EvaluationJobResult;
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 model EvaluationJobResult {
   /**
    * Represents the options used running the evaluation.
@@ -1084,7 +1114,9 @@ model IntentEvaluationSummary {
 /**
  * Represents the state of loading a snapshot job.
  */
-model LoadSnapshotJobState extends JobState {}
+model LoadSnapshotJobState {
+  ...JobState;
+}
 
 /**
  * Represents the assigned deployment resources.
@@ -1159,7 +1191,9 @@ model UnassignDeploymentResourcesOptions {
 /**
  * Represents the state of a deployment resources job.
  */
-model DeploymentResourcesJobState extends JobState {}
+model DeploymentResourcesJobState {
+  ...JobState;
+}
 
 /**
  * Represents a list of retrieved training jobs.
@@ -1179,7 +1213,9 @@ model TrainingJobs {
 /**
  * Represents the state of a training job.
  */
-model TrainingJobState extends JobState {
+model TrainingJobState {
+
+  ...JobState;
   /**
    * Represents training tasks detailed result.
    */
@@ -1267,7 +1303,9 @@ model ProjectsMetadata {
 /**
  * Represents the state of a project deletion job.
  */
-model ProjectDeletionJobState extends JobState {}
+model ProjectDeletionJobState {
+  ...JobState;
+}
 
 /**
  * Represents the metadata for deployments assigned to a resource.
@@ -1408,7 +1446,8 @@ model TrainingConfigVersion {
   /**
    * Represents the version of the config.
    */
-  trainingConfigVersion: string;
+  @clientName("trainingConfigVersion", "csharp")
+  configVersion: string;
 
   /**
    * Represents the training config version expiration date.
@@ -1627,6 +1666,7 @@ model ExportedUtteranceEntityLabel {
   length: int32;
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 model ConversationSummarizationExportedProjectAssets {
   /**
    * Represents the conversations of the project.
@@ -1637,6 +1677,7 @@ model ConversationSummarizationExportedProjectAssets {
 /**
  * Represents an exported conversation for a custom conversation summarization.
  */
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 model CustomConversationSummarizationConversation {
   summaryLocation?: string;
 
@@ -1693,7 +1734,9 @@ model ExportedConversationOrchestrationOptions
  * Represents the options used to define the orchestration behavior of an intent.
  */
 @discriminator("targetProjectKind")
-model ExportedOrchestrationOptions {}
+model ExportedOrchestrationOptions {
+  targetProjectKind : OrchestrationTargetProjectKind;
+}
 
 /**
  * Defines the orchestration details for a LUIS application target.
