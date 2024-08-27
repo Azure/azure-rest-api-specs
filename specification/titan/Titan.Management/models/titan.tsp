@@ -66,10 +66,6 @@ model ComputeDeviceProperties {
   @visibility("read")
   machineName: string;
 
-  @doc("A device that connects to the network. One of: Server, ChassisManager, RackManager.")
-  @visibility("read")
-  machineType: MachineType;
-
   @doc("The name of the physical structure the machine is on.")
   @visibility("read")
   rackName: string;

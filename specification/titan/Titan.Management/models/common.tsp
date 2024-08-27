@@ -119,41 +119,6 @@ union DeploymentType {
   string,
 }
 
-@doc("Machine type enum")
-union MachineType {
-  @doc("Blade machine type.")
-  Blade: "Blade",
-
-  @doc("MachineForLogicalDevice machine type.")
-  MachineForLogicalDevice: "MachineForLogicalDevice",
-
-  @doc("SubstrateMachine machine type.")
-  SubstrateMachine: "SubstrateMachine",
-
-  @doc("LegacyMachine machine type.")
-  LegacyMachine: "LegacyMachine",
-
-  @doc("Baremetal machine type.")
-  Baremetal: "Baremetal",
-
-  @doc("LogicalNameMachine machine type.")
-  LogicalNameMachine: "LogicalNameMachine",
-
-  @doc("Server machine type.")
-  Server: "Server",
-
-  @doc("AzureHost machine type.")
-  AzureHost: "AzureHost",
-
-  @doc("LogicalMachine machine type.")
-  LogicalMachine: "LogicalMachine",
-
-  @doc("Unknown machine type.")
-  Unknown: "Unknown",
-
-  string,
-}
-
 @doc("Workload type enum")
 union WorkloadType {
   @doc("Baremetal workload type.")

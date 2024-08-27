@@ -222,11 +222,6 @@
           "description": "The name of the machine.",
           "readOnly": true
         },
-        "machineType": {
-          "$ref": "#/definitions/MachineType",
-          "description": "A device that connects to the network. One of: Server, ChassisManager, RackManager.",
-          "readOnly": true
-        },
         "rackName": {
           "type": "string",
           "description": "The name of the physical structure the machine is on.",
@@ -259,7 +254,6 @@
         "lifeCycleState",
         "macAddress",
         "machineName",
-        "machineType",
         "rackName",
         "serialNumber",
         "workloadType"
@@ -459,78 +453,6 @@
             "name": "EPMS",
             "value": "EPMS",
             "description": "The EPMS."
-          }
-        ]
-      }
-    },
-    "MachineType": {
-      "type": "string",
-      "description": "Machine type enum",
-      "enum": [
-        "Blade",
-        "MachineForLogicalDevice",
-        "SubstrateMachine",
-        "LegacyMachine",
-        "Baremetal",
-        "LogicalNameMachine",
-        "Server",
-        "AzureHost",
-        "LogicalMachine",
-        "Unknown"
-      ],
-      "x-ms-enum": {
-        "name": "MachineType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Blade",
-            "value": "Blade",
-            "description": "Blade machine type."
-          },
-          {
-            "name": "MachineForLogicalDevice",
-            "value": "MachineForLogicalDevice",
-            "description": "MachineForLogicalDevice machine type."
-          },
-          {
-            "name": "SubstrateMachine",
-            "value": "SubstrateMachine",
-            "description": "SubstrateMachine machine type."
-          },
-          {
-            "name": "LegacyMachine",
-            "value": "LegacyMachine",
-            "description": "LegacyMachine machine type."
-          },
-          {
-            "name": "Baremetal",
-            "value": "Baremetal",
-            "description": "Baremetal machine type."
-          },
-          {
-            "name": "LogicalNameMachine",
-            "value": "LogicalNameMachine",
-            "description": "LogicalNameMachine machine type."
-          },
-          {
-            "name": "Server",
-            "value": "Server",
-            "description": "Server machine type."
-          },
-          {
-            "name": "AzureHost",
-            "value": "AzureHost",
-            "description": "AzureHost machine type."
-          },
-          {
-            "name": "LogicalMachine",
-            "value": "LogicalMachine",
-            "description": "LogicalMachine machine type."
-          },
-          {
-            "name": "Unknown",
-            "value": "Unknown",
-            "description": "Unknown machine type."
           }
         ]
       }
