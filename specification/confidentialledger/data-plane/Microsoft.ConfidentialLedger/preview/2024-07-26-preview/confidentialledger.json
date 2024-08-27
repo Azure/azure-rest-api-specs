@@ -694,10 +694,7 @@
         "description": "Custom roles allow users to define and manage app specific AuthZ policy.",
         "parameters": [
           {
-            "$ref": "#/parameters/RoleNameParameter"
-          },
-          {
-            "$ref": "#/parameters/RoleActionParameter"
+            "$ref": "#/parameters/RoleParameter"
           }
         ],
         "responses": {
@@ -723,10 +720,7 @@
         "description": "Custom roles allow users to define and manage app specific AuthZ policy.",
         "parameters": [
           {
-            "$ref": "#/parameters/RoleNameParameter"
-          },
-          {
-            "$ref": "#/parameters/RoleActionParameter"
+            "$ref": "#/parameters/RoleParameter"
           }
         ],
         "responses": {
@@ -1489,14 +1483,30 @@
     "boolean": {
       "type": "boolean"
     },
+    "Role": {
+      "description": "Definition for roles",
+      "type": "object",
+      "properties": {
+        "roleName": {
+          "description": "name of the user defined role",
+          "type": "string"
+        },
+        "roleAction": {
+          "items": {
+            "$ref": "#/definitions/RoleActionDef"
+          },
+          "type": "array"
+        }
+      }
+    },
     "RoleName": {
-      "description": "Role names for user defined roles",
+      "description": "name of the user defined role",
       "type": "string"
     },
     "RoleAction": {
-        "items": {
-          "$ref": "#/definitions/RoleActionDef"
-        },
+      "items": {
+        "$ref": "#/definitions/RoleActionDef"
+      },
       "type": "array"
     },
     "RoleActionDef": {
@@ -1505,6 +1515,9 @@
           "type": "string"
         }
       },
+      "required": [
+        "roleAction"
+      ],
       "type": "array"
     }
   },
@@ -1592,8 +1605,18 @@
         "$ref": "#/definitions/Bundle"
       }
     },
+    "RoleParameter": {
+      "name": "role",
+      "description": "user defined role name",
+      "in": "body",
+      "required": true,
+      "x-ms-parameter-location": "method",
+      "schema": {
+        "$ref": "#/definitions/Role"
+      }
+    },
     "RoleNameParameter": {
-      "name": "roleName",
+      "name": "role",
       "description": "user defined role name",
       "in": "body",
       "required": true,
@@ -1603,8 +1626,8 @@
       }
     },
     "RoleActionParameter": {
-      "name": "roleAction",
-      "description": "role actions for user defined roles",
+      "name": "role",
+      "description": "user defined role name",
       "in": "body",
       "required": true,
       "x-ms-parameter-location": "method",
@@ -1612,5 +1635,6 @@
         "$ref": "#/definitions/RoleAction"
       }
     }
+
   }
 }
