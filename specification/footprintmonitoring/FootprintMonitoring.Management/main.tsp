@@ -24,7 +24,7 @@ using TypeSpec.Versioning;
  * Microsoft Footprint active monitoring system REST API version 2020-02-01-preview.
  */
 @armProviderNamespace
-@useAuth(AadOauth2Auth<["user_impersonation"]>)
+// @useAuth(AadOauth2Auth<["user_impersonation"]>)
 @service({
   title: "FootprintMonitoringManagementClient",
 })
