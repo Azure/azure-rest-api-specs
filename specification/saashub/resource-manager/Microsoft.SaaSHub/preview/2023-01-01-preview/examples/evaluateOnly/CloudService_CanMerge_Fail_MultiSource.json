@@ -9,6 +9,10 @@
         {
           "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.SaaSHub/cloudServices/sourceResourceName1",
           "quantity": 10
+        },
+        {
+          "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.SaaSHub/cloudServices/targetResourceName",
+          "quantity": 5
         }
       ]
     }
@@ -16,9 +20,9 @@
   "responses": {
     "200": {
       "body": {
-        "evaluateResult": "Passed",
-        "reasonCode": null,
-        "reason": null,
+        "evaluateResult": "Failed",
+        "reasonCode": "InvalidRequestBody",
+        "reason": "Currently only supports single source resource",
         "additionalInfo": null
       }
     }
