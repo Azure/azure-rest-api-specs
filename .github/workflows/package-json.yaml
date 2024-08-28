@@ -1,4 +1,4 @@
-name: package.json
+name: Protect package.json
 
 on:
   pull_request:
@@ -9,7 +9,9 @@ on:
       - package.json
 
 jobs:
-  always-fail:
+  protect-package-json:
+    name: Protect package.json
+
     runs-on: ubuntu-latest
 
     steps:
