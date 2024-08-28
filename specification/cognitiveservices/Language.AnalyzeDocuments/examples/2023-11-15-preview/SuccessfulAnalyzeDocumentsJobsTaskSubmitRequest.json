@@ -1,4 +1,6 @@
 {
+  "operationId": "AnalyzeDocumentsSubmitJob",
+  "title": "SuccessfulAnalyzeDocumentsJobsTaskSubmitRequest",
   "parameters": {
     "Ocp-Apim-Subscription-Key": "{API key}",
     "api-version": "2023-11-15-preview",
@@ -28,7 +30,11 @@
           "kind": "PiiEntityRecognition",
           "taskName": "Redact PII Task 1",
           "parameters": {
-            "redactionCharacter": "-"
+            "redactionCharacter": "-",
+            "piiCategories": [
+              "Person",
+              "Organization"
+            ]
           }
         }
       ]
