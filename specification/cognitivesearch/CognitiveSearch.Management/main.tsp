@@ -6,13 +6,20 @@ using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.ResourceManager;
 
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-common-types-version" "legacy"
 @doc("CognitiveSearch Indexer Resource Provider management API.")
-@useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+@versioned(Versions)
 namespace Microsoft.CognitiveSearch;
+
+enum Versions {
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  `2023-05-01-preview`,
+}
 
 @parentResource(Index)
 @doc("An indexer resource is a child tracked resource of index")
 model Indexer is TrackedResource<IndexerProperties> {
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-name-pattern" "legacy"
   @path
   @key("indexerName")
   @segment("indexers")
@@ -25,7 +32,15 @@ model Indexer is TrackedResource<IndexerProperties> {
 interface IndexerOperations {
   get is ArmResourceRead<Indexer>;
   createOrUpdate is ArmResourceCreateOrUpdateAsync<Indexer>;
-  update is ArmResourcePatchAsync<Indexer, IndexerProperties>;
+  update is ArmCustomPatchAsync<
+    Indexer,
+    Azure.ResourceManager.Foundations.ResourceUpdateModel<
+      Indexer,
+      IndexerProperties
+    >
+  >;
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "legacy"
+  #suppress "deprecated" "Legacy"
   delete is ArmResourceDeleteAsync<Indexer>;
 }
 
@@ -54,6 +69,7 @@ model DataSource {
   properties: DataSourceProperties;
 }
 
+#suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "legacy"
 @discriminator("authenticationType")
 @doc("Parent connection")
 model Connection {}
@@ -68,6 +84,7 @@ model Credentials extends Connection {
   connectionString: string;
 }
 
+#suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "legacy"
 @discriminator("kind")
 @doc("Datasource properties types")
 model DataSourceProperties {}
@@ -124,10 +141,12 @@ model FailurePolicy {
 }
 
 @doc("Supported Failure policy")
-enum FailurePolicyType {
+union FailurePolicyType {
+  string,
+
   @doc("Indexer will stop after the first failure.")
-  FailOnFirstFailure,
+  FailOnFirstFailure: "FailOnFirstFailure",
 
   @doc("Indexer will not stop for the specified number of failures")
-  TolerateFailures,
+  TolerateFailures: "TolerateFailures",
 }

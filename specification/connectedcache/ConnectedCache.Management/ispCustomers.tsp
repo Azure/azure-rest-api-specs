@@ -5,7 +5,6 @@ import "./models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 
 namespace Microsoft.ConnectedCache;
@@ -39,3 +38,8 @@ interface IspCustomers {
   @doc("This api gets information about all ispCustomer resources under the given subscription")
   listBySubscription is ArmListBySubscription<IspCustomerResource>;
 }
+
+@@OpenAPI.extension(Azure.ResourceManager.TrackedResource.properties,
+  "x-ms-mutability",
+  ["create", "update", "read"]
+);

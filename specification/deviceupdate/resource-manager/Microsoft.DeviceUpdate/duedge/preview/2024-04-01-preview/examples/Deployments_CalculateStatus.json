@@ -1,0 +1,29 @@
+{
+  "parameters": {
+    "api-version": "2024-04-01-preview",
+    "deploymentName": "mydeployment",
+    "resourceGroupName": "test-rg",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "updateAccountName": "contoso"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "deploymentState": "Active",
+        "subgroupStatus": [
+          {
+            "deploymentState": "Active",
+            "deviceClassId": "deviceClassId1",
+            "devicesCanceledCount": 0,
+            "devicesCompletedFailedCount": 0,
+            "devicesCompletedSucceededCount": 1,
+            "devicesInProgressCount": 0,
+            "totalDevices": 1
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "Deployments_CalculateStatus",
+  "title": "Gets the status of a Deployment"
+}

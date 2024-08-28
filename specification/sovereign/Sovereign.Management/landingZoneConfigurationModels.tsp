@@ -19,7 +19,7 @@ model LandingZoneConfigurationProperties {
   ddosProtectionCreationOption: ResourceCreationOptions;
 
   @doc("The resource id of the ddos protection plan.")
-  existingDdosProtectionId?: ResourceIdentifier<[
+  existingDdosProtectionId?: armResourceIdentifier<[
     {
       type: "Microsoft.Network/ddosProtectionPlans";
     }
@@ -29,7 +29,7 @@ model LandingZoneConfigurationProperties {
   logAnalyticsWorkspaceCreationOption: ResourceCreationOptions;
 
   @doc("The resource id of the log analytics workspace that was created to centralize log ingestion.")
-  existingLogAnalyticsWorkspaceId?: ResourceIdentifier<[
+  existingLogAnalyticsWorkspaceId?: armResourceIdentifier<[
     {
       type: "Microsoft.OperationalInsights/workspaces";
     }
@@ -60,7 +60,7 @@ model LandingZoneConfigurationProperties {
   azureBastionCreationOption: ResourceCreationOptions;
 
   @doc("The resource id of azure bastion.")
-  existingAzureBastionId?: ResourceIdentifier<[
+  existingAzureBastionId?: armResourceIdentifier<[
     {
       type: "Microsoft.Network/bastionHosts";
     }
@@ -154,21 +154,21 @@ model GenerateLandingZoneRequest {
   infrastructureAsCodeOutputOptions: InfrastructureAsCodeOutputOptions;
 
   @doc("Management subscription fully qualified Id.")
-  existingManagementSubscriptionId?: ResourceIdentifier<[
+  existingManagementSubscriptionId?: armResourceIdentifier<[
     {
       type: "Microsoft.Subscription/aliases";
     }
   ]>;
 
   @doc("Identity subscription fully qualified Id.")
-  existingIdentitySubscriptionId?: ResourceIdentifier<[
+  existingIdentitySubscriptionId?: armResourceIdentifier<[
     {
       type: "Microsoft.Subscription/aliases";
     }
   ]>;
 
   @doc("Connectivity subscription fully qualified Id.")
-  existingConnectivitySubscriptionId?: ResourceIdentifier<[
+  existingConnectivitySubscriptionId?: armResourceIdentifier<[
     {
       type: "Microsoft.Subscription/aliases";
     }
@@ -178,7 +178,7 @@ model GenerateLandingZoneRequest {
   subscriptionBillingScope?: string;
 
   @doc("Optional parent for management group hierarchy, used as intermediate root management group parent, if specified. If empty, default will deploy beneath tenant toot management group.")
-  existingTopLevelMgParentId?: ResourceIdentifier<[
+  existingTopLevelMgParentId?: armResourceIdentifier<[
     {
       type: "Microsoft.Management/managementGroups";
     }
@@ -237,7 +237,9 @@ model UpdateAuthoringStatusResponse {
 }
 
 @doc("The authoring status for a landing zone configuration.")
-enum AuthoringStatus {
+union AuthoringStatus {
+  string,
+
   @doc("This is the default status when a create configuration request is made. In this state, the Landing Zone configuration can be updated.")
   Authoring: "Authoring",
 
@@ -249,7 +251,9 @@ enum AuthoringStatus {
 }
 
 @doc("Output options for landing zone code generation.")
-enum InfrastructureAsCodeOutputOptions {
+union InfrastructureAsCodeOutputOptions {
+  string,
+
   @doc("Value when generating Landing Zone code in Bicep.")
   Bicep: "Bicep",
 
@@ -262,7 +266,9 @@ enum InfrastructureAsCodeOutputOptions {
 }
 
 @doc("The input values for creating or using an existing firewall resource.")
-enum FirewallCreationOptions {
+union FirewallCreationOptions {
+  string,
+
   @doc("Value when a firewall resource is not created.")
   None: "None",
 
@@ -274,7 +280,9 @@ enum FirewallCreationOptions {
 }
 
 @doc("Options for resource creation.")
-enum ResourceCreationOptions {
+union ResourceCreationOptions {
+  string,
+
   @doc("Value to create a new resource.")
   Yes: "Yes",
 
@@ -295,7 +303,7 @@ model CreateCopyRequest {
 @doc("The response of the create copy action of landing zone configuration.")
 model CreateCopyResponse {
   @doc("The id of the copied landing zone configuration resource.")
-  copiedLandingZoneConfigurationId: ResourceIdentifier<[
+  copiedLandingZoneConfigurationId: armResourceIdentifier<[
     {
       type: "Microsoft.Sovereign/landingZoneConfigurations";
     }
