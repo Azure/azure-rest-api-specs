@@ -21,6 +21,7 @@ jobs:
     - name: Detect changes to protected files
       run: |
         . eng/scripts/ChangedFiles-Functions.ps1
+
         $protectedFiles = @("package.json", "package-lock.json")
         $changedFiles = @(Get-ChangedFiles -baseCommitish HEAD^ -targetCommitish HEAD -diffFilter "")
         $matchedFiles = @($protectedFiles | Where-Object { $changedFiles -contains $_})
