@@ -953,3 +953,18 @@ model CustomizationGroup {
   @visibility("read")
   endTime?: utcDateTime;
 }
+
+@added(APIVersions.v2024_09_01_preview)
+@doc("A DevBox snapshot")
+@resource("snapshots")
+@parentResource(DevBox)
+model DevBoxSnapshot {
+  @key("snapshotId")
+  @doc("The id of the snapshot.")
+  @visibility("read")
+  snapshotId: string;
+  
+  @doc("The datetime that the snapshot was created.")
+  @visibility("read")
+  createdTime: utcDateTime;
+}
