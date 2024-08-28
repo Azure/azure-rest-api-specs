@@ -67,6 +67,7 @@ namespace Customizations; // The actual name here doesn't matter and is here for
 @@access(AI.Model.getEmbeddings, Access.internal);
 @@access(AI.Model.getImageEmbeddings, Access.internal);
 @@access(AI.Model.getModelInfo, Access.public, "java");
+@@clientName(AI.Model.ChatCompletionsResponseFormatJSON, "ChatCompletionsResponseFormatJson", "java");
 
 // We use shorter names in the Python client library
 @@clientName(AI.Model.ChatRequestSystemMessage, "SystemMessage", "python");
