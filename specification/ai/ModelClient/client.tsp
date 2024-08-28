@@ -45,6 +45,7 @@ namespace Customizations; // The actual name here doesn't matter and is here for
 @@access(AI.Model.EmbeddingItem, Access.public);
 @@access(AI.Model.EmbeddingsResult, Access.public);
 @@access(AI.Model.EmbeddingsUsage, Access.public);
+@@access(AI.Model.ExtraParameters, Access.public, "java");
 @@access(AI.Model.FunctionCall, Access.public);
 @@access(AI.Model.FunctionDefinition, Access.public);
 @@access(AI.Model.ModelInfo, Access.public);
