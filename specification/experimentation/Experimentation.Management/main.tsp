@@ -22,7 +22,7 @@ using TypeSpec.Versioning;
  */
 @armProviderNamespace
 @service({
-    title: "Experimentation",
+  title: "Experimentation",
 })
 @versioned(Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
@@ -32,10 +32,10 @@ namespace Microsoft.Experimentation;
  * The available API versions.
  */
 enum Versions {
-    /**
-     * The 2024-11-30-preview API version.
-     */
-    @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-    @useDependency(Azure.Core.Versions.v1_0_Preview_1)
-    v2024_11_30_preview: "2024-11-30-preview",
+  /**
+   * The 2024-11-30-preview API version.
+   */
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
+  v2024_11_30_preview: "2024-11-30-preview",
 }

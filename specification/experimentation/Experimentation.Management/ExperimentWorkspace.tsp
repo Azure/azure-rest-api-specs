@@ -52,16 +52,10 @@ interface ExperimentWorkspaces {
     /**
      * Update an experiment workspace
      */
-    #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For matching existing behavior"
     @parameterVisibility
-    update is ArmCustomPatchSync<
+    update is ArmCustomPatchAsync<
         ExperimentWorkspace,
-        ExperimentWorkspacePatch,
-        Response = ArmResponse<ExperimentWorkspace> | {
-            ...AcceptedResponse;
-            ...Body<ExperimentWorkspace>;
-            ...ArmLroLocationHeader;
-        }
+        ExperimentWorkspacePatch
     >;
 
     /**
