@@ -50,10 +50,19 @@ interface ExperimentWorkspaces {
     createOrUpdate is ArmResourceCreateOrReplaceAsync<ExperimentWorkspace>;
 
     /**
-     * Patch an experiment workspace
+     * Update an experiment workspace
      */
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For matching existing behavior"
     @parameterVisibility
-    patch is ArmCustomPatchAsync<ExperimentWorkspace, ExperimentWorkspacePatch>;
+    update is ArmCustomPatchSync<
+        ExperimentWorkspace,
+        ExperimentWorkspacePatch,
+        Response = ArmResponse<ExperimentWorkspace> | {
+            ...AcceptedResponse;
+            ...Body<ExperimentWorkspace>;
+            ...ArmLroLocationHeader;
+        }
+    >;
 
     /**
      * Deletes an experiment workspace
@@ -76,6 +85,6 @@ interface ExperimentWorkspaces {
 @@doc(ExperimentWorkspaces.createOrUpdate::parameters.resource,
     "Parameters supplied to the CreateOrUpdate experiment workspace operation."
 );
-@@doc(ExperimentWorkspaces.patch::parameters.properties,
-    "Parameters supplied to the Patch experiment workspace operation."
+@@doc(ExperimentWorkspaces.update::parameters.properties,
+    "Parameters supplied to the update experiment workspace operation."
 );
