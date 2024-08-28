@@ -2,11 +2,13 @@ import "@azure-tools/typespec-client-generator-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
 import "./main.tsp";
+import "./decorator.js";
 
 using TypeSpec.Versioning;
 using Azure.ClientGenerator.Core;
 using Microsoft.AVS;
 
+@autoRouteForSingleton
 @client(
   {
     name: "AvsClient",
