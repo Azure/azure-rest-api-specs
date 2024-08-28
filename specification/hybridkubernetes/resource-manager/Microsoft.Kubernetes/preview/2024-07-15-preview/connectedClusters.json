@@ -31,7 +31,7 @@
     "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Kubernetes/connectedClusters/{clusterName}": {
       "put": {
         "summary": "Register a new Kubernetes cluster with Azure Resource Manager.",
-        "operationId": "ConnectedCluster_Create",
+        "operationId": "ConnectedCluster_CreateOrUpdate",
         "description": "API to register a new Kubernetes cluster and create a tracked resource in Azure Resource Manager (ARM).",
         "consumes": [
           "application/json"
@@ -48,6 +48,9 @@
           },
           "CreateClusterPrivateLinkExample": {
             "$ref": "./examples/CreateClusterPrivateLinkExample.json"
+          },
+          "UpdateClusterByPutExample": {
+            "$ref": "./examples/UpdateClusterByPutExample.json"
           }
         },
         "parameters": [
@@ -110,7 +113,7 @@
         ],
         "x-ms-examples": {
           "UpdateClusterExample": {
-            "$ref": "./examples/UpdateClusterExample.json"
+            "$ref": "./examples/UpdateClusterByPatchExample.json"
           }
         },
         "parameters": [
