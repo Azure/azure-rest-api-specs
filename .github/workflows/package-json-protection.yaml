@@ -17,7 +17,8 @@ jobs:
         # Required since "HEAD^" is passed to Get-ChangedFiles
         fetch-depth: 2
 
-    - run: |
+    - name: Detect changes to package[-lock].json
+      run: |
         . eng/scripts/ChangedFiles-Functions.ps1
         $changedFiles = @(Get-ChangedFiles -baseCommitish HEAD^ -targetCommitish HEAD -diffFilter "")
         if (($changedFiles -contains "package.json") -or ($changedFiles -contains "package-lock.json")) {
