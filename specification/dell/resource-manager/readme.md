@@ -47,6 +47,7 @@ These settings apply only when `--tag=package-2024-08-28-preview` is specified o
 input-file:
   - Dell.Storage/preview/2024-08-28-preview/Dell.Storage.json
 ---
+```
 
 ## Suppression
 

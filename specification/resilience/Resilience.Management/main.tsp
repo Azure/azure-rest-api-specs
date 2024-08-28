@@ -170,5 +170,5 @@ union ResilienceState {
 @armResourceOperations
 interface Resilience {
   get is ArmResourceRead<ResilienceResource>;
-  listByParent is ArmResourceListByParent<ResilienceResource>;
+  list is ArmResourceListByParent<ResilienceResource>;
 }

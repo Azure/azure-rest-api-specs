@@ -1,0 +1,42 @@
+{
+  "title": "Connectors_Get",
+  "operationId": "Connectors_Get",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "resourceGroupName",
+    "api-version": "2024-05-01-preview",
+    "workbenchName": "test-workbench",
+    "chamberName": "test-chamber",
+    "connectorName": "test-connector"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroup/providers/Microsoft.ModSimWorkbench/workbenches/test-workbench/chambers/chamber-name/connectors/test-connector",
+        "type": "Microsoft.ModSimWorkbench/workbenches/chambers/connectors",
+        "location": "Central US",
+        "properties": {
+          "provisioningState": "Processing",
+          "accessConfigurations": {
+            "accessType": "GUI",
+            "gatewayType": "None",
+            "accessUrl": "my-access-url"
+          },
+          "remoteDesktop": {
+            "etx": {
+              "connectionNodeCount": 12,
+              "licenseActivated": "True",
+              "replyUrlEtx": "my-url",
+              "replyUrlOtds": "my-otds-url",
+              "licenseKeyUri": "my-uri"
+            }
+          },
+          "networkAcls": {
+            "allowedAddressSpaces": []
+          },
+          "copyPasteSetting": "enabled"
+        }
+      }
+    }
+  }
+}

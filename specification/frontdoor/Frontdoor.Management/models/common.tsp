@@ -36,12 +36,11 @@ union ProvisioningState {
 }
 
 scalar DatacenterResourceId
-extends armResourceIdentifier<[
-  {
-    type: "string",
-  }
-]>;
-  
+  extends armResourceIdentifier<[
+    {
+      type: "string",
+    }
+  ]>;
 
 @doc("OsType enum")
 union OsType {
@@ -87,7 +86,7 @@ union Cloud {
 @doc("Status enum")
 union Status {
   string,
-  
+
   @doc("Status enum Alive")
   Alive: "Alive",
 
