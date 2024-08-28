@@ -21,7 +21,6 @@ using TypeSpec.Versioning;
  * Rest API for Experimentation Service.
  */
 @armProviderNamespace
-@useAuth(AadOauth2Auth<["user_impersonation"]>)
 @service({
     title: "Experimentation",
 })

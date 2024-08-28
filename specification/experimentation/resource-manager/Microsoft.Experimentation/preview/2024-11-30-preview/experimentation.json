@@ -22,21 +22,20 @@
   ],
   "security": [
     {
-      "AadOauth2Auth": [
+      "azure_auth": [
         "user_impersonation"
       ]
     }
   ],
   "securityDefinitions": {
-    "AadOauth2Auth": {
+    "azure_auth": {
       "type": "oauth2",
-      "description": "The Azure Active Directory OAuth2 Flow",
-      "flow": "accessCode",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
       "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
       "scopes": {
-        "user_impersonation": ""
-      },
-      "tokenUrl": "https://login.microsoftonline.com/common/oauth2/token"
+        "user_impersonation": "impersonate your user account"
+      }
     }
   },
   "tags": [
@@ -387,8 +386,19 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Resource deleted successfully."
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
           },
           "204": {
             "description": "Resource does not exist."
@@ -404,16 +414,15 @@
           "Delete an ExperimentWorkspace": {
             "$ref": "./examples/ExperimentWorkspaces_Delete.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       }
     }
   },
   "definitions": {
-    "Azure.Core.uuid": {
-      "type": "string",
-      "format": "uuid",
-      "description": "Universally Unique Identifier"
-    },
     "Azure.ResourceManager.ResourceProvisioningState": {
       "type": "string",
       "description": "The provisioning state of a resource type.",
@@ -656,16 +665,6 @@
       "type": "object",
       "description": "The workspace managed identity",
       "properties": {
-        "principalId": {
-          "$ref": "#/definitions/Azure.Core.uuid",
-          "description": "The service principal ID of the system assigned identity. This property will only be provided for a system assigned identity.",
-          "readOnly": true
-        },
-        "tenantId": {
-          "$ref": "#/definitions/Azure.Core.uuid",
-          "description": "The tenant ID of the system assigned identity. This property will only be provided for a system assigned identity.",
-          "readOnly": true
-        },
         "type": {
           "$ref": "#/definitions/ResourceIdentityType",
           "description": "The type of managed identity assigned to this resource."

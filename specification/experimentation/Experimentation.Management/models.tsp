@@ -4,7 +4,6 @@ import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
-using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
@@ -156,23 +155,11 @@ model RemoteVariantAssignment {
  * The workspace managed identity
  */
 model ManagedIdentity {
-    /** The service principal ID of the system assigned identity. This property will only be provided for a system assigned identity. */
-    @visibility("read")
-    principalId?: uuid;
-
-    /** The tenant ID of the system assigned identity. This property will only be provided for a system assigned identity. */
-    @visibility("read")
-    tenantId?: uuid;
-
     /** The type of managed identity assigned to this resource. */
     type: ResourceIdentityType;
 
     /** The identities assigned to this resource by the user. */
     #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "UserAssignedIdentities are expected to be a record of UserAssignedIdentity"
-    @typeChangedFrom(
-        Azure.ResourceManager.CommonTypes.Versions.v5,
-        Record<UserAssignedIdentity>
-    )
     userAssignedIdentities?: Record<UserAssignedIdentity | null>;
 }
 

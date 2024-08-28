@@ -58,7 +58,7 @@ interface ExperimentWorkspaces {
     /**
      * Deletes an experiment workspace
      */
-    delete is ArmResourceDeleteSync<ExperimentWorkspace>;
+    delete is ArmResourceDeleteWithoutOkAsync<ExperimentWorkspace>;
 
     /**
      * Gets all experiment workspaces in a resource group.
