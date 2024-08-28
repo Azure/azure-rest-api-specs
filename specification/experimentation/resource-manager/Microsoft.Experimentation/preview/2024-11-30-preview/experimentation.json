@@ -204,6 +204,11 @@
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Get a single ExperimentWorkspace": {
+            "$ref": "./examples/ExperimentWorkspaceGet.json"
+          }
         }
       },
       "put": {
@@ -272,11 +277,11 @@
           }
         },
         "x-ms-examples": {
-          "Create or update an ExperimentWorkspace with Advanced sku.": {
-            "$ref": "./examples/ExperimentWorkspaces_CreateOrUpdate.json"
-          },
           "Create or update an ExperimentWorkspace with Free sku.": {
             "$ref": "./examples/ExperimentWorkspaces_Free_CreateOrUpdate.json"
+          },
+          "Create or update an ExperimentWorkspace with Premium sku.": {
+            "$ref": "./examples/ExperimentWorkspaces_CreateOrUpdate.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -404,6 +409,11 @@
     }
   },
   "definitions": {
+    "Azure.Core.uuid": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Universally Unique Identifier"
+    },
     "Azure.ResourceManager.ResourceProvisioningState": {
       "type": "string",
       "description": "The provisioning state of a resource type.",
@@ -450,6 +460,14 @@
         "sku": {
           "$ref": "#/definitions/ExperimentWorkspaceSku",
           "description": "The SKU (Stock Keeping Unit) assigned to this resource."
+        },
+        "kind": {
+          "$ref": "#/definitions/ExperimentWorkspaceKind",
+          "description": "Metadata used by portal/tooling/etc to render different UX experiences for resources of the same type. Supported values are Standard and Advanced.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         }
       },
       "allOf": [
@@ -457,6 +475,30 @@
           "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
         }
       ]
+    },
+    "ExperimentWorkspaceKind": {
+      "type": "string",
+      "description": "The experiment workspace model Kind.",
+      "enum": [
+        "Standard",
+        "Advanced"
+      ],
+      "x-ms-enum": {
+        "name": "ExperimentWorkspaceKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Standard",
+            "value": "Standard",
+            "description": "The Standard Kind"
+          },
+          {
+            "name": "Advanced",
+            "value": "Advanced",
+            "description": "The Advanced Kind generally available with Premium SKU"
+          }
+        ]
+      }
     },
     "ExperimentWorkspaceListResult": {
       "type": "object",
@@ -550,7 +592,7 @@
       "properties": {
         "name": {
           "$ref": "#/definitions/ExperimentWorkspaceSkuName",
-          "description": "The name of the SKU. Ex - F0, A0. It is typically a letter+number code"
+          "description": "The name of the SKU. Ex - F0, P0. It is typically a letter+number code"
         },
         "tier": {
           "$ref": "#/definitions/ExperimentWorkspaceSkuTier",
@@ -567,7 +609,7 @@
       "description": "The experiment workspace model SKU name.",
       "enum": [
         "F0",
-        "A0"
+        "P0"
       ],
       "x-ms-enum": {
         "name": "ExperimentWorkspaceSkuName",
@@ -579,9 +621,9 @@
             "description": "The Free service sku name."
           },
           {
-            "name": "A0",
-            "value": "A0",
-            "description": "The Advanced service sku name."
+            "name": "P0",
+            "value": "P0",
+            "description": "The Premium service sku name."
           }
         ]
       }
@@ -591,7 +633,7 @@
       "description": "The experiment workspace model SKU tier.",
       "enum": [
         "Free",
-        "Advanced"
+        "Premium"
       ],
       "x-ms-enum": {
         "name": "ExperimentWorkspaceSkuTier",
@@ -603,9 +645,9 @@
             "description": "The Free service tier."
           },
           {
-            "name": "Advanced",
-            "value": "Advanced",
-            "description": "The Advanced service tier."
+            "name": "Premium",
+            "value": "Premium",
+            "description": "The Premium service tier."
           }
         ]
       }
@@ -614,17 +656,32 @@
       "type": "object",
       "description": "The workspace managed identity",
       "properties": {
+        "principalId": {
+          "$ref": "#/definitions/Azure.Core.uuid",
+          "description": "The service principal ID of the system assigned identity. This property will only be provided for a system assigned identity.",
+          "readOnly": true
+        },
+        "tenantId": {
+          "$ref": "#/definitions/Azure.Core.uuid",
+          "description": "The tenant ID of the system assigned identity. This property will only be provided for a system assigned identity.",
+          "readOnly": true
+        },
         "type": {
           "$ref": "#/definitions/ResourceIdentityType",
-          "description": "The type of managed identity for the workspace"
+          "description": "The type of managed identity assigned to this resource."
         },
         "userAssignedIdentities": {
-          "type": "array",
-          "description": "The user assigned managed identities.",
-          "items": {
-            "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/UserAssignedIdentity"
-          },
-          "x-ms-identifiers": []
+          "type": "object",
+          "description": "The identities assigned to this resource by the user.",
+          "additionalProperties": {
+            "allOf": [
+              {
+                "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/UserAssignedIdentity"
+              }
+            ],
+            "type": "object",
+            "x-nullable": true
+          }
         }
       },
       "required": [

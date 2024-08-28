@@ -1,10 +1,10 @@
 {
   "operationId": "ExperimentWorkspaces_CreateOrUpdate",
-  "title": "Create or update an ExperimentWorkspace with Advanced sku.",
+  "title": "Create or update an ExperimentWorkspace with Premium sku.",
   "parameters": {
     "subscriptionId": "fa5fc227-a624-475e-b696-cdd604c735bc",
     "resourceGroupName": "res9871",
-    "experimentWorkspaceName": "expWorkspace6",
+    "experimentWorkspaceName": "expworkspace6",
     "api-version": "2024-11-30-preview",
     "parameters": {
       "location": "eastus2euap",
@@ -29,15 +29,16 @@
         }
       },
       "sku": {
-        "name": "A0"
-      }
+        "name": "P0"
+      },
+      "kind": "Advanced"
     }
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/{subscription-id}/resourceGroups/res9871/providers/Microsoft.Experimentation/experimentWorkspaces/expWorkspace6",
-        "name": "expWorkspace6",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/res9871/providers/Microsoft.Experimentation/experimentWorkspaces/expworkspace6",
+        "name": "expworkspace6",
         "type": "Microsoft.Experimentation/experimentWorkspaces",
         "location": "eastus2euap",
         "tags": {
@@ -45,7 +46,6 @@
         },
         "properties": {
           "expWorkspaceId": "02270d43-f68a-401b-b526-86942525c351",
-          "afdTasUrl": "https://test-exp-s2s.msedge.net/exptas194/12270d43-f68a-401b-b526-86942525c350-testanvyas6/api/v1/tas",
           "provisioningState": "Succeeded",
           "variantAssignmentConfigPublishing": {
             "enabled": true,
@@ -72,15 +72,16 @@
           }
         },
         "sku": {
-          "name": "A0",
-          "tier": "Advanced"
-        }
+          "name": "P0",
+          "tier": "Premium"
+        },
+        "kind": "Advanced"
       }
     },
     "201": {
       "body": {
-        "id": "/subscriptions/{subscription-id}/resourceGroups/res9871/providers/Microsoft.Experimentation/experimentWorkspaces/expWorkspace6",
-        "name": "expWorkspace6",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/res9871/providers/Microsoft.Experimentation/experimentWorkspaces/expworkspace6",
+        "name": "expworkspace6",
         "type": "Microsoft.Experimentation/experimentWorkspaces",
         "location": "eastus2euap",
         "tags": {
@@ -88,7 +89,6 @@
         },
         "properties": {
           "expWorkspaceId": "02270d43-f68a-401b-b526-86942525c352",
-          "afdTasUrl": "https://test-exp-s2s.msedge.net/exptas194/02270d43-f68a-401b-b526-86942525c350-testanvyas7/api/v1/tas",
           "provisioningState": "Succeeded",
           "variantAssignmentConfigPublishing": {
             "enabled": true,
@@ -115,9 +115,10 @@
           }
         },
         "sku": {
-          "name": "A0",
-          "tier": "Advanced"
-        }
+          "name": "P0",
+          "tier": "Premium"
+        },
+        "kind": "Advanced"
       }
     }
   }

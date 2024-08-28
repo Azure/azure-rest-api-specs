@@ -29,6 +29,12 @@ model ExperimentWorkspace
     #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "The standard sku does not fit our needs"
     @doc("The SKU (Stock Keeping Unit) assigned to this resource.")
     sku?: ExperimentWorkspaceSku;
+
+    #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "The standard kind does not support list of enum values"
+    @doc("Metadata used by portal/tooling/etc to render different UX experiences for resources of the same type. Supported values are Standard and Advanced.")
+    @pattern("^[-\\w\\._,\\(\\\\\\)]+$")
+    @visibility("read", "create")
+    kind?: ExperimentWorkspaceKind;
 }
 
 @armResourceOperations

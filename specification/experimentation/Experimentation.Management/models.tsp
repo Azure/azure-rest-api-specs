@@ -4,6 +4,8 @@ import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
+using Azure.Core;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
@@ -154,15 +156,24 @@ model RemoteVariantAssignment {
  * The workspace managed identity
  */
 model ManagedIdentity {
-    /**
-     * The type of managed identity for the workspace
-     */
+    /** The service principal ID of the system assigned identity. This property will only be provided for a system assigned identity. */
+    @visibility("read")
+    principalId?: uuid;
+
+    /** The tenant ID of the system assigned identity. This property will only be provided for a system assigned identity. */
+    @visibility("read")
+    tenantId?: uuid;
+
+    /** The type of managed identity assigned to this resource. */
     type: ResourceIdentityType;
 
-    /**
-     * The user assigned managed identities.
-     */
-    userAssignedIdentities?: UserAssignedIdentity[];
+    /** The identities assigned to this resource by the user. */
+    #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "UserAssignedIdentities are expected to be a record of UserAssignedIdentity"
+    @typeChangedFrom(
+        Azure.ResourceManager.CommonTypes.Versions.v5,
+        Record<UserAssignedIdentity>
+    )
+    userAssignedIdentities?: Record<UserAssignedIdentity | null>;
 }
 
 /**
@@ -214,7 +225,7 @@ model ExperimentWorkspacePatch {
  * The experiment workspace model definition representing SKU
  */
 model ExperimentWorkspaceSku {
-    /** The name of the SKU. Ex - F0, A0. It is typically a letter+number code */
+    /** The name of the SKU. Ex - F0, P0. It is typically a letter+number code */
     name: ExperimentWorkspaceSkuName;
 
     /** The name of the SKU tier */
@@ -229,8 +240,8 @@ union ExperimentWorkspaceSkuTier {
     /** The Free service tier. */
     Free: "Free",
 
-    /** The Advanced service tier. */
-    Advanced: "Advanced",
+    /** The Premium service tier. */
+    Premium: "Premium",
 
     string,
 }
@@ -242,8 +253,21 @@ union ExperimentWorkspaceSkuName {
     /** The Free service sku name. */
     F0: "F0",
 
-    /** The Advanced service sku name. */
-    A0: "A0",
+    /** The Premium service sku name. */
+    P0: "P0",
+
+    string,
+}
+
+/**
+ * The experiment workspace model Kind.
+ */
+union ExperimentWorkspaceKind {
+    /** The Standard Kind */
+    Standard: "Standard",
+
+    /** The Advanced Kind generally available with Premium SKU */
+    Advanced: "Advanced",
 
     string,
 }
