@@ -279,7 +279,7 @@
           "Create or update an ExperimentWorkspace with Free sku.": {
             "$ref": "./examples/ExperimentWorkspaces_Free_CreateOrUpdate.json"
           },
-          "Create or update an ExperimentWorkspace with Premium sku.": {
+          "Create or update an ExperimentWorkspace with Standard sku and Advanced kind.": {
             "$ref": "./examples/ExperimentWorkspaces_CreateOrUpdate.json"
           }
         },
@@ -489,7 +489,7 @@
       "type": "string",
       "description": "The experiment workspace model Kind.",
       "enum": [
-        "Standard",
+        "Regular",
         "Advanced"
       ],
       "x-ms-enum": {
@@ -497,14 +497,14 @@
         "modelAsString": true,
         "values": [
           {
-            "name": "Standard",
-            "value": "Standard",
-            "description": "The Standard Kind"
+            "name": "Regular",
+            "value": "Regular",
+            "description": "The Regular Kind"
           },
           {
             "name": "Advanced",
             "value": "Advanced",
-            "description": "The Advanced Kind generally available with Premium SKU"
+            "description": "The Advanced Kind generally available with Standard SKU"
           }
         ]
       }
@@ -618,7 +618,7 @@
       "description": "The experiment workspace model SKU name.",
       "enum": [
         "F0",
-        "P0"
+        "S0"
       ],
       "x-ms-enum": {
         "name": "ExperimentWorkspaceSkuName",
@@ -630,9 +630,9 @@
             "description": "The Free service sku name."
           },
           {
-            "name": "P0",
-            "value": "P0",
-            "description": "The Premium service sku name."
+            "name": "S0",
+            "value": "S0",
+            "description": "The Standard service sku name."
           }
         ]
       }
@@ -642,7 +642,7 @@
       "description": "The experiment workspace model SKU tier.",
       "enum": [
         "Free",
-        "Premium"
+        "Standard"
       ],
       "x-ms-enum": {
         "name": "ExperimentWorkspaceSkuTier",
@@ -654,9 +654,9 @@
             "description": "The Free service tier."
           },
           {
-            "name": "Premium",
-            "value": "Premium",
-            "description": "The Premium service tier."
+            "name": "Standard",
+            "value": "Standard",
+            "description": "The Standard service tier."
           }
         ]
       }
