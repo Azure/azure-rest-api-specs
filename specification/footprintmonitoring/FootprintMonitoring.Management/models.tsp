@@ -242,6 +242,7 @@ model SubResource {
 /**
  * An Azure resource.
  */
+@OpenAPI.extension("x-ms-azure-resource", true)
 model Resource {
   /**
    * Fully qualified resource Id for the resource.
