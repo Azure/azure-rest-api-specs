@@ -151,7 +151,7 @@
             "$ref": "#/parameters/StandardId"
           },
           {
-            "$ref": "#/definitions/SecurityStandard"
+            "$ref": "#/parameters/SecurityStandardBody"
           }
         ],
         "responses": {
@@ -367,6 +367,16 @@
       "type": "string",
       "pattern": "[{]?[0-9a-fA-F]{8}-(?:[0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}[}]?$",
       "description": "The Security Standard key - unique key for the standard type",
+      "x-ms-parameter-location": "method"
+    },
+    "SecurityStandardBody": {
+      "name": "standard",
+      "in": "body",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/SecurityStandard"
+      },
+      "description": "Custom security standard over a pre-defined scope",
       "x-ms-parameter-location": "method"
     },
     "Scope": {

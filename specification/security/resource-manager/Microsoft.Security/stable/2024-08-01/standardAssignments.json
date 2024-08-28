@@ -99,7 +99,7 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/definitions/StandardAssignment"
+            "$ref": "#/parameters/StandardsAssignmentBody"
           }
         ],
         "responses": {
@@ -416,6 +416,16 @@
       "type": "string",
       "pattern": "[{]?[0-9a-fA-F]{8}-(?:[0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}[}]?$",
       "description": "The standard assignments assignment key - unique key for the standard assignment",
+      "x-ms-parameter-location": "method"
+    },
+    "StandardsAssignmentBody": {
+      "name": "standardAssignment",
+      "in": "body",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/StandardAssignment"
+      },
+      "description": "Custom standard assignment over a pre-defined scope",
       "x-ms-parameter-location": "method"
     },
     "Scope": {
