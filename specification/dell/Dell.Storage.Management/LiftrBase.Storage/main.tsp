@@ -156,4 +156,5 @@ model FileSystemResource
   name: string;
 
   ...Azure.ResourceManager.ManagedServiceIdentityProperty;
+  ...Azure.ResourceManager.Foundations.ArmTagsProperty;
 }

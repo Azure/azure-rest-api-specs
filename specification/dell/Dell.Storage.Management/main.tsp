@@ -29,7 +29,7 @@ using LiftrBase;
   title: "Dell.Storage",
 })
 @versioned(Versions)
-@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
+@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
 namespace Dell.Storage;
 
 /**
@@ -37,13 +37,13 @@ namespace Dell.Storage;
  */
 enum Versions {
   /**
-   * The 2022-06-09-preview API version.
+   * The 2024-08-28-preview API version.
    */
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @useDependency(Azure.Core.Versions.v1_0_Preview_1)
   @useDependency(LiftrBase.Versions.v2_preview)
   @useDependency(LiftrBase.Storage.Versions.v2_preview)
-  v2_preview: "2022-06-09-preview",
+  v2_preview: "2024-08-28-preview",
 }
 interface Operations extends Azure.ResourceManager.Operations {}
 
