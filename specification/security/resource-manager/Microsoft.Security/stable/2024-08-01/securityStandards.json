@@ -62,7 +62,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "Security standards list by scope",
             "schema": {
               "$ref": "#/definitions/SecurityStandardList"
             }
@@ -110,7 +110,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "Security standard successfully created",
             "schema": {
               "$ref": "#/definitions/SecurityStandard"
             }
@@ -151,7 +151,7 @@
             "$ref": "#/parameters/StandardId"
           },
           {
-            "$ref": "#/parameters/SecurityStandardBody"
+            "$ref": "#/definitions/SecurityStandard"
           }
         ],
         "responses": {
@@ -162,7 +162,7 @@
             }
           },
           "200": {
-            "description": "OK - Updated",
+            "description": "Security standard successfully updated",
             "schema": {
               "$ref": "#/definitions/SecurityStandard"
             }
@@ -205,7 +205,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK - security standard was deleted"
+            "description": "Security standard successfully deleted"
           },
           "204": {
             "description": "No Content - security standard does not exist"
@@ -252,7 +252,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../common/v1/types.json#/definitions/Resource"
+          "$ref": "../../../common/v5/types.json#/definitions/Resource"
         }
       ]
     },
@@ -261,11 +261,11 @@
       "description": "Describes properties of a standard.",
       "properties": {
         "displayName": {
-          "description": "display name of the standard, equivalent to the standardId",
+          "description": "Display name of the standard, equivalent to the standardId",
           "type": "string"
         },
         "standardType": {
-          "description": "standard type (Custom or Default or Compliance only currently)",
+          "description": "Standard type (Custom or Default or Compliance only currently)",
           "type": "string",
           "readOnly": true,
           "enum": [
@@ -279,7 +279,7 @@
           }
         },
         "description": {
-          "description": "description of the standard",
+          "description": "Description of the standard",
           "type": "string"
         },
         "assessments": {
@@ -312,23 +312,23 @@
       "description": "The standard metadata",
       "properties": {
         "createdBy": {
-          "description": "standard Created by object id (GUID)",
+          "description": "Standard Created by object id (GUID)",
           "type": "string",
           "readOnly": true
         },
         "createdOn": {
-          "description": "standard creation date",
+          "description": "Standard creation date",
           "type": "string",
           "format": "date-time",
           "readOnly": true
         },
         "lastUpdatedBy": {
-          "description": "standard last updated by object id (GUID)",
+          "description": "Standard last updated by object id (GUID)",
           "type": "string",
           "readOnly": true
         },
         "lastUpdatedOn": {
-          "description": "standard last update date",
+          "description": "Standard last update date",
           "type": "string",
           "format": "date-time",
           "readOnly": true
@@ -340,7 +340,7 @@
       "description": "Describes properties of an assessment as related to the standard",
       "properties": {
         "assessmentKey": {
-          "description": "the assessment key",
+          "description": "The assessment key",
           "type": "string"
         }
       }
@@ -367,16 +367,6 @@
       "type": "string",
       "pattern": "[{]?[0-9a-fA-F]{8}-(?:[0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}[}]?$",
       "description": "The Security Standard key - unique key for the standard type",
-      "x-ms-parameter-location": "method"
-    },
-    "SecurityStandardBody": {
-      "name": "standard",
-      "in": "body",
-      "required": true,
-      "schema": {
-        "$ref": "#/definitions/SecurityStandard"
-      },
-      "description": "Custom security standard over a pre-defined scope",
       "x-ms-parameter-location": "method"
     },
     "Scope": {

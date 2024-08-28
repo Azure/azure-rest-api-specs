@@ -60,7 +60,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK - Returns information about the standard assignment.",
+            "description": "Returns information about the standard assignment.",
             "schema": {
               "$ref": "#/definitions/StandardAssignment"
             }
@@ -99,7 +99,7 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/StandardsAssignmentBody"
+            "$ref": "#/definitions/StandardAssignment"
           }
         ],
         "responses": {
@@ -110,7 +110,7 @@
             }
           },
           "200": {
-            "description": "OK - Updated",
+            "description": "OK - Standard assignment was successfully updated",
             "schema": {
               "$ref": "#/definitions/StandardAssignment"
             }
@@ -148,7 +148,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK - standard assignments was deleted"
+            "description": "OK - standard assignments was successfully deleted"
           },
           "204": {
             "description": "No Content - standard assignments does not exist"
@@ -184,7 +184,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "Standard assignment list by scope",
             "schema": {
               "$ref": "#/definitions/StandardAssignmentsList"
             }
@@ -234,7 +234,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../common/v1/types.json#/definitions/Resource"
+          "$ref": "../../../common/v5/types.json#/definitions/Resource"
         }
       ]
     },
@@ -243,11 +243,11 @@
       "description": "Describes the properties of a standardAssignment",
       "properties": {
         "displayName": {
-          "description": "display name of the standardAssignment",
+          "description": "Display name of the standardAssignment",
           "type": "string"
         },
         "description": {
-          "description": "description of the standardAssignment",
+          "description": "Description of the standardAssignment",
           "type": "string"
         },
         "assignedStandard": {
@@ -255,7 +255,7 @@
           "$ref": "#/definitions/AssignedStandardItem"
         },
         "effect": {
-          "description": "expected effect of this assignment (Audit/Exempt/Attest)",
+          "description": "Expected effect of this assignment (Audit/Exempt/Attest)",
           "type": "string",
           "enum": [
             "Audit",
@@ -325,7 +325,7 @@
               "$ref": "#/definitions/AssignedAssessmentItem"
             },
             "complianceDate": {
-              "description": "attestation compliance date",
+              "description": "Attestation compliance date",
               "type": "string",
               "format": "date-time",
               "readOnly": true
@@ -350,23 +350,23 @@
       "description": "The standard assignment metadata",
       "properties": {
         "createdBy": {
-          "description": "standard assignment Created by object id (GUID)",
+          "description": "Standard assignment Created by object id (GUID)",
           "type": "string",
           "readOnly": true
         },
         "createdOn": {
-          "description": "standard assignment creation date",
+          "description": "Standard assignment creation date",
           "type": "string",
           "format": "date-time",
           "readOnly": true
         },
         "lastUpdatedBy": {
-          "description": "standard assignment last updated by object id (GUID)",
+          "description": "Standard assignment last updated by object id (GUID)",
           "type": "string",
           "readOnly": true
         },
         "lastUpdatedOn": {
-          "description": "standard assignment last update date",
+          "description": "Standard assignment last update date",
           "type": "string",
           "format": "date-time",
           "readOnly": true
@@ -375,27 +375,27 @@
     },
     "AssignedStandardItem": {
       "type": "object",
-      "description": "describe the properties of a of a standard assignments object reference",
+      "description": "Describe the properties of a of a standard assignments object reference",
       "properties": {
         "id": {
-          "description": "full resourceId of the Microsoft.Security/standard object",
+          "description": "Full resourceId of the Microsoft.Security/standard object",
           "type": "string"
         }
       }
     },
     "AssignedAssessmentItem": {
       "type": "object",
-      "description": "describe the properties of a security assessment object reference (by key)",
+      "description": "Describe the properties of a security assessment object reference (by key)",
       "properties": {
         "assessmentKey": {
-          "description": "unique key to a security assessment object",
+          "description": "Unique key to a security assessment object",
           "type": "string"
         }
       }
     },
     "AttestationEvidence": {
       "type": "object",
-      "description": "describe the properties of a assignment attestation",
+      "description": "Describe the properties of a assignment attestation",
       "properties": {
         "description": {
           "description": "The description of the evidence",
@@ -416,16 +416,6 @@
       "type": "string",
       "pattern": "[{]?[0-9a-fA-F]{8}-(?:[0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}[}]?$",
       "description": "The standard assignments assignment key - unique key for the standard assignment",
-      "x-ms-parameter-location": "method"
-    },
-    "StandardsAssignmentBody": {
-      "name": "standardAssignment",
-      "in": "body",
-      "required": true,
-      "schema": {
-        "$ref": "#/definitions/StandardAssignment"
-      },
-      "description": "Custom standard assignment over a pre-defined scope",
       "x-ms-parameter-location": "method"
     },
     "Scope": {
