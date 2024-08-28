@@ -1,0 +1,19 @@
+name: package.json
+
+on:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - package-lock.json
+      - package.json
+
+jobs:
+  always-fail:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Always fail
+      run: |
+        echo "Files 'package.json' and 'package-lock.json' should only be updated by the Azure SDK team"
+        exit 1
