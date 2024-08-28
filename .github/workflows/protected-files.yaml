@@ -28,7 +28,7 @@ jobs:
 
         if ($matchedFiles.Count -gt 0) {
           foreach ($file in $matchedFiles) {
-            Write-Output "::error file={$file}::File should only be updated by the Azure SDK team.  If intentional, the PR may be merged by the Azure SDK team via bypassing the branch protections."
+            Write-Output "::error file=$file::File '$file' should only be updated by the Azure SDK team.  If intentional, the PR may be merged by the Azure SDK team via bypassing the branch protections."
           }
           exit 1
         }
