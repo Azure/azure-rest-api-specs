@@ -27,7 +27,7 @@ union CommunicationMessageKind {
   @added(Versions.c2024_08_30_Preview)
   @doc("Document message type.")
   document: "document",
-  
+
   @added(Versions.c2024_08_30_Preview)
   @doc("Video message type.")
   video: "video",
@@ -142,41 +142,41 @@ model MediaNotificationContent {
 
 @renamedFrom(Versions.c2024_08_30_Preview, "MediaNotificationContent")
 @doc("A request to send an image notification.")
-model ImageNotificationContent extends NotificationContent{
+model ImageNotificationContent extends NotificationContent {
   @doc("Message notification type is image.")
   kind: CommunicationMessageKind.image;
 
-  ...MediaNotificationContent
+  ...MediaNotificationContent;
 }
 
 @added(Versions.c2024_08_30_Preview)
 @doc("A request to send a document notification.")
-model DocumentNotificationContent extends NotificationContent{
+model DocumentNotificationContent extends NotificationContent {
   @doc("Message notification type is image.")
   kind: CommunicationMessageKind.document;
 
   @doc("Optional name for the file.")
   fileName?: string;
 
-  ...MediaNotificationContent
+  ...MediaNotificationContent;
 }
 
 @added(Versions.c2024_08_30_Preview)
 @doc("A request to send a video notification.")
-model VideoNotificationContent extends NotificationContent{
+model VideoNotificationContent extends NotificationContent {
   @doc("Message notification type is image.")
   kind: CommunicationMessageKind.video;
 
-  ...MediaNotificationContent
+  ...MediaNotificationContent;
 }
 
 @added(Versions.c2024_08_30_Preview)
 @doc("A request to send an audio notification.")
-model AudioNotificationContent extends NotificationContent{
+model AudioNotificationContent extends NotificationContent {
   @doc("Message notification type is audio.")
   kind: CommunicationMessageKind.audio;
 
-  ...MediaNotificationContent
+  ...MediaNotificationContent;
 }
 
 @doc("A request to send a template notification.")
@@ -429,6 +429,7 @@ enum Versions {
   @doc("Azure Communication Messages 2024-02-01 api version")
   @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   c2024_02_01: "2024-02-01",
+
   @doc("Azure Communication Messages 2024-08-30-preview api version")
   @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   c2024_08_30_Preview: "2024-08-30-preview",
