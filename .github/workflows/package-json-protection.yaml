@@ -4,9 +4,6 @@ on:
   pull_request:
     branches:
       - main
-    paths:
-      - package-lock.json
-      - package.json
 
 jobs:
   package-json-protection:
@@ -15,7 +12,19 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Fail
-      uses: actions/github-script@v7
+    - uses: actions/checkout@v4
       with:
-        script: core.setFailed("'package.json' and 'package-lock.json' should only be updated by the Azure SDK team.  If the changes are intentional, the PR may be merged via bypassing the branch protections.")
+        # Required since "HEAD^" is passed to Get-ChangedFiles
+        fetch-depth: 2
+
+    - run: |
+        . eng/scripts/ChangedFiles-Functions.ps1
+        $changedFiles = @(Get-ChangedFiles -baseCommitish HEAD^ -targetCommitish HEAD -diffFilter "")
+        if (($changedFiles -contains "package.json") -or ($changedFiles -contains "package-lock.json")) {
+          Write-Output "::error::'package.json' and 'package-lock.json' should only be updated by the Azure SDK team.  If the changes are intentional, the PR may be merged by the Azure SDK team via bypassing the branch protections."
+          exit 1
+        }
+        else {
+          Write-Output "::notice::No changes to 'package.json' or 'package-lock.json'"
+        }
+      shell: pwsh
