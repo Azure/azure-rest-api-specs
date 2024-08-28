@@ -558,11 +558,11 @@ interface DevBoxes {
   @doc("Lists snapshots for this Dev Box.")
   @added(APIVersions.v2024_09_01_preview)
   listSnapshots is StandardResourceOperations.ResourceList<DevBoxSnapshot>;
-  
+
   @doc("Gets a snapshot by snapshot id.")
   @added(APIVersions.v2024_09_01_preview)
   getSnapshot is StandardResourceOperations.ResourceRead<DevBoxSnapshot>;
-  
+
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Replacing Status Monitor"
   @doc("Restores a Dev Box to a specified snapshot.")
   @added(APIVersions.v2024_09_01_preview)

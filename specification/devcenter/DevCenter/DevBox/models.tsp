@@ -963,7 +963,7 @@ model DevBoxSnapshot {
   @doc("The id of the snapshot.")
   @visibility("read")
   snapshotId: string;
-  
+
   @doc("The datetime that the snapshot was created.")
   @visibility("read")
   createdTime: utcDateTime;
