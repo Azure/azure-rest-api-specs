@@ -110,12 +110,19 @@ union EvaluationKind {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
+@lroStatus
 union JobStatus {
   string,
   notStarted: "notStarted",
   running: "running",
+
+  @lroSucceeded
   succeeded: "succeeded",
+
+  @lroFailed
   failed: "failed",
+
+  @lroCanceled
   cancelled: "cancelled",
   cancelling: "cancelling",
   partiallyCompleted: "partiallyCompleted",

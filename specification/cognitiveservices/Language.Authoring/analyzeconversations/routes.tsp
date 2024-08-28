@@ -1,9 +1,16 @@
-import "@azure-tools/typespec-azure-core";
 import "@typespec/rest";
+import "@typespec/http";
+import "@typespec/versioning";
+import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-client-generator-core";
 import "./models.tsp";
 
-using TypeSpec.Rest;
+using Azure.ClientGenerator.Core;
 using TypeSpec.Http;
+using TypeSpec.Rest;
+using TypeSpec.Versioning;
+using Azure.Core;
+using Azure.Core.Traits;
 
 namespace Language.Authoring;
 
@@ -56,7 +63,8 @@ op createProject is Azure.Core.Foundations.Operation<
 @summary("Delete project")
 @route("/{projectName}")
 @delete
-op deleteProject is Azure.Core.Foundations.Operation<
+@pollingOperation(getProjectDeletionStatus)
+op deleteProject is Foundations.LongRunningOperation<
   {
     /**
      * The project name.
@@ -64,7 +72,7 @@ op deleteProject is Azure.Core.Foundations.Operation<
     @path
     projectName: string;
   },
-  void,
+  AcceptedResponse,
     {},
   ErrorResponse
 >;
