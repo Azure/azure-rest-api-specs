@@ -2,12 +2,13 @@ import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
 import "@typespec/openapi";
+import "@typespec/versioning";
 import "@azure-tools/typespec-azure-resource-manager";
-import "../Operations.Management/models.tsp";
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.Core;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 using Azure.ResourceManager;
 
 namespace Microsoft.AzureStackHCI;
@@ -210,6 +211,18 @@ union VmSizeEnum {
 
   @doc("Custom virtual machine size")
   Custom: "Custom",
+
+  string,
+}
+
+@added(Versions.v2024_05_01_preview)
+@doc("Gpu Assignment types")
+union GpuAssignmentTypeEnum {
+  @doc("Attach Graphics Processing Unit (GPU) using Discrete Device Assignment (DDA)")
+  GpuDDA: "GpuDDA",
+
+  @doc("Attach Graphics Processing Unit (GPU) using GPU Partitioning")
+  GpuP: "GpuP",
 
   string,
 }
@@ -501,6 +514,14 @@ model GalleryImageProperties {
   @doc("The observed state of gallery images")
   @visibility("read")
   status?: GalleryImageStatus;
+
+  @added(Versions.v2024_05_01_preview)
+  @doc("Resource ID of the source virtual machine from whose OS disk the gallery image is created.")
+  sourceVirtualMachineId?: armResourceIdentifier<[
+    {
+      type: "Microsoft.AzureStackHCI/virtualMachineInstance";
+    }
+  ]>;
 }
 
 @doc("This is the gallery image definition identifier.")
@@ -1069,6 +1090,11 @@ model VirtualHardDiskProperties {
   @doc("Physical sector in bytes")
   physicalSectorBytes?: int32;
 
+  @added(Versions.v2024_05_01_preview)
+  @doc("URL for downloading or accessing the virtual hard disk. This URL points to a secure link from where the VHD can be downloaded or accessed directly.")
+  @secret
+  downloadUrl?: string;
+
   #suppress "@azure-tools/typespec-azure-core/casing-style" "HyperV is the correct case."
   @doc("The hypervisor generation of the Virtual Machine [V1, V2]")
   hyperVGeneration?: HyperVGeneration;
@@ -1103,6 +1129,14 @@ model VirtualHardDiskStatus {
 
   @doc("Provisioning status of the vhd")
   provisioningStatus?: VirtualHardDiskStatusProvisioningStatus;
+
+  @added(Versions.v2024_05_01_preview)
+  @doc("The download status of the virtual hard disk")
+  downloadStatus?: VirtualHardDiskDownloadStatus;
+
+  @added(Versions.v2024_05_01_preview)
+  @doc("The upload status of the virtual hard disk")
+  uploadStatus?: VirtualHardDiskUploadStatus;
 }
 
 @doc("VHD Status provisioning status")
@@ -1114,10 +1148,51 @@ model VirtualHardDiskStatusProvisioningStatus {
   status?: Status;
 }
 
+@added(Versions.v2024_05_01_preview)
+@doc("The download status of the virtual hard disk")
+model VirtualHardDiskDownloadStatus {
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "MB should be referenced as MB."
+  @doc("The downloaded sized of the virtual hard disk in MB")
+  downloadedSizeInMB?: int64;
+}
+
+@added(Versions.v2024_05_01_preview)
+@doc("The upload status of the virtual hard disk")
+model VirtualHardDiskUploadStatus {
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "MB should be referenced as MB."
+  @doc("The uploaded sized of the virtual hard disk in MB")
+  uploadedSizeInMB?: int64;
+
+  @doc("The status of Uploading virtual hard disk [Succeeded, Failed, InProgress]")
+  status?: Status;
+}
+
 @doc("The virtual hard disk resource patch definition.")
 model VirtualHardDisksUpdateRequest {
   @doc("Resource tags")
   tags?: Record<string>;
+}
+
+@added(Versions.v2024_05_01_preview)
+@doc("Request for uploading virtual hard disk.")
+model VirtualHardDiskUploadRequest {
+  @doc("The Azure managed disk SAS URL to upload the virtual hard disk to.")
+  @secret
+  azureManagedDiskUploadUrl: string;
+}
+
+@added(Versions.v2024_05_01_preview)
+@doc("Response for uploading virtual hard disk.")
+model VirtualHardDiskUploadResponse {
+  @doc("The ARM ID for a Virtual Hard Disk.")
+  virtualHardDiskId?: armResourceIdentifier<[
+    {
+      type: "Microsoft.AzureStackHCI/virtualHardDisks";
+    }
+  ]>;
+
+  @doc("The upload status of the virtual hard disk")
+  uploadStatus?: VirtualHardDiskUploadStatus;
 }
 
 @doc("Properties under the virtual machine instance resource")
@@ -1177,6 +1252,12 @@ model VirtualMachineInstancePropertiesHardwareProfile {
 
   @doc("Dynamic memory config")
   dynamicMemoryConfig?: VirtualMachineInstancePropertiesHardwareProfileDynamicMemoryConfig;
+
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "GPU is a short form. It is the correct case."
+  @added(Versions.v2024_05_01_preview)
+  @doc("virtualMachineGPUs - list of gpus to be attached to the virtual machine instance")
+  @extension("x-ms-identifiers", [])
+  virtualMachineGPUs?: VirtualMachineInstancePropertiesHardwareProfileVirtualMachineGPU[];
 }
 
 @doc("Dynamic memory config")
@@ -1191,6 +1272,21 @@ model VirtualMachineInstancePropertiesHardwareProfileDynamicMemoryConfig {
 
   @doc("Defines the amount of extra memory that should be reserved for a virtual machine instance at runtime, as a percentage of the total memory that the virtual machine instance is thought to need. This only applies to virtual systems with dynamic memory enabled. This property can be in the range of 5 to 2000.")
   targetMemoryBuffer?: int32;
+}
+
+#suppress "@azure-tools/typespec-azure-core/casing-style" "GPU is a short form. It is the correct case."
+@added(Versions.v2024_05_01_preview)
+@doc("GPU properties - describes the GPU configuration.")
+model VirtualMachineInstancePropertiesHardwareProfileVirtualMachineGPU {
+  @doc("GPU assignment type")
+  assignmentType: GpuAssignmentTypeEnum;
+
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "MB is a short form."
+  @doc("Size of gpu partition in MB for GPU-P")
+  partitionSizeMB?: int64;
+
+  @doc("Name of the GPU")
+  gpuName?: string;
 }
 
 @doc("NetworkProfile - describes the network configuration the virtual machine instance")
@@ -1469,6 +1565,12 @@ model HardwareProfileUpdate {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "MB is a short form."
   @doc("RAM in MB for the virtual machine instance")
   memoryMB?: int64;
+
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "GPU is a short form. It is the correct case."
+  @added(Versions.v2024_05_01_preview)
+  @doc("virtualMachineGPUs - updated list of GPUs on the virtual machine instance")
+  @extension("x-ms-identifiers", [])
+  virtualMachineGPUs?: VirtualMachineInstancePropertiesHardwareProfileVirtualMachineGPU[];
 }
 
 @doc("Storage profile update")

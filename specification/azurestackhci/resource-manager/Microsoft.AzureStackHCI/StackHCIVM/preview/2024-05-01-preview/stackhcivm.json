@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Microsoft.AzureStackHCI",
-    "version": "2024-02-01-preview",
+    "version": "2024-05-01-preview",
     "description": "Azure Stack HCI management service",
     "x-typespec-generated": [
       {
@@ -204,6 +204,9 @@
         "x-ms-examples": {
           "PutVirtualMachineInstanceWithGalleryImage": {
             "$ref": "./examples/VirtualMachineInstances_CreateOrUpdate_Put_Virtual_Machine_Instance_With_Gallery_Image.json"
+          },
+          "PutVirtualMachineInstanceWithGpu": {
+            "$ref": "./examples/VirtualMachineInstances_CreateOrUpdate_Put_Virtual_Machine_Instance_With_Gpu.json"
           },
           "PutVirtualMachineInstanceWithMarketplaceGalleryImage": {
             "$ref": "./examples/VirtualMachineInstances_CreateOrUpdate_Put_Virtual_Machine_Instance_With_Marketplace_Gallery_Image.json"
@@ -3948,6 +3951,18 @@
           "$ref": "#/definitions/GalleryImageStatus",
           "description": "The observed state of gallery images",
           "readOnly": true
+        },
+        "sourceVirtualMachineId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Resource ID of the source virtual machine from whose OS disk the gallery image is created.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.AzureStackHCI/virtualMachineInstance"
+              }
+            ]
+          }
         }
       },
       "required": [
@@ -4081,6 +4096,30 @@
           "description": "This property indicates the size of the VHD to be created.",
           "readOnly": true
         }
+      }
+    },
+    "GpuAssignmentTypeEnum": {
+      "type": "string",
+      "description": "Gpu Assignment types",
+      "enum": [
+        "GpuDDA",
+        "GpuP"
+      ],
+      "x-ms-enum": {
+        "name": "GpuAssignmentTypeEnum",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "GpuDDA",
+            "value": "GpuDDA",
+            "description": "Attach Graphics Processing Unit (GPU) using Discrete Device Assignment (DDA)"
+          },
+          {
+            "name": "GpuP",
+            "value": "GpuP",
+            "description": "Attach Graphics Processing Unit (GPU) using GPU Partitioning"
+          }
+        ]
       }
     },
     "GuestAgent": {
@@ -4217,6 +4256,14 @@
           "type": "integer",
           "format": "int64",
           "description": "RAM in MB for the virtual machine instance"
+        },
+        "virtualMachineGPUs": {
+          "type": "array",
+          "description": "virtualMachineGPUs - updated list of GPUs on the virtual machine instance",
+          "items": {
+            "$ref": "#/definitions/VirtualMachineInstancePropertiesHardwareProfileVirtualMachineGPU"
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -6085,6 +6132,17 @@
         }
       }
     },
+    "VirtualHardDiskDownloadStatus": {
+      "type": "object",
+      "description": "The download status of the virtual hard disk",
+      "properties": {
+        "downloadedSizeInMB": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The downloaded sized of the virtual hard disk in MB"
+        }
+      }
+    },
     "VirtualHardDiskListResult": {
       "type": "object",
       "description": "The response of a VirtualHardDisk list operation.",
@@ -6134,6 +6192,12 @@
           "format": "int32",
           "description": "Physical sector in bytes"
         },
+        "downloadUrl": {
+          "type": "string",
+          "format": "password",
+          "description": "URL for downloading or accessing the virtual hard disk. This URL points to a secure link from where the VHD can be downloaded or accessed directly.",
+          "x-ms-secret": true
+        },
         "hyperVGeneration": {
           "$ref": "#/definitions/HyperVGeneration",
           "description": "The hypervisor generation of the Virtual Machine [V1, V2]"
@@ -6181,6 +6245,14 @@
         "provisioningStatus": {
           "$ref": "#/definitions/VirtualHardDiskStatusProvisioningStatus",
           "description": "Provisioning status of the vhd"
+        },
+        "downloadStatus": {
+          "$ref": "#/definitions/VirtualHardDiskDownloadStatus",
+          "description": "The download status of the virtual hard disk"
+        },
+        "uploadStatus": {
+          "$ref": "#/definitions/VirtualHardDiskUploadStatus",
+          "description": "The upload status of the virtual hard disk"
         }
       },
       "x-ms-client-flatten": true
@@ -6209,6 +6281,58 @@
           "additionalProperties": {
             "type": "string"
           }
+        }
+      }
+    },
+    "VirtualHardDiskUploadRequest": {
+      "type": "object",
+      "description": "Request for uploading virtual hard disk.",
+      "properties": {
+        "azureManagedDiskUploadUrl": {
+          "type": "string",
+          "format": "password",
+          "description": "The Azure managed disk SAS URL to upload the virtual hard disk to.",
+          "x-ms-secret": true
+        }
+      },
+      "required": [
+        "azureManagedDiskUploadUrl"
+      ]
+    },
+    "VirtualHardDiskUploadResponse": {
+      "type": "object",
+      "description": "Response for uploading virtual hard disk.",
+      "properties": {
+        "virtualHardDiskId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The ARM ID for a Virtual Hard Disk.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.AzureStackHCI/virtualHardDisks"
+              }
+            ]
+          }
+        },
+        "uploadStatus": {
+          "$ref": "#/definitions/VirtualHardDiskUploadStatus",
+          "description": "The upload status of the virtual hard disk"
+        }
+      }
+    },
+    "VirtualHardDiskUploadStatus": {
+      "type": "object",
+      "description": "The upload status of the virtual hard disk",
+      "properties": {
+        "uploadedSizeInMB": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The uploaded sized of the virtual hard disk in MB"
+        },
+        "status": {
+          "$ref": "#/definitions/Status",
+          "description": "The status of Uploading virtual hard disk [Succeeded, Failed, InProgress]"
         }
       }
     },
@@ -6534,6 +6658,14 @@
         "dynamicMemoryConfig": {
           "$ref": "#/definitions/VirtualMachineInstancePropertiesHardwareProfileDynamicMemoryConfig",
           "description": "Dynamic memory config"
+        },
+        "virtualMachineGPUs": {
+          "type": "array",
+          "description": "virtualMachineGPUs - list of gpus to be attached to the virtual machine instance",
+          "items": {
+            "$ref": "#/definitions/VirtualMachineInstancePropertiesHardwareProfileVirtualMachineGPU"
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -6557,6 +6689,28 @@
           "description": "Defines the amount of extra memory that should be reserved for a virtual machine instance at runtime, as a percentage of the total memory that the virtual machine instance is thought to need. This only applies to virtual systems with dynamic memory enabled. This property can be in the range of 5 to 2000."
         }
       }
+    },
+    "VirtualMachineInstancePropertiesHardwareProfileVirtualMachineGPU": {
+      "type": "object",
+      "description": "GPU properties - describes the GPU configuration.",
+      "properties": {
+        "assignmentType": {
+          "$ref": "#/definitions/GpuAssignmentTypeEnum",
+          "description": "GPU assignment type"
+        },
+        "partitionSizeMB": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Size of gpu partition in MB for GPU-P"
+        },
+        "gpuName": {
+          "type": "string",
+          "description": "Name of the GPU"
+        }
+      },
+      "required": [
+        "assignmentType"
+      ]
     },
     "VirtualMachineInstancePropertiesNetworkProfile": {
       "type": "object",
