@@ -261,19 +261,20 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "headers": {
+              "Operation-Location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The location for monitoring the operation state."
+              }
+            }
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -281,7 +282,8 @@
           "SuccessfulCopyProject": {
             "$ref": "./examples/SuccessfulCopyProject.json"
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/{projectName}/:export": {
@@ -364,19 +366,20 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "headers": {
+              "Operation-Location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The location for monitoring the operation state."
+              }
+            }
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -384,7 +387,8 @@
           "SuccessfulExportProject": {
             "$ref": "./examples/SuccessfulExportProject.json"
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/{projectName}/:import": {
@@ -441,19 +445,20 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "headers": {
+              "Operation-Location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The location for monitoring the operation state."
+              }
+            }
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -461,7 +466,8 @@
           "SuccessfulImportProject": {
             "$ref": "./examples/SuccessfulImportProject.json"
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/{projectName}/:train": {
@@ -491,19 +497,20 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "headers": {
+              "Operation-Location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The location for monitoring the operation state."
+              }
+            }
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -511,7 +518,8 @@
           "SuccessfulTrainProject": {
             "$ref": "./examples/SuccessfulTrainProject.json"
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/{projectName}/copy/jobs/{jobId}": {
@@ -716,19 +724,20 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "headers": {
+              "Operation-Location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The location for monitoring the operation state."
+              }
+            }
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -736,7 +745,8 @@
           "SuccessfulDeployProject": {
             "$ref": "./examples/SuccessfulDeployProject.json"
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       },
       "delete": {
         "operationId": "DeleteDeployment",
@@ -762,19 +772,20 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "headers": {
+              "Operation-Location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The location for monitoring the operation state."
+              }
+            }
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -782,7 +793,8 @@
           "SuccessfulDeleteDeployment": {
             "$ref": "./examples/SuccessfulDeleteDeployment.json"
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/{projectName}/deployments/{deploymentName}/:delete-from-resources": {
@@ -819,19 +831,20 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "headers": {
+              "Operation-Location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The location for monitoring the operation state."
+              }
+            }
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -839,7 +852,8 @@
           "SuccessfulDeleteDeploymentFromResources": {
             "$ref": "./examples/SuccessfulDeleteDeploymentFromResources.json"
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/{projectName}/deployments/{deploymentName}/delete-from-resources/jobs/{jobId}": {
@@ -980,19 +994,20 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "headers": {
+              "Operation-Location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The location for monitoring the operation state."
+              }
+            }
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -1000,7 +1015,8 @@
           "SuccessfulSwapDeployments": {
             "$ref": "./examples/SuccessfulSwapDeployments.json"
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/{projectName}/deployments/swap/jobs/{jobId}": {
@@ -1401,19 +1417,20 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "headers": {
+              "Operation-Location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The location for monitoring the operation state."
+              }
+            }
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -1421,7 +1438,8 @@
           "SuccessfulEvaluationProject": {
             "$ref": "./examples/SuccessfulEvaluationProject.json"
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/{projectName}/models/{trainedModelLabel}/:load-snapshot": {
@@ -1449,19 +1467,20 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "headers": {
+              "Operation-Location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The location for monitoring the operation state."
+              }
+            }
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -1469,7 +1488,8 @@
           "SuccessfulLoadSnapshot": {
             "$ref": "./examples/SuccessfulLoadSnapshot.json"
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/{projectName}/models/{trainedModelLabel}/evaluate/jobs/{jobId}": {
@@ -1830,19 +1850,20 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "headers": {
+              "Operation-Location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The location for monitoring the operation state."
+              }
+            }
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -1850,7 +1871,8 @@
           "SuccessfulAssignDeploymentResources": {
             "$ref": "./examples/SuccessfulAssignDeploymentResources.json"
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/{projectName}/resources/:unassign": {
@@ -1880,19 +1902,20 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "headers": {
+              "Operation-Location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The location for monitoring the operation state."
+              }
+            }
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -1900,7 +1923,8 @@
           "SuccessfulUnassignDeploymentResources": {
             "$ref": "./examples/SuccessfulUnassignDeploymentResources.json"
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/{projectName}/resources/assign/jobs/{jobId}": {
@@ -2149,19 +2173,20 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "headers": {
+              "Operation-Location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The location for monitoring the operation state."
+              }
+            }
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -2169,7 +2194,8 @@
           "SuccessfulCancelTrainingJob": {
             "$ref": "./examples/SuccessfulCancelTrainingJob.json"
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/": {

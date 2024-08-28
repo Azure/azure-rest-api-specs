@@ -109,7 +109,8 @@ op copyProjectAuthorization is Azure.Core.Foundations.Operation<
 @summary("Copy project")
 @route("/{projectName}/:copy")
 @post
-op copyProject is Azure.Core.Foundations.Operation<
+@pollingOperation(getCopyProjectStatus)
+op copyProject is Foundations.LongRunningOperation<
   {
     /**
      * The project name.
@@ -123,7 +124,9 @@ op copyProject is Azure.Core.Foundations.Operation<
     @body
     body: CopyProjectOptions;
   },
-  void
+  AcceptedResponse,
+  {},
+  ErrorResponse
 >;
 
 /**
@@ -133,7 +136,8 @@ op copyProject is Azure.Core.Foundations.Operation<
 @summary("Export project")
 @route("/{projectName}/:export")
 @post
-op export is Azure.Core.Foundations.Operation<
+@pollingOperation(getExportStatus)
+op export is Foundations.LongRunningOperation<
   {
     /**
      * The project name.
@@ -167,7 +171,9 @@ op export is Azure.Core.Foundations.Operation<
     @query("trainedModelLabel")
     trainedModelLabel?: string;
   },
-  void
+  AcceptedResponse,
+  {},
+  ErrorResponse
 >;
 
 /**
@@ -178,7 +184,8 @@ op export is Azure.Core.Foundations.Operation<
 @summary("Import project")
 @route("/{projectName}/:import")
 @post
-op `import` is Azure.Core.Foundations.Operation<
+@pollingOperation(getImportStatus)
+op `import` is Foundations.LongRunningOperation<
   {
     /**
      * The project name.
@@ -198,7 +205,9 @@ op `import` is Azure.Core.Foundations.Operation<
     @body
     body: ExportedProject;
   },
-  void
+  AcceptedResponse,
+  {},
+  ErrorResponse
 >;
 
 /**
@@ -208,7 +217,8 @@ op `import` is Azure.Core.Foundations.Operation<
 @summary("Train project")
 @route("/{projectName}/:train")
 @post
-op train is Azure.Core.Foundations.Operation<
+@pollingOperation(getTrainingStatus)
+op train is Foundations.LongRunningOperation<
   {
     /**
      * The project name.
@@ -222,7 +232,9 @@ op train is Azure.Core.Foundations.Operation<
     @body
     body: TrainingJobOptions;
   },
-  void
+  AcceptedResponse,
+  {},
+  ErrorResponse
 >;
 
 /**
@@ -316,7 +328,8 @@ op getDeployment is Azure.Core.Foundations.Operation<
 @summary("Update deployment")
 @route("/{projectName}/deployments/{deploymentName}")
 @put
-op deployProject is Azure.Core.Foundations.Operation<
+@pollingOperation(getDeploymentStatus)
+op deployProject is Foundations.LongRunningOperation<
   {
     /**
      * The project name.
@@ -336,7 +349,9 @@ op deployProject is Azure.Core.Foundations.Operation<
     @body
     body: CreateDeploymentOptions;
   },
-  void
+  AcceptedResponse,
+  {},
+  ErrorResponse
 >;
 
 /**
@@ -346,7 +361,8 @@ op deployProject is Azure.Core.Foundations.Operation<
 @summary("Delete deployment")
 @route("/{projectName}/deployments/{deploymentName}")
 @delete
-op deleteDeployment is Azure.Core.Foundations.Operation<
+@pollingOperation(getDeploymentStatus)
+op deleteDeployment is Foundations.LongRunningOperation<
   {
     /**
      * The project name.
@@ -360,7 +376,9 @@ op deleteDeployment is Azure.Core.Foundations.Operation<
     @path
     deploymentName: string;
   },
-  void
+  AcceptedResponse,
+  {},
+  ErrorResponse
 >;
 
 /**
@@ -370,7 +388,8 @@ op deleteDeployment is Azure.Core.Foundations.Operation<
 @summary("Delete deployment from resources")
 @route("/{projectName}/deployments/{deploymentName}/:delete-from-resources")
 @post
-op deleteDeploymentFromResources is Azure.Core.Foundations.Operation<
+@pollingOperation(getDeploymentDeleteFromResourcesStatus)
+op deleteDeploymentFromResources is Foundations.LongRunningOperation<
   {
     /**
      * The project name.
@@ -390,7 +409,9 @@ op deleteDeploymentFromResources is Azure.Core.Foundations.Operation<
     @body
     body: DeleteDeploymentOptions;
   },
-  void
+  AcceptedResponse,
+  {},
+  ErrorResponse
 >;
 
 /**
@@ -460,7 +481,8 @@ op getDeploymentStatus is Azure.Core.Foundations.Operation<
 @summary("Swap deployments")
 @route("/{projectName}/deployments/:swap")
 @post
-op swapDeployments is Azure.Core.Foundations.Operation<
+@pollingOperation(getSwapDeploymentsStatus)
+op swapDeployments is Foundations.LongRunningOperation<
   {
     /**
      * The project name.
@@ -474,7 +496,9 @@ op swapDeployments is Azure.Core.Foundations.Operation<
     @body
     body: SwapDeploymentsOptions;
   },
-  void
+  AcceptedResponse,
+  {},
+  ErrorResponse
 >;
 
 /**
@@ -665,7 +689,8 @@ op deleteTrainedModel is Azure.Core.Foundations.Operation<
 @summary("Evaluate model")
 @route("/{projectName}/models/{trainedModelLabel}/:evaluate")
 @post
-op evaluateModel is Azure.Core.Foundations.Operation<
+@pollingOperation(getEvaluationStatus)
+op evaluateModel is Foundations.LongRunningOperation<
   {
     /**
      * The project name.
@@ -685,7 +710,9 @@ op evaluateModel is Azure.Core.Foundations.Operation<
     @body
     body: EvaluationOnDemandOptions;
   },
-  void
+  AcceptedResponse,
+  {},
+  ErrorResponse
 >;
 
 /**
@@ -696,7 +723,8 @@ op evaluateModel is Azure.Core.Foundations.Operation<
 @summary("Load trained model snapshot to the working directory.")
 @route("/{projectName}/models/{trainedModelLabel}/:load-snapshot")
 @post
-op loadSnapshot is Azure.Core.Foundations.Operation<
+@pollingOperation(getLoadSnapshotStatus)
+op loadSnapshot is Foundations.LongRunningOperation<
   {
     /**
      * The project name.
@@ -710,7 +738,9 @@ op loadSnapshot is Azure.Core.Foundations.Operation<
     @path
     trainedModelLabel: string;
   },
-  void
+  AcceptedResponse,
+  {},
+  ErrorResponse
 >;
 
 /**
@@ -895,7 +925,8 @@ op listDeploymentResources is Azure.Core.Foundations.Operation<
 @summary("Assign deployment resources")
 @route("/{projectName}/resources/:assign")
 @post
-op assignDeploymentResources is Azure.Core.Foundations.Operation<
+@pollingOperation(getAssignDeploymentResourcesStatus)
+op assignDeploymentResources is Foundations.LongRunningOperation<
   {
     /**
      * The project name.
@@ -909,7 +940,9 @@ op assignDeploymentResources is Azure.Core.Foundations.Operation<
     @body
     body: AssignDeploymentResourcesOptions;
   },
-  void
+  AcceptedResponse,
+  {},
+  ErrorResponse
 >;
 
 /**
@@ -920,7 +953,8 @@ op assignDeploymentResources is Azure.Core.Foundations.Operation<
 @summary("Unassign deployment resources")
 @route("/{projectName}/resources/:unassign")
 @post
-op unassignDeploymentResources is Azure.Core.Foundations.Operation<
+@pollingOperation(getUnassignDeploymentResourcesStatus)
+op unassignDeploymentResources is Foundations.LongRunningOperation<
   {
     /**
      * The project name.
@@ -934,7 +968,9 @@ op unassignDeploymentResources is Azure.Core.Foundations.Operation<
     @body
     body: UnassignDeploymentResourcesOptions;
   },
-  void
+  AcceptedResponse,
+  {},
+  ErrorResponse
 >;
 
 /**
@@ -1052,7 +1088,8 @@ op getTrainingStatus is Azure.Core.Foundations.Operation<
 @summary("Cancel training")
 @route("/{projectName}/train/jobs/{jobId}/:cancel")
 @post
-op cancelTrainingJob is Azure.Core.Foundations.Operation<
+@pollingOperation(getTrainingStatus)
+op cancelTrainingJob is Foundations.LongRunningOperation<
   {
     /**
      * The project name.
@@ -1066,7 +1103,9 @@ op cancelTrainingJob is Azure.Core.Foundations.Operation<
     @path
     jobId: string;
   },
-  void
+  AcceptedResponse,
+  {},
+  ErrorResponse
 >;
 
 /**
