@@ -101,6 +101,16 @@ interface Accounts
     Account,
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader
   >;
+
+  delete is ArmResourceDeleteWithoutOkAsync<Account>;
+
+  update is ArmCustomPatchSync<
+    Account,
+    Azure.ResourceManager.Foundations.ResourceUpdateModel<
+      Account,
+      OmitDefaults<AccountProperties>
+    >
+  >;
 }
 
 @doc("The location of subscription quota resource.")
