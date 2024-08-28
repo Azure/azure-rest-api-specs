@@ -297,6 +297,30 @@
     }
   },
   "definitions": {
+    "AudioNotificationContent": {
+      "type": "object",
+      "description": "A request to send an audio notification.",
+      "properties": {
+        "content": {
+          "type": "string",
+          "description": "Optional text content."
+        },
+        "mediaUri": {
+          "type": "string",
+          "format": "uri",
+          "description": "A media url for the file. Required if the type is one of the supported media types, e.g. image"
+        }
+      },
+      "required": [
+        "mediaUri"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/NotificationContent"
+        }
+      ],
+      "x-ms-discriminator-value": "audio"
+    },
     "Azure.Core.Foundations.Error": {
       "type": "object",
       "description": "The error object.",
@@ -371,6 +395,7 @@
         "image",
         "document",
         "video",
+        "audio",
         "template"
       ],
       "x-ms-enum": {
@@ -396,6 +421,11 @@
             "name": "video",
             "value": "video",
             "description": "Video message type."
+          },
+          {
+            "name": "audio",
+            "value": "audio",
+            "description": "Audio message type."
           },
           {
             "name": "template",

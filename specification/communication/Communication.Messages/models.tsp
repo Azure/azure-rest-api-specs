@@ -32,6 +32,10 @@ union CommunicationMessageKind {
   @doc("Video message type.")
   video: "video",
 
+  @added(Versions.c2024_08_30_Preview)
+  @doc("Audio message type.")
+  audio: "audio",
+
   @doc("Template message type.")
   template: "template",
 }
@@ -162,6 +166,15 @@ model DocumentNotificationContent extends NotificationContent{
 model VideoNotificationContent extends NotificationContent{
   @doc("Message notification type is image.")
   kind: CommunicationMessageKind.video;
+
+  ...MediaNotificationContent
+}
+
+@added(Versions.c2024_08_30_Preview)
+@doc("A request to send an audio notification.")
+model AudioNotificationContent extends NotificationContent{
+  @doc("Message notification type is audio.")
+  kind: CommunicationMessageKind.audio;
 
   ...MediaNotificationContent
 }
