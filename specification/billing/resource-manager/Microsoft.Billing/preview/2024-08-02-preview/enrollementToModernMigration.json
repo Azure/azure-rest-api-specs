@@ -1,0 +1,245 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "BillingManagementClient",
+    "description": "Documentation for Microsoft.Billing.",
+    "contact": {
+      "name": "Microsoft.Billing",
+      "url": "https://learn.microsoft.com/en-us/rest/api/billing/",
+      "email": "pacebpexphot@microsoft.com"
+    },
+    "version": "2024-08-02-preview"
+  },
+  "paths": {
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/migrationEntity/default": {
+      "get": {
+        "tags": [
+          "EnrollementToModernMigration"
+        ],
+        "description": "Gets an enrollement to modern footprint mapping details.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "operationId": "EnrollementToModernMigration_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/billingAccountName"
+          },
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Enrollment to modern footprint mapping details.",
+            "schema": {
+              "$ref": "#/definitions/GetEnrollementToModernMapResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AssociatedTenantsDelete": {
+            "$ref": "./examples/getEnrollementToModernMap.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/migrationEntity/migrate": {
+      "put": {
+        "tags": [
+          "EnrollementToModernMigration"
+        ],
+        "description": "Migrates enrollment to modern",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "operationId": "EnrollementToModernMigration_MigrateEnrollement",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/billingAccountName"
+          },
+          {
+            "$ref": ".,/types.json#/parameters/apiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "parameters",
+            "description": "The enrollment to modern mapping details.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MigrationMappingProperties"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Transfer details.",
+            "schema": {
+              "$ref": "#/definitions/MigrateEnrollementResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AssociatedTenantsListByBillingAccount": {
+            "$ref": "./examples/migrateEnrollement.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "MigrationMappingProperties": {
+      "description": "Enrollement to modern mapping properties.",
+      "type": "object",
+      "properties": {
+        "destinationBillingScope": {
+          "description": "Modern billing scope to which enrollment is to be mapped.",
+          "type": "string"
+        },
+        "migrateEnrollmentRequestStatus": {
+          "description": "Migration enrollement request status.",
+          "type": "string"
+        }
+      }
+    },
+    "GetEnrollementToModernMapResponse": {
+      "description": "Get enrollement to modern mapping details.",
+      "type": "object",
+       "properties": {
+        "id": {
+          "description": "Fully qualified ID for the migrateEntity resource.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "name": {
+          "description": "Resource name.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "type": {
+          "description": "Resource type, Microsoft.Billing/billingAccounts/migrationEntity.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "properties": {
+          "destinationBillingScope": {
+            "description": "Modern billing scope to which enrollment is to be mapped.",
+            "type": "string"
+          },
+          "enrollmentId": {
+            "description": "Enrollment Id",
+            "type": "string"
+          },
+          "status": {
+            "description": "Migration Status",
+            "type": "string"
+          },
+          "transferId": {
+            "description": "Transfer Id",
+            "type": "string"
+          }
+        }
+      }
+    },
+    "MigrateEnrollementResponse": {
+      "description": "Get enrollement to modern mapping details.",
+      "type": "object",
+       "properties": {
+        "id": {
+          "description": "Fully qualified ID for the migrateEntity resource.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "name": {
+          "description": "Resource name.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "type": {
+          "description": "Resource type, Microsoft.Billing/billingAccounts/migrationEntity.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "properties": {
+          "destinationBillingScope": {
+            "description": "Modern billing scope to which enrollment is to be mapped.",
+            "type": "string"
+          },
+          "enrollmentId": {
+            "description": "Enrollment Id",
+            "type": "string"
+          },
+          "status": {
+            "description": "Migration Status",
+            "type": "string"
+          },
+          "transferId": {
+            "description": "Transfer Id",
+            "type": "string"
+          },
+          "products":{
+            "productType": {
+              "description": "product type",
+              "type": "string"
+            },
+            "productId": {
+              "description": "product Id",
+              "type": "string"
+            },
+            "name": {
+              "description": "product name",
+              "type": "string"
+            },
+            "skuDescription": {
+              "description": "product sku description",
+              "type": "string"
+            },
+            "status": {
+              "description": "product transfer status",
+              "type": "string"
+            }
+          }
+        }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      },
+      "description": "Azure Active Directory OAuth2 Flow."
+    }
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ]
+}
