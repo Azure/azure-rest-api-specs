@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Microsoft AzurePlaywrightService Management API",
-    "version": "2024-02-01-preview",
+    "version": "2024-08-01-preview",
     "description": "Microsoft.AzurePlaywrightService Resource Provider Management API.",
     "x-typespec-generated": [
       {
@@ -247,7 +247,8 @@
             "required": true,
             "type": "string",
             "enum": [
-              "ScalableExecution"
+              "ScalableExecution",
+              "Reporting"
             ],
             "x-ms-enum": {
               "name": "QuotaNames",
@@ -257,6 +258,11 @@
                   "name": "ScalableExecution",
                   "value": "ScalableExecution",
                   "description": "The quota details for scalable execution feature. When enabled, Playwright client workers can connect to cloud-hosted browsers. This can increase the number of parallel workers for a test run, significantly minimizing test completion durations."
+                },
+                {
+                  "name": "Reporting",
+                  "value": "Reporting",
+                  "description": "The quota details for reporting feature. When enabled, Playwright client will be able to upload and display test results, including artifacts like traces and screenshots, in the Playwright portal. This enables faster and more efficient troubleshooting."
                 }
               ]
             }
@@ -654,7 +660,8 @@
             "required": true,
             "type": "string",
             "enum": [
-              "ScalableExecution"
+              "ScalableExecution",
+              "Reporting"
             ],
             "x-ms-enum": {
               "name": "QuotaNames",
@@ -664,6 +671,11 @@
                   "name": "ScalableExecution",
                   "value": "ScalableExecution",
                   "description": "The quota details for scalable execution feature. When enabled, Playwright client workers can connect to cloud-hosted browsers. This can increase the number of parallel workers for a test run, significantly minimizing test completion durations."
+                },
+                {
+                  "name": "Reporting",
+                  "value": "Reporting",
+                  "description": "The quota details for reporting feature. When enabled, Playwright client will be able to upload and display test results, including artifacts like traces and screenshots, in the Playwright portal. This enables faster and more efficient troubleshooting."
                 }
               ]
             }
@@ -837,6 +849,31 @@
         "reporting": {
           "type": "string",
           "description": "When enabled, this feature allows the workspace to upload and display test results, including artifacts like traces and screenshots, in the Playwright portal. This enables faster and more efficient troubleshooting.",
+          "default": "Enabled",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "EnablementStatus",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Enabled",
+                "value": "Enabled",
+                "description": "The feature is Enabled."
+              },
+              {
+                "name": "Disabled",
+                "value": "Disabled",
+                "description": "The feature is Disabled."
+              }
+            ]
+          }
+        },
+        "localAuth": {
+          "type": "string",
+          "description": "When enabled, this feature allows the workspace to use local auth(through access key) for authentication of test runs.",
           "default": "Disabled",
           "enum": [
             "Enabled",
@@ -993,6 +1030,31 @@
         "reporting": {
           "type": "string",
           "description": "When enabled, this feature allows the workspace to upload and display test results, including artifacts like traces and screenshots, in the Playwright portal. This enables faster and more efficient troubleshooting.",
+          "default": "Enabled",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "EnablementStatus",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Enabled",
+                "value": "Enabled",
+                "description": "The feature is Enabled."
+              },
+              {
+                "name": "Disabled",
+                "value": "Disabled",
+                "description": "The feature is Disabled."
+              }
+            ]
+          }
+        },
+        "localAuth": {
+          "type": "string",
+          "description": "When enabled, this feature allows the workspace to use local auth(through access key) for authentication of test runs.",
           "default": "Disabled",
           "enum": [
             "Enabled",
@@ -1073,6 +1135,42 @@
         ]
       }
     },
+    "OfferingType": {
+      "type": "string",
+      "description": "Offering type state.",
+      "enum": [
+        "NotApplicable",
+        "PrivatePreview",
+        "PublicPreview",
+        "GeneralAvailability"
+      ],
+      "x-ms-enum": {
+        "name": "OfferingType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NotApplicable",
+            "value": "NotApplicable",
+            "description": "The offeringType is NotApplicable."
+          },
+          {
+            "name": "PrivatePreview",
+            "value": "PrivatePreview",
+            "description": "The offeringType is PrivatePreview."
+          },
+          {
+            "name": "PublicPreview",
+            "value": "PublicPreview",
+            "description": "The offeringType is PublicPreview."
+          },
+          {
+            "name": "GeneralAvailability",
+            "value": "GeneralAvailability",
+            "description": "The offeringType is GeneralAvailability."
+          }
+        ]
+      }
+    },
     "ProvisioningState": {
       "type": "string",
       "description": "The status of the current operation.",
@@ -1119,7 +1217,8 @@
             "description": "Change accepted for processing.."
           }
         ]
-      }
+      },
+      "readOnly": true
     },
     "Quota": {
       "type": "object",
@@ -1165,6 +1264,11 @@
         "freeTrial": {
           "$ref": "#/definitions/FreeTrialProperties",
           "description": "The subscription quota resource free-trial properties."
+        },
+        "offeringType": {
+          "$ref": "#/definitions/OfferingType",
+          "description": "Indicates the offering type for the subscription.",
+          "readOnly": true
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
