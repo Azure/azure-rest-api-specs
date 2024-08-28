@@ -16,6 +16,4 @@ jobs:
 
     steps:
     - name: Fail
-      run: |
-        echo "::error ::Files 'package.json' and 'package-lock.json' should only be updated by the Azure SDK team.  If the changes are intentional, the PR may be merged via bypassing the branch protections."
-        exit 1
+      run: echo "::error ::Files 'package.json' and 'package-lock.json' should only be updated by the Azure SDK team.  If the changes are intentional, the PR may be merged via bypassing the branch protections."
