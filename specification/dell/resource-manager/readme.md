@@ -46,8 +46,9 @@ These settings apply only when `--tag=package-2024-08-28-preview` is specified o
 ```yaml $(tag) == 'package-2024-08-28-preview'
 input-file:
   - Dell.Storage/preview/2024-08-28-preview/Dell.Storage.json
----
 ```
+
+---
 
 ## Suppression
 
