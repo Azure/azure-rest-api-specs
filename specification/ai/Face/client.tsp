@@ -18,6 +18,10 @@ namespace ClientCustomizations;
 @@clientName(GroupingResult, "FaceGroupingResult");
 @@clientName(LivenessDecision, "FaceLivenessDecision");
 @@clientName(ImageType, "FaceImageType");
+@@clientName(OperationStatus, "FaceOperationStatus");
+@@clientName(TrainingResult, "FaceTrainingResult");
+@@clientName(IdentificationCandidate, "FaceIdentificationCandidate");
+@@clientName(IdentificationResult, "FaceIdentificationResult");
 
 @@access(DetectionModel, Access.public);
 @@access(RecognitionModel, Access.public);
@@ -85,10 +89,10 @@ interface FaceClient {
 }
 
 @client({
-  name: "FaceServiceClient",
+  name: "FaceAdministrationClient",
   service: Face,
 })
-namespace FaceServiceClient {
+namespace FaceAdministrationClient {
   @operationGroup
   @clientName("FaceListClientImpl", "csharp")
   interface FaceList {
