@@ -30,15 +30,6 @@ openapi-subtype: rpaas
 tag: package-2024-08-28-preview
 ```
 
-### Tag: package-2022-06-09-preview
-
-These settings apply only when `--tag=package-2022-06-09-preview` is specified on the command line.
-
-```yaml $(tag) == 'package-2022-06-09-preview'
-input-file:
-  - Dell.Storage/preview/2022-06-09-preview/dellstorage.json
-```
-
 ### Tag: package-2024-08-28-preview
 
 These settings apply only when `--tag=package-2024-08-28-preview` is specified on the command line.
@@ -46,15 +37,16 @@ These settings apply only when `--tag=package-2024-08-28-preview` is specified o
 ```yaml $(tag) == 'package-2024-08-28-preview'
 input-file:
   - Dell.Storage/preview/2024-08-28-preview/Dell.Storage.json
----
 ```
+
+---
 
 ## Suppression
 
 ``` yaml
 suppressions:
   - code: BodyTopLevelProperties
-    from: openapi.json
+    from: Dell.Storage.json
     reason: Issue https://github.com/Azure/azure-openapi-validator/issues/722. The BodyTopLevelProperties check failing.
 ```
 
