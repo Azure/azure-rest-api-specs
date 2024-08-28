@@ -8,7 +8,8 @@ This is the AutoRest configuration file for SecurityInsights.
 
 ## Getting Started
 
-To build the SDK for SecurityInsights, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
+To build the SDK for Azure Machine Learning, simply [Install AutoRest](https://aka.ms/autorest/install) and
+ in this folder, run:
 
 > `autorest`
 
@@ -25,14 +26,11 @@ To see additional help and options, run:
 These are the global settings for the SecurityInsights API.
 
 ``` yaml
-title: MicrosoftSentinel
-description: Microsoft Sentinel is a scalable, cloud-native, SIEM, and SOAR solution.
 openapi-type: arm
 tag: package-preview-2024-04
 ```
 
 ---
-
 
 ### Tag: package-preview-2024-04
 
@@ -78,7 +76,8 @@ input-file:
 suppressions:
   - code: AvoidAdditionalProperties
     from: dataConnectors.json
-    reason: These properties are unknown and need to be specified by the customer (each request can have different values)
+    reason: These properties are unknown and need to be specified by the customer 
+       (each request can have different values)
   - code: AvoidAdditionalProperties
     from: Entities.json
     reason: These properties are unknown and changed frequently (each request can have different values for each entity)
@@ -99,20 +98,26 @@ suppressions:
     reason: These properties are unknown (each request can have different values for each entity)
   - code: AvoidAdditionalProperties
     from: TriggeredAnalyticsRuleRuns.json
-    reason: TriggeredAnalyticsRuleRun does not include a property called "additionalProperties", it is only used to mark that 'ruleRunAdditionalData' is a dictionary or string to object.
+    reason: TriggeredAnalyticsRuleRun does not include a property called "additionalProperties", it is only used to mark
+       that 'ruleRunAdditionalData' is a dictionary or string to object.
   - code: AvoidAdditionalProperties
     from: ThreatIntelligenceQuery.json
-    reason: These properties are required in current API. The team is working on a new version of API to resolve it in the future release.
+    reason: These properties are required in current API. The team is working on a new version of API to resolve it in
+       the future release.
 - code: GetCollectionOnlyHasValueAndNextLink
     from: Entities.json
-    reason: This API is published to customers and we have not changed it in the past year, nor will we be able to change it without breaking changes to customers.
+    reason: This API is published to customers and we have not changed it in the past year, nor will we be able 
+       to change it without breaking changes to customers.
 - code: DefinitionsPropertiesNamesCamelCase
     from: Entities.json
-    reason: This API is published to customers and we have not changed it in the past year, nor will we be able to change it without breaking changes to customers.
+    reason: This API is published to customers and we have not changed it in the past year, nor will we be able 
+       to change it without breaking changes to customers.
 - code: PutRequestResponseSchemeArm
     from: Entities.json
-    reason: This API is published to customers and we have not changed it in the past year, nor will we be able to change it without breaking changes to customers.
+    reason: This API is published to customers and we have not changed it in the past year, nor will we be able 
+       to change it without breaking changes to customers.
 ```
+
 ### Tag: package-2024-03
 
 These settings apply only when `--tag=package-2024-03` is specified on the command line.
@@ -1040,11 +1045,14 @@ input-file:
 ``` yaml
 directive:
   - suppress: R4017
-    reason: Our resources do not support list by subscription. They're not top-level resources. To get a SecurityInsights resource, we should have a subscription as well as a resource group and Log Analytics workspace.
+    reason: Our resources do not support list by subscription. They're not top-level resources. To get 
+       a SecurityInsights resource, we should have a subscription as well as
+       a resource group and Log Analytics workspace.
   - suppress: OBJECT_ADDITIONAL_PROPERTIES
-    reason: 'Caused by a duplicate Resource definition in our common directory that contains systemData. We were instructed to supress this by Swagger reviewr.'
+    reason: 'Caused by a duplicate Resource definition in our common directory that contains systemData. We were 
+       instructed to suppress this by Swagger reviewer.'
   - suppress: GuidUsage
-    reason: 'Tenent Id should be a Guid'
+    reason: 'Tenant Id should be a Guid'
 ```
 
 ---
