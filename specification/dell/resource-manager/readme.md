@@ -36,7 +36,7 @@ These settings apply only when `--tag=package-2022-06-09-preview` is specified o
 
 ```yaml $(tag) == 'package-2022-06-09-preview'
 input-file:
-  - preview/2022-06-09-preview/dellstorage.json
+  - Dell.Storage/preview/2022-06-09-preview/dellstorage.json
 ```
 
 ### Tag: package-2024-08-28-preview
@@ -45,7 +45,7 @@ These settings apply only when `--tag=package-2024-08-28-preview` is specified o
 
 ```yaml $(tag) == 'package-2024-08-28-preview'
 input-file:
-  - preview/2024-08-28-preview/Dell.Storage.json
+  - Dell.Storage/preview/2024-08-28-preview/Dell.Storage.json
 ---
 
 ## Suppression
