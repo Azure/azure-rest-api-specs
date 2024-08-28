@@ -7,7 +7,7 @@ using Azure.ClientGenerator.Core;
 namespace Language.AnalyzeTextClientCustomizations;
 
 @@clientName(Tasks, "DocumentActions", "csharp");
-@@clientName(State, "DocumentActionState", "csharp");
+@@clientName(Status, "DocumentActionState", "csharp");
 @@clientName(Error, "AnalyzeDocumentsError", "csharp");
 
 @@clientName(Entity, "NamedEntity", "csharp");
@@ -21,6 +21,10 @@ namespace Language.AnalyzeTextClientCustomizations;
 @@clientName(ErrorCode, "AnalyzeDocumentsErrorCode", "csharp");
 
 @@clientName(WarningCodeValue, "WarningCode", "csharp");
+
+@@clientName(Entity.confidenceScore, "confidence", "csharp");
+
+@@clientName(AnalyzeDocumentsLROTask.taskName, "Name", "csharp");
 
 @@clientName(PiiCategoriesExclude.ABARoutingNumber,
   "AbaRoutingNumber",
@@ -598,5 +602,59 @@ namespace Language.AnalyzeTextClientCustomizations;
 );
 @@clientName(ExtractiveSummarizationTaskParameters,
   "ExtractiveSummarizationActionContent",
+  "csharp"
+);
+
+@@clientName(AnalyzeDocumentJobsInput,
+  "AnalyzeDocumentsOperationInput",
+  "csharp"
+);
+@@clientName(AnalyzeDocumentJobsInput.analysisInput,
+  "DocumentsInput",
+  "csharp"
+);
+@@clientName(AnalyzeDocumentJobsInput.tasks, "Actions", "csharp");
+
+@@clientName(AnalyzeDocumentsLROResultsKind,
+  "AnalyzeDocumentsOperationResultsKind",
+  "csharp"
+);
+@@clientName(AnalyzeDocumentsLROResultsKind.AbstractiveSummarizationLROResults,
+  "AbstractiveSummarizationOperationResults",
+  "csharp"
+);
+@@clientName(AnalyzeDocumentsLROResultsKind.ExtractiveSummarizationLROResults,
+  "ExtractiveSummarizationOperationResults",
+  "csharp"
+);
+@@clientName(AnalyzeDocumentsLROResultsKind.PiiEntityRecognitionLROResults,
+  "PiiEntityRecognitionOperationResults",
+  "csharp"
+);
+
+@@clientName(PiiEntityRecognitionLROResult,
+  "PiiEntityRecognitionOperationResult",
+  "csharp"
+);
+@@clientName(AbstractiveSummarizationLROResult,
+  "AbstractiveSummarizationOperationResult",
+  "csharp"
+);
+@@clientName(ExtractiveSummarizationLROResult,
+  "ExtractiveSummarizationOperationResult",
+  "csharp"
+);
+
+@@clientName(analyzeDocumentsSubmitJob,
+  "AnalyzeDocumentsSubmitOperation",
+  "csharp"
+);
+
+@@clientName(analyzeDocumentsJobStatus,
+  "GetAnalyzeDocumentsJobStatus",
+  "csharp"
+);
+@@clientName(analyzeDocumentsCancelJob,
+  "AnalyzeDocumentsCancelOperation",
   "csharp"
 );
