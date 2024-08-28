@@ -218,7 +218,7 @@ These settings apply only when `--tag=release_2024_05_01_preview` is specified o
 input-file: preview/2024-05-01-preview/inference.json
 ```
 
-## AzureOpenAI 2024-05-01-preview
+## AzureOpenAI 2024-05-01-preview (generated)
 These settings apply only when `--tag=release_2024_05_01_preview_autogen` is specified on the command line.
 
 ``` yaml $(tag) == 'release_2024_05_01_preview_autogen'
@@ -237,4 +237,18 @@ These settings apply only when `--tag=release_2024_06_01_autogen` is specified o
 
 ``` yaml $(tag) == 'release_2024_06_01_autogen'
 input-file: stable/2024-06-01/generated.json
+```
+
+## AzureOpenAI 2024-07-01-preview
+These settings apply only when `--tag=release_2024_07_01_preview` is specified on the command line.
+
+``` yaml $(tag) == 'release_2024_07_01_preview'
+input-file: preview/2024-07-01-preview/inference.json
+```
+
+## AzureOpenAI 2024-07-01-preview (generated)
+These settings apply only when `--tag=release_2024_07_01_preview_autogen` is specified on the command line.
+
+``` yaml $(tag) == 'release_2024_07_01_preview_autogen'
+input-file: preview/2024-07-01-preview/generated.json
 ```
