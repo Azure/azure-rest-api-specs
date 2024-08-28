@@ -64,8 +64,8 @@ namespace Customizations; // The actual name here doesn't matter and is here for
 // 2. Add hyper-params (to getChatCompletions/Embeddings/ImageEmbeddings, all clients)
 // 3. Cache model info (to getModelInfo, all clients, Python only)
 @@access(AI.Model.getChatCompletions, Access.internal);
-@@access(AI.Model.getEmbeddings, Access.internal);
-@@access(AI.Model.getImageEmbeddings, Access.internal);
+@@access(AI.Model.getEmbeddings, Access.internal, "python");
+@@access(AI.Model.getImageEmbeddings, Access.internal, "python");
 @@access(AI.Model.getModelInfo, Access.internal, "python");
 
 // We use shorter names in the Python client library
