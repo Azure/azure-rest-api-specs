@@ -4,6 +4,7 @@ on:
   pull_request:
     branches:
       - main
+      - RPSaaSMaster
       - package-json-protection
 
 jobs:
@@ -23,7 +24,7 @@ jobs:
         . eng/scripts/ChangedFiles-Functions.ps1
         $changedFiles = @(Get-ChangedFiles -baseCommitish HEAD^ -targetCommitish HEAD -diffFilter "")
         if (($changedFiles -contains "package.json") -or ($changedFiles -contains "package-lock.json")) {
-          Write-Output "::error::'package.json' and 'package-lock.json' should only be updated by the Azure SDK team.  If the changes are intentional, the PR may be merged by the Azure SDK team via bypassing the branch protections."
+          Write-Output "::error::Files 'package.json' and 'package-lock.json' should only be updated by the Azure SDK team.  If intentional, the PR may be merged by the Azure SDK team via bypassing the branch protections."
           exit 1
         }
         else {
