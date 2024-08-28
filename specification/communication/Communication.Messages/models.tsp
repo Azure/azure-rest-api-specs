@@ -27,7 +27,7 @@ union CommunicationMessageKind {
   @added(Versions.c2024_08_30_Preview)
   @doc("Document message type.")
   document: "document",
-
+  
   @added(Versions.c2024_08_30_Preview)
   @doc("Video message type.")
   video: "video",
@@ -125,44 +125,45 @@ model TextNotificationContent extends NotificationContent {
   content: string;
 }
 
-@doc("Base model for media notification content.")
-model MediaNotificationContentBase {
+@added(Versions.c2024_08_30_Preview)
+@doc("A request to send a media notification. Could be an image, document or video.")
+model MediaNotificationContent {
   @doc("Optional text content.")
   content?: string;
 
   @clientName("mediaUrl", "java")
-  @doc("A media URL for the file.")
+  @doc("A media url for the file. Required if the type is one of the supported media types, e.g. image")
   mediaUri: url;
 }
 
-@clientName("MediaNotificationContent")
+@renamedFrom(Versions.c2024_08_30_Preview, "MediaNotificationContent")
 @doc("A request to send an image notification.")
-model ImageNotificationContent extends NotificationContent {
+model ImageNotificationContent extends NotificationContent{
   @doc("Message notification type is image.")
   kind: CommunicationMessageKind.image;
 
-  ...MediaNotificationContentBase
+  ...MediaNotificationContent
 }
 
 @added(Versions.c2024_08_30_Preview)
 @doc("A request to send a document notification.")
-model DocumentNotificationContent extends NotificationContent {
-  @doc("Message notification type is document.")
+model DocumentNotificationContent extends NotificationContent{
+  @doc("Message notification type is image.")
   kind: CommunicationMessageKind.document;
 
   @doc("Optional name for the file.")
   fileName?: string;
 
-  ...MediaNotificationContentBase
+  ...MediaNotificationContent
 }
 
 @added(Versions.c2024_08_30_Preview)
 @doc("A request to send a video notification.")
-model VideoNotificationContent extends NotificationContent {
-  @doc("Message notification type is video.")
+model VideoNotificationContent extends NotificationContent{
+  @doc("Message notification type is image.")
   kind: CommunicationMessageKind.video;
 
-  ...MediaNotificationContentBase
+  ...MediaNotificationContent
 }
 
 @doc("A request to send a template notification.")
