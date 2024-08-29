@@ -30,8 +30,6 @@ openapi-type: arm
 tag: package-preview-2024-04
 ```
 
----
-
 ### Tag: package-preview-2024-04
 
 These settings apply only when `--tag=package-preview-2024-04` is specified on the command line.
@@ -946,8 +944,6 @@ input-file:
 - Microsoft.SecurityInsights/preview/2021-09-01-preview/EntityQueryTemplates.json
 ```
 
----
-
 ### Tag: package-2021-10
 
 These settings apply only when `--tag=package-2021-10` is specified on the command line.
@@ -977,8 +973,6 @@ input-file:
 - Microsoft.SecurityInsights/stable/2021-04-01/ThreatIntelligence.json
 ```
 
----
-
 ### Tag: package-2020-01
 
 These settings apply only when `--tag=package-2020-01` is specified on the command line.
@@ -990,8 +984,6 @@ input-file:
 - Microsoft.SecurityInsights/stable/2020-01-01/DataConnectors.json
 - Microsoft.SecurityInsights/stable/2020-01-01/SecurityInsights.json
 ```
-
----
 
 ### Tag: package-2021-03-preview-only
 
@@ -1011,8 +1003,6 @@ input-file:
 - Microsoft.SecurityInsights/preview/2021-03-01-preview/EntityQueryTemplates.json
 - Microsoft.SecurityInsights/preview/2021-03-01-preview/Metadata.json
 ```
-
----
 
 ### Tag: package-2019-01-preview
 
