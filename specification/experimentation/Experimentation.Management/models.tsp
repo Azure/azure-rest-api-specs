@@ -159,8 +159,8 @@ model ManagedIdentity {
   type: ResourceIdentityType;
 
   /** The identities assigned to this resource by the user. */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "UserAssignedIdentities are expected to be a record of UserAssignedIdentity"
-  userAssignedIdentities?: Record<UserAssignedIdentity | null>;
+  #suppress "deprecated" "We are in private preview and not planning to use client SDKs generated from TypeSpec. For public preview, we will support system assigned and that should fix this warning."
+  userAssignedIdentities?: UserAssignedIdentities;
 }
 
 /**
