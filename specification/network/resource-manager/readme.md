@@ -100,6 +100,37 @@ input-file:
   - Microsoft.Network/stable/2024-03-01/vmssNetworkInterface.json
   - Microsoft.Network/stable/2024-03-01/vmssPublicIpAddress.json
   - Microsoft.Network/stable/2024-03-01/webapplicationfirewall.json
+suppressions:
+  - code: PatchIdentityProperty
+    from: networkWatcher.json
+    reason: False alarm.
+  - code: PatchIdentityProperty
+    from: virtualNetworkGateway.json
+    reason: False alarm.
+  - code: ParameterNotDefinedInGlobalParameters
+    from: networkManagerRoutingConfiguration.json
+    reason: Referenced in common types.json file
+  - code: ListInOperationName
+    from: virtualWan.json
+    reason: Customized verb is used for API
+  - code: ParameterNotUsingCommonTypes
+    from: virtualWan.json
+    reason:  We are define the resourceGroupName is our swagger without using common types to be consistent with all other parameters we defined in the swagger. 
+  - code: RequiredReadOnlySystemData
+    from: virtualWan.json
+    reason:  We do not yet support system data. 
+  - code: PutInOperationName
+    from: virtualWan.json
+    reason: Child resource is auto-created when top-level resource is created.
+  - code: PostOperationIdContainsUrlVerb
+    from: virtualWan.json
+    reason: Customized verbs are used for API
+  - code: AllProxyResourcesShouldHaveDelete
+    from: virtualWan.json
+    reason: Service design forces behavior
+  - suppress: XmsIdentifierValidation
+    from: webapplicationfirewall.json
+    reason: By design, no id is needed for groupmembership resources.
 ```
 
 ### Tag: package-2024-01-preview
