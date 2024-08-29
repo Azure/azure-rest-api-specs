@@ -148,6 +148,9 @@ model TranslationInput {
 
   @doc("Subtitle max char count per segment.")
   subtitleMaxCharCountPerSegment?: int32;
+
+  @doc("Export subtitle in video.")
+  exportSubtitleInVideo?: boolean;
 }
 
 @doc("Iteration result.")
@@ -170,6 +173,9 @@ model IterationResult {
 
 @doc("Iteration input.")
 model IterationInput {
+  @doc("Webvtt file for content editing.")
+  webvttFile?: WebvttFile;
+
   @doc("Speaker count of the video.")
   speakerCount?: int32;
 
@@ -179,8 +185,8 @@ model IterationInput {
   @doc("Subtitle max char count per segment.")
   subtitleMaxCharCountPerSegment?: int32;
 
-  @doc("Webvtt file for content editing.")
-  webvttFile?: WebvttFile;
+  @doc("Export subtitle in video.")
+  exportSubtitleInVideo?: boolean;
 }
 
 @doc("Operation ID header.")

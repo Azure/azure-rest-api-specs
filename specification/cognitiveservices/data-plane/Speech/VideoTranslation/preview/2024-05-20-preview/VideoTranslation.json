@@ -678,6 +678,10 @@
       "type": "object",
       "description": "Iteration input.",
       "properties": {
+        "webvttFile": {
+          "$ref": "#/definitions/WebvttFile",
+          "description": "Webvtt file for content editing."
+        },
         "speakerCount": {
           "type": "integer",
           "format": "int32",
@@ -692,9 +696,9 @@
           "format": "int32",
           "description": "Subtitle max char count per segment."
         },
-        "webvttFile": {
-          "$ref": "#/definitions/WebvttFile",
-          "description": "Webvtt file for content editing."
+        "exportSubtitleInVideo": {
+          "type": "boolean",
+          "description": "Export subtitle in video."
         }
       }
     },
@@ -913,6 +917,10 @@
           "type": "integer",
           "format": "int32",
           "description": "Subtitle max char count per segment."
+        },
+        "exportSubtitleInVideo": {
+          "type": "boolean",
+          "description": "Export subtitle in video."
         }
       },
       "required": [
