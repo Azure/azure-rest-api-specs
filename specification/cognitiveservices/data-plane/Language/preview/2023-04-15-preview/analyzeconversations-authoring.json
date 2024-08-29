@@ -2438,13 +2438,37 @@
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "top",
+            "in": "query",
+            "description": "The number of projects to be returned.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "skip",
+            "in": "query",
+            "description": "The offset in the response.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "maxpagesize",
+            "in": "query",
+            "description": "The maximum number of projects per page.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
           }
         ],
         "responses": {
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/PagedProjectsMetadata"
+              "$ref": "#/definitions/PagedProjectMetadata"
             }
           },
           "default": {
@@ -4428,15 +4452,15 @@
         ]
       }
     },
-    "PagedProjectsMetadata": {
+    "PagedProjectMetadata": {
       "type": "object",
-      "description": "Paged collection of ProjectsMetadata items",
+      "description": "Paged collection of ProjectMetadata items",
       "properties": {
         "value": {
           "type": "array",
-          "description": "The ProjectsMetadata items on this page",
+          "description": "The ProjectMetadata items on this page",
           "items": {
-            "$ref": "#/definitions/ProjectsMetadata"
+            "$ref": "#/definitions/ProjectMetadata"
           },
           "x-ms-identifiers": []
         },
@@ -4854,28 +4878,6 @@
           "description": "The list of trained models.",
           "items": {
             "$ref": "#/definitions/ProjectTrainedModel"
-          },
-          "x-ms-identifiers": []
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "The next page link."
-        }
-      },
-      "required": [
-        "value",
-        "nextLink"
-      ]
-    },
-    "ProjectsMetadata": {
-      "type": "object",
-      "description": "Represents a list of retrieved projects' metadata.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The list of projects.",
-          "items": {
-            "$ref": "#/definitions/ProjectMetadata"
           },
           "x-ms-identifiers": []
         },

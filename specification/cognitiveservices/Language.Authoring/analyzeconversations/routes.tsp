@@ -32,6 +32,8 @@ op getProject is languageOperations.ResourceRead<
   ProjectMetadata
 >;
 
+
+alias ShowStatsQueryParameter = TraitContext.Create;
 /**
  * Creates a new project or updates an existing one.
  */
@@ -1078,6 +1080,20 @@ op cancelTrainingJob is Foundations.LongRunningOperation<
   ErrorResponse
 >;
 
+alias ListProjectsQueryParameters = ListQueryParametersTrait<{
+  /** The number of projects to be returned. */
+  @query
+  top?: int32;
+
+  /** The offset in the response. */
+  @query
+  skip?: int32;
+
+  /** The maximum number of projects per page. */
+  @query
+  maxpagesize?: int32;
+}>;
+
 /**
  * Lists the existing projects.
  */
@@ -1085,27 +1101,8 @@ op cancelTrainingJob is Foundations.LongRunningOperation<
 @summary("List projects")
 @get
 op listProjects is languageOperations.ResourceList<
-    ProjectsMetadata,
-  {
-    /**
-     * The number of projects to be returned.
-     */
-    @query("top")
-    top?: int32;
-
-    /**
-     * The offset in the response.
-     */
-    @query("skip")
-    skip?: int32;
-
-    /**
-     * The maximum number of projects per page.
-     */
-    @query("maxpagesize")
-    maxpagesize?: int32;
-  }
-  
+    ProjectMetadata,
+  ListProjectsQueryParameters  
 >;
 
 /**
