@@ -474,7 +474,7 @@
           },
           {
             "name": "x-ms-access-soft-deleted-resources",
-            "description": "Optional, used to get soft deleted volume groups if set to true.",
+            "description": "Optional, used to get soft deleted volume groups only if set to true. If it is not set for a soft deleted volume groups, it will return 404. If set for active volume groups, it will return 404.",
             "in": "header",
             "required": false,
             "type": "string",
@@ -671,18 +671,20 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "purge",
-            "description": "Optional, used to purge soft deleted volume groups if set to true.",
+            "name": "deletetype",
+            "description": "Optional. Specifies that the delete operation should be purge for soft delete volume group. This cannot be used with active volume group delete. The value of deletetype can only be 'permanent'.",
             "in": "query",
             "required": false,
             "type": "string",
-            "enum": [
-              "true",
-              "false"
-            ],
-            "x-ms-enum": {
-              "name": "purge",
-              "modelAsString": true
+            "schema": {
+              "type": "string",
+              "enum": [
+                "permanent"
+              ],
+              "x-ms-enum": {
+                "name": "deletetype",
+                "modelAsString": true
+              }
             }
           }
         ],
@@ -742,21 +744,6 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "name": "x-ms-access-soft-deleted-resources",
-            "description": "Optional, used to get soft deleted volume groups if set to true.",
-            "in": "header",
-            "required": false,
-            "type": "string",
-            "enum": [
-              "true",
-              "false"
-            ],
-            "x-ms-enum": {
-              "name": "x-ms-access-soft-deleted-resources",
-              "modelAsString": true
-            }
           }
         ],
         "responses": {
@@ -978,18 +965,20 @@
             "description": "Optional, used to delete volume if active sessions present. Allowed value are only true or false. Default value is false."
           },
           {
-            "name": "purge",
-            "description": "Optional, used to purge soft deleted volumes if set to true.",
+            "name": "deletetype",
+            "description": "Optional. Specifies that the delete operation should be purge for soft delete volume group. This cannot be used with active volume group delete. The value of deletetype can only be 'permanent'.",
             "in": "query",
             "required": false,
             "type": "string",
-            "enum": [
-              "true",
-              "false"
-            ],
-            "x-ms-enum": {
-              "name": "purge",
-              "modelAsString": true
+            "schema": {
+              "type": "string",
+              "enum": [
+                "permanent"
+              ],
+              "x-ms-enum": {
+                "name": "deletetype",
+                "modelAsString": true
+              }
             }
           }
         ],
@@ -1052,21 +1041,6 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "name": "x-ms-access-soft-deleted-resources",
-            "description": "Optional, used to get soft deleted volumes if set to true.",
-            "in": "header",
-            "required": false,
-            "type": "string",
-            "enum": [
-              "true",
-              "false"
-            ],
-            "x-ms-enum": {
-              "name": "x-ms-access-soft-deleted-resources",
-              "modelAsString": true
-            }
           }
         ],
         "responses": {
@@ -1181,7 +1155,7 @@
           },
           {
             "name": "x-ms-access-soft-deleted-resources",
-            "description": "Optional, used to get soft deleted volumes if set to true.",
+            "description": "Optional, used to get soft deleted volumes if set to true. If it is not set for a soft deleted volumes, it will return 404. If set for active volumes, it will return 404.",
             "in": "header",
             "required": false,
             "type": "string",
@@ -2840,11 +2814,18 @@
       "type": "object",
       "description": "Response for Delete Retention Policy object",
       "properties": {
-        "enabled": {
-          "type": "boolean",
-          "description": "The flag to enable/disable retention policy."
+        "policyState": {
+          "type": "string",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "policyState",
+            "modelAsString": true
+          }
         },
-        "days": {
+        "retentionPeriodDays": {
           "type": "integer",
           "format": "int32",
           "minimum": 0,
