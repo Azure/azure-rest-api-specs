@@ -29,7 +29,6 @@ These are the global settings for the Footprint Monitoring API.
 title: FootprintMonitoringManagementClient
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2024-08-21-preview
 ```
 
 ### Tag: package-2024-08-21-preview
