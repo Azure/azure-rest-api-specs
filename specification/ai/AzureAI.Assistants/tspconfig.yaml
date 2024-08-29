@@ -1,0 +1,34 @@
+parameters:
+  "service-dir":
+    default: "sdk/ai"
+emit:
+  - "@azure-tools/typespec-autorest"
+  - "@typespec/openapi3"
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/data-plane"
+options:
+  "@azure-tools/typespec-autorest":
+    emitter-output-dir: "{project-root}/../"
+    azure-resource-provider-folder: "data-plane"
+    examples-directory: "{project-root}/examples"
+    output-file: "{output-folder-base}/OpenApiV2/{version-status}/{version}/assistants_generated.json"
+    omit-unreachable-types: true
+    emit-lro-options: "none"
+  "@typespec/openapi3":
+    emitter-output-dir: "{project-root}/../"
+    output-file: "{output-folder-base}/OpenApiV3/{version}/assistants_generated.yaml"
+  "@azure-tools/typespec-csharp":
+    package-dir: "Azure.AI.Assistants"
+    namespace: "Azure.AI.Assistants"
+    clear-output-folder: true
+    model-namespace: false
+    generate-protocol-methods: false
+    flavor: azure
+  "@azure-tools/typespec-python":
+    package-dir: "azure-ai-assistants"
+    package-name: "azure-ai-assistants"
+    package-mode: dataplane
+    package-version: "1.0.0b1"
+    generate-sample-project: false
+    flavor: azure
