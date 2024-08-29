@@ -108,7 +108,7 @@ suppressions:
     from: Entities.json
     reason: This API is published to customers and we have not changed it in the past year, nor will we be able to change it without breaking changes to customers.
   - code: PutRequestResponseSchemeArm
-    from: Entities.json
+    from: EntityQueries.json
     reason: This API is published to customers and we have not changed it in the past year, nor will we be able to change it without breaking changes to customers.
 ```
 
