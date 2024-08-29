@@ -1164,7 +1164,7 @@
           "Databases",
           "AccessPolicyAssignments"
         ],
-        "operationId": "AccessPolicyAssignments_List",
+        "operationId": "AccessPolicyAssignment_List",
         "description": "Gets all databases in the specified Redis Enterprise cluster.",
         "x-ms-examples": {
           "RedisEnterpriseAccessPolicyAssignmentList": {
@@ -1719,86 +1719,16 @@
           }
         }
       }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Cache/locations/{location}/checkNameAvailability": {
-      "post": {
-        "tags": [
-          "RedisEnterprise"
-        ],
-        "operationId": "RedisEnterprise_CheckNameAvailability",
-        "x-ms-examples": {
-          "RedisEnterpriseCheckNameAvailability": {
-            "$ref": "./examples/RedisEnterpriseCheckNameAvailability.json"
-          }
-        },
-        "description": "Checks that the Redis Enterprise cache name is valid and is not already in use.",
-        "parameters": [
-          {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/CheckNameAvailabilityParameters"
-            },
-            "description": "Parameters supplied to the CheckNameAvailability Redis operation. The only supported resource type is 'Microsoft.Cache/redisenterprise'"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/LocationParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Name is available"
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
     }
   },
   "definitions": {
-    "CheckNameAvailabilityParameters": {
-      "description": "Parameters body to pass for resource name availability check.",
-      "type": "object",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "Resource name."
-        },
-        "type": {
-          "type": "string",
-          "description": "Resource type. The only legal value of this property for checking redis enterprise cache name availability is 'Microsoft.Cache/redisenterprise'.",
-          "enum": [
-            "Microsoft.Cache/redisenterprise"
-          ],
-          "x-ms-enum": {
-            "name": "type",
-            "modelAsString": true
-          }
-        }
-      },
-      "required": [
-        "name",
-        "type"
-      ]
-    },
     "Sku": {
       "description": "SKU parameters supplied to the create Redis Enterprise cluster operation.",
       "type": "object",
       "properties": {
         "name": {
           "type": "string",
-          "description": "The level of Redis Enterprise cluster to deploy. Possible values: ('GeneralPurpose_G5', 'MemoryOptimized_M10', 'ComputeOptimized_X5', etc.). For more information on SKUs see the latest pricing documentation. Note that additional SKUs may become supported in the future.",
+          "description": "The level of Redis Enterprise cluster to deploy. Possible values: ('Balanced_B5', 'MemoryOptimized_M10', 'ComputeOptimized_X5', etc.). For more information on SKUs see the latest pricing documentation. Note that additional SKUs may become supported in the future.",
           "enum": [
             "Enterprise_E1",
             "Enterprise_E5",
@@ -1811,20 +1741,20 @@
             "EnterpriseFlash_F300",
             "EnterpriseFlash_F700",
             "EnterpriseFlash_F1500",
-            "GeneralPurpose_G0",
-            "GeneralPurpose_G1",
-            "GeneralPurpose_G3",
-            "GeneralPurpose_G5",
-            "GeneralPurpose_G10",
-            "GeneralPurpose_G20",
-            "GeneralPurpose_G50",
-            "GeneralPurpose_G100",
-            "GeneralPurpose_G150",
-            "GeneralPurpose_G250",
-            "GeneralPurpose_G350",
-            "GeneralPurpose_G500",
-            "GeneralPurpose_G700",
-            "GeneralPurpose_G1000",
+            "Balanced_B0",
+            "Balanced_B1",
+            "Balanced_B3",
+            "Balanced_B5",
+            "Balanced_B10",
+            "Balanced_B20",
+            "Balanced_B50",
+            "Balanced_B100",
+            "Balanced_B150",
+            "Balanced_B250",
+            "Balanced_B350",
+            "Balanced_B500",
+            "Balanced_B700",
+            "Balanced_B1000",
             "MemoryOptimized_M10",
             "MemoryOptimized_M20",
             "MemoryOptimized_M50",
@@ -1837,7 +1767,6 @@
             "MemoryOptimized_M1000",
             "MemoryOptimized_M1500",
             "MemoryOptimized_M2000",
-            "ComputeOptimized_X1",
             "ComputeOptimized_X3",
             "ComputeOptimized_X5",
             "ComputeOptimized_X10",
@@ -1849,13 +1778,13 @@
             "ComputeOptimized_X350",
             "ComputeOptimized_X500",
             "ComputeOptimized_X700",
-            "AutoTiering_T250",
-            "AutoTiering_T500",
-            "AutoTiering_T700",
-            "AutoTiering_T1000",
-            "AutoTiering_T1500",
-            "AutoTiering_T2000",
-            "AutoTiering_T4500"
+            "FlashOptimized_A250",
+            "FlashOptimized_A500",
+            "FlashOptimized_A700",
+            "FlashOptimized_A1000",
+            "FlashOptimized_A1500",
+            "FlashOptimized_A2000",
+            "FlashOptimized_A4500"
           ],
           "x-ms-enum": {
             "name": "SkuName",
@@ -1865,7 +1794,7 @@
         "capacity": {
           "type": "integer",
           "format": "int32",
-          "description": "The size multiple of the Redis Enterprise cluster. Valid values depend upon the SKU, and are (2, 4, 6, ...) for Enterprise_E SKUs and (3, 9, 15, ...) for EnterpriseFlash_ SKUs. This parameter is not used with the other (GeneralPurpose, MemoryOptimized, ComputeOptimized) SKUs. They operate without any capacity value."
+          "description": "This property is only used with Enterprise and EnterpriseFlash SKUs. Determines the size of the cluster. Valid values are (2, 4, 6, ...) for Enterprise SKUs and (3, 9, 15, ...) for EnterpriseFlash SKUs."
         }
       },
       "required": [
@@ -2298,15 +2227,10 @@
         },
         "accessKeysAuthentication": {
           "type": "string",
-          "description": "Access database using keys - default is enabled. This property can be Enabled/Disabled to allow or deny access with the current access keys. Can be updated even after database is created.",
+          "description": "This property can be Enabled/Disabled to allow or deny access with the current access keys. Can be updated even after database is created.",
           "enum": [
             "Disabled",
             "Enabled"
-          ],
-          "x-ms-mutability": [
-            "read",
-            "create",
-            "update"
           ],
           "x-ms-enum": {
             "name": "accessKeysAuthentication",
@@ -2341,16 +2265,11 @@
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
           "readOnly": true,
-          "description": "Current provisioning status of the database"
-        },
-        "resourceState": {
-          "$ref": "#/definitions/ResourceState",
-          "readOnly": true,
-          "description": "Current resource status of the database"
+          "description": "Current provisioning status of the access policy assignment."
         },
         "accessPolicyName": {
           "type": "string",
-          "description": "Name of access policy under specific access policy assignment.",
+          "description": "Name of access policy under specific access policy assignment. Only default policy is supported.",
           "default": "default",
           "pattern": "^([a-zA-Z0-9][a-zA-Z0-9-]*[a-zA-Z0-9]|[a-zA-Z0-9])$",
           "x-ms-mutability": [
@@ -2369,7 +2288,10 @@
           },
           "description": "The user associated with the access policy."
         }
-      }
+      },
+      "required": [
+        "user"
+      ]
     },
     "AccessPolicyAssignment": {
       "description": "Describes the access policy assignment of Redis Enterprise database",
@@ -2395,7 +2317,7 @@
           "items": {
             "$ref": "#/definitions/AccessPolicyAssignment"
           },
-          "description": "List of access policy assignment"
+          "description": "List of access policy assignments."
         },
         "nextLink": {
           "type": "string",
