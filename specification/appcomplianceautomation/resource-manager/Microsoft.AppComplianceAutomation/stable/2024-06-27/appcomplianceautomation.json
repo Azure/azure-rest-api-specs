@@ -1,0 +1,4552 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "App Compliance Automation Tool for Microsoft 365",
+    "version": "2024-06-27",
+    "description": "App Compliance Automation Tool for Microsoft 365 API spec",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "AppComplianceAutomation"
+    },
+    {
+      "name": "Operations"
+    }
+  ],
+  "paths": {
+    "/providers/Microsoft.AppComplianceAutomation/checkNameAvailability": {
+      "post": {
+        "operationId": "ProviderActions_CheckNameAvailability",
+        "tags": [
+          "AppComplianceAutomation"
+        ],
+        "description": "Check if the given name is available for a report.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/CheckNameAvailabilityRequest"
+            },
+            "x-ms-client-name": "body"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/CheckNameAvailabilityResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Report_CheckNameAvailability": {
+            "$ref": "./examples/Report_CheckNameAvailability.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.AppComplianceAutomation/getCollectionCount": {
+      "post": {
+        "operationId": "ProviderActions_GetCollectionCount",
+        "tags": [
+          "AppComplianceAutomation"
+        ],
+        "description": "Get the count of reports.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GetCollectionCountRequest"
+            },
+            "x-ms-client-name": "body"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/GetCollectionCountResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Report_GetCollectionCount": {
+            "$ref": "./examples/Report_GetCollectionCount.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.AppComplianceAutomation/getOverviewStatus": {
+      "post": {
+        "operationId": "ProviderActions_GetOverviewStatus",
+        "tags": [
+          "AppComplianceAutomation"
+        ],
+        "description": "Get the resource overview status.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GetOverviewStatusRequest"
+            },
+            "x-ms-client-name": "body"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/GetOverviewStatusResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Report_GetOverviewStatus": {
+            "$ref": "./examples/Report_GetOverviewStatus.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.AppComplianceAutomation/listInUseStorageAccounts": {
+      "post": {
+        "operationId": "ProviderActions_ListInUseStorageAccounts",
+        "tags": [
+          "AppComplianceAutomation"
+        ],
+        "description": "List the storage accounts which are in use by related reports",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ListInUseStorageAccountsRequest"
+            },
+            "x-ms-client-name": "body"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ListInUseStorageAccountsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ListInUseStorageAccountsWithSubscriptions": {
+            "$ref": "./examples/ListInUseStorageAccountsWithSubscriptions.json"
+          },
+          "ListInUseStorageAccountsWithoutSubscriptions": {
+            "$ref": "./examples/ListInUseStorageAccountsWithoutSubscriptions.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.AppComplianceAutomation/onboard": {
+      "post": {
+        "operationId": "ProviderActions_Onboard",
+        "tags": [
+          "AppComplianceAutomation"
+        ],
+        "description": "Onboard given subscriptions to Microsoft.AppComplianceAutomation provider.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/OnboardRequest"
+            },
+            "x-ms-client-name": "body"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/OnboardResponse"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Onboard": {
+            "$ref": "./examples/Onboard.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/providers/Microsoft.AppComplianceAutomation/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Operations_List": {
+            "$ref": "./examples/Operations_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.AppComplianceAutomation/reports": {
+      "get": {
+        "operationId": "Report_List",
+        "tags": [
+          "AppComplianceAutomation"
+        ],
+        "description": "Get the AppComplianceAutomation report list for the tenant.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/QueryParameters.skipToken"
+          },
+          {
+            "$ref": "#/parameters/QueryParameters.top"
+          },
+          {
+            "$ref": "#/parameters/QueryParameters.select"
+          },
+          {
+            "$ref": "#/parameters/QueryParameters.filter"
+          },
+          {
+            "$ref": "#/parameters/QueryParameters.orderby"
+          },
+          {
+            "$ref": "#/parameters/QueryParameters.offerGuid"
+          },
+          {
+            "$ref": "#/parameters/QueryParameters.reportCreatorTenantId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ReportResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Report_List": {
+            "$ref": "./examples/Report_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.AppComplianceAutomation/reports/{reportName}": {
+      "get": {
+        "operationId": "Report_Get",
+        "tags": [
+          "AppComplianceAutomation"
+        ],
+        "description": "Get the AppComplianceAutomation report and its properties.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "reportName",
+            "in": "path",
+            "description": "Report Name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[-a-zA-Z0-9_]{1,50}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ReportResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Report_Get": {
+            "$ref": "./examples/Report_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Report_CreateOrUpdate",
+        "tags": [
+          "AppComplianceAutomation"
+        ],
+        "description": "Create a new AppComplianceAutomation report or update an exiting AppComplianceAutomation report.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "reportName",
+            "in": "path",
+            "description": "Report Name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[-a-zA-Z0-9_]{1,50}$"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Parameters for the create or update operation",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ReportResource"
+            },
+            "x-ms-client-name": "properties"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'ReportResource' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ReportResource"
+            }
+          },
+          "201": {
+            "description": "Resource 'ReportResource' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ReportResource"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Report_CreateOrUpdate": {
+            "$ref": "./examples/Report_CreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "Report_Update",
+        "tags": [
+          "AppComplianceAutomation"
+        ],
+        "description": "Update an exiting AppComplianceAutomation report.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "reportName",
+            "in": "path",
+            "description": "Report Name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[-a-zA-Z0-9_]{1,50}$"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Parameters for the create or update operation",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ReportResourcePatch"
+            },
+            "x-ms-client-name": "properties"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ReportResource"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Report_Update": {
+            "$ref": "./examples/Report_Update.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "Report_Delete",
+        "tags": [
+          "AppComplianceAutomation"
+        ],
+        "description": "Delete an AppComplianceAutomation report.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "reportName",
+            "in": "path",
+            "description": "Report Name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[-a-zA-Z0-9_]{1,50}$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Report_Delete": {
+            "$ref": "./examples/Report_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/providers/Microsoft.AppComplianceAutomation/reports/{reportName}/checkNameAvailability": {
+      "post": {
+        "operationId": "Report_NestedResourceCheckNameAvailability",
+        "tags": [
+          "AppComplianceAutomation"
+        ],
+        "description": "Checks the report's nested resource name availability, e.g: Webhooks, Evidences, Snapshots.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "reportName",
+            "in": "path",
+            "description": "Report Name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[-a-zA-Z0-9_]{1,50}$"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "NameAvailabilityRequest object.",
+            "required": true,
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/CheckNameAvailabilityRequest"
+            },
+            "x-ms-client-name": "body"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/CheckNameAvailabilityResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Report_EvidenceCheckNameAvailability": {
+            "$ref": "./examples/Report_NestedResourceCheckNameAvailability_Report_Evidence_Check_Name_Availability.json"
+          },
+          "Report_SnapshotCheckNameAvailability": {
+            "$ref": "./examples/Report_NestedResourceCheckNameAvailability_Report_Snapshot_Check_Name_Availability.json"
+          },
+          "Report_WebhookCheckNameAvailability": {
+            "$ref": "./examples/Report_NestedResourceCheckNameAvailability_Report_Webhook_Check_Name_Availability.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.AppComplianceAutomation/reports/{reportName}/evidences": {
+      "get": {
+        "operationId": "Evidence_ListByReport",
+        "tags": [
+          "AppComplianceAutomation"
+        ],
+        "description": "Returns a paginated list of evidences for a specified report.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/QueryParameters.skipToken"
+          },
+          {
+            "$ref": "#/parameters/QueryParameters.top"
+          },
+          {
+            "$ref": "#/parameters/QueryParameters.select"
+          },
+          {
+            "$ref": "#/parameters/QueryParameters.filter"
+          },
+          {
+            "$ref": "#/parameters/QueryParameters.orderby"
+          },
+          {
+            "$ref": "#/parameters/QueryParameters.offerGuid"
+          },
+          {
+            "$ref": "#/parameters/QueryParameters.reportCreatorTenantId"
+          },
+          {
+            "name": "reportName",
+            "in": "path",
+            "description": "Report Name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[-a-zA-Z0-9_]{1,50}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/EvidenceResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Evidence_ListByReport": {
+            "$ref": "./examples/Evidence_ListByReport.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.AppComplianceAutomation/reports/{reportName}/evidences/{evidenceName}": {
+      "get": {
+        "operationId": "Evidence_Get",
+        "tags": [
+          "AppComplianceAutomation"
+        ],
+        "description": "Get the evidence metadata",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "reportName",
+            "in": "path",
+            "description": "Report Name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[-a-zA-Z0-9_]{1,50}$"
+          },
+          {
+            "name": "evidenceName",
+            "in": "path",
+            "description": "The evidence name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-_.]+$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/EvidenceResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Evidence_Get": {
+            "$ref": "./examples/Evidence_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Evidence_CreateOrUpdate",
+        "tags": [
+          "AppComplianceAutomation"
+        ],
+        "description": "Create or Update an evidence a specified report",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ExtraParameter.offerGuid"
+          },
+          {
+            "$ref": "#/parameters/ExtraParameter.reportCreatorTenantId"
+          },
+          {
+            "name": "reportName",
+            "in": "path",
+            "description": "Report Name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[-a-zA-Z0-9_]{1,50}$"
+          },
+          {
+            "name": "evidenceName",
+            "in": "path",
+            "description": "The evidence name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-_.]+$"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Parameters for the create or update operation",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EvidenceResource"
+            },
+            "x-ms-client-name": "properties"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'EvidenceResource' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/EvidenceResource"
+            }
+          },
+          "201": {
+            "description": "Resource 'EvidenceResource' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/EvidenceResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Evidence_CreateOrUpdate": {
+            "$ref": "./examples/Evidence_CreateOrUpdate.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "Evidence_Delete",
+        "tags": [
+          "AppComplianceAutomation"
+        ],
+        "description": "Delete an existent evidence from a specified report",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "reportName",
+            "in": "path",
+            "description": "Report Name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[-a-zA-Z0-9_]{1,50}$"
+          },
+          {
+            "name": "evidenceName",
+            "in": "path",
+            "description": "The evidence name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-_.]+$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Evidence_Delete": {
+            "$ref": "./examples/Evidence_Delete.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.AppComplianceAutomation/reports/{reportName}/evidences/{evidenceName}/download": {
+      "post": {
+        "operationId": "Evidence_Download",
+        "tags": [
+          "AppComplianceAutomation"
+        ],
+        "description": "Download evidence file.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "reportName",
+            "in": "path",
+            "description": "Report Name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[-a-zA-Z0-9_]{1,50}$"
+          },
+          {
+            "name": "evidenceName",
+            "in": "path",
+            "description": "The evidence name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-_.]+$"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Parameters for the query operation",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EvidenceFileDownloadRequest"
+            },
+            "x-ms-client-name": "body"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/EvidenceFileDownloadResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Evidence_Download": {
+            "$ref": "./examples/Evidence_Download.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.AppComplianceAutomation/reports/{reportName}/fix": {
+      "post": {
+        "operationId": "Report_Fix",
+        "tags": [
+          "AppComplianceAutomation"
+        ],
+        "description": "Fix the AppComplianceAutomation report error. e.g: App Compliance Automation Tool service unregistered, automation removed.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "reportName",
+            "in": "path",
+            "description": "Report Name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[-a-zA-Z0-9_]{1,50}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ReportFixResult"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Report_Fix": {
+            "$ref": "./examples/Report_Fix.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/providers/Microsoft.AppComplianceAutomation/reports/{reportName}/getScopingQuestions": {
+      "post": {
+        "operationId": "Report_GetScopingQuestions",
+        "tags": [
+          "AppComplianceAutomation"
+        ],
+        "description": "Fix the AppComplianceAutomation report error. e.g: App Compliance Automation Tool service unregistered, automation removed.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "reportName",
+            "in": "path",
+            "description": "Report Name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[-a-zA-Z0-9_]{1,50}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ScopingQuestions"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Report_GetScopingQuestions": {
+            "$ref": "./examples/Report_GetScopingQuestions.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.AppComplianceAutomation/reports/{reportName}/scopingConfigurations": {
+      "get": {
+        "operationId": "ScopingConfiguration_List",
+        "tags": [
+          "AppComplianceAutomation"
+        ],
+        "description": "Returns a list format of the singleton scopingConfiguration for a specified report.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "reportName",
+            "in": "path",
+            "description": "Report Name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[-a-zA-Z0-9_]{1,50}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ScopingConfigurationResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ScopingConfiguration_List": {
+            "$ref": "./examples/ScopingConfiguration_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.AppComplianceAutomation/reports/{reportName}/scopingConfigurations/{scopingConfigurationName}": {
+      "get": {
+        "operationId": "ScopingConfiguration_Get",
+        "tags": [
+          "AppComplianceAutomation"
+        ],
+        "description": "Get the AppComplianceAutomation scoping configuration of the specific report.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "reportName",
+            "in": "path",
+            "description": "Report Name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[-a-zA-Z0-9_]{1,50}$"
+          },
+          {
+            "name": "scopingConfigurationName",
+            "in": "path",
+            "description": "The scoping configuration of the specific report.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ScopingConfigurationResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ScopingConfiguration": {
+            "$ref": "./examples/ScopingConfiguration_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "ScopingConfiguration_CreateOrUpdate",
+        "tags": [
+          "AppComplianceAutomation"
+        ],
+        "description": "Get the AppComplianceAutomation scoping configuration of the specific report.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "reportName",
+            "in": "path",
+            "description": "Report Name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[-a-zA-Z0-9_]{1,50}$"
+          },
+          {
+            "name": "scopingConfigurationName",
+            "in": "path",
+            "description": "The scoping configuration of the specific report.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_]*$"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Parameters for the create or update operation, this is a singleton resource, so please make sure you're using 'default' as the name.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ScopingConfigurationResource"
+            },
+            "x-ms-client-name": "properties"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'ScopingConfigurationResource' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ScopingConfigurationResource"
+            }
+          },
+          "201": {
+            "description": "Resource 'ScopingConfigurationResource' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ScopingConfigurationResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ScopingConfiguration_CreateOrUpdate": {
+            "$ref": "./examples/ScopingConfiguration_CreateOrUpdate.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "ScopingConfiguration_Delete",
+        "tags": [
+          "AppComplianceAutomation"
+        ],
+        "description": "Clean the AppComplianceAutomation scoping configuration of the specific report.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "reportName",
+            "in": "path",
+            "description": "Report Name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[-a-zA-Z0-9_]{1,50}$"
+          },
+          {
+            "name": "scopingConfigurationName",
+            "in": "path",
+            "description": "The scoping configuration of the specific report.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ScopingConfiguration_Delete": {
+            "$ref": "./examples/ScopingConfiguration_Delete.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.AppComplianceAutomation/reports/{reportName}/snapshots": {
+      "get": {
+        "operationId": "Snapshot_List",
+        "tags": [
+          "AppComplianceAutomation"
+        ],
+        "description": "Get the AppComplianceAutomation snapshot list.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/QueryParameters.skipToken"
+          },
+          {
+            "$ref": "#/parameters/QueryParameters.top"
+          },
+          {
+            "$ref": "#/parameters/QueryParameters.select"
+          },
+          {
+            "$ref": "#/parameters/QueryParameters.filter"
+          },
+          {
+            "$ref": "#/parameters/QueryParameters.orderby"
+          },
+          {
+            "$ref": "#/parameters/QueryParameters.offerGuid"
+          },
+          {
+            "$ref": "#/parameters/QueryParameters.reportCreatorTenantId"
+          },
+          {
+            "name": "reportName",
+            "in": "path",
+            "description": "Report Name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[-a-zA-Z0-9_]{1,50}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SnapshotResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Snapshot_List": {
+            "$ref": "./examples/Snapshot_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.AppComplianceAutomation/reports/{reportName}/snapshots/{snapshotName}": {
+      "get": {
+        "operationId": "Snapshot_Get",
+        "tags": [
+          "AppComplianceAutomation"
+        ],
+        "description": "Get the AppComplianceAutomation snapshot and its properties.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "reportName",
+            "in": "path",
+            "description": "Report Name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[-a-zA-Z0-9_]{1,50}$"
+          },
+          {
+            "name": "snapshotName",
+            "in": "path",
+            "description": "Snapshot Name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-_]{1,64}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SnapshotResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Snapshot_Get": {
+            "$ref": "./examples/Snapshot_Get.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.AppComplianceAutomation/reports/{reportName}/snapshots/{snapshotName}/download": {
+      "post": {
+        "operationId": "Snapshot_Download",
+        "tags": [
+          "AppComplianceAutomation"
+        ],
+        "description": "Download compliance needs from snapshot, like: Compliance Report, Resource List.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "reportName",
+            "in": "path",
+            "description": "Report Name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[-a-zA-Z0-9_]{1,50}$"
+          },
+          {
+            "name": "snapshotName",
+            "in": "path",
+            "description": "Snapshot Name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-_]{1,64}$"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Parameters for the query operation",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SnapshotDownloadRequest"
+            },
+            "x-ms-client-name": "body"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DownloadResponse"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Snapshot_Download_ComplianceDetailedPdfReport": {
+            "$ref": "./examples/Snapshot_Download_Snapshot_Download_Compliance_Detailed_Pdf_Report.json"
+          },
+          "Snapshot_Download_CompliancePdfReport": {
+            "$ref": "./examples/Snapshot_Download_Snapshot_Download_Compliance_Pdf_Report.json"
+          },
+          "Snapshot_Download_ComplianceReport": {
+            "$ref": "./examples/Snapshot_Download_Snapshot_Download_Compliance_Report.json"
+          },
+          "Snapshot_Download_ResourceList": {
+            "$ref": "./examples/Snapshot_Download_Snapshot_Download_Resource_List.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/providers/Microsoft.AppComplianceAutomation/reports/{reportName}/syncCertRecord": {
+      "post": {
+        "operationId": "Report_SyncCertRecord",
+        "tags": [
+          "AppComplianceAutomation"
+        ],
+        "description": "Synchronize attestation record from app compliance.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "reportName",
+            "in": "path",
+            "description": "Report Name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[-a-zA-Z0-9_]{1,50}$"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Parameters for synchronize certification record operation",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SyncCertRecordRequest"
+            },
+            "x-ms-client-name": "body"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SyncCertRecordResponse"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Report_SyncCertRecord": {
+            "$ref": "./examples/Report_SyncCertRecord.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/providers/Microsoft.AppComplianceAutomation/reports/{reportName}/verify": {
+      "post": {
+        "operationId": "Report_Verify",
+        "tags": [
+          "AppComplianceAutomation"
+        ],
+        "description": "Verify the AppComplianceAutomation report health status.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "reportName",
+            "in": "path",
+            "description": "Report Name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[-a-zA-Z0-9_]{1,50}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ReportVerificationResult"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Report_Verify": {
+            "$ref": "./examples/Report_Verify.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/providers/Microsoft.AppComplianceAutomation/reports/{reportName}/webhooks": {
+      "get": {
+        "operationId": "Webhook_List",
+        "tags": [
+          "AppComplianceAutomation"
+        ],
+        "description": "Get the AppComplianceAutomation webhook list.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/QueryParameters.skipToken"
+          },
+          {
+            "$ref": "#/parameters/QueryParameters.top"
+          },
+          {
+            "$ref": "#/parameters/QueryParameters.select"
+          },
+          {
+            "$ref": "#/parameters/QueryParameters.filter"
+          },
+          {
+            "$ref": "#/parameters/QueryParameters.orderby"
+          },
+          {
+            "$ref": "#/parameters/QueryParameters.offerGuid"
+          },
+          {
+            "$ref": "#/parameters/QueryParameters.reportCreatorTenantId"
+          },
+          {
+            "name": "reportName",
+            "in": "path",
+            "description": "Report Name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[-a-zA-Z0-9_]{1,50}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/WebhookResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Webhook_List": {
+            "$ref": "./examples/Webhook_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.AppComplianceAutomation/reports/{reportName}/webhooks/{webhookName}": {
+      "get": {
+        "operationId": "Webhook_Get",
+        "tags": [
+          "AppComplianceAutomation"
+        ],
+        "description": "Get the AppComplianceAutomation webhook and its properties.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "reportName",
+            "in": "path",
+            "description": "Report Name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[-a-zA-Z0-9_]{1,50}$"
+          },
+          {
+            "name": "webhookName",
+            "in": "path",
+            "description": "Webhook Name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[-a-zA-Z0-9_]{1,50}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/WebhookResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Webhook_Get": {
+            "$ref": "./examples/Webhook_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Webhook_CreateOrUpdate",
+        "tags": [
+          "AppComplianceAutomation"
+        ],
+        "description": "Create a new AppComplianceAutomation webhook or update an exiting AppComplianceAutomation webhook.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "reportName",
+            "in": "path",
+            "description": "Report Name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[-a-zA-Z0-9_]{1,50}$"
+          },
+          {
+            "name": "webhookName",
+            "in": "path",
+            "description": "Webhook Name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[-a-zA-Z0-9_]{1,50}$"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Parameters for the create or update operation",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/WebhookResource"
+            },
+            "x-ms-client-name": "properties"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'WebhookResource' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/WebhookResource"
+            }
+          },
+          "201": {
+            "description": "Resource 'WebhookResource' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/WebhookResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Webhook_CreateOrUpdate": {
+            "$ref": "./examples/Webhook_CreateOrUpdate.json"
+          }
+        }
+      },
+      "patch": {
+        "operationId": "Webhook_Update",
+        "tags": [
+          "AppComplianceAutomation"
+        ],
+        "description": "Update an exiting AppComplianceAutomation webhook.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "reportName",
+            "in": "path",
+            "description": "Report Name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[-a-zA-Z0-9_]{1,50}$"
+          },
+          {
+            "name": "webhookName",
+            "in": "path",
+            "description": "Webhook Name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[-a-zA-Z0-9_]{1,50}$"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Parameters for the create or update operation",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/WebhookResourcePatch"
+            },
+            "x-ms-client-name": "properties"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/WebhookResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Webhook_Update": {
+            "$ref": "./examples/Webhook_Update.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "Webhook_Delete",
+        "tags": [
+          "AppComplianceAutomation"
+        ],
+        "description": "Delete an AppComplianceAutomation webhook.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "reportName",
+            "in": "path",
+            "description": "Report Name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[-a-zA-Z0-9_]{1,50}$"
+          },
+          {
+            "name": "webhookName",
+            "in": "path",
+            "description": "Webhook Name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[-a-zA-Z0-9_]{1,50}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Webhook_Delete": {
+            "$ref": "./examples/Webhook_Delete.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.AppComplianceAutomation/triggerEvaluation": {
+      "post": {
+        "operationId": "ProviderActions_TriggerEvaluation",
+        "tags": [
+          "AppComplianceAutomation"
+        ],
+        "description": "Trigger quick evaluation for the given subscriptions.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TriggerEvaluationRequest"
+            },
+            "x-ms-client-name": "body"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/TriggerEvaluationResponse"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "TriggerEvaluation": {
+            "$ref": "./examples/TriggerEvaluation.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "Category": {
+      "type": "object",
+      "description": "A class represent the compliance category.",
+      "properties": {
+        "categoryName": {
+          "type": "string",
+          "description": "The name of the compliance category. e.g. \"Operational Security\"",
+          "readOnly": true
+        },
+        "categoryStatus": {
+          "$ref": "#/definitions/CategoryStatus",
+          "description": "Category status.",
+          "readOnly": true
+        },
+        "controlFamilies": {
+          "type": "array",
+          "description": "List of control families.",
+          "items": {
+            "$ref": "#/definitions/ControlFamily"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "controlFamilyName"
+          ]
+        }
+      }
+    },
+    "CategoryStatus": {
+      "type": "string",
+      "description": "Indicates the category status.",
+      "enum": [
+        "Passed",
+        "Failed",
+        "NotApplicable",
+        "PendingApproval"
+      ],
+      "x-ms-enum": {
+        "name": "CategoryStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Passed",
+            "value": "Passed",
+            "description": "The category is passed."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "The category is failed."
+          },
+          {
+            "name": "NotApplicable",
+            "value": "NotApplicable",
+            "description": "The category is not applicable."
+          },
+          {
+            "name": "PendingApproval",
+            "value": "PendingApproval",
+            "description": "The category is pending for approval."
+          }
+        ]
+      }
+    },
+    "CertSyncRecord": {
+      "type": "object",
+      "description": "A class represent the certification record synchronized from app compliance.",
+      "properties": {
+        "offerGuid": {
+          "type": "string",
+          "description": "The offerGuid which mapping to the reports.",
+          "minLength": 1
+        },
+        "certificationStatus": {
+          "type": "string",
+          "description": "Indicates the status of certification process."
+        },
+        "ingestionStatus": {
+          "type": "string",
+          "description": "Indicates the status of compliance process."
+        },
+        "controls": {
+          "type": "array",
+          "description": "The control records list to be synchronized.",
+          "items": {
+            "$ref": "#/definitions/ControlSyncRecord"
+          },
+          "x-ms-identifiers": [
+            "controlId"
+          ]
+        }
+      }
+    },
+    "ComplianceReportItem": {
+      "type": "object",
+      "description": "Object that includes all the content for single compliance result.",
+      "properties": {
+        "categoryName": {
+          "type": "string",
+          "description": "The category name.",
+          "readOnly": true
+        },
+        "controlFamilyName": {
+          "type": "string",
+          "description": "The control family name.",
+          "readOnly": true
+        },
+        "controlId": {
+          "type": "string",
+          "description": "The control Id - e.g. \"1\".",
+          "readOnly": true
+        },
+        "controlName": {
+          "type": "string",
+          "description": "The control name.",
+          "readOnly": true
+        },
+        "controlStatus": {
+          "$ref": "#/definitions/ControlStatus",
+          "description": "Control status.",
+          "readOnly": true
+        },
+        "responsibilityTitle": {
+          "type": "string",
+          "description": "The title of the customer responsibility.",
+          "readOnly": true
+        },
+        "responsibilityDescription": {
+          "type": "string",
+          "description": "The description of the customer responsibility.",
+          "readOnly": true
+        },
+        "resourceId": {
+          "type": "string",
+          "description": "The Id of the resource.",
+          "readOnly": true
+        },
+        "resourceType": {
+          "type": "string",
+          "description": "The type of the resource.  e.g. \"Microsoft.SignalRService/SignalR\"",
+          "readOnly": true
+        },
+        "resourceOrigin": {
+          "$ref": "#/definitions/ResourceOrigin",
+          "description": "Resource origin.",
+          "readOnly": true
+        },
+        "resourceStatus": {
+          "$ref": "#/definitions/ResourceStatus",
+          "description": "Resource status.",
+          "readOnly": true
+        },
+        "resourceStatusChangeDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The status change date for the resource.",
+          "readOnly": true
+        }
+      }
+    },
+    "ComplianceResult": {
+      "type": "object",
+      "description": "A class represent the compliance result.",
+      "properties": {
+        "complianceName": {
+          "type": "string",
+          "description": "The name of the compliance. e.g. \"M365\"",
+          "readOnly": true
+        },
+        "categories": {
+          "type": "array",
+          "description": "List of categories.",
+          "items": {
+            "$ref": "#/definitions/Category"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "categoryName"
+          ]
+        }
+      }
+    },
+    "ContentType": {
+      "type": "string",
+      "description": "content type",
+      "enum": [
+        "application/json"
+      ],
+      "x-ms-enum": {
+        "name": "ContentType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ApplicationJson",
+            "value": "application/json",
+            "description": "The content type is application/json."
+          }
+        ]
+      }
+    },
+    "Control": {
+      "type": "object",
+      "description": "A class represent the control.",
+      "properties": {
+        "controlId": {
+          "type": "string",
+          "description": "The Id of the control. e.g. \"Operational_Security_10\"",
+          "readOnly": true
+        },
+        "controlName": {
+          "type": "string",
+          "description": "The name of the control. e.g. \"Unsupported OS and Software.\"",
+          "readOnly": true
+        },
+        "controlFullName": {
+          "type": "string",
+          "description": "The full name of the control. e.g. \"Validate that unsupported operating systems and software components are not in use.\"",
+          "readOnly": true
+        },
+        "controlDescription": {
+          "type": "string",
+          "description": "The control's description",
+          "readOnly": true
+        },
+        "controlDescriptionHyperLink": {
+          "type": "string",
+          "description": "The hyper link to the control's description'.",
+          "readOnly": true
+        },
+        "controlStatus": {
+          "$ref": "#/definitions/ControlStatus",
+          "description": "Control status.",
+          "readOnly": true
+        },
+        "responsibilities": {
+          "type": "array",
+          "description": "List of customer responsibility.",
+          "items": {
+            "$ref": "#/definitions/Responsibility"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "responsibilityId"
+          ]
+        }
+      }
+    },
+    "ControlFamily": {
+      "type": "object",
+      "description": "A class represent the control family.",
+      "properties": {
+        "controlFamilyName": {
+          "type": "string",
+          "description": "The name of the control family. e.g. \"Malware Protection - Anti-Virus\"",
+          "readOnly": true
+        },
+        "controlFamilyStatus": {
+          "$ref": "#/definitions/ControlFamilyStatus",
+          "description": "The control family status",
+          "readOnly": true
+        },
+        "controls": {
+          "type": "array",
+          "description": "List of controls.",
+          "items": {
+            "$ref": "#/definitions/Control"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "controlId"
+          ]
+        }
+      }
+    },
+    "ControlFamilyStatus": {
+      "type": "string",
+      "description": "Indicates the control family status.",
+      "enum": [
+        "Passed",
+        "Failed",
+        "NotApplicable",
+        "PendingApproval"
+      ],
+      "x-ms-enum": {
+        "name": "ControlFamilyStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Passed",
+            "value": "Passed",
+            "description": "The control family is passed."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "The control family is failed."
+          },
+          {
+            "name": "NotApplicable",
+            "value": "NotApplicable",
+            "description": "The control family is not applicable."
+          },
+          {
+            "name": "PendingApproval",
+            "value": "PendingApproval",
+            "description": "The control family is pending for approval."
+          }
+        ]
+      }
+    },
+    "ControlStatus": {
+      "type": "string",
+      "description": "Indicates the control status.",
+      "enum": [
+        "Passed",
+        "Failed",
+        "NotApplicable",
+        "PendingApproval"
+      ],
+      "x-ms-enum": {
+        "name": "ControlStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Passed",
+            "value": "Passed",
+            "description": "The control is passed."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "The control is failed."
+          },
+          {
+            "name": "NotApplicable",
+            "value": "NotApplicable",
+            "description": "The control is not applicable."
+          },
+          {
+            "name": "PendingApproval",
+            "value": "PendingApproval",
+            "description": "The control is pending for approval."
+          }
+        ]
+      }
+    },
+    "ControlSyncRecord": {
+      "type": "object",
+      "description": "A class represent the control record synchronized from app compliance.",
+      "properties": {
+        "controlId": {
+          "type": "string",
+          "description": "The Id of the control. e.g. \"Operational_Security_10\""
+        },
+        "controlStatus": {
+          "type": "string",
+          "description": "Control status synchronized from app compliance."
+        }
+      }
+    },
+    "DeliveryStatus": {
+      "type": "string",
+      "description": "webhook deliveryStatus",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "NotStarted"
+      ],
+      "x-ms-enum": {
+        "name": "DeliveryStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "The webhook is delivered successfully."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "The webhook is failed to deliver."
+          },
+          {
+            "name": "NotStarted",
+            "value": "NotStarted",
+            "description": "The webhook is not delivered."
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "DownloadResponse": {
+      "type": "object",
+      "description": "Object that includes all the possible response for the download operation.",
+      "properties": {
+        "resourceList": {
+          "type": "array",
+          "description": "Resource list of the report",
+          "items": {
+            "$ref": "#/definitions/ResourceItem"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "resourceId"
+          ]
+        },
+        "complianceReport": {
+          "type": "array",
+          "description": "List of the compliance result",
+          "items": {
+            "$ref": "#/definitions/ComplianceReportItem"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "controlId"
+          ]
+        },
+        "compliancePdfReport": {
+          "$ref": "#/definitions/DownloadResponseCompliancePdfReport",
+          "description": "Compliance pdf report",
+          "readOnly": true
+        },
+        "complianceDetailedPdfReport": {
+          "$ref": "#/definitions/DownloadResponseComplianceDetailedPdfReport",
+          "description": "The detailed compliance pdf report",
+          "readOnly": true
+        }
+      }
+    },
+    "DownloadResponseComplianceDetailedPdfReport": {
+      "type": "object",
+      "description": "The detailed compliance pdf report",
+      "properties": {
+        "sasUri": {
+          "type": "string",
+          "description": "The uri of detailed compliance pdf report",
+          "readOnly": true
+        }
+      }
+    },
+    "DownloadResponseCompliancePdfReport": {
+      "type": "object",
+      "description": "Compliance pdf report",
+      "properties": {
+        "sasUri": {
+          "type": "string",
+          "description": "The uri of compliance pdf report",
+          "readOnly": true
+        }
+      }
+    },
+    "DownloadType": {
+      "type": "string",
+      "description": "Indicates the download type.",
+      "enum": [
+        "ComplianceReport",
+        "CompliancePdfReport",
+        "ComplianceDetailedPdfReport",
+        "ResourceList"
+      ],
+      "x-ms-enum": {
+        "name": "DownloadType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ComplianceReport",
+            "value": "ComplianceReport",
+            "description": "Download the compliance report."
+          },
+          {
+            "name": "CompliancePdfReport",
+            "value": "CompliancePdfReport",
+            "description": "Download the compliance pdf report."
+          },
+          {
+            "name": "ComplianceDetailedPdfReport",
+            "value": "ComplianceDetailedPdfReport",
+            "description": "Download the detailed compliance pdf report."
+          },
+          {
+            "name": "ResourceList",
+            "value": "ResourceList",
+            "description": "Download the resource list of the report."
+          }
+        ]
+      }
+    },
+    "EnableSslVerification": {
+      "type": "string",
+      "description": "whether to enable ssl verification",
+      "enum": [
+        "true",
+        "false"
+      ],
+      "x-ms-enum": {
+        "name": "EnableSslVerification",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "True",
+            "value": "true",
+            "description": "The ssl verification is enabled."
+          },
+          {
+            "name": "False",
+            "value": "false",
+            "description": "The ssl verification is not enabled."
+          }
+        ]
+      }
+    },
+    "EvidenceFileDownloadRequest": {
+      "type": "object",
+      "description": "Evidence file's download request.",
+      "properties": {
+        "reportCreatorTenantId": {
+          "type": "string",
+          "description": "Tenant id."
+        },
+        "offerGuid": {
+          "type": "string",
+          "description": "The offerGuid which mapping to the reports.",
+          "minLength": 1
+        }
+      }
+    },
+    "EvidenceFileDownloadResponse": {
+      "type": "object",
+      "description": "Object that includes all the possible response for the evidence file download operation.",
+      "properties": {
+        "evidenceFile": {
+          "$ref": "#/definitions/EvidenceFileDownloadResponseEvidenceFile",
+          "description": "The uri of evidence file",
+          "readOnly": true
+        }
+      }
+    },
+    "EvidenceFileDownloadResponseEvidenceFile": {
+      "type": "object",
+      "description": "The uri of evidence file",
+      "properties": {
+        "url": {
+          "type": "string",
+          "description": "The url of evidence file",
+          "readOnly": true
+        }
+      }
+    },
+    "EvidenceProperties": {
+      "type": "object",
+      "description": "Evidence's properties.",
+      "properties": {
+        "evidenceType": {
+          "$ref": "#/definitions/EvidenceType",
+          "description": "Evidence type."
+        },
+        "filePath": {
+          "type": "string",
+          "description": "The path of the file in storage."
+        },
+        "extraData": {
+          "type": "string",
+          "description": "Extra data considered as evidence."
+        },
+        "controlId": {
+          "type": "string",
+          "description": "Control id."
+        },
+        "responsibilityId": {
+          "type": "string",
+          "description": "Responsibility id."
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Azure lifecycle management",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "filePath"
+      ]
+    },
+    "EvidenceResource": {
+      "type": "object",
+      "description": "A class represent an AppComplianceAutomation evidence resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/EvidenceProperties",
+          "description": "Evidence property.",
+          "x-ms-client-flatten": true,
+          "x-ms-client-name": "properties"
+        }
+      },
+      "required": [
+        "properties"
+      ],
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "EvidenceResourceListResult": {
+      "type": "object",
+      "description": "The response of a EvidenceResource list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The EvidenceResource items on this page",
+          "items": {
+            "$ref": "#/definitions/EvidenceResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "EvidenceType": {
+      "type": "string",
+      "description": "Evidence type",
+      "enum": [
+        "File",
+        "AutoCollectedEvidence",
+        "Data"
+      ],
+      "x-ms-enum": {
+        "name": "EvidenceType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "File",
+            "value": "File",
+            "description": "The evidence is a file."
+          },
+          {
+            "name": "AutoCollectedEvidence",
+            "value": "AutoCollectedEvidence",
+            "description": "The evidence auto collected by App Compliance Automation."
+          },
+          {
+            "name": "Data",
+            "value": "Data",
+            "description": "The evidence is data."
+          }
+        ]
+      }
+    },
+    "GetCollectionCountRequest": {
+      "type": "object",
+      "description": "Get collection count's request object.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The resource type."
+        }
+      }
+    },
+    "GetCollectionCountResponse": {
+      "type": "object",
+      "description": "The get collection count response.",
+      "properties": {
+        "count": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The count of the specified resource."
+        }
+      }
+    },
+    "GetOverviewStatusRequest": {
+      "type": "object",
+      "description": "Get overview status request object.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The resource type."
+        }
+      }
+    },
+    "GetOverviewStatusResponse": {
+      "type": "object",
+      "description": "The get overview status response.",
+      "properties": {
+        "statusList": {
+          "type": "array",
+          "description": "List of different status items.",
+          "items": {
+            "$ref": "#/definitions/StatusItem"
+          },
+          "x-ms-identifiers": [
+            "statusName"
+          ]
+        }
+      }
+    },
+    "InputType": {
+      "type": "string",
+      "description": "Question input type.",
+      "enum": [
+        "None",
+        "Text",
+        "Email",
+        "MultilineText",
+        "Url",
+        "Number",
+        "Boolean",
+        "Telephone",
+        "YesNoNa",
+        "Date",
+        "YearPicker",
+        "SingleSelection",
+        "SingleSelectDropdown",
+        "MultiSelectCheckbox",
+        "MultiSelectDropdown",
+        "MultiSelectDropdownCustom",
+        "Group",
+        "Upload"
+      ],
+      "x-ms-enum": {
+        "name": "InputType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "None",
+            "value": "None",
+            "description": "The input type is a text box."
+          },
+          {
+            "name": "Text",
+            "value": "Text",
+            "description": "The input content is text string."
+          },
+          {
+            "name": "Email",
+            "value": "Email",
+            "description": "The input content should be an email address."
+          },
+          {
+            "name": "MultilineText",
+            "value": "MultilineText",
+            "description": "The input content should be multiline text."
+          },
+          {
+            "name": "Url",
+            "value": "Url",
+            "description": "The input content should be a URL."
+          },
+          {
+            "name": "Number",
+            "value": "Number",
+            "description": "The input content should be a number."
+          },
+          {
+            "name": "Boolean",
+            "value": "Boolean",
+            "description": "The input content should be a boolean."
+          },
+          {
+            "name": "Telephone",
+            "value": "Telephone",
+            "description": "The input content should be a telephone number."
+          },
+          {
+            "name": "YesNoNa",
+            "value": "YesNoNa",
+            "description": "The input content should be Yes, No or Na."
+          },
+          {
+            "name": "Date",
+            "value": "Date",
+            "description": "The input content should be a date."
+          },
+          {
+            "name": "YearPicker",
+            "value": "YearPicker",
+            "description": "The input content is a Year, pick from the dropdown list."
+          },
+          {
+            "name": "SingleSelection",
+            "value": "SingleSelection",
+            "description": "The input content is a single result seleted from the options."
+          },
+          {
+            "name": "SingleSelectDropdown",
+            "value": "SingleSelectDropdown",
+            "description": "The input content is a single result seleted from the dropdown options."
+          },
+          {
+            "name": "MultiSelectCheckbox",
+            "value": "MultiSelectCheckbox",
+            "description": "The input content are multiple results seleted from the checkboxes."
+          },
+          {
+            "name": "MultiSelectDropdown",
+            "value": "MultiSelectDropdown",
+            "description": "The input content are multiple results seleted from the dropdown options."
+          },
+          {
+            "name": "MultiSelectDropdownCustom",
+            "value": "MultiSelectDropdownCustom",
+            "description": "The input content are result seleted from the custom dropdown options."
+          },
+          {
+            "name": "Group",
+            "value": "Group",
+            "description": "The input content is a group of answers."
+          },
+          {
+            "name": "Upload",
+            "value": "Upload",
+            "description": "The input content is a uploaded file."
+          }
+        ]
+      }
+    },
+    "IsRecommendSolution": {
+      "type": "string",
+      "description": "Indicates whether this solution is the recommended.",
+      "enum": [
+        "true",
+        "false"
+      ],
+      "x-ms-enum": {
+        "name": "IsRecommendSolution",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "True",
+            "value": "true",
+            "description": "This solution is the recommended."
+          },
+          {
+            "name": "False",
+            "value": "false",
+            "description": "This solution is not the recommended."
+          }
+        ]
+      }
+    },
+    "ListInUseStorageAccountsRequest": {
+      "type": "object",
+      "description": "Parameters for listing in use storage accounts operation. If subscription list is null, it will check the user's all subscriptions.",
+      "properties": {
+        "subscriptionIds": {
+          "type": "array",
+          "description": "List of subscription ids to be query. If the list is null or empty, the API will query all the subscriptions of the user.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ListInUseStorageAccountsResponse": {
+      "type": "object",
+      "description": "Parameters for listing in use storage accounts operation. If subscription list is null, it will check the user's all subscriptions.",
+      "properties": {
+        "storageAccountList": {
+          "type": "array",
+          "description": "The storage account list which in use in related reports.",
+          "items": {
+            "$ref": "#/definitions/StorageInfo"
+          },
+          "x-ms-identifiers": [
+            "accountName"
+          ]
+        }
+      }
+    },
+    "NotificationEvent": {
+      "type": "string",
+      "description": "notification event.",
+      "enum": [
+        "generate_snapshot_success",
+        "generate_snapshot_failed",
+        "assessment_failure",
+        "report_configuration_changes",
+        "report_deletion"
+      ],
+      "x-ms-enum": {
+        "name": "NotificationEvent",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "generate_snapshot_success",
+            "value": "generate_snapshot_success",
+            "description": "The subscribed report's snapshot is successfully generated."
+          },
+          {
+            "name": "generate_snapshot_failed",
+            "value": "generate_snapshot_failed",
+            "description": "The subscribed report's snapshot is failed to generate."
+          },
+          {
+            "name": "assessment_failure",
+            "value": "assessment_failure",
+            "description": "The subscribed report failed while collecting the assessments."
+          },
+          {
+            "name": "report_configuration_changes",
+            "value": "report_configuration_changes",
+            "description": "The subscribed report's configuration is changed."
+          },
+          {
+            "name": "report_deletion",
+            "value": "report_deletion",
+            "description": "The subscribed report is deleted."
+          }
+        ]
+      }
+    },
+    "OnboardRequest": {
+      "type": "object",
+      "description": "Parameters for onboard operation",
+      "properties": {
+        "subscriptionIds": {
+          "type": "array",
+          "description": "List of subscription ids to be onboarded",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "subscriptionIds"
+      ]
+    },
+    "OnboardResponse": {
+      "type": "object",
+      "description": "Success. The response indicates given subscriptions has been onboarded.",
+      "properties": {
+        "subscriptionIds": {
+          "type": "array",
+          "description": "List of subscription ids that are onboarded",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "OverviewStatus": {
+      "type": "object",
+      "description": "The overview of the compliance result for one report.",
+      "properties": {
+        "passedCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The count of all passed control.",
+          "readOnly": true
+        },
+        "failedCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The count of all failed control.",
+          "readOnly": true
+        },
+        "manualCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The count of all manual control.",
+          "readOnly": true
+        },
+        "notApplicableCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The count of all not applicable control.",
+          "readOnly": true
+        },
+        "pendingCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The count of all pending for approval control.",
+          "readOnly": true
+        }
+      }
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "Resource provisioning states.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Creating",
+        "Deleting",
+        "Fixing",
+        "Verifying",
+        "Updating"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "The provision is succeeded."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "The provision is failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "The provision is canceled."
+          },
+          {
+            "name": "Creating",
+            "value": "Creating",
+            "description": "The creation is in progress."
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "The deletion is in progress."
+          },
+          {
+            "name": "Fixing",
+            "value": "Fixing",
+            "description": "The fix of the resource in progress."
+          },
+          {
+            "name": "Verifying",
+            "value": "Verifying",
+            "description": "The verification of the resource in progress."
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "The update of the resource in progress."
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "QuickAssessment": {
+      "type": "object",
+      "description": "A class represent the quick assessment.",
+      "properties": {
+        "resourceId": {
+          "type": "string",
+          "description": "Resource id.",
+          "readOnly": true
+        },
+        "responsibilityId": {
+          "type": "string",
+          "description": "Responsibility id.",
+          "readOnly": true
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp of resource creation (UTC).",
+          "readOnly": true
+        },
+        "resourceStatus": {
+          "$ref": "#/definitions/ResourceStatus",
+          "description": "Quick assessment status.",
+          "readOnly": true
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Quick assessment display name.",
+          "readOnly": true
+        },
+        "description": {
+          "type": "string",
+          "description": "Quick assessment display name.",
+          "readOnly": true
+        },
+        "remediationLink": {
+          "type": "string",
+          "description": "Link to remediation steps for this quick assessment.",
+          "readOnly": true
+        }
+      }
+    },
+    "Recommendation": {
+      "type": "object",
+      "description": "A class represent the recommendation.",
+      "properties": {
+        "recommendationId": {
+          "type": "string",
+          "description": "The Id of the recommendation.",
+          "readOnly": true
+        },
+        "recommendationShortName": {
+          "type": "string",
+          "description": "The short name of the recommendation. e.g. \"Invalid TLS config\"",
+          "readOnly": true
+        },
+        "recommendationSolutions": {
+          "type": "array",
+          "description": "List of recommendation solutions.",
+          "items": {
+            "$ref": "#/definitions/RecommendationSolution"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "recommendationSolutionIndex"
+          ]
+        }
+      }
+    },
+    "RecommendationSolution": {
+      "type": "object",
+      "description": "A class represent the recommendation solution.",
+      "properties": {
+        "recommendationSolutionIndex": {
+          "type": "string",
+          "description": "The index of the recommendation solution.",
+          "readOnly": true
+        },
+        "recommendationSolutionContent": {
+          "type": "string",
+          "description": "The detail steps of the recommendation solution.",
+          "readOnly": true
+        },
+        "isRecommendSolution": {
+          "$ref": "#/definitions/IsRecommendSolution",
+          "description": "Indicates whether this solution is the recommended.",
+          "readOnly": true
+        }
+      }
+    },
+    "ReportComplianceStatus": {
+      "type": "object",
+      "description": "A list which includes all the compliance result for one report.",
+      "properties": {
+        "m365": {
+          "$ref": "#/definitions/OverviewStatus",
+          "description": "The Microsoft 365 certification name.",
+          "readOnly": true
+        }
+      }
+    },
+    "ReportFixResult": {
+      "type": "object",
+      "description": "Report fix result.",
+      "properties": {
+        "result": {
+          "$ref": "#/definitions/Result",
+          "description": "Indicates whether the fix action is Succeeded or Failed.",
+          "readOnly": true
+        },
+        "reason": {
+          "type": "string",
+          "description": "If the report fix action failed, to indicate the detailed failed reason.",
+          "readOnly": true
+        }
+      }
+    },
+    "ReportPatchProperties": {
+      "type": "object",
+      "description": "Patch Report's properties.",
+      "properties": {
+        "triggerTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Report collection trigger time."
+        },
+        "timeZone": {
+          "type": "string",
+          "description": "Report collection trigger time's time zone, the available list can be obtained by executing \"Get-TimeZone -ListAvailable\" in PowerShell.\nAn example of valid timezone id is \"Pacific Standard Time\"."
+        },
+        "resources": {
+          "type": "array",
+          "description": "List of resource data.",
+          "items": {
+            "$ref": "#/definitions/ResourceMetadata"
+          },
+          "x-ms-identifiers": [
+            "resourceId"
+          ]
+        },
+        "status": {
+          "$ref": "#/definitions/ReportStatus",
+          "description": "Report status.",
+          "readOnly": true
+        },
+        "errors": {
+          "type": "array",
+          "description": "List of report error codes.",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "Report's tenant id.",
+          "readOnly": true
+        },
+        "offerGuid": {
+          "type": "string",
+          "description": "A list of comma-separated offerGuids indicates a series of offerGuids that map to the report. For example, \"00000000-0000-0000-0000-000000000001,00000000-0000-0000-0000-000000000002\" and \"00000000-0000-0000-0000-000000000003\"."
+        },
+        "nextTriggerTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Report next collection trigger time.",
+          "readOnly": true
+        },
+        "lastTriggerTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Report last collection trigger time.",
+          "readOnly": true
+        },
+        "subscriptions": {
+          "type": "array",
+          "description": "List of subscription Ids.",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "complianceStatus": {
+          "$ref": "#/definitions/ReportComplianceStatus",
+          "description": "Report compliance status.",
+          "readOnly": true
+        },
+        "storageInfo": {
+          "$ref": "#/definitions/StorageInfo",
+          "description": "The information of 'bring your own storage' binding to the report"
+        },
+        "certRecords": {
+          "type": "array",
+          "description": "List of synchronized certification records.",
+          "items": {
+            "$ref": "#/definitions/CertSyncRecord"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "offerGuid"
+          ]
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Azure lifecycle management",
+          "readOnly": true
+        }
+      }
+    },
+    "ReportProperties": {
+      "type": "object",
+      "description": "Create Report's properties.",
+      "properties": {
+        "triggerTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Report collection trigger time."
+        },
+        "timeZone": {
+          "type": "string",
+          "description": "Report collection trigger time's time zone, the available list can be obtained by executing \"Get-TimeZone -ListAvailable\" in PowerShell.\nAn example of valid timezone id is \"Pacific Standard Time\"."
+        },
+        "resources": {
+          "type": "array",
+          "description": "List of resource data.",
+          "items": {
+            "$ref": "#/definitions/ResourceMetadata"
+          },
+          "x-ms-identifiers": [
+            "resourceId"
+          ]
+        },
+        "status": {
+          "$ref": "#/definitions/ReportStatus",
+          "description": "Report status.",
+          "readOnly": true
+        },
+        "errors": {
+          "type": "array",
+          "description": "List of report error codes.",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "Report's tenant id.",
+          "readOnly": true
+        },
+        "offerGuid": {
+          "type": "string",
+          "description": "A list of comma-separated offerGuids indicates a series of offerGuids that map to the report. For example, \"00000000-0000-0000-0000-000000000001,00000000-0000-0000-0000-000000000002\" and \"00000000-0000-0000-0000-000000000003\"."
+        },
+        "nextTriggerTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Report next collection trigger time.",
+          "readOnly": true
+        },
+        "lastTriggerTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Report last collection trigger time.",
+          "readOnly": true
+        },
+        "subscriptions": {
+          "type": "array",
+          "description": "List of subscription Ids.",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "complianceStatus": {
+          "$ref": "#/definitions/ReportComplianceStatus",
+          "description": "Report compliance status.",
+          "readOnly": true
+        },
+        "storageInfo": {
+          "$ref": "#/definitions/StorageInfo",
+          "description": "The information of 'bring your own storage' binding to the report"
+        },
+        "certRecords": {
+          "type": "array",
+          "description": "List of synchronized certification records.",
+          "items": {
+            "$ref": "#/definitions/CertSyncRecord"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "offerGuid"
+          ]
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Azure lifecycle management",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "triggerTime",
+        "timeZone",
+        "resources"
+      ]
+    },
+    "ReportResource": {
+      "type": "object",
+      "description": "A class represent an AppComplianceAutomation report resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ReportProperties",
+          "description": "Report property.",
+          "x-ms-client-flatten": true,
+          "x-ms-client-name": "properties"
+        }
+      },
+      "required": [
+        "properties"
+      ],
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ReportResourceListResult": {
+      "type": "object",
+      "description": "The response of a ReportResource list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ReportResource items on this page",
+          "items": {
+            "$ref": "#/definitions/ReportResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ReportResourcePatch": {
+      "type": "object",
+      "description": "A class represent a AppComplianceAutomation report resource update properties.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ReportPatchProperties",
+          "description": "Report property."
+        }
+      }
+    },
+    "ReportStatus": {
+      "type": "string",
+      "description": "Report status.",
+      "enum": [
+        "Active",
+        "Failed",
+        "Reviewing",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "ReportStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Active",
+            "value": "Active",
+            "description": "The report is active."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "The report is failed."
+          },
+          {
+            "name": "Reviewing",
+            "value": "Reviewing",
+            "description": "The report is under reviewing."
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "The report is disabled."
+          }
+        ]
+      }
+    },
+    "ReportVerificationResult": {
+      "type": "object",
+      "description": "Report health status verification result.",
+      "properties": {
+        "result": {
+          "$ref": "#/definitions/Result",
+          "description": "Indicates whether the report verification action is Succeeded or Failed.",
+          "readOnly": true
+        },
+        "reason": {
+          "type": "string",
+          "description": "If the report verification action failed, to indicate the detailed failed reason.",
+          "readOnly": true
+        }
+      }
+    },
+    "ResourceItem": {
+      "type": "object",
+      "description": "Resource Id.",
+      "properties": {
+        "subscriptionId": {
+          "type": "string",
+          "description": "The subscription Id of this resource.",
+          "readOnly": true
+        },
+        "resourceGroup": {
+          "type": "string",
+          "description": "The resource group name of this resource.",
+          "readOnly": true
+        },
+        "resourceType": {
+          "type": "string",
+          "description": "The resource type of this resource. e.g. \"Microsoft.SignalRService/SignalR\"",
+          "readOnly": true
+        },
+        "resourceId": {
+          "type": "string",
+          "description": "The resource Id - e.g. \"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Compute/virtualMachines/vm1\".",
+          "readOnly": true
+        }
+      }
+    },
+    "ResourceMetadata": {
+      "type": "object",
+      "description": "Single resource Id's metadata.",
+      "properties": {
+        "resourceId": {
+          "type": "string",
+          "description": "Resource Id - e.g. \"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Compute/virtualMachines/vm1\"."
+        },
+        "resourceType": {
+          "type": "string",
+          "description": "Resource type. e.g. \"Microsoft.Compute/virtualMachines\""
+        },
+        "resourceKind": {
+          "type": "string",
+          "description": "Resource kind."
+        },
+        "resourceOrigin": {
+          "$ref": "#/definitions/ResourceOrigin",
+          "description": "Resource Origin."
+        },
+        "accountId": {
+          "type": "string",
+          "description": "Account Id. For example - the AWS account id."
+        }
+      },
+      "required": [
+        "resourceId"
+      ]
+    },
+    "ResourceOrigin": {
+      "type": "string",
+      "description": "Resource Origin.",
+      "enum": [
+        "Azure",
+        "AWS",
+        "GCP"
+      ],
+      "x-ms-enum": {
+        "name": "ResourceOrigin",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Azure",
+            "value": "Azure",
+            "description": "The resource is from Azure."
+          },
+          {
+            "name": "AWS",
+            "value": "AWS",
+            "description": "The resource is from AWS."
+          },
+          {
+            "name": "GCP",
+            "value": "GCP",
+            "description": "The resource is from GCP."
+          }
+        ]
+      }
+    },
+    "ResourceStatus": {
+      "type": "string",
+      "description": "Indicates the resource status.",
+      "enum": [
+        "Healthy",
+        "Unhealthy"
+      ],
+      "x-ms-enum": {
+        "name": "ResourceStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Healthy",
+            "value": "Healthy",
+            "description": "The resource is healthy."
+          },
+          {
+            "name": "Unhealthy",
+            "value": "Unhealthy",
+            "description": "The resource is unhealthy."
+          }
+        ]
+      }
+    },
+    "Responsibility": {
+      "type": "object",
+      "description": "A class represent the customer responsibility.",
+      "properties": {
+        "responsibilityId": {
+          "type": "string",
+          "description": "The id of the customer responsibility.",
+          "readOnly": true
+        },
+        "responsibilityTitle": {
+          "type": "string",
+          "description": "The title of the customer responsibility.",
+          "readOnly": true
+        },
+        "responsibilityDescription": {
+          "type": "string",
+          "description": "The description of the customer responsibility.",
+          "readOnly": true
+        },
+        "responsibilityType": {
+          "$ref": "#/definitions/ResponsibilityType",
+          "description": "The type of customer responsibility.",
+          "readOnly": true
+        },
+        "responsibilitySeverity": {
+          "$ref": "#/definitions/ResponsibilitySeverity",
+          "description": "The severity level of this customer responsibility.",
+          "readOnly": true
+        },
+        "responsibilityStatus": {
+          "$ref": "#/definitions/ResponsibilityStatus",
+          "description": "The status of this customer responsibility.",
+          "readOnly": true
+        },
+        "responsibilityEnvironment": {
+          "$ref": "#/definitions/ResponsibilityEnvironment",
+          "description": "The supported cloud environment of this customer responsibility.",
+          "readOnly": true
+        },
+        "failedResourceCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The count of all failed resources."
+        },
+        "totalResourceCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The count of all resources."
+        },
+        "resourceList": {
+          "type": "array",
+          "description": "List of resource.",
+          "items": {
+            "$ref": "#/definitions/ResponsibilityResource"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "resourceId"
+          ]
+        },
+        "recommendationList": {
+          "type": "array",
+          "description": "List of recommendation.",
+          "items": {
+            "$ref": "#/definitions/Recommendation"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "recommendationId"
+          ]
+        },
+        "guidance": {
+          "type": "string",
+          "description": "The evidence upload guidance description.",
+          "readOnly": true
+        },
+        "justification": {
+          "type": "string",
+          "description": "The justification given by the user to clarify the reason.",
+          "readOnly": true
+        },
+        "evidenceFiles": {
+          "type": "array",
+          "description": "List of evidence file url.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ResponsibilityEnvironment": {
+      "type": "string",
+      "description": "Indicates the customer responsibility supported cloud environment.",
+      "enum": [
+        "Azure",
+        "AWS",
+        "GCP",
+        "General"
+      ],
+      "x-ms-enum": {
+        "name": "ResponsibilityEnvironment",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Azure",
+            "value": "Azure",
+            "description": "The responsibility is supported in Azure."
+          },
+          {
+            "name": "AWS",
+            "value": "AWS",
+            "description": "The responsibility is supported in AWS."
+          },
+          {
+            "name": "GCP",
+            "value": "GCP",
+            "description": "The responsibility is supported in GCP."
+          },
+          {
+            "name": "General",
+            "value": "General",
+            "description": "The responsibility is general requirement of all environment."
+          }
+        ]
+      }
+    },
+    "ResponsibilityResource": {
+      "type": "object",
+      "description": "A class represent the resource.",
+      "properties": {
+        "resourceId": {
+          "type": "string",
+          "description": "The Id of the resource.",
+          "readOnly": true
+        },
+        "accountId": {
+          "type": "string",
+          "description": "Account Id. For example - AWS account Id.",
+          "readOnly": true
+        },
+        "resourceType": {
+          "type": "string",
+          "description": "The type of the resource. e.g. \"Microsoft.SignalRService/SignalR\"",
+          "readOnly": true
+        },
+        "resourceOrigin": {
+          "$ref": "#/definitions/ResourceOrigin",
+          "description": "Resource origin.",
+          "readOnly": true
+        },
+        "resourceStatus": {
+          "$ref": "#/definitions/ResourceStatus",
+          "description": "Resource status.",
+          "readOnly": true
+        },
+        "resourceStatusChangeDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The status change date for the resource.",
+          "readOnly": true
+        },
+        "recommendationIds": {
+          "type": "array",
+          "description": "List of recommendation id.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ResponsibilitySeverity": {
+      "type": "string",
+      "description": "Indicates the customer responsibility severity.",
+      "enum": [
+        "High",
+        "Medium",
+        "Low"
+      ],
+      "x-ms-enum": {
+        "name": "ResponsibilitySeverity",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "High",
+            "value": "High",
+            "description": "The responsibility is high severity."
+          },
+          {
+            "name": "Medium",
+            "value": "Medium",
+            "description": "The responsibility is medium severity."
+          },
+          {
+            "name": "Low",
+            "value": "Low",
+            "description": "The responsibility is low severity."
+          }
+        ]
+      }
+    },
+    "ResponsibilityStatus": {
+      "type": "string",
+      "description": "Indicates the customer responsibility status.",
+      "enum": [
+        "Passed",
+        "Failed",
+        "NotApplicable",
+        "PendingApproval"
+      ],
+      "x-ms-enum": {
+        "name": "ResponsibilityStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Passed",
+            "value": "Passed",
+            "description": "The responsibility is passed."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "The responsibility is failed."
+          },
+          {
+            "name": "NotApplicable",
+            "value": "NotApplicable",
+            "description": "The responsibility is not applicable."
+          },
+          {
+            "name": "PendingApproval",
+            "value": "PendingApproval",
+            "description": "The responsibility is pending for approval."
+          }
+        ]
+      }
+    },
+    "ResponsibilityType": {
+      "type": "string",
+      "description": "Indicates the customer responsibility type.",
+      "enum": [
+        "Automated",
+        "ScopedManual",
+        "Manual"
+      ],
+      "x-ms-enum": {
+        "name": "ResponsibilityType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Automated",
+            "value": "Automated",
+            "description": "The responsibility is automated."
+          },
+          {
+            "name": "ScopedManual",
+            "value": "ScopedManual",
+            "description": "The responsibility is scoped manual."
+          },
+          {
+            "name": "Manual",
+            "value": "Manual",
+            "description": "The responsibility is manual."
+          }
+        ]
+      }
+    },
+    "Result": {
+      "type": "string",
+      "description": "Indicates whether the fix action is Succeeded or Failed.",
+      "enum": [
+        "Succeeded",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "name": "Result",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "The result is succeeded."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "The result is failed."
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "Rule": {
+      "type": "string",
+      "description": "Scoping question rule.",
+      "enum": [
+        "Required",
+        "CharLength",
+        "Url",
+        "Urls",
+        "Domains",
+        "USPrivacyShield",
+        "PublicSOX",
+        "CreditCardPCI",
+        "AzureApplication",
+        "ValidGuid",
+        "PublisherVerification",
+        "DynamicDropdown",
+        "PreventNonEnglishChar",
+        "ValidEmail"
+      ],
+      "x-ms-enum": {
+        "name": "Rule",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Required",
+            "value": "Required",
+            "description": "The question is required to answer."
+          },
+          {
+            "name": "CharLength",
+            "value": "CharLength",
+            "description": "The question answer length is limited."
+          },
+          {
+            "name": "Url",
+            "value": "Url",
+            "description": "The question answer should be an Url."
+          },
+          {
+            "name": "Urls",
+            "value": "Urls",
+            "description": "The question answer should be Urls."
+          },
+          {
+            "name": "Domains",
+            "value": "Domains",
+            "description": "The question answer should be domains."
+          },
+          {
+            "name": "USPrivacyShield",
+            "value": "USPrivacyShield",
+            "description": "The question answer should be a UsPrivacyShield."
+          },
+          {
+            "name": "PublicSOX",
+            "value": "PublicSOX",
+            "description": "The question answer should be a PublicSOX."
+          },
+          {
+            "name": "CreditCardPCI",
+            "value": "CreditCardPCI",
+            "description": "The question answer should be a CreditCardPCI."
+          },
+          {
+            "name": "AzureApplication",
+            "value": "AzureApplication",
+            "description": "The question answer should be an AzureApplication."
+          },
+          {
+            "name": "ValidGuid",
+            "value": "ValidGuid",
+            "description": "The question answer should be a valid guid."
+          },
+          {
+            "name": "PublisherVerification",
+            "value": "PublisherVerification",
+            "description": "The question answer should be publisher verification."
+          },
+          {
+            "name": "DynamicDropdown",
+            "value": "DynamicDropdown",
+            "description": "The question answer should be dynamic dropdown."
+          },
+          {
+            "name": "PreventNonEnglishChar",
+            "value": "PreventNonEnglishChar",
+            "description": "The question answer should prevent non-english char."
+          },
+          {
+            "name": "ValidEmail",
+            "value": "ValidEmail",
+            "description": "The question answer should be a valid email."
+          }
+        ]
+      }
+    },
+    "ScopingAnswer": {
+      "type": "object",
+      "description": "Scoping answer.",
+      "properties": {
+        "questionId": {
+          "type": "string",
+          "description": "Question id.",
+          "pattern": "^[-a-zA-Z0-9_]{1,50}$"
+        },
+        "answers": {
+          "type": "array",
+          "description": "Question answer value list.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "questionId",
+        "answers"
+      ]
+    },
+    "ScopingConfigurationProperties": {
+      "type": "object",
+      "description": "ScopingConfiguration's properties.",
+      "properties": {
+        "answers": {
+          "type": "array",
+          "description": "List of scoping question answers.",
+          "items": {
+            "$ref": "#/definitions/ScopingAnswer"
+          },
+          "x-ms-identifiers": [
+            "questionId"
+          ]
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Azure lifecycle management",
+          "readOnly": true
+        }
+      }
+    },
+    "ScopingConfigurationResource": {
+      "type": "object",
+      "description": "A class represent an AppComplianceAutomation scoping configuration resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ScopingConfigurationProperties",
+          "description": "ScopingConfiguration property.",
+          "x-ms-client-flatten": true,
+          "x-ms-client-name": "properties"
+        }
+      },
+      "required": [
+        "properties"
+      ],
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ScopingConfigurationResourceListResult": {
+      "type": "object",
+      "description": "The response of a ScopingConfigurationResource list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ScopingConfigurationResource items on this page",
+          "items": {
+            "$ref": "#/definitions/ScopingConfigurationResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ScopingQuestion": {
+      "type": "object",
+      "description": "The definition of a scoping question.",
+      "properties": {
+        "questionId": {
+          "type": "string",
+          "description": "Question id.",
+          "readOnly": true
+        },
+        "superiorQuestionId": {
+          "type": "string",
+          "description": "Superior question id.",
+          "readOnly": true
+        },
+        "inputType": {
+          "$ref": "#/definitions/InputType",
+          "description": "Input type of the question answer.",
+          "readOnly": true
+        },
+        "optionIds": {
+          "type": "array",
+          "description": "Option id list.",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "rules": {
+          "type": "array",
+          "description": "The rule of the question.",
+          "items": {
+            "$ref": "#/definitions/Rule"
+          },
+          "readOnly": true
+        },
+        "showSubQuestionsValue": {
+          "type": "string",
+          "description": "The answer value to show the sub questions.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "questionId",
+        "inputType",
+        "optionIds",
+        "rules"
+      ]
+    },
+    "ScopingQuestions": {
+      "type": "object",
+      "description": "Scoping question list.",
+      "properties": {
+        "questions": {
+          "type": "array",
+          "description": "List of scoping questions.",
+          "items": {
+            "$ref": "#/definitions/ScopingQuestion"
+          },
+          "x-ms-identifiers": [
+            "questionId"
+          ]
+        }
+      }
+    },
+    "SendAllEvents": {
+      "type": "string",
+      "description": "whether to send notification under any event.",
+      "enum": [
+        "true",
+        "false"
+      ],
+      "x-ms-enum": {
+        "name": "SendAllEvents",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "True",
+            "value": "true",
+            "description": "Need send notification under any event."
+          },
+          {
+            "name": "False",
+            "value": "false",
+            "description": "No need to send notification under any event."
+          }
+        ]
+      }
+    },
+    "SnapshotDownloadRequest": {
+      "type": "object",
+      "description": "Snapshot's download request.",
+      "properties": {
+        "reportCreatorTenantId": {
+          "type": "string",
+          "description": "Tenant id."
+        },
+        "downloadType": {
+          "$ref": "#/definitions/DownloadType",
+          "description": "Indicates the download type."
+        },
+        "offerGuid": {
+          "type": "string",
+          "description": "The offerGuid which mapping to the reports.",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "downloadType"
+      ]
+    },
+    "SnapshotProperties": {
+      "type": "object",
+      "description": "Snapshot's properties.",
+      "properties": {
+        "snapshotName": {
+          "type": "string",
+          "description": "Snapshot name.",
+          "readOnly": true
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp of resource creation (UTC).",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Azure lifecycle management",
+          "readOnly": true
+        },
+        "reportProperties": {
+          "$ref": "#/definitions/ReportProperties",
+          "description": "The report essential info.",
+          "readOnly": true
+        },
+        "reportSystemData": {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/systemData",
+          "description": "Metadata pertaining to creation and last modification of the resource.",
+          "readOnly": true
+        },
+        "complianceResults": {
+          "type": "array",
+          "description": "List of compliance results.",
+          "items": {
+            "$ref": "#/definitions/ComplianceResult"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "complianceName"
+          ]
+        }
+      }
+    },
+    "SnapshotResource": {
+      "type": "object",
+      "description": "A class represent a AppComplianceAutomation snapshot resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SnapshotProperties",
+          "description": "Snapshot's property.",
+          "x-ms-client-flatten": true,
+          "x-ms-client-name": "properties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "SnapshotResourceListResult": {
+      "type": "object",
+      "description": "The response of a SnapshotResource list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The SnapshotResource items on this page",
+          "items": {
+            "$ref": "#/definitions/SnapshotResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "StatusItem": {
+      "type": "object",
+      "description": "Single status.",
+      "properties": {
+        "statusName": {
+          "type": "string",
+          "description": "Status name - e.g. \"Active\", \"Failed\"."
+        },
+        "statusValue": {
+          "type": "string",
+          "description": "Status value. e.g. \"100\", or \"100%\"."
+        }
+      }
+    },
+    "StorageInfo": {
+      "type": "object",
+      "description": "The information of 'bring your own storage' account binding to the report",
+      "properties": {
+        "subscriptionId": {
+          "type": "string",
+          "description": "The subscription id which 'bring your own storage' account belongs to"
+        },
+        "resourceGroup": {
+          "type": "string",
+          "description": "The resourceGroup which 'bring your own storage' account belongs to"
+        },
+        "accountName": {
+          "type": "string",
+          "description": "'bring your own storage' account name"
+        },
+        "location": {
+          "type": "string",
+          "description": "The region of 'bring your own storage' account"
+        }
+      }
+    },
+    "SyncCertRecordRequest": {
+      "type": "object",
+      "description": "Synchronize certification record request.",
+      "properties": {
+        "certRecord": {
+          "$ref": "#/definitions/CertSyncRecord",
+          "description": "certification record to be synchronized."
+        }
+      },
+      "required": [
+        "certRecord"
+      ]
+    },
+    "SyncCertRecordResponse": {
+      "type": "object",
+      "description": "Synchronize certification record response.",
+      "properties": {
+        "certRecord": {
+          "$ref": "#/definitions/CertSyncRecord",
+          "description": "certification record synchronized."
+        }
+      }
+    },
+    "TriggerEvaluationProperty": {
+      "type": "object",
+      "description": "Trigger evaluation response.",
+      "properties": {
+        "triggerTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time when the evaluation is triggered.",
+          "readOnly": true
+        },
+        "evaluationEndTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time when the evaluation is end.",
+          "readOnly": true
+        },
+        "resourceIds": {
+          "type": "array",
+          "description": "List of resource ids to be evaluated",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-identifiers": [
+            "resourceId"
+          ]
+        },
+        "quickAssessments": {
+          "type": "array",
+          "description": "List of quick assessments",
+          "items": {
+            "$ref": "#/definitions/QuickAssessment"
+          },
+          "x-ms-identifiers": [
+            "resourceId"
+          ]
+        }
+      }
+    },
+    "TriggerEvaluationRequest": {
+      "type": "object",
+      "description": "Trigger evaluation request.",
+      "properties": {
+        "resourceIds": {
+          "type": "array",
+          "description": "List of resource ids to be evaluated",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "resourceIds"
+      ]
+    },
+    "TriggerEvaluationResponse": {
+      "type": "object",
+      "description": "Trigger evaluation response.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/TriggerEvaluationProperty",
+          "description": "trigger evaluation property."
+        }
+      }
+    },
+    "UpdateWebhookKey": {
+      "type": "string",
+      "description": "whether to update webhookKey.",
+      "enum": [
+        "true",
+        "false"
+      ],
+      "x-ms-enum": {
+        "name": "UpdateWebhookKey",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "True",
+            "value": "true",
+            "description": "Need update the webhook key."
+          },
+          {
+            "name": "False",
+            "value": "false",
+            "description": "No need to update the webhook key."
+          }
+        ]
+      }
+    },
+    "WebhookKeyEnabled": {
+      "type": "string",
+      "description": "whether webhookKey is enabled.",
+      "enum": [
+        "true",
+        "false"
+      ],
+      "x-ms-enum": {
+        "name": "WebhookKeyEnabled",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "True",
+            "value": "true",
+            "description": "The webhookKey is enabled."
+          },
+          {
+            "name": "False",
+            "value": "false",
+            "description": "The webhookKey is not enabled."
+          }
+        ]
+      }
+    },
+    "WebhookProperties": {
+      "type": "object",
+      "description": "Webhook properties.",
+      "properties": {
+        "webhookId": {
+          "type": "string",
+          "description": "Webhook id in database.",
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "#/definitions/WebhookStatus",
+          "description": "Webhook status."
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "Tenant id.",
+          "readOnly": true
+        },
+        "sendAllEvents": {
+          "$ref": "#/definitions/SendAllEvents",
+          "description": "whether to send notification under any event."
+        },
+        "events": {
+          "type": "array",
+          "description": "under which event notification should be sent.",
+          "items": {
+            "$ref": "#/definitions/NotificationEvent"
+          }
+        },
+        "payloadUrl": {
+          "type": "string",
+          "description": "webhook payload url",
+          "pattern": "^(http(s)?://)[\\S]{0,64994}$"
+        },
+        "contentType": {
+          "$ref": "#/definitions/ContentType",
+          "description": "content type"
+        },
+        "webhookKey": {
+          "type": "string",
+          "description": "webhook secret token. If not set, this field value is null; otherwise, please set a string value.",
+          "pattern": "^.{0,2048}$"
+        },
+        "updateWebhookKey": {
+          "$ref": "#/definitions/UpdateWebhookKey",
+          "description": "whether to update webhookKey."
+        },
+        "webhookKeyEnabled": {
+          "$ref": "#/definitions/WebhookKeyEnabled",
+          "description": "whether webhookKey is enabled.",
+          "readOnly": true
+        },
+        "enableSslVerification": {
+          "$ref": "#/definitions/EnableSslVerification",
+          "description": "whether to enable ssl verification"
+        },
+        "deliveryStatus": {
+          "$ref": "#/definitions/DeliveryStatus",
+          "description": "webhook deliveryStatus",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Azure Resource Provisioning State",
+          "readOnly": true
+        }
+      }
+    },
+    "WebhookResource": {
+      "type": "object",
+      "description": "A class represent an AppComplianceAutomation webhook resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/WebhookProperties",
+          "description": "Webhook property.",
+          "x-ms-client-flatten": true,
+          "x-ms-client-name": "properties"
+        }
+      },
+      "required": [
+        "properties"
+      ],
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "WebhookResourceListResult": {
+      "type": "object",
+      "description": "The response of a WebhookResource list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The WebhookResource items on this page",
+          "items": {
+            "$ref": "#/definitions/WebhookResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "WebhookResourcePatch": {
+      "type": "object",
+      "description": "A class represent a AppComplianceAutomation webhook resource update properties.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/WebhookProperties",
+          "description": "Webhook property."
+        }
+      }
+    },
+    "WebhookStatus": {
+      "type": "string",
+      "description": "Webhook status.",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "WebhookStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "The webhook is enabled."
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "The webhook is disabled."
+          }
+        ]
+      }
+    }
+  },
+  "parameters": {
+    "ExtraParameter.offerGuid": {
+      "name": "offerGuid",
+      "in": "query",
+      "description": "The offerGuid which mapping to the reports.",
+      "required": false,
+      "type": "string",
+      "minLength": 1,
+      "x-ms-parameter-location": "method"
+    },
+    "ExtraParameter.reportCreatorTenantId": {
+      "name": "reportCreatorTenantId",
+      "in": "query",
+      "description": "The tenant id of the report creator.",
+      "required": false,
+      "type": "string",
+      "minLength": 1,
+      "x-ms-parameter-location": "method"
+    },
+    "QueryParameters.filter": {
+      "name": "$filter",
+      "in": "query",
+      "description": "The filter to apply on the operation.",
+      "required": false,
+      "type": "string",
+      "minLength": 1,
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "filter"
+    },
+    "QueryParameters.offerGuid": {
+      "name": "offerGuid",
+      "in": "query",
+      "description": "The offerGuid which mapping to the reports.",
+      "required": false,
+      "type": "string",
+      "minLength": 1,
+      "x-ms-parameter-location": "method"
+    },
+    "QueryParameters.orderby": {
+      "name": "$orderby",
+      "in": "query",
+      "description": "OData order by query option.",
+      "required": false,
+      "type": "string",
+      "minLength": 1,
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "orderby"
+    },
+    "QueryParameters.reportCreatorTenantId": {
+      "name": "reportCreatorTenantId",
+      "in": "query",
+      "description": "The tenant id of the report creator.",
+      "required": false,
+      "type": "string",
+      "minLength": 1,
+      "x-ms-parameter-location": "method"
+    },
+    "QueryParameters.select": {
+      "name": "$select",
+      "in": "query",
+      "description": "OData Select statement. Limits the properties on each entry to just those requested, e.g. ?$select=reportName,id.",
+      "required": false,
+      "type": "string",
+      "minLength": 1,
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "select"
+    },
+    "QueryParameters.skipToken": {
+      "name": "$skipToken",
+      "in": "query",
+      "description": "Skip over when retrieving results.",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "skipToken"
+    },
+    "QueryParameters.top": {
+      "name": "$top",
+      "in": "query",
+      "description": "Number of elements to return when retrieving results.",
+      "required": false,
+      "type": "integer",
+      "format": "int32",
+      "minimum": 1,
+      "maximum": 100,
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "top"
+    }
+  }
+}

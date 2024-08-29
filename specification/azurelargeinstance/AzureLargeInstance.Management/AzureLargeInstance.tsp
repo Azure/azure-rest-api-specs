@@ -5,15 +5,16 @@ import "@azure-tools/typespec-client-generator-core";
 import "./models.tsp";
 
 using TypeSpec.Rest;
+using TypeSpec.Versioning;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using Azure.ClientGenerator.Core;
 
 namespace Microsoft.AzureLargeInstance;
 @doc("""
-Azure Large Instance info on Azure (ARM properties and AzureLargeInstance
-properties)
-""")
+  Azure Large Instance info on Azure (ARM properties and AzureLargeInstance
+  properties)
+  """)
 model AzureLargeInstance is TrackedResource<AzureLargeInstanceProperties> {
   @doc("Name of the AzureLargeInstance.")
   @pattern(".*")
@@ -23,32 +24,46 @@ model AzureLargeInstance is TrackedResource<AzureLargeInstanceProperties> {
   name: string;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation"
 @armResourceOperations
 @clientName("AzureLargeInstance")
 interface AzureLargeInstances {
   @doc("""
-Gets an Azure Large Instance for the specified subscription, resource group,
-and instance name.
-""")
+    Gets an Azure Large Instance for the specified subscription, resource group,
+    and instance name.
+    """)
   get is ArmResourceRead<AzureLargeInstance>;
 
+  @added(Versions.v2024_08_01_preview)
   @doc("""
-Patches the Tags field of an Azure Large Instance for the specified
-subscription, resource group, and instance name.
-""")
+    Creates an Azure Large Instance for the specified subscription,
+    resource group, and instance name.
+    """)
+  create is ArmResourceCreateOrReplaceSync<AzureLargeInstance>;
+
+  @added(Versions.v2024_08_01_preview)
+  @armResourceDelete(AzureLargeInstance)
+  @doc("""
+    Deletes an Azure Large Instance for the specified subscription, resource group,
+    and instance name.
+    """)
+  delete is ArmResourceDeleteSync<AzureLargeInstance>;
+
+  @doc("""
+    Patches the Tags field of an Azure Large Instance for the specified
+    subscription, resource group, and instance name.
+    """)
   update is ArmCustomPatchSync<AzureLargeInstance>;
 
   @doc("""
-Gets a list of Azure Large Instances in the specified subscription and resource
-group. The operations returns various properties of each Azure Large Instance.
-""")
+    Gets a list of Azure Large Instances in the specified subscription and resource
+    group. The operations returns various properties of each Azure Large Instance.
+    """)
   listByResourceGroup is ArmResourceListByParent<AzureLargeInstance>;
 
   @doc("""
-Gets a list of Azure Large Instances in the specified subscription. The
-operations returns various properties of each Azure Large Instance.
-""")
+    Gets a list of Azure Large Instances in the specified subscription. The
+    operations returns various properties of each Azure Large Instance.
+    """)
   listBySubscription is ArmListBySubscription<AzureLargeInstance>;
 
   @doc("The operation to start an Azure Large Instance (only for compute instances)")

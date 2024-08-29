@@ -6,12 +6,12 @@ This is the AutoRest configuration file the Cognitive Services Language SDK.
 
 ## Releases
 
-The current release of Language is 2023-04-01.
+The current release of Language is 2023-11-11-preview.
 
-<!-- The current stable release of Language is 2023-04-01. -->
+<!-- The current stable release of Language is 2023-11-11-preview. -->
 
 ```yaml
-tag: release_2023-04-01
+tag: release_2023-11-15-preview
 add-credentials: true
 clear-output-folder: true
 openapi-type: data-plane
@@ -22,8 +22,9 @@ directive:
 
 ### Release
 
-``` yaml $(tag) == 'release_2023-04-01'
+``` yaml $(tag) == 'release_2023-11-15-preview'
 input-file:
+  - analyzedocuments.json
   - analyzetext.json
   - analyzetext-authoring.json
   - analyzeconversations.json

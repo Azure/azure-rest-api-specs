@@ -76,7 +76,12 @@ model BindingProperties {
 @armResourceOperations
 interface Targets {
   get is ArmResourceRead<Target>;
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<Target>;
+  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "MUST CHANGE ON NEXT UPDATE"
+  @Azure.Core.useFinalStateVia("azure-async-operation")
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<
+    Target,
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader
+  >;
   update is ArmCustomPatchSync<Target>;
   delete is ArmResourceDeleteWithoutOkAsync<Target>;
   listByResourceGroup is ArmResourceListByParent<Target>;

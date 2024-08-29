@@ -1119,21 +1119,6 @@
     }
   },
   "definitions": {
-    "Azure.ResourceManager.PrivateEndpointConnection": {
-      "type": "object",
-      "description": "The private endpoint connection resource",
-      "properties": {
-        "properties": {
-          "$ref": "../../../../../common-types/resource-management/v5/privatelinks.json#/definitions/PrivateEndpointConnectionProperties",
-          "description": "The private endpoint connection properties"
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
-        }
-      ]
-    },
     "ConnectionString": {
       "type": "object",
       "description": "Connection string for the mongo cluster",
@@ -1180,12 +1165,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/FirewallRuleProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "description": "The resource-specific properties for this resource."
         }
       },
       "allOf": [
@@ -1261,12 +1241,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/MongoClusterProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "description": "The resource-specific properties for this resource."
         }
       },
       "allOf": [
@@ -1373,7 +1348,7 @@
           "type": "array",
           "description": "List of private endpoint connections.",
           "items": {
-            "$ref": "#/definitions/Azure.ResourceManager.PrivateEndpointConnection"
+            "$ref": "../../../../../common-types/resource-management/v5/privatelinks.json#/definitions/PrivateEndpointConnection"
           },
           "readOnly": true
         }
@@ -1461,7 +1436,7 @@
         },
         "properties": {
           "$ref": "#/definitions/MongoClusterUpdateProperties",
-          "x-ms-client-flatten": true
+          "description": "The resource-specific properties for this resource."
         }
       }
     },
@@ -1577,12 +1552,7 @@
       "properties": {
         "properties": {
           "$ref": "../../../../../common-types/resource-management/v5/privatelinks.json#/definitions/PrivateEndpointConnectionProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "description": "The resource-specific properties for this resource."
         }
       },
       "allOf": [
@@ -1618,12 +1588,7 @@
       "properties": {
         "properties": {
           "$ref": "../../../../../common-types/resource-management/v5/privatelinks.json#/definitions/PrivateLinkResourceProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "description": "The resource-specific properties for this resource."
         }
       },
       "allOf": [

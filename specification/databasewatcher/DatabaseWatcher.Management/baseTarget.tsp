@@ -15,7 +15,7 @@ interface Targets {
   get is ArmResourceRead<Target>;
   createOrUpdate is ArmResourceCreateOrReplaceSync<Target>;
   delete is ArmResourceDeleteSync<Target>;
-  listByParent is ArmResourceListByParent<Target>;
+  listByWatcher is ArmResourceListByParent<Target>;
 }
 
 @parentResource(Watcher)
@@ -28,6 +28,7 @@ model Target is ProxyResource<TargetProperties> {
   name: string;
 }
 
+#suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
 @doc("The generic properties of a target.")
 @discriminator("targetType")
 model TargetProperties {

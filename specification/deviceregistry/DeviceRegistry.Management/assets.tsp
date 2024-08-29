@@ -205,9 +205,20 @@ model AssetStatusError {
 interface Assets {
   get is ArmResourceRead<Asset>;
 
-  createOrReplace is ArmResourceCreateOrReplaceAsync<Asset>;
+  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "MUST CHANGE ON NEXT UPDATE"
+  @Azure.Core.useFinalStateVia("azure-async-operation")
+  createOrReplace is ArmResourceCreateOrReplaceAsync<
+    Asset,
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader
+  >;
 
-  update is ArmResourcePatchAsync<Asset, AssetProperties>;
+  update is ArmCustomPatchAsync<
+    Asset,
+    Azure.ResourceManager.Foundations.ResourceUpdateModel<
+      Asset,
+      AssetProperties
+    >
+  >;
 
   delete is ArmResourceDeleteWithoutOkAsync<Asset>;
 

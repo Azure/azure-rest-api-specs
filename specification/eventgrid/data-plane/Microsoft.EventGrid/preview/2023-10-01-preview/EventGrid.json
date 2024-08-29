@@ -195,12 +195,23 @@
             "type": "string"
           },
           {
-            "name": "acknowledgeOptions",
+            "name": "body",
             "in": "body",
-            "description": "AcknowledgeOptions.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/AcknowledgeOptions"
+              "type": "object",
+              "properties": {
+                "lockTokens": {
+                  "type": "array",
+                  "description": "Array of lock tokens.",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              },
+              "required": [
+                "lockTokens"
+              ]
             }
           }
         ],
@@ -258,13 +269,13 @@
             "in": "query",
             "description": "Release cloud events with the specified delay in seconds.",
             "required": false,
-            "type": "number",
+            "type": "string",
             "enum": [
-              0,
-              10,
-              60,
-              600,
-              3600
+              "0",
+              "10",
+              "60",
+              "600",
+              "3600"
             ],
             "x-ms-enum": {
               "name": "ReleaseDelay",
@@ -272,39 +283,50 @@
               "values": [
                 {
                   "name": "By0Seconds",
-                  "value": 0,
+                  "value": "0",
                   "description": "Release the event after 0 seconds."
                 },
                 {
                   "name": "By10Seconds",
-                  "value": 10,
+                  "value": "10",
                   "description": "Release the event after 10 seconds."
                 },
                 {
                   "name": "By60Seconds",
-                  "value": 60,
+                  "value": "60",
                   "description": "Release the event after 60 seconds."
                 },
                 {
                   "name": "By600Seconds",
-                  "value": 600,
+                  "value": "600",
                   "description": "Release the event after 600 seconds."
                 },
                 {
                   "name": "By3600Seconds",
-                  "value": 3600,
+                  "value": "3600",
                   "description": "Release the event after 3600 seconds."
                 }
               ]
             }
           },
           {
-            "name": "releaseOptions",
+            "name": "body",
             "in": "body",
-            "description": "ReleaseOptions",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ReleaseOptions"
+              "type": "object",
+              "properties": {
+                "lockTokens": {
+                  "type": "array",
+                  "description": "Array of lock tokens.",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              },
+              "required": [
+                "lockTokens"
+              ]
             }
           }
         ],
@@ -358,12 +380,23 @@
             "type": "string"
           },
           {
-            "name": "rejectOptions",
+            "name": "body",
             "in": "body",
-            "description": "RejectOptions",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/RejectOptions"
+              "type": "object",
+              "properties": {
+                "lockTokens": {
+                  "type": "array",
+                  "description": "Array of lock tokens.",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              },
+              "required": [
+                "lockTokens"
+              ]
             }
           }
         ],
@@ -417,12 +450,23 @@
             "type": "string"
           },
           {
-            "name": "renewLockOptions",
+            "name": "body",
             "in": "body",
-            "description": "RenewLockOptions",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/RenewLockOptions"
+              "type": "object",
+              "properties": {
+                "lockTokens": {
+                  "type": "array",
+                  "description": "Array of lock tokens.",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              },
+              "required": [
+                "lockTokens"
+              ]
             }
           }
         ],
@@ -515,22 +559,6 @@
     }
   },
   "definitions": {
-    "AcknowledgeOptions": {
-      "type": "object",
-      "description": "Array of lock tokens for the corresponding received Cloud Events to be acknowledged.",
-      "properties": {
-        "lockTokens": {
-          "type": "array",
-          "description": "Array of lock tokens.",
-          "items": {
-            "type": "string"
-          }
-        }
-      },
-      "required": [
-        "lockTokens"
-      ]
-    },
     "AcknowledgeResult": {
       "type": "object",
       "description": "The result of the Acknowledge operation.",
@@ -746,22 +774,6 @@
         "value"
       ]
     },
-    "RejectOptions": {
-      "type": "object",
-      "description": "Array of lock tokens for the corresponding received Cloud Events to be rejected.",
-      "properties": {
-        "lockTokens": {
-          "type": "array",
-          "description": "Array of lock tokens.",
-          "items": {
-            "type": "string"
-          }
-        }
-      },
-      "required": [
-        "lockTokens"
-      ]
-    },
     "RejectResult": {
       "type": "object",
       "description": "The result of the Reject operation.",
@@ -785,22 +797,6 @@
       "required": [
         "failedLockTokens",
         "succeededLockTokens"
-      ]
-    },
-    "ReleaseOptions": {
-      "type": "object",
-      "description": "Array of lock tokens for the corresponding received Cloud Events to be released.",
-      "properties": {
-        "lockTokens": {
-          "type": "array",
-          "description": "Array of lock tokens.",
-          "items": {
-            "type": "string"
-          }
-        }
-      },
-      "required": [
-        "lockTokens"
       ]
     },
     "ReleaseResult": {
@@ -851,22 +847,6 @@
       "required": [
         "failedLockTokens",
         "succeededLockTokens"
-      ]
-    },
-    "RenewLockOptions": {
-      "type": "object",
-      "description": "Array of lock tokens for the corresponding received Cloud Events to be renewed.",
-      "properties": {
-        "lockTokens": {
-          "type": "array",
-          "description": "Array of lock tokens.",
-          "items": {
-            "type": "string"
-          }
-        }
-      },
-      "required": [
-        "lockTokens"
       ]
     }
   },

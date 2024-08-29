@@ -27,7 +27,7 @@ These are the global settings for Route Client.
 ``` yaml
 title: RouteClient
 openapi-type: data-plane
-tag: package-preview-2024-05
+tag: package-preview-2024-06
 add-credentials: true
 credential-default-policy-type: BearerTokenCredentialPolicy
 credential-scopes: 'https://atlas.microsoft.com/.default'
@@ -39,15 +39,31 @@ modelerfour:
   lenient-model-deduplication: true
 ```
 
-### Tag: package-preview-2024-05
+### Tag: package-preview-2024-6
+
+These settings apply only when `--tag=package-preview-2024-06` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2024-06'
+input-file:
+  - preview/2024-06-01-preview/route.json
+  
+suppressions:
+  - code: OperationIdNounVerb
+    reason: False alarm. Per the Noun_Verb convention for Operation Ids, the noun 'Route' should not appear after the underscore.
+```
+### Tag: package-preview-2024-5
 
 These settings apply only when `--tag=package-preview-2024-05` is specified on the command line.
 
 ```yaml $(tag) == 'package-preview-2024-05'
 input-file:
   - preview/2024-05-01-preview/route.json
-```
 
+suppressions:
+  - code: OperationIdNounVerb
+    reason: False alarm. Per the Noun_Verb convention for Operation Ids, the noun 'Route' should not appear after the underscore.
+
+```
 ### Tag: package-preview-2024-04
 
 These settings apply only when `--tag=package-preview-2024-04` is specified on the command line.

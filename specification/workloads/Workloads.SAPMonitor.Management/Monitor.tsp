@@ -31,7 +31,12 @@ interface Monitors {
   /**
    * Creates a SAP monitor for the specified subscription, resource group, and resource name.
    */
-  create is ArmResourceCreateOrReplaceAsync<Monitor>;
+  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "MUST CHANGE ON NEXT UPDATE"
+  @Azure.Core.useFinalStateVia("azure-async-operation")
+  create is ArmResourceCreateOrReplaceAsync<
+    Monitor,
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader
+  >;
 
   /**
    * Patches the Tags field of a SAP monitor for the specified subscription, resource group, and SAP monitor name.

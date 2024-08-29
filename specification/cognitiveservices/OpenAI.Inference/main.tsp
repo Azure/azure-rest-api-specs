@@ -5,9 +5,11 @@ import "./routes/common.tsp";
 import "./routes/audio_speech.tsp";
 import "./routes/audio_transcription.tsp";
 import "./routes/audio_translation.tsp";
+import "./routes/batches.tsp";
 import "./routes/completions.tsp";
 import "./routes/images.tsp";
 import "./routes/embeddings.tsp";
+import "./routes/files.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Versioning;
@@ -30,9 +32,9 @@ using TypeSpec.Versioning;
   "Azure OpenAI APIs for completions and search",
   {
     @doc("""
-Supported Cognitive Services endpoints (protocol and hostname, for example:
-https://westus.api.cognitive.microsoft.com).
-""")
+      Supported Cognitive Services endpoints (protocol and hostname, for example:
+      https://westus.api.cognitive.microsoft.com).
+      """)
     endpoint: string,
   }
 )
@@ -54,8 +56,23 @@ enum ServiceApiVersions {
   v2023_07_01_Preview: "2023-07-01-preview",
 
   @useDependency(Azure.Core.Versions.v1_0_Preview_1)
+  v2024_02_01: "2024-02-01",
+
+  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
   v2024_02_15_Preview: "2024-02-15-preview",
 
   @useDependency(Azure.Core.Versions.v1_0_Preview_1)
   v2024_03_01_Preview: "2024-03-01-preview",
+
+  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
+  v2024_04_01_Preview: "2024-04-01-preview",
+
+  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
+  v2024_05_01_Preview: "2024-05-01-preview",
+
+  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
+  v2024_06_01: "2024-06-01",
+
+  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
+  v2024_07_01_Preview: "2024-07-01-preview",
 }

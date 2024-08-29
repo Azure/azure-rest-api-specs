@@ -29,7 +29,12 @@ interface Deployments {
   /**
    * Create a Deployment. '.default' and '.unassigned' are system defined values and cannot be used for product or device group name.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<Deployment>;
+  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "MUST CHANGE ON NEXT UPDATE"
+  @Azure.Core.useFinalStateVia("azure-async-operation")
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+    Deployment,
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader
+  >;
 
   /**
    * Delete a Deployment. '.default' and '.unassigned' are system defined values and cannot be used for product or device group name.

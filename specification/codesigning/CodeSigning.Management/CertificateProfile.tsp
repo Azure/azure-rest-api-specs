@@ -27,8 +27,13 @@ interface CertificateProfiles {
   @doc("Get details of a certificate profile.")
   get is ArmResourceRead<CertificateProfile>;
 
+  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "MUST CHANGE ON NEXT UPDATE"
   @doc("Create a certificate profile.")
-  create is ArmResourceCreateOrReplaceAsync<CertificateProfile>;
+  @Azure.Core.useFinalStateVia("azure-async-operation")
+  create is ArmResourceCreateOrReplaceAsync<
+    CertificateProfile,
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader
+  >;
 
   @doc("Delete a certificate profile.")
   delete is ArmResourceDeleteWithoutOkAsync<CertificateProfile>;
