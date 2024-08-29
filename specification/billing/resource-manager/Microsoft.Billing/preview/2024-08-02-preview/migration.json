@@ -14,13 +14,13 @@
     "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/migrations/default": {
       "get": {
         "tags": [
-          "EnrollementToModernMigration"
+          "Migration"
         ],
-        "description": "Gets an enrollement to modern footprint mapping details.",
+        "description": "Gets migration mapping details.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
         },
-        "operationId": "EnrollementToModernMigration_Get",
+        "operationId": "Migration_Get",
         "produces": [
           "application/json"
         ],
@@ -34,9 +34,9 @@
         ],
         "responses": {
           "200": {
-            "description": "Enrollment to modern footprint mapping details.",
+            "description": "Migration mapping details.",
             "schema": {
-              "$ref": "#/definitions/GetEnrollementToModernMapResponse"
+              "$ref": "#/definitions/MigrationMappingResponse"
             }
           },
           "default": {
@@ -47,20 +47,20 @@
           }
         },
         "x-ms-examples": {
-          "GetEnrollementToModernMap": {
-            "$ref": "./examples/getEnrollementToModernMap.json"
+          "MigrationDetails": {
+            "$ref": "./examples/MigrationDetails.json"
           }
         }
       },
       "put": {
         "tags": [
-          "EnrollementToModernMigration"
+          "Migration"
         ],
-        "description": "Migrates enrollment to modern",
+        "description": "Migrates from source to destination billing scope",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
         },
-        "operationId": "EnrollementToModernMigration_MigrateEnrollement",
+        "operationId": "Migration_Put",
         "produces": [
           "application/json"
         ],
@@ -74,7 +74,7 @@
           {
             "in": "body",
             "name": "parameters",
-            "description": "The enrollment to modern mapping details.",
+            "description": "Migration mapping details.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/MigrationMappingProperties"
@@ -83,9 +83,9 @@
         ],
         "responses": {
           "200": {
-            "description": "Transfer details.",
+            "description": "Migration details.",
             "schema": {
-              "$ref": "#/definitions/MigrateEnrollementResponse"
+              "$ref": "#/definitions/MigrationResponse"
             }
           },
           "default": {
@@ -96,8 +96,8 @@
           }
         },
         "x-ms-examples": {
-          "MigrateEnrollement": {
-            "$ref": "./examples/migrateEnrollement.json"
+          "MigrationDetails": {
+            "$ref": "./examples/MigrationDetails.json"
           }
         }
       }
@@ -105,25 +105,25 @@
   },
   "definitions": {
     "MigrationMappingProperties": {
-      "description": "Enrollement to modern mapping properties.",
+      "description": "Migration mapping properties.",
       "type": "object",
       "properties": {
         "destinationBillingScope": {
-          "description": "Modern billing scope to which enrollment is to be mapped.",
+          "description": "Destination billing scope to be mapped.",
           "type": "string"
         },
-        "migrateEnrollmentRequestStatus": {
-          "description": "Migration enrollement request status.",
+        "status": {
+          "description": "Migration Request status.",
           "type": "string"
         }
       }
     },
-    "GetEnrollementToModernMapResponse": {
-      "description": "Get enrollement to modern mapping details.",
+    "MigrationResponse": {
+      "description": "Response contains Migration details.",
       "type": "object",
        "properties": {
         "id": {
-          "description": "Fully qualified ID for the migrateEntity resource.",
+          "description": "Resource id",
           "readOnly": true,
           "type": "string"
         },
@@ -133,56 +133,17 @@
           "type": "string"
         },
         "type": {
-          "description": "Resource type, Microsoft.Billing/billingAccounts/migrationEntity.",
+          "description": "Resource type",
           "readOnly": true,
           "type": "string"
         },
         "properties": {
           "destinationBillingScope": {
-            "description": "Modern billing scope to which enrollment is to be mapped.",
+            "description": "Destination billing scope to be mapped.",
             "type": "string"
           },
-          "enrollmentId": {
-            "description": "Enrollment Id",
-            "type": "string"
-          },
-          "status": {
-            "description": "Migration Status",
-            "type": "string"
-          },
-          "transferId": {
-            "description": "Transfer Id",
-            "type": "string"
-          }
-        }
-      }
-    },
-    "MigrateEnrollementResponse": {
-      "description": "Get enrollement to modern mapping details.",
-      "type": "object",
-       "properties": {
-        "id": {
-          "description": "Fully qualified ID for the migrateEntity resource.",
-          "readOnly": true,
-          "type": "string"
-        },
-        "name": {
-          "description": "Resource name.",
-          "readOnly": true,
-          "type": "string"
-        },
-        "type": {
-          "description": "Resource type, Microsoft.Billing/billingAccounts/migrationEntity.",
-          "readOnly": true,
-          "type": "string"
-        },
-        "properties": {
-          "destinationBillingScope": {
-            "description": "Modern billing scope to which enrollment is to be mapped.",
-            "type": "string"
-          },
-          "enrollmentId": {
-            "description": "Enrollment Id",
+          "sourceBillingAccount": {
+            "description": "source billing account name",
             "type": "string"
           },
           "status": {
