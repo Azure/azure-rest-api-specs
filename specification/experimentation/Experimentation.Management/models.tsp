@@ -159,7 +159,7 @@ model ManagedIdentity {
   type: ResourceIdentityType;
 
   /** The identities assigned to this resource by the user. */
-  #suppress "deprecated" "We are in private preview and not planning to use client SDKs generated from TypeSpec. For public preview, we will support system assigned and that should fix this warning."
+  #suppress "deprecated" "We are in private preview and not planning to use client SDKs generated from TypeSpec. For public preview, we will support system assigned and that should fix this warning"
   userAssignedIdentities?: UserAssignedIdentities;
 }
 
