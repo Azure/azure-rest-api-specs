@@ -111,7 +111,7 @@ model FileSystemResourceUpdate {
   /**
    * The managed service identities assigned to this resource.
    */
-  identity?: Azure.ResourceManager.CommonTypes.ManagedServiceIdentity;
+  identity?: Azure.ResourceManager.ManagedServiceIdentityProperty;
 
   /**
    * Resource tags.
@@ -149,12 +149,11 @@ model FileSystemResource
    * A FileSystem Resource by Dell
    */
   @path
-  @key("fileSystemName")
-  @segment("fileSystems")
+  @key("filesystemName")
+  @segment("filesystems")
   @visibility("read")
   @pattern("^[a-zA-Z0-9_-]*$")
   name: string;
 
   ...Azure.ResourceManager.ManagedServiceIdentityProperty;
-  ...Azure.ResourceManager.Foundations.ArmTagsProperty;
 }

@@ -86,7 +86,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Dell.Storage/fileSystems": {
+    "/subscriptions/{subscriptionId}/providers/Dell.Storage/filesystems": {
       "get": {
         "operationId": "FileSystems_ListBySubscription",
         "tags": [
@@ -128,7 +128,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Dell.Storage/fileSystems": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Dell.Storage/filesystems": {
       "get": {
         "operationId": "FileSystems_ListByResourceGroup",
         "tags": [
@@ -173,7 +173,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Dell.Storage/fileSystems/{fileSystemName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Dell.Storage/filesystems/{filesystemName}": {
       "get": {
         "operationId": "FileSystems_Get",
         "tags": [
@@ -191,7 +191,7 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "fileSystemName",
+            "name": "filesystemName",
             "in": "path",
             "description": "Name of the filesystem resource",
             "required": true,
@@ -239,7 +239,7 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "fileSystemName",
+            "name": "filesystemName",
             "in": "path",
             "description": "Name of the filesystem resource",
             "required": true,
@@ -317,7 +317,7 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "fileSystemName",
+            "name": "filesystemName",
             "in": "path",
             "description": "Name of the filesystem resource",
             "required": true,
@@ -374,7 +374,7 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "fileSystemName",
+            "name": "filesystemName",
             "in": "path",
             "description": "Name of the filesystem resource",
             "required": true,
@@ -428,6 +428,16 @@
     }
   },
   "definitions": {
+    "Azure.ResourceManager.ManagedServiceIdentityProperty": {
+      "type": "object",
+      "description": "The managed service identities envelope.",
+      "properties": {
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The managed service identities assigned to this resource."
+        }
+      }
+    },
     "FileSystemResourceListResult": {
       "type": "object",
       "description": "The response of a FileSystemResource list operation.",
@@ -594,13 +604,6 @@
         "identity": {
           "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
           "description": "The managed service identities assigned to this resource."
-        },
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
         }
       },
       "allOf": [
@@ -665,7 +668,7 @@
       "description": "The type used for update operations of the FileSystemResource.",
       "properties": {
         "identity": {
-          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "$ref": "#/definitions/Azure.ResourceManager.ManagedServiceIdentityProperty",
           "description": "The managed service identities assigned to this resource."
         },
         "tags": {
