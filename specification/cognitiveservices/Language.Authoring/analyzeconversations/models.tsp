@@ -169,6 +169,7 @@ union OrchestrationTargetProjectKind {
 /**
  * Represents the metadata of a project.
  */
+@resource("projects")
 model ProjectMetadata {
   /**
    * Represents the project creation datetime.
@@ -212,6 +213,8 @@ model ProjectMetadata {
   /**
    * The new project name.
    */
+  @key("projectName")
+  @visibility("read")
   projectName: string;
 
   /**
@@ -1295,10 +1298,13 @@ model SubTrainingJobState {
 /**
  * Represents a list of retrieved projects' metadata.
  */
+@resource("projects")
 model ProjectsMetadata {
   /**
    * The list of projects.
    */
+  @key
+  @visibility
   value: ProjectMetadata[];
 
   /**
@@ -1492,8 +1498,7 @@ model ConversationExportedEntity {
   regex?: ExportedEntityRegex;
 
   /**
-   * The required components. Allowed values are 'learned', 'list', 'prebuilts' and
-   * 'regex'.
+   * The required components. Allowed values are 'learned', 'list', 'prebuilts' and 'regex'.
    */
   requiredComponents?: string[];
 }

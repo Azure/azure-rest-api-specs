@@ -14,21 +14,21 @@ using Azure.Core.Traits;
 
 namespace Language.Authoring;
 
+
+alias ServiceTraits = NoRepeatableRequests &
+  NoConditionalRequests &
+  NoClientRequestId;
+
+alias languageOperations = ResourceOperations<ServiceTraits, ErrorResponse>;
+
+
 /**
  * Gets the details of a project.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @summary("Get project details")
-@route("/{projectName}")
 @get
-op getProject is Azure.Core.Foundations.Operation<
-  {
-    /**
-     * The project name.
-     */
-    @path
-    projectName: string;
-  },
+op getProject is languageOperations.ResourceRead<
   ProjectMetadata
 >;
 
@@ -37,45 +37,15 @@ op getProject is Azure.Core.Foundations.Operation<
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @summary("Create project")
-@route("/{projectName}")
-@patch
-op createProject is Azure.Core.Foundations.Operation<
-  {
-    /**
-     * The project name.
-     */
-    @path
-    projectName: string;
-
-    /**
-     * The project parameters.
-     */
-    @body
-    body: CreateProjectOptions;
-  },
-  ProjectMetadata
->;
+op createProject is languageOperations.ResourceCreateOrUpdate<ProjectMetadata>;
 
 /**
  * Deletes a project.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @summary("Delete project")
-@route("/{projectName}")
-@delete
 @pollingOperation(getProjectDeletionStatus)
-op deleteProject is Foundations.LongRunningOperation<
-  {
-    /**
-     * The project name.
-     */
-    @path
-    projectName: string;
-  },
-  AcceptedResponse,
-    {},
-  ErrorResponse
->;
+op deleteProject is languageOperations.LongRunningResourceDelete<ProjectMetadata>;
 
 /**
  * Generates a copy project operation authorization to the current target Azure
@@ -1113,9 +1083,9 @@ op cancelTrainingJob is Foundations.LongRunningOperation<
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @summary("List projects")
-@route("/")
 @get
-op listProjects is Azure.Core.Foundations.Operation<
+op listProjects is languageOperations.ResourceList<
+    ProjectsMetadata,
   {
     /**
      * The number of projects to be returned.
@@ -1134,8 +1104,8 @@ op listProjects is Azure.Core.Foundations.Operation<
      */
     @query("maxpagesize")
     maxpagesize?: int32;
-  },
-  ProjectsMetadata
+  }
+  
 >;
 
 /**
