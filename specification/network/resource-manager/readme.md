@@ -109,10 +109,10 @@ suppressions:
     reason: False alarm.
   - code: ParameterNotDefinedInGlobalParameters
     from: networkManagerRoutingConfiguration.json
-    reason: Referenced in common types.json file
+    reason: Referenced in common types.json file.
   - code: ListInOperationName
     from: virtualWan.json
-    reason: Customized verb is used for API
+    reason: Customized verb is used for API.
   - code: ParameterNotUsingCommonTypes
     from: virtualWan.json
     reason:  We are define the resourceGroupName is our swagger without using common types to be consistent with all other parameters we defined in the swagger. 
@@ -124,11 +124,11 @@ suppressions:
     reason: Child resource is auto-created when top-level resource is created.
   - code: PostOperationIdContainsUrlVerb
     from: virtualWan.json
-    reason: Customized verbs are used for API
+    reason: Customized verbs are used for API.
   - code: AllProxyResourcesShouldHaveDelete
     from: virtualWan.json
-    reason: Service design forces behavior
-  - suppress: XmsIdentifierValidation
+    reason: Service design forces behavior.
+  - code: XmsIdentifierValidation
     from: webapplicationfirewall.json
     reason: By design, no id is needed for groupmembership resources.
 ```
