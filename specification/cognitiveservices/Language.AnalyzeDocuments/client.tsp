@@ -7,7 +7,7 @@ using Azure.ClientGenerator.Core;
 namespace Language.AnalyzeTextClientCustomizations;
 
 @@clientName(Tasks, "DocumentActions", "csharp");
-@@clientName(Status, "DocumentActionState", "csharp");
+@@clientName(State, "DocumentActionState", "csharp");
 @@clientName(Error, "AnalyzeDocumentsError", "csharp");
 
 @@clientName(Entity, "NamedEntity", "csharp");
