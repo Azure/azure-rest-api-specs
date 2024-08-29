@@ -22,8 +22,6 @@ namespace Language.AnalyzeTextClientCustomizations;
 
 @@clientName(WarningCodeValue, "WarningCode", "csharp");
 
-@@clientName(Entity.confidenceScore, "confidence", "csharp");
-
 @@clientName(AnalyzeDocumentsLROTask.taskName, "Name", "csharp");
 
 @@clientName(PiiCategoriesExclude.ABARoutingNumber,
