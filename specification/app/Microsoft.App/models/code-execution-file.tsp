@@ -5,33 +5,33 @@ using TypeSpec.Rest;
 namespace Microsoft.App;
 
 @doc("Code execution file resource collection.")
-model CodeExecutionFileCollection {
+model SessionResourceFileCollection {
   @doc("The files uploaded.")
-  value: CodeExecutionFile[];
+  value: SessionResourceFile[];
 }
 
 @doc("Code execution file resource.")
 @parentResource(SessionPool)
 @resource("files")
-model CodeExecutionFile {
-  @key("filename")
+model SessionResourceFile {
+  @key("fileName")
   @segment("files")
   @doc("The name of the file.")
   @visibility("create")
-  filename: string;
+  fileName: string;
 
   @doc("Code execution file resource properties.")
-  properties: CodeExecutionFileProperties;
+  properties: SessionResourceFileProperties;
 }
 
 @doc("Code execution file resource properties.")
-model CodeExecutionFileProperties {
+model SessionResourceFileProperties {
   @doc("The name of the file.")
-  filename: string;
+  fileName: string;
 
   @doc("The size of the file.")
-  size: int64;
+  sizeInBytes: int64;
 
   @doc("The date time when the file was last modified.")
-  lastModifiedTime: utcDateTime;
+  lastModifiedAt: utcDateTime;
 }

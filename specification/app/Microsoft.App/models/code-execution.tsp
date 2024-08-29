@@ -5,26 +5,26 @@ using TypeSpec.Rest;
 namespace Microsoft.App;
 
 @doc("The request to execute code.")
-model CodeExecutionRequest {
+model SessionCodeExecutionRequest {
   @doc("The properties for executing code.")
-  properties: CodeExecutionRequestProperties;
+  properties: SessionCodeExecutionRequestProperties;
 }
 
 @doc("The response containing the result of the code execution.")
-model CodeExecutionResponse {
+model SessionCodeExecutionResponse {
   @doc("The properties of the code execution response.")
-  properties: CodeExecutionResponseProperties;
+  properties: SessionCodeExecutionResponseProperties;
 }
 
 @doc("The properties of the code execution request.")
-model CodeExecutionRequestProperties {
+model SessionCodeExecutionRequestProperties {
   @doc("The code input type of the code execution request.")
   codeInputType: CodeInputType;
 
   @doc("The execution type of the code execution request.")
   executionType: ExecutionType;
 
-  @doc("The code to execute.")
+  @doc("The string of the code to execute, based on CodeInputType.")
   code: string;
 
   @doc("Code execution timeout in seconds.")
@@ -36,13 +36,13 @@ union CodeInputType {
   string,
 
   @doc("Inline.")
-  inline: "inline",
+  inline: "Inline",
 
   @doc("InlineBase64.")
-  inlineBase64: "inlineBase64",
+  inlineBase64: "InlineBase64",
 
   @doc("InlineText.")
-  inlineText: "inlineText",
+  inlineText: "InlineText",
 }
 
 @doc("Execution Type")
@@ -50,11 +50,11 @@ union ExecutionType {
   string,
 
   @doc("Synchronous")
-  synchronous: "synchronous",
+  synchronous: "Synchronous",
 }
 
 @doc("The properties of the code execution result.")
-model CodeExecutionResponseProperties {
+model SessionCodeExecutionResponseProperties {
   @doc("The status of the code execution, indicates whether succeeded or not.")
   status: CodeExecutionStatus;
 

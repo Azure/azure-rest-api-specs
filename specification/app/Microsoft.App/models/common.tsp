@@ -38,6 +38,9 @@ model SessionPool {
   @key("sessionPoolName")
   @segment("sessionPools")
   @visibility
+  @pattern("^[a-z][a-z0-9]*$")
+  @maxLength(63)
+  @minLength(3)
   sessionPoolName: string;
 }
 
@@ -69,7 +72,7 @@ model SessionPoolNameParameter {
 }
 
 @doc("The code execution name path parameter.")
-model CodeExecutionFileNameParameter {
+model SessionResourceFileNameParameter {
   @doc("The name of the file.")
   @path
   filename: string;

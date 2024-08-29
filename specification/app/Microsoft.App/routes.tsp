@@ -21,7 +21,7 @@ alias SessionTraits = NoRepeatableRequests &
 
 alias SessionOperations = Azure.Core.ResourceOperations<SessionTraits>;
 
-interface CodeExecution {
+interface SessionCodeExecution {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" ""
   @doc("Execute code in a session.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/sessionPools/{sessionPoolName}/code/execute")
@@ -34,20 +34,20 @@ interface CodeExecution {
 
       @doc("The request to execute code.")
       @body
-      codeExecutionRequest: CodeExecutionRequest;
+      codeExecutionRequest: SessionCodeExecutionRequest;
     },
-    CodeExecutionResponse,
+    SessionCodeExecutionResponse,
     {},
     Foundations.ErrorResponse
   >;
 }
 
-interface CodeExecutionFiles {
+interface SessionResourceFiles {
   @doc("Get the file resource.")
-  getFileMetadata is SessionOperations.ResourceRead<CodeExecutionFile>;
+  getFileMetadata is SessionOperations.ResourceRead<SessionResourceFile>;
 
   @doc("Delete the file.")
-  deleteFile is SessionOperations.ResourceDelete<CodeExecutionFile>;
+  deleteFile is SessionOperations.ResourceDelete<SessionResourceFile>;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" ""
   @doc("Get the content of the file.")
@@ -58,7 +58,7 @@ interface CodeExecutionFiles {
       ...SubscriptionIdParameter;
       ...ResourceGroupNameParameter;
       ...SessionPoolNameParameter;
-      ...CodeExecutionFileNameParameter;
+      ...SessionResourceFileNameParameter;
       ...SessionIdentifier;
     },
     bytes,
@@ -69,7 +69,7 @@ interface CodeExecutionFiles {
   #suppress "@azure-tools/typespec-azure-core/byos" ""
   @doc("Upload a file to a session.")
   uploadFile is SessionOperations.ResourceAction<
-    CodeExecutionFile,
+    SessionResourceFile,
     {
       @doc("The content type for the operation. Always multipart/form-data for this operation.")
       @header("content-type")
@@ -78,6 +78,6 @@ interface CodeExecutionFiles {
       @doc("The file to upload.")
       file: bytes;
     },
-    CodeExecutionFileCollection
+    SessionResourceFileCollection
   >;
 }
