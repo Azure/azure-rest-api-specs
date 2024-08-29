@@ -71,9 +71,321 @@
     },
     {
       "name": "ExternalConnections"
+    },
+    {
+      "name": "Approval"
     }
   ],
   "paths": {
+    "/{resourceUri}/providers/Microsoft.Mission/approvals/{approvalName}": {
+      "get": {
+        "operationId": "Approval_Get",
+        "tags": [
+          "Approval"
+        ],
+        "description": "Get a ApprovalResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          },
+          {
+            "name": "approvalName",
+            "in": "path",
+            "description": "The name of the approvals resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z][a-zA-Z0-9-]*[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ApprovalResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Approval_Get": {
+            "$ref": "./examples/Approvals_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Approval_CreateOrUpdate",
+        "tags": [
+          "Approval"
+        ],
+        "description": "Create a ApprovalResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          },
+          {
+            "name": "approvalName",
+            "in": "path",
+            "description": "The name of the approvals resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z][a-zA-Z0-9-]*[a-zA-Z0-9]$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ApprovalResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Arm resource update successful",
+            "schema": {
+              "$ref": "#/definitions/ApprovalResource"
+            }
+          },
+          "201": {
+            "description": "Azure create operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ApprovalResource"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Approval_CreateOrUpdate": {
+            "$ref": "./examples/Approvals_CreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "Approval_Update",
+        "tags": [
+          "Approval"
+        ],
+        "description": "Update a ApprovalResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          },
+          {
+            "name": "approvalName",
+            "in": "path",
+            "description": "The name of the approvals resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z][a-zA-Z0-9-]*[a-zA-Z0-9]$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ApprovalResourceUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ApprovalResource"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Approval_Update": {
+            "$ref": "./examples/Approvals_Update.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "Approval_Delete",
+        "tags": [
+          "Approval"
+        ],
+        "description": "Delete a ApprovalResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          },
+          {
+            "name": "approvalName",
+            "in": "path",
+            "description": "The name of the approvals resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z][a-zA-Z0-9-]*[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Approval_Delete": {
+            "$ref": "./examples/Approvals_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/{resourceUri}/providers/Microsoft.Mission/approvals/{approvalName}/initiatorCallback": {
+      "post": {
+        "operationId": "Approval_InitiatorCallback",
+        "tags": [
+          "Approval"
+        ],
+        "description": "Upon receiving approval or rejection from approver, this facilitates actions on approval resource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          },
+          {
+            "name": "approvalName",
+            "in": "path",
+            "description": "The name of the approvals resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z][a-zA-Z0-9-]*[a-zA-Z0-9]$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/InitiatorCallbackRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/InitiatorCallbackResponse"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Approval_InitiatorCallback": {
+            "$ref": "./examples/Approvals_InitiatorCallback.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
     "/providers/Microsoft.Mission/operations": {
       "get": {
         "operationId": "Operations_List",
@@ -1922,6 +2234,80 @@
         "x-ms-examples": {
           "EnclaveConnection_ApprovalCallback": {
             "$ref": "./examples/EnclaveConnection_PostApprovalCallback.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Mission/enclaveConnections/{enclaveConnectionName}/approvalDeletionCallback": {
+      "post": {
+        "operationId": "EnclaveConnection_ApprovalDeletionCallback",
+        "tags": [
+          "EnclaveConnection"
+        ],
+        "description": "Callback that triggers on approval deletion state change.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "enclaveConnectionName",
+            "in": "path",
+            "description": "The name of the Enclave Connection Resource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z][a-zA-Z0-9-]*[a-zA-Z0-9]$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ApprovalDeletionCallbackRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ApprovalDeletionCallbackResponse"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "EnclaveConnection_ApprovalDeletionCallback": {
+            "$ref": "./examples/EnclaveConnection_ApprovalDeletionCallback.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -3828,7 +4214,7 @@
       "properties": {
         "resourceId": {
           "type": "string",
-          "description": "Resource Id of the item being approved or declined"
+          "description": "Resource Id of the item being approved or rejected"
         },
         "resourceRequestAction": {
           "type": "string",
@@ -3873,6 +4259,146 @@
       "required": [
         "message"
       ]
+    },
+    "ApprovalDeletionCallbackRequest": {
+      "type": "object",
+      "description": "Request body for calling post-action",
+      "properties": {
+        "resourceRequestAction": {
+          "type": "string",
+          "description": "Resource request action indicating action which needed to be performed upon calling approval-deletion-callback post action",
+          "enum": [
+            "Create",
+            "Delete",
+            "Update"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true
+          }
+        }
+      },
+      "required": [
+        "resourceRequestAction"
+      ]
+    },
+    "ApprovalDeletionCallbackResponse": {
+      "type": "object",
+      "description": "Response body after handling of approvalDeletionCallbackRequest",
+      "properties": {
+        "message": {
+          "type": "string",
+          "description": "Confirmation message indicating the result of the operation."
+        }
+      },
+      "required": [
+        "message"
+      ]
+    },
+    "ApprovalProperties": {
+      "type": "object",
+      "description": "Approvals Resource Properties",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Provisioning State.",
+          "readOnly": true
+        },
+        "parent1": {
+          "type": "string",
+          "description": "Parameter for optimizing query results"
+        },
+        "parent2": {
+          "type": "string",
+          "description": "Parameter for optimizing query results"
+        },
+        "requestMetadata": {
+          "$ref": "#/definitions/RequestMetadata",
+          "description": "Request metadata for the approval request."
+        }
+      },
+      "required": [
+        "requestMetadata"
+      ]
+    },
+    "ApprovalPropertiesUpdate": {
+      "type": "object",
+      "description": "Approvals Resource Properties",
+      "properties": {
+        "parent1": {
+          "type": "string",
+          "description": "Parameter for optimizing query results"
+        },
+        "parent2": {
+          "type": "string",
+          "description": "Parameter for optimizing query results"
+        },
+        "requestMetadata": {
+          "$ref": "#/definitions/RequestMetadataUpdate",
+          "description": "Request metadata for the approval request."
+        }
+      }
+    },
+    "ApprovalResource": {
+      "type": "object",
+      "description": "Approval Model Resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ApprovalProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ApprovalResourceUpdate": {
+      "type": "object",
+      "description": "Approval Model Resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ApprovalPropertiesUpdate",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ApprovalStatus": {
+      "type": "string",
+      "description": "Approval Status Enum",
+      "enum": [
+        "Approved",
+        "Rejected",
+        "Pending"
+      ],
+      "x-ms-enum": {
+        "name": "ApprovalStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Approved",
+            "value": "Approved",
+            "description": "ApprovalStatus Type Approved"
+          },
+          {
+            "name": "Rejected",
+            "value": "Rejected",
+            "description": "ApprovalStatus Type Rejected"
+          },
+          {
+            "name": "Pending",
+            "value": "Pending",
+            "description": "ApprovalStatus Type Pending"
+          }
+        ]
+      }
     },
     "Azure.ResourceManager.CommonTypes.ManagedServiceIdentityUpdate": {
       "type": "object",
@@ -5288,6 +5814,39 @@
         ]
       }
     },
+    "InitiatorCallbackRequest": {
+      "type": "object",
+      "description": "Request body for calling post-action",
+      "properties": {
+        "approvalStatus": {
+          "type": "string",
+          "description": "Approval status indicating 'Approved' or 'Rejected'",
+          "enum": [
+            "Approved",
+            "Rejected"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true
+          }
+        }
+      },
+      "required": [
+        "approvalStatus"
+      ]
+    },
+    "InitiatorCallbackResponse": {
+      "type": "object",
+      "description": "Response body after handling of approvalCallbackRequest",
+      "properties": {
+        "message": {
+          "type": "string",
+          "description": "Confirmation message indicating the result of the operation."
+        }
+      },
+      "required": [
+        "message"
+      ]
+    },
     "InternalConnection": {
       "type": "object",
       "description": "Describes an Internal Connection.",
@@ -5733,6 +6292,37 @@
         ]
       },
       "readOnly": true
+    },
+    "RequestMetadata": {
+      "type": "object",
+      "description": "Request Metadata for approvals request.",
+      "properties": {
+        "resourceAction": {
+          "type": "string",
+          "description": "Resource Action of the item being approved or declined."
+        },
+        "approvalStatus": {
+          "$ref": "#/definitions/ApprovalStatus",
+          "description": "Approval status."
+        }
+      },
+      "required": [
+        "resourceAction"
+      ]
+    },
+    "RequestMetadataUpdate": {
+      "type": "object",
+      "description": "Request Metadata for approvals request.",
+      "properties": {
+        "resourceAction": {
+          "type": "string",
+          "description": "Resource Action of the item being approved or declined."
+        },
+        "approvalStatus": {
+          "$ref": "#/definitions/ApprovalStatus",
+          "description": "Approval status."
+        }
+      }
     },
     "ServiceIdentifier": {
       "type": "string",
@@ -6252,5 +6842,15 @@
       ]
     }
   },
-  "parameters": {}
+  "parameters": {
+    "Azure.ResourceManager.ResourceUriParameter": {
+      "name": "resourceUri",
+      "in": "path",
+      "description": "The fully qualified Azure Resource manager identifier of the resource.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "x-ms-skip-url-encoding": true
+    }
+  }
 }

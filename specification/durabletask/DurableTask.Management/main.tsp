@@ -62,6 +62,10 @@ model NamespaceProperties {
   @visibility("read")
   url?: string;
 
+  @doc("URL of the durable task service dashboard")
+  @visibility("read")
+  dashboardUrl?: string;
+
   @doc("IP allow list for durable task service. Values can be Pv4, IPv6 or CIDR")
   ipAllowlist?: string[];
 }
@@ -117,7 +121,7 @@ interface Namespaces {
   createOrUpdate is ArmResourceCreateOrReplaceAsync<Namespace>;
   update is ArmCustomPatchAsync<Namespace, NamespaceUpdate>;
   //update is ArmResourcePatchSync<Namespace, NamespaceProperties>;
-  delete is ArmResourceDeleteSync<Namespace>;
+  delete is ArmResourceDeleteWithoutOkAsync<Namespace>;
   listByResourceGroup is ArmResourceListByParent<Namespace>;
   listBySubscription is ArmListBySubscription<Namespace>;
 }
@@ -129,7 +133,7 @@ interface TaskHubs {
   @doc("Create or update a Task Hub")
   createOrUpdate is ArmResourceCreateOrReplaceSync<TaskHub>;
   @doc("Update a Task Hub")
-  update is ArmCustomPatchAsync<TaskHub, TaskHubUpdate>;
+  update is ArmCustomPatchSync<TaskHub, TaskHubUpdate>;
   @doc("Delete a Task Hub")
   delete is ArmResourceDeleteSync<TaskHub>;
   @doc("List Task Hubs")

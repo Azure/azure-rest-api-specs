@@ -16,24 +16,14 @@ Set-StrictMode -Version 3
 
 . $PSScriptRoot/ChangedFiles-Functions.ps1
 . $PSScriptRoot/Logging-Functions.ps1
+. $PSScriptRoot/Suppressions-Functions.ps1
 
-function Get-Suppression {
+function Get-ValidatedSuppression {
   param (
     [string]$fileInSpecFolder
   )
 
-  # -NoEnumerate to prevent single-element arrays from being collapsed to a single object
-  # -AsHashtable is closer to raw JSON than PSCustomObject
-  $suppressions = npm exec --no -- get-suppressions TypeSpecRequirement $fileInSpecFolder | ConvertFrom-Json -NoEnumerate -AsHashtable
-
-  if ($LASTEXITCODE -ne 0) {
-      LogError "Failure running 'npm exec get-suppressions'"
-      LogJobFailure
-      exit 1
-  }
-
-  # For now, we just use the first matching suppression returned by "get-suppressions" (#29003)
-  $suppression = $suppressions ? $suppressions[0] : $null
+  $suppression = Get-Suppression "TypeSpecRequirement" $fileInSpecFolder
 
   if ($suppression) {
     # Each path must specify a single version (without wildcards) under "preview|stable"
@@ -90,7 +80,7 @@ else {
 
     $fullPath = (Join-Path $repoPath $file)
 
-    $suppression = Get-Suppression $fullPath
+    $suppression = Get-ValidatedSuppression $fullPath
     if ($suppression) {
       $reason = $suppression["reason"] ?? "<no reason specified>"
 

@@ -5,37 +5,95 @@ import "@azure-tools/typespec-autorest";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
-@doc("Provisioning state enum")
-union ProvisioningState {
-  @doc("The resource is being provisioned.")
-  Provisioning: "Provisioning",
+@doc("Device type enum")
+union DeviceType {
+  @doc("The Server.")
+  Server: "Server",
 
-  @doc("The resource action is successful.")
-  Succeeded: "Succeeded",
+  @doc("The ChassisManager.")
+  ChassisManager: "ChassisManager",
 
-  @doc("The resource action has failed.")
-  Failed: "Failed",
+  @doc("The EpmsSensor.")
+  EpmsSensor: "EpmsSensor",
 
-  @doc("The resource action has been cancelled.")
-  Canceled: "Canceled",
+  @doc("The RackManager.")
+  RackManager: "RackManager",
 
-  @doc("The resource provisioning has been accepted.")
-  Accepted: "Accepted",
+  @doc("The EPMS.")
+  EPMS: "EPMS",
 
-  @doc("The resource is being created.")
-  Creating: "Creating",
+  string,
+}
 
-  @doc("The resource is being updated.")
-  Updating: "Updating",
+@doc("Deployment type enum")
+union DeploymentType {
+  @doc("Pilotfish deployment.")
+  Pilotfish: "Pilotfish",
 
-  @doc("The resource is being deleted.")
-  Deleting: "Deleting",
+  @doc("AzureAll deployment.")
+  AzureAll: "AzureAll",
 
-  @doc("The resource has been deleted.")
-  Deleted: "Deleted",
+  @doc("Exchange deployment.")
+  Exchange: "Exchange",
 
-  @doc("The resource status is unspecified.")
-  NotSpecified: "NotSpecified",
+  @doc("Autopilot deployment.")
+  Autopilot: "Autopilot",
+
+  @doc("Sharepoint deployment.")
+  Sharepoint: "Sharepoint",
+
+  @doc("FOPE deployment.")
+  FOPE: "FOPE",
+
+  @doc("DatacenterServices deployment.")
+  DatacenterServices: "DatacenterServices",
+
+  @doc("MacCloud deployment.")
+  MacCloud: "MacCloud",
+
+  @doc("PreBuild deployment.")
+  PreBuild: "PreBuild",
+
+  @doc("AzureDNS deployment.")
+  AzureDNS: "AzureDNS",
+
+  @doc("CPS deployment.")
+  CPS: "CPS",
+
+  @doc("Tycoon deployment.")
+  Tycoon: "Tycoon",
+
+  @doc("AzureEngSys deployment.")
+  AzureEngSys: "AzureEngSys",
+
+  @doc("Fabric deployment.")
+  Fabric: "Fabric",
+
+  @doc("DCCE deployment.")
+  DCCE: "DCCE",
+
+  @doc("AzureKeyVault deployment.")
+  AzureKeyVault: "AzureKeyVault",
+
+  @doc("FirstPartyNetwork deployment.")
+  FirstPartyNetwork: "FirstPartyNetwork",
+
+  @doc("Unknown deployment.")
+  Unknown: "Unknown",
+
+  string,
+}
+
+@doc("Workload type enum")
+union WorkloadType {
+  @doc("Baremetal workload type.")
+  Baremetal: "Baremetal",
+
+  @doc("VM workload type.")
+  VM: "VM",
+
+  @doc("Unknown workload type.")
+  Unknown: "Unknown",
 
   string,
 }

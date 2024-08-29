@@ -14,23 +14,62 @@
         "properties": {
           "instanceCountSummary": [
             {
+              "zone": 1,
               "instanceCountsByState": [
                 {
-                  "state": "creating",
+                  "state": "Creating",
                   "count": 100
                 },
                 {
-                  "state": "running",
+                  "state": "Running",
+                  "count": 20
+                },
+                {
+                  "state": "Deleting",
+                  "count": 21
+                }
+              ]
+            },
+            {
+              "zone": 2,
+              "instanceCountsByState": [
+                {
+                  "state": "Creating",
+                  "count": 100
+                },
+                {
+                  "state": "Running",
                   "count": 500
                 },
                 {
-                  "state": "deleting",
+                  "state": "Deleting",
                   "count": 20
+                }
+              ]
+            },
+            {
+              "zone": 3,
+              "instanceCountsByState": [
+                {
+                  "state": "Creating",
+                  "count": 100
+                },
+                {
+                  "state": "Running",
+                  "count": 20
+                },
+                {
+                  "state": "Deleting",
+                  "count": 7
                 }
               ]
             }
           ],
-          "provisioningState": "Succeeded"
+          "provisioningState": "Succeeded",
+          "status": {
+            "code": "HealthState/healthy",
+            "message": "The pool is healthy."
+          }
         },
         "id": "/subscriptions/8CC31D61-82D7-4B2B-B9DC-6B924DE7D229/resourceGroups/rgstandbypool/providers/Microsoft.StandbyPool/standbyContainerGroupPools/pool/runtimeViews/latest",
         "name": "pool",

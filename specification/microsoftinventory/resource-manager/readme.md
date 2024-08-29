@@ -30,22 +30,20 @@ openapi-subtype: rpaas
 tag: package-2024-01-01-preview
 ```
 
-### Tag: package-preview-2024-01
+### Tag: package-2024-01-01-preview
 
-These settings apply only when `--tag=package-preview-2024-01` is specified on the command line.
+These settings apply only when `--tag=package-2024-01-01-preview` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2024-01'
+```yaml $(tag) == 'package-2024-01-01-preview'
 input-file:
   - Microsoft.Inventory/preview/2024-01-01-preview/microsoftinventory.json
-  
 suppressions:
-  - code: OperationIdNounVerb
-    reason: The operation id cannot be fixed as fixing it is resulting in typespec validation errors valid.
-    where: $.paths["/providers/Microsoft.Inventory/locations/{location}/physicalAzureHosts/{azureHostName}"].get.operationId
-  - code: OperationIdNounVerb
-    reason: The operation id cannot be fixed as fixing it is resulting in typespec validation errors valid.
-    where: $.paths["/providers/Microsoft.Inventory/locations/{location}/physicalClusters/{clusterName}"].get.operationId
-  - code: OperationIdNounVerb
-    reason: The operation id cannot be fixed as fixing it is resulting in typespec validation errors valid.
-    where: $.paths["/providers/Microsoft.Inventory/locations/{location}/physicalDatacenters/{datacenterName}"].get.operationId    
+  - code: EnumInsteadOfBoolean
+    where:
+      - $.definitions.AdditionalStateInformation.properties.releaseNonDataRetentionResource
+      - $.definitions.AdditionalStateInformation.properties.blockNewResourceCreation
+      - $.definitions.ClusterProperties.properties.isClusterInBuildout
+    reason: These properties should be booleans, and were set as booleans previously
 ```
+
+---

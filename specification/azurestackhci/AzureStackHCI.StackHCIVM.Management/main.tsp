@@ -25,7 +25,7 @@ using TypeSpec.Versioning;
  * Azure Stack HCI management service
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "HCI itself is a short form."
-#suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint"
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "Operations API is still spec'd, but now resides in another spec in this namespace."
 @armProviderNamespace
 @service({
   title: "Microsoft.AzureStackHCI",

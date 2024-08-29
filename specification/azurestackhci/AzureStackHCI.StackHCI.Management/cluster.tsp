@@ -346,6 +346,7 @@ union ImdsAttestation {
 @doc("Cluster details to update.")
 @discriminator("kind")
 model ClusterPatch {
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing api"
   @doc("Resource tags.")
   tags?: Record<string>;
 
@@ -865,6 +866,7 @@ model IsolatedVmAttestationConfiguration {
 
 @doc("Cluster of nodes installed with Windows-based OS.")
 model WindowsClusterPatch extends ClusterPatch {
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing api"
   @doc("Resource tags.")
   tags?: Record<string>;
 

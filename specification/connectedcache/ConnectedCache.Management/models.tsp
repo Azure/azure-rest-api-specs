@@ -147,6 +147,7 @@ model CacheNodeOldResponse {
 
 @doc("Mcc PATCH operation properties.")
 model ConnectedCachePatchResource {
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing api"
   @doc("Resource tags.")
   @visibility("read", "update")
   tags?: Record<string>;
