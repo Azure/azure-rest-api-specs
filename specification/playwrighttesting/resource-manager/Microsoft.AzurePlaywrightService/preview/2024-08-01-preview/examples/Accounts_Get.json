@@ -1,20 +1,11 @@
 {
-  "title": "Accounts_Update",
-  "operationId": "Accounts_Update",
+  "title": "Accounts_Get",
+  "operationId": "Accounts_Get",
   "parameters": {
-    "api-version": "2024-02-01-preview",
+    "api-version": "2024-08-01-preview",
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "resourceGroupName": "dummyrg",
-    "accountName": "myPlaywrightAccount",
-    "properties": {
-      "tags": {
-        "Team": "Dev Exp",
-        "Division": "LT"
-      },
-      "properties": {
-        "regionalAffinity": "Enabled"
-      }
-    }
+    "accountName": "myPlaywrightAccount"
   },
   "responses": {
     "200": {
@@ -25,7 +16,8 @@
           "provisioningState": "Succeeded",
           "regionalAffinity": "Enabled",
           "scalableExecution": "Enabled",
-          "reporting": "Enabled"
+          "reporting": "Enabled",
+          "localAuth": "Enabled"
         },
         "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/dummyrg/providers/Microsoft.AzurePlaywrightService/accounts/myPlaywrightAccount",
         "name": "myPlaywrightAccount",
