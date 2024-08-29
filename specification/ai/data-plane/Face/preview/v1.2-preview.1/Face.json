@@ -88,12 +88,12 @@
       "post": {
         "operationId": "FaceDetectionOperations_DetectFromUrl",
         "summary": "Detect human faces in an image, return face rectangles, and optionally with faceIds, landmarks, and attributes.",
-        "description": "> [!IMPORTANT]\n> Microsoft has retired or limited facial recognition capabilities that can be used to try to infer emotional states and identity attributes which, if misused, can subject people to stereotyping, discrimination or unfair denial of services. The retired capabilities are emotion and gender. The limited capabilities are age, smile, facial hair, hair and makeup. Email Azure Face API <azureface@microsoft.com> if you have a responsible use case that would benefit from the use of any of the limited capabilities. Read more about this decision https://azure.microsoft.com/blog/responsible-ai-investments-and-safeguards-for-facial-recognition/.\n\n*\n  * No image will be stored. Only the extracted face feature(s) will be stored on server. The faceId is an identifier of the face feature and will be used in \"Identify\", \"Verify\", and \"Find Similar\". The stored face features will expire and be deleted at the time specified by faceIdTimeToLive after the original detection call.\n  * Optional parameters include faceId, landmarks, and attributes. Attributes include headPose, glasses, occlusion, accessories, blur, exposure, noise, mask, and qualityForRecognition. Some of the results returned for specific attributes may not be highly accurate.\n  * JPEG, PNG, GIF (the first frame), and BMP format are supported. The allowed image file size is from 1KB to 6MB.\n  * The minimum detectable face size is 36x36 pixels in an image no larger than 1920x1080 pixels. Images with dimensions higher than 1920x1080 pixels will need a proportionally larger minimum face size.\n  * Up to 100 faces can be returned for an image. Faces are ranked by face rectangle size from large to small.\n  * For optimal results when querying \"Identify\", \"Verify\", and \"Find Similar\" ('returnFaceId' is true), please use faces that are: frontal, clear, and with a minimum size of 200x200 pixels (100 pixels between eyes).\n  * Different 'detectionModel' values can be provided. To use and compare different detection models, please refer to https://learn.microsoft.com/azure/ai-services/computer-vision/how-to/specify-detection-model\n    * 'detection_02': Face attributes and landmarks are disabled if you choose this detection model.\n    * 'detection_03': Face attributes (mask, blur, and headPose) and landmarks are supported if you choose this detection model.\n  * Different 'recognitionModel' values are provided. If follow-up operations like \"Verify\", \"Identify\", \"Find Similar\" are needed, please specify the recognition model with 'recognitionModel' parameter. The default value for 'recognitionModel' is 'recognition_01', if latest model needed, please explicitly specify the model you need in this parameter. Once specified, the detected faceIds will be associated with the specified recognition model. More details, please refer to https://learn.microsoft.com/azure/ai-services/computer-vision/how-to/specify-recognition-model.",
+        "description": "> [!IMPORTANT]\n> Microsoft has retired or limited facial recognition capabilities that can be used to try to infer emotional states and identity attributes which, if misused, can subject people to stereotyping, discrimination or unfair denial of services. The retired capabilities are emotion and gender. The limited capabilities are age, smile, facial hair, hair and makeup. Email [Azure Face API](mailto:azureface@microsoft.com) if you have a responsible use case that would benefit from the use of any of the limited capabilities. Read more about this decision [here](https://azure.microsoft.com/blog/responsible-ai-investments-and-safeguards-for-facial-recognition/).\n\n*\n  * No image will be stored. Only the extracted face feature(s) will be stored on server. The faceId is an identifier of the face feature and will be used in \"Identify\", \"Verify\", and \"Find Similar\". The stored face features will expire and be deleted at the time specified by faceIdTimeToLive after the original detection call.\n  * Optional parameters include faceId, landmarks, and attributes. Attributes include headPose, glasses, occlusion, accessories, blur, exposure, noise, mask, and qualityForRecognition. Some of the results returned for specific attributes may not be highly accurate.\n  * JPEG, PNG, GIF (the first frame), and BMP format are supported. The allowed image file size is from 1KB to 6MB.\n  * The minimum detectable face size is 36x36 pixels in an image no larger than 1920x1080 pixels. Images with dimensions higher than 1920x1080 pixels will need a proportionally larger minimum face size.\n  * Up to 100 faces can be returned for an image. Faces are ranked by face rectangle size from large to small.\n  * For optimal results when querying \"Identify\", \"Verify\", and \"Find Similar\" ('returnFaceId' is true), please use faces that are: frontal, clear, and with a minimum size of 200x200 pixels (100 pixels between eyes).\n  * Different 'detectionModel' values can be provided. The availability of landmarks and supported attributes depends on the detection model specified. To use and compare different detection models, please refer to [here](https://learn.microsoft.com/azure/ai-services/computer-vision/how-to/specify-detection-model).\n  * Different 'recognitionModel' values are provided. If follow-up operations like \"Verify\", \"Identify\", \"Find Similar\" are needed, please specify the recognition model with 'recognitionModel' parameter. The default value for 'recognitionModel' is 'recognition_01', if latest model needed, please explicitly specify the model you need in this parameter. Once specified, the detected faceIds will be associated with the specified recognition model. More details, please refer to [here](https://learn.microsoft.com/azure/ai-services/computer-vision/how-to/specify-recognition-model).",
         "parameters": [
           {
             "name": "detectionModel",
             "in": "query",
-            "description": "The 'detectionModel' associated with the detected faceIds. Supported 'detectionModel' values include 'detection_01', 'detection_02' and 'detection_03'. The default value is 'detection_01'.",
+            "description": "The 'detectionModel' associated with the detected faceIds. Supported 'detectionModel' values include 'detection_01', 'detection_02' and 'detection_03'. The default value is 'detection_01'. 'detection_03' is recommended since its accuracy is improved on smaller faces (64x64 pixels) and rotated face orientations.",
             "required": false,
             "type": "string",
             "default": "detection_01",
@@ -1306,60 +1306,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "name": {
-                  "type": "string",
-                  "description": "User defined name, maximum length is 128.",
-                  "minLength": 1,
-                  "maxLength": 128
-                },
-                "userData": {
-                  "type": "string",
-                  "description": "Optional user defined data. Length should not exceed 16K.",
-                  "maxLength": 16384
-                },
-                "recognitionModel": {
-                  "type": "string",
-                  "description": "The 'recognitionModel' associated with this face list. Supported 'recognitionModel' values include 'recognition_01', 'recognition_02, 'recognition_03', and 'recognition_04'. The default value is 'recognition_01'. 'recognition_04' is recommended since its accuracy is improved on faces wearing masks compared with 'recognition_03', and its overall accuracy is improved compared with 'recognition_01' and 'recognition_02'.",
-                  "default": "recognition_01",
-                  "enum": [
-                    "recognition_01",
-                    "recognition_02",
-                    "recognition_03",
-                    "recognition_04"
-                  ],
-                  "x-ms-enum": {
-                    "name": "RecognitionModel",
-                    "modelAsString": true,
-                    "values": [
-                      {
-                        "name": "recognition_01",
-                        "value": "recognition_01",
-                        "description": "The default recognition model for \"Detect\". All those faceIds created before 2019 March are bonded with this recognition model."
-                      },
-                      {
-                        "name": "recognition_02",
-                        "value": "recognition_02",
-                        "description": "Recognition model released in 2019 March."
-                      },
-                      {
-                        "name": "recognition_03",
-                        "value": "recognition_03",
-                        "description": "Recognition model released in 2020 May."
-                      },
-                      {
-                        "name": "recognition_04",
-                        "value": "recognition_04",
-                        "description": "Recognition model released in 2021 February. It's recommended to use this recognition model for better recognition accuracy."
-                      }
-                    ]
-                  }
-                }
-              },
-              "required": [
-                "name"
-              ]
+              "$ref": "#/definitions/CreateCollectionRequest"
             }
           }
         ],
@@ -1405,20 +1352,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "name": {
-                  "type": "string",
-                  "description": "User defined name, maximum length is 128.",
-                  "minLength": 1,
-                  "maxLength": 128
-                },
-                "userData": {
-                  "type": "string",
-                  "description": "Optional user defined data. Length should not exceed 16K.",
-                  "maxLength": 16384
-                }
-              }
+              "$ref": "#/definitions/UserDefinedFieldsForUpdate"
             }
           }
         ],
@@ -1488,7 +1422,7 @@
       "post": {
         "operationId": "FaceListOperations_AddFaceListFaceFromUrl",
         "summary": "Add a face to a specified Face List, up to 1,000 faces.",
-        "description": "To deal with an image containing multiple faces, input face can be specified as an image with a targetFace rectangle. It returns a persistedFaceId representing the added face. No image will be stored. Only the extracted face feature(s) will be stored on server until \"Delete Face List Face\" or \"Delete Face List\" is called.\n\nNote that persistedFaceId is different from faceId generated by \"Detect\".\n>\n*\n  * Higher face image quality means better recognition precision. Please consider high-quality faces: frontal, clear, and face size is 200x200 pixels (100 pixels between eyes) or bigger.\n  * Each person entry can hold up to 248 faces.\n  * JPEG, PNG, GIF (the first frame), and BMP format are supported. The allowed image file size is from 1KB to 6MB.\n  * \"targetFace\" rectangle should contain one face. Zero or multiple faces will be regarded as an error. If the provided \"targetFace\" rectangle is not returned from \"Detect\", there's no guarantee to detect and add the face successfully.\n  * Out of detectable face size (36x36 - 4096x4096 pixels), large head-pose, or large occlusions will cause failures.\n  * The minimum detectable face size is 36x36 pixels in an image no larger than 1920x1080 pixels. Images with dimensions higher than 1920x1080 pixels will need a proportionally larger minimum face size.\n  * Different 'detectionModel' values can be provided. To use and compare different detection models, please refer to https://learn.microsoft.com/azure/ai-services/computer-vision/how-to/specify-detection-model",
+        "description": "To deal with an image containing multiple faces, input face can be specified as an image with a targetFace rectangle. It returns a persistedFaceId representing the added face. No image will be stored. Only the extracted face feature(s) will be stored on server until \"Delete Face List Face\" or \"Delete Face List\" is called.\n\nNote that persistedFaceId is different from faceId generated by \"Detect\".\n\n>\n*\n  * Higher face image quality means better recognition precision. Please consider high-quality faces: frontal, clear, and face size is 200x200 pixels (100 pixels between eyes) or bigger.\n  * JPEG, PNG, GIF (the first frame), and BMP format are supported. The allowed image file size is from 1KB to 6MB.\n  * \"targetFace\" rectangle should contain one face. Zero or multiple faces will be regarded as an error. If the provided \"targetFace\" rectangle is not returned from \"Detect\", there's no guarantee to detect and add the face successfully.\n  * Out of detectable face size (36x36 - 4096x4096 pixels), large head-pose, or large occlusions will cause failures.\n  * The minimum detectable face size is 36x36 pixels in an image no larger than 1920x1080 pixels. Images with dimensions higher than 1920x1080 pixels will need a proportionally larger minimum face size.\n  * Different 'detectionModel' values can be provided. To use and compare different detection models, please refer to [here](https://learn.microsoft.com/azure/ai-services/computer-vision/how-to/specify-detection-model).",
         "parameters": [
           {
             "name": "faceListId",
@@ -1501,77 +1435,20 @@
             "pattern": "^[a-z0-9-_]+$"
           },
           {
-            "name": "targetFace",
-            "in": "query",
-            "description": "A face rectangle to specify the target face to be added to a person, in the format of 'targetFace=left,top,width,height'.",
-            "required": false,
-            "type": "array",
-            "items": {
-              "type": "integer",
-              "format": "int32"
-            },
-            "collectionFormat": "csv",
-            "minItems": 4,
-            "maxItems": 4
+            "$ref": "#/parameters/AddFaceOptions.targetFace"
           },
           {
-            "name": "detectionModel",
-            "in": "query",
-            "description": "The 'detectionModel' associated with the detected faceIds. Supported 'detectionModel' values include 'detection_01', 'detection_02' and 'detection_03'. The default value is 'detection_01'.",
-            "required": false,
-            "type": "string",
-            "default": "detection_01",
-            "enum": [
-              "detection_01",
-              "detection_02",
-              "detection_03"
-            ],
-            "x-ms-enum": {
-              "name": "DetectionModel",
-              "modelAsString": true,
-              "values": [
-                {
-                  "name": "detection_01",
-                  "value": "detection_01",
-                  "description": "The default detection model. Recommend for near frontal face detection. For scenarios with exceptionally large angle (head-pose) faces, occluded faces or wrong image orientation, the faces in such cases may not be detected."
-                },
-                {
-                  "name": "detection_02",
-                  "value": "detection_02",
-                  "description": "Detection model released in 2019 May with improved accuracy especially on small, side and blurry faces."
-                },
-                {
-                  "name": "detection_03",
-                  "value": "detection_03",
-                  "description": "Detection model released in 2021 February with improved accuracy especially on small faces."
-                }
-              ]
-            }
+            "$ref": "#/parameters/AddFaceOptions.detectionModel"
           },
           {
-            "name": "userData",
-            "in": "query",
-            "description": "User-provided data attached to the face. The size limit is 1K.",
-            "required": false,
-            "type": "string",
-            "maxLength": 1024
+            "$ref": "#/parameters/AddFaceOptions.userData"
           },
           {
             "name": "body",
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "url": {
-                  "type": "string",
-                  "format": "uri",
-                  "description": "URL of input image."
-                }
-              },
-              "required": [
-                "url"
-              ]
+              "$ref": "#/definitions/AddFaceFromUrlRequest"
             }
           }
         ],
@@ -2015,60 +1892,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "name": {
-                  "type": "string",
-                  "description": "User defined name, maximum length is 128.",
-                  "minLength": 1,
-                  "maxLength": 128
-                },
-                "userData": {
-                  "type": "string",
-                  "description": "Optional user defined data. Length should not exceed 16K.",
-                  "maxLength": 16384
-                },
-                "recognitionModel": {
-                  "type": "string",
-                  "description": "The 'recognitionModel' associated with this face list. Supported 'recognitionModel' values include 'recognition_01', 'recognition_02, 'recognition_03', and 'recognition_04'. The default value is 'recognition_01'. 'recognition_04' is recommended since its accuracy is improved on faces wearing masks compared with 'recognition_03', and its overall accuracy is improved compared with 'recognition_01' and 'recognition_02'.",
-                  "default": "recognition_01",
-                  "enum": [
-                    "recognition_01",
-                    "recognition_02",
-                    "recognition_03",
-                    "recognition_04"
-                  ],
-                  "x-ms-enum": {
-                    "name": "RecognitionModel",
-                    "modelAsString": true,
-                    "values": [
-                      {
-                        "name": "recognition_01",
-                        "value": "recognition_01",
-                        "description": "The default recognition model for \"Detect\". All those faceIds created before 2019 March are bonded with this recognition model."
-                      },
-                      {
-                        "name": "recognition_02",
-                        "value": "recognition_02",
-                        "description": "Recognition model released in 2019 March."
-                      },
-                      {
-                        "name": "recognition_03",
-                        "value": "recognition_03",
-                        "description": "Recognition model released in 2020 May."
-                      },
-                      {
-                        "name": "recognition_04",
-                        "value": "recognition_04",
-                        "description": "Recognition model released in 2021 February. It's recommended to use this recognition model for better recognition accuracy."
-                      }
-                    ]
-                  }
-                }
-              },
-              "required": [
-                "name"
-              ]
+              "$ref": "#/definitions/CreateCollectionRequest"
             }
           }
         ],
@@ -2114,20 +1938,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "name": {
-                  "type": "string",
-                  "description": "User defined name, maximum length is 128.",
-                  "minLength": 1,
-                  "maxLength": 128
-                },
-                "userData": {
-                  "type": "string",
-                  "description": "Optional user defined data. Length should not exceed 16K.",
-                  "maxLength": 16384
-                }
-              }
+              "$ref": "#/definitions/UserDefinedFieldsForUpdate"
             }
           }
         ],
@@ -2262,7 +2073,7 @@
       "post": {
         "operationId": "FaceListOperations_AddLargeFaceListFaceFromUrl",
         "summary": "Add a face to a specified Large Face List, up to 1,000,000 faces.",
-        "description": "To deal with an image containing multiple faces, input face can be specified as an image with a targetFace rectangle. It returns a persistedFaceId representing the added face. No image will be stored. Only the extracted face feature(s) will be stored on server until \"Delete Large Face List Face\" or \"Delete Large Face List\" is called.\n\nNote that persistedFaceId is different from faceId generated by \"Detect\".\n>\n*\n  * Higher face image quality means better recognition precision. Please consider high-quality faces: frontal, clear, and face size is 200x200 pixels (100 pixels between eyes) or bigger.\n  * Each person entry can hold up to 248 faces.\n  * JPEG, PNG, GIF (the first frame), and BMP format are supported. The allowed image file size is from 1KB to 6MB.\n  * \"targetFace\" rectangle should contain one face. Zero or multiple faces will be regarded as an error. If the provided \"targetFace\" rectangle is not returned from \"Detect\", there's no guarantee to detect and add the face successfully.\n  * Out of detectable face size (36x36 - 4096x4096 pixels), large head-pose, or large occlusions will cause failures.\n  * The minimum detectable face size is 36x36 pixels in an image no larger than 1920x1080 pixels. Images with dimensions higher than 1920x1080 pixels will need a proportionally larger minimum face size.\n  * Different 'detectionModel' values can be provided. To use and compare different detection models, please refer to https://learn.microsoft.com/azure/ai-services/computer-vision/how-to/specify-detection-model\n\n> [!NOTE]\n>\n> *\n>   * Free-tier subscription quota: 1,000 faces per Large Face List.\n>   * S0-tier subscription quota: 1,000,000 faces per Large Face List.",
+        "description": "To deal with an image containing multiple faces, input face can be specified as an image with a targetFace rectangle. It returns a persistedFaceId representing the added face. No image will be stored. Only the extracted face feature(s) will be stored on server until \"Delete Large Face List Face\" or \"Delete Large Face List\" is called.\n\nNote that persistedFaceId is different from faceId generated by \"Detect\".\n\n>\n*\n  * Higher face image quality means better recognition precision. Please consider high-quality faces: frontal, clear, and face size is 200x200 pixels (100 pixels between eyes) or bigger.\n  * JPEG, PNG, GIF (the first frame), and BMP format are supported. The allowed image file size is from 1KB to 6MB.\n  * \"targetFace\" rectangle should contain one face. Zero or multiple faces will be regarded as an error. If the provided \"targetFace\" rectangle is not returned from \"Detect\", there's no guarantee to detect and add the face successfully.\n  * Out of detectable face size (36x36 - 4096x4096 pixels), large head-pose, or large occlusions will cause failures.\n  * The minimum detectable face size is 36x36 pixels in an image no larger than 1920x1080 pixels. Images with dimensions higher than 1920x1080 pixels will need a proportionally larger minimum face size.\n  * Different 'detectionModel' values can be provided. To use and compare different detection models, please refer to [here](https://learn.microsoft.com/azure/ai-services/computer-vision/how-to/specify-detection-model).\n\n> [!NOTE]\n>\n> *\n>   * Free-tier subscription quota: 1,000 faces per Large Face List.\n>   * S0-tier subscription quota: 1,000,000 faces per Large Face List.",
         "parameters": [
           {
             "name": "largeFaceListId",
@@ -2275,77 +2086,20 @@
             "pattern": "^[a-z0-9-_]+$"
           },
           {
-            "name": "targetFace",
-            "in": "query",
-            "description": "A face rectangle to specify the target face to be added to a person, in the format of 'targetFace=left,top,width,height'.",
-            "required": false,
-            "type": "array",
-            "items": {
-              "type": "integer",
-              "format": "int32"
-            },
-            "collectionFormat": "csv",
-            "minItems": 4,
-            "maxItems": 4
+            "$ref": "#/parameters/AddFaceOptions.targetFace"
           },
           {
-            "name": "detectionModel",
-            "in": "query",
-            "description": "The 'detectionModel' associated with the detected faceIds. Supported 'detectionModel' values include 'detection_01', 'detection_02' and 'detection_03'. The default value is 'detection_01'.",
-            "required": false,
-            "type": "string",
-            "default": "detection_01",
-            "enum": [
-              "detection_01",
-              "detection_02",
-              "detection_03"
-            ],
-            "x-ms-enum": {
-              "name": "DetectionModel",
-              "modelAsString": true,
-              "values": [
-                {
-                  "name": "detection_01",
-                  "value": "detection_01",
-                  "description": "The default detection model. Recommend for near frontal face detection. For scenarios with exceptionally large angle (head-pose) faces, occluded faces or wrong image orientation, the faces in such cases may not be detected."
-                },
-                {
-                  "name": "detection_02",
-                  "value": "detection_02",
-                  "description": "Detection model released in 2019 May with improved accuracy especially on small, side and blurry faces."
-                },
-                {
-                  "name": "detection_03",
-                  "value": "detection_03",
-                  "description": "Detection model released in 2021 February with improved accuracy especially on small faces."
-                }
-              ]
-            }
+            "$ref": "#/parameters/AddFaceOptions.detectionModel"
           },
           {
-            "name": "userData",
-            "in": "query",
-            "description": "User-provided data attached to the face. The size limit is 1K.",
-            "required": false,
-            "type": "string",
-            "maxLength": 1024
+            "$ref": "#/parameters/AddFaceOptions.userData"
           },
           {
             "name": "body",
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "url": {
-                  "type": "string",
-                  "format": "uri",
-                  "description": "URL of input image."
-                }
-              },
-              "required": [
-                "url"
-              ]
+              "$ref": "#/definitions/AddFaceFromUrlRequest"
             }
           }
         ],
@@ -2453,14 +2207,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "userData": {
-                  "type": "string",
-                  "description": "User-provided data attached to the face. The length limit is 1K.",
-                  "maxLength": 1024
-                }
-              }
+              "$ref": "#/definitions/FaceUserData"
             }
           }
         ],
@@ -2760,60 +2507,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "name": {
-                  "type": "string",
-                  "description": "User defined name, maximum length is 128.",
-                  "minLength": 1,
-                  "maxLength": 128
-                },
-                "userData": {
-                  "type": "string",
-                  "description": "Optional user defined data. Length should not exceed 16K.",
-                  "maxLength": 16384
-                },
-                "recognitionModel": {
-                  "type": "string",
-                  "description": "The 'recognitionModel' associated with this face list. Supported 'recognitionModel' values include 'recognition_01', 'recognition_02, 'recognition_03', and 'recognition_04'. The default value is 'recognition_01'. 'recognition_04' is recommended since its accuracy is improved on faces wearing masks compared with 'recognition_03', and its overall accuracy is improved compared with 'recognition_01' and 'recognition_02'.",
-                  "default": "recognition_01",
-                  "enum": [
-                    "recognition_01",
-                    "recognition_02",
-                    "recognition_03",
-                    "recognition_04"
-                  ],
-                  "x-ms-enum": {
-                    "name": "RecognitionModel",
-                    "modelAsString": true,
-                    "values": [
-                      {
-                        "name": "recognition_01",
-                        "value": "recognition_01",
-                        "description": "The default recognition model for \"Detect\". All those faceIds created before 2019 March are bonded with this recognition model."
-                      },
-                      {
-                        "name": "recognition_02",
-                        "value": "recognition_02",
-                        "description": "Recognition model released in 2019 March."
-                      },
-                      {
-                        "name": "recognition_03",
-                        "value": "recognition_03",
-                        "description": "Recognition model released in 2020 May."
-                      },
-                      {
-                        "name": "recognition_04",
-                        "value": "recognition_04",
-                        "description": "Recognition model released in 2021 February. It's recommended to use this recognition model for better recognition accuracy."
-                      }
-                    ]
-                  }
-                }
-              },
-              "required": [
-                "name"
-              ]
+              "$ref": "#/definitions/CreateCollectionRequest"
             }
           }
         ],
@@ -2859,20 +2553,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "name": {
-                  "type": "string",
-                  "description": "User defined name, maximum length is 128.",
-                  "minLength": 1,
-                  "maxLength": 128
-                },
-                "userData": {
-                  "type": "string",
-                  "description": "Optional user defined data. Length should not exceed 16K.",
-                  "maxLength": 16384
-                }
-              }
+              "$ref": "#/definitions/UserDefinedFieldsForUpdate"
             }
           }
         ],
@@ -3023,23 +2704,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "name": {
-                  "type": "string",
-                  "description": "User defined name, maximum length is 128.",
-                  "minLength": 1,
-                  "maxLength": 128
-                },
-                "userData": {
-                  "type": "string",
-                  "description": "Optional user defined data. Length should not exceed 16K.",
-                  "maxLength": 16384
-                }
-              },
-              "required": [
-                "name"
-              ]
+              "$ref": "#/definitions/UserDefinedFields"
             }
           }
         ],
@@ -3147,20 +2812,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "name": {
-                  "type": "string",
-                  "description": "User defined name, maximum length is 128.",
-                  "minLength": 1,
-                  "maxLength": 128
-                },
-                "userData": {
-                  "type": "string",
-                  "description": "Optional user defined data. Length should not exceed 16K.",
-                  "maxLength": 16384
-                }
-              }
+              "$ref": "#/definitions/UserDefinedFieldsForUpdate"
             }
           }
         ],
@@ -3238,7 +2890,7 @@
       "post": {
         "operationId": "PersonGroupOperations_AddLargePersonGroupPersonFaceFromUrl",
         "summary": "Add a face to a person into a Large Person Group for face identification or verification.",
-        "description": "To deal with an image containing multiple faces, input face can be specified as an image with a targetFace rectangle. It returns a persistedFaceId representing the added face. No image will be stored. Only the extracted face feature(s) will be stored on server until \"Delete Large Person Group Person Face\", \"Delete Large Person Group Person\" or \"Delete Large Person Group\" is called.\n\nNote that persistedFaceId is different from faceId generated by \"Detect\".\n>\n*\n  * Higher face image quality means better recognition precision. Please consider high-quality faces: frontal, clear, and face size is 200x200 pixels (100 pixels between eyes) or bigger.\n  * Each person entry can hold up to 248 faces.\n  * JPEG, PNG, GIF (the first frame), and BMP format are supported. The allowed image file size is from 1KB to 6MB.\n  * \"targetFace\" rectangle should contain one face. Zero or multiple faces will be regarded as an error. If the provided \"targetFace\" rectangle is not returned from \"Detect\", there's no guarantee to detect and add the face successfully.\n  * Out of detectable face size (36x36 - 4096x4096 pixels), large head-pose, or large occlusions will cause failures.\n  * The minimum detectable face size is 36x36 pixels in an image no larger than 1920x1080 pixels. Images with dimensions higher than 1920x1080 pixels will need a proportionally larger minimum face size.\n  * Different 'detectionModel' values can be provided. To use and compare different detection models, please refer to https://learn.microsoft.com/azure/ai-services/computer-vision/how-to/specify-detection-model",
+        "description": "To deal with an image containing multiple faces, input face can be specified as an image with a targetFace rectangle. It returns a persistedFaceId representing the added face. No image will be stored. Only the extracted face feature(s) will be stored on server until \"Delete Large Person Group Person Face\", \"Delete Large Person Group Person\" or \"Delete Large Person Group\" is called.\n\nNote that persistedFaceId is different from faceId generated by \"Detect\".\n\n>\n*\n  * Each person entry can hold up to 248 faces.\n  * Higher face image quality means better recognition precision. Please consider high-quality faces: frontal, clear, and face size is 200x200 pixels (100 pixels between eyes) or bigger.\n  * JPEG, PNG, GIF (the first frame), and BMP format are supported. The allowed image file size is from 1KB to 6MB.\n  * \"targetFace\" rectangle should contain one face. Zero or multiple faces will be regarded as an error. If the provided \"targetFace\" rectangle is not returned from \"Detect\", there's no guarantee to detect and add the face successfully.\n  * Out of detectable face size (36x36 - 4096x4096 pixels), large head-pose, or large occlusions will cause failures.\n  * The minimum detectable face size is 36x36 pixels in an image no larger than 1920x1080 pixels. Images with dimensions higher than 1920x1080 pixels will need a proportionally larger minimum face size.\n  * Different 'detectionModel' values can be provided. To use and compare different detection models, please refer to [here](https://learn.microsoft.com/azure/ai-services/computer-vision/how-to/specify-detection-model).",
         "parameters": [
           {
             "name": "largePersonGroupId",
@@ -3259,77 +2911,20 @@
             "format": "uuid"
           },
           {
-            "name": "targetFace",
-            "in": "query",
-            "description": "A face rectangle to specify the target face to be added to a person, in the format of 'targetFace=left,top,width,height'.",
-            "required": false,
-            "type": "array",
-            "items": {
-              "type": "integer",
-              "format": "int32"
-            },
-            "collectionFormat": "csv",
-            "minItems": 4,
-            "maxItems": 4
+            "$ref": "#/parameters/AddFaceOptions.targetFace"
           },
           {
-            "name": "detectionModel",
-            "in": "query",
-            "description": "The 'detectionModel' associated with the detected faceIds. Supported 'detectionModel' values include 'detection_01', 'detection_02' and 'detection_03'. The default value is 'detection_01'.",
-            "required": false,
-            "type": "string",
-            "default": "detection_01",
-            "enum": [
-              "detection_01",
-              "detection_02",
-              "detection_03"
-            ],
-            "x-ms-enum": {
-              "name": "DetectionModel",
-              "modelAsString": true,
-              "values": [
-                {
-                  "name": "detection_01",
-                  "value": "detection_01",
-                  "description": "The default detection model. Recommend for near frontal face detection. For scenarios with exceptionally large angle (head-pose) faces, occluded faces or wrong image orientation, the faces in such cases may not be detected."
-                },
-                {
-                  "name": "detection_02",
-                  "value": "detection_02",
-                  "description": "Detection model released in 2019 May with improved accuracy especially on small, side and blurry faces."
-                },
-                {
-                  "name": "detection_03",
-                  "value": "detection_03",
-                  "description": "Detection model released in 2021 February with improved accuracy especially on small faces."
-                }
-              ]
-            }
+            "$ref": "#/parameters/AddFaceOptions.detectionModel"
           },
           {
-            "name": "userData",
-            "in": "query",
-            "description": "User-provided data attached to the face. The size limit is 1K.",
-            "required": false,
-            "type": "string",
-            "maxLength": 1024
+            "$ref": "#/parameters/AddFaceOptions.userData"
           },
           {
             "name": "body",
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "url": {
-                  "type": "string",
-                  "format": "uri",
-                  "description": "URL of input image."
-                }
-              },
-              "required": [
-                "url"
-              ]
+              "$ref": "#/definitions/AddFaceFromUrlRequest"
             }
           }
         ],
@@ -3453,14 +3048,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "userData": {
-                  "type": "string",
-                  "description": "User-provided data attached to the face. The length limit is 1K.",
-                  "maxLength": 1024
-                }
-              }
+              "$ref": "#/definitions/FaceUserData"
             }
           }
         ],
@@ -3811,60 +3399,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "name": {
-                  "type": "string",
-                  "description": "User defined name, maximum length is 128.",
-                  "minLength": 1,
-                  "maxLength": 128
-                },
-                "userData": {
-                  "type": "string",
-                  "description": "Optional user defined data. Length should not exceed 16K.",
-                  "maxLength": 16384
-                },
-                "recognitionModel": {
-                  "type": "string",
-                  "description": "The 'recognitionModel' associated with this face list. Supported 'recognitionModel' values include 'recognition_01', 'recognition_02, 'recognition_03', and 'recognition_04'. The default value is 'recognition_01'. 'recognition_04' is recommended since its accuracy is improved on faces wearing masks compared with 'recognition_03', and its overall accuracy is improved compared with 'recognition_01' and 'recognition_02'.",
-                  "default": "recognition_01",
-                  "enum": [
-                    "recognition_01",
-                    "recognition_02",
-                    "recognition_03",
-                    "recognition_04"
-                  ],
-                  "x-ms-enum": {
-                    "name": "RecognitionModel",
-                    "modelAsString": true,
-                    "values": [
-                      {
-                        "name": "recognition_01",
-                        "value": "recognition_01",
-                        "description": "The default recognition model for \"Detect\". All those faceIds created before 2019 March are bonded with this recognition model."
-                      },
-                      {
-                        "name": "recognition_02",
-                        "value": "recognition_02",
-                        "description": "Recognition model released in 2019 March."
-                      },
-                      {
-                        "name": "recognition_03",
-                        "value": "recognition_03",
-                        "description": "Recognition model released in 2020 May."
-                      },
-                      {
-                        "name": "recognition_04",
-                        "value": "recognition_04",
-                        "description": "Recognition model released in 2021 February. It's recommended to use this recognition model for better recognition accuracy."
-                      }
-                    ]
-                  }
-                }
-              },
-              "required": [
-                "name"
-              ]
+              "$ref": "#/definitions/CreateCollectionRequest"
             }
           }
         ],
@@ -3910,20 +3445,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "name": {
-                  "type": "string",
-                  "description": "User defined name, maximum length is 128.",
-                  "minLength": 1,
-                  "maxLength": 128
-                },
-                "userData": {
-                  "type": "string",
-                  "description": "Optional user defined data. Length should not exceed 16K.",
-                  "maxLength": 16384
-                }
-              }
+              "$ref": "#/definitions/UserDefinedFieldsForUpdate"
             }
           }
         ],
@@ -4074,23 +3596,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "name": {
-                  "type": "string",
-                  "description": "User defined name, maximum length is 128.",
-                  "minLength": 1,
-                  "maxLength": 128
-                },
-                "userData": {
-                  "type": "string",
-                  "description": "Optional user defined data. Length should not exceed 16K.",
-                  "maxLength": 16384
-                }
-              },
-              "required": [
-                "name"
-              ]
+              "$ref": "#/definitions/UserDefinedFields"
             }
           }
         ],
@@ -4198,20 +3704,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "name": {
-                  "type": "string",
-                  "description": "User defined name, maximum length is 128.",
-                  "minLength": 1,
-                  "maxLength": 128
-                },
-                "userData": {
-                  "type": "string",
-                  "description": "Optional user defined data. Length should not exceed 16K.",
-                  "maxLength": 16384
-                }
-              }
+              "$ref": "#/definitions/UserDefinedFieldsForUpdate"
             }
           }
         ],
@@ -4289,7 +3782,7 @@
       "post": {
         "operationId": "PersonGroupOperations_AddPersonGroupPersonFaceFromUrl",
         "summary": "Add a face to a person into a Person Group for face identification or verification.",
-        "description": "To deal with an image containing multiple faces, input face can be specified as an image with a targetFace rectangle. It returns a persistedFaceId representing the added face. No image will be stored. Only the extracted face feature(s) will be stored on server until \"Delete Person Group Person Face\", \"Delete Person Group Person\" or \"Delete Person Group\" is called.\n\nNote that persistedFaceId is different from faceId generated by \"Detect\".\n>\n*\n  * Higher face image quality means better recognition precision. Please consider high-quality faces: frontal, clear, and face size is 200x200 pixels (100 pixels between eyes) or bigger.\n  * Each person entry can hold up to 248 faces.\n  * JPEG, PNG, GIF (the first frame), and BMP format are supported. The allowed image file size is from 1KB to 6MB.\n  * \"targetFace\" rectangle should contain one face. Zero or multiple faces will be regarded as an error. If the provided \"targetFace\" rectangle is not returned from \"Detect\", there's no guarantee to detect and add the face successfully.\n  * Out of detectable face size (36x36 - 4096x4096 pixels), large head-pose, or large occlusions will cause failures.\n  * The minimum detectable face size is 36x36 pixels in an image no larger than 1920x1080 pixels. Images with dimensions higher than 1920x1080 pixels will need a proportionally larger minimum face size.\n  * Different 'detectionModel' values can be provided. To use and compare different detection models, please refer to https://learn.microsoft.com/azure/ai-services/computer-vision/how-to/specify-detection-model",
+        "description": "To deal with an image containing multiple faces, input face can be specified as an image with a targetFace rectangle. It returns a persistedFaceId representing the added face. No image will be stored. Only the extracted face feature(s) will be stored on server until \"Delete Person Group Person Face\", \"Delete Person Group Person\" or \"Delete Person Group\" is called.\n\nNote that persistedFaceId is different from faceId generated by \"Detect\".\n\n>\n* \n  * Each person entry can hold up to 248 faces.\n  * Higher face image quality means better recognition precision. Please consider high-quality faces: frontal, clear, and face size is 200x200 pixels (100 pixels between eyes) or bigger.\n  * JPEG, PNG, GIF (the first frame), and BMP format are supported. The allowed image file size is from 1KB to 6MB.\n  * \"targetFace\" rectangle should contain one face. Zero or multiple faces will be regarded as an error. If the provided \"targetFace\" rectangle is not returned from \"Detect\", there's no guarantee to detect and add the face successfully.\n  * Out of detectable face size (36x36 - 4096x4096 pixels), large head-pose, or large occlusions will cause failures.\n  * The minimum detectable face size is 36x36 pixels in an image no larger than 1920x1080 pixels. Images with dimensions higher than 1920x1080 pixels will need a proportionally larger minimum face size.\n  * Different 'detectionModel' values can be provided. To use and compare different detection models, please refer to [here](https://learn.microsoft.com/azure/ai-services/computer-vision/how-to/specify-detection-model).",
         "parameters": [
           {
             "name": "personGroupId",
@@ -4310,77 +3803,20 @@
             "format": "uuid"
           },
           {
-            "name": "targetFace",
-            "in": "query",
-            "description": "A face rectangle to specify the target face to be added to a person, in the format of 'targetFace=left,top,width,height'.",
-            "required": false,
-            "type": "array",
-            "items": {
-              "type": "integer",
-              "format": "int32"
-            },
-            "collectionFormat": "csv",
-            "minItems": 4,
-            "maxItems": 4
+            "$ref": "#/parameters/AddFaceOptions.targetFace"
           },
           {
-            "name": "detectionModel",
-            "in": "query",
-            "description": "The 'detectionModel' associated with the detected faceIds. Supported 'detectionModel' values include 'detection_01', 'detection_02' and 'detection_03'. The default value is 'detection_01'.",
-            "required": false,
-            "type": "string",
-            "default": "detection_01",
-            "enum": [
-              "detection_01",
-              "detection_02",
-              "detection_03"
-            ],
-            "x-ms-enum": {
-              "name": "DetectionModel",
-              "modelAsString": true,
-              "values": [
-                {
-                  "name": "detection_01",
-                  "value": "detection_01",
-                  "description": "The default detection model. Recommend for near frontal face detection. For scenarios with exceptionally large angle (head-pose) faces, occluded faces or wrong image orientation, the faces in such cases may not be detected."
-                },
-                {
-                  "name": "detection_02",
-                  "value": "detection_02",
-                  "description": "Detection model released in 2019 May with improved accuracy especially on small, side and blurry faces."
-                },
-                {
-                  "name": "detection_03",
-                  "value": "detection_03",
-                  "description": "Detection model released in 2021 February with improved accuracy especially on small faces."
-                }
-              ]
-            }
+            "$ref": "#/parameters/AddFaceOptions.detectionModel"
           },
           {
-            "name": "userData",
-            "in": "query",
-            "description": "User-provided data attached to the face. The size limit is 1K.",
-            "required": false,
-            "type": "string",
-            "maxLength": 1024
+            "$ref": "#/parameters/AddFaceOptions.userData"
           },
           {
             "name": "body",
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "url": {
-                  "type": "string",
-                  "format": "uri",
-                  "description": "URL of input image."
-                }
-              },
-              "required": [
-                "url"
-              ]
+              "$ref": "#/definitions/AddFaceFromUrlRequest"
             }
           }
         ],
@@ -4504,14 +3940,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "userData": {
-                  "type": "string",
-                  "description": "User-provided data attached to the face. The length limit is 1K.",
-                  "maxLength": 1024
-                }
-              }
+              "$ref": "#/definitions/FaceUserData"
             }
           }
         ],
@@ -4750,23 +4179,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "name": {
-                  "type": "string",
-                  "description": "User defined name, maximum length is 128.",
-                  "minLength": 1,
-                  "maxLength": 128
-                },
-                "userData": {
-                  "type": "string",
-                  "description": "Optional user defined data. Length should not exceed 16K.",
-                  "maxLength": 16384
-                }
-              },
-              "required": [
-                "name"
-              ]
+              "$ref": "#/definitions/UserDefinedFields"
             }
           }
         ],
@@ -4867,20 +4280,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "name": {
-                  "type": "string",
-                  "description": "User defined name, maximum length is 128.",
-                  "minLength": 1,
-                  "maxLength": 128
-                },
-                "userData": {
-                  "type": "string",
-                  "description": "Optional user defined data. Length should not exceed 16K.",
-                  "maxLength": 16384
-                }
-              }
+              "$ref": "#/definitions/UserDefinedFieldsForUpdate"
             }
           }
         ],
@@ -5094,7 +4494,7 @@
       "post": {
         "operationId": "PersonDirectoryOperations_AddPersonFace",
         "summary": "Add a face to a person (see Person Directory \"Create Person\") for face identification or verification.",
-        "description": "To deal with an image containing multiple faces, input face can be specified as an image with a targetFace rectangle. It returns a persistedFaceId representing the added face. No image will be stored. Only the extracted face feature(s) will be stored on server until Person Directory \"Delete Person Face\" or \"Delete Person\" is called.\n\nNote that persistedFaceId is different from faceId generated by \"Detect\".\n>\n*\n  * Higher face image quality means better recognition precision. Please consider high-quality faces: frontal, clear, and face size is 200x200 pixels (100 pixels between eyes) or bigger.\n  * Each person entry can hold up to 248 faces.\n  * JPEG, PNG, GIF (the first frame), and BMP format are supported. The allowed image file size is from 1KB to 6MB.\n  * \"targetFace\" rectangle should contain one face. Zero or multiple faces will be regarded as an error. If the provided \"targetFace\" rectangle is not returned from \"Detect\", there's no guarantee to detect and add the face successfully.\n  * Out of detectable face size (36x36 - 4096x4096 pixels), large head-pose, or large occlusions will cause failures.\n  * The minimum detectable face size is 36x36 pixels in an image no larger than 1920x1080 pixels. Images with dimensions higher than 1920x1080 pixels will need a proportionally larger minimum face size.\n  * Different 'detectionModel' values can be provided. To use and compare different detection models, please refer to https://learn.microsoft.com/azure/ai-services/computer-vision/how-to/specify-detection-model\n*\n  * Adding/deleting faces to/from a same person will be processed sequentially. Adding/deleting faces to/from different persons are processed in parallel.\n  * This is a long running operation. Use Response Header \"Operation-Location\" to determine when the AddFace operation has successfully propagated for future requests to \"Identify\". For further information about Operation-Locations see \"Get Face Operation Status\".",
+        "description": "To deal with an image containing multiple faces, input face can be specified as an image with a targetFace rectangle. It returns a persistedFaceId representing the added face. No image will be stored. Only the extracted face feature(s) will be stored on server until Person Directory \"Delete Person Face\" or \"Delete Person\" is called.\n\nNote that persistedFaceId is different from faceId generated by \"Detect\".\n\n>\n*\n  * Each person entry can hold up to 248 faces.\n  * Higher face image quality means better recognition precision. Please consider high-quality faces: frontal, clear, and face size is 200x200 pixels (100 pixels between eyes) or bigger.\n  * JPEG, PNG, GIF (the first frame), and BMP format are supported. The allowed image file size is from 1KB to 6MB.\n  * \"targetFace\" rectangle should contain one face. Zero or multiple faces will be regarded as an error. If the provided \"targetFace\" rectangle is not returned from \"Detect\", there's no guarantee to detect and add the face successfully.\n  * Out of detectable face size (36x36 - 4096x4096 pixels), large head-pose, or large occlusions will cause failures.\n  * The minimum detectable face size is 36x36 pixels in an image no larger than 1920x1080 pixels. Images with dimensions higher than 1920x1080 pixels will need a proportionally larger minimum face size.\n  * Different 'detectionModel' values can be provided. To use and compare different detection models, please refer to [here](https://learn.microsoft.com/azure/ai-services/computer-vision/how-to/specify-detection-model).\n  * Adding/deleting faces to/from a same person will be processed sequentially. Adding/deleting faces to/from different persons are processed in parallel.\n  * This is a long running operation. Use Response Header \"Operation-Location\" to determine when the AddFace operation has successfully propagated for future requests to \"Identify\". For further information about Operation-Locations see \"Get Face Operation Status\".",
         "consumes": [
           "application/octet-stream"
         ],
@@ -5147,60 +4547,13 @@
             }
           },
           {
-            "name": "targetFace",
-            "in": "query",
-            "description": "A face rectangle to specify the target face to be added to a person, in the format of 'targetFace=left,top,width,height'.",
-            "required": false,
-            "type": "array",
-            "items": {
-              "type": "integer",
-              "format": "int32"
-            },
-            "collectionFormat": "csv",
-            "minItems": 4,
-            "maxItems": 4
+            "$ref": "#/parameters/AddFaceOptions.targetFace"
           },
           {
-            "name": "detectionModel",
-            "in": "query",
-            "description": "The 'detectionModel' associated with the detected faceIds. Supported 'detectionModel' values include 'detection_01', 'detection_02' and 'detection_03'. The default value is 'detection_01'.",
-            "required": false,
-            "type": "string",
-            "default": "detection_01",
-            "enum": [
-              "detection_01",
-              "detection_02",
-              "detection_03"
-            ],
-            "x-ms-enum": {
-              "name": "DetectionModel",
-              "modelAsString": true,
-              "values": [
-                {
-                  "name": "detection_01",
-                  "value": "detection_01",
-                  "description": "The default detection model. Recommend for near frontal face detection. For scenarios with exceptionally large angle (head-pose) faces, occluded faces or wrong image orientation, the faces in such cases may not be detected."
-                },
-                {
-                  "name": "detection_02",
-                  "value": "detection_02",
-                  "description": "Detection model released in 2019 May with improved accuracy especially on small, side and blurry faces."
-                },
-                {
-                  "name": "detection_03",
-                  "value": "detection_03",
-                  "description": "Detection model released in 2021 February with improved accuracy especially on small faces."
-                }
-              ]
-            }
+            "$ref": "#/parameters/AddFaceOptions.detectionModel"
           },
           {
-            "name": "userData",
-            "in": "query",
-            "description": "User-provided data attached to the face. The size limit is 1K.",
-            "required": false,
-            "type": "string",
-            "maxLength": 1024
+            "$ref": "#/parameters/AddFaceOptions.userData"
           },
           {
             "name": "imageContent",
@@ -5404,14 +4757,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "userData": {
-                  "type": "string",
-                  "description": "User-provided data attached to the face. The length limit is 1K.",
-                  "maxLength": 1024
-                }
-              }
+              "$ref": "#/definitions/FaceUserData"
             }
           }
         ],
@@ -5637,7 +4983,7 @@
       "post": {
         "operationId": "FaceDetectionOperations_Detect",
         "summary": "Detect human faces in an image, return face rectangles, and optionally with faceIds, landmarks, and attributes.",
-        "description": "> [!IMPORTANT]\n> Microsoft has retired or limited facial recognition capabilities that can be used to try to infer emotional states and identity attributes which, if misused, can subject people to stereotyping, discrimination or unfair denial of services. The retired capabilities are emotion and gender. The limited capabilities are age, smile, facial hair, hair and makeup. Email Azure Face API <azureface@microsoft.com> if you have a responsible use case that would benefit from the use of any of the limited capabilities. Read more about this decision https://azure.microsoft.com/blog/responsible-ai-investments-and-safeguards-for-facial-recognition/.\n\n*\n  * No image will be stored. Only the extracted face feature(s) will be stored on server. The faceId is an identifier of the face feature and will be used in \"Identify\", \"Verify\", and \"Find Similar\". The stored face features will expire and be deleted at the time specified by faceIdTimeToLive after the original detection call.\n  * Optional parameters include faceId, landmarks, and attributes. Attributes include headPose, glasses, occlusion, accessories, blur, exposure, noise, mask, and qualityForRecognition. Some of the results returned for specific attributes may not be highly accurate.\n  * JPEG, PNG, GIF (the first frame), and BMP format are supported. The allowed image file size is from 1KB to 6MB.\n  * The minimum detectable face size is 36x36 pixels in an image no larger than 1920x1080 pixels. Images with dimensions higher than 1920x1080 pixels will need a proportionally larger minimum face size.\n  * Up to 100 faces can be returned for an image. Faces are ranked by face rectangle size from large to small.\n  * For optimal results when querying \"Identify\", \"Verify\", and \"Find Similar\" ('returnFaceId' is true), please use faces that are: frontal, clear, and with a minimum size of 200x200 pixels (100 pixels between eyes).\n  * Different 'detectionModel' values can be provided. To use and compare different detection models, please refer to https://learn.microsoft.com/azure/ai-services/computer-vision/how-to/specify-detection-model\n    * 'detection_02': Face attributes and landmarks are disabled if you choose this detection model.\n    * 'detection_03': Face attributes (mask, blur, and headPose) and landmarks are supported if you choose this detection model.\n  * Different 'recognitionModel' values are provided. If follow-up operations like \"Verify\", \"Identify\", \"Find Similar\" are needed, please specify the recognition model with 'recognitionModel' parameter. The default value for 'recognitionModel' is 'recognition_01', if latest model needed, please explicitly specify the model you need in this parameter. Once specified, the detected faceIds will be associated with the specified recognition model. More details, please refer to https://learn.microsoft.com/azure/ai-services/computer-vision/how-to/specify-recognition-model.",
+        "description": "> [!IMPORTANT]\n> Microsoft has retired or limited facial recognition capabilities that can be used to try to infer emotional states and identity attributes which, if misused, can subject people to stereotyping, discrimination or unfair denial of services. The retired capabilities are emotion and gender. The limited capabilities are age, smile, facial hair, hair and makeup. Email [Azure Face API](mailto:azureface@microsoft.com) if you have a responsible use case that would benefit from the use of any of the limited capabilities. Read more about this decision [here](https://azure.microsoft.com/blog/responsible-ai-investments-and-safeguards-for-facial-recognition/).\n\n*\n  * No image will be stored. Only the extracted face feature(s) will be stored on server. The faceId is an identifier of the face feature and will be used in \"Identify\", \"Verify\", and \"Find Similar\". The stored face features will expire and be deleted at the time specified by faceIdTimeToLive after the original detection call.\n  * Optional parameters include faceId, landmarks, and attributes. Attributes include headPose, glasses, occlusion, accessories, blur, exposure, noise, mask, and qualityForRecognition. Some of the results returned for specific attributes may not be highly accurate.\n  * JPEG, PNG, GIF (the first frame), and BMP format are supported. The allowed image file size is from 1KB to 6MB.\n  * The minimum detectable face size is 36x36 pixels in an image no larger than 1920x1080 pixels. Images with dimensions higher than 1920x1080 pixels will need a proportionally larger minimum face size.\n  * Up to 100 faces can be returned for an image. Faces are ranked by face rectangle size from large to small.\n  * For optimal results when querying \"Identify\", \"Verify\", and \"Find Similar\" ('returnFaceId' is true), please use faces that are: frontal, clear, and with a minimum size of 200x200 pixels (100 pixels between eyes).\n  * Different 'detectionModel' values can be provided. The availability of landmarks and supported attributes depends on the detection model specified. To use and compare different detection models, please refer to [here](https://learn.microsoft.com/azure/ai-services/computer-vision/how-to/specify-detection-model).\n  * Different 'recognitionModel' values are provided. If follow-up operations like \"Verify\", \"Identify\", \"Find Similar\" are needed, please specify the recognition model with 'recognitionModel' parameter. The default value for 'recognitionModel' is 'recognition_01', if latest model needed, please explicitly specify the model you need in this parameter. Once specified, the detected faceIds will be associated with the specified recognition model. More details, please refer to [here](https://learn.microsoft.com/azure/ai-services/computer-vision/how-to/specify-recognition-model).",
         "consumes": [
           "application/octet-stream"
         ],
@@ -5645,7 +4991,7 @@
           {
             "name": "detectionModel",
             "in": "query",
-            "description": "The 'detectionModel' associated with the detected faceIds. Supported 'detectionModel' values include 'detection_01', 'detection_02' and 'detection_03'. The default value is 'detection_01'.",
+            "description": "The 'detectionModel' associated with the detected faceIds. Supported 'detectionModel' values include 'detection_01', 'detection_02' and 'detection_03'. The default value is 'detection_01'. 'detection_03' is recommended since its accuracy is improved on smaller faces (64x64 pixels) and rotated face orientations.",
             "required": false,
             "type": "string",
             "default": "detection_01",
@@ -5894,12 +5240,12 @@
       "post": {
         "operationId": "FaceDetectionOperations_DetectFromSessionImageId",
         "summary": "Detect human faces in an image, return face rectangles, and optionally with faceIds, landmarks, and attributes.",
-        "description": "> [!IMPORTANT]\n> Microsoft has retired or limited facial recognition capabilities that can be used to try to infer emotional states and identity attributes which, if misused, can subject people to stereotyping, discrimination or unfair denial of services. The retired capabilities are emotion and gender. The limited capabilities are age, smile, facial hair, hair and makeup. Email Azure Face API <azureface@microsoft.com> if you have a responsible use case that would benefit from the use of any of the limited capabilities. Read more about this decision https://azure.microsoft.com/blog/responsible-ai-investments-and-safeguards-for-facial-recognition/.\n\n*\n  * No image will be stored. Only the extracted face feature(s) will be stored on server. The faceId is an identifier of the face feature and will be used in \"Identify\", \"Verify\", and \"Find Similar\". The stored face features will expire and be deleted at the time specified by faceIdTimeToLive after the original detection call.\n  * Optional parameters include faceId, landmarks, and attributes. Attributes include headPose, glasses, occlusion, accessories, blur, exposure, noise, mask, and qualityForRecognition. Some of the results returned for specific attributes may not be highly accurate.\n  * JPEG, PNG, GIF (the first frame), and BMP format are supported. The allowed image file size is from 1KB to 6MB.\n  * The minimum detectable face size is 36x36 pixels in an image no larger than 1920x1080 pixels. Images with dimensions higher than 1920x1080 pixels will need a proportionally larger minimum face size.\n  * Up to 100 faces can be returned for an image. Faces are ranked by face rectangle size from large to small.\n  * For optimal results when querying \"Identify\", \"Verify\", and \"Find Similar\" ('returnFaceId' is true), please use faces that are: frontal, clear, and with a minimum size of 200x200 pixels (100 pixels between eyes).\n  * Different 'detectionModel' values can be provided. To use and compare different detection models, please refer to https://learn.microsoft.com/azure/ai-services/computer-vision/how-to/specify-detection-model\n    * 'detection_02': Face attributes and landmarks are disabled if you choose this detection model.\n    * 'detection_03': Face attributes (mask, blur, and headPose) and landmarks are supported if you choose this detection model.\n  * Different 'recognitionModel' values are provided. If follow-up operations like \"Verify\", \"Identify\", \"Find Similar\" are needed, please specify the recognition model with 'recognitionModel' parameter. The default value for 'recognitionModel' is 'recognition_01', if latest model needed, please explicitly specify the model you need in this parameter. Once specified, the detected faceIds will be associated with the specified recognition model. More details, please refer to https://learn.microsoft.com/azure/ai-services/computer-vision/how-to/specify-recognition-model.",
+        "description": "> [!IMPORTANT]\n> Microsoft has retired or limited facial recognition capabilities that can be used to try to infer emotional states and identity attributes which, if misused, can subject people to stereotyping, discrimination or unfair denial of services. The retired capabilities are emotion and gender. The limited capabilities are age, smile, facial hair, hair and makeup. Email [Azure Face API](mailto:azureface@microsoft.com) if you have a responsible use case that would benefit from the use of any of the limited capabilities. Read more about this decision [here](https://azure.microsoft.com/blog/responsible-ai-investments-and-safeguards-for-facial-recognition/).\n\n*\n  * No image will be stored. Only the extracted face feature(s) will be stored on server. The faceId is an identifier of the face feature and will be used in \"Identify\", \"Verify\", and \"Find Similar\". The stored face features will expire and be deleted at the time specified by faceIdTimeToLive after the original detection call.\n  * Optional parameters include faceId, landmarks, and attributes. Attributes include headPose, glasses, occlusion, accessories, blur, exposure, noise, mask, and qualityForRecognition. Some of the results returned for specific attributes may not be highly accurate.\n  * JPEG, PNG, GIF (the first frame), and BMP format are supported. The allowed image file size is from 1KB to 6MB.\n  * The minimum detectable face size is 36x36 pixels in an image no larger than 1920x1080 pixels. Images with dimensions higher than 1920x1080 pixels will need a proportionally larger minimum face size.\n  * Up to 100 faces can be returned for an image. Faces are ranked by face rectangle size from large to small.\n  * For optimal results when querying \"Identify\", \"Verify\", and \"Find Similar\" ('returnFaceId' is true), please use faces that are: frontal, clear, and with a minimum size of 200x200 pixels (100 pixels between eyes).\n  * Different 'detectionModel' values can be provided. The availability of landmarks and supported attributes depends on the detection model specified. To use and compare different detection models, please refer to [here](https://learn.microsoft.com/azure/ai-services/computer-vision/how-to/specify-detection-model).\n  * Different 'recognitionModel' values are provided. If follow-up operations like \"Verify\", \"Identify\", \"Find Similar\" are needed, please specify the recognition model with 'recognitionModel' parameter. The default value for 'recognitionModel' is 'recognition_01', if latest model needed, please explicitly specify the model you need in this parameter. Once specified, the detected faceIds will be associated with the specified recognition model. More details, please refer to [here](https://learn.microsoft.com/azure/ai-services/computer-vision/how-to/specify-recognition-model).",
         "parameters": [
           {
             "name": "detectionModel",
             "in": "query",
-            "description": "The 'detectionModel' associated with the detected faceIds. Supported 'detectionModel' values include 'detection_01', 'detection_02' and 'detection_03'. The default value is 'detection_01'.",
+            "description": "The 'detectionModel' associated with the detected faceIds. Supported 'detectionModel' values include 'detection_01', 'detection_02' and 'detection_03'. The default value is 'detection_01'. 'detection_03' is recommended since its accuracy is improved on smaller faces (64x64 pixels) and rotated face orientations.",
             "required": false,
             "type": "string",
             "default": "detection_01",
@@ -6215,23 +5561,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "name": {
-                  "type": "string",
-                  "description": "User defined name, maximum length is 128.",
-                  "minLength": 1,
-                  "maxLength": 128
-                },
-                "userData": {
-                  "type": "string",
-                  "description": "Optional user defined data. Length should not exceed 16K.",
-                  "maxLength": 16384
-                }
-              },
-              "required": [
-                "name"
-              ]
+              "$ref": "#/definitions/UserDefinedFields"
             }
           }
         ],
@@ -6280,20 +5610,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "name": {
-                  "type": "string",
-                  "description": "User defined name, maximum length is 128.",
-                  "minLength": 1,
-                  "maxLength": 128
-                },
-                "userData": {
-                  "type": "string",
-                  "description": "Optional user defined data. Length should not exceed 16K.",
-                  "maxLength": 16384
-                }
-              }
+              "$ref": "#/definitions/UserDefinedFieldsForUpdate"
             }
           }
         ],
@@ -6325,7 +5642,7 @@
       "post": {
         "operationId": "FaceListOperations_AddFaceListFace",
         "summary": "Add a face to a specified Face List, up to 1,000 faces.",
-        "description": "To deal with an image containing multiple faces, input face can be specified as an image with a targetFace rectangle. It returns a persistedFaceId representing the added face. No image will be stored. Only the extracted face feature(s) will be stored on server until \"Delete Face List Face\" or \"Delete Face List\" is called.\n\nNote that persistedFaceId is different from faceId generated by \"Detect\".\n>\n*\n  * Higher face image quality means better recognition precision. Please consider high-quality faces: frontal, clear, and face size is 200x200 pixels (100 pixels between eyes) or bigger.\n  * Each person entry can hold up to 248 faces.\n  * JPEG, PNG, GIF (the first frame), and BMP format are supported. The allowed image file size is from 1KB to 6MB.\n  * \"targetFace\" rectangle should contain one face. Zero or multiple faces will be regarded as an error. If the provided \"targetFace\" rectangle is not returned from \"Detect\", there's no guarantee to detect and add the face successfully.\n  * Out of detectable face size (36x36 - 4096x4096 pixels), large head-pose, or large occlusions will cause failures.\n  * The minimum detectable face size is 36x36 pixels in an image no larger than 1920x1080 pixels. Images with dimensions higher than 1920x1080 pixels will need a proportionally larger minimum face size.\n  * Different 'detectionModel' values can be provided. To use and compare different detection models, please refer to https://learn.microsoft.com/azure/ai-services/computer-vision/how-to/specify-detection-model",
+        "description": "To deal with an image containing multiple faces, input face can be specified as an image with a targetFace rectangle. It returns a persistedFaceId representing the added face. No image will be stored. Only the extracted face feature(s) will be stored on server until \"Delete Face List Face\" or \"Delete Face List\" is called.\n\nNote that persistedFaceId is different from faceId generated by \"Detect\".\n\n>\n*\n  * Higher face image quality means better recognition precision. Please consider high-quality faces: frontal, clear, and face size is 200x200 pixels (100 pixels between eyes) or bigger.\n  * JPEG, PNG, GIF (the first frame), and BMP format are supported. The allowed image file size is from 1KB to 6MB.\n  * \"targetFace\" rectangle should contain one face. Zero or multiple faces will be regarded as an error. If the provided \"targetFace\" rectangle is not returned from \"Detect\", there's no guarantee to detect and add the face successfully.\n  * Out of detectable face size (36x36 - 4096x4096 pixels), large head-pose, or large occlusions will cause failures.\n  * The minimum detectable face size is 36x36 pixels in an image no larger than 1920x1080 pixels. Images with dimensions higher than 1920x1080 pixels will need a proportionally larger minimum face size.\n  * Different 'detectionModel' values can be provided. To use and compare different detection models, please refer to [here](https://learn.microsoft.com/azure/ai-services/computer-vision/how-to/specify-detection-model).",
         "consumes": [
           "application/octet-stream"
         ],
@@ -6341,70 +5658,16 @@
             "pattern": "^[a-z0-9-_]+$"
           },
           {
-            "name": "targetFace",
-            "in": "query",
-            "description": "A face rectangle to specify the target face to be added to a person, in the format of 'targetFace=left,top,width,height'.",
-            "required": false,
-            "type": "array",
-            "items": {
-              "type": "integer",
-              "format": "int32"
-            },
-            "collectionFormat": "csv",
-            "minItems": 4,
-            "maxItems": 4
+            "$ref": "#/parameters/AddFaceOptions.targetFace"
           },
           {
-            "name": "detectionModel",
-            "in": "query",
-            "description": "The 'detectionModel' associated with the detected faceIds. Supported 'detectionModel' values include 'detection_01', 'detection_02' and 'detection_03'. The default value is 'detection_01'.",
-            "required": false,
-            "type": "string",
-            "default": "detection_01",
-            "enum": [
-              "detection_01",
-              "detection_02",
-              "detection_03"
-            ],
-            "x-ms-enum": {
-              "name": "DetectionModel",
-              "modelAsString": true,
-              "values": [
-                {
-                  "name": "detection_01",
-                  "value": "detection_01",
-                  "description": "The default detection model. Recommend for near frontal face detection. For scenarios with exceptionally large angle (head-pose) faces, occluded faces or wrong image orientation, the faces in such cases may not be detected."
-                },
-                {
-                  "name": "detection_02",
-                  "value": "detection_02",
-                  "description": "Detection model released in 2019 May with improved accuracy especially on small, side and blurry faces."
-                },
-                {
-                  "name": "detection_03",
-                  "value": "detection_03",
-                  "description": "Detection model released in 2021 February with improved accuracy especially on small faces."
-                }
-              ]
-            }
+            "$ref": "#/parameters/AddFaceOptions.detectionModel"
           },
           {
-            "name": "userData",
-            "in": "query",
-            "description": "User-provided data attached to the face. The size limit is 1K.",
-            "required": false,
-            "type": "string",
-            "maxLength": 1024
+            "$ref": "#/parameters/AddFaceOptions.userData"
           },
           {
-            "name": "imageContent",
-            "in": "body",
-            "description": "The image to be analyzed",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "format": "binary"
-            }
+            "$ref": "#/parameters/AddFaceRequest.imageContent"
           }
         ],
         "responses": {
@@ -6869,7 +6132,7 @@
       "post": {
         "operationId": "FaceListOperations_AddLargeFaceListFace",
         "summary": "Add a face to a specified Large Face List, up to 1,000,000 faces.",
-        "description": "To deal with an image containing multiple faces, input face can be specified as an image with a targetFace rectangle. It returns a persistedFaceId representing the added face. No image will be stored. Only the extracted face feature(s) will be stored on server until \"Delete Large Face List Face\" or \"Delete Large Face List\" is called.\n\nNote that persistedFaceId is different from faceId generated by \"Detect\".\n>\n*\n  * Higher face image quality means better recognition precision. Please consider high-quality faces: frontal, clear, and face size is 200x200 pixels (100 pixels between eyes) or bigger.\n  * Each person entry can hold up to 248 faces.\n  * JPEG, PNG, GIF (the first frame), and BMP format are supported. The allowed image file size is from 1KB to 6MB.\n  * \"targetFace\" rectangle should contain one face. Zero or multiple faces will be regarded as an error. If the provided \"targetFace\" rectangle is not returned from \"Detect\", there's no guarantee to detect and add the face successfully.\n  * Out of detectable face size (36x36 - 4096x4096 pixels), large head-pose, or large occlusions will cause failures.\n  * The minimum detectable face size is 36x36 pixels in an image no larger than 1920x1080 pixels. Images with dimensions higher than 1920x1080 pixels will need a proportionally larger minimum face size.\n  * Different 'detectionModel' values can be provided. To use and compare different detection models, please refer to https://learn.microsoft.com/azure/ai-services/computer-vision/how-to/specify-detection-model\n\n> [!NOTE]\n>\n> *\n>   * Free-tier subscription quota: 1,000 faces per Large Face List.\n>   * S0-tier subscription quota: 1,000,000 faces per Large Face List.",
+        "description": "To deal with an image containing multiple faces, input face can be specified as an image with a targetFace rectangle. It returns a persistedFaceId representing the added face. No image will be stored. Only the extracted face feature(s) will be stored on server until \"Delete Large Face List Face\" or \"Delete Large Face List\" is called.\n\nNote that persistedFaceId is different from faceId generated by \"Detect\".\n\n>\n*\n  * Higher face image quality means better recognition precision. Please consider high-quality faces: frontal, clear, and face size is 200x200 pixels (100 pixels between eyes) or bigger.\n  * JPEG, PNG, GIF (the first frame), and BMP format are supported. The allowed image file size is from 1KB to 6MB.\n  * \"targetFace\" rectangle should contain one face. Zero or multiple faces will be regarded as an error. If the provided \"targetFace\" rectangle is not returned from \"Detect\", there's no guarantee to detect and add the face successfully.\n  * Out of detectable face size (36x36 - 4096x4096 pixels), large head-pose, or large occlusions will cause failures.\n  * The minimum detectable face size is 36x36 pixels in an image no larger than 1920x1080 pixels. Images with dimensions higher than 1920x1080 pixels will need a proportionally larger minimum face size.\n  * Different 'detectionModel' values can be provided. To use and compare different detection models, please refer to [here](https://learn.microsoft.com/azure/ai-services/computer-vision/how-to/specify-detection-model).\n\n> [!NOTE]\n>\n> *\n>   * Free-tier subscription quota: 1,000 faces per Large Face List.\n>   * S0-tier subscription quota: 1,000,000 faces per Large Face List.",
         "consumes": [
           "application/octet-stream"
         ],
@@ -6885,70 +6148,16 @@
             "pattern": "^[a-z0-9-_]+$"
           },
           {
-            "name": "targetFace",
-            "in": "query",
-            "description": "A face rectangle to specify the target face to be added to a person, in the format of 'targetFace=left,top,width,height'.",
-            "required": false,
-            "type": "array",
-            "items": {
-              "type": "integer",
-              "format": "int32"
-            },
-            "collectionFormat": "csv",
-            "minItems": 4,
-            "maxItems": 4
+            "$ref": "#/parameters/AddFaceOptions.targetFace"
           },
           {
-            "name": "detectionModel",
-            "in": "query",
-            "description": "The 'detectionModel' associated with the detected faceIds. Supported 'detectionModel' values include 'detection_01', 'detection_02' and 'detection_03'. The default value is 'detection_01'.",
-            "required": false,
-            "type": "string",
-            "default": "detection_01",
-            "enum": [
-              "detection_01",
-              "detection_02",
-              "detection_03"
-            ],
-            "x-ms-enum": {
-              "name": "DetectionModel",
-              "modelAsString": true,
-              "values": [
-                {
-                  "name": "detection_01",
-                  "value": "detection_01",
-                  "description": "The default detection model. Recommend for near frontal face detection. For scenarios with exceptionally large angle (head-pose) faces, occluded faces or wrong image orientation, the faces in such cases may not be detected."
-                },
-                {
-                  "name": "detection_02",
-                  "value": "detection_02",
-                  "description": "Detection model released in 2019 May with improved accuracy especially on small, side and blurry faces."
-                },
-                {
-                  "name": "detection_03",
-                  "value": "detection_03",
-                  "description": "Detection model released in 2021 February with improved accuracy especially on small faces."
-                }
-              ]
-            }
+            "$ref": "#/parameters/AddFaceOptions.detectionModel"
           },
           {
-            "name": "userData",
-            "in": "query",
-            "description": "User-provided data attached to the face. The size limit is 1K.",
-            "required": false,
-            "type": "string",
-            "maxLength": 1024
+            "$ref": "#/parameters/AddFaceOptions.userData"
           },
           {
-            "name": "imageContent",
-            "in": "body",
-            "description": "The image to be analyzed",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "format": "binary"
-            }
+            "$ref": "#/parameters/AddFaceRequest.imageContent"
           }
         ],
         "responses": {
@@ -6982,7 +6191,7 @@
       "post": {
         "operationId": "PersonGroupOperations_AddLargePersonGroupPersonFace",
         "summary": "Add a face to a person into a Large Person Group for face identification or verification.",
-        "description": "To deal with an image containing multiple faces, input face can be specified as an image with a targetFace rectangle. It returns a persistedFaceId representing the added face. No image will be stored. Only the extracted face feature(s) will be stored on server until \"Delete Large Person Group Person Face\", \"Delete Large Person Group Person\" or \"Delete Large Person Group\" is called.\n\nNote that persistedFaceId is different from faceId generated by \"Detect\".\n>\n*\n  * Higher face image quality means better recognition precision. Please consider high-quality faces: frontal, clear, and face size is 200x200 pixels (100 pixels between eyes) or bigger.\n  * Each person entry can hold up to 248 faces.\n  * JPEG, PNG, GIF (the first frame), and BMP format are supported. The allowed image file size is from 1KB to 6MB.\n  * \"targetFace\" rectangle should contain one face. Zero or multiple faces will be regarded as an error. If the provided \"targetFace\" rectangle is not returned from \"Detect\", there's no guarantee to detect and add the face successfully.\n  * Out of detectable face size (36x36 - 4096x4096 pixels), large head-pose, or large occlusions will cause failures.\n  * The minimum detectable face size is 36x36 pixels in an image no larger than 1920x1080 pixels. Images with dimensions higher than 1920x1080 pixels will need a proportionally larger minimum face size.\n  * Different 'detectionModel' values can be provided. To use and compare different detection models, please refer to https://learn.microsoft.com/azure/ai-services/computer-vision/how-to/specify-detection-model",
+        "description": "To deal with an image containing multiple faces, input face can be specified as an image with a targetFace rectangle. It returns a persistedFaceId representing the added face. No image will be stored. Only the extracted face feature(s) will be stored on server until \"Delete Large Person Group Person Face\", \"Delete Large Person Group Person\" or \"Delete Large Person Group\" is called.\n\nNote that persistedFaceId is different from faceId generated by \"Detect\".\n\n>\n*\n  * Each person entry can hold up to 248 faces.\n  * Higher face image quality means better recognition precision. Please consider high-quality faces: frontal, clear, and face size is 200x200 pixels (100 pixels between eyes) or bigger.\n  * JPEG, PNG, GIF (the first frame), and BMP format are supported. The allowed image file size is from 1KB to 6MB.\n  * \"targetFace\" rectangle should contain one face. Zero or multiple faces will be regarded as an error. If the provided \"targetFace\" rectangle is not returned from \"Detect\", there's no guarantee to detect and add the face successfully.\n  * Out of detectable face size (36x36 - 4096x4096 pixels), large head-pose, or large occlusions will cause failures.\n  * The minimum detectable face size is 36x36 pixels in an image no larger than 1920x1080 pixels. Images with dimensions higher than 1920x1080 pixels will need a proportionally larger minimum face size.\n  * Different 'detectionModel' values can be provided. To use and compare different detection models, please refer to [here](https://learn.microsoft.com/azure/ai-services/computer-vision/how-to/specify-detection-model).",
         "consumes": [
           "application/octet-stream"
         ],
@@ -7006,70 +6215,16 @@
             "format": "uuid"
           },
           {
-            "name": "targetFace",
-            "in": "query",
-            "description": "A face rectangle to specify the target face to be added to a person, in the format of 'targetFace=left,top,width,height'.",
-            "required": false,
-            "type": "array",
-            "items": {
-              "type": "integer",
-              "format": "int32"
-            },
-            "collectionFormat": "csv",
-            "minItems": 4,
-            "maxItems": 4
+            "$ref": "#/parameters/AddFaceOptions.targetFace"
           },
           {
-            "name": "detectionModel",
-            "in": "query",
-            "description": "The 'detectionModel' associated with the detected faceIds. Supported 'detectionModel' values include 'detection_01', 'detection_02' and 'detection_03'. The default value is 'detection_01'.",
-            "required": false,
-            "type": "string",
-            "default": "detection_01",
-            "enum": [
-              "detection_01",
-              "detection_02",
-              "detection_03"
-            ],
-            "x-ms-enum": {
-              "name": "DetectionModel",
-              "modelAsString": true,
-              "values": [
-                {
-                  "name": "detection_01",
-                  "value": "detection_01",
-                  "description": "The default detection model. Recommend for near frontal face detection. For scenarios with exceptionally large angle (head-pose) faces, occluded faces or wrong image orientation, the faces in such cases may not be detected."
-                },
-                {
-                  "name": "detection_02",
-                  "value": "detection_02",
-                  "description": "Detection model released in 2019 May with improved accuracy especially on small, side and blurry faces."
-                },
-                {
-                  "name": "detection_03",
-                  "value": "detection_03",
-                  "description": "Detection model released in 2021 February with improved accuracy especially on small faces."
-                }
-              ]
-            }
+            "$ref": "#/parameters/AddFaceOptions.detectionModel"
           },
           {
-            "name": "userData",
-            "in": "query",
-            "description": "User-provided data attached to the face. The size limit is 1K.",
-            "required": false,
-            "type": "string",
-            "maxLength": 1024
+            "$ref": "#/parameters/AddFaceOptions.userData"
           },
           {
-            "name": "imageContent",
-            "in": "body",
-            "description": "The image to be analyzed",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "format": "binary"
-            }
+            "$ref": "#/parameters/AddFaceRequest.imageContent"
           }
         ],
         "responses": {
@@ -7103,7 +6258,7 @@
       "post": {
         "operationId": "PersonGroupOperations_AddPersonGroupPersonFace",
         "summary": "Add a face to a person into a Person Group for face identification or verification.",
-        "description": "To deal with an image containing multiple faces, input face can be specified as an image with a targetFace rectangle. It returns a persistedFaceId representing the added face. No image will be stored. Only the extracted face feature(s) will be stored on server until \"Delete Person Group Person Face\", \"Delete Person Group Person\" or \"Delete Person Group\" is called.\n\nNote that persistedFaceId is different from faceId generated by \"Detect\".\n>\n*\n  * Higher face image quality means better recognition precision. Please consider high-quality faces: frontal, clear, and face size is 200x200 pixels (100 pixels between eyes) or bigger.\n  * Each person entry can hold up to 248 faces.\n  * JPEG, PNG, GIF (the first frame), and BMP format are supported. The allowed image file size is from 1KB to 6MB.\n  * \"targetFace\" rectangle should contain one face. Zero or multiple faces will be regarded as an error. If the provided \"targetFace\" rectangle is not returned from \"Detect\", there's no guarantee to detect and add the face successfully.\n  * Out of detectable face size (36x36 - 4096x4096 pixels), large head-pose, or large occlusions will cause failures.\n  * The minimum detectable face size is 36x36 pixels in an image no larger than 1920x1080 pixels. Images with dimensions higher than 1920x1080 pixels will need a proportionally larger minimum face size.\n  * Different 'detectionModel' values can be provided. To use and compare different detection models, please refer to https://learn.microsoft.com/azure/ai-services/computer-vision/how-to/specify-detection-model",
+        "description": "To deal with an image containing multiple faces, input face can be specified as an image with a targetFace rectangle. It returns a persistedFaceId representing the added face. No image will be stored. Only the extracted face feature(s) will be stored on server until \"Delete Person Group Person Face\", \"Delete Person Group Person\" or \"Delete Person Group\" is called.\n\nNote that persistedFaceId is different from faceId generated by \"Detect\".\n\n>\n* \n  * Each person entry can hold up to 248 faces.\n  * Higher face image quality means better recognition precision. Please consider high-quality faces: frontal, clear, and face size is 200x200 pixels (100 pixels between eyes) or bigger.\n  * JPEG, PNG, GIF (the first frame), and BMP format are supported. The allowed image file size is from 1KB to 6MB.\n  * \"targetFace\" rectangle should contain one face. Zero or multiple faces will be regarded as an error. If the provided \"targetFace\" rectangle is not returned from \"Detect\", there's no guarantee to detect and add the face successfully.\n  * Out of detectable face size (36x36 - 4096x4096 pixels), large head-pose, or large occlusions will cause failures.\n  * The minimum detectable face size is 36x36 pixels in an image no larger than 1920x1080 pixels. Images with dimensions higher than 1920x1080 pixels will need a proportionally larger minimum face size.\n  * Different 'detectionModel' values can be provided. To use and compare different detection models, please refer to [here](https://learn.microsoft.com/azure/ai-services/computer-vision/how-to/specify-detection-model).",
         "consumes": [
           "application/octet-stream"
         ],
@@ -7127,70 +6282,16 @@
             "format": "uuid"
           },
           {
-            "name": "targetFace",
-            "in": "query",
-            "description": "A face rectangle to specify the target face to be added to a person, in the format of 'targetFace=left,top,width,height'.",
-            "required": false,
-            "type": "array",
-            "items": {
-              "type": "integer",
-              "format": "int32"
-            },
-            "collectionFormat": "csv",
-            "minItems": 4,
-            "maxItems": 4
+            "$ref": "#/parameters/AddFaceOptions.targetFace"
           },
           {
-            "name": "detectionModel",
-            "in": "query",
-            "description": "The 'detectionModel' associated with the detected faceIds. Supported 'detectionModel' values include 'detection_01', 'detection_02' and 'detection_03'. The default value is 'detection_01'.",
-            "required": false,
-            "type": "string",
-            "default": "detection_01",
-            "enum": [
-              "detection_01",
-              "detection_02",
-              "detection_03"
-            ],
-            "x-ms-enum": {
-              "name": "DetectionModel",
-              "modelAsString": true,
-              "values": [
-                {
-                  "name": "detection_01",
-                  "value": "detection_01",
-                  "description": "The default detection model. Recommend for near frontal face detection. For scenarios with exceptionally large angle (head-pose) faces, occluded faces or wrong image orientation, the faces in such cases may not be detected."
-                },
-                {
-                  "name": "detection_02",
-                  "value": "detection_02",
-                  "description": "Detection model released in 2019 May with improved accuracy especially on small, side and blurry faces."
-                },
-                {
-                  "name": "detection_03",
-                  "value": "detection_03",
-                  "description": "Detection model released in 2021 February with improved accuracy especially on small faces."
-                }
-              ]
-            }
+            "$ref": "#/parameters/AddFaceOptions.detectionModel"
           },
           {
-            "name": "userData",
-            "in": "query",
-            "description": "User-provided data attached to the face. The size limit is 1K.",
-            "required": false,
-            "type": "string",
-            "maxLength": 1024
+            "$ref": "#/parameters/AddFaceOptions.userData"
           },
           {
-            "name": "imageContent",
-            "in": "body",
-            "description": "The image to be analyzed",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "format": "binary"
-            }
+            "$ref": "#/parameters/AddFaceRequest.imageContent"
           }
         ],
         "responses": {
@@ -7224,7 +6325,7 @@
       "post": {
         "operationId": "PersonDirectoryOperations_AddPersonFaceFromUrl",
         "summary": "Add a face to a person (see Person Directory \"Create Person\") for face identification or verification.",
-        "description": "To deal with an image containing multiple faces, input face can be specified as an image with a targetFace rectangle. It returns a persistedFaceId representing the added face. No image will be stored. Only the extracted face feature(s) will be stored on server until Person Directory \"Delete Person Face\" or \"Delete Person\" is called.\n\nNote that persistedFaceId is different from faceId generated by \"Detect\".\n>\n*\n  * Higher face image quality means better recognition precision. Please consider high-quality faces: frontal, clear, and face size is 200x200 pixels (100 pixels between eyes) or bigger.\n  * Each person entry can hold up to 248 faces.\n  * JPEG, PNG, GIF (the first frame), and BMP format are supported. The allowed image file size is from 1KB to 6MB.\n  * \"targetFace\" rectangle should contain one face. Zero or multiple faces will be regarded as an error. If the provided \"targetFace\" rectangle is not returned from \"Detect\", there's no guarantee to detect and add the face successfully.\n  * Out of detectable face size (36x36 - 4096x4096 pixels), large head-pose, or large occlusions will cause failures.\n  * The minimum detectable face size is 36x36 pixels in an image no larger than 1920x1080 pixels. Images with dimensions higher than 1920x1080 pixels will need a proportionally larger minimum face size.\n  * Different 'detectionModel' values can be provided. To use and compare different detection models, please refer to https://learn.microsoft.com/azure/ai-services/computer-vision/how-to/specify-detection-model\n*\n  * Adding/deleting faces to/from a same person will be processed sequentially. Adding/deleting faces to/from different persons are processed in parallel.\n  * This is a long running operation. Use Response Header \"Operation-Location\" to determine when the AddFace operation has successfully propagated for future requests to \"Identify\". For further information about Operation-Locations see \"Get Face Operation Status\".",
+        "description": "To deal with an image containing multiple faces, input face can be specified as an image with a targetFace rectangle. It returns a persistedFaceId representing the added face. No image will be stored. Only the extracted face feature(s) will be stored on server until Person Directory \"Delete Person Face\" or \"Delete Person\" is called.\n\nNote that persistedFaceId is different from faceId generated by \"Detect\".\n\n>\n*\n  * Each person entry can hold up to 248 faces.\n  * Higher face image quality means better recognition precision. Please consider high-quality faces: frontal, clear, and face size is 200x200 pixels (100 pixels between eyes) or bigger.\n  * JPEG, PNG, GIF (the first frame), and BMP format are supported. The allowed image file size is from 1KB to 6MB.\n  * \"targetFace\" rectangle should contain one face. Zero or multiple faces will be regarded as an error. If the provided \"targetFace\" rectangle is not returned from \"Detect\", there's no guarantee to detect and add the face successfully.\n  * Out of detectable face size (36x36 - 4096x4096 pixels), large head-pose, or large occlusions will cause failures.\n  * The minimum detectable face size is 36x36 pixels in an image no larger than 1920x1080 pixels. Images with dimensions higher than 1920x1080 pixels will need a proportionally larger minimum face size.\n  * Different 'detectionModel' values can be provided. To use and compare different detection models, please refer to [here](https://learn.microsoft.com/azure/ai-services/computer-vision/how-to/specify-detection-model).\n  * Adding/deleting faces to/from a same person will be processed sequentially. Adding/deleting faces to/from different persons are processed in parallel.\n  * This is a long running operation. Use Response Header \"Operation-Location\" to determine when the AddFace operation has successfully propagated for future requests to \"Identify\". For further information about Operation-Locations see \"Get Face Operation Status\".",
         "parameters": [
           {
             "name": "personId",
@@ -7274,60 +6375,13 @@
             }
           },
           {
-            "name": "targetFace",
-            "in": "query",
-            "description": "A face rectangle to specify the target face to be added to a person, in the format of 'targetFace=left,top,width,height'.",
-            "required": false,
-            "type": "array",
-            "items": {
-              "type": "integer",
-              "format": "int32"
-            },
-            "collectionFormat": "csv",
-            "minItems": 4,
-            "maxItems": 4
+            "$ref": "#/parameters/AddFaceOptions.targetFace"
           },
           {
-            "name": "detectionModel",
-            "in": "query",
-            "description": "The 'detectionModel' associated with the detected faceIds. Supported 'detectionModel' values include 'detection_01', 'detection_02' and 'detection_03'. The default value is 'detection_01'.",
-            "required": false,
-            "type": "string",
-            "default": "detection_01",
-            "enum": [
-              "detection_01",
-              "detection_02",
-              "detection_03"
-            ],
-            "x-ms-enum": {
-              "name": "DetectionModel",
-              "modelAsString": true,
-              "values": [
-                {
-                  "name": "detection_01",
-                  "value": "detection_01",
-                  "description": "The default detection model. Recommend for near frontal face detection. For scenarios with exceptionally large angle (head-pose) faces, occluded faces or wrong image orientation, the faces in such cases may not be detected."
-                },
-                {
-                  "name": "detection_02",
-                  "value": "detection_02",
-                  "description": "Detection model released in 2019 May with improved accuracy especially on small, side and blurry faces."
-                },
-                {
-                  "name": "detection_03",
-                  "value": "detection_03",
-                  "description": "Detection model released in 2021 February with improved accuracy especially on small faces."
-                }
-              ]
-            }
+            "$ref": "#/parameters/AddFaceOptions.detectionModel"
           },
           {
-            "name": "userData",
-            "in": "query",
-            "description": "User-provided data attached to the face. The size limit is 1K.",
-            "required": false,
-            "type": "string",
-            "maxLength": 1024
+            "$ref": "#/parameters/AddFaceOptions.userData"
           },
           {
             "name": "body",
@@ -7619,6 +6673,20 @@
         ]
       }
     },
+    "AddFaceFromUrlRequest": {
+      "type": "object",
+      "description": "Add face from url request.",
+      "properties": {
+        "url": {
+          "type": "string",
+          "format": "uri",
+          "description": "URL of input image."
+        }
+      },
+      "required": [
+        "url"
+      ]
+    },
     "AddFaceResult": {
       "type": "object",
       "description": "Response body for adding face.",
@@ -7743,6 +6811,63 @@
       "required": [
         "blurLevel",
         "value"
+      ]
+    },
+    "CreateCollectionRequest": {
+      "type": "object",
+      "description": "Model for creating face collection.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "User defined name, maximum length is 128.",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "userData": {
+          "type": "string",
+          "description": "Optional user defined data. Length should not exceed 16K.",
+          "maxLength": 16384
+        },
+        "recognitionModel": {
+          "type": "string",
+          "description": "The 'recognitionModel' associated with this face list. Supported 'recognitionModel' values include 'recognition_01', 'recognition_02, 'recognition_03', and 'recognition_04'. The default value is 'recognition_01'. 'recognition_04' is recommended since its accuracy is improved on faces wearing masks compared with 'recognition_03', and its overall accuracy is improved compared with 'recognition_01' and 'recognition_02'.",
+          "default": "recognition_01",
+          "enum": [
+            "recognition_01",
+            "recognition_02",
+            "recognition_03",
+            "recognition_04"
+          ],
+          "x-ms-enum": {
+            "name": "RecognitionModel",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "recognition_01",
+                "value": "recognition_01",
+                "description": "The default recognition model for \"Detect\". All those faceIds created before 2019 March are bonded with this recognition model."
+              },
+              {
+                "name": "recognition_02",
+                "value": "recognition_02",
+                "description": "Recognition model released in 2019 March."
+              },
+              {
+                "name": "recognition_03",
+                "value": "recognition_03",
+                "description": "Recognition model released in 2020 May."
+              },
+              {
+                "name": "recognition_04",
+                "value": "recognition_04",
+                "description": "Recognition model released in 2021 February. It's recommended to use this recognition model for better recognition accuracy."
+              }
+            ]
+          }
+        }
+      },
+      "required": [
+        "name"
       ]
     },
     "CreateLivenessSessionContent": {
@@ -8402,6 +7527,17 @@
             "description": "Session has available result."
           }
         ]
+      }
+    },
+    "FaceUserData": {
+      "type": "object",
+      "description": "User defined data for persisted face.",
+      "properties": {
+        "userData": {
+          "type": "string",
+          "description": "User-provided data attached to the face. The length limit is 1K.",
+          "maxLength": 1024
+        }
       }
     },
     "FacialHair": {
@@ -9748,6 +8884,43 @@
         "lastSuccessfulTrainingDateTime"
       ]
     },
+    "UserDefinedFields": {
+      "type": "object",
+      "description": "User defined fields for object creation.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "User defined name, maximum length is 128.",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "userData": {
+          "type": "string",
+          "description": "Optional user defined data. Length should not exceed 16K.",
+          "maxLength": 16384
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
+    "UserDefinedFieldsForUpdate": {
+      "type": "object",
+      "description": "User defined fields for object update.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "User defined name, maximum length is 128.",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "userData": {
+          "type": "string",
+          "description": "Optional user defined data. Length should not exceed 16K.",
+          "maxLength": 16384
+        }
+      }
+    },
     "VerificationResult": {
       "type": "object",
       "description": "Verify result.",
@@ -9776,5 +8949,76 @@
       "pattern": "^[a-z0-9-_]+$"
     }
   },
-  "parameters": {}
+  "parameters": {
+    "AddFaceOptions.detectionModel": {
+      "name": "detectionModel",
+      "in": "query",
+      "description": "The 'detectionModel' associated with the detected faceIds. Supported 'detectionModel' values include 'detection_01', 'detection_02' and 'detection_03'. The default value is 'detection_01'.",
+      "required": false,
+      "type": "string",
+      "default": "detection_01",
+      "enum": [
+        "detection_01",
+        "detection_02",
+        "detection_03"
+      ],
+      "x-ms-enum": {
+        "name": "DetectionModel",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "detection_01",
+            "value": "detection_01",
+            "description": "The default detection model. Recommend for near frontal face detection. For scenarios with exceptionally large angle (head-pose) faces, occluded faces or wrong image orientation, the faces in such cases may not be detected."
+          },
+          {
+            "name": "detection_02",
+            "value": "detection_02",
+            "description": "Detection model released in 2019 May with improved accuracy especially on small, side and blurry faces."
+          },
+          {
+            "name": "detection_03",
+            "value": "detection_03",
+            "description": "Detection model released in 2021 February with improved accuracy especially on small faces."
+          }
+        ]
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "AddFaceOptions.targetFace": {
+      "name": "targetFace",
+      "in": "query",
+      "description": "A face rectangle to specify the target face to be added to a person, in the format of 'targetFace=left,top,width,height'.",
+      "required": false,
+      "type": "array",
+      "items": {
+        "type": "integer",
+        "format": "int32"
+      },
+      "collectionFormat": "csv",
+      "minItems": 4,
+      "maxItems": 4,
+      "x-ms-parameter-location": "method"
+    },
+    "AddFaceOptions.userData": {
+      "name": "userData",
+      "in": "query",
+      "description": "User-provided data attached to the face. The size limit is 1K.",
+      "required": false,
+      "type": "string",
+      "maxLength": 1024,
+      "x-ms-parameter-location": "method"
+    },
+    "AddFaceRequest.imageContent": {
+      "name": "imageContent",
+      "in": "body",
+      "description": "The image to be analyzed",
+      "required": true,
+      "schema": {
+        "type": "string",
+        "format": "binary"
+      },
+      "x-ms-parameter-location": "method"
+    }
+  }
 }
