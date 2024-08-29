@@ -554,7 +554,7 @@ model ProjectDeployments {
   /**
    * The next page link.
    */
-  nextLink: string;
+  nextLink?: string;
 }
 
 /**
