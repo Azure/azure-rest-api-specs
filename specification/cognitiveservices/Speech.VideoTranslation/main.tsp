@@ -139,6 +139,15 @@ model TranslationInput {
 
   @doc("Translation video file url.")
   videoFileUrl: url;
+
+  @doc("Speaker count of the video.")
+  speakerCount?: int32;
+
+  @doc("Speaker count of the video.")
+  enableLipSync?: boolean;
+
+  @doc("Subtitle max char count per segment.")
+  subtitleMaxCharCountPerSegment?: int32;
 }
 
 @doc("Iteration result.")
