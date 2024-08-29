@@ -1,0 +1,561 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "ACS Call Settings API",
+        "version": "2024-09-15-preview",
+        "description": "API to manage call settings for Azure resources."
+    },
+    "securityDefinitions": {
+        "azure_auth": {
+            "type": "oauth2",
+            "flow": "implicit",
+            "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+            "scopes": {
+                "user_impersonation": "impersonate your user account"
+            },
+            "description": "Azure Active Directory OAuth2 Flow"
+        },
+        "apiKey": {
+            "type": "apiKey",
+            "name": "access_key",
+            "in": "header",
+            "description": "An authentication string containing a signature generated using HMAC-SHA256 scheme."
+        }
+    },
+    "security": [
+        {
+            "azure_auth": [
+                "user_impersonation"
+            ]
+        },
+        {
+            "apiKey": []
+        }
+    ],
+    "x-ms-parameterized-host": {
+        "hostTemplate": "{endpoint}",
+        "useSchemePrefix": false,
+        "parameters": [
+            {
+                "$ref": "#/parameters/Endpoint"
+            }
+        ]
+    },
+    "produces": [
+        "application/json"
+    ],
+    "consumes": [
+        "application/json"
+    ],
+    "tags": [
+        {
+            "name": "CallSettings"
+        }
+    ],
+    "paths": {
+        "/call-settings/participants": {
+            "get": {
+                "operationId": "ParticipantCallSettingsList_List",
+                "tags": [
+                    "CallSettings"
+                ],
+                "description": "Retrieves all configured participant call settings.",
+                "summary": "Retrieve all configured participant call settings.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The request has succeeded.",
+                        "schema": {
+                            "$ref": "#/definitions/PagedParticipantCallSettingsItem"
+                        }
+                    },
+                    "default": {
+                        "description": "Failure",
+                        "schema": {
+                            "$ref": "../../../Common/stable/2022-07-13/common.json#/definitions/CommunicationErrorResponse"
+                        },
+                        "headers": {
+                            "x-ms-error-code": {
+                                "type": "string",
+                                "description": "Error code"
+                            }
+                        }
+                    }
+                },
+                "x-ms-pageable": {
+                    "nextLinkName": "nextLink"
+                }
+            }
+        },
+        "/call-settings/participants/{participantRawId}": {
+            "patch": {
+                "operationId": "ParticipantCallSettings_CreateUpdate",
+                "tags": [
+                    "CallSettings"
+                ],
+                "summary": "Create or update call settings.",
+                "description": "Creates or updates call settings for a Participant with specified ID.",
+                "consumes": [
+                    "application/merge-patch+json"
+                ],
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ParticipantRawId"
+                    },
+                    {
+                        "name": "CallSettings",
+                        "in": "body",
+                        "required": true,
+                        "description": "Call settings to create or update.",
+                        "schema": {
+                            "$ref": "#/definitions/CallSettingsUpdate"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Call settings updated successfully.",
+                        "schema": {
+                            "$ref": "#/definitions/CallSettings"
+                        }
+                    },
+                    "201": {
+                        "description": "Call settings created successfully.",
+                        "schema": {
+                            "$ref": "#/definitions/CallSettings"
+                        }
+                    },
+                    "default": {
+                        "description": "Failure",
+                        "schema": {
+                            "$ref": "../../../Common/stable/2022-07-13/common.json#/definitions/CommunicationErrorResponse"
+                        },
+                        "headers": {
+                            "x-ms-error-code": {
+                                "type": "string",
+                                "description": "Error code"
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "operationId": "ParticipantCallSettings_Delete",
+                "tags": [
+                    "CallSettings"
+                ],
+                "summary": "Delete call settings.",
+                "description": "Deletes call settings for a Participant with specified ID.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ParticipantRawId"
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Call settings deleted successfully."
+                    },
+                    "default": {
+                        "description": "Failure",
+                        "schema": {
+                            "$ref": "../../../Common/stable/2022-07-13/common.json#/definitions/CommunicationErrorResponse"
+                        },
+                        "headers": {
+                            "x-ms-error-code": {
+                                "type": "string",
+                                "description": "Error code"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/call-settings/global": {
+            "get": {
+                "operationId": "GlobalCallSettings_Get",
+                "tags": [
+                    "CallSettings"
+                ],
+                "summary": "Retrieve global call settings.",
+                "description": "Retrieves the current global call settings with no specific scope.",
+                "parameters": [
+                    {
+                         "$ref": "#/parameters/ApiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully retrieved call settings.",
+                        "schema": {
+                            "$ref": "#/definitions/CallSettings"
+                        }
+                    },
+                    "default": {
+                        "description": "Failure",
+                        "schema": {
+                            "$ref": "../../../Common/stable/2022-07-13/common.json#/definitions/CommunicationErrorResponse"
+                        },
+                        "headers": {
+                            "x-ms-error-code": {
+                                "type": "string",
+                                "description": "Error code"
+                            }
+                        }
+                    }
+                }
+            },
+            "patch": {
+                "operationId": "GlobalCallSettings_CreateUpdate",
+                "tags": [
+                    "CallSettings"
+                ],
+                "summary": "Create call or update settings.",
+                "description": "Creates call settings with no specific scope (e.g., global settings).",
+                "consumes": [
+                    "application/merge-patch+json"
+                ],
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "name": "CallSettings",
+                        "in": "body",
+                        "required": true,
+                        "description": "Call settings to create or update.",
+                        "schema": {
+                            "$ref": "#/definitions/CallSettingsUpdate"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Call settings updated successfully.",
+                        "schema": {
+                            "$ref": "#/definitions/CallSettings"
+                        }
+                    },
+                    "201": {
+                        "description": "Call settings created successfully.",
+                        "schema": {
+                            "$ref": "#/definitions/CallSettings"
+                        }
+                    },
+                    "default": {
+                        "description": "Failure",
+                        "schema": {
+                            "$ref": "../../../Common/stable/2022-07-13/common.json#/definitions/CommunicationErrorResponse"
+                        },
+                        "headers": {
+                            "x-ms-error-code": {
+                                "type": "string",
+                                "description": "Error code"
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "operationId": "GlobalCallSettings_Delete",
+                "tags": [
+                    "CallSettings"
+                ],
+                "summary": "Delete call settings.",
+                "description": "Deletes call settings.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Call settings deleted successfully."
+                    },
+                    "default": {
+                        "description": "Failure",
+                        "schema": {
+                            "$ref": "../../../Common/stable/2022-07-13/common.json#/definitions/CommunicationErrorResponse"
+                        },
+                        "headers": {
+                            "x-ms-error-code": {
+                                "type": "string",
+                                "description": "Error code"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "PagedParticipantCallSettingsItem": {
+            "type": "object",
+            "description": "Paged collection of ParticipantCallSettingsItem items",
+            "properties": {
+                "value": {
+                    "type": "array",
+                    "description": "The ParticipantCallSettingsItem items on this page",
+                    "items": {
+                        "$ref": "#/definitions/ParticipantCallSettingsItem"
+                    }
+                },
+                "nextLink": {
+                    "type": "string",
+                    "format": "uri",
+                    "description": "The link to the next page of items"
+                }
+            },
+            "required": [
+                "value"
+            ]
+        },
+        "ParticipantCallSettingsItem": {
+            "type": "object",
+            "description": "Configuration of general call settings",
+            "properties": {
+                "id": {
+                    "description": "ParticipantRawId",
+                    "type": "string"
+                },
+                "autoRecordingSettings": {
+                    "$ref": "#/definitions/AutoRecordingSettings",
+                    "description": "Recording setttings"
+                }
+            },
+            "required": [
+                "id",
+                "autoRecordingSettings"
+            ]
+        },
+        "AutoRecordingSettings": {
+            "type": "object",
+            "description": "Configuration for recording settings.",
+            "properties": {
+                "enabled": {
+                    "type": "boolean",
+                    "description": "Whether to enable auto-recording."
+                },
+                "content": {
+                    "$ref": "#/definitions/ContentType",
+                    "description": "Type of content to record (e.g., audio)."
+                },
+                "channel": {
+                    "$ref": "#/definitions/ChannelType",
+                    "description": "Recording channel configuration (e.g., mixed)."
+                },
+                "format": {
+                    "$ref": "#/definitions/FormatType",
+                    "description": "Format of the recording (e.g., wav)."
+                },
+                "pauseOnStart": {
+                    "type": "boolean",
+                    "description": "Whether to pause recording on start."
+                },
+                "storageKind": {
+                    "$ref": "#/definitions/StorageKindType",
+                    "description": "Type of storage to use for recordings (e.g., azureBlobStorage)."
+                },
+                "destinationContainerUrl": {
+                    "type": "string",
+                    "format": "uri",
+                    "description": "URL of the Azure Blob Storage container where the recordings should be saved."
+                }
+            },
+            "required": [
+                "enabled",
+                "content",
+                "channel",
+                "format",
+                "pauseOnStart",
+                "storageKind",
+                "destinationContainerUrl"
+            ]
+        },
+        "AutoRecordingSettingsUpdate": {
+            "type": "object",
+            "description": "Configuration for recording settings.",
+            "properties": {
+                "enabled": {
+                    "type": "boolean",
+                    "description": "Whether to enable auto-recording."
+                },
+                "content": {
+                    "$ref": "#/definitions/ContentType",
+                    "description": "Type of content to record (e.g., audio)."
+                },
+                "channel": {
+                    "$ref": "#/definitions/ChannelType",
+                    "description": "Recording channel configuration (e.g., mixed)."
+                },
+                "format": {
+                    "$ref": "#/definitions/FormatType",
+                    "description": "Format of the recording (e.g., wav)."
+                },
+                "pauseOnStart": {
+                    "type": "boolean",
+                    "description": "Whether to pause recording on start."
+                },
+                "storageKind": {
+                    "$ref": "#/definitions/StorageKindType",
+                    "description": "Type of storage to use for recordings (e.g., azureBlobStorage)."
+                },
+                "destinationContainerUrl": {
+                    "type": "string",
+                    "format": "uri",
+                    "description": "URL of the Azure Blob Storage container where the recordings should be saved."
+                }
+            }
+        },
+        "CallSettings": {
+            "type": "object",
+            "description": "Configuration of general call settings",
+            "properties": {
+                "autoRecordingSettings": {
+                    "$ref": "#/definitions/AutoRecordingSettings",
+                    "description": "Recording setttings"
+                }
+            },
+            "required": [
+                "autoRecordingSettings"
+            ]
+        },
+        "CallSettingsUpdate": {
+            "type": "object",
+            "description": "Configuration of general call settings",
+            "properties": {
+                "autoRecordingSettings": {
+                    "$ref": "#/definitions/AutoRecordingSettingsUpdate",
+                    "description": "Recording setttings"
+                }
+            }
+        },
+        "ChannelType": {
+            "type": "string",
+            "description": "Type of media channel.",
+            "enum": [
+                "mixed",
+                "unmixed"
+            ],
+            "x-ms-enum": {
+                "name": "ChannelType",
+                "modelAsString": true,
+                "values": [
+                    {
+                        "name": "mixed",
+                        "value": "mixed"
+                    },
+                    {
+                        "name": "unmixed",
+                        "value": "unmixed"
+                    }
+                ]
+            }
+        },
+        "ContentType": {
+            "type": "string",
+            "description": "Type of recording content.",
+            "enum": [
+                "audio",
+                "audioVideo"
+            ],
+            "x-ms-enum": {
+                "name": "ContentType",
+                "modelAsString": true,
+                "values": [
+                    {
+                        "name": "audio",
+                        "value": "audio"
+                    },
+                    {
+                        "name": "audioVideo",
+                        "value": "audioVideo"
+                    }
+                ]
+            }
+        },
+        "FormatType": {
+            "type": "string",
+            "description": "Media format of the recording.",
+            "enum": [
+                "mp3",
+                "mp4",
+                "wav"
+            ],
+            "x-ms-enum": {
+                "name": "FormatType",
+                "modelAsString": true,
+                "values": [
+                    {
+                        "name": "mp3",
+                        "value": "mp3"
+                    },
+                    {
+                        "name": "mp4",
+                        "value": "mp4"
+                    },
+                    {
+                        "name": "wav",
+                        "value": "wav"
+                    }
+                ]
+            }
+        },
+        "StorageKindType": {
+            "type": "string",
+            "description": "Type of storage for recording.",
+            "enum": [
+                "AzureBlobStorage",
+                "AzureCommunicationServices"
+            ],
+            "x-ms-enum": {
+                "name": "StorageKindType",
+                "modelAsString": true,
+                "values": [
+                    {
+                        "name": "AzureBlobStorage",
+                        "value": "AzureBlobStorage"
+                    },
+                    {
+                        "name": "AzureCommunicationServices",
+                        "value": "AzureCommunicationServices"
+                    }
+                ]
+            }
+        }
+    },
+    "parameters": {
+        "ApiVersionParameter": {
+            "in": "query",
+            "name": "api-version",
+            "description": "Version of API to invoke",
+            "required": true,
+            "type": "string"
+        },
+        "Endpoint": {
+            "in": "path",
+            "name": "endpoint",
+            "description": "The communication resource, for example https://resourcename.communication.azure.com",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true,
+            "x-ms-parameter-location": "client"
+        },
+        "ParticipantRawId": {
+            "in": "path",
+            "name": "participantRawId",
+            "description": "The raw Id of the participant.",
+            "required": true,
+            "type": "string"
+        }
+    }
+}
