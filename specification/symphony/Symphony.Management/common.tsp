@@ -31,9 +31,11 @@ model ComponentProperties {
   @doc("Name of the component.")
   name: string;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing api"
   @doc("Metadata information of the component.")
   metadata?: Record<string>;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing api"
   @doc("Properties of the component.")
   properties?: Record<unknown>;
 
@@ -53,6 +55,7 @@ model BindingProperties {
   @doc("Name of the provider.")
   provider: string;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing api"
   @doc("Configuration values for the binding.")
   config?: Record<string>;
 
@@ -102,9 +105,11 @@ model StageProperties {
   @doc("The contexts of the Stage")
   contexts?: string;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing api"
   @doc("The config of the Stage")
   config?: Record<unknown>;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing api"
   @doc("The inputs of the Stage")
   inputs?: Record<unknown>;
 

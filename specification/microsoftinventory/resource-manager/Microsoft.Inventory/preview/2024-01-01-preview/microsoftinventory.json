@@ -86,7 +86,7 @@
         },
         "x-ms-examples": {
           "SubscriptionInternalPropertyResources_List": {
-            "$ref": "./examples/SubscriptionInternalPropertyResources_List_MaximumSet_Gen.json"
+            "$ref": "./examples/SubscriptionInternalPropertyResources_List.json"
           }
         },
         "x-ms-pageable": {
@@ -132,11 +132,11 @@
     },
     "/providers/Microsoft.Inventory/locations/{location}/physicalAzureHosts": {
       "get": {
-        "operationId": "AzureHosts_ListByTenant",
+        "operationId": "AzureHosts_List",
         "tags": [
           "AzureHosts"
         ],
-        "description": "List AzureHostResource resources by tenant",
+        "description": "List AzureHostResource resources by TenantLocationResource",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -160,8 +160,8 @@
           }
         },
         "x-ms-examples": {
-          "AzureHosts_ListByTenant": {
-            "$ref": "./examples/AzureHosts_ListByTenant_MaximumSet_Gen.json"
+          "AzureHosts_List": {
+            "$ref": "./examples/AzureHosts_List.json"
           }
         },
         "x-ms-pageable": {
@@ -171,7 +171,7 @@
     },
     "/providers/Microsoft.Inventory/locations/{location}/physicalAzureHosts/{azureHostName}": {
       "get": {
-        "operationId": "AzureHosts_GetAzureHost",
+        "operationId": "AzureHosts_Get",
         "tags": [
           "AzureHosts"
         ],
@@ -207,19 +207,19 @@
           }
         },
         "x-ms-examples": {
-          "AzureHosts_GetAzureHost": {
-            "$ref": "./examples/AzureHosts_GetAzureHost.json"
+          "AzureHosts_Get": {
+            "$ref": "./examples/AzureHosts_Get.json"
           }
         }
       }
     },
     "/providers/Microsoft.Inventory/locations/{location}/physicalClusters": {
       "get": {
-        "operationId": "Clusters_ListByTenant",
+        "operationId": "Clusters_List",
         "tags": [
           "Clusters"
         ],
-        "description": "List ClusterResource resources by tenant",
+        "description": "List ClusterResource resources by TenantLocationResource",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -243,8 +243,8 @@
           }
         },
         "x-ms-examples": {
-          "Clusters_ListByTenant": {
-            "$ref": "./examples/Clusters_ListByTenant_MaximumSet_Gen.json"
+          "Clusters_List": {
+            "$ref": "./examples/Clusters_List.json"
           }
         },
         "x-ms-pageable": {
@@ -254,7 +254,7 @@
     },
     "/providers/Microsoft.Inventory/locations/{location}/physicalClusters/{clusterName}": {
       "get": {
-        "operationId": "Clusters_GetCluster",
+        "operationId": "Clusters_Get",
         "tags": [
           "Clusters"
         ],
@@ -290,19 +290,19 @@
           }
         },
         "x-ms-examples": {
-          "Clusters_GetCluster": {
-            "$ref": "./examples/Clusters_GetCluster.json"
+          "Clusters_Get": {
+            "$ref": "./examples/Clusters_Get.json"
           }
         }
       }
     },
     "/providers/Microsoft.Inventory/locations/{location}/physicalDatacenters": {
       "get": {
-        "operationId": "Datacenters_ListByTenant",
+        "operationId": "Datacenters_List",
         "tags": [
           "Datacenters"
         ],
-        "description": "List DatacenterResource resources by tenant",
+        "description": "List DatacenterResource resources by TenantLocationResource",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -326,8 +326,8 @@
           }
         },
         "x-ms-examples": {
-          "Datacenters_ListByTenant": {
-            "$ref": "./examples/Datacenters_ListByTenant_MaximumSet_Gen.json"
+          "Datacenters_List": {
+            "$ref": "./examples/Datacenters_List.json"
           }
         },
         "x-ms-pageable": {
@@ -337,7 +337,7 @@
     },
     "/providers/Microsoft.Inventory/locations/{location}/physicalDatacenters/{datacenterName}": {
       "get": {
-        "operationId": "Datacenters_GetDatacenter",
+        "operationId": "Datacenters_Get",
         "tags": [
           "Datacenters"
         ],
@@ -373,8 +373,8 @@
           }
         },
         "x-ms-examples": {
-          "Datacenters_GetDatacenter": {
-            "$ref": "./examples/Datacenters_GetDatacenter.json"
+          "Datacenters_Get": {
+            "$ref": "./examples/Datacenters_Get.json"
           }
         }
       }
@@ -407,7 +407,7 @@
         },
         "x-ms-examples": {
           "Operations_List": {
-            "$ref": "./examples/Operations_List_MaximumSet_Gen.json"
+            "$ref": "./examples/Operations_List.json"
           }
         },
         "x-ms-pageable": {
@@ -477,12 +477,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/AzureHostProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "description": "The resource-specific properties for this resource."
         }
       },
       "allOf": [
@@ -680,12 +675,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/ClusterProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "description": "The resource-specific properties for this resource."
         }
       },
       "allOf": [
@@ -824,12 +814,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/DatacenterProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "description": "The resource-specific properties for this resource."
         }
       },
       "allOf": [
@@ -1198,12 +1183,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/SubscriptionInternalProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "description": "The resource-specific properties for this resource."
         }
       },
       "allOf": [
@@ -1288,24 +1268,6 @@
             "name": "Priority",
             "value": "Priority",
             "description": "Priority tier"
-          }
-        ]
-      }
-    },
-    "Versions": {
-      "type": "string",
-      "description": "The available API versions.",
-      "enum": [
-        "2024-01-01-preview"
-      ],
-      "x-ms-enum": {
-        "name": "Versions",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "v2024_01_01_preview",
-            "value": "2024-01-01-preview",
-            "description": "2021-10-01-preview version"
           }
         ]
       }
