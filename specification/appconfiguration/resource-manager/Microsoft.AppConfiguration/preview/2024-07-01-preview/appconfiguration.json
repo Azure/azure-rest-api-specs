@@ -1623,7 +1623,7 @@
             "$ref": "#/parameters/ConfigStoreNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/networksecurityperimeter.json#/parameters/NetworkSecurityPerimeterConfigurationNameParameter"
+            "$ref": "#/parameters/NetworkSecurityPerimeterConfigurationNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -1668,7 +1668,7 @@
             "$ref": "#/parameters/ConfigStoreNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/networksecurityperimeter.json#/parameters/NetworkSecurityPerimeterConfigurationNameParameter"
+            "$ref": "#/parameters/NetworkSecurityPerimeterConfigurationNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -3075,6 +3075,17 @@
       "type": "string",
       "pattern": "^[^\\x00-\\x1F\\x7F]+$",
       "x-ms-parameter-location": "method"
+    },
+    "NetworkSecurityPerimeterConfigurationNameParameter": {
+      "name": "networkSecurityPerimeterConfigurationName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 512,
+      "x-ms-parameter-location": "method",
+      "pattern": "^.*$",
+      "description": "The name for a network security perimeter configuration"
     }
   },
   "securityDefinitions": {
