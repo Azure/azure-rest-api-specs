@@ -114,7 +114,7 @@ interface Client2 {
     name: "ImageEmbeddingsClient",
     service: AI.Model,
   },
-  "python,csharp"
+  "python"
 )
 interface Client3 {
   embed is AI.Model.getImageEmbeddings;
