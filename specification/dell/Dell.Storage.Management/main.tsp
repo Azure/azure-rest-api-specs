@@ -29,7 +29,7 @@ using LiftrBase;
   title: "Dell.Storage",
 })
 @versioned(Versions)
-@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
+@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
 namespace Dell.Storage;
 
 /**
