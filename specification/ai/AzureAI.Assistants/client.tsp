@@ -226,7 +226,7 @@ namespace Azure.AI.Assistants {
   // "Note that deleting an AssistantFile doesn’t delete the original File object, it simply deletes the association
   // between that File and the Assistant."
 
-  op createAssistant(...CreateAssistantOptions): Assistant;
+  op createAssistant(...AssistantCreationOptions): Assistant;
   @@override(Azure.AI.Assistants.createAssistant, Azure.AI.Assistants.createAssistant, "python");
 
   @@clientName(createAssistant::parameters.body,
