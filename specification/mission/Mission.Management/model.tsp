@@ -207,7 +207,6 @@ model CommunityEndpointResource
   name: string;
 }
 
-
 @added(Microsoft.Mission.Versions.v2024_06_01_preview)
 @doc("Approval Model Resource")
 model ApprovalResource is ExtensionResource<ApprovalProperties> {
@@ -435,14 +434,15 @@ interface Approval {
   get is ArmResourceRead<ApprovalResource>;
   createOrUpdate is ArmResourceCreateOrUpdateAsync<ApprovalResource>;
   listByParent is ArmResourceListByParent<ApprovalResource>;
-  update is ArmResourcePatchAsync<
-    ApprovalResource,
-    ApprovalProperties
-  >;
+  update is ArmResourcePatchAsync<ApprovalResource, ApprovalProperties>;
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   #suppress "deprecated" "Backwards compatibility"
-  delete is ArmResourceDeleteWithoutOkAsync<ApprovalResource>;  
+  delete is ArmResourceDeleteWithoutOkAsync<ApprovalResource>;
   @doc("Upon receiving approval or rejection from approver, this facilitates actions on approval resource")
   @armResourceAction(ApprovalResource)
-  initiatorCallback is ArmResourceActionAsync<ApprovalResource, InitiatorCallbackRequest, InitiatorCallbackResponse>;
+  initiatorCallback is ArmResourceActionAsync<
+    ApprovalResource,
+    InitiatorCallbackRequest,
+    InitiatorCallbackResponse
+  >;
 }
