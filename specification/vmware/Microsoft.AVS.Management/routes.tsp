@@ -12,8 +12,6 @@ using OpenAPI;
 
 namespace Microsoft.AVS;
 
-interface Operations extends Azure.ResourceManager.Operations {}
-
 @armResourceOperations
 interface Locations {
   @doc("Return trial status for subscription by region")
