@@ -103,3 +103,45 @@ union WorkloadNetworkVMGroupProvisioningState {
   string,
   WorkloadNetworkProvisioningState,
 }
+
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Can not change existing name."
+@doc("NSX VM Group")
+@parentResource(WorkloadNetwork)
+model WorkloadNetworkVMGroup
+  is ProxyResource<WorkloadNetworkVMGroupProperties> {
+  @doc("ID of the VM group.")
+  @pattern("^[-\\w\\._]+$")
+  @key("vmGroupId")
+  @path
+  @segment("vmGroups")
+  name: string;
+}
+
+@doc("Parameter for vmGroupId")
+model VmGroupIdParameter {
+  @doc("ID of the VM group.")
+  @pattern("^[-\\w\\._]+$")
+  @path
+  vmGroupId: string;
+}
+
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Can not change existing name."
+@doc("NSX VM Group Properties")
+model WorkloadNetworkVMGroupProperties {
+  @doc("Display name of the VM group.")
+  displayName?: string;
+
+  @doc("Virtual machine members of this group.")
+  members?: string[];
+
+  @doc("VM Group status.")
+  @visibility("read")
+  status?: VMGroupStatusEnum;
+
+  @doc("The provisioning state")
+  @visibility("read")
+  provisioningState?: WorkloadNetworkVMGroupProvisioningState;
+
+  @doc("NSX revision number.")
+  revision?: int64;
+}

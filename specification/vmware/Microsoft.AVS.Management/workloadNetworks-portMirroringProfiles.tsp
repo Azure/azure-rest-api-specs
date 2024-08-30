@@ -119,3 +119,49 @@ union WorkloadNetworkPortMirroringProvisioningState {
   string,
   WorkloadNetworkProvisioningState,
 }
+
+@doc("NSX Port Mirroring")
+@parentResource(WorkloadNetwork)
+model WorkloadNetworkPortMirroring
+  is ProxyResource<WorkloadNetworkPortMirroringProperties> {
+  @doc("ID of the NSX port mirroring profile.")
+  @pattern("^[-\\w\\._]+$")
+  @key("portMirroringId")
+  @path
+  @segment("portMirroringProfiles")
+  name: string;
+}
+
+@doc("Parameter for portMirroringId")
+model PortMirroringProfileParameter {
+  @doc("ID of the NSX port mirroring profile.")
+  @pattern("^[-\\w\\._]+$")
+  @path
+  portMirroringId: string;
+}
+
+@doc("NSX Port Mirroring Properties")
+model WorkloadNetworkPortMirroringProperties {
+  @doc("Display name of the port mirroring profile.")
+  displayName?: string;
+
+  @doc("Direction of port mirroring profile.")
+  direction?: PortMirroringDirectionEnum;
+
+  @doc("Source VM Group.")
+  source?: string;
+
+  @doc("Destination VM Group.")
+  destination?: string;
+
+  @doc("Port Mirroring Status.")
+  @visibility("read")
+  status?: PortMirroringStatusEnum;
+
+  @doc("The provisioning state")
+  @visibility("read")
+  provisioningState?: WorkloadNetworkPortMirroringProvisioningState;
+
+  @doc("NSX revision number.")
+  revision?: int64;
+}

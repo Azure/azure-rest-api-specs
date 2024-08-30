@@ -39,3 +39,54 @@ interface CloudLinks {
   "x-ms-client-name",
   "cloudLink"
 );
+
+@doc("Cloud Link status")
+union CloudLinkStatus {
+  string,
+
+  @doc("is active")
+  Active: "Active",
+
+  @doc("is building")
+  Building: "Building",
+
+  @doc("is deleting")
+  Deleting: "Deleting",
+
+  @doc("is failed")
+  Failed: "Failed",
+
+  @doc("is disconnected")
+  Disconnected: "Disconnected",
+}
+
+@doc("A cloud link resource")
+@parentResource(PrivateCloud)
+model CloudLink is ProxyResource<CloudLinkProperties> {
+  @doc("Name of the cloud link.")
+  @pattern("^[-\\w\\._]+$")
+  @key("cloudLinkName")
+  @path
+  @segment("cloudLinks")
+  name: string;
+}
+
+@doc("cloud link provisioning state")
+union CloudLinkProvisioningState {
+  string,
+  ResourceProvisioningState,
+}
+
+@doc("The properties of a cloud link.")
+model CloudLinkProperties {
+  @doc("The provisioning state of the resource.")
+  @visibility("read")
+  provisioningState?: CloudLinkProvisioningState;
+
+  @doc("The state of the cloud link.")
+  @visibility("read")
+  status?: CloudLinkStatus;
+
+  @doc("Identifier of the other private cloud participating in the link.")
+  linkedCloud?: string;
+}

@@ -87,3 +87,77 @@ union ClusterProvisioningState {
   @doc("is updating")
   Updating: "Updating",
 }
+
+@doc("The common properties of a cluster")
+model CommonClusterProperties {
+  @doc("The cluster size")
+  clusterSize?: int32;
+
+  @doc("The state of the cluster provisioning")
+  @visibility("read")
+  provisioningState?: ClusterProvisioningState;
+
+  @doc("The identity")
+  @visibility("read")
+  clusterId?: int32;
+
+  @doc("The hosts")
+  hosts?: string[];
+
+  @doc("Name of the vsan datastore associated with the cluster")
+  vsanDatastoreName?: string;
+}
+
+@doc("A cluster resource")
+@parentResource(PrivateCloud)
+model Cluster is ProxyResource<ClusterProperties> {
+  ...ResourceSkuRequired;
+
+  @doc("Name of the cluster")
+  @pattern("^[-\\w\\._]+$")
+  @key("clusterName")
+  @path
+  @segment("clusters")
+  name: string;
+}
+
+@doc("The properties of a cluster")
+model ClusterProperties {
+  ...CommonClusterProperties;
+}
+
+@doc("An update of a cluster resource")
+model ClusterUpdate {
+  ...ResourceSkuProperty;
+
+  @doc("The properties of a cluster resource that may be updated")
+  @extension("x-ms-client-flatten", true)
+  properties?: ClusterUpdateProperties;
+}
+
+@doc("The properties of a cluster that may be updated")
+model ClusterUpdateProperties {
+  @doc("The cluster size")
+  clusterSize?: int32;
+
+  @doc("The hosts")
+  hosts?: string[];
+}
+
+@doc("List of all zones and associated hosts for a cluster")
+model ClusterZoneList {
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers"
+  @doc("Zone and associated hosts info")
+  zones?: ClusterZone[];
+}
+
+@doc("Zone and associated hosts info")
+model ClusterZone {
+  @doc("List of hosts belonging to the availability zone in a cluster")
+  @visibility("read")
+  hosts?: string[];
+
+  @doc("Availability zone identifier")
+  @visibility("read")
+  zone?: string;
+}

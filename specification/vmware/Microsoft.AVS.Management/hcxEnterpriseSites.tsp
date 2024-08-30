@@ -51,3 +51,35 @@ union HcxEnterpriseSiteStatus {
   @doc("is deleted")
   Deleted: "Deleted",
 }
+
+@doc("An HCX Enterprise Site resource")
+@parentResource(PrivateCloud)
+model HcxEnterpriseSite is ProxyResource<HcxEnterpriseSiteProperties> {
+  @doc("Name of the HCX Enterprise Site")
+  @pattern("^[-\\w\\._]+$")
+  @key("hcxEnterpriseSiteName")
+  @path
+  @segment("hcxEnterpriseSites")
+  name: string;
+}
+
+@doc("HCX Enterprise Site provisioning state")
+union HcxEnterpriseSiteProvisioningState {
+  string,
+  ResourceProvisioningState,
+}
+
+@doc("The properties of an HCX Enterprise Site")
+model HcxEnterpriseSiteProperties {
+  @doc("The provisioning state of the resource.")
+  @visibility("read")
+  provisioningState?: HcxEnterpriseSiteProvisioningState;
+
+  @doc("The activation key")
+  @visibility("read")
+  activationKey?: string;
+
+  @doc("The status of the HCX Enterprise Site")
+  @visibility("read")
+  status?: HcxEnterpriseSiteStatus;
+}

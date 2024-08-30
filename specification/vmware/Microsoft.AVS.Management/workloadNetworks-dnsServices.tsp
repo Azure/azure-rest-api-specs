@@ -91,3 +91,89 @@ interface WorkloadNetworkDnsServices {
   "x-ms-client-name",
   "workloadNetworkDnsService"
 );
+
+@doc("DNS service log level")
+union DnsServiceLogLevelEnum {
+  string,
+
+  @doc("is debug")
+  DEBUG: "DEBUG",
+
+  @doc("is info")
+  INFO: "INFO",
+
+  @doc("is warning")
+  WARNING: "WARNING",
+
+  @doc("is error")
+  ERROR: "ERROR",
+
+  @doc("is fatal")
+  FATAL: "FATAL",
+}
+
+@doc("DNS service status")
+union DnsServiceStatusEnum {
+  string,
+
+  @doc("is success")
+  SUCCESS: "SUCCESS",
+
+  @doc("is failure")
+  FAILURE: "FAILURE",
+}
+
+@doc("Workload Network DNS Service provisioning state")
+union WorkloadNetworkDnsServiceProvisioningState {
+  string,
+  WorkloadNetworkProvisioningState,
+}
+
+@doc("NSX DNS Service")
+@parentResource(WorkloadNetwork)
+model WorkloadNetworkDnsService
+  is ProxyResource<WorkloadNetworkDnsServiceProperties> {
+  @doc("ID of the DNS service.")
+  @pattern("^[-\\w\\._]+$")
+  @key("dnsServiceId")
+  @path
+  @segment("dnsServices")
+  name: string;
+}
+
+@doc("Parameter for dnsServiceId")
+model DnsServiceIdParameter {
+  @doc("ID of the DNS service.")
+  @pattern("^[-\\w\\._]+$")
+  @path
+  dnsServiceId: string;
+}
+
+@doc("NSX DNS Service Properties")
+model WorkloadNetworkDnsServiceProperties {
+  @doc("Display name of the DNS Service.")
+  displayName?: string;
+
+  @doc("DNS service IP of the DNS Service.")
+  dnsServiceIp?: string;
+
+  @doc("Default DNS zone of the DNS Service.")
+  defaultDnsZone?: string;
+
+  @doc("FQDN zones of the DNS Service.")
+  fqdnZones?: string[];
+
+  @doc("DNS Service log level.")
+  logLevel?: DnsServiceLogLevelEnum;
+
+  @doc("DNS Service status.")
+  @visibility("read")
+  status?: DnsServiceStatusEnum;
+
+  @doc("The provisioning state")
+  @visibility("read")
+  provisioningState?: WorkloadNetworkDnsServiceProvisioningState;
+
+  @doc("NSX revision number.")
+  revision?: int64;
+}

@@ -82,3 +82,58 @@ union WorkloadNetworkSegmentProvisioningState {
   string,
   WorkloadNetworkProvisioningState,
 }
+
+@doc("NSX Segment")
+@parentResource(WorkloadNetwork)
+model WorkloadNetworkSegment
+  is ProxyResource<WorkloadNetworkSegmentProperties> {
+  @doc("The ID of the NSX Segment")
+  @pattern("^[-\\w\\._]+$")
+  @key("segmentId")
+  @path
+  @segment("segments")
+  name: string;
+}
+
+@doc("NSX Segment Properties")
+model WorkloadNetworkSegmentProperties {
+  @doc("Display name of the segment.")
+  displayName?: string;
+
+  @doc("Gateway which to connect segment to.")
+  connectedGateway?: string;
+
+  @doc("Subnet which to connect segment to.")
+  subnet?: WorkloadNetworkSegmentSubnet;
+
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers"
+  @doc("Port Vif which segment is associated with.")
+  @visibility("read")
+  portVif?: WorkloadNetworkSegmentPortVif[];
+
+  @doc("Segment status.")
+  @visibility("read")
+  status?: SegmentStatusEnum;
+
+  @doc("The provisioning state")
+  @visibility("read")
+  provisioningState?: WorkloadNetworkSegmentProvisioningState;
+
+  @doc("NSX revision number.")
+  revision?: int64;
+}
+
+@doc("Subnet configuration for segment")
+model WorkloadNetworkSegmentSubnet {
+  @doc("DHCP Range assigned for subnet.")
+  dhcpRanges?: string[];
+
+  @doc("Gateway address.")
+  gatewayAddress?: string;
+}
+
+@doc("Ports and any VIF attached to segment.")
+model WorkloadNetworkSegmentPortVif {
+  @doc("Name of port or VIF attached to segment.")
+  portName?: string;
+}

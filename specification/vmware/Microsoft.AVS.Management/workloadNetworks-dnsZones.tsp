@@ -85,3 +85,65 @@ interface WorkloadNetworkDnsZones {
   "x-ms-client-name",
   "workloadNetworkDnsZone"
 );
+
+@doc("Workload Network DNS Zone provisioning state")
+union WorkloadNetworkDnsZoneProvisioningState {
+  string,
+  WorkloadNetworkProvisioningState,
+}
+
+@doc("NSX DNS Zone")
+@parentResource(WorkloadNetwork)
+model WorkloadNetworkDnsZone
+  is ProxyResource<WorkloadNetworkDnsZoneProperties> {
+  @doc("ID of the DNS zone.")
+  @pattern("^[-\\w\\._]+$")
+  @key("dnsZoneId")
+  @path
+  @segment("dnsZones")
+  name: string;
+}
+
+@doc("Parameter for dnsZoneId")
+model DnsZoneIdParameter {
+  @doc("ID of the DNS zone.")
+  @pattern("^[-\\w\\._]+$")
+  @path
+  dnsZoneId: string;
+}
+
+@doc("NSX DNS Zone Properties")
+model WorkloadNetworkDnsZoneProperties {
+  @doc("Display name of the DNS Zone.")
+  displayName?: string;
+
+  @doc("Domain names of the DNS Zone.")
+  domain?: string[];
+
+  @doc("DNS Server IP array of the DNS Zone.")
+  dnsServerIps?: string[];
+
+  @doc("Source IP of the DNS Zone.")
+  sourceIp?: string;
+
+  @doc("Number of DNS Services using the DNS zone.")
+  dnsServices?: int64;
+
+  @doc("The provisioning state")
+  @visibility("read")
+  provisioningState?: WorkloadNetworkDnsZoneProvisioningState;
+
+  @doc("NSX revision number.")
+  revision?: int64;
+}
+
+@doc("The type of DNS zone.")
+union DnsZoneType {
+  string,
+
+  @doc("Primary DNS zone.")
+  Public: "Public",
+
+  @doc("Private DNS zone.")
+  Private: "Private",
+}

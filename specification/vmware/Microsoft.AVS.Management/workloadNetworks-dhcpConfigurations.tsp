@@ -92,3 +92,75 @@ union WorkloadNetworkDhcpProvisioningState {
   string,
   WorkloadNetworkProvisioningState,
 }
+
+@doc("NSX DHCP")
+@parentResource(WorkloadNetwork)
+model WorkloadNetworkDhcp is ProxyResource<WorkloadNetworkDhcpEntity> {
+  @doc("The ID of the DHCP configuration")
+  @pattern("^[-\\w\\._]+$")
+  @key("dhcpId")
+  @path
+  @segment("dhcpConfigurations")
+  name: string;
+}
+
+@doc("Parameter for dhcpId")
+model DhcpIdParameter {
+  @doc("The ID of the DHCP configuration")
+  @pattern("^[-\\w\\._]+$")
+  @path
+  dhcpId: string;
+}
+
+@doc("Type of DHCP: SERVER or RELAY.")
+union DhcpTypeEnum {
+  SERVER: "SERVER",
+  RELAY: "RELAY",
+  string,
+}
+@doc("""
+  Base class for WorkloadNetworkDhcpServer and WorkloadNetworkDhcpRelay to
+  inherit from
+  """)
+@discriminator("dhcpType")
+model WorkloadNetworkDhcpEntity {
+  @doc("Type of DHCP: SERVER or RELAY.")
+  dhcpType: DhcpTypeEnum;
+
+  @doc("Display name of the DHCP entity.")
+  displayName?: string;
+
+  @doc("NSX Segments consuming DHCP.")
+  @visibility("read")
+  segments?: string[];
+
+  @doc("The provisioning state")
+  @visibility("read")
+  provisioningState?: WorkloadNetworkDhcpProvisioningState;
+
+  @doc("NSX revision number.")
+  revision?: int64;
+}
+
+@doc("NSX DHCP Server")
+model WorkloadNetworkDhcpServer extends WorkloadNetworkDhcpEntity {
+  @doc("DHCP Server Address.")
+  serverAddress?: string;
+
+  @doc("DHCP Server Lease Time.")
+  leaseTime?: int64;
+
+  @doc("Type of DHCP: SERVER or RELAY.")
+  dhcpType: DhcpTypeEnum.SERVER;
+}
+
+@doc("NSX DHCP Relay")
+model WorkloadNetworkDhcpRelay extends WorkloadNetworkDhcpEntity {
+  @doc("DHCP Relay Addresses. Max 3.")
+  @minItems(1)
+  @maxItems(3)
+  serverAddresses?: string[];
+
+  @doc("Type of DHCP: SERVER or RELAY.")
+  dhcpType: DhcpTypeEnum.RELAY;
+}

@@ -97,3 +97,76 @@ union DatastoreStatus {
   @doc("is dead or error")
   DeadOrError: "DeadOrError",
 }
+
+@doc("A datastore resource")
+@parentResource(Cluster)
+model Datastore is ProxyResource<DatastoreProperties> {
+  @doc("Name of the datastore")
+  @pattern("^[-\\w\\._]+$")
+  @key("datastoreName")
+  @path
+  @segment("datastores")
+  name: string;
+}
+
+@doc("The properties of a datastore")
+model DatastoreProperties {
+  @doc("The state of the datastore provisioning")
+  @visibility("read")
+  provisioningState?: DatastoreProvisioningState;
+
+  @doc("An Azure NetApp Files volume")
+  netAppVolume?: NetAppVolume;
+
+  @doc("An iSCSI volume")
+  diskPoolVolume?: DiskPoolVolume;
+
+  @doc("An Elastic SAN volume")
+  elasticSanVolume?: ElasticSanVolume;
+
+  @doc("The operational status of the datastore")
+  @visibility("read")
+  status?: DatastoreStatus;
+}
+
+@doc("An Azure NetApp Files volume from Microsoft.NetApp provider")
+model NetAppVolume {
+  @doc("Azure resource ID of the NetApp volume")
+  id: string;
+}
+
+@doc("An iSCSI volume from Microsoft.StoragePool provider")
+model DiskPoolVolume {
+  @doc("Azure resource ID of the iSCSI target")
+  targetId: string;
+
+  @doc("Name of the LUN to be used for datastore")
+  lunName: string;
+
+  @doc("""
+    Mode that describes whether the LUN has to be mounted as a datastore or
+    attached as a LUN
+    """)
+  mountOption?: MountOptionEnum = MountOptionEnum.MOUNT;
+
+  @doc("Device path")
+  @visibility("read")
+  path?: string;
+}
+
+scalar ClusterResourceId
+  extends Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.ContainerService/managedClusters",
+    }
+  ]>;
+
+@doc("An Elastic SAN volume from Microsoft.ElasticSan provider")
+model ElasticSanVolume {
+  @doc("Azure resource ID of the Elastic SAN Volume")
+  targetId: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.ElasticSan/elasticSans/volumeGroups/volumes";
+    }
+  ]>;
+}

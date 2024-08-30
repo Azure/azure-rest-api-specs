@@ -4,7 +4,6 @@ import "@azure-tools/typespec-client-generator-core";
 import "@typespec/rest";
 import "@typespec/versioning";
 
-import "./models.tsp"; // TODO remove
 import "./common.tsp";
 
 // imports organized by resource type path names

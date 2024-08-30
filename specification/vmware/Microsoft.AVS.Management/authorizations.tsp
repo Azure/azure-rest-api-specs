@@ -51,3 +51,33 @@ union ExpressRouteAuthorizationProvisioningState {
   @doc("is updating")
   Updating: "Updating",
 }
+
+@doc("ExpressRoute Circuit Authorization")
+@parentResource(PrivateCloud)
+model ExpressRouteAuthorization
+  is ProxyResource<ExpressRouteAuthorizationProperties> {
+  @doc("Name of the ExpressRoute Circuit Authorization")
+  @pattern("^[-\\w\\._]+$")
+  @key("authorizationName")
+  @path
+  @segment("authorizations")
+  name: string;
+}
+
+@doc("The properties of an ExpressRoute Circuit Authorization resource")
+model ExpressRouteAuthorizationProperties {
+  @doc("The state of the ExpressRoute Circuit Authorization provisioning")
+  @visibility("read")
+  provisioningState?: ExpressRouteAuthorizationProvisioningState;
+
+  @doc("The ID of the ExpressRoute Circuit Authorization")
+  @visibility("read")
+  expressRouteAuthorizationId?: string;
+
+  @doc("The key of the ExpressRoute Circuit Authorization")
+  @visibility("read")
+  expressRouteAuthorizationKey?: string;
+
+  @doc("The ID of the ExpressRoute Circuit")
+  expressRouteId?: string;
+}

@@ -51,3 +51,54 @@ union QuotaEnabled {
   @doc("is disabled")
   Disabled: "Disabled",
 }
+
+@doc("Subscription trial availability")
+model Trial {
+  @doc("Trial status")
+  @visibility("read")
+  status?: TrialStatus;
+
+  @doc("Number of trial hosts available")
+  @visibility("read")
+  availableHosts?: int32;
+}
+
+@doc("Subscription quotas")
+model Quota {
+  @doc("Remaining hosts quota by sku type")
+  @visibility("read")
+  hostsRemaining?: Record<int32>;
+
+  @doc("Host quota is active for current subscription")
+  @visibility("read")
+  quotaEnabled?: QuotaEnabled;
+}
+
+@doc("A location resource")
+@subscriptionResource
+model Location is ProxyResource<LocationProperties> {
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "Legacy DO NOT EVER COPY THIS"
+  @doc("A location in a subscription")
+  @pattern("^[-\\w\\._]+$")
+  @key("location")
+  @path
+  @segment("locations")
+  @Azure.ResourceManager.CommonTypes.Private.armCommonParameter(
+    "LocationParameter",
+    Azure.ResourceManager.CommonTypes.Versions.v5
+  )
+  name: string;
+}
+
+@doc("location provisioning state")
+union LocationProvisioningState {
+  string,
+  ResourceProvisioningState,
+}
+
+@doc("The properties of a location resource")
+model LocationProperties {
+  @doc("The provisioning state of the resource.")
+  @visibility("read")
+  provisioningState?: LocationProvisioningState;
+}

@@ -67,3 +67,50 @@ interface WorkloadNetworkPublicIps {
   "x-ms-client-name",
   "workloadNetworkPublicIP"
 );
+
+@doc("Workload Network Public IP provisioning state")
+union WorkloadNetworkPublicIPProvisioningState {
+  string,
+  WorkloadNetworkProvisioningState,
+}
+
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Can not change existing name."
+@doc("NSX Public IP Block")
+@parentResource(WorkloadNetwork)
+model WorkloadNetworkPublicIP
+  is ProxyResource<WorkloadNetworkPublicIPProperties> {
+  @doc("ID of the DNS zone.")
+  @pattern("^[-\\w\\._]+$")
+  @key("publicIPId")
+  @path
+  @segment("publicIPs")
+  name: string;
+}
+
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Can not change existing name."
+@doc("Parameter for publicIPId")
+model PublicIPIdParameter {
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Can not change existing name."
+  @doc("ID of the DNS zone.")
+  @pattern("^[-\\w\\._]+$")
+  @path
+  publicIPId: string;
+}
+
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Can not change existing name."
+@doc("NSX Public IP Block Properties")
+model WorkloadNetworkPublicIPProperties {
+  @doc("Display name of the Public IP Block.")
+  displayName?: string;
+
+  @doc("Number of Public IPs requested.")
+  numberOfPublicIPs?: int64;
+
+  @doc("CIDR Block of the Public IP Block.")
+  @visibility("read")
+  publicIPBlock?: string;
+
+  @doc("The provisioning state")
+  @visibility("read")
+  provisioningState?: WorkloadNetworkPublicIPProvisioningState;
+}
