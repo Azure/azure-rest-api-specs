@@ -28,3 +28,14 @@ suppressions:
         - The model or publicly exposed class 'ErrorResponse' had its instance variable 'code' deleted or renamed in the current version
         - The model or publicly exposed class 'ErrorResponse' had its instance variable 'details' deleted or renamed in the current version
         - The model or publicly exposed class 'ErrorResponse' had its instance variable 'message' deleted or renamed in the current version
+  azure-sdk-for-go:
+    - package: 'sdk/resourcemanager/apimanagement/armapimanagement'
+      breaking-changes:
+        - Type of `AssociationContractProperties.ProvisioningState` has been changed from `*string` to `*ProvisioningState`
+        - Type of `ErrorResponse.Error` has been changed from `*ErrorResponseBody` to `*ErrorDetail`
+        - Operation `*APIClient.Delete` has been changed to LRO, use `*APIClient.BeginDelete` instead.
+        - Operation `*UserClient.Delete` has been changed to LRO, use `*UserClient.BeginDelete` instead.
+        - Operation `*PolicyClient.ListByService` has supported pagination, use `*PolicyClient.NewListByServicePager` instead.
+        - Operation `*PolicyFragmentClient.ListByService` has supported pagination, use `*PolicyFragmentClient.NewListByServicePager` instead.
+        - Operation `*PortalConfigClient.ListByService` has supported pagination, use `*PortalConfigClient.NewListByServicePager` instead.
+        - Operation `*ProductPolicyClient.ListByProduct` has supported pagination, use `*ProductPolicyClient.NewListByProductPager` instead.
