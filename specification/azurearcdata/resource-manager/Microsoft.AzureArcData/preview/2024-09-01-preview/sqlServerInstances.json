@@ -1348,6 +1348,7 @@
       "properties": {
         "azureManagedInstanceResourceId": {
           "type": "string",
+          "format": "arm-id",
           "description": "The Azure SQL Managed Instance resource ID to link with the SQL Server instance."
         },
         "azureManagedInstanceRole": {
@@ -1408,7 +1409,8 @@
             "SQLServer",
             "ManagedInstance",
             "ManagedInstanceCrossValidation",
-            "Dag"
+            "Dag",
+            "Certificates"
           ],
           "x-ms-enum": {
             "name": "requirementCategory",
@@ -1428,7 +1430,7 @@
             "modelAsString": true
           }
         },
-        "requirementInfoText": {
+        "requirementInformation": {
           "type": "string",
           "description": "The information text about requirement."
         },
