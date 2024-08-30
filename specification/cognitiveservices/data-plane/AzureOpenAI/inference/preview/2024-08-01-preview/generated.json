@@ -1918,6 +1918,11 @@
         "chunk_id": {
           "type": "string",
           "description": "The chunk ID of the citation."
+        },
+        "rerank_score": {
+          "type": "number",
+          "format": "double",
+          "description": "The rerank score of the retrieved document."
         }
       },
       "required": [
@@ -1972,6 +1977,11 @@
           "type": "string",
           "description": "The chunk ID of the citation."
         },
+        "rerank_score": {
+          "type": "number",
+          "format": "double",
+          "description": "The rerank score of the retrieved document."
+        },
         "search_queries": {
           "type": "array",
           "description": "The search queries used to retrieve the document.",
@@ -1992,12 +2002,6 @@
           "description": "The original search score of the retrieved document.",
           "x-ms-client-name": "originalSearchScore"
         },
-        "rerank_score": {
-          "type": "number",
-          "format": "double",
-          "description": "The rerank score of the retrieved document.",
-          "x-ms-client-name": "rerankScore"
-        },
         "filter_reason": {
           "$ref": "#/definitions/AzureChatExtensionRetrieveDocumentFilterReason",
           "description": "Represents the rationale for filtering the document. If the document does not undergo filtering,\nthis field will remain unset.",
@@ -2015,10 +2019,10 @@
       "description": "  A representation of configuration data for a single Azure OpenAI chat extension. This will be used by a chat\n  completions request that should use Azure OpenAI chat extensions to augment the response behavior.\n  The use of this configuration is compatible only with Azure OpenAI.",
       "enum": [
         "azure_search",
-        "azure_ml_index",
         "azure_cosmos_db",
         "elasticsearch",
-        "pinecone"
+        "pinecone",
+        "mongo_db"
       ],
       "x-ms-enum": {
         "name": "AzureChatExtensionType",
@@ -2028,11 +2032,6 @@
             "name": "azureSearch",
             "value": "azure_search",
             "description": "Represents the use of Azure AI Search as an Azure OpenAI chat extension."
-          },
-          {
-            "name": "azureMachineLearningIndex",
-            "value": "azure_ml_index",
-            "description": "Represents the use of Azure Machine Learning index as an Azure OpenAI chat extension."
           },
           {
             "name": "azureCosmosDB",
@@ -2048,6 +2047,11 @@
             "name": "pinecone",
             "value": "pinecone",
             "description": "Represents the use of Pinecone index as an Azure OpenAI chat extension."
+          },
+          {
+            "name": "mongoDB",
+            "value": "mongo_db",
+            "description": "Represents the use of a MongoDB chat extension."
           }
         ]
       }
@@ -2149,11 +2153,6 @@
           "description": "The configured strictness of the search relevance filtering. The higher of strictness, the higher of the precision but lower recall of the answer.",
           "minimum": 1,
           "maximum": 5
-        },
-        "role_information": {
-          "type": "string",
-          "description": "Give the model instructions about how it should behave and any context it should reference when generating a response. You can describe the assistant's personality and tell it how to format responses. There's a 100 token limit for it, and it counts against the overall token limit.",
-          "x-ms-client-name": "roleInformation"
         },
         "max_search_queries": {
           "type": "integer",
@@ -2348,100 +2347,6 @@
         "polygon"
       ]
     },
-    "AzureMachineLearningIndexChatExtensionConfiguration": {
-      "type": "object",
-      "description": "A specific representation of configurable options for Azure Machine Learning vector index when using it as an Azure\nOpenAI chat extension.",
-      "properties": {
-        "parameters": {
-          "$ref": "#/definitions/AzureMachineLearningIndexChatExtensionParameters",
-          "description": "The parameters for the Azure Machine Learning vector index chat extension."
-        }
-      },
-      "required": [
-        "parameters"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/AzureChatExtensionConfiguration"
-        }
-      ],
-      "x-ms-discriminator-value": "azure_ml_index"
-    },
-    "AzureMachineLearningIndexChatExtensionParameters": {
-      "type": "object",
-      "description": "Parameters for the Azure Machine Learning vector index chat extension. The supported authentication types are AccessToken, SystemAssignedManagedIdentity and UserAssignedManagedIdentity.",
-      "properties": {
-        "authentication": {
-          "$ref": "#/definitions/OnYourDataAuthenticationOptions",
-          "description": "The authentication method to use when accessing the defined data source.\nEach data source type supports a specific set of available authentication methods; please see the documentation of\nthe data source for supported mechanisms.\nIf not otherwise provided, On Your Data will attempt to use System Managed Identity (default credential)\nauthentication."
-        },
-        "top_n_documents": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The configured top number of documents to feature for the configured query.",
-          "x-ms-client-name": "topNDocuments"
-        },
-        "in_scope": {
-          "type": "boolean",
-          "description": "Whether queries should be restricted to use of indexed data.",
-          "x-ms-client-name": "inScope"
-        },
-        "strictness": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The configured strictness of the search relevance filtering. The higher of strictness, the higher of the precision but lower recall of the answer.",
-          "minimum": 1,
-          "maximum": 5
-        },
-        "role_information": {
-          "type": "string",
-          "description": "Give the model instructions about how it should behave and any context it should reference when generating a response. You can describe the assistant's personality and tell it how to format responses. There's a 100 token limit for it, and it counts against the overall token limit.",
-          "x-ms-client-name": "roleInformation"
-        },
-        "max_search_queries": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The max number of rewritten queries should be send to search provider for one user message. If not specified,\nthe system will decide the number of queries to send.",
-          "x-ms-client-name": "maxSearchQueries"
-        },
-        "allow_partial_result": {
-          "type": "boolean",
-          "description": "If specified as true, the system will allow partial search results to be used and the request fails if all the queries fail.\nIf not specified, or specified as false, the request will fail if any search query fails.",
-          "default": false,
-          "x-ms-client-name": "allowPartialResult"
-        },
-        "include_contexts": {
-          "type": "array",
-          "description": "The included properties of the output context. If not specified, the default value is `citations` and `intent`.",
-          "items": {
-            "$ref": "#/definitions/OnYourDataContextProperty"
-          },
-          "x-ms-client-name": "includeContexts"
-        },
-        "project_resource_id": {
-          "type": "string",
-          "description": "The resource ID of the Azure Machine Learning project.",
-          "x-ms-client-name": "projectResourceId"
-        },
-        "name": {
-          "type": "string",
-          "description": "The Azure Machine Learning vector index name."
-        },
-        "version": {
-          "type": "string",
-          "description": "The version of the Azure Machine Learning vector index."
-        },
-        "filter": {
-          "type": "string",
-          "description": "Search filter. Only supported if the Azure Machine Learning vector index is of type AzureSearch."
-        }
-      },
-      "required": [
-        "project_resource_id",
-        "name",
-        "version"
-      ]
-    },
     "AzureSearchChatExtensionConfiguration": {
       "type": "object",
       "description": "A specific representation of configurable options for Azure Search when using it as an Azure OpenAI chat\nextension.",
@@ -2486,11 +2391,6 @@
           "description": "The configured strictness of the search relevance filtering. The higher of strictness, the higher of the precision but lower recall of the answer.",
           "minimum": 1,
           "maximum": 5
-        },
-        "role_information": {
-          "type": "string",
-          "description": "Give the model instructions about how it should behave and any context it should reference when generating a response. You can describe the assistant's personality and tell it how to format responses. There's a 100 token limit for it, and it counts against the overall token limit.",
-          "x-ms-client-name": "roleInformation"
         },
         "max_search_queries": {
           "type": "integer",
@@ -2989,10 +2889,20 @@
             "$ref": "#/definitions/ChatTokenLogProbabilityResult"
           },
           "x-ms-identifiers": []
+        },
+        "refusal": {
+          "type": "array",
+          "description": "The list of log probability information entries for the choice's message refusal message tokens, as requested via the 'logprobs' option.",
+          "x-nullable": true,
+          "items": {
+            "$ref": "#/definitions/ChatTokenLogProbabilityResult"
+          },
+          "x-ms-identifiers": []
         }
       },
       "required": [
-        "content"
+        "content",
+        "refusal"
       ]
     },
     "ChatCompletions": {
@@ -3070,8 +2980,28 @@
       "description": "The definition information for a chat completions function tool that can call a function in response to a tool call.",
       "properties": {
         "function": {
-          "$ref": "#/definitions/FunctionDefinition",
-          "description": "The function definition details for the function tool."
+          "type": "object",
+          "description": "The function definition details for the function tool.",
+          "properties": {
+            "description": {
+              "type": "string",
+              "description": "A description of what the function does, used by the model to choose when and how to call the function."
+            },
+            "name": {
+              "type": "string",
+              "description": "The name of the function to be called. Must be a-z, A-Z, 0-9, or contain underscores and dashes, with a maximum length of 64."
+            },
+            "parameters": {},
+            "strict": {
+              "type": "boolean",
+              "description": "Whether to enable strict schema adherence when generating the function call. If set to true, the model will follow the exact schema defined in the `parameters` field. Only a subset of JSON Schema is supported when `strict` is `true`. Learn more about Structured Outputs in the [function calling guide](docs/guides/function-calling).",
+              "default": false,
+              "x-nullable": true
+            }
+          },
+          "required": [
+            "name"
+          ]
         }
       },
       "required": [
@@ -3093,6 +3023,44 @@
         }
       ],
       "x-ms-discriminator-value": "json_object"
+    },
+    "ChatCompletionsJsonSchemaResponseFormat": {
+      "type": "object",
+      "description": "A response format for Chat Completions that restricts responses to emitting JSON that conforms to a provided JSON\nSchema for Structured Outputs.",
+      "properties": {
+        "json_schema": {
+          "type": "object",
+          "properties": {
+            "description": {
+              "type": "string",
+              "description": "A description of what the response format is for, used by the model to determine how to respond in the format."
+            },
+            "name": {
+              "type": "string",
+              "description": "The name of the response format. Must be a-z, A-Z, 0-9, or contain underscores and dashes, with a maximum length of 64."
+            },
+            "schema": {},
+            "strict": {
+              "type": "boolean",
+              "description": "Whether to enable strict schema adherence when generating the output. If set to true, the model will always follow the exact schema defined in the `schema` field. Only a subset of JSON Schema is supported when `strict` is `true`. To learn more, read the [Structured Outputs guide](/docs/guides/structured-outputs).",
+              "default": false,
+              "x-nullable": true
+            }
+          },
+          "required": [
+            "name"
+          ]
+        }
+      },
+      "required": [
+        "json_schema"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ChatCompletionsResponseFormat"
+        }
+      ],
+      "x-ms-discriminator-value": "json_schema"
     },
     "ChatCompletionsOptions": {
       "type": "object",
@@ -3294,9 +3262,7 @@
       "description": "A request chat message representing response or action from the assistant.",
       "properties": {
         "content": {
-          "type": "string",
-          "description": "The content of the message.",
-          "x-nullable": true
+          "description": "The content of the message."
         },
         "name": {
           "type": "string",
@@ -3370,7 +3336,6 @@
       "description": "A request chat message containing system instructions that influence how the model will generate a chat completions\nresponse.",
       "properties": {
         "content": {
-          "type": "string",
           "description": "The contents of the system message."
         },
         "name": {
@@ -3393,9 +3358,7 @@
       "description": "A request chat message representing requested output from a configured tool.",
       "properties": {
         "content": {
-          "type": "string",
-          "description": "The content of the message.",
-          "x-nullable": true
+          "description": "The content of the message."
         },
         "tool_call_id": {
           "type": "string",
@@ -3443,6 +3406,10 @@
         "role": {
           "$ref": "#/definitions/ChatRole",
           "description": "The chat role associated with the message."
+        },
+        "refusal": {
+          "type": "string",
+          "description": "The refusal message generated by the model."
         },
         "content": {
           "type": "string",
@@ -4182,11 +4149,6 @@
           "minimum": 1,
           "maximum": 5
         },
-        "role_information": {
-          "type": "string",
-          "description": "Give the model instructions about how it should behave and any context it should reference when generating a response. You can describe the assistant's personality and tell it how to format responses. There's a 100 token limit for it, and it counts against the overall token limit.",
-          "x-ms-client-name": "roleInformation"
-        },
         "max_search_queries": {
           "type": "integer",
           "format": "int32",
@@ -4892,6 +4854,134 @@
         "data"
       ]
     },
+    "MongoDBChatExtensionConfiguration": {
+      "type": "object",
+      "description": "A specific representation of configurable options for a MongoDB chat extension configuration.",
+      "properties": {
+        "parameters": {
+          "$ref": "#/definitions/MongoDBChatExtensionParameters",
+          "description": "The parameters for the MongoDB chat extension."
+        }
+      },
+      "required": [
+        "parameters"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/AzureChatExtensionConfiguration"
+        }
+      ],
+      "x-ms-discriminator-value": "mongo_db"
+    },
+    "MongoDBChatExtensionParameters": {
+      "type": "object",
+      "description": "Parameters for the MongoDB chat extension. The supported authentication types are AccessToken, SystemAssignedManagedIdentity and UserAssignedManagedIdentity.",
+      "properties": {
+        "authentication": {
+          "$ref": "#/definitions/OnYourDataAuthenticationOptions",
+          "description": "The authentication method to use when accessing the defined data source.\nEach data source type supports a specific set of available authentication methods; please see the documentation of\nthe data source for supported mechanisms.\nIf not otherwise provided, On Your Data will attempt to use System Managed Identity (default credential)\nauthentication."
+        },
+        "top_n_documents": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The configured top number of documents to feature for the configured query.",
+          "x-ms-client-name": "topNDocuments"
+        },
+        "in_scope": {
+          "type": "boolean",
+          "description": "Whether queries should be restricted to use of indexed data.",
+          "x-ms-client-name": "inScope"
+        },
+        "strictness": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The configured strictness of the search relevance filtering. The higher of strictness, the higher of the precision but lower recall of the answer.",
+          "minimum": 1,
+          "maximum": 5
+        },
+        "max_search_queries": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The max number of rewritten queries should be send to search provider for one user message. If not specified,\nthe system will decide the number of queries to send.",
+          "x-ms-client-name": "maxSearchQueries"
+        },
+        "allow_partial_result": {
+          "type": "boolean",
+          "description": "If specified as true, the system will allow partial search results to be used and the request fails if all the queries fail.\nIf not specified, or specified as false, the request will fail if any search query fails.",
+          "default": false,
+          "x-ms-client-name": "allowPartialResult"
+        },
+        "include_contexts": {
+          "type": "array",
+          "description": "The included properties of the output context. If not specified, the default value is `citations` and `intent`.",
+          "items": {
+            "$ref": "#/definitions/OnYourDataContextProperty"
+          },
+          "x-ms-client-name": "includeContexts"
+        },
+        "endpoint": {
+          "type": "string",
+          "description": "The endpoint name for MongoDB."
+        },
+        "collection_name": {
+          "type": "string",
+          "description": "The collection name for MongoDB."
+        },
+        "database_name": {
+          "type": "string",
+          "description": "The database name for MongoDB."
+        },
+        "app_name": {
+          "type": "string",
+          "description": "The app name for MongoDB."
+        },
+        "fields_mapping": {
+          "type": "object",
+          "description": "Field mappings to apply to data used by the MongoDB data source.\nNote that content and vector field mappings are required for MongoDB.",
+          "properties": {
+            "content_fields": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "vector_fields": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "title_field": {
+              "type": "string"
+            },
+            "url_field": {
+              "type": "string"
+            },
+            "filepath_field": {
+              "type": "string"
+            },
+            "content_fields_separator": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "content_fields",
+            "vector_fields"
+          ]
+        },
+        "embedding_dependency": {
+          "description": "The vectorization source to use with the MongoDB chat extension."
+        }
+      },
+      "required": [
+        "endpoint",
+        "collection_name",
+        "database_name",
+        "app_name",
+        "fields_mapping",
+        "embedding_dependency"
+      ]
+    },
     "OnYourDataAccessTokenAuthenticationOptions": {
       "type": "object",
       "description": "The authentication options for Azure OpenAI On Your Data when using access token.",
@@ -5119,6 +5209,16 @@
       ],
       "x-ms-discriminator-value": "endpoint"
     },
+    "OnYourDataIntegratedVectorizationSource": {
+      "type": "object",
+      "description": "Represents the integrated vectorizer defined within the search resource.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/OnYourDataVectorizationSource"
+        }
+      ],
+      "x-ms-discriminator-value": "integrated"
+    },
     "OnYourDataKeyAndKeyIdAuthenticationOptions": {
       "type": "object",
       "description": "The authentication options for Azure OpenAI On Your Data when using an Elasticsearch key and key ID pair.",
@@ -5193,6 +5293,30 @@
         }
       ],
       "x-ms-discriminator-value": "user_assigned_managed_identity"
+    },
+    "OnYourDataUsernameAndPasswordAuthenticationOptions": {
+      "type": "object",
+      "description": "The authentication options for Azure OpenAI On Your Data when using a username and password.",
+      "properties": {
+        "username": {
+          "type": "string",
+          "description": "The username."
+        },
+        "password": {
+          "type": "string",
+          "description": "The password."
+        }
+      },
+      "required": [
+        "username",
+        "password"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/OnYourDataAuthenticationOptions"
+        }
+      ],
+      "x-ms-discriminator-value": "username_and_password"
     },
     "OnYourDataVectorSearchAccessTokenAuthenticationOptions": {
       "type": "object",
@@ -5291,7 +5415,8 @@
       "enum": [
         "endpoint",
         "deployment_name",
-        "model_id"
+        "model_id",
+        "integrated"
       ],
       "x-ms-enum": {
         "name": "OnYourDataVectorizationSourceType",
@@ -5311,6 +5436,11 @@
             "name": "modelId",
             "value": "model_id",
             "description": "Represents a specific embedding model ID as defined in the search service.\nCurrently only supported by Elasticsearch®."
+          },
+          {
+            "name": "integrated",
+            "value": "integrated",
+            "description": "Represents the integrated vectorizer defined within the search resource."
           }
         ]
       }
@@ -5415,11 +5545,6 @@
           "description": "The configured strictness of the search relevance filtering. The higher of strictness, the higher of the precision but lower recall of the answer.",
           "minimum": 1,
           "maximum": 5
-        },
-        "role_information": {
-          "type": "string",
-          "description": "Give the model instructions about how it should behave and any context it should reference when generating a response. You can describe the assistant's personality and tell it how to format responses. There's a 100 token limit for it, and it counts against the overall token limit.",
-          "x-ms-client-name": "roleInformation"
         },
         "max_search_queries": {
           "type": "integer",

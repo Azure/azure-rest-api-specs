@@ -1506,6 +1506,11 @@
         "chunk_id": {
           "type": "string",
           "description": "The chunk ID of the citation."
+        },
+        "rerank_score": {
+          "type": "number",
+          "format": "double",
+          "description": "The rerank score of the retrieved document."
         }
       },
       "required": [
@@ -1560,6 +1565,11 @@
           "type": "string",
           "description": "The chunk ID of the citation."
         },
+        "rerank_score": {
+          "type": "number",
+          "format": "double",
+          "description": "The rerank score of the retrieved document."
+        },
         "search_queries": {
           "type": "array",
           "description": "The search queries used to retrieve the document.",
@@ -1579,12 +1589,6 @@
           "format": "double",
           "description": "The original search score of the retrieved document.",
           "x-ms-client-name": "originalSearchScore"
-        },
-        "rerank_score": {
-          "type": "number",
-          "format": "double",
-          "description": "The rerank score of the retrieved document.",
-          "x-ms-client-name": "rerankScore"
         },
         "filter_reason": {
           "$ref": "#/definitions/AzureChatExtensionRetrieveDocumentFilterReason",
@@ -2617,9 +2621,7 @@
       "description": "A request chat message representing response or action from the assistant.",
       "properties": {
         "content": {
-          "type": "string",
-          "description": "The content of the message.",
-          "x-nullable": true
+          "description": "The content of the message."
         },
         "name": {
           "type": "string",

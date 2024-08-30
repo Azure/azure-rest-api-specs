@@ -100,6 +100,22 @@ model OnYourDataEncodedApiKeyAuthenticationOptions
 }
 
 @doc("""
+  The authentication options for Azure OpenAI On Your Data when using a username and password.
+  """)
+@added(ServiceApiVersions.v2024_08_01_Preview)
+model OnYourDataUsernameAndPasswordAuthenticationOptions
+  extends OnYourDataAuthenticationOptions {
+  @doc("The discriminator type for username and password.")
+  type: "username_and_password";
+
+  @doc("The username.")
+  username: string;
+
+  @doc("The password.")
+  password: string;
+}
+
+@doc("""
   The authentication options for Azure OpenAI On Your Data when using access token.
   """)
 @added(ServiceApiVersions.v2024_02_15_Preview)

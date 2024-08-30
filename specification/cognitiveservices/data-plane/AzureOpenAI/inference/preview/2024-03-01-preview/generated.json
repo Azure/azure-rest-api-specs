@@ -1370,6 +1370,11 @@
         "chunk_id": {
           "type": "string",
           "description": "The chunk ID of the citation."
+        },
+        "rerank_score": {
+          "type": "number",
+          "format": "double",
+          "description": "The rerank score of the retrieved document."
         }
       },
       "required": [
@@ -2326,9 +2331,7 @@
       "description": "A request chat message representing response or action from the assistant.",
       "properties": {
         "content": {
-          "type": "string",
-          "description": "The content of the message.",
-          "x-nullable": true
+          "description": "The content of the message."
         },
         "name": {
           "type": "string",

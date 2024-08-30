@@ -37,6 +37,7 @@ alias OnYourDataCommonChatExtensionConfiguration = {
 
   @doc("Give the model instructions about how it should behave and any context it should reference when generating a response. You can describe the assistant's personality and tell it how to format responses. There's a 100 token limit for it, and it counts against the overall token limit.")
   @encodedName("application/json", "role_information")
+  @removed(ServiceApiVersions.v2024_08_01_Preview)
   roleInformation?: string;
 
   /**
