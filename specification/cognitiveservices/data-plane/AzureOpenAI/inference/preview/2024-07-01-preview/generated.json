@@ -59,6 +59,164 @@
   },
   "tags": [],
   "paths": {
+    "/batches": {
+      "get": {
+        "operationId": "ListBatches",
+        "description": "Gets a list of all batches owned by the Azure OpenAI resource.",
+        "parameters": [
+          {
+            "name": "after",
+            "in": "query",
+            "description": "Identifier for the last event from the previous pagination request.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Number of batches to retrieve. Defaults to 20.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The requested list of batches.",
+            "schema": {
+              "type": "object",
+              "description": "The response data for a requested list of items.",
+              "properties": {
+                "object": {
+                  "type": "string",
+                  "description": "The object type, which is always list.",
+                  "enum": [
+                    "list"
+                  ],
+                  "x-ms-enum": {
+                    "modelAsString": false
+                  }
+                },
+                "data": {
+                  "type": "array",
+                  "description": "The requested list of items.",
+                  "items": {
+                    "$ref": "#/definitions/Batch"
+                  }
+                },
+                "first_id": {
+                  "type": "string",
+                  "description": "The first ID represented in this list.",
+                  "x-ms-client-name": "firstId"
+                },
+                "last_id": {
+                  "type": "string",
+                  "description": "The last ID represented in this list.",
+                  "x-ms-client-name": "lastId"
+                },
+                "has_more": {
+                  "type": "boolean",
+                  "description": "A value indicating whether there are additional values available not captured in this list.",
+                  "x-ms-client-name": "hasMore"
+                }
+              },
+              "required": [
+                "object"
+              ]
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List batch operations": {
+            "$ref": "./examples/get_batches.json"
+          }
+        }
+      },
+      "post": {
+        "operationId": "CreateBatch",
+        "description": "Creates and executes a batch from an uploaded file of requests.\nResponse includes details of the enqueued job including job status.\nThe ID of the result file is added to the response once complete.",
+        "parameters": [
+          {
+            "name": "createBatchRequest",
+            "in": "body",
+            "description": "The specification of the batch to create and execute.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BatchCreateRequest"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "The requested new batch job.",
+            "schema": {
+              "$ref": "#/definitions/Batch"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create a new batch job": {
+            "$ref": "./examples/post_batch.json"
+          }
+        }
+      }
+    },
+    "/batches/{batchId}": {
+      "get": {
+        "operationId": "GetBatch",
+        "description": "Gets details for a single batch specified by the given batchID.",
+        "parameters": [
+          {
+            "name": "batchId",
+            "in": "path",
+            "description": "The identifier of the batch.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The requested existing batch job.",
+            "schema": {
+              "$ref": "#/definitions/Batch"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Retrieve a batch job": {
+            "$ref": "./examples/get_batch.json"
+          }
+        }
+      }
+    },
+    "/batches/{batchId}/cancel": {
+      "post": {
+        "operationId": "CancelBatch",
+        "description": "Gets details for a single batch specified by the given batchID.",
+        "parameters": [
+          {
+            "name": "batchId",
+            "in": "path",
+            "description": "The identifier of the batch.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The updated batch job that was canceled.",
+            "schema": {
+              "$ref": "#/definitions/Batch"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Cancel an in-progress batch job": {
+            "$ref": "./examples/cancel_batch.json"
+          }
+        }
+      }
+    },
     "/deployments/{deploymentId}/audio/speech": {
       "post": {
         "operationId": "GenerateSpeechFromText",
@@ -79,12 +237,7 @@
             "type": "string"
           },
           {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/SpeechGenerationOptions"
-            }
+            "$ref": "#/parameters/GenerateSpeechFromTextBody"
           }
         ],
         "responses": {
@@ -137,28 +290,127 @@
             "type": "string"
           },
           {
-            "$ref": "#/parameters/AudioTranscriptionOptions.file"
+            "name": "file",
+            "in": "formData",
+            "description": "The audio data to transcribe. This must be the binary content of a file in one of the supported media formats:\n flac, mp3, mp4, mpeg, mpga, m4a, ogg, wav, webm.",
+            "required": true,
+            "type": "file"
           },
           {
-            "$ref": "#/parameters/AudioTranscriptionOptions.filename"
+            "name": "filename",
+            "in": "formData",
+            "description": "The optional filename or descriptive identifier to associate with with the audio data.",
+            "required": false,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/AudioTranscriptionOptions.responseFormat"
+            "name": "response_format",
+            "in": "formData",
+            "description": "The requested format of the transcription response data, which will influence the content and detail of the result.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "json",
+              "verbose_json",
+              "text",
+              "srt",
+              "vtt"
+            ],
+            "x-ms-enum": {
+              "name": "AudioTranscriptionFormat",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "json",
+                  "value": "json",
+                  "description": "Use a response body that is a JSON object containing a single 'text' field for the transcription."
+                },
+                {
+                  "name": "verbose_json",
+                  "value": "verbose_json",
+                  "description": "Use a response body that is a JSON object containing transcription text along with timing, segments, and other\nmetadata."
+                },
+                {
+                  "name": "text",
+                  "value": "text",
+                  "description": "Use a response body that is plain text containing the raw, unannotated transcription."
+                },
+                {
+                  "name": "srt",
+                  "value": "srt",
+                  "description": "Use a response body that is plain text in SubRip (SRT) format that also includes timing information."
+                },
+                {
+                  "name": "vtt",
+                  "value": "vtt",
+                  "description": "Use a response body that is plain text in Web Video Text Tracks (VTT) format that also includes timing information."
+                }
+              ]
+            },
+            "x-ms-client-name": "responseFormat"
           },
           {
-            "$ref": "#/parameters/AudioTranscriptionOptions.language"
+            "name": "language",
+            "in": "formData",
+            "description": "The primary spoken language of the audio data to be transcribed, supplied as a two-letter ISO-639-1 language code\nsuch as 'en' or 'fr'.\nProviding this known input language is optional but may improve the accuracy and/or latency of transcription.",
+            "required": false,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/AudioTranscriptionOptions.prompt"
+            "name": "prompt",
+            "in": "formData",
+            "description": "An optional hint to guide the model's style or continue from a prior audio segment. The written language of the\nprompt should match the primary spoken language of the audio data.",
+            "required": false,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/AudioTranscriptionOptions.temperature"
+            "name": "temperature",
+            "in": "formData",
+            "description": "The sampling temperature, between 0 and 1.\nHigher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic.\nIf set to 0, the model will use log probability to automatically increase the temperature until certain thresholds are hit.",
+            "required": false,
+            "type": "number",
+            "format": "float"
           },
           {
-            "$ref": "#/parameters/AudioTranscriptionOptions.timestampGranularities"
+            "name": "timestamp_granularities",
+            "in": "formData",
+            "description": "The timestamp granularities to populate for this transcription.\n`response_format` must be set `verbose_json` to use timestamp granularities.\nEither or both of these options are supported: `word`, or `segment`.\nNote: There is no additional latency for segment timestamps, but generating word timestamps incurs additional latency.",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "word",
+                "segment"
+              ],
+              "x-ms-enum": {
+                "name": "AudioTranscriptionTimestampGranularity",
+                "modelAsString": true,
+                "values": [
+                  {
+                    "name": "word",
+                    "value": "word",
+                    "description": "Indicates that responses should include timing information about each transcribed word. Note that generating word\ntimestamp information will incur additional response latency."
+                  },
+                  {
+                    "name": "segment",
+                    "value": "segment",
+                    "description": "Indicates that responses should include timing and other information about each transcribed audio segment. Audio\nsegment timestamp information does not incur any additional latency."
+                  }
+                ]
+              }
+            },
+            "default": [
+              "segment"
+            ],
+            "x-ms-client-name": "timestampGranularities"
           },
           {
-            "$ref": "#/parameters/AudioTranscriptionOptions.model"
+            "name": "model",
+            "in": "formData",
+            "description": "The model to use for this transcription request.",
+            "required": false,
+            "type": "string"
           }
         ],
         "responses": {
@@ -211,22 +463,86 @@
             "type": "string"
           },
           {
-            "$ref": "#/parameters/AudioTranslationOptions.file"
+            "name": "file",
+            "in": "formData",
+            "description": "The audio data to translate. This must be the binary content of a file in one of the supported media formats:\n flac, mp3, mp4, mpeg, mpga, m4a, ogg, wav, webm.",
+            "required": true,
+            "type": "file"
           },
           {
-            "$ref": "#/parameters/AudioTranslationOptions.filename"
+            "name": "filename",
+            "in": "formData",
+            "description": "The optional filename or descriptive identifier to associate with with the audio data.",
+            "required": false,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/AudioTranslationOptions.responseFormat"
+            "name": "response_format",
+            "in": "formData",
+            "description": "The requested format of the translation response data, which will influence the content and detail of the result.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "json",
+              "verbose_json",
+              "text",
+              "srt",
+              "vtt"
+            ],
+            "x-ms-enum": {
+              "name": "AudioTranslationFormat",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "json",
+                  "value": "json",
+                  "description": "Use a response body that is a JSON object containing a single 'text' field for the translation."
+                },
+                {
+                  "name": "verbose_json",
+                  "value": "verbose_json",
+                  "description": "Use a response body that is a JSON object containing translation text along with timing, segments, and other\nmetadata."
+                },
+                {
+                  "name": "text",
+                  "value": "text",
+                  "description": "Use a response body that is plain text containing the raw, unannotated translation."
+                },
+                {
+                  "name": "srt",
+                  "value": "srt",
+                  "description": "Use a response body that is plain text in SubRip (SRT) format that also includes timing information."
+                },
+                {
+                  "name": "vtt",
+                  "value": "vtt",
+                  "description": "Use a response body that is plain text in Web Video Text Tracks (VTT) format that also includes timing information."
+                }
+              ]
+            },
+            "x-ms-client-name": "responseFormat"
           },
           {
-            "$ref": "#/parameters/AudioTranslationOptions.prompt"
+            "name": "prompt",
+            "in": "formData",
+            "description": "An optional hint to guide the model's style or continue from a prior audio segment. The written language of the\nprompt should match the primary spoken language of the audio data.",
+            "required": false,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/AudioTranslationOptions.temperature"
+            "name": "temperature",
+            "in": "formData",
+            "description": "The sampling temperature, between 0 and 1.\nHigher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic.\nIf set to 0, the model will use log probability to automatically increase the temperature until certain thresholds are hit.",
+            "required": false,
+            "type": "number",
+            "format": "float"
           },
           {
-            "$ref": "#/parameters/AudioTranslationOptions.model"
+            "name": "model",
+            "in": "formData",
+            "description": "The model to use for this translation request.",
+            "required": false,
+            "type": "string"
           }
         ],
         "responses": {
@@ -272,12 +588,7 @@
             "type": "string"
           },
           {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ChatCompletionsOptions"
-            }
+            "$ref": "#/parameters/GetChatCompletionsBody"
           }
         ],
         "responses": {
@@ -344,12 +655,7 @@
             "type": "string"
           },
           {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/CompletionsOptions"
-            }
+            "$ref": "#/parameters/GetCompletionsBody"
           }
         ],
         "responses": {
@@ -395,12 +701,7 @@
             "type": "string"
           },
           {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/EmbeddingsOptions"
-            }
+            "$ref": "#/parameters/GetEmbeddingsBody"
           }
         ],
         "responses": {
@@ -446,12 +747,7 @@
             "type": "string"
           },
           {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ImageGenerationOptions"
-            }
+            "$ref": "#/parameters/GetImageGenerationsBody"
           }
         ],
         "responses": {
@@ -480,6 +776,260 @@
           }
         }
       }
+    },
+    "/files": {
+      "get": {
+        "operationId": "ListFiles",
+        "description": "Gets a list of previously uploaded files.",
+        "parameters": [
+          {
+            "name": "purpose",
+            "in": "query",
+            "description": "A value that, when provided, limits list results to files matching the corresponding purpose.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "fine-tune",
+              "fine-tune-results",
+              "assistants",
+              "assistants_output",
+              "batch",
+              "batch_output",
+              "vision"
+            ],
+            "x-ms-enum": {
+              "name": "FilePurpose",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "fineTune",
+                  "value": "fine-tune",
+                  "description": "Indicates a file is used for fine tuning input."
+                },
+                {
+                  "name": "fineTuneResults",
+                  "value": "fine-tune-results",
+                  "description": "Indicates a file is used for fine tuning results."
+                },
+                {
+                  "name": "assistants",
+                  "value": "assistants",
+                  "description": "Indicates a file is used as input to assistants."
+                },
+                {
+                  "name": "assistantsOutput",
+                  "value": "assistants_output",
+                  "description": "Indicates a file is used as output by assistants."
+                },
+                {
+                  "name": "batch",
+                  "value": "batch",
+                  "description": "Indicates a file is used as input to ."
+                },
+                {
+                  "name": "batchOutput",
+                  "value": "batch_output",
+                  "description": "Indicates a file is used as output by a vector store batch operation."
+                },
+                {
+                  "name": "vision",
+                  "value": "vision",
+                  "description": "Indicates a file is used as input to a vision operation."
+                }
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The requested list of files.",
+            "schema": {
+              "$ref": "#/definitions/FileListResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Returns a list of files filtered by purpose": {
+            "$ref": "./examples/list_file.json"
+          }
+        }
+      },
+      "post": {
+        "operationId": "UploadFile",
+        "description": "Uploads a file for use by other operations.",
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "parameters": [
+          {
+            "name": "file",
+            "in": "formData",
+            "description": "The file data (not filename) to upload.",
+            "required": true,
+            "type": "file"
+          },
+          {
+            "name": "purpose",
+            "in": "formData",
+            "description": "The intended purpose of the file.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "fine-tune",
+              "fine-tune-results",
+              "assistants",
+              "assistants_output",
+              "batch",
+              "batch_output",
+              "vision"
+            ],
+            "x-ms-enum": {
+              "name": "FilePurpose",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "fineTune",
+                  "value": "fine-tune",
+                  "description": "Indicates a file is used for fine tuning input."
+                },
+                {
+                  "name": "fineTuneResults",
+                  "value": "fine-tune-results",
+                  "description": "Indicates a file is used for fine tuning results."
+                },
+                {
+                  "name": "assistants",
+                  "value": "assistants",
+                  "description": "Indicates a file is used as input to assistants."
+                },
+                {
+                  "name": "assistantsOutput",
+                  "value": "assistants_output",
+                  "description": "Indicates a file is used as output by assistants."
+                },
+                {
+                  "name": "batch",
+                  "value": "batch",
+                  "description": "Indicates a file is used as input to ."
+                },
+                {
+                  "name": "batchOutput",
+                  "value": "batch_output",
+                  "description": "Indicates a file is used as output by a vector store batch operation."
+                },
+                {
+                  "name": "vision",
+                  "value": "vision",
+                  "description": "Indicates a file is used as input to a vision operation."
+                }
+              ]
+            }
+          },
+          {
+            "name": "filename",
+            "in": "formData",
+            "description": "A filename to associate with the uploaded data.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A representation of the uploaded file.",
+            "schema": {
+              "$ref": "#/definitions/OpenAIFile"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Uploads a file": {
+            "$ref": "./examples/upload_file.json"
+          }
+        }
+      }
+    },
+    "/files/{fileId}": {
+      "get": {
+        "operationId": "GetFile",
+        "description": "Returns information about a specific file. Does not retrieve file content.",
+        "parameters": [
+          {
+            "name": "fileId",
+            "in": "path",
+            "description": "The ID of the file to retrieve.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/OpenAIFile"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Returns a file": {
+            "$ref": "./examples/get_file.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "DeleteFile",
+        "description": "Delete a previously uploaded file.",
+        "parameters": [
+          {
+            "name": "fileId",
+            "in": "path",
+            "description": "The ID of the file to delete.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/FileDeletionStatus"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a previously uploaded file.": {
+            "$ref": "./examples/delete_file.json"
+          }
+        }
+      }
+    },
+    "/files/{fileId}/content": {
+      "get": {
+        "operationId": "GetFileContent",
+        "description": "Returns information about a specific file. Does not retrieve file content.",
+        "parameters": [
+          {
+            "name": "fileId",
+            "in": "path",
+            "description": "The ID of the file to retrieve.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "type": "string",
+              "format": "byte"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Returns the content of a file": {
+            "$ref": "./examples/get_file_content.json"
+          }
+        }
+      }
     }
   },
   "x-ms-paths": {
@@ -502,28 +1052,127 @@
             "type": "string"
           },
           {
-            "$ref": "#/parameters/AudioTranscriptionOptions.file"
+            "name": "file",
+            "in": "formData",
+            "description": "The audio data to transcribe. This must be the binary content of a file in one of the supported media formats:\n flac, mp3, mp4, mpeg, mpga, m4a, ogg, wav, webm.",
+            "required": true,
+            "type": "file"
           },
           {
-            "$ref": "#/parameters/AudioTranscriptionOptions.filename"
+            "name": "filename",
+            "in": "formData",
+            "description": "The optional filename or descriptive identifier to associate with with the audio data.",
+            "required": false,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/AudioTranscriptionOptions.responseFormat"
+            "name": "response_format",
+            "in": "formData",
+            "description": "The requested format of the transcription response data, which will influence the content and detail of the result.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "json",
+              "verbose_json",
+              "text",
+              "srt",
+              "vtt"
+            ],
+            "x-ms-enum": {
+              "name": "AudioTranscriptionFormat",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "json",
+                  "value": "json",
+                  "description": "Use a response body that is a JSON object containing a single 'text' field for the transcription."
+                },
+                {
+                  "name": "verbose_json",
+                  "value": "verbose_json",
+                  "description": "Use a response body that is a JSON object containing transcription text along with timing, segments, and other\nmetadata."
+                },
+                {
+                  "name": "text",
+                  "value": "text",
+                  "description": "Use a response body that is plain text containing the raw, unannotated transcription."
+                },
+                {
+                  "name": "srt",
+                  "value": "srt",
+                  "description": "Use a response body that is plain text in SubRip (SRT) format that also includes timing information."
+                },
+                {
+                  "name": "vtt",
+                  "value": "vtt",
+                  "description": "Use a response body that is plain text in Web Video Text Tracks (VTT) format that also includes timing information."
+                }
+              ]
+            },
+            "x-ms-client-name": "responseFormat"
           },
           {
-            "$ref": "#/parameters/AudioTranscriptionOptions.language"
+            "name": "language",
+            "in": "formData",
+            "description": "The primary spoken language of the audio data to be transcribed, supplied as a two-letter ISO-639-1 language code\nsuch as 'en' or 'fr'.\nProviding this known input language is optional but may improve the accuracy and/or latency of transcription.",
+            "required": false,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/AudioTranscriptionOptions.prompt"
+            "name": "prompt",
+            "in": "formData",
+            "description": "An optional hint to guide the model's style or continue from a prior audio segment. The written language of the\nprompt should match the primary spoken language of the audio data.",
+            "required": false,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/AudioTranscriptionOptions.temperature"
+            "name": "temperature",
+            "in": "formData",
+            "description": "The sampling temperature, between 0 and 1.\nHigher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic.\nIf set to 0, the model will use log probability to automatically increase the temperature until certain thresholds are hit.",
+            "required": false,
+            "type": "number",
+            "format": "float"
           },
           {
-            "$ref": "#/parameters/AudioTranscriptionOptions.timestampGranularities"
+            "name": "timestamp_granularities",
+            "in": "formData",
+            "description": "The timestamp granularities to populate for this transcription.\n`response_format` must be set `verbose_json` to use timestamp granularities.\nEither or both of these options are supported: `word`, or `segment`.\nNote: There is no additional latency for segment timestamps, but generating word timestamps incurs additional latency.",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "word",
+                "segment"
+              ],
+              "x-ms-enum": {
+                "name": "AudioTranscriptionTimestampGranularity",
+                "modelAsString": true,
+                "values": [
+                  {
+                    "name": "word",
+                    "value": "word",
+                    "description": "Indicates that responses should include timing information about each transcribed word. Note that generating word\ntimestamp information will incur additional response latency."
+                  },
+                  {
+                    "name": "segment",
+                    "value": "segment",
+                    "description": "Indicates that responses should include timing and other information about each transcribed audio segment. Audio\nsegment timestamp information does not incur any additional latency."
+                  }
+                ]
+              }
+            },
+            "default": [
+              "segment"
+            ],
+            "x-ms-client-name": "timestampGranularities"
           },
           {
-            "$ref": "#/parameters/AudioTranscriptionOptions.model"
+            "name": "model",
+            "in": "formData",
+            "description": "The model to use for this transcription request.",
+            "required": false,
+            "type": "string"
           }
         ],
         "responses": {
@@ -572,22 +1221,86 @@
             "type": "string"
           },
           {
-            "$ref": "#/parameters/AudioTranslationOptions.file"
+            "name": "file",
+            "in": "formData",
+            "description": "The audio data to translate. This must be the binary content of a file in one of the supported media formats:\n flac, mp3, mp4, mpeg, mpga, m4a, ogg, wav, webm.",
+            "required": true,
+            "type": "file"
           },
           {
-            "$ref": "#/parameters/AudioTranslationOptions.filename"
+            "name": "filename",
+            "in": "formData",
+            "description": "The optional filename or descriptive identifier to associate with with the audio data.",
+            "required": false,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/AudioTranslationOptions.responseFormat"
+            "name": "response_format",
+            "in": "formData",
+            "description": "The requested format of the translation response data, which will influence the content and detail of the result.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "json",
+              "verbose_json",
+              "text",
+              "srt",
+              "vtt"
+            ],
+            "x-ms-enum": {
+              "name": "AudioTranslationFormat",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "json",
+                  "value": "json",
+                  "description": "Use a response body that is a JSON object containing a single 'text' field for the translation."
+                },
+                {
+                  "name": "verbose_json",
+                  "value": "verbose_json",
+                  "description": "Use a response body that is a JSON object containing translation text along with timing, segments, and other\nmetadata."
+                },
+                {
+                  "name": "text",
+                  "value": "text",
+                  "description": "Use a response body that is plain text containing the raw, unannotated translation."
+                },
+                {
+                  "name": "srt",
+                  "value": "srt",
+                  "description": "Use a response body that is plain text in SubRip (SRT) format that also includes timing information."
+                },
+                {
+                  "name": "vtt",
+                  "value": "vtt",
+                  "description": "Use a response body that is plain text in Web Video Text Tracks (VTT) format that also includes timing information."
+                }
+              ]
+            },
+            "x-ms-client-name": "responseFormat"
           },
           {
-            "$ref": "#/parameters/AudioTranslationOptions.prompt"
+            "name": "prompt",
+            "in": "formData",
+            "description": "An optional hint to guide the model's style or continue from a prior audio segment. The written language of the\nprompt should match the primary spoken language of the audio data.",
+            "required": false,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/AudioTranslationOptions.temperature"
+            "name": "temperature",
+            "in": "formData",
+            "description": "The sampling temperature, between 0 and 1.\nHigher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic.\nIf set to 0, the model will use log probability to automatically increase the temperature until certain thresholds are hit.",
+            "required": false,
+            "type": "number",
+            "format": "float"
           },
           {
-            "$ref": "#/parameters/AudioTranslationOptions.model"
+            "name": "model",
+            "in": "formData",
+            "description": "The model to use for this translation request.",
+            "required": false,
+            "type": "string"
           }
         ],
         "responses": {
@@ -1931,6 +2644,290 @@
         ]
       }
     },
+    "Batch": {
+      "type": "object",
+      "description": "The Batch object.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The id assigned to the Batch."
+        },
+        "object": {
+          "type": "string",
+          "description": "The object type, which is always `batch`.",
+          "enum": [
+            "batch"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
+        },
+        "endpoint": {
+          "type": "string",
+          "description": "The OpenAI API endpoint used by the batch."
+        },
+        "errors": {
+          "$ref": "#/definitions/BatchErrorList",
+          "description": "The list of Batch errors."
+        },
+        "input_file_id": {
+          "type": "string",
+          "description": "The ID of the input file for the batch.",
+          "minLength": 1,
+          "x-ms-client-name": "inputFileId"
+        },
+        "completion_window": {
+          "type": "string",
+          "description": "The time frame within which the batch should be processed.",
+          "x-ms-client-name": "completionWindow"
+        },
+        "status": {
+          "$ref": "#/definitions/BatchStatus",
+          "description": "The current status of the batch."
+        },
+        "output_file_id": {
+          "type": "string",
+          "description": "The ID of the file containing the outputs of successfully executed requests.",
+          "x-ms-client-name": "outputFileId"
+        },
+        "error_file_id": {
+          "type": "string",
+          "description": "The ID of the file containing the outputs of requests with errors.",
+          "x-ms-client-name": "errorFileId"
+        },
+        "created_at": {
+          "type": "integer",
+          "format": "unixtime",
+          "description": "The Unix timestamp (in seconds) for when the batch was created.",
+          "x-ms-client-name": "createdAt"
+        },
+        "in_progress_at": {
+          "type": "integer",
+          "format": "unixtime",
+          "description": "The Unix timestamp (in seconds) for when the batch started processing.",
+          "x-ms-client-name": "inProgressAt"
+        },
+        "expires_at": {
+          "type": "integer",
+          "format": "unixtime",
+          "description": "The Unix timestamp (in seconds) for when the batch will expire.",
+          "x-ms-client-name": "expiresAt"
+        },
+        "finalizing_at": {
+          "type": "integer",
+          "format": "unixtime",
+          "description": "The Unix timestamp (in seconds) for when the batch started finalizing.",
+          "x-ms-client-name": "finalizingAt"
+        },
+        "completed_at": {
+          "type": "integer",
+          "format": "unixtime",
+          "description": "The Unix timestamp (in seconds) for when the batch was completed.",
+          "x-ms-client-name": "completedAt"
+        },
+        "failed_at": {
+          "type": "integer",
+          "format": "unixtime",
+          "description": "The Unix timestamp (in seconds) for when the batch failed.",
+          "x-ms-client-name": "failedAt"
+        },
+        "expired_at": {
+          "type": "integer",
+          "format": "unixtime",
+          "description": "The Unix timestamp (in seconds) for when the batch expired.",
+          "x-ms-client-name": "expiredAt"
+        },
+        "cancelling_at": {
+          "type": "integer",
+          "format": "unixtime",
+          "description": "The Unix timestamp (in seconds) for when the batch started cancelling.",
+          "x-ms-client-name": "cancellingAt"
+        },
+        "cancelled_at": {
+          "type": "integer",
+          "format": "unixtime",
+          "description": "The Unix timestamp (in seconds) for when the batch was cancelled.",
+          "x-ms-client-name": "cancelledAt"
+        },
+        "request_counts": {
+          "type": "object",
+          "description": "The request counts for different statuses within the batch.",
+          "properties": {
+            "total": {
+              "type": "integer",
+              "format": "int32",
+              "description": "Total number of requests in the batch."
+            },
+            "completed": {
+              "type": "integer",
+              "format": "int32",
+              "description": "Number of requests that have been completed successfully."
+            },
+            "failed": {
+              "type": "integer",
+              "format": "int32",
+              "description": "Number of requests that have failed."
+            }
+          },
+          "x-ms-client-name": "requestCounts"
+        },
+        "metadata": {
+          "type": "object",
+          "description": "A set of key-value pairs that can be attached to the batch. This can be useful for storing additional information about the batch in a structured format.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "id",
+        "object",
+        "input_file_id"
+      ]
+    },
+    "BatchCreateRequest": {
+      "type": "object",
+      "description": "Defines the request to create a batch.",
+      "properties": {
+        "endpoint": {
+          "type": "string",
+          "description": "The API endpoint used by the batch."
+        },
+        "input_file_id": {
+          "type": "string",
+          "description": "The ID of the input file for the batch.",
+          "minLength": 1,
+          "x-ms-client-name": "inputFileId"
+        },
+        "completion_window": {
+          "type": "string",
+          "description": "The time frame within which the batch should be processed.",
+          "x-ms-client-name": "completionWindow"
+        },
+        "metadata": {
+          "type": "object",
+          "description": "A set of key-value pairs that can be attached to the batch. This can be useful for storing additional information about the batch in a structured format.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "endpoint",
+        "input_file_id",
+        "completion_window"
+      ]
+    },
+    "BatchErrorDatum": {
+      "type": "object",
+      "description": "A Datum containing information about a Batch Error.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "An error code identifying the error type."
+        },
+        "message": {
+          "type": "string",
+          "description": "A human-readable message providing more details about the error."
+        },
+        "param": {
+          "type": "string",
+          "description": "The name of the parameter that caused the error, if applicable."
+        },
+        "line": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The line number of the input file where the error occurred, if applicable."
+        }
+      }
+    },
+    "BatchErrorList": {
+      "type": "object",
+      "description": "A list of Batch errors.",
+      "properties": {
+        "object": {
+          "type": "string",
+          "description": "The object type, which is always `list`.",
+          "enum": [
+            "list"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
+        },
+        "data": {
+          "type": "array",
+          "description": "The list of Batch error data.",
+          "items": {
+            "$ref": "#/definitions/BatchErrorDatum"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "object"
+      ]
+    },
+    "BatchStatus": {
+      "type": "string",
+      "description": "The status of a batch.",
+      "enum": [
+        "validating",
+        "failed",
+        "in_progress",
+        "finalizing",
+        "completed",
+        "expired",
+        "cancelling",
+        "cancelled"
+      ],
+      "x-ms-enum": {
+        "name": "BatchStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "validating",
+            "value": "validating",
+            "description": "The input file is being validated before the batch can begin."
+          },
+          {
+            "name": "failed",
+            "value": "failed",
+            "description": "The input file has failed the validation process."
+          },
+          {
+            "name": "in_progress",
+            "value": "in_progress",
+            "description": "The input file was successfully validated and the batch is currently being executed."
+          },
+          {
+            "name": "finalizing",
+            "value": "finalizing",
+            "description": "The batch has completed and the results are being prepared."
+          },
+          {
+            "name": "completed",
+            "value": "completed",
+            "description": "The batch has been completed and the results are ready."
+          },
+          {
+            "name": "expired",
+            "value": "expired",
+            "description": "The batch was not able to complete within the 24-hour time window."
+          },
+          {
+            "name": "cancelling",
+            "value": "cancelling",
+            "description": "Cancellation of the batch has been initiated."
+          },
+          {
+            "name": "cancelled",
+            "value": "cancelled",
+            "description": "The batch was cancelled."
+          }
+        ]
+      }
+    },
     "ChatChoice": {
       "type": "object",
       "description": "The representation of a single prompt completion as part of an overall chat completions request.\nGenerally, `n` choices are generated per provided prompt with a default value of 1.\nToken limits and other settings may limit the number of choices generated.",
@@ -1959,11 +2956,6 @@
           "description": "The reason that this chat completions choice completed its generated.",
           "x-nullable": true,
           "x-ms-client-name": "finishReason"
-        },
-        "finish_details": {
-          "$ref": "#/definitions/ChatFinishDetails",
-          "description": "The reason the model stopped generating tokens, together with any applicable details.\nThis structured representation replaces 'finish_reason' for some models.",
-          "x-ms-client-name": "finishDetails"
         },
         "delta": {
           "$ref": "#/definitions/ChatResponseMessage",
@@ -2286,20 +3278,6 @@
     "ChatCompletionsToolDefinition": {
       "type": "object",
       "description": "An abstract representation of a tool that can be used by the model to improve a chat completions response.",
-      "properties": {
-        "type": {
-          "type": "string",
-          "description": "The object type."
-        }
-      },
-      "discriminator": "type",
-      "required": [
-        "type"
-      ]
-    },
-    "ChatFinishDetails": {
-      "type": "object",
-      "description": "An abstract representation of structured information about why a chat completions response terminated.",
       "properties": {
         "type": {
           "type": "string",
@@ -2951,8 +3929,7 @@
       },
       "required": [
         "filtered",
-        "detected",
-        "license"
+        "detected"
       ]
     },
     "ContentFilterDetailedResults": {
@@ -3454,6 +4431,170 @@
         "total_tokens"
       ]
     },
+    "FileDeletionStatus": {
+      "type": "object",
+      "description": "A status response from a file deletion operation.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The ID of the resource specified for deletion."
+        },
+        "deleted": {
+          "type": "boolean",
+          "description": "A value indicating whether deletion was successful."
+        },
+        "object": {
+          "type": "string",
+          "description": "The object type, which is always 'file'.",
+          "enum": [
+            "file"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
+        }
+      },
+      "required": [
+        "id",
+        "deleted",
+        "object"
+      ]
+    },
+    "FileListResponse": {
+      "type": "object",
+      "description": "The response data from a file list operation.",
+      "properties": {
+        "object": {
+          "type": "string",
+          "description": "The object type, which is always 'list'.",
+          "enum": [
+            "list"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
+        },
+        "data": {
+          "type": "array",
+          "description": "The files returned for the request.",
+          "items": {
+            "$ref": "#/definitions/OpenAIFile"
+          }
+        }
+      },
+      "required": [
+        "object",
+        "data"
+      ]
+    },
+    "FilePurpose": {
+      "type": "string",
+      "description": "The possible values denoting the intended usage of a file.",
+      "enum": [
+        "fine-tune",
+        "fine-tune-results",
+        "assistants",
+        "assistants_output",
+        "batch",
+        "batch_output",
+        "vision"
+      ],
+      "x-ms-enum": {
+        "name": "FilePurpose",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "fineTune",
+            "value": "fine-tune",
+            "description": "Indicates a file is used for fine tuning input."
+          },
+          {
+            "name": "fineTuneResults",
+            "value": "fine-tune-results",
+            "description": "Indicates a file is used for fine tuning results."
+          },
+          {
+            "name": "assistants",
+            "value": "assistants",
+            "description": "Indicates a file is used as input to assistants."
+          },
+          {
+            "name": "assistantsOutput",
+            "value": "assistants_output",
+            "description": "Indicates a file is used as output by assistants."
+          },
+          {
+            "name": "batch",
+            "value": "batch",
+            "description": "Indicates a file is used as input to ."
+          },
+          {
+            "name": "batchOutput",
+            "value": "batch_output",
+            "description": "Indicates a file is used as output by a vector store batch operation."
+          },
+          {
+            "name": "vision",
+            "value": "vision",
+            "description": "Indicates a file is used as input to a vision operation."
+          }
+        ]
+      }
+    },
+    "FileState": {
+      "type": "string",
+      "description": "The state of the file.",
+      "enum": [
+        "uploaded",
+        "pending",
+        "running",
+        "processed",
+        "error",
+        "deleting",
+        "deleted"
+      ],
+      "x-ms-enum": {
+        "name": "FileState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "uploaded",
+            "value": "uploaded",
+            "description": "The file has been uploaded but it's not yet processed. This state is not returned by Azure OpenAI and exposed only for\ncompatibility. It can be categorized as an inactive state."
+          },
+          {
+            "name": "pending",
+            "value": "pending",
+            "description": "The operation was created and is not queued to be processed in the future. It can be categorized as an inactive state."
+          },
+          {
+            "name": "running",
+            "value": "running",
+            "description": "The operation has started to be processed. It can be categorized as an active state."
+          },
+          {
+            "name": "processed",
+            "value": "processed",
+            "description": "The operation has successfully processed and is ready for consumption. It can be categorized as a terminal state."
+          },
+          {
+            "name": "error",
+            "value": "error",
+            "description": "The operation has completed processing with a failure and cannot be further consumed. It can be categorized as a terminal state."
+          },
+          {
+            "name": "deleting",
+            "value": "deleting",
+            "description": "The entity is in the process to be deleted. This state is not returned by Azure OpenAI and exposed only for compatibility.\nIt can be categorized as an active state."
+          },
+          {
+            "name": "deleted",
+            "value": "deleted",
+            "description": "The entity has been deleted but may still be referenced by other entities predating the deletion. It can be categorized as a\nterminal state."
+          }
+        ]
+      }
+    },
     "FunctionCall": {
       "type": "object",
       "description": "The name and arguments of a function that should be called, as generated by the model.",
@@ -3750,16 +4891,6 @@
         "created",
         "data"
       ]
-    },
-    "MaxTokensFinishDetails": {
-      "type": "object",
-      "description": "A structured representation of a stop reason that signifies a token limit was reached before the model could naturally\ncomplete.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ChatFinishDetails"
-        }
-      ],
-      "x-ms-discriminator-value": "max_tokens"
     },
     "OnYourDataAccessTokenAuthenticationOptions": {
       "type": "object",
@@ -4184,6 +5315,62 @@
         ]
       }
     },
+    "OpenAIFile": {
+      "type": "object",
+      "description": "Represents an assistant that can call the model and use tools.",
+      "properties": {
+        "object": {
+          "type": "string",
+          "description": "The object type, which is always 'file'.",
+          "enum": [
+            "file"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
+        },
+        "id": {
+          "type": "string",
+          "description": "The identifier, which can be referenced in API endpoints."
+        },
+        "bytes": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The size of the file, in bytes."
+        },
+        "filename": {
+          "type": "string",
+          "description": "The name of the file."
+        },
+        "created_at": {
+          "type": "integer",
+          "format": "unixtime",
+          "description": "The Unix timestamp, in seconds, representing when this object was created.",
+          "x-ms-client-name": "createdAt"
+        },
+        "purpose": {
+          "$ref": "#/definitions/FilePurpose",
+          "description": "The intended purpose of a file."
+        },
+        "status": {
+          "$ref": "#/definitions/FileState",
+          "description": "The state of the file. This field is available in Azure OpenAI only."
+        },
+        "status_details": {
+          "type": "string",
+          "description": "The error message with details in case processing of this file failed. This field is available in Azure OpenAI only.",
+          "x-ms-client-name": "statusDetails"
+        }
+      },
+      "required": [
+        "object",
+        "id",
+        "bytes",
+        "filename",
+        "created_at",
+        "purpose"
+      ]
+    },
     "PineconeChatExtensionConfiguration": {
       "type": "object",
       "description": "A specific representation of configurable options for Pinecone when using it as an Azure OpenAI chat\nextension.",
@@ -4446,247 +5633,9 @@
           }
         ]
       }
-    },
-    "StopFinishDetails": {
-      "type": "object",
-      "description": "A structured representation of a stop reason that signifies natural termination by the model.",
-      "properties": {
-        "stop": {
-          "type": "string",
-          "description": "The token sequence that the model terminated with."
-        }
-      },
-      "required": [
-        "stop"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/ChatFinishDetails"
-        }
-      ],
-      "x-ms-discriminator-value": "stop"
     }
   },
   "parameters": {
-    "AudioTranscriptionOptions.file": {
-      "name": "file",
-      "in": "formData",
-      "description": "The audio data to transcribe. This must be the binary content of a file in one of the supported media formats:\n flac, mp3, mp4, mpeg, mpga, m4a, ogg, wav, webm.",
-      "required": true,
-      "type": "file",
-      "x-ms-parameter-location": "method"
-    },
-    "AudioTranscriptionOptions.filename": {
-      "name": "filename",
-      "in": "formData",
-      "description": "The optional filename or descriptive identifier to associate with with the audio data.",
-      "required": false,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "AudioTranscriptionOptions.language": {
-      "name": "language",
-      "in": "formData",
-      "description": "The primary spoken language of the audio data to be transcribed, supplied as a two-letter ISO-639-1 language code\nsuch as 'en' or 'fr'.\nProviding this known input language is optional but may improve the accuracy and/or latency of transcription.",
-      "required": false,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "AudioTranscriptionOptions.model": {
-      "name": "model",
-      "in": "formData",
-      "description": "The model to use for this transcription request.",
-      "required": false,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "AudioTranscriptionOptions.prompt": {
-      "name": "prompt",
-      "in": "formData",
-      "description": "An optional hint to guide the model's style or continue from a prior audio segment. The written language of the\nprompt should match the primary spoken language of the audio data.",
-      "required": false,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "AudioTranscriptionOptions.responseFormat": {
-      "name": "response_format",
-      "in": "formData",
-      "description": "The requested format of the transcription response data, which will influence the content and detail of the result.",
-      "required": false,
-      "type": "string",
-      "enum": [
-        "json",
-        "verbose_json",
-        "text",
-        "srt",
-        "vtt"
-      ],
-      "x-ms-enum": {
-        "name": "AudioTranscriptionFormat",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "json",
-            "value": "json",
-            "description": "Use a response body that is a JSON object containing a single 'text' field for the transcription."
-          },
-          {
-            "name": "verbose_json",
-            "value": "verbose_json",
-            "description": "Use a response body that is a JSON object containing transcription text along with timing, segments, and other\nmetadata."
-          },
-          {
-            "name": "text",
-            "value": "text",
-            "description": "Use a response body that is plain text containing the raw, unannotated transcription."
-          },
-          {
-            "name": "srt",
-            "value": "srt",
-            "description": "Use a response body that is plain text in SubRip (SRT) format that also includes timing information."
-          },
-          {
-            "name": "vtt",
-            "value": "vtt",
-            "description": "Use a response body that is plain text in Web Video Text Tracks (VTT) format that also includes timing information."
-          }
-        ]
-      },
-      "x-ms-parameter-location": "method",
-      "x-ms-client-name": "responseFormat"
-    },
-    "AudioTranscriptionOptions.temperature": {
-      "name": "temperature",
-      "in": "formData",
-      "description": "The sampling temperature, between 0 and 1.\nHigher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic.\nIf set to 0, the model will use log probability to automatically increase the temperature until certain thresholds are hit.",
-      "required": false,
-      "type": "number",
-      "format": "float",
-      "x-ms-parameter-location": "method"
-    },
-    "AudioTranscriptionOptions.timestampGranularities": {
-      "name": "timestamp_granularities",
-      "in": "formData",
-      "description": "The timestamp granularities to populate for this transcription.\n`response_format` must be set `verbose_json` to use timestamp granularities.\nEither or both of these options are supported: `word`, or `segment`.\nNote: There is no additional latency for segment timestamps, but generating word timestamps incurs additional latency.",
-      "required": false,
-      "type": "array",
-      "items": {
-        "type": "string",
-        "enum": [
-          "word",
-          "segment"
-        ],
-        "x-ms-enum": {
-          "name": "AudioTranscriptionTimestampGranularity",
-          "modelAsString": true,
-          "values": [
-            {
-              "name": "word",
-              "value": "word",
-              "description": "Indicates that responses should include timing information about each transcribed word. Note that generating word\ntimestamp information will incur additional response latency."
-            },
-            {
-              "name": "segment",
-              "value": "segment",
-              "description": "Indicates that responses should include timing and other information about each transcribed audio segment. Audio\nsegment timestamp information does not incur any additional latency."
-            }
-          ]
-        }
-      },
-      "default": [
-        "segment"
-      ],
-      "x-ms-parameter-location": "method",
-      "x-ms-client-name": "timestampGranularities"
-    },
-    "AudioTranslationOptions.file": {
-      "name": "file",
-      "in": "formData",
-      "description": "The audio data to translate. This must be the binary content of a file in one of the supported media formats:\n flac, mp3, mp4, mpeg, mpga, m4a, ogg, wav, webm.",
-      "required": true,
-      "type": "file",
-      "x-ms-parameter-location": "method"
-    },
-    "AudioTranslationOptions.filename": {
-      "name": "filename",
-      "in": "formData",
-      "description": "The optional filename or descriptive identifier to associate with with the audio data.",
-      "required": false,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "AudioTranslationOptions.model": {
-      "name": "model",
-      "in": "formData",
-      "description": "The model to use for this translation request.",
-      "required": false,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "AudioTranslationOptions.prompt": {
-      "name": "prompt",
-      "in": "formData",
-      "description": "An optional hint to guide the model's style or continue from a prior audio segment. The written language of the\nprompt should match the primary spoken language of the audio data.",
-      "required": false,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "AudioTranslationOptions.responseFormat": {
-      "name": "response_format",
-      "in": "formData",
-      "description": "The requested format of the translation response data, which will influence the content and detail of the result.",
-      "required": false,
-      "type": "string",
-      "enum": [
-        "json",
-        "verbose_json",
-        "text",
-        "srt",
-        "vtt"
-      ],
-      "x-ms-enum": {
-        "name": "AudioTranslationFormat",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "json",
-            "value": "json",
-            "description": "Use a response body that is a JSON object containing a single 'text' field for the translation."
-          },
-          {
-            "name": "verbose_json",
-            "value": "verbose_json",
-            "description": "Use a response body that is a JSON object containing translation text along with timing, segments, and other\nmetadata."
-          },
-          {
-            "name": "text",
-            "value": "text",
-            "description": "Use a response body that is plain text containing the raw, unannotated translation."
-          },
-          {
-            "name": "srt",
-            "value": "srt",
-            "description": "Use a response body that is plain text in SubRip (SRT) format that also includes timing information."
-          },
-          {
-            "name": "vtt",
-            "value": "vtt",
-            "description": "Use a response body that is plain text in Web Video Text Tracks (VTT) format that also includes timing information."
-          }
-        ]
-      },
-      "x-ms-parameter-location": "method",
-      "x-ms-client-name": "responseFormat"
-    },
-    "AudioTranslationOptions.temperature": {
-      "name": "temperature",
-      "in": "formData",
-      "description": "The sampling temperature, between 0 and 1.\nHigher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic.\nIf set to 0, the model will use log probability to automatically increase the temperature until certain thresholds are hit.",
-      "required": false,
-      "type": "number",
-      "format": "float",
-      "x-ms-parameter-location": "method"
-    },
     "Azure.Core.Foundations.ApiVersionParameter": {
       "name": "api-version",
       "in": "query",
@@ -4696,6 +5645,56 @@
       "minLength": 1,
       "x-ms-parameter-location": "method",
       "x-ms-client-name": "apiVersion"
+    },
+    "GenerateSpeechFromTextBody": {
+      "name": "body",
+      "in": "body",
+      "description": "A representation of the request options that control the behavior of a text-to-speech operation.",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/SpeechGenerationOptions"
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "GetChatCompletionsBody": {
+      "name": "body",
+      "in": "body",
+      "description": "The configuration information for a chat completions request.\nCompletions support a wide variety of tasks and generate text that continues from or \"completes\"\nprovided prompt data.",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/ChatCompletionsOptions"
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "GetCompletionsBody": {
+      "name": "body",
+      "in": "body",
+      "description": "The configuration information for a completions request.\nCompletions support a wide variety of tasks and generate text that continues from or \"completes\"\nprovided prompt data.",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/CompletionsOptions"
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "GetEmbeddingsBody": {
+      "name": "body",
+      "in": "body",
+      "description": "The configuration information for an embeddings request.\nEmbeddings measure the relatedness of text strings and are commonly used for search, clustering,\nrecommendations, and other similar scenarios.",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/EmbeddingsOptions"
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "GetImageGenerationsBody": {
+      "name": "body",
+      "in": "body",
+      "description": "Represents the request data used to generate images.",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/ImageGenerationOptions"
+      },
+      "x-ms-parameter-location": "method"
     }
   }
 }

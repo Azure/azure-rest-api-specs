@@ -4414,7 +4414,8 @@
         }
       },
       "required": [
-        "authentication"
+        "authentication",
+        "host"
       ]
     },
     "DataflowEndpointKafkaAcks": {
@@ -4630,8 +4631,7 @@
         },
         "host": {
           "type": "string",
-          "description": "Host of the Broker in the form of <hostname>:<port>. Optional; connects to Broker if omitted.",
-          "default": "aio-mq-dmqtt-frontend:8883"
+          "description": "Host of the Broker in the form of <hostname>:<port>. Optional; connects to Broker if omitted."
         },
         "protocol": {
           "type": "string",
@@ -4703,7 +4703,7 @@
           "description": "Qos for Broker connection.",
           "default": 1,
           "minimum": 0,
-          "maximum": 2
+          "maximum": 1
         },
         "sessionExpirySeconds": {
           "type": "integer",
@@ -5668,7 +5668,7 @@
       "enum": [
         "SystemAssignedManagedIdentity",
         "UserAssignedManagedIdentity",
-        "Sasl",
+        "ServiceAccountToken",
         "X509Certificate",
         "Anonymous"
       ],
@@ -5687,9 +5687,9 @@
             "description": "UserAssignedManagedIdentity type"
           },
           {
-            "name": "Sasl",
-            "value": "Sasl",
-            "description": "Sasl Option"
+            "name": "ServiceAccountToken",
+            "value": "ServiceAccountToken",
+            "description": "ServiceAccountToken Option"
           },
           {
             "name": "X509Certificate",
@@ -6191,6 +6191,24 @@
           "minimum": 1,
           "maximum": 300
         }
+      }
+    },
+    "ServiceAccountTokenMethod": {
+      "type": "string",
+      "description": "Service Account Token Method",
+      "enum": [
+        "ServiceAccountToken"
+      ],
+      "x-ms-enum": {
+        "name": "ServiceAccountTokenMethod",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ServiceAccountToken",
+            "value": "ServiceAccountToken",
+            "description": "ServiceAccountToken Option"
+          }
+        ]
       }
     },
     "ServiceType": {
