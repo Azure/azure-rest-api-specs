@@ -1046,7 +1046,7 @@ model CredentialImageData {
 }
 
 @added(ContentSafety.Versions.v2024_09_30_Preview)
-@doc("The request of decoding content credential in the given image.")
+@doc("The request of detect watermark in the given image.")
 model DecodeImageCredentialOptions {
   @doc("The image to be analyzed.")
   image: CredentialImageData;

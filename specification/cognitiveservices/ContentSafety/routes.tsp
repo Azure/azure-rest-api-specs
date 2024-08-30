@@ -187,9 +187,9 @@ interface ImageOperations {
   @added(ContentSafety.Versions.v2024_09_30_Preview)
   @summary("Decode the content credentials from assets.")
   @doc("A synchronous API for decoding the content credentials from assets.")
-  @route("/image:decodeCredential")
+  @route("/image:detectWatermark")
   @post
-  decodeCredential is Azure.Core.RpcOperation<
+  detectWatermark is Azure.Core.RpcOperation<
     {
       @bodyRoot
       @doc("The image to be decoded, which is in base64 string format.")
