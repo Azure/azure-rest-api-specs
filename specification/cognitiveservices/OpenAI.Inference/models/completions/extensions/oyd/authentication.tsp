@@ -31,6 +31,10 @@ union OnYourDataAuthenticationType {
 
   @doc("Authentication via user-assigned managed identity.")
   userAssignedManagedIdentity: "user_assigned_managed_identity",
+
+  @added(ServiceApiVersions.v2024_08_01_Preview)
+  @doc("Authentication via username and password.")
+  usernameAndPassword: "username_and_password",
 }
 
 @discriminator("type")
@@ -106,7 +110,7 @@ model OnYourDataEncodedApiKeyAuthenticationOptions
 model OnYourDataUsernameAndPasswordAuthenticationOptions
   extends OnYourDataAuthenticationOptions {
   @doc("The discriminator type for username and password.")
-  type: "username_and_password";
+  type: OnYourDataAuthenticationType.usernameAndPassword;
 
   @doc("The username.")
   username: string;

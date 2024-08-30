@@ -621,9 +621,6 @@
           "Creates a completion based on Azure Cognitive Services vector data and user-assigned managed identity. Uses Azure OpenAI chat extensions.": {
             "$ref": "./examples/generated_extensions_chat_completions_azure_search_advanced.json"
           },
-          "Creates a completion for the provided AML index. Uses Azure OpenAI chat extensions.": {
-            "$ref": "./examples/generated_extensions_chat_completions_aml_index.json"
-          },
           "Creates a completion for the provided Azure Cosmos DB. Uses Azure OpenAI chat extensions.": {
             "$ref": "./examples/generated_extensions_chat_completions_cosmos_db.json"
           },
@@ -5045,7 +5042,8 @@
         "encoded_api_key",
         "access_token",
         "system_assigned_managed_identity",
-        "user_assigned_managed_identity"
+        "user_assigned_managed_identity",
+        "username_and_password"
       ],
       "x-ms-enum": {
         "name": "OnYourDataAuthenticationType",
@@ -5085,6 +5083,11 @@
             "name": "userAssignedManagedIdentity",
             "value": "user_assigned_managed_identity",
             "description": "Authentication via user-assigned managed identity."
+          },
+          {
+            "name": "usernameAndPassword",
+            "value": "username_and_password",
+            "description": "Authentication via username and password."
           }
         ]
       }
