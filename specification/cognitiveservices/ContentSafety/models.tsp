@@ -392,7 +392,7 @@ model AnalyzeTextGroundednessOptions {
     A value indicating if to generate mitigated content for the ungrounded content and included in the response.
     This field is optional, with a default value of false.
     """)
-  mitigating?: boolean;
+  correction?: boolean;
 
   @doc("""
     A value indicating if to generate an explanation for the groundedness analysis result and included in the response.
@@ -456,10 +456,10 @@ model AnalyzeTextGroundednessResult {
   ungroundedDetails: UngroundednessDetails[];
 
   @doc("""
-    The mitigation for detected ungroundedness.
-    It's available only when the 'mitigating' field in the input is set to true.
+    The correction for detected ungroundedness.
+    It's available only when the 'correction' field in the input is set to true.
     """)
-  mitigatedText?: string;
+  correctedText?: string;
 }
 
 @added(ContentSafety.Versions.v2024_09_15_Preview)
