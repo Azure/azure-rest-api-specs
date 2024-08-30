@@ -41,7 +41,7 @@
   "paths": {
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/sessionPools/{sessionPoolName}/code/execute": {
       "post": {
-        "operationId": "CodeExecution_ExecuteCode",
+        "operationId": "SessionCodeExecution_ExecuteCode",
         "description": "Execute code in a session.",
         "parameters": [
           {
@@ -65,7 +65,7 @@
             "description": "The request to execute code.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/CodeExecutionRequest"
+              "$ref": "#/definitions/SessionCodeExecutionRequest"
             }
           }
         ],
@@ -73,7 +73,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/CodeExecutionResponse"
+              "$ref": "#/definitions/SessionCodeExecutionResponse"
             }
           },
           "default": {
@@ -88,20 +88,12 @@
               }
             }
           }
-        },
-        "x-ms-examples": {
-          "CodeExecution_ExecuteCode_Result": {
-            "$ref": "./examples/CodeExecution_ExecuteCode_Result.json"
-          },
-          "CodeExecution_ExecuteCode_StandardOut": {
-            "$ref": "./examples/CodeExecution_ExecuteCode_StandardOut.json"
-          }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/sessionPools/{sessionPoolName}/files/{filename}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/sessionPools/{sessionPoolName}/files/{fileName}": {
       "get": {
-        "operationId": "CodeExecutionFiles_GetFileMetadata",
+        "operationId": "SessionResourceFiles_GetFileMetadata",
         "description": "Get the file resource.",
         "parameters": [
           {
@@ -129,10 +121,13 @@
             "in": "path",
             "description": "The name of the session pool.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-z][a-z0-9]*$"
           },
           {
-            "name": "filename",
+            "name": "fileName",
             "in": "path",
             "description": "The name of the file.",
             "required": true,
@@ -146,7 +141,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/CodeExecutionFile"
+              "$ref": "#/definitions/SessionResourceFile"
             }
           },
           "default": {
@@ -161,15 +156,10 @@
               }
             }
           }
-        },
-        "x-ms-examples": {
-          "CodeExecutionFiles_GetFileMetadata": {
-            "$ref": "./examples/CodeExecutionFiles_GetFileMetadata.json"
-          }
         }
       },
       "delete": {
-        "operationId": "CodeExecutionFiles_DeleteFile",
+        "operationId": "SessionResourceFiles_DeleteFile",
         "description": "Delete the file.",
         "parameters": [
           {
@@ -197,10 +187,13 @@
             "in": "path",
             "description": "The name of the session pool.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-z][a-z0-9]*$"
           },
           {
-            "name": "filename",
+            "name": "fileName",
             "in": "path",
             "description": "The name of the file.",
             "required": true,
@@ -226,17 +219,12 @@
               }
             }
           }
-        },
-        "x-ms-examples": {
-          "CodeExecutionFiles_DeleteFile": {
-            "$ref": "./examples/CodeExecutionFiles_DeleteFile.json"
-          }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/sessionPools/{sessionPoolName}/files/{filename}:uploadFile": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/sessionPools/{sessionPoolName}/files/{fileName}:uploadFile": {
       "post": {
-        "operationId": "CodeExecutionFiles_UploadFile",
+        "operationId": "SessionResourceFiles_UploadFile",
         "description": "Upload a file to a session.",
         "consumes": [
           "multipart/form-data"
@@ -267,10 +255,13 @@
             "in": "path",
             "description": "The name of the session pool.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-z][a-z0-9]*$"
           },
           {
-            "name": "filename",
+            "name": "fileName",
             "in": "path",
             "description": "The name of the file.",
             "required": true,
@@ -291,7 +282,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/CodeExecutionFileCollection"
+              "$ref": "#/definitions/SessionResourceFileCollection"
             }
           },
           "default": {
@@ -306,17 +297,12 @@
               }
             }
           }
-        },
-        "x-ms-examples": {
-          "CodeExecutionFiles_UploadFile": {
-            "$ref": "./examples/CodeExecutionFiles_UploadFile.json"
-          }
         }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/sessionPools/{sessionPoolName}/files/content/{filename}": {
       "get": {
-        "operationId": "CodeExecutionFiles_GetFileContent",
+        "operationId": "SessionResourceFiles_GetFileContent",
         "description": "Get the content of the file.",
         "parameters": [
           {
@@ -332,7 +318,7 @@
             "$ref": "#/parameters/SessionPoolNameParameter"
           },
           {
-            "$ref": "#/parameters/CodeExecutionFileNameParameter"
+            "$ref": "#/parameters/SessionResourceFileNameParameter"
           },
           {
             "$ref": "#/parameters/SessionIdentifier"
@@ -357,11 +343,6 @@
                 "description": "String error code indicating what went wrong."
               }
             }
-          }
-        },
-        "x-ms-examples": {
-          "CodeExecutionFiles_GetFileContent": {
-            "$ref": "./examples/CodeExecutionFiles_GetFileContent.json"
           }
         }
       }
@@ -434,75 +415,99 @@
       "format": "uuid",
       "description": "Universally Unique Identifier"
     },
-    "CodeExecutionFile": {
-      "type": "object",
-      "description": "Code execution file resource.",
-      "properties": {
-        "filename": {
-          "type": "string",
-          "description": "The name of the file.",
-          "x-ms-mutability": [
-            "create"
-          ]
-        },
-        "properties": {
-          "$ref": "#/definitions/CodeExecutionFileProperties",
-          "description": "Code execution file resource properties."
-        }
-      },
-      "required": [
-        "filename",
-        "properties"
-      ]
-    },
-    "CodeExecutionFileCollection": {
-      "type": "object",
-      "description": "Code execution file resource collection.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The files uploaded.",
-          "items": {
-            "$ref": "#/definitions/CodeExecutionFile"
+    "CodeExecutionStatus": {
+      "type": "string",
+      "description": "Code execution status.",
+      "enum": [
+        "Success",
+        "Failure"
+      ],
+      "x-ms-enum": {
+        "name": "CodeExecutionStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Success",
+            "value": "Success",
+            "description": "The code execution succeeded."
           },
-          "x-ms-identifiers": []
-        }
-      },
-      "required": [
-        "value"
-      ]
+          {
+            "name": "Failure",
+            "value": "Failure",
+            "description": "The code execution failed."
+          }
+        ]
+      }
     },
-    "CodeExecutionFileProperties": {
+    "CodeInputType": {
+      "type": "string",
+      "description": "Code input type.",
+      "enum": [
+        "Inline",
+        "InlineBase64",
+        "InlineText"
+      ],
+      "x-ms-enum": {
+        "name": "CodeInputType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "inline",
+            "value": "Inline",
+            "description": "Inline."
+          },
+          {
+            "name": "inlineBase64",
+            "value": "InlineBase64",
+            "description": "InlineBase64."
+          },
+          {
+            "name": "inlineText",
+            "value": "InlineText",
+            "description": "InlineText."
+          }
+        ]
+      }
+    },
+    "ExecutionType": {
+      "type": "string",
+      "description": "Execution Type",
+      "enum": [
+        "Synchronous"
+      ],
+      "x-ms-enum": {
+        "name": "ExecutionType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "synchronous",
+            "value": "Synchronous",
+            "description": "Synchronous"
+          }
+        ]
+      }
+    },
+    "ResourceGroup": {
       "type": "object",
-      "description": "Code execution file resource properties.",
+      "description": "Resource group resource.",
       "properties": {
-        "filename": {
+        "resourceGroupName": {
           "type": "string",
-          "description": "The name of the file."
-        },
-        "size": {
-          "type": "integer",
-          "format": "int64",
-          "description": "The size of the file."
-        },
-        "lastModifiedTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The date time when the file was last modified."
+          "description": "The name of the resource group. The name is case insensitive.",
+          "minLength": 1,
+          "maxLength": 90
         }
       },
       "required": [
-        "filename",
-        "size",
-        "lastModifiedTime"
+        "resourceGroupName"
       ]
     },
-    "CodeExecutionRequest": {
+    "SessionCodeExecutionRequest": {
       "type": "object",
       "description": "The request to execute code.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/CodeExecutionRequestProperties",
+          "$ref": "#/definitions/SessionCodeExecutionRequestProperties",
           "description": "The properties for executing code."
         }
       },
@@ -510,7 +515,7 @@
         "properties"
       ]
     },
-    "CodeExecutionRequestProperties": {
+    "SessionCodeExecutionRequestProperties": {
       "type": "object",
       "description": "The properties of the code execution request.",
       "properties": {
@@ -524,7 +529,7 @@
         },
         "code": {
           "type": "string",
-          "description": "The code to execute."
+          "description": "The string of the code to execute, based on CodeInputType."
         },
         "timeoutInSeconds": {
           "type": "integer",
@@ -539,12 +544,12 @@
         "timeoutInSeconds"
       ]
     },
-    "CodeExecutionResponse": {
+    "SessionCodeExecutionResponse": {
       "type": "object",
       "description": "The response containing the result of the code execution.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/CodeExecutionResponseProperties",
+          "$ref": "#/definitions/SessionCodeExecutionResponseProperties",
           "description": "The properties of the code execution response."
         }
       },
@@ -552,7 +557,7 @@
         "properties"
       ]
     },
-    "CodeExecutionResponseProperties": {
+    "SessionCodeExecutionResponseProperties": {
       "type": "object",
       "description": "The properties of the code execution result.",
       "properties": {
@@ -585,104 +590,83 @@
         "executionTimeInMilliseconds"
       ]
     },
-    "CodeExecutionStatus": {
-      "type": "string",
-      "description": "Code execution status.",
-      "enum": [
-        "Success",
-        "Failure"
-      ],
-      "x-ms-enum": {
-        "name": "CodeExecutionStatus",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Success",
-            "value": "Success",
-            "description": "The code execution succeeded."
-          },
-          {
-            "name": "Failure",
-            "value": "Failure",
-            "description": "The code execution failed."
-          }
-        ]
-      }
-    },
-    "CodeInputType": {
-      "type": "string",
-      "description": "Code input type.",
-      "enum": [
-        "inline",
-        "inlineBase64",
-        "inlineText"
-      ],
-      "x-ms-enum": {
-        "name": "CodeInputType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "inline",
-            "value": "inline",
-            "description": "Inline."
-          },
-          {
-            "name": "inlineBase64",
-            "value": "inlineBase64",
-            "description": "InlineBase64."
-          },
-          {
-            "name": "inlineText",
-            "value": "inlineText",
-            "description": "InlineText."
-          }
-        ]
-      }
-    },
-    "ExecutionType": {
-      "type": "string",
-      "description": "Execution Type",
-      "enum": [
-        "synchronous"
-      ],
-      "x-ms-enum": {
-        "name": "ExecutionType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "synchronous",
-            "value": "synchronous",
-            "description": "Synchronous"
-          }
-        ]
-      }
-    },
-    "ResourceGroup": {
-      "type": "object",
-      "description": "Resource group resource.",
-      "properties": {
-        "resourceGroupName": {
-          "type": "string",
-          "description": "The name of the resource group. The name is case insensitive.",
-          "minLength": 1,
-          "maxLength": 90
-        }
-      },
-      "required": [
-        "resourceGroupName"
-      ]
-    },
     "SessionPool": {
       "type": "object",
       "description": "Session pool resource.",
       "properties": {
         "sessionPoolName": {
           "type": "string",
-          "description": "The name of the session pool."
+          "description": "The name of the session pool.",
+          "minLength": 3,
+          "maxLength": 63,
+          "pattern": "^[a-z][a-z0-9]*$"
         }
       },
       "required": [
         "sessionPoolName"
+      ]
+    },
+    "SessionResourceFile": {
+      "type": "object",
+      "description": "Code execution file resource.",
+      "properties": {
+        "fileName": {
+          "type": "string",
+          "description": "The name of the file.",
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "properties": {
+          "$ref": "#/definitions/SessionResourceFileProperties",
+          "description": "Code execution file resource properties."
+        }
+      },
+      "required": [
+        "fileName",
+        "properties"
+      ]
+    },
+    "SessionResourceFileCollection": {
+      "type": "object",
+      "description": "Code execution file resource collection.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The files uploaded.",
+          "items": {
+            "$ref": "#/definitions/SessionResourceFile"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "SessionResourceFileProperties": {
+      "type": "object",
+      "description": "Code execution file resource properties.",
+      "properties": {
+        "fileName": {
+          "type": "string",
+          "description": "The name of the file."
+        },
+        "sizeInBytes": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The size of the file."
+        },
+        "lastModifiedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The date time when the file was last modified."
+        }
+      },
+      "required": [
+        "fileName",
+        "sizeInBytes",
+        "lastModifiedAt"
       ]
     },
     "Subscription": {
@@ -710,14 +694,6 @@
       "x-ms-parameter-location": "method",
       "x-ms-client-name": "apiVersion"
     },
-    "CodeExecutionFileNameParameter": {
-      "name": "filename",
-      "in": "path",
-      "description": "The name of the file.",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
     "ResourceGroupNameParameter": {
       "name": "resourceGroupName",
       "in": "path",
@@ -743,6 +719,14 @@
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "client"
+    },
+    "SessionResourceFileNameParameter": {
+      "name": "filename",
+      "in": "path",
+      "description": "The name of the file.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
     },
     "SubscriptionIdParameter": {
       "name": "subscriptionId",
