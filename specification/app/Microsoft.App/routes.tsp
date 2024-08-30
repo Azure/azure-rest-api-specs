@@ -43,6 +43,9 @@ interface CodeExecution {
 }
 
 interface CodeExecutionFiles {
+  @doc("List the file resources.")
+  listFileMetadata is SessionOperations.ResourceList<CodeExecutionFile>;
+
   @doc("Get the file resource.")
   getFileMetadata is SessionOperations.ResourceRead<CodeExecutionFile>;
 
