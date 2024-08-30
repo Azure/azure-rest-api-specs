@@ -53,30 +53,33 @@
         }
     ],
     "paths": {
-        "/call-settings/participants": {
+        "/call-settings/participants/{participantRawId}": {
             "get": {
-                "operationId": "ParticipantCallSettingsList_List",
+                "operationId": "ParticipantCallSettings_Get",
                 "tags": [
                     "CallSettings"
                 ],
-                "description": "Retrieves all configured participant call settings.",
-                "summary": "Retrieve all configured participant call settings.",
+                "summary": "Retrieve call settings.",
+                "description": "Retrieves call settings for a Participant with specified ID.",
                 "parameters": [
                     {
                         "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ParticipantRawId"
                     }
                 ],
                 "responses": {
                     "200": {
-                        "description": "The request has succeeded.",
+                        "description": "Successfully retrieved call settings.",
                         "schema": {
-                            "$ref": "#/definitions/PagedParticipantCallSettingsItem"
+                            "$ref": "#/definitions/CallSettings"
                         }
                     },
                     "default": {
                         "description": "Failure",
                         "schema": {
-                            "$ref": "../../../Common/stable/2022-07-13/common.json#/definitions/CommunicationErrorResponse"
+                            "$ref": "../../../Common/stable/2023-11-15/common.json#/definitions/CommunicationErrorResponse"
                         },
                         "headers": {
                             "x-ms-error-code": {
@@ -85,13 +88,8 @@
                             }
                         }
                     }
-                },
-                "x-ms-pageable": {
-                    "nextLinkName": "nextLink"
                 }
-            }
-        },
-        "/call-settings/participants/{participantRawId}": {
+            },
             "patch": {
                 "operationId": "ParticipantCallSettings_CreateUpdate",
                 "tags": [
@@ -135,7 +133,7 @@
                     "default": {
                         "description": "Failure",
                         "schema": {
-                            "$ref": "../../../Common/stable/2022-07-13/common.json#/definitions/CommunicationErrorResponse"
+                            "$ref": "../../../Common/stable/2023-11-15/common.json#/definitions/CommunicationErrorResponse"
                         },
                         "headers": {
                             "x-ms-error-code": {
@@ -168,7 +166,7 @@
                     "default": {
                         "description": "Failure",
                         "schema": {
-                            "$ref": "../../../Common/stable/2022-07-13/common.json#/definitions/CommunicationErrorResponse"
+                            "$ref": "../../../Common/stable/2023-11-15/common.json#/definitions/CommunicationErrorResponse"
                         },
                         "headers": {
                             "x-ms-error-code": {
@@ -190,7 +188,7 @@
                 "description": "Retrieves the current global call settings with no specific scope.",
                 "parameters": [
                     {
-                         "$ref": "#/parameters/ApiVersionParameter"
+                        "$ref": "#/parameters/ApiVersionParameter"
                     }
                 ],
                 "responses": {
@@ -203,7 +201,7 @@
                     "default": {
                         "description": "Failure",
                         "schema": {
-                            "$ref": "../../../Common/stable/2022-07-13/common.json#/definitions/CommunicationErrorResponse"
+                            "$ref": "../../../Common/stable/2023-11-15/common.json#/definitions/CommunicationErrorResponse"
                         },
                         "headers": {
                             "x-ms-error-code": {
@@ -254,7 +252,7 @@
                     "default": {
                         "description": "Failure",
                         "schema": {
-                            "$ref": "../../../Common/stable/2022-07-13/common.json#/definitions/CommunicationErrorResponse"
+                            "$ref": "../../../Common/stable/2023-11-15/common.json#/definitions/CommunicationErrorResponse"
                         },
                         "headers": {
                             "x-ms-error-code": {
@@ -284,7 +282,7 @@
                     "default": {
                         "description": "Failure",
                         "schema": {
-                            "$ref": "../../../Common/stable/2022-07-13/common.json#/definitions/CommunicationErrorResponse"
+                            "$ref": "../../../Common/stable/2023-11-15/common.json#/definitions/CommunicationErrorResponse"
                         },
                         "headers": {
                             "x-ms-error-code": {
@@ -298,45 +296,6 @@
         }
     },
     "definitions": {
-        "PagedParticipantCallSettingsItem": {
-            "type": "object",
-            "description": "Paged collection of ParticipantCallSettingsItem items",
-            "properties": {
-                "value": {
-                    "type": "array",
-                    "description": "The ParticipantCallSettingsItem items on this page",
-                    "items": {
-                        "$ref": "#/definitions/ParticipantCallSettingsItem"
-                    }
-                },
-                "nextLink": {
-                    "type": "string",
-                    "format": "uri",
-                    "description": "The link to the next page of items"
-                }
-            },
-            "required": [
-                "value"
-            ]
-        },
-        "ParticipantCallSettingsItem": {
-            "type": "object",
-            "description": "Configuration of general call settings",
-            "properties": {
-                "id": {
-                    "description": "ParticipantRawId",
-                    "type": "string"
-                },
-                "autoRecordingSettings": {
-                    "$ref": "#/definitions/AutoRecordingSettings",
-                    "description": "Recording setttings"
-                }
-            },
-            "required": [
-                "id",
-                "autoRecordingSettings"
-            ]
-        },
         "AutoRecordingSettings": {
             "type": "object",
             "description": "Configuration for recording settings.",
