@@ -26,7 +26,7 @@ These are the global settings for the storagepool.
 
 ``` yaml
 openapi-type: arm
-tag: package-2024-05
+tag: package-2024-07-01-preview
 ```
 
 
