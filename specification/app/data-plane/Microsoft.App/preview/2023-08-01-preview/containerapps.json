@@ -91,6 +91,70 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/sessionPools/{sessionPoolName}/files": {
+      "get": {
+        "operationId": "SessionResourceFiles_ListFileMetadata",
+        "description": "List the file resources.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The ID of the target subscription. The value must be an UUID.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group. The name is case insensitive.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 90
+          },
+          {
+            "name": "sessionPoolName",
+            "in": "path",
+            "description": "The name of the session pool.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-z][a-z0-9]*$"
+          },
+          {
+            "$ref": "#/parameters/SessionIdentifier"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedSessionResourceFile"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/sessionPools/{sessionPoolName}/files/{fileName}": {
       "get": {
         "operationId": "SessionResourceFiles_GetFileMetadata",
@@ -486,6 +550,28 @@
           }
         ]
       }
+    },
+    "PagedSessionResourceFile": {
+      "type": "object",
+      "description": "Paged collection of SessionResourceFile items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The SessionResourceFile items on this page",
+          "items": {
+            "$ref": "#/definitions/SessionResourceFile"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
     },
     "ResourceGroup": {
       "type": "object",

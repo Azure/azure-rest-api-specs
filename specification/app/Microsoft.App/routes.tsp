@@ -43,6 +43,9 @@ interface SessionCodeExecution {
 }
 
 interface SessionResourceFiles {
+  @doc("List the file resources.")
+  listFileMetadata is SessionOperations.ResourceList<SessionResourceFile>;
+
   @doc("Get the file resource.")
   getFileMetadata is SessionOperations.ResourceRead<SessionResourceFile>;
 
