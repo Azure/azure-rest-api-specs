@@ -4,7 +4,7 @@ import "@azure-tools/typespec-client-generator-core";
 import "@typespec/rest";
 import "@typespec/versioning";
 
-import "./routes.tsp"; // TODO remove
+import "./models.tsp"; // TODO remove
 import "./common.tsp";
 
 // imports organized by resource type path names
@@ -15,14 +15,10 @@ import "./clusters.tsp";
 import "./datastores.tsp";
 import "./globalReachConnections.tsp";
 import "./hcxEnterpriseSites.tsp";
-import "./hosts.tsp";
 import "./iscsiPaths.tsp";
 import "./locations.tsp";
-import "./maintenances.tsp";
 import "./placementPolicies.tsp";
 import "./privateClouds.tsp";
-import "./provisionedNetworks.tsp";
-import "./pureStoragePolicies.tsp";
 import "./scriptCmdlets.tsp";
 import "./scriptExecutions.tsp";
 import "./scriptPackages.tsp";

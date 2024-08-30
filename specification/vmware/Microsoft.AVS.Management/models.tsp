@@ -2175,17 +2175,3 @@ union IscsiPathProvisioningState {
   @doc("is updating")
   Updating: "Updating",
 }
-
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
-@doc("The SKU (Stock Keeping Unit) assigned to this resource.")
-model ResourceSkuRequired {
-  @doc("The SKU (Stock Keeping Unit) assigned to this resource.")
-  sku: Foundations.Sku;
-}
-
-@doc("The response of a {name} list operation.", Resource)
-@friendlyName(FriendlyNameFormat, Resource)
-model ResourceList<
-  Resource extends Foundations.Resource,
-  FriendlyNameFormat extends valueof string = "{name}List"
-> is Azure.Core.Page<Resource>;
