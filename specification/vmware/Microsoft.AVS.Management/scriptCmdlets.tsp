@@ -10,12 +10,12 @@ using TypeSpec.Versioning;
 
 @armResourceOperations
 interface ScriptCmdlets {
-    #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
-    @operationId("ScriptCmdlets_List")
-    list is ArmResourceListByParent<
-        ScriptCmdlet,
-        Response = ArmResponse<ResourceList<ScriptCmdlet, "{name}sList">>
-    >;
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
+  @operationId("ScriptCmdlets_List")
+  list is ArmResourceListByParent<
+    ScriptCmdlet,
+    Response = ArmResponse<ResourceList<ScriptCmdlet, "{name}sList">>
+  >;
 
-    get is ArmResourceRead<ScriptCmdlet>;
+  get is ArmResourceRead<ScriptCmdlet>;
 }

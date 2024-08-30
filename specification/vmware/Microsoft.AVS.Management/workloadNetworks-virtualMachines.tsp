@@ -10,17 +10,17 @@ using TypeSpec.Versioning;
 
 @armResourceOperations
 interface WorkloadNetworkVirtualMachines {
-    #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
-    @operationId("WorkloadNetworks_ListVirtualMachines")
-    list is ArmResourceListByParent<
-        WorkloadNetworkVirtualMachine,
-        Response = ArmResponse<ResourceList<
-            WorkloadNetworkVirtualMachine,
-            "{name}sList"
-        >>
-    >;
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
+  @operationId("WorkloadNetworks_ListVirtualMachines")
+  list is ArmResourceListByParent<
+    WorkloadNetworkVirtualMachine,
+    Response = ArmResponse<ResourceList<
+      WorkloadNetworkVirtualMachine,
+      "{name}sList"
+    >>
+  >;
 
-    #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
-    @operationId("WorkloadNetworks_GetVirtualMachine")
-    get is ArmResourceRead<WorkloadNetworkVirtualMachine>;
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
+  @operationId("WorkloadNetworks_GetVirtualMachine")
+  get is ArmResourceRead<WorkloadNetworkVirtualMachine>;
 }
