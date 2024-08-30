@@ -53,70 +53,40 @@ op deleteProject is languageOperations.LongRunningResourceDelete<ProjectMetadata
  * Generates a copy project operation authorization to the current target Azure
  * resource.
  */
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+#suppress "@azure-tools/typespec-azure-core/casing-style"
 @summary("Copy project authorization")
-@route("/{projectName}/:authorize-copy")
 @post
-op copyProjectAuthorization is Azure.Core.Foundations.Operation<
-  {
-    /**
-     * The project name.
-     */
-    @path
-    projectName: string;
-
-    /**
-     * The copy project authorization info.
-     */
-    @body
-    body: CopyAuthorizationOptions;
-  },
-  CopyProjectOptions
->;
+op `authorize-copy` is languageOperations.ResourceAction<
+ProjectMetadata,
+CopyAuthorizationOptions,
+CopyProjectOptions
+>
+;
 
 /**
  * Copies an existing project to another Azure resource.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @summary("Copy project")
-@route("/{projectName}/:copy")
 @post
 @pollingOperation(getCopyProjectStatus)
-op copyProject is Foundations.LongRunningOperation<
-  {
-    /**
-     * The project name.
-     */
-    @path
-    projectName: string;
-
-    /**
-     * The copy project info.
-     */
-    @body
-    body: CopyProjectOptions;
-  },
-  AcceptedResponse,
-  {},
-  ErrorResponse
+op copy is languageOperations.LongRunningResourceAction <
+  ProjectMetadata,
+  CopyProjectOptions,
+  CopyProjectJobState,
+  ErrorResponse, 
+  {}
 >;
 
 /**
  * Triggers a job to export a project's data.
  */
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @summary("Export project")
-@route("/{projectName}/:export")
 @post
 @pollingOperation(getExportStatus)
-op export is Foundations.LongRunningOperation<
+op export is languageOperations.LongRunningResourceAction <
+  ProjectMetadata,
   {
-    /**
-     * The project name.
-     */
-    @path
-    projectName: string;
-
     /**
      * The format of the exported project file to use.
      */
@@ -143,28 +113,21 @@ op export is Foundations.LongRunningOperation<
     @query("trainedModelLabel")
     trainedModelLabel?: string;
   },
-  AcceptedResponse,
-  {},
-  ErrorResponse
+  ExportProjectJobState, 
+  ErrorResponse, 
+  {}
 >;
 
 /**
  * Triggers a job to import a project. If a project with the same name already
  * exists, the data of that project is replaced.
  */
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @summary("Import project")
-@route("/{projectName}/:import")
 @post
 @pollingOperation(getImportStatus)
-op `import` is Foundations.LongRunningOperation<
+op `import` is languageOperations.LongRunningResourceAction <
+  ProjectMetadata,
   {
-    /**
-     * The project name.
-     */
-    @path
-    projectName: string;
-
     /**
      * The format of the exported project file to use.
      */
@@ -177,36 +140,23 @@ op `import` is Foundations.LongRunningOperation<
     @body
     body: ExportedProject;
   },
-  AcceptedResponse,
-  {},
-  ErrorResponse
+  ImportProjectJobState, 
+  ErrorResponse, 
+  {}
 >;
 
 /**
  * Triggers a training job for a project.
  */
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @summary("Train project")
-@route("/{projectName}/:train")
 @post
 @pollingOperation(getTrainingStatus)
-op train is Foundations.LongRunningOperation<
-  {
-    /**
-     * The project name.
-     */
-    @path
-    projectName: string;
-
-    /**
-     * The training input parameters.
-     */
-    @body
-    body: TrainingJobOptions;
-  },
-  AcceptedResponse,
-  {},
-  ErrorResponse
+op train is languageOperations.LongRunningResourceAction <
+  ProjectMetadata,
+  TrainingJobOptions,
+  TrainingJobState,
+  ErrorResponse, 
+  {}
 >;
 
 /**
@@ -216,7 +166,7 @@ op train is Foundations.LongRunningOperation<
 @summary("Get copy project status")
 @route("/{projectName}/copy/jobs/{jobId}")
 @get
-op getCopyProjectStatus is Azure.Core.Foundations.Operation<
+op getCopyProjectStatus is Foundations.Operation<
   {
     /**
      * The project name.
@@ -238,58 +188,18 @@ op getCopyProjectStatus is Azure.Core.Foundations.Operation<
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @summary("List deployments")
-@route("/{projectName}/deployments")
 @get
-op listDeployments is Azure.Core.Foundations.Operation<
-  {
-    /**
-     * The project name.
-     */
-    @path
-    projectName: string;
-
-    /**
-     * The number of deployments to be returned.
-     */
-    @query("top")
-    top?: int32;
-
-    /**
-     * The offset in the response.
-     */
-    @query("skip")
-    skip?: int32;
-
-    /**
-     * The maximum number of deployments per page.
-     */
-    @query("maxpagesize")
-    maxpagesize?: int32;
-  },
-  ProjectDeployments
+op listDeployments is languageOperations.ResourceList<
+    ProjectDeployment,
+  ListProjectsQueryParameters  
 >;
 
 /**
  * Gets the details of a deployment.
  */
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @summary("Get deployment details")
-@route("/{projectName}/deployments/{deploymentName}")
 @get
-op getDeployment is Azure.Core.Foundations.Operation<
-  {
-    /**
-     * The project name.
-     */
-    @path
-    projectName: string;
-
-    /**
-     * The deployment name.
-     */
-    @path
-    deploymentName: string;
-  },
+op getDeployment is languageOperations.ResourceRead<
   ProjectDeployment
 >;
 
@@ -298,7 +208,7 @@ op getDeployment is Azure.Core.Foundations.Operation<
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @summary("Update deployment")
-@route("/{projectName}/deployments/{deploymentName}")
+@route("/projects/{projectName}/deployments/{deploymentName}")
 @put
 @pollingOperation(getDeploymentStatus)
 op deployProject is Foundations.LongRunningOperation<
@@ -329,61 +239,24 @@ op deployProject is Foundations.LongRunningOperation<
 /**
  * Deletes a project deployment.
  */
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @summary("Delete deployment")
-@route("/{projectName}/deployments/{deploymentName}")
-@delete
 @pollingOperation(getDeploymentStatus)
-op deleteDeployment is Foundations.LongRunningOperation<
-  {
-    /**
-     * The project name.
-     */
-    @path
-    projectName: string;
-
-    /**
-     * The deployment name.
-     */
-    @path
-    deploymentName: string;
-  },
-  AcceptedResponse,
-  {},
-  ErrorResponse
+op deleteDeployment is languageOperations.LongRunningResourceDelete<
+  ProjectDeployment
 >;
 
 /**
  * Deletes a project deployment from the specified assigned resources.
  */
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+#suppress "@azure-tools/typespec-azure-core/casing-style"
 @summary("Delete deployment from resources")
-@route("/{projectName}/deployments/{deploymentName}/:delete-from-resources")
-@post
 @pollingOperation(getDeploymentDeleteFromResourcesStatus)
-op deleteDeploymentFromResources is Foundations.LongRunningOperation<
-  {
-    /**
-     * The project name.
-     */
-    @path
-    projectName: string;
-
-    /**
-     * The deployment name.
-     */
-    @path
-    deploymentName: string;
-
-    /**
-     * The options for deleting the deployment.
-     */
-    @body
-    body: DeleteDeploymentOptions;
-  },
-  AcceptedResponse,
-  {},
-  ErrorResponse
+op `delete-from-resources` is languageOperations.LongRunningResourceAction<
+  ProjectDeployment,
+  DeleteDeploymentOptions,
+  DeploymentJobState,
+  ErrorResponse,
+  {}
 >;
 
 /**
@@ -391,9 +264,9 @@ op deleteDeploymentFromResources is Foundations.LongRunningOperation<
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @summary("Get deployment deletion from resources status")
-@route("/{projectName}/deployments/{deploymentName}/delete-from-resources/jobs/{jobId}")
+@route("/projects/{projectName}/deployments/{deploymentName}/delete-from-resources/jobs/{jobId}")
 @get
-op getDeploymentDeleteFromResourcesStatus is Azure.Core.Foundations.Operation<
+op getDeploymentDeleteFromResourcesStatus is Foundations.Operation<
   {
     /**
      * The project name.
@@ -421,9 +294,9 @@ op getDeploymentDeleteFromResourcesStatus is Azure.Core.Foundations.Operation<
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @summary("Get deployment status")
-@route("/{projectName}/deployments/{deploymentName}/jobs/{jobId}")
+@route("/projects/{projectName}/deployments/{deploymentName}/jobs/{jobId}")
 @get
-op getDeploymentStatus is Azure.Core.Foundations.Operation<
+op getDeploymentStatus is Foundations.Operation<
   {
     /**
      * The project name.
@@ -451,7 +324,7 @@ op getDeploymentStatus is Azure.Core.Foundations.Operation<
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @summary("Swap deployments")
-@route("/{projectName}/deployments/:swap")
+@route("/projects/{projectName}/deployments/:swap")
 @post
 @pollingOperation(getSwapDeploymentsStatus)
 op swapDeployments is Foundations.LongRunningOperation<
@@ -478,9 +351,9 @@ op swapDeployments is Foundations.LongRunningOperation<
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @summary("Gets swap deployments status")
-@route("/{projectName}/deployments/swap/jobs/{jobId}")
+@route("/projects/{projectName}/deployments/swap/jobs/{jobId}")
 @get
-op getSwapDeploymentsStatus is Azure.Core.Foundations.Operation<
+op getSwapDeploymentsStatus is Foundations.Operation<
   {
     /**
      * The project name.
@@ -503,9 +376,9 @@ op getSwapDeploymentsStatus is Azure.Core.Foundations.Operation<
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @summary("Get export status")
-@route("/{projectName}/export/jobs/{jobId}")
+@route("/projects/{projectName}/export/jobs/{jobId}")
 @get
-op getExportStatus is Azure.Core.Foundations.Operation<
+op getExportStatus is Foundations.Operation<
   {
     /**
      * The project name.
@@ -527,9 +400,9 @@ op getExportStatus is Azure.Core.Foundations.Operation<
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @summary("Get export result")
-@route("/{projectName}/export/jobs/{jobId}/result")
+@route("/projects/{projectName}/export/jobs/{jobId}/result")
 @get
-op getExportResult is Azure.Core.Foundations.Operation<
+op getExportResult is Foundations.Operation<
   {
     /**
      * The project name.
@@ -551,9 +424,9 @@ op getExportResult is Azure.Core.Foundations.Operation<
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @summary("Get import status")
-@route("/{projectName}/import/jobs/{jobId}")
+@route("/projects/{projectName}/import/jobs/{jobId}")
 @get
-op getImportStatus is Azure.Core.Foundations.Operation<
+op getImportStatus is Foundations.Operation<
   {
     /**
      * The project name.
@@ -575,144 +448,53 @@ op getImportStatus is Azure.Core.Foundations.Operation<
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @summary("List trained models")
-@route("/{projectName}/models")
-@get
-op listTrainedModels is Azure.Core.Foundations.Operation<
-  {
-    /**
-     * The project name.
-     */
-    @path
-    projectName: string;
-
-    /**
-     * The number of trained models to be returned.
-     */
-    @query("top")
-    top?: int32;
-
-    /**
-     * The offset in the response.
-     */
-    @query("skip")
-    skip?: int32;
-
-    /**
-     * The maximum number of trained models per page.
-     */
-    @query("maxpagesize")
-    maxpagesize?: int32;
-  },
-  ProjectTrainedModels
+op listTrainedModels is languageOperations.ResourceList<
+  ProjectTrainedModel,
+  ListProjectsQueryParameters
 >;
 
 /**
  * Gets the details of a trained model.
  */
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @summary("Get trained model details")
-@route("/{projectName}/models/{trainedModelLabel}")
-@get
-op getTrainedModel is Azure.Core.Foundations.Operation<
-  {
-    /**
-     * The project name.
-     */
-    @path
-    projectName: string;
-
-    /**
-     * The trained model label.
-     */
-    @path
-    trainedModelLabel: string;
-  },
-  ProjectTrainedModel
->;
+op getTrainedModel is languageOperations.ResourceRead<ProjectTrainedModel>;
 
 /**
  * Deletes an existing trained model.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @summary("Delete trained model")
-@route("/{projectName}/models/{trainedModelLabel}")
-@delete
-op deleteTrainedModel is Azure.Core.Foundations.Operation<
-  {
-    /**
-     * The project name.
-     */
-    @path
-    projectName: string;
-
-    /**
-     * The trained model label.
-     */
-    @path
-    trainedModelLabel: string;
-  },
-  void
->;
+op deleteTrainedModel is languageOperations.ResourceDelete<ProjectTrainedModel>;
 
 /**
  * Triggers evaluation operation on a trained model.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @summary("Evaluate model")
-@route("/{projectName}/models/{trainedModelLabel}/:evaluate")
+//@route("/{projectName}/models/{trainedModelLabel}/:evaluate")
 @post
 @pollingOperation(getEvaluationStatus)
-op evaluateModel is Foundations.LongRunningOperation<
-  {
-    /**
-     * The project name.
-     */
-    @path
-    projectName: string;
-
-    /**
-     * The trained model label.
-     */
-    @path
-    trainedModelLabel: string;
-
-    /**
-     * The split kind and percentage for the testing dataset.
-     */
-    @body
-    body: EvaluationOnDemandOptions;
-  },
-  AcceptedResponse,
-  {},
-  ErrorResponse
+op evaluate is languageOperations.LongRunningResourceAction<
+  ProjectTrainedModel,
+  EvaluationOnDemandOptions,
+  EvaluationJobState,
+  ErrorResponse,
+  {}
 >;
 
 /**
  * Restores the snapshot of this trained model to be the current working directory
  * of the project.
  */
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+#suppress "@azure-tools/typespec-azure-core/casing-style"
 @summary("Load trained model snapshot to the working directory.")
-@route("/{projectName}/models/{trainedModelLabel}/:load-snapshot")
-@post
 @pollingOperation(getLoadSnapshotStatus)
-op loadSnapshot is Foundations.LongRunningOperation<
-  {
-    /**
-     * The project name.
-     */
-    @path
-    projectName: string;
-
-    /**
-     * The trained model label.
-     */
-    @path
-    trainedModelLabel: string;
-  },
-  AcceptedResponse,
+op `load-snapshot` is languageOperations.LongRunningResourceAction <
+  ProjectTrainedModel,
   {},
-  ErrorResponse
+  LoadSnapshotJobState,
+  ErrorResponse,
+  {}
 >;
 
 /**
@@ -720,9 +502,9 @@ op loadSnapshot is Foundations.LongRunningOperation<
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @summary("Get evaluation status")
-@route("/{projectName}/models/{trainedModelLabel}/evaluate/jobs/{jobId}")
+@route("/projects/{projectName}/models/{trainedModelLabel}/evaluate/jobs/{jobId}")
 @get
-op getEvaluationStatus is Azure.Core.Foundations.Operation<
+op getEvaluationStatus is Foundations.Operation<
   {
     /**
      * The project name.
@@ -751,9 +533,9 @@ op getEvaluationStatus is Azure.Core.Foundations.Operation<
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @summary("Get trained model evaluation result")
-@route("/{projectName}/models/{trainedModelLabel}/evaluation/result")
+@route("/projects/{projectName}/models/{trainedModelLabel}/evaluation/result")
 @get
-op getModelEvaluationResults is Azure.Core.Foundations.Operation<
+op getModelEvaluationResults is Foundations.Operation<
   {
     /**
      * The project name.
@@ -801,9 +583,9 @@ op getModelEvaluationResults is Azure.Core.Foundations.Operation<
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @summary("Get trained model evaluation summary")
-@route("/{projectName}/models/{trainedModelLabel}/evaluation/summary-result")
+@route("/projects/{projectName}/models/{trainedModelLabel}/evaluation/summary-result")
 @get
-op getModelEvaluationSummary is Azure.Core.Foundations.Operation<
+op getModelEvaluationSummary is Foundations.Operation<
   {
     /**
      * The project name.
@@ -825,9 +607,9 @@ op getModelEvaluationSummary is Azure.Core.Foundations.Operation<
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @summary("Get load snapshot status")
-@route("/{projectName}/models/{trainedModelLabel}/load-snapshot/jobs/{jobId}")
+@route("/projects/{projectName}/models/{trainedModelLabel}/load-snapshot/jobs/{jobId}")
 @get
-op getLoadSnapshotStatus is Azure.Core.Foundations.Operation<
+op getLoadSnapshotStatus is Foundations.Operation<
   {
     /**
      * The project name.
@@ -855,36 +637,10 @@ op getLoadSnapshotStatus is Azure.Core.Foundations.Operation<
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @summary("Lists deployment resources")
-@route("/{projectName}/resources")
-@get
-op listDeploymentResources is Azure.Core.Foundations.Operation<
-  {
-    /**
-     * The project name.
-     */
-    @path
-    projectName: string;
-
-    /**
-     * The number of deployments to be returned.
-     */
-    @query("top")
-    top?: int32;
-
-    /**
-     * The offset in the response.
-     */
-    @query("skip")
-    skip?: int32;
-
-    /**
-     * The maximum number of deployments per page.
-     */
-    @query("maxpagesize")
-    maxpagesize?: int32;
-  },
-  AssignedDeploymentResources
->;
+op listDeploymentResources is languageOperations.ResourceList<
+  AssignedDeploymentResource, 
+  ListProjectsQueryParameters
+  >;
 
 /**
  * Assign new Azure resources to a project to allow deploying new deployments to
@@ -895,7 +651,7 @@ op listDeploymentResources is Azure.Core.Foundations.Operation<
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @summary("Assign deployment resources")
-@route("/{projectName}/resources/:assign")
+@route("/projects/{projectName}/resources/:assign")
 @post
 @pollingOperation(getAssignDeploymentResourcesStatus)
 op assignDeploymentResources is Foundations.LongRunningOperation<
@@ -923,7 +679,7 @@ op assignDeploymentResources is Foundations.LongRunningOperation<
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @summary("Unassign deployment resources")
-@route("/{projectName}/resources/:unassign")
+@route("/projects/{projectName}/resources/:unassign")
 @post
 @pollingOperation(getUnassignDeploymentResourcesStatus)
 op unassignDeploymentResources is Foundations.LongRunningOperation<
@@ -950,9 +706,9 @@ op unassignDeploymentResources is Foundations.LongRunningOperation<
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @summary("Get assign deployment resources status")
-@route("/{projectName}/resources/assign/jobs/{jobId}")
+@route("/projects/{projectName}/resources/assign/jobs/{jobId}")
 @get
-op getAssignDeploymentResourcesStatus is Azure.Core.Foundations.Operation<
+op getAssignDeploymentResourcesStatus is Foundations.Operation<
   {
     /**
      * The project name.
@@ -974,9 +730,9 @@ op getAssignDeploymentResourcesStatus is Azure.Core.Foundations.Operation<
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @summary("Get unassign deployment resources status")
-@route("/{projectName}/resources/unassign/jobs/{jobId}")
+@route("/projects/{projectName}/resources/unassign/jobs/{jobId}")
 @get
-op getUnassignDeploymentResourcesStatus is Azure.Core.Foundations.Operation<
+op getUnassignDeploymentResourcesStatus is Foundations.Operation<
   {
     /**
      * The project name.
@@ -998,87 +754,33 @@ op getUnassignDeploymentResourcesStatus is Azure.Core.Foundations.Operation<
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @summary("List training jobs")
-@route("/{projectName}/train/jobs")
-@get
-op listTrainingJobs is Azure.Core.Foundations.Operation<
-  {
-    /**
-     * The project name.
-     */
-    @path
-    projectName: string;
-
-    /**
-     * The number of training jobs to be returned.
-     */
-    @query("top")
-    top?: int32;
-
-    /**
-     * The offset in the response.
-     */
-    @query("skip")
-    skip?: int32;
-
-    /**
-     * The maximum number of jobs per page.
-     */
-    @query("maxpagesize")
-    maxpagesize?: int32;
-  },
-  TrainingJobs
->;
+op listTrainingJobs is languageOperations.ResourceList<
+  TrainingJobState, 
+  ListProjectsQueryParameters
+  >;
 
 /**
  * Gets the status for a training job.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @summary("Get training status")
-@route("/{projectName}/train/jobs/{jobId}")
-@get
-op getTrainingStatus is Azure.Core.Foundations.Operation<
-  {
-    /**
-     * The project name.
-     */
-    @path
-    projectName: string;
-
-    /**
-     * The job ID.
-     */
-    @path
-    jobId: string;
-  },
-  TrainingJobState
->;
+op getTrainingStatus is languageOperations.ResourceRead<TrainingJobState>;
 
 /**
  * Triggers a cancellation for a running training job.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @summary("Cancel training")
-@route("/{projectName}/train/jobs/{jobId}/:cancel")
-@post
 @pollingOperation(getTrainingStatus)
-op cancelTrainingJob is Foundations.LongRunningOperation<
-  {
-    /**
-     * The project name.
-     */
-    @path
-    projectName: string;
-
-    /**
-     * The job ID.
-     */
-    @path
-    jobId: string;
-  },
-  AcceptedResponse,
+op cancel is languageOperations.LongRunningResourceAction <
+  TrainingJobState,
   {},
-  ErrorResponse
+  TrainingJobState,
+  ErrorResponse,
+  {}
 >;
+
+
 
 alias ListProjectsQueryParameters = ListQueryParametersTrait<{
   /** The number of projects to be returned. */
@@ -1110,9 +812,9 @@ op listProjects is languageOperations.ResourceList<
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @summary("Get project deletion status")
-@route("/global/deletion-jobs/{jobId}")
+@route("/projects/global/deletion-jobs/{jobId}")
 @get
-op getProjectDeletionStatus is Azure.Core.Foundations.Operation<
+op getProjectDeletionStatus is Foundations.Operation<
   {
     /**
      * The job ID.
@@ -1130,9 +832,9 @@ op getProjectDeletionStatus is Azure.Core.Foundations.Operation<
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @summary("Lists assigned resource deployments")
-@route("/global/deployments/resources")
+@route("/projects/global/deployments/resources")
 @get
-op listAssignedResourceDeployments is Azure.Core.Foundations.Operation<
+op listAssignedResourceDeployments is Foundations.Operation<
   {
     /**
      * The number of deployments to be returned.
@@ -1160,9 +862,9 @@ op listAssignedResourceDeployments is Azure.Core.Foundations.Operation<
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @summary("List supported languages")
-@route("/global/languages")
+@route("/projects/global/languages")
 @get
-op getSupportedLanguages is Azure.Core.Foundations.Operation<
+op getSupportedLanguages is Foundations.Operation<
   {
     /**
      * The project kind.
@@ -1197,9 +899,9 @@ op getSupportedLanguages is Azure.Core.Foundations.Operation<
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @summary("List supported prebuilt entities")
-@route("/global/prebuilt-entities")
+@route("/projects/global/prebuilt-entities")
 @get
-op getSupportedPrebuiltEntities is Azure.Core.Foundations.Operation<
+op getSupportedPrebuiltEntities is Foundations.Operation<
   {
     /**
      * The language to get supported prebuilt entities for. Required if multilingual
@@ -1242,9 +944,9 @@ op getSupportedPrebuiltEntities is Azure.Core.Foundations.Operation<
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @summary("List training config versions")
-@route("/global/training-config-versions")
+@route("/projects/global/training-config-versions")
 @get
-op listTrainingConfigVersions is Azure.Core.Foundations.Operation<
+op listTrainingConfigVersions is Foundations.Operation<
   {
     /**
      * The project kind.

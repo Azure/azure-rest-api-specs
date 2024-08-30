@@ -198,39 +198,45 @@ model ProjectMetadata {
   /**
    * Represents the project kind.
    */
+  @visibility("create", "read")
   projectKind: ProjectKind;
 
   /**
    * The project settings.
    */
+  @visibility("create", "read")
   settings?: ProjectSettings;
 
   /**
    * The storage container name in case of conversation summarization.
    */
+  @visibility("create", "read")
   storageInputContainerName?: string;
 
   /**
    * The new project name.
    */
   @key("projectName")
-  @visibility("read")
+  @visibility("create", "read")
   projectName: string;
 
   /**
    * Whether the project would be used for multiple languages or not.
    */
+  @visibility("create", "read")
   multilingual?: boolean;
 
   /**
    * The project description.
    */
+  @visibility("create", "read")
   description?: string;
 
   /**
    * The project language. This is BCP-47 representation of a language. For example,
    * use "en" for English, "en-gb" for English (UK), "es" for Spanish etc.
    */
+  @visibility("create", "read")
   language: string;
 }
 
@@ -491,6 +497,8 @@ model JobState {
   /**
    * The job ID.
    */
+  @key
+  @visibility("read")
   jobId: string;
 
   /**
@@ -560,10 +568,14 @@ model ProjectDeployments {
 /**
  * Represents a project deployment.
  */
+@resource("deployments")
+@parentResource(ProjectMetadata)
 model ProjectDeployment {
   /**
    * Represents deployment name.
    */
+  @key("deploymentName")
+  @visibility("read")
   deploymentName: string;
 
   /**
@@ -704,11 +716,15 @@ model ProjectTrainedModels {
 /**
  * Represents a trained model.
  */
+@resource("models")
+@parentResource(ProjectMetadata)
 model ProjectTrainedModel {
   /**
    * The trained model label.
    */
-  label: string;
+  @key
+  @visibility("read")
+  trainedModelLabel: string;  //label: string;
 
   /**
    * The model ID.
@@ -1146,10 +1162,14 @@ model AssignedDeploymentResources {
 /**
  * Represents the assigned deployment resource.
  */
+@resource("resources")
+@parentResource(ProjectMetadata)
 model AssignedDeploymentResource {
   /**
    * The resource ID.
    */
+  @key
+  @visibility("read")
   azureResourceId: string;
 
   /**
@@ -1223,6 +1243,8 @@ model TrainingJobs {
 /**
  * Represents the state of a training job.
  */
+@resource("train/jobs")
+@parentResource(ProjectMetadata)
 model TrainingJobState {
 
   ...JobState;
@@ -1316,6 +1338,7 @@ model ProjectsMetadata {
 /**
  * Represents the state of a project deletion job.
  */
+@resource ("/projects/global/deletion-jobs/{jobId}")
 model ProjectDeletionJobState {
   ...JobState;
 }
@@ -1332,7 +1355,7 @@ model AssignedResourceDeploymentsMetadata {
   /**
    * The next page link.
    */
-  nextLink: string;
+  nextLink ?: string;
 }
 
 /**
@@ -1383,7 +1406,7 @@ model SupportedLanguages {
   /**
    * The next page link.
    */
-  nextLink: string;
+  nextLink ?: string;
 }
 
 /**
@@ -1414,7 +1437,7 @@ model PrebuiltEntities {
   /**
    * The next page link.
    */
-  nextLink: string;
+  nextLink ?: string;
 }
 
 /**
@@ -1449,7 +1472,7 @@ model TrainingConfigVersions {
   /**
    * The next page link.
    */
-  nextLink: string;
+  nextLink ?: string;
 }
 
 /**
