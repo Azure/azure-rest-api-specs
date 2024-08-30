@@ -4,7 +4,7 @@ import "@typespec/versioning";
 using TypeSpec.Http;
 using TypeSpec.Versioning;
 
-namespace Azure.AI.OpenAI.Assistants;
+namespace Azure.AI.Assistants;
 
 //
 // Tool inputs -- definitions used before model evaluation to configure assistants, threads, and messages

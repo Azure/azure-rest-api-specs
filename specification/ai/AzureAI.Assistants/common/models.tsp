@@ -4,7 +4,7 @@ import "@typespec/versioning";
 using TypeSpec.Http;
 using TypeSpec.Versioning;
 
-namespace Azure.AI.OpenAI.Assistants;
+namespace Azure.AI.Assistants;
 
 @doc("The possible values for roles attributed to messages in a thread.")
 @added(ServiceApiVersions.v2024_02_15_preview)

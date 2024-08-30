@@ -21,11 +21,6 @@ namespace Azure.AI {
 
 }
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "OpenAI is a case-sensitive name"
-namespace Azure.AI.OpenAI {
-
-}
-
 @useAuth(
   ApiKeyAuth<ApiKeyLocation.header, "api-key"> | OAuth2Auth<[
     {
@@ -36,19 +31,19 @@ namespace Azure.AI.OpenAI {
   ]>
 )
 @service({
-  title: "Azure OpenAI",
+  title: "Azure AI",
 })
 @server(
   "{endpoint}",
-  "Azure OpenAI APIs for Assistants.",
+  "Azure APIs for Assistants.",
   {
     @doc("An OpenAI endpoint supporting assistants functionality.")
     endpoint: string,
   }
 )
 @versioned(ServiceApiVersions)
-@doc("Azure OpenAI APIs for Assistants.")
-namespace Azure.AI.OpenAI.Assistants {
+@doc("Azure APIs for Assistants.")
+namespace Azure.AI.Assistants {
   @doc("The known set of supported API versions.")
   enum ServiceApiVersions {
     @useDependency(Azure.Core.Versions.v1_0_Preview_2)

@@ -7,7 +7,7 @@ using TypeSpec.Rest;
 using TypeSpec.Http;
 using TypeSpec.Versioning;
 
-namespace Azure.AI.OpenAI.Assistants;
+namespace Azure.AI.Assistants;
 
 /**
  * Creates a new assistant.

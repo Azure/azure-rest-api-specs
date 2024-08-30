@@ -9,13 +9,8 @@ namespace Azure.AI {
 
 }
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "OpenAI is a case-sensitive name"
-namespace Azure.AI.OpenAI {
-
-}
-
-@TypeSpec.Versioning.versioned(Azure.AI.OpenAI.Assistants.ServiceApiVersions)
-namespace Azure.AI.OpenAI.Assistants {
+@TypeSpec.Versioning.versioned(Azure.AI.Assistants.ServiceApiVersions)
+namespace Azure.AI.Assistants {
   // Trivial response value containers should treat these containers as internal details and instead surface a shimmed
   // operation that exposes the underlying data directly.
   @@clientName(AssistantDeletionStatus,
@@ -230,6 +225,9 @@ namespace Azure.AI.OpenAI.Assistants {
   // From https://platform.openai.com/docs/assistants/how-it-works
   // "Note that deleting an AssistantFile doesn’t delete the original File object, it simply deletes the association
   // between that File and the Assistant."
+
+  op createAssistant(...CreateAssistantOptions): Assistant;
+  @@override(Azure.AI.Assistants.createAssistant, Azure.AI.Assistants.createAssistant, "python")
 
   @@clientName(createAssistant::parameters.body,
     "assistantCreationOptions",

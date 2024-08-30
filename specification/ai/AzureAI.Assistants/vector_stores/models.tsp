@@ -1,4 +1,4 @@
-namespace Azure.AI.OpenAI.Assistants;
+namespace Azure.AI.Assistants;
 
 using TypeSpec.Versioning;
 

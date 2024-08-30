@@ -3,7 +3,7 @@ import "@typespec/versioning";
 import "../tools/models.tsp";
 import "../main.tsp";
 
-namespace Azure.AI.OpenAI.Assistants;
+namespace Azure.AI.Assistants;
 
 using TypeSpec.Versioning;
 

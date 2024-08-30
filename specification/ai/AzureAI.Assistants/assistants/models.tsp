@@ -5,7 +5,7 @@ import "../tools/models.tsp";
 import "../tools/tool_resources.tsp";
 import "../main.tsp";
 
-namespace Azure.AI.OpenAI.Assistants;
+namespace Azure.AI.Assistants;
 
 using TypeSpec.Http;
 using TypeSpec.Versioning;

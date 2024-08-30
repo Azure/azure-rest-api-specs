@@ -7,7 +7,7 @@ import "../messages/models.tsp";
 using TypeSpec.Http;
 using TypeSpec.Versioning;
 
-namespace Azure.AI.OpenAI.Assistants;
+namespace Azure.AI.Assistants;
 
 @doc("Information about a single thread associated with an assistant.")
 @added(ServiceApiVersions.v2024_02_15_preview)

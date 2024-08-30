@@ -13,7 +13,7 @@ using TypeSpec.Versioning;
 
 using Azure.Core;
 
-namespace Azure.AI.OpenAI.Assistants;
+namespace Azure.AI.Assistants;
 
 /**
  * Creates a new message on a specified thread.

@@ -4,7 +4,7 @@ import "@typespec/versioning";
 using TypeSpec.Http;
 using TypeSpec.Versioning;
 
-namespace Azure.AI.OpenAI.Assistants;
+namespace Azure.AI.Assistants;
 
 /** Options to configure a vector store static chunking strategy. */
 @added(ServiceApiVersions.v2024_07_01_preview)
