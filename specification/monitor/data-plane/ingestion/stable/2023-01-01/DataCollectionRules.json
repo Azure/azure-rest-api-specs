@@ -20,7 +20,6 @@
       {
         "name": "endpoint",
         "in": "path",
-        "description": "The Data Collection Endpoint for the Data Collection Rule. For example, https://dce-name.eastus-2.ingest.monitor.azure.com",
         "required": true,
         "type": "string",
         "format": "uri",
@@ -98,7 +97,8 @@
               "items": {
                 "type": "object",
                 "additionalProperties": {}
-              }
+              },
+              "x-ms-identifiers": []
             }
           }
         ],
@@ -149,7 +149,8 @@
           "description": "An array of details about specific errors that led to this reported error.",
           "items": {
             "$ref": "#/definitions/Azure.Core.Foundations.Error"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "innererror": {
           "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
@@ -176,7 +177,7 @@
     },
     "Azure.Core.Foundations.InnerError": {
       "type": "object",
-      "description": "An object containing more specific information about the error. As per Azure REST API guidelines - https://aka.ms/AzureRestApiGuidelines#handling-errors.",
+      "description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.",
       "properties": {
         "code": {
           "type": "string",
