@@ -2,7 +2,6 @@ namespace Microsoft.AVS;
 
 using Azure.ClientGenerator.Core;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 using TypeSpec.Rest;
@@ -40,3 +39,61 @@ interface Datastores {
   "x-ms-client-name",
   "datastore"
 );
+
+@doc("datastore provisioning state")
+union DatastoreProvisioningState {
+  string,
+  ResourceProvisioningState,
+
+  @doc("is cancelled")
+  Cancelled: "Cancelled",
+
+  @doc("is pending")
+  Pending: "Pending",
+
+  @doc("is creating")
+  Creating: "Creating",
+
+  @doc("is updating")
+  Updating: "Updating",
+
+  @doc("is deleting")
+  Deleting: "Deleting",
+}
+
+@doc("mount option")
+union MountOptionEnum {
+  string,
+
+  @doc("is mount")
+  MOUNT: "MOUNT",
+
+  @doc("is attach")
+  ATTACH: "ATTACH",
+}
+
+@doc("datastore status")
+union DatastoreStatus {
+  string,
+
+  @doc("is unknown")
+  Unknown: "Unknown",
+
+  @doc("is accessible")
+  Accessible: "Accessible",
+
+  @doc("is inaccessible")
+  Inaccessible: "Inaccessible",
+
+  @doc("is attached")
+  Attached: "Attached",
+
+  @doc("is detached")
+  Detached: "Detached",
+
+  @doc("is lost communication")
+  LostCommunication: "LostCommunication",
+
+  @doc("is dead or error")
+  DeadOrError: "DeadOrError",
+}

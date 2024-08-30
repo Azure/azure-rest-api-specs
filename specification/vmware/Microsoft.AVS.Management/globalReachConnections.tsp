@@ -2,7 +2,6 @@ namespace Microsoft.AVS;
 
 using Azure.ClientGenerator.Core;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 using TypeSpec.Rest;
@@ -42,3 +41,26 @@ interface GlobalReachConnections {
   "x-ms-client-name",
   "globalReachConnection"
 );
+
+@doc("Global Reach Connection provisioning state")
+union GlobalReachConnectionProvisioningState {
+  string,
+  ResourceProvisioningState,
+
+  @doc("is updating")
+  Updating: "Updating",
+}
+
+@doc("Global Reach Connection status")
+union GlobalReachConnectionStatus {
+  string,
+
+  @doc("is connected")
+  Connected: "Connected",
+
+  @doc("is connecting")
+  Connecting: "Connecting",
+
+  @doc("is disconnected")
+  Disconnected: "Disconnected",
+}

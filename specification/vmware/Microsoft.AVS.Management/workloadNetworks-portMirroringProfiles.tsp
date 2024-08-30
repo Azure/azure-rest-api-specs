@@ -2,7 +2,6 @@ namespace Microsoft.AVS;
 
 using Azure.ClientGenerator.Core;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 using TypeSpec.Rest;
@@ -56,7 +55,7 @@ interface WorkloadNetworkPortMirroringProfiles {
     }
   )
   delete(
-    ...BaseParameters<WorkloadNetworkPortMirroring>,
+    ...Foundations.BaseParameters<WorkloadNetworkPortMirroring>,
     ...PortMirroringProfileParameter,
     ...PrivateCloudNameParameter,
   ):
@@ -89,3 +88,34 @@ interface WorkloadNetworkPortMirroringProfiles {
   "x-ms-client-name",
   "workloadNetworkPortMirroring"
 );
+
+@doc("Port Mirroring Direction")
+union PortMirroringDirectionEnum {
+  string,
+
+  @doc("is ingress")
+  INGRESS: "INGRESS",
+
+  @doc("is egress")
+  EGRESS: "EGRESS",
+
+  @doc("is bidirectional")
+  BIDIRECTIONAL: "BIDIRECTIONAL",
+}
+
+@doc("Port Mirroring status")
+union PortMirroringStatusEnum {
+  string,
+
+  @doc("is success")
+  SUCCESS: "SUCCESS",
+
+  @doc("is failure")
+  FAILURE: "FAILURE",
+}
+
+@doc("Workload Network Port Mirroring provisioning state")
+union WorkloadNetworkPortMirroringProvisioningState {
+  string,
+  WorkloadNetworkProvisioningState,
+}

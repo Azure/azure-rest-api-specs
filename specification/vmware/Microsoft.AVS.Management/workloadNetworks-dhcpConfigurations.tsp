@@ -2,7 +2,6 @@ namespace Microsoft.AVS;
 
 using Azure.ClientGenerator.Core;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 using TypeSpec.Rest;
@@ -26,7 +25,7 @@ interface WorkloadNetworkDhcpConfigurations {
   @doc("Get a {name}", WorkloadNetworkDhcp)
   @get
   get(
-    ...BaseParameters<WorkloadNetworkDhcp>,
+    ...Foundations.BaseParameters<WorkloadNetworkDhcp>,
     ...DhcpIdParameter,
     ...PrivateCloudNameParameter,
   ): ArmResponse<WorkloadNetworkDhcp> | ErrorResponse;
@@ -87,3 +86,9 @@ interface WorkloadNetworkDhcpConfigurations {
   "x-ms-client-name",
   "workloadNetworkDhcp"
 );
+
+@doc("Workload Network DHCP provisioning state")
+union WorkloadNetworkDhcpProvisioningState {
+  string,
+  WorkloadNetworkProvisioningState,
+}

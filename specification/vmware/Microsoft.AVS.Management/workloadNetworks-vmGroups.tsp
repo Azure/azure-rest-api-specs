@@ -2,7 +2,6 @@ namespace Microsoft.AVS;
 
 using Azure.ClientGenerator.Core;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 using TypeSpec.Rest;
@@ -53,7 +52,7 @@ interface WorkloadNetworkVmGroups {
     }
   )
   delete(
-    ...BaseParameters<WorkloadNetworkVMGroup>,
+    ...Foundations.BaseParameters<WorkloadNetworkVMGroup>,
     ...VmGroupIdParameter,
     ...PrivateCloudNameParameter,
   ):
@@ -87,3 +86,20 @@ interface WorkloadNetworkVmGroups {
   "x-ms-client-name",
   "workloadNetworkVMGroup"
 );
+
+@doc("VM group status")
+union VMGroupStatusEnum {
+  string,
+
+  @doc("is success")
+  SUCCESS: "SUCCESS",
+
+  @doc("is failure")
+  FAILURE: "FAILURE",
+}
+
+@doc("Workload Network VM Group provisioning state")
+union WorkloadNetworkVMGroupProvisioningState {
+  string,
+  WorkloadNetworkProvisioningState,
+}

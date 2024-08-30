@@ -2,7 +2,6 @@ namespace Microsoft.AVS;
 
 using Azure.ClientGenerator.Core;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 using TypeSpec.Rest;
@@ -73,3 +72,18 @@ interface Clusters {
   "cluster"
 );
 @@clientName(Clusters.createOrUpdate::parameters.resource, "cluster");
+
+@doc("Cluster provisioning state")
+union ClusterProvisioningState {
+  string,
+  ResourceProvisioningState,
+
+  @doc("is cancelled")
+  Cancelled: "Cancelled",
+
+  @doc("is deleting")
+  Deleting: "Deleting",
+
+  @doc("is updating")
+  Updating: "Updating",
+}

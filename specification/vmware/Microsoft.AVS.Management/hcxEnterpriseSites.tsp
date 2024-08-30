@@ -2,7 +2,6 @@ namespace Microsoft.AVS;
 
 using Azure.ClientGenerator.Core;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 using TypeSpec.Rest;
@@ -36,38 +35,19 @@ interface HcxEnterpriseSites {
   "hcxEnterpriseSite"
 );
 
-@armResourceOperations
-interface Authorizations {
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
-  @operationId("Authorizations_List")
-  list is ArmResourceListByParent<
-    ExpressRouteAuthorization,
-    Response = ArmResponse<ResourceList<ExpressRouteAuthorization>>
-  >;
+@doc("HCX Enterprise Site status")
+union HcxEnterpriseSiteStatus {
+  string,
 
-  get is ArmResourceRead<ExpressRouteAuthorization>;
+  @doc("is available")
+  Available: "Available",
 
-  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "MUST REMOVE AT NEXT API VERSION UPDATE"
-  @Azure.Core.useFinalStateVia("azure-async-operation")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<
-    ExpressRouteAuthorization,
-    BaseParameters<PrivateCloud>,
-    LroHeaders = Azure.Core.Foundations.RetryAfterHeader
-  >;
+  @doc("is consumed")
+  Consumed: "Consumed",
 
-  #suppress "deprecated"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes"
-  delete is ArmResourceDeleteAsync<ExpressRouteAuthorization>;
+  @doc("is deactivated")
+  Deactivated: "Deactivated",
+
+  @doc("is deleted")
+  Deleted: "Deleted",
 }
-
-@@encodedName(Authorizations.createOrUpdate::parameters.resource,
-  "application/json",
-  "authorization"
-);
-@@clientName(Authorizations.createOrUpdate::parameters.resource,
-  "authorization"
-);
-@@OpenAPI.extension(Authorizations.createOrUpdate::parameters.resource,
-  "x-ms-client-name",
-  "authorization"
-);

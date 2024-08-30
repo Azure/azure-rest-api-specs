@@ -2,7 +2,6 @@ namespace Microsoft.AVS;
 
 using Azure.ClientGenerator.Core;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 using TypeSpec.Rest;
@@ -90,3 +89,101 @@ interface PrivateClouds {
   "privateCloud"
 );
 @@clientName(PrivateClouds.createOrUpdate::parameters.resource, "privateCloud");
+
+@doc("private cloud provisioning state")
+union PrivateCloudProvisioningState {
+  string,
+  ResourceProvisioningState,
+
+  @doc("is cancelled")
+  Cancelled: "Cancelled",
+
+  @doc("is pending")
+  Pending: "Pending",
+
+  @doc("is building")
+  Building: "Building",
+
+  @doc("is deleting")
+  Deleting: "Deleting",
+
+  @doc("is updating")
+  Updating: "Updating",
+}
+
+@doc("NSX public IP quota raised")
+union NsxPublicIpQuotaRaisedEnum {
+  string,
+
+  @doc("is enabled")
+  Enabled: "Enabled",
+
+  @doc("is disabled")
+  Disabled: "Disabled",
+}
+
+@doc("Whether internet is enabled or disabled")
+union InternetEnum {
+  string,
+
+  @doc("is enabled")
+  Enabled: "Enabled",
+
+  @doc("is disabled")
+  Disabled: "Disabled",
+}
+
+@doc("Whether SSL is enabled or disabled")
+union SslEnum {
+  string,
+
+  @doc("is enabled")
+  Enabled: "Enabled",
+
+  @doc("is disabled")
+  Disabled: "Disabled",
+}
+
+@doc("Whether the private clouds is available in a single zone or two zones")
+union AvailabilityStrategy {
+  string,
+
+  @doc("in single zone")
+  SingleZone: "SingleZone",
+
+  @doc("in two zones")
+  DualZone: "DualZone",
+}
+
+@doc("Whether encryption is enabled or disabled")
+union EncryptionState {
+  string,
+
+  @doc("is enabled")
+  Enabled: "Enabled",
+
+  @doc("is disabled")
+  Disabled: "Disabled",
+}
+
+@doc("Whether the the encryption key is connected or access denied")
+union EncryptionKeyStatus {
+  string,
+
+  @doc("is connected")
+  Connected: "Connected",
+
+  @doc("is access denied")
+  AccessDenied: "AccessDenied",
+}
+
+@doc("Whether the encryption version is fixed or auto-detected")
+union EncryptionVersionType {
+  string,
+
+  @doc("is fixed")
+  Fixed: "Fixed",
+
+  @doc("is auto-detected")
+  AutoDetected: "AutoDetected",
+}

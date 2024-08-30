@@ -2,7 +2,6 @@ namespace Microsoft.AVS;
 
 using Azure.ClientGenerator.Core;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 using TypeSpec.Rest;
@@ -41,7 +40,7 @@ model ResourceList<
 op ArmResourceActionSyncNoRequestBody<
   TResource extends Azure.ResourceManager.Foundations.Resource,
   TResponse extends TypeSpec.Reflection.Model,
-  TBaseParameters = BaseParameters<TResource>
+  TBaseParameters = Foundations.BaseParameters<TResource>
 >(
   ...ResourceInstanceParameters<TResource, TBaseParameters>,
 ): ArmResponse<TResponse> | ErrorResponse;
@@ -51,7 +50,7 @@ op ArmResourceActionSyncNoRequestBody<
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next update"
 op ArmResourceActionNoContentAsyncNoRequestBody<
   TResource extends Azure.ResourceManager.Foundations.Resource,
-  TBaseParameters extends TypeSpec.Reflection.Model = BaseParameters<TResource>
+  TBaseParameters extends TypeSpec.Reflection.Model = Foundations.BaseParameters<TResource>
 > is ArmResourceActionAsyncBaseNoRequestBody<
   TResource,
   ArmAcceptedLroResponse | ArmNoContentResponse<"Action completed successfully.">,

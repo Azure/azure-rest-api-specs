@@ -2,7 +2,6 @@ namespace Microsoft.AVS;
 
 using Azure.ClientGenerator.Core;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 using TypeSpec.Rest;
@@ -66,3 +65,20 @@ interface WorkloadNetworkSegments {
   "x-ms-client-name",
   "workloadNetworkSegment"
 );
+
+@doc("Segment status")
+union SegmentStatusEnum {
+  string,
+
+  @doc("is success")
+  SUCCESS: "SUCCESS",
+
+  @doc("is failure")
+  FAILURE: "FAILURE",
+}
+
+@doc("Workload Network Segment provisioning state")
+union WorkloadNetworkSegmentProvisioningState {
+  string,
+  WorkloadNetworkProvisioningState,
+}
