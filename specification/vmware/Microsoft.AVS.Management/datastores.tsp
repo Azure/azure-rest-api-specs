@@ -154,13 +154,6 @@ model DiskPoolVolume {
   path?: string;
 }
 
-scalar ClusterResourceId
-  extends Azure.Core.armResourceIdentifier<[
-    {
-      type: "Microsoft.ContainerService/managedClusters",
-    }
-  ]>;
-
 @doc("An Elastic SAN volume from Microsoft.ElasticSan provider")
 model ElasticSanVolume {
   @doc("Azure resource ID of the Elastic SAN Volume")
