@@ -983,8 +983,8 @@
           "Databases",
           "AccessPolicyAssignments"
         ],
-        "operationId": "AccessPolicyAssignment_Create",
-        "description": "Creates access policy assignment for database",
+        "operationId": "AccessPolicyAssignment_CreateUpdate",
+        "description": "Creates/Updates a particular access policy assignment for a database",
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
           "final-state-via": "original-uri"
@@ -1165,7 +1165,7 @@
           "AccessPolicyAssignments"
         ],
         "operationId": "AccessPolicyAssignment_List",
-        "description": "Gets all databases in the specified Redis Enterprise cluster.",
+        "description": "Gets all access policy assignments..",
         "x-ms-examples": {
           "RedisEnterpriseAccessPolicyAssignmentList": {
             "$ref": "./examples/RedisEnterpriseAccessPolicyAssignmentsList.json"
@@ -2269,13 +2269,8 @@
         },
         "accessPolicyName": {
           "type": "string",
-          "description": "Name of access policy under specific access policy assignment. Only default policy is supported.",
-          "default": "default",
-          "pattern": "^([a-zA-Z0-9][a-zA-Z0-9-]*[a-zA-Z0-9]|[a-zA-Z0-9])$",
-          "x-ms-mutability": [
-            "read",
-            "update"
-          ]
+          "description": "Name of access policy under specific access policy assignment. Only \"default\" policy is supported for now.",
+          "pattern": "^([a-zA-Z0-9][a-zA-Z0-9-]*[a-zA-Z0-9]|[a-zA-Z0-9])$"
         },
         "user": {
           "type": "object",
@@ -2290,7 +2285,8 @@
         }
       },
       "required": [
-        "user"
+        "user",
+		"accessPolicyName"
       ]
     },
     "AccessPolicyAssignment": {
