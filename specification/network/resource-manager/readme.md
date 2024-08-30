@@ -139,7 +139,7 @@ suppressions:
   - code: RequiredReadOnlySystemData
     from: virtualWan.json
     where:
-    - $.paths.["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/vpnGateways/{gatewayName}/vpnConnections/{connectionName}/vpnLinkConnections/{linkConnectionName}/sharedKeys/default"]
+    - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/vpnGateways/{gatewayName}/vpnConnections/{connectionName}/vpnLinkConnections/{linkConnectionName}/sharedKeys/default"]
     reason:  We do not yet support system data. 
   - code: ParameterNotUsingCommonTypes
     from: virtualWan.json
@@ -169,7 +169,7 @@ suppressions:
   - code: ParameterNotUsingCommonTypes
     from: virtualWan.json
     where:
-    - $.paths.["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/vpnGateways/{gatewayName}/vpnConnections/{connectionName}/vpnLinkConnections/{linkConnectionName}/sharedKeys/default/listSharedKey"]
+    - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/vpnGateways/{gatewayName}/vpnConnections/{connectionName}/vpnLinkConnections/{linkConnectionName}/sharedKeys/default/listSharedKey"]
     reason:  We are define the resourceGroupName is our swagger without using common types to be consistent with all other parameters we defined in the swagger. 
   - code: AllProxyResourcesShouldHaveDelete
     from: virtualWan.json
