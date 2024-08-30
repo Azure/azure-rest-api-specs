@@ -55,7 +55,7 @@ interface SessionResourceFiles {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" ""
   @doc("Get the content of the file.")
   @get
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/sessionPools/{sessionPoolName}/files/content/{filename}")
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/sessionPools/{sessionPoolName}/files/{filename}/content")
   getFileContent is Foundations.Operation<
     {
       ...SubscriptionIdParameter;
