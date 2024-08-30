@@ -25,7 +25,7 @@ op createAssistant(
    * The request details to use when creating a new assistant.
    */
   @bodyRoot
-  body: AssistantCreationOptions,
+  assistantCreationOptions: AssistantCreationOptions,
 ): Assistant;
 
 /**

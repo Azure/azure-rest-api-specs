@@ -229,10 +229,11 @@ namespace Azure.AI.Assistants {
   op createAssistant(...AssistantCreationOptions): Assistant;
   @@override(Azure.AI.Assistants.createAssistant, Azure.AI.Assistants.createAssistant, "python");
 
-  @@clientName(createAssistant::parameters.body,
-    "assistantCreationOptions",
-    "java"
-  );
+  // @@clientName(createAssistant::parameters.body,
+  //  "assistantCreationOptions",
+  //  "java"
+  //);
+  
   @@clientName(updateAssistant::parameters.body,
     "updateAssistantOptions",
     "java"
