@@ -109,6 +109,11 @@ model Resource {
  */
 model FileSystemResourceUpdate {
   /**
+   * The managed service identities assigned to this resource.
+   */
+  identity?: Azure.ResourceManager.Foundations.ManagedServiceIdentity;
+
+  /**
    * Resource tags.
    */
   tags?: Record<string>;
@@ -117,11 +122,6 @@ model FileSystemResourceUpdate {
    * The updatable properties of the FileSystemResource.
    */
   properties?: FileSystemResourceUpdateProperties;
-
-  /**
-   * The managed service identities assigned to this resource.
-   */
-  ...ManagedServiceIdentityProperty;
 }
 
 /**

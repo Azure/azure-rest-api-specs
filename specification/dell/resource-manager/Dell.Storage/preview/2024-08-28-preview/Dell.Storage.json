@@ -657,6 +657,10 @@
       "type": "object",
       "description": "The type used for update operations of the FileSystemResource.",
       "properties": {
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The managed service identities assigned to this resource."
+        },
         "tags": {
           "type": "object",
           "description": "Resource tags.",
@@ -667,10 +671,6 @@
         "properties": {
           "$ref": "#/definitions/LiftrBase.Storage.FileSystemResourceUpdateProperties",
           "description": "The updatable properties of the FileSystemResource."
-        },
-        "identity": {
-          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
-          "description": "The managed service identities assigned to this resource."
         }
       }
     },
