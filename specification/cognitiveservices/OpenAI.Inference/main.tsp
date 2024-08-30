@@ -10,6 +10,7 @@ import "./routes/completions.tsp";
 import "./routes/images.tsp";
 import "./routes/embeddings.tsp";
 import "./routes/files.tsp";
+import "./routes/uploads.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Versioning;

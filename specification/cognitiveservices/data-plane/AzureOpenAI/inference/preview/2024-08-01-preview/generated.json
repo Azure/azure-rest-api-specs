@@ -1027,6 +1027,119 @@
           }
         }
       }
+    },
+    "/uploads": {
+      "post": {
+        "operationId": "CreateUpload",
+        "description": "Creates an intermediate Upload object that you can add Parts to. Currently, an Upload can accept at most 8 GB in total and expires after an hour after you create it.\n\nOnce you complete the Upload, we will create a File object that contains all the parts you uploaded. This File is usable in the rest of our platform as a regular File object.\n\nFor certain purposes, the correct mime_type must be specified. Please refer to documentation for the supported MIME types for your use case.\n\nFor guidance on the proper filename extensions for each purpose, please follow the documentation on creating a File.",
+        "parameters": [
+          {
+            "name": "requestBody",
+            "in": "body",
+            "description": "The request body for the operation options.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CreateUploadRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Upload"
+            }
+          }
+        }
+      }
+    },
+    "/uploads/{upload_id}/cancel": {
+      "post": {
+        "operationId": "CancelUpload",
+        "description": "Cancels the Upload. No Parts may be added after an Upload is cancelled.",
+        "parameters": [
+          {
+            "name": "upload_id",
+            "in": "path",
+            "description": "The ID of the upload associated with this operation.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Upload"
+            }
+          }
+        }
+      }
+    },
+    "/uploads/{upload_id}/complete": {
+      "post": {
+        "operationId": "CompleteUpload",
+        "description": "Completes the Upload.\n\nWithin the returned Upload object, there is a nested File object that is ready to use in the rest of the platform.\n\nYou can specify the order of the Parts by passing in an ordered list of the Part IDs.\n\nThe number of bytes uploaded upon completion must match the number of bytes initially specified when creating the Upload object. No Parts may be added after an Upload is completed.",
+        "parameters": [
+          {
+            "name": "upload_id",
+            "in": "path",
+            "description": "The ID of the upload associated with this operation.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "requestBody",
+            "in": "body",
+            "description": "The request body for the completion operation.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CompleteUploadRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Upload"
+            }
+          }
+        }
+      }
+    },
+    "/uploads/{upload_id}/parts": {
+      "post": {
+        "operationId": "AddUploadPart",
+        "description": "Adds a Part to an Upload object. A Part represents a chunk of bytes from the file you are trying to upload.\n\nEach Part can be at most 64 MB, and you can add Parts until you hit the Upload maximum of 8 GB.\n\nIt is possible to add multiple Parts in parallel. You can decide the intended order of the Parts when you complete the Upload.",
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "parameters": [
+          {
+            "name": "upload_id",
+            "in": "path",
+            "description": "The ID of the upload associated with this operation.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "data",
+            "in": "formData",
+            "description": "The chunk of bytes for this Part.",
+            "required": true,
+            "type": "file"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/UploadPart"
+            }
+          }
+        }
+      }
     }
   },
   "x-ms-paths": {
@@ -1329,6 +1442,20 @@
     }
   },
   "definitions": {
+    "AddUploadPartRequest": {
+      "type": "object",
+      "description": "The multipart/form-data request body of a data part addition request for an upload.",
+      "properties": {
+        "data": {
+          "type": "string",
+          "format": "byte",
+          "description": "The chunk of bytes for this Part."
+        }
+      },
+      "required": [
+        "data"
+      ]
+    },
     "AudioTaskLabel": {
       "type": "string",
       "description": "Defines the possible descriptors for available audio operation responses.",
@@ -3588,6 +3715,26 @@
         "finish_reason"
       ]
     },
+    "CompleteUploadRequest": {
+      "type": "object",
+      "description": "The request body of an upload completion request.",
+      "properties": {
+        "part_ids": {
+          "type": "array",
+          "description": "The ordered list of Part IDs.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "md5": {
+          "type": "string",
+          "description": "The optional md5 checksum for the file contents to verify if the bytes uploaded matches what you expect."
+        }
+      },
+      "required": [
+        "part_ids"
+      ]
+    },
     "Completions": {
       "type": "object",
       "description": "Representation of the response data from a completions request.\nCompletions support a wide variety of tasks and generate text that continues from or \"completes\"\nprovided prompt data.",
@@ -4100,6 +4247,44 @@
           }
         ]
       }
+    },
+    "CreateUploadRequest": {
+      "type": "object",
+      "description": "The request body of an upload creation operation.",
+      "properties": {
+        "filename": {
+          "type": "string",
+          "description": "The name of the file to upload."
+        },
+        "purpose": {
+          "type": "string",
+          "description": "The intended purpose of the uploaded file.\n\nSee the [documentation on File purposes](/docs/api-reference/files/create#files-create-purpose).",
+          "enum": [
+            "assistants",
+            "batch",
+            "fine-tune",
+            "vision"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true
+          }
+        },
+        "bytes": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of bytes in the file you are uploading."
+        },
+        "mime_type": {
+          "type": "string",
+          "description": "The MIME type of the file.\n\nThis must fall within the supported MIME types for your file purpose. See the supported MIME types for assistants and vision."
+        }
+      },
+      "required": [
+        "filename",
+        "purpose",
+        "bytes",
+        "mime_type"
+      ]
     },
     "ElasticsearchChatExtensionConfiguration": {
       "type": "object",
@@ -5761,6 +5946,116 @@
           }
         ]
       }
+    },
+    "Upload": {
+      "type": "object",
+      "description": "The Upload object can accept byte chunks in the form of Parts.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The Upload unique identifier, which can be referenced in API endpoints."
+        },
+        "created_at": {
+          "type": "integer",
+          "format": "unixtime",
+          "description": "The Unix timestamp (in seconds) for when the Upload was created."
+        },
+        "filename": {
+          "type": "string",
+          "description": "The name of the file to be uploaded."
+        },
+        "bytes": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The intended number of bytes to be uploaded."
+        },
+        "purpose": {
+          "type": "string",
+          "description": "The intended purpose of the file. [Please refer here](/docs/api-reference/files/object#files/object-purpose) for acceptable values."
+        },
+        "status": {
+          "type": "string",
+          "description": "The status of the Upload.",
+          "enum": [
+            "pending",
+            "completed",
+            "cancelled",
+            "expired"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true
+          }
+        },
+        "expires_at": {
+          "type": "integer",
+          "format": "unixtime",
+          "description": "The Unix timestamp (in seconds) for when the Upload was created."
+        },
+        "object": {
+          "type": "string",
+          "description": "The object type, which is always \"upload\".",
+          "enum": [
+            "upload"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
+        },
+        "file": {
+          "type": "object",
+          "description": "The ready File object after the Upload is completed.",
+          "x-nullable": true,
+          "allOf": [
+            {
+              "$ref": "#/definitions/OpenAIFile"
+            }
+          ]
+        }
+      },
+      "required": [
+        "id",
+        "created_at",
+        "filename",
+        "bytes",
+        "purpose",
+        "status",
+        "expires_at"
+      ]
+    },
+    "UploadPart": {
+      "type": "object",
+      "description": "The upload Part represents a chunk of bytes we can add to an Upload object.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The upload Part unique identifier, which can be referenced in API endpoints."
+        },
+        "created_at": {
+          "type": "integer",
+          "format": "unixtime",
+          "description": "The Unix timestamp (in seconds) for when the Part was created."
+        },
+        "upload_id": {
+          "type": "string",
+          "description": "The ID of the Upload object that this Part was added to."
+        },
+        "object": {
+          "type": "string",
+          "description": "The object type, which is always `upload.part`.",
+          "enum": [
+            "upload.part"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
+        }
+      },
+      "required": [
+        "id",
+        "created_at",
+        "upload_id",
+        "object"
+      ]
     }
   },
   "parameters": {
