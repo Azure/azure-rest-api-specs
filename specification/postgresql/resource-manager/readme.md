@@ -36,9 +36,20 @@ tag: package-flexibleserver-2024-03-01-preview
 ```
 
 ``` yaml $(package-singleservers)
-tag: package-2020-01-01
+tag: package-preview-2022-05
 ```
 
+### Tag: package-2022-05-01-privatepreview
+
+These settings apply only when `--tag=package-2022-05-01-privatepreview` is specified on the command line.
+
+```yaml $(tag) == 'package-2022-05-01-privatepreview'
+input-file:
+  - Microsoft.DBforPostgreSQL/preview/2022-05-01-privatepreview/Migrations.json
+  - Microsoft.DBforPostgreSQL/preview/2022-05-01-privatepreview/Databases.json
+  - Microsoft.DBforPostgreSQL/preview/2022-05-01-privatepreview/PrivateDnsZone.json
+  - Microsoft.DBforPostgreSQL/preview/2022-05-01-privatepreview/postgresql.json
+```
 
 ### Tag: package-flexibleserver-2024-03-preview
 
@@ -266,7 +277,6 @@ input-file:
   - Microsoft.DBforPostgreSQL/preview/2022-03-08-preview/VirtualNetwork.json
   - Microsoft.DBforPostgreSQL/preview/2022-03-08-preview/ServerStartStopRestart.json
 ```
-
 ### Tag: package-flexibleserver-2022-03-privatepreview
 
 These settings apply only when `--tag=package-flexibleserver-2022-03-privatepreview` is specified on the command line.
