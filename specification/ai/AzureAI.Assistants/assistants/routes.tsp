@@ -72,8 +72,7 @@ op updateAssistant(
   /**
    * The request details to use when modifying an existing assistant.
    */
-  @bodyRoot
-  body: UpdateAssistantOptions,
+  ...UpdateAssistantOptions
 ): Assistant;
 
 /**

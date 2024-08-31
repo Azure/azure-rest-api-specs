@@ -229,10 +229,11 @@ namespace Azure.AI.Assistants {
   //@override(Azure.AI.Assistants.createAssistant, "java")
   //op createAssistantCustomization(createAssistantOptions: CreateAssistantOptions): Assistant;
   
-  @@clientName(updateAssistant::parameters.body,
-    "updateAssistantOptions",
-    "java"
-  );
+  //@@clientName(updateAssistant::parameters.body,
+  //  "updateAssistantOptions",
+  //  "java"
+  //);
+  
   @@clientName(createThreadAndRun::parameters.body,
     "createAndRunThreadOptions",
     "java"
