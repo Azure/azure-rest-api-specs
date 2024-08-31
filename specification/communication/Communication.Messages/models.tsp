@@ -132,9 +132,6 @@ model TextNotificationContent extends NotificationContent {
 @added(Versions.c2024_08_30_Preview)
 @doc("A request to send a media notification. Could be an image, document or video.")
 model MediaNotificationContent {
-  @doc("Optional text content.")
-  content?: string;
-
   @clientName("mediaUrl", "java")
   @doc("A media url for the file. Required if the type is one of the supported media types, e.g. image")
   mediaUri: url;
@@ -146,6 +143,9 @@ model ImageNotificationContent extends NotificationContent {
   @doc("Message notification type is image.")
   kind: CommunicationMessageKind.image;
 
+  @doc("Optional text content.")
+  content?: string;
+
   ...MediaNotificationContent;
 }
 
@@ -154,6 +154,9 @@ model ImageNotificationContent extends NotificationContent {
 model DocumentNotificationContent extends NotificationContent {
   @doc("Message notification type is image.")
   kind: CommunicationMessageKind.document;
+
+  @doc("Optional text content.")
+  content?: string;
 
   @doc("Optional name for the file.")
   fileName?: string;
@@ -166,6 +169,9 @@ model DocumentNotificationContent extends NotificationContent {
 model VideoNotificationContent extends NotificationContent {
   @doc("Message notification type is image.")
   kind: CommunicationMessageKind.video;
+
+  @doc("Optional text content.")
+  content?: string;
 
   ...MediaNotificationContent;
 }
