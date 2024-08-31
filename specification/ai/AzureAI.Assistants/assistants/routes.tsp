@@ -24,7 +24,7 @@ op createAssistant(
   /**
    * The request details to use when creating a new assistant.
    */
-  ...AssistantCreationOptions
+  ...CreateAssistantOptions
 ): Assistant;
 
 /**

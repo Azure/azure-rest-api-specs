@@ -85,7 +85,7 @@ model Assistant {
 
 @doc("The request details to use when creating a new assistant.")
 @added(ServiceApiVersions.v2024_02_15_preview)
-model AssistantCreationOptions {
+model CreateAssistantOptions {
   @doc("The ID of the model to use.")
   `model`: string;
 
