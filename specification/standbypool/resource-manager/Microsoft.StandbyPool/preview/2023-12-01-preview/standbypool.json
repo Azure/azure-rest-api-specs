@@ -172,7 +172,7 @@
         "tags": [
           "StandbyContainerGroupPools"
         ],
-        "description": "List StandbyContainerGroupPoolResource resources by resource group",
+        "description": "A resource list operation, at the scope of the resource's parent",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -446,7 +446,7 @@
         "tags": [
           "StandbyVirtualMachinePools"
         ],
-        "description": "List StandbyVirtualMachinePoolResource resources by resource group",
+        "description": "A resource list operation, at the scope of the resource's parent",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -716,11 +716,11 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StandbyPool/standbyVirtualMachinePools/{standbyVirtualMachinePoolName}/standbyVirtualMachines": {
       "get": {
-        "operationId": "StandbyVirtualMachines_ListByStandbyVirtualMachinePoolResource",
+        "operationId": "StandbyVirtualMachines_ListByStandbyPool",
         "tags": [
           "StandbyVirtualMachines"
         ],
-        "description": "List StandbyVirtualMachineResource resources by StandbyVirtualMachinePoolResource",
+        "description": "A resource list operation, at the scope of the resource's parent",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -752,11 +752,6 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "StandbyVirtualMachines_ListByStandbyVirtualMachinePoolResource": {
-            "$ref": "./examples/StandbyVirtualMachines_ListByStandbyVirtualMachinePoolResource.json"
           }
         },
         "x-ms-pageable": {
