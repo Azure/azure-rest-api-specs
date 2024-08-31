@@ -3639,6 +3639,18 @@ suppressions:
     reason: The resource name parameter 'bastionHostName' is not defined with a 'pattern' restriction. Suppress it for now to avoid breaking change because it is referenced by all Bastion APIs. 
   - code: LroErrorContent
     reason: CloudError does not follow required error schema. Suppress it for now to avoid breaking change because it is referenced by many files.
+  - code: BodyTopLevelProperties
+    from: virtualWan.json
+    reason: False alarm.
+    where:
+    - $.definitions.ConnectionSharedKeyResultList
+  - code: ResourceNameRestriction
+    from: virtualWan.json
+    reason: The resource name parameter 'gatewayName', 'connectionName', 'linkConnectionName' is not defined with a 'pattern' restriction. Suppress it for now to avoid breaking change because it is referenced by all vpn link connection APIs.
+    where:
+    - $.paths.["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/vpnGateways/{gatewayName}/vpnConnections/{connectionName}/vpnLinkConnections/{linkConnectionName}/sharedKeys"]
+    - $.paths.["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/vpnGateways/{gatewayName}/vpnConnections/{connectionName}/vpnLinkConnections/{linkConnectionName}/sharedKeys/default"]
+    - $.paths.["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/vpnGateways/{gatewayName}/vpnConnections/{connectionName}/vpnLinkConnections/{linkConnectionName}/sharedKeys/default/listSharedKey"]
 ```
 
 ## Go
