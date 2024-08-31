@@ -14,8 +14,6 @@ output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-hybridcompute
 directive:
   - remove-operation: 
     - Machines_Reconnect
-    - Machines_CreateOrUpdate
-    - Machines_Update
 ```
 
 ## Java multi-api
