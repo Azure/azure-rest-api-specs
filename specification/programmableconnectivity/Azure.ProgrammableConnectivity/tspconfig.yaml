@@ -1,4 +1,4 @@
-parameters:  
+parameters:
   "service-dir":
     default: "sdk/programmableconnectivity"
   "dependencies":
@@ -9,6 +9,7 @@ emit:
 options:
   "@azure-tools/typespec-autorest":
     azure-resource-provider-folder: "data-plane"
+    emit-lro-options: "none"
     emitter-output-dir: "{project-root}/.."
     examples-directory: "{project-root}/examples"
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/openapi.json"
@@ -17,10 +18,12 @@ options:
     clear-output-folder: true
     model-namespace: false
     namespace: "{package-dir}"
+    flavor: azure
   "@azure-tools/typespec-python":
     package-mode: "dataplane"
     package-dir: "azure-programmableconnectivity"
     package-name: "{package-dir}"
+    flavor: azure
 linter:
   extends:
-    - "@azure-tools/typespec-azure-core/all"
+    - "@azure-tools/typespec-azure-rulesets/data-plane"

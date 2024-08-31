@@ -958,6 +958,11 @@
             "modelAsString": true
           }
         },
+        "replicaState": {
+          "type": "string",
+          "readOnly": true,
+          "description": "state of Namespace replica."
+        },
         "clusterArmId": {
           "type": "string",
           "description": "Optional property that denotes the ARM ID of the Cluster. This is required, if a namespace replica should be placed in a Dedicated Event Hub Cluster"
@@ -981,10 +986,9 @@
           "type": "string",
           "description": "Query parameter for the new primary location after failover."
         },
-        "maximumGracePeriodInMins": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Maximum time duration allowed complete data replication from primary to secondary. Use maximumGracePeriodInMins = 0: For Unplanned Geo-Failover, which switches the role between primary and secondary immediately. The data that is not being replicated yet will be discarded. Use maximumGracePeriodInMins > 0: For Planned Geo-Failover/DR Drill, continue replicating data until grace period expires.  Any data that is not replicated during the grace period will be discarded. During the replication the namespace stops accepting any new publishing requests"
+        "force": {
+          "type": "boolean",
+          "description": "If Force is false then graceful failover is attempted after ensuring no data loss. If Force flag is set to true, Forced failover is attempted with possible data loss."
         }
       }
     },

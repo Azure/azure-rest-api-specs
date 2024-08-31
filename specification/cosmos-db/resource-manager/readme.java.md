@@ -11,6 +11,13 @@ license-header: MICROSOFT_MIT_NO_CODEGEN
 payload-flattening-threshold: 1
 output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-cosmosdb
 service-name: CosmosDB
+directive:
+  - from: managedCassandra.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/cassandraClusters/{clusterName}/invokeCommandAsync"].post
+    transform: $['operationId'] = 'CassandraClusters_invokeCommandAsyncResource'
+  - from: managedCassandra.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/cassandraClusters/{clusterName}/commands/{commandId}"].get
+    transform: $['operationId'] = 'CassandraClusters_GetCommandAsyncResource'
 ```
 
 ### Java multi-api

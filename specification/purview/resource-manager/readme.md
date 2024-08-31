@@ -26,7 +26,16 @@ These are the global settings for the Purview API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2023-05-01-preview
+tag: package-2024-04-01-preview
+```
+
+### Tag: package-2024-04-01-preview
+
+These settings apply only when `--tag=package-2024-04-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2024-04-01-preview'
+input-file:
+- Microsoft.Purview/preview/2024-04-01-preview/purview.json
 ```
 
 ### Tag: package-2023-05-01-preview
@@ -84,7 +93,7 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-python-track2
+  - repo: azure-sdk-for-python
   - repo: azure-sdk-for-go
   - repo: azure-resource-manager-schemas
   - repo: azure-powershell
@@ -126,7 +135,7 @@ directive:
       - $.definitions.CheckNameAvailabilityResult.properties.nameAvailable
       - $.definitions.DimensionProperties.properties.toBeExportedForCustomer
     reason:
-      - Check name model is set by ARM team https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/proxy-api-reference.md#check-name-availability-requests  
+      - Check name model is set by ARM team https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/proxy-api-reference.md#check-name-availability-requests
   - suppress: R2025 # NextLinkPropertyMustExist
     where:
       - $.definitions.UsageList.properties.nextLink

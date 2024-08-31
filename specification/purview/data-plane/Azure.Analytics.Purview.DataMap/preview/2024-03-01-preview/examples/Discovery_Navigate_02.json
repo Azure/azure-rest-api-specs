@@ -1,0 +1,62 @@
+{
+  "parameters": {
+    "Endpoint": "{Endpoint}",
+    "NavigationRequest": {
+      "navigationMode": "assetType",
+      "itemPath": {
+        "path": "/azure_sql_server",
+        "extendedProperties": {}
+      },
+      "properties": {}
+    },
+    "api-version": "2024-03-01-preview",
+    "maxpagesize": 100,
+    "continuationToken": "<token>"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "items": [
+          {
+            "name": "testsqlserver01",
+            "type": "azure_sql_server",
+            "isLeafNode": false,
+            "isEntity": true,
+            "itemPath": {
+              "path": "testsqlserver01",
+              "extendedProperties": {
+                "resourceGroup": "test-rg",
+                "serverEndpoint": "testsqlserver01.database.windows.net",
+                "subscriptionId": "12345678-1234-5678-1234-86b7251e0353"
+              }
+            },
+            "properties": {
+              "identifier": "mssql://testsqlserver01.database.windows.net",
+              "resourceId": "/subscriptions/12345678-1234-5678-1234-86b7251e0353/resourceGroups/test-rg/providers/Microsoft.Sql/servers/testsqlserver01",
+              "cloudType": "Azure"
+            }
+          },
+          {
+            "name": "testsqlserver02",
+            "type": "azure_sql_server",
+            "isLeafNode": false,
+            "isEntity": true,
+            "itemPath": {
+              "path": "testsqlserver02",
+              "extendedProperties": {
+                "resourceGroup": "test-rg",
+                "serverEndpoint": "testsqlserver02.database.windows.net",
+                "subscriptionId": "12345678-1234-5678-1234-86b7251e0353"
+              }
+            },
+            "properties": {
+              "identifier": "mssql://testsqlserver02.database.windows.net",
+              "resourceId": "/subscriptions/12345678-1234-5678-1234-86b7251e0353/resourceGroups/test-rg/providers/Microsoft.Sql/servers/testsqlserver02",
+              "cloudType": "Azure"
+            }
+          }
+        ]
+      }
+    }
+  }
+}
