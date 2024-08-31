@@ -26,11 +26,59 @@ These are the global settings for the SecurityInsights API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2024-03
+tag: package-preview-2025-01
 ```
 
 ---
 
+
+### Tag: package-preview-2025-01
+
+These settings apply only when `--tag=package-preview-2025-01` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2025-01'
+input-file:
+  - Microsoft.SecurityInsights/preview/2025-01-01-preview/AlertRules.json
+  - Microsoft.SecurityInsights/preview/2025-01-01-preview/AutomationRules.json
+  - Microsoft.SecurityInsights/preview/2025-01-01-preview/Bookmarks.json
+  - Microsoft.SecurityInsights/preview/2025-01-01-preview/ContentPackages.json
+  - Microsoft.SecurityInsights/preview/2025-01-01-preview/ContentProductPackages.json
+  - Microsoft.SecurityInsights/preview/2025-01-01-preview/ContentProductTemplates.json
+  - Microsoft.SecurityInsights/preview/2025-01-01-preview/ContentTemplates.json
+  - Microsoft.SecurityInsights/preview/2025-01-01-preview/DataConnectors.json
+  - Microsoft.SecurityInsights/preview/2025-01-01-preview/Incidents.json
+  - Microsoft.SecurityInsights/preview/2025-01-01-preview/Metadata.json
+  - Microsoft.SecurityInsights/preview/2025-01-01-preview/OnboardingStates.json
+  - Microsoft.SecurityInsights/preview/2025-01-01-preview/operations.json
+  - Microsoft.SecurityInsights/preview/2025-01-01-preview/SecurityMLAnalyticsSettings.json
+  - Microsoft.SecurityInsights/preview/2025-01-01-preview/SourceControls.json
+  - Microsoft.SecurityInsights/preview/2025-01-01-preview/ThreatIntelligence.json
+  - Microsoft.SecurityInsights/preview/2025-01-01-preview/Watchlists.json
+```
+
+### Tag: package-preview-2025-01
+
+These settings apply only when `--tag=package-preview-2025-01` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2025-01'
+input-file:
+  - Microsoft.SecurityInsights/preview/2025-01-01-preview/AlertRules.json
+  - Microsoft.SecurityInsights/preview/2025-01-01-preview/AutomationRules.json
+  - Microsoft.SecurityInsights/preview/2025-01-01-preview/Bookmarks.json
+  - Microsoft.SecurityInsights/preview/2025-01-01-preview/ContentPackages.json
+  - Microsoft.SecurityInsights/preview/2025-01-01-preview/ContentProductPackages.json
+  - Microsoft.SecurityInsights/preview/2025-01-01-preview/ContentProductTemplates.json
+  - Microsoft.SecurityInsights/preview/2025-01-01-preview/ContentTemplates.json
+  - Microsoft.SecurityInsights/preview/2025-01-01-preview/DataConnectors.json
+  - Microsoft.SecurityInsights/preview/2025-01-01-preview/Incidents.json
+  - Microsoft.SecurityInsights/preview/2025-01-01-preview/Metadata.json
+  - Microsoft.SecurityInsights/preview/2025-01-01-preview/OnboardingStates.json
+  - Microsoft.SecurityInsights/preview/2025-01-01-preview/operations.json
+  - Microsoft.SecurityInsights/preview/2025-01-01-preview/SecurityMLAnalyticsSettings.json
+  - Microsoft.SecurityInsights/preview/2025-01-01-preview/SourceControls.json
+  - Microsoft.SecurityInsights/preview/2025-01-01-preview/ThreatIntelligence.json
+  - Microsoft.SecurityInsights/preview/2025-01-01-preview/Watchlists.json
+```
 
 ### Tag: package-2024-03
 
