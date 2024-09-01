@@ -163,6 +163,7 @@ suppressions:
     reason: We don't want the the organization name values to be restricted by the regular expressions and we have few more specific logic for validation in the backend code that involves replacing some of the chars and passing the check instead of failing at the ARM level. So the "pattern" property is not defined.
   - code: DefinitionsPropertiesNamesCamelCase
     reason: The property fields are in camel case to match the request and response payload of the confluent APIs.
+- code: RequiredPropertiesMissingInResourceModel
+    reason: Our service is RPaaS service and this is coming because of new validation rule. Adding the suppression as recommended by the breaking change team, as the values were marked as optional in earlier PRs.
      
-
 ```
