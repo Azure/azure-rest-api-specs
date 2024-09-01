@@ -71,7 +71,6 @@ interface FileSystems {
    * Update a FileSystemResource
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @parameterVisibility
   @operationId("FileSystems_Update")
   update is ArmCustomPatchSync<FileSystemResource, FileSystemResourceUpdate>;
 
