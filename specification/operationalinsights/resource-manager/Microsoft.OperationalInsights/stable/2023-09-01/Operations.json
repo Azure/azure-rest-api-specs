@@ -48,7 +48,7 @@
         "description": "Lists all of the available OperationalInsights Rest API operations.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -56,6 +56,12 @@
             "description": "OK response definition.",
             "schema": {
               "$ref": "#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -67,6 +73,7 @@
   },
   "definitions": {
     "OperationListResult": {
+      "type": "object",
       "description": "Result of the request to list solution operations.",
       "properties": {
         "value": {
@@ -74,6 +81,9 @@
           "items": {
             "$ref": "#/definitions/Operation"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "description": "List of solution operations supported by the OperationsManagement resource provider."
         },
         "nextLink": {
@@ -84,6 +94,7 @@
       }
     },
     "Operation": {
+      "type": "object",
       "description": "Supported operation of OperationalInsights resource provider.",
       "properties": {
         "name": {
@@ -91,6 +102,7 @@
           "type": "string"
         },
         "display": {
+          "type": "object",
           "description": "Display metadata associated with the operation.",
           "properties": {
             "provider": {
@@ -116,4 +128,3 @@
   },
   "parameters": {}
 }
-
