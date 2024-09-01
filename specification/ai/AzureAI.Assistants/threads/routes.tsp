@@ -24,8 +24,7 @@ op createThread(
   /**
    * The details used to create a new assistant thread.
    */
-  @bodyRoot
-  body: AssistantThreadCreationOptions,
+  ...AssistantThreadCreationOptions
 ): AssistantThread;
 
 // list threads?
@@ -62,8 +61,7 @@ op updateThread(
   /**
    * The details used to update an existing assistant thread.
    */
-  @bodyRoot
-  body: UpdateAssistantThreadOptions,
+  ...UpdateAssistantThreadOptions
 ): AssistantThread;
 
 /**

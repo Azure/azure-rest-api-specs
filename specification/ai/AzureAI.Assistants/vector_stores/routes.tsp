@@ -38,8 +38,7 @@ op createVectorStore(
   /**
    * Request object for creating a vector store.
    */
-  @bodyRoot
-  body: VectorStoreOptions,
+  ...VectorStoreOptions
 ): VectorStore;
 
 /**
@@ -72,8 +71,7 @@ op modifyVectorStore(
   /**
    * Request object for updating a vector store.
    */
-  @bodyRoot
-  body: VectorStoreUpdateOptions,
+  ...VectorStoreUpdateOptions
 ): VectorStore;
 
 /**

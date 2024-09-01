@@ -233,27 +233,26 @@ namespace Azure.AI.Assistants {
   //  "updateAssistantOptions",
   //  "java"
   //);
-  
-  @@clientName(createThreadAndRun::parameters.body,
-    "createAndRunThreadOptions",
-    "java"
-  );
-  @@clientName(createThread::parameters.body,
-    "assistantThreadCreationOptions",
-    "java"
-  );
-  @@clientName(updateThread::parameters.body,
-    "updateAssistantThreadOptions",
-    "java"
-  );
-  @@clientName(createVectorStore::parameters.body,
-    "vectorStoreOptions",
-    "java"
-  );
-  @@clientName(modifyVectorStore::parameters.body,
-    "vectorStoreUpdateOptions",
-    "java"
-  );
-  @@clientName(createRun::parameters.body, "createRunOptions", "java");
-  @@clientName(createMessage::parameters.body, "threadMessageOptions", "java");
+  //@@clientName(createThreadAndRun::parameters.body,
+  //  "createAndRunThreadOptions",
+  //  "java"
+  //);
+  //@@clientName(createThread::parameters.body,
+  //  "assistantThreadCreationOptions",
+  //  "java"
+  //);
+  ///@@clientName(updateThread::parameters.body,
+  //  "updateAssistantThreadOptions",
+  //  "java"
+  //);
+  //@@clientName(createVectorStore::parameters.body,
+  //  "vectorStoreOptions",
+  //  "java"
+  //);
+  //@@clientName(modifyVectorStore::parameters.body,
+  //  "vectorStoreUpdateOptions",
+  //  "java"
+  //);
+  //@@clientName(createRun::parameters.body, "createRunOptions", "java");
+  //@@clientName(createMessage::parameters.body, "threadMessageOptions", "java");
 }

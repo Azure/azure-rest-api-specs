@@ -34,7 +34,7 @@ op createRun(
   /**
    * The details used when creating a new run of an assistant thread.
    */
-  @bodyRoot body: CreateRunOptions,
+  ....CreateRunOptions
 ): ThreadRun;
 
 /**
@@ -147,6 +147,5 @@ op createThreadAndRun(
   /**
    * The details used when creating and immediately running a new assistant thread.
    */
-  @bodyRoot
-  body: CreateAndRunThreadOptions,
+  ...CreateAndRunThreadOptions
 ): ThreadRun;
