@@ -34,7 +34,7 @@ op createRun(
   /**
    * The details used when creating a new run of an assistant thread.
    */
-  ....CreateRunOptions
+  ...CreateRunOptions
 ): ThreadRun;
 
 /**
