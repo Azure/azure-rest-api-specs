@@ -19,14 +19,13 @@ namespace Azure.AI.Assistants;
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
 @post
 @added(ServiceApiVersions.v2024_02_15_preview)
-@actionSeparator("/")
 @route("/assistants")
-op createAssistant(
-  /**
-   * The request details to use when creating a new assistant.
-   */
-  ...CreateAssistantOptions
-): Assistant;
+op createAssistant is Azure.Core.RpcOperation<
+  {
+    ...CreateAssistantOptions
+  },
+  Assistant
+>;
 
 /**
  * Gets a list of assistants that were previously created.
@@ -39,7 +38,6 @@ op createAssistant(
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
 @get
 @added(ServiceApiVersions.v2024_02_15_preview)
-@actionSeparator("/")
 @route("/assistants")
 op listAssistants(...OpenAIListRequestOptions): OpenAIPageableListOf<Assistant>;
 
