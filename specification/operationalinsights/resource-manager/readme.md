@@ -64,6 +64,9 @@ input-file:
   - Microsoft.OperationalInsights/LogAnalyticsRP/stable/2023-09-01/Usages.json
   - Microsoft.OperationalInsights/LogAnalyticsRP/stable/2023-09-01/WorkspacePurge.json
   - Microsoft.OperationalInsights/LogAnalyticsRP/stable/2023-09-01/Workspaces.json
+  - Microsoft.OperationalInsights/QueryRP/stable/2019-09-01/QueryPackQueries.json
+  - Microsoft.OperationalInsights/QueryRP/stable/2019-09-01/QueryPacks.json
+
 ```
 
 ### Tag: package-2015-11-preview
