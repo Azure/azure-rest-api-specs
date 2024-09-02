@@ -66,7 +66,7 @@
     }
   ],
   "paths": {
-    "/call-settings/{participantRawId}": {
+    "/call-settings/{id}": {
       "get": {
         "operationId": "ParticipantCallSettingsGet",
         "tags": [
@@ -79,9 +79,9 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "participantRawId",
+            "name": "id",
             "in": "path",
-            "description": "Id of the participant",
+            "description": "Raw id of the participant",
             "required": true,
             "type": "string"
           }
@@ -127,9 +127,9 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "participantRawId",
+            "name": "id",
             "in": "path",
-            "description": "Id of the participant",
+            "description": "Raw id of the participant",
             "required": true,
             "type": "string"
           },
@@ -187,9 +187,9 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "participantRawId",
+            "name": "id",
             "in": "path",
-            "description": "Id of the participant",
+            "description": "Raw id of the participant",
             "required": true,
             "type": "string"
           }
@@ -610,9 +610,9 @@
       "type": "object",
       "description": "Participant level call settings",
       "properties": {
-        "participantRawId": {
+        "id": {
           "type": "string",
-          "description": "Id of the participant"
+          "description": "Raw id of the participant"
         },
         "autoRecordingSettings": {
           "$ref": "#/definitions/AutoRecordingSettings",
@@ -620,7 +620,7 @@
         }
       },
       "required": [
-        "participantRawId",
+        "id",
         "autoRecordingSettings"
       ]
     },
@@ -628,9 +628,9 @@
       "type": "object",
       "description": "Participant level call settings",
       "properties": {
-        "participantRawId": {
+        "id": {
           "type": "string",
-          "description": "Id of the participant"
+          "description": "Raw id of the participant"
         },
         "autoRecordingSettings": {
           "$ref": "#/definitions/AutoRecordingSettingsCreateOrUpdate",
