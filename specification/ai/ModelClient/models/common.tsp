@@ -131,7 +131,7 @@ union ModelType {
   chat: "chat",
 }
 
-model AdditionalRequestHeaders {
+alias AdditionalRequestHeaders = {
   @doc("""
     Controls what happens if extra parameters, undefined by the REST API,
     are passed in the JSON request payload.
@@ -139,7 +139,7 @@ model AdditionalRequestHeaders {
     """)
   @header("extra-parameters")
   extra_params?: ExtraParameters;
-}
+};
 
 @doc("Controls what happens if extra parameters, undefined by the REST API, are passed in the JSON request payload.")
 union ExtraParameters {
