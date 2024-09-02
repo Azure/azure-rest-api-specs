@@ -749,14 +749,73 @@
     }
   },
   "definitions": {
+    "Azure.ResourceManager.CommonTypes.ExtendedLocation": {
+      "type": "object",
+      "description": "The complex type of the extended location.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the extended location."
+        },
+        "type": {
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.ExtendedLocationType",
+          "description": "The type of the extended location."
+        }
+      },
+      "required": [
+        "name",
+        "type"
+      ]
+    },
+    "Azure.ResourceManager.CommonTypes.ExtendedLocationType": {
+      "type": "string",
+      "description": "The supported ExtendedLocation types.",
+      "enum": [
+        "EdgeZone",
+        "CustomLocation"
+      ],
+      "x-ms-enum": {
+        "name": "ExtendedLocationType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "EdgeZone",
+            "value": "EdgeZone",
+            "description": "Azure Edge Zones location type"
+          },
+          {
+            "name": "CustomLocation",
+            "value": "CustomLocation",
+            "description": "Azure Custom Locations type"
+          }
+        ]
+      }
+    },
+    "Azure.ResourceManager.CommonTypes.TrackedResourceUpdate": {
+      "type": "object",
+      "description": "The resource model definition for an Azure Resource Manager tracked top level resource which has 'tags' and a 'location'",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/Resource"
+        }
+      ]
+    },
     "AzureMonitorWorkspace": {
       "type": "object",
       "description": "An Azure Monitor Workspace definition.",
       "properties": {
         "properties": {
           "$ref": "#/definitions/AzureMonitorWorkspaceProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "description": "The resource-specific properties for this resource."
         },
         "etag": {
           "type": "string",
@@ -883,30 +942,18 @@
     },
     "AzureMonitorWorkspaceUpdate": {
       "type": "object",
-      "description": "The type used for update operations of the AzureMonitorWorkspace.",
+      "description": "An Azure Monitor Workspace definition.",
       "properties": {
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
         "properties": {
-          "$ref": "#/definitions/AzureMonitorWorkspaceUpdateProperties",
-          "x-ms-client-flatten": true
+          "$ref": "#/definitions/AzureMonitorWorkspaceProperties",
+          "description": "The resource-specific properties for this resource."
         }
-      }
-    },
-    "AzureMonitorWorkspaceUpdateProperties": {
-      "type": "object",
-      "description": "The updatable properties of the AzureMonitorWorkspace.",
-      "properties": {
-        "metrics": {
-          "$ref": "#/definitions/Metrics",
-          "description": "Information about metrics for the Azure Monitor workspace"
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
         }
-      }
+      ]
     },
     "BatchProcessor": {
       "type": "object",
@@ -1011,42 +1058,6 @@
             "name": "PipelineGroup",
             "value": "PipelineGroup",
             "description": "Export data to another pipeline group instance."
-          }
-        ]
-      }
-    },
-    "ExtendedLocation": {
-      "type": "object",
-      "description": "The extended location info.",
-      "properties": {
-        "type": {
-          "$ref": "#/definitions/ExtendedLocationType",
-          "description": "The type of extended location."
-        },
-        "name": {
-          "type": "string",
-          "description": "The name of extended location."
-        }
-      },
-      "required": [
-        "type",
-        "name"
-      ]
-    },
-    "ExtendedLocationType": {
-      "type": "string",
-      "description": "The extended location type.",
-      "enum": [
-        "CustomLocation"
-      ],
-      "x-ms-enum": {
-        "name": "ExtendedLocationType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "CustomLocation",
-            "value": "CustomLocation",
-            "description": "Custom location."
           }
         ]
       }
@@ -1247,12 +1258,10 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/PipelineGroupProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "description": "The resource-specific properties for this resource."
         },
         "extendedLocation": {
-          "$ref": "#/definitions/ExtendedLocation",
-          "description": "The extended location for given pipeline group.",
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.ExtendedLocation",
           "x-ms-mutability": [
             "read",
             "create"
@@ -1344,26 +1353,9 @@
         "service"
       ]
     },
-    "PipelineGroupUpdate": {
+    "PipelineGroupPropertiesUpdate": {
       "type": "object",
-      "description": "The type used for update operations of the PipelineGroup.",
-      "properties": {
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "properties": {
-          "$ref": "#/definitions/PipelineGroupUpdateProperties",
-          "x-ms-client-flatten": true
-        }
-      }
-    },
-    "PipelineGroupUpdateProperties": {
-      "type": "object",
-      "description": "The updatable properties of the PipelineGroup.",
+      "description": "Properties that need to be specified to create a new pipeline group instance.",
       "properties": {
         "replicas": {
           "type": "integer",
@@ -1407,6 +1399,21 @@
           "x-ms-identifiers": []
         }
       }
+    },
+    "PipelineGroupUpdate": {
+      "type": "object",
+      "description": "A pipeline group definition.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PipelineGroupPropertiesUpdate",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
+        }
+      ]
     },
     "PipelineType": {
       "type": "string",

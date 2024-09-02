@@ -52,10 +52,10 @@
   "paths": {
     "/providers/Microsoft.CognitiveSearch/operations": {
       "get": {
+        "operationId": "Operations_List",
         "tags": [
           "Operations"
         ],
-        "operationId": "Operations_List",
         "description": "List the operations for the provider",
         "parameters": [
           {
@@ -64,7 +64,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
             }
@@ -76,22 +76,22 @@
             }
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
         "x-ms-examples": {
           "Operations_List": {
             "$ref": "./examples/Operations_List.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.CognitiveSearch/indexes": {
       "get": {
+        "operationId": "IndexOperations_ListBySubscription",
         "tags": [
           "IndexOperations"
         ],
-        "operationId": "IndexOperations_ListBySubscription",
         "description": "List Index resources by subscription ID",
         "parameters": [
           {
@@ -103,7 +103,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/IndexListResult"
             }
@@ -115,22 +115,22 @@
             }
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
         "x-ms-examples": {
           "IndexOperations_ListBySubscription": {
             "$ref": "./examples/IndexOperations_ListBySubscription.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveSearch/indexes": {
       "get": {
+        "operationId": "IndexOperations_ListByResourceGroup",
         "tags": [
           "IndexOperations"
         ],
-        "operationId": "IndexOperations_ListByResourceGroup",
         "description": "List Index resources by resource group",
         "parameters": [
           {
@@ -145,7 +145,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/IndexListResult"
             }
@@ -157,22 +157,22 @@
             }
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
         "x-ms-examples": {
           "IndexOperations_ListByResourceGroup": {
             "$ref": "./examples/IndexOperations_ListByResourceGroup.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveSearch/indexes/{name}": {
       "get": {
+        "operationId": "IndexOperations_Get",
         "tags": [
           "IndexOperations"
         ],
-        "operationId": "IndexOperations_Get",
         "description": "Get a Index",
         "parameters": [
           {
@@ -187,14 +187,14 @@
           {
             "name": "name",
             "in": "path",
-            "required": true,
             "description": "The name of the index resource.",
+            "required": true,
             "type": "string"
           }
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/Index"
             }
@@ -213,10 +213,10 @@
         }
       },
       "put": {
+        "operationId": "IndexOperations_CreateOrUpdate",
         "tags": [
           "IndexOperations"
         ],
-        "operationId": "IndexOperations_CreateOrUpdate",
         "description": "Create a Index",
         "parameters": [
           {
@@ -231,15 +231,15 @@
           {
             "name": "name",
             "in": "path",
-            "required": true,
             "description": "The name of the index resource.",
+            "required": true,
             "type": "string"
           },
           {
             "name": "resource",
             "in": "body",
-            "required": true,
             "description": "Resource create parameters.",
+            "required": true,
             "schema": {
               "$ref": "#/definitions/Index"
             }
@@ -247,22 +247,26 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Resource 'Index' update operation succeeded",
             "schema": {
               "$ref": "#/definitions/Index"
             }
           },
           "201": {
-            "description": "ARM create operation completed successfully.",
-            "headers": {
-              "Retry-After": {
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
-                "type": "integer",
-                "format": "int32"
-              }
-            },
+            "description": "Resource 'Index' create operation succeeded",
             "schema": {
               "$ref": "#/definitions/Index"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
             }
           },
           "default": {
@@ -283,10 +287,10 @@
         "x-ms-long-running-operation": true
       },
       "patch": {
+        "operationId": "IndexOperations_Update",
         "tags": [
           "IndexOperations"
         ],
-        "operationId": "IndexOperations_Update",
         "description": "Update a Index",
         "parameters": [
           {
@@ -301,15 +305,15 @@
           {
             "name": "name",
             "in": "path",
-            "required": true,
             "description": "The name of the index resource.",
+            "required": true,
             "type": "string"
           },
           {
             "name": "properties",
             "in": "body",
-            "required": true,
             "description": "The resource properties to be updated.",
+            "required": true,
             "schema": {
               "$ref": "#/definitions/IndexUpdate"
             }
@@ -317,7 +321,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/Index"
             }
@@ -325,14 +329,14 @@
           "202": {
             "description": "Resource update request accepted.",
             "headers": {
-              "Retry-After": {
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
-                "type": "integer",
-                "format": "int32"
-              },
               "Location": {
-                "description": "The Location header contains the URL where the status of the long running operation can be checked.",
-                "type": "string"
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
           },
@@ -354,10 +358,10 @@
         "x-ms-long-running-operation": true
       },
       "delete": {
+        "operationId": "IndexOperations_Delete",
         "tags": [
           "IndexOperations"
         ],
-        "operationId": "IndexOperations_Delete",
         "description": "Delete a Index",
         "parameters": [
           {
@@ -372,8 +376,8 @@
           {
             "name": "name",
             "in": "path",
-            "required": true,
             "description": "The name of the index resource.",
+            "required": true,
             "type": "string"
           }
         ],
@@ -384,19 +388,19 @@
           "202": {
             "description": "Resource deletion accepted.",
             "headers": {
-              "Retry-After": {
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
-                "type": "integer",
-                "format": "int32"
-              },
               "Location": {
-                "description": "The Location header contains the URL where the status of the long running operation can be checked.",
-                "type": "string"
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
           },
           "204": {
-            "description": "Resource deleted successfully."
+            "description": "Resource does not exist."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -418,10 +422,10 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveSearch/indexes/{name}/indexers/{indexerName}": {
       "get": {
+        "operationId": "IndexerOperations_Get",
         "tags": [
           "IndexerOperations"
         ],
-        "operationId": "IndexerOperations_Get",
         "description": "Get a Indexer",
         "parameters": [
           {
@@ -436,21 +440,21 @@
           {
             "name": "name",
             "in": "path",
-            "required": true,
             "description": "The name of the index resource.",
+            "required": true,
             "type": "string"
           },
           {
             "name": "indexerName",
             "in": "path",
-            "required": true,
             "description": "The name of the indexer resource.",
+            "required": true,
             "type": "string"
           }
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/Indexer"
             }
@@ -469,10 +473,10 @@
         }
       },
       "put": {
+        "operationId": "IndexerOperations_CreateOrUpdate",
         "tags": [
           "IndexerOperations"
         ],
-        "operationId": "IndexerOperations_CreateOrUpdate",
         "description": "Create a Indexer",
         "parameters": [
           {
@@ -487,22 +491,22 @@
           {
             "name": "name",
             "in": "path",
-            "required": true,
             "description": "The name of the index resource.",
+            "required": true,
             "type": "string"
           },
           {
             "name": "indexerName",
             "in": "path",
-            "required": true,
             "description": "The name of the indexer resource.",
+            "required": true,
             "type": "string"
           },
           {
             "name": "resource",
             "in": "body",
-            "required": true,
             "description": "Resource create parameters.",
+            "required": true,
             "schema": {
               "$ref": "#/definitions/Indexer"
             }
@@ -510,22 +514,26 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Resource 'Indexer' update operation succeeded",
             "schema": {
               "$ref": "#/definitions/Indexer"
             }
           },
           "201": {
-            "description": "ARM create operation completed successfully.",
-            "headers": {
-              "Retry-After": {
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
-                "type": "integer",
-                "format": "int32"
-              }
-            },
+            "description": "Resource 'Indexer' create operation succeeded",
             "schema": {
               "$ref": "#/definitions/Indexer"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
             }
           },
           "default": {
@@ -546,10 +554,10 @@
         "x-ms-long-running-operation": true
       },
       "patch": {
+        "operationId": "IndexerOperations_Update",
         "tags": [
           "IndexerOperations"
         ],
-        "operationId": "IndexerOperations_Update",
         "description": "Update a Indexer",
         "parameters": [
           {
@@ -564,22 +572,22 @@
           {
             "name": "name",
             "in": "path",
-            "required": true,
             "description": "The name of the index resource.",
+            "required": true,
             "type": "string"
           },
           {
             "name": "indexerName",
             "in": "path",
-            "required": true,
             "description": "The name of the indexer resource.",
+            "required": true,
             "type": "string"
           },
           {
             "name": "properties",
             "in": "body",
-            "required": true,
             "description": "The resource properties to be updated.",
+            "required": true,
             "schema": {
               "$ref": "#/definitions/IndexerUpdate"
             }
@@ -587,7 +595,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/Indexer"
             }
@@ -595,14 +603,14 @@
           "202": {
             "description": "Resource update request accepted.",
             "headers": {
-              "Retry-After": {
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
-                "type": "integer",
-                "format": "int32"
-              },
               "Location": {
-                "description": "The Location header contains the URL where the status of the long running operation can be checked.",
-                "type": "string"
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
           },
@@ -624,10 +632,10 @@
         "x-ms-long-running-operation": true
       },
       "delete": {
+        "operationId": "IndexerOperations_Delete",
         "tags": [
           "IndexerOperations"
         ],
-        "operationId": "IndexerOperations_Delete",
         "description": "Delete a Indexer",
         "parameters": [
           {
@@ -642,15 +650,15 @@
           {
             "name": "name",
             "in": "path",
-            "required": true,
             "description": "The name of the index resource.",
+            "required": true,
             "type": "string"
           },
           {
             "name": "indexerName",
             "in": "path",
-            "required": true,
             "description": "The name of the indexer resource.",
+            "required": true,
             "type": "string"
           }
         ],
@@ -661,19 +669,19 @@
           "202": {
             "description": "Resource deletion accepted.",
             "headers": {
-              "Retry-After": {
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
-                "type": "integer",
-                "format": "int32"
-              },
               "Location": {
-                "description": "The Location header contains the URL where the status of the long running operation can be checked.",
-                "type": "string"
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
           },
           "204": {
-            "description": "Resource deleted successfully."
+            "description": "Resource does not exist."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -695,10 +703,10 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveSearch/indexes/{name}/listKeys": {
       "post": {
+        "operationId": "IndexOperations_ListKeys",
         "tags": [
           "IndexOperations"
         ],
-        "operationId": "IndexOperations_ListKeys",
         "description": "List ApiKeys used to access the dataplane.",
         "parameters": [
           {
@@ -713,14 +721,14 @@
           {
             "name": "name",
             "in": "path",
-            "required": true,
             "description": "The name of the index resource.",
+            "required": true,
             "type": "string"
           }
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/IndexKeys"
             }
@@ -741,10 +749,10 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveSearch/indexes/{name}/regenerateKey": {
       "post": {
+        "operationId": "IndexOperations_RegenerateKey",
         "tags": [
           "IndexOperations"
         ],
-        "operationId": "IndexOperations_RegenerateKey",
         "description": "Regenerates an ApiKey.",
         "parameters": [
           {
@@ -759,15 +767,15 @@
           {
             "name": "name",
             "in": "path",
-            "required": true,
             "description": "The name of the index resource.",
+            "required": true,
             "type": "string"
           },
           {
             "name": "body",
             "in": "body",
-            "required": true,
             "description": "The content of the action request",
+            "required": true,
             "schema": {
               "$ref": "#/definitions/RegenerateKeyParameters"
             }
@@ -775,7 +783,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/IndexKeys"
             }
@@ -797,14 +805,15 @@
   },
   "definitions": {
     "AuthOption": {
-      "description": "Authentication options for accessing the dataplane.",
       "type": "string",
+      "description": "Authentication options for accessing the dataplane.",
       "enum": [
         "AadOnly",
         "AadAndApiKeys"
       ],
       "x-ms-enum": {
         "name": "AuthOption",
+        "modelAsString": true,
         "values": [
           {
             "name": "AadOnly",
@@ -821,13 +830,13 @@
     },
     "AzureSql": {
       "type": "object",
+      "description": "Sql/AzureSql Datasource",
       "properties": {
         "tableOrViewName": {
           "type": "string",
           "description": "Sql/AzureSql Database name"
         }
       },
-      "description": "Sql/AzureSql Datasource",
       "required": [
         "tableOrViewName"
       ],
@@ -840,6 +849,7 @@
     },
     "AzureStorageBlob": {
       "type": "object",
+      "description": "Storage Blob Datasource",
       "properties": {
         "containerName": {
           "type": "string",
@@ -850,7 +860,6 @@
           "description": "Query information"
         }
       },
-      "description": "Storage Blob Datasource",
       "required": [
         "containerName",
         "query"
@@ -864,6 +873,7 @@
     },
     "AzureStorageTable": {
       "type": "object",
+      "description": "AzureStorage Table Datasource",
       "properties": {
         "containerName": {
           "type": "string",
@@ -874,7 +884,6 @@
           "description": "Query information"
         }
       },
-      "description": "AzureStorage Table Datasource",
       "required": [
         "containerName",
         "query"
@@ -888,6 +897,7 @@
     },
     "Capacity": {
       "type": "object",
+      "description": "The capacity will autoscale between the minimum and maximum number of vCores based on the usage of your index.",
       "properties": {
         "minVCores": {
           "type": "number",
@@ -904,7 +914,6 @@
           "description": "Pausing strategy for the index"
         }
       },
-      "description": "The capacity will autoscale between the minimum and maximum number of vCores based on the usage of your index.",
       "required": [
         "minVCores",
         "maxVCores",
@@ -913,6 +922,7 @@
     },
     "CapacityUpdate": {
       "type": "object",
+      "description": "The capacity will autoscale between the minimum and maximum number of vCores based on the usage of your index.",
       "properties": {
         "minVCores": {
           "type": "number",
@@ -928,18 +938,17 @@
           "$ref": "#/definitions/Pause",
           "description": "Pausing strategy for the index"
         }
-      },
-      "description": "The capacity will autoscale between the minimum and maximum number of vCores based on the usage of your index."
+      }
     },
     "Connection": {
       "type": "object",
+      "description": "Parent connection",
       "properties": {
         "authenticationType": {
           "type": "string",
           "description": "Discriminator property for Connection."
         }
       },
-      "description": "Parent connection",
       "discriminator": "authenticationType",
       "required": [
         "authenticationType"
@@ -947,6 +956,7 @@
     },
     "CosmosDbNoSql": {
       "type": "object",
+      "description": "CosmosDb/NoSql Datasource",
       "properties": {
         "collectionName": {
           "type": "string",
@@ -957,7 +967,6 @@
           "description": "Query information"
         }
       },
-      "description": "CosmosDb/NoSql Datasource",
       "required": [
         "collectionName",
         "query"
@@ -971,15 +980,15 @@
     },
     "Credentials": {
       "type": "object",
+      "description": "Credentials definition",
       "properties": {
         "connectionString": {
           "type": "string",
-          "description": "Connection string",
           "format": "password",
+          "description": "Connection string",
           "x-ms-secret": true
         }
       },
-      "description": "Credentials definition",
       "required": [
         "connectionString"
       ],
@@ -992,6 +1001,7 @@
     },
     "DataSource": {
       "type": "object",
+      "description": "datasource object",
       "properties": {
         "connection": {
           "$ref": "#/definitions/Connection",
@@ -1002,7 +1012,6 @@
           "description": "other datasource Properties"
         }
       },
-      "description": "datasource object",
       "required": [
         "connection",
         "properties"
@@ -1010,13 +1019,13 @@
     },
     "DataSourceProperties": {
       "type": "object",
+      "description": "Datasource properties types",
       "properties": {
         "kind": {
           "type": "string",
           "description": "Discriminator property for DataSourceProperties."
         }
       },
-      "description": "Datasource properties types",
       "discriminator": "kind",
       "required": [
         "kind"
@@ -1024,6 +1033,7 @@
     },
     "DataSourceUpdate": {
       "type": "object",
+      "description": "datasource object",
       "properties": {
         "connection": {
           "$ref": "#/definitions/Connection",
@@ -1033,11 +1043,11 @@
           "$ref": "#/definitions/DataSourceProperties",
           "description": "other datasource Properties"
         }
-      },
-      "description": "datasource object"
+      }
     },
     "DelayPause": {
       "type": "object",
+      "description": "When the pause strategy is set to 'Delay', the index will enter a paused state after not being used for a fixed amount of time.",
       "properties": {
         "duration": {
           "type": "string",
@@ -1045,7 +1055,6 @@
           "description": "The interval after which an index is paused if not in use."
         }
       },
-      "description": "When the pause strategy is set to 'Delay', the index will enter a paused state after not being used for a fixed amount of time.",
       "required": [
         "duration"
       ],
@@ -1058,13 +1067,13 @@
     },
     "FailurePolicy": {
       "type": "object",
+      "description": "Failure policy parent",
       "properties": {
         "type": {
           "$ref": "#/definitions/FailurePolicyType",
           "description": "Failure policy type"
         }
       },
-      "description": "Failure policy parent",
       "required": [
         "type"
       ]
@@ -1095,28 +1104,23 @@
     },
     "FailurePolicyUpdate": {
       "type": "object",
+      "description": "Failure policy parent",
       "properties": {
         "type": {
           "$ref": "#/definitions/FailurePolicyType",
           "description": "Failure policy type"
         }
-      },
-      "description": "Failure policy parent"
+      }
     },
     "Index": {
       "type": "object",
+      "description": "An index resource",
       "properties": {
         "properties": {
           "$ref": "#/definitions/IndexProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "description": "The resource-specific properties for this resource."
         }
       },
-      "description": "An index resource",
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
@@ -1125,33 +1129,33 @@
     },
     "IndexKeys": {
       "type": "object",
+      "description": "The list of all ApiKeys used to access the dataplane.",
       "properties": {
         "primaryReadWriteKey": {
           "type": "string",
-          "description": "Primary read-write ApiKey.",
           "format": "password",
+          "description": "Primary read-write ApiKey.",
           "x-ms-secret": true
         },
         "secondaryReadWriteKey": {
           "type": "string",
-          "description": "Secondary read-write ApiKey.",
           "format": "password",
+          "description": "Secondary read-write ApiKey.",
           "x-ms-secret": true
         },
         "primaryReadOnlyKey": {
           "type": "string",
-          "description": "Primary read-only ApiKey.",
           "format": "password",
+          "description": "Primary read-only ApiKey.",
           "x-ms-secret": true
         },
         "secondaryReadOnlyKey": {
           "type": "string",
-          "description": "Secondary read-only ApiKey.",
           "format": "password",
+          "description": "Secondary read-only ApiKey.",
           "x-ms-secret": true
         }
       },
-      "description": "The list of all ApiKeys used to access the dataplane.",
       "required": [
         "primaryReadWriteKey",
         "secondaryReadWriteKey",
@@ -1161,29 +1165,28 @@
     },
     "IndexListResult": {
       "type": "object",
+      "description": "The response of a Index list operation.",
       "properties": {
         "value": {
           "type": "array",
+          "description": "The Index items on this page",
           "items": {
             "$ref": "#/definitions/Index"
-          },
-          "x-typespec-name": "Index[]",
-          "description": "The Index items on this page"
+          }
         },
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items",
-          "x-typespec-name": "TypeSpec.Rest.ResourceLocation"
+          "description": "The link to the next page of items"
         }
       },
-      "description": "The response of a Index list operation.",
       "required": [
         "value"
       ]
     },
     "IndexProperties": {
       "type": "object",
+      "description": "The properties of the index.",
       "properties": {
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
@@ -1208,7 +1211,6 @@
           "description": "Authentication option to be used when accessing the dataplane"
         }
       },
-      "description": "The properties of the index.",
       "required": [
         "queryCapacity",
         "indexingCapacity"
@@ -1216,24 +1218,24 @@
     },
     "IndexUpdate": {
       "type": "object",
+      "description": "The type used for update operations of the Index.",
       "properties": {
         "tags": {
           "type": "object",
+          "description": "Resource tags.",
           "additionalProperties": {
             "type": "string"
-          },
-          "x-typespec-name": "Record<string>",
-          "description": "Resource tags."
+          }
         },
         "properties": {
           "$ref": "#/definitions/IndexUpdateProperties",
-          "x-ms-client-flatten": true
+          "description": "The resource-specific properties for this resource."
         }
-      },
-      "description": "The type used for update operations of the Index."
+      }
     },
     "IndexUpdateProperties": {
       "type": "object",
+      "description": "The updatable properties of the Index.",
       "properties": {
         "queryCapacity": {
           "$ref": "#/definitions/CapacityUpdate",
@@ -1247,23 +1249,17 @@
           "$ref": "#/definitions/AuthOption",
           "description": "Authentication option to be used when accessing the dataplane"
         }
-      },
-      "description": "The updatable properties of the Index."
+      }
     },
     "Indexer": {
       "type": "object",
+      "description": "An indexer resource is a child tracked resource of index",
       "properties": {
         "properties": {
           "$ref": "#/definitions/IndexerProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "description": "The resource-specific properties for this resource."
         }
       },
-      "description": "An indexer resource is a child tracked resource of index",
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
@@ -1272,6 +1268,7 @@
     },
     "IndexerProperties": {
       "type": "object",
+      "description": "The properties of the indexer.",
       "properties": {
         "description": {
           "type": "string",
@@ -1291,7 +1288,6 @@
           "description": "Connection and container information for DataSource"
         }
       },
-      "description": "The properties of the indexer.",
       "required": [
         "failurePolicy",
         "dataSource"
@@ -1299,24 +1295,24 @@
     },
     "IndexerUpdate": {
       "type": "object",
+      "description": "The type used for update operations of the Indexer.",
       "properties": {
         "tags": {
           "type": "object",
+          "description": "Resource tags.",
           "additionalProperties": {
             "type": "string"
-          },
-          "x-typespec-name": "Record<string>",
-          "description": "Resource tags."
+          }
         },
         "properties": {
           "$ref": "#/definitions/IndexerUpdateProperties",
-          "x-ms-client-flatten": true
+          "description": "The resource-specific properties for this resource."
         }
-      },
-      "description": "The type used for update operations of the Indexer."
+      }
     },
     "IndexerUpdateProperties": {
       "type": "object",
+      "description": "The updatable properties of the Indexer.",
       "properties": {
         "description": {
           "type": "string",
@@ -1330,12 +1326,11 @@
           "$ref": "#/definitions/DataSourceUpdate",
           "description": "Connection and container information for DataSource"
         }
-      },
-      "description": "The updatable properties of the Indexer."
+      }
     },
     "KeyKind": {
-      "description": "ApiKeys used to access the dataplane.",
       "type": "string",
+      "description": "ApiKeys used to access the dataplane.",
       "enum": [
         "PrimaryReadWriteKey",
         "SecondaryReadWriteKey",
@@ -1371,7 +1366,6 @@
     },
     "NonePause": {
       "type": "object",
-      "properties": {},
       "description": "When the pause strategy is set to 'None', the index will remain always active.",
       "allOf": [
         {
@@ -1382,13 +1376,13 @@
     },
     "Pause": {
       "type": "object",
+      "description": "Pausing strategy for the index",
       "properties": {
         "type": {
           "type": "string",
           "description": "Discriminator property for Pause."
         }
       },
-      "description": "Pausing strategy for the index",
       "discriminator": "type",
       "required": [
         "type"
@@ -1411,15 +1405,18 @@
         "values": [
           {
             "name": "Succeeded",
-            "value": "Succeeded"
+            "value": "Succeeded",
+            "description": "Resource has been created."
           },
           {
             "name": "Failed",
-            "value": "Failed"
+            "value": "Failed",
+            "description": "Resource creation failed."
           },
           {
             "name": "Canceled",
-            "value": "Canceled"
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
           },
           {
             "name": "Provisioning",
@@ -1437,17 +1434,18 @@
             "description": "Index is accepted."
           }
         ]
-      }
+      },
+      "readOnly": true
     },
     "RegenerateKeyParameters": {
       "type": "object",
+      "description": "Regenerates a specific kind of ApiKey.",
       "properties": {
         "keyKind": {
           "$ref": "#/definitions/KeyKind",
           "description": "The kind of ApiKey to regenerate."
         }
       },
-      "description": "Regenerates a specific kind of ApiKey.",
       "required": [
         "keyKind"
       ]

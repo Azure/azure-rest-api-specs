@@ -2,27 +2,26 @@
 
 These settings apply only when `--az` is specified on the command line.
 
-For new Resource Provider. It is highly recommended to onboard Azure CLI extensions. There's no differences in terms of customer usage. 
+For new Resource Provider. It is highly recommended to onboard Azure CLI extensions. There's no differences in terms of customer usage.
 
-``` yaml $(az) && $(target-mode) != 'core'
+```yaml $(az) && $(target-mode) != 'core'
 az:
-    extensions: experimentation
-    namespace: azure.mgmt.experimentation
-    package-name: azure-mgmt-experimentation
+  extensions: experimentation
+  namespace: azure.mgmt.experimentation
+  package-name: azure-mgmt-experimentation
 az-output-folder: $(azure-cli-extension-folder)/src/experimentation
 python-sdk-output-folder: "$(az-output-folder)/azext_experimentation/vendored_sdks/experimentation"
 # add additional configuration here specific for Azure CLI
 # refer to the faq.md for more details
 ```
 
+This is for command modules that already in azure cli main repo.
 
-
-This is for command modules that already in azure cli main repo. 
-``` yaml $(az) && $(target-mode) == 'core'
+```yaml $(az) && $(target-mode) == 'core'
 az:
   extensions: experimentation
   namespace: azure.mgmt.experimentation
   package-name: azure-mgmt-experimentation
 az-output-folder: $(azure-cli-folder)/src/azure-cli/azure/cli/command_modules/experimentation
 python-sdk-output-folder: "$(az-output-folder)/vendored_sdks/experimentation"
-``` 
+```

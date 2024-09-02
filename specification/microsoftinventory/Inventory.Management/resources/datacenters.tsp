@@ -1,7 +1,6 @@
 import "@typespec/http";
 import "@typespec/rest";
 import "@typespec/versioning";
-/** import "@azure-tools/typespec-autorest"; */
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "../models/datacenter.tsp";
@@ -19,6 +18,7 @@ using Azure.ResourceManager;
 namespace Microsoft.Inventory;
 
 @tenantResource
+@parentResource(TenantLocationResource)
 model DatacenterResource is ProxyResource<DatacenterProperties> {
   @pattern("[a-zA-Z0-9]+[-_]*")
   @key("datacenterName")
@@ -30,6 +30,6 @@ model DatacenterResource is ProxyResource<DatacenterProperties> {
 
 @armResourceOperations
 interface Datacenters {
-  getDatacenter is ArmLocResourceRead<DatacenterResource>;
-  list is ArmLocResourceListByParent<DatacenterResource>;
+  get is ArmResourceRead<DatacenterResource>;
+  list is ArmResourceListByParent<DatacenterResource>;
 }

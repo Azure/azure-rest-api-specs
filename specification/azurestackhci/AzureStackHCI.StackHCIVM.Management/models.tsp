@@ -357,7 +357,7 @@ union AttestHealthStatusEnum {
   string,
 }
 
-@added(Versions.v2024_05_01_preview)
+@added(Versions.v2024_08_01_preview)
 @doc("Defines type of hardware platform from attestation token.")
 union AttestHWPlatformEnum {
   @doc("AttestHWPlatform is Secure Encrypted Virtualization Secure Nested Paging (SEVSNP)")
@@ -369,7 +369,7 @@ union AttestHWPlatformEnum {
   string,
 }
 
-@added(Versions.v2024_05_01_preview)
+@added(Versions.v2024_08_01_preview)
 @doc("Defines type of managed disk security encryption type from attestation token.")
 union AttestDiskSecurityEncryptionTypeEnum {
   @doc("Disk security encryption type is non-persisted Trusted Platform Module (TPM)")
@@ -406,7 +406,7 @@ union OperatingSystemTypes {
   string,
 }
 
-@added(Versions.v2024_05_01_preview)
+@added(Versions.v2024_08_01_preview)
 @doc("Encryption type of the managed disk enum.")
 union SecurityEncryptionType {
   @doc("Non-persisted TPM encryption type")
@@ -652,6 +652,7 @@ model ExtendedLocation {
 
 @doc("The gallery images resource patch definition.")
 model GalleryImagesUpdateRequest {
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing api"
   @doc("Resource tags")
   tags?: Record<string>;
 }
@@ -968,6 +969,7 @@ model LogicalNetworkStatusProvisioningStatus {
 
 @doc("The logical network resource patch definition.")
 model LogicalNetworksUpdateRequest {
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing api"
   @doc("Resource tags")
   tags?: Record<string>;
 }
@@ -1043,18 +1045,21 @@ model MarketplaceGalleryImageStatusDownloadStatus {
 
 @doc("The marketplace gallery image resource patch definition.")
 model MarketplaceGalleryImagesUpdateRequest {
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing api"
   @doc("Resource tags")
   tags?: Record<string>;
 }
 
 @doc("The network interface resource patch definition.")
 model NetworkInterfacesUpdateRequest {
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing api"
   @doc("Resource tags")
   tags?: Record<string>;
 }
 
 @doc("Tags object for patch operations.")
 model TagsObject {
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing api"
   @doc("Resource tags.")
   tags?: Record<string>;
 }
@@ -1105,6 +1110,7 @@ model StorageContainerStatusProvisioningStatus {
 
 @doc("The storage container resource patch definition.")
 model StorageContainersUpdateRequest {
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing api"
   @doc("Resource tags")
   tags?: Record<string>;
 }
@@ -1214,6 +1220,7 @@ model VirtualHardDiskUploadStatus {
 
 @doc("The virtual hard disk resource patch definition.")
 model VirtualHardDisksUpdateRequest {
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing api"
   @doc("Resource tags")
   tags?: Record<string>;
 }
@@ -1335,7 +1342,7 @@ model VirtualMachineInstancePropertiesHardwareProfileVirtualMachineGPU {
   partitionSizeMB?: int64;
 
   @doc("Name of the GPU")
-  name?: string;
+  gpuName?: string;
 }
 
 @doc("NetworkProfile - describes the network configuration the virtual machine instance")
@@ -1463,12 +1470,12 @@ model VirtualMachineInstancePropertiesStorageProfileOsDisk
   @doc("This property allows you to specify the type of the OS that is included in the disk if creating a VM from user-image or a specialized VHD. Possible values are: Windows, Linux.")
   osType?: OperatingSystemTypes;
 
-  @added(Versions.v2024_05_01_preview)
+  @added(Versions.v2024_08_01_preview)
   @doc("The managed disk parameters.")
   managedDisk?: VirtualMachineInstanceManagedDiskParameters;
 }
 
-@added(Versions.v2024_05_01_preview)
+@added(Versions.v2024_08_01_preview)
 @doc("The parameters of a managed disk.")
 model VirtualMachineInstanceManagedDiskParameters {
   @doc("Specifies the security profile for the managed disk.")
@@ -1476,7 +1483,7 @@ model VirtualMachineInstanceManagedDiskParameters {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "VM is a short form. It is the correct case."
-@added(Versions.v2024_05_01_preview)
+@added(Versions.v2024_08_01_preview)
 @doc("Specifies the security profile settings for the managed disk. NOTE: It can only be set for Confidential VMs")
 model VMDiskSecurityProfile {
   @doc("Specifies the EncryptionType of the managed disk. It is set to NonPersistedTPM for not persisting firmware state in the VMGuestState blob. NOTE: It can be set for only Confidential VMs.")
@@ -1739,13 +1746,12 @@ model AttestationStatusProperties {
   @visibility("read")
   provisioningState?: ProvisioningStateEnum;
 
-  @added(Versions.v2024_05_01_preview)
   @doc("The hardware platform information from attestation token. This only applies to Confidential VM.")
   @visibility("read")
-  @added(Versions.v2024_05_01_preview)
+  @added(Versions.v2024_08_01_preview)
   attestHardwarePlatform?: AttestHWPlatformEnum;
 
-  @added(Versions.v2024_05_01_preview)
+  @added(Versions.v2024_08_01_preview)
   @doc("The managed disk security encryption type from attestation token. This only applies to Confidential VM.")
   @visibility("read")
   attestDiskSecurityEncryptionType?: AttestDiskSecurityEncryptionTypeEnum;

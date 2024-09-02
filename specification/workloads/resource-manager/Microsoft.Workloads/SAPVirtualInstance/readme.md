@@ -27,9 +27,24 @@ These are the global settings for the workloads.
 ``` yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-preview-2024-02
+tag: package-2024-09
 ```
 
+
+### Tag: package-2024-09
+
+These settings apply only when `--tag=package-2024-09` is specified on the command line.
+
+``` yaml $(tag) == 'package-2024-09'
+input-file:
+  - stable/2024-09-01/SAPVirtualInstance.json
+  - ../common-types/v1/commonTypes.json
+  - ../operations/stable/2024-09-01/operations.json
+suppressions:
+  - code: BodyTopLevelProperties
+    from: SAPVirtualInstance.json
+    reason: This is an incorrect failure due to a bug in the tool
+```
 
 ### Tag: package-preview-2024-02
 
