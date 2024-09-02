@@ -1102,6 +1102,11 @@
           "202": {
             "description": "Arc SQL Server MI link assessment is in progress.",
             "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
               "Location": {
                 "type": "string",
                 "description": "The URL to retrieve the operation status."
