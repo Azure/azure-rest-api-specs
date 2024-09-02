@@ -19,6 +19,7 @@ namespace Azure.AI.Assistants;
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
 @post
 @added(ServiceApiVersions.v2024_02_15_preview)
+@actionSeparator("/")
 @route("/assistants")
 op createAssistant(
   /**
@@ -38,6 +39,7 @@ op createAssistant(
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
 @get
 @added(ServiceApiVersions.v2024_02_15_preview)
+@actionSeparator("/")
 @route("/assistants")
 op listAssistants(...OpenAIListRequestOptions): OpenAIPageableListOf<Assistant>;
 
