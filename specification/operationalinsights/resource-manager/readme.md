@@ -45,25 +45,25 @@ These settings apply only when `--tag=package-2023-09` is specified on the comma
 
 ```yaml $(tag) == 'package-2023-09'
 input-file:
-  - Microsoft.OperationalInsights/stable/2023-09-01/AvailableServiceTiers.json
-  - Microsoft.OperationalInsights/stable/2023-09-01/Clusters.json
-  - Microsoft.OperationalInsights/stable/2023-09-01/DataExports.json
-  - Microsoft.OperationalInsights/stable/2023-09-01/DataSources.json
-  - Microsoft.OperationalInsights/stable/2023-09-01/Gateways.json
-  - Microsoft.OperationalInsights/stable/2023-09-01/IntelligencePacks.json
-  - Microsoft.OperationalInsights/stable/2023-09-01/LinkedServices.json
-  - Microsoft.OperationalInsights/stable/2023-09-01/LinkedStorageAccounts.json
-  - Microsoft.OperationalInsights/stable/2023-09-01/ManagementGroups.json
-  - Microsoft.OperationalInsights/stable/2023-09-01/Operations.json
-  - Microsoft.OperationalInsights/stable/2023-09-01/OperationStatuses.json
-  - Microsoft.OperationalInsights/stable/2023-09-01/SavedSearches.json
-  - Microsoft.OperationalInsights/stable/2023-09-01/Schema.json
-  - Microsoft.OperationalInsights/stable/2023-09-01/SharedKeys.json
-  - Microsoft.OperationalInsights/stable/2023-09-01/StorageInsightConfigs.json
-  - Microsoft.OperationalInsights/stable/2023-09-01/Tables.json
-  - Microsoft.OperationalInsights/stable/2023-09-01/Usages.json
-  - Microsoft.OperationalInsights/stable/2023-09-01/WorkspacePurge.json
-  - Microsoft.OperationalInsights/stable/2023-09-01/Workspaces.json
+  - Microsoft.OperationalInsights/LogAnalyticsRP/stable/2023-09-01/AvailableServiceTiers.json
+  - Microsoft.OperationalInsights/LogAnalyticsRP/stable/2023-09-01/Clusters.json
+  - Microsoft.OperationalInsights/LogAnalyticsRP/stable/2023-09-01/DataExports.json
+  - Microsoft.OperationalInsights/LogAnalyticsRP/stable/2023-09-01/DataSources.json
+  - Microsoft.OperationalInsights/LogAnalyticsRP/stable/2023-09-01/Gateways.json
+  - Microsoft.OperationalInsights/LogAnalyticsRP/stable/2023-09-01/IntelligencePacks.json
+  - Microsoft.OperationalInsights/LogAnalyticsRP/stable/2023-09-01/LinkedServices.json
+  - Microsoft.OperationalInsights/LogAnalyticsRP/stable/2023-09-01/LinkedStorageAccounts.json
+  - Microsoft.OperationalInsights/LogAnalyticsRP/stable/2023-09-01/ManagementGroups.json
+  - Microsoft.OperationalInsights/LogAnalyticsRP/stable/2023-09-01/Operations.json
+  - Microsoft.OperationalInsights/LogAnalyticsRP/stable/2023-09-01/OperationStatuses.json
+  - Microsoft.OperationalInsights/LogAnalyticsRP/stable/2023-09-01/SavedSearches.json
+  - Microsoft.OperationalInsights/LogAnalyticsRP/stable/2023-09-01/Schema.json
+  - Microsoft.OperationalInsights/LogAnalyticsRP/stable/2023-09-01/SharedKeys.json
+  - Microsoft.OperationalInsights/LogAnalyticsRP/stable/2023-09-01/StorageInsightConfigs.json
+  - Microsoft.OperationalInsights/LogAnalyticsRP/stable/2023-09-01/Tables.json
+  - Microsoft.OperationalInsights/LogAnalyticsRP/stable/2023-09-01/Usages.json
+  - Microsoft.OperationalInsights/LogAnalyticsRP/stable/2023-09-01/WorkspacePurge.json
+  - Microsoft.OperationalInsights/LogAnalyticsRP/stable/2023-09-01/Workspaces.json
 ```
 
 ### Tag: package-2015-11-preview
@@ -72,8 +72,8 @@ These settings apply only when `--tag=package-2015-11-preview` is specified on t
 
 ``` yaml $(tag) == 'package-2015-11-preview'
 input-file:
-- Microsoft.OperationalInsights/preview/2015-11-01-preview/LinkedServices.json
-- Microsoft.OperationalInsights/preview/2015-11-01-preview/OperationalInsights.json
+- Microsoft.OperationalInsights/LogAnalyticsRP/preview/2015-11-01-preview/LinkedServices.json
+- Microsoft.OperationalInsights/LogAnalyticsRP/preview/2015-11-01-preview/OperationalInsights.json
 ```
 
 ### Tag: package-2015-03
@@ -82,7 +82,7 @@ These settings apply only when `--tag=package-2015-03` is specified on the comma
 
 ``` yaml $(tag) == 'package-2015-03'
 input-file:
-- Microsoft.OperationalInsights/stable/2015-03-20/OperationalInsights.json
+- Microsoft.OperationalInsights/LogAnalyticsRP/stable/2015-03-20/OperationalInsights.json
 ```
 
 ### Tag: package-2019-08-preview
@@ -91,9 +91,9 @@ These settings apply only when `--tag=package-2019-08-preview` is specified on t
 
 ``` yaml $(tag) == 'package-2019-08-preview'
 input-file:
-- Microsoft.OperationalInsights/preview/2019-08-01-preview/Clusters.json
-- Microsoft.OperationalInsights/preview/2019-08-01-preview/LinkedServices.json
-- Microsoft.OperationalInsights/preview/2019-08-01-preview/OperationalInsights.json
+- Microsoft.OperationalInsights/LogAnalyticsRP/preview/2019-08-01-preview/Clusters.json
+- Microsoft.OperationalInsights/LogAnalyticsRP/preview/2019-08-01-preview/LinkedServices.json
+- Microsoft.OperationalInsights/LogAnalyticsRP/preview/2019-08-01-preview/OperationalInsights.json
 ```
 
 ### Tag: package-2019-09-preview
@@ -102,8 +102,8 @@ These settings apply only when `--tag=package-2019-09-preview` is specified on t
 
 ``` yaml $(tag) == 'package-2019-09-preview'
 input-file:
-- Microsoft.OperationalInsights/preview/2019-09-01-preview/QueryPacks_API.json
-- Microsoft.OperationalInsights/preview/2019-09-01-preview/QueryPackQueries_API.json
+- Microsoft.OperationalInsights/LogAnalyticsRP/preview/2019-09-01-preview/QueryPacks_API.json
+- Microsoft.OperationalInsights/LogAnalyticsRP/preview/2019-09-01-preview/QueryPackQueries_API.json
 ```
 
 ### Tag: package-2020-03-preview
@@ -112,26 +112,26 @@ These settings apply only when `--tag=package-2020-03-preview` is specified on t
 
 ``` yaml $(tag) == 'package-2020-03-preview'
 input-file:
-- Microsoft.OperationalInsights/preview/2020-03-01-preview/DataExports.json
-- Microsoft.OperationalInsights/preview/2020-03-01-preview/DataSources.json
-- Microsoft.OperationalInsights/preview/2020-03-01-preview/DataCollectorLogs.json
-- Microsoft.OperationalInsights/preview/2020-03-01-preview/IntelligencePacks.json
-- Microsoft.OperationalInsights/preview/2020-03-01-preview/LinkedServices.json
-- Microsoft.OperationalInsights/preview/2020-03-01-preview/LinkedStorageAccounts.json
-- Microsoft.OperationalInsights/preview/2020-03-01-preview/ManagementGroups.json
-- Microsoft.OperationalInsights/preview/2020-03-01-preview/Operations.json
-- Microsoft.OperationalInsights/preview/2020-03-01-preview/OperationStatuses.json
-- Microsoft.OperationalInsights/preview/2020-03-01-preview/SharedKeys.json
-- Microsoft.OperationalInsights/preview/2020-03-01-preview/Usages.json
-- Microsoft.OperationalInsights/preview/2020-03-01-preview/Workspaces.json
-- Microsoft.OperationalInsights/preview/2020-03-01-preview/Clusters.json
-- Microsoft.OperationalInsights/preview/2020-03-01-preview/StorageInsightConfigs.json
-- Microsoft.OperationalInsights/preview/2020-03-01-preview/SavedSearches.json
-- Microsoft.OperationalInsights/preview/2020-03-01-preview/AvailableServiceTiers.json
-- Microsoft.OperationalInsights/preview/2020-03-01-preview/Gateways.json
-- Microsoft.OperationalInsights/preview/2020-03-01-preview/Schema.json
-- Microsoft.OperationalInsights/preview/2020-03-01-preview/WorkspacePurge.json
-- Microsoft.OperationalInsights/preview/2020-03-01-preview/Tables.json
+- Microsoft.OperationalInsights/LogAnalyticsRP/preview/2020-03-01-preview/DataExports.json
+- Microsoft.OperationalInsights/LogAnalyticsRP/preview/2020-03-01-preview/DataSources.json
+- Microsoft.OperationalInsights/LogAnalyticsRP/preview/2020-03-01-preview/DataCollectorLogs.json
+- Microsoft.OperationalInsights/LogAnalyticsRP/preview/2020-03-01-preview/IntelligencePacks.json
+- Microsoft.OperationalInsights/LogAnalyticsRP/preview/2020-03-01-preview/LinkedServices.json
+- Microsoft.OperationalInsights/LogAnalyticsRP/preview/2020-03-01-preview/LinkedStorageAccounts.json
+- Microsoft.OperationalInsights/LogAnalyticsRP/preview/2020-03-01-preview/ManagementGroups.json
+- Microsoft.OperationalInsights/LogAnalyticsRP/preview/2020-03-01-preview/Operations.json
+- Microsoft.OperationalInsights/LogAnalyticsRP/preview/2020-03-01-preview/OperationStatuses.json
+- Microsoft.OperationalInsights/LogAnalyticsRP/preview/2020-03-01-preview/SharedKeys.json
+- Microsoft.OperationalInsights/LogAnalyticsRP/preview/2020-03-01-preview/Usages.json
+- Microsoft.OperationalInsights/LogAnalyticsRP/preview/2020-03-01-preview/Workspaces.json
+- Microsoft.OperationalInsights/LogAnalyticsRP/preview/2020-03-01-preview/Clusters.json
+- Microsoft.OperationalInsights/LogAnalyticsRP/preview/2020-03-01-preview/StorageInsightConfigs.json
+- Microsoft.OperationalInsights/LogAnalyticsRP/preview/2020-03-01-preview/SavedSearches.json
+- Microsoft.OperationalInsights/LogAnalyticsRP/preview/2020-03-01-preview/AvailableServiceTiers.json
+- Microsoft.OperationalInsights/LogAnalyticsRP/preview/2020-03-01-preview/Gateways.json
+- Microsoft.OperationalInsights/LogAnalyticsRP/preview/2020-03-01-preview/Schema.json
+- Microsoft.OperationalInsights/LogAnalyticsRP/preview/2020-03-01-preview/WorkspacePurge.json
+- Microsoft.OperationalInsights/LogAnalyticsRP/preview/2020-03-01-preview/Tables.json
 ```
 
 ### Tag: package-2021-12-01-preview
@@ -140,25 +140,25 @@ These settings apply only when `--tag=package-2021-12-01-preview` is specified o
 
 ``` yaml $(tag) == 'package-2021-12-01-preview'
 input-file:
-- Microsoft.OperationalInsights/preview/2021-12-01-preview/Operations.json
-- Microsoft.OperationalInsights/preview/2021-12-01-preview/Workspaces.json
-- Microsoft.OperationalInsights/preview/2021-12-01-preview/Tables.json
-- Microsoft.OperationalInsights/stable/2020-08-01/DataExports.json
-- Microsoft.OperationalInsights/stable/2020-08-01/DataSources.json
-- Microsoft.OperationalInsights/stable/2020-08-01/IntelligencePacks.json
-- Microsoft.OperationalInsights/stable/2020-08-01/LinkedServices.json
-- Microsoft.OperationalInsights/stable/2020-08-01/LinkedStorageAccounts.json
-- Microsoft.OperationalInsights/stable/2020-08-01/ManagementGroups.json
-- Microsoft.OperationalInsights/stable/2020-08-01/OperationStatuses.json
-- Microsoft.OperationalInsights/stable/2020-08-01/SharedKeys.json
-- Microsoft.OperationalInsights/stable/2020-08-01/Usages.json
-- Microsoft.OperationalInsights/stable/2020-08-01/StorageInsightConfigs.json
-- Microsoft.OperationalInsights/stable/2020-08-01/SavedSearches.json
-- Microsoft.OperationalInsights/stable/2020-08-01/AvailableServiceTiers.json
-- Microsoft.OperationalInsights/stable/2020-08-01/Gateways.json
-- Microsoft.OperationalInsights/stable/2020-08-01/Schema.json
-- Microsoft.OperationalInsights/stable/2020-08-01/WorkspacePurge.json
-- Microsoft.OperationalInsights/stable/2021-06-01/Clusters.json
+- Microsoft.OperationalInsights/LogAnalyticsRP/preview/2021-12-01-preview/Operations.json
+- Microsoft.OperationalInsights/LogAnalyticsRP/preview/2021-12-01-preview/Workspaces.json
+- Microsoft.OperationalInsights/LogAnalyticsRP/preview/2021-12-01-preview/Tables.json
+- Microsoft.OperationalInsights/LogAnalyticsRP/stable/2020-08-01/DataExports.json
+- Microsoft.OperationalInsights/LogAnalyticsRP/stable/2020-08-01/DataSources.json
+- Microsoft.OperationalInsights/LogAnalyticsRP/stable/2020-08-01/IntelligencePacks.json
+- Microsoft.OperationalInsights/LogAnalyticsRP/stable/2020-08-01/LinkedServices.json
+- Microsoft.OperationalInsights/LogAnalyticsRP/stable/2020-08-01/LinkedStorageAccounts.json
+- Microsoft.OperationalInsights/LogAnalyticsRP/stable/2020-08-01/ManagementGroups.json
+- Microsoft.OperationalInsights/LogAnalyticsRP/stable/2020-08-01/OperationStatuses.json
+- Microsoft.OperationalInsights/LogAnalyticsRP/stable/2020-08-01/SharedKeys.json
+- Microsoft.OperationalInsights/LogAnalyticsRP/stable/2020-08-01/Usages.json
+- Microsoft.OperationalInsights/LogAnalyticsRP/stable/2020-08-01/StorageInsightConfigs.json
+- Microsoft.OperationalInsights/LogAnalyticsRP/stable/2020-08-01/SavedSearches.json
+- Microsoft.OperationalInsights/LogAnalyticsRP/stable/2020-08-01/AvailableServiceTiers.json
+- Microsoft.OperationalInsights/LogAnalyticsRP/stable/2020-08-01/Gateways.json
+- Microsoft.OperationalInsights/LogAnalyticsRP/stable/2020-08-01/Schema.json
+- Microsoft.OperationalInsights/LogAnalyticsRP/stable/2020-08-01/WorkspacePurge.json
+- Microsoft.OperationalInsights/LogAnalyticsRP/stable/2021-06-01/Clusters.json
 ```
 
 ### Tag: package-2020-08
@@ -167,25 +167,25 @@ These settings apply only when `--tag=package-2020-08` is specified on the comma
 
 ``` yaml $(tag) == 'package-2020-08'
 input-file:
-- Microsoft.OperationalInsights/stable/2020-08-01/DataExports.json
-- Microsoft.OperationalInsights/stable/2020-08-01/DataSources.json
-- Microsoft.OperationalInsights/stable/2020-08-01/IntelligencePacks.json
-- Microsoft.OperationalInsights/stable/2020-08-01/LinkedServices.json
-- Microsoft.OperationalInsights/stable/2020-08-01/LinkedStorageAccounts.json
-- Microsoft.OperationalInsights/stable/2020-08-01/ManagementGroups.json
-- Microsoft.OperationalInsights/stable/2020-08-01/Operations.json
-- Microsoft.OperationalInsights/stable/2020-08-01/OperationStatuses.json
-- Microsoft.OperationalInsights/stable/2020-08-01/SharedKeys.json
-- Microsoft.OperationalInsights/stable/2020-08-01/Usages.json
-- Microsoft.OperationalInsights/stable/2020-08-01/Workspaces.json
-- Microsoft.OperationalInsights/stable/2020-08-01/Clusters.json
-- Microsoft.OperationalInsights/stable/2020-08-01/StorageInsightConfigs.json
-- Microsoft.OperationalInsights/stable/2020-08-01/SavedSearches.json
-- Microsoft.OperationalInsights/stable/2020-08-01/AvailableServiceTiers.json
-- Microsoft.OperationalInsights/stable/2020-08-01/Gateways.json
-- Microsoft.OperationalInsights/stable/2020-08-01/Schema.json
-- Microsoft.OperationalInsights/stable/2020-08-01/WorkspacePurge.json
-- Microsoft.OperationalInsights/stable/2020-08-01/Tables.json
+- Microsoft.OperationalInsights/LogAnalyticsRP/stable/2020-08-01/DataExports.json
+- Microsoft.OperationalInsights/LogAnalyticsRP/stable/2020-08-01/DataSources.json
+- Microsoft.OperationalInsights/LogAnalyticsRP/stable/2020-08-01/IntelligencePacks.json
+- Microsoft.OperationalInsights/LogAnalyticsRP/stable/2020-08-01/LinkedServices.json
+- Microsoft.OperationalInsights/LogAnalyticsRP/stable/2020-08-01/LinkedStorageAccounts.json
+- Microsoft.OperationalInsights/LogAnalyticsRP/stable/2020-08-01/ManagementGroups.json
+- Microsoft.OperationalInsights/LogAnalyticsRP/stable/2020-08-01/Operations.json
+- Microsoft.OperationalInsights/LogAnalyticsRP/stable/2020-08-01/OperationStatuses.json
+- Microsoft.OperationalInsights/LogAnalyticsRP/stable/2020-08-01/SharedKeys.json
+- Microsoft.OperationalInsights/LogAnalyticsRP/stable/2020-08-01/Usages.json
+- Microsoft.OperationalInsights/LogAnalyticsRP/stable/2020-08-01/Workspaces.json
+- Microsoft.OperationalInsights/LogAnalyticsRP/stable/2020-08-01/Clusters.json
+- Microsoft.OperationalInsights/LogAnalyticsRP/stable/2020-08-01/StorageInsightConfigs.json
+- Microsoft.OperationalInsights/LogAnalyticsRP/stable/2020-08-01/SavedSearches.json
+- Microsoft.OperationalInsights/LogAnalyticsRP/stable/2020-08-01/AvailableServiceTiers.json
+- Microsoft.OperationalInsights/LogAnalyticsRP/stable/2020-08-01/Gateways.json
+- Microsoft.OperationalInsights/LogAnalyticsRP/stable/2020-08-01/Schema.json
+- Microsoft.OperationalInsights/LogAnalyticsRP/stable/2020-08-01/WorkspacePurge.json
+- Microsoft.OperationalInsights/LogAnalyticsRP/stable/2020-08-01/Tables.json
 ```
 
 ### Tag: package-2020-10-only
@@ -194,10 +194,10 @@ These settings apply only when `--tag=package-2020-10-only` is specified on the 
 
 ``` yaml $(tag) == 'package-2020-10-only'
 input-file:
-- Microsoft.OperationalInsights/stable/2020-10-01/Clusters.json
-- Microsoft.OperationalInsights/stable/2020-10-01/Operations.json
-- Microsoft.OperationalInsights/stable/2020-10-01/Tables.json
-- Microsoft.OperationalInsights/stable/2020-10-01/Workspaces.json
+- Microsoft.OperationalInsights/LogAnalyticsRP/stable/2020-10-01/Clusters.json
+- Microsoft.OperationalInsights/LogAnalyticsRP/stable/2020-10-01/Operations.json
+- Microsoft.OperationalInsights/LogAnalyticsRP/stable/2020-10-01/Tables.json
+- Microsoft.OperationalInsights/LogAnalyticsRP/stable/2020-10-01/Workspaces.json
 ```
 
 ### Tag: package-2020-10
@@ -206,25 +206,25 @@ These settings apply only when `--tag=package-2020-10` is specified on the comma
 
 ``` yaml $(tag) == 'package-2020-10'
 input-file:
-- Microsoft.OperationalInsights/stable/2020-08-01/DataExports.json
-- Microsoft.OperationalInsights/stable/2020-08-01/DataSources.json
-- Microsoft.OperationalInsights/stable/2020-08-01/IntelligencePacks.json
-- Microsoft.OperationalInsights/stable/2020-08-01/LinkedServices.json
-- Microsoft.OperationalInsights/stable/2020-08-01/LinkedStorageAccounts.json
-- Microsoft.OperationalInsights/stable/2020-08-01/ManagementGroups.json
-- Microsoft.OperationalInsights/stable/2020-08-01/OperationStatuses.json
-- Microsoft.OperationalInsights/stable/2020-08-01/SharedKeys.json
-- Microsoft.OperationalInsights/stable/2020-08-01/Usages.json
-- Microsoft.OperationalInsights/stable/2020-08-01/StorageInsightConfigs.json
-- Microsoft.OperationalInsights/stable/2020-08-01/SavedSearches.json
-- Microsoft.OperationalInsights/stable/2020-08-01/AvailableServiceTiers.json
-- Microsoft.OperationalInsights/stable/2020-08-01/Gateways.json
-- Microsoft.OperationalInsights/stable/2020-08-01/Schema.json
-- Microsoft.OperationalInsights/stable/2020-08-01/WorkspacePurge.json
-- Microsoft.OperationalInsights/stable/2020-08-01/Tables.json
-- Microsoft.OperationalInsights/stable/2020-10-01/Clusters.json
-- Microsoft.OperationalInsights/stable/2020-10-01/Operations.json
-- Microsoft.OperationalInsights/stable/2020-10-01/Workspaces.json
+- Microsoft.OperationalInsights/LogAnalyticsRP/stable/2020-08-01/DataExports.json
+- Microsoft.OperationalInsights/LogAnalyticsRP/stable/2020-08-01/DataSources.json
+- Microsoft.OperationalInsights/LogAnalyticsRP/stable/2020-08-01/IntelligencePacks.json
+- Microsoft.OperationalInsights/LogAnalyticsRP/stable/2020-08-01/LinkedServices.json
+- Microsoft.OperationalInsights/LogAnalyticsRP/stable/2020-08-01/LinkedStorageAccounts.json
+- Microsoft.OperationalInsights/LogAnalyticsRP/stable/2020-08-01/ManagementGroups.json
+- Microsoft.OperationalInsights/LogAnalyticsRP/stable/2020-08-01/OperationStatuses.json
+- Microsoft.OperationalInsights/LogAnalyticsRP/stable/2020-08-01/SharedKeys.json
+- Microsoft.OperationalInsights/LogAnalyticsRP/stable/2020-08-01/Usages.json
+- Microsoft.OperationalInsights/LogAnalyticsRP/stable/2020-08-01/StorageInsightConfigs.json
+- Microsoft.OperationalInsights/LogAnalyticsRP/stable/2020-08-01/SavedSearches.json
+- Microsoft.OperationalInsights/LogAnalyticsRP/stable/2020-08-01/AvailableServiceTiers.json
+- Microsoft.OperationalInsights/LogAnalyticsRP/stable/2020-08-01/Gateways.json
+- Microsoft.OperationalInsights/LogAnalyticsRP/stable/2020-08-01/Schema.json
+- Microsoft.OperationalInsights/LogAnalyticsRP/stable/2020-08-01/WorkspacePurge.json
+- Microsoft.OperationalInsights/LogAnalyticsRP/stable/2020-08-01/Tables.json
+- Microsoft.OperationalInsights/LogAnalyticsRP/stable/2020-10-01/Clusters.json
+- Microsoft.OperationalInsights/LogAnalyticsRP/stable/2020-10-01/Operations.json
+- Microsoft.OperationalInsights/LogAnalyticsRP/stable/2020-10-01/Workspaces.json
 ```
 
 ### Tag: package-2021-06
@@ -233,25 +233,25 @@ These settings apply only when `--tag=package-2021-06` is specified on the comma
 
 ``` yaml $(tag) == 'package-2021-06'
 input-file:
-- Microsoft.OperationalInsights/stable/2020-08-01/DataExports.json
-- Microsoft.OperationalInsights/stable/2020-08-01/DataSources.json
-- Microsoft.OperationalInsights/stable/2020-08-01/IntelligencePacks.json
-- Microsoft.OperationalInsights/stable/2020-08-01/LinkedServices.json
-- Microsoft.OperationalInsights/stable/2020-08-01/LinkedStorageAccounts.json
-- Microsoft.OperationalInsights/stable/2020-08-01/ManagementGroups.json
-- Microsoft.OperationalInsights/stable/2020-08-01/OperationStatuses.json
-- Microsoft.OperationalInsights/stable/2020-08-01/SharedKeys.json
-- Microsoft.OperationalInsights/stable/2020-08-01/Usages.json
-- Microsoft.OperationalInsights/stable/2020-08-01/StorageInsightConfigs.json
-- Microsoft.OperationalInsights/stable/2020-08-01/SavedSearches.json
-- Microsoft.OperationalInsights/stable/2020-08-01/AvailableServiceTiers.json
-- Microsoft.OperationalInsights/stable/2020-08-01/Gateways.json
-- Microsoft.OperationalInsights/stable/2020-08-01/Schema.json
-- Microsoft.OperationalInsights/stable/2020-08-01/WorkspacePurge.json
-- Microsoft.OperationalInsights/stable/2021-06-01/Clusters.json
-- Microsoft.OperationalInsights/stable/2020-10-01/Operations.json
-- Microsoft.OperationalInsights/stable/2020-08-01/Tables.json
-- Microsoft.OperationalInsights/stable/2021-06-01/Workspaces.json
+- Microsoft.OperationalInsights/LogAnalyticsRP/stable/2020-08-01/DataExports.json
+- Microsoft.OperationalInsights/LogAnalyticsRP/stable/2020-08-01/DataSources.json
+- Microsoft.OperationalInsights/LogAnalyticsRP/stable/2020-08-01/IntelligencePacks.json
+- Microsoft.OperationalInsights/LogAnalyticsRP/stable/2020-08-01/LinkedServices.json
+- Microsoft.OperationalInsights/LogAnalyticsRP/stable/2020-08-01/LinkedStorageAccounts.json
+- Microsoft.OperationalInsights/LogAnalyticsRP/stable/2020-08-01/ManagementGroups.json
+- Microsoft.OperationalInsights/LogAnalyticsRP/stable/2020-08-01/OperationStatuses.json
+- Microsoft.OperationalInsights/LogAnalyticsRP/stable/2020-08-01/SharedKeys.json
+- Microsoft.OperationalInsights/LogAnalyticsRP/stable/2020-08-01/Usages.json
+- Microsoft.OperationalInsights/LogAnalyticsRP/stable/2020-08-01/StorageInsightConfigs.json
+- Microsoft.OperationalInsights/LogAnalyticsRP/stable/2020-08-01/SavedSearches.json
+- Microsoft.OperationalInsights/LogAnalyticsRP/stable/2020-08-01/AvailableServiceTiers.json
+- Microsoft.OperationalInsights/LogAnalyticsRP/stable/2020-08-01/Gateways.json
+- Microsoft.OperationalInsights/LogAnalyticsRP/stable/2020-08-01/Schema.json
+- Microsoft.OperationalInsights/LogAnalyticsRP/stable/2020-08-01/WorkspacePurge.json
+- Microsoft.OperationalInsights/LogAnalyticsRP/stable/2021-06-01/Clusters.json
+- Microsoft.OperationalInsights/LogAnalyticsRP/stable/2020-10-01/Operations.json
+- Microsoft.OperationalInsights/LogAnalyticsRP/stable/2020-08-01/Tables.json
+- Microsoft.OperationalInsights/LogAnalyticsRP/stable/2021-06-01/Workspaces.json
 ```
 
 ### Tag: package-2022-02
@@ -260,27 +260,27 @@ These settings apply only when `--tag=package-2022-02` is specified on the comma
 
 ``` yaml $(tag) == 'package-2022-02'
 input-file:
-- Microsoft.OperationalInsights/stable/2019-09-01/QueryPacks.json
-- Microsoft.OperationalInsights/stable/2019-09-01/QueryPackQueries.json
-- Microsoft.OperationalInsights/stable/2020-08-01/DataExports.json
-- Microsoft.OperationalInsights/stable/2020-08-01/DataSources.json
-- Microsoft.OperationalInsights/stable/2020-08-01/IntelligencePacks.json
-- Microsoft.OperationalInsights/stable/2020-08-01/LinkedServices.json
-- Microsoft.OperationalInsights/stable/2020-08-01/LinkedStorageAccounts.json
-- Microsoft.OperationalInsights/stable/2020-08-01/ManagementGroups.json
-- Microsoft.OperationalInsights/stable/2020-08-01/OperationStatuses.json
-- Microsoft.OperationalInsights/stable/2020-08-01/SharedKeys.json
-- Microsoft.OperationalInsights/stable/2020-08-01/Usages.json
-- Microsoft.OperationalInsights/stable/2020-08-01/StorageInsightConfigs.json
-- Microsoft.OperationalInsights/stable/2020-08-01/SavedSearches.json
-- Microsoft.OperationalInsights/stable/2020-08-01/AvailableServiceTiers.json
-- Microsoft.OperationalInsights/stable/2020-08-01/Gateways.json
-- Microsoft.OperationalInsights/stable/2020-08-01/Schema.json
-- Microsoft.OperationalInsights/stable/2020-08-01/WorkspacePurge.json
-- Microsoft.OperationalInsights/stable/2021-06-01/Clusters.json
-- Microsoft.OperationalInsights/preview/2021-12-01-preview/Operations.json
-- Microsoft.OperationalInsights/preview/2021-12-01-preview/Workspaces.json
-- Microsoft.OperationalInsights/preview/2021-12-01-preview/Tables.json
+- Microsoft.OperationalInsights/LogAnalyticsRP/stable/2019-09-01/QueryPacks.json
+- Microsoft.OperationalInsights/LogAnalyticsRP/stable/2019-09-01/QueryPackQueries.json
+- Microsoft.OperationalInsights/LogAnalyticsRP/stable/2020-08-01/DataExports.json
+- Microsoft.OperationalInsights/LogAnalyticsRP/stable/2020-08-01/DataSources.json
+- Microsoft.OperationalInsights/LogAnalyticsRP/stable/2020-08-01/IntelligencePacks.json
+- Microsoft.OperationalInsights/LogAnalyticsRP/stable/2020-08-01/LinkedServices.json
+- Microsoft.OperationalInsights/LogAnalyticsRP/stable/2020-08-01/LinkedStorageAccounts.json
+- Microsoft.OperationalInsights/LogAnalyticsRP/stable/2020-08-01/ManagementGroups.json
+- Microsoft.OperationalInsights/LogAnalyticsRP/stable/2020-08-01/OperationStatuses.json
+- Microsoft.OperationalInsights/LogAnalyticsRP/stable/2020-08-01/SharedKeys.json
+- Microsoft.OperationalInsights/LogAnalyticsRP/stable/2020-08-01/Usages.json
+- Microsoft.OperationalInsights/LogAnalyticsRP/stable/2020-08-01/StorageInsightConfigs.json
+- Microsoft.OperationalInsights/LogAnalyticsRP/stable/2020-08-01/SavedSearches.json
+- Microsoft.OperationalInsights/LogAnalyticsRP/stable/2020-08-01/AvailableServiceTiers.json
+- Microsoft.OperationalInsights/LogAnalyticsRP/stable/2020-08-01/Gateways.json
+- Microsoft.OperationalInsights/LogAnalyticsRP/stable/2020-08-01/Schema.json
+- Microsoft.OperationalInsights/LogAnalyticsRP/stable/2020-08-01/WorkspacePurge.json
+- Microsoft.OperationalInsights/LogAnalyticsRP/stable/2021-06-01/Clusters.json
+- Microsoft.OperationalInsights/LogAnalyticsRP/preview/2021-12-01-preview/Operations.json
+- Microsoft.OperationalInsights/LogAnalyticsRP/preview/2021-12-01-preview/Workspaces.json
+- Microsoft.OperationalInsights/LogAnalyticsRP/preview/2021-12-01-preview/Tables.json
 ```
 
 ### Tag: package-2022-10
@@ -289,27 +289,27 @@ These settings apply only when `--tag=package-2022-10` is specified on the comma
 
 ``` yaml $(tag) == 'package-2022-10'
 input-file:
-- Microsoft.OperationalInsights/stable/2019-09-01/QueryPacks.json
-- Microsoft.OperationalInsights/stable/2019-09-01/QueryPackQueries.json
-- Microsoft.OperationalInsights/stable/2020-08-01/DataExports.json
-- Microsoft.OperationalInsights/stable/2020-08-01/DataSources.json
-- Microsoft.OperationalInsights/stable/2020-08-01/IntelligencePacks.json
-- Microsoft.OperationalInsights/stable/2020-08-01/LinkedServices.json
-- Microsoft.OperationalInsights/stable/2020-08-01/LinkedStorageAccounts.json
-- Microsoft.OperationalInsights/stable/2020-08-01/ManagementGroups.json
-- Microsoft.OperationalInsights/stable/2020-08-01/OperationStatuses.json
-- Microsoft.OperationalInsights/stable/2020-08-01/SharedKeys.json
-- Microsoft.OperationalInsights/stable/2020-08-01/Usages.json
-- Microsoft.OperationalInsights/stable/2020-08-01/StorageInsightConfigs.json
-- Microsoft.OperationalInsights/stable/2020-08-01/SavedSearches.json
-- Microsoft.OperationalInsights/stable/2020-08-01/AvailableServiceTiers.json
-- Microsoft.OperationalInsights/stable/2020-08-01/Gateways.json
-- Microsoft.OperationalInsights/stable/2020-08-01/Schema.json
-- Microsoft.OperationalInsights/stable/2020-08-01/WorkspacePurge.json
-- Microsoft.OperationalInsights/stable/2022-10-01/Clusters.json
-- Microsoft.OperationalInsights/stable/2022-10-01/Operations.json
-- Microsoft.OperationalInsights/stable/2022-10-01/Workspaces.json
-- Microsoft.OperationalInsights/stable/2022-10-01/Tables.json
+- Microsoft.OperationalInsights/LogAnalyticsRP/stable/2019-09-01/QueryPacks.json
+- Microsoft.OperationalInsights/LogAnalyticsRP/stable/2019-09-01/QueryPackQueries.json
+- Microsoft.OperationalInsights/LogAnalyticsRP/stable/2020-08-01/DataExports.json
+- Microsoft.OperationalInsights/LogAnalyticsRP/stable/2020-08-01/DataSources.json
+- Microsoft.OperationalInsights/LogAnalyticsRP/stable/2020-08-01/IntelligencePacks.json
+- Microsoft.OperationalInsights/LogAnalyticsRP/stable/2020-08-01/LinkedServices.json
+- Microsoft.OperationalInsights/LogAnalyticsRP/stable/2020-08-01/LinkedStorageAccounts.json
+- Microsoft.OperationalInsights/LogAnalyticsRP/stable/2020-08-01/ManagementGroups.json
+- Microsoft.OperationalInsights/LogAnalyticsRP/stable/2020-08-01/OperationStatuses.json
+- Microsoft.OperationalInsights/LogAnalyticsRP/stable/2020-08-01/SharedKeys.json
+- Microsoft.OperationalInsights/LogAnalyticsRP/stable/2020-08-01/Usages.json
+- Microsoft.OperationalInsights/LogAnalyticsRP/stable/2020-08-01/StorageInsightConfigs.json
+- Microsoft.OperationalInsights/LogAnalyticsRP/stable/2020-08-01/SavedSearches.json
+- Microsoft.OperationalInsights/LogAnalyticsRP/stable/2020-08-01/AvailableServiceTiers.json
+- Microsoft.OperationalInsights/LogAnalyticsRP/stable/2020-08-01/Gateways.json
+- Microsoft.OperationalInsights/LogAnalyticsRP/stable/2020-08-01/Schema.json
+- Microsoft.OperationalInsights/LogAnalyticsRP/stable/2020-08-01/WorkspacePurge.json
+- Microsoft.OperationalInsights/LogAnalyticsRP/stable/2022-10-01/Clusters.json
+- Microsoft.OperationalInsights/LogAnalyticsRP/stable/2022-10-01/Operations.json
+- Microsoft.OperationalInsights/LogAnalyticsRP/stable/2022-10-01/Workspaces.json
+- Microsoft.OperationalInsights/LogAnalyticsRP/stable/2022-10-01/Tables.json
 ```
 
 ---
