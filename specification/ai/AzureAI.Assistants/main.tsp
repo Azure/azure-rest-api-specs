@@ -1,5 +1,5 @@
 import "@azure-tools/typespec-azure-core";
-import "@typespec/http";
+import "@typespec/rest";
 import "@typespec/versioning";
 
 import "./assistants/main.tsp";
@@ -12,17 +12,13 @@ import "./streaming/events.tsp";
 import "./vector_stores/main.tsp";
 
 using TypeSpec.Http;
+using TypeSpec.Rest;
 using TypeSpec.Versioning;
-
 using Azure.Core;
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "OpenAI is a case-sensitive name"
-namespace Azure.AI {
-
-}
-
+#suppress "@azure-tools/typespec-autorest/unsupported-http-auth-scheme"
 @useAuth(
-  ApiKeyAuth<ApiKeyLocation.header, "api-key"> | OAuth2Auth<[
+  BearerAuth | ApiKeyAuth<ApiKeyLocation.header, "api-key"> | OAuth2Auth<[
     {
       type: OAuth2FlowType.implicit,
       authorizationUrl: "https://login.microsoftonline.com/common/oauth2/v2.0/authorize",
@@ -31,16 +27,8 @@ namespace Azure.AI {
   ]>
 )
 @service({
-  title: "Azure AI",
+  title: "Azure AI Assistants",
 })
-@server(
-  "{endpoint}",
-  "Azure APIs for Assistants.",
-  {
-    @doc("An OpenAI endpoint supporting assistants functionality.")
-    endpoint: string,
-  }
-)
 @versioned(ServiceApiVersions)
 @doc("Azure APIs for Assistants.")
 namespace Azure.AI.Assistants {
