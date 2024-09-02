@@ -9,7 +9,7 @@ using TypeSpec.Versioning;
 namespace Customizations; // The actual name here doesn't matter and is here for organization purposes only
 
 // Are these needed?
-@@usage(AI.Model.ChatCompletions, Usage.output);
+// @@usage(AI.Model.ChatCompletions, Usage.output);
 @@usage(AI.Model.ModelInfo, Usage.output);
 @@usage(AI.Model.StreamingChatCompletionsUpdate, Usage.output);
 @@usage(AI.Model.StreamingChatChoiceUpdate, Usage.output);
@@ -19,7 +19,7 @@ namespace Customizations; // The actual name here doesn't matter and is here for
 // Since we made all operator methods internal, we need to expliclty
 // say we still want the models they use to be public.
 @@access(AI.Model.ChatChoice, Access.public);
-@@access(AI.Model.ChatCompletions, Access.public);
+//@@access(AI.Model.ChatCompletions, Access.public);
 @@access(AI.Model.ChatCompletionsToolCall, Access.public);
 @@access(AI.Model.ChatCompletionsToolDefinition, Access.public);
 @@access(AI.Model.ChatCompletionsNamedToolChoice, Access.public);
@@ -60,7 +60,7 @@ namespace Customizations; // The actual name here doesn't matter and is here for
 @@access(AI.Model.StreamingChatResponseToolCallUpdate, Access.public, "python");
 
 // The operators need to be hidden, since we hand-write the public versions of those
-@@access(AI.Model.getChatCompletions, Access.internal);
+//@@access(AI.Model.getChatCompletions, Access.internal);
 @@access(AI.Model.getEmbeddings, Access.internal);
 @@access(AI.Model.getImageEmbeddings, Access.internal);
 @@access(AI.Model.getModelInfo, Access.internal, "python");
