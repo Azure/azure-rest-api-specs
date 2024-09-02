@@ -20,12 +20,15 @@ namespace Azure.AI.Assistants;
 @post
 @added(ServiceApiVersions.v2024_02_15_preview)
 @route("/assistants")
-op createAssistant(
-  /**
-   * The request details to use when creating a new assistant.
-   */
+op createAssistant is Azure.Core.RpcOperation<
+  {
+    ...CreateAssistantOptions
+  },
+  Assistant
+>;
+/*op createAssistant(
   ...CreateAssistantOptions
-): Assistant;
+): Assistant;*/
 
 /**
  * Gets a list of assistants that were previously created.
