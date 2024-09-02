@@ -433,6 +433,7 @@ model TagUpdate {
   /**
    * List of key value pairs that describe the resource. This will overwrite the existing tags.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing api"
   tags?: Record<string>;
 }
 
@@ -1045,6 +1046,7 @@ model ImportManifestMetadata {
   /**
    * A JSON object containing the hash(es) of the file. At least SHA256 hash is required. This object can be thought of as a set of key-value pairs where the key is the hash algorithm, and the value is the hash of the file calculated using that algorithm.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing api"
   hashes: Record<string>;
 }
 
@@ -1101,6 +1103,7 @@ model UpdateProperties {
   /**
    * List of update compatibility information.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing api"
   @OpenAPI.extension("x-ms-identifiers", [])
   compatibility: Record<string>[];
 
@@ -1236,6 +1239,7 @@ model UpdateFileBase {
   /**
    * Mapping of hashing algorithm to base64 encoded hash values.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing api"
   hashes: Record<string>;
 
   /**
@@ -1256,6 +1260,7 @@ model UpdateFileBase {
   /**
    * Optional file properties (not consumed by service but pass-through to device).
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing api"
   properties?: Record<string>;
 }
 
