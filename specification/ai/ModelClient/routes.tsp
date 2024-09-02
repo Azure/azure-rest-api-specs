@@ -21,8 +21,8 @@ namespace AI.Model;
   provided prompt data. The method makes a REST API call to the `/chat/completions` route 
   on the given endpoint.
   """)
-@actionSeparator("/")
-@route("chat/completions")
+@post
+@route("/chat/completions")
 op getChatCompletions is Azure.Core.RpcOperation<
   {
     ...ChatCompletionsOptions
