@@ -9,7 +9,7 @@ using Azure.ClientGenerator.Core;
 
 namespace AI.Model;
 
-model ChatCompletionsOptions = {
+model ChatCompletionsOptions {
   @doc("""
     The collection of context messages associated with this chat completions request.
     Typical usage begins with a chat message for the System role that provides instructions for
@@ -116,7 +116,7 @@ model ChatCompletionsOptions = {
   `model`?: string;
 
   ...Record<unknown>;
-};
+}
 
 alias ChatCompletionsCommon = {
   @doc("A unique identifier associated with this chat completions response.")
