@@ -1597,6 +1597,16 @@
         "modelAsString": true
       }
     },
+    "IcebergWriteSettings": {
+      "description": "Iceberg write settings.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/FormatWriteSettings"
+        }
+      ],
+      "properties": {}
+    },
     "AvroSource": {
       "description": "A copy activity Avro source.",
       "type": "object",
@@ -4763,6 +4773,25 @@
         "storeSettings": {
           "$ref": "#/definitions/StoreWriteSettings",
           "description": "Binary store settings."
+        }
+      }
+    },
+    "IcebergSink": {
+      "description": "A copy activity Iceberg sink.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySink"
+        }
+      ],
+      "properties": {
+        "storeSettings": {
+          "$ref": "#/definitions/StoreWriteSettings",
+          "description": "Iceberg store settings."
+        },
+        "formatSettings": {
+          "$ref": "#/definitions/IcebergWriteSettings",
+          "description": "Iceberg format settings."
         }
       }
     },
