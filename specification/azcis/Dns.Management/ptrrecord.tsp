@@ -24,8 +24,8 @@ model PtrRecordResourceProperties {
   @doc("Gets or sets the ttl")
   ttl: string;
 
-  @doc("Arm location")
-  armLocation?: string;
+  @doc("Azure location")
+  azureLocation?: string;
 
   @doc("Provisioning state")
   @visibility("read")

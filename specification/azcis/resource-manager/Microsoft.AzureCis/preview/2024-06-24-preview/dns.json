@@ -146,7 +146,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.AzureCis/apSlbVips": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AzureCis/autoPilotSymbolicLabelVirtualIps": {
       "get": {
         "operationId": "ApSlbVip_ListBySubscription",
         "tags": [
@@ -466,7 +466,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureCis/apSlbVips": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureCis/autoPilotSymbolicLabelVirtualIps": {
       "get": {
         "operationId": "ApSlbVip_ListByResourceGroup",
         "tags": [
@@ -508,7 +508,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureCis/apSlbVips/{resourceName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureCis/autoPilotSymbolicLabelVirtualIps/{resourceName}": {
       "get": {
         "operationId": "ApSlbVip_Get",
         "tags": [
@@ -1213,9 +1213,9 @@
           "type": "string",
           "description": "Gets or sets the ttl"
         },
-        "armLocation": {
+        "azureLocation": {
           "type": "string",
-          "description": "Arm location"
+          "description": "Azure location"
         },
         "provisioningState": {
           "$ref": "#/definitions/AddressRecordProvisioningState",
@@ -1306,13 +1306,13 @@
       "type": "object",
       "description": "ApSlbVip properties",
       "properties": {
-        "apDnsName": {
+        "autoPilotDnsName": {
           "type": "string",
-          "description": "Gets or sets the Ap Dns name. This is case-insensitive"
+          "description": "Gets or sets the associated press Dns name. This is case-insensitive"
         },
-        "armLocation": {
+        "azureLocation": {
           "type": "string",
-          "description": "Arm location"
+          "description": "Azure location"
         },
         "provisioningState": {
           "$ref": "#/definitions/ApSlbVipProvisioningState",
@@ -1321,7 +1321,7 @@
         }
       },
       "required": [
-        "apDnsName"
+        "autoPilotDnsName"
       ]
     },
     "CanonicalNameRecordProvisioningState": {
@@ -1413,9 +1413,9 @@
           "type": "string",
           "description": "Gets or sets the ttl"
         },
-        "armLocation": {
+        "azureLocation": {
           "type": "string",
-          "description": "Arm location"
+          "description": "Azure location"
         },
         "provisioningState": {
           "$ref": "#/definitions/CanonicalNameRecordProvisioningState",
@@ -1518,9 +1518,9 @@
           "type": "string",
           "description": "Gets or sets the ttl"
         },
-        "armLocation": {
+        "azureLocation": {
           "type": "string",
-          "description": "Arm location"
+          "description": "Azure location"
         },
         "provisioningState": {
           "$ref": "#/definitions/PtrRecordProvisioningState",
@@ -1635,9 +1635,9 @@
           "type": "string",
           "description": "Gets or sets the ttl"
         },
-        "armLocation": {
+        "azureLocation": {
           "type": "string",
-          "description": "Arm location"
+          "description": "Azure location"
         },
         "provisioningState": {
           "$ref": "#/definitions/ServiceRecordProvisioningState",

@@ -15,11 +15,11 @@ namespace Microsoft.AzureCis;
 @doc("ApSlbVip properties")
 @added(Versions.v2024_06_24_preview)
 model ApSlbVipResourceProperties {
-  @doc("Gets or sets the Ap Dns name. This is case-insensitive")
-  apDnsName: string;
+  @doc("Gets or sets the associated press Dns name. This is case-insensitive")
+  autoPilotDnsName: string;
 
-  @doc("Arm location")
-  armLocation?: string;
+  @doc("Azure location")
+  azureLocation?: string;
 
   @doc("Provisioning state")
   @visibility("read")
@@ -32,7 +32,7 @@ model ApSlbVipResource is ProxyResource<ApSlbVipResourceProperties> {
   @doc("The name of resource.")
   @pattern("^[a-zA-Z0-9-]{3,80}$")
   @key("resourceName")
-  @segment("apSlbVips") // start with lower case
+  @segment("autoPilotSymbolicLabelVirtualIps") // start with lower case
   @visibility("read")
   @path
   name: string;
