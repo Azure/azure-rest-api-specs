@@ -85,14 +85,14 @@ namespace Customizations; // The actual name here doesn't matter and is here for
   "python"
 );
 
-@client({
+/*@client({
   name: "ChatCompletionsClient",
   service: AI.Model,
 })
 interface Client1 {
   complete is AI.Model.getChatCompletions;
   getModelInfo is AI.Model.getModelInfo;
-}
+}*/
 
 @client(
   {
