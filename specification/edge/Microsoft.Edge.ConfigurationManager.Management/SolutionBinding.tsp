@@ -17,6 +17,21 @@ using Azure.ResourceManager;
 
 namespace Microsoft.Edge;
 
+@doc("Configured Solution Version")
+model ConfiguredSolutionVersion {
+  @doc("Solution Version")
+  solutionVersion: string;
+
+  @doc("Latest Configuration Revision")
+  latestConfigRevision: string;
+}
+
+@doc("Solution Configuration Parameter")
+model SolutionConfigurationParameter {
+  @doc("Solution Version")
+  solutionVersion: string;
+}
+
 @doc("Solution Binding Properties")
 model SolutionBindingProperties {
   @doc("Solution of solution binding")
@@ -25,11 +40,16 @@ model SolutionBindingProperties {
   @doc("Deployment Target of solution binding")
   deploymentTarget: string;
 
-  @doc("Active Deployment Instance of solution binding")
+  @doc("Active Solution Instance of solution binding")
   activeSolutionInstance: string;
 
   @doc("Scope of solution binding")
   scope: string;
+
+  @doc("Array of configured solution versions")
+  @visibility("read")
+  @extension("x-ms-identifiers", [])
+  configuredSolutionVersions: ConfiguredSolutionVersion[];
 
   @doc("Provisioning state of resource")
   @visibility("read")
@@ -70,7 +90,7 @@ interface SolutionBindings {
   @doc("Post request to resolve configuration")
   resolveConfiguration is ArmResourceActionAsync<
     SolutionBinding,
-    void,
+    SolutionConfigurationParameter,
     SolutionBindingConfiguration
   >;
 
