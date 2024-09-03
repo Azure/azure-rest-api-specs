@@ -267,7 +267,7 @@
           "200": {
             "description": "List of all DeletedVaults in the subscription.",
             "schema": {
-              "$ref": "#/definitions/DeletedVaultsList"
+              "$ref": "#/definitions/DeletedVaultList"
             }
           },
           "default": {
@@ -1433,7 +1433,7 @@
         }
       }
     },
-    "DeletedVaultsList": {
+    "DeletedVaultList": {
       "description": "The response model for a list of DeletedVaults.",
       "type": "object",
       "properties": {
@@ -1454,28 +1454,13 @@
     },
     "DeletedVault": {
       "description": "DeletedVault information as returned by the resource provider.",
-      "required": [
-        "id",
-        "name",
-        "type"
-      ],
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
       "properties": {
-        "id": {
-          "description": "DeletedVault ARM Id.",
-          "type": "string",
-          "readOnly": true
-        },
-        "name": {
-          "description": "DeletedVault ARM name.",
-          "type": "string",
-          "readOnly": true
-        },
-        "type": {
-          "description": "DeletedVault ARM type.",
-          "type": "string",
-          "readOnly": true
-        },
         "location": {
           "description": "DeletedVault location.",
           "type": "string",
