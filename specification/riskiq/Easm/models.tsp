@@ -2048,9 +2048,7 @@ model ResponseTypeParameter {
 @doc("The prameter of responseIncludes")
 @Versioning.added(Versions.v2024_03_01_preview)
 model ResponseIncludesParameter {
-  @query({
-    format: "csv",
-  })
+  @query
   @doc("The properties to include in the response.")
   responseIncludes?: string[];
 }
@@ -2161,6 +2159,7 @@ alias BodyParameter<
   TName extends valueof string = "body",
   TDoc extends valueof string = "Body parameter."
 > = {
+  #suppress "@azure-tools/typespec-azure-core/friendly-name" "Legacy"
   @doc(TDoc)
   @friendlyName(TName)
   @bodyRoot
