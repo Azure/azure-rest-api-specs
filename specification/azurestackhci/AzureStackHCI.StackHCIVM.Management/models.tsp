@@ -706,7 +706,9 @@ model RouteTable {
   @visibility("read")
   type?: string;
 
+  #suppress "deprecated" "LEGACY flattening"
   @doc("Properties of the route table.")
+  @Azure.ClientGenerator.Core.flattenProperty
   properties?: RouteTableProperties;
 }
 
