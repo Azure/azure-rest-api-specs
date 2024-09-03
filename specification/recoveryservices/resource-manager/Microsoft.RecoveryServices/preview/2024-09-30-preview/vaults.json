@@ -248,19 +248,19 @@
           "DeletedVaults"
         ],
         "description": "List of all DeletedVaults in the subscription.",
-        "operationId": "DeletedVaults_ListAll",
+        "operationId": "DeletedVaults_ListBySubscription",
         "produces": [
           "application/json"
         ],
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/Location"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -283,7 +283,7 @@
         },
         "x-ms-examples": {
           "List of Recovery Services DeletedVaults in SubscriptionId": {
-            "$ref": "./examples/DeletedVaults_ListAll.json"
+            "$ref": "./examples/DeletedVaults_ListBySubscription.json"
           }
         }
       }
@@ -300,7 +300,7 @@
         ],
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/Location"
@@ -309,7 +309,7 @@
             "$ref": "#/parameters/DeletedVaultName"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -349,7 +349,7 @@
         ],
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/Location"
@@ -358,7 +358,7 @@
             "$ref": "#/parameters/DeletedVaultName"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
             "name": "undeleteInput",
@@ -398,7 +398,10 @@
             "$ref": "./examples/DeletedVaults_Undelete.json"
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.RecoveryServices/locations/{location}/deletedVaults/{deletedVaultName}/operations/{operationId}": {
@@ -413,7 +416,7 @@
         ],
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/Location"
@@ -425,10 +428,11 @@
             "name": "operationId",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "description": "Operation tracking Id."
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -1455,15 +1459,22 @@
     "DeletedVault": {
       "description": "DeletedVault information as returned by the resource provider.",
       "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ProxyResource"
-        }
-      ],
-      "required": [
-        "properties"
-      ],
       "properties": {
+        "id": {
+          "description": "ARM ID of the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "ARM name of the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "Type of resource.",
+          "type": "string",
+          "readOnly": true
+        },
         "properties": {
           "$ref": "#/definitions/DeletedVaultProperties"
         }
@@ -1608,27 +1619,6 @@
         "classicAlertSettings": {
           "description": "Settings for classic alerts",
           "$ref": "#/definitions/ClassicAlertSettings"
-        }
-      }
-    },
-    "ProxyResource": {
-      "description": "ARM Proxy Resource.",
-      "type": "object",
-      "properties": {
-        "id": {
-          "description": "Resource Id represents the complete path to the resource.",
-          "type": "string",
-          "readOnly": true
-        },
-        "name": {
-          "description": "Resource name associated with the resource.",
-          "type": "string",
-          "readOnly": true
-        },
-        "type": {
-          "description": "Resource type represents the complete path of the form Namespace/ResourceType/ResourceType/...",
-          "type": "string",
-          "readOnly": true
         }
       }
     },
@@ -2615,6 +2605,7 @@
       "name": "location",
       "in": "path",
       "description": "Location of the resource.",
+      "required": true,
       "type": "string"
     },
     "ApiVersion": {
