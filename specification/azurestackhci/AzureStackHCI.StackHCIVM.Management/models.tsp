@@ -541,8 +541,9 @@ model GalleryImageVersion {
   @doc("This is the version of the gallery image.")
   name?: string;
 
+  #suppress "deprecated" "Legacy flattening"
   @doc("Describes the properties of a gallery image version.")
-  @extension("x-ms-client-flatten", true)
+  @Azure.ClientGenerator.Core.flattenProperty
   properties?: GalleryImageVersionProperties;
 }
 
@@ -574,7 +575,6 @@ model GalleryOSDiskImage {
 }
 
 @doc("The observed state of gallery images")
-@extension("x-ms-client-flatten", true)
 model GalleryImageStatus {
   @doc("GalleryImage provisioning error code")
   errorCode?: string;
@@ -653,8 +653,9 @@ model LogicalNetworkPropertiesDhcpOptions {
 
 @doc("Properties of the subnet.")
 model Subnet {
+  #suppress "deprecated" "Legacy flattening"
   @doc("Properties of the subnet.")
-  @extension("x-ms-client-flatten", true)
+  @Azure.ClientGenerator.Core.flattenProperty
   properties?: SubnetProperties;
 
   @doc("Name - The name of the resource that is unique within a resource group. This name can be used to access the resource.")
@@ -705,8 +706,9 @@ model RouteTable {
   @visibility("read")
   type?: string;
 
+  #suppress "deprecated" "LEGACY flattening"
   @doc("Properties of the route table.")
-  @extension("x-ms-client-flatten", true)
+  @Azure.ClientGenerator.Core.flattenProperty
   properties?: RouteTableProperties;
 }
 
@@ -719,8 +721,9 @@ model RouteTableProperties {
 
 @doc("Route - Route resource.")
 model Route {
+  #suppress "deprecated" "Legacy flattend property"
   @doc("Properties of the route.")
-  @extension("x-ms-client-flatten", true)
+  @Azure.ClientGenerator.Core.flattenProperty
   properties?: RouteProperties;
 
   @doc("Name - name of the subnet")
@@ -846,7 +849,6 @@ model NetworkInterfaceProperties {
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "IP is a short form. The casing is correct."
 @doc("InterfaceIPConfiguration IPConfiguration in a network interface.")
-@extension("x-ms-client-flatten", true)
 model IPConfiguration {
   @doc("Name - The name of the resource that is unique within a resource group. This name can be used to access the resource.")
   @visibility("read", "create")
@@ -887,7 +889,6 @@ model InterfaceDNSSettings {
 }
 
 @doc("The observed state of network interfaces")
-@extension("x-ms-client-flatten", true)
 model NetworkInterfaceStatus {
   @doc("NetworkInterface provisioning error code")
   errorCode?: string;
@@ -909,7 +910,6 @@ model NetworkInterfaceStatusProvisioningStatus {
 }
 
 @doc("The observed state of logical networks")
-@extension("x-ms-client-flatten", true)
 model LogicalNetworkStatus {
   @doc("LogicalNetwork provisioning error code")
   errorCode?: string;
@@ -972,7 +972,6 @@ model MarketplaceGalleryImageProperties {
 }
 
 @doc("The observed state of marketplace gallery images")
-@extension("x-ms-client-flatten", true)
 model MarketplaceGalleryImageStatus {
   @doc("MarketplaceGalleryImage provisioning error code")
   errorCode?: string;
@@ -1042,7 +1041,6 @@ model StorageContainerProperties {
 }
 
 @doc("The observed state of storage containers")
-@extension("x-ms-client-flatten", true)
 model StorageContainerStatus {
   @doc("StorageContainer provisioning error code")
   errorCode?: string;
@@ -1125,7 +1123,6 @@ model VirtualHardDiskProperties {
 }
 
 @doc("The observed state of virtual hard disks")
-@extension("x-ms-client-flatten", true)
 model VirtualHardDiskStatus {
   @doc("VirtualHardDisk provisioning error code")
   errorCode?: string;
@@ -1475,7 +1472,6 @@ model InstanceViewStatus {
 }
 
 @doc("The observed state of virtual machine instances")
-@extension("x-ms-client-flatten", true)
 model VirtualMachineInstanceStatus {
   @doc("VirtualMachine provisioning error code")
   errorCode?: string;

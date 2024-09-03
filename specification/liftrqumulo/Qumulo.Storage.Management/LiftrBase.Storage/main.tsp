@@ -71,6 +71,7 @@ model FileSystemResourceProperties {
   /**
    * Initial administrator password of the resource
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Legacy"
   @extension("x-ms-secret", true)
   adminPassword: string;
 
