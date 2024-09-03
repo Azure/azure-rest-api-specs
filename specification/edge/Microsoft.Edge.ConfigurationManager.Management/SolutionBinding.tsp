@@ -49,7 +49,7 @@ model SolutionBindingProperties {
   @doc("Array of configured solution versions")
   @visibility("read")
   @extension("x-ms-identifiers", [])
-  configuredSolutionVersions: ConfiguredSolutionVersion[];
+  configuredSolutionVersions?: ConfiguredSolutionVersion[];
 
   @doc("Provisioning state of resource")
   @visibility("read")
