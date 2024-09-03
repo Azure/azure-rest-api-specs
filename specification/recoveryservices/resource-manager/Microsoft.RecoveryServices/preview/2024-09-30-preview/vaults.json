@@ -1418,6 +1418,97 @@
         }
       }
     },
+    "DeletedVaultList": {
+      "description": "The response model for a list of DeletedVaults.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DeletedVault"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "DeletedVault": {
+      "description": "DeletedVault information as returned by the resource provider.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "DeletedVault ARM Id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "DeletedVault ARM name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "DeletedVault ARM type.",
+          "type": "string",
+          "readOnly": true
+        },
+        "location": {
+          "description": "DeletedVault location.",
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/DeletedVaultProperties"
+        }
+      }
+    },
+    "DeletedVaultProperties": {
+      "description": "Properties of the DeletedVault.",
+      "type": "object",
+      "properties": {
+        "vaultId": {
+          "description": "ARM Id of the Vault which was deleted.",
+          "type": "string",
+          "readOnly": true
+        },
+        "vaultDeletionTime": {
+          "description": "Time in UTC at which the Vault was deleted.",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "purgeAt": {
+          "description": "Time in UTC at which the DeletedVault will be purged.",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        }
+      }
+    },
+    "DeletedVaultUndeleteInput": {
+      "description": "Input definition for DeletedVault undelete.",
+      "required": [
+        "properties"
+      ],
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/UnplannedFailoverInputProperties",
+          "description": "Unplanned failover input properties."
+        }
+      }
+    },
+    "DeletedVaultUndeleteInputProperties": {
+      "description": "Input definition for DeletedVault undelete properties.",
+      "type": "object",
+      "properties": {
+        "recoveryResourceGroupId": {
+          "description": "Recovery resource group Id.",
+          "type": "string"
+        }
+      }
+    },
     "RestoreSettings": {
       "description": "Restore Settings  of the vault",
       "type": "object",
