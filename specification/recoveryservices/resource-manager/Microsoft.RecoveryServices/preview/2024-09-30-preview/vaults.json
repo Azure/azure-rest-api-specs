@@ -247,8 +247,8 @@
         "tags": [
           "DeletedVaults"
         ],
-        "description": "Fetches all the DeletedVaults in the subscription.",
-        "operationId": "DeletedVaults_ListBySubscriptionId",
+        "description": "List of all DeletedVaults in the subscription.",
+        "operationId": "DeletedVaults_ListBySubscription",
         "produces": [
           "application/json"
         ],
@@ -257,11 +257,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "name": "location",
-            "in": "path",
-            "description": "Location of the resource",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/Location"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -269,7 +265,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "List of all DeletedVaults in the subscription.",
             "schema": {
               "$ref": "#/definitions/DeletedVaultCollection"
             }
@@ -287,7 +283,7 @@
         },
         "x-ms-examples": {
           "List of Recovery Services DeletedVaults in SubscriptionId": {
-            "$ref": "./examples/DeletedVaults_ListBySubscriptionId.json"
+            "$ref": "./examples/DeletedVaults_ListBySubscription.json"
           }
         }
       }
@@ -307,18 +303,15 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "name": "location",
-            "in": "path",
-            "description": "Location of the resource",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/Location"
           },
           {
             "$ref": "#/parameters/DeletedVaultName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           }
+
         ],
         "responses": {
           "200": {
@@ -360,11 +353,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "name": "location",
-            "in": "path",
-            "description": "Location of the resource",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/Location"
           },
           {
             "$ref": "#/parameters/DeletedVaultName"
@@ -428,11 +417,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "name": "location",
-            "in": "path",
-            "description": "Location of the resource",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/Location"
           },
           {
             "$ref": "#/parameters/DeletedVaultName"
@@ -1491,7 +1476,11 @@
           "description": "DeletedVault location.",
           "type": "string",
           "readOnly": true,
-          "required":  false
+          "required":  [
+            "id",
+            "name",
+            "type"
+          ]
         },
         "properties": {
           "$ref": "#/definitions/DeletedVaultProperties"
@@ -1536,6 +1525,9 @@
     },
     "DeletedVaultUndeleteInputProperties": {
       "description": "Input definition for DeletedVault undelete properties.",
+      "required": [
+        "recoveryResourceGroupId"
+      ],
       "type": "object",
       "properties": {
         "recoveryResourceGroupId": {
@@ -2615,6 +2607,13 @@
       "required": true,
       "pattern": "^[A-Za-z][A-Za-z0-9-]*$",
       "x-ms-parameter-location": "method",
+      "type": "string"
+    },
+    "Location": {
+      "name": "location",
+      "in": "path",
+      "description": "Location of the resource.",
+      "required": true,
       "type": "string"
     },
     "ApiVersion": {
