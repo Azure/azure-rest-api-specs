@@ -28,6 +28,7 @@ model ConfigurationLink {
 @doc("Solution Properties")
 model SolutionProperties {
   @doc("Current Version of solution")
+  @visibility("read")
   currentVersion: string;
 
   @doc("List of capabilities")
