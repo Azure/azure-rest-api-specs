@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Microsoft NetApp",
+    "title": "Microsoft NetApp PUBLIC",
     "description": "Microsoft NetApp Azure Resource Provider specification",
     "version": "2024-05-01-preview",
     "x-ms-code-generation-settings": {
@@ -886,14 +886,14 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/migrateEncryption": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/transitionToCmk": {
       "post": {
         "tags": [
           "NetApp Accounts"
         ],
-        "operationId": "Accounts_MigrateEncryptionKey",
-        "summary": "Migrate volumes encryption key source.",
-        "description": "Migrates all volumes in a VNet to a different encryption key source (Microsoft-managed key or Azure Key Vault). Operation fails if targeted volumes share encryption sibling set with volumes from another account.",
+        "operationId": "Accounts_TransitionToCmk",
+        "summary": "Transition volumes encryption from PMK to CMK.",
+        "description": "Transitions all volumes in a VNet to a different encryption key source (Microsoft-managed key or Azure Key Vault). Operation fails if targeted volumes share encryption sibling set with volumes from another account.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
@@ -939,7 +939,7 @@
         },
         "x-ms-examples": {
           "Accounts_MigrateEncryptionKey": {
-            "$ref": "examples/Accounts_MigrateEncryptionKey.json"
+            "$ref": "examples/Accounts_TransitionEncryptionKey.json"
           }
         }
       }
@@ -1000,7 +1000,7 @@
         ],
         "operationId": "Accounts_ChangeKeyVault",
         "summary": "Change Key Vault/Managed HSM that is used for encryption of volumes under NetApp account.",
-        "description": "Affects existing volumes that are encrypted with Key Vault/Managed HSM, and new volumes. Supports MHSM to Key Vault, Key Vault to MHSM, MHSM to MHSM and Key Vault to Key Vault.",
+        "description": "Affects existing volumes that are encrypted with Key Vault/Managed HSM, and new volumes. Supports HSM to Key Vault, Key Vault to HSM, HSM to HSM and Key Vault to Key Vault.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
