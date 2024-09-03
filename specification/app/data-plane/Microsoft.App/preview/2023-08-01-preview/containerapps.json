@@ -39,9 +39,9 @@
   },
   "tags": [],
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/sessionPools/{sessionPoolName}/code/execute": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/sessionPools/{sessionPoolName}/codeExecute": {
       "post": {
-        "operationId": "SessionCodeExecution_ExecuteCode",
+        "operationId": "ExecuteCode",
         "description": "Execute code in a session.",
         "parameters": [
           {
@@ -73,7 +73,53 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/SessionCodeExecutionResponse"
+              "$ref": "#/definitions/SessionCodeExecutionResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/sessionPools/{sessionPoolName}/codeExecutionResult": {
+      "get": {
+        "operationId": "GetCodeExecutionResult",
+        "description": "Get the code execution result.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SessionPoolNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SessionIdentifier"
+          },
+          {
+            "$ref": "#/parameters/CodeExecutionIdentifier"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/SessionCodeExecutionResult"
             }
           },
           "default": {
@@ -537,7 +583,8 @@
       "type": "string",
       "description": "Execution Type",
       "enum": [
-        "Synchronous"
+        "Synchronous",
+        "Asynchronous"
       ],
       "x-ms-enum": {
         "name": "ExecutionType",
@@ -547,6 +594,59 @@
             "name": "synchronous",
             "value": "Synchronous",
             "description": "Synchronous"
+          },
+          {
+            "name": "asynchronous",
+            "value": "Asynchronous",
+            "description": "Asynchronous"
+          }
+        ]
+      }
+    },
+    "MultiArrayStatus": {
+      "type": "string",
+      "description": "Multi array status.",
+      "enum": [
+        "MultiArrayEnabled",
+        "MultiArrayDisabled"
+      ],
+      "x-ms-enum": {
+        "name": "MultiArrayStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "multiArrayEnabled",
+            "value": "MultiArrayEnabled",
+            "description": "Multi array enabled"
+          },
+          {
+            "name": "multiArrayDisabled",
+            "value": "MultiArrayDisabled",
+            "description": "Multi array disabled."
+          }
+        ]
+      }
+    },
+    "NetworkStatus": {
+      "type": "string",
+      "description": "Network status.",
+      "enum": [
+        "EgressEnabled",
+        "EgressDisabled"
+      ],
+      "x-ms-enum": {
+        "name": "NetworkStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "egressEnabled",
+            "value": "EgressEnabled",
+            "description": "Session egress enabled."
+          },
+          {
+            "name": "egressDisabled",
+            "value": "EgressDisabled",
+            "description": "Session egress disabled."
           }
         ]
       }
@@ -592,19 +692,6 @@
       "type": "object",
       "description": "The request to execute code.",
       "properties": {
-        "properties": {
-          "$ref": "#/definitions/SessionCodeExecutionRequestProperties",
-          "description": "The properties for executing code."
-        }
-      },
-      "required": [
-        "properties"
-      ]
-    },
-    "SessionCodeExecutionRequestProperties": {
-      "type": "object",
-      "description": "The properties of the code execution request.",
-      "properties": {
         "codeInputType": {
           "$ref": "#/definitions/CodeInputType",
           "description": "The code input type of the code execution request."
@@ -612,6 +699,14 @@
         "executionType": {
           "$ref": "#/definitions/ExecutionType",
           "description": "The execution type of the code execution request."
+        },
+        "networkStatus": {
+          "$ref": "#/definitions/NetworkStatus",
+          "description": "The network status of the code execution session."
+        },
+        "multiArrayStatus": {
+          "$ref": "#/definitions/MultiArrayStatus",
+          "description": "The multi array status of the code execution session."
         },
         "code": {
           "type": "string",
@@ -626,27 +721,21 @@
       "required": [
         "codeInputType",
         "executionType",
+        "networkStatus",
+        "multiArrayStatus",
         "code",
         "timeoutInSeconds"
       ]
     },
-    "SessionCodeExecutionResponse": {
+    "SessionCodeExecutionResult": {
       "type": "object",
-      "description": "The response containing the result of the code execution.",
+      "description": "The result containing the result of the code execution.",
       "properties": {
-        "properties": {
-          "$ref": "#/definitions/SessionCodeExecutionResponseProperties",
-          "description": "The properties of the code execution response."
-        }
-      },
-      "required": [
-        "properties"
-      ]
-    },
-    "SessionCodeExecutionResponseProperties": {
-      "type": "object",
-      "description": "The properties of the code execution result.",
-      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Session code execution id",
+          "readOnly": true
+        },
         "status": {
           "$ref": "#/definitions/CodeExecutionStatus",
           "description": "The status of the code execution, indicates whether succeeded or not."
@@ -669,6 +758,7 @@
         }
       },
       "required": [
+        "id",
         "status",
         "stdout",
         "stderr",
@@ -779,6 +869,14 @@
       "minLength": 1,
       "x-ms-parameter-location": "method",
       "x-ms-client-name": "apiVersion"
+    },
+    "CodeExecutionIdentifier": {
+      "name": "executionId",
+      "in": "query",
+      "description": "The identifier of code execution.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "client"
     },
     "ResourceGroupNameParameter": {
       "name": "resourceGroupName",

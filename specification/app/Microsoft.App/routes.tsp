@@ -21,26 +21,41 @@ alias SessionTraits = NoRepeatableRequests &
 
 alias SessionOperations = Azure.Core.ResourceOperations<SessionTraits>;
 
-interface SessionCodeExecution {
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" ""
-  @doc("Execute code in a session.")
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/sessionPools/{sessionPoolName}/code/execute")
-  executeCode is Foundations.Operation<
-    {
-      ...SubscriptionIdParameter;
-      ...ResourceGroupNameParameter;
-      ...SessionPoolNameParameter;
-      ...SessionIdentifier;
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" ""
+@doc("Execute code in a session.")
+@route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/sessionPools/{sessionPoolName}/codeExecute")
+op executeCode is Foundations.Operation<
+  {
+    ...SubscriptionIdParameter;
+    ...ResourceGroupNameParameter;
+    ...SessionPoolNameParameter;
+    ...SessionIdentifier;
 
-      @doc("The request to execute code.")
-      @body
-      codeExecutionRequest: SessionCodeExecutionRequest;
-    },
-    SessionCodeExecutionResponse,
-    {},
-    Foundations.ErrorResponse
-  >;
-}
+    @doc("The request to execute code.")
+    @body
+    codeExecutionRequest: SessionCodeExecutionRequest;
+  },
+  SessionCodeExecutionResult,
+  {},
+  Foundations.ErrorResponse
+>;
+
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" ""
+@Foundations.Private.ensureVerb("ResourceRead", "GET")
+@doc("Get the code execution result.")
+@route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/sessionPools/{sessionPoolName}/codeExecutionResult")
+op getCodeExecutionResult is Foundations.Operation<
+  {
+    ...SubscriptionIdParameter;
+    ...ResourceGroupNameParameter;
+    ...SessionPoolNameParameter;
+    ...SessionIdentifier;
+    ...CodeExecutionIdentifier;
+  },
+  SessionCodeExecutionResult,
+  {},
+  Foundations.ErrorResponse
+>;
 
 interface SessionResourceFiles {
   @doc("List the file resources.")

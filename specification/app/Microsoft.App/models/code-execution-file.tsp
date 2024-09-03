@@ -20,15 +20,6 @@ model SessionResourceFile {
   @visibility("create")
   fileName: string;
 
-  @doc("Code execution file resource properties.")
-  properties: SessionResourceFileProperties;
-}
-
-@doc("Code execution file resource properties.")
-model SessionResourceFileProperties {
-  @doc("The name of the file.")
-  fileName: string;
-
   @doc("The size of the file.")
   sizeInBytes: int64;
 

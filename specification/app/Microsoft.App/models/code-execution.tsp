@@ -6,29 +6,46 @@ namespace Microsoft.App;
 
 @doc("The request to execute code.")
 model SessionCodeExecutionRequest {
-  @doc("The properties for executing code.")
-  properties: SessionCodeExecutionRequestProperties;
-}
-
-@doc("The response containing the result of the code execution.")
-model SessionCodeExecutionResponse {
-  @doc("The properties of the code execution response.")
-  properties: SessionCodeExecutionResponseProperties;
-}
-
-@doc("The properties of the code execution request.")
-model SessionCodeExecutionRequestProperties {
   @doc("The code input type of the code execution request.")
   codeInputType: CodeInputType;
 
   @doc("The execution type of the code execution request.")
   executionType: ExecutionType;
 
+  @doc("The network status of the code execution session.")
+  networkStatus: NetworkStatus;
+
+  @doc("The multi array status of the code execution session.")
+  multiArrayStatus: MultiArrayStatus;
+
   @doc("The string of the code to execute, based on CodeInputType.")
   code: string;
 
   @doc("Code execution timeout in seconds.")
   timeoutInSeconds: int64;
+}
+
+@doc("The result containing the result of the code execution.")
+model SessionCodeExecutionResult {
+  @visibility("read")
+  @doc("Session code execution id")
+  id: string;
+
+  @doc("The status of the code execution, indicates whether succeeded or not.")
+  status: CodeExecutionStatus;
+
+  @doc("The standard output of the code execution.")
+  stdout: string;
+
+  @doc("The standard error of the code execution.")
+  stderr: string;
+
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" ""
+  @doc("The result of the code execution.")
+  result: unknown;
+
+  @doc("The execution time of the code in milliseconds.")
+  executionTimeInMilliseconds: int64;
 }
 
 @doc("Code input type.")
@@ -51,25 +68,31 @@ union ExecutionType {
 
   @doc("Synchronous")
   synchronous: "Synchronous",
+
+  @doc("Asynchronous")
+  asynchronous: "Asynchronous",
 }
 
-@doc("The properties of the code execution result.")
-model SessionCodeExecutionResponseProperties {
-  @doc("The status of the code execution, indicates whether succeeded or not.")
-  status: CodeExecutionStatus;
+@doc("Network status.")
+union NetworkStatus {
+  string,
 
-  @doc("The standard output of the code execution.")
-  stdout: string;
+  @doc("Session egress enabled.")
+  egressEnabled: "EgressEnabled",
 
-  @doc("The standard error of the code execution.")
-  stderr: string;
+  @doc("Session egress disabled.")
+  egressDisabled: "EgressDisabled",
+}
 
-  #suppress "@azure-tools/typespec-azure-core/no-unknown" ""
-  @doc("The result of the code execution.")
-  result: unknown;
+@doc("Multi array status.")
+union MultiArrayStatus {
+  string,
 
-  @doc("The execution time of the code in milliseconds.")
-  executionTimeInMilliseconds: int64;
+  @doc("Multi array enabled")
+  multiArrayEnabled: "MultiArrayEnabled",
+
+  @doc("Multi array disabled.")
+  multiArrayDisabled: "MultiArrayDisabled",
 }
 
 @doc("Code execution status.")
