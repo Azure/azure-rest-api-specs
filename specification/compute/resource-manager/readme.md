@@ -34,7 +34,7 @@ These are the global settings for the Compute API.
 title: ComputeManagementClient
 description: Compute Client
 openapi-type: arm
-tag: package-2024-07-01-only
+tag: package-2024-07-01
 
 modelerfour:
   lenient-model-deduplication: true
