@@ -3952,7 +3952,7 @@
         },
         "activeSolutionInstance": {
           "type": "string",
-          "description": "Active Solution Instance of solution binding"
+          "description": "Active Deployment Instance of solution binding"
         },
         "scope": {
           "type": "string",
@@ -3985,7 +3985,7 @@
         },
         "activeSolutionInstance": {
           "type": "string",
-          "description": "Active Solution Instance of solution binding"
+          "description": "Active Deployment Instance of solution binding"
         },
         "scope": {
           "type": "string",
@@ -4128,8 +4128,7 @@
       "properties": {
         "currentVersion": {
           "type": "string",
-          "description": "Current Version of solution",
-          "readOnly": true
+          "description": "Current Version of solution"
         },
         "capabilities": {
           "type": "array",
@@ -4159,6 +4158,7 @@
         }
       },
       "required": [
+        "currentVersion",
         "capabilities",
         "description"
       ]
@@ -4167,6 +4167,10 @@
       "type": "object",
       "description": "Solution Properties",
       "properties": {
+        "currentVersion": {
+          "type": "string",
+          "description": "Current Version of solution"
+        },
         "capabilities": {
           "type": "array",
           "description": "List of capabilities",
