@@ -98,9 +98,6 @@ op updateAssistant is Azure.Core.RpcOperation<
 >;
 /*
 op updateAssistant(
-  /**
-   * The request details to use when modifying an existing assistant.
-   */
   ...UpdateAssistantOptions
 ): Assistant;
 */
