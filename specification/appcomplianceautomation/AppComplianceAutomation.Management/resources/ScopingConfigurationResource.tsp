@@ -82,6 +82,11 @@ interface ScopingConfiguration {
   "Parameters for the create or update operation, this is a singleton resource, so please make sure you're using 'default' as the name."
 );
 
+#suppress "deprecated" "LEGACY - DO NOT COPY - FIX"
+@@encodedName(ScopingConfiguration.createOrUpdate::parameters.resource,
+  "application/json",
+  "parameters"
+);
 @@clientName(ScopingConfiguration.createOrUpdate::parameters.resource,
   "properties"
 );

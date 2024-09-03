@@ -162,6 +162,11 @@ interface Report {
 @@doc(Report.createOrUpdate::parameters.resource,
   "Parameters for the create or update operation"
 );
+#suppress "deprecated" "LEGACY - DO NOT COPY - FIX"
+@@encodedName(Report.createOrUpdate::parameters.resource,
+  "application/json",
+  "parameters"
+);
 
 @@clientName(Report.createOrUpdate::parameters.resource, "properties");
 

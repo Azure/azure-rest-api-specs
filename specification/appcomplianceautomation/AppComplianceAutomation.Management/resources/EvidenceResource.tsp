@@ -110,4 +110,9 @@ interface Evidence {
 );
 @@doc(Evidence.download::parameters.body, "Parameters for the query operation");
 
+#suppress "deprecated" "LEGACY - DO NOT COPY - FIX"
+@@encodedName(Evidence.createOrUpdate::parameters.resource,
+  "application/json",
+  "parameters"
+);
 @@clientName(Evidence.createOrUpdate::parameters.resource, "properties");

@@ -103,4 +103,16 @@ interface Webhook {
   "Parameters for the create or update operation"
 );
 
-@@clientName(Webhook.createOrUpdate::parameters.resource, "parameters");
+#suppress "deprecated" "LEGACY - DO NOT COPY - FIX"
+@@encodedName(Webhook.update::parameters.properties,
+  "application/json",
+  "parameters"
+);
+
+#suppress "deprecated" "LEGACY - DO NOT COPY - FIX"
+@@encodedName(Webhook.createOrUpdate::parameters.resource,
+  "application/json",
+  "parameters"
+);
+
+@@clientName(Webhook.createOrUpdate::parameters.resource, "properties");
