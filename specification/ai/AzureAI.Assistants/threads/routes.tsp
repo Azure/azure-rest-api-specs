@@ -71,14 +71,22 @@ op getThread(@path threadId: string): AssistantThread;
 #suppress "@azure-tools/typespec-azure-core/no-operation-id" "non-standard operations"
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
 @post
-@route("/threads/{threadId}")
+@route("/openai/threads/{threadId}")
 @added(ServiceApiVersions.v2024_02_15_preview)
+op updateThread is Azure.Core.RpcOperation<
+  {
+    /**
+     * The details used to update an existing assistant thread.
+     */
+    ...UpdateAssistantThreadOptions
+  },
+  AssistantThread
+>;
+/*
 op updateThread(
-  /**
-   * The details used to update an existing assistant thread.
-   */
   ...UpdateAssistantThreadOptions
 ): AssistantThread;
+*/
 
 /**
  * Deletes an existing thread.
@@ -92,4 +100,12 @@ op updateThread(
 @delete
 @route("/threads/{threadId}")
 @added(ServiceApiVersions.v2024_02_15_preview)
+op deleteThread is Azure.Core.RpcOperation<
+  {
+    @path threadId: string
+  },
+  ThreadDeletionStatus
+>;
+/*
 op deleteThread(@path threadId: string): ThreadDeletionStatus;
+*/
