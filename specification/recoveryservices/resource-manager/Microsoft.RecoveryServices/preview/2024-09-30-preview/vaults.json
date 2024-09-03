@@ -242,6 +242,201 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.RecoveryServices/locations/{location}/deletedVaults": {
+      "get": {
+        "tags": [
+          "DeletedVaults"
+        ],
+        "description": "Fetches all the deleted vaults in the subscription.",
+        "operationId": "DeletedVaults_ListBySubscriptionId",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DeletedVaultList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink",
+          "itemName": "value"
+        },
+        "x-ms-examples": {
+          "List of Recovery Services Deleted Vaults in SubscriptionId": {
+            "$ref": "./examples/DeletedVaults_ListBySubscriptionId.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.RecoveryServices/locations/{location}/deletedVaults/{deletedVaultName}": {
+      "get": {
+        "tags": [
+          "DeletedVaults"
+        ],
+        "description": "Get the DeletedVault details.",
+        "operationId": "DeletedVaults_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+
+          {
+            "$ref": "#/parameters/DeletedVaultName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DeletedVault"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-examples": {
+          "Get Recovery Services Deleted Vault": {
+            "$ref": "./examples/DeletedVaults_Get.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.RecoveryServices/locations/{location}/deletedVaults/{deletedVaultName}/undelete": {
+      "post": {
+        "tags": [
+          "DeletedVaults"
+        ],
+        "description": "Undeletes the deleted vault.",
+        "operationId": "DeletedVaults_Undelete",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/DeletedVaultName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "undeleteInput",
+            "in": "body",
+            "description": "Undelete input.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DeletedVaultUndeleteInput"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DeletedVault"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-examples": {
+          "Undeletes the Recovery Services Deleted Vault": {
+            "$ref": "./examples/DeletedVaults_Undelete.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.RecoveryServices/locations/{location}/deletedVaults/{deletedVaultName}/operations/{operationId}": {
+      "get": {
+        "tags": [
+          "DeletedVaults"
+        ],
+        "description": "Gets the operation status for a deleted vault.",
+        "operationId": "DeletedVaults_GetDeletedVaultOperationStatus",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/DeletedVaultName"
+          },
+          {
+            "name": "operationId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/OperationResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Operation Status": {
+            "$ref": "./examples/DeletedVaults_GetDeletedVaultOperationStatus.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.RecoveryServices/vaults": {
       "get": {
         "tags": [
@@ -2283,6 +2478,14 @@
       "name": "vaultName",
       "in": "path",
       "description": "The name of the recovery services vault.",
+      "required": true,
+      "x-ms-parameter-location": "method",
+      "type": "string"
+    },
+    "DeletedVaultName": {
+      "name": "deletedVaultName",
+      "in": "path",
+      "description": "The name of the deleted recovery services vault.",
       "required": true,
       "x-ms-parameter-location": "method",
       "type": "string"
