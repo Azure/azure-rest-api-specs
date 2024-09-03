@@ -69,6 +69,7 @@ interface ListTenantConfigurationViolationsOperations {
 @@doc(TenantConfigurations.create::parameters.resource,
   "The parameters required to create or update tenant configuration."
 );
+#suppress "deprecated" "LEGACY - DO NOT COPY - FIX"
 @@encodedName(TenantConfigurations.create::parameters.resource,
   "application/json",
   "tenantConfiguration"

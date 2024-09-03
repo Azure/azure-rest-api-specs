@@ -174,7 +174,7 @@ interface Report {
 @@doc(Report.checkNameAvailability::parameters.body,
   "NameAvailabilityRequest object."
 );
-
+#suppress "deprecated" "LEGACY - DO NOT COPY - FIX"
 @@encodedName(Report.update::parameters.properties,
   "application/json",
   "parameters"
