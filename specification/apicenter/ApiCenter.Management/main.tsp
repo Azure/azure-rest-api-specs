@@ -43,6 +43,85 @@ enum Versions {
   v2024_03_15_preview: "2024-03-15-preview",
 }
 
+#suppress "deprecated" "LEGACY - DO NOT COPY THIS DOESN'T MAKE SENSE - FIX"
+@@encodedName(Apis.createOrUpdate::parameters.resource,
+  "application/json",
+  "payload"
+);
+@@clientName(Apis.createOrUpdate::parameters.resource, "payload");
+
+#suppress "deprecated" "LEGACY - DO NOT COPY THIS DOESN'T MAKE SENSE - FIX"
+@@encodedName(ApiDefinitions.createOrUpdate::parameters.resource,
+  "application/json",
+  "payload"
+);
+@@clientName(ApiDefinitions.createOrUpdate::parameters.resource, "payload");
+
+#suppress "deprecated" "LEGACY - DO NOT COPY THIS DOESN'T MAKE SENSE - FIX"
+@@encodedName(ApiVersions.createOrUpdate::parameters.resource,
+  "application/json",
+  "payload"
+);
+@@clientName(ApiVersions.createOrUpdate::parameters.resource, "payload");
+
+#suppress "deprecated" "LEGACY - DO NOT COPY THIS DOESN'T MAKE SENSE - FIX"
+@@encodedName(Deployments.createOrUpdate::parameters.resource,
+  "application/json",
+  "payload"
+);
+@@clientName(Deployments.createOrUpdate::parameters.resource, "payload");
+
+#suppress "deprecated" "LEGACY - DO NOT COPY THIS DOESN'T MAKE SENSE - FIX"
+@@encodedName(Environments.createOrUpdate::parameters.resource,
+  "application/json",
+  "payload"
+);
+@@clientName(Environments.createOrUpdate::parameters.resource, "payload");
+
+#suppress "deprecated" "LEGACY - DO NOT COPY THIS DOESN'T MAKE SENSE - FIX"
+@@encodedName(MetadataSchemas.createOrUpdate::parameters.resource,
+  "application/json",
+  "payload"
+);
+@@clientName(MetadataSchemas.createOrUpdate::parameters.resource, "payload");
+
+#suppress "deprecated" "LEGACY - DO NOT COPY THIS DOESN'T MAKE SENSE - FIX"
+@@encodedName(Services.update::parameters.properties,
+  "application/json",
+  "payload"
+);
+@@clientName(Services.update::parameters.properties, "payload");
+
+#suppress "deprecated" "LEGACY - DO NOT COPY THIS DOESN'T MAKE SENSE - FIX"
+@@encodedName(Workspaces.createOrUpdate::parameters.resource,
+  "application/json",
+  "payload"
+);
+@@clientName(Workspaces.createOrUpdate::parameters.resource, "payload");
+
+#suppress "deprecated" "LEGACY - DO NOT COPY THIS DOESN'T MAKE SENSE - FIX"
+@@encodedName(ApiDefinitions.importSpecification::parameters.body,
+  "application/json",
+  "payload"
+);
+
+@@clientName(ApiDefinitions.importSpecification::parameters.body, "payload");
+
+@@encodedName(ApiDefinitions.exportSpecification::parameters.body,
+  "application/json",
+  "payload"
+);
+
+@@clientName(ApiDefinitions.exportSpecification::parameters.body, "payload");
+
+#suppress "deprecated" "LEGACY - DO NOT COPY THIS DOESN'T MAKE SENSE - FIX"
+@@encodedName(Services.exportMetadataSchema::parameters.body,
+  "application/json",
+  "payload"
+);
+
+@@clientName(Services.exportMetadataSchema::parameters.body, "payload");
+
 @@visibility(Azure.Core.Page.nextLink, "read");
 @@visibility(Azure.Core.Page.value, "read");
 /**
