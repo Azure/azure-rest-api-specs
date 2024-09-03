@@ -722,7 +722,7 @@ model ProjectTrainedModel {
   /**
    * The trained model label.
    */
-  @key("lable")
+  @key
   @visibility("read")
   trainedModelLabel: string;  //label: string;
 
@@ -1467,7 +1467,7 @@ model TrainingConfigVersions {
   /**
    * The list of the training config versions.
    */
-  value: TrainingConfigVersion[];
+  value: TrainingConfigVersionInfo[];
 
   /**
    * The next page link.
@@ -1478,12 +1478,11 @@ model TrainingConfigVersions {
 /**
  * Represents a training config version.
  */
-model TrainingConfigVersion {
+model TrainingConfigVersionInfo {
   /**
    * Represents the version of the config.
    */
-  @clientName("trainingConfigVersion", "csharp")
-  configVersion: string;
+  trainingConfigVersion: string;
 
   /**
    * Represents the training config version expiration date.

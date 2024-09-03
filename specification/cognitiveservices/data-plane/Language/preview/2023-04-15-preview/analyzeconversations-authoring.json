@@ -378,6 +378,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "SuccessfulCopyProject": {
+            "$ref": "./examples/SuccessfulCopyProject.json"
+          }
+        },
         "x-ms-long-running-operation": true
       }
     },
@@ -1323,7 +1328,7 @@
         }
       }
     },
-    "/projects/{projectName}/models/{lable}": {
+    "/projects/{projectName}/models/{trainedModelLabel}": {
       "get": {
         "operationId": "GetTrainedModel",
         "summary": "Get trained model details",
@@ -1340,7 +1345,7 @@
             "type": "string"
           },
           {
-            "name": "lable",
+            "name": "trainedModelLabel",
             "in": "path",
             "description": "The trained model label.",
             "required": true,
@@ -1383,7 +1388,7 @@
             "type": "string"
           },
           {
-            "name": "lable",
+            "name": "trainedModelLabel",
             "in": "path",
             "description": "The trained model label.",
             "required": true,
@@ -4927,11 +4932,11 @@
         "secondDeploymentName"
       ]
     },
-    "TrainingConfigVersion": {
+    "TrainingConfigVersionInfo": {
       "type": "object",
       "description": "Represents a training config version.",
       "properties": {
-        "configVersion": {
+        "trainingConfigVersion": {
           "type": "string",
           "description": "Represents the version of the config."
         },
@@ -4942,7 +4947,7 @@
         }
       },
       "required": [
-        "configVersion",
+        "trainingConfigVersion",
         "modelExpirationDate"
       ]
     },
@@ -4954,7 +4959,7 @@
           "type": "array",
           "description": "The list of the training config versions.",
           "items": {
-            "$ref": "#/definitions/TrainingConfigVersion"
+            "$ref": "#/definitions/TrainingConfigVersionInfo"
           },
           "x-ms-identifiers": []
         },
