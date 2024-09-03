@@ -23,8 +23,16 @@ namespace Azure.AI.Assistants;
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
 @get
 @added(ServiceApiVersions.v2024_02_15_preview)
-@route("/files")
+@route("/openai/files")
+op listFiles is Azure.Core.RpcOperation<
+  {
+    @query purpose?: FilePurpose
+  },
+  FileListResponse
+>;
+/*
 op listFiles(@query purpose?: FilePurpose): FileListResponse;
+*/
 
 /**
  * Uploads a file for use by other operations.
@@ -41,57 +49,102 @@ op listFiles(@query purpose?: FilePurpose): FileListResponse;
 #suppress "@azure-tools/typespec-azure-core/byos" "mirrored API"
 @post
 @added(ServiceApiVersions.v2024_02_15_preview)
-@route("/files")
+@route("/openai/files")
+op uploadFile is Azure.Core.RpcOperation<
+  {
+    @header contentType: "multipart/form-data",
+    @clientName("Data", "csharp") file: bytes,
+    purpose: FilePurpose,
+
+    /*
+     * Spec note: filename is not documented as a distinct option but functionally should be one. The value is encoded
+     *            in the multipart Content-Disposition header for the data section and can be provided independently of
+     *            any specific data source like a file. It can be inferred in some circumstances (as when using direct
+     *            file input, like curl does) but should remain configurable when using a stream or other data source
+     *            lacking an a priori name.
+     */
+    filename?: string
+  },
+  OpenAIFile
+>;
+/*
 op uploadFile(
   @header contentType: "multipart/form-data",
   @clientName("Data", "csharp") file: bytes,
   purpose: FilePurpose,
 
-  /*
-   * Spec note: filename is not documented as a distinct option but functionally should be one. The value is encoded
-   *            in the multipart Content-Disposition header for the data section and can be provided independently of
-   *            any specific data source like a file. It can be inferred in some circumstances (as when using direct
-   *            file input, like curl does) but should remain configurable when using a stream or other data source
-   *            lacking an a priori name.
-   */
   filename?: string,
 ): OpenAIFile;
+*/
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
 #suppress "@azure-tools/typespec-azure-core/no-operation-id" "non-standard operations"
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
 @delete
 @doc("Delete a previously uploaded file.")
-@route("/files/{fileId}")
+@route("/openai/files/{fileId}")
+op deleteFile is Azure.Core.RpcOperation<
+  {
+    @doc("The ID of the file to delete.")
+    @encodedName("application/json", "file_id")
+    @path
+    fileId: string
+  },
+  FileDeletionStatus
+>;
+/*
 op deleteFile(
   @doc("The ID of the file to delete.")
   @encodedName("application/json", "file_id")
   @path
   fileId: string,
 ): FileDeletionStatus;
+*/
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
 #suppress "@azure-tools/typespec-azure-core/no-operation-id" "non-standard operations"
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
 #suppress "@azure-tools/typespec-azure-core/use-standard-names" "mirrored API name parity"
 @get
-@route("/files/{fileId}")
+@route("/openai/files/{fileId}")
 @doc("Returns information about a specific file. Does not retrieve file content.")
+op getFile is Azure.Core.RpcOperation<
+  {
+    @doc("The ID of the file to retrieve.")
+    @path
+    @encodedName("application/json", "file_id")
+    fileId: string
+  },
+  OpenAIFile
+>;
+/*
 op getFile(
   @doc("The ID of the file to retrieve.")
   @path
   @encodedName("application/json", "file_id")
   fileId: string,
 ): OpenAIFile;
+*/
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
 @get
-@route("/files/{fileId}/content")
+@route("/openai/files/{fileId}/content")
 @doc("Returns information about a specific file. Does not retrieve file content.")
+op getFileContent is Azure.Core.RpcOperation<
+  {
+    @doc("The ID of the file to retrieve.")
+    @path
+    @encodedName("application/json", "file_id")
+    fileId: string
+  },
+  bytes
+>;
+/*
 op getFileContent(
   @doc("The ID of the file to retrieve.")
   @path
   @encodedName("application/json", "file_id")
   fileId: string,
 ): bytes;
+*/
