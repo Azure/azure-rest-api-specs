@@ -526,4 +526,32 @@ interface DevBoxes {
   @doc("Gets an operation on a Dev Box.")
   @added(APIVersions.v2024_02_01)
   getOperation is StandardResourceOperations.ResourceRead<DevBoxOperation>;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "No model for this."
+  @doc("Gets the log for an imaging build task.")
+  @route("/projects/{projectName}/imageBuildLogs/{imageBuildLogId}")
+  @get
+  @added(APIVersions.v2024_08_01_preview)
+  getImagingTaskLog is Azure.Core.Foundations.Operation<
+    {
+      @doc("The DevCenter Project upon which to execute operations.")
+      @maxLength(63)
+      @minLength(3)
+      @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
+      @path
+      projectName: string;
+
+      @doc("An imaging build log id.")
+      @path
+      imageBuildLogId: uuid;
+    },
+    {
+      @doc("Set producer to text/plain")
+      @header
+      contentType: "text/plain";
+
+      @body
+      body: string;
+    }
+  >;
 }

@@ -163,7 +163,7 @@
         "tags": [
           "BillingProfile"
         ],
-        "description": "Creates or updates a billing profile. The operation is supported for billing accounts with agreement type Microsoft Customer Agreement, Microsoft Partner Agreement and Enterprise Agreement. If you are a MCA Individual (Pay-as-you-go) customer, then please use the Azure portal experience to create the billing profile.",
+        "description": "Creates or updates a billing profile. The operation is supported for billing accounts with agreement type Microsoft Customer Agreement and Microsoft Partner Agreement. If you are a MCA Individual (Pay-as-you-go) customer, then please use the Azure portal experience to create the billing profile.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
         },
@@ -530,23 +530,10 @@
         "targetClouds": {
           "description": "Identifies the cloud environments that are associated with a billing profile. This is a system managed optional field and gets updated as the billing profile gets associated with accounts in various clouds.",
           "type": "array",
-          "items": {
-            "description": "Identifies the cloud environments that are associated with an invoice section. This is a system managed optional field and gets updated as the invoice section gets associated with accounts in various clouds.",
-            "enum": [
-              "Other",
-              "Internal",
-              "USGov",
-              "USNat",
-              "USSec"
-            ],
-            "type": "string",
-            "x-ms-enum": {
-              "name": "TargetCloud",
-              "modelAsString": true
-            }
-          },
           "readOnly": true,
-          "x-ms-identifiers": []
+          "items": {
+            "type": "string"
+          }
         },
         "currentPaymentTerm": {
           "description": "The current payment term of the billing profile.",

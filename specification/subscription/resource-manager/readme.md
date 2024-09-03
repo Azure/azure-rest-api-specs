@@ -23,6 +23,13 @@ To see additional help and options, run:
 ``` yaml
 directive:
   - suppress: R2059
+  - suppress: PutResponseCodes
+    from: subscriptions.json
+    where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Subscription/changeTenantRequest/default"].put
+    reason: Not supposed to return 201 as the response code for the below API since existing api with new version change, got exceptions from ARM reviewer.
+  - suppress: PutRequestResponseSchemeArm
+    from: subscriptions.json
+    reason: The models designed in new version of this existing api in which put request, need not be same in response, but creating workitem - "https://msazure.visualstudio.com/One/_workitems/edit/29042001", to take this item in future ref for next set of changes.
   - suppress: LroExtension
     from: subscriptions.json
     where: $.paths["/providers/Microsoft.Subscription/subscriptionOperations/{operationId}"].get
@@ -40,6 +47,17 @@ These are the global settings for the Subscription API.
 ``` yaml
 openapi-type: arm
 tag: package-2021-10
+```
+
+### Tag: package-2024-08-preview
+
+These settings apply only when `--tag=package-2024-08-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2024-08-preview'
+input-file:
+- Microsoft.Subscription/preview/2024-08-01-preview/subscriptions.json
+title: Initiate, Get and Accept Subscription Changed Directory
+description: Initiate, Get and Accept Subscription Changed Directory
 ```
 
 ### Tag: package-2021-10
