@@ -247,7 +247,7 @@
         "tags": [
           "DeletedVaults"
         ],
-        "description": "Fetches all the deleted vaults in the subscription.",
+        "description": "Fetches all the DeletedVaults in the subscription.",
         "operationId": "DeletedVaults_ListBySubscriptionId",
         "produces": [
           "application/json"
@@ -258,13 +258,20 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "location",
+            "in": "path",
+            "description": "Location of the resource",
+            "required": true,
+            "type": "string"
           }
         ],
         "responses": {
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/DeletedVaultList"
+              "$ref": "#/definitions/DeletedVaultCollection"
             }
           },
           "default": {
@@ -280,7 +287,7 @@
           "itemName": "value"
         },
         "x-ms-examples": {
-          "List of Recovery Services Deleted Vaults in SubscriptionId": {
+          "List of Recovery Services DeletedVaults in SubscriptionId": {
             "$ref": "./examples/DeletedVaults_ListBySubscriptionId.json"
           }
         }
@@ -306,6 +313,13 @@
 
           {
             "$ref": "#/parameters/DeletedVaultName"
+          },
+          {
+            "name": "location",
+            "in": "path",
+            "description": "Location of the resource",
+            "required": true,
+            "type": "string"
           }
         ],
         "responses": {
@@ -324,7 +338,7 @@
         },
         "deprecated": false,
         "x-ms-examples": {
-          "Get Recovery Services Deleted Vault": {
+          "Get Recovery Services DeletedVault": {
             "$ref": "./examples/DeletedVaults_Get.json"
           }
         }
@@ -335,7 +349,7 @@
         "tags": [
           "DeletedVaults"
         ],
-        "description": "Undeletes the deleted vault.",
+        "description": "Undelete the DeletedVault.",
         "operationId": "DeletedVaults_Undelete",
         "consumes": [
           "application/json"
@@ -352,6 +366,13 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "location",
+            "in": "path",
+            "description": "Location of the resource",
+            "required": true,
+            "type": "string"
           },
           {
             "name": "undeleteInput",
@@ -371,18 +392,23 @@
             }
           },
           "202": {
-            "description": "Accepted"
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "deprecated": false,
         "x-ms-examples": {
-          "Undeletes the Recovery Services Deleted Vault": {
+          "Undelete the Recovery Services DeletedVault": {
             "$ref": "./examples/DeletedVaults_Undelete.json"
           }
         },
@@ -394,8 +420,8 @@
         "tags": [
           "DeletedVaults"
         ],
-        "description": "Gets the operation status for a deleted vault.",
-        "operationId": "DeletedVaults_GetDeletedVaultOperationStatus",
+        "description": "Gets the operation status for a DeletedVault.",
+        "operationId": "DeletedVaults_GetOperationStatus",
         "produces": [
           "application/json"
         ],
@@ -405,6 +431,13 @@
           },
           {
             "$ref": "#/parameters/DeletedVaultName"
+          },
+          {
+            "name": "location",
+            "in": "path",
+            "description": "Location of the resource",
+            "required": true,
+            "type": "string"
           },
           {
             "name": "operationId",
@@ -432,7 +465,7 @@
         },
         "x-ms-examples": {
           "Get Operation Status": {
-            "$ref": "./examples/DeletedVaults_GetDeletedVaultOperationStatus.json"
+            "$ref": "./examples/DeletedVaults_GetOperationStatus.json"
           }
         }
       }
@@ -1418,17 +1451,19 @@
         }
       }
     },
-    "DeletedVaultList": {
+    "DeletedVaultCollection": {
       "description": "The response model for a list of DeletedVaults.",
       "type": "object",
       "properties": {
         "value": {
+          "description": "The list of DeletedVaults.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/DeletedVault"
           }
         },
         "nextLink": {
+          "description": "The value of next link.",
           "type": "string",
           "readOnly": true
         }
@@ -2578,6 +2613,9 @@
       "in": "path",
       "description": "The name of the deleted recovery services vault.",
       "required": true,
+      "pattern": "^[a-z][a-z0-9]*$",
+      "minLength": 3,
+      "maxLength": 63,
       "x-ms-parameter-location": "method",
       "type": "string"
     },
