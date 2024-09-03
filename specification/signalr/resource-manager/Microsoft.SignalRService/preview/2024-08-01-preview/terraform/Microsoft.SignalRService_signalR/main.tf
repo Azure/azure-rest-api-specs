@@ -38,7 +38,7 @@ resource "azapi_resource" "signalR" {
   parent_id = azapi_resource.resourceGroup.id
   name      = var.resource_name
   location  = var.location
-  body = jsonencode({
+  body = {
     identity = {
       type = "SystemAssigned"
     }
@@ -136,7 +136,7 @@ resource "azapi_resource" "signalR" {
     tags = {
       key1 = "value1"
     }
-  })
+  }
   schema_validation_enabled = false
 }
 
@@ -147,7 +147,7 @@ resource "azapi_resource_action" "patch_signalR" {
   resource_id = azapi_resource.signalR.id
   action      = ""
   method      = "PATCH"
-  body = jsonencode({
+  body = {
     identity = {
       type = "SystemAssigned"
     }
@@ -245,7 +245,7 @@ resource "azapi_resource_action" "patch_signalR" {
     tags = {
       key1 = "value1"
     }
-  })
+  }
   depends_on = [azapi_resource.signalR]
 }
 
@@ -274,9 +274,9 @@ resource "azapi_resource_action" "regenerateKey" {
   resource_id = azapi_resource.signalR.id
   action      = "regenerateKey"
   method      = "POST"
-  body = jsonencode({
+  body = {
     keyType = "Primary"
-  })
+  }
   depends_on = [azapi_resource_action.patch_signalR]
 }
 

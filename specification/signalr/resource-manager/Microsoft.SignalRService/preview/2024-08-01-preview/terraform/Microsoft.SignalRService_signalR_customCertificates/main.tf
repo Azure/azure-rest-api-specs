@@ -7,12 +7,11 @@ terraform {
 }
 
 provider "azapi" {
-  # This is not needed after the api is completely onboarded
-  endpoint = [ {
-    resource_manager_endpoint = "https://eastus2euap.management.azure.com/"
-    resource_manager_audience = "https://management.core.windows.net/"
-    active_directory_authority_host = "https://login.microsoftonline.com"
-  } ]
+}
+
+provider "azurerm" {
+  features {
+  }
 }
 
 variable "resource_name" {
@@ -23,6 +22,9 @@ variable "resource_name" {
 variable "location" {
   type    = string
   default = "eastus2euap"
+}
+
+data "azurerm_client_config" "current" {
 }
 
 resource "azapi_resource" "resourceGroup" {
@@ -36,10 +38,11 @@ resource "azapi_resource" "signalR" {
   parent_id = azapi_resource.resourceGroup.id
   name      = var.resource_name
   location  = var.location
-  body = jsonencode({
-    identity = {
-      type                   = "SystemAssigned"
-    }
+  identity {
+    type         = "SystemAssigned"
+    identity_ids = []
+  }
+  body = {
     properties = {
       cors = {
       }
@@ -95,12 +98,70 @@ resource "azapi_resource" "signalR" {
       capacity = 1
       name     = "Premium_P1"
     }
-  })
+  }
   schema_validation_enabled = false
   response_export_values    = ["*"]
 }
 
-# Maunal Step: grant msi access to keyvault
+resource "azurerm_key_vault" "test" {
+  name                       = var.resource_name
+  location                   = var.location
+  resource_group_name        = azapi_resource.resourceGroup.name
+  tenant_id                  = data.azurerm_client_config.current.tenant_id
+  sku_name                   = "standard"
+  soft_delete_retention_days = 7
+
+  access_policy {
+    tenant_id = data.azurerm_client_config.current.tenant_id
+    object_id = data.azurerm_client_config.current.object_id
+
+    certificate_permissions = [
+      "Create",
+      "Delete",
+      "Get",
+      "Import",
+      "Purge",
+      "Recover",
+      "Update",
+      "List",
+    ]
+
+    secret_permissions = [
+      "Get",
+      "Set",
+    ]
+  }
+
+  access_policy {
+    tenant_id = data.azurerm_client_config.current.tenant_id
+    object_id = azapi_resource.signalR.identity[0].principal_id
+
+    certificate_permissions = [
+      "Create",
+      "Delete",
+      "Get",
+      "Import",
+      "Purge",
+      "Recover",
+      "Update",
+      "List",
+    ]
+
+    secret_permissions = [
+      "Get",
+      "Set",
+    ]
+  }
+}
+
+resource "azurerm_key_vault_certificate" "test" {
+  name         = var.resource_name
+  key_vault_id = azurerm_key_vault.test.id
+  certificate {
+    contents = filebase64("certificate-to-import.pfx")
+    password = ""
+  }
+}
 
 // OperationId: SignalRCustomCertificates_CreateOrUpdate, SignalRCustomCertificates_Get, SignalRCustomCertificates_Delete
 // PUT GET DELETE /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/signalR/{resourceName}/customCertificates/{certificateName}
@@ -108,13 +169,13 @@ resource "azapi_resource" "customCertificate" {
   type      = "Microsoft.SignalRService/signalR/customCertificates@2024-08-01-preview"
   parent_id = azapi_resource.signalR.id
   name      = var.resource_name
-  body = jsonencode({
+  body = {
     properties = {
-      keyVaultBaseUri       = "https://signalrtest.vault.azure.net/"
-      keyVaultSecretName    = "domain"
-      keyVaultSecretVersion = "108cf62f1717463392a4ef31fdb7e22c"
+      keyVaultBaseUri       = azurerm_key_vault.test.vault_uri
+      keyVaultSecretName    = azurerm_key_vault_certificate.test.name
+      keyVaultSecretVersion = azurerm_key_vault_certificate.test.version
     }
-  })
+  }
   schema_validation_enabled = false
 }
 

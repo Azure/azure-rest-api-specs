@@ -8,11 +8,11 @@ terraform {
 
 provider "azapi" {
   # This is not needed after the api is completely onboarded
-  endpoint = [ {
-    resource_manager_endpoint = "https://eastus2euap.management.azure.com/"
-    resource_manager_audience = "https://management.core.windows.net/"
+  endpoint = [{
+    resource_manager_endpoint       = "https://eastus2euap.management.azure.com/"
+    resource_manager_audience       = "https://management.core.windows.net/"
     active_directory_authority_host = "https://login.microsoftonline.com"
-  } ]
+  }]
 }
 
 variable "resource_name" {
@@ -36,7 +36,7 @@ resource "azapi_resource" "signalR" {
   parent_id = azapi_resource.resourceGroup.id
   name      = var.resource_name
   location  = var.location
-  body = jsonencode({
+  body = {
     identity = {
       type                   = "None"
       userAssignedIdentities = null
@@ -96,7 +96,7 @@ resource "azapi_resource" "signalR" {
       capacity = 1
       name     = "Standard_S1"
     }
-  })
+  }
   schema_validation_enabled = false
   response_export_values    = ["*"]
 }
@@ -106,7 +106,7 @@ resource "azapi_resource" "virtualNetwork" {
   parent_id = azapi_resource.resourceGroup.id
   name      = var.resource_name
   location  = var.location
-  body = jsonencode({
+  body = {
     properties = {
       addressSpace = {
         addressPrefixes = [
@@ -114,21 +114,23 @@ resource "azapi_resource" "virtualNetwork" {
         ]
       }
     }
-  })
+  }
+  lifecycle {
+    ignore_changes = [body.properties.subnets]
+  }
   schema_validation_enabled = false
-  response_export_values    = ["*"]
 }
 
 resource "azapi_resource" "subnet" {
   type      = "Microsoft.Network/virtualNetworks/subnets@2023-05-01"
   parent_id = azapi_resource.virtualNetwork.id
   name      = var.resource_name
-  body = jsonencode({
+  body = {
     properties = {
       addressPrefix                  = "10.5.2.0/24"
       privateEndpointNetworkPolicies = "Enabled"
     }
-  })
+  }
   schema_validation_enabled = false
   response_export_values    = ["*"]
 }
@@ -139,7 +141,7 @@ resource "azapi_resource" "private_endpoint" {
   location  = var.location
   parent_id = azapi_resource.resourceGroup.id
 
-  body = jsonencode({
+  body = {
     properties = {
       subnet = {
         id = azapi_resource.subnet.id
@@ -152,25 +154,32 @@ resource "azapi_resource" "private_endpoint" {
         }
       }]
     }
-  })
+  }
 }
 
 // OperationId: SignalRPrivateEndpointConnections_List
 // GET /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/signalR/{resourceName}/privateEndpointConnections
 data "azapi_resource_list" "listPrivateEndpointConnectionsBySignalR" {
-  type       = "Microsoft.SignalRService/signalR/privateEndpointConnections@2024-08-01-preview"
-  parent_id  = azapi_resource.signalR.id
+  type                   = "Microsoft.SignalRService/signalR/privateEndpointConnections@2024-08-01-preview"
+  parent_id              = azapi_resource.signalR.id
   response_export_values = ["*"]
-  depends_on = [azapi_resource.private_endpoint]
+  depends_on             = [azapi_resource.private_endpoint]
 }
 
-// OperationId: SignalRPrivateEndpointConnections_Update, SignalRPrivateEndpointConnections_Get, SignalRPrivateEndpointConnections_Delete
-// PUT GET DELETE /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/signalR/{resourceName}/privateEndpointConnections/{privateEndpointConnectionName}
-resource "azapi_update_resource" "privateEndpointConnection" {
+
+data "azapi_resource_id" "privateEndpointConnection" {
   type      = "Microsoft.SignalRService/signalR/privateEndpointConnections@2024-08-01-preview"
   parent_id = azapi_resource.signalR.id
-  name      = local.privateEndpointConnectionName
-  body = jsonencode({
+  name      = coalesce(local.privateEndpointConnectionName, "dummy")
+}
+
+// OperationId: SignalRPrivateEndpointConnections_Update
+// PUT /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/signalR/{resourceName}/privateEndpointConnections/{privateEndpointConnectionName}
+resource "azapi_resource_action" "put_privateEndpointConnection" {
+  type        = "Microsoft.SignalRService/signalR/privateEndpointConnections@2024-08-01-preview"
+  resource_id = data.azapi_resource_id.privateEndpointConnection.id
+  method      = "PUT"
+  body = {
     properties = {
       privateEndpoint = {
       }
@@ -179,14 +188,27 @@ resource "azapi_update_resource" "privateEndpointConnection" {
         status          = "Approved"
       }
     }
-  })
+  }
 }
 
-# resource "azapi_resource_action" "delete_privateEndpointConnection" {
-#   type      = "Microsoft.SignalRService/signalR/privateEndpointConnections@2024-08-01-preview"
-#   resource_id = azapi_update_resource.privateEndpointConnection.id
-#   method = "DELETE"
-# }
+// OperationId: SignalRPrivateEndpointConnections_Get
+// GET /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/signalR/{resourceName}/privateEndpointConnections/{privateEndpointConnectionName}
+resource "azapi_resource_action" "get_privateEndpointConnection" {
+  type        = "Microsoft.SignalRService/signalR/privateEndpointConnections@2024-08-01-preview"
+  resource_id = data.azapi_resource_id.privateEndpointConnection.id
+  method      = "GET"
+  depends_on  = [azapi_resource_action.put_privateEndpointConnection]
+}
+
+// OperationId:SignalRPrivateEndpointConnections_Delete
+// DELETE /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/signalR/{resourceName}/privateEndpointConnections/{privateEndpointConnectionName}
+resource "azapi_resource_action" "delete_privateEndpointConnection" {
+  type        = "Microsoft.SignalRService/signalR/privateEndpointConnections@2024-08-01-preview"
+  resource_id = data.azapi_resource_id.privateEndpointConnection.id
+  method      = "DELETE"
+  when        = "destroy"
+  depends_on  = [azapi_resource_action.get_privateEndpointConnection]
+}
 
 locals {
   privateEndpointConnectionName = one([for r in jsondecode(data.azapi_resource_list.listPrivateEndpointConnectionsBySignalR.output).value : r.name

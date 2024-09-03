@@ -41,7 +41,7 @@ resource "azapi_resource" "signalR" {
   parent_id = azapi_resource.resourceGroup.id
   name      = var.resource_name
   location  = var.location
-  body = jsonencode({
+  body = {
     identity = {
       type                   = "None"
       userAssignedIdentities = null
@@ -101,7 +101,7 @@ resource "azapi_resource" "signalR" {
       capacity = 1
       name     = "Premium_P1"
     }
-  })
+  }
   schema_validation_enabled = false
   response_export_values    = ["*"]
 }
@@ -113,7 +113,7 @@ resource "azapi_resource" "replica" {
   parent_id = azapi_resource.signalR.id
   name      = var.resource_name
   location  = var.replica_location
-  body = jsonencode({
+  body = {
     properties = {
       resourceStopped = "false"
     }
@@ -125,7 +125,7 @@ resource "azapi_resource" "replica" {
     tags = {
       key1 = "value1"
     }
-  })
+  }
   schema_validation_enabled = false
 }
 
@@ -134,7 +134,7 @@ resource "azapi_resource" "serverfarm" {
   parent_id = azapi_resource.resourceGroup.id
   name      = var.resource_name
   location  = "eastus"
-  body = jsonencode({
+  body = {
     properties = {
       hyperV         = false
       perSiteScaling = false
@@ -144,7 +144,7 @@ resource "azapi_resource" "serverfarm" {
     sku = {
       name = "S1"
     }
-  })
+  }
   schema_validation_enabled = false
   response_export_values    = ["*"]
 }
@@ -154,7 +154,7 @@ resource "azapi_resource" "site" {
   parent_id = azapi_resource.resourceGroup.id
   name      = var.resource_name
   location  = "eastus"
-  body = jsonencode({
+  body = {
     identity = {
       type = "None"
     }
@@ -187,7 +187,7 @@ resource "azapi_resource" "site" {
       }
       vnetRouteAllEnabled = false
     }
-  })
+  }
   schema_validation_enabled = false
   response_export_values    = ["*"]
 }
@@ -198,13 +198,13 @@ resource "azapi_resource" "sharedPrivateLinkResource" {
   type      = "Microsoft.SignalRService/signalR/sharedPrivateLinkResources@2024-08-01-preview"
   parent_id = azapi_resource.signalR.id
   name      = var.resource_name
-  body = jsonencode({
+  body = {
     properties = {
       groupId               = "sites"
       privateLinkResourceId = azapi_resource.site.id
       requestMessage        = "Please approve"
     }
-  })
+  }
   schema_validation_enabled = false
 }
 
@@ -221,13 +221,13 @@ resource "azapi_resource_action" "put_sharedPrivateLinkResource" {
   type        = "Microsoft.SignalRService/signalR/replicas/sharedPrivateLinkResources@2024-08-01-preview"
   resource_id = data.azapi_resource_id.sharedPrivateLinkResource.id
   method      = "PUT"
-  body = jsonencode({
+  body = {
     properties = {
       groupId               = "sites"
       privateLinkResourceId = azapi_resource.site.id
       requestMessage        = "Please approve"
     }
-  })
+  }
   depends_on = [ azapi_resource.sharedPrivateLinkResource ]
 }
 

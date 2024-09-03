@@ -8,11 +8,11 @@ terraform {
 
 provider "azapi" {
   # This is not needed after the api is completely onboarded 
-  endpoint = [ {
-    resource_manager_endpoint = "https://eastus2euap.management.azure.com/"
-    resource_manager_audience = "https://management.core.windows.net/"
+  endpoint = [{
+    resource_manager_endpoint       = "https://eastus2euap.management.azure.com/"
+    resource_manager_audience       = "https://management.core.windows.net/"
     active_directory_authority_host = "https://login.microsoftonline.com"
-  } ]
+  }]
 }
 
 variable "resource_name" {
@@ -43,10 +43,10 @@ resource "azapi_resource_action" "checkNameAvailability" {
   resource_id = data.azapi_resource_id.location.id
   action      = "checkNameAvailability"
   method      = "POST"
-  body = jsonencode({
+  body = {
     name = "mySignalRService"
     type = "Microsoft.SignalRService/SignalR"
-  })
+  }
 }
 
 // OperationId: Usages_List

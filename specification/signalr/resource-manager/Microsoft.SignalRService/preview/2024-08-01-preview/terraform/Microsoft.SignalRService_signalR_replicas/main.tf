@@ -41,7 +41,7 @@ resource "azapi_resource" "signalR" {
   parent_id = azapi_resource.resourceGroup.id
   name      = var.resource_name
   location  = var.primary_location
-  body = jsonencode({
+  body = {
     identity = {
       type                   = "None"
       userAssignedIdentities = null
@@ -101,7 +101,7 @@ resource "azapi_resource" "signalR" {
       capacity = 1
       name     = "Premium_P1"
     }
-  })
+  }
   schema_validation_enabled = false
   response_export_values    = ["*"]
 }
@@ -113,7 +113,7 @@ resource "azapi_resource" "replica" {
   parent_id = azapi_resource.signalR.id
   name      = var.resource_name
   location  = var.replica_location
-  body = jsonencode({
+  body = {
     properties = {
       resourceStopped = "false"
     }
@@ -125,7 +125,7 @@ resource "azapi_resource" "replica" {
     tags = {
       key1 = "value1"
     }
-  })
+  }
   schema_validation_enabled = false
 }
 
@@ -136,7 +136,7 @@ resource "azapi_resource_action" "patch_replica" {
   resource_id = azapi_resource.replica.id
   action      = ""
   method      = "PATCH"
-  body = jsonencode({
+  body = {
     properties = {
       resourceStopped = "false"
     }
@@ -148,7 +148,7 @@ resource "azapi_resource_action" "patch_replica" {
     tags = {
       key1 = "value1"
     }
-  })
+  }
   depends_on = [azapi_resource.replica]
 }
 
