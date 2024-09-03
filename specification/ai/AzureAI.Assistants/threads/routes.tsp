@@ -19,13 +19,21 @@ namespace Azure.AI.Assistants;
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
 @post
 @added(ServiceApiVersions.v2024_02_15_preview)
-@route("/threads")
+@route("/openai/threads")
+op createThread is Azure.Core.RpcOperation<
+  {
+    /**
+     * The details used to create a new assistant thread.
+     */
+    ...AssistantThreadCreationOptions
+  },
+  AssistantThread
+>;
+/*
 op createThread(
-  /**
-   * The details used to create a new assistant thread.
-   */
   ...AssistantThreadCreationOptions
 ): AssistantThread;
+*/
 
 // list threads?
 
@@ -40,9 +48,17 @@ op createThread(
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
 #suppress "@azure-tools/typespec-azure-core/use-standard-names" "mirrored API name parity"
 @get
-@route("/threads/{threadId}")
+@route("/openai/threads/{threadId}")
 @added(ServiceApiVersions.v2024_02_15_preview)
+op getThread is Azure.Core.RpcOperation<
+  {
+    @path threadId: string
+  },
+  AssistantThread
+>;
+/*
 op getThread(@path threadId: string): AssistantThread;
+*/
 
 /**
  * Modifies an existing thread.
