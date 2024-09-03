@@ -2185,6 +2185,12 @@
         "responses": {
           "200": {
             "description": "Successfully created SessionHostConfiguration.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "The URL of the resource used to check the status of the asynchronous operation.",
+                "type": "string"
+              }
+            },
             "schema": {
               "$ref": "#/definitions/SessionHostConfiguration"
             }
@@ -2193,6 +2199,10 @@
             "description": "Successfully created SessionHostConfiguration.",
             "headers": {
               "Location": {
+                "description": "The URL of the resource used to check the status of the asynchronous operation.",
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
                 "description": "The URL of the resource used to check the status of the asynchronous operation.",
                 "type": "string"
               },
