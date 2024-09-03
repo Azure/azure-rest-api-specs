@@ -248,7 +248,7 @@
           "DeletedVaults"
         ],
         "description": "List of all DeletedVaults in the subscription.",
-        "operationId": "DeletedVaults_ListBySubscription",
+        "operationId": "DeletedVaults_ListBySubscriptionId",
         "produces": [
           "application/json"
         ],
@@ -269,6 +269,12 @@
             "schema": {
               "$ref": "#/definitions/DeletedVaultList"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "deprecated": false,
@@ -277,7 +283,7 @@
         },
         "x-ms-examples": {
           "Gets the list of DeletedVaults in subscription": {
-            "$ref": "./examples/DeletedVaults_ListBySubscription.json"
+            "$ref": "./examples/DeletedVaults_ListBySubscriptionId.json"
           }
         }
       }
