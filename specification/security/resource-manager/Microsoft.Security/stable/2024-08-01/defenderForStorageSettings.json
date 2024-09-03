@@ -3,7 +3,7 @@
   "info": {
     "title": "Security Center",
     "description": "API spec for Microsoft.Security (Azure Security Center) resource provider",
-    "version": "2022-12-01-preview"
+    "version": "2024-08-01"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -185,9 +185,37 @@
           "type": "integer",
           "format": "int32",
           "description": "Defines the max GB to be scanned per Month. Set to -1 if no capping is needed."
+        },
+        "filters": {
+          "$ref": "#/definitions/OnUploadFilters",
+          "description": "Determine which blobs get scanned by On Upload malware scanning. An Or operation is performed between each filter type."
         }
       },
       "description": "Properties of On Upload malware scanning."
+    },
+    "OnUploadFilters": {
+      "type": "object",
+      "properties": {
+        "excludeBlobsBeginningWith": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Exclude each blob that begins with ANY OF the given prefixes from On Upload malware scanning."
+        },
+        "excludeBlobsEndingWith": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Exclude each blob that begins with ANY OF the given suffixes from On Upload malware scanning."
+        },
+        "excludeBlobsLargerThan": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Exclude each blob larger than the given value in bytes from On Upload malware scanning."
+        }
+      }
     },
     "SensitiveDataDiscoveryProperties": {
       "type": "object",
