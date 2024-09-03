@@ -195,9 +195,6 @@
         "operationId": "CreateProject",
         "summary": "Create project",
         "description": "Creates a new project or updates an existing one.",
-        "consumes": [
-          "application/merge-patch+json"
-        ],
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -205,31 +202,34 @@
           {
             "name": "projectName",
             "in": "path",
-            "description": "The new project name.",
+            "description": "The project name.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "resource",
+            "name": "body",
             "in": "body",
-            "description": "The resource instance.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ProjectMetadataCreateOrUpdate"
+              "type": "object",
+              "properties": {
+                "body": {
+                  "$ref": "#/definitions/CreateProjectOptionsUpdate",
+                  "description": "The project parameters."
+                }
+              }
             }
           }
         ],
         "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/ProjectMetadata"
-            }
-          },
           "201": {
             "description": "The request has succeeded and a new resource has been created as a result.",
-            "schema": {
-              "$ref": "#/definitions/ProjectMetadata"
+            "headers": {
+              "Operation-Location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The location for monitoring the operation state."
+              }
             }
           },
           "default": {
@@ -243,7 +243,8 @@
           "SuccessfulCreateProject": {
             "$ref": "./examples/SuccessfulCreateProject.json"
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       },
       "delete": {
         "operationId": "DeleteProject",
@@ -256,7 +257,7 @@
           {
             "name": "projectName",
             "in": "path",
-            "description": "The new project name.",
+            "description": "The project name.",
             "required": true,
             "type": "string"
           }
@@ -264,28 +265,6 @@
         "responses": {
           "202": {
             "description": "The request has been accepted for processing, but processing has not yet completed.",
-            "schema": {
-              "type": "object",
-              "description": "Provides status details for long running operations.",
-              "properties": {
-                "id": {
-                  "type": "string",
-                  "description": "The unique ID of the operation."
-                },
-                "status": {
-                  "$ref": "#/definitions/Azure.Core.Foundations.OperationState",
-                  "description": "The status of the operation"
-                },
-                "error": {
-                  "$ref": "#/definitions/Azure.Core.Foundations.Error",
-                  "description": "Error object that describes the error when status is \"Failed\"."
-                }
-              },
-              "required": [
-                "id",
-                "status"
-              ]
-            },
             "headers": {
               "Operation-Location": {
                 "type": "string",
@@ -355,9 +334,9 @@
         }
       }
     },
-    "/projects/{projectName}:copy": {
+    "/projects/{projectName}/:copy": {
       "post": {
-        "operationId": "Copy",
+        "operationId": "CopyProject",
         "summary": "Copy project",
         "description": "Copies an existing project to another Azure resource.",
         "parameters": [
@@ -367,13 +346,14 @@
           {
             "name": "projectName",
             "in": "path",
-            "description": "The new project name.",
+            "description": "The project name.",
             "required": true,
             "type": "string"
           },
           {
             "name": "body",
             "in": "body",
+            "description": "The copy project info.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/CopyProjectOptions"
@@ -383,32 +363,6 @@
         "responses": {
           "202": {
             "description": "The request has been accepted for processing, but processing has not yet completed.",
-            "schema": {
-              "type": "object",
-              "description": "Provides status details for long running operations.",
-              "properties": {
-                "id": {
-                  "type": "string",
-                  "description": "The unique ID of the operation."
-                },
-                "status": {
-                  "$ref": "#/definitions/Azure.Core.Foundations.OperationState",
-                  "description": "The status of the operation"
-                },
-                "error": {
-                  "$ref": "#/definitions/ErrorResponse",
-                  "description": "Error object that describes the error when status is \"Failed\"."
-                },
-                "result": {
-                  "$ref": "#/definitions/CopyProjectJobState",
-                  "description": "The result of the operation."
-                }
-              },
-              "required": [
-                "id",
-                "status"
-              ]
-            },
             "headers": {
               "Operation-Location": {
                 "type": "string",
@@ -424,15 +378,10 @@
             }
           }
         },
-        "x-ms-examples": {
-          "SuccessfulCopyProject": {
-            "$ref": "./examples/SuccessfulCopyProject.json"
-          }
-        },
         "x-ms-long-running-operation": true
       }
     },
-    "/projects/{projectName}:export": {
+    "/projects/{projectName}/:export": {
       "post": {
         "operationId": "Export",
         "summary": "Export project",
@@ -444,7 +393,7 @@
           {
             "name": "projectName",
             "in": "path",
-            "description": "The new project name.",
+            "description": "The project name.",
             "required": true,
             "type": "string"
           },
@@ -514,32 +463,6 @@
         "responses": {
           "202": {
             "description": "The request has been accepted for processing, but processing has not yet completed.",
-            "schema": {
-              "type": "object",
-              "description": "Provides status details for long running operations.",
-              "properties": {
-                "id": {
-                  "type": "string",
-                  "description": "The unique ID of the operation."
-                },
-                "status": {
-                  "$ref": "#/definitions/Azure.Core.Foundations.OperationState",
-                  "description": "The status of the operation"
-                },
-                "error": {
-                  "$ref": "#/definitions/ErrorResponse",
-                  "description": "Error object that describes the error when status is \"Failed\"."
-                },
-                "result": {
-                  "$ref": "#/definitions/ExportProjectJobState",
-                  "description": "The result of the operation."
-                }
-              },
-              "required": [
-                "id",
-                "status"
-              ]
-            },
             "headers": {
               "Operation-Location": {
                 "type": "string",
@@ -563,7 +486,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/projects/{projectName}:import": {
+    "/projects/{projectName}/:import": {
       "post": {
         "operationId": "Import",
         "summary": "Import project",
@@ -575,7 +498,7 @@
           {
             "name": "projectName",
             "in": "path",
-            "description": "The new project name.",
+            "description": "The project name.",
             "required": true,
             "type": "string"
           },
@@ -619,32 +542,6 @@
         "responses": {
           "202": {
             "description": "The request has been accepted for processing, but processing has not yet completed.",
-            "schema": {
-              "type": "object",
-              "description": "Provides status details for long running operations.",
-              "properties": {
-                "id": {
-                  "type": "string",
-                  "description": "The unique ID of the operation."
-                },
-                "status": {
-                  "$ref": "#/definitions/Azure.Core.Foundations.OperationState",
-                  "description": "The status of the operation"
-                },
-                "error": {
-                  "$ref": "#/definitions/ErrorResponse",
-                  "description": "Error object that describes the error when status is \"Failed\"."
-                },
-                "result": {
-                  "$ref": "#/definitions/ImportProjectJobState",
-                  "description": "The result of the operation."
-                }
-              },
-              "required": [
-                "id",
-                "status"
-              ]
-            },
             "headers": {
               "Operation-Location": {
                 "type": "string",
@@ -668,7 +565,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/projects/{projectName}:train": {
+    "/projects/{projectName}/:train": {
       "post": {
         "operationId": "Train",
         "summary": "Train project",
@@ -680,13 +577,14 @@
           {
             "name": "projectName",
             "in": "path",
-            "description": "The new project name.",
+            "description": "The project name.",
             "required": true,
             "type": "string"
           },
           {
             "name": "body",
             "in": "body",
+            "description": "The training input parameters.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/TrainingJobOptions"
@@ -696,32 +594,6 @@
         "responses": {
           "202": {
             "description": "The request has been accepted for processing, but processing has not yet completed.",
-            "schema": {
-              "type": "object",
-              "description": "Provides status details for long running operations.",
-              "properties": {
-                "id": {
-                  "type": "string",
-                  "description": "The unique ID of the operation."
-                },
-                "status": {
-                  "$ref": "#/definitions/Azure.Core.Foundations.OperationState",
-                  "description": "The status of the operation"
-                },
-                "error": {
-                  "$ref": "#/definitions/ErrorResponse",
-                  "description": "Error object that describes the error when status is \"Failed\"."
-                },
-                "result": {
-                  "$ref": "#/definitions/TrainingJobState",
-                  "description": "The result of the operation."
-                }
-              },
-              "required": [
-                "id",
-                "status"
-              ]
-            },
             "headers": {
               "Operation-Location": {
                 "type": "string",
@@ -922,14 +794,14 @@
           {
             "name": "projectName",
             "in": "path",
-            "description": "The new project name.",
+            "description": "The project name.",
             "required": true,
             "type": "string"
           },
           {
             "name": "deploymentName",
             "in": "path",
-            "description": "Represents deployment name.",
+            "description": "The deployment name.",
             "required": true,
             "type": "string"
           }
@@ -937,28 +809,6 @@
         "responses": {
           "202": {
             "description": "The request has been accepted for processing, but processing has not yet completed.",
-            "schema": {
-              "type": "object",
-              "description": "Provides status details for long running operations.",
-              "properties": {
-                "id": {
-                  "type": "string",
-                  "description": "The unique ID of the operation."
-                },
-                "status": {
-                  "$ref": "#/definitions/Azure.Core.Foundations.OperationState",
-                  "description": "The status of the operation"
-                },
-                "error": {
-                  "$ref": "#/definitions/Azure.Core.Foundations.Error",
-                  "description": "Error object that describes the error when status is \"Failed\"."
-                }
-              },
-              "required": [
-                "id",
-                "status"
-              ]
-            },
             "headers": {
               "Operation-Location": {
                 "type": "string",
@@ -982,9 +832,9 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/projects/{projectName}/deployments/{deploymentName}:delete-from-resources": {
+    "/projects/{projectName}/deployments/{deploymentName}/:delete-from-resources": {
       "post": {
-        "operationId": "DeleteFromResources",
+        "operationId": "DeleteDeploymentFromResources",
         "summary": "Delete deployment from resources",
         "description": "Deletes a project deployment from the specified assigned resources.",
         "parameters": [
@@ -994,20 +844,21 @@
           {
             "name": "projectName",
             "in": "path",
-            "description": "The new project name.",
+            "description": "The project name.",
             "required": true,
             "type": "string"
           },
           {
             "name": "deploymentName",
             "in": "path",
-            "description": "Represents deployment name.",
+            "description": "The deployment name.",
             "required": true,
             "type": "string"
           },
           {
             "name": "body",
             "in": "body",
+            "description": "The options for deleting the deployment.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/DeleteDeploymentOptions"
@@ -1017,32 +868,6 @@
         "responses": {
           "202": {
             "description": "The request has been accepted for processing, but processing has not yet completed.",
-            "schema": {
-              "type": "object",
-              "description": "Provides status details for long running operations.",
-              "properties": {
-                "id": {
-                  "type": "string",
-                  "description": "The unique ID of the operation."
-                },
-                "status": {
-                  "$ref": "#/definitions/Azure.Core.Foundations.OperationState",
-                  "description": "The status of the operation"
-                },
-                "error": {
-                  "$ref": "#/definitions/ErrorResponse",
-                  "description": "Error object that describes the error when status is \"Failed\"."
-                },
-                "result": {
-                  "$ref": "#/definitions/DeploymentJobState",
-                  "description": "The result of the operation."
-                }
-              },
-              "required": [
-                "id",
-                "status"
-              ]
-            },
             "headers": {
               "Operation-Location": {
                 "type": "string",
@@ -1498,7 +1323,7 @@
         }
       }
     },
-    "/projects/{projectName}/models/{trainedModelLabel}": {
+    "/projects/{projectName}/models/{lable}": {
       "get": {
         "operationId": "GetTrainedModel",
         "summary": "Get trained model details",
@@ -1515,7 +1340,7 @@
             "type": "string"
           },
           {
-            "name": "trainedModelLabel",
+            "name": "lable",
             "in": "path",
             "description": "The trained model label.",
             "required": true,
@@ -1558,7 +1383,7 @@
             "type": "string"
           },
           {
-            "name": "trainedModelLabel",
+            "name": "lable",
             "in": "path",
             "description": "The trained model label.",
             "required": true,
@@ -1583,9 +1408,9 @@
         }
       }
     },
-    "/projects/{projectName}/models/{trainedModelLabel}:evaluate": {
+    "/projects/{projectName}/models/{trainedModelLabel}/:evaluate": {
       "post": {
-        "operationId": "Evaluate",
+        "operationId": "EvaluateModel",
         "summary": "Evaluate model",
         "description": "Triggers evaluation operation on a trained model.",
         "parameters": [
@@ -1595,7 +1420,7 @@
           {
             "name": "projectName",
             "in": "path",
-            "description": "The new project name.",
+            "description": "The project name.",
             "required": true,
             "type": "string"
           },
@@ -1609,6 +1434,7 @@
           {
             "name": "body",
             "in": "body",
+            "description": "The split kind and percentage for the testing dataset.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/EvaluationOnDemandOptions"
@@ -1618,32 +1444,6 @@
         "responses": {
           "202": {
             "description": "The request has been accepted for processing, but processing has not yet completed.",
-            "schema": {
-              "type": "object",
-              "description": "Provides status details for long running operations.",
-              "properties": {
-                "id": {
-                  "type": "string",
-                  "description": "The unique ID of the operation."
-                },
-                "status": {
-                  "$ref": "#/definitions/Azure.Core.Foundations.OperationState",
-                  "description": "The status of the operation"
-                },
-                "error": {
-                  "$ref": "#/definitions/ErrorResponse",
-                  "description": "Error object that describes the error when status is \"Failed\"."
-                },
-                "result": {
-                  "$ref": "#/definitions/EvaluationJobState",
-                  "description": "The result of the operation."
-                }
-              },
-              "required": [
-                "id",
-                "status"
-              ]
-            },
             "headers": {
               "Operation-Location": {
                 "type": "string",
@@ -1667,7 +1467,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/projects/{projectName}/models/{trainedModelLabel}:load-snapshot": {
+    "/projects/{projectName}/models/{trainedModelLabel}/:load-snapshot": {
       "post": {
         "operationId": "LoadSnapshot",
         "summary": "Load trained model snapshot to the working directory.",
@@ -1679,7 +1479,7 @@
           {
             "name": "projectName",
             "in": "path",
-            "description": "The new project name.",
+            "description": "The project name.",
             "required": true,
             "type": "string"
           },
@@ -1694,32 +1494,6 @@
         "responses": {
           "202": {
             "description": "The request has been accepted for processing, but processing has not yet completed.",
-            "schema": {
-              "type": "object",
-              "description": "Provides status details for long running operations.",
-              "properties": {
-                "id": {
-                  "type": "string",
-                  "description": "The unique ID of the operation."
-                },
-                "status": {
-                  "$ref": "#/definitions/Azure.Core.Foundations.OperationState",
-                  "description": "The status of the operation"
-                },
-                "error": {
-                  "$ref": "#/definitions/ErrorResponse",
-                  "description": "Error object that describes the error when status is \"Failed\"."
-                },
-                "result": {
-                  "$ref": "#/definitions/LoadSnapshotJobState",
-                  "description": "The result of the operation."
-                }
-              },
-              "required": [
-                "id",
-                "status"
-              ]
-            },
             "headers": {
               "Operation-Location": {
                 "type": "string",
@@ -2387,9 +2161,9 @@
         }
       }
     },
-    "/projects/{projectName}/train/jobs/{jobId}:cancel": {
+    "/projects/{projectName}/train/jobs/{jobId}/:cancel": {
       "post": {
-        "operationId": "Cancel",
+        "operationId": "CancelTrainingJob",
         "summary": "Cancel training",
         "description": "Triggers a cancellation for a running training job.",
         "parameters": [
@@ -2399,7 +2173,7 @@
           {
             "name": "projectName",
             "in": "path",
-            "description": "The new project name.",
+            "description": "The project name.",
             "required": true,
             "type": "string"
           },
@@ -2414,32 +2188,6 @@
         "responses": {
           "202": {
             "description": "The request has been accepted for processing, but processing has not yet completed.",
-            "schema": {
-              "type": "object",
-              "description": "Provides status details for long running operations.",
-              "properties": {
-                "id": {
-                  "type": "string",
-                  "description": "The unique ID of the operation."
-                },
-                "status": {
-                  "$ref": "#/definitions/Azure.Core.Foundations.OperationState",
-                  "description": "The status of the operation"
-                },
-                "error": {
-                  "$ref": "#/definitions/ErrorResponse",
-                  "description": "Error object that describes the error when status is \"Failed\"."
-                },
-                "result": {
-                  "$ref": "#/definitions/TrainingJobState",
-                  "description": "The result of the operation."
-                }
-              },
-              "required": [
-                "id",
-                "status"
-              ]
-            },
             "headers": {
               "Operation-Location": {
                 "type": "string",
@@ -2998,48 +2746,6 @@
         }
       }
     },
-    "Azure.Core.Foundations.OperationState": {
-      "type": "string",
-      "description": "Enum describing allowed operation states.",
-      "enum": [
-        "NotStarted",
-        "Running",
-        "Succeeded",
-        "Failed",
-        "Canceled"
-      ],
-      "x-ms-enum": {
-        "name": "OperationState",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "NotStarted",
-            "value": "NotStarted",
-            "description": "The operation has not started."
-          },
-          {
-            "name": "Running",
-            "value": "Running",
-            "description": "The operation is in progress."
-          },
-          {
-            "name": "Succeeded",
-            "value": "Succeeded",
-            "description": "The operation has completed successfully."
-          },
-          {
-            "name": "Failed",
-            "value": "Failed",
-            "description": "The operation has failed."
-          },
-          {
-            "name": "Canceled",
-            "value": "Canceled",
-            "description": "The operation has been canceled by the user."
-          }
-        ]
-      }
-    },
     "CompositionSetting": {
       "type": "string",
       "enum": [
@@ -3388,6 +3094,40 @@
         "projectName",
         "language"
       ]
+    },
+    "CreateProjectOptionsUpdate": {
+      "type": "object",
+      "description": "Represents the options used to create or update a project.",
+      "properties": {
+        "projectKind": {
+          "$ref": "#/definitions/ProjectKind",
+          "description": "Represents the project kind."
+        },
+        "settings": {
+          "$ref": "#/definitions/ProjectSettingsUpdate",
+          "description": "The project settings."
+        },
+        "storageInputContainerName": {
+          "type": "string",
+          "description": "The storage container name in case of conversation summarization."
+        },
+        "projectName": {
+          "type": "string",
+          "description": "The new project name."
+        },
+        "multilingual": {
+          "type": "boolean",
+          "description": "Whether the project would be used for multiple languages or not."
+        },
+        "description": {
+          "type": "string",
+          "description": "The project description."
+        },
+        "language": {
+          "type": "string",
+          "description": "The project language. This is BCP-47 representation of a language. For example,\nuse \"en\" for English, \"en-gb\" for English (UK), \"es\" for Spanish etc."
+        }
+      }
     },
     "DeleteDeploymentOptions": {
       "type": "object",
@@ -4937,59 +4677,32 @@
         },
         "projectKind": {
           "$ref": "#/definitions/ProjectKind",
-          "description": "Represents the project kind.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "description": "Represents the project kind."
         },
         "settings": {
           "$ref": "#/definitions/ProjectSettings",
-          "description": "The project settings.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "description": "The project settings."
         },
         "storageInputContainerName": {
           "type": "string",
-          "description": "The storage container name in case of conversation summarization.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "description": "The storage container name in case of conversation summarization."
         },
         "projectName": {
           "type": "string",
           "description": "The new project name.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "readOnly": true
         },
         "multilingual": {
           "type": "boolean",
-          "description": "Whether the project would be used for multiple languages or not.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "description": "Whether the project would be used for multiple languages or not."
         },
         "description": {
           "type": "string",
-          "description": "The project description.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "description": "The project description."
         },
         "language": {
           "type": "string",
-          "description": "The project language. This is BCP-47 representation of a language. For example,\nuse \"en\" for English, \"en-gb\" for English (UK), \"es\" for Spanish etc.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "description": "The project language. This is BCP-47 representation of a language. For example,\nuse \"en\" for English, \"en-gb\" for English (UK), \"es\" for Spanish etc."
         }
       },
       "required": [
@@ -4999,88 +4712,6 @@
         "projectName",
         "language"
       ]
-    },
-    "ProjectMetadataCreateOrUpdate": {
-      "type": "object",
-      "description": "Represents the metadata of a project.",
-      "properties": {
-        "createdDateTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Represents the project creation datetime."
-        },
-        "lastModifiedDateTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Represents the project creation datetime."
-        },
-        "lastTrainedDateTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Represents the project last trained datetime."
-        },
-        "lastDeployedDateTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Represents the project last deployed datetime."
-        },
-        "projectKind": {
-          "$ref": "#/definitions/ProjectKind",
-          "description": "Represents the project kind.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "settings": {
-          "$ref": "#/definitions/ProjectSettingsCreateOrUpdate",
-          "description": "The project settings.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "storageInputContainerName": {
-          "type": "string",
-          "description": "The storage container name in case of conversation summarization.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "projectName": {
-          "type": "string",
-          "description": "The new project name.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "multilingual": {
-          "type": "boolean",
-          "description": "Whether the project would be used for multiple languages or not.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "description": {
-          "type": "string",
-          "description": "The project description.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "language": {
-          "type": "string",
-          "description": "The project language. This is BCP-47 representation of a language. For example,\nuse \"en\" for English, \"en-gb\" for English (UK), \"es\" for Spanish etc.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        }
-      }
     },
     "ProjectSettings": {
       "type": "object",
@@ -5104,7 +4735,7 @@
         "confidenceThreshold"
       ]
     },
-    "ProjectSettingsCreateOrUpdate": {
+    "ProjectSettingsUpdate": {
       "type": "object",
       "description": "Represents the settings used to define the project behavior.",
       "properties": {
@@ -5580,12 +5211,9 @@
       },
       "required": [
         "text",
-        "location",
         "language",
         "entitiesResult",
-        "intentsResult",
-        "labeledSummaryLocation",
-        "predictedSummaryLocation"
+        "intentsResult"
       ]
     },
     "UtteranceIntentsEvaluationResult": {

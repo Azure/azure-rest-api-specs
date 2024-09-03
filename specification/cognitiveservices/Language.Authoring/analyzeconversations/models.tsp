@@ -198,45 +198,45 @@ model ProjectMetadata {
   /**
    * Represents the project kind.
    */
-  @visibility("create", "read")
+  //@visibility("create", "read")
   projectKind: ProjectKind;
 
   /**
    * The project settings.
    */
-  @visibility("create", "read")
+  //@visibility("create", "read")
   settings?: ProjectSettings;
 
   /**
    * The storage container name in case of conversation summarization.
    */
-  @visibility("create", "read")
+  //@visibility("create", "read")
   storageInputContainerName?: string;
 
   /**
    * The new project name.
    */
-  @key("projectName")
-  @visibility("create", "read")
+  @key
+  @visibility("read")
   projectName: string;
 
   /**
    * Whether the project would be used for multiple languages or not.
    */
-  @visibility("create", "read")
+  //@visibility("create", "read")
   multilingual?: boolean;
 
   /**
    * The project description.
    */
-  @visibility("create", "read")
+  //@visibility("create", "read")
   description?: string;
 
   /**
    * The project language. This is BCP-47 representation of a language. For example,
    * use "en" for English, "en-gb" for English (UK), "es" for Spanish etc.
    */
-  @visibility("create", "read")
+  //@visibility("create", "read")
   language: string;
 }
 
@@ -722,7 +722,7 @@ model ProjectTrainedModel {
   /**
    * The trained model label.
    */
-  @key
+  @key("lable")
   @visibility("read")
   trainedModelLabel: string;  //label: string;
 
@@ -838,7 +838,7 @@ model UtteranceEvaluationResult {
   /**
    * Represents the conversation location.
    */
-  location: string;
+  location?:string;
 
   /**
    * Represents the utterance language. This is BCP-47 representation of a language.
@@ -860,12 +860,12 @@ model UtteranceEvaluationResult {
   /**
    * Represents the location of the labeled summary.
    */
-  labeledSummaryLocation: string;
+  labeledSummaryLocation?: string;
 
   /**
    * Represents the location of the predicted summary.
    */
-  predictedSummaryLocation: string;
+  predictedSummaryLocation?: string;
 }
 
 /**

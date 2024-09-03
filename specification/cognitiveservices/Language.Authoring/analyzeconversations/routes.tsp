@@ -39,15 +39,45 @@ alias ShowStatsQueryParameter = TraitContext.Create;
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @summary("Create project")
-op createProject is languageOperations.ResourceCreateOrUpdate<ProjectMetadata>;
+@patch
+@route("/projects/{projectName}")
+@pollingOperation(getProjectDeletionStatus)
+op createProject is Foundations.LongRunningOperation<
+  {
+    /**
+     * The project name.
+     */
+    @path
+    projectName: string;
+
+    /** The project parameters. */
+    body: CreateProjectOptions;
+  },
+  CreatedResponse,
+  {},
+  ErrorResponse
+>;
 
 /**
  * Deletes a project.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @summary("Delete project")
+@route("/projects/{projectName}")
+@delete
 @pollingOperation(getProjectDeletionStatus)
-op deleteProject is languageOperations.LongRunningResourceDelete<ProjectMetadata>;
+op deleteProject is Foundations.LongRunningOperation<
+  {
+    /**
+     * The project name.
+     */
+    @path
+    projectName: string;
+  },
+  AcceptedResponse,
+    {},
+  ErrorResponse
+>;
 
 /**
  * Generates a copy project operation authorization to the current target Azure
@@ -68,25 +98,44 @@ CopyProjectOptions
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @summary("Copy project")
+@route("/projects/{projectName}/:copy")
 @post
 @pollingOperation(getCopyProjectStatus)
-op copy is languageOperations.LongRunningResourceAction <
-  ProjectMetadata,
-  CopyProjectOptions,
-  CopyProjectJobState,
-  ErrorResponse, 
-  {}
+op copyProject is Foundations.LongRunningOperation<
+  {
+    /**
+     * The project name.
+     */
+    @path
+    projectName: string;
+
+    /**
+     * The copy project info.
+     */
+    @body
+    body: CopyProjectOptions;
+  },
+  AcceptedResponse,
+  {},
+  ErrorResponse
 >;
 
 /**
  * Triggers a job to export a project's data.
  */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @summary("Export project")
+@route("/projects/{projectName}/:export")
 @post
 @pollingOperation(getExportStatus)
-op export is languageOperations.LongRunningResourceAction <
-  ProjectMetadata,
+op export is Foundations.LongRunningOperation<
   {
+    /**
+     * The project name.
+     */
+    @path
+    projectName: string;
+
     /**
      * The format of the exported project file to use.
      */
@@ -113,21 +162,28 @@ op export is languageOperations.LongRunningResourceAction <
     @query("trainedModelLabel")
     trainedModelLabel?: string;
   },
-  ExportProjectJobState, 
-  ErrorResponse, 
-  {}
+  AcceptedResponse,
+  {},
+  ErrorResponse
 >;
 
 /**
  * Triggers a job to import a project. If a project with the same name already
  * exists, the data of that project is replaced.
  */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @summary("Import project")
+@route("/projects/{projectName}/:import")
 @post
 @pollingOperation(getImportStatus)
-op `import` is languageOperations.LongRunningResourceAction <
-  ProjectMetadata,
+op `import` is Foundations.LongRunningOperation<
   {
+    /**
+     * The project name.
+     */
+    @path
+    projectName: string;
+
     /**
      * The format of the exported project file to use.
      */
@@ -140,23 +196,36 @@ op `import` is languageOperations.LongRunningResourceAction <
     @body
     body: ExportedProject;
   },
-  ImportProjectJobState, 
-  ErrorResponse, 
-  {}
+  AcceptedResponse,
+  {},
+  ErrorResponse
 >;
 
 /**
  * Triggers a training job for a project.
  */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @summary("Train project")
+@route("/projects/{projectName}/:train")
 @post
 @pollingOperation(getTrainingStatus)
-op train is languageOperations.LongRunningResourceAction <
-  ProjectMetadata,
-  TrainingJobOptions,
-  TrainingJobState,
-  ErrorResponse, 
-  {}
+op train is Foundations.LongRunningOperation<
+  {
+    /**
+     * The project name.
+     */
+    @path
+    projectName: string;
+
+    /**
+     * The training input parameters.
+     */
+    @body
+    body: TrainingJobOptions;
+  },
+  AcceptedResponse,
+  {},
+  ErrorResponse
 >;
 
 /**
@@ -239,26 +308,62 @@ op deployProject is Foundations.LongRunningOperation<
 /**
  * Deletes a project deployment.
  */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @summary("Delete deployment")
+@route("/projects/{projectName}/deployments/{deploymentName}")
+@delete
 @pollingOperation(getDeploymentStatus)
-op deleteDeployment is languageOperations.LongRunningResourceDelete<
-  ProjectDeployment
+op deleteDeployment is Foundations.LongRunningOperation<
+  {
+    /**
+     * The project name.
+     */
+    @path
+    projectName: string;
+
+    /**
+     * The deployment name.
+     */
+    @path
+    deploymentName: string;
+  },
+  AcceptedResponse,
+  {},
+  ErrorResponse
 >;
 
 /**
  * Deletes a project deployment from the specified assigned resources.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style"
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @summary("Delete deployment from resources")
+@route("/projects/{projectName}/deployments/{deploymentName}/:delete-from-resources")
+@post
 @pollingOperation(getDeploymentDeleteFromResourcesStatus)
-op `delete-from-resources` is languageOperations.LongRunningResourceAction<
-  ProjectDeployment,
-  DeleteDeploymentOptions,
-  DeploymentJobState,
-  ErrorResponse,
-  {}
->;
+op deleteDeploymentFromResources is Foundations.LongRunningOperation<
+  {
+    /**
+     * The project name.
+     */
+    @path
+    projectName: string;
 
+    /**
+     * The deployment name.
+     */
+    @path
+    deploymentName: string;
+
+    /**
+     * The options for deleting the deployment.
+     */
+    @body
+    body: DeleteDeploymentOptions;
+  },
+  AcceptedResponse,
+  {},
+  ErrorResponse
+>;
 /**
  * Gets the status of an existing delete deployment from specific resources job.
  */
@@ -471,30 +576,60 @@ op deleteTrainedModel is languageOperations.ResourceDelete<ProjectTrainedModel>;
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @summary("Evaluate model")
-//@route("/{projectName}/models/{trainedModelLabel}/:evaluate")
+@route("/projects/{projectName}/models/{trainedModelLabel}/:evaluate")
 @post
 @pollingOperation(getEvaluationStatus)
-op evaluate is languageOperations.LongRunningResourceAction<
-  ProjectTrainedModel,
-  EvaluationOnDemandOptions,
-  EvaluationJobState,
-  ErrorResponse,
-  {}
+op evaluateModel is Foundations.LongRunningOperation<
+  {
+    /**
+     * The project name.
+     */
+    @path
+    projectName: string;
+
+    /**
+     * The trained model label.
+     */
+    @path
+    trainedModelLabel: string;
+
+    /**
+     * The split kind and percentage for the testing dataset.
+     */
+    @body
+    body: EvaluationOnDemandOptions;
+  },
+  AcceptedResponse,
+  {},
+  ErrorResponse
 >;
 
 /**
  * Restores the snapshot of this trained model to be the current working directory
  * of the project.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style"
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @summary("Load trained model snapshot to the working directory.")
+@route("/projects/{projectName}/models/{trainedModelLabel}/:load-snapshot")
+@post
 @pollingOperation(getLoadSnapshotStatus)
-op `load-snapshot` is languageOperations.LongRunningResourceAction <
-  ProjectTrainedModel,
+op loadSnapshot is Foundations.LongRunningOperation<
+  {
+    /**
+     * The project name.
+     */
+    @path
+    projectName: string;
+
+    /**
+     * The trained model label.
+     */
+    @path
+    trainedModelLabel: string;
+  },
+  AcceptedResponse,
   {},
-  LoadSnapshotJobState,
-  ErrorResponse,
-  {}
+  ErrorResponse
 >;
 
 /**
@@ -771,13 +906,26 @@ op getTrainingStatus is languageOperations.ResourceRead<TrainingJobState>;
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @summary("Cancel training")
+@route("/projects/{projectName}/train/jobs/{jobId}/:cancel")
+@post
 @pollingOperation(getTrainingStatus)
-op cancel is languageOperations.LongRunningResourceAction <
-  TrainingJobState,
+op cancelTrainingJob is Foundations.LongRunningOperation<
+  {
+    /**
+     * The project name.
+     */
+    @path
+    projectName: string;
+
+    /**
+     * The job ID.
+     */
+    @path
+    jobId: string;
+  },
+  AcceptedResponse,
   {},
-  TrainingJobState,
-  ErrorResponse,
-  {}
+  ErrorResponse
 >;
 
 
