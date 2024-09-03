@@ -208,11 +208,42 @@ resource "azapi_resource" "sharedPrivateLinkResource" {
   schema_validation_enabled = false
 }
 
+data "azapi_resource_list" "listPrivateEndpointConnectionsBySite" {
+  type                   = "Microsoft.Web/sites/privateEndpointConnections@2023-12-01"
+  parent_id              = azapi_resource.site.id
+  response_export_values = ["*"]
+  depends_on             = [azapi_resource.sharedPrivateLinkResource]
+}
+
+locals {
+  privateEndpointConnectionNames = tolist(jsondecode(data.azapi_resource_list.listPrivateEndpointConnectionsBySite.output).value[*].name)
+  privateEndpointConnectionName  = length(local.privateEndpointConnectionNames) > 0 ? local.privateEndpointConnectionNames[0] : null
+}
+
+resource "azapi_update_resource" "privateEndpointConnection" {
+  type      = "Microsoft.Web/sites/privateEndpointConnections@2023-12-01"
+  parent_id = azapi_resource.site.id
+  name      = coalesce(local.privateEndpointConnectionName, "dummy")
+  body = {
+    properties = {
+      privateLinkServiceConnectionState = {
+        status = "Approved"
+      }
+    }
+  }
+}
+
+resource "time_sleep" "wait" {
+  depends_on      = [azapi_update_resource.privateEndpointConnection]
+  create_duration = "600s"
+}
+
+
 data "azapi_resource_id" "sharedPrivateLinkResource" {
-  type      = "Microsoft.SignalRService/signalR/replicas/sharedPrivateLinkResources@2023-12-12"
-  parent_id = azapi_resource.replica.id
-  name      = var.resource_name
-  depends_on = [ azapi_resource.sharedPrivateLinkResource ]
+  type       = "Microsoft.SignalRService/signalR/replicas/sharedPrivateLinkResources@2023-12-12"
+  parent_id  = azapi_resource.replica.id
+  name       = var.resource_name
+  depends_on = [azapi_resource.sharedPrivateLinkResource]
 }
 
 // OperationId: SignalRReplicaSharedPrivateLinkResources_CreateOrUpdate
@@ -228,7 +259,7 @@ resource "azapi_resource_action" "put_sharedPrivateLinkResource" {
       requestMessage        = "Please approve"
     }
   }
-  depends_on = [ azapi_resource.sharedPrivateLinkResource ]
+  depends_on = [azapi_update_resource.privateEndpointConnection, time_sleep.wait]
 }
 
 // OperationId: SignalRReplicaSharedPrivateLinkResources_Get
@@ -244,7 +275,5 @@ data "azapi_resource" "sharedPrivateLinkResource" {
 data "azapi_resource_list" "listSharedPrivateLinkResourcesByReplica" {
   type       = "Microsoft.SignalRService/signalR/replicas/sharedPrivateLinkResources@2024-08-01-preview"
   parent_id  = azapi_resource.replica.id
-  # depends_on = [data.azapi_resource.sharedPrivateLinkResource]
+  depends_on = [data.azapi_resource.sharedPrivateLinkResource]
 }
-
-
