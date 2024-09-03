@@ -21,6 +21,9 @@ model HelmSolutionProperties {
   @doc("Helm Chart URI of helm solution")
   helmChartUri: string;
 
+  @doc("Helm Chart Version of helm solution")
+  helmChartVersion: string;
+
   @doc("Configuration template of helm solution")
   configurationTemplate: string;
 
