@@ -1457,8 +1457,11 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "#/definitions/ProxyResource"
         }
+      ],
+      "required": [
+        "properties"
       ],
       "properties": {
         "location": {
@@ -1612,6 +1615,28 @@
           "$ref": "#/definitions/ClassicAlertSettings"
         }
       }
+    },
+    "ProxyResource": {
+      "description": "ARM Proxy Resource.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Resource Id represents the complete path to the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "Resource name associated with the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "Resource type represents the complete path of the form Namespace/ResourceType/ResourceType/...",
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "x-ms-azure-resource": true
     },
     "Resource": {
       "description": "ARM Resource.",
