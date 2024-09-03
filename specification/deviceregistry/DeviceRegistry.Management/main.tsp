@@ -4,6 +4,10 @@ import "@typespec/versioning";
 import "@azure-tools/typespec-azure-resource-manager";
 import "./assets.tsp";
 import "./assetEndpointProfiles.tsp";
+import "./billings.tsp";
+import "./discoveredAssets.tsp";
+import "./discoveredAssetEndpointProfiles.tsp";
+import "./schemaRegistries.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
@@ -16,8 +20,8 @@ using Azure.ResourceManager.Foundations;
 @service({
   title: "Microsoft.DeviceRegistry management service",
 })
-@versioned(Microsoft.DeviceRegistry.Versions)
 @doc("Microsoft.DeviceRegistry Resource Provider management API.")
+@versioned(Versions)
 namespace Microsoft.DeviceRegistry;
 
 /** API versions */

@@ -50,6 +50,24 @@
     },
     {
       "name": "AssetEndpointProfiles"
+    },
+    {
+      "name": "BillingContainers"
+    },
+    {
+      "name": "DiscoveredAssets"
+    },
+    {
+      "name": "DiscoveredAssetEndpointProfiles"
+    },
+    {
+      "name": "SchemaRegistries"
+    },
+    {
+      "name": "Schemas"
+    },
+    {
+      "name": "SchemaVersions"
     }
   ],
   "paths": {
@@ -77,6 +95,11 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "List_Operations": {
+            "$ref": "./examples/List_Operations.json"
           }
         },
         "x-ms-pageable": {
@@ -113,6 +136,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "List_AssetEndpointProfiles_Subscription": {
+            "$ref": "./examples/List_AssetEndpointProfiles_Subscription.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -145,6 +173,174 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "List_Assets_Subscription": {
+            "$ref": "./examples/List_Assets_Subscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DeviceRegistry/billingContainers": {
+      "get": {
+        "operationId": "BillingContainers_ListBySubscription",
+        "tags": [
+          "BillingContainers"
+        ],
+        "description": "List BillingContainer resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/BillingContainerListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List_BillingContainers_Subscription": {
+            "$ref": "./examples/List_BillingContainers_Subscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DeviceRegistry/billingContainers/{billingContainerName}": {
+      "get": {
+        "operationId": "BillingContainers_Get",
+        "tags": [
+          "BillingContainers"
+        ],
+        "description": "Get a BillingContainer",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "billingContainerName",
+            "in": "path",
+            "description": "Name of the billing container.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[0-9a-zA-Z][a-zA-Z0-9-]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/BillingContainer"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get_BillingContainer": {
+            "$ref": "./examples/Get_BillingContainer.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DeviceRegistry/discoveredAssetEndpointProfiles": {
+      "get": {
+        "operationId": "DiscoveredAssetEndpointProfiles_ListBySubscription",
+        "tags": [
+          "DiscoveredAssetEndpointProfiles"
+        ],
+        "description": "List DiscoveredAssetEndpointProfile resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DiscoveredAssetEndpointProfileListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List_DiscoveredAssetEndpointProfiles_Subscription": {
+            "$ref": "./examples/List_DiscoveredAssetEndpointProfiles_Subscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DeviceRegistry/discoveredAssets": {
+      "get": {
+        "operationId": "DiscoveredAssets_ListBySubscription",
+        "tags": [
+          "DiscoveredAssets"
+        ],
+        "description": "List DiscoveredAsset resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DiscoveredAssetListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List_DiscoveredAssets_Subscription": {
+            "$ref": "./examples/List_DiscoveredAssets_Subscription.json"
           }
         },
         "x-ms-pageable": {
@@ -186,6 +382,50 @@
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Get_OperationStatus": {
+            "$ref": "./examples/Get_OperationStatus.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DeviceRegistry/schemaRegistries": {
+      "get": {
+        "operationId": "SchemaRegistries_ListBySubscription",
+        "tags": [
+          "SchemaRegistries"
+        ],
+        "description": "List SchemaRegistry resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SchemaRegistryListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List_SchemaRegistries_Subscription": {
+            "$ref": "./examples/List_SchemaRegistries_Subscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -219,6 +459,11 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "List_AssetEndpointProfiles_ResourceGroup": {
+            "$ref": "./examples/List_AssetEndpointProfiles_ResourceGroup.json"
           }
         },
         "x-ms-pageable": {
@@ -266,6 +511,14 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get_AssetEndpointProfile": {
+            "$ref": "./examples/Get_AssetEndpointProfile.json"
+          },
+          "Get_AssetEndpointProfile_With_SyncStatus": {
+            "$ref": "./examples/Get_AssetEndpointProfile_With_SyncStatus.json"
           }
         }
       },
@@ -318,6 +571,10 @@
               "$ref": "#/definitions/AssetEndpointProfile"
             },
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -330,6 +587,14 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Create_AssetEndpointProfile": {
+            "$ref": "./examples/Create_AssetEndpointProfile.json"
+          },
+          "Create_AssetEndpointProfile_With_DiscoveredAepRef": {
+            "$ref": "./examples/Create_AssetEndpointProfile_With_DiscoveredAepRef.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -401,6 +666,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Update_AssetEndpointProfile": {
+            "$ref": "./examples/Update_AssetEndpointProfile.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -458,6 +728,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Delete_AssetEndpointProfile": {
+            "$ref": "./examples/Delete_AssetEndpointProfile.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -494,6 +769,11 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "List_Assets_ResourceGroup": {
+            "$ref": "./examples/List_Assets_ResourceGroup.json"
           }
         },
         "x-ms-pageable": {
@@ -541,6 +821,14 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get_Asset": {
+            "$ref": "./examples/Get_Asset.json"
+          },
+          "Get_Asset_With_SyncStatus": {
+            "$ref": "./examples/Get_Asset_With_SyncStatus.json"
           }
         }
       },
@@ -593,6 +881,10 @@
               "$ref": "#/definitions/Asset"
             },
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -605,6 +897,20 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Create_Asset_With_DiscoveredAssetRefs": {
+            "$ref": "./examples/Create_Asset_With_DiscoveredAssetRef.json"
+          },
+          "Create_Asset_With_ExternalAssetId": {
+            "$ref": "./examples/Create_Asset_With_ExternalAssetId.json"
+          },
+          "Create_Asset_Without_DisplayName": {
+            "$ref": "./examples/Create_Asset_Without_DisplayName.json"
+          },
+          "Create_Asset_Without_ExternalAssetId": {
+            "$ref": "./examples/Create_Asset_Without_ExternalAssetId.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -676,6 +982,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Update_Asset": {
+            "$ref": "./examples/Update_Asset.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -733,10 +1044,1447 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Delete_Asset": {
+            "$ref": "./examples/Delete_Asset.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DeviceRegistry/discoveredAssetEndpointProfiles": {
+      "get": {
+        "operationId": "DiscoveredAssetEndpointProfiles_ListByResourceGroup",
+        "tags": [
+          "DiscoveredAssetEndpointProfiles"
+        ],
+        "description": "List DiscoveredAssetEndpointProfile resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DiscoveredAssetEndpointProfileListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List_DiscoveredAssetEndpointProfiles_ResourceGroup": {
+            "$ref": "./examples/List_DiscoveredAssetEndpointProfiles_ResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DeviceRegistry/discoveredAssetEndpointProfiles/{discoveredAssetEndpointProfileName}": {
+      "get": {
+        "operationId": "DiscoveredAssetEndpointProfiles_Get",
+        "tags": [
+          "DiscoveredAssetEndpointProfiles"
+        ],
+        "description": "Get a DiscoveredAssetEndpointProfile",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "discoveredAssetEndpointProfileName",
+            "in": "path",
+            "description": "Discovered Asset Endpoint Profile name parameter.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DiscoveredAssetEndpointProfile"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get_DiscoveredAssetEndpointProfile": {
+            "$ref": "./examples/Get_DiscoveredAssetEndpointProfile.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "DiscoveredAssetEndpointProfiles_CreateOrReplace",
+        "tags": [
+          "DiscoveredAssetEndpointProfiles"
+        ],
+        "description": "Create a DiscoveredAssetEndpointProfile",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "discoveredAssetEndpointProfileName",
+            "in": "path",
+            "description": "Discovered Asset Endpoint Profile name parameter.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DiscoveredAssetEndpointProfile"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'DiscoveredAssetEndpointProfile' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/DiscoveredAssetEndpointProfile"
+            }
+          },
+          "201": {
+            "description": "Resource 'DiscoveredAssetEndpointProfile' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/DiscoveredAssetEndpointProfile"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create_DiscoveredAssetEndpointProfile": {
+            "$ref": "./examples/Create_DiscoveredAssetEndpointProfile.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "DiscoveredAssetEndpointProfiles_Update",
+        "tags": [
+          "DiscoveredAssetEndpointProfiles"
+        ],
+        "description": "Update a DiscoveredAssetEndpointProfile",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "discoveredAssetEndpointProfileName",
+            "in": "path",
+            "description": "Discovered Asset Endpoint Profile name parameter.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DiscoveredAssetEndpointProfileUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DiscoveredAssetEndpointProfile"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update_DiscoveredAssetEndpointProfile": {
+            "$ref": "./examples/Update_DiscoveredAssetEndpointProfile.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "DiscoveredAssetEndpointProfiles_Delete",
+        "tags": [
+          "DiscoveredAssetEndpointProfiles"
+        ],
+        "description": "Delete a DiscoveredAssetEndpointProfile",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "discoveredAssetEndpointProfileName",
+            "in": "path",
+            "description": "Discovered Asset Endpoint Profile name parameter.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete_DiscoveredAssetEndpointProfile": {
+            "$ref": "./examples/Delete_DiscoveredAssetEndpointProfile.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DeviceRegistry/discoveredAssets": {
+      "get": {
+        "operationId": "DiscoveredAssets_ListByResourceGroup",
+        "tags": [
+          "DiscoveredAssets"
+        ],
+        "description": "List DiscoveredAsset resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DiscoveredAssetListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List_DiscoveredAssets_ResourceGroup": {
+            "$ref": "./examples/List_DiscoveredAssets_ResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DeviceRegistry/discoveredAssets/{discoveredAssetName}": {
+      "get": {
+        "operationId": "DiscoveredAssets_Get",
+        "tags": [
+          "DiscoveredAssets"
+        ],
+        "description": "Get a DiscoveredAsset",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "discoveredAssetName",
+            "in": "path",
+            "description": "Discovered Asset name parameter.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DiscoveredAsset"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get_DiscoveredAsset": {
+            "$ref": "./examples/Get_DiscoveredAsset.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "DiscoveredAssets_CreateOrReplace",
+        "tags": [
+          "DiscoveredAssets"
+        ],
+        "description": "Create a DiscoveredAsset",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "discoveredAssetName",
+            "in": "path",
+            "description": "Discovered Asset name parameter.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DiscoveredAsset"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'DiscoveredAsset' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/DiscoveredAsset"
+            }
+          },
+          "201": {
+            "description": "Resource 'DiscoveredAsset' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/DiscoveredAsset"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create_DiscoveredAsset": {
+            "$ref": "./examples/Create_DiscoveredAsset.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "DiscoveredAssets_Update",
+        "tags": [
+          "DiscoveredAssets"
+        ],
+        "description": "Update a DiscoveredAsset",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "discoveredAssetName",
+            "in": "path",
+            "description": "Discovered Asset name parameter.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DiscoveredAssetUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DiscoveredAsset"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update_DiscoveredAsset": {
+            "$ref": "./examples/Update_DiscoveredAsset.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "DiscoveredAssets_Delete",
+        "tags": [
+          "DiscoveredAssets"
+        ],
+        "description": "Delete a DiscoveredAsset",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "discoveredAssetName",
+            "in": "path",
+            "description": "Discovered Asset name parameter.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete_DiscoveredAsset": {
+            "$ref": "./examples/Delete_DiscoveredAsset.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DeviceRegistry/schemaRegistries": {
+      "get": {
+        "operationId": "SchemaRegistries_ListByResourceGroup",
+        "tags": [
+          "SchemaRegistries"
+        ],
+        "description": "List SchemaRegistry resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SchemaRegistryListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List_SchemaRegistries_ResourceGroup": {
+            "$ref": "./examples/List_SchemaRegistries_ResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DeviceRegistry/schemaRegistries/{schemaRegistryName}": {
+      "get": {
+        "operationId": "SchemaRegistries_Get",
+        "tags": [
+          "SchemaRegistries"
+        ],
+        "description": "Get a SchemaRegistry",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "schemaRegistryName",
+            "in": "path",
+            "description": "Schema registry name parameter.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SchemaRegistry"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get_SchemaRegistry": {
+            "$ref": "./examples/Get_SchemaRegistry.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "SchemaRegistries_CreateOrReplace",
+        "tags": [
+          "SchemaRegistries"
+        ],
+        "description": "Create a SchemaRegistry",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "schemaRegistryName",
+            "in": "path",
+            "description": "Schema registry name parameter.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SchemaRegistry"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'SchemaRegistry' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/SchemaRegistry"
+            }
+          },
+          "201": {
+            "description": "Resource 'SchemaRegistry' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/SchemaRegistry"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create_SchemaRegistry": {
+            "$ref": "./examples/Create_SchemaRegistry.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "SchemaRegistries_Update",
+        "tags": [
+          "SchemaRegistries"
+        ],
+        "description": "Update a SchemaRegistry",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "schemaRegistryName",
+            "in": "path",
+            "description": "Schema registry name parameter.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SchemaRegistryUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SchemaRegistry"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update_SchemaRegistry": {
+            "$ref": "./examples/Update_SchemaRegistry.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "SchemaRegistries_Delete",
+        "tags": [
+          "SchemaRegistries"
+        ],
+        "description": "Delete a SchemaRegistry",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "schemaRegistryName",
+            "in": "path",
+            "description": "Schema registry name parameter.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete_SchemaRegistry": {
+            "$ref": "./examples/Delete_SchemaRegistry.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DeviceRegistry/schemaRegistries/{schemaRegistryName}/schemas": {
+      "get": {
+        "operationId": "Schemas_ListBySchemaRegistry",
+        "tags": [
+          "Schemas"
+        ],
+        "description": "List Schema resources by SchemaRegistry",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "schemaRegistryName",
+            "in": "path",
+            "description": "Schema registry name parameter.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SchemaListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List_Schemas_SchemaRegistry": {
+            "$ref": "./examples/List_Schemas_SchemaRegistry.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DeviceRegistry/schemaRegistries/{schemaRegistryName}/schemas/{schemaName}": {
+      "get": {
+        "operationId": "Schemas_Get",
+        "tags": [
+          "Schemas"
+        ],
+        "description": "Get a Schema",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "schemaRegistryName",
+            "in": "path",
+            "description": "Schema registry name parameter.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
+          },
+          {
+            "name": "schemaName",
+            "in": "path",
+            "description": "Schema name parameter.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Schema"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Schemas_Get": {
+            "$ref": "./examples/Get_Schema.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Schemas_CreateOrReplace",
+        "tags": [
+          "Schemas"
+        ],
+        "description": "Create a Schema",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "schemaRegistryName",
+            "in": "path",
+            "description": "Schema registry name parameter.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
+          },
+          {
+            "name": "schemaName",
+            "in": "path",
+            "description": "Schema name parameter.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Schema"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'Schema' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Schema"
+            }
+          },
+          "201": {
+            "description": "Resource 'Schema' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Schema"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create_Schema": {
+            "$ref": "./examples/Create_Schema.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "Schemas_Delete",
+        "tags": [
+          "Schemas"
+        ],
+        "description": "Delete a Schema",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "schemaRegistryName",
+            "in": "path",
+            "description": "Schema registry name parameter.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
+          },
+          {
+            "name": "schemaName",
+            "in": "path",
+            "description": "Schema name parameter.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete_Schema": {
+            "$ref": "./examples/Delete_Schema.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DeviceRegistry/schemaRegistries/{schemaRegistryName}/schemas/{schemaName}/schemaVersions": {
+      "get": {
+        "operationId": "SchemaVersions_ListBySchema",
+        "tags": [
+          "SchemaVersions"
+        ],
+        "description": "List SchemaVersion resources by Schema",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "schemaRegistryName",
+            "in": "path",
+            "description": "Schema registry name parameter.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
+          },
+          {
+            "name": "schemaName",
+            "in": "path",
+            "description": "Schema name parameter.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SchemaVersionListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List_SchemaVersions_Schema": {
+            "$ref": "./examples/List_SchemaVersions_Schema.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DeviceRegistry/schemaRegistries/{schemaRegistryName}/schemas/{schemaName}/schemaVersions/{schemaVersionName}": {
+      "get": {
+        "operationId": "SchemaVersions_Get",
+        "tags": [
+          "SchemaVersions"
+        ],
+        "description": "Get a SchemaVersion",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "schemaRegistryName",
+            "in": "path",
+            "description": "Schema registry name parameter.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
+          },
+          {
+            "name": "schemaName",
+            "in": "path",
+            "description": "Schema name parameter.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
+          },
+          {
+            "name": "schemaVersionName",
+            "in": "path",
+            "description": "Schema version name parameter.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 10,
+            "pattern": "^[0-9]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SchemaVersion"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get_SchemaVersion": {
+            "$ref": "./examples/Get_SchemaVersion.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "SchemaVersions_CreateOrReplace",
+        "tags": [
+          "SchemaVersions"
+        ],
+        "description": "Create a SchemaVersion",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "schemaRegistryName",
+            "in": "path",
+            "description": "Schema registry name parameter.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
+          },
+          {
+            "name": "schemaName",
+            "in": "path",
+            "description": "Schema name parameter.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
+          },
+          {
+            "name": "schemaVersionName",
+            "in": "path",
+            "description": "Schema version name parameter.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 10,
+            "pattern": "^[0-9]*$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SchemaVersion"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'SchemaVersion' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/SchemaVersion"
+            }
+          },
+          "201": {
+            "description": "Resource 'SchemaVersion' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/SchemaVersion"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create_SchemaVersion": {
+            "$ref": "./examples/Create_SchemaVersion.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "SchemaVersions_Delete",
+        "tags": [
+          "SchemaVersions"
+        ],
+        "description": "Delete a SchemaVersion",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "schemaRegistryName",
+            "in": "path",
+            "description": "Schema registry name parameter.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
+          },
+          {
+            "name": "schemaName",
+            "in": "path",
+            "description": "Schema name parameter.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
+          },
+          {
+            "name": "schemaVersionName",
+            "in": "path",
+            "description": "Schema version name parameter.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 10,
+            "pattern": "^[0-9]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete_SchemaVersion": {
+            "$ref": "./examples/Delete_SchemaVersion.json"
+          }
+        }
       }
     }
   },
@@ -830,17 +2578,30 @@
           "format": "uri",
           "description": "The local valid URI specifying the network address/DNS name of a southbound device. The scheme part of the targetAddress URI specifies the type of the device. The additionalConfiguration field holds further connector type specific configuration."
         },
-        "userAuthentication": {
-          "$ref": "#/definitions/UserAuthentication",
-          "description": "Defines the client authentication mechanism to the server."
+        "endpointProfileType": {
+          "type": "string",
+          "description": "Defines the configuration for the connector type that is being used with the endpoint profile."
         },
-        "transportAuthentication": {
-          "$ref": "#/definitions/TransportAuthentication",
-          "description": "Defines the authentication mechanism for the southbound connector connecting to the shop floor/OT device."
+        "authentication": {
+          "$ref": "#/definitions/Authentication",
+          "description": "Defines the client authentication mechanism to the server."
         },
         "additionalConfiguration": {
           "type": "string",
-          "description": "Contains connectivity type specific further configuration (e.g. OPC UA, Modbus, ONVIF)."
+          "description": "Stringified JSON that contains connectivity type specific further configuration (e.g. OPC UA, Modbus, ONVIF)."
+        },
+        "discoveredAssetEndpointProfileRef": {
+          "type": "string",
+          "description": "Reference to a discovered asset endpoint profile. Populated only if the asset endpoint profile has been created from discovery flow. Discovered asset endpoint profile name must be provided.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "status": {
+          "$ref": "#/definitions/AssetEndpointProfileStatus",
+          "description": "Read only object to reflect changes that have occurred on the Edge. Similar to Kubernetes status property for custom resources.",
+          "readOnly": true
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
@@ -849,49 +2610,80 @@
         }
       },
       "required": [
-        "targetAddress"
+        "targetAddress",
+        "endpointProfileType"
       ]
     },
-    "AssetEndpointProfileUpdate": {
+    "AssetEndpointProfilePropertiesUpdate": {
       "type": "object",
-      "description": "The type used for update operations of the AssetEndpointProfile.",
-      "properties": {
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "properties": {
-          "$ref": "#/definitions/AssetEndpointProfileUpdateProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
-        }
-      }
-    },
-    "AssetEndpointProfileUpdateProperties": {
-      "type": "object",
-      "description": "The updatable properties of the AssetEndpointProfile.",
+      "description": "Defines the Asset Endpoint Profile properties.",
       "properties": {
         "targetAddress": {
           "type": "string",
           "format": "uri",
           "description": "The local valid URI specifying the network address/DNS name of a southbound device. The scheme part of the targetAddress URI specifies the type of the device. The additionalConfiguration field holds further connector type specific configuration."
         },
-        "userAuthentication": {
-          "$ref": "#/definitions/UserAuthenticationUpdate",
-          "description": "Defines the client authentication mechanism to the server."
+        "endpointProfileType": {
+          "type": "string",
+          "description": "Defines the configuration for the connector type that is being used with the endpoint profile."
         },
-        "transportAuthentication": {
-          "$ref": "#/definitions/TransportAuthenticationUpdate",
-          "description": "Defines the authentication mechanism for the southbound connector connecting to the shop floor/OT device."
+        "authentication": {
+          "$ref": "#/definitions/AuthenticationUpdate",
+          "description": "Defines the client authentication mechanism to the server."
         },
         "additionalConfiguration": {
           "type": "string",
-          "description": "Contains connectivity type specific further configuration (e.g. OPC UA, Modbus, ONVIF)."
+          "description": "Stringified JSON that contains connectivity type specific further configuration (e.g. OPC UA, Modbus, ONVIF)."
         }
       }
+    },
+    "AssetEndpointProfileStatus": {
+      "type": "object",
+      "description": "Defines the asset endpoint profile status properties.",
+      "properties": {
+        "errors": {
+          "type": "array",
+          "description": "Array object to transfer and persist errors that originate from the Edge.",
+          "items": {
+            "$ref": "#/definitions/AssetEndpointProfileStatusError"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "AssetEndpointProfileStatusError": {
+      "type": "object",
+      "description": "Defines the asset endpoint profile status error properties.",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Error code for classification of errors (ex: 400, 404, 500, etc.).",
+          "readOnly": true
+        },
+        "message": {
+          "type": "string",
+          "description": "Human readable helpful error message to provide additional context for error (ex: “targetAddress 'foo' is not a valid url”).",
+          "readOnly": true
+        }
+      }
+    },
+    "AssetEndpointProfileUpdate": {
+      "type": "object",
+      "description": "Asset Endpoint Profile definition.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AssetEndpointProfilePropertiesUpdate",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
     },
     "AssetListResult": {
       "type": "object",
@@ -923,10 +2715,6 @@
           "description": "Globally unique, immutable, non-reusable id.",
           "readOnly": true
         },
-        "assetType": {
-          "type": "string",
-          "description": "Resource path to asset type (model) definition."
-        },
         "enabled": {
           "type": "boolean",
           "description": "Enabled/Disabled status of the asset."
@@ -947,9 +2735,9 @@
           "type": "string",
           "description": "Human-readable description of the asset."
         },
-        "assetEndpointProfileUri": {
+        "assetEndpointProfileRef": {
           "type": "string",
-          "description": "A reference to the asset endpoint profile (connection information) used by brokers to connect to an endpoint that provides data points for this asset. Must have the format <ModuleCR.metadata.namespace>/<ModuleCR.metadata.name>.",
+          "description": "A reference to the asset endpoint profile (connection information) used by brokers to connect to an endpoint that provides data points for this asset. Must provide asset endpoint profile name.",
           "x-ms-mutability": [
             "read",
             "create"
@@ -957,7 +2745,7 @@
         },
         "version": {
           "type": "integer",
-          "format": "int32",
+          "format": "int64",
           "description": "An integer that is incremented each time the resource is modified.",
           "readOnly": true
         },
@@ -998,25 +2786,40 @@
           "description": "A set of key-value pairs that contain custom attributes set by the customer.",
           "additionalProperties": {}
         },
-        "defaultDataPointsConfiguration": {
+        "discoveredAssetRefs": {
+          "type": "array",
+          "description": "Reference to a list of discovered assets. Populated only if the asset has been created from discovery flow. Discovered asset names must be provided.",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "defaultDatasetsConfiguration": {
           "type": "string",
-          "description": "Protocol-specific default configuration for all data points. Each data point can have its own configuration that overrides the default settings here. This assumes that each asset instance has one protocol."
+          "description": "Stringified JSON that contains connector-specific default configuration for all datasets. Each dataset can have its own configuration that overrides the default settings here."
         },
         "defaultEventsConfiguration": {
           "type": "string",
-          "description": "Protocol-specific default configuration for all events. Each event can have its own configuration that overrides the default settings here. This assumes that each asset instance has one protocol."
+          "description": "Stringified JSON that contains connector-specific default configuration for all events. Each event can have its own configuration that overrides the default settings here."
         },
-        "dataPoints": {
+        "defaultTopic": {
+          "$ref": "#/definitions/Topic",
+          "description": "Object that describes the default topic information for the asset."
+        },
+        "datasets": {
           "type": "array",
-          "description": "Array of data points that are part of the asset. Each data point can reference an asset type capability and have per-data point configuration. See below for more details for the definition of the dataPoints element.",
+          "description": "Array of datasets that are part of the asset. Each dataset describes the data points that make up the set.",
           "items": {
-            "$ref": "#/definitions/DataPoint"
+            "$ref": "#/definitions/Dataset"
           },
           "x-ms-identifiers": []
         },
         "events": {
           "type": "array",
-          "description": "Array of events that are part of the asset. Each event can reference an asset type capability and have per-event configuration. See below for more details about the definition of the events element.",
+          "description": "Array of events that are part of the asset. Each event can have per-event configuration.",
           "items": {
             "$ref": "#/definitions/Event"
           },
@@ -1034,69 +2837,13 @@
         }
       },
       "required": [
-        "assetEndpointProfileUri"
+        "assetEndpointProfileRef"
       ]
     },
-    "AssetStatus": {
+    "AssetPropertiesUpdate": {
       "type": "object",
-      "description": "Defines the asset status properties.",
+      "description": "Defines the asset properties.",
       "properties": {
-        "errors": {
-          "type": "array",
-          "description": "Array object to transfer and persist errors that originate from the Edge.",
-          "items": {
-            "$ref": "#/definitions/AssetStatusError"
-          },
-          "x-ms-identifiers": []
-        },
-        "version": {
-          "type": "integer",
-          "format": "int32",
-          "description": "A read only incremental counter indicating the number of times the configuration has been modified from the perspective of the current actual (Edge) state of the Asset. Edge would be the only writer of this value and would sync back up to the cloud. In steady state, this should equal version."
-        }
-      }
-    },
-    "AssetStatusError": {
-      "type": "object",
-      "description": "Defines the asset status error properties.",
-      "properties": {
-        "code": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Error code for classification of errors (ex: 400, 404, 500, etc.)."
-        },
-        "message": {
-          "type": "string",
-          "description": "Human readable helpful error message to provide additional context for error (ex: “capability Id 'foo' does not exist”)."
-        }
-      }
-    },
-    "AssetUpdate": {
-      "type": "object",
-      "description": "The type used for update operations of the Asset.",
-      "properties": {
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "properties": {
-          "$ref": "#/definitions/AssetUpdateProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
-        }
-      }
-    },
-    "AssetUpdateProperties": {
-      "type": "object",
-      "description": "The updatable properties of the Asset.",
-      "properties": {
-        "assetType": {
-          "type": "string",
-          "description": "Resource path to asset type (model) definition."
-        },
         "enabled": {
           "type": "boolean",
           "description": "Enabled/Disabled status of the asset."
@@ -1146,25 +2893,29 @@
           "description": "A set of key-value pairs that contain custom attributes set by the customer.",
           "additionalProperties": {}
         },
-        "defaultDataPointsConfiguration": {
+        "defaultDatasetsConfiguration": {
           "type": "string",
-          "description": "Protocol-specific default configuration for all data points. Each data point can have its own configuration that overrides the default settings here. This assumes that each asset instance has one protocol."
+          "description": "Stringified JSON that contains connector-specific default configuration for all datasets. Each dataset can have its own configuration that overrides the default settings here."
         },
         "defaultEventsConfiguration": {
           "type": "string",
-          "description": "Protocol-specific default configuration for all events. Each event can have its own configuration that overrides the default settings here. This assumes that each asset instance has one protocol."
+          "description": "Stringified JSON that contains connector-specific default configuration for all events. Each event can have its own configuration that overrides the default settings here."
         },
-        "dataPoints": {
+        "defaultTopic": {
+          "$ref": "#/definitions/TopicUpdate",
+          "description": "Object that describes the default topic information for the asset."
+        },
+        "datasets": {
           "type": "array",
-          "description": "Array of data points that are part of the asset. Each data point can reference an asset type capability and have per-data point configuration. See below for more details for the definition of the dataPoints element.",
+          "description": "Array of datasets that are part of the asset. Each dataset describes the data points that make up the set.",
           "items": {
-            "$ref": "#/definitions/DataPoint"
+            "$ref": "#/definitions/Dataset"
           },
           "x-ms-identifiers": []
         },
         "events": {
           "type": "array",
-          "description": "Array of events that are part of the asset. Each event can reference an asset type capability and have per-event configuration. See below for more details about the definition of the events element.",
+          "description": "Array of events that are part of the asset. Each event can have per-event configuration.",
           "items": {
             "$ref": "#/definitions/Event"
           },
@@ -1172,7 +2923,347 @@
         }
       }
     },
+    "AssetStatus": {
+      "type": "object",
+      "description": "Defines the asset status properties.",
+      "properties": {
+        "errors": {
+          "type": "array",
+          "description": "Array object to transfer and persist errors that originate from the Edge.",
+          "items": {
+            "$ref": "#/definitions/AssetStatusError"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "version": {
+          "type": "integer",
+          "format": "int64",
+          "description": "A read only incremental counter indicating the number of times the configuration has been modified from the perspective of the current actual (Edge) state of the Asset. Edge would be the only writer of this value and would sync back up to the cloud. In steady state, this should equal version.",
+          "readOnly": true
+        },
+        "datasets": {
+          "type": "array",
+          "description": "Array of dataset statuses that describe the status of each dataset.",
+          "items": {
+            "$ref": "#/definitions/AssetStatusDataset"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "events": {
+          "type": "array",
+          "description": "Array of event statuses that describe the status of each event.",
+          "items": {
+            "$ref": "#/definitions/AssetStatusEvent"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "AssetStatusDataset": {
+      "type": "object",
+      "description": "Defines the asset status dataset properties.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the dataset. Must be unique within the status.datasets array. This name is used to correlate between the spec and status dataset information.",
+          "readOnly": true
+        },
+        "messageSchemaReference": {
+          "$ref": "#/definitions/MessageSchemaReference",
+          "description": "The message schema reference object.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
+    "AssetStatusError": {
+      "type": "object",
+      "description": "Defines the asset status error properties.",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Error code for classification of errors (ex: 400, 404, 500, etc.).",
+          "readOnly": true
+        },
+        "message": {
+          "type": "string",
+          "description": "Human readable helpful error message to provide additional context for error (ex: “capability Id 'foo' does not exist”).",
+          "readOnly": true
+        }
+      }
+    },
+    "AssetStatusEvent": {
+      "type": "object",
+      "description": "Defines the asset status event properties.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the event. Must be unique within the status.events array. This name is used to correlate between the spec and status event information.",
+          "readOnly": true
+        },
+        "messageSchemaReference": {
+          "$ref": "#/definitions/MessageSchemaReference",
+          "description": "The message schema reference object.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
+    "AssetUpdate": {
+      "type": "object",
+      "description": "Asset definition.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AssetPropertiesUpdate",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "Authentication": {
+      "type": "object",
+      "description": "Definition of the client authentication mechanism to the server.",
+      "properties": {
+        "method": {
+          "type": "string",
+          "description": "Defines the method to authenticate the user of the client at the server.",
+          "default": "Certificate",
+          "enum": [
+            "Anonymous",
+            "Certificate",
+            "UsernamePassword"
+          ],
+          "x-ms-enum": {
+            "name": "AuthenticationMethod",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Anonymous",
+                "value": "Anonymous",
+                "description": "The user authentication method is anonymous."
+              },
+              {
+                "name": "Certificate",
+                "value": "Certificate",
+                "description": "The user authentication method is an x509 certificate."
+              },
+              {
+                "name": "UsernamePassword",
+                "value": "UsernamePassword",
+                "description": "The user authentication method is a username and password."
+              }
+            ]
+          }
+        },
+        "usernamePasswordCredentials": {
+          "$ref": "#/definitions/UsernamePasswordCredentials",
+          "description": "Defines the username and password references when UsernamePassword user authentication mode is selected."
+        },
+        "x509Credentials": {
+          "$ref": "#/definitions/X509Credentials",
+          "description": "Defines the certificate reference when Certificate user authentication mode is selected."
+        }
+      },
+      "required": [
+        "method"
+      ]
+    },
+    "AuthenticationMethod": {
+      "type": "string",
+      "description": "The method to authenticate the user of the client at the server.",
+      "enum": [
+        "Anonymous",
+        "Certificate",
+        "UsernamePassword"
+      ],
+      "x-ms-enum": {
+        "name": "AuthenticationMethod",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Anonymous",
+            "value": "Anonymous",
+            "description": "The user authentication method is anonymous."
+          },
+          {
+            "name": "Certificate",
+            "value": "Certificate",
+            "description": "The user authentication method is an x509 certificate."
+          },
+          {
+            "name": "UsernamePassword",
+            "value": "UsernamePassword",
+            "description": "The user authentication method is a username and password."
+          }
+        ]
+      }
+    },
+    "AuthenticationUpdate": {
+      "type": "object",
+      "description": "Definition of the client authentication mechanism to the server.",
+      "properties": {
+        "method": {
+          "type": "string",
+          "description": "Defines the method to authenticate the user of the client at the server.",
+          "default": "Certificate",
+          "enum": [
+            "Anonymous",
+            "Certificate",
+            "UsernamePassword"
+          ],
+          "x-ms-enum": {
+            "name": "AuthenticationMethod",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Anonymous",
+                "value": "Anonymous",
+                "description": "The user authentication method is anonymous."
+              },
+              {
+                "name": "Certificate",
+                "value": "Certificate",
+                "description": "The user authentication method is an x509 certificate."
+              },
+              {
+                "name": "UsernamePassword",
+                "value": "UsernamePassword",
+                "description": "The user authentication method is a username and password."
+              }
+            ]
+          }
+        },
+        "usernamePasswordCredentials": {
+          "$ref": "#/definitions/UsernamePasswordCredentialsUpdate",
+          "description": "Defines the username and password references when UsernamePassword user authentication mode is selected."
+        },
+        "x509Credentials": {
+          "$ref": "#/definitions/X509CredentialsUpdate",
+          "description": "Defines the certificate reference when Certificate user authentication mode is selected."
+        }
+      }
+    },
+    "BillingContainer": {
+      "type": "object",
+      "description": "billingContainer Model as Azure resource whose sole purpose is to keep track of billables resources under a subscription.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/BillingContainerProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true
+        },
+        "etag": {
+          "type": "string",
+          "description": "Resource ETag",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "BillingContainerListResult": {
+      "type": "object",
+      "description": "The response of a BillingContainer list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The BillingContainer items on this page",
+          "items": {
+            "$ref": "#/definitions/BillingContainer"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "BillingContainerProperties": {
+      "type": "object",
+      "description": "Defines the billingContainer properties.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Provisioning state of the resource.",
+          "readOnly": true
+        }
+      }
+    },
     "DataPoint": {
+      "type": "object",
+      "description": "Defines the data point properties.",
+      "properties": {
+        "observabilityMode": {
+          "type": "string",
+          "description": "An indication of how the data point should be mapped to OpenTelemetry.",
+          "default": "None",
+          "enum": [
+            "None",
+            "Counter",
+            "Gauge",
+            "Histogram",
+            "Log"
+          ],
+          "x-ms-enum": {
+            "name": "DataPointObservabilityMode",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "None",
+                "value": "None",
+                "description": "No mapping to OpenTelemetry."
+              },
+              {
+                "name": "Counter",
+                "value": "Counter",
+                "description": "Map as counter to OpenTelemetry."
+              },
+              {
+                "name": "Gauge",
+                "value": "Gauge",
+                "description": "Map as gauge to OpenTelemetry."
+              },
+              {
+                "name": "Histogram",
+                "value": "Histogram",
+                "description": "Map as histogram to OpenTelemetry."
+              },
+              {
+                "name": "Log",
+                "value": "Log",
+                "description": "Map as log to OpenTelemetry."
+              }
+            ]
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataPointBase"
+        }
+      ]
+    },
+    "DataPointBase": {
       "type": "object",
       "description": "Defines the data point properties.",
       "properties": {
@@ -1184,63 +3275,481 @@
           "type": "string",
           "description": "The address of the source of the data in the asset (e.g. URL) so that a client can access the data source on the asset."
         },
-        "capabilityId": {
-          "type": "string",
-          "description": "The path to the type definition of the capability (e.g. DTMI, OPC UA information model node id, etc.), for example dtmi:com:example:Robot:_contents:__prop1;1."
-        },
-        "observabilityMode": {
-          "type": "string",
-          "description": "An indication of how the data point should be mapped to OpenTelemetry.",
-          "default": "none",
-          "enum": [
-            "none",
-            "counter",
-            "gauge",
-            "histogram",
-            "log"
-          ],
-          "x-ms-enum": {
-            "name": "DataPointsObservabilityMode",
-            "modelAsString": true,
-            "values": [
-              {
-                "name": "None",
-                "value": "none",
-                "description": "No mapping to OpenTelemetry."
-              },
-              {
-                "name": "Counter",
-                "value": "counter",
-                "description": "Map as counter to OpenTelemetry."
-              },
-              {
-                "name": "Gauge",
-                "value": "gauge",
-                "description": "Map as gauge to OpenTelemetry."
-              },
-              {
-                "name": "Histogram",
-                "value": "histogram",
-                "description": "Map as histogram to OpenTelemetry."
-              },
-              {
-                "name": "Log",
-                "value": "log",
-                "description": "Map as log to OpenTelemetry."
-              }
-            ]
-          }
-        },
         "dataPointConfiguration": {
           "type": "string",
-          "description": "Protocol-specific configuration for the data point. For OPC UA, this could include configuration like, publishingInterval, samplingInterval, and queueSize."
+          "description": "Stringified JSON that contains connector-specific configuration for the data point. For OPC UA, this could include configuration like, publishingInterval, samplingInterval, and queueSize."
         }
       },
       "required": [
+        "name",
         "dataSource"
       ]
     },
-    "Event": {
+    "Dataset": {
+      "type": "object",
+      "description": "Defines the dataset properties.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the dataset."
+        },
+        "datasetConfiguration": {
+          "type": "string",
+          "description": "Stringified JSON that contains connector-specific JSON string that describes configuration for the specific dataset."
+        },
+        "topic": {
+          "$ref": "#/definitions/Topic",
+          "description": "Object that describes the topic information for the specific dataset."
+        },
+        "dataPoints": {
+          "type": "array",
+          "description": "Array of data points that are part of the dataset. Each data point can have per-data point configuration.",
+          "items": {
+            "$ref": "#/definitions/DataPoint"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
+    "DiscoveredAsset": {
+      "type": "object",
+      "description": "Discovered Asset definition.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DiscoveredAssetProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true
+        },
+        "extendedLocation": {
+          "$ref": "#/definitions/ExtendedLocation",
+          "description": "The extended location.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "extendedLocation"
+      ],
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "DiscoveredAssetEndpointProfile": {
+      "type": "object",
+      "description": "Discovered Asset Endpoint Profile definition.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DiscoveredAssetEndpointProfileProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true
+        },
+        "extendedLocation": {
+          "$ref": "#/definitions/ExtendedLocation",
+          "description": "The extended location.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "extendedLocation"
+      ],
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "DiscoveredAssetEndpointProfileListResult": {
+      "type": "object",
+      "description": "The response of a DiscoveredAssetEndpointProfile list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The DiscoveredAssetEndpointProfile items on this page",
+          "items": {
+            "$ref": "#/definitions/DiscoveredAssetEndpointProfile"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "DiscoveredAssetEndpointProfileProperties": {
+      "type": "object",
+      "description": "Defines the Discovered Asset Endpoint Profile properties.",
+      "properties": {
+        "targetAddress": {
+          "type": "string",
+          "format": "uri",
+          "description": "The local valid URI specifying the network address/DNS name of a southbound device. The scheme part of the targetAddress URI specifies the type of the device. The additionalConfiguration field holds further connector type specific configuration."
+        },
+        "additionalConfiguration": {
+          "type": "string",
+          "description": "Stringified JSON that contains connectivity type specific further configuration (e.g. OPC UA, Modbus, ONVIF)."
+        },
+        "supportedAuthenticationMethods": {
+          "type": "array",
+          "description": "List of supported authentication methods supported by the target server.",
+          "items": {
+            "$ref": "#/definitions/AuthenticationMethod"
+          },
+          "x-ms-identifiers": []
+        },
+        "endpointProfileType": {
+          "type": "string",
+          "description": "Defines the configuration for the connector type that is being used with the endpoint profile."
+        },
+        "discoveryId": {
+          "type": "string",
+          "description": "Identifier used to detect changes in the asset endpoint profile."
+        },
+        "version": {
+          "type": "integer",
+          "format": "int64",
+          "description": "An integer that is incremented each time the resource is modified."
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Provisioning state of the resource.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "targetAddress",
+        "endpointProfileType",
+        "discoveryId",
+        "version"
+      ]
+    },
+    "DiscoveredAssetEndpointProfilePropertiesUpdate": {
+      "type": "object",
+      "description": "Defines the Discovered Asset Endpoint Profile properties.",
+      "properties": {
+        "targetAddress": {
+          "type": "string",
+          "format": "uri",
+          "description": "The local valid URI specifying the network address/DNS name of a southbound device. The scheme part of the targetAddress URI specifies the type of the device. The additionalConfiguration field holds further connector type specific configuration."
+        },
+        "additionalConfiguration": {
+          "type": "string",
+          "description": "Stringified JSON that contains connectivity type specific further configuration (e.g. OPC UA, Modbus, ONVIF)."
+        },
+        "supportedAuthenticationMethods": {
+          "type": "array",
+          "description": "List of supported authentication methods supported by the target server.",
+          "items": {
+            "$ref": "#/definitions/AuthenticationMethod"
+          },
+          "x-ms-identifiers": []
+        },
+        "endpointProfileType": {
+          "type": "string",
+          "description": "Defines the configuration for the connector type that is being used with the endpoint profile."
+        },
+        "discoveryId": {
+          "type": "string",
+          "description": "Identifier used to detect changes in the asset endpoint profile."
+        },
+        "version": {
+          "type": "integer",
+          "format": "int64",
+          "description": "An integer that is incremented each time the resource is modified."
+        }
+      }
+    },
+    "DiscoveredAssetEndpointProfileUpdate": {
+      "type": "object",
+      "description": "Discovered Asset Endpoint Profile definition.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DiscoveredAssetEndpointProfilePropertiesUpdate",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "DiscoveredAssetListResult": {
+      "type": "object",
+      "description": "The response of a DiscoveredAsset list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The DiscoveredAsset items on this page",
+          "items": {
+            "$ref": "#/definitions/DiscoveredAsset"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "DiscoveredAssetProperties": {
+      "type": "object",
+      "description": "Defines the discovered asset properties.",
+      "properties": {
+        "assetEndpointProfileRef": {
+          "type": "string",
+          "description": "A reference to the asset endpoint profile (connection information) used by brokers to connect to an endpoint that provides data points for this asset. Must provide asset endpoint profile name.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "discoveryId": {
+          "type": "string",
+          "description": "Identifier used to detect changes in the asset."
+        },
+        "version": {
+          "type": "integer",
+          "format": "int64",
+          "description": "An integer that is incremented each time the resource is modified."
+        },
+        "manufacturer": {
+          "type": "string",
+          "description": "Asset manufacturer name."
+        },
+        "manufacturerUri": {
+          "type": "string",
+          "description": "Asset manufacturer URI."
+        },
+        "model": {
+          "type": "string",
+          "description": "Asset model name."
+        },
+        "productCode": {
+          "type": "string",
+          "description": "Asset product code."
+        },
+        "hardwareRevision": {
+          "type": "string",
+          "description": "Revision number of the hardware."
+        },
+        "softwareRevision": {
+          "type": "string",
+          "description": "Revision number of the software."
+        },
+        "documentationUri": {
+          "type": "string",
+          "description": "Reference to the documentation."
+        },
+        "serialNumber": {
+          "type": "string",
+          "description": "Asset serial number."
+        },
+        "defaultDatasetsConfiguration": {
+          "type": "string",
+          "description": "Stringified JSON that contains connector-specific default configuration for all datasets. Each dataset can have its own configuration that overrides the default settings here."
+        },
+        "defaultEventsConfiguration": {
+          "type": "string",
+          "description": "Stringified JSON that contains connector-specific default configuration for all events. Each event can have its own configuration that overrides the default settings here."
+        },
+        "defaultTopic": {
+          "$ref": "#/definitions/Topic",
+          "description": "Object that describes the default topic information for the asset."
+        },
+        "datasets": {
+          "type": "array",
+          "description": "Array of datasets that are part of the asset. Each dataset spec describes the data points that make up the set.",
+          "items": {
+            "$ref": "#/definitions/DiscoveredDataset"
+          },
+          "x-ms-identifiers": []
+        },
+        "events": {
+          "type": "array",
+          "description": "Array of events that are part of the asset. Each event can have per-event configuration.",
+          "items": {
+            "$ref": "#/definitions/DiscoveredEvent"
+          },
+          "x-ms-identifiers": []
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Provisioning state of the resource.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "assetEndpointProfileRef",
+        "discoveryId",
+        "version"
+      ]
+    },
+    "DiscoveredAssetPropertiesUpdate": {
+      "type": "object",
+      "description": "Defines the discovered asset properties.",
+      "properties": {
+        "discoveryId": {
+          "type": "string",
+          "description": "Identifier used to detect changes in the asset."
+        },
+        "version": {
+          "type": "integer",
+          "format": "int64",
+          "description": "An integer that is incremented each time the resource is modified."
+        },
+        "manufacturer": {
+          "type": "string",
+          "description": "Asset manufacturer name."
+        },
+        "manufacturerUri": {
+          "type": "string",
+          "description": "Asset manufacturer URI."
+        },
+        "model": {
+          "type": "string",
+          "description": "Asset model name."
+        },
+        "productCode": {
+          "type": "string",
+          "description": "Asset product code."
+        },
+        "hardwareRevision": {
+          "type": "string",
+          "description": "Revision number of the hardware."
+        },
+        "softwareRevision": {
+          "type": "string",
+          "description": "Revision number of the software."
+        },
+        "documentationUri": {
+          "type": "string",
+          "description": "Reference to the documentation."
+        },
+        "serialNumber": {
+          "type": "string",
+          "description": "Asset serial number."
+        },
+        "defaultDatasetsConfiguration": {
+          "type": "string",
+          "description": "Stringified JSON that contains connector-specific default configuration for all datasets. Each dataset can have its own configuration that overrides the default settings here."
+        },
+        "defaultEventsConfiguration": {
+          "type": "string",
+          "description": "Stringified JSON that contains connector-specific default configuration for all events. Each event can have its own configuration that overrides the default settings here."
+        },
+        "defaultTopic": {
+          "$ref": "#/definitions/TopicUpdate",
+          "description": "Object that describes the default topic information for the asset."
+        },
+        "datasets": {
+          "type": "array",
+          "description": "Array of datasets that are part of the asset. Each dataset spec describes the data points that make up the set.",
+          "items": {
+            "$ref": "#/definitions/DiscoveredDataset"
+          },
+          "x-ms-identifiers": []
+        },
+        "events": {
+          "type": "array",
+          "description": "Array of events that are part of the asset. Each event can have per-event configuration.",
+          "items": {
+            "$ref": "#/definitions/DiscoveredEvent"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "DiscoveredAssetUpdate": {
+      "type": "object",
+      "description": "Discovered Asset definition.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DiscoveredAssetPropertiesUpdate",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "DiscoveredDataPoint": {
+      "type": "object",
+      "description": "Defines the data point properties.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the data point."
+        },
+        "dataSource": {
+          "type": "string",
+          "description": "The address of the source of the data in the asset (e.g. URL) so that a client can access the data source on the asset."
+        },
+        "dataPointConfiguration": {
+          "type": "string",
+          "description": "Stringified JSON that contains connector-specific configuration for the data point. For OPC UA, this could include configuration like, publishingInterval, samplingInterval, and queueSize."
+        },
+        "lastUpdatedOn": {
+          "type": "string",
+          "format": "date-time",
+          "description": "UTC timestamp indicating when the data point was added or modified."
+        }
+      },
+      "required": [
+        "name",
+        "dataSource"
+      ]
+    },
+    "DiscoveredDataset": {
+      "type": "object",
+      "description": "Defines the dataset properties.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the dataset."
+        },
+        "datasetConfiguration": {
+          "type": "string",
+          "description": "Stringified JSON that contains connector-specific properties that describes configuration for the specific dataset."
+        },
+        "topic": {
+          "$ref": "#/definitions/Topic",
+          "description": "Object that describes the topic information for the specific dataset."
+        },
+        "dataPoints": {
+          "type": "array",
+          "description": "Array of data points that are part of the dataset. Each data point can have per-data point configuration.",
+          "items": {
+            "$ref": "#/definitions/DiscoveredDataPoint"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
+    "DiscoveredEvent": {
       "type": "object",
       "description": "Defines the event properties.",
       "properties": {
@@ -1252,41 +3761,84 @@
           "type": "string",
           "description": "The address of the notifier of the event in the asset (e.g. URL) so that a client can access the event on the asset."
         },
-        "capabilityId": {
+        "eventConfiguration": {
           "type": "string",
-          "description": "The path to the type definition of the capability (e.g. DTMI, OPC UA information model node id, etc.), for example dtmi:com:example:Robot:_contents:__prop1;1."
+          "description": "Stringified JSON that contains connector-specific configuration for the event. For OPC UA, this could include configuration like, publishingInterval, samplingInterval, and queueSize."
         },
+        "topic": {
+          "$ref": "#/definitions/Topic",
+          "description": "Object that describes the topic information for the specific event."
+        },
+        "lastUpdatedOn": {
+          "type": "string",
+          "format": "date-time",
+          "description": "UTC timestamp indicating when the event was added or modified."
+        }
+      },
+      "required": [
+        "name",
+        "eventNotifier"
+      ]
+    },
+    "Event": {
+      "type": "object",
+      "description": "Defines the event properties.",
+      "properties": {
         "observabilityMode": {
           "type": "string",
           "description": "An indication of how the event should be mapped to OpenTelemetry.",
-          "default": "none",
+          "default": "None",
           "enum": [
-            "none",
-            "log"
+            "None",
+            "Log"
           ],
           "x-ms-enum": {
-            "name": "EventsObservabilityMode",
+            "name": "EventObservabilityMode",
             "modelAsString": true,
             "values": [
               {
                 "name": "None",
-                "value": "none",
+                "value": "None",
                 "description": "No mapping to OpenTelemetry."
               },
               {
                 "name": "Log",
-                "value": "log",
+                "value": "Log",
                 "description": "Map as log to OpenTelemetry."
               }
             ]
           }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/EventBase"
+        }
+      ]
+    },
+    "EventBase": {
+      "type": "object",
+      "description": "Defines the event properties.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the event."
+        },
+        "eventNotifier": {
+          "type": "string",
+          "description": "The address of the notifier of the event in the asset (e.g. URL) so that a client can access the event on the asset."
         },
         "eventConfiguration": {
           "type": "string",
-          "description": "Protocol-specific configuration for the event. For OPC UA, this could include configuration like, publishingInterval, samplingInterval, and queueSize."
+          "description": "Stringified JSON that contains connector-specific configuration for the event. For OPC UA, this could include configuration like, publishingInterval, samplingInterval, and queueSize."
+        },
+        "topic": {
+          "$ref": "#/definitions/Topic",
+          "description": "Object that describes the topic information for the specific event."
         }
       },
       "required": [
+        "name",
         "eventNotifier"
       ]
     },
@@ -1308,23 +3860,55 @@
         "name"
       ]
     },
-    "OwnCertificate": {
-      "type": "object",
-      "description": "Certificate or private key that can be used by the southbound connector connecting to the shop floor/OT device. The accepted extensions are .der for certificates and .pfx/.pem for private keys.",
-      "properties": {
-        "certThumbprint": {
-          "type": "string",
-          "description": "Certificate thumbprint."
-        },
-        "certSecretReference": {
-          "type": "string",
-          "description": "Secret Reference name (cert and private key)."
-        },
-        "certPasswordReference": {
-          "type": "string",
-          "description": "Secret Reference Name (Pfx or Pem password)."
-        }
+    "Format": {
+      "type": "string",
+      "description": "Defines the schema format.",
+      "enum": [
+        "JsonSchema/draft-07",
+        "Delta/1.0"
+      ],
+      "x-ms-enum": {
+        "name": "Format",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "JsonSchema_draft7",
+            "value": "JsonSchema/draft-07",
+            "description": "JSON Schema version draft 7 format"
+          },
+          {
+            "name": "Delta_1_0",
+            "value": "Delta/1.0",
+            "description": "Delta format"
+          }
+        ]
       }
+    },
+    "MessageSchemaReference": {
+      "type": "object",
+      "description": "Defines the message schema reference properties.",
+      "properties": {
+        "schemaRegistryNamespace": {
+          "type": "string",
+          "description": "The message schema registry namespace.",
+          "readOnly": true
+        },
+        "schemaName": {
+          "type": "string",
+          "description": "The message schema name.",
+          "readOnly": true
+        },
+        "schemaVersion": {
+          "type": "string",
+          "description": "The message schema version.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "schemaRegistryNamespace",
+        "schemaName",
+        "schemaVersion"
+      ]
     },
     "ProvisioningState": {
       "type": "string",
@@ -1333,7 +3917,8 @@
         "Succeeded",
         "Failed",
         "Canceled",
-        "Accepted"
+        "Accepted",
+        "Deleting"
       ],
       "x-ms-enum": {
         "name": "ProvisioningState",
@@ -1358,132 +3943,386 @@
             "name": "Accepted",
             "value": "Accepted",
             "description": "Resource has been accepted by the server."
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "Resource is deleting."
           }
         ]
       },
       "readOnly": true
     },
-    "TransportAuthentication": {
+    "Schema": {
       "type": "object",
-      "description": "Definition of the authentication mechanism for the southbound connector.",
+      "description": "Schema definition.",
       "properties": {
-        "ownCertificates": {
+        "properties": {
+          "$ref": "#/definitions/SchemaProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "SchemaListResult": {
+      "type": "object",
+      "description": "The response of a Schema list operation.",
+      "properties": {
+        "value": {
           "type": "array",
-          "description": "Defines a reference to a secret which contains all certificates and private keys that can be used by the southbound connector connecting to the shop floor/OT device. The accepted extensions are .der for certificates and .pfx/.pem for private keys.",
+          "description": "The Schema items on this page",
           "items": {
-            "$ref": "#/definitions/OwnCertificate"
-          },
-          "x-ms-identifiers": []
+            "$ref": "#/definitions/Schema"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
         }
       },
       "required": [
-        "ownCertificates"
+        "value"
       ]
     },
-    "TransportAuthenticationUpdate": {
+    "SchemaProperties": {
       "type": "object",
-      "description": "Definition of the authentication mechanism for the southbound connector.",
+      "description": "Defines the schema properties.",
       "properties": {
-        "ownCertificates": {
+        "uuid": {
+          "type": "string",
+          "description": "Globally unique, immutable, non-reusable id.",
+          "readOnly": true
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Human-readable display name."
+        },
+        "description": {
+          "type": "string",
+          "description": "Human-readable description of the schema."
+        },
+        "format": {
+          "$ref": "#/definitions/Format",
+          "description": "Format of the schema.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "schemaType": {
+          "$ref": "#/definitions/SchemaType",
+          "description": "Type of the schema.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Provisioning state of the resource.",
+          "readOnly": true
+        },
+        "tags": {
+          "type": "object",
+          "description": "Schema tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "format",
+        "schemaType"
+      ]
+    },
+    "SchemaRegistry": {
+      "type": "object",
+      "description": "Schema registry definition.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SchemaRegistryProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true
+        },
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/SystemAssignedServiceIdentity",
+          "description": "The managed service identities assigned to this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "SchemaRegistryListResult": {
+      "type": "object",
+      "description": "The response of a SchemaRegistry list operation.",
+      "properties": {
+        "value": {
           "type": "array",
-          "description": "Defines a reference to a secret which contains all certificates and private keys that can be used by the southbound connector connecting to the shop floor/OT device. The accepted extensions are .der for certificates and .pfx/.pem for private keys.",
+          "description": "The SchemaRegistry items on this page",
           "items": {
-            "$ref": "#/definitions/OwnCertificate"
-          },
-          "x-ms-identifiers": []
+            "$ref": "#/definitions/SchemaRegistry"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "SchemaRegistryProperties": {
+      "type": "object",
+      "description": "Defines the schema registry properties.",
+      "properties": {
+        "uuid": {
+          "type": "string",
+          "description": "Globally unique, immutable, non-reusable id.",
+          "readOnly": true
+        },
+        "namespace": {
+          "type": "string",
+          "description": "Schema registry namespace. Uniquely identifies a schema registry within a tenant.",
+          "maxLength": 32,
+          "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Human-readable display name."
+        },
+        "description": {
+          "type": "string",
+          "description": "Human-readable description of the schema registry."
+        },
+        "storageAccountContainerUrl": {
+          "type": "string",
+          "description": "The Storage Account's Container URL where schemas will be stored.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Provisioning state of the resource.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "namespace",
+        "storageAccountContainerUrl"
+      ]
+    },
+    "SchemaRegistryPropertiesUpdate": {
+      "type": "object",
+      "description": "Defines the schema registry properties.",
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "Human-readable display name."
+        },
+        "description": {
+          "type": "string",
+          "description": "Human-readable description of the schema registry."
         }
       }
     },
-    "UserAuthentication": {
+    "SchemaRegistryUpdate": {
       "type": "object",
-      "description": "Definition of the client authentication mechanism to the server.",
+      "description": "Schema registry definition.",
       "properties": {
-        "mode": {
-          "type": "string",
-          "description": "Defines the mode to authenticate the user of the client at the server.",
-          "default": "Certificate",
-          "enum": [
-            "Anonymous",
-            "Certificate",
-            "UsernamePassword"
-          ],
-          "x-ms-enum": {
-            "name": "UserAuthenticationMode",
-            "modelAsString": true,
-            "values": [
-              {
-                "name": "Anonymous",
-                "value": "Anonymous",
-                "description": "The user authentication mode is anonymous."
-              },
-              {
-                "name": "Certificate",
-                "value": "Certificate",
-                "description": "The user authentication mode is an x509 certificate."
-              },
-              {
-                "name": "UsernamePassword",
-                "value": "UsernamePassword",
-                "description": "The user authentication mode is a username and password."
-              }
-            ]
+        "properties": {
+          "$ref": "#/definitions/SchemaRegistryPropertiesUpdate",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true
+        },
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/SystemAssignedServiceIdentity",
+          "description": "The managed service identities assigned to this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "SchemaType": {
+      "type": "string",
+      "description": "Defines the schema type.",
+      "enum": [
+        "MessageSchema"
+      ],
+      "x-ms-enum": {
+        "name": "SchemaType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "MessageSchema",
+            "value": "MessageSchema",
+            "description": "Message Schema schema type"
+          }
+        ]
+      }
+    },
+    "SchemaVersion": {
+      "type": "object",
+      "description": "Schema version's definition.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SchemaVersionProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "SchemaVersionListResult": {
+      "type": "object",
+      "description": "The response of a SchemaVersion list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The SchemaVersion items on this page",
+          "items": {
+            "$ref": "#/definitions/SchemaVersion"
           }
         },
-        "usernamePasswordCredentials": {
-          "$ref": "#/definitions/UsernamePasswordCredentials",
-          "description": "Defines the username and password references when UsernamePassword user authentication mode is selected."
-        },
-        "x509Credentials": {
-          "$ref": "#/definitions/X509Credentials",
-          "description": "Defines the certificate reference when Certificate user authentication mode is selected."
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
         }
       },
       "required": [
-        "mode"
+        "value"
       ]
     },
-    "UserAuthenticationUpdate": {
+    "SchemaVersionProperties": {
       "type": "object",
-      "description": "Definition of the client authentication mechanism to the server.",
+      "description": "Defines the schema version properties.",
       "properties": {
-        "mode": {
+        "uuid": {
           "type": "string",
-          "description": "Defines the mode to authenticate the user of the client at the server.",
-          "default": "Certificate",
+          "description": "Globally unique, immutable, non-reusable id.",
+          "readOnly": true
+        },
+        "description": {
+          "type": "string",
+          "description": "Human-readable description of the schema."
+        },
+        "schemaContent": {
+          "type": "string",
+          "description": "Schema content.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "hash": {
+          "type": "string",
+          "description": "Hash of the schema content.",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Provisioning state of the resource.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "schemaContent"
+      ]
+    },
+    "Topic": {
+      "type": "object",
+      "description": "Object that describes the topic information.",
+      "properties": {
+        "path": {
+          "type": "string",
+          "description": "The topic path for messages published to an MQTT broker."
+        },
+        "retain": {
+          "type": "string",
+          "description": "When set to 'Keep', messages published to an MQTT broker will have the retain flag set. Default: 'Never'.",
+          "default": "Never",
           "enum": [
-            "Anonymous",
-            "Certificate",
-            "UsernamePassword"
+            "Keep",
+            "Never"
           ],
           "x-ms-enum": {
-            "name": "UserAuthenticationMode",
+            "name": "TopicRetainType",
             "modelAsString": true,
             "values": [
               {
-                "name": "Anonymous",
-                "value": "Anonymous",
-                "description": "The user authentication mode is anonymous."
+                "name": "Keep",
+                "value": "Keep",
+                "description": "Retain the messages."
               },
               {
-                "name": "Certificate",
-                "value": "Certificate",
-                "description": "The user authentication mode is an x509 certificate."
-              },
-              {
-                "name": "UsernamePassword",
-                "value": "UsernamePassword",
-                "description": "The user authentication mode is a username and password."
+                "name": "Never",
+                "value": "Never",
+                "description": "Never retain messages."
               }
             ]
           }
+        }
+      },
+      "required": [
+        "path"
+      ]
+    },
+    "TopicUpdate": {
+      "type": "object",
+      "description": "Object that describes the topic information.",
+      "properties": {
+        "path": {
+          "type": "string",
+          "description": "The topic path for messages published to an MQTT broker."
         },
-        "usernamePasswordCredentials": {
-          "$ref": "#/definitions/UsernamePasswordCredentialsUpdate",
-          "description": "Defines the username and password references when UsernamePassword user authentication mode is selected."
-        },
-        "x509Credentials": {
-          "$ref": "#/definitions/X509CredentialsUpdate",
-          "description": "Defines the certificate reference when Certificate user authentication mode is selected."
+        "retain": {
+          "type": "string",
+          "description": "When set to 'Keep', messages published to an MQTT broker will have the retain flag set. Default: 'Never'.",
+          "default": "Never",
+          "enum": [
+            "Keep",
+            "Never"
+          ],
+          "x-ms-enum": {
+            "name": "TopicRetainType",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Keep",
+                "value": "Keep",
+                "description": "Retain the messages."
+              },
+              {
+                "name": "Never",
+                "value": "Never",
+                "description": "Never retain messages."
+              }
+            ]
+          }
         }
       }
     },
@@ -1491,31 +4330,31 @@
       "type": "object",
       "description": "The credentials for authentication mode UsernamePassword.",
       "properties": {
-        "usernameReference": {
+        "usernameSecretName": {
           "type": "string",
-          "description": "A reference to secret containing the username."
+          "description": "The name of the secret containing the username."
         },
-        "passwordReference": {
+        "passwordSecretName": {
           "type": "string",
-          "description": "A reference to secret containing the password."
+          "description": "The name of the secret containing the password."
         }
       },
       "required": [
-        "usernameReference",
-        "passwordReference"
+        "usernameSecretName",
+        "passwordSecretName"
       ]
     },
     "UsernamePasswordCredentialsUpdate": {
       "type": "object",
       "description": "The credentials for authentication mode UsernamePassword.",
       "properties": {
-        "usernameReference": {
+        "usernameSecretName": {
           "type": "string",
-          "description": "A reference to secret containing the username."
+          "description": "The name of the secret containing the username."
         },
-        "passwordReference": {
+        "passwordSecretName": {
           "type": "string",
-          "description": "A reference to secret containing the password."
+          "description": "The name of the secret containing the password."
         }
       }
     },
@@ -1523,22 +4362,22 @@
       "type": "object",
       "description": "The x509 certificate for authentication mode Certificate.",
       "properties": {
-        "certificateReference": {
+        "certificateSecretName": {
           "type": "string",
-          "description": "A reference to secret containing the certificate and private key (e.g. stored as .der/.pem or .der/.pfx)."
+          "description": "The name of the secret containing the certificate and private key (e.g. stored as .der/.pem or .der/.pfx)."
         }
       },
       "required": [
-        "certificateReference"
+        "certificateSecretName"
       ]
     },
     "X509CredentialsUpdate": {
       "type": "object",
       "description": "The x509 certificate for authentication mode Certificate.",
       "properties": {
-        "certificateReference": {
+        "certificateSecretName": {
           "type": "string",
-          "description": "A reference to secret containing the certificate and private key (e.g. stored as .der/.pem or .der/.pfx)."
+          "description": "The name of the secret containing the certificate and private key (e.g. stored as .der/.pem or .der/.pfx)."
         }
       }
     }
