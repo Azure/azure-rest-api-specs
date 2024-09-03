@@ -321,7 +321,6 @@ interface WorkloadNetworkSegments {
   "workloadNetworkSegment"
 );
 @@clientName(WorkloadNetworkSegments.update::parameters.properties,
-  "application/json",
   "workloadNetworkSegment"
 );
 
