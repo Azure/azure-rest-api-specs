@@ -29,14 +29,14 @@ using Azure.Core;
 @service({
   title: "Azure AI Assistants",
 })
-@server(
+/*@server(
   "{endpoint}",
   "Azure APIs for Assistants.",
   {
     @doc("An endpoint supporting assistants functionality.")
     endpoint: string,
   }
-)
+)*/
 @versioned(ServiceApiVersions)
 @doc("Azure APIs for Assistants.")
 namespace Azure.AI.Assistants {
