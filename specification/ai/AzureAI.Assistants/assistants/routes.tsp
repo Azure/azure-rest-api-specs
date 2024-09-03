@@ -42,7 +42,15 @@ op createAssistant is Azure.Core.RpcOperation<
 @get
 @added(ServiceApiVersions.v2024_02_15_preview)
 @route("/openai/assistants")
+op listAssistants is Azure.Core.RpcOperation<
+  {
+    ...OpenAIListRequestOptions
+  },
+  OpenAIPageableListOf<Assistant>
+>;
+/*
 op listAssistants(...OpenAIListRequestOptions): OpenAIPageableListOf<Assistant>;
+*/
 
 /**
  * Retrieves an existing assistant.
@@ -57,7 +65,15 @@ op listAssistants(...OpenAIListRequestOptions): OpenAIPageableListOf<Assistant>;
 @get
 @route("/openai/assistants/{assistantId}")
 @added(ServiceApiVersions.v2024_02_15_preview)
+op getAssistant is Azure.Core.RpcOperation<
+  {
+    @path assistantId: string
+  },
+  Assistant
+>;
+/*
 op getAssistant(@path assistantId: string): Assistant;
+*/
 
 /**
  * Modifies an existing assistant.
@@ -71,12 +87,23 @@ op getAssistant(@path assistantId: string): Assistant;
 @post
 @route("/openai/assistants/{assistantId}")
 @added(ServiceApiVersions.v2024_02_15_preview)
+op updateAssistant is Azure.Core.RpcOperation<
+  {
+    /**
+     * The request details to use when modifying an existing assistant.
+     */
+    ...UpdateAssistantOptions
+  },
+  Assistant
+>;
+/*
 op updateAssistant(
   /**
    * The request details to use when modifying an existing assistant.
    */
   ...UpdateAssistantOptions
 ): Assistant;
+*/
 
 /**
  * Deletes an assistant.
@@ -90,4 +117,12 @@ op updateAssistant(
 @delete
 @route("/openai/assistants/{assistantId}")
 @added(ServiceApiVersions.v2024_02_15_preview)
+op deleteAssistant is Azure.Core.RpcOperation<
+  {
+    @path assistantId: string
+  },
+  AssistantDeletionStatus
+>;
+/*
 op deleteAssistant(@path assistantId: string): AssistantDeletionStatus;
+*/
