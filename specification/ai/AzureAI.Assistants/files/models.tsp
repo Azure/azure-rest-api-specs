@@ -131,3 +131,9 @@ model FileDeletionStatus {
   @doc("The object type, which is always 'file'.")
   object: "file";
 }
+
+@doc("A response from a file get content operation.")
+@added(ServiceApiVersions.v2024_02_15_preview)
+model FileContentResponse {
+  content: bytes;
+}

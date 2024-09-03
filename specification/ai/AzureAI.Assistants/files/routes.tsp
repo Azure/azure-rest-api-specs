@@ -138,7 +138,7 @@ op getFileContent is Azure.Core.RpcOperation<
     @encodedName("application/json", "file_id")
     fileId: string
   },
-  bytes
+  FileContentResponse
 >;
 /*
 op getFileContent(
