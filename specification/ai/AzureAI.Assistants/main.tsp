@@ -18,7 +18,7 @@ using Azure.Core;
 
 #suppress "@azure-tools/typespec-autorest/unsupported-http-auth-scheme"
 @useAuth(
-  BearerAuth | ApiKeyAuth<ApiKeyLocation.header, "api-key"> | OAuth2Auth<[
+  ApiKeyAuth<ApiKeyLocation.header, "api-key"> | OAuth2Auth<[
     {
       type: OAuth2FlowType.implicit,
       authorizationUrl: "https://login.microsoftonline.com/common/oauth2/v2.0/authorize",
@@ -29,6 +29,14 @@ using Azure.Core;
 @service({
   title: "Azure AI Assistants",
 })
+@server(
+  "{endpoint}",
+  "Azure APIs for Assistants.",
+  {
+    @doc("An endpoint supporting assistants functionality.")
+    endpoint: string,
+  }
+)
 @versioned(ServiceApiVersions)
 @doc("Azure APIs for Assistants.")
 namespace Azure.AI.Assistants {
