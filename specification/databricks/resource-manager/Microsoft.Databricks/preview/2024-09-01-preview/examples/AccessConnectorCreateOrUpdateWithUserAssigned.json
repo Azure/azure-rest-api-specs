@@ -1,0 +1,65 @@
+{
+  "parameters": {
+    "subscriptionId": "11111111-1111-1111-1111-111111111111",
+    "resourceGroupName": "rg",
+    "connectorName": "myAccessConnector",
+    "api-version": "2024-09-01-preview",
+    "identity": {
+      "type": "UserAssigned",
+      "userAssignedIdentities": {
+        "/subscriptions/11111111-1111-1111-1111-111111111111/resourcegroups/rg1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/testuseridentity": {}
+      }
+    },
+    "parameters": {
+      "location": "westus"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "myAccessConnector",
+        "id": "/subscriptions/11111111-1111-1111-1111-111111111111/resourceGroups/rg/providers/Microsoft.Databricks/accessConnectors/myAccessConnector2",
+        "type": "Microsoft.Databricks/accessConnectors",
+        "location": "West US",
+        "tags": {
+          "key1": "value1"
+        },
+        "properties": {
+          "provisioningState": "Succeeded",
+          "referedBy": []
+        },
+        "identity": {
+          "type": "UserAssigned",
+          "userAssignedIdentities": {
+            "/subscriptions/11111111-1111-1111-1111-111111111111/resourcegroups/rg1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/testuseridentity": {
+              "principalId": "329429bc-adec-4dce-9568-25a6d486e468",
+              "clientId": "329419bc-adec-4dce-9568-25a6d486e468"
+            }
+          }
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "myAccessConnector",
+        "id": "/subscriptions/11111111-1111-1111-1111-111111111111/resourceGroups/rg/providers/Microsoft.Databricks/accessConnectors/myAccessConnector",
+        "type": "Microsoft.Databricks/accessConnectors",
+        "location": "West US",
+        "tags": {},
+        "properties": {
+          "provisioningState": "Succeeded",
+          "referedBy": []
+        },
+        "identity": {
+          "type": "UserAssigned",
+          "userAssignedIdentities": {
+            "/subscriptions/11111111-1111-1111-1111-111111111111/resourcegroups/rg1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/testuseridentity": {
+              "principalId": "329429bc-adec-4dce-9568-25a6d486e468",
+              "clientId": "329419bc-adec-4dce-9568-25a6d486e468"
+            }
+          }
+        }
+      }
+    }
+  }
+}
