@@ -99,6 +99,7 @@ interface AzureLargeInstances {
  * @template TBaseParameters Optional. Allows overriding the parameters for the operation
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "Template for optional body"
+#suppress "@azure-tools/typespec-azure-core/no-openapi" "DO NOT COPY - migrate to LRO apis"
 @autoRoute
 @OpenAPI.extension("x-ms-long-running-operation", true)
 @OpenAPI.extension(

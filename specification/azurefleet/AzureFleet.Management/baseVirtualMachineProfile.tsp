@@ -1442,6 +1442,7 @@ model VirtualMachineScaleSetExtensionProperties {
    * protectedSettingsFromKeyVault or no protected settings at all.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Converted legacy object to typespec https://github.com/Azure/azure-rest-api-specs/blob/d715112415eb08572ee96cc4bd77217aa44dedf1/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2024-03-01/virtualMachineScaleSet.json#L5002C1-L5009C11"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Legacy"
   @visibility("create", "update")
   @OpenAPI.extension("x-ms-secret", true)
   protectedSettings?: Record<unknown>;

@@ -48,7 +48,7 @@ interface TenantConfigurations {
   /**
    * Gets list of the tenant configurations.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "For backward compatibility"
   @operationId("TenantConfigurations_List")
   list is ArmResourceListByParent<Configuration, TenantBaseParameters>;
 }
@@ -58,7 +58,7 @@ interface ListTenantConfigurationViolationsOperations {
   /**
    * Gets list of items that violate tenant's configuration.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "For backward compatibility"
   @route("/providers/Microsoft.Portal/listTenantConfigurationViolations")
   @armResourceCollectionAction
   @post
