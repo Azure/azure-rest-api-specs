@@ -19,7 +19,7 @@ namespace Azure.AI.Assistants;
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
 @post
 @added(ServiceApiVersions.v2024_02_15_preview)
-@route("/openai/assistants")
+@route("/assistants")
 op createAssistant is Azure.Core.RpcOperation<
   {
     ...CreateAssistantOptions
@@ -41,7 +41,7 @@ op createAssistant is Azure.Core.RpcOperation<
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
 @get
 @added(ServiceApiVersions.v2024_02_15_preview)
-@route("/openai/assistants")
+@route("/assistants")
 op listAssistants(...OpenAIListRequestOptions): OpenAIPageableListOf<Assistant>;
 
 /**
@@ -55,7 +55,7 @@ op listAssistants(...OpenAIListRequestOptions): OpenAIPageableListOf<Assistant>;
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
 #suppress "@azure-tools/typespec-azure-core/use-standard-names" "mirrored API name parity"
 @get
-@route("/openai/assistants/{assistantId}")
+@route("/assistants/{assistantId}")
 @added(ServiceApiVersions.v2024_02_15_preview)
 op getAssistant(@path assistantId: string): Assistant;
 
@@ -69,7 +69,7 @@ op getAssistant(@path assistantId: string): Assistant;
 #suppress "@azure-tools/typespec-azure-core/no-operation-id" "non-standard operations"
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
 @post
-@route("/openai/assistants/{assistantId}")
+@route("/assistants/{assistantId}")
 @added(ServiceApiVersions.v2024_02_15_preview)
 op updateAssistant(
   /**
@@ -88,6 +88,6 @@ op updateAssistant(
 #suppress "@azure-tools/typespec-azure-core/no-operation-id" "non-standard operations"
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
 @delete
-@route("/openai/assistants/{assistantId}")
+@route("/assistants/{assistantId}")
 @added(ServiceApiVersions.v2024_02_15_preview)
 op deleteAssistant(@path assistantId: string): AssistantDeletionStatus;

@@ -22,7 +22,7 @@ using Azure.Core;
     {
       type: OAuth2FlowType.implicit,
       authorizationUrl: "https://login.microsoftonline.com/common/oauth2/v2.0/authorize",
-      scopes: ["https://ml.azure.com/.default"],
+      scopes: ["https://cognitiveservices.azure.com/.default"],
     }
   ]>
 )
