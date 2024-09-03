@@ -207,6 +207,48 @@ model ResourceOperation {
   operation?: ResourceOperationDetails;
 }
 
+#suppress "@azure-tools/typespec-azure-core/no-offsetdatetime" "Prefer using `utcDateTime` when representing a datetime unless an offset is necessary."
+@doc("This defines a list of operation errors associated with a unique operationId")
+model OperationErrorDetails {
+  @doc("The error code of the operation")
+  errorCode: string;
+
+  @doc("The error details of the operation")
+  errorDetails: offsetDateTime;
+
+  @doc("The timestamp of the error occurence")
+  timeStamp: offsetDateTime;
+
+  @doc("CRP operationid of the operation for deeper analysis")
+  crpOperationId: string;
+}
+
+#suppress "@azure-tools/typespec-azure-core/no-offsetdatetime" "Prefer using `utcDateTime` when representing a datetime unless an offset is necessary."
+@doc("This is the first level of operation errors from the request when clients get errors per vm operation")
+model OperationErrorsResult {
+  @doc("The operationId identifying a vm operation")
+  operationId?: string;
+
+  @doc("The creation time of the error result")
+  creationTime?: offsetDateTime;
+
+  @doc("The activation time of a vm operation")
+  activationTime?: offsetDateTime;
+
+  @doc("The completion time of the operation if the operation was completed")
+  completedAt?: offsetDateTime;
+
+  @extension("x-ms-identifiers", [])
+  @doc("A list of errors associated with the operationid")
+  operationErrors?: Array<OperationErrorDetails>;
+
+  @doc("Request level error code")
+  requestErrorCode?: string;
+
+  @doc("Request level error details")
+  requestErrorDetails?: string;
+}
+
 // ----------- SubmitDeallocate ---------
 @doc("The deallocate request for resources")
 model SubmitDeallocateRequest {
@@ -375,4 +417,18 @@ model CancelOperationsResponse {
   @extension("x-ms-identifiers", ["resourceId"])
   @doc("An array of resource operations that were successfully cancelled")
   results: Array<ResourceOperation>;
+}
+
+// ----------- GetOperationErrors ---------
+@doc("This is the request to get errors per vm operations")
+model GetOperationErrorsRequest {
+  @doc("The list of operation ids to query errors of")
+  operationIds: Array<string>;
+}
+
+@doc("This is the response from a get operations errors request")
+model GetOperationErrorsResponse {
+  @extension("x-ms-identifiers", ["operationId"])
+  @doc("An array of operationids and their corresponding errors if any")
+  results: Array<OperationErrorsResult>;
 }
