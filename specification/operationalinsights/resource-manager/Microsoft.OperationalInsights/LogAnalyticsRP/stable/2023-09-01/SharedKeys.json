@@ -34,7 +34,7 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/listkeys": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/listkeys": {
       "post": {
         "tags": [
           "Workspaces"
@@ -44,7 +44,7 @@
             "$ref": "./examples/WorkspacesGetSharedKeys.json"
           }
         },
-        "operationId": "SharedKeys_ListSharedKeys",
+        "operationId": "SharedKeys_List",
         "description": "Gets the shared keys for a workspace.",
         "parameters": [
           {
@@ -66,11 +66,17 @@
             "schema": {
               "$ref": "#/definitions/SharedKeys"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/sharedKeys": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/sharedKeys": {
       "post": {
         "tags": [
           "Workspaces"
@@ -80,7 +86,7 @@
             "$ref": "./examples/WorkspacesGetSharedKeys.json"
           }
         },
-        "operationId": "SharedKeys_GetSharedKeys",
+        "operationId": "SharedKeys_Get",
         "description": "Gets the shared keys for a workspace.",
         "parameters": [
           {
@@ -102,11 +108,17 @@
             "schema": {
               "$ref": "#/definitions/SharedKeys"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/regenerateSharedKey": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/regenerateSharedKey": {
       "post": {
         "tags": [
           "Workspaces"
@@ -137,6 +149,12 @@
             "description": "Returns the new shared keys associated with the Log Analytics Workspace.",
             "schema": {
               "$ref": "#/definitions/SharedKeys"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         }
