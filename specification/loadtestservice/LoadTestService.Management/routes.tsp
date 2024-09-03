@@ -11,16 +11,18 @@ namespace Microsoft.LoadTestService;
 
 interface Operations extends Azure.ResourceManager.Operations {}
 
+#suppress "deprecated" "LEGACY - DO NOT COPY - FIX"
 @@encodedName(LoadTests.createOrUpdate::parameters.resource,
   "application/json",
   "LoadTestResource"
 );
 
+#suppress "deprecated" "LEGACY - DO NOT COPY - FIX"
 @@encodedName(LoadTests.update::parameters.properties,
   "application/json",
   "LoadTestResourcePatchRequestBody"
 );
-
+#suppress "deprecated" "LEGACY - DO NOT COPY - FIX"
 @@encodedName(Quotas.checkAvailability::parameters.body,
   "application/json",
   "QuotaBucketRequest"

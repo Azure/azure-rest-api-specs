@@ -38,7 +38,6 @@ interface LoadTests {
 
   deleteLoadtest is Microsoft.LoadTestService.LoadTests.delete;
 
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Operation id already published"
   outboundNetworkDependenciesEndpoints is Microsoft.LoadTestService.LoadTests.outboundNetworkDependenciesEndpoints;
 
   getQuota is Microsoft.LoadTestService.Quotas.get;

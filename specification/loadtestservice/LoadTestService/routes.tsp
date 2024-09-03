@@ -16,6 +16,13 @@ using Azure.ClientGenerator.Core;
 
 namespace Microsoft.LoadTestService;
 
+#suppress "deprecated" "LEGACY - DO NOT COPY - FIX"
+@@encodedName(Azure.Core.Foundations.ResourceBody.resource,
+  "application/json",
+  "body"
+);
+@@clientName(Azure.Core.Foundations.ResourceBody.resource, "body");
+
 @tag("Test")
 interface LoadTestAdministration {
   @summary("Create a new test or update an existing test by providing the test Id.")
