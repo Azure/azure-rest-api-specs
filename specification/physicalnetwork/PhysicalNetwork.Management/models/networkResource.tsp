@@ -46,6 +46,7 @@ model NetworkDeviceProperties {
   @doc("The device's rack location")
   dcRackLocation: string;
 
+  @Versioning.added(Versions.v2024_09_01_preview)
   @doc("The device owner's Service Tree Id")
   serviceTreeId: string;
 
