@@ -295,14 +295,13 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/ContainerGroup"
-            }
-          },
           "202": {
-            "description": "Delete started."
+            "description": "Delete started.",
+            "headers": {
+                "location": {
+                  "type": "string"
+                }
+              }
           },
           "204": {
             "description": "No Content - the specified container group was not found."
@@ -418,7 +417,12 @@
         ],
         "responses": {
           "202": {
-            "description": "Started - the container group is starting."
+            "description": "Started - the container group is starting.",
+            "headers": {
+                "location": {
+                  "type": "string"
+                }
+            }
           },
           "204": {
             "description": "Started - the container group is already running or starting."
@@ -536,8 +540,7 @@
             "in": "path",
             "description": "The name of the container instance.",
             "required": true,
-            "type": "string",
-            "pattern": "^[a-z][a-z0-9]*$"
+            "type": "string"
           },
           {
             "name": "tail",
@@ -598,7 +601,9 @@
             "description": "The name of the container instance.",
             "required": true,
             "type": "string",
-            "pattern": "^[a-z][a-z0-9]*$"
+            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9]$",
+            "minLength": 1,
+            "maxLength": 63
           },
           {
             "name": "containerExecRequest",
@@ -655,7 +660,9 @@
             "description": "The name of the container instance.",
             "required": true,
             "type": "string",
-            "pattern": "^[a-z][a-z0-9]*$"
+            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9]$",
+            "minLength": 1,
+            "maxLength": 63
           }
         ],
         "responses": {
@@ -818,11 +825,13 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK"
-          },
           "202": {
-            "description": "Delete started."
+            "description": "Delete started.",
+            "headers": {
+                "location": {
+                  "type": "string"
+                }
+            }
           },
           "204": {
             "description": "No Content - the specified container group was not found."
@@ -995,6 +1004,7 @@
             },
             "202": {
               "description": "nGroup update started"
+              }
             },
             "default": {
               "description": "Error response describing why the operation failed.",
@@ -1026,7 +1036,12 @@
           ],
           "responses": {
             "202": {
-              "description": "Accepted"
+              "description": "Accepted",
+              "headers": {
+                "location": {
+                  "type": "string"
+                }
+              }
             },
             "204": {
               "description": "No Content"
@@ -1063,7 +1078,12 @@
         ],
         "responses": {
           "202": {
-            "description": "Started - the container groups are starting."
+            "description": "Started - the container groups are starting.",
+            "headers": {
+              "location": {
+                "type": "string"
+              }
+            }
           },
           "204": {
             "description": "Started - the container groups are already running or starting."
@@ -2605,6 +2625,7 @@
           "description": "The resource type."
         },
         "location": {
+          "readOnly": true,
           "type": "string",
           "description": "The resource location."
         },
@@ -3136,7 +3157,7 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "pattern": "^[a-z][a-z0-9]*$",
+      "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9]$",
       "description": "The name of the container group.",
       "x-ms-parameter-location": "method"
     },
@@ -3153,7 +3174,9 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "pattern": "^[a-z][a-z0-9]*$",
+      "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9]$",
+      "minLength": 1,
+      "maxLength": 63,
       "description": "The name of the subnet.",
       "x-ms-parameter-location": "method"
     },
@@ -3170,7 +3193,9 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "pattern": "^[a-z][a-z0-9]*$",
+      "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9]$",
+      "minLength": 1,
+      "maxLength": 63,
       "description": "The N Groups name.",
       "x-ms-parameter-location": "method"
     }
