@@ -1623,12 +1623,12 @@
     },
     "EmptyDirVolume": {
       "description": "The empty directory volume.",
-      "type": "object",
+      "type": "string",
       "properties": {}
     },
     "SecretVolume": {
       "description": "The secret volume.",
-      "type": "object",
+      "type": "string",
       "additionalProperties": {
         "type": "string"
       }
@@ -1638,6 +1638,7 @@
       "required": [
         "repository"
       ],
+      "type": "object",
       "properties": {
         "directory": {
           "description": "Target directory name. Must not contain or start with '..'.  If '.' is supplied, the volume directory will be the git repository.  Otherwise, if specified, the volume will contain the git repository in the subdirectory with the given name.",
