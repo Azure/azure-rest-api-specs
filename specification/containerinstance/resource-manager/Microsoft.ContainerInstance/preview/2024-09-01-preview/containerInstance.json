@@ -341,7 +341,7 @@
           }
         ],
         "responses": {
-          "204": {
+          "202": {
             "description": "NoContent"
           },
           "default": {
@@ -423,9 +423,6 @@
                   "type": "string"
                 }
             }
-          },
-          "204": {
-            "description": "Started - the container group is already running or starting."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -570,6 +567,9 @@
               "$ref": "#/definitions/CloudError"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -795,6 +795,9 @@
               "$ref": "#/definitions/CloudError"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -881,6 +884,9 @@
               "$ref": "#/definitions/CloudError"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -1085,9 +1091,6 @@
               }
             }
           },
-          "204": {
-            "description": "Started - the container groups are already running or starting."
-          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -1152,7 +1155,7 @@
           }
         ],
         "responses": {
-          "204": {
+          "202": {
             "description": "NoContent"
           },
           "default": {
