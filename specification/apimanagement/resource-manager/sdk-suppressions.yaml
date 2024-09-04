@@ -39,3 +39,11 @@ suppressions:
         - Operation `*PolicyFragmentClient.ListByService` has supported pagination, use `*PolicyFragmentClient.NewListByServicePager` instead.
         - Operation `*PortalConfigClient.ListByService` has supported pagination, use `*PortalConfigClient.NewListByServicePager` instead.
         - Operation `*ProductPolicyClient.ListByProduct` has supported pagination, use `*ProductPolicyClient.NewListByProductPager` instead.
+  azure-sdk-for-js:
+    - package: '@azure/arm-apimanagement'
+      breaking-changes:
+        - Interface ErrorResponse no longer has parameter code
+        - Interface ErrorResponse no longer has parameter details
+        - Interface ErrorResponse no longer has parameter message
+        - Removed operation Api.delete
+        - Removed operation User.delete
