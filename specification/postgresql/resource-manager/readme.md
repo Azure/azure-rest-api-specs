@@ -59,7 +59,6 @@ input-file:
   - Microsoft.DBforPostgreSQL/stable/2024-08-01/PrivateDnsZone.json
   - Microsoft.DBforPostgreSQL/stable/2024-08-01/PrivateEndpointConnections.json
   - Microsoft.DBforPostgreSQL/stable/2024-08-01/PrivateLinkResources.json
-  - Microsoft.DBforPostgreSQL/stable/2024-08-01/QuotaUsages.json
   - Microsoft.DBforPostgreSQL/stable/2024-08-01/Replicas.json
   - Microsoft.DBforPostgreSQL/stable/2024-08-01/ServerLogs.json
   - Microsoft.DBforPostgreSQL/stable/2024-08-01/ServerStartStopRestart.json
