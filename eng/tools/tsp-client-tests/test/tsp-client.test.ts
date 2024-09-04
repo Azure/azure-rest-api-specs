@@ -54,7 +54,12 @@ async function convert(expect: ExpectStatic, readme: string) {
     expect(stdout).toContain("TypeSpec compiler");
     expect(exitCode, all).toBe(0);
   } finally {
-    await rm(outputFolder, { recursive: true, force: true });
+    try {
+      await rm(outputFolder, { recursive: true, force: true });
+    } catch {
+      // retry
+      await rm(outputFolder, { recursive: true, force: true });
+    }
   }
 
   // Ensure outputFolder is deleted
