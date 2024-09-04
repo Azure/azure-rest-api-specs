@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Azure Maps Search Service",
-    "version": "2024-10-01-preview",
+    "version": "2024-07-01-preview",
     "description": "Azure Maps Search REST APIs"
   },
   "host": "atlas.microsoft.com",
@@ -468,7 +468,7 @@
     },
     "/geocode:asyncBatch": {
       "post": {
-        "description": "The Geocoding Asynchronous Batch API is designed for processing large volumes of geocoding queries asynchronously.\n\nAfter submitting your batch request, the service processes the queries in the background. You can check the status of the request periodically and retrieve the results once they are available. This approach is beneficial for applications that can accommodate longer processing times and do not require instant responses.\n\n### Submitting an Asynchronous Batch Request\n\nTo submit a request, you must provide the following:\n\n- **`inputFolderPath`**: A URL pointing to a blob storage that contains your batch of geocoding queries. The format of the data should be consistent with that used for the synchronous batch version.\n- **`outputFolderPath`**: The destination URL of a blob storage where the batch results will be stored upon completion.\n- **`msiClientId`** (optional): The Client ID of a user-assigned managed identity. This is used for authentication and authorization of both `inputFolderPath` and `outputFolderPath`. If the managed identity is system-assigned, this field can be left null.\n\nThe response header `Operation-Location` returns a URL with the Azure Maps geography endpoint `{geography}.atlas.microsoft.com`. To ensure that the endpoint returned in the `Operation-Location` header is the same as the submit job endpoint, using the geography endpoint is suggested.",
+        "description": "The Geocoding Asynchronous Batch API is designed for processing large volumes of geocoding queries asynchronously.\n\nAfter submitting your batch request, the service processes the queries in the background. You can check the status of the request periodically and retrieve the results once they are available. This approach is beneficial for applications that can accommodate longer processing times and do not require instant responses.\n\n### Submitting an Asynchronous Batch Request\n\nTo submit a request, you must provide the following:\n\n- **`inputContainerUri`**: A URL pointing to a blob storage that contains your batch of geocoding queries. The format of the data should be consistent with that used for the synchronous batch version.\n- **`outputContainerUri`**: The destination URL of a blob storage where the batch results will be stored upon completion.\n- **`msiClientId`** (optional): The Client ID of a user-assigned managed identity. This is used for authentication and authorization of both `inputContainerUri` and `outputContainerUri`. If the managed identity is system-assigned, this field can be left null.\n\nThe response header `Operation-Location` returns a URL with the Azure Maps geography endpoint `{geography}.atlas.microsoft.com`. To ensure that the endpoint returned in the `Operation-Location` header is the same as the submit job endpoint, using the geography endpoint is suggested.",
         "operationId": "Search_SubmitGeocodingAsynchronousBatch",
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
@@ -717,7 +717,7 @@
     },
     "/reverseGeocode:asyncBatch": {
       "post": {
-        "description": "The Reverse Geocoding Asynchronous Batch API is designed for processing large volumes of reverse geocoding queries asynchronously.\n\nAfter submitting your batch request, the service processes the queries in the background. You can check the status of the request periodically and retrieve the results once they are available. This approach is beneficial for applications that can accommodate longer processing times and do not require instant responses.\n\n### Submitting an Asynchronous Batch Request\n\nTo submit a request, you must provide the following:\n\n- **`inputFolderPath`**: A URL pointing to a blob storage that contains your batch of reverse geocoding queries. The format of the data should be consistent with that used for the synchronous batch version.\n- **`outputFolderPath`**: The destination URL of a blob storage where the batch results will be stored upon completion.\n- **`msiClientId`** (optional): The Client ID of a user-assigned managed identity. This is used for authentication and authorization of both `inputFolderPath` and `outputFolderPath`. If the managed identity is system-assigned, this field can be left null.\n\nThe response header `Operation-Location` returns a URL with the Azure Maps geography endpoint `{geography}.atlas.microsoft.com`. To ensure that the endpoint returned in the `Operation-Location` header is the same as the submit job endpoint, using the geography endpoint is suggested.",
+        "description": "The Reverse Geocoding Asynchronous Batch API is designed for processing large volumes of reverse geocoding queries asynchronously.\n\nAfter submitting your batch request, the service processes the queries in the background. You can check the status of the request periodically and retrieve the results once they are available. This approach is beneficial for applications that can accommodate longer processing times and do not require instant responses.\n\n### Submitting an Asynchronous Batch Request\n\nTo submit a request, you must provide the following:\n\n- **`inputContainerUri`**: A URL pointing to a blob storage that contains your batch of reverse geocoding queries. The format of the data should be consistent with that used for the synchronous batch version.\n- **`outputContainerUri`**: The destination URL of a blob storage where the batch results will be stored upon completion.\n- **`msiClientId`** (optional): The Client ID of a user-assigned managed identity. This is used for authentication and authorization of both `inputContainerUri` and `outputContainerUri`. If the managed identity is system-assigned, this field can be left null.\n\nThe response header `Operation-Location` returns a URL with the Azure Maps geography endpoint `{geography}.atlas.microsoft.com`. To ensure that the endpoint returned in the `Operation-Location` header is the same as the submit job endpoint, using the geography endpoint is suggested.",
         "operationId": "Search_SubmitReverseGeocodingAsynchronousBatch",
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
@@ -939,18 +939,18 @@
       "type": "object",
       "description": "Universal asynchronous batch request body.",
       "properties": {
-        "inputFolderPath": {
-          "description": "The URL that points to a Azure blob storage folder where the batch input blobs will be stored.",
+        "inputContainerUri": {
+          "description": "The URI for the Azure Blob Storage container with the input blobs to be processed.",
           "type": "string",
           "format": "uri"
         },
-        "outputFolderPath": {
-          "description": "The URL that points to a Azure blob storage folder where the batch results will be stored.",
+        "outputContainerUri": {
+          "description": "The URI for the Azure Blob Storage container where the output blobs will be stored.",
           "type": "string",
           "format": "uri"
         },
         "allowBlobOverwrite": {
-          "description": "If a blob with the same name as the batch result already exists in the output folder, the transformation will terminate to avoid overwriting the existing blob. If the allowBlobOverwrite option is set to true, the existing blob will be overwritten.",
+          "description": "If a blob with the same name as the batch result output already exists in the output container, the transformation will terminate to avoid overwriting the existing blob. If allowBlobOverwrite option is set to true, the existing blob will be overwritten.",
           "type": "boolean",
           "default": false
         },
@@ -960,8 +960,8 @@
         }
       },
       "required": [
-        "inputFolderPath",
-        "outputFolderPath"
+        "inputContainerUri",
+        "outputContainerUri"
       ]
     },
     "ReverseGeocodingBatchRequestItem": {
@@ -1390,7 +1390,7 @@
       }
     },
     "AsyncBatchOperation": {
-      "$ref": "../../../AsyncBatchManagement/preview/2024-10-01-preview/asyncBatchManagement.json#/definitions/AsyncBatchOperation"
+      "$ref": "../../../AsyncBatchManagement/preview/2024-07-01-preview/asyncBatchManagement.json#/definitions/AsyncBatchOperation"
     }
   }
 }
