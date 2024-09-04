@@ -277,6 +277,10 @@
               "$ref": "#/definitions/Workbench"
             },
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -294,6 +298,9 @@
         "x-ms-examples": {
           "Workbenches_CreateOrUpdate": {
             "$ref": "./examples/WorkbenchesCreateOrUpdate.json"
+          },
+          "Workbenches_CreateOrUpdate with deprecated sku": {
+            "$ref": "./examples/WorkbenchesCreateOrUpdateDeprecated.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -436,7 +443,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ModSimWorkbench/workbenches/{workbenchName}/chambers": {
       "get": {
-        "operationId": "Chambers_ListByWorkbench",
+        "operationId": "Chambers_List",
         "tags": [
           "Chambers"
         ],
@@ -475,7 +482,7 @@
           }
         },
         "x-ms-examples": {
-          "Chambers_ListByWorkbench": {
+          "Chambers_List": {
             "$ref": "./examples/ChambersList.json"
           }
         },
@@ -593,6 +600,10 @@
               "$ref": "#/definitions/Chamber"
             },
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -768,7 +779,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ModSimWorkbench/workbenches/{workbenchName}/chambers/{chamberName}/connectors": {
       "get": {
-        "operationId": "Connectors_ListByChamber",
+        "operationId": "Connectors_List",
         "tags": [
           "Connectors"
         ],
@@ -815,7 +826,7 @@
           }
         },
         "x-ms-examples": {
-          "Connectors_ListByChamber": {
+          "Connectors_List": {
             "$ref": "./examples/ConnectorsList.json"
           }
         },
@@ -949,6 +960,10 @@
               "$ref": "#/definitions/Connector"
             },
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -1533,7 +1548,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ModSimWorkbench/workbenches/{workbenchName}/chambers/{chamberName}/fileRequests": {
       "get": {
-        "operationId": "FileRequests_ListByChamber",
+        "operationId": "FileRequests_List",
         "tags": [
           "FileRequests"
         ],
@@ -1580,7 +1595,7 @@
           }
         },
         "x-ms-examples": {
-          "FileRequests_ListByChamber": {
+          "FileRequests_List": {
             "$ref": "./examples/FileRequestsList.json"
           }
         },
@@ -1825,7 +1840,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ModSimWorkbench/workbenches/{workbenchName}/chambers/{chamberName}/files": {
       "get": {
-        "operationId": "Files_ListByChamber",
+        "operationId": "Files_List",
         "tags": [
           "Files"
         ],
@@ -1872,7 +1887,7 @@
           }
         },
         "x-ms-examples": {
-          "Files_ListByChamber": {
+          "Files_List": {
             "$ref": "./examples/FilesList.json"
           }
         },
@@ -2561,7 +2576,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ModSimWorkbench/workbenches/{workbenchName}/chambers/{chamberName}/storages": {
       "get": {
-        "operationId": "Storages_ListByChamber",
+        "operationId": "Storages_List",
         "tags": [
           "Storages"
         ],
@@ -2608,7 +2623,7 @@
           }
         },
         "x-ms-examples": {
-          "Storages_ListByChamber": {
+          "Storages_List": {
             "$ref": "./examples/StoragesList.json"
           }
         },
@@ -2742,6 +2757,10 @@
               "$ref": "#/definitions/Storage"
             },
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -2933,7 +2952,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ModSimWorkbench/workbenches/{workbenchName}/chambers/{chamberName}/workloads": {
       "get": {
-        "operationId": "Workloads_ListByChamber",
+        "operationId": "Workloads_List",
         "tags": [
           "Workloads"
         ],
@@ -2980,7 +2999,7 @@
           }
         },
         "x-ms-examples": {
-          "Workloads_ListByChamber": {
+          "Workloads_List": {
             "$ref": "./examples/WorkloadsList.json"
           }
         },
@@ -3114,6 +3133,10 @@
               "$ref": "#/definitions/Workload"
             },
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -3530,7 +3553,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ModSimWorkbench/workbenches/{workbenchName}/sharedStorages": {
       "get": {
-        "operationId": "SharedStorages_ListByWorkbench",
+        "operationId": "SharedStorages_List",
         "tags": [
           "SharedStorages"
         ],
@@ -3569,7 +3592,7 @@
           }
         },
         "x-ms-examples": {
-          "SharedStorages_ListByWorkbench": {
+          "SharedStorages_List": {
             "$ref": "./examples/SharedStoragesList.json"
           }
         },
@@ -3687,6 +3710,10 @@
               "$ref": "#/definitions/SharedStorage"
             },
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -4016,6 +4043,24 @@
         }
       }
     },
+    "Azure.ResourceManager.CommonTypes.TrackedResourceUpdate": {
+      "type": "object",
+      "description": "The resource model definition for an Azure Resource Manager tracked top level resource which has 'tags' and a 'location'",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
+        }
+      ]
+    },
     "Cadence": {
       "type": "object",
       "description": "Cadence License Manager.",
@@ -4053,12 +4098,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/ChamberProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "description": "The resource-specific properties for this resource."
         }
       },
       "allOf": [
@@ -4134,18 +4174,24 @@
         }
       }
     },
+    "ChamberPropertiesUpdate": {
+      "type": "object",
+      "description": "Chamber properties."
+    },
     "ChamberUpdate": {
       "type": "object",
-      "description": "The type used for update operations of the Chamber.",
+      "description": "Chamber tracked resource.",
       "properties": {
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
+        "properties": {
+          "$ref": "#/definitions/ChamberPropertiesUpdate",
+          "description": "The resource-specific properties for this resource."
         }
-      }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
+        }
+      ]
     },
     "ConnectedChamber": {
       "type": "object",
@@ -4179,12 +4225,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/ConnectorProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "description": "The resource-specific properties for this resource."
         }
       },
       "allOf": [
@@ -4295,26 +4336,9 @@
         "networkAcls"
       ]
     },
-    "ConnectorUpdate": {
+    "ConnectorPropertiesUpdate": {
       "type": "object",
-      "description": "The type used for update operations of the Connector.",
-      "properties": {
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "properties": {
-          "$ref": "#/definitions/ConnectorUpdateProperties",
-          "x-ms-client-flatten": true
-        }
-      }
-    },
-    "ConnectorUpdateProperties": {
-      "type": "object",
-      "description": "The updatable properties of the Connector.",
+      "description": "Connector properties.",
       "properties": {
         "accessConfigurations": {
           "$ref": "#/definitions/AccessConfigurationUpdate",
@@ -4335,6 +4359,21 @@
           ]
         }
       }
+    },
+    "ConnectorUpdate": {
+      "type": "object",
+      "description": "Connector tracked resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ConnectorPropertiesUpdate",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
+        }
+      ]
     },
     "CopyPasteParameters": {
       "type": "object",
@@ -4469,12 +4508,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/FileProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "description": "The resource-specific properties for this resource."
         }
       },
       "allOf": [
@@ -4651,12 +4685,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/FileRequestProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "description": "The resource-specific properties for this resource."
         }
       },
       "allOf": [
@@ -5240,12 +5269,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/SharedStorageProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "description": "The resource-specific properties for this resource."
         }
       },
       "allOf": [
@@ -5326,7 +5350,7 @@
         },
         "localMountPath": {
           "type": "string",
-          "description": "Directory where the shared storage volume mounted.",
+          "description": "Directory where the storage volume is mounted.",
           "readOnly": true
         },
         "chambers": {
@@ -5345,61 +5369,23 @@
           ]
         },
         "performanceTier": {
-          "type": "string",
-          "description": "Performance tier of the shared storage.",
-          "default": "Standard",
-          "enum": [
-            "Standard",
-            "Ultra"
-          ],
-          "x-ms-enum": {
-            "name": "SharedStoragePerformanceTier",
-            "modelAsString": true,
-            "values": [
-              {
-                "name": "Standard",
-                "value": "Standard",
-                "description": "Standard tier."
-              },
-              {
-                "name": "Ultra",
-                "value": "Ultra",
-                "description": "Ultra tier."
-              }
-            ]
-          },
+          "$ref": "#/definitions/SharedStoragePerformanceTier",
+          "description": "Performance tier of the chamber storage.",
           "x-ms-mutability": [
             "read",
+            "update",
             "create"
           ]
         }
       },
       "required": [
         "capacityAllocated",
-        "chambers",
-        "performanceTier"
+        "chambers"
       ]
     },
-    "SharedStorageUpdate": {
+    "SharedStoragePropertiesUpdate": {
       "type": "object",
-      "description": "The type used for update operations of the SharedStorage.",
-      "properties": {
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "properties": {
-          "$ref": "#/definitions/SharedStorageUpdateProperties",
-          "x-ms-client-flatten": true
-        }
-      }
-    },
-    "SharedStorageUpdateProperties": {
-      "type": "object",
-      "description": "The updatable properties of the SharedStorage.",
+      "description": "Shared storage properties.",
       "properties": {
         "capacityAllocated": {
           "type": "integer",
@@ -5428,12 +5414,29 @@
         },
         "performanceTier": {
           "$ref": "#/definitions/SharedStoragePerformanceTier",
-          "description": "Performance tier of the shared storage.",
+          "description": "Performance tier of the chamber storage.",
           "x-ms-mutability": [
-            "update"
+            "read",
+            "update",
+            "create"
           ]
         }
       }
+    },
+    "SharedStorageUpdate": {
+      "type": "object",
+      "description": "Shared storage tracked resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SharedStoragePropertiesUpdate",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
+        }
+      ]
     },
     "Siemens": {
       "type": "object",
@@ -5465,12 +5468,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/StorageProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "description": "The resource-specific properties for this resource."
         }
       },
       "allOf": [
@@ -5505,8 +5503,7 @@
       "description": "Performance tier of chamber storage.",
       "enum": [
         "Standard",
-        "Ultra",
-        "Premium"
+        "Ultra"
       ],
       "x-ms-enum": {
         "name": "StoragePerformanceTier",
@@ -5521,18 +5518,13 @@
             "name": "Ultra",
             "value": "Ultra",
             "description": "Ultra tier."
-          },
-          {
-            "name": "Premium",
-            "value": "Premium",
-            "description": "Premium tier."
           }
         ]
       }
     },
     "StorageProperties": {
       "type": "object",
-      "description": "Storage  properties.",
+      "description": "Storage properties.",
       "properties": {
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
@@ -5557,70 +5549,26 @@
         },
         "localMountPath": {
           "type": "string",
-          "description": "Directory where the chamber storage volume mounted.",
+          "description": "Directory where the storage volume is mounted.",
           "readOnly": true
         },
         "performanceTier": {
-          "type": "string",
+          "$ref": "#/definitions/StoragePerformanceTier",
           "description": "Performance tier of the chamber storage.",
-          "default": "Standard",
-          "enum": [
-            "Standard",
-            "Ultra",
-            "Premium"
-          ],
-          "x-ms-enum": {
-            "name": "StoragePerformanceTier",
-            "modelAsString": true,
-            "values": [
-              {
-                "name": "Standard",
-                "value": "Standard",
-                "description": "Standard tier."
-              },
-              {
-                "name": "Ultra",
-                "value": "Ultra",
-                "description": "Ultra tier."
-              },
-              {
-                "name": "Premium",
-                "value": "Premium",
-                "description": "Premium tier."
-              }
-            ]
-          },
           "x-ms-mutability": [
             "read",
+            "update",
             "create"
           ]
         }
       },
       "required": [
-        "capacityAllocated",
-        "performanceTier"
+        "capacityAllocated"
       ]
     },
-    "StorageUpdate": {
+    "StoragePropertiesUpdate": {
       "type": "object",
-      "description": "The type used for update operations of the Storage.",
-      "properties": {
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "properties": {
-          "$ref": "#/definitions/StorageUpdateProperties",
-          "x-ms-client-flatten": true
-        }
-      }
-    },
-    "StorageUpdateProperties": {
-      "type": "object",
-      "description": "The updatable properties of the Storage.",
+      "description": "Storage properties.",
       "properties": {
         "capacityAllocated": {
           "type": "integer",
@@ -5636,10 +5584,27 @@
           "$ref": "#/definitions/StoragePerformanceTier",
           "description": "Performance tier of the chamber storage.",
           "x-ms-mutability": [
-            "update"
+            "read",
+            "update",
+            "create"
           ]
         }
       }
+    },
+    "StorageUpdate": {
+      "type": "object",
+      "description": "Storage tracked resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/StoragePropertiesUpdate",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
+        }
+      ]
     },
     "Synopsys": {
       "type": "object",
@@ -5671,12 +5636,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/WorkbenchProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "description": "The resource-specific properties for this resource."
         }
       },
       "allOf": [
@@ -5734,30 +5694,12 @@
         }
       },
       "required": [
-        "appOidc",
-        "sku"
+        "appOidc"
       ]
     },
-    "WorkbenchUpdate": {
+    "WorkbenchPropertiesUpdate": {
       "type": "object",
-      "description": "The type used for update operations of the Workbench.",
-      "properties": {
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "properties": {
-          "$ref": "#/definitions/WorkbenchUpdateProperties",
-          "x-ms-client-flatten": true
-        }
-      }
-    },
-    "WorkbenchUpdateProperties": {
-      "type": "object",
-      "description": "The updatable properties of the Workbench.",
+      "description": "Workbench properties.",
       "properties": {
         "appOidc": {
           "$ref": "#/definitions/AppOidcUpdate",
@@ -5770,18 +5712,28 @@
         }
       }
     },
+    "WorkbenchUpdate": {
+      "type": "object",
+      "description": "Workbench tracked resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/WorkbenchPropertiesUpdate",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
+        }
+      ]
+    },
     "Workload": {
       "type": "object",
       "description": "Workload tracked resource.",
       "properties": {
         "properties": {
           "$ref": "#/definitions/WorkloadProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "description": "The resource-specific properties for this resource."
         }
       },
       "allOf": [
@@ -5869,18 +5821,24 @@
         "edaType"
       ]
     },
+    "WorkloadPropertiesUpdate": {
+      "type": "object",
+      "description": "Workload properties."
+    },
     "WorkloadUpdate": {
       "type": "object",
-      "description": "The type used for update operations of the Workload.",
+      "description": "Workload tracked resource.",
       "properties": {
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
+        "properties": {
+          "$ref": "#/definitions/WorkloadPropertiesUpdate",
+          "description": "The resource-specific properties for this resource."
         }
-      }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
+        }
+      ]
     }
   },
   "parameters": {}

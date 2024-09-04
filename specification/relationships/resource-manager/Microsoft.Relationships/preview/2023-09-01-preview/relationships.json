@@ -176,6 +176,10 @@
               "$ref": "#/definitions/DependencyOfRelationship"
             },
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -369,6 +373,10 @@
               "$ref": "#/definitions/ServiceGroupMemberRelationship"
             },
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -504,12 +512,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/DependencyOfRelationshipProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "description": "The resource-specific properties for this resource."
         }
       },
       "allOf": [
@@ -676,12 +679,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/ServiceGroupMemberRelationshipProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "description": "The resource-specific properties for this resource."
         }
       },
       "allOf": [
@@ -761,24 +759,6 @@
         "metadata",
         "originInformation"
       ]
-    },
-    "Versions": {
-      "type": "string",
-      "description": "Relationships RP API Versions",
-      "enum": [
-        "2023-09-01-preview"
-      ],
-      "x-ms-enum": {
-        "name": "Versions",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "2023-09-01-preview",
-            "value": "2023-09-01-preview",
-            "description": "2023-09-01-preview version"
-          }
-        ]
-      }
     }
   },
   "parameters": {

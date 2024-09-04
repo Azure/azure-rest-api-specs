@@ -1,0 +1,97 @@
+{
+  "title": "Connectors_CreateOrUpdate",
+  "operationId": "Connectors_CreateOrUpdate",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "resourceGroupName",
+    "api-version": "2024-05-01-preview",
+    "workbenchName": "test-workbench",
+    "chamberName": "test-chamber",
+    "connectorName": "test-connector",
+    "resource": {
+      "location": "Central US",
+      "properties": {
+        "accessConfigurations": {
+          "accessType": "GUI",
+          "gatewayType": "VPN",
+          "connectorSubnetId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroup/providers/Microsoft.Network/virtualNetworks/test-virtualNetwork/subnets/test-subnet"
+        },
+        "remoteDesktop": {
+          "etx": {
+            "licenseKeyUri": "my-uri",
+            "licenseActivated": "True"
+          }
+        },
+        "networkAcls": {
+          "allowedAddressSpaces": [
+            "10.1.0.0/16"
+          ]
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroup/providers/Microsoft.ModSimWorkbench/workbenches/test-workbench/chambers/chamber-name/connectors/test-connector",
+        "type": "Microsoft.ModSimWorkbench/workbenches/chambers/connectors",
+        "location": "Central US",
+        "properties": {
+          "provisioningState": "Processing",
+          "accessConfigurations": {
+            "accessType": "GUI",
+            "gatewayType": "VPN",
+            "connectorSubnetId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroup/providers/Microsoft.Network/virtualNetworks/test-virtualNetwork/subnets/test-subnet"
+          },
+          "remoteDesktop": {
+            "etx": {
+              "replyUrlEtx": "my-url",
+              "replyUrlOtds": "my-otds-url",
+              "licenseKeyUri": "my-uri",
+              "connectionNodeCount": 2,
+              "licenseActivated": "True"
+            }
+          },
+          "networkAcls": {
+            "allowedAddressSpaces": [
+              "10.1.0.0/16"
+            ]
+          }
+        }
+      }
+    },
+    "201": {
+      "headers": {
+        "x-ms-async-operation-timeout": "PT2H30M"
+      },
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroup/providers/Microsoft.ModSimWorkbench/workbenches/test-workbench/chambers/chamber-name/connectors/test-connector",
+        "type": "Microsoft.ModSimWorkbench/workbenches/chambers/connectors",
+        "location": "Central US",
+        "properties": {
+          "provisioningState": "Processing",
+          "accessConfigurations": {
+            "accessType": "GUI",
+            "gatewayType": "VPN",
+            "ipAddress": "10.1.0.0/16",
+            "connectorSubnetId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroup/providers/Microsoft.Network/virtualNetworks/test-virtualNetwork/subnets/test-subnet"
+          },
+          "remoteDesktop": {
+            "etx": {
+              "replyUrlEtx": "my-url",
+              "replyUrlOtds": "my-otds-url",
+              "licenseKeyUri": "my-uri",
+              "connectionNodeCount": 2,
+              "licenseActivated": "True"
+            }
+          },
+          "networkAcls": {
+            "allowedAddressSpaces": [
+              "10.1.0.0/16"
+            ]
+          }
+        }
+      }
+    }
+  }
+}

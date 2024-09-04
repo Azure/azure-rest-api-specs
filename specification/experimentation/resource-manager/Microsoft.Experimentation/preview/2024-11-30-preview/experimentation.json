@@ -1,0 +1,798 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Experimentation",
+    "version": "2024-11-30-preview",
+    "description": "Rest API for Experimentation Service.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Operations"
+    },
+    {
+      "name": "ExperimentWorkspaces"
+    }
+  ],
+  "paths": {
+    "/providers/Microsoft.Experimentation/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List ExperimentWorkspaces operations.": {
+            "$ref": "./examples/ExperimentWorkspaces_OperationsList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Experimentation/experimentWorkspaces": {
+      "get": {
+        "operationId": "ExperimentWorkspaces_ListBySubscription",
+        "tags": [
+          "ExperimentWorkspaces"
+        ],
+        "description": "Gets all experiment workspaces in the specified subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ExperimentWorkspaceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List ExperimentWorkspaces on a subscription.": {
+            "$ref": "./examples/ExperimentWorkspaces_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Experimentation/experimentWorkspaces": {
+      "get": {
+        "operationId": "ExperimentWorkspaces_ListByResourceGroup",
+        "tags": [
+          "ExperimentWorkspaces"
+        ],
+        "description": "Gets all experiment workspaces in a resource group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ExperimentWorkspaceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List ExperimentWorkspaces on a resource group.": {
+            "$ref": "./examples/ExperimentWorkspaces_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Experimentation/experimentWorkspaces/{experimentWorkspaceName}": {
+      "get": {
+        "operationId": "ExperimentWorkspaces_Get",
+        "tags": [
+          "ExperimentWorkspaces"
+        ],
+        "description": "Gets an experiment workspace",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "experimentWorkspaceName",
+            "in": "path",
+            "description": "The name of the experimentation workspace.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z0-9]{3,14}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ExperimentWorkspace"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a single ExperimentWorkspace": {
+            "$ref": "./examples/ExperimentWorkspaceGet.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "ExperimentWorkspaces_CreateOrUpdate",
+        "tags": [
+          "ExperimentWorkspaces"
+        ],
+        "description": "Create an experiment workspace, or update an existing workspace",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "experimentWorkspaceName",
+            "in": "path",
+            "description": "The name of the experimentation workspace.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z0-9]{3,14}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Parameters supplied to the CreateOrUpdate experiment workspace operation.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ExperimentWorkspace"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'ExperimentWorkspace' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ExperimentWorkspace"
+            }
+          },
+          "201": {
+            "description": "Resource 'ExperimentWorkspace' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ExperimentWorkspace"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or update an ExperimentWorkspace with Free sku.": {
+            "$ref": "./examples/ExperimentWorkspaces_Free_CreateOrUpdate.json"
+          },
+          "Create or update an ExperimentWorkspace with Standard sku and Advanced kind.": {
+            "$ref": "./examples/ExperimentWorkspaces_CreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "ExperimentWorkspaces_Update",
+        "tags": [
+          "ExperimentWorkspaces"
+        ],
+        "description": "Update an experiment workspace",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "experimentWorkspaceName",
+            "in": "path",
+            "description": "The name of the experimentation workspace.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z0-9]{3,14}$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "Parameters supplied to the update experiment workspace operation.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ExperimentWorkspacePatch"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ExperimentWorkspace"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update an Experiment Workspace.": {
+            "$ref": "./examples/ExperimentWorkspaces_Patch.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "ExperimentWorkspaces_Delete",
+        "tags": [
+          "ExperimentWorkspaces"
+        ],
+        "description": "Deletes an experiment workspace",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "experimentWorkspaceName",
+            "in": "path",
+            "description": "The name of the experimentation workspace.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z0-9]{3,14}$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete an ExperimentWorkspace": {
+            "$ref": "./examples/ExperimentWorkspaces_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "Azure.ResourceManager.ResourceProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of a resource type.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "ResourceProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "ExperimentWorkspace": {
+      "type": "object",
+      "description": "An experiment workspace.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ExperimentWorkspaceProperties",
+          "description": "Resource properties."
+        },
+        "identity": {
+          "$ref": "#/definitions/ManagedIdentity",
+          "description": "Managed identity."
+        },
+        "sku": {
+          "$ref": "#/definitions/ExperimentWorkspaceSku",
+          "description": "The SKU (Stock Keeping Unit) assigned to this resource."
+        },
+        "kind": {
+          "$ref": "#/definitions/ExperimentWorkspaceKind",
+          "description": "Metadata used by portal/service to render different experiences for resources of the same type. Supported values are Regular and Advanced.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "ExperimentWorkspaceKind": {
+      "type": "string",
+      "description": "The experiment workspace model Kind.",
+      "enum": [
+        "Regular",
+        "Advanced"
+      ],
+      "x-ms-enum": {
+        "name": "ExperimentWorkspaceKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Regular",
+            "value": "Regular",
+            "description": "The Regular Kind"
+          },
+          {
+            "name": "Advanced",
+            "value": "Advanced",
+            "description": "The Advanced Kind generally available with Standard SKU"
+          }
+        ]
+      }
+    },
+    "ExperimentWorkspaceListResult": {
+      "type": "object",
+      "description": "The response of a ExperimentWorkspace list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ExperimentWorkspace items on this page",
+          "items": {
+            "$ref": "#/definitions/ExperimentWorkspace"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ExperimentWorkspacePatch": {
+      "type": "object",
+      "description": "An experiment workspace properties.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "identity": {
+          "$ref": "#/definitions/ManagedIdentity",
+          "description": "The identity of the workspace"
+        }
+      }
+    },
+    "ExperimentWorkspaceProperties": {
+      "type": "object",
+      "description": "An experiment workspace properties.",
+      "properties": {
+        "expWorkspaceId": {
+          "type": "string",
+          "description": "The id for experiment workspace",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
+          "description": "The provisioning state for the resource",
+          "readOnly": true
+        },
+        "variantAssignmentConfigPublishing": {
+          "$ref": "#/definitions/VariantAssignmentConfigPublishing",
+          "description": "The variant assignment configuration will be published to a storage account linked here. This involves using the Variant Assignment SDK. Using this assignment method, your service will pull the assignment blob from storage account registered in the workspace."
+        },
+        "remoteVariantAssignment": {
+          "$ref": "#/definitions/RemoteVariantAssignment",
+          "description": "The remote variant assignment, your service will do a network call to an assignment endpoint and retrieve the variants assigned. This option is recommended for testing with less than 100 RPS."
+        },
+        "logAnalyticsResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The resource identifier of the Log Analytics workspace which experiment workspace uses for generating experiment analysis results.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.OperationalInsights/workspaces"
+              }
+            ]
+          }
+        },
+        "logsExporterStorageAccountResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The resource identifier of storage account where logs are exported from Log Analytics workspace. Experiment workspace uses it generating experiment analysis results.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Storage/storageAccounts"
+              }
+            ]
+          }
+        }
+      }
+    },
+    "ExperimentWorkspaceSku": {
+      "type": "object",
+      "description": "The experiment workspace model definition representing SKU",
+      "properties": {
+        "name": {
+          "$ref": "#/definitions/ExperimentWorkspaceSkuName",
+          "description": "The name of the SKU. Ex - F0, P0. It is typically a letter+number code"
+        },
+        "tier": {
+          "$ref": "#/definitions/ExperimentWorkspaceSkuTier",
+          "description": "The name of the SKU tier",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
+    "ExperimentWorkspaceSkuName": {
+      "type": "string",
+      "description": "The experiment workspace model SKU name.",
+      "enum": [
+        "F0",
+        "S0"
+      ],
+      "x-ms-enum": {
+        "name": "ExperimentWorkspaceSkuName",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "F0",
+            "value": "F0",
+            "description": "The Free service sku name."
+          },
+          {
+            "name": "S0",
+            "value": "S0",
+            "description": "The Standard service sku name."
+          }
+        ]
+      }
+    },
+    "ExperimentWorkspaceSkuTier": {
+      "type": "string",
+      "description": "The experiment workspace model SKU tier.",
+      "enum": [
+        "Free",
+        "Standard"
+      ],
+      "x-ms-enum": {
+        "name": "ExperimentWorkspaceSkuTier",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Free",
+            "value": "Free",
+            "description": "The Free service tier."
+          },
+          {
+            "name": "Standard",
+            "value": "Standard",
+            "description": "The Standard service tier."
+          }
+        ]
+      }
+    },
+    "ManagedIdentity": {
+      "type": "object",
+      "description": "The workspace managed identity",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/ResourceIdentityType",
+          "description": "The type of managed identity assigned to this resource."
+        },
+        "userAssignedIdentities": {
+          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/UserAssignedIdentities",
+          "description": "The identities assigned to this resource by the user."
+        }
+      },
+      "required": [
+        "type"
+      ]
+    },
+    "RemoteVariantAssignment": {
+      "type": "object",
+      "description": "The remote variant assignment, your service will do a network call to an assignment endpoint and retrieve the variants assigned. This option is recommended for testing with less than 100 RPS.",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Indicates whether the remote variant assignment is enabled or not. Provisioning a remote variant assignment endpoint is an asynchronous operation and can take up to 20 minutes."
+        },
+        "endpoint": {
+          "type": "string",
+          "description": "The endpoint where your service will make a network call to retrieve the variants assigned.",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/RemoteVariantAssignmentProvisioningState",
+          "description": "The provisioning state of the remote variant assignment service endpoint.",
+          "readOnly": true
+        }
+      }
+    },
+    "RemoteVariantAssignmentProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of the remote variant assignment service endpoint.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Accepted",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "RemoteVariantAssignmentProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "The provisioning state is Succeeded."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "The provisioning state is Failed."
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "The provisioning state is Running."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "The provisioning state is Running."
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "ResourceIdentityType": {
+      "type": "string",
+      "description": "The type of managed identity for the workspace",
+      "enum": [
+        "None",
+        "UserAssigned"
+      ],
+      "x-ms-enum": {
+        "name": "ResourceIdentityType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "None",
+            "value": "None",
+            "description": "No managed identity"
+          },
+          {
+            "name": "UserAssigned",
+            "value": "UserAssigned",
+            "description": "User assigned managed identity"
+          }
+        ]
+      }
+    },
+    "VariantAssignmentConfigPublishing": {
+      "type": "object",
+      "description": "The variant assignment configuration will be published to a storage account linked here. This involves using the Variant Assignment SDK. Using this assignment method, your service will pull the assignment blob from storage account registered in the workspace.",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Indicates whether variant assignment publishing model is enabled or not."
+        },
+        "storageAccountResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The resource identifier of storage account where blob should be delivered. Blob would be delivered to exp-blobs storage container in the storage account.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Storage/storageAccounts"
+              }
+            ]
+          }
+        },
+        "userAssignedIdentityResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "User assigned identity to use for accessing storage account. This identity should have access to storage account specified in storageAccountResourceId. If not specified, defaults to first alphabetically sorted user assigned identity assigned to the workspace.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.ManagedIdentity/userAssignedIdentities"
+              }
+            ]
+          }
+        }
+      }
+    }
+  },
+  "parameters": {}
+}

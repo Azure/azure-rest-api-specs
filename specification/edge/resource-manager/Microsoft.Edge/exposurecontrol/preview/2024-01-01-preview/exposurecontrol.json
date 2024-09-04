@@ -372,6 +372,10 @@
               "$ref": "#/definitions/ExposureFeature"
             },
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -628,6 +632,10 @@
               "$ref": "#/definitions/ExposureWorkflowManifest"
             },
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -892,6 +900,10 @@
               "$ref": "#/definitions/ExposureWorkflow"
             },
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -1194,6 +1206,10 @@
               "$ref": "#/definitions/ExposureGroup"
             },
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -1287,12 +1303,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/ExposureFeatureProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "description": "The resource-specific properties for this resource."
         }
       },
       "allOf": [
@@ -1343,12 +1354,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/ExposureGroupProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "description": "The resource-specific properties for this resource."
         }
       },
       "allOf": [
@@ -1406,12 +1412,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/ExposureWorkflowProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "description": "The resource-specific properties for this resource."
         }
       },
       "allOf": [
@@ -1447,12 +1448,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/ExposureWorkflowManifestProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "description": "The resource-specific properties for this resource."
         }
       },
       "allOf": [
@@ -1926,24 +1922,6 @@
             "name": "Omitted",
             "value": "Omitted",
             "description": "Ring/Stage is skipped for business reasons."
-          }
-        ]
-      }
-    },
-    "Versions": {
-      "type": "string",
-      "description": "The available API versions.",
-      "enum": [
-        "2024-01-01-preview"
-      ],
-      "x-ms-enum": {
-        "name": "Versions",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "v2024_00_01",
-            "value": "2024-01-01-preview",
-            "description": "Version 2024-01-01-preview"
           }
         ]
       }

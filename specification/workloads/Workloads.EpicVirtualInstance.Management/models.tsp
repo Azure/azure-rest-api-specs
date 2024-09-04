@@ -329,7 +329,12 @@ model EpicVirtualInstanceProperties {
  * The Epic Configuration.
  */
 @discriminator("configurationType")
-model EpicConfiguration {}
+model EpicConfiguration {
+  /**
+   * The configuration type.
+   */
+  configurationType: EpicConfigurationType;
+}
 
 /**
  * Managed resource group configuration
