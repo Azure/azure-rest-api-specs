@@ -26,6 +26,10 @@
           "type": "string",
           "description": "Type of linked service."
         },
+        "version": {
+          "type": "string",
+          "description": "Version of the linked service."
+        },
         "connectVia": {
           "description": "The integration runtime reference.",
           "$ref": "../datafactory.json#/definitions/IntegrationRuntimeReference"
@@ -107,12 +111,32 @@
         "typeProperties": {
           "description": "Azure Table Storage linked service properties.",
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/AzureStorageLinkedServiceTypeProperties"
+          "$ref": "#/definitions/AzureTableStorageLinkedServiceTypeProperties"
         }
       },
       "required": [
         "typeProperties"
       ]
+    },
+    "AzureTableStorageLinkedServiceTypeProperties": {
+      "description": "Azure Table Storage linked service properties.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AzureStorageLinkedServiceTypeProperties"
+        }
+      ],
+      "properties": {
+        "serviceEndpoint": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "Table service endpoint of the Azure Table Storage resource. It is mutually exclusive with connectionString, sasUri property."
+        },
+        "credential": {
+          "$ref": "../datafactory.json#/definitions/CredentialReference",
+          "description": "The credential reference containing authentication information."
+        }
+      }
     },
     "AzureStorageLinkedServiceTypeProperties": {
       "description": "Azure Storage linked service properties.",
@@ -1029,7 +1053,12 @@
         "authenticationType": {
           "type": "object",
           "x-ms-format": "dfe-string",
-          "description": "The authentication type to connect to Dynamics server. 'Office365' for online scenario, 'Ifd' for on-premises with Ifd scenario, 'AADServicePrincipal' for Server-To-Server authentication in online scenario. Type: string (or Expression with resultType string)."
+          "description": "The authentication type to connect to Dynamics server. 'Office365' for online scenario, 'Ifd' for on-premises with Ifd scenario, 'AADServicePrincipal' for Server-To-Server authentication in online scenario, 'Active Directory' for Dynamics on-premises with IFD. Type: string (or Expression with resultType string)."
+        },
+        "domain": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "The Active Directory domain that will verify user credentials. Type: string (or Expression with resultType string)."
         },
         "username": {
           "type": "object",
@@ -1086,7 +1115,8 @@
       "enum": [
         "Office365",
         "Ifd",
-        "AADServicePrincipal"
+        "AADServicePrincipal",
+        "Active Directory"
       ],
       "x-ms-enum": {
         "name": "DynamicsAuthenticationType",
@@ -1145,7 +1175,12 @@
         "authenticationType": {
           "type": "object",
           "x-ms-format": "dfe-string",
-          "description": "The authentication type to connect to Dynamics CRM server. 'Office365' for online scenario, 'Ifd' for on-premises with Ifd scenario, 'AADServicePrincipal' for Server-To-Server authentication in online scenario. Type: string (or Expression with resultType string)."
+          "description": "The authentication type to connect to Dynamics CRM server. 'Office365' for online scenario, 'Ifd' for on-premises with Ifd scenario, 'AADServicePrincipal' for Server-To-Server authentication in online scenario, 'Active Directory' for Dynamics on-premises with IFD. Type: string (or Expression with resultType string)."
+        },
+        "domain": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "The Active Directory domain that will verify user credentials. Type: string (or Expression with resultType string)."
         },
         "username": {
           "type": "object",
@@ -1248,7 +1283,12 @@
         "authenticationType": {
           "type": "object",
           "x-ms-format": "dfe-string",
-          "description": "The authentication type to connect to Common Data Service for Apps server. 'Office365' for online scenario, 'Ifd' for on-premises with Ifd scenario. 'AADServicePrincipal' for Server-To-Server authentication in online scenario. Type: string (or Expression with resultType string)."
+          "description": "The authentication type to connect to Common Data Service for Apps server. 'Office365' for online scenario, 'Ifd' for on-premises with Ifd scenario. 'AADServicePrincipal' for Server-To-Server authentication in online scenario, 'Active Directory' for Dynamics on-premises with IFD. Type: string (or Expression with resultType string)."
+        },
+        "domain": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "The Active Directory domain that will verify user credentials. Type: string (or Expression with resultType string)."
         },
         "username": {
           "type": "object",
@@ -1464,6 +1504,15 @@
         "encryptedCredential": {
           "type": "string",
           "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string."
+        },
+        "serviceEndpoint": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "File service endpoint of the Azure File Storage resource. It is mutually exclusive with connectionString, sasUri property."
+        },
+        "credential": {
+          "$ref": "../datafactory.json#/definitions/CredentialReference",
+          "description": "The credential reference containing authentication information."
         }
       }
     },
@@ -3751,6 +3800,19 @@
           "type": "object",
           "x-ms-format": "dfe-string",
           "description": "The scope of the access required. It describes what kind of access will be requested. Type: string (or Expression with resultType string)."
+        },
+        "servicePrincipalCredentialType": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "The service principal credential type to use in Server-To-Server authentication. 'ServicePrincipalKey' for key/secret, 'ServicePrincipalCert' for certificate. Type: string (or Expression with resultType string)."
+        },
+        "servicePrincipalEmbeddedCert": {
+          "description": "Specify the base64 encoded certificate of your application registered in Azure Active Directory. Type: string (or Expression with resultType string).",
+          "$ref": "../datafactory.json#/definitions/SecretBase"
+        },
+        "servicePrincipalEmbeddedCertPassword": {
+          "description": "Specify the password of your certificate if your certificate has a password and you are using AadServicePrincipal authentication. Type: string (or Expression with resultType string).",
+          "$ref": "../datafactory.json#/definitions/SecretBase"
         }
       },
       "required": [
@@ -6710,8 +6772,28 @@
       "properties": {
         "connectionString": {
           "description": "An ODBC connection string. Type: string, SecureString or AzureKeyVaultSecretReference.",
+          "x-ms-format": "dfe-string",
+          "type": "object"
+        },
+        "server": {
           "type": "object",
-          "x-ms-format": "dfe-string"
+          "x-ms-format": "dfe-string",
+          "description": "Server name for connection. Type: string."
+        },
+        "port": {
+          "type": "object",
+          "x-ms-format": "dfe-int",
+          "description": "The port for the connection. Type: integer."
+        },
+        "uid": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "Username for authentication. Type: string."
+        },
+        "database": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "Database name for connection. Type: string."
         },
         "pwd": {
           "$ref": "../datafactory.json#/definitions/AzureKeyVaultSecretReference",
@@ -8016,6 +8098,19 @@
           "description": "The client secret of your application registered in Azure Active Directory. Type: string (or Expression with resultType string).",
           "$ref": "../datafactory.json#/definitions/SecretBase"
         },
+        "servicePrincipalCredentialType": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "The service principal credential type to use in Server-To-Server authentication. 'ServicePrincipalKey' for key/secret, 'ServicePrincipalCert' for certificate. Type: string (or Expression with resultType string)."
+        },
+        "servicePrincipalEmbeddedCert": {
+          "description": "Specify the base64 encoded certificate of your application registered in Azure Active Directory. Type: string (or Expression with resultType string).",
+          "$ref": "../datafactory.json#/definitions/SecretBase"
+        },
+        "servicePrincipalEmbeddedCertPassword": {
+          "description": "Specify the password of your certificate if your certificate has a password and you are using AadServicePrincipal authentication. Type: string (or Expression with resultType string).",
+          "$ref": "../datafactory.json#/definitions/SecretBase"
+        },
         "encryptedCredential": {
           "type": "string",
           "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string."
@@ -8024,8 +8119,7 @@
       "required": [
         "siteUrl",
         "tenantId",
-        "servicePrincipalId",
-        "servicePrincipalKey"
+        "servicePrincipalId"
       ]
     },
     "AzureSynapseArtifactsLinkedService": {

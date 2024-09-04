@@ -13,7 +13,7 @@ model PrivateEndpointConnectionResource
 @armResourceOperations(PrivateEndpointConnectionResource)
 interface PrivateEndpointConnections {
   /** List existing private connections */
-  listConnections is ArmResourceListByParent<PrivateEndpointConnectionResource>;
+  listByMongoCluster is ArmResourceListByParent<PrivateEndpointConnectionResource>;
   /** Get a specific private connection */
   get is ArmResourceRead<PrivateEndpointConnectionResource>;
   /** Create a Private endpoint connection */
@@ -41,5 +41,5 @@ model PrivateLinkResource is ProxyResource<PrivateLinkResourceProperties> {
 @armResourceOperations(PrivateLinkResource)
 interface PrivateLinks {
   /** list private links on the given resource */
-  list is ArmResourceListByParent<PrivateLinkResource>;
+  listByMongoCluster is ArmResourceListByParent<PrivateLinkResource>;
 }

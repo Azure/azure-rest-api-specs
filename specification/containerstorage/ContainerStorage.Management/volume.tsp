@@ -25,7 +25,13 @@ interface Volumes {
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader
   >;
   delete is ArmResourceDeleteWithoutOkAsync<Volume>;
-  update is ArmResourcePatchAsync<Volume, VolumeProperties>;
+  update is ArmCustomPatchAsync<
+    Volume,
+    Azure.ResourceManager.Foundations.ResourceUpdateModel<
+      Volume,
+      VolumeProperties
+    >
+  >;
   listByPool is ArmResourceListByParent<Volume>;
 }
 

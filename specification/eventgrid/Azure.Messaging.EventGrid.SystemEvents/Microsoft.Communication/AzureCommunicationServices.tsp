@@ -1,3 +1,5 @@
+import "@typespec/versioning";
+using TypeSpec.Versioning;
 /** Describes the schema of the Azure Communication Services events published to Azure Event Grid. This corresponds to the Data property of an EventGridEvent. */
 namespace Microsoft.EventGrid.SystemEvents;
 
@@ -51,6 +53,7 @@ model AcsChatMessageEditedEventData extends AcsChatMessageEventBaseProperties {
   ...AcsChatMessageBaseEventData;
 
   /** The time at which the message was edited */
+  @madeRequired(ServiceApiVersions.v2024_01_01)
   editTime: utcDateTime;
 }
 
@@ -61,6 +64,7 @@ model AcsChatMessageEditedInThreadEventData
   ...AcsChatMessageBaseEventData;
 
   /** The time at which the message was edited */
+  @madeRequired(ServiceApiVersions.v2024_01_01)
   editTime: utcDateTime;
 }
 
@@ -68,6 +72,7 @@ model AcsChatMessageEditedInThreadEventData
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
 model AcsChatMessageDeletedEventData extends AcsChatMessageEventBaseProperties {
   /** The time at which the message was deleted */
+  @madeRequired(ServiceApiVersions.v2024_01_01)
   deleteTime: utcDateTime;
 }
 
@@ -76,6 +81,7 @@ model AcsChatMessageDeletedEventData extends AcsChatMessageEventBaseProperties {
 model AcsChatMessageDeletedInThreadEventData
   extends AcsChatMessageEventInThreadBaseProperties {
   /** The time at which the message was deleted */
+  @madeRequired(ServiceApiVersions.v2024_01_01)
   deleteTime: utcDateTime;
 }
 
@@ -115,6 +121,7 @@ model AcsChatThreadPropertiesUpdatedPerUserEventData
   editedByCommunicationIdentifier: CommunicationIdentifierModel;
 
   /** The time at which the properties of the thread were updated */
+  @madeRequired(ServiceApiVersions.v2024_01_01)
   editTime: utcDateTime;
 
   /** The thread metadata */
@@ -144,6 +151,7 @@ model AcsChatParticipantAddedToThreadWithUserEventData
 model AcsChatParticipantRemovedFromThreadWithUserEventData
   extends AcsChatThreadEventBaseProperties {
   /** The time at which the user was removed to the thread */
+  @madeRequired(ServiceApiVersions.v2024_01_01)
   time: utcDateTime;
 
   /** The communication identifier of the user who removed the user */
@@ -168,6 +176,7 @@ model AcsChatParticipantAddedToThreadEventData
 model AcsChatParticipantRemovedFromThreadEventData
   extends AcsChatEventInThreadBaseProperties {
   /** The time at which the user was removed to the thread */
+  @madeRequired(ServiceApiVersions.v2024_01_01)
   time: utcDateTime;
 
   /** The communication identifier of the user who removed the user */
@@ -193,6 +202,7 @@ model AcsSmsDeliveryReportReceivedEventData extends AcsSmsEventBaseProperties {
   deliveryAttempts: AcsSmsDeliveryAttemptProperties[];
 
   /** The time at which the SMS delivery report was received */
+  @madeRequired(ServiceApiVersions.v2024_01_01)
   receivedTimestamp: utcDateTime;
 
   /** Customer Content */
@@ -206,6 +216,7 @@ model AcsSmsReceivedEventData extends AcsSmsEventBaseProperties {
   message?: string;
 
   /** The time at which the SMS was received */
+  @madeRequired(ServiceApiVersions.v2024_01_01)
   receivedTimestamp: utcDateTime;
 }
 
@@ -216,18 +227,22 @@ model AcsRecordingFileStatusUpdatedEventData {
   recordingStorageInfo: AcsRecordingStorageInfoProperties;
 
   /** The time at which the recording started */
+  @madeRequired(ServiceApiVersions.v2024_01_01)
   recordingStartTime: utcDateTime;
 
   /** The recording duration in milliseconds */
   recordingDurationMs?: int64;
 
   /** The recording content type- AudioVideo, or Audio */
+  @madeRequired(ServiceApiVersions.v2024_01_01)
   recordingContentType: recordingContentType;
 
   /** The recording  channel type - Mixed, Unmixed */
+  @madeRequired(ServiceApiVersions.v2024_01_01)
   recordingChannelType: recordingChannelType;
 
   /** The recording format type - Mp4, Mp3, Wav */
+  @madeRequired(ServiceApiVersions.v2024_01_01)
   recordingFormatType: recordingFormatType;
 
   /** The reason for ending recording session */
@@ -246,13 +261,15 @@ model AcsEmailDeliveryReportReceivedEventData {
   messageId?: string;
 
   /** The status of the email. Any value other than Delivered is considered failed. */
+  @madeRequired(ServiceApiVersions.v2024_01_01)
   status: AcsEmailDeliveryReportStatus;
 
   /** Detailed information about the status if any */
   deliveryStatusDetails: AcsEmailDeliveryReportStatusDetails;
 
   /** The time at which the email delivery report received timestamp */
-  deliveryAttemptTimeStamp: utcDateTime;
+  @madeRequired(ServiceApiVersions.v2024_01_01)
+  deliveryAttemptTimestamp: utcDateTime;
 }
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.EmailEngagementTrackingReportReceived event. */
@@ -267,7 +284,8 @@ model AcsEmailEngagementTrackingReportReceivedEventData {
   messageId?: string;
 
   /** The time at which the user interacted with the email */
-  userActionTimeStamp: utcDateTime;
+  @madeRequired(ServiceApiVersions.v2024_01_01)
+  userActionTimestamp: utcDateTime;
 
   /** The context of the type of engagement user had with email */
   engagementContext?: string;
@@ -276,6 +294,7 @@ model AcsEmailEngagementTrackingReportReceivedEventData {
   userAgent?: string;
 
   /** The type of engagement user have with email */
+  @madeRequired(ServiceApiVersions.v2024_01_01)
   engagementType: AcsUserEngagement;
 }
 
@@ -369,6 +388,7 @@ model AcsRouterJobQueuedEventData extends AcsRouterJobEventData {
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
 model AcsRouterJobReceivedEventData extends AcsRouterJobEventData {
   /** Router Job Received Job Status */
+  @madeRequired(ServiceApiVersions.v2024_01_01)
   jobStatus: AcsRouterJobStatus;
 
   /** Router Job Classification Policy Id */
@@ -381,6 +401,7 @@ model AcsRouterJobReceivedEventData extends AcsRouterJobEventData {
   requestedWorkerSelectors: AcsRouterWorkerSelector[];
 
   /** Router Job Received Scheduled Time in UTC */
+  @madeRequired(ServiceApiVersions.v2024_01_01)
   scheduledOn: utcDateTime;
 
   /** Unavailable For Matching for Router Job Received */
@@ -442,6 +463,7 @@ model AcsRouterJobSchedulingFailedEventData extends AcsRouterJobEventData {
 
   /** Router Job Scheduling Failed Scheduled Time in UTC */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  @madeRequired(ServiceApiVersions.v2024_01_01)
   scheduledOn: utcDateTime;
 
   /** Router Job Scheduling Failed Reason */
@@ -472,6 +494,7 @@ model AcsRouterJobWaitingForActivationEventData extends AcsRouterJobEventData {
 
   /** Router Job Waiting For Activation Scheduled Time in UTC */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  @madeRequired(ServiceApiVersions.v2024_01_01)
   scheduledOn: utcDateTime;
 
   /** Router Job Waiting For Activation Unavailable For Matching */
@@ -564,10 +587,12 @@ model AcsRouterWorkerOfferIssuedEventData extends AcsRouterWorkerEventData {
 
   /** Router Worker Offer Issued Time in UTC */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  @madeRequired(ServiceApiVersions.v2024_01_01)
   offeredOn: utcDateTime;
 
   /** Router Worker Offer Issued Expiration Time in UTC */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  @madeRequired(ServiceApiVersions.v2024_01_01)
   expiresOn: utcDateTime;
 
   /** Router Worker Offer Issued Worker Tags */
@@ -692,6 +717,7 @@ model AcsRouterWorkerSelector {
   key?: string;
 
   /** Router Job Worker Selector Label Operator */
+  @madeRequired(ServiceApiVersions.v2024_01_01)
   labelOperator: AcsRouterLabelOperator;
 
   /** Router Job Worker Selector Value */
@@ -702,9 +728,11 @@ model AcsRouterWorkerSelector {
   ttlSeconds: float64;
 
   /** Router Job Worker Selector State */
+  @madeRequired(ServiceApiVersions.v2024_01_01)
   state: AcsRouterWorkerSelectorState;
 
   /** Router Job Worker Selector Expiration Time */
+  @madeRequired(ServiceApiVersions.v2024_01_01)
   expirationTime: utcDateTime;
 }
 
@@ -736,6 +764,7 @@ alias AcsChatThreadDeletedBaseEventData = {
   deletedByCommunicationIdentifier: CommunicationIdentifierModel;
 
   /** The deletion time of the thread */
+  @madeRequired(ServiceApiVersions.v2024_01_01)
   deleteTime: utcDateTime;
 };
 
@@ -744,6 +773,7 @@ alias AcsChatThreadPropertiesBaseEventData = {
   editedByCommunicationIdentifier: CommunicationIdentifierModel;
 
   /** The time at which the properties of the thread were updated */
+  @madeRequired(ServiceApiVersions.v2024_01_01)
   editTime: utcDateTime;
 
   /** The updated thread properties */
@@ -756,6 +786,7 @@ alias AcsChatThreadPropertiesBaseEventData = {
 
 alias AcsChatParticipantBaseEventData = {
   /** The time at which the user was added to the thread */
+  @madeRequired(ServiceApiVersions.v2024_01_01)
   time: utcDateTime;
 
   /** The communication identifier of the user who added the user */
@@ -868,6 +899,7 @@ model AcsEmailDeliveryReportStatusDetails {
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
 model AcsChatThreadEventBaseProperties extends AcsChatEventBaseProperties {
   /** The original creation time of the thread */
+  @madeRequired(ServiceApiVersions.v2024_01_01)
   createTime: utcDateTime;
 
   /** The version of the thread */
@@ -879,6 +911,7 @@ model AcsChatThreadEventBaseProperties extends AcsChatEventBaseProperties {
 model AcsChatThreadEventInThreadBaseProperties
   extends AcsChatEventInThreadBaseProperties {
   /** The original creation time of the thread */
+  @madeRequired(ServiceApiVersions.v2024_01_01)
   createTime: utcDateTime;
 
   /** The version of the thread */
@@ -898,6 +931,7 @@ model AcsChatMessageEventBaseProperties extends AcsChatEventBaseProperties {
   senderDisplayName?: string;
 
   /** The original compose time of the message */
+  @madeRequired(ServiceApiVersions.v2024_01_01)
   composeTime: utcDateTime;
 
   /** The type of the message */
@@ -921,6 +955,7 @@ model AcsChatMessageEventInThreadBaseProperties
   senderDisplayName?: string;
 
   /** The original compose time of the message */
+  @madeRequired(ServiceApiVersions.v2024_01_01)
   composeTime: utcDateTime;
 
   /** The type of the message */
@@ -974,6 +1009,7 @@ model AcsSmsEventBaseProperties {
 /** Schema for details of a delivery attempt */
 model AcsSmsDeliveryAttemptProperties {
   /** TimeStamp when delivery was attempted */
+  @madeRequired(ServiceApiVersions.v2024_01_01)
   timestamp: utcDateTime;
 
   /** Number of segments that were successfully delivered */
@@ -1033,6 +1069,7 @@ union AcsUserEngagement {
 /** Identifies a participant in Azure Communication services. A participant is, for example, a phone number or an Azure communication user. This model must be interpreted as a union: Apart from rawId, at most one further property may be set. */
 model CommunicationIdentifierModel {
   /** The identifier kind. Only required in responses. */
+  @madeRequired(ServiceApiVersions.v2024_01_01)
   kind: CommunicationIdentifierModelKind;
 
   /** Raw Id of the identifier. Optional in requests, required in responses. */
@@ -1074,6 +1111,7 @@ model MicrosoftTeamsAppIdentifierModel {
   appId: string;
 
   /** The cloud that the Microsoft Teams application belongs to. By default 'public' if missing. */
+  @madeRequired(ServiceApiVersions.v2024_01_01)
   cloud: CommunicationCloudEnvironmentModel;
 }
 
@@ -1086,6 +1124,7 @@ model MicrosoftTeamsUserIdentifierModel {
   isAnonymous?: boolean;
 
   /** The cloud that the Microsoft Teams user belongs to. By default 'public' if missing. */
+  @madeRequired(ServiceApiVersions.v2024_01_01)
   cloud: CommunicationCloudEnvironmentModel;
 }
 
@@ -1132,9 +1171,11 @@ model AcsMessageDeliveryStatusUpdatedEventData extends AcsMessageEventData {
   messageId?: string;
 
   /** The updated message status */
+  @madeRequired(ServiceApiVersions.v2024_01_01)
   status: AcsMessageDeliveryStatus;
 
   /** The updated message channel type */
+  @madeRequired(ServiceApiVersions.v2024_01_01)
   channelType: AcsMessageChannelKind;
 }
 
@@ -1196,6 +1237,7 @@ model AcsMessageButtonContent {
 /** Message Interactive Content */
 model AcsMessageInteractiveContent {
   /** The Message interactive reply type */
+  @madeRequired(ServiceApiVersions.v2024_01_01)
   type: AcsInteractiveReplyKind;
 
   /** The Message Sent when a customer clicks a button */
@@ -1235,6 +1277,7 @@ model AcsMessageEventData {
   to?: string;
 
   /** The time message was received */
+  @madeRequired(ServiceApiVersions.v2024_01_01)
   receivedTimeStamp: utcDateTime;
 
   /** The channel event error */

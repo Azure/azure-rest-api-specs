@@ -3354,6 +3354,48 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/listRegistrationTokens": {
+      "post": {
+        "tags": [
+          "HostPool"
+        ],
+        "operationId": "HostPools_ListRegistrationTokens",
+        "description": "Operation to list the RegistrationTokens associated with the HostPool.",
+        "x-ms-examples": {
+          "HostPools_ListRegistrationToken_Post": {
+            "$ref": "./examples/HostPools_ListRegistrationToken_Post.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/HostPoolNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved host pool in resource group.",
+            "schema": {
+              "$ref": "#/definitions/RegistrationTokenList"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/userSessions": {
       "get": {
         "tags": [
@@ -7168,6 +7210,43 @@
           },
           "type": "string",
           "description": "The type of resetting the token."
+        }
+      }
+    },
+    "RegistrationTokenList": {
+      "type": "object",
+      "title": "RegistrationTokenList",
+      "description": "List of RegistrationToken definitions.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of RegistrationToken definitions.",
+          "items": {
+            "$ref": "#/definitions/RegistrationTokenMinimal"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Link to the next page of results."
+        }
+      }
+    },
+    "RegistrationTokenMinimal": {
+      "description": "Represents a Minimal set of properties for RegistrationToken definition.",
+      "type": "object",
+      "properties": {
+        "expirationTime": {
+          "format": "date-time",
+          "type": "string",
+          "description": "Expiration time of registration token.",
+          "x-nullable": true
+        },
+        "token": {
+          "type": "string",
+          "description": "The registration token base64 encoded string.",
+          "x-ms-secret": true
         }
       }
     },

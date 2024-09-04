@@ -32,9 +32,7 @@ op createMessage(
   @path threadId: string,
 
   /** A single message within an assistant thread, as provided during that thread's creation for its initial state. */
-  @added(ServiceApiVersions.v2024_05_01_preview)
-  @body
-  threadMessageOptions: ThreadMessageOptions,
+  @bodyRoot body: ThreadMessageOptions,
 ): ThreadMessage;
 
 /**

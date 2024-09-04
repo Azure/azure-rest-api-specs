@@ -110,6 +110,7 @@ alias BodyParameter<
   TName extends valueof string = "body",
   TDoc extends valueof string = "Body parameter."
 > = {
+  #suppress "@azure-tools/typespec-azure-core/friendly-name" "Legacy"
   @doc(TDoc)
   @friendlyName(TName)
   @bodyRoot

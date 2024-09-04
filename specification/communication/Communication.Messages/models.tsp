@@ -375,13 +375,9 @@ enum Versions {
   c2024_02_01: "2024-02-01",
 }
 
-alias BodyParameter<
-  T,
-  TName extends valueof string = "body",
-  TDoc extends valueof string = "Body parameter."
-> = {
-  @doc(TDoc)
-  @friendlyName(TName)
+@doc("Notification messages send request body.")
+model NotificationMessagesSendRequestBody {
+  @doc("Details of the message to send.")
   @bodyRoot
-  body: T;
-};
+  body: NotificationContent;
+}

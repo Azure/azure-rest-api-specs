@@ -1,0 +1,9 @@
+suppressions:
+  azure-sdk-for-go:
+    - package: sdk/resourcemanager/healthbot/armhealthbot
+      breaking-changes:
+        - Operation `*BotsClient.Update` has been changed to LRO, use `*BotsClient.BeginUpdate` instead.
+  azure-sdk-for-js:
+    - package: "@azure/arm-healthbot"
+      breaking-changes:
+        - Removed operation Bots.update

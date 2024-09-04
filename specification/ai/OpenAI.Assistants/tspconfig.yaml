@@ -3,25 +3,25 @@ parameters:
     default: "sdk/openai"
   "dependencies":
     default: ""
+  output-folder-base:
+    default: "data-plane/OpenAI.Assistants/"
 emit:
   - "@azure-tools/typespec-autorest"
   - "@typespec/openapi3"
-# - "@azure-tools/typespec-java"
-# - "@azure-tools/typespec-csharp"
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/data-plane"
 options:
   "@azure-tools/typespec-autorest":
-    azure-resource-provider-folder: "data-plane"
-    emit-lro-options: "none"
     emitter-output-dir: "{project-root}/../"
-    output-file: "data-plane/OpenAI.Assistants/OpenApiV2/{version-status}/{version}/assistants_generated.json"
+    azure-resource-provider-folder: "data-plane"
     examples-directory: "{project-root}/examples"
+    output-file: "{output-folder-base}/OpenApiV2/{version-status}/{version}/assistants_generated.json"
     omit-unreachable-types: true
+    emit-lro-options: "none"
   "@typespec/openapi3":
     emitter-output-dir: "{project-root}/../"
-    output-file: "data-plane/OpenAI.Assistants/OpenApiV3/{version}/assistants_generated.yaml"
+    output-file: "{output-folder-base}/OpenApiV3/{version}/assistants_generated.yaml"
   "@azure-tools/typespec-csharp":
     package-dir: "Azure.AI.OpenAI.Assistants"
     namespace: "Azure.AI.OpenAI.Assistants"
