@@ -62,7 +62,11 @@ interface SAPVirtualInstances {
    */
   start is ArmResourceActionAsync<
     SAPVirtualInstance,
-    StartRequest,
+    {
+      @doc("The Virtual Instance for SAP solutions resource start request body.")
+      @body
+      body?: StartRequest;
+    },
     Foundations.OperationStatusResult
   >;
 
@@ -71,7 +75,11 @@ interface SAPVirtualInstances {
    */
   stop is ArmResourceActionAsync<
     SAPVirtualInstance,
-    StopRequest,
+    {
+      @doc("The Virtual Instance for SAP solutions resource stop request body.")
+      @body
+      body?: StopRequest;
+    },
     Foundations.OperationStatusResult
   >;
 
