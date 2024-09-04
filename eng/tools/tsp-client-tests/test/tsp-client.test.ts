@@ -61,20 +61,20 @@ async function convert(expect: ExpectStatic, readme: string) {
   expect(() => access(outputFolder)).rejects.toThrowError();
 }
 
-// test.concurrent("Usage", async ({ expect }) => {
-//   const { all, exitCode } = await npmExec("tsp-client");
+test.concurrent("Usage", async ({ expect }) => {
+  const { all, exitCode } = await npmExec("tsp-client");
 
-//   expect(all).toContain("Usage");
-//   expect(exitCode).not.toBe(0);
-// });
+  expect(all).toContain("Usage");
+  expect(exitCode).not.toBe(0);
+});
 
-// test.concurrent("Convert keyvault/data-plane", async ({ expect }) => {
-//   await convert(expect, "specification/keyvault/data-plane/readme.md");
-// });
+test.concurrent("Convert keyvault/data-plane", async ({ expect }) => {
+  await convert(expect, "specification/keyvault/data-plane/readme.md");
+});
 
-// test.concurrent("Convert sphere/resource-manager", async ({ expect }) => {
-//   await convert(expect, "specification/sphere/resource-manager/readme.md");
-// });
+test.concurrent("Convert sphere/resource-manager", async ({ expect }) => {
+  await convert(expect, "specification/sphere/resource-manager/readme.md");
+});
 
 test.concurrent("Convert addons/resource-manager", async ({ expect }) => {
   await convert(expect, "specification/addons/resource-manager/readme.md");
