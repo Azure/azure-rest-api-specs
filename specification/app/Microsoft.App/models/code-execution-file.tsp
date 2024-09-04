@@ -23,6 +23,9 @@ model SessionResourceFile {
   @doc("The size of the file.")
   sizeInBytes: int64;
 
+  @doc("The date time when the file was uploaded.")
+  createdAt: utcDateTime;
+
   @doc("The date time when the file was last modified.")
   lastModifiedAt: utcDateTime;
 }

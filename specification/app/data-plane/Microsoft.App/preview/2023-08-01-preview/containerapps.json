@@ -410,7 +410,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/sessionPools/{sessionPoolName}/files/{filename}/content": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/sessionPools/{sessionPoolName}/files/{filename}/download": {
       "get": {
         "operationId": "SessionResourceFiles_GetFileContent",
         "description": "Get the content of the file.",
@@ -731,6 +731,31 @@
       "type": "object",
       "description": "The result containing the result of the code execution.",
       "properties": {
+        "codeInputType": {
+          "$ref": "#/definitions/CodeInputType",
+          "description": "The code input type of the code execution request."
+        },
+        "executionType": {
+          "$ref": "#/definitions/ExecutionType",
+          "description": "The execution type of the code execution request."
+        },
+        "networkStatus": {
+          "$ref": "#/definitions/NetworkStatus",
+          "description": "The network status of the code execution session."
+        },
+        "multiArrayStatus": {
+          "$ref": "#/definitions/MultiArrayStatus",
+          "description": "The multi array status of the code execution session."
+        },
+        "code": {
+          "type": "string",
+          "description": "The string of the code to execute, based on CodeInputType."
+        },
+        "timeoutInSeconds": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Code execution timeout in seconds."
+        },
         "id": {
           "type": "string",
           "description": "Session code execution id",
@@ -758,6 +783,12 @@
         }
       },
       "required": [
+        "codeInputType",
+        "executionType",
+        "networkStatus",
+        "multiArrayStatus",
+        "code",
+        "timeoutInSeconds",
         "id",
         "status",
         "stdout",
@@ -793,14 +824,27 @@
             "create"
           ]
         },
-        "properties": {
-          "$ref": "#/definitions/SessionResourceFileProperties",
-          "description": "Code execution file resource properties."
+        "sizeInBytes": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The size of the file."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The date time when the file was uploaded."
+        },
+        "lastModifiedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The date time when the file was last modified."
         }
       },
       "required": [
         "fileName",
-        "properties"
+        "sizeInBytes",
+        "createdAt",
+        "lastModifiedAt"
       ]
     },
     "SessionResourceFileCollection": {
@@ -818,31 +862,6 @@
       },
       "required": [
         "value"
-      ]
-    },
-    "SessionResourceFileProperties": {
-      "type": "object",
-      "description": "Code execution file resource properties.",
-      "properties": {
-        "fileName": {
-          "type": "string",
-          "description": "The name of the file."
-        },
-        "sizeInBytes": {
-          "type": "integer",
-          "format": "int64",
-          "description": "The size of the file."
-        },
-        "lastModifiedAt": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The date time when the file was last modified."
-        }
-      },
-      "required": [
-        "fileName",
-        "sizeInBytes",
-        "lastModifiedAt"
       ]
     },
     "Subscription": {
