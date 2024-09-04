@@ -56,6 +56,7 @@ directive:
 
 These are the global settings for the IoTOperations.
 
+
 ```yaml
 openapi-type: arm
 openapi-subtype: rpaas
