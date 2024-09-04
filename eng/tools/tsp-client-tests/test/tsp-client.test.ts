@@ -17,7 +17,7 @@ async function convert(expect: ExpectStatic, readme: string) {
   const specFolder = dirname(dirname(join(repoRoot, readme)));
   const outputFolder = join(
     specFolder,
-    "Test.TspClientConvert" + readme.includes("resource-manager") ? ".Management" : "",
+    "Test.TspClientConvert" + (readme.includes("resource-manager") ? ".Management" : ""),
   );
 
   try {
