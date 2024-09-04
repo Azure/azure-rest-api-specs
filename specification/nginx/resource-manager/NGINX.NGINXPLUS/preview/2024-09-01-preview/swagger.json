@@ -55,9 +55,9 @@
           {
             "in": "body",
             "name": "body",
-            "description": "The API Key object containing necessary fields (e.g. secret text, expiration date) to upsert the key.",
+            "description": "The API Key object containing fields (e.g. secret text, expiration date) to upsert the key.",
             "schema": {
-              "$ref": "#/definitions/NginxDeploymentApiKey"
+              "$ref": "#/definitions/NginxDeploymentApiKeyRequest"
             }
           },
           {
@@ -68,13 +68,13 @@
           "200": {
             "description": "The API Key was successfully created and returned.",
             "schema": {
-              "$ref": "#/definitions/NginxDeploymentApiKey"
+              "$ref": "#/definitions/NginxDeploymentApiKeyResponse"
             }
           },
           "201": {
             "description": "The API Key was successfully updated and returned.",
             "schema": {
-              "$ref": "#/definitions/NginxDeploymentApiKey"
+              "$ref": "#/definitions/NginxDeploymentApiKeyResponse"
             }
           },
           "default": {
@@ -166,7 +166,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/NginxDeploymentApiKey"
+              "$ref": "#/definitions/NginxDeploymentApiKeyResponse"
             }
           },
           "default": {
@@ -1724,14 +1724,25 @@
         }
       }
     },
-    "NginxDeploymentApiKeyProperties": {
+    "NginxDeploymentApiKeyRequestProperties": {
       "type": "object",
       "properties": {
         "secretText": {
           "type": "string",
           "format": "password",
-          "description": "Secret text to be used as a Dataplane API Key. This is a write only property that can never be read back, but the first three characters will be returned in the 'hint' property."
+          "description": "Secret text to be used as a Dataplane API Key. This is a write only property that can never be read back, but the first three characters will be returned in the 'hint' property.",
+          "x-ms-secret": true
         },
+        "endDateTime": {
+          "format": "date-time",
+          "type": "string",
+          "description": "The time after which this Dataplane API Key is no longer valid."
+        }
+      }
+    },
+    "NginxDeploymentApiKeyResponseProperties": {
+      "type": "object",
+      "properties": {
         "hint": {
           "type": "string",
           "readOnly": true,
@@ -1744,7 +1755,7 @@
         }
       }
     },
-    "NginxDeploymentApiKey": {
+    "NginxDeploymentApiKeyRequest": {
       "type": "object",
       "x-ms-azure-resource": true,
       "properties": {
@@ -1761,7 +1772,28 @@
           "readOnly": true
         },
         "properties": {
-          "$ref": "#/definitions/NginxDeploymentApiKeyProperties"
+          "$ref": "#/definitions/NginxDeploymentApiKeyRequestProperties"
+        }
+      }
+    },
+    "NginxDeploymentApiKeyResponse": {
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/NginxDeploymentApiKeyResponseProperties"
         }
       }
     },
@@ -1771,7 +1803,7 @@
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/NginxDeploymentApiKey"
+            "$ref": "#/definitions/NginxDeploymentApiKeyResponse"
           }
         },
         "nextLink": {
