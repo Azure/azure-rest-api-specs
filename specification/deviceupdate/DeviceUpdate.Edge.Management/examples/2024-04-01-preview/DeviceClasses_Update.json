@@ -1,0 +1,54 @@
+{
+  "parameters": {
+    "api-version": "2024-04-01-preview",
+    "deviceClassName": "ee13113a78e5f6029714911c6cbf5427fbcb9d9e",
+    "resourceGroupName": "test-rg",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "tagUpdatePayload": {
+      "tags": {
+        "tagKey": "tagValue"
+      }
+    },
+    "updateAccountName": "contoso"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "ee13113a78e5f6029714911c6cbf5427fbcb9d9e",
+        "type": "Microsoft.DeviceUpdate/updateaccounts/deviceClass",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Microsoft.DeviceUpdate/updateaccounts/contoso/deviceClasses/ee13113a78e5f6029714911c6cbf5427fbcb9d9e",
+        "location": "westus2",
+        "properties": {
+          "deviceClassId": "ee13113a78e5f6029714911c6cbf5427fbcb9d9e",
+          "deviceClassInfo": {
+            "compatibilityProperties": {
+              "manufacturer": "manufacturer1",
+              "model": "model1"
+            },
+            "updateProtocol": {
+              "id": 1
+            }
+          },
+          "highestVersionCompatibleUpdateId": {
+            "name": "updatename",
+            "provider": "myprovider",
+            "version": "1.0"
+          },
+          "installableUpdates": [
+            {
+              "name": "updatename",
+              "provider": "myprovider",
+              "version": "1.0"
+            }
+          ],
+          "provisioningState": "Succeeded"
+        },
+        "tags": {
+          "tagKey": "tagValue"
+        }
+      }
+    }
+  },
+  "operationId": "DeviceClasses_Update",
+  "title": "Updates Device Class"
+}

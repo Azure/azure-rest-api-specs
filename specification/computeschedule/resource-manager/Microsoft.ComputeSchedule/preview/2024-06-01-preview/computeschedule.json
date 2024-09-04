@@ -776,6 +776,24 @@
         "location"
       ]
     },
+    "NotificationType": {
+      "type": "string",
+      "description": "The type of notification we want to send for auto actions operations.",
+      "enum": [
+        "Email"
+      ],
+      "x-ms-enum": {
+        "name": "NotificationType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Email",
+            "value": "Email",
+            "description": "Notify through e-mail"
+          }
+        ]
+      }
+    },
     "OperationState": {
       "type": "string",
       "description": "Values that define the states of operations in Scheduled Actions",
@@ -840,7 +858,8 @@
             "description": "Operations that are blocked"
           }
         ]
-      }
+      },
+      "readOnly": true
     },
     "OptimizationPreference": {
       "type": "string",
@@ -1051,6 +1070,7 @@
               }
             ]
           },
+          "readOnly": true,
           "x-ms-enum.modelAsString": true
         },
         "timeZone": {
@@ -1339,24 +1359,6 @@
         "resources",
         "correlationid"
       ]
-    },
-    "Versions": {
-      "type": "string",
-      "description": "ComputeSchedule API versions",
-      "enum": [
-        "2024-06-01-preview"
-      ],
-      "x-ms-enum": {
-        "name": "Versions",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "2024-06-01-preview",
-            "value": "2024-06-01-preview",
-            "description": "2024-06-01-preview version"
-          }
-        ]
-      }
     }
   },
   "parameters": {}

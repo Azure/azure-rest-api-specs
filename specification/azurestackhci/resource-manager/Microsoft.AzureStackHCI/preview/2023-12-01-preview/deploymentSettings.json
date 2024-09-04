@@ -325,6 +325,11 @@
         "replicationMode": {
           "$ref": "#/definitions/ReplicationMode",
           "description": "Replication mode feature configuration for HCI cluster."
+        },
+        "hardwareClass": {
+          "$ref": "#/definitions/HardwareClass",
+          "description": "Hardware class of the cluster.",
+          "readOnly": true
         }
       }
     },
@@ -1061,6 +1066,31 @@
             "name": "RackAware",
             "value": "RackAware",
             "description": "RackAware cluster."
+          }
+        ]
+      }
+    },
+    "HardwareClass": {
+      "type": "string",
+      "description": "Hardware class of the cluster.",
+      "enum": [
+        "Small",
+        "Medium",
+        "Large"
+      ],
+      "x-ms-enum": {
+        "name": "HardwareClass",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Small",
+            "value": "Small",
+            "description": "Small cluster."
+          },
+          {
+            "name": "Medium",
+            "value": "Medium",
+            "description": "Medium cluster."
           }
         ]
       }

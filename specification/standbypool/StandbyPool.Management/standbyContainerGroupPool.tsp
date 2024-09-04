@@ -41,6 +41,10 @@ model StandbyContainerGroupPoolResourceProperties {
   @doc("Specifies container group properties of standby container group pools.")
   containerGroupProperties: ContainerGroupProperties;
 
+  @doc("Specifies zones of standby container group pools.")
+  @added(Microsoft.StandbyPool.Versions.`2024-08-01-preview`)
+  zones?: string[];
+
   @doc("The status of the last operation.")
   @visibility("read")
   provisioningState?: ProvisioningState;
@@ -72,7 +76,7 @@ model ContainerGroupProperties {
 @doc("Details of the ContainerGroupProfile.")
 model ContainerGroupProfile {
   @doc("Specifies container group profile id of standby container groups.")
-  id: ResourceIdentifier<[
+  id: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.ContainerInstance/containerGroupProfiles";
     }
@@ -84,16 +88,18 @@ model ContainerGroupProfile {
 
 @added(Microsoft.StandbyPool.Versions.`2023-12-01-preview`)
 @doc("Refill policy of standby pool")
-enum RefillPolicy {
+union RefillPolicy {
   @doc("A refill policy that standby pool is automatically refilled to maintain maxReadyCapacity.")
-  always,
+  always: "always",
+
+  string,
 }
 
 @added(Microsoft.StandbyPool.Versions.`2023-12-01-preview`)
 @doc("Subnet of container group")
 model Subnet {
   @doc("Specifies ARM resource id of the subnet.")
-  id: ResourceIdentifier<[
+  id: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.Network/virtualNetworks/subnets";
     }
@@ -106,9 +112,12 @@ interface StandbyContainerGroupPools {
   get is ArmResourceRead<StandbyContainerGroupPoolResource>;
   createOrUpdate is ArmResourceCreateOrUpdateAsync<StandbyContainerGroupPoolResource>;
   delete is ArmResourceDeleteWithoutOkAsync<StandbyContainerGroupPoolResource>;
-  update is ArmResourcePatchSync<
+  update is ArmCustomPatchSync<
     StandbyContainerGroupPoolResource,
-    StandbyContainerGroupPoolResourceProperties
+    Azure.ResourceManager.Foundations.ResourceUpdateModel<
+      StandbyContainerGroupPoolResource,
+      StandbyContainerGroupPoolResourceProperties
+    >
   >;
   listByResourceGroup is ArmResourceListByParent<StandbyContainerGroupPoolResource>;
   listBySubscription is ArmListBySubscription<StandbyContainerGroupPoolResource>;

@@ -194,7 +194,7 @@
         "tags": [
           "BillingContainers"
         ],
-        "description": "List BillingContainer resources by subscription",
+        "description": "List BillingContainer resources by subscription ID",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -2849,8 +2849,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/AssetProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "description": "The resource-specific properties for this resource."
         },
         "extendedLocation": {
           "$ref": "#/definitions/ExtendedLocation",
@@ -2876,8 +2875,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/AssetEndpointProfileProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "description": "The resource-specific properties for this resource."
         },
         "extendedLocation": {
           "$ref": "#/definitions/ExtendedLocation",
@@ -2968,6 +2966,29 @@
         "endpointProfileType"
       ]
     },
+    "AssetEndpointProfilePropertiesUpdate": {
+      "type": "object",
+      "description": "Defines the Asset Endpoint Profile properties.",
+      "properties": {
+        "targetAddress": {
+          "type": "string",
+          "format": "uri",
+          "description": "The local valid URI specifying the network address/DNS name of a southbound device. The scheme part of the targetAddress URI specifies the type of the device. The additionalConfiguration field holds further connector type specific configuration."
+        },
+        "endpointProfileType": {
+          "type": "string",
+          "description": "Defines the configuration for the connector type that is being used with the endpoint profile."
+        },
+        "authentication": {
+          "$ref": "#/definitions/AuthenticationUpdate",
+          "description": "Defines the client authentication mechanism to the server."
+        },
+        "additionalConfiguration": {
+          "type": "string",
+          "description": "Stringified JSON that contains connectivity type specific further configuration (e.g. OPC UA, Modbus, ONVIF)."
+        }
+      }
+    },
     "AssetEndpointProfileStatus": {
       "type": "object",
       "description": "Defines the asset endpoint profile status properties.",
@@ -3002,43 +3023,18 @@
     },
     "AssetEndpointProfileUpdate": {
       "type": "object",
-      "description": "The type used for update operations of the AssetEndpointProfile.",
+      "description": "Asset Endpoint Profile definition.",
       "properties": {
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
         "properties": {
-          "$ref": "#/definitions/AssetEndpointProfileUpdateProperties",
-          "x-ms-client-flatten": true
+          "$ref": "#/definitions/AssetEndpointProfilePropertiesUpdate",
+          "description": "The resource-specific properties for this resource."
         }
-      }
-    },
-    "AssetEndpointProfileUpdateProperties": {
-      "type": "object",
-      "description": "The updatable properties of the AssetEndpointProfile.",
-      "properties": {
-        "targetAddress": {
-          "type": "string",
-          "format": "uri",
-          "description": "The local valid URI specifying the network address/DNS name of a southbound device. The scheme part of the targetAddress URI specifies the type of the device. The additionalConfiguration field holds further connector type specific configuration."
-        },
-        "endpointProfileType": {
-          "type": "string",
-          "description": "Defines the configuration for the connector type that is being used with the endpoint profile."
-        },
-        "authentication": {
-          "$ref": "#/definitions/AuthenticationUpdate",
-          "description": "Defines the client authentication mechanism to the server."
-        },
-        "additionalConfiguration": {
-          "type": "string",
-          "description": "Stringified JSON that contains connectivity type specific further configuration (e.g. OPC UA, Modbus, ONVIF)."
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
         }
-      }
+      ]
     },
     "AssetListResult": {
       "type": "object",
@@ -3195,6 +3191,89 @@
         "assetEndpointProfileRef"
       ]
     },
+    "AssetPropertiesUpdate": {
+      "type": "object",
+      "description": "Defines the asset properties.",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Enabled/Disabled status of the asset."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Human-readable display name."
+        },
+        "description": {
+          "type": "string",
+          "description": "Human-readable description of the asset."
+        },
+        "manufacturer": {
+          "type": "string",
+          "description": "Asset manufacturer name."
+        },
+        "manufacturerUri": {
+          "type": "string",
+          "description": "Asset manufacturer URI."
+        },
+        "model": {
+          "type": "string",
+          "description": "Asset model name."
+        },
+        "productCode": {
+          "type": "string",
+          "description": "Asset product code."
+        },
+        "hardwareRevision": {
+          "type": "string",
+          "description": "Revision number of the hardware."
+        },
+        "softwareRevision": {
+          "type": "string",
+          "description": "Revision number of the software."
+        },
+        "documentationUri": {
+          "type": "string",
+          "description": "Reference to the documentation."
+        },
+        "serialNumber": {
+          "type": "string",
+          "description": "Asset serial number."
+        },
+        "attributes": {
+          "type": "object",
+          "description": "A set of key-value pairs that contain custom attributes set by the customer.",
+          "additionalProperties": {}
+        },
+        "defaultDatasetsConfiguration": {
+          "type": "string",
+          "description": "Stringified JSON that contains connector-specific default configuration for all datasets. Each dataset can have its own configuration that overrides the default settings here."
+        },
+        "defaultEventsConfiguration": {
+          "type": "string",
+          "description": "Stringified JSON that contains connector-specific default configuration for all events. Each event can have its own configuration that overrides the default settings here."
+        },
+        "defaultTopic": {
+          "$ref": "#/definitions/TopicUpdate",
+          "description": "Object that describes the default topic information for the asset."
+        },
+        "datasets": {
+          "type": "array",
+          "description": "Array of datasets that are part of the asset. Each dataset describes the data points that make up the set.",
+          "items": {
+            "$ref": "#/definitions/Dataset"
+          },
+          "x-ms-identifiers": []
+        },
+        "events": {
+          "type": "array",
+          "description": "Array of events that are part of the asset. Each event can have per-event configuration.",
+          "items": {
+            "$ref": "#/definitions/Event"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
     "AssetStatus": {
       "type": "object",
       "description": "Defines the asset status properties.",
@@ -3291,103 +3370,18 @@
     },
     "AssetUpdate": {
       "type": "object",
-      "description": "The type used for update operations of the Asset.",
+      "description": "Asset definition.",
       "properties": {
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
         "properties": {
-          "$ref": "#/definitions/AssetUpdateProperties",
-          "x-ms-client-flatten": true
+          "$ref": "#/definitions/AssetPropertiesUpdate",
+          "description": "The resource-specific properties for this resource."
         }
-      }
-    },
-    "AssetUpdateProperties": {
-      "type": "object",
-      "description": "The updatable properties of the Asset.",
-      "properties": {
-        "enabled": {
-          "type": "boolean",
-          "description": "Enabled/Disabled status of the asset."
-        },
-        "displayName": {
-          "type": "string",
-          "description": "Human-readable display name."
-        },
-        "description": {
-          "type": "string",
-          "description": "Human-readable description of the asset."
-        },
-        "manufacturer": {
-          "type": "string",
-          "description": "Asset manufacturer name."
-        },
-        "manufacturerUri": {
-          "type": "string",
-          "description": "Asset manufacturer URI."
-        },
-        "model": {
-          "type": "string",
-          "description": "Asset model name."
-        },
-        "productCode": {
-          "type": "string",
-          "description": "Asset product code."
-        },
-        "hardwareRevision": {
-          "type": "string",
-          "description": "Revision number of the hardware."
-        },
-        "softwareRevision": {
-          "type": "string",
-          "description": "Revision number of the software."
-        },
-        "documentationUri": {
-          "type": "string",
-          "description": "Reference to the documentation."
-        },
-        "serialNumber": {
-          "type": "string",
-          "description": "Asset serial number."
-        },
-        "attributes": {
-          "type": "object",
-          "description": "A set of key-value pairs that contain custom attributes set by the customer.",
-          "additionalProperties": {}
-        },
-        "defaultDatasetsConfiguration": {
-          "type": "string",
-          "description": "Stringified JSON that contains connector-specific default configuration for all datasets. Each dataset can have its own configuration that overrides the default settings here."
-        },
-        "defaultEventsConfiguration": {
-          "type": "string",
-          "description": "Stringified JSON that contains connector-specific default configuration for all events. Each event can have its own configuration that overrides the default settings here."
-        },
-        "defaultTopic": {
-          "$ref": "#/definitions/TopicUpdate",
-          "description": "Object that describes the default topic information for the asset."
-        },
-        "datasets": {
-          "type": "array",
-          "description": "Array of datasets that are part of the asset. Each dataset describes the data points that make up the set.",
-          "items": {
-            "$ref": "#/definitions/Dataset"
-          },
-          "x-ms-identifiers": []
-        },
-        "events": {
-          "type": "array",
-          "description": "Array of events that are part of the asset. Each event can have per-event configuration.",
-          "items": {
-            "$ref": "#/definitions/Event"
-          },
-          "x-ms-identifiers": []
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
         }
-      }
+      ]
     },
     "Authentication": {
       "type": "object",
@@ -3512,14 +3506,41 @@
         }
       }
     },
+    "Azure.ResourceManager.CommonTypes.SystemAssignedServiceIdentityUpdate": {
+      "type": "object",
+      "description": "Managed service identity (either system assigned, or none)",
+      "properties": {
+        "type": {
+          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/SystemAssignedServiceIdentityType",
+          "description": "The type of managed identity assigned to this resource."
+        }
+      }
+    },
+    "Azure.ResourceManager.CommonTypes.TrackedResourceUpdate": {
+      "type": "object",
+      "description": "The resource model definition for an Azure Resource Manager tracked top level resource which has 'tags' and a 'location'",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
+        }
+      ]
+    },
     "BillingContainer": {
       "type": "object",
       "description": "billingContainer Model as Azure resource whose sole purpose is to keep track of billables resources under a subscription.",
       "properties": {
         "properties": {
           "$ref": "#/definitions/BillingContainerProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "description": "The resource-specific properties for this resource."
         },
         "etag": {
           "type": "string",
@@ -3718,8 +3739,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/DeviceProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "description": "The resource-specific properties for this resource."
         },
         "etag": {
           "type": "string",
@@ -3903,26 +3923,9 @@
         }
       }
     },
-    "DeviceUpdate": {
+    "DevicePropertiesUpdate": {
       "type": "object",
-      "description": "The type used for update operations of the Device.",
-      "properties": {
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "properties": {
-          "$ref": "#/definitions/DeviceUpdateProperties",
-          "x-ms-client-flatten": true
-        }
-      }
-    },
-    "DeviceUpdateProperties": {
-      "type": "object",
-      "description": "The updatable properties of the Device.",
+      "description": "Defines the device properties.",
       "properties": {
         "enabled": {
           "type": "boolean",
@@ -3944,14 +3947,28 @@
         }
       }
     },
+    "DeviceUpdate": {
+      "type": "object",
+      "description": "Device Model as ARM resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DevicePropertiesUpdate",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
+        }
+      ]
+    },
     "DiscoveredAsset": {
       "type": "object",
       "description": "Discovered Asset definition.",
       "properties": {
         "properties": {
           "$ref": "#/definitions/DiscoveredAssetProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "description": "The resource-specific properties for this resource."
         },
         "extendedLocation": {
           "$ref": "#/definitions/ExtendedLocation",
@@ -3977,8 +3994,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/DiscoveredAssetEndpointProfileProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "description": "The resource-specific properties for this resource."
         },
         "extendedLocation": {
           "$ref": "#/definitions/ExtendedLocation",
@@ -4066,26 +4082,9 @@
         "version"
       ]
     },
-    "DiscoveredAssetEndpointProfileUpdate": {
+    "DiscoveredAssetEndpointProfilePropertiesUpdate": {
       "type": "object",
-      "description": "The type used for update operations of the DiscoveredAssetEndpointProfile.",
-      "properties": {
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "properties": {
-          "$ref": "#/definitions/DiscoveredAssetEndpointProfileUpdateProperties",
-          "x-ms-client-flatten": true
-        }
-      }
-    },
-    "DiscoveredAssetEndpointProfileUpdateProperties": {
-      "type": "object",
-      "description": "The updatable properties of the DiscoveredAssetEndpointProfile.",
+      "description": "Defines the Discovered Asset Endpoint Profile properties.",
       "properties": {
         "targetAddress": {
           "type": "string",
@@ -4118,6 +4117,21 @@
           "description": "An integer that is incremented each time the resource is modified."
         }
       }
+    },
+    "DiscoveredAssetEndpointProfileUpdate": {
+      "type": "object",
+      "description": "Discovered Asset Endpoint Profile definition.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DiscoveredAssetEndpointProfilePropertiesUpdate",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
+        }
+      ]
     },
     "DiscoveredAssetListResult": {
       "type": "object",
@@ -4233,26 +4247,9 @@
         "version"
       ]
     },
-    "DiscoveredAssetUpdate": {
+    "DiscoveredAssetPropertiesUpdate": {
       "type": "object",
-      "description": "The type used for update operations of the DiscoveredAsset.",
-      "properties": {
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "properties": {
-          "$ref": "#/definitions/DiscoveredAssetUpdateProperties",
-          "x-ms-client-flatten": true
-        }
-      }
-    },
-    "DiscoveredAssetUpdateProperties": {
-      "type": "object",
-      "description": "The updatable properties of the DiscoveredAsset.",
+      "description": "Defines the discovered asset properties.",
       "properties": {
         "discoveryId": {
           "type": "string",
@@ -4324,6 +4321,21 @@
           "x-ms-identifiers": []
         }
       }
+    },
+    "DiscoveredAssetUpdate": {
+      "type": "object",
+      "description": "Discovered Asset definition.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DiscoveredAssetPropertiesUpdate",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
+        }
+      ]
     },
     "DiscoveredDataPoint": {
       "type": "object",
@@ -4629,8 +4641,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/SchemaProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "description": "The resource-specific properties for this resource."
         }
       },
       "allOf": [
@@ -4717,8 +4728,11 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/SchemaRegistryProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "description": "The resource-specific properties for this resource."
+        },
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/SystemAssignedServiceIdentity",
+          "description": "The managed service identities assigned to this resource."
         }
       },
       "allOf": [
@@ -4787,10 +4801,6 @@
           "$ref": "#/definitions/ProvisioningState",
           "description": "Provisioning state of the resource.",
           "readOnly": true
-        },
-        "identity": {
-          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/SystemAssignedServiceIdentity",
-          "description": "The managed service identities assigned to this resource."
         }
       },
       "required": [
@@ -4798,26 +4808,9 @@
         "storageAccountContainerUrl"
       ]
     },
-    "SchemaRegistryUpdate": {
+    "SchemaRegistryPropertiesUpdate": {
       "type": "object",
-      "description": "The type used for update operations of the SchemaRegistry.",
-      "properties": {
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "properties": {
-          "$ref": "#/definitions/SchemaRegistryUpdateProperties",
-          "x-ms-client-flatten": true
-        }
-      }
-    },
-    "SchemaRegistryUpdateProperties": {
-      "type": "object",
-      "description": "The updatable properties of the SchemaRegistry.",
+      "description": "Defines the schema registry properties.",
       "properties": {
         "displayName": {
           "type": "string",
@@ -4826,12 +4819,27 @@
         "description": {
           "type": "string",
           "description": "Human-readable description of the schema registry."
-        },
-        "identity": {
-          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/SystemAssignedServiceIdentity",
-          "description": "The managed service identities assigned to this resource."
         }
       }
+    },
+    "SchemaRegistryUpdate": {
+      "type": "object",
+      "description": "Schema registry definition.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SchemaRegistryPropertiesUpdate",
+          "description": "The resource-specific properties for this resource."
+        },
+        "identity": {
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.SystemAssignedServiceIdentityUpdate",
+          "description": "The managed service identities assigned to this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
+        }
+      ]
     },
     "SchemaType": {
       "type": "string",
@@ -4857,8 +4865,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/SchemaVersionProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "description": "The resource-specific properties for this resource."
         }
       },
       "allOf": [

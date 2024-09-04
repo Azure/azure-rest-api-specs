@@ -147,6 +147,7 @@ model AccountSku {
 
 @doc("Parameters for creating or updating a trusted signing account.")
 model CodeSigningAccountPatch {
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing api"
   @doc("Resource tags.")
   tags?: Record<string>;
 

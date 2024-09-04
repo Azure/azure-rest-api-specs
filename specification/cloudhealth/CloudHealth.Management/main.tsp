@@ -724,7 +724,13 @@ alias TimestampQueryParam = {
 interface HealthModels {
   get is ArmResourceRead<HealthModel>;
   create is ArmResourceCreateOrUpdateAsync<HealthModel>;
-  update is ArmResourcePatchAsync<HealthModel, HealthModelProperties>;
+  update is ArmCustomPatchAsync<
+    HealthModel,
+    Azure.ResourceManager.Foundations.ResourceUpdateModel<
+      HealthModel,
+      HealthModelProperties
+    >
+  >;
   delete is ArmResourceDeleteWithoutOkAsync<HealthModel>;
   listByResourceGroup is ArmResourceListByParent<HealthModel>;
   listBySubscription is ArmListBySubscription<HealthModel>;
@@ -736,7 +742,7 @@ interface SignalDefinitions {
   createOrUpdate is ArmResourceCreateOrReplaceSync<SignalDefinition>;
   delete is ArmResourceDeleteSync<SignalDefinition>;
 
-  listByParent is ArmResourceListByParent<
+  listByHealthModel is ArmResourceListByParent<
     SignalDefinition,
     Azure.ResourceManager.Foundations.BaseParameters<SignalDefinition> &
       TimestampQueryParam
@@ -749,7 +755,7 @@ interface AuthenticationSettings {
   createOrUpdate is ArmResourceCreateOrReplaceSync<AuthenticationSetting>;
   delete is ArmResourceDeleteSync<AuthenticationSetting>;
 
-  listByParent is ArmResourceListByParent<AuthenticationSetting>;
+  listByHealthModel is ArmResourceListByParent<AuthenticationSetting>;
 }
 
 @armResourceOperations(Entity)
@@ -758,7 +764,7 @@ interface Entities {
   createOrUpdate is ArmResourceCreateOrReplaceSync<Entity>;
   delete is ArmResourceDeleteSync<Entity>;
 
-  listByParent is ArmResourceListByParent<
+  listByHealthModel is ArmResourceListByParent<
     Entity,
     Azure.ResourceManager.Foundations.BaseParameters<Entity> &
       TimestampQueryParam
@@ -771,7 +777,7 @@ interface Relationships {
   createOrUpdate is ArmResourceCreateOrReplaceSync<Relationship>;
   delete is ArmResourceDeleteSync<Relationship>;
 
-  listByParent is ArmResourceListByParent<
+  listByHealthModel is ArmResourceListByParent<
     Relationship,
     Azure.ResourceManager.Foundations.BaseParameters<Relationship> &
       TimestampQueryParam
@@ -784,7 +790,7 @@ interface DiscoveryRules {
   createOrUpdate is ArmResourceCreateOrReplaceSync<DiscoveryRule>;
   delete is ArmResourceDeleteSync<DiscoveryRule>;
 
-  listByParent is ArmResourceListByParent<
+  listByHealthModel is ArmResourceListByParent<
     DiscoveryRule,
     Azure.ResourceManager.Foundations.BaseParameters<DiscoveryRule> &
       TimestampQueryParam

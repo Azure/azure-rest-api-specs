@@ -29,7 +29,7 @@ title: AzureStackHCIClient
 description: Azure Stack HCI management service
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-preview-2024-06
+tag: package-preview-2024-07
 ```
 
 ## Suppression
@@ -40,6 +40,7 @@ directive:
     from:
       - arcSettings.json
       - clusters.json
+      - hci.json
       - extensions.json
       - operations.json
       - offers.json
@@ -59,6 +60,7 @@ suppressions:
     reason: Microsoft.AzureStackHCI was chosen over Microsoft.AzureStackHci or Microsoft.AzureStackHyperConvergedInfrastructure
     from:
       - arcSettings.json
+      - hci.json
       - clusters.json
       - extensions.json
       - operations.json
@@ -76,6 +78,7 @@ suppressions:
   - code: ResourceNameRestriction
     reason: ClusterName didn't have a pattern initially, adding the constraint now will cause a breaking change
     from:
+      - hci.json
       - deploymentSettings.json
       - clusters.json
       - securitySettings.json
@@ -102,7 +105,7 @@ suppressions:
   - code: PatchBodyParametersSchema
     reason: already used in GA api version, fixing it will cause breaking change
     from:
-      - clusters.json
+      - hci.json
 
   - code: PutResponseCodes
     reason: already used in GA api version, fixing it will cause breaking change
@@ -148,6 +151,10 @@ suppressions:
     reason: already working without the properties section, adding it will break polymorphism
     from:
       - edgeDevices.json
+      - hci.json
+      - updates.json
+      - deploymentSettings.json
+      - securitySettings.json
 
   - code: XmsPageableForListCalls
     reason: already used in GA api version, fixing it will cause breaking change
@@ -183,6 +190,7 @@ suppressions:
     reason: We have a dependency on other team which is already using these values, changing it will break backward compatibility
     from:
       - deploymentSettings.json
+      - hci.json
     where:
       - $.definitions.QosPolicyOverrides.properties.priorityValue8021Action_Cluster
       - $.definitions.QosPolicyOverrides.properties.priorityValue8021Action_SMB
@@ -191,11 +199,34 @@ suppressions:
       - $.definitions.SetInformationJobProperties.properties.priorityValue8021Action_SMB
       - $.definitions.SetInformationJobProperties.properties.bandwidthPercentage_SMB
 
+  - code: BodyTopLevelProperties
+    reason: The BodyTopLevelProperties rule is mistakenly flagging paged responses #722
+
   - code: TopLevelResourcesListBySubscription
     reason: It is reporting issue for proxy extension resource which doesn't have use case to ListBySubscription as this resource will always tied to one parent resource only. Additionally, there is a 1:1 relationship between HybridCompute Machines and AzureStackHCI VirtualMachineInstances.
 ```
 
+### Tag: package-preview-2024-07
 
+These settings apply only when `--tag=package-preview-2024-07` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2024-07'
+input-file:
+  - preview/2024-07-01-preview/hci.json
+  - preview/2024-07-01-preview/arcSettings.json
+  - preview/2024-07-01-preview/deploymentSettings.json
+  - preview/2024-07-01-preview/edgeDevices.json
+  - preview/2024-07-01-preview/extensions.json
+  - preview/2024-07-01-preview/offers.json
+  - ../operations/preview/2024-07-01-preview/operations.json
+  - preview/2024-07-01-preview/publishers.json
+  - preview/2024-07-01-preview/skus.json
+  - preview/2024-07-01-preview/updateRuns.json
+  - preview/2024-07-01-preview/updateSummaries.json
+  - preview/2024-07-01-preview/updates.json
+  - preview/2024-07-01-preview/securitySettings.json
+  - preview/2024-06-01-preview/edgeNodePool.json
+```
 ### Tag: package-preview-2024-06
 
 These settings apply only when `--tag=package-preview-2024-06` is specified on the command line.
@@ -217,9 +248,6 @@ input-file:
   - preview/2024-03-01-preview/updates.json
   - preview/2024-03-01-preview/securitySettings.json
 ```
-
----
-
 
 ### Tag: package-2024-04
 
@@ -276,7 +304,7 @@ This is not used by Autorest itself.
 swagger-to-sdk:
   - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-java
-  - repo: azure-sdk-for-go
+  #- repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_azurestackhci']
