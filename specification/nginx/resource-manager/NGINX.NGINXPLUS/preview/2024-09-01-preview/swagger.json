@@ -539,7 +539,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/NginxConfiguration"
+              "$ref": "#/definitions/NginxConfigurationResponse"
             }
           },
           "default": {
@@ -592,7 +592,7 @@
             "name": "body",
             "description": "The NGINX configuration",
             "schema": {
-              "$ref": "#/definitions/NginxConfiguration"
+              "$ref": "#/definitions/NginxConfigurationRequest"
             }
           }
         ],
@@ -600,13 +600,13 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/NginxConfiguration"
+              "$ref": "#/definitions/NginxConfigurationResponse"
             }
           },
           "201": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/NginxConfiguration"
+              "$ref": "#/definitions/NginxConfigurationResponse"
             }
           },
           "default": {
@@ -1261,7 +1261,7 @@
         }
       }
     },
-    "NginxConfigurationProtectedFile": {
+    "NginxConfigurationProtectedFileRequest": {
       "type": "object",
       "properties": {
         "content": {
@@ -1269,6 +1269,21 @@
           "x-ms-secret": true,
           "description": "The content of the protected file. This value is a PUT only value. If you perform a GET request on this value, it will be empty because it is a protected file."
         },
+        "virtualPath": {
+          "type": "string",
+          "description": "The virtual path of the protected file.",
+          "example": "/etc/nginx/protected-file.cert"
+        },
+        "contentHash": {
+          "type": "string",
+          "description": "The hash of the content of the file. This value is used to determine if the file has changed.",
+          "example": "sha256:1234567890ABCDEF1234567890ABCDEF1234567890ABCDEF1234567890ABCDEF"
+        }
+      }
+    },
+    "NginxConfigurationProtectedFileResponse": {
+      "type": "object",
+      "properties": {
         "virtualPath": {
           "type": "string",
           "description": "The virtual path of the protected file.",
@@ -1296,7 +1311,7 @@
         }
       }
     },
-    "NginxConfigurationProperties": {
+    "NginxConfigurationResponseProperties": {
       "type": "object",
       "properties": {
         "provisioningState": {
@@ -1312,7 +1327,7 @@
         "protectedFiles": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/NginxConfigurationProtectedFile"
+            "$ref": "#/definitions/NginxConfigurationProtectedFileResponse"
           },
           "x-ms-identifiers": []
         },
@@ -1324,7 +1339,35 @@
         }
       }
     },
-    "NginxConfiguration": {
+    "NginxConfigurationRequestProperties": {
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState"
+        },
+        "files": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NginxConfigurationFile"
+          },
+          "x-ms-identifiers": []
+        },
+        "protectedFiles": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NginxConfigurationProtectedFileRequest"
+          },
+          "x-ms-identifiers": []
+        },
+        "package": {
+          "$ref": "#/definitions/NginxConfigurationPackage"
+        },
+        "rootFile": {
+          "type": "string"
+        }
+      }
+    },
+    "NginxConfigurationResponse": {
       "type": "object",
       "x-ms-azure-resource": true,
       "properties": {
@@ -1341,7 +1384,35 @@
           "readOnly": true
         },
         "properties": {
-          "$ref": "#/definitions/NginxConfigurationProperties"
+          "$ref": "#/definitions/NginxConfigurationResponseProperties"
+        },
+        "location": {
+          "type": "string"
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "readOnly": true
+        }
+      }
+    },
+    "NginxConfigurationRequest": {
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/NginxConfigurationRequestProperties"
         },
         "location": {
           "type": "string"
@@ -1360,7 +1431,7 @@
           "description": "Results of a list operation.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/NginxConfiguration"
+            "$ref": "#/definitions/NginxConfigurationResponse"
           }
         },
         "nextLink": {
@@ -1891,7 +1962,7 @@
             "protectedFiles": {
               "type": "array",
               "items": {
-                "$ref": "#/definitions/NginxConfigurationProtectedFile"
+                "$ref": "#/definitions/NginxConfigurationProtectedFileRequest"
               },
               "x-ms-identifiers": []
             },
