@@ -1208,7 +1208,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.ContainerInstance/ngroups": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ContainerInstance/nGroups": {
       "get": {
         "operationId": "NGroups_List",
         "x-ms-examples": {},
@@ -1626,12 +1626,12 @@
     },
     "EmptyDirVolume": {
       "description": "The empty directory volume.",
-      "type": "string",
+      "type": "object",
       "properties": {}
     },
     "SecretVolume": {
       "description": "The secret volume.",
-      "type": "string",
+      "type": "object",
       "additionalProperties": {
         "type": "string"
       }
@@ -1641,7 +1641,6 @@
       "required": [
         "repository"
       ],
-      "type": "object",
       "properties": {
         "directory": {
           "description": "Target directory name. Must not contain or start with '..'.  If '.' is supplied, the volume directory will be the git repository.  Otherwise, if specified, the volume will contain the git repository in the subdirectory with the given name.",
@@ -2513,6 +2512,10 @@
         "content": {
           "type": "string",
           "description": "The content of the log."
+        },
+        "nextLink": {
+          "description": "The link used to get the next page of logs.",
+          "type": "string"
         }
       }
     },
@@ -2952,6 +2955,10 @@
         "ccePolicy": {
           "type": "string",
           "description": "The base64 encoded confidential compute enforcement policy"
+        },
+        "nextLink": {
+          "description": "The link used to get the next page of operations.",
+          "type": "string"
         }
       }
     },
@@ -2959,6 +2966,18 @@
       "description": "The container probe, for liveness or readiness.",
       "type": "object",
       "properties": {
+        "resourceType": {
+          "type": "string",
+          "description": "The type of resource the sku is applied to."
+        },
+        "sku": {
+          "type": "string",
+          "description": "The sku of the resource type"
+        },
+        "skuCapacity": {
+          "type": "string",
+          "description": "The number of container groups of the nGroups."
+        },
         "nextLink": {
           "description": "The link used to get the next page of operations.",
           "type": "string"
@@ -3165,7 +3184,6 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9]$",
       "description": "The name of the virtual network.",
       "x-ms-parameter-location": "method"
     },
