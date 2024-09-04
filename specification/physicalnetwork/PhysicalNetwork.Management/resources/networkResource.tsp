@@ -73,7 +73,6 @@ model LocationCollectionParameters<T extends Azure.ResourceManager.Foundations.R
 @get
 @listsResource(TResource)
 @segmentOf(TResource)
-@armRenameListByOperation(TResource, TParentName, TParentFriendlyName) // This must come before @armResourceList!
 @armResourceList(TResource)
 op ArmLocResourceListByParent<
   TResource extends Azure.ResourceManager.Foundations.Resource,

@@ -49,7 +49,7 @@
   "paths": {
     "/providers/Microsoft.PhysicalNetwork/locations/{location}/networkDevices": {
       "get": {
-        "operationId": "NetworkDevices_ListByResourceGroup",
+        "operationId": "NetworkDevices_List",
         "tags": [
           "NetworkDevices"
         ],
@@ -74,11 +74,6 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "NetworkDevices_ListByResourceGroup": {
-            "$ref": "./examples/NetworkDevices_ListByResourceGroup.json"
           }
         },
         "x-ms-pageable": {
@@ -220,6 +215,10 @@
           "type": "string",
           "description": "The device's rack location"
         },
+        "serviceTreeId": {
+          "type": "string",
+          "description": "The device owner's Service Tree Id"
+        },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
           "description": "Provisioning state",
@@ -238,7 +237,8 @@
         "cluster",
         "cloudType",
         "deploymentType",
-        "dcRackLocation"
+        "dcRackLocation",
+        "serviceTreeId"
       ]
     },
     "NetworkDeviceResource": {
@@ -247,8 +247,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/NetworkDeviceProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "description": "The resource-specific properties for this resource."
         }
       },
       "allOf": [
