@@ -295,14 +295,13 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/ContainerGroup"
-            }
-          },
           "202": {
-            "description": "Delete started."
+            "description": "Delete started.",
+            "headers": {
+                "location": {
+                  "type": "string"
+                }
+              }
           },
           "204": {
             "description": "No Content - the specified container group was not found."
@@ -418,7 +417,12 @@
         ],
         "responses": {
           "202": {
-            "description": "Started - the container group is starting."
+            "description": "Started - the container group is starting.",
+            "headers": {
+                "location": {
+                  "type": "string"
+                }
+            }
           },
           "204": {
             "description": "Started - the container group is already running or starting."
@@ -821,11 +825,13 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK"
-          },
           "202": {
-            "description": "Delete started."
+            "description": "Delete started.",
+            "headers": {
+                "location": {
+                  "type": "string"
+                }
+            }
           },
           "204": {
             "description": "No Content - the specified container group was not found."
@@ -997,7 +1003,12 @@
               }
             },
             "202": {
-              "description": "nGroup update started"
+              "description": "nGroup update started",
+              "headers": {
+                "location": {
+                  "type": "string"
+                }
+              }
             },
             "default": {
               "description": "Error response describing why the operation failed.",
@@ -1028,11 +1039,13 @@
             }
           ],
           "responses": {
-            "200": {
-              "description": "OK"
-            },
             "202": {
-              "description": "Accepted"
+              "description": "Accepted",
+              "headers": {
+                "location": {
+                  "type": "string"
+                }
+              }
             },
             "204": {
               "description": "No Content"
@@ -1069,7 +1082,12 @@
         ],
         "responses": {
           "202": {
-            "description": "Started - the container groups are starting."
+            "description": "Started - the container groups are starting.",
+            "headers": {
+              "location": {
+                "type": "string"
+              }
+            }
           },
           "204": {
             "description": "Started - the container groups are already running or starting."
