@@ -386,3 +386,18 @@ See configuration in [readme.ruby.md](./readme.ruby.md)
 ## TypeScript
 
 See configuration in [readme.typescript](./readme.typescript.md)
+
+## Suppress Warnings
+``` yaml
+suppressions:
+  - code: EvenSegmentedPathForPutOperation
+    from: privateLinkScopes.json
+    where: $.paths[/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridCompute/machines/{machineName}/providers/Microsoft.HybridCompute/networkConfigurations/current"]
+    reason: False positive
+suppressions:
+  - code: BodyTopLevelProperties
+    from: HybridCompute.json
+    where: $.definitions.AgentVersion
+    reason: Previously approved and released, breaking change
+
+```
