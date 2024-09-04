@@ -46,6 +46,9 @@ model NetworkDeviceProperties {
   @doc("The device's rack location")
   dcRackLocation: string;
 
+  @doc("The device owner's Service Tree Id")
+  serviceTreeId: string;
+
   @doc("Provisioning state")
   @visibility("read")
   provisioningState?: ProvisioningState;
