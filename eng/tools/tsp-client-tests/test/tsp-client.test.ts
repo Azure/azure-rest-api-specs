@@ -79,3 +79,23 @@ async function convert(expect: ExpectStatic, readme: string) {
 test.concurrent("Convert addons/resource-manager", async ({ expect }) => {
   await convert(expect, "specification/addons/resource-manager/readme.md");
 });
+
+test.concurrent("Convert adhybridhealthservice/resource-manager", async ({ expect }) => {
+  await convert(expect, "specification/adhybridhealthservice/resource-manager/readme.md");
+});
+
+test.concurrent("Convert adp/resource-manager", async ({ expect }) => {
+  await convert(expect, "specification/adp/resource-manager/readme.md");
+});
+
+test.concurrent("Convert advisor/resource-manager", async ({ expect }) => {
+  await convert(expect, "specification/adp/resource-manager/readme.md");
+});
+
+test.concurrent("Convert agrifood/data-plane", async ({ expect }) => {
+  await convert(expect, "specification/agrifood/data-plane/readme.md");
+});
+
+test.concurrent("Convert agrifood/resource-manager", async ({ expect }) => {
+  await convert(expect, "specification/agrifood/resource-manager/readme.md");
+});
