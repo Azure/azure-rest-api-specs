@@ -673,6 +673,19 @@
         }
       }
     },
+    "CipherSuites": {
+      "description": "Describes valid TLS cipher suites.",
+      "type": "object",
+      "properties": {
+        "suites": {
+          "description": "List of TLS Cipher Suites that are supported by App Service.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
     "CloningInfo": {
       "description": "Information needed for cloning operation.",
       "required": [
@@ -3814,7 +3827,8 @@
           "description": "Either a function group or a function name is required. For additional information see https://aka.ms/flexconsumption/alwaysready."
         },
         "instanceCount": {
-          "type": "number",
+          "type": "integer",
+          "format": "int32",
           "description": "Sets the number of 'Always Ready' instances for a given function group or a specific function. For additional information see https://aka.ms/flexconsumption/alwaysready."
         }
       }
@@ -3832,11 +3846,13 @@
         },
         "maximumInstanceCount": {
           "description": "The maximum number of instances for the function app.",
-          "type": "number"
+          "type": "integer",
+          "format": "int32"
         },
         "instanceMemoryMB": {
           "description": "Set the amount of memory allocated to each instance of the function app in MB. CPU and network bandwidth are allocated proportionally.",
-          "type": "number"
+          "type": "integer",
+          "format": "int32"
         },
         "triggers": {
           "type": "object",
@@ -3847,7 +3863,8 @@
               "description": "Scale and concurrency settings for the HTTP trigger.",
               "properties": {
                 "perInstanceConcurrency": {
-                  "type": "number",
+                  "type": "integer",
+                  "format": "int32",
                   "description": "The maximum number of concurrent HTTP trigger invocations per instance."
                 }
               }
