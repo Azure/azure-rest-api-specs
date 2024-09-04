@@ -377,11 +377,11 @@
           "Creates a completion based on Azure Search vector data, previous assistant message and user-assigned managed identity.": {
             "$ref": "./examples/chat_completions_azure_search_advanced.json"
           },
-          "Creates a completion for the provided AML index.": {
-            "$ref": "./examples/chat_completions_aml_index.json"
-          },
           "Creates a completion for the provided Azure Cosmos DB.": {
             "$ref": "./examples/chat_completions_cosmos_db.json"
+          },
+          "Creates a completion for the provided Mongo DB.": {
+            "$ref": "./examples/chat_completions_mongo_db.json"
           },
           "Creates a completion for the provided Elasticsearch.": {
             "$ref": "./examples/chat_completions_elasticsearch.json"
@@ -3613,6 +3613,9 @@
                           "type": "number"
                         }
                       }
+                    },
+                    "usage": {
+                      "$ref": "#/components/schemas/completionUsage"
                     }
                   }
                 },
@@ -4236,165 +4239,6 @@
           "refusal"
         ]
       },
-      "chatCompletionRequestMessageRole": {
-        "type": "string",
-        "enum": [
-          "system",
-          "user",
-          "assistant",
-          "tool",
-          "function"
-        ],
-        "description": "The role of the messages author.",
-        "x-ms-enum": {
-          "name": "ChatCompletionRequestMessageRole",
-          "modelAsString": true,
-          "values": [
-            {
-              "value": "system",
-              "description": "The message author role is system."
-            },
-            {
-              "value": "user",
-              "description": "The message author role is user."
-            },
-            {
-              "value": "assistant",
-              "description": "The message author role is assistant."
-            },
-            {
-              "value": "tool",
-              "description": "The message author role is tool."
-            },
-            {
-              "value": "function",
-              "description": "Deprecated. The message author role is function."
-            }
-          ]
-        }
-      },
-      "chatCompletionRequestMessageSystem": {
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/chatCompletionRequestMessage"
-          },
-          {
-            "type": "object",
-            "properties": {
-              "content": {
-                "type": "string",
-                "description": "The contents of the message.",
-                "nullable": true
-              }
-            }
-          }
-        ],
-        "required": [
-          "content"
-        ]
-      },
-      "chatCompletionRequestMessageUser": {
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/chatCompletionRequestMessage"
-          },
-          {
-            "type": "object",
-            "properties": {
-              "content": {
-                "oneOf": [
-                  {
-                    "type": "string",
-                    "description": "The contents of the message."
-                  },
-                  {
-                    "type": "array",
-                    "description": "An array of content parts with a defined type, each can be of type `text` or `image_url` when passing in images. You can pass multiple images by adding multiple `image_url` content parts. Image input is only supported when using the `gpt-4-visual-preview` model.",
-                    "minimum": 1,
-                    "items": {
-                      "$ref": "#/components/schemas/chatCompletionRequestMessageContentPart"
-                    }
-                  }
-                ],
-                "nullable": true
-              }
-            }
-          }
-        ],
-        "required": [
-          "content"
-        ]
-      },
-      "chatCompletionRequestMessageContentPart": {
-        "type": "object",
-        "properties": {
-          "type": {
-            "$ref": "#/components/schemas/chatCompletionRequestMessageContentPartType"
-          }
-        },
-        "discriminator": {
-          "propertyName": "type",
-          "mapping": {
-            "text": "#/components/schemas/chatCompletionRequestMessageContentPartText",
-            "image_url": "#/components/schemas/chatCompletionRequestMessageContentPartImage"
-          }
-        },
-        "required": [
-          "type"
-        ]
-      },
-      "chatCompletionRequestMessageContentPartType": {
-        "type": "string",
-        "enum": [
-          "text",
-          "image_url"
-        ],
-        "description": "The type of the content part.",
-        "x-ms-enum": {
-          "name": "ChatCompletionRequestMessageContentPartType",
-          "modelAsString": true,
-          "values": [
-            {
-              "value": "text",
-              "description": "The content part type is text."
-            },
-            {
-              "value": "image_url",
-              "description": "The content part type is image_url."
-            }
-          ]
-        }
-      },
-      "chatCompletionRequestMessageAssistant": {
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/chatCompletionRequestMessage"
-          },
-          {
-            "type": "object",
-            "properties": {
-              "content": {
-                "type": "string",
-                "description": "The contents of the message.",
-                "nullable": true
-              },
-              "tool_calls": {
-                "type": "array",
-                "description": "The tool calls generated by the model, such as function calls.",
-                "items": {
-                  "$ref": "#/components/schemas/chatCompletionMessageToolCall"
-                }
-              },
-              "context": {
-                "$ref": "#/components/schemas/azureChatExtensionsMessageContext"
-              }
-            }
-          }
-        ],
-        "required": [
-          "content"
-        ]
-      },
       "azureChatExtensionConfiguration": {
         "required": [
           "type"
@@ -4410,9 +4254,9 @@
           "propertyName": "type",
           "mapping": {
             "azure_search": "#/components/schemas/azureSearchChatExtensionConfiguration",
-            "azure_ml_index": "#/components/schemas/azureMachineLearningIndexChatExtensionConfiguration",
             "azure_cosmos_db": "#/components/schemas/azureCosmosDBChatExtensionConfiguration",
             "elasticsearch": "#/components/schemas/elasticsearchChatExtensionConfiguration",
+            "mongo_db": "#/components/schemas/mongoDBChatExtensionConfiguration",
             "pinecone": "#/components/schemas/pineconeChatExtensionConfiguration"
           }
         }
@@ -4422,9 +4266,9 @@
         "description": "  A representation of configuration data for a single Azure OpenAI chat extension. This will be used by a chat\n  completions request that should use Azure OpenAI chat extensions to augment the response behavior.\n  The use of this configuration is compatible only with Azure OpenAI.",
         "enum": [
           "azure_search",
-          "azure_ml_index",
           "azure_cosmos_db",
           "elasticsearch",
+          "mongo_db",
           "pinecone"
         ],
         "x-ms-enum": {
@@ -4437,11 +4281,6 @@
               "description": "Represents the use of Azure Search as an Azure OpenAI chat extension."
             },
             {
-              "name": "azureMachineLearningIndex",
-              "value": "azure_ml_index",
-              "description": "Represents the use of Azure Machine Learning index as an Azure OpenAI chat extension."
-            },
-            {
               "name": "azureCosmosDB",
               "value": "azure_cosmos_db",
               "description": "Represents the use of Azure Cosmos DB as an Azure OpenAI chat extension."
@@ -4450,6 +4289,11 @@
               "name": "elasticsearch",
               "value": "elasticsearch",
               "description": "Represents the use of Elasticsearch® index as an Azure OpenAI chat extension."
+            },
+            {
+              "name": "mongoDB",
+              "value": "mongo_db",
+              "description": "Represents the use of Mongo DB as an Azure OpenAI chat extension."
             },
             {
               "name": "pinecone",
@@ -4528,10 +4372,6 @@
             "description": "The configured strictness of the search relevance filtering. The higher of strictness, the higher of the precision but lower recall of the answer.",
             "format": "int32"
           },
-          "role_information": {
-            "type": "string",
-            "description": "Give the model instructions about how it should behave and any context it should reference when generating a response. You can describe the assistant's personality and tell it how to format responses. There's a 100 token limit for it, and it counts against the overall token limit."
-          },
           "endpoint": {
             "type": "string",
             "description": "The absolute endpoint path for the Azure Search resource to use.",
@@ -4562,6 +4402,9 @@
               },
               {
                 "$ref": "#/components/schemas/onYourDataDeploymentNameVectorizationSource"
+              },
+              {
+                "$ref": "#/components/schemas/onYourDataIntegratedVectorizationSource"
               }
             ]
           },
@@ -4660,103 +4503,6 @@
           ]
         }
       },
-      "azureMachineLearningIndexChatExtensionConfiguration": {
-        "required": [
-          "parameters"
-        ],
-        "description": "A specific representation of configurable options for Azure Machine Learning vector index when using it as an Azure\nOpenAI chat extension.",
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/azureChatExtensionConfiguration"
-          },
-          {
-            "properties": {
-              "parameters": {
-                "$ref": "#/components/schemas/azureMachineLearningIndexChatExtensionParameters"
-              }
-            }
-          }
-        ],
-        "x-ms-discriminator-value": "azure_ml_index"
-      },
-      "azureMachineLearningIndexChatExtensionParameters": {
-        "required": [
-          "authentication",
-          "name",
-          "project_resource_id",
-          "version"
-        ],
-        "type": "object",
-        "properties": {
-          "authentication": {
-            "oneOf": [
-              {
-                "$ref": "#/components/schemas/onYourDataAccessTokenAuthenticationOptions"
-              },
-              {
-                "$ref": "#/components/schemas/onYourDataSystemAssignedManagedIdentityAuthenticationOptions"
-              },
-              {
-                "$ref": "#/components/schemas/onYourDataUserAssignedManagedIdentityAuthenticationOptions"
-              }
-            ]
-          },
-          "top_n_documents": {
-            "type": "integer",
-            "description": "The configured top number of documents to feature for the configured query.",
-            "format": "int32"
-          },
-          "max_search_queries": {
-            "type": "integer",
-            "description": "The max number of rewritten queries should be send to search provider for one user message. If not specified, the system will decide the number of queries to send.",
-            "format": "int32"
-          },
-          "allow_partial_result": {
-            "type": "boolean",
-            "default": false,
-            "description": "If specified as true, the system will allow partial search results to be used and the request fails if all the queries fail. If not specified, or specified as false, the request will fail if any search query fails."
-          },
-          "in_scope": {
-            "type": "boolean",
-            "description": "Whether queries should be restricted to use of indexed data."
-          },
-          "strictness": {
-            "maximum": 5,
-            "minimum": 1,
-            "type": "integer",
-            "description": "The configured strictness of the search relevance filtering. The higher of strictness, the higher of the precision but lower recall of the answer.",
-            "format": "int32"
-          },
-          "role_information": {
-            "type": "string",
-            "description": "Give the model instructions about how it should behave and any context it should reference when generating a response. You can describe the assistant's personality and tell it how to format responses. There's a 100 token limit for it, and it counts against the overall token limit."
-          },
-          "project_resource_id": {
-            "type": "string",
-            "description": "The resource ID of the Azure Machine Learning project."
-          },
-          "name": {
-            "type": "string",
-            "description": "The Azure Machine Learning vector index name."
-          },
-          "version": {
-            "type": "string",
-            "description": "The version of the Azure Machine Learning vector index."
-          },
-          "filter": {
-            "type": "string",
-            "description": "Search filter. Only supported if the Azure Machine Learning vector index is of type AzureSearch."
-          },
-          "include_contexts": {
-            "type": "array",
-            "description": "The included properties of the output context. If not specified, the default value is `citations` and `intent`.",
-            "items": {
-              "$ref": "#/components/schemas/onYourDataContextProperty"
-            }
-          }
-        },
-        "description": "Parameters for the Azure Machine Learning vector index chat extension."
-      },
       "azureCosmosDBChatExtensionConfiguration": {
         "required": [
           "parameters"
@@ -4815,10 +4561,6 @@
             "type": "integer",
             "description": "The configured strictness of the search relevance filtering. The higher of strictness, the higher of the precision but lower recall of the answer.",
             "format": "int32"
-          },
-          "role_information": {
-            "type": "string",
-            "description": "Give the model instructions about how it should behave and any context it should reference when generating a response. You can describe the assistant's personality and tell it how to format responses. There's a 100 token limit for it, and it counts against the overall token limit."
           },
           "database_name": {
             "type": "string",
@@ -4958,10 +4700,6 @@
             "description": "The configured strictness of the search relevance filtering. The higher of strictness, the higher of the precision but lower recall of the answer.",
             "format": "int32"
           },
-          "role_information": {
-            "type": "string",
-            "description": "Give the model instructions about how it should behave and any context it should reference when generating a response. You can describe the assistant's personality and tell it how to format responses. There's a 100 token limit for it, and it counts against the overall token limit."
-          },
           "endpoint": {
             "type": "string",
             "description": "The endpoint of Elasticsearch®.",
@@ -5060,6 +4798,150 @@
           ]
         }
       },
+      "mongoDBChatExtensionConfiguration": {
+        "required": [
+          "parameters"
+        ],
+        "description": "A specific representation of configurable options for Mongo DB when using it as an Azure OpenAI chat\nextension.",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/azureChatExtensionConfiguration"
+          },
+          {
+            "properties": {
+              "parameters": {
+                "$ref": "#/components/schemas/mongoDBChatExtensionParameters"
+              }
+            }
+          }
+        ],
+        "x-ms-discriminator-value": "mongo_db"
+      },
+      "mongoDBChatExtensionParameters": {
+        "required": [
+          "authentication",
+          "app_name",
+          "collection_name",
+          "database_name",
+          "endpoint",
+          "embedding_dependency",
+          "fields_mapping",
+          "index_name"
+        ],
+        "type": "object",
+        "properties": {
+          "authentication": {
+            "$ref": "#/components/schemas/onYourDataUsernameAndPasswordAuthenticationOptions"
+          },
+          "top_n_documents": {
+            "type": "integer",
+            "description": "The configured top number of documents to feature for the configured query.",
+            "format": "int32"
+          },
+          "max_search_queries": {
+            "type": "integer",
+            "description": "The max number of rewritten queries should be send to search provider for one user message. If not specified, the system will decide the number of queries to send.",
+            "format": "int32"
+          },
+          "allow_partial_result": {
+            "type": "boolean",
+            "default": false,
+            "description": "If specified as true, the system will allow partial search results to be used and the request fails if all the queries fail. If not specified, or specified as false, the request will fail if any search query fails."
+          },
+          "in_scope": {
+            "type": "boolean",
+            "description": "Whether queries should be restricted to use of indexed data."
+          },
+          "strictness": {
+            "maximum": 5,
+            "minimum": 1,
+            "type": "integer",
+            "description": "The configured strictness of the search relevance filtering. The higher of strictness, the higher of the precision but lower recall of the answer.",
+            "format": "int32"
+          },
+          "endpoint": {
+            "type": "string",
+            "description": "The name of the Mongo DB cluster endpoint."
+          },
+          "database_name": {
+            "type": "string",
+            "description": "The name of the Mongo DB database."
+          },
+          "collection_name": {
+            "type": "string",
+            "description": "The name of the Mongo DB Collection."
+          },
+          "app_name": {
+            "type": "string",
+            "description": "The name of the Mongo DB Application."
+          },
+          "index_name": {
+            "type": "string",
+            "description": "The The name of the Mongo DB index."
+          },
+          "fields_mapping": {
+            "$ref": "#/components/schemas/mongoDBFieldMappingOptions"
+          },
+          "embedding_dependency": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/onYourDataEndpointVectorizationSource"
+              },
+              {
+                "$ref": "#/components/schemas/onYourDataDeploymentNameVectorizationSource"
+              }
+            ]
+          },
+          "include_contexts": {
+            "type": "array",
+            "description": "The included properties of the output context. If not specified, the default value is `citations` and `intent`.",
+            "items": {
+              "$ref": "#/components/schemas/onYourDataContextProperty"
+            }
+          }
+        },
+        "description": "Parameters to use when configuring Azure OpenAI On Your Data chat extensions when using Mongo DB."
+      },
+      "mongoDBFieldMappingOptions": {
+        "required": [
+          "content_fields",
+          "vector_fields"
+        ],
+        "type": "object",
+        "properties": {
+          "title_field": {
+            "type": "string",
+            "description": "The name of the index field to use as a title."
+          },
+          "url_field": {
+            "type": "string",
+            "description": "The name of the index field to use as a URL."
+          },
+          "filepath_field": {
+            "type": "string",
+            "description": "The name of the index field to use as a filepath."
+          },
+          "content_fields": {
+            "type": "array",
+            "description": "The names of index fields that should be treated as content.",
+            "items": {
+              "type": "string"
+            }
+          },
+          "content_fields_separator": {
+            "type": "string",
+            "description": "The separator pattern that content fields should use."
+          },
+          "vector_fields": {
+            "type": "array",
+            "description": "The names of fields that represent vector data.",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "description": "Optional settings to control how fields are processed when using a configured Mongo DB resource."
+      },
       "pineconeChatExtensionConfiguration": {
         "required": [
           "parameters"
@@ -5117,10 +4999,6 @@
             "type": "integer",
             "description": "The configured strictness of the search relevance filtering. The higher of strictness, the higher of the precision but lower recall of the answer.",
             "format": "int32"
-          },
-          "role_information": {
-            "type": "string",
-            "description": "Give the model instructions about how it should behave and any context it should reference when generating a response. You can describe the assistant's personality and tell it how to format responses. There's a 100 token limit for it, and it counts against the overall token limit."
           },
           "environment": {
             "type": "string",
@@ -5198,7 +5076,8 @@
             "encoded_api_key": "#/components/schemas/onYourDataEncodedApiKeyAuthenticationOptions",
             "access_token": "#/components/schemas/onYourDataAccessTokenAuthenticationOptions",
             "system_assigned_managed_identity": "#/components/schemas/onYourDataSystemAssignedManagedIdentityAuthenticationOptions",
-            "user_assigned_managed_identity": "#/components/schemas/onYourDataUserAssignedManagedIdentityAuthenticationOptions"
+            "user_assigned_managed_identity": "#/components/schemas/onYourDataUserAssignedManagedIdentityAuthenticationOptions",
+            "username_and_password": "#/components/schemas/onYourDataUsernameAndPasswordAuthenticationOptions"
           }
         }
       },
@@ -5242,7 +5121,8 @@
           "encoded_api_key",
           "access_token",
           "system_assigned_managed_identity",
-          "user_assigned_managed_identity"
+          "user_assigned_managed_identity",
+          "username_and_password"
         ],
         "x-ms-enum": {
           "name": "OnYourDataAuthenticationType",
@@ -5282,6 +5162,11 @@
               "name": "userAssignedManagedIdentity",
               "value": "user_assigned_managed_identity",
               "description": "Authentication via user-assigned managed identity."
+            },
+            {
+              "name": "usernameAndPassword",
+              "value": "username_and_password",
+              "description": "Authentication via username and password."
             }
           ]
         }
@@ -5420,6 +5305,31 @@
         ],
         "x-ms-discriminator-value": "user_assigned_managed_identity"
       },
+      "onYourDataUsernameAndPasswordAuthenticationOptions": {
+        "required": [
+          "username",
+          "password"
+        ],
+        "description": "The authentication options for Azure OpenAI On Your Data when using a username and a password.",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/onYourDataAuthenticationOptions"
+          },
+          {
+            "properties": {
+              "username": {
+                "type": "string",
+                "description": "The username to use for authentication."
+              },
+              "password": {
+                "type": "string",
+                "description": "The password. to use for authentication."
+              }
+            }
+          }
+        ],
+        "x-ms-discriminator-value": "username_and_password"
+      },
       "onYourDataVectorizationSource": {
         "required": [
           "type"
@@ -5436,6 +5346,7 @@
           "mapping": {
             "endpoint": "#/components/schemas/onYourDataEndpointVectorizationSource",
             "deployment_name": "#/components/schemas/onYourDataDeploymentNameVectorizationSource",
+            "integrated": "#/components/schemas/onYourDataIntegratedVectorizationSource",
             "model_id": "#/components/schemas/onYourDataModelIdVectorizationSource"
           }
         }
@@ -5446,6 +5357,7 @@
         "enum": [
           "endpoint",
           "deployment_name",
+          "integrated",
           "model_id"
         ],
         "x-ms-enum": {
@@ -5461,6 +5373,11 @@
               "name": "deploymentName",
               "value": "deployment_name",
               "description": "Represents an Ada model deployment name to use. This model deployment must be in the same Azure OpenAI resource, but\nOn Your Data will use this model deployment via an internal call rather than a public one, which enables vector\nsearch even in private networks."
+            },
+            {
+              "name": "integrated",
+              "value": "integrated",
+              "description": "Represents the integrated vectorizer defined within the search resource."
             },
             {
               "name": "modelId",
@@ -5532,6 +5449,15 @@
         ],
         "x-ms-discriminator-value": "deployment_name"
       },
+      "onYourDataIntegratedVectorizationSource": {
+        "description": "Represents the integrated vectorizer defined within the search resource.",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/onYourDataVectorizationSource"
+          }
+        ],
+        "x-ms-discriminator-value": "integrated"
+      },
       "onYourDataModelIdVectorizationSource": {
         "required": [
           "model_id"
@@ -5602,6 +5528,11 @@
           "chunk_id": {
             "type": "string",
             "description": "The chunk ID of the citation."
+          },
+          "rerank_score": {
+            "type": "number",
+            "description": "The rerank score of the retrieved document.",
+            "format": "double"
           }
         },
         "description": "citation information for a chat completions response message."
@@ -5635,11 +5566,6 @@
               "original_search_score": {
                 "type": "number",
                 "description": "The original search score of the retrieved document.",
-                "format": "double"
-              },
-              "rerank_score": {
-                "type": "number",
-                "description": "The rerank score of the retrieved document.",
                 "format": "double"
               },
               "filter_reason": {
