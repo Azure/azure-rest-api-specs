@@ -63,7 +63,6 @@ input-file:
   - Microsoft.DBforPostgreSQL/stable/2024-08-01/Replicas.json
   - Microsoft.DBforPostgreSQL/stable/2024-08-01/ServerLogs.json
   - Microsoft.DBforPostgreSQL/stable/2024-08-01/ServerStartStopRestart.json
-  - Microsoft.DBforPostgreSQL/stable/2024-08-01/TuningOptions.json
   - Microsoft.DBforPostgreSQL/stable/2024-08-01/ThreatProtection.json
   - Microsoft.DBforPostgreSQL/stable/2024-08-01/VirtualEndpoints.json
   - Microsoft.DBforPostgreSQL/stable/2024-08-01/VirtualNetwork.json
