@@ -54,12 +54,7 @@ async function convert(expect: ExpectStatic, readme: string) {
     expect(stdout).toContain("TypeSpec compiler");
     expect(exitCode, all).toBe(0);
   } finally {
-    try {
-      await rm(outputFolder, { recursive: true, force: true });
-    } catch {
-      // retry
-      await rm(outputFolder, { recursive: true, force: true });
-    }
+    await rm(outputFolder, { recursive: true, force: true });
   }
 
   // Ensure outputFolder is deleted
@@ -94,7 +89,7 @@ test.concurrent("Convert adp/resource-manager", async ({ expect }) => {
 });
 
 test.concurrent("Convert advisor/resource-manager", async ({ expect }) => {
-  await convert(expect, "specification/adp/resource-manager/readme.md");
+  await convert(expect, "specification/advisor/resource-manager/readme.md");
 });
 
 test.concurrent("Convert agrifood/data-plane", async ({ expect }) => {
