@@ -26,7 +26,7 @@ These are the global settings for the WebPubSub API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2024-04-01-preview
+tag: package-2024-03-01
 ```
 
 ### Suppression
