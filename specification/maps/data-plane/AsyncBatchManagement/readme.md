@@ -24,13 +24,13 @@ To see additional help and options, run:
 
 These are the global settings for Asynchronous Batch Management Client.
 
-``` yaml
+```yaml
 title: AsynchronousBatchManagementClient
 openapi-type: data-plane
 tag: package-preview-2024-07
 add-credentials: true
 credential-default-policy-type: BearerTokenCredentialPolicy
-credential-scopes: 'https://atlas.microsoft.com/.default'
+credential-scopes: "https://atlas.microsoft.com/.default"
 track2: true
 verbose: true
 sdk-integration: true
@@ -43,7 +43,7 @@ modelerfour:
 
 These settings apply only when `--tag=package-preview-2024-07` is specified on the command line.
 
-``` yaml $(tag) == 'package-preview-2024-07'
+```yaml $(tag) == 'package-preview-2024-07'
 input-file:
   - preview/2024-07-01-preview/asyncBatchManagement.json
 ```
