@@ -392,7 +392,9 @@ See configuration in [readme.typescript](./readme.typescript.md)
 suppressions:
   - code: EvenSegmentedPathForPutOperation
     from: privateLinkScopes.json
-    where: $.paths[/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridCompute/machines/{machineName}/providers/Microsoft.HybridCompute/networkConfigurations/current"]
+    reason: False positive
+  - code: TagsAreNotAllowedForProxyResources
+    from: HybridCompute.json
     reason: False positive
   - code: BodyTopLevelProperties
     from: HybridCompute.json
