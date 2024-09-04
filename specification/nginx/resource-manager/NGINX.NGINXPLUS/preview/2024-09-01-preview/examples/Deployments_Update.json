@@ -1,6 +1,6 @@
 {
   "parameters": {
-    "api-version": "2024-06-01-preview",
+    "api-version": "2024-09-01-preview",
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "resourceGroupName": "myResourceGroup",
     "deploymentName": "myDeployment",
@@ -30,7 +30,6 @@
         "properties": {
           "provisioningState": "Succeeded",
           "nginxVersion": "nginx-1.19.6",
-          "managedResourceGroup": "myManagedResourceGroup",
           "ipAddress": "1.1.1.1",
           "networkProfile": {
             "frontEndIPConfiguration": {
@@ -82,7 +81,8 @@
                 "wafNginxVersion": "4.815.0"
               }
             }
-          }
+          },
+          "dataplaneApiEndpoint": "mynginx-75b3bf22a555.eastus2.nginxaas.net"
         }
       }
     },
@@ -98,7 +98,6 @@
         "properties": {
           "provisioningState": "Accepted",
           "nginxVersion": "nginx-1.19.6",
-          "managedResourceGroup": "myManagedResourceGroup",
           "networkProfile": {
             "frontEndIPConfiguration": {
               "publicIPAddresses": [
@@ -128,7 +127,8 @@
             "webApplicationFirewallSettings": {
               "activationState": "Enabled"
             }
-          }
+          },
+          "dataplaneApiEndpoint": "mynginx-75b3bf22a555.eastus2.nginxaas.net"
         }
       }
     }
