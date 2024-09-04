@@ -1772,7 +1772,75 @@
           }
         }
       }
-    }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/NewRelic.Observability/monitors/{monitorName}/resubscribe": {
+        "post": {
+          "tags": [
+            "Resubscribe"
+          ],
+          "summary": "Resubscribe the NewRelic Organization.",
+          "operationId": "Monitors_Resubscribe",
+          "consumes": [
+            "application/json"
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            },
+            {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            },
+            {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            },
+            {
+              "$ref": "#/parameters/MonitorNameParameter"
+            },
+            {
+              "in": "body",
+              "name": "body",
+              "description": "Resubscribe Properties",
+              "schema": {
+                "$ref": "#/definitions/ResubscribeProperties"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Success",
+              "schema": {
+                "$ref": "#/definitions/NewRelicMonitorResource"
+              }
+            },
+            "202": {
+              "headers": {
+                "Location": {
+                  "type": "string"
+                }
+              },
+              "description": "Accepted"
+            },
+            "default": {
+              "description": "Default error response.",
+              "schema": {
+                "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              }
+            }
+          },
+          "x-ms-long-running-operation": true,
+          "x-ms-long-running-operation-options": {
+            "final-state-via": "azure-async-operation"
+          },
+          "x-ms-examples": {
+            "Monitors_Resubscribe": {
+              "$ref": "./examples/Monitors_Resubscribe.json"
+            }
+          }
+        }
+      }
   },
   "definitions": {
     "AccountCreationSource": {
@@ -3034,6 +3102,36 @@
         ]
       }
     },
+    "ResubscribeProperties": {
+      "description": "Resubscribe Properties",
+      "type": "object",
+      "properties": {
+        "planId": {
+          "description": "Newly selected plan Id to create the new Marketplace subscription for Resubscribe",
+          "type": "string"
+        },
+        "termId": {
+          "description": "Newly selected term Id to create the new Marketplace subscription for Resubscribe",
+          "type": "string"
+        },
+        "subscriptionId": {
+          "description": "Newly selected Azure Subscription Id in which the new Marketplace subscription will be created for Resubscribe",
+          "type": "string"
+        },
+        "resourceGroup": {
+          "description": "Newly selected Azure resource group in which the new Marketplace subscription will be created for Resubscribe",
+          "type": "string"
+        },
+        "organizationId": {
+          "description": "Organization Id of the NewRelic Organization that needs to be resubscribed",
+          "type": "string"
+        },
+        "publisherId": {
+          "description": "Publisher Id of the NewRelic offer that needs to be resubscribed",
+          "type": "string"
+        }
+      }
+    },
     "SecureString": {
       "type": "string",
       "description": "Credential string.",
@@ -3325,6 +3423,15 @@
     }
   },
   "parameters": {
+    "MonitorNameParameter": {
+      "in": "path",
+      "name": "monitorName",
+      "description": "Monitor resource name",
+      "required": true,
+      "type": "string",
+      "pattern": "^.*$",
+      "x-ms-parameter-location": "method"
+    },
     "AccountIdParameter": {
       "name": "accountId",
       "in": "query",
