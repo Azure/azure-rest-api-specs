@@ -474,7 +474,7 @@
           },
           {
             "name": "x-ms-access-soft-deleted-resources",
-            "description": "Optional, used to get soft deleted volume groups only if set to true. If it is not set for a soft deleted volume groups, it will return 404. If set for active volume groups, it will return 404.",
+            "description": "Optional, returns only soft deleted volume groups if set to true. If set to false or if not specified, returns only active volume groups.",
             "in": "header",
             "required": false,
             "type": "string",
@@ -672,7 +672,7 @@
           },
           {
             "name": "deleteType",
-            "description": "Optional. Specifies that the delete operation should be purge for soft delete volume group. This cannot be used with active volume group delete. The value of deleteType can only be 'permanent'.",
+            "description": "Optional. Specifies that the delete operation should be a permanent delete for the soft deleted volume group. The value of deleteType can only be 'permanent'.",
             "in": "query",
             "required": false,
             "type": "string",
@@ -963,7 +963,7 @@
           },
           {
             "name": "deleteType",
-            "description": "Optional. Specifies that the delete operation should be purge for soft delete volume group. This cannot be used with active volume group delete. The value of deleteType can only be 'permanent'.",
+            "description": "Optional. Specifies that the delete operation should be a permanent delete for the soft deleted volume group. The value of deleteType can only be 'permanent'.",
             "in": "query",
             "required": false,
             "type": "string",
@@ -1149,7 +1149,7 @@
           },
           {
             "name": "x-ms-access-soft-deleted-resources",
-            "description": "Optional, used to get soft deleted volumes if set to true. If it is not set for a soft deleted volumes, it will return 404. If set for active volumes, it will return 404.",
+            "description": "Optional, returns only soft deleted volumes if set to true. If set to false or if not specified, returns only active volumes.",
             "in": "header",
             "required": false,
             "type": "string",
@@ -2248,7 +2248,7 @@
           "description": "A boolean indicating whether or not Data Integrity Check is enabled"
         },
         "deleteRetentionPolicy": {
-          "description": "The retention policy for the soft deleted resources.",
+          "description": "The retention policy for the soft deleted volume group and its associated resources.",
           "$ref": "#/definitions/DeleteRetentionPolicy"
         }
       }
@@ -2381,7 +2381,7 @@
           "description": "A boolean indicating whether or not Data Integrity Check is enabled"
         },
         "deleteRetentionPolicy": {
-          "description": "The retention policy for the soft deleted resources.",
+          "description": "The retention policy for the soft deleted volume group and its associated resources",
           "$ref": "#/definitions/DeleteRetentionPolicy"
         }
       }
