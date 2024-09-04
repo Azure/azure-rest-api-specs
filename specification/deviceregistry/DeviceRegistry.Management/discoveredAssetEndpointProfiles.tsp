@@ -62,14 +62,27 @@ model DiscoveredAssetEndpointProfileProperties {
   provisioningState?: ProvisioningState;
 }
 
+// The updateable properties of the Discovered Asset Endpoint Profile.
+// This is a workaround to fix the patch payload that otherwise will expose the 'location' field (not present in patch),
+// since otherwise it extends the ARM TrackedResource type.
+alias DiscoveredAssetEndpointProfilePropertiesUpdate = {
+  ...OptionalProperties<UpdateableProperties<DiscoveredAssetEndpointProfileProperties>>;
+};
+
 @armResourceOperations
 @added(Versions.v2024_09_01_preview)
 interface DiscoveredAssetEndpointProfiles {
   get is ArmResourceRead<DiscoveredAssetEndpointProfile>;
   createOrReplace is ArmResourceCreateOrReplaceAsync<DiscoveredAssetEndpointProfile>;
-  update is ArmResourcePatchAsync<
+  // Using 'ArmCustomPatchAsync' instead of 'ArmResourcePatchAsync' to define the correct patch payload for the resource.
+  // This is a workaround to fix the patch payload that otherwise will expose the 'location' field (not present in patch),
+  // since otherwise it extends the ARM TrackedResource type.
+  update is ArmCustomPatchAsync<
     DiscoveredAssetEndpointProfile,
-    DiscoveredAssetEndpointProfileProperties
+    Azure.ResourceManager.Foundations.ResourceUpdateModel<
+      DiscoveredAssetEndpointProfile,
+      DiscoveredAssetEndpointProfilePropertiesUpdate
+    >
   >;
   delete is ArmResourceDeleteWithoutOkAsync<DiscoveredAssetEndpointProfile>;
   listByResourceGroup is ArmResourceListByParent<DiscoveredAssetEndpointProfile>;

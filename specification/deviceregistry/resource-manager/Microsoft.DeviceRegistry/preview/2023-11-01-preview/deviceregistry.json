@@ -939,9 +939,27 @@
         "targetAddress"
       ]
     },
-    "AssetEndpointProfilePropertiesUpdate": {
+    "AssetEndpointProfileUpdate": {
       "type": "object",
-      "description": "Defines the Asset Endpoint Profile properties.",
+      "description": "The type used for update operations of the AssetEndpointProfile.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/AssetEndpointProfileUpdateProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "AssetEndpointProfileUpdateProperties": {
+      "type": "object",
+      "description": "The updatable properties of the AssetEndpointProfile.",
       "properties": {
         "targetAddress": {
           "type": "string",
@@ -961,22 +979,6 @@
           "description": "Stringified JSON that contains connectivity type specific further configuration (e.g. OPC UA, Modbus, ONVIF)."
         }
       }
-    },
-    "AssetEndpointProfileUpdate": {
-      "type": "object",
-      "description": "Asset Endpoint Profile definition.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/AssetEndpointProfilePropertiesUpdate",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
-        }
-      ]
     },
     "AssetListResult": {
       "type": "object",
@@ -1122,9 +1124,65 @@
         "assetEndpointProfileUri"
       ]
     },
-    "AssetPropertiesUpdate": {
+    "AssetStatus": {
       "type": "object",
-      "description": "Defines the asset properties.",
+      "description": "Defines the asset status properties.",
+      "properties": {
+        "errors": {
+          "type": "array",
+          "description": "Array object to transfer and persist errors that originate from the Edge.",
+          "items": {
+            "$ref": "#/definitions/AssetStatusError"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "version": {
+          "type": "integer",
+          "format": "int32",
+          "description": "A read only incremental counter indicating the number of times the configuration has been modified from the perspective of the current actual (Edge) state of the Asset. Edge would be the only writer of this value and would sync back up to the cloud. In steady state, this should equal version.",
+          "readOnly": true
+        }
+      }
+    },
+    "AssetStatusError": {
+      "type": "object",
+      "description": "Defines the asset status error properties.",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Error code for classification of errors (ex: 400, 404, 500, etc.).",
+          "readOnly": true
+        },
+        "message": {
+          "type": "string",
+          "description": "Human readable helpful error message to provide additional context for error (ex: “capability Id 'foo' does not exist”).",
+          "readOnly": true
+        }
+      }
+    },
+    "AssetUpdate": {
+      "type": "object",
+      "description": "The type used for update operations of the Asset.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/AssetUpdateProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "AssetUpdateProperties": {
+      "type": "object",
+      "description": "The updatable properties of the Asset.",
       "properties": {
         "assetType": {
           "type": "string",
@@ -1204,60 +1262,6 @@
           "x-ms-identifiers": []
         }
       }
-    },
-    "AssetStatus": {
-      "type": "object",
-      "description": "Defines the asset status properties.",
-      "properties": {
-        "errors": {
-          "type": "array",
-          "description": "Array object to transfer and persist errors that originate from the Edge.",
-          "items": {
-            "$ref": "#/definitions/AssetStatusError"
-          },
-          "readOnly": true,
-          "x-ms-identifiers": []
-        },
-        "version": {
-          "type": "integer",
-          "format": "int32",
-          "description": "A read only incremental counter indicating the number of times the configuration has been modified from the perspective of the current actual (Edge) state of the Asset. Edge would be the only writer of this value and would sync back up to the cloud. In steady state, this should equal version.",
-          "readOnly": true
-        }
-      }
-    },
-    "AssetStatusError": {
-      "type": "object",
-      "description": "Defines the asset status error properties.",
-      "properties": {
-        "code": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Error code for classification of errors (ex: 400, 404, 500, etc.).",
-          "readOnly": true
-        },
-        "message": {
-          "type": "string",
-          "description": "Human readable helpful error message to provide additional context for error (ex: “capability Id 'foo' does not exist”).",
-          "readOnly": true
-        }
-      }
-    },
-    "AssetUpdate": {
-      "type": "object",
-      "description": "Asset definition.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/AssetPropertiesUpdate",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
-        }
-      ]
     },
     "DataPoint": {
       "type": "object",

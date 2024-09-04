@@ -369,11 +369,27 @@ model MessageSchemaReference {
   schemaVersion: string;
 }
 
+// The updateable properties of the Asset.
+// This is a workaround to fix the patch payload that otherwise will expose the 'location' field (not present in patch),
+// since otherwise it extends the ARM TrackedResource type.
+alias AssetPropertiesUpdate = {
+  ...OptionalProperties<UpdateableProperties<AssetProperties>>;
+};
+
 @armResourceOperations
 interface Assets {
   get is ArmResourceRead<Asset>;
   createOrReplace is ArmResourceCreateOrReplaceAsync<Asset>;
-  update is ArmResourcePatchAsync<Asset, AssetProperties>;
+  // Using 'ArmCustomPatchAsync' instead of 'ArmResourcePatchAsync' to define the correct patch payload for the resource.
+  // This is a workaround to fix the patch payload that otherwise will expose the 'location' field (not present in patch),
+  // since otherwise it extends the ARM TrackedResource type.
+  update is ArmCustomPatchAsync<
+    Asset,
+    Azure.ResourceManager.Foundations.ResourceUpdateModel<
+      Asset,
+      AssetPropertiesUpdate
+    >
+  >;
   delete is ArmResourceDeleteWithoutOkAsync<Asset>;
   listByResourceGroup is ArmResourceListByParent<Asset>;
   listBySubscription is ArmListBySubscription<Asset>;
