@@ -68,6 +68,58 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Web/staticSiteRegions": {
+      "get": {
+        "summary": "Get a list of available Static Site regions.",
+        "description": "Description for Get a list of available Static Site regions.",
+        "operationId": "ListStaticSiteRegions",
+        "parameters": [
+          {
+            "name": "sku",
+            "in": "query",
+            "description": "Name of SKU used to filter the regions.",
+            "type": "string",
+            "enum": [
+              "Free",
+              "Standard",
+              "Dedicated"
+            ],
+            "x-ms-enum": {
+              "name": "SkuName",
+              "modelAsString": true
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/StaticSiteRegionCollection"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Get a list of available Static Site regions": {
+            "$ref": "./examples/ListStaticSiteRegions.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Web/staticSites": {
       "get": {
         "tags": [
@@ -5513,6 +5565,50 @@
           "description": "Link to next page of resources.",
           "type": "string",
           "readOnly": true
+        }
+      }
+    },
+    "StaticSiteRegionCollection": {
+      "description": "Collection of Static Site regions.",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Collection of resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/StaticSiteRegion"
+          }
+        },
+        "nextLink": {
+          "description": "Link to next page of resources.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "StaticSiteRegion": {
+      "description": "Static site region.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "./CommonDefinitions.json#/definitions/ProxyOnlyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "StaticSiteRegion resource specific properties",
+          "type": "object",
+          "properties": {
+            "displayName": {
+              "description": "Display name for region.",
+              "type": "string",
+              "readOnly": true
+            }
+          },
+          "x-ms-client-flatten": true
         }
       }
     }
