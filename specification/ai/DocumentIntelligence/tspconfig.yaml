@@ -1,56 +1,60 @@
+parameters:
+  "service-dir":
+    "default": "sdk/documentintelligence"
+
 emit:
-- '@azure-tools/typespec-autorest'
+  - "@azure-tools/typespec-autorest"
+  # - "@azure-tools/typespec-csharp",
+  # - "@azure-tools/typespec-python",
+  # - "@azure-tools/typespec-ts"
 linter:
   extends:
-  - '@azure-tools/typespec-azure-rulesets/data-plane'
+    - "@azure-tools/typespec-azure-rulesets/data-plane"
 options:
-  '@azure-tools/typespec-autorest':
-    azure-resource-provider-folder: data-plane
-    emit-lro-options: none
-    emitter-output-dir: '{project-root}/..'
-    examples-directory: examples
+  "@azure-tools/typespec-autorest":
+    azure-resource-provider-folder: "data-plane"
+    emit-lro-options: "none"
+    emitter-output-dir: "{project-root}/.."
+    examples-directory: "examples"
     omit-unreachable-types: true
-    output-file: '{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/DocumentIntelligence.json'
-  '@azure-tools/typespec-csharp':
+    output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/DocumentIntelligence.json"
+  "@azure-tools/typespec-python":
+    package-pprint-name: "Azure AI Document Intelligence"
+    package-dir: "azure-ai-documentintelligence"
+    package-name: "{package-dir}"
+    package-version: 1.0.0b2
     flavor: azure
-    model-namespace: false
-    namespace: Azure.AI.DocumentIntelligence
-    package-dir: Azure.AI.DocumentIntelligence
-  '@azure-tools/typespec-java':
-    custom-types-subpackage: implementation.models
-    customization-class: customization/src/main/java/DocumentIntelligenceCustomizations.java
+    generate-test: true
+    generate-sample: true
+    examples-dir: "{project-root}/examples"
+  "@azure-tools/typespec-java":
+    package-dir: "azure-ai-documentintelligence"
+    namespace: "com.azure.ai.documentintelligence"
     enable-sync-stack: true
-    flavor: azure
+    custom-types-subpackage: "implementation.models"
     generate-tests: false
-    namespace: com.azure.ai.documentintelligence
-    package-dir: azure-ai-documentintelligence
+    customization-class: customization/src/main/java/DocumentIntelligenceCustomizations.java
     polling:
-      buildClassifier:
-        final-type: com.azure.ai.documentintelligence.models.DocumentClassifierDetails
       buildDocumentModel:
         final-type: com.azure.ai.documentintelligence.models.DocumentModelDetails
+      buildClassifier:
+        final-type: com.azure.ai.documentintelligence.models.DocumentClassifierDetails
       composeModel:
         final-type: com.azure.ai.documentintelligence.models.DocumentModelDetails
       copyModelTo:
         final-type: com.azure.ai.documentintelligence.models.DocumentModelDetails
-  '@azure-tools/typespec-python':
     flavor: azure
-    package-dir: azure-ai-documentintelligence
-    package-name: '{package-dir}'
-    package-pprint-name: Azure AI Document Intelligence
-    package-version: 1.0.0b2
-    generate-test: true
-    generate-sample: true
-    examples-dir: "{project-root}/examples"
-  '@azure-tools/typespec-ts':
+  "@azure-tools/typespec-csharp":
+    package-dir: "Azure.AI.DocumentIntelligence"
+    namespace: "Azure.AI.DocumentIntelligence"
+    model-namespace: false
     flavor: azure
-    generateMetadata: true
-    package-dir: ai-document-intelligence-rest
-    packageDetails:
-      description: Document Intelligence Rest Client
-      name: '@azure-rest/ai-document-intelligence'
-      version: 1.0.0-beta.1
+  "@azure-tools/typespec-ts":
     title: DocumentIntelligence
-parameters:
-  service-dir:
-    default: sdk/documentintelligence
+    package-dir: "ai-document-intelligence-rest"
+    generateMetadata: true
+    packageDetails:
+      name: "@azure-rest/ai-document-intelligence"
+      description: "Document Intelligence Rest Client"
+      version: "1.0.0-beta.1"
+    flavor: azure
