@@ -17,7 +17,7 @@ model Fleet is TrackedResource<FleetProperties> {
   @doc("The name of the Compute Fleet")
   @key("fleetName")
   @segment("fleets")
-  @pattern("^[^_\\W][\\w-._]{0,79}(?<![-.])$")
+  @pattern("^[^_\\W][\\w\\-._]{0,79}(?<![-.])$")
   @path
   name: string;
 
@@ -237,7 +237,7 @@ interface Fleets {
     ...ProviderNamespace<Fleet>,
     ...ResourceNameParameter<
       Fleet,
-      NamePattern = "^[^_\\W][\\w-._]{0,79}(?<![-.])$"
+      NamePattern = "^[^_\\W][\\w\\-._]{0,79}(?<![-.])$"
     >,
   ): ArmResponse<VirtualMachineScaleSetListResult> | ErrorResponse;
 }
