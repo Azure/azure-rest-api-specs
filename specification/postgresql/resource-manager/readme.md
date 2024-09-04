@@ -28,45 +28,45 @@ These are the global settings for the PostgreSQL API.
 title: PostgreSQLManagementClient
 description: The Microsoft Azure management API provides create, read, update, and delete functionality for Azure PostgreSQL resources including servers, databases, firewall rules, VNET rules, security alert policies, log files and configurations with new business model.
 openapi-type: arm
-tag: package-flexibleserver-2024-04-01
+tag: package-flexibleserver-2024-08-01
 ```
 
 ``` yaml $(package-flexibleservers)
-tag: package-flexibleserver-2024-04-01
+tag: package-flexibleserver-2024-08-01
 ```
 
 ``` yaml $(package-singleservers)
 tag: package-2020-01-01
 ```
 
-### Tag: package-flexibleserver-2024-04-01
+### Tag: package-flexibleserver-2024-08-01
 
-These settings apply only when `--tag=package-flexibleserver-2024-04-01` is specified on the command line.
+These settings apply only when `--tag=package-flexibleserver-2024-08-01` is specified on the command line.
 
-``` yaml $(tag) == 'package-flexibleserver-2024-04-01'
+``` yaml $(tag) == 'package-flexibleserver-2024-08-01'
 input-file:
-  - Microsoft.DBforPostgreSQL/stable/2024-04-01/Administrators.json
-  - Microsoft.DBforPostgreSQL/stable/2024-04-01/Backups.json
-  - Microsoft.DBforPostgreSQL/stable/2024-04-01/Capabilities.json
-  - Microsoft.DBforPostgreSQL/stable/2024-04-01/CheckNameAvailability.json
-  - Microsoft.DBforPostgreSQL/stable/2024-04-01/Configuration.json
-  - Microsoft.DBforPostgreSQL/stable/2024-04-01/Databases.json
-  - Microsoft.DBforPostgreSQL/stable/2024-04-01/FirewallRules.json
-  - Microsoft.DBforPostgreSQL/stable/2024-04-01/FlexibleServers.json
-  - Microsoft.DBforPostgreSQL/stable/2024-04-01/LongTermRetentionOperation.json
-  - Microsoft.DBforPostgreSQL/stable/2024-04-01/Migrations.json
-  - Microsoft.DBforPostgreSQL/stable/2024-04-01/Operations.json
-  - Microsoft.DBforPostgreSQL/stable/2024-04-01/PrivateDnsZone.json
-  - Microsoft.DBforPostgreSQL/stable/2024-04-01/PrivateEndpointConnections.json
-  - Microsoft.DBforPostgreSQL/stable/2024-04-01/PrivateLinkResources.json
-  - Microsoft.DBforPostgreSQL/stable/2024-04-01/QuotaUsages.json
-  - Microsoft.DBforPostgreSQL/stable/2024-04-01/Replicas.json
-  - Microsoft.DBforPostgreSQL/stable/2024-04-01/ServerLogs.json
-  - Microsoft.DBforPostgreSQL/stable/2024-04-01/ServerStartStopRestart.json
-  - Microsoft.DBforPostgreSQL/stable/2024-04-01/TuningOptions.json
-  - Microsoft.DBforPostgreSQL/stable/2024-04-01/ThreatProtection.json
-  - Microsoft.DBforPostgreSQL/stable/2024-04-01/VirtualEndpoints.json
-  - Microsoft.DBforPostgreSQL/stable/2024-04-01/VirtualNetwork.json
+  - Microsoft.DBforPostgreSQL/stable/2024-08-01/Administrators.json
+  - Microsoft.DBforPostgreSQL/stable/2024-08-01/Backups.json
+  - Microsoft.DBforPostgreSQL/stable/2024-08-01/Capabilities.json
+  - Microsoft.DBforPostgreSQL/stable/2024-08-01/CheckNameAvailability.json
+  - Microsoft.DBforPostgreSQL/stable/2024-08-01/Configuration.json
+  - Microsoft.DBforPostgreSQL/stable/2024-08-01/Databases.json
+  - Microsoft.DBforPostgreSQL/stable/2024-08-01/FirewallRules.json
+  - Microsoft.DBforPostgreSQL/stable/2024-08-01/FlexibleServers.json
+  - Microsoft.DBforPostgreSQL/stable/2024-08-01/LongTermRetentionOperation.json
+  - Microsoft.DBforPostgreSQL/stable/2024-08-01/Migrations.json
+  - Microsoft.DBforPostgreSQL/stable/2024-08-01/Operations.json
+  - Microsoft.DBforPostgreSQL/stable/2024-08-01/PrivateDnsZone.json
+  - Microsoft.DBforPostgreSQL/stable/2024-08-01/PrivateEndpointConnections.json
+  - Microsoft.DBforPostgreSQL/stable/2024-08-01/PrivateLinkResources.json
+  - Microsoft.DBforPostgreSQL/stable/2024-08-01/QuotaUsages.json
+  - Microsoft.DBforPostgreSQL/stable/2024-08-01/Replicas.json
+  - Microsoft.DBforPostgreSQL/stable/2024-08-01/ServerLogs.json
+  - Microsoft.DBforPostgreSQL/stable/2024-08-01/ServerStartStopRestart.json
+  - Microsoft.DBforPostgreSQL/stable/2024-08-01/TuningOptions.json
+  - Microsoft.DBforPostgreSQL/stable/2024-08-01/ThreatProtection.json
+  - Microsoft.DBforPostgreSQL/stable/2024-08-01/VirtualEndpoints.json
+  - Microsoft.DBforPostgreSQL/stable/2024-08-01/VirtualNetwork.json
 suppressions:
   - code: PutResponseCodes
     from: PrivateEndpointConnections.json
