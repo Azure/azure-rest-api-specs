@@ -333,9 +333,9 @@
     }
   },
   "definitions": {
-    "Azure.ResourceManager.Foundations.ManagedServiceIdentityType": {
+    "Azure.ResourceManager.Legacy.ManagedServiceIdentityType": {
       "type": "string",
-      "description": "The kind of managed identity assigned to this resource.",
+      "description": "Type of managed service identity (where both SystemAssigned and UserAssigned types are allowed).",
       "enum": [
         "None",
         "SystemAssigned",
@@ -406,12 +406,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/DelegatedIdentityProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "description": "The resource-specific properties for this resource."
         },
         "identity": {
           "$ref": "../../../../../common-types/resource-management/v5/managedidentitywithdelegation.json#/definitions/ManagedServiceIdentityWithDelegation",
@@ -491,7 +486,7 @@
           "description": "The template for adding optional properties.",
           "properties": {
             "type": {
-              "$ref": "#/definitions/Azure.ResourceManager.Foundations.ManagedServiceIdentityType",
+              "$ref": "#/definitions/Azure.ResourceManager.Legacy.ManagedServiceIdentityType",
               "description": "The type of managed identity assigned to this resource."
             },
             "userAssignedIdentities": {

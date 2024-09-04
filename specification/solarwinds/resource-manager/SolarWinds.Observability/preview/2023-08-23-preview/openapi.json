@@ -63,7 +63,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
             }
@@ -105,7 +105,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/SolarWindsOrganizationResourceListResult"
             }
@@ -147,7 +147,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/SolarWindsOrganizationResourceListResult"
             }
@@ -197,7 +197,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/SolarWindsOrganizationResource"
             }
@@ -262,6 +262,10 @@
               "$ref": "#/definitions/SolarWindsOrganizationResource"
             },
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -322,7 +326,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/SolarWindsOrganizationResource"
             }
@@ -330,14 +334,14 @@
           "202": {
             "description": "Resource update request accepted.",
             "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
@@ -384,25 +388,22 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Resource deleted successfully."
-          },
           "202": {
             "description": "Resource deletion accepted.",
             "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
           "204": {
-            "description": "Resource deleted successfully."
+            "description": "Resource does not exist."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -456,7 +457,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/MetricsStatusResponse"
             }
@@ -506,7 +507,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/MonitoredResourceListResponse"
             }
@@ -559,7 +560,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/TagRuleListResult"
             }
@@ -620,7 +621,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/TagRule"
             }
@@ -696,6 +697,10 @@
               "$ref": "#/definitions/TagRule"
             },
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -767,7 +772,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/TagRule"
             }
@@ -775,14 +780,14 @@
           "202": {
             "description": "Resource update request accepted.",
             "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
@@ -840,25 +845,22 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Resource deleted successfully."
-          },
           "202": {
             "description": "Resource deletion accepted.",
             "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
           "204": {
-            "description": "Resource deleted successfully."
+            "description": "Resource does not exist."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -883,6 +885,59 @@
     }
   },
   "definitions": {
+    "Azure.ResourceManager.Legacy.ManagedServiceIdentityType": {
+      "type": "string",
+      "description": "Type of managed service identity (where both SystemAssigned and UserAssigned types are allowed).",
+      "enum": [
+        "None",
+        "SystemAssigned",
+        "UserAssigned",
+        "SystemAssigned, UserAssigned"
+      ],
+      "x-ms-enum": {
+        "name": "ManagedServiceIdentityType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "None",
+            "value": "None",
+            "description": "No managed identity."
+          },
+          {
+            "name": "SystemAssigned",
+            "value": "SystemAssigned",
+            "description": "System assigned managed identity."
+          },
+          {
+            "name": "UserAssigned",
+            "value": "UserAssigned",
+            "description": "User assigned managed identity."
+          },
+          {
+            "name": "SystemAndUserAssigned",
+            "value": "SystemAssigned, UserAssigned",
+            "description": "System and user assigned managed identity."
+          }
+        ]
+      }
+    },
+    "Azure.ResourceManager.Legacy.ManagedServiceIdentityV4Update": {
+      "type": "object",
+      "description": "Managed service identity (system assigned and/or user assigned identities)",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/Azure.ResourceManager.Legacy.ManagedServiceIdentityType",
+          "description": "The type of managed identity assigned to this resource."
+        },
+        "userAssignedIdentities": {
+          "type": "object",
+          "description": "The identities assigned to this resource by the user.",
+          "additionalProperties": {
+            "$ref": "../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/UserAssignedIdentity"
+          }
+        }
+      }
+    },
     "BillingSource": {
       "type": "string",
       "description": "Billing source",
@@ -891,24 +946,6 @@
       ],
       "x-ms-enum": {
         "name": "BillingSource",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "AZURE",
-            "value": "AZURE",
-            "description": "Billing source is Azure"
-          }
-        ]
-      }
-    },
-    "BillingSourceValues": {
-      "type": "string",
-      "description": "Billing source",
-      "enum": [
-        "AZURE"
-      ],
-      "x-ms-enum": {
-        "name": "BillingSourceValues",
         "modelAsString": true,
         "values": [
           {
@@ -1008,30 +1045,6 @@
       ],
       "x-ms-enum": {
         "name": "LiftrResourceCategories",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Unknown",
-            "value": "Unknown",
-            "description": "Liftr Resource category is unknown"
-          },
-          {
-            "name": "MonitorLogs",
-            "value": "MonitorLogs",
-            "description": "Liftr Resource category is monitor logs"
-          }
-        ]
-      }
-    },
-    "LiftrResourceCategoriesValues": {
-      "type": "string",
-      "description": "Liftr Resource category.",
-      "enum": [
-        "Unknown",
-        "MonitorLogs"
-      ],
-      "x-ms-enum": {
-        "name": "LiftrResourceCategoriesValues",
         "modelAsString": true,
         "values": [
           {
@@ -1208,30 +1221,6 @@
       ],
       "x-ms-enum": {
         "name": "MonitoringStatus",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Enabled",
-            "value": "Enabled",
-            "description": "monitoring is enabled"
-          },
-          {
-            "name": "Disabled",
-            "value": "Disabled",
-            "description": "monitoring is disabled"
-          }
-        ]
-      }
-    },
-    "MonitoringStatusValues": {
-      "type": "string",
-      "description": "Flag specifying if the resource monitoring is enabled or disabled.",
-      "enum": [
-        "Enabled",
-        "Disabled"
-      ],
-      "x-ms-enum": {
-        "name": "MonitoringStatusValues",
         "modelAsString": true,
         "values": [
           {
@@ -1532,30 +1521,6 @@
         ]
       }
     },
-    "SendAadLogsStatusValues": {
-      "type": "string",
-      "description": "Indicates whether AAD logs are being sent.",
-      "enum": [
-        "Enabled",
-        "Disabled"
-      ],
-      "x-ms-enum": {
-        "name": "SendAadLogsStatusValues",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Enabled",
-            "value": "Enabled",
-            "description": "AAD logs are enabled"
-          },
-          {
-            "name": "Disabled",
-            "value": "Disabled",
-            "description": "AAD logs are disabled"
-          }
-        ]
-      }
-    },
     "SendActivityLogsStatus": {
       "type": "string",
       "description": "Indicates whether activity logs are being sent.",
@@ -1565,30 +1530,6 @@
       ],
       "x-ms-enum": {
         "name": "SendActivityLogsStatus",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Enabled",
-            "value": "Enabled",
-            "description": "Activity logs are enabled"
-          },
-          {
-            "name": "Disabled",
-            "value": "Disabled",
-            "description": "Activity logs are disabled"
-          }
-        ]
-      }
-    },
-    "SendActivityLogsStatusValues": {
-      "type": "string",
-      "description": "Indicates whether activity logs are being sent.",
-      "enum": [
-        "Enabled",
-        "Disabled"
-      ],
-      "x-ms-enum": {
-        "name": "SendActivityLogsStatusValues",
         "modelAsString": true,
         "values": [
           {
@@ -1652,30 +1593,6 @@
         ]
       }
     },
-    "SendSubscriptionLogsStatusValues": {
-      "type": "string",
-      "description": "Indicates whether subscription logs are being sent.",
-      "enum": [
-        "Enabled",
-        "Disabled"
-      ],
-      "x-ms-enum": {
-        "name": "SendSubscriptionLogsStatusValues",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Enabled",
-            "value": "Enabled",
-            "description": "subscription logs are enabled"
-          },
-          {
-            "name": "Disabled",
-            "value": "Disabled",
-            "description": "subscription logs are disabled"
-          }
-        ]
-      }
-    },
     "SendingLogsStatus": {
       "type": "string",
       "description": "Indicates whether logs are being sent.",
@@ -1685,30 +1602,6 @@
       ],
       "x-ms-enum": {
         "name": "SendingLogsStatus",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Enabled",
-            "value": "Enabled",
-            "description": "logs are enabled"
-          },
-          {
-            "name": "Disabled",
-            "value": "Disabled",
-            "description": "logs are disabled"
-          }
-        ]
-      }
-    },
-    "SendingLogsStatusValues": {
-      "type": "string",
-      "description": "Indicates whether logs are being sent.",
-      "enum": [
-        "Enabled",
-        "Disabled"
-      ],
-      "x-ms-enum": {
-        "name": "SendingLogsStatusValues",
         "modelAsString": true,
         "values": [
           {
@@ -1790,12 +1683,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/OrganizationProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "description": "The resource-specific properties for this resource."
         },
         "identity": {
           "$ref": "../../../../../common-types/resource-management/v4/managedidentity.json#/definitions/ManagedServiceIdentity",
@@ -1834,7 +1722,7 @@
       "description": "The template for adding optional properties.",
       "properties": {
         "identity": {
-          "$ref": "../../../../../common-types/resource-management/v4/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "$ref": "#/definitions/Azure.ResourceManager.Legacy.ManagedServiceIdentityV4Update",
           "description": "The managed service identities assigned to this resource."
         },
         "tags": {
@@ -1874,42 +1762,13 @@
         ]
       }
     },
-    "TagActionValues": {
-      "type": "string",
-      "description": "Valid actions for a filtering tag. Exclusion takes priority over inclusion.",
-      "enum": [
-        "Include",
-        "Exclude"
-      ],
-      "x-ms-enum": {
-        "name": "TagActionValues",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Include",
-            "value": "Include",
-            "description": "tags are included"
-          },
-          {
-            "name": "Exclude",
-            "value": "Exclude",
-            "description": "tags are excluded"
-          }
-        ]
-      }
-    },
     "TagRule": {
       "type": "object",
       "description": "A tag rule belonging to SolarWinds account",
       "properties": {
         "properties": {
           "$ref": "#/definitions/MonitoringTagRulesProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "description": "The resource-specific properties for this resource."
         }
       },
       "allOf": [

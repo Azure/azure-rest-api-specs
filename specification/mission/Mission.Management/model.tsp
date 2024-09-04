@@ -3,9 +3,9 @@ import "@typespec/http";
 import "@typespec/openapi";
 import "@typespec/versioning";
 import "@azure-tools/typespec-autorest";
-import "@azure-tools/typespec-providerhub";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@azure-tools/typespec-client-generator-core";
 
 import "./resourcetypes/community/community.tsp";
 import "./resourcetypes/virtualEnclave/virtualenclave.tsp";
@@ -19,10 +19,18 @@ import "./resourcetypes/transitHub/transitHub.tsp";
 import "./resourcetypes/enclaveConnection/enclaveConnection.tsp";
 import "./resourcetypes/communityEndpoint/communityEndpoint.tsp";
 import "./resourcetypes/enclaveEndpoint/enclaveEndpoint.tsp";
+import "./resourcetypes/postActions/approvalcallback.tsp";
+import "./resourcetypes/approvals/approvals.tsp";
+import "./resourcetypes/postActions/initiatorcallback.tsp";
+import "./resourcetypes/postActions/approvaldeletioncallback.tsp";
 
-using TypeSpec.Http;
-using TypeSpec.Rest;
+using Azure.ClientGenerator.Core;
+using Azure.Core;
+using Azure.Core.Traits;
 using Azure.ResourceManager;
+using TypeSpec.Http;
+using TypeSpec.OpenAPI;
+using TypeSpec.Rest;
 using TypeSpec.Versioning;
 
 @doc("Microsoft Mission Resource Provider management API.")
@@ -47,19 +55,19 @@ namespace Microsoft.Mission;
 )
 @armResourceCreateOrUpdate(TResource)
 @put
-op ArmResourceCreateOrUpdate2Async<
-  TResource extends Azure.ResourceManager.Foundations.ArmResource,
+op ArmResourceCreateOrUpdateAsync<
+  TResource extends Azure.ResourceManager.Foundations.Resource,
   TBaseParameters = Azure.ResourceManager.Foundations.BaseParameters<TResource>
 >(
   ...ResourceInstanceParameters<TResource, TBaseParameters>,
 
   @doc("Resource create parameters.")
-  @body
+  @bodyRoot
   resource: TResource,
 ): ArmUpdatedResponse<TResource> | ArmCreatedResponse<TResource> | ErrorResponse;
 
 @doc("Arm resource update successful")
-model ArmUpdatedResponse<TResource extends Azure.ResourceManager.Foundations.ArmResource>
+model ArmUpdatedResponse<TResource extends Azure.ResourceManager.Foundations.Resource>
   is ArmResponse<TResource>;
 
 @doc("Community Model Resource")
@@ -70,7 +78,14 @@ model CommunityResource is TrackedResource<CommunityProperties> {
   @path
   @doc("The name of the communityResource Resource")
   name: string;
+
+  /** The managed service identity for this resource */
+  ...ManagedServiceIdentityProperty;
 }
+
+@@added(CommunityResource.identity,
+  Microsoft.Mission.Versions.v2024_06_01_preview
+);
 
 @doc("Virtual Enclave Model Resource")
 model EnclaveResource is TrackedResource<VirtualEnclaveProperties> {
@@ -80,7 +95,14 @@ model EnclaveResource is TrackedResource<VirtualEnclaveProperties> {
   @doc("The name of the enclaveResource Resource")
   @path
   name: string;
+
+  /** The managed service identity for this resource */
+  ...ManagedServiceIdentityProperty;
 }
+
+@@added(EnclaveResource.identity,
+  Microsoft.Mission.Versions.v2024_06_01_preview
+);
 
 @doc("Workload Model Resource")
 @parentResource(EnclaveResource)
@@ -93,6 +115,8 @@ model WorkloadResource is TrackedResource<WorkloadProperties> {
   name: string;
 }
 
+#suppress "@azure-tools/typespec-providerhub/non-breaking-versioning" "New version does not have any breaking change."
+@removed(Microsoft.Mission.Versions.v2024_06_01_preview)
 @doc("Catalog Model Resource")
 model CatalogResource is TrackedResource<CatalogProperties> {
   @key("catalogName")
@@ -183,14 +207,27 @@ model CommunityEndpointResource
   name: string;
 }
 
+@added(Microsoft.Mission.Versions.v2024_06_01_preview)
+@doc("Approval Model Resource")
+model ApprovalResource is ExtensionResource<ApprovalProperties> {
+  @key("approvalName")
+  @segment("approvals")
+  @path
+  @pattern("^[a-zA-Z][a-zA-Z0-9-]*[a-zA-Z0-9]$")
+  @doc("The name of the approvals resource.")
+  name: string;
+}
+
 @doc("Workload Interface")
 @armResourceOperations
 interface Workload {
   get is ArmResourceRead<WorkloadResource>;
-  createOrUpdate is ArmResourceCreateOrUpdate2Async<WorkloadResource>;
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<WorkloadResource>;
   update is ArmResourcePatchAsync<WorkloadResource, WorkloadProperties>;
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "deprecated" "Backwards compatibility"
   delete is ArmResourceDeleteAsync<WorkloadResource>;
-  listByParent is ArmResourceListByParent<WorkloadResource>;
+  listByEnclaveResource is ArmResourceListByParent<WorkloadResource>;
   listBySubscription is ArmListBySubscription<WorkloadResource>;
 }
 
@@ -198,10 +235,12 @@ interface Workload {
 @armResourceOperations
 interface Endpoint {
   get is ArmResourceRead<EndpointResource>;
-  createOrUpdate is ArmResourceCreateOrUpdate2Async<EndpointResource>;
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<EndpointResource>;
   update is ArmResourcePatchAsync<EndpointResource, EndpointProperties>;
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "deprecated" "Backwards compatibility"
   delete is ArmResourceDeleteAsync<EndpointResource>;
-  listByParent is ArmResourceListByParent<EndpointResource>;
+  listByEnclaveResource is ArmResourceListByParent<EndpointResource>;
   listBySubscription is ArmListBySubscription<EndpointResource>;
 }
 
@@ -209,10 +248,12 @@ interface Endpoint {
 @armResourceOperations
 interface VirtualEnclave {
   get is ArmResourceRead<EnclaveResource>;
-  createOrUpdate is ArmResourceCreateOrUpdate2Async<EnclaveResource>;
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<EnclaveResource>;
   update is ArmResourcePatchAsync<EnclaveResource, VirtualEnclaveProperties>;
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "deprecated" "Backwards compatibility"
   delete is ArmResourceDeleteAsync<EnclaveResource>;
-  listByParent is ArmResourceListByParent<EnclaveResource>;
+  listByResourceGroup is ArmResourceListByParent<EnclaveResource>;
   listBySubscription is ArmListBySubscription<EnclaveResource>;
 
   @autoRoute
@@ -220,11 +261,12 @@ interface VirtualEnclave {
   @armResourceAction(EnclaveResource)
   @post
   @added(Microsoft.Mission.Versions.v2023_08_01_preview)
+  @removed(Microsoft.Mission.Versions.v2024_06_01_preview)
   checkAddressSpaceAvailability(
     ...ResourceInstanceParameters<EnclaveResource>,
 
     @doc("Check IP Address Space request body.")
-    @body
+    @bodyRoot
     checkAddressSpaceAvailabilityRequest: CheckAddressSpaceAvailabilityRequest,
   ): ArmResponse<CheckAddressSpaceAvailabilityResponse> | ErrorResponse;
 }
@@ -233,21 +275,41 @@ interface VirtualEnclave {
 @armResourceOperations
 interface Community {
   get is ArmResourceRead<CommunityResource>;
-  createOrUpdate is ArmResourceCreateOrUpdate2Async<CommunityResource>;
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<CommunityResource>;
   update is ArmResourcePatchAsync<CommunityResource, CommunityProperties>;
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "deprecated" "Backwards compatibility"
   delete is ArmResourceDeleteAsync<CommunityResource>;
-  listByParent is ArmResourceListByParent<CommunityResource>;
+  listByResourceGroup is ArmResourceListByParent<CommunityResource>;
   listBySubscription is ArmListBySubscription<CommunityResource>;
+
+  @autoRoute
+  @doc("Checks that the IP Address Space to be allocated for this Community is available.")
+  @armResourceAction(CommunityResource)
+  @post
+  @added(Microsoft.Mission.Versions.v2024_06_01_preview)
+  checkAddressSpaceAvailability(
+    ...ResourceInstanceParameters<CommunityResource>,
+
+    @doc("Check IP Address Space request body.")
+    @bodyRoot
+    checkAddressSpaceAvailabilityRequest: CheckAddressSpaceAvailabilityRequest,
+  ): ArmResponse<CheckAddressSpaceAvailabilityResponse> | ErrorResponse;
 }
 
+#suppress "@azure-tools/typespec-providerhub/non-breaking-versioning" "New version does not have any breaking change."
+@removed(Microsoft.Mission.Versions.v2024_06_01_preview)
 @doc("Catalog Interface")
 @armResourceOperations
-interface Catalog {
+@renamedFrom(Microsoft.Mission.Versions.v2024_06_01_preview, "Catalog")
+interface CatalogInterface {
   get is ArmResourceRead<CatalogResource>;
-  createOrUpdate is ArmResourceCreateOrUpdate2Async<CatalogResource>;
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<CatalogResource>;
   update is ArmResourcePatchAsync<CatalogResource, CatalogProperties>;
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "deprecated" "Backwards compatibility"
   delete is ArmResourceDeleteAsync<CatalogResource>;
-  listByParent is ArmResourceListByParent<CatalogResource>;
+  listByResourceGroup is ArmResourceListByParent<CatalogResource>;
   listBySubscription is ArmListBySubscription<CatalogResource>;
 }
 
@@ -255,13 +317,15 @@ interface Catalog {
 @armResourceOperations
 interface InternalConnections {
   get is ArmResourceRead<InternalConnection>;
-  createOrUpdate is ArmResourceCreateOrUpdate2Async<InternalConnection>;
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<InternalConnection>;
   update is ArmResourcePatchAsync<
     InternalConnection,
     InternalConnectionProperties
   >;
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "deprecated" "Backwards compatibility"
   delete is ArmResourceDeleteAsync<InternalConnection>;
-  listByParent is ArmResourceListByParent<InternalConnection>;
+  listByResourceGroup is ArmResourceListByParent<InternalConnection>;
   listBySubscription is ArmListBySubscription<InternalConnection>;
 }
 
@@ -270,10 +334,12 @@ interface InternalConnections {
 @armResourceOperations
 interface TransitHub {
   get is ArmResourceRead<TransitHubResource>;
-  createOrUpdate is ArmResourceCreateOrUpdate2Async<TransitHubResource>;
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<TransitHubResource>;
   update is ArmResourcePatchAsync<TransitHubResource, TransitHubProperties>;
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "deprecated" "Backwards compatibility"
   delete is ArmResourceDeleteAsync<TransitHubResource>;
-  listByParent is ArmResourceListByParent<TransitHubResource>;
+  listByCommunityResource is ArmResourceListByParent<TransitHubResource>;
   listBySubscription is ArmListBySubscription<TransitHubResource>;
 }
 
@@ -282,14 +348,33 @@ interface TransitHub {
 @armResourceOperations
 interface EnclaveConnection {
   get is ArmResourceRead<EnclaveConnectionResource>;
-  createOrUpdate is ArmResourceCreateOrUpdate2Async<EnclaveConnectionResource>;
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<EnclaveConnectionResource>;
   update is ArmResourcePatchAsync<
     EnclaveConnectionResource,
     EnclaveConnectionProperties
   >;
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "deprecated" "Backwards compatibility"
   delete is ArmResourceDeleteAsync<EnclaveConnectionResource>;
-  listByParent is ArmResourceListByParent<EnclaveConnectionResource>;
+  listByResourceGroup is ArmResourceListByParent<EnclaveConnectionResource>;
   listBySubscription is ArmListBySubscription<EnclaveConnectionResource>;
+
+  @doc("Callback that triggers on approval state change.")
+  @armResourceAction(EnclaveConnectionResource)
+  @added(Microsoft.Mission.Versions.v2024_06_01_preview)
+  approvalCallback is ArmResourceActionAsync<
+    EnclaveConnectionResource,
+    ApprovalCallbackRequest,
+    ApprovalCallbackResponse
+  >;
+  @doc("Callback that triggers on approval deletion state change.")
+  @armResourceAction(EnclaveConnectionResource)
+  @added(Microsoft.Mission.Versions.v2024_06_01_preview)
+  approvalDeletionCallback is ArmResourceActionAsync<
+    EnclaveConnectionResource,
+    ApprovalDeletionCallbackRequest,
+    ApprovalDeletionCallbackResponse
+  >;
 }
 
 @added(Microsoft.Mission.Versions.v2023_08_01_preview)
@@ -297,13 +382,15 @@ interface EnclaveConnection {
 @armResourceOperations
 interface EnclaveEndpoints {
   get is ArmResourceRead<EnclaveEndpointResource>;
-  createOrUpdate is ArmResourceCreateOrUpdate2Async<EnclaveEndpointResource>;
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<EnclaveEndpointResource>;
   update is ArmResourcePatchAsync<
     EnclaveEndpointResource,
     EnclaveEndpointProperties
   >;
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "deprecated" "Backwards compatibility"
   delete is ArmResourceDeleteAsync<EnclaveEndpointResource>;
-  listByParent is ArmResourceListByParent<EnclaveEndpointResource>;
+  listByEnclaveResource is ArmResourceListByParent<EnclaveEndpointResource>;
   listBySubscription is ArmListBySubscription<EnclaveEndpointResource>;
 }
 
@@ -312,13 +399,15 @@ interface EnclaveEndpoints {
 @armResourceOperations
 interface CommunityEndpoints {
   get is ArmResourceRead<CommunityEndpointResource>;
-  createOrUpdate is ArmResourceCreateOrUpdate2Async<CommunityEndpointResource>;
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<CommunityEndpointResource>;
   update is ArmResourcePatchAsync<
     CommunityEndpointResource,
     CommunityEndpointProperties
   >;
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "deprecated" "Backwards compatibility"
   delete is ArmResourceDeleteAsync<CommunityEndpointResource>;
-  listByParent is ArmResourceListByParent<CommunityEndpointResource>;
+  listByCommunityResource is ArmResourceListByParent<CommunityEndpointResource>;
   listBySubscription is ArmListBySubscription<CommunityEndpointResource>;
 }
 
@@ -326,12 +415,31 @@ interface CommunityEndpoints {
 @armResourceOperations
 interface ExternalConnections {
   get is ArmResourceRead<ExternalConnection>;
-  createOrUpdate is ArmResourceCreateOrUpdate2Async<ExternalConnection>;
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<ExternalConnection>;
   update is ArmResourcePatchAsync<
     ExternalConnection,
     ExternalConnectionProperties
   >;
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "deprecated" "Backwards compatibility"
   delete is ArmResourceDeleteAsync<ExternalConnection>;
-  listByParent is ArmResourceListByParent<ExternalConnection>;
+  listByResourceGroup is ArmResourceListByParent<ExternalConnection>;
   listBySubscription is ArmListBySubscription<ExternalConnection>;
+}
+
+@added(Microsoft.Mission.Versions.v2024_06_01_preview)
+@doc("Approval Interface")
+@armResourceOperations
+interface Approval {
+  get is ArmResourceRead<ApprovalResource>;
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<ApprovalResource>;
+  update is ArmResourcePatchAsync<ApprovalResource, ApprovalProperties>;
+  delete is ArmResourceDeleteWithoutOkAsync<ApprovalResource>;
+  @doc("Upon receiving approval or rejection from approver, this facilitates actions on approval resource")
+  @armResourceAction(ApprovalResource)
+  initiatorCallback is ArmResourceActionAsync<
+    ApprovalResource,
+    InitiatorCallbackRequest,
+    InitiatorCallbackResponse
+  >;
 }

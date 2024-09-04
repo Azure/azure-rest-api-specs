@@ -1,6 +1,5 @@
 import "@typespec/rest";
 import "@typespec/versioning";
-import "@azure-tools/typespec-providerhub";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
@@ -12,10 +11,15 @@ using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.ResourceManager;
 
+@doc("Microsoft Mission Resource Provider management API.")
+namespace Microsoft.Mission;
+
 @doc("List of storage types support by catalog")
-enum CatalogStorageType {
+union CatalogStorageType {
   @doc("Blob Storage Catalog Type")
-  BlobCatalog,
+  BlobCatalog: "BlobCatalog",
+
+  string,
 }
 
 @doc("Base type for catalog.")
@@ -44,6 +48,7 @@ model Package {
   @doc("Package Name.")
   name?: string;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing api"
   @doc("Package metadata.")
   metadata?: Record<string>;
 }

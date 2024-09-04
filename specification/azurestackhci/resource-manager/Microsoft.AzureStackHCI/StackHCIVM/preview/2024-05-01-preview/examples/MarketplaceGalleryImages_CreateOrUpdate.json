@@ -1,0 +1,122 @@
+{
+  "parameters": {
+    "name": "test-marketplace-gallery-image",
+    "api-version": "2024-05-01-preview",
+    "marketplaceGalleryImageName": "test-marketplace-gallery-image",
+    "resource": {
+      "extendedLocation": {
+        "name": "/subscriptions/a95612cb-f1fa-4daa-a4fd-272844fa512c/resourceGroups/dogfoodarc/providers/Microsoft.ExtendedLocation/customLocations/dogfood-location",
+        "type": "CustomLocation"
+      },
+      "location": "West US2",
+      "properties": {
+        "cloudInitDataSource": "Azure",
+        "containerId": "/subscriptions/a95612cb-f1fa-4daa-a4fd-272844fa512c/resourceGroups/dogfoodarc/providers/Microsoft.AzureStackHCI/storageContainers/test-storage-container",
+        "hyperVGeneration": "V1",
+        "identifier": {
+          "offer": "myOfferName",
+          "publisher": "myPublisherName",
+          "sku": "mySkuName"
+        },
+        "osType": "Windows",
+        "version": {
+          "name": "1.0.0"
+        }
+      }
+    },
+    "resourceGroupName": "test-rg",
+    "subscriptionId": "fd3c3665-1729-4b7b-9a38-238e83b0f98b"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "test-marketplace-gallery-image",
+        "type": "Microsoft.AzureStackHCI/marketplaceGalleryImages",
+        "extendedLocation": {
+          "name": "/subscriptions/a95612cb-f1fa-4daa-a4fd-272844fa512c/resourceGroups/dogfoodarc/providers/Microsoft.ExtendedLocation/customLocations/dogfood-location",
+          "type": "CustomLocation"
+        },
+        "id": "/subscriptions/a95612cb-f1fa-4daa-a4fd-272844fa512c/resourceGroups/dogfoodarc/providers/Microsoft.AzureStackHCI/marketplaceGalleryImages/test-marketplace-gallery-image",
+        "location": "West US2",
+        "properties": {
+          "cloudInitDataSource": "Azure",
+          "containerId": "/subscriptions/a95612cb-f1fa-4daa-a4fd-272844fa512c/resourceGroups/dogfoodarc/providers/Microsoft.AzureStackHCI/storageContainers/test-storage-container",
+          "hyperVGeneration": "V1",
+          "identifier": {
+            "offer": "myOfferName",
+            "publisher": "myPublisherName",
+            "sku": "mySkuName"
+          },
+          "osType": "Windows",
+          "provisioningState": "Accepted",
+          "status": {
+            "downloadStatus": {
+              "downloadSizeInMB": 9383
+            },
+            "progressPercentage": 0,
+            "provisioningStatus": {
+              "operationId": "79cfc696-44f5-4a68-a620-21850f7e9fb0",
+              "status": "InProgress"
+            }
+          },
+          "version": {
+            "name": "1.0.0",
+            "properties": {
+              "storageProfile": {
+                "osDiskImage": {
+                  "sizeInMB": 30270
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "test-marketplace-gallery-image",
+        "type": "Microsoft.AzureStackHCI/marketplaceGalleryImages",
+        "extendedLocation": {
+          "name": "/subscriptions/a95612cb-f1fa-4daa-a4fd-272844fa512c/resourceGroups/dogfoodarc/providers/Microsoft.ExtendedLocation/customLocations/dogfood-location",
+          "type": "CustomLocation"
+        },
+        "id": "/subscriptions/a95612cb-f1fa-4daa-a4fd-272844fa512c/resourceGroups/dogfoodarc/providers/Microsoft.AzureStackHCI/marketplaceGalleryImages/test-marketplace-gallery-image",
+        "location": "West US2",
+        "properties": {
+          "cloudInitDataSource": "Azure",
+          "containerId": "/subscriptions/a95612cb-f1fa-4daa-a4fd-272844fa512c/resourceGroups/dogfoodarc/providers/Microsoft.AzureStackHCI/storageContainers/test-storage-container",
+          "hyperVGeneration": "V1",
+          "identifier": {
+            "offer": "myOfferName",
+            "publisher": "myPublisherName",
+            "sku": "mySkuName"
+          },
+          "osType": "Windows",
+          "provisioningState": "Creating",
+          "status": {
+            "downloadStatus": {
+              "downloadSizeInMB": 9383
+            },
+            "progressPercentage": 100,
+            "provisioningStatus": {
+              "operationId": "79cfc696-44f5-4a68-a620-21850f7e9fb0",
+              "status": "Succeeded"
+            }
+          },
+          "version": {
+            "name": "1.0.0",
+            "properties": {
+              "storageProfile": {
+                "osDiskImage": {
+                  "sizeInMB": 30270
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "operationId": "MarketplaceGalleryImages_CreateOrUpdate",
+  "title": "PutMarketplaceGalleryImage"
+}

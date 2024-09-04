@@ -29,7 +29,7 @@ title: Microsoft.AzureStackHCI
 description: Azure Stack HCI management service
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-preview-2024-05-01-test
+tag: package-preview-2024-08-01-preview
 ```
 
 ## Suppression
@@ -39,16 +39,19 @@ directive:
   - suppress: R3020
     from:
       - stackhcivm.json
+      - operations.json
     reason: Microsoft.AzureStackHCI is the correct name for our RP.
 suppressions:
   - code: PathResourceProviderNamePascalCase
     reason: We had already gone to production with "HCI" in our namespace, so changing it to "Hci" now would be disruptive.
     from: 
       - stackhcivm.json
+      - operations.json
   - code: DefinitionsPropertiesNamesCamelCase
     reason: There is a false positive reporting the two letter acronym ID should be lower camel case. The property is correctly capitalized according to guidance.
     from: 
       - stackhcivm.json
+      - operations.json
   - code:  XmsPageableForListCalls
     reason: XmsPageable not needed for GET calls
     from:
@@ -58,17 +61,41 @@ suppressions:
     from: 
       - stackhcivm.json
   - code: APIVersionPattern
-    reason: 2024-05-01-test-preview is for internal testing only and recommended by API spec review office hours.
+    reason: 2024-05-01-preview is for internal testing only and recommended by API spec review office hours.
     from:
       - stackhcivm.json
 ```
+
+
+### Tag: package-preview-2024-08
+
+These settings apply only when `--tag=package-preview-2024-08-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2024-08-01-preview'
+input-file:
+  - preview/2024-08-01-preview/stackhcivm.json
+  - ../operations/preview/2024-08-01-preview/operations.json
+```
+
+### Tag: package-preview-2024-07
+
+These settings apply only when `--tag=package-preview-2024-07-15-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2024-07-15-preview'
+input-file:
+  - preview/2024-07-15-preview/stackhcivm.json
+  - ../operations/preview/2024-07-15-preview/operations.json
+```
+
+
 ### Tag: package-preview-2024-05
 
-These settings apply only when `--tag=package-preview-2024-05-01-test` is specified on the command line.
+These settings apply only when `--tag=package-preview-2024-05-01-preview` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2024-05-01-test'
+```yaml $(tag) == 'package-preview-2024-05-01-preview'
 input-file:
-  - preview/2024-05-01-test-preview/stackhcivm.json
+  - preview/2024-05-01-preview/stackhcivm.json
+  - ../operations/preview/2024-05-01-preview/operations.json
 ```
 
 ### Tag: package-preview-2024-02
@@ -78,4 +105,5 @@ These settings apply only when `--tag=package-preview-2024-02-01` is specified o
 ```yaml $(tag) == 'package-preview-2024-02-01'
 input-file:
   - preview/2024-02-01-preview/stackhcivm.json
+  - ../operations/preview/2024-02-01-preview/operations.json
 ```

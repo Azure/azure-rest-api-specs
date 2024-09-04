@@ -70,6 +70,66 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AzureTerraform/operationStatuses/{operationId}": {
+      "get": {
+        "x-ms-examples": {
+          "Get specific operation status": {
+            "$ref": "./examples/GetOperationStatus.json"
+          }
+        },
+        "tags": [
+          "OperationStatuses"
+        ],
+        "operationId": "OperationStatuses_Get",
+        "description": "Get the status of a long running azure asynchronous operation.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/OperationIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Finalized operation status.",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
+          },
+          "202": {
+            "description": "InProgress operation status.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "The Azure-AsyncOperation header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
+          },
+          "default": {
+            "description": "Error response returned if request was unsuccessful.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.AzureTerraform/exportTerraform": {
       "post": {
         "tags": [
@@ -89,10 +149,22 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK - Returns the template.",
-            "schema": {
-              "$ref": "#/definitions/ExportResult"
+          "202": {
+            "description": "Export request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "The Azure-AsyncOperation header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
             }
           },
           "default": {
@@ -106,38 +178,55 @@
           "ExportTerraform": {
             "$ref": "./examples/ExportTerraform.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/OperationStatus"
+        },
+        "x-ms-long-running-operation": true
       }
     }
   },
   "definitions": {
-    "ExportResourceParameter": {
+    "ExportResource": {
       "allOf": [
         {
-          "$ref": "#/definitions/BaseExportParameter"
+          "$ref": "#/definitions/BaseExportModel"
         }
       ],
       "description": "Export parameter for a single resource",
       "required": [
-        "resourceId"
+        "resourceIds"
       ],
       "properties": {
-        "resourceId": {
+        "resourceIds": {
           "description": "The id of the resource to be exported",
-          "type": "string"
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         },
-        "name": {
-          "description": "The Terraform resource name",
+        "resourceName": {
+          "description": "The Terraform resource name. Only works when `resourceIds` contains only one item.",
           "type": "string",
           "default": "res-0"
+        },
+        "resourceType": {
+          "description": "The Terraform resource type. Only works when `resourceIds` contains only one item.",
+          "type": "string"
+        },
+        "namePattern": {
+          "description": "The name pattern of the Terraform resources",
+          "type": "string",
+          "default": "res-"
         }
       },
       "type": "object"
     },
-    "ExportResourceGroupParameter": {
+    "ExportResourceGroup": {
       "allOf": [
         {
-          "$ref": "#/definitions/BaseExportParameter"
+          "$ref": "#/definitions/BaseExportModel"
         }
       ],
       "description": "Export parameter for a resource group",
@@ -150,17 +239,17 @@
           "type": "string"
         },
         "namePattern": {
-          "description": "The pattern of the Terraform resources",
+          "description": "The name pattern of the Terraform resources",
           "type": "string",
           "default": "res-"
         }
       },
       "type": "object"
     },
-    "ExportQueryParameter": {
+    "ExportQuery": {
       "allOf": [
         {
-          "$ref": "#/definitions/BaseExportParameter"
+          "$ref": "#/definitions/BaseExportModel"
         }
       ],
       "description": "Export parameter for resources queried by ARG (Azure Resource Graph)",
@@ -173,7 +262,7 @@
           "type": "string"
         },
         "namePattern": {
-          "description": "The pattern of the Terraform resources",
+          "description": "The name pattern of the Terraform resources",
           "type": "string",
           "default": "res-"
         },
@@ -185,7 +274,7 @@
       },
       "type": "object"
     },
-    "BaseExportParameter": {
+    "BaseExportModel": {
       "description": "The base export parameter",
       "discriminator": "type",
       "required": [
@@ -203,18 +292,21 @@
             "azurerm",
             "azapi"
           ],
-          "default": "azurerm"
+          "default": "azurerm",
+          "x-ms-enum": {
+            "name": "targetProvider",
+            "modelAsString": true
+          }
         },
         "fullProperties": {
           "description": "Whether to output all non-computed properties in the generated Terraform configuration? This probably needs manual modifications to make it valid",
           "type": "boolean",
-          "default": false
+          "default": true
         },
-        "parallelism": {
-          "description": " Limit the number of parallel operations, i.e., resource discovery, import",
-          "type": "integer",
-          "format": "int64",
-          "default": 10
+        "maskSensitive": {
+          "description": "Mask sensitive attributes in the Terraform configuration",
+          "type": "boolean",
+          "default": true
         }
       },
       "type": "object"
@@ -223,9 +315,9 @@
       "description": "The parameter type",
       "type": "string",
       "enum": [
-        "ExportResourceParameter",
-        "ExportResourceGroupParameter",
-        "ExportQueryParameter"
+        "ExportResource",
+        "ExportResourceGroup",
+        "ExportQuery"
       ],
       "x-ms-enum": {
         "name": "parameterType",
@@ -257,6 +349,49 @@
           "x-ms-identifiers": []
         }
       }
+    },
+    "OperationStatus": {
+      "description": "The status of the LRO operation.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+        }
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The operation status resource Id."
+        },
+        "name": {
+          "type": "string",
+          "description": "The operation name."
+        },
+        "startTime": {
+          "type": "string",
+          "description": "The start time of the operation.",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "endTime": {
+          "type": "string",
+          "description": "The end time of the operation.",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "status": {
+          "type": "string",
+          "description": "The status of the operation."
+        },
+        "percentComplete": {
+          "description": "The progress percentage of the operation, ranges from 0 to 100",
+          "type": "number",
+          "format": "double"
+        },
+        "properties": {
+          "$ref": "#/definitions/ExportResult"
+        }
+      }
     }
   },
   "parameters": {
@@ -266,7 +401,7 @@
       "name": "exportParameter",
       "required": true,
       "schema": {
-        "$ref": "#/definitions/BaseExportParameter"
+        "$ref": "#/definitions/BaseExportModel"
       },
       "x-ms-parameter-location": "method"
     }

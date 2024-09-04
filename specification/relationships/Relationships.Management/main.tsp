@@ -9,7 +9,6 @@ using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 
 @armProviderNamespace
 @service({
@@ -60,13 +59,12 @@ model RelationshipMetadata {
 /**
  * The provisioning state of a resource.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum"
 @lroStatus
-enum ProvisioningState {
-  ...ResourceProvisioningState,
+union ProvisioningState {
+  ResourceProvisioningState,
 
   /** The relationship is being provisioned */
-  Provisioning,
+  Provisioning: "Provisioning",
 }
 
 @doc("Base relationship properties.")
@@ -159,11 +157,11 @@ model ServiceGroupMemberRelationship
 
 interface Operations extends Azure.ResourceManager.Operations {}
 
-interface Relationships<TRelationship extends ArmResource> {
+interface Relationships<TRelationship extends Azure.ResourceManager.Foundations.Resource> {
   createOrUpdate is ArmResourceCreateOrReplaceAsync<TRelationship>;
   get is ArmResourceRead<TRelationship>;
   delete is ArmResourceDeleteSync<TRelationship>;
-  listByParent is ArmResourceListByParent<TRelationship>;
+  list is ArmResourceListByParent<TRelationship>;
 }
 
 @armResourceOperations

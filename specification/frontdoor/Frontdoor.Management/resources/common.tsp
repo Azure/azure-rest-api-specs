@@ -14,20 +14,20 @@ namespace Microsoft.Frontdoor;
 
 /** The available API versions. */
 enum Versions {
-   /** 2024-10-01-preview version */
+  /** 2024-10-01-preview version */
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @useDependency(Azure.Core.Versions.v1_0_Preview_1)
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
   v2024_01_01_preview: "2024-01-01-preview",
 }
 
-model LocationInstanceParameters<T extends ArmResource> {
+model LocationInstanceParameters<T extends Foundations.Resource> {
   ...ApiVersionParameter;
   ...ProviderNamespace<T>;
   ...LocationParameter;
   ...KeysOf<T>;
 }
-model LocationCollectionParameters<T extends ArmResource> {
+model LocationCollectionParameters<T extends Foundations.Resource> {
   ...ApiVersionParameter;
   ...ProviderNamespace<T>;
   ...LocationParameter;
@@ -47,10 +47,9 @@ model LocationCollectionParameters<T extends ArmResource> {
 @get
 @listsResource(TResource)
 @segmentOf(TResource)
-@armRenameListByOperation(TResource, TParentName, TParentFriendlyName) // This must come before @armResourceList!
 @armResourceList(TResource)
 op ArmLocResourceListByParent<
-  TResource extends ArmResource,
+  TResource extends Foundations.Resource,
   TBaseParameters = BaseParameters<TResource>,
   TParentName extends valueof string = "",
   TParentFriendlyName extends valueof string = ""
@@ -71,7 +70,7 @@ op ArmLocResourceListByParent<
 @get
 @armResourceRead(TResource)
 op ArmLocResourceRead<
-  TResource extends ArmResource,
+  TResource extends Foundations.Resource,
   TBaseParameters = BaseParameters<TResource>
 >(
   ...LocationInstanceParameters<TResource>,

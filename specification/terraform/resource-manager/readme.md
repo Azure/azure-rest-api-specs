@@ -29,7 +29,7 @@ title: AzureTerraformManagementClient
 description: AzureTerraform Client
 openapi-type: arm
 openapi-subtype: providerHub
-tag: package-2023-07
+tag: package-2023-07-01-preview
 ```
 
 

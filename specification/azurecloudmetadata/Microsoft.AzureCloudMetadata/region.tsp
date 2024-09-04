@@ -14,6 +14,7 @@ using Azure.ResourceManager;
 namespace Microsoft.AzureCloudMetadata;
 
 /** Region resource. */
+@tenantResource
 @parentResource(Geography)
 model Region is ProxyResource<RegionProperties> {
   @doc("The region name")
