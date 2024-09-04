@@ -303,7 +303,7 @@ interface Environments {
   delayAction is StandardResourceOperations.ResourceAction<
     EnvironmentAction,
     {
-      @doc("The time to delay the Environment action until.")
+      @doc("The time to delay the Environment action until, in RFC3339 format.")
       @query("until")
       until: utcDateTime;
     },

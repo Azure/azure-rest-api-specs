@@ -1904,9 +1904,9 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/projects/{projectName}/users/{userId}/devboxes/{devBoxName}:restore": {
+    "/projects/{projectName}/users/{userId}/devboxes/{devBoxName}:restoreSnapshot": {
       "post": {
-        "operationId": "DevBoxes_RestoreDevBox",
+        "operationId": "DevBoxes_RestoreSnapshotDevBox",
         "description": "Restores a Dev Box to a specified snapshot.",
         "parameters": [
           {
@@ -1979,7 +1979,7 @@
         },
         "x-ms-examples": {
           "Attempts to restore the Dev Box to a selected snapshot.": {
-            "$ref": "./examples/DevBoxes_RestoreDevBox.json"
+            "$ref": "./examples/DevBoxes_RestoreSnapshotDevBox.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -2254,7 +2254,7 @@
           {
             "name": "until",
             "in": "query",
-            "description": "The time to delay the Dev Box action or actions until.",
+            "description": "The time to delay the Dev Box action or actions until, in RFC3339 format.",
             "required": true,
             "type": "string",
             "format": "date-time",
@@ -2329,7 +2329,7 @@
           {
             "name": "until",
             "in": "query",
-            "description": "The time to delay the Dev Box action or actions until.",
+            "description": "The time to delay the Dev Box action or actions until, in RFC3339 format.",
             "required": true,
             "type": "string",
             "format": "date-time",
@@ -3027,7 +3027,7 @@
           {
             "name": "snapshotId",
             "in": "path",
-            "description": "The id of the snapshot.",
+            "description": "The id of the snapshot. Should be treated as opaque string.",
             "required": true,
             "type": "string"
           }
@@ -3694,7 +3694,7 @@
           {
             "name": "until",
             "in": "query",
-            "description": "The time to delay the Environment action until.",
+            "description": "The time to delay the Environment action until, in RFC3339 format.",
             "required": true,
             "type": "string",
             "format": "date-time"
@@ -4237,13 +4237,13 @@
         "startTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Start time of the customization group.",
+          "description": "Start time of the customization group, in RFC3339 format.",
           "readOnly": true
         },
         "endTime": {
           "type": "string",
           "format": "date-time",
-          "description": "End time of the customization group.",
+          "description": "End time of the customization group, in RFC3339 format.",
           "readOnly": true
         }
       },
@@ -4343,13 +4343,13 @@
         "startTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Start time of the task.",
+          "description": "Start time of the task, in RFC3339 format.",
           "readOnly": true
         },
         "endTime": {
           "type": "string",
           "format": "date-time",
-          "description": "End time of the task.",
+          "description": "End time of the task, in RFC3339 format.",
           "readOnly": true
         }
       },
@@ -4544,12 +4544,12 @@
         "startTime": {
           "type": "string",
           "format": "date-time",
-          "description": "The start time of the operation."
+          "description": "The start time of the operation, in RFC3339 format."
         },
         "endTime": {
           "type": "string",
           "format": "date-time",
-          "description": "The end time of the operation."
+          "description": "The end time of the operation, in RFC3339 format."
         },
         "percentComplete": {
           "type": "number",
@@ -4784,7 +4784,7 @@
         "createdTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Creation time of this Dev Box.",
+          "description": "Creation time of this Dev Box, in RFC3339 format.",
           "readOnly": true
         },
         "localAdministrator": {
@@ -4839,7 +4839,7 @@
         "suspendedUntil": {
           "type": "string",
           "format": "date-time",
-          "description": "The earliest time that the action could occur (UTC)."
+          "description": "The earliest time that the action could occur (UTC), in RFC3339 format."
         },
         "next": {
           "$ref": "#/definitions/DevBoxNextAction",
@@ -4960,7 +4960,7 @@
         "scheduledTime": {
           "type": "string",
           "format": "date-time",
-          "description": "The time the action will be triggered (UTC)."
+          "description": "The time the action will be triggered (UTC), in RFC3339 format."
         }
       },
       "required": [
@@ -4999,12 +4999,12 @@
         "startTime": {
           "type": "string",
           "format": "date-time",
-          "description": "he time the operation started."
+          "description": "he time the operation started, in RFC3339 format."
         },
         "endTime": {
           "type": "string",
           "format": "date-time",
-          "description": "The time the operation finished."
+          "description": "The time the operation finished, in RFC3339 format."
         },
         "error": {
           "$ref": "#/definitions/Azure.Core.Foundations.Error",
@@ -5026,7 +5026,8 @@
         "Start",
         "Stop",
         "Restart",
-        "Repair"
+        "Repair",
+        "RestoreSnapshot"
       ],
       "x-ms-enum": {
         "name": "DevBoxOperationKind",
@@ -5051,6 +5052,11 @@
             "name": "Repair",
             "value": "Repair",
             "description": "The operation represents a Dev Box repair."
+          },
+          {
+            "name": "RestoreSnapshot",
+            "value": "RestoreSnapshot",
+            "description": "The operation represents a Dev Box restore from snapshot."
           }
         ]
       }
@@ -5213,19 +5219,38 @@
       ],
       "x-ms-discriminator-value": "Restart"
     },
+    "DevBoxRestoreSnapshotOperation": {
+      "type": "object",
+      "description": "Information about a restore from snapshot operation on a Dev Box.",
+      "properties": {
+        "snapshotId": {
+          "type": "string",
+          "description": "Specifies the snapshot id that was used for the restore operation."
+        }
+      },
+      "required": [
+        "snapshotId"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/DevBoxOperation"
+        }
+      ],
+      "x-ms-discriminator-value": "RestoreSnapshot"
+    },
     "DevBoxSnapshot": {
       "type": "object",
       "description": "A DevBox snapshot",
       "properties": {
         "snapshotId": {
           "type": "string",
-          "description": "The id of the snapshot.",
+          "description": "The id of the snapshot. Should be treated as opaque string.",
           "readOnly": true
         },
         "createdTime": {
           "type": "string",
           "format": "date-time",
-          "description": "The datetime that the snapshot was created.",
+          "description": "The datetime that the snapshot was created, in RFC3339 format.",
           "readOnly": true
         }
       },
@@ -5369,7 +5394,7 @@
         "lastModifiedAt": {
           "type": "string",
           "format": "date-time",
-          "description": "Time the object was last modified."
+          "description": "Time the object was last modified, in RFC3339 format."
         }
       },
       "required": [
@@ -5522,7 +5547,7 @@
         "scheduledTime": {
           "type": "string",
           "format": "date-time",
-          "description": "The time the action will be triggered (UTC)."
+          "description": "The time the action will be triggered (UTC), in RFC3339 format."
         }
       }
     },
@@ -5558,12 +5583,12 @@
         "startTime": {
           "type": "string",
           "format": "date-time",
-          "description": "The time the operation started."
+          "description": "The time the operation started, in RFC3339 format."
         },
         "endTime": {
           "type": "string",
           "format": "date-time",
-          "description": "The time the operation finished."
+          "description": "The time the operation finished, in RFC3339 format."
         },
         "environmentParameters": {
           "type": "object",
@@ -6046,7 +6071,7 @@
         "publishedDate": {
           "type": "string",
           "format": "date-time",
-          "description": "The datetime that the backing image version was published.",
+          "description": "The datetime that the backing image version was published, in RFC3339 format.",
           "readOnly": true
         }
       }
@@ -6103,12 +6128,12 @@
         "startTime": {
           "type": "string",
           "format": "date-time",
-          "description": "The start time of the operation."
+          "description": "The start time of the operation, in RFC3339 format."
         },
         "endTime": {
           "type": "string",
           "format": "date-time",
-          "description": "The end time of the operation."
+          "description": "The end time of the operation, in RFC3339 format."
         },
         "percentComplete": {
           "type": "number",

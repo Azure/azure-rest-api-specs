@@ -500,7 +500,7 @@ interface DevBoxes {
   delayAction is StandardResourceOperations.ResourceAction<
     DevBoxAction,
     {
-      @doc("The time to delay the Dev Box action or actions until.")
+      @doc("The time to delay the Dev Box action or actions until, in RFC3339 format.")
       @query("until")
       delayUntil: utcDateTime;
     },
@@ -512,7 +512,7 @@ interface DevBoxes {
   delayActions is StandardResourceOperations.ResourceCollectionAction<
     DevBoxAction,
     {
-      @doc("The time to delay the Dev Box action or actions until.")
+      @doc("The time to delay the Dev Box action or actions until, in RFC3339 format.")
       @query("until")
       delayUntil: utcDateTime;
     },
@@ -567,8 +567,8 @@ interface DevBoxes {
   @doc("Restores a Dev Box to a specified snapshot.")
   @added(APIVersions.v2024_09_01_preview)
   @pollingOperation(OperationStatuses.get)
-  @action("restore")
-  restoreDevBox is DevCenterOps.LongRunningResourceAction<
+  @action("restoreSnapshot")
+  restoreSnapshotDevBox is DevCenterOps.LongRunningResourceAction<
     DevBox,
     {
       @doc("Required parameter that specifies the snapshot id to use for the restore operation.")
