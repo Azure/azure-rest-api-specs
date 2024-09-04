@@ -1,12 +1,9 @@
 import "@typespec/http";
 import "@typespec/rest";
 import "@typespec/versioning";
-import "@azure-tools/typespec-providerhub";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
-using Autorest;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
@@ -16,10 +13,8 @@ using Azure.ResourceManager;
 @armProviderNamespace
 @service({
   title: "IndexManagementClient",
-  version: "2023-05-01-preview",
 })
 @doc("CognitiveSearch Resource Provider management API.")
-@useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
 namespace Microsoft.CognitiveSearch;
 
 @armResourceOperations
@@ -29,10 +24,13 @@ interface OperationExtensions {
   @post
   @doc("List resource")
   ArmResourceActionNoRequestBodySync<
-    TResource extends ArmResource,
+    TResource extends Azure.ResourceManager.Foundations.Resource,
     TResponse extends {}
   >(
-    ...ResourceInstanceParameters<TResource, BaseParameters<TResource>>,
+    ...ResourceInstanceParameters<
+      TResource,
+      Azure.ResourceManager.Foundations.BaseParameters<TResource>
+    >,
   ): ArmResponse<TResponse> | ErrorResponse;
 }
 
@@ -48,8 +46,16 @@ interface IndexOperations {
 
   createOrUpdate is ArmResourceCreateOrUpdateAsync<Index>;
 
-  update is ArmResourcePatchAsync<Index, IndexProperties>;
+  update is ArmCustomPatchAsync<
+    Index,
+    Azure.ResourceManager.Foundations.ResourceUpdateModel<
+      Index,
+      IndexProperties
+    >
+  >;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "legacy"
+  #suppress "deprecated" "legacy"
   delete is ArmResourceDeleteAsync<Index>;
 
   @doc("List ApiKeys used to access the dataplane.")
@@ -68,6 +74,7 @@ interface IndexOperations {
 
 @doc("An index resource")
 model Index is TrackedResource<IndexProperties> {
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-name-pattern" "legacy"
   @path
   @key("name")
   @segment("indexes")
@@ -110,6 +117,7 @@ model Capacity {
   autoPause: Pause;
 }
 
+#suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "legacy"
 @discriminator("type")
 @doc("Pausing strategy for the index")
 model Pause {}
@@ -132,15 +140,19 @@ model NonePause extends Pause {
 @doc("The list of all ApiKeys used to access the dataplane.")
 model IndexKeys {
   @doc("Primary read-write ApiKey.")
+  @secret
   primaryReadWriteKey: string;
 
   @doc("Secondary read-write ApiKey.")
+  @secret
   secondaryReadWriteKey: string;
 
   @doc("Primary read-only ApiKey.")
+  @secret
   primaryReadOnlyKey: string;
 
   @doc("Secondary read-only ApiKey.")
+  @secret
   secondaryReadOnlyKey: string;
 }
 
@@ -152,39 +164,43 @@ model RegenerateKeyParameters {
 
 @lroStatus
 @doc("Provisioning state of the index resource.")
-enum ProvisioningState {
-  ...ResourceProvisioningState,
+union ProvisioningState {
+  ResourceProvisioningState,
 
   @doc("Index is provisioning.")
-  Provisioning,
+  Provisioning: "Provisioning",
 
   @doc("Index is deleting.")
-  Deleting,
+  Deleting: "Deleting",
 
   @doc("Index is accepted.")
-  Accepted,
+  Accepted: "Accepted",
 }
 
 @doc("Authentication options for accessing the dataplane.")
-enum AuthOption {
+union AuthOption {
+  string,
+
   @doc("Azure Active Directory authentication option.")
-  AadOnly,
+  AadOnly: "AadOnly",
 
   @doc("Azure Active Directory and ApiKeys authentication option.")
-  AadAndApiKeys,
+  AadAndApiKeys: "AadAndApiKeys",
 }
 
 @doc("ApiKeys used to access the dataplane.")
-enum KeyKind {
+union KeyKind {
+  string,
+
   @doc("Primary read-write ApiKey.")
-  PrimaryReadWriteKey,
+  PrimaryReadWriteKey: "PrimaryReadWriteKey",
 
   @doc("Secondary read-write ApiKey.")
-  SecondaryReadWriteKey,
+  SecondaryReadWriteKey: "SecondaryReadWriteKey",
 
   @doc("Primary read-only ApiKey.")
-  PrimaryReadOnlyKey,
+  PrimaryReadOnlyKey: "PrimaryReadOnlyKey",
 
   @doc("Secondary read-only ApiKey.")
-  SecondaryReadOnlyKey,
+  SecondaryReadOnlyKey: "SecondaryReadOnlyKey",
 }

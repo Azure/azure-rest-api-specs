@@ -4,7 +4,6 @@ import "@azure-tools/typespec-azure-core";
 import "@typespec/openapi";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-resource-manager";
-import "../Operations.Management/models.tsp";
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.Core;
@@ -216,7 +215,7 @@ union VmSizeEnum {
   string,
 }
 
-@added(Versions.v2024_05_01_test_preview)
+@added(Versions.v2024_05_01_preview)
 @doc("Gpu Assignment types")
 union GpuAssignmentTypeEnum {
   @doc("Attach Graphics Processing Unit (GPU) using Discrete Device Assignment (DDA)")
@@ -358,7 +357,7 @@ union AttestHealthStatusEnum {
   string,
 }
 
-@added(Versions.v2024_05_01_test_preview)
+@added(Versions.v2024_08_01_preview)
 @doc("Defines type of hardware platform from attestation token.")
 union AttestHWPlatformEnum {
   @doc("AttestHWPlatform is Secure Encrypted Virtualization Secure Nested Paging (SEVSNP)")
@@ -370,7 +369,7 @@ union AttestHWPlatformEnum {
   string,
 }
 
-@added(Versions.v2024_05_01_test_preview)
+@added(Versions.v2024_08_01_preview)
 @doc("Defines type of managed disk security encryption type from attestation token.")
 union AttestDiskSecurityEncryptionTypeEnum {
   @doc("Disk security encryption type is non-persisted Trusted Platform Module (TPM)")
@@ -407,7 +406,7 @@ union OperatingSystemTypes {
   string,
 }
 
-@added(Versions.v2024_05_01_test_preview)
+@added(Versions.v2024_08_01_preview)
 @doc("Encryption type of the managed disk enum.")
 union SecurityEncryptionType {
   @doc("Non-persisted TPM encryption type")
@@ -548,6 +547,14 @@ model GalleryImageProperties {
   @doc("The observed state of gallery images")
   @visibility("read")
   status?: GalleryImageStatus;
+
+  @added(Versions.v2024_05_01_preview)
+  @doc("Resource ID of the source virtual machine from whose OS disk the gallery image is created.")
+  sourceVirtualMachineId?: armResourceIdentifier<[
+    {
+      type: "Microsoft.AzureStackHCI/virtualMachineInstance";
+    }
+  ]>;
 }
 
 @doc("This is the gallery image definition identifier.")
@@ -645,6 +652,7 @@ model ExtendedLocation {
 
 @doc("The gallery images resource patch definition.")
 model GalleryImagesUpdateRequest {
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing api"
   @doc("Resource tags")
   tags?: Record<string>;
 }
@@ -867,6 +875,10 @@ model NetworkInterfaceProperties {
 
   @doc("NetworkSecurityGroup - Network Security Group attached to the network interface.")
   networkSecurityGroup?: NetworkSecurityGroupArmReference;
+
+  @added(Versions.v2024_07_15_preview)
+  @doc("Boolean indicating whether this is a local network interface or if one should be created.")
+  createFromLocal?: boolean = false;
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "IP is a short form. The casing is correct."
@@ -957,6 +969,7 @@ model LogicalNetworkStatusProvisioningStatus {
 
 @doc("The logical network resource patch definition.")
 model LogicalNetworksUpdateRequest {
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing api"
   @doc("Resource tags")
   tags?: Record<string>;
 }
@@ -1032,18 +1045,21 @@ model MarketplaceGalleryImageStatusDownloadStatus {
 
 @doc("The marketplace gallery image resource patch definition.")
 model MarketplaceGalleryImagesUpdateRequest {
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing api"
   @doc("Resource tags")
   tags?: Record<string>;
 }
 
 @doc("The network interface resource patch definition.")
 model NetworkInterfacesUpdateRequest {
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing api"
   @doc("Resource tags")
   tags?: Record<string>;
 }
 
 @doc("Tags object for patch operations.")
 model TagsObject {
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing api"
   @doc("Resource tags.")
   tags?: Record<string>;
 }
@@ -1094,6 +1110,7 @@ model StorageContainerStatusProvisioningStatus {
 
 @doc("The storage container resource patch definition.")
 model StorageContainersUpdateRequest {
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing api"
   @doc("Resource tags")
   tags?: Record<string>;
 }
@@ -1115,6 +1132,19 @@ model VirtualHardDiskProperties {
 
   @doc("Physical sector in bytes")
   physicalSectorBytes?: int32;
+
+  @added(Versions.v2024_05_01_preview)
+  @doc("URL for downloading or accessing the virtual hard disk. This URL points to a secure link from where the VHD can be downloaded or accessed directly.")
+  @secret
+  downloadUrl?: string;
+
+  @added(Versions.v2024_07_15_preview)
+  @doc("Boolean indicating whether this is a local hard disk or if one should be created.")
+  createFromLocal?: boolean = false;
+
+  @added(Versions.v2024_07_15_preview)
+  @doc("Operating system type of the OS disk. Possible values are: Windows, Linux.")
+  osType?: OperatingSystemTypes;
 
   #suppress "@azure-tools/typespec-azure-core/casing-style" "HyperV is the correct case."
   @doc("The hypervisor generation of the Virtual Machine [V1, V2]")
@@ -1150,6 +1180,14 @@ model VirtualHardDiskStatus {
 
   @doc("Provisioning status of the vhd")
   provisioningStatus?: VirtualHardDiskStatusProvisioningStatus;
+
+  @added(Versions.v2024_05_01_preview)
+  @doc("The download status of the virtual hard disk")
+  downloadStatus?: VirtualHardDiskDownloadStatus;
+
+  @added(Versions.v2024_05_01_preview)
+  @doc("The upload status of the virtual hard disk")
+  uploadStatus?: VirtualHardDiskUploadStatus;
 }
 
 @doc("VHD Status provisioning status")
@@ -1161,10 +1199,52 @@ model VirtualHardDiskStatusProvisioningStatus {
   status?: Status;
 }
 
+@added(Versions.v2024_05_01_preview)
+@doc("The download status of the virtual hard disk")
+model VirtualHardDiskDownloadStatus {
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "MB should be referenced as MB."
+  @doc("The downloaded sized of the virtual hard disk in MB")
+  downloadedSizeInMB?: int64;
+}
+
+@added(Versions.v2024_05_01_preview)
+@doc("The upload status of the virtual hard disk")
+model VirtualHardDiskUploadStatus {
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "MB should be referenced as MB."
+  @doc("The uploaded sized of the virtual hard disk in MB")
+  uploadedSizeInMB?: int64;
+
+  @doc("The status of Uploading virtual hard disk [Succeeded, Failed, InProgress]")
+  status?: Status;
+}
+
 @doc("The virtual hard disk resource patch definition.")
 model VirtualHardDisksUpdateRequest {
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing api"
   @doc("Resource tags")
   tags?: Record<string>;
+}
+
+@added(Versions.v2024_05_01_preview)
+@doc("Request for uploading virtual hard disk.")
+model VirtualHardDiskUploadRequest {
+  @doc("The Azure managed disk SAS URL to upload the virtual hard disk to.")
+  @secret
+  azureManagedDiskUploadUrl: string;
+}
+
+@added(Versions.v2024_05_01_preview)
+@doc("Response for uploading virtual hard disk.")
+model VirtualHardDiskUploadResponse {
+  @doc("The ARM ID for a Virtual Hard Disk.")
+  virtualHardDiskId?: armResourceIdentifier<[
+    {
+      type: "Microsoft.AzureStackHCI/virtualHardDisks";
+    }
+  ]>;
+
+  @doc("The upload status of the virtual hard disk")
+  uploadStatus?: VirtualHardDiskUploadStatus;
 }
 
 @doc("Properties under the virtual machine instance resource")
@@ -1208,6 +1288,10 @@ model VirtualMachineInstanceProperties {
 
   @doc("Unique identifier defined by ARC to identify the guest of the VM.")
   resourceUid?: string;
+
+  @added(Versions.v2024_07_15_preview)
+  @doc("Boolean indicating whether this is a local virtual machine or if one should be created.")
+  createFromLocal?: boolean = false;
 }
 
 @doc("HardwareProfile - Specifies the hardware settings for the virtual machine instance.")
@@ -1226,7 +1310,7 @@ model VirtualMachineInstancePropertiesHardwareProfile {
   dynamicMemoryConfig?: VirtualMachineInstancePropertiesHardwareProfileDynamicMemoryConfig;
 
   #suppress "@azure-tools/typespec-azure-core/casing-style" "GPU is a short form. It is the correct case."
-  @added(Versions.v2024_05_01_test_preview)
+  @added(Versions.v2024_05_01_preview)
   @doc("virtualMachineGPUs - list of gpus to be attached to the virtual machine instance")
   @extension("x-ms-identifiers", [])
   virtualMachineGPUs?: VirtualMachineInstancePropertiesHardwareProfileVirtualMachineGPU[];
@@ -1247,7 +1331,7 @@ model VirtualMachineInstancePropertiesHardwareProfileDynamicMemoryConfig {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "GPU is a short form. It is the correct case."
-@added(Versions.v2024_05_01_test_preview)
+@added(Versions.v2024_05_01_preview)
 @doc("GPU properties - describes the GPU configuration.")
 model VirtualMachineInstancePropertiesHardwareProfileVirtualMachineGPU {
   @doc("GPU assignment type")
@@ -1258,7 +1342,7 @@ model VirtualMachineInstancePropertiesHardwareProfileVirtualMachineGPU {
   partitionSizeMB?: int64;
 
   @doc("Name of the GPU")
-  name?: string;
+  gpuName?: string;
 }
 
 @doc("NetworkProfile - describes the network configuration the virtual machine instance")
@@ -1386,12 +1470,12 @@ model VirtualMachineInstancePropertiesStorageProfileOsDisk
   @doc("This property allows you to specify the type of the OS that is included in the disk if creating a VM from user-image or a specialized VHD. Possible values are: Windows, Linux.")
   osType?: OperatingSystemTypes;
 
-  @added(Versions.v2024_05_01_test_preview)
+  @added(Versions.v2024_08_01_preview)
   @doc("The managed disk parameters.")
   managedDisk?: VirtualMachineInstanceManagedDiskParameters;
 }
 
-@added(Versions.v2024_05_01_test_preview)
+@added(Versions.v2024_08_01_preview)
 @doc("The parameters of a managed disk.")
 model VirtualMachineInstanceManagedDiskParameters {
   @doc("Specifies the security profile for the managed disk.")
@@ -1399,7 +1483,7 @@ model VirtualMachineInstanceManagedDiskParameters {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "VM is a short form. It is the correct case."
-@added(Versions.v2024_05_01_test_preview)
+@added(Versions.v2024_08_01_preview)
 @doc("Specifies the security profile settings for the managed disk. NOTE: It can only be set for Confidential VMs")
 model VMDiskSecurityProfile {
   @doc("Specifies the EncryptionType of the managed disk. It is set to NonPersistedTPM for not persisting firmware state in the VMGuestState blob. NOTE: It can be set for only Confidential VMs.")
@@ -1558,7 +1642,7 @@ model HardwareProfileUpdate {
   memoryMB?: int64;
 
   #suppress "@azure-tools/typespec-azure-core/casing-style" "GPU is a short form. It is the correct case."
-  @added(Versions.v2024_05_01_test_preview)
+  @added(Versions.v2024_05_01_preview)
   @doc("virtualMachineGPUs - updated list of GPUs on the virtual machine instance")
   @extension("x-ms-identifiers", [])
   virtualMachineGPUs?: VirtualMachineInstancePropertiesHardwareProfileVirtualMachineGPU[];
@@ -1662,13 +1746,12 @@ model AttestationStatusProperties {
   @visibility("read")
   provisioningState?: ProvisioningStateEnum;
 
-  @added(Versions.v2024_05_01_test_preview)
   @doc("The hardware platform information from attestation token. This only applies to Confidential VM.")
   @visibility("read")
-  @added(Versions.v2024_05_01_test_preview)
+  @added(Versions.v2024_08_01_preview)
   attestHardwarePlatform?: AttestHWPlatformEnum;
 
-  @added(Versions.v2024_05_01_test_preview)
+  @added(Versions.v2024_08_01_preview)
   @doc("The managed disk security encryption type from attestation token. This only applies to Confidential VM.")
   @visibility("read")
   attestDiskSecurityEncryptionType?: AttestDiskSecurityEncryptionTypeEnum;

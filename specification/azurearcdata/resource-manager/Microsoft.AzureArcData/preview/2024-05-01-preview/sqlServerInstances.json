@@ -269,6 +269,10 @@
         "clientConnection": {
           "description": "Client connection related configuration.",
           "$ref": "#/definitions/ClientConnection"
+        },
+        "serviceType": {
+          "description": "Indicates if the resource represents a SQL Server engine or a SQL Server component service installed on the host.",
+          "$ref": "#/definitions/ServiceType"
         }
       }
     },
@@ -514,6 +518,10 @@
         "clientConnection": {
           "description": "Client connection related configuration.",
           "$ref": "#/definitions/ClientConnection"
+        },
+        "serviceType": {
+          "description": "Indicates if the resource represents a SQL Server engine or a SQL Server component service installed on the host.",
+          "$ref": "#/definitions/ServiceType"
         }
       }
     },
@@ -738,6 +746,43 @@
           "type": "boolean",
           "description": "Indicates if client connection is enabled for this SQL Server instance."
         }
+      }
+    },
+    "ServiceType": {
+      "description": "Indicates if the resource represents a SQL Server engine or a SQL Server component service installed on the host.",
+      "type": "string",
+      "enum": [
+        "Engine",
+        "SSRS",
+        "SSAS",
+        "SSIS",
+        "PBIRS"
+      ],
+      "x-ms-enum": {
+        "name": "serviceType",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Engine",
+            "description": "SQL Server Database Services."
+          },
+          {
+            "value": "SSRS",
+            "description": "SQL Server Reporting Services."
+          },
+          {
+            "value": "SSAS",
+            "description": "SQL Server Analysis Services."
+          },
+          {
+            "value": "SSIS",
+            "description": "SQL Server Integration Services."
+          },
+          {
+            "value": "PBIRS",
+            "description": "Power BI Report Server."
+          }
+        ]
       }
     },
     "ServerAssessments": {

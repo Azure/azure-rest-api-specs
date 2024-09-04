@@ -7,7 +7,6 @@ using TypeSpec.Rest;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 
 namespace Microsoft.Edge;
 
@@ -56,7 +55,6 @@ model ConnectivityStatusUpdate {
   /**
    * The updatable properties of the ConnectivityStatus.
    */
-  @extension("x-ms-client-flatten", true)
   properties?: ConnectivityStatusUpdateProperties;
 }
 

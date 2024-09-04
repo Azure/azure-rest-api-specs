@@ -317,6 +317,19 @@
         "azureServiceEndpoint": {
           "type": "string",
           "description": "For Azure blob service endpoint type, select either Default or Custom domain. If you selected **Custom domain, enter the domain for the blob service in this format core.windows.net."
+        },
+        "clusterType": {
+          "$ref": "#/definitions/ClusterType",
+          "description": "Cluster type supported."
+        },
+        "replicationMode": {
+          "$ref": "#/definitions/ReplicationMode",
+          "description": "Replication mode feature configuration for HCI cluster."
+        },
+        "hardwareClass": {
+          "$ref": "#/definitions/HardwareClass",
+          "description": "Hardware class of the cluster.",
+          "readOnly": true
         }
       }
     },
@@ -481,6 +494,31 @@
         "deploymentMode": {
           "$ref": "./hciCommon.json#/definitions/DeploymentMode",
           "description": "The deployment mode for cluster deployment."
+        },
+        "operationType": {
+          "type": "string",
+          "description": "The intended operation for a cluster.",
+          "enum": [
+            "ClusterProvisioning",
+            "ClusterUpgrade"
+          ],
+          "default": "ClusterProvisioning",
+          "x-ms-enum": {
+            "name": "OperationType",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "ClusterProvisioning",
+                "value": "ClusterProvisioning",
+                "description": "Cluster provisioning operation."
+              },
+              {
+                "name": "ClusterUpgrade",
+                "value": "ClusterUpgrade",
+                "description": "Cluster upgrade operation."
+              }
+            ]
+          }
         },
         "deploymentConfiguration": {
           "$ref": "#/definitions/DeploymentConfiguration",
@@ -693,6 +731,14 @@
         "ipv4Address": {
           "type": "string",
           "description": "The IPv4 address assigned to each physical server on your Azure Stack HCI cluster."
+        },
+        "faultDomainName": {
+          "type": "string",
+          "description": "Fault domain name for HCI cluster. e.g. FaultDomainA, FaultDomainB"
+        },
+        "faultDomainMode": {
+          "$ref": "#/definitions/FaultDomainMode",
+          "description": "Fault Domain mode for HCI cluster."
         }
       }
     },
@@ -712,6 +758,54 @@
           "type": "string",
           "description": "This parameter should only be modified based on your OEM guidance. Do not modify this parameter without OEM validation."
         }
+      }
+    },
+    "FaultDomainMode": {
+      "type": "string",
+      "description": "Fault Domain mode for HCI cluster.",
+      "enum": [
+        "Active",
+        "Passive"
+      ],
+      "x-ms-enum": {
+        "name": "FaultDomainMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Active",
+            "value": "Active",
+            "description": "Fault domain in active mode."
+          },
+          {
+            "name": "Passive",
+            "value": "Passive",
+            "description": "Fault domain in passive mode."
+          }
+        ]
+      }
+    },
+    "ReplicationMode": {
+      "type": "string",
+      "description": "Replication mode feature configuration for HCI cluster.",
+      "enum": [
+        "Sync",
+        "Async"
+      ],
+      "x-ms-enum": {
+        "name": "ReplicationMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Sync",
+            "value": "Sync",
+            "description": "Sync mode enabled."
+          },
+          {
+            "name": "Async",
+            "value": "Async",
+            "description": "Async mode enabled."
+          }
+        ]
       }
     },
     "SbePartnerInfo": {
@@ -944,6 +1038,61 @@
             "physicalNode"
           ]
         }
+      }
+    },
+    "ClusterType": {
+      "type": "string",
+      "description": "Supported cluster types.",
+      "enum": [
+        "Standard",
+        "Stretch",
+        "RackAware"
+      ],
+      "x-ms-enum": {
+        "name": "ClusterType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Standard",
+            "value": "Standard",
+            "description": "Standard cluster."
+          },
+          {
+            "name": "Stretch",
+            "value": "Stretch",
+            "description": "Stretch cluster."
+          },
+          {
+            "name": "RackAware",
+            "value": "RackAware",
+            "description": "RackAware cluster."
+          }
+        ]
+      }
+    },
+    "HardwareClass": {
+      "type": "string",
+      "description": "Hardware class of the cluster.",
+      "enum": [
+        "Small",
+        "Medium",
+        "Large"
+      ],
+      "x-ms-enum": {
+        "name": "HardwareClass",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Small",
+            "value": "Small",
+            "description": "Small cluster."
+          },
+          {
+            "name": "Medium",
+            "value": "Medium",
+            "description": "Medium cluster."
+          }
+        ]
       }
     },
     "VirtualSwitchConfigurationOverrides": {

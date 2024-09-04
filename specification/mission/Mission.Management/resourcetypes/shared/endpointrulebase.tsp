@@ -1,3 +1,6 @@
+@doc("Microsoft Mission Resource Provider management API.")
+namespace Microsoft.Mission;
+
 @doc("Base Endpoint Rule Properties")
 model EndpointRuleBase {
   @doc("Endpoint Rule Name.")

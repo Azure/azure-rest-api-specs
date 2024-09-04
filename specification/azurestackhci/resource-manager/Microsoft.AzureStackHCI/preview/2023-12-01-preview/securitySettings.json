@@ -333,6 +333,7 @@
     "ProvisioningState": {
       "type": "string",
       "description": "The provisioning state of a resource.",
+      "readOnly": true,
       "enum": [
         "Succeeded",
         "Failed",
@@ -425,6 +426,16 @@
           "description": "Secured Core Compliance Assignment",
           "default": "Audit"
         },
+        "wdacComplianceAssignment": {
+          "$ref": "#/definitions/ComplianceAssignmentType",
+          "description": "WDAC Compliance Assignment",
+          "default": "Audit"
+        },
+        "smbEncryptionForIntraClusterTrafficComplianceAssignment": {
+          "$ref": "#/definitions/ComplianceAssignmentType",
+          "description": "SMB encryption for intra-cluster traffic Compliance Assignment",
+          "default": "Audit"
+        },
         "securityComplianceStatus": {
           "$ref": "#/definitions/SecurityComplianceStatus",
           "description": "Security Compliance Status",
@@ -432,8 +443,7 @@
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
-          "description": "The status of the last operation.",
-          "readOnly": true
+          "description": "The status of the last operation."
         }
       }
     },
@@ -453,7 +463,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
       ]
     },

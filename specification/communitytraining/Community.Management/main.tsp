@@ -1,7 +1,6 @@
 import "@typespec/http";
 import "@typespec/rest";
 import "@typespec/versioning";
-import "@azure-tools/typespec-providerhub";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
@@ -10,13 +9,18 @@ using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.ResourceManager;
 
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-common-types-version" "legacy"
 @armProviderNamespace("Microsoft.Community")
 @service({
   title: "Microsoft.Community",
-  version: "2023-08-01-preview",
 })
-@useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+@versioned(Versions)
 namespace Microsoft.Community;
+
+enum Versions {
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  `2023-08-01-preview`,
+}
 
 interface Operations extends Azure.ResourceManager.Operations {}
 
@@ -31,25 +35,25 @@ model CommunityTraining is TrackedResource<CommunityTrainingProperties> {
   @path
   name: string;
 
-  ...ResourceSku;
+  ...ResourceSkuProperty;
 }
 
 @doc("The status of the current operation.")
 @Azure.Core.lroStatus
-enum ProvisioningState {
-  ...ResourceProvisioningState,
+union ProvisioningState {
+  ResourceProvisioningState,
 
   @doc("Initial provisioning in progress")
-  Provisioning,
+  Provisioning: "Provisioning",
 
   @doc("Update in progress")
-  Updating,
+  Updating: "Updating",
 
   @doc("Deletion in progress")
-  Deleting,
+  Deleting: "Deleting",
 
   @doc("Change accepted for processing")
-  Accepted,
+  Accepted: "Accepted",
 }
 
 @doc("Details of the Community CommunityTraining Identity Configuration")
@@ -127,10 +131,15 @@ model CommunityTrainingProperties {
 interface CommunityTrainings {
   get is ArmResourceRead<CommunityTraining>;
   create is ArmResourceCreateOrUpdateAsync<CommunityTraining>;
-  update is ArmResourcePatchAsync<
+  update is ArmCustomPatchAsync<
     CommunityTraining,
-    CommunityTrainingProperties
+    Azure.ResourceManager.Foundations.ResourceUpdateModel<
+      CommunityTraining,
+      CommunityTrainingProperties
+    >
   >;
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "legacy"
+  #suppress "deprecated" "legacy"
   delete is ArmResourceDeleteAsync<CommunityTraining>;
   listByResourceGroup is ArmResourceListByParent<CommunityTraining>;
   listBySubscription is ArmListBySubscription<CommunityTraining>;

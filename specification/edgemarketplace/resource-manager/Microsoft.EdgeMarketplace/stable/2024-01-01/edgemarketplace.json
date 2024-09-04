@@ -108,7 +108,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/OfferListResult"
             }
@@ -154,7 +154,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/Offer"
             }
@@ -206,7 +206,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/DiskAccessToken"
             }
@@ -214,14 +214,14 @@
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
@@ -276,7 +276,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/DiskAccessToken"
             }
@@ -353,7 +353,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/PublisherListResult"
             }
@@ -400,7 +400,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/Publisher"
             }
@@ -433,7 +433,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
             }
@@ -472,7 +472,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/OfferListResult"
             }
@@ -511,7 +511,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/PublisherListResult"
             }
@@ -811,12 +811,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/OfferProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "description": "The resource-specific properties for this resource."
         }
       },
       "allOf": [
@@ -965,7 +960,8 @@
         },
         "provisioningState": {
           "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
-          "description": "The resource provisioning state"
+          "description": "The resource provisioning state",
+          "readOnly": true
         },
         "marketplaceSkus": {
           "type": "array",
@@ -1047,7 +1043,7 @@
             "description": "Origin is system"
           },
           {
-            "name": "user,system",
+            "name": "userAndSystem",
             "value": "user,system",
             "description": "Origin is user and system"
           }
@@ -1060,12 +1056,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/PublisherProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "description": "The resource-specific properties for this resource."
         }
       },
       "allOf": [
@@ -1101,12 +1092,10 @@
       "properties": {
         "provisioningState": {
           "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
-          "description": "The resource provisioning state"
+          "description": "The resource provisioning state",
+          "readOnly": true
         }
-      },
-      "required": [
-        "provisioningState"
-      ]
+      }
     },
     "SkuOperatingSystem": {
       "type": "object",
@@ -1145,24 +1134,6 @@
           "type": "string",
           "description": "The privacy policy uri"
         }
-      }
-    },
-    "Versions": {
-      "type": "string",
-      "description": "The available API versions.",
-      "enum": [
-        "2024-01-01"
-      ],
-      "x-ms-enum": {
-        "name": "Versions",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "v2024_00_01",
-            "value": "2024-01-01",
-            "description": "Version 2024-01-01"
-          }
-        ]
       }
     }
   },
