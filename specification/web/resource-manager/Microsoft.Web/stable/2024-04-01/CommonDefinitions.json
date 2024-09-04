@@ -965,6 +965,110 @@
         }
       }
     },
+    "SwiftVirtualNetworkProxy": {
+      "description": "Swift Virtual Network Contract. This is used to enable the new Swift way of doing virtual network integration.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyOnlyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SwiftVirtualNetwork"
+        }
+      }
+    },
+    "SwiftVirtualNetwork": {
+      "description": "Swift Virtual Network Contract. This is used to enable the new Swift way of doing virtual network integration.",
+      "type": "object",
+      "properties": {
+        "subnetResourceId": {
+          "description": "The Virtual Network subnet's Azure resource ID",
+          "type": "string",
+          "format": "arm-id"
+        },
+        "swiftSupported": {
+          "description": "Boolean flag indicating whether Swift integration is supported",
+          "type": "boolean"
+        },
+        "subnetIpAllocation": {
+          "description": "IP allocation for a Swift Subnet",
+          "type": "object",
+          "properties": {
+            "subnetIpAddressesAvailable": {
+              "description": "The number of IP addresses available in the Swift subnet address space",
+              "type": "integer",
+              "format": "int32"
+            },
+            "subnetIpAddressesUsed": {
+              "description": "The number of IP addresses that have already been used in the Swift subnet address space",
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        },
+        "vnetConnectionAllocation": {
+          "description": "Swift Connection allocation for an App Service Plan",
+          "type": "object",
+          "properties": {
+            "vnetConnectionsUsed": {
+              "description": "The number of Swift Connections used for an App Service Plan",
+              "type": "integer",
+              "format": "int32"
+            },
+            "vnetConnectionsMax": {
+              "description": "The maximum number of Swift Connections available for an App Service Plan",
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        },
+        "resourceAllocation": {
+          "description": "Resources (sites and serverfarms) allocated to this subnet",
+          "type": "object",
+          "properties": {
+            "connectedServerFarmsId": {
+              "description": "The list of all ServerFarms' Azure resource ID that are using the VNET",
+              "type": "array",
+              "items": {
+                "type": "string",
+                "format": "arm-id"
+              }
+            },
+            "connectedSitesId": {
+              "description": "The list of all Sites' Azure resource ID that are using the VNET",
+              "type": "array",
+              "items": {
+                "type": "string",
+                "format": "arm-id"
+              }
+            }
+          }
+        }
+      }
+    },
+    "SwiftVirtualNetworkCollection": {
+      "description": "Collection of Swift Virtual Networks",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Collection of resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SwiftVirtualNetwork"
+          }
+        },
+        "nextLink": {
+          "description": "Link to next page of resources.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
     "CustomDnsSuffixConfiguration": {
       "description": "Full view of the custom domain suffix configuration for ASEv3.",
       "type": "object",

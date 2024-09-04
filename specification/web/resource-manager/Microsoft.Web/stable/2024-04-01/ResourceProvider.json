@@ -545,6 +545,98 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Web/locations/{location}/virtualNetworkIntegrations": {
+      "post": {
+        "summary": "Retrieve information regarding the provided virtual network integration",
+        "description": "Retrieve information regarding the provided virtual network integration, such as its allocated resources and its allocated IP",
+        "operationId": "VirtualNetworkIntegrations",
+        "parameters": [
+          {
+            "name": "request",
+            "in": "body",
+            "description": "Object contains the subnetResourceId",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/VirtualNetworkIntegrationRequest"
+            }
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/SwiftVirtualNetwork"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetVirtualNetworkIntegrations": {
+            "$ref": "./examples/GetVirtualNetworkIntegrations.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Web/locations/{location}/purgeUnusedVirtualNetworkIntegration": {
+      "post": {
+        "summary": "Delete orphaned (unused) VNET integration",
+        "description": "Delete orphaned (unused) VNET integration, otherwise fail the call if there are sites that are still using the VNET integrations",
+        "operationId": "PurgeUnusedVirtualNetworkIntegrations",
+        "parameters": [
+          {
+            "name": "request",
+            "in": "body",
+            "description": "Object contains the subnetResourceId",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/VirtualNetworkIntegrationRequest"
+            }
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The Virtual Network is deleted.",
+            "schema": {
+              "$ref": "#/definitions/VirtualNetworkIntegrationResponse"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "#/definitions/VirtualNetworkIntegrationResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PurgeUnusedVirtualNetworkIntegrations": {
+            "$ref": "./examples/PurgeUnusedVirtualNetworkIntegrations.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Web/locations/{location}/usages": {
       "get": {
         "summary": "Lists subscription core usages for all skus used in a location, for a given type of quota.",
@@ -1604,6 +1696,46 @@
             }
           },
           "x-ms-client-flatten": true
+        }
+      }
+    },
+    "VirtualNetworkIntegrationRequest": {
+      "description": "Virtual Network Integration request content.",
+      "required": [
+        "subnetResourceId"
+      ],
+      "type": "object",
+      "properties": {
+        "subnetResourceId": {
+          "description": "The Azure Resource ID of the subnet",
+          "type": "string",
+          "format": "arm-id"
+        }
+      }
+    },
+    "VirtualNetworkIntegrationResponse": {
+      "description": "Response wrapper for PurgedUnusedVirtualNetworkIntegrations.",
+      "type": "object",
+      "properties": {
+        "message": {
+          "description": "Description of the result",
+          "type": "string",
+          "enum": [
+            "Operation is not supported at the moment.",
+            "Purged unused virtual network integration.",
+            "<ERROR> Conflict: Virtual network integration is still in use."
+          ],
+          "x-ms-enum": {
+            "name": "VirtualNetworkIntegrationResponseMessage",
+            "modelAsString": true
+          }
+        },
+        "swiftVirtualNetwork" : {
+          "description": "The Swift Virtual Network object",
+          "type": "object",
+          "schema": {
+            "$ref": "./CommonDefinitions.json#/definitions/SwiftVirtualNetwork"
+          }
         }
       }
     }

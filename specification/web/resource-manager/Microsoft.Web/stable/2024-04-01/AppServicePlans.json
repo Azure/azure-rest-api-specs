@@ -1410,6 +1410,111 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/serverfarms/{name}/virtualNetworkIntegrations/{vnetName}": {
+      "get": {
+        "tags": [
+          "AppServicePlans"
+        ],
+        "summary": "Get a Virtual Network associated with an App Service plan",
+        "description": "Get a Virtual Network associated with an App Service plan and its properties, such as IP allocation and resource allocation",
+        "operationId": "AppServicePlans_GetVirtualNetworkIntegration",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the App Service plan.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "vnetName",
+            "in": "path",
+            "description": "Name of the Virtual Network in the form of <vnetGuid>_<subnetName>",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}_.+$"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/SwiftVirtualNetwork"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetVirtualNetworkIntegration": {
+            "$ref": "./examples/AppServicePlan_GetVirtualNetworkIntegration.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/serverfarms/{name}/virtualNetworkIntegrations": {
+      "get": {
+        "tags": [
+          "AppServicePlans"
+        ],
+        "summary": "Get all Virtual Networks associated with an App Service plan",
+        "description": "Get all Virtual Networks associated with an App Service plan and their properties, such as IP allocation and resource allocation",
+        "operationId": "AppServicePlans_GetVirtualNetworkIntegrations",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the App Service plan.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/SwiftVirtualNetworkCollection"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "GetVirtualNetworkIntegrations": {
+            "$ref": "./examples/AppServicePlan_GetVirtualNetworkIntegrations.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/serverfarms/{name}/workers/{workerName}/reboot": {
       "post": {
         "tags": [
