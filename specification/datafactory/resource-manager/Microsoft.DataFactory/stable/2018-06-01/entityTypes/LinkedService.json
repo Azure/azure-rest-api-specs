@@ -5822,7 +5822,7 @@
         "driverVersion": {
           "type": "object",
           "x-ms-format": "dfe-string",
-          "description": "The version of the MariaDB driver. Type: string. V1 or empty for legacy driver, V2 for new driver. V1 can support connection string and property bag, V2 can only support connection string."
+          "description": "The version of the MariaDB driver. Type: string. V1 or empty for legacy driver, V2 for new driver. V1 can support connection string and property bag, V2 can only support connection string. The legacy driver is scheduled for deprecation by October 2024."
         },
         "connectionString": {
           "description": "An ODBC connection string. Type: string, SecureString or AzureKeyVaultSecretReference.",
@@ -5848,6 +5848,16 @@
           "type": "object",
           "x-ms-format": "dfe-string",
           "description": "Database name for connection. Type: string."
+        },
+        "sslMode": {
+          "type": "object",
+          "x-ms-format": "dfe-int",
+          "description": "This option specifies whether the driver uses TLS encryption and verification when connecting to MariaDB. E.g., SSLMode=<0/1/2/3/4>. Options: DISABLED (0) / PREFERRED (1) (Default) / REQUIRED (2) / VERIFY_CA (3) / VERIFY_IDENTITY (4), REQUIRED (2) is recommended to only allow connections encrypted with SSL/TLS."
+        },
+        "useSystemTrustStore": {
+          "type": "object",
+          "x-ms-format": "dfe-int",
+          "description": "This option specifies whether to use a CA certificate from the system trust store, or from a specified PEM file. E.g. UseSystemTrustStore=<0/1>; Options: Enabled (1) / Disabled (0) (Default)"
         },
         "password": {
           "$ref": "../datafactory.json#/definitions/AzureKeyVaultSecretReference",
