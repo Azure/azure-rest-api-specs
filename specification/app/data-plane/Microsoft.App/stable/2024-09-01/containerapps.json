@@ -445,8 +445,8 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/sessionPools/{sessionPoolName}/files/{fileName}/download": {
       "get": {
-        "operationId": "SessionResourceFiles_GetFileContent",
-        "description": "Get the content of the file.",
+        "operationId": "SessionResourceFiles_DownloadFile",
+        "description": "Download the file.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -489,8 +489,8 @@
           }
         },
         "x-ms-examples": {
-          "SessionResourceFiles_GetFileContent": {
-            "$ref": "./examples/SessionResourceFiles_GetFileContent.json"
+          "SessionResourceFiles_DownloadFile": {
+            "$ref": "./examples/SessionResourceFiles_DownloadFile.json"
           }
         }
       }
@@ -870,12 +870,12 @@
         "createdAt": {
           "type": "string",
           "format": "date-time",
-          "description": "The date time when the file was uploaded."
+          "description": "The date time in RFC3339 format when the file was uploaded."
         },
         "lastModifiedAt": {
           "type": "string",
           "format": "date-time",
-          "description": "The date time when the file was last modified."
+          "description": "The date time in RFC3339 format when the file was last modified."
         }
       },
       "required": [

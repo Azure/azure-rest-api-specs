@@ -68,10 +68,10 @@ interface SessionResourceFiles {
   deleteFile is SessionOperations.ResourceDelete<SessionResourceFile>;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" ""
-  @doc("Get the content of the file.")
+  @doc("Download the file.")
   @get
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/sessionPools/{sessionPoolName}/files/{fileName}/download")
-  getFileContent is Foundations.Operation<
+  downloadFile is Foundations.Operation<
     {
       ...SubscriptionIdParameter;
       ...ResourceGroupNameParameter;
