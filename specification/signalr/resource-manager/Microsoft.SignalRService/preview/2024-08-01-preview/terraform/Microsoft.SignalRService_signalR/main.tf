@@ -17,7 +17,7 @@ provider "azapi" {
 
 variable "resource_name" {
   type    = string
-  default = "acctest33252"
+  default = "acctest33253"
 }
 
 variable "location" {
@@ -50,6 +50,8 @@ resource "azapi_resource" "signalR" {
           "https://bar.com",
         ]
       }
+      resourceStopped = "false"
+      regionEndpointEnabled = "Enabled"
       disableAadAuth   = false
       disableLocalAuth = false
       features = [
@@ -78,6 +80,39 @@ resource "azapi_resource" "signalR" {
           value = "False"
         },
       ]
+   applicationFirewall = {
+            clientConnectionCountRules = [
+              {
+                type = "ThrottleByJwtSignatureRule",
+                maxCount = 13
+              },
+              {
+                type = "ThrottleByUserIdRule",
+                maxCount = 20
+              },
+              {
+                type = "ThrottleByJwtCustomClaimRule",
+                claimName =  "claimName",
+                maxCount = 20
+              }
+            ]
+          },
+       resourceLogConfiguration = {
+        categories = [
+          {
+            enabled = "false"
+            name    = "MessagingLogs"
+          },
+          {
+            enabled = "false"
+            name    = "ConnectivityLogs"
+          },
+          {
+            enabled = "false"
+            name    = "HttpRequestLogs"
+          },
+        ]
+      }
       liveTraceConfiguration = {
         categories = [
           {
@@ -88,6 +123,11 @@ resource "azapi_resource" "signalR" {
         enabled = "false"
       }
       networkACLs = {
+        ipRules = [
+          {
+            action = "Allow"
+            value = "0.0.0.0/0"
+          },]
         defaultAction = "Deny"
         privateEndpoints = [
           // Need to create a private endpoint first
@@ -102,6 +142,7 @@ resource "azapi_resource" "signalR" {
           allow = [
             "ClientConnection",
           ]
+          deny = []
         }
       }
       publicNetworkAccess = "Enabled"
@@ -148,11 +189,14 @@ resource "azapi_resource_action" "patch_signalR" {
   action      = ""
   method      = "PATCH"
   body = {
+    location = var.location
     identity = {
       type = "SystemAssigned"
     }
     kind = "SignalR"
     properties = {
+      resourceStopped = "false"
+      regionEndpointEnabled = "Enabled"
       cors = {
         allowedOrigins = [
           "https://foo.com",
@@ -207,10 +251,16 @@ resource "azapi_resource_action" "patch_signalR" {
           #   name = "mysignalrservice.1fa229cd-bf3f-47f0-8c49-afb36723997e"
           # },
         ]
+         ipRules = [
+          {
+            action = "Allow"
+            value = "0.0.0.0/0"
+          },]
         publicNetwork = {
           allow = [
             "ClientConnection",
           ]
+          deny = []
         }
       }
       publicNetworkAccess = "Enabled"
@@ -219,6 +269,39 @@ resource "azapi_resource_action" "patch_signalR" {
       }
       tls = {
         clientCertEnabled = false
+      }
+     applicationFirewall = {
+            clientConnectionCountRules = [
+              {
+                type = "ThrottleByJwtSignatureRule",
+                maxCount = 13
+              },
+              {
+                type = "ThrottleByUserIdRule",
+                maxCount = 20
+              },
+              {
+                type = "ThrottleByJwtCustomClaimRule",
+                claimName = "claimName",
+                maxCount =20
+              }
+            ]
+          },
+      resourceLogConfiguration = {
+        categories = [
+          {
+            enabled = "false"
+            name    = "MessagingLogs"
+          },
+          {
+            enabled = "false"
+            name    = "ConnectivityLogs"
+          },
+          {
+            enabled = "false"
+            name    = "HttpRequestLogs"
+          },
+        ]
       }
       upstream = {
         templates = [
@@ -318,5 +401,63 @@ data "azapi_resource_list" "listSignalRByResourceGroup" {
   type       = "Microsoft.SignalRService/signalR@2024-08-01-preview"
   parent_id  = azapi_resource.resourceGroup.id
   depends_on = [azapi_resource.signalR]
+}
+
+# // OperationId: SignalRReplicas_List
+# // GET /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/signalR/{resourceName}/replicas
+data "azapi_resource_list" "listReplicasBySignalR" {
+  type       = "Microsoft.SignalRService/signalR/replicas@2024-08-01-preview"
+  parent_id  = azapi_resource.signalR.id
+}
+
+resource "azapi_resource" "user_assigned_identity" {
+  type      = "Microsoft.ManagedIdentity/userAssignedIdentities@2018-11-30"
+  name      = var.resource_name
+  location  = var.location
+   parent_id = azapi_resource.resourceGroup.id
+}
+
+# validate properties that can't exist together
+// OperationId: SignalR_CreateOrUpdate, SignalR_Get, SignalR_Delete
+// PUT GET DELETE /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/signalR/{resourceName}
+resource "azapi_resource" "signalR2" {
+  type      = "Microsoft.SignalRService/signalR@2024-08-01-preview"
+  parent_id = azapi_resource.resourceGroup.id
+  name      = format("%s2", var.resource_name)
+  location  = var.location
+  body = {
+   identity = {
+                type = "UserAssigned",
+                userAssignedIdentities = {
+                     "${azapi_resource.user_assigned_identity.id}"  = {}
+                }
+            },
+    kind = "SignalR"
+    sku = {
+      capacity = 1
+      name     = "Premium_P1"
+      tier     = "Premium"
+    }
+  }
+  schema_validation_enabled = false
+}
+
+
+// OperationId: SignalR_Update
+// PATCH /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/signalR/{resourceName}
+resource "azapi_resource_action" "patch_signalR2" {
+  type        = "Microsoft.SignalRService/signalR@2024-08-01-preview"
+  resource_id = azapi_resource.signalR2.id
+  action      = ""
+  method      = "PATCH"
+  body = {
+    location = var.location
+      identity = {
+                type = "UserAssigned",
+                userAssignedIdentities = {
+                     "${azapi_resource.user_assigned_identity.id}"  = {}
+                }
+            },
+}
 }
 

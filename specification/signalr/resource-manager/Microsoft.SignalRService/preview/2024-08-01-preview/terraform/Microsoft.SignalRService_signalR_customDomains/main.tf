@@ -49,50 +49,9 @@ resource "azapi_resource" "signalR" {
       }
       disableAadAuth   = false
       disableLocalAuth = false
-      features = [
-        {
-          flag  = "ServiceMode"
-          value = "Default"
-        },
-        {
-          flag  = "EnableConnectivityLogs"
-          value = "False"
-        },
-        {
-          flag  = "EnableMessagingLogs"
-          value = "False"
-        },
-        {
-          flag  = "EnableLiveTrace"
-          value = "False"
-        },
-      ]
       publicNetworkAccess = "Enabled"
-      resourceLogConfiguration = {
-        categories = [
-          {
-            enabled = "false"
-            name    = "MessagingLogs"
-          },
-          {
-            enabled = "false"
-            name    = "ConnectivityLogs"
-          },
-          {
-            enabled = "false"
-            name    = "HttpRequestLogs"
-          },
-        ]
-      }
-      serverless = {
-        connectionTimeoutInSeconds = 30
-      }
       tls = {
         clientCertEnabled = false
-      }
-      upstream = {
-        templates = [
-        ]
       }
     }
     sku = {

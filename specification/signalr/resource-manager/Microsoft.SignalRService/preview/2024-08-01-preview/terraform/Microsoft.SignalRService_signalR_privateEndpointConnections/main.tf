@@ -17,7 +17,7 @@ provider "azapi" {
 
 variable "resource_name" {
   type    = string
-  default = "acctest55446"
+  default = "acctest55447"
 }
 
 variable "location" {
@@ -46,50 +46,9 @@ resource "azapi_resource" "signalR" {
       }
       disableAadAuth   = false
       disableLocalAuth = false
-      features = [
-        {
-          flag  = "ServiceMode"
-          value = "Default"
-        },
-        {
-          flag  = "EnableConnectivityLogs"
-          value = "False"
-        },
-        {
-          flag  = "EnableMessagingLogs"
-          value = "False"
-        },
-        {
-          flag  = "EnableLiveTrace"
-          value = "False"
-        },
-      ]
       publicNetworkAccess = "Enabled"
-      resourceLogConfiguration = {
-        categories = [
-          {
-            enabled = "false"
-            name    = "MessagingLogs"
-          },
-          {
-            enabled = "false"
-            name    = "ConnectivityLogs"
-          },
-          {
-            enabled = "false"
-            name    = "HttpRequestLogs"
-          },
-        ]
-      }
-      serverless = {
-        connectionTimeoutInSeconds = 30
-      }
       tls = {
         clientCertEnabled = false
-      }
-      upstream = {
-        templates = [
-        ]
       }
     }
     sku = {
@@ -186,6 +145,7 @@ resource "azapi_resource_action" "put_privateEndpointConnection" {
       privateLinkServiceConnectionState = {
         actionsRequired = "None"
         status          = "Approved"
+        description     = "Please approve"
       }
     }
   }
@@ -213,4 +173,68 @@ resource "azapi_resource_action" "delete_privateEndpointConnection" {
 locals {
   privateEndpointConnectionName = one([for r in jsondecode(data.azapi_resource_list.listPrivateEndpointConnectionsBySignalR.output).value : r.name
   if r.properties.privateEndpoint.id == azapi_resource.private_endpoint.id])
+}
+
+resource "azapi_resource_action" "put_signalR" {
+  type        = "Microsoft.SignalRService/signalR@2024-08-01-preview"
+  resource_id = azapi_resource.signalR.id
+  action      = ""
+  method      = "PUT"
+  body = {
+    location = var.location
+    properties = {
+      networkACLs = {
+         privateEndpoints = [
+                        {
+                            name = local.privateEndpointConnectionName
+                            allow =[
+                                "ServerConnection",
+                                "ClientConnection",
+                                "RESTAPI",
+                                "Trace"
+                            ]
+                            deny = []
+                        }
+                    ],
+      }
+    }
+    sku = {
+      capacity = 1
+      name     = "Standard_S1"
+      tier     = "Standard"
+    }
+  }
+  depends_on = [ azapi_resource_action.put_privateEndpointConnection ]
+}
+
+resource "azapi_resource_action" "patch_signalR" {
+  type        = "Microsoft.SignalRService/signalR@2024-08-01-preview"
+  resource_id = azapi_resource.signalR.id
+  action      = ""
+  method      = "PATCH"
+  body = {
+    location = var.location
+    properties = {
+      networkACLs = {
+         privateEndpoints = [
+                        {
+                            name = local.privateEndpointConnectionName
+                            allow =[
+                                "ServerConnection",
+                                "ClientConnection",
+                                "RESTAPI",
+                                "Trace"
+                            ]
+                            deny = []
+                        }
+                    ],
+      }
+    }
+    sku = {
+      capacity = 1
+      name     = "Standard_S1"
+      tier     = "Standard"
+    }
+  }
+  depends_on = [ azapi_resource_action.put_signalR ]
 }

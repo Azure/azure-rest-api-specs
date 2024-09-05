@@ -47,54 +47,11 @@ resource "azapi_resource" "signalR" {
       userAssignedIdentities = null
     }
     properties = {
-      cors = {
-      }
       disableAadAuth   = false
       disableLocalAuth = false
-      features = [
-        {
-          flag  = "ServiceMode"
-          value = "Default"
-        },
-        {
-          flag  = "EnableConnectivityLogs"
-          value = "False"
-        },
-        {
-          flag  = "EnableMessagingLogs"
-          value = "False"
-        },
-        {
-          flag  = "EnableLiveTrace"
-          value = "False"
-        },
-      ]
       publicNetworkAccess = "Enabled"
-      resourceLogConfiguration = {
-        categories = [
-          {
-            enabled = "false"
-            name    = "MessagingLogs"
-          },
-          {
-            enabled = "false"
-            name    = "ConnectivityLogs"
-          },
-          {
-            enabled = "false"
-            name    = "HttpRequestLogs"
-          },
-        ]
-      }
-      serverless = {
-        connectionTimeoutInSeconds = 30
-      }
       tls = {
         clientCertEnabled = false
-      }
-      upstream = {
-        templates = [
-        ]
       }
     }
     sku = {
@@ -116,6 +73,7 @@ resource "azapi_resource" "replica" {
   body = {
     properties = {
       resourceStopped = "false"
+      regionEndpointEnabled = "Enabled"
     }
     sku = {
       capacity = 1
@@ -123,7 +81,7 @@ resource "azapi_resource" "replica" {
       tier     = "Premium"
     }
     tags = {
-      key1 = "value1"
+      key1 = "value2"
     }
   }
   schema_validation_enabled = false
@@ -137,8 +95,10 @@ resource "azapi_resource_action" "patch_replica" {
   action      = ""
   method      = "PATCH"
   body = {
+    location = var.replica_location
     properties = {
       resourceStopped = "false"
+      regionEndpointEnabled = "Enabled"
     }
     sku = {
       capacity = 1
@@ -146,7 +106,7 @@ resource "azapi_resource_action" "patch_replica" {
       tier     = "Premium"
     }
     tags = {
-      key1 = "value1"
+      key1 = "value2"
     }
   }
   depends_on = [azapi_resource.replica]
@@ -170,13 +130,3 @@ data "azapi_resource_action" "skus" {
   action      = "skus"
   method      = "GET"
 }
-
-# This api can't be tested until the api is completely onboarded
-# // OperationId: SignalRReplicas_List
-# // GET /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/signalR/{resourceName}/replicas
-# data "azapi_resource_list" "listReplicasBySignalR" {
-#   type       = "Microsoft.SignalRService/signalR/replicas@2024-08-01-preview"
-#   parent_id  = azapi_resource.signalR.id
-#   depends_on = [azapi_resource.replica]
-# }
-

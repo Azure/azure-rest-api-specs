@@ -47,54 +47,11 @@ resource "azapi_resource" "signalR" {
       userAssignedIdentities = null
     }
     properties = {
-      cors = {
-      }
       disableAadAuth   = false
       disableLocalAuth = false
-      features = [
-        {
-          flag  = "ServiceMode"
-          value = "Default"
-        },
-        {
-          flag  = "EnableConnectivityLogs"
-          value = "False"
-        },
-        {
-          flag  = "EnableMessagingLogs"
-          value = "False"
-        },
-        {
-          flag  = "EnableLiveTrace"
-          value = "False"
-        },
-      ]
       publicNetworkAccess = "Enabled"
-      resourceLogConfiguration = {
-        categories = [
-          {
-            enabled = "false"
-            name    = "MessagingLogs"
-          },
-          {
-            enabled = "false"
-            name    = "ConnectivityLogs"
-          },
-          {
-            enabled = "false"
-            name    = "HttpRequestLogs"
-          },
-        ]
-      }
-      serverless = {
-        connectionTimeoutInSeconds = 30
-      }
       tls = {
         clientCertEnabled = false
-      }
-      upstream = {
-        templates = [
-        ]
       }
     }
     sku = {
@@ -257,6 +214,7 @@ resource "azapi_resource_action" "put_sharedPrivateLinkResource" {
       groupId               = "sites"
       privateLinkResourceId = azapi_resource.site.id
       requestMessage        = "Please approve"
+      fqdns                 = []
     }
   }
   depends_on = [azapi_update_resource.privateEndpointConnection, time_sleep.wait]
