@@ -12,7 +12,7 @@ using Azure.Core;
 using Azure.Core.Traits;
 
 @service({
-  title: "Microsoft.VoiceServices.Provisioning",
+  title: "Microsoft.VoiceServices.Provisioning test",
 })
 @useAuth(
   [
