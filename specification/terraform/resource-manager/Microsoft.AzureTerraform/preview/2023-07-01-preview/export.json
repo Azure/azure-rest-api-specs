@@ -136,7 +136,7 @@
           "ExportTerraform"
         ],
         "operationId": "ExportTerraform",
-        "description": "Exports the Terraform configuration used for the specified scope.",
+        "description": "Exports the Terraform configuration of the specified resources.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -194,7 +194,7 @@
           "$ref": "#/definitions/BaseExportModel"
         }
       ],
-      "description": "Export parameter for a single resource",
+      "description": "Export parameter for individual resources",
       "required": [
         "resourceIds"
       ],
@@ -366,6 +366,11 @@
         "name": {
           "type": "string",
           "description": "The operation name."
+        },
+        "resourceId": {
+          "type": "string",
+          "description": "The fully qualified resource ID of the resource for which the operation was performed",
+          "readOnly": true
         },
         "startTime": {
           "type": "string",
