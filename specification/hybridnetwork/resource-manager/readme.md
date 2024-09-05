@@ -51,10 +51,6 @@ suppressions:
     reason: sku cannot be patched
 ```
 
-```yaml
-openapi-type: arm
-openapi-subtype: rpaas
-tag: package-2023-09-01
 ```
 ### Tag: package-2023-09-01
 
