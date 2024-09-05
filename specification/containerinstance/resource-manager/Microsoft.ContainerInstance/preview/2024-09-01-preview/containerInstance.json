@@ -218,7 +218,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -309,7 +309,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -342,12 +342,17 @@
         ],
         "responses": {
           "202": {
-            "description": "NoContent"
+            "description": "NoContent",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -427,7 +432,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -843,7 +848,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -968,7 +973,7 @@
             "default": {
               "description": "Error response describing why the operation failed.",
               "schema": {
-                "$ref": "#/definitions/CloudError"
+                "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
               }
             }
           },
@@ -1010,12 +1015,17 @@
               }
             },
             "202": {
-              "description": "nGroup update started"
+              "description": "nGroup update started",
+              "headers": {
+                "Location": {
+                  "type": "string"
+                }
+              }
             },
             "default": {
               "description": "Error response describing why the operation failed.",
               "schema": {
-                "$ref": "#/definitions/CloudError"
+                "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
               }
             }
           },
@@ -1055,7 +1065,7 @@
             "default": {
               "description": "Error response describing why the operation failed.",
               "schema": {
-                "$ref": "#/definitions/CloudError"
+                "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
               }
             }
           },
@@ -1094,7 +1104,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1156,12 +1166,17 @@
         ],
         "responses": {
           "202": {
-            "description": "NoContent"
+            "description": "NoContent",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1639,6 +1654,7 @@
     },
     "GitRepoVolume": {
       "description": "Represents a volume that is populated with the contents of a git repository",
+      "type": "object",
       "required": [
         "repository"
       ],
