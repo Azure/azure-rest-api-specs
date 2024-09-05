@@ -4837,22 +4837,41 @@
       }
     },
     "MachineIpAddress": {
-      "type": "object",
-      "readOnly": true,
       "description": "The machine IP address details.",
       "properties": {
-        "ip": {
-          "type": "string",
-          "readOnly": true,
-          "description": "IPv4 or IPv6 address of the machine"
-        },
         "family": {
-          "$ref": "#/definitions/IPFamily",
-          "description": "To determine if address belongs IPv4 or IPv6 family."
+          "description": "To determine if address belongs IPv4 or IPv6 family",
+          "enum": [
+            "IPv4",
+            "IPv6"
+          ],
+          "readOnly": true,
+          "type": "string",
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "IPFamily",
+            "values": [
+              {
+                "description": "IPv4 family",
+                "value": "IPv4"
+              },
+              {
+                "description": "IPv6 family",
+                "value": "IPv6"
+              }
+            ]
+          }
+        },
+        "ip": {
+          "description": "IPv4 or IPv6 address of the machine",
+          "readOnly": true,
+          "type": "string"
         }
-      }
+      },
+      "readOnly": true,
+      "type": "object"
     },
-    "IPFamily": {
+    "ipFamily": {
       "type": "string",
       "readOnly": true,
       "description": "To determine if address belongs IPv4 or IPv6 family.",
@@ -4861,7 +4880,7 @@
         "IPv6"
       ],
       "x-ms-enum": {
-        "name": "IPFamily",
+        "name": "ipFamily",
         "modelAsString": true,
         "values": [
           {
