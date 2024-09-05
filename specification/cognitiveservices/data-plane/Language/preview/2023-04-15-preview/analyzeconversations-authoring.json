@@ -2799,6 +2799,21 @@
         ]
       }
     },
+    "ConfusionMatrix": {
+      "type": "object",
+      "description": "Represents a confusion matrix for evaluating predictions against labeled data.",
+      "properties": {
+        "matrix": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/ConfusionMatrixRow"
+          }
+        }
+      },
+      "required": [
+        "matrix"
+      ]
+    },
     "ConfusionMatrixCell": {
       "type": "object",
       "description": "Represents a cell in a confusion matrix.",
@@ -2817,6 +2832,21 @@
       "required": [
         "normalizedValue",
         "rawValue"
+      ]
+    },
+    "ConfusionMatrixRow": {
+      "type": "object",
+      "description": "Represents a row in the confusion matrix..",
+      "properties": {
+        "matrixRow": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/ConfusionMatrixCell"
+          }
+        }
+      },
+      "required": [
+        "matrixRow"
       ]
     },
     "ConversationExportedEntity": {
@@ -3253,14 +3283,8 @@
       "description": "Represents the evaluation result summary for the project's entities.",
       "properties": {
         "confusionMatrix": {
-          "type": "object",
-          "description": "Represents the confusion matrix between two entities (the two entities can be\nthe same). The matrix is between the entity that was labelled and the entity\nthat was predicted.",
-          "additionalProperties": {
-            "additionalProperties": {
-              "$ref": "#/definitions/ConfusionMatrixCell"
-            },
-            "type": "object"
-          }
+          "$ref": "#/definitions/ConfusionMatrix",
+          "description": "Represents the confusion matrix between two entities (the two entities can be\nthe same). The matrix is between the entity that was labelled and the entity\nthat was predicted."
         },
         "entities": {
           "type": "object",
@@ -4096,14 +4120,8 @@
       "description": "Represents the evaluation summary for the project's intents.",
       "properties": {
         "confusionMatrix": {
-          "type": "object",
-          "description": "Represents the confusion matrix between two intents (the two intents can be the\nsame). The matrix is between the intent that was labelled and the intent that\nwas predicted.",
-          "additionalProperties": {
-            "additionalProperties": {
-              "$ref": "#/definitions/ConfusionMatrixCell"
-            },
-            "type": "object"
-          }
+          "$ref": "#/definitions/ConfusionMatrix",
+          "description": "Represents the confusion matrix between two intents (the two intents can be the\nsame). The matrix is between the intent that was labelled and the intent that\nwas predicted."
         },
         "intents": {
           "type": "object",
