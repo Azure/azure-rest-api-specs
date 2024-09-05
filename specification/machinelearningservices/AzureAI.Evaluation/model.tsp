@@ -1,52 +1,109 @@
-import "@typespec/http";
 import "@typespec/rest";
+import "@azure-tools/typespec-autorest";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
-import "./routes.tsp";
+import "./common.tsp";
+import "@typespec/openapi";
+import "@typespec/versioning";
 
+using TypeSpec.OpenAPI;
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.Core.Traits;
 
-@useAuth(
-  OAuth2Auth<[
-    {
-      type: OAuth2FlowType.implicit,
-      authorizationUrl: "https://login.microsoftonline.com/common/oauth2/v2.0/authorize",
-      scopes: ["https://ml.azure.com/.default"],
-    }
-  ]>
-)
-@service({
-  title: "Azure Machine Learning Evaluation Data Plane Service",
-})
-@server(
-  "{endpoint}/evaluation/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}",
-  "Machinelearning Services Evaluation APIs",
-  {
-    @doc("""
-      Supported Azure-AI Evaluation endpoints.
-      """)
-    endpoint: url,
-
-    @doc("The ID of the target subscription.")
-    subscriptionId: string,
-
-    @doc("The name of the Resource Group.")
-    resourceGroupName: string,
-
-    @doc("The name of the AI project.")
-    workspaceName: string,
-  }
-)
-@versioned(Versions)
 namespace Microsoft.MachineLearningServices;
 
-@doc("Azure Machine Learning Evaluation Data Plane Service api versions.")
-enum Versions {
-  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
-  @doc("The 2022-11-01-preview version of the Microsoft.MachineLearningServices service.")
-  `2022-11-01-preview`,
+@doc("Evaluator Configuration")
+model EvaluatorConfiguration {
+  @doc("Identifier of the evaluator.")
+  id: string;
+
+  @doc("Initialization parameters of the evaluator.")
+  init_params?: Record<string>;
+
+  @doc("Data parameters of the evaluator.")
+  data_mapping?: Record<string>;
 }
+
+@doc("Data Source for Application Insight.")
+model AppInsightDataSource {
+  @doc("Application Insight connection string.")
+  connection_string: string;
+
+  @doc("Query to fetch data.")
+  query: string;
+}
+
+@doc("Input Data for Evaluation.")
+union InputData {
+    string,
+    AppInsightDataSource
+}
+
+@doc("Output Location for Evaluation.")
+model outputLocation {
+  @doc("Output location for the evaluation.")
+  dataPath: string;
+}
+
+@doc("Base Model and prompt for evaluation.")
+model BaseModel {
+  @doc("Base model for evaluation.")
+  endpoint: string;
+
+  @doc("System prompt to be used with base model.")
+  prompt: string;
+
+  @doc("parameters for evaluation.")
+  parameters: Record<string>;
+}
+
+@doc("Evaluation Target.")
+union EvaluationTarget {
+    string,
+    AppInsightDataSource
+}
+
+@doc("Evaluation Definition")
+model Evaluation {
+  @doc("Identifier of the evaluation.")
+  id: string;
+
+  @doc("Update stage to 'Archive' to archive the asset. Default is Development, which means the asset is under development.")
+  displayName?: string = "Development";
+
+  @doc("Description of the evaluation. It can be used to store additional information about the evaluation and is mutable.")
+  description?: string;
+
+  @doc("Metadata containing createdBy and modifiedBy information.")
+  @visibility("read")
+  systemData?: SystemData;
+
+  @doc("Status of the evaluation. It is set by service and is read-only.")
+  @visibility("read")
+  status?: string;
+
+  @doc("Evaluation's tags. Unlike properties, tags are fully mutable.")
+  tags?: Record<string>;
+
+  @doc("Evaluation's properties. Unlike tags, properties are add-only. Once added, a property cannot be removed.")
+  properties?: Record<string>;
+
+  @doc("Evaluators to be used for the evaluation.")
+  evaluators?: Record<EvaluatorConfiguration>;
+
+  @doc("Data for evaluation.")
+  data: InputData;
+
+  @doc("Output location for the evaluation.")
+  outputLocation?: string;
+
+  @doc("Evaluation Target.")
+  evaluation_target?: EvaluationTarget;
+}
+
+#suppress "@azure-tools/typespec-providerhub/no-inline-model" "Need to create reponses correctly"
+alias ResourceCreatedResponse<T extends TypeSpec.Reflection.Model> = TypeSpec.Http.Response<201> &
+  T;

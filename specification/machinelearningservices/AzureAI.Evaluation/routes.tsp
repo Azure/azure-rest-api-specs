@@ -15,14 +15,14 @@ using Azure.Core.Foundations;
 namespace Microsoft.MachineLearningServices;
 
 interface Evaluations {
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Waiting for bug fix:}
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Waiting for bug fix: https://github.com/Azure/typespec-azure-pr/issues/3739."
   @doc("Get an Evalution.")
   @route("/evalations/{id}")
   @get
   get is Azure.Core.Foundations.Operation<
     {
       @doc("Identifier of the evaluation.")
-      @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_]*$") # TODO: Check if this is the correct pattern
+      @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_]*$")
       @maxLength(254)
       @path
       id: string;
@@ -41,5 +41,6 @@ interface Evaluations {
       @body
       body: Evaluation;
     },
-    ResourceCreated<Evaluation>
+    ResourceCreatedResponse<Evaluation>
   >;
+}
