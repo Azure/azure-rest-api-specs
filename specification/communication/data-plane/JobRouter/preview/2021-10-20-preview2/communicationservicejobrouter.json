@@ -1052,6 +1052,56 @@
         }
       }
     },
+    "/routing/jobs/{jobId}/assignments/{assignmentId}:unassign": {
+      "post": {
+        "tags": [
+          "Jobs"
+        ],
+        "summary": "Un-assign a job.",
+        "operationId": "JobRouter_UnassignJobAction",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "jobId",
+            "description": "Id of the job to unassign",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "assignmentId",
+            "description": "Id of the assignment to unassign",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/UnassignJobResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Unassigns a job": {
+            "$ref": "./examples/Jobs_UnassignJob.json"
+          }
+        }
+      }
+    },
     "/routing/workers/{workerId}/offers/{offerId}:accept": {
       "post": {
         "tags": [
@@ -3321,6 +3371,24 @@
         }
       },
       "x-ms-discriminator-value": "static"
+    },
+    "UnassignJobResponse": {
+      "required": [
+        "jobId",
+        "unassignmentCount"
+      ],
+      "type": "object",
+      "properties": {
+        "jobId": {
+          "description": "The Id of the job unassigned.",
+          "type": "string"
+        },
+        "unassignmentCount": {
+          "format": "int32",
+          "description": "The number of times a job is unassigned. At a maximum 3.",
+          "type": "integer"
+        }
+      }
     },
     "WaitTimeExceptionTrigger": {
       "description": "Trigger for an exception action on exceeding wait time",

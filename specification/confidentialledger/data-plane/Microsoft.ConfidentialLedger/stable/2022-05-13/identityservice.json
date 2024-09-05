@@ -2,17 +2,17 @@
   "swagger": "2.0",
   "info": {
     "version": "2022-05-13",
-    "title": "ConfidentialLedgerIdentityServiceClient",
-    "description": "The ConfidentialLedgerIdentityServiceClient is used to retrieve the TLS certificate required for connecting to a Confidential Ledger."
+    "title": "ConfidentialLedgerCertificateClient",
+    "description": "The ConfidentialLedgerCertificateClient is used to retrieve the TLS certificate required for connecting to a Confidential Ledger."
   },
   "x-ms-parameterized-host": {
-    "hostTemplate": "{identityServiceUri}",
+    "hostTemplate": "{certificateEndpoint}",
     "useSchemePrefix": false,
     "positionInOperation": "first",
     "parameters": [
       {
-        "name": "identityServiceUri",
-        "description": "The Identity Service URL, for example https://identity.accledger.azure.com",
+        "name": "certificateEndpoint",
+        "description": "The certificate endpoint (or \"Identity Service Endpoint\" in the Azure portal), for example https://identity.confidential-ledger.core.azure.com",
         "required": true,
         "type": "string",
         "in": "path",

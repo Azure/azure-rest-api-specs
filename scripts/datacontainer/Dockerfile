@@ -1,4 +1,8 @@
-FROM mcr.microsoft.com/oss/mirror/docker.io/library/ubuntu:20.04
+FROM mcr.microsoft.com/cbl-mariner/base/core:2.0
+
+RUN tdnf -y update && \
+    tdnf -y install git && \
+    tdnf clean all
 
 RUN mkdir -p /usr/data/specrepo/
 

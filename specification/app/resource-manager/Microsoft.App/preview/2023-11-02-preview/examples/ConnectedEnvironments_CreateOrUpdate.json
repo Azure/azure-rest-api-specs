@@ -1,0 +1,73 @@
+{
+  "parameters": {
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
+    "resourceGroupName": "examplerg",
+    "connectedEnvironmentName": "testenv",
+    "api-version": "2023-11-02-preview",
+    "kind": "kubernetes",
+    "location": "East US",
+    "extendedLocation": {
+      "name": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/examplerg/providers/Microsoft.ExtendedLocation/customLocations/testcustomlocation",
+      "type": "CustomLocation"
+    },
+    "environmentEnvelope": {
+      "location": "East US",
+      "properties": {
+        "staticIp": "1.2.3.4",
+        "daprAIConnectionString": "InstrumentationKey=00000000-0000-0000-0000-000000000000;IngestionEndpoint=https://northcentralus-0.in.applicationinsights.azure.com/",
+        "customDomainConfiguration": {
+          "dnsSuffix": "www.my-name.com",
+          "certificateValue": "Y2VydA==",
+          "certificatePassword": "private key password"
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/examplerg/providers/Microsoft.App/connectedEnvironments/testenv",
+        "name": "testenv",
+        "type": "Microsoft.App/connectedEnvironments",
+        "location": "East US",
+        "extendedLocation": {
+          "name": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/examplerg/providers/Microsoft.ExtendedLocation/customLocations/testcustomlocation",
+          "type": "CustomLocation"
+        },
+        "tags": {},
+        "properties": {
+          "provisioningState": "Succeeded",
+          "deploymentErrors": null,
+          "defaultDomain": "testenv.k4apps.io",
+          "staticIp": "1.2.3.4",
+          "customDomainConfiguration": {
+            "customDomainVerificationId": "custom domain verification id",
+            "dnsSuffix": "www.my-name.com",
+            "subjectName": "CN=www.my-name.com",
+            "expirationDate": "2022-11-06T04:00:00Z",
+            "thumbprint": "CERTIFICATE_THUMBPRINT"
+          }
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/examplerg/providers/Microsoft.App/connectedEnvironments/testenv",
+        "name": "testenv",
+        "type": "Microsoft.App/connectedEnvironments",
+        "location": "East US",
+        "extendedLocation": {
+          "name": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/examplerg/providers/Microsoft.ExtendedLocation/customLocations/testcustomlocation",
+          "type": "CustomLocation"
+        },
+        "tags": {},
+        "properties": {
+          "provisioningState": "Waiting",
+          "deploymentErrors": null,
+          "defaultDomain": "testenv.k4apps.io",
+          "staticIp": "1.2.3.4"
+        }
+      }
+    }
+  }
+}

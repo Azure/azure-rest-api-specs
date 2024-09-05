@@ -3157,7 +3157,10 @@
         "computeLocation": {
           "description": "Location for the underlying compute",
           "type": "string",
-          "readOnly": true
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "provisioningState": {
           "type": "string",
@@ -3218,7 +3221,11 @@
         },
         "disableLocalAuth": {
           "type": "boolean",
-          "description": "Opt-out of local authentication and ensure customers can use only MSI and AAD exclusively for authentication."
+          "description": "Opt-out of local authentication and ensure customers can use only MSI and AAD exclusively for authentication.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         }
       },
       "required": [

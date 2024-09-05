@@ -18,8 +18,12 @@ Generate all API versions currently shipped for this package
 
 ```yaml $(python)
 multiapi: true
+default-api-version: "2021-11-01"
 clear-output-folder: true
 batch:
+  - tag: package-2022-10-preview
+  - tag: package-2022-01-preview
+  - tag: package-2021-11
   - tag: package-2021-06-preview
   - tag: package-2021-01-preview
   - tag: package-2018-01-preview
@@ -31,6 +35,36 @@ batch:
 ``` yaml $(multiapiscript)
 output-folder: $(python-sdks-folder)/servicebus/azure-mgmt-servicebus/azure/mgmt/servicebus/
 perform-load: false
+```
+
+### Tag: package-2022-10-preview and python
+
+These settings apply only when `--tag=package-2022-10-preview --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-2022-10-preview'
+namespace: azure.mgmt.servicebus.v2022_10_01_preview
+output-folder: $(python-sdks-folder)/servicebus/azure-mgmt-servicebus/azure/mgmt/servicebus/v2022_10_01_preview
+```
+
+### Tag: package-2022-01-preview and python
+
+These settings apply only when `--tag=package-2022-01-preview --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-2022-01-preview'
+namespace: azure.mgmt.servicebus.v2022_01_01_preview
+output-folder: $(python-sdks-folder)/servicebus/azure-mgmt-servicebus/azure/mgmt/servicebus/v2022_01_01_preview
+```
+
+### Tag: package-2021-11 and python
+
+These settings apply only when `--tag=package-2021-11 --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-2021-11'
+namespace: azure.mgmt.servicebus.v2021_11_01
+output-folder: $(python-sdks-folder)/servicebus/azure-mgmt-servicebus/azure/mgmt/servicebus/v2021_11_01
 ```
 
 ### Tag: package-2021-06-preview and python

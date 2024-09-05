@@ -27,7 +27,7 @@ These are the global settings for the appliance.
 ```yaml
 name: appliances
 openapi-type: arm
-tag: package-2022-04-15-preview
+tag: package-2022-10-27
 ```
 
 ### Tag: package-2021-10-31-preview
@@ -48,6 +48,15 @@ input-file:
   - Microsoft.ResourceConnector/preview/2022-04-15-preview/appliances.json
 ```
 
+### Tag: package-2022-10-27
+
+These settings apply only when `--tag=package-2022-10-27` is specified on the command line.
+
+```yaml $(tag) == 'package-2022-10-27'
+input-file:
+  - Microsoft.ResourceConnector/stable/2022-10-27/appliances.json
+```
+
 ---
 
 # Code Generation
@@ -59,10 +68,9 @@ This is not used by Autorest itself.
 
 ```yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-python-track2
+  - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
-  - repo: azure-sdk-for-go-track2
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-ruby
     after_scripts:
@@ -89,3 +97,7 @@ See configuration in [readme.typescript.md](./readme.typescript.md)
 ## CSharp
 
 See configuration in [readme.csharp.md](./readme.csharp.md)
+
+## Java
+
+See configuration in [readme.java.md](./readme.java.md)

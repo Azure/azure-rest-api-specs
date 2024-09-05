@@ -1,0 +1,479 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure Network Fabric Management Service API",
+    "description": "Self service experience for Azure Network Fabric API.",
+    "version": "2023-06-15"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedNetworkFabric/internetGateways/{internetGatewayName}": {
+      "put": {
+        "tags": [
+          "InternetGateways"
+        ],
+        "operationId": "InternetGateways_Create",
+        "summary": "Create a Network Fabric Service Internet Gateway.",
+        "description": "Creates a Network Fabric Service Internet Gateway resource instance.",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/InternetGatewayNameParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "description": "Request payload.",
+            "schema": {
+              "$ref": "#/definitions/InternetGateway"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/InternetGateway"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/InternetGateway"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "The URL to retrieve the status of the asynchronous operation."
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "InternetGateways_Create_MaximumSet_Gen": {
+            "$ref": "./examples/InternetGateways_Create_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "InternetGateways"
+        ],
+        "operationId": "InternetGateways_Get",
+        "summary": "Retrieves details of Network Fabric Service Internet Gateway.",
+        "description": "Implements Gateway GET method.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/InternetGatewayNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/InternetGateway"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "InternetGateways_Get_MaximumSet_Gen": {
+            "$ref": "./examples/InternetGateways_Get_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "InternetGateways"
+        ],
+        "operationId": "InternetGateways_Update",
+        "summary": "Updates a Network Fabric Service Internet Gateway.",
+        "description": "Execute patch on Network Fabric Service Internet Gateway.",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/InternetGatewayNameParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "description": "API to update certain properties of the L2 Isolation Domain resource..",
+            "schema": {
+              "$ref": "#/definitions/InternetGatewayPatch"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/InternetGateway"
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "description": "The URL to retrieve the status of the asynchronous operation.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "InternetGateways_Update_MaximumSet_Gen": {
+            "$ref": "./examples/InternetGateways_Update_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "InternetGateways"
+        ],
+        "operationId": "InternetGateways_Delete",
+        "summary": "Deletes a Network Fabric Service Internet Gateway.",
+        "description": "Execute a delete on Network Fabric Service Internet Gateway.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/InternetGatewayNameParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "InternetGateways_Delete_MaximumSet_Gen": {
+            "$ref": "./examples/InternetGateways_Delete_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedNetworkFabric/internetGateways": {
+      "get": {
+        "operationId": "InternetGateways_ListByResourceGroup",
+        "summary": "List Internet Gateways by resource group.",
+        "description": "Displays Internet Gateways list by resource group GET method.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lists all InternetGateways under the resource group.",
+            "schema": {
+              "$ref": "#/definitions/InternetGatewaysListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "InternetGateways_ListByResourceGroup_MaximumSet_Gen": {
+            "$ref": "./examples/InternetGateways_ListByResourceGroup_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ManagedNetworkFabric/internetGateways": {
+      "get": {
+        "operationId": "InternetGateways_ListBySubscription",
+        "summary": "List Internet Gateways by subscription.",
+        "description": "Displays Internet Gateways list by subscription GET method.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lists all Internet Gateways under the subscription.",
+            "schema": {
+              "$ref": "#/definitions/InternetGatewaysListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "InternetGateways_ListBySubscription_MaximumSet_Gen": {
+            "$ref": "./examples/InternetGateways_ListBySubscription_MaximumSet_Gen.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "InternetGatewayProperties": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/AnnotationResource",
+          "description": "Common properties for annotated type."
+        },
+        {
+          "$ref": "#/definitions/InternetGatewayPatchableProperties"
+        }
+      ],
+      "properties": {
+        "ipv4Address": {
+          "type": "string",
+          "description": "IPv4 Address of Internet Gateway.",
+          "readOnly": true
+        },
+        "port": {
+          "type": "integer",
+          "description": "Port number of Internet Gateway.",
+          "format": "int32",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "Gateway Type of the resource.",
+          "enum": [
+            "Infrastructure",
+            "Workload"
+          ],
+          "minLength": 1,
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "GatewayType"
+          }
+        },
+        "networkFabricControllerId": {
+          "description": "ARM Resource ID of the Network Fabric Controller.",
+          "$ref": "./common.json#/definitions/NetworkFabricControllerIdProperty"
+        },
+        "provisioningState": {
+          "description": "Provisioning state of resource.",
+          "$ref": "./common.json#/definitions/ProvisioningState",
+          "readOnly": true
+        }
+      },
+      "description": "Internet Gateway Properties defines the properties of the resource.",
+      "required": [
+        "type",
+        "networkFabricControllerId"
+      ]
+    },
+    "InternetGatewayPatchableProperties": {
+      "type": "object",
+      "description": "Internet Gateway Patchable Properties defines the patchable properties of the resource.",
+      "properties": {
+        "internetGatewayRuleId": {
+          "description": "ARM Resource ID of the Internet Gateway Rule.",
+          "$ref": "./common.json#/definitions/InternetGatewayRuleIdProperty"
+        }
+      }
+    },
+    "InternetGateway": {
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "description": "The Internet Gateway resource definition.",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Resource properties.",
+          "$ref": "#/definitions/InternetGatewayProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "required": [
+        "properties"
+      ]
+    },
+    "InternetGatewayPatch": {
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Resource properties.",
+          "$ref": "#/definitions/InternetGatewayPatchableProperties"
+        }
+      },
+      "allOf": [
+        {
+          "description": "Resource tags",
+          "$ref": "./common.json#/definitions/TagsUpdate"
+        }
+      ],
+      "description": "The Internet Gateway patch resource definition."
+    },
+    "InternetGatewaysListResult": {
+      "type": "object",
+      "description": "List of InternetGateways.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "Displays list of Internet Gateway resources.",
+          "items": {
+            "$ref": "#/definitions/InternetGateway"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Url to follow for getting next page of resources."
+        }
+      }
+    }
+  },
+  "parameters": {
+    "InternetGatewayNameParameter": {
+      "type": "string",
+      "description": "Name of the Internet Gateway.",
+      "in": "path",
+      "name": "internetGatewayName",
+      "required": true,
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

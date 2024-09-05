@@ -26,8 +26,65 @@ These are the global settings for the communicationservices.
 
 ```yaml
 openapi-type: data-plane
-tag: package-jobrouter-2021-10-20-preview2
+tag: package-jobrouter-2023-11-01
 ```
+
+### Suppression
+``` yaml
+suppressions:
+  - code: ValidFormats
+    where: $.definitions["Azure.Core.eTag"].format
+    reason: eTag should be an allowed format
+directive:
+  - suppress: INVALID_TYPE
+```
+
+### Tag: package-jobrouter-2024-01-18-preview
+
+These settings apply only when `--tag=package-jobrouter-2024-01-18-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-jobrouter-2024-01-18-preview'
+input-file:
+  - preview/2024-01-18-preview/communicationservicejobrouter.json
+```
+
+### Tag: package-jobrouter-2023-11-01
+
+These settings apply only when `--tag=package-jobrouter-2023-11-01` is specified on the command line.
+
+```yaml $(tag) == 'package-jobrouter-2023-11-01'
+input-file:
+  - stable/2023-11-01/communicationservicejobrouter.json
+```
+
+### Tag: package-jobrouter-2022-07-18-preview
+
+These settings apply only when `--tag=package-jobrouter-2022-07-18-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-jobrouter-2022-07-18-preview'
+input-file:
+  - preview/2022-07-18-preview/communicationservicejobrouter.json
+title:
+  Azure Communication Services
+directive:
+# Set reference to WorkerSelectorAttachment in ClassificationPolicy
+  - from: swagger-document
+    where: "$.definitions.ClassificationPolicy.properties.workerSelectors.items"
+    transform: >
+      $["$ref"] = "#/definitions/WorkerSelectorAttachment";
+# Set reference to QueueSelectorAttachment in ClassificationPolicy  
+  - from: swagger-document
+    where: "$.definitions.ClassificationPolicy.properties.queueSelectors.items"
+    transform: >
+      $["$ref"] = "#/definitions/QueueSelectorAttachment";
+# Set reference to ExceptionAction in ExceptionRule
+  - from: swagger-document
+    where: "$.definitions.ExceptionRule.properties.actions"
+    transform: >
+      $.type = "object";
+      $.additionalProperties["$ref"] = "#/definitions/ExceptionAction";
+```
+
 
 ### Tag: package-jobrouter-2021-10-20-preview2
 

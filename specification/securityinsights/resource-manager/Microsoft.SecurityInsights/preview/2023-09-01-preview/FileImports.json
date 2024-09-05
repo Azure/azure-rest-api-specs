@@ -1,0 +1,564 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Security Insights",
+    "description": "API spec for Microsoft.SecurityInsights (Azure Security Insights) resource provider",
+    "version": "2023-09-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/fileImports": {
+      "get": {
+        "x-ms-examples": {
+          "Get all file imports.": {
+            "$ref": "./examples/fileImports/GetFileImports.json"
+          }
+        },
+        "tags": [
+          "FileImports"
+        ],
+        "description": "Gets all file imports.",
+        "operationId": "FileImports_List",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/ODataFilter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/ODataOrderBy"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/ODataTop"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/ODataSkipToken"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/FileImportList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/fileImports/{fileImportId}": {
+      "get": {
+        "x-ms-examples": {
+          "Get a file import.": {
+            "$ref": "./examples/fileImports/GetFileImportById.json"
+          }
+        },
+        "tags": [
+          "FileImports"
+        ],
+        "description": "Gets a file import.",
+        "operationId": "FileImports_Get",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/FileImportId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/FileImport"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "put": {
+        "x-ms-examples": {
+          "Create a file import.": {
+            "$ref": "./examples/fileImports/CreateFileImport.json"
+          }
+        },
+        "tags": [
+          "FileImports"
+        ],
+        "description": "Creates the file import.",
+        "operationId": "FileImports_Create",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/FileImportId"
+          },
+          {
+            "$ref": "#/parameters/FileImport"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/FileImport"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "x-ms-examples": {
+          "Delete a file import.": {
+            "$ref": "./examples/fileImports/DeleteFileImport.json"
+          }
+        },
+        "tags": [
+          "FileImports"
+        ],
+        "description": "Delete the file import.",
+        "operationId": "FileImports_Delete",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/FileImportId"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "schema": {
+              "$ref": "#/definitions/FileImport"
+            }
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "FileMetadata": {
+      "description": "Represents a file.",
+      "properties": {
+        "fileFormat": {
+          "description": "The format of the file",
+          "enum": [
+            "CSV",
+            "JSON",
+            "Unspecified"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "fileFormat",
+            "values": [
+              {
+                "description": "A CSV file.",
+                "value": "CSV"
+              },
+              {
+                "description": "A JSON file.",
+                "value": "JSON"
+              },
+              {
+                "description": "A file of other format.",
+                "value": "Unspecified"
+              }
+            ]
+          }
+        },
+        "fileName": {
+          "description": "The name of the file.",
+          "type": "string"
+        },
+        "fileSize": {
+          "description": "The size of the file.",
+          "format": "int32",
+          "type": "integer"
+        },
+        "fileContentUri": {
+          "description": "A URI with a valid SAS token to allow uploading / downloading the file.",
+          "type": "string",
+          "readOnly": true
+        },
+        "deleteStatus": {
+          "description": "Indicates whether the file was deleted from the storage account.",
+          "enum": [
+            "Deleted",
+            "NotDeleted",
+            "Unspecified"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "DeleteStatus",
+            "values": [
+              {
+                "description": "The file was deleted.",
+                "value": "Deleted"
+              },
+              {
+                "description": "The file was not deleted.",
+                "value": "NotDeleted"
+              },
+              {
+                "description": "Unspecified",
+                "value": "Unspecified"
+              }
+            ]
+          },
+          "readOnly": true
+        }
+      },
+      "type": "object"
+    },
+    "FileImport": {
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
+        }
+      ],
+      "description": "Represents a file import in Azure Security Insights.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/FileImportProperties",
+          "description": "File import properties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object"
+    },
+    "FileImportList": {
+      "description": "List all the file imports.",
+      "properties": {
+        "nextLink": {
+          "description": "URL to fetch the next set of file imports.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "value": {
+          "description": "Array of file imports.",
+          "items": {
+            "$ref": "#/definitions/FileImport"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object",
+      "required": [
+        "value"
+      ]
+    },
+    "FileImportProperties": {
+      "description": "Describes the FileImport's properties",
+      "properties": {
+        "ingestionMode": {
+          "description": "Describes how to ingest the records in the file.",
+          "enum": [
+            "IngestOnlyIfAllAreValid",
+            "IngestAnyValidRecords",
+            "Unspecified"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "IngestionMode",
+            "values": [
+              {
+                "description": "No records should be ingested when invalid records are detected.",
+                "value": "IngestOnlyIfAllAreValid"
+              },
+              {
+                "description": "Valid records should still be ingested when invalid records are detected.",
+                "value": "IngestAnyValidRecords"
+              },
+              {
+                "description": "Unspecified",
+                "value": "Unspecified"
+              }
+            ]
+          }
+        },
+        "contentType": {
+          "description": "The content type of this file.",
+          "enum": [
+            "BasicIndicator",
+            "StixIndicator",
+            "Unspecified"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "FileImportContentType",
+            "values": [
+              {
+                "description": "File containing records with the core fields of an indicator, plus the observables to construct the STIX pattern.",
+                "value": "BasicIndicator"
+              },
+              {
+                "description": "File containing STIX indicators.",
+                "value": "StixIndicator"
+              },
+              {
+                "description": "File containing other records.",
+                "value": "Unspecified"
+              }
+            ]
+          }
+        },
+        "createdTimeUTC": {
+          "description": "The time the file was imported.",
+          "format": "date-time",
+          "readOnly": true,
+          "type": "string"
+        },
+        "errorFile": {
+          "description": "Represents the error file (if the import was ingested with errors or failed the validation).",
+          "$ref": "#/definitions/FileMetadata",
+          "readOnly": true,
+          "type": "object"
+        },
+        "errorsPreview": {
+          "description": "An ordered list of some of the errors that were encountered during validation.",
+          "items": {
+            "description": "An error that were encountered during validation.",
+            "$ref": "#/definitions/ValidationError"
+          },
+          "readOnly": true,
+          "type": "array",
+          "x-ms-identifiers": []
+        },
+        "importFile": {
+          "description": "Represents the imported file.",
+          "$ref": "#/definitions/FileMetadata",
+          "type": "object"
+        },
+        "ingestedRecordCount": {
+          "description": "The number of records that have been successfully ingested.",
+          "readOnly": true,
+          "type": "integer",
+          "format": "int32"
+        },
+        "source": {
+          "description": "The source for the data in the file.",
+          "type": "string"
+        },
+        "state": {
+          "description": "The state of the file import.",
+          "enum": [
+            "FatalError",
+            "Ingested",
+            "IngestedWithErrors",
+            "InProgress",
+            "Invalid",
+            "WaitingForUpload",
+            "Unspecified"
+          ],
+          "readOnly": true,
+          "type": "string",
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "FileImportState",
+            "values": [
+              {
+                "description": "A fatal error has occurred while ingesting the file.",
+                "value": "FatalError"
+              },
+              {
+                "description": "The file has been ingested.",
+                "value": "Ingested"
+              },
+              {
+                "description": "The file has been ingested with errors.",
+                "value": "IngestedWithErrors"
+              },
+              {
+                "description": "The file ingestion is in progress.",
+                "value": "InProgress"
+              },
+              {
+                "description": "The file is invalid.",
+                "value": "Invalid"
+              },
+              {
+                "description": "Waiting for the file to be uploaded.",
+                "value": "WaitingForUpload"
+              },
+              {
+                "description": "Unspecified state.",
+                "value": "Unspecified"
+              }
+            ]
+          }
+        },
+        "totalRecordCount": {
+          "description": "The number of records in the file.",
+          "readOnly": true,
+          "type": "integer",
+          "format": "int32"
+        },
+        "validRecordCount": {
+          "description": "The number of records that have passed validation.",
+          "readOnly": true,
+          "type": "integer",
+          "format": "int32"
+        },
+        "filesValidUntilTimeUTC": {
+          "description": "The time the files associated with this import are deleted from the storage account.",
+          "format": "date-time",
+          "readOnly": true,
+          "type": "string"
+        },
+        "importValidUntilTimeUTC": {
+          "description": "The time the file import record is soft deleted from the database and history.",
+          "format": "date-time",
+          "readOnly": true,
+          "type": "string"
+        }
+      },
+      "required": [
+        "ingestionMode",
+        "contentType",
+        "importFile",
+        "source"
+      ],
+      "type": "object"
+    },
+    "ValidationError": {
+      "description": "Describes an error encountered in the file during validation.",
+      "properties": {
+        "recordIndex": {
+          "description": "The number of the record that has the error.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "errorMessages": {
+          "description": "A list of descriptions of the error.",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true,
+          "type": "array"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "parameters": {
+    "FileImportId": {
+      "description": "File import ID",
+      "in": "path",
+      "name": "fileImportId",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "FileImport": {
+      "description": "The file import",
+      "in": "body",
+      "name": "fileImport",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/FileImport"
+      },
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

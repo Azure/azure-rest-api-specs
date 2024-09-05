@@ -1,0 +1,35 @@
+{
+  "parameters": {
+    "Endpoint": "{Endpoint}",
+    "body": {
+      "enumDefs": [],
+      "structDefs": [],
+      "classificationDefs": [],
+      "entityDefs": [
+        {
+          "name": "azure_sql_server_example",
+          "superTypes": [
+            "azure_resource"
+          ],
+          "typeVersion": "1.0",
+          "attributeDefs": [
+            {
+              "name": "databases",
+              "typeName": "array<azure_sql_db>",
+              "cardinality": "SET",
+              "isIndexable": false,
+              "isOptional": true,
+              "isUnique": false
+            }
+          ]
+        }
+      ],
+      "relationshipDefs": []
+    }
+  },
+  "responses": {
+    "204": {}
+  },
+  "title": "Type_BulkDelete",
+  "operationId": "Type_BulkDelete"
+}

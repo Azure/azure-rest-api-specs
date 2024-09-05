@@ -1,0 +1,40 @@
+{
+  "parameters": {
+    "api-version": "2023-10-01",
+    "subscriptionId": "60bcfc77-6589-4da2-b7fd-f9ec9322cf95",
+    "resourceGroupName": "examples-rg",
+    "storageMoverName": "examples-storageMoverName",
+    "projectName": "examples-projectName",
+    "jobDefinitionName": "examples-jobDefinitionName",
+    "jobDefinition": {
+      "properties": {
+        "description": "Updated Job Definition Description",
+        "agentName": "updatedAgentName"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/60bcfc77-6589-4da2-b7fd-f9ec9322cf95/resourceGroups/examples-rg/providers/Microsoft.StorageMover/storageMovers/examples-storageMoverName/projects/examples-projectName/jobDefinitions/examples-jobDefinitionName",
+        "name": "examples-jobDefinitionName",
+        "type": "Microsoft.StorageMover/storageMovers/projectName/jobDefinitionName",
+        "properties": {
+          "description": "Updated Job Definition Description",
+          "copyMode": "Additive",
+          "sourceName": "updatedSource",
+          "sourceResourceId": "/subscriptions/60bcfc77-6589-4da2-b7fd-f9ec9322cf95/resourceGroups/examples-rg/providers/Microsoft.StorageMover/storageMovers/examples-storageMoverName/endpoints/updatedSource",
+          "sourceSubpath": "/",
+          "targetName": "updatedTarget",
+          "targetResourceId": "/subscriptions/60bcfc77-6589-4da2-b7fd-f9ec9322cf95/resourceGroups/examples-rg/providers/Microsoft.StorageMover/storageMovers/examples-storageMoverName/endpoints/updatedTarget",
+          "targetSubpath": "/",
+          "latestJobRunName": null,
+          "latestJobRunResourceId": null,
+          "latestJobRunStatus": null,
+          "agentName": "updatedAgentName",
+          "agentResourceId": "/subscriptions/60bcfc77-6589-4da2-b7fd-f9ec9322cf95/resourceGroups/examples-rg/providers/Microsoft.StorageMover/storageMovers/examples-storageMoverName/agents/migration-agent"
+        }
+      }
+    }
+  }
+}

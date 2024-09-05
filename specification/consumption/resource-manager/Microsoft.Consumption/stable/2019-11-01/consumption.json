@@ -1481,6 +1481,11 @@
         ],
         "operationId": "Operations_List",
         "description": "Lists all of the available consumption REST API operations.",
+        "x-ms-examples": {
+          "OperationsList": {
+            "$ref": "./examples/OperationList.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -3483,6 +3488,11 @@
           "format": "decimal",
           "readOnly": true
         },
+        "resourceType": {
+          "description": "Resource type.",
+          "type": "string",
+          "readOnly": true
+        },
         "totalCostWithReservedInstances": {
           "description": "The total amount of cost with reserved instances.",
           "$ref": "#/definitions/amount",
@@ -3515,6 +3525,12 @@
         "skuName": {
           "description": "This is the ARM Sku name.",
           "type": "string",
+          "readOnly": true
+        },
+        "subscriptionId": {
+          "description": "Subscription ID",
+          "type": "string",
+          "format": "uuid",
           "readOnly": true
         }
       }

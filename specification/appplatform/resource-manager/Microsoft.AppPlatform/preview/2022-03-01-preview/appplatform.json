@@ -6313,7 +6313,7 @@
           "readOnly": true
         },
         "serviceId": {
-          "description": "ServiceInstanceEntity GUID which uniquely identifies a created resource",
+          "description": "ServiceInstanceEntity Id which uniquely identifies a created resource",
           "type": "string",
           "readOnly": true
         },
@@ -9734,11 +9734,13 @@
       "properties": {
         "cpu": {
           "description": "Cpu allocated to each Spring Cloud Gateway instance.",
-          "type": "string"
+          "type": "string",
+          "default": "1"
         },
         "memory": {
           "description": "Memory allocated to each Spring Cloud Gateway instance.",
-          "type": "string"
+          "type": "string",
+          "default": "2Gi"
         }
       }
     },

@@ -1,0 +1,5163 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Workloads Client",
+    "version": "2024-09-01",
+    "description": "Workloads client provides access to various workload operations.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "SAPVirtualInstances"
+    },
+    {
+      "name": "SAPCentralServerInstances"
+    },
+    {
+      "name": "SAPDatabaseInstances"
+    },
+    {
+      "name": "SAPApplicationServerInstances"
+    }
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Workloads/locations/{location}/sapVirtualInstanceMetadata/default/getAvailabilityZoneDetails": {
+      "post": {
+        "operationId": "SapVirtualInstances_GetAvailabilityZoneDetails",
+        "tags": [
+          "SAPVirtualInstances"
+        ],
+        "description": "Get the recommended SAP Availability Zone Pair Details for your region.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SAPAvailabilityZoneDetailsRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SAPAvailabilityZoneDetailsResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SAP Availability zone details in east us": {
+            "$ref": "./examples/SapVirtualInstances_GetAvailabilityZoneDetails_eastus.json"
+          },
+          "SAP Availability zone details in north europe": {
+            "$ref": "./examples/SapVirtualInstances_GetAvailabilityZoneDetails_northeurope.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Workloads/locations/{location}/sapVirtualInstanceMetadata/default/getDiskConfigurations": {
+      "post": {
+        "operationId": "SapVirtualInstances_GetDiskConfigurations",
+        "tags": [
+          "SAPVirtualInstances"
+        ],
+        "description": "Get the SAP Disk Configuration Layout prod/non-prod SAP System.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SAPDiskConfigurationsRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SAPDiskConfigurationsResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SAP disk configurations for input environment NonProd.": {
+            "$ref": "./examples/SapVirtualInstances_GetDiskConfigurations_NonProd.json"
+          },
+          "SAP disk configurations for input environment Prod.": {
+            "$ref": "./examples/SapVirtualInstances_GetDiskConfigurations_Prod.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Workloads/locations/{location}/sapVirtualInstanceMetadata/default/getSapSupportedSku": {
+      "post": {
+        "operationId": "SapVirtualInstances_GetSapSupportedSku",
+        "tags": [
+          "SAPVirtualInstances"
+        ],
+        "description": "Get a list of SAP supported SKUs for ASCS, Application and Database tier.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SAPSupportedSkusRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SAPSupportedResourceSkusResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SAP supported SKUs for distributed HA environment with Availability set.": {
+            "$ref": "./examples/SapVirtualInstances_GetSapSupportedSku_DistributedHA_AvSet.json"
+          },
+          "SAP supported SKUs for distributed Non HA environment.": {
+            "$ref": "./examples/SapVirtualInstances_GetSapSupportedSku_Distributed.json"
+          },
+          "SAP supported SKUs for single server.": {
+            "$ref": "./examples/SapVirtualInstances_GetSapSupportedSku_SingleServer.json"
+          },
+          "SAP supported Skus for HA with availability zone.": {
+            "$ref": "./examples/SapVirtualInstances_GetSapSupportedSku_DistributedHA_AvZone.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Workloads/locations/{location}/sapVirtualInstanceMetadata/default/getSizingRecommendations": {
+      "post": {
+        "operationId": "SapVirtualInstances_GetSizingRecommendations",
+        "tags": [
+          "SAPVirtualInstances"
+        ],
+        "description": "Gets the sizing recommendations.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SAPSizingRecommendationRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SAPSizingRecommendationResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SAP sizing recommendations for HA with availability set.": {
+            "$ref": "./examples/SapVirtualInstances_GetSizingRecommendations_S4HANA_HA_AvSet.json"
+          },
+          "SAP sizing recommendations for HA with availability zone.": {
+            "$ref": "./examples/SapVirtualInstances_GetSizingRecommendations_S4HANA_HA_AvZone.json"
+          },
+          "SAP sizing recommendations for non HA distributed system.": {
+            "$ref": "./examples/SapVirtualInstances_GetSizingRecommendations_S4HANA_Distributed.json"
+          },
+          "SAP sizing recommendations for single server.": {
+            "$ref": "./examples/SapVirtualInstances_GetSizingRecommendations_S4HANA_SingleServer.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Workloads/sapVirtualInstances": {
+      "get": {
+        "operationId": "SapVirtualInstances_ListBySubscription",
+        "tags": [
+          "SAPVirtualInstances"
+        ],
+        "description": "Gets all Virtual Instances for SAP solutions resources in a Subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SAPVirtualInstanceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SAPVirtualInstances_ListBySubscription": {
+            "$ref": "./examples/SapVirtualInstances_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Workloads/sapVirtualInstances": {
+      "get": {
+        "operationId": "SapVirtualInstances_ListByResourceGroup",
+        "tags": [
+          "SAPVirtualInstances"
+        ],
+        "description": "Gets all Virtual Instances for SAP solutions resources in a Resource Group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SAPVirtualInstanceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SAPVirtualInstances_ListByResourceGroup": {
+            "$ref": "./examples/SapVirtualInstances_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Workloads/sapVirtualInstances/{sapVirtualInstanceName}": {
+      "get": {
+        "operationId": "SapVirtualInstances_Get",
+        "tags": [
+          "SAPVirtualInstances"
+        ],
+        "description": "Gets a Virtual Instance for SAP solutions resource",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "sapVirtualInstanceName",
+            "in": "path",
+            "description": "The name of the Virtual Instances for SAP solutions resource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z][a-zA-Z0-9]{2}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SAPVirtualInstance"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SAPVirtualInstances Get With ACSS Installation Blocked": {
+            "$ref": "./examples/SapVirtualInstances_GetAcssInstallationBlocked.json"
+          },
+          "SAPVirtualInstances_Get": {
+            "$ref": "./examples/SapVirtualInstances_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "SapVirtualInstances_Create",
+        "tags": [
+          "SAPVirtualInstances"
+        ],
+        "description": "Creates a Virtual Instance for SAP solutions (VIS) resource",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "sapVirtualInstanceName",
+            "in": "path",
+            "description": "The name of the Virtual Instances for SAP solutions resource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z][a-zA-Z0-9]{2}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Virtual Instance for SAP solutions resource request body.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SAPVirtualInstance"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'SAPVirtualInstance' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/SAPVirtualInstance"
+            }
+          },
+          "201": {
+            "description": "Resource 'SAPVirtualInstance' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/SAPVirtualInstance"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create Infrastructure (with OS configuration) with Azure Compute Gallery Image": {
+            "$ref": "./examples/SapVirtualInstances_CreateInfraOsComputeGalleryImage.json"
+          },
+          "Create Infrastructure (with OS configuration) with custom resource names for Distributed System": {
+            "$ref": "./examples/SapVirtualInstances_CreateInfraOsCustomResourceNamesDS.json"
+          },
+          "Create Infrastructure (with OS configuration) with custom resource names for HA System with Availability Set": {
+            "$ref": "./examples/SapVirtualInstances_CreateInfraOsCustomResourceNamesHaAvailabilitySet.json"
+          },
+          "Create Infrastructure (with OS configuration) with custom resource names for HA system with Availability Zone": {
+            "$ref": "./examples/SapVirtualInstances_CreateInfraOsCustomResourceNamesHaAvailabilityZone.json"
+          },
+          "Create Infrastructure (with OS configuration) with custom resource names for Single Server System": {
+            "$ref": "./examples/SapVirtualInstances_CreateInfraOsCustomResourceNamesSingleServer.json"
+          },
+          "Create Infrastructure (with OS configuration) with trusted access enabled": {
+            "$ref": "./examples/SapVirtualInstances_CreateInfraWithOsTrustedAccess.json"
+          },
+          "Create Infrastructure only for Distributed System": {
+            "$ref": "./examples/SapVirtualInstances_CreateInfraDS.json"
+          },
+          "Create Infrastructure only for HA System with Availability Set": {
+            "$ref": "./examples/SapVirtualInstances_CreateInfraHaAvailabilitySet.json"
+          },
+          "Create Infrastructure only for HA System with Availability Zone": {
+            "$ref": "./examples/SapVirtualInstances_CreateInfraHaAvailabilityZone.json"
+          },
+          "Create Infrastructure only for Single Server System": {
+            "$ref": "./examples/SapVirtualInstances_CreateInfraSingleServer.json"
+          },
+          "Create Infrastructure with Disk and OS configuration for Distributed System (Recommended)": {
+            "$ref": "./examples/SapVirtualInstances_CreateInfraDiskOsDSRecommended.json"
+          },
+          "Create Infrastructure with Disk and OS configuration for HA System with Availability Set (Recommended)": {
+            "$ref": "./examples/SapVirtualInstances_CreateInfraDiskOsHaAvailabilitySetRecommended.json"
+          },
+          "Create Infrastructure with Disk and OS configuration for HA System with Availability Zone (Recommended)": {
+            "$ref": "./examples/SapVirtualInstances_CreateInfraDiskOsHaAvailabilityZoneRecommended.json"
+          },
+          "Create Infrastructure with Disk and OS configurations for Single Server System (Recommended)": {
+            "$ref": "./examples/SapVirtualInstances_CreateInfraDiskOsSingleServerRecommended.json"
+          },
+          "Create Infrastructure with OS configuration for Distributed System (Recommended)": {
+            "$ref": "./examples/SapVirtualInstances_CreateInfraOsDSRecommended.json"
+          },
+          "Create Infrastructure with OS configuration for HA System with Availability Set (Recommended)": {
+            "$ref": "./examples/SapVirtualInstances_CreateInfraOsHaAvailabilitySetRecommended.json"
+          },
+          "Create Infrastructure with OS configuration for HA System with Availability Zone (Recommended)": {
+            "$ref": "./examples/SapVirtualInstances_CreateInfraOsHaAvailabilityZoneRecommended.json"
+          },
+          "Create Infrastructure with OS configuration for Single Server System (Recommended)": {
+            "$ref": "./examples/SapVirtualInstances_CreateInfraOsSIngleServerRecommended.json"
+          },
+          "Create Infrastructure with a new SAP Transport Directory Fileshare": {
+            "$ref": "./examples/SapVirtualInstances_CreateInfraWithNewFileshare.json"
+          },
+          "Create Infrastructure with an existing SAP Transport Directory Fileshare": {
+            "$ref": "./examples/SapVirtualInstances_CreateInfraWithExistingFileshare.json"
+          },
+          "Create Infrastructure without a SAP Transport Directory Fileshare": {
+            "$ref": "./examples/SapVirtualInstances_CreateInfraWithoutFileshare.json"
+          },
+          "Detect SAP Software Installation on a Distributed System": {
+            "$ref": "./examples/SapVirtualInstances_CreateDetectDS.json"
+          },
+          "Detect SAP Software Installation on a Single Server System": {
+            "$ref": "./examples/SapVirtualInstances_CreateDetectSingleServer.json"
+          },
+          "Detect SAP Software Installation on an HA System with Availability Set": {
+            "$ref": "./examples/SapVirtualInstances_CreateDetectHaAvailabilitySet.json"
+          },
+          "Detect SAP Software Installation on an HA System with Availability Zone": {
+            "$ref": "./examples/SapVirtualInstances_CreateDetectHaAvailabilityZone.json"
+          },
+          "Install SAP Software on Distributed System": {
+            "$ref": "./examples/SapVirtualInstances_CreateInstallDS.json"
+          },
+          "Install SAP Software on Single Server System": {
+            "$ref": "./examples/SapVirtualInstances_CreateInstallSingleServer.json"
+          },
+          "Register existing SAP system as Virtual Instance for SAP solutions with optional customizations.": {
+            "$ref": "./examples/SapVirtualInstances_CreateRegisterSapSolutionsCustom.json"
+          },
+          "Register existing SAP system as Virtual Instance for SAP solutions.": {
+            "$ref": "./examples/SapVirtualInstances_CreateRegisterSapSolutions.json"
+          },
+          "Register with trusted access enabled": {
+            "$ref": "./examples/SapVirtualInstances_CreateRegisterWithTrustedAccess.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "SapVirtualInstances_Update",
+        "tags": [
+          "SAPVirtualInstances"
+        ],
+        "description": "Updates a Virtual Instance for SAP solutions resource",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "sapVirtualInstanceName",
+            "in": "path",
+            "description": "The name of the Virtual Instances for SAP solutions resource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z][a-zA-Z0-9]{2}$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "Request body to update a Virtual Instance for SAP solutions resource.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UpdateSAPVirtualInstanceRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SAPVirtualInstance"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SAPVirtualInstances_TrustedAccessEnable_Update": {
+            "$ref": "./examples/SapVirtualInstances_UpdateTrustedAccess.json"
+          },
+          "SAPVirtualInstances_Update": {
+            "$ref": "./examples/SapVirtualInstances_Update.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "SapVirtualInstances_Delete",
+        "tags": [
+          "SAPVirtualInstances"
+        ],
+        "description": "Deletes a Virtual Instance for SAP solutions resource and its child resources, that is the associated Central Services Instance, Application Server Instances and Database Instance.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "sapVirtualInstanceName",
+            "in": "path",
+            "description": "The name of the Virtual Instances for SAP solutions resource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z][a-zA-Z0-9]{2}$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SAPVirtualInstances_Delete": {
+            "$ref": "./examples/SapVirtualInstances_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Workloads/sapVirtualInstances/{sapVirtualInstanceName}/applicationInstances": {
+      "get": {
+        "operationId": "SapApplicationServerInstances_List",
+        "tags": [
+          "SAPApplicationServerInstances"
+        ],
+        "description": "Lists the SAP Application Server Instance resources for a given Virtual Instance for SAP solutions resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "sapVirtualInstanceName",
+            "in": "path",
+            "description": "The name of the Virtual Instances for SAP solutions resource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z][a-zA-Z0-9]{2}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SAPApplicationServerInstanceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SapApplicationServerInstances List By SAP Virtual Instance": {
+            "$ref": "./examples/SapApplicationServerInstances_ListBySapVirtualInstance.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Workloads/sapVirtualInstances/{sapVirtualInstanceName}/applicationInstances/{applicationInstanceName}": {
+      "get": {
+        "operationId": "SapApplicationServerInstances_Get",
+        "tags": [
+          "SAPApplicationServerInstances"
+        ],
+        "description": "Gets the SAP Application Server Instance corresponding to the Virtual Instance for SAP solutions resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "sapVirtualInstanceName",
+            "in": "path",
+            "description": "The name of the Virtual Instances for SAP solutions resource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z][a-zA-Z0-9]{2}$"
+          },
+          {
+            "name": "applicationInstanceName",
+            "in": "path",
+            "description": "The name of SAP Application Server instance resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^.*"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SAPApplicationServerInstance"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SAPApplicationServerInstances_Get": {
+            "$ref": "./examples/SapApplicationServerInstances_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "SapApplicationServerInstances_Create",
+        "tags": [
+          "SAPApplicationServerInstances"
+        ],
+        "description": "Puts the SAP Application Server Instance resource. &lt;br&gt;&lt;br&gt;This will be used by service only. PUT by end user will return a Bad Request error.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "sapVirtualInstanceName",
+            "in": "path",
+            "description": "The name of the Virtual Instances for SAP solutions resource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z][a-zA-Z0-9]{2}$"
+          },
+          {
+            "name": "applicationInstanceName",
+            "in": "path",
+            "description": "The name of SAP Application Server instance resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^.*"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "The SAP Application Server Instance resource request body.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SAPApplicationServerInstance"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'SAPApplicationServerInstance' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/SAPApplicationServerInstance"
+            }
+          },
+          "201": {
+            "description": "Resource 'SAPApplicationServerInstance' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/SAPApplicationServerInstance"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create SAP Application Server Instances for HA System with Availability Set": {
+            "$ref": "./examples/SapApplicationServerInstances_CreateForHaWithAvailabilitySet.json"
+          },
+          "SAPApplicationServerInstances_Create": {
+            "$ref": "./examples/SapApplicationServerInstances_Create.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "SapApplicationServerInstances_Update",
+        "tags": [
+          "SAPApplicationServerInstances"
+        ],
+        "description": "Puts the SAP Application Server Instance resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "sapVirtualInstanceName",
+            "in": "path",
+            "description": "The name of the Virtual Instances for SAP solutions resource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z][a-zA-Z0-9]{2}$"
+          },
+          {
+            "name": "applicationInstanceName",
+            "in": "path",
+            "description": "The name of SAP Application Server instance resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^.*"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The SAP Application Server Instance resource request body.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UpdateSAPApplicationInstanceRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SAPApplicationServerInstance"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SAPApplicationServerInstances_Update": {
+            "$ref": "./examples/SapApplicationServerInstances_Update.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "SapApplicationServerInstances_Delete",
+        "tags": [
+          "SAPApplicationServerInstances"
+        ],
+        "description": "Deletes the SAP Application Server Instance resource. &lt;br&gt;&lt;br&gt;This operation will be used by service only. Delete by end user will return a Bad Request error.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "sapVirtualInstanceName",
+            "in": "path",
+            "description": "The name of the Virtual Instances for SAP solutions resource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z][a-zA-Z0-9]{2}$"
+          },
+          {
+            "name": "applicationInstanceName",
+            "in": "path",
+            "description": "The name of SAP Application Server instance resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^.*"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SAPApplicationServerInstances_Delete": {
+            "$ref": "./examples/SapApplicationServerInstances_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Workloads/sapVirtualInstances/{sapVirtualInstanceName}/applicationInstances/{applicationInstanceName}/start": {
+      "post": {
+        "operationId": "SapApplicationServerInstances_Start",
+        "tags": [
+          "SAPApplicationServerInstances"
+        ],
+        "description": "Starts the SAP Application Server Instance.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "sapVirtualInstanceName",
+            "in": "path",
+            "description": "The name of the Virtual Instances for SAP solutions resource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z][a-zA-Z0-9]{2}$"
+          },
+          {
+            "name": "applicationInstanceName",
+            "in": "path",
+            "description": "The name of SAP Application Server instance resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^.*"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "SAP Application server instance start request body.",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/StartRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/OperationStatusResult"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Start Virtual Machine and the SAP Application Server Instance on it.": {
+            "$ref": "./examples/SapApplicationServerInstances_StartInstanceVM.json"
+          },
+          "Start the SAP Application Server Instance.": {
+            "$ref": "./examples/SapApplicationServerInstances_StartInstance.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Workloads/sapVirtualInstances/{sapVirtualInstanceName}/applicationInstances/{applicationInstanceName}/stop": {
+      "post": {
+        "operationId": "SapApplicationServerInstances_Stop",
+        "tags": [
+          "SAPApplicationServerInstances"
+        ],
+        "description": "Stops the SAP Application Server Instance.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "sapVirtualInstanceName",
+            "in": "path",
+            "description": "The name of the Virtual Instances for SAP solutions resource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z][a-zA-Z0-9]{2}$"
+          },
+          {
+            "name": "applicationInstanceName",
+            "in": "path",
+            "description": "The name of SAP Application Server instance resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^.*"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "SAP Application server instance stop request body.",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/StopRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/OperationStatusResult"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Soft Stop the SAP Application Server Instance": {
+            "$ref": "./examples/SapApplicationServerInstances_StopInstanceSoft.json"
+          },
+          "Soft Stop the SAP Application Server Instance and it's infrastructure.": {
+            "$ref": "./examples/SapApplicationServerInstances_StopInstanceSoftInfrastructure.json"
+          },
+          "Stop the SAP Application Server Instance": {
+            "$ref": "./examples/SapApplicationServerInstances_StopInstance.json"
+          },
+          "Stop the SAP Application Server Instance and it's infrastructure.": {
+            "$ref": "./examples/SapApplicationServerInstances_StopInstanceInfrastructure.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Workloads/sapVirtualInstances/{sapVirtualInstanceName}/centralInstances": {
+      "get": {
+        "operationId": "SapCentralServerInstances_List",
+        "tags": [
+          "SAPCentralServerInstances"
+        ],
+        "description": "Lists the SAP Central Services Instance resource for the given Virtual Instance for SAP solutions resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "sapVirtualInstanceName",
+            "in": "path",
+            "description": "The name of the Virtual Instances for SAP solutions resource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z][a-zA-Z0-9]{2}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SAPCentralServerInstanceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SAPCentralInstances List by SAP virtual instance": {
+            "$ref": "./examples/SapCentralServerInstances_ListBySapVirtualInstance.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Workloads/sapVirtualInstances/{sapVirtualInstanceName}/centralInstances/{centralInstanceName}": {
+      "get": {
+        "operationId": "SapCentralServerInstances_Get",
+        "tags": [
+          "SAPCentralServerInstances"
+        ],
+        "description": "Gets the SAP Central Services Instance resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "sapVirtualInstanceName",
+            "in": "path",
+            "description": "The name of the Virtual Instances for SAP solutions resource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z][a-zA-Z0-9]{2}$"
+          },
+          {
+            "name": "centralInstanceName",
+            "in": "path",
+            "description": "Central Services Instance resource name string modeled as parameter for auto generation to work correctly.",
+            "required": true,
+            "type": "string",
+            "pattern": "^.*"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SAPCentralServerInstance"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SapCentralServerInstances_Get": {
+            "$ref": "./examples/SapCentralInstances_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "SapCentralServerInstances_Create",
+        "tags": [
+          "SAPCentralServerInstances"
+        ],
+        "description": "Creates the SAP Central Services Instance resource. &lt;br&gt;&lt;br&gt;This will be used by service only. PUT operation on this resource by end user will return a Bad Request error.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "sapVirtualInstanceName",
+            "in": "path",
+            "description": "The name of the Virtual Instances for SAP solutions resource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z][a-zA-Z0-9]{2}$"
+          },
+          {
+            "name": "centralInstanceName",
+            "in": "path",
+            "description": "Central Services Instance resource name string modeled as parameter for auto generation to work correctly.",
+            "required": true,
+            "type": "string",
+            "pattern": "^.*"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "The SAP Central Services Instance request body.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SAPCentralServerInstance"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'SAPCentralServerInstance' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/SAPCentralServerInstance"
+            }
+          },
+          "201": {
+            "description": "Resource 'SAPCentralServerInstance' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/SAPCentralServerInstance"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create SAP Central Instances for HA System with Availability Set": {
+            "$ref": "./examples/SapCentralInstances_CreateForHaWithAvailabilitySet.json"
+          },
+          "SapCentralServerInstances_Create": {
+            "$ref": "./examples/SapCentralInstances_Create.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "SapCentralServerInstances_Update",
+        "tags": [
+          "SAPCentralServerInstances"
+        ],
+        "description": "Updates the SAP Central Services Instance resource. &lt;br&gt;&lt;br&gt;This can be used to update tags on the resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "sapVirtualInstanceName",
+            "in": "path",
+            "description": "The name of the Virtual Instances for SAP solutions resource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z][a-zA-Z0-9]{2}$"
+          },
+          {
+            "name": "centralInstanceName",
+            "in": "path",
+            "description": "Central Services Instance resource name string modeled as parameter for auto generation to work correctly.",
+            "required": true,
+            "type": "string",
+            "pattern": "^.*"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The SAP Central Services Instance resource request body.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UpdateSAPCentralInstanceRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SAPCentralServerInstance"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SapCentralServerInstances_Update": {
+            "$ref": "./examples/SapCentralInstances_Update.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "SapCentralServerInstances_Delete",
+        "tags": [
+          "SAPCentralServerInstances"
+        ],
+        "description": "Deletes the SAP Central Services Instance resource. &lt;br&gt;&lt;br&gt;This will be used by service only. Delete operation on this resource by end user will return a Bad Request error. You can delete the parent resource, which is the Virtual Instance for SAP solutions resource, using the delete operation on it.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "sapVirtualInstanceName",
+            "in": "path",
+            "description": "The name of the Virtual Instances for SAP solutions resource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z][a-zA-Z0-9]{2}$"
+          },
+          {
+            "name": "centralInstanceName",
+            "in": "path",
+            "description": "Central Services Instance resource name string modeled as parameter for auto generation to work correctly.",
+            "required": true,
+            "type": "string",
+            "pattern": "^.*"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SapCentralServerInstances_Delete": {
+            "$ref": "./examples/SapCentralInstances_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Workloads/sapVirtualInstances/{sapVirtualInstanceName}/centralInstances/{centralInstanceName}/start": {
+      "post": {
+        "operationId": "SapCentralServerInstances_Start",
+        "tags": [
+          "SAPCentralServerInstances"
+        ],
+        "description": "Starts the SAP Central Services Instance.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "sapVirtualInstanceName",
+            "in": "path",
+            "description": "The name of the Virtual Instances for SAP solutions resource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z][a-zA-Z0-9]{2}$"
+          },
+          {
+            "name": "centralInstanceName",
+            "in": "path",
+            "description": "Central Services Instance resource name string modeled as parameter for auto generation to work correctly.",
+            "required": true,
+            "type": "string",
+            "pattern": "^.*"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "SAP Central Services instance start request body.",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/StartRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/OperationStatusResult"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Start the SAP Central Services Instance": {
+            "$ref": "./examples/SapCentralInstances_StartInstance.json"
+          },
+          "Start the virtual machine(s) and the SAP central services instance on it.": {
+            "$ref": "./examples/SapCentralInstances_StartInstanceVM.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Workloads/sapVirtualInstances/{sapVirtualInstanceName}/centralInstances/{centralInstanceName}/stop": {
+      "post": {
+        "operationId": "SapCentralServerInstances_Stop",
+        "tags": [
+          "SAPCentralServerInstances"
+        ],
+        "description": "Stops the SAP Central Services Instance.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "sapVirtualInstanceName",
+            "in": "path",
+            "description": "The name of the Virtual Instances for SAP solutions resource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z][a-zA-Z0-9]{2}$"
+          },
+          {
+            "name": "centralInstanceName",
+            "in": "path",
+            "description": "Central Services Instance resource name string modeled as parameter for auto generation to work correctly.",
+            "required": true,
+            "type": "string",
+            "pattern": "^.*"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "SAP Central Services instance stop request body.",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/StopRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/OperationStatusResult"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Stop the SAP Central Services Instance and its underlying Virtual Machine(s)": {
+            "$ref": "./examples/SapCentralInstances_StopInstanceVM.json"
+          },
+          "Stop the SAP Central Services Instance.": {
+            "$ref": "./examples/SapCentralInstances_StopInstance.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Workloads/sapVirtualInstances/{sapVirtualInstanceName}/databaseInstances": {
+      "get": {
+        "operationId": "SapDatabaseInstances_List",
+        "tags": [
+          "SAPDatabaseInstances"
+        ],
+        "description": "Lists the Database resources associated with a Virtual Instance for SAP solutions resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "sapVirtualInstanceName",
+            "in": "path",
+            "description": "The name of the Virtual Instances for SAP solutions resource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z][a-zA-Z0-9]{2}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SAPDatabaseInstanceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SAPDatabaseInstances list by SAP virtual instance": {
+            "$ref": "./examples/SapDatabaseInstances_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Workloads/sapVirtualInstances/{sapVirtualInstanceName}/databaseInstances/{databaseInstanceName}": {
+      "get": {
+        "operationId": "SapDatabaseInstances_Get",
+        "tags": [
+          "SAPDatabaseInstances"
+        ],
+        "description": "Gets the SAP Database Instance resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "sapVirtualInstanceName",
+            "in": "path",
+            "description": "The name of the Virtual Instances for SAP solutions resource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z][a-zA-Z0-9]{2}$"
+          },
+          {
+            "name": "databaseInstanceName",
+            "in": "path",
+            "description": "Database resource name string modeled as parameter for auto generation to work correctly.",
+            "required": true,
+            "type": "string",
+            "pattern": "^.*"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SAPDatabaseInstance"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SAPDatabaseInstances_Get": {
+            "$ref": "./examples/SapDatabaseInstances_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "SapDatabaseInstances_Create",
+        "tags": [
+          "SAPDatabaseInstances"
+        ],
+        "description": "Creates the Database resource corresponding to the Virtual Instance for SAP solutions resource. &lt;br&gt;&lt;br&gt;This will be used by service only. PUT by end user will return a Bad Request error.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "sapVirtualInstanceName",
+            "in": "path",
+            "description": "The name of the Virtual Instances for SAP solutions resource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z][a-zA-Z0-9]{2}$"
+          },
+          {
+            "name": "databaseInstanceName",
+            "in": "path",
+            "description": "Database resource name string modeled as parameter for auto generation to work correctly.",
+            "required": true,
+            "type": "string",
+            "pattern": "^.*"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Request body of Database resource of a SAP system.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SAPDatabaseInstance"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'SAPDatabaseInstance' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/SAPDatabaseInstance"
+            }
+          },
+          "201": {
+            "description": "Resource 'SAPDatabaseInstance' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/SAPDatabaseInstance"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create SAP Database Instances for HA System with Availability Set": {
+            "$ref": "./examples/SapDatabaseInstances_CreateForHaWithAvailabilitySet.json"
+          },
+          "SAPDatabaseInstances_Create": {
+            "$ref": "./examples/SapDatabaseInstances_Create.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "SapDatabaseInstances_Update",
+        "tags": [
+          "SAPDatabaseInstances"
+        ],
+        "description": "Updates the Database resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "sapVirtualInstanceName",
+            "in": "path",
+            "description": "The name of the Virtual Instances for SAP solutions resource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z][a-zA-Z0-9]{2}$"
+          },
+          {
+            "name": "databaseInstanceName",
+            "in": "path",
+            "description": "Database resource name string modeled as parameter for auto generation to work correctly.",
+            "required": true,
+            "type": "string",
+            "pattern": "^.*"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "Database resource update request body.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UpdateSAPDatabaseInstanceRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SAPDatabaseInstance"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SAPDatabaseInstances_Update": {
+            "$ref": "./examples/SapDatabaseInstances_Update.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "SapDatabaseInstances_Delete",
+        "tags": [
+          "SAPDatabaseInstances"
+        ],
+        "description": "Deletes the Database resource corresponding to a Virtual Instance for SAP solutions resource. &lt;br&gt;&lt;br&gt;This will be used by service only. Delete by end user will return a Bad Request error.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "sapVirtualInstanceName",
+            "in": "path",
+            "description": "The name of the Virtual Instances for SAP solutions resource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z][a-zA-Z0-9]{2}$"
+          },
+          {
+            "name": "databaseInstanceName",
+            "in": "path",
+            "description": "Database resource name string modeled as parameter for auto generation to work correctly.",
+            "required": true,
+            "type": "string",
+            "pattern": "^.*"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SAPDatabaseInstances_Delete": {
+            "$ref": "./examples/SapDatabaseInstances_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Workloads/sapVirtualInstances/{sapVirtualInstanceName}/databaseInstances/{databaseInstanceName}/start": {
+      "post": {
+        "operationId": "SapDatabaseInstances_Start",
+        "tags": [
+          "SAPDatabaseInstances"
+        ],
+        "description": "Starts the database instance of the SAP system.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "sapVirtualInstanceName",
+            "in": "path",
+            "description": "The name of the Virtual Instances for SAP solutions resource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z][a-zA-Z0-9]{2}$"
+          },
+          {
+            "name": "databaseInstanceName",
+            "in": "path",
+            "description": "Database resource name string modeled as parameter for auto generation to work correctly.",
+            "required": true,
+            "type": "string",
+            "pattern": "^.*"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "SAP Database server instance start request body.",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/StartRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/OperationStatusResult"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Start Virtual Machine and the database instance of the SAP system on it.": {
+            "$ref": "./examples/SapDatabaseInstances_StartInstanceVM.json"
+          },
+          "Start the database instance of the SAP system.": {
+            "$ref": "./examples/SapDatabaseInstances_StartInstance.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Workloads/sapVirtualInstances/{sapVirtualInstanceName}/databaseInstances/{databaseInstanceName}/stop": {
+      "post": {
+        "operationId": "SapDatabaseInstances_Stop",
+        "tags": [
+          "SAPDatabaseInstances"
+        ],
+        "description": "Stops the database instance of the SAP system.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "sapVirtualInstanceName",
+            "in": "path",
+            "description": "The name of the Virtual Instances for SAP solutions resource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z][a-zA-Z0-9]{2}$"
+          },
+          {
+            "name": "databaseInstanceName",
+            "in": "path",
+            "description": "Database resource name string modeled as parameter for auto generation to work correctly.",
+            "required": true,
+            "type": "string",
+            "pattern": "^.*"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Stop request for the database instance of the SAP system.",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/StopRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/OperationStatusResult"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Soft Stop the database instance of the SAP system and the underlying Virtual Machine(s).": {
+            "$ref": "./examples/SapDatabaseInstances_StopInstanceSoftVM.json"
+          },
+          "Soft Stop the database instance of the SAP system.": {
+            "$ref": "./examples/SapDatabaseInstances_StopInstanceSoft.json"
+          },
+          "Stop the database instance of the SAP system and the underlying Virtual Machine(s).": {
+            "$ref": "./examples/SapDatabaseInstances_StopInstanceVM.json"
+          },
+          "Stop the database instance of the SAP system.": {
+            "$ref": "./examples/SapDatabaseInstances_StopInstance.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Workloads/sapVirtualInstances/{sapVirtualInstanceName}/start": {
+      "post": {
+        "operationId": "SapVirtualInstances_Start",
+        "tags": [
+          "SAPVirtualInstances"
+        ],
+        "description": "Starts the SAP application, that is the Central Services instance and Application server instances.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "sapVirtualInstanceName",
+            "in": "path",
+            "description": "The name of the Virtual Instances for SAP solutions resource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z][a-zA-Z0-9]{2}$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The Virtual Instance for SAP solutions resource start request body.",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/StartRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/OperationStatusResult"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SAPVirtualInstances_Start": {
+            "$ref": "./examples/SapVirtualInstances_Start.json"
+          },
+          "SAPVirtualInstances_Start_WithInfraOperations": {
+            "$ref": "./examples/SapVirtualInstances_StartWithInfraOperations.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Workloads/sapVirtualInstances/{sapVirtualInstanceName}/stop": {
+      "post": {
+        "operationId": "SapVirtualInstances_Stop",
+        "tags": [
+          "SAPVirtualInstances"
+        ],
+        "description": "Stops the SAP Application, that is the Application server instances and Central Services instance.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "sapVirtualInstanceName",
+            "in": "path",
+            "description": "The name of the Virtual Instances for SAP solutions resource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z][a-zA-Z0-9]{2}$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The Virtual Instance for SAP solutions resource stop request body.",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/StopRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/OperationStatusResult"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SAPVirtualInstances_Stop": {
+            "$ref": "./examples/SapVirtualInstances_Stop.json"
+          },
+          "Soft Stop of SapVirtualInstances_Stop": {
+            "$ref": "./examples/SapVirtualInstances_SoftStop.json"
+          },
+          "Soft Stop the virtual machine(s) and the SAP system on it.": {
+            "$ref": "./examples/SapVirtualInstances_SoftStopVMAndSystem.json"
+          },
+          "Stop the virtual machine(s) and the SAP system on it.": {
+            "$ref": "./examples/SapVirtualInstances_StopVMAndSystem.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "ApplicationServerConfiguration": {
+      "type": "object",
+      "description": "Gets or sets the application server configuration.",
+      "properties": {
+        "subnetId": {
+          "type": "string",
+          "description": "The subnet id."
+        },
+        "virtualMachineConfiguration": {
+          "$ref": "#/definitions/VirtualMachineConfiguration",
+          "description": "Gets or sets the virtual machine configuration."
+        },
+        "instanceCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The number of app server instances."
+        }
+      },
+      "required": [
+        "subnetId",
+        "virtualMachineConfiguration",
+        "instanceCount"
+      ]
+    },
+    "ApplicationServerFullResourceNames": {
+      "type": "object",
+      "description": "The full resource names object for application layer resources. The number of entries in this list should be equal to the number VMs to be created for application layer.",
+      "properties": {
+        "virtualMachines": {
+          "type": "array",
+          "description": "The list of virtual machine naming details.",
+          "items": {
+            "$ref": "#/definitions/VirtualMachineResourceNames"
+          },
+          "x-ms-identifiers": []
+        },
+        "availabilitySetName": {
+          "type": "string",
+          "description": "The full name for availability set. In case name is not provided, it will be defaulted to {SID}-App-AvSet."
+        }
+      }
+    },
+    "ApplicationServerVirtualMachineType": {
+      "type": "string",
+      "description": "Defines the type of application server VM.",
+      "enum": [
+        "Active",
+        "Standby",
+        "Unknown"
+      ],
+      "x-ms-enum": {
+        "name": "ApplicationServerVirtualMachineType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Active",
+            "value": "Active",
+            "description": "Active Application server vm type."
+          },
+          {
+            "name": "Standby",
+            "value": "Standby",
+            "description": "Standby Application server vm type."
+          },
+          {
+            "name": "Unknown",
+            "value": "Unknown",
+            "description": "Unknown Application server vm type."
+          }
+        ]
+      }
+    },
+    "ApplicationServerVmDetails": {
+      "type": "object",
+      "description": "The Application Server VM Details.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/ApplicationServerVirtualMachineType",
+          "description": "Defines the type of application server VM.",
+          "readOnly": true
+        },
+        "virtualMachineId": {
+          "type": "string",
+          "description": "The virtual machine id.",
+          "readOnly": true
+        },
+        "storageDetails": {
+          "type": "array",
+          "description": "Storage details of all the Storage Accounts attached to the App Virtual Machine. For e.g. NFS on AFS Shared Storage.",
+          "items": {
+            "$ref": "#/definitions/StorageInformation"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "CentralServerConfiguration": {
+      "type": "object",
+      "description": "Gets or sets the central server configuration.",
+      "properties": {
+        "subnetId": {
+          "type": "string",
+          "description": "The subnet id."
+        },
+        "virtualMachineConfiguration": {
+          "$ref": "#/definitions/VirtualMachineConfiguration",
+          "description": "Gets or sets the virtual machine configuration."
+        },
+        "instanceCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The number of central server VMs."
+        }
+      },
+      "required": [
+        "subnetId",
+        "virtualMachineConfiguration",
+        "instanceCount"
+      ]
+    },
+    "CentralServerFullResourceNames": {
+      "type": "object",
+      "description": "The full resource names object for central server layer resources.",
+      "properties": {
+        "virtualMachines": {
+          "type": "array",
+          "description": "The list of names for all ASCS virtual machines to be deployed. The number of entries in this list should be equal to the number VMs to be created for ASCS layer. At maximum, there can be two virtual machines at this layer: ASCS and ERS.",
+          "items": {
+            "$ref": "#/definitions/VirtualMachineResourceNames"
+          },
+          "x-ms-identifiers": []
+        },
+        "availabilitySetName": {
+          "type": "string",
+          "description": "The full name for availability set. In case name is not provided, it will be defaulted to {SID}-ASCS-AvSet."
+        },
+        "loadBalancer": {
+          "$ref": "#/definitions/LoadBalancerResourceNames",
+          "description": "The resource names object for load balancer and related resources."
+        }
+      }
+    },
+    "CentralServerVirtualMachineType": {
+      "type": "string",
+      "description": "Defines the type of central server VM.",
+      "enum": [
+        "Primary",
+        "Secondary",
+        "Unknown",
+        "ASCS",
+        "ERSInactive",
+        "ERS",
+        "Standby"
+      ],
+      "x-ms-enum": {
+        "name": "CentralServerVirtualMachineType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Primary",
+            "value": "Primary",
+            "description": "Primary central server vm."
+          },
+          {
+            "name": "Secondary",
+            "value": "Secondary",
+            "description": "Secondary central server vm."
+          },
+          {
+            "name": "Unknown",
+            "value": "Unknown",
+            "description": "Central server vm type unknown."
+          },
+          {
+            "name": "ASCS",
+            "value": "ASCS",
+            "description": "ASCS Central server vm type."
+          },
+          {
+            "name": "ERSInactive",
+            "value": "ERSInactive",
+            "description": "ERSInactive Central server vm type."
+          },
+          {
+            "name": "ERS",
+            "value": "ERS",
+            "description": "ERS Central server vm type."
+          },
+          {
+            "name": "Standby",
+            "value": "Standby",
+            "description": "Standby Central server vm type."
+          }
+        ]
+      }
+    },
+    "CentralServerVmDetails": {
+      "type": "object",
+      "description": "The SAP Central Services Instance VM details.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/CentralServerVirtualMachineType",
+          "description": "Defines the type of central server VM.",
+          "readOnly": true
+        },
+        "virtualMachineId": {
+          "type": "string",
+          "description": "The virtual machine id.",
+          "readOnly": true
+        },
+        "storageDetails": {
+          "type": "array",
+          "description": "Storage details of all the Storage Accounts attached to the ASCS Virtual Machine. For e.g. NFS on AFS Shared Storage.",
+          "items": {
+            "$ref": "#/definitions/StorageInformation"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "CreateAndMountFileShareConfiguration": {
+      "type": "object",
+      "description": "Gets or sets the file share configuration where the transport directory fileshare is created and mounted as a part of the create infra flow. Please pre-create the resource group you intend to place the transport directory in. The storage account and fileshare will be auto-created by the ACSS and doesn't need to be pre-created.",
+      "properties": {
+        "resourceGroup": {
+          "type": "string",
+          "description": "The name of transport file share resource group. This should be pre created by the customer. The app rg is used in case of missing input."
+        },
+        "storageAccountName": {
+          "type": "string",
+          "description": "The name of file share storage account name . A custom name is used in case of missing input."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/FileShareConfiguration"
+        }
+      ],
+      "x-ms-discriminator-value": "CreateAndMount"
+    },
+    "DatabaseConfiguration": {
+      "type": "object",
+      "description": "Gets or sets the database configuration.",
+      "properties": {
+        "databaseType": {
+          "$ref": "#/definitions/SAPDatabaseType",
+          "description": "The database type."
+        },
+        "subnetId": {
+          "type": "string",
+          "description": "The subnet id."
+        },
+        "virtualMachineConfiguration": {
+          "$ref": "#/definitions/VirtualMachineConfiguration",
+          "description": "Gets or sets the virtual machine configuration."
+        },
+        "instanceCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The number of database VMs."
+        },
+        "diskConfiguration": {
+          "$ref": "#/definitions/DiskConfiguration",
+          "description": "Gets or sets the disk configuration."
+        }
+      },
+      "required": [
+        "subnetId",
+        "virtualMachineConfiguration",
+        "instanceCount"
+      ]
+    },
+    "DatabaseServerFullResourceNames": {
+      "type": "object",
+      "description": "The full resource names object for database layer resources. The number of entries in this list should be equal to the number VMs to be created for database layer.",
+      "properties": {
+        "virtualMachines": {
+          "type": "array",
+          "description": "The list of virtual machine naming details.",
+          "items": {
+            "$ref": "#/definitions/VirtualMachineResourceNames"
+          },
+          "x-ms-identifiers": []
+        },
+        "availabilitySetName": {
+          "type": "string",
+          "description": "The full name for availability set. In case name is not provided, it will be defaulted to {SID}-DB-AvSet."
+        },
+        "loadBalancer": {
+          "$ref": "#/definitions/LoadBalancerResourceNames",
+          "description": "The resource names object for load balancer and related resources."
+        }
+      }
+    },
+    "DatabaseVmDetails": {
+      "type": "object",
+      "description": "Database VM details.",
+      "properties": {
+        "virtualMachineId": {
+          "type": "string",
+          "description": "The virtual machine id.",
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "#/definitions/SAPVirtualInstanceStatus",
+          "description": "Defines the SAP Instance status.",
+          "readOnly": true
+        },
+        "storageDetails": {
+          "type": "array",
+          "description": "Storage details of all the Storage Accounts attached to the Database Virtual Machine. For e.g. NFS on AFS Shared Storage.",
+          "items": {
+            "$ref": "#/definitions/StorageInformation"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "DeployerVmPackages": {
+      "type": "object",
+      "description": "Defines the url and storage account ID where deployer VM packages are uploaded",
+      "properties": {
+        "url": {
+          "type": "string",
+          "description": "The URL to the deployer VM packages file."
+        },
+        "storageAccountId": {
+          "type": "string",
+          "description": "The deployer VM packages storage account id"
+        }
+      }
+    },
+    "DeploymentConfiguration": {
+      "type": "object",
+      "description": "Deployment Configuration.",
+      "properties": {
+        "appLocation": {
+          "type": "string",
+          "description": "The geo-location where the SAP system is to be created."
+        },
+        "infrastructureConfiguration": {
+          "$ref": "#/definitions/InfrastructureConfiguration",
+          "description": "The infrastructure configuration."
+        },
+        "softwareConfiguration": {
+          "$ref": "#/definitions/SoftwareConfiguration",
+          "description": "The software configuration."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/SAPConfiguration"
+        }
+      ],
+      "x-ms-discriminator-value": "Deployment"
+    },
+    "DeploymentWithOSConfiguration": {
+      "type": "object",
+      "description": "Deployment along with OS Configuration.",
+      "properties": {
+        "appLocation": {
+          "type": "string",
+          "description": "The geo-location where the SAP system is to be created."
+        },
+        "infrastructureConfiguration": {
+          "$ref": "#/definitions/InfrastructureConfiguration",
+          "description": "The infrastructure configuration."
+        },
+        "softwareConfiguration": {
+          "$ref": "#/definitions/SoftwareConfiguration",
+          "description": "The software configuration."
+        },
+        "osSapConfiguration": {
+          "$ref": "#/definitions/OsSapConfiguration",
+          "description": "The OS and SAP configuration."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/SAPConfiguration"
+        }
+      ],
+      "x-ms-discriminator-value": "DeploymentWithOSConfig"
+    },
+    "DiscoveryConfiguration": {
+      "type": "object",
+      "description": "Discovery Details.",
+      "properties": {
+        "centralServerVmId": {
+          "type": "string",
+          "description": "The virtual machine ID of the Central Server."
+        },
+        "managedRgStorageAccountName": {
+          "type": "string",
+          "description": "The custom storage account name for the storage account created by the service in the managed resource group created as part of VIS deployment.<br><br>Refer to the storage account naming rules [here](https://learn.microsoft.com/azure/azure-resource-manager/management/resource-name-rules#microsoftstorage).<br><br>If not provided, the service will create the storage account with a random name.",
+          "minLength": 3,
+          "maxLength": 24
+        },
+        "appLocation": {
+          "type": "string",
+          "description": "The geo-location where the SAP system exists.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/SAPConfiguration"
+        }
+      ],
+      "x-ms-discriminator-value": "Discovery"
+    },
+    "DiskConfiguration": {
+      "type": "object",
+      "description": "The Disk Configuration Details.",
+      "properties": {
+        "diskVolumeConfigurations": {
+          "type": "object",
+          "description": "The disk configuration for the db volume. For HANA, Required volumes are: ['hana/data', 'hana/log', hana/shared', 'usr/sap', 'os'], Optional volume : ['backup'].",
+          "additionalProperties": {
+            "$ref": "#/definitions/DiskVolumeConfiguration"
+          }
+        }
+      }
+    },
+    "DiskDetails": {
+      "type": "object",
+      "description": "The supported disk size details for a disk type.",
+      "properties": {
+        "sku": {
+          "$ref": "#/definitions/DiskSku",
+          "description": "The type of disk sku. For example, Standard_LRS, Standard_ZRS, Premium_LRS, Premium_ZRS."
+        },
+        "sizeGB": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The disk size in GB."
+        },
+        "minimumSupportedDiskCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The minimum supported disk count."
+        },
+        "maximumSupportedDiskCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The maximum supported disk count."
+        },
+        "iopsReadWrite": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The disk Iops."
+        },
+        "mbpsReadWrite": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The disk provisioned throughput in MBps."
+        },
+        "diskTier": {
+          "type": "string",
+          "description": "The disk tier, e.g. P10, E10."
+        }
+      }
+    },
+    "DiskSku": {
+      "type": "object",
+      "description": "The type of disk sku. For example, Standard_LRS, Standard_ZRS, Premium_LRS, Premium_ZRS.",
+      "properties": {
+        "name": {
+          "$ref": "#/definitions/DiskSkuName",
+          "description": "Defines the disk sku name."
+        }
+      }
+    },
+    "DiskSkuName": {
+      "type": "string",
+      "description": "Defines the disk sku name.",
+      "enum": [
+        "Standard_LRS",
+        "Premium_LRS",
+        "StandardSSD_LRS",
+        "UltraSSD_LRS",
+        "Premium_ZRS",
+        "StandardSSD_ZRS",
+        "PremiumV2_LRS"
+      ],
+      "x-ms-enum": {
+        "name": "DiskSkuName",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Standard_LRS",
+            "value": "Standard_LRS",
+            "description": "Standard LRS Disk SKU."
+          },
+          {
+            "name": "Premium_LRS",
+            "value": "Premium_LRS",
+            "description": "Premium_LRS Disk SKU."
+          },
+          {
+            "name": "StandardSSD_LRS",
+            "value": "StandardSSD_LRS",
+            "description": "StandardSSD_LRS Disk SKU."
+          },
+          {
+            "name": "UltraSSD_LRS",
+            "value": "UltraSSD_LRS",
+            "description": "UltraSSD_LRS Disk SKU."
+          },
+          {
+            "name": "Premium_ZRS",
+            "value": "Premium_ZRS",
+            "description": "Premium_ZRS Disk SKU."
+          },
+          {
+            "name": "StandardSSD_ZRS",
+            "value": "StandardSSD_ZRS",
+            "description": "StandardSSD_ZRS Disk SKU."
+          },
+          {
+            "name": "PremiumV2_LRS",
+            "value": "PremiumV2_LRS",
+            "description": "PremiumV2_LRS Disk SKU."
+          }
+        ]
+      }
+    },
+    "DiskVolumeConfiguration": {
+      "type": "object",
+      "description": "The disk configuration required for the selected volume.",
+      "properties": {
+        "count": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The total number of disks required for the concerned volume."
+        },
+        "sizeGB": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The disk size in GB."
+        },
+        "sku": {
+          "$ref": "#/definitions/DiskSku",
+          "description": "The disk SKU details."
+        }
+      }
+    },
+    "EnqueueReplicationServerProperties": {
+      "type": "object",
+      "description": "Defines the SAP Enqueue Replication Server (ERS) properties.",
+      "properties": {
+        "ersVersion": {
+          "$ref": "#/definitions/EnqueueReplicationServerType",
+          "description": "Defines the type of Enqueue Replication Server.",
+          "readOnly": true
+        },
+        "instanceNo": {
+          "type": "string",
+          "description": "ERS Instance Number.",
+          "readOnly": true
+        },
+        "hostname": {
+          "type": "string",
+          "description": "ERS SAP Hostname.",
+          "readOnly": true
+        },
+        "kernelVersion": {
+          "type": "string",
+          "description": "ERS SAP Kernel Version.",
+          "readOnly": true
+        },
+        "kernelPatch": {
+          "type": "string",
+          "description": "ERS SAP Kernel Patch level.",
+          "readOnly": true
+        },
+        "ipAddress": {
+          "type": "string",
+          "description": "ERS SAP IP Address.",
+          "readOnly": true
+        },
+        "health": {
+          "$ref": "#/definitions/SAPHealthState",
+          "description": "Defines the health of SAP Instances.",
+          "readOnly": true
+        }
+      }
+    },
+    "EnqueueReplicationServerType": {
+      "type": "string",
+      "description": "Defines the type of Enqueue Replication Server.",
+      "enum": [
+        "EnqueueReplicator1",
+        "EnqueueReplicator2"
+      ],
+      "x-ms-enum": {
+        "name": "EnqueueReplicationServerType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "EnqueueReplicator1",
+            "value": "EnqueueReplicator1",
+            "description": "Enqueue Replication server type 1."
+          },
+          {
+            "name": "EnqueueReplicator2",
+            "value": "EnqueueReplicator2",
+            "description": "Enqueue Replication server type 2."
+          }
+        ]
+      }
+    },
+    "EnqueueServerProperties": {
+      "type": "object",
+      "description": "Defines the SAP Enqueue Server properties.",
+      "properties": {
+        "hostname": {
+          "type": "string",
+          "description": "Enqueue Server SAP Hostname.",
+          "readOnly": true
+        },
+        "ipAddress": {
+          "type": "string",
+          "description": "Enqueue Server SAP IP Address.",
+          "readOnly": true
+        },
+        "port": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Enqueue Server Port.",
+          "readOnly": true
+        },
+        "health": {
+          "$ref": "#/definitions/SAPHealthState",
+          "description": "Defines the health of SAP Instances.",
+          "readOnly": true
+        }
+      }
+    },
+    "ErrorDefinition": {
+      "type": "object",
+      "description": "Error definition.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Service specific error code which serves as the substatus for the HTTP error code.",
+          "readOnly": true
+        },
+        "message": {
+          "type": "string",
+          "description": "Description of the error.",
+          "readOnly": true
+        },
+        "details": {
+          "type": "array",
+          "description": "Internal error details.",
+          "items": {
+            "$ref": "#/definitions/ErrorDefinition"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "ExternalInstallationSoftwareConfiguration": {
+      "type": "object",
+      "description": "The SAP Software configuration Input when the software is installed externally outside the service.",
+      "properties": {
+        "centralServerVmId": {
+          "type": "string",
+          "description": "The resource ID of the virtual machine containing the central server instance."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/SoftwareConfiguration"
+        }
+      ],
+      "x-ms-discriminator-value": "External"
+    },
+    "FileShareConfiguration": {
+      "type": "object",
+      "description": "File Share configuration details, populated with information on storage configuration mounted on the VIS. The createAndMount option is selected in case of missing input.",
+      "properties": {
+        "configurationType": {
+          "$ref": "#/definitions/FileShareConfigurationType",
+          "description": "The type of file share config, eg: Mount/CreateAndMount/Skip."
+        }
+      },
+      "discriminator": "configurationType",
+      "required": [
+        "configurationType"
+      ]
+    },
+    "FileShareConfigurationType": {
+      "type": "string",
+      "description": "The type of file share config.",
+      "enum": [
+        "Skip",
+        "CreateAndMount",
+        "Mount"
+      ],
+      "x-ms-enum": {
+        "name": "FileShareConfigurationType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Skip",
+            "value": "Skip",
+            "description": "Skip creating the file share."
+          },
+          {
+            "name": "CreateAndMount",
+            "value": "CreateAndMount",
+            "description": "Fileshare will be created and mounted by service."
+          },
+          {
+            "name": "Mount",
+            "value": "Mount",
+            "description": "Existing fileshare provided will be mounted by service."
+          }
+        ]
+      }
+    },
+    "GatewayServerProperties": {
+      "type": "object",
+      "description": "Defines the SAP Gateway Server properties.",
+      "properties": {
+        "port": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Gateway Port.",
+          "readOnly": true
+        },
+        "health": {
+          "$ref": "#/definitions/SAPHealthState",
+          "description": "Defines the health of SAP Instances.",
+          "readOnly": true
+        }
+      }
+    },
+    "HighAvailabilityConfiguration": {
+      "type": "object",
+      "description": "Gets or sets the high availability configuration.",
+      "properties": {
+        "highAvailabilityType": {
+          "$ref": "#/definitions/SAPHighAvailabilityType",
+          "description": "The high availability type."
+        }
+      },
+      "required": [
+        "highAvailabilityType"
+      ]
+    },
+    "HighAvailabilitySoftwareConfiguration": {
+      "type": "object",
+      "description": "Gets or sets the HA software configuration.",
+      "properties": {
+        "fencingClientId": {
+          "type": "string",
+          "description": "The fencing client id."
+        },
+        "fencingClientPassword": {
+          "type": "string",
+          "format": "password",
+          "description": "The fencing client id secret/password. The secret should never expire. This will be used pacemaker to start/stop the cluster VMs.",
+          "x-ms-secret": true
+        }
+      },
+      "required": [
+        "fencingClientId",
+        "fencingClientPassword"
+      ]
+    },
+    "ImageReference": {
+      "type": "object",
+      "description": "Specifies information about the image to use. You can specify information about platform images, marketplace images, or virtual machine images. This element is required when you want to use a platform image, marketplace image, or virtual machine image, but is not used in other creation operations. NOTE: Image reference publisher and offer can only be set when you create the scale set.",
+      "properties": {
+        "publisher": {
+          "type": "string",
+          "description": "The image publisher."
+        },
+        "offer": {
+          "type": "string",
+          "description": "Specifies the offer of the platform image or marketplace image used to create the virtual machine."
+        },
+        "sku": {
+          "type": "string",
+          "description": "The image SKU."
+        },
+        "version": {
+          "type": "string",
+          "description": "Specifies the version of the platform image or marketplace image used to create the virtual machine. The allowed formats are Major.Minor.Build or 'latest'. Major, Minor, and Build are decimal numbers. Specify 'latest' to use the latest version of an image available at deploy time. Even if you use 'latest', the VM image will not automatically update after deploy time even if a new version becomes available."
+        },
+        "id": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Specifies the ARM resource ID of the Azure Compute Gallery image version used for creating ACSS VMs. You will need to provide this input when you choose to deploy virtual machines in ACSS with OS image from the Azure Compute gallery."
+        }
+      }
+    },
+    "InfrastructureConfiguration": {
+      "type": "object",
+      "description": "Deploy SAP Infrastructure Details.",
+      "properties": {
+        "appResourceGroup": {
+          "type": "string",
+          "description": "The application resource group where SAP system resources will be deployed."
+        },
+        "deploymentType": {
+          "$ref": "#/definitions/SAPDeploymentType",
+          "description": "The SAP deployment type. Eg: SingleServer/ThreeTier."
+        }
+      },
+      "discriminator": "deploymentType",
+      "required": [
+        "appResourceGroup",
+        "deploymentType"
+      ]
+    },
+    "LinuxConfiguration": {
+      "type": "object",
+      "description": "Specifies the Linux operating system settings on the virtual machine. <br><br>For a list of supported Linux distributions, see [Linux on Azure-Endorsed Distributions](https://docs.microsoft.com/azure/virtual-machines/linux/endorsed-distros).",
+      "properties": {
+        "disablePasswordAuthentication": {
+          "type": "boolean",
+          "description": "Specifies whether password authentication should be disabled."
+        },
+        "ssh": {
+          "$ref": "#/definitions/SshConfiguration",
+          "description": "Specifies the ssh key configuration for a Linux OS. (This property is deprecated, please use 'sshKeyPair' instead)"
+        },
+        "sshKeyPair": {
+          "$ref": "#/definitions/SshKeyPair",
+          "description": "The SSH Key-pair used to authenticate with the VM's."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/OSConfiguration"
+        }
+      ],
+      "x-ms-discriminator-value": "Linux"
+    },
+    "LoadBalancerDetails": {
+      "type": "object",
+      "description": "The Load Balancer details such as Load Balancer ID.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Fully qualified resource ID for the load balancer.",
+          "readOnly": true
+        }
+      }
+    },
+    "LoadBalancerResourceNames": {
+      "type": "object",
+      "description": "The resource names object for load balancer and related resources.",
+      "properties": {
+        "loadBalancerName": {
+          "type": "string",
+          "description": "The full resource name for load balancer. If this value is not provided, load balancer will be name as {ASCS/DB}-loadBalancer."
+        },
+        "frontendIpConfigurationNames": {
+          "type": "array",
+          "description": "The list of frontend IP configuration names. If provided as input, size of this list should be 2 for cs layer and should be 1 for database layer.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "backendPoolNames": {
+          "type": "array",
+          "description": "The list of backend pool names. Currently, ACSS deploys only one backend pool and hence, size of this list should be 1",
+          "items": {
+            "type": "string"
+          }
+        },
+        "healthProbeNames": {
+          "type": "array",
+          "description": "The list of health probe names. If provided as input, size of this list should be 2 for cs layer and should be 1 for database layer.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ManagedRGConfiguration": {
+      "type": "object",
+      "description": "Managed resource group configuration",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Managed resource group name"
+        }
+      }
+    },
+    "ManagedResourcesNetworkAccessType": {
+      "type": "string",
+      "description": "Defines the network access type for managed resources.",
+      "enum": [
+        "Public",
+        "Private"
+      ],
+      "x-ms-enum": {
+        "name": "ManagedResourcesNetworkAccessType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Public",
+            "value": "Public",
+            "description": "Managed resources will be deployed with public network access enabled."
+          },
+          {
+            "name": "Private",
+            "value": "Private",
+            "description": "Managed resources will be deployed with public network access disabled."
+          }
+        ]
+      }
+    },
+    "MessageServerProperties": {
+      "type": "object",
+      "description": "Defines the SAP message server properties.",
+      "properties": {
+        "msPort": {
+          "type": "integer",
+          "format": "int64",
+          "description": "message server port.",
+          "readOnly": true
+        },
+        "internalMsPort": {
+          "type": "integer",
+          "format": "int64",
+          "description": "message server internal MS port.",
+          "readOnly": true
+        },
+        "httpPort": {
+          "type": "integer",
+          "format": "int64",
+          "description": "message server HTTP Port.",
+          "readOnly": true
+        },
+        "httpsPort": {
+          "type": "integer",
+          "format": "int64",
+          "description": "message server HTTPS Port.",
+          "readOnly": true
+        },
+        "hostname": {
+          "type": "string",
+          "description": "message server SAP Hostname.",
+          "readOnly": true
+        },
+        "ipAddress": {
+          "type": "string",
+          "description": "message server IP Address.",
+          "readOnly": true
+        },
+        "health": {
+          "$ref": "#/definitions/SAPHealthState",
+          "description": "Defines the health of SAP Instances.",
+          "readOnly": true
+        }
+      }
+    },
+    "MountFileShareConfiguration": {
+      "type": "object",
+      "description": "Gets or sets the file share configuration where the transport directory fileshare already exists, and user wishes to mount the fileshare as a part of the create infra flow.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The fileshare resource ID"
+        },
+        "privateEndpointId": {
+          "type": "string",
+          "description": "The private endpoint resource ID"
+        }
+      },
+      "required": [
+        "id",
+        "privateEndpointId"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/FileShareConfiguration"
+        }
+      ],
+      "x-ms-discriminator-value": "Mount"
+    },
+    "NamingPatternType": {
+      "type": "string",
+      "description": "The pattern type to be used for resource naming.",
+      "enum": [
+        "FullResourceName"
+      ],
+      "x-ms-enum": {
+        "name": "NamingPatternType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "FullResourceName",
+            "value": "FullResourceName",
+            "description": "Full resource names that will be created by service."
+          }
+        ]
+      }
+    },
+    "NetworkConfiguration": {
+      "type": "object",
+      "description": "Defines the network configuration type for SAP system infrastructure that is being deployed",
+      "properties": {
+        "isSecondaryIpEnabled": {
+          "type": "boolean",
+          "description": "Specifies whether a secondary IP address should be added to the network interface on all VMs of the SAP system being deployed",
+          "default": false
+        }
+      }
+    },
+    "NetworkInterfaceResourceNames": {
+      "type": "object",
+      "description": "The resource names object for network interface and related resources.",
+      "properties": {
+        "networkInterfaceName": {
+          "type": "string",
+          "description": "The full name for network interface. If name is not provided, service uses a default name based on the deployment type. For SingleServer, default name is {SID}-Nic. In case of HA-AvZone systems, default name will be {SID}-{App/ASCS/DB}-Zone{A/B}-Nic with an incrementor at the end in case of more than 1 instance per layer. For distributed and HA-AvSet systems, default name will be {SID}-{App/ASCS/DB}-Nic with an incrementor at the end in case of more than 1 instance per layer."
+        }
+      }
+    },
+    "OSConfiguration": {
+      "type": "object",
+      "description": "Defines the OS configuration.",
+      "properties": {
+        "osType": {
+          "$ref": "#/definitions/OSType",
+          "description": "The OS Type"
+        }
+      },
+      "discriminator": "osType",
+      "required": [
+        "osType"
+      ]
+    },
+    "OSProfile": {
+      "type": "object",
+      "description": "Specifies the operating system settings for the virtual machine. Some of the settings cannot be changed once VM is provisioned.",
+      "properties": {
+        "adminUsername": {
+          "type": "string",
+          "description": "Specifies the name of the administrator account. <br><br> This property cannot be updated after the VM is created. <br><br> **Windows-only restriction:** Cannot end in \".\" <br><br> **Disallowed values:** \"administrator\", \"admin\", \"user\", \"user1\", \"test\", \"user2\", \"test1\", \"user3\", \"admin1\", \"1\", \"123\", \"a\", \"actuser\", \"adm\", \"admin2\", \"aspnet\", \"backup\", \"console\", \"david\", \"guest\", \"john\", \"owner\", \"root\", \"server\", \"sql\", \"support\", \"support_388945a0\", \"sys\", \"test2\", \"test3\", \"user4\", \"user5\". <br><br> **Minimum-length (Linux):** 1  character <br><br> **Max-length (Linux):** 64 characters <br><br> **Max-length (Windows):** 20 characters."
+        },
+        "adminPassword": {
+          "type": "string",
+          "format": "password",
+          "description": "Specifies the password of the administrator account. <br><br> **Minimum-length (Windows):** 8 characters <br><br> **Minimum-length (Linux):** 6 characters <br><br> **Max-length (Windows):** 123 characters <br><br> **Max-length (Linux):** 72 characters <br><br> **Complexity requirements:** 3 out of 4 conditions below need to be fulfilled <br> Has lower characters <br>Has upper characters <br> Has a digit <br> Has a special character (Regex match [\\W_]) <br><br> **Disallowed values:** \"abc@123\", \"P@$$w0rd\", \"P@ssw0rd\", \"P@ssword123\", \"Pa$$word\", \"pass@word1\", \"Password!\", \"Password1\", \"Password22\", \"iloveyou!\" <br><br> For resetting the password, see [How to reset the Remote Desktop service or its login password in a Windows VM](https://docs.microsoft.com/troubleshoot/azure/virtual-machines/reset-rdp) <br><br> For resetting root password, see [Manage users, SSH, and check or repair disks on Azure Linux VMs using the VMAccess Extension](https://docs.microsoft.com/troubleshoot/azure/virtual-machines/troubleshoot-ssh-connection)",
+          "x-ms-secret": true
+        },
+        "osConfiguration": {
+          "$ref": "#/definitions/OSConfiguration",
+          "description": "Specifies Windows operating system settings on the virtual machine."
+        }
+      }
+    },
+    "OSType": {
+      "type": "string",
+      "description": "The OS Type",
+      "enum": [
+        "Linux",
+        "Windows"
+      ],
+      "x-ms-enum": {
+        "name": "OSType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Linux",
+            "value": "Linux",
+            "description": "Linux OS Type."
+          },
+          {
+            "name": "Windows",
+            "value": "Windows",
+            "description": "Windows OS Type."
+          }
+        ]
+      }
+    },
+    "OsSapConfiguration": {
+      "type": "object",
+      "description": "Defines the OS and SAP Configurations for Deployment",
+      "properties": {
+        "deployerVmPackages": {
+          "$ref": "#/definitions/DeployerVmPackages",
+          "description": "The url and storage account ID where deployer VM packages are uploaded"
+        },
+        "sapFqdn": {
+          "type": "string",
+          "description": "The FQDN to set for the SAP system"
+        }
+      }
+    },
+    "SAPApplicationServerInstance": {
+      "type": "object",
+      "description": "Define the SAP Application Server Instance resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SAPApplicationServerProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "SAPApplicationServerInstanceListResult": {
+      "type": "object",
+      "description": "The response of a SAPApplicationServerInstance list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The SAPApplicationServerInstance items on this page",
+          "items": {
+            "$ref": "#/definitions/SAPApplicationServerInstance"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "SAPApplicationServerProperties": {
+      "type": "object",
+      "description": "Defines the SAP Application Server instance properties.",
+      "properties": {
+        "instanceNo": {
+          "type": "string",
+          "description": "Application server Instance Number.",
+          "readOnly": true
+        },
+        "subnet": {
+          "type": "string",
+          "description": "Application server Subnet.",
+          "readOnly": true
+        },
+        "hostname": {
+          "type": "string",
+          "description": "Application server instance SAP hostname.",
+          "readOnly": true
+        },
+        "kernelVersion": {
+          "type": "string",
+          "description": "Application server instance SAP Kernel Version.",
+          "readOnly": true
+        },
+        "kernelPatch": {
+          "type": "string",
+          "description": "Application server instance SAP Kernel Patch level.",
+          "readOnly": true
+        },
+        "ipAddress": {
+          "type": "string",
+          "description": "Application server instance SAP IP Address.",
+          "readOnly": true
+        },
+        "gatewayPort": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Application server instance gateway Port.",
+          "readOnly": true
+        },
+        "icmHttpPort": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Application server instance ICM HTTP Port.",
+          "readOnly": true
+        },
+        "icmHttpsPort": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Application server instance ICM HTTPS Port.",
+          "readOnly": true
+        },
+        "dispatcherStatus": {
+          "type": "string",
+          "description": "Application server instance dispatcher status.",
+          "readOnly": true
+        },
+        "loadBalancerDetails": {
+          "$ref": "#/definitions/LoadBalancerDetails",
+          "description": "The Load Balancer details such as LoadBalancer ID attached to Application Server Virtual Machines",
+          "readOnly": true
+        },
+        "vmDetails": {
+          "type": "array",
+          "description": "The list of virtual machines.",
+          "items": {
+            "$ref": "#/definitions/ApplicationServerVmDetails"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "status": {
+          "$ref": "#/definitions/SAPVirtualInstanceStatus",
+          "description": "Defines the SAP Instance status.",
+          "readOnly": true
+        },
+        "health": {
+          "$ref": "#/definitions/SAPHealthState",
+          "description": "Defines the health of SAP Instances.",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/SapVirtualInstanceProvisioningState",
+          "description": "Defines the provisioning states.",
+          "readOnly": true
+        },
+        "errors": {
+          "$ref": "#/definitions/SAPVirtualInstanceError",
+          "description": "Defines the Application Instance errors.",
+          "readOnly": true
+        }
+      }
+    },
+    "SAPAvailabilityZoneDetailsRequest": {
+      "type": "object",
+      "description": "The SAP request to get list of availability zones.",
+      "properties": {
+        "appLocation": {
+          "type": "string",
+          "description": "The geo-location where the SAP resources will be created."
+        },
+        "sapProduct": {
+          "$ref": "#/definitions/SAPProductType",
+          "description": "Defines the SAP Product type."
+        },
+        "databaseType": {
+          "$ref": "#/definitions/SAPDatabaseType",
+          "description": "The database type. Eg: HANA, DB2, etc"
+        }
+      },
+      "required": [
+        "appLocation",
+        "sapProduct",
+        "databaseType"
+      ]
+    },
+    "SAPAvailabilityZoneDetailsResult": {
+      "type": "object",
+      "description": "The list of supported availability zone pairs which are part of SAP HA deployment.",
+      "properties": {
+        "availabilityZonePairs": {
+          "type": "array",
+          "description": "Gets the list of availability zone pairs.",
+          "items": {
+            "$ref": "#/definitions/SAPAvailabilityZonePair"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "SAPAvailabilityZonePair": {
+      "type": "object",
+      "description": "The SAP Availability Zone Pair.",
+      "properties": {
+        "zoneA": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The zone A."
+        },
+        "zoneB": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The zone B."
+        }
+      }
+    },
+    "SAPCentralServerInstance": {
+      "type": "object",
+      "description": "Define the SAP Central Services Instance resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SAPCentralServerProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "SAPCentralServerInstanceListResult": {
+      "type": "object",
+      "description": "The response of a SAPCentralServerInstance list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The SAPCentralServerInstance items on this page",
+          "items": {
+            "$ref": "#/definitions/SAPCentralServerInstance"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "SAPCentralServerProperties": {
+      "type": "object",
+      "description": "Defines the SAP Central Services Instance properties.",
+      "properties": {
+        "instanceNo": {
+          "type": "string",
+          "description": "The central services instance number.",
+          "readOnly": true
+        },
+        "subnet": {
+          "type": "string",
+          "description": "The central services instance subnet.",
+          "readOnly": true
+        },
+        "messageServerProperties": {
+          "$ref": "#/definitions/MessageServerProperties",
+          "description": "Defines the SAP message server properties."
+        },
+        "enqueueServerProperties": {
+          "$ref": "#/definitions/EnqueueServerProperties",
+          "description": "Defines the SAP Enqueue Server properties."
+        },
+        "gatewayServerProperties": {
+          "$ref": "#/definitions/GatewayServerProperties",
+          "description": "Defines the SAP Gateway Server properties."
+        },
+        "enqueueReplicationServerProperties": {
+          "$ref": "#/definitions/EnqueueReplicationServerProperties",
+          "description": "Defines the SAP Enqueue Replication Server (ERS) properties."
+        },
+        "kernelVersion": {
+          "type": "string",
+          "description": "The central services instance Kernel Version.",
+          "readOnly": true
+        },
+        "kernelPatch": {
+          "type": "string",
+          "description": "The central services instance Kernel Patch level.",
+          "readOnly": true
+        },
+        "loadBalancerDetails": {
+          "$ref": "#/definitions/LoadBalancerDetails",
+          "description": "The Load Balancer details such as LoadBalancer ID attached to ASCS Virtual Machines",
+          "readOnly": true
+        },
+        "vmDetails": {
+          "type": "array",
+          "description": "The list of virtual machines corresponding to the Central Services instance.",
+          "items": {
+            "$ref": "#/definitions/CentralServerVmDetails"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "status": {
+          "$ref": "#/definitions/SAPVirtualInstanceStatus",
+          "description": "Defines the SAP Instance status.",
+          "readOnly": true
+        },
+        "health": {
+          "$ref": "#/definitions/SAPHealthState",
+          "description": "Defines the health of SAP Instances.",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/SapVirtualInstanceProvisioningState",
+          "description": "Defines the provisioning states.",
+          "readOnly": true
+        },
+        "errors": {
+          "$ref": "#/definitions/SAPVirtualInstanceError",
+          "description": "Defines the errors related to SAP Central Services Instance resource.",
+          "readOnly": true
+        }
+      }
+    },
+    "SAPConfiguration": {
+      "type": "object",
+      "description": "The SAP Configuration.",
+      "properties": {
+        "configurationType": {
+          "$ref": "#/definitions/SAPConfigurationType",
+          "description": "The configuration type. Eg: Deployment/Discovery"
+        }
+      },
+      "discriminator": "configurationType",
+      "required": [
+        "configurationType"
+      ]
+    },
+    "SAPConfigurationType": {
+      "type": "string",
+      "description": "The configuration Type.",
+      "enum": [
+        "Deployment",
+        "Discovery",
+        "DeploymentWithOSConfig"
+      ],
+      "x-ms-enum": {
+        "name": "SAPConfigurationType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Deployment",
+            "value": "Deployment",
+            "description": "SAP system will be deployed by service. No OS configurations will be done."
+          },
+          {
+            "name": "Discovery",
+            "value": "Discovery",
+            "description": "Existing SAP system will be registered."
+          },
+          {
+            "name": "DeploymentWithOSConfig",
+            "value": "DeploymentWithOSConfig",
+            "description": "SAP system will be deployed by service. OS configurations will be done."
+          }
+        ]
+      }
+    },
+    "SAPDatabaseInstance": {
+      "type": "object",
+      "description": "Define the Database resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SAPDatabaseProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "SAPDatabaseInstanceListResult": {
+      "type": "object",
+      "description": "The response of a SAPDatabaseInstance list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The SAPDatabaseInstance items on this page",
+          "items": {
+            "$ref": "#/definitions/SAPDatabaseInstance"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "SAPDatabaseProperties": {
+      "type": "object",
+      "description": "Defines the Database properties.",
+      "properties": {
+        "subnet": {
+          "type": "string",
+          "description": "Database subnet.",
+          "readOnly": true
+        },
+        "databaseSid": {
+          "type": "string",
+          "description": "Database SID name.",
+          "readOnly": true
+        },
+        "databaseType": {
+          "type": "string",
+          "description": "Database type, that is if the DB is HANA, DB2, Oracle, SAP ASE, Max DB or MS SQL Server.",
+          "readOnly": true
+        },
+        "ipAddress": {
+          "type": "string",
+          "description": "Database IP Address.",
+          "readOnly": true
+        },
+        "loadBalancerDetails": {
+          "$ref": "#/definitions/LoadBalancerDetails",
+          "description": "The Load Balancer details such as LoadBalancer ID attached to Database Virtual Machines",
+          "readOnly": true
+        },
+        "vmDetails": {
+          "type": "array",
+          "description": "The list of virtual machines corresponding to the Database resource.",
+          "items": {
+            "$ref": "#/definitions/DatabaseVmDetails"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "status": {
+          "$ref": "#/definitions/SAPVirtualInstanceStatus",
+          "description": "Defines the SAP Instance status.",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/SapVirtualInstanceProvisioningState",
+          "description": "Defines the provisioning states.",
+          "readOnly": true
+        },
+        "errors": {
+          "$ref": "#/definitions/SAPVirtualInstanceError",
+          "description": "Defines the errors related to Database resource.",
+          "readOnly": true
+        }
+      }
+    },
+    "SAPDatabaseScaleMethod": {
+      "type": "string",
+      "description": "The database scale method.",
+      "enum": [
+        "ScaleUp"
+      ],
+      "x-ms-enum": {
+        "name": "SAPDatabaseScaleMethod",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ScaleUp",
+            "value": "ScaleUp",
+            "description": "ScaleUp Hana Database deployment type"
+          }
+        ]
+      }
+    },
+    "SAPDatabaseType": {
+      "type": "string",
+      "description": "Defines the supported SAP Database types.",
+      "enum": [
+        "HANA",
+        "DB2"
+      ],
+      "x-ms-enum": {
+        "name": "SAPDatabaseType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "HANA",
+            "value": "HANA",
+            "description": "HANA Database type of SAP system."
+          },
+          {
+            "name": "DB2",
+            "value": "DB2",
+            "description": "DB2 database type of the SAP system."
+          }
+        ]
+      }
+    },
+    "SAPDeploymentType": {
+      "type": "string",
+      "description": "The type of SAP deployment, single server or Three tier.",
+      "enum": [
+        "SingleServer",
+        "ThreeTier"
+      ],
+      "x-ms-enum": {
+        "name": "SAPDeploymentType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "SingleServer",
+            "value": "SingleServer",
+            "description": "SAP Single server deployment type."
+          },
+          {
+            "name": "ThreeTier",
+            "value": "ThreeTier",
+            "description": "SAP Distributed deployment type."
+          }
+        ]
+      }
+    },
+    "SAPDiskConfiguration": {
+      "type": "object",
+      "description": "The SAP Disk Configuration contains 'recommended disk' details and list of supported disks detail for a volume type.",
+      "properties": {
+        "recommendedConfiguration": {
+          "$ref": "#/definitions/DiskVolumeConfiguration",
+          "description": "The recommended disk details for a given VM Sku."
+        },
+        "supportedConfigurations": {
+          "type": "array",
+          "description": "The list of supported disks for a given VM Sku.",
+          "items": {
+            "$ref": "#/definitions/DiskDetails"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "SAPDiskConfigurationsRequest": {
+      "type": "object",
+      "description": "The SAP request to get list of disk configurations.",
+      "properties": {
+        "appLocation": {
+          "type": "string",
+          "description": "The geo-location where the SAP resources will be created."
+        },
+        "environment": {
+          "$ref": "#/definitions/SAPEnvironmentType",
+          "description": "Defines the environment type - Production/Non Production."
+        },
+        "sapProduct": {
+          "$ref": "#/definitions/SAPProductType",
+          "description": "Defines the SAP Product type."
+        },
+        "databaseType": {
+          "$ref": "#/definitions/SAPDatabaseType",
+          "description": "The database type. Eg: HANA, DB2, etc"
+        },
+        "deploymentType": {
+          "$ref": "#/definitions/SAPDeploymentType",
+          "description": "The deployment type. Eg: SingleServer/ThreeTier"
+        },
+        "dbVmSku": {
+          "type": "string",
+          "description": "The VM SKU for database instance."
+        }
+      },
+      "required": [
+        "appLocation",
+        "environment",
+        "sapProduct",
+        "databaseType",
+        "deploymentType",
+        "dbVmSku"
+      ]
+    },
+    "SAPDiskConfigurationsResult": {
+      "type": "object",
+      "description": "The list of disk configuration for vmSku which are part of SAP deployment.",
+      "properties": {
+        "volumeConfigurations": {
+          "type": "object",
+          "description": "The disk configuration for the db volume. For HANA, Required volumes are: ['hana/data', 'hana/log', hana/shared', 'usr/sap', 'os'], Optional volume : ['backup'].",
+          "additionalProperties": {
+            "$ref": "#/definitions/SAPDiskConfiguration"
+          }
+        }
+      }
+    },
+    "SAPEnvironmentType": {
+      "type": "string",
+      "description": "Defines the environment type - Production/Non Production.",
+      "enum": [
+        "NonProd",
+        "Prod"
+      ],
+      "x-ms-enum": {
+        "name": "SAPEnvironmentType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NonProd",
+            "value": "NonProd",
+            "description": "Non Production SAP system."
+          },
+          {
+            "name": "Prod",
+            "value": "Prod",
+            "description": "Production SAP system."
+          }
+        ]
+      }
+    },
+    "SAPHealthState": {
+      "type": "string",
+      "description": "Defines the health of SAP Instances.",
+      "enum": [
+        "Unknown",
+        "Healthy",
+        "Unhealthy",
+        "Degraded"
+      ],
+      "x-ms-enum": {
+        "name": "SAPHealthState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Unknown",
+            "value": "Unknown",
+            "description": "SAP System health is unknown."
+          },
+          {
+            "name": "Healthy",
+            "value": "Healthy",
+            "description": "SAP System health is healthy."
+          },
+          {
+            "name": "Unhealthy",
+            "value": "Unhealthy",
+            "description": "SAP System is unhealthy."
+          },
+          {
+            "name": "Degraded",
+            "value": "Degraded",
+            "description": "SAP System health is degraded."
+          }
+        ]
+      }
+    },
+    "SAPHighAvailabilityType": {
+      "type": "string",
+      "description": "The high availability type (AvailabilitySet or AvailabilityZone).",
+      "enum": [
+        "AvailabilitySet",
+        "AvailabilityZone"
+      ],
+      "x-ms-enum": {
+        "name": "SAPHighAvailabilityType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "AvailabilitySet",
+            "value": "AvailabilitySet",
+            "description": "HA deployment with availability sets."
+          },
+          {
+            "name": "AvailabilityZone",
+            "value": "AvailabilityZone",
+            "description": "HA deployment with availability zones."
+          }
+        ]
+      }
+    },
+    "SAPInstallWithoutOSConfigSoftwareConfiguration": {
+      "type": "object",
+      "description": "The SAP Software configuration Input when the software is to be installed by service without OS Configurations",
+      "properties": {
+        "bomUrl": {
+          "type": "string",
+          "description": "The URL to the SAP Build of Materials(BOM) file."
+        },
+        "sapBitsStorageAccountId": {
+          "type": "string",
+          "description": "The SAP bits storage account id."
+        },
+        "softwareVersion": {
+          "type": "string",
+          "description": "The software version to install."
+        },
+        "highAvailabilitySoftwareConfiguration": {
+          "$ref": "#/definitions/HighAvailabilitySoftwareConfiguration",
+          "description": "Gets or sets the HA software configuration."
+        }
+      },
+      "required": [
+        "bomUrl",
+        "sapBitsStorageAccountId",
+        "softwareVersion"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/SoftwareConfiguration"
+        }
+      ],
+      "x-ms-discriminator-value": "SAPInstallWithoutOSConfig"
+    },
+    "SAPProductType": {
+      "type": "string",
+      "description": "Defines the SAP Product type.",
+      "enum": [
+        "ECC",
+        "S4HANA",
+        "Other"
+      ],
+      "x-ms-enum": {
+        "name": "SAPProductType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ECC",
+            "value": "ECC",
+            "description": "SAP Product ECC."
+          },
+          {
+            "name": "S4HANA",
+            "value": "S4HANA",
+            "description": "SAP Product S4HANA."
+          },
+          {
+            "name": "Other",
+            "value": "Other",
+            "description": "SAP Products other than the ones listed."
+          }
+        ]
+      }
+    },
+    "SAPSizingRecommendationRequest": {
+      "type": "object",
+      "description": "The SAP Sizing Recommendation request.",
+      "properties": {
+        "appLocation": {
+          "type": "string",
+          "description": "The geo-location where the resource is to be created."
+        },
+        "environment": {
+          "$ref": "#/definitions/SAPEnvironmentType",
+          "description": "Defines the environment type - Production/Non Production."
+        },
+        "sapProduct": {
+          "$ref": "#/definitions/SAPProductType",
+          "description": "Defines the SAP Product type."
+        },
+        "deploymentType": {
+          "$ref": "#/definitions/SAPDeploymentType",
+          "description": "The deployment type. Eg: SingleServer/ThreeTier"
+        },
+        "saps": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The SAP Application Performance Standard measurement."
+        },
+        "dbMemory": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The database memory configuration."
+        },
+        "databaseType": {
+          "$ref": "#/definitions/SAPDatabaseType",
+          "description": "The database type."
+        },
+        "dbScaleMethod": {
+          "$ref": "#/definitions/SAPDatabaseScaleMethod",
+          "description": "The DB scale method."
+        },
+        "highAvailabilityType": {
+          "$ref": "#/definitions/SAPHighAvailabilityType",
+          "description": "The high availability type."
+        }
+      },
+      "required": [
+        "appLocation",
+        "environment",
+        "sapProduct",
+        "deploymentType",
+        "saps",
+        "dbMemory",
+        "databaseType"
+      ]
+    },
+    "SAPSizingRecommendationResult": {
+      "type": "object",
+      "description": "The SAP sizing recommendation result.",
+      "properties": {
+        "deploymentType": {
+          "$ref": "#/definitions/SAPDeploymentType",
+          "description": "The deployment type. Eg: SingleServer/ThreeTier"
+        }
+      },
+      "discriminator": "deploymentType",
+      "required": [
+        "deploymentType"
+      ]
+    },
+    "SAPSoftwareInstallationType": {
+      "type": "string",
+      "description": "The SAP software installation Type.",
+      "enum": [
+        "ServiceInitiated",
+        "SAPInstallWithoutOSConfig",
+        "External"
+      ],
+      "x-ms-enum": {
+        "name": "SAPSoftwareInstallationType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ServiceInitiated",
+            "value": "ServiceInitiated",
+            "description": "SAP Install managed by service."
+          },
+          {
+            "name": "SAPInstallWithoutOSConfig",
+            "value": "SAPInstallWithoutOSConfig",
+            "description": "SAP Install without OS Config."
+          },
+          {
+            "name": "External",
+            "value": "External",
+            "description": "External software installation type."
+          }
+        ]
+      }
+    },
+    "SAPSupportedResourceSkusResult": {
+      "type": "object",
+      "description": "The list of supported SKUs for different resources which are part of SAP deployment.",
+      "properties": {
+        "supportedSkus": {
+          "type": "array",
+          "description": "Gets the list of SAP supported SKUs.",
+          "items": {
+            "$ref": "#/definitions/SAPSupportedSku"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "SAPSupportedSku": {
+      "type": "object",
+      "description": "The SAP supported SKU.",
+      "properties": {
+        "vmSku": {
+          "type": "string",
+          "description": "The VM Sku."
+        },
+        "isAppServerCertified": {
+          "type": "boolean",
+          "description": "True if the Sku is certified for App server in the SAP system."
+        },
+        "isDatabaseCertified": {
+          "type": "boolean",
+          "description": "True if the Sku is certified for Database server in the SAP system."
+        }
+      }
+    },
+    "SAPSupportedSkusRequest": {
+      "type": "object",
+      "description": "The SAP request to get list of supported SKUs.",
+      "properties": {
+        "appLocation": {
+          "type": "string",
+          "description": "The geo-location where the resource is to be created."
+        },
+        "environment": {
+          "$ref": "#/definitions/SAPEnvironmentType",
+          "description": "Defines the environment type - Production/Non Production."
+        },
+        "sapProduct": {
+          "$ref": "#/definitions/SAPProductType",
+          "description": "Defines the SAP Product type."
+        },
+        "deploymentType": {
+          "$ref": "#/definitions/SAPDeploymentType",
+          "description": "The deployment type. Eg: SingleServer/ThreeTier"
+        },
+        "databaseType": {
+          "$ref": "#/definitions/SAPDatabaseType",
+          "description": "The database type. Eg: HANA, DB2, etc"
+        },
+        "highAvailabilityType": {
+          "$ref": "#/definitions/SAPHighAvailabilityType",
+          "description": "The high availability type."
+        }
+      },
+      "required": [
+        "appLocation",
+        "environment",
+        "sapProduct",
+        "deploymentType",
+        "databaseType"
+      ]
+    },
+    "SAPVirtualInstance": {
+      "type": "object",
+      "description": "Define the Virtual Instance for SAP solutions resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SAPVirtualInstanceProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true
+        },
+        "identity": {
+          "$ref": "../../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The managed service identities assigned to this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "SAPVirtualInstanceError": {
+      "type": "object",
+      "description": "An error response from the Virtual Instance for SAP Workload service.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ErrorDefinition",
+          "description": "The Virtual Instance for SAP error body."
+        }
+      }
+    },
+    "SAPVirtualInstanceListResult": {
+      "type": "object",
+      "description": "The response of a SAPVirtualInstance list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The SAPVirtualInstance items on this page",
+          "items": {
+            "$ref": "#/definitions/SAPVirtualInstance"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "SAPVirtualInstanceProperties": {
+      "type": "object",
+      "description": "Defines the Virtual Instance for SAP solutions resource properties.",
+      "properties": {
+        "environment": {
+          "$ref": "#/definitions/SAPEnvironmentType",
+          "description": "Defines the environment type - Production/Non Production.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "sapProduct": {
+          "$ref": "#/definitions/SAPProductType",
+          "description": "Defines the SAP Product type.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "managedResourcesNetworkAccessType": {
+          "$ref": "#/definitions/ManagedResourcesNetworkAccessType",
+          "description": "Specifies the network access configuration for the resources that will be deployed in the Managed Resource Group. The options to choose from are Public and Private. If 'Private' is chosen, the Storage Account service tag should be enabled on the subnets in which the SAP VMs exist. This is required for establishing connectivity between VM extensions and the managed resource group storage account. This setting is currently applicable only to Storage Account. Learn more here https://go.microsoft.com/fwlink/?linkid=2247228"
+        },
+        "configuration": {
+          "$ref": "#/definitions/SAPConfiguration",
+          "description": "Defines if the SAP system is being created using Azure Center for SAP solutions (ACSS) or if an existing SAP system is being registered with ACSS"
+        },
+        "managedResourceGroupConfiguration": {
+          "$ref": "#/definitions/ManagedRGConfiguration",
+          "description": "Managed resource group configuration"
+        },
+        "status": {
+          "$ref": "#/definitions/SAPVirtualInstanceStatus",
+          "description": "Defines the SAP Instance status.",
+          "readOnly": true
+        },
+        "health": {
+          "$ref": "#/definitions/SAPHealthState",
+          "description": "Defines the health of SAP Instances.",
+          "readOnly": true
+        },
+        "state": {
+          "$ref": "#/definitions/SAPVirtualInstanceState",
+          "description": "Defines the Virtual Instance for SAP state.",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/SapVirtualInstanceProvisioningState",
+          "description": "Defines the provisioning states.",
+          "readOnly": true
+        },
+        "errors": {
+          "$ref": "#/definitions/SAPVirtualInstanceError",
+          "description": "Indicates any errors on the Virtual Instance for SAP solutions resource.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "environment",
+        "sapProduct",
+        "configuration"
+      ]
+    },
+    "SAPVirtualInstanceState": {
+      "type": "string",
+      "description": "Defines the Virtual Instance for SAP state.",
+      "enum": [
+        "InfrastructureDeploymentPending",
+        "InfrastructureDeploymentInProgress",
+        "InfrastructureDeploymentFailed",
+        "SoftwareInstallationPending",
+        "SoftwareInstallationInProgress",
+        "SoftwareInstallationFailed",
+        "SoftwareDetectionInProgress",
+        "SoftwareDetectionFailed",
+        "DiscoveryPending",
+        "DiscoveryInProgress",
+        "DiscoveryFailed",
+        "RegistrationComplete",
+        "ACSSInstallationBlocked"
+      ],
+      "x-ms-enum": {
+        "name": "SAPVirtualInstanceState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "InfrastructureDeploymentPending",
+            "value": "InfrastructureDeploymentPending",
+            "description": "Infrastructure is not yet deployed."
+          },
+          {
+            "name": "InfrastructureDeploymentInProgress",
+            "value": "InfrastructureDeploymentInProgress",
+            "description": "Infrastructure deployment is in progress."
+          },
+          {
+            "name": "InfrastructureDeploymentFailed",
+            "value": "InfrastructureDeploymentFailed",
+            "description": "Infrastructure deployment has failed."
+          },
+          {
+            "name": "SoftwareInstallationPending",
+            "value": "SoftwareInstallationPending",
+            "description": "Infrastructure deployment is successful. Software installation is pending."
+          },
+          {
+            "name": "SoftwareInstallationInProgress",
+            "value": "SoftwareInstallationInProgress",
+            "description": "Software installation is in progress."
+          },
+          {
+            "name": "SoftwareInstallationFailed",
+            "value": "SoftwareInstallationFailed",
+            "description": "Software installation failed."
+          },
+          {
+            "name": "SoftwareDetectionInProgress",
+            "value": "SoftwareDetectionInProgress",
+            "description": "Software detection is in progress."
+          },
+          {
+            "name": "SoftwareDetectionFailed",
+            "value": "SoftwareDetectionFailed",
+            "description": "Software detection failed."
+          },
+          {
+            "name": "DiscoveryPending",
+            "value": "DiscoveryPending",
+            "description": "Registration has not started."
+          },
+          {
+            "name": "DiscoveryInProgress",
+            "value": "DiscoveryInProgress",
+            "description": "Registration is in progress."
+          },
+          {
+            "name": "DiscoveryFailed",
+            "value": "DiscoveryFailed",
+            "description": "Registration has failed."
+          },
+          {
+            "name": "RegistrationComplete",
+            "value": "RegistrationComplete",
+            "description": "Registration is complete."
+          },
+          {
+            "name": "ACSSInstallationBlocked",
+            "value": "ACSSInstallationBlocked",
+            "description": "ACSS installation cannot proceed."
+          }
+        ]
+      }
+    },
+    "SAPVirtualInstanceStatus": {
+      "type": "string",
+      "description": "Defines the SAP Instance status.",
+      "enum": [
+        "Starting",
+        "Running",
+        "Stopping",
+        "Offline",
+        "PartiallyRunning",
+        "Unavailable",
+        "SoftShutdown"
+      ],
+      "x-ms-enum": {
+        "name": "SAPVirtualInstanceStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Starting",
+            "value": "Starting",
+            "description": "SAP system is getting started."
+          },
+          {
+            "name": "Running",
+            "value": "Running",
+            "description": "SAP system is running."
+          },
+          {
+            "name": "Stopping",
+            "value": "Stopping",
+            "description": "SAP system is being stopped."
+          },
+          {
+            "name": "Offline",
+            "value": "Offline",
+            "description": "SAP system is offline."
+          },
+          {
+            "name": "PartiallyRunning",
+            "value": "PartiallyRunning",
+            "description": "SAP system is partially running."
+          },
+          {
+            "name": "Unavailable",
+            "value": "Unavailable",
+            "description": "SAP system status is unavailable."
+          },
+          {
+            "name": "SoftShutdown",
+            "value": "SoftShutdown",
+            "description": "Soft shutdown of SAP system is initiated."
+          }
+        ]
+      }
+    },
+    "SapVirtualInstanceProvisioningState": {
+      "type": "string",
+      "description": "Defines the provisioning states.",
+      "enum": [
+        "Succeeded",
+        "Updating",
+        "Creating",
+        "Failed",
+        "Deleting",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "SapVirtualInstanceProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "ACSS succeeded provisioning state."
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "ACSS updating provisioning state."
+          },
+          {
+            "name": "Creating",
+            "value": "Creating",
+            "description": "ACSS Creating provisioning state."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "ACSS Failed provisioning state."
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "ACSS Deleting provisioning state."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "ACSS Canceled provisioning state."
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "ServiceInitiatedSoftwareConfiguration": {
+      "type": "object",
+      "description": "The SAP Software configuration Input when the software is to be installed by service.",
+      "properties": {
+        "bomUrl": {
+          "type": "string",
+          "description": "The URL to the SAP Build of Materials(BOM) file."
+        },
+        "softwareVersion": {
+          "type": "string",
+          "description": "The software version to install."
+        },
+        "sapBitsStorageAccountId": {
+          "type": "string",
+          "description": "The SAP bits storage account id."
+        },
+        "sapFqdn": {
+          "type": "string",
+          "description": "The FQDN to set for the SAP system during install."
+        },
+        "sshPrivateKey": {
+          "type": "string",
+          "format": "password",
+          "description": "The SSH private key.",
+          "x-ms-secret": true
+        },
+        "highAvailabilitySoftwareConfiguration": {
+          "$ref": "#/definitions/HighAvailabilitySoftwareConfiguration",
+          "description": "Gets or sets the HA software configuration."
+        }
+      },
+      "required": [
+        "bomUrl",
+        "softwareVersion",
+        "sapBitsStorageAccountId",
+        "sapFqdn",
+        "sshPrivateKey"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/SoftwareConfiguration"
+        }
+      ],
+      "x-ms-discriminator-value": "ServiceInitiated"
+    },
+    "SharedStorageResourceNames": {
+      "type": "object",
+      "description": "The resource names object for shared storage.",
+      "properties": {
+        "sharedStorageAccountName": {
+          "type": "string",
+          "description": "The full name of the shared storage account. If it is not provided, it will be defaulted to {SID}nfs{guid of 15 chars}."
+        },
+        "sharedStorageAccountPrivateEndPointName": {
+          "type": "string",
+          "description": "The full name of private end point for the shared storage account. If it is not provided, it will be defaulted to {storageAccountName}_pe"
+        }
+      }
+    },
+    "SingleServerConfiguration": {
+      "type": "object",
+      "description": "Gets or sets the single server configuration. For prerequisites for creating the infrastructure, please see [here](https://go.microsoft.com/fwlink/?linkid=2212611&clcid=0x409)",
+      "properties": {
+        "networkConfiguration": {
+          "$ref": "#/definitions/NetworkConfiguration",
+          "description": "Network configuration for the server"
+        },
+        "databaseType": {
+          "$ref": "#/definitions/SAPDatabaseType",
+          "description": "The database type."
+        },
+        "subnetId": {
+          "type": "string",
+          "description": "The subnet id."
+        },
+        "virtualMachineConfiguration": {
+          "$ref": "#/definitions/VirtualMachineConfiguration",
+          "description": "Gets or sets the virtual machine configuration."
+        },
+        "dbDiskConfiguration": {
+          "$ref": "#/definitions/DiskConfiguration",
+          "description": "Gets or sets the disk configuration."
+        },
+        "customResourceNames": {
+          "$ref": "#/definitions/SingleServerCustomResourceNames",
+          "description": "The set of custom names to be used for underlying azure resources that are part of the SAP system."
+        }
+      },
+      "required": [
+        "subnetId",
+        "virtualMachineConfiguration"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/InfrastructureConfiguration"
+        }
+      ],
+      "x-ms-discriminator-value": "SingleServer"
+    },
+    "SingleServerCustomResourceNames": {
+      "type": "object",
+      "description": "The resource-names input to specify custom names for underlying azure resources that are part of a single server SAP system.",
+      "properties": {
+        "namingPatternType": {
+          "$ref": "#/definitions/NamingPatternType",
+          "description": "The naming pattern type."
+        }
+      },
+      "discriminator": "namingPatternType",
+      "required": [
+        "namingPatternType"
+      ]
+    },
+    "SingleServerFullResourceNames": {
+      "type": "object",
+      "description": "The resource name object where the specified values will be full resource names of the corresponding resources in a single server SAP system.",
+      "properties": {
+        "virtualMachine": {
+          "$ref": "#/definitions/VirtualMachineResourceNames",
+          "description": "The resource names object for virtual machine and related resources."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/SingleServerCustomResourceNames"
+        }
+      ],
+      "x-ms-discriminator-value": "FullResourceName"
+    },
+    "SingleServerRecommendationResult": {
+      "type": "object",
+      "description": "The recommended configuration for a single server SAP system.",
+      "properties": {
+        "vmSku": {
+          "type": "string",
+          "description": "The recommended VM SKU for single server."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/SAPSizingRecommendationResult"
+        }
+      ],
+      "x-ms-discriminator-value": "SingleServer"
+    },
+    "SkipFileShareConfiguration": {
+      "type": "object",
+      "description": "Gets or sets the file share configuration for scenarios where transport directory fileshare is not created or required.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/FileShareConfiguration"
+        }
+      ],
+      "x-ms-discriminator-value": "Skip"
+    },
+    "SoftwareConfiguration": {
+      "type": "object",
+      "description": "The SAP Software configuration Input.",
+      "properties": {
+        "softwareInstallationType": {
+          "$ref": "#/definitions/SAPSoftwareInstallationType",
+          "description": "The SAP software installation type."
+        }
+      },
+      "discriminator": "softwareInstallationType",
+      "required": [
+        "softwareInstallationType"
+      ]
+    },
+    "SshConfiguration": {
+      "type": "object",
+      "description": "SSH configuration for Linux based VMs running on Azure",
+      "properties": {
+        "publicKeys": {
+          "type": "array",
+          "description": "The list of SSH public keys used to authenticate with linux based VMs.",
+          "items": {
+            "$ref": "#/definitions/SshPublicKey"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "SshKeyPair": {
+      "type": "object",
+      "description": "The SSH Key-pair used to authenticate with the VM. The key needs to be at least 2048-bit and in ssh-rsa format. <br><br> For creating ssh keys, see [Create SSH keys on Linux and Mac for Linux VMs in Azure](https://docs.microsoft.com/azure/virtual-machines/linux/create-ssh-keys-detailed).",
+      "properties": {
+        "publicKey": {
+          "type": "string",
+          "description": "SSH public key"
+        },
+        "privateKey": {
+          "type": "string",
+          "format": "password",
+          "description": "SSH private key.",
+          "x-ms-secret": true
+        }
+      }
+    },
+    "SshPublicKey": {
+      "type": "object",
+      "description": "Contains information about SSH certificate public key and the path on the Linux VM where the public key is placed.",
+      "properties": {
+        "keyData": {
+          "type": "string",
+          "description": "SSH public key certificate used to authenticate with the VM through ssh. The key needs to be at least 2048-bit and in ssh-rsa format. <br><br> For creating ssh keys, see [Create SSH keys on Linux and Mac for Linux VMs in Azure](https://docs.microsoft.com/azure/virtual-machines/linux/create-ssh-keys-detailed)."
+        }
+      }
+    },
+    "StartRequest": {
+      "type": "object",
+      "description": "Start SAP instance(s) request body.",
+      "properties": {
+        "startVm": {
+          "type": "boolean",
+          "description": "The boolean value indicates whether to start the virtual machines before starting the SAP instances.",
+          "default": false
+        }
+      }
+    },
+    "StopRequest": {
+      "type": "object",
+      "description": "Stop SAP instance(s) request body.",
+      "properties": {
+        "softStopTimeoutSeconds": {
+          "type": "integer",
+          "format": "int64",
+          "description": "This parameter defines how long (in seconds) the soft shutdown waits until the RFC/HTTP clients no longer consider the server for calls with load balancing. Value 0 means that the kernel does not wait, but goes directly into the next shutdown state, i.e. hard stop.",
+          "default": 0
+        },
+        "deallocateVm": {
+          "type": "boolean",
+          "description": "The boolean value indicates whether to Stop and deallocate the virtual machines along with the SAP instances.",
+          "default": false
+        }
+      }
+    },
+    "StorageConfiguration": {
+      "type": "object",
+      "description": "Gets or sets the storage configuration.",
+      "properties": {
+        "transportFileShareConfiguration": {
+          "$ref": "#/definitions/FileShareConfiguration",
+          "description": "The properties of the transport directory attached to the VIS. The default for transportFileShareConfiguration is the createAndMount flow if storage configuration is missing."
+        }
+      }
+    },
+    "StorageInformation": {
+      "type": "object",
+      "description": "Storage details of all the Storage accounts attached to the VM. For e.g. NFS on AFS Shared Storage.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Fully qualified resource ID for the storage account.",
+          "readOnly": true
+        }
+      }
+    },
+    "ThreeTierConfiguration": {
+      "type": "object",
+      "description": "Gets or sets the three tier SAP configuration. For prerequisites for creating the infrastructure, please see [here](https://go.microsoft.com/fwlink/?linkid=2212611&clcid=0x409)",
+      "properties": {
+        "networkConfiguration": {
+          "$ref": "#/definitions/NetworkConfiguration",
+          "description": "Network configuration common to all servers"
+        },
+        "centralServer": {
+          "$ref": "#/definitions/CentralServerConfiguration",
+          "description": "The central server configuration."
+        },
+        "applicationServer": {
+          "$ref": "#/definitions/ApplicationServerConfiguration",
+          "description": "The application server configuration."
+        },
+        "databaseServer": {
+          "$ref": "#/definitions/DatabaseConfiguration",
+          "description": "The database configuration."
+        },
+        "highAvailabilityConfig": {
+          "$ref": "#/definitions/HighAvailabilityConfiguration",
+          "description": "The high availability configuration."
+        },
+        "storageConfiguration": {
+          "$ref": "#/definitions/StorageConfiguration",
+          "description": "The storage configuration."
+        },
+        "customResourceNames": {
+          "$ref": "#/definitions/ThreeTierCustomResourceNames",
+          "description": "The set of custom names to be used for underlying azure resources that are part of the SAP system."
+        }
+      },
+      "required": [
+        "centralServer",
+        "applicationServer",
+        "databaseServer"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/InfrastructureConfiguration"
+        }
+      ],
+      "x-ms-discriminator-value": "ThreeTier"
+    },
+    "ThreeTierCustomResourceNames": {
+      "type": "object",
+      "description": "The resource-names input to specify custom names for underlying azure resources that are part of a three tier SAP system.",
+      "properties": {
+        "namingPatternType": {
+          "$ref": "#/definitions/NamingPatternType",
+          "description": "The pattern type to be used for resource naming."
+        }
+      },
+      "discriminator": "namingPatternType",
+      "required": [
+        "namingPatternType"
+      ]
+    },
+    "ThreeTierFullResourceNames": {
+      "type": "object",
+      "description": "The resource name object where the specified values will be full resource names of the corresponding resources in a three tier SAP system.",
+      "properties": {
+        "centralServer": {
+          "$ref": "#/definitions/CentralServerFullResourceNames",
+          "description": "The full resource names object for central server layer resources."
+        },
+        "applicationServer": {
+          "$ref": "#/definitions/ApplicationServerFullResourceNames",
+          "description": "The full resource names object for application layer resources. The number of entries in this list should be equal to the number VMs to be created for application layer."
+        },
+        "databaseServer": {
+          "$ref": "#/definitions/DatabaseServerFullResourceNames",
+          "description": "The full resource names object for database layer resources. The number of entries in this list should be equal to the number VMs to be created for database layer."
+        },
+        "sharedStorage": {
+          "$ref": "#/definitions/SharedStorageResourceNames",
+          "description": "The resource names object for shared storage."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ThreeTierCustomResourceNames"
+        }
+      ],
+      "x-ms-discriminator-value": "FullResourceName"
+    },
+    "ThreeTierRecommendationResult": {
+      "type": "object",
+      "description": "The recommended configuration for a three tier SAP system.",
+      "properties": {
+        "dbVmSku": {
+          "type": "string",
+          "description": "The database VM SKU."
+        },
+        "databaseInstanceCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The database server instance count."
+        },
+        "centralServerVmSku": {
+          "type": "string",
+          "description": "The central server VM SKU."
+        },
+        "centralServerInstanceCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The central server instance count."
+        },
+        "applicationServerVmSku": {
+          "type": "string",
+          "description": "The application server VM SKU."
+        },
+        "applicationServerInstanceCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The application server instance count."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/SAPSizingRecommendationResult"
+        }
+      ],
+      "x-ms-discriminator-value": "ThreeTier"
+    },
+    "UpdateSAPApplicationInstanceRequest": {
+      "type": "object",
+      "description": "Defines the request body for updating SAP Application Instance.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Gets or sets the Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "UpdateSAPCentralInstanceRequest": {
+      "type": "object",
+      "description": "Defines the request body for updating SAP Central Instance.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Gets or sets the Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "UpdateSAPDatabaseInstanceRequest": {
+      "type": "object",
+      "description": "Defines the request body for updating SAP Database Instance.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Gets or sets the Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "UpdateSAPVirtualInstanceProperties": {
+      "type": "object",
+      "description": "Defines the update request body properties for updating Virtual Instance for SAP.",
+      "properties": {
+        "managedResourcesNetworkAccessType": {
+          "$ref": "#/definitions/ManagedResourcesNetworkAccessType",
+          "description": "Specifies the network access configuration for the resources that will be deployed in the Managed Resource Group. The options to choose from are Public and Private. If 'Private' is chosen, the Storage Account service tag should be enabled on the subnets in which the SAP VMs exist. This is required for establishing connectivity between VM extensions and the managed resource group storage account. This setting is currently applicable only to Storage Account. Learn more here https://go.microsoft.com/fwlink/?linkid=2247228"
+        }
+      }
+    },
+    "UpdateSAPVirtualInstanceRequest": {
+      "type": "object",
+      "description": "Defines the request body for updating Virtual Instance for SAP.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Gets or sets the Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "identity": {
+          "$ref": "../../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "Managed service identity (user assigned identities)"
+        },
+        "properties": {
+          "$ref": "#/definitions/UpdateSAPVirtualInstanceProperties",
+          "description": "The update properties."
+        }
+      }
+    },
+    "VirtualMachineConfiguration": {
+      "type": "object",
+      "description": "Defines the virtual machine configuration.",
+      "properties": {
+        "vmSize": {
+          "type": "string",
+          "description": "The virtual machine size."
+        },
+        "imageReference": {
+          "$ref": "#/definitions/ImageReference",
+          "description": "The image reference."
+        },
+        "osProfile": {
+          "$ref": "#/definitions/OSProfile",
+          "description": "The OS profile."
+        }
+      },
+      "required": [
+        "vmSize",
+        "imageReference",
+        "osProfile"
+      ]
+    },
+    "VirtualMachineResourceNames": {
+      "type": "object",
+      "description": "The resource names object for virtual machine and related resources.",
+      "properties": {
+        "vmName": {
+          "type": "string",
+          "description": "The full name for virtual machine. The length of this field can be upto 64 characters. If name is not provided, service uses a default name based on the deployment type. For SingleServer, default name is {SID}vm. In case of HA-AvZone systems, default name will be {SID}{app/ascs/db}z{a/b}vm with an incrementor at the end in case of more than 1 vm per layer. For distributed and HA-AvSet systems, default name will be {SID}{app/ascs/db}vm with an incrementor at the end in case of more than 1 vm per layer."
+        },
+        "hostName": {
+          "type": "string",
+          "description": "The full name for virtual-machine's host (computer name). Currently, ACSS only supports host names which are less than or equal to 13 characters long. If this value is not provided, vmName will be used as host name."
+        },
+        "networkInterfaces": {
+          "type": "array",
+          "description": "The list of network interface name objects for the selected virtual machine. Currently, only one network interface is supported per virtual machine.",
+          "items": {
+            "$ref": "#/definitions/NetworkInterfaceResourceNames"
+          },
+          "x-ms-identifiers": []
+        },
+        "osDiskName": {
+          "type": "string",
+          "description": "The full name for OS disk attached to the VM. If this value is not provided, it will be named by ARM as per its default naming standards (prefixed with vm name). There is only one OS disk attached per Virtual Machine."
+        },
+        "dataDiskNames": {
+          "type": "object",
+          "description": "The full resource names for virtual machine data disks. This is a dictionary containing list of names of data disks per volume. Currently supported volumes for database layer are ['hana/data', 'hana/log', hana/shared', 'usr/sap', 'os', 'backup']. For application and cs layers, only 'default' volume is supported",
+          "additionalProperties": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          }
+        }
+      }
+    },
+    "WindowsConfiguration": {
+      "type": "object",
+      "description": "Specifies Windows operating system settings on the virtual machine.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/OSConfiguration"
+        }
+      ],
+      "x-ms-discriminator-value": "Windows"
+    }
+  },
+  "parameters": {}
+}

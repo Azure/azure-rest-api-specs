@@ -1,0 +1,57 @@
+{
+  "parameters": {
+    "api-version": "2023-10-01-preview",
+    "body": {},
+    "resourceGroupName": "test-rg",
+    "sapDiscoverySiteName": "SampleSite",
+    "sapInstanceName": "MPP_MPP",
+    "serverInstanceName": "APP_SapServer1",
+    "subscriptionId": "6d875e77-e412-4d7d-9af4-8895278b4443"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "APP_SapServer1",
+        "type": "Microsoft.Workloads/sapDiscoverySites/sapInstances/serverInstances",
+        "id": "/subscriptions/6d875e77-e412-4d7d-9af4-8895278b4443/resourceGroups/test-rg/providers/Microsoft.Workloads/sapDiscoverySites/SampleSite/sapInstances/MPP_MPP/serverInstances/APP_SapServer1",
+        "properties": {
+          "configurationData": {
+            "cpu": 8,
+            "cpuInMhz": 2300,
+            "cpuType": "AMD EPYC 7452 Processor",
+            "databaseType": "Adabas",
+            "hardwareManufacturer": "Microsoft Corporation",
+            "model": "Virtual Machine",
+            "ram": 256,
+            "saps": 7000,
+            "targetHanaRamSizeGB": 512,
+            "totalDiskIops": 1000,
+            "totalDiskSizeGB": 512
+          },
+          "instanceSid": "MPP",
+          "operatingSystem": "IBM",
+          "performanceData": {
+            "dataSource": "Excel",
+            "maxCpuLoad": 10,
+            "totalSourceDbSizeGB": 750
+          },
+          "provisioningState": "Succeeded",
+          "sapInstanceType": "APP",
+          "sapProduct": "SAP ERP ENHANCE PACKAGE",
+          "sapProductVersion": "6.08",
+          "serverName": "SapServer1"
+        },
+        "systemData": {
+          "createdAt": "2023-06-26T14:15:22Z",
+          "createdBy": "UserName",
+          "createdByType": "User",
+          "lastModifiedAt": "2023-06-26T14:15:22Z",
+          "lastModifiedBy": "UserName",
+          "lastModifiedByType": "User"
+        }
+      }
+    }
+  },
+  "operationId": "ServerInstances_Get",
+  "title": "GET a Server Instance resource."
+}
