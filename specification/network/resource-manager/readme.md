@@ -100,15 +100,6 @@ input-file:
   - Microsoft.Network/stable/2024-03-01/vmssNetworkInterface.json
   - Microsoft.Network/stable/2024-03-01/vmssPublicIpAddress.json
   - Microsoft.Network/stable/2024-03-01/webapplicationfirewall.json
-suppressions:
-  - code: PatchIdentityProperty
-    from: networkWatcher.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkWatchers/{networkWatcherName}/flowLogs/{flowLogName}"].patch.parameters
-    reason: False alarm.
-  - code: PatchIdentityProperty
-    from: virtualNetworkGateway.json
-    where: $.paths[ "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}"].patch.parameters
-    reason: False alarm. 
 ```
 
 ### Tag: package-2024-01-preview
