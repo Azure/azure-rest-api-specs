@@ -1035,7 +1035,7 @@
           }
         },
         "clusterExtensionIds": {
-          "description": "Contains the reference to the add-on that contains charts to deploy CRDs and operators.",
+          "description": "Contains the reference to the add-on that contains charts to deploy CRDs and operators. Optional for EdgeCluster hostType.",
           "type": "array",
           "items": {
             "type": "string"
@@ -1049,14 +1049,15 @@
           "type": "string"
         },
         "hostResourceId": {
-          "description": "Connected Cluster or AKS Cluster. The Custom Locations RP will perform a checkAccess API for listAdminCredentials permissions.",
+          "description": "Connected Cluster, AKS Cluster or Commodore Cluster. The Custom Locations RP will perform a checkAccess API for listAdminCredentials permissions for Connected Cluster and AKS Cluster.",
           "type": "string"
         },
         "hostType": {
-          "description": "Type of host the Custom Locations is referencing (Kubernetes, etc...).",
+          "description": "Type of host the Custom Locations is referencing (Kubernetes, EdgeCluster, etc...).",
           "type": "string",
           "enum": [
-            "Kubernetes"
+            "Kubernetes",
+            "EdgeCluster"
           ],
           "x-ms-enum": {
             "name": "HostType",
@@ -1064,7 +1065,7 @@
           }
         },
         "namespace": {
-          "description": "Kubernetes namespace that will be created on the specified cluster.",
+          "description": "Kubernetes namespace that will be created on the specified cluster. Optional for EdgeCluster hostType.",
           "type": "string"
         },
         "provisioningState": {
