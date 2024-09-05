@@ -2953,11 +2953,19 @@
             "type": "string"
           },
           "description": "The nGroups zones. NOTE: Availability zones can only be set when you create the scale set"
+        },
+        "location": {
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "description": "The geo-location where the resource lives"
         }
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/TrackedResource"
+          "$ref": "#/definitions/Resource"
         }
       ],
       "description": "Describes a nGroup."
