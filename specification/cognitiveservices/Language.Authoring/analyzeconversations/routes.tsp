@@ -39,24 +39,7 @@ alias ShowStatsQueryParameter = TraitContext.Create;
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @summary("Create project")
-@patch
-@route("/projects/{projectName}")
-@pollingOperation(getProjectDeletionStatus)
-op createProject is Foundations.LongRunningOperation<
-  {
-    /**
-     * The project name.
-     */
-    @path
-    projectName: string;
-
-    /** The project parameters. */
-    body: CreateProjectOptions;
-  },
-  CreatedResponse,
-  {},
-  ErrorResponse
->;
+op createProject is languageOperations.ResourceCreateOrUpdate<ProjectMetadata>;
 
 /**
  * Deletes a project.

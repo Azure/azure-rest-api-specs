@@ -198,45 +198,45 @@ model ProjectMetadata {
   /**
    * Represents the project kind.
    */
-  //@visibility("create", "read")
+  @visibility("create", "read")
   projectKind: ProjectKind;
 
   /**
    * The project settings.
    */
-  //@visibility("create", "read")
+  @visibility("create", "read")
   settings?: ProjectSettings;
 
   /**
    * The storage container name in case of conversation summarization.
    */
-  //@visibility("create", "read")
+  @visibility("create", "read")
   storageInputContainerName?: string;
 
   /**
    * The new project name.
    */
-  @key
-  @visibility("read")
+  @key("projectName")
+  @visibility("create", "read")
   projectName: string;
 
   /**
    * Whether the project would be used for multiple languages or not.
    */
-  //@visibility("create", "read")
+  @visibility("create", "read")
   multilingual?: boolean;
 
   /**
    * The project description.
    */
-  //@visibility("create", "read")
+  @visibility("create", "read")
   description?: string;
 
   /**
    * The project language. This is BCP-47 representation of a language. For example,
    * use "en" for English, "en-gb" for English (UK), "es" for Spanish etc.
    */
-  //@visibility("create", "read")
+  @visibility("create", "read")
   language: string;
 }
 
@@ -1005,6 +1005,7 @@ model ConfusionMatrixCell {
    */
   rawValue: float32;
 }
+
 
 /**
  * Represents the evaluation result for an entity.
