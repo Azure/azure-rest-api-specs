@@ -824,7 +824,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudError"            
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -834,8 +834,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerInstance/ngroups/{ngroupsName}/skus": {
       "get": {
         "operationId": "NGroupsSkus_Get",
-        "x-ms-examples": {
-        },
+        "x-ms-examples": {},
         "summary": "Get the resource sku, resource type, and sku capacity of the n groups.",
         "description": "Get the resource sku, resource type, and sku capacity of the n groups.",
         "parameters": [
@@ -873,179 +872,179 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerInstance/ngroups/{ngroupsName}": {
       "get": {
-          "operationId": "NGroups_Get",
-          "x-ms-examples": {},
-          "summary": "Display information about a specified nGroup.",
-          "description": "Get the properties of the specified n group.",
-          "parameters": [
-            {
-              "$ref": "#/parameters/SubscriptionIdParameter"
-            },
-            {
-              "$ref": "#/parameters/ApiVersionParameter"
-            },
-            {
-              "$ref": "#/parameters/ResourceGroupNameParameter"
-            },
-            {
-              "$ref": "#/parameters/NGroupsNameParameter"
+        "operationId": "NGroups_Get",
+        "x-ms-examples": {},
+        "summary": "Display information about a specified nGroup.",
+        "description": "Get the properties of the specified n group.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/NGroupsNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/NGroup"
             }
-          ],
-          "responses": {
-            "200": {
-              "description": "OK",
-              "schema": {
-                "$ref": "#/definitions/NGroup"
-            }
-            },
-            "default": {
-              "description": "Error response describing why the operation failed.",
-              "schema": {
-                "$ref": "#/definitions/CloudError"
-              }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
             }
           }
+        }
       },
       "put": {
-          "operationId": "NGroups_CreateOrUpdate",
-          "x-ms-examples": {},
-          "description": "Create or update a nGroup.",
-          "parameters": [
-            {
-              "$ref": "#/parameters/ResourceGroupNameParameter"
+        "operationId": "NGroups_CreateOrUpdate",
+        "x-ms-examples": {},
+        "description": "Create or update a nGroup.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/NGroupsNameParameter"
+          },
+          {
+            "name": "nGroup",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NGroup"
             },
-            {
-              "$ref": "#/parameters/NGroupsNameParameter"
-            },
-            {
-              "name": "nGroup",
-              "in": "body",
-              "required": true,
-              "schema": {
-                "$ref": "#/definitions/NGroup"
-              },
-              "description": "The nGroup object."
-            },
-            {
-              "$ref": "#/parameters/ApiVersionParameter"
-            },
-            {
-              "$ref": "#/parameters/SubscriptionIdParameter"
-            }
-          ],
-          "responses": {
-            "200": {
-              "description": "OK",
-              "schema": {
-                "$ref": "#/definitions/NGroup"
-              }
-            },
-            "201": {
-              "description": "Created",
-              "schema": {
-                "$ref": "#/definitions/NGroup"
-              }
-            },
-            "default": {
-              "description": "Error response describing why the operation failed.",
-              "schema": {
-                "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-              }
+            "description": "The nGroup object."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/NGroup"
             }
           },
-          "x-ms-long-running-operation": true
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/NGroup"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
       },
       "patch": {
-          "operationId": "NGroups_Update",
-          "x-ms-examples": {},
-          "summary": "Update a specified nGroup.",
-          "description": "Update a specified nGroup.",
-          "parameters": [
-            {
-              "$ref": "#/parameters/ResourceGroupNameParameter"
+        "operationId": "NGroups_Update",
+        "x-ms-examples": {},
+        "summary": "Update a specified nGroup.",
+        "description": "Update a specified nGroup.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/NGroupsNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NGroup"
             },
-            {
-              "$ref": "#/parameters/NGroupsNameParameter"
-            },
-            {
-              "name": "parameters",
-              "in": "body",
-              "required": true,
-              "schema": {
-                "$ref": "#/definitions/NGroup"
-              },
-              "description": "The nGroup object."
-            },
-            {
-              "$ref": "#/parameters/ApiVersionParameter"
-            },
-            {
-              "$ref": "#/parameters/SubscriptionIdParameter"
+            "description": "The nGroup object."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/NGroup"
             }
-          ],
-          "responses": {
-            "200": {
-              "description": "OK",
-              "schema": {
-                "$ref": "#/definitions/NGroup"
-              }
-            },
-            "202": {
-              "description": "nGroup update started",
-              "headers": {
-                "Location": {
-                  "type": "string"
-                }
-              }
-            },
-            "default": {
-              "description": "Error response describing why the operation failed.",
-              "schema": {
-                "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+          },
+          "202": {
+            "description": "nGroup update started",
+            "headers": {
+              "Location": {
+                "type": "string"
               }
             }
           },
-          "x-ms-long-running-operation": true
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
       },
       "delete": {
-          "operationId": "NGroups_Delete",
-          "x-ms-examples": {},
-          "summary": "Delete a nGroup.",
-          "description": "Deletes a nGroup.",
-          "parameters": [
-            {
-              "$ref": "#/parameters/ResourceGroupNameParameter"
-            },
-            {
-              "$ref": "#/parameters/NGroupsNameParameter"
-            },
-            {
-              "$ref": "#/parameters/ApiVersionParameter"
-            },
-            {
-              "$ref": "#/parameters/SubscriptionIdParameter"
-            }
-          ],
-          "responses": {
-            "202": {
-              "description": "Accepted",
-              "headers": {
-                "location": {
-                  "type": "string"
-                }
-              }
-            },
-            "204": {
-              "description": "No Content"
-            },
-            "default": {
-              "description": "Error response describing why the operation failed.",
-              "schema": {
-                "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+        "operationId": "NGroups_Delete",
+        "x-ms-examples": {},
+        "summary": "Delete a nGroup.",
+        "description": "Deletes a nGroup.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/NGroupsNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "location": {
+                "type": "string"
               }
             }
           },
-          "x-ms-long-running-operation": true
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerInstance/ngroups/{ngroupsName}/start": {
@@ -1605,8 +1604,8 @@
     "SecretVolume": {
       "description": "The secret volume.",
       "type": "object",
-          "additionalProperties": {
-            "type": "string"
+      "additionalProperties": {
+        "type": "string"
       }
     },
     "GitRepoVolume": {
@@ -2865,9 +2864,9 @@
     },
     "NetworkDependenciesResponse": {
       "description": "Response for network dependencies, always empty list.",
-          "type": "array",
-          "items": {
-            "type": "string"
+      "type": "array",
+      "items": {
+        "type": "string"
       }
     },
     "ConfidentialComputeProperties": {
@@ -3154,4 +3153,3 @@
     }
   }
 }
-
