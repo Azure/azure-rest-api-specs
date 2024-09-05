@@ -1774,73 +1774,73 @@
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/NewRelic.Observability/monitors/{monitorName}/resubscribe": {
-        "post": {
-          "tags": [
-            "Resubscribe"
-          ],
-          "summary": "Resubscribe the NewRelic Organization.",
-          "operationId": "Monitors_Resubscribe",
-          "consumes": [
-            "application/json"
-          ],
-          "produces": [
-            "application/json"
-          ],
-          "parameters": [
-            {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-            },
-            {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-            },
-            {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-            },
-            {
-              "$ref": "#/parameters/MonitorNameParameter"
-            },
-            {
-              "in": "body",
-              "name": "body",
-              "description": "Resubscribe Properties",
-              "schema": {
-                "$ref": "#/definitions/ResubscribeProperties"
-              }
+      "post": {
+        "tags": [
+          "Resubscribe"
+        ],
+        "summary": "Resubscribe the NewRelic Organization.",
+        "operationId": "Monitors_Resubscribe",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MonitorNameParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Resubscribe Properties",
+            "schema": {
+              "$ref": "#/definitions/ResubscribeProperties"
             }
-          ],
-          "responses": {
-            "200": {
-              "description": "Success",
-              "schema": {
-                "$ref": "#/definitions/NewRelicMonitorResource"
-              }
-            },
-            "202": {
-              "headers": {
-                "Location": {
-                  "type": "string"
-                }
-              },
-              "description": "Accepted"
-            },
-            "default": {
-              "description": "Default error response.",
-              "schema": {
-                "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-              }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/NewRelicMonitorResource"
             }
           },
-          "x-ms-long-running-operation": true,
-          "x-ms-long-running-operation-options": {
-            "final-state-via": "azure-async-operation"
+          "202": {
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            },
+            "description": "Accepted"
           },
-          "x-ms-examples": {
-            "Monitors_Resubscribe": {
-              "$ref": "./examples/Monitors_Resubscribe.json"
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "Monitors_Resubscribe": {
+            "$ref": "./examples/Monitors_Resubscribe.json"
           }
         }
       }
+    }
   },
   "definitions": {
     "AccountCreationSource": {
