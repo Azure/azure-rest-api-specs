@@ -26,7 +26,7 @@ using Azure.Core;
   "Azure Programmable Connectivity Endpoint.",
   {
     @doc("An Azure Programmable Connectivity Endpoint providing access to Network APIs, for example https://{region}.apcgatewayapi.azure.com")
-    endpoint: string,
+    endpoint: url,
   }
 )
 @versioned(APCVersions)
