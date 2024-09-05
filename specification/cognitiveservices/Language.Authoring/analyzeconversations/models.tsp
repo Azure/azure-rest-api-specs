@@ -949,7 +949,7 @@ model EntitiesEvaluationSummary {
    * the same). The matrix is between the entity that was labelled and the entity
    * that was predicted.
    */
-  confusionMatrix: Record<Record<ConfusionMatrixCell>>;
+  confusionMatrix: ConfusionMatrix;
 
   /**
    * Represents the entities evaluation summary.
@@ -993,26 +993,14 @@ model EntitiesEvaluationSummary {
 
 
 /**
- * Represents a row in the confusion matrix..
+ * Represents a row in the confusion matrix.
  */
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
-model ConfusionMatrixRow {
-  
-  @clientName("confusionMatrixRow", "csharp")
-  matrixRow: Record<ConfusionMatrixCell>;
-
-}
+model ConfusionMatrixRow is Record<ConfusionMatrixCell>;
 
 /**
  * Represents a confusion matrix for evaluating predictions against labeled data.
  */
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
-model ConfusionMatrix {
-
-  @clientName("confusionMatrix", "csharp")
-  matrix: Record<ConfusionMatrixRow>;
-
-}
+model ConfusionMatrix is Record<ConfusionMatrixRow>;
 
 
 /**
@@ -1080,7 +1068,7 @@ model IntentsEvaluationSummary {
    * same). The matrix is between the intent that was labelled and the intent that
    * was predicted.
    */
-  confusionMatrix: Record<Record<ConfusionMatrixCell>>;
+  confusionMatrix: ConfusionMatrix;
 
   /**
    * Represents the intents evaluation summary.
