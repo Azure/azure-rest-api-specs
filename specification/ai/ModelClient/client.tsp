@@ -43,8 +43,8 @@ namespace Customizations; // The actual name here doesn't matter and is here for
 @@access(AI.Model.FunctionDefinition, Access.public);
 @@access(AI.Model.ModelInfo, Access.public);
 @@access(AI.Model.ModelType, Access.public);
-@@access(AI.Model.StreamingChatChoiceUpdate, Access.public, "python");
-@@access(AI.Model.StreamingChatCompletionsUpdate, Access.public, "python");
+@@access(AI.Model.StreamingChatChoiceUpdate, Access.public);
+@@access(AI.Model.StreamingChatCompletionsUpdate, Access.public);
 @@access(AI.Model.ChatMessageContentItem, Access.public);
 @@access(AI.Model.ChatMessageTextContentItem, Access.public);
 @@access(AI.Model.ChatMessageImageContentItem, Access.public);
