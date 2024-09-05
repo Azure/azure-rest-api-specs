@@ -170,9 +170,6 @@
           "ConfidentialContainerGroup": {
             "$ref": "./examples/ContainerGroupCreateConfidential.json"
           },
-          "ContainerGroupCreateOrUpdateWithStandbyPool": {
-            "$ref": "./examples/ContainerGroupCreateOrUpdateStandbyPool.json"
-          },
           "ContainerGroupsCreateWithPriority": {
             "$ref": "./examples/ContainerGroupsCreatePriority.json"
           }
@@ -218,7 +215,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -295,13 +292,14 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ContainerGroup"
+            }
+          },
           "202": {
-            "description": "Delete started.",
-            "headers": {
-                "location": {
-                  "type": "string"
-                }
-              }
+            "description": "Delete started."
           },
           "204": {
             "description": "No Content - the specified container group was not found."
@@ -309,7 +307,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -341,18 +339,13 @@
           }
         ],
         "responses": {
-          "202": {
-            "description": "NoContent",
-            "headers": {
-              "Location": {
-                "type": "string"
-              }
-            }
+          "204": {
+            "description": "NoContent"
           },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -422,17 +415,15 @@
         ],
         "responses": {
           "202": {
-            "description": "Started - the container group is starting.",
-            "headers": {
-                "location": {
-                  "type": "string"
-                }
-            }
+            "description": "Started - the container group is starting."
+          },
+          "204": {
+            "description": "Started - the container group is already running or starting."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -460,7 +451,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/OperationListResult"
+              "$ref": "#/definitions/OperationListResult"
             }
           },
           "default": {
@@ -542,7 +533,6 @@
             "in": "path",
             "description": "The name of the container instance.",
             "required": true,
-            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9]$",
             "type": "string"
           },
           {
@@ -563,7 +553,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/LogsList"
+              "$ref": "#/definitions/Logs"
             }
           },
           "default": {
@@ -572,9 +562,6 @@
               "$ref": "#/definitions/CloudError"
             }
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     },
@@ -606,10 +593,7 @@
             "in": "path",
             "description": "The name of the container instance.",
             "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9]$",
-            "minLength": 1,
-            "maxLength": 63
+            "type": "string"
           },
           {
             "name": "containerExecRequest",
@@ -665,10 +649,7 @@
             "in": "path",
             "description": "The name of the container instance.",
             "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9]$",
-            "minLength": 1,
-            "maxLength": 63
+            "type": "string"
           }
         ],
         "responses": {
@@ -800,13 +781,10 @@
               "$ref": "#/definitions/CloudError"
             }
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/{virtualNetworkName}/subnets/{subnetName}/providers/Microsoft.ContainerInstance/serviceAssociationLinks/default": {
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/{virtualNetworkName}/subnets/{subnetName}/providers/Microsoft.ContainerInstance/serviceAssociationLinks/default": {
       "delete": {
         "operationId": "SubnetServiceAssociationLink_Delete",
         "x-ms-examples": {
@@ -834,13 +812,11 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK"
+          },
           "202": {
-            "description": "Delete started.",
-            "headers": {
-                "location": {
-                  "type": "string"
-                }
-            }
+            "description": "Delete started."
           },
           "204": {
             "description": "No Content - the specified container group was not found."
@@ -848,7 +824,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -858,8 +834,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerInstance/ngroups/{ngroupsName}/skus": {
       "get": {
         "operationId": "NGroupsSkus_Get",
-        "x-ms-examples": {
-        },
+        "x-ms-examples": {},
         "summary": "Get the resource sku, resource type, and sku capacity of the n groups.",
         "description": "Get the resource sku, resource type, and sku capacity of the n groups.",
         "parameters": [
@@ -897,179 +872,179 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerInstance/ngroups/{ngroupsName}": {
       "get": {
-          "operationId": "NGroups_Get",
-          "x-ms-examples": {},
-          "summary": "Display information about a specified nGroup.",
-          "description": "Get the properties of the specified n group.",
-          "parameters": [
-            {
-              "$ref": "#/parameters/SubscriptionIdParameter"
-            },
-            {
-              "$ref": "#/parameters/ApiVersionParameter"
-            },
-            {
-              "$ref": "#/parameters/ResourceGroupNameParameter"
-            },
-            {
-              "$ref": "#/parameters/NGroupsNameParameter"
+        "operationId": "NGroups_Get",
+        "x-ms-examples": {},
+        "summary": "Display information about a specified nGroup.",
+        "description": "Get the properties of the specified n group.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/NGroupsNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/NGroup"
             }
-          ],
-          "responses": {
-            "200": {
-              "description": "OK",
-              "schema": {
-                "$ref": "#/definitions/NGroup"
-            }
-            },
-            "default": {
-              "description": "Error response describing why the operation failed.",
-              "schema": {
-                "$ref": "#/definitions/CloudError"
-              }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
             }
           }
+        }
       },
       "put": {
-          "operationId": "NGroups_CreateOrUpdate",
-          "x-ms-examples": {},
-          "description": "Create or update a nGroup.",
-          "parameters": [
-            {
-              "$ref": "#/parameters/ResourceGroupNameParameter"
+        "operationId": "NGroups_CreateOrUpdate",
+        "x-ms-examples": {},
+        "description": "Create or update a nGroup.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/NGroupsNameParameter"
+          },
+          {
+            "name": "nGroup",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NGroup"
             },
-            {
-              "$ref": "#/parameters/NGroupsNameParameter"
-            },
-            {
-              "name": "nGroup",
-              "in": "body",
-              "required": true,
-              "schema": {
-                "$ref": "#/definitions/NGroup"
-              },
-              "description": "The nGroup object."
-            },
-            {
-              "$ref": "#/parameters/ApiVersionParameter"
-            },
-            {
-              "$ref": "#/parameters/SubscriptionIdParameter"
-            }
-          ],
-          "responses": {
-            "200": {
-              "description": "OK",
-              "schema": {
-                "$ref": "#/definitions/NGroup"
-              }
-            },
-            "201": {
-              "description": "Created",
-              "schema": {
-                "$ref": "#/definitions/NGroup"
-              }
-            },
-            "default": {
-              "description": "Error response describing why the operation failed.",
-              "schema": {
-                "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-              }
+            "description": "The nGroup object."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/NGroup"
             }
           },
-          "x-ms-long-running-operation": true
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/NGroup"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
       },
       "patch": {
-          "operationId": "NGroups_Update",
-          "x-ms-examples": {},
-          "summary": "Update a specified nGroup.",
-          "description": "Update a specified nGroup.",
-          "parameters": [
-            {
-              "$ref": "#/parameters/ResourceGroupNameParameter"
+        "operationId": "NGroups_Update",
+        "x-ms-examples": {},
+        "summary": "Update a specified nGroup.",
+        "description": "Update a specified nGroup.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/NGroupsNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NGroup"
             },
-            {
-              "$ref": "#/parameters/NGroupsNameParameter"
-            },
-            {
-              "name": "parameters",
-              "in": "body",
-              "required": true,
-              "schema": {
-                "$ref": "#/definitions/NGroup"
-              },
-              "description": "The nGroup object."
-            },
-            {
-              "$ref": "#/parameters/ApiVersionParameter"
-            },
-            {
-              "$ref": "#/parameters/SubscriptionIdParameter"
+            "description": "The nGroup object."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/NGroup"
             }
-          ],
-          "responses": {
-            "200": {
-              "description": "OK",
-              "schema": {
-                "$ref": "#/definitions/NGroup"
-              }
-            },
-            "202": {
-              "description": "nGroup update started",
-              "headers": {
-                "Location": {
-                  "type": "string"
-                }
-              }
-            },
-            "default": {
-              "description": "Error response describing why the operation failed.",
-              "schema": {
-                "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+          },
+          "202": {
+            "description": "nGroup update started",
+            "headers": {
+              "Location": {
+                "type": "string"
               }
             }
           },
-          "x-ms-long-running-operation": true
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
       },
       "delete": {
-          "operationId": "NGroups_Delete",
-          "x-ms-examples": {},
-          "summary": "Delete a nGroup.",
-          "description": "Deletes a nGroup.",
-          "parameters": [
-            {
-              "$ref": "#/parameters/ResourceGroupNameParameter"
-            },
-            {
-              "$ref": "#/parameters/NGroupsNameParameter"
-            },
-            {
-              "$ref": "#/parameters/ApiVersionParameter"
-            },
-            {
-              "$ref": "#/parameters/SubscriptionIdParameter"
-            }
-          ],
-          "responses": {
-            "202": {
-              "description": "Accepted",
-              "headers": {
-                "location": {
-                  "type": "string"
-                }
-              }
-            },
-            "204": {
-              "description": "No Content"
-            },
-            "default": {
-              "description": "Error response describing why the operation failed.",
-              "schema": {
-                "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+        "operationId": "NGroups_Delete",
+        "x-ms-examples": {},
+        "summary": "Delete a nGroup.",
+        "description": "Deletes a nGroup.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/NGroupsNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "location": {
+                "type": "string"
               }
             }
           },
-          "x-ms-long-running-operation": true
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerInstance/ngroups/{ngroupsName}/start": {
@@ -1376,24 +1351,6 @@
         "securityContext": {
           "description": "The container security properties.",
           "$ref": "#/definitions/SecurityContextDefinition"
-        },
-        "configMap": {
-          "description": "The config map.",
-          "$ref": "#/definitions/ConfigMap"
-        }
-      }
-    },
-    "ConfigMap": {
-      "description": "The container config map.",
-      "type": "object",
-      "properties": {
-        "keyValuePairs": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string",
-            "description": "The list of key value pairs associated with the config map of the container."
-          },
-          "description": "The key value pairs dictionary in the config map."
         }
       }
     },
@@ -1641,22 +1598,18 @@
     },
     "EmptyDirVolume": {
       "description": "The empty directory volume.",
-      "type": "string"
+      "type": "object",
+      "properties": {}
     },
     "SecretVolume": {
       "description": "The secret volume.",
       "type": "object",
-      "properties": {
-        "tags": {
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
+      "additionalProperties": {
+        "type": "string"
       }
     },
     "GitRepoVolume": {
       "description": "Represents a volume that is populated with the contents of a git repository",
-      "type": "object",
       "required": [
         "repository"
       ],
@@ -1991,55 +1944,12 @@
                 "name": "ContainerGroupPriority",
                 "modelAsString": true
               }
-            },
-            "containerGroupProfile": {
-              "description": "The reference container group profile properties.",
-              "$ref": "#/definitions/ContainerGroupProfileReferenceDefinition"
-            },
-            "standbyPoolProfile": {
-              "description": "The reference standby pool profile properties.",
-              "$ref": "#/definitions/StandbyPoolProfileDefinition"
-            },
-            "isCreatedFromStandbyPool": {
-              "readOnly": true,
-              "type": "boolean",
-              "description": "The flag indicating whether the container group is created by standby pool."
             }
           },
           "required": [
             "containers",
-            "osType"          ]
-        }
-      }
-    },
-    "ContainerGroupProfileReferenceDefinition": {
-      "description": "The container group profile reference.",
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "The container group profile reference id.This will be an ARM resource id in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerInstance/containerGroupProfiles/{containerGroupProfileName}'."
-        },
-        "revision": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The container group profile reference revision."
-        }
-      }
-    },
-    "StandbyPoolProfileDefinition": {
-      "description": "The standby pool profile reference.",
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "The standby pool profile reference id.This will be an ARM resource id in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StandbyPool/standbyContainerGroupPools/{standbyPoolName}'."
-        },
-        "failContainerGroupCreateOnReuseFailure": {
-          "type": "boolean",
-          "description": "The flag to determine whether ACI should fail the create request if the container group can not be obtained from standby pool."
+            "osType"
+          ]
         }
       }
     },
@@ -2065,11 +1975,11 @@
               "description": "Version of the extension being used."
             },
             "settings": {
-              "type": "string",
+              "type": "object",
               "description": "Settings for the extension."
             },
             "protectedSettings": {
-              "type": "string",
+              "type": "object",
               "description": "Protected settings for the extension."
             }
           },
@@ -2085,7 +1995,6 @@
     },
     "ContainerGroupIdentity": {
       "description": "Identity for the container group.",
-      "type": "object",
       "properties": {
         "principalId": {
           "readOnly": true,
@@ -2400,10 +2309,6 @@
           "type": "string",
           "description": "The name of the operation."
         },
-        "isDataAction": {
-          "description": "Indicates whether the operation is a data action",
-          "type": "boolean"
-        },
         "display": {
           "description": "The display information of the operation.",
           "type": "object",
@@ -2427,7 +2332,7 @@
           }
         },
         "properties": {
-          "type": "string",
+          "type": "object",
           "description": "The additional properties.",
           "x-ms-client-flatten": true
         },
@@ -2463,10 +2368,6 @@
           "x-ms-identifiers": [
             "name"
           ]
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "The URI to fetch the next page of operations."
         }
       }
     },
@@ -2529,23 +2430,6 @@
         "nextLink": {
           "type": "string",
           "description": "The URI to fetch the next page of container groups."
-        }
-      }
-    },
-    "LogsList": {
-      "description": "List of container logs object.",
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Logs"
-          },
-          "description": "The list of container logs."
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "The URI to fetch the next page of container logs."
         }
       }
     },
@@ -2673,7 +2557,6 @@
           "description": "The resource type."
         },
         "location": {
-          "readOnly": true,
           "type": "string",
           "description": "The resource location."
         },
@@ -2943,7 +2826,6 @@
     },
     "CloudError": {
       "x-ms-external": true,
-      "type": "object",
       "properties": {
         "error": {
           "$ref": "#/definitions/CloudErrorBody"
@@ -2953,7 +2835,6 @@
     },
     "CloudErrorBody": {
       "x-ms-external": true,
-      "type": "object",
       "properties": {
         "code": {
           "type": "string",
@@ -2983,19 +2864,9 @@
     },
     "NetworkDependenciesResponse": {
       "description": "Response for network dependencies, always empty list.",
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "Response for network dependencies, always empty list."
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "The URI to fetch the next page of network dependencies."
-        }
+      "type": "array",
+      "items": {
+        "type": "string"
       }
     },
     "ConfidentialComputeProperties": {
@@ -3081,6 +2952,14 @@
             "type": "string"
           },
           "description": "The nGroups zones. NOTE: Availability zones can only be set when you create the scale set"
+        },
+        "location": {
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "description": "The geo-location where the resource lives"
         }
       },
       "allOf": [
@@ -3234,7 +3113,6 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9]$",
       "description": "The name of the container group.",
       "x-ms-parameter-location": "method"
     },
@@ -3243,7 +3121,6 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9]$",
       "description": "The name of the virtual network.",
       "x-ms-parameter-location": "method"
     },
@@ -3252,9 +3129,6 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9]$",
-      "minLength": 1,
-      "maxLength": 63,
       "description": "The name of the subnet.",
       "x-ms-parameter-location": "method"
     },
@@ -3279,4 +3153,3 @@
     }
   }
 }
-
