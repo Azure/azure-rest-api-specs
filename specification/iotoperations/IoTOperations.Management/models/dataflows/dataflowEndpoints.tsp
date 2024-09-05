@@ -386,7 +386,7 @@ model DataflowEndpointMqttAuthentication {
 }
 
 @doc("DataflowEndpoint Anonymous Authentication Method properties")
-model DataflowEndpointAuthenticationAnonymous {} 
+model DataflowEndpointAuthenticationAnonymous {}
 
 @doc("DataflowEndpoint Mqtt Authentication Method properties")
 union MqttAuthMethod {
