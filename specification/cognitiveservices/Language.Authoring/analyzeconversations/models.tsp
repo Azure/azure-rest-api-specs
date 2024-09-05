@@ -949,7 +949,7 @@ model EntitiesEvaluationSummary {
    * the same). The matrix is between the entity that was labelled and the entity
    * that was predicted.
    */
-  confusionMatrix: ConfusionMatrix;
+  confusionMatrix: Record<Record<ConfusionMatrixCell>>;
 
   /**
    * Represents the entities evaluation summary.
@@ -1080,7 +1080,7 @@ model IntentsEvaluationSummary {
    * same). The matrix is between the intent that was labelled and the intent that
    * was predicted.
    */
-  confusionMatrix: ConfusionMatrix;
+  confusionMatrix: Record<Record<ConfusionMatrixCell>>;
 
   /**
    * Represents the intents evaluation summary.
