@@ -3955,6 +3955,10 @@
         "secretRef"
       ]
     },
+    "DataflowEndpointAuthenticationAnonymous": {
+      "type": "object",
+      "description": "DataflowEndpoint Anonymous Authentication Method properties"
+    },
     "DataflowEndpointAuthenticationSasl": {
       "type": "object",
       "description": "DataflowEndpoint Authentication Sasl properties",
@@ -4748,6 +4752,10 @@
         "x509CertificateSettings": {
           "$ref": "#/definitions/DataflowEndpointAuthenticationX509",
           "description": "X.509 certificate authentication."
+        },
+        "anonymousSettings": {
+          "$ref": "#/definitions/DataflowEndpointAuthenticationAnonymous",
+          "description": "Anonymous authentication."
         }
       },
       "required": [
