@@ -26,8 +26,6 @@ To see additional help and options, run:
 These are the global settings for the Machine Learning Services API.
 
 ``` yaml
-title: MachineLearningServicesManagementClient
-description: Microsoft Machine Learning Services Azure Resource Provider specification
 openapi-type: arm
 tag: package-preview-2024-10
 ```
