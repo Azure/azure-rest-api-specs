@@ -75,7 +75,7 @@ model SessionPoolNameParameter {
 model SessionResourceFileNameParameter {
   @doc("The name of the file.")
   @path
-  filename: string;
+  fileName: string;
 }
 
 @doc("Session identifier query parameter.")

@@ -70,7 +70,7 @@ interface SessionResourceFiles {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" ""
   @doc("Get the content of the file.")
   @get
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/sessionPools/{sessionPoolName}/files/{filename}/download")
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/sessionPools/{sessionPoolName}/files/{fileName}/download")
   getFileContent is Foundations.Operation<
     {
       ...SubscriptionIdParameter;
