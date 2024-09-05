@@ -68,7 +68,10 @@ model DataflowEndpointAuthenticationX509 {
 }
 
 @doc("DataflowEndpoint Anonymous Authentication Method properties")
-model DataflowEndpointAuthenticationAnonymous {}
+model DataflowEndpointAuthenticationAnonymous {
+  @doc("Type of anonymous authentication.")
+  someKey?: string;
+}
 
 /**
  *
