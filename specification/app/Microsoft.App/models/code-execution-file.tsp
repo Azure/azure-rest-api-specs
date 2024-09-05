@@ -17,7 +17,7 @@ model SessionResourceFile {
   @key("fileName")
   @segment("files")
   @doc("The name of the file.")
-  @visibility("create")
+  @visibility("read", "query", "create", "update", "delete")
   fileName: string;
 
   @doc("The size of the file.")
