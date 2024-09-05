@@ -96,6 +96,6 @@ interface SessionResourceFiles {
       @doc("The file to upload.")
       file: bytes;
     },
-    SessionResourceFileCollection
+    SessionResourceFile
   >;
 }
