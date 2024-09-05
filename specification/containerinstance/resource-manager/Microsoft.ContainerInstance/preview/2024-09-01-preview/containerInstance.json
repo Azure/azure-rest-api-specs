@@ -170,9 +170,6 @@
           "ConfidentialContainerGroup": {
             "$ref": "./examples/ContainerGroupCreateConfidential.json"
           },
-          "ContainerGroupCreateOrUpdateWithStandbyPool": {
-            "$ref": "./examples/ContainerGroupCreateOrUpdateStandbyPool.json"
-          },
           "ContainerGroupsCreateWithPriority": {
             "$ref": "./examples/ContainerGroupsCreatePriority.json"
           }
@@ -218,7 +215,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -295,13 +292,14 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ContainerGroup"
+            }
+          },
           "202": {
-            "description": "Delete started.",
-            "headers": {
-                "location": {
-                  "type": "string"
-                }
-              }
+            "description": "Delete started."
           },
           "204": {
             "description": "No Content - the specified container group was not found."
@@ -309,7 +307,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -341,18 +339,13 @@
           }
         ],
         "responses": {
-          "202": {
-            "description": "NoContent",
-            "headers": {
-              "Location": {
-                "type": "string"
-              }
-            }
+          "204": {
+            "description": "NoContent"
           },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -422,17 +415,15 @@
         ],
         "responses": {
           "202": {
-            "description": "Started - the container group is starting.",
-            "headers": {
-                "location": {
-                  "type": "string"
-                }
-            }
+            "description": "Started - the container group is starting."
+          },
+          "204": {
+            "description": "Started - the container group is already running or starting."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -460,7 +451,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/OperationListResult"
+              "$ref": "#/definitions/OperationListResult"
             }
           },
           "default": {
@@ -542,7 +533,6 @@
             "in": "path",
             "description": "The name of the container instance.",
             "required": true,
-            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9]$",
             "type": "string"
           },
           {
@@ -563,7 +553,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/LogsList"
+              "$ref": "#/definitions/Logs"
             }
           },
           "default": {
@@ -572,9 +562,6 @@
               "$ref": "#/definitions/CloudError"
             }
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     },
@@ -606,10 +593,7 @@
             "in": "path",
             "description": "The name of the container instance.",
             "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9]$",
-            "minLength": 1,
-            "maxLength": 63
+            "type": "string"
           },
           {
             "name": "containerExecRequest",
@@ -665,10 +649,7 @@
             "in": "path",
             "description": "The name of the container instance.",
             "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9]$",
-            "minLength": 1,
-            "maxLength": 63
+            "type": "string"
           }
         ],
         "responses": {
@@ -800,9 +781,6 @@
               "$ref": "#/definitions/CloudError"
             }
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     },
@@ -834,13 +812,11 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK"
+          },
           "202": {
-            "description": "Delete started.",
-            "headers": {
-                "location": {
-                  "type": "string"
-                }
-            }
+            "description": "Delete started."
           },
           "204": {
             "description": "No Content - the specified container group was not found."
@@ -848,7 +824,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"            
             }
           }
         },
@@ -1376,24 +1352,6 @@
         "securityContext": {
           "description": "The container security properties.",
           "$ref": "#/definitions/SecurityContextDefinition"
-        },
-        "configMap": {
-          "description": "The config map.",
-          "$ref": "#/definitions/ConfigMap"
-        }
-      }
-    },
-    "ConfigMap": {
-      "description": "The container config map.",
-      "type": "object",
-      "properties": {
-        "keyValuePairs": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string",
-            "description": "The list of key value pairs associated with the config map of the container."
-          },
-          "description": "The key value pairs dictionary in the config map."
         }
       }
     },
@@ -1641,22 +1599,18 @@
     },
     "EmptyDirVolume": {
       "description": "The empty directory volume.",
-      "type": "string"
+      "type": "object",
+      "properties": {}
     },
     "SecretVolume": {
       "description": "The secret volume.",
       "type": "object",
-      "properties": {
-        "tags": {
           "additionalProperties": {
             "type": "string"
-          }
-        }
       }
     },
     "GitRepoVolume": {
       "description": "Represents a volume that is populated with the contents of a git repository",
-      "type": "object",
       "required": [
         "repository"
       ],
@@ -1991,55 +1945,12 @@
                 "name": "ContainerGroupPriority",
                 "modelAsString": true
               }
-            },
-            "containerGroupProfile": {
-              "description": "The reference container group profile properties.",
-              "$ref": "#/definitions/ContainerGroupProfileReferenceDefinition"
-            },
-            "standbyPoolProfile": {
-              "description": "The reference standby pool profile properties.",
-              "$ref": "#/definitions/StandbyPoolProfileDefinition"
-            },
-            "isCreatedFromStandbyPool": {
-              "readOnly": true,
-              "type": "boolean",
-              "description": "The flag indicating whether the container group is created by standby pool."
             }
           },
           "required": [
             "containers",
-            "osType"          ]
-        }
-      }
-    },
-    "ContainerGroupProfileReferenceDefinition": {
-      "description": "The container group profile reference.",
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "The container group profile reference id.This will be an ARM resource id in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerInstance/containerGroupProfiles/{containerGroupProfileName}'."
-        },
-        "revision": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The container group profile reference revision."
-        }
-      }
-    },
-    "StandbyPoolProfileDefinition": {
-      "description": "The standby pool profile reference.",
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "The standby pool profile reference id.This will be an ARM resource id in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StandbyPool/standbyContainerGroupPools/{standbyPoolName}'."
-        },
-        "failContainerGroupCreateOnReuseFailure": {
-          "type": "boolean",
-          "description": "The flag to determine whether ACI should fail the create request if the container group can not be obtained from standby pool."
+            "osType"
+          ]
         }
       }
     },
@@ -2065,11 +1976,11 @@
               "description": "Version of the extension being used."
             },
             "settings": {
-              "type": "string",
+              "type": "object",
               "description": "Settings for the extension."
             },
             "protectedSettings": {
-              "type": "string",
+              "type": "object",
               "description": "Protected settings for the extension."
             }
           },
@@ -2085,7 +1996,6 @@
     },
     "ContainerGroupIdentity": {
       "description": "Identity for the container group.",
-      "type": "object",
       "properties": {
         "principalId": {
           "readOnly": true,
@@ -2400,10 +2310,6 @@
           "type": "string",
           "description": "The name of the operation."
         },
-        "isDataAction": {
-          "description": "Indicates whether the operation is a data action",
-          "type": "boolean"
-        },
         "display": {
           "description": "The display information of the operation.",
           "type": "object",
@@ -2427,7 +2333,7 @@
           }
         },
         "properties": {
-          "type": "string",
+          "type": "object",
           "description": "The additional properties.",
           "x-ms-client-flatten": true
         },
@@ -2463,10 +2369,6 @@
           "x-ms-identifiers": [
             "name"
           ]
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "The URI to fetch the next page of operations."
         }
       }
     },
@@ -2529,23 +2431,6 @@
         "nextLink": {
           "type": "string",
           "description": "The URI to fetch the next page of container groups."
-        }
-      }
-    },
-    "LogsList": {
-      "description": "List of container logs object.",
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Logs"
-          },
-          "description": "The list of container logs."
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "The URI to fetch the next page of container logs."
         }
       }
     },
@@ -2673,7 +2558,6 @@
           "description": "The resource type."
         },
         "location": {
-          "readOnly": true,
           "type": "string",
           "description": "The resource location."
         },
@@ -2943,7 +2827,6 @@
     },
     "CloudError": {
       "x-ms-external": true,
-      "type": "object",
       "properties": {
         "error": {
           "$ref": "#/definitions/CloudErrorBody"
@@ -2953,7 +2836,6 @@
     },
     "CloudErrorBody": {
       "x-ms-external": true,
-      "type": "object",
       "properties": {
         "code": {
           "type": "string",
@@ -2983,19 +2865,9 @@
     },
     "NetworkDependenciesResponse": {
       "description": "Response for network dependencies, always empty list.",
-      "type": "object",
-      "properties": {
-        "value": {
           "type": "array",
           "items": {
             "type": "string"
-          },
-          "description": "Response for network dependencies, always empty list."
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "The URI to fetch the next page of network dependencies."
-        }
       }
     },
     "ConfidentialComputeProperties": {
@@ -3234,7 +3106,6 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9]$",
       "description": "The name of the container group.",
       "x-ms-parameter-location": "method"
     },
@@ -3243,7 +3114,6 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9]$",
       "description": "The name of the virtual network.",
       "x-ms-parameter-location": "method"
     },
@@ -3252,9 +3122,6 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9]$",
-      "minLength": 1,
-      "maxLength": 63,
       "description": "The name of the subnet.",
       "x-ms-parameter-location": "method"
     },
