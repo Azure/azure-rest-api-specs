@@ -1591,7 +1591,8 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/AutoActionProperties",
-          "description": "The resource-specific properties for this resource."
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true
         }
       },
       "allOf": [
@@ -1677,7 +1678,7 @@
           "readOnly": true
         },
         "provisioningState": {
-          "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
+          "$ref": "#/definitions/ProvisioningState",
           "description": "The status of the last provisioning operation performed on the resource.",
           "readOnly": true
         }
@@ -1691,58 +1692,6 @@
         "notificationSettings",
         "isDisabled"
       ]
-    },
-    "AutoActionPropertiesUpdate": {
-      "type": "object",
-      "description": "Auto action properties",
-      "properties": {
-        "resourceType": {
-          "$ref": "#/definitions/ResourceType",
-          "description": "The type of resource the auto action is targeting"
-        },
-        "actionType": {
-          "$ref": "#/definitions/ActionType",
-          "description": "The action the auto action should perform in the resources"
-        },
-        "startTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The time which the auto action is supposed to start running"
-        },
-        "endTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The time when the auto action is supposed to stop scheduling"
-        },
-        "resources": {
-          "type": "array",
-          "description": "The list of the resources the auto action is supposed to perform the actions on",
-          "items": {
-            "$ref": "#/definitions/AutoActionResource"
-          },
-          "x-ms-identifiers": [
-            "resourceId"
-          ],
-          "x-ms-mutability": [
-            "update",
-            "create"
-          ]
-        },
-        "schedule": {
-          "$ref": "#/definitions/AutoActionScheduleUpdate",
-          "description": "The schedule the auto action is supposed to follow"
-        },
-        "notificationSettings": {
-          "type": "array",
-          "description": "The notification settings for the auto action",
-          "items": {
-            "$ref": "#/definitions/NotificationProperties"
-          },
-          "x-ms-identifiers": [
-            "destination"
-          ]
-        }
-      }
     },
     "AutoActionResource": {
       "type": "object",
@@ -1889,18 +1838,72 @@
     },
     "AutoActionUpdate": {
       "type": "object",
-      "description": "The auto action resource",
+      "description": "The type used for update operations of the AutoAction.",
       "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
         "properties": {
-          "$ref": "#/definitions/AutoActionPropertiesUpdate",
-          "description": "The resource-specific properties for this resource."
+          "$ref": "#/definitions/AutoActionUpdateProperties",
+          "x-ms-client-flatten": true
         }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
+      }
+    },
+    "AutoActionUpdateProperties": {
+      "type": "object",
+      "description": "The updatable properties of the AutoAction.",
+      "properties": {
+        "resourceType": {
+          "$ref": "#/definitions/ResourceType",
+          "description": "The type of resource the auto action is targeting"
+        },
+        "actionType": {
+          "$ref": "#/definitions/ActionType",
+          "description": "The action the auto action should perform in the resources"
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time which the auto action is supposed to start running"
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time when the auto action is supposed to stop scheduling"
+        },
+        "resources": {
+          "type": "array",
+          "description": "The list of the resources the auto action is supposed to perform the actions on",
+          "items": {
+            "$ref": "#/definitions/AutoActionResource"
+          },
+          "x-ms-identifiers": [
+            "resourceId"
+          ],
+          "x-ms-mutability": [
+            "update",
+            "create"
+          ]
+        },
+        "schedule": {
+          "$ref": "#/definitions/AutoActionScheduleUpdate",
+          "description": "The schedule the auto action is supposed to follow"
+        },
+        "notificationSettings": {
+          "type": "array",
+          "description": "The notification settings for the auto action",
+          "items": {
+            "$ref": "#/definitions/NotificationProperties"
+          },
+          "x-ms-identifiers": [
+            "destination"
+          ]
         }
-      ]
+      }
     },
     "Azure.Core.Foundations.Error": {
       "type": "object",
@@ -1949,24 +1952,6 @@
           "description": "Inner error."
         }
       }
-    },
-    "Azure.ResourceManager.CommonTypes.TrackedResourceUpdate": {
-      "type": "object",
-      "description": "The resource model definition for an Azure Resource Manager tracked top level resource which has 'tags' and a 'location'",
-      "properties": {
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
-        }
-      ]
     },
     "Azure.ResourceManager.ResourceProvisioningState": {
       "type": "string",
@@ -2453,7 +2438,8 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/OccurrenceProperties",
-          "description": "The resource-specific properties for this resource."
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true
         }
       },
       "allOf": [
@@ -2748,6 +2734,43 @@
           }
         ]
       }
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "Provisioning state",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Deleting"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "Resource is being deleted."
+          }
+        ]
+      },
+      "readOnly": true
     },
     "ResourceOperation": {
       "type": "object",
