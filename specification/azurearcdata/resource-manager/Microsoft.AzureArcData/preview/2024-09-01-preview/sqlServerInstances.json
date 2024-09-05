@@ -1382,11 +1382,11 @@
       "description": "The response containing the results of the MI Link assessment.",
       "type": "object",
       "properties": {
-        "assessmentResults": {
+        "assessments": {
           "type": "array",
           "description": "The list of the results for MI Link assessment.",
           "items": {
-            "$ref": "#/definitions/SqlServerInstanceManagedInstanceLinkAssessmentResult"
+            "$ref": "#/definitions/SqlServerInstanceManagedInstanceLinkAssessment"
           },
           "x-ms-identifiers": [
             "name"
@@ -1394,15 +1394,15 @@
         }
       }
     },
-    "SqlServerInstanceManagedInstanceLinkAssessmentResult": {
+    "SqlServerInstanceManagedInstanceLinkAssessment": {
       "description": "The status of an individual requirement for MI Link.",
       "type": "object",
       "properties": {
-        "requirementName": {
+        "name": {
           "type": "string",
           "description": "The name of the requirement."
         },
-        "requirementCategory": {
+        "category": {
           "type": "string",
           "description": "The category of the requirement.",
           "enum": [
@@ -1413,11 +1413,11 @@
             "Certificates"
           ],
           "x-ms-enum": {
-            "name": "requirementCategory",
+            "name": "assessmentCategory",
             "modelAsString": true
           }
         },
-        "requirementStatus": {
+        "status": {
           "type": "string",
           "description": "The status of the requirement.",
           "enum": [
@@ -1426,15 +1426,15 @@
             "Failure"
           ],
           "x-ms-enum": {
-            "name": "requirementStatus",
+            "name": "assessmentStatus",
             "modelAsString": true
           }
         },
-        "requirementInformation": {
+        "information": {
           "type": "string",
           "description": "The information text about requirement."
         },
-        "requirementAdditionalInformation": {
+        "additionalInformation": {
           "type": "string",
           "description": "Additional details about the check, including any recommended actions."
         }
