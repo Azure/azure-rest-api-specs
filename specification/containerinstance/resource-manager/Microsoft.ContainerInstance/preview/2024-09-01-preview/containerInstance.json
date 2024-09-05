@@ -558,7 +558,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/Logs"
+              "$ref": "#/definitions/LogsList"
             }
           },
           "default": {
@@ -875,7 +875,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/NGroupSkus"
+              "$ref": "#/definitions/NGroupsSkusList"
             }
           },
           "default": {
@@ -1626,14 +1626,15 @@
     },
     "EmptyDirVolume": {
       "description": "The empty directory volume.",
-      "type": "object",
-      "properties": {}
+      "type": "object"
     },
     "SecretVolume": {
       "description": "The secret volume.",
       "type": "object",
-      "additionalProperties": {
-        "type": "string"
+      "properties": {
+        "additionalProperties": {
+          "type": "string"
+        }
       }
     },
     "GitRepoVolume": {
@@ -2440,6 +2441,10 @@
           "x-ms-identifiers": [
             "name"
           ]
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URI to fetch the next page of operations."
         }
       }
     },
@@ -2505,6 +2510,23 @@
         }
       }
     },
+    "LogsList": {
+      "description": "List of container logs object.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Logs"
+          },
+          "description": "The list of container logs."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URI to fetch the next page of container logs."
+        }
+      }
+    },
     "Logs": {
       "description": "The logs.",
       "type": "object",
@@ -2512,10 +2534,6 @@
         "content": {
           "type": "string",
           "description": "The content of the log."
-        },
-        "nextLink": {
-          "description": "The link used to get the next page of logs.",
-          "type": "string"
         }
       }
     },
@@ -2943,9 +2961,19 @@
     },
     "NetworkDependenciesResponse": {
       "description": "Response for network dependencies, always empty list.",
-      "type": "array",
-      "items": {
-        "type": "string"
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Response for network dependencies, always empty list."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URI to fetch the next page of network dependencies."
+        }
       }
     },
     "ConfidentialComputeProperties": {
@@ -2955,10 +2983,23 @@
         "ccePolicy": {
           "type": "string",
           "description": "The base64 encoded confidential compute enforcement policy"
+        }
+      }
+    },
+    "NGroupsSkusList": {
+      "description": "List of SKU definitions. NGroups offer a single sku",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NGroupSkus"
+          },
+          "description": "The list of N Groups SKUs."
         },
         "nextLink": {
-          "description": "The link used to get the next page of operations.",
-          "type": "string"
+          "type": "string",
+          "description": "The URI to fetch the next page of N Groups SKUs."
         }
       }
     },
@@ -2977,10 +3018,6 @@
         "skuCapacity": {
           "type": "string",
           "description": "The number of container groups of the nGroups."
-        },
-        "nextLink": {
-          "description": "The link used to get the next page of operations.",
-          "type": "string"
         }
       }
     },
