@@ -4871,29 +4871,6 @@
       "readOnly": true,
       "type": "object"
     },
-    "ipFamily": {
-      "type": "string",
-      "readOnly": true,
-      "description": "To determine if address belongs IPv4 or IPv6 family.",
-      "enum": [
-        "IPv4",
-        "IPv6"
-      ],
-      "x-ms-enum": {
-        "name": "ipFamily",
-        "modelAsString": true,
-        "values": [
-          {
-            "value": "IPv4",
-            "description": "IPv4 family"
-          },
-          {
-            "value": "IPv6",
-            "description": "IPv6 family"
-          }
-        ]
-      }
-    },
     "PodLinkLocalAccess": {
       "type": "string",
       "description": "Defines access to special link local addresses (Azure Instance Metadata Service, aka IMDS) for pods with hostNetwork=false. If not specified, the default is 'IMDS'.",
@@ -5147,8 +5124,16 @@
         "ipFamilies": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ipFamily",
-            "description": "The IP version to use for cluster networking and IP assignment."
+            "type": "string",
+            "description": "The IP version to use for cluster networking and IP assignment.",
+            "enum": [
+              "IPv4",
+              "IPv6"
+            ],
+            "x-ms-enum": {
+              "name": "ipFamily",
+              "modelAsString": true
+            }
           },
           "title": "The IP families used to specify IP versions available to the cluster.",
           "description": "IP families are used to determine single-stack or dual-stack clusters. For single-stack, the expected value is IPv4. For dual-stack, the expected values are IPv4 and IPv6."
