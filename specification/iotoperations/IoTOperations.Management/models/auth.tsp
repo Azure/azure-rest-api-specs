@@ -67,6 +67,9 @@ model DataflowEndpointAuthenticationX509 {
   secretRef: string;
 }
 
+@doc("DataflowEndpoint Anonymous Authentication Method properties")
+model DataflowEndpointAuthenticationAnonymous {}
+
 /**
  *
  * Broker Authentication Models

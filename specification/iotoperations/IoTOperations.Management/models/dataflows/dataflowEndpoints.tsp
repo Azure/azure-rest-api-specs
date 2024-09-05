@@ -385,8 +385,6 @@ model DataflowEndpointMqttAuthentication {
   anonymousSettings?: DataflowEndpointAuthenticationAnonymous;
 }
 
-@doc("DataflowEndpoint Anonymous Authentication Method properties")
-model DataflowEndpointAuthenticationAnonymous {}
 
 @doc("DataflowEndpoint Mqtt Authentication Method properties")
 union MqttAuthMethod {
