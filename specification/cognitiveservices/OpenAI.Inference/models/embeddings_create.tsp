@@ -91,7 +91,7 @@ model EmbeddingItem {
   @clientName("promptIndex", "java")
   index: int32;
 
-  @doc("The object type which is always \"embedding\".")
+  @doc("The object type which is always 'embedding'.")
   @added(ServiceApiVersions.v2024_07_01_Preview)
   object: "embedding";
 }
