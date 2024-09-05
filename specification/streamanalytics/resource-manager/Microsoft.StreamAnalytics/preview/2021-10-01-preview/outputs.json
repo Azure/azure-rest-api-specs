@@ -1207,6 +1207,47 @@
         }
       }
     },
+    "ReflexOutputDataSource": {
+      "type": "object",
+      "description": "Describes a Reflex output data source.",
+      "x-ms-discriminator-value": "Reflex",
+      "allOf": [
+        {
+          "$ref": "#/definitions/OutputDataSource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ReflexOutputDataSourceProperties",
+          "description": "The properties that are associated with a Reflex output. Required on PUT (CreateOrReplace) requests.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "ReflexOutputDataSourceProperties": {
+      "type": "object",
+      "description": "The properties that are associated with a Reflex output.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/OAuthBasedDataSourceProperties"
+        }
+      ],
+      "properties": {
+        "AegSubscriptionName": {
+          "type": "string",
+          "description": "Unique ASA query ID. For EventGrid it's an unique subscription name, set internally by EventGrid on subscription creation."
+        },
+        "FabricEsName": {
+          "type": "string",
+          "description": "Public EG populates aeg-subscription-name with the subscription name set by the subscription creator. This header was added, because Fabric EG didn't populate aeg-subscription-name with our set value, but EG internal value. The EG subscription name set by us during creation gets populated to fabris-es-name. There is no additional validation to ensure the existence of the subscription, so both aeg-subscription-name and fabris-es-name can be set to any ID that best represents the ASA query subscription."
+        },
+        "WebhookUrl": {
+          "type": "string",
+          "description": "Webhook URL Format: https://{RegionCode}.data.activator.pipe.{WebhookEnvironment}.aria.trafficmanager.net/api/v2/OneRiv
+          er/PushEvents/{tenantId}/{sourceType}/{eventName}"
+        }
+      }
+    },
     "GatewayMessageBusOutputDataSourceProperties": {
       "type": "object",
       "description": "The properties that are associated with a Gateway Message Bus.",

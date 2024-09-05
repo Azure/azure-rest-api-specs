@@ -479,6 +479,10 @@
         "watermarkSettings": {
           "$ref": "#/definitions/InputWatermarkProperties",
           "description": "Settings which determine whether to read watermark events."
+        },
+        "messagingCatalogConfiguration": {
+          "$ref": "#/definitions/MessagingCatalogConfiguration",
+          "description": "Messaging catalog configuration"
         }
       },
       "required": [
@@ -1446,6 +1450,115 @@
       ],
       "x-ms-enum": {
         "name": "InputWatermarkMode",
+        "modelAsString": true
+      }
+    },
+    "MessagingCatalogConfiguration": {
+      "type": "string",
+      "description": "The messaging catalog configuration.",
+      "properties": {
+        "endpoint": {
+          "type": "string",
+          "description": "endpoint"
+        },
+        "errorPolicy": {
+          "$ref": "#/definitions/SchemaRegistryErrorPolicy",
+          "description": "errorPolicy"
+        },
+        "messages": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Message"
+          },
+          "description": "messages"
+        },
+        "schemaGroups": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SchemaGroup"
+          },
+          "description": "schemaGroups"
+        },
+        "format": {
+          "$ref": "#/definitions/MessagingCatalogMessageFormat",
+          "description": "format"
+        },
+        "protocol": {
+          "$ref": "#/definitions/MessagingCatalogProtocol",
+          "description": "protocol"
+        },
+        "schemaFormat": {
+          "type": "string",
+          "description": "schema"
+        },
+        "authenticationMode": {
+          "$ref": "../../common/v1/definitions.json#/definitions/AuthenticationMode",
+          "description": "Authentication Mode."
+        }
+      }
+    },
+    "SchemaRegistryErrorPolicy": {
+      "type": "string",
+      "description": "The schema registry error policy.",
+      "enum": [
+        "Drop",
+        "Accept"
+      ],
+      "x-ms-enum": {
+        "name": "SchemaRegistryErrorPolicy",
+        "modelAsString": true
+      }
+    },
+    "Message": {
+      "description": "The message properties",
+      "type": "object",
+      "properties": {
+        "messageGroupId": {
+          "type": "string",
+          "description": "The message group id."
+        },
+        "messageId": {
+          "type": "string",
+          "description": "The message id."
+        },
+        "schemaVersion": {
+          "type": "string",
+          "description": "The schema version."
+        }
+      }
+    },
+    "SchemaGroup": {
+      "description": "The schema group",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The schema group id."
+        }
+      }
+    },
+    "MessagingCatalogMessageFormat": {
+      "type": "string",
+      "description": "The messaging catalog message format.",
+      "enum": [
+        "NotSet",
+        "CloudEvents_1_0"
+      ],
+      "x-ms-enum": {
+        "name": "MessagingCatalogMessageFormat",
+        "modelAsString": true
+      }
+    },
+    "MessagingCatalogProtocol": {
+      "type": "string",
+      "description": "The messaging catalog protocol.",
+      "enum": [
+        "NotSet",
+        "Any",
+        "AMQP_1_0"
+      ],
+      "x-ms-enum": {
+        "name": "MessagingCatalogProtocol",
         "modelAsString": true
       }
     }
