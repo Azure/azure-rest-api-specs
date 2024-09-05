@@ -59,7 +59,7 @@ op getCodeExecutionResult is Foundations.Operation<
 
 interface SessionResourceFiles {
   @doc("List the file resources.")
-  listFileMetadata is SessionOperations.ResourceList<SessionResourceFile>;
+  listFilesMetadata is SessionOperations.ResourceList<SessionResourceFile>;
 
   @doc("Get the file resource.")
   getFileMetadata is SessionOperations.ResourceRead<SessionResourceFile>;
