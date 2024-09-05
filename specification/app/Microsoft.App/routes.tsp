@@ -41,7 +41,6 @@ op executeCode is Foundations.Operation<
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" ""
-@Foundations.Private.ensureVerb("ResourceRead", "GET")
 @doc("Get the code execution result.")
 @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/sessionPools/{sessionPoolName}/codeExecutionResult")
 op getCodeExecutionResult is Foundations.Operation<

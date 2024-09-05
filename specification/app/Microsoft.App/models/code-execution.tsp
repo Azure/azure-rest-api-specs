@@ -30,7 +30,7 @@ model SessionCodeExecutionResult {
   ...SessionCodeExecutionRequest;
 
   @visibility("read")
-  @doc("Session code execution id")
+  @doc("Session code execution id.")
   id: string;
 
   @doc("The status of the code execution, indicates whether succeeded or not.")
