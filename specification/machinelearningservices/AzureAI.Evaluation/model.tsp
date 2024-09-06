@@ -117,8 +117,8 @@ model PagedEvaluation {
   nextLink?: ResourceLocation<Evaluation>;
 }
 
-@doc("Update Evaluation Tags")
-model UpdateEvaluationTags {
+@doc("Update Evaluation Request")
+model UpdateEvaluationRequest {
   @doc("Tags to be updated.")
   tags: Record<string>;
 }
