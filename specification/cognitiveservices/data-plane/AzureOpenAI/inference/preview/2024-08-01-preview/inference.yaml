@@ -37,7 +37,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/createCompletionRequest'
+              $ref: "#/components/schemas/createCompletionRequest"
             example:
               prompt: |-
                 Negate the following sentence.The price for bubblegum increased on thursday.
@@ -45,12 +45,12 @@ paths:
                  Negated Sentence:
               max_tokens: 50
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/createCompletionResponse'
+                $ref: "#/components/schemas/createCompletionResponse"
               example:
                 model: davinci
                 object: text_completion
@@ -71,7 +71,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/errorResponse'
+                $ref: "#/components/schemas/errorResponse"
           headers:
             apim-request-id:
               description: Request ID for troubleshooting purposes
@@ -110,7 +110,7 @@ paths:
                     Unless you are embedding code, we suggest replacing newlines (\n) in your input with a single space, as we have observed inferior results when newlines are present.
                   oneOf:
                     - type: string
-                      default: ''
+                      default: ""
                       example: This is a test.
                       nullable: true
                     - type: array
@@ -142,7 +142,7 @@ paths:
               required:
                 - input
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
@@ -211,16 +211,16 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/createChatCompletionRequest'
+              $ref: "#/components/schemas/createChatCompletionRequest"
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
               schema:
                 oneOf:
-                  - $ref: '#/components/schemas/createChatCompletionResponse'
-                  - $ref: '#/components/schemas/createChatCompletionStreamResponse'
+                  - $ref: "#/components/schemas/createChatCompletionResponse"
+                  - $ref: "#/components/schemas/createChatCompletionStreamResponse"
           headers:
             apim-request-id:
               description: Request ID for troubleshooting purposes
@@ -231,7 +231,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/errorResponse'
+                $ref: "#/components/schemas/errorResponse"
           headers:
             apim-request-id:
               description: Request ID for troubleshooting purposes
@@ -278,16 +278,16 @@ paths:
         content:
           multipart/form-data:
             schema:
-              $ref: '#/components/schemas/createTranscriptionRequest'
+              $ref: "#/components/schemas/createTranscriptionRequest"
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
               schema:
                 oneOf:
-                  - $ref: '#/components/schemas/audioResponse'
-                  - $ref: '#/components/schemas/audioVerboseResponse'
+                  - $ref: "#/components/schemas/audioResponse"
+                  - $ref: "#/components/schemas/audioVerboseResponse"
             text/plain:
               schema:
                 type: string
@@ -321,16 +321,16 @@ paths:
         content:
           multipart/form-data:
             schema:
-              $ref: '#/components/schemas/createTranslationRequest'
+              $ref: "#/components/schemas/createTranslationRequest"
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
               schema:
                 oneOf:
-                  - $ref: '#/components/schemas/audioResponse'
-                  - $ref: '#/components/schemas/audioVerboseResponse'
+                  - $ref: "#/components/schemas/audioResponse"
+                  - $ref: "#/components/schemas/audioVerboseResponse"
             text/plain:
               schema:
                 type: string
@@ -364,9 +364,9 @@ paths:
         content:
           multipart/form-data:
             schema:
-              $ref: '#/components/schemas/createSpeechRequest'
+              $ref: "#/components/schemas/createSpeechRequest"
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/octet-stream:
@@ -385,7 +385,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/imageGenerationsRequest'
+              $ref: "#/components/schemas/imageGenerationsRequest"
       parameters:
         - in: path
           name: deployment-id
@@ -402,18 +402,18 @@ paths:
             example: 2024-08-01-preview
             description: api version
       responses:
-        '200':
+        "200":
           description: Ok
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/generateImagesResponse'
+                $ref: "#/components/schemas/generateImagesResponse"
         default:
           description: An error occurred.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/dalleErrorResponse'
+                $ref: "#/components/schemas/dalleErrorResponse"
       x-ms-examples:
         Create an image.:
           $ref: ./examples/image_generation.yaml
@@ -470,12 +470,12 @@ paths:
             example: 2024-08-01-preview
             description: api version
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/listAssistantsResponse'
+                $ref: "#/components/schemas/listAssistantsResponse"
       x-ms-examples:
         Create an image.:
           $ref: ./examples/list_assistants.yaml
@@ -485,30 +485,30 @@ paths:
         - Assistants
       summary: Create an assistant with a model and instructions.
       parameters:
-      - in: query
-        name: api-version
-        required: true
-        schema:
-          type: string
-          example: 2024-08-01-preview
-        description: api version
+        - in: query
+          name: api-version
+          required: true
+          schema:
+            type: string
+            example: 2024-08-01-preview
+          description: api version
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/createAssistantRequest'
+              $ref: "#/components/schemas/createAssistantRequest"
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/assistantObject'
+                $ref: "#/components/schemas/assistantObject"
       x-ms-examples:
         Create an assistant.:
           $ref: ./examples/create_assistant.yaml
-          
+
   /assistants/{assistant_id}:
     get:
       operationId: Get_Assistant
@@ -530,12 +530,12 @@ paths:
             example: 2024-08-01-preview
             description: api version
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/assistantObject'
+                $ref: "#/components/schemas/assistantObject"
       x-ms-examples:
         Create an assistant.:
           $ref: ./examples/retrieve_assistant.yaml
@@ -563,14 +563,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/modifyAssistantRequest'
+              $ref: "#/components/schemas/modifyAssistantRequest"
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/assistantObject'
+                $ref: "#/components/schemas/assistantObject"
       x-ms-examples:
         Create an assistant.:
           $ref: ./examples/modify_assistant.yaml
@@ -594,12 +594,12 @@ paths:
             example: 2024-08-01-preview
             description: api version
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/deleteAssistantResponse'
+                $ref: "#/components/schemas/deleteAssistantResponse"
       x-ms-examples:
         Create an assistant.:
           $ref: ./examples/delete_assistant.yaml
@@ -622,14 +622,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/createThreadRequest'
+              $ref: "#/components/schemas/createThreadRequest"
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/threadObject'
+                $ref: "#/components/schemas/threadObject"
       x-ms-examples:
         Create a thread.:
           $ref: ./examples/create_thread.yaml
@@ -654,12 +654,12 @@ paths:
             example: 2024-08-01-preview
             description: api version
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/threadObject'
+                $ref: "#/components/schemas/threadObject"
       x-ms-examples:
         Create a thread.:
           $ref: ./examples/retrieve_thread.yaml
@@ -687,14 +687,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/modifyThreadRequest'
+              $ref: "#/components/schemas/modifyThreadRequest"
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/threadObject'
+                $ref: "#/components/schemas/threadObject"
       x-ms-examples:
         Modify a thread.:
           $ref: ./examples/modify_thread.yaml
@@ -718,12 +718,12 @@ paths:
             example: 2024-08-01-preview
             description: api version
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/deleteThreadResponse'
+                $ref: "#/components/schemas/deleteThreadResponse"
       x-ms-examples:
         Delete a thread.:
           $ref: ./examples/delete_thread.yaml
@@ -791,12 +791,12 @@ paths:
             example: 2024-08-01-preview
             description: api version
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/listMessagesResponse'
+                $ref: "#/components/schemas/listMessagesResponse"
       x-ms-examples:
         List messages.:
           $ref: ./examples/list_messages.yaml
@@ -824,14 +824,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/createMessageRequest'
+              $ref: "#/components/schemas/createMessageRequest"
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/messageObject'
+                $ref: "#/components/schemas/messageObject"
       x-ms-examples:
         Create a message.:
           $ref: ./examples/create_message.yaml
@@ -862,12 +862,12 @@ paths:
             example: 2024-08-01-preview
             description: api version
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/messageObject'
+                $ref: "#/components/schemas/messageObject"
       x-ms-examples:
         Retrieve a message.:
           $ref: ./examples/get_message.yaml
@@ -901,14 +901,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/modifyMessageRequest'
+              $ref: "#/components/schemas/modifyMessageRequest"
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/messageObject'
+                $ref: "#/components/schemas/messageObject"
       x-ms-examples:
         Modify a message.:
           $ref: ./examples/modify_message.yaml
@@ -931,14 +931,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/createThreadAndRunRequest'
+              $ref: "#/components/schemas/createThreadAndRunRequest"
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/runObject'
+                $ref: "#/components/schemas/runObject"
       x-ms-examples:
         Create a thread and run it.:
           $ref: ./examples/create_thread_and_run.yaml
@@ -997,12 +997,12 @@ paths:
             example: 2024-08-01-preview
             description: api version
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/listRunsResponse'
+                $ref: "#/components/schemas/listRunsResponse"
       x-ms-examples:
         List runs.:
           $ref: ./examples/list_runs.yaml
@@ -1030,14 +1030,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/createRunRequest'
+              $ref: "#/components/schemas/createRunRequest"
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/runObject'
+                $ref: "#/components/schemas/runObject"
       x-ms-examples:
         Create a run.:
           $ref: ./examples/create_run.yaml
@@ -1068,12 +1068,12 @@ paths:
             example: 2024-08-01-preview
             description: api version
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/runObject'
+                $ref: "#/components/schemas/runObject"
       x-ms-examples:
         Retrieve a run.:
           $ref: ./examples/get_run.yaml
@@ -1107,14 +1107,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/modifyRunRequest'
+              $ref: "#/components/schemas/modifyRunRequest"
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/runObject'
+                $ref: "#/components/schemas/runObject"
       x-ms-examples:
         Modify a run.:
           $ref: ./examples/modify_run.yaml
@@ -1150,14 +1150,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/submitToolOutputsRunRequest'
+              $ref: "#/components/schemas/submitToolOutputsRunRequest"
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/runObject'
+                $ref: "#/components/schemas/runObject"
       x-ms-examples:
         Submit tool outputs to a run.:
           $ref: ./examples/submit_tool_outputs_to_run.yaml
@@ -1188,12 +1188,12 @@ paths:
             example: 2024-08-01-preview
           description: api version
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/runObject'
+                $ref: "#/components/schemas/runObject"
       x-ms-examples:
         Cancel a run.:
           $ref: ./examples/cancel_run.yaml
@@ -1258,12 +1258,12 @@ paths:
             example: 2024-08-01-preview
           description: api version
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/listRunStepsResponse'
+                $ref: "#/components/schemas/listRunStepsResponse"
       x-ms-examples:
         List run steps.:
           $ref: ./examples/list_run_steps.yaml
@@ -1300,12 +1300,12 @@ paths:
             example: 2024-08-01-preview
           description: api version
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/runStepObject'
+                $ref: "#/components/schemas/runStepObject"
       x-ms-examples:
         Retrieve a run step.:
           $ref: ./examples/get_run_step.yaml
@@ -1516,7 +1516,7 @@ paths:
             type: string
             default: desc
             enum: ["asc", "desc"]
-            x-ms-enum: 
+            x-ms-enum:
               name: ListVectorStoreFilesOrder
               modelAsString: true
               values:
@@ -1789,7 +1789,7 @@ paths:
       x-ms-examples:
         Cancel a vector store file batch.:
           $ref: ./examples/cancel_vector_store_file_batch.yaml
-     
+
   /vector_stores/{vector_store_id}/file_batches/{batch_id}/files:
     get:
       operationId: List_Vector_Store_File_Batch_Files
@@ -1823,7 +1823,7 @@ paths:
             type: string
             default: desc
             enum: ["asc", "desc"]
-            x-ms-enum: 
+            x-ms-enum:
               name: ListVectorStoreFilesOrder
               modelAsString: true
               values:
@@ -1870,14 +1870,14 @@ paths:
       x-ms-examples:
         List vector store files in a batch.:
           $ref: ./examples/list_vector_store_file_batch.yaml
-  
+
 components:
   schemas:
     errorResponse:
       type: object
       properties:
         error:
-          $ref: '#/components/schemas/error'
+          $ref: "#/components/schemas/error"
     errorBase:
       type: object
       properties:
@@ -1888,22 +1888,22 @@ components:
     error:
       type: object
       allOf:
-        - $ref: '#/components/schemas/errorBase'
+        - $ref: "#/components/schemas/errorBase"
       properties:
         param:
           type: string
         type:
           type: string
         inner_error:
-          $ref: '#/components/schemas/innerError'
+          $ref: "#/components/schemas/innerError"
     innerError:
       description: Inner error with additional details.
       type: object
       properties:
         code:
-          $ref: '#/components/schemas/innerErrorCode'
+          $ref: "#/components/schemas/innerErrorCode"
         content_filter_results:
-          $ref: '#/components/schemas/contentFilterPromptResults'
+          $ref: "#/components/schemas/contentFilterPromptResults"
     innerErrorCode:
       description: Error codes for the inner error object.
       enum:
@@ -1919,26 +1919,26 @@ components:
       type: object
       properties:
         error:
-          $ref: '#/components/schemas/dalleError'
+          $ref: "#/components/schemas/dalleError"
     dalleError:
       type: object
       allOf:
-        - $ref: '#/components/schemas/errorBase'
+        - $ref: "#/components/schemas/errorBase"
       properties:
         param:
           type: string
         type:
           type: string
         inner_error:
-          $ref: '#/components/schemas/dalleInnerError'
+          $ref: "#/components/schemas/dalleInnerError"
     dalleInnerError:
       description: Inner error with additional details.
       type: object
       properties:
         code:
-          $ref: '#/components/schemas/innerErrorCode'
+          $ref: "#/components/schemas/innerErrorCode"
         content_filter_results:
-          $ref: '#/components/schemas/dalleFilterResults'
+          $ref: "#/components/schemas/dalleFilterResults"
         revised_prompt:
           type: string
           description: The prompt that was used to generate the image, if there was any revision to the prompt.
@@ -1952,7 +1952,7 @@ components:
     contentFilterSeverityResult:
       type: object
       allOf:
-        - $ref: '#/components/schemas/contentFilterResultBase'
+        - $ref: "#/components/schemas/contentFilterResultBase"
         - properties:
             severity:
               type: string
@@ -1979,7 +1979,7 @@ components:
     contentFilterDetectedResult:
       type: object
       allOf:
-        - $ref: '#/components/schemas/contentFilterResultBase'
+        - $ref: "#/components/schemas/contentFilterResultBase"
         - properties:
             detected:
               type: boolean
@@ -1989,7 +1989,7 @@ components:
     contentFilterDetectedWithCitationResult:
       type: object
       allOf:
-        - $ref: '#/components/schemas/contentFilterDetectedResult'
+        - $ref: "#/components/schemas/contentFilterDetectedResult"
         - properties:
             citation:
               type: object
@@ -2004,7 +2004,7 @@ components:
     contentFilterIdResult:
       type: object
       allOf:
-        - $ref: '#/components/schemas/contentFilterResultBase'
+        - $ref: "#/components/schemas/contentFilterResultBase"
         - properties:
             id:
               type: string
@@ -2016,55 +2016,53 @@ components:
       description: Information about the content filtering results.
       properties:
         sexual:
-          $ref: '#/components/schemas/contentFilterSeverityResult'
+          $ref: "#/components/schemas/contentFilterSeverityResult"
         violence:
-          $ref: '#/components/schemas/contentFilterSeverityResult'
+          $ref: "#/components/schemas/contentFilterSeverityResult"
         hate:
-          $ref: '#/components/schemas/contentFilterSeverityResult'
+          $ref: "#/components/schemas/contentFilterSeverityResult"
         self_harm:
-          $ref: '#/components/schemas/contentFilterSeverityResult'
+          $ref: "#/components/schemas/contentFilterSeverityResult"
         profanity:
-          $ref: '#/components/schemas/contentFilterDetectedResult'
+          $ref: "#/components/schemas/contentFilterDetectedResult"
         custom_blocklists:
-          $ref: '#/components/schemas/contentFilterDetailedResults'
+          $ref: "#/components/schemas/contentFilterDetailedResults"
         error:
-          $ref: '#/components/schemas/errorBase'
+          $ref: "#/components/schemas/errorBase"
     contentFilterPromptResults:
       type: object
       description: Information about the content filtering category (hate, sexual, violence, self_harm), if it has been detected, as well as the severity level (very_low, low, medium, high-scale that determines the intensity and risk level of harmful content) and if it has been filtered or not. Information about jailbreak content and profanity, if it has been detected, and if it has been filtered or not. And information about customer block list, if it has been filtered and its id.
       allOf:
-        - $ref: '#/components/schemas/contentFilterResultsBase'
+        - $ref: "#/components/schemas/contentFilterResultsBase"
         - properties:
             jailbreak:
-              $ref: '#/components/schemas/contentFilterDetectedResult'
+              $ref: "#/components/schemas/contentFilterDetectedResult"
             indirect_attack:
-              $ref: '#/components/schemas/contentFilterDetectedResult'
+              $ref: "#/components/schemas/contentFilterDetectedResult"
     contentFilterChoiceResults:
       type: object
       description: Information about the content filtering category (hate, sexual, violence, self_harm), if it has been detected, as well as the severity level (very_low, low, medium, high-scale that determines the intensity and risk level of harmful content) and if it has been filtered or not. Information about third party text and profanity, if it has been detected, and if it has been filtered or not. And information about customer block list, if it has been filtered and its id.
       allOf:
-        - $ref: '#/components/schemas/contentFilterResultsBase'
+        - $ref: "#/components/schemas/contentFilterResultsBase"
         - properties:
             protected_material_text:
-              $ref: '#/components/schemas/contentFilterDetectedResult'
+              $ref: "#/components/schemas/contentFilterDetectedResult"
         - properties:
             protected_material_code:
-              $ref: '#/components/schemas/contentFilterDetectedWithCitationResult'
+              $ref: "#/components/schemas/contentFilterDetectedWithCitationResult"
     contentFilterDetailedResults:
-        type: object
-        description: Content filtering results with a detail of content filter ids for the filtered segments.
-        allOf:
-            - 
-                $ref: '#/components/schemas/contentFilterResultBase'
-            - 
-                properties:
-                    details:
-                        items:
-                            $ref: '#/components/schemas/contentFilterIdResult'
-                        type: array
-        required:
-            - filtered
-            - details
+      type: object
+      description: Content filtering results with a detail of content filter ids for the filtered segments.
+      allOf:
+        - $ref: "#/components/schemas/contentFilterResultBase"
+        - properties:
+            details:
+              items:
+                $ref: "#/components/schemas/contentFilterIdResult"
+              type: array
+      required:
+        - filtered
+        - details
     promptFilterResult:
       type: object
       description: Content filtering results for a single prompt in the request.
@@ -2072,36 +2070,36 @@ components:
         prompt_index:
           type: integer
         content_filter_results:
-          $ref: '#/components/schemas/contentFilterPromptResults'
+          $ref: "#/components/schemas/contentFilterPromptResults"
     promptFilterResults:
       type: array
       description: Content filtering results for zero or more prompts in the request. In a streaming request, results for different prompts may arrive at different times or in different orders.
       items:
-        $ref: '#/components/schemas/promptFilterResult'
+        $ref: "#/components/schemas/promptFilterResult"
     dalleContentFilterResults:
       type: object
       description: Information about the content filtering results.
       properties:
         sexual:
-          $ref: '#/components/schemas/contentFilterSeverityResult'
+          $ref: "#/components/schemas/contentFilterSeverityResult"
         violence:
-          $ref: '#/components/schemas/contentFilterSeverityResult'
+          $ref: "#/components/schemas/contentFilterSeverityResult"
         hate:
-          $ref: '#/components/schemas/contentFilterSeverityResult'
+          $ref: "#/components/schemas/contentFilterSeverityResult"
         self_harm:
-          $ref: '#/components/schemas/contentFilterSeverityResult'
+          $ref: "#/components/schemas/contentFilterSeverityResult"
     dalleFilterResults:
       type: object
       description: Information about the content filtering category (hate, sexual, violence, self_harm), if it has been detected, as well as the severity level (very_low, low, medium, high-scale that determines the intensity and risk level of harmful content) and if it has been filtered or not. Information about jailbreak content and profanity, if it has been detected, and if it has been filtered or not. And information about customer block list, if it has been filtered and its id.
       allOf:
-        - $ref: '#/components/schemas/dalleContentFilterResults'
+        - $ref: "#/components/schemas/dalleContentFilterResults"
         - properties:
             profanity:
-              $ref: '#/components/schemas/contentFilterDetectedResult'
+              $ref: "#/components/schemas/contentFilterDetectedResult"
             jailbreak:
-              $ref: '#/components/schemas/contentFilterDetectedResult'
+              $ref: "#/components/schemas/contentFilterDetectedResult"
             custom_blocklists:
-              $ref: '#/components/schemas/contentFilterDetailedResults'
+              $ref: "#/components/schemas/contentFilterDetailedResults"
     chatCompletionsRequestCommon:
       type: object
       properties:
@@ -2126,7 +2124,7 @@ components:
           example: 1
           nullable: true
         stream:
-          description: 'If set, partial message deltas will be sent, like in ChatGPT. Tokens will be sent as data-only server-sent events as they become available, with the stream terminated by a `data: [DONE]` message.'
+          description: "If set, partial message deltas will be sent, like in ChatGPT. Tokens will be sent as data-only server-sent events as they become available, with the stream terminated by a `data: [DONE]` message."
           type: boolean
           nullable: true
           default: false
@@ -2390,7 +2388,7 @@ components:
               text:
                 type: string
               content_filter_results:
-                $ref: '#/components/schemas/contentFilterChoiceResults'
+                $ref: "#/components/schemas/contentFilterChoiceResults"
         created:
           type: integer
           description: The Unix timestamp (in seconds) of when the completion was created.
@@ -2398,7 +2396,7 @@ components:
           type: string
           description: The model used for completion.
         prompt_filter_results:
-          $ref: '#/components/schemas/promptFilterResults'
+          $ref: "#/components/schemas/promptFilterResults"
         system_fingerprint:
           type: string
           description: |
@@ -2421,21 +2419,21 @@ components:
     createChatCompletionRequest:
       type: object
       allOf:
-        - $ref: '#/components/schemas/chatCompletionsRequestCommon'
+        - $ref: "#/components/schemas/chatCompletionsRequestCommon"
         - properties:
             messages:
               description: A list of messages comprising the conversation so far. [Example Python code](https://github.com/openai/openai-cookbook/blob/main/examples/How_to_format_inputs_to_ChatGPT_models.ipynb).
               type: array
               minItems: 1
               items:
-                $ref: '#/components/schemas/chatCompletionRequestMessage'
+                $ref: "#/components/schemas/chatCompletionRequestMessage"
             data_sources:
               type: array
               description: |2-
                   The configuration entries for Azure OpenAI chat extensions that use them.
                   This additional specification is only compatible with Azure OpenAI.
               items:
-                $ref: '#/components/schemas/azureChatExtensionConfiguration'
+                $ref: "#/components/schemas/azureChatExtensionConfiguration"
             frequency_penalty:
               type: number
               default: 0
@@ -2730,7 +2728,7 @@ components:
             - arguments
             - name
       required:
-        - role      
+        - role
 
     chatCompletionRequestToolMessage:
       type: object
@@ -2860,7 +2858,7 @@ components:
       type: object
       properties:
         type:
-          $ref: '#/components/schemas/azureChatExtensionType'
+          $ref: "#/components/schemas/azureChatExtensionType"
       description: |2-
           A representation of configuration data for a single Azure OpenAI chat extension. This will be used by a chat
           completions request that should use Azure OpenAI chat extensions to augment the response behavior.
@@ -2868,11 +2866,11 @@ components:
       discriminator:
         propertyName: type
         mapping:
-          azure_search: '#/components/schemas/azureSearchChatExtensionConfiguration'
-          azure_cosmos_db: '#/components/schemas/azureCosmosDBChatExtensionConfiguration'
-          elasticsearch: '#/components/schemas/elasticsearchChatExtensionConfiguration'
-          mongo_db: '#/components/schemas/mongoDBChatExtensionConfiguration'          
-          pinecone: '#/components/schemas/pineconeChatExtensionConfiguration'
+          azure_search: "#/components/schemas/azureSearchChatExtensionConfiguration"
+          azure_cosmos_db: "#/components/schemas/azureCosmosDBChatExtensionConfiguration"
+          elasticsearch: "#/components/schemas/elasticsearchChatExtensionConfiguration"
+          mongo_db: "#/components/schemas/mongoDBChatExtensionConfiguration"
+          pinecone: "#/components/schemas/pineconeChatExtensionConfiguration"
     azureChatExtensionType:
       type: string
       description: |2-
@@ -2900,7 +2898,7 @@ components:
             description: Represents the use of Elasticsearch® index as an Azure OpenAI chat extension.
           - name: mongoDB
             value: mongo_db
-            description: Represents the use of Mongo DB as an Azure OpenAI chat extension.            
+            description: Represents the use of Mongo DB as an Azure OpenAI chat extension.
           - name: pinecone
             value: pinecone
             description: Represents the use of Pinecone index as an Azure OpenAI chat extension.
@@ -2911,10 +2909,10 @@ components:
         A specific representation of configurable options for Azure Search when using it as an Azure OpenAI chat
         extension.
       allOf:
-        - $ref: '#/components/schemas/azureChatExtensionConfiguration'
+        - $ref: "#/components/schemas/azureChatExtensionConfiguration"
         - properties:
             parameters:
-              $ref: '#/components/schemas/azureSearchChatExtensionParameters'
+              $ref: "#/components/schemas/azureSearchChatExtensionParameters"
       x-ms-discriminator-value: azure_search
     azureSearchChatExtensionParameters:
       required:
@@ -2925,10 +2923,10 @@ components:
       properties:
         authentication:
           oneOf:
-            - $ref: '#/components/schemas/onYourDataApiKeyAuthenticationOptions'
-            - $ref: '#/components/schemas/onYourDataSystemAssignedManagedIdentityAuthenticationOptions'
-            - $ref: '#/components/schemas/onYourDataUserAssignedManagedIdentityAuthenticationOptions'
-            - $ref: '#/components/schemas/onYourDataAccessTokenAuthenticationOptions'
+            - $ref: "#/components/schemas/onYourDataApiKeyAuthenticationOptions"
+            - $ref: "#/components/schemas/onYourDataSystemAssignedManagedIdentityAuthenticationOptions"
+            - $ref: "#/components/schemas/onYourDataUserAssignedManagedIdentityAuthenticationOptions"
+            - $ref: "#/components/schemas/onYourDataAccessTokenAuthenticationOptions"
         top_n_documents:
           type: integer
           description: The configured top number of documents to feature for the configured query.
@@ -2958,9 +2956,9 @@ components:
           type: string
           description: The name of the index to use as available in the referenced Azure Search resource.
         fields_mapping:
-          $ref: '#/components/schemas/azureSearchIndexFieldMappingOptions'
+          $ref: "#/components/schemas/azureSearchIndexFieldMappingOptions"
         query_type:
-          $ref: '#/components/schemas/azureSearchQueryType'
+          $ref: "#/components/schemas/azureSearchQueryType"
         semantic_configuration:
           type: string
           description: The additional semantic configuration for the query.
@@ -2969,14 +2967,14 @@ components:
           description: Search filter.
         embedding_dependency:
           oneOf:
-            - $ref: '#/components/schemas/onYourDataEndpointVectorizationSource'
-            - $ref: '#/components/schemas/onYourDataDeploymentNameVectorizationSource'
-            - $ref: '#/components/schemas/onYourDataIntegratedVectorizationSource'
+            - $ref: "#/components/schemas/onYourDataEndpointVectorizationSource"
+            - $ref: "#/components/schemas/onYourDataDeploymentNameVectorizationSource"
+            - $ref: "#/components/schemas/onYourDataIntegratedVectorizationSource"
         include_contexts:
           type: array
           description: The included properties of the output context. If not specified, the default value is `citations` and `intent`.
           items:
-            $ref: '#/components/schemas/onYourDataContextProperty'
+            $ref: "#/components/schemas/onYourDataContextProperty"
       description: Parameters for Azure Search when used as an Azure OpenAI chat extension.
     azureSearchIndexFieldMappingOptions:
       type: object
@@ -3044,10 +3042,10 @@ components:
         A specific representation of configurable options for Azure Cosmos DB when using it as an Azure OpenAI chat
         extension.
       allOf:
-        - $ref: '#/components/schemas/azureChatExtensionConfiguration'
+        - $ref: "#/components/schemas/azureChatExtensionConfiguration"
         - properties:
             parameters:
-              $ref: '#/components/schemas/azureCosmosDBChatExtensionParameters'
+              $ref: "#/components/schemas/azureCosmosDBChatExtensionParameters"
       x-ms-discriminator-value: azure_cosmos_db
     azureCosmosDBChatExtensionParameters:
       required:
@@ -3060,7 +3058,7 @@ components:
       type: object
       properties:
         authentication:
-          $ref: '#/components/schemas/onYourDataConnectionStringAuthenticationOptions'
+          $ref: "#/components/schemas/onYourDataConnectionStringAuthenticationOptions"
         top_n_documents:
           type: integer
           description: The configured top number of documents to feature for the configured query.
@@ -3092,16 +3090,16 @@ components:
           type: string
           description: The MongoDB vCore index name to use with Azure Cosmos DB.
         fields_mapping:
-          $ref: '#/components/schemas/azureCosmosDBFieldMappingOptions'
+          $ref: "#/components/schemas/azureCosmosDBFieldMappingOptions"
         embedding_dependency:
           oneOf:
-            - $ref: '#/components/schemas/onYourDataEndpointVectorizationSource'
-            - $ref: '#/components/schemas/onYourDataDeploymentNameVectorizationSource'
+            - $ref: "#/components/schemas/onYourDataEndpointVectorizationSource"
+            - $ref: "#/components/schemas/onYourDataDeploymentNameVectorizationSource"
         include_contexts:
           type: array
           description: The included properties of the output context. If not specified, the default value is `citations` and `intent`.
           items:
-            $ref: '#/components/schemas/onYourDataContextProperty'
+            $ref: "#/components/schemas/onYourDataContextProperty"
       description: |-
         Parameters to use when configuring Azure OpenAI On Your Data chat extensions when using Azure Cosmos DB for
         MongoDB vCore.
@@ -3141,10 +3139,10 @@ components:
         A specific representation of configurable options for Elasticsearch when using it as an Azure OpenAI chat
         extension.
       allOf:
-        - $ref: '#/components/schemas/azureChatExtensionConfiguration'
+        - $ref: "#/components/schemas/azureChatExtensionConfiguration"
         - properties:
             parameters:
-              $ref: '#/components/schemas/elasticsearchChatExtensionParameters'
+              $ref: "#/components/schemas/elasticsearchChatExtensionParameters"
       x-ms-discriminator-value: elasticsearch
     elasticsearchChatExtensionParameters:
       required:
@@ -3155,8 +3153,8 @@ components:
       properties:
         authentication:
           oneOf:
-            - $ref: '#/components/schemas/onYourDataKeyAndKeyIdAuthenticationOptions'
-            - $ref: '#/components/schemas/onYourDataEncodedApiKeyAuthenticationOptions'
+            - $ref: "#/components/schemas/onYourDataKeyAndKeyIdAuthenticationOptions"
+            - $ref: "#/components/schemas/onYourDataEncodedApiKeyAuthenticationOptions"
         top_n_documents:
           type: integer
           description: The configured top number of documents to feature for the configured query.
@@ -3186,20 +3184,20 @@ components:
           type: string
           description: The index name of Elasticsearch®.
         fields_mapping:
-          $ref: '#/components/schemas/elasticsearchIndexFieldMappingOptions'
+          $ref: "#/components/schemas/elasticsearchIndexFieldMappingOptions"
         query_type:
-          $ref: '#/components/schemas/elasticsearchQueryType'
+          $ref: "#/components/schemas/elasticsearchQueryType"
         embedding_dependency:
           oneOf:
-            - $ref: '#/components/schemas/onYourDataEndpointVectorizationSource'
-            - $ref: '#/components/schemas/onYourDataDeploymentNameVectorizationSource'
-            - $ref: '#/components/schemas/onYourDataModelIdVectorizationSource'
+            - $ref: "#/components/schemas/onYourDataEndpointVectorizationSource"
+            - $ref: "#/components/schemas/onYourDataDeploymentNameVectorizationSource"
+            - $ref: "#/components/schemas/onYourDataModelIdVectorizationSource"
         include_contexts:
           type: array
           description: The included properties of the output context. If not specified, the default value is `citations` and `intent`.
           items:
-            $ref: '#/components/schemas/onYourDataContextProperty'
-      description: 'Parameters to use when configuring Elasticsearch® as an Azure OpenAI chat extension. '
+            $ref: "#/components/schemas/onYourDataContextProperty"
+      description: "Parameters to use when configuring Elasticsearch® as an Azure OpenAI chat extension. "
     elasticsearchIndexFieldMappingOptions:
       type: object
       properties:
@@ -3249,10 +3247,10 @@ components:
         A specific representation of configurable options for Mongo DB when using it as an Azure OpenAI chat
         extension.
       allOf:
-        - $ref: '#/components/schemas/azureChatExtensionConfiguration'
+        - $ref: "#/components/schemas/azureChatExtensionConfiguration"
         - properties:
             parameters:
-              $ref: '#/components/schemas/mongoDBChatExtensionParameters'
+              $ref: "#/components/schemas/mongoDBChatExtensionParameters"
       x-ms-discriminator-value: mongo_db
     mongoDBChatExtensionParameters:
       required:
@@ -3267,7 +3265,7 @@ components:
       type: object
       properties:
         authentication:
-          $ref: '#/components/schemas/onYourDataUsernameAndPasswordAuthenticationOptions'
+          $ref: "#/components/schemas/onYourDataUsernameAndPasswordAuthenticationOptions"
         top_n_documents:
           type: integer
           description: The configured top number of documents to feature for the configured query.
@@ -3291,7 +3289,7 @@ components:
           format: int32
         endpoint:
           type: string
-          description: The name of the Mongo DB cluster endpoint.        
+          description: The name of the Mongo DB cluster endpoint.
         database_name:
           type: string
           description: The name of the Mongo DB database.
@@ -3300,21 +3298,21 @@ components:
           description: The name of the Mongo DB Collection.
         app_name:
           type: string
-          description: The name of the Mongo DB Application.          
+          description: The name of the Mongo DB Application.
         index_name:
           type: string
           description: The The name of the Mongo DB index.
         fields_mapping:
-          $ref: '#/components/schemas/mongoDBFieldMappingOptions'
+          $ref: "#/components/schemas/mongoDBFieldMappingOptions"
         embedding_dependency:
           oneOf:
-            - $ref: '#/components/schemas/onYourDataEndpointVectorizationSource'
-            - $ref: '#/components/schemas/onYourDataDeploymentNameVectorizationSource'
+            - $ref: "#/components/schemas/onYourDataEndpointVectorizationSource"
+            - $ref: "#/components/schemas/onYourDataDeploymentNameVectorizationSource"
         include_contexts:
           type: array
           description: The included properties of the output context. If not specified, the default value is `citations` and `intent`.
           items:
-            $ref: '#/components/schemas/onYourDataContextProperty'
+            $ref: "#/components/schemas/onYourDataContextProperty"
       description: |-
         Parameters to use when configuring Azure OpenAI On Your Data chat extensions when using Mongo DB.
 
@@ -3347,7 +3345,7 @@ components:
           items:
             type: string
       description: Optional settings to control how fields are processed when using a configured Mongo DB resource.
-    
+
     pineconeChatExtensionConfiguration:
       required:
         - parameters
@@ -3355,10 +3353,10 @@ components:
         A specific representation of configurable options for Pinecone when using it as an Azure OpenAI chat
         extension.
       allOf:
-        - $ref: '#/components/schemas/azureChatExtensionConfiguration'
+        - $ref: "#/components/schemas/azureChatExtensionConfiguration"
         - properties:
             parameters:
-              $ref: '#/components/schemas/pineconeChatExtensionParameters'
+              $ref: "#/components/schemas/pineconeChatExtensionParameters"
       x-ms-discriminator-value: pinecone
     pineconeChatExtensionParameters:
       required:
@@ -3370,7 +3368,7 @@ components:
       type: object
       properties:
         authentication:
-          $ref: '#/components/schemas/onYourDataApiKeyAuthenticationOptions'
+          $ref: "#/components/schemas/onYourDataApiKeyAuthenticationOptions"
         top_n_documents:
           type: integer
           description: The configured top number of documents to feature for the configured query.
@@ -3399,14 +3397,14 @@ components:
           type: string
           description: The name of the Pinecone database index.
         fields_mapping:
-          $ref: '#/components/schemas/pineconeFieldMappingOptions'
+          $ref: "#/components/schemas/pineconeFieldMappingOptions"
         embedding_dependency:
-          $ref: '#/components/schemas/onYourDataDeploymentNameVectorizationSource'
+          $ref: "#/components/schemas/onYourDataDeploymentNameVectorizationSource"
         include_contexts:
           type: array
           description: The included properties of the output context. If not specified, the default value is `citations` and `intent`.
           items:
-            $ref: '#/components/schemas/onYourDataContextProperty'
+            $ref: "#/components/schemas/onYourDataContextProperty"
       description: Parameters for configuring Azure OpenAI Pinecone chat extensions.
     pineconeFieldMappingOptions:
       required:
@@ -3437,19 +3435,19 @@ components:
       type: object
       properties:
         type:
-          $ref: '#/components/schemas/onYourDataAuthenticationType'
+          $ref: "#/components/schemas/onYourDataAuthenticationType"
       description: The authentication options for Azure OpenAI On Your Data.
       discriminator:
         propertyName: type
         mapping:
-          api_key: '#/components/schemas/onYourDataApiKeyAuthenticationOptions'
-          connection_string: '#/components/schemas/onYourDataConnectionStringAuthenticationOptions'
-          key_and_key_id: '#/components/schemas/onYourDataKeyAndKeyIdAuthenticationOptions'
-          encoded_api_key: '#/components/schemas/onYourDataEncodedApiKeyAuthenticationOptions'
-          access_token: '#/components/schemas/onYourDataAccessTokenAuthenticationOptions'
-          system_assigned_managed_identity: '#/components/schemas/onYourDataSystemAssignedManagedIdentityAuthenticationOptions'
-          user_assigned_managed_identity: '#/components/schemas/onYourDataUserAssignedManagedIdentityAuthenticationOptions'
-          username_and_password: '#/components/schemas/onYourDataUsernameAndPasswordAuthenticationOptions'
+          api_key: "#/components/schemas/onYourDataApiKeyAuthenticationOptions"
+          connection_string: "#/components/schemas/onYourDataConnectionStringAuthenticationOptions"
+          key_and_key_id: "#/components/schemas/onYourDataKeyAndKeyIdAuthenticationOptions"
+          encoded_api_key: "#/components/schemas/onYourDataEncodedApiKeyAuthenticationOptions"
+          access_token: "#/components/schemas/onYourDataAccessTokenAuthenticationOptions"
+          system_assigned_managed_identity: "#/components/schemas/onYourDataSystemAssignedManagedIdentityAuthenticationOptions"
+          user_assigned_managed_identity: "#/components/schemas/onYourDataUserAssignedManagedIdentityAuthenticationOptions"
+          username_and_password: "#/components/schemas/onYourDataUsernameAndPasswordAuthenticationOptions"
     onYourDataContextProperty:
       type: string
       description: The context property.
@@ -3509,13 +3507,13 @@ components:
             description: Authentication via user-assigned managed identity.
           - name: usernameAndPassword
             value: username_and_password
-            description: Authentication via username and password.          
+            description: Authentication via username and password.
     onYourDataApiKeyAuthenticationOptions:
       required:
         - key
       description: The authentication options for Azure OpenAI On Your Data when using an API key.
       allOf:
-        - $ref: '#/components/schemas/onYourDataAuthenticationOptions'
+        - $ref: "#/components/schemas/onYourDataAuthenticationOptions"
         - properties:
             key:
               type: string
@@ -3526,7 +3524,7 @@ components:
         - connection_string
       description: The authentication options for Azure OpenAI On Your Data when using a connection string.
       allOf:
-        - $ref: '#/components/schemas/onYourDataAuthenticationOptions'
+        - $ref: "#/components/schemas/onYourDataAuthenticationOptions"
         - properties:
             connection_string:
               type: string
@@ -3538,7 +3536,7 @@ components:
         - key_id
       description: The authentication options for Azure OpenAI On Your Data when using an Elasticsearch key and key ID pair.
       allOf:
-        - $ref: '#/components/schemas/onYourDataAuthenticationOptions'
+        - $ref: "#/components/schemas/onYourDataAuthenticationOptions"
         - properties:
             key:
               type: string
@@ -3552,7 +3550,7 @@ components:
         - encoded_api_key
       description: The authentication options for Azure OpenAI On Your Data when using an Elasticsearch encoded API key.
       allOf:
-        - $ref: '#/components/schemas/onYourDataAuthenticationOptions'
+        - $ref: "#/components/schemas/onYourDataAuthenticationOptions"
         - properties:
             encoded_api_key:
               type: string
@@ -3563,7 +3561,7 @@ components:
         - access_token
       description: The authentication options for Azure OpenAI On Your Data when using access token.
       allOf:
-        - $ref: '#/components/schemas/onYourDataAuthenticationOptions'
+        - $ref: "#/components/schemas/onYourDataAuthenticationOptions"
         - properties:
             access_token:
               type: string
@@ -3572,14 +3570,14 @@ components:
     onYourDataSystemAssignedManagedIdentityAuthenticationOptions:
       description: The authentication options for Azure OpenAI On Your Data when using a system-assigned managed identity.
       allOf:
-        - $ref: '#/components/schemas/onYourDataAuthenticationOptions'
+        - $ref: "#/components/schemas/onYourDataAuthenticationOptions"
       x-ms-discriminator-value: system_assigned_managed_identity
     onYourDataUserAssignedManagedIdentityAuthenticationOptions:
       required:
         - managed_identity_resource_id
       description: The authentication options for Azure OpenAI On Your Data when using a user-assigned managed identity.
       allOf:
-        - $ref: '#/components/schemas/onYourDataAuthenticationOptions'
+        - $ref: "#/components/schemas/onYourDataAuthenticationOptions"
         - properties:
             managed_identity_resource_id:
               type: string
@@ -3591,30 +3589,30 @@ components:
         - password
       description: The authentication options for Azure OpenAI On Your Data when using a username and a password.
       allOf:
-        - $ref: '#/components/schemas/onYourDataAuthenticationOptions'
+        - $ref: "#/components/schemas/onYourDataAuthenticationOptions"
         - properties:
             username:
               type: string
               description: The username to use for authentication.
             password:
               type: string
-              description: The password. to use for authentication.              
-      x-ms-discriminator-value: username_and_password    
+              description: The password. to use for authentication.
+      x-ms-discriminator-value: username_and_password
     onYourDataVectorizationSource:
       required:
         - type
       type: object
       properties:
         type:
-          $ref: '#/components/schemas/onYourDataVectorizationSourceType'
+          $ref: "#/components/schemas/onYourDataVectorizationSourceType"
       description: An abstract representation of a vectorization source for Azure OpenAI On Your Data with vector search.
       discriminator:
         propertyName: type
         mapping:
-          endpoint: '#/components/schemas/onYourDataEndpointVectorizationSource'
-          deployment_name: '#/components/schemas/onYourDataDeploymentNameVectorizationSource'
-          integrated: '#/components/schemas/onYourDataIntegratedVectorizationSource'
-          model_id: '#/components/schemas/onYourDataModelIdVectorizationSource'
+          endpoint: "#/components/schemas/onYourDataEndpointVectorizationSource"
+          deployment_name: "#/components/schemas/onYourDataDeploymentNameVectorizationSource"
+          integrated: "#/components/schemas/onYourDataIntegratedVectorizationSource"
+          model_id: "#/components/schemas/onYourDataModelIdVectorizationSource"
     onYourDataVectorizationSourceType:
       type: string
       description: |-
@@ -3640,7 +3638,7 @@ components:
               search even in private networks.
           - name: integrated
             value: integrated
-            description: Represents the integrated vectorizer defined within the search resource.              
+            description: Represents the integrated vectorizer defined within the search resource.
           - name: modelId
             value: model_id
             description: |-
@@ -3654,7 +3652,7 @@ components:
         The details of a a vectorization source, used by Azure OpenAI On Your Data when applying vector search, that is based
         on a public Azure OpenAI endpoint call for embeddings.
       allOf:
-        - $ref: '#/components/schemas/onYourDataVectorizationSource'
+        - $ref: "#/components/schemas/onYourDataVectorizationSource"
         - properties:
             endpoint:
               type: string
@@ -3662,8 +3660,8 @@ components:
               format: uri
             authentication:
               oneOf:
-                - $ref: '#/components/schemas/onYourDataApiKeyAuthenticationOptions'
-                - $ref: '#/components/schemas/onYourDataAccessTokenAuthenticationOptions'
+                - $ref: "#/components/schemas/onYourDataApiKeyAuthenticationOptions"
+                - $ref: "#/components/schemas/onYourDataAccessTokenAuthenticationOptions"
             dimensions:
               type: integer
               description: The number of dimensions the embeddings should have. Only supported in `text-embedding-3` and later models.
@@ -3676,7 +3674,7 @@ components:
         The details of a a vectorization source, used by Azure OpenAI On Your Data when applying vector search, that is based
         on an internal embeddings model deployment name in the same Azure OpenAI resource.
       allOf:
-        - $ref: '#/components/schemas/onYourDataVectorizationSource'
+        - $ref: "#/components/schemas/onYourDataVectorizationSource"
         - properties:
             deployment_name:
               type: string
@@ -3690,8 +3688,8 @@ components:
       description: |-
         Represents the integrated vectorizer defined within the search resource.
       allOf:
-        - $ref: '#/components/schemas/onYourDataVectorizationSource'
-      x-ms-discriminator-value: integrated      
+        - $ref: "#/components/schemas/onYourDataVectorizationSource"
+      x-ms-discriminator-value: integrated
     onYourDataModelIdVectorizationSource:
       required:
         - model_id
@@ -3699,7 +3697,7 @@ components:
         The details of a a vectorization source, used by Azure OpenAI On Your Data when applying vector search, that is based
         on a search service model ID. Currently only supported by Elasticsearch®.
       allOf:
-        - $ref: '#/components/schemas/onYourDataVectorizationSource'
+        - $ref: "#/components/schemas/onYourDataVectorizationSource"
         - properties:
             model_id:
               type: string
@@ -3712,7 +3710,7 @@ components:
           type: array
           description: The data source retrieval result, used to generate the assistant message in the response.
           items:
-            $ref: '#/components/schemas/citation'
+            $ref: "#/components/schemas/citation"
           x-ms-identifiers: []
         intent:
           type: string
@@ -3721,7 +3719,7 @@ components:
           type: array
           description: All the retrieved documents.
           items:
-            $ref: '#/components/schemas/retrievedDocument'
+            $ref: "#/components/schemas/retrievedDocument"
 
       description: |2-
           A representation of the additional context information available when Azure OpenAI chat extensions are involved
@@ -3750,7 +3748,7 @@ components:
         rerank_score:
           type: number
           description: The rerank score of the retrieved document.
-          format: double          
+          format: double
       description: citation information for a chat completions response message.
     retrievedDocument:
       type: object
@@ -3759,7 +3757,7 @@ components:
         - search_queries
         - data_source_index
       allOf:
-        - $ref: '#/components/schemas/citation'
+        - $ref: "#/components/schemas/citation"
         - properties:
             search_queries:
               type: array
@@ -3775,7 +3773,7 @@ components:
               description: The original search score of the retrieved document.
               format: double
             filter_reason:
-              $ref: '#/components/schemas/filterReason'
+              $ref: "#/components/schemas/filterReason"
               description: Represents the rationale for filtering the document. If the document does not undergo filtering, this field will remain unset.
 
     filterReason:
@@ -3802,7 +3800,7 @@ components:
           type: string
           description: The ID of the tool call.
         type:
-          $ref: '#/components/schemas/toolCallType'
+          $ref: "#/components/schemas/toolCallType"
         function:
           type: object
           description: The function that the model called.
@@ -3833,7 +3831,7 @@ components:
             description: The tool call type is function.
     chatCompletionRequestMessageTool:
       allOf:
-        - $ref: '#/components/schemas/chatCompletionRequestMessage'
+        - $ref: "#/components/schemas/chatCompletionRequestMessage"
         - type: object
           nullable: true
           properties:
@@ -3849,7 +3847,7 @@ components:
         - content
     chatCompletionRequestMessageFunction:
       allOf:
-        - $ref: '#/components/schemas/chatCompletionRequestMessage'
+        - $ref: "#/components/schemas/chatCompletionRequestMessage"
         - type: object
           description: Deprecated. Message that represents a function.
           nullable: true
@@ -3877,7 +3875,7 @@ components:
           type: string
           description: A unique identifier for the chat completion.
         prompt_filter_results:
-          $ref: '#/components/schemas/promptFilterResults'
+          $ref: "#/components/schemas/promptFilterResults"
         choices:
           type: array
           description: A list of chat completion choices. Can be more than one if `n` is greater than 1.
@@ -3910,7 +3908,7 @@ components:
               message:
                 $ref: "#/components/schemas/chatCompletionResponseMessage"
               content_filter_results:
-                $ref: '#/components/schemas/contentFilterChoiceResults'
+                $ref: "#/components/schemas/contentFilterChoiceResults"
               logprobs: &chat_completion_response_logprobs
                 description: Log probability information for the choice.
                 type: object
@@ -4095,7 +4093,7 @@ components:
           description: A list of message content tokens with log probability information.
           type: array
           items:
-            $ref: '#/components/schemas/chatCompletionTokenLogprob'
+            $ref: "#/components/schemas/chatCompletionTokenLogprob"
           nullable: true
         refusal:
           description: A list of message refusal tokens with log probability information.
@@ -4152,7 +4150,7 @@ components:
       description: A chat completion message generated by the model.
       properties:
         role:
-          $ref: '#/components/schemas/chatCompletionResponseMessageRole'
+          $ref: "#/components/schemas/chatCompletionResponseMessageRole"
         refusal:
           type: string
           description: The refusal message generated by the model.
@@ -4165,11 +4163,11 @@ components:
           type: array
           description: The tool calls generated by the model, such as function calls.
           items:
-            $ref: '#/components/schemas/chatCompletionMessageToolCall'
+            $ref: "#/components/schemas/chatCompletionMessageToolCall"
         function_call:
-          $ref: '#/components/schemas/chatCompletionFunctionCall'
+          $ref: "#/components/schemas/chatCompletionFunctionCall"
         context:
-          $ref: '#/components/schemas/azureChatExtensionsMessageContext'
+          $ref: "#/components/schemas/azureChatExtensionsMessageContext"
       required:
         - role
         - content
@@ -4197,7 +4195,7 @@ components:
             - none
             - auto
             - required
-        - $ref: '#/components/schemas/chatCompletionNamedToolChoice'
+        - $ref: "#/components/schemas/chatCompletionNamedToolChoice"
     chatCompletionNamedToolChoice:
       type: object
       description: Specifies a tool the model should use. Use to force the model to call a specific function.
@@ -4216,8 +4214,8 @@ components:
           required:
             - name
       required:
-      - type
-      - function
+        - type
+        - function
 
     chatCompletionMessageToolCalls:
       type: array
@@ -4256,23 +4254,23 @@ components:
         - completion_tokens
         - total_tokens
     chatCompletionTool:
-            type: object
-            properties:
-                type:
-                    type: string
-                    enum: ["function"]
-                    description: The type of the tool. Currently, only `function` is supported.
-                function:
-                    $ref: "#/components/schemas/FunctionObject"
-            required:
-                - type
-                - function
-    
+      type: object
+      properties:
+        type:
+          type: string
+          enum: ["function"]
+          description: The type of the tool. Currently, only `function` is supported.
+        function:
+          $ref: "#/components/schemas/FunctionObject"
+      required:
+        - type
+        - function
+
     FunctionParameters:
       type: object
       description: "The parameters the functions accepts, described as a JSON Schema object. See the guide](https://learn.microsoft.com/en-us/azure/ai-services/openai/how-to/function-calling) for examples, and the [JSON Schema reference](https://json-schema.org/understanding-json-schema/) for documentation about the format. \n\nOmitting `parameters` defines a function with an empty parameter list."
       additionalProperties: true
-    
+
     FunctionObject:
       type: object
       properties:
@@ -4322,8 +4320,8 @@ components:
       properties:
         type:
           type: string
-          description: 'The type of response format being defined: `json_schema`'
-          enum: ['json_schema']
+          description: "The type of response format being defined: `json_schema`"
+          enum: ["json_schema"]
         json_schema:
           type: object
           properties:
@@ -4334,12 +4332,12 @@ components:
               type: string
               description: The name of the response format. Must be a-z, A-Z, 0-9, or contain underscores and dashes, with a maximum length of 64.
             schema:
-              $ref: '#/components/schemas/ResponseFormatJsonSchemaSchema'
+              $ref: "#/components/schemas/ResponseFormatJsonSchemaSchema"
             strict:
               type: boolean
               nullable: true
               default: false
-              description:  Whether to enable strict schema adherence when generating the output. If set to true, the model will always follow the exact schema defined in the `schema` field. Only a subset of JSON Schema is supported when `strict` is `true`.
+              description: Whether to enable strict schema adherence when generating the output. If set to true, the model will always follow the exact schema defined in the `schema` field. Only a subset of JSON Schema is supported when `strict` is `true`.
           required:
             - type
             - name
@@ -4366,7 +4364,7 @@ components:
           type: string
           description: An optional text to guide the model's style or continue a previous audio segment. The prompt should be in English.
         response_format:
-          $ref: '#/components/schemas/audioResponseFormat'
+          $ref: "#/components/schemas/audioResponseFormat"
         temperature:
           type: number
           default: 0
@@ -4386,7 +4384,7 @@ components:
       description: Translation or transcription response when response_format was verbose_json
       type: object
       allOf:
-        - $ref: '#/components/schemas/audioResponse'
+        - $ref: "#/components/schemas/audioResponse"
         - properties:
             task:
               type: string
@@ -4405,11 +4403,11 @@ components:
             segments:
               type: array
               items:
-                $ref: '#/components/schemas/audioSegment'
+                $ref: "#/components/schemas/audioSegment"
             words:
               type: array
               items:
-                $ref: '#/components/schemas/audioWord'
+                $ref: "#/components/schemas/audioWord"
 
       required:
         - text
@@ -4437,7 +4435,7 @@ components:
           type: string
           description: An optional text to guide the model's style or continue a previous audio segment. The prompt should match the audio language.
         response_format:
-          $ref: '#/components/schemas/audioResponseFormat'
+          $ref: "#/components/schemas/audioResponseFormat"
         temperature:
           type: number
           default: 0
@@ -4498,15 +4496,15 @@ components:
       type: object
       description: Transcription or translation word.
       properties:
-          word:
-            type: string
-            description: Word
-          start:
-            type: number
-            description: Word start offset.
-          end:
-            type: number
-            description: Word end offset.
+        word:
+          type: string
+          description: Word
+        start:
+          type: number
+          description: Word start offset.
+        end:
+          type: number
+          description: Word end offset.
     createSpeechRequest:
       type: object
       description: Speech request.
@@ -4633,25 +4631,25 @@ components:
           format: string
           example: a corgi in a field
           minLength: 1
-        'n':
+        "n":
           description: The number of images to generate.
           type: integer
           minimum: 1
           maximum: 1
           default: 1
         size:
-          $ref: '#/components/schemas/imageSize'
+          $ref: "#/components/schemas/imageSize"
         response_format:
-          $ref: '#/components/schemas/imagesResponseFormat'
+          $ref: "#/components/schemas/imagesResponseFormat"
         user:
           description: A unique identifier representing your end-user, which can help to monitor and detect abuse.
           type: string
           format: string
           example: user123456
         quality:
-          $ref: '#/components/schemas/imageQuality'
+          $ref: "#/components/schemas/imageQuality"
         style:
-          $ref: '#/components/schemas/imageStyle'
+          $ref: "#/components/schemas/imageStyle"
       required:
         - prompt
     generateImagesResponse:
@@ -4661,12 +4659,12 @@ components:
           type: integer
           format: unixtime
           description: The unix timestamp when the operation was created.
-          example: '1676540381'
+          example: "1676540381"
         data:
           type: array
           description: The result data of the operation, if successful
           items:
-            $ref: '#/components/schemas/imageResult'
+            $ref: "#/components/schemas/imageResult"
       required:
         - created
         - data
@@ -4682,12 +4680,12 @@ components:
           type: string
           description: The base64 encoded image
         content_filter_results:
-          $ref: '#/components/schemas/dalleContentFilterResults'
+          $ref: "#/components/schemas/dalleContentFilterResults"
         revised_prompt:
           type: string
           description: The prompt that was used to generate the image, if there was any revision to the prompt.
         prompt_filter_results:
-          $ref: '#/components/schemas/dalleFilterResults'
+          $ref: "#/components/schemas/dalleFilterResults"
     line:
       type: object
       description: A content line object consisting of an adjacent sequence of content elements, such as words and selection marks.
@@ -4698,7 +4696,7 @@ components:
           type: array
           description: An array of spans that represent detected objects and its bounding box information.
           items:
-            $ref: '#/components/schemas/span'
+            $ref: "#/components/schemas/span"
       required:
         - text
         - spans
@@ -4724,7 +4722,7 @@ components:
               x:
                 type: number
                 description: The x-coordinate of the point.
-              'y':
+              "y":
                 type: number
                 description: The y-coordinate of the point.
       required:
@@ -4732,7 +4730,7 @@ components:
         - offset
         - length
         - polygon
-    
+
     runCompletionUsage:
       type: object
       description: Usage statistics related to the run. This value will be `null` if the run is not in a terminal state (i.e. `in_progress`, `queued`, etc.).
@@ -4847,7 +4845,7 @@ components:
             ID of the model to use. You can use the [List models](/docs/api-reference/models/list) API to see all of your available models, or see our [Model overview](/docs/models/overview) for descriptions of them.
           type: string
         instructions:
-          description:  &assistant_instructions_param_description |
+          description: &assistant_instructions_param_description |
             The system instructions that the assistant uses. The maximum length is 256,000 characters.
           type: string
           maxLength: 256000
@@ -4860,9 +4858,9 @@ components:
           maxItems: 128
           items:
             oneOf:
-              - $ref: '#/components/schemas/assistantToolsCode'
-              - $ref: '#/components/schemas/assistantToolsFileSearch'
-              - $ref: '#/components/schemas/assistantToolsFunction'
+              - $ref: "#/components/schemas/assistantToolsCode"
+              - $ref: "#/components/schemas/assistantToolsFileSearch"
+              - $ref: "#/components/schemas/assistantToolsFunction"
         tool_resources:
           type: object
           description: |
@@ -4927,7 +4925,7 @@ components:
         - instructions
         - tools
         - metadata
-        
+
     createAssistantRequest:
       type: object
       additionalProperties: false
@@ -4959,9 +4957,9 @@ components:
           maxItems: 128
           items:
             oneOf:
-              - $ref: '#/components/schemas/assistantToolsCode'
-              - $ref: '#/components/schemas/assistantToolsFileSearch'
-              - $ref: '#/components/schemas/assistantToolsFunction'
+              - $ref: "#/components/schemas/assistantToolsCode"
+              - $ref: "#/components/schemas/assistantToolsFileSearch"
+              - $ref: "#/components/schemas/assistantToolsFunction"
         tool_resources:
           type: object
           description: |
@@ -5008,56 +5006,56 @@ components:
                         type: object
                         description: The chunking strategy used to chunk the file(s). If not set, will use the `auto` strategy.
                         oneOf:
-                            - type: object
-                              title: Auto Chunking Strategy
-                              description: The default strategy. This strategy currently uses a `max_chunk_size_tokens` of `800` and `chunk_overlap_tokens` of `400`.
-                              additionalProperties: false
-                              properties:
-                                  type:
-                                      type: string
-                                      description: Always `auto`.
-                                      enum: ["auto"]
-                                      x-ms-enum:
-                                          name: AutoChunkingStrategyType
-                                          modelAsString: true
-                                          values:
-                                              - value: auto
-                              required:
-                                  - type 
-                            - type: object
-                              title: Static Chunking Strategy
-                              additionalProperties: false
-                              properties:
-                                  type:
-                                      type: string
-                                      description: Always `static`.
-                                      enum: ["static"]
-                                      x-ms-enum:
-                                          name: StaticChunkingStrategyType
-                                          modelAsString: true
-                                          values:
-                                              - value: static
-                                  static:
-                                      type: object
-                                      additionalProperties: false
-                                      properties:
-                                          max_chunk_size_tokens:
-                                              type: integer
-                                              minimum: 100
-                                              maximum: 4096
-                                              description: The maximum number of tokens in each chunk. The default value is `800`. The minimum value is `100` and the maximum value is `4096`.
-                                          chunk_overlap_tokens:
-                                              type: integer
-                                              description: |
-                                                  The number of tokens that overlap between chunks. The default value is `400`.
-                                                  
-                                                  Note that the overlap must not exceed half of `max_chunk_size_tokens`.
-                                      required:
-                                          - max_chunk_size_tokens
-                                          - chunk_overlap_tokens
-                              required:
-                                  - type
-                                  - static
+                          - type: object
+                            title: Auto Chunking Strategy
+                            description: The default strategy. This strategy currently uses a `max_chunk_size_tokens` of `800` and `chunk_overlap_tokens` of `400`.
+                            additionalProperties: false
+                            properties:
+                              type:
+                                type: string
+                                description: Always `auto`.
+                                enum: ["auto"]
+                                x-ms-enum:
+                                  name: AutoChunkingStrategyType
+                                  modelAsString: true
+                                  values:
+                                    - value: auto
+                            required:
+                              - type
+                          - type: object
+                            title: Static Chunking Strategy
+                            additionalProperties: false
+                            properties:
+                              type:
+                                type: string
+                                description: Always `static`.
+                                enum: ["static"]
+                                x-ms-enum:
+                                  name: StaticChunkingStrategyType
+                                  modelAsString: true
+                                  values:
+                                    - value: static
+                              static:
+                                type: object
+                                additionalProperties: false
+                                properties:
+                                  max_chunk_size_tokens:
+                                    type: integer
+                                    minimum: 100
+                                    maximum: 4096
+                                    description: The maximum number of tokens in each chunk. The default value is `800`. The minimum value is `100` and the maximum value is `4096`.
+                                  chunk_overlap_tokens:
+                                    type: integer
+                                    description: |
+                                      The number of tokens that overlap between chunks. The default value is `400`.
+
+                                      Note that the overlap must not exceed half of `max_chunk_size_tokens`.
+                                required:
+                                  - max_chunk_size_tokens
+                                  - chunk_overlap_tokens
+                            required:
+                              - type
+                              - static
                       metadata:
                         type: object
                         description: |
@@ -5127,9 +5125,9 @@ components:
           maxItems: 128
           items:
             oneOf:
-              - $ref: '#/components/schemas/assistantToolsCode'
-              - $ref: '#/components/schemas/assistantToolsFileSearch'
-              - $ref: '#/components/schemas/assistantToolsFunction'
+              - $ref: "#/components/schemas/assistantToolsCode"
+              - $ref: "#/components/schemas/assistantToolsFileSearch"
+              - $ref: "#/components/schemas/assistantToolsFunction"
         tool_resources:
           type: object
           description: |
@@ -5210,7 +5208,7 @@ components:
         data:
           type: array
           items:
-            $ref: '#/components/schemas/assistantObject'
+            $ref: "#/components/schemas/assistantObject"
         first_id:
           type: string
           example: asst_hLBK7PXBv5Lr2NQT7KLY0ag1
@@ -5226,14 +5224,14 @@ components:
         - first_id
         - last_id
         - has_more
-    
+
     assistantToolsCode:
       type: object
       title: Code interpreter tool
       properties:
         type:
           type: string
-          description: 'The type of tool being defined: `code_interpreter`'
+          description: "The type of tool being defined: `code_interpreter`"
           enum:
             - code_interpreter
           x-ms-enum:
@@ -5250,7 +5248,7 @@ components:
       properties:
         type:
           type: string
-          description: 'The type of tool being defined: `file_search`'
+          description: "The type of tool being defined: `file_search`"
           enum:
             - file_search
           x-ms-enum:
@@ -5278,14 +5276,14 @@ components:
                 for more information.
       required:
         - type
-    
+
     assistantToolsFileSearchTypeOnly:
       type: object
       title: FileSearch tool
       properties:
         type:
           type: string
-          description: 'The type of tool being defined: `file_search`'
+          description: "The type of tool being defined: `file_search`"
           enum:
             - file_search
           x-ms-enum:
@@ -5296,14 +5294,13 @@ components:
       required:
         - type
 
-
     assistantToolsFunction:
       type: object
       title: Function tool
       properties:
         type:
           type: string
-          description: 'The type of tool being defined: `function`'
+          description: "The type of tool being defined: `function`"
           enum:
             - function
           x-ms-enum:
@@ -5322,7 +5319,7 @@ components:
               type: string
               description: The name of the function to be called. Must be a-z, A-Z, 0-9, or contain underscores and dashes, with a maximum length of 64.
             parameters:
-              $ref: '#/components/schemas/chatCompletionFunctionParameters'
+              $ref: "#/components/schemas/chatCompletionFunctionParameters"
           required:
             - name
             - parameters
@@ -5330,7 +5327,7 @@ components:
       required:
         - type
         - function
-    
+
     truncationObject:
       type: object
       title: Thread Truncation Controls
@@ -5478,7 +5475,7 @@ components:
                   type: array
                   description: A list of the relevant tool calls.
                   items:
-                    $ref: '#/components/schemas/runToolCallObject'
+                    $ref: "#/components/schemas/runToolCallObject"
               required:
                 - tool_calls
           required:
@@ -5556,9 +5553,9 @@ components:
           maxItems: 20
           items:
             oneOf:
-              - $ref: '#/components/schemas/assistantToolsCode'
-              - $ref: '#/components/schemas/assistantToolsFileSearch'
-              - $ref: '#/components/schemas/assistantToolsFunction'            
+              - $ref: "#/components/schemas/assistantToolsCode"
+              - $ref: "#/components/schemas/assistantToolsFileSearch"
+              - $ref: "#/components/schemas/assistantToolsFunction"
         metadata:
           description: *metadata_description
           type: object
@@ -5652,9 +5649,9 @@ components:
           maxItems: 20
           items:
             oneOf:
-              - $ref: '#/components/schemas/assistantToolsCode'
-              - $ref: '#/components/schemas/assistantToolsFileSearch'
-              - $ref: '#/components/schemas/assistantToolsFunction'
+              - $ref: "#/components/schemas/assistantToolsCode"
+              - $ref: "#/components/schemas/assistantToolsFileSearch"
+              - $ref: "#/components/schemas/assistantToolsFunction"
         metadata:
           description: *metadata_description
           type: object
@@ -5714,7 +5711,7 @@ components:
         data:
           type: array
           items:
-            $ref: '#/components/schemas/runObject'
+            $ref: "#/components/schemas/runObject"
         first_id:
           type: string
           example: run_hLBK7PXBv5Lr2NQT7KLY0ag1
@@ -5780,7 +5777,7 @@ components:
             name: RunToolCallObjectType
             modelAsString: true
             values:
-              - value: function    
+              - value: function
         function:
           type: object
           description: The function definition.
@@ -5807,7 +5804,7 @@ components:
           description: The ID of the assistant to use to execute this run.
           type: string
         thread:
-          $ref: '#/components/schemas/createThreadRequest'
+          $ref: "#/components/schemas/createThreadRequest"
           description: If no thread is provided, an empty thread will be created.
         model:
           description: The ID of the [Model](/docs/api-reference/models) to be used to execute this run. If a value is provided here, it will override the model associated with the assistant. If not, the model associated with the assistant will be used.
@@ -5824,9 +5821,9 @@ components:
           maxItems: 20
           items:
             oneOf:
-              - $ref: '#/components/schemas/assistantToolsCode'
-              - $ref: '#/components/schemas/assistantToolsFileSearch'
-              - $ref: '#/components/schemas/assistantToolsFunction'
+              - $ref: "#/components/schemas/assistantToolsCode"
+              - $ref: "#/components/schemas/assistantToolsFileSearch"
+              - $ref: "#/components/schemas/assistantToolsFunction"
         tool_resources:
           type: object
           description: |
@@ -5963,7 +5960,7 @@ components:
         - created_at
         - tool_resources
         - metadata
-        
+
     createThreadRequest:
       type: object
       additionalProperties: false
@@ -5972,7 +5969,7 @@ components:
           description: A list of messages to start the thread with.
           type: array
           items:
-            $ref: '#/components/schemas/createMessageRequest'
+            $ref: "#/components/schemas/createMessageRequest"
         tool_resources:
           type: object
           description: |
@@ -6019,56 +6016,56 @@ components:
                         type: object
                         description: The chunking strategy used to chunk the file(s). If not set, will use the `auto` strategy.
                         oneOf:
-                            - type: object
-                              title: Auto Chunking Strategy
-                              description: The default strategy. This strategy currently uses a `max_chunk_size_tokens` of `800` and `chunk_overlap_tokens` of `400`.
-                              additionalProperties: false
-                              properties:
-                                  type:
-                                      type: string
-                                      description: Always `auto`.
-                                      enum: ["auto"]
-                                      x-ms-enum:
-                                          name: AutoChunkingStrategyType
-                                          modelAsString: true
-                                          values:
-                                              - value: auto
-                              required:
-                                  - type 
-                            - type: object
-                              title: Static Chunking Strategy
-                              additionalProperties: false
-                              properties:
-                                  type:
-                                      type: string
-                                      description: Always `static`.
-                                      enum: ["static"]
-                                      x-ms-enum:
-                                          name: StaticChunkingStrategyType
-                                          modelAsString: true
-                                          values:
-                                              - value: static
-                                  static:
-                                      type: object
-                                      additionalProperties: false
-                                      properties:
-                                          max_chunk_size_tokens:
-                                              type: integer
-                                              minimum: 100
-                                              maximum: 4096
-                                              description: The maximum number of tokens in each chunk. The default value is `800`. The minimum value is `100` and the maximum value is `4096`.
-                                          chunk_overlap_tokens:
-                                              type: integer
-                                              description: |
-                                                  The number of tokens that overlap between chunks. The default value is `400`.
-                                                  
-                                                  Note that the overlap must not exceed half of `max_chunk_size_tokens`.
-                                      required:
-                                          - max_chunk_size_tokens
-                                          - chunk_overlap_tokens
-                              required:
-                                  - type
-                                  - static
+                          - type: object
+                            title: Auto Chunking Strategy
+                            description: The default strategy. This strategy currently uses a `max_chunk_size_tokens` of `800` and `chunk_overlap_tokens` of `400`.
+                            additionalProperties: false
+                            properties:
+                              type:
+                                type: string
+                                description: Always `auto`.
+                                enum: ["auto"]
+                                x-ms-enum:
+                                  name: AutoChunkingStrategyType
+                                  modelAsString: true
+                                  values:
+                                    - value: auto
+                            required:
+                              - type
+                          - type: object
+                            title: Static Chunking Strategy
+                            additionalProperties: false
+                            properties:
+                              type:
+                                type: string
+                                description: Always `static`.
+                                enum: ["static"]
+                                x-ms-enum:
+                                  name: StaticChunkingStrategyType
+                                  modelAsString: true
+                                  values:
+                                    - value: static
+                              static:
+                                type: object
+                                additionalProperties: false
+                                properties:
+                                  max_chunk_size_tokens:
+                                    type: integer
+                                    minimum: 100
+                                    maximum: 4096
+                                    description: The maximum number of tokens in each chunk. The default value is `800`. The minimum value is `100` and the maximum value is `4096`.
+                                  chunk_overlap_tokens:
+                                    type: integer
+                                    description: |
+                                      The number of tokens that overlap between chunks. The default value is `400`.
+
+                                      Note that the overlap must not exceed half of `max_chunk_size_tokens`.
+                                required:
+                                  - max_chunk_size_tokens
+                                  - chunk_overlap_tokens
+                            required:
+                              - type
+                              - static
                       metadata:
                         type: object
                         description: |
@@ -6148,7 +6145,7 @@ components:
         data:
           type: array
           items:
-            $ref: '#/components/schemas/threadObject'
+            $ref: "#/components/schemas/threadObject"
         first_id:
           type: string
           example: asst_hLBK7PXBv5Lr2NQT7KLY0ag1
@@ -6253,8 +6250,8 @@ components:
           type: array
           items:
             oneOf:
-              - $ref: '#/components/schemas/messageContentImageFileObject'
-              - $ref: '#/components/schemas/messageContentTextObject'
+              - $ref: "#/components/schemas/messageContentImageFileObject"
+              - $ref: "#/components/schemas/messageContentTextObject"
         assistant_id:
           description: If applicable, the ID of the assistant that authored this message.
           type: string
@@ -6433,7 +6430,7 @@ components:
         data:
           type: array
           items:
-            $ref: '#/components/schemas/messageObject'
+            $ref: "#/components/schemas/messageObject"
         first_id:
           type: string
           example: msg_hLBK7PXBv5Lr2NQT7KLY0ag1
@@ -6504,8 +6501,8 @@ components:
               type: array
               items:
                 oneOf:
-                  - $ref: '#/components/schemas/messageContentTextAnnotationsFileCitationObject'
-                  - $ref: '#/components/schemas/messageContentTextAnnotationsFilePathObject'
+                  - $ref: "#/components/schemas/messageContentTextAnnotationsFileCitationObject"
+                  - $ref: "#/components/schemas/messageContentTextAnnotationsFilePathObject"
           required:
             - value
             - annotations
@@ -6592,7 +6589,7 @@ components:
         - file_path
         - start_index
         - end_index
-    
+
     messageDeltaContentImageFileObject:
       title: Image file
       type: object
@@ -6691,7 +6688,7 @@ components:
       required:
         - index
         - type
-    
+
     messageDeltaContentTextAnnotationsFilePathObject:
       title: File path
       type: object
@@ -6727,7 +6724,7 @@ components:
       required:
         - index
         - type
-    
+
     runStepObject:
       type: object
       title: Run steps
@@ -6801,8 +6798,8 @@ components:
           type: object
           description: The details of the run step.
           oneOf:
-            - $ref: '#/components/schemas/runStepDetailsMessageCreationObject'
-            - $ref: '#/components/schemas/runStepDetailsToolCallsObject'
+            - $ref: "#/components/schemas/runStepDetailsMessageCreationObject"
+            - $ref: "#/components/schemas/runStepDetailsToolCallsObject"
         last_error:
           type: object
           description: The last error associated with this run step. Will be `null` if there are no errors.
@@ -6906,7 +6903,7 @@ components:
         data:
           type: array
           items:
-            $ref: '#/components/schemas/runStepObject'
+            $ref: "#/components/schemas/runStepObject"
         first_id:
           type: string
           example: step_hLBK7PXBv5Lr2NQT7KLY0ag1
@@ -6949,7 +6946,7 @@ components:
       required:
         - type
         - message_creation
-    
+
     runStepDeltaStepDetailsMessageCreationObject:
       title: Message creation
       type: object
@@ -6995,13 +6992,13 @@ components:
           items:
             type: object
             oneOf:
-              - $ref: '#/components/schemas/runStepDetailsToolCallsCodeObject'
-              - $ref: '#/components/schemas/runStepDetailsToolCallsFileSearchObject'
-              - $ref: '#/components/schemas/runStepDetailsToolCallsFunctionObject'
+              - $ref: "#/components/schemas/runStepDetailsToolCallsCodeObject"
+              - $ref: "#/components/schemas/runStepDetailsToolCallsFileSearchObject"
+              - $ref: "#/components/schemas/runStepDetailsToolCallsFunctionObject"
       required:
         - type
         - tool_calls
-    
+
     runStepDeltaStepDetailsToolCallsObject:
       title: Tool calls
       type: object
@@ -7062,13 +7059,13 @@ components:
               items:
                 type: object
                 oneOf:
-                  - $ref: '#/components/schemas/runStepDetailsToolCallsCodeOutputLogsObject'
-                  - $ref: '#/components/schemas/runStepDetailsToolCallsCodeOutputImageObject'
+                  - $ref: "#/components/schemas/runStepDetailsToolCallsCodeOutputLogsObject"
+                  - $ref: "#/components/schemas/runStepDetailsToolCallsCodeOutputImageObject"
       required:
         - id
         - type
         - code_interpreter
-    
+
     runStepDeltaStepDetailsToolCallsCodeObject:
       title: Code interpreter tool call
       type: object
@@ -7129,7 +7126,7 @@ components:
       required:
         - type
         - logs
-    
+
     runStepDeltaStepDetailsToolCallsCodeOutputLogsObject:
       title: Code interpreter log output
       type: object
@@ -7179,7 +7176,7 @@ components:
       required:
         - type
         - image
-    
+
     runStepDeltaStepDetailsToolCallsCodeOutputImageObject:
       title: Code interpreter image output
       type: object
@@ -7205,7 +7202,7 @@ components:
       required:
         - index
         - type
-    
+
     runStepDetailsToolCallsFileSearchObject:
       title: File search tool call
       type: object
@@ -7297,7 +7294,7 @@ components:
         - id
         - type
         - function
-    
+
     runStepDeltaStepDetailsToolCallsFunctionObject:
       type: object
       title: Function tool call
@@ -7462,14 +7459,13 @@ components:
             The chunking strategy used to chunk the file(s). If not set, will use the
             `auto` strategy. Only applicable if `file_ids` is non-empty.
           oneOf:
-            - $ref: '#/components/schemas/autoChunkingStrategyRequestParam'
-            - $ref: '#/components/schemas/staticChunkingStrategyRequestParam'
+            - $ref: "#/components/schemas/autoChunkingStrategyRequestParam"
+            - $ref: "#/components/schemas/staticChunkingStrategyRequestParam"
         metadata:
           description: *metadata_description
           type: object
           nullable: true
-        
-    
+
     updateVectorStoreRequest:
       type: object
       additionalProperties: false
@@ -7485,7 +7481,7 @@ components:
           description: *metadata_description
           type: object
           nullable: true
-    
+
     listVectorStoresResponse:
       properties:
         object:
@@ -7531,7 +7527,7 @@ components:
         - id
         - object
         - deleted
-   
+
     vectorStoreFileObject:
       type: object
       title: Vector store files
@@ -7544,7 +7540,7 @@ components:
           description: The object type, which is always `vector_store.file`.
           type: string
           enum: ["vector_store.file"]
-          x-ms-enum: 
+          x-ms-enum:
             name: VectorStoreFileObjectType
             modelAsString: true
             values:
@@ -7605,8 +7601,8 @@ components:
             The chunking strategy used to chunk the file(s). If not set, will use the
             `auto` strategy. Only applicable if `file_ids` is non-empty.
           oneOf:
-            - $ref: '#/components/schemas/autoChunkingStrategyRequestParam'
-            - $ref: '#/components/schemas/staticChunkingStrategyRequestParam'
+            - $ref: "#/components/schemas/autoChunkingStrategyRequestParam"
+            - $ref: "#/components/schemas/staticChunkingStrategyRequestParam"
       required:
         - id
         - object
@@ -7654,7 +7650,7 @@ components:
             values:
               - value: static
         static:
-          $ref: '#/components/schemas/staticChunkingStrategy'
+          $ref: "#/components/schemas/staticChunkingStrategy"
       required:
         - type
         - static
@@ -7707,7 +7703,7 @@ components:
           enum:
             - static
         static:
-          $ref: '#/components/schemas/staticChunkingStrategy'
+          $ref: "#/components/schemas/staticChunkingStrategy"
       required:
         - type
         - static
@@ -7718,8 +7714,8 @@ components:
         The chunking strategy used to chunk the file(s). If not set, will use the
         `auto` strategy.
       oneOf:
-        - $ref: '#/components/schemas/autoChunkingStrategyRequestParam'
-        - $ref: '#/components/schemas/staticChunkingStrategyRequestParam'
+        - $ref: "#/components/schemas/autoChunkingStrategyRequestParam"
+        - $ref: "#/components/schemas/staticChunkingStrategyRequestParam"
 
     createVectorStoreFileRequest:
       type: object
@@ -7943,7 +7939,7 @@ components:
           required:
             - event
             - data
-          description: Occurs when a run moves to a `queued` status.          
+          description: Occurs when a run moves to a `queued` status.
         - type: object
           properties:
             event:
@@ -8056,7 +8052,7 @@ components:
             - event
             - data
           description: Occurs when a run expires.
-          
+
     runStepStreamEvent:
       oneOf:
         - type: object
@@ -8075,7 +8071,7 @@ components:
             - event
             - data
           description: Occurs when a run step is created.
-          
+
         - type: object
           properties:
             event:
@@ -8123,7 +8119,7 @@ components:
           required:
             - event
             - data
-          description: Occurs when a run step is completed.      
+          description: Occurs when a run step is completed.
         - type: object
           properties:
             event:
@@ -8172,7 +8168,7 @@ components:
             - event
             - data
           description: Occurs when a run step expires.
-          
+
     messageStreamEvent:
       oneOf:
         - type: object
@@ -8190,7 +8186,7 @@ components:
           required:
             - event
             - data
-          description: Occurs when a message is created.       
+          description: Occurs when a message is created.
         - type: object
           properties:
             event:
@@ -8273,7 +8269,7 @@ components:
         - event
         - data
       description: Occurs when an error occurs. This can happen due to an internal server error or a timeout.
-      
+
     doneEvent:
       type: object
       properties:

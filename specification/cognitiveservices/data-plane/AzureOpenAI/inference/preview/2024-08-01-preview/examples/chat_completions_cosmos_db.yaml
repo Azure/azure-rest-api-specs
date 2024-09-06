@@ -1,6 +1,6 @@
 title: Creates a completion for the provided Azure Cosmos DB.
 parameters:
-  endpoint: '{endpoint}'
+  endpoint: "{endpoint}"
   api-version: 2024-08-01-preview
   deployment-id: <deployment-id>
   body:
@@ -18,14 +18,14 @@ parameters:
           index_name: azuredocindex
           embedding_dependency:
             type: deployment_name
-            deployment_name: '{embedding deployment name}'
+            deployment_name: "{embedding deployment name}"
           fields_mapping:
             content_fields:
               - content
             vector_fields:
               - contentvector
 responses:
-  '200':
+  "200":
     body:
       id: chatcmpl-7R1nGnsXO8n4oi9UPz2f3UHdgAYMn
       created: 1686676106
@@ -41,7 +41,7 @@ responses:
                   title: Citation Title
                   filepath: contoso.txt
                   url: https://contoso.blob.windows.net/container/contoso.txt
-                  chunk_id: '0'
+                  chunk_id: "0"
               intent: dog care
       usage:
         completion_tokens: 557

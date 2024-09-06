@@ -1,6 +1,6 @@
 title: Creates a completion based on Azure Search data and system-assigned managed identity.
 parameters:
-  endpoint: '{endpoint}'
+  endpoint: "{endpoint}"
   api-version: 2024-08-01-preview
   deployment-id: <deployment-id>
   body:
@@ -11,11 +11,11 @@ parameters:
       - type: azure_search
         parameters:
           endpoint: https://your-search-endpoint.search.windows.net/
-          index_name: '{index name}'
+          index_name: "{index name}"
           authentication:
             type: system_assigned_managed_identity
 responses:
-  '200':
+  "200":
     body:
       id: chatcmpl-7R1nGnsXO8n4oi9UPz2f3UHdgAYMn
       created: 1686676106
@@ -31,7 +31,7 @@ responses:
                   title: Citation Title
                   filepath: contoso.txt
                   url: https://contoso.blob.windows.net/container/contoso.txt
-                  chunk_id: '0'
+                  chunk_id: "0"
               intent: dog care
       usage:
         completion_tokens: 557
