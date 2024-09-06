@@ -12237,13 +12237,6 @@
           "items": {
             "$ref": "#/definitions/AzureLocation"
           }
-        },
-        "reservedInstanceSupportedLocations": {
-          "type": "array",
-          "description": "List of locations where the RI options for storage type is available.",
-          "items": {
-            "$ref": "#/definitions/AzureLocation"
-          }
         }
       }
     },
@@ -12324,6 +12317,22 @@
           "description": "Estimated Network",
           "items": {
             "$ref": "#/definitions/EstimatedNetwork"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "estimatedCostWithVcfByol": {
+          "type": "number",
+          "format": "float",
+          "description": "Estimated Cost With VCF BYOL",
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "errors": {
+          "type": "array",
+          "description": "Represents errors which might have occurred while calculating AVS Node Summary",
+          "items": {
+            "$ref": "#/definitions/ErrorDetail"
           },
           "readOnly": true,
           "x-ms-identifiers": []
@@ -17812,7 +17821,7 @@
         "MonthlyAvsNodeCost",
         "MonthlyExternalStorageCost",
         "MonthlyNetworkCost",
-        "MonthlyVcfByolSavings"
+        "MonthlyVcfByolCostDifference"
       ],
       "x-ms-enum": {
         "name": "CostComponentName",
@@ -17859,9 +17868,9 @@
             "description": "Monthly Network cost"
           },
           {
-            "name": "MonthlyVcfByolSavings",
-            "value": "MonthlyVcfByolSavings",
-            "description": "Monthly savings from using VCF BYOL"
+            "name": "MonthlyVcfByolCostDifference",
+            "value": "MonthlyVcfByolCostDifference",
+            "description": "Monthly compute cost difference between VCF BYOL and non VCF BYOL SKUs"
           }
         ]
       }
@@ -18231,6 +18240,27 @@
           "readOnly": true
         }
       }
+    },
+    "ErrorDetail": {
+      "type": "object",
+      "description": "Error Details",
+      "properties": {
+        "errorCode": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Error Code",
+          "readOnly": true
+        },
+        "errorMessage": {
+          "type": "string",
+          "description": "Description of the error occurred",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "errorCode",
+        "errorMessage"
+      ]
     },
     "EstimatedCostByOffer": {
       "type": "object",
