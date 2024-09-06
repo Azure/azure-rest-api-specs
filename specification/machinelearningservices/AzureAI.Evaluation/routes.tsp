@@ -67,9 +67,9 @@ interface Evaluations {
       @path
       id: string;
 
-      @doc("Tags of Evaluation.")
+      @doc("Update evaluation request.")
       @body
-      body: UpdateEvaluationTags;
+      body: UpdateEvaluationRequest;
     },
     OkResponse<Evaluation>
   >;

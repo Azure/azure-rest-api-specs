@@ -47,6 +47,6 @@ namespace Microsoft.MachineLearningServices;
 @doc("Azure Machine Learning Evaluation Data Plane Service api versions.")
 enum Versions {
   @useDependency(Azure.Core.Versions.v1_0_Preview_2)
-  @doc("The 2022-11-01-preview version of the Microsoft.MachineLearningServices service.")
-  `2022-11-01-preview`,
+  @doc("The 2024-05-01-preview version of the Microsoft.MachineLearningServices service.")
+  `2024-05-01-preview`,
 }
