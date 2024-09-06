@@ -51,13 +51,13 @@ title:
   Azure Communication Services
 ```
 
-### Tag: package-2024-08-30-preview
+### Tag: package-2024-08-30
 
-These settings apply only when `--tag=package-2024-08-30-preview` is specified on the command line.
+These settings apply only when `--tag=package-2024-08-30` is specified on the command line.
 
-```yaml $(tag) == 'package-2024-08-30-preview'
+```yaml $(tag) == 'package-2024-08-30'
 input-file:
-  - preview/2024-08-30-preview/communicationservicesmessages.json
+  - preview/2024-08-30/communicationservicesmessages.json
 title:
   Azure Communication Services
 ```

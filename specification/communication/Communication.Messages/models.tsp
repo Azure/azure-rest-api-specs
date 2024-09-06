@@ -24,15 +24,15 @@ union CommunicationMessageKind {
   @doc("Image message type.")
   image: "image",
 
-  @added(Versions.c2024_08_30_Preview)
+  @added(Versions.c2024_08_30)
   @doc("Document message type.")
   document: "document",
 
-  @added(Versions.c2024_08_30_Preview)
+  @added(Versions.c2024_08_30)
   @doc("Video message type.")
   video: "video",
 
-  @added(Versions.c2024_08_30_Preview)
+  @added(Versions.c2024_08_30)
   @doc("Audio message type.")
   audio: "audio",
 
@@ -129,7 +129,7 @@ model TextNotificationContent extends NotificationContent {
   content: string;
 }
 
-@added(Versions.c2024_08_30_Preview)
+@added(Versions.c2024_08_30)
 @doc("A request to send a media notification. Could be an image, document or video.")
 model MediaNotificationContent {
   @clientName("mediaUrl", "java")
@@ -137,7 +137,7 @@ model MediaNotificationContent {
   mediaUri: url;
 }
 
-@renamedFrom(Versions.c2024_08_30_Preview, "MediaNotificationContent")
+@renamedFrom(Versions.c2024_08_30, "MediaNotificationContent")
 @doc("A request to send an image notification.")
 model ImageNotificationContent extends NotificationContent {
   @doc("Message notification type is image.")
@@ -149,7 +149,7 @@ model ImageNotificationContent extends NotificationContent {
   ...MediaNotificationContent;
 }
 
-@added(Versions.c2024_08_30_Preview)
+@added(Versions.c2024_08_30)
 @doc("A request to send a document notification.")
 model DocumentNotificationContent extends NotificationContent {
   @doc("Message notification type is image.")
@@ -164,7 +164,7 @@ model DocumentNotificationContent extends NotificationContent {
   ...MediaNotificationContent;
 }
 
-@added(Versions.c2024_08_30_Preview)
+@added(Versions.c2024_08_30)
 @doc("A request to send a video notification.")
 model VideoNotificationContent extends NotificationContent {
   @doc("Message notification type is image.")
@@ -176,7 +176,7 @@ model VideoNotificationContent extends NotificationContent {
   ...MediaNotificationContent;
 }
 
-@added(Versions.c2024_08_30_Preview)
+@added(Versions.c2024_08_30)
 @doc("A request to send an audio notification.")
 model AudioNotificationContent extends NotificationContent {
   @doc("Message notification type is audio.")
@@ -436,7 +436,7 @@ enum Versions {
   @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   c2024_02_01: "2024-02-01",
 
-  @doc("Azure Communication Messages 2024-08-30-preview api version")
+  @doc("Azure Communication Messages 2024-08-30 api version")
   @useDependency(Azure.Core.Versions.v1_0_Preview_2)
-  c2024_08_30_Preview: "2024-08-30-preview",
+  c2024_08_30: "2024-08-30",
 }
