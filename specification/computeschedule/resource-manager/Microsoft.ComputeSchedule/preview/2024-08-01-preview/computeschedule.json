@@ -1591,8 +1591,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/AutoActionProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "description": "The resource-specific properties for this resource."
         }
       },
       "allOf": [
@@ -1692,6 +1691,58 @@
         "notificationSettings",
         "isDisabled"
       ]
+    },
+    "AutoActionPropertiesUpdate": {
+      "type": "object",
+      "description": "Auto action properties",
+      "properties": {
+        "resourceType": {
+          "$ref": "#/definitions/ResourceType",
+          "description": "The type of resource the auto action is targeting"
+        },
+        "actionType": {
+          "$ref": "#/definitions/ActionType",
+          "description": "The action the auto action should perform in the resources"
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time which the auto action is supposed to start running"
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time when the auto action is supposed to stop scheduling"
+        },
+        "resources": {
+          "type": "array",
+          "description": "The list of the resources the auto action is supposed to perform the actions on",
+          "items": {
+            "$ref": "#/definitions/AutoActionResource"
+          },
+          "x-ms-identifiers": [
+            "resourceId"
+          ],
+          "x-ms-mutability": [
+            "update",
+            "create"
+          ]
+        },
+        "schedule": {
+          "$ref": "#/definitions/AutoActionScheduleUpdate",
+          "description": "The schedule the auto action is supposed to follow"
+        },
+        "notificationSettings": {
+          "type": "array",
+          "description": "The notification settings for the auto action",
+          "items": {
+            "$ref": "#/definitions/NotificationProperties"
+          },
+          "x-ms-identifiers": [
+            "destination"
+          ]
+        }
+      }
     },
     "AutoActionResource": {
       "type": "object",
@@ -1838,72 +1889,18 @@
     },
     "AutoActionUpdate": {
       "type": "object",
-      "description": "The type used for update operations of the AutoAction.",
+      "description": "The auto action resource",
       "properties": {
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
         "properties": {
-          "$ref": "#/definitions/AutoActionUpdateProperties",
-          "x-ms-client-flatten": true
+          "$ref": "#/definitions/AutoActionPropertiesUpdate",
+          "description": "The resource-specific properties for this resource."
         }
-      }
-    },
-    "AutoActionUpdateProperties": {
-      "type": "object",
-      "description": "The updatable properties of the AutoAction.",
-      "properties": {
-        "resourceType": {
-          "$ref": "#/definitions/ResourceType",
-          "description": "The type of resource the auto action is targeting"
-        },
-        "actionType": {
-          "$ref": "#/definitions/ActionType",
-          "description": "The action the auto action should perform in the resources"
-        },
-        "startTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The time which the auto action is supposed to start running"
-        },
-        "endTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The time when the auto action is supposed to stop scheduling"
-        },
-        "resources": {
-          "type": "array",
-          "description": "The list of the resources the auto action is supposed to perform the actions on",
-          "items": {
-            "$ref": "#/definitions/AutoActionResource"
-          },
-          "x-ms-identifiers": [
-            "resourceId"
-          ],
-          "x-ms-mutability": [
-            "update",
-            "create"
-          ]
-        },
-        "schedule": {
-          "$ref": "#/definitions/AutoActionScheduleUpdate",
-          "description": "The schedule the auto action is supposed to follow"
-        },
-        "notificationSettings": {
-          "type": "array",
-          "description": "The notification settings for the auto action",
-          "items": {
-            "$ref": "#/definitions/NotificationProperties"
-          },
-          "x-ms-identifiers": [
-            "destination"
-          ]
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
         }
-      }
+      ]
     },
     "Azure.Core.Foundations.Error": {
       "type": "object",
@@ -1952,6 +1949,24 @@
           "description": "Inner error."
         }
       }
+    },
+    "Azure.ResourceManager.CommonTypes.TrackedResourceUpdate": {
+      "type": "object",
+      "description": "The resource model definition for an Azure Resource Manager tracked top level resource which has 'tags' and a 'location'",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
+        }
+      ]
     },
     "Azure.ResourceManager.ResourceProvisioningState": {
       "type": "string",
@@ -2438,8 +2453,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/OccurrenceProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "description": "The resource-specific properties for this resource."
         }
       },
       "allOf": [
