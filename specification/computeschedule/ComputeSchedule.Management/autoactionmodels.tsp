@@ -239,7 +239,6 @@ union ProvisioningState {
   string,
 }
 
-
 @added(Microsoft.ComputeSchedule.Versions.`2024-08-01-preview`)
 @doc("Auto action properties")
 model AutoActionProperties {
