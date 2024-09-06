@@ -1,0 +1,84 @@
+{
+  "parameters": {
+    "resourceGroupName": "rg1",
+    "api-version": "2024-05-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/gateways/standard-gw-1",
+            "name": "standard-gw-1",
+            "type": "Microsoft.ApiManagement/gateways",
+            "tags": {
+              "owner": "v-aswmoh",
+              "ReleaseName": "Z3"
+            },
+            "location": "West US",
+            "etag": "AAAAAAAWN/4=",
+            "properties": {
+              "provisioningState": "Succeeded",
+              "targetProvisioningState": "",
+              "createdAtUtc": "2021-06-16T09:40:00.9453556Z",
+              "frontend": {
+                "defaultHostname": "standard-gw-1.westus.gateway.azure-api.net"
+              },
+              "backend": {
+                "subnet": {
+                  "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/vn1/subnets/sn1"
+                }
+              },
+              "configurationApi": {
+                "hostname": "standard-gw-1.westus.configuration.gateway.azure-api.net"
+              }
+            },
+            "sku": {
+              "name": "Standard",
+              "capacity": 1
+            },
+            "systemData": {
+              "createdBy": "bar@contoso.com",
+              "createdByType": "User",
+              "createdAt": "2021-06-16T09:40:00.7106733Z",
+              "lastModifiedBy": "foo@contoso.com",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2021-06-20T06:33:09.6159006Z"
+            }
+          },
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/gateways/standard-gw-2",
+            "name": "standard-gw-2",
+            "type": "Microsoft.ApiManagement/gateways",
+            "tags": {
+              "Owner": "vitaliik"
+            },
+            "location": "East US",
+            "etag": "AAAAAAAWKwo=",
+            "properties": {
+              "provisioningState": "Succeeded",
+              "targetProvisioningState": "",
+              "createdAtUtc": "2021-06-16T09:40:00.9453556Z",
+              "frontend": {
+                "defaultHostname": "standard-gw-2.eastus.gateway.azure-api.net"
+              },
+              "backend": {
+                "subnet": {
+                  "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/vn2/subnets/sn2"
+                }
+              },
+              "configurationApi": {
+                "hostname": "standard-gw-2.eastus.configuration.gateway.azure-api.net"
+              }
+            },
+            "sku": {
+              "name": "Standard",
+              "capacity": 1
+            }
+          }
+        ]
+      }
+    }
+  }
+}
