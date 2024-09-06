@@ -3100,7 +3100,8 @@
       "properties": {
         "serviceName": {
           "type": "string",
-          "description": "Kubernetes Service name of this listener."
+          "description": "Kubernetes Service name of this listener.",
+          "default": "aio-mq-dmqtt-frontend"
         },
         "ports": {
           "type": "array",
@@ -3954,16 +3955,6 @@
         "secretRef"
       ]
     },
-    "DataflowEndpointAuthenticationAnonymous": {
-      "type": "object",
-      "description": "DataflowEndpoint Anonymous Authentication Method properties",
-      "properties": {
-        "someKey": {
-          "type": "string",
-          "description": "Type of anonymous authentication."
-        }
-      }
-    },
     "DataflowEndpointAuthenticationSasl": {
       "type": "object",
       "description": "DataflowEndpoint Authentication Sasl properties",
@@ -4757,10 +4748,6 @@
         "x509CertificateSettings": {
           "$ref": "#/definitions/DataflowEndpointAuthenticationX509",
           "description": "X.509 certificate authentication."
-        },
-        "anonymousSettings": {
-          "$ref": "#/definitions/DataflowEndpointAuthenticationAnonymous",
-          "description": "Anonymous authentication."
         }
       },
       "required": [
