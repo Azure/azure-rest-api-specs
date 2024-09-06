@@ -2387,8 +2387,6 @@ components:
                       type: object
                       additionalProperties:
                         type: number
-                  usage:
-                    $ref: "#/components/schemas/completionUsage"
               text:
                 type: string
               content_filter_results:
@@ -2411,6 +2409,8 @@ components:
           type: string
           description: The object type, which is always "text_completion"
           enum: [text_completion]
+        usage:
+          $ref: "#/components/schemas/completionUsage"
       required:
         - id
         - object
