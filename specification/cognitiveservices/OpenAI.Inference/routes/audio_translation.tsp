@@ -27,7 +27,7 @@ namespace Azure.OpenAI;
 @sharedRoute
 op getAudioTranslationAsPlainText is Azure.Core.ResourceAction<
   Deployment,
-  BodyParameter<AudioTranslationOptions>,
+  GetAudioTranslationBody,  // response_format must be one of: text, srt, vtt
   AudioTextResponse,
   MultipartFormDataRequestHeadersTraits & TextPlainResponseHeadersTraits
 >;
@@ -42,7 +42,7 @@ op getAudioTranslationAsPlainText is Azure.Core.ResourceAction<
 @sharedRoute
 op getAudioTranslationAsResponseObject is Azure.Core.ResourceAction<
   Deployment,
-  BodyParameter<AudioTranslationOptions>,  // response_format must be unspecified (json) or one of: json, verbose_json
+  GetAudioTranslationBody,  // response_format must be unspecified (json) or one of: json, verbose_json
   AudioTranslation,
   MultipartFormDataRequestHeadersTraits
 >;

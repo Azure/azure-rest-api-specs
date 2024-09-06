@@ -1125,7 +1125,7 @@ model LocationHeader {
 
 @armResourceOperations
 interface IscsiPaths {
-  list is ArmResourceListByParent<IscsiPath>;
+  listByPrivateCloud is ArmResourceListByParent<IscsiPath>;
 
   get is ArmResourceRead<IscsiPath>;
 

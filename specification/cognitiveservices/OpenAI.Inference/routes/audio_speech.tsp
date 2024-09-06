@@ -20,6 +20,6 @@ namespace Azure.OpenAI;
 @actionSeparator("/")
 op generateSpeechFromText is ResourceAction<
   Deployment,
-  BodyParameter<SpeechGenerationOptions>,
+  GenerateSpeechFromTextBody,
   SpeechGenerationResponse
 >;

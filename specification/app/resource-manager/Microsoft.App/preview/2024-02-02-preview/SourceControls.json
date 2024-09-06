@@ -172,7 +172,14 @@
             }
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "name": "x-ms-github-auxiliary",
+            "in": "header",
+            "description": "Github personal access token used for SourceControl.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -231,7 +238,28 @@
             "type": "string"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "name": "x-ms-github-auxiliary",
+            "in": "header",
+            "description": "Github personal access token used for SourceControl.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "ignoreWorkflowDeletionFailure",
+            "in": "query",
+            "description": "Ignore Workflow Deletion Failure.",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "deleteWorkflow",
+            "in": "query",
+            "description": "Delete workflow.",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {

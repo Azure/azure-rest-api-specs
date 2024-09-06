@@ -148,14 +148,3 @@ union ApiResponseFormat {
   /** Using `json_object` format will limit the usage of ToolCall to only functions. */
   jsonObject: "json_object",
 }
-
-alias BodyParameter<
-  T,
-  TName extends valueof string = "body",
-  TDoc extends valueof string = "Body parameter."
-> = {
-  @doc(TDoc)
-  @friendlyName(TName)
-  @bodyRoot
-  body: T;
-};

@@ -24,11 +24,16 @@ options:
     package-name: "{package-dir}"
     package-version: 1.0.0b2
     flavor: azure
+    generate-test: true
+    generate-sample: true
+    examples-dir: "{project-root}/examples"
   "@azure-tools/typespec-java":
     package-dir: "azure-ai-documentintelligence"
     namespace: "com.azure.ai.documentintelligence"
     enable-sync-stack: true
     custom-types-subpackage: "implementation.models"
+    generate-tests: false
+    customization-class: customization/src/main/java/DocumentIntelligenceCustomizations.java
     polling:
       buildDocumentModel:
         final-type: com.azure.ai.documentintelligence.models.DocumentModelDetails

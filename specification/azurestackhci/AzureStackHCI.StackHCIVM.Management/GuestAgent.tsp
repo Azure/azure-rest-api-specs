@@ -42,5 +42,5 @@ interface GuestAgents {
   delete is ArmResourceDeleteWithoutOkAsync<GuestAgent>;
 
   @doc("Returns the list of GuestAgent of the given vm.")
-  list is ArmResourceListByParent<GuestAgent>;
+  listByVirtualMachineInstance is ArmResourceListByParent<GuestAgent>;
 }

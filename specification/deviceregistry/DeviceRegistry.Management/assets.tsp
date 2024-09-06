@@ -212,7 +212,13 @@ interface Assets {
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader
   >;
 
-  update is ArmResourcePatchAsync<Asset, AssetProperties>;
+  update is ArmCustomPatchAsync<
+    Asset,
+    Azure.ResourceManager.Foundations.ResourceUpdateModel<
+      Asset,
+      AssetProperties
+    >
+  >;
 
   delete is ArmResourceDeleteWithoutOkAsync<Asset>;
 

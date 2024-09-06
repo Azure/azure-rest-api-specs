@@ -40,9 +40,12 @@ interface LoadTests {
   >;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "Existing API"
-  update is ArmResourcePatchAsync<
+  update is ArmCustomPatchAsync<
     LoadTestResource,
-    LoadTestProperties,
+    Azure.ResourceManager.Foundations.ResourceUpdateModel<
+      LoadTestResource,
+      LoadTestProperties
+    >,
     LroHeaders = ArmAsyncOperationHeader &
       ArmLroLocationHeader &
       Azure.Core.Foundations.RetryAfterHeader
@@ -56,7 +59,7 @@ interface LoadTests {
   outboundNetworkDependenciesEndpoints is CustomOperations.ArmResourceActionSyncCustomGet<
     LoadTestResource,
     void,
-    OutboundEnvironmentEndpointCollection
+    PagedOutboundEnvironmentEndpoint
   >;
 }
 
@@ -89,13 +92,16 @@ interface LoadTestMappings {
 
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "Existing API"
   @added(APIVersions.v2023_12_01_preview)
-  update is ArmResourcePatchSync<
+  update is ArmCustomPatchSync<
     LoadTestMappingResource,
-    LoadTestMappingProperties
+    Azure.ResourceManager.Foundations.ResourceUpdateModel<
+      LoadTestMappingResource,
+      LoadTestMappingProperties
+    >
   >;
 
   @added(APIVersions.v2023_12_01_preview)
-  listByScope is ArmResourceListByParent<LoadTestMappingResource>;
+  list is ArmResourceListByParent<LoadTestMappingResource>;
 }
 
 @armResourceOperations
@@ -111,11 +117,14 @@ interface LoadTestProfileMappings {
 
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "Existing API"
   @added(APIVersions.v2023_12_01_preview)
-  update is ArmResourcePatchSync<
+  update is ArmCustomPatchSync<
     LoadTestProfileMappingResource,
-    LoadTestProfileMappingProperties
+    Azure.ResourceManager.Foundations.ResourceUpdateModel<
+      LoadTestProfileMappingResource,
+      LoadTestProfileMappingProperties
+    >
   >;
 
   @added(APIVersions.v2023_12_01_preview)
-  listByScope is ArmResourceListByParent<LoadTestProfileMappingResource>;
+  list is ArmResourceListByParent<LoadTestProfileMappingResource>;
 }

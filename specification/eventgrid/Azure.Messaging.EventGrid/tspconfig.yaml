@@ -23,6 +23,9 @@ options:
     package-name: "{package-dir}"
     emitter-output-dir: "{project-root}/{service-dir}/{package-name}"
     flavor: azure
+    generate-test: true
+    generate-sample: true
+    examples-dir: "{project-root}/examples"
   # Uncomment this line and add "@azure-tools/typespec-csharp" to your package.json to generate C# code
   "@azure-tools/typespec-csharp":
     package-dir: Azure.Messaging.EventGridV2
@@ -35,10 +38,10 @@ options:
     namespace: "com.azure.messaging.eventgrid.namespaces"
     package-dir: azure-messaging-eventgrid-namespaces
     partial-update: true
-    namer: true
     generate-samples: false
     generate-tests: false
     enable-sync-stack: true
+    service-version-exclude-preview: true
     customization-class: customization/src/main/java/EventGridCustomization.java
     dev-options:
       loglevel: info

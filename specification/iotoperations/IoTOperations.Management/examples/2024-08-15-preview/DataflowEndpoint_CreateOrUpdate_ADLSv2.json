@@ -1,0 +1,98 @@
+{
+  "title": "DataflowEndpoint_CreateOrUpdate_ADLSv2",
+  "operationId": "DataflowEndpoint_CreateOrUpdate",
+  "parameters": {
+    "api-version": "2024-08-15-preview",
+    "subscriptionId": "F8C729F9-DF9C-4743-848F-96EE433D8E53",
+    "resourceGroupName": "rgiotoperations",
+    "instanceName": "resource-name123",
+    "dataflowEndpointName": "adlsv2-endpoint",
+    "resource": {
+      "properties": {
+        "endpointType": "DataLakeStorage",
+        "dataLakeStorageSettings": {
+          "host": "example.blob.core.windows.net",
+          "authentication": {
+            "method": "AccessToken",
+            "accessTokenSettings": {
+              "secretRef": "my-secret"
+            }
+          }
+        }
+      },
+      "extendedLocation": {
+        "name": "qmbrfwcpwwhggszhrdjv",
+        "type": "CustomLocation"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "endpointType": "DataLakeStorage",
+          "dataLakeStorageSettings": {
+            "host": "example.blob.core.windows.net",
+            "authentication": {
+              "method": "AccessToken",
+              "accessTokenSettings": {
+                "secretRef": "my-secret"
+              }
+            }
+          },
+          "provisioningState": "Succeeded"
+        },
+        "extendedLocation": {
+          "name": "qmbrfwcpwwhggszhrdjv",
+          "type": "CustomLocation"
+        },
+        "id": "/subscriptions/0000000-0000-0000-0000-000000000000/resourceGroups/resourceGroup123/providers/Microsoft.IoTOperations/instances/resource-name123/dataflowEndpoints/resource-name123",
+        "name": "zyhxscudobzfacetvgyjiav",
+        "type": "iay",
+        "systemData": {
+          "createdBy": "ssvaslsmudloholronopqyxjcu",
+          "createdByType": "User",
+          "createdAt": "2024-08-09T18:13:29.389Z",
+          "lastModifiedBy": "gnicpuszwd",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2024-08-09T18:13:29.389Z"
+        }
+      }
+    },
+    "201": {
+      "headers": {
+        "Azure-AsyncOperation": "https://contoso.com/operationstatus"
+      },
+      "body": {
+        "properties": {
+          "endpointType": "DataLakeStorage",
+          "dataLakeStorageSettings": {
+            "host": "example.blob.core.windows.net",
+            "authentication": {
+              "method": "AccessToken",
+              "accessTokenSettings": {
+                "secretRef": "my-secret"
+              }
+            }
+          },
+          "provisioningState": "Succeeded"
+        },
+        "extendedLocation": {
+          "name": "qmbrfwcpwwhggszhrdjv",
+          "type": "CustomLocation"
+        },
+        "id": "/subscriptions/0000000-0000-0000-0000-000000000000/resourceGroups/resourceGroup123/providers/Microsoft.IoTOperations/instances/resource-name123/dataflowEndpoints/resource-name123",
+        "name": "zyhxscudobzfacetvgyjiav",
+        "type": "iay",
+        "systemData": {
+          "createdBy": "ssvaslsmudloholronopqyxjcu",
+          "createdByType": "User",
+          "createdAt": "2024-08-09T18:13:29.389Z",
+          "lastModifiedBy": "gnicpuszwd",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2024-08-09T18:13:29.389Z"
+        }
+      }
+    }
+  }
+}

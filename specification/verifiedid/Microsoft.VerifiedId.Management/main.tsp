@@ -77,7 +77,13 @@ interface Authorities {
     Authority,
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader
   >;
-  update is ArmResourcePatchSync<Authority, AuthorityProperties>;
+  update is ArmCustomPatchSync<
+    Authority,
+    Azure.ResourceManager.Foundations.ResourceUpdateModel<
+      Authority,
+      AuthorityProperties
+    >
+  >;
   delete is ArmResourceDeleteSync<Authority>;
   listByResourceGroup is ArmResourceListByParent<Authority>;
   listBySubscription is ArmListBySubscription<Authority>;
