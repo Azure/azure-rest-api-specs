@@ -1,6 +1,7 @@
 import "@typespec/rest";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "./alertRuleResources.tsp";
 import "./sqlDbDatabaseTarget.tsp";
 import "./sqlDbElasticPoolTarget.tsp";
 import "./sqlMiTarget.tsp";
@@ -30,6 +31,12 @@ enum Versions {
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   v2023_09_01_preview: "2023-09-01-preview",
+
+  @doc("The 2024-07-17-preview version.")
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
+  v2024_07_19_preview: "2024-07-19-preview",
 }
 @doc("The DatabaseWatcherProviderHub resource.")
 model Watcher is TrackedResource<WatcherProperties> {
@@ -55,6 +62,14 @@ model WatcherProperties {
   @visibility("read")
   @doc("The provisioning state of the resource watcher.")
   provisioningState?: DatabaseWatcherProvisioningState;
+
+  @doc("The resource ID of a user-assigned managed identity that will be assigned to a new alert rule.")
+  @added(Versions.v2024_07_19_preview)
+  defaultAlertRuleIdentityResourceId?: armResourceIdentifier<[
+    {
+      type: "Microsoft.ManagedIdentity/userAssignedIdentities";
+    }
+  ]>;
 }
 
 @doc("The properties of a data store.")
@@ -112,7 +127,13 @@ interface Watchers {
     Watcher,
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader
   >;
-  update is ArmResourcePatchAsync<Watcher, WatcherProperties>;
+  update is ArmCustomPatchAsync<
+    Watcher,
+    Azure.ResourceManager.Foundations.ResourceUpdateModel<
+      Watcher,
+      WatcherProperties
+    >
+  >;
   delete is ArmResourceDeleteWithoutOkAsync<Watcher>;
   listByResourceGroup is ArmResourceListByParent<Watcher>;
   listBySubscription is ArmListBySubscription<Watcher>;

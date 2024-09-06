@@ -3,6 +3,7 @@ using Azure.ResourceManager;
 using TypeSpec.Http;
 
 namespace Microsoft.DocumentDB;
+
 /** Represents a mongo cluster firewall rule. */
 @parentResource(MongoCluster)
 model FirewallRule is ProxyResource<FirewallRuleProperties> {
@@ -51,5 +52,5 @@ interface FirewallRules {
   /** Deletes a mongo cluster firewall rule. */
   delete is ArmResourceDeleteWithoutOkAsync<FirewallRule>;
   /** List all the firewall rules in a given mongo cluster. */
-  listByParent is ArmResourceListByParent<FirewallRule>;
+  listByMongoCluster is ArmResourceListByParent<FirewallRule>;
 }

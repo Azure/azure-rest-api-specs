@@ -790,7 +790,7 @@ model DevBoxRepairOperationResult {
 }
 
 @doc("The Customization Task list result.")
-model CustomizationTaskDefinitionResult
+model PagedCustomizationTaskDefinition
   is Azure.Core.Page<CustomizationTaskDefinition>;
 
 @doc("Represents a task to be used in customizing a Dev Box.")

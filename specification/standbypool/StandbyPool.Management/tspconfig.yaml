@@ -10,6 +10,9 @@ options:
   "@azure-tools/typespec-autorest":
     use-read-only-status-schema: true
     azure-resource-provider-folder: "resource-manager"
+    emit-common-types-schema: "never"
+    # `arm-resource-flattening` is only used for back-compat for specs existed on July 2024. All new service spec should NOT use this flag
+    arm-resource-flattening: true
     emitter-output-dir: "{project-root}/.."
     examples-directory: "{project-root}/examples"
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/standbypool.json"
@@ -21,4 +24,4 @@ options:
     flavor: "azure"
     namespace: "com.azure.resourcemanager.standbypool"
     service-name: "Standby Pool"
-    examples-directory: "examples"
+    examples-directory: "{project-root}/examples"
