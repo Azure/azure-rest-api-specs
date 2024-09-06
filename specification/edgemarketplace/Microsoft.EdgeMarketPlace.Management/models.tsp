@@ -13,54 +13,63 @@ namespace Microsoft.EdgeMarketplace;
 interface Operations extends Azure.ResourceManager.Operations {}
 
 @doc("Enum for CreatedBy")
-enum CreatedByType {
+union CreatedByType {
+  string,
+
   @doc("The resource is created by user")
-  User,
+  User: "User",
 
   @doc("The resource is created by application")
-  Application,
+  Application: "Application",
 
   @doc("The resource is created by managed identity")
-  ManagedIdentity,
+  ManagedIdentity: "ManagedIdentity",
 
   @doc("The resource is created by key")
-  Key,
+  Key: "Key",
 }
 
 @doc("Origin Enum")
-enum Origin {
+union Origin {
+  string,
+
   @doc("Origin is user")
-  user,
+  user: "user",
 
   @doc("Origin is system")
-  system,
+  system: "system",
 
   @doc("Origin is user and system")
-  `user,system`,
+  userAndSystem: "user,system",
 }
 
 @doc("ActionType Enum")
-enum ActionType {
+union ActionType {
+  string,
+
   @doc("ActionType is internal")
-  Internal,
+  Internal: "Internal",
 }
 
 @doc("OfferAvailability Enum")
-enum OfferAvailability {
-  @doc("The offer availability is private") Private,
-  @doc("The offer availability is public") Public,
+union OfferAvailability {
+  string,
+  @doc("The offer availability is private") Private: "Private",
+  @doc("The offer availability is public") Public: "Public",
 }
 
 @doc("Offer release type Enum")
-enum OfferReleaseType {
-  @doc("The offer in preview") Preview,
-  @doc("The offer in GA") GA,
+union OfferReleaseType {
+  string,
+  @doc("The offer in preview") Preview: "Preview",
+  @doc("The offer in GA") GA: "GA",
 }
 
 @doc("Publisher properties")
 model PublisherProperties {
   @doc("The resource provisioning state")
-  provisioningState: ResourceProvisioningState;
+  @visibility("read")
+  provisioningState?: ResourceProvisioningState;
 }
 
 @doc("The offer properties")
@@ -75,6 +84,7 @@ model OfferProperties {
   offerContent: OfferContent;
 
   @doc("The resource provisioning state")
+  @visibility("read")
   provisioningState?: ResourceProvisioningState;
 
   @doc("The marketplace skus")

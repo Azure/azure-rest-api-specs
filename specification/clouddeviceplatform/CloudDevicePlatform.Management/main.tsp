@@ -17,7 +17,7 @@ using Azure.ResourceManager;
 @service({
   title: "Microsoft.CloudDevicePlatform management service",
 })
-@versioned(Microsoft.CloudDevicePlatform.Versions)
+@versioned(Versions)
 namespace Microsoft.CloudDevicePlatform;
 
 @doc("Microsoft.CloudDevicePlatform Versions")

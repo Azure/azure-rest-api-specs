@@ -54,5 +54,5 @@ interface HyperspaceWebServerInstances {
   /**
    * Lists the Epic HyperspaceWeb Server Instance resources for a given Virtual Instance for Epic solutions resource.
    */
-  list is ArmResourceListByParent<HyperspaceWebServerInstance>;
+  listByEpicVirtualInstance is ArmResourceListByParent<HyperspaceWebServerInstance>;
 }

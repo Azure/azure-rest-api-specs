@@ -1,5 +1,5 @@
 using Azure.ResourceManager;
-
+using Azure.Core;
 namespace Microsoft.Sovereign;
 
 @doc("The properties of the Landing Zone registration resource type.")
@@ -9,14 +9,14 @@ model LandingZoneRegistrationProperties {
   provisioningState?: ResourceProvisioningState;
 
   @doc("The resource id of the top level management group")
-  existingTopLevelMgId: ResourceIdentifier<[
+  existingTopLevelMgId: armResourceIdentifier<[
     {
       type: "Microsoft.Management/managementGroups";
     }
   ]>;
 
   @doc("The resource id of the associated landing zone configuration.")
-  existingLandingZoneConfigurationId: ResourceIdentifier<[
+  existingLandingZoneConfigurationId: armResourceIdentifier<[
     {
       type: "Microsoft.Sovereign/landingZoneConfigurations";
     }

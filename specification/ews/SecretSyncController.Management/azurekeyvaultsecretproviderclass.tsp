@@ -6,6 +6,7 @@ import "./common.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
+using Azure.Core;
 using Azure.ResourceManager;
 
 @armProviderNamespace("Microsoft.SecretSyncController")
@@ -33,44 +34,12 @@ model AzureKeyVaultSecretProviderClassProperties {
   @pattern("^[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}$")
   tenantId: string;
 
-  @doc("List of objects to synchronize from the specified Azure Key Vault.")
-  @OpenAPI.extension("x-ms-identifiers", [])
-  objects?: AzureKeyVaultObjectProperties[];
+  @doc("Objects defines the desired state of synced K8s secret objects")
+  objects?: string;
 
   @doc("Provisioning state of the AzureKeyVaultSecretProviderClass instance.")
   @visibility("read")
   provisioningState?: ProvisioningState;
-}
-
-@doc("The properties of an object to synchronize from an Azure Key Vault.")
-model AzureKeyVaultObjectProperties {
-  // Azure Key Vault Object properties
-  // https://azure.github.io/secrets-store-csi-driver-provider-azure/docs/getting-started/usage/
-  @doc("The name of the object in Azure Key Vault.")
-  objectName: string;
-
-  @doc("The type of the object in Azure Key Vault.")
-  objectType: AzureKeyVaultObjectType;
-
-  @doc("The number of versions of the object to synchronize.")
-  versionsToSync?: int32;
-}
-
-// Defined as an extensable union rather than an enum for compliance with rule https://azure.github.io/typespec-azure/docs/next/libraries/azure-core/rules/no-enum
-@doc("Enumeration of types of object that can be synchronized from an Azure Key Vault.")
-union AzureKeyVaultObjectType {
-  // https://learn.microsoft.com/en-us/azure/key-vault/general/about-keys-secrets-certificates
-  // https://azure.github.io/secrets-store-csi-driver-provider-azure/docs/configurations/getting-certs-and-keys/
-  @doc("Azure Key Vault secret")
-  Secret: "Secret",
-
-  @doc("Azure Key Vault key")
-  Key: "Key",
-
-  @doc("Azure Key Vault certificate")
-  Cert: "Cert",
-
-  string,
 }
 
 @armResourceOperations

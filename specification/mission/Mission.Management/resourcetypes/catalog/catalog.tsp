@@ -48,6 +48,7 @@ model Package {
   @doc("Package Name.")
   name?: string;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing api"
   @doc("Package metadata.")
   metadata?: Record<string>;
 }

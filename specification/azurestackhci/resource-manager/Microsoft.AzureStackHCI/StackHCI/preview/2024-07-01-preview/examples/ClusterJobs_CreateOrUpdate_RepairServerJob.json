@@ -1,0 +1,240 @@
+{
+  "title": "ClusterJobs_CreateOrUpdate_RepairServerJob",
+  "operationId": "ClusterJobs_CreateOrUpdate",
+  "parameters": {
+    "subscriptionId": "fd3c3665-1729-4b7b-9a38-238e83b0f98b",
+    "resourceGroupName": "test-rg",
+    "clusterName": "myCluster",
+    "jobsName": "repairnode",
+    "api-version": "2024-07-01-preview",
+    "resource": {
+      "kind": "WindowsServer",
+      "properties": {
+        "jobType": "RepairServer",
+        "arcNodeResourceIds": [
+          "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/ArcInstance-rg/providers/Microsoft.HybridCompute/machines/Node-2"
+        ],
+        "serverName": "Node-2",
+        "deploymentMode": "Deploy",
+        "secrets": [
+          {
+            "secretName": "cluster1-LocalAdminCredential-f5bcc1d9-23af-4ae9-aca1-041d0f593a63",
+            "eceSecretName": "LocalAdminCredential",
+            "secretLocation": "https://sclusterkvnirhci35.vault.azure.net/secrets/cluster-34232342-LocalAdminCredential-f5bcc1d9-23af-4ae9-aca1-041d0f593a63/9276354aabfc492fa9b2cdbefb54ae4b"
+          },
+          {
+            "secretName": "cluster2-AzureStackLCMUserCredential-f5bcc1d9-23af-4ae9-aca1-041d0f593a63",
+            "eceSecretName": "AzureStackLCMUserCredential",
+            "secretLocation": "https://sclusterkvnirhci35.vault.azure.net/secrets/cluster-34232342-AzureStackLCMUserCredential-f5bcc1d9-23af-4ae9-aca1-041d0f593a63/9276354aabfc492fa9b2cdbefb54ae4c"
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/user-pvtrp-rg/providers/Microsoft.AzureStackHCI/clusters/hciclu3/jobs/repairnode",
+        "name": "repairnode",
+        "type": "Microsoft.AzureStackHCI/clusters/jobs",
+        "kind": "WindowsServer",
+        "systemData": {
+          "createdBy": "user@microsoft.com",
+          "createdByType": "User",
+          "createdAt": "2024-01-29T10:43:27.9471574Z",
+          "lastModifiedBy": "user@microsoft.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2024-01-29T10:43:27.9471574Z"
+        },
+        "properties": {
+          "jobType": "RepairServer",
+          "serverName": "Node-2",
+          "deploymentMode": "Deploy",
+          "secrets": [
+            {
+              "secretName": "cluster1-LocalAdminCredential-f5bcc1d9-23af-4ae9-aca1-041d0f593a63",
+              "eceSecretName": "LocalAdminCredential",
+              "secretLocation": "https://sclusterkvnirhci35.vault.azure.net/secrets/cluster-34232342-LocalAdminCredential-f5bcc1d9-23af-4ae9-aca1-041d0f593a63/9276354aabfc492fa9b2cdbefb54ae4b"
+            },
+            {
+              "secretName": "cluster2-AzureStackLCMUserCredential-f5bcc1d9-23af-4ae9-aca1-041d0f593a63",
+              "eceSecretName": "AzureStackLCMUserCredential",
+              "secretLocation": "https://sclusterkvnirhci35.vault.azure.net/secrets/cluster-34232342-AzureStackLCMUserCredential-f5bcc1d9-23af-4ae9-aca1-041d0f593a63/9276354aabfc492fa9b2cdbefb54ae4c"
+            }
+          ],
+          "reportedProperties": {
+            "validationStatus": {
+              "status": "Error",
+              "steps": [
+                {
+                  "fullStepIndex": "0",
+                  "name": "Repair Server Deployment",
+                  "description": "Repair Server.",
+                  "startTimeUtc": "2023-06-09T00:08:19",
+                  "endTimeUtc": "2023-06-09T04:01:47",
+                  "status": "Error",
+                  "exception": [
+                    "exception1",
+                    "exception2"
+                  ],
+                  "steps": [
+                    {
+                      "fullStepIndex": "0.1",
+                      "name": "Before Cloud Deployment",
+                      "description": "Before Cloud Deployment",
+                      "startTimeUtc": "2023-06-09T00:08:23",
+                      "endTimeUtc": "2023-06-09T01:10:10",
+                      "exception": [
+                        "exception1",
+                        "exception2"
+                      ],
+                      "steps": []
+                    }
+                  ]
+                }
+              ]
+            },
+            "deploymentStatus": {
+              "status": "Error",
+              "steps": [
+                {
+                  "fullStepIndex": "0",
+                  "name": "Repair Server Deployment",
+                  "description": "Repair Server.",
+                  "startTimeUtc": "2023-06-09T00:08:19",
+                  "endTimeUtc": "2023-06-09T04:01:47",
+                  "status": "Error",
+                  "exception": [
+                    "exception1",
+                    "exception2"
+                  ],
+                  "steps": [
+                    {
+                      "fullStepIndex": "0.1",
+                      "name": "Before Cloud Deployment",
+                      "description": "Before Cloud Deployment",
+                      "startTimeUtc": "2023-06-09T00:08:23",
+                      "endTimeUtc": "2023-06-09T01:10:10",
+                      "exception": [
+                        "exception1",
+                        "exception2"
+                      ],
+                      "steps": []
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          "provisioningState": "Succeeded",
+          "arcNodeResourceIds": [
+            "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/ArcInstance-rg/providers/Microsoft.HybridCompute/machines/Node-2"
+          ],
+          "status": "NotSpecified"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/user-pvtrp-rg/providers/Microsoft.AzureStackHCI/clusters/hciclu3/jobs/repairnode",
+        "name": "repairnode",
+        "type": "Microsoft.AzureStackHCI/clusters/jobs",
+        "kind": "WindowsServer",
+        "systemData": {
+          "createdBy": "user@microsoft.com",
+          "createdByType": "User",
+          "createdAt": "2024-01-29T10:43:27.9471574Z",
+          "lastModifiedBy": "user@microsoft.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2024-01-29T10:43:27.9471574Z"
+        },
+        "properties": {
+          "jobType": "RepairServer",
+          "serverName": "Node-2",
+          "deploymentMode": "Deploy",
+          "secrets": [
+            {
+              "secretName": "cluster1-LocalAdminCredential-f5bcc1d9-23af-4ae9-aca1-041d0f593a63",
+              "eceSecretName": "LocalAdminCredential",
+              "secretLocation": "https://sclusterkvnirhci35.vault.azure.net/secrets/cluster-34232342-LocalAdminCredential-f5bcc1d9-23af-4ae9-aca1-041d0f593a63/9276354aabfc492fa9b2cdbefb54ae4b"
+            },
+            {
+              "secretName": "cluster2-AzureStackLCMUserCredential-f5bcc1d9-23af-4ae9-aca1-041d0f593a63",
+              "eceSecretName": "AzureStackLCMUserCredential",
+              "secretLocation": "https://sclusterkvnirhci35.vault.azure.net/secrets/cluster-34232342-AzureStackLCMUserCredential-f5bcc1d9-23af-4ae9-aca1-041d0f593a63/9276354aabfc492fa9b2cdbefb54ae4c"
+            }
+          ],
+          "reportedProperties": {
+            "validationStatus": {
+              "status": "Error",
+              "steps": [
+                {
+                  "fullStepIndex": "0",
+                  "name": "Repair Server Deployment",
+                  "description": "Repair Server.",
+                  "startTimeUtc": "2023-06-09T00:08:19",
+                  "endTimeUtc": "2023-06-09T04:01:47",
+                  "status": "Error",
+                  "exception": [
+                    "exception1",
+                    "exception2"
+                  ],
+                  "steps": [
+                    {
+                      "fullStepIndex": "0.1",
+                      "name": "Before Cloud Deployment",
+                      "description": "Before Cloud Deployment",
+                      "startTimeUtc": "2023-06-09T00:08:23",
+                      "endTimeUtc": "2023-06-09T01:10:10",
+                      "exception": [
+                        "exception1",
+                        "exception2"
+                      ],
+                      "steps": []
+                    }
+                  ]
+                }
+              ]
+            },
+            "deploymentStatus": {
+              "status": "Error",
+              "steps": [
+                {
+                  "fullStepIndex": "0",
+                  "name": "Repair Server Deployment",
+                  "description": "Repair Server.",
+                  "startTimeUtc": "2023-06-09T00:08:19",
+                  "endTimeUtc": "2023-06-09T04:01:47",
+                  "status": "Error",
+                  "exception": [
+                    "exception1",
+                    "exception2"
+                  ],
+                  "steps": [
+                    {
+                      "fullStepIndex": "0.1",
+                      "name": "Before Cloud Deployment",
+                      "description": "Before Cloud Deployment",
+                      "startTimeUtc": "2023-06-09T00:08:23",
+                      "endTimeUtc": "2023-06-09T01:10:10",
+                      "exception": [
+                        "exception1",
+                        "exception2"
+                      ],
+                      "steps": []
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          "provisioningState": "Succeeded",
+          "arcNodeResourceIds": [
+            "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/ArcInstance-rg/providers/Microsoft.HybridCompute/machines/Node-2"
+          ],
+          "status": "NotSpecified"
+        }
+      }
+    }
+  }
+}

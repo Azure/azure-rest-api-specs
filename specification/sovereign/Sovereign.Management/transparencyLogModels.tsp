@@ -21,7 +21,9 @@ model TransparencyLogProperties {
 
 @doc("Supported cultures.")
 @added(Versions.Preview20240331)
-enum Culture {
+union Culture {
+  string,
+
   @doc("Czech (Czechia)")
   cs_CZ: "cs-CZ",
 
@@ -85,7 +87,9 @@ enum Culture {
 
 @doc("Supported file formats.")
 @added(Versions.Preview20240331)
-enum FileFormat {
+union FileFormat {
+  string,
+
   @doc("No file requested.")
   None: "None",
 

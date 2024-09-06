@@ -24,19 +24,31 @@ These are the global settings for the MessagingConnectors.
 ```yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2024-05-01-preview
+tag: package-2024-08-01-preview
 ```
 
-### Tag: package-2024-05-01-preview
+### Tag: package-2024-08-01-preview
 
-These settings apply only when `--tag=package-2024-05-01-preview` is specified on the command line.
+These settings apply only when `--tag=package-2024-08-01-preview` is specified on the command line.
 
-```yaml $(tag) == 'package-2024-05-01-preview'
+```yaml $(tag) == 'package-2024-08-01-preview'
 input-file:
-  - Microsoft.MessagingConnectors/preview/2024-05-01-preview/messagingconnectors.json
+  - Microsoft.MessagingConnectors/preview/2024-08-01-preview/messagingconnectors.json
 ```
 
 ---
+
+## Suppression
+
+``` yaml
+input-file:
+  - Microsoft.MessagingConnectors/preview/2024-08-01-preview/messagingconnectors.json
+
+suppressions:
+  - code: BodyTopLevelProperties
+    from: messagingconnectors.json
+    reason: Issue https://github.com/Azure/azure-openapi-validator/issues/722. The BodyTopLevelProperties check failing.
+ ```
 
 # Code Generation
 

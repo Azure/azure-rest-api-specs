@@ -6,7 +6,6 @@ import "./models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -39,14 +38,14 @@ interface ConnectivityStatuses {
    */
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     ConnectivityStatus,
-    BaseParameters<ConnectivityStatus>,
+    Azure.ResourceManager.Foundations.BaseParameters<ConnectivityStatus>,
     ArmAsyncOperationHeader & Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**
    * Update a ConnectivityStatus
    */
-  @parameterVisibility("read")
+  @parameterVisibility
   update is ArmCustomPatchSync<ConnectivityStatus, ConnectivityStatusUpdate>;
 
   /**

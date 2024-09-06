@@ -2,7 +2,6 @@ import "@typespec/http";
 import "@typespec/openapi";
 import "@typespec/rest";
 import "@typespec/versioning";
-import "@azure-tools/typespec-providerhub";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
@@ -10,19 +9,23 @@ using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using Azure.Core;
 using Azure.Core.Traits;
 using OpenAPI;
 
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-common-types-version" "legacy"
 @armProviderNamespace("Microsoft.ConnectedCredentials")
 @service({
   title: "Microsoft.ConnectedCredentials",
-  version: "2023-06-12-preview",
 })
 @doc("Connected Credentials Provider management API.")
-@useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+@versioned(Versions)
 namespace Microsoft.ConnectedCredentials;
+
+enum Versions {
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  `2023-06-12-preview`,
+}
 
 interface Operations extends Azure.ResourceManager.Operations {}
 
@@ -42,20 +45,20 @@ model Credential is TrackedResource<CredentialProperties> {
 
 @doc("The status of the current operation.")
 @Azure.Core.lroStatus
-enum ProvisioningState {
-  ...ResourceProvisioningState,
+union ProvisioningState {
+  ResourceProvisioningState,
 
   @doc("The provisioning resource state.")
-  Provisioning,
+  Provisioning: "Provisioning",
 
   @doc("The updating resource state.")
-  Updating,
+  Updating: "Updating",
 
   @doc("The deleting resource state.")
-  Deleting,
+  Deleting: "Deleting",
 
   @doc("The accepted resource state.")
-  Accepted,
+  Accepted: "Accepted",
 }
 
 @doc("The extended location.")
@@ -134,10 +137,12 @@ model Target {
 
 @doc("Metadata of credential resource.")
 model Metadata {
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing API"
   @visibility("read", "create")
   @doc("Annotations of credential resource.")
   annotations?: Record<string>;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing API"
   @visibility("read", "create")
   @doc("Labels of credential resource.")
   labels?: Record<string>;
@@ -192,7 +197,15 @@ model ResourceStatus {
 interface Credentials {
   get is ArmResourceRead<Credential>;
   createOrUpdate is ArmResourceCreateOrUpdateAsync<Credential>;
-  update is ArmResourcePatchAsync<Credential, CredentialProperties>;
+  update is ArmCustomPatchAsync<
+    Credential,
+    Azure.ResourceManager.Foundations.ResourceUpdateModel<
+      Credential,
+      CredentialProperties
+    >
+  >;
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "legacy"
+  #suppress "deprecated" "legacy"
   delete is ArmResourceDeleteAsync<Credential>;
   listByResourceGroup is ArmResourceListByParent<Credential>;
   listBySubscription is ArmListBySubscription<Credential>;

@@ -11,7 +11,7 @@ using Azure.ResourceManager;
 
 @doc("Request body for calling post-action")
 model ApprovalCallbackRequest {
-  @doc("Resource Id of the item being approved or declined")
+  @doc("Resource Id of the item being approved or rejected")
   resourceId: string;
 
   @doc("Resource request action indicating action which needed to be performed upon calling approval-callback post action")

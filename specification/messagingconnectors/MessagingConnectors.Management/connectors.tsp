@@ -22,7 +22,7 @@ using TypeSpec.OpenAPI;
 namespace Microsoft.MessagingConnectors;
 
 @doc("A Connector resource Azure")
-model ConnectorInstance is TrackedResource<ResourceProperties> {
+model MessagingConnector is TrackedResource<ResourceProperties> {
   @doc("Name of the Connector resource.")
   @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{0,78}[a-zA-Z0-9_]")
   @path
@@ -34,26 +34,26 @@ model ConnectorInstance is TrackedResource<ResourceProperties> {
 @armResourceOperations
 interface ConnectorOperations {
   @doc("Gets an Connector instance for the specified subscription, resource group, and instance name.")
-  get is ArmResourceRead<ConnectorInstance>;
+  get is ArmResourceRead<MessagingConnector>;
 
   @doc("Create an Connector instance for the specified subscription, resource group, and instance name.")
-  createOrUpdate is ArmResourceCreateOrReplaceSync<ConnectorInstance>;
+  createOrUpdate is ArmResourceCreateOrReplaceSync<MessagingConnector>;
 
   @doc("Delete an Connector instance for the specified subscription, resource group, and instance name.")
-  delete is ArmResourceDeleteSync<ConnectorInstance>;
+  delete is ArmResourceDeleteSync<MessagingConnector>;
 
   @doc("Pause one Connector to paused status")
-  pause is ArmResourceActionNoContentSync<ConnectorInstance, {}>;
+  pause is ArmResourceActionNoContentSync<MessagingConnector, {}>;
 
   @doc("Resume one Connector to running status")
-  resume is ArmResourceActionNoContentSync<ConnectorInstance, {}>;
+  resume is ArmResourceActionNoContentSync<MessagingConnector, {}>;
 
   @doc("List Connector By ResourceGroup and Subscription")
-  listByResourceGroup is ArmResourceListByParent<ConnectorInstance>;
+  listByResourceGroup is ArmResourceListByParent<MessagingConnector>;
 
   @doc("List Connector By Subscription")
-  listBySubscription is ArmListBySubscription<ConnectorInstance>;
+  listBySubscription is ArmListBySubscription<MessagingConnector>;
 
   @doc("Update Tags of Connector")
-  updateTags is ArmTagsPatchSync<ConnectorInstance>;
+  updateTags is ArmTagsPatchSync<MessagingConnector>;
 }

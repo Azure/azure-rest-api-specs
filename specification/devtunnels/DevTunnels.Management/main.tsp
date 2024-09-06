@@ -8,15 +8,19 @@ using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 
 @armProviderNamespace
 @service({
   title: "Azure Dev Tunnels",
-  version: "2023-05-23-preview",
 })
-@useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+@versioned(Versions)
 namespace Microsoft.DevTunnels;
+
+enum Versions {
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  `2023-05-23-preview`,
+}
 
 interface Operations extends Azure.ResourceManager.Operations {
   @tag("CheckNameAvailability")
@@ -24,15 +28,17 @@ interface Operations extends Azure.ResourceManager.Operations {
 }
 
 @doc("Provisioning state enum")
-enum ProvisioningState {
+union ProvisioningState {
+  string,
+
   @doc("The operation succeeded")
-  Succeeded,
-  
+  Succeeded: "Succeeded",
+
   @doc("The operation failed")
-  Failed,
+  Failed: "Failed",
 
   @doc("The operation was canceled")
-  Canceled,
+  Canceled: "Canceled",
 }
 
 @doc("The properties of TunnelPlan")
@@ -58,7 +64,8 @@ model TunnelPlanResource is TrackedResource<TunnelPlanProperties> {
   @path
   @pattern("^[a-zA-Z0-9-]{3,24}$")
   name: string;
-  ...EntityTag;
+
+  ...EntityTagProperty;
 }
 
 @doc("The response to a getToken request")
@@ -74,15 +81,15 @@ interface TunnelPlans {
   @post
   @doc("POST ARM resource action with no body")
   ArmResourceActionNoBodySync<
-    TResource extends ArmResource,
+    TResource extends Azure.ResourceManager.CommonTypes.Resource,
     TResponse extends {},
-    TBaseParameters = BaseParameters<TResource>
+    TBaseParameters = Azure.ResourceManager.Foundations.BaseParameters<TResource>
   >(
-    ...ResourceInstanceParameters<TResource, TBaseParameters>
+    ...ResourceInstanceParameters<TResource, TBaseParameters>,
   ): ArmResponse<TResponse> | ErrorResponse;
 
   get is ArmResourceRead<TunnelPlanResource>;
-  createOrUpdate is ArmResourceCreateOrUpdateSync<TunnelPlanResource>;
+  createOrUpdate is ArmResourceCreateOrReplaceSync<TunnelPlanResource>;
   update is ArmResourcePatchSync<TunnelPlanResource, TunnelPlanProperties>;
   delete is ArmResourceDeleteSync<TunnelPlanResource>;
   listByResourceGroup is ArmResourceListByParent<TunnelPlanResource>;
@@ -106,6 +113,7 @@ model BillingTierProperties {
 
 @subscriptionResource
 model BillingTierResource is ProxyResource<BillingTierProperties> {
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-name-pattern" "Legacy"
   @doc("Billing Tier Name")
   @visibility("read")
   @key

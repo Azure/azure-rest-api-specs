@@ -64,22 +64,12 @@ interface EdgeDeviceJobs {
 
 ///////////////////models///////////
 
-@doc("Represents the status of a log collection operation.")
-union LogCollectionStatus {
-  @doc("A custom status provided as a string.")
+@doc("Represents the provisioning operating system type.")
+union ProvisioningOsType {
   string,
 
-  @doc("Indicates that no log collection operation has been initiated.")
-  None: "None",
-
-  @doc("Indicates that the log collection operation is currently in progress.")
-  InProgress: "InProgress",
-
-  @doc("Indicates that the log collection operation has failed.")
-  Failed: "Failed",
-
-  @doc("Indicates that the log collection operation has completed successfully.")
-  Succeeded: "Succeeded",
+  @doc("AzureLinux OS.")
+  AzureLinux: "AzureLinux",
 }
 
 @doc("Job Type supported by Azure Linux Edge Devices.")
@@ -93,31 +83,12 @@ union AzureLinuxEdgeDeviceJobType {
   RemoteSupport: "RemoteSupport",
 }
 
-@doc("Defines the level of remote support access granted.")
-union RemoteSupportAccessLevel {
-  @doc("A custom access level provided as a string.")
+@doc("Job Type supported by Azure Linux Edge Devices in Restricted operating environment.")
+union AzureLinuxRoeEdgeDeviceJobType {
   string,
 
-  @doc("No remote support access is granted.")
-  None: "None",
-
-  @doc("Access is limited to diagnostics information only.")
-  Diagnostics: "Diagnostics",
-
-  @doc("Access includes diagnostics information and the ability to perform repairs.")
-  DiagnosticsAndRepair: "DiagnosticsAndRepair",
-}
-
-@doc("Defines the type of remote support action to be performed on an edge device.")
-union RemoteSupportType {
-  @doc("A custom action type provided as a string.")
-  string,
-
-  @doc("Enables remote support for the edge device.")
-  Enable: "Enable",
-
-  @doc("Revokes previously granted remote support access for the edge device.")
-  Revoke: "Revoke",
+  @doc("Job to provision operating system in the device.")
+  ProvisionOs: "ProvisionOs",
 }
 
 @doc("Job Type supported.")
@@ -194,12 +165,34 @@ model LogCollectionSession {
 
   @doc("The status of the log collection session.")
   @visibility("read")
-  status?: LogCollectionStatus;
+  status?: DeviceLogCollectionStatus;
 
   @doc("A unique identifier for correlating this log collection session with other operations or sessions.")
   @visibility("read")
   correlationId?: string;
 }
+
+@doc("Represents the status of a log collection operation.")
+union DeviceLogCollectionStatus {
+  @doc("A custom status provided as a string.")
+  string,
+
+  @doc("Log collection operation has not been initiated.")
+  NotStarted: "NotStarted",
+
+  @doc("Indicates that the log collection operation is currently running.")
+  Running: "Running",
+
+  @doc("Indicates that the log collection operation has failed.")
+  Failed: "Failed",
+
+  @doc("Indicates that the log collection operation has completed successfully.")
+  Succeeded: "Succeeded",
+
+  @doc("Indicates that the log collection operation has completed successfully.")
+  Canceled: "Canceled",
+}
+
 @doc("Edge device job properties")
 @discriminator("jobType")
 model AzureLinuxEdgeDeviceJobProperties {
@@ -208,6 +201,16 @@ model AzureLinuxEdgeDeviceJobProperties {
   @doc("Job Type to support polymorphic resource.")
   @extension("x-ms-mutability", ["create", "read"])
   jobType: AzureLinuxEdgeDeviceJobType;
+}
+
+@doc("Azure linux edge device job properties in restricted operating environment")
+@discriminator("jobType")
+model AzureLinuxRoeEdgeDeviceJobProperties {
+  ...EdgeDeviceJobProperties;
+
+  @doc("Job Type to support polymorphic resource.")
+  @extension("x-ms-mutability", ["create", "read"])
+  jobType: AzureLinuxRoeEdgeDeviceJobType;
 }
 
 @doc("Edge device job properties")
@@ -264,6 +267,15 @@ model AzureLinuxEdgeDeviceJob extends EdgeDeviceJob {
   kind: EdgeDeviceKind.AzureLinux;
 }
 
+@doc("Edge device job for Azure Linux restricted operating environment solution.")
+model AzureLinuxRoeEdgeDeviceJob extends EdgeDeviceJob {
+  @doc("Edge device job properties for restricted operating environment")
+  properties: AzureLinuxRoeEdgeDeviceJobProperties;
+
+  @doc("Edge Solution type to support polymorphic resource.")
+  kind: EdgeDeviceKind.AzureLinuxRoe;
+}
+
 @doc("Represents the properties of an Azure Linux Remote Support job.")
 model AzureLinuxRemoteSupportJobProperties
   extends AzureLinuxEdgeDeviceJobProperties {
@@ -271,6 +283,194 @@ model AzureLinuxRemoteSupportJobProperties
 
   @doc("Job Type to support polymorphic resource.")
   jobType: AzureLinuxEdgeDeviceJobType.RemoteSupport;
+}
+
+@doc("Represents the properties of an Azure Linux restricted operating environment Provision Os job.")
+model AzureLinuxRoeProvisionOsJobProperties
+  extends AzureLinuxRoeEdgeDeviceJobProperties {
+  @doc("Job Type to support polymorphic resource.")
+  jobType: AzureLinuxRoeEdgeDeviceJobType.ProvisionOs;
+
+  @doc("Os Provisioning request.")
+  provisioningRequest: ProvisioningRequest;
+}
+
+@discriminator("target")
+@doc("Represents a provisioning request.")
+model ProvisioningRequest {
+  @doc("Target operating system to support polymorphic resource.")
+  @extension("x-ms-mutability", ["create", "read"])
+  target: ProvisioningOsType;
+}
+
+@doc("Azure Linux provisioning request.")
+model AzureLinuxProvisioningRequest extends ProvisioningRequest {
+  @doc("Target operating system type to support polymorphic resource.")
+  target: ProvisioningOsType.AzureLinux;
+
+  @doc("Operating system profile.")
+  osProfile: OsProfile;
+
+  @doc("User configuration.")
+  userConfiguration: UserConfiguration;
+
+  @doc("Onboarding configuration.")
+  onboardingConfiguration: OnboardingConfiguration;
+
+  @doc("Device configuration.")
+  deviceConfiguration: DeviceConfiguration;
+}
+
+@doc("Operating system profile.")
+model OsProfile {
+  @doc("Name of the operating system.")
+  osName?: string;
+
+  @doc("Type of the operating system.")
+  osType?: string;
+
+  @doc("Version of the operating system.")
+  osVersion?: string;
+
+  @doc("URL of the operating system image.")
+  osImageUrl?: string;
+}
+
+@doc("User configuration.")
+model UserConfiguration {
+  @doc("Name of the user.")
+  userName: string;
+
+  @doc("Type of the secret used for authentication.")
+  secretType: string;
+
+  @doc("Location of the secret used for authentication.")
+  secretLocation: string;
+}
+
+@doc("Onboarding resource type.")
+union OnboardingResourceType {
+  string,
+
+  @doc("Hybrid Compute Machine.")
+  HybridComputeMachine: "HybridComputeMachine",
+}
+
+@discriminator("type")
+@doc("Onboarding configuration.")
+model OnboardingConfiguration {
+  @doc("Type of the onboarding resource to support polymorphic resource.")
+  @extension("x-ms-mutability", ["create", "read"])
+  type: OnboardingResourceType;
+}
+
+@doc("Represents properties for hybrid compute machine onboarding resource.")
+model HybridComputeMachineOnboardingConfiguration
+  extends OnboardingConfiguration {
+  @doc("Type of the onboarding resource to support polymorphic resource.")
+  type: OnboardingResourceType.HybridComputeMachine;
+
+  @doc("Resource ID.")
+  resourceId: string;
+
+  @doc("Location of the resource.")
+  location: string;
+
+  @doc("Tenant ID of the resource.")
+  tenantId?: string;
+
+  @doc("Azure Arc virtual machine ID.")
+  arcVirtualMachineId: string;
+}
+
+@doc("Device configuration.")
+model DeviceConfiguration {
+  @doc("Network configuration.")
+  network?: NetworkConfiguration;
+
+  @doc("Hostname of the device.")
+  hostName?: string;
+
+  @doc("Web proxy configuration.")
+  webProxy?: WebProxyConfiguration;
+
+  @doc("Time configuration.")
+  time?: TimeConfiguration;
+}
+
+@doc("Network configuration.")
+model NetworkConfiguration {
+  @OpenAPI.extension("x-ms-identifiers", [])
+  @doc("List of network adapters.")
+  networkAdapters: NetworkAdapter[];
+}
+
+@doc("Network adapter configuration.")
+model NetworkAdapter {
+  @doc("Type of IP assignment.")
+  ipAssignmentType: IpAssignmentType;
+
+  @doc("IP address.")
+  ipAddress?: string;
+
+  @doc("IP address range.")
+  ipAddressRange?: IpAddressRange;
+
+  @doc("Gateway id.")
+  gateway?: string;
+
+  @doc("Subnet mask.")
+  subnetMask?: string;
+
+  @doc("Array of DNS addresses.")
+  dnsAddressArray?: string[];
+
+  @doc("VLAN ID for the network setup.")
+  vlanId?: string;
+}
+
+@doc("IP assignment types")
+union IpAssignmentType {
+  string,
+
+  @doc("Automatic IP assignment")
+  Automatic: "Automatic",
+
+  @doc("Manual IP assignment")
+  Manual: "Manual",
+}
+
+@doc("IP address range configuration.")
+model IpAddressRange {
+  @doc("Start IP address.")
+  startIp: string;
+
+  @doc("End IP address.")
+  endIp: string;
+}
+
+@doc("Web proxy configuration.")
+model WebProxyConfiguration {
+  @doc("Connection URI of the web proxy.")
+  connectionUri?: string;
+
+  @doc("Port of the web proxy.")
+  port?: string;
+
+  @doc("Bypass list for the web proxy.")
+  bypassList?: string[];
+}
+
+@doc("Time configuration.")
+model TimeConfiguration {
+  @doc("Primary NTP server.")
+  primaryTimeServer?: string;
+
+  @doc("Secondary NTP server.")
+  secondaryTimeServer?: string;
+
+  @doc("Time zone.")
+  timeZone?: string;
 }
 
 @doc("Represents the reported properties of a remote support job.")
@@ -289,20 +489,16 @@ model RemoteSupportReportedProperties {
 
   @doc("Optional settings for configuring the node for remote support.")
   @visibility("read")
-  @extension("x-ms-identifiers", ["arcResourceId"])
-  nodeSettings?: RemoteSupportNodeSettings[];
+  nodeSettings?: RemoteSupportNodeSettings;
 
   @doc("Details of the remote support session.")
   @visibility("read")
-  sessionDetails?: RemoteSupportSession;
+  @extension("x-ms-identifiers", ["sessionId"])
+  sessionDetails?: RemoteSupportSession[];
 }
 
 @doc("Represents the settings of a remote support node.")
 model RemoteSupportNodeSettings {
-  @doc("The resource ID of the Azure Arc enabled server.")
-  @visibility("read")
-  arcResourceId?: string;
-
   @doc("The state of the remote support node.")
   @visibility("read")
   state?: string;
@@ -322,14 +518,14 @@ model RemoteSupportNodeSettings {
   @doc("The error message, if any, from the last connection attempt.")
   @visibility("read")
   connectionErrorMessage?: string;
-
-  @doc("The location where the session transcript is stored.")
-  @visibility("read")
-  transcriptLocation?: string;
 }
 
 @doc("Represents a remote support session.")
 model RemoteSupportSession {
+  @doc("Unique session Id.")
+  @visibility("read")
+  sessionId?: string;
+
   @doc("The start time of the remote support session, in UTC.")
   @visibility("read")
   sessionStartTime?: utcDateTime;
@@ -338,17 +534,13 @@ model RemoteSupportSession {
   @visibility("read")
   sessionEndTime?: utcDateTime;
 
-  @doc("The name of the node for which the session was initiated.")
-  @visibility("read")
-  nodeName?: string;
-
-  @doc("The duration of the session in minutes.")
-  @visibility("read")
-  duration?: int32;
-
   @doc("The level of access granted during the remote support session.")
   @visibility("read")
   accessLevel?: RemoteSupportAccessLevel;
+
+  @doc("The location where the session transcript is stored.")
+  @visibility("read")
+  transcriptLocation?: string;
 }
 
 @doc("Represents the properties of a log collection job.")

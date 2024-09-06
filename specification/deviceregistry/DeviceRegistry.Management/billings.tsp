@@ -46,7 +46,7 @@ model BillingContainerProperties {
 @armResourceOperations
 interface BillingContainers {
   get is ArmResourceRead<BillingContainer>;
-  listByResourceGroup is ArmResourceListByParent<BillingContainer>;
+  listBySubscription is ArmListBySubscription<BillingContainer>;
 
   // PUT is not allowed for end users.
   // createOrReplace is ArmResourceCreateOrReplaceAsync<BillingContainer>;

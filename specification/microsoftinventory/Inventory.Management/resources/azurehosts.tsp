@@ -20,7 +20,9 @@ using Azure.ResourceManager.Foundations;
 namespace Microsoft.Inventory;
 
 @tenantResource
-model AzureHostResource is ProxyResource<AzureHostProperties> {
+@parentResource(TenantLocationResource)
+model AzureHostResource
+  is Azure.ResourceManager.ProxyResource<AzureHostProperties> {
   @pattern("[a-zA-Z0-9]+[-]*")
   @key("azureHostName")
   @segment("physicalAzureHosts")
@@ -31,12 +33,6 @@ model AzureHostResource is ProxyResource<AzureHostProperties> {
 
 @armResourceOperations
 interface AzureHosts {
-  getAzureHost is ArmLocResourceRead<
-    AzureHostResource,
-    BaseParameters<AzureHostResource> & LocationParameter
-  >;
-  list is ArmLocResourceListByParent<
-    AzureHostResource,
-    LocationCollectionParameters<AzureHostResource>
-  >;
+  get is ArmResourceRead<AzureHostResource>;
+  list is ArmResourceListByParent<AzureHostResource>;
 }

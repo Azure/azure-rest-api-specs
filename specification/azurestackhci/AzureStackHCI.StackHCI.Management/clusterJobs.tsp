@@ -13,22 +13,6 @@ using Azure.Core;
 @armProviderNamespace("Microsoft.AzureStackHCI")
 namespace Microsoft.AzureStackHCI;
 
-@doc("A Cluster")
-model Cluster is TrackedResource<ClusterProperties> {
-  @pattern("^[a-zA-Z0-9-]{3,24}$")
-  @key("clusterName")
-  @doc("Name of Cluster")
-  @segment("clusters")
-  @visibility("read")
-  @path("/clusters/{clusterName}")
-  name: string;
-}
-@doc("A ClusterProperties")
-model ClusterProperties {
-  @doc("The provisioning state of the cluster.")
-  @visibility("read")
-  provisioningState?: ProvisioningState;
-}
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" ""
 @doc("Cluster Jobs resource")
 @parentResource(Cluster)
@@ -65,17 +49,6 @@ interface ClusterJobs {
 @@doc(ClusterJob.name, "Name of ClusterJob");
 
 ////////////////////models////////////////////
-
-@doc("Edge solution type.")
-union EdgeSolutionType {
-  string,
-
-  @doc("Edge solution for Windows based edge devices.")
-  Windows: "Windows",
-
-  @doc("Edge solution for Azure linux edge devices.")
-  AzureLinux: "AzureLinux",
-}
 
 @doc("Secret names allowed for Enterprise Cloud Engine (ECE) deployment.")
 union EceSecrets {
@@ -123,9 +96,6 @@ union HciJobType {
 
   @doc("Job to add a network intent to the cluster.")
   AddNetworkIntent: "AddNetworkIntent",
-
-  @doc("Job to set or update information in the cluster.")
-  SetInformation: "SetInformation",
 }
 
 @doc("Properties for adding a server to the cluster.")
@@ -241,7 +211,7 @@ model AzureLinuxRepairServerJobProperties
   @extension("x-ms-identifiers", ["secretName"])
   secrets?: EceDeploymentSecrets[];
 
-  @doc("List of Azure resource ids of Arc machines part of cluster for which job will be triggered.")
+  @doc("List of Azure resource ids of Arc machines part of c`luster for which job will be triggered.")
   @visibility("read", "create")
   arcNodeResourceIds?: string[];
 
@@ -255,7 +225,7 @@ model AzureStackHciJob extends ClusterJob {
   properties: HciClusterJobProperties;
 
   @doc("Edge Solution type to support polymorphic resource.")
-  kind: EdgeSolutionType.Windows;
+  kind: EdgeSolutionType.WindowsServer;
 }
 
 @doc("HCI Cluster Job properties")
@@ -266,19 +236,6 @@ model HciClusterJobProperties {
   @doc("Job Type to support polymorphic resource.")
   @extension("x-ms-mutability", ["create", "read"])
   jobType: HciJobType;
-}
-
-@doc("Properties for adding network intent to a cluster.")
-model HciAddNetworkIntentJobProperties extends HciClusterJobProperties {
-  @doc("List of protected parameters to pass to trigger job for cluster.")
-  @extension("x-ms-identifiers", ["secretName"])
-  secrets?: EceDeploymentSecrets[];
-
-  @doc("HostNetwork properties to set network intent.")
-  hostNetwork?: DeploymentHostNetwork;
-
-  @doc("ClusterJob Type to support polymorphic resource.")
-  jobType: HciJobType.AddNetworkIntent;
 }
 
 @doc("Properties for adding a server in the cluster.")
@@ -342,44 +299,6 @@ model HciResumeServerJobProperties extends HciClusterJobProperties {
 
   @doc("ClusterJob Type to support polymorphic resource.")
   jobType: HciJobType.ResumeServer;
-}
-
-@doc("Properties for setting information in the HCI cluster.")
-model HciSetInformationJobProperties extends HciClusterJobProperties {
-  @doc("Set to represent if the system is configured in a switchless or switched configuration.")
-  switchless?: boolean;
-
-  @doc("A string with a list of comma-separated name of the network adapters to use for the storage intent.")
-  storageIntentAdapters?: string;
-
-  @doc("A string with the name of the storage intent. If not provided a default one storage is used.")
-  name?: string;
-
-  @doc("A string with a list of comma-separated vlan ids to use which should map exactly and in order to the adapters provided in StorageIntentAdapters. If not provided the system uses the defaults set by Network ATC.")
-  vlanId?: string;
-
-  @doc("A string with the size to be set for jumbo packet frame size for the storage adapters.")
-  jumboPacket?: string;
-
-  @doc("A string to be set to enabled or disabled to specify if network direct mode should be enabled/disabled.")
-  networkDirect?: string;
-
-  @doc("A string that specifies the network direct technology to be used. Possible values are iWARP, RoCE and RoCEv2.")
-  networkDirectTechnology?: string;
-
-  @doc("A string to specify the 802.1Q priority for the cluster.")
-  priorityValue8021ActionCluster?: string;
-
-  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
-  @doc("A string to specify the 802.1Q priority for SMB.")
-  priorityValue8021ActionSMB?: string;
-
-  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
-  @doc("A string to specify the bandwidth percentage to be used for SMB.")
-  bandwidthPercentageSMB?: string;
-
-  @doc("ClusterJob Type to support polymorphic resource.")
-  jobType: "SetInformation";
 }
 
 @doc("Properties for pausing a server in the cluster.")

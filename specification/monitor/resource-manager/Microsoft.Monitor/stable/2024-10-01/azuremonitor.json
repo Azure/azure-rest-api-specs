@@ -752,6 +752,48 @@
     }
   },
   "definitions": {
+    "Azure.ResourceManager.CommonTypes.ExtendedLocation": {
+      "type": "object",
+      "description": "The complex type of the extended location.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the extended location."
+        },
+        "type": {
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.ExtendedLocationType",
+          "description": "The type of the extended location."
+        }
+      },
+      "required": [
+        "name",
+        "type"
+      ]
+    },
+    "Azure.ResourceManager.CommonTypes.ExtendedLocationType": {
+      "type": "string",
+      "description": "The supported ExtendedLocation types.",
+      "enum": [
+        "EdgeZone",
+        "CustomLocation"
+      ],
+      "x-ms-enum": {
+        "name": "ExtendedLocationType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "EdgeZone",
+            "value": "EdgeZone",
+            "description": "Azure Edge Zones location type"
+          },
+          {
+            "name": "CustomLocation",
+            "value": "CustomLocation",
+            "description": "Azure Custom Locations type"
+          }
+        ]
+      }
+    },
     "Azure.ResourceManager.CommonTypes.TrackedResourceUpdate": {
       "type": "object",
       "description": "The resource model definition for an Azure Resource Manager tracked top level resource which has 'tags' and a 'location'",
@@ -1023,42 +1065,6 @@
         ]
       }
     },
-    "ExtendedLocation": {
-      "type": "object",
-      "description": "The extended location info.",
-      "properties": {
-        "type": {
-          "$ref": "#/definitions/ExtendedLocationType",
-          "description": "The type of extended location."
-        },
-        "name": {
-          "type": "string",
-          "description": "The name of extended location."
-        }
-      },
-      "required": [
-        "type",
-        "name"
-      ]
-    },
-    "ExtendedLocationType": {
-      "type": "string",
-      "description": "The extended location type.",
-      "enum": [
-        "CustomLocation"
-      ],
-      "x-ms-enum": {
-        "name": "ExtendedLocationType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "CustomLocation",
-            "value": "CustomLocation",
-            "description": "Custom location."
-          }
-        ]
-      }
-    },
     "ExternalNetworkingMode": {
       "type": "string",
       "description": "The mode of the external networking.",
@@ -1099,11 +1105,11 @@
       "properties": {
         "sourceField": {
           "$ref": "#/definitions/JsonMapperSourceField",
-          "description": "Define a source field from which a json array will be read and parsed to it's elements. The number of elements in the json array is expected to be the same as the length of keys"
+          "description": "Define a source field from which a json array will be read and parsed to it's elements. The number of elements in the json array is expected to be the same as the length of keys."
         },
         "destinationField": {
           "$ref": "#/definitions/JsonMapperDestinationField",
-          "description": "Define a destination field to which the parsed output will be written. The output is a map, it's keys is the given keys array and the matching values are the parsed json array elements"
+          "description": "Define a destination field to which the parsed output will be written. The output is a map, it's keys is the given keys array and the matching values are the parsed json array elements."
         },
         "keys": {
           "type": "array",
@@ -1123,7 +1129,7 @@
       "properties": {
         "destination": {
           "type": "string",
-          "description": "Define the destination's element. The element is the body or the attributes of the message, to which the json array mapper will write the output map",
+          "description": "Define the destination's element. The element is the body or the attributes of the message, to which the json array mapper will write the output map.",
           "default": "attributes",
           "enum": [
             "body",
@@ -1148,17 +1154,17 @@
         },
         "fieldName": {
           "type": "string",
-          "description": "Define a destination field name under the given element. Leaving this empty, means the root of the element. In case element=attributes and fieldName is empty, the object's attributes themselves will contain the key value output pairs"
+          "description": "Define a destination field name under the given element. Leaving this empty, means the root of the element. In case element=attributes and fieldName is empty, the object's attributes themselves will contain the key value output pairs."
         }
       }
     },
     "JsonMapperSourceField": {
       "type": "object",
-      "description": "JsonArrayMapper source field used to describe the field from which the json array will be read",
+      "description": "JsonArrayMapper source field used to describe the field from which the json array will be read.",
       "properties": {
         "fieldName": {
           "type": "string",
-          "description": "Define a source field name from which the json array mapper will read the json array. Leaving this empty, means reading the body of the message itself"
+          "description": "Define a source field name from which the json array mapper will read the json array. Leaving this empty, means reading the body of the message itself."
         }
       }
     },
@@ -1327,8 +1333,7 @@
           "description": "The resource-specific properties for this resource."
         },
         "extendedLocation": {
-          "$ref": "#/definitions/ExtendedLocation",
-          "description": "The extended location for given pipeline group.",
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.ExtendedLocation",
           "x-ms-mutability": [
             "read",
             "create"

@@ -1,0 +1,44 @@
+{
+  "operationId": "Workloads_Update",
+  "title": "Workloads_Update",
+  "parameters": {
+    "api-version": "2024-05-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "rg1",
+    "workbenchName": "test-workbench",
+    "chamberName": "test-chamber",
+    "workloadName": "test-workload",
+    "sku": {
+      "name": "Standard_D4d_v4"
+    },
+    "properties": {
+      "tags": {
+        "tag-name": "tag-value"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "test-workload",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroup/providers/Microsoft.ModSimWorkbench/workbenches/test-workbench/chambers/test-chamber/workloads/test-workload",
+        "type": "Microsoft.ModSimWorkbench/workbenches/chambers/workloads",
+        "location": "Central US",
+        "zones": [
+          "1"
+        ],
+        "properties": {
+          "provisioningState": "Succeeded",
+          "edaType": "Semiconductor",
+          "vmSize": "Standard_D4d_v4"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.NetApp/locations/eastus/operationResults/616ee961-4042-4935-b4a0-ed6f4dae0172?api-version=2021-10-01&operationResultResponseType=Location",
+        "x-ms-async-operation-timeout": "PT2H30M"
+      }
+    }
+  }
+}

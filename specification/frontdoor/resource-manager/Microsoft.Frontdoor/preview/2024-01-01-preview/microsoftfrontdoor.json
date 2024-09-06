@@ -47,13 +47,13 @@
     }
   ],
   "paths": {
-    "/providers/Microsoft.Frontdoor/locations/{location}/genericVirtualMachines": {
+    "/providers/Microsoft.Frontdoor/locations/{location}/virtualMachines": {
       "get": {
         "operationId": "VmResources_ListByTenant",
         "tags": [
           "VmResources"
         ],
-        "description": "List VmResource resources by tenant",
+        "description": "A resource list operation, at the scope of the resource's parent",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -86,7 +86,7 @@
         }
       }
     },
-    "/providers/Microsoft.Frontdoor/locations/{location}/genericVirtualMachines/{virtualMachineName}": {
+    "/providers/Microsoft.Frontdoor/locations/{location}/virtualMachines/{virtualMachineName}": {
       "get": {
         "operationId": "VmResources_Get",
         "tags": [
@@ -410,24 +410,6 @@
         ]
       }
     },
-    "Versions": {
-      "type": "string",
-      "description": "The available API versions.",
-      "enum": [
-        "2024-01-01-preview"
-      ],
-      "x-ms-enum": {
-        "name": "Versions",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "v2024_01_01_preview",
-            "value": "2024-01-01-preview",
-            "description": "2024-10-01-preview version"
-          }
-        ]
-      }
-    },
     "VmProperties": {
       "type": "object",
       "description": "VirtualMachine Properties",
@@ -530,12 +512,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/VmProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "description": "The resource-specific properties for this resource."
         }
       },
       "allOf": [

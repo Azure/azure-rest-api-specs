@@ -25,7 +25,7 @@ using TypeSpec.Versioning;
  * Azure Stack HCI management service
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "HCI itself is a short form."
-#suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint"
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "Operations API is still spec'd, but now resides in another spec in this namespace."
 @armProviderNamespace
 @service({
   title: "Microsoft.AzureStackHCI",
@@ -59,4 +59,11 @@ enum Versions {
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @useDependency(Azure.Core.Versions.v1_0_Preview_1)
   v2024_07_15_preview: "2024-07-15-preview",
+
+  /**
+   * The 2024-08-01-preview  API version for internal testing only.
+   */
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
+  v2024_08_01_preview: "2024-08-01-preview",
 }

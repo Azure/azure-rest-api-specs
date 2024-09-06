@@ -10,6 +10,7 @@ using TypeSpec.Http;
 namespace Microsoft.EdgeMarketplace;
 @doc("An offer.")
 model Offer is ExtensionResource<OfferProperties> {
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-name-pattern" "Legacy"
   @doc("Id of the offer")
   @path
   @key("offerId")

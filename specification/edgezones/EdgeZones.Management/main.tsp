@@ -1,7 +1,6 @@
 import "@typespec/http";
 import "@typespec/rest";
 import "@typespec/versioning";
-import "@azure-tools/typespec-providerhub";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
@@ -9,56 +8,65 @@ using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 
 @armProviderNamespace("Microsoft.EdgeZones")
 @service({
   title: "Microsoft.EdgeZones",
 })
 @versioned(Versions)
-@armCommonTypesVersion(CommonTypes.Versions.v5)
 namespace Microsoft.EdgeZones;
 
 /** Api versions */
 enum Versions {
   /** 2024-04-01-preview api version */
+  @armCommonTypesVersion(CommonTypes.Versions.v5)
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   `2024-04-01-preview`,
+
+  /** 2024-08-01 api version */
+  @armCommonTypesVersion(CommonTypes.Versions.v5)
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
+  `2024-08-01`,
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}
 
 @doc("The status of the current operation.")
 @Azure.Core.lroStatus
-enum ProvisioningState {
-  ...ResourceProvisioningState,
+union ProvisioningState {
+  string,
+  ResourceProvisioningState,
 
   @doc("Provisioning State")
-  Provisioning,
+  Provisioning: "Provisioning",
 
   @doc("Updating State")
-  Updating,
+  Updating: "Updating",
 
   @doc("Deleting State")
-  Deleting,
+  Deleting: "Deleting",
 
   @doc("Accepted State")
-  Accepted,
+  Accepted: "Accepted",
 }
 
 @doc("The Azure Extended Zone registration status for a subscription")
-enum RegistrationState {
+union RegistrationState {
+  string,
+
   @doc("Subscription not registered for the Azure Extended Zone")
-  NotRegistered,
+  NotRegistered: "NotRegistered",
 
   @doc("Subscription pending registration for the Azure Extended Zone")
-  PendingRegister,
+  PendingRegister: "PendingRegister",
 
   @doc("Subscription is registered for the Azure Extended Zone")
-  Registered,
+  Registered: "Registered",
 
   @doc("Subscription is pending unregistering for the Azure Extended Zone")
-  PendingUnregister,
+  PendingUnregister: "PendingUnregister",
 }
 
 @doc("The properties of an Extended Zone resource.")
@@ -126,8 +134,8 @@ model ExtendedZone is ProxyResource<ExtendedZoneProperties> {
 @post
 @doc("Arm Resource Action Taking no request body object and returning result object")
 op ArmResourceActionNoBodySync<
-  TResource extends ArmResource,
-  TBaseParameters = BaseParameters<TResource>
+  TResource extends Azure.ResourceManager.CommonTypes.Resource,
+  TBaseParameters = Azure.ResourceManager.Foundations.BaseParameters<TResource>
 >(
   ...ResourceInstanceParameters<TResource, TBaseParameters>,
 ): ArmResponse<TResource> | ErrorResponse;

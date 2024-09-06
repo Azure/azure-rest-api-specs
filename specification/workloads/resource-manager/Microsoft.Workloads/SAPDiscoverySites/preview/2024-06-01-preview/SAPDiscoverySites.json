@@ -224,6 +224,10 @@
               "$ref": "#/definitions/SAPDiscoverySite"
             },
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -587,6 +591,10 @@
               "$ref": "#/definitions/SAPInstance"
             },
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -925,6 +933,10 @@
               "$ref": "#/definitions/ServerInstance"
             },
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -1480,8 +1492,8 @@
           "description": "Operation status."
         },
         "percentComplete": {
-          "type": "integer",
-          "format": "int32",
+          "type": "number",
+          "format": "double",
           "description": "Percent of the operation that is complete.",
           "minimum": 0,
           "maximum": 100
@@ -1525,8 +1537,7 @@
         }
       },
       "required": [
-        "status",
-        "operations"
+        "status"
       ]
     },
     "NativePerformanceData": {
@@ -1699,11 +1710,7 @@
         "properties": {
           "$ref": "#/definitions/SAPDiscoverySiteProperties",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "x-ms-client-flatten": true
         },
         "extendedLocation": {
           "$ref": "#/definitions/ExtendedLocation",
@@ -1781,11 +1788,7 @@
         "properties": {
           "$ref": "#/definitions/SAPInstanceProperties",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "x-ms-client-flatten": true
         }
       },
       "allOf": [
@@ -1984,11 +1987,7 @@
         "properties": {
           "$ref": "#/definitions/ServerInstanceProperties",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "x-ms-client-flatten": true
         }
       },
       "allOf": [

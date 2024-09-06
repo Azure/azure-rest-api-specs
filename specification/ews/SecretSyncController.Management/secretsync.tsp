@@ -19,31 +19,33 @@ model SecretSync is TrackedResource<SecretSyncProperties> {
 
 @doc("The properties of the SecretSync instance.")
 model SecretSyncProperties {
-  // Add patterns TODO 28520548 https://msazure.visualstudio.com/One/_workitems/edit/28520548
-  @doc("The name of the matching secret provider class instance.")
+  @doc("SecretProviderClassName specifies the name of the SecretProviderClass resource, which contains the information needed to access the cloud provider secret store.")
   @minLength(1)
   @maxLength(253)
+  @pattern("^[a-z0-9]([-a-z0-9]*[a-z0-9])?(\\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*$")
   secretProviderClassName: string;
 
-  @doc("The name of the Kubernetes service account used to access the cloud secret store.")
+  @doc("ServiceAccountName specifies the name of the service account used to access the cloud provider secret store. The audience field in the service account token must be passed as parameter in the controller configuration. The audience is used when requesting a token from the API server for the service account; the supported audiences are defined by each provider.")
   @minLength(1)
   @maxLength(253)
+  @pattern("^[a-z0-9]([-a-z0-9]*[a-z0-9])?(\\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*$")
   serviceAccountName: string;
 
-  @doc("The type of Kubernetes secret to store the cloud secret store data as.")
+  @doc("Type specifies the type of the Kubernetes secret object, e.g. \"Opaque\" or\"kubernetes.io/tls\". The controller must have permission to create secrets of the specified type.")
   kubernetesSecretType: KubernetesSecretType;
 
-  @doc("The ForceSynchronization field can be used to force a secret to synchronize. By changing the value in this field, a synchronization operation is triggered for this SecretSync instance.")
+  @doc("ForceSynchronization can be used to force the secret synchronization. The secret synchronization is triggered by changing the value in this field. This field is not used to resolve synchronization conflicts.")
   @pattern("^[A-Za-z0-9]([-A-Za-z0-9]+([-._a-zA-Z0-9]?[A-Za-z0-9])*)?")
   @maxLength(253)
   forceSynchronization?: string;
 
-  @doc("List of mappings between objects in the cloud secret store and corresponding Kubernetes secrets.")
+  @doc("An array of SecretObjectData that maps secret data from the external secret provider to the Kubernetes secret. Each entry specifies the source secret in the external provider and the corresponding key in the Kubernetes secret.")
+  @minItems(1)
   @OpenAPI.extension("x-ms-identifiers", [])
   objectSecretMapping: KubernetesSecretObjectMapping[];
 
   @visibility("read")
-  @doc("The status object contains the state of the secret synchronization process for this SecretSync instance.")
+  @doc("SecretSyncStatus defines the observed state of the secret synchronization process.")
   status?: SecretSyncStatus;
 
   @doc("Provisioning state of the SecretSync instance.")
@@ -53,16 +55,17 @@ model SecretSyncProperties {
 
 @doc("Properties defining the mapping between a cloud secret store object and a Kubernetes Secret.")
 model KubernetesSecretObjectMapping {
-  // Doc needs work + add patterns - TODO #28520313 https://msazure.visualstudio.com/One/_workitems/edit/28520313
-  @doc("sourcePath is the data source value of the secret defined in the Secret Provider Class. This matches the path of a file in the MountResponse returned from the provider.")
+  @doc("SourcePath is the identifier for the secret data as defined by the external secret provider. This is the key or path to the secret in the provider's system, which gets mounted to a specific path in the pod. The value should match the name of the secret as specified in the SecretProviderClass's objects array.")
   @minLength(1)
   @maxLength(253)
+  @pattern("^[A-Za-z0-9.]([-A-Za-z0-9]+([-._a-zA-Z0-9]?[A-Za-z0-9])*)?(\\/([0-9]+))*$")
   sourcePath: string;
 
-  @doc("targetPath is the key in the Kubernetes secret's data field as described in the Kubernetes API reference: https://kubernetes.io/docs/reference/kubernetes-api/config-and-storage-resources/secret-v1/")
+  @doc("TargetKey is the key in the Kubernetes secret's data field where the secret value will be stored. This key is used to reference the secret data within Kubernetes, and it should be unique within the secret.")
   @minLength(1)
   @maxLength(253)
-  targetPath: string;
+  @pattern("^[A-Za-z0-9.]([-A-Za-z0-9]+([-._a-zA-Z0-9]?[A-Za-z0-9])*)?(\\/([0-9]+))*$")
+  targetKey: string;
 }
 
 // https://kubernetes.io/docs/concepts/configuration/secret/#secret-types
@@ -81,38 +84,63 @@ union KubernetesSecretType {
   string,
 }
 
+@doc("Status conditions types")
+union StatusConditionType {
+  @doc("The status is true")
+  True: "True",
+
+  @doc("The status is false")
+  False: "False",
+
+  @doc("The status is unknown")
+  Unknown: "Unknown",
+
+  string,
+}
+
 @doc("SecretSyncStatus defines the observed state of the secret synchronization process.")
 model SecretSyncStatus {
-  // Needs better doc TODO #28507605 https://msazure.visualstudio.com/One/_workitems/edit/28507605
   @doc("LastSuccessfulSyncTime represents the last time the secret was retrieved from the Provider and updated.")
+  @visibility("read")
   lastSuccessfulSyncTime?: utcDateTime;
 
   @OpenAPI.extension("x-ms-identifiers", [])
-  @doc("Condition contains details for one aspect of the current state of this API Resource")
+  @doc("Conditions represent the status of the secret create and update processes. The status can be True, False, or Unknown with various reasons and messages explaining the state. Examples of reasons include CreateSucceeded, ProviderError, InvalidClusterSecretLabelError, InvalidClusterSecretAnnotationError, UnknownError, ValidatingAdmissionPolicyCheckFailed, UserInputValidationFailed, ControllerSpcError, ControllerInternalError, NoValueChange, and ValueChangeOrForceUpdateDetected.")
+  @visibility("read")
   conditions?: SecretSyncCondition[];
 
   // Not including syncHash at the moment for security concerns TODO #28507544 https://msazure.visualstudio.com/One/_workitems/edit/28507544
 }
 
-// Needs better doc (and for fields) TODO #28507605 https://msazure.visualstudio.com/One/_workitems/edit/28507605
-@doc("Condition contains details for one aspect of the current state of this SecretSync object.")
+@doc("A condition represents the status of the secret create and update processes.")
 model SecretSyncCondition {
-  @doc("lastTransitionTime is the last time the condition transitioned from one status to another. This should be when the underlying condition changed. If that is not known, then using the time when the API field changed is acceptable.")
+  @doc("LastTransitionTime is the last time the condition transitioned from one status to another. This should be when the underlying condition changed. If that is not known, then using the time when the API field changed is acceptable.")
+  @visibility("read")
   lastTransitionTime?: utcDateTime;
 
-  @doc("message is a human readable message indicating details about the transition. This may be an empty string.")
+  @doc("Message is a human readable message indicating details about the transition. This may be an empty string.")
+  @visibility("read")
   message: string;
 
-  @doc("observedGeneration represents the .metadata.generation that the condition was set based upon. For instance, if .metadata.generation is currently 12, but the .status.conditions[x].observedGeneration is 9, the condition is out of date with respect to the current state of the instance.")
-  observedGeneration?: int32;
+  @doc("ObservedGeneration represents the .metadata.generation that the condition was set based upon. For instance, if .metadata.generation is currently 12, but the .status.conditions[x].observedGeneration is 9, the condition is out of date with respect to the current state of the instance.")
+  @visibility("read")
+  observedGeneration?: int64;
 
-  @doc("reason contains a programmatic identifier indicating the reason for the condition's last transition. Producers of specific condition types may define expected values and meanings for this field, and whether the values are considered a guaranteed API. The value should be a CamelCase string. This field may not be empty.")
+  @doc("Reason contains a programmatic identifier indicating the reason for the condition's last transition. Producers of specific condition types may define expected values and meanings for this field, and whether the values are considered a guaranteed API. The value should be a CamelCase string. This field may not be empty.")
+  @visibility("read")
+  @minLength(1)
+  @maxLength(1024)
+  @pattern("^[A-Za-z]([A-Za-z0-9_,:]*[A-Za-z0-9_])?$")
   reason: string;
 
-  @doc("status of the condition, one of True, False, Unknown.")
-  status: string;
+  @doc("Status of the condition, one of True, False, Unknown.")
+  @visibility("read")
+  status: StatusConditionType;
 
-  @doc("type of condition in CamelCase or in foo.example.com/CamelCase. --- Many .condition.type values are consistent across resources like Available, but because arbitrary conditions can be useful (see .node.status.conditions), the ability to de-conflict is important. The regex it matches is (dns1123SubdomainFmt/)?(qualifiedNameFmt)")
+  @doc("Type of condition in CamelCase or in foo.example.com/CamelCase. Many .condition.type values are consistent across resources like Available, but because arbitrary conditions can be useful (see .node.status.conditions), the ability to de-conflict is important. The regex it matches is (dns1123SubdomainFmt/)?(qualifiedNameFmt)")
+  @visibility("read")
+  @maxLength(316)
+  @pattern("^([a-z0-9]([-a-z0-9]*[a-z0-9])?(\\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*/)?(([A-Za-z0-9][-A-Za-z0-9_.]*)?[A-Za-z0-9])$")
   type: string;
 }
 

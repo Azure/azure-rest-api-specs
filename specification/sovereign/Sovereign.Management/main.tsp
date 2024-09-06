@@ -1,7 +1,6 @@
 import "@typespec/http";
 import "@typespec/rest";
 import "@typespec/versioning";
-import "@azure-tools/typespec-providerhub";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "./landingZoneConfigurationModels.tsp";
@@ -15,8 +14,6 @@ using TypeSpec.Versioning;
 using Azure.ResourceManager;
 using Azure.Core;
 using OpenAPI;
-using Autorest;
-using Azure.ResourceManager.Foundations;
 
 @service({
   title: "Cloud for Sovereignty Resource Provider.",
@@ -118,7 +115,13 @@ model TransparencyLog is ProxyResource<TransparencyLogProperties> {
 interface TransparencyLogs {
   get is ArmResourceRead<TransparencyLog>;
   create is ArmResourceCreateOrReplaceSync<TransparencyLog>;
-  update is ArmResourcePatchSync<TransparencyLog, TransparencyLogProperties>;
+  update is ArmCustomPatchSync<
+    TransparencyLog,
+    Azure.ResourceManager.Foundations.ResourceUpdateModel<
+      TransparencyLog,
+      TransparencyLogProperties
+    >
+  >;
   delete is ArmResourceDeleteSync<TransparencyLog>;
   listByTenant is ArmResourceListByParent<TransparencyLog>;
 }

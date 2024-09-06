@@ -393,6 +393,10 @@
               "$ref": "#/definitions/CacheNodePreviewResource"
             },
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -660,6 +664,10 @@
               "$ref": "#/definitions/EnterprisePreviewResource"
             },
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -927,6 +935,10 @@
               "$ref": "#/definitions/EnterpriseMccCustomerResource"
             },
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -1038,14 +1050,14 @@
           "202": {
             "description": "Resource deletion accepted.",
             "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
@@ -1239,6 +1251,10 @@
               "$ref": "#/definitions/EnterpriseMccCacheNodeResource"
             },
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -1370,14 +1386,14 @@
           "202": {
             "description": "Resource deletion accepted.",
             "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
@@ -1600,6 +1616,10 @@
               "$ref": "#/definitions/IspCustomerResource"
             },
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -1711,14 +1731,14 @@
           "202": {
             "description": "Resource deletion accepted.",
             "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
@@ -1912,6 +1932,10 @@
               "$ref": "#/definitions/IspCacheNodeResource"
             },
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -2043,14 +2067,14 @@
           "202": {
             "description": "Resource deletion accepted.",
             "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
@@ -2293,6 +2317,44 @@
           "format": "date-time",
           "description": "customer requested date time for mcc install of update cycle"
         },
+        "autoUpdateNextAvailableVersion": {
+          "type": "string",
+          "description": "Auto update version that is the Next available version to update on mcc cache node",
+          "readOnly": true
+        },
+        "autoUpdateNextAvailableDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Auto update last applied date time of mcc install",
+          "readOnly": true
+        },
+        "autoUpdateAppliedVersion": {
+          "type": "string",
+          "description": "Auto update version that is the applied to update on mcc cache node",
+          "readOnly": true
+        },
+        "autoUpdateLastAppliedDetails": {
+          "type": "string",
+          "description": "Auto Update status details from the backend after applying the new version details",
+          "readOnly": true
+        },
+        "autoUpdateLastAppliedState": {
+          "type": "string",
+          "description": "Last applied auto update state for mcc install of auto update cycle",
+          "readOnly": true
+        },
+        "autoUpdateLastAppliedDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Auto update last applied date time of mcc install",
+          "readOnly": true
+        },
+        "autoUpdateLastTriggeredDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Auto update last triggered date time of mcc install",
+          "readOnly": true
+        },
         "optionalProperty1": {
           "type": "string",
           "description": "Optional property #1 of Mcc response object"
@@ -2381,12 +2443,14 @@
         },
         "signupStatus": {
           "type": "boolean",
-          "description": "Customer resource signup status as boolean."
+          "description": "Customer resource signup status as boolean.",
+          "readOnly": true
         },
         "signupStatusCode": {
           "type": "integer",
           "format": "int32",
-          "description": "Customer resource signup status as integer code."
+          "description": "Customer resource signup status as integer code.",
+          "readOnly": true
         },
         "signupStatusText": {
           "type": "string",
@@ -2617,7 +2681,8 @@
         },
         "xCid": {
           "type": "string",
-          "description": "Cache node resource Azure XCid."
+          "description": "Cache node resource Azure XCid.",
+          "readOnly": true
         },
         "isEnterpriseManaged": {
           "type": "boolean",
@@ -2625,29 +2690,41 @@
         },
         "createAsyncOperationId": {
           "type": "string",
-          "description": "Cache node resource create async operation Id."
+          "description": "Cache node resource create async operation Id.",
+          "readOnly": true
         },
         "deleteAsyncOperationId": {
           "type": "string",
-          "description": "Cache node resource deletion async operation Id."
+          "description": "Cache node resource deletion async operation Id.",
+          "readOnly": true
         },
         "clientTenantId": {
           "type": "string",
-          "description": "Cache node resource customer resource client tenant Id of subscription."
+          "description": "Cache node resource customer resource client tenant Id of subscription.",
+          "readOnly": true
         },
         "category": {
           "type": "string",
-          "description": "Cache node resource category."
+          "description": "Cache node resource category.",
+          "readOnly": true
         },
         "releaseVersion": {
           "type": "integer",
           "format": "int32",
-          "description": "Cache node resource release version."
+          "description": "Cache node resource release version.",
+          "readOnly": true
         },
         "lastSyncWithAzureTimestamp": {
           "type": "string",
           "format": "date-time",
-          "description": "Cache node resource last sync timestamp."
+          "description": "Cache node resource last sync timestamp.",
+          "readOnly": true
+        },
+        "lastUpdatedTimestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Cache node resource last backend updated timestamp.",
+          "readOnly": true
         },
         "synchWithAzureAttemptsCount": {
           "type": "integer",
@@ -2657,7 +2734,8 @@
         },
         "containerConfigurations": {
           "type": "string",
-          "description": "Cache node resource container configuration details."
+          "description": "Cache node resource container configuration details.",
+          "readOnly": true
         },
         "cidrCsv": {
           "type": "array",
@@ -2772,7 +2850,8 @@
         "addressSpace": {
           "type": "integer",
           "format": "int32",
-          "description": "Cache node resource total addressable space defined by the Cidr Csv block."
+          "description": "Cache node resource total addressable space defined by the Cidr Csv block.",
+          "readOnly": true
         },
         "workerConnections": {
           "type": "integer",
@@ -2796,6 +2875,33 @@
           "type": "string",
           "description": "Cache node resource Mcc Container Id Uri.",
           "readOnly": true
+        },
+        "fullyQualifiedDomainName": {
+          "type": "string",
+          "description": "FQDN(fully qualified domain name) value of the mcc cache node"
+        },
+        "autoUpdateRingType": {
+          "$ref": "#/definitions/autoUpdateRingType",
+          "description": "Auto Update Ring Type which is slow or fast etc."
+        },
+        "autoUpdateRequestedWeek": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Customer requested week of month for mcc install of auto update cycle",
+          "minimum": 1,
+          "maximum": 5
+        },
+        "autoUpdateRequestedDay": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Customer requested day of week for mcc install of auto update cycle",
+          "minimum": 1,
+          "maximum": 7
+        },
+        "autoUpdateRequestedTime": {
+          "type": "string",
+          "description": "Customer requested time of the day for mcc install of auto update cycle, should be hh:mm",
+          "pattern": "^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$"
         }
       }
     },
@@ -2873,10 +2979,10 @@
         "properties": {
           "$ref": "#/definitions/CacheNodeOldResponse",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
           "x-ms-mutability": [
-            "read",
-            "create"
+            "create",
+            "update",
+            "read"
           ]
         }
       },
@@ -3191,10 +3297,10 @@
         "properties": {
           "$ref": "#/definitions/CacheNodeProperty",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
           "x-ms-mutability": [
-            "read",
-            "create"
+            "create",
+            "update",
+            "read"
           ]
         }
       },
@@ -3232,10 +3338,10 @@
         "properties": {
           "$ref": "#/definitions/CustomerProperty",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
           "x-ms-mutability": [
-            "read",
-            "create"
+            "create",
+            "update",
+            "read"
           ]
         }
       },
@@ -3273,10 +3379,10 @@
         "properties": {
           "$ref": "#/definitions/CacheNodeOldResponse",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
           "x-ms-mutability": [
-            "read",
-            "create"
+            "create",
+            "update",
+            "read"
           ]
         }
       },
@@ -3314,10 +3420,10 @@
         "properties": {
           "$ref": "#/definitions/CacheNodeProperty",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
           "x-ms-mutability": [
-            "read",
-            "create"
+            "create",
+            "update",
+            "read"
           ]
         }
       },
@@ -3355,10 +3461,10 @@
         "properties": {
           "$ref": "#/definitions/CustomerProperty",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
           "x-ms-mutability": [
-            "read",
-            "create"
+            "create",
+            "update",
+            "read"
           ]
         }
       },
@@ -3393,90 +3499,30 @@
       "type": "object",
       "description": "Represents all Cidr details of the Bgp request for a specific cache node resource",
       "properties": {
-        "location": {
-          "type": "string",
-          "description": "The geo-location where the resource lives",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "id": {
-          "type": "string",
-          "description": "Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}",
-          "readOnly": true
-        },
-        "type": {
-          "type": "string",
-          "description": "The type of the resource. E.g. \"Microsoft.Compute/virtualMachines\" or \"Microsoft.Storage/storageAccounts\"",
-          "readOnly": true
-        },
-        "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData",
-          "description": "Azure Resource Manager metadata containing createdBy and modifiedBy information.",
-          "readOnly": true
-        },
         "properties": {
           "$ref": "#/definitions/BgpCidrsConfiguration",
           "description": "Mcc cache node resource Bgp Cidr properties."
         }
       },
-      "required": [
-        "location",
-        "id",
-        "type"
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
       ]
     },
     "MccCacheNodeInstallDetails": {
       "type": "object",
       "description": "Mcc cache node resource all install details.",
       "properties": {
-        "location": {
-          "type": "string",
-          "description": "The geo-location where the resource lives",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "id": {
-          "type": "string",
-          "description": "Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}",
-          "readOnly": true
-        },
-        "type": {
-          "type": "string",
-          "description": "The type of the resource. E.g. \"Microsoft.Compute/virtualMachines\" or \"Microsoft.Storage/storageAccounts\"",
-          "readOnly": true
-        },
-        "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData",
-          "description": "Azure Resource Manager metadata containing createdBy and modifiedBy information.",
-          "readOnly": true
-        },
         "properties": {
           "$ref": "#/definitions/CacheNodeInstallProperties",
           "description": "Mcc cache node resource install script details."
         }
       },
-      "required": [
-        "location",
-        "id",
-        "type"
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
       ]
     },
     "OsType": {
@@ -3484,7 +3530,8 @@
       "description": "Operating System of the cache node",
       "enum": [
         "Windows",
-        "Linux"
+        "Linux",
+        "Eflow"
       ],
       "x-ms-enum": {
         "name": "OsType",
@@ -3499,6 +3546,11 @@
             "name": "Linux",
             "value": "Linux",
             "description": "cache node installs on Linux Operating system"
+          },
+          {
+            "name": "Eflow",
+            "value": "Eflow",
+            "description": "cache node installs on Azure Eflow"
           }
         ]
       }
@@ -3591,20 +3643,32 @@
         }
       }
     },
-    "Versions": {
+    "autoUpdateRingType": {
       "type": "string",
-      "description": "The available API versions.",
+      "description": "Auto update Ring type",
       "enum": [
-        "2023-05-01-preview"
+        "Preview",
+        "Slow",
+        "Fast"
       ],
       "x-ms-enum": {
-        "name": "Versions",
+        "name": "autoUpdateRingType",
         "modelAsString": true,
         "values": [
           {
-            "name": "v2023_05_01_preview",
-            "value": "2023-05-01-preview",
-            "description": "Microsoft Connected Cache Rest Api version 2023-05-01-preview"
+            "name": "Preview",
+            "value": "Preview",
+            "description": "customer selection of preview update install mcc on their physical vm"
+          },
+          {
+            "name": "Slow",
+            "value": "Slow",
+            "description": "customer selection of slow update to install mcc on their physical vm"
+          },
+          {
+            "name": "Fast",
+            "value": "Fast",
+            "description": "customer selection of fast / auto update to install mcc on their physical vm"
           }
         ]
       }

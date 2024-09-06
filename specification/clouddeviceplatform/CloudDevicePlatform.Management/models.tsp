@@ -16,7 +16,7 @@ namespace Microsoft.CloudDevicePlatform;
 @doc("Represents a CloudDevicePlatform delegated identity resource.")
 model DelegatedIdentity is TrackedResource<DelegatedIdentityProperties> {
   ...ResourceNameParameter<DelegatedIdentity>;
-  ...ManagedServiceCommonTypes.ManagedServiceIdentityWithDelegationProperty;
+  ...Microsoft.ManagedServiceCommonTypes.ManagedServiceIdentityWithDelegationProperty;
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/empty-updatable-properties"
@@ -34,7 +34,7 @@ model DelegatedIdentityUpdate {
   ...Azure.ResourceManager.Foundations.ArmTagsProperty;
 
   @doc("Updatable managed service identity")
-  identity?: ManagedServiceCommonTypes.ManagedServiceIdentityWithDelegationUpdate;
+  identity?: Microsoft.ManagedServiceCommonTypes.ManagedServiceIdentityWithDelegationUpdate;
 }
 
 /**
@@ -43,17 +43,16 @@ model DelegatedIdentityUpdate {
  *
  * An issue tracking availability of the type is here: https://github.com/Azure/typespec-azure/issues/944
  */
-@useDependency(Azure.Core.Versions.v1_0_Preview_2)
-@useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
 namespace Microsoft.ManagedServiceCommonTypes {
   /** Managed service identity (system assigned and/or user assigned identities and/or delegated identities) - internal use only. */
   #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "common type"
-  @Azure.ResourceManager.Private.armCommonDefinition(
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "Unsupported common type"
+  @Azure.ResourceManager.CommonTypes.Private.armCommonDefinition(
     "ManagedServiceIdentityWithDelegation",
     Azure.ResourceManager.CommonTypes.Versions.v5,
     "managedidentitywithdelegation.json"
   )
+  @added(Versions.v2024_06_01_preview)
   model ManagedServiceIdentityWithDelegation
     extends Azure.ResourceManager.Foundations.ManagedServiceIdentity {
     /** The set of delegated resources. The delegated resources dictionary keys will be source resource internal ids - internal use only. */
@@ -62,7 +61,8 @@ namespace Microsoft.ManagedServiceCommonTypes {
   }
 
   /** Delegated resource properties - internal use only. */
-  @Azure.ResourceManager.Private.armCommonDefinition(
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "Unsupported common type"
+  @Azure.ResourceManager.CommonTypes.Private.armCommonDefinition(
     "DelegatedResource",
     Azure.ResourceManager.CommonTypes.Versions.v5,
     "managedidentitywithdelegation.json"
@@ -82,16 +82,17 @@ namespace Microsoft.ManagedServiceCommonTypes {
   }
 
   /** mix-in envelope property for ManagedServiceIdentityWithDelegation */
-  model ManagedServiceIdentityWithDelegationProperty {
+  alias ManagedServiceIdentityWithDelegationProperty = {
     /** The set of delegated resources. The delegated resources dictionary keys will be source resource internal ids */
     #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "common type"
     identity?: ManagedServiceIdentityWithDelegation;
-  }
+  };
 
   /** Model defining updatable properties of a ManagedServiceIdentityWithDelegation */
   #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance"
+  @added(Versions.v2024_06_01_preview)
   model ManagedServiceIdentityWithDelegationUpdate
-    extends OptionalProperties<UpdateableProperties<Azure.ResourceManager.Foundations.ManagedServiceIdentity>> {
+    extends OptionalProperties<UpdateableProperties<Azure.ResourceManager.Legacy.ManagedServiceIdentityV4>> {
     /** The set of delegated resources. The delegated resources dictionary keys will be source resource internal ids */
     #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "required for patch operations"
     delegatedResources?: Record<DelegatedResource>;

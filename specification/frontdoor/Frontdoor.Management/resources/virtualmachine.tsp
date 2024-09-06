@@ -24,7 +24,7 @@ namespace Microsoft.Frontdoor;
 model VmResource is ProxyResource<VmProperties> {
   @pattern("[a-zA-Z0-9]+[-_]*")
   @key("virtualMachineName")
-  @segment("genericVirtualMachines")
+  @segment("virtualMachines")
   @doc("VirtualMachines")
   @path
   name: string;
@@ -35,5 +35,5 @@ interface Operations extends Azure.ResourceManager.Operations {}
 @armResourceOperations
 interface VmResources {
   get is ArmLocResourceRead<VmResource>;
-  list is ArmLocResourceListByParent<VmResource>;
+  listByTenant is ArmLocResourceListByParent<VmResource>;
 }

@@ -45,12 +45,12 @@ suppressions:
       - $.definitions.AssetListResult.properties.value.items.properties.properties.properties.attributes
       - $.definitions.AssetProperties.properties.attributes
       - $.definitions.AssetUpdate.properties.properties.properties.attributes
-      - $.definitions.AssetUpdateProperties.properties.attributes
+      - $.definitions.AssetPropertiesUpdate.properties.attributes
       - $.definitions.Device.properties.properties.properties.attributes
       - $.definitions.DeviceListResult.properties.value.items.properties.properties.properties.attributes
       - $.definitions.DeviceProperties.properties.attributes
       - $.definitions.DeviceUpdate.properties.properties.properties.attributes
-      - $.definitions.DeviceUpdateProperties.properties.attributes
+      - $.definitions.DevicePropertiesUpdate.properties.attributes
     reason: attributes is a customer-defined property of any shape
   - code: PropertiesTypeObjectNoDefinition
     from:
@@ -60,12 +60,12 @@ suppressions:
       - $.definitions.AssetListResult.properties.value.items.properties.properties.properties.attributes
       - $.definitions.AssetProperties.properties.attributes
       - $.definitions.AssetUpdate.properties.properties.properties.attributes
-      - $.definitions.AssetUpdateProperties.properties.attributes
+      - $.definitions.AssetPropertiesUpdate.properties.attributes
       - $.definitions.Device.properties.properties.properties.attributes
       - $.definitions.DeviceListResult.properties.value.items.properties.properties.properties.attributes
       - $.definitions.DeviceProperties.properties.attributes
       - $.definitions.DeviceUpdate.properties.properties.properties.attributes
-      - $.definitions.DeviceUpdateProperties.properties.attributes
+      - $.definitions.DevicePropertiesUpdate.properties.attributes
     reason: attributes is a customer-defined property of any shape
   - code: OperationIdNounVerb
     from:
@@ -94,12 +94,12 @@ suppressions:
       - $.definitions.AssetListResult.properties.value.items.properties.properties.properties.attributes
       - $.definitions.AssetProperties.properties.attributes
       - $.definitions.AssetUpdate.properties.properties.properties.attributes
-      - $.definitions.AssetUpdateProperties.properties.attributes
+      - $.definitions.AssetPropertiesUpdate.properties.attributes
       - $.definitions.Device.properties.properties.properties.attributes
       - $.definitions.DeviceListResult.properties.value.items.properties.properties.properties.attributes
       - $.definitions.DeviceProperties.properties.attributes
       - $.definitions.DeviceUpdate.properties.properties.properties.attributes
-      - $.definitions.DeviceUpdateProperties.properties.attributes
+      - $.definitions.DevicePropertiesUpdate.properties.attributes
     reason: attributes is a customer-defined property of any shape
   - code: PropertiesTypeObjectNoDefinition
     from:
@@ -109,12 +109,12 @@ suppressions:
       - $.definitions.AssetListResult.properties.value.items.properties.properties.properties.attributes
       - $.definitions.AssetProperties.properties.attributes
       - $.definitions.AssetUpdate.properties.properties.properties.attributes
-      - $.definitions.AssetUpdateProperties.properties.attributes
+      - $.definitions.AssetPropertiesUpdate.properties.attributes
       - $.definitions.Device.properties.properties.properties.attributes
       - $.definitions.DeviceListResult.properties.value.items.properties.properties.properties.attributes
       - $.definitions.DeviceProperties.properties.attributes
       - $.definitions.DeviceUpdate.properties.properties.properties.attributes
-      - $.definitions.DeviceUpdateProperties.properties.attributes
+      - $.definitions.DevicePropertiesUpdate.properties.attributes
     reason: attributes is a customer-defined property of any shape
 ```
 

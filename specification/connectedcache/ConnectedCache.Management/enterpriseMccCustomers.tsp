@@ -6,7 +6,6 @@ import "./models.tsp";
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 
 namespace Microsoft.ConnectedCache;
 
@@ -40,3 +39,8 @@ interface EnterpriseMccCustomers {
   @doc("This api gets information about all enterpriseMccCustomer resources under the given subscription")
   listBySubscription is ArmListBySubscription<EnterpriseMccCustomerResource>;
 }
+
+@@OpenAPI.extension(Azure.ResourceManager.TrackedResource.properties,
+  "x-ms-mutability",
+  ["create", "update", "read"]
+);

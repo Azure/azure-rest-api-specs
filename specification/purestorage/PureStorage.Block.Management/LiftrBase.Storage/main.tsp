@@ -25,6 +25,7 @@ enum Versions {
   v1_preview: "2023-06-01-preview",
 }
 
+#suppress "@azure-tools/typespec-azure-core/friendly-name" "Legacy"
 @doc("Reservation resource type.")
 @friendlyName("Reservation")
 model Reservation<TProperties extends Model = ReservationProperties>
@@ -47,7 +48,13 @@ interface Reservations<
 > {
   get is ArmResourceRead<TReservation>;
   create is ArmResourceCreateOrUpdateAsync<TReservation>;
-  update is ArmResourcePatchAsync<TReservation, TReservationProperties>;
+  update is ArmCustomPatchAsync<
+    TReservation,
+    Azure.ResourceManager.Foundations.ResourceUpdateModel<
+      TReservation,
+      TReservationProperties
+    >
+  >;
   delete is ArmResourceDeleteWithoutOkAsync<TReservation>;
   listByResourceGroup is ArmResourceListByParent<TReservation>;
   listBySubscription is ArmListBySubscription<TReservation>;

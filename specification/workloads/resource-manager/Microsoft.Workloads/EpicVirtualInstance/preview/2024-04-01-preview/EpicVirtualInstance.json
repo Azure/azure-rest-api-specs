@@ -233,6 +233,10 @@
               "$ref": "#/definitions/EpicVirtualInstance"
             },
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -531,6 +535,10 @@
               "$ref": "#/definitions/DatabaseServerInstance"
             },
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -845,6 +853,10 @@
               "$ref": "#/definitions/HyperspaceWebServerInstance"
             },
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -1159,6 +1171,10 @@
               "$ref": "#/definitions/PresentationServerInstance"
             },
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -1473,6 +1489,10 @@
               "$ref": "#/definitions/SharedServerInstance"
             },
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -1787,6 +1807,10 @@
               "$ref": "#/definitions/WssServerInstance"
             },
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -1967,12 +1991,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/DatabaseServerProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "description": "The resource-specific properties for this resource."
         }
       },
       "allOf": [
@@ -2119,8 +2138,8 @@
       "description": "The Epic Configuration.",
       "properties": {
         "configurationType": {
-          "type": "string",
-          "description": "Discriminator property for EpicConfiguration."
+          "$ref": "#/definitions/EpicConfigurationType",
+          "description": "The configuration type."
         }
       },
       "discriminator": "configurationType",
@@ -2212,12 +2231,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/EpicVirtualInstanceProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "description": "The resource-specific properties for this resource."
         }
       },
       "allOf": [
@@ -2497,12 +2511,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/HyperspaceWebServerProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "description": "The resource-specific properties for this resource."
         }
       },
       "allOf": [
@@ -2659,12 +2668,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/PresentationServerProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "description": "The resource-specific properties for this resource."
         }
       },
       "allOf": [
@@ -2898,12 +2902,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/SharedServerProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "description": "The resource-specific properties for this resource."
         }
       },
       "allOf": [
@@ -3062,12 +3061,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/WssServerProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "description": "The resource-specific properties for this resource."
         }
       },
       "allOf": [
