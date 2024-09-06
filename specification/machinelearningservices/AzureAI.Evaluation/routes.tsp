@@ -72,4 +72,5 @@ interface Evaluations {
       body: UpdateEvaluationTags;
     },
     OkResponse<Evaluation>
+  >;
 }
