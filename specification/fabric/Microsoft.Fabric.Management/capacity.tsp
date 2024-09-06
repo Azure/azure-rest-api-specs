@@ -45,22 +45,10 @@ interface FabricCapacities {
   listBySubscription is ArmListBySubscription<FabricCapacity>;
 
   @doc("Resume operation of the specified Fabric capacity instance.")
-  resume is ArmResourceActionAsync<
-    FabricCapacity,
-    void,
-    OkResponse,
-    LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
-      ArmLroLocationHeader<FinalResult = void>
-  >;
+  resume is ArmResourceActionAsync<FabricCapacity, void, ResumeOkStatusCode>;
 
   @doc("Suspend operation of the specified Fabric capacity instance.")
-  suspend is ArmResourceActionAsync<
-    FabricCapacity,
-    void,
-    OkResponse,
-    LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
-      ArmLroLocationHeader<FinalResult = void>
-  >;
+  suspend is ArmResourceActionAsync<FabricCapacity, void, SuspendOkStatusCode>;
 
   checkNameAvailability is checkLocalNameAvailability;
 
@@ -85,4 +73,14 @@ interface FabricCapacities {
     ...SubscriptionIdParameter,
     ...Azure.ResourceManager.Foundations.DefaultProviderNamespace,
   ): RpSkuEnumerationForNewResourceResult | ErrorResponse;
+}
+
+@doc("The capacity was successfully suspended")
+model SuspendOkStatusCode {
+  ...OkResponse;
+}
+
+@doc("The capacity was successfully resumed")
+model ResumeOkStatusCode {
+  ...OkResponse;
 }
