@@ -314,6 +314,9 @@ model Label {
   name?: string;
 }
 
+@doc("The details of an error.")
+model ErrorDetail is Foundations.Error;
+
 @doc("Details of a long running operation.")
 model OperationDetails {
   @doc("The unique id of the operation.")
@@ -326,5 +329,5 @@ model OperationDetails {
     An error, available when the status is `Failed`, describing why the operation
     failed.
     """)
-  error?: Foundations.Error;
+  error?: ErrorDetail;
 }
