@@ -14,7 +14,7 @@
     "https"
   ],
   "x-ms-parameterized-host": {
-    "hostTemplate": "{Endpoint}/language/authoring/analyze-conversations",
+    "hostTemplate": "{Endpoint}/language",
     "useSchemePrefix": false,
     "parameters": [
       {
@@ -110,7 +110,7 @@
         }
       }
     },
-    "/projects": {
+    "/authoring/analyze-conversations/projects": {
       "get": {
         "operationId": "ListProjects",
         "summary": "List projects",
@@ -168,7 +168,7 @@
         }
       }
     },
-    "/projects/{projectName}": {
+    "/authoring/analyze-conversations/projects/{projectName}": {
       "get": {
         "operationId": "GetProject",
         "summary": "Get project details",
@@ -258,50 +258,9 @@
             "$ref": "./examples/SuccessfulCreateProject.json"
           }
         }
-      },
-      "delete": {
-        "operationId": "DeleteProject",
-        "summary": "Delete project",
-        "description": "Deletes a project.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "projectName",
-            "in": "path",
-            "description": "The project name.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "The request has been accepted for processing, but processing has not yet completed.",
-            "headers": {
-              "Operation-Location": {
-                "type": "string",
-                "format": "uri",
-                "description": "The location for monitoring the operation state."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "SuccessfulDeleteProject": {
-            "$ref": "./examples/SuccessfulDeleteProject.json"
-          }
-        },
-        "x-ms-long-running-operation": true
       }
     },
-    "/projects/{projectName}:authorize-copy": {
+    "/authoring/analyze-conversations/projects/{projectName}:authorize-copy": {
       "post": {
         "operationId": "AuthorizeCopy",
         "summary": "Copy project authorization",
@@ -345,6 +304,484 @@
             "$ref": "./examples/SuccessfulCopyProjectAuthorization.json"
           }
         }
+      }
+    },
+    "/authoring/analyze-conversations/projects/{projectName}/deployments": {
+      "get": {
+        "operationId": "ListDeployments",
+        "summary": "List deployments",
+        "description": "Lists the deployments belonging to a project.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "The new project name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "top",
+            "in": "query",
+            "description": "The number of projects to be returned.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "skip",
+            "in": "query",
+            "description": "The offset in the response.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "maxpagesize",
+            "in": "query",
+            "description": "The maximum number of projects per page.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedProjectDeployment"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SuccessfulListDeployments": {
+            "$ref": "./examples/SuccessfulListDeployments.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/authoring/analyze-conversations/projects/{projectName}/deployments/{deploymentName}": {
+      "get": {
+        "operationId": "GetDeployment",
+        "summary": "Get deployment details",
+        "description": "Gets the details of a deployment.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "The new project name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "deploymentName",
+            "in": "path",
+            "description": "Represents deployment name.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ProjectDeployment"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SuccessfulGetDeployment": {
+            "$ref": "./examples/SuccessfulGetDeployment.json"
+          }
+        }
+      }
+    },
+    "/authoring/analyze-conversations/projects/{projectName}/models": {
+      "get": {
+        "operationId": "ListTrainedModels",
+        "summary": "List trained models",
+        "description": "Lists the trained models belonging to a project.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "The new project name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "top",
+            "in": "query",
+            "description": "The number of projects to be returned.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "skip",
+            "in": "query",
+            "description": "The offset in the response.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "maxpagesize",
+            "in": "query",
+            "description": "The maximum number of projects per page.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedProjectTrainedModel"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SuccessfulListModels": {
+            "$ref": "./examples/SuccessfulListModels.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/authoring/analyze-conversations/projects/{projectName}/models/{trainedModelLabel}": {
+      "get": {
+        "operationId": "GetTrainedModel",
+        "summary": "Get trained model details",
+        "description": "Gets the details of a trained model.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "The new project name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "trainedModelLabel",
+            "in": "path",
+            "description": "The trained model label.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ProjectTrainedModel"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SuccessfulGetModel": {
+            "$ref": "./examples/SuccessfulGetModel.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "DeleteTrainedModel",
+        "summary": "Delete trained model",
+        "description": "Deletes an existing trained model.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "The new project name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "trainedModelLabel",
+            "in": "path",
+            "description": "The trained model label.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SuccessfulDeleteModel": {
+            "$ref": "./examples/SuccessfulDeleteModel.json"
+          }
+        }
+      }
+    },
+    "/authoring/analyze-conversations/projects/{projectName}/resources": {
+      "get": {
+        "operationId": "ListDeploymentResources",
+        "summary": "Lists deployment resources",
+        "description": "Lists the deployments resources assigned to the project.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "The new project name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "top",
+            "in": "query",
+            "description": "The number of projects to be returned.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "skip",
+            "in": "query",
+            "description": "The offset in the response.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "maxpagesize",
+            "in": "query",
+            "description": "The maximum number of projects per page.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedAssignedDeploymentResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SuccessfulListDeploymentResources": {
+            "$ref": "./examples/SuccessfulListDeploymentResources.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/authoring/analyze-conversations/projects/{projectName}/train/jobs": {
+      "get": {
+        "operationId": "ListTrainingJobs",
+        "summary": "List training jobs",
+        "description": "Lists the non-expired training jobs created for a project.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "The new project name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "top",
+            "in": "query",
+            "description": "The number of projects to be returned.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "skip",
+            "in": "query",
+            "description": "The offset in the response.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "maxpagesize",
+            "in": "query",
+            "description": "The maximum number of projects per page.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedTrainingJobState"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SuccessfulListTrainingJobs": {
+            "$ref": "./examples/SuccessfulListTrainingJobs.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/authoring/analyze-conversations/projects/{projectName}/train/jobs/{jobId}": {
+      "get": {
+        "operationId": "GetTrainingStatus",
+        "summary": "Get training status",
+        "description": "Gets the status for a training job.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "The new project name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "jobId",
+            "in": "path",
+            "description": "The job ID.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/TrainingJobState"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SuccessfulGetTrainStatus": {
+            "$ref": "./examples/SuccessfulGetTrainStatus.json"
+          }
+        }
+      }
+    },
+    "/projects/{projectName}": {
+      "delete": {
+        "operationId": "DeleteProject",
+        "summary": "Delete project",
+        "description": "Deletes a project.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "The project name.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "headers": {
+              "Operation-Location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The location for monitoring the operation state."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SuccessfulDeleteProject": {
+            "$ref": "./examples/SuccessfulDeleteProject.json"
+          }
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/projects/{projectName}/:copy": {
@@ -635,115 +1072,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/projects/{projectName}/deployments": {
-      "get": {
-        "operationId": "ListDeployments",
-        "summary": "List deployments",
-        "description": "Lists the deployments belonging to a project.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "projectName",
-            "in": "path",
-            "description": "The new project name.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "top",
-            "in": "query",
-            "description": "The number of projects to be returned.",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
-          },
-          {
-            "name": "skip",
-            "in": "query",
-            "description": "The offset in the response.",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
-          },
-          {
-            "name": "maxpagesize",
-            "in": "query",
-            "description": "The maximum number of projects per page.",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/PagedProjectDeployment"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "SuccessfulListDeployments": {
-            "$ref": "./examples/SuccessfulListDeployments.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
     "/projects/{projectName}/deployments/{deploymentName}": {
-      "get": {
-        "operationId": "GetDeployment",
-        "summary": "Get deployment details",
-        "description": "Gets the details of a deployment.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "projectName",
-            "in": "path",
-            "description": "The new project name.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "deploymentName",
-            "in": "path",
-            "description": "Represents deployment name.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/ProjectDeployment"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "SuccessfulGetDeployment": {
-            "$ref": "./examples/SuccessfulGetDeployment.json"
-          }
-        }
-      },
       "put": {
         "operationId": "DeployProject",
         "summary": "Update deployment",
@@ -1281,156 +1610,6 @@
         }
       }
     },
-    "/projects/{projectName}/models": {
-      "get": {
-        "operationId": "ListTrainedModels",
-        "summary": "List trained models",
-        "description": "Lists the trained models belonging to a project.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "projectName",
-            "in": "path",
-            "description": "The new project name.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "top",
-            "in": "query",
-            "description": "The number of projects to be returned.",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
-          },
-          {
-            "name": "skip",
-            "in": "query",
-            "description": "The offset in the response.",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
-          },
-          {
-            "name": "maxpagesize",
-            "in": "query",
-            "description": "The maximum number of projects per page.",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/PagedProjectTrainedModel"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "SuccessfulListModels": {
-            "$ref": "./examples/SuccessfulListModels.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/projects/{projectName}/models/{trainedModelLabel}": {
-      "get": {
-        "operationId": "GetTrainedModel",
-        "summary": "Get trained model details",
-        "description": "Gets the details of a trained model.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "projectName",
-            "in": "path",
-            "description": "The new project name.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "trainedModelLabel",
-            "in": "path",
-            "description": "The trained model label.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/ProjectTrainedModel"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "SuccessfulGetModel": {
-            "$ref": "./examples/SuccessfulGetModel.json"
-          }
-        }
-      },
-      "delete": {
-        "operationId": "DeleteTrainedModel",
-        "summary": "Delete trained model",
-        "description": "Deletes an existing trained model.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "projectName",
-            "in": "path",
-            "description": "The new project name.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "trainedModelLabel",
-            "in": "path",
-            "description": "The trained model label.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "SuccessfulDeleteModel": {
-            "$ref": "./examples/SuccessfulDeleteModel.json"
-          }
-        }
-      }
-    },
     "/projects/{projectName}/models/{trainedModelLabel}/:evaluate": {
       "post": {
         "operationId": "EvaluateModel",
@@ -1803,71 +1982,6 @@
         }
       }
     },
-    "/projects/{projectName}/resources": {
-      "get": {
-        "operationId": "ListDeploymentResources",
-        "summary": "Lists deployment resources",
-        "description": "Lists the deployments resources assigned to the project.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "projectName",
-            "in": "path",
-            "description": "The new project name.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "top",
-            "in": "query",
-            "description": "The number of projects to be returned.",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
-          },
-          {
-            "name": "skip",
-            "in": "query",
-            "description": "The offset in the response.",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
-          },
-          {
-            "name": "maxpagesize",
-            "in": "query",
-            "description": "The maximum number of projects per page.",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/PagedAssignedDeploymentResource"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "SuccessfulListDeploymentResources": {
-            "$ref": "./examples/SuccessfulListDeploymentResources.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
     "/projects/{projectName}/resources/:assign": {
       "post": {
         "operationId": "AssignDeploymentResources",
@@ -2070,116 +2184,6 @@
         "x-ms-examples": {
           "SuccessfulGetUnassignDeploymentResourcesStatus": {
             "$ref": "./examples/SuccessfulGetUnassignDeploymentResourcesStatus.json"
-          }
-        }
-      }
-    },
-    "/projects/{projectName}/train/jobs": {
-      "get": {
-        "operationId": "ListTrainingJobs",
-        "summary": "List training jobs",
-        "description": "Lists the non-expired training jobs created for a project.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "projectName",
-            "in": "path",
-            "description": "The new project name.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "top",
-            "in": "query",
-            "description": "The number of projects to be returned.",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
-          },
-          {
-            "name": "skip",
-            "in": "query",
-            "description": "The offset in the response.",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
-          },
-          {
-            "name": "maxpagesize",
-            "in": "query",
-            "description": "The maximum number of projects per page.",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/PagedTrainingJobState"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "SuccessfulListTrainingJobs": {
-            "$ref": "./examples/SuccessfulListTrainingJobs.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/projects/{projectName}/train/jobs/{jobId}": {
-      "get": {
-        "operationId": "GetTrainingStatus",
-        "summary": "Get training status",
-        "description": "Gets the status for a training job.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "projectName",
-            "in": "path",
-            "description": "The new project name.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "jobId",
-            "in": "path",
-            "description": "The job ID.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/TrainingJobState"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "SuccessfulGetTrainStatus": {
-            "$ref": "./examples/SuccessfulGetTrainStatus.json"
           }
         }
       }

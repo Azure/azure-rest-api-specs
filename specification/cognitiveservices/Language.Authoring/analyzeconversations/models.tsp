@@ -169,7 +169,7 @@ union OrchestrationTargetProjectKind {
 /**
  * Represents the metadata of a project.
  */
-@resource("projects")
+@resource("authoring/analyze-conversations/projects")
 model ProjectMetadata {
   /**
    * Represents the project creation datetime.
