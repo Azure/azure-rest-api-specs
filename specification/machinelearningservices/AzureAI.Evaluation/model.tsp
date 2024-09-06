@@ -104,6 +104,30 @@ model Evaluation {
   evaluation_target?: EvaluationTarget;
 }
 
+@doc("Paged evaluation items")
+@pagedResult
+model PagedEvaluation {
+  @doc("The list of Evaluations.")
+  @extension("x-ms-identifiers", [])
+  @items
+  value: Evaluation[];
+
+  @doc("The link to the next page of items")
+  @nextLink
+  nextLink?: ResourceLocation<Evaluation>;
+}
+
+@doc("Update Evaluation Tags")
+model UpdateEvaluationTags {
+  @doc("Tags to be updated.")
+  tags: Record<string>;
+}
+
+
 #suppress "@azure-tools/typespec-providerhub/no-inline-model" "Need to create reponses correctly"
 alias ResourceCreatedResponse<T extends TypeSpec.Reflection.Model> = TypeSpec.Http.Response<201> &
+  T;
+
+#suppress "@azure-tools/typespec-providerhub/no-inline-model" "Need to create reponses correctly"
+alias OkResponse<T extends TypeSpec.Reflection.Model> = TypeSpec.Http.Response<200> &
   T;
