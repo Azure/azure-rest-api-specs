@@ -36,16 +36,15 @@ model AppInsightDataSource {
   query: string;
 }
 
-// @doc("Data source for Evaluation.")
-// union DataSource {
-//     dataset_id: string;
-//     app_insights: AppInsightDataSource;
-// }
+union DataSource {
+    dataset_id: string,
+    app_insights: AppInsightDataSource,
+}
 
 @doc("Input Data for Evaluation.")
 model Data{
   @doc("Data for evaluation.")
-  source: string | AppInsightDataSource;
+  source: DataSource;
 }
 
 @doc("Output Location for Evaluation.")
@@ -64,11 +63,6 @@ model BaseModel {
 
   @doc("parameters for evaluation.")
   parameters: Record<string>;
-}
-
-@doc("Evaluation Target.")
-union EvaluationTarget {
-    BaseModel
 }
 
 @doc("Evaluation Definition")
@@ -106,7 +100,7 @@ model Evaluation {
   outputLocation?: string;
 
   @doc("Evaluation Target.")
-  evaluation_target?: EvaluationTarget;
+  evaluation_target?: BaseModel;
 }
 
 @doc("Paged evaluation items")
