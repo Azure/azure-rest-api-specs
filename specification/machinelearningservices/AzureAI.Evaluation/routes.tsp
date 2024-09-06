@@ -16,7 +16,7 @@ namespace Microsoft.MachineLearningServices;
 
 interface Evaluations {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Waiting for bug fix: https://github.com/Azure/typespec-azure-pr/issues/3739."
-  @doc("Get an Evalution.")
+  @doc("Get an evalution.")
   @route("/evalations/{id}")
   @get
   get is Azure.Core.Foundations.Operation<
@@ -32,7 +32,7 @@ interface Evaluations {
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Waiting for bug fix: https://github.com/Azure/typespec-azure-pr/issues/3739."
-  @doc("Creates or updates a Prompt")
+  @doc("Creates an evaluation.")
   @route("/evaluations/create")
   @post
   create is Azure.Core.Foundations.Operation<
@@ -43,4 +43,33 @@ interface Evaluations {
     },
     ResourceCreatedResponse<Evaluation>
   >;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Waiting for bug fix: https://github.com/Azure/typespec-azure-pr/issues/3739."
+  @doc("List evaluations")
+  @route("/evaluations")
+  @get
+  list is Azure.Core.Foundations.Operation<
+    {
+      ...StandardListQueryParameters;
+    },
+    PagedEvaluation
+  >;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Waiting for bug fix: https://github.com/Azure/typespec-azure-pr/issues/3739."
+  @doc("Update an evaluation.")
+  @route("/evaluations/{id}")
+  @patch
+  update is Azure.Core.Foundations.Operation<
+    {
+      @doc("Identifier of the evaluation.")
+      @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_]*$")
+      @maxLength(254)
+      @path
+      id: string;
+
+      @doc("Tags of Evaluation.")
+      @body
+      body: UpdateEvaluationTags;
+    },
+    OkResponse<Evaluation>
 }
