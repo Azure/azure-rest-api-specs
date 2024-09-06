@@ -62,8 +62,7 @@ model BaseModel {
 
 @doc("Evaluation Target.")
 union EvaluationTarget {
-    string,
-    AppInsightDataSource
+    BaseModel
 }
 
 @doc("Evaluation Definition")
@@ -71,8 +70,11 @@ model Evaluation {
   @doc("Identifier of the evaluation.")
   id: string;
 
+  @doc("Data for evaluation.")
+  data: InputData;
+
   @doc("Update stage to 'Archive' to archive the asset. Default is Development, which means the asset is under development.")
-  displayName?: string = "Development";
+  displayName?: string;
 
   @doc("Description of the evaluation. It can be used to store additional information about the evaluation and is mutable.")
   description?: string;
@@ -93,9 +95,6 @@ model Evaluation {
 
   @doc("Evaluators to be used for the evaluation.")
   evaluators?: Record<EvaluatorConfiguration>;
-
-  @doc("Data for evaluation.")
-  data: InputData;
 
   @doc("Output location for the evaluation.")
   outputLocation?: string;
