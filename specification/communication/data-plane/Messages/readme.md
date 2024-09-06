@@ -57,7 +57,7 @@ These settings apply only when `--tag=package-2024-08-30` is specified on the co
 
 ```yaml $(tag) == 'package-2024-08-30'
 input-file:
-  - preview/2024-08-30/communicationservicesmessages.json
+  - stable/2024-08-30/communicationservicesmessages.json
 title:
   Azure Communication Services
 ```
