@@ -3563,6 +3563,21 @@
           "type": "string",
           "description": "Client secret of the Application in external Identity Provider, used to authenticate login request. For example, it is App Secret for Facebook login, API Key for Google login, Public Key for Microsoft. This property will not be filled on 'GET' operations! Use '/listSecrets' POST request to get the value.",
           "minLength": 1
+        },
+        "certificateId": {
+          "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.ApiManagement/service/certificates"
+              }
+            ]
+          },
+          "example": {
+            "certificateId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/certificates/templateCert"
+          },
+          "description": "Certificate full resource ID used in external Identity Provider"
         }
       },
       "allOf": [
@@ -3605,6 +3620,18 @@
           "type": "string",
           "description": "Client secret of the Application in external Identity Provider, used to authenticate login request. For example, it is App Secret for Facebook login, API Key for Google login, Public Key for Microsoft. This property will not be filled on 'GET' operations! Use '/listSecrets' POST request to get the value.",
           "minLength": 1
+        },
+        "certificateId": {
+          "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.ApiManagement/service/certificates"
+              }
+            ]
+          },
+          "description": "Certificate full resource ID used in external Identity Provider"
         }
       },
       "allOf": [
@@ -3663,6 +3690,21 @@
           "type": "string",
           "description": "Client secret of the Application in external Identity Provider, used to authenticate login request. For example, it is App Secret for Facebook login, API Key for Google login, Public Key for Microsoft.",
           "minLength": 1
+        },
+        "certificateId": {
+          "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.ApiManagement/service/certificates"
+              }
+            ]
+          },
+          "example": {
+            "certificateId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/certificates/templateCert"
+          },
+          "description": "Certificate full resource ID used in external Identity Provider"
         }
       },
       "allOf": [
