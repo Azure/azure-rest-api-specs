@@ -38,8 +38,8 @@ model AppInsightDataSource {
 
 @doc("Data source for Evaluation.")
 union DataSource {
-    string;
-    AppInsightDataSource;
+    dataset_id: string;
+    app_insights: AppInsightDataSource;
 }
 
 @doc("Input Data for Evaluation.")
