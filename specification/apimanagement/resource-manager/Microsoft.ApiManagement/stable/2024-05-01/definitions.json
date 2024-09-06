@@ -2859,6 +2859,11 @@
           "$ref": "#/definitions/PipelineDiagnosticSettings",
           "description": "Diagnostic settings for incoming/outgoing HTTP messages to the Backend"
         },
+        "largeLanguageModel": {
+
+              "$ref": "#/definitions/LLMDiagnosticSettings",
+              "description": "Large Language Models diagnostic settings"
+        },
         "logClientIp": {
           "type": "boolean",
           "description": "Log the ClientIP. Default is false."
@@ -3000,6 +3005,11 @@
         "backend": {
           "$ref": "#/definitions/PipelineDiagnosticSettings",
           "description": "Diagnostic settings for incoming/outgoing HTTP messages to the Backend"
+        },
+        "largeLanguageModel": {
+
+          "$ref": "#/definitions/LLMDiagnosticSettings",
+          "description": "Large Language Models diagnostic settings"
         },
         "logClientIp": {
           "type": "boolean",
@@ -4743,6 +4753,78 @@
           "type": "string",
           "description": "A URL that points to the literal example"
         }
+      }
+    },
+    "LLMDiagnosticSettings": {
+      "type": "object",
+      "description": "Diagnostic settings for Large Language Models",
+      "properties": {
+        "logs": {
+          "$ref": "#/definitions/LLMLogsTypes",
+          "description": "Specifies whether default diagnostic should be enabled for Large Language Models or not."
+        },
+        "requests": {
+          "$ref": "#/definitions/LLMMessageDiagnosticSettings",
+          "description": "Diagnostic settings for Large Language Models requests."
+        },
+        "responses": {
+          "$ref": "#/definitions/LLMMessageDiagnosticSettings",
+          "description": "Diagnostic settings for Large Language Models responses."
+        }
+      }
+    },
+    "LLMLogsTypes": {
+      "type": "string",
+      "enum": [
+        "enabled",
+        "disabled"
+      ],
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "llm-diagnostic-settings",
+        "values": [
+          {
+            "value": "enabled",
+            "description": "Default llm logs are enabled."
+          },
+          {
+            "value": "disabled",
+            "description": "Default llm logs are disabled."
+          }
+        ]
+      }
+    },
+    "LLMMessageDiagnosticSettings": {
+      "type": "object",
+      "description": "Diagnostic settings for Large Language Models Messages",
+      "properties": {
+        "messages": {
+          "$ref": "#/definitions/LLMMessageLogTypes",
+          "description": "Specifies which message should be logged. Currently there is only 'all' option."
+        },
+        "maxSizeInBytes": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Maximum size of message to logs in bytes. The maximum size is 32KB.",
+          "maximum": 32768
+        }
+      }
+    },
+    "LLMMessageLogTypes": {
+      "type": "string",
+      "enum": [
+        "all"
+      ],
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "llm-message-log-types",
+        "values": [
+          {
+            "value": "all",
+            "description": "Log all messages.",
+            "x-apim-code-enumValue": 1
+          }
+        ]
       }
     },
     "PipelineDiagnosticSettings": {
