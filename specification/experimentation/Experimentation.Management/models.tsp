@@ -85,7 +85,7 @@ model ExperimentWorkspaceProperties {
   /**
    * The resource identifier of the Log Analytics workspace which experiment workspace uses for generating experiment analysis results.
    */
-  logAnalyticsResourceId?: Azure.Core.armResourceIdentifier<[
+  logAnalyticsWorkspaceResourceId?: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.OperationalInsights/workspaces";
     }
