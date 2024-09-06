@@ -37,9 +37,14 @@ model AppInsightDataSource {
 }
 
 @doc("Input Data for Evaluation.")
-union InputData {
+union DataSource {
     string,
     AppInsightDataSource
+}
+
+model Data{
+  @doc("Data for evaluation.")
+  source: DataSource;
 }
 
 @doc("Output Location for Evaluation.")
@@ -71,7 +76,7 @@ model Evaluation {
   id: string;
 
   @doc("Data for evaluation.")
-  data: InputData;
+  data: Data;
 
   @doc("Update stage to 'Archive' to archive the asset. Default is Development, which means the asset is under development.")
   displayName?: string;
