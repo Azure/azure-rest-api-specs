@@ -1,153 +1,139 @@
-import "@azure-tools/typespec-autorest";
-import "@azure-tools/typespec-azure-core";
-import "@azure-tools/typespec-azure-resource-manager";
-import "@typespec/rest";
-import "@typespec/openapi";
 import "@typespec/versioning";
+import "@typespec/openapi";
 
-using Azure.ResourceManager;
 using TypeSpec.Versioning;
-using TypeSpec.Reflection;
 using TypeSpec.OpenAPI;
 
 @versioned(LiftrBase.Versions)
 namespace LiftrBase;
 
-@doc("Supported versions for LiftrBase resource model")
+/**
+ * The available API versions.
+ */
 enum Versions {
-  @doc("Dependent on Azure.ResourceManager.Versions.v1_0_Preview_1")
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
-  v2_preview: "2024-02-01-preview",
+    /**
+     * The 2024-08-28-preview API version.
+     */
+    v2_preview: "2024-08-28-preview",
 }
 
 /**
  * Marketplace subscription status of the file system resource
  */
 union MarketplaceSubscriptionStatus {
-  /**
-   * Fulfillment has not started
-   */
-  PendingFulfillmentStart: "PendingFulfillmentStart",
+    string,
 
-  /**
-   * Marketplace offer is subscribed
-   */
-  Subscribed: "Subscribed",
+    /**
+     * Fulfillment has not started
+     */
+    PendingFulfillmentStart: "PendingFulfillmentStart",
 
-  /**
-   * Marketplace offer is suspended because of non payment
-   */
-  Suspended: "Suspended",
+    /**
+     * Marketplace offer is subscribed
+     */
+    Subscribed: "Subscribed",
 
-  /**
-   * Marketplace offer is unsubscribed
-   */
-  Unsubscribed: "Unsubscribed",
+    /**
+     * Marketplace offer is suspended because of non payment
+     */
+    Suspended: "Suspended",
 
-  string,
-}
-
-@doc("MarketplaceDetails of Dell FileSystem resource")
-model MarketplaceDetails {
-  /**
-   * Marketplace Subscription Id
-   */
-  marketplaceSubscriptionId?: string;
-
-  /**
-   * Plan Id
-   */
-  planId: string;
-
-  /**
-   * Offer Id
-   */
-  offerId: string;
-
-  /**
-   * Publisher Id
-   */
-  publisherId?: string;
-
-  /**
-   * Marketplace subscription status
-   */
-  @visibility("read")
-  marketplaceSubscriptionStatus?: MarketplaceSubscriptionStatus;
-}
-
-@doc("User Details of Dell FileSystem resource")
-model UserDetails {
-  /**
-   * User Email
-   */
-  @extension("x-ms-secret", true)
-  email: string;
-}
-
-@doc("Base resource properties that can be extended for arm resources.")
-model BaseResourceProperties {
-  @doc("MarketplaceDetails of Dell FileSystem resource")
-  @visibility("create", "read")
-  marketplace: MarketplaceDetails;
-
-  @doc("User Details of Dell FileSystem resource")
-  user: UserDetails;
-
-  @doc("Provisioning state of the resource.")
-  @visibility("read")
-  provisioningState?: ProvisioningState;
+    /**
+     * Marketplace offer is unsubscribed
+     */
+    Unsubscribed: "Unsubscribed",
 }
 
 /**
  * Provisioning State of the File system resource
  */
 union ProvisioningState {
-  /**
-   * File system resource creation request accepted
-   */
-  Accepted: "Accepted",
+    string,
 
-  /**
-   * File system resource creation started
-   */
-  Creating: "Creating",
+    /**
+     * File system resource creation request accepted
+     */
+    Accepted: "Accepted",
 
-  /**
-   * File system resource is being updated
-   */
-  Updating: "Updating",
+    /**
+     * File system resource creation started
+     */
+    Creating: "Creating",
 
-  /**
-   * File system resource deletion started
-   */
-  Deleting: "Deleting",
+    /**
+     * File system resource is being updated
+     */
+    Updating: "Updating",
 
-  /**
-   * File system resource creation successful
-   */
-  Succeeded: "Succeeded",
+    /**
+     * File system resource deletion started
+     */
+    Deleting: "Deleting",
 
-  /**
-   * File system resource creation failed
-   */
-  Failed: "Failed",
+    /**
+     * File system resource creation successful
+     */
+    Succeeded: "Succeeded",
 
-  /**
-   * File system resource creation canceled
-   */
-  Canceled: "Canceled",
+    /**
+     * File system resource creation failed
+     */
+    Failed: "Failed",
 
-  /**
-   * File system resource is deleted
-   */
-  Deleted: "Deleted",
+    /**
+     * File system resource creation canceled
+     */
+    Canceled: "Canceled",
 
-  /**
-   * File system resource state is unknown
-   */
-  NotSpecified: "NotSpecified",
+    /**
+     * File system resource is deleted
+     */
+    Deleted: "Deleted",
 
-  string,
+    /**
+     * File system resource state is unknown
+     */
+    NotSpecified: "NotSpecified",
+}
+
+/**
+ * MarketplaceDetails of Dell FileSystem resource
+ */
+model MarketplaceDetails {
+    /**
+     * Marketplace Subscription Id
+     */
+    marketplaceSubscriptionId?: string;
+
+    /**
+     * Plan Id
+     */
+    planId: string;
+
+    /**
+     * Offer Id
+     */
+    offerId: string;
+
+    /**
+     * Publisher Id
+     */
+    publisherId?: string;
+
+    /**
+     * Marketplace subscription status
+     */
+    @visibility("read")
+    marketplaceSubscriptionStatus?: MarketplaceSubscriptionStatus;
+}
+
+/**
+ * User Details of Dell FileSystem resource
+ */
+model UserDetails {
+    /**
+     * User Email
+     */
+    @extension("x-ms-secret", true)
+    email: string;
 }

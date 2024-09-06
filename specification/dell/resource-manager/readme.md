@@ -50,15 +50,6 @@ input-file:
 
 ---
 
-## Suppression
-
-``` yaml
-suppressions:
-  - code: BodyTopLevelProperties
-    from: Dell.Storage.json
-    reason: Issue https://github.com/Azure/azure-openapi-validator/issues/722. The BodyTopLevelProperties check failing.
-```
-
 # Code Generation
 
 ## Swagger to SDK
