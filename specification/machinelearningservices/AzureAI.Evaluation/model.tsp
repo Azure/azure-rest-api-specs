@@ -36,16 +36,16 @@ model AppInsightDataSource {
   query: string;
 }
 
-@doc("Data source for Evaluation.")
-union DataSource {
-    dataset_id: string;
-    app_insights: AppInsightDataSource;
-}
+// @doc("Data source for Evaluation.")
+// union DataSource {
+//     dataset_id: string;
+//     app_insights: AppInsightDataSource;
+// }
 
 @doc("Input Data for Evaluation.")
 model Data{
   @doc("Data for evaluation.")
-  source: DataSource;
+  source: string | AppInsightDataSource;
 }
 
 @doc("Output Location for Evaluation.")
