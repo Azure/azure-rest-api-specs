@@ -69,6 +69,7 @@ op deleteProject is Foundations.LongRunningOperation<
 #suppress "@azure-tools/typespec-azure-core/casing-style"
 @summary("Copy project authorization")
 @post
+@actionSeparator("/:")
 op `authorize-copy` is languageOperations.ResourceAction<
 ProjectMetadata,
 CopyAuthorizationOptions,
@@ -81,7 +82,7 @@ CopyProjectOptions
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @summary("Copy project")
-@route("/projects/{projectName}/:copy")
+@route("/authoring/analyze-conversations/projects/{projectName}/:copy")
 @post
 @pollingOperation(getCopyProjectStatus)
 op copyProject is Foundations.LongRunningOperation<
@@ -108,7 +109,7 @@ op copyProject is Foundations.LongRunningOperation<
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @summary("Export project")
-@route("/projects/{projectName}/:export")
+@route("/authoring/analyze-conversations/projects/{projectName}/:export")
 @post
 @pollingOperation(getExportStatus)
 op export is Foundations.LongRunningOperation<
@@ -156,7 +157,7 @@ op export is Foundations.LongRunningOperation<
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @summary("Import project")
-@route("/projects/{projectName}/:import")
+@route("/authoring/analyze-conversations/projects/{projectName}/:import")
 @post
 @pollingOperation(getImportStatus)
 op `import` is Foundations.LongRunningOperation<
@@ -189,7 +190,7 @@ op `import` is Foundations.LongRunningOperation<
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @summary("Train project")
-@route("/projects/{projectName}/:train")
+@route("/authoring/analyze-conversations/projects/{projectName}/:train")
 @post
 @pollingOperation(getTrainingStatus)
 op train is Foundations.LongRunningOperation<
@@ -216,7 +217,7 @@ op train is Foundations.LongRunningOperation<
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @summary("Get copy project status")
-@route("/{projectName}/copy/jobs/{jobId}")
+@route("/authoring/analyze-conversations/projects/{projectName}/copy/jobs/{jobId}")
 @get
 op getCopyProjectStatus is Foundations.Operation<
   {
@@ -320,7 +321,7 @@ op deleteDeployment is Foundations.LongRunningOperation<
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @summary("Delete deployment from resources")
-@route("/projects/{projectName}/deployments/{deploymentName}/:delete-from-resources")
+@route("/authoring/analyze-conversations/projects/{projectName}/deployments/{deploymentName}/:delete-from-resources")
 @post
 @pollingOperation(getDeploymentDeleteFromResourcesStatus)
 op deleteDeploymentFromResources is Foundations.LongRunningOperation<
@@ -352,7 +353,7 @@ op deleteDeploymentFromResources is Foundations.LongRunningOperation<
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @summary("Get deployment deletion from resources status")
-@route("/projects/{projectName}/deployments/{deploymentName}/delete-from-resources/jobs/{jobId}")
+@route("/authoring/analyze-conversations/projects/{projectName}/deployments/{deploymentName}/delete-from-resources/jobs/{jobId}")
 @get
 op getDeploymentDeleteFromResourcesStatus is Foundations.Operation<
   {
@@ -382,7 +383,7 @@ op getDeploymentDeleteFromResourcesStatus is Foundations.Operation<
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @summary("Get deployment status")
-@route("/projects/{projectName}/deployments/{deploymentName}/jobs/{jobId}")
+@route("/authoring/analyze-conversations/projects/{projectName}/deployments/{deploymentName}/jobs/{jobId}")
 @get
 op getDeploymentStatus is Foundations.Operation<
   {
@@ -412,7 +413,7 @@ op getDeploymentStatus is Foundations.Operation<
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @summary("Swap deployments")
-@route("/projects/{projectName}/deployments/:swap")
+@route("/authoring/analyze-conversations/projects/{projectName}/deployments/:swap")
 @post
 @pollingOperation(getSwapDeploymentsStatus)
 op swapDeployments is Foundations.LongRunningOperation<
@@ -439,7 +440,7 @@ op swapDeployments is Foundations.LongRunningOperation<
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @summary("Gets swap deployments status")
-@route("/projects/{projectName}/deployments/swap/jobs/{jobId}")
+@route("/authoring/analyze-conversations/projects/{projectName}/deployments/swap/jobs/{jobId}")
 @get
 op getSwapDeploymentsStatus is Foundations.Operation<
   {
@@ -464,7 +465,7 @@ op getSwapDeploymentsStatus is Foundations.Operation<
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @summary("Get export status")
-@route("/projects/{projectName}/export/jobs/{jobId}")
+@route("/authoring/analyze-conversations/projects/{projectName}/export/jobs/{jobId}")
 @get
 op getExportStatus is Foundations.Operation<
   {
@@ -512,7 +513,7 @@ op getExportResult is Foundations.Operation<
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @summary("Get import status")
-@route("/projects/{projectName}/import/jobs/{jobId}")
+@route("/authoring/analyze-conversations/projects/{projectName}/import/jobs/{jobId}")
 @get
 op getImportStatus is Foundations.Operation<
   {
@@ -559,7 +560,7 @@ op deleteTrainedModel is languageOperations.ResourceDelete<ProjectTrainedModel>;
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @summary("Evaluate model")
-@route("/projects/{projectName}/models/{trainedModelLabel}/:evaluate")
+@route("/authoring/analyze-conversations/projects/{projectName}/models/{trainedModelLabel}/:evaluate")
 @post
 @pollingOperation(getEvaluationStatus)
 op evaluateModel is Foundations.LongRunningOperation<
@@ -593,7 +594,7 @@ op evaluateModel is Foundations.LongRunningOperation<
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @summary("Load trained model snapshot to the working directory.")
-@route("/projects/{projectName}/models/{trainedModelLabel}/:load-snapshot")
+@route("/authoring/analyze-conversations/projects/{projectName}/models/{trainedModelLabel}/:load-snapshot")
 @post
 @pollingOperation(getLoadSnapshotStatus)
 op loadSnapshot is Foundations.LongRunningOperation<
@@ -620,7 +621,7 @@ op loadSnapshot is Foundations.LongRunningOperation<
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @summary("Get evaluation status")
-@route("/projects/{projectName}/models/{trainedModelLabel}/evaluate/jobs/{jobId}")
+@route("/authoring/analyze-conversations/projects/{projectName}/models/{trainedModelLabel}/evaluate/jobs/{jobId}")
 @get
 op getEvaluationStatus is Foundations.Operation<
   {
@@ -651,7 +652,7 @@ op getEvaluationStatus is Foundations.Operation<
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @summary("Get trained model evaluation result")
-@route("/projects/{projectName}/models/{trainedModelLabel}/evaluation/result")
+@route("/authoring/analyze-conversations/projects/{projectName}/models/{trainedModelLabel}/evaluation/result")
 @get
 op getModelEvaluationResults is Foundations.Operation<
   {
@@ -701,7 +702,7 @@ op getModelEvaluationResults is Foundations.Operation<
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @summary("Get trained model evaluation summary")
-@route("/projects/{projectName}/models/{trainedModelLabel}/evaluation/summary-result")
+@route("/authoring/analyze-conversations/projects/{projectName}/models/{trainedModelLabel}/evaluation/summary-result")
 @get
 op getModelEvaluationSummary is Foundations.Operation<
   {
@@ -725,7 +726,7 @@ op getModelEvaluationSummary is Foundations.Operation<
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @summary("Get load snapshot status")
-@route("/projects/{projectName}/models/{trainedModelLabel}/load-snapshot/jobs/{jobId}")
+@route("/authoring/analyze-conversations/projects/{projectName}/models/{trainedModelLabel}/load-snapshot/jobs/{jobId}")
 @get
 op getLoadSnapshotStatus is Foundations.Operation<
   {
@@ -769,7 +770,7 @@ op listDeploymentResources is languageOperations.ResourceList<
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @summary("Assign deployment resources")
-@route("/projects/{projectName}/resources/:assign")
+@route("/authoring/analyze-conversations/projects/{projectName}/resources/:assign")
 @post
 @pollingOperation(getAssignDeploymentResourcesStatus)
 op assignDeploymentResources is Foundations.LongRunningOperation<
@@ -797,7 +798,7 @@ op assignDeploymentResources is Foundations.LongRunningOperation<
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @summary("Unassign deployment resources")
-@route("/projects/{projectName}/resources/:unassign")
+@route("/authoring/analyze-conversations/projects/{projectName}/resources/:unassign")
 @post
 @pollingOperation(getUnassignDeploymentResourcesStatus)
 op unassignDeploymentResources is Foundations.LongRunningOperation<
@@ -824,7 +825,7 @@ op unassignDeploymentResources is Foundations.LongRunningOperation<
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @summary("Get assign deployment resources status")
-@route("/projects/{projectName}/resources/assign/jobs/{jobId}")
+@route("/authoring/analyze-conversations/projects/{projectName}/resources/assign/jobs/{jobId}")
 @get
 op getAssignDeploymentResourcesStatus is Foundations.Operation<
   {
@@ -848,7 +849,7 @@ op getAssignDeploymentResourcesStatus is Foundations.Operation<
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @summary("Get unassign deployment resources status")
-@route("/projects/{projectName}/resources/unassign/jobs/{jobId}")
+@route("/authoring/analyze-conversations/projects/{projectName}/resources/unassign/jobs/{jobId}")
 @get
 op getUnassignDeploymentResourcesStatus is Foundations.Operation<
   {
@@ -889,7 +890,7 @@ op getTrainingStatus is languageOperations.ResourceRead<TrainingJobState>;
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @summary("Cancel training")
-@route("/projects/{projectName}/train/jobs/{jobId}/:cancel")
+@route("/authoring/analyze-conversations/projects/{projectName}/train/jobs/{jobId}/:cancel")
 @post
 @pollingOperation(getTrainingStatus)
 op cancelTrainingJob is Foundations.LongRunningOperation<
@@ -943,7 +944,7 @@ op listProjects is languageOperations.ResourceList<
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @summary("Get project deletion status")
-@route("/projects/global/deletion-jobs/{jobId}")
+@route("/authoring/analyze-conversations/projects/global/deletion-jobs/{jobId}")
 @get
 op getProjectDeletionStatus is Foundations.Operation<
   {
@@ -963,7 +964,7 @@ op getProjectDeletionStatus is Foundations.Operation<
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @summary("Lists assigned resource deployments")
-@route("/projects/global/deployments/resources")
+@route("/authoring/analyze-conversations/projects/global/deployments/resources")
 @get
 op listAssignedResourceDeployments is Foundations.Operation<
   {
@@ -993,7 +994,7 @@ op listAssignedResourceDeployments is Foundations.Operation<
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @summary("List supported languages")
-@route("/projects/global/languages")
+@route("/authoring/analyze-conversations/projects/global/languages")
 @get
 op getSupportedLanguages is Foundations.Operation<
   {
@@ -1030,7 +1031,7 @@ op getSupportedLanguages is Foundations.Operation<
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @summary("List supported prebuilt entities")
-@route("/projects/global/prebuilt-entities")
+@route("/authoring/analyze-conversations/projects/global/prebuilt-entities")
 @get
 op getSupportedPrebuiltEntities is Foundations.Operation<
   {
@@ -1075,7 +1076,7 @@ op getSupportedPrebuiltEntities is Foundations.Operation<
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @summary("List training config versions")
-@route("/projects/global/training-config-versions")
+@route("/authoring/analyze-conversations/projects/global/training-config-versions")
 @get
 op listTrainingConfigVersions is Foundations.Operation<
   {

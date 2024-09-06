@@ -59,57 +59,6 @@
   },
   "tags": [],
   "paths": {
-    "/{projectName}/copy/jobs/{jobId}": {
-      "get": {
-        "operationId": "GetCopyProjectStatus",
-        "summary": "Get copy project status",
-        "description": "Gets the status of an existing copy project job.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "projectName",
-            "in": "path",
-            "description": "The project name.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "jobId",
-            "in": "path",
-            "description": "The job ID.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/CopyProjectJobState"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "SuccessfulGetCopyProjectStatus": {
-            "$ref": "./examples/SuccessfulGetCopyProjectStatus.json"
-          }
-        }
-      }
-    },
     "/authoring/analyze-conversations/projects": {
       "get": {
         "operationId": "ListProjects",
@@ -260,7 +209,7 @@
         }
       }
     },
-    "/authoring/analyze-conversations/projects/{projectName}:authorize-copy": {
+    "/authoring/analyze-conversations/projects/{projectName}/:authorize-copy": {
       "post": {
         "operationId": "AuthorizeCopy",
         "summary": "Copy project authorization",
@@ -302,6 +251,345 @@
         "x-ms-examples": {
           "SuccessfulCopyProjectAuthorization": {
             "$ref": "./examples/SuccessfulCopyProjectAuthorization.json"
+          }
+        }
+      }
+    },
+    "/authoring/analyze-conversations/projects/{projectName}/:copy": {
+      "post": {
+        "operationId": "CopyProject",
+        "summary": "Copy project",
+        "description": "Copies an existing project to another Azure resource.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "The project name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The copy project info.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CopyProjectOptions"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "headers": {
+              "Operation-Location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The location for monitoring the operation state."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SuccessfulCopyProject": {
+            "$ref": "./examples/SuccessfulCopyProject.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/authoring/analyze-conversations/projects/{projectName}/:export": {
+      "post": {
+        "operationId": "Export",
+        "summary": "Export project",
+        "description": "Triggers a job to export a project's data.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "The project name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "format",
+            "in": "query",
+            "description": "The format of the exported project file to use.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "Conversation",
+              "Luis"
+            ],
+            "x-ms-enum": {
+              "name": "ExportedProjectFormat",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "Conversation",
+                  "value": "Conversation",
+                  "description": "Specifies the format for a conversational project."
+                },
+                {
+                  "name": "Luis",
+                  "value": "Luis",
+                  "description": "Specifies the format for an application that was exported from LUIS."
+                }
+              ]
+            }
+          },
+          {
+            "name": "stringIndexType",
+            "in": "query",
+            "description": "Specifies the method used to interpret string offsets. For additional\ninformation see https://aka.ms/text-analytics-offsets.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "Utf16CodeUnit"
+            ],
+            "x-ms-enum": {
+              "name": "StringIndexType",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "Utf16CodeUnit",
+                  "value": "Utf16CodeUnit",
+                  "description": "The offset and length values will correspond to UTF-16 code units. Use this\noption if your application is written in a language that support Unicode, for\nexample Java, JavaScript."
+                }
+              ]
+            }
+          },
+          {
+            "name": "assetKind",
+            "in": "query",
+            "description": "Kind of asset to export.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "trainedModelLabel",
+            "in": "query",
+            "description": "Trained model label to export. If the trainedModelLabel is null, the default\nbehavior is to export the current working copy.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "headers": {
+              "Operation-Location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The location for monitoring the operation state."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SuccessfulExportProject": {
+            "$ref": "./examples/SuccessfulExportProject.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/authoring/analyze-conversations/projects/{projectName}/:import": {
+      "post": {
+        "operationId": "Import",
+        "summary": "Import project",
+        "description": "Triggers a job to import a project. If a project with the same name already\nexists, the data of that project is replaced.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "The project name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "format",
+            "in": "query",
+            "description": "The format of the exported project file to use.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "Conversation",
+              "Luis"
+            ],
+            "x-ms-enum": {
+              "name": "ExportedProjectFormat",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "Conversation",
+                  "value": "Conversation",
+                  "description": "Specifies the format for a conversational project."
+                },
+                {
+                  "name": "Luis",
+                  "value": "Luis",
+                  "description": "Specifies the format for an application that was exported from LUIS."
+                }
+              ]
+            }
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The project data to import.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ExportedProject"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "headers": {
+              "Operation-Location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The location for monitoring the operation state."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SuccessfulImportProject": {
+            "$ref": "./examples/SuccessfulImportProject.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/authoring/analyze-conversations/projects/{projectName}/:train": {
+      "post": {
+        "operationId": "Train",
+        "summary": "Train project",
+        "description": "Triggers a training job for a project.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "The project name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The training input parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TrainingJobOptions"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "headers": {
+              "Operation-Location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The location for monitoring the operation state."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SuccessfulTrainProject": {
+            "$ref": "./examples/SuccessfulTrainProject.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/authoring/analyze-conversations/projects/{projectName}/copy/jobs/{jobId}": {
+      "get": {
+        "operationId": "GetCopyProjectStatus",
+        "summary": "Get copy project status",
+        "description": "Gets the status of an existing copy project job.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "The project name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "jobId",
+            "in": "path",
+            "description": "The job ID.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/CopyProjectJobState"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SuccessfulGetCopyProjectStatus": {
+            "$ref": "./examples/SuccessfulGetCopyProjectStatus.json"
           }
         }
       }
@@ -412,6 +700,386 @@
         "x-ms-examples": {
           "SuccessfulGetDeployment": {
             "$ref": "./examples/SuccessfulGetDeployment.json"
+          }
+        }
+      }
+    },
+    "/authoring/analyze-conversations/projects/{projectName}/deployments/{deploymentName}/:delete-from-resources": {
+      "post": {
+        "operationId": "DeleteDeploymentFromResources",
+        "summary": "Delete deployment from resources",
+        "description": "Deletes a project deployment from the specified assigned resources.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "The project name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "deploymentName",
+            "in": "path",
+            "description": "The deployment name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The options for deleting the deployment.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DeleteDeploymentOptions"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "headers": {
+              "Operation-Location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The location for monitoring the operation state."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SuccessfulDeleteDeploymentFromResources": {
+            "$ref": "./examples/SuccessfulDeleteDeploymentFromResources.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/authoring/analyze-conversations/projects/{projectName}/deployments/{deploymentName}/delete-from-resources/jobs/{jobId}": {
+      "get": {
+        "operationId": "GetDeploymentDeleteFromResourcesStatus",
+        "summary": "Get deployment deletion from resources status",
+        "description": "Gets the status of an existing delete deployment from specific resources job.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "The project name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "deploymentName",
+            "in": "path",
+            "description": "The deployment name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "jobId",
+            "in": "path",
+            "description": "The job ID.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DeploymentJobState"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SuccessfulGetDeploymentDeleteFromResourcesStatus": {
+            "$ref": "./examples/SuccessfulGetDeploymentDeleteFromResourcesStatus.json"
+          }
+        }
+      }
+    },
+    "/authoring/analyze-conversations/projects/{projectName}/deployments/{deploymentName}/jobs/{jobId}": {
+      "get": {
+        "operationId": "GetDeploymentStatus",
+        "summary": "Get deployment status",
+        "description": "Gets the status of an existing deployment job.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "The project name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "deploymentName",
+            "in": "path",
+            "description": "The deployment name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "jobId",
+            "in": "path",
+            "description": "The job ID.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DeploymentJobState"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SuccessfulGetDeploymentStatus": {
+            "$ref": "./examples/SuccessfulGetDeploymentStatus.json"
+          }
+        }
+      }
+    },
+    "/authoring/analyze-conversations/projects/{projectName}/deployments/:swap": {
+      "post": {
+        "operationId": "SwapDeployments",
+        "summary": "Swap deployments",
+        "description": "Swaps two existing deployments with each other.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "The project name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The job object to swap two deployments.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SwapDeploymentsOptions"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "headers": {
+              "Operation-Location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The location for monitoring the operation state."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SuccessfulSwapDeployments": {
+            "$ref": "./examples/SuccessfulSwapDeployments.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/authoring/analyze-conversations/projects/{projectName}/deployments/swap/jobs/{jobId}": {
+      "get": {
+        "operationId": "GetSwapDeploymentsStatus",
+        "summary": "Gets swap deployments status",
+        "description": "Gets the status of an existing swap deployment job.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "The project name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "jobId",
+            "in": "path",
+            "description": "The job ID.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DeploymentJobState"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SuccessfulGetSwapDeploymentsStatus": {
+            "$ref": "./examples/SuccessfulGetSwapDeploymentsStatus.json"
+          }
+        }
+      }
+    },
+    "/authoring/analyze-conversations/projects/{projectName}/export/jobs/{jobId}": {
+      "get": {
+        "operationId": "GetExportStatus",
+        "summary": "Get export status",
+        "description": "Gets the status of an export job. Once job completes, returns the project\nmetadata, and assets.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "The project name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "jobId",
+            "in": "path",
+            "description": "The job ID.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ExportProjectJobState"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SuccessfulGetExportStatus": {
+            "$ref": "./examples/SuccessfulGetExportStatus.json"
+          }
+        }
+      }
+    },
+    "/authoring/analyze-conversations/projects/{projectName}/import/jobs/{jobId}": {
+      "get": {
+        "operationId": "GetImportStatus",
+        "summary": "Get import status",
+        "description": "Gets the status for an import.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "The project name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "jobId",
+            "in": "path",
+            "description": "The job ID.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ImportProjectJobState"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SuccessfulGetImportStatus": {
+            "$ref": "./examples/SuccessfulGetImportStatus.json"
           }
         }
       }
@@ -566,6 +1234,378 @@
         }
       }
     },
+    "/authoring/analyze-conversations/projects/{projectName}/models/{trainedModelLabel}/:evaluate": {
+      "post": {
+        "operationId": "EvaluateModel",
+        "summary": "Evaluate model",
+        "description": "Triggers evaluation operation on a trained model.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "The project name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "trainedModelLabel",
+            "in": "path",
+            "description": "The trained model label.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The split kind and percentage for the testing dataset.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EvaluationOnDemandOptions"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "headers": {
+              "Operation-Location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The location for monitoring the operation state."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SuccessfulEvaluationProject": {
+            "$ref": "./examples/SuccessfulEvaluationProject.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/authoring/analyze-conversations/projects/{projectName}/models/{trainedModelLabel}/:load-snapshot": {
+      "post": {
+        "operationId": "LoadSnapshot",
+        "summary": "Load trained model snapshot to the working directory.",
+        "description": "Restores the snapshot of this trained model to be the current working directory\nof the project.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "The project name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "trainedModelLabel",
+            "in": "path",
+            "description": "The trained model label.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "headers": {
+              "Operation-Location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The location for monitoring the operation state."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SuccessfulLoadSnapshot": {
+            "$ref": "./examples/SuccessfulLoadSnapshot.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/authoring/analyze-conversations/projects/{projectName}/models/{trainedModelLabel}/evaluate/jobs/{jobId}": {
+      "get": {
+        "operationId": "GetEvaluationStatus",
+        "summary": "Get evaluation status",
+        "description": "Gets the status for an evaluation job.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "The project name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "trainedModelLabel",
+            "in": "path",
+            "description": "The trained model label.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "jobId",
+            "in": "path",
+            "description": "The job ID.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/EvaluationJobState"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SuccessfulGetEvaluationStatus": {
+            "$ref": "./examples/SuccessfulGetEvaluationStatus.json"
+          }
+        }
+      }
+    },
+    "/authoring/analyze-conversations/projects/{projectName}/models/{trainedModelLabel}/evaluation/result": {
+      "get": {
+        "operationId": "GetModelEvaluationResults",
+        "summary": "Get trained model evaluation result",
+        "description": "Gets the detailed results of the evaluation for a trained model. This includes\nthe raw inference results for the data included in the evaluation process.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "The project name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "trainedModelLabel",
+            "in": "path",
+            "description": "The trained model label.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "stringIndexType",
+            "in": "query",
+            "description": "Specifies the method used to interpret string offsets. For additional\ninformation see https://aka.ms/text-analytics-offsets.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "Utf16CodeUnit"
+            ],
+            "x-ms-enum": {
+              "name": "StringIndexType",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "Utf16CodeUnit",
+                  "value": "Utf16CodeUnit",
+                  "description": "The offset and length values will correspond to UTF-16 code units. Use this\noption if your application is written in a language that support Unicode, for\nexample Java, JavaScript."
+                }
+              ]
+            }
+          },
+          {
+            "name": "top",
+            "in": "query",
+            "description": "The number of utterances to be returned.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "skip",
+            "in": "query",
+            "description": "The offset in the response.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "maxpagesize",
+            "in": "query",
+            "description": "The maximum number of utterances per page.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/EvaluationResults"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SuccessfulGetModelEvaluation": {
+            "$ref": "./examples/SuccessfulGetModelEvaluation.json"
+          }
+        }
+      }
+    },
+    "/authoring/analyze-conversations/projects/{projectName}/models/{trainedModelLabel}/evaluation/summary-result": {
+      "get": {
+        "operationId": "GetModelEvaluationSummary",
+        "summary": "Get trained model evaluation summary",
+        "description": "Gets the evaluation summary of a trained model. The summary includes high level\nperformance measurements of the model e.g., F1, Precision, Recall, etc.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "The project name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "trainedModelLabel",
+            "in": "path",
+            "description": "The trained model label.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/EvaluationSummary"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SuccessfulGetModelEvaluationSummary": {
+            "$ref": "./examples/SuccessfulGetModelEvaluationSummary.json"
+          }
+        }
+      }
+    },
+    "/authoring/analyze-conversations/projects/{projectName}/models/{trainedModelLabel}/load-snapshot/jobs/{jobId}": {
+      "get": {
+        "operationId": "GetLoadSnapshotStatus",
+        "summary": "Get load snapshot status",
+        "description": "Gets the status for loading a snapshot.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "The project name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "trainedModelLabel",
+            "in": "path",
+            "description": "The trained model label.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "jobId",
+            "in": "path",
+            "description": "The job ID.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/LoadSnapshotJobState"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SuccessfulGetLoadSnapshotStatus": {
+            "$ref": "./examples/SuccessfulGetLoadSnapshotStatus.json"
+          }
+        }
+      }
+    },
     "/authoring/analyze-conversations/projects/{projectName}/resources": {
       "get": {
         "operationId": "ListDeploymentResources",
@@ -628,6 +1668,212 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/authoring/analyze-conversations/projects/{projectName}/resources/:assign": {
+      "post": {
+        "operationId": "AssignDeploymentResources",
+        "summary": "Assign deployment resources",
+        "description": "Assign new Azure resources to a project to allow deploying new deployments to\nthem. This API is available only via AAD authentication and not supported via\nsubscription key authentication. For more details about AAD authentication,\ncheck here:\nhttps://learn.microsoft.com/en-us/azure/cognitive-services/authentication?tabs=powershell#authenticate-with-azure-active-directory",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "The project name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The new project resources info.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AssignDeploymentResourcesOptions"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "headers": {
+              "Operation-Location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The location for monitoring the operation state."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SuccessfulAssignDeploymentResources": {
+            "$ref": "./examples/SuccessfulAssignDeploymentResources.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/authoring/analyze-conversations/projects/{projectName}/resources/:unassign": {
+      "post": {
+        "operationId": "UnassignDeploymentResources",
+        "summary": "Unassign deployment resources",
+        "description": "Unassign resources from a project. This disallows deploying new deployments to\nthese resources, and deletes existing deployments assigned to them.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "The project name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The info for the deployment resources to be deleted.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UnassignDeploymentResourcesOptions"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "headers": {
+              "Operation-Location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The location for monitoring the operation state."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SuccessfulUnassignDeploymentResources": {
+            "$ref": "./examples/SuccessfulUnassignDeploymentResources.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/authoring/analyze-conversations/projects/{projectName}/resources/assign/jobs/{jobId}": {
+      "get": {
+        "operationId": "GetAssignDeploymentResourcesStatus",
+        "summary": "Get assign deployment resources status",
+        "description": "Gets the status of an existing assign deployment resources job.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "The project name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "jobId",
+            "in": "path",
+            "description": "The job ID.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DeploymentResourcesJobState"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SuccessfulGetAssignDeploymentResourcesStatus": {
+            "$ref": "./examples/SuccessfulGetAssignDeploymentResourcesStatus.json"
+          }
+        }
+      }
+    },
+    "/authoring/analyze-conversations/projects/{projectName}/resources/unassign/jobs/{jobId}": {
+      "get": {
+        "operationId": "GetUnassignDeploymentResourcesStatus",
+        "summary": "Get unassign deployment resources status",
+        "description": "Gets the status of an existing unassign deployment resources job.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "The project name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "jobId",
+            "in": "path",
+            "description": "The job ID.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DeploymentResourcesJobState"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SuccessfulGetUnassignDeploymentResourcesStatus": {
+            "$ref": "./examples/SuccessfulGetUnassignDeploymentResourcesStatus.json"
+          }
         }
       }
     },
@@ -741,6 +1987,424 @@
         }
       }
     },
+    "/authoring/analyze-conversations/projects/{projectName}/train/jobs/{jobId}/:cancel": {
+      "post": {
+        "operationId": "CancelTrainingJob",
+        "summary": "Cancel training",
+        "description": "Triggers a cancellation for a running training job.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "The project name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "jobId",
+            "in": "path",
+            "description": "The job ID.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "headers": {
+              "Operation-Location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The location for monitoring the operation state."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SuccessfulCancelTrainingJob": {
+            "$ref": "./examples/SuccessfulCancelTrainingJob.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/authoring/analyze-conversations/projects/global/deletion-jobs/{jobId}": {
+      "get": {
+        "operationId": "GetProjectDeletionStatus",
+        "summary": "Get project deletion status",
+        "description": "Gets the status for a project deletion job.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "jobId",
+            "in": "path",
+            "description": "The job ID.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ProjectDeletionJobState"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SuccessfulGetProjectDeletionStatus": {
+            "$ref": "./examples/SuccessfulGetProjectDeletionStatus.json"
+          }
+        }
+      }
+    },
+    "/authoring/analyze-conversations/projects/global/deployments/resources": {
+      "get": {
+        "operationId": "ListAssignedResourceDeployments",
+        "summary": "Lists assigned resource deployments",
+        "description": "Lists the deployments to which an Azure resource is assigned. This doesn't\nreturn deployments belonging to projects owned by this resource. It only\nreturns deployments belonging to projects owned by other resources.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "top",
+            "in": "query",
+            "description": "The number of deployments to be returned.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "skip",
+            "in": "query",
+            "description": "The offset in the response.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "maxpagesize",
+            "in": "query",
+            "description": "The maximum number of deployments per page.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/AssignedResourceDeploymentsMetadata"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SuccessfulListAssignedResourceDeployments": {
+            "$ref": "./examples/SuccessfulListAssignedResourceDeployments.json"
+          }
+        }
+      }
+    },
+    "/authoring/analyze-conversations/projects/global/languages": {
+      "get": {
+        "operationId": "GetSupportedLanguages",
+        "summary": "List supported languages",
+        "description": "Lists the supported languages for the given project type.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "projectKind",
+            "in": "query",
+            "description": "The project kind.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "Conversation",
+              "Orchestration",
+              "CustomConversationSummarization"
+            ],
+            "x-ms-enum": {
+              "name": "ProjectKind",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "Conversation",
+                  "value": "Conversation",
+                  "description": "A project to build natural language into apps, bots, and IoT devices."
+                },
+                {
+                  "name": "Orchestration",
+                  "value": "Orchestration",
+                  "description": "A project to connect and orchestrate Conversation, Custom question answering\nand LUIS projects together in one single project."
+                },
+                {
+                  "name": "CustomConversationSummarization",
+                  "value": "CustomConversationSummarization",
+                  "description": "A project to build conversation summarization models which are able to\nsummarize long conversations."
+                }
+              ]
+            }
+          },
+          {
+            "name": "top",
+            "in": "query",
+            "description": "The number of languages to be returned.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "skip",
+            "in": "query",
+            "description": "The offset in the response.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "maxpagesize",
+            "in": "query",
+            "description": "The maximum number of languages per page.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/SupportedLanguages"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SuccessfulGetSupportedLanguages": {
+            "$ref": "./examples/SuccessfulGetSupportedLanguages.json"
+          }
+        }
+      }
+    },
+    "/authoring/analyze-conversations/projects/global/prebuilt-entities": {
+      "get": {
+        "operationId": "GetSupportedPrebuiltEntities",
+        "summary": "List supported prebuilt entities",
+        "description": "Lists the supported prebuilt entities that can be used while creating composed\nentities.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "language",
+            "in": "query",
+            "description": "The language to get supported prebuilt entities for. Required if multilingual\nis false. This is BCP-47 representation of a language. For example, use \"en\"\nfor English, \"en-gb\" for English (UK), \"es\" for Spanish etc.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "multilingual",
+            "in": "query",
+            "description": "Whether to get the support prebuilt entities for multilingual or monolingual\nprojects. If true, the language parameter is ignored.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "top",
+            "in": "query",
+            "description": "The number of prebuilt entities to be returned.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "skip",
+            "in": "query",
+            "description": "The offset in the response.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "maxpagesize",
+            "in": "query",
+            "description": "The maximum number of prebuilt entities per page.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PrebuiltEntities"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SuccessfulGetSupportedPrebuiltEntities": {
+            "$ref": "./examples/SuccessfulGetSupportedPrebuiltEntities.json"
+          }
+        }
+      }
+    },
+    "/authoring/analyze-conversations/projects/global/training-config-versions": {
+      "get": {
+        "operationId": "ListTrainingConfigVersions",
+        "summary": "List training config versions",
+        "description": "Lists the support training config version for a given project type.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "projectKind",
+            "in": "query",
+            "description": "The project kind.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "Conversation",
+              "Orchestration",
+              "CustomConversationSummarization"
+            ],
+            "x-ms-enum": {
+              "name": "ProjectKind",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "Conversation",
+                  "value": "Conversation",
+                  "description": "A project to build natural language into apps, bots, and IoT devices."
+                },
+                {
+                  "name": "Orchestration",
+                  "value": "Orchestration",
+                  "description": "A project to connect and orchestrate Conversation, Custom question answering\nand LUIS projects together in one single project."
+                },
+                {
+                  "name": "CustomConversationSummarization",
+                  "value": "CustomConversationSummarization",
+                  "description": "A project to build conversation summarization models which are able to\nsummarize long conversations."
+                }
+              ]
+            }
+          },
+          {
+            "name": "top",
+            "in": "query",
+            "description": "The number of config versions to be returned.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "skip",
+            "in": "query",
+            "description": "The offset in the response.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "maxpagesize",
+            "in": "query",
+            "description": "The maximum number of config versions per page.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/TrainingConfigVersions"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SuccessfulGetSupportedTrainingConfigVersions": {
+            "$ref": "./examples/SuccessfulGetSupportedTrainingConfigVersions.json"
+          }
+        }
+      }
+    },
     "/projects/{projectName}": {
       "delete": {
         "operationId": "DeleteProject",
@@ -779,294 +2443,6 @@
         "x-ms-examples": {
           "SuccessfulDeleteProject": {
             "$ref": "./examples/SuccessfulDeleteProject.json"
-          }
-        },
-        "x-ms-long-running-operation": true
-      }
-    },
-    "/projects/{projectName}/:copy": {
-      "post": {
-        "operationId": "CopyProject",
-        "summary": "Copy project",
-        "description": "Copies an existing project to another Azure resource.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "projectName",
-            "in": "path",
-            "description": "The project name.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "description": "The copy project info.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/CopyProjectOptions"
-            }
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "The request has been accepted for processing, but processing has not yet completed.",
-            "headers": {
-              "Operation-Location": {
-                "type": "string",
-                "format": "uri",
-                "description": "The location for monitoring the operation state."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "SuccessfulCopyProject": {
-            "$ref": "./examples/SuccessfulCopyProject.json"
-          }
-        },
-        "x-ms-long-running-operation": true
-      }
-    },
-    "/projects/{projectName}/:export": {
-      "post": {
-        "operationId": "Export",
-        "summary": "Export project",
-        "description": "Triggers a job to export a project's data.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "projectName",
-            "in": "path",
-            "description": "The project name.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "format",
-            "in": "query",
-            "description": "The format of the exported project file to use.",
-            "required": false,
-            "type": "string",
-            "enum": [
-              "Conversation",
-              "Luis"
-            ],
-            "x-ms-enum": {
-              "name": "ExportedProjectFormat",
-              "modelAsString": true,
-              "values": [
-                {
-                  "name": "Conversation",
-                  "value": "Conversation",
-                  "description": "Specifies the format for a conversational project."
-                },
-                {
-                  "name": "Luis",
-                  "value": "Luis",
-                  "description": "Specifies the format for an application that was exported from LUIS."
-                }
-              ]
-            }
-          },
-          {
-            "name": "stringIndexType",
-            "in": "query",
-            "description": "Specifies the method used to interpret string offsets. For additional\ninformation see https://aka.ms/text-analytics-offsets.",
-            "required": true,
-            "type": "string",
-            "enum": [
-              "Utf16CodeUnit"
-            ],
-            "x-ms-enum": {
-              "name": "StringIndexType",
-              "modelAsString": true,
-              "values": [
-                {
-                  "name": "Utf16CodeUnit",
-                  "value": "Utf16CodeUnit",
-                  "description": "The offset and length values will correspond to UTF-16 code units. Use this\noption if your application is written in a language that support Unicode, for\nexample Java, JavaScript."
-                }
-              ]
-            }
-          },
-          {
-            "name": "assetKind",
-            "in": "query",
-            "description": "Kind of asset to export.",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "trainedModelLabel",
-            "in": "query",
-            "description": "Trained model label to export. If the trainedModelLabel is null, the default\nbehavior is to export the current working copy.",
-            "required": false,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "The request has been accepted for processing, but processing has not yet completed.",
-            "headers": {
-              "Operation-Location": {
-                "type": "string",
-                "format": "uri",
-                "description": "The location for monitoring the operation state."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "SuccessfulExportProject": {
-            "$ref": "./examples/SuccessfulExportProject.json"
-          }
-        },
-        "x-ms-long-running-operation": true
-      }
-    },
-    "/projects/{projectName}/:import": {
-      "post": {
-        "operationId": "Import",
-        "summary": "Import project",
-        "description": "Triggers a job to import a project. If a project with the same name already\nexists, the data of that project is replaced.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "projectName",
-            "in": "path",
-            "description": "The project name.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "format",
-            "in": "query",
-            "description": "The format of the exported project file to use.",
-            "required": false,
-            "type": "string",
-            "enum": [
-              "Conversation",
-              "Luis"
-            ],
-            "x-ms-enum": {
-              "name": "ExportedProjectFormat",
-              "modelAsString": true,
-              "values": [
-                {
-                  "name": "Conversation",
-                  "value": "Conversation",
-                  "description": "Specifies the format for a conversational project."
-                },
-                {
-                  "name": "Luis",
-                  "value": "Luis",
-                  "description": "Specifies the format for an application that was exported from LUIS."
-                }
-              ]
-            }
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "description": "The project data to import.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ExportedProject"
-            }
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "The request has been accepted for processing, but processing has not yet completed.",
-            "headers": {
-              "Operation-Location": {
-                "type": "string",
-                "format": "uri",
-                "description": "The location for monitoring the operation state."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "SuccessfulImportProject": {
-            "$ref": "./examples/SuccessfulImportProject.json"
-          }
-        },
-        "x-ms-long-running-operation": true
-      }
-    },
-    "/projects/{projectName}/:train": {
-      "post": {
-        "operationId": "Train",
-        "summary": "Train project",
-        "description": "Triggers a training job for a project.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "projectName",
-            "in": "path",
-            "description": "The project name.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "description": "The training input parameters.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/TrainingJobOptions"
-            }
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "The request has been accepted for processing, but processing has not yet completed.",
-            "headers": {
-              "Operation-Location": {
-                "type": "string",
-                "format": "uri",
-                "description": "The location for monitoring the operation state."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "SuccessfulTrainProject": {
-            "$ref": "./examples/SuccessfulTrainProject.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -1179,335 +2555,6 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/projects/{projectName}/deployments/{deploymentName}/:delete-from-resources": {
-      "post": {
-        "operationId": "DeleteDeploymentFromResources",
-        "summary": "Delete deployment from resources",
-        "description": "Deletes a project deployment from the specified assigned resources.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "projectName",
-            "in": "path",
-            "description": "The project name.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "deploymentName",
-            "in": "path",
-            "description": "The deployment name.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "description": "The options for deleting the deployment.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/DeleteDeploymentOptions"
-            }
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "The request has been accepted for processing, but processing has not yet completed.",
-            "headers": {
-              "Operation-Location": {
-                "type": "string",
-                "format": "uri",
-                "description": "The location for monitoring the operation state."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "SuccessfulDeleteDeploymentFromResources": {
-            "$ref": "./examples/SuccessfulDeleteDeploymentFromResources.json"
-          }
-        },
-        "x-ms-long-running-operation": true
-      }
-    },
-    "/projects/{projectName}/deployments/{deploymentName}/delete-from-resources/jobs/{jobId}": {
-      "get": {
-        "operationId": "GetDeploymentDeleteFromResourcesStatus",
-        "summary": "Get deployment deletion from resources status",
-        "description": "Gets the status of an existing delete deployment from specific resources job.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "projectName",
-            "in": "path",
-            "description": "The project name.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "deploymentName",
-            "in": "path",
-            "description": "The deployment name.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "jobId",
-            "in": "path",
-            "description": "The job ID.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/DeploymentJobState"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "SuccessfulGetDeploymentDeleteFromResourcesStatus": {
-            "$ref": "./examples/SuccessfulGetDeploymentDeleteFromResourcesStatus.json"
-          }
-        }
-      }
-    },
-    "/projects/{projectName}/deployments/{deploymentName}/jobs/{jobId}": {
-      "get": {
-        "operationId": "GetDeploymentStatus",
-        "summary": "Get deployment status",
-        "description": "Gets the status of an existing deployment job.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "projectName",
-            "in": "path",
-            "description": "The project name.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "deploymentName",
-            "in": "path",
-            "description": "The deployment name.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "jobId",
-            "in": "path",
-            "description": "The job ID.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/DeploymentJobState"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "SuccessfulGetDeploymentStatus": {
-            "$ref": "./examples/SuccessfulGetDeploymentStatus.json"
-          }
-        }
-      }
-    },
-    "/projects/{projectName}/deployments/:swap": {
-      "post": {
-        "operationId": "SwapDeployments",
-        "summary": "Swap deployments",
-        "description": "Swaps two existing deployments with each other.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "projectName",
-            "in": "path",
-            "description": "The project name.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "description": "The job object to swap two deployments.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/SwapDeploymentsOptions"
-            }
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "The request has been accepted for processing, but processing has not yet completed.",
-            "headers": {
-              "Operation-Location": {
-                "type": "string",
-                "format": "uri",
-                "description": "The location for monitoring the operation state."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "SuccessfulSwapDeployments": {
-            "$ref": "./examples/SuccessfulSwapDeployments.json"
-          }
-        },
-        "x-ms-long-running-operation": true
-      }
-    },
-    "/projects/{projectName}/deployments/swap/jobs/{jobId}": {
-      "get": {
-        "operationId": "GetSwapDeploymentsStatus",
-        "summary": "Gets swap deployments status",
-        "description": "Gets the status of an existing swap deployment job.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "projectName",
-            "in": "path",
-            "description": "The project name.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "jobId",
-            "in": "path",
-            "description": "The job ID.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/DeploymentJobState"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "SuccessfulGetSwapDeploymentsStatus": {
-            "$ref": "./examples/SuccessfulGetSwapDeploymentsStatus.json"
-          }
-        }
-      }
-    },
-    "/projects/{projectName}/export/jobs/{jobId}": {
-      "get": {
-        "operationId": "GetExportStatus",
-        "summary": "Get export status",
-        "description": "Gets the status of an export job. Once job completes, returns the project\nmetadata, and assets.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "projectName",
-            "in": "path",
-            "description": "The project name.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "jobId",
-            "in": "path",
-            "description": "The job ID.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/ExportProjectJobState"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "SuccessfulGetExportStatus": {
-            "$ref": "./examples/SuccessfulGetExportStatus.json"
-          }
-        }
-      }
-    },
     "/projects/{projectName}/export/jobs/{jobId}/result": {
       "get": {
         "operationId": "GetExportResult",
@@ -1555,1053 +2602,6 @@
         "x-ms-examples": {
           "SuccessfulGetExportResult": {
             "$ref": "./examples/SuccessfulGetExportResult.json"
-          }
-        }
-      }
-    },
-    "/projects/{projectName}/import/jobs/{jobId}": {
-      "get": {
-        "operationId": "GetImportStatus",
-        "summary": "Get import status",
-        "description": "Gets the status for an import.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "projectName",
-            "in": "path",
-            "description": "The project name.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "jobId",
-            "in": "path",
-            "description": "The job ID.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/ImportProjectJobState"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "SuccessfulGetImportStatus": {
-            "$ref": "./examples/SuccessfulGetImportStatus.json"
-          }
-        }
-      }
-    },
-    "/projects/{projectName}/models/{trainedModelLabel}/:evaluate": {
-      "post": {
-        "operationId": "EvaluateModel",
-        "summary": "Evaluate model",
-        "description": "Triggers evaluation operation on a trained model.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "projectName",
-            "in": "path",
-            "description": "The project name.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "trainedModelLabel",
-            "in": "path",
-            "description": "The trained model label.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "description": "The split kind and percentage for the testing dataset.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/EvaluationOnDemandOptions"
-            }
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "The request has been accepted for processing, but processing has not yet completed.",
-            "headers": {
-              "Operation-Location": {
-                "type": "string",
-                "format": "uri",
-                "description": "The location for monitoring the operation state."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "SuccessfulEvaluationProject": {
-            "$ref": "./examples/SuccessfulEvaluationProject.json"
-          }
-        },
-        "x-ms-long-running-operation": true
-      }
-    },
-    "/projects/{projectName}/models/{trainedModelLabel}/:load-snapshot": {
-      "post": {
-        "operationId": "LoadSnapshot",
-        "summary": "Load trained model snapshot to the working directory.",
-        "description": "Restores the snapshot of this trained model to be the current working directory\nof the project.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "projectName",
-            "in": "path",
-            "description": "The project name.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "trainedModelLabel",
-            "in": "path",
-            "description": "The trained model label.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "The request has been accepted for processing, but processing has not yet completed.",
-            "headers": {
-              "Operation-Location": {
-                "type": "string",
-                "format": "uri",
-                "description": "The location for monitoring the operation state."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "SuccessfulLoadSnapshot": {
-            "$ref": "./examples/SuccessfulLoadSnapshot.json"
-          }
-        },
-        "x-ms-long-running-operation": true
-      }
-    },
-    "/projects/{projectName}/models/{trainedModelLabel}/evaluate/jobs/{jobId}": {
-      "get": {
-        "operationId": "GetEvaluationStatus",
-        "summary": "Get evaluation status",
-        "description": "Gets the status for an evaluation job.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "projectName",
-            "in": "path",
-            "description": "The project name.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "trainedModelLabel",
-            "in": "path",
-            "description": "The trained model label.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "jobId",
-            "in": "path",
-            "description": "The job ID.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/EvaluationJobState"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "SuccessfulGetEvaluationStatus": {
-            "$ref": "./examples/SuccessfulGetEvaluationStatus.json"
-          }
-        }
-      }
-    },
-    "/projects/{projectName}/models/{trainedModelLabel}/evaluation/result": {
-      "get": {
-        "operationId": "GetModelEvaluationResults",
-        "summary": "Get trained model evaluation result",
-        "description": "Gets the detailed results of the evaluation for a trained model. This includes\nthe raw inference results for the data included in the evaluation process.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "projectName",
-            "in": "path",
-            "description": "The project name.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "trainedModelLabel",
-            "in": "path",
-            "description": "The trained model label.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "stringIndexType",
-            "in": "query",
-            "description": "Specifies the method used to interpret string offsets. For additional\ninformation see https://aka.ms/text-analytics-offsets.",
-            "required": true,
-            "type": "string",
-            "enum": [
-              "Utf16CodeUnit"
-            ],
-            "x-ms-enum": {
-              "name": "StringIndexType",
-              "modelAsString": true,
-              "values": [
-                {
-                  "name": "Utf16CodeUnit",
-                  "value": "Utf16CodeUnit",
-                  "description": "The offset and length values will correspond to UTF-16 code units. Use this\noption if your application is written in a language that support Unicode, for\nexample Java, JavaScript."
-                }
-              ]
-            }
-          },
-          {
-            "name": "top",
-            "in": "query",
-            "description": "The number of utterances to be returned.",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
-          },
-          {
-            "name": "skip",
-            "in": "query",
-            "description": "The offset in the response.",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
-          },
-          {
-            "name": "maxpagesize",
-            "in": "query",
-            "description": "The maximum number of utterances per page.",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/EvaluationResults"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "SuccessfulGetModelEvaluation": {
-            "$ref": "./examples/SuccessfulGetModelEvaluation.json"
-          }
-        }
-      }
-    },
-    "/projects/{projectName}/models/{trainedModelLabel}/evaluation/summary-result": {
-      "get": {
-        "operationId": "GetModelEvaluationSummary",
-        "summary": "Get trained model evaluation summary",
-        "description": "Gets the evaluation summary of a trained model. The summary includes high level\nperformance measurements of the model e.g., F1, Precision, Recall, etc.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "projectName",
-            "in": "path",
-            "description": "The project name.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "trainedModelLabel",
-            "in": "path",
-            "description": "The trained model label.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/EvaluationSummary"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "SuccessfulGetModelEvaluationSummary": {
-            "$ref": "./examples/SuccessfulGetModelEvaluationSummary.json"
-          }
-        }
-      }
-    },
-    "/projects/{projectName}/models/{trainedModelLabel}/load-snapshot/jobs/{jobId}": {
-      "get": {
-        "operationId": "GetLoadSnapshotStatus",
-        "summary": "Get load snapshot status",
-        "description": "Gets the status for loading a snapshot.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "projectName",
-            "in": "path",
-            "description": "The project name.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "trainedModelLabel",
-            "in": "path",
-            "description": "The trained model label.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "jobId",
-            "in": "path",
-            "description": "The job ID.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/LoadSnapshotJobState"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "SuccessfulGetLoadSnapshotStatus": {
-            "$ref": "./examples/SuccessfulGetLoadSnapshotStatus.json"
-          }
-        }
-      }
-    },
-    "/projects/{projectName}/resources/:assign": {
-      "post": {
-        "operationId": "AssignDeploymentResources",
-        "summary": "Assign deployment resources",
-        "description": "Assign new Azure resources to a project to allow deploying new deployments to\nthem. This API is available only via AAD authentication and not supported via\nsubscription key authentication. For more details about AAD authentication,\ncheck here:\nhttps://learn.microsoft.com/en-us/azure/cognitive-services/authentication?tabs=powershell#authenticate-with-azure-active-directory",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "projectName",
-            "in": "path",
-            "description": "The project name.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "description": "The new project resources info.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/AssignDeploymentResourcesOptions"
-            }
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "The request has been accepted for processing, but processing has not yet completed.",
-            "headers": {
-              "Operation-Location": {
-                "type": "string",
-                "format": "uri",
-                "description": "The location for monitoring the operation state."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "SuccessfulAssignDeploymentResources": {
-            "$ref": "./examples/SuccessfulAssignDeploymentResources.json"
-          }
-        },
-        "x-ms-long-running-operation": true
-      }
-    },
-    "/projects/{projectName}/resources/:unassign": {
-      "post": {
-        "operationId": "UnassignDeploymentResources",
-        "summary": "Unassign deployment resources",
-        "description": "Unassign resources from a project. This disallows deploying new deployments to\nthese resources, and deletes existing deployments assigned to them.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "projectName",
-            "in": "path",
-            "description": "The project name.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "description": "The info for the deployment resources to be deleted.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/UnassignDeploymentResourcesOptions"
-            }
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "The request has been accepted for processing, but processing has not yet completed.",
-            "headers": {
-              "Operation-Location": {
-                "type": "string",
-                "format": "uri",
-                "description": "The location for monitoring the operation state."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "SuccessfulUnassignDeploymentResources": {
-            "$ref": "./examples/SuccessfulUnassignDeploymentResources.json"
-          }
-        },
-        "x-ms-long-running-operation": true
-      }
-    },
-    "/projects/{projectName}/resources/assign/jobs/{jobId}": {
-      "get": {
-        "operationId": "GetAssignDeploymentResourcesStatus",
-        "summary": "Get assign deployment resources status",
-        "description": "Gets the status of an existing assign deployment resources job.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "projectName",
-            "in": "path",
-            "description": "The project name.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "jobId",
-            "in": "path",
-            "description": "The job ID.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/DeploymentResourcesJobState"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "SuccessfulGetAssignDeploymentResourcesStatus": {
-            "$ref": "./examples/SuccessfulGetAssignDeploymentResourcesStatus.json"
-          }
-        }
-      }
-    },
-    "/projects/{projectName}/resources/unassign/jobs/{jobId}": {
-      "get": {
-        "operationId": "GetUnassignDeploymentResourcesStatus",
-        "summary": "Get unassign deployment resources status",
-        "description": "Gets the status of an existing unassign deployment resources job.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "projectName",
-            "in": "path",
-            "description": "The project name.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "jobId",
-            "in": "path",
-            "description": "The job ID.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/DeploymentResourcesJobState"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "SuccessfulGetUnassignDeploymentResourcesStatus": {
-            "$ref": "./examples/SuccessfulGetUnassignDeploymentResourcesStatus.json"
-          }
-        }
-      }
-    },
-    "/projects/{projectName}/train/jobs/{jobId}/:cancel": {
-      "post": {
-        "operationId": "CancelTrainingJob",
-        "summary": "Cancel training",
-        "description": "Triggers a cancellation for a running training job.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "projectName",
-            "in": "path",
-            "description": "The project name.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "jobId",
-            "in": "path",
-            "description": "The job ID.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "The request has been accepted for processing, but processing has not yet completed.",
-            "headers": {
-              "Operation-Location": {
-                "type": "string",
-                "format": "uri",
-                "description": "The location for monitoring the operation state."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "SuccessfulCancelTrainingJob": {
-            "$ref": "./examples/SuccessfulCancelTrainingJob.json"
-          }
-        },
-        "x-ms-long-running-operation": true
-      }
-    },
-    "/projects/global/deletion-jobs/{jobId}": {
-      "get": {
-        "operationId": "GetProjectDeletionStatus",
-        "summary": "Get project deletion status",
-        "description": "Gets the status for a project deletion job.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "jobId",
-            "in": "path",
-            "description": "The job ID.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/ProjectDeletionJobState"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "SuccessfulGetProjectDeletionStatus": {
-            "$ref": "./examples/SuccessfulGetProjectDeletionStatus.json"
-          }
-        }
-      }
-    },
-    "/projects/global/deployments/resources": {
-      "get": {
-        "operationId": "ListAssignedResourceDeployments",
-        "summary": "Lists assigned resource deployments",
-        "description": "Lists the deployments to which an Azure resource is assigned. This doesn't\nreturn deployments belonging to projects owned by this resource. It only\nreturns deployments belonging to projects owned by other resources.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "top",
-            "in": "query",
-            "description": "The number of deployments to be returned.",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
-          },
-          {
-            "name": "skip",
-            "in": "query",
-            "description": "The offset in the response.",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
-          },
-          {
-            "name": "maxpagesize",
-            "in": "query",
-            "description": "The maximum number of deployments per page.",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/AssignedResourceDeploymentsMetadata"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "SuccessfulListAssignedResourceDeployments": {
-            "$ref": "./examples/SuccessfulListAssignedResourceDeployments.json"
-          }
-        }
-      }
-    },
-    "/projects/global/languages": {
-      "get": {
-        "operationId": "GetSupportedLanguages",
-        "summary": "List supported languages",
-        "description": "Lists the supported languages for the given project type.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "projectKind",
-            "in": "query",
-            "description": "The project kind.",
-            "required": true,
-            "type": "string",
-            "enum": [
-              "Conversation",
-              "Orchestration",
-              "CustomConversationSummarization"
-            ],
-            "x-ms-enum": {
-              "name": "ProjectKind",
-              "modelAsString": true,
-              "values": [
-                {
-                  "name": "Conversation",
-                  "value": "Conversation",
-                  "description": "A project to build natural language into apps, bots, and IoT devices."
-                },
-                {
-                  "name": "Orchestration",
-                  "value": "Orchestration",
-                  "description": "A project to connect and orchestrate Conversation, Custom question answering\nand LUIS projects together in one single project."
-                },
-                {
-                  "name": "CustomConversationSummarization",
-                  "value": "CustomConversationSummarization",
-                  "description": "A project to build conversation summarization models which are able to\nsummarize long conversations."
-                }
-              ]
-            }
-          },
-          {
-            "name": "top",
-            "in": "query",
-            "description": "The number of languages to be returned.",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
-          },
-          {
-            "name": "skip",
-            "in": "query",
-            "description": "The offset in the response.",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
-          },
-          {
-            "name": "maxpagesize",
-            "in": "query",
-            "description": "The maximum number of languages per page.",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/SupportedLanguages"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "SuccessfulGetSupportedLanguages": {
-            "$ref": "./examples/SuccessfulGetSupportedLanguages.json"
-          }
-        }
-      }
-    },
-    "/projects/global/prebuilt-entities": {
-      "get": {
-        "operationId": "GetSupportedPrebuiltEntities",
-        "summary": "List supported prebuilt entities",
-        "description": "Lists the supported prebuilt entities that can be used while creating composed\nentities.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "language",
-            "in": "query",
-            "description": "The language to get supported prebuilt entities for. Required if multilingual\nis false. This is BCP-47 representation of a language. For example, use \"en\"\nfor English, \"en-gb\" for English (UK), \"es\" for Spanish etc.",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "multilingual",
-            "in": "query",
-            "description": "Whether to get the support prebuilt entities for multilingual or monolingual\nprojects. If true, the language parameter is ignored.",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "top",
-            "in": "query",
-            "description": "The number of prebuilt entities to be returned.",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
-          },
-          {
-            "name": "skip",
-            "in": "query",
-            "description": "The offset in the response.",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
-          },
-          {
-            "name": "maxpagesize",
-            "in": "query",
-            "description": "The maximum number of prebuilt entities per page.",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/PrebuiltEntities"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "SuccessfulGetSupportedPrebuiltEntities": {
-            "$ref": "./examples/SuccessfulGetSupportedPrebuiltEntities.json"
-          }
-        }
-      }
-    },
-    "/projects/global/training-config-versions": {
-      "get": {
-        "operationId": "ListTrainingConfigVersions",
-        "summary": "List training config versions",
-        "description": "Lists the support training config version for a given project type.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "projectKind",
-            "in": "query",
-            "description": "The project kind.",
-            "required": true,
-            "type": "string",
-            "enum": [
-              "Conversation",
-              "Orchestration",
-              "CustomConversationSummarization"
-            ],
-            "x-ms-enum": {
-              "name": "ProjectKind",
-              "modelAsString": true,
-              "values": [
-                {
-                  "name": "Conversation",
-                  "value": "Conversation",
-                  "description": "A project to build natural language into apps, bots, and IoT devices."
-                },
-                {
-                  "name": "Orchestration",
-                  "value": "Orchestration",
-                  "description": "A project to connect and orchestrate Conversation, Custom question answering\nand LUIS projects together in one single project."
-                },
-                {
-                  "name": "CustomConversationSummarization",
-                  "value": "CustomConversationSummarization",
-                  "description": "A project to build conversation summarization models which are able to\nsummarize long conversations."
-                }
-              ]
-            }
-          },
-          {
-            "name": "top",
-            "in": "query",
-            "description": "The number of config versions to be returned.",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
-          },
-          {
-            "name": "skip",
-            "in": "query",
-            "description": "The offset in the response.",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
-          },
-          {
-            "name": "maxpagesize",
-            "in": "query",
-            "description": "The maximum number of config versions per page.",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/TrainingConfigVersions"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "SuccessfulGetSupportedTrainingConfigVersions": {
-            "$ref": "./examples/SuccessfulGetSupportedTrainingConfigVersions.json"
           }
         }
       }
