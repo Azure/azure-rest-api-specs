@@ -22,6 +22,9 @@ options:
     package-dir: "azure-mgmt-devopsinfrastructure"
     package-name: "{package-dir}"
     flavor: "azure"
+    generate-test: true
+    generate-sample: true
+    examples-dir: "{project-root}/examples"
   "@azure-tools/typespec-java":
     package-dir: "azure-resourcemanager-devopsinfrastructure"
     flavor: "azure"
@@ -33,3 +36,8 @@ options:
     clear-output-folder: true
     namespace: Microsoft.DevOpsInfrastructure
     model-namespace: false
+  "@azure-tools/typespec-csharp":
+    flavor: azure
+    clear-output-folder: true
+    package-dir: "Azure.ResourceManager.DevOpsInfrastructure"
+    namespace: "{package-dir}"

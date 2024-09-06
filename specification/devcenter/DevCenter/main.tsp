@@ -47,4 +47,8 @@ enum APIVersions {
   @doc("The 2024-05-01-preview service API version")
   @useDependency(Versions.v1_0_Preview_2)
   v2024_05_01_preview: "2024-05-01-preview",
+
+  @doc("The 2024-08-01-preview service API version")
+  @useDependency(Versions.v1_0_Preview_2)
+  v2024_08_01_preview: "2024-08-01-preview",
 }
