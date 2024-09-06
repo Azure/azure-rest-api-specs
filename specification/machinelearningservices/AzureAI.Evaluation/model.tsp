@@ -36,12 +36,13 @@ model AppInsightDataSource {
   query: string;
 }
 
-@doc("Input Data for Evaluation.")
+@doc("Data source for Evaluation.")
 union DataSource {
-    string,
-    AppInsightDataSource
+    string;
+    AppInsightDataSource;
 }
 
+@doc("Input Data for Evaluation.")
 model Data{
   @doc("Data for evaluation.")
   source: DataSource;
