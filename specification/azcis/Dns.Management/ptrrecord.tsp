@@ -15,13 +15,13 @@ namespace Microsoft.AzureCis;
 @doc("PtrRecord properties")
 @added(Versions.v2024_06_24_preview)
 model PtrRecordResourceProperties {
-  @doc("Gets or sets the dns name")
+  @doc("Gets or sets the DNS name")
   dnsName: string;
 
   @doc("Gets or sets the IP Address in String format")
   pointsTo: string;
 
-  @doc("Gets or sets the ttl")
+  @doc("Gets or sets the TTL")
   ttl: string;
 
   @doc("Azure location")

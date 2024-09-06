@@ -12,10 +12,10 @@ using Autorest;
 
 namespace Microsoft.AzureCis;
 
-@doc("ApSlbVip properties")
+@doc("Autopilot SLB VIP properties")
 @added(Versions.v2024_06_24_preview)
 model ApSlbVipResourceProperties {
-  @doc("Gets or sets the associated press Dns name. This is case-insensitive")
+  @doc("Gets or sets the auto pilot DNS name. This is case-insensitive")
   autoPilotDnsName: string;
 
   @doc("Azure location")
@@ -26,7 +26,7 @@ model ApSlbVipResourceProperties {
   provisioningState?: ApSlbVipProvisioningState;
 }
 
-@doc("ApSlbVip Resource")
+@doc("Autopilot SLB VIP Resource")
 @added(Versions.v2024_06_24_preview)
 model ApSlbVipResource is ProxyResource<ApSlbVipResourceProperties> {
   @doc("The name of resource.")
