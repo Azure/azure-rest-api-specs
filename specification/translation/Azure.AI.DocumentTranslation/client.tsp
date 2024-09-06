@@ -41,28 +41,34 @@ interface SingleDocumentTranslationClient {
   documentTranslate is DocumentTranslation.DocumentTranslationOperations.documentTranslate;
 }
 
+@@clientName(DocumentTranslation.DocumentTranslateBody.body,
+  "documentTranslateContent",
+  "csharp"
+);
 
 @@clientName(DocumentTranslation.DocumentTranslateBody.body,
   "documentTranslateContent",
-  "csharp,java"
+  "java"
 );
 
 @@clientName(DocumentTranslation.StartTranslationBody.body,
   "startTranslationDetails",
-  "csharp,java"
+  "csharp"
 );
 
 @@clientName(DocumentTranslation.StartTranslationBody.body,
   "startTranslationDetails",
-  "csharp,java"
+  "java"
 );
 
-
-@@access(DocumentTranslationClient.getSupportedFormats, Access.internal, "python");
-@@access(DocumentTranslation.FileFormat, Access.public);
-@@usage(DocumentTranslation.FileFormat, Usage.output);
-@@access(DocumentTranslation.FileFormatType, Access.public);
-@@usage(DocumentTranslation.FileFormatType, Usage.output);
+@@access(DocumentTranslationClient.getSupportedFormats,
+  Access.internal,
+  "python"
+);
+@@access(DocumentTranslation.FileFormat, Access.public, "python");
+@@usage(DocumentTranslation.FileFormat, Usage.output, "python");
+@@access(DocumentTranslation.FileFormatType, Access.public, "python");
+@@usage(DocumentTranslation.FileFormatType, Usage.output, "python");
 
 @@clientName(DocumentTranslationClient.startTranslation,
   "_begin_start_translation",
@@ -89,23 +95,11 @@ interface SingleDocumentTranslationClient {
   "python"
 );
 
+@@clientName(DocumentTranslation.Glossary.format, "file_format", "python");
 
-@@clientName(DocumentTranslation.Glossary.format,
-  "file_format",
-  "python"
-);
+@@clientName(DocumentTranslation.Glossary.version, "format_version", "python");
 
-
-@@clientName(DocumentTranslation.Glossary.version,
-  "format_version",
-  "python"
-);
-
-@@clientName(DocumentTranslation.Glossary,
-  "TranslationGlossary",
-  "python"
-);
-
+@@clientName(DocumentTranslation.Glossary, "TranslationGlossary", "python");
 
 @@clientName(DocumentTranslation.DocumentStatus.createdDateTimeUtc,
   "created_on",
@@ -127,16 +121,12 @@ interface SingleDocumentTranslationClient {
   "python"
 );
 
-@@clientName(DocumentTranslation.DocumentStatus.to,
-  "translated_to",
-  "python"
-);
+@@clientName(DocumentTranslation.DocumentStatus.to, "translated_to", "python");
 
 @@clientName(DocumentTranslation.DocumentStatus.progress,
   "translation_progress",
   "python"
 );
-
 
 @@clientName(DocumentTranslation.DocumentStatus.characterCharged,
   "characters_charged",
@@ -148,18 +138,9 @@ interface SingleDocumentTranslationClient {
   "python"
 );
 
-@@clientName(DocumentTranslation.StatusSummary.cancelled,
-  "canceled",
-  "python"
-);
+@@clientName(DocumentTranslation.StatusSummary.cancelled, "canceled", "python");
 
-
-
-@@clientName(DocumentTranslation.FileFormat.format,
-  "file_format",
-  "python"
-);
-
+@@clientName(DocumentTranslation.FileFormat.format, "file_format", "python");
 
 @@clientName(DocumentTranslation.FileFormat.defaultVersion,
   "default_format_version",
@@ -176,29 +157,15 @@ interface SingleDocumentTranslationClient {
   "python"
 );
 
-@@clientName(DocumentTranslation.TargetInput.category,
-  "category_id",
-  "python"
-);
+@@clientName(DocumentTranslation.TargetInput.category, "category_id", "python");
 
-@@clientName(DocumentTranslation.TargetInput,
-  "TranslationTarget",
-  "python"
-);
-
+@@clientName(DocumentTranslation.TargetInput, "TranslationTarget", "python");
 
 @@clientName(DocumentTranslation.TranslationError,
   "DocumentTranslationError",
   "python"
 );
 
+@@clientName(DocumentTranslation.Status.Cancelled, "canceled", "python");
 
-@@clientName(DocumentTranslation.Status.Cancelled,
-  "canceled",
-  "python"
-);
-
-@@clientName(DocumentTranslation.Status.Cancelling,
-  "canceling",
-  "python"
-);
+@@clientName(DocumentTranslation.Status.Cancelling, "canceling", "python");
