@@ -55,11 +55,11 @@ These settings apply only when `--tag=release_2023_11_15_preview` is specified o
 
 ``` yaml $(tag) == 'release_2023-11-15-preview'
 input-file:
-  - preview/2023-11-15-preview/analyzedocuments.json
   - preview/2023-11-15-preview/analyzetext.json
   - preview/2023-11-15-preview/analyzetext-authoring.json
   - preview/2023-11-15-preview/analyzeconversations.json
   - preview/2023-11-15-preview/analyzeconversations-authoring.json
+  - preview/2023-11-15-preview/analyzedocuments.json
   - preview/2023-11-15-preview/questionanswering.json
   - preview/2023-11-15-preview/questionanswering-authoring.json
 title:

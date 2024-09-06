@@ -1,0 +1,71 @@
+{
+  "parameters": {
+    "api-version": "2024-06-01-preview",
+    "subscriptionId": "123e4567-e89b-12d3-a456-426655440000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/storageAppliances/storageApplianceName",
+            "name": "storageApplianceName",
+            "systemData": {
+              "createdAt": "2021-01-22T13:27:03.008Z",
+              "createdBy": "identityA",
+              "createdByType": "Application",
+              "lastModifiedAt": "2021-01-22T13:29:03.001Z",
+              "lastModifiedBy": "identityB",
+              "lastModifiedByType": "User"
+            },
+            "type": "Microsoft.NetworkCloud/storageAppliances",
+            "location": "location",
+            "tags": {
+              "key1": "myvalue1",
+              "key2": "myvalue2"
+            },
+            "extendedLocation": {
+              "type": "CustomLocation",
+              "name": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.ExtendedLocation/customLocations/clusterExtendedLocationName"
+            },
+            "properties": {
+              "rackId": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/racks/rackName",
+              "storageApplianceSkuId": "684E-3B16-399E",
+              "rackSlot": 1,
+              "serialNumber": "BM1219XXX",
+              "administratorCredentials": {
+                "username": "adminUser"
+              },
+              "provisioningState": "Succeeded",
+              "clusterId": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/clusters/clusterName",
+              "capacity": 893,
+              "capacityUsed": 500,
+              "remoteVendorManagementStatus": "Enabled",
+              "remoteVendorManagementFeature": "Supported",
+              "detailedStatus": "Available",
+              "detailedStatusMessage": "Storage appliance is up and running",
+              "managementIpv4Address": "192.0.2.2",
+              "manufacturer": "Contoso Storage",
+              "model": "ArrayStore-Flash70",
+              "secretRotationStatus": [
+                {
+                  "secretType": "Storage Appliance User",
+                  "lastRotationTime": "2023-09-30T13:27:23.103Z",
+                  "rotationPeriodDays": 60,
+                  "expirePeriodDays": 90,
+                  "secretArchiveReference": {
+                    "keyVaultId": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.KeyVault/vaults/keyVaultName",
+                    "secretName": "ffffffff-ffff-ffff-ffff-ffffffffffff-resource-group-cluster-1679871-storage-appliance-credential-manager-ffffffff",
+                    "secretVersion": "02ab6c1f9c0f4982b0632b0d5d74a33b"
+                  }
+                }
+              ],
+              "version": "9.9.9"
+            }
+          }
+        ],
+        "nextLink": "https://fully.qualified.hyperlink"
+      }
+    }
+  }
+}

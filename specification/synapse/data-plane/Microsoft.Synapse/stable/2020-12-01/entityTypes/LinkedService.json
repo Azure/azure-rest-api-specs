@@ -1357,7 +1357,6 @@
         },
         "serviceEndpoint": {
           "type": "object",
-          "x-ms-format": "dfe-string",
           "description": "File service endpoint of the Azure File Storage resource. It is mutually exclusive with connectionString, sasUri property."
         },
         "credential": {
@@ -1667,87 +1666,70 @@
       "properties": {
         "server": {
           "type": "object",
-          "x-ms-format": "dfe-string",
           "description": "Server name for connection. Type: string."
         },
         "port": {
           "type": "object",
-          "x-ms-format": "dfe-int",
           "description": "The port for the connection. Type: integer."
         },
         "username": {
           "type": "object",
-          "x-ms-format": "dfe-string",
           "description": "Username for authentication. Type: string."
         },
         "database": {
           "type": "object",
-          "x-ms-format": "dfe-string",
           "description": "Database name for connection. Type: string."
         },
         "sslMode": {
           "type": "object",
-          "x-ms-format": "dfe-int",
           "description": "SSL mode for connection. Type: integer. 0: disable, 1:allow, 2: prefer, 3: require, 4: verify-ca, 5: verify-full. Type: integer."
         },
         "schema": {
           "type": "object",
-          "x-ms-format": "dfe-string",
           "description": "Sets the schema search path. Type: string."
         },
         "pooling": {
           "type": "object",
-          "x-ms-format": "dfe-bool",
           "description": "Whether connection pooling should be used. Type: boolean."
         },
         "connectionTimeout": {
           "type": "object",
-          "x-ms-format": "dfe-int",
           "description": "The time to wait (in seconds) while trying to establish a connection before terminating the attempt and generating an error. Type: integer."
         },
         "commandTimeout": {
           "type": "object",
-          "x-ms-format": "dfe-int",
           "description": "The time to wait (in seconds) while trying to execute a command before terminating the attempt and generating an error. Set to zero for infinity. Type: integer."
         },
         "trustServerCertificate": {
           "type": "object",
-          "x-ms-format": "dfe-bool",
           "description": "Whether to trust the server certificate without validating it. Type: boolean."
         },
         "sslCertificate": {
           "type": "object",
-          "x-ms-format": "dfe-string",
           "description": "Location of a client certificate to be sent to the server. Type: string."
         },
         "sslKey": {
           "type": "object",
-          "x-ms-format": "dfe-string",
           "description": "Location of a client key for a client certificate to be sent to the server. Type: string."
         },
         "sslPassword": {
           "type": "object",
-          "x-ms-format": "dfe-string",
           "description": "Password for a key for a client certificate. Type: string."
         },
         "readBufferSize": {
           "type": "object",
-          "x-ms-format": "dfe-int",
           "description": "Determines the size of the internal buffer uses when reading. Increasing may improve performance if transferring large values from the database. Type: integer."
         },
         "logParameters": {
           "type": "object",
-          "x-ms-format": "dfe-bool",
           "description": "When enabled, parameter values are logged when commands are executed. Type: boolean."
         },
         "timezone": {
           "type": "object",
-          "x-ms-format": "dfe-string",
           "description": "Gets or sets the session timezone. Type: string."
         },
         "encoding": {
           "type": "object",
-          "x-ms-format": "dfe-string",
           "description": "Gets or sets the .NET encoding that will be used to encode/decode PostgreSQL string data. Type: string"
         },
         "password": {
@@ -5324,7 +5306,7 @@
       "properties": {
         "driverVersion": {
           "type": "object",
-          "description": "The version of the MariaDB driver. Type: string. V1 or empty for legacy driver, V2 for new driver. V1 can support connection string and property bag, V2 can only support connection string."
+          "description": "The version of the MariaDB driver. Type: string. V1 or empty for legacy driver, V2 for new driver. V1 can support connection string and property bag, V2 can only support connection string. The legacy driver is scheduled for deprecation by October 2024."
         },
         "connectionString": {
           "description": "An ODBC connection string. Type: string, SecureString or AzureKeyVaultSecretReference.",
@@ -5345,6 +5327,14 @@
         "database": {
           "type": "object",
           "description": "Database name for connection. Type: string."
+        },
+        "sslMode": {
+          "type": "object",
+          "description": "This option specifies whether the driver uses TLS encryption and verification when connecting to MariaDB. E.g., SSLMode=<0/1/2/3/4>. Options: DISABLED (0) / PREFERRED (1) (Default) / REQUIRED (2) / VERIFY_CA (3) / VERIFY_IDENTITY (4), REQUIRED (2) is recommended to only allow connections encrypted with SSL/TLS."
+        },
+        "useSystemTrustStore": {
+          "type": "object",
+          "description": "This option specifies whether to use a CA certificate from the system trust store, or from a specified PEM file. E.g. UseSystemTrustStore=<0/1>; Options: Enabled (1) / Disabled (0) (Default)"
         },
         "password": {
           "$ref": "../artifacts.json#/definitions/AzureKeyVaultSecretReference",
