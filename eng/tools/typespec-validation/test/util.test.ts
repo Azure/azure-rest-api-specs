@@ -1,8 +1,8 @@
+import { describe, it } from "vitest";
 import { gitDiffTopSpecFolder, normalizePath } from "../src/utils.js";
 import { strict as assert } from "node:assert";
 import process from "process";
 import path from "path";
-import { describe } from "node:test";
 import { TsvTestHost } from "./tsv-test-host.js";
 
 describe("util", function () {

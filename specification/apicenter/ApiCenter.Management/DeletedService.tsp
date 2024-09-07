@@ -7,7 +7,6 @@ import "./Service.tsp";
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 
 namespace Microsoft.ApiCenter;

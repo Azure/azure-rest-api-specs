@@ -118,42 +118,26 @@ model OwnCertificate {
 
 @armResourceOperations
 interface AssetEndpointProfiles {
-  @Autorest.example(
-    "./examples/Get_AssetEndpointProfile.json",
-    "Get an Asset Endpoint Profile."
-  )
   get is ArmResourceRead<AssetEndpointProfile>;
 
-  @Autorest.example(
-    "./examples/Create_AssetEndpointProfile.json",
-    "Create an Asset Endpoint Profile."
-  )
-  createOrReplace is ArmResourceCreateOrReplaceAsync<AssetEndpointProfile>;
-
-  @Autorest.example(
-    "./examples/Update_AssetEndpointProfile.json",
-    "Patch an Asset Endpoint Profile."
-  )
-  update is ArmResourcePatchAsync<
+  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "MUST CHANGE ON NEXT UPDATE"
+  @Azure.Core.useFinalStateVia("azure-async-operation")
+  createOrReplace is ArmResourceCreateOrReplaceAsync<
     AssetEndpointProfile,
-    AssetEndpointProfileProperties
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader
   >;
 
-  @Autorest.example(
-    "./examples/Delete_AssetEndpointProfile.json",
-    "Delete an Asset Endpoint Profile."
-  )
+  update is ArmCustomPatchAsync<
+    AssetEndpointProfile,
+    Azure.ResourceManager.Foundations.ResourceUpdateModel<
+      AssetEndpointProfile,
+      AssetEndpointProfileProperties
+    >
+  >;
+
   delete is ArmResourceDeleteWithoutOkAsync<AssetEndpointProfile>;
 
-  @Autorest.example(
-    "./examples/List_AssetEndpointProfiles_ResourceGroup.json",
-    "List Asset Endpoint Profiles in a Resource Group."
-  )
   listByResourceGroup is ArmResourceListByParent<AssetEndpointProfile>;
 
-  @Autorest.example(
-    "./examples/List_AssetEndpointProfiles_Subscription.json",
-    "List Asset Endpoint Profiles in a Subscription."
-  )
   listBySubscription is ArmListBySubscription<AssetEndpointProfile>;
 }

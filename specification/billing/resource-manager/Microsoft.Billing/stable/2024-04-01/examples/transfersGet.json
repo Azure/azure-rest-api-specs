@@ -1,0 +1,40 @@
+{
+  "parameters": {
+    "api-version": "2024-04-01",
+    "billingAccountName": "10000000-0000-0000-0000-000000000000:00000000-0000-0000-0000-000000000000_2019-05-31",
+    "billingProfileName": "xxxx-xxxx-xxx-xxx",
+    "invoiceSectionName": "yyyy-yyyy-yyy-yyy",
+    "transferName": "aabb123"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/providers/Microsoft.Billing/BillingAccounts/10000000-0000-0000-0000-000000000000:00000000-0000-0000-0000-000000000000_2019-05-31/billingProfiles/xxxx-xxxx-xxx-xxx/invoiceSections/yyyy-yyyy-yyy-yyy/transfers/aabb123",
+        "name": "aabb123",
+        "type": "Microsoft.Billing/transfers",
+        "properties": {
+          "expirationTime": "2018-11-05T17:32:28Z",
+          "transferStatus": "InProgress",
+          "recipientEmailId": "user@contoso.com",
+          "initiatorEmailId": "xyz@contoso.com",
+          "detailedTransferStatus": [
+            {
+              "productType": "AzureSubscription",
+              "productId": "subscriptionId",
+              "productName": "Azure subscription 1",
+              "skuDescription": "MS-AZR-0017G",
+              "transferStatus": "InProgress"
+            },
+            {
+              "productType": "AzureReservation",
+              "productId": "reservedInstanceId",
+              "productName": "Reservation name",
+              "skuDescription": "Standard_D2s_v3;VirtualMachines;P1Y",
+              "transferStatus": "InProgress"
+            }
+          ]
+        }
+      }
+    }
+  }
+}

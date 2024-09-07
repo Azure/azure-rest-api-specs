@@ -120,7 +120,7 @@ interface JobRouterOperations {
     RouterJob,
     {
       @doc("Request object for reclassifying a job.")
-      @body
+      @bodyRoot
       options?: ReclassifyJobOptions;
     },
     ReclassifyJobResultWithOkResponse
@@ -133,7 +133,7 @@ interface JobRouterOperations {
     RouterJob,
     {
       @doc("Request model for cancelling job.")
-      @body
+      @bodyRoot
       options?: CancelJobOptions;
     },
     CancelJobResultWithOkResponse
@@ -146,7 +146,7 @@ interface JobRouterOperations {
     RouterJobAssignment,
     {
       @doc("Request model for completing job.")
-      @body
+      @bodyRoot
       options?: CompleteJobOptions;
     },
     CompleteJobResultWithOkResponse
@@ -159,7 +159,7 @@ interface JobRouterOperations {
     RouterJobAssignment,
     {
       @doc("Request model for closing job.")
-      @body
+      @bodyRoot
       options?: CloseJobOptions;
     },
     CloseJobResultWithOkResponse
@@ -190,7 +190,7 @@ interface JobRouterOperations {
     RouterJobAssignment,
     {
       @doc("Request body for unassign route.")
-      @body
+      @bodyRoot
       options?: UnassignJobOptions;
     },
     UnassignJobResult
@@ -208,7 +208,7 @@ interface JobRouterOperations {
     RouterJobOffer,
     {
       @doc("Request model for declining offer.")
-      @body
+      @bodyRoot
       options?: DeclineJobOfferOptions;
     },
     DeclineJobOfferResultWithOkResponse

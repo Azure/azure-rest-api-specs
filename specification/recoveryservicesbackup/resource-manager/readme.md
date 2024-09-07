@@ -55,6 +55,15 @@ semantic-validator: true
 message-format: json
 ```
 
+### Tag: package-preview-2024-04
+
+These settings apply only when `--tag=package-preview-2024-04` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2024-04'
+input-file:
+  - Microsoft.RecoveryServices/preview/2024-04-30-preview/bms.json
+```
+
 ### Tag: package-2024-04
 
 These settings apply only when `--tag=package-2024-04` is specified on the command line.
@@ -493,4 +502,9 @@ directive:
   - suppress: LroErrorContent
     from: bms.json
     reason: The azure backup service's API infra handles the conversation from execptions to custom error CloudError. Changing this would be breaking change for our service.
+  - suppress: ConsistentPatchProperties  
+    from: bms.json
+    where: 
+     - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupFabrics/{fabricName}/protectionContainers/{containerName}/protectedItems/{protectedItemName}/recoveryPoints/{recoveryPointId}"].patch.parameters[8]["schema"]
+    reason: Known false alarm for the discriminator pattern that causes ConsistentPatchProperties rule to fail.
 ```

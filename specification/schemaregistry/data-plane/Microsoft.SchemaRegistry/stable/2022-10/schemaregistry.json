@@ -380,33 +380,6 @@
               "type": "file"
             },
             "headers": {
-              "Content-Type": {
-                "type": "string",
-                "description": "The content type for given schema.",
-                "enum": [
-                  "application/json; serialization=Avro",
-                  "application/json; serialization=Json",
-                  "text/plain; charset=utf-8"
-                ],
-                "x-ms-enum": {
-                  "name": "SchemaContentTypeValues",
-                  "modelAsString": false,
-                  "values": [
-                    {
-                      "name": "avro",
-                      "value": "application/json; serialization=Avro"
-                    },
-                    {
-                      "name": "json",
-                      "value": "application/json; serialization=Json"
-                    },
-                    {
-                      "name": "custom",
-                      "value": "text/plain; charset=utf-8"
-                    }
-                  ]
-                }
-              },
               "Location": {
                 "type": "string",
                 "description": "URL location of schema, identified by schema group, schema name, and version."
@@ -484,33 +457,6 @@
               "type": "file"
             },
             "headers": {
-              "Content-Type": {
-                "type": "string",
-                "description": "The content type for given schema.",
-                "enum": [
-                  "application/json; serialization=Avro",
-                  "application/json; serialization=Json",
-                  "text/plain; charset=utf-8"
-                ],
-                "x-ms-enum": {
-                  "name": "SchemaContentTypeValues",
-                  "modelAsString": false,
-                  "values": [
-                    {
-                      "name": "avro",
-                      "value": "application/json; serialization=Avro"
-                    },
-                    {
-                      "name": "json",
-                      "value": "application/json; serialization=Json"
-                    },
-                    {
-                      "name": "custom",
-                      "value": "text/plain; charset=utf-8"
-                    }
-                  ]
-                }
-              },
               "Location": {
                 "type": "string",
                 "description": "URL location of schema, identified by schema group, schema name, and version."
@@ -637,6 +583,7 @@
     },
     "SchemaContentTypeValues": {
       "type": "string",
+      "description": "Describes closed list of schema content type values.",
       "enum": [
         "application/json; serialization=Avro",
         "application/json; serialization=Json",
@@ -648,15 +595,18 @@
         "values": [
           {
             "name": "avro",
-            "value": "application/json; serialization=Avro"
+            "value": "application/json; serialization=Avro",
+            "description": "Avro encoding."
           },
           {
             "name": "json",
-            "value": "application/json; serialization=Json"
+            "value": "application/json; serialization=Json",
+            "description": "JSON encoding"
           },
           {
             "name": "custom",
-            "value": "text/plain; charset=utf-8"
+            "value": "text/plain; charset=utf-8",
+            "description": "Plain text custom encoding."
           }
         ]
       }
@@ -735,36 +685,6 @@
       "required": [
         "schemaName"
       ]
-    },
-    "ServiceVersion": {
-      "type": "string",
-      "description": "Represents the Schema Registry API version to use for requests.",
-      "enum": [
-        "2021-10",
-        "2022-10",
-        "2023-07-01"
-      ],
-      "x-ms-enum": {
-        "name": "ServiceVersion",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "V2021_10",
-            "value": "2021-10",
-            "description": "Azure Schema Registry 2021-10 Version"
-          },
-          {
-            "name": "V2022_10",
-            "value": "2022-10",
-            "description": "Azure Schema Registry 2022-10 Version"
-          },
-          {
-            "name": "V2023_07_01",
-            "value": "2023-07-01",
-            "description": "Azure Schema Registry 2023-07-01 Version. This is the default version."
-          }
-        ]
-      }
     }
   },
   "parameters": {

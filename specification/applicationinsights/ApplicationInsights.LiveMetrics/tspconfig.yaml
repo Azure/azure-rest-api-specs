@@ -9,6 +9,7 @@ emit:
 options:
   "@azure-tools/typespec-autorest":
     azure-resource-provider-folder: "data-plane"
+    emit-lro-options: "none"
     emitter-output-dir: "{project-root}/.."
     examples-directory: "{project-root}/examples"
     # omit the enum type Versions from being added to versioned swagger
@@ -19,6 +20,9 @@ options:
     package-name: "{package-dir}"
     package-mode: dataplane
     flavor: azure
+    generate-test: true
+    generate-sample: true
+    examples-dir: "{project-root}/examples"
   "@azure-tools/typespec-csharp":
     package-dir: "LiveMetrics"
     namespace: "{package-dir}"
@@ -39,4 +43,4 @@ options:
     flavor: azure
 linter:
   extends:
-    - "@azure-tools/typespec-azure-core/all"
+    - "@azure-tools/typespec-azure-rulesets/data-plane"

@@ -75,12 +75,7 @@
             "type": "string"
           },
           {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ChatCompletionsOptions"
-            }
+            "$ref": "#/parameters/GetChatCompletionsBody"
           }
         ],
         "responses": {
@@ -126,12 +121,7 @@
             "type": "string"
           },
           {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/CompletionsOptions"
-            }
+            "$ref": "#/parameters/GetCompletionsBody"
           }
         ],
         "responses": {
@@ -177,12 +167,7 @@
             "type": "string"
           },
           {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/EmbeddingsOptions"
-            }
+            "$ref": "#/parameters/GetEmbeddingsBody"
           }
         ],
         "responses": {
@@ -932,6 +917,36 @@
       "minLength": 1,
       "x-ms-parameter-location": "method",
       "x-ms-client-name": "apiVersion"
+    },
+    "GetChatCompletionsBody": {
+      "name": "body",
+      "in": "body",
+      "description": "The configuration information for a chat completions request.\nCompletions support a wide variety of tasks and generate text that continues from or \"completes\"\nprovided prompt data.",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/ChatCompletionsOptions"
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "GetCompletionsBody": {
+      "name": "body",
+      "in": "body",
+      "description": "The configuration information for a completions request.\nCompletions support a wide variety of tasks and generate text that continues from or \"completes\"\nprovided prompt data.",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/CompletionsOptions"
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "GetEmbeddingsBody": {
+      "name": "body",
+      "in": "body",
+      "description": "The configuration information for an embeddings request.\nEmbeddings measure the relatedness of text strings and are commonly used for search, clustering,\nrecommendations, and other similar scenarios.",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/EmbeddingsOptions"
+      },
+      "x-ms-parameter-location": "method"
     }
   }
 }

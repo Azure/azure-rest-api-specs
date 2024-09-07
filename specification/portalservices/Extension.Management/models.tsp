@@ -1,16 +1,5 @@
-import "@typespec/http";
-import "@typespec/rest";
-import "@typespec/versioning";
-import "@azure-tools/typespec-azure-core";
-import "@azure-tools/typespec-azure-resource-manager";
-
-using TypeSpec.Http;
-using TypeSpec.Rest;
-using TypeSpec.Versioning;
 using OpenAPI;
-using Autorest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 
 namespace Microsoft.PortalServices;
 
@@ -312,7 +301,7 @@ model ArmCommonProperties {
    * Metadata pertaining to creation and last modification of the resource.
    */
   @visibility("read")
-  systemData?: SystemData;
+  systemData?: Azure.ResourceManager.Foundations.SystemData;
 }
 
 /**
@@ -439,6 +428,7 @@ model PortalExtensionListSourcesFolder {
 /**
  * The content metadata of a file
  */
+#suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
 @discriminator("kind")
 model PortalExtensionListSourcesFile {
   /**

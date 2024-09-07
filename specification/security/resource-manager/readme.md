@@ -106,11 +106,31 @@ tag: package-composite-v3
 
 The following packages may be composed from multiple api-versions.
 
+
+### Tag: package-preview-2024-05
+
+These settings apply only when `--tag=package-preview-2024-05` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2024-05'
+input-file:
+  - Microsoft.Security/preview/2024-05-15-preview/securityConnectorsDevOps.json
+suppressions:
+  - code: LroLocationHeader
+    from: securityConnectorsDevOps.json
+    reason: False positive. Per ResourceProvider specification SecurityConnectors DevOps uses Azure-AsyncOperation header instead of Location header
+  - code: ResourceNameRestriction
+    from: securityConnectorsDevOps.json
+    reason: SecurityConnectors DevOps collects data from thirdparty providers which do not always specify name patterns
+  - code: OperationsAPIImplementation
+    from: securityConnectorsDevOps.json
+    reason: Suppression of OperationsAPI as it doesn't apply to this specific file.
+```
+
 ### Tag: package-2024-04
 
 These settings apply only when `--tag=package-2024-04` is specified on the command line.
 
-```yaml $(tag) == 'package-2024-04'
+``` yaml $(tag) == 'package-2024-04'
 input-file:
   - Microsoft.Security/stable/2024-04-01/securityConnectorsDevOps.json
 suppressions:
@@ -131,7 +151,7 @@ suppressions:
 
 These settings apply only when `--tag=package-preview-2024-03` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2024-03'
+``` yaml $(tag) == 'package-preview-2024-03'
 input-file:
   - Microsoft.Security/preview/2024-03-01-preview/securityConnectors.json
 ```
@@ -375,10 +395,8 @@ These settings apply only when `--tag=package-composite-v1` is specified on the 
 
 ``` yaml $(tag) == 'package-composite-v1'
 input-file:
-- Microsoft.Security/preview/2015-06-01-preview/adaptiveNetworkHardenings.json
 - Microsoft.Security/preview/2015-06-01-preview/alerts.json
 - Microsoft.Security/preview/2015-06-01-preview/allowedConnections.json
-- Microsoft.Security/preview/2015-06-01-preview/applicationWhitelistings.json
 - Microsoft.Security/preview/2015-06-01-preview/discoveredSecuritySolutions.json
 - Microsoft.Security/preview/2015-06-01-preview/externalSecuritySolutions.json
 - Microsoft.Security/preview/2015-06-01-preview/jitNetworkAccessPolicies.json
@@ -391,7 +409,6 @@ input-file:
 - Microsoft.Security/preview/2017-08-01-preview/compliances.json
 - Microsoft.Security/preview/2017-08-01-preview/deviceSecurityGroups.json
 - Microsoft.Security/preview/2017-08-01-preview/informationProtectionPolicies.json
-- Microsoft.Security/preview/2017-08-01-preview/pricings.json
 - Microsoft.Security/preview/2017-08-01-preview/settings.json
 - Microsoft.Security/preview/2017-08-01-preview/workspaceSettings.json
 - Microsoft.Security/preview/2019-01-01-preview/alertsSuppressionRules.json
@@ -421,9 +438,7 @@ These settings apply only when `--tag=package-composite-v2` is specified on the 
 
 ``` yaml $(tag) == 'package-composite-v2'
 input-file:
-- Microsoft.Security/preview/2015-06-01-preview/adaptiveNetworkHardenings.json
 - Microsoft.Security/preview/2015-06-01-preview/allowedConnections.json
-- Microsoft.Security/preview/2015-06-01-preview/applicationWhitelistings.json
 - Microsoft.Security/preview/2015-06-01-preview/discoveredSecuritySolutions.json
 - Microsoft.Security/preview/2015-06-01-preview/externalSecuritySolutions.json
 - Microsoft.Security/preview/2015-06-01-preview/jitNetworkAccessPolicies.json
@@ -497,14 +512,13 @@ input-file:
 - Microsoft.Security/preview/2023-12-01-preview/automations.json
 - Microsoft.Security/preview/2023-12-01-preview/securityContacts.json
 - Microsoft.Security/preview/2024-03-01-preview/securityConnectors.json
+- Microsoft.Security/preview/2024-05-15-preview/securityConnectorsDevOps.json
 - Microsoft.Security/stable/2017-08-01/complianceResults.json
 - Microsoft.Security/stable/2019-01-01/advancedThreatProtectionSettings.json
 - Microsoft.Security/stable/2019-08-01/deviceSecurityGroups.json
 - Microsoft.Security/stable/2019-08-01/iotSecuritySolutionAnalytics.json
 - Microsoft.Security/stable/2019-08-01/iotSecuritySolutions.json
-- Microsoft.Security/stable/2020-01-01/adaptiveNetworkHardenings.json
 - Microsoft.Security/stable/2020-01-01/allowedConnections.json
-- Microsoft.Security/stable/2020-01-01/applicationWhitelistings.json
 - Microsoft.Security/stable/2020-01-01/discoveredSecuritySolutions.json
 - Microsoft.Security/stable/2020-01-01/externalSecuritySolutions.json
 - Microsoft.Security/stable/2020-01-01/jitNetworkAccessPolicies.json
@@ -520,7 +534,6 @@ input-file:
 - Microsoft.Security/stable/2023-05-01/ServerVulnerabilityAssessmentsSettings.json
 - Microsoft.Security/stable/2023-11-15/apiCollections.json
 - Microsoft.Security/stable/2024-01-01/pricings.json
-- Microsoft.Security/stable/2024-04-01/securityConnectorsDevOps.json
 
 # Autorest suppressions
 suppressions:
@@ -580,9 +593,7 @@ input-file:
 - Microsoft.Security/stable/2019-08-01/deviceSecurityGroups.json
 - Microsoft.Security/stable/2019-08-01/iotSecuritySolutionAnalytics.json
 - Microsoft.Security/stable/2019-08-01/iotSecuritySolutions.json
-- Microsoft.Security/stable/2020-01-01/adaptiveNetworkHardenings.json
 - Microsoft.Security/stable/2020-01-01/allowedConnections.json
-- Microsoft.Security/stable/2020-01-01/applicationWhitelistings.json
 - Microsoft.Security/stable/2020-01-01/discoveredSecuritySolutions.json
 - Microsoft.Security/stable/2020-01-01/externalSecuritySolutions.json
 - Microsoft.Security/stable/2020-01-01/jitNetworkAccessPolicies.json
@@ -626,10 +637,8 @@ These settings apply only when `--tag=package-2015-06-preview-only` is specified
 
 ``` yaml $(tag) == 'package-2015-06-preview-only'
 input-file:
-- Microsoft.Security/preview/2015-06-01-preview/adaptiveNetworkHardenings.json
 - Microsoft.Security/preview/2015-06-01-preview/alerts.json
 - Microsoft.Security/preview/2015-06-01-preview/allowedConnections.json
-- Microsoft.Security/preview/2015-06-01-preview/applicationWhitelistings.json
 - Microsoft.Security/preview/2015-06-01-preview/discoveredSecuritySolutions.json
 - Microsoft.Security/preview/2015-06-01-preview/externalSecuritySolutions.json
 - Microsoft.Security/preview/2015-06-01-preview/jitNetworkAccessPolicies.json
@@ -673,7 +682,6 @@ input-file:
 - Microsoft.Security/preview/2017-08-01-preview/informationProtectionPolicies.json
 - Microsoft.Security/preview/2017-08-01-preview/iotSecuritySolutionAnalytics.json
 - Microsoft.Security/preview/2017-08-01-preview/iotSecuritySolutions.json
-- Microsoft.Security/preview/2017-08-01-preview/pricings.json
 - Microsoft.Security/preview/2017-08-01-preview/securityContacts.json
 - Microsoft.Security/preview/2017-08-01-preview/settings.json
 - Microsoft.Security/preview/2017-08-01-preview/workspaceSettings.json
@@ -836,9 +844,7 @@ These settings apply only when `--tag=package-2020-01-python-only` is specified 
 
 ``` yaml $(tag) == 'package-2020-01-python-only'
 input-file:
-- Microsoft.Security/stable/2020-01-01/adaptiveNetworkHardenings.json
 - Microsoft.Security/stable/2020-01-01/allowedConnections.json
-- Microsoft.Security/stable/2020-01-01/applicationWhitelistings.json
 - Microsoft.Security/stable/2020-01-01/assessmentMetadata.json
 - Microsoft.Security/stable/2020-01-01/assessments.json
 - Microsoft.Security/stable/2020-01-01/discoveredSecuritySolutions.json
@@ -861,10 +867,8 @@ These settings apply only when `--tag=package-2020-01-only` is specified on the 
 
 ``` yaml $(tag) == 'package-2020-01-only'
 input-file:
-- Microsoft.Security/stable/2020-01-01/adaptiveNetworkHardenings.json
 - Microsoft.Security/stable/2020-01-01/alerts.json
 - Microsoft.Security/stable/2020-01-01/allowedConnections.json
-- Microsoft.Security/stable/2020-01-01/applicationWhitelistings.json
 - Microsoft.Security/stable/2020-01-01/assessmentMetadata.json
 - Microsoft.Security/stable/2020-01-01/assessments.json
 - Microsoft.Security/stable/2020-01-01/discoveredSecuritySolutions.json

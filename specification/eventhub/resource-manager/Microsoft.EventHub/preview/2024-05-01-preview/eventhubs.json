@@ -92,8 +92,11 @@
         ],
         "operationId": "EventHubs_CreateOrUpdate",
         "x-ms-examples": {
-          "EventHubCreate": {
+          "EHEventHubCreate": {
             "$ref": "./examples/EventHubs/EHEventHubCreate.json"
+          },
+          "EHEventHubWithDeleteOrCompactPolicyCreate": {
+            "$ref": "./examples/EventHubs/EHEventHubWithDeleteOrCompactPolicyCreate.json"
           },
           "EHEventHubWithDeletePolicyCreate": {
             "$ref": "./examples/EventHubs/EHEventHubWithDeletePolicyCreate.json"
@@ -281,7 +284,7 @@
           "enum": [
             "Delete",
             "Compact",
-            "Delete,Compact"
+            "DeleteOrCompact"
           ],
           "x-ms-enum": {
             "name": "CleanupPolicyRetentionDescription",
@@ -291,20 +294,38 @@
         "retentionTimeInHours": {
           "format": "int64",
           "type": "integer",
-          "description": "Number of hours to retain the events for this Event Hub. If cleanupPolicy is Compact the returned value of this property is Long.MaxValue "
+          "description": "Number of hours to retain the events for this Event Hub. This should be positive value upto namespace SKU max. -1 is a special case where retention time is infinite, but the size of an entity is restricted and its size depends on namespace SKU type."
         },
         "minCompactionLagInMins": {
           "format": "int64",
           "type": "integer",
-          "description": "The minimum time a message will remain ineligible for compaction in the log. Only applicable for logs that are being compacted."
+          "description": "The minimum time a message will remain ineligible for compaction in the log. This value is used when cleanupPolicy is Compact or DeleteOrCompact."
         },
         "tombstoneRetentionTimeInHours": {
           "format": "int32",
           "type": "integer",
-          "description": "Number of hours to retain the tombstone markers of a compacted Event Hub. This value is only used when cleanupPolicy is Compact. Consumer must complete reading the tombstone marker within this specified amount of time if consumer begins from starting offset to ensure they get a valid snapshot for the specific key described by the tombstone marker within the compacted Event Hub"
+          "description": "Number of hours to retain the tombstone markers of a compacted Event Hub. This value is used when cleanupPolicy is Compact or DeleteOrCompact. Consumer must complete reading the tombstone marker within this specified amount of time if consumer begins from starting offset to ensure they get a valid snapshot for the specific key described by the tombstone marker within the compacted Event Hub"
         }
       },
       "description": "Properties to configure retention settings for the  eventhub"
+    },
+    "MessageTimestampDescription": {
+      "type": "object",
+      "properties": {
+        "timestampType": {
+          "type": "string",
+          "description": "Denotes the type of timestamp the message will hold.Two types of timestamp types - \"AppendTime\" and \"CreateTime\". AppendTime refers the time in which message got appended inside broker log. CreateTime refers to the time in which the message was generated on source side and producers can set this timestamp while sending the message. Default value is AppendTime. If you are using AMQP protocol, CreateTime equals AppendTime and its behavior remains the same.",
+          "enum": [
+            "LogAppend",
+            "Create"
+          ],
+          "x-ms-enum": {
+            "name": "TimestampType",
+            "modelAsString": true
+          }
+        }
+      },
+      "description": "Properties of MessageTimestamp Description"
     },
     "Eventhub": {
       "properties": {
@@ -370,17 +391,9 @@
               "$ref": "#/definitions/RetentionDescription",
               "description": "Event Hub retention settings"
             },
-            "messageTimestampType": {
-              "type": "string",
-              "description": "Denotes the type of timestamp the message will hold. Two types of timestamp types AppendTime, CreateTime. AppendTime refers the time in which message got appended inside broker log. CreateTime refers to the time in which the message was generated on source side and producers can set this timestamp while sending the message. Default value is AppendTime. If you are using AMQP protocol, CreateTime equals AppendTime for now and will full have runtime support later.",
-              "enum": [
-                "AppendTime",
-                "CreateTime"
-              ],
-              "x-ms-enum": {
-                "name": "TimestampType",
-                "modelAsString": true
-              }
+            "messageTimestampDescription": {
+              "$ref": "#/definitions/MessageTimestampDescription",
+              "description": "Properties of MessageTimestamp Description"
             },
             "identifier": {
               "type": "string",

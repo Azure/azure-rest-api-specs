@@ -16,12 +16,16 @@ using TypeSpec.Versioning;
     endpoint: url,
   }
 )
-@useAuth(AzureKey)
+@useAuth(AzureKey | EntraIdToken)
 namespace AzureHealthInsights;
 
 @doc("The secret key for your Azure Cognitive Services subscription.")
 model AzureKey
   is ApiKeyAuth<ApiKeyLocation.header, "Ocp-Apim-Subscription-Key">;
+
+@doc("The Microsoft Entra Id Flow")
+model EntraIdToken
+  is Azure.Core.AadOauth2Auth<["https://cognitiveservices.azure.com/.default"]>;
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "https://github.com/Azure/typespec-azure/issues/3107"
 enum ApiVersion {

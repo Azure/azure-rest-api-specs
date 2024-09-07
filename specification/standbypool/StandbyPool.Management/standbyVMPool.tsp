@@ -72,16 +72,30 @@ model StandbyVirtualMachinePoolElasticityProfile {
   @maxValue(2000)
   @minValue(0)
   maxReadyCapacity: int64;
+
+  @added(Microsoft.StandbyPool.Versions.`2024-03-01-preview`)
+  @doc("Specifies the desired minimum number of virtual machines in the standby virtual machine pool. MinReadyCapacity cannot exceed MaxReadyCapacity.")
+  @maxValue(2000)
+  @minValue(0)
+  minReadyCapacity?: int64;
 }
 
 @armResourceOperations
 interface StandbyVirtualMachinePools {
   get is ArmResourceRead<StandbyVirtualMachinePoolResource>;
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<StandbyVirtualMachinePoolResource>;
-  delete is ArmResourceDeleteWithoutOkAsync<StandbyVirtualMachinePoolResource>;
-  update is ArmResourcePatchSync<
+  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "MUST CHANGE ON NEXT UPDATE"
+  @Azure.Core.useFinalStateVia("azure-async-operation")
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<
     StandbyVirtualMachinePoolResource,
-    StandbyVirtualMachinePoolResourceProperties
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader
+  >;
+  delete is ArmResourceDeleteWithoutOkAsync<StandbyVirtualMachinePoolResource>;
+  update is ArmCustomPatchSync<
+    StandbyVirtualMachinePoolResource,
+    Azure.ResourceManager.Foundations.ResourceUpdateModel<
+      StandbyVirtualMachinePoolResource,
+      StandbyVirtualMachinePoolResourceProperties
+    >
   >;
   listByResourceGroup is ArmResourceListByParent<StandbyVirtualMachinePoolResource>;
   listBySubscription is ArmListBySubscription<StandbyVirtualMachinePoolResource>;

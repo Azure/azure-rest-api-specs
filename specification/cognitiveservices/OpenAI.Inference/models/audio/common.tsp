@@ -20,6 +20,6 @@ union AudioTaskLabel {
 
 alias AudioTextResponse = {
   @doc("Representation of the response data of audio text.")
-  @body
+  @bodyRoot
   body: string;
 };

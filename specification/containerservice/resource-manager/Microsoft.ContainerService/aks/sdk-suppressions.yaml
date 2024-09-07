@@ -2,9 +2,18 @@ suppressions:
   azure-sdk-for-go:
     - package: 'sdk/resourcemanager/containerservice/armcontainerservice'
       breaking-changes:
-        - Field `NodeSelector` of struct `IstioEgressGateway` has been removed
+        - Function `*ManagedClustersClient.GetOSOptions` has been removed
+        - Struct `OSOptionProfile` has been removed
+        - Struct `OSOptionPropertyList` has been removed
+        - Struct `OSOptionProperty` has been removed
   azure-sdk-for-python:
     - package: azure-mgmt-containerservice
       breaking-changes:
+        - Removed operation ManagedClustersOperations.get_os_options
         - Model ManagedClusterAzureMonitorProfileAppMonitoring no longer has parameter enabled
         - Model ManagedClusterAzureMonitorProfileContainerInsights no longer has parameter windows_host_logs
+        - Model AgentPoolSecurityProfile no longer has parameter ssh_access
+  azure-sdk-for-js:
+    - package: '@azure/arm-containerservice'
+      breaking-changes:
+        - Removed operation ManagedClusters.getOSOptions

@@ -37,7 +37,7 @@ scalar Uri extends string;
 @doc("Marketplace details for an organization")
 model MarketplaceDetails {
   @doc("Azure subscription id for the the marketplace offer is purchased from")
-  subscriptionId: string;
+  subscriptionId?: string;
 
   @doc("Marketplace subscription status")
   subscriptionStatus?: MarketplaceSubscriptionStatus;
