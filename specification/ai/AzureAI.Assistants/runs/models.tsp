@@ -148,8 +148,12 @@ model ThreadRun {
 
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
   @encodedName("application/json", "tool_resources")
-  @added(ServiceApiVersions.v2024_05_01_preview)
+  @added(ServiceApiVersions.v2024_07_01_preview)
   toolResources?: UpdateToolResourcesOptions | null;
+
+  @doc("Determines if tools can be executed in parallel within the run.")
+  @added(ServiceApiVersions.v2024_07_01_preview)
+  parallelToolCalls?: boolean;
 }
 
 /** The reason why the run is incomplete. This will point to which specific token limit was reached over the course of the run. */
