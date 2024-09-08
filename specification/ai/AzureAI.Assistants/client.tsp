@@ -184,6 +184,12 @@ namespace Azure.AI.Assistants {
   @@usage(MessageDeltaChunk, Usage.output);
   @@access(MessageDeltaChunk, Access.public);
 
+  @@usage(MessageDelta, Usage.output);
+  @@access(MessageDelta, Access.public);
+
+  @@usage(MessageDeltaContent, Usage.output);
+  @@access(MessageDeltaContent, Access.public);
+
   // Stream events : made public to expose documentation and make class casting for strongly typed languages easier
 
   @@usage(AssistantStreamEvent, Usage.output);
