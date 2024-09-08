@@ -145,6 +145,11 @@ model ThreadRun {
   responseFormat: AssistantsApiResponseFormatOption | null;
 
   ...RequiredNullableMetadata;
+
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
+  @encodedName("application/json", "tool_resources")
+  @added(ServiceApiVersions.v2024_05_01_preview)
+  toolResources?: UpdateToolResourcesOptions | null;
 }
 
 /** The reason why the run is incomplete. This will point to which specific token limit was reached over the course of the run. */
