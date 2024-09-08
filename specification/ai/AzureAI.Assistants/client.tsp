@@ -157,14 +157,14 @@ namespace Azure.AI.Assistants {
   @@usage(MessageDeltaImageFileContent, Usage.output);
   @@access(MessageDeltaImageFileContent, Access.public);
 
-  @@usage(MessageDeltaImageFileContentObject, Usage.output)
-  @@access(MessageDeltaImageFileContentObject, Access.public)
+  @@usage(MessageDeltaImageFileContentObject, Usage.output);
+  @@access(MessageDeltaImageFileContentObject, Access.public);
 
   @@usage(MessageDeltaTextContent, Usage.output);
   @@access(MessageDeltaTextContent, Access.public);
 
-  @@usage(MessageDeltaTextContentObject, Usage.output)
-  @@access(MessageDeltaTextContentObject, Access.public)
+  @@usage(MessageDeltaTextContentObject, Usage.output);
+  @@access(MessageDeltaTextContentObject, Access.public);
 
   @@usage(RunStepDeltaMessageCreationObject, Usage.output);
   @@access(RunStepDeltaMessageCreationObject, Access.public);
