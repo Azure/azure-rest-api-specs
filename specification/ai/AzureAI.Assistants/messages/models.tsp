@@ -350,17 +350,17 @@ model MessageDeltaImageFileContentObject {
 
 /** Represents a streamed text content part within a streaming message delta chunk. */
 @added(ServiceApiVersions.v2024_02_15_preview)
-model MessageDeltaTextContentObject extends MessageDeltaContent {
+model MessageDeltaTextContent extends MessageDeltaContent {
   /** The type of content for this content part, which is always "text." */
   type: "text";
 
   /** The text content details. */
-  text?: MessageDeltaTextContent;
+  text?: MessageDeltaTextContentObject;
 }
 
 /** Represents the data of a streamed text content part within a streaming message delta chunk. */
 @added(ServiceApiVersions.v2024_02_15_preview)
-model MessageDeltaTextContent {
+model MessageDeltaTextContentObject {
   /** The data that makes up the text. */
   value?: string;
 
@@ -382,14 +382,14 @@ model MessageDeltaTextAnnotation {
 
 /** Represents a streamed file citation applied to a streaming text content part. */
 @added(ServiceApiVersions.v2024_02_15_preview)
-model MessageDeltaTextFileCitationAnnotationObject
+model MessageDeltaTextFileCitationAnnotation
   extends MessageDeltaTextAnnotation {
   /** The type of the text content annotation, which is always "file_citation." */
   type: "file_citation";
 
   /** The file citation information. */
   @encodedName("application/json", "file_citation")
-  fileCitation?: MessageDeltaTextFileCitationAnnotation;
+  fileCitation?: MessageDeltaTextFileCitationAnnotationObject;
 
   /** The text in the message content that needs to be replaced */
   text?: string;
@@ -405,7 +405,7 @@ model MessageDeltaTextFileCitationAnnotationObject
 
 /** Represents the data of a streamed file citation as applied to a streaming text content part. */
 @added(ServiceApiVersions.v2024_02_15_preview)
-model MessageDeltaTextFileCitationAnnotation {
+model MessageDeltaTextFileCitationAnnotationObject {
   /** The ID of the specific file the citation is from. */
   @encodedName("application/json", "file_id")
   fileId?: string;
@@ -416,14 +416,14 @@ model MessageDeltaTextFileCitationAnnotation {
 
 /** Represents a streamed file path annotation applied to a streaming text content part. */
 @added(ServiceApiVersions.v2024_02_15_preview)
-model MessageDeltaTextFilePathAnnotationObject
+model MessageDeltaTextFilePathAnnotation
   extends MessageDeltaTextAnnotation {
   /** The type of the text content annotation, which is always "file_path." */
   type: "file_path";
 
   /** The file path information. */
   @encodedName("application/json", "file_path")
-  filePath?: MessageDeltaTextFilePathAnnotation;
+  filePath?: MessageDeltaTextFilePathAnnotationObject;
 
   /** The start index of this annotation in the content text. */
   @encodedName("application/json", "start_index")
@@ -439,7 +439,7 @@ model MessageDeltaTextFilePathAnnotationObject
 
 /** Represents the data of a streamed file path annotation as applied to a streaming text content part. */
 @added(ServiceApiVersions.v2024_02_15_preview)
-model MessageDeltaTextFilePathAnnotation {
+model MessageDeltaTextFilePathAnnotationObject {
   /** The file ID for the annotation. */
   @encodedName("application/json", "file_id")
   fileId?: string;
