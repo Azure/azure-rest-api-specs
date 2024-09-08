@@ -1,0 +1,27 @@
+{
+  "parameters": {
+    "api-version": "2024-08-01-preview",
+    "job-id": "ingestion-job"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "kind": "UserCompute",
+        "jobId": "ingestion-job",
+        "workspaceId": "/subscriptions/f375b912-331c-4fc5-8e9f-2d7205e3e036/resourceGroups/adrama-copilot-demo/providers/Microsoft.MachineLearningServices/workspaces/adrama-rag-dev",
+        "compute": {
+          "kind": "ServerlessCompute"
+        },
+        "target": {
+          "kind": "AzureAISearch",
+          "connectionId": "/subscriptions/f375b912-331c-4fc5-8e9f-2d7205e3e036/resourceGroups/adrama-copilot-demo/providers/Microsoft.MachineLearningServices/workspaces/adrama-rag-dev/connections/search-connection"
+        },
+        "datasource": {
+          "kind": "Dataset",
+          "datasetId": "azureml://locations/centraluseuap/workspaces/83317fe6-efa6-4e4a-b020-d0edd11ec382/data/PlainText/versions/1",
+          "datasetType": "uri_folder"
+        }
+      }
+    }
+  }
+}
