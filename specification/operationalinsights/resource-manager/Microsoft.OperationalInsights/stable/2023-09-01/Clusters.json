@@ -48,13 +48,13 @@
         "description": "Gets Log Analytics clusters in a resource group.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -90,10 +90,10 @@
         "description": "Gets the Log Analytics clusters in a subscription.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -129,13 +129,13 @@
         "description": "Create or update a Log Analytics cluster.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "name": "clusterName",
@@ -195,7 +195,7 @@
         "description": "Deletes a cluster instance.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "clusterName",
@@ -205,13 +205,16 @@
             "description": "Name of the Log Analytics Cluster."
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
+          "202": {
+            "description": "Accepted response definition."
+          },
           "200": {
             "description": "OK response definition."
           },
@@ -240,13 +243,13 @@
         "description": "Gets a Log Analytics cluster instance.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
             "name": "clusterName",
@@ -284,7 +287,7 @@
         "description": "Updates a Log Analytics cluster.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "clusterName",
@@ -303,10 +306,10 @@
             "description": "The parameters required to patch a Log Analytics cluster."
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -314,14 +317,6 @@
             "description": "The existing cluster was successfully updated. Check provisioningStatus to see detailed status.",
             "schema": {
               "$ref": "#/definitions/Cluster"
-            }
-          },
-          "202": {
-            "description": "Accepted response definition.",
-            "headers": {
-              "Location": {
-                "type": "string"
-              }
             }
           },
           "default": {
@@ -337,11 +332,8 @@
   },
   "definitions": {
     "ClusterProperties": {
+      "type": "object",
       "properties": {
-        "nextLink": {
-          "description": "The link used to get the next page of recommendations.",
-          "type": "string"
-        },
         "clusterId": {
           "type": "string",
           "readOnly": true,
@@ -365,28 +357,78 @@
             "modelAsString": true
           }
         },
+        "isDoubleEncryptionEnabled": {
+          "type": "boolean",
+          "description": "Configures whether cluster will use double encryption. This Property can not be modified after cluster creation. Default value is 'true'",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "isAvailabilityZonesEnabled": {
+          "type": "boolean",
+          "description": "Sets whether the cluster will support availability zones. This can be set as true only in regions where Azure Data Explorer support Availability Zones. This Property can not be modified after cluster creation. Default value is 'true' if region supports Availability Zones."
+        },
+        "billingType": {
+          "$ref": "#/definitions/billingType",
+          "description": "The cluster's billing type."
+        },
         "keyVaultProperties": {
           "$ref": "#/definitions/keyVaultProperties",
           "description": "The associated key properties."
+        },
+        "lastModifiedDate": {
+          "type": "string",
+          "description": "The last time the cluster was updated.",
+          "readOnly": true
+        },
+        "createdDate": {
+          "type": "string",
+          "description": "The cluster creation time",
+          "readOnly": true
+        },
+        "associatedWorkspaces": {
+          "description": "The list of Log Analytics workspaces associated with the cluster",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AssociatedWorkspace"
+          },
+          "x-ms-identifiers": [
+            "workspaceId"
+          ]
+        },
+        "capacityReservationProperties": {
+          "$ref": "#/definitions/CapacityReservationProperties",
+          "description": "Additional properties for capacity reservation"
         }
       },
       "description": "Cluster properties."
     },
     "ClusterPatchProperties": {
+      "type": "object",
       "properties": {
         "keyVaultProperties": {
           "$ref": "#/definitions/keyVaultProperties",
           "description": "The associated key properties."
+        },
+        "billingType": {
+          "$ref": "#/definitions/billingType",
+          "description": "The cluster's billing type."
         }
       },
       "description": "Log Analytics cluster patch properties."
     },
     "ClusterPatch": {
+      "type": "object",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/ClusterPatchProperties",
           "description": "Log Analytics cluster properties."
+        },
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "Resource's identity."
         },
         "sku": {
           "$ref": "#/definitions/ClusterSku",
@@ -409,10 +451,11 @@
       "x-ms-azure-resource": true
     },
     "Cluster": {
+      "type": "object",
       "properties": {
         "identity": {
-          "$ref": "#/definitions/Identity",
-          "description": "The identity of the resource."
+          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "Resource's identity."
         },
         "sku": {
           "$ref": "#/definitions/ClusterSku",
@@ -426,12 +469,13 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/TrackedResource"
         }
       ],
       "description": "The top level Log Analytics cluster resource container."
     },
     "ClusterListResult": {
+      "type": "object",
       "properties": {
         "nextLink": {
           "description": "The link used to get the next page of recommendations.",
@@ -448,6 +492,7 @@
       "description": "The list clusters operation response."
     },
     "keyVaultProperties": {
+      "type": "object",
       "description": "The key vault properties.",
       "properties": {
         "keyVaultUri": {
@@ -461,20 +506,55 @@
         "keyVersion": {
           "description": "The version of the key associated with the Log Analytics cluster.",
           "type": "string"
+        },
+        "keyRsaSize": {
+          "description": "Selected key minimum required size.",
+          "type": "integer",
+          "format": "int32"
         }
       }
     },
+    "billingType": {
+      "type": "string",
+      "readOnly": false,
+      "description": "Configures whether billing will be only on the cluster or each workspace will be billed by its proportional use. This does not change the overall billing, only how it will be distributed. Default value is 'Cluster'",
+      "enum": [
+        "Cluster",
+        "Workspaces"
+      ],
+      "x-ms-enum": {
+        "name": "BillingType",
+        "modelAsString": true
+      }
+    },
     "ClusterSku": {
+      "type": "object",
       "description": "The cluster sku definition.",
       "properties": {
         "capacity": {
-          "description": "The capacity value",
+          "description": "The capacity reservation level in Gigabytes for this cluster.",
           "type": "integer",
-          "format": "int64"
+          "format": "int64",
+          "enum": [
+            100,
+            200,
+            300,
+            400,
+            500,
+            1000,
+            2000,
+            5000,
+            10000,
+            25000,
+            50000
+          ],
+          "x-ms-enum": {
+            "name": "Capacity"
+          }
         },
         "name": {
           "type": "string",
-          "description": "The name of the SKU.",
+          "description": "The SKU (tier) of a cluster.",
           "enum": [
             "CapacityReservation"
           ],
@@ -485,35 +565,56 @@
         }
       }
     },
-    "Identity": {
+    "AssociatedWorkspace": {
+      "type": "object",
+      "description": "The list of Log Analytics workspaces associated with the cluster.",
       "properties": {
-        "principalId": {
+        "workspaceId": {
           "readOnly": true,
-          "type": "string",
-          "description": "The principal ID of resource identity."
+          "description": "Associated workspace immutable id.",
+          "type": "string"
         },
-        "tenantId": {
+        "workspaceName": {
           "readOnly": true,
-          "type": "string",
-          "description": "The tenant ID of resource."
+          "description": "Associated workspace resource name.",
+          "type": "string"
         },
-        "type": {
-          "type": "string",
-          "description": "The identity type.",
-          "enum": [
-            "SystemAssigned",
-            "None"
-          ],
-          "x-ms-enum": {
-            "name": "IdentityType",
-            "modelAsString": false
-          }
+        "resourceId": {
+          "readOnly": true,
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.OperationalInsights/workspaces"
+              }
+            ]
+          },
+          "description": "Associated workspace arm resource id, in the form of: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}.",
+          "type": "string"
+        },
+        "associateDate": {
+          "readOnly": true,
+          "description": "The time of workspace association.",
+          "type": "string"
         }
-      },
-      "required": [
-        "type"
-      ],
-      "description": "Identity for the resource."
+      }
+    },
+    "CapacityReservationProperties": {
+      "type": "object",
+      "description": "The Capacity Reservation properties.",
+      "properties": {
+        "lastSkuUpdate": {
+          "readOnly": true,
+          "description": "The last time Sku was updated.",
+          "type": "string"
+        },
+        "minCapacity": {
+          "readOnly": true,
+          "description": "Minimum CapacityReservation value in Gigabytes.",
+          "type": "integer",
+          "format": "int64"
+        }
+      }
     }
   },
   "parameters": {}

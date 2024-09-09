@@ -400,6 +400,7 @@
   },
   "definitions": {
     "WorkspaceSku": {
+      "type": "object",
       "properties": {
         "name": {
           "type": "string",
@@ -422,13 +423,23 @@
         "capacityReservationLevel": {
           "type": "integer",
           "format": "int32",
-          "description": "The capacity reservation level for this workspace, when CapacityReservation sku is selected."
-        },
-        "maxCapacityReservationLevel": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The maximum capacity reservation level available for this workspace, when CapacityReservation sku is selected.",
-          "readOnly": true
+          "description": "The capacity reservation level in GB for this workspace, when CapacityReservation sku is selected.",
+          "enum": [
+            100,
+            200,
+            300,
+            400,
+            500,
+            1000,
+            2000,
+            5000,
+            10000,
+            25000,
+            50000
+          ],
+          "x-ms-enum": {
+            "name": "CapacityReservationLevel"
+          }
         },
         "lastSkuUpdate": {
           "type": "string",
@@ -442,6 +453,7 @@
       "description": "The SKU (tier) of a workspace."
     },
     "WorkspaceCapping": {
+      "type": "object",
       "description": "The daily volume cap for ingestion.",
       "properties": {
         "dailyQuotaGb": {
@@ -500,10 +512,12 @@
       }
     },
     "WorkspaceProperties": {
+      "type": "object",
       "properties": {
         "provisioningState": {
           "type": "string",
           "description": "The provisioning state of the workspace.",
+          "readOnly": true,
           "enum": [
             "Creating",
             "Succeeded",
@@ -565,22 +579,117 @@
           "items": {
             "$ref": "#/definitions/PrivateLinkScopedResource"
           },
+          "x-ms-identifiers": [
+            "resourceId"
+          ],
           "description": "List of linked private link scope resources."
         },
         "features": {
-          "x-ms-client-flatten": true,
           "$ref": "#/definitions/WorkspaceFeatures",
           "description": "Workspace features."
+        },
+        "defaultDataCollectionRuleResourceId": {
+          "type": "string",
+          "description": "The resource ID of the default Data Collection Rule to use for this workspace. Expected format is - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/dataCollectionRules/{dcrName}."
         }
       },
       "description": "Workspace properties."
     },
     "WorkspaceFeatures": {
-      "properties": {},
+      "type": "object",
+      "properties": {
+        "enableDataExport": {
+          "type": "boolean",
+          "x-nullable": true,
+          "description": "Flag that indicate if data should be exported."
+        },
+        "immediatePurgeDataOn30Days": {
+          "type": "boolean",
+          "x-nullable": true,
+          "description": "Flag that describes if we want to remove the data after 30 days."
+        },
+        "enableLogAccessUsingOnlyResourcePermissions": {
+          "type": "boolean",
+          "x-nullable": true,
+          "description": "Flag that indicate which permission to use - resource or workspace or both."
+        },
+        "clusterResourceId": {
+          "type": "string",
+          "x-nullable": true,
+          "description": "Dedicated LA cluster resourceId that is linked to the workspaces."
+        },
+        "disableLocalAuth": {
+          "type": "boolean",
+          "x-nullable": true,
+          "description": "Disable Non-AAD based Auth."
+        },
+        "unifiedSentinelBillingOnly": {
+          "type": "boolean",
+          "x-nullable": true,
+          "readOnly": true,
+          "description": "An indication if the specify workspace is limited to sentinel's unified billing model only."
+        }
+      },
       "additionalProperties": true,
       "description": "Workspace features."
     },
+    "Identity": {
+      "properties": {
+        "principalId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The principal ID of resource identity."
+        },
+        "tenantId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The tenant ID of resource."
+        },
+        "type": {
+          "type": "string",
+          "description": "Type of managed service identity.",
+          "enum": [
+            "SystemAssigned",
+            "UserAssigned",
+            "None"
+          ],
+          "x-ms-enum": {
+            "name": "IdentityType",
+            "modelAsString": false
+          }
+        },
+        "userAssignedIdentities": {
+          "description": "The list of user identities associated with the resource. The user identity dictionary key references will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/UserIdentityProperties"
+          }
+        }
+      },
+      "required": [
+        "type"
+      ],
+      "type": "object",
+      "description": "Identity for the resource."
+    },
+    "UserIdentityProperties": {
+      "type": "object",
+      "description": "User assigned identity properties.",
+      "properties": {
+        "principalId": {
+          "readOnly": true,
+          "description": "The principal id of user assigned identity.",
+          "type": "string"
+        },
+        "clientId": {
+          "readOnly": true,
+          "description": "The client id of user assigned identity.",
+          "type": "string"
+        }
+      }
+    },
     "PrivateLinkScopedResource": {
+      "type": "object",
       "properties": {
         "resourceId": {
           "type": "string",
@@ -594,15 +703,24 @@
       "description": "The private link scope resource reference."
     },
     "Workspace": {
+      "type": "object",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/WorkspaceProperties",
           "description": "Workspace properties."
         },
-        "eTag": {
+        "identity": {
+          "$ref": "#/definitions/Identity",
+          "description": "The identity of the resource."
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "readOnly": true
+        },
+        "etag": {
           "type": "string",
-          "description": "The ETag of the workspace."
+          "description": "The etag of the workspace."
         }
       },
       "allOf": [
@@ -613,11 +731,16 @@
       "description": "The top level Workspace resource container."
     },
     "WorkspacePatch": {
+      "type": "object",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/WorkspaceProperties",
           "description": "Workspace properties."
+        },
+        "identity": {
+          "$ref": "#/definitions/Identity",
+          "description": "The identity of the resource."
         },
         "tags": {
           "type": "object",
@@ -640,6 +763,7 @@
       "description": "The top level Workspace resource container."
     },
     "WorkspaceListResult": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -677,4 +801,3 @@
   },
   "parameters": {}
 }
-
