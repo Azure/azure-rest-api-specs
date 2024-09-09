@@ -5,6 +5,8 @@ using Azure.ClientGenerator.Core;
 using Azure.ResourceManager.CommonTypes;
 using Microsoft.DocumentDB;
 
+@@clientName(Microsoft.DocumentDB, "MongoClusterMgmtClient", "javascript");
+
 @@clientName(Microsoft.DocumentDB, "MongoClusterMgmtClient", "python");
 @@access(Operations.list, Access.internal, "csharp");
 @@clientName(CheckNameAvailabilityResponse,
