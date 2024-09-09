@@ -12,6 +12,14 @@ using Azure.Core;
 @service({
   title: "Microsoft.App service",
 })
+@server(
+  "{endpoint}",
+  "Session pool management endpoint.",
+  {
+    @doc("The management endpoint of the session pool.")
+    endpoint: string,
+  }
+)
 @versioned(Microsoft.App.Versions)
 namespace Microsoft.App;
 

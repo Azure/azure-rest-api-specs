@@ -23,12 +23,9 @@ alias SessionOperations = Azure.Core.ResourceOperations<SessionTraits>;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" ""
 @doc("Execute code in a session.")
-@route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/sessionPools/{sessionPoolName}/codeExecute")
+@route("/codeExecute")
 op executeCode is Foundations.Operation<
   {
-    ...SubscriptionIdParameter;
-    ...ResourceGroupNameParameter;
-    ...SessionPoolNameParameter;
     ...SessionIdentifier;
 
     @doc("The request to execute code.")
@@ -42,12 +39,9 @@ op executeCode is Foundations.Operation<
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" ""
 @doc("Get the code execution result.")
-@route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/sessionPools/{sessionPoolName}/codeExecutionResult")
+@route("/codeExecutionResult")
 op getCodeExecutionResult is Foundations.Operation<
   {
-    ...SubscriptionIdParameter;
-    ...ResourceGroupNameParameter;
-    ...SessionPoolNameParameter;
     ...SessionIdentifier;
     ...CodeExecutionIdentifier;
   },
@@ -69,12 +63,9 @@ interface SessionResourceFiles {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" ""
   @doc("Download the file.")
   @get
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/sessionPools/{sessionPoolName}/files/{fileName}/download")
+  @route("/files/{fileName}/download")
   downloadFile is Foundations.Operation<
     {
-      ...SubscriptionIdParameter;
-      ...ResourceGroupNameParameter;
-      ...SessionPoolNameParameter;
       ...SessionResourceFileNameParameter;
       ...SessionIdentifier;
     },

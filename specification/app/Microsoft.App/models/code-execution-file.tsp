@@ -11,7 +11,6 @@ model SessionResourceFileCollection {
 }
 
 @doc("Code execution file resource.")
-@parentResource(SessionPool)
 @resource("files")
 model SessionResourceFile {
   @key("fileName")
