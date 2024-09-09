@@ -3002,23 +3002,8 @@
           "description": "The list of user identities associated with the container scale set. The user identity dictionary key references will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.",
           "additionalProperties": {
             "type": "object",
-            "$ref": "#/definitions/UserAssignedIdentityAdditionalProperties"
+            "$ref": "../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/UserAssignedIdentity"
           }
-        }
-      }
-    },
-    "UserAssignedIdentityAdditionalProperties": {
-      "type": "object",
-      "properties": {
-        "principalId": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The principal id of user assigned identity."
-        },
-        "clientId": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The client id of user assigned identity."
         }
       }
     },
@@ -3040,7 +3025,19 @@
         "provisioningState": {
           "readOnly": true,
           "type": "string",
-          "description": "The provisioning state, which only appears in the response."
+          "enum": [
+            "Creating",
+            "Updating",
+            "Failed",
+            "Succeeded",
+            "Deleting",
+            "Migrating"
+          ],
+          "description": "The provisioning state, which only appears in the response.",
+          "x-ms-enum": {
+            "name": "NGroupProvisioningState",
+            "modelAsString": true
+          }
         }
       },
       "description": "Describes the properties of a Container Scale Set."
