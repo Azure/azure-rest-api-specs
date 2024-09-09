@@ -466,7 +466,7 @@ input-file:
   - Microsoft.Web/stable/2022-09-01/Recommendations.json
   - Microsoft.Web/stable/2022-09-01/ResourceHealthMetadata.json
   - Microsoft.Web/stable/2022-09-01/ResourceProvider.json
-  - Microsoft.Web/stable/2023-09-01/SiteCertificates.json
+  - Microsoft.Web/stable/2022-09-01/SiteCertificates.json
   - Microsoft.Web/stable/2022-09-01/StaticSites.json
   - Microsoft.Web/stable/2022-09-01/WebApps.json
 directive:
