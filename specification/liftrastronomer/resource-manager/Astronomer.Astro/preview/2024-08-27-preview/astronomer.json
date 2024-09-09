@@ -462,6 +462,30 @@
         ]
       }
     },
+    "LiftrBase.AutoRenewStatus": {
+      "type": "number",
+      "description": "Subscription auto renew status",
+      "enum": [
+        0,
+        1
+      ],
+      "x-ms-enum": {
+        "name": "AutoRenewStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Disable",
+            "value": 0,
+            "description": "Disable/Disabled auto renew"
+          },
+          {
+            "name": "Enable",
+            "value": 1,
+            "description": "Enable/Enabled auto renew"
+          }
+        ]
+      }
+    },
     "LiftrBase.Data.OrganizationProperties": {
       "type": "object",
       "description": "Properties specific to Data Organization resource",
@@ -646,8 +670,14 @@
           "description": "Plan Display Name for the marketplace offer"
         },
         "autoRenew": {
-          "type": "boolean",
-          "description": "Subscription auto renewal flag"
+          "$ref": "#/definitions/LiftrBase.AutoRenewStatus",
+          "description": "Subscription auto renew status"
+        },
+        "endDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Current subscription end date and time",
+          "readOnly": true
         }
       },
       "required": [
