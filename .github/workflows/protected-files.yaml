@@ -1,0 +1,34 @@
+name: Protected Files
+
+on: pull_request
+
+jobs:
+  protected-files:
+    name: Protected Files
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        # Required since "HEAD^" is passed to Get-ChangedFiles
+        fetch-depth: 2
+
+    - name: Detect changes to protected files
+      run: |
+        . eng/scripts/ChangedFiles-Functions.ps1
+
+        $protectedFiles = @("package.json", "package-lock.json")
+        $changedFiles = @(Get-ChangedFiles -baseCommitish HEAD^ -targetCommitish HEAD -diffFilter "")
+        $matchedFiles = @($protectedFiles | Where-Object { $changedFiles -contains $_})
+
+        if ($matchedFiles.Count -gt 0) {
+          foreach ($file in $matchedFiles) {
+            Write-Output "::error file=$file::File '$file' should only be updated by the Azure SDK team.  If intentional, the PR may be merged by the Azure SDK team via bypassing the branch protections."
+          }
+          exit 1
+        }
+        else {
+          Write-Output "::notice::No changes to protected files: [$($protectedFiles -join ', ')]"
+        }
+      shell: pwsh
