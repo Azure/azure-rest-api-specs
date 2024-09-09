@@ -21,21 +21,21 @@ model EvaluatorConfiguration {
   id: string;
 
   @doc("Initialization parameters of the evaluator.")
-  initParams?: Record<string>;
+  initParams?: Record<Record<string, Any>>;
 
   @doc("Data parameters of the evaluator.")
-  dataMapping?: Record<string>;
+  dataMapping?: Record<string, string>;
 }
 
 @doc("Abstract data class.")
 @discriminator("type")
-model Data {
-  @doc("Data identifier.")
+model InputData {
+  @doc("Evaluation input data")
   id: string;
 }
 
 @doc("Data Source for Application Insight.")
-model AppInsight extends Data {
+model AppInsightsConfiguration extends InputData {
 
   type: "app_insights";
 
@@ -47,7 +47,7 @@ model AppInsight extends Data {
 }
 
 @doc("Dataset as source for evaluation.")
-model Dataset extends Data {
+model Dataset extends InputData {
   type: "dataset";
 }
 
@@ -63,11 +63,14 @@ model BaseModel extends EvaluationTarget {
   @doc("Base model for evaluation.")
   endpoint: string;
 
-  @doc("System prompt to be used with base model.")
+  @doc("System prompt to be used with base model. This property will hold prompt asset id.")
   prompt: string;
 
   @doc("parameters for evaluation.")
   parameters: Record<string>;
+
+  @doc("Reference to the key of the base model. Key is stored as part of connection.")
+  key: string;
 
   type: "base_model";
 }
