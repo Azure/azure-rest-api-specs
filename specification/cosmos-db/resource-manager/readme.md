@@ -49,6 +49,7 @@ input-file:
   - Microsoft.DocumentDB/preview/2024-09-01-preview/services.json
   - Microsoft.DocumentDB/preview/2024-09-01-preview/throughputpool.json
   - Microsoft.DocumentDB/preview/2024-09-01-preview/chaosFault.json
+```
 
 ### Tag: package-2024-08
 
