@@ -2958,7 +2958,7 @@
           "$ref": "#/definitions/NGroupProperties"
         },
         "identity": {
-          "$ref": "#/definitions/NGroupIdentity",
+          "$ref": "../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/ManagedServiceIdentity",
           "description": "The identity of the nGroup, if configured."
         },
         "zones": {
@@ -2983,44 +2983,6 @@
         }
       ],
       "description": "Describes a nGroup."
-    },
-    "NGroupIdentity": {
-      "type": "object",
-      "description": "Identity for the nGroup.",
-      "properties": {
-        "principalId": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The principal id of the nGroup identity. This property will only be provided for a system assigned identity."
-        },
-        "tenantId": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The tenant id associated with the nGroup. This property will only be provided for a system assigned identity."
-        },
-        "type": {
-          "type": "string",
-          "description": "The type of identity used for the container scale set. The type 'SystemAssigned, UserAssigned' includes both an implicitly created identity and a set of user assigned identities. The type 'None' will remove any identities from the nGroup.",
-          "enum": [
-            "SystemAssigned",
-            "UserAssigned",
-            "SystemAssigned, UserAssigned",
-            "None"
-          ],
-          "x-ms-enum": {
-            "name": "ResourceIdentityType",
-            "modelAsString": false
-          }
-        },
-        "userAssignedIdentities": {
-          "type": "object",
-          "description": "The list of user identities associated with the container scale set. The user identity dictionary key references will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.",
-          "additionalProperties": {
-            "type": "object",
-            "$ref": "../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/UserAssignedIdentity"
-          }
-        }
-      }
     },
     "NGroupProperties": {
       "type": "object",
