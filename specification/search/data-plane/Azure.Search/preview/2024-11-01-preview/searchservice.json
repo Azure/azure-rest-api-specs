@@ -6348,15 +6348,10 @@
           "description": "The name of the kind of compression method being configured for use with vector search.",
           "x-nullable": false
         },
-        "rerankWithOriginalVectors": {
-          "type": "boolean",
-          "default": true,
-          "description": "If set to true, once the ordered set of results calculated using compressed vectors are obtained, they will be reranked again by recalculating the full-precision similarity scores. This will improve recall at the expense of latency."
-        },
-        "defaultOversampling": {
-          "type": "number",
-          "format": "double",
-          "description": "Default oversampling factor. Oversampling will internally request more documents (specified by this multiplier) in the initial search. This increases the set of results that will be reranked using recomputed similarity scores from full-precision vectors. Minimum value is 1, meaning no oversampling (1x). This parameter can only be set when rerankWithOriginalVectors is true. Higher values improve recall at the expense of latency.",
+        "rescoringOptions": {
+          "type": "object",
+          "$ref": "#/definitions/RescoringOptions",
+          "description": "Contains the options for rescoring.",
           "x-nullable": true
         },
         "truncationDimension": {
@@ -6371,6 +6366,31 @@
         "kind"
       ],
       "description": "Contains configuration options specific to the compression method used during indexing or querying."
+    },
+    "RescoringOptions": {
+      "x-ms-client-name": "RescoringOptions",
+      "type": "object",
+      "properties": {
+        "enableRescoring": {
+          "type": "boolean",
+          "default": true,
+          "description": "If set to true, after the initial search on the compressed vectors, the similarity scores are recalculated using the full-precision vectors. This will improve recall at the expense of latency.",
+          "x-nullable": true
+        },
+        "defaultOversampling": {
+          "type": "number",
+          "format": "double",
+          "description": "Default oversampling factor. Oversampling retrieves a greater set of potential documents to offset the resolution loss due to quantization. This increases the set of results that will be rescored on full-precision vectors. Minimum value is 1, meaning no oversampling (1x). This parameter can only be set when 'enableRescoring' is true. Higher values improve recall at the expense of latency.",
+          "x-nullable": true
+        },
+        "rescoreStorageMethod": {
+          "$ref": "#/definitions/VectorSearchCompressionRescoreStorageMethod",
+          "default": "preserveOriginals",
+          "description": "Controls the storage method for original vectors. This setting is immutable.",
+          "x-nullable": true
+        }
+      },
+      "description": "Contains the options for rescoring."
     },
     "ScalarQuantizationVectorSearchCompressionConfiguration": {
       "x-ms-client-name": "ScalarQuantizationCompressionConfiguration",
@@ -6452,6 +6472,30 @@
         ]
       },
       "description": "The compression method used for indexing and querying."
+    },
+    "VectorSearchCompressionRescoreStorageMethod": {
+      "type": "string",
+      "enum": [
+        "preserveOriginals",
+        "discardOriginals"
+      ],
+      "x-ms-enum": {
+        "name": "VectorSearchCompressionRescoreStorageMethod",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "preserveOriginals",
+            "name": "PreserveOriginals",
+            "description": "This option preserves the original full-precision vectors. Choose this option for maximum flexibility and highest quality of compressed search results. This consumes more storage but allows for rescoring and oversampling."
+          },
+          {
+            "value": "discardOriginals",
+            "name": "DiscardOriginals",
+            "description": "This option discards the original full-precision vectors. Choose this option for maximum storage savings. Since this option does not allow for rescoring and oversampling, it will often cause slight to moderate reductions in quality."
+          }
+        ]
+      },
+      "description": "The storage method for the original full-precision vectors used for rescoring and internal index operations."
     },
     "VectorSearchVectorizer": {
       "type": "object",
@@ -7160,6 +7204,14 @@
           "default": true,
           "description": "For CSV blobs, indicates that the first (non-blank) line of each blob contains headers."
         },
+        "markdownParsingSubmode": {
+          "$ref": "#/definitions/MarkdownParsingSubmode",
+          "x-nullable": true
+        },
+        "markdownHeaderDepth": {
+          "$ref": "#/definitions/MarkdownHeaderDepth",
+          "x-nullable": true
+        },
         "documentRoot": {
           "type": "string",
           "description": "For JSON arrays, given a structured or semi-structured document, you can specify a path to the array using this property."
@@ -7201,7 +7253,8 @@
         "delimitedText",
         "json",
         "jsonArray",
-        "jsonLines"
+        "jsonLines",
+        "markdown"
       ],
       "x-ms-enum": {
         "name": "BlobIndexerParsingMode",
@@ -7236,6 +7289,11 @@
             "value": "jsonLines",
             "name": "JsonLines",
             "description": "Set to jsonLines to extract individual JSON entities, separated by a new line, as separate documents."
+          },
+          {
+            "value": "markdown",
+            "name": "Markdown",
+            "description": "Set to markdown to extract structured content from markdown files."
           }
         ]
       },
@@ -7328,6 +7386,80 @@
       },
       "default": "none",
       "description": "Determines algorithm for text extraction from PDF files in Azure blob storage."
+    },
+    "MarkdownParsingSubmode": {
+      "type": "string",
+      "enum": [
+        "oneToMany",
+        "oneToOne"
+      ],
+      "x-ms-enum": {
+        "name": "MarkdownParsingSubmode",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "oneToMany",
+            "name": "OneToMany",
+            "description": "Indicates that markdown files will be parsed into one or more search documents. This is the default."
+          },
+          {
+            "value": "oneToOne",
+            "name": "OneToOne",
+            "description": "Indicates that markdown files will be parsed into exactly one search document."
+          }
+        ]
+      },
+      "default": "oneToMany",
+      "description": "Specifies the submode that will determine whether a markdown file will be parsed into exactly one search document or multiple search documents."
+    },
+    "MarkdownHeaderDepth": {
+      "type": "string",
+      "enum": [
+        "h1",
+        "h2",
+        "h3",
+        "h4",
+        "h5",
+        "h6"
+      ],
+      "x-ms-enum": {
+        "name": "MarkdownHeaderDepth",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "h1",
+            "name": "h1",
+            "description": "Indicates that headers up to a level of h1 will be considered while grouping markdown content."
+          },
+          {
+            "value": "h2",
+            "name": "h2",
+            "description": "Indicates that headers up to a level of h2 will be considered while grouping markdown content."
+          },
+          {
+            "value": "h3",
+            "name": "h3",
+            "description": "Indicates that headers up to a level of h3 will be considered while grouping markdown content."
+          },
+          {
+            "value": "h4",
+            "name": "h4",
+            "description": "Indicates that headers up to a level of h4 will be considered while grouping markdown content."
+          },
+          {
+            "value": "h5",
+            "name": "h5",
+            "description": "Indicates that headers up to a level of h5 will be considered while grouping markdown content."
+          },
+          {
+            "value": "h6",
+            "name": "h6",
+            "description": "Indicates that headers up to a level of h6 will be considered while grouping markdown content. This is the default."
+          }
+        ]
+      },
+      "default": "h6",
+      "description": "Specifies the max header depth that will be considered while grouping markdown content."
     },
     "ExecutionEnvironment": {
       "type": "string",
@@ -8944,6 +9076,53 @@
       },
       "required": [
         "key"
+      ]
+    },
+    "AIServicesAccountKey": {
+      "description": "The multi-region account key of an Azure AI service resource that's attached to a skillset.",
+      "x-ms-discriminator-value": "#Microsoft.Azure.Search.AIServicesByKey",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CognitiveServicesAccount"
+        }
+      ],
+      "properties": {
+        "key": {
+          "type": "string",
+          "description": "The key used to provision the Azure AI service resource attached to a skillset."
+        },
+        "subdomainUrl": {
+          "type": "string",
+          "description": "The subdomain url for the corresponding AI Service."
+        }
+      },
+      "required": [
+        "key",
+        "subdomainUrl"
+      ]
+    },
+    "AIServicesAccountIdentity": {
+      "description": "The multi-region account of an Azure AI service resource that's attached to a skillset.",
+      "x-ms-discriminator-value": "#Microsoft.Azure.Search.AIServicesByIdentity",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CognitiveServicesAccount"
+        }
+      ],
+      "properties": {
+        "identity": {
+          "$ref": "#/definitions/SearchIndexerDataIdentity",
+          "x-nullable": true,
+          "description": "The user-assigned managed identity used for connections to AI Service. If not specified, the system-assigned managed identity is used. On updates to the skillset, if the identity is unspecified, the value remains unchanged. If set to \"none\", the value of this property is cleared."
+        },
+        "subdomainUrl": {
+          "type": "string",
+          "description": "The subdomain url for the corresponding AI Service."
+        }
+      },
+      "required": [
+        "identity",
+        "subdomainUrl"
       ]
     },
     "SearchIndexerSkill": {

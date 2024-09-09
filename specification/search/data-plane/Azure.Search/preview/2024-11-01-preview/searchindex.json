@@ -434,7 +434,7 @@
                 }
               ]
             },
-            "description": "This parameter is only valid if the query type is `semantic`. If set, the query returns answers extracted from key passages in the highest ranked documents. The number of answers returned can be configured by appending the pipe character `|` followed by the `count-<number of answers>` option after the answers parameter value, such as `extractive|count-3`. Default count is 1. The confidence threshold can be configured by appending the pipe character `|` followed by the `threshold-<confidence threshold>` option after the answers parameter value, such as `extractive|threshold-0.9`. Default threshold is 0.7.",
+            "description": "This parameter is only valid if the query type is `semantic`. If set, the query returns answers extracted from key passages in the highest ranked documents. The number of answers returned can be configured by appending the pipe character `|` followed by the `count-<number of answers>` option after the answers parameter value, such as `extractive|count-3`. Default count is 1. The confidence threshold can be configured by appending the pipe character `|` followed by the `threshold-<confidence threshold>` option after the answers parameter value, such as `extractive|threshold-0.9`. Default threshold is 0.7. The maximum character length of answers can be configured by appending the pipe character '|' followed by the 'count-<number of maximum character length>', such as 'extractive|maxcharlength-600'.",
             "x-ms-parameter-grouping": {
               "name": "SearchOptions"
             }
@@ -463,7 +463,36 @@
                 }
               ]
             },
-            "description": "This parameter is only valid if the query type is `semantic`. If set, the query returns captions extracted from key passages in the highest ranked documents. When Captions is set to `extractive`, highlighting is enabled by default, and can be configured by appending the pipe character `|` followed by the `highlight-<true/false>` option, such as `extractive|highlight-true`. Defaults to `None`.",
+            "description": "This parameter is only valid if the query type is `semantic`. If set, the query returns captions extracted from key passages in the highest ranked documents. When Captions is set to `extractive`, highlighting is enabled by default, and can be configured by appending the pipe character `|` followed by the `highlight-<true/false>` option, such as `extractive|highlight-true`. Defaults to `None`. The maximum character length of captions can be configured by appending the pipe character '|' followed by the 'count-<number of maximum character length>', such as 'extractive|maxcharlength-600'.",
+            "x-ms-parameter-grouping": {
+              "name": "SearchOptions"
+            }
+          },
+          {
+            "name": "queryRewrites",
+            "in": "query",
+            "type": "string",
+            "enum": [
+              "none",
+              "generative"
+            ],
+            "x-ms-enum": {
+              "name": "QueryRewritesType",
+              "modelAsString": true,
+              "values": [
+                {
+                  "value": "none",
+                  "name": "None",
+                  "description": "Do not generate additional query rewrites for this query."
+                },
+                {
+                  "value": "generative",
+                  "name": "Generative",
+                  "description": "Generate alternative query terms to increase the recall of a search request."
+                }
+              ]
+            },
+            "description": "When QueryRewrites is set to `generative`, the query terms are sent to a generate model which will produce 10 (default) rewrites to help increase the recall of the request. The requested count can be configured by appending the pipe character `|` followed by the `count-<number of rewrites>` option, such as `generative|count-3`. Defaults to `None`. This parameter is only valid if the query type is `semantic`.",
             "x-ms-parameter-grouping": {
               "name": "SearchOptions"
             }
@@ -484,7 +513,8 @@
             "enum": [
               "disabled",
               "semantic",
-              "vector"
+              "vector",
+              "queryRewrites"
             ],
             "x-ms-enum": {
               "name": "QueryDebugMode",
@@ -504,6 +534,11 @@
                   "value": "vector",
                   "name": "Vector",
                   "description": "Allows the user to further explore their hybrid and vector query results."
+                },
+                {
+                  "value": "queryRewrites",
+                  "name": "QueryRewrites",
+                  "description": "Allows the user to explore the list of query rewrites generated for their search request."
                 }
               ]
             },
@@ -1213,6 +1248,16 @@
       "additionalProperties": true,
       "description": "A result containing a document found by a suggestion query, plus associated metadata."
     },
+    "SearchFacetsResult": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "array",
+        "items": {
+          "$ref": "#/definitions/FacetResult"
+        }
+      },
+      "readOnly": true
+    },
     "FacetResult": {
       "properties": {
         "count": {
@@ -1220,6 +1265,12 @@
           "format": "int64",
           "readOnly": true,
           "description": "The approximate count of documents falling within the bucket described by this facet."
+        },
+        "@search.facets": {
+          "$ref": "#/definitions/SearchFacetsResult",
+          "readOnly": true,
+          "x-ms-client-name": "Facets",
+          "description": "The nested facet query results for the search operation, organized as a collection of buckets for each faceted field; null if the query did not contain any nested facets."
         }
       },
       "additionalProperties": true,
@@ -1242,13 +1293,7 @@
           "description": "A value indicating the percentage of the index that was included in the query, or null if minimumCoverage was not specified in the request."
         },
         "@search.facets": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "array",
-            "items": {
-              "$ref": "#/definitions/FacetResult"
-            }
-          },
+          "$ref": "#/definitions/SearchFacetsResult",
           "readOnly": true,
           "x-ms-client-name": "Facets",
           "description": "The facet query results for the search operation, organized as a collection of buckets for each faceted field; null if the query did not include any facet expressions."
@@ -1479,7 +1524,9 @@
       "type": "string",
       "enum": [
         "disabled",
-        "semantic"
+        "semantic",
+        "vector",
+        "queryRewrites"
       ],
       "x-ms-enum": {
         "name": "QueryDebugMode",
@@ -1494,6 +1541,16 @@
             "value": "semantic",
             "name": "Semantic",
             "description": "Allows the user to further explore their reranked results."
+          },
+          {
+            "value": "vector",
+            "name": "Vector",
+            "description": "Allows the user to further explore their hybrid and vector query results."
+          },
+          {
+            "value": "queryRewrites",
+            "name": "QueryRewrites",
+            "description": "Allows the user to explore the list of query rewrites generated for their search request."
           }
         ]
       },
@@ -1659,6 +1716,10 @@
         "text": {
           "type": "string",
           "description": "The text to be vectorized to perform a vector search query."
+        },
+        "queryRewrites": {
+          "$ref": "#/definitions/QueryRewrites",
+          "description": "Can be configured to let a generative model rewrite the query before sending it to be vectorized."
         }
       },
       "required": [
@@ -2839,7 +2900,7 @@
           }
         ]
       },
-      "description": "This parameter is only valid if the query type is `semantic`. If set, the query returns answers extracted from key passages in the highest ranked documents. The number of answers returned can be configured by appending the pipe character `|` followed by the `count-<number of answers>` option after the answers parameter value, such as `extractive|count-3`. Default count is 1. The confidence threshold can be configured by appending the pipe character `|` followed by the `threshold-<confidence threshold>` option after the answers parameter value, such as `extractive|threshold-0.9`. Default threshold is 0.7."
+      "description": "This parameter is only valid if the query type is `semantic`. If set, the query returns answers extracted from key passages in the highest ranked documents. The number of answers returned can be configured by appending the pipe character `|` followed by the `count-<number of answers>` option after the answers parameter value, such as `extractive|count-3`. Default count is 1. The confidence threshold can be configured by appending the pipe character `|` followed by the `threshold-<confidence threshold>` option after the answers parameter value, such as `extractive|threshold-0.9`. Default threshold is 0.7. The maximum character length of answers can be configured by appending the pipe character '|' followed by the 'count-<number of maximum character length>', such as 'extractive|maxcharlength-600'."
     },
     "Captions": {
       "type": "string",
@@ -2863,7 +2924,31 @@
           }
         ]
       },
-      "description": "This parameter is only valid if the query type is `semantic`. If set, the query returns captions extracted from key passages in the highest ranked documents. When Captions is set to `extractive`, highlighting is enabled by default, and can be configured by appending the pipe character `|` followed by the `highlight-<true/false>` option, such as `extractive|highlight-true`. Defaults to `None`."
+      "description": "This parameter is only valid if the query type is `semantic`. If set, the query returns captions extracted from key passages in the highest ranked documents. When Captions is set to `extractive`, highlighting is enabled by default, and can be configured by appending the pipe character `|` followed by the `highlight-<true/false>` option, such as `extractive|highlight-true`. Defaults to `None`. The maximum character length of captions can be configured by appending the pipe character '|' followed by the 'count-<number of maximum character length>', such as 'extractive|maxcharlength-600'."
+    },
+    "QueryRewrites": {
+      "type": "string",
+      "enum": [
+        "none",
+        "generative"
+      ],
+      "x-ms-enum": {
+        "name": "QueryRewritesType",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "none",
+            "name": "None",
+            "description": "Do not generate additional query rewrites for this query."
+          },
+          {
+            "value": "generative",
+            "name": "Generative",
+            "description": "Generate alternative query terms to increase the recall of a search request."
+          }
+        ]
+      },
+      "description": "When QueryRewrites is set to `generative`, the query terms are sent to a generate model which will produce 10 (default) rewrites to help increase the recall of the request. The requested count can be configured by appending the pipe character `|` followed by the `count-<number of rewrites>` option, such as `generative|count-3`. Defaults to `None`. This parameter is only valid if the query type is `semantic`."
     },
     "DocumentDebugInfo": {
       "type": "object",
@@ -2877,6 +2962,11 @@
           "$ref": "#/definitions/VectorsDebugInfo",
           "readOnly": true,
           "description": "Contains debugging information specific to vector and hybrid search."
+        },
+        "queryRewrites": {
+          "$ref": "#/definitions/QueryRewritesDebugInfo",
+          "readOnly": true,
+          "description": "Contains debugging information specific to query rewrites."
         }
       },
       "description": "Contains debugging information that can be used to further explore your search results."
@@ -3054,6 +3144,37 @@
       },
       "readOnly": true,
       "description": "A single vector field result. Both @search.score and vector similarity values are returned. Vector similarity is related to @search.score by an equation."
+    },
+    "QueryRewritesDebugInfo": {
+      "type": "object",
+      "properties": {
+        "text": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true,
+          "description": "List of query rewrites generated for the text query."
+        },
+        "vectors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VectorQueryRewritesDebugInfo"
+          },
+          "readOnly": true,
+          "description": "List of query rewrites generated for the vectorizable text queries."
+        }
+      },
+      "readOnly": true,
+      "description": "Contains debugging information specific to query rewrites."
+    },
+    "VectorQueryRewritesDebugInfo": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "readOnly": true,
+      "description": "List of query rewrites generated for the vectorizable text queries."
     }
   },
   "parameters": {
