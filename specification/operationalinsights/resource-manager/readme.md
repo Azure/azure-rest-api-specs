@@ -45,6 +45,33 @@ These settings apply only when `--tag=package-2023-09` is specified on the comma
 
 ```yaml $(tag) == 'package-2023-09'
 input-file:
+  - Microsoft.OperationalInsights/stable/2023-09-01/AvailableServiceTiers.json
+  - Microsoft.OperationalInsights/stable/2023-09-01/Clusters.json
+  - Microsoft.OperationalInsights/stable/2023-09-01/DataExports.json
+  - Microsoft.OperationalInsights/stable/2023-09-01/DataSources.json
+  - Microsoft.OperationalInsights/stable/2023-09-01/Gateways.json
+  - Microsoft.OperationalInsights/stable/2023-09-01/IntelligencePacks.json
+  - Microsoft.OperationalInsights/stable/2023-09-01/LinkedServices.json
+  - Microsoft.OperationalInsights/stable/2023-09-01/LinkedStorageAccounts.json
+  - Microsoft.OperationalInsights/stable/2023-09-01/ManagementGroups.json
+  - Microsoft.OperationalInsights/stable/2023-09-01/Operations.json
+  - Microsoft.OperationalInsights/stable/2023-09-01/OperationStatuses.json
+  - Microsoft.OperationalInsights/stable/2023-09-01/SavedSearches.json
+  - Microsoft.OperationalInsights/stable/2023-09-01/Schema.json
+  - Microsoft.OperationalInsights/stable/2023-09-01/SharedKeys.json
+  - Microsoft.OperationalInsights/stable/2023-09-01/StorageInsightConfigs.json
+  - Microsoft.OperationalInsights/stable/2023-09-01/Tables.json
+  - Microsoft.OperationalInsights/stable/2023-09-01/Usages.json
+  - Microsoft.OperationalInsights/stable/2023-09-01/WorkspacePurge.json
+  - Microsoft.OperationalInsights/stable/2023-09-01/Workspaces.json
+```
+
+### Tag: package-2023-09
+
+These settings apply only when `--tag=package-2023-09` is specified on the command line.
+
+```yaml $(tag) == 'package-2023-09'
+input-file:
 - Microsoft.OperationalInsights/stable/2023-09-01/Operations.json
 - Microsoft.OperationalInsights/stable/2023-09-01/Workspaces.json
 - Microsoft.OperationalInsights/stable/2022-10-01/Tables.json
