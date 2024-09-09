@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2024-07-26-preview",
+    "version": "2024-08-22-preview",
     "title": "ConfidentialLedgerClient",
     "description": "The ConfidentialLedgerClient writes and retrieves ledger entries against the Confidential Ledger service."
   },
@@ -523,11 +523,11 @@
         }
       }
     },
-    "/app/user-defined-endpoints ": {
+    "/app/user-defined-endpoints": {
       "get": {
         "operationId": "GetUserDefinedEndpoint",
         "x-ms-examples": {
-          " GetUserDefinedEndpoint ": {
+          "GetUserDefinedEndpoint": {
             "$ref": "./examples/ledger/GetUserDefinedEndpoint.json"
           }
         },
@@ -551,7 +551,7 @@
       "put": {
         "operationId": "CreateUserDefinedEndpoint",
         "x-ms-examples": {
-          " CreateUserDefinedEndpoint ": {
+          "CreateUserDefinedEndpoint": {
             "$ref": "./examples/ledger/CreateUserDefinedEndpoint.json"
           }
         },
@@ -575,11 +575,11 @@
         }
       }
     },
-    "/app/user-defined-endpoints/run-time-options ": {
+    "/app/user-defined-endpoints/run-time-options": {
       "get": {
         "operationId": " GetRuntimeOptions ",
         "x-ms-examples": {
-          " GetRuntimeOptions ": {
+          "GetRuntimeOptions": {
             "$ref": "./examples/ledger/GetRuntimeOptions.json"
           }
         },
@@ -601,9 +601,9 @@
         }
       },
       "patch": {
-        "operationId": " PatchRuntimeOptions ",
+        "operationId": "PatchRuntimeOptions",
         "x-ms-examples": {
-          " PatchRuntimeOptions ": {
+          "PatchRuntimeOptions": {
             "$ref": "./examples/ledger/PatchRuntimeOptions.json"
           }
         },
@@ -625,11 +625,11 @@
         }
       }
     },
-    "/app/user-defined-endpoints/modules ": {
+    "/app/user-defined-endpoints/modules": {
       "get": {
-        "operationId": " GetUserDefinedEndpointsModule ",
+        "operationId": "GetUserDefinedEndpointsModule",
         "x-ms-examples": {
-          " GetUserDefinedEndpointsModule ": {
+          "GetUserDefinedEndpointsModule": {
             "$ref": "./examples/ledger/GetUserDefinedEndpointsModule.json"
           }
         },
@@ -653,11 +653,11 @@
         }
       }
     },
-    "/app/roles ": {
+    "/app/roles": {
       "get": {
         "operationId": "GetUserDefinedRole",
         "x-ms-examples": {
-          " GetUserDefinedRole ": {
+          "GetUserDefinedRole": {
             "$ref": "./examples/ledger/GetUserDefinedRole.json"
           }
         },
@@ -686,7 +686,7 @@
       "put": {
         "operationId": "PutUserDefinedRole",
         "x-ms-examples": {
-          " PutUserDefinedRole ": {
+          "PutUserDefinedRole": {
             "$ref": "./examples/ledger/PutUserDefinedRole.json"
           }
         },
@@ -712,7 +712,7 @@
       "patch": {
         "operationId": "PatchUserDefinedRole",
         "x-ms-examples": {
-          " PatchUserDefinedRole ": {
+          "PatchUserDefinedRole": {
             "$ref": "./examples/ledger/PatchUserDefinedRole.json"
           }
         },
@@ -738,7 +738,7 @@
       "delete": {
         "operationId": "DeleteUserDefinedRole",
         "x-ms-examples": {
-          " DeleteUserDefinedRole ": {
+          "DeleteUserDefinedRole": {
             "$ref": "./examples/ledger/DeleteUserDefinedRole.json"
           }
         },
@@ -1491,7 +1491,7 @@
           "description": "name of the user defined role",
           "type": "string"
         },
-        "roleAction": {
+        "roleActions": {
           "items": {
             "$ref": "#/definitions/RoleActionDef"
           },
@@ -1505,13 +1505,13 @@
     },
     "RoleActionDef": {
       "properties": {
-        "roleAction": {
+        "roleActions": {
           "description": "action of the user defined role",
           "type": "string"
         }
       },
       "required": [
-        "roleAction"
+        "roleActions"
       ],
       "type": "string"
     }
