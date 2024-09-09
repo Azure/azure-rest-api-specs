@@ -15,8 +15,8 @@ using Azure.Core.Traits;
 namespace Language.Authoring;
 
 alias ServiceTraits = NoRepeatableRequests &
-	NoConditionalRequests &
-	NoClientRequestId;
+  NoConditionalRequests &
+  NoClientRequestId;
 
 alias languageOperations = ResourceOperations<ServiceTraits, ErrorResponse>;
 
@@ -45,16 +45,16 @@ op createProject is languageOperations.ResourceCreateOrUpdate<ProjectMetadata>;
 @delete
 @pollingOperation(getProjectDeletionStatus)
 op deleteProject is Foundations.LongRunningOperation<
-	{
-		/**
-		 * The project name.
-		 */
-		@path
-		projectName: string;
-	},
-	AcceptedResponse,
-	{},
-	ErrorResponse
+  {
+    /**
+     * The project name.
+     */
+    @path
+    projectName: string;
+  },
+  AcceptedResponse,
+  {},
+  ErrorResponse
 >;
 
 /**
@@ -66,9 +66,9 @@ op deleteProject is Foundations.LongRunningOperation<
 @post
 @actionSeparator("/:")
 op `authorize-copy` is languageOperations.ResourceAction<
-	ProjectMetadata,
-	CopyAuthorizationOptions,
-	CopyProjectOptions
+  ProjectMetadata,
+  CopyAuthorizationOptions,
+  CopyProjectOptions
 >;
 
 /**
@@ -80,22 +80,22 @@ op `authorize-copy` is languageOperations.ResourceAction<
 @post
 @pollingOperation(getCopyProjectStatus)
 op copyProject is Foundations.LongRunningOperation<
-	{
-		/**
-		 * The project name.
-		 */
-		@path
-		projectName: string;
+  {
+    /**
+     * The project name.
+     */
+    @path
+    projectName: string;
 
-		/**
-		 * The copy project info.
-		 */
-		@body
-		body: CopyProjectOptions;
-	},
-	AcceptedResponse,
-	{},
-	ErrorResponse
+    /**
+     * The copy project info.
+     */
+    @body
+    body: CopyProjectOptions;
+  },
+  AcceptedResponse,
+  {},
+  ErrorResponse
 >;
 
 /**
@@ -107,42 +107,42 @@ op copyProject is Foundations.LongRunningOperation<
 @post
 @pollingOperation(getExportStatus)
 op export is Foundations.LongRunningOperation<
-	{
-		/**
-		 * The project name.
-		 */
-		@path
-		projectName: string;
+  {
+    /**
+     * The project name.
+     */
+    @path
+    projectName: string;
 
-		/**
-		 * The format of the exported project file to use.
-		 */
-		@query("format")
-		format?: ExportedProjectFormat;
+    /**
+     * The format of the exported project file to use.
+     */
+    @query("format")
+    format?: ExportedProjectFormat;
 
-		/**
-		 * Specifies the method used to interpret string offsets. For additional
-		 * information see https://aka.ms/text-analytics-offsets.
-		 */
-		@query("stringIndexType")
-		stringIndexType: StringIndexType;
+    /**
+     * Specifies the method used to interpret string offsets. For additional
+     * information see https://aka.ms/text-analytics-offsets.
+     */
+    @query("stringIndexType")
+    stringIndexType: StringIndexType;
 
-		/**
-		 * Kind of asset to export.
-		 */
-		@query("assetKind")
-		assetKind?: string;
+    /**
+     * Kind of asset to export.
+     */
+    @query("assetKind")
+    assetKind?: string;
 
-		/**
-		 * Trained model label to export. If the trainedModelLabel is null, the default
-		 * behavior is to export the current working copy.
-		 */
-		@query("trainedModelLabel")
-		trainedModelLabel?: string;
-	},
-	AcceptedResponse,
-	{},
-	ErrorResponse
+    /**
+     * Trained model label to export. If the trainedModelLabel is null, the default
+     * behavior is to export the current working copy.
+     */
+    @query("trainedModelLabel")
+    trainedModelLabel?: string;
+  },
+  AcceptedResponse,
+  {},
+  ErrorResponse
 >;
 
 /**
@@ -155,28 +155,28 @@ op export is Foundations.LongRunningOperation<
 @post
 @pollingOperation(getImportStatus)
 op `import` is Foundations.LongRunningOperation<
-	{
-		/**
-		 * The project name.
-		 */
-		@path
-		projectName: string;
+  {
+    /**
+     * The project name.
+     */
+    @path
+    projectName: string;
 
-		/**
-		 * The format of the exported project file to use.
-		 */
-		@query("format")
-		format?: ExportedProjectFormat;
+    /**
+     * The format of the exported project file to use.
+     */
+    @query("format")
+    format?: ExportedProjectFormat;
 
-		/**
-		 * The project data to import.
-		 */
-		@body
-		body: ExportedProject;
-	},
-	AcceptedResponse,
-	{},
-	ErrorResponse
+    /**
+     * The project data to import.
+     */
+    @body
+    body: ExportedProject;
+  },
+  AcceptedResponse,
+  {},
+  ErrorResponse
 >;
 
 /**
@@ -188,22 +188,22 @@ op `import` is Foundations.LongRunningOperation<
 @post
 @pollingOperation(getTrainingStatus)
 op train is Foundations.LongRunningOperation<
-	{
-		/**
-		 * The project name.
-		 */
-		@path
-		projectName: string;
+  {
+    /**
+     * The project name.
+     */
+    @path
+    projectName: string;
 
-		/**
-		 * The training input parameters.
-		 */
-		@body
-		body: TrainingJobOptions;
-	},
-	AcceptedResponse,
-	{},
-	ErrorResponse
+    /**
+     * The training input parameters.
+     */
+    @body
+    body: TrainingJobOptions;
+  },
+  AcceptedResponse,
+  {},
+  ErrorResponse
 >;
 
 /**
@@ -214,20 +214,20 @@ op train is Foundations.LongRunningOperation<
 @route("/authoring/analyze-conversations/projects/{projectName}/copy/jobs/{jobId}")
 @get
 op getCopyProjectStatus is Foundations.Operation<
-	{
-		/**
-		 * The project name.
-		 */
-		@path
-		projectName: string;
+  {
+    /**
+     * The project name.
+     */
+    @path
+    projectName: string;
 
-		/**
-		 * The job ID.
-		 */
-		@path
-		jobId: string;
-	},
-	CopyProjectJobState
+    /**
+     * The job ID.
+     */
+    @path
+    jobId: string;
+  },
+  CopyProjectJobState
 >;
 
 /**
@@ -237,8 +237,8 @@ op getCopyProjectStatus is Foundations.Operation<
 @summary("List deployments")
 @get
 op listDeployments is languageOperations.ResourceList<
-	ProjectDeployment,
-	ListProjectsQueryParameters
+  ProjectDeployment,
+  ListProjectsQueryParameters
 >;
 
 /**
@@ -257,28 +257,28 @@ op getDeployment is languageOperations.ResourceRead<ProjectDeployment>;
 @put
 @pollingOperation(getDeploymentStatus)
 op deployProject is Foundations.LongRunningOperation<
-	{
-		/**
-		 * The project name.
-		 */
-		@path
-		projectName: string;
+  {
+    /**
+     * The project name.
+     */
+    @path
+    projectName: string;
 
-		/**
-		 * The deployment name.
-		 */
-		@path
-		deploymentName: string;
+    /**
+     * The deployment name.
+     */
+    @path
+    deploymentName: string;
 
-		/**
-		 * The new deployment info.
-		 */
-		@body
-		body: CreateDeploymentOptions;
-	},
-	AcceptedResponse,
-	{},
-	ErrorResponse
+    /**
+     * The new deployment info.
+     */
+    @body
+    body: CreateDeploymentOptions;
+  },
+  AcceptedResponse,
+  {},
+  ErrorResponse
 >;
 
 /**
@@ -290,22 +290,22 @@ op deployProject is Foundations.LongRunningOperation<
 @delete
 @pollingOperation(getDeploymentStatus)
 op deleteDeployment is Foundations.LongRunningOperation<
-	{
-		/**
-		 * The project name.
-		 */
-		@path
-		projectName: string;
+  {
+    /**
+     * The project name.
+     */
+    @path
+    projectName: string;
 
-		/**
-		 * The deployment name.
-		 */
-		@path
-		deploymentName: string;
-	},
-	AcceptedResponse,
-	{},
-	ErrorResponse
+    /**
+     * The deployment name.
+     */
+    @path
+    deploymentName: string;
+  },
+  AcceptedResponse,
+  {},
+  ErrorResponse
 >;
 
 /**
@@ -317,28 +317,28 @@ op deleteDeployment is Foundations.LongRunningOperation<
 @post
 @pollingOperation(getDeploymentDeleteFromResourcesStatus)
 op deleteDeploymentFromResources is Foundations.LongRunningOperation<
-	{
-		/**
-		 * The project name.
-		 */
-		@path
-		projectName: string;
+  {
+    /**
+     * The project name.
+     */
+    @path
+    projectName: string;
 
-		/**
-		 * The deployment name.
-		 */
-		@path
-		deploymentName: string;
+    /**
+     * The deployment name.
+     */
+    @path
+    deploymentName: string;
 
-		/**
-		 * The options for deleting the deployment.
-		 */
-		@body
-		body: DeleteDeploymentOptions;
-	},
-	AcceptedResponse,
-	{},
-	ErrorResponse
+    /**
+     * The options for deleting the deployment.
+     */
+    @body
+    body: DeleteDeploymentOptions;
+  },
+  AcceptedResponse,
+  {},
+  ErrorResponse
 >;
 /**
  * Gets the status of an existing delete deployment from specific resources job.
@@ -348,26 +348,26 @@ op deleteDeploymentFromResources is Foundations.LongRunningOperation<
 @route("/authoring/analyze-conversations/projects/{projectName}/deployments/{deploymentName}/delete-from-resources/jobs/{jobId}")
 @get
 op getDeploymentDeleteFromResourcesStatus is Foundations.Operation<
-	{
-		/**
-		 * The project name.
-		 */
-		@path
-		projectName: string;
+  {
+    /**
+     * The project name.
+     */
+    @path
+    projectName: string;
 
-		/**
-		 * The deployment name.
-		 */
-		@path
-		deploymentName: string;
+    /**
+     * The deployment name.
+     */
+    @path
+    deploymentName: string;
 
-		/**
-		 * The job ID.
-		 */
-		@path
-		jobId: string;
-	},
-	DeploymentJobState
+    /**
+     * The job ID.
+     */
+    @path
+    jobId: string;
+  },
+  DeploymentJobState
 >;
 
 /**
@@ -378,26 +378,26 @@ op getDeploymentDeleteFromResourcesStatus is Foundations.Operation<
 @route("/authoring/analyze-conversations/projects/{projectName}/deployments/{deploymentName}/jobs/{jobId}")
 @get
 op getDeploymentStatus is Foundations.Operation<
-	{
-		/**
-		 * The project name.
-		 */
-		@path
-		projectName: string;
+  {
+    /**
+     * The project name.
+     */
+    @path
+    projectName: string;
 
-		/**
-		 * The deployment name.
-		 */
-		@path
-		deploymentName: string;
+    /**
+     * The deployment name.
+     */
+    @path
+    deploymentName: string;
 
-		/**
-		 * The job ID.
-		 */
-		@path
-		jobId: string;
-	},
-	DeploymentJobState
+    /**
+     * The job ID.
+     */
+    @path
+    jobId: string;
+  },
+  DeploymentJobState
 >;
 
 /**
@@ -409,22 +409,22 @@ op getDeploymentStatus is Foundations.Operation<
 @post
 @pollingOperation(getSwapDeploymentsStatus)
 op swapDeployments is Foundations.LongRunningOperation<
-	{
-		/**
-		 * The project name.
-		 */
-		@path
-		projectName: string;
+  {
+    /**
+     * The project name.
+     */
+    @path
+    projectName: string;
 
-		/**
-		 * The job object to swap two deployments.
-		 */
-		@body
-		body: SwapDeploymentsOptions;
-	},
-	AcceptedResponse,
-	{},
-	ErrorResponse
+    /**
+     * The job object to swap two deployments.
+     */
+    @body
+    body: SwapDeploymentsOptions;
+  },
+  AcceptedResponse,
+  {},
+  ErrorResponse
 >;
 
 /**
@@ -435,20 +435,20 @@ op swapDeployments is Foundations.LongRunningOperation<
 @route("/authoring/analyze-conversations/projects/{projectName}/deployments/swap/jobs/{jobId}")
 @get
 op getSwapDeploymentsStatus is Foundations.Operation<
-	{
-		/**
-		 * The project name.
-		 */
-		@path
-		projectName: string;
+  {
+    /**
+     * The project name.
+     */
+    @path
+    projectName: string;
 
-		/**
-		 * The job ID.
-		 */
-		@path
-		jobId: string;
-	},
-	DeploymentJobState
+    /**
+     * The job ID.
+     */
+    @path
+    jobId: string;
+  },
+  DeploymentJobState
 >;
 
 /**
@@ -460,20 +460,20 @@ op getSwapDeploymentsStatus is Foundations.Operation<
 @route("/authoring/analyze-conversations/projects/{projectName}/export/jobs/{jobId}")
 @get
 op getExportStatus is Foundations.Operation<
-	{
-		/**
-		 * The project name.
-		 */
-		@path
-		projectName: string;
+  {
+    /**
+     * The project name.
+     */
+    @path
+    projectName: string;
 
-		/**
-		 * The job ID.
-		 */
-		@path
-		jobId: string;
-	},
-	ExportProjectJobState
+    /**
+     * The job ID.
+     */
+    @path
+    jobId: string;
+  },
+  ExportProjectJobState
 >;
 
 /**
@@ -484,20 +484,20 @@ op getExportStatus is Foundations.Operation<
 @route("/projects/{projectName}/export/jobs/{jobId}/result")
 @get
 op getExportResult is Foundations.Operation<
-	{
-		/**
-		 * The project name.
-		 */
-		@path
-		projectName: string;
+  {
+    /**
+     * The project name.
+     */
+    @path
+    projectName: string;
 
-		/**
-		 * The job ID.
-		 */
-		@path
-		jobId: string;
-	},
-	ExportedProject
+    /**
+     * The job ID.
+     */
+    @path
+    jobId: string;
+  },
+  ExportedProject
 >;
 
 /**
@@ -508,20 +508,20 @@ op getExportResult is Foundations.Operation<
 @route("/authoring/analyze-conversations/projects/{projectName}/import/jobs/{jobId}")
 @get
 op getImportStatus is Foundations.Operation<
-	{
-		/**
-		 * The project name.
-		 */
-		@path
-		projectName: string;
+  {
+    /**
+     * The project name.
+     */
+    @path
+    projectName: string;
 
-		/**
-		 * The job ID.
-		 */
-		@path
-		jobId: string;
-	},
-	ImportProjectJobState
+    /**
+     * The job ID.
+     */
+    @path
+    jobId: string;
+  },
+  ImportProjectJobState
 >;
 
 /**
@@ -530,8 +530,8 @@ op getImportStatus is Foundations.Operation<
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @summary("List trained models")
 op listTrainedModels is languageOperations.ResourceList<
-	ProjectTrainedModel,
-	ListProjectsQueryParameters
+  ProjectTrainedModel,
+  ListProjectsQueryParameters
 >;
 
 /**
@@ -556,28 +556,28 @@ op deleteTrainedModel is languageOperations.ResourceDelete<ProjectTrainedModel>;
 @post
 @pollingOperation(getEvaluationStatus)
 op evaluateModel is Foundations.LongRunningOperation<
-	{
-		/**
-		 * The project name.
-		 */
-		@path
-		projectName: string;
+  {
+    /**
+     * The project name.
+     */
+    @path
+    projectName: string;
 
-		/**
-		 * The trained model label.
-		 */
-		@path
-		trainedModelLabel: string;
+    /**
+     * The trained model label.
+     */
+    @path
+    trainedModelLabel: string;
 
-		/**
-		 * The split kind and percentage for the testing dataset.
-		 */
-		@body
-		body: EvaluationOnDemandOptions;
-	},
-	AcceptedResponse,
-	{},
-	ErrorResponse
+    /**
+     * The split kind and percentage for the testing dataset.
+     */
+    @body
+    body: EvaluationOnDemandOptions;
+  },
+  AcceptedResponse,
+  {},
+  ErrorResponse
 >;
 
 /**
@@ -590,22 +590,22 @@ op evaluateModel is Foundations.LongRunningOperation<
 @post
 @pollingOperation(getLoadSnapshotStatus)
 op loadSnapshot is Foundations.LongRunningOperation<
-	{
-		/**
-		 * The project name.
-		 */
-		@path
-		projectName: string;
+  {
+    /**
+     * The project name.
+     */
+    @path
+    projectName: string;
 
-		/**
-		 * The trained model label.
-		 */
-		@path
-		trainedModelLabel: string;
-	},
-	AcceptedResponse,
-	{},
-	ErrorResponse
+    /**
+     * The trained model label.
+     */
+    @path
+    trainedModelLabel: string;
+  },
+  AcceptedResponse,
+  {},
+  ErrorResponse
 >;
 
 /**
@@ -616,26 +616,26 @@ op loadSnapshot is Foundations.LongRunningOperation<
 @route("/authoring/analyze-conversations/projects/{projectName}/models/{trainedModelLabel}/evaluate/jobs/{jobId}")
 @get
 op getEvaluationStatus is Foundations.Operation<
-	{
-		/**
-		 * The project name.
-		 */
-		@path
-		projectName: string;
+  {
+    /**
+     * The project name.
+     */
+    @path
+    projectName: string;
 
-		/**
-		 * The trained model label.
-		 */
-		@path
-		trainedModelLabel: string;
+    /**
+     * The trained model label.
+     */
+    @path
+    trainedModelLabel: string;
 
-		/**
-		 * The job ID.
-		 */
-		@path
-		jobId: string;
-	},
-	EvaluationJobState
+    /**
+     * The job ID.
+     */
+    @path
+    jobId: string;
+  },
+  EvaluationJobState
 >;
 
 /**
@@ -647,45 +647,45 @@ op getEvaluationStatus is Foundations.Operation<
 @route("/authoring/analyze-conversations/projects/{projectName}/models/{trainedModelLabel}/evaluation/result")
 @get
 op getModelEvaluationResults is Foundations.Operation<
-	{
-		/**
-		 * The project name.
-		 */
-		@path
-		projectName: string;
+  {
+    /**
+     * The project name.
+     */
+    @path
+    projectName: string;
 
-		/**
-		 * The trained model label.
-		 */
-		@path
-		trainedModelLabel: string;
+    /**
+     * The trained model label.
+     */
+    @path
+    trainedModelLabel: string;
 
-		/**
-		 * Specifies the method used to interpret string offsets. For additional
-		 * information see https://aka.ms/text-analytics-offsets.
-		 */
-		@query("stringIndexType")
-		stringIndexType: StringIndexType;
+    /**
+     * Specifies the method used to interpret string offsets. For additional
+     * information see https://aka.ms/text-analytics-offsets.
+     */
+    @query("stringIndexType")
+    stringIndexType: StringIndexType;
 
-		/**
-		 * The number of utterances to be returned.
-		 */
-		@query("top")
-		top?: int32;
+    /**
+     * The number of utterances to be returned.
+     */
+    @query("top")
+    top?: int32;
 
-		/**
-		 * The offset in the response.
-		 */
-		@query("skip")
-		skip?: int32;
+    /**
+     * The offset in the response.
+     */
+    @query("skip")
+    skip?: int32;
 
-		/**
-		 * The maximum number of utterances per page.
-		 */
-		@query("maxpagesize")
-		maxpagesize?: int32;
-	},
-	EvaluationResults
+    /**
+     * The maximum number of utterances per page.
+     */
+    @query("maxpagesize")
+    maxpagesize?: int32;
+  },
+  EvaluationResults
 >;
 
 /**
@@ -697,20 +697,20 @@ op getModelEvaluationResults is Foundations.Operation<
 @route("/authoring/analyze-conversations/projects/{projectName}/models/{trainedModelLabel}/evaluation/summary-result")
 @get
 op getModelEvaluationSummary is Foundations.Operation<
-	{
-		/**
-		 * The project name.
-		 */
-		@path
-		projectName: string;
+  {
+    /**
+     * The project name.
+     */
+    @path
+    projectName: string;
 
-		/**
-		 * The trained model label.
-		 */
-		@path
-		trainedModelLabel: string;
-	},
-	EvaluationSummary
+    /**
+     * The trained model label.
+     */
+    @path
+    trainedModelLabel: string;
+  },
+  EvaluationSummary
 >;
 
 /**
@@ -721,26 +721,26 @@ op getModelEvaluationSummary is Foundations.Operation<
 @route("/authoring/analyze-conversations/projects/{projectName}/models/{trainedModelLabel}/load-snapshot/jobs/{jobId}")
 @get
 op getLoadSnapshotStatus is Foundations.Operation<
-	{
-		/**
-		 * The project name.
-		 */
-		@path
-		projectName: string;
+  {
+    /**
+     * The project name.
+     */
+    @path
+    projectName: string;
 
-		/**
-		 * The trained model label.
-		 */
-		@path
-		trainedModelLabel: string;
+    /**
+     * The trained model label.
+     */
+    @path
+    trainedModelLabel: string;
 
-		/**
-		 * The job ID.
-		 */
-		@path
-		jobId: string;
-	},
-	LoadSnapshotJobState
+    /**
+     * The job ID.
+     */
+    @path
+    jobId: string;
+  },
+  LoadSnapshotJobState
 >;
 
 /**
@@ -749,8 +749,8 @@ op getLoadSnapshotStatus is Foundations.Operation<
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @summary("Lists deployment resources")
 op listDeploymentResources is languageOperations.ResourceList<
-	AssignedDeploymentResource,
-	ListProjectsQueryParameters
+  AssignedDeploymentResource,
+  ListProjectsQueryParameters
 >;
 
 /**
@@ -766,22 +766,22 @@ op listDeploymentResources is languageOperations.ResourceList<
 @post
 @pollingOperation(getAssignDeploymentResourcesStatus)
 op assignDeploymentResources is Foundations.LongRunningOperation<
-	{
-		/**
-		 * The project name.
-		 */
-		@path
-		projectName: string;
+  {
+    /**
+     * The project name.
+     */
+    @path
+    projectName: string;
 
-		/**
-		 * The new project resources info.
-		 */
-		@body
-		body: AssignDeploymentResourcesOptions;
-	},
-	AcceptedResponse,
-	{},
-	ErrorResponse
+    /**
+     * The new project resources info.
+     */
+    @body
+    body: AssignDeploymentResourcesOptions;
+  },
+  AcceptedResponse,
+  {},
+  ErrorResponse
 >;
 
 /**
@@ -794,22 +794,22 @@ op assignDeploymentResources is Foundations.LongRunningOperation<
 @post
 @pollingOperation(getUnassignDeploymentResourcesStatus)
 op unassignDeploymentResources is Foundations.LongRunningOperation<
-	{
-		/**
-		 * The project name.
-		 */
-		@path
-		projectName: string;
+  {
+    /**
+     * The project name.
+     */
+    @path
+    projectName: string;
 
-		/**
-		 * The info for the deployment resources to be deleted.
-		 */
-		@body
-		body: UnassignDeploymentResourcesOptions;
-	},
-	AcceptedResponse,
-	{},
-	ErrorResponse
+    /**
+     * The info for the deployment resources to be deleted.
+     */
+    @body
+    body: UnassignDeploymentResourcesOptions;
+  },
+  AcceptedResponse,
+  {},
+  ErrorResponse
 >;
 
 /**
@@ -820,20 +820,20 @@ op unassignDeploymentResources is Foundations.LongRunningOperation<
 @route("/authoring/analyze-conversations/projects/{projectName}/resources/assign/jobs/{jobId}")
 @get
 op getAssignDeploymentResourcesStatus is Foundations.Operation<
-	{
-		/**
-		 * The project name.
-		 */
-		@path
-		projectName: string;
+  {
+    /**
+     * The project name.
+     */
+    @path
+    projectName: string;
 
-		/**
-		 * The job ID.
-		 */
-		@path
-		jobId: string;
-	},
-	DeploymentResourcesJobState
+    /**
+     * The job ID.
+     */
+    @path
+    jobId: string;
+  },
+  DeploymentResourcesJobState
 >;
 
 /**
@@ -844,20 +844,20 @@ op getAssignDeploymentResourcesStatus is Foundations.Operation<
 @route("/authoring/analyze-conversations/projects/{projectName}/resources/unassign/jobs/{jobId}")
 @get
 op getUnassignDeploymentResourcesStatus is Foundations.Operation<
-	{
-		/**
-		 * The project name.
-		 */
-		@path
-		projectName: string;
+  {
+    /**
+     * The project name.
+     */
+    @path
+    projectName: string;
 
-		/**
-		 * The job ID.
-		 */
-		@path
-		jobId: string;
-	},
-	DeploymentResourcesJobState
+    /**
+     * The job ID.
+     */
+    @path
+    jobId: string;
+  },
+  DeploymentResourcesJobState
 >;
 
 /**
@@ -866,8 +866,8 @@ op getUnassignDeploymentResourcesStatus is Foundations.Operation<
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @summary("List training jobs")
 op listTrainingJobs is languageOperations.ResourceList<
-	TrainingJobState,
-	ListProjectsQueryParameters
+  TrainingJobState,
+  ListProjectsQueryParameters
 >;
 
 /**
@@ -886,36 +886,36 @@ op getTrainingStatus is languageOperations.ResourceRead<TrainingJobState>;
 @post
 @pollingOperation(getTrainingStatus)
 op cancelTrainingJob is Foundations.LongRunningOperation<
-	{
-		/**
-		 * The project name.
-		 */
-		@path
-		projectName: string;
+  {
+    /**
+     * The project name.
+     */
+    @path
+    projectName: string;
 
-		/**
-		 * The job ID.
-		 */
-		@path
-		jobId: string;
-	},
-	AcceptedResponse,
-	{},
-	ErrorResponse
+    /**
+     * The job ID.
+     */
+    @path
+    jobId: string;
+  },
+  AcceptedResponse,
+  {},
+  ErrorResponse
 >;
 
 alias ListProjectsQueryParameters = ListQueryParametersTrait<{
-	/** The number of projects to be returned. */
-	@query
-	top?: int32;
+  /** The number of projects to be returned. */
+  @query
+  top?: int32;
 
-	/** The offset in the response. */
-	@query
-	skip?: int32;
+  /** The offset in the response. */
+  @query
+  skip?: int32;
 
-	/** The maximum number of projects per page. */
-	@query
-	maxpagesize?: int32;
+  /** The maximum number of projects per page. */
+  @query
+  maxpagesize?: int32;
 }>;
 
 /**
@@ -925,8 +925,8 @@ alias ListProjectsQueryParameters = ListQueryParametersTrait<{
 @summary("List projects")
 @get
 op listProjects is languageOperations.ResourceList<
-	ProjectMetadata,
-	ListProjectsQueryParameters
+  ProjectMetadata,
+  ListProjectsQueryParameters
 >;
 
 /**
@@ -937,14 +937,14 @@ op listProjects is languageOperations.ResourceList<
 @route("/authoring/analyze-conversations/projects/global/deletion-jobs/{jobId}")
 @get
 op getProjectDeletionStatus is Foundations.Operation<
-	{
-		/**
-		 * The job ID.
-		 */
-		@path
-		jobId: string;
-	},
-	ProjectDeletionJobState
+  {
+    /**
+     * The job ID.
+     */
+    @path
+    jobId: string;
+  },
+  ProjectDeletionJobState
 >;
 
 /**
@@ -957,26 +957,26 @@ op getProjectDeletionStatus is Foundations.Operation<
 @route("/authoring/analyze-conversations/projects/global/deployments/resources")
 @get
 op listAssignedResourceDeployments is Foundations.Operation<
-	{
-		/**
-		 * The number of deployments to be returned.
-		 */
-		@query("top")
-		top?: int32;
+  {
+    /**
+     * The number of deployments to be returned.
+     */
+    @query("top")
+    top?: int32;
 
-		/**
-		 * The offset in the response.
-		 */
-		@query("skip")
-		skip?: int32;
+    /**
+     * The offset in the response.
+     */
+    @query("skip")
+    skip?: int32;
 
-		/**
-		 * The maximum number of deployments per page.
-		 */
-		@query("maxpagesize")
-		maxpagesize?: int32;
-	},
-	AssignedResourceDeploymentsMetadata
+    /**
+     * The maximum number of deployments per page.
+     */
+    @query("maxpagesize")
+    maxpagesize?: int32;
+  },
+  AssignedResourceDeploymentsMetadata
 >;
 
 /**
@@ -987,32 +987,32 @@ op listAssignedResourceDeployments is Foundations.Operation<
 @route("/authoring/analyze-conversations/projects/global/languages")
 @get
 op getSupportedLanguages is Foundations.Operation<
-	{
-		/**
-		 * The project kind.
-		 */
-		@query("projectKind")
-		projectKind: ProjectKind;
+  {
+    /**
+     * The project kind.
+     */
+    @query("projectKind")
+    projectKind: ProjectKind;
 
-		/**
-		 * The number of languages to be returned.
-		 */
-		@query("top")
-		top?: int32;
+    /**
+     * The number of languages to be returned.
+     */
+    @query("top")
+    top?: int32;
 
-		/**
-		 * The offset in the response.
-		 */
-		@query("skip")
-		skip?: int32;
+    /**
+     * The offset in the response.
+     */
+    @query("skip")
+    skip?: int32;
 
-		/**
-		 * The maximum number of languages per page.
-		 */
-		@query("maxpagesize")
-		maxpagesize?: int32;
-	},
-	SupportedLanguages
+    /**
+     * The maximum number of languages per page.
+     */
+    @query("maxpagesize")
+    maxpagesize?: int32;
+  },
+  SupportedLanguages
 >;
 
 /**
@@ -1024,41 +1024,41 @@ op getSupportedLanguages is Foundations.Operation<
 @route("/authoring/analyze-conversations/projects/global/prebuilt-entities")
 @get
 op getSupportedPrebuiltEntities is Foundations.Operation<
-	{
-		/**
-		 * The language to get supported prebuilt entities for. Required if multilingual
-		 * is false. This is BCP-47 representation of a language. For example, use "en"
-		 * for English, "en-gb" for English (UK), "es" for Spanish etc.
-		 */
-		@query("language")
-		language?: string;
+  {
+    /**
+     * The language to get supported prebuilt entities for. Required if multilingual
+     * is false. This is BCP-47 representation of a language. For example, use "en"
+     * for English, "en-gb" for English (UK), "es" for Spanish etc.
+     */
+    @query("language")
+    language?: string;
 
-		/**
-		 * Whether to get the support prebuilt entities for multilingual or monolingual
-		 * projects. If true, the language parameter is ignored.
-		 */
-		@query("multilingual")
-		multilingual?: string;
+    /**
+     * Whether to get the support prebuilt entities for multilingual or monolingual
+     * projects. If true, the language parameter is ignored.
+     */
+    @query("multilingual")
+    multilingual?: string;
 
-		/**
-		 * The number of prebuilt entities to be returned.
-		 */
-		@query("top")
-		top?: int32;
+    /**
+     * The number of prebuilt entities to be returned.
+     */
+    @query("top")
+    top?: int32;
 
-		/**
-		 * The offset in the response.
-		 */
-		@query("skip")
-		skip?: int32;
+    /**
+     * The offset in the response.
+     */
+    @query("skip")
+    skip?: int32;
 
-		/**
-		 * The maximum number of prebuilt entities per page.
-		 */
-		@query("maxpagesize")
-		maxpagesize?: int32;
-	},
-	PrebuiltEntities
+    /**
+     * The maximum number of prebuilt entities per page.
+     */
+    @query("maxpagesize")
+    maxpagesize?: int32;
+  },
+  PrebuiltEntities
 >;
 
 /**
@@ -1069,30 +1069,30 @@ op getSupportedPrebuiltEntities is Foundations.Operation<
 @route("/authoring/analyze-conversations/projects/global/training-config-versions")
 @get
 op listTrainingConfigVersions is Foundations.Operation<
-	{
-		/**
-		 * The project kind.
-		 */
-		@query("projectKind")
-		projectKind: ProjectKind;
+  {
+    /**
+     * The project kind.
+     */
+    @query("projectKind")
+    projectKind: ProjectKind;
 
-		/**
-		 * The number of config versions to be returned.
-		 */
-		@query("top")
-		top?: int32;
+    /**
+     * The number of config versions to be returned.
+     */
+    @query("top")
+    top?: int32;
 
-		/**
-		 * The offset in the response.
-		 */
-		@query("skip")
-		skip?: int32;
+    /**
+     * The offset in the response.
+     */
+    @query("skip")
+    skip?: int32;
 
-		/**
-		 * The maximum number of config versions per page.
-		 */
-		@query("maxpagesize")
-		maxpagesize?: int32;
-	},
-	TrainingConfigVersions
+    /**
+     * The maximum number of config versions per page.
+     */
+    @query("maxpagesize")
+    maxpagesize?: int32;
+  },
+  TrainingConfigVersions
 >;
