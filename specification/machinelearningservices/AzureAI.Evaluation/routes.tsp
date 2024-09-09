@@ -16,8 +16,8 @@ namespace Microsoft.MachineLearningServices;
 
 interface Evaluations {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Waiting for bug fix: https://github.com/Azure/typespec-azure-pr/issues/3739."
-  @doc("Get an evalution.")
-  @route("/evalations/{id}")
+  @doc("Get an evaluation.")
+  @route("/evaluations/{id}")
   @get
   get is Azure.Core.Foundations.Operation<
     {
