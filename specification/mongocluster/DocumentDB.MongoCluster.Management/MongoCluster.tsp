@@ -276,9 +276,6 @@ model ConnectionString {
 union MongoClusterStatus {
   string,
 
-  /** The mongo cluster resource is ready for use. */
-  "Ready",
-
   /** The mongo cluster resource is being provisioned. */
   "Provisioning",
 
