@@ -21,14 +21,16 @@ model EvaluatorConfiguration {
   id: string;
 
   @doc("Initialization parameters of the evaluator.")
-  init_params?: Record<string>;
+  initParams?: Record<string>;
 
   @doc("Data parameters of the evaluator.")
-  data_mapping?: Record<string>;
+  dataMapping?: Record<string>;
 }
 
+@doc("Abstract data class.")
 @discriminator("type")
 model Data {
+  @doc("Data identifier.")
   id: string;
 }
 
@@ -38,7 +40,7 @@ model AppInsight extends Data {
   type: "app_insights";
 
   @doc("Application Insight connection string.")
-  connection_string: string;
+  connectionString: string;
 
   @doc("Query to fetch data.")
   query: string;
@@ -49,14 +51,15 @@ model Dataset extends Data {
   type: "dataset";
 }
 
-@doc("Output Location for Evaluation.")
-model outputLocation {
-  @doc("Output location for the evaluation.")
-  dataPath: string;
+@discriminator("type")
+@doc("Evaluation Target.")
+model EvaluationTarget {
+  @doc("Name of the evaluation target.")
+  name?: string;
 }
 
 @doc("Base Model and prompt for evaluation.")
-model BaseModel {
+model BaseModel extends EvaluationTarget {
   @doc("Base model for evaluation.")
   endpoint: string;
 
@@ -65,12 +68,14 @@ model BaseModel {
 
   @doc("parameters for evaluation.")
   parameters: Record<string>;
+
+  type: "base_model";
 }
 
 @doc("Evaluation Definition")
 model Evaluation {
   @doc("Identifier of the evaluation.")
-  id: string;
+  id?: string;
 
   @doc("Data for evaluation.")
   data: Data;
@@ -96,13 +101,13 @@ model Evaluation {
   properties?: Record<string>;
 
   @doc("Evaluators to be used for the evaluation.")
-  evaluators?: Record<EvaluatorConfiguration>;
+  evaluators: Record<EvaluatorConfiguration>;
 
   @doc("Output location for the evaluation.")
   outputLocation?: string;
 
   @doc("Evaluation Target.")
-  evaluation_target?: BaseModel;
+  evaluationTarget?: EvaluationTarget;
 }
 
 @doc("Paged evaluation items")
