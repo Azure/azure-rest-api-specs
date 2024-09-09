@@ -27,26 +27,26 @@ model EvaluatorConfiguration {
   data_mapping?: Record<string>;
 }
 
+@discriminator("type")
+model Data {
+  id: string;
+}
+
 @doc("Data Source for Application Insight.")
-model AppInsight{
+model AppInsight extends Data {
   @doc("Application Insight connection string.")
   connection_string: string;
 
   @doc("Query to fetch data.")
   query: string;
+
+  type: "app_insights";
 }
 
 @doc("Dataset as source for evaluation.")
-model Dataset {
+model Dataset extend Data {
   @doc("Dataset id.")
-  id: string;
-}
-
-model Data {
-  allOf: [
-    Dataset,
-    AppInsight
-  ]
+  type: "dataset";
 }
 
 // union DataSource {
