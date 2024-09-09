@@ -34,31 +34,20 @@ model Data {
 
 @doc("Data Source for Application Insight.")
 model AppInsight extends Data {
+
+  type: "app_insights";
+
   @doc("Application Insight connection string.")
   connection_string: string;
 
   @doc("Query to fetch data.")
   query: string;
-
-  type: "app_insights";
 }
 
 @doc("Dataset as source for evaluation.")
-model Dataset extend Data {
-  @doc("Dataset id.")
+model Dataset extends Data {
   type: "dataset";
 }
-
-// union DataSource {
-//     dataset: Dataset;
-//     app_insights: AppInsight;
-// }
-
-// @doc("Input Data for Evaluation.")
-// model Data{
-//   @doc("Data for evaluation.")
-//   source: DataSource;
-// }
 
 @doc("Output Location for Evaluation.")
 model outputLocation {
