@@ -40,6 +40,19 @@ options:
     flavor: azure
     clear-output-folder: true
     namespace: "{package-dir}"
+  "@azure-tools/typespec-ts":
+    generateMetadata: true
+    generateSample: true
+    generateTest: true
+    azureSdkForJs: true
+    isModularLibrary: true
+    experimentalExtensibleEnums: true
+    enableOperationGroup: true
+    hierarchyClient: false
+    package-dir: "arm-mongocluster"
+    packageDetails:
+      name: "@azure/arm-mongocluster"
+    flavor: azure
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"
