@@ -182,7 +182,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "azure-async-operation"
         }
       },
       "delete": {
@@ -247,20 +247,7 @@
         "provisioningState": {
           "readOnly": true,
           "type": "string",
-          "description": "The current provisioning state of the API Management gateway config connection ",
-          "enum": [
-            "Activating",
-            "Canceled",
-            "Failed",
-            "Succeeded",
-            "Terminating",
-            "Upgrading",
-            "Updating"
-          ],
-          "x-ms-enum": {
-            "name": "ProvisioningState",
-            "modelAsString": true
-          }
+          "description": "The current provisioning state of the API Management gateway config connection "
         },
         "sourceId": {
           "type": "string",
@@ -335,4 +322,3 @@
   },
   "parameters": {}
 }
-
