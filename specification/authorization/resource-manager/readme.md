@@ -108,15 +108,15 @@ input-file:
   - Microsoft.Authorization/preview/2022-05-01-preview/authorization-RoleDefinitionsCalls.json
   - Microsoft.Authorization/preview/2024-09-01-preview/common-types.json
   - Microsoft.Authorization/preview/2021-12-01-preview/authorization-AccessReviewCalls.json
-  - Microsoft.Authorization/preview/2024-02-01-preview/EligibleChildResources.json
-  - Microsoft.Authorization/preview/2024-02-01-preview/RoleAssignmentSchedule.json
-  - Microsoft.Authorization/preview/2024-02-01-preview/RoleAssignmentScheduleInstance.json
-  - Microsoft.Authorization/preview/2024-02-01-preview/RoleAssignmentScheduleRequest.json
-  - Microsoft.Authorization/preview/2024-02-01-preview/RoleEligibilitySchedule.json
-  - Microsoft.Authorization/preview/2024-02-01-preview/RoleEligibilityScheduleInstance.json
-  - Microsoft.Authorization/preview/2024-02-01-preview/RoleEligibilityScheduleRequest.json
-  - Microsoft.Authorization/preview/2024-02-01-preview/RoleManagementPolicy.json
-  - Microsoft.Authorization/preview/2024-02-01-preview/RoleManagementPolicyAssignment.json
+  - Microsoft.Authorization/preview/2024-09-01-preview/EligibleChildResources.json
+  - Microsoft.Authorization/preview/2024-09-01-preview/RoleAssignmentSchedule.json
+  - Microsoft.Authorization/preview/2024-09-01-preview/RoleAssignmentScheduleInstance.json
+  - Microsoft.Authorization/preview/2024-09-01-preview/RoleAssignmentScheduleRequest.json
+  - Microsoft.Authorization/preview/2024-09-01-preview/RoleEligibilitySchedule.json
+  - Microsoft.Authorization/preview/2024-09-01-preview/RoleEligibilityScheduleInstance.json
+  - Microsoft.Authorization/preview/2024-09-01-preview/RoleEligibilityScheduleRequest.json
+  - Microsoft.Authorization/preview/2024-09-01-preview/RoleManagementPolicy.json
+  - Microsoft.Authorization/preview/2024-09-01-preview/RoleManagementPolicyAssignment.json
   - Microsoft.Authorization/preview/2022-08-01-preview/RoleManagementAlerts.json
 ```
 
