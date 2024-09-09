@@ -1,7 +1,10 @@
 parameters:
   "service-dir":
     default: "sdk/oracledatabase"
-
+  "dependencies":
+    "additionalDirectories":
+      - "specification/oracle/models"
+    default: ""
 emit:
   - "@azure-tools/typespec-autorest"
 
@@ -21,6 +24,14 @@ options:
     packageDetails:
       name: "@azure/arm-oracledatabase"
     flavor: azure
+    generateMetadata: true
+    generateSample: true
+    generateTest: true
+    azureSdkForJs: true
+    isModularLibrary: true
+    experimentalExtensibleEnums: true
+    enableOperationGroup: true
+    hierarchyClient: false
 
 linter:
   extends:
