@@ -117,6 +117,7 @@ input-file:
   - Microsoft.Web/stable/2023-12-01/ResourceHealthMetadata.json
   - Microsoft.Web/stable/2023-12-01/ResourceProvider.json
   - Microsoft.Web/stable/2023-12-01/StaticSites.json
+  - Microsoft.Web/stable/2023-12-01/SiteCertificates.json
   - Microsoft.Web/stable/2023-12-01/WebApps.json
 directive:
   # suppress each RPC 3016 error
@@ -290,6 +291,7 @@ input-file:
   - Microsoft.Web/stable/2023-01-01/Recommendations.json
   - Microsoft.Web/stable/2023-01-01/ResourceHealthMetadata.json
   - Microsoft.Web/stable/2023-01-01/ResourceProvider.json
+  - Microsoft.Web/stable/2023-01-01/SiteCertificates.json
   - Microsoft.Web/stable/2023-01-01/StaticSites.json
   - Microsoft.Web/stable/2023-01-01/WebApps.json
 directive:
@@ -464,6 +466,7 @@ input-file:
   - Microsoft.Web/stable/2022-09-01/Recommendations.json
   - Microsoft.Web/stable/2022-09-01/ResourceHealthMetadata.json
   - Microsoft.Web/stable/2022-09-01/ResourceProvider.json
+  - Microsoft.Web/stable/2023-09-01/SiteCertificates.json
   - Microsoft.Web/stable/2022-09-01/StaticSites.json
   - Microsoft.Web/stable/2022-09-01/WebApps.json
 directive:
@@ -637,6 +640,7 @@ input-file:
   - Microsoft.Web/stable/2022-03-01/Recommendations.json
   - Microsoft.Web/stable/2022-03-01/ResourceHealthMetadata.json
   - Microsoft.Web/stable/2022-03-01/ResourceProvider.json
+  - Microsoft.Web/stable/2022-03-01/SiteCertificates.json
   - Microsoft.Web/stable/2022-03-01/StaticSites.json
   - Microsoft.Web/stable/2022-03-01/WebApps.json
 directive: 
@@ -811,6 +815,7 @@ input-file:
   - Microsoft.Web/stable/2021-03-01/Recommendations.json
   - Microsoft.Web/stable/2021-03-01/ResourceHealthMetadata.json
   - Microsoft.Web/stable/2021-03-01/ResourceProvider.json
+  - Microsoft.Web/stable/2021-03-01/SiteCertificates.json
   - Microsoft.Web/stable/2021-03-01/StaticSites.json
   - Microsoft.Web/stable/2021-03-01/WebApps.json
 directive:
@@ -986,6 +991,7 @@ input-file:
   - Microsoft.Web/stable/2021-02-01/Recommendations.json
   - Microsoft.Web/stable/2021-02-01/ResourceHealthMetadata.json
   - Microsoft.Web/stable/2021-02-01/ResourceProvider.json
+  - Microsoft.Web/stable/2021-02-01/SiteCertificates.json
   - Microsoft.Web/stable/2021-02-01/StaticSites.json
   - Microsoft.Web/stable/2021-02-01/WebApps.json
 directive:
@@ -1149,6 +1155,7 @@ input-file:
   - Microsoft.Web/stable/2021-01-15/Recommendations.json
   - Microsoft.Web/stable/2021-01-15/ResourceHealthMetadata.json
   - Microsoft.Web/stable/2021-01-15/ResourceProvider.json
+  - Microsoft.Web/stable/2021-01-15/SiteCertificates.json
   - Microsoft.Web/stable/2021-01-15/StaticSites.json
   - Microsoft.Web/stable/2021-01-15/WebApps.json
 directive:
@@ -1287,6 +1294,7 @@ input-file:
   - Microsoft.Web/stable/2021-01-01/Recommendations.json
   - Microsoft.Web/stable/2021-01-01/ResourceHealthMetadata.json
   - Microsoft.Web/stable/2021-01-01/ResourceProvider.json
+  - Microsoft.Web/stable/2021-01-01/SiteCertificates.json
   - Microsoft.Web/stable/2021-01-01/StaticSites.json
   - Microsoft.Web/stable/2021-01-01/WebApps.json
   - Microsoft.Web/stable/2021-01-01/KubeEnvironments.json
@@ -1388,6 +1396,7 @@ input-file:
 - Microsoft.Web/stable/2020-12-01/Recommendations.json
 - Microsoft.Web/stable/2020-12-01/ResourceProvider.json
 - Microsoft.Web/stable/2020-12-01/WebApps.json
+- Microsoft.Web/stable/2020-12-01/SiteCertificates.json
 - Microsoft.Web/stable/2020-12-01/StaticSites.json
 - Microsoft.Web/stable/2020-12-01/AppServiceEnvironments.json
 - Microsoft.Web/stable/2020-12-01/AppServicePlans.json
@@ -1485,6 +1494,7 @@ input-file:
 - Microsoft.Web/stable/2020-10-01/Recommendations.json
 - Microsoft.Web/stable/2020-10-01/ResourceProvider.json
 - Microsoft.Web/stable/2020-10-01/WebApps.json
+- Microsoft.Web/stable/2020-10-01/SiteCertificates.json
 - Microsoft.Web/stable/2020-10-01/StaticSites.json
 - Microsoft.Web/stable/2020-10-01/AppServiceEnvironments.json
 - Microsoft.Web/stable/2020-10-01/AppServicePlans.json
@@ -1528,6 +1538,7 @@ input-file:
 - Microsoft.Web/stable/2020-09-01/Recommendations.json
 - Microsoft.Web/stable/2020-09-01/ResourceProvider.json
 - Microsoft.Web/stable/2020-09-01/WebApps.json
+- Microsoft.Web/stable/2020-09-01/SiteCertificates.json
 - Microsoft.Web/stable/2020-09-01/StaticSites.json
 - Microsoft.Web/stable/2020-09-01/AppServiceEnvironments.json
 - Microsoft.Web/stable/2020-09-01/AppServicePlans.json
@@ -1575,6 +1586,7 @@ input-file:
 - Microsoft.Web/stable/2020-06-01/Recommendations.json
 - Microsoft.Web/stable/2020-06-01/ResourceProvider.json
 - Microsoft.Web/stable/2020-06-01/WebApps.json
+- Microsoft.Web/stable/2020-06-01/SiteCertificates.json
 - Microsoft.Web/stable/2020-06-01/StaticSites.json
 - Microsoft.Web/stable/2020-06-01/AppServiceEnvironments.json
 - Microsoft.Web/stable/2020-06-01/AppServicePlans.json
@@ -1611,6 +1623,7 @@ input-file:
 - Microsoft.Web/stable/2019-08-01/Recommendations.json
 - Microsoft.Web/stable/2019-08-01/ResourceProvider.json
 - Microsoft.Web/stable/2019-08-01/WebApps.json
+- Microsoft.Web/stable/2019-08-01/SiteCertificates.json
 - Microsoft.Web/stable/2019-08-01/StaticSites.json
 - Microsoft.Web/stable/2019-08-01/AppServiceEnvironments.json
 - Microsoft.Web/stable/2019-08-01/AppServicePlans.json
@@ -1640,6 +1653,7 @@ input-file:
 - Microsoft.Web/stable/2018-02-01/Recommendations.json
 - Microsoft.Web/stable/2018-02-01/ResourceProvider.json
 - Microsoft.Web/stable/2018-11-01/WebApps.json
+- Microsoft.Web/stable/2018-11-01/SiteCertificates.json
 - Microsoft.Web/stable/2018-02-01/AppServiceEnvironments.json
 - Microsoft.Web/stable/2018-02-01/AppServicePlans.json
 - Microsoft.Web/stable/2018-02-01/ResourceHealthMetadata.json
@@ -1676,6 +1690,7 @@ input-file:
 - Microsoft.Web/stable/2018-02-01/AppServiceEnvironments.json
 - Microsoft.Web/stable/2018-02-01/AppServicePlans.json
 - Microsoft.Web/stable/2018-02-01/ResourceHealthMetadata.json
+- Microsoft.Web/stable/2018-02-01/SiteCertificates.json
 directive:
   # suppress each RPC 3019 error
 - where: $.definitions.Identifier.properties
@@ -1727,6 +1742,7 @@ input-file:
 - Microsoft.Web/stable/2018-02-01/AppServiceEnvironments.json
 - Microsoft.Web/stable/2018-02-01/AppServicePlans.json
 - Microsoft.Web/stable/2018-02-01/ResourceHealthMetadata.json
+- Microsoft.Web/stable/2018-02-01/SiteCertificates.json
 directive:
   # suppress each RPC 3019 error
 - where: $.definitions.Identifier.properties
@@ -1760,6 +1776,7 @@ input-file:
 - Microsoft.Web/stable/2018-02-01/AppServiceEnvironments.json
 - Microsoft.Web/stable/2018-02-01/AppServicePlans.json
 - Microsoft.Web/stable/2018-02-01/ResourceHealthMetadata.json
+- Microsoft.Web/stable/2018-02-01/SiteCertificates.json
 directive:
   # suppress each RPC 3019 error
 - where: $.definitions.Identifier.properties
@@ -1793,6 +1810,7 @@ input-file:
 - Microsoft.Web/stable/2016-08-01/WebApps.json
 - Microsoft.Web/stable/2016-09-01/AppServiceEnvironments.json
 - Microsoft.Web/stable/2016-09-01/AppServicePlans.json
+- Microsoft.Web/stable/2016-03-01/SiteCertificates.json
 directive:
   # suppress each RPC 3019 error
 - where: $.definitions.User.properties
@@ -2167,6 +2185,7 @@ input-file:
 - Microsoft.Web/stable/2016-03-01/Recommendations.json
 - Microsoft.Web/stable/2016-03-01/ResourceHealthMetadata.json
 - Microsoft.Web/stable/2016-03-01/ResourceProvider.json
+- Microsoft.Web/stable/2016-03-01/SiteCertificates.json
 directive:
   # suppress each RPC 3019 error
 - where: $.definitions.User.properties
@@ -2600,6 +2619,7 @@ input-file:
 - Microsoft.Web/stable/2016-03-01/Recommendations.json
 - Microsoft.Web/stable/2016-03-01/ResourceHealthMetadata.json
 - Microsoft.Web/stable/2016-03-01/ResourceProvider.json
+- Microsoft.Web/stable/2016-03-01/SiteCertificates.json
 ```
 
 ---
@@ -2653,6 +2673,7 @@ input-file:
 - Microsoft.Web/stable/2016-03-01/Recommendations.json
 - Microsoft.Web/stable/2016-09-01/AppServiceEnvironments.json
 - Microsoft.Web/stable/2016-09-01/AppServicePlans.json
+- Microsoft.Web/stable/2016-03-01/SiteCertificates.json
 ```
 
 ### Tag: profile-hybrid-2019-03-01
@@ -2670,6 +2691,7 @@ input-file:
 - Microsoft.Web/stable/2018-02-01/Provider.json
 - Microsoft.Web/stable/2018-02-01/ResourceProvider.json
 - Microsoft.Web/stable/2018-02-01/Recommendations.json
+- Microsoft.Web/stable/2018-02-01/SiteCertificates.json
 ```
 
 ### Tag: profile-hybrid-2020-09-01
@@ -2686,4 +2708,5 @@ input-file:
 - Microsoft.Web/stable/2018-02-01/Provider.json
 - Microsoft.Web/stable/2018-02-01/ResourceProvider.json
 - Microsoft.Web/stable/2018-02-01/Recommendations.json
+- Microsoft.Web/stable/2018-02-01/SiteCertificates.json
 ```
