@@ -1,10 +1,10 @@
+import "@typespec/http";
 import "@typespec/rest";
 import "@azure-tools/typespec-autorest";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "./common.tsp";
 import "@typespec/openapi";
-import "@typespec/versioning";
 
 using TypeSpec.OpenAPI;
 using TypeSpec.Http;
@@ -28,7 +28,7 @@ model EvaluatorConfiguration {
 }
 
 @doc("Data Source for Application Insight.")
-model AppInsightDataSource {
+model AppInsight{
   @doc("Application Insight connection string.")
   connection_string: string;
 
@@ -36,16 +36,29 @@ model AppInsightDataSource {
   query: string;
 }
 
-union DataSource {
-    dataset_id: string,
-    app_insights: AppInsightDataSource,
+@doc("Dataset as source for evaluation.")
+model Dataset {
+  @doc("Dataset id.")
+  id: string;
 }
 
-@doc("Input Data for Evaluation.")
-model Data{
-  @doc("Data for evaluation.")
-  source: DataSource;
+model Data {
+  allOf: [
+    Dataset,
+    AppInsight
+  ]
 }
+
+// union DataSource {
+//     dataset: Dataset;
+//     app_insights: AppInsight;
+// }
+
+// @doc("Input Data for Evaluation.")
+// model Data{
+//   @doc("Data for evaluation.")
+//   source: DataSource;
+// }
 
 @doc("Output Location for Evaluation.")
 model outputLocation {
