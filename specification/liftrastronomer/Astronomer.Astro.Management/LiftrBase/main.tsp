@@ -43,13 +43,13 @@ union MarketplaceSubscriptionStatus {
 @added(Versions.v2024_08_27)
 @doc("Subscription auto renew status")
 union AutoRenewStatus {
-  integer,
+  string,
 
   @doc("Disable/Disabled auto renew")
-  Disable: 0,
+  Disable: "Disable",
 
   @doc("Enable/Enabled auto renew")
-  Enable: 1,
+  Enable: "Enable",
 }
 
 @doc("A string that represents a URI.")
