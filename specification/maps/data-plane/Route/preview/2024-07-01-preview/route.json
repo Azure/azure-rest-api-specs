@@ -436,7 +436,7 @@
     },
     "/route/matrix": {
       "post": {
-        "description": "**Applies to**: see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\n\nThe `Post Route Matrix` API is an HTTP `POST` request that allows calculation of a matrix of route summaries for a set of routes defined by origin and destination locations by using a sync request. For every given origin, the service calculates the cost of routing from that origin to every given destination. The set of origins and the set of destinations can be thought of as the column and row headers of a table and each cell in the table contains the costs of routing from the origin to the destination for that cell. As an example, let's say a food delivery company has 20 drivers and they need to find the closest driver to pick up the delivery from the restaurant. To solve this use case, they can call Matrix Route API.\n\n\nFor each route, the travel times and distances are returned. You can use the computed costs to determine which detailed routes to calculate using the Route Directions API.\n\n\nThe maximum size of a matrix for sync request it's **2500** (the number of origins multiplied by the number of destinations).\n\n\n\n### Submit Synchronous Route Matrix Request\nIf your scenario requires synchronous requests and the maximum size of the matrix is less than or equal to 2500, you might want to make synchronous request. The maximum size of a matrix for this API is **2500** (the number of origins multiplied by the number of destinations). With that constraint in mind, examples of possible matrix dimensions are: 50x50, 60x40, 90x20 (it does not need to be square).\n\n\n\n### API limitation\n The synchronous processing of matrix is best suited for fast, small matrices of route calculation. To calculate larger matrices and heavy route calculation, use the asynchronous endpoint. The following limitation is applicable to the synchronous requests. If none of the rows in the following table match the request's parameters, the request does not meet the requirements and will not be processed.\n\n| Max matrix size | Max number of origins  | Max number of destinations | Additional limits\n |------------------|------------------------|----------------------------|------------|\n| 100              | 100         | 100              | N/A |\n| 200              | 200         | 200              | All origins and destinations should be contained in an axis-aligned 400 km x 400 km bounding box. Otherwise, some matrix cells will be resolved as OUT_OF_REGION.  |\n| 2500             | 1000        | 1000             | - `departAt` or `arriveAt` must be any.<br> - `traffic` must be historical.<br> - `travelMode` must be either driving or truck<br> - No other parameters can be used explicitly   |\n\n\nExamples:\n - Request of 10x20 matrix with `traffic=live`: This request will be processed with a bounding box limit, as it matches a limit of up to 200, which includes bounding box restrictions.\n\n - Request of 10x20 matrix with default parameters (`traffic=historical`): This request will be processed without a bounding box limit, as it matches a limit of up to 2500, which does  not impose bounding box restrictions.\n\n\n",
+        "description": "**Applies to**: see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\n\nThe `Route Matrix` API is an HTTP `POST` request that allows calculation of a matrix of route summaries for a set of routes defined by origin and destination locations by using a sync request. For every given origin, the service calculates the cost of routing from that origin to every given destination. The set of origins and the set of destinations can be thought of as the column and row headers of a table and each cell in the table contains the costs of routing from the origin to the destination for that cell. Route Matrices can be calculated for driving, walking and truck routes. For example, a food delivery company has 20 drivers and they need to find the closest driver to pick up the delivery from the restaurant. To solve this use case, they can call the Route Matrix API and use the travel cost to sort the drivers by their actual travel distance or time from the restaurant.\n\n\nRoute Matrices are used in several different types of applications, most commonly to solve the Travelling Salesman Problem (TSP) and Vehicle Routing Problem (VRP). For each origin-destination pair in the matrix, the travel time and distance are returned. You can use the computed costs to determine which detailed routes to calculate using the Route Directions API.\n\n\nThe maximum size of a matrix for sync request it's **2500** (the number of origins multiplied by the number of destinations).\n\n\n\n### Submit Synchronous Route Matrix Request\nIf your scenario requires synchronous requests and the maximum size of the matrix is less than or equal to 2500, you might want to make synchronous request. The maximum size of a matrix for this API is **2500** (the number of origins multiplied by the number of destinations). With that constraint in mind, examples of possible matrix dimensions are: 50x50, 60x40, 90x20 (it does not need to be square).\n\n\n\n### API limitation\n The synchronous processing of matrix is best suited for fast, small matrices of route calculation. To calculate larger matrices and heavy route calculation, use the asynchronous endpoint. The following limitation is applicable to the synchronous requests. If none of the rows in the following table match the request's parameters, the request does not meet the requirements and will not be processed.\n\n| Max matrix size | Max number of origins  | Max number of destinations | Additional limits\n |------------------|------------------------|----------------------------|------------|\n| 100              | 100         | 100              | N/A |\n| 200              | 200         | 200              | All origins and destinations should be contained in an axis-aligned 400 km x 400 km bounding box. Otherwise, some matrix cells will be resolved as OUT_OF_REGION.  |\n| 2500             | 1000        | 1000             | - `departAt` or `arriveAt` must be any.<br> - `traffic` must be historical.<br> - `travelMode` must be either driving or truck<br> - No other parameters can be used explicitly   |\n\n\nExamples:\n - Request of 10x20 matrix with `traffic=live`: This request will be processed with a bounding box limit, as it matches a limit of up to 200, which includes bounding box restrictions.\n\n - Request of 10x20 matrix with default parameters (`traffic=historical`): This request will be processed without a bounding box limit, as it matches a limit of up to 2500, which does  not impose bounding box restrictions.\n\n\n",
         "operationId": "Route_PostRouteMatrix",
         "consumes": [
           "application/geo+json"
@@ -492,7 +492,7 @@
     },
     "/route/matrix:async": {
       "post": {
-        "description": "**Applies to**: see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\n\nThe `Post Route Matrix` API is an HTTP `POST` request that allows calculation of a matrix of route summaries for a set of routes defined by origin and destination locations by using an asynchronous (async) request. For every given origin, the service calculates the cost of routing from that origin to every given destination. The set of origins and the set of destinations can be thought of as the column and row headers of a table and each cell in the table contains the costs of routing from the origin to the destination for that cell. As an example, let's say a food delivery company has 20 drivers and they need to find the closest driver to pick up the delivery from the restaurant. To solve this use case, they can call Matrix Route API.\n\n\nFor each route, the travel times and distances are returned. You can use the computed costs to determine which detailed routes to calculate using the Route Directions API.\n\n\nThe maximum size of a matrix for async request is **50000** and for sync request it's **2500** (the number of origins multiplied by the number of destinations).\n\n\n\n### Submit Asynchronous Route Matrix Request\nThe Asynchronous API is appropriate for processing big volumes of relatively complex routing requests. When you make a request by using async request, by default the service returns a 202 response code along a URL in the Operation-Location field of the response header with the Azure Maps geography endpoint `{geography}.atlas.microsoft.com. This URL should be checked periodically until the status is Succeeded. \n\n\nThe maximum size of a matrix for this API is **50000** (the number of origins multiplied by the number of destinations). With that constraint in mind, examples of possible matrix dimensions are: 500x100, 100x100, 280x170. 100x50 (it does not need to be square).\n\n\nThe asynchronous responses are stored for **24** hours. The redirect URL returns a 404 response if used after the expiration period.\n\n\n\n\n```\nPOST https://atlas.microsoft.com/route/matrix:async?api-version=2024-07-01-preview&subscription-key={subscription-key}\n```\n\nHere's a typical sequence of asynchronous operations:\n1. Client sends a Route Matrix POST request to Azure Maps\n\n2. The server will respond with one of the following:\n\n    > HTTP `202 Accepted` -  Route Matrix request has been accepted.\n\n    > HTTP `Error` - There was an error processing your Route Matrix request. This could either be a 400 Bad Request or any other Error status code.\n\n\n3. If the Matrix Route request was accepted successfully, the Location header in the response contains the URL to get the status of the request. This status URI looks like the following:\n\n  ```\n    GET https://atlas.microsoft.com/route/operations/{id}?api-version=2024-07-01-preview?subscription-key={subscription-key}\n  ```\n\n\n4. Client issues a GET request on the resultUrl obtained in Step 3 to get the results\n\n \n\n  ```\n    GET https://atlas.microsoft.com/route/operations/{id}/result?api-version=2024-07-01-preview?subscription-key={subscription-key}\n   ```\n\n\n\n ### API limitation\n The asynchronous processing of matrix is best suited for larger matrices that require heavy route calculation. The following limitation is applicable to the asynchronous requests. If none of the rows in the following table match the request's parameters, the request does not meet the requirements and will not be processed.\n\n > Async requests supports up to 50K matrix size in a single request. If you want to request an increase to this limit, you can create an Azure Maps Technical Support Request in the Azure portal.\n\n \n| Max matrix size  | Max number of origins | Max number of destinations  | Additional limits |\n|------------------|-----------------------|-----------------------------|-------------------|\n| 2500             | 1000                  | 1000                        | All origins and destinations should be contained in an axis-aligned 400 km x 400 km bounding box. Otherwise some matrix cells will be resolved as OUT_OF_REGION.  |\n| 50,000           | 10,000                | 10,000                      | - `departAt` or `arriveAt` must be any.<br>- `traffic` must be historical.<br/>- `optimizeRoute` must be fastest.<br/>- `travelMode` must be either driving or truck. <br/>- No other parameters can be used explicitly.  |\n\n\n",
+        "description": "**Applies to**: see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\n\nThe `Route Matrix Async` API is an HTTP `POST` request that allows calculation of a matrix of route summaries for a set of routes defined by origin and destination locations by using an asynchronous (async) request. For every given origin, the service calculates the cost of routing from that origin to every given destination. The set of origins and the set of destinations can be thought of as the column and row headers of a table and each cell in the table contains the costs of routing from the origin to the destination for that cell.  Route Matrices can be calculated for driving, walking and truck routes.\n\nnRoute Matrices are used in several different types of applications, most commonly to solve the Travelling Salesman Problem (TSP) and Vehicle Routing Problem (VRP). For each origin-destination pair in the matrix, the travel time and distance are returned. You can use the computed costs to determine which detailed routes to calculate using the Route Directions API.\n\n\nThe maximum size of a matrix for async request is **50000** (the number of origins multiplied by the number of destinations).\n\n\nThe maximum size of a matrix for async request is **50000**\n\n\n\n### Submit Asynchronous Route Matrix Request\nThe Asynchronous API is appropriate for processing big volumes of relatively complex routing requests. When you make a request by using async request, by default the service returns a 202 response code along a URL in the Operation-Location field of the response header with the Azure Maps geography endpoint `{geography}.atlas.microsoft.com. This URL should be checked periodically until the status is Succeeded. \n\n\nThe maximum size of a matrix for this API is **50000** (the number of origins multiplied by the number of destinations). With that constraint in mind, examples of possible matrix dimensions are: 500x100, 100x100, 280x170. 100x50 (it does not need to be square).\n\n\nThe asynchronous responses are stored for **24** hours. The redirect URL returns a 404 response if used after the expiration period.\n\n\n\n\n```\nPOST https://atlas.microsoft.com/route/matrix:async?api-version=2024-07-01-preview&subscription-key={subscription-key}\n```\n\nHere's a typical sequence of asynchronous operations:\n1. Client sends a Route Matrix POST request to Azure Maps\n\n2. The server will respond with one of the following:\n\n    > HTTP `202 Accepted` -  Route Matrix request has been accepted.\n\n    > HTTP `Error` - There was an error processing your Route Matrix request. This could either be a 400 Bad Request or any other Error status code.\n\n\n3. If the Matrix Route request was accepted successfully, the Location header in the response contains the URL to get the status of the request. This status URI looks like the following:\n\n  ```\n    GET https://atlas.microsoft.com/route/operations/{id}?api-version=2024-07-01-preview?subscription-key={subscription-key}\n  ```\n\n\n4. Client issues a GET request on the resultUrl obtained in Step 3 to get the results\n\n \n\n  ```\n    GET https://atlas.microsoft.com/route/operations/{id}/result?api-version=2024-07-01-preview?subscription-key={subscription-key}\n   ```\n\n\n\n ### API limitation\n The asynchronous processing of matrix is best suited for larger matrices that require heavy route calculation. The following limitation is applicable to the asynchronous requests. If none of the rows in the following table match the request's parameters, the request does not meet the requirements and will not be processed.\n\n > Async requests supports up to 50K matrix size in a single request. If you want to request an increase to this limit, you can create an Azure Maps Technical Support Request in the Azure portal.\n\n \n| Max matrix size  | Max number of origins | Max number of destinations  | Additional limits |\n|------------------|-----------------------|-----------------------------|-------------------|\n| 2500             | 1000                  | 1000                        | All origins and destinations should be contained in an axis-aligned 400 km x 400 km bounding box. Otherwise some matrix cells will be resolved as OUT_OF_REGION.  |\n| 50,000           | 10,000                | 10,000                      | - `departAt` or `arriveAt` must be any.<br>- `traffic` must be historical.<br/>- `optimizeRoute` must be fastest.<br/>- `travelMode` must be either driving or truck. <br/>- No other parameters can be used explicitly.  |\n\n\n",
         "operationId": "Route_PostRouteMatrixAsync",
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
@@ -961,7 +961,7 @@
         },
         "features": {
           "type": "array",
-          "description": "A set of MultiPoint for matrix. Refer to [RFC 7946](https://www.rfc-editor.org/rfc/rfc7946) for details on the GeoJSON format.",
+          "description": "A set of origin and destination points passed as GeoJSON MultiPoint features for the input matrix. Refer to [RFC 7946](https://www.rfc-editor.org/rfc/rfc7946) for details on the GeoJSON format.",
           "minimum": 2,
           "maximum": 2,
           "items": {
@@ -969,12 +969,12 @@
           }
         },
         "departAt": {
-          "description": "The date and time of departure from the origin point formatted as a `dateTime` value defined by [RFC 3339, section 5.6](https://www.rfc-editor.org/rfc/rfc3339#section-5.6). When a time zone offset is not specified, UTC will be assumed.\n\nThe `departAt` value must be in the future in the date-time format or now value to set it to the current time.\n\nExamples:\n\n\"departAt\": \"2023-06-01T09:30:00.000-07:00\"",
+          "description": "The date and time of departure from the origin point formatted as a `dateTime` value defined by [RFC 3339, section 5.6](https://www.rfc-editor.org/rfc/rfc3339#section-5.6). When a time zone offset is not specified, UTC will be assumed.\n\nThe `departAt` value must be in the future in the date-time format. The `departAt` parameter cannot be used in conjunction with `arriveAt`.\n\nThe `departAt` also supports:-`any` value tailored to the use case where the time context is irrelevant. The `traffic=live` parameter value cannot be used together with `any`.-`now` value to set the departure time to the processing time of each indivual cell. Processing time may be any time between submission and its completion. This mode is best used together with traffic=live.\n\nDefault value: `any` if `departAt` is not specified.\n\nExamples:\n\n\"departAt\": \"2024-12-01T09:30:00.000-07:00\"",
           "type": "string",
           "format": "date-time"
         },
         "arriveAt": {
-          "description": "The date and time of arrival at the destination point formatted as a `dateTime` value defined by [RFC 3339, section 5.6](https://www.rfc-editor.org/rfc/rfc3339#section-5.6). When a time zone offset is not specified, UTC will be assumed.\n\nThe `arriveAt` value must be in the future. The `arriveAt` parameter cannot be used in conjunction with `departAt`.\n\nExample: \"arriveAt\": \"2023-06-01T09:30:00.000-07:00\"",
+          "description": "The date and time of arrival at the destination point formatted as a `dateTime` value defined by [RFC 3339, section 5.6](https://www.rfc-editor.org/rfc/rfc3339#section-5.6). When a time zone offset is not specified, UTC will be assumed.\n\nThe `arriveAt` value must be in the future. The `arriveAt` parameter cannot be used in conjunction with `departAt`.\n\nThe `departAt` also supports `any` value which is tailored to the use case where the time context is irrelevant. The `traffic=live` parameter value cannot be used together with `any`.\n\nDefault value: `any` if `arriveAt` is not specified.\n\nExample: \"arriveAt\": \"2024-12-01T09:30:00.000-07:00\"",
           "type": "string",
           "format": "date-time"
         },
@@ -995,7 +995,7 @@
               {
                 "value": "fastest",
                 "name": "Fastest",
-                "description": "Finds the fastest route"
+                "description": "Finds the fastest route to optimize route by travel time.\n\nOnly `fastest` is supported for the Route Matrix sync API. To use the other types, check the Route Matrix async API."
               }
             ]
           }
@@ -1004,7 +1004,7 @@
           "$ref": "#/definitions/RouteMatrixTrafficEnum"
         },
         "avoid": {
-          "description": "Specifies something that the route calculation should try to avoid when determining the route.",
+          "description": "Specifies restrictions that the route calculation should honor when determining the route. Avoid supports multiple values in a request and is only supported for the driving and truck travelMode.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/RouteMatrixAvoidEnum"
@@ -1028,7 +1028,7 @@
         },
         "features": {
           "type": "array",
-          "description": "A set of MultiPoint for matrix. Refer to [RFC 7946](https://www.rfc-editor.org/rfc/rfc7946) for details on the GeoJSON format.",
+          "description": "A set of origin and destination points passed as GeoJSON MultiPoint features for the input matrix. Refer to [RFC 7946](https://www.rfc-editor.org/rfc/rfc7946) for details on the GeoJSON format.",
           "minimum": 2,
           "maximum": 2,
           "items": {
@@ -1036,11 +1036,11 @@
           }
         },
         "departAt": {
-          "description": "The date and time of departure from the origin point formatted as a `dateTime` value defined by [RFC 3339, section 5.6](https://www.rfc-editor.org/rfc/rfc3339#section-5.6). When a time zone offset is not specified, UTC will be assumed.\n\nThe `departAt` value must be in the future in the date-time format or `now` value to set it to the current time or `any` value. The traffic=live parameter value cannot be used together with any. \n\nExamples:\n\n\"departAt\": \"2023-06-01T09:30:00.000-07:00\"",
+          "description": "The date and time of departure from the origin point formatted as a `dateTime` value defined by [RFC 3339, section 5.6](https://www.rfc-editor.org/rfc/rfc3339#section-5.6). When a time zone offset is not specified, UTC will be assumed.\n\nThe `departAt` value must be in the future in the date-time format. The `departAt` parameter cannot be used in conjunction with `arriveAt`.\n\nThe `departAt` also supports:-`any` value tailored to the use case where the time context is irrelevant. The `traffic=live` parameter value cannot be used together with `any`.-`now` value to set the departure time to the processing time of each indivual cell. Processing time may be any time between submission and its completion. This mode is best used together with traffic=live.\n\nDefault value: `any` if `departAt` is not specified.\n\nExamples:\n\n\"departAt\": \"2024-12-01T09:30:00.000-07:00\"",
           "type": "string"
         },
         "arriveAt": {
-          "description": "The date and time of arrival at the destination point formatted as a `dateTime` value defined by [RFC 3339, section 5.6](https://www.rfc-editor.org/rfc/rfc3339#section-5.6). When a time zone offset is not specified, UTC will be assumed.\n\nThe `arriveAt` value must be in the future or `any. The traffic=live parameter value cannot be used together with any. The `arriveAt` parameter cannot be used in conjunction with `departAt`.\n\nExample: \"arriveAt\": \"2023-06-01T09:30:00.000-07:00\"",
+          "description": "The date and time of arrival at the destination point formatted as a `dateTime` value defined by [RFC 3339, section 5.6](https://www.rfc-editor.org/rfc/rfc3339#section-5.6). When a time zone offset is not specified, UTC will be assumed.\n\nThe `arriveAt` value must be in the future. The `arriveAt` parameter cannot be used in conjunction with `departAt`.\n\nThe `departAt` also supports `any` value which is tailored to the use case where the time context is irrelevant. The `traffic=live` parameter value cannot be used together with `any`.\n\nDefault value: `any` if `arriveAt` is not specified.\n\nExample: \"arriveAt\": \"2024-12-01T09:30:00.000-07:00\"",
           "type": "string"
         },
         "travelMode": {
@@ -1061,12 +1061,12 @@
               {
                 "value": "shortest",
                 "name": "Shortest",
-                "description": "The route is calculated to minimize the distance."
+                "description": "Finds the shortest route to optimize route by travel distance."
               },
               {
                 "value": "fastest",
                 "name": "Fastest",
-                "description": "Finds the fastest route"
+                "description": "Finds the fastest route to optimize route by travel time."
               }
             ]
           }
@@ -1075,7 +1075,7 @@
           "$ref": "#/definitions/RouteMatrixTrafficEnum"
         },
         "avoid": {
-          "description": "Specifies something that the route calculation should try to avoid when determining the route.",
+          "description": "Specifies restrictions that the route calculation should honor when determining the route. Avoid supports multiple values in a request and is only supported for the driving and truck travelMode.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/RouteMatrixAvoidEnum"
@@ -2486,7 +2486,7 @@
     },
     "RouteMatrixVehicleSpec": {
       "type": "object",
-      "description": "Specifies the vehicle attributes such as vehicle height, weight, max speed, type of cargo, etc. to consider when calculating the route matrix. This helps avoid low bridge clearances, road restrictions, difficult right turns to provide the optimized truck route based on the vehicle specifications. Vehicle attributes are specified within the vehicleSpec property.",
+      "description": "Specifies the vehicle attributes such as vehicle height, weight, max speed, type of cargo, etc. to consider when calculating the route matrix. This helps avoid low bridge clearances, road restrictions, difficult right turns to provide the optimized route based on the vehicle specifications. Vehicle attributes are specified within the vehicleSpec property.",
       "allOf": [
         {
           "$ref": "#/definitions/VehicleSpec"
@@ -2803,7 +2803,7 @@
       }
     },
     "RouteMatrixAvoidEnum": {
-      "description": "Specifies something that the route calculation should try to avoid when determining the route.",
+      "description": "Specifies restrictions that the route calculation should honor when determining the route. Avoid supports multiple values in a request and is only supported for the driving and truck travelMode.",
       "type": "string",
       "enum": [
         "tollRoads",
@@ -2816,18 +2816,18 @@
           {
             "value": "tollRoads",
             "name": "TollRoads",
-            "description": "Avoids toll roads."
+            "description": "Avoids the use of toll roads in the route."
           },
           {
             "value": "unpavedRoads",
             "name": "UnpavedRoads",
-            "description": "Avoids unpaved roads."
+            "description": "Avoids unpaved roads in the route."
           }
         ]
       }
     },
     "RouteMatrixTrafficEnum": {
-      "description": "Decides how traffic is considered for computing routes.",
+      "description": "Specifies how traffic is considered for computing routes.\n\nDefault value: `historical`",
       "type": "string",
       "default": "historical",
       "enum": [
@@ -2841,12 +2841,12 @@
           {
             "value": "historical",
             "name": "Historical",
-            "description": "Finds the route based on historical traffic data"
+            "description": "Route calculation considers historical travel times and long term closures. Traffic jams and short-term closures during the travel time window do not influence routing or travel time."
           },
           {
             "value": "live",
             "name": "Live",
-            "description": "Finds the route based on live traffic data."
+            "description": "In addition to historical travel times, route calculation considers traffic jams and short- and long-term closures during the travel time window.\n\n`Note`: `traffic=live` may not be used in conjunction with `arriveAt=any` and `departAt=any`"
           }
         ]
       }
@@ -2913,7 +2913,7 @@
           },
           {
             "value": "truck",
-            "description": "Routing profile suitable for commercial vehicles like trucks are used for range polygon calculation."
+            "description": "Routing profile suitable for commercial vehicles like trucks are used for route matrix calculation."
           },
           {
             "value": "walking",
@@ -3170,7 +3170,7 @@
     },
     "InputRouteMatrixFeaturesItem": {
       "type": "object",
-      "description": "Specifies the input origins and destination points. `GeoJSON` feature object and additional properties. Refer to [RFC 7946](https://www.rfc-editor.org/rfc/rfc7946) for details.",
+      "description": "Specifies the input origin and destination points and additional properties for the `GeoJSON` MultiPoint feature object. Refer to [RFC 7946](https://www.rfc-editor.org/rfc/rfc7946) for details.",
       "properties": {
         "type": {
           "$ref": "#/definitions/FeaturesItemTypeEnum"
@@ -3179,7 +3179,7 @@
           "$ref": "../../../Common/preview/1.0/common.json#/definitions/GeoJsonMultiPoint"
         },
         "properties": {
-          "description": "Feature properties.",
+          "description": "MultiPoint feature properties object which specifies the origin features and destination features for the input matrix.",
           "type": "object",
           "$ref": "#/definitions/InputRouteMatrixProperties"
         }
@@ -3192,10 +3192,10 @@
     },
     "InputRouteMatrixProperties": {
       "type": "object",
-      "description": "Specifies the properties of Route Matrix",
+      "description": "Specifies the properties object for the input matrix.",
       "properties": {
         "pointType": {
-          "description": "The type of the route matrix.",
+          "description": "Specifies the origin MultiPoint type and destination MultiPoint type for the input matrix.",
           "type": "string",
           "enum": [
             "origins",
@@ -3207,11 +3207,11 @@
             "values": [
               {
                 "value": "origins",
-                "description": "The origin locations."
+                "description": "MutiPoint features that define the origin locations in the input matrix."
               },
               {
                 "value": "destinations",
-                "description": "The destination locations."
+                "description": "MutiPoint features that define the destination locations in the input matrix."
               }
             ]
           }
