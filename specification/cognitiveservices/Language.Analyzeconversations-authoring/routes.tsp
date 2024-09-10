@@ -258,7 +258,7 @@ op getCopyProjectStatus is Foundations.Operation<
 @summary("List deployments")
 @get
 op listDeployments is languageOperations.ResourceList<
-  ProjectDeployment,
+  ConversationalAnalysisAuthoringProjectDeployment,
   ListProjectsQueryParameters
 >;
 
@@ -267,7 +267,7 @@ op listDeployments is languageOperations.ResourceList<
  */
 @summary("Get deployment details")
 @get
-op getDeployment is languageOperations.ResourceRead<ProjectDeployment>;
+op getDeployment is languageOperations.ResourceRead<ConversationalAnalysisAuthoringProjectDeployment>;
 
 /**
  * Creates a new deployment or replaces an existing one.
@@ -337,6 +337,7 @@ op deleteDeployment is Foundations.LongRunningOperation<
 @route("/authoring/analyze-conversations/projects/{projectName}/deployments/{deploymentName}/:delete-from-resources")
 @post
 @pollingOperation(ConversationalAnalysisAuthoring.getDeploymentDeleteFromResourcesStatus)
+@added(Versions.v2023_04_15_preview)
 op deleteDeploymentFromResources is Foundations.LongRunningOperation<
   {
     /**
@@ -368,6 +369,7 @@ op deleteDeploymentFromResources is Foundations.LongRunningOperation<
 @summary("Get deployment deletion from resources status")
 @route("/authoring/analyze-conversations/projects/{projectName}/deployments/{deploymentName}/delete-from-resources/jobs/{jobId}")
 @get
+@added(Versions.v2023_04_15_preview)
 op getDeploymentDeleteFromResourcesStatus is Foundations.Operation<
   {
     /**
@@ -551,7 +553,7 @@ op getImportStatus is Foundations.Operation<
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @summary("List trained models")
 op listTrainedModels is languageOperations.ResourceList<
-  ProjectTrainedModel,
+  ConversationalAnalysisAuthoringProjectTrainedModel,
   ListProjectsQueryParameters
 >;
 
@@ -559,14 +561,14 @@ op listTrainedModels is languageOperations.ResourceList<
  * Gets the details of a trained model.
  */
 @summary("Get trained model details")
-op getTrainedModel is languageOperations.ResourceRead<ProjectTrainedModel>;
+op getTrainedModel is languageOperations.ResourceRead<ConversationalAnalysisAuthoringProjectTrainedModel>;
 
 /**
  * Deletes an existing trained model.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @summary("Delete trained model")
-op deleteTrainedModel is languageOperations.ResourceDelete<ProjectTrainedModel>;
+op deleteTrainedModel is languageOperations.ResourceDelete<ConversationalAnalysisAuthoringProjectTrainedModel>;
 
 /**
  * Triggers evaluation operation on a trained model.
@@ -576,6 +578,7 @@ op deleteTrainedModel is languageOperations.ResourceDelete<ProjectTrainedModel>;
 @route("/authoring/analyze-conversations/projects/{projectName}/models/{trainedModelLabel}/:evaluate")
 @post
 @pollingOperation(ConversationalAnalysisAuthoring.getEvaluationStatus)
+@added(Versions.v2023_04_15_preview)
 op evaluateModel is Foundations.LongRunningOperation<
   {
     /**
@@ -636,6 +639,7 @@ op loadSnapshot is Foundations.LongRunningOperation<
 @summary("Get evaluation status")
 @route("/authoring/analyze-conversations/projects/{projectName}/models/{trainedModelLabel}/evaluate/jobs/{jobId}")
 @get
+@added(Versions.v2023_04_15_preview)
 op getEvaluationStatus is Foundations.Operation<
   {
     /**

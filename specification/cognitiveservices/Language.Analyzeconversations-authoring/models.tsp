@@ -561,7 +561,7 @@ model ProjectDeployments {
   /**
    * The list of retrieved deployments.
    */
-  value: ProjectDeployment[];
+  value: ConversationalAnalysisAuthoringProjectDeployment[];
 
   /**
    * The next page link.
@@ -574,7 +574,7 @@ model ProjectDeployments {
  */
 @resource("deployments")
 @parentResource(ProjectMetadata)
-model ProjectDeployment {
+model ConversationalAnalysisAuthoringProjectDeployment {
   /**
    * Represents deployment name.
    */
@@ -612,6 +612,7 @@ model ProjectDeployment {
   /**
    * Represents the metadata of the assigned Azure resources.
    */
+  @added(Versions.v2023_04_15_preview)
   assignedResources: DeploymentResource[];
 }
 
@@ -705,11 +706,11 @@ model ImportProjectJobState {
 /**
  * Represents a list of retrieved trained models.
  */
-model ProjectTrainedModels {
+model ConversationalAnalysisAuthoringProjectTrainedModels {
   /**
    * The list of trained models.
    */
-  value: ProjectTrainedModel[];
+  value: ConversationalAnalysisAuthoringProjectTrainedModel[];
 
   /**
    * The next page link.
@@ -722,11 +723,11 @@ model ProjectTrainedModels {
  */
 @resource("models")
 @parentResource(ProjectMetadata)
-model ProjectTrainedModel {
+model ConversationalAnalysisAuthoringProjectTrainedModel {
   /**
    * The trained model label.
    */
-  @key
+  @key("label")
   @visibility("read")
   trainedModelLabel: string; //label: string;
 
