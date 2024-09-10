@@ -196,24 +196,23 @@
     "OnUploadFilters": {
       "type": "object",
       "properties": {
-        "excludeBlobsBeginningWith": {
+        "excludeBlobsWithPrefix": {
           "type": "array",
           "items": {
             "type": "string"
           },
-          "description": "Exclude each blob that begins with ANY OF the given prefixes from On Upload malware scanning."
+          "description": "Exclude each blob that has a subject prefix matching any of the provided values from On Upload malware scanning. Blob subjects have the following structure: `<container-name>/<blob-name>`, meaning prefixes will consider containers and hierarchical namespaces"
         },
-        "excludeBlobsEndingWith": {
+        "excludeBlobsWithSuffix": {
           "type": "array",
           "items": {
             "type": "string"
           },
-          "description": "Exclude each blob that begins with ANY OF the given suffixes from On Upload malware scanning."
+          "description": "Exclude each blob that has a subject suffix matching any of the provided values from On Upload malware scanning. Blob subjects have the following structure: `<container-name>/<blob-name>`, meaning suffixes can consider containers and hierarchical namespaces"
         },
         "excludeBlobsLargerThan": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Exclude each blob larger than the given value in bytes from On Upload malware scanning."
+          "format": "int64",
+          "description": "Exclude each blob with size larger than the given value in bytes from On Upload malware scanning."
         }
       }
     },

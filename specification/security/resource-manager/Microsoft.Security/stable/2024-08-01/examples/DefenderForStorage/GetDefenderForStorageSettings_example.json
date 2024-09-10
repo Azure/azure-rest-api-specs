@@ -17,12 +17,12 @@
               "isEnabled": true,
               "capGBPerMonth": -1,
               "filters": {
-                "excludeBlobsBeginningWith": [
-                  "blobServices/default/containers/unscanned-container",
-                  "blobServices/default/containers/sample-container/blobs/logs"
+                "excludeBlobsWithPrefix": [
+                  "unscanned-container",
+                  "sample-container/logs"
                 ],
-                "excludeBlobsEndingWith": [
-                  ".log",
+                "excludeBlobsWithSuffix": [
+                  "large-logs-container-suffix/logs.log",
                   ".jpg"
                 ],
                 "excludeBlobsLargerThan": 1024
