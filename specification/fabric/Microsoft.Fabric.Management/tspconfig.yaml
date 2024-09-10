@@ -25,6 +25,18 @@ options:
     generate-test: true
     generate-sample: true
     examples-dir: "{project-root}/examples"
+  "@azure-tools/typespec-ts":
+    azureSdkForJs: true
+    isModularLibrary: true
+    generateMetadata: true
+    hierarchyClient: false
+    experimentalExtensibleEnums: true
+    enableOperationGroup: true
+    package-dir: "arm-fabric"
+    emitter-output-dir: "{project-root}/{service-dir}/{package-dir}"
+    flavor: "azure"
+    packageDetails:
+      name: "@azure/arm-fabric"
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"
