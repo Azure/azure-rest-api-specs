@@ -490,7 +490,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/PagedProjectDeployment"
+              "$ref": "#/definitions/PagedConversationalAnalysisAuthoringProjectDeployment"
             }
           },
           "default": {
@@ -538,7 +538,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/ProjectDeployment"
+              "$ref": "#/definitions/ConversationalAnalysisAuthoringProjectDeployment"
             }
           },
           "default": {
@@ -551,113 +551,6 @@
         "x-ms-examples": {
           "SuccessfulGetDeployment": {
             "$ref": "./examples/SuccessfulGetDeployment.json"
-          }
-        }
-      }
-    },
-    "/authoring/analyze-conversations/projects/{projectName}/deployments/{deploymentName}/:delete-from-resources": {
-      "post": {
-        "operationId": "ConversationalAnalysisAuthoring_DeleteDeploymentFromResources",
-        "summary": "Delete deployment from resources",
-        "description": "Deletes a project deployment from the specified assigned resources.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "projectName",
-            "in": "path",
-            "description": "The project name.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "deploymentName",
-            "in": "path",
-            "description": "The deployment name.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "description": "The options for deleting the deployment.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ConversationalAnalysisAuthoringDeleteDeploymentOptions"
-            }
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "The request has been accepted for processing, but processing has not yet completed.",
-            "headers": {
-              "Operation-Location": {
-                "type": "string",
-                "format": "uri",
-                "description": "The location for monitoring the operation state."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-long-running-operation": true
-      }
-    },
-    "/authoring/analyze-conversations/projects/{projectName}/deployments/{deploymentName}/delete-from-resources/jobs/{jobId}": {
-      "get": {
-        "operationId": "ConversationalAnalysisAuthoring_GetDeploymentDeleteFromResourcesStatus",
-        "summary": "Get deployment deletion from resources status",
-        "description": "Gets the status of an existing delete deployment from specific resources job.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "projectName",
-            "in": "path",
-            "description": "The project name.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "deploymentName",
-            "in": "path",
-            "description": "The deployment name.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "jobId",
-            "in": "path",
-            "description": "The job ID.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/DeploymentJobState"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
           }
         }
       }
@@ -970,7 +863,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/PagedProjectTrainedModel"
+              "$ref": "#/definitions/PagedConversationalAnalysisAuthoringProjectTrainedModel"
             }
           },
           "default": {
@@ -990,7 +883,7 @@
         }
       }
     },
-    "/authoring/analyze-conversations/projects/{projectName}/models/{trainedModelLabel}": {
+    "/authoring/analyze-conversations/projects/{projectName}/models/{label}": {
       "get": {
         "operationId": "ConversationalAnalysisAuthoring_GetTrainedModel",
         "summary": "Get trained model details",
@@ -1007,7 +900,7 @@
             "type": "string"
           },
           {
-            "name": "trainedModelLabel",
+            "name": "label",
             "in": "path",
             "description": "The trained model label.",
             "required": true,
@@ -1018,7 +911,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/ProjectTrainedModel"
+              "$ref": "#/definitions/ConversationalAnalysisAuthoringProjectTrainedModel"
             }
           },
           "default": {
@@ -1050,7 +943,7 @@
             "type": "string"
           },
           {
-            "name": "trainedModelLabel",
+            "name": "label",
             "in": "path",
             "description": "The trained model label.",
             "required": true,
@@ -1073,60 +966,6 @@
             "$ref": "./examples/SuccessfulDeleteModel.json"
           }
         }
-      }
-    },
-    "/authoring/analyze-conversations/projects/{projectName}/models/{trainedModelLabel}/:evaluate": {
-      "post": {
-        "operationId": "ConversationalAnalysisAuthoring_EvaluateModel",
-        "summary": "Evaluate model",
-        "description": "Triggers evaluation operation on a trained model.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "projectName",
-            "in": "path",
-            "description": "The project name.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "trainedModelLabel",
-            "in": "path",
-            "description": "The trained model label.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "description": "The split kind and percentage for the testing dataset.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/EvaluationOnDemandOptions"
-            }
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "The request has been accepted for processing, but processing has not yet completed.",
-            "headers": {
-              "Operation-Location": {
-                "type": "string",
-                "format": "uri",
-                "description": "The location for monitoring the operation state."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-long-running-operation": true
       }
     },
     "/authoring/analyze-conversations/projects/{projectName}/models/{trainedModelLabel}/:load-snapshot": {
@@ -1177,59 +1016,6 @@
           }
         },
         "x-ms-long-running-operation": true
-      }
-    },
-    "/authoring/analyze-conversations/projects/{projectName}/models/{trainedModelLabel}/evaluate/jobs/{jobId}": {
-      "get": {
-        "operationId": "ConversationalAnalysisAuthoring_GetEvaluationStatus",
-        "summary": "Get evaluation status",
-        "description": "Gets the status for an evaluation job.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "projectName",
-            "in": "path",
-            "description": "The project name.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "trainedModelLabel",
-            "in": "path",
-            "description": "The trained model label.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "jobId",
-            "in": "path",
-            "description": "The job ID.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/EvaluationJobState"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        }
       }
     },
     "/authoring/analyze-conversations/projects/{projectName}/models/{trainedModelLabel}/evaluation/result": {
@@ -2097,6 +1883,11 @@
               }
             }
           }
+        },
+        "x-ms-examples": {
+          "SuccessfulGetExportResult": {
+            "$ref": "./examples/SuccessfulGetExportResult.json"
+          }
         }
       }
     }
@@ -2414,19 +2205,6 @@
         "language"
       ]
     },
-    "ConversationalAnalysisAuthoringDeleteDeploymentOptions": {
-      "type": "object",
-      "description": "Represents the options for deleting a project deployment.",
-      "properties": {
-        "assignedResourceIds": {
-          "type": "array",
-          "description": "Represents the resource IDs to delete the deployment from.\nIf not provided, the deployment will be rolled out from all the\nresources it is deployed to.\nIf provided, it will delete the deployment only from the specified\nassigned resources, and leave it for the rest.",
-          "items": {
-            "type": "string"
-          }
-        }
-      }
-    },
     "ConversationalAnalysisAuthoringEvaluationKind": {
       "type": "string",
       "enum": [
@@ -2673,6 +2451,48 @@
         ]
       }
     },
+    "ConversationalAnalysisAuthoringProjectDeployment": {
+      "type": "object",
+      "description": "Represents a project deployment.",
+      "properties": {
+        "deploymentName": {
+          "type": "string",
+          "description": "Represents deployment name.",
+          "readOnly": true
+        },
+        "modelId": {
+          "type": "string",
+          "description": "Represents deployment modelId."
+        },
+        "lastTrainedDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Represents deployment last trained time."
+        },
+        "lastDeployedDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Represents deployment last deployed time."
+        },
+        "deploymentExpirationDate": {
+          "type": "string",
+          "format": "date",
+          "description": "Represents deployment expiration date in the runtime."
+        },
+        "modelTrainingConfigVersion": {
+          "type": "string",
+          "description": "Represents model training config version."
+        }
+      },
+      "required": [
+        "deploymentName",
+        "modelId",
+        "lastTrainedDateTime",
+        "lastDeployedDateTime",
+        "deploymentExpirationDate",
+        "modelTrainingConfigVersion"
+      ]
+    },
     "ConversationalAnalysisAuthoringProjectKind": {
       "type": "string",
       "enum": [
@@ -2742,6 +2562,53 @@
           "description": "Gets or sets the augment diacritics flag."
         }
       }
+    },
+    "ConversationalAnalysisAuthoringProjectTrainedModel": {
+      "type": "object",
+      "description": "Represents a trained model.",
+      "properties": {
+        "trainedModelLabel": {
+          "type": "string",
+          "description": "The trained model label.",
+          "readOnly": true
+        },
+        "modelId": {
+          "type": "string",
+          "description": "The model ID."
+        },
+        "lastTrainedDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The last trained date time of the model."
+        },
+        "lastTrainingDurationInSeconds": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The duration of the model's last training request in seconds."
+        },
+        "modelExpirationDate": {
+          "type": "string",
+          "format": "date",
+          "description": "The model expiration date."
+        },
+        "modelTrainingConfigVersion": {
+          "type": "string",
+          "description": "The model training config version."
+        },
+        "hasSnapshot": {
+          "type": "boolean",
+          "description": "The flag to indicate if the trained model has a snapshot ready."
+        }
+      },
+      "required": [
+        "trainedModelLabel",
+        "modelId",
+        "lastTrainedDateTime",
+        "lastTrainingDurationInSeconds",
+        "modelExpirationDate",
+        "modelTrainingConfigVersion",
+        "hasSnapshot"
+      ]
     },
     "ConversationalAnalysisAuthoringStringIndexType": {
       "type": "string",
@@ -2877,24 +2744,6 @@
         "createdDateTime",
         "lastUpdatedDateTime",
         "status"
-      ]
-    },
-    "DeploymentResource": {
-      "type": "object",
-      "description": "Represents an Azure resource assigned to a deployment.",
-      "properties": {
-        "resourceId": {
-          "type": "string",
-          "description": "Represents the Azure resource Id."
-        },
-        "region": {
-          "type": "string",
-          "description": "Represents the resource region."
-        }
-      },
-      "required": [
-        "resourceId",
-        "region"
       ]
     },
     "EntitiesEvaluationSummary": {
@@ -3107,106 +2956,6 @@
       "required": [
         "error"
       ]
-    },
-    "EvaluationJobResult": {
-      "type": "object",
-      "properties": {
-        "evaluationOptions": {
-          "$ref": "#/definitions/ConversationalAnalysisAuthoringEvaluationOptions",
-          "description": "Represents the options used running the evaluation."
-        },
-        "modelLabel": {
-          "type": "string",
-          "description": "Represents trained model label."
-        },
-        "trainingConfigVersion": {
-          "type": "string",
-          "description": "Represents training config version."
-        },
-        "percentComplete": {
-          "type": "number",
-          "format": "double",
-          "description": "Represents progress percentage."
-        }
-      },
-      "required": [
-        "evaluationOptions",
-        "modelLabel",
-        "trainingConfigVersion",
-        "percentComplete"
-      ]
-    },
-    "EvaluationJobState": {
-      "type": "object",
-      "description": "Represents the state of a evaluation job.",
-      "properties": {
-        "jobId": {
-          "type": "string",
-          "description": "The job ID.",
-          "readOnly": true
-        },
-        "createdDateTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The creation date time of the job."
-        },
-        "lastUpdatedDateTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The last date time the job was updated."
-        },
-        "expirationDateTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The expiration date time of the job."
-        },
-        "status": {
-          "$ref": "#/definitions/JobStatus",
-          "description": "The job status."
-        },
-        "warnings": {
-          "type": "array",
-          "description": "The warnings that were encountered while executing the job.",
-          "items": {
-            "$ref": "#/definitions/Warning"
-          },
-          "x-ms-identifiers": []
-        },
-        "errors": {
-          "type": "array",
-          "description": "The errors encountered while executing the job.",
-          "items": {
-            "$ref": "#/definitions/Error"
-          },
-          "x-ms-identifiers": []
-        },
-        "result": {
-          "$ref": "#/definitions/EvaluationJobResult",
-          "description": "Represents evaluation task detailed result."
-        }
-      },
-      "required": [
-        "jobId",
-        "createdDateTime",
-        "lastUpdatedDateTime",
-        "status",
-        "result"
-      ]
-    },
-    "EvaluationOnDemandOptions": {
-      "type": "object",
-      "description": "Represents the options used running the evaluation.",
-      "properties": {
-        "kind": {
-          "$ref": "#/definitions/ConversationalAnalysisAuthoringEvaluationKind",
-          "description": "Represents the evaluation kind. By default, the evaluation kind is set to\npercentage."
-        },
-        "testingSplitPercentage": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Represents the testing dataset split percentage. Only needed in case the\nevaluation kind is percentage."
-        }
-      }
     },
     "EvaluationResults": {
       "type": "object",
@@ -3740,15 +3489,37 @@
         "intent"
       ]
     },
-    "PagedProjectDeployment": {
+    "PagedConversationalAnalysisAuthoringProjectDeployment": {
       "type": "object",
-      "description": "Paged collection of ProjectDeployment items",
+      "description": "Paged collection of ConversationalAnalysisAuthoringProjectDeployment items",
       "properties": {
         "value": {
           "type": "array",
-          "description": "The ProjectDeployment items on this page",
+          "description": "The ConversationalAnalysisAuthoringProjectDeployment items on this page",
           "items": {
-            "$ref": "#/definitions/ProjectDeployment"
+            "$ref": "#/definitions/ConversationalAnalysisAuthoringProjectDeployment"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PagedConversationalAnalysisAuthoringProjectTrainedModel": {
+      "type": "object",
+      "description": "Paged collection of ConversationalAnalysisAuthoringProjectTrainedModel items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ConversationalAnalysisAuthoringProjectTrainedModel items on this page",
+          "items": {
+            "$ref": "#/definitions/ConversationalAnalysisAuthoringProjectTrainedModel"
           },
           "x-ms-identifiers": []
         },
@@ -3771,28 +3542,6 @@
           "description": "The ProjectMetadata items on this page",
           "items": {
             "$ref": "#/definitions/ProjectMetadata"
-          },
-          "x-ms-identifiers": []
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
-    "PagedProjectTrainedModel": {
-      "type": "object",
-      "description": "Paged collection of ProjectTrainedModel items",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The ProjectTrainedModel items on this page",
-          "items": {
-            "$ref": "#/definitions/ProjectTrainedModel"
           },
           "x-ms-identifiers": []
         },
@@ -3922,57 +3671,6 @@
         "createdDateTime",
         "lastUpdatedDateTime",
         "status"
-      ]
-    },
-    "ProjectDeployment": {
-      "type": "object",
-      "description": "Represents a project deployment.",
-      "properties": {
-        "deploymentName": {
-          "type": "string",
-          "description": "Represents deployment name.",
-          "readOnly": true
-        },
-        "modelId": {
-          "type": "string",
-          "description": "Represents deployment modelId."
-        },
-        "lastTrainedDateTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Represents deployment last trained time."
-        },
-        "lastDeployedDateTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Represents deployment last deployed time."
-        },
-        "deploymentExpirationDate": {
-          "type": "string",
-          "format": "date",
-          "description": "Represents deployment expiration date in the runtime."
-        },
-        "modelTrainingConfigVersion": {
-          "type": "string",
-          "description": "Represents model training config version."
-        },
-        "assignedResources": {
-          "type": "array",
-          "description": "Represents the metadata of the assigned Azure resources.",
-          "items": {
-            "$ref": "#/definitions/DeploymentResource"
-          },
-          "x-ms-identifiers": []
-        }
-      },
-      "required": [
-        "deploymentName",
-        "modelId",
-        "lastTrainedDateTime",
-        "lastDeployedDateTime",
-        "deploymentExpirationDate",
-        "modelTrainingConfigVersion",
-        "assignedResources"
       ]
     },
     "ProjectMetadata": {
@@ -4145,53 +3843,6 @@
           ]
         }
       }
-    },
-    "ProjectTrainedModel": {
-      "type": "object",
-      "description": "Represents a trained model.",
-      "properties": {
-        "trainedModelLabel": {
-          "type": "string",
-          "description": "The trained model label.",
-          "readOnly": true
-        },
-        "modelId": {
-          "type": "string",
-          "description": "The model ID."
-        },
-        "lastTrainedDateTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The last trained date time of the model."
-        },
-        "lastTrainingDurationInSeconds": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The duration of the model's last training request in seconds."
-        },
-        "modelExpirationDate": {
-          "type": "string",
-          "format": "date",
-          "description": "The model expiration date."
-        },
-        "modelTrainingConfigVersion": {
-          "type": "string",
-          "description": "The model training config version."
-        },
-        "hasSnapshot": {
-          "type": "boolean",
-          "description": "The flag to indicate if the trained model has a snapshot ready."
-        }
-      },
-      "required": [
-        "trainedModelLabel",
-        "modelId",
-        "lastTrainedDateTime",
-        "lastTrainingDurationInSeconds",
-        "modelExpirationDate",
-        "modelTrainingConfigVersion",
-        "hasSnapshot"
-      ]
     },
     "SubTrainingJobState": {
       "type": "object",

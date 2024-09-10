@@ -639,7 +639,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/PagedProjectDeployment"
+              "$ref": "#/definitions/PagedConversationalAnalysisAuthoringProjectDeployment"
             }
           },
           "default": {
@@ -687,7 +687,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/ProjectDeployment"
+              "$ref": "#/definitions/ConversationalAnalysisAuthoringProjectDeployment"
             }
           },
           "default": {
@@ -1129,7 +1129,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/PagedProjectTrainedModel"
+              "$ref": "#/definitions/PagedConversationalAnalysisAuthoringProjectTrainedModel"
             }
           },
           "default": {
@@ -1149,7 +1149,7 @@
         }
       }
     },
-    "/authoring/analyze-conversations/projects/{projectName}/models/{trainedModelLabel}": {
+    "/authoring/analyze-conversations/projects/{projectName}/models/{label}": {
       "get": {
         "operationId": "ConversationalAnalysisAuthoring_GetTrainedModel",
         "summary": "Get trained model details",
@@ -1166,7 +1166,7 @@
             "type": "string"
           },
           {
-            "name": "trainedModelLabel",
+            "name": "label",
             "in": "path",
             "description": "The trained model label.",
             "required": true,
@@ -1177,7 +1177,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/ProjectTrainedModel"
+              "$ref": "#/definitions/ConversationalAnalysisAuthoringProjectTrainedModel"
             }
           },
           "default": {
@@ -1209,7 +1209,7 @@
             "type": "string"
           },
           {
-            "name": "trainedModelLabel",
+            "name": "label",
             "in": "path",
             "description": "The trained model label.",
             "required": true,
@@ -3343,6 +3343,57 @@
         ]
       }
     },
+    "ConversationalAnalysisAuthoringProjectDeployment": {
+      "type": "object",
+      "description": "Represents a project deployment.",
+      "properties": {
+        "deploymentName": {
+          "type": "string",
+          "description": "Represents deployment name.",
+          "readOnly": true
+        },
+        "modelId": {
+          "type": "string",
+          "description": "Represents deployment modelId."
+        },
+        "lastTrainedDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Represents deployment last trained time."
+        },
+        "lastDeployedDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Represents deployment last deployed time."
+        },
+        "deploymentExpirationDate": {
+          "type": "string",
+          "format": "date",
+          "description": "Represents deployment expiration date in the runtime."
+        },
+        "modelTrainingConfigVersion": {
+          "type": "string",
+          "description": "Represents model training config version."
+        },
+        "assignedResources": {
+          "type": "array",
+          "description": "Represents the metadata of the assigned Azure resources.",
+          "items": {
+            "$ref": "#/definitions/DeploymentResource"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "deploymentName",
+        "modelId",
+        "lastTrainedDateTime",
+        "lastDeployedDateTime",
+        "deploymentExpirationDate",
+        "modelTrainingConfigVersion",
+        "assignedResources"
+      ]
+    },
     "ConversationalAnalysisAuthoringProjectKind": {
       "type": "string",
       "enum": [
@@ -3412,6 +3463,53 @@
           "description": "Gets or sets the augment diacritics flag."
         }
       }
+    },
+    "ConversationalAnalysisAuthoringProjectTrainedModel": {
+      "type": "object",
+      "description": "Represents a trained model.",
+      "properties": {
+        "trainedModelLabel": {
+          "type": "string",
+          "description": "The trained model label.",
+          "readOnly": true
+        },
+        "modelId": {
+          "type": "string",
+          "description": "The model ID."
+        },
+        "lastTrainedDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The last trained date time of the model."
+        },
+        "lastTrainingDurationInSeconds": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The duration of the model's last training request in seconds."
+        },
+        "modelExpirationDate": {
+          "type": "string",
+          "format": "date",
+          "description": "The model expiration date."
+        },
+        "modelTrainingConfigVersion": {
+          "type": "string",
+          "description": "The model training config version."
+        },
+        "hasSnapshot": {
+          "type": "boolean",
+          "description": "The flag to indicate if the trained model has a snapshot ready."
+        }
+      },
+      "required": [
+        "trainedModelLabel",
+        "modelId",
+        "lastTrainedDateTime",
+        "lastTrainingDurationInSeconds",
+        "modelExpirationDate",
+        "modelTrainingConfigVersion",
+        "hasSnapshot"
+      ]
     },
     "ConversationalAnalysisAuthoringStringIndexType": {
       "type": "string",
@@ -4552,15 +4650,37 @@
         "value"
       ]
     },
-    "PagedProjectDeployment": {
+    "PagedConversationalAnalysisAuthoringProjectDeployment": {
       "type": "object",
-      "description": "Paged collection of ProjectDeployment items",
+      "description": "Paged collection of ConversationalAnalysisAuthoringProjectDeployment items",
       "properties": {
         "value": {
           "type": "array",
-          "description": "The ProjectDeployment items on this page",
+          "description": "The ConversationalAnalysisAuthoringProjectDeployment items on this page",
           "items": {
-            "$ref": "#/definitions/ProjectDeployment"
+            "$ref": "#/definitions/ConversationalAnalysisAuthoringProjectDeployment"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PagedConversationalAnalysisAuthoringProjectTrainedModel": {
+      "type": "object",
+      "description": "Paged collection of ConversationalAnalysisAuthoringProjectTrainedModel items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ConversationalAnalysisAuthoringProjectTrainedModel items on this page",
+          "items": {
+            "$ref": "#/definitions/ConversationalAnalysisAuthoringProjectTrainedModel"
           },
           "x-ms-identifiers": []
         },
@@ -4583,28 +4703,6 @@
           "description": "The ProjectMetadata items on this page",
           "items": {
             "$ref": "#/definitions/ProjectMetadata"
-          },
-          "x-ms-identifiers": []
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
-    "PagedProjectTrainedModel": {
-      "type": "object",
-      "description": "Paged collection of ProjectTrainedModel items",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The ProjectTrainedModel items on this page",
-          "items": {
-            "$ref": "#/definitions/ProjectTrainedModel"
           },
           "x-ms-identifiers": []
         },
@@ -4734,57 +4832,6 @@
         "createdDateTime",
         "lastUpdatedDateTime",
         "status"
-      ]
-    },
-    "ProjectDeployment": {
-      "type": "object",
-      "description": "Represents a project deployment.",
-      "properties": {
-        "deploymentName": {
-          "type": "string",
-          "description": "Represents deployment name.",
-          "readOnly": true
-        },
-        "modelId": {
-          "type": "string",
-          "description": "Represents deployment modelId."
-        },
-        "lastTrainedDateTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Represents deployment last trained time."
-        },
-        "lastDeployedDateTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Represents deployment last deployed time."
-        },
-        "deploymentExpirationDate": {
-          "type": "string",
-          "format": "date",
-          "description": "Represents deployment expiration date in the runtime."
-        },
-        "modelTrainingConfigVersion": {
-          "type": "string",
-          "description": "Represents model training config version."
-        },
-        "assignedResources": {
-          "type": "array",
-          "description": "Represents the metadata of the assigned Azure resources.",
-          "items": {
-            "$ref": "#/definitions/DeploymentResource"
-          },
-          "x-ms-identifiers": []
-        }
-      },
-      "required": [
-        "deploymentName",
-        "modelId",
-        "lastTrainedDateTime",
-        "lastDeployedDateTime",
-        "deploymentExpirationDate",
-        "modelTrainingConfigVersion",
-        "assignedResources"
       ]
     },
     "ProjectMetadata": {
@@ -4957,53 +5004,6 @@
           ]
         }
       }
-    },
-    "ProjectTrainedModel": {
-      "type": "object",
-      "description": "Represents a trained model.",
-      "properties": {
-        "trainedModelLabel": {
-          "type": "string",
-          "description": "The trained model label.",
-          "readOnly": true
-        },
-        "modelId": {
-          "type": "string",
-          "description": "The model ID."
-        },
-        "lastTrainedDateTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The last trained date time of the model."
-        },
-        "lastTrainingDurationInSeconds": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The duration of the model's last training request in seconds."
-        },
-        "modelExpirationDate": {
-          "type": "string",
-          "format": "date",
-          "description": "The model expiration date."
-        },
-        "modelTrainingConfigVersion": {
-          "type": "string",
-          "description": "The model training config version."
-        },
-        "hasSnapshot": {
-          "type": "boolean",
-          "description": "The flag to indicate if the trained model has a snapshot ready."
-        }
-      },
-      "required": [
-        "trainedModelLabel",
-        "modelId",
-        "lastTrainedDateTime",
-        "lastTrainingDurationInSeconds",
-        "modelExpirationDate",
-        "modelTrainingConfigVersion",
-        "hasSnapshot"
-      ]
     },
     "ResourceMetadata": {
       "type": "object",
