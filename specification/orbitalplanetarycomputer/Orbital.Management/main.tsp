@@ -37,6 +37,8 @@ model GeoCatalog is TrackedResource<GeoCatalogProperties> {
   @path
   @segment("geoCatalogs")
   name: string;
+
+  ...ManagedServiceIdentityProperty;
 }
 
 @doc("The Azure Orbital Planetary Computer GeoCatalog tier")
@@ -80,11 +82,22 @@ model GeoCatalogProperties {
   provisioningState?: ProvisioningState;
 }
 
+model ManagedServiceIdentityUpdate
+  is OptionalProperties<UpdateableProperties<Azure.ResourceManager.Foundations.ManagedServiceIdentity>>;
+
+/** Patch request workaround for Swagger LintDiff. Typespec Bug: https://github.com/Azure/typespec-azure/issues/383 */
+model GeoCatalogUpdate {
+  ...Azure.ResourceManager.Foundations.ArmTagsProperty;
+
+  /** Updatable managed service identity */
+  identity?: ManagedServiceIdentityUpdate;
+}
+
 @armResourceOperations(GeoCatalog)
 interface GeoCatalogs {
   get is ArmResourceRead<GeoCatalog>;
   create is ArmResourceCreateOrUpdateAsync<GeoCatalog>;
-  update is ArmResourcePatchSync<GeoCatalog, GeoCatalogProperties>;
+  update is ArmCustomPatchAsync<GeoCatalog, GeoCatalogUpdate>; //ArmResourcePatchSync<GeoCatalog, GeoCatalogProperties>;
   delete is ArmResourceDeleteWithoutOkAsync<GeoCatalog>;
   listByResourceGroup is ArmResourceListByParent<GeoCatalog>;
   listBySubscription is ArmListBySubscription<GeoCatalog>;
