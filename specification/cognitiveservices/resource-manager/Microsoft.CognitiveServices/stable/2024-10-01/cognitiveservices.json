@@ -5444,6 +5444,10 @@
         },
         "capacitySettings": {
           "$ref": "#/definitions/DeploymentCapacitySettings"
+        },
+        "parentDeploymentName": {
+          "type": "string",
+          "description": "The name of parent deployment."
         }
       },
       "description": "Properties of Cognitive Services account deployment."
@@ -5466,6 +5470,11 @@
         "source": {
           "type": "string",
           "description": "Optional. Deployment model source ARM resource ID."
+        },
+        "sourceAccount": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Source of the model, another Microsoft.CognitiveServices accounts ARM resource ID."
         },
         "callRateLimit": {
           "readOnly": true,
