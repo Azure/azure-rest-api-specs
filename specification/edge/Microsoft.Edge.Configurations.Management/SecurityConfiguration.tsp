@@ -45,7 +45,7 @@ model SecurityConfigurationProperties {
   @doc("Usecase of this configuration")
   usecase: Usecase;
 
-  @doc("References for the secrets from keyvaults")
+  @doc("References for the secrets from keyvault")
   @extension("x-ms-identifiers", ["secretUri"])
   secretReferences: SecretReference[];
 }
@@ -66,7 +66,7 @@ model SecretReference {
   purpose: SecretPurpose;
 }
 
-@doc("Vairous purposes for the secrets")
+@doc("Various purposes for the secrets")
 union SecretPurpose {
   @doc("LocalAdminCredential Secret")
   LocalAdminCredential: "LocalAdminCredential",
