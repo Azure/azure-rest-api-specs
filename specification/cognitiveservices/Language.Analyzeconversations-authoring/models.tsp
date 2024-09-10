@@ -727,9 +727,9 @@ model ConversationalAnalysisAuthoringProjectTrainedModel {
   /**
    * The trained model label.
    */
-  @key("label")
+  @key
   @visibility("read")
-  trainedModelLabel: string; //label: string;
+  label: string; //label: string;
 
   /**
    * The model ID.
