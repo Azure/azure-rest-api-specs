@@ -21,10 +21,10 @@ model EvaluatorConfiguration {
   id: string;
 
   @doc("Initialization parameters of the evaluator.")
-  initParams?: Record<Record<string, Any>>;
+  initParams?: Record<string>;
 
   @doc("Data parameters of the evaluator.")
-  dataMapping?: Record<string, string>;
+  dataMapping?: Record<string>;
 }
 
 @doc("Abstract data class.")
@@ -61,16 +61,13 @@ model EvaluationTarget {
 @doc("Base Model and prompt for evaluation.")
 model BaseModel extends EvaluationTarget {
   @doc("Base model for evaluation.")
-  endpoint: string;
+  model_config: Record<Record<unknown>>;
 
   @doc("System prompt to be used with base model. This property will hold prompt asset id.")
   prompt: string;
 
   @doc("parameters for evaluation.")
   parameters: Record<string>;
-
-  @doc("Reference to the key of the base model. Key is stored as part of connection.")
-  key: string;
 
   type: "base_model";
 }
@@ -81,7 +78,7 @@ model Evaluation {
   id?: string;
 
   @doc("Data for evaluation.")
-  data: Data;
+  data: InputData;
 
   @doc("Update stage to 'Archive' to archive the asset. Default is Development, which means the asset is under development.")
   displayName?: string;
@@ -106,9 +103,6 @@ model Evaluation {
   @doc("Evaluators to be used for the evaluation.")
   evaluators: Record<EvaluatorConfiguration>;
 
-  @doc("Output location for the evaluation.")
-  outputLocation?: string;
-
   @doc("Evaluation Target.")
   evaluationTarget?: EvaluationTarget;
 }
@@ -128,8 +122,15 @@ model PagedEvaluation {
 
 @doc("Update Evaluation Request")
 model UpdateEvaluationRequest {
+  // Tags do we addition or overwrite?
   @doc("Tags to be updated.")
   tags: Record<string>;
+
+  @doc("Display Name")
+  displayName: string;
+
+  @doc("Description")
+  description: string;
 }
 
 
