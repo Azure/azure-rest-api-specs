@@ -44,7 +44,7 @@ interface ConversationalAnalysisAuthoring {
 #suppress "@azure-tools/typespec-azure-core/casing-style"
 @summary("Get project details")
 @get
-op getProject is languageOperations.ResourceRead<ProjectMetadata>;
+op getProject is languageOperations.ResourceRead<ConversationalAnalysisAuthoringProjectMetadata>;
 
 
 /**
@@ -52,7 +52,7 @@ op getProject is languageOperations.ResourceRead<ProjectMetadata>;
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @summary("Create project")
-op createProject is languageOperations.ResourceCreateOrUpdate<ProjectMetadata>;
+op createProject is languageOperations.ResourceCreateOrUpdate<ConversationalAnalysisAuthoringProjectMetadata>;
 
 /**
  * Deletes a project.
@@ -85,7 +85,7 @@ op deleteProject is Foundations.LongRunningOperation<
 @actionSeparator("/:")
 @added(Versions.v2023_04_15_preview)
 op `authorize-copy` is languageOperations.ResourceAction<
-  ProjectMetadata,
+  ConversationalAnalysisAuthoringProjectMetadata,
   ConversationalAnalysisAuthoringCopyAuthorizationOptions,
   ConversationalAnalysisAuthoringCopyProjectOptions
 >;
@@ -138,7 +138,7 @@ op export is Foundations.LongRunningOperation<
      * The format of the exported project file to use.
      */
     @query("format")
-    format?: ExportedProjectFormat;
+    format?: ConversationalAnalysisAuthoringExportedProjectFormat;
 
     /**
      * Specifies the method used to interpret string offsets. For additional
@@ -186,7 +186,7 @@ op `import` is Foundations.LongRunningOperation<
      * The format of the exported project file to use.
      */
     @query("format")
-    format?: ExportedProjectFormat;
+    format?: ConversationalAnalysisAuthoringExportedProjectFormat;
 
     /**
      * The project data to import.
@@ -248,7 +248,7 @@ op getCopyProjectStatus is Foundations.Operation<
     @path
     jobId: string;
   },
-  CopyProjectJobState
+  ConversationalAnalysisAuthoringCopyProjectJobState
 >;
 
 /**
@@ -390,7 +390,7 @@ op getDeploymentDeleteFromResourcesStatus is Foundations.Operation<
     @path
     jobId: string;
   },
-  DeploymentJobState
+  ConversationalAnalysisAuthoringDeploymentJobState
 >;
 
 /**
@@ -420,7 +420,7 @@ op getDeploymentStatus is Foundations.Operation<
     @path
     jobId: string;
   },
-  DeploymentJobState
+  ConversationalAnalysisAuthoringDeploymentJobState
 >;
 
 /**
@@ -471,7 +471,7 @@ op getSwapDeploymentsStatus is Foundations.Operation<
     @path
     jobId: string;
   },
-  DeploymentJobState
+  ConversationalAnalysisAuthoringDeploymentJobState
 >;
 
 /**
@@ -496,7 +496,7 @@ op getExportStatus is Foundations.Operation<
     @path
     jobId: string;
   },
-  ExportProjectJobState
+  ConversationalAnalysisAuthoringExportProjectJobState
 >;
 
 /**
@@ -544,7 +544,7 @@ op getImportStatus is Foundations.Operation<
     @path
     jobId: string;
   },
-  ImportProjectJobState
+  ConversationalAnalysisAuthoringImportProjectJobState
 >;
 
 /**
@@ -597,7 +597,7 @@ op evaluateModel is Foundations.LongRunningOperation<
      * The split kind and percentage for the testing dataset.
      */
     @body
-    body: EvaluationOnDemandOptions;
+    body: ConversationalAnalysisAuthoringEvaluationOnDemandOptions;
   },
   AcceptedResponse,
   {},
@@ -660,7 +660,7 @@ op getEvaluationStatus is Foundations.Operation<
     @path
     jobId: string;
   },
-  EvaluationJobState
+  ConversationalAnalysisAuthoringEvaluationJobState
 >;
 
 /**
@@ -710,7 +710,7 @@ op getModelEvaluationResults is Foundations.Operation<
     @query("maxpagesize")
     maxpagesize?: int32;
   },
-  EvaluationResults
+  ConversationalAnalysisAuthoringEvaluationResults
 >;
 
 /**
@@ -735,7 +735,7 @@ op getModelEvaluationSummary is Foundations.Operation<
     @path
     trainedModelLabel: string;
   },
-  EvaluationSummary
+  ConversationalAnalysisAuthoringEvaluationSummary
 >;
 
 /**
@@ -765,7 +765,7 @@ op getLoadSnapshotStatus is Foundations.Operation<
     @path
     jobId: string;
   },
-  LoadSnapshotJobState
+  ConversationalAnalysisAuthoringLoadSnapshotJobState
 >;
 
 /**
@@ -775,7 +775,7 @@ op getLoadSnapshotStatus is Foundations.Operation<
 @summary("Lists deployment resources")
 @added(Versions.v2023_04_15_preview)
 op listDeploymentResources is languageOperations.ResourceList<
-  AssignedDeploymentResource,
+  ConversationalAnalysisAuthoringAssignedDeploymentResource,
   ListProjectsQueryParameters
 >;
 
@@ -862,7 +862,7 @@ op getAssignDeploymentResourcesStatus is Foundations.Operation<
     @path
     jobId: string;
   },
-  DeploymentResourcesJobState
+  ConversationalAnalysisAuthoringDeploymentResourcesJobState
 >;
 
 /**
@@ -887,7 +887,7 @@ op getUnassignDeploymentResourcesStatus is Foundations.Operation<
     @path
     jobId: string;
   },
-  DeploymentResourcesJobState
+  ConversationalAnalysisAuthoringDeploymentResourcesJobState
 >;
 
 /**
@@ -896,7 +896,7 @@ op getUnassignDeploymentResourcesStatus is Foundations.Operation<
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @summary("List training jobs")
 op listTrainingJobs is languageOperations.ResourceList<
-  TrainingJobState,
+  ConversationalAnalysisAuthoringTrainingJobState,
   ListProjectsQueryParameters
 >;
 
@@ -905,7 +905,7 @@ op listTrainingJobs is languageOperations.ResourceList<
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @summary("Get training status")
-op getTrainingStatus is languageOperations.ResourceRead<TrainingJobState>;
+op getTrainingStatus is languageOperations.ResourceRead<ConversationalAnalysisAuthoringTrainingJobState>;
 
 /**
  * Triggers a cancellation for a running training job.
@@ -943,7 +943,7 @@ op cancelTrainingJob is Foundations.LongRunningOperation<
 @summary("List projects")
 @get
 op listProjects is languageOperations.ResourceList<
-  ProjectMetadata,
+  ConversationalAnalysisAuthoringProjectMetadata,
   ListProjectsQueryParameters
 >;
 
@@ -962,7 +962,7 @@ op getProjectDeletionStatus is Foundations.Operation<
     @path
     jobId: string;
   },
-  ProjectDeletionJobState
+  ConversationalAnalysisAuthoringProjectDeletionJobState
 >;
 
 /**
@@ -995,7 +995,7 @@ op listAssignedResourceDeployments is Foundations.Operation<
     @query("maxpagesize")
     maxpagesize?: int32;
   },
-  AssignedResourceDeploymentsMetadata
+  ConversationalAnalysisAuthoringAssignedResourceDeploymentsMetadata
 >;
 
 /**
@@ -1031,7 +1031,7 @@ op getSupportedLanguages is Foundations.Operation<
     @query("maxpagesize")
     maxpagesize?: int32;
   },
-  SupportedLanguages
+  ConversationalAnalysisAuthoringSupportedLanguages
 >;
 
 /**
@@ -1077,7 +1077,7 @@ op getSupportedPrebuiltEntities is Foundations.Operation<
     @query("maxpagesize")
     maxpagesize?: int32;
   },
-  PrebuiltEntities
+  ConversationalAnalysisAuthoringPrebuiltEntities
 >;
 
 /**
@@ -1113,6 +1113,6 @@ op listTrainingConfigVersions is Foundations.Operation<
     @query("maxpagesize")
     maxpagesize?: int32;
   },
-  TrainingConfigVersions
+  ConversationalAnalysisAuthoringTrainingConfigVersions
 >;
 }

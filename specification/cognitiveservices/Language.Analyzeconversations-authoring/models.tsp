@@ -51,7 +51,7 @@ union ErrorCode {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
-union ExportedProjectFormat {
+union ConversationalAnalysisAuthoringExportedProjectFormat {
   string,
 
   /**
@@ -111,7 +111,7 @@ union ConversationalAnalysisAuthoringEvaluationKind {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 @lroStatus
-union JobStatus {
+union ConversationalAnalysisAuthoringJobStatus {
   string,
   notStarted: "notStarted",
   running: "running",
@@ -130,7 +130,7 @@ union JobStatus {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
-union CompositionSetting {
+union ConversationalAnalysisAuthoringCompositionSetting {
   string,
 
   /**
@@ -171,7 +171,7 @@ union ConversationalAnalysisAuthoringOrchestrationTargetProjectKind {
  * Represents the metadata of a project.
  */
 @resource("authoring/analyze-conversations/projects")
-model ProjectMetadata {
+model ConversationalAnalysisAuthoringProjectMetadata {
   /**
    * Represents the project creation datetime.
    */
@@ -490,14 +490,14 @@ model ConversationalAnalysisAuthoringEvaluationOptions {
  * Represents the state of a copy job.
  */
 @added(Versions.v2023_04_15_preview)
-model CopyProjectJobState {
-  ...JobState;
+model ConversationalAnalysisAuthoringCopyProjectJobState {
+  ...ConversationalAnalysisAuthoringJobState;
 }
 
 /**
  * Represents a job's state.
  */
-model JobState {
+model ConversationalAnalysisAuthoringJobState {
   /**
    * The job ID.
    */
@@ -526,12 +526,12 @@ model JobState {
   /**
    * The job status.
    */
-  status: JobStatus;
+  status: ConversationalAnalysisAuthoringJobStatus;
 
   /**
    * The warnings that were encountered while executing the job.
    */
-  warnings?: Warning[];
+  warnings?: ConversationalAnalysisAuthoringWarning[];
 
   /**
    * The errors encountered while executing the job.
@@ -542,7 +542,7 @@ model JobState {
 /**
  * Represents a warning that was encountered while executing the request.
  */
-model Warning {
+model ConversationalAnalysisAuthoringWarning {
   /**
    * The warning code.
    */
@@ -557,7 +557,7 @@ model Warning {
 /**
  * Represents a list of retrieved deployments.
  */
-model ProjectDeployments {
+model ConversationalAnalysisAuthoringProjectDeployments {
   /**
    * The list of retrieved deployments.
    */
@@ -573,7 +573,7 @@ model ProjectDeployments {
  * Represents a project deployment.
  */
 @resource("deployments")
-@parentResource(ProjectMetadata)
+@parentResource(ConversationalAnalysisAuthoringProjectMetadata)
 model ConversationalAnalysisAuthoringProjectDeployment {
   /**
    * Represents deployment name.
@@ -613,13 +613,13 @@ model ConversationalAnalysisAuthoringProjectDeployment {
    * Represents the metadata of the assigned Azure resources.
    */
   @added(Versions.v2023_04_15_preview)
-  assignedResources: DeploymentResource[];
+  assignedResources: ConversationalAnalysisAuthoringDeploymentResource[];
 }
 
 /**
  * Represents an Azure resource assigned to a deployment.
  */
-model DeploymentResource {
+model ConversationalAnalysisAuthoringDeploymentResource {
   /**
    * Represents the Azure resource Id.
    */
@@ -665,8 +665,8 @@ model ConversationalAnalysisAuthoringDeleteDeploymentOptions {
 /**
  * Represents the state of a deployment job.
  */
-model DeploymentJobState {
-  ...JobState;
+model ConversationalAnalysisAuthoringDeploymentJobState {
+  ...ConversationalAnalysisAuthoringJobState;
 }
 
 /**
@@ -687,8 +687,8 @@ model ConversationalAnalysisAuthoringSwapDeploymentsOptions {
 /**
  * Represents the state of an export job.
  */
-model ExportProjectJobState {
-  ...JobState;
+model ConversationalAnalysisAuthoringExportProjectJobState {
+  ...ConversationalAnalysisAuthoringJobState;
 
   /**
    * The URL to use in order to download the exported project.
@@ -699,8 +699,8 @@ model ExportProjectJobState {
 /**
  * Represents the state of an import job.
  */
-model ImportProjectJobState {
-  ...JobState;
+model ConversationalAnalysisAuthoringImportProjectJobState {
+  ...ConversationalAnalysisAuthoringJobState;
 }
 
 /**
@@ -722,7 +722,7 @@ model ConversationalAnalysisAuthoringProjectTrainedModels {
  * Represents a trained model.
  */
 @resource("models")
-@parentResource(ProjectMetadata)
+@parentResource(ConversationalAnalysisAuthoringProjectMetadata)
 model ConversationalAnalysisAuthoringProjectTrainedModel {
   /**
    * The trained model label.
@@ -766,7 +766,7 @@ model ConversationalAnalysisAuthoringProjectTrainedModel {
 /**
  * Represents the options used running the evaluation.
  */
-model EvaluationOnDemandOptions {
+model ConversationalAnalysisAuthoringEvaluationOnDemandOptions {
   /**
    * Represents the evaluation kind. By default, the evaluation kind is set to
    * percentage.
@@ -783,17 +783,17 @@ model EvaluationOnDemandOptions {
 /**
  * Represents the state of a evaluation job.
  */
-model EvaluationJobState {
-  ...JobState;
+model ConversationalAnalysisAuthoringEvaluationJobState {
+  ...ConversationalAnalysisAuthoringJobState;
 
   /**
    * Represents evaluation task detailed result.
    */
-  result: EvaluationJobResult;
+  result: ConversationalAnalysisAuthoringEvaluationJobResult;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
-model EvaluationJobResult {
+model ConversationalAnalysisAuthoringEvaluationJobResult {
   /**
    * Represents the options used running the evaluation.
    */
@@ -818,11 +818,11 @@ model EvaluationJobResult {
 /**
  * Represent a list of utterances' evaluation results.
  */
-model EvaluationResults {
+model ConversationalAnalysisAuthoringEvaluationResults {
   /**
    * The utterances evaluation results.
    */
-  value: UtteranceEvaluationResult[];
+  value: ConversationalAnalysisAuthoringUtteranceEvaluationResult[];
 
   /**
    * The next page link.
@@ -833,7 +833,7 @@ model EvaluationResults {
 /**
  * Represents the evaluation result for an utterance.
  */
-model UtteranceEvaluationResult {
+model ConversationalAnalysisAuthoringUtteranceEvaluationResult {
   /**
    * Represents the utterance text.
    */
@@ -854,12 +854,12 @@ model UtteranceEvaluationResult {
   /**
    * Represents the entities results for the utterance.
    */
-  entitiesResult: UtteranceEntitiesEvaluationResult;
+  entitiesResult: ConversationalAnalysisAuthoringUtteranceEntitiesEvaluationResult;
 
   /**
    * Represents the intents results for the utterance.
    */
-  intentsResult: UtteranceIntentsEvaluationResult;
+  intentsResult: ConversationalAnalysisAuthoringUtteranceIntentsEvaluationResult;
 
   /**
    * Represents the location of the labeled summary.
@@ -876,22 +876,22 @@ model UtteranceEvaluationResult {
  * Represents the comparison between the expected and predicted entities for an
  * utterance.
  */
-model UtteranceEntitiesEvaluationResult {
+model ConversationalAnalysisAuthoringUtteranceEntitiesEvaluationResult {
   /**
    * Represents the expected entity labels.
    */
-  expectedEntities: UtteranceEntityEvaluationResult[];
+  expectedEntities: ConversationalAnalysisAuthoringUtteranceEntityEvaluationResult[];
 
   /**
    * Represents the predicted entity labels.
    */
-  predictedEntities: UtteranceEntityEvaluationResult[];
+  predictedEntities: ConversationalAnalysisAuthoringUtteranceEntityEvaluationResult[];
 }
 
 /**
  * Represents the evaluation output of an entity label or prediction.
  */
-model UtteranceEntityEvaluationResult {
+model ConversationalAnalysisAuthoringUtteranceEntityEvaluationResult {
   /**
    * Represents the entity category.
    */
@@ -912,7 +912,7 @@ model UtteranceEntityEvaluationResult {
  * Represents the comparison between the expected and the predicted intent for an
  * utterance.
  */
-model UtteranceIntentsEvaluationResult {
+model ConversationalAnalysisAuthoringUtteranceIntentsEvaluationResult {
   /**
    * Represents the utterance's expected intent.
    */
@@ -927,16 +927,16 @@ model UtteranceIntentsEvaluationResult {
 /**
  * Represents the evaluation result summary.
  */
-model EvaluationSummary {
+model ConversationalAnalysisAuthoringEvaluationSummary {
   /**
    * Contains the data related to entities evaluation.
    */
-  entitiesEvaluation: EntitiesEvaluationSummary;
+  entitiesEvaluation: ConversationalAnalysisAuthoringEntitiesEvaluationSummary;
 
   /**
    * Contains the data related to intents evaluation.
    */
-  intentsEvaluation: IntentsEvaluationSummary;
+  intentsEvaluation: ConversationalAnalysisAuthoringIntentsEvaluationSummary;
 
   /**
    * The options that were used while running the evaluation.
@@ -947,18 +947,18 @@ model EvaluationSummary {
 /**
  * Represents the evaluation result summary for the project's entities.
  */
-model EntitiesEvaluationSummary {
+model ConversationalAnalysisAuthoringEntitiesEvaluationSummary {
   /**
    * Represents the confusion matrix between two entities (the two entities can be
    * the same). The matrix is between the entity that was labelled and the entity
    * that was predicted.
    */
-  confusionMatrix: ConfusionMatrix;
+  confusionMatrix: ConversationalAnalysisAuthoringConfusionMatrix;
 
   /**
    * Represents the entities evaluation summary.
    */
-  entities: Record<EntityEvaluationSummary>;
+  entities: Record<ConversationalAnalysisAuthoringEntityEvaluationSummary>;
 
   /**
    * Represents the micro F1. Expected value is a float between 0 and 1 inclusive.
@@ -998,17 +998,17 @@ model EntitiesEvaluationSummary {
 /**
  * Represents a row in the confusion matrix.
  */
-model ConfusionMatrixRow is Record<ConfusionMatrixCell>;
+model ConversationalAnalysisAuthoringConfusionMatrixRow is Record<ConversationalAnalysisAuthoringConfusionMatrixCell>;
 
 /**
  * Represents a confusion matrix for evaluating predictions against labeled data.
  */
-model ConfusionMatrix is Record<ConfusionMatrixRow>;
+model ConversationalAnalysisAuthoringConfusionMatrix is Record<ConversationalAnalysisAuthoringConfusionMatrixRow>;
 
 /**
  * Represents a cell in a confusion matrix.
  */
-model ConfusionMatrixCell {
+model ConversationalAnalysisAuthoringConfusionMatrixCell {
   /**
    * Represents normalized value in percentages.
    */
@@ -1023,7 +1023,7 @@ model ConfusionMatrixCell {
 /**
  * Represents the evaluation result for an entity.
  */
-model EntityEvaluationSummary {
+model ConversationalAnalysisAuthoringEntityEvaluationSummary {
   /**
    * Represents the model precision
    */
@@ -1063,18 +1063,18 @@ model EntityEvaluationSummary {
 /**
  * Represents the evaluation summary for the project's intents.
  */
-model IntentsEvaluationSummary {
+model ConversationalAnalysisAuthoringIntentsEvaluationSummary {
   /**
    * Represents the confusion matrix between two intents (the two intents can be the
    * same). The matrix is between the intent that was labelled and the intent that
    * was predicted.
    */
-  confusionMatrix: ConfusionMatrix;
+  confusionMatrix: ConversationalAnalysisAuthoringConfusionMatrix;
 
   /**
    * Represents the intents evaluation summary.
    */
-  intents: Record<IntentEvaluationSummary>;
+  intents: Record<ConversationalAnalysisAuthoringIntentEvaluationSummary>;
 
   /**
    * Represents the micro F1. Expected value is a float between 0 and 1 inclusive.
@@ -1114,7 +1114,7 @@ model IntentsEvaluationSummary {
 /**
  * The evaluation summary for an intent.
  */
-model IntentEvaluationSummary {
+model ConversationalAnalysisAuthoringIntentEvaluationSummary {
   /**
    * Represents the model precision
    */
@@ -1154,19 +1154,19 @@ model IntentEvaluationSummary {
 /**
  * Represents the state of loading a snapshot job.
  */
-model LoadSnapshotJobState {
-  ...JobState;
+model ConversationalAnalysisAuthoringLoadSnapshotJobState {
+  ...ConversationalAnalysisAuthoringJobState;
 }
 
 /**
  * Represents the assigned deployment resources.
  */
 @added(Versions.v2023_04_15_preview)
-model AssignedDeploymentResources {
+model ConversationalAnalysisAuthoringAssignedDeploymentResources {
   /**
    * The list of assigned deployment resources.
    */
-  value: AssignedDeploymentResource[];
+  value: ConversationalAnalysisAuthoringAssignedDeploymentResource[];
 
   /**
    * The next page link.
@@ -1178,9 +1178,9 @@ model AssignedDeploymentResources {
  * Represents the assigned deployment resource.
  */
 @resource("resources")
-@parentResource(ProjectMetadata)
+@parentResource(ConversationalAnalysisAuthoringProjectMetadata)
 @added(Versions.v2023_04_15_preview)
-model AssignedDeploymentResource {
+model ConversationalAnalysisAuthoringAssignedDeploymentResource {
   /**
    * The resource ID.
    */
@@ -1202,13 +1202,13 @@ model ConversationalAnalysisAuthoringAssignDeploymentResourcesOptions {
   /**
    * Represents the metadata for the resources to be assigned.
    */
-  resourcesMetadata: ResourceMetadata[];
+  resourcesMetadata: ConversationalAnalysisAuthoringResourceMetadata[];
 }
 
 /**
  * Represents metadata for the Azure resource..
  */
-model ResourceMetadata {
+model ConversationalAnalysisAuthoringResourceMetadata {
   /**
    * Represents the Azure resource ID.
    */
@@ -1240,18 +1240,18 @@ model ConversationalAnalysisAuthoringUnassignDeploymentResourcesOptions {
  * Represents the state of a deployment resources job.
  */
 @added(Versions.v2023_04_15_preview)
-model DeploymentResourcesJobState {
-  ...JobState;
+model ConversationalAnalysisAuthoringDeploymentResourcesJobState {
+  ...ConversationalAnalysisAuthoringJobState;
 }
 
 /**
  * Represents a list of retrieved training jobs.
  */
-model TrainingJobs {
+model ConversationalAnalysisAuthoringTrainingJobs {
   /**
    * The list of jobs.
    */
-  value: TrainingJobState[];
+  value: ConversationalAnalysisAuthoringTrainingJobState[];
 
   /**
    * The next page link.
@@ -1263,20 +1263,20 @@ model TrainingJobs {
  * Represents the state of a training job.
  */
 @resource("train/jobs")
-@parentResource(ProjectMetadata)
-model TrainingJobState {
-  ...JobState;
+@parentResource(ConversationalAnalysisAuthoringProjectMetadata)
+model ConversationalAnalysisAuthoringTrainingJobState {
+  ...ConversationalAnalysisAuthoringJobState;
 
   /**
    * Represents training tasks detailed result.
    */
-  result: TrainingJobResult;
+  result: ConversationalAnalysisAuthoringTrainingJobResult;
 }
 
 /**
  * Represents the output of a training job.
  */
-model TrainingJobResult {
+model ConversationalAnalysisAuthoringTrainingJobResult {
   /**
    * Represents trained model label.
    */
@@ -1295,12 +1295,12 @@ model TrainingJobResult {
   /**
    * Represents the model training status.
    */
-  trainingStatus: SubTrainingJobState;
+  trainingStatus: ConversationalAnalysisAuthoringSubTrainingJobState;
 
   /**
    * Represents model evaluation status.
    */
-  evaluationStatus?: SubTrainingJobState;
+  evaluationStatus?: ConversationalAnalysisAuthoringSubTrainingJobState;
 
   /**
    * Represents the estimated end date time for training and evaluation.
@@ -1312,7 +1312,7 @@ model TrainingJobResult {
 /**
  * Represents the detailed state of a training sub-operation.
  */
-model SubTrainingJobState {
+model ConversationalAnalysisAuthoringSubTrainingJobState {
   /**
    * Represents progress percentage.
    */
@@ -1333,20 +1333,20 @@ model SubTrainingJobState {
   /**
    * Represents the status of the sub-operation.
    */
-  status: JobStatus;
+  status: ConversationalAnalysisAuthoringJobStatus;
 }
 
 /**
  * Represents a list of retrieved projects' metadata.
  */
 @resource("projects")
-model ProjectsMetadata {
+model ConversationalAnalysisAuthoringProjectsMetadata {
   /**
    * The list of projects.
    */
   @key
   @visibility
-  value: ProjectMetadata[];
+  value: ConversationalAnalysisAuthoringProjectMetadata[];
 
   /**
    * The next page link.
@@ -1358,19 +1358,19 @@ model ProjectsMetadata {
  * Represents the state of a project deletion job.
  */
 @resource("/projects/global/deletion-jobs/{jobId}")
-model ProjectDeletionJobState {
-  ...JobState;
+model ConversationalAnalysisAuthoringProjectDeletionJobState {
+  ...ConversationalAnalysisAuthoringJobState;
 }
 
 /**
  * Represents the metadata for deployments assigned to a resource.
  */
 @added(Versions.v2023_04_15_preview)
-model AssignedResourceDeploymentsMetadata {
+model ConversationalAnalysisAuthoringAssignedResourceDeploymentsMetadata {
   /**
    * The list of retrieved assigned project deployments.
    */
-  value: AssignedProjectDeploymentsMetadata[];
+  value: ConversationalAnalysisAuthoringAssignedProjectDeploymentsMetadata[];
 
   /**
    * The next page link.
@@ -1382,7 +1382,7 @@ model AssignedResourceDeploymentsMetadata {
  * Represents the metadata for assigned deployments for a project.
  */
 @added(Versions.v2023_04_15_preview)
-model AssignedProjectDeploymentsMetadata {
+model ConversationalAnalysisAuthoringAssignedProjectDeploymentsMetadata {
   /**
    * Represents the project name.
    */
@@ -1391,14 +1391,14 @@ model AssignedProjectDeploymentsMetadata {
   /**
    * Represents the resource region.
    */
-  deploymentsMetadata: AssignedProjectDeploymentMetadata[];
+  deploymentsMetadata: ConversationalAnalysisAuthoringAssignedProjectDeploymentMetadata[];
 }
 
 /**
  * Represents the metadata for an assigned deployment
  */
 @added(Versions.v2023_04_15_preview)
-model AssignedProjectDeploymentMetadata {
+model ConversationalAnalysisAuthoringAssignedProjectDeploymentMetadata {
   /**
    * Represents the deployment name.
    */
@@ -1419,11 +1419,11 @@ model AssignedProjectDeploymentMetadata {
 /**
  * Represents a list of retrieved languages.
  */
-model SupportedLanguages {
+model ConversationalAnalysisAuthoringSupportedLanguages {
   /**
    * The list of the languages.
    */
-  value: SupportedLanguage[];
+  value: ConversationalAnalysisAuthoringSupportedLanguage[];
 
   /**
    * The next page link.
@@ -1434,7 +1434,7 @@ model SupportedLanguages {
 /**
  * Represents a supported language.
  */
-model SupportedLanguage {
+model ConversationalAnalysisAuthoringSupportedLanguage {
   /**
    * The language name.
    */
@@ -1450,11 +1450,11 @@ model SupportedLanguage {
 /**
  * Represents a list of the retrieved supported prebuilt entities.
  */
-model PrebuiltEntities {
+model ConversationalAnalysisAuthoringPrebuiltEntities {
   /**
    * The supported prebuilt entities.
    */
-  value: PrebuiltEntity[];
+  value: ConversationalAnalysisAuthoringPrebuiltEntity[];
 
   /**
    * The next page link.
@@ -1465,7 +1465,7 @@ model PrebuiltEntities {
 /**
  * Represents a supported prebuilt entity.
  */
-model PrebuiltEntity {
+model ConversationalAnalysisAuthoringPrebuiltEntity {
   /**
    * The prebuilt entity category.
    */
@@ -1485,11 +1485,11 @@ model PrebuiltEntity {
 /**
  * Represents a list of training config versions.
  */
-model TrainingConfigVersions {
+model ConversationalAnalysisAuthoringTrainingConfigVersions {
   /**
    * The list of the training config versions.
    */
-  value: TrainingConfigVersionInfo[];
+  value: ConversationalAnalysisAuthoringTrainingConfigVersionInfo[];
 
   /**
    * The next page link.
@@ -1500,7 +1500,7 @@ model TrainingConfigVersions {
 /**
  * Represents a training config version.
  */
-model TrainingConfigVersionInfo {
+model ConversationalAnalysisAuthoringTrainingConfigVersionInfo {
   /**
    * Represents the version of the config.
    */
@@ -1515,7 +1515,7 @@ model TrainingConfigVersionInfo {
 /**
  * Represents an entity with its components.
  */
-model ConversationExportedEntity {
+model ConversationalAnalysisAuthoringConversationExportedEntity {
   /**
    * The category of the entity.
    */
@@ -1524,22 +1524,22 @@ model ConversationExportedEntity {
   /**
    * The behavior to follow when the entity's components overlap with each other.
    */
-  compositionSetting?: CompositionSetting;
+  compositionSetting?: ConversationalAnalysisAuthoringCompositionSetting;
 
   /**
    * The list component of the entity.
    */
-  list?: ExportedEntityList;
+  list?: ConversationalAnalysisAuthoringExportedEntityList;
 
   /**
    * The prebuilt entities components.
    */
-  prebuilts?: ExportedPrebuiltEntity[];
+  prebuilts?: ConversationalAnalysisAuthoringExportedPrebuiltEntity[];
 
   /**
    * The regex component of the entity.
    */
-  regex?: ExportedEntityRegex;
+  regex?: ConversationalAnalysisAuthoringExportedEntityRegex;
 
   /**
    * The required components. Allowed values are 'learned', 'list', 'prebuilts' and 'regex'.
@@ -1550,17 +1550,17 @@ model ConversationExportedEntity {
 /**
  * Represents a list component of an entity.
  */
-model ExportedEntityList {
+model ConversationalAnalysisAuthoringExportedEntityList {
   /**
    * The sub-lists of the list component.
    */
-  sublists?: ExportedEntitySublist[];
+  sublists?: ConversationalAnalysisAuthoringExportedEntitySublist[];
 }
 
 /**
  * Represents a sub-list inside a list component.
  */
-model ExportedEntitySublist {
+model ConversationalAnalysisAuthoringExportedEntitySublist {
   /**
    * The key of the sub-list.
    */
@@ -1569,13 +1569,13 @@ model ExportedEntitySublist {
   /**
    * The phrases of that correspond to the sub-list.
    */
-  synonyms?: ExportedEntityListSynonym[];
+  synonyms?: ConversationalAnalysisAuthoringExportedEntityListSynonym[];
 }
 
 /**
  * Represents a list of synonyms inside a list component
  */
-model ExportedEntityListSynonym {
+model ConversationalAnalysisAuthoringExportedEntityListSynonym {
   /**
    * Represents the language of the synonyms. This is BCP-47 representation of a
    * language. For example, use "en" for English, "en-gb" for English (UK), "es" for
@@ -1592,7 +1592,7 @@ model ExportedEntityListSynonym {
 /**
  * Represents an exported prebuilt entity component
  */
-model ExportedPrebuiltEntity {
+model ConversationalAnalysisAuthoringExportedPrebuiltEntity {
   /**
    * The prebuilt entity category.
    */
@@ -1602,13 +1602,13 @@ model ExportedPrebuiltEntity {
 /**
  * Represents a regex component of an entity.
  */
-model ExportedEntityRegex {
+model ConversationalAnalysisAuthoringExportedEntityRegex {
   /**
    * The regex expressions of the regex component. These expressions follow the .NET
    * regex syntax. For reference, check here:
    * https://learn.microsoft.com/dotnet/standard/base-types/regular-expressions
    */
-  expressions?: ExportedEntityRegexExpression[];
+  expressions?: ConversationalAnalysisAuthoringExportedEntityRegexExpression[];
 }
 
 /**
@@ -1616,7 +1616,7 @@ model ExportedEntityRegex {
  * the .NET regex syntax. For reference, check here:
  * https://learn.microsoft.com/dotnet/standard/base-types/regular-expressions
  */
-model ExportedEntityRegexExpression {
+model ConversationalAnalysisAuthoringExportedEntityRegexExpression {
   /**
    * The key of the regex expression.
    */
@@ -1638,7 +1638,7 @@ model ExportedEntityRegexExpression {
 /**
  * Represents an exported intent of a conversational project.
  */
-model ConversationExportedIntent {
+model ConversationalAnalysisAuthoringConversationExportedIntent {
   /**
    * The intent category.
    */
@@ -1652,17 +1652,17 @@ model ConversationalAnalysisAuthoringConversationExportedProjectAssets extends C
   /**
    * The intents defined in the project.
    */
-  intents?: ConversationExportedIntent[];
+  intents?: ConversationalAnalysisAuthoringConversationExportedIntent[];
 
   /**
    * The entities defined in the project.
    */
-  entities?: ConversationExportedEntity[];
+  entities?: ConversationalAnalysisAuthoringConversationExportedEntity[];
 
   /**
    * The utterances defined in the project.
    */
-  utterances?: ConversationExportedUtterance[];
+  utterances?: ConversationalAnalysisAuthoringConversationExportedUtterance[];
 
   /**
    * The type of project containing the assets.
@@ -1673,11 +1673,11 @@ model ConversationalAnalysisAuthoringConversationExportedProjectAssets extends C
 /**
  * Represents an exported utterance for a conversational project.
  */
-model ConversationExportedUtterance {
+model ConversationalAnalysisAuthoringConversationExportedUtterance {
   /**
    * Represents the entity labels of the utterance.
    */
-  entities?: ExportedUtteranceEntityLabel[];
+  entities?: ConversationalAnalysisAuthoringExportedUtteranceEntityLabel[];
 
   /**
    * The utterance text.
@@ -1705,7 +1705,7 @@ model ConversationExportedUtterance {
 /**
  * Represents an entity label for an utterance.
  */
-model ExportedUtteranceEntityLabel {
+model ConversationalAnalysisAuthoringExportedUtteranceEntityLabel {
   /**
    * The category of the entity label.
    */
@@ -1723,18 +1723,18 @@ model ExportedUtteranceEntityLabel {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
-model ConversationSummarizationExportedProjectAssets {
+model ConversationalAnalysisAuthoringConversationSummarizationExportedProjectAssets {
   /**
    * Represents the conversations of the project.
    */
-  conversations?: CustomConversationSummarizationConversation[];
+  conversations?: ConversationalAnalysisAuthoringCustomConversationSummarizationConversation[];
 }
 
 /**
  * Represents an exported conversation for a custom conversation summarization.
  */
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
-model CustomConversationSummarizationConversation {
+model ConversationalAnalysisAuthoringCustomConversationSummarizationConversation {
   summaryLocation?: string;
 
   /**
@@ -1774,7 +1774,7 @@ model ConversationalAnalysisAuthoringExportedConversationOrchestration {
  * Represents the orchestration options for a Conversational project target.
  */
 model ConversationalAnalysisAuthoringExportedConversationOrchestrationOptions
-  extends ExportedOrchestrationOptions {
+  extends ConversationalAnalysisAuthoringExportedOrchestrationOptions {
   /**
    * The Conversational project target details.
    */
@@ -1790,7 +1790,7 @@ model ConversationalAnalysisAuthoringExportedConversationOrchestrationOptions
  * Represents the options used to define the orchestration behavior of an intent.
  */
 @discriminator("targetProjectKind")
-model ExportedOrchestrationOptions {
+model ConversationalAnalysisAuthoringExportedOrchestrationOptions {
   targetProjectKind: ConversationalAnalysisAuthoringOrchestrationTargetProjectKind;
 }
 
@@ -1817,7 +1817,7 @@ model ConversationalAnalysisAuthoringExportedLuisOrchestration {
 /**
  * Represents the orchestration options for a LUIS application target.
  */
-model ConversationalAnalysisAuthoringExportedLuisOrchestrationOptions extends ExportedOrchestrationOptions {
+model ConversationalAnalysisAuthoringExportedLuisOrchestrationOptions extends ConversationalAnalysisAuthoringExportedOrchestrationOptions {
   /**
    * The LUIS application target details.
    */
@@ -1843,7 +1843,7 @@ model ConversationalAnalysisAuthoringExportedQuestionAnsweringOrchestration {
  * Represents the orchestration options for a Question Answering project target.
  */
 model ConversationalAnalysisAuthoringExportedQuestionAnsweringOrchestrationOptions
-  extends ExportedOrchestrationOptions {
+  extends ConversationalAnalysisAuthoringExportedOrchestrationOptions {
   /**
    * The Question Answering project details.
    */
@@ -1858,11 +1858,11 @@ model ConversationalAnalysisAuthoringExportedQuestionAnsweringOrchestrationOptio
 /**
  * Represents an exported intent for an orchestration project.
  */
-model OrchestrationExportedIntent {
+model ConversationalAnalysisAuthoringOrchestrationExportedIntent {
   /**
    * Specifies the behavior of this intent in the orchestration flow.
    */
-  orchestration?: ExportedOrchestrationOptions;
+  orchestration?: ConversationalAnalysisAuthoringExportedOrchestrationOptions;
 
   /**
    * The intent category.
@@ -1877,12 +1877,12 @@ model ConversationalAnalysisAuthoringOrchestrationExportedProjectAssets extends 
   /**
    * Represents the intents of the project.
    */
-  intents?: OrchestrationExportedIntent[];
+  intents?: ConversationalAnalysisAuthoringOrchestrationExportedIntent[];
 
   /**
    * Represents the utterances of the project.
    */
-  utterances?: OrchestrationExportedUtterance[];
+  utterances?: ConversationalAnalysisAuthoringOrchestrationExportedUtterance[];
 
   /**
    * The type of project containing the assets.
@@ -1893,7 +1893,7 @@ model ConversationalAnalysisAuthoringOrchestrationExportedProjectAssets extends 
 /**
  * Represents an utterance of an orchestration project.
  */
-model OrchestrationExportedUtterance {
+model ConversationalAnalysisAuthoringOrchestrationExportedUtterance {
   /**
    * The utterance text.
    */
