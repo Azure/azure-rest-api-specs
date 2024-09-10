@@ -526,11 +526,11 @@
         "operationId": "AdminRules_CreateOrUpdate",
         "parameters": [
           {
-            "name": "adminRule",
+            "name": "adminRuleName",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/BaseAdminRule"
+              "$ref": "#/definitions/AdminRule"
             },
             "description": "The admin rule to create or update"
           }
@@ -539,13 +539,13 @@
           "200": {
             "description": "Updated rule",
             "schema": {
-              "$ref": "#/definitions/BaseAdminRule"
+              "$ref": "#/definitions/AdminRule"
             }
           },
           "201": {
             "description": "Created rule",
             "schema": {
-              "$ref": "#/definitions/BaseAdminRule"
+              "$ref": "#/definitions/AdminRule"
             }
           },
           "default": {
@@ -803,6 +803,9 @@
     },
     "AdminRule": {
       "type": "object",
+      "required": [
+        "properties"
+      ],
       "properties": {
         "properties": {
           "$ref": "#/definitions/AdminPropertiesFormat",

@@ -125,6 +125,7 @@
             "in": "body",
             "name": "body",
             "description": "Pool resource object to create/update.",
+            "required": true,
             "schema": {
               "$ref": "#/definitions/IpamPool"
             }
@@ -141,6 +142,11 @@
             "description": "Pool was created",
             "schema": {
               "$ref": "#/definitions/IpamPool"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string"
+              }
             }
           },
           "default": {
@@ -149,6 +155,10 @@
               "$ref": "./network.json#/definitions/CommonErrorResponse"
             }
           }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
         },
         "x-ms-examples": {
           "IpamPools_Create": {
@@ -304,7 +314,7 @@
           "202": {
             "description": "Pool delete request accepted and will complete asynchronously",
             "headers": {
-              "Location": {
+              "Azure-AsyncOperation": {
                 "type": "string"
               }
             }
@@ -321,7 +331,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "azure-async-operation"
         },
         "x-ms-examples": {
           "IpamPools_Delete": {
@@ -751,6 +761,9 @@
     "IpamPool": {
       "description": "Instance of Pool resource.",
       "type": "object",
+      "required": [
+        "properties"
+      ],
       "properties": {
         "properties": {
           "$ref": "#/definitions/IpamPoolProperties"
