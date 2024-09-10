@@ -38,6 +38,10 @@ These settings apply only when `--tag=package-2024-10-01-preview` is specified o
 ```yaml $(tag) == 'package-2024-10-01-preview'
 input-file:
   - ../updatemanager/resource-manager/Microsoft.UpdateManager/preview/2024-10-01-preview/updatemanager.json
+suppressions:
+  - code: TagsAreNotAllowedForProxyResources
+    from: updatemanager.json
+    reason: Issue https://github.com/Azure/azure-openapi-validator/issues/722. The BodyTopLevelProperties check failing.
 ```
 
 ---

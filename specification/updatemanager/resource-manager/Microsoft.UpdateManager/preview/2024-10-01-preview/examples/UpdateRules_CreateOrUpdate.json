@@ -1,13 +1,13 @@
 {
-  "title": "UpdateRuleSets_Update",
-  "operationId": "UpdateRuleSets_Update",
+  "title": "UpdateRules_CreateOrUpdate",
+  "operationId": "UpdateRules_CreateOrUpdate",
   "parameters": {
     "api-version": "2024-10-01-preview",
     "subscriptionId": "11809CA1-E126-4017-945E-AA795CD5C5A9",
     "resourceGroupName": "rgopenapi",
-    "updateRuleSetName": "updateruleset1",
-    "properties": {
-      "tags": {},
+    "updateRuleName": "updaterule1",
+    "resource": {
+      "location": "westus",
       "properties": {
         "rebootSettings": "IfRequired",
         "windowsParameters": {
@@ -39,6 +39,7 @@
   "responses": {
     "200": {
       "body": {
+        "location": "westus",
         "properties": {
           "rebootSettings": "IfRequired",
           "windowsParameters": {
@@ -64,12 +65,59 @@
               "Security"
             ]
           },
+          "approvePatchesAfterDays": 14,
           "provisioningState": "Succeeded"
         },
-        "tags": {},
+        "id": "/subscriptions/11809CA1-E126-4017-945E-AA795CD5C5A9/resourceGroups/rgopenapi/providers/Microsoft.UpdateManager/updaterules/updaterule1",
+        "name": "updaterule1",
+        "type": "Microsoft.UpdateManager/updaterules",
+        "systemData": {
+          "createdBy": "iewyxsnriqktsvp",
+          "createdByType": "User",
+          "createdAt": "2023-05-19T00:28:48.610Z",
+          "lastModifiedBy": "xrchbnnuzierzpxw",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2023-05-19T00:28:48.610Z"
+        }
+      }
+    },
+    "201": {
+      "headers": {
+        "Azure-AsyncOperation": "https://contoso.com/operationstatus"
+      },
+      "body": {
         "location": "westus",
-        "id": "/subscriptions/11809CA1-E126-4017-945E-AA795CD5C5A9/resourceGroups/rgopenapi/providers/Microsoft.UpdateManager/updaterulesets/updateruleset1",
-        "name": "updateruleset1",
+        "properties": {
+          "rebootSettings": "IfRequired",
+          "windowsParameters": {
+            "kbNumbersToExclude": [
+              "4025925"
+            ],
+            "kbNumbersToInclude": [
+              "4025924"
+            ],
+            "classificationsToInclude": [
+              "Critical"
+            ],
+            "excludeKbsRequiringReboot": true
+          },
+          "linuxParameters": {
+            "packageNameMasksToExclude": [
+              "vlan"
+            ],
+            "packageNameMasksToInclude": [
+              "openssh"
+            ],
+            "classificationsToInclude": [
+              "Security"
+            ]
+          },
+          "approvePatchesAfterDays": 14,
+          "provisioningState": "Succeeded"
+        },
+        "id": "/subscriptions/11809CA1-E126-4017-945E-AA795CD5C5A9/resourceGroups/rgopenapi/providers/Microsoft.UpdateManager/updaterules/updaterule1",
+        "name": "updaterule1",
+        "type": "Microsoft.UpdateManager/updaterules",
         "systemData": {
           "createdBy": "iewyxsnriqktsvp",
           "createdByType": "User",
