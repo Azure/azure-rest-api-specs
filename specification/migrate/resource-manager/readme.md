@@ -40,6 +40,16 @@ These settings apply only when `--tag=package-preview-2023-10` is specified on t
 input-file:
   - Microsoft.OffAzure/preview/2023-10-01-preview/migrate.json
 ```
+
+### Tag: package-preview-2024-05
+
+These settings apply only when `--tag=package-preview-2024-05` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2024-05'
+input-file:
+  - Microsoft.OffAzure/preview/2024-05-01-preview/migrate.json
+```
+
 ### Tag: package-2023-06
 
 These settings apply only when `--tag=package-2023-06` is specified on the command line.
@@ -191,7 +201,16 @@ These are the global settings for the API.
 
 ``` yaml
 openapi-type: arm
-tag: package-preview-2023-10
+tag: package-preview-2024-05
+```
+
+### Tag: package-preview-2024-05
+
+These settings apply only when `--tag=package-preview-2024-05` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2024-05'
+input-file:
+  - Microsoft.OffAzure/preview/2024-05-01-preview/migrate.json
 ```
 
 ### Tag: package-preview-2023-10
