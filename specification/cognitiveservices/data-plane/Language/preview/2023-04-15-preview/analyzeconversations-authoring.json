@@ -61,7 +61,7 @@
   "paths": {
     "/authoring/analyze-conversations/projects": {
       "get": {
-        "operationId": "ListProjects",
+        "operationId": "ConversationalAnalysisAuthoring_ListProjects",
         "summary": "List projects",
         "description": "Lists the existing projects.",
         "parameters": [
@@ -107,11 +107,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "SuccessfulListProjects": {
-            "$ref": "./examples/SuccessfulListProjects.json"
-          }
-        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -119,7 +114,7 @@
     },
     "/authoring/analyze-conversations/projects/{projectName}": {
       "get": {
-        "operationId": "GetProject",
+        "operationId": "ConversationalAnalysisAuthoring_GetProject",
         "summary": "Get project details",
         "description": "Gets the details of a project.",
         "parameters": [
@@ -147,15 +142,10 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-examples": {
-          "SuccessfulGetProject": {
-            "$ref": "./examples/SuccessfulGetProject.json"
-          }
         }
       },
       "patch": {
-        "operationId": "CreateProject",
+        "operationId": "ConversationalAnalysisAuthoring_CreateProject",
         "summary": "Create project",
         "description": "Creates a new project or updates an existing one.",
         "consumes": [
@@ -201,17 +191,12 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-examples": {
-          "SuccessfulCreateProject": {
-            "$ref": "./examples/SuccessfulCreateProject.json"
-          }
         }
       }
     },
     "/authoring/analyze-conversations/projects/{projectName}/:authorize-copy": {
       "post": {
-        "operationId": "AuthorizeCopy",
+        "operationId": "ConversationalAnalysisAuthoring_AuthorizeCopy",
         "summary": "Copy project authorization",
         "description": "Generates a copy project operation authorization to the current target Azure\nresource.",
         "parameters": [
@@ -230,7 +215,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/CopyAuthorizationOptions"
+              "$ref": "#/definitions/ConversationalAnalysisAuthoringCopyAuthorizationOptions"
             }
           }
         ],
@@ -238,7 +223,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/CopyProjectOptions"
+              "$ref": "#/definitions/ConversationalAnalysisAuthoringCopyProjectOptions"
             }
           },
           "default": {
@@ -247,17 +232,12 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-examples": {
-          "SuccessfulCopyProjectAuthorization": {
-            "$ref": "./examples/SuccessfulCopyProjectAuthorization.json"
-          }
         }
       }
     },
     "/authoring/analyze-conversations/projects/{projectName}/:copy": {
       "post": {
-        "operationId": "CopyProject",
+        "operationId": "ConversationalAnalysisAuthoring_CopyProject",
         "summary": "Copy project",
         "description": "Copies an existing project to another Azure resource.",
         "parameters": [
@@ -277,7 +257,7 @@
             "description": "The copy project info.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/CopyProjectOptions"
+              "$ref": "#/definitions/ConversationalAnalysisAuthoringCopyProjectOptions"
             }
           }
         ],
@@ -299,17 +279,12 @@
             }
           }
         },
-        "x-ms-examples": {
-          "SuccessfulCopyProject": {
-            "$ref": "./examples/SuccessfulCopyProject.json"
-          }
-        },
         "x-ms-long-running-operation": true
       }
     },
     "/authoring/analyze-conversations/projects/{projectName}/:export": {
       "post": {
-        "operationId": "Export",
+        "operationId": "ConversationalAnalysisAuthoring_Export",
         "summary": "Export project",
         "description": "Triggers a job to export a project's data.",
         "parameters": [
@@ -360,7 +335,7 @@
               "Utf16CodeUnit"
             ],
             "x-ms-enum": {
-              "name": "StringIndexType",
+              "name": "ConversationalAnalysisAuthoringStringIndexType",
               "modelAsString": true,
               "values": [
                 {
@@ -404,17 +379,12 @@
             }
           }
         },
-        "x-ms-examples": {
-          "SuccessfulExportProject": {
-            "$ref": "./examples/SuccessfulExportProject.json"
-          }
-        },
         "x-ms-long-running-operation": true
       }
     },
     "/authoring/analyze-conversations/projects/{projectName}/:import": {
       "post": {
-        "operationId": "Import",
+        "operationId": "ConversationalAnalysisAuthoring_Import",
         "summary": "Import project",
         "description": "Triggers a job to import a project. If a project with the same name already\nexists, the data of that project is replaced.",
         "parameters": [
@@ -461,7 +431,7 @@
             "description": "The project data to import.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ExportedProject"
+              "$ref": "#/definitions/ConversationalAnalysisAuthoringExportedProject"
             }
           }
         ],
@@ -483,17 +453,12 @@
             }
           }
         },
-        "x-ms-examples": {
-          "SuccessfulImportProject": {
-            "$ref": "./examples/SuccessfulImportProject.json"
-          }
-        },
         "x-ms-long-running-operation": true
       }
     },
     "/authoring/analyze-conversations/projects/{projectName}/:train": {
       "post": {
-        "operationId": "Train",
+        "operationId": "ConversationalAnalysisAuthoring_Train",
         "summary": "Train project",
         "description": "Triggers a training job for a project.",
         "parameters": [
@@ -513,7 +478,7 @@
             "description": "The training input parameters.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/TrainingJobOptions"
+              "$ref": "#/definitions/ConversationalAnalysisAuthoringTrainingJobOptions"
             }
           }
         ],
@@ -535,17 +500,12 @@
             }
           }
         },
-        "x-ms-examples": {
-          "SuccessfulTrainProject": {
-            "$ref": "./examples/SuccessfulTrainProject.json"
-          }
-        },
         "x-ms-long-running-operation": true
       }
     },
     "/authoring/analyze-conversations/projects/{projectName}/copy/jobs/{jobId}": {
       "get": {
-        "operationId": "GetCopyProjectStatus",
+        "operationId": "ConversationalAnalysisAuthoring_GetCopyProjectStatus",
         "summary": "Get copy project status",
         "description": "Gets the status of an existing copy project job.",
         "parameters": [
@@ -586,17 +546,12 @@
               }
             }
           }
-        },
-        "x-ms-examples": {
-          "SuccessfulGetCopyProjectStatus": {
-            "$ref": "./examples/SuccessfulGetCopyProjectStatus.json"
-          }
         }
       }
     },
     "/authoring/analyze-conversations/projects/{projectName}/deployments": {
       "get": {
-        "operationId": "ListDeployments",
+        "operationId": "ConversationalAnalysisAuthoring_ListDeployments",
         "summary": "List deployments",
         "description": "Lists the deployments belonging to a project.",
         "parameters": [
@@ -649,11 +604,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "SuccessfulListDeployments": {
-            "$ref": "./examples/SuccessfulListDeployments.json"
-          }
-        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -661,7 +611,7 @@
     },
     "/authoring/analyze-conversations/projects/{projectName}/deployments/{deploymentName}": {
       "get": {
-        "operationId": "GetDeployment",
+        "operationId": "ConversationalAnalysisAuthoring_GetDeployment",
         "summary": "Get deployment details",
         "description": "Gets the details of a deployment.",
         "parameters": [
@@ -696,17 +646,12 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-examples": {
-          "SuccessfulGetDeployment": {
-            "$ref": "./examples/SuccessfulGetDeployment.json"
-          }
         }
       }
     },
     "/authoring/analyze-conversations/projects/{projectName}/deployments/{deploymentName}/:delete-from-resources": {
       "post": {
-        "operationId": "DeleteDeploymentFromResources",
+        "operationId": "ConversationalAnalysisAuthoring_DeleteDeploymentFromResources",
         "summary": "Delete deployment from resources",
         "description": "Deletes a project deployment from the specified assigned resources.",
         "parameters": [
@@ -733,7 +678,7 @@
             "description": "The options for deleting the deployment.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/DeleteDeploymentOptions"
+              "$ref": "#/definitions/ConversationalAnalysisAuthoringDeleteDeploymentOptions"
             }
           }
         ],
@@ -755,17 +700,12 @@
             }
           }
         },
-        "x-ms-examples": {
-          "SuccessfulDeleteDeploymentFromResources": {
-            "$ref": "./examples/SuccessfulDeleteDeploymentFromResources.json"
-          }
-        },
         "x-ms-long-running-operation": true
       }
     },
     "/authoring/analyze-conversations/projects/{projectName}/deployments/{deploymentName}/delete-from-resources/jobs/{jobId}": {
       "get": {
-        "operationId": "GetDeploymentDeleteFromResourcesStatus",
+        "operationId": "ConversationalAnalysisAuthoring_GetDeploymentDeleteFromResourcesStatus",
         "summary": "Get deployment deletion from resources status",
         "description": "Gets the status of an existing delete deployment from specific resources job.",
         "parameters": [
@@ -813,17 +753,12 @@
               }
             }
           }
-        },
-        "x-ms-examples": {
-          "SuccessfulGetDeploymentDeleteFromResourcesStatus": {
-            "$ref": "./examples/SuccessfulGetDeploymentDeleteFromResourcesStatus.json"
-          }
         }
       }
     },
     "/authoring/analyze-conversations/projects/{projectName}/deployments/{deploymentName}/jobs/{jobId}": {
       "get": {
-        "operationId": "GetDeploymentStatus",
+        "operationId": "ConversationalAnalysisAuthoring_GetDeploymentStatus",
         "summary": "Get deployment status",
         "description": "Gets the status of an existing deployment job.",
         "parameters": [
@@ -871,17 +806,12 @@
               }
             }
           }
-        },
-        "x-ms-examples": {
-          "SuccessfulGetDeploymentStatus": {
-            "$ref": "./examples/SuccessfulGetDeploymentStatus.json"
-          }
         }
       }
     },
     "/authoring/analyze-conversations/projects/{projectName}/deployments/:swap": {
       "post": {
-        "operationId": "SwapDeployments",
+        "operationId": "ConversationalAnalysisAuthoring_SwapDeployments",
         "summary": "Swap deployments",
         "description": "Swaps two existing deployments with each other.",
         "parameters": [
@@ -901,7 +831,7 @@
             "description": "The job object to swap two deployments.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/SwapDeploymentsOptions"
+              "$ref": "#/definitions/ConversationalAnalysisAuthoringSwapDeploymentsOptions"
             }
           }
         ],
@@ -923,17 +853,12 @@
             }
           }
         },
-        "x-ms-examples": {
-          "SuccessfulSwapDeployments": {
-            "$ref": "./examples/SuccessfulSwapDeployments.json"
-          }
-        },
         "x-ms-long-running-operation": true
       }
     },
     "/authoring/analyze-conversations/projects/{projectName}/deployments/swap/jobs/{jobId}": {
       "get": {
-        "operationId": "GetSwapDeploymentsStatus",
+        "operationId": "ConversationalAnalysisAuthoring_GetSwapDeploymentsStatus",
         "summary": "Gets swap deployments status",
         "description": "Gets the status of an existing swap deployment job.",
         "parameters": [
@@ -974,17 +899,12 @@
               }
             }
           }
-        },
-        "x-ms-examples": {
-          "SuccessfulGetSwapDeploymentsStatus": {
-            "$ref": "./examples/SuccessfulGetSwapDeploymentsStatus.json"
-          }
         }
       }
     },
     "/authoring/analyze-conversations/projects/{projectName}/export/jobs/{jobId}": {
       "get": {
-        "operationId": "GetExportStatus",
+        "operationId": "ConversationalAnalysisAuthoring_GetExportStatus",
         "summary": "Get export status",
         "description": "Gets the status of an export job. Once job completes, returns the project\nmetadata, and assets.",
         "parameters": [
@@ -1025,17 +945,12 @@
               }
             }
           }
-        },
-        "x-ms-examples": {
-          "SuccessfulGetExportStatus": {
-            "$ref": "./examples/SuccessfulGetExportStatus.json"
-          }
         }
       }
     },
     "/authoring/analyze-conversations/projects/{projectName}/import/jobs/{jobId}": {
       "get": {
-        "operationId": "GetImportStatus",
+        "operationId": "ConversationalAnalysisAuthoring_GetImportStatus",
         "summary": "Get import status",
         "description": "Gets the status for an import.",
         "parameters": [
@@ -1076,17 +991,12 @@
               }
             }
           }
-        },
-        "x-ms-examples": {
-          "SuccessfulGetImportStatus": {
-            "$ref": "./examples/SuccessfulGetImportStatus.json"
-          }
         }
       }
     },
     "/authoring/analyze-conversations/projects/{projectName}/models": {
       "get": {
-        "operationId": "ListTrainedModels",
+        "operationId": "ConversationalAnalysisAuthoring_ListTrainedModels",
         "summary": "List trained models",
         "description": "Lists the trained models belonging to a project.",
         "parameters": [
@@ -1139,11 +1049,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "SuccessfulListModels": {
-            "$ref": "./examples/SuccessfulListModels.json"
-          }
-        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -1151,7 +1056,7 @@
     },
     "/authoring/analyze-conversations/projects/{projectName}/models/{trainedModelLabel}": {
       "get": {
-        "operationId": "GetTrainedModel",
+        "operationId": "ConversationalAnalysisAuthoring_GetTrainedModel",
         "summary": "Get trained model details",
         "description": "Gets the details of a trained model.",
         "parameters": [
@@ -1186,15 +1091,10 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-examples": {
-          "SuccessfulGetModel": {
-            "$ref": "./examples/SuccessfulGetModel.json"
-          }
         }
       },
       "delete": {
-        "operationId": "DeleteTrainedModel",
+        "operationId": "ConversationalAnalysisAuthoring_DeleteTrainedModel",
         "summary": "Delete trained model",
         "description": "Deletes an existing trained model.",
         "parameters": [
@@ -1226,17 +1126,12 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-examples": {
-          "SuccessfulDeleteModel": {
-            "$ref": "./examples/SuccessfulDeleteModel.json"
-          }
         }
       }
     },
     "/authoring/analyze-conversations/projects/{projectName}/models/{trainedModelLabel}/:evaluate": {
       "post": {
-        "operationId": "EvaluateModel",
+        "operationId": "ConversationalAnalysisAuthoring_EvaluateModel",
         "summary": "Evaluate model",
         "description": "Triggers evaluation operation on a trained model.",
         "parameters": [
@@ -1285,17 +1180,12 @@
             }
           }
         },
-        "x-ms-examples": {
-          "SuccessfulEvaluationProject": {
-            "$ref": "./examples/SuccessfulEvaluationProject.json"
-          }
-        },
         "x-ms-long-running-operation": true
       }
     },
     "/authoring/analyze-conversations/projects/{projectName}/models/{trainedModelLabel}/:load-snapshot": {
       "post": {
-        "operationId": "LoadSnapshot",
+        "operationId": "ConversationalAnalysisAuthoring_LoadSnapshot",
         "summary": "Load trained model snapshot to the working directory.",
         "description": "Restores the snapshot of this trained model to be the current working directory\nof the project.",
         "parameters": [
@@ -1335,17 +1225,12 @@
             }
           }
         },
-        "x-ms-examples": {
-          "SuccessfulLoadSnapshot": {
-            "$ref": "./examples/SuccessfulLoadSnapshot.json"
-          }
-        },
         "x-ms-long-running-operation": true
       }
     },
     "/authoring/analyze-conversations/projects/{projectName}/models/{trainedModelLabel}/evaluate/jobs/{jobId}": {
       "get": {
-        "operationId": "GetEvaluationStatus",
+        "operationId": "ConversationalAnalysisAuthoring_GetEvaluationStatus",
         "summary": "Get evaluation status",
         "description": "Gets the status for an evaluation job.",
         "parameters": [
@@ -1393,17 +1278,12 @@
               }
             }
           }
-        },
-        "x-ms-examples": {
-          "SuccessfulGetEvaluationStatus": {
-            "$ref": "./examples/SuccessfulGetEvaluationStatus.json"
-          }
         }
       }
     },
     "/authoring/analyze-conversations/projects/{projectName}/models/{trainedModelLabel}/evaluation/result": {
       "get": {
-        "operationId": "GetModelEvaluationResults",
+        "operationId": "ConversationalAnalysisAuthoring_GetModelEvaluationResults",
         "summary": "Get trained model evaluation result",
         "description": "Gets the detailed results of the evaluation for a trained model. This includes\nthe raw inference results for the data included in the evaluation process.",
         "parameters": [
@@ -1434,7 +1314,7 @@
               "Utf16CodeUnit"
             ],
             "x-ms-enum": {
-              "name": "StringIndexType",
+              "name": "ConversationalAnalysisAuthoringStringIndexType",
               "modelAsString": true,
               "values": [
                 {
@@ -1489,17 +1369,12 @@
               }
             }
           }
-        },
-        "x-ms-examples": {
-          "SuccessfulGetModelEvaluation": {
-            "$ref": "./examples/SuccessfulGetModelEvaluation.json"
-          }
         }
       }
     },
     "/authoring/analyze-conversations/projects/{projectName}/models/{trainedModelLabel}/evaluation/summary-result": {
       "get": {
-        "operationId": "GetModelEvaluationSummary",
+        "operationId": "ConversationalAnalysisAuthoring_GetModelEvaluationSummary",
         "summary": "Get trained model evaluation summary",
         "description": "Gets the evaluation summary of a trained model. The summary includes high level\nperformance measurements of the model e.g., F1, Precision, Recall, etc.",
         "parameters": [
@@ -1540,17 +1415,12 @@
               }
             }
           }
-        },
-        "x-ms-examples": {
-          "SuccessfulGetModelEvaluationSummary": {
-            "$ref": "./examples/SuccessfulGetModelEvaluationSummary.json"
-          }
         }
       }
     },
     "/authoring/analyze-conversations/projects/{projectName}/models/{trainedModelLabel}/load-snapshot/jobs/{jobId}": {
       "get": {
-        "operationId": "GetLoadSnapshotStatus",
+        "operationId": "ConversationalAnalysisAuthoring_GetLoadSnapshotStatus",
         "summary": "Get load snapshot status",
         "description": "Gets the status for loading a snapshot.",
         "parameters": [
@@ -1598,17 +1468,12 @@
               }
             }
           }
-        },
-        "x-ms-examples": {
-          "SuccessfulGetLoadSnapshotStatus": {
-            "$ref": "./examples/SuccessfulGetLoadSnapshotStatus.json"
-          }
         }
       }
     },
     "/authoring/analyze-conversations/projects/{projectName}/resources": {
       "get": {
-        "operationId": "ListDeploymentResources",
+        "operationId": "ConversationalAnalysisAuthoring_ListDeploymentResources",
         "summary": "Lists deployment resources",
         "description": "Lists the deployments resources assigned to the project.",
         "parameters": [
@@ -1661,11 +1526,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "SuccessfulListDeploymentResources": {
-            "$ref": "./examples/SuccessfulListDeploymentResources.json"
-          }
-        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -1673,7 +1533,7 @@
     },
     "/authoring/analyze-conversations/projects/{projectName}/resources/:assign": {
       "post": {
-        "operationId": "AssignDeploymentResources",
+        "operationId": "ConversationalAnalysisAuthoring_AssignDeploymentResources",
         "summary": "Assign deployment resources",
         "description": "Assign new Azure resources to a project to allow deploying new deployments to\nthem. This API is available only via AAD authentication and not supported via\nsubscription key authentication. For more details about AAD authentication,\ncheck here:\nhttps://learn.microsoft.com/en-us/azure/cognitive-services/authentication?tabs=powershell#authenticate-with-azure-active-directory",
         "parameters": [
@@ -1693,7 +1553,7 @@
             "description": "The new project resources info.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/AssignDeploymentResourcesOptions"
+              "$ref": "#/definitions/ConversationalAnalysisAuthoringAssignDeploymentResourcesOptions"
             }
           }
         ],
@@ -1715,17 +1575,12 @@
             }
           }
         },
-        "x-ms-examples": {
-          "SuccessfulAssignDeploymentResources": {
-            "$ref": "./examples/SuccessfulAssignDeploymentResources.json"
-          }
-        },
         "x-ms-long-running-operation": true
       }
     },
     "/authoring/analyze-conversations/projects/{projectName}/resources/:unassign": {
       "post": {
-        "operationId": "UnassignDeploymentResources",
+        "operationId": "ConversationalAnalysisAuthoring_UnassignDeploymentResources",
         "summary": "Unassign deployment resources",
         "description": "Unassign resources from a project. This disallows deploying new deployments to\nthese resources, and deletes existing deployments assigned to them.",
         "parameters": [
@@ -1745,7 +1600,7 @@
             "description": "The info for the deployment resources to be deleted.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/UnassignDeploymentResourcesOptions"
+              "$ref": "#/definitions/ConversationalAnalysisAuthoringUnassignDeploymentResourcesOptions"
             }
           }
         ],
@@ -1767,17 +1622,12 @@
             }
           }
         },
-        "x-ms-examples": {
-          "SuccessfulUnassignDeploymentResources": {
-            "$ref": "./examples/SuccessfulUnassignDeploymentResources.json"
-          }
-        },
         "x-ms-long-running-operation": true
       }
     },
     "/authoring/analyze-conversations/projects/{projectName}/resources/assign/jobs/{jobId}": {
       "get": {
-        "operationId": "GetAssignDeploymentResourcesStatus",
+        "operationId": "ConversationalAnalysisAuthoring_GetAssignDeploymentResourcesStatus",
         "summary": "Get assign deployment resources status",
         "description": "Gets the status of an existing assign deployment resources job.",
         "parameters": [
@@ -1818,17 +1668,12 @@
               }
             }
           }
-        },
-        "x-ms-examples": {
-          "SuccessfulGetAssignDeploymentResourcesStatus": {
-            "$ref": "./examples/SuccessfulGetAssignDeploymentResourcesStatus.json"
-          }
         }
       }
     },
     "/authoring/analyze-conversations/projects/{projectName}/resources/unassign/jobs/{jobId}": {
       "get": {
-        "operationId": "GetUnassignDeploymentResourcesStatus",
+        "operationId": "ConversationalAnalysisAuthoring_GetUnassignDeploymentResourcesStatus",
         "summary": "Get unassign deployment resources status",
         "description": "Gets the status of an existing unassign deployment resources job.",
         "parameters": [
@@ -1869,17 +1714,12 @@
               }
             }
           }
-        },
-        "x-ms-examples": {
-          "SuccessfulGetUnassignDeploymentResourcesStatus": {
-            "$ref": "./examples/SuccessfulGetUnassignDeploymentResourcesStatus.json"
-          }
         }
       }
     },
     "/authoring/analyze-conversations/projects/{projectName}/train/jobs": {
       "get": {
-        "operationId": "ListTrainingJobs",
+        "operationId": "ConversationalAnalysisAuthoring_ListTrainingJobs",
         "summary": "List training jobs",
         "description": "Lists the non-expired training jobs created for a project.",
         "parameters": [
@@ -1932,11 +1772,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "SuccessfulListTrainingJobs": {
-            "$ref": "./examples/SuccessfulListTrainingJobs.json"
-          }
-        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -1944,7 +1779,7 @@
     },
     "/authoring/analyze-conversations/projects/{projectName}/train/jobs/{jobId}": {
       "get": {
-        "operationId": "GetTrainingStatus",
+        "operationId": "ConversationalAnalysisAuthoring_GetTrainingStatus",
         "summary": "Get training status",
         "description": "Gets the status for a training job.",
         "parameters": [
@@ -1979,17 +1814,12 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-examples": {
-          "SuccessfulGetTrainStatus": {
-            "$ref": "./examples/SuccessfulGetTrainStatus.json"
-          }
         }
       }
     },
     "/authoring/analyze-conversations/projects/{projectName}/train/jobs/{jobId}/:cancel": {
       "post": {
-        "operationId": "CancelTrainingJob",
+        "operationId": "ConversationalAnalysisAuthoring_CancelTrainingJob",
         "summary": "Cancel training",
         "description": "Triggers a cancellation for a running training job.",
         "parameters": [
@@ -2029,17 +1859,12 @@
             }
           }
         },
-        "x-ms-examples": {
-          "SuccessfulCancelTrainingJob": {
-            "$ref": "./examples/SuccessfulCancelTrainingJob.json"
-          }
-        },
         "x-ms-long-running-operation": true
       }
     },
     "/authoring/analyze-conversations/projects/global/deletion-jobs/{jobId}": {
       "get": {
-        "operationId": "GetProjectDeletionStatus",
+        "operationId": "ConversationalAnalysisAuthoring_GetProjectDeletionStatus",
         "summary": "Get project deletion status",
         "description": "Gets the status for a project deletion job.",
         "parameters": [
@@ -2073,17 +1898,12 @@
               }
             }
           }
-        },
-        "x-ms-examples": {
-          "SuccessfulGetProjectDeletionStatus": {
-            "$ref": "./examples/SuccessfulGetProjectDeletionStatus.json"
-          }
         }
       }
     },
     "/authoring/analyze-conversations/projects/global/deployments/resources": {
       "get": {
-        "operationId": "ListAssignedResourceDeployments",
+        "operationId": "ConversationalAnalysisAuthoring_ListAssignedResourceDeployments",
         "summary": "Lists assigned resource deployments",
         "description": "Lists the deployments to which an Azure resource is assigned. This doesn't\nreturn deployments belonging to projects owned by this resource. It only\nreturns deployments belonging to projects owned by other resources.",
         "parameters": [
@@ -2134,17 +1954,12 @@
               }
             }
           }
-        },
-        "x-ms-examples": {
-          "SuccessfulListAssignedResourceDeployments": {
-            "$ref": "./examples/SuccessfulListAssignedResourceDeployments.json"
-          }
         }
       }
     },
     "/authoring/analyze-conversations/projects/global/languages": {
       "get": {
-        "operationId": "GetSupportedLanguages",
+        "operationId": "ConversationalAnalysisAuthoring_GetSupportedLanguages",
         "summary": "List supported languages",
         "description": "Lists the supported languages for the given project type.",
         "parameters": [
@@ -2163,7 +1978,7 @@
               "CustomConversationSummarization"
             ],
             "x-ms-enum": {
-              "name": "ProjectKind",
+              "name": "ConversationalAnalysisAuthoringProjectKind",
               "modelAsString": true,
               "values": [
                 {
@@ -2228,17 +2043,12 @@
               }
             }
           }
-        },
-        "x-ms-examples": {
-          "SuccessfulGetSupportedLanguages": {
-            "$ref": "./examples/SuccessfulGetSupportedLanguages.json"
-          }
         }
       }
     },
     "/authoring/analyze-conversations/projects/global/prebuilt-entities": {
       "get": {
-        "operationId": "GetSupportedPrebuiltEntities",
+        "operationId": "ConversationalAnalysisAuthoring_GetSupportedPrebuiltEntities",
         "summary": "List supported prebuilt entities",
         "description": "Lists the supported prebuilt entities that can be used while creating composed\nentities.",
         "parameters": [
@@ -2303,17 +2113,12 @@
               }
             }
           }
-        },
-        "x-ms-examples": {
-          "SuccessfulGetSupportedPrebuiltEntities": {
-            "$ref": "./examples/SuccessfulGetSupportedPrebuiltEntities.json"
-          }
         }
       }
     },
     "/authoring/analyze-conversations/projects/global/training-config-versions": {
       "get": {
-        "operationId": "ListTrainingConfigVersions",
+        "operationId": "ConversationalAnalysisAuthoring_ListTrainingConfigVersions",
         "summary": "List training config versions",
         "description": "Lists the support training config version for a given project type.",
         "parameters": [
@@ -2332,7 +2137,7 @@
               "CustomConversationSummarization"
             ],
             "x-ms-enum": {
-              "name": "ProjectKind",
+              "name": "ConversationalAnalysisAuthoringProjectKind",
               "modelAsString": true,
               "values": [
                 {
@@ -2397,17 +2202,12 @@
               }
             }
           }
-        },
-        "x-ms-examples": {
-          "SuccessfulGetSupportedTrainingConfigVersions": {
-            "$ref": "./examples/SuccessfulGetSupportedTrainingConfigVersions.json"
-          }
         }
       }
     },
     "/projects/{projectName}": {
       "delete": {
-        "operationId": "DeleteProject",
+        "operationId": "ConversationalAnalysisAuthoring_DeleteProject",
         "summary": "Delete project",
         "description": "Deletes a project.",
         "parameters": [
@@ -2440,17 +2240,12 @@
             }
           }
         },
-        "x-ms-examples": {
-          "SuccessfulDeleteProject": {
-            "$ref": "./examples/SuccessfulDeleteProject.json"
-          }
-        },
         "x-ms-long-running-operation": true
       }
     },
     "/projects/{projectName}/deployments/{deploymentName}": {
       "put": {
-        "operationId": "DeployProject",
+        "operationId": "ConversationalAnalysisAuthoring_DeployProject",
         "summary": "Update deployment",
         "description": "Creates a new deployment or replaces an existing one.",
         "parameters": [
@@ -2477,7 +2272,7 @@
             "description": "The new deployment info.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/CreateDeploymentOptions"
+              "$ref": "#/definitions/ConversationalAnalysisAuthoringCreateDeploymentOptions"
             }
           }
         ],
@@ -2499,15 +2294,10 @@
             }
           }
         },
-        "x-ms-examples": {
-          "SuccessfulDeployProject": {
-            "$ref": "./examples/SuccessfulDeployProject.json"
-          }
-        },
         "x-ms-long-running-operation": true
       },
       "delete": {
-        "operationId": "DeleteDeployment",
+        "operationId": "ConversationalAnalysisAuthoring_DeleteDeployment",
         "summary": "Delete deployment",
         "description": "Deletes a project deployment.",
         "parameters": [
@@ -2547,17 +2337,12 @@
             }
           }
         },
-        "x-ms-examples": {
-          "SuccessfulDeleteDeployment": {
-            "$ref": "./examples/SuccessfulDeleteDeployment.json"
-          }
-        },
         "x-ms-long-running-operation": true
       }
     },
     "/projects/{projectName}/export/jobs/{jobId}/result": {
       "get": {
-        "operationId": "GetExportResult",
+        "operationId": "ConversationalAnalysisAuthoring_GetExportResult",
         "summary": "Get export result",
         "description": "Gets the result of an export job.",
         "parameters": [
@@ -2583,7 +2368,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/ExportedProject"
+              "$ref": "#/definitions/ConversationalAnalysisAuthoringExportedProject"
             }
           },
           "default": {
@@ -2598,33 +2383,11 @@
               }
             }
           }
-        },
-        "x-ms-examples": {
-          "SuccessfulGetExportResult": {
-            "$ref": "./examples/SuccessfulGetExportResult.json"
-          }
         }
       }
     }
   },
   "definitions": {
-    "AssignDeploymentResourcesOptions": {
-      "type": "object",
-      "description": "Represents the options for assigning Azure resources to a project.",
-      "properties": {
-        "resourcesMetadata": {
-          "type": "array",
-          "description": "Represents the metadata for the resources to be assigned.",
-          "items": {
-            "$ref": "#/definitions/ResourceMetadata"
-          },
-          "x-ms-identifiers": []
-        }
-      },
-      "required": [
-        "resourcesMetadata"
-      ]
-    },
     "AssignedDeploymentResource": {
       "type": "object",
       "description": "Represents the assigned deployment resource.",
@@ -2895,42 +2658,6 @@
         "category"
       ]
     },
-    "ConversationExportedProjectAssets": {
-      "type": "object",
-      "description": "Represents the exported assets of a conversational project.",
-      "properties": {
-        "intents": {
-          "type": "array",
-          "description": "The intents defined in the project.",
-          "items": {
-            "$ref": "#/definitions/ConversationExportedIntent"
-          },
-          "x-ms-identifiers": []
-        },
-        "entities": {
-          "type": "array",
-          "description": "The entities defined in the project.",
-          "items": {
-            "$ref": "#/definitions/ConversationExportedEntity"
-          },
-          "x-ms-identifiers": []
-        },
-        "utterances": {
-          "type": "array",
-          "description": "The utterances defined in the project.",
-          "items": {
-            "$ref": "#/definitions/ConversationExportedUtterance"
-          },
-          "x-ms-identifiers": []
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/ExportedProjectAssets"
-        }
-      ],
-      "x-ms-discriminator-value": "Conversation"
-    },
     "ConversationExportedUtterance": {
       "type": "object",
       "description": "Represents an exported utterance for a conversational project.",
@@ -2965,12 +2692,65 @@
         "intent"
       ]
     },
-    "CopyAuthorizationOptions": {
+    "ConversationalAnalysisAuthoringAssignDeploymentResourcesOptions": {
+      "type": "object",
+      "description": "Represents the options for assigning Azure resources to a project.",
+      "properties": {
+        "resourcesMetadata": {
+          "type": "array",
+          "description": "Represents the metadata for the resources to be assigned.",
+          "items": {
+            "$ref": "#/definitions/ResourceMetadata"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "resourcesMetadata"
+      ]
+    },
+    "ConversationalAnalysisAuthoringConversationExportedProjectAssets": {
+      "type": "object",
+      "description": "Represents the exported assets of a conversational project.",
+      "properties": {
+        "intents": {
+          "type": "array",
+          "description": "The intents defined in the project.",
+          "items": {
+            "$ref": "#/definitions/ConversationExportedIntent"
+          },
+          "x-ms-identifiers": []
+        },
+        "entities": {
+          "type": "array",
+          "description": "The entities defined in the project.",
+          "items": {
+            "$ref": "#/definitions/ConversationExportedEntity"
+          },
+          "x-ms-identifiers": []
+        },
+        "utterances": {
+          "type": "array",
+          "description": "The utterances defined in the project.",
+          "items": {
+            "$ref": "#/definitions/ConversationExportedUtterance"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ConversationalAnalysisAuthoringExportedProjectAssets"
+        }
+      ],
+      "x-ms-discriminator-value": "Conversation"
+    },
+    "ConversationalAnalysisAuthoringCopyAuthorizationOptions": {
       "type": "object",
       "description": "Represents the options for authorizing a project copy to the current Azure\nresource.",
       "properties": {
         "projectKind": {
-          "$ref": "#/definitions/ProjectKind",
+          "$ref": "#/definitions/ConversationalAnalysisAuthoringProjectKind",
           "description": "Represents the project kind."
         },
         "storageInputContainerName": {
@@ -2984,6 +2764,533 @@
       },
       "required": [
         "projectKind"
+      ]
+    },
+    "ConversationalAnalysisAuthoringCopyProjectOptions": {
+      "type": "object",
+      "description": "Represents the options for copying an existing project to another Azure\nresource.",
+      "properties": {
+        "projectKind": {
+          "$ref": "#/definitions/ConversationalAnalysisAuthoringProjectKind",
+          "description": "Represents the project kind."
+        },
+        "targetProjectName": {
+          "type": "string",
+          "description": "The project name to be copied-into."
+        },
+        "accessToken": {
+          "type": "string",
+          "description": "The access token."
+        },
+        "expiresAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The expiration of the access token."
+        },
+        "targetResourceId": {
+          "type": "string",
+          "description": "Represents the target Azure resource ID."
+        },
+        "targetResourceRegion": {
+          "type": "string",
+          "description": "Represents the target Azure resource region."
+        }
+      },
+      "required": [
+        "projectKind",
+        "targetProjectName",
+        "accessToken",
+        "expiresAt",
+        "targetResourceId",
+        "targetResourceRegion"
+      ]
+    },
+    "ConversationalAnalysisAuthoringCreateDeploymentOptions": {
+      "type": "object",
+      "description": "Represents the options for creating or updating a project deployment.",
+      "properties": {
+        "trainedModelLabel": {
+          "type": "string",
+          "description": "Represents the trained model label."
+        },
+        "assignedResourceIds": {
+          "type": "array",
+          "description": "Represents the resource IDs to be assigned to the deployment.\nIf provided, the deployment will be rolled out to the resources\nprovided here as well as the original resource in which the project is created.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "trainedModelLabel"
+      ]
+    },
+    "ConversationalAnalysisAuthoringCreateProjectOptions": {
+      "type": "object",
+      "description": "Represents the options used to create or update a project.",
+      "properties": {
+        "projectKind": {
+          "$ref": "#/definitions/ConversationalAnalysisAuthoringProjectKind",
+          "description": "Represents the project kind."
+        },
+        "settings": {
+          "$ref": "#/definitions/ConversationalAnalysisAuthoringProjectSettings",
+          "description": "The project settings."
+        },
+        "storageInputContainerName": {
+          "type": "string",
+          "description": "The storage container name in case of conversation summarization."
+        },
+        "projectName": {
+          "type": "string",
+          "description": "The new project name."
+        },
+        "multilingual": {
+          "type": "boolean",
+          "description": "Whether the project would be used for multiple languages or not."
+        },
+        "description": {
+          "type": "string",
+          "description": "The project description."
+        },
+        "language": {
+          "type": "string",
+          "description": "The project language. This is BCP-47 representation of a language. For example,\nuse \"en\" for English, \"en-gb\" for English (UK), \"es\" for Spanish etc."
+        }
+      },
+      "required": [
+        "projectKind",
+        "projectName",
+        "language"
+      ]
+    },
+    "ConversationalAnalysisAuthoringDeleteDeploymentOptions": {
+      "type": "object",
+      "description": "Represents the options for deleting a project deployment.",
+      "properties": {
+        "assignedResourceIds": {
+          "type": "array",
+          "description": "Represents the resource IDs to delete the deployment from.\nIf not provided, the deployment will be rolled out from all the\nresources it is deployed to.\nIf provided, it will delete the deployment only from the specified\nassigned resources, and leave it for the rest.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ConversationalAnalysisAuthoringEvaluationKind": {
+      "type": "string",
+      "enum": [
+        "percentage",
+        "manual"
+      ],
+      "x-ms-enum": {
+        "name": "ConversationalAnalysisAuthoringEvaluationKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "percentage",
+            "value": "percentage",
+            "description": "Split the data into training and test sets according to user-defined\npercentages."
+          },
+          {
+            "name": "manual",
+            "value": "manual",
+            "description": "Split the data according to the chosen dataset for every example in the data."
+          }
+        ]
+      }
+    },
+    "ConversationalAnalysisAuthoringEvaluationOptions": {
+      "type": "object",
+      "description": "Represents the options used running the evaluation.",
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/ConversationalAnalysisAuthoringEvaluationKind",
+          "description": "Represents the evaluation kind. By default, the evaluation kind is set to\npercentage."
+        },
+        "trainingSplitPercentage": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Represents the training dataset split percentage. Only needed in case the\nevaluation kind is percentage."
+        },
+        "testingSplitPercentage": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Represents the testing dataset split percentage. Only needed in case the\nevaluation kind is percentage."
+        }
+      }
+    },
+    "ConversationalAnalysisAuthoringExportedConversationOrchestration": {
+      "type": "object",
+      "description": "Defines the orchestration details for a Conversational project target.",
+      "properties": {
+        "projectName": {
+          "type": "string",
+          "description": "The name of the targeted project."
+        },
+        "deploymentName": {
+          "type": "string",
+          "description": "The name of the targeted deployment."
+        }
+      },
+      "required": [
+        "projectName",
+        "deploymentName"
+      ]
+    },
+    "ConversationalAnalysisAuthoringExportedConversationOrchestrationOptions": {
+      "type": "object",
+      "description": "Represents the orchestration options for a Conversational project target.",
+      "properties": {
+        "conversationOrchestration": {
+          "$ref": "#/definitions/ConversationalAnalysisAuthoringExportedConversationOrchestration",
+          "description": "The Conversational project target details."
+        }
+      },
+      "required": [
+        "conversationOrchestration"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ExportedOrchestrationOptions"
+        }
+      ],
+      "x-ms-discriminator-value": "Conversation"
+    },
+    "ConversationalAnalysisAuthoringExportedLuisOrchestration": {
+      "type": "object",
+      "description": "Defines the orchestration details for a LUIS application target.",
+      "properties": {
+        "appId": {
+          "type": "string",
+          "description": "The LUIS application ID."
+        },
+        "appVersion": {
+          "type": "string",
+          "description": "The targeted version Id."
+        },
+        "slotName": {
+          "type": "string",
+          "description": "The targeted slot name."
+        }
+      },
+      "required": [
+        "appId"
+      ]
+    },
+    "ConversationalAnalysisAuthoringExportedLuisOrchestrationOptions": {
+      "type": "object",
+      "description": "Represents the orchestration options for a LUIS application target.",
+      "properties": {
+        "luisOrchestration": {
+          "$ref": "#/definitions/ConversationalAnalysisAuthoringExportedLuisOrchestration",
+          "description": "The LUIS application target details."
+        }
+      },
+      "required": [
+        "luisOrchestration"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ExportedOrchestrationOptions"
+        }
+      ],
+      "x-ms-discriminator-value": "Luis"
+    },
+    "ConversationalAnalysisAuthoringExportedProject": {
+      "type": "object",
+      "description": "Represents an exported project.",
+      "properties": {
+        "projectFileVersion": {
+          "type": "string",
+          "description": "The version of the exported file."
+        },
+        "stringIndexType": {
+          "$ref": "#/definitions/ConversationalAnalysisAuthoringStringIndexType",
+          "description": "Specifies the method used to interpret string offsets. For additional\ninformation see https://aka.ms/text-analytics-offsets."
+        },
+        "metadata": {
+          "$ref": "#/definitions/ConversationalAnalysisAuthoringCreateProjectOptions",
+          "description": "Represents the project metadata."
+        },
+        "assets": {
+          "$ref": "#/definitions/ConversationalAnalysisAuthoringExportedProjectAssets",
+          "description": "Represents the project assets."
+        }
+      },
+      "required": [
+        "projectFileVersion",
+        "stringIndexType",
+        "metadata"
+      ]
+    },
+    "ConversationalAnalysisAuthoringExportedProjectAssets": {
+      "type": "object",
+      "description": "Represents the assets of an exported project.",
+      "properties": {
+        "projectKind": {
+          "$ref": "#/definitions/ConversationalAnalysisAuthoringProjectKind"
+        }
+      },
+      "discriminator": "projectKind",
+      "required": [
+        "projectKind"
+      ]
+    },
+    "ConversationalAnalysisAuthoringExportedQuestionAnsweringOrchestration": {
+      "type": "object",
+      "description": "Defines the orchestration details for a Question Answering project target.",
+      "properties": {
+        "projectName": {
+          "type": "string",
+          "description": "The name of the target project."
+        }
+      },
+      "required": [
+        "projectName"
+      ]
+    },
+    "ConversationalAnalysisAuthoringExportedQuestionAnsweringOrchestrationOptions": {
+      "type": "object",
+      "description": "Represents the orchestration options for a Question Answering project target.",
+      "properties": {
+        "questionAnsweringOrchestration": {
+          "$ref": "#/definitions/ConversationalAnalysisAuthoringExportedQuestionAnsweringOrchestration",
+          "description": "The Question Answering project details."
+        }
+      },
+      "required": [
+        "questionAnsweringOrchestration"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ExportedOrchestrationOptions"
+        }
+      ],
+      "x-ms-discriminator-value": "QuestionAnswering"
+    },
+    "ConversationalAnalysisAuthoringOrchestrationExportedProjectAssets": {
+      "type": "object",
+      "description": "Represents the assets of an orchestration project.",
+      "properties": {
+        "intents": {
+          "type": "array",
+          "description": "Represents the intents of the project.",
+          "items": {
+            "$ref": "#/definitions/OrchestrationExportedIntent"
+          },
+          "x-ms-identifiers": []
+        },
+        "utterances": {
+          "type": "array",
+          "description": "Represents the utterances of the project.",
+          "items": {
+            "$ref": "#/definitions/OrchestrationExportedUtterance"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ConversationalAnalysisAuthoringExportedProjectAssets"
+        }
+      ],
+      "x-ms-discriminator-value": "Orchestration"
+    },
+    "ConversationalAnalysisAuthoringOrchestrationTargetProjectKind": {
+      "type": "string",
+      "enum": [
+        "Luis",
+        "Conversation",
+        "QuestionAnswering"
+      ],
+      "x-ms-enum": {
+        "name": "ConversationalAnalysisAuthoringOrchestrationTargetProjectKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Luis",
+            "value": "Luis"
+          },
+          {
+            "name": "Conversation",
+            "value": "Conversation"
+          },
+          {
+            "name": "QuestionAnswering",
+            "value": "QuestionAnswering"
+          }
+        ]
+      }
+    },
+    "ConversationalAnalysisAuthoringProjectKind": {
+      "type": "string",
+      "enum": [
+        "Conversation",
+        "Orchestration",
+        "CustomConversationSummarization"
+      ],
+      "x-ms-enum": {
+        "name": "ConversationalAnalysisAuthoringProjectKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Conversation",
+            "value": "Conversation",
+            "description": "A project to build natural language into apps, bots, and IoT devices."
+          },
+          {
+            "name": "Orchestration",
+            "value": "Orchestration",
+            "description": "A project to connect and orchestrate Conversation, Custom question answering\nand LUIS projects together in one single project."
+          },
+          {
+            "name": "CustomConversationSummarization",
+            "value": "CustomConversationSummarization",
+            "description": "A project to build conversation summarization models which are able to\nsummarize long conversations."
+          }
+        ]
+      }
+    },
+    "ConversationalAnalysisAuthoringProjectSettings": {
+      "type": "object",
+      "description": "Represents the settings used to define the project behavior.",
+      "properties": {
+        "confidenceThreshold": {
+          "type": "number",
+          "format": "float",
+          "description": "The threshold of the intent with the highest confidence, at which the\nprediction will automatically be changed to \"None\". The value of the threshold\nshould be between 0 and 1 inclusive."
+        },
+        "normalizeCasing": {
+          "type": "boolean",
+          "description": "Gets or sets normalize casing flag"
+        },
+        "augmentDiacritics": {
+          "type": "boolean",
+          "description": "Gets or sets the augment diacritics flag."
+        }
+      },
+      "required": [
+        "confidenceThreshold"
+      ]
+    },
+    "ConversationalAnalysisAuthoringProjectSettingsCreateOrUpdate": {
+      "type": "object",
+      "description": "Represents the settings used to define the project behavior.",
+      "properties": {
+        "confidenceThreshold": {
+          "type": "number",
+          "format": "float",
+          "description": "The threshold of the intent with the highest confidence, at which the\nprediction will automatically be changed to \"None\". The value of the threshold\nshould be between 0 and 1 inclusive."
+        },
+        "normalizeCasing": {
+          "type": "boolean",
+          "description": "Gets or sets normalize casing flag"
+        },
+        "augmentDiacritics": {
+          "type": "boolean",
+          "description": "Gets or sets the augment diacritics flag."
+        }
+      }
+    },
+    "ConversationalAnalysisAuthoringStringIndexType": {
+      "type": "string",
+      "enum": [
+        "Utf16CodeUnit"
+      ],
+      "x-ms-enum": {
+        "name": "ConversationalAnalysisAuthoringStringIndexType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Utf16CodeUnit",
+            "value": "Utf16CodeUnit",
+            "description": "The offset and length values will correspond to UTF-16 code units. Use this\noption if your application is written in a language that support Unicode, for\nexample Java, JavaScript."
+          }
+        ]
+      }
+    },
+    "ConversationalAnalysisAuthoringSwapDeploymentsOptions": {
+      "type": "object",
+      "description": "Represents the options for swapping two deployments together.",
+      "properties": {
+        "firstDeploymentName": {
+          "type": "string",
+          "description": "Represents the first deployment name."
+        },
+        "secondDeploymentName": {
+          "type": "string",
+          "description": "Represents the second deployment name."
+        }
+      },
+      "required": [
+        "firstDeploymentName",
+        "secondDeploymentName"
+      ]
+    },
+    "ConversationalAnalysisAuthoringTrainingJobOptions": {
+      "type": "object",
+      "description": "Represents the options for starting a new training job.",
+      "properties": {
+        "modelLabel": {
+          "type": "string",
+          "description": "Represents the output model label."
+        },
+        "trainingConfigVersion": {
+          "type": "string",
+          "description": "Represents training config version. By default, \"latest\" value is used which\nuses the latest released training config version."
+        },
+        "trainingMode": {
+          "$ref": "#/definitions/ConversationalAnalysisAuthoringTrainingMode",
+          "description": "Represents the mode of the training operation."
+        },
+        "evaluationOptions": {
+          "$ref": "#/definitions/ConversationalAnalysisAuthoringEvaluationOptions",
+          "description": "Represents the evaluation options. By default, the evaluation kind is\npercentage, with training split percentage as 80, and testing split percentage\nas 20."
+        }
+      },
+      "required": [
+        "modelLabel",
+        "trainingMode"
+      ]
+    },
+    "ConversationalAnalysisAuthoringTrainingMode": {
+      "type": "string",
+      "enum": [
+        "advanced",
+        "standard"
+      ],
+      "x-ms-enum": {
+        "name": "ConversationalAnalysisAuthoringTrainingMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "advanced",
+            "value": "advanced",
+            "description": "Trains using fine-tuned neural network transformer models. Can train\nmultilingual projects."
+          },
+          {
+            "name": "standard",
+            "value": "standard",
+            "description": "Faster training times for quicker iterations."
+          }
+        ]
+      }
+    },
+    "ConversationalAnalysisAuthoringUnassignDeploymentResourcesOptions": {
+      "type": "object",
+      "description": "Represents the options to unassign Azure resources from a project.",
+      "properties": {
+        "assignedResourceIds": {
+          "type": "array",
+          "description": "Represents the assigned resource IDs to be unassigned.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "assignedResourceIds"
       ]
     },
     "CopyProjectJobState": {
@@ -3037,117 +3344,6 @@
         "lastUpdatedDateTime",
         "status"
       ]
-    },
-    "CopyProjectOptions": {
-      "type": "object",
-      "description": "Represents the options for copying an existing project to another Azure\nresource.",
-      "properties": {
-        "projectKind": {
-          "$ref": "#/definitions/ProjectKind",
-          "description": "Represents the project kind."
-        },
-        "targetProjectName": {
-          "type": "string",
-          "description": "The project name to be copied-into."
-        },
-        "accessToken": {
-          "type": "string",
-          "description": "The access token."
-        },
-        "expiresAt": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The expiration of the access token."
-        },
-        "targetResourceId": {
-          "type": "string",
-          "description": "Represents the target Azure resource ID."
-        },
-        "targetResourceRegion": {
-          "type": "string",
-          "description": "Represents the target Azure resource region."
-        }
-      },
-      "required": [
-        "projectKind",
-        "targetProjectName",
-        "accessToken",
-        "expiresAt",
-        "targetResourceId",
-        "targetResourceRegion"
-      ]
-    },
-    "CreateDeploymentOptions": {
-      "type": "object",
-      "description": "Represents the options for creating or updating a project deployment.",
-      "properties": {
-        "trainedModelLabel": {
-          "type": "string",
-          "description": "Represents the trained model label."
-        },
-        "assignedResourceIds": {
-          "type": "array",
-          "description": "Represents the resource IDs to be assigned to the deployment.\nIf provided, the deployment will be rolled out to the resources\nprovided here as well as the original resource in which the project is created.",
-          "items": {
-            "type": "string"
-          }
-        }
-      },
-      "required": [
-        "trainedModelLabel"
-      ]
-    },
-    "CreateProjectOptions": {
-      "type": "object",
-      "description": "Represents the options used to create or update a project.",
-      "properties": {
-        "projectKind": {
-          "$ref": "#/definitions/ProjectKind",
-          "description": "Represents the project kind."
-        },
-        "settings": {
-          "$ref": "#/definitions/ProjectSettings",
-          "description": "The project settings."
-        },
-        "storageInputContainerName": {
-          "type": "string",
-          "description": "The storage container name in case of conversation summarization."
-        },
-        "projectName": {
-          "type": "string",
-          "description": "The new project name."
-        },
-        "multilingual": {
-          "type": "boolean",
-          "description": "Whether the project would be used for multiple languages or not."
-        },
-        "description": {
-          "type": "string",
-          "description": "The project description."
-        },
-        "language": {
-          "type": "string",
-          "description": "The project language. This is BCP-47 representation of a language. For example,\nuse \"en\" for English, \"en-gb\" for English (UK), \"es\" for Spanish etc."
-        }
-      },
-      "required": [
-        "projectKind",
-        "projectName",
-        "language"
-      ]
-    },
-    "DeleteDeploymentOptions": {
-      "type": "object",
-      "description": "Represents the options for deleting a project deployment.",
-      "properties": {
-        "assignedResourceIds": {
-          "type": "array",
-          "description": "Represents the resource IDs to delete the deployment from.\nIf not provided, the deployment will be rolled out from all the\nresources it is deployed to.\nIf provided, it will delete the deployment only from the specified\nassigned resources, and leave it for the rest.",
-          "items": {
-            "type": "string"
-          }
-        }
-      }
     },
     "DeploymentJobState": {
       "type": "object",
@@ -3486,7 +3682,7 @@
       "type": "object",
       "properties": {
         "evaluationOptions": {
-          "$ref": "#/definitions/EvaluationOptions",
+          "$ref": "#/definitions/ConversationalAnalysisAuthoringEvaluationOptions",
           "description": "Represents the options used running the evaluation."
         },
         "modelLabel": {
@@ -3567,56 +3763,13 @@
         "result"
       ]
     },
-    "EvaluationKind": {
-      "type": "string",
-      "enum": [
-        "percentage",
-        "manual"
-      ],
-      "x-ms-enum": {
-        "name": "EvaluationKind",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "percentage",
-            "value": "percentage",
-            "description": "Split the data into training and test sets according to user-defined\npercentages."
-          },
-          {
-            "name": "manual",
-            "value": "manual",
-            "description": "Split the data according to the chosen dataset for every example in the data."
-          }
-        ]
-      }
-    },
     "EvaluationOnDemandOptions": {
       "type": "object",
       "description": "Represents the options used running the evaluation.",
       "properties": {
         "kind": {
-          "$ref": "#/definitions/EvaluationKind",
+          "$ref": "#/definitions/ConversationalAnalysisAuthoringEvaluationKind",
           "description": "Represents the evaluation kind. By default, the evaluation kind is set to\npercentage."
-        },
-        "testingSplitPercentage": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Represents the testing dataset split percentage. Only needed in case the\nevaluation kind is percentage."
-        }
-      }
-    },
-    "EvaluationOptions": {
-      "type": "object",
-      "description": "Represents the options used running the evaluation.",
-      "properties": {
-        "kind": {
-          "$ref": "#/definitions/EvaluationKind",
-          "description": "Represents the evaluation kind. By default, the evaluation kind is set to\npercentage."
-        },
-        "trainingSplitPercentage": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Represents the training dataset split percentage. Only needed in case the\nevaluation kind is percentage."
         },
         "testingSplitPercentage": {
           "type": "integer",
@@ -3660,7 +3813,7 @@
           "description": "Contains the data related to intents evaluation."
         },
         "evaluationOptions": {
-          "$ref": "#/definitions/EvaluationOptions",
+          "$ref": "#/definitions/ConversationalAnalysisAuthoringEvaluationOptions",
           "description": "The options that were used while running the evaluation."
         }
       },
@@ -3724,43 +3877,6 @@
         "lastUpdatedDateTime",
         "status"
       ]
-    },
-    "ExportedConversationOrchestration": {
-      "type": "object",
-      "description": "Defines the orchestration details for a Conversational project target.",
-      "properties": {
-        "projectName": {
-          "type": "string",
-          "description": "The name of the targeted project."
-        },
-        "deploymentName": {
-          "type": "string",
-          "description": "The name of the targeted deployment."
-        }
-      },
-      "required": [
-        "projectName",
-        "deploymentName"
-      ]
-    },
-    "ExportedConversationOrchestrationOptions": {
-      "type": "object",
-      "description": "Represents the orchestration options for a Conversational project target.",
-      "properties": {
-        "conversationOrchestration": {
-          "$ref": "#/definitions/ExportedConversationOrchestration",
-          "description": "The Conversational project target details."
-        }
-      },
-      "required": [
-        "conversationOrchestration"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/ExportedOrchestrationOptions"
-        }
-      ],
-      "x-ms-discriminator-value": "Conversation"
     },
     "ExportedEntityList": {
       "type": "object",
@@ -3843,52 +3959,12 @@
         }
       }
     },
-    "ExportedLuisOrchestration": {
-      "type": "object",
-      "description": "Defines the orchestration details for a LUIS application target.",
-      "properties": {
-        "appId": {
-          "type": "string",
-          "description": "The LUIS application ID."
-        },
-        "appVersion": {
-          "type": "string",
-          "description": "The targeted version Id."
-        },
-        "slotName": {
-          "type": "string",
-          "description": "The targeted slot name."
-        }
-      },
-      "required": [
-        "appId"
-      ]
-    },
-    "ExportedLuisOrchestrationOptions": {
-      "type": "object",
-      "description": "Represents the orchestration options for a LUIS application target.",
-      "properties": {
-        "luisOrchestration": {
-          "$ref": "#/definitions/ExportedLuisOrchestration",
-          "description": "The LUIS application target details."
-        }
-      },
-      "required": [
-        "luisOrchestration"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/ExportedOrchestrationOptions"
-        }
-      ],
-      "x-ms-discriminator-value": "Luis"
-    },
     "ExportedOrchestrationOptions": {
       "type": "object",
       "description": "Represents the options used to define the orchestration behavior of an intent.",
       "properties": {
         "targetProjectKind": {
-          "$ref": "#/definitions/OrchestrationTargetProjectKind"
+          "$ref": "#/definitions/ConversationalAnalysisAuthoringOrchestrationTargetProjectKind"
         }
       },
       "discriminator": "targetProjectKind",
@@ -3908,78 +3984,6 @@
       "required": [
         "category"
       ]
-    },
-    "ExportedProject": {
-      "type": "object",
-      "description": "Represents an exported project.",
-      "properties": {
-        "projectFileVersion": {
-          "type": "string",
-          "description": "The version of the exported file."
-        },
-        "stringIndexType": {
-          "$ref": "#/definitions/StringIndexType",
-          "description": "Specifies the method used to interpret string offsets. For additional\ninformation see https://aka.ms/text-analytics-offsets."
-        },
-        "metadata": {
-          "$ref": "#/definitions/CreateProjectOptions",
-          "description": "Represents the project metadata."
-        },
-        "assets": {
-          "$ref": "#/definitions/ExportedProjectAssets",
-          "description": "Represents the project assets."
-        }
-      },
-      "required": [
-        "projectFileVersion",
-        "stringIndexType",
-        "metadata"
-      ]
-    },
-    "ExportedProjectAssets": {
-      "type": "object",
-      "description": "Represents the assets of an exported project.",
-      "properties": {
-        "projectKind": {
-          "$ref": "#/definitions/ProjectKind"
-        }
-      },
-      "discriminator": "projectKind",
-      "required": [
-        "projectKind"
-      ]
-    },
-    "ExportedQuestionAnsweringOrchestration": {
-      "type": "object",
-      "description": "Defines the orchestration details for a Question Answering project target.",
-      "properties": {
-        "projectName": {
-          "type": "string",
-          "description": "The name of the target project."
-        }
-      },
-      "required": [
-        "projectName"
-      ]
-    },
-    "ExportedQuestionAnsweringOrchestrationOptions": {
-      "type": "object",
-      "description": "Represents the orchestration options for a Question Answering project target.",
-      "properties": {
-        "questionAnsweringOrchestration": {
-          "$ref": "#/definitions/ExportedQuestionAnsweringOrchestration",
-          "description": "The Question Answering project details."
-        }
-      },
-      "required": [
-        "questionAnsweringOrchestration"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/ExportedOrchestrationOptions"
-        }
-      ],
-      "x-ms-discriminator-value": "QuestionAnswering"
     },
     "ExportedUtteranceEntityLabel": {
       "type": "object",
@@ -4280,34 +4284,6 @@
         "category"
       ]
     },
-    "OrchestrationExportedProjectAssets": {
-      "type": "object",
-      "description": "Represents the assets of an orchestration project.",
-      "properties": {
-        "intents": {
-          "type": "array",
-          "description": "Represents the intents of the project.",
-          "items": {
-            "$ref": "#/definitions/OrchestrationExportedIntent"
-          },
-          "x-ms-identifiers": []
-        },
-        "utterances": {
-          "type": "array",
-          "description": "Represents the utterances of the project.",
-          "items": {
-            "$ref": "#/definitions/OrchestrationExportedUtterance"
-          },
-          "x-ms-identifiers": []
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/ExportedProjectAssets"
-        }
-      ],
-      "x-ms-discriminator-value": "Orchestration"
-    },
     "OrchestrationExportedUtterance": {
       "type": "object",
       "description": "Represents an utterance of an orchestration project.",
@@ -4333,32 +4309,6 @@
         "text",
         "intent"
       ]
-    },
-    "OrchestrationTargetProjectKind": {
-      "type": "string",
-      "enum": [
-        "Luis",
-        "Conversation",
-        "QuestionAnswering"
-      ],
-      "x-ms-enum": {
-        "name": "OrchestrationTargetProjectKind",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Luis",
-            "value": "Luis"
-          },
-          {
-            "name": "Conversation",
-            "value": "Conversation"
-          },
-          {
-            "name": "QuestionAnswering",
-            "value": "QuestionAnswering"
-          }
-        ]
-      }
     },
     "PagedAssignedDeploymentResource": {
       "type": "object",
@@ -4617,35 +4567,6 @@
         "assignedResources"
       ]
     },
-    "ProjectKind": {
-      "type": "string",
-      "enum": [
-        "Conversation",
-        "Orchestration",
-        "CustomConversationSummarization"
-      ],
-      "x-ms-enum": {
-        "name": "ProjectKind",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Conversation",
-            "value": "Conversation",
-            "description": "A project to build natural language into apps, bots, and IoT devices."
-          },
-          {
-            "name": "Orchestration",
-            "value": "Orchestration",
-            "description": "A project to connect and orchestrate Conversation, Custom question answering\nand LUIS projects together in one single project."
-          },
-          {
-            "name": "CustomConversationSummarization",
-            "value": "CustomConversationSummarization",
-            "description": "A project to build conversation summarization models which are able to\nsummarize long conversations."
-          }
-        ]
-      }
-    },
     "ProjectMetadata": {
       "type": "object",
       "description": "Represents the metadata of a project.",
@@ -4671,7 +4592,7 @@
           "description": "Represents the project last deployed datetime."
         },
         "projectKind": {
-          "$ref": "#/definitions/ProjectKind",
+          "$ref": "#/definitions/ConversationalAnalysisAuthoringProjectKind",
           "description": "Represents the project kind.",
           "x-ms-mutability": [
             "read",
@@ -4679,7 +4600,7 @@
           ]
         },
         "settings": {
-          "$ref": "#/definitions/ProjectSettings",
+          "$ref": "#/definitions/ConversationalAnalysisAuthoringProjectSettings",
           "description": "The project settings.",
           "x-ms-mutability": [
             "read",
@@ -4760,7 +4681,7 @@
           "description": "Represents the project last deployed datetime."
         },
         "projectKind": {
-          "$ref": "#/definitions/ProjectKind",
+          "$ref": "#/definitions/ConversationalAnalysisAuthoringProjectKind",
           "description": "Represents the project kind.",
           "x-ms-mutability": [
             "read",
@@ -4768,7 +4689,7 @@
           ]
         },
         "settings": {
-          "$ref": "#/definitions/ProjectSettingsCreateOrUpdate",
+          "$ref": "#/definitions/ConversationalAnalysisAuthoringProjectSettingsCreateOrUpdate",
           "description": "The project settings.",
           "x-ms-mutability": [
             "read",
@@ -4814,47 +4735,6 @@
             "read",
             "create"
           ]
-        }
-      }
-    },
-    "ProjectSettings": {
-      "type": "object",
-      "description": "Represents the settings used to define the project behavior.",
-      "properties": {
-        "confidenceThreshold": {
-          "type": "number",
-          "format": "float",
-          "description": "The threshold of the intent with the highest confidence, at which the\nprediction will automatically be changed to \"None\". The value of the threshold\nshould be between 0 and 1 inclusive."
-        },
-        "normalizeCasing": {
-          "type": "boolean",
-          "description": "Gets or sets normalize casing flag"
-        },
-        "augmentDiacritics": {
-          "type": "boolean",
-          "description": "Gets or sets the augment diacritics flag."
-        }
-      },
-      "required": [
-        "confidenceThreshold"
-      ]
-    },
-    "ProjectSettingsCreateOrUpdate": {
-      "type": "object",
-      "description": "Represents the settings used to define the project behavior.",
-      "properties": {
-        "confidenceThreshold": {
-          "type": "number",
-          "format": "float",
-          "description": "The threshold of the intent with the highest confidence, at which the\nprediction will automatically be changed to \"None\". The value of the threshold\nshould be between 0 and 1 inclusive."
-        },
-        "normalizeCasing": {
-          "type": "boolean",
-          "description": "Gets or sets normalize casing flag"
-        },
-        "augmentDiacritics": {
-          "type": "boolean",
-          "description": "Gets or sets the augment diacritics flag."
         }
       }
     },
@@ -4928,23 +4808,6 @@
         "region"
       ]
     },
-    "StringIndexType": {
-      "type": "string",
-      "enum": [
-        "Utf16CodeUnit"
-      ],
-      "x-ms-enum": {
-        "name": "StringIndexType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Utf16CodeUnit",
-            "value": "Utf16CodeUnit",
-            "description": "The offset and length values will correspond to UTF-16 code units. Use this\noption if your application is written in a language that support Unicode, for\nexample Java, JavaScript."
-          }
-        ]
-      }
-    },
     "SubTrainingJobState": {
       "type": "object",
       "description": "Represents the detailed state of a training sub-operation.",
@@ -5013,24 +4876,6 @@
         "value"
       ]
     },
-    "SwapDeploymentsOptions": {
-      "type": "object",
-      "description": "Represents the options for swapping two deployments together.",
-      "properties": {
-        "firstDeploymentName": {
-          "type": "string",
-          "description": "Represents the first deployment name."
-        },
-        "secondDeploymentName": {
-          "type": "string",
-          "description": "Represents the second deployment name."
-        }
-      },
-      "required": [
-        "firstDeploymentName",
-        "secondDeploymentName"
-      ]
-    },
     "TrainingConfigVersionInfo": {
       "type": "object",
       "description": "Represents a training config version.",
@@ -5071,32 +4916,6 @@
         "value"
       ]
     },
-    "TrainingJobOptions": {
-      "type": "object",
-      "description": "Represents the options for starting a new training job.",
-      "properties": {
-        "modelLabel": {
-          "type": "string",
-          "description": "Represents the output model label."
-        },
-        "trainingConfigVersion": {
-          "type": "string",
-          "description": "Represents training config version. By default, \"latest\" value is used which\nuses the latest released training config version."
-        },
-        "trainingMode": {
-          "$ref": "#/definitions/TrainingMode",
-          "description": "Represents the mode of the training operation."
-        },
-        "evaluationOptions": {
-          "$ref": "#/definitions/EvaluationOptions",
-          "description": "Represents the evaluation options. By default, the evaluation kind is\npercentage, with training split percentage as 80, and testing split percentage\nas 20."
-        }
-      },
-      "required": [
-        "modelLabel",
-        "trainingMode"
-      ]
-    },
     "TrainingJobResult": {
       "type": "object",
       "description": "Represents the output of a training job.",
@@ -5110,7 +4929,7 @@
           "description": "Represents training config version."
         },
         "trainingMode": {
-          "$ref": "#/definitions/TrainingMode",
+          "$ref": "#/definitions/ConversationalAnalysisAuthoringTrainingMode",
           "description": "Represents the mode of the training operation."
         },
         "trainingStatus": {
@@ -5188,45 +5007,6 @@
         "lastUpdatedDateTime",
         "status",
         "result"
-      ]
-    },
-    "TrainingMode": {
-      "type": "string",
-      "enum": [
-        "advanced",
-        "standard"
-      ],
-      "x-ms-enum": {
-        "name": "TrainingMode",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "advanced",
-            "value": "advanced",
-            "description": "Trains using fine-tuned neural network transformer models. Can train\nmultilingual projects."
-          },
-          {
-            "name": "standard",
-            "value": "standard",
-            "description": "Faster training times for quicker iterations."
-          }
-        ]
-      }
-    },
-    "UnassignDeploymentResourcesOptions": {
-      "type": "object",
-      "description": "Represents the options to unassign Azure resources from a project.",
-      "properties": {
-        "assignedResourceIds": {
-          "type": "array",
-          "description": "Represents the assigned resource IDs to be unassigned.",
-          "items": {
-            "type": "string"
-          }
-        }
-      },
-      "required": [
-        "assignedResourceIds"
       ]
     },
     "UtteranceEntitiesEvaluationResult": {

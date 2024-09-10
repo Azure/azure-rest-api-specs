@@ -44,6 +44,10 @@ namespace Language.Authoring;
 
 /** Analyze Conversations Service Versions */
 enum Versions {
+  /** Version 2023-04-01 */
+  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
+  v2023_04_01: "2023-04-01",
+
   /** Version 2023-04-15-preview */
   @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   v2023_04_15_preview: "2023-04-15-preview",

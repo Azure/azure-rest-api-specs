@@ -20,15 +20,33 @@ alias ServiceTraits = NoRepeatableRequests &
 
 alias languageOperations = ResourceOperations<ServiceTraits, ErrorResponse>;
 
+alias ShowStatsQueryParameter = TraitContext.Create;
+
+alias ListProjectsQueryParameters = ListQueryParametersTrait<{
+  /** The number of projects to be returned. */
+  @query
+  top?: int32;
+
+  /** The offset in the response. */
+  @query
+  skip?: int32;
+
+  /** The maximum number of projects per page. */
+  @query
+  maxpagesize?: int32;
+}>;
+
+interface ConversationalAnalysisAuthoring {
 /**
  * Gets the details of a project.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+#suppress "@azure-tools/typespec-azure-core/casing-style"
 @summary("Get project details")
 @get
 op getProject is languageOperations.ResourceRead<ProjectMetadata>;
 
-alias ShowStatsQueryParameter = TraitContext.Create;
+
 /**
  * Creates a new project or updates an existing one.
  */
@@ -43,7 +61,7 @@ op createProject is languageOperations.ResourceCreateOrUpdate<ProjectMetadata>;
 @summary("Delete project")
 @route("/projects/{projectName}")
 @delete
-@pollingOperation(getProjectDeletionStatus)
+@pollingOperation(ConversationalAnalysisAuthoring.getProjectDeletionStatus)
 op deleteProject is Foundations.LongRunningOperation<
   {
     /**
@@ -65,10 +83,11 @@ op deleteProject is Foundations.LongRunningOperation<
 @summary("Copy project authorization")
 @post
 @actionSeparator("/:")
+@added(Versions.v2023_04_15_preview)
 op `authorize-copy` is languageOperations.ResourceAction<
   ProjectMetadata,
-  CopyAuthorizationOptions,
-  CopyProjectOptions
+  ConversationalAnalysisAuthoringCopyAuthorizationOptions,
+  ConversationalAnalysisAuthoringCopyProjectOptions
 >;
 
 /**
@@ -78,7 +97,8 @@ op `authorize-copy` is languageOperations.ResourceAction<
 @summary("Copy project")
 @route("/authoring/analyze-conversations/projects/{projectName}/:copy")
 @post
-@pollingOperation(getCopyProjectStatus)
+@pollingOperation(ConversationalAnalysisAuthoring.getCopyProjectStatus)
+@added(Versions.v2023_04_15_preview)
 op copyProject is Foundations.LongRunningOperation<
   {
     /**
@@ -91,7 +111,7 @@ op copyProject is Foundations.LongRunningOperation<
      * The copy project info.
      */
     @body
-    body: CopyProjectOptions;
+    body: ConversationalAnalysisAuthoringCopyProjectOptions;
   },
   AcceptedResponse,
   {},
@@ -105,7 +125,7 @@ op copyProject is Foundations.LongRunningOperation<
 @summary("Export project")
 @route("/authoring/analyze-conversations/projects/{projectName}/:export")
 @post
-@pollingOperation(getExportStatus)
+@pollingOperation(ConversationalAnalysisAuthoring.getExportStatus)
 op export is Foundations.LongRunningOperation<
   {
     /**
@@ -125,7 +145,7 @@ op export is Foundations.LongRunningOperation<
      * information see https://aka.ms/text-analytics-offsets.
      */
     @query("stringIndexType")
-    stringIndexType: StringIndexType;
+    stringIndexType: ConversationalAnalysisAuthoringStringIndexType;
 
     /**
      * Kind of asset to export.
@@ -153,7 +173,7 @@ op export is Foundations.LongRunningOperation<
 @summary("Import project")
 @route("/authoring/analyze-conversations/projects/{projectName}/:import")
 @post
-@pollingOperation(getImportStatus)
+@pollingOperation(ConversationalAnalysisAuthoring.getImportStatus)
 op `import` is Foundations.LongRunningOperation<
   {
     /**
@@ -172,7 +192,7 @@ op `import` is Foundations.LongRunningOperation<
      * The project data to import.
      */
     @body
-    body: ExportedProject;
+    body: ConversationalAnalysisAuthoringExportedProject;
   },
   AcceptedResponse,
   {},
@@ -186,7 +206,7 @@ op `import` is Foundations.LongRunningOperation<
 @summary("Train project")
 @route("/authoring/analyze-conversations/projects/{projectName}/:train")
 @post
-@pollingOperation(getTrainingStatus)
+@pollingOperation(ConversationalAnalysisAuthoring.getTrainingStatus)
 op train is Foundations.LongRunningOperation<
   {
     /**
@@ -199,7 +219,7 @@ op train is Foundations.LongRunningOperation<
      * The training input parameters.
      */
     @body
-    body: TrainingJobOptions;
+    body: ConversationalAnalysisAuthoringTrainingJobOptions;
   },
   AcceptedResponse,
   {},
@@ -213,6 +233,7 @@ op train is Foundations.LongRunningOperation<
 @summary("Get copy project status")
 @route("/authoring/analyze-conversations/projects/{projectName}/copy/jobs/{jobId}")
 @get
+@added(Versions.v2023_04_15_preview)
 op getCopyProjectStatus is Foundations.Operation<
   {
     /**
@@ -255,7 +276,7 @@ op getDeployment is languageOperations.ResourceRead<ProjectDeployment>;
 @summary("Update deployment")
 @route("/projects/{projectName}/deployments/{deploymentName}")
 @put
-@pollingOperation(getDeploymentStatus)
+@pollingOperation(ConversationalAnalysisAuthoring.getDeploymentStatus)
 op deployProject is Foundations.LongRunningOperation<
   {
     /**
@@ -274,7 +295,7 @@ op deployProject is Foundations.LongRunningOperation<
      * The new deployment info.
      */
     @body
-    body: CreateDeploymentOptions;
+    body: ConversationalAnalysisAuthoringCreateDeploymentOptions;
   },
   AcceptedResponse,
   {},
@@ -288,7 +309,7 @@ op deployProject is Foundations.LongRunningOperation<
 @summary("Delete deployment")
 @route("/projects/{projectName}/deployments/{deploymentName}")
 @delete
-@pollingOperation(getDeploymentStatus)
+@pollingOperation(ConversationalAnalysisAuthoring.getDeploymentStatus)
 op deleteDeployment is Foundations.LongRunningOperation<
   {
     /**
@@ -315,7 +336,7 @@ op deleteDeployment is Foundations.LongRunningOperation<
 @summary("Delete deployment from resources")
 @route("/authoring/analyze-conversations/projects/{projectName}/deployments/{deploymentName}/:delete-from-resources")
 @post
-@pollingOperation(getDeploymentDeleteFromResourcesStatus)
+@pollingOperation(ConversationalAnalysisAuthoring.getDeploymentDeleteFromResourcesStatus)
 op deleteDeploymentFromResources is Foundations.LongRunningOperation<
   {
     /**
@@ -334,7 +355,7 @@ op deleteDeploymentFromResources is Foundations.LongRunningOperation<
      * The options for deleting the deployment.
      */
     @body
-    body: DeleteDeploymentOptions;
+    body: ConversationalAnalysisAuthoringDeleteDeploymentOptions;
   },
   AcceptedResponse,
   {},
@@ -407,7 +428,7 @@ op getDeploymentStatus is Foundations.Operation<
 @summary("Swap deployments")
 @route("/authoring/analyze-conversations/projects/{projectName}/deployments/:swap")
 @post
-@pollingOperation(getSwapDeploymentsStatus)
+@pollingOperation(ConversationalAnalysisAuthoring.getSwapDeploymentsStatus)
 op swapDeployments is Foundations.LongRunningOperation<
   {
     /**
@@ -420,7 +441,7 @@ op swapDeployments is Foundations.LongRunningOperation<
      * The job object to swap two deployments.
      */
     @body
-    body: SwapDeploymentsOptions;
+    body: ConversationalAnalysisAuthoringSwapDeploymentsOptions;
   },
   AcceptedResponse,
   {},
@@ -497,7 +518,7 @@ op getExportResult is Foundations.Operation<
     @path
     jobId: string;
   },
-  ExportedProject
+  ConversationalAnalysisAuthoringExportedProject
 >;
 
 /**
@@ -554,7 +575,7 @@ op deleteTrainedModel is languageOperations.ResourceDelete<ProjectTrainedModel>;
 @summary("Evaluate model")
 @route("/authoring/analyze-conversations/projects/{projectName}/models/{trainedModelLabel}/:evaluate")
 @post
-@pollingOperation(getEvaluationStatus)
+@pollingOperation(ConversationalAnalysisAuthoring.getEvaluationStatus)
 op evaluateModel is Foundations.LongRunningOperation<
   {
     /**
@@ -588,7 +609,7 @@ op evaluateModel is Foundations.LongRunningOperation<
 @summary("Load trained model snapshot to the working directory.")
 @route("/authoring/analyze-conversations/projects/{projectName}/models/{trainedModelLabel}/:load-snapshot")
 @post
-@pollingOperation(getLoadSnapshotStatus)
+@pollingOperation(ConversationalAnalysisAuthoring.getLoadSnapshotStatus)
 op loadSnapshot is Foundations.LongRunningOperation<
   {
     /**
@@ -665,7 +686,7 @@ op getModelEvaluationResults is Foundations.Operation<
      * information see https://aka.ms/text-analytics-offsets.
      */
     @query("stringIndexType")
-    stringIndexType: StringIndexType;
+    stringIndexType: ConversationalAnalysisAuthoringStringIndexType;
 
     /**
      * The number of utterances to be returned.
@@ -748,6 +769,7 @@ op getLoadSnapshotStatus is Foundations.Operation<
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @summary("Lists deployment resources")
+@added(Versions.v2023_04_15_preview)
 op listDeploymentResources is languageOperations.ResourceList<
   AssignedDeploymentResource,
   ListProjectsQueryParameters
@@ -764,7 +786,8 @@ op listDeploymentResources is languageOperations.ResourceList<
 @summary("Assign deployment resources")
 @route("/authoring/analyze-conversations/projects/{projectName}/resources/:assign")
 @post
-@pollingOperation(getAssignDeploymentResourcesStatus)
+@pollingOperation(ConversationalAnalysisAuthoring.getAssignDeploymentResourcesStatus)
+@added(Versions.v2023_04_15_preview)
 op assignDeploymentResources is Foundations.LongRunningOperation<
   {
     /**
@@ -777,7 +800,7 @@ op assignDeploymentResources is Foundations.LongRunningOperation<
      * The new project resources info.
      */
     @body
-    body: AssignDeploymentResourcesOptions;
+    body: ConversationalAnalysisAuthoringAssignDeploymentResourcesOptions;
   },
   AcceptedResponse,
   {},
@@ -792,7 +815,8 @@ op assignDeploymentResources is Foundations.LongRunningOperation<
 @summary("Unassign deployment resources")
 @route("/authoring/analyze-conversations/projects/{projectName}/resources/:unassign")
 @post
-@pollingOperation(getUnassignDeploymentResourcesStatus)
+@pollingOperation(ConversationalAnalysisAuthoring.getUnassignDeploymentResourcesStatus)
+@added(Versions.v2023_04_15_preview)
 op unassignDeploymentResources is Foundations.LongRunningOperation<
   {
     /**
@@ -805,7 +829,7 @@ op unassignDeploymentResources is Foundations.LongRunningOperation<
      * The info for the deployment resources to be deleted.
      */
     @body
-    body: UnassignDeploymentResourcesOptions;
+    body: ConversationalAnalysisAuthoringUnassignDeploymentResourcesOptions;
   },
   AcceptedResponse,
   {},
@@ -819,6 +843,7 @@ op unassignDeploymentResources is Foundations.LongRunningOperation<
 @summary("Get assign deployment resources status")
 @route("/authoring/analyze-conversations/projects/{projectName}/resources/assign/jobs/{jobId}")
 @get
+@added(Versions.v2023_04_15_preview)
 op getAssignDeploymentResourcesStatus is Foundations.Operation<
   {
     /**
@@ -843,6 +868,7 @@ op getAssignDeploymentResourcesStatus is Foundations.Operation<
 @summary("Get unassign deployment resources status")
 @route("/authoring/analyze-conversations/projects/{projectName}/resources/unassign/jobs/{jobId}")
 @get
+@added(Versions.v2023_04_15_preview)
 op getUnassignDeploymentResourcesStatus is Foundations.Operation<
   {
     /**
@@ -884,7 +910,7 @@ op getTrainingStatus is languageOperations.ResourceRead<TrainingJobState>;
 @summary("Cancel training")
 @route("/authoring/analyze-conversations/projects/{projectName}/train/jobs/{jobId}/:cancel")
 @post
-@pollingOperation(getTrainingStatus)
+@pollingOperation(ConversationalAnalysisAuthoring.getTrainingStatus)
 op cancelTrainingJob is Foundations.LongRunningOperation<
   {
     /**
@@ -904,19 +930,7 @@ op cancelTrainingJob is Foundations.LongRunningOperation<
   ErrorResponse
 >;
 
-alias ListProjectsQueryParameters = ListQueryParametersTrait<{
-  /** The number of projects to be returned. */
-  @query
-  top?: int32;
 
-  /** The offset in the response. */
-  @query
-  skip?: int32;
-
-  /** The maximum number of projects per page. */
-  @query
-  maxpagesize?: int32;
-}>;
 
 /**
  * Lists the existing projects.
@@ -956,6 +970,7 @@ op getProjectDeletionStatus is Foundations.Operation<
 @summary("Lists assigned resource deployments")
 @route("/authoring/analyze-conversations/projects/global/deployments/resources")
 @get
+@added(Versions.v2023_04_15_preview)
 op listAssignedResourceDeployments is Foundations.Operation<
   {
     /**
@@ -992,7 +1007,7 @@ op getSupportedLanguages is Foundations.Operation<
      * The project kind.
      */
     @query("projectKind")
-    projectKind: ProjectKind;
+    projectKind: ConversationalAnalysisAuthoringProjectKind;
 
     /**
      * The number of languages to be returned.
@@ -1074,7 +1089,7 @@ op listTrainingConfigVersions is Foundations.Operation<
      * The project kind.
      */
     @query("projectKind")
-    projectKind: ProjectKind;
+    projectKind: ConversationalAnalysisAuthoringProjectKind;
 
     /**
      * The number of config versions to be returned.
@@ -1096,3 +1111,5 @@ op listTrainingConfigVersions is Foundations.Operation<
   },
   TrainingConfigVersions
 >;
+
+}

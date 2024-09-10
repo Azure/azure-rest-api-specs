@@ -14,7 +14,7 @@ using Azure.Core.Traits;
 namespace Language.Authoring;
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
-union ProjectKind {
+union ConversationalAnalysisAuthoringProjectKind {
   string,
 
   /**
@@ -66,7 +66,7 @@ union ExportedProjectFormat {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
-union StringIndexType {
+union ConversationalAnalysisAuthoringStringIndexType {
   string,
 
   /**
@@ -78,7 +78,7 @@ union StringIndexType {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
-union TrainingMode {
+union ConversationalAnalysisAuthoringTrainingMode {
   string,
 
   /**
@@ -94,7 +94,7 @@ union TrainingMode {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
-union EvaluationKind {
+union ConversationalAnalysisAuthoringEvaluationKind {
   string,
 
   /**
@@ -160,7 +160,7 @@ union CompositionSetting {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
-union OrchestrationTargetProjectKind {
+union ConversationalAnalysisAuthoringOrchestrationTargetProjectKind {
   string,
   Luis: "Luis",
   Conversation: "Conversation",
@@ -200,13 +200,13 @@ model ProjectMetadata {
    * Represents the project kind.
    */
   @visibility("create", "read")
-  projectKind: ProjectKind;
+  projectKind: ConversationalAnalysisAuthoringProjectKind;
 
   /**
    * The project settings.
    */
   @visibility("create", "read")
-  settings?: ProjectSettings;
+  settings?: ConversationalAnalysisAuthoringProjectSettings;
 
   /**
    * The storage container name in case of conversation summarization.
@@ -244,7 +244,7 @@ model ProjectMetadata {
 /**
  * Represents the settings used to define the project behavior.
  */
-model ProjectSettings {
+model ConversationalAnalysisAuthoringProjectSettings {
   /**
    * The threshold of the intent with the highest confidence, at which the
    * prediction will automatically be changed to "None". The value of the threshold
@@ -302,16 +302,16 @@ model Error {
 /**
  * Represents the options used to create or update a project.
  */
-model CreateProjectOptions {
+model ConversationalAnalysisAuthoringCreateProjectOptions {
   /**
    * Represents the project kind.
    */
-  projectKind: ProjectKind;
+  projectKind: ConversationalAnalysisAuthoringProjectKind;
 
   /**
    * The project settings.
    */
-  settings?: ProjectSettings;
+  settings?: ConversationalAnalysisAuthoringProjectSettings;
 
   /**
    * The storage container name in case of conversation summarization.
@@ -344,11 +344,12 @@ model CreateProjectOptions {
  * Represents the options for authorizing a project copy to the current Azure
  * resource.
  */
-model CopyAuthorizationOptions {
+@added(Versions.v2023_04_15_preview)
+model ConversationalAnalysisAuthoringCopyAuthorizationOptions {
   /**
    * Represents the project kind.
    */
-  projectKind: ProjectKind;
+  projectKind: ConversationalAnalysisAuthoringProjectKind;
 
   /**
    * The name of the storage container.
@@ -366,11 +367,12 @@ model CopyAuthorizationOptions {
  * Represents the options for copying an existing project to another Azure
  * resource.
  */
-model CopyProjectOptions {
+@added(Versions.v2023_04_15_preview)
+model ConversationalAnalysisAuthoringCopyProjectOptions {
   /**
    * Represents the project kind.
    */
-  projectKind: ProjectKind;
+  projectKind: ConversationalAnalysisAuthoringProjectKind;
 
   /**
    * The project name to be copied-into.
@@ -402,7 +404,7 @@ model CopyProjectOptions {
 /**
  * Represents an exported project.
  */
-model ExportedProject {
+model ConversationalAnalysisAuthoringExportedProject {
   /**
    * The version of the exported file.
    */
@@ -412,31 +414,31 @@ model ExportedProject {
    * Specifies the method used to interpret string offsets. For additional
    * information see https://aka.ms/text-analytics-offsets.
    */
-  stringIndexType: StringIndexType;
+  stringIndexType: ConversationalAnalysisAuthoringStringIndexType;
 
   /**
    * Represents the project metadata.
    */
-  metadata: CreateProjectOptions;
+  metadata: ConversationalAnalysisAuthoringCreateProjectOptions;
 
   /**
    * Represents the project assets.
    */
-  assets?: ExportedProjectAssets;
+  assets?: ConversationalAnalysisAuthoringExportedProjectAssets;
 }
 
 /**
  * Represents the assets of an exported project.
  */
 @discriminator("projectKind")
-model ExportedProjectAssets {
-  projectKind: ProjectKind;
+model ConversationalAnalysisAuthoringExportedProjectAssets {
+  projectKind: ConversationalAnalysisAuthoringProjectKind;
 }
 
 /**
  * Represents the options for starting a new training job.
  */
-model TrainingJobOptions {
+model ConversationalAnalysisAuthoringTrainingJobOptions {
   /**
    * Represents the output model label.
    */
@@ -451,25 +453,25 @@ model TrainingJobOptions {
   /**
    * Represents the mode of the training operation.
    */
-  trainingMode: TrainingMode;
+  trainingMode: ConversationalAnalysisAuthoringTrainingMode;
 
   /**
    * Represents the evaluation options. By default, the evaluation kind is
    * percentage, with training split percentage as 80, and testing split percentage
    * as 20.
    */
-  evaluationOptions?: EvaluationOptions;
+  evaluationOptions?: ConversationalAnalysisAuthoringEvaluationOptions;
 }
 
 /**
  * Represents the options used running the evaluation.
  */
-model EvaluationOptions {
+model ConversationalAnalysisAuthoringEvaluationOptions {
   /**
    * Represents the evaluation kind. By default, the evaluation kind is set to
    * percentage.
    */
-  kind?: EvaluationKind;
+  kind?: ConversationalAnalysisAuthoringEvaluationKind;
 
   /**
    * Represents the training dataset split percentage. Only needed in case the
@@ -487,6 +489,7 @@ model EvaluationOptions {
 /**
  * Represents the state of a copy job.
  */
+@added(Versions.v2023_04_15_preview)
 model CopyProjectJobState {
   ...JobState;
 }
@@ -630,7 +633,7 @@ model DeploymentResource {
 /**
  * Represents the options for creating or updating a project deployment.
  */
-model CreateDeploymentOptions {
+model ConversationalAnalysisAuthoringCreateDeploymentOptions {
   /**
    * Represents the trained model label.
    */
@@ -647,7 +650,7 @@ model CreateDeploymentOptions {
 /**
  * Represents the options for deleting a project deployment.
  */
-model DeleteDeploymentOptions {
+model ConversationalAnalysisAuthoringDeleteDeploymentOptions {
   /**
    * Represents the resource IDs to delete the deployment from.
    *             If not provided, the deployment will be rolled out from all the
@@ -668,7 +671,7 @@ model DeploymentJobState {
 /**
  * Represents the options for swapping two deployments together.
  */
-model SwapDeploymentsOptions {
+model ConversationalAnalysisAuthoringSwapDeploymentsOptions {
   /**
    * Represents the first deployment name.
    */
@@ -767,7 +770,7 @@ model EvaluationOnDemandOptions {
    * Represents the evaluation kind. By default, the evaluation kind is set to
    * percentage.
    */
-  kind?: EvaluationKind;
+  kind?: ConversationalAnalysisAuthoringEvaluationKind;
 
   /**
    * Represents the testing dataset split percentage. Only needed in case the
@@ -793,7 +796,7 @@ model EvaluationJobResult {
   /**
    * Represents the options used running the evaluation.
    */
-  evaluationOptions: EvaluationOptions;
+  evaluationOptions: ConversationalAnalysisAuthoringEvaluationOptions;
 
   /**
    * Represents trained model label.
@@ -937,7 +940,7 @@ model EvaluationSummary {
   /**
    * The options that were used while running the evaluation.
    */
-  evaluationOptions?: EvaluationOptions;
+  evaluationOptions?: ConversationalAnalysisAuthoringEvaluationOptions;
 }
 
 /**
@@ -1157,6 +1160,7 @@ model LoadSnapshotJobState {
 /**
  * Represents the assigned deployment resources.
  */
+@added(Versions.v2023_04_15_preview)
 model AssignedDeploymentResources {
   /**
    * The list of assigned deployment resources.
@@ -1174,6 +1178,7 @@ model AssignedDeploymentResources {
  */
 @resource("resources")
 @parentResource(ProjectMetadata)
+@added(Versions.v2023_04_15_preview)
 model AssignedDeploymentResource {
   /**
    * The resource ID.
@@ -1191,7 +1196,8 @@ model AssignedDeploymentResource {
 /**
  * Represents the options for assigning Azure resources to a project.
  */
-model AssignDeploymentResourcesOptions {
+@added(Versions.v2023_04_15_preview)
+model ConversationalAnalysisAuthoringAssignDeploymentResourcesOptions {
   /**
    * Represents the metadata for the resources to be assigned.
    */
@@ -1221,7 +1227,8 @@ model ResourceMetadata {
 /**
  * Represents the options to unassign Azure resources from a project.
  */
-model UnassignDeploymentResourcesOptions {
+@added(Versions.v2023_04_15_preview)
+model ConversationalAnalysisAuthoringUnassignDeploymentResourcesOptions {
   /**
    * Represents the assigned resource IDs to be unassigned.
    */
@@ -1231,6 +1238,7 @@ model UnassignDeploymentResourcesOptions {
 /**
  * Represents the state of a deployment resources job.
  */
+@added(Versions.v2023_04_15_preview)
 model DeploymentResourcesJobState {
   ...JobState;
 }
@@ -1281,7 +1289,7 @@ model TrainingJobResult {
   /**
    * Represents the mode of the training operation.
    */
-  trainingMode?: TrainingMode;
+  trainingMode?: ConversationalAnalysisAuthoringTrainingMode;
 
   /**
    * Represents the model training status.
@@ -1356,6 +1364,7 @@ model ProjectDeletionJobState {
 /**
  * Represents the metadata for deployments assigned to a resource.
  */
+@added(Versions.v2023_04_15_preview)
 model AssignedResourceDeploymentsMetadata {
   /**
    * The list of retrieved assigned project deployments.
@@ -1371,6 +1380,7 @@ model AssignedResourceDeploymentsMetadata {
 /**
  * Represents the metadata for assigned deployments for a project.
  */
+@added(Versions.v2023_04_15_preview)
 model AssignedProjectDeploymentsMetadata {
   /**
    * Represents the project name.
@@ -1386,6 +1396,7 @@ model AssignedProjectDeploymentsMetadata {
 /**
  * Represents the metadata for an assigned deployment
  */
+@added(Versions.v2023_04_15_preview)
 model AssignedProjectDeploymentMetadata {
   /**
    * Represents the deployment name.
@@ -1636,7 +1647,7 @@ model ConversationExportedIntent {
 /**
  * Represents the exported assets of a conversational project.
  */
-model ConversationExportedProjectAssets extends ExportedProjectAssets {
+model ConversationalAnalysisAuthoringConversationExportedProjectAssets extends ConversationalAnalysisAuthoringExportedProjectAssets {
   /**
    * The intents defined in the project.
    */
@@ -1746,7 +1757,7 @@ model CustomConversationSummarizationConversation {
 /**
  * Defines the orchestration details for a Conversational project target.
  */
-model ExportedConversationOrchestration {
+model ConversationalAnalysisAuthoringExportedConversationOrchestration {
   /**
    * The name of the targeted project.
    */
@@ -1761,12 +1772,12 @@ model ExportedConversationOrchestration {
 /**
  * Represents the orchestration options for a Conversational project target.
  */
-model ExportedConversationOrchestrationOptions
+model ConversationalAnalysisAuthoringExportedConversationOrchestrationOptions
   extends ExportedOrchestrationOptions {
   /**
    * The Conversational project target details.
    */
-  conversationOrchestration: ExportedConversationOrchestration;
+  conversationOrchestration: ConversationalAnalysisAuthoringExportedConversationOrchestration;
 
   /**
    * The kind of the target used in the orchestration flow.
@@ -1779,13 +1790,13 @@ model ExportedConversationOrchestrationOptions
  */
 @discriminator("targetProjectKind")
 model ExportedOrchestrationOptions {
-  targetProjectKind: OrchestrationTargetProjectKind;
+  targetProjectKind: ConversationalAnalysisAuthoringOrchestrationTargetProjectKind;
 }
 
 /**
  * Defines the orchestration details for a LUIS application target.
  */
-model ExportedLuisOrchestration {
+model ConversationalAnalysisAuthoringExportedLuisOrchestration {
   /**
    * The LUIS application ID.
    */
@@ -1805,11 +1816,11 @@ model ExportedLuisOrchestration {
 /**
  * Represents the orchestration options for a LUIS application target.
  */
-model ExportedLuisOrchestrationOptions extends ExportedOrchestrationOptions {
+model ConversationalAnalysisAuthoringExportedLuisOrchestrationOptions extends ExportedOrchestrationOptions {
   /**
    * The LUIS application target details.
    */
-  luisOrchestration: ExportedLuisOrchestration;
+  luisOrchestration: ConversationalAnalysisAuthoringExportedLuisOrchestration;
 
   /**
    * The kind of the target used in the orchestration flow.
@@ -1820,7 +1831,7 @@ model ExportedLuisOrchestrationOptions extends ExportedOrchestrationOptions {
 /**
  * Defines the orchestration details for a Question Answering project target.
  */
-model ExportedQuestionAnsweringOrchestration {
+model ConversationalAnalysisAuthoringExportedQuestionAnsweringOrchestration {
   /**
    * The name of the target project.
    */
@@ -1830,12 +1841,12 @@ model ExportedQuestionAnsweringOrchestration {
 /**
  * Represents the orchestration options for a Question Answering project target.
  */
-model ExportedQuestionAnsweringOrchestrationOptions
+model ConversationalAnalysisAuthoringExportedQuestionAnsweringOrchestrationOptions
   extends ExportedOrchestrationOptions {
   /**
    * The Question Answering project details.
    */
-  questionAnsweringOrchestration: ExportedQuestionAnsweringOrchestration;
+  questionAnsweringOrchestration: ConversationalAnalysisAuthoringExportedQuestionAnsweringOrchestration;
 
   /**
    * The kind of the target used in the orchestration flow.
@@ -1861,7 +1872,7 @@ model OrchestrationExportedIntent {
 /**
  * Represents the assets of an orchestration project.
  */
-model OrchestrationExportedProjectAssets extends ExportedProjectAssets {
+model ConversationalAnalysisAuthoringOrchestrationExportedProjectAssets extends ConversationalAnalysisAuthoringExportedProjectAssets {
   /**
    * Represents the intents of the project.
    */
