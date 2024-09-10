@@ -34,7 +34,7 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/tables": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/tables": {
       "get": {
         "tags": [
           "Tables"
@@ -79,7 +79,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/tables/{tableName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/tables/{tableName}": {
       "patch": {
         "tags": [
           "Tables"
@@ -105,7 +105,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/TableNameParameter"
+            "$ref": "../../../common/v1/types.json#/parameters/TableNameParameter"
           },
           {
             "name": "parameters",
@@ -125,7 +125,15 @@
             }
           },
           "202": {
-            "description": "Accepted response definition (Long running operation)."
+            "description": "Accepted response definition (Long running operation).",
+            "headers": {
+              "Location": {
+                "type": "string"
+              },
+              "azure-asyncoperation": {
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -164,7 +172,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/TableNameParameter"
+            "$ref": "../../../common/v1/types.json#/parameters/TableNameParameter"
           }
         ],
         "responses": {
@@ -207,7 +215,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/TableNameParameter"
+            "$ref": "../../../common/v1/types.json#/parameters/TableNameParameter"
           }
         ],
         "responses": {
@@ -218,7 +226,15 @@
             "description": "OK response definition."
           },
           "202": {
-            "description": "Accepted response definition (Long running operation)."
+            "description": "Accepted response definition (Long running operation).",
+            "headers": {
+              "Location": {
+                "type": "string"
+              },
+              "azure-asyncoperation": {
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -259,7 +275,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/TableNameParameter"
+            "$ref": "../../../common/v1/types.json#/parameters/TableNameParameter"
           }
         ],
         "responses": {
@@ -301,7 +317,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/TableNameParameter"
+            "$ref": "../../../common/v1/types.json#/parameters/TableNameParameter"
           }
         ],
         "responses": {
@@ -673,7 +689,8 @@
           "description": "Instruct the system how to handle and charge the logs ingested to this table.",
           "enum": [
             "Basic",
-            "Analytics"
+            "Analytics",
+            "Auxiliary"
           ],
           "x-ms-enum": {
             "name": "TablePlanEnum",
@@ -681,11 +698,15 @@
             "values": [
               {
                 "value": "Basic",
-                "description": "Logs  that are adjusted to support high volume low value verbose logs."
+                "description": "Logs that are adjusted to support high volume low value verbose logs."
               },
               {
                 "value": "Analytics",
                 "description": "Logs  that allow monitoring and analytics."
+              },
+              {
+                "value": "Auxiliary",
+                "description": "TBD."
               }
             ]
           }
@@ -777,16 +798,6 @@
         }
       },
       "description": "The list tables operation response."
-    }
-  },
-  "parameters": {
-    "TableNameParameter": {
-      "name": "tableName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The name of the table.",
-      "x-ms-parameter-location": "method"
     }
   }
 }
