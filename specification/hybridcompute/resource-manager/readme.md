@@ -26,7 +26,7 @@ These are the global settings for the HybridCompute API.
 
 ``` yaml
 openapi-type: arm
-tag: package-preview-2024-05
+tag: package-2024-07
 directive:
   - from: HybridCompute.json
     where: $.definitions.MachineInstallPatchesParameters.properties.maximumDuration
@@ -58,98 +58,23 @@ directive:
   - from: HybridCompute.json
     where: $.definitions.MachineAssessPatchesResult.properties.assessmentActivityId
     transform: '$[''format''] = ''uuid'''
-  - from: HybridCompute.json
-    where: '$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridCompute/machines/{machineName}"].get.parameters'
-    transform: |-
-      return [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "machineName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-_\\.]{1,54}$",
-            "minLength": 1,
-            "maxLength": 54,
-            "description": "The name of the hybrid machine."
-          },
-          {
-            "name": "$expand",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "description": "The expand expression to apply on the operation.",
-          }
-        ]
-  - from: HybridCompute.json
-    where: '$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridCompute/machines/{machineName}/runCommands/{runCommandName}"].delete.responses'
-    transform: |-
-      return {
-        "200": {
-          "description": "OK"
-        },
-        "202": {
-          "description": "Accepted",
-          "headers": {
-            "Location": {
-              "description": "The URL of the resource used to check the status of the asynchronous operation.",
-              "type": "string"
-            },
-            "Retry-After": {
-              "description": "The recommended number of seconds to wait before calling the URI specified in Azure-AsyncOperation.",
-              "type": "integer",
-              "format": "int32"
-            },
-            "Azure-AsyncOperation": {
-              "description": "The URI to poll for completion status.",
-              "type": "string"
-            }
-          }
-        },
-        "204": {
-          "description": "No Content"
-        },
-        "default": {
-          "description": "Error response describing why the operation failed.",
-          "schema": {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-          }
-        }
-      }
   - where:
       subject: NetworkProfile
     remove: true
-  - where:
-      subject: MachineRunCommand
-      verb: Set
-    remove: true
 
-  # we don't want user to interact with them / we don't support some operations
-  - remove-operation: AgentVersion_List
-  - remove-operation: AgentVersion_Get
-  - remove-operation: HybridIdentityMetadata_Get
-  - remove-operation: HybridIdentityMetadata_ListByMachines
-  - remove-operation: Licenses_ValidateLicense
-  - remove-operation: LicenseProfiles_Get
-  - remove-operation: LicenseProfiles_Delete
-  - remove-operation: LicenseProfiles_Update
-  - remove-operation: LicenseProfiles_List
-  - remove-operation: LicenseProfiles_CreateOrUpdate
-  - remove-operation: NetworkConfigurations_Get
-  - remove-operation: NetworkConfigurations_Update
-  - remove-operation: NetworkConfigurations_CreateOrUpdate
-  - remove-operation: MachineRunCommands_Update #PATCH
 
 ```
 
+
+### Tag: package-2024-07
+
+These settings apply only when `--tag=package-2024-07` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-07'
+input-file:
+  - Microsoft.HybridCompute/stable/2024-07-10/HybridCompute.json
+  - Microsoft.HybridCompute/stable/2024-07-10/privateLinkScopes.json
+```
 
 ### Tag: package-preview-2024-05
 
