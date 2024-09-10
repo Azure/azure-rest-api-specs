@@ -462,30 +462,6 @@
         ]
       }
     },
-    "LiftrBase.AutoRenewStatus": {
-      "type": "string",
-      "description": "Subscription auto renew status",
-      "enum": [
-        "Enable",
-        "Disable"
-      ],
-      "x-ms-enum": {
-        "name": "AutoRenewStatus",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Enable",
-            "value": "Enable",
-            "description": "Enable/Enabled auto renew"
-          },
-          {
-            "name": "Disable",
-            "value": "Disable",
-            "description": "Disable/Disabled auto renew"
-          }
-        ]
-      }
-    },
     "LiftrBase.Data.OrganizationProperties": {
       "type": "object",
       "description": "Properties specific to Data Organization resource",
@@ -669,9 +645,9 @@
           "type": "string",
           "description": "Plan Display Name for the marketplace offer"
         },
-        "autoRenew": {
-          "$ref": "#/definitions/LiftrBase.AutoRenewStatus",
-          "description": "Subscription auto renew status"
+        "renewalMode": {
+          "$ref": "#/definitions/LiftrBase.RenewalMode",
+          "description": "Subscription renewal mode"
         },
         "endDate": {
           "type": "string",
@@ -685,6 +661,30 @@
         "offerId",
         "planId"
       ]
+    },
+    "LiftrBase.RenewalMode": {
+      "type": "string",
+      "description": "Subscription renewal mode",
+      "enum": [
+        "Auto",
+        "Manual"
+      ],
+      "x-ms-enum": {
+        "name": "RenewalMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Auto",
+            "value": "Auto",
+            "description": "Automatic renewal"
+          },
+          {
+            "name": "Manual",
+            "value": "Manual",
+            "description": "Manual renewal"
+          }
+        ]
+      }
     },
     "LiftrBase.SingleSignOnProperties": {
       "type": "object",

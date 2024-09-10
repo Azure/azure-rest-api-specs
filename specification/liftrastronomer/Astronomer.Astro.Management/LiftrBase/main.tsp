@@ -41,15 +41,15 @@ union MarketplaceSubscriptionStatus {
 
 @added(Versions.v2024_08_27_preview)
 @added(Versions.v2024_08_27)
-@doc("Subscription auto renew status")
-union AutoRenewStatus {
+@doc("Subscription renewal mode")
+union RenewalMode {
   string,
 
-  @doc("Enable/Enabled auto renew")
-  Enable: "Enable",
+  @doc("Automatic renewal")
+  Auto: "Auto",
 
-  @doc("Disable/Disabled auto renew")
-  Disable: "Disable",
+  @doc("Manual renewal")
+  Manual: "Manual",
 }
 
 @doc("A string that represents a URI.")
@@ -89,8 +89,8 @@ model OfferDetails {
 
   @added(Versions.v2024_08_27_preview)
   @added(Versions.v2024_08_27)
-  @doc("Subscription auto renew status")
-  autoRenew?: AutoRenewStatus;
+  @doc("Subscription renewal mode")
+  renewalMode?: RenewalMode;
 
   @added(Versions.v2024_08_27_preview)
   @added(Versions.v2024_08_27)
