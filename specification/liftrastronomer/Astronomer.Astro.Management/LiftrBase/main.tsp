@@ -45,11 +45,11 @@ union MarketplaceSubscriptionStatus {
 union AutoRenewStatus {
   string,
 
-  @doc("Disable/Disabled auto renew")
-  Disable: "Disable",
-
   @doc("Enable/Enabled auto renew")
   Enable: "Enable",
+
+  @doc("Disable/Disabled auto renew")
+  Disable: "Disable",
 }
 
 @doc("A string that represents a URI.")
