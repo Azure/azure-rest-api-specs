@@ -11753,11 +11753,6 @@
           "$ref": "#/definitions/CloudSuitability",
           "description": "Gets a value indicating whether machine is suitable for the cloud platform\nselected.",
           "readOnly": true
-        },
-        "avsTargetNode": {
-          "$ref": "#/definitions/AzureAvsNodeType",
-          "description": "Gets the Avs Target Type for Machine.",
-          "readOnly": true
         }
       }
     },
@@ -12325,8 +12320,7 @@
           "type": "number",
           "format": "float",
           "description": "Estimated Cost With VCF BYOL",
-          "readOnly": true,
-          "x-ms-identifiers": []
+          "readOnly": true
         },
         "errors": {
           "type": "array",
@@ -12371,7 +12365,7 @@
         "monthlyPrice": {
           "type": "number",
           "format": "float",
-          "description": "monthly cost for network type."
+          "description": "Monthly cost for network type."
         },
         "networkType": {
           "$ref": "#/definitions/NetworkSkuType",
@@ -17819,8 +17813,8 @@
         "MonthlyPremiumV2StorageCost",
         "MonthlyLinuxAzureHybridCostSavings",
         "MonthlyAvsNodeCost",
-        "MonthlyExternalStorageCost",
-        "MonthlyNetworkCost",
+        "MonthlyAvsExternalStorageCost",
+        "MonthlyAvsNetworkCost",
         "MonthlyVcfByolCostDifference"
       ],
       "x-ms-enum": {
@@ -17858,14 +17852,14 @@
             "description": "Monthly AVS Node cost"
           },
           {
-            "name": "MonthlyExternalStorageCost",
-            "value": "MonthlyExternalStorageCost",
-            "description": "Monthly External Storage cost"
+            "name": "MonthlyAvsExternalStorageCost",
+            "value": "MonthlyAvsExternalStorageCost",
+            "description": "Monthly AVS External Storage cost"
           },
           {
-            "name": "MonthlyNetworkCost",
-            "value": "MonthlyNetworkCost",
-            "description": "Monthly Network cost"
+            "name": "MonthlyAvsNetworkCost",
+            "value": "MonthlyAvsNetworkCost",
+            "description": "Monthly AVS Network cost"
           },
           {
             "name": "MonthlyVcfByolCostDifference",
