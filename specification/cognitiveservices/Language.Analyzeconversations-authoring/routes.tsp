@@ -1111,5 +1111,4 @@ op listTrainingConfigVersions is Foundations.Operation<
   },
   TrainingConfigVersions
 >;
-
 }
