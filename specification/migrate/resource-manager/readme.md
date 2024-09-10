@@ -20,6 +20,14 @@ batch:
   - tag: package-migrateengine-2022-05
 ```
 
+### Tag: package-preview-2023-09
+These settings apply only when `--tag=package-preview-2023-09` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2023-09'
+input-file:
+  - Microsoft.Migrate/AssessmentProjects/preview/2023-09-09-preview/migrate.json
+```
+
 ### Tag: package-migrate-2023-04
 
 These settings apply only when `--tag=package-migrate-2023-04` is specified on the command line.
