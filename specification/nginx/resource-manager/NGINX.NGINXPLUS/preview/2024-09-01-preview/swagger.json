@@ -66,13 +66,13 @@
         ],
         "responses": {
           "200": {
-            "description": "The API Key was successfully created and returned.",
+            "description": "The API Key was successfully updated and returned.",
             "schema": {
               "$ref": "#/definitions/NginxDeploymentApiKeyResponse"
             }
           },
           "201": {
-            "description": "The API Key was successfully updated and returned.",
+            "description": "The API Key was successfully created and returned.",
             "schema": {
               "$ref": "#/definitions/NginxDeploymentApiKeyResponse"
             }
@@ -118,10 +118,10 @@
         ],
         "responses": {
           "204": {
-            "description": "The API Key was successfully deleted."
+            "description": "The API key resource does not exist."
           },
           "200": {
-            "description": "OK"
+            "description": "The API key was successfully deleted."
           },
           "default": {
             "description": "Default error response.",
@@ -1386,9 +1386,6 @@
         "properties": {
           "$ref": "#/definitions/NginxConfigurationResponseProperties"
         },
-        "location": {
-          "type": "string"
-        },
         "systemData": {
           "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
           "readOnly": true
@@ -1413,9 +1410,6 @@
         },
         "properties": {
           "$ref": "#/definitions/NginxConfigurationRequestProperties"
-        },
-        "location": {
-          "type": "string"
         },
         "systemData": {
           "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
