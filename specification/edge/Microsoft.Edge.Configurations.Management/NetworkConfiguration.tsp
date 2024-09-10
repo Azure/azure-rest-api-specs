@@ -48,8 +48,8 @@ model NetworkConfigurationProperties {
   @visibility("read")
   provisioningState?: ResourceProvisioningState;
 
-  @doc("Usecase of this configuration")
-  usecase: Usecase;
+  @doc("UseCase of this configuration")
+  useCase: UseCase;
 }
 
 @doc("NetworkConfigurationProperties for LAN")

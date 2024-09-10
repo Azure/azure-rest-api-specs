@@ -42,8 +42,8 @@ model SecurityConfigurationProperties {
   @visibility("read")
   provisioningState?: ResourceProvisioningState;
 
-  @doc("Usecase of this configuration")
-  usecase: Usecase;
+  @doc("UseCase of this configuration")
+  useCase: UseCase;
 
   @doc("References for the secrets from keyvault")
   @extension("x-ms-identifiers", ["secretUri"])
