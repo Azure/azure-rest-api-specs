@@ -8,11 +8,11 @@ terraform {
 
 provider "azapi" {
   # This is not needed after the api is completely onboarded
-  endpoint = [ {
-    resource_manager_endpoint = "https://eastus2euap.management.azure.com/"
-    resource_manager_audience = "https://management.core.windows.net/"
+  endpoint = [{
+    resource_manager_endpoint       = "https://eastus2euap.management.azure.com/"
+    resource_manager_audience       = "https://management.core.windows.net/"
     active_directory_authority_host = "https://login.microsoftonline.com"
-  } ]
+  }]
 }
 
 variable "resource_name" {
@@ -50,10 +50,10 @@ resource "azapi_resource" "signalR" {
           "https://bar.com",
         ]
       }
-      resourceStopped = "false"
+      resourceStopped       = "false"
       regionEndpointEnabled = "Enabled"
-      disableAadAuth   = false
-      disableLocalAuth = false
+      disableAadAuth        = false
+      disableLocalAuth      = false
       features = [
         {
           flag = "ServiceMode"
@@ -80,24 +80,24 @@ resource "azapi_resource" "signalR" {
           value = "False"
         },
       ]
-   applicationFirewall = {
-            clientConnectionCountRules = [
-              {
-                type = "ThrottleByJwtSignatureRule",
-                maxCount = 13
-              },
-              {
-                type = "ThrottleByUserIdRule",
-                maxCount = 20
-              },
-              {
-                type = "ThrottleByJwtCustomClaimRule",
-                claimName =  "claimName",
-                maxCount = 20
-              }
-            ]
+      applicationFirewall = {
+        clientConnectionCountRules = [
+          {
+            type     = "ThrottleByJwtSignatureRule",
+            maxCount = 13
           },
-       resourceLogConfiguration = {
+          {
+            type     = "ThrottleByUserIdRule",
+            maxCount = 20
+          },
+          {
+            type      = "ThrottleByJwtCustomClaimRule",
+            claimName = "claimName",
+            maxCount  = 20
+          }
+        ]
+      },
+      resourceLogConfiguration = {
         categories = [
           {
             enabled = "false"
@@ -126,8 +126,8 @@ resource "azapi_resource" "signalR" {
         ipRules = [
           {
             action = "Allow"
-            value = "0.0.0.0/0"
-          },]
+            value  = "0.0.0.0/0"
+        }, ]
         defaultAction = "Deny"
         privateEndpoints = [
           // Need to create a private endpoint first
@@ -195,7 +195,7 @@ resource "azapi_resource_action" "patch_signalR" {
     }
     kind = "SignalR"
     properties = {
-      resourceStopped = "false"
+      resourceStopped       = "false"
       regionEndpointEnabled = "Enabled"
       cors = {
         allowedOrigins = [
@@ -251,11 +251,11 @@ resource "azapi_resource_action" "patch_signalR" {
           #   name = "mysignalrservice.1fa229cd-bf3f-47f0-8c49-afb36723997e"
           # },
         ]
-         ipRules = [
+        ipRules = [
           {
             action = "Allow"
-            value = "0.0.0.0/0"
-          },]
+            value  = "0.0.0.0/0"
+        }, ]
         publicNetwork = {
           allow = [
             "ClientConnection",
@@ -270,23 +270,23 @@ resource "azapi_resource_action" "patch_signalR" {
       tls = {
         clientCertEnabled = false
       }
-     applicationFirewall = {
-            clientConnectionCountRules = [
-              {
-                type = "ThrottleByJwtSignatureRule",
-                maxCount = 13
-              },
-              {
-                type = "ThrottleByUserIdRule",
-                maxCount = 20
-              },
-              {
-                type = "ThrottleByJwtCustomClaimRule",
-                claimName = "claimName",
-                maxCount =20
-              }
-            ]
+      applicationFirewall = {
+        clientConnectionCountRules = [
+          {
+            type     = "ThrottleByJwtSignatureRule",
+            maxCount = 13
           },
+          {
+            type     = "ThrottleByUserIdRule",
+            maxCount = 20
+          },
+          {
+            type      = "ThrottleByJwtCustomClaimRule",
+            claimName = "claimName",
+            maxCount  = 20
+          }
+        ]
+      },
       resourceLogConfiguration = {
         categories = [
           {
@@ -370,7 +370,7 @@ resource "azapi_resource_action" "restart" {
   resource_id = azapi_resource.signalR.id
   action      = "restart"
   method      = "POST"
-  depends_on = [azapi_resource_action.regenerateKey]
+  depends_on  = [azapi_resource_action.regenerateKey]
 }
 
 // OperationId: SignalR_ListSkus
@@ -406,15 +406,15 @@ data "azapi_resource_list" "listSignalRByResourceGroup" {
 # // OperationId: SignalRReplicas_List
 # // GET /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/signalR/{resourceName}/replicas
 data "azapi_resource_list" "listReplicasBySignalR" {
-  type       = "Microsoft.SignalRService/signalR/replicas@2024-08-01-preview"
-  parent_id  = azapi_resource.signalR.id
+  type      = "Microsoft.SignalRService/signalR/replicas@2024-08-01-preview"
+  parent_id = azapi_resource.signalR.id
 }
 
 resource "azapi_resource" "user_assigned_identity" {
   type      = "Microsoft.ManagedIdentity/userAssignedIdentities@2018-11-30"
   name      = var.resource_name
   location  = var.location
-   parent_id = azapi_resource.resourceGroup.id
+  parent_id = azapi_resource.resourceGroup.id
 }
 
 # validate properties that can't exist together
@@ -426,12 +426,12 @@ resource "azapi_resource" "signalR2" {
   name      = format("%s2", var.resource_name)
   location  = var.location
   body = {
-   identity = {
-                type = "UserAssigned",
-                userAssignedIdentities = {
-                     "${azapi_resource.user_assigned_identity.id}"  = {}
-                }
-            },
+    identity = {
+      type = "UserAssigned",
+      userAssignedIdentities = {
+        "${azapi_resource.user_assigned_identity.id}" = {}
+      }
+    },
     kind = "SignalR"
     sku = {
       capacity = 1
@@ -452,12 +452,12 @@ resource "azapi_resource_action" "patch_signalR2" {
   method      = "PATCH"
   body = {
     location = var.location
-      identity = {
-                type = "UserAssigned",
-                userAssignedIdentities = {
-                     "${azapi_resource.user_assigned_identity.id}"  = {}
-                }
-            },
-}
+    identity = {
+      type = "UserAssigned",
+      userAssignedIdentities = {
+        "${azapi_resource.user_assigned_identity.id}" = {}
+      }
+    },
+  }
 }
 

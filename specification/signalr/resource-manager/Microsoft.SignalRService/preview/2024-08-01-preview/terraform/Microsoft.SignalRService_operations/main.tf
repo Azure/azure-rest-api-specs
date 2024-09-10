@@ -8,12 +8,12 @@ terraform {
 
 provider "azapi" {
   # This is not needed after the api is completely onboarded
-  endpoint = [ {
+  endpoint = [{
     # Use dogfood endpoint as apis in this tf will not be routed to canary regions
-    resource_manager_endpoint = "https://api-dogfood.resources.windows-int.net/"
-    resource_manager_audience = "https://management.core.windows.net/"
+    resource_manager_endpoint       = "https://api-dogfood.resources.windows-int.net/"
+    resource_manager_audience       = "https://management.core.windows.net/"
     active_directory_authority_host = "https://login.windows-ppe.net/"
-  } ]
+  }]
 }
 
 variable "resource_name" {

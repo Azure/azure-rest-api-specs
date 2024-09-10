@@ -46,8 +46,8 @@ resource "azapi_resource" "signalR" {
     properties = {
       cors = {
       }
-      disableAadAuth   = false
-      disableLocalAuth = false
+      disableAadAuth      = false
+      disableLocalAuth    = false
       publicNetworkAccess = "Enabled"
       tls = {
         clientCertEnabled = false

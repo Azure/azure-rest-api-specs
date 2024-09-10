@@ -8,11 +8,11 @@ terraform {
 
 provider "azapi" {
   # This is not needed after the api is completely onboarded
-  endpoint = [ {
-    resource_manager_endpoint = "https://eastus2euap.management.azure.com/"
-    resource_manager_audience = "https://management.core.windows.net/"
+  endpoint = [{
+    resource_manager_endpoint       = "https://eastus2euap.management.azure.com/"
+    resource_manager_audience       = "https://management.core.windows.net/"
     active_directory_authority_host = "https://login.microsoftonline.com"
-  } ]
+  }]
 }
 
 variable "resource_name" {
@@ -47,8 +47,8 @@ resource "azapi_resource" "signalR" {
       userAssignedIdentities = null
     }
     properties = {
-      disableAadAuth   = false
-      disableLocalAuth = false
+      disableAadAuth      = false
+      disableLocalAuth    = false
       publicNetworkAccess = "Enabled"
       tls = {
         clientCertEnabled = false
@@ -72,7 +72,7 @@ resource "azapi_resource" "replica" {
   location  = var.replica_location
   body = {
     properties = {
-      resourceStopped = "false"
+      resourceStopped       = "false"
       regionEndpointEnabled = "Enabled"
     }
     sku = {
@@ -97,7 +97,7 @@ resource "azapi_resource_action" "patch_replica" {
   body = {
     location = var.replica_location
     properties = {
-      resourceStopped = "false"
+      resourceStopped       = "false"
       regionEndpointEnabled = "Enabled"
     }
     sku = {
@@ -119,7 +119,7 @@ resource "azapi_resource_action" "restart" {
   resource_id = azapi_resource.replica.id
   action      = "restart"
   method      = "POST"
-  depends_on = [ azapi_resource_action.patch_replica ]
+  depends_on  = [azapi_resource_action.patch_replica]
 }
 
 // OperationId: SignalR_ListReplicaSkus

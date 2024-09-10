@@ -7,22 +7,24 @@ terraform {
 }
 
 provider "azapi" {
-  # This is not needed after the api is completely onboarded 
-  endpoint = [ {
-    resource_manager_endpoint = "https://eastus2euap.management.azure.com/"
-    resource_manager_audience = "https://management.core.windows.net/"
-    active_directory_authority_host = "https://login.microsoftonline.com"
-  } ]
+}
+
+provider "azurerm" {
+  features {
+  }
 }
 
 variable "resource_name" {
   type    = string
-  default = "acctest5766"
+  default = "acctest049822"
 }
 
 variable "location" {
   type    = string
   default = "eastus2euap"
+}
+
+data "azurerm_client_config" "current" {
 }
 
 resource "azapi_resource" "resourceGroup" {
@@ -32,18 +34,21 @@ resource "azapi_resource" "resourceGroup" {
 }
 
 resource "azapi_resource" "webPubSub" {
-  type      = "Microsoft.SignalRService/webPubSub@2023-02-01"
+  type      = "Microsoft.SignalRService/WebPubSub@2023-02-01"
   parent_id = azapi_resource.resourceGroup.id
   name      = var.resource_name
   location  = var.location
+  identity {
+    type         = "SystemAssigned"
+    identity_ids = []
+  }
+
   body = {
     properties = {
-      disableAadAuth      = false
-      disableLocalAuth    = false
-      publicNetworkAccess = "Enabled"
-      tls = {
-        clientCertEnabled = false
+      cors = {
       }
+      disableAadAuth   = false
+      disableLocalAuth = false
     }
     sku = {
       capacity = 1
@@ -54,6 +59,66 @@ resource "azapi_resource" "webPubSub" {
   response_export_values    = ["*"]
 }
 
+resource "azurerm_key_vault" "test" {
+  name                       = var.resource_name
+  location                   = var.location
+  resource_group_name        = azapi_resource.resourceGroup.name
+  tenant_id                  = data.azurerm_client_config.current.tenant_id
+  sku_name                   = "standard"
+  soft_delete_retention_days = 7
+
+  access_policy {
+    tenant_id = data.azurerm_client_config.current.tenant_id
+    object_id = data.azurerm_client_config.current.object_id
+
+    certificate_permissions = [
+      "Create",
+      "Delete",
+      "Get",
+      "Import",
+      "Purge",
+      "Recover",
+      "Update",
+      "List",
+    ]
+
+    secret_permissions = [
+      "Get",
+      "Set",
+    ]
+  }
+
+  access_policy {
+    tenant_id = data.azurerm_client_config.current.tenant_id
+    object_id = azapi_resource.webPubSub.identity[0].principal_id
+
+    certificate_permissions = [
+      "Create",
+      "Delete",
+      "Get",
+      "Import",
+      "Purge",
+      "Recover",
+      "Update",
+      "List",
+    ]
+
+    secret_permissions = [
+      "Get",
+      "Set",
+    ]
+  }
+}
+
+resource "azurerm_key_vault_certificate" "test" {
+  name         = var.resource_name
+  key_vault_id = azurerm_key_vault.test.id
+  certificate {
+    contents = filebase64("certificate-to-import.pfx")
+    password = ""
+  }
+}
+
 // OperationId: WebPubSubCustomCertificates_CreateOrUpdate, WebPubSubCustomCertificates_Get, WebPubSubCustomCertificates_Delete
 // PUT GET DELETE /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/webPubSub/{resourceName}/customCertificates/{certificateName}
 resource "azapi_resource" "customCertificate" {
@@ -62,12 +127,38 @@ resource "azapi_resource" "customCertificate" {
   name      = var.resource_name
   body = {
     properties = {
-      keyVaultBaseUri       = "https://signalrtest.vault.azure.net/"
-      keyVaultSecretName    = "domain"
-      keyVaultSecretVersion = "856559a3253341e69c23c1737987b959"
+      keyVaultBaseUri       = azurerm_key_vault.test.vault_uri
+      keyVaultSecretName    = azurerm_key_vault_certificate.test.name
+      keyVaultSecretVersion = azurerm_key_vault_certificate.test.version
     }
   }
   schema_validation_enabled = false
+}
+
+resource "azapi_resource" "dnsZone" {
+  type      = "Microsoft.Network/dnsZones@2018-05-01"
+  parent_id = azapi_resource.resourceGroup.id
+  name      = "${var.resource_name}.com"
+  location  = "global"
+}
+
+resource "azapi_resource" "CNAME" {
+  type      = "Microsoft.Network/dnsZones/CNAME@2018-05-01"
+  parent_id = azapi_resource.dnsZone.id
+  name      = "signalr"
+  body = {
+    properties = {
+      CNAMERecord = {
+        cname = azapi_resource.webPubSub.output.properties.hostName
+      }
+      TTL = 3600
+      metadata = {
+      }
+      targetResource = {
+      }
+    }
+  }
+  depends_on = [azapi_resource.customCertificate]
 }
 
 // OperationId: WebPubSubCustomDomains_CreateOrUpdate, WebPubSubCustomDomains_Get, WebPubSubCustomDomains_Delete
@@ -81,7 +172,7 @@ resource "azapi_resource" "customDomain" {
       customCertificate = {
         id = azapi_resource.customCertificate.id
       }
-      domainName = "apitest2.e2e-prod.signalr-test.azure.com"
+      domainName = "signalr.${azapi_resource.dnsZone.name}"
     }
   }
   schema_validation_enabled = false

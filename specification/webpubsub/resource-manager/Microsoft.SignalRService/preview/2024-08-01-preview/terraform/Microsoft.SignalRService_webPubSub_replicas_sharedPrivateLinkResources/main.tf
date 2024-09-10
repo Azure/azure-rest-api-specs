@@ -8,11 +8,11 @@ terraform {
 
 provider "azapi" {
   # This is not needed after the api is completely onboarded 
-  endpoint = [ {
-    resource_manager_endpoint = "https://eastus2euap.management.azure.com/"
-    resource_manager_audience = "https://management.core.windows.net/"
+  endpoint = [{
+    resource_manager_endpoint       = "https://eastus2euap.management.azure.com/"
+    resource_manager_audience       = "https://management.core.windows.net/"
     active_directory_authority_host = "https://login.microsoftonline.com"
-  } ]
+  }]
 }
 
 
@@ -176,6 +176,7 @@ resource "azapi_resource_action" "put_sharedPrivateLinkResource" {
       groupId               = "sites"
       privateLinkResourceId = azapi_resource.site.id
       requestMessage        = "Please approve"
+      fqdns                 = []
     }
   }
 }

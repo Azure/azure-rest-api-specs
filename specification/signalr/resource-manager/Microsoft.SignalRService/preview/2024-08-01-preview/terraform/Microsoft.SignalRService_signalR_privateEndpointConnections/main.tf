@@ -44,8 +44,8 @@ resource "azapi_resource" "signalR" {
     properties = {
       cors = {
       }
-      disableAadAuth   = false
-      disableLocalAuth = false
+      disableAadAuth      = false
+      disableLocalAuth    = false
       publicNetworkAccess = "Enabled"
       tls = {
         clientCertEnabled = false
@@ -184,18 +184,18 @@ resource "azapi_resource_action" "put_signalR" {
     location = var.location
     properties = {
       networkACLs = {
-         privateEndpoints = [
-                        {
-                            name = local.privateEndpointConnectionName
-                            allow =[
-                                "ServerConnection",
-                                "ClientConnection",
-                                "RESTAPI",
-                                "Trace"
-                            ]
-                            deny = []
-                        }
-                    ],
+        privateEndpoints = [
+          {
+            name = local.privateEndpointConnectionName
+            allow = [
+              "ServerConnection",
+              "ClientConnection",
+              "RESTAPI",
+              "Trace"
+            ]
+            deny = []
+          }
+        ],
       }
     }
     sku = {
@@ -204,7 +204,7 @@ resource "azapi_resource_action" "put_signalR" {
       tier     = "Standard"
     }
   }
-  depends_on = [ azapi_resource_action.put_privateEndpointConnection ]
+  depends_on = [azapi_resource_action.put_privateEndpointConnection]
 }
 
 resource "azapi_resource_action" "patch_signalR" {
@@ -216,18 +216,18 @@ resource "azapi_resource_action" "patch_signalR" {
     location = var.location
     properties = {
       networkACLs = {
-         privateEndpoints = [
-                        {
-                            name = local.privateEndpointConnectionName
-                            allow =[
-                                "ServerConnection",
-                                "ClientConnection",
-                                "RESTAPI",
-                                "Trace"
-                            ]
-                            deny = []
-                        }
-                    ],
+        privateEndpoints = [
+          {
+            name = local.privateEndpointConnectionName
+            allow = [
+              "ServerConnection",
+              "ClientConnection",
+              "RESTAPI",
+              "Trace"
+            ]
+            deny = []
+          }
+        ],
       }
     }
     sku = {
@@ -236,5 +236,5 @@ resource "azapi_resource_action" "patch_signalR" {
       tier     = "Standard"
     }
   }
-  depends_on = [ azapi_resource_action.put_signalR ]
+  depends_on = [azapi_resource_action.put_signalR]
 }
