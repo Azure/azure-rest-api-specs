@@ -140,10 +140,10 @@ model TranslationInput {
   @doc("Translation video file url.")
   videoFileUrl: url;
 
-  @doc("Speaker count of the video.")
+  @doc("Number of speakers in the video.")
   speakerCount?: int32;
 
-  @doc("Subtitle max char count per segment.")
+  @doc("Subtitle max display character count per segment.")
   subtitleMaxCharCountPerSegment?: int32;
 
   @doc("Export subtitle in video.")
@@ -173,10 +173,10 @@ model IterationInput {
   @doc("Webvtt file for content editing.")
   webvttFile?: WebvttFile;
 
-  @doc("Speaker count of the video.")
+  @doc("Number of speakers in the video.")
   speakerCount?: int32;
 
-  @doc("Subtitle max char count per segment.")
+  @doc("Subtitle max display character count per segment.")
   subtitleMaxCharCountPerSegment?: int32;
 
   @doc("Export subtitle in video.")
