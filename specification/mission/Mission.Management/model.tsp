@@ -433,7 +433,10 @@ interface ExternalConnections {
 interface Approval {
   get is ArmResourceRead<ApprovalResource>;
   createOrUpdate is ArmResourceCreateOrUpdateAsync<ApprovalResource>;
+  listByParent is ArmResourceListByParent<ApprovalResource>;
   update is ArmResourcePatchAsync<ApprovalResource, ApprovalProperties>;
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "deprecated" "Backwards compatibility"
   delete is ArmResourceDeleteWithoutOkAsync<ApprovalResource>;
   @doc("Upon receiving approval or rejection from approver, this facilitates actions on approval resource")
   @armResourceAction(ApprovalResource)
