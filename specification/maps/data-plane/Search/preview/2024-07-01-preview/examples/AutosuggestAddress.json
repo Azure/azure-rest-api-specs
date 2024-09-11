@@ -1,0 +1,45 @@
+{
+  "parameters": {
+    "api-version": "2024-07-01-preview",
+    "query": "1 Microsoft Way, Redmond",
+    "resultTypes": "Address",
+    "AzureKey": "[subscription-key]"
+  },
+  "responses": {
+    "200": {
+      "headers": {
+        "Content-Type": "application/geo+json"
+      },
+      "body": {
+        "type": "FeatureCollection",
+        "features": [
+          {
+            "type": "Feature",
+            "properties": {
+              "type": "Address",
+              "address": {
+                "countryRegion": {
+                  "ISO": "US",
+                  "name": "United States"
+                },
+                "adminDistricts": [
+                  {
+                    "name": "Washington"
+                  },
+                  {
+                    "name": "King County"
+                  }
+                ],
+                "formattedAddress": "1 Microsoft Way, Redmond, WA 98052",
+                "locality": "Redmond",
+                "postalCode": "98052",
+                "addressLine": "1 Microsoft Way"
+              }
+            },
+            "geometry": null
+          }
+        ]
+      }
+    }
+  }
+}
