@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2024-08-02-preview",
+    "version": "2024-10-02-preview",
     "title": "ContainerApps API Client"
   },
   "host": "management.azure.com",
@@ -441,6 +441,14 @@
               "description": "Traffic weight assigned to this revision",
               "type": "integer",
               "readOnly": true
+            },
+            "labels": {
+              "description": "List of labels assigned to this revision.",
+              "type": "array",
+              "readOnly": true,
+              "items": {
+                "type": "string"
+              }
             },
             "provisioningError": {
               "description": "Optional Field - Platform Error Message",
