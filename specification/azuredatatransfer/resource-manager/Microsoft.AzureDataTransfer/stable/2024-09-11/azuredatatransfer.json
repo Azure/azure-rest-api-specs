@@ -1657,6 +1657,10 @@
         "messagingOptions": {
           "$ref": "#/definitions/messagingOptions",
           "description": "The messaging options for this flow"
+        },
+        "customerManagedKeyVaultUri": {
+          "type": "string",
+          "description": "The URI to the customer managed key for this flow"
         }
       },
       "description": "Properties of flow"
@@ -1871,6 +1875,13 @@
         "schemas": {
           "description": "The schemas for this connection",
           "$ref": "#/definitions/schemas"
+        },
+        "schemaUris": {
+          "description": "The schema URIs for this connection",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         }
       },
       "required": [
@@ -2283,6 +2294,22 @@
             "name": "schemaDirection",
             "modelAsString": true
           }
+        },
+        "schemaUri": {
+          "type": "string",
+          "description": "Uri containing SAS token for the zipped schema"
+        },
+        "schemaType": {
+          "description": "The Schema Type",
+          "enum": [
+            "Xsd",
+            "Zip"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "SchemaType",
+            "modelAsString": true
+          }
         }
       }
     },
@@ -2398,4 +2425,3 @@
     }
   }
 }
-
