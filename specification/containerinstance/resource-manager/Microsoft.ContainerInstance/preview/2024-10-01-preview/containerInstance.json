@@ -161,6 +161,9 @@
           "ContainerGroupsCreateOrUpdate": {
             "$ref": "./examples/ContainerGroupsCreateOrUpdate.json"
           },
+          "ContainerGroupsCreateOrUpdateSecretReference": {
+            "$ref": "./examples/ContainerGroupsCreateOrUpdateSecretReference.json"
+          },
           "ContainerGroupCreateWithExtensions": {
             "$ref": "./examples/ContainerGroupExtensions.json"
           },
@@ -836,6 +839,29 @@
     }
   },
   "definitions": {
+    "SecretReference": {
+      "description": "A secret reference",
+      "type": "object",
+      "required": [
+        "name",
+        "identity",
+        "secretReferenceUri"
+      ],
+      "properties": {
+        "name": {
+          "description": "The identifier of the secret reference",
+          "type": "string"
+        },
+        "identity": {
+          "description": "The resource id of the managed identity that has access to the secret in the key vault",
+          "type": "string"
+        },
+        "secretReferenceUri": {
+          "description": "",
+          "type": "string"
+        }
+      }
+    },
     "Container": {
       "description": "A container instance.",
       "type": "object",
@@ -1210,6 +1236,10 @@
         "storageAccountKey": {
           "description": "The storage account access key used to access the Azure File share.",
           "type": "string"
+        },
+        "storageAccountKeyReference": {
+          "description": "The reference to the storage account access key used to access the Azure File share.",
+          "type": "string"
         }
       }
     },
@@ -1220,6 +1250,13 @@
     },
     "SecretVolume": {
       "description": "The secret volume.",
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
+    "SecretReferenceVolume": {
+      "description": "The secret reference volume.",
       "type": "object",
       "additionalProperties": {
         "type": "string"
@@ -1267,6 +1304,10 @@
         "secret": {
           "description": "The secret volume.",
           "$ref": "#/definitions/SecretVolume"
+        },
+        "secretReference":{
+          "description": "The secret reference volume.",
+          "$ref": "#/definitions/SecretReferenceVolume"
         },
         "gitRepo": {
           "description": "The git repo volume.",
@@ -1419,6 +1460,16 @@
               "readOnly": true,
               "type": "string",
               "description": "The provisioning state of the container group. This only appears in the response."
+            },
+            "secrets": {
+              "type": "array",
+              "description": "The secret references that will be referenced within the container group.",
+              "items": {
+                "$ref": "#/definitions/SecretReference"
+              },
+              "x-ms-identifiers": [
+                "name"
+              ]
             },
             "containers": {
               "type": "array",
@@ -1723,6 +1774,10 @@
           "description": "The password for the private registry.",
           "x-ms-secret": true
         },
+        "passwordReference": {
+          "type": "string",
+          "description": "The reference for the private registry password."
+        },
         "identity": {
           "type": "string",
           "description": "The identity for the private registry."
@@ -1935,6 +1990,10 @@
           "type": "string",
           "description": "The value of the secure environment variable.",
           "x-ms-secret": true
+        },
+        "secureValueReference": {
+          "type": "string",
+          "description": "The reference of the secure environment variable."
         }
       },
       "required": [
