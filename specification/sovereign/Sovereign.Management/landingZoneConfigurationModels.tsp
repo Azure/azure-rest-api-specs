@@ -118,6 +118,7 @@ model PolicyInitiativeAssignmentProperties {
   @doc("The fully qualified id of the policy initiative.")
   policyInitiativeId: string;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing api"
   #suppress "@azure-tools/typespec-azure-core/bad-record-type" "This would be customer defined parameter based on the policy initiatives to be assigned. Hence we need to use Record<unknown> as it will differ per initiative."
   @doc("The parameters for the assignment of policy initiatives.")
   assignmentParameters: Record<unknown>;

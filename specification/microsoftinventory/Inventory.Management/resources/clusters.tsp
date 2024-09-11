@@ -18,6 +18,7 @@ using Azure.ResourceManager;
 namespace Microsoft.Inventory;
 
 @tenantResource
+@parentResource(TenantLocationResource)
 model ClusterResource is ProxyResource<ClusterProperties> {
   @pattern("[a-zA-Z0-9]+[-_]*")
   @key("clusterName")
@@ -29,6 +30,6 @@ model ClusterResource is ProxyResource<ClusterProperties> {
 
 @armResourceOperations
 interface Clusters {
-  getCluster is ArmLocResourceRead<ClusterResource>;
-  list is ArmLocResourceListByParent<ClusterResource>;
+  get is ArmResourceRead<ClusterResource>;
+  list is ArmResourceListByParent<ClusterResource>;
 }

@@ -663,6 +663,9 @@
           "Merge Failed Caused by Source CloudService": {
             "$ref": "./examples/evaluateOnly/CloudService_CanMerge_Fail_SourceCloudService.json"
           },
+          "Merge Failed Caused by having multiple Source CloudService": {
+            "$ref": "./examples/evaluateOnly/CloudService_CanMerge_Fail_MultiSource.json"
+          },
           "InvalidRequestBody": {
             "$ref": "./examples/evaluateOnly/CloudService_CanMerge_InvalidRequestBody.json"
           }
@@ -817,6 +820,11 @@
         "productCode": {
           "description": "Product Universal Product Number of the product",
           "type": "string"
+        },
+        "licenseData": {
+          "description": "License data of the product",
+          "type": "string",
+          "readOnly": true
         },
         "provisioningState": {
           "readOnly": true,

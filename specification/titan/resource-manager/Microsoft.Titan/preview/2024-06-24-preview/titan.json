@@ -1,0 +1,523 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft.Titan management service",
+    "version": "2024-06-24-preview",
+    "description": "Microsoft.Titan Resource Provider management API.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Operations"
+    },
+    {
+      "name": "ComputeDevices"
+    }
+  ],
+  "paths": {
+    "/providers/Microsoft.Titan/locations/{location}/computeDevices": {
+      "get": {
+        "operationId": "ComputeDevices_List",
+        "tags": [
+          "ComputeDevices"
+        ],
+        "description": "List ComputeDeviceResource resources by TenantLocationResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ComputeDeviceResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ComputeDevices_List": {
+            "$ref": "./examples/ComputeDevices_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Titan/locations/{location}/computeDevices/{computeDevice}": {
+      "get": {
+        "operationId": "ComputeDevices_Get",
+        "tags": [
+          "ComputeDevices"
+        ],
+        "description": "Get a ComputeDeviceResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+          },
+          {
+            "name": "computeDevice",
+            "in": "path",
+            "description": "The parent resource name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-._]{1,58}[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ComputeDeviceResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ComputeDevices_Get": {
+            "$ref": "./examples/ComputeDevices_Get.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Titan/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Operations_List": {
+            "$ref": "./examples/Operations_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Azure.ResourceManager.ResourceProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of a resource type.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "ResourceProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "ComputeDeviceProperties": {
+      "type": "object",
+      "description": "Compute Device Properties",
+      "properties": {
+        "deviceType": {
+          "$ref": "#/definitions/DeviceType",
+          "description": "The device type",
+          "readOnly": true
+        },
+        "dcCode": {
+          "type": "string",
+          "description": "The short datacenter code where the physical device is located as surfaced by Network Graph Service (NGS). Ex: BN1 ",
+          "readOnly": true
+        },
+        "deploymentType": {
+          "$ref": "#/definitions/DeploymentType",
+          "description": "The onboarding group as surfaced by Network Graph Service (NGS). ",
+          "readOnly": true
+        },
+        "dcRackLocation": {
+          "type": "string",
+          "description": "If the NgsDeviceType is a chassis manager or rack manager, the location of the rack. Unknown otherwise. Surfaced by Network Graph Service (NGS).",
+          "readOnly": true
+        },
+        "function": {
+          "type": "string",
+          "description": "Whether the device is for production. Surfaced by Network Graph Service (NGS).",
+          "readOnly": true
+        },
+        "assetTag": {
+          "type": "string",
+          "description": "Unique asset tag of the machine as reported by Hardware Inventory System.",
+          "readOnly": true
+        },
+        "ipAddress": {
+          "type": "string",
+          "description": "The main (or front-end) IP address of the machine at the time of the snapshot.",
+          "readOnly": true
+        },
+        "lifeCycleState": {
+          "type": "string",
+          "description": "Represents the logical state of the machine as it goes through the hardware lifecycle.",
+          "readOnly": true
+        },
+        "macAddress": {
+          "type": "string",
+          "description": "The network MAC address of the machine.",
+          "readOnly": true
+        },
+        "machineName": {
+          "type": "string",
+          "description": "The name of the machine.",
+          "readOnly": true
+        },
+        "rackName": {
+          "type": "string",
+          "description": "The name of the physical structure the machine is on.",
+          "readOnly": true
+        },
+        "serialNumber": {
+          "type": "string",
+          "description": "Unique serial number of the machine as reported by Hardware Inventory System.",
+          "readOnly": true
+        },
+        "workloadType": {
+          "$ref": "#/definitions/WorkloadType",
+          "description": "If the machine type is a server, the environment in which workloads are run. One of: Baremetal, VM, Container.",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
+          "description": "The status of the last operation",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "deviceType",
+        "dcCode",
+        "deploymentType",
+        "dcRackLocation",
+        "function",
+        "assetTag",
+        "ipAddress",
+        "lifeCycleState",
+        "macAddress",
+        "machineName",
+        "rackName",
+        "serialNumber",
+        "workloadType"
+      ]
+    },
+    "ComputeDeviceResource": {
+      "type": "object",
+      "description": "Compute Device resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ComputeDeviceProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ComputeDeviceResourceListResult": {
+      "type": "object",
+      "description": "The response of a ComputeDeviceResource list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ComputeDeviceResource items on this page",
+          "items": {
+            "$ref": "#/definitions/ComputeDeviceResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "DeploymentType": {
+      "type": "string",
+      "description": "Deployment type enum",
+      "enum": [
+        "Pilotfish",
+        "AzureAll",
+        "Exchange",
+        "Autopilot",
+        "Sharepoint",
+        "FOPE",
+        "DatacenterServices",
+        "MacCloud",
+        "PreBuild",
+        "AzureDNS",
+        "CPS",
+        "Tycoon",
+        "AzureEngSys",
+        "Fabric",
+        "DCCE",
+        "AzureKeyVault",
+        "FirstPartyNetwork",
+        "Unknown"
+      ],
+      "x-ms-enum": {
+        "name": "DeploymentType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Pilotfish",
+            "value": "Pilotfish",
+            "description": "Pilotfish deployment."
+          },
+          {
+            "name": "AzureAll",
+            "value": "AzureAll",
+            "description": "AzureAll deployment."
+          },
+          {
+            "name": "Exchange",
+            "value": "Exchange",
+            "description": "Exchange deployment."
+          },
+          {
+            "name": "Autopilot",
+            "value": "Autopilot",
+            "description": "Autopilot deployment."
+          },
+          {
+            "name": "Sharepoint",
+            "value": "Sharepoint",
+            "description": "Sharepoint deployment."
+          },
+          {
+            "name": "FOPE",
+            "value": "FOPE",
+            "description": "FOPE deployment."
+          },
+          {
+            "name": "DatacenterServices",
+            "value": "DatacenterServices",
+            "description": "DatacenterServices deployment."
+          },
+          {
+            "name": "MacCloud",
+            "value": "MacCloud",
+            "description": "MacCloud deployment."
+          },
+          {
+            "name": "PreBuild",
+            "value": "PreBuild",
+            "description": "PreBuild deployment."
+          },
+          {
+            "name": "AzureDNS",
+            "value": "AzureDNS",
+            "description": "AzureDNS deployment."
+          },
+          {
+            "name": "CPS",
+            "value": "CPS",
+            "description": "CPS deployment."
+          },
+          {
+            "name": "Tycoon",
+            "value": "Tycoon",
+            "description": "Tycoon deployment."
+          },
+          {
+            "name": "AzureEngSys",
+            "value": "AzureEngSys",
+            "description": "AzureEngSys deployment."
+          },
+          {
+            "name": "Fabric",
+            "value": "Fabric",
+            "description": "Fabric deployment."
+          },
+          {
+            "name": "DCCE",
+            "value": "DCCE",
+            "description": "DCCE deployment."
+          },
+          {
+            "name": "AzureKeyVault",
+            "value": "AzureKeyVault",
+            "description": "AzureKeyVault deployment."
+          },
+          {
+            "name": "FirstPartyNetwork",
+            "value": "FirstPartyNetwork",
+            "description": "FirstPartyNetwork deployment."
+          },
+          {
+            "name": "Unknown",
+            "value": "Unknown",
+            "description": "Unknown deployment."
+          }
+        ]
+      }
+    },
+    "DeviceType": {
+      "type": "string",
+      "description": "Device type enum",
+      "enum": [
+        "Server",
+        "ChassisManager",
+        "EpmsSensor",
+        "RackManager",
+        "EPMS"
+      ],
+      "x-ms-enum": {
+        "name": "DeviceType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Server",
+            "value": "Server",
+            "description": "The Server."
+          },
+          {
+            "name": "ChassisManager",
+            "value": "ChassisManager",
+            "description": "The ChassisManager."
+          },
+          {
+            "name": "EpmsSensor",
+            "value": "EpmsSensor",
+            "description": "The EpmsSensor."
+          },
+          {
+            "name": "RackManager",
+            "value": "RackManager",
+            "description": "The RackManager."
+          },
+          {
+            "name": "EPMS",
+            "value": "EPMS",
+            "description": "The EPMS."
+          }
+        ]
+      }
+    },
+    "WorkloadType": {
+      "type": "string",
+      "description": "Workload type enum",
+      "enum": [
+        "Baremetal",
+        "VM",
+        "Unknown"
+      ],
+      "x-ms-enum": {
+        "name": "WorkloadType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Baremetal",
+            "value": "Baremetal",
+            "description": "Baremetal workload type."
+          },
+          {
+            "name": "VM",
+            "value": "VM",
+            "description": "VM workload type."
+          },
+          {
+            "name": "Unknown",
+            "value": "Unknown",
+            "description": "Unknown workload type."
+          }
+        ]
+      }
+    }
+  },
+  "parameters": {}
+}

@@ -558,6 +558,7 @@ model IdentityInfo {
 
 @doc("Resource metadata")
 model ResourceMetadata {
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing api"
   #suppress "@azure-tools/typespec-azure-core/bad-record-type" "This is arbitrary JSON to provide custom attributes"
   @doc("Custom attributes")
   @visibility("read", "create")

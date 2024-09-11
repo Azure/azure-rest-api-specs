@@ -652,6 +652,7 @@ model ExtendedLocation {
 
 @doc("The gallery images resource patch definition.")
 model GalleryImagesUpdateRequest {
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing api"
   @doc("Resource tags")
   tags?: Record<string>;
 }
@@ -968,6 +969,7 @@ model LogicalNetworkStatusProvisioningStatus {
 
 @doc("The logical network resource patch definition.")
 model LogicalNetworksUpdateRequest {
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing api"
   @doc("Resource tags")
   tags?: Record<string>;
 }
@@ -1043,18 +1045,21 @@ model MarketplaceGalleryImageStatusDownloadStatus {
 
 @doc("The marketplace gallery image resource patch definition.")
 model MarketplaceGalleryImagesUpdateRequest {
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing api"
   @doc("Resource tags")
   tags?: Record<string>;
 }
 
 @doc("The network interface resource patch definition.")
 model NetworkInterfacesUpdateRequest {
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing api"
   @doc("Resource tags")
   tags?: Record<string>;
 }
 
 @doc("Tags object for patch operations.")
 model TagsObject {
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing api"
   @doc("Resource tags.")
   tags?: Record<string>;
 }
@@ -1105,6 +1110,7 @@ model StorageContainerStatusProvisioningStatus {
 
 @doc("The storage container resource patch definition.")
 model StorageContainersUpdateRequest {
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing api"
   @doc("Resource tags")
   tags?: Record<string>;
 }
@@ -1214,6 +1220,7 @@ model VirtualHardDiskUploadStatus {
 
 @doc("The virtual hard disk resource patch definition.")
 model VirtualHardDisksUpdateRequest {
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing api"
   @doc("Resource tags")
   tags?: Record<string>;
 }
