@@ -145,13 +145,6 @@ model DiscoveredEvent {
   lastUpdatedOn?: utcDateTime;
 }
 
-// The updateable properties of the Discovered Asset.
-// This is a workaround to fix the patch payload that otherwise will expose the 'location' field (not present in patch),
-// since otherwise it extends the ARM TrackedResource type.
-alias DiscoveredAssetPropertiesUpdate = {
-  ...OptionalProperties<UpdateableProperties<DiscoveredAssetProperties>>;
-};
-
 @armResourceOperations
 @added(Versions.v2024_09_01_preview)
 interface DiscoveredAssets {
@@ -164,7 +157,7 @@ interface DiscoveredAssets {
     DiscoveredAsset,
     Azure.ResourceManager.Foundations.ResourceUpdateModel<
       DiscoveredAsset,
-      DiscoveredAssetPropertiesUpdate
+      DiscoveredAssetProperties
     >
   >;
   delete is ArmResourceDeleteWithoutOkAsync<DiscoveredAsset>;

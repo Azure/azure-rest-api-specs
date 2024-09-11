@@ -159,13 +159,6 @@ model SchemaVersionProperties {
   provisioningState?: ProvisioningState;
 }
 
-// The updateable properties of the Schema Registry.
-// This is a workaround to fix the patch payload that otherwise will expose the 'location' field (not present in patch),
-// since otherwise it extends the ARM TrackedResource type.
-alias SchemaRegistriesPropertiesUpdate = {
-  ...OptionalProperties<UpdateableProperties<SchemaRegistryProperties>>;
-};
-
 @added(Versions.v2024_09_01_preview)
 @armResourceOperations
 interface SchemaRegistries {
@@ -178,7 +171,7 @@ interface SchemaRegistries {
     SchemaRegistry,
     Azure.ResourceManager.Foundations.ResourceUpdateModel<
       SchemaRegistry,
-      SchemaRegistriesPropertiesUpdate
+      SchemaRegistryProperties
     >
   >;
   delete is ArmResourceDeleteWithoutOkAsync<SchemaRegistry>;
