@@ -1890,7 +1890,7 @@ model ConversationalAnalysisAuthoringExportedLuisOrchestration {
   /**
    * The LUIS application ID.
    */
-  appId: string;
+  appId: uuid;
 
   /**
    * The targeted version Id.

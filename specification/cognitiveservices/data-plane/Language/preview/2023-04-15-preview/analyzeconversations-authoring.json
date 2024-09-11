@@ -2442,6 +2442,11 @@
     }
   },
   "definitions": {
+    "Azure.Core.uuid": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Universally Unique Identifier"
+    },
     "ConversationalAnalysisAuthoringAssignDeploymentResourcesOptions": {
       "type": "object",
       "description": "Represents the options for assigning Azure resources to a project.",
@@ -3515,7 +3520,7 @@
       "description": "Defines the orchestration details for a LUIS application target.",
       "properties": {
         "appId": {
-          "type": "string",
+          "$ref": "#/definitions/Azure.Core.uuid",
           "description": "The LUIS application ID."
         },
         "appVersion": {

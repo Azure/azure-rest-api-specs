@@ -1754,6 +1754,11 @@
     }
   },
   "definitions": {
+    "Azure.Core.uuid": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Universally Unique Identifier"
+    },
     "ConversationalAnalysisAuthoringCompositionSetting": {
       "type": "string",
       "enum": [
@@ -2426,7 +2431,7 @@
       "description": "Defines the orchestration details for a LUIS application target.",
       "properties": {
         "appId": {
-          "type": "string",
+          "$ref": "#/definitions/Azure.Core.uuid",
           "description": "The LUIS application ID."
         },
         "appVersion": {
