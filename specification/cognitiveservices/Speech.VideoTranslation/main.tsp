@@ -24,15 +24,6 @@ using TypeSpec.OpenAPI;
 )
 @useAuth(KeyAuth | AADToken)
 @tag("VideoTranslation")
-@info({
-  contact: {
-    name: "Azure AI - Speech Services",
-    url: "https://learn.microsoft.com/azure/ai-services/speech-service/",
-  },
-  license: {
-    name: "Copyright (c) Microsoft. All rights reserved.",
-  },
-})
 namespace Microsoft.Speech.VideoTranslation;
 
 @doc("Provide your Speech resource key here.")
