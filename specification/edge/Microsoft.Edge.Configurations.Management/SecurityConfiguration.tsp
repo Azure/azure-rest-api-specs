@@ -42,7 +42,7 @@ model SecurityConfigurationProperties {
   @visibility("read")
   provisioningState?: ResourceProvisioningState;
 
-  @doc("Scenario in which this configuraiton is used")
+  @doc("Scenario in which this configuration is used")
   scenario: Scenario;
 
   @doc("References for the secrets from keyvault")
