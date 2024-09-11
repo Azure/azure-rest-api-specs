@@ -133,7 +133,7 @@ input-file:
 
 ``` yaml
 directive:
-  - suppress: TopLevelResourcesListBySubscription
+  - suppress: TenantLevelAPIsNotAllowed
     reason: These are tenant level APIs and resource types by design.
     from: serviceGroups.json
     where: $.definitions.ServiceGroup
