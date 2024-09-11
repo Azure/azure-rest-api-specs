@@ -132,11 +132,11 @@ input-file:
 # Suppression
 
 ``` yaml
-directive:
-  - suppress: TenantLevelAPIsNotAllowed
+suppressions:
+  - code: TenantLevelAPIsNotAllowed
     reason: These are tenant level APIs and resource types by design.
     from: serviceGroups.json
-    where: $.definitions.ServiceGroup
+    where: $.paths["/providers/Microsoft.Management/serviceGroups/{serviceGroupName}"]
 ```
 ---
 
