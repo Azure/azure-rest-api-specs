@@ -31,7 +31,7 @@ using TypeSpec.Versioning;
   ]>
 )
 @service({
-  title: "Microsoft Cognitive Language Service - Analyze Conversations",
+  title: "Microsoft Cognitive Language Service - Analyze Conversations Authoring",
 })
 @versioned(Versions)
 @server(
