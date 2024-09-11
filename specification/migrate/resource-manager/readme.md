@@ -30,7 +30,9 @@ suppressions:
   - code: AvoidAdditionalProperties
     reason: Migrate feature is widely adopted and requires additionalProperties for these swagger properties.
   - code: ProvisioningStateMustBeReadOnly
-    reason: ProvisioningState is an existing property.
+    reason: The current swagger version only modifies the resources which do not have Provisioning states as readOnly and not introducing any new Resources, These are incorrectly flagged for previous versions.
+  - code: UnSupportedPatchProperties
+    reason: There is no patch operation that is introduced in this swagger version where it is not readOnly. This is incorrectly flagged for previous versions.
 ```
 
 ### Tag: package-migrate-2023-04
