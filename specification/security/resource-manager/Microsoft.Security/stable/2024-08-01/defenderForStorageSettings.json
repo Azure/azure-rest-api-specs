@@ -188,7 +188,7 @@
         },
         "filters": {
           "$ref": "#/definitions/OnUploadFilters",
-          "description": "Determine which blobs get scanned by On Upload malware scanning. An Or operation is performed between each filter type."
+          "description": "Optional. Determine which blobs get scanned by On Upload malware scanning. An Or operation is performed between each filter type."
         }
       },
       "description": "Properties of On Upload malware scanning."
@@ -201,18 +201,18 @@
           "items": {
             "type": "string"
           },
-          "description": "Exclude blobs with one of the given prefixes from on-upload malware scanning. Prefixes must follow the format '/<container-name>/<blob-name>', are case-insensitive, and must start with '/' followed by the container name. Do not include the storage account name."
+          "description": "Optional. Exclude blobs with one of the given prefixes from on-upload malware scanning. Prefixes must follow the format '/<container-name>/<blob-name>', are case-insensitive, and must start with '/' followed by the container name. Do not include the storage account name."
         },
         "excludeBlobsWithSuffix": {
           "type": "array",
           "items": {
             "type": "string"
           },
-          "description": "Exclude blobs with one of the given suffixes from on-upload malware scanning. Suffixes match only the end of blob names, are case-insensitive, and should be used for file extensions or blob name endings only."
+          "description": "Optional. Exclude blobs with one of the given suffixes from on-upload malware scanning. Suffixes match only the end of blob names, are case-insensitive, and should be used for file extensions or blob name endings only."
         },
         "excludeBlobsLargerThan": {
           "format": "int64",
-          "description": "Exclude each blob with size in bytes larger than the given value from on-upload malware scanning."
+          "description": "Optional. Exclude each blob with size in bytes larger than the given value from on-upload malware scanning."
         }
       }
     },
