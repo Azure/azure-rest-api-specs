@@ -201,18 +201,18 @@
           "items": {
             "type": "string"
           },
-          "description": "Exclude each blob that has a subject prefix matching any of the provided values from On Upload malware scanning. Blob subjects have the following structure: `<container-name>/<blob-name>`, meaning prefixes will consider containers and hierarchical namespaces"
+          "description": "Exclude blobs with one of the given prefixes from on-upload malware scanning. Prefixes must follow the format '/<container-name>/<blob-name>', are case-insensitive, and must start with '/' followed by the container name. Do not include the storage account name"
         },
         "excludeBlobsWithSuffix": {
           "type": "array",
           "items": {
             "type": "string"
           },
-          "description": "Exclude each blob that has a subject suffix matching any of the provided values from On Upload malware scanning. Blob subjects have the following structure: `<container-name>/<blob-name>`, meaning suffixes can consider containers and hierarchical namespaces"
+          "description": "Exclude blobs with one of the given suffixes from on-upload malware scanning. Suffixes match only the end of blob names, are case-insensitive, and should be used for file extensions or blob name endings only"
         },
         "excludeBlobsLargerThan": {
           "format": "int64",
-          "description": "Exclude each blob with size larger than the given value in bytes from On Upload malware scanning."
+          "description": "Exclude each blob with size in bytes larger than the given value from on-upload malware scanning."
         }
       }
     },
