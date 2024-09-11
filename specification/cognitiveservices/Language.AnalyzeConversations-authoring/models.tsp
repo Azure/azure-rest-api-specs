@@ -1441,8 +1441,7 @@ model ConversationExportedEntity {
   regex?: ExportedEntityRegex;
 
   /**
-   * The required components. Allowed values are 'learned', 'list', 'prebuilts' and
-   * 'regex'.
+   * The required components. Allowed values are 'learned', 'list', 'prebuilts' and 'regex'.
    */
   requiredComponents?: string[];
 }
