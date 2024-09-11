@@ -50,6 +50,7 @@ input-file:
   - Microsoft.App/preview/2024-08-02-preview/ContainerAppsBuilds.json
   - Microsoft.App/preview/2024-08-02-preview/ContainerAppsPatches.json
   - Microsoft.App/preview/2024-08-02-preview/ContainerAppsRevisions.json
+  - Microsoft.App/preview/2024-08-02-preview/ContainerAppsLabelHistory.json
   - Microsoft.App/preview/2024-08-02-preview/Diagnostics.json
   - Microsoft.App/preview/2024-08-02-preview/DotNetComponents.json
   - Microsoft.App/preview/2024-08-02-preview/FunctionsExtension.json
