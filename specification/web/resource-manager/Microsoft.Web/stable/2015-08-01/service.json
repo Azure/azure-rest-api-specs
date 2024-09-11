@@ -16785,61 +16785,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{siteName}/certificates/{name}/hostNameBindings": {
-      "get": {
-        "tags": [
-          "SiteCertificates"
-        ],
-        "summary": "Gets all hostname bindings the certificate is used in for a given site.",
-        "operationId": "SiteCertificates_ListHostnameBindings",
-        "parameters": [
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "description": "Name of the resource group",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "siteName",
-            "in": "path",
-            "description": "Name of the site.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "Name of the certificate.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/HostNameBindingCollection"
-            }
-          },
-          "default": {
-            "description": "App Service error response.",
-            "schema": {
-              "$ref": "#/definitions/DefaultErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{siteName}/slots/{slot}/certificates": {
       "get": {
         "tags": [
@@ -17142,68 +17087,6 @@
               "$ref": "#/definitions/DefaultErrorResponse"
             }
           }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{siteName}/slots/{slot}/certificates/{name}/hostNameBindings": {
-      "get": {
-        "tags": [
-          "SiteCertificates"
-        ],
-        "summary": "Gets all hostname bindings the certificate is used in for a given site and deployment slot.",
-        "operationId": "SiteCertificates_ListHostnameBindingsSlot",
-        "parameters": [
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "description": "Name of the resource group",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "siteName",
-            "in": "path",
-            "description": "Name of the site.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "slot",
-            "in": "path",
-            "description": "Name of the deployment slot. If a slot is not specified, the API will create a binding for the production slot.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "Name of the certificate.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/HostNameBindingCollection"
-            }
-          },
-          "default": {
-            "description": "App Service error response.",
-            "schema": {
-              "$ref": "#/definitions/DefaultErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     }
