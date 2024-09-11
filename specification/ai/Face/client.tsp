@@ -86,11 +86,20 @@ interface FaceClient {
 }
 
 @client({
-  name: "FaceAdministrationClient",
+  name: "administration.FaceAdministrationClient",
   service: Face,
 })
 namespace FaceAdministrationClient {
+  model LargeFaceListClientOptions {
+    largeFaceListId: collectionId;
+  }
+
+  model LargePersonGroupOptions {
+    largePersonGroupId: collectionId;
+  }
+
   @operationGroup
+  @clientInitialization(LargeFaceListClientOptions)
   @clientName("LargeFaceListClientImpl", "csharp")
   interface LargeFaceList {
     @doc("Please refer to https://learn.microsoft.com/rest/api/face/face-list-operations/create-large-face-list for more details.")
@@ -127,6 +136,7 @@ namespace FaceAdministrationClient {
   }
 
   @operationGroup
+  @clientInitialization(LargePersonGroupOptions)
   @clientName("LargePersonGroupClientImpl", "csharp")
   interface LargePersonGroup {
     @doc("Please refer to https://learn.microsoft.com/rest/api/face/person-group-operations/create-large-person-group for more details.")
