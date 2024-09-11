@@ -22,8 +22,8 @@ model ArcGatewayConfigurationProperties {
   @visibility("read")
   provisioningState?: ResourceProvisioningState;
 
-  @doc("UseCase of this configuration")
-  useCase: UseCase;
+  @doc("Scenario in which this configuraiton is used")
+  scenario: Scenario;
 
   // TODO - check if this is supposed to be http web-url or arm-id of arcGateway.
   @doc("Uri for the arcGateway")

@@ -2682,9 +2682,9 @@
           "description": "Provisioning state of resource",
           "readOnly": true
         },
-        "useCase": {
-          "$ref": "#/definitions/UseCase",
-          "description": "UseCase of this configuration"
+        "scenario": {
+          "$ref": "#/definitions/Scenario",
+          "description": "Scenario in which this configuraiton is used"
         },
         "arcGatewayUri": {
           "type": "string",
@@ -2692,7 +2692,7 @@
         }
       },
       "required": [
-        "useCase",
+        "scenario",
         "arcGatewayUri"
       ]
     },
@@ -2700,9 +2700,9 @@
       "type": "object",
       "description": "ArcGatewayConfigurationProperties Properties",
       "properties": {
-        "useCase": {
-          "$ref": "#/definitions/UseCase",
-          "description": "UseCase of this configuration"
+        "scenario": {
+          "$ref": "#/definitions/Scenario",
+          "description": "Scenario in which this configuraiton is used"
         },
         "arcGatewayUri": {
           "type": "string",
@@ -2986,9 +2986,9 @@
           "description": "Provisioning state of resource",
           "readOnly": true
         },
-        "useCase": {
-          "$ref": "#/definitions/UseCase",
-          "description": "UseCase of this configuration"
+        "scenario": {
+          "$ref": "#/definitions/Scenario",
+          "description": "Scenario in which this configuraiton is used"
         },
         "connectivityType": {
           "$ref": "#/definitions/ConnectivityType",
@@ -3000,7 +3000,7 @@
         }
       },
       "required": [
-        "useCase",
+        "scenario",
         "connectivityType"
       ]
     },
@@ -3008,9 +3008,9 @@
       "type": "object",
       "description": "ConnectivityConfigurationProperties Properties",
       "properties": {
-        "useCase": {
-          "$ref": "#/definitions/UseCase",
-          "description": "UseCase of this configuration"
+        "scenario": {
+          "$ref": "#/definitions/Scenario",
+          "description": "Scenario in which this configuraiton is used"
         },
         "connectivityType": {
           "$ref": "#/definitions/ConnectivityType",
@@ -3393,9 +3393,9 @@
           "description": "The status of the last operation.",
           "readOnly": true
         },
-        "useCase": {
-          "$ref": "#/definitions/UseCase",
-          "description": "UseCase of this configuration"
+        "scenario": {
+          "$ref": "#/definitions/Scenario",
+          "description": "Scenario in which this configuraiton is used"
         },
         "ipAssignments": {
           "$ref": "#/definitions/IpAssignment",
@@ -3403,7 +3403,7 @@
         }
       },
       "required": [
-        "useCase",
+        "scenario",
         "ipAssignments"
       ]
     },
@@ -3411,9 +3411,9 @@
       "type": "object",
       "description": "NetworkConfigurationProperties for LAN",
       "properties": {
-        "useCase": {
-          "$ref": "#/definitions/UseCase",
-          "description": "UseCase of this configuration"
+        "scenario": {
+          "$ref": "#/definitions/Scenario",
+          "description": "Scenario in which this configuraiton is used"
         },
         "ipAssignments": {
           "$ref": "#/definitions/IpAssignmentUpdate",
@@ -3491,13 +3491,13 @@
           "description": "The status of the last operation.",
           "readOnly": true
         },
-        "useCase": {
-          "$ref": "#/definitions/UseCase",
-          "description": "UseCase of this configuration"
+        "scenario": {
+          "$ref": "#/definitions/Scenario",
+          "description": "Scenario in which this configuraiton is used"
         }
       },
       "required": [
-        "useCase"
+        "scenario"
       ]
     },
     "NetworkConfigurationUpdate": {
@@ -3670,6 +3670,24 @@
         }
       }
     },
+    "Scenario": {
+      "type": "string",
+      "description": "UseCase enum",
+      "enum": [
+        "Provisioning"
+      ],
+      "x-ms-enum": {
+        "name": "Scenario",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Provisioning",
+            "value": "Provisioning",
+            "description": "Provisioning (ZTP) "
+          }
+        ]
+      }
+    },
     "SecretPurpose": {
       "type": "string",
       "description": "Various purposes for the secrets",
@@ -3763,9 +3781,9 @@
           "description": "The status of the last operation.",
           "readOnly": true
         },
-        "useCase": {
-          "$ref": "#/definitions/UseCase",
-          "description": "UseCase of this configuration"
+        "scenario": {
+          "$ref": "#/definitions/Scenario",
+          "description": "Scenario in which this configuraiton is used"
         },
         "secretReferences": {
           "type": "array",
@@ -3779,7 +3797,7 @@
         }
       },
       "required": [
-        "useCase",
+        "scenario",
         "secretReferences"
       ]
     },
@@ -3787,9 +3805,9 @@
       "type": "object",
       "description": "SecurityConfiguration Properties",
       "properties": {
-        "useCase": {
-          "$ref": "#/definitions/UseCase",
-          "description": "UseCase of this configuration"
+        "scenario": {
+          "$ref": "#/definitions/Scenario",
+          "description": "Scenario in which this configuraiton is used"
         },
         "secretReferences": {
           "type": "array",
@@ -3863,9 +3881,9 @@
           "description": "Provisioning state of resource",
           "readOnly": true
         },
-        "useCase": {
-          "$ref": "#/definitions/UseCase",
-          "description": "UseCase of this configuration"
+        "scenario": {
+          "$ref": "#/definitions/Scenario",
+          "description": "Scenario in which this configuraiton is used"
         },
         "timezone": {
           "type": "string",
@@ -3881,7 +3899,7 @@
         }
       },
       "required": [
-        "useCase",
+        "scenario",
         "timezone",
         "ntpConfigurationChoice"
       ]
@@ -3890,9 +3908,9 @@
       "type": "object",
       "description": "ArcGatewayConfigurationProperties Properties",
       "properties": {
-        "useCase": {
-          "$ref": "#/definitions/UseCase",
-          "description": "UseCase of this configuration"
+        "scenario": {
+          "$ref": "#/definitions/Scenario",
+          "description": "Scenario in which this configuraiton is used"
         },
         "timezone": {
           "type": "string",
@@ -3922,24 +3940,6 @@
           "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
       ]
-    },
-    "UseCase": {
-      "type": "string",
-      "description": "UseCase enum",
-      "enum": [
-        "Provisioning"
-      ],
-      "x-ms-enum": {
-        "name": "UseCase",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Provisioning",
-            "value": "Provisioning",
-            "description": "Provisioning (ZTP) "
-          }
-        ]
-      }
     }
   },
   "parameters": {

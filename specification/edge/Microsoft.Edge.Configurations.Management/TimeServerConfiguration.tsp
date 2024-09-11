@@ -44,8 +44,8 @@ model TimeServerConfigurationProperties {
   @visibility("read")
   provisioningState?: ResourceProvisioningState;
 
-  @doc("UseCase of this configuration")
-  useCase: UseCase;
+  @doc("Scenario in which this configuraiton is used")
+  scenario: Scenario;
 
   // TODO - check if this is supposed to be string or some other build-in type.
   @doc("timezone value")

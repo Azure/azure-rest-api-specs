@@ -4,8 +4,8 @@ using Azure.ResourceManager;
 
 namespace Microsoft.Edge;
 
-@doc("UseCase enum")
-union UseCase {
+@doc("Scenario enum")
+union Scenario {
   string,
 
   @doc("Provisioning (ZTP) ")
