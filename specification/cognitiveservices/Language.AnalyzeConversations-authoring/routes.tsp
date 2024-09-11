@@ -113,6 +113,7 @@ interface ConversationalAnalysisAuthoring {
   @route("/authoring/analyze-conversations/projects/{projectName}/:authorize-copy")
   @post
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  @added(Versions.v2023_04_15_preview)
   copyProjectAuthorization is Azure.Core.Foundations.Operation<
     {
       /**
@@ -280,6 +281,7 @@ op train is Foundations.LongRunningOperation<
   @route("/authoring/analyze-conversations/projects/{projectName}/copy/jobs/{jobId}")
   @get
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  @added(Versions.v2023_04_15_preview)
   getCopyProjectStatus is Azure.Core.Foundations.Operation<
     {
       /**
@@ -462,6 +464,7 @@ op deleteDeploymentFromResources is Foundations.LongRunningOperation<
   @route("/authoring/analyze-conversations/projects/{projectName}/deployments/{deploymentName}/delete-from-resources/jobs/{jobId}")
   @get
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  @added(Versions.v2023_04_15_preview)
   getDeploymentDeleteFromResourcesStatus is Azure.Core.Foundations.Operation<
     {
       /**
@@ -771,6 +774,7 @@ op loadSnapshot is Foundations.LongRunningOperation<
   @route("/authoring/analyze-conversations/projects/{projectName}/models/{trainedModelLabel}/evaluate/jobs/{jobId}")
   @get
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  @added(Versions.v2023_04_15_preview)
   getEvaluationStatus is Azure.Core.Foundations.Operation<
     {
       /**
@@ -906,6 +910,7 @@ op loadSnapshot is Foundations.LongRunningOperation<
   @route("/authoring/analyze-conversations/projects/{projectName}/resources")
   @get
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  @added(Versions.v2023_04_15_preview)
   listDeploymentResources is Azure.Core.Foundations.Operation<
     {
       /**
@@ -1005,6 +1010,7 @@ op unassignDeploymentResources is Foundations.LongRunningOperation<
   @route("/authoring/analyze-conversations/projects/{projectName}/resources/assign/jobs/{jobId}")
   @get
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  @added(Versions.v2023_04_15_preview)
   getAssignDeploymentResourcesStatus is Azure.Core.Foundations.Operation<
     {
       /**
@@ -1029,6 +1035,7 @@ op unassignDeploymentResources is Foundations.LongRunningOperation<
   @route("/authoring/analyze-conversations/projects/{projectName}/resources/unassign/jobs/{jobId}")
   @get
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  @added(Versions.v2023_04_15_preview)
   getUnassignDeploymentResourcesStatus is Azure.Core.Foundations.Operation<
     {
       /**
@@ -1160,6 +1167,7 @@ op cancelTrainingJob is Foundations.LongRunningOperation<
   @route("/authoring/analyze-conversations/projects/global/deployments/resources")
   @get
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  @added(Versions.v2023_04_15_preview)
   listAssignedResourceDeployments is Azure.Core.Foundations.Operation<
     {
       /**
