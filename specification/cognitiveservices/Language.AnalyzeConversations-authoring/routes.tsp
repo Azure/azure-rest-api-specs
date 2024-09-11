@@ -42,7 +42,7 @@ interface ConversationalAnalysisAuthoring {
       @query("maxpagesize")
       maxpagesize?: int32;
     },
-    ProjectsMetadata
+    ConversationalAnalysisAuthoringProjectsMetadata
   >;
 
   /**
@@ -60,7 +60,7 @@ interface ConversationalAnalysisAuthoring {
       @path
       projectName: string;
     },
-    ProjectMetadata
+    ConversationalAnalysisAuthoringProjectMetadata
   >;
 
   /**
@@ -68,20 +68,20 @@ interface ConversationalAnalysisAuthoring {
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Need to rename the body"
   //@pollingOperation(Widgets.getWidgetOperationStatus)
-  @createsOrUpdatesResource(ProjectMetadata)
+  @createsOrUpdatesResource(ConversationalAnalysisAuthoringProjectMetadata)
   @parameterVisibility("create", "update")
   @patch
   createProject is Foundations.ResourceOperation<
-    ProjectMetadata,
+    ConversationalAnalysisAuthoringProjectMetadata,
     {
       @doc("This request has a JSON Merge Patch body.")
       @TypeSpec.Http.header("Content-Type")
       contentType: "application/merge-patch+json";
 
       /** The request body */
-      @bodyRoot body: ProjectMetadata;
+      @bodyRoot body: ConversationalAnalysisAuthoringProjectMetadata;
     },
-    Foundations.ResourceCreatedOrOkResponse<ProjectMetadata> ,
+    Foundations.ResourceCreatedOrOkResponse<ConversationalAnalysisAuthoringProjectMetadata> ,
     ErrorResponse
   >;
 
@@ -127,9 +127,9 @@ interface ConversationalAnalysisAuthoring {
        * The copy project authorization info.
        */
       @body
-      body: CopyAuthorizationOptions;
+      body: ConversationalAnalysisAuthoringCopyAuthorizationOptions;
     },
-    CopyProjectOptions
+    ConversationalAnalysisAuthoringCopyProjectOptions
   >;
 
   /**
@@ -153,7 +153,7 @@ op copyProject is Foundations.LongRunningOperation<
        * The copy project info.
        */
       @body
-      body: CopyProjectOptions;
+      body: ConversationalAnalysisAuthoringCopyProjectOptions;
   },
   AcceptedResponse,
   {},
@@ -182,14 +182,14 @@ op export is Foundations.LongRunningOperation<
        */
       @query("format")
       #suppress "@azure-tools/typespec-azure-core/casing-style"
-      ExportedProjectFormat?: ExportedProjectFormat;
+      ExportedProjectFormat?: ConversationalAnalysisAuthoringExportedProjectFormat;
 
       /**
        * Specifies the method used to interpret string offsets. For additional
        * information see https://aka.ms/text-analytics-offsets.
        */
       @query("stringIndexType")
-      stringIndexType: StringIndexType;
+      stringIndexType: ConversationalAnalysisAuthoringStringIndexType;
 
       /**
        * Kind of asset to export.
@@ -233,13 +233,13 @@ op `import` is Foundations.LongRunningOperation<
        */
       @query("format")
       #suppress "@azure-tools/typespec-azure-core/casing-style"
-      ExportedProjectFormat?: ExportedProjectFormat;
+      ExportedProjectFormat?: ConversationalAnalysisAuthoringExportedProjectFormat;
 
       /**
        * The project data to import.
        */
       @body
-      body: ExportedProject;
+      body: ConversationalAnalysisAuthoringExportedProject;
   },
   AcceptedResponse,
   {},
@@ -267,7 +267,7 @@ op train is Foundations.LongRunningOperation<
        * The training input parameters.
        */
       @body
-      body: TrainingJobOptions;
+      body: ConversationalAnalysisAuthoringTrainingJobOptions;
   },
   AcceptedResponse,
   {},
@@ -297,7 +297,7 @@ op train is Foundations.LongRunningOperation<
       @path
       jobId: string;
     },
-    CopyProjectJobState
+    ConversationalAnalysisAuthoringCopyProjectJobState
   >;
 
   /**
@@ -333,7 +333,7 @@ op train is Foundations.LongRunningOperation<
       @query("maxpagesize")
       maxpagesize?: int32;
     },
-    ProjectDeployments
+    ConversationalAnalysisAuthoringProjectDeployments
   >;
 
   /**
@@ -357,7 +357,7 @@ op train is Foundations.LongRunningOperation<
       @path
       deploymentName: string;
     },
-    ProjectDeployment
+    ConversationalAnalysisAuthoringProjectDeployment
   >;
 
   /**
@@ -386,7 +386,7 @@ op deployProject is Foundations.LongRunningOperation<
        * The new deployment info.
        */
       @body
-      body: CreateDeploymentOptions;
+      body: ConversationalAnalysisAuthoringCreateDeploymentOptions;
   },
   AcceptedResponse,
   {},
@@ -450,7 +450,7 @@ op deleteDeploymentFromResources is Foundations.LongRunningOperation<
        * The options for deleting the deployment.
        */
       @body
-      body: DeleteDeploymentOptions;
+      body: ConversationalAnalysisAuthoringDeleteDeploymentOptions;
   },
   AcceptedResponse,
   {},
@@ -486,7 +486,7 @@ op deleteDeploymentFromResources is Foundations.LongRunningOperation<
       @path
       jobId: string;
     },
-    DeploymentJobState
+    ConversationalAnalysisAuthoringDeploymentJobState
   >;
 
   /**
@@ -516,7 +516,7 @@ op deleteDeploymentFromResources is Foundations.LongRunningOperation<
       @path
       jobId: string;
     },
-    DeploymentJobState
+    ConversationalAnalysisAuthoringDeploymentJobState
   >;
 
   /**
@@ -539,7 +539,7 @@ op swapDeployments is Foundations.LongRunningOperation<
        * The job object to swap two deployments.
        */
       @body
-      body: SwapDeploymentsOptions;
+      body: ConversationalAnalysisAuthoringSwapDeploymentsOptions;
   },
   AcceptedResponse,
   {},
@@ -568,7 +568,7 @@ op swapDeployments is Foundations.LongRunningOperation<
       @path
       jobId: string;
     },
-    DeploymentJobState
+    ConversationalAnalysisAuthoringDeploymentJobState
   >;
 
   /**
@@ -593,7 +593,7 @@ op swapDeployments is Foundations.LongRunningOperation<
       @path
       jobId: string;
     },
-    ExportProjectJobState
+    ConversationalAnalysisAuthoringExportProjectJobState
   >;
 
   /**
@@ -617,7 +617,7 @@ op swapDeployments is Foundations.LongRunningOperation<
       @path
       jobId: string;
     },
-    ImportProjectJobState
+    ConversationalAnalysisAuthoringImportProjectJobState
   >;
 
   /**
@@ -653,7 +653,7 @@ op swapDeployments is Foundations.LongRunningOperation<
       @query("maxpagesize")
       maxpagesize?: int32;
     },
-    ProjectTrainedModels
+    ConversationalAnalysisAuthoringProjectTrainedModels
   >;
 
   /**
@@ -677,7 +677,7 @@ op swapDeployments is Foundations.LongRunningOperation<
       @path
       trainedModelLabel: string;
     },
-    ProjectTrainedModel
+    ConversationalAnalysisAuthoringProjectTrainedModel
   >;
 
   /**
@@ -731,7 +731,7 @@ op evaluateModel is Foundations.LongRunningOperation<
        * The training input parameters.
        */
       @body
-      body: EvaluationOptions;
+      body: ConversationalAnalysisAuthoringEvaluationOptions;
   },
   AcceptedResponse,
   {},
@@ -796,7 +796,7 @@ op loadSnapshot is Foundations.LongRunningOperation<
       @path
       jobId: string;
     },
-    EvaluationJobState
+    ConversationalAnalysisAuthoringEvaluationJobState
   >;
 
   /**
@@ -826,7 +826,7 @@ op loadSnapshot is Foundations.LongRunningOperation<
        * information see https://aka.ms/text-analytics-offsets.
        */
       @query("stringIndexType")
-      stringIndexType: StringIndexType;
+      stringIndexType: ConversationalAnalysisAuthoringStringIndexType;
 
       /**
        * The maximum number of resources to return from the collection.
@@ -846,7 +846,7 @@ op loadSnapshot is Foundations.LongRunningOperation<
       @query("maxpagesize")
       maxpagesize?: int32;
     },
-    EvaluationResults
+    ConversationalAnalysisAuthoringEvaluationResults
   >;
 
   /**
@@ -871,7 +871,7 @@ op loadSnapshot is Foundations.LongRunningOperation<
       @path
       trainedModelLabel: string;
     },
-    EvaluationSummary
+    ConversationalAnalysisAuthoringEvaluationSummary
   >;
 
   /**
@@ -901,7 +901,7 @@ op loadSnapshot is Foundations.LongRunningOperation<
       @path
       jobId: string;
     },
-    LoadSnapshotJobState
+    ConversationalAnalysisAuthoringLoadSnapshotJobState
   >;
 
   /**
@@ -938,7 +938,7 @@ op loadSnapshot is Foundations.LongRunningOperation<
       @query("maxpagesize")
       maxpagesize?: int32;
     },
-    AssignedDeploymentResources
+    ConversationalAnalysisAuthoringAssignedDeploymentResources
   >;
 
   /**
@@ -966,7 +966,7 @@ op assignDeploymentResources is Foundations.LongRunningOperation<
        * The new project resources info.
        */
       @body
-      body: AssignDeploymentResourcesOptions;
+      body: ConversationalAnalysisAuthoringAssignDeploymentResourcesOptions;
   },
   AcceptedResponse,
   {},
@@ -996,7 +996,7 @@ op unassignDeploymentResources is Foundations.LongRunningOperation<
        * The info for the deployment resources to be deleted.
        */
       @body
-      body: UnassignDeploymentResourcesOptions;
+      body: ConversationalAnalysisAuthoringUnassignDeploymentResourcesOptions;
   },
   AcceptedResponse,
   {},
@@ -1026,7 +1026,7 @@ op unassignDeploymentResources is Foundations.LongRunningOperation<
       @path
       jobId: string;
     },
-    DeploymentResourcesJobState
+    ConversationalAnalysisAuthoringDeploymentResourcesJobState
   >;
 
   /**
@@ -1051,7 +1051,7 @@ op unassignDeploymentResources is Foundations.LongRunningOperation<
       @path
       jobId: string;
     },
-    DeploymentResourcesJobState
+    ConversationalAnalysisAuthoringDeploymentResourcesJobState
   >;
 
   /**
@@ -1087,7 +1087,7 @@ op unassignDeploymentResources is Foundations.LongRunningOperation<
       @query("maxpagesize")
       maxpagesize?: int32;
     },
-    TrainingJobs
+    ConversationalAnalysisAuthoringTrainingJobs
   >;
 
   /**
@@ -1111,7 +1111,7 @@ op unassignDeploymentResources is Foundations.LongRunningOperation<
       @path
       jobId: string;
     },
-    TrainingJobState
+    ConversationalAnalysisAuthoringTrainingJobState
   >;
 
   /**
@@ -1156,7 +1156,7 @@ op cancelTrainingJob is Foundations.LongRunningOperation<
       @path
       jobId: string;
     },
-    ProjectDeletionJobState
+    ConversationalAnalysisAuthoringProjectDeletionJobState
   >;
 
   /**
@@ -1188,7 +1188,7 @@ op cancelTrainingJob is Foundations.LongRunningOperation<
       @query("maxpagesize")
       maxpagesize?: int32;
     },
-    AssignedResourceDeploymentsMetadata
+    ConversationalAnalysisAuthoringAssignedResourceDeploymentsMetadata
   >;
 
   /**
@@ -1204,7 +1204,7 @@ op cancelTrainingJob is Foundations.LongRunningOperation<
        */
       @query("projectKind")
       #suppress "@azure-tools/typespec-azure-core/casing-style"
-      ProjectKind: ProjectKind;
+      ProjectKind: ConversationalAnalysisAuthoringProjectKind;
 
       /**
        * The maximum number of resources to return from the collection.
@@ -1224,7 +1224,7 @@ op cancelTrainingJob is Foundations.LongRunningOperation<
       @query("maxpagesize")
       maxpagesize?: int32;
     },
-    SupportedLanguages
+    ConversationalAnalysisAuthoringSupportedLanguages
   >;
 
   /**
@@ -1269,7 +1269,7 @@ op cancelTrainingJob is Foundations.LongRunningOperation<
       @query("maxpagesize")
       maxpagesize?: int32;
     },
-    PrebuiltEntities
+    ConversationalAnalysisAuthoringPrebuiltEntities
   >;
 
   /**
@@ -1285,7 +1285,7 @@ op cancelTrainingJob is Foundations.LongRunningOperation<
        */
       @query("projectKind")
       #suppress "@azure-tools/typespec-azure-core/casing-style"
-      ProjectKind: ProjectKind;
+      ProjectKind: ConversationalAnalysisAuthoringProjectKind;
 
       /**
        * The maximum number of resources to return from the collection.
@@ -1305,6 +1305,6 @@ op cancelTrainingJob is Foundations.LongRunningOperation<
       @query("maxpagesize")
       maxpagesize?: int32;
     },
-    TrainingConfigVersions
+    ConversationalAnalysisAuthoringTrainingConfigVersions
   >;
 }
