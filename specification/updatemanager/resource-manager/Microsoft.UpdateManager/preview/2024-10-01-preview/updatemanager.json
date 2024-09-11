@@ -43,7 +43,7 @@
       "name": "Operations"
     },
     {
-      "name": "UpdateRuleSets"
+      "name": "UpdateRules"
     }
   ],
   "paths": {
@@ -83,13 +83,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.UpdateManager/updateRuleSets": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.UpdateManager/updateRules": {
       "get": {
-        "operationId": "UpdateRuleSets_ListBySubscription",
+        "operationId": "UpdateRules_ListBySubscription",
         "tags": [
-          "UpdateRuleSets"
+          "UpdateRules"
         ],
-        "description": "List UpdateRuleSet resources by subscription ID",
+        "description": "List UpdateRule resources by subscription ID",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -102,7 +102,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/UpdateRuleSetListResult"
+              "$ref": "#/definitions/UpdateRuleListResult"
             }
           },
           "default": {
@@ -113,8 +113,8 @@
           }
         },
         "x-ms-examples": {
-          "UpdateRuleSets_ListBySubscription": {
-            "$ref": "./examples/UpdateRuleSets_ListBySubscription.json"
+          "UpdateRules_ListBySubscription": {
+            "$ref": "./examples/UpdateRules_ListBySubscription.json"
           }
         },
         "x-ms-pageable": {
@@ -122,13 +122,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.UpdateManager/updateRuleSets": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.UpdateManager/updateRules": {
       "get": {
-        "operationId": "UpdateRuleSets_ListByResourceGroup",
+        "operationId": "UpdateRules_ListByResourceGroup",
         "tags": [
-          "UpdateRuleSets"
+          "UpdateRules"
         ],
-        "description": "List UpdateRuleSet resources by resource group",
+        "description": "List UpdateRule resources by resource group",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -144,7 +144,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/UpdateRuleSetListResult"
+              "$ref": "#/definitions/UpdateRuleListResult"
             }
           },
           "default": {
@@ -155,8 +155,8 @@
           }
         },
         "x-ms-examples": {
-          "UpdateRuleSets_ListByResourceGroup": {
-            "$ref": "./examples/UpdateRuleSets_ListByResourceGroup.json"
+          "UpdateRules_ListByResourceGroup": {
+            "$ref": "./examples/UpdateRules_ListByResourceGroup.json"
           }
         },
         "x-ms-pageable": {
@@ -164,13 +164,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.UpdateManager/updateRuleSets/{updateRuleSetName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.UpdateManager/updateRules/{updateRuleName}": {
       "get": {
-        "operationId": "UpdateRuleSets_Get",
+        "operationId": "UpdateRules_Get",
         "tags": [
-          "UpdateRuleSets"
+          "UpdateRules"
         ],
-        "description": "Get a UpdateRuleSet",
+        "description": "Get a UpdateRule",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -182,9 +182,9 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "updateRuleSetName",
+            "name": "updateRuleName",
             "in": "path",
-            "description": "The name of the UpdateRuleSet",
+            "description": "The name of the UpdateRule",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9-]{3,24}$"
@@ -194,7 +194,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/UpdateRuleSet"
+              "$ref": "#/definitions/UpdateRule"
             }
           },
           "default": {
@@ -205,17 +205,17 @@
           }
         },
         "x-ms-examples": {
-          "UpdateRuleSets_Get": {
-            "$ref": "./examples/UpdateRuleSets_Get.json"
+          "UpdateRules_Get": {
+            "$ref": "./examples/UpdateRules_Get.json"
           }
         }
       },
       "put": {
-        "operationId": "UpdateRuleSets_CreateOrUpdate",
+        "operationId": "UpdateRules_CreateOrUpdate",
         "tags": [
-          "UpdateRuleSets"
+          "UpdateRules"
         ],
-        "description": "Create a UpdateRuleSet",
+        "description": "Create a UpdateRule",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -227,9 +227,9 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "updateRuleSetName",
+            "name": "updateRuleName",
             "in": "path",
-            "description": "The name of the UpdateRuleSet",
+            "description": "The name of the UpdateRule",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9-]{3,24}$"
@@ -240,21 +240,21 @@
             "description": "Resource create parameters.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/UpdateRuleSet"
+              "$ref": "#/definitions/UpdateRule"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "Resource 'UpdateRuleSet' update operation succeeded",
+            "description": "Resource 'UpdateRule' update operation succeeded",
             "schema": {
-              "$ref": "#/definitions/UpdateRuleSet"
+              "$ref": "#/definitions/UpdateRule"
             }
           },
           "201": {
-            "description": "Resource 'UpdateRuleSet' create operation succeeded",
+            "description": "Resource 'UpdateRule' create operation succeeded",
             "schema": {
-              "$ref": "#/definitions/UpdateRuleSet"
+              "$ref": "#/definitions/UpdateRule"
             },
             "headers": {
               "Azure-AsyncOperation": {
@@ -276,8 +276,8 @@
           }
         },
         "x-ms-examples": {
-          "UpdateRuleSets_CreateOrUpdate": {
-            "$ref": "./examples/UpdateRuleSets_CreateOrUpdate.json"
+          "UpdateRules_CreateOrUpdate": {
+            "$ref": "./examples/UpdateRules_CreateOrUpdate.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -286,11 +286,11 @@
         "x-ms-long-running-operation": true
       },
       "patch": {
-        "operationId": "UpdateRuleSets_Update",
+        "operationId": "UpdateRules_Update",
         "tags": [
-          "UpdateRuleSets"
+          "UpdateRules"
         ],
-        "description": "Update a UpdateRuleSet",
+        "description": "Update a UpdateRule",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -302,9 +302,9 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "updateRuleSetName",
+            "name": "updateRuleName",
             "in": "path",
-            "description": "The name of the UpdateRuleSet",
+            "description": "The name of the UpdateRule",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9-]{3,24}$"
@@ -315,7 +315,7 @@
             "description": "The resource properties to be updated.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/UpdateRuleSetUpdate"
+              "$ref": "#/definitions/UpdateRuleUpdate"
             }
           }
         ],
@@ -323,7 +323,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/UpdateRuleSet"
+              "$ref": "#/definitions/UpdateRule"
             }
           },
           "default": {
@@ -334,17 +334,17 @@
           }
         },
         "x-ms-examples": {
-          "UpdateRuleSets_Update": {
-            "$ref": "./examples/UpdateRuleSets_Update.json"
+          "UpdateRules_Update": {
+            "$ref": "./examples/UpdateRules_Update.json"
           }
         }
       },
       "delete": {
-        "operationId": "UpdateRuleSets_Delete",
+        "operationId": "UpdateRules_Delete",
         "tags": [
-          "UpdateRuleSets"
+          "UpdateRules"
         ],
-        "description": "Delete a UpdateRuleSet",
+        "description": "Delete a UpdateRule",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -356,9 +356,9 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "updateRuleSetName",
+            "name": "updateRuleName",
             "in": "path",
-            "description": "The name of the UpdateRuleSet",
+            "description": "The name of the UpdateRule",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9-]{3,24}$"
@@ -390,8 +390,8 @@
           }
         },
         "x-ms-examples": {
-          "UpdateRuleSets_Delete": {
-            "$ref": "./examples/UpdateRuleSets_Delete.json"
+          "UpdateRules_Delete": {
+            "$ref": "./examples/UpdateRules_Delete.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -504,12 +504,12 @@
       },
       "readOnly": true
     },
-    "UpdateRuleSet": {
+    "UpdateRule": {
       "type": "object",
       "description": "Concrete tracked resource types can be created by aliasing this type using a specific property type.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/UpdateRuleSetProperties",
+          "$ref": "#/definitions/UpdateRuleProperties",
           "description": "The resource-specific properties for this resource."
         }
       },
@@ -519,15 +519,15 @@
         }
       ]
     },
-    "UpdateRuleSetListResult": {
+    "UpdateRuleListResult": {
       "type": "object",
-      "description": "The response of a UpdateRuleSet list operation.",
+      "description": "The response of a UpdateRule list operation.",
       "properties": {
         "value": {
           "type": "array",
-          "description": "The UpdateRuleSet items on this page",
+          "description": "The UpdateRule items on this page",
           "items": {
-            "$ref": "#/definitions/UpdateRuleSet"
+            "$ref": "#/definitions/UpdateRule"
           }
         },
         "nextLink": {
@@ -540,7 +540,7 @@
         "value"
       ]
     },
-    "UpdateRuleSetProperties": {
+    "UpdateRuleProperties": {
       "type": "object",
       "description": "Update rule set properties.",
       "properties": {
@@ -570,12 +570,12 @@
         }
       }
     },
-    "UpdateRuleSetUpdate": {
+    "UpdateRuleUpdate": {
       "type": "object",
       "description": "Concrete tracked resource types can be created by aliasing this type using a specific property type.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/UpdateRuleSetProperties",
+          "$ref": "#/definitions/UpdateRuleProperties",
           "description": "The resource-specific properties for this resource."
         }
       },
