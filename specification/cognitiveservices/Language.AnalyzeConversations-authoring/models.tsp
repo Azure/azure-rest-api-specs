@@ -33,6 +33,7 @@ union ConversationalAnalysisAuthoringProjectKind {
    * A project to build conversation summarization models which are able to
    * summarize long conversations.
    */
+  @added(Versions.v2023_04_15_preview)
   CustomConversationSummarization: "CustomConversationSummarization",
 }
 
