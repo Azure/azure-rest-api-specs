@@ -4469,13 +4469,12 @@
           "description": "Gets or sets the .NET encoding that will be used to encode/decode PostgreSQL string data. Type: string"
         },
         "password": {
-          "$ref": "../datafactory.json#/definitions/AzureKeyVaultSecretReference",
+          "$ref": "../artifacts.json#/definitions/AzureKeyVaultSecretReference",
           "description": "The Azure key vault secret reference of password in connection string."
         },
         "encryptedCredential": {
-          "type": "string",
-          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string."
-        }
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string).",
+          "type": "object"
       },
       "required": [
         "server",
