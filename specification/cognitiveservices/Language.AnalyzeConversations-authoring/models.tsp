@@ -409,6 +409,7 @@ model CreateProjectOptions {
  * Represents the options for authorizing a project copy to the current Azure
  * resource.
  */
+@added(Versions.v2023_04_15_preview)
 model CopyAuthorizationOptions {
   /**
    * Represents the project kind.
@@ -431,6 +432,7 @@ model CopyAuthorizationOptions {
  * Represents the options for copying an existing project to another Azure
  * resource.
  */
+@added(Versions.v2023_04_15_preview)
 model CopyProjectOptions {
   /**
    * Represents the project kind.
@@ -552,6 +554,7 @@ model EvaluationOptions {
 /**
  * Represents the state of a copy job.
  */
+@added(Versions.v2023_04_15_preview)
 model CopyProjectJobState {
   ...JobState;
 }
@@ -658,6 +661,7 @@ model ProjectDeployment {
   /**
    * Represents the metadata of the assigned Azure resources.
    */
+  @added(Versions.v2023_04_15_preview)
   assignedResources: DeploymentResource[];
 }
 
@@ -1156,12 +1160,14 @@ model LoadSnapshotJobState {
 /**
  * Represents the assigned deployment resources.
  */
+@added(Versions.v2023_04_15_preview)
 model AssignedDeploymentResources
   is Azure.Core.Page<AssignedDeploymentResource>;
 
 /**
  * Represents the assigned deployment resource.
  */
+@added(Versions.v2023_04_15_preview)
 model AssignedDeploymentResource {
   /**
    * The resource ID.
@@ -1177,6 +1183,7 @@ model AssignedDeploymentResource {
 /**
  * Represents the options for assigning Azure resources to a project.
  */
+@added(Versions.v2023_04_15_preview)
 model AssignDeploymentResourcesOptions {
   /**
    * Represents the metadata for the resources to be assigned.
@@ -1207,6 +1214,7 @@ model ResourceMetadata {
 /**
  * Represents the options to unassign Azure resources from a project.
  */
+@added(Versions.v2023_04_15_preview)
 model UnassignDeploymentResourcesOptions {
   /**
    * Represents the assigned resource IDs to be unassigned.
@@ -1217,6 +1225,7 @@ model UnassignDeploymentResourcesOptions {
 /**
  * Represents the state of a deployment resources job.
  */
+@added(Versions.v2023_04_15_preview)
 model DeploymentResourcesJobState {
   ...JobState;
 }
@@ -1311,12 +1320,14 @@ model ProjectDeletionJobState{
 /**
  * Represents the metadata for deployments assigned to a resource.
  */
+@added(Versions.v2023_04_15_preview)
 model AssignedResourceDeploymentsMetadata
   is Azure.Core.Page<AssignedProjectDeploymentsMetadata>;
 
 /**
  * Represents the metadata for assigned deployments for a project.
  */
+@added(Versions.v2023_04_15_preview)
 model AssignedProjectDeploymentsMetadata {
   /**
    * Represents the project name.
@@ -1332,6 +1343,7 @@ model AssignedProjectDeploymentsMetadata {
 /**
  * Represents the metadata for an assigned deployment
  */
+@added(Versions.v2023_04_15_preview)
 model AssignedProjectDeploymentMetadata {
   /**
    * Represents the deployment name.
