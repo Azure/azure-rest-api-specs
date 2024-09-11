@@ -843,6 +843,49 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/NewRelic.Observability/monitors/{monitorName}/refreshIngestionKey": {
+      "post": {
+        "tags": [
+          "Monitors"
+        ],
+        "operationId": "Monitors_RefreshIngestionKey",
+        "description": "Refreshes the ingestion key for all monitors linked to the same account associated to this monitor.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "monitorName",
+            "in": "path",
+            "required": true,
+            "description": "Name of the Monitors resource",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Successfully refreshed the ingestion key."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Monitors_RefreshIngestionKey": {
+            "$ref": "./examples/Monitors_RefreshIngestionKey.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/NewRelic.Observability/monitors/{monitorName}/monitoredResources": {
       "post": {
         "tags": [
