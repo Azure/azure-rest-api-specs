@@ -2865,6 +2865,12 @@
         ]
       }
     },
+    "ConfusionMatrix": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/definitions/ConfusionMatrixRow"
+      }
+    },
     "ConfusionMatrixCell": {
       "type": "object",
       "description": "Represents a cell in a confusion matrix.",
@@ -2884,6 +2890,12 @@
         "normalizedValue",
         "rawValue"
       ]
+    },
+    "ConfusionMatrixRow": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/definitions/ConfusionMatrixCell"
+      }
     },
     "ConversationExportedEntity": {
       "type": "object",
@@ -3335,14 +3347,8 @@
       "description": "Represents the evaluation result summary for the project's entities.",
       "properties": {
         "confusionMatrix": {
-          "type": "object",
-          "description": "Represents the confusion matrix between two entities (the two entities can be\nthe same). The matrix is between the entity that was labelled and the entity\nthat was predicted.",
-          "additionalProperties": {
-            "additionalProperties": {
-              "$ref": "#/definitions/ConfusionMatrixCell"
-            },
-            "type": "object"
-          }
+          "$ref": "#/definitions/ConfusionMatrix",
+          "description": "Represents the confusion matrix between two entities (the two entities can be\nthe same). The matrix is between the entity that was labelled and the entity\nthat was predicted."
         },
         "entities": {
           "type": "object",

@@ -943,6 +943,12 @@ model EvaluationSummary {
   evaluationOptions?: EvaluationOptions;
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required"
+model ConfusionMatrix is Record<ConfusionMatrixRow>;
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required"
+model ConfusionMatrixRow is Record<ConfusionMatrixCell>;
+
 /**
  * Represents the evaluation result summary for the project's entities.
  */
@@ -952,7 +958,7 @@ model EntitiesEvaluationSummary {
    * the same). The matrix is between the entity that was labelled and the entity
    * that was predicted.
    */
-  confusionMatrix: Record<Record<ConfusionMatrixCell>>;
+  confusionMatrix: ConfusionMatrix;
 
   /**
    * Represents the entities evaluation summary.
