@@ -39,7 +39,7 @@ model CodeInterpreterToolResource {
    */
   @encodedName("application/json", "file_ids")
   @maxItems(20)
-  fileIds: string[] = #[];
+  fileIds?: string[] = #[];
 }
 
 /**

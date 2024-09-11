@@ -213,6 +213,16 @@ namespace Azure.AI.Assistants {
   @@usage(DoneEvent, Usage.output);
   @@access(DoneEvent, Access.public);
 
+  // Tool resources
+  @@usage(ToolResources, Usage.output);
+  @@access(ToolResources, Access.public);
+
+  @@usage(CodeInterpreterToolResource, Usage.output);
+  @@access(CodeInterpreterToolResource, Access.public);
+
+  @@usage(FileSearchToolResource, Usage.output);
+  @@access(FileSearchToolResource, Access.public);
+
   // Ensure some shared types remain public despite interaction with previously internalized details
   @@access(MessageTextFilePathAnnotation, Access.public);
   @@access(MessageTextFileCitationAnnotation, Access.public);
