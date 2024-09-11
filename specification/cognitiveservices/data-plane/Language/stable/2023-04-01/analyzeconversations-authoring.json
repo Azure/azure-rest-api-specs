@@ -123,9 +123,6 @@
           "SuccessfulListProjects": {
             "$ref": "./examples/SuccessfulListProjects.json"
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     },
@@ -577,9 +574,6 @@
           "SuccessfulListDeployments": {
             "$ref": "./examples/SuccessfulListDeployments.json"
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     },
@@ -1067,9 +1061,6 @@
           "SuccessfulListModels": {
             "$ref": "./examples/SuccessfulListModels.json"
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     },
@@ -1490,9 +1481,6 @@
           "SuccessfulListTrainingJobs": {
             "$ref": "./examples/SuccessfulListTrainingJobs.json"
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     },
@@ -1731,9 +1719,6 @@
           "SuccessfulGetSupportedLanguages": {
             "$ref": "./examples/SuccessfulGetSupportedLanguages.json"
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     },
@@ -1808,9 +1793,6 @@
           "SuccessfulGetSupportedPrebuiltEntities": {
             "$ref": "./examples/SuccessfulGetSupportedPrebuiltEntities.json"
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     },
@@ -1905,9 +1887,6 @@
           "SuccessfulGetSupportedTrainingConfigVersions": {
             "$ref": "./examples/SuccessfulGetSupportedTrainingConfigVersions.json"
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     }
@@ -3445,7 +3424,7 @@
       "properties": {
         "value": {
           "type": "array",
-          "description": "The PrebuiltEntity items on this page",
+          "description": "The supported prebuilt entities.",
           "items": {
             "$ref": "#/definitions/PrebuiltEntity"
           },
@@ -3453,8 +3432,7 @@
         },
         "nextLink": {
           "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
+          "description": "The next page link."
         }
       },
       "required": [
@@ -3582,7 +3560,7 @@
       "properties": {
         "value": {
           "type": "array",
-          "description": "The ProjectDeployment items on this page",
+          "description": "The list of retrieved deployments.",
           "items": {
             "$ref": "#/definitions/ProjectDeployment"
           },
@@ -3590,8 +3568,7 @@
         },
         "nextLink": {
           "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
+          "description": "The next page link."
         }
       },
       "required": [
@@ -3877,7 +3854,7 @@
       "properties": {
         "value": {
           "type": "array",
-          "description": "The ProjectTrainedModel items on this page",
+          "description": "The list of trained models.",
           "items": {
             "$ref": "#/definitions/ProjectTrainedModel"
           },
@@ -3885,8 +3862,7 @@
         },
         "nextLink": {
           "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
+          "description": "The next page link."
         }
       },
       "required": [
@@ -3899,7 +3875,7 @@
       "properties": {
         "value": {
           "type": "array",
-          "description": "The ProjectMetadata items on this page",
+          "description": "The list of projects.",
           "items": {
             "$ref": "#/definitions/ProjectMetadata"
           },
@@ -3907,8 +3883,7 @@
         },
         "nextLink": {
           "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
+          "description": "The next page link."
         }
       },
       "required": [
@@ -3985,7 +3960,7 @@
       "properties": {
         "value": {
           "type": "array",
-          "description": "The SupportedLanguage items on this page",
+          "description": "The list of the languages.",
           "items": {
             "$ref": "#/definitions/SupportedLanguage"
           },
@@ -3993,8 +3968,7 @@
         },
         "nextLink": {
           "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
+          "description": "The next page link."
         }
       },
       "required": [
@@ -4025,7 +3999,7 @@
       "properties": {
         "value": {
           "type": "array",
-          "description": "The ConversationalAnalysisAuthoringTrainingConfigVersion items on this page",
+          "description": "The list of the training config versions.",
           "items": {
             "$ref": "#/definitions/ConversationalAnalysisAuthoringTrainingConfigVersion"
           },
@@ -4033,8 +4007,7 @@
         },
         "nextLink": {
           "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
+          "description": "The next page link."
         }
       },
       "required": [
@@ -4165,7 +4138,7 @@
       "properties": {
         "value": {
           "type": "array",
-          "description": "The TrainingJobState items on this page",
+          "description": "The list of jobs.",
           "items": {
             "$ref": "#/definitions/TrainingJobState"
           },
@@ -4173,8 +4146,7 @@
         },
         "nextLink": {
           "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
+          "description": "The next page link."
         }
       },
       "required": [

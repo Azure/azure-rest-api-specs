@@ -199,7 +199,17 @@ union OrchestrationTargetProjectKind {
 /**
  * Represents a list of retrieved projects' metadata.
  */
-model ProjectsMetadata is Azure.Core.Page<ProjectMetadata>;
+model ProjectsMetadata {
+  /**
+   * The list of projects.
+   */
+  value: ProjectMetadata[];
+
+  /**
+   * The next page link.
+   */
+  nextLink?: string;
+}
 
 /**
  * Represents the metadata of a project.
@@ -620,7 +630,17 @@ model Warning {
 /**
  * Represents a list of retrieved deployments.
  */
-model ProjectDeployments is Azure.Core.Page<ProjectDeployment>;
+model ProjectDeployments {
+  /**
+   * The list of retrieved deployments.
+   */
+  value: ProjectDeployment[];
+
+  /**
+   * The next page link.
+   */
+  nextLink?: string;
+}
 
 /**
  * Represents a project deployment.
@@ -755,7 +775,17 @@ model ImportProjectJobState {
 /**
  * Represents a list of retrieved trained models.
  */
-model ProjectTrainedModels is Azure.Core.Page<ProjectTrainedModel>;
+model ProjectTrainedModels {
+  /**
+   * The list of trained models.
+   */
+  value: ProjectTrainedModel[];
+
+  /**
+   * The next page link.
+   */
+  nextLink?: string;
+}
 
 /**
  * Represents a trained model.
@@ -1161,8 +1191,17 @@ model LoadSnapshotJobState {
  * Represents the assigned deployment resources.
  */
 @added(Versions.v2023_04_15_preview)
-model AssignedDeploymentResources
-  is Azure.Core.Page<AssignedDeploymentResource>;
+model AssignedDeploymentResources{
+  /**
+   * The list of assigned deployment resources.
+   */
+  value: AssignedDeploymentResource[];
+
+  /**
+   * The next page link.
+   */
+  nextLink?: string;
+}
 
 /**
  * Represents the assigned deployment resource.
@@ -1233,7 +1272,17 @@ model DeploymentResourcesJobState {
 /**
  * Represents a list of retrieved training jobs.
  */
-model TrainingJobs is Azure.Core.Page<TrainingJobState>;
+model TrainingJobs {
+  /**
+   * The list of jobs.
+   */
+  value: TrainingJobState[];
+
+  /**
+   * The next page link.
+   */
+  nextLink?: string;
+}
 
 /**
  * Represents the state of a training job.
@@ -1321,8 +1370,17 @@ model ProjectDeletionJobState{
  * Represents the metadata for deployments assigned to a resource.
  */
 @added(Versions.v2023_04_15_preview)
-model AssignedResourceDeploymentsMetadata
-  is Azure.Core.Page<AssignedProjectDeploymentsMetadata>;
+model AssignedResourceDeploymentsMetadata{
+  /**
+   * The list of retrieved assigned project deployments.
+   */
+  value: AssignedProjectDeploymentsMetadata[];
+
+  /**
+   * The next page link.
+   */
+  nextLink?: string;
+}
 
 /**
  * Represents the metadata for assigned deployments for a project.
@@ -1365,8 +1423,17 @@ model AssignedProjectDeploymentMetadata {
 /**
  * Represents a list of retrieved languages.
  */
-model SupportedLanguages is Azure.Core.Page<SupportedLanguage>;
+model SupportedLanguages{
+  /**
+   * The list of the languages.
+   */
+  value: SupportedLanguage[];
 
+  /**
+   * The next page link.
+   */
+  nextLink?: string;
+}
 /**
  * Represents a supported language.
  */
@@ -1386,7 +1453,17 @@ model SupportedLanguage {
 /**
  * Represents a list of the retrieved supported prebuilt entities.
  */
-model PrebuiltEntities is Azure.Core.Page<PrebuiltEntity>;
+model PrebuiltEntities {
+  /**
+   * The supported prebuilt entities.
+   */
+  value: PrebuiltEntity[];
+
+  /**
+   * The next page link.
+   */
+  nextLink?: string;
+}
 
 /**
  * Represents a supported prebuilt entity.
@@ -1411,7 +1488,17 @@ model PrebuiltEntity {
 /**
  * Represents a list of training config versions.
  */
-model TrainingConfigVersions is Azure.Core.Page<ConversationalAnalysisAuthoringTrainingConfigVersion>;
+model TrainingConfigVersions {
+  /**
+   * The list of the training config versions.
+   */
+  value: ConversationalAnalysisAuthoringTrainingConfigVersion[];
+
+  /**
+   * The next page link.
+   */
+  nextLink?: string;
+}
 
 /**
  * Represents a training config version.
