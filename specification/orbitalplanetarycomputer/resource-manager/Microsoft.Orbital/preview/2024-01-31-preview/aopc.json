@@ -381,42 +381,6 @@
     }
   },
   "definitions": {
-    "Azure.ResourceManager.CommonTypes.ManagedServiceIdentityType": {
-      "type": "string",
-      "description": "Type of managed service identity (where both SystemAssigned and UserAssigned types are allowed).",
-      "enum": [
-        "None",
-        "SystemAssigned",
-        "UserAssigned",
-        "SystemAssigned,UserAssigned"
-      ],
-      "x-ms-enum": {
-        "name": "ManagedServiceIdentityType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "None",
-            "value": "None",
-            "description": "No managed identity."
-          },
-          {
-            "name": "SystemAssigned",
-            "value": "SystemAssigned",
-            "description": "System assigned managed identity."
-          },
-          {
-            "name": "UserAssigned",
-            "value": "UserAssigned",
-            "description": "User assigned managed identity."
-          },
-          {
-            "name": "SystemAndUserAssigned",
-            "value": "SystemAssigned,UserAssigned",
-            "description": "System and user assigned managed identity."
-          }
-        ]
-      }
-    },
     "CatalogTier": {
       "type": "string",
       "description": "The Azure Orbital Planetary Computer GeoCatalog tier",
@@ -441,8 +405,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/GeoCatalogProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "description": "The resource-specific properties for this resource."
         },
         "identity": {
           "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
@@ -537,15 +500,20 @@
       "description": "The template for adding optional properties.",
       "properties": {
         "type": {
-          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.ManagedServiceIdentityType",
+          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentityType",
           "description": "The type of managed identity assigned to this resource."
         },
         "userAssignedIdentities": {
           "type": "object",
           "description": "The identities assigned to this resource by the user.",
-          "x-nullable": true,
           "additionalProperties": {
-            "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/UserAssignedIdentity"
+            "allOf": [
+              {
+                "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/UserAssignedIdentity"
+              }
+            ],
+            "type": "object",
+            "x-nullable": true
           }
         }
       }
