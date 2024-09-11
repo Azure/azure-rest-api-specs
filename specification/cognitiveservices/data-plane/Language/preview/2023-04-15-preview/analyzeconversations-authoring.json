@@ -1703,9 +1703,6 @@
           "SuccessfulGetModelEvaluation": {
             "$ref": "./examples/SuccessfulGetModelEvaluation.json"
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     },
@@ -3728,7 +3725,7 @@
       "properties": {
         "value": {
           "type": "array",
-          "description": "The UtteranceEvaluationResult items on this page",
+          "description": "The utterances evaluation results.",
           "items": {
             "$ref": "#/definitions/UtteranceEvaluationResult"
           },
@@ -3736,12 +3733,12 @@
         },
         "nextLink": {
           "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
+          "description": "The next page link."
         }
       },
       "required": [
-        "value"
+        "value",
+        "nextLink"
       ]
     },
     "EvaluationSummary": {

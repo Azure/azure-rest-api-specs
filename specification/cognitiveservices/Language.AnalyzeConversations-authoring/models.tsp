@@ -832,7 +832,17 @@ model EvaluationJobResult {
 /**
  * Represent a list of utterances' evaluation results.
  */
-model EvaluationResults is Azure.Core.Page<UtteranceEvaluationResult>;
+model EvaluationResults {
+  /**
+   * The utterances evaluation results.
+   */
+  value: UtteranceEvaluationResult[];
+
+  /**
+   * The next page link.
+   */
+  nextLink: string;
+}
 
 /**
  * Represents the evaluation result for an utterance.
