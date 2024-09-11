@@ -175,6 +175,9 @@
       "patch": {
         "operationId": "ConversationalAnalysisAuthoring_CreateProject",
         "description": "Creates a new project or updates an existing one.",
+        "consumes": [
+          "application/merge-patch+json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -182,7 +185,7 @@
           {
             "name": "projectName",
             "in": "path",
-            "description": "The name of the project to use.",
+            "description": "The new project name.",
             "required": true,
             "type": "string",
             "maxLength": 100
@@ -190,16 +193,22 @@
           {
             "name": "body",
             "in": "body",
-            "description": "The project parameters.",
+            "description": "The request body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/CreateProjectOptionsUpdate"
+              "$ref": "#/definitions/ProjectMetadataCreateOrUpdate"
             }
           }
         ],
         "responses": {
           "200": {
             "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ProjectMetadata"
+            }
+          },
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
             "schema": {
               "$ref": "#/definitions/ProjectMetadata"
             }
@@ -3181,40 +3190,6 @@
         "language"
       ]
     },
-    "CreateProjectOptionsUpdate": {
-      "type": "object",
-      "description": "Represents the options used to create or update a project.",
-      "properties": {
-        "projectKind": {
-          "$ref": "#/definitions/ProjectKind",
-          "description": "Represents the project kind."
-        },
-        "settings": {
-          "$ref": "#/definitions/ProjectSettingsUpdate",
-          "description": "The project settings."
-        },
-        "storageInputContainerName": {
-          "type": "string",
-          "description": "The storage container name in case of conversation summarization."
-        },
-        "projectName": {
-          "type": "string",
-          "description": "The new project name."
-        },
-        "multilingual": {
-          "type": "boolean",
-          "description": "Whether the project would be used for multiple languages or not."
-        },
-        "description": {
-          "type": "string",
-          "description": "The project description."
-        },
-        "language": {
-          "type": "string",
-          "description": "The project language. This is BCP-47 representation of a language. For example,\nuse \"en\" for English, \"en-gb\" for English (UK), \"es\" for Spanish etc."
-        }
-      }
-    },
     "DeleteDeploymentOptions": {
       "type": "object",
       "description": "Represents the options for deleting a project deployment.",
@@ -4813,31 +4788,60 @@
         },
         "projectKind": {
           "$ref": "#/definitions/ProjectKind",
-          "description": "Represents the project kind."
+          "description": "Represents the project kind.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "settings": {
           "$ref": "#/definitions/ProjectSettings",
-          "description": "The project settings."
+          "description": "The project settings.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "storageInputContainerName": {
           "type": "string",
-          "description": "The storage container name in case of conversation summarization."
+          "description": "The storage container name in case of conversation summarization.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "projectName": {
           "type": "string",
-          "description": "The new project name."
+          "description": "The new project name.",
+          "maxLength": 100,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "multilingual": {
           "type": "boolean",
-          "description": "Whether the project would be used for multiple languages or not."
+          "description": "Whether the project would be used for multiple languages or not.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "description": {
           "type": "string",
-          "description": "The project description."
+          "description": "The project description.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "language": {
           "type": "string",
-          "description": "The project language. This is BCP-47 representation of a language. For example,\nuse \"en\" for English, \"en-gb\" for English (UK), \"es\" for Spanish etc."
+          "description": "The project language. This is BCP-47 representation of a language. For example,\nuse \"en\" for English, \"en-gb\" for English (UK), \"es\" for Spanish etc.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         }
       },
       "required": [
@@ -4847,6 +4851,89 @@
         "projectName",
         "language"
       ]
+    },
+    "ProjectMetadataCreateOrUpdate": {
+      "type": "object",
+      "description": "Represents the metadata of a project.",
+      "properties": {
+        "createdDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Represents the project creation datetime."
+        },
+        "lastModifiedDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Represents the project creation datetime."
+        },
+        "lastTrainedDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Represents the project last trained datetime."
+        },
+        "lastDeployedDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Represents the project last deployed datetime."
+        },
+        "projectKind": {
+          "$ref": "#/definitions/ProjectKind",
+          "description": "Represents the project kind.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "settings": {
+          "$ref": "#/definitions/ProjectSettingsCreateOrUpdate",
+          "description": "The project settings.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "storageInputContainerName": {
+          "type": "string",
+          "description": "The storage container name in case of conversation summarization.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "projectName": {
+          "type": "string",
+          "description": "The new project name.",
+          "maxLength": 100,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "multilingual": {
+          "type": "boolean",
+          "description": "Whether the project would be used for multiple languages or not.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "description": {
+          "type": "string",
+          "description": "The project description.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "language": {
+          "type": "string",
+          "description": "The project language. This is BCP-47 representation of a language. For example,\nuse \"en\" for English, \"en-gb\" for English (UK), \"es\" for Spanish etc.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      }
     },
     "ProjectSettings": {
       "type": "object",
@@ -4862,7 +4949,7 @@
         "confidenceThreshold"
       ]
     },
-    "ProjectSettingsUpdate": {
+    "ProjectSettingsCreateOrUpdate": {
       "type": "object",
       "description": "Represents the settings used to define the project behavior.",
       "properties": {

@@ -66,25 +66,23 @@ interface ConversationalAnalysisAuthoring {
   /**
    * Creates a new project or updates an existing one.
    */
-  @route("/authoring/analyze-conversations/projects/{projectName}")
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Need to rename the body"
+  //@pollingOperation(Widgets.getWidgetOperationStatus)
+  @createsOrUpdatesResource(ProjectMetadata)
+  @parameterVisibility("create", "update")
   @patch
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  createProject is Azure.Core.Foundations.Operation<
+  createProject is Foundations.ResourceOperation<
+    ProjectMetadata,
     {
-      /**
-       * The name of the project to use.
-       */
-      @maxLength(100)
-      @path
-      projectName: string;
+      @doc("This request has a JSON Merge Patch body.")
+      @TypeSpec.Http.header("Content-Type")
+      contentType: "application/merge-patch+json";
 
-      /**
-       * The project parameters.
-       */
-      @body
-      body: CreateProjectOptions;
+      /** The request body */
+      @bodyRoot body: ProjectMetadata;
     },
-    ProjectMetadata
+    Foundations.ResourceCreatedOrOkResponse<ProjectMetadata> ,
+    ErrorResponse
   >;
 
   /**
