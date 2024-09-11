@@ -4326,14 +4326,8 @@
       "description": "Represents the evaluation summary for the project's intents.",
       "properties": {
         "confusionMatrix": {
-          "type": "object",
-          "description": "Represents the confusion matrix between two intents (the two intents can be the\nsame). The matrix is between the intent that was labelled and the intent that\nwas predicted.",
-          "additionalProperties": {
-            "additionalProperties": {
-              "$ref": "#/definitions/ConfusionMatrixCell"
-            },
-            "type": "object"
-          }
+          "$ref": "#/definitions/ConfusionMatrix",
+          "description": "Represents the confusion matrix between two intents (the two intents can be the\nsame). The matrix is between the intent that was labelled and the intent that\nwas predicted."
         },
         "intents": {
           "type": "object",

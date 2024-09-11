@@ -1064,7 +1064,7 @@ model IntentsEvaluationSummary {
    * same). The matrix is between the intent that was labelled and the intent that
    * was predicted.
    */
-  confusionMatrix: Record<Record<ConfusionMatrixCell>>;
+  confusionMatrix: ConfusionMatrix;
 
   /**
    * Represents the intents evaluation summary.
