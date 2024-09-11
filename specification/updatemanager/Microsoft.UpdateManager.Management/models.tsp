@@ -10,12 +10,12 @@ using Azure.ResourceManager;
 
 namespace Microsoft.UpdateManager;
 
-model UpdateRuleSet is TrackedResource<UpdateRuleSetProperties> {
-  ...ResourceNameParameter<UpdateRuleSet>;
+model UpdateRule is TrackedResource<UpdateRuleProperties> {
+  ...ResourceNameParameter<UpdateRule>;
 }
 
 @doc("Update rule set properties.")
-model UpdateRuleSetProperties {
+model UpdateRuleProperties {
   @doc("reboot settings.")
   rebootSettings?: rebootSettings;
 
@@ -103,11 +103,11 @@ union ProvisioningState {
 interface Operations extends Azure.ResourceManager.Operations {}
 
 @armResourceOperations
-interface UpdateRuleSets {
-  get is ArmResourceRead<UpdateRuleSet>;
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<UpdateRuleSet>;
-  update is ArmResourcePatchSync<UpdateRuleSet, UpdateRuleSetProperties>;
-  delete is ArmResourceDeleteWithoutOkAsync<UpdateRuleSet>;
-  listByResourceGroup is ArmResourceListByParent<UpdateRuleSet>;
-  listBySubscription is ArmListBySubscription<UpdateRuleSet>;
+interface UpdateRules {
+  get is ArmResourceRead<UpdateRule>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<UpdateRule>;
+  update is ArmResourcePatchSync<UpdateRule, UpdateRuleProperties>;
+  delete is ArmResourceDeleteWithoutOkAsync<UpdateRule>;
+  listByResourceGroup is ArmResourceListByParent<UpdateRule>;
+  listBySubscription is ArmListBySubscription<UpdateRule>;
 }
