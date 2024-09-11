@@ -42,7 +42,8 @@ interface ConversationalAnalysisAuthoring {
       @query("maxpagesize")
       maxpagesize?: int32;
     },
-    ConversationalAnalysisAuthoringProjectsMetadata
+    ConversationalAnalysisAuthoringProjectsMetadata,{},
+    ErrorResponse 
   >;
 
   /**
@@ -60,7 +61,8 @@ interface ConversationalAnalysisAuthoring {
       @path
       projectName: string;
     },
-    ConversationalAnalysisAuthoringProjectMetadata
+    ConversationalAnalysisAuthoringProjectMetadata,{},
+    ErrorResponse 
   >;
 
   /**
@@ -82,6 +84,7 @@ interface ConversationalAnalysisAuthoring {
       @bodyRoot body: ConversationalAnalysisAuthoringProjectMetadata;
     },
     Foundations.ResourceCreatedOrOkResponse<ConversationalAnalysisAuthoringProjectMetadata> ,
+    {},
     ErrorResponse
   >;
 
@@ -129,7 +132,9 @@ interface ConversationalAnalysisAuthoring {
       @body
       body: ConversationalAnalysisAuthoringCopyAuthorizationOptions;
     },
-    ConversationalAnalysisAuthoringCopyProjectOptions
+    ConversationalAnalysisAuthoringCopyProjectOptions,
+   {},
+    ErrorResponse 
   >;
 
   /**
@@ -297,7 +302,9 @@ op train is Foundations.LongRunningOperation<
       @path
       jobId: string;
     },
-    ConversationalAnalysisAuthoringCopyProjectJobState
+    ConversationalAnalysisAuthoringCopyProjectJobState,
+  {},
+  ErrorResponse
   >;
 
   /**
@@ -333,7 +340,9 @@ op train is Foundations.LongRunningOperation<
       @query("maxpagesize")
       maxpagesize?: int32;
     },
-    ConversationalAnalysisAuthoringProjectDeployments
+    ConversationalAnalysisAuthoringProjectDeployments,
+  {},
+  ErrorResponse
   >;
 
   /**
@@ -357,7 +366,9 @@ op train is Foundations.LongRunningOperation<
       @path
       deploymentName: string;
     },
-    ConversationalAnalysisAuthoringProjectDeployment
+    ConversationalAnalysisAuthoringProjectDeployment,
+  {},
+  ErrorResponse
   >;
 
   /**
@@ -486,7 +497,9 @@ op deleteDeploymentFromResources is Foundations.LongRunningOperation<
       @path
       jobId: string;
     },
-    ConversationalAnalysisAuthoringDeploymentJobState
+    ConversationalAnalysisAuthoringDeploymentJobState,
+  {},
+  ErrorResponse
   >;
 
   /**
@@ -516,7 +529,9 @@ op deleteDeploymentFromResources is Foundations.LongRunningOperation<
       @path
       jobId: string;
     },
-    ConversationalAnalysisAuthoringDeploymentJobState
+    ConversationalAnalysisAuthoringDeploymentJobState,
+  {},
+  ErrorResponse
   >;
 
   /**
@@ -568,7 +583,9 @@ op swapDeployments is Foundations.LongRunningOperation<
       @path
       jobId: string;
     },
-    ConversationalAnalysisAuthoringDeploymentJobState
+    ConversationalAnalysisAuthoringDeploymentJobState,
+  {},
+  ErrorResponse
   >;
 
   /**
@@ -593,7 +610,9 @@ op swapDeployments is Foundations.LongRunningOperation<
       @path
       jobId: string;
     },
-    ConversationalAnalysisAuthoringExportProjectJobState
+    ConversationalAnalysisAuthoringExportProjectJobState,
+  {},
+  ErrorResponse
   >;
 
   /**
@@ -617,7 +636,9 @@ op swapDeployments is Foundations.LongRunningOperation<
       @path
       jobId: string;
     },
-    ConversationalAnalysisAuthoringImportProjectJobState
+    ConversationalAnalysisAuthoringImportProjectJobState,
+  {},
+  ErrorResponse
   >;
 
   /**
@@ -653,7 +674,9 @@ op swapDeployments is Foundations.LongRunningOperation<
       @query("maxpagesize")
       maxpagesize?: int32;
     },
-    ConversationalAnalysisAuthoringProjectTrainedModels
+    ConversationalAnalysisAuthoringProjectTrainedModels,
+  {},
+  ErrorResponse
   >;
 
   /**
@@ -677,7 +700,9 @@ op swapDeployments is Foundations.LongRunningOperation<
       @path
       trainedModelLabel: string;
     },
-    ConversationalAnalysisAuthoringProjectTrainedModel
+    ConversationalAnalysisAuthoringProjectTrainedModel,
+  {},
+  ErrorResponse
   >;
 
   /**
@@ -701,7 +726,9 @@ op swapDeployments is Foundations.LongRunningOperation<
       @path
       trainedModelLabel: string;
     },
-    void
+    void,
+  {},
+  ErrorResponse
   >;
 
   /**
@@ -796,7 +823,9 @@ op loadSnapshot is Foundations.LongRunningOperation<
       @path
       jobId: string;
     },
-    ConversationalAnalysisAuthoringEvaluationJobState
+    ConversationalAnalysisAuthoringEvaluationJobState,
+  {},
+  ErrorResponse
   >;
 
   /**
@@ -846,7 +875,9 @@ op loadSnapshot is Foundations.LongRunningOperation<
       @query("maxpagesize")
       maxpagesize?: int32;
     },
-    ConversationalAnalysisAuthoringEvaluationResults
+    ConversationalAnalysisAuthoringEvaluationResults,
+  {},
+  ErrorResponse
   >;
 
   /**
@@ -871,7 +902,9 @@ op loadSnapshot is Foundations.LongRunningOperation<
       @path
       trainedModelLabel: string;
     },
-    ConversationalAnalysisAuthoringEvaluationSummary
+    ConversationalAnalysisAuthoringEvaluationSummary,
+  {},
+  ErrorResponse
   >;
 
   /**
@@ -901,7 +934,9 @@ op loadSnapshot is Foundations.LongRunningOperation<
       @path
       jobId: string;
     },
-    ConversationalAnalysisAuthoringLoadSnapshotJobState
+    ConversationalAnalysisAuthoringLoadSnapshotJobState,
+  {},
+  ErrorResponse
   >;
 
   /**
@@ -938,7 +973,9 @@ op loadSnapshot is Foundations.LongRunningOperation<
       @query("maxpagesize")
       maxpagesize?: int32;
     },
-    ConversationalAnalysisAuthoringAssignedDeploymentResources
+    ConversationalAnalysisAuthoringAssignedDeploymentResources,
+  {},
+  ErrorResponse
   >;
 
   /**
@@ -1026,7 +1063,9 @@ op unassignDeploymentResources is Foundations.LongRunningOperation<
       @path
       jobId: string;
     },
-    ConversationalAnalysisAuthoringDeploymentResourcesJobState
+    ConversationalAnalysisAuthoringDeploymentResourcesJobState,
+  {},
+  ErrorResponse
   >;
 
   /**
@@ -1051,7 +1090,9 @@ op unassignDeploymentResources is Foundations.LongRunningOperation<
       @path
       jobId: string;
     },
-    ConversationalAnalysisAuthoringDeploymentResourcesJobState
+    ConversationalAnalysisAuthoringDeploymentResourcesJobState,
+  {},
+  ErrorResponse
   >;
 
   /**
@@ -1087,7 +1128,9 @@ op unassignDeploymentResources is Foundations.LongRunningOperation<
       @query("maxpagesize")
       maxpagesize?: int32;
     },
-    ConversationalAnalysisAuthoringTrainingJobs
+    ConversationalAnalysisAuthoringTrainingJobs,
+  {},
+  ErrorResponse
   >;
 
   /**
@@ -1111,7 +1154,9 @@ op unassignDeploymentResources is Foundations.LongRunningOperation<
       @path
       jobId: string;
     },
-    ConversationalAnalysisAuthoringTrainingJobState
+    ConversationalAnalysisAuthoringTrainingJobState,
+  {},
+  ErrorResponse
   >;
 
   /**
@@ -1156,7 +1201,9 @@ op cancelTrainingJob is Foundations.LongRunningOperation<
       @path
       jobId: string;
     },
-    ConversationalAnalysisAuthoringProjectDeletionJobState
+    ConversationalAnalysisAuthoringProjectDeletionJobState,
+  {},
+  ErrorResponse
   >;
 
   /**
@@ -1188,7 +1235,9 @@ op cancelTrainingJob is Foundations.LongRunningOperation<
       @query("maxpagesize")
       maxpagesize?: int32;
     },
-    ConversationalAnalysisAuthoringAssignedResourceDeploymentsMetadata
+    ConversationalAnalysisAuthoringAssignedResourceDeploymentsMetadata,
+  {},
+  ErrorResponse
   >;
 
   /**
@@ -1224,7 +1273,9 @@ op cancelTrainingJob is Foundations.LongRunningOperation<
       @query("maxpagesize")
       maxpagesize?: int32;
     },
-    ConversationalAnalysisAuthoringSupportedLanguages
+    ConversationalAnalysisAuthoringSupportedLanguages,
+  {},
+  ErrorResponse
   >;
 
   /**
@@ -1269,7 +1320,9 @@ op cancelTrainingJob is Foundations.LongRunningOperation<
       @query("maxpagesize")
       maxpagesize?: int32;
     },
-    ConversationalAnalysisAuthoringPrebuiltEntities
+    ConversationalAnalysisAuthoringPrebuiltEntities,
+  {},
+  ErrorResponse
   >;
 
   /**
@@ -1305,6 +1358,8 @@ op cancelTrainingJob is Foundations.LongRunningOperation<
       @query("maxpagesize")
       maxpagesize?: int32;
     },
-    ConversationalAnalysisAuthoringTrainingConfigVersions
+    ConversationalAnalysisAuthoringTrainingConfigVersions,
+  {},
+  ErrorResponse
   >;
 }
