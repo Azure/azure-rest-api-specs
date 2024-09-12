@@ -53,7 +53,11 @@ model SecurityConfigurationProperties {
 @doc("Reference to the secret")
 model SecretReference {
   @doc("resourceId to the keyvault")
-  keyvaultResourceId: string;
+  keyvaultResourceId: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.KeyVault/vaults";
+    }
+  ]>;
 
   @doc("vaultUri of the keyvault")
   @visibility("read")

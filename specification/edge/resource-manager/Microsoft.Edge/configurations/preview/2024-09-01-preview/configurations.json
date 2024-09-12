@@ -2688,7 +2688,15 @@
         },
         "arcGatewayUri": {
           "type": "string",
-          "description": "Uri for the arcGateway"
+          "format": "arm-id",
+          "description": "ArmId to the arcGateway",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.HybridCompute/Gateways"
+              }
+            ]
+          }
         }
       },
       "required": [
@@ -2706,7 +2714,15 @@
         },
         "arcGatewayUri": {
           "type": "string",
-          "description": "Uri for the arcGateway"
+          "format": "arm-id",
+          "description": "ArmId to the arcGateway",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.HybridCompute/Gateways"
+              }
+            ]
+          }
         }
       }
     },
@@ -3712,7 +3728,15 @@
       "properties": {
         "keyvaultResourceId": {
           "type": "string",
-          "description": "resourceId to the keyvault"
+          "format": "arm-id",
+          "description": "resourceId to the keyvault",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.KeyVault/vaults"
+              }
+            ]
+          }
         },
         "vaultUri": {
           "type": "string",

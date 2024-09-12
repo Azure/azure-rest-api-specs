@@ -25,9 +25,12 @@ model ArcGatewayConfigurationProperties {
   @doc("Scenario in which this configuration is used")
   scenario: Scenario;
 
-  // TODO - check if this is supposed to be http web-url or arm-id of arcGateway.
-  @doc("Uri for the arcGateway")
-  arcGatewayUri: string;
+  @doc("ArmId to the arcGateway")
+  arcGatewayUri: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.HybridCompute/Gateways";
+    }
+  ]>;
 }
 
 @doc("ArcGatewayConfiguration Resource")
