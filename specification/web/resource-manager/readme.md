@@ -176,6 +176,9 @@ directive:
   from: WebApps.json
   reason: SystemData will implement in next version.
 - suppress: R4009
+  from: SiteCertificates.json
+  reason: SystemData will implement in next version.
+- suppress: R4009
   from: StaticSites.json
   reason: SystemData will implement in next version.
 - suppress: R4009
@@ -328,6 +331,9 @@ directive:
   reason: SystemData will implement in next version.
 - suppress: R4009
   from: Certificates.json
+  reason: SystemData will implement in next version.
+- suppress: R4009
+  from: SiteCertificates.json
   reason: SystemData will implement in next version.
 - suppress: R4009
   from: CommonDefinitions.json
@@ -505,6 +511,9 @@ directive:
   from: Certificates.json
   reason: SystemData will implement in next version.
 - suppress: R4009
+  from: SiteCertificates.json
+  reason: SystemData will implement in next version.
+- suppress: R4009
   from: CommonDefinitions.json
   reason: SystemData will implement in next version.
 - suppress: R4009
@@ -677,6 +686,9 @@ directive:
   reason: SystemData will implement in next version.
 - suppress: R4009
   from: Certificates.json
+  reason: SystemData will implement in next version.
+- suppress: R4009
+  from: SiteCertificates.json
   reason: SystemData will implement in next version.
 - suppress: R4009
   from: CommonDefinitions.json
@@ -852,6 +864,9 @@ directive:
   reason: SystemData will implement in next version.
 - suppress: R4009
   from: Certificates.json
+  reason: SystemData will implement in next version.
+- suppress: R4009
+  from: SiteCertificates.json
   reason: SystemData will implement in next version.
 - suppress: R4009
   from: CommonDefinitions.json
@@ -1030,6 +1045,9 @@ directive:
   from: Certificates.json
   reason: SystemData will implement in next version.
 - suppress: R4009
+  from: SiteCertificates.json
+  reason: SystemData will implement in next version.
+- suppress: R4009
   from: CommonDefinitions.json
   reason: SystemData will implement in next version.
 - suppress: R4009
@@ -1194,6 +1212,9 @@ directive:
   from: Certificates.json
   reason: SystemData will implement in next version.
 - suppress: R4009
+  from: SiteCertificates.json
+  reason: SystemData will implement in next version.
+- suppress: R4009
   from: CommonDefinitions.json
   reason: SystemData will implement in next version.
 - suppress: R4009
@@ -1334,6 +1355,9 @@ directive:
   from: Certificates.json
   reason: SystemData will implement in next version.
 - suppress: R4009
+  from: SiteCertificates.json
+  reason: SystemData will implement in next version.
+- suppress: R4009
   from: CommonDefinitions.json
   reason: SystemData will implement in next version.
 - suppress: R4009
@@ -1435,6 +1459,9 @@ directive:
   reason: SystemData will implement in next version.
 - suppress: R4009
   from: Certificates.json
+  reason: SystemData will implement in next version.
+- suppress: R4009
+  from: SiteCertificates.json
   reason: SystemData will implement in next version.
 - suppress: R4009
   from: CommonDefinitions.json
