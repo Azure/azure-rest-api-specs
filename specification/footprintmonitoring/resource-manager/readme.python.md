@@ -17,12 +17,8 @@ python:
   output-folder: $(python-sdks-folder)/footprintmonitoring/azure-mgmt-footprintmonitoring/azure/mgmt/footprintmonitoring
 ```
 
-``` yaml $(python)
-no-namespace-folders: true
-output-folder: $(python-sdks-folder)/consumption/azure-mgmt-consumption/azure/mgmt/consumption
-```
-
-``` yaml $(python)
-modelerfour:
-  lenient-model-deduplication: true
+```yaml $(python) && $(python-mode) == 'create'
+python:
+  basic-setup-py: true
+  output-folder: $(python-sdks-folder)/footprintmonitoring/azure-mgmt-footprintmonitoring
 ```
