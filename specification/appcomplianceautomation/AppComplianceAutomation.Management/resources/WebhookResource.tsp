@@ -40,8 +40,8 @@ model WebhookResource extends Azure.ResourceManager.Foundations.ProxyResource {
   /**
    * Webhook property.
    */
-  @extension("x-ms-client-flatten", true)
-  @extension("x-ms-client-name", "properties")
+  #suppress "deprecated" "Legacy flatten"
+  @Azure.ClientGenerator.Core.flattenProperty
   properties: WebhookProperties; // Replace 'WebhookProperties' with the actual type
 }
 
@@ -51,21 +51,21 @@ interface Webhook {
   /**
    * Get the AppComplianceAutomation webhook and its properties.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "For backward compatibility"
   @operationId("Webhook_Get")
   get is ArmResourceRead<WebhookResource>;
 
   /**
    * Create a new AppComplianceAutomation webhook or update an exiting AppComplianceAutomation webhook.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "For backward compatibility"
   @operationId("Webhook_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<WebhookResource>;
 
   /**
    * Update an exiting AppComplianceAutomation webhook.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "For backward compatibility"
   @parameterVisibility
   @operationId("Webhook_Update")
   update is ArmCustomPatchSync<
@@ -78,14 +78,14 @@ interface Webhook {
   /**
    * Delete an AppComplianceAutomation webhook.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "For backward compatibility"
   @operationId("Webhook_Delete")
   delete is ArmResourceDeleteSync<WebhookResource>;
 
   /**
    * Get the AppComplianceAutomation webhook list.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "For backward compatibility"
   @operationId("Webhook_List")
   list is ArmResourceListByParent<
     WebhookResource,
@@ -103,19 +103,16 @@ interface Webhook {
   "Parameters for the create or update operation"
 );
 
+#suppress "deprecated" "LEGACY - DO NOT COPY - FIX"
 @@encodedName(Webhook.update::parameters.properties,
   "application/json",
   "parameters"
 );
 
+#suppress "deprecated" "LEGACY - DO NOT COPY - FIX"
 @@encodedName(Webhook.createOrUpdate::parameters.resource,
   "application/json",
   "parameters"
 );
 
-@@OpenAPI.extension(Webhook.createOrUpdate::parameters.resource,
-  "x-ms-client-name",
-  "properties"
-);
-
-@@clientName(Webhook.createOrUpdate::parameters.resource, "parameters");
+@@clientName(Webhook.createOrUpdate::parameters.resource, "properties");
