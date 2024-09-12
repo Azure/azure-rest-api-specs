@@ -267,6 +267,7 @@ model ConversationalAnalysisAuthoringProjectMetadata {
    * The storage container name in case of conversation summarization.
    */
   @visibility("create", "read")
+  @added(Versions.v2023_04_15_preview)
   storageInputContainerName?: string;
 
   /**
