@@ -32,7 +32,7 @@ op executeCode is Foundations.Operation<
     @body
     codeExecutionRequest: SessionCodeExecutionRequest;
   },
-  SessionCodeExecutionResult,
+  Foundations.AcceptedResponse | Foundations.ResourceOkResponse<SessionCodeExecutionResult>,
   {},
   Foundations.ErrorResponse
 >;
