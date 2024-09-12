@@ -112,23 +112,23 @@ model ModelInfo {
 union ModelType {
   string,
 
-  @doc("Embeddings.")
+  @doc("A model capable of generating embeddings from a text")
   embeddings: "embeddings",
 
-  @doc("Image generation")
+  @doc("A model capable of generating images from an image and text description")
   image_generation: "image_generation",
 
-  @doc("Text generation")
+  @doc("A text generation model")
   text_generation: "text_generation",
 
-  @doc("Image embeddings")
+  @doc("A model capable of generating embeddings from an image")
   image_embeddings: "image_embeddings",
 
-  @doc("Audio generation")
+  @doc("A text-to-audio generative model")
   audio_generation: "audio_generation",
 
-  @doc("Chat completions")
-  chat: "chat",
+  @doc("A model capable of taking chat-formatted messages and generate responses")
+  chat_completion: "chat_completion",
 }
 
 alias AdditionalRequestHeaders = {
