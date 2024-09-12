@@ -26,9 +26,10 @@ To see additional help and options, run:
 These are the global settings for the Footprint Monitoring API.
 
 ```yaml
-title: FootprintMonitoringManagementClient
 openapi-type: arm
+title: FootprintMonitoringManagementClient
 openapi-subtype: rpaas
+tag: package-2024-08-21-preview
 ```
 
 ### Tag: package-2024-08-21-preview
@@ -37,7 +38,7 @@ These settings apply only when `--tag=package-2024-08-21-preview` is specified o
 
 ```yaml $(tag) == 'package-2024-08-21-preview'
 input-file:
-- Microsoft.FootprintMonitoring/preview/2024-08-21-preview/footprintProfiles.json
+  - Microsoft.FootprintMonitoring/preview/2024-08-21-preview/footprintProfiles.json
 ```
 
 ### Tag: package-2020-02-01-preview
@@ -46,7 +47,7 @@ These settings apply only when `--tag=package-2020-02-01-preview` is specified o
 
 ```yaml $(tag) == 'package-2020-02-01-preview'
 input-file:
-- Microsoft.FootprintMonitoring/preview/2020-02-01-preview/footprintProfiles.json
+  - Microsoft.FootprintMonitoring/preview/2020-02-01-preview/footprintProfiles.json
 ```
 
 ---
@@ -61,7 +62,7 @@ This is not used by Autorest itself.
 ```yaml $(swagger-to-sdk)
 swagger-to-sdk:
   # - repo: azure-sdk-for-net
-  - repo: azure-sdk-for-python
+  - repo: azure-sdk-for-python-track2
   # - repo: azure-sdk-for-js
   - repo: azure-sdk-for-go
     after_scripts:
