@@ -101,7 +101,6 @@ suppressions:
   azure-sdk-for-js:
     - package: '@azure/arm-avs'
       breaking-changes:
-        - Interface Operation no longer has parameter properties
         - Operation WorkloadNetworks.beginUpdateDhcp has a new signature
         - Operation WorkloadNetworks.beginUpdateDhcpAndWait has a new signature
         - Operation WorkloadNetworks.beginUpdateDnsService has a new signature
@@ -114,10 +113,6 @@ suppressions:
         - Operation WorkloadNetworks.beginUpdateSegmentsAndWait has a new signature
         - Operation WorkloadNetworks.beginUpdateVMGroup has a new signature
         - Operation WorkloadNetworks.beginUpdateVMGroupAndWait has a new signature
-        - Operation WorkloadNetworks.get has a new signature
-        - Parameter location of interface TrackedResource is now required
-        - Removed Enum KnownResourceIdentityType
-        - Removed Enum KnownWorkloadNetworkName
-        - Type of parameter identity of interface PrivateCloud is changed from PrivateCloudIdentity to SystemAssignedServiceIdentity
-        - Type of parameter identity of interface PrivateCloudUpdate is changed from PrivateCloudIdentity to SystemAssignedServiceIdentity
-        - Type of parameter origin of interface Operation is changed from string to Origin
+        - Removed Enum KnownSystemAssignedServiceIdentityType
+        - Type of parameter identity of interface PrivateCloud is changed from SystemAssignedServiceIdentity to PrivateCloudIdentity
+        - Type of parameter identity of interface PrivateCloudUpdate is changed from SystemAssignedServiceIdentity to PrivateCloudIdentity
