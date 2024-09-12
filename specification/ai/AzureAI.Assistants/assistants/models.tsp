@@ -112,7 +112,7 @@ model CreateAssistantOptions {
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
   @encodedName("application/json", "tool_resources")
   @added(ServiceApiVersions.v2024_05_01_preview)
-  toolResources?: CreateToolResourcesOptions | null;
+  toolResources?: ToolResources | null;
 
   /**
    * What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output more random,
@@ -177,7 +177,7 @@ model UpdateAssistantOptions {
    */
   @encodedName("application/json", "tool_resources")
   @added(ServiceApiVersions.v2024_05_01_preview)
-  toolResources?: UpdateToolResourcesOptions;
+  toolResources?: ToolResources;
 
   /**
    * What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output more random,
