@@ -3919,11 +3919,25 @@
           }
         }
       },
+      "allOf": [
+        {
+          "$ref": "#/definitions/GalleryResourceProfilePropertiesBase"
+        }
+      ],
       "required": [
         "osType",
         "applicableHostEndpoint"
       ],
       "description": "Describes the properties of a gallery inVMAccessControlProfile."
+    },
+    "GalleryResourceProfilePropertiesBase": {
+      "properties": {
+        "provisioningState": {
+          "readOnly": true,
+          "$ref": "#/definitions/GalleryProvisioningState"
+        }
+      },
+      "description": "The properties of a gallery ResourceProfile."
     },
     "GalleryInVMAccessControlProfileVersion": {
       "properties": {
