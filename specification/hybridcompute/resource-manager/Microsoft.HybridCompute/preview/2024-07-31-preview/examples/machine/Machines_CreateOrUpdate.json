@@ -1,0 +1,141 @@
+{
+  "parameters": {
+    "subscriptionId": "{subscriptionId}",
+    "resourceGroupName": "myResourceGroup",
+    "machineName": "myMachine",
+    "api-version": "2024-07-31-preview",
+    "parameters": {
+      "location": "eastus2euap",
+      "properties": {
+        "vmId": "b7a098cc-b0b8-46e8-a205-62f301a62a8f",
+        "locationData": {
+          "name": "Redmond"
+        },
+        "osProfile": {
+          "windowsConfiguration": {
+            "patchSettings": {
+              "enableHotpatching": true
+            }
+          }
+        },
+        "clientPublicKey": "string",
+        "parentClusterResourceId": "{AzureStackHCIResourceId}",
+        "privateLinkScopeResourceId": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.HybridCompute/privateLinkScopes/privateLinkScopeName"
+      },
+      "identity": {
+        "type": "SystemAssigned"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.HybridCompute/machines/myMachine",
+        "name": "myMachine",
+        "location": "eastus2euap",
+        "tags": null,
+        "identity": {
+          "type": "SystemAssigned",
+          "principalId": "string",
+          "tenantId": "string"
+        },
+        "type": "Microsoft.HybridCompute/machines",
+        "kind": null,
+        "properties": {
+          "provisioningState": "Succeeded",
+          "agentVersion": null,
+          "status": null,
+          "lastStatusChange": null,
+          "errorDetails": null,
+          "displayName": null,
+          "machineFqdn": null,
+          "vmUuid": null,
+          "osSku": null,
+          "osEdition": "Standard",
+          "domainName": null,
+          "adFqdn": null,
+          "dnsFqdn": null,
+          "osVersion": null,
+          "osType": null,
+          "osProfile": {
+            "computerName": null,
+            "windowsConfiguration": {
+              "patchSettings": {
+                "assessmentMode": null,
+                "patchMode": null,
+                "enableHotpatching": true,
+                "status": {
+                  "hotpatchEnablementStatus": "PendingEvaluation",
+                  "error": null
+                }
+              }
+            },
+            "linuxConfiguration": {
+              "patchSettings": {
+                "assessmentMode": null,
+                "patchMode": null
+              }
+            }
+          },
+          "licenseProfile": {
+            "licenseStatus": "Licensed",
+            "licenseChannel": "PSG",
+            "softwareAssurance": {
+              "softwareAssuranceCustomer": true
+            },
+            "esuProfile": {
+              "licenseAssignmentState": "Assigned",
+              "esuEligibility": "Ineligible",
+              "serverType": "Standard",
+              "esuKeyState": "Inactive",
+              "esuKeys": [
+                {
+                  "sku": "skuNumber1",
+                  "licenseStatus": 1
+                },
+                {
+                  "sku": "skuNumber2",
+                  "licenseStatus": 1
+                }
+              ]
+            },
+            "productProfile": {
+              "subscriptionStatus": "Enabled",
+              "productType": "WindowsServer",
+              "enrollmentDate": "2023-10-05T20:36:49.745Z",
+              "billingStartDate": "2023-10-05T20:36:49.745Z",
+              "disenrollmentDate": "2023-11-05T20:36:49.745Z",
+              "billingEndDate": "2023-11-05T20:36:49.745Z",
+              "productFeatures": [
+                {
+                  "name": "Hotpatch",
+                  "subscriptionStatus": "Enabled",
+                  "enrollmentDate": "2023-10-05T20:36:49.745Z",
+                  "billingStartDate": "2023-10-05T20:36:49.745Z",
+                  "disenrollmentDate": "2023-11-05T20:36:49.745Z",
+                  "billingEndDate": "2023-11-05T20:36:49.745Z"
+                }
+              ]
+            }
+          },
+          "vmId": "b7a098cc-b0b8-46e8-a205-62f301a62a8f",
+          "locationData": {
+            "name": "Redmond",
+            "city": "redmond",
+            "district": null,
+            "countryOrRegion": "usa"
+          },
+          "clientPublicKey": "string",
+          "parentClusterResourceId": "{AzureStackHCIResourceId}",
+          "mssqlDiscovered": "false",
+          "detectedProperties": {
+            "cloudprovider": "N/A",
+            "manufacturer": "Microsoft Corporation",
+            "model": "Virtual Machine"
+          },
+          "privateLinkScopeResourceId": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.HybridCompute/privateLinkScopes/privateLinkScopeName"
+        }
+      }
+    }
+  }
+}
