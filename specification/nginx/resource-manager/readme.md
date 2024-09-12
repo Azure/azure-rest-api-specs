@@ -28,7 +28,7 @@ These are the global settings for the Nginx API.
 title: NginxManagementClient
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-preview-2024-09-01
+tag: package-preview-2024-11-01
 ```
 
 ### Tag: package-2021-05-01-preview
