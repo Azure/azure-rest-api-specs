@@ -15,7 +15,6 @@ interface ContentSafetyClient {
   analyzeImage is ContentSafety.ImageOperations.analyzeImage;
   analyzeText is ContentSafety.TextOperations.analyzeText;
   detectTextProtectedMaterial is ContentSafety.TextOperations.detectTextProtectedMaterial;
-  shieldPrompt is ContentSafety.TextOperations.shieldPrompt;
 }
 
 @client({
@@ -31,5 +30,4 @@ interface BlocklistClient {
   getTextBlocklistItem is ContentSafety.TextBlocklists.getTextBlocklistItem;
   listTextBlocklistItems is ContentSafety.TextBlocklists.listTextBlocklistItems;
   listTextBlocklists is ContentSafety.TextBlocklists.listTextBlocklists;
-  removeBlocklistItems is ContentSafety.TextBlocklists.removeBlocklistItems;
 }
