@@ -5,21 +5,17 @@
     "resourceGroupName": "resourceGroup1",
     "iacProfileName": "profile1",
     "parameters": {
-      "location": "location1",
-      "tags": {
-        "appname": "testApp"
-      },
+      "location": "eastus",
       "properties": {
         "githubProfile": {
-          "repositoryOwner": "owner",
-          "repositoryName": "localtest",
-          "repositoryMainBranch": "main"
+          "repositoryOwner": "qfai",
+          "repositoryName": "localtest"
         },
         "terraformProfile": {
-          "storageAccountSubscription": "subscription",
-          "storageAccountResourceGroup": "hybrid-iac",
-          "storageAccountName": "hybridiac",
-          "storageContainerName": "hybridiac"
+          "storageAccountSubscription": "586c20df-c465-4f10-8673-65aa4859e7ca",
+          "storageAccountResourceGroup": "test",
+          "storageAccountName": "iacbackend",
+          "storageContainerName": "tfbackend"
         },
         "stages": [
           {
@@ -33,33 +29,14 @@
               "dev"
             ],
             "gitEnvironment": "Terraform"
-          },
-          {
-            "stageName": "prod",
-            "dependencies": [
-              "qa"
-            ],
-            "gitEnvironment": "Terraform"
           }
         ],
         "templates": [
           {
-            "templateName": "base",
-            "sourceResourceId": "/subscriptions/xxxx/resourceGroups/xxxx",
-            "instanceStage": "dev",
-            "instanceName": "contoso",
-            "templateDetails": [
-              {
-                "productName": "HCI",
-                "count": 1,
-                "namingConvention": "$sitid-hci"
-              },
-              {
-                "productName": "AKSarc",
-                "count": 1,
-                "namingConvention": "$sitid-aks"
-              }
-            ]
+            "templateName": "hciaksss",
+            "quickStartTemplateType": "HCIAKS",
+            "instanceName": "quickinstance",
+            "instanceStage": "dev"
           }
         ]
       }
