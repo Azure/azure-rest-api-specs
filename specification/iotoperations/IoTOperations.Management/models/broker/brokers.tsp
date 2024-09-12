@@ -70,7 +70,7 @@ model AdvancedSettings {
   encryptInternalTraffic?: OperationalMode = OperationalMode.Enabled;
 
   @doc("Certificate rotation and private key configuration.")
-  internalCerts?: CertManagerCertOptions;
+  internalCerts?: CertManagerCertConfig;
 }
 
 @doc("Cardinality properties")
@@ -261,7 +261,7 @@ model GenerateResourceLimits {
 }
 
 @doc("Cert Manager Cert properties")
-model CertManagerCertOptions {
+model CertManagerCertConfig {
   @doc("Lifetime of certificate. Must be specified using a Go time.Duration format (h|m|s). E.g. 240h for 240 hours and 45m for 45 minutes.")
   duration: string;
 

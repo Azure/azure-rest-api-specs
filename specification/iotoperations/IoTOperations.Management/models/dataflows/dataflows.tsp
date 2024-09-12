@@ -39,7 +39,7 @@ model DataflowProperties {
 
   @doc("List of operations including source and destination references as well as transformation.")
   @OpenAPI.extension("x-ms-identifiers", [])
-  operations: DataflowOperation[];
+  operations: DataflowOperationDetails[];
 
   @visibility("read")
   @doc("The status of the last operation.")
@@ -47,7 +47,7 @@ model DataflowProperties {
 }
 
 @doc("Dataflow Operation properties. NOTE - One only method is allowed to be used for one entry.")
-model DataflowOperation {
+model DataflowOperationDetails {
   @doc("Type of operation.")
   operationType: OperationType;
 

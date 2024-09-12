@@ -59,7 +59,7 @@ model AuthorizationRule {
   brokerResources: BrokerResourceRule[];
 
   @doc("Give access to clients based on the following properties.")
-  principals: PrincipalDefinition;
+  principals: PrincipalDetails;
 
   @doc("Give access to state store resources.")
   @OpenAPI.extension("x-ms-identifiers", [])
@@ -67,7 +67,7 @@ model AuthorizationRule {
 }
 
 @doc("PrincipalDefinition properties of Rule")
-model PrincipalDefinition {
+model PrincipalDetails {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "existing API"
   @doc("A list of key-value pairs that match the attributes of the clients. The attributes are case-sensitive and must match the attributes provided by the clients during authentication.")
   @OpenAPI.extension("x-ms-identifiers", [])
