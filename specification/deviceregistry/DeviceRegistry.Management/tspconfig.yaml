@@ -11,7 +11,6 @@ options:
     # `arm-resource-flattening` is only used for back-compat for specs existed on July 2024. All new service spec should NOT use this flag
     arm-resource-flattening: true
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/deviceregistry.json"
-    examples-directory: "{project-root}/examples"
     use-read-only-status-schema: true
     omit-unreachable-types: true
   "@azure-tools/typespec-java":
@@ -19,7 +18,6 @@ options:
     flavor: "azure"
     namespace: "com.azure.resourcemanager.deviceregistry"
     service-name: "Device Registry"
-    examples-directory: "{project-root}/examples"
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"

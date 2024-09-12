@@ -45,14 +45,14 @@ interface FileSystems {
   /**
    * Get a FileSystemResource
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "For backward compatibility"
   @operationId("FileSystems_Get")
   get is ArmResourceRead<FileSystemResource>;
 
   /**
    * Create a FileSystemResource
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "For backward compatibility"
   @operationId("FileSystems_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     FileSystemResource,
@@ -63,7 +63,7 @@ interface FileSystems {
   /**
    * Update a FileSystemResource
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "For backward compatibility"
   @parameterVisibility
   @operationId("FileSystems_Update")
   update is ArmCustomPatchSync<FileSystemResource, FileSystemResourceUpdate>;
@@ -71,7 +71,7 @@ interface FileSystems {
   /**
    * Delete a FileSystemResource
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "For backward compatibility"
   @operationId("FileSystems_Delete")
   delete is ArmResourceDeleteWithoutOkAsync<
     FileSystemResource,
@@ -82,14 +82,14 @@ interface FileSystems {
   /**
    * List FileSystemResource resources by resource group
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "For backward compatibility"
   @operationId("FileSystems_ListByResourceGroup")
   listByResourceGroup is ArmResourceListByParent<FileSystemResource>;
 
   /**
    * List FileSystemResource resources by subscription ID
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "For backward compatibility"
   @operationId("FileSystems_ListBySubscription")
   listBySubscription is ArmListBySubscription<FileSystemResource>;
 }

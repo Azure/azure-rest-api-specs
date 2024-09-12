@@ -114,7 +114,6 @@ model Schedule {
   timeZone: string;
 
   @doc("The deadlinetype of the operation, this can either be InitiateAt or CompleteBy")
-  @extension("x-ms-enum.modelAsString", true)
   deadlineType: DeadlineType = DeadlineType.Unknown;
 }
 
@@ -160,7 +159,6 @@ model ResourceOperationDetails {
   resourceId: Azure.Core.armResourceIdentifier;
 
   @doc("Type of operation performed on the resources")
-  @extension("x-ms-enum.modelAsString", true)
   opType: ResourceOperationType = ResourceOperationType.Unknown;
 
   @doc("Subscription id attached to the request")
@@ -171,11 +169,9 @@ model ResourceOperationDetails {
   deadline: offsetDateTime;
 
   @doc("Type of deadline of the operation")
-  @extension("x-ms-enum.modelAsString", true)
   deadlineType: DeadlineType = DeadlineType.Unknown;
 
   @doc("Current state of the operation")
-  @extension("x-ms-enum.modelAsString", true)
   state: OperationState = OperationState.Unknown;
 
   @doc("Timezone for the operation")
@@ -274,7 +270,7 @@ model DeallocateResourceOperationResponse {
   type: string;
 
   @doc("The location of the deallocate request eg westus")
-  @extension("x-ms-mutability", ["read", "create"])
+  @visibility("read", "create")
   location: string;
 
   @extension("x-ms-identifiers", ["resourceId"])
@@ -307,7 +303,7 @@ model StartResourceOperationResponse {
   type: string;
 
   @doc("The location of the start request eg westus")
-  @extension("x-ms-mutability", ["read", "create"])
+  @visibility("read", "create")
   location: string;
 
   @extension("x-ms-identifiers", ["resourceId"])
@@ -340,7 +336,7 @@ model HibernateResourceOperationResponse {
   type: string;
 
   @doc("The location of the Hibernate request eg westus")
-  @extension("x-ms-mutability", ["read", "create"])
+  @visibility("read", "create")
   location: string;
 
   @extension("x-ms-identifiers", ["resourceId"])
