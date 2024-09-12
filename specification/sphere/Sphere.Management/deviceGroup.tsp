@@ -1,7 +1,10 @@
+import "@azure-tools/typespec-client-generator-core";
+
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using Azure.ClientGenerator.Core;
 
 namespace Microsoft.AzureSphere;
 /**
@@ -85,11 +88,4 @@ interface DeviceGroups {
 @@doc(DeviceGroups.claimDevices::parameters.body,
   "Bulk claim devices request body."
 );
-@@encodedName(DeviceGroups.claimDevices::parameters.body,
-  "application/json",
-  "claimDevicesRequest"
-);
-@@extension(DeviceGroups.claimDevices::parameters.body,
-  "x-ms-client-name",
-  "claimDevicesRequest"
-);
+@@clientName(DeviceGroups.claimDevices::parameters.body, "claimDevicesRequest");
