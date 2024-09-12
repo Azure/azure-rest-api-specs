@@ -20,7 +20,7 @@ model Fleet is TrackedResource<FleetProperties> {
   @pattern("^[^_\\W][\\w\\-._]{0,79}(?<![-.])$")
   @path
   name: string;
-  
+
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Zones is a valid property"
   @doc("Zones in which the Compute Fleet is available")
   zones?: Array<string>;
@@ -60,9 +60,6 @@ union ProvisioningState {
 
   @doc("Update in progress.")
   Updating: "Updating",
-
-  @doc("Deletion in progress.")
-  Deleting: "Deleting",
 }
 
 @doc("Details of the Compute Fleet.")
