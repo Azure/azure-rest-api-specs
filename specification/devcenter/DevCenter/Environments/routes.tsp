@@ -262,12 +262,7 @@ interface Environments {
   @added(APIVersions.v2024_05_01_preview)
   getEnvironmentTypeAbilities is Azure.Core.Foundations.Operation<
     {
-      @doc("The DevCenter Project upon which to execute operations.")
-      @maxLength(63)
-      @minLength(3)
-      @pattern("^[a-zA-Z0-9][a-zA-Z0-9-]{2,62}$")
-      @path
-      projectName: string;
+      ...ProjectNameParameter;
 
       @doc("The name of the environment type")
       @maxLength(63)
