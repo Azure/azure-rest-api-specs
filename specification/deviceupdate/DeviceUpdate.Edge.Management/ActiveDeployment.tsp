@@ -64,12 +64,14 @@ interface ActiveDeployments {
 );
 @@doc(ActiveDeployments.update::parameters.properties, "Updated tags.");
 
+#suppress "deprecated" "LEGACY - DO NOT COPY - FIX"
 @@encodedName(ActiveDeployments.create::parameters.resource,
   "application/json",
   "activeDeployment"
 );
 @@clientName(ActiveDeployments.create::parameters.resource, "activeDeployment");
 
+#suppress "deprecated" "LEGACY - DO NOT COPY - FIX"
 @@encodedName(ActiveDeployments.update::parameters.properties,
   "application/json",
   "tagUpdatePayload"

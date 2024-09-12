@@ -118,6 +118,7 @@ interface Watchers {
   listByResourceGroup is ArmResourceListByParent<Watcher>;
   listBySubscription is ArmListBySubscription<Watcher>;
 
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "TODO migrate to LRO"
   @doc("The action to start monitoring all targets configured for a database watcher.")
   @action
   @post
@@ -133,6 +134,7 @@ interface Watchers {
     ...ResourceInstanceParameters<Watcher>,
   ): ArmAcceptedLroResponse | ArmResponse<Watcher> | ErrorResponse;
 
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "TODO migrate to LRO"
   @doc("The action to stop monitoring all targets configured for a database watcher.")
   @action
   @post

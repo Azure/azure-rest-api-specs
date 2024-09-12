@@ -131,7 +131,7 @@ model ClusterJobProperties {
   deploymentMode?: DeploymentMode = DeploymentMode.Deploy;
 
   @doc("List of Azure resource ids of Arc machines part of cluster for which job will be triggered.")
-  @extension("x-ms-mutability", ["create", "read"])
+  @visibility("create", "read")
   arcNodeResourceIds?: string[];
 
   @doc("Job provisioning state")
@@ -188,7 +188,7 @@ model AzureLinuxClusterJobProperties {
   ...ClusterJobProperties;
 
   @doc("Job Type to support polymorphic resource.")
-  @extension("x-ms-mutability", ["create", "read"])
+  @visibility("create", "read")
   jobType: AzureLinuxJobType;
 }
 
@@ -234,7 +234,7 @@ model HciClusterJobProperties {
   ...ClusterJobProperties;
 
   @doc("Job Type to support polymorphic resource.")
-  @extension("x-ms-mutability", ["create", "read"])
+  @visibility("create", "read")
   jobType: HciJobType;
 }
 

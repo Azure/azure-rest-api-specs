@@ -35,7 +35,8 @@ model ScopingConfigurationResource extends ProxyResourceBase {
   /**
    * ScopingConfiguration property.
    */
-  @extension("x-ms-client-flatten", true)
+  #suppress "deprecated" "Legacy flattening"
+  @Azure.ClientGenerator.Core.flattenProperty
   @extension("x-ms-client-name", "properties")
   properties: ScopingConfigurationProperties;
 }
@@ -46,28 +47,28 @@ interface ScopingConfigurationResources {
   /**
    * Get the AppComplianceAutomation scoping configuration of the specific report.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "For backward compatibility"
   @operationId("ScopingConfiguration_Get")
   get is ArmResourceRead<ScopingConfigurationResource>;
 
   /**
    * Get the AppComplianceAutomation scoping configuration of the specific report.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "For backward compatibility"
   @operationId("ScopingConfiguration_CreateOrUpdate")
   createOrUpdate is AcatOperations.AcatResourceCreateOrReplaceSync<ScopingConfigurationResource>;
 
   /**
    * Clean the AppComplianceAutomation scoping configuration of the specific report.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "For backward compatibility"
   @operationId("ScopingConfiguration_Delete")
   delete is ArmResourceDeleteSync<ScopingConfigurationResource>;
 
   /**
    * Returns a list format of the singleton scopingConfiguration for a specified report.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "For backward compatibility"
   @operationId("ScopingConfigurations_List")
   list is ArmResourceListByParent<ScopingConfigurationResource>;
 }
