@@ -609,6 +609,11 @@
         },
         "summary": "Runtime options for custom endpoints.",
         "description": "Updates the runtime options.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/JSRuntimeOptionsParameter"
+          }
+        ],
         "responses": {
           "200": {
             "description": " Runtime options for custom endpoints.",
@@ -1522,8 +1527,6 @@
       "in": "query",
       "required": true,
       "x-ms-parameter-location": "method",
-      "maximum": 9007199254740991,
-      "minimum": -9007199254740991,
       "type": "integer",
       "format": "int64",
       "description": "The commit in the consensus protocol."
@@ -1598,6 +1601,16 @@
       "x-ms-parameter-location": "method",
       "schema": {
         "$ref": "#/definitions/Bundle"
+      }
+    },
+    "JSRuntimeOptionsParameter": {
+      "name": "JSRuntimeOptions",
+      "description": "JS runtime options",
+      "in": "body",
+      "required": true,
+      "x-ms-parameter-location": "method",
+      "schema": {
+        "$ref": "#/definitions/JSRuntimeOptions"
       }
     },
     "RoleParameter": {
