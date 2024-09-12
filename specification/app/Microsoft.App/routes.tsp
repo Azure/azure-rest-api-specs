@@ -12,7 +12,7 @@ using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.Core.Traits;
 
-namespace Microsoft.App;
+namespace Microsoft.App.DynamicSessions;
 
 alias SessionTraits = NoRepeatableRequests &
   NoConditionalRequests &

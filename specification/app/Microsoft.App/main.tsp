@@ -10,7 +10,7 @@ using Azure.Core;
 
 @useAuth(AadOauth2Auth<["https://dynamicsessions.io/.default"]>)
 @service({
-  title: "Microsoft.App service",
+  title: "Microsoft.App Dynamic Sessions service",
 })
 @server(
   "{endpoint}",
@@ -20,12 +20,12 @@ using Azure.Core;
     endpoint: string,
   }
 )
-@versioned(Microsoft.App.Versions)
-namespace Microsoft.App;
+@versioned(Microsoft.App.DynamicSessions.Versions)
+namespace Microsoft.App.DynamicSessions;
 
-@doc("The Microsoft.App service versions.")
+@doc("The Microsoft.App Dynamic Sessions service versions.")
 enum Versions {
   @useDependency(Azure.Core.Versions.v1_0_Preview_2)
-  @doc("The 2024-09-01 version of the Microsoft.App service.")
+  @doc("The 2024-09-01 version of the Microsoft.App Dynamic Sessions service.")
   `2024-09-01`,
 }

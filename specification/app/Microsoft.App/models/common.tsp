@@ -4,7 +4,7 @@ using Azure.Core;
 using TypeSpec.Http;
 using TypeSpec.Rest;
 
-namespace Microsoft.App;
+namespace Microsoft.App.DynamicSessions;
 using OpenAPI;
 
 @doc("The code execution name path parameter.")

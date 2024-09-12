@@ -11,29 +11,29 @@ options:
     azure-resource-provider-folder: "data-plane"
     emitter-output-dir: "{project-root}/.."
     examples-directory: "{project-root}/examples"
-    output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/containerapps.json"
+    output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/DynamicSessions.json"
   "@azure-tools/typespec-python":
-    package-dir: "microsoft-app"
+    package-dir: "microsoft-app-dynamicsessions"
     package-name: "{package-dir}"
     package-mode: dataplane
     flavor: azure
   "@azure-tools/typespec-csharp":
-    package-dir: "Microsoft.App"
+    package-dir: "Microsoft.App.DynamicSessions"
     namespace: "{package-dir}"
     clear-output-folder: true
     model-namespace: false
     flavor: azure
   "@azure-tools/typespec-ts":
-    package-dir: "microsoft-app-rest"
+    package-dir: "microsoft-app-dynamicsessions-rest"
     generateMetadata: true
     generateTest: true
     packageDetails:
-      name: "@azure-rest/microsoft-app-rest"
-      description: "Microsoft.App Service"
+      name: "@azure-rest/microsoft-app-dynamicsessions-rest"
+      description: "Microsoft.App Dynamic Sessions Service"
     flavor: azure
   "@azure-tools/typespec-java":
-    package-dir: "microsoft-app"
-    namespace: com.microsoft.app
+    package-dir: "microsoft-app-dynamicsessions"
+    namespace: com.microsoft.app.dynamicsessions
     flavor: azure
 linter:
   extends:

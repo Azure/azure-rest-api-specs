@@ -2,7 +2,7 @@ import "./common.tsp";
 using TypeSpec.Http;
 using TypeSpec.Rest;
 
-namespace Microsoft.App;
+namespace Microsoft.App.DynamicSessions;
 
 @doc("Code execution file resource collection.")
 model SessionResourceFileCollection {
