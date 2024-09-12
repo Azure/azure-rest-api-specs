@@ -595,6 +595,7 @@ model Quota {
 @doc("A location resource")
 @subscriptionResource
 model Location is ProxyResource<LocationProperties> {
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "Legacy DO NOT EVER COPY THIS"
   @doc("A location in a subscription")
   @pattern("^[-\\w\\._]+$")
   @key("location")
