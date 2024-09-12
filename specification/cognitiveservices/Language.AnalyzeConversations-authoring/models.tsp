@@ -404,6 +404,7 @@ model ConversationalAnalysisAuthoringCreateProjectOptions {
   /**
    * The storage container name in case of conversation summarization.
    */
+  @added(Versions.v2023_04_15_preview)
   storageInputContainerName?: string;
 
   /**
@@ -732,6 +733,7 @@ model ConversationalAnalysisAuthoringCreateDeploymentOptions {
   /**
    * Represents the trained model label.
    */
+  @added(Versions.v2023_04_15_preview)
   trainedModelLabel: string;
 
   /**
