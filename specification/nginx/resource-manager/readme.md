@@ -102,3 +102,13 @@ These settings apply only when `--tag=package-preview-2024-09-01` is specified o
 input-file:
   - NGINX.NGINXPLUS/preview/2024-09-01-preview/swagger.json
 ```
+
+
+### Tag: package-preview-2024-11-01
+
+These settings apply only when `--tag=package-preview-2024-11-01` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2024-11-01'
+input-file:
+  - NGINX.NGINXPLUS/preview/2024-11-01-preview/swagger.json
+```
