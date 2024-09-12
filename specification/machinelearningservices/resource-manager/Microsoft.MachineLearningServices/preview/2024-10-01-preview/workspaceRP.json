@@ -693,6 +693,9 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ProxyApiVersion"
           }
         ],
         "responses": {
@@ -747,6 +750,9 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ProxyApiVersion"
           }
         ],
         "responses": {
@@ -811,6 +817,9 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ProxyApiVersion"
           }
         ],
         "responses": {
@@ -863,6 +872,9 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ProxyApiVersion"
           },
           {
             "in": "body",
@@ -978,6 +990,9 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ProxyApiVersion"
           }
         ],
         "responses": {
@@ -1029,6 +1044,9 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ProxyApiVersion"
           }
         ],
         "responses": {
@@ -1083,6 +1101,9 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ProxyApiVersion"
           }
         ],
         "responses": {
@@ -1147,6 +1168,9 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ProxyApiVersion"
           }
         ],
         "responses": {
@@ -1199,6 +1223,9 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ProxyApiVersion"
           },
           {
             "in": "body",
@@ -1271,6 +1298,9 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ProxyApiVersion"
           },
           {
             "in": "body",
@@ -1357,6 +1387,9 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
+            "$ref": "#/parameters/ProxyApiVersion"
+          },
+          {
             "in": "body",
             "name": "body",
             "required": true,
@@ -1367,6 +1400,20 @@
           }
         ],
         "responses": {
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "description": "URI to poll for asynchronous operation result.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "Duration the client should wait between requests, in seconds.",
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          },
           "204": {
             "description": "No Content"
           },
@@ -1416,6 +1463,9 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ProxyApiVersion"
           }
         ],
         "responses": {
@@ -1473,6 +1523,9 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ProxyApiVersion"
           }
         ],
         "responses": {
@@ -1540,6 +1593,9 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ProxyApiVersion"
           }
         ],
         "responses": {
@@ -1595,6 +1651,9 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ProxyApiVersion"
           },
           {
             "in": "body",
@@ -1661,6 +1720,9 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ProxyApiVersion"
           }
         ],
         "responses": {
@@ -1715,6 +1777,9 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ProxyApiVersion"
           }
         ],
         "responses": {
@@ -1779,6 +1844,9 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ProxyApiVersion"
           }
         ],
         "responses": {
@@ -1831,6 +1899,9 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ProxyApiVersion"
           },
           {
             "in": "body",
@@ -2099,7 +2170,19 @@
           },
           {
             "in": "query",
-            "name": "includeInferenceEndpoints",
+            "name": "includeOnlineEndpoints",
+            "type": "boolean",
+            "default": false
+          },
+          {
+            "in": "query",
+            "name": "includeServerlessEndpoints",
+            "type": "boolean",
+            "default": false
+          },
+          {
+            "in": "query",
+            "name": "includeConnections",
             "type": "boolean",
             "default": false
           },
@@ -2341,6 +2424,9 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ProxyApiVersion"
           }
         ],
         "responses": {
@@ -2631,6 +2717,9 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ProxyApiVersion"
           }
         ],
         "responses": {
@@ -2685,6 +2774,9 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ProxyApiVersion"
           }
         ],
         "responses": {
@@ -2749,6 +2841,9 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ProxyApiVersion"
           }
         ],
         "responses": {
@@ -2801,6 +2896,9 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ProxyApiVersion"
           },
           {
             "in": "body",
@@ -3979,8 +4077,10 @@
           "$ref": "#/definitions/EndpointDeploymentModel"
         },
         "raiPolicyName": {
-          "type": "string",
-          "description": "The name of RAI policy."
+          "type": "string"
+        },
+        "sku": {
+          "$ref": "#/definitions/CognitiveServicesSku"
         },
         "versionUpgradeOption": {
           "description": "Deployment model version upgrade option.",
@@ -4105,6 +4205,7 @@
         "Sybase",
         "Teradata",
         "Vertica",
+        "Pinecone",
         "Cassandra",
         "Couchbase",
         "MongoDbV2",
@@ -4149,10 +4250,12 @@
         "Xero",
         "Zoho",
         "GenericContainerRegistry",
+        "Elasticsearch",
         "OpenAI",
         "Serp",
         "BingLLMSearch",
-        "Serverless"
+        "Serverless",
+        "ManagedOnlineEndpoint"
       ],
       "type": "string",
       "x-ms-enum": {
@@ -4295,6 +4398,11 @@
         },
         "dnsResolution": {
           "description": "Setting for diagnosing dns resolution",
+          "type": "object",
+          "additionalProperties": {}
+        },
+        "hub": {
+          "description": "Setting for diagnosing the hub",
           "type": "object",
           "additionalProperties": {}
         },
@@ -6808,6 +6916,14 @@
       "description": "The properties of a machine learning workspace.",
       "type": "object",
       "properties": {
+        "agentsEndpointUri": {
+          "description": "The URI of agents endpoint associated with this workspace.",
+          "type": "string",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
         "allowPublicAccessWhenBehindVnet": {
           "description": "The flag to indicate whether to allow public access when behind VNet.",
           "type": "boolean"
@@ -6902,6 +7018,10 @@
           "items": {
             "type": "string"
           }
+        },
+        "lazyInitSystemDatastores": {
+          "description": "Lazily initialize system datastores until the moment they are first needed.\r\nWhen set, delays the moment that containers and fileshares are created on the workspace-associated Azure storage account.",
+          "type": "boolean"
         },
         "managedNetwork": {
           "$ref": "#/definitions/ManagedNetworkSettings"
@@ -7112,6 +7232,10 @@
           "description": "Retention time in days after workspace get soft deleted.",
           "type": "integer"
         },
+        "systemDatastoresAuthMode": {
+          "description": "The auth mode used for accessing the system datastores of the workspace.",
+          "type": "string"
+        },
         "v1LegacyMode": {
           "description": "Enabling v1_legacy_mode may prevent you from using features provided by the v2 API.",
           "type": "boolean"
@@ -7278,6 +7402,13 @@
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
+    },
+    "ProxyApiVersion": {
+      "in": "query",
+      "name": "proxy-api-version",
+      "description": "Api version used by proxy call",
+      "type": "string",
+      "x-ms-parameter-location": "method"
     }
   },
   "securityDefinitions": {
@@ -7298,4 +7429,3 @@
     }
   ]
 }
-
