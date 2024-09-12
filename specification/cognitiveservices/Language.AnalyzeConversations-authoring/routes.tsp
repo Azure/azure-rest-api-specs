@@ -72,7 +72,7 @@ interface ConversationalAnalysisAuthoring {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Need to rename the body"
   //@pollingOperation(Widgets.getWidgetOperationStatus)
   @createsOrUpdatesResource(ConversationalAnalysisAuthoringProjectMetadata)
-  @parameterVisibility("create", "update")
+  @parameterVisibility
   @patch
   createProject is Foundations.ResourceOperation<
     ConversationalAnalysisAuthoringProjectMetadata,
@@ -82,7 +82,7 @@ interface ConversationalAnalysisAuthoring {
       contentType: "application/merge-patch+json";
 
       /** The request body */
-      @bodyRoot body: ConversationalAnalysisAuthoringProjectMetadata;
+      @bodyRoot body: ConversationalAnalysisAuthoringCreateProjectOptions;
     },
     Foundations.ResourceCreatedOrOkResponse<ConversationalAnalysisAuthoringProjectMetadata>,
     {},

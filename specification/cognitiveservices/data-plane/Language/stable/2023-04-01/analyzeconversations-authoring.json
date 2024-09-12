@@ -180,7 +180,7 @@
             "description": "The request body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ConversationalAnalysisAuthoringProjectMetadataCreateOrUpdate"
+              "$ref": "#/definitions/ConversationalAnalysisAuthoringCreateProjectOptions"
             }
           }
         ],
@@ -3190,80 +3190,6 @@
         "language"
       ]
     },
-    "ConversationalAnalysisAuthoringProjectMetadataCreateOrUpdate": {
-      "type": "object",
-      "description": "Represents the metadata of a project.",
-      "properties": {
-        "createdDateTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Represents the project creation datetime."
-        },
-        "lastModifiedDateTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Represents the project creation datetime."
-        },
-        "lastTrainedDateTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Represents the project last trained datetime."
-        },
-        "lastDeployedDateTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Represents the project last deployed datetime."
-        },
-        "projectKind": {
-          "$ref": "#/definitions/ConversationalAnalysisAuthoringProjectKind",
-          "description": "Represents the project kind.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "settings": {
-          "$ref": "#/definitions/ConversationalAnalysisAuthoringProjectSettingsCreateOrUpdate",
-          "description": "The project settings.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "projectName": {
-          "type": "string",
-          "description": "The new project name.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "multilingual": {
-          "type": "boolean",
-          "description": "Whether the project would be used for multiple languages or not.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "description": {
-          "type": "string",
-          "description": "The project description.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "language": {
-          "type": "string",
-          "description": "The project language. This is BCP-47 representation of a language. For example,\nuse \"en\" for English, \"en-gb\" for English (UK), \"es\" for Spanish etc.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        }
-      }
-    },
     "ConversationalAnalysisAuthoringProjectSettings": {
       "type": "object",
       "description": "Represents the settings used to define the project behavior.",
@@ -3277,17 +3203,6 @@
       "required": [
         "confidenceThreshold"
       ]
-    },
-    "ConversationalAnalysisAuthoringProjectSettingsCreateOrUpdate": {
-      "type": "object",
-      "description": "Represents the settings used to define the project behavior.",
-      "properties": {
-        "confidenceThreshold": {
-          "type": "number",
-          "format": "float",
-          "description": "The threshold of the intent with the highest confidence, at which the\nprediction will automatically be changed to \"None\". The value of the threshold\nshould be between 0 and 1 inclusive."
-        }
-      }
     },
     "ConversationalAnalysisAuthoringProjectTrainedModel": {
       "type": "object",
