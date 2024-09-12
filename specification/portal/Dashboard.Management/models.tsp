@@ -199,6 +199,7 @@ model PatchableDashboard {
   /**
    * Resource tags
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "existing API"
   tags?: Record<string>;
 }
 
