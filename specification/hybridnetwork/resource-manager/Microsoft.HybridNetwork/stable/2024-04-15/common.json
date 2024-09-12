@@ -3,7 +3,7 @@
   "info": {
     "title": "HybridNetworkManagementClient",
     "description": "The definitions in this swagger specification will be used to manage the Hybrid Network resources.",
-    "version": "2023-09-01"
+    "version": "2024-04-15"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -105,6 +105,22 @@
       ],
       "x-ms-enum": {
         "name": "NFVIType",
+        "modelAsString": true
+      }
+    },
+    "backingResourcePublicNetworkAccess": {
+      "type": "string",
+      "x-ms-mutability": [
+        "read",
+        "create"
+      ],
+      "description": "The backing resource network access type.",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "backingResourcePublicNetworkAccess",
         "modelAsString": true
       }
     },
