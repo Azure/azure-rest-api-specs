@@ -51,7 +51,7 @@ model AssistantThreadCreationOptions {
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
   @encodedName("application/json", "tool_resources")
   @added(ServiceApiVersions.v2024_05_01_preview)
-  toolResources?: CreateToolResourcesOptions | null;
+  toolResources?: ToolResources | null;
 
   ...OptionalNullableMetadata;
 }
@@ -70,7 +70,7 @@ model UpdateAssistantThreadOptions {
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
   @encodedName("application/json", "tool_resources")
   @added(ServiceApiVersions.v2024_05_01_preview)
-  toolResources?: UpdateToolResourcesOptions | null;
+  toolResources?: ToolResources | null;
 
   ...OptionalNullableMetadata;
 }
