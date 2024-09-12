@@ -4877,6 +4877,62 @@
           },
           "description": "List of private endpoint connection associated with the specified resource",
           "x-nullable": true
+        },
+        "managedPrivateUDP": {
+          "enum": [
+            "Default",
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "ManagedPrivateUDP",
+            "modelAsString": true
+          },
+          "type": "string",
+          "description": "Default: AVD-wide settings are used to determine connection availability, Enabled: UDP will attempt this connection type when making connections. This means that this connection is possible, but is not guaranteed, as there are other factors that may prevent this connection type, Disabled: UDP will not attempt this connection type when making connections",
+          "x-nullable": false
+        },
+        "directUDP": {
+          "enum": [
+            "Default",
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "DirectUDP",
+            "modelAsString": true
+          },
+          "type": "string",
+          "description": "Default: AVD-wide settings are used to determine connection availability, Enabled: UDP will attempt this connection type when making connections. This means that this connection is possible, but is not guaranteed, as there are other factors that may prevent this connection type, Disabled: UDP will not attempt this connection type when making connections",
+          "x-nullable": false
+        },
+        "publicUDP": {
+          "enum": [
+            "Default",
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "PublicUDP",
+            "modelAsString": true
+          },
+          "type": "string",
+          "description": "Default: AVD-wide settings are used to determine connection availability, Enabled: UDP will attempt this connection type when making connections. This means that this connection is possible, but is not guaranteed, as there are other factors that may prevent this connection type, Disabled: UDP will not attempt this connection type when making connections",
+          "x-nullable": false
+        },
+        "relayUDP": {
+          "enum": [
+            "Default",
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "RelayUDP",
+            "modelAsString": true
+          },
+          "type": "string",
+          "description": "Default: AVD-wide settings are used to determine connection availability, Enabled: UDP will attempt this connection type when making connections. This means that this connection is possible, but is not guaranteed, as there are other factors that may prevent this connection type, Disabled: UDP will not attempt this connection type when making connections",
+          "x-nullable": false
         }
       }
     },
@@ -5036,6 +5092,62 @@
           "$ref": "#/definitions/AgentUpdatePatchProperties",
           "description": "The session host configuration for updating agent, monitoring agent, and stack component.",
           "x-nullable": true
+        },
+        "managedPrivateUDP": {
+          "enum": [
+            "Default",
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "ManagedPrivateUDP",
+            "modelAsString": true
+          },
+          "type": "string",
+          "description": "Default: AVD-wide settings are used to determine connection availability, Enabled: UDP will attempt this connection type when making connections. This means that this connection is possible, but is not guaranteed, as there are other factors that may prevent this connection type, Disabled: UDP will not attempt this connection type when making connections",
+          "x-nullable": false
+        },
+        "directUDP": {
+          "enum": [
+            "Default",
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "DirectUDP",
+            "modelAsString": true
+          },
+          "type": "string",
+          "description": "Default: AVD-wide settings are used to determine connection availability, Enabled: UDP will attempt this connection type when making connections. This means that this connection is possible, but is not guaranteed, as there are other factors that may prevent this connection type, Disabled: UDP will not attempt this connection type when making connections",
+          "x-nullable": false
+        },
+        "publicUDP": {
+          "enum": [
+            "Default",
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "PublicUDP",
+            "modelAsString": true
+          },
+          "type": "string",
+          "description": "Default: AVD-wide settings are used to determine connection availability, Enabled: UDP will attempt this connection type when making connections. This means that this connection is possible, but is not guaranteed, as there are other factors that may prevent this connection type, Disabled: UDP will not attempt this connection type when making connections",
+          "x-nullable": false
+        },
+        "relayUDP": {
+          "enum": [
+            "Default",
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "RelayUDP",
+            "modelAsString": true
+          },
+          "type": "string",
+          "description": "Default: AVD-wide settings are used to determine connection availability, Enabled: UDP will attempt this connection type when making connections. This means that this connection is possible, but is not guaranteed, as there are other factors that may prevent this connection type, Disabled: UDP will not attempt this connection type when making connections",
+          "x-nullable": false
         }
       }
     },
