@@ -32,7 +32,7 @@ model PipelineGroup is TrackedResource<PipelineGroupProperties> {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Extended location is not included in TrackedResource yet."
   @doc("The extended location for given pipeline group.")
   @visibility("read", "create")
-  extendedLocation?: ExtendedLocation;
+  extendedLocation?: CommonTypes.ExtendedLocation;
 }
 
 @doc("Properties that need to be specified to create a new pipeline group instance.")
@@ -257,6 +257,7 @@ interface PipelineGroups {
   delete is ArmResourceDeleteWithoutOkAsync<PipelineGroup>;
 
   @doc("Updates a pipeline group instance")
+  @parameterVisibility
   update is ArmCustomPatchAsync<
     PipelineGroup,
     Azure.ResourceManager.Foundations.ResourceUpdateModel<
