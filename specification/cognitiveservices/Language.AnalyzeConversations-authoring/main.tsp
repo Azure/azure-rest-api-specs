@@ -53,7 +53,6 @@ namespace Language.Authoring;
  * The available API versions.
  */
 enum Versions {
-
   /** Version 2023-04-01 */
   @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   v2023_04_01: "2023-04-01",

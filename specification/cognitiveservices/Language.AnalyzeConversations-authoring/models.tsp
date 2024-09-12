@@ -155,12 +155,16 @@ union ConversationalAnalysisAuthoringJobStatus {
   string,
   notStarted: "notStarted",
   running: "running",
+
   @lroSucceeded
   succeeded: "succeeded",
+
   @lroFailed
   failed: "failed",
+
   @lroCanceled
   cancelled: "cancelled",
+
   cancelling: "cancelling",
   partiallyCompleted: "partiallyCompleted",
 }
@@ -325,7 +329,6 @@ model ErrorResponse {
  * The error object.
  */
 model Error {
-
   /**
    * One of a server-defined set of error codes.
    */
@@ -788,8 +791,8 @@ model ConversationalAnalysisAuthoringSwapDeploymentsOptions {
  */
 @clientName("ExportProjectJobState", "csharp")
 model ConversationalAnalysisAuthoringExportProjectJobState {
-
   ...ConversationalAnalysisAuthoringJobState;
+
   /**
    * The URL to use in order to download the exported project.
    */
@@ -867,8 +870,8 @@ model ConversationalAnalysisAuthoringProjectTrainedModel {
  */
 @clientName("EvaluationJobState", "csharp")
 model ConversationalAnalysisAuthoringEvaluationJobState {
-
   ...ConversationalAnalysisAuthoringJobState;
+
   /**
    * Represents evaluation task detailed result.
    */
@@ -1021,11 +1024,13 @@ model ConversationalAnalysisAuthoringEvaluationSummary {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
 @clientName("ConfusionMatrix", "csharp")
-model ConversationalAnalysisAuthoringConfusionMatrix is Record<ConversationalAnalysisAuthoringConfusionMatrixRow>;
+model ConversationalAnalysisAuthoringConfusionMatrix
+  is Record<ConversationalAnalysisAuthoringConfusionMatrixRow>;
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
 @clientName("ConfusionMatrixRow", "csharp")
-model ConversationalAnalysisAuthoringConfusionMatrixRow is Record<ConversationalAnalysisAuthoringConfusionMatrixCell>;
+model ConversationalAnalysisAuthoringConfusionMatrixRow
+  is Record<ConversationalAnalysisAuthoringConfusionMatrixCell>;
 
 /**
  * Represents the evaluation result summary for the project's entities.
@@ -1242,7 +1247,7 @@ model ConversationalAnalysisAuthoringLoadSnapshotJobState {
  */
 @added(Versions.v2023_04_15_preview)
 @clientName("AssignedDeploymentResources", "csharp")
-model ConversationalAnalysisAuthoringAssignedDeploymentResources{
+model ConversationalAnalysisAuthoringAssignedDeploymentResources {
   /**
    * The list of assigned deployment resources.
    */
@@ -1346,8 +1351,8 @@ model ConversationalAnalysisAuthoringTrainingJobs {
  */
 @clientName("TrainingJobState", "csharp")
 model ConversationalAnalysisAuthoringTrainingJobState {
-
   ...ConversationalAnalysisAuthoringJobState;
+
   /**
    * Represents training tasks detailed result.
    */
@@ -1423,7 +1428,7 @@ model ConversationalAnalysisAuthoringSubTrainingJobState {
  * Represents the state of a project deletion job.
  */
 @clientName("ProjectDeletionJobState", "csharp")
-model ConversationalAnalysisAuthoringProjectDeletionJobState{
+model ConversationalAnalysisAuthoringProjectDeletionJobState {
   ...ConversationalAnalysisAuthoringJobState;
 }
 
@@ -1432,7 +1437,7 @@ model ConversationalAnalysisAuthoringProjectDeletionJobState{
  */
 @added(Versions.v2023_04_15_preview)
 @clientName("AssignedResourceDeploymentsMetadata", "csharp")
-model ConversationalAnalysisAuthoringAssignedResourceDeploymentsMetadata{
+model ConversationalAnalysisAuthoringAssignedResourceDeploymentsMetadata {
   /**
    * The list of retrieved assigned project deployments.
    */
@@ -1488,7 +1493,7 @@ model ConversationalAnalysisAuthoringAssignedProjectDeploymentMetadata {
  * Represents a list of retrieved languages.
  */
 @clientName("SupportedLanguages", "csharp")
-model ConversationalAnalysisAuthoringSupportedLanguages{
+model ConversationalAnalysisAuthoringSupportedLanguages {
   /**
    * The list of the languages.
    */
@@ -1577,7 +1582,6 @@ model ConversationalAnalysisAuthoringTrainingConfigVersion {
   /**
    * Represents the version of the config.
    */
-  
   trainingConfigVersion: string;
 
   /**
@@ -1731,7 +1735,8 @@ model ConversationalAnalysisAuthoringConversationExportedIntent {
  * Represents the exported assets of a conversational project.
  */
 @clientName("ConversationExportedProjectAssets", "csharp")
-model ConversationalAnalysisAuthoringConversationExportedProjectAssets extends ConversationalAnalysisAuthoringExportedProjectAssets {
+model ConversationalAnalysisAuthoringConversationExportedProjectAssets
+  extends ConversationalAnalysisAuthoringExportedProjectAssets {
   /**
    * The intents defined in the project.
    */
@@ -1909,7 +1914,8 @@ model ConversationalAnalysisAuthoringExportedLuisOrchestration {
  * Represents the orchestration options for a LUIS application target.
  */
 @clientName("ExportedLuisOrchestrationOptions", "csharp")
-model ConversationalAnalysisAuthoringExportedLuisOrchestrationOptions extends ConversationalAnalysisAuthoringExportedOrchestrationOptions {
+model ConversationalAnalysisAuthoringExportedLuisOrchestrationOptions
+  extends ConversationalAnalysisAuthoringExportedOrchestrationOptions {
   /**
    * The LUIS application target details.
    */
@@ -1969,7 +1975,8 @@ model ConversationalAnalysisAuthoringOrchestrationExportedIntent {
  * Represents the assets of an orchestration project.
  */
 @clientName("OrchestrationExportedProjectAssets", "csharp")
-model ConversationalAnalysisAuthoringOrchestrationExportedProjectAssets extends ConversationalAnalysisAuthoringExportedProjectAssets {
+model ConversationalAnalysisAuthoringOrchestrationExportedProjectAssets
+  extends ConversationalAnalysisAuthoringExportedProjectAssets {
   /**
    * Represents the intents of the project.
    */
