@@ -302,6 +302,8 @@ model InformaticaServerlessRuntimeResource
   @doc("Name of the Serverless Runtime resource")
   @path
   name: string;
+
+  ...ManagedServiceIdentityProperty;
 }
 
 @doc("Properties specific to the Informatica DataManagement Organization resource.")
