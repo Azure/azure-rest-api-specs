@@ -29,7 +29,6 @@ openapi-type: arm
 tag: package-2024-09
 ```
 
-
 ### Tag: package-2024-09
 
 These settings apply only when `--tag=package-2024-09` is specified on the command line.
