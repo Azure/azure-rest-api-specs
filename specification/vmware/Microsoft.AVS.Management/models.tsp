@@ -583,6 +583,7 @@ model Trial {
 
 @doc("Subscription quotas")
 model Quota {
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "existing API"
   @doc("Remaining hosts quota by sku type")
   @visibility("read")
   hostsRemaining?: Record<int32>;
@@ -648,8 +649,9 @@ model PrivateCloudUpdate {
   ...ResourceSkuProperty;
   ...ManagedSystemAssignedIdentityProperty;
 
+  #suppress "deprecated" "Legacy flatten"
   @doc("The updatable properties of a private cloud resource")
-  @extension("x-ms-client-flatten", true)
+  @Azure.ClientGenerator.Core.flattenProperty
   properties?: PrivateCloudUpdateProperties;
 }
 
@@ -968,8 +970,9 @@ model ClusterProperties {
 model ClusterUpdate {
   ...ResourceSkuProperty;
 
+  #suppress "deprecated" "Legacy flatten"
   @doc("The properties of a cluster resource that may be updated")
-  @extension("x-ms-client-flatten", true)
+  @Azure.ClientGenerator.Core.flattenProperty
   properties?: ClusterUpdateProperties;
 }
 
@@ -1785,8 +1788,9 @@ model PlacementPolicyProperties {
 
 @doc("An update of a DRS placement policy resource")
 model PlacementPolicyUpdate {
+  #suppress "deprecated" "Legacy flatten"
   @doc("The properties of a placement policy resource that may be updated")
-  @extension("x-ms-client-flatten", true)
+  @Azure.ClientGenerator.Core.flattenProperty
   properties?: PlacementPolicyUpdateProperties;
 }
 
