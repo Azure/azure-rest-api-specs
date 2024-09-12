@@ -1,0 +1,109 @@
+{
+  "parameters": {
+    "api-version": "2024-07-01",
+    "parameters": {
+      "dataDisksToAttach": [
+        {
+          "caching": "ReadOnly",
+          "deleteOption": "Delete",
+          "diskEncryptionSet": {
+            "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/diskEncryptionSets/{existing-diskEncryptionSet-name}"
+          },
+          "diskId": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/vmss3176_vmss3176_0_disk2_6c4f554bdafa49baa780eb2d128ff39d",
+          "lun": 1,
+          "writeAcceleratorEnabled": true
+        },
+        {
+          "caching": "ReadWrite",
+          "deleteOption": "Detach",
+          "diskEncryptionSet": {
+            "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/diskEncryptionSets/{existing-diskEncryptionSet-name}"
+          },
+          "diskId": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/vmss3176_vmss3176_2_disk3_7d5e664bdafa49baa780eb2d128ff38e",
+          "lun": 2,
+          "writeAcceleratorEnabled": false
+        }
+      ],
+      "dataDisksToDetach": [
+        {
+          "detachOption": "ForceDetach",
+          "diskId": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/vmss3176_vmss3176_1_disk1_1a4e784bdafa49baa780eb2d128ff65x"
+        },
+        {
+          "detachOption": "ForceDetach",
+          "diskId": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/vmss3176_vmss3176_4_disk4_4d4e784bdafa49baa780eb2d256ff41z"
+        }
+      ]
+    },
+    "resourceGroupName": "rgcompute",
+    "subscriptionId": "{subscription-id}",
+    "vmName": "aaaaaaaaaaaaaaaaaaaa"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "dataDisks": [
+          {
+            "name": "vmss3176_vmss3176_0_disk2_6c4f554bdafa49baa780eb2d128ff39d",
+            "caching": "ReadOnly",
+            "createOption": "Attach",
+            "deleteOption": "Delete",
+            "diskSizeGB": 30,
+            "lun": 1,
+            "managedDisk": {
+              "diskEncryptionSet": {
+                "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/diskEncryptionSets/{existing-diskEncryptionSet-name}"
+              },
+              "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/vmss3176_vmss3176_0_disk2_6c4f554bdafa49baa780eb2d128ff39d",
+              "storageAccountType": "Premium_LRS"
+            },
+            "writeAcceleratorEnabled": true
+          },
+          {
+            "name": "vmss3176_vmss3176_2_disk3_7d5e664bdafa49baa780eb2d128ff38e",
+            "caching": "ReadWrite",
+            "createOption": "Attach",
+            "deleteOption": "Detach",
+            "diskSizeGB": 100,
+            "lun": 2,
+            "managedDisk": {
+              "diskEncryptionSet": {
+                "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/diskEncryptionSets/{existing-diskEncryptionSet-name}"
+              },
+              "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/vmss3176_vmss3176_2_disk3_7d5e664bdafa49baa780eb2d128ff38e",
+              "storageAccountType": "Premium_LRS"
+            },
+            "writeAcceleratorEnabled": false
+          }
+        ],
+        "imageReference": {
+          "offer": "WindowsServer",
+          "publisher": "MicrosoftWindowsServer",
+          "sku": "2016-Datacenter",
+          "version": "latest"
+        },
+        "osDisk": {
+          "name": "myOsDisk",
+          "caching": "ReadWrite",
+          "createOption": "FromImage",
+          "diskSizeGB": 30,
+          "managedDisk": {
+            "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/myOsDisk",
+            "storageAccountType": "Premium_LRS"
+          },
+          "osType": "Windows"
+        }
+      },
+      "headers": {
+        "location": "https://foo.com/operationstatus"
+      }
+    },
+    "202": {
+      "headers": {
+        "location": "https://foo.com/operationstatus"
+      }
+    }
+  },
+  "operationId": "VirtualMachines_AttachDetachDataDisks",
+  "title": "VirtualMachine_AttachDetachDataDisks_MaximumSet_Gen"
+}

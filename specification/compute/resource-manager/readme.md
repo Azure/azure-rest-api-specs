@@ -36,10 +36,12 @@ description: Compute Client
 openapi-type: arm
 tag: package-2024-07-01
 
-modelerfour:
-  lenient-model-deduplication: true
-
 directive:
+  - from: diskRPCommon.json
+    where: $.definitions
+    transform: >
+      $.PurchasePlan["x-ms-client-name"] = "DiskPurchasePlan";
+      $.GrantAccessData.properties.access.description = "The Access Level, accepted values include None, Read, Write.";
   - where:
       - $.definitions.VirtualMachine.properties
     suppress:

@@ -1,0 +1,278 @@
+import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
+import "@typespec/rest";
+import "./models.tsp";
+import "./VirtualMachineScaleSet.tsp";
+
+using TypeSpec.Rest;
+using Azure.ResourceManager;
+using TypeSpec.Http;
+using TypeSpec.OpenAPI;
+
+namespace Microsoft.Compute;
+/**
+ * Describes a virtual machine scale set virtual machine.
+ */
+@parentResource(VirtualMachineScaleSet)
+model VirtualMachineScaleSetVM
+  is Azure.ResourceManager.TrackedResource<VirtualMachineScaleSetVMProperties> {
+  ...ResourceNameParameter<
+    Resource = VirtualMachineScaleSetVM,
+    KeyName = "instanceId",
+    SegmentName = "virtualMachines",
+    NamePattern = ""
+  >;
+
+  /**
+   * The virtual machine instance ID.
+   */
+  @visibility("read")
+  instanceId?: string;
+
+  /**
+   * The virtual machine SKU.
+   */
+  @visibility("read")
+  sku?: Sku;
+
+  /**
+   * Specifies information about the marketplace image used to create the virtual machine. This element is only used for marketplace images. Before you can use a marketplace image from an API, you must enable the image for programmatic use.  In the Azure portal, find the marketplace image that you want to use and then click **Want to deploy programmatically, Get Started ->**. Enter any required information and then click **Save**.
+   */
+  plan?: Plan;
+
+  /**
+   * The virtual machine child extension resources.
+   */
+  @visibility("read")
+  resources?: VirtualMachineExtension[];
+
+  /**
+   * The virtual machine zones.
+   */
+  @visibility("read")
+  zones?: string[];
+
+  /**
+   * The identity of the virtual machine, if configured.
+   */
+  identity?: VirtualMachineIdentity;
+
+  /**
+   * Etag is property returned in Update/Get response of the VMSS VM, so that customer can supply it in the header to ensure optimistic updates.
+   */
+  @visibility("read")
+  etag?: string;
+}
+
+@armResourceOperations
+interface VirtualMachineScaleSetVMS {
+  /**
+   * Gets a virtual machine from a VM scale set.
+   */
+  get is ArmResourceRead<
+    VirtualMachineScaleSetVM,
+    {
+      ...Azure.ResourceManager.Foundations.BaseParameters<VirtualMachineScaleSetVM>;
+
+      /**
+       * The expand expression to apply on the operation. 'InstanceView' will retrieve the instance view of the virtual machine. 'UserData' will retrieve the UserData of the virtual machine.
+       */
+      @query("$expand")
+      $expand?: InstanceViewTypes;
+    }
+  >;
+
+  /**
+   * Updates a virtual machine of a VM scale set.
+   */
+  update is ArmResourceCreateOrReplaceAsync<
+    VirtualMachineScaleSetVM,
+    {
+      ...Azure.ResourceManager.Foundations.BaseParameters<VirtualMachineScaleSetVM>;
+
+      /**
+       * The ETag of the transformation. Omit this value to always overwrite the current resource. Specify the last-seen ETag value to prevent accidentally overwriting concurrent changes.
+       */
+      @header
+      IfMatch?: string;
+
+      /**
+       * Set to '*' to allow a new record set to be created, but to prevent updating an existing record set. Other values will result in error from server as they are not supported.
+       */
+      @header
+      IfNoneMatch?: string;
+    }
+  >;
+
+  /**
+   * Deletes a virtual machine from a VM scale set.
+   */
+  delete is ArmResourceDeleteAsync<
+    VirtualMachineScaleSetVM,
+    {
+      ...Azure.ResourceManager.Foundations.BaseParameters<VirtualMachineScaleSetVM>;
+
+      /**
+       * Optional parameter to force delete a virtual machine from a VM scale set. (Feature in Preview)
+       */
+      @query("forceDeletion")
+      forceDeletion?: boolean;
+    }
+  >;
+
+  /**
+   * Reimages (upgrade the operating system) a specific virtual machine in a VM scale set.
+   */
+  reimage is ArmResourceActionAsync<
+    VirtualMachineScaleSetVM,
+    VirtualMachineScaleSetVMReimageParameters,
+    void
+  >;
+
+  /**
+   * Allows you to re-image all the disks ( including data disks ) in the a VM scale set instance. This operation is only supported for managed disks.
+   */
+  reimageAll is ArmResourceActionAsync<VirtualMachineScaleSetVM, void, void>;
+
+  /**
+   * Approve upgrade on deferred rolling upgrade for OS disk on a VM scale set instance.
+   */
+  approveRollingUpgrade is ArmResourceActionNoResponseContentAsync<
+    VirtualMachineScaleSetVM,
+    void
+  >;
+
+  /**
+   * Deallocates a specific virtual machine in a VM scale set. Shuts down the virtual machine and releases the compute resources it uses. You are not billed for the compute resources of this virtual machine once it is deallocated.
+   */
+  deallocate is ArmResourceActionAsync<VirtualMachineScaleSetVM, void, void>;
+
+  /**
+   * Power off (stop) a virtual machine in a VM scale set. Note that resources are still attached and you are getting charged for the resources. Instead, use deallocate to release resources and avoid charges.
+   */
+  powerOff is ArmResourceActionAsync<
+    VirtualMachineScaleSetVM,
+    void,
+    void,
+    {
+      ...Azure.ResourceManager.Foundations.BaseParameters<VirtualMachineScaleSetVM>;
+
+      /**
+       * The parameter to request non-graceful VM shutdown. True value for this flag indicates non-graceful shutdown whereas false indicates otherwise. Default value for this flag is false if not specified
+       */
+      @query("skipShutdown")
+      skipShutdown?: boolean;
+    }
+  >;
+
+  /**
+   * Restarts a virtual machine in a VM scale set.
+   */
+  restart is ArmResourceActionAsync<VirtualMachineScaleSetVM, void, void>;
+
+  /**
+   * Starts a virtual machine in a VM scale set.
+   */
+  start is ArmResourceActionAsync<VirtualMachineScaleSetVM, void, void>;
+
+  /**
+   * Shuts down the virtual machine in the virtual machine scale set, moves it to a new node, and powers it back on.
+   */
+  redeploy is ArmResourceActionAsync<VirtualMachineScaleSetVM, void, void>;
+
+  /**
+   * The operation to retrieve SAS URIs of boot diagnostic logs for a virtual machine in a VM scale set.
+   */
+  retrieveBootDiagnosticsData is ArmResourceActionSync<
+    VirtualMachineScaleSetVM,
+    void,
+    RetrieveBootDiagnosticsDataResult,
+    {
+      ...Azure.ResourceManager.Foundations.BaseParameters<VirtualMachineScaleSetVM>;
+
+      /**
+       * Expiration duration in minutes for the SAS URIs with a value between 1 to 1440 minutes. **Note:** If not specified, SAS URIs will be generated with a default expiration duration of 120 minutes.
+       */
+      @query("sasUriExpirationTimeInMinutes")
+      sasUriExpirationTimeInMinutes?: int32;
+    }
+  >;
+
+  /**
+   * Performs maintenance on a virtual machine in a VM scale set.
+   */
+  performMaintenance is ArmResourceActionAsync<
+    VirtualMachineScaleSetVM,
+    void,
+    void
+  >;
+
+  /**
+   * The operation to simulate the eviction of spot virtual machine in a VM scale set.
+   */
+  simulateEviction is ArmResourceActionNoContentSync<
+    VirtualMachineScaleSetVM,
+    void
+  >;
+
+  /**
+   * Attach and detach data disks to/from a virtual machine in a VM scale set.
+   */
+  attachDetachDataDisks is ArmResourceActionAsync<
+    VirtualMachineScaleSetVM,
+    AttachDetachDataDisksRequest,
+    StorageProfile
+  >;
+
+  /**
+   * Run command on a virtual machine in a VM scale set.
+   */
+  runCommand is ArmResourceActionAsync<
+    VirtualMachineScaleSetVM,
+    RunCommandInput,
+    RunCommandResult
+  >;
+
+  /**
+   * Gets the status of a virtual machine from a VM scale set.
+   */
+  // FIXME: VirtualMachineScaleSetVMs_GetInstanceView could not be converted to a resource operation
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualMachines/{instanceId}/instanceView")
+  @get
+  getInstanceView(
+    ...ApiVersionParameter,
+    ...ResourceGroupParameter,
+
+    /**
+     * The name of the VM scale set.
+     */
+    @path
+    vmScaleSetName: string,
+
+    /**
+     * The instance ID of the virtual machine.
+     */
+    @path
+    instanceId: string,
+
+    ...SubscriptionIdParameter,
+  ): ArmResponse<VirtualMachineScaleSetVMInstanceView> | ErrorResponse;
+}
+
+@@doc(VirtualMachineScaleSetVM.name, "The instance ID of the virtual machine.");
+@@doc(VirtualMachineScaleSetVM.properties,
+  "Describes the properties of a virtual machine scale set virtual machine."
+);
+@@doc(VirtualMachineScaleSetVMS.update::parameters.resource,
+  "Parameters supplied to the Update Virtual Machine Scale Sets VM operation."
+);
+@@doc(VirtualMachineScaleSetVMS.reimage::parameters.body,
+  "Parameters for the Reimaging Virtual machine in ScaleSet."
+);
+@@doc(VirtualMachineScaleSetVMS.attachDetachDataDisks::parameters.body,
+  "Parameters supplied to the attach and detach data disks operation on a Virtual Machine Scale Sets VM."
+);
+@@doc(VirtualMachineScaleSetVMS.runCommand::parameters.body,
+  "Parameters supplied to the Run command operation."
+);
