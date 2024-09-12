@@ -9,6 +9,7 @@ using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using TypeSpec.OpenAPI;
 
+#suppress "@azure-tools/typespec-azure-core/no-openapi" "Keeping this in the spec for now"
 @doc("Video translation API to translate video from source locale to target locale.")
 @versioned(VideoTranslation.ApiVersions)
 @service({
@@ -24,6 +25,15 @@ using TypeSpec.OpenAPI;
 )
 @useAuth(KeyAuth | AADToken)
 @tag("VideoTranslation")
+@info({
+  contact: {
+    name: "Azure AI - Speech Services",
+    url: "https://learn.microsoft.com/azure/ai-services/speech-service/",
+  },
+  license: {
+    name: "Copyright (c) Microsoft. All rights reserved.",
+  },
+})
 namespace Microsoft.Speech.VideoTranslation;
 
 @doc("Provide your Speech resource key here.")
