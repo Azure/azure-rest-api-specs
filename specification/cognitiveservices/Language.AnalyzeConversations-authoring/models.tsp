@@ -733,7 +733,6 @@ model ConversationalAnalysisAuthoringCreateDeploymentOptions {
   /**
    * Represents the trained model label.
    */
-  @added(Versions.v2023_04_15_preview)
   trainedModelLabel: string;
 
   /**
@@ -741,6 +740,7 @@ model ConversationalAnalysisAuthoringCreateDeploymentOptions {
    *             If provided, the deployment will be rolled out to the resources
    * provided here as well as the original resource in which the project is created.
    */
+  @added(Versions.v2023_04_15_preview)
   assignedResourceIds?: string[];
 }
 
