@@ -56,6 +56,7 @@ interface Reservations
     ...ResourceInstanceParameters<Reservation>,
   ): ArmResponse<LimitDetails> | ErrorResponse;
 
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "TODO - Migrate to LRO pattern"
   @added(Versions.v2_preview)
   @doc("Change the marketplace plan of the reservation.")
   @armResourceAction(Reservation)
@@ -203,6 +204,7 @@ interface StoragePools {
     ...ResourceInstanceParameters<StoragePool>,
   ): ArmResponse<AvsStatus> | ErrorResponse;
 
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "TODO - Migrate to LRO pattern"
   @doc("Enable AVS on storage pool")
   @armResourceAction(StoragePool)
   @action("enableAvs")
@@ -225,6 +227,7 @@ interface StoragePools {
     ArmCombinedLroHeaders & Azure.Core.Foundations.RetryAfterHeader
   > | ErrorResponse;
 
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "TODO - Migrate to LRO pattern"
   @added(Versions.v3_preview)
   @doc("Enables the AVS connection support for a specific Storage Pool")
   @armResourceAction(StoragePool)
@@ -248,6 +251,7 @@ interface StoragePools {
     ArmCombinedLroHeaders & Azure.Core.Foundations.RetryAfterHeader
   > | ErrorResponse;
 
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "TODO - Migrate to LRO pattern"
   @doc("Disable AVS on storage pool")
   @armResourceAction(StoragePool)
   @action("disableAvs")
@@ -266,6 +270,7 @@ interface StoragePools {
     ArmCombinedLroHeaders & Azure.Core.Foundations.RetryAfterHeader
   > | ErrorResponse;
 
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "TODO - Migrate to LRO pattern"
   @added(Versions.v3_preview)
   @doc("Disables the AVS connection support for a specific Storage Pool")
   @armResourceAction(StoragePool)
@@ -285,6 +290,7 @@ interface StoragePools {
     ArmCombinedLroHeaders & Azure.Core.Foundations.RetryAfterHeader
   > | ErrorResponse;
 
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "TODO - Migrate to LRO pattern"
   @doc("Finalize AVS on storage pool")
   @armResourceAction(StoragePool)
   @action("finalizeAvs")
@@ -303,6 +309,7 @@ interface StoragePools {
     ArmCombinedLroHeaders & Azure.Core.Foundations.RetryAfterHeader
   > | ErrorResponse;
 
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "TODO - Migrate to LRO pattern"
   @added(Versions.v3_preview)
   @doc("Finalize the AVS connection for a specific Storage Pool")
   @armResourceAction(StoragePool)
@@ -326,6 +333,7 @@ interface StoragePools {
     ArmCombinedLroHeaders & Azure.Core.Foundations.RetryAfterHeader
   > | ErrorResponse;
 
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "TODO - Migrate to LRO pattern"
   @added(Versions.v3_preview)
   @doc("Make sure that all steps necessary to enable this storage pool to be connected to the AVS instance are fully working, and fix them if not")
   @armResourceAction(StoragePool)
@@ -345,6 +353,7 @@ interface StoragePools {
     ArmCombinedLroHeaders & Azure.Core.Foundations.RetryAfterHeader
   > | ErrorResponse;
 
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "TODO - Migrate to LRO pattern"
   @doc("Enable VSphere plugin on storage pool")
   @armResourceAction(StoragePool)
   @action("enableVspherePlugin")
@@ -367,6 +376,7 @@ interface StoragePools {
     ArmCombinedLroHeaders & Azure.Core.Foundations.RetryAfterHeader
   > | ErrorResponse;
 
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "TODO - Migrate to LRO pattern"
   @doc("Disable VSphere plugin on storage pool")
   @armResourceAction(StoragePool)
   @action("disableVspherePlugin")
@@ -385,6 +395,7 @@ interface StoragePools {
     ArmCombinedLroHeaders & Azure.Core.Foundations.RetryAfterHeader
   > | ErrorResponse;
 
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "TODO - Migrate to LRO pattern"
   @doc("Upgrade VSphere plugin on storage pool")
   @armResourceAction(StoragePool)
   @action("upgradeVspherePlugin")

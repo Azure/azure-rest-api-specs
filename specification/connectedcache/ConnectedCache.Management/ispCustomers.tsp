@@ -38,8 +38,3 @@ interface IspCustomers {
   @doc("This api gets information about all ispCustomer resources under the given subscription")
   listBySubscription is ArmListBySubscription<IspCustomerResource>;
 }
-
-@@OpenAPI.extension(Azure.ResourceManager.TrackedResource.properties,
-  "x-ms-mutability",
-  ["create", "update", "read"]
-);
