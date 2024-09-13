@@ -63,7 +63,7 @@
             "$ref": "#/parameters/TiType"
           },
           {
-            "$ref": "#/parameters/Query"
+            "$ref": "#/parameters/CountQuery"
           }
         ],
         "responses": {
@@ -99,7 +99,7 @@
         "count"
       ]
     },
-    "Query": {
+    "CountQuery": {
       "description": "Represents a query to run on the TI objects in the workspace.",
       "properties": {
         "properties": {
@@ -315,12 +315,12 @@
     }
   },
   "parameters": {
-    "Query": {
+    "CountQuery": {
       "description": "The query to run on the TI objects in the workspace.",
       "in": "body",
       "name": "query",
       "schema": {
-        "$ref": "#/definitions/Query"
+        "$ref": "#/definitions/CountQuery"
       },
       "x-ms-parameter-location": "method"
     },
