@@ -1364,193 +1364,197 @@
       "type": "object"
     },
     "string_to_string_to_EndpointProperties": {
+      "additional_properties": {
         "path": {
           "$ref": "#/definitions/string_to_EndpointProperties"
-        },
+        }
+      }, 
       "type": "object"
     },
     "string_to_EndpointProperties": {
+      "additional_properties": {
         "map_method_properties": {
           "$ref": "#/definitions/EndpointProperties"
-        },
+        }
+      },
       "type": "object"
-    },
-    "EndpointProperties": {
-      "properties": {
-        "authn_policies": {
-          "$ref": "#/definitions/json_array"
+      },
+      "EndpointProperties": {
+        "properties": {
+          "authn_policies": {
+            "$ref": "#/definitions/json_array"
+          },
+          "forwarding_required": {
+            "$ref": "#/definitions/ForwardingRequired"
+          },
+          "interpreter_reuse": {
+            "$ref": "#/definitions/InterpreterReusePolicy"
+          },
+          "js_function": {
+            "type": "string"
+          },
+          "js_module": {
+            "type": "string"
+          },
+          "mode": {
+            "$ref": "#/definitions/Mode"
+          },
+          "openapi": {
+            "$ref": "#/definitions/json"
+          },
+          "openapi_hidden": {
+            "$ref": "#/definitions/boolean"
+          },
+          "redirection_strategy": {
+            "$ref": "#/definitions/RedirectionStrategy"
+          }
         },
-        "forwarding_required": {
-          "$ref": "#/definitions/ForwardingRequired"
-        },
-        "interpreter_reuse": {
-          "$ref": "#/definitions/InterpreterReusePolicy"
-        },
-        "js_function": {
-          "type": "string"
-        },
-        "js_module": {
-          "type": "string"
-        },
-        "mode": {
-          "$ref": "#/definitions/Mode"
-        },
-        "openapi": {
+        "required": [
+          "forwarding_required",
+          "authn_policies"
+        ],
+        "type": "object"
+      },
+      "json": {},
+      "json_array": {
+        "items": {
           "$ref": "#/definitions/json"
         },
-        "openapi_hidden": {
-          "$ref": "#/definitions/boolean"
+        "type": "array"
+      },
+      "ForwardingRequired": {
+        "enum": [
+          "sometimes",
+          "always",
+          "never"
+        ],
+        "x-ms-enum": {
+          "name": "ForwardingRequired",
+          "modelAsString": true
         },
-        "redirection_strategy": {
-          "$ref": "#/definitions/RedirectionStrategy"
-        }
+        "type": "string"
       },
-      "required": [
-        "forwarding_required",
-        "authn_policies"
-      ],
-      "type": "object"
-    },
-    "json": {},
-    "json_array": {
-      "items": {
-        "$ref": "#/definitions/json"
-      },
-      "type": "array"
-    },
-    "ForwardingRequired": {
-      "enum": [
-        "sometimes",
-        "always",
-        "never"
-      ],
-      "x-ms-enum": {
-        "name": "ForwardingRequired",
-        "modelAsString": true
-      },
-      "type": "string"
-    },
-    "InterpreterReusePolicy": {
-      "properties": {
-        "key": {
-          "type": "string"
-        }
-      },
-      "required": [
-        "key"
-      ],
-      "type": "object"
-    },
-    "Mode": {
-      "enum": [
-        "readwrite",
-        "readonly",
-        "historical"
-      ],
-      "x-ms-enum": {
-        "name": "Mode",
-        "modelAsString": true
-      },
-      "type": "string"
-    },
-    "RedirectionStrategy": {
-      "enum": [
-        "none",
-        "to_primary",
-        "to_backup"
-      ],
-      "x-ms-enum": {
-        "name": "RedirectionStrategy",
-        "modelAsString": true
-      },
-      "type": "string"
-    },
-    "ModuleDef": {
-      "properties": {
-        "module": {
-          "type": "string"
+      "InterpreterReusePolicy": {
+        "properties": {
+          "key": {
+            "type": "string"
+          }
         },
-        "name": {
-          "type": "string"
-        }
+        "required": [
+          "key"
+        ],
+        "type": "object"
       },
-      "required": [
-        "name",
-        "module"
-      ],
-      "type": "object"
-    },
-    "ModuleDef_array": {
-      "items": {
-        "$ref": "#/definitions/ModuleDef"
+      "Mode": {
+        "enum": [
+          "readwrite",
+          "readonly",
+          "historical"
+        ],
+        "x-ms-enum": {
+          "name": "Mode",
+          "modelAsString": true
+        },
+        "type": "string"
       },
-      "type": "object"
-    },
-    "JSRuntimeOptions": {
-      "description": "JS runtime options for user defined endpoints",
-      "properties": {
-        "log_exception_details": {
-          "$ref": "#/definitions/boolean"
+      "RedirectionStrategy": {
+        "enum": [
+          "none",
+          "to_primary",
+          "to_backup"
+        ],
+        "x-ms-enum": {
+          "name": "RedirectionStrategy",
+          "modelAsString": true
         },
-        "max_cached_interpreters": {
-          "$ref": "#/definitions/uint64"
-        },
-        "max_execution_time_ms": {
-          "$ref": "#/definitions/uint64"
-        },
-        "max_heap_bytes": {
-          "$ref": "#/definitions/uint64"
-        },
-        "max_stack_bytes": {
-          "$ref": "#/definitions/uint64"
-        },
-        "return_exception_details": {
-          "$ref": "#/definitions/boolean"
-        }
+        "type": "string"
       },
-      "type": "object"
-    },
-    "uint64": {
-      "minimum": 0,
-      "type": "integer",
-      "format": "int64"
-    },
-    "boolean": {
-      "type": "boolean"
-    },
-    "Role": {
-      "description": "Definition for roles",
-      "type": "object",
-      "properties": {
-        "roleName": {
-          "description": "name of the user defined role",
-          "type": "string"
-        },
-        "roleActions": {
-          "items": {
-            "$ref": "#/definitions/RoleActionDef"
+      "ModuleDef": {
+        "properties": {
+          "module": {
+            "type": "string"
           },
-          "type": "object"
+          "name": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "name",
+          "module"
+        ],
+        "type": "object"
+      },
+      "ModuleDef_array": {
+        "items": {
+          "$ref": "#/definitions/ModuleDef"
+        },
+        "type": "object"
+      },
+      "JSRuntimeOptions": {
+        "description": "JS runtime options for user defined endpoints",
+        "properties": {
+          "log_exception_details": {
+            "$ref": "#/definitions/boolean"
+          },
+          "max_cached_interpreters": {
+            "$ref": "#/definitions/uint64"
+          },
+          "max_execution_time_ms": {
+            "$ref": "#/definitions/uint64"
+          },
+          "max_heap_bytes": {
+            "$ref": "#/definitions/uint64"
+          },
+          "max_stack_bytes": {
+            "$ref": "#/definitions/uint64"
+          },
+          "return_exception_details": {
+            "$ref": "#/definitions/boolean"
+          }
+        },
+        "type": "object"
+      },
+      "uint64": {
+        "minimum": 0,
+        "type": "integer",
+        "format": "int64"
+      },
+      "boolean": {
+        "type": "boolean"
+      },
+      "Role": {
+        "description": "Definition for roles",
+        "type": "object",
+        "properties": {
+          "roleName": {
+            "description": "name of the user defined role",
+            "type": "string"
+          },
+          "roleActions": {
+            "items": {
+              "$ref": "#/definitions/RoleActionDef"
+            },
+            "type": "object"
+          }
         }
+      },
+      "RoleName": {
+        "description": "name of the user defined role",
+        "type": "string"
+      },
+      "RoleActionDef": {
+        "properties": {
+          "roleActions": {
+            "description": "action of the user defined role",
+            "type": "string"
+          }
+        },
+        "required": [
+          "roleActions"
+        ],
+        "type": "string"
       }
     },
-    "RoleName": {
-      "description": "name of the user defined role",
-      "type": "string"
-    },
-    "RoleActionDef": {
-      "properties": {
-        "roleActions": {
-          "description": "action of the user defined role",
-          "type": "string"
-        }
-      },
-      "required": [
-        "roleActions"
-      ],
-      "type": "string"
-    }
-  },
   "parameters": {
     "CommitParameter": {
       "name": "commit",
