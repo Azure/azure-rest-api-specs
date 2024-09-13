@@ -1,7 +1,10 @@
+import "@azure-tools/typespec-client-generator-core";
+
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using Azure.ClientGenerator.Core;
 
 namespace Microsoft.AzureSphere;
 /**
@@ -137,20 +140,8 @@ interface Catalogs {
 @@doc(Catalogs.listDeviceGroups::parameters.body,
   "List device groups for catalog."
 );
-@@encodedName(Catalogs.listDeviceGroups::parameters.body,
-  "application/json",
-  "listDeviceGroupsRequest"
-);
-@@extension(Catalogs.listDeviceGroups::parameters.body,
-  "x-ms-client-name",
+@@clientName(Catalogs.listDeviceGroups::parameters.body,
   "listDeviceGroupsRequest"
 );
 @@doc(Catalogs.uploadImage::parameters.body, "Image upload request body.");
-@@encodedName(Catalogs.uploadImage::parameters.body,
-  "application/json",
-  "uploadImageRequest"
-);
-@@extension(Catalogs.uploadImage::parameters.body,
-  "x-ms-client-name",
-  "uploadImageRequest"
-);
+@@clientName(Catalogs.uploadImage::parameters.body, "uploadImageRequest");
