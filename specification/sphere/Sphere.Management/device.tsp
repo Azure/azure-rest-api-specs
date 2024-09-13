@@ -2,6 +2,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using Azure.ClientGenerator.Core;
 
 namespace Microsoft.AzureSphere;
 /**
@@ -74,11 +75,6 @@ interface Devices {
 @@doc(Devices.generateCapabilityImage::parameters.body,
   "Generate capability image request body."
 );
-@@encodedName(Devices.generateCapabilityImage::parameters.body,
-  "application/json",
-  "generateDeviceCapabilityRequest"
-);
-@@extension(Devices.generateCapabilityImage::parameters.body,
-  "x-ms-client-name",
+@@clientName(Devices.generateCapabilityImage::parameters.body,
   "generateDeviceCapabilityRequest"
 );
