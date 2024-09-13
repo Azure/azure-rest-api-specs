@@ -54,28 +54,17 @@ model OnboardingServiceProperties {
   @doc("The onboarding service device endpoints.")
   deviceEndpoints?: DeviceEndpoints;
 
-  @doc("Selecting 'yes' will enable a Microsoft managed PKI to issue certificates. Setting up of the CA and policies for certificate management will be while defining the onboarding policy.")
+  @doc("Selecting 'true' will enable a Microsoft managed PKI to issue certificates. Setting up of the CA and policies for certificate management will be while defining the onboarding policy.")
   @visibility("read", "create")
-  enableOperationalCertificates: YesNoOption;
+  enableCertificateManagement: boolean;
 
   @doc("Allow public network access to private links.")
   @visibility("read", "create", "update")
-  publicNetworkAccess?: EnableDisableOptions;
+  publicNetworkAccess?: PublicNetworkAccessOptions;
 
   @doc("The private endpoint connections.")
   @visibility("read")
   privateEndpointConnections?: Array<PrivateEndpointConnection>;
-}
-
-@doc("Yes/No Options for boolean values.")
-union YesNoOption {
-  string,
-
-  @doc("Yes option.")
-  Yes: "Yes",
-
-  @doc("No option.")
-  No: "No",
 }
 
 @doc("Device endpoints.")
@@ -92,14 +81,14 @@ model DeviceEndpoint {
   hostName?: string;
 }
 
-@doc("Enabled/Disabled options for boolean values.")
-union EnableDisableOptions {
+@doc("Options for public network access for private endpoints.")
+union PublicNetworkAccessOptions {
   string,
 
-  @doc("The boolean value indicating the option is enabled")
+  @doc("The value indicating the public network access is enabled.")
   Enabled: "Enabled",
 
-  @doc("The boolean value indicating the option is disabled")
+  @doc("The value indicating the public network access is disabled.")
   Disabled: "Disabled",
 }
 
@@ -111,7 +100,7 @@ interface OnboardingServices {
   get is ArmResourceRead<OnboardingService>;
   createOrUpdate is ArmResourceCreateOrUpdateAsync<OnboardingService>;
   delete is ArmResourceDeleteWithoutOkAsync<OnboardingService>;
-  update is ArmResourcePatchSync<
+  update is ArmResourcePatchAsync<
     OnboardingService,
     OnboardingServiceProperties
   >;
@@ -142,7 +131,7 @@ model PolicyProperties {
   description?: string;
 
   @doc("The policy status")
-  status: EnableDisableOptions;
+  status: PolicyStatusOptions;
 
   @visibility("read")
   @doc("The status of the last operation.")
@@ -164,6 +153,17 @@ model PolicyProperties {
 
   @doc("The identity the OnboardingService Policy will use. Must be from the list of enabled managed identities on the resource.")
   selectedIdentity?: SelectedIdentity;
+}
+
+@doc("Options for policy status.")
+union PolicyStatusOptions {
+  string,
+
+  @doc("The value indicating the policy is enabled.")
+  Enabled: "Enabled",
+
+  @doc("The value indicating the policy is disabled.")
+  Disabled: "Disabled",
 }
 
 @doc("Information on the selected identity. Can be SystemAssigned or UserAssigned.")
@@ -585,7 +585,7 @@ model PolicyPatchProperties {
   description?: string;
 
   @doc("The policy status")
-  status?: EnableDisableOptions;
+  status?: PolicyStatusOptions;
 
   @visibility("read")
   @doc("The status of the last operation.")
@@ -799,7 +799,7 @@ model DeviceStateProperties {
   onboardingStatus: OnboardingStatus;
 
   @doc("Indicates if the device is enabled for discovery")
-  discoveryEnabled?: YesNoOption;
+  discoveryEnabled?: DiscoveryOptions;
 
   @doc("The onboarding policy resource id")
   policyResourceId: PolicyResourceId;
@@ -816,6 +816,17 @@ model DeviceStateProperties {
   // @visibility("read")
   // @doc("TTL until the device can be discovered.")
   // discoverableUntilDate?: string;
+}
+
+@doc("Options for enabling or disabling devices for discovery.")
+union DiscoveryOptions {
+  string,
+
+  @doc("Value indicating the device is enabled for discovery")
+  True: "True",
+
+  @doc("Value indicating the device is disabled for discovery")
+  False: "False",
 }
 
 @doc("The current onboarding status.")
