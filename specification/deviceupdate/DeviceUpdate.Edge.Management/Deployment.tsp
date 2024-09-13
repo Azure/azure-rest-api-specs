@@ -79,12 +79,14 @@ interface Deployments {
   "Device state filter. Uses OData syntax. Example: deviceState eq 'Succeeded'"
 );
 
+#suppress "deprecated" "LEGACY - DO NOT COPY - FIX"
 @@encodedName(Deployments.create::parameters.resource,
   "application/json",
   "deployment"
 );
 @@clientName(Deployments.create::parameters.resource, "deployment");
 
+#suppress "deprecated" "LEGACY - DO NOT COPY - FIX"
 @@encodedName(Deployments.update::parameters.properties,
   "application/json",
   "tagUpdatePayload"

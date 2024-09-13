@@ -35,7 +35,8 @@ model ReportResource extends ProxyResourceBase {
   /**
    * Report property.
    */
-  @extension("x-ms-client-flatten", true)
+  #suppress "deprecated" "Legacy flattening"
+  @Azure.ClientGenerator.Core.flattenProperty
   @extension("x-ms-client-name", "properties")
   properties: ReportProperties;
 }
@@ -46,14 +47,14 @@ interface ReportResources {
   /**
    * Get the AppComplianceAutomation report and its properties.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "For backward compatibility"
   @operationId("Reports_Get")
   get is ArmResourceRead<ReportResource>;
 
   /**
    * Create a new AppComplianceAutomation report or update an exiting AppComplianceAutomation report.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "For backward compatibility"
   @operationId("Reports_CreateOrUpdate")
   createOrUpdate is AcatOperations.AcatResourceCreateOrReplaceAsync<
     ReportResource,
@@ -63,7 +64,7 @@ interface ReportResources {
   /**
    * Update an exiting AppComplianceAutomation report.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "For backward compatibility"
   @parameterVisibility("read")
   @operationId("Reports_Update")
   update is ArmCustomPatchAsync<
@@ -75,7 +76,7 @@ interface ReportResources {
   /**
    * Delete an AppComplianceAutomation report.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "For backward compatibility"
   @operationId("Reports_Delete")
   delete is ArmResourceDeleteWithoutOkAsync<
     ReportResource,
@@ -85,7 +86,7 @@ interface ReportResources {
   /**
    * Get the AppComplianceAutomation report list for the tenant.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "For backward compatibility"
   @operationId("Reports_List")
   list is ArmResourceListByParent<
     ReportResource,
@@ -98,7 +99,7 @@ interface ReportResources {
   /**
    * Synchronize attestation record from app compliance.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "For backward compatibility"
   @operationId("Reports_SyncCertRecord")
   syncCertRecord is ArmResourceActionAsync<
     ReportResource,
@@ -110,7 +111,7 @@ interface ReportResources {
   /**
    * Checks the report's nested resource name availability, e.g: Webhooks, Evidences, Snapshots.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "For backward compatibility"
   @operationId("Reports_NestedResourceCheckNameAvailability")
   checkNameAvailability is ArmResourceActionSync<
     ReportResource,
@@ -121,7 +122,7 @@ interface ReportResources {
   /**
    * Fix the AppComplianceAutomation report error. e.g: App Compliance Automation Tool service unregistered, automation removed.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "For backward compatibility"
   @operationId("Reports_Fix")
   fix is ArmResourceActionAsync<
     ReportResource,
@@ -133,7 +134,7 @@ interface ReportResources {
   /**
    * Fix the AppComplianceAutomation report error. e.g: App Compliance Automation Tool service unregistered, automation removed.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "For backward compatibility"
   @operationId("GetScopingQuestions")
   getScopingQuestions is ArmResourceActionSync<
     ReportResource,
@@ -145,7 +146,7 @@ interface ReportResources {
   /**
    * Verify the AppComplianceAutomation report health status.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "For backward compatibility"
   @operationId("Report_Verify")
   verify is ArmResourceActionAsync<
     ReportResource,
