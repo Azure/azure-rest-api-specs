@@ -26,7 +26,7 @@ These are the global settings for the HybridCompute API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2024-07
+tag: package-preview-2024-07
 directive:
   - from: HybridCompute.json
     where: $.definitions.MachineInstallPatchesParameters.properties.maximumDuration
@@ -63,8 +63,30 @@ directive:
     remove: true
 
 
+  # internal operations
+  - remove-operation: AgentVersion_List
+  - remove-operation: AgentVersion_Get
+  # we don't use them, remove in the future
+  - remove-operation: HybridIdentityMetadata_Get
+  - remove-operation: HybridIdentityMetadata_ListByMachines
+  # we want to retire them and use setting operations instead
+  - remove-operation: NetworkConfigurations_Get
+  - remove-operation: NetworkConfigurations_Update
+  - remove-operation: NetworkConfigurations_CreateOrUpdate
+  # we don't want enable PATCH for run command
+  - remove-operation: MachineRunCommands_Update
+
 ```
 
+### Tag: package-preview-2024-07
+
+These settings apply only when `--tag=package-preview-2024-07` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2024-07'
+input-file:
+  - Microsoft.HybridCompute/preview/2024-07-31-preview/HybridCompute.json
+  - Microsoft.HybridCompute/preview/2024-07-31-preview/privateLinkScopes.json
+```
 
 ### Tag: package-2024-07
 
@@ -364,3 +386,18 @@ See configuration in [readme.ruby.md](./readme.ruby.md)
 ## TypeScript
 
 See configuration in [readme.typescript](./readme.typescript.md)
+
+## Suppress Warnings
+``` yaml
+suppressions:
+  - code: EvenSegmentedPathForPutOperation
+    from: privateLinkScopes.json
+    reason: False positive
+  - code: TagsAreNotAllowedForProxyResources
+    from: HybridCompute.json
+    reason: False positive
+  - code: BodyTopLevelProperties
+    from: HybridCompute.json
+    where: $.definitions.AgentVersion
+    reason: Previously approved and released, would require potentially breaking changes
+```
