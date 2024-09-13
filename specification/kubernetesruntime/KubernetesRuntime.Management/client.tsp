@@ -3,4 +3,7 @@ import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
 
-@@clientName(Microsoft.KubernetesRuntime, "ContainerOrchestratorRuntimeMgmt", "python");
+@@clientName(Microsoft.KubernetesRuntime,
+  "ContainerOrchestratorRuntimeMgmt",
+  "python"
+);
