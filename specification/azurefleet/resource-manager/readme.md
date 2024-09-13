@@ -72,7 +72,7 @@ These settings apply only when `--tag=package-2024-10-01` is specified on the co
 
 ```yaml $(tag) == 'package-2024-10-01'
 input-file:
-  - Microsoft.AzureFleet/stable/package-2024-10-01/azurefleet.json
+  - Microsoft.AzureFleet/stable/2024-10-01/azurefleet.json
 ```
 
 ---
