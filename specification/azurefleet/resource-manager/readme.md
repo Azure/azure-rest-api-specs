@@ -26,7 +26,7 @@ These are the global settings for the computefleet.
 
 ```yaml
 openapi-type: arm
-tag: package-preview-2024-05
+tag: package-2024-10-01
 suppressions:
   - code: PatchBodyParametersSchema
     from: azurefleet.json
@@ -64,6 +64,15 @@ These settings apply only when `--tag=package-preview-2024-05` is specified on t
 ```yaml $(tag) == 'package-preview-2024-05'
 input-file:
   - Microsoft.AzureFleet/preview/2024-05-01-preview/azurefleet.json
+```
+
+### Tag: package-2024-10-01
+
+These settings apply only when `--tag=package-2024-10-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-10-01'
+input-file:
+  - Microsoft.AzureFleet/stable/package-2024-10-01/azurefleet.json
 ```
 
 ---

@@ -8,7 +8,7 @@ azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
 package-name: azure-mgmt-computefleet
 namespace: azure.mgmt.computefleet
-package-version: 1.0.0b1
+package-version: 1.0.1
 clear-output-folder: true
 ```
 
