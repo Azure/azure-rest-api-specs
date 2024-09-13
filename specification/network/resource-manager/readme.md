@@ -102,7 +102,7 @@ input-file:
   - Microsoft.Network/stable/2024-05-01/vmssNetworkInterface.json
   - Microsoft.Network/stable/2024-05-01/vmssPublicIpAddress.json
   - Microsoft.Network/stable/2024-05-01/webapplicationfirewall.json
- suppressions:
+suppressions:
   - code: SystemDataDefinitionsCommonTypes
     from: networkVerifier.json
     reason: False alarm for common type errors.
