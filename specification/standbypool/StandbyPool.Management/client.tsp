@@ -60,3 +60,4 @@ using Microsoft.StandbyPool;
   "StandbyPoolManagementClient",
   "javascript"
 );
+@@clientName(Microsoft.StandbyPool, "StandbyPoolMgmtClient", "python");
