@@ -2,17 +2,17 @@
   "swagger": "2.0",
   "info": {
     "title": "SharedImageGalleryServiceClient",
-    "description": "Shared Image Gallery Service Client.",
-    "version": "2023-07-03"
+    "version": "2023-07-03",
+    "description": "Shared Image Gallery Service Client."
   },
-  "host": "management.azure.com",
   "schemes": [
     "https"
   ],
-  "consumes": [
+  "host": "management.azure.com",
+  "produces": [
     "application/json"
   ],
-  "produces": [
+  "consumes": [
     "application/json"
   ],
   "security": [
@@ -25,425 +25,25 @@
   "securityDefinitions": {
     "azure_auth": {
       "type": "oauth2",
-      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
-      "flow": "implicit",
       "description": "Azure Active Directory OAuth2 Flow",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
       "scopes": {
         "user_impersonation": "impersonate your user account"
       }
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/galleries/{galleryName}": {
-      "put": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/galleries": {
+      "get": {
+        "operationId": "Galleries_List",
         "tags": [
           "Galleries"
         ],
-        "operationId": "Galleries_CreateOrUpdate",
-        "description": "Create or update a Shared Image Gallery.",
+        "description": "List galleries under a subscription.",
         "parameters": [
           {
             "$ref": "../../../common-types/v1/common.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "galleryName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Shared Image Gallery. The allowed characters are alphabets and numbers with dots and periods allowed in the middle. The maximum length is 80 characters."
-          },
-          {
-            "$ref": "../../../common-types/v1/common.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "name": "gallery",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/Gallery"
-            },
-            "description": "Parameters supplied to the create or update Shared Image Gallery operation."
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/Gallery"
-            }
-          },
-          "201": {
-            "description": "Created",
-            "schema": {
-              "$ref": "#/definitions/Gallery"
-            }
-          },
-          "202": {
-            "description": "Accepted",
-            "schema": {
-              "$ref": "#/definitions/Gallery"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../common-types/v1/common.json#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "Create or update a simple gallery.": {
-            "$ref": "./examples/galleryExamples/Gallery_Create.json"
-          },
-          "Create or update a simple gallery with sharing profile.": {
-            "$ref": "./examples/galleryExamples/Gallery_Create_WithSharingProfile.json"
-          },
-          "Create or update a simple gallery with soft deletion enabled.": {
-            "$ref": "./examples/galleryExamples/Gallery_Create_SoftDeletionEnabled.json"
-          },
-          "Create a community gallery.": {
-            "$ref": "./examples/galleryExamples/CommunityGallery_Create.json"
-          }
-        }
-      },
-      "patch": {
-        "tags": [
-          "Galleries"
-        ],
-        "operationId": "Galleries_Update",
-        "description": "Update a Shared Image Gallery.",
-        "parameters": [
-          {
-            "$ref": "../../../common-types/v1/common.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "galleryName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Shared Image Gallery. The allowed characters are alphabets and numbers with dots and periods allowed in the middle. The maximum length is 80 characters."
-          },
-          {
-            "$ref": "../../../common-types/v1/common.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "name": "gallery",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/GalleryUpdate"
-            },
-            "description": "Parameters supplied to the update Shared Image Gallery operation."
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/Gallery"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../common-types/v1/common.json#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "Update a simple gallery.": {
-            "$ref": "./examples/galleryExamples/Gallery_Update.json"
-          }
-        }
-      },
-      "get": {
-        "tags": [
-          "Galleries"
-        ],
-        "operationId": "Galleries_Get",
-        "description": "Retrieves information about a Shared Image Gallery.",
-        "parameters": [
-          {
-            "$ref": "../../../common-types/v1/common.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "galleryName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Shared Image Gallery."
-          },
-          {
-            "$ref": "../../../common-types/v1/common.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "name": "$select",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "description": "The select expression to apply on the operation.",
-            "enum": [
-              "Permissions"
-            ],
-            "x-ms-enum": {
-              "name": "SelectPermissions",
-              "modelAsString": true
-            }
-          },
-          {
-            "$ref": "#/parameters/GalleryODataExpandQueryParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/Gallery"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../common-types/v1/common.json#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get a gallery.": {
-            "$ref": "./examples/galleryExamples/Gallery_Get.json"
-          },
-          "Get a gallery with select permissions.": {
-            "$ref": "./examples/galleryExamples/Gallery_Get_WithSelectPermissions.json"
-          },
-          "Get a gallery with expand sharingProfile groups.": {
-            "$ref": "./examples/galleryExamples/Gallery_Get_WithExpandSharingProfileGroups.json"
-          },
-          "Get a community gallery.": {
-            "$ref": "./examples/galleryExamples/CommunityGallery_Get.json"
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "Galleries"
-        ],
-        "operationId": "Galleries_Delete",
-        "description": "Delete a Shared Image Gallery.",
-        "parameters": [
-          {
-            "$ref": "../../../common-types/v1/common.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "galleryName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Shared Image Gallery to be deleted."
-          },
-          {
-            "$ref": "../../../common-types/v1/common.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "202": {
-            "description": "Accepted"
-          },
-          "204": {
-            "description": "No Content"
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../common-types/v1/common.json#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "Delete a gallery.": {
-            "$ref": "./examples/galleryExamples/Gallery_Delete.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/galleries/{galleryName}/images/{galleryImageName}": {
-      "put": {
-        "tags": [
-          "GalleryImages"
-        ],
-        "operationId": "GalleryImages_CreateOrUpdate",
-        "description": "Create or update a gallery image definition.",
-        "parameters": [
-          {
-            "$ref": "../../../common-types/v1/common.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "galleryName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Shared Image Gallery in which the Image Definition is to be created."
-          },
-          {
-            "name": "galleryImageName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the gallery image definition to be created or updated. The allowed characters are alphabets and numbers with dots, dashes, and periods allowed in the middle. The maximum length is 80 characters."
-          },
-          {
-            "$ref": "../../../common-types/v1/common.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "name": "galleryImage",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/GalleryImage"
-            },
-            "description": "Parameters supplied to the create or update gallery image operation."
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/GalleryImage"
-            }
-          },
-          "201": {
-            "description": "Created",
-            "schema": {
-              "$ref": "#/definitions/GalleryImage"
-            }
-          },
-          "202": {
-            "description": "Accepted",
-            "schema": {
-              "$ref": "#/definitions/GalleryImage"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../common-types/v1/common.json#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "Create or update a simple gallery image.": {
-            "$ref": "./examples/galleryExamples/GalleryImage_Create.json"
-          }
-        }
-      },
-      "patch": {
-        "tags": [
-          "GalleryImages"
-        ],
-        "operationId": "GalleryImages_Update",
-        "description": "Update a gallery image definition.",
-        "parameters": [
-          {
-            "$ref": "../../../common-types/v1/common.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "galleryName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Shared Image Gallery in which the Image Definition is to be updated."
-          },
-          {
-            "name": "galleryImageName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the gallery image definition to be updated. The allowed characters are alphabets and numbers with dots, dashes, and periods allowed in the middle. The maximum length is 80 characters."
-          },
-          {
-            "$ref": "../../../common-types/v1/common.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "name": "galleryImage",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/GalleryImageUpdate"
-            },
-            "description": "Parameters supplied to the update gallery image operation."
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/GalleryImage"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../common-types/v1/common.json#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "Update a simple gallery image.": {
-            "$ref": "./examples/galleryExamples/GalleryImage_Update.json"
-          }
-        }
-      },
-      "get": {
-        "tags": [
-          "GalleryImages"
-        ],
-        "operationId": "GalleryImages_Get",
-        "description": "Retrieves information about a gallery image definition.",
-        "parameters": [
-          {
-            "$ref": "../../../common-types/v1/common.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "galleryName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Shared Image Gallery from which the Image Definitions are to be retrieved."
-          },
-          {
-            "name": "galleryImageName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the gallery image definition to be retrieved."
           },
           {
             "$ref": "../../../common-types/v1/common.json#/parameters/ApiVersionParameter"
@@ -453,7 +53,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/GalleryImage"
+              "$ref": "#/definitions/GalleryList"
             }
           },
           "default": {
@@ -464,927 +64,21 @@
           }
         },
         "x-ms-examples": {
-          "Get a gallery image.": {
-            "$ref": "./examples/galleryExamples/GalleryImage_Get.json"
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "GalleryImages"
-        ],
-        "operationId": "GalleryImages_Delete",
-        "description": "Delete a gallery image.",
-        "parameters": [
-          {
-            "$ref": "../../../common-types/v1/common.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "galleryName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Shared Image Gallery in which the Image Definition is to be deleted."
-          },
-          {
-            "name": "galleryImageName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the gallery image definition to be deleted."
-          },
-          {
-            "$ref": "../../../common-types/v1/common.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "202": {
-            "description": "Accepted"
-          },
-          "204": {
-            "description": "No Content"
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../common-types/v1/common.json#/definitions/CloudError"
-            }
+          "List galleries in a subscription.": {
+            "$ref": "./examples/galleryExamples/Gallery_ListBySubscription.json"
           }
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "Delete a gallery image.": {
-            "$ref": "./examples/galleryExamples/GalleryImage_Delete.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/galleries/{galleryName}/images/{galleryImageName}/versions/{galleryImageVersionName}": {
-      "put": {
-        "tags": [
-          "GalleryImageVersions"
-        ],
-        "operationId": "GalleryImageVersions_CreateOrUpdate",
-        "description": "Create or update a gallery image version.",
-        "parameters": [
-          {
-            "$ref": "../../../common-types/v1/common.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "galleryName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Shared Image Gallery in which the Image Definition resides."
-          },
-          {
-            "name": "galleryImageName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the gallery image definition in which the Image Version is to be created."
-          },
-          {
-            "name": "galleryImageVersionName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the gallery image version to be created. Needs to follow semantic version name pattern: The allowed characters are digit and period. Digits must be within the range of a 32-bit integer. Format: <MajorVersion>.<MinorVersion>.<Patch>"
-          },
-          {
-            "$ref": "../../../common-types/v1/common.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "name": "galleryImageVersion",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/GalleryImageVersion"
-            },
-            "description": "Parameters supplied to the create or update gallery image version operation."
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/GalleryImageVersion"
-            }
-          },
-          "201": {
-            "description": "Created",
-            "schema": {
-              "$ref": "#/definitions/GalleryImageVersion"
-            }
-          },
-          "202": {
-            "description": "Accepted",
-            "schema": {
-              "$ref": "#/definitions/GalleryImageVersion"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../common-types/v1/common.json#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "Create or update a simple Gallery Image Version using managed image as source.": {
-            "$ref": "./examples/galleryExamples/GalleryImageVersion_Create.json"
-          },
-          "Create or update a simple Gallery Image Version using snapshots as a source.": {
-            "$ref": "./examples/galleryExamples/GalleryImageVersion_Create_WithSnapshotsAsSource.json"
-          },
-          "Create or update a simple Gallery Image Version using VM as source.": {
-            "$ref": "./examples/galleryExamples/GalleryImageVersion_Create_WithVmAsSource.json"
-          },
-          "Create or update a simple Gallery Image Version using shared image as source.": {
-            "$ref": "./examples/galleryExamples/GalleryImageVersion_Create_WithImageVersionAsSource.json"
-          },
-          "Create or update a simple Gallery Image Version using community gallery image as source.": {
-            "$ref": "./examples/galleryExamples/GalleryImageVersion_Create_WithCommunityImageVersionAsSource.json"
-          },
-          "Create or update a simple Gallery Image Version using mix of disks and snapshots as a source.": {
-            "$ref": "./examples/galleryExamples/GalleryImageVersion_Create_WithSnapshotsAsSource.json"
-          },
-          "Create or update a simple Gallery Image Version using vhd as a source.": {
-            "$ref": "./examples/galleryExamples/GalleryImageVersion_Create_WithVHD.json"
-          },
-          "Create or update a simple Gallery Image Version using shallow replication mode.": {
-            "$ref": "./examples/galleryExamples/GalleryImageVersion_Create_WithShallowReplicationMode.json"
-          },
-          "Create or update a simple gallery image version with target extended locations specified.": {
-            "$ref": "./examples/galleryExamples/GalleryImageVersion_Create_WithTargetExtendedLocations.json"
-          },
-          "Create or update a simple Gallery Image Version using vhd as a source with custom UEFI keys.": {
-            "$ref": "./examples/galleryExamples/GalleryImageVersion_Create_WithVHD_UefiSettings.json"
-          }
-        }
-      },
-      "patch": {
-        "tags": [
-          "GalleryImageVersions"
-        ],
-        "operationId": "GalleryImageVersions_Update",
-        "description": "Update a gallery image version.",
-        "parameters": [
-          {
-            "$ref": "../../../common-types/v1/common.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "galleryName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Shared Image Gallery in which the Image Definition resides."
-          },
-          {
-            "name": "galleryImageName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the gallery image definition in which the Image Version is to be updated."
-          },
-          {
-            "name": "galleryImageVersionName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the gallery image version to be updated. Needs to follow semantic version name pattern: The allowed characters are digit and period. Digits must be within the range of a 32-bit integer. Format: <MajorVersion>.<MinorVersion>.<Patch>"
-          },
-          {
-            "$ref": "../../../common-types/v1/common.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "name": "galleryImageVersion",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/GalleryImageVersionUpdate"
-            },
-            "description": "Parameters supplied to the update gallery image version operation."
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/GalleryImageVersion"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../common-types/v1/common.json#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "Update a simple Gallery Image Version (Managed Image as source).": {
-            "$ref": "./examples/galleryExamples/GalleryImageVersion_Update.json"
-          },
-          "Update a simple Gallery Image Version without source id.": {
-            "$ref": "./examples/galleryExamples/GalleryImageVersion_Update_WithoutSourceId.json"
-          }
-        }
-      },
-      "get": {
-        "tags": [
-          "GalleryImageVersions"
-        ],
-        "operationId": "GalleryImageVersions_Get",
-        "description": "Retrieves information about a gallery image version.",
-        "parameters": [
-          {
-            "$ref": "../../../common-types/v1/common.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "galleryName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Shared Image Gallery in which the Image Definition resides."
-          },
-          {
-            "name": "galleryImageName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the gallery image definition in which the Image Version resides."
-          },
-          {
-            "name": "galleryImageVersionName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the gallery image version to be retrieved."
-          },
-          {
-            "name": "$expand",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "description": "The expand expression to apply on the operation.",
-            "enum": [
-              "ReplicationStatus",
-              "UefiSettings"
-            ],
-            "x-ms-enum": {
-              "name": "ReplicationStatusTypes",
-              "modelAsString": true
-            }
-          },
-          {
-            "$ref": "../../../common-types/v1/common.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/GalleryImageVersion"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../common-types/v1/common.json#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get a gallery image version.": {
-            "$ref": "./examples/galleryExamples/GalleryImageVersion_Get.json"
-          },
-          "Get a gallery image version with replication status.": {
-            "$ref": "./examples/galleryExamples/GalleryImageVersion_Get_WithReplicationStatus.json"
-          },
-          "Get a gallery image version with snapshots as a source.": {
-            "$ref": "./examples/galleryExamples/GalleryImageVersion_Get_WithSnapshotsAsSource.json"
-          },
-          "Get a gallery image version with vhd as a source.": {
-            "$ref": "./examples/galleryExamples/GalleryImageVersion_Get_WithVhdAsSource.json"
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "GalleryImageVersions"
-        ],
-        "operationId": "GalleryImageVersions_Delete",
-        "description": "Delete a gallery image version.",
-        "parameters": [
-          {
-            "$ref": "../../../common-types/v1/common.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "galleryName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Shared Image Gallery in which the Image Definition resides."
-          },
-          {
-            "name": "galleryImageName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the gallery image definition in which the Image Version resides."
-          },
-          {
-            "name": "galleryImageVersionName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the gallery image version to be deleted."
-          },
-          {
-            "$ref": "../../../common-types/v1/common.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "202": {
-            "description": "Accepted"
-          },
-          "204": {
-            "description": "No Content"
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../common-types/v1/common.json#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "Delete a gallery image version.": {
-            "$ref": "./examples/galleryExamples/GalleryImageVersion_Delete.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/galleries/{galleryName}/applications/{galleryApplicationName}": {
-      "put": {
-        "tags": [
-          "GalleryApplications"
-        ],
-        "operationId": "GalleryApplications_CreateOrUpdate",
-        "description": "Create or update a gallery Application Definition.",
-        "parameters": [
-          {
-            "$ref": "../../../common-types/v1/common.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "galleryName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Shared Application Gallery in which the Application Definition is to be created."
-          },
-          {
-            "name": "galleryApplicationName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the gallery Application Definition to be created or updated. The allowed characters are alphabets and numbers with dots, dashes, and periods allowed in the middle. The maximum length is 80 characters."
-          },
-          {
-            "$ref": "../../../common-types/v1/common.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "name": "galleryApplication",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/GalleryApplication"
-            },
-            "description": "Parameters supplied to the create or update gallery Application operation."
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/GalleryApplication"
-            }
-          },
-          "201": {
-            "description": "Created",
-            "schema": {
-              "$ref": "#/definitions/GalleryApplication"
-            }
-          },
-          "202": {
-            "description": "Accepted",
-            "schema": {
-              "$ref": "#/definitions/GalleryApplication"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../common-types/v1/common.json#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "Create or update a simple gallery Application.": {
-            "$ref": "./examples/galleryExamples/GalleryApplication_Create.json"
-          }
-        }
-      },
-      "patch": {
-        "tags": [
-          "GalleryApplications"
-        ],
-        "operationId": "GalleryApplications_Update",
-        "description": "Update a gallery Application Definition.",
-        "parameters": [
-          {
-            "$ref": "../../../common-types/v1/common.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "galleryName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Shared Application Gallery in which the Application Definition is to be updated."
-          },
-          {
-            "name": "galleryApplicationName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the gallery Application Definition to be updated. The allowed characters are alphabets and numbers with dots, dashes, and periods allowed in the middle. The maximum length is 80 characters."
-          },
-          {
-            "$ref": "../../../common-types/v1/common.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "name": "galleryApplication",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/GalleryApplicationUpdate"
-            },
-            "description": "Parameters supplied to the update gallery Application operation."
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/GalleryApplication"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../common-types/v1/common.json#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "Update a simple gallery Application.": {
-            "$ref": "./examples/galleryExamples/GalleryApplication_Update.json"
-          }
-        }
-      },
-      "get": {
-        "tags": [
-          "GalleryApplications"
-        ],
-        "operationId": "GalleryApplications_Get",
-        "description": "Retrieves information about a gallery Application Definition.",
-        "parameters": [
-          {
-            "$ref": "../../../common-types/v1/common.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "galleryName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Shared Application Gallery from which the Application Definitions are to be retrieved."
-          },
-          {
-            "name": "galleryApplicationName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the gallery Application Definition to be retrieved."
-          },
-          {
-            "$ref": "../../../common-types/v1/common.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/GalleryApplication"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../common-types/v1/common.json#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get a gallery Application.": {
-            "$ref": "./examples/galleryExamples/GalleryApplication_Get.json"
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "GalleryApplications"
-        ],
-        "operationId": "GalleryApplications_Delete",
-        "description": "Delete a gallery Application.",
-        "parameters": [
-          {
-            "$ref": "../../../common-types/v1/common.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "galleryName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Shared Application Gallery in which the Application Definition is to be deleted."
-          },
-          {
-            "name": "galleryApplicationName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the gallery Application Definition to be deleted."
-          },
-          {
-            "$ref": "../../../common-types/v1/common.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "202": {
-            "description": "Accepted"
-          },
-          "204": {
-            "description": "No Content"
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../common-types/v1/common.json#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "Delete a gallery Application.": {
-            "$ref": "./examples/galleryExamples/GalleryApplication_Delete.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/galleries/{galleryName}/applications/{galleryApplicationName}/versions/{galleryApplicationVersionName}": {
-      "put": {
-        "tags": [
-          "GalleryApplicationVersions"
-        ],
-        "operationId": "GalleryApplicationVersions_CreateOrUpdate",
-        "description": "Create or update a gallery Application Version.",
-        "parameters": [
-          {
-            "$ref": "../../../common-types/v1/common.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "galleryName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Shared Application Gallery in which the Application Definition resides."
-          },
-          {
-            "name": "galleryApplicationName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the gallery Application Definition in which the Application Version is to be created."
-          },
-          {
-            "name": "galleryApplicationVersionName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the gallery Application Version to be created. Needs to follow semantic version name pattern: The allowed characters are digit and period. Digits must be within the range of a 32-bit integer. Format: <MajorVersion>.<MinorVersion>.<Patch>"
-          },
-          {
-            "$ref": "../../../common-types/v1/common.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "name": "galleryApplicationVersion",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/GalleryApplicationVersion"
-            },
-            "description": "Parameters supplied to the create or update gallery Application Version operation."
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/GalleryApplicationVersion"
-            }
-          },
-          "201": {
-            "description": "Created",
-            "schema": {
-              "$ref": "#/definitions/GalleryApplicationVersion"
-            }
-          },
-          "202": {
-            "description": "Accepted",
-            "schema": {
-              "$ref": "#/definitions/GalleryApplicationVersion"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../common-types/v1/common.json#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "Create or update a simple gallery Application Version.": {
-            "$ref": "./examples/galleryExamples/GalleryApplicationVersion_Create.json"
-          }
-        }
-      },
-      "patch": {
-        "tags": [
-          "GalleryApplicationVersions"
-        ],
-        "operationId": "GalleryApplicationVersions_Update",
-        "description": "Update a gallery Application Version.",
-        "parameters": [
-          {
-            "$ref": "../../../common-types/v1/common.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "galleryName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Shared Application Gallery in which the Application Definition resides."
-          },
-          {
-            "name": "galleryApplicationName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the gallery Application Definition in which the Application Version is to be updated."
-          },
-          {
-            "name": "galleryApplicationVersionName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the gallery Application Version to be updated. Needs to follow semantic version name pattern: The allowed characters are digit and period. Digits must be within the range of a 32-bit integer. Format: <MajorVersion>.<MinorVersion>.<Patch>"
-          },
-          {
-            "$ref": "../../../common-types/v1/common.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "name": "galleryApplicationVersion",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/GalleryApplicationVersionUpdate"
-            },
-            "description": "Parameters supplied to the update gallery Application Version operation."
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/GalleryApplicationVersion"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../common-types/v1/common.json#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "Update a simple gallery Application Version.": {
-            "$ref": "./examples/galleryExamples/GalleryApplicationVersion_Update.json"
-          }
-        }
-      },
-      "get": {
-        "tags": [
-          "GalleryApplicationVersions"
-        ],
-        "operationId": "GalleryApplicationVersions_Get",
-        "description": "Retrieves information about a gallery Application Version.",
-        "parameters": [
-          {
-            "$ref": "../../../common-types/v1/common.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "galleryName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Shared Application Gallery in which the Application Definition resides."
-          },
-          {
-            "name": "galleryApplicationName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the gallery Application Definition in which the Application Version resides."
-          },
-          {
-            "name": "galleryApplicationVersionName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the gallery Application Version to be retrieved."
-          },
-          {
-            "name": "$expand",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "description": "The expand expression to apply on the operation.",
-            "enum": [
-              "ReplicationStatus",
-              "UefiSettings"
-            ],
-            "x-ms-enum": {
-              "name": "ReplicationStatusTypes",
-              "modelAsString": true
-            }
-          },
-          {
-            "$ref": "../../../common-types/v1/common.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/GalleryApplicationVersion"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../common-types/v1/common.json#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get a gallery Application Version.": {
-            "$ref": "./examples/galleryExamples/GalleryApplicationVersion_Get.json"
-          },
-          "Get a gallery Application Version with replication status.": {
-            "$ref": "./examples/galleryExamples/GalleryApplicationVersion_Get_WithReplicationStatus.json"
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "GalleryApplicationVersions"
-        ],
-        "operationId": "GalleryApplicationVersions_Delete",
-        "description": "Delete a gallery Application Version.",
-        "parameters": [
-          {
-            "$ref": "../../../common-types/v1/common.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "galleryName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Shared Application Gallery in which the Application Definition resides."
-          },
-          {
-            "name": "galleryApplicationName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the gallery Application Definition in which the Application Version resides."
-          },
-          {
-            "name": "galleryApplicationVersionName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the gallery Application Version to be deleted."
-          },
-          {
-            "$ref": "../../../common-types/v1/common.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "202": {
-            "description": "Accepted"
-          },
-          "204": {
-            "description": "No Content"
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../common-types/v1/common.json#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "Delete a gallery Application Version.": {
-            "$ref": "./examples/galleryExamples/GalleryApplicationVersion_Delete.json"
-          }
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/galleries": {
       "get": {
+        "operationId": "Galleries_ListByResourceGroup",
         "tags": [
           "Galleries"
         ],
-        "operationId": "Galleries_ListByResourceGroup",
         "description": "List galleries under a resource group.",
         "parameters": [
           {
@@ -1421,52 +115,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/galleries": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/galleries/{galleryName}": {
       "get": {
+        "operationId": "Galleries_Get",
         "tags": [
           "Galleries"
         ],
-        "operationId": "Galleries_List",
-        "description": "List galleries under a subscription.",
-        "parameters": [
-          {
-            "$ref": "../../../common-types/v1/common.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../common-types/v1/common.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/GalleryList"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../common-types/v1/common.json#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "List galleries in a subscription.": {
-            "$ref": "./examples/galleryExamples/Gallery_ListBySubscription.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/galleries/{galleryName}/images": {
-      "get": {
-        "tags": [
-          "GalleryImages"
-        ],
-        "operationId": "GalleryImages_ListByGallery",
-        "description": "List gallery image definitions in a gallery.",
+        "description": "Retrieves information about a Shared Image Gallery.",
         "parameters": [
           {
             "$ref": "../../../common-types/v1/common.json#/parameters/SubscriptionIdParameter"
@@ -1477,19 +132,36 @@
           {
             "name": "galleryName",
             "in": "path",
+            "description": "The name of the Shared Image Gallery.",
             "required": true,
-            "type": "string",
-            "description": "The name of the Shared Image Gallery from which Image Definitions are to be listed."
+            "type": "string"
           },
           {
             "$ref": "../../../common-types/v1/common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "The select expression to apply on the operation.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "Permissions"
+            ],
+            "x-ms-enum": {
+              "name": "SelectPermissions",
+              "modelAsString": true
+            }
+          },
+          {
+            "$ref": "#/parameters/GalleryODataExpandQueryParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/GalleryImageList"
+              "$ref": "#/definitions/Gallery"
             }
           },
           "default": {
@@ -1500,22 +172,26 @@
           }
         },
         "x-ms-examples": {
-          "List gallery images in a gallery.": {
-            "$ref": "./examples/galleryExamples/GalleryImage_ListByGallery.json"
+          "Get a community gallery.": {
+            "$ref": "./examples/galleryExamples/CommunityGallery_Get.json"
+          },
+          "Get a gallery with expand sharingProfile groups.": {
+            "$ref": "./examples/galleryExamples/Gallery_Get_WithExpandSharingProfileGroups.json"
+          },
+          "Get a gallery with select permissions.": {
+            "$ref": "./examples/galleryExamples/Gallery_Get_WithSelectPermissions.json"
+          },
+          "Get a gallery.": {
+            "$ref": "./examples/galleryExamples/Gallery_Get.json"
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/galleries/{galleryName}/images/{galleryImageName}/versions": {
-      "get": {
+      },
+      "put": {
+        "operationId": "Galleries_CreateOrUpdate",
         "tags": [
-          "GalleryImageVersions"
+          "Galleries"
         ],
-        "operationId": "GalleryImageVersions_ListByGalleryImage",
-        "description": "List gallery image versions in a gallery image definition.",
+        "description": "Create or update a Shared Image Gallery.",
         "parameters": [
           {
             "$ref": "../../../common-types/v1/common.json#/parameters/SubscriptionIdParameter"
@@ -1526,26 +202,40 @@
           {
             "name": "galleryName",
             "in": "path",
+            "description": "The name of the Shared Image Gallery. The allowed characters are alphabets and numbers with dots and periods allowed in the middle. The maximum length is 80 characters.",
             "required": true,
-            "type": "string",
-            "description": "The name of the Shared Image Gallery in which the Image Definition resides."
-          },
-          {
-            "name": "galleryImageName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Shared Image Gallery Image Definition from which the Image Versions are to be listed."
+            "type": "string"
           },
           {
             "$ref": "../../../common-types/v1/common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "gallery",
+            "in": "body",
+            "description": "Parameters supplied to the create or update Shared Image Gallery operation.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Gallery"
+            }
           }
         ],
         "responses": {
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/GalleryImageVersionList"
+              "$ref": "#/definitions/Gallery"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/Gallery"
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "schema": {
+              "$ref": "#/definitions/Gallery"
             }
           },
           "default": {
@@ -1556,21 +246,130 @@
           }
         },
         "x-ms-examples": {
-          "List gallery image versions in a gallery image definition.": {
-            "$ref": "./examples/galleryExamples/GalleryImageVersion_ListByGalleryImage.json"
+          "Create a community gallery.": {
+            "$ref": "./examples/galleryExamples/CommunityGallery_Create.json"
+          },
+          "Create or update a simple gallery with sharing profile.": {
+            "$ref": "./examples/galleryExamples/Gallery_Create_WithSharingProfile.json"
+          },
+          "Create or update a simple gallery with soft deletion enabled.": {
+            "$ref": "./examples/galleryExamples/Gallery_Create_SoftDeletionEnabled.json"
+          },
+          "Create or update a simple gallery.": {
+            "$ref": "./examples/galleryExamples/Gallery_Create.json"
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "Galleries_Update",
+        "tags": [
+          "Galleries"
+        ],
+        "description": "Update a Shared Image Gallery.",
+        "parameters": [
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "galleryName",
+            "in": "path",
+            "description": "The name of the Shared Image Gallery. The allowed characters are alphabets and numbers with dots and periods allowed in the middle. The maximum length is 80 characters.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "gallery",
+            "in": "body",
+            "description": "Parameters supplied to the update Shared Image Gallery operation.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GalleryUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Gallery"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common-types/v1/common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update a simple gallery.": {
+            "$ref": "./examples/galleryExamples/Gallery_Update.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "Galleries_Delete",
+        "tags": [
+          "Galleries"
+        ],
+        "description": "Delete a Shared Image Gallery.",
+        "parameters": [
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "galleryName",
+            "in": "path",
+            "description": "The name of the Shared Image Gallery to be deleted.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common-types/v1/common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a gallery.": {
+            "$ref": "./examples/galleryExamples/Gallery_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/galleries/{galleryName}/applications": {
       "get": {
+        "operationId": "GalleryApplications_ListByGallery",
         "tags": [
           "GalleryApplications"
         ],
-        "operationId": "GalleryApplications_ListByGallery",
         "description": "List gallery Application Definitions in a gallery.",
         "parameters": [
           {
@@ -1582,9 +381,9 @@
           {
             "name": "galleryName",
             "in": "path",
+            "description": "The name of the Shared Application Gallery from which Application Definitions are to be listed.",
             "required": true,
-            "type": "string",
-            "description": "The name of the Shared Application Gallery from which Application Definitions are to be listed."
+            "type": "string"
           },
           {
             "$ref": "../../../common-types/v1/common.json#/parameters/ApiVersionParameter"
@@ -1614,12 +413,254 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/galleries/{galleryName}/applications/{galleryApplicationName}": {
+      "get": {
+        "operationId": "GalleryApplications_Get",
+        "tags": [
+          "GalleryApplications"
+        ],
+        "description": "Retrieves information about a gallery Application Definition.",
+        "parameters": [
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "galleryName",
+            "in": "path",
+            "description": "The name of the Shared Application Gallery from which the Application Definitions are to be retrieved.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "galleryApplicationName",
+            "in": "path",
+            "description": "The name of the gallery Application Definition to be retrieved.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/GalleryApplication"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common-types/v1/common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a gallery Application.": {
+            "$ref": "./examples/galleryExamples/GalleryApplication_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "GalleryApplications_CreateOrUpdate",
+        "tags": [
+          "GalleryApplications"
+        ],
+        "description": "Create or update a gallery Application Definition.",
+        "parameters": [
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "galleryName",
+            "in": "path",
+            "description": "The name of the Shared Application Gallery in which the Application Definition is to be created.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "galleryApplicationName",
+            "in": "path",
+            "description": "The name of the gallery Application Definition to be created or updated. The allowed characters are alphabets and numbers with dots, dashes, and periods allowed in the middle. The maximum length is 80 characters.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "galleryApplication",
+            "in": "body",
+            "description": "Parameters supplied to the create or update gallery Application operation.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GalleryApplication"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/GalleryApplication"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/GalleryApplication"
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "schema": {
+              "$ref": "#/definitions/GalleryApplication"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common-types/v1/common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or update a simple gallery Application.": {
+            "$ref": "./examples/galleryExamples/GalleryApplication_Create.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "GalleryApplications_Update",
+        "tags": [
+          "GalleryApplications"
+        ],
+        "description": "Update a gallery Application Definition.",
+        "parameters": [
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "galleryName",
+            "in": "path",
+            "description": "The name of the Shared Application Gallery in which the Application Definition is to be updated.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "galleryApplicationName",
+            "in": "path",
+            "description": "The name of the gallery Application Definition to be updated. The allowed characters are alphabets and numbers with dots, dashes, and periods allowed in the middle. The maximum length is 80 characters.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "galleryApplication",
+            "in": "body",
+            "description": "Parameters supplied to the update gallery Application operation.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GalleryApplicationUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/GalleryApplication"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common-types/v1/common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update a simple gallery Application.": {
+            "$ref": "./examples/galleryExamples/GalleryApplication_Update.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "GalleryApplications_Delete",
+        "tags": [
+          "GalleryApplications"
+        ],
+        "description": "Delete a gallery Application.",
+        "parameters": [
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "galleryName",
+            "in": "path",
+            "description": "The name of the Shared Application Gallery in which the Application Definition is to be deleted.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "galleryApplicationName",
+            "in": "path",
+            "description": "The name of the gallery Application Definition to be deleted.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common-types/v1/common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a gallery Application.": {
+            "$ref": "./examples/galleryExamples/GalleryApplication_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/galleries/{galleryName}/applications/{galleryApplicationName}/versions": {
       "get": {
+        "operationId": "GalleryApplicationVersions_ListByGalleryApplication",
         "tags": [
           "GalleryApplicationVersions"
         ],
-        "operationId": "GalleryApplicationVersions_ListByGalleryApplication",
         "description": "List gallery Application Versions in a gallery Application Definition.",
         "parameters": [
           {
@@ -1631,16 +672,16 @@
           {
             "name": "galleryName",
             "in": "path",
+            "description": "The name of the Shared Application Gallery in which the Application Definition resides.",
             "required": true,
-            "type": "string",
-            "description": "The name of the Shared Application Gallery in which the Application Definition resides."
+            "type": "string"
           },
           {
             "name": "galleryApplicationName",
             "in": "path",
+            "description": "The name of the Shared Application Gallery Application Definition from which the Application Versions are to be listed.",
             "required": true,
-            "type": "string",
-            "description": "The name of the Shared Application Gallery Application Definition from which the Application Versions are to be listed."
+            "type": "string"
           },
           {
             "$ref": "../../../common-types/v1/common.json#/parameters/ApiVersionParameter"
@@ -1670,12 +711,971 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/galleries/{galleryName}/applications/{galleryApplicationName}/versions/{galleryApplicationVersionName}": {
+      "get": {
+        "operationId": "GalleryApplicationVersions_Get",
+        "tags": [
+          "GalleryApplicationVersions"
+        ],
+        "description": "Retrieves information about a gallery Application Version.",
+        "parameters": [
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "galleryName",
+            "in": "path",
+            "description": "The name of the Shared Application Gallery in which the Application Definition resides.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "galleryApplicationName",
+            "in": "path",
+            "description": "The name of the gallery Application Definition in which the Application Version resides.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "galleryApplicationVersionName",
+            "in": "path",
+            "description": "The name of the gallery Application Version to be retrieved.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "The expand expression to apply on the operation.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "ReplicationStatus",
+              "UefiSettings"
+            ],
+            "x-ms-enum": {
+              "name": "ReplicationStatusTypes",
+              "modelAsString": true
+            }
+          },
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/GalleryApplicationVersion"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common-types/v1/common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a gallery Application Version with replication status.": {
+            "$ref": "./examples/galleryExamples/GalleryApplicationVersion_Get_WithReplicationStatus.json"
+          },
+          "Get a gallery Application Version.": {
+            "$ref": "./examples/galleryExamples/GalleryApplicationVersion_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "GalleryApplicationVersions_CreateOrUpdate",
+        "tags": [
+          "GalleryApplicationVersions"
+        ],
+        "description": "Create or update a gallery Application Version.",
+        "parameters": [
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "galleryName",
+            "in": "path",
+            "description": "The name of the Shared Application Gallery in which the Application Definition resides.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "galleryApplicationName",
+            "in": "path",
+            "description": "The name of the gallery Application Definition in which the Application Version is to be created.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "galleryApplicationVersionName",
+            "in": "path",
+            "description": "The name of the gallery Application Version to be created. Needs to follow semantic version name pattern: The allowed characters are digit and period. Digits must be within the range of a 32-bit integer. Format: <MajorVersion>.<MinorVersion>.<Patch>",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "galleryApplicationVersion",
+            "in": "body",
+            "description": "Parameters supplied to the create or update gallery Application Version operation.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GalleryApplicationVersion"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/GalleryApplicationVersion"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/GalleryApplicationVersion"
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "schema": {
+              "$ref": "#/definitions/GalleryApplicationVersion"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common-types/v1/common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or update a simple gallery Application Version.": {
+            "$ref": "./examples/galleryExamples/GalleryApplicationVersion_Create.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "GalleryApplicationVersions_Update",
+        "tags": [
+          "GalleryApplicationVersions"
+        ],
+        "description": "Update a gallery Application Version.",
+        "parameters": [
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "galleryName",
+            "in": "path",
+            "description": "The name of the Shared Application Gallery in which the Application Definition resides.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "galleryApplicationName",
+            "in": "path",
+            "description": "The name of the gallery Application Definition in which the Application Version is to be updated.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "galleryApplicationVersionName",
+            "in": "path",
+            "description": "The name of the gallery Application Version to be updated. Needs to follow semantic version name pattern: The allowed characters are digit and period. Digits must be within the range of a 32-bit integer. Format: <MajorVersion>.<MinorVersion>.<Patch>",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "galleryApplicationVersion",
+            "in": "body",
+            "description": "Parameters supplied to the update gallery Application Version operation.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GalleryApplicationVersionUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/GalleryApplicationVersion"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common-types/v1/common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update a simple gallery Application Version.": {
+            "$ref": "./examples/galleryExamples/GalleryApplicationVersion_Update.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "GalleryApplicationVersions_Delete",
+        "tags": [
+          "GalleryApplicationVersions"
+        ],
+        "description": "Delete a gallery Application Version.",
+        "parameters": [
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "galleryName",
+            "in": "path",
+            "description": "The name of the Shared Application Gallery in which the Application Definition resides.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "galleryApplicationName",
+            "in": "path",
+            "description": "The name of the gallery Application Definition in which the Application Version resides.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "galleryApplicationVersionName",
+            "in": "path",
+            "description": "The name of the gallery Application Version to be deleted.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common-types/v1/common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a gallery Application Version.": {
+            "$ref": "./examples/galleryExamples/GalleryApplicationVersion_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/galleries/{galleryName}/images": {
+      "get": {
+        "operationId": "GalleryImages_ListByGallery",
+        "tags": [
+          "GalleryImages"
+        ],
+        "description": "List gallery image definitions in a gallery.",
+        "parameters": [
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "galleryName",
+            "in": "path",
+            "description": "The name of the Shared Image Gallery from which Image Definitions are to be listed.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/GalleryImageList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common-types/v1/common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List gallery images in a gallery.": {
+            "$ref": "./examples/galleryExamples/GalleryImage_ListByGallery.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/galleries/{galleryName}/images/{galleryImageName}": {
+      "get": {
+        "operationId": "GalleryImages_Get",
+        "tags": [
+          "GalleryImages"
+        ],
+        "description": "Retrieves information about a gallery image definition.",
+        "parameters": [
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "galleryName",
+            "in": "path",
+            "description": "The name of the Shared Image Gallery from which the Image Definitions are to be retrieved.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "galleryImageName",
+            "in": "path",
+            "description": "The name of the gallery image definition to be retrieved.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/GalleryImage"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common-types/v1/common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a gallery image.": {
+            "$ref": "./examples/galleryExamples/GalleryImage_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "GalleryImages_CreateOrUpdate",
+        "tags": [
+          "GalleryImages"
+        ],
+        "description": "Create or update a gallery image definition.",
+        "parameters": [
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "galleryName",
+            "in": "path",
+            "description": "The name of the Shared Image Gallery in which the Image Definition is to be created.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "galleryImageName",
+            "in": "path",
+            "description": "The name of the gallery image definition to be created or updated. The allowed characters are alphabets and numbers with dots, dashes, and periods allowed in the middle. The maximum length is 80 characters.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "galleryImage",
+            "in": "body",
+            "description": "Parameters supplied to the create or update gallery image operation.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GalleryImage"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/GalleryImage"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/GalleryImage"
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "schema": {
+              "$ref": "#/definitions/GalleryImage"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common-types/v1/common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or update a simple gallery image.": {
+            "$ref": "./examples/galleryExamples/GalleryImage_Create.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "GalleryImages_Update",
+        "tags": [
+          "GalleryImages"
+        ],
+        "description": "Update a gallery image definition.",
+        "parameters": [
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "galleryName",
+            "in": "path",
+            "description": "The name of the Shared Image Gallery in which the Image Definition is to be updated.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "galleryImageName",
+            "in": "path",
+            "description": "The name of the gallery image definition to be updated. The allowed characters are alphabets and numbers with dots, dashes, and periods allowed in the middle. The maximum length is 80 characters.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "galleryImage",
+            "in": "body",
+            "description": "Parameters supplied to the update gallery image operation.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GalleryImageUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/GalleryImage"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common-types/v1/common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update a simple gallery image.": {
+            "$ref": "./examples/galleryExamples/GalleryImage_Update.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "GalleryImages_Delete",
+        "tags": [
+          "GalleryImages"
+        ],
+        "description": "Delete a gallery image.",
+        "parameters": [
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "galleryName",
+            "in": "path",
+            "description": "The name of the Shared Image Gallery in which the Image Definition is to be deleted.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "galleryImageName",
+            "in": "path",
+            "description": "The name of the gallery image definition to be deleted.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common-types/v1/common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a gallery image.": {
+            "$ref": "./examples/galleryExamples/GalleryImage_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/galleries/{galleryName}/images/{galleryImageName}/versions": {
+      "get": {
+        "operationId": "GalleryImageVersions_ListByGalleryImage",
+        "tags": [
+          "GalleryImageVersions"
+        ],
+        "description": "List gallery image versions in a gallery image definition.",
+        "parameters": [
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "galleryName",
+            "in": "path",
+            "description": "The name of the Shared Image Gallery in which the Image Definition resides.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "galleryImageName",
+            "in": "path",
+            "description": "The name of the Shared Image Gallery Image Definition from which the Image Versions are to be listed.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/GalleryImageVersionList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common-types/v1/common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List gallery image versions in a gallery image definition.": {
+            "$ref": "./examples/galleryExamples/GalleryImageVersion_ListByGalleryImage.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/galleries/{galleryName}/images/{galleryImageName}/versions/{galleryImageVersionName}": {
+      "get": {
+        "operationId": "GalleryImageVersions_Get",
+        "tags": [
+          "GalleryImageVersions"
+        ],
+        "description": "Retrieves information about a gallery image version.",
+        "parameters": [
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "galleryName",
+            "in": "path",
+            "description": "The name of the Shared Image Gallery in which the Image Definition resides.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "galleryImageName",
+            "in": "path",
+            "description": "The name of the gallery image definition in which the Image Version resides.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "galleryImageVersionName",
+            "in": "path",
+            "description": "The name of the gallery image version to be retrieved.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "The expand expression to apply on the operation.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "ReplicationStatus",
+              "UefiSettings"
+            ],
+            "x-ms-enum": {
+              "name": "ReplicationStatusTypes",
+              "modelAsString": true
+            }
+          },
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/GalleryImageVersion"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common-types/v1/common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a gallery image version with replication status.": {
+            "$ref": "./examples/galleryExamples/GalleryImageVersion_Get_WithReplicationStatus.json"
+          },
+          "Get a gallery image version with snapshots as a source.": {
+            "$ref": "./examples/galleryExamples/GalleryImageVersion_Get_WithSnapshotsAsSource.json"
+          },
+          "Get a gallery image version with vhd as a source.": {
+            "$ref": "./examples/galleryExamples/GalleryImageVersion_Get_WithVhdAsSource.json"
+          },
+          "Get a gallery image version.": {
+            "$ref": "./examples/galleryExamples/GalleryImageVersion_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "GalleryImageVersions_CreateOrUpdate",
+        "tags": [
+          "GalleryImageVersions"
+        ],
+        "description": "Create or update a gallery image version.",
+        "parameters": [
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "galleryName",
+            "in": "path",
+            "description": "The name of the Shared Image Gallery in which the Image Definition resides.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "galleryImageName",
+            "in": "path",
+            "description": "The name of the gallery image definition in which the Image Version is to be created.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "galleryImageVersionName",
+            "in": "path",
+            "description": "The name of the gallery image version to be created. Needs to follow semantic version name pattern: The allowed characters are digit and period. Digits must be within the range of a 32-bit integer. Format: <MajorVersion>.<MinorVersion>.<Patch>",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "galleryImageVersion",
+            "in": "body",
+            "description": "Parameters supplied to the create or update gallery image version operation.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GalleryImageVersion"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/GalleryImageVersion"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/GalleryImageVersion"
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "schema": {
+              "$ref": "#/definitions/GalleryImageVersion"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common-types/v1/common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or update a simple Gallery Image Version using VM as source.": {
+            "$ref": "./examples/galleryExamples/GalleryImageVersion_Create_WithVmAsSource.json"
+          },
+          "Create or update a simple Gallery Image Version using community gallery image as source.": {
+            "$ref": "./examples/galleryExamples/GalleryImageVersion_Create_WithCommunityImageVersionAsSource.json"
+          },
+          "Create or update a simple Gallery Image Version using managed image as source.": {
+            "$ref": "./examples/galleryExamples/GalleryImageVersion_Create.json"
+          },
+          "Create or update a simple Gallery Image Version using mix of disks and snapshots as a source.": {
+            "$ref": "./examples/galleryExamples/GalleryImageVersion_Create_WithSnapshotsAsSource.json"
+          },
+          "Create or update a simple Gallery Image Version using shallow replication mode.": {
+            "$ref": "./examples/galleryExamples/GalleryImageVersion_Create_WithShallowReplicationMode.json"
+          },
+          "Create or update a simple Gallery Image Version using shared image as source.": {
+            "$ref": "./examples/galleryExamples/GalleryImageVersion_Create_WithImageVersionAsSource.json"
+          },
+          "Create or update a simple Gallery Image Version using snapshots as a source.": {
+            "$ref": "./examples/galleryExamples/GalleryImageVersion_Create_WithSnapshotsAsSource.json"
+          },
+          "Create or update a simple Gallery Image Version using vhd as a source with custom UEFI keys.": {
+            "$ref": "./examples/galleryExamples/GalleryImageVersion_Create_WithVHD_UefiSettings.json"
+          },
+          "Create or update a simple Gallery Image Version using vhd as a source.": {
+            "$ref": "./examples/galleryExamples/GalleryImageVersion_Create_WithVHD.json"
+          },
+          "Create or update a simple gallery image version with target extended locations specified.": {
+            "$ref": "./examples/galleryExamples/GalleryImageVersion_Create_WithTargetExtendedLocations.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "GalleryImageVersions_Update",
+        "tags": [
+          "GalleryImageVersions"
+        ],
+        "description": "Update a gallery image version.",
+        "parameters": [
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "galleryName",
+            "in": "path",
+            "description": "The name of the Shared Image Gallery in which the Image Definition resides.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "galleryImageName",
+            "in": "path",
+            "description": "The name of the gallery image definition in which the Image Version is to be updated.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "galleryImageVersionName",
+            "in": "path",
+            "description": "The name of the gallery image version to be updated. Needs to follow semantic version name pattern: The allowed characters are digit and period. Digits must be within the range of a 32-bit integer. Format: <MajorVersion>.<MinorVersion>.<Patch>",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "galleryImageVersion",
+            "in": "body",
+            "description": "Parameters supplied to the update gallery image version operation.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GalleryImageVersionUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/GalleryImageVersion"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common-types/v1/common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update a simple Gallery Image Version (Managed Image as source).": {
+            "$ref": "./examples/galleryExamples/GalleryImageVersion_Update.json"
+          },
+          "Update a simple Gallery Image Version without source id.": {
+            "$ref": "./examples/galleryExamples/GalleryImageVersion_Update_WithoutSourceId.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "GalleryImageVersions_Delete",
+        "tags": [
+          "GalleryImageVersions"
+        ],
+        "description": "Delete a gallery image version.",
+        "parameters": [
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "galleryName",
+            "in": "path",
+            "description": "The name of the Shared Image Gallery in which the Image Definition resides.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "galleryImageName",
+            "in": "path",
+            "description": "The name of the gallery image definition in which the Image Version resides.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "galleryImageVersionName",
+            "in": "path",
+            "description": "The name of the gallery image version to be deleted.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common-types/v1/common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a gallery image version.": {
+            "$ref": "./examples/galleryExamples/GalleryImageVersion_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/galleries/{galleryName}/share": {
       "post": {
+        "operationId": "GallerySharingProfile_Update",
         "tags": [
           "GallerySharingUpdate"
         ],
-        "operationId": "GallerySharingProfile_Update",
         "description": "Update sharing profile of a gallery.",
         "parameters": [
           {
@@ -1687,9 +1687,9 @@
           {
             "name": "galleryName",
             "in": "path",
+            "description": "The name of the Shared Image Gallery.",
             "required": true,
-            "type": "string",
-            "description": "The name of the Shared Image Gallery."
+            "type": "string"
           },
           {
             "$ref": "../../../common-types/v1/common.json#/parameters/ApiVersionParameter"
@@ -1697,11 +1697,11 @@
           {
             "name": "sharingUpdate",
             "in": "body",
+            "description": "Parameters supplied to the update gallery sharing profile.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/SharingUpdate"
-            },
-            "description": "Parameters supplied to the update gallery sharing profile."
+            }
           }
         ],
         "responses": {
@@ -1724,141 +1724,22 @@
             }
           }
         },
-        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Add sharing id to the sharing profile of a gallery.": {
             "$ref": "./examples/galleryExamples/Gallery_AddToSharingProfile.json"
           },
-          "share a gallery to community.": {
-            "$ref": "./examples/galleryExamples/Gallery_EnableCommunityGallery.json"
-          },
           "reset sharing profile of a gallery.": {
             "$ref": "./examples/galleryExamples/Gallery_ResetSharingProfile.json"
+          },
+          "share a gallery to community.": {
+            "$ref": "./examples/galleryExamples/Gallery_EnableCommunityGallery.json"
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       }
     }
   },
   "definitions": {
-    "Gallery": {
-      "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/GalleryProperties"
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../common-types/v1/common.json#/definitions/Resource"
-        }
-      ],
-      "description": "Specifies information about the Shared Image Gallery that you want to create or update."
-    },
-    "GalleryUpdate": {
-      "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/GalleryProperties"
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/UpdateResourceDefinition"
-        }
-      ],
-      "description": "Specifies information about the Shared Image Gallery that you want to update."
-    },
-    "GalleryProperties": {
-      "properties": {
-        "description": {
-          "type": "string",
-          "description": "The description of this Shared Image Gallery resource. This property is updatable."
-        },
-        "identifier": {
-          "$ref": "#/definitions/GalleryIdentifier"
-        },
-        "provisioningState": {
-          "readOnly": true,
-          "$ref": "#/definitions/GalleryProvisioningState"
-        },
-        "sharingProfile": {
-          "$ref": "#/definitions/SharingProfile"
-        },
-        "softDeletePolicy": {
-          "$ref": "#/definitions/SoftDeletePolicy"
-        },
-        "sharingStatus": {
-          "readOnly": true,
-          "$ref": "#/definitions/SharingStatus"
-        }
-      },
-      "description": "Describes the properties of a Shared Image Gallery."
-    },
-    "GalleryIdentifier": {
-      "properties": {
-        "uniqueName": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The unique name of the Shared Image Gallery. This name is generated automatically by Azure."
-        }
-      },
-      "description": "Describes the gallery unique name."
-    },
-    "SharingProfile": {
-      "description": "Profile for gallery sharing to subscription or tenant",
-      "properties": {
-        "permissions": {
-          "type": "string",
-          "description": "This property allows you to specify the permission of sharing gallery. Possible values are: **Private,** **Groups,** **Community.**",
-          "enum": [
-            "Private",
-            "Groups",
-            "Community"
-          ],
-          "x-ms-enum": {
-            "name": "GallerySharingPermissionTypes",
-            "modelAsString": true
-          }
-        },
-        "groups": {
-          "readOnly": true,
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/SharingProfileGroup"
-          },
-          "x-ms-identifiers": [],
-          "description": "A list of sharing profile groups."
-        },
-        "communityGalleryInfo": {
-          "$ref": "#/definitions/CommunityGalleryInfo",
-          "description": "Information of community gallery if current gallery is shared to community."
-        }
-      }
-    },
-    "SharingProfileGroup": {
-      "description": "Group of the gallery sharing profile",
-      "properties": {
-        "type": {
-          "type": "string",
-          "description": "This property allows you to specify the type of sharing group. Possible values are: **Subscriptions,** **AADTenants.**",
-          "enum": [
-            "Subscriptions",
-            "AADTenants"
-          ],
-          "x-ms-enum": {
-            "name": "SharingProfileGroupTypes",
-            "modelAsString": true
-          }
-        },
-        "ids": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "A list of subscription/tenant ids the gallery is aimed to be shared to."
-        }
-      }
-    },
     "CommunityGalleryInfo": {
       "type": "object",
       "description": "Information of community gallery if current gallery is shared to community",
@@ -1880,115 +1761,184 @@
           "description": "The prefix of the gallery name that will be displayed publicly. Visible to all users."
         },
         "communityGalleryEnabled": {
-          "readOnly": true,
           "type": "boolean",
-          "description": "Contains info about whether community gallery sharing is enabled."
+          "description": "Contains info about whether community gallery sharing is enabled.",
+          "readOnly": true
         },
         "publicNames": {
-          "readOnly": true,
           "type": "array",
+          "description": "Community gallery public name list.",
           "items": {
             "type": "string"
           },
-          "description": "Community gallery public name list."
+          "readOnly": true
         }
       }
     },
-    "SoftDeletePolicy": {
-      "type": "object",
+    "DataDiskImageEncryption": {
+      "description": "Contains encryption settings for a data disk image.",
       "properties": {
-        "isSoftDeleteEnabled": {
-          "type": "boolean",
-          "description": "Enables soft-deletion for resources in this gallery, allowing them to be recovered within retention time."
+        "lun": {
+          "type": "integer",
+          "format": "int32",
+          "description": "This property specifies the logical unit number of the data disk. This value is used to identify data disks within the Virtual Machine and therefore must be unique for each data disk attached to the Virtual Machine."
         }
       },
-      "description": "Contains information about the soft deletion policy of the gallery."
+      "required": [
+        "lun"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/DiskImageEncryption"
+        }
+      ]
     },
-    "SharingStatus": {
-      "type": "object",
+    "DiskImageEncryption": {
+      "description": "This is the disk image encryption base class.",
       "properties": {
-        "aggregatedState": {
+        "diskEncryptionSetId": {
           "type": "string",
-          "$ref": "#/definitions/SharingState",
-          "description": "Aggregated sharing state of current gallery."
+          "description": "A relative URI containing the resource ID of the disk encryption set."
+        }
+      }
+    },
+    "EncryptionImages": {
+      "description": "Optional. Allows users to provide customer managed keys for encrypting the OS and data disks in the gallery artifact.",
+      "properties": {
+        "osDiskImage": {
+          "$ref": "#/definitions/OSDiskImageEncryption"
         },
-        "summary": {
+        "dataDiskImages": {
           "type": "array",
+          "description": "A list of encryption specifications for data disk images.",
           "items": {
-            "$ref": "#/definitions/RegionalSharingStatus"
+            "$ref": "#/definitions/DataDiskImageEncryption"
           },
           "x-ms-identifiers": [
-            "region"
-          ],
-          "description": "Summary of all regional sharing status."
-        }
-      },
-      "description": "Sharing status of current gallery."
-    },
-    "SharingState": {
-      "readOnly": true,
-      "type": "string",
-      "title": "The sharing state of the gallery.",
-      "description": "The sharing state of the gallery, which only appears in the response.",
-      "enum": [
-        "Succeeded",
-        "InProgress",
-        "Failed",
-        "Unknown"
-      ],
-      "x-ms-enum": {
-        "name": "SharingState",
-        "modelAsString": true
-      }
-    },
-    "RegionalSharingStatus": {
-      "type": "object",
-      "description": "Gallery regional sharing status",
-      "properties": {
-        "region": {
-          "type": "string",
-          "description": "Region name"
-        },
-        "state": {
-          "type": "string",
-          "$ref": "#/definitions/SharingState",
-          "description": "Gallery sharing state in current region"
-        },
-        "details": {
-          "type": "string",
-          "description": "Details of gallery regional sharing failure."
+            "lun"
+          ]
         }
       }
     },
-    "GalleryApplication": {
+    "Gallery": {
+      "description": "Specifies information about the Shared Image Gallery that you want to create or update.",
       "properties": {
         "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/GalleryApplicationProperties"
+          "$ref": "#/definitions/GalleryProperties",
+          "x-ms-client-flatten": true
         }
       },
       "allOf": [
         {
           "$ref": "../../../common-types/v1/common.json#/definitions/Resource"
         }
-      ],
-      "description": "Specifies information about the gallery Application Definition that you want to create or update."
+      ]
     },
-    "GalleryApplicationUpdate": {
+    "GalleryApplication": {
+      "description": "Specifies information about the gallery Application Definition that you want to create or update.",
       "properties": {
         "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/GalleryApplicationProperties"
+          "$ref": "#/definitions/GalleryApplicationProperties",
+          "x-ms-client-flatten": true
         }
       },
       "allOf": [
         {
-          "$ref": "#/definitions/UpdateResourceDefinition"
+          "$ref": "../../../common-types/v1/common.json#/definitions/Resource"
         }
-      ],
-      "description": "Specifies information about the gallery Application Definition that you want to update."
+      ]
+    },
+    "GalleryApplicationCustomAction": {
+      "type": "object",
+      "description": "A custom action that can be performed with a Gallery Application Version.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the custom action.  Must be unique within the Gallery Application Version."
+        },
+        "script": {
+          "type": "string",
+          "description": "The script to run when executing this custom action."
+        },
+        "description": {
+          "type": "string",
+          "description": "Description to help the users understand what this custom action does."
+        },
+        "parameters": {
+          "type": "array",
+          "description": "The parameters that this custom action uses",
+          "items": {
+            "$ref": "#/definitions/GalleryApplicationCustomActionParameter"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        }
+      },
+      "required": [
+        "name",
+        "script"
+      ]
+    },
+    "GalleryApplicationCustomActionParameter": {
+      "type": "object",
+      "description": "The definition of a parameter that can be passed to a custom action of a Gallery Application Version.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the custom action.  Must be unique within the Gallery Application Version."
+        },
+        "required": {
+          "type": "boolean",
+          "description": "Indicates whether this parameter must be passed when running the custom action."
+        },
+        "type": {
+          "type": "string",
+          "description": "Specifies the type of the custom action parameter. Possible values are: String, ConfigurationDataBlob or LogOutputBlob",
+          "enum": [
+            "String",
+            "ConfigurationDataBlob",
+            "LogOutputBlob"
+          ],
+          "x-ms-enum": {
+            "name": "GalleryApplicationCustomActionParameterType",
+            "modelAsString": false
+          }
+        },
+        "defaultValue": {
+          "type": "string",
+          "description": "The default value of the parameter.  Only applies to string types"
+        },
+        "description": {
+          "type": "string",
+          "description": "A description to help users understand what this parameter means"
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
+    "GalleryApplicationList": {
+      "description": "The List Gallery Applications operation response.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "A list of Gallery Applications.",
+          "items": {
+            "$ref": "#/definitions/GalleryApplication"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The uri to fetch the next page of Application Definitions in the Application Gallery. Call ListNext() with this to fetch the next page of gallery Application Definitions."
+        }
+      },
+      "required": [
+        "value"
+      ]
     },
     "GalleryApplicationProperties": {
+      "description": "Describes the properties of a gallery Application Definition.",
       "properties": {
         "description": {
           "type": "string",
@@ -2025,49 +1975,68 @@
         },
         "customActions": {
           "type": "array",
+          "description": "A list of custom actions that can be performed with all of the Gallery Application Versions within this Gallery Application.",
           "items": {
             "$ref": "#/definitions/GalleryApplicationCustomAction"
           },
           "x-ms-identifiers": [
             "name"
-          ],
-          "description": "A list of custom actions that can be performed with all of the Gallery Application Versions within this Gallery Application."
+          ]
         }
       },
       "required": [
         "supportedOSType"
-      ],
-      "description": "Describes the properties of a gallery Application Definition."
+      ]
     },
-    "GalleryApplicationVersion": {
+    "GalleryApplicationUpdate": {
+      "description": "Specifies information about the gallery Application Definition that you want to update.",
       "properties": {
         "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/GalleryApplicationVersionProperties"
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../common-types/v1/common.json#/definitions/Resource"
-        }
-      ],
-      "description": "Specifies information about the gallery Application Version that you want to create or update."
-    },
-    "GalleryApplicationVersionUpdate": {
-      "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/GalleryApplicationVersionProperties"
+          "$ref": "#/definitions/GalleryApplicationProperties",
+          "x-ms-client-flatten": true
         }
       },
       "allOf": [
         {
           "$ref": "#/definitions/UpdateResourceDefinition"
         }
-      ],
-      "description": "Specifies information about the gallery Application Version that you want to update."
+      ]
+    },
+    "GalleryApplicationVersion": {
+      "description": "Specifies information about the gallery Application Version that you want to create or update.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/GalleryApplicationVersionProperties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../common-types/v1/common.json#/definitions/Resource"
+        }
+      ]
+    },
+    "GalleryApplicationVersionList": {
+      "description": "The List Gallery Application version operation response.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "A list of gallery Application Versions.",
+          "items": {
+            "$ref": "#/definitions/GalleryApplicationVersion"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The uri to fetch the next page of gallery Application Versions. Call ListNext() with this to fetch the next page of gallery Application Versions."
+        }
+      },
+      "required": [
+        "value"
+      ]
     },
     "GalleryApplicationVersionProperties": {
+      "description": "Describes the properties of a gallery image version.",
       "properties": {
         "publishingProfile": {
           "$ref": "#/definitions/GalleryApplicationVersionPublishingProfile"
@@ -2076,20 +2045,20 @@
           "$ref": "#/definitions/GalleryApplicationVersionSafetyProfile"
         },
         "provisioningState": {
-          "readOnly": true,
-          "$ref": "#/definitions/GalleryProvisioningState"
+          "$ref": "#/definitions/GalleryProvisioningState",
+          "readOnly": true
         },
         "replicationStatus": {
-          "readOnly": true,
-          "$ref": "#/definitions/ReplicationStatus"
+          "$ref": "#/definitions/ReplicationStatus",
+          "readOnly": true
         }
       },
       "required": [
         "publishingProfile"
-      ],
-      "description": "Describes the properties of a gallery image version."
+      ]
     },
     "GalleryApplicationVersionPublishingProfile": {
+      "description": "The publishing profile of a gallery image version.",
       "properties": {
         "source": {
           "$ref": "#/definitions/UserArtifactSource"
@@ -2102,10 +2071,10 @@
         },
         "advancedSettings": {
           "type": "object",
+          "description": "Optional. Additional settings to pass to the vm-application-manager extension. For advanced use only.",
           "additionalProperties": {
             "type": "string"
-          },
-          "description": "Optional. Additional settings to pass to the vm-application-manager extension. For advanced use only."
+          }
         },
         "enableHealthCheck": {
           "type": "boolean",
@@ -2113,55 +2082,9 @@
         },
         "customActions": {
           "type": "array",
+          "description": "A list of custom actions that can be performed with this Gallery Application Version.",
           "items": {
             "$ref": "#/definitions/GalleryApplicationCustomAction"
-          },
-          "x-ms-identifiers": [
-            "name"
-          ],
-          "description": "A list of custom actions that can be performed with this Gallery Application Version."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/GalleryArtifactPublishingProfileBase"
-        }
-      ],
-      "required": [
-        "source"
-      ],
-      "description": "The publishing profile of a gallery image version."
-    },
-    "GalleryApplicationVersionSafetyProfile": {
-      "type": "object",
-      "properties": {},
-      "allOf": [
-        {
-          "$ref": "#/definitions/GalleryArtifactSafetyProfileBase"
-        }
-      ],
-      "description": "The safety profile of the Gallery Application Version."
-    },
-    "GalleryApplicationCustomAction": {
-      "type": "object",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "The name of the custom action.  Must be unique within the Gallery Application Version."
-        },
-        "script": {
-          "type": "string",
-          "description": "The script to run when executing this custom action."
-        },
-        "description": {
-          "type": "string",
-          "description": "Description to help the users understand what this custom action does."
-        },
-        "parameters": {
-          "type": "array",
-          "description": "The parameters that this custom action uses",
-          "items": {
-            "$ref": "#/definitions/GalleryApplicationCustomActionParameter"
           },
           "x-ms-identifiers": [
             "name"
@@ -2169,128 +2092,291 @@
         }
       },
       "required": [
-        "name",
-        "script"
+        "source"
       ],
-      "description": "A custom action that can be performed with a Gallery Application Version."
-    },
-    "GalleryApplicationCustomActionParameter": {
-      "type": "object",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "The name of the custom action.  Must be unique within the Gallery Application Version."
-        },
-        "required": {
-          "type": "boolean",
-          "description": "Indicates whether this parameter must be passed when running the custom action."
-        },
-        "type": {
-          "type": "string",
-          "description": "Specifies the type of the custom action parameter. Possible values are: String, ConfigurationDataBlob or LogOutputBlob",
-          "enum": [
-            "String",
-            "ConfigurationDataBlob",
-            "LogOutputBlob"
-          ],
-          "x-ms-enum": {
-            "name": "GalleryApplicationCustomActionParameterType",
-            "modelAsString": false
-          }
-        },
-        "defaultValue": {
-          "type": "string",
-          "description": "The default value of the parameter.  Only applies to string types"
-        },
-        "description": {
-          "type": "string",
-          "description": "A description to help users understand what this parameter means"
-        }
-      },
-      "required": [
-        "name"
-      ],
-      "description": "The definition of a parameter that can be passed to a custom action of a Gallery Application Version."
-    },
-    "UserArtifactSource": {
-      "properties": {
-        "mediaLink": {
-          "type": "string",
-          "description": "Required. The mediaLink of the artifact, must be a readable storage page blob."
-        },
-        "defaultConfigurationLink": {
-          "type": "string",
-          "description": "Optional. The defaultConfigurationLink of the artifact, must be a readable storage page blob."
-        }
-      },
-      "required": [
-        "mediaLink"
-      ],
-      "description": "The source image from which the Image Version is going to be created."
-    },
-    "UserArtifactManage": {
-      "properties": {
-        "install": {
-          "type": "string",
-          "description": "Required. The path and arguments to install the gallery application. This is limited to 4096 characters."
-        },
-        "remove": {
-          "type": "string",
-          "description": "Required. The path and arguments to remove the gallery application. This is limited to 4096 characters."
-        },
-        "update": {
-          "type": "string",
-          "description": "Optional. The path and arguments to update the gallery application. If not present, then update operation will invoke remove command on the previous version and install command on the current version of the gallery application. This is limited to 4096 characters."
-        }
-      },
-      "required": [
-        "install",
-        "remove"
-      ]
-    },
-    "UserArtifactSettings": {
-      "type": "object",
-      "properties": {
-        "packageFileName": {
-          "type": "string",
-          "description": "Optional. The name to assign the downloaded package file on the VM. This is limited to 4096 characters. If not specified, the package file will be named the same as the Gallery Application name."
-        },
-        "configFileName": {
-          "type": "string",
-          "description": "Optional. The name to assign the downloaded config file on the VM. This is limited to 4096 characters. If not specified, the config file will be named the Gallery Application name appended with \"_config\"."
-        }
-      },
-      "description": "Additional settings for the VM app that contains the target package and config file name when it is deployed to target VM or VM scale set."
-    },
-    "GalleryImage": {
-      "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/GalleryImageProperties"
-        }
-      },
       "allOf": [
         {
-          "$ref": "../../../common-types/v1/common.json#/definitions/Resource"
+          "$ref": "#/definitions/GalleryArtifactPublishingProfileBase"
         }
-      ],
-      "description": "Specifies information about the gallery image definition that you want to create or update."
+      ]
     },
-    "GalleryImageUpdate": {
+    "GalleryApplicationVersionSafetyProfile": {
+      "type": "object",
+      "description": "The safety profile of the Gallery Application Version.",
+      "properties": {},
+      "allOf": [
+        {
+          "$ref": "#/definitions/GalleryArtifactSafetyProfileBase"
+        }
+      ]
+    },
+    "GalleryApplicationVersionUpdate": {
+      "description": "Specifies information about the gallery Application Version that you want to update.",
       "properties": {
         "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/GalleryImageProperties"
+          "$ref": "#/definitions/GalleryApplicationVersionProperties",
+          "x-ms-client-flatten": true
         }
       },
       "allOf": [
         {
           "$ref": "#/definitions/UpdateResourceDefinition"
         }
+      ]
+    },
+    "GalleryArtifactPublishingProfileBase": {
+      "description": "Describes the basic gallery artifact publishing profile.",
+      "properties": {
+        "targetRegions": {
+          "type": "array",
+          "description": "The target regions where the Image Version is going to be replicated to. This property is updatable.",
+          "items": {
+            "$ref": "#/definitions/TargetRegion"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "replicaCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of replicas of the Image Version to be created per region. This property would take effect for a region when regionalReplicaCount is not specified. This property is updatable."
+        },
+        "excludeFromLatest": {
+          "type": "boolean",
+          "description": "If set to true, Virtual Machines deployed from the latest version of the Image Definition won't use this Image Version."
+        },
+        "publishedDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp for when the gallery image version is published.",
+          "readOnly": true
+        },
+        "endOfLifeDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The end of life date of the gallery image version. This property can be used for decommissioning purposes. This property is updatable."
+        },
+        "storageAccountType": {
+          "type": "string",
+          "description": "Specifies the storage account type to be used to store the image. This property is not updatable.",
+          "enum": [
+            "Standard_LRS",
+            "Standard_ZRS",
+            "Premium_LRS"
+          ],
+          "x-ms-enum": {
+            "name": "StorageAccountType",
+            "modelAsString": true
+          }
+        },
+        "replicationMode": {
+          "type": "string",
+          "description": "Optional parameter which specifies the mode to be used for replication. This property is not updatable.",
+          "enum": [
+            "Full",
+            "Shallow"
+          ],
+          "x-ms-enum": {
+            "name": "ReplicationMode",
+            "modelAsString": true
+          }
+        },
+        "targetExtendedLocations": {
+          "type": "array",
+          "description": "The target extended locations where the Image Version is going to be replicated to. This property is updatable.",
+          "items": {
+            "$ref": "#/definitions/GalleryTargetExtendedLocation"
+          },
+          "x-ms-identifiers": [
+            "name",
+            "extendedLocation/name"
+          ]
+        }
+      }
+    },
+    "GalleryArtifactSafetyProfileBase": {
+      "type": "object",
+      "description": "This is the safety profile of the Gallery Artifact Version.",
+      "properties": {
+        "allowDeletionOfReplicatedLocations": {
+          "type": "boolean",
+          "description": "Indicates whether or not removing this Gallery Image Version from replicated regions is allowed."
+        }
+      }
+    },
+    "GalleryArtifactSource": {
+      "description": "The source image from which the Image Version is going to be created.",
+      "properties": {
+        "managedImage": {
+          "$ref": "#/definitions/ManagedArtifact"
+        }
+      },
+      "required": [
+        "managedImage"
+      ]
+    },
+    "GalleryArtifactVersionFullSource": {
+      "type": "object",
+      "description": "The source of the gallery artifact version.",
+      "properties": {
+        "communityGalleryImageId": {
+          "type": "string",
+          "description": "The resource Id of the source Community Gallery Image.  Only required when using Community Gallery Image as a source."
+        },
+        "virtualMachineId": {
+          "type": "string",
+          "description": "The resource Id of the source virtual machine.  Only required when capturing a virtual machine to source this Gallery Image Version."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/GalleryArtifactVersionSource"
+        }
+      ]
+    },
+    "GalleryArtifactVersionSource": {
+      "description": "The gallery artifact version source.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The id of the gallery artifact version source."
+        }
+      }
+    },
+    "GalleryDataDiskImage": {
+      "description": "This is the data disk image.",
+      "properties": {
+        "lun": {
+          "type": "integer",
+          "format": "int32",
+          "description": "This property specifies the logical unit number of the data disk. This value is used to identify data disks within the Virtual Machine and therefore must be unique for each data disk attached to the Virtual Machine."
+        }
+      },
+      "required": [
+        "lun"
       ],
-      "description": "Specifies information about the gallery image definition that you want to update."
+      "allOf": [
+        {
+          "$ref": "#/definitions/GalleryDiskImage"
+        }
+      ]
+    },
+    "GalleryDiskImage": {
+      "description": "This is the disk image base class.",
+      "properties": {
+        "sizeInGB": {
+          "type": "integer",
+          "format": "int32",
+          "description": "This property indicates the size of the VHD to be created.",
+          "readOnly": true
+        },
+        "hostCaching": {
+          "type": "string",
+          "description": "The host caching of the disk. Valid values are 'None', 'ReadOnly', and 'ReadWrite'",
+          "enum": [
+            "None",
+            "ReadOnly",
+            "ReadWrite"
+          ],
+          "x-ms-enum": {
+            "name": "HostCaching",
+            "modelAsString": false
+          }
+        },
+        "source": {
+          "$ref": "#/definitions/GalleryDiskImageSource"
+        }
+      }
+    },
+    "GalleryDiskImageSource": {
+      "type": "object",
+      "description": "The source for the disk image.",
+      "properties": {
+        "uri": {
+          "type": "string",
+          "description": "The uri of the gallery artifact version source. Currently used to specify vhd/blob source."
+        },
+        "storageAccountId": {
+          "type": "string",
+          "description": "The Storage Account Id that contains the vhd blob being used as a source for this artifact version."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/GalleryArtifactVersionSource"
+        }
+      ]
+    },
+    "GalleryExtendedLocation": {
+      "type": "object",
+      "description": "The name of the extended location.",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "type": {
+          "$ref": "#/definitions/GalleryExtendedLocationType"
+        }
+      }
+    },
+    "GalleryExtendedLocationType": {
+      "type": "string",
+      "description": "It is type of the extended location.",
+      "enum": [
+        "EdgeZone",
+        "Unknown"
+      ],
+      "x-ms-enum": {
+        "name": "GalleryExtendedLocationType",
+        "modelAsString": true
+      }
+    },
+    "GalleryIdentifier": {
+      "description": "Describes the gallery unique name.",
+      "properties": {
+        "uniqueName": {
+          "type": "string",
+          "description": "The unique name of the Shared Image Gallery. This name is generated automatically by Azure.",
+          "readOnly": true
+        }
+      }
+    },
+    "GalleryImage": {
+      "description": "Specifies information about the gallery image definition that you want to create or update.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/GalleryImageProperties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../common-types/v1/common.json#/definitions/Resource"
+        }
+      ]
+    },
+    "GalleryImageList": {
+      "description": "The List Gallery Images operation response.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "A list of Shared Image Gallery images.",
+          "items": {
+            "$ref": "#/definitions/GalleryImage"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The uri to fetch the next page of Image Definitions in the Shared Image Gallery. Call ListNext() with this to fetch the next page of gallery image definitions."
+        }
+      },
+      "required": [
+        "value"
+      ]
     },
     "GalleryImageProperties": {
+      "description": "Describes the properties of a gallery image definition.",
       "properties": {
         "description": {
           "type": "string",
@@ -2362,18 +2448,18 @@
           "$ref": "./galleryRPCommon.json#/definitions/ImagePurchasePlan"
         },
         "provisioningState": {
-          "readOnly": true,
-          "$ref": "#/definitions/GalleryProvisioningState"
+          "$ref": "#/definitions/GalleryProvisioningState",
+          "readOnly": true
         },
         "features": {
           "type": "array",
+          "description": "A list of gallery image features.",
           "items": {
             "$ref": "./galleryRPCommon.json#/definitions/GalleryImageFeature"
           },
           "x-ms-identifiers": [
             "name"
-          ],
-          "description": "A list of gallery image features."
+          ]
         },
         "architecture": {
           "$ref": "./galleryRPCommon.json#/definitions/Architecture"
@@ -2383,45 +2469,64 @@
         "osType",
         "osState",
         "identifier"
-      ],
-      "description": "Describes the properties of a gallery image definition."
+      ]
     },
-    "GalleryImageVersion": {
+    "GalleryImageUpdate": {
+      "description": "Specifies information about the gallery image definition that you want to update.",
       "properties": {
         "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/GalleryImageVersionProperties"
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../common-types/v1/common.json#/definitions/Resource"
-        }
-      ],
-      "description": "Specifies information about the gallery image version that you want to create or update."
-    },
-    "GalleryImageVersionUpdate": {
-      "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/GalleryImageVersionProperties"
+          "$ref": "#/definitions/GalleryImageProperties",
+          "x-ms-client-flatten": true
         }
       },
       "allOf": [
         {
           "$ref": "#/definitions/UpdateResourceDefinition"
         }
-      ],
-      "description": "Specifies information about the gallery image version that you want to update."
+      ]
+    },
+    "GalleryImageVersion": {
+      "description": "Specifies information about the gallery image version that you want to create or update.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/GalleryImageVersionProperties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../common-types/v1/common.json#/definitions/Resource"
+        }
+      ]
+    },
+    "GalleryImageVersionList": {
+      "description": "The List Gallery Image version operation response.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "A list of gallery image versions.",
+          "items": {
+            "$ref": "#/definitions/GalleryImageVersion"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The uri to fetch the next page of gallery image versions. Call ListNext() with this to fetch the next page of gallery image versions."
+        }
+      },
+      "required": [
+        "value"
+      ]
     },
     "GalleryImageVersionProperties": {
+      "description": "Describes the properties of a gallery image version.",
       "properties": {
         "publishingProfile": {
           "$ref": "#/definitions/GalleryImageVersionPublishingProfile"
         },
         "provisioningState": {
-          "readOnly": true,
-          "$ref": "#/definitions/GalleryProvisioningState"
+          "$ref": "#/definitions/GalleryProvisioningState",
+          "readOnly": true
         },
         "storageProfile": {
           "$ref": "#/definitions/GalleryImageVersionStorageProfile"
@@ -2430,8 +2535,8 @@
           "$ref": "#/definitions/GalleryImageVersionSafetyProfile"
         },
         "replicationStatus": {
-          "readOnly": true,
-          "$ref": "#/definitions/ReplicationStatus"
+          "$ref": "#/definitions/ReplicationStatus",
+          "readOnly": true
         },
         "securityProfile": {
           "$ref": "#/definitions/ImageVersionSecurityProfile"
@@ -2439,116 +2544,163 @@
       },
       "required": [
         "storageProfile"
-      ],
-      "description": "Describes the properties of a gallery image version."
+      ]
     },
-    "GalleryArtifactPublishingProfileBase": {
+    "GalleryImageVersionPublishingProfile": {
+      "description": "The publishing profile of a gallery image Version.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/GalleryArtifactPublishingProfileBase"
+        }
+      ]
+    },
+    "GalleryImageVersionSafetyProfile": {
+      "type": "object",
+      "description": "This is the safety profile of the Gallery Image Version.",
       "properties": {
-        "targetRegions": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/TargetRegion"
-          },
-          "x-ms-identifiers": [
-            "name"
-          ],
-          "description": "The target regions where the Image Version is going to be replicated to. This property is updatable."
-        },
-        "replicaCount": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The number of replicas of the Image Version to be created per region. This property would take effect for a region when regionalReplicaCount is not specified. This property is updatable."
-        },
-        "excludeFromLatest": {
+        "reportedForPolicyViolation": {
           "type": "boolean",
-          "description": "If set to true, Virtual Machines deployed from the latest version of the Image Definition won't use this Image Version."
+          "description": "Indicates whether this image has been reported as violating Microsoft's policies.",
+          "readOnly": true
         },
-        "publishedDate": {
-          "readOnly": true,
-          "type": "string",
-          "format": "date-time",
-          "description": "The timestamp for when the gallery image version is published."
-        },
-        "endOfLifeDate": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The end of life date of the gallery image version. This property can be used for decommissioning purposes. This property is updatable."
-        },
-        "storageAccountType": {
-          "type": "string",
-          "description": "Specifies the storage account type to be used to store the image. This property is not updatable.",
-          "enum": [
-            "Standard_LRS",
-            "Standard_ZRS",
-            "Premium_LRS"
-          ],
-          "x-ms-enum": {
-            "name": "StorageAccountType",
-            "modelAsString": true
-          }
-        },
-        "replicationMode": {
-          "type": "string",
-          "description": "Optional parameter which specifies the mode to be used for replication. This property is not updatable.",
-          "enum": [
-            "Full",
-            "Shallow"
-          ],
-          "x-ms-enum": {
-            "name": "ReplicationMode",
-            "modelAsString": true
-          }
-        },
-        "targetExtendedLocations": {
+        "policyViolations": {
           "type": "array",
+          "description": "A list of Policy Violations that have been reported for this Gallery Image Version.",
           "items": {
-            "$ref": "#/definitions/GalleryTargetExtendedLocation"
+            "$ref": "#/definitions/PolicyViolation"
           },
-          "x-ms-identifiers": [
-            "name",
-            "extendedLocation/name"
-          ],
-          "description": "The target extended locations where the Image Version is going to be replicated to. This property is updatable."
+          "readOnly": true,
+          "x-ms-identifiers": []
         }
       },
-      "description": "Describes the basic gallery artifact publishing profile."
+      "allOf": [
+        {
+          "$ref": "#/definitions/GalleryArtifactSafetyProfileBase"
+        }
+      ]
     },
-    "TargetRegion": {
+    "GalleryImageVersionStorageProfile": {
+      "description": "This is the storage profile of a Gallery Image Version.",
       "properties": {
-        "name": {
-          "type": "string",
-          "description": "The name of the region."
+        "source": {
+          "$ref": "#/definitions/GalleryArtifactVersionFullSource"
         },
-        "regionalReplicaCount": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The number of replicas of the Image Version to be created per region. This property is updatable."
+        "osDiskImage": {
+          "$ref": "#/definitions/GalleryOSDiskImage"
         },
-        "storageAccountType": {
-          "type": "string",
-          "description": "Specifies the storage account type to be used to store the image. This property is not updatable.",
-          "enum": [
-            "Standard_LRS",
-            "Standard_ZRS",
-            "Premium_LRS"
-          ],
-          "x-ms-enum": {
-            "name": "StorageAccountType",
-            "modelAsString": true
+        "dataDiskImages": {
+          "type": "array",
+          "description": "A list of data disk images.",
+          "items": {
+            "$ref": "#/definitions/GalleryDataDiskImage"
+          },
+          "x-ms-identifiers": [
+            "lun"
+          ]
+        }
+      }
+    },
+    "GalleryImageVersionUefiSettings": {
+      "type": "object",
+      "description": "Contains UEFI settings for the image version.",
+      "properties": {
+        "signatureTemplateNames": {
+          "type": "array",
+          "description": "The name of the template(s) that contains default UEFI key signatures that will be added to the image.",
+          "items": {
+            "$ref": "#/definitions/UefiSignatureTemplateName"
+          },
+          "x-ms-identifiers": []
+        },
+        "additionalSignatures": {
+          "$ref": "#/definitions/UefiKeySignatures"
+        }
+      }
+    },
+    "GalleryImageVersionUpdate": {
+      "description": "Specifies information about the gallery image version that you want to update.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/GalleryImageVersionProperties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/UpdateResourceDefinition"
+        }
+      ]
+    },
+    "GalleryList": {
+      "description": "The List Galleries operation response.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "A list of galleries.",
+          "items": {
+            "$ref": "#/definitions/Gallery"
           }
         },
-        "encryption": {
-          "$ref": "#/definitions/EncryptionImages"
-        },
-        "excludeFromLatest": {
-          "type": "boolean",
-          "description": "Contains the flag setting to hide an image when users specify version='latest'"
+        "nextLink": {
+          "type": "string",
+          "description": "The uri to fetch the next page of galleries. Call ListNext() with this to fetch the next page of galleries."
         }
       },
       "required": [
-        "name"
+        "value"
+      ]
+    },
+    "GalleryOSDiskImage": {
+      "description": "This is the OS disk image.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/GalleryDiskImage"
+        }
+      ]
+    },
+    "GalleryProperties": {
+      "description": "Describes the properties of a Shared Image Gallery.",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "The description of this Shared Image Gallery resource. This property is updatable."
+        },
+        "identifier": {
+          "$ref": "#/definitions/GalleryIdentifier"
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/GalleryProvisioningState",
+          "readOnly": true
+        },
+        "sharingProfile": {
+          "$ref": "#/definitions/SharingProfile"
+        },
+        "softDeletePolicy": {
+          "$ref": "#/definitions/SoftDeletePolicy"
+        },
+        "sharingStatus": {
+          "$ref": "#/definitions/SharingStatus",
+          "readOnly": true
+        }
+      }
+    },
+    "GalleryProvisioningState": {
+      "type": "string",
+      "title": "The current state of the gallery or gallery artifact.",
+      "description": "The provisioning state, which only appears in the response.",
+      "enum": [
+        "Creating",
+        "Updating",
+        "Failed",
+        "Succeeded",
+        "Deleting",
+        "Migrating"
       ],
-      "description": "Describes the target region information."
+      "x-ms-enum": {
+        "name": "GalleryProvisioningState",
+        "modelAsString": true
+      },
+      "readOnly": true
     },
     "GalleryTargetExtendedLocation": {
       "type": "object",
@@ -2584,54 +2736,63 @@
         }
       }
     },
-    "GalleryExtendedLocation": {
+    "GalleryUpdate": {
+      "description": "Specifies information about the Shared Image Gallery that you want to update.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/GalleryProperties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/UpdateResourceDefinition"
+        }
+      ]
+    },
+    "ImageVersionSecurityProfile": {
       "type": "object",
+      "description": "The security profile of a gallery image version",
       "properties": {
-        "name": {
-          "type": "string"
+        "uefiSettings": {
+          "$ref": "#/definitions/GalleryImageVersionUefiSettings"
+        }
+      }
+    },
+    "LatestGalleryImageVersion": {
+      "type": "object",
+      "description": "The gallery image version with latest version in a particular region.",
+      "properties": {
+        "latestVersionName": {
+          "type": "string",
+          "description": "The name of the latest version in the region."
         },
-        "type": {
-          "$ref": "#/definitions/GalleryExtendedLocationType"
+        "location": {
+          "type": "string",
+          "description": "region of the Gallery Image Version."
         }
       },
-      "description": "The name of the extended location."
+      "readOnly": true
     },
-    "GalleryExtendedLocationType": {
-      "type": "string",
-      "enum": [
-        "EdgeZone",
-        "Unknown"
-      ],
-      "x-ms-enum": {
-        "name": "GalleryExtendedLocationType",
-        "modelAsString": true
-      },
-      "description": "It is type of the extended location."
-    },
-    "EncryptionImages": {
+    "ManagedArtifact": {
+      "description": "The managed artifact.",
       "properties": {
-        "osDiskImage": {
-          "$ref": "#/definitions/OSDiskImageEncryption"
-        },
-        "dataDiskImages": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/DataDiskImageEncryption"
-          },
-          "x-ms-identifiers": [
-            "lun"
-          ],
-          "description": "A list of encryption specifications for data disk images."
+        "id": {
+          "type": "string",
+          "description": "The managed artifact id."
         }
       },
-      "description": "Optional. Allows users to provide customer managed keys for encrypting the OS and data disks in the gallery artifact."
+      "required": [
+        "id"
+      ]
     },
     "OSDiskImageEncryption": {
       "type": "object",
+      "description": "Contains encryption settings for an OS disk image.",
       "properties": {
         "securityProfile": {
-          "type": "object",
           "$ref": "#/definitions/OSDiskImageSecurityProfile",
+          "type": "object",
           "description": "This property specifies the security profile of an OS disk image."
         }
       },
@@ -2639,11 +2800,11 @@
         {
           "$ref": "#/definitions/DiskImageEncryption"
         }
-      ],
-      "description": "Contains encryption settings for an OS disk image."
+      ]
     },
     "OSDiskImageSecurityProfile": {
       "type": "object",
+      "description": "Contains security profile for an OS disk image.",
       "properties": {
         "confidentialVMEncryptionType": {
           "type": "string",
@@ -2663,225 +2824,11 @@
           "type": "string",
           "description": "secure VM disk encryption set id"
         }
-      },
-      "description": "Contains security profile for an OS disk image."
-    },
-    "DataDiskImageEncryption": {
-      "properties": {
-        "lun": {
-          "type": "integer",
-          "format": "int32",
-          "description": "This property specifies the logical unit number of the data disk. This value is used to identify data disks within the Virtual Machine and therefore must be unique for each data disk attached to the Virtual Machine."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/DiskImageEncryption"
-        }
-      ],
-      "required": [
-        "lun"
-      ],
-      "description": "Contains encryption settings for a data disk image."
-    },
-    "DiskImageEncryption": {
-      "properties": {
-        "diskEncryptionSetId": {
-          "type": "string",
-          "description": "A relative URI containing the resource ID of the disk encryption set."
-        }
-      },
-      "description": "This is the disk image encryption base class."
-    },
-    "GalleryArtifactSource": {
-      "properties": {
-        "managedImage": {
-          "$ref": "#/definitions/ManagedArtifact"
-        }
-      },
-      "required": [
-        "managedImage"
-      ],
-      "description": "The source image from which the Image Version is going to be created."
-    },
-    "ManagedArtifact": {
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "The managed artifact id."
-        }
-      },
-      "required": [
-        "id"
-      ],
-      "description": "The managed artifact."
-    },
-    "GalleryImageVersionPublishingProfile": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/GalleryArtifactPublishingProfileBase"
-        }
-      ],
-      "description": "The publishing profile of a gallery image Version."
-    },
-    "GalleryImageVersionStorageProfile": {
-      "properties": {
-        "source": {
-          "$ref": "#/definitions/GalleryArtifactVersionFullSource"
-        },
-        "osDiskImage": {
-          "$ref": "#/definitions/GalleryOSDiskImage"
-        },
-        "dataDiskImages": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/GalleryDataDiskImage"
-          },
-          "x-ms-identifiers": [
-            "lun"
-          ],
-          "description": "A list of data disk images."
-        }
-      },
-      "description": "This is the storage profile of a Gallery Image Version."
-    },
-    "GalleryArtifactVersionFullSource": {
-      "type": "object",
-      "properties": {
-        "communityGalleryImageId": {
-          "type": "string",
-          "description": "The resource Id of the source Community Gallery Image.  Only required when using Community Gallery Image as a source."
-        },
-        "virtualMachineId": {
-          "type": "string",
-          "description": "The resource Id of the source virtual machine.  Only required when capturing a virtual machine to source this Gallery Image Version."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/GalleryArtifactVersionSource"
-        }
-      ],
-      "description": "The source of the gallery artifact version."
-    },
-    "GalleryArtifactVersionSource": {
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "The id of the gallery artifact version source."
-        }
-      },
-      "description": "The gallery artifact version source."
-    },
-    "GalleryOSDiskImage": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/GalleryDiskImage"
-        }
-      ],
-      "description": "This is the OS disk image."
-    },
-    "GalleryDataDiskImage": {
-      "properties": {
-        "lun": {
-          "type": "integer",
-          "format": "int32",
-          "description": "This property specifies the logical unit number of the data disk. This value is used to identify data disks within the Virtual Machine and therefore must be unique for each data disk attached to the Virtual Machine."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/GalleryDiskImage"
-        }
-      ],
-      "required": [
-        "lun"
-      ],
-      "description": "This is the data disk image."
-    },
-    "GalleryDiskImage": {
-      "properties": {
-        "sizeInGB": {
-          "readOnly": true,
-          "type": "integer",
-          "format": "int32",
-          "description": "This property indicates the size of the VHD to be created."
-        },
-        "hostCaching": {
-          "type": "string",
-          "description": "The host caching of the disk. Valid values are 'None', 'ReadOnly', and 'ReadWrite'",
-          "enum": [
-            "None",
-            "ReadOnly",
-            "ReadWrite"
-          ],
-          "x-ms-enum": {
-            "name": "HostCaching",
-            "modelAsString": false
-          }
-        },
-        "source": {
-          "$ref": "#/definitions/GalleryDiskImageSource"
-        }
-      },
-      "description": "This is the disk image base class."
-    },
-    "GalleryDiskImageSource": {
-      "type": "object",
-      "properties": {
-        "uri": {
-          "type": "string",
-          "description": "The uri of the gallery artifact version source. Currently used to specify vhd/blob source."
-        },
-        "storageAccountId": {
-          "type": "string",
-          "description": "The Storage Account Id that contains the vhd blob being used as a source for this artifact version."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/GalleryArtifactVersionSource"
-        }
-      ],
-      "description": "The source for the disk image."
-    },
-    "GalleryArtifactSafetyProfileBase": {
-      "type": "object",
-      "properties": {
-        "allowDeletionOfReplicatedLocations": {
-          "type": "boolean",
-          "description": "Indicates whether or not removing this Gallery Image Version from replicated regions is allowed."
-        }
-      },
-      "description": "This is the safety profile of the Gallery Artifact Version."
-    },
-    "GalleryImageVersionSafetyProfile": {
-      "type": "object",
-      "properties": {
-        "reportedForPolicyViolation": {
-          "type": "boolean",
-          "description": "Indicates whether this image has been reported as violating Microsoft's policies.",
-          "readOnly": true
-        },
-        "policyViolations": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/PolicyViolation"
-          },
-          "x-ms-identifiers": [],
-          "description": "A list of Policy Violations that have been reported for this Gallery Image Version.",
-          "readOnly": true
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/GalleryArtifactSafetyProfileBase"
-        }
-      ],
-      "description": "This is the safety profile of the Gallery Image Version."
+      }
     },
     "PolicyViolation": {
       "type": "object",
+      "description": "A policy violation reported against a gallery artifact.",
       "properties": {
         "category": {
           "type": "string",
@@ -2901,58 +2848,17 @@
           "type": "string",
           "description": "Describes specific details about why this policy violation was reported."
         }
-      },
-      "description": "A policy violation reported against a gallery artifact."
-    },
-    "ImageVersionSecurityProfile": {
-      "type": "object",
-      "description": "The security profile of a gallery image version",
-      "properties": {
-        "uefiSettings": {
-          "$ref": "#/definitions/GalleryImageVersionUefiSettings"
-        }
       }
     },
-    "ReplicationStatus": {
-      "properties": {
-        "aggregatedState": {
-          "readOnly": true,
-          "type": "string",
-          "description": "This is the aggregated replication status based on all the regional replication status flags.",
-          "enum": [
-            "Unknown",
-            "InProgress",
-            "Completed",
-            "Failed"
-          ],
-          "x-ms-enum": {
-            "name": "AggregatedReplicationState",
-            "modelAsString": true
-          }
-        },
-        "summary": {
-          "readOnly": true,
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/RegionalReplicationStatus"
-          },
-          "x-ms-identifiers": [
-            "region"
-          ],
-          "description": "This is a summary of replication status for each region."
-        }
-      },
-      "description": "This is the replication status of the gallery image version."
-    },
     "RegionalReplicationStatus": {
+      "description": "This is the regional replication status.",
       "properties": {
         "region": {
-          "readOnly": true,
           "type": "string",
-          "description": "The region to which the gallery image version is being replicated to."
+          "description": "The region to which the gallery image version is being replicated to.",
+          "readOnly": true
         },
         "state": {
-          "readOnly": true,
           "type": "string",
           "description": "This is the regional replication state.",
           "enum": [
@@ -2964,144 +2870,163 @@
           "x-ms-enum": {
             "name": "ReplicationState",
             "modelAsString": true
-          }
+          },
+          "readOnly": true
         },
         "details": {
-          "readOnly": true,
           "type": "string",
-          "description": "The details of the replication status."
+          "description": "The details of the replication status.",
+          "readOnly": true
         },
         "progress": {
-          "readOnly": true,
           "type": "integer",
           "format": "int32",
-          "description": "It indicates progress of the replication job."
+          "description": "It indicates progress of the replication job.",
+          "readOnly": true
         }
-      },
-      "description": "This is the regional replication status."
+      }
     },
-    "GalleryList": {
+    "RegionalSharingStatus": {
+      "type": "object",
+      "description": "Gallery regional sharing status",
       "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Gallery"
-          },
-          "description": "A list of galleries."
-        },
-        "nextLink": {
+        "region": {
           "type": "string",
-          "description": "The uri to fetch the next page of galleries. Call ListNext() with this to fetch the next page of galleries."
-        }
-      },
-      "required": [
-        "value"
-      ],
-      "description": "The List Galleries operation response."
-    },
-    "GalleryImageList": {
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/GalleryImage"
-          },
-          "description": "A list of Shared Image Gallery images."
+          "description": "Region name"
         },
-        "nextLink": {
+        "state": {
+          "$ref": "#/definitions/SharingState",
           "type": "string",
-          "description": "The uri to fetch the next page of Image Definitions in the Shared Image Gallery. Call ListNext() with this to fetch the next page of gallery image definitions."
-        }
-      },
-      "required": [
-        "value"
-      ],
-      "description": "The List Gallery Images operation response."
-    },
-    "GalleryImageVersionList": {
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/GalleryImageVersion"
-          },
-          "description": "A list of gallery image versions."
+          "description": "Gallery sharing state in current region"
         },
-        "nextLink": {
+        "details": {
           "type": "string",
-          "description": "The uri to fetch the next page of gallery image versions. Call ListNext() with this to fetch the next page of gallery image versions."
+          "description": "Details of gallery regional sharing failure."
         }
-      },
-      "required": [
-        "value"
-      ],
-      "description": "The List Gallery Image version operation response."
+      }
     },
-    "GalleryApplicationList": {
+    "ReplicationStatus": {
+      "description": "This is the replication status of the gallery image version.",
       "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/GalleryApplication"
+        "aggregatedState": {
+          "type": "string",
+          "description": "This is the aggregated replication status based on all the regional replication status flags.",
+          "enum": [
+            "Unknown",
+            "InProgress",
+            "Completed",
+            "Failed"
+          ],
+          "x-ms-enum": {
+            "name": "AggregatedReplicationState",
+            "modelAsString": true
           },
-          "description": "A list of Gallery Applications."
+          "readOnly": true
         },
-        "nextLink": {
-          "type": "string",
-          "description": "The uri to fetch the next page of Application Definitions in the Application Gallery. Call ListNext() with this to fetch the next page of gallery Application Definitions."
-        }
-      },
-      "required": [
-        "value"
-      ],
-      "description": "The List Gallery Applications operation response."
-    },
-    "GalleryApplicationVersionList": {
-      "properties": {
-        "value": {
+        "summary": {
           "type": "array",
+          "description": "This is a summary of replication status for each region.",
           "items": {
-            "$ref": "#/definitions/GalleryApplicationVersion"
+            "$ref": "#/definitions/RegionalReplicationStatus"
           },
-          "description": "A list of gallery Application Versions."
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "The uri to fetch the next page of gallery Application Versions. Call ListNext() with this to fetch the next page of gallery Application Versions."
-        }
-      },
-      "required": [
-        "value"
-      ],
-      "description": "The List Gallery Application version operation response."
-    },
-    "UpdateResourceDefinition": {
-      "description": "The Update Resource model definition.",
-      "properties": {
-        "id": {
           "readOnly": true,
+          "x-ms-identifiers": [
+            "region"
+          ]
+        }
+      }
+    },
+    "SharingProfile": {
+      "description": "Profile for gallery sharing to subscription or tenant",
+      "properties": {
+        "permissions": {
           "type": "string",
-          "description": "Resource Id"
+          "description": "This property allows you to specify the permission of sharing gallery. Possible values are: **Private,** **Groups,** **Community.**",
+          "enum": [
+            "Private",
+            "Groups",
+            "Community"
+          ],
+          "x-ms-enum": {
+            "name": "GallerySharingPermissionTypes",
+            "modelAsString": true
+          }
         },
-        "name": {
+        "groups": {
+          "type": "array",
+          "description": "A list of sharing profile groups.",
+          "items": {
+            "$ref": "#/definitions/SharingProfileGroup"
+          },
           "readOnly": true,
-          "type": "string",
-          "description": "Resource name"
+          "x-ms-identifiers": []
         },
+        "communityGalleryInfo": {
+          "$ref": "#/definitions/CommunityGalleryInfo",
+          "description": "Information of community gallery if current gallery is shared to community."
+        }
+      }
+    },
+    "SharingProfileGroup": {
+      "description": "Group of the gallery sharing profile",
+      "properties": {
         "type": {
-          "readOnly": true,
           "type": "string",
-          "description": "Resource type"
+          "description": "This property allows you to specify the type of sharing group. Possible values are: **Subscriptions,** **AADTenants.**",
+          "enum": [
+            "Subscriptions",
+            "AADTenants"
+          ],
+          "x-ms-enum": {
+            "name": "SharingProfileGroupTypes",
+            "modelAsString": true
+          }
         },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
+        "ids": {
+          "type": "array",
+          "description": "A list of subscription/tenant ids the gallery is aimed to be shared to.",
+          "items": {
             "type": "string"
-          },
-          "description": "Resource tags"
+          }
         }
+      }
+    },
+    "SharingState": {
+      "type": "string",
+      "title": "The sharing state of the gallery.",
+      "description": "The sharing state of the gallery, which only appears in the response.",
+      "enum": [
+        "Succeeded",
+        "InProgress",
+        "Failed",
+        "Unknown"
+      ],
+      "x-ms-enum": {
+        "name": "SharingState",
+        "modelAsString": true
       },
-      "x-ms-azure-resource": true
+      "readOnly": true
+    },
+    "SharingStatus": {
+      "type": "object",
+      "description": "Sharing status of current gallery.",
+      "properties": {
+        "aggregatedState": {
+          "$ref": "#/definitions/SharingState",
+          "type": "string",
+          "description": "Aggregated sharing state of current gallery."
+        },
+        "summary": {
+          "type": "array",
+          "description": "Summary of all regional sharing status.",
+          "items": {
+            "$ref": "#/definitions/RegionalSharingStatus"
+          },
+          "x-ms-identifiers": [
+            "region"
+          ]
+        }
+      }
     },
     "SharingUpdate": {
       "description": "Specifies information about the gallery sharing profile update.",
@@ -3122,11 +3047,11 @@
         },
         "groups": {
           "type": "array",
+          "description": "A list of sharing profile groups.",
           "items": {
             "$ref": "#/definitions/SharingProfileGroup"
           },
-          "x-ms-identifiers": [],
-          "description": "A list of sharing profile groups."
+          "x-ms-identifiers": []
         }
       },
       "required": [
@@ -3134,67 +3059,77 @@
       ],
       "x-ms-azure-resource": true
     },
-    "GalleryProvisioningState": {
-      "readOnly": true,
-      "type": "string",
-      "title": "The current state of the gallery or gallery artifact.",
-      "description": "The provisioning state, which only appears in the response.",
-      "enum": [
-        "Creating",
-        "Updating",
-        "Failed",
-        "Succeeded",
-        "Deleting",
-        "Migrating"
-      ],
-      "x-ms-enum": {
-        "name": "GalleryProvisioningState",
-        "modelAsString": true
-      }
-    },
-    "LatestGalleryImageVersion": {
+    "SoftDeletePolicy": {
       "type": "object",
-      "readOnly": true,
-      "description": "The gallery image version with latest version in a particular region.",
+      "description": "Contains information about the soft deletion policy of the gallery.",
       "properties": {
-        "latestVersionName": {
-          "type": "string",
-          "description": "The name of the latest version in the region."
-        },
-        "location": {
-          "type": "string",
-          "description": "region of the Gallery Image Version."
+        "isSoftDeleteEnabled": {
+          "type": "boolean",
+          "description": "Enables soft-deletion for resources in this gallery, allowing them to be recovered within retention time."
         }
       }
     },
-    "GalleryImageVersionUefiSettings": {
-      "type": "object",
-      "description": "Contains UEFI settings for the image version.",
+    "TargetRegion": {
+      "description": "Describes the target region information.",
       "properties": {
-        "signatureTemplateNames": {
+        "name": {
+          "type": "string",
+          "description": "The name of the region."
+        },
+        "regionalReplicaCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of replicas of the Image Version to be created per region. This property is updatable."
+        },
+        "storageAccountType": {
+          "type": "string",
+          "description": "Specifies the storage account type to be used to store the image. This property is not updatable.",
+          "enum": [
+            "Standard_LRS",
+            "Standard_ZRS",
+            "Premium_LRS"
+          ],
+          "x-ms-enum": {
+            "name": "StorageAccountType",
+            "modelAsString": true
+          }
+        },
+        "encryption": {
+          "$ref": "#/definitions/EncryptionImages"
+        },
+        "excludeFromLatest": {
+          "type": "boolean",
+          "description": "Contains the flag setting to hide an image when users specify version='latest'"
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
+    "UefiKey": {
+      "type": "object",
+      "description": "A UEFI key signature.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The type of key signature.",
+          "enum": [
+            "sha256",
+            "x509"
+          ],
+          "x-ms-enum": {
+            "name": "UefiKeyType",
+            "modelAsString": true
+          }
+        },
+        "value": {
           "type": "array",
-          "description": "The name of the template(s) that contains default UEFI key signatures that will be added to the image.",
+          "description": "The value of the key signature.",
           "items": {
-            "$ref": "#/definitions/UefiSignatureTemplateName"
+            "type": "string"
           },
           "x-ms-identifiers": []
-        },
-        "additionalSignatures": {
-          "$ref": "#/definitions/UefiKeySignatures"
         }
-      }
-    },
-    "UefiSignatureTemplateName": {
-      "type": "string",
-      "description": "The name of the signature template that contains default UEFI keys.",
-      "enum": [
-        "NoSignatureTemplate",
-        "MicrosoftUefiCertificateAuthorityTemplate",
-        "MicrosoftWindowsTemplate"
-      ],
-      "x-ms-enum": {
-        "name": "UefiSignatureTemplateName",
-        "modelAsString": true
       }
     },
     "UefiKeySignatures": {
@@ -3202,8 +3137,8 @@
       "description": "Additional UEFI key signatures that will be added to the image in addition to the signature templates",
       "properties": {
         "pk": {
-          "description": "The Platform Key of this image version.",
-          "$ref": "#/definitions/UefiKey"
+          "$ref": "#/definitions/UefiKey",
+          "description": "The Platform Key of this image version."
         },
         "kek": {
           "type": "array",
@@ -3231,48 +3166,105 @@
         }
       }
     },
-    "UefiKey": {
-      "type": "object",
-      "description": "A UEFI key signature.",
+    "UefiSignatureTemplateName": {
+      "type": "string",
+      "description": "The name of the signature template that contains default UEFI keys.",
+      "enum": [
+        "NoSignatureTemplate",
+        "MicrosoftUefiCertificateAuthorityTemplate",
+        "MicrosoftWindowsTemplate"
+      ],
+      "x-ms-enum": {
+        "name": "UefiSignatureTemplateName",
+        "modelAsString": true
+      }
+    },
+    "UpdateResourceDefinition": {
+      "description": "The Update Resource model definition.",
       "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource Id",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "Resource name",
+          "readOnly": true
+        },
         "type": {
           "type": "string",
-          "description": "The type of key signature.",
-          "enum": [
-            "sha256",
-            "x509"
-          ],
-          "x-ms-enum": {
-            "name": "UefiKeyType",
-            "modelAsString": true
-          }
+          "description": "Resource type",
+          "readOnly": true
         },
-        "value": {
-          "type": "array",
-          "description": "The value of the key signature.",
-          "items": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags",
+          "additionalProperties": {
             "type": "string"
-          },
-          "x-ms-identifiers": []
+          }
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "UserArtifactManage": {
+      "properties": {
+        "install": {
+          "type": "string",
+          "description": "Required. The path and arguments to install the gallery application. This is limited to 4096 characters."
+        },
+        "remove": {
+          "type": "string",
+          "description": "Required. The path and arguments to remove the gallery application. This is limited to 4096 characters."
+        },
+        "update": {
+          "type": "string",
+          "description": "Optional. The path and arguments to update the gallery application. If not present, then update operation will invoke remove command on the previous version and install command on the current version of the gallery application. This is limited to 4096 characters."
+        }
+      },
+      "required": [
+        "install",
+        "remove"
+      ]
+    },
+    "UserArtifactSettings": {
+      "type": "object",
+      "description": "Additional settings for the VM app that contains the target package and config file name when it is deployed to target VM or VM scale set.",
+      "properties": {
+        "packageFileName": {
+          "type": "string",
+          "description": "Optional. The name to assign the downloaded package file on the VM. This is limited to 4096 characters. If not specified, the package file will be named the same as the Gallery Application name."
+        },
+        "configFileName": {
+          "type": "string",
+          "description": "Optional. The name to assign the downloaded config file on the VM. This is limited to 4096 characters. If not specified, the config file will be named the Gallery Application name appended with \"_config\"."
         }
       }
+    },
+    "UserArtifactSource": {
+      "description": "The source image from which the Image Version is going to be created.",
+      "properties": {
+        "mediaLink": {
+          "type": "string",
+          "description": "Required. The mediaLink of the artifact, must be a readable storage page blob."
+        },
+        "defaultConfigurationLink": {
+          "type": "string",
+          "description": "Optional. The defaultConfigurationLink of the artifact, must be a readable storage page blob."
+        }
+      },
+      "required": [
+        "mediaLink"
+      ]
     }
   },
   "parameters": {
-    "ResourceGroupNameParameter": {
-      "name": "resourceGroupName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method",
-      "description": "The name of the resource group."
-    },
     "GalleryODataExpandQueryParameter": {
       "name": "$expand",
       "in": "query",
+      "description": "The expand query option to apply on the operation.",
       "required": false,
       "type": "string",
-      "description": "The expand query option to apply on the operation.",
       "enum": [
         "SharingProfile/Groups"
       ],
@@ -3280,6 +3272,14 @@
         "name": "GalleryExpandParams",
         "modelAsString": true
       },
+      "x-ms-parameter-location": "method"
+    },
+    "ResourceGroupNameParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "description": "The name of the resource group.",
+      "required": true,
+      "type": "string",
       "x-ms-parameter-location": "method"
     }
   }

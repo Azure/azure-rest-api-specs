@@ -2,17 +2,17 @@
   "swagger": "2.0",
   "info": {
     "title": "ComputeManagementClient",
-    "description": "The Compute Management Client.",
-    "version": "2024-07-01"
+    "version": "2024-07-01",
+    "description": "The Compute Management Client."
   },
-  "host": "management.azure.com",
   "schemes": [
     "https"
   ],
-  "consumes": [
+  "host": "management.azure.com",
+  "produces": [
     "application/json"
   ],
-  "produces": [
+  "consumes": [
     "application/json"
   ],
   "security": [
@@ -25,57 +25,352 @@
   "securityDefinitions": {
     "azure_auth": {
       "type": "oauth2",
-      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
-      "flow": "implicit",
       "description": "Azure Active Directory OAuth2 Flow",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
       "scopes": {
         "user_impersonation": "impersonate your user account"
       }
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/publishers/{publisherName}/artifacttypes/vmimage/offers/{offer}/skus/{skus}/versions/{version}": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/edgeZones/{edgeZone}/publishers": {
       "get": {
+        "operationId": "VirtualMachineImagesEdgeZone_ListPublishers",
         "tags": [
           "VirtualMachineImages"
         ],
-        "operationId": "VirtualMachineImages_Get",
-        "description": "Gets a virtual machine image.",
+        "description": "Gets a list of virtual machine image publishers for the specified Azure location and edge zone.",
         "parameters": [
           {
             "name": "location",
             "in": "path",
+            "description": "The name of a supported Azure region.",
             "required": true,
-            "type": "string",
-            "description": "The name of a supported Azure region."
+            "type": "string"
+          },
+          {
+            "name": "edgeZone",
+            "in": "path",
+            "description": "The name of the edge zone.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/VirtualMachineImageResource"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common-types/v1/common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VirtualMachineImagesEdgeZone_ListPublishers_MaximumSet_Gen": {
+            "$ref": "./examples/virtualMachineImageExamples/VirtualMachineImagesEdgeZone_ListPublishers_MaximumSet_Gen.json"
+          },
+          "VirtualMachineImagesEdgeZone_ListPublishers_MinimumSet_Gen": {
+            "$ref": "./examples/virtualMachineImageExamples/VirtualMachineImagesEdgeZone_ListPublishers_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/edgeZones/{edgeZone}/publishers/{publisherName}/artifacttypes/vmimage/offers": {
+      "get": {
+        "operationId": "VirtualMachineImagesEdgeZone_ListOffers",
+        "tags": [
+          "VirtualMachineImages"
+        ],
+        "description": "Gets a list of virtual machine image offers for the specified location, edge zone and publisher.",
+        "parameters": [
+          {
+            "name": "location",
+            "in": "path",
+            "description": "The name of a supported Azure region.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "edgeZone",
+            "in": "path",
+            "description": "The name of the edge zone.",
+            "required": true,
+            "type": "string"
           },
           {
             "name": "publisherName",
             "in": "path",
+            "description": "A valid image publisher.",
             "required": true,
-            "type": "string",
-            "description": "A valid image publisher."
+            "type": "string"
+          },
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/VirtualMachineImageResource"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common-types/v1/common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VirtualMachineImagesEdgeZone_ListOffers_MaximumSet_Gen": {
+            "$ref": "./examples/virtualMachineImageExamples/VirtualMachineImagesEdgeZone_ListOffers_MaximumSet_Gen.json"
+          },
+          "VirtualMachineImagesEdgeZone_ListOffers_MinimumSet_Gen": {
+            "$ref": "./examples/virtualMachineImageExamples/VirtualMachineImagesEdgeZone_ListOffers_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/edgeZones/{edgeZone}/publishers/{publisherName}/artifacttypes/vmimage/offers/{offer}/skus": {
+      "get": {
+        "operationId": "VirtualMachineImagesEdgeZone_ListSkus",
+        "tags": [
+          "VirtualMachineImages"
+        ],
+        "description": "Gets a list of virtual machine image SKUs for the specified location, edge zone, publisher, and offer.",
+        "parameters": [
+          {
+            "name": "location",
+            "in": "path",
+            "description": "The name of a supported Azure region.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "edgeZone",
+            "in": "path",
+            "description": "The name of the edge zone.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "publisherName",
+            "in": "path",
+            "description": "A valid image publisher.",
+            "required": true,
+            "type": "string"
           },
           {
             "name": "offer",
             "in": "path",
+            "description": "A valid image publisher offer.",
             "required": true,
-            "type": "string",
-            "description": "A valid image publisher offer."
+            "type": "string"
+          },
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/VirtualMachineImageResource"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common-types/v1/common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VirtualMachineImagesEdgeZone_ListSkus_MaximumSet_Gen": {
+            "$ref": "./examples/virtualMachineImageExamples/VirtualMachineImagesEdgeZone_ListSkus_MaximumSet_Gen.json"
+          },
+          "VirtualMachineImagesEdgeZone_ListSkus_MinimumSet_Gen": {
+            "$ref": "./examples/virtualMachineImageExamples/VirtualMachineImagesEdgeZone_ListSkus_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/edgeZones/{edgeZone}/publishers/{publisherName}/artifacttypes/vmimage/offers/{offer}/skus/{skus}/versions": {
+      "get": {
+        "operationId": "VirtualMachineImagesEdgeZone_List",
+        "tags": [
+          "VirtualMachineImages"
+        ],
+        "description": "Gets a list of all virtual machine image versions for the specified location, edge zone, publisher, offer, and SKU.",
+        "parameters": [
+          {
+            "name": "location",
+            "in": "path",
+            "description": "The name of a supported Azure region.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "edgeZone",
+            "in": "path",
+            "description": "The name of the edge zone.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "publisherName",
+            "in": "path",
+            "description": "A valid image publisher.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "offer",
+            "in": "path",
+            "description": "A valid image publisher offer.",
+            "required": true,
+            "type": "string"
           },
           {
             "name": "skus",
             "in": "path",
+            "description": "A valid image SKU.",
             "required": true,
-            "type": "string",
-            "description": "A valid image SKU."
+            "type": "string"
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "The expand expression to apply on the operation.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "description": "An integer value specifying the number of images to return that matches supplied values.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "$orderby",
+            "in": "query",
+            "description": "Specifies the order of the results returned. Formatted as an OData query.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/VirtualMachineImageResource"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common-types/v1/common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VirtualMachineImagesEdgeZone_List_MaximumSet_Gen": {
+            "$ref": "./examples/virtualMachineImageExamples/VirtualMachineImagesEdgeZone_List_MaximumSet_Gen.json"
+          },
+          "VirtualMachineImagesEdgeZone_List_MinimumSet_Gen": {
+            "$ref": "./examples/virtualMachineImageExamples/VirtualMachineImagesEdgeZone_List_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/edgeZones/{edgeZone}/publishers/{publisherName}/artifacttypes/vmimage/offers/{offer}/skus/{skus}/versions/{version}": {
+      "get": {
+        "operationId": "VirtualMachineImagesEdgeZone_Get",
+        "tags": [
+          "VirtualMachineImages"
+        ],
+        "description": "Gets a virtual machine image in an edge zone.",
+        "parameters": [
+          {
+            "name": "location",
+            "in": "path",
+            "description": "The name of a supported Azure region.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "edgeZone",
+            "in": "path",
+            "description": "The name of the edge zone.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "publisherName",
+            "in": "path",
+            "description": "A valid image publisher.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "offer",
+            "in": "path",
+            "description": "A valid image publisher offer.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "skus",
+            "in": "path",
+            "description": "A valid image SKU.",
+            "required": true,
+            "type": "string"
           },
           {
             "name": "version",
             "in": "path",
+            "description": "A valid image SKU version.",
             "required": true,
-            "type": "string",
-            "description": "A valid image SKU version."
+            "type": "string"
           },
           {
             "$ref": "../../../common-types/v1/common.json#/parameters/ApiVersionParameter"
@@ -99,57 +394,278 @@
           }
         },
         "x-ms-examples": {
-          "VirtualMachineImage_Get_MaximumSet_Gen": {
-            "$ref": "./examples/virtualMachineImageExamples/VirtualMachineImage_Get_MaximumSet_Gen.json"
+          "VirtualMachineImagesEdgeZone_Get_MaximumSet_Gen": {
+            "$ref": "./examples/virtualMachineImageExamples/VirtualMachineImagesEdgeZone_Get_MaximumSet_Gen.json"
           },
-          "VirtualMachineImage_Get_MinimumSet_Gen": {
-            "$ref": "./examples/virtualMachineImageExamples/VirtualMachineImage_Get_MinimumSet_Gen.json"
+          "VirtualMachineImagesEdgeZone_Get_MinimumSet_Gen": {
+            "$ref": "./examples/virtualMachineImageExamples/VirtualMachineImagesEdgeZone_Get_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/edgeZones/{edgeZone}/vmimages": {
+      "get": {
+        "operationId": "VirtualMachineImages_ListByEdgeZone",
+        "tags": [
+          "VirtualMachineImages"
+        ],
+        "description": "Gets a list of all virtual machine image versions for the specified edge zone",
+        "parameters": [
+          {
+            "name": "location",
+            "in": "path",
+            "description": "The name of a supported Azure region.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "edgeZone",
+            "in": "path",
+            "description": "The name of the edge zone.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/VmImagesInEdgeZoneListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common-types/v1/common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VirtualMachineImagesEdgeZone_ListByEdgeZone_MaximumSet_Gen": {
+            "$ref": "./examples/virtualMachineImageExamples/VirtualMachineImagesEdgeZone_ListByEdgeZone_MaximumSet_Gen.json"
+          },
+          "VirtualMachineImagesEdgeZone_ListByEdgeZone_MinimumSet_Gen": {
+            "$ref": "./examples/virtualMachineImageExamples/VirtualMachineImagesEdgeZone_ListByEdgeZone_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/publishers": {
+      "get": {
+        "operationId": "VirtualMachineImages_ListPublishers",
+        "tags": [
+          "VirtualMachineImages"
+        ],
+        "description": "Gets a list of virtual machine image publishers for the specified Azure location.",
+        "parameters": [
+          {
+            "name": "location",
+            "in": "path",
+            "description": "The name of a supported Azure region.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/VirtualMachineImageResource"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common-types/v1/common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VirtualMachineImage_ListPublishers_MaximumSet_Gen": {
+            "$ref": "./examples/virtualMachineImageExamples/VirtualMachineImage_ListPublishers_MaximumSet_Gen.json"
+          },
+          "VirtualMachineImage_ListPublishers_MinimumSet_Gen": {
+            "$ref": "./examples/virtualMachineImageExamples/VirtualMachineImage_ListPublishers_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/publishers/{publisherName}/artifacttypes/vmimage/offers": {
+      "get": {
+        "operationId": "VirtualMachineImages_ListOffers",
+        "tags": [
+          "VirtualMachineImages"
+        ],
+        "description": "Gets a list of virtual machine image offers for the specified location and publisher.",
+        "parameters": [
+          {
+            "name": "location",
+            "in": "path",
+            "description": "The name of a supported Azure region.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "publisherName",
+            "in": "path",
+            "description": "A valid image publisher.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/VirtualMachineImageResource"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common-types/v1/common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VirtualMachineImage_ListOffers_MaximumSet_Gen": {
+            "$ref": "./examples/virtualMachineImageExamples/VirtualMachineImage_ListOffers_MaximumSet_Gen.json"
+          },
+          "VirtualMachineImage_ListOffers_MinimumSet_Gen": {
+            "$ref": "./examples/virtualMachineImageExamples/VirtualMachineImage_ListOffers_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/publishers/{publisherName}/artifacttypes/vmimage/offers/{offer}/skus": {
+      "get": {
+        "operationId": "VirtualMachineImages_ListSkus",
+        "tags": [
+          "VirtualMachineImages"
+        ],
+        "description": "Gets a list of virtual machine image SKUs for the specified location, publisher, and offer.",
+        "parameters": [
+          {
+            "name": "location",
+            "in": "path",
+            "description": "The name of a supported Azure region.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "publisherName",
+            "in": "path",
+            "description": "A valid image publisher.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "offer",
+            "in": "path",
+            "description": "A valid image publisher offer.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/VirtualMachineImageResource"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common-types/v1/common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VirtualMachineImage_ListSkus_MaximumSet_Gen": {
+            "$ref": "./examples/virtualMachineImageExamples/VirtualMachineImage_ListSkus_MaximumSet_Gen.json"
+          },
+          "VirtualMachineImage_ListSkus_MinimumSet_Gen": {
+            "$ref": "./examples/virtualMachineImageExamples/VirtualMachineImage_ListSkus_MinimumSet_Gen.json"
           }
         }
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/publishers/{publisherName}/artifacttypes/vmimage/offers/{offer}/skus/{skus}/versions": {
       "get": {
+        "operationId": "VirtualMachineImages_List",
         "tags": [
           "VirtualMachineImages"
         ],
-        "operationId": "VirtualMachineImages_List",
         "description": "Gets a list of all virtual machine image versions for the specified location, publisher, offer, and SKU.",
         "parameters": [
           {
             "name": "location",
             "in": "path",
+            "description": "The name of a supported Azure region.",
             "required": true,
-            "type": "string",
-            "description": "The name of a supported Azure region."
+            "type": "string"
           },
           {
             "name": "publisherName",
             "in": "path",
+            "description": "A valid image publisher.",
             "required": true,
-            "type": "string",
-            "description": "A valid image publisher."
+            "type": "string"
           },
           {
             "name": "offer",
             "in": "path",
+            "description": "A valid image publisher offer.",
             "required": true,
-            "type": "string",
-            "description": "A valid image publisher offer."
+            "type": "string"
           },
           {
             "name": "skus",
             "in": "path",
+            "description": "A valid image SKU.",
             "required": true,
-            "type": "string",
-            "description": "A valid image SKU."
+            "type": "string"
           },
           {
             "name": "$expand",
             "in": "query",
+            "description": "The expand expression to apply on the operation.",
             "required": false,
-            "type": "string",
-            "description": "The expand expression to apply on the operation."
+            "type": "string"
           },
           {
             "name": "$top",
@@ -198,223 +714,48 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/publishers/{publisherName}/artifacttypes/vmimage/offers": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/publishers/{publisherName}/artifacttypes/vmimage/offers/{offer}/skus/{skus}/versions/{version}": {
       "get": {
+        "operationId": "VirtualMachineImages_Get",
         "tags": [
           "VirtualMachineImages"
         ],
-        "operationId": "VirtualMachineImages_ListOffers",
-        "description": "Gets a list of virtual machine image offers for the specified location and publisher.",
+        "description": "Gets a virtual machine image.",
         "parameters": [
           {
             "name": "location",
             "in": "path",
+            "description": "The name of a supported Azure region.",
             "required": true,
-            "type": "string",
-            "description": "The name of a supported Azure region."
+            "type": "string"
           },
           {
             "name": "publisherName",
             "in": "path",
+            "description": "A valid image publisher.",
             "required": true,
-            "type": "string",
-            "description": "A valid image publisher."
-          },
-          {
-            "$ref": "../../../common-types/v1/common.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../common-types/v1/common.json#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/VirtualMachineImageResource"
-              }
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../common-types/v1/common.json#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "VirtualMachineImage_ListOffers_MaximumSet_Gen": {
-            "$ref": "./examples/virtualMachineImageExamples/VirtualMachineImage_ListOffers_MaximumSet_Gen.json"
-          },
-          "VirtualMachineImage_ListOffers_MinimumSet_Gen": {
-            "$ref": "./examples/virtualMachineImageExamples/VirtualMachineImage_ListOffers_MinimumSet_Gen.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/publishers": {
-      "get": {
-        "tags": [
-          "VirtualMachineImages"
-        ],
-        "operationId": "VirtualMachineImages_ListPublishers",
-        "description": "Gets a list of virtual machine image publishers for the specified Azure location.",
-        "parameters": [
-          {
-            "name": "location",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of a supported Azure region."
-          },
-          {
-            "$ref": "../../../common-types/v1/common.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../common-types/v1/common.json#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/VirtualMachineImageResource"
-              }
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../common-types/v1/common.json#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "VirtualMachineImage_ListPublishers_MaximumSet_Gen": {
-            "$ref": "./examples/virtualMachineImageExamples/VirtualMachineImage_ListPublishers_MaximumSet_Gen.json"
-          },
-          "VirtualMachineImage_ListPublishers_MinimumSet_Gen": {
-            "$ref": "./examples/virtualMachineImageExamples/VirtualMachineImage_ListPublishers_MinimumSet_Gen.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/publishers/{publisherName}/artifacttypes/vmimage/offers/{offer}/skus": {
-      "get": {
-        "tags": [
-          "VirtualMachineImages"
-        ],
-        "operationId": "VirtualMachineImages_ListSkus",
-        "description": "Gets a list of virtual machine image SKUs for the specified location, publisher, and offer.",
-        "parameters": [
-          {
-            "name": "location",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of a supported Azure region."
-          },
-          {
-            "name": "publisherName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "A valid image publisher."
+            "type": "string"
           },
           {
             "name": "offer",
             "in": "path",
+            "description": "A valid image publisher offer.",
             "required": true,
-            "type": "string",
-            "description": "A valid image publisher offer."
-          },
-          {
-            "$ref": "../../../common-types/v1/common.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../common-types/v1/common.json#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/VirtualMachineImageResource"
-              }
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../common-types/v1/common.json#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "VirtualMachineImage_ListSkus_MaximumSet_Gen": {
-            "$ref": "./examples/virtualMachineImageExamples/VirtualMachineImage_ListSkus_MaximumSet_Gen.json"
-          },
-          "VirtualMachineImage_ListSkus_MinimumSet_Gen": {
-            "$ref": "./examples/virtualMachineImageExamples/VirtualMachineImage_ListSkus_MinimumSet_Gen.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/edgeZones/{edgeZone}/publishers/{publisherName}/artifacttypes/vmimage/offers/{offer}/skus/{skus}/versions/{version}": {
-      "get": {
-        "tags": [
-          "VirtualMachineImages"
-        ],
-        "operationId": "VirtualMachineImagesEdgeZone_Get",
-        "description": "Gets a virtual machine image in an edge zone.",
-        "parameters": [
-          {
-            "name": "location",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of a supported Azure region."
-          },
-          {
-            "name": "edgeZone",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the edge zone."
-          },
-          {
-            "name": "publisherName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "A valid image publisher."
-          },
-          {
-            "name": "offer",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "A valid image publisher offer."
+            "type": "string"
           },
           {
             "name": "skus",
             "in": "path",
+            "description": "A valid image SKU.",
             "required": true,
-            "type": "string",
-            "description": "A valid image SKU."
+            "type": "string"
           },
           {
             "name": "version",
             "in": "path",
+            "description": "A valid image SKU version.",
             "required": true,
-            "type": "string",
-            "description": "A valid image SKU version."
+            "type": "string"
           },
           {
             "$ref": "../../../common-types/v1/common.json#/parameters/ApiVersionParameter"
@@ -438,359 +779,77 @@
           }
         },
         "x-ms-examples": {
-          "VirtualMachineImagesEdgeZone_Get_MaximumSet_Gen": {
-            "$ref": "./examples/virtualMachineImageExamples/VirtualMachineImagesEdgeZone_Get_MaximumSet_Gen.json"
+          "VirtualMachineImage_Get_MaximumSet_Gen": {
+            "$ref": "./examples/virtualMachineImageExamples/VirtualMachineImage_Get_MaximumSet_Gen.json"
           },
-          "VirtualMachineImagesEdgeZone_Get_MinimumSet_Gen": {
-            "$ref": "./examples/virtualMachineImageExamples/VirtualMachineImagesEdgeZone_Get_MinimumSet_Gen.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/edgeZones/{edgeZone}/publishers/{publisherName}/artifacttypes/vmimage/offers/{offer}/skus/{skus}/versions": {
-      "get": {
-        "tags": [
-          "VirtualMachineImages"
-        ],
-        "operationId": "VirtualMachineImagesEdgeZone_List",
-        "description": "Gets a list of all virtual machine image versions for the specified location, edge zone, publisher, offer, and SKU.",
-        "parameters": [
-          {
-            "name": "location",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of a supported Azure region."
-          },
-          {
-            "name": "edgeZone",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the edge zone."
-          },
-          {
-            "name": "publisherName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "A valid image publisher."
-          },
-          {
-            "name": "offer",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "A valid image publisher offer."
-          },
-          {
-            "name": "skus",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "A valid image SKU."
-          },
-          {
-            "name": "$expand",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "description": "The expand expression to apply on the operation."
-          },
-          {
-            "name": "$top",
-            "in": "query",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "description": "An integer value specifying the number of images to return that matches supplied values."
-          },
-          {
-            "name": "$orderby",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "description": "Specifies the order of the results returned. Formatted as an OData query."
-          },
-          {
-            "$ref": "../../../common-types/v1/common.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../common-types/v1/common.json#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/VirtualMachineImageResource"
-              }
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../common-types/v1/common.json#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "VirtualMachineImagesEdgeZone_List_MaximumSet_Gen": {
-            "$ref": "./examples/virtualMachineImageExamples/VirtualMachineImagesEdgeZone_List_MaximumSet_Gen.json"
-          },
-          "VirtualMachineImagesEdgeZone_List_MinimumSet_Gen": {
-            "$ref": "./examples/virtualMachineImageExamples/VirtualMachineImagesEdgeZone_List_MinimumSet_Gen.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/edgeZones/{edgeZone}/publishers/{publisherName}/artifacttypes/vmimage/offers": {
-      "get": {
-        "tags": [
-          "VirtualMachineImages"
-        ],
-        "operationId": "VirtualMachineImagesEdgeZone_ListOffers",
-        "description": "Gets a list of virtual machine image offers for the specified location, edge zone and publisher.",
-        "parameters": [
-          {
-            "name": "location",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of a supported Azure region."
-          },
-          {
-            "name": "edgeZone",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the edge zone."
-          },
-          {
-            "name": "publisherName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "A valid image publisher."
-          },
-          {
-            "$ref": "../../../common-types/v1/common.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../common-types/v1/common.json#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/VirtualMachineImageResource"
-              }
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../common-types/v1/common.json#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "VirtualMachineImagesEdgeZone_ListOffers_MaximumSet_Gen": {
-            "$ref": "./examples/virtualMachineImageExamples/VirtualMachineImagesEdgeZone_ListOffers_MaximumSet_Gen.json"
-          },
-          "VirtualMachineImagesEdgeZone_ListOffers_MinimumSet_Gen": {
-            "$ref": "./examples/virtualMachineImageExamples/VirtualMachineImagesEdgeZone_ListOffers_MinimumSet_Gen.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/edgeZones/{edgeZone}/publishers": {
-      "get": {
-        "tags": [
-          "VirtualMachineImages"
-        ],
-        "operationId": "VirtualMachineImagesEdgeZone_ListPublishers",
-        "description": "Gets a list of virtual machine image publishers for the specified Azure location and edge zone.",
-        "parameters": [
-          {
-            "name": "location",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of a supported Azure region."
-          },
-          {
-            "name": "edgeZone",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the edge zone."
-          },
-          {
-            "$ref": "../../../common-types/v1/common.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../common-types/v1/common.json#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/VirtualMachineImageResource"
-              }
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../common-types/v1/common.json#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "VirtualMachineImagesEdgeZone_ListPublishers_MaximumSet_Gen": {
-            "$ref": "./examples/virtualMachineImageExamples/VirtualMachineImagesEdgeZone_ListPublishers_MaximumSet_Gen.json"
-          },
-          "VirtualMachineImagesEdgeZone_ListPublishers_MinimumSet_Gen": {
-            "$ref": "./examples/virtualMachineImageExamples/VirtualMachineImagesEdgeZone_ListPublishers_MinimumSet_Gen.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/edgeZones/{edgeZone}/vmimages": {
-      "get": {
-        "tags": [
-          "VirtualMachineImages"
-        ],
-        "operationId": "VirtualMachineImages_ListByEdgeZone",
-        "description": "Gets a list of all virtual machine image versions for the specified edge zone",
-        "parameters": [
-          {
-            "name": "location",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of a supported Azure region."
-          },
-          {
-            "name": "edgeZone",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the edge zone."
-          },
-          {
-            "$ref": "../../../common-types/v1/common.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../common-types/v1/common.json#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/VmImagesInEdgeZoneListResult"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../common-types/v1/common.json#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "VirtualMachineImagesEdgeZone_ListByEdgeZone_MaximumSet_Gen": {
-            "$ref": "./examples/virtualMachineImageExamples/VirtualMachineImagesEdgeZone_ListByEdgeZone_MaximumSet_Gen.json"
-          },
-          "VirtualMachineImagesEdgeZone_ListByEdgeZone_MinimumSet_Gen": {
-            "$ref": "./examples/virtualMachineImageExamples/VirtualMachineImagesEdgeZone_ListByEdgeZone_MinimumSet_Gen.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/edgeZones/{edgeZone}/publishers/{publisherName}/artifacttypes/vmimage/offers/{offer}/skus": {
-      "get": {
-        "tags": [
-          "VirtualMachineImages"
-        ],
-        "operationId": "VirtualMachineImagesEdgeZone_ListSkus",
-        "description": "Gets a list of virtual machine image SKUs for the specified location, edge zone, publisher, and offer.",
-        "parameters": [
-          {
-            "name": "location",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of a supported Azure region."
-          },
-          {
-            "name": "edgeZone",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the edge zone."
-          },
-          {
-            "name": "publisherName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "A valid image publisher."
-          },
-          {
-            "name": "offer",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "A valid image publisher offer."
-          },
-          {
-            "$ref": "../../../common-types/v1/common.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../common-types/v1/common.json#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/VirtualMachineImageResource"
-              }
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../common-types/v1/common.json#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "VirtualMachineImagesEdgeZone_ListSkus_MaximumSet_Gen": {
-            "$ref": "./examples/virtualMachineImageExamples/VirtualMachineImagesEdgeZone_ListSkus_MaximumSet_Gen.json"
-          },
-          "VirtualMachineImagesEdgeZone_ListSkus_MinimumSet_Gen": {
-            "$ref": "./examples/virtualMachineImageExamples/VirtualMachineImagesEdgeZone_ListSkus_MinimumSet_Gen.json"
+          "VirtualMachineImage_Get_MinimumSet_Gen": {
+            "$ref": "./examples/virtualMachineImageExamples/VirtualMachineImage_Get_MinimumSet_Gen.json"
           }
         }
       }
     }
   },
   "definitions": {
+    "AlternativeOption": {
+      "type": "object",
+      "description": "Describes the alternative option specified by the Publisher for this image when this image is deprecated.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Describes the type of the alternative option.",
+          "enum": [
+            "None",
+            "Offer",
+            "Plan"
+          ],
+          "x-ms-enum": {
+            "name": "AlternativeType",
+            "modelAsString": true
+          }
+        },
+        "value": {
+          "type": "string",
+          "description": "Indicates the alternative option value specified by the Publisher. This is the Offer name when the type is Offer or the Plan name when the type is Plan."
+        }
+      }
+    },
+    "ArchitectureType": {
+      "type": "string",
+      "description": "Specifies the Architecture Type",
+      "enum": [
+        "x64",
+        "Arm64"
+      ],
+      "x-ms-enum": {
+        "name": "ArchitectureTypes",
+        "modelAsString": true
+      }
+    },
+    "AutomaticOSUpgradeProperties": {
+      "description": "Describes automatic OS upgrade properties on the image.",
+      "properties": {
+        "automaticOSUpgradeSupported": {
+          "type": "boolean",
+          "description": "Specifies whether automatic OS upgrade is supported on the image."
+        }
+      },
+      "required": [
+        "automaticOSUpgradeSupported"
+      ]
+    },
+    "DataDiskImage": {
+      "description": "Contains the data disk images information.",
+      "properties": {
+        "lun": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Specifies the logical unit number of the data disk. This value is used to identify data disks within the VM and therefore must be unique for each data disk attached to a VM.",
+          "readOnly": true
+        }
+      }
+    },
     "DisallowedConfiguration": {
+      "description": "Specifies the disallowed configuration for a virtual machine image.",
       "properties": {
         "vmDiskType": {
           "type": "string",
@@ -804,109 +863,11 @@
             "modelAsString": true
           }
         }
-      },
-      "description": "Specifies the disallowed configuration for a virtual machine image."
-    },
-    "VirtualMachineImageResource": {
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "The name of the resource."
-        },
-        "location": {
-          "type": "string",
-          "description": "The supported Azure location of the resource."
-        },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Specifies the tags that are assigned to the virtual machine. For more information about using tags, see [Using tags to organize your Azure resources](https://docs.microsoft.com/azure/azure-resource-manager/resource-group-using-tags.md)."
-        },
-        "extendedLocation": {
-          "$ref": "../../../common-types/v1/common.json#/definitions/ExtendedLocation",
-          "description": "The extended location of the Virtual Machine."
-        }
-      },
-      "required": [
-        "name",
-        "location"
-      ],
-      "allOf": [
-        {
-          "$ref": "../../../common-types/v1/common.json#/definitions/SubResource"
-        }
-      ],
-      "description": "Virtual machine image resource information."
-    },
-    "PurchasePlan": {
-      "properties": {
-        "publisher": {
-          "type": "string",
-          "description": "The publisher ID."
-        },
-        "name": {
-          "type": "string",
-          "description": "The plan ID."
-        },
-        "product": {
-          "type": "string",
-          "description": "Specifies the product of the image from the marketplace. This is the same value as Offer under the imageReference element."
-        }
-      },
-      "required": [
-        "publisher",
-        "name",
-        "product"
-      ],
-      "description": "Used for establishing the purchase context of any 3rd Party artifact through MarketPlace."
-    },
-    "OSDiskImage": {
-      "properties": {
-        "operatingSystem": {
-          "type": "string",
-          "description": "The operating system of the osDiskImage.",
-          "enum": [
-            "Windows",
-            "Linux"
-          ],
-          "x-ms-enum": {
-            "name": "OperatingSystemTypes",
-            "modelAsString": false
-          }
-        }
-      },
-      "required": [
-        "operatingSystem"
-      ],
-      "description": "Contains the os disk image information."
-    },
-    "DataDiskImage": {
-      "properties": {
-        "lun": {
-          "readOnly": true,
-          "type": "integer",
-          "format": "int32",
-          "description": "Specifies the logical unit number of the data disk. This value is used to identify data disks within the VM and therefore must be unique for each data disk attached to a VM."
-        }
-      },
-      "description": "Contains the data disk images information."
-    },
-    "AutomaticOSUpgradeProperties": {
-      "properties": {
-        "automaticOSUpgradeSupported": {
-          "type": "boolean",
-          "description": "Specifies whether automatic OS upgrade is supported on the image."
-        }
-      },
-      "required": [
-        "automaticOSUpgradeSupported"
-      ],
-      "description": "Describes automatic OS upgrade properties on the image."
+      }
     },
     "ImageDeprecationStatus": {
       "type": "object",
+      "description": "Describes image deprecation status properties on the image.",
       "properties": {
         "imageState": {
           "type": "string",
@@ -929,33 +890,70 @@
         "alternativeOption": {
           "$ref": "#/definitions/AlternativeOption"
         }
-      },
-      "description": "Describes image deprecation status properties on the image."
+      }
     },
-    "AlternativeOption": {
-      "type": "object",
+    "OSDiskImage": {
+      "description": "Contains the os disk image information.",
       "properties": {
-        "type": {
+        "operatingSystem": {
           "type": "string",
-          "description": "Describes the type of the alternative option.",
+          "description": "The operating system of the osDiskImage.",
           "enum": [
-            "None",
-            "Offer",
-            "Plan"
+            "Windows",
+            "Linux"
           ],
           "x-ms-enum": {
-            "name": "AlternativeType",
-            "modelAsString": true
+            "name": "OperatingSystemTypes",
+            "modelAsString": false
           }
-        },
-        "value": {
-          "type": "string",
-          "description": "Indicates the alternative option value specified by the Publisher. This is the Offer name when the type is Offer or the Plan name when the type is Plan."
         }
       },
-      "description": "Describes the alternative option specified by the Publisher for this image when this image is deprecated."
+      "required": [
+        "operatingSystem"
+      ]
+    },
+    "PurchasePlan": {
+      "description": "Used for establishing the purchase context of any 3rd Party artifact through MarketPlace.",
+      "properties": {
+        "publisher": {
+          "type": "string",
+          "description": "The publisher ID."
+        },
+        "name": {
+          "type": "string",
+          "description": "The plan ID."
+        },
+        "product": {
+          "type": "string",
+          "description": "Specifies the product of the image from the marketplace. This is the same value as Offer under the imageReference element."
+        }
+      },
+      "required": [
+        "publisher",
+        "name",
+        "product"
+      ]
+    },
+    "VirtualMachineImage": {
+      "description": "Describes a Virtual Machine Image.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/VirtualMachineImageProperties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "required": [
+        "name",
+        "location"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/VirtualMachineImageResource"
+        }
+      ]
     },
     "VirtualMachineImageFeature": {
+      "description": "Specifies additional capabilities supported by the image",
       "properties": {
         "name": {
           "type": "string",
@@ -965,10 +963,10 @@
           "type": "string",
           "description": "The corresponding value for the feature."
         }
-      },
-      "description": "Specifies additional capabilities supported by the image"
+      }
     },
     "VirtualMachineImageProperties": {
+      "description": "Describes the properties of a Virtual Machine Image.",
       "properties": {
         "plan": {
           "$ref": "#/definitions/PurchasePlan"
@@ -1010,14 +1008,29 @@
         "imageDeprecationStatus": {
           "$ref": "#/definitions/ImageDeprecationStatus"
         }
-      },
-      "description": "Describes the properties of a Virtual Machine Image."
+      }
     },
-    "VirtualMachineImage": {
+    "VirtualMachineImageResource": {
+      "description": "Virtual machine image resource information.",
       "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/VirtualMachineImageProperties"
+        "name": {
+          "type": "string",
+          "description": "The name of the resource."
+        },
+        "location": {
+          "type": "string",
+          "description": "The supported Azure location of the resource."
+        },
+        "tags": {
+          "type": "object",
+          "description": "Specifies the tags that are assigned to the virtual machine. For more information about using tags, see [Using tags to organize your Azure resources](https://docs.microsoft.com/azure/azure-resource-manager/resource-group-using-tags.md).",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "extendedLocation": {
+          "$ref": "../../../common-types/v1/common.json#/definitions/ExtendedLocation",
+          "description": "The extended location of the Virtual Machine."
         }
       },
       "required": [
@@ -1026,38 +1039,25 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/VirtualMachineImageResource"
+          "$ref": "../../../common-types/v1/common.json#/definitions/SubResource"
         }
-      ],
-      "description": "Describes a Virtual Machine Image."
+      ]
     },
     "VmImagesInEdgeZoneListResult": {
       "type": "object",
+      "description": "The List VmImages in EdgeZone operation response.",
       "properties": {
         "value": {
           "type": "array",
+          "description": "The list of VMImages in EdgeZone",
           "items": {
             "$ref": "#/definitions/VirtualMachineImageResource"
-          },
-          "description": "The list of VMImages in EdgeZone"
+          }
         },
         "nextLink": {
           "type": "string",
           "description": "The URI to fetch the next page of VMImages in EdgeZone. Call ListNext() with this URI to fetch the next page of VmImages."
         }
-      },
-      "description": "The List VmImages in EdgeZone operation response."
-    },
-    "ArchitectureType": {
-      "type": "string",
-      "description": "Specifies the Architecture Type",
-      "enum": [
-        "x64",
-        "Arm64"
-      ],
-      "x-ms-enum": {
-        "name": "ArchitectureTypes",
-        "modelAsString": true
       }
     }
   }

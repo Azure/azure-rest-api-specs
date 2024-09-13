@@ -2,17 +2,17 @@
   "swagger": "2.0",
   "info": {
     "title": "ComputeDiagnosticResourceProviderClient",
-    "description": "The Compute Diagnostic Resource Provider Client",
-    "version": "2024-06-01-preview"
+    "version": "2024-06-01-preview",
+    "description": "The Compute Diagnostic Resource Provider Client"
   },
-  "host": "management.azure.com",
   "schemes": [
     "https"
   ],
-  "consumes": [
+  "host": "management.azure.com",
+  "produces": [
     "application/json"
   ],
-  "produces": [
+  "consumes": [
     "application/json"
   ],
   "security": [
@@ -25,9 +25,9 @@
   "securityDefinitions": {
     "azure_auth": {
       "type": "oauth2",
-      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
-      "flow": "implicit",
       "description": "Azure Active Directory OAuth2 Flow",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
       "scopes": {
         "user_impersonation": "impersonate your user account"
       }
@@ -36,10 +36,10 @@
   "paths": {
     "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/diagnosticOperations/{operationId}": {
       "get": {
+        "operationId": "DiagnosticOperations_Read",
         "tags": [
           "diagnosticOperations"
         ],
-        "operationId": "DiagnosticOperations_Read",
         "description": "Gets status of a Diagnostic operation issued for Disk Inspection.",
         "parameters": [
           {
@@ -84,74 +84,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/diagnostics/diskInspection/run": {
-      "post": {
-        "tags": [
-          "diagnostics"
-        ],
-        "operationId": "DiskInspection_Create",
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "description": "Creates a request for executing disk Inspection.",
-        "consumes": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "name": "runDiskInspectionInput",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/RunDiskInspectionInput"
-            },
-            "description": "RunDiskInspection object supplied in the body of the Post run disk inspection operation."
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "Accepted",
-            "headers": {
-              "Location": {
-                "type": "string"
-              }
-            }
-          },
-          "default": {
-            "description": "Error response describing why the diagnostic run failed.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Create a request for disk inspection.": {
-            "$ref": "./examples/RunDiskInspection.json"
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/diagnostics": {
       "get": {
+        "operationId": "Diagnostics_List",
         "tags": [
           "diagnostics"
         ],
-        "operationId": "Diagnostics_List",
         "description": "Lists all available Compute diagnostics for a subscription in a location.",
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink",
-          "itemName": "value"
-        },
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
@@ -181,15 +120,19 @@
           "Gets the status of a scheduled disk inspection request.": {
             "$ref": "./examples/ListDiagnostics.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink",
+          "itemName": "value"
         }
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/diagnostics/diskInspection": {
       "get": {
+        "operationId": "DiskInspection_Get",
         "tags": [
           "diagnostics_DiskInspection"
         ],
-        "operationId": "DiskInspection_Get",
         "description": "Gets a specific Compute diagnostic for a subscription in a location.",
         "parameters": [
           {
@@ -225,11 +168,10 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/diagnostics/diskInspection/registerStorageConfiguration": {
       "post": {
+        "operationId": "DiskInspectionStorageConfiguration_Register",
         "tags": [
           "registerStorageConfiguration"
         ],
-        "operationId": "DiskInspectionStorageConfiguration_Register",
-        "x-ms-long-running-operation": false,
         "description": "Register a storageAccount for a subscription used for DiskInspection",
         "consumes": [
           "application/json"
@@ -247,11 +189,11 @@
           {
             "name": "storageConfigurationInput",
             "in": "body",
+            "description": "Storage Configuration object supplied in the body of the Post to cache storageAccount for a given subscription.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/StorageConfigurationInput"
-            },
-            "description": "Storage Configuration object supplied in the body of the Post to cache storageAccount for a given subscription."
+            }
           }
         ],
         "responses": {
@@ -269,16 +211,73 @@
           "Create a request for registering a storageAccount information.": {
             "$ref": "./examples/RegisterStorageConfiguration.json"
           }
-        }
+        },
+        "x-ms-long-running-operation": false
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/diagnostics/diskInspection/run": {
+      "post": {
+        "operationId": "DiskInspection_Create",
+        "tags": [
+          "diagnostics"
+        ],
+        "description": "Creates a request for executing disk Inspection.",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "runDiskInspectionInput",
+            "in": "body",
+            "description": "RunDiskInspection object supplied in the body of the Post run disk inspection operation.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RunDiskInspectionInput"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the diagnostic run failed.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create a request for disk inspection.": {
+            "$ref": "./examples/RunDiskInspection.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/diagnostics/diskInspection/validateStorageConfiguration": {
       "post": {
+        "operationId": "DiskInspectionStorageConfiguration_Validate",
         "tags": [
           "validateStorageConfiguration"
         ],
-        "operationId": "DiskInspectionStorageConfiguration_Validate",
-        "x-ms-long-running-operation": false,
         "description": "Validate if a storageAccount configuration exists for a subscription used for DiskInspection.",
         "consumes": [
           "application/json"
@@ -312,15 +311,16 @@
           "Returns storageAccount value for an existing configuration entry": {
             "$ref": "./examples/ValidateStorageConfiguration.json"
           }
-        }
+        },
+        "x-ms-long-running-operation": false
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/diagnostics/spotPlacementRecommender": {
       "get": {
+        "operationId": "SpotPlacementRecommender_Get",
         "tags": [
           "diagnostics_SpotPlacementRecommender"
         ],
-        "operationId": "SpotPlacementRecommender_Get",
         "description": "[SOON TO BE DEPRECATED] Gets Spot Placement Recommender diagnostic metadata.",
         "parameters": [
           {
@@ -356,10 +356,10 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/diagnostics/spotPlacementRecommender/generate": {
       "post": {
+        "operationId": "SpotPlacementRecommender_Post",
         "tags": [
           "spotPlacementRecommender"
         ],
-        "operationId": "SpotPlacementRecommender_Post",
         "description": "[SOON TO BE DEPRECATED] Generates placement scores for Spot VM skus.",
         "parameters": [
           {
@@ -374,11 +374,11 @@
           {
             "name": "spotPlacementRecommenderInput",
             "in": "body",
+            "description": "SpotPlacementRecommender object supplied in the body of the Post spot placement recommender operation.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/SpotPlacementRecommenderInput"
-            },
-            "description": "SpotPlacementRecommender object supplied in the body of the Post spot placement recommender operation."
+            }
           }
         ],
         "responses": {
@@ -404,10 +404,10 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/placementScores/spot": {
       "get": {
+        "operationId": "SpotPlacementScores_Get",
         "tags": [
           "placementScores_spot"
         ],
-        "operationId": "SpotPlacementScores_Get",
         "description": "Gets Spot Placement Scores metadata.",
         "parameters": [
           {
@@ -443,10 +443,10 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/placementScores/spot/generate": {
       "post": {
+        "operationId": "SpotPlacementScores_Post",
         "tags": [
           "spotPlacementScores"
         ],
-        "operationId": "SpotPlacementScores_Post",
         "description": "Generates placement scores for Spot VM skus.",
         "parameters": [
           {
@@ -461,11 +461,11 @@
           {
             "name": "spotPlacementScoresInput",
             "in": "body",
+            "description": "SpotPlacementScores object supplied in the body of the Post spot placement scores operation.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/SpotPlacementScoresInput"
-            },
-            "description": "SpotPlacementScores object supplied in the body of the Post spot placement scores operation."
+            }
           }
         ],
         "responses": {
@@ -491,26 +491,9 @@
     }
   },
   "definitions": {
-    "ComputeDiagnosticsList": {
-      "description": "Lists all available Compute diagnostics for a subscription in a location.",
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ComputeDiagnosticBase"
-          },
-          "description": "The collection of available Compute diagnostics returned by the listing operation."
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "The continuation token."
-        }
-      }
-    },
     "ComputeDiagnosticBase": {
-      "description": "Contains metadata of a diagnostic type",
       "type": "object",
+      "description": "Contains metadata of a diagnostic type",
       "properties": {
         "properties": {
           "$ref": "#/definitions/DiagnosticProperties"
@@ -522,45 +505,26 @@
         }
       ]
     },
-    "DiagnosticProperties": {
-      "description": "Contains additional properties of a diagnostic",
+    "ComputeDiagnosticsList": {
       "type": "object",
+      "description": "Lists all available Compute diagnostics for a subscription in a location.",
       "properties": {
-        "supportedResourceTypes": {
+        "value": {
           "type": "array",
+          "description": "The collection of available Compute diagnostics returned by the listing operation.",
           "items": {
-            "type": "string"
-          },
-          "description": "Describes what are the supported resource types for a diagnostic."
+            "$ref": "#/definitions/ComputeDiagnosticBase"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The continuation token."
         }
       }
     },
-    "RunDiskInspectionInput": {
-      "type": "object",
-      "properties": {
-        "resourceId": {
-          "description": "Qualified ID of the resource.",
-          "type": "string"
-        },
-        "manifest": {
-          "description": "Name of manifest in order to trigger Disk Inspection.",
-          "type": "string"
-        },
-        "uploadSasUri": {
-          "description": "SAS uri to the blob where results will be uploaded.",
-          "type": "string",
-          "x-ms-secret": true
-        }
-      },
-      "required": [
-        "resourceId",
-        "manifest",
-        "uploadSasUri"
-      ],
-      "description": "Data used for requesting a Disk Inspection execution."
-    },
     "ComputeDiagnosticsOperationResult": {
       "type": "object",
+      "description": "Api output result when Compute Diagnostic operation is completed.",
       "properties": {
         "message": {
           "type": "string",
@@ -572,6 +536,7 @@
         },
         "resultStatus": {
           "type": "string",
+          "description": "Result status of the async operation.",
           "enum": [
             "Success",
             "Failed"
@@ -579,8 +544,7 @@
           "x-ms-enum": {
             "name": "resultStatus",
             "modelAsString": true
-          },
-          "description": "Result status of the async operation."
+          }
         },
         "errorDetail": {
           "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorDetail",
@@ -591,43 +555,24 @@
           "format": "date-time",
           "description": "The time when the disk inspection was completed."
         }
-      },
-      "description": "Api output result when Compute Diagnostic operation is completed."
+      }
     },
-    "StorageConfigurationInput": {
+    "DiagnosticProperties": {
       "type": "object",
+      "description": "Contains additional properties of a diagnostic",
       "properties": {
-        "storageAccountId": {
-          "description": "Fully qualified storage account Id. Example: \"/subscriptions/{subId}/resourceGroups/{rgName}/providers/Microsoft.Storage/storageAccounts/{storageAccountName}\"",
-          "type": "string"
+        "supportedResourceTypes": {
+          "type": "array",
+          "description": "Describes what are the supported resource types for a diagnostic.",
+          "items": {
+            "type": "string"
+          }
         }
-      },
-      "required": [
-        "storageAccountId"
-      ],
-      "description": "Data used for registering a Storage Account for a Subscription."
-    },
-    "StorageConfigurationResponse": {
-      "type": "object",
-      "properties": {
-        "storageAccountId": {
-          "type": "string",
-          "description": "Fully qualified storage account Id. Example: \"/subscriptions/{subId}/resourceGroups/{rgName}/providers/Microsoft.Storage/storageAccounts/{storageAccountName}\""
-        }
-      },
-      "description": "Api output result when there is an existing storage configuration entry."
-    },
-    "ErrorResponse": {
-      "type": "object",
-      "properties": {
-        "error": {
-          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorDetail"
-        }
-      },
-      "description": "An error response from the Compute Diagnostic Resource Provider service."
+      }
     },
     "ErrorDetail": {
       "type": "object",
+      "description": "Error Detail message.",
       "properties": {
         "code": {
           "type": "string",
@@ -643,20 +588,29 @@
         },
         "details": {
           "type": "array",
+          "description": "The Api error details",
           "items": {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorDetail"
-          },
-          "description": "The Api error details"
+          }
         },
         "innerError": {
           "$ref": "#/definitions/InnerError",
           "description": "The Api inner error"
         }
-      },
-      "description": "Error Detail message."
+      }
+    },
+    "ErrorResponse": {
+      "type": "object",
+      "description": "An error response from the Compute Diagnostic Resource Provider service.",
+      "properties": {
+        "error": {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorDetail"
+        }
+      }
     },
     "InnerError": {
       "type": "object",
+      "description": "Inner error details.",
       "properties": {
         "exceptiontype": {
           "type": "string",
@@ -666,151 +620,11 @@
           "type": "string",
           "description": "The internal error message or exception dump."
         }
-      },
-      "description": "Inner error details."
-    },
-    "SpotPlacementRecommenderInput": {
-      "type": "object",
-      "properties": {
-        "desiredLocations": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "The desired regions"
-        },
-        "desiredSizes": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ResourceSize"
-          },
-          "description": "The desired resource SKUs."
-        },
-        "desiredCount": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Desired instance count per region/zone based on the scope."
-        },
-        "availabilityZones": {
-          "type": "boolean",
-          "description": "Defines if the scope is zonal or regional."
-        }
-      },
-      "description": "SpotPlacementRecommender API Input."
-    },
-    "SpotPlacementRecommenderResponse": {
-      "type": "object",
-      "properties": {
-        "desiredLocations": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "The desired regions"
-        },
-        "desiredSizes": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ResourceSize"
-          },
-          "description": "The desired resource SKUs."
-        },
-        "desiredCount": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Desired instance count per region/zone based on the scope."
-        },
-        "availabilityZones": {
-          "type": "boolean",
-          "description": "Defines if the scope is zonal or regional."
-        },
-        "placementScores": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/PlacementScore"
-          },
-          "description": "The spot placement scores."
-        }
-      },
-      "description": "SpotPlacementRecommender API response."
-    },
-    "SpotPlacementScoresInput": {
-      "type": "object",
-      "properties": {
-        "desiredLocations": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "The desired regions"
-        },
-        "desiredSizes": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ResourceSize"
-          },
-          "description": "The desired resource SKUs."
-        },
-        "desiredCount": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Desired instance count per region/zone based on the scope."
-        },
-        "availabilityZones": {
-          "type": "boolean",
-          "description": "Defines if the scope is zonal or regional."
-        }
-      },
-      "description": "SpotPlacementScores API Input."
-    },
-    "SpotPlacementScoresResponse": {
-      "type": "object",
-      "properties": {
-        "desiredLocations": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "The desired regions"
-        },
-        "desiredSizes": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ResourceSize"
-          },
-          "description": "The desired resource SKUs."
-        },
-        "desiredCount": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Desired instance count per region/zone based on the scope."
-        },
-        "availabilityZones": {
-          "type": "boolean",
-          "description": "Defines if the scope is zonal or regional."
-        },
-        "placementScores": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/PlacementScore"
-          },
-          "description": "The spot placement scores."
-        }
-      },
-      "description": "SpotPlacementScores API response."
-    },
-    "ResourceSize": {
-      "type": "object",
-      "properties": {
-        "sku": {
-          "type": "string",
-          "description": "The resource's CRP virtual machine SKU size."
-        }
-      },
-      "description": "SpotPlacementRecommender API response."
+      }
     },
     "PlacementScore": {
       "type": "object",
+      "description": "The spot placement score for sku/region/zone combination.",
       "properties": {
         "sku": {
           "type": "string",
@@ -832,8 +646,194 @@
           "type": "boolean",
           "description": "Whether the desired quota is available."
         }
+      }
+    },
+    "ResourceSize": {
+      "type": "object",
+      "description": "SpotPlacementRecommender API response.",
+      "properties": {
+        "sku": {
+          "type": "string",
+          "description": "The resource's CRP virtual machine SKU size."
+        }
+      }
+    },
+    "RunDiskInspectionInput": {
+      "type": "object",
+      "description": "Data used for requesting a Disk Inspection execution.",
+      "properties": {
+        "resourceId": {
+          "type": "string",
+          "description": "Qualified ID of the resource."
+        },
+        "manifest": {
+          "type": "string",
+          "description": "Name of manifest in order to trigger Disk Inspection."
+        },
+        "uploadSasUri": {
+          "type": "string",
+          "description": "SAS uri to the blob where results will be uploaded.",
+          "x-ms-secret": true
+        }
       },
-      "description": "The spot placement score for sku/region/zone combination."
+      "required": [
+        "resourceId",
+        "manifest",
+        "uploadSasUri"
+      ]
+    },
+    "SpotPlacementRecommenderInput": {
+      "type": "object",
+      "description": "SpotPlacementRecommender API Input.",
+      "properties": {
+        "desiredLocations": {
+          "type": "array",
+          "description": "The desired regions",
+          "items": {
+            "type": "string"
+          }
+        },
+        "desiredSizes": {
+          "type": "array",
+          "description": "The desired resource SKUs.",
+          "items": {
+            "$ref": "#/definitions/ResourceSize"
+          }
+        },
+        "desiredCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Desired instance count per region/zone based on the scope."
+        },
+        "availabilityZones": {
+          "type": "boolean",
+          "description": "Defines if the scope is zonal or regional."
+        }
+      }
+    },
+    "SpotPlacementRecommenderResponse": {
+      "type": "object",
+      "description": "SpotPlacementRecommender API response.",
+      "properties": {
+        "desiredLocations": {
+          "type": "array",
+          "description": "The desired regions",
+          "items": {
+            "type": "string"
+          }
+        },
+        "desiredSizes": {
+          "type": "array",
+          "description": "The desired resource SKUs.",
+          "items": {
+            "$ref": "#/definitions/ResourceSize"
+          }
+        },
+        "desiredCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Desired instance count per region/zone based on the scope."
+        },
+        "availabilityZones": {
+          "type": "boolean",
+          "description": "Defines if the scope is zonal or regional."
+        },
+        "placementScores": {
+          "type": "array",
+          "description": "The spot placement scores.",
+          "items": {
+            "$ref": "#/definitions/PlacementScore"
+          }
+        }
+      }
+    },
+    "SpotPlacementScoresInput": {
+      "type": "object",
+      "description": "SpotPlacementScores API Input.",
+      "properties": {
+        "desiredLocations": {
+          "type": "array",
+          "description": "The desired regions",
+          "items": {
+            "type": "string"
+          }
+        },
+        "desiredSizes": {
+          "type": "array",
+          "description": "The desired resource SKUs.",
+          "items": {
+            "$ref": "#/definitions/ResourceSize"
+          }
+        },
+        "desiredCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Desired instance count per region/zone based on the scope."
+        },
+        "availabilityZones": {
+          "type": "boolean",
+          "description": "Defines if the scope is zonal or regional."
+        }
+      }
+    },
+    "SpotPlacementScoresResponse": {
+      "type": "object",
+      "description": "SpotPlacementScores API response.",
+      "properties": {
+        "desiredLocations": {
+          "type": "array",
+          "description": "The desired regions",
+          "items": {
+            "type": "string"
+          }
+        },
+        "desiredSizes": {
+          "type": "array",
+          "description": "The desired resource SKUs.",
+          "items": {
+            "$ref": "#/definitions/ResourceSize"
+          }
+        },
+        "desiredCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Desired instance count per region/zone based on the scope."
+        },
+        "availabilityZones": {
+          "type": "boolean",
+          "description": "Defines if the scope is zonal or regional."
+        },
+        "placementScores": {
+          "type": "array",
+          "description": "The spot placement scores.",
+          "items": {
+            "$ref": "#/definitions/PlacementScore"
+          }
+        }
+      }
+    },
+    "StorageConfigurationInput": {
+      "type": "object",
+      "description": "Data used for registering a Storage Account for a Subscription.",
+      "properties": {
+        "storageAccountId": {
+          "type": "string",
+          "description": "Fully qualified storage account Id. Example: \"/subscriptions/{subId}/resourceGroups/{rgName}/providers/Microsoft.Storage/storageAccounts/{storageAccountName}\""
+        }
+      },
+      "required": [
+        "storageAccountId"
+      ]
+    },
+    "StorageConfigurationResponse": {
+      "type": "object",
+      "description": "Api output result when there is an existing storage configuration entry.",
+      "properties": {
+        "storageAccountId": {
+          "type": "string",
+          "description": "Fully qualified storage account Id. Example: \"/subscriptions/{subId}/resourceGroups/{rgName}/providers/Microsoft.Storage/storageAccounts/{storageAccountName}\""
+        }
+      }
     }
   }
 }

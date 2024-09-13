@@ -2,17 +2,17 @@
   "swagger": "2.0",
   "info": {
     "title": "DiskResourceProviderClient",
-    "description": "The Disk Resource Provider Client.",
-    "version": "2024-03-02"
+    "version": "2024-03-02",
+    "description": "The Disk Resource Provider Client."
   },
-  "host": "management.azure.com",
   "schemes": [
     "https"
   ],
-  "consumes": [
+  "host": "management.azure.com",
+  "produces": [
     "application/json"
   ],
-  "produces": [
+  "consumes": [
     "application/json"
   ],
   "security": [
@@ -25,139 +25,90 @@
   "securityDefinitions": {
     "azure_auth": {
       "type": "oauth2",
-      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
-      "flow": "implicit",
       "description": "Azure Active Directory OAuth2 Flow",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
       "scopes": {
         "user_impersonation": "impersonate your user account"
       }
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/snapshots/{snapshotName}": {
-      "put": {
-        "tags": [
-          "Snapshots"
-        ],
-        "operationId": "Snapshots_CreateOrUpdate",
-        "description": "Creates or updates a snapshot.",
-        "parameters": [
-          {
-            "$ref": "../../../common-types/v1/common.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "./diskRPCommon.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/SnapshotNameParameter"
-          },
-          {
-            "$ref": "../../../common-types/v1/common.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "name": "snapshot",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/Snapshot"
-            },
-            "description": "Snapshot object supplied in the body of the Put disk operation."
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/Snapshot"
-            }
-          },
-          "202": {
-            "description": "Accepted",
-            "schema": {
-              "$ref": "#/definitions/Snapshot"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Create a snapshot from an existing snapshot in the same or a different subscription.": {
-            "$ref": "./examples/snapshotExamples/Snapshot_Create_FromAnExistingSnapshot.json"
-          },
-          "Create a snapshot by importing an unmanaged blob from the same subscription.": {
-            "$ref": "./examples/snapshotExamples/Snapshot_Create_ByImportingAnUnmanagedBlobFromTheSameSubscription.json"
-          },
-          "Create a snapshot by importing an unmanaged blob from a different subscription.": {
-            "$ref": "./examples/snapshotExamples/Snapshot_Create_ByImportingAnUnmanagedBlobFromADifferentSubscription.json"
-          },
-          "Create a snapshot from an existing snapshot in the same or a different subscription in a different region.": {
-            "$ref": "./examples/snapshotExamples/Snapshot_Create_FromAnExistingSnapshotInDifferentRegion.json"
-          },
-          "Create a snapshot from an elastic san volume snapshot.": {
-            "$ref": "./examples/snapshotExamples/Snapshot_Create_FromAnElasticSanVolumeSnapshot.json"
-          },
-          "Create a snapshot from an existing snapshot in the same or a different subscription in a different region with quicker copy speed.": {
-            "$ref": "./examples/snapshotExamples/Snapshot_Create_EnhancedProvisionedBandwidthCopySpeed.json"
-          }
-        },
-        "x-ms-long-running-operation": true
-      },
-      "patch": {
-        "tags": [
-          "Snapshots"
-        ],
-        "operationId": "Snapshots_Update",
-        "description": "Updates (patches) a snapshot.",
-        "parameters": [
-          {
-            "$ref": "../../../common-types/v1/common.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "./diskRPCommon.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/SnapshotNameParameter"
-          },
-          {
-            "$ref": "../../../common-types/v1/common.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "name": "snapshot",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/SnapshotUpdate"
-            },
-            "description": "Snapshot object supplied in the body of the Patch snapshot operation."
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/Snapshot"
-            }
-          },
-          "202": {
-            "description": "Accepted",
-            "schema": {
-              "$ref": "#/definitions/Snapshot"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Update a snapshot.": {
-            "$ref": "./examples/snapshotExamples/Snapshot_Update.json"
-          },
-          "Update a snapshot with accelerated networking.": {
-            "$ref": "./examples/snapshotExamples/Snapshot_Update_WithAcceleratedNetwork.json"
-          }
-        },
-        "x-ms-long-running-operation": true
-      },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/snapshots": {
       "get": {
+        "operationId": "Snapshots_List",
         "tags": [
           "Snapshots"
         ],
+        "description": "Lists snapshots under a subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SnapshotList"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List all snapshots in a subscription.": {
+            "$ref": "./examples/snapshotExamples/Snapshot_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/snapshots": {
+      "get": {
+        "operationId": "Snapshots_ListByResourceGroup",
+        "tags": [
+          "Snapshots"
+        ],
+        "description": "Lists snapshots under a resource group.",
+        "parameters": [
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "./diskRPCommon.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SnapshotList"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List all snapshots in a resource group.": {
+            "$ref": "./examples/snapshotExamples/Snapshot_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/snapshots/{snapshotName}": {
+      "get": {
         "operationId": "Snapshots_Get",
+        "tags": [
+          "Snapshots"
+        ],
         "description": "Gets information about a snapshot.",
         "parameters": [
           {
@@ -190,11 +141,129 @@
           }
         }
       },
-      "delete": {
+      "put": {
+        "operationId": "Snapshots_CreateOrUpdate",
         "tags": [
           "Snapshots"
         ],
+        "description": "Creates or updates a snapshot.",
+        "parameters": [
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "./diskRPCommon.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SnapshotNameParameter"
+          },
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "snapshot",
+            "in": "body",
+            "description": "Snapshot object supplied in the body of the Put disk operation.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Snapshot"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Snapshot"
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "schema": {
+              "$ref": "#/definitions/Snapshot"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create a snapshot by importing an unmanaged blob from a different subscription.": {
+            "$ref": "./examples/snapshotExamples/Snapshot_Create_ByImportingAnUnmanagedBlobFromADifferentSubscription.json"
+          },
+          "Create a snapshot by importing an unmanaged blob from the same subscription.": {
+            "$ref": "./examples/snapshotExamples/Snapshot_Create_ByImportingAnUnmanagedBlobFromTheSameSubscription.json"
+          },
+          "Create a snapshot from an elastic san volume snapshot.": {
+            "$ref": "./examples/snapshotExamples/Snapshot_Create_FromAnElasticSanVolumeSnapshot.json"
+          },
+          "Create a snapshot from an existing snapshot in the same or a different subscription in a different region with quicker copy speed.": {
+            "$ref": "./examples/snapshotExamples/Snapshot_Create_EnhancedProvisionedBandwidthCopySpeed.json"
+          },
+          "Create a snapshot from an existing snapshot in the same or a different subscription in a different region.": {
+            "$ref": "./examples/snapshotExamples/Snapshot_Create_FromAnExistingSnapshotInDifferentRegion.json"
+          },
+          "Create a snapshot from an existing snapshot in the same or a different subscription.": {
+            "$ref": "./examples/snapshotExamples/Snapshot_Create_FromAnExistingSnapshot.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "Snapshots_Update",
+        "tags": [
+          "Snapshots"
+        ],
+        "description": "Updates (patches) a snapshot.",
+        "parameters": [
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "./diskRPCommon.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SnapshotNameParameter"
+          },
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "snapshot",
+            "in": "body",
+            "description": "Snapshot object supplied in the body of the Patch snapshot operation.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SnapshotUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Snapshot"
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "schema": {
+              "$ref": "#/definitions/Snapshot"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update a snapshot with accelerated networking.": {
+            "$ref": "./examples/snapshotExamples/Snapshot_Update_WithAcceleratedNetwork.json"
+          },
+          "Update a snapshot.": {
+            "$ref": "./examples/snapshotExamples/Snapshot_Update.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
         "operationId": "Snapshots_Delete",
+        "tags": [
+          "Snapshots"
+        ],
         "description": "Deletes a snapshot.",
         "parameters": [
           {
@@ -229,81 +298,12 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/snapshots": {
-      "get": {
-        "tags": [
-          "Snapshots"
-        ],
-        "operationId": "Snapshots_ListByResourceGroup",
-        "description": "Lists snapshots under a resource group.",
-        "parameters": [
-          {
-            "$ref": "../../../common-types/v1/common.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "./diskRPCommon.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "../../../common-types/v1/common.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/SnapshotList"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "List all snapshots in a resource group.": {
-            "$ref": "./examples/snapshotExamples/Snapshot_ListByResourceGroup.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/snapshots": {
-      "get": {
-        "tags": [
-          "Snapshots"
-        ],
-        "operationId": "Snapshots_List",
-        "description": "Lists snapshots under a subscription.",
-        "parameters": [
-          {
-            "$ref": "../../../common-types/v1/common.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../common-types/v1/common.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/SnapshotList"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "List all snapshots in a subscription.": {
-            "$ref": "./examples/snapshotExamples/Snapshot_ListBySubscription.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/snapshots/{snapshotName}/beginGetAccess": {
       "post": {
+        "operationId": "Snapshots_GrantAccess",
         "tags": [
           "Snapshots"
         ],
-        "operationId": "Snapshots_GrantAccess",
         "description": "Grants access to a snapshot.",
         "parameters": [
           {
@@ -321,11 +321,11 @@
           {
             "name": "grantAccessData",
             "in": "body",
+            "description": "Access data object supplied in the body of the get snapshot access operation.",
             "required": true,
             "schema": {
               "$ref": "./diskRPCommon.json#/definitions/GrantAccessData"
-            },
-            "description": "Access data object supplied in the body of the get snapshot access operation."
+            }
           }
         ],
         "responses": {
@@ -344,18 +344,18 @@
             "$ref": "./examples/snapshotExamples/Snapshot_BeginGetAccess.json"
           }
         },
-        "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
-        }
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/snapshots/{snapshotName}/endGetAccess": {
       "post": {
+        "operationId": "Snapshots_RevokeAccess",
         "tags": [
           "Snapshots"
         ],
-        "operationId": "Snapshots_RevokeAccess",
         "description": "Revokes access to a snapshot.",
         "parameters": [
           {
@@ -384,20 +384,21 @@
             "$ref": "./examples/snapshotExamples/Snapshot_EndGetAccess.json"
           }
         },
-        "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
-        }
+        },
+        "x-ms-long-running-operation": true
       }
     }
   },
   "definitions": {
     "Snapshot": {
+      "description": "Snapshot resource.",
       "properties": {
         "managedBy": {
-          "readOnly": true,
           "type": "string",
-          "description": "Unused. Always Null."
+          "description": "Unused. Always Null.",
+          "readOnly": true
         },
         "sku": {
           "$ref": "#/definitions/SnapshotSku"
@@ -407,44 +408,25 @@
           "description": "The extended location where the snapshot will be created. Extended location cannot be changed."
         },
         "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/SnapshotProperties"
+          "$ref": "#/definitions/SnapshotProperties",
+          "x-ms-client-flatten": true
         }
       },
       "allOf": [
         {
           "$ref": "../../../common-types/v1/common.json#/definitions/Resource"
         }
-      ],
-      "description": "Snapshot resource."
-    },
-    "SnapshotUpdate": {
-      "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/SnapshotUpdateProperties"
-        },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Resource tags"
-        },
-        "sku": {
-          "$ref": "#/definitions/SnapshotSku"
-        }
-      },
-      "description": "Snapshot update resource."
+      ]
     },
     "SnapshotList": {
+      "description": "The List Snapshots operation response.",
       "properties": {
         "value": {
           "type": "array",
+          "description": "A list of snapshots.",
           "items": {
             "$ref": "#/definitions/Snapshot"
-          },
-          "description": "A list of snapshots."
+          }
         },
         "nextLink": {
           "type": "string",
@@ -453,53 +435,16 @@
       },
       "required": [
         "value"
-      ],
-      "description": "The List Snapshots operation response."
-    },
-    "SnapshotSku": {
-      "properties": {
-        "name": {
-          "type": "string",
-          "enum": [
-            "Standard_LRS",
-            "Premium_LRS",
-            "Standard_ZRS"
-          ],
-          "x-ms-enum": {
-            "name": "SnapshotStorageAccountTypes",
-            "modelAsString": true,
-            "values": [
-              {
-                "value": "Standard_LRS",
-                "description": "Standard HDD locally redundant storage"
-              },
-              {
-                "value": "Premium_LRS",
-                "description": "Premium SSD locally redundant storage"
-              },
-              {
-                "value": "Standard_ZRS",
-                "description": "Standard zone redundant storage"
-              }
-            ]
-          },
-          "description": "The sku name."
-        },
-        "tier": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The sku tier."
-        }
-      },
-      "description": "The snapshots sku name. Can be Standard_LRS, Premium_LRS, or Standard_ZRS. This is an optional parameter for incremental snapshot and the default behavior is the SKU will be set to the same sku as the previous snapshot"
+      ]
     },
     "SnapshotProperties": {
+      "description": "Snapshot resource properties.",
       "properties": {
         "timeCreated": {
-          "readOnly": true,
           "type": "string",
           "format": "date-time",
-          "description": "The time when the snapshot was created."
+          "description": "The time when the snapshot was created.",
+          "readOnly": true
         },
         "osType": {
           "type": "string",
@@ -545,8 +490,8 @@
         "diskSizeBytes": {
           "type": "integer",
           "format": "int64",
-          "readOnly": true,
-          "description": "The size of the disk in bytes. This field is read only."
+          "description": "The size of the disk in bytes. This field is read only.",
+          "readOnly": true
         },
         "diskState": {
           "$ref": "./diskRPCommon.json#/definitions/DiskState",
@@ -554,17 +499,17 @@
         },
         "uniqueId": {
           "type": "string",
-          "readOnly": true,
-          "description": "Unique Guid identifying the resource."
+          "description": "Unique Guid identifying the resource.",
+          "readOnly": true
         },
         "encryptionSettingsCollection": {
           "$ref": "./diskRPCommon.json#/definitions/EncryptionSettingsCollection",
           "description": "Encryption settings collection used be Azure Disk Encryption, can contain multiple encryption settings per disk or snapshot."
         },
         "provisioningState": {
-          "readOnly": true,
           "type": "string",
-          "description": "The disk provisioning state."
+          "description": "The disk provisioning state.",
+          "readOnly": true
         },
         "incremental": {
           "type": "boolean",
@@ -572,8 +517,8 @@
         },
         "incrementalSnapshotFamilyId": {
           "type": "string",
-          "readOnly": true,
-          "description": "Incremental snapshots for a disk share an incremental snapshot family id. The Get Page Range Diff API can only be called on incremental snapshots with the same family id."
+          "description": "Incremental snapshots for a disk share an incremental snapshot family id. The Get Page Range Diff API can only be called on incremental snapshots with the same family id.",
+          "readOnly": true
         },
         "encryption": {
           "$ref": "./diskRPCommon.json#/definitions/Encryption",
@@ -611,10 +556,66 @@
       },
       "required": [
         "creationData"
-      ],
-      "description": "Snapshot resource properties."
+      ]
+    },
+    "SnapshotSku": {
+      "description": "The snapshots sku name. Can be Standard_LRS, Premium_LRS, or Standard_ZRS. This is an optional parameter for incremental snapshot and the default behavior is the SKU will be set to the same sku as the previous snapshot",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The sku name.",
+          "enum": [
+            "Standard_LRS",
+            "Premium_LRS",
+            "Standard_ZRS"
+          ],
+          "x-ms-enum": {
+            "name": "SnapshotStorageAccountTypes",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Standard_LRS",
+                "description": "Standard HDD locally redundant storage"
+              },
+              {
+                "value": "Premium_LRS",
+                "description": "Premium SSD locally redundant storage"
+              },
+              {
+                "value": "Standard_ZRS",
+                "description": "Standard zone redundant storage"
+              }
+            ]
+          }
+        },
+        "tier": {
+          "type": "string",
+          "description": "The sku tier.",
+          "readOnly": true
+        }
+      }
+    },
+    "SnapshotUpdate": {
+      "description": "Snapshot update resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SnapshotUpdateProperties",
+          "x-ms-client-flatten": true
+        },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "sku": {
+          "$ref": "#/definitions/SnapshotSku"
+        }
+      }
     },
     "SnapshotUpdateProperties": {
+      "description": "Snapshot resource update properties.",
       "properties": {
         "osType": {
           "type": "string",
@@ -662,17 +663,16 @@
           "$ref": "./diskRPCommon.json#/definitions/SupportedCapabilities",
           "description": "List of supported capabilities for the image from which the OS disk was created."
         }
-      },
-      "description": "Snapshot resource update properties."
+      }
     }
   },
   "parameters": {
     "SnapshotNameParameter": {
       "name": "snapshotName",
       "in": "path",
+      "description": "The name of the snapshot that is being created. The name can't be changed after the snapshot is created. Supported characters for the name are a-z, A-Z, 0-9, _ and -. The max name length is 80 characters.",
       "required": true,
       "type": "string",
-      "description": "The name of the snapshot that is being created. The name can't be changed after the snapshot is created. Supported characters for the name are a-z, A-Z, 0-9, _ and -. The max name length is 80 characters.",
       "x-ms-parameter-location": "method"
     }
   }

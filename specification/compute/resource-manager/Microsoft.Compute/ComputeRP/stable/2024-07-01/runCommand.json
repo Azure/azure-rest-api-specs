@@ -2,18 +2,18 @@
   "swagger": "2.0",
   "info": {
     "title": "RunCommandsClient",
-    "description": "The Run Commands Client.",
-    "version": "2024-07-01"
+    "version": "2024-07-01",
+    "description": "The Run Commands Client."
   },
-  "host": "management.azure.com",
   "schemes": [
     "https"
   ],
-  "consumes": [
+  "host": "management.azure.com",
+  "produces": [
     "application/json",
     "text/json"
   ],
-  "produces": [
+  "consumes": [
     "application/json",
     "text/json"
   ],
@@ -27,9 +27,9 @@
   "securityDefinitions": {
     "azure_auth": {
       "type": "oauth2",
-      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
-      "flow": "implicit",
       "description": "Azure Active Directory OAuth2 Flow",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
       "scopes": {
         "user_impersonation": "impersonate your user account"
       }
@@ -38,23 +38,18 @@
   "paths": {
     "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/runCommands": {
       "get": {
+        "operationId": "VirtualMachineRunCommands_List",
         "tags": [
           "VirtualMachineRunCommands"
         ],
-        "operationId": "VirtualMachineRunCommands_List",
-        "x-ms-examples": {
-          "VirtualMachineRunCommandList": {
-            "$ref": "./examples/runCommandExamples/RunCommand_List.json"
-          }
-        },
         "description": "Lists all available run commands for a subscription in a location.",
         "parameters": [
           {
             "name": "location",
             "in": "path",
+            "description": "The location upon which run commands is queried.",
             "required": true,
             "type": "string",
-            "description": "The location upon which run commands is queried.",
             "pattern": "^[-\\w\\._]+$"
           },
           {
@@ -72,6 +67,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "VirtualMachineRunCommandList": {
+            "$ref": "./examples/runCommandExamples/RunCommand_List.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -79,31 +79,26 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/runCommands/{commandId}": {
       "get": {
+        "operationId": "VirtualMachineRunCommands_Get",
         "tags": [
           "VirtualMachineRunCommands"
         ],
-        "operationId": "VirtualMachineRunCommands_Get",
-        "x-ms-examples": {
-          "VirtualMachineRunCommandGet": {
-            "$ref": "./examples/runCommandExamples/RunCommand_Get.json"
-          }
-        },
         "description": "Gets specific run command for a subscription in a location.",
         "parameters": [
           {
             "name": "location",
             "in": "path",
+            "description": "The location upon which run commands is queried.",
             "required": true,
             "type": "string",
-            "description": "The location upon which run commands is queried.",
             "pattern": "^[-\\w\\._]+$"
           },
           {
             "name": "commandId",
             "in": "path",
+            "description": "The command id.",
             "required": true,
-            "type": "string",
-            "description": "The command id."
+            "type": "string"
           },
           {
             "$ref": "../../../common-types/v1/common.json#/parameters/ApiVersionParameter"
@@ -119,111 +114,49 @@
               "$ref": "#/definitions/RunCommandDocument"
             }
           }
+        },
+        "x-ms-examples": {
+          "VirtualMachineRunCommandGet": {
+            "$ref": "./examples/runCommandExamples/RunCommand_Get.json"
+          }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/runCommand": {
-      "post": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualMachines/{instanceId}/runCommands": {
+      "get": {
+        "operationId": "VirtualMachineScaleSetVMRunCommands_List",
         "tags": [
-          "VirtualMachines"
+          "VirtualMachineScaleSetVMRunCommands"
         ],
-        "operationId": "VirtualMachines_RunCommand",
-        "x-ms-examples": {
-          "VirtualMachineRunCommand": {
-            "$ref": "./examples/runCommandExamples/VirtualMachineRunCommand.json"
-          }
-        },
-        "description": "Run command on the VM.",
+        "description": "The operation to get all run commands of an instance in Virtual Machine Scaleset.",
         "parameters": [
           {
             "name": "resourceGroupName",
             "in": "path",
+            "description": "The name of the resource group.",
             "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
-          },
-          {
-            "name": "vmName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the virtual machine."
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/RunCommandInput"
-            },
-            "description": "Parameters supplied to the Run command operation."
-          },
-          {
-            "$ref": "../../../common-types/v1/common.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../common-types/v1/common.json#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/RunCommandResult"
-            }
-          },
-          "202": {
-            "description": "Accepted"
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualmachines/{instanceId}/runCommand": {
-      "post": {
-        "tags": [
-          "VirtualMachineScaleSetVMs"
-        ],
-        "operationId": "VirtualMachineScaleSetVMs_RunCommand",
-        "x-ms-examples": {
-          "VirtualMachineScaleSetVMs_RunCommand": {
-            "$ref": "./examples/runCommandExamples/VirtualMachineScaleSetVMRunCommand.json"
-          }
-        },
-        "description": "Run command on a virtual machine in a VM scale set.",
-        "parameters": [
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
+            "type": "string"
           },
           {
             "name": "vmScaleSetName",
             "in": "path",
+            "description": "The name of the VM scale set.",
             "required": true,
-            "type": "string",
-            "description": "The name of the VM scale set."
+            "type": "string"
           },
           {
             "name": "instanceId",
             "in": "path",
+            "description": "The instance ID of the virtual machine.",
             "required": true,
-            "type": "string",
-            "description": "The instance ID of the virtual machine."
+            "type": "string"
           },
           {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/RunCommandInput"
-            },
-            "description": "Parameters supplied to the Run command operation."
+            "name": "$expand",
+            "in": "query",
+            "description": "The expand expression to apply on the operation.",
+            "required": false,
+            "type": "string"
           },
           {
             "$ref": "../../../common-types/v1/common.json#/parameters/ApiVersionParameter"
@@ -236,56 +169,139 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/RunCommandResult"
+              "$ref": "#/definitions/VirtualMachineRunCommandsListResult"
             }
           },
-          "202": {
-            "description": "Accepted"
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common-types/v1/common.json#/definitions/CloudError"
+            }
           }
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+        "x-ms-examples": {
+          "List run commands in Vmss instance.": {
+            "$ref": "./examples/runCommandExamples/VirtualMachineScaleSetVMRunCommand_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/runCommands/{runCommandName}": {
-      "put": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualMachines/{instanceId}/runCommands/{runCommandName}": {
+      "get": {
+        "operationId": "VirtualMachineScaleSetVMRunCommands_Get",
         "tags": [
-          "VirtualMachineRunCommands"
+          "VirtualMachineScaleSetVMRunCommands"
         ],
-        "operationId": "VirtualMachineRunCommands_CreateOrUpdate",
-        "description": "The operation to create or update the run command.",
+        "description": "The operation to get the VMSS VM run command.",
         "parameters": [
           {
             "name": "resourceGroupName",
             "in": "path",
+            "description": "The name of the resource group.",
             "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
+            "type": "string"
           },
           {
-            "name": "vmName",
+            "name": "vmScaleSetName",
             "in": "path",
+            "description": "The name of the VM scale set.",
             "required": true,
-            "type": "string",
-            "description": "The name of the virtual machine where the run command should be created or updated."
+            "type": "string"
+          },
+          {
+            "name": "instanceId",
+            "in": "path",
+            "description": "The instance ID of the virtual machine.",
+            "required": true,
+            "type": "string"
           },
           {
             "name": "runCommandName",
             "in": "path",
+            "description": "The name of the virtual machine run command.",
             "required": true,
-            "type": "string",
-            "description": "The name of the virtual machine run command."
+            "type": "string"
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "The expand expression to apply on the operation.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/VirtualMachineRunCommand"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common-types/v1/common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get VirtualMachineScaleSet VM run commands.": {
+            "$ref": "./examples/runCommandExamples/VirtualMachineScaleSetVMRunCommand_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "VirtualMachineScaleSetVMRunCommands_CreateOrUpdate",
+        "tags": [
+          "VirtualMachineScaleSetVMRunCommands"
+        ],
+        "description": "The operation to create or update the VMSS VM run command.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "vmScaleSetName",
+            "in": "path",
+            "description": "The name of the VM scale set.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "instanceId",
+            "in": "path",
+            "description": "The instance ID of the virtual machine.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "runCommandName",
+            "in": "path",
+            "description": "The name of the virtual machine run command.",
+            "required": true,
+            "type": "string"
           },
           {
             "name": "runCommand",
             "in": "body",
+            "description": "Parameters supplied to the Create Virtual Machine RunCommand operation.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/VirtualMachineRunCommand"
-            },
-            "description": "Parameters supplied to the Create Virtual Machine RunCommand operation."
+            }
           },
           {
             "$ref": "../../../common-types/v1/common.json#/parameters/ApiVersionParameter"
@@ -314,49 +330,56 @@
             }
           }
         },
-        "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "Create or update a run command.": {
-            "$ref": "./examples/runCommandExamples/VirtualMachineRunCommand_CreateOrUpdate.json"
+          "Create VirtualMachineScaleSet VM run command.": {
+            "$ref": "./examples/runCommandExamples/VirtualMachineScaleSetVMRunCommand_CreateOrUpdate.json"
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       },
       "patch": {
+        "operationId": "VirtualMachineScaleSetVMRunCommands_Update",
         "tags": [
-          "VirtualMachineRunCommands"
+          "VirtualMachineScaleSetVMRunCommands"
         ],
-        "operationId": "VirtualMachineRunCommands_Update",
-        "description": "The operation to update the run command.",
+        "description": "The operation to update the VMSS VM run command.",
         "parameters": [
           {
             "name": "resourceGroupName",
             "in": "path",
+            "description": "The name of the resource group.",
             "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
+            "type": "string"
           },
           {
-            "name": "vmName",
+            "name": "vmScaleSetName",
             "in": "path",
+            "description": "The name of the VM scale set.",
             "required": true,
-            "type": "string",
-            "description": "The name of the virtual machine where the run command should be updated."
+            "type": "string"
+          },
+          {
+            "name": "instanceId",
+            "in": "path",
+            "description": "The instance ID of the virtual machine.",
+            "required": true,
+            "type": "string"
           },
           {
             "name": "runCommandName",
             "in": "path",
+            "description": "The name of the virtual machine run command.",
             "required": true,
-            "type": "string",
-            "description": "The name of the virtual machine run command."
+            "type": "string"
           },
           {
             "name": "runCommand",
             "in": "body",
+            "description": "Parameters supplied to the Update Virtual Machine RunCommand operation.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/VirtualMachineRunCommandUpdate"
-            },
-            "description": "Parameters supplied to the Update Virtual Machine RunCommand operation."
+            }
           },
           {
             "$ref": "../../../common-types/v1/common.json#/parameters/ApiVersionParameter"
@@ -379,40 +402,47 @@
             }
           }
         },
-        "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "Update a run command.": {
-            "$ref": "./examples/runCommandExamples/VirtualMachineRunCommand_Update.json"
+          "Update VirtualMachineScaleSet VM run command.": {
+            "$ref": "./examples/runCommandExamples/VirtualMachineScaleSetVMRunCommand_Update.json"
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       },
       "delete": {
+        "operationId": "VirtualMachineScaleSetVMRunCommands_Delete",
         "tags": [
-          "VirtualMachineRunCommands"
+          "VirtualMachineScaleSetVMRunCommands"
         ],
-        "operationId": "VirtualMachineRunCommands_Delete",
-        "description": "The operation to delete the run command.",
+        "description": "The operation to delete the VMSS VM run command.",
         "parameters": [
           {
             "name": "resourceGroupName",
             "in": "path",
+            "description": "The name of the resource group.",
             "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
+            "type": "string"
           },
           {
-            "name": "vmName",
+            "name": "vmScaleSetName",
             "in": "path",
+            "description": "The name of the VM scale set.",
             "required": true,
-            "type": "string",
-            "description": "The name of the virtual machine where the run command should be deleted."
+            "type": "string"
+          },
+          {
+            "name": "instanceId",
+            "in": "path",
+            "description": "The instance ID of the virtual machine.",
+            "required": true,
+            "type": "string"
           },
           {
             "name": "runCommandName",
             "in": "path",
+            "description": "The name of the virtual machine run command.",
             "required": true,
-            "type": "string",
-            "description": "The name of the virtual machine run command."
+            "type": "string"
           },
           {
             "$ref": "../../../common-types/v1/common.json#/parameters/ApiVersionParameter"
@@ -438,47 +468,51 @@
             }
           }
         },
-        "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "Delete a run command.": {
-            "$ref": "./examples/runCommandExamples/VirtualMachineRunCommand_Delete.json"
+          "Delete VirtualMachineScaleSet VM run command.": {
+            "$ref": "./examples/runCommandExamples/VirtualMachineScaleSetVMRunCommand_Delete.json"
           }
-        }
-      },
-      "get": {
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualmachines/{instanceId}/runCommand": {
+      "post": {
+        "operationId": "VirtualMachineScaleSetVMs_RunCommand",
         "tags": [
-          "VirtualMachineRunCommands"
+          "VirtualMachineScaleSetVMs"
         ],
-        "operationId": "VirtualMachineRunCommands_GetByVirtualMachine",
-        "description": "The operation to get the run command.",
+        "description": "Run command on a virtual machine in a VM scale set.",
         "parameters": [
           {
             "name": "resourceGroupName",
             "in": "path",
+            "description": "The name of the resource group.",
             "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
+            "type": "string"
           },
           {
-            "name": "vmName",
+            "name": "vmScaleSetName",
             "in": "path",
+            "description": "The name of the VM scale set.",
             "required": true,
-            "type": "string",
-            "description": "The name of the virtual machine containing the run command."
+            "type": "string"
           },
           {
-            "name": "runCommandName",
+            "name": "instanceId",
             "in": "path",
+            "description": "The instance ID of the virtual machine.",
             "required": true,
-            "type": "string",
-            "description": "The name of the virtual machine run command."
+            "type": "string"
           },
           {
-            "name": "$expand",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "description": "The expand expression to apply on the operation."
+            "name": "parameters",
+            "in": "body",
+            "description": "Parameters supplied to the Run command operation.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RunCommandInput"
+            }
           },
           {
             "$ref": "../../../common-types/v1/common.json#/parameters/ApiVersionParameter"
@@ -491,51 +525,112 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/VirtualMachineRunCommand"
+              "$ref": "#/definitions/RunCommandResult"
             }
           },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../common-types/v1/common.json#/definitions/CloudError"
-            }
+          "202": {
+            "description": "Accepted"
           }
         },
         "x-ms-examples": {
-          "Get a run command.": {
-            "$ref": "./examples/runCommandExamples/VirtualMachineRunCommand_Get.json"
+          "VirtualMachineScaleSetVMs_RunCommand": {
+            "$ref": "./examples/runCommandExamples/VirtualMachineScaleSetVMRunCommand.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/runCommand": {
+      "post": {
+        "operationId": "VirtualMachines_RunCommand",
+        "tags": [
+          "VirtualMachines"
+        ],
+        "description": "Run command on the VM.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "vmName",
+            "in": "path",
+            "description": "The name of the virtual machine.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Parameters supplied to the Run command operation.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RunCommandInput"
+            }
+          },
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RunCommandResult"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          }
+        },
+        "x-ms-examples": {
+          "VirtualMachineRunCommand": {
+            "$ref": "./examples/runCommandExamples/VirtualMachineRunCommand.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/runCommands": {
       "get": {
+        "operationId": "VirtualMachineRunCommands_ListByVirtualMachine",
         "tags": [
           "VirtualMachineRunCommands"
         ],
-        "operationId": "VirtualMachineRunCommands_ListByVirtualMachine",
         "description": "The operation to get all run commands of a Virtual Machine.",
         "parameters": [
           {
             "name": "resourceGroupName",
             "in": "path",
+            "description": "The name of the resource group.",
             "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
+            "type": "string"
           },
           {
             "name": "vmName",
             "in": "path",
+            "description": "The name of the virtual machine containing the run command.",
             "required": true,
-            "type": "string",
-            "description": "The name of the virtual machine containing the run command."
+            "type": "string"
           },
           {
             "name": "$expand",
             "in": "query",
+            "description": "The expand expression to apply on the operation.",
             "required": false,
-            "type": "string",
-            "description": "The expand expression to apply on the operation."
+            "type": "string"
           },
           {
             "$ref": "../../../common-types/v1/common.json#/parameters/ApiVersionParameter"
@@ -568,50 +663,105 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualMachines/{instanceId}/runCommands/{runCommandName}": {
-      "put": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/runCommands/{runCommandName}": {
+      "get": {
+        "operationId": "VirtualMachineRunCommands_GetByVirtualMachine",
         "tags": [
-          "VirtualMachineScaleSetVMRunCommands"
+          "VirtualMachineRunCommands"
         ],
-        "operationId": "VirtualMachineScaleSetVMRunCommands_CreateOrUpdate",
-        "description": "The operation to create or update the VMSS VM run command.",
+        "description": "The operation to get the run command.",
         "parameters": [
           {
             "name": "resourceGroupName",
             "in": "path",
+            "description": "The name of the resource group.",
             "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
+            "type": "string"
           },
           {
-            "name": "vmScaleSetName",
+            "name": "vmName",
             "in": "path",
+            "description": "The name of the virtual machine containing the run command.",
             "required": true,
-            "type": "string",
-            "description": "The name of the VM scale set."
-          },
-          {
-            "name": "instanceId",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The instance ID of the virtual machine."
+            "type": "string"
           },
           {
             "name": "runCommandName",
             "in": "path",
+            "description": "The name of the virtual machine run command.",
             "required": true,
-            "type": "string",
-            "description": "The name of the virtual machine run command."
+            "type": "string"
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "The expand expression to apply on the operation.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/VirtualMachineRunCommand"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common-types/v1/common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a run command.": {
+            "$ref": "./examples/runCommandExamples/VirtualMachineRunCommand_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "VirtualMachineRunCommands_CreateOrUpdate",
+        "tags": [
+          "VirtualMachineRunCommands"
+        ],
+        "description": "The operation to create or update the run command.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "vmName",
+            "in": "path",
+            "description": "The name of the virtual machine where the run command should be created or updated.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "runCommandName",
+            "in": "path",
+            "description": "The name of the virtual machine run command.",
+            "required": true,
+            "type": "string"
           },
           {
             "name": "runCommand",
             "in": "body",
+            "description": "Parameters supplied to the Create Virtual Machine RunCommand operation.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/VirtualMachineRunCommand"
-            },
-            "description": "Parameters supplied to the Create Virtual Machine RunCommand operation."
+            }
           },
           {
             "$ref": "../../../common-types/v1/common.json#/parameters/ApiVersionParameter"
@@ -640,56 +790,49 @@
             }
           }
         },
-        "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "Create VirtualMachineScaleSet VM run command.": {
-            "$ref": "./examples/runCommandExamples/VirtualMachineScaleSetVMRunCommand_CreateOrUpdate.json"
+          "Create or update a run command.": {
+            "$ref": "./examples/runCommandExamples/VirtualMachineRunCommand_CreateOrUpdate.json"
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       },
       "patch": {
+        "operationId": "VirtualMachineRunCommands_Update",
         "tags": [
-          "VirtualMachineScaleSetVMRunCommands"
+          "VirtualMachineRunCommands"
         ],
-        "operationId": "VirtualMachineScaleSetVMRunCommands_Update",
-        "description": "The operation to update the VMSS VM run command.",
+        "description": "The operation to update the run command.",
         "parameters": [
           {
             "name": "resourceGroupName",
             "in": "path",
+            "description": "The name of the resource group.",
             "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
+            "type": "string"
           },
           {
-            "name": "vmScaleSetName",
+            "name": "vmName",
             "in": "path",
+            "description": "The name of the virtual machine where the run command should be updated.",
             "required": true,
-            "type": "string",
-            "description": "The name of the VM scale set."
-          },
-          {
-            "name": "instanceId",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The instance ID of the virtual machine."
+            "type": "string"
           },
           {
             "name": "runCommandName",
             "in": "path",
+            "description": "The name of the virtual machine run command.",
             "required": true,
-            "type": "string",
-            "description": "The name of the virtual machine run command."
+            "type": "string"
           },
           {
             "name": "runCommand",
             "in": "body",
+            "description": "Parameters supplied to the Update Virtual Machine RunCommand operation.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/VirtualMachineRunCommandUpdate"
-            },
-            "description": "Parameters supplied to the Update Virtual Machine RunCommand operation."
+            }
           },
           {
             "$ref": "../../../common-types/v1/common.json#/parameters/ApiVersionParameter"
@@ -712,47 +855,40 @@
             }
           }
         },
-        "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "Update VirtualMachineScaleSet VM run command.": {
-            "$ref": "./examples/runCommandExamples/VirtualMachineScaleSetVMRunCommand_Update.json"
+          "Update a run command.": {
+            "$ref": "./examples/runCommandExamples/VirtualMachineRunCommand_Update.json"
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       },
       "delete": {
+        "operationId": "VirtualMachineRunCommands_Delete",
         "tags": [
-          "VirtualMachineScaleSetVMRunCommands"
+          "VirtualMachineRunCommands"
         ],
-        "operationId": "VirtualMachineScaleSetVMRunCommands_Delete",
-        "description": "The operation to delete the VMSS VM run command.",
+        "description": "The operation to delete the run command.",
         "parameters": [
           {
             "name": "resourceGroupName",
             "in": "path",
+            "description": "The name of the resource group.",
             "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
+            "type": "string"
           },
           {
-            "name": "vmScaleSetName",
+            "name": "vmName",
             "in": "path",
+            "description": "The name of the virtual machine where the run command should be deleted.",
             "required": true,
-            "type": "string",
-            "description": "The name of the VM scale set."
-          },
-          {
-            "name": "instanceId",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The instance ID of the virtual machine."
+            "type": "string"
           },
           {
             "name": "runCommandName",
             "in": "path",
+            "description": "The name of the virtual machine run command.",
             "required": true,
-            "type": "string",
-            "description": "The name of the virtual machine run command."
+            "type": "string"
           },
           {
             "$ref": "../../../common-types/v1/common.json#/parameters/ApiVersionParameter"
@@ -778,228 +914,51 @@
             }
           }
         },
-        "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "Delete VirtualMachineScaleSet VM run command.": {
-            "$ref": "./examples/runCommandExamples/VirtualMachineScaleSetVMRunCommand_Delete.json"
-          }
-        }
-      },
-      "get": {
-        "tags": [
-          "VirtualMachineScaleSetVMRunCommands"
-        ],
-        "operationId": "VirtualMachineScaleSetVMRunCommands_Get",
-        "description": "The operation to get the VMSS VM run command.",
-        "parameters": [
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
-          },
-          {
-            "name": "vmScaleSetName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the VM scale set."
-          },
-          {
-            "name": "instanceId",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The instance ID of the virtual machine."
-          },
-          {
-            "name": "runCommandName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the virtual machine run command."
-          },
-          {
-            "name": "$expand",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "description": "The expand expression to apply on the operation."
-          },
-          {
-            "$ref": "../../../common-types/v1/common.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../common-types/v1/common.json#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/VirtualMachineRunCommand"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../common-types/v1/common.json#/definitions/CloudError"
-            }
+          "Delete a run command.": {
+            "$ref": "./examples/runCommandExamples/VirtualMachineRunCommand_Delete.json"
           }
         },
-        "x-ms-examples": {
-          "Get VirtualMachineScaleSet VM run commands.": {
-            "$ref": "./examples/runCommandExamples/VirtualMachineScaleSetVMRunCommand_Get.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualMachines/{instanceId}/runCommands": {
-      "get": {
-        "tags": [
-          "VirtualMachineScaleSetVMRunCommands"
-        ],
-        "operationId": "VirtualMachineScaleSetVMRunCommands_List",
-        "description": "The operation to get all run commands of an instance in Virtual Machine Scaleset.",
-        "parameters": [
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
-          },
-          {
-            "name": "vmScaleSetName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the VM scale set."
-          },
-          {
-            "name": "instanceId",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The instance ID of the virtual machine."
-          },
-          {
-            "name": "$expand",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "description": "The expand expression to apply on the operation."
-          },
-          {
-            "$ref": "../../../common-types/v1/common.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../common-types/v1/common.json#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/VirtualMachineRunCommandsListResult"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../common-types/v1/common.json#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "List run commands in Vmss instance.": {
-            "$ref": "./examples/runCommandExamples/VirtualMachineScaleSetVMRunCommand_List.json"
-          }
-        }
+        "x-ms-long-running-operation": true
       }
     }
   },
   "definitions": {
-    "RunCommandInputParameter": {
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "The run command parameter name."
-        },
-        "value": {
-          "type": "string",
-          "description": "The run command parameter value."
-        }
-      },
-      "required": [
-        "name",
-        "value"
-      ],
+    "RunCommandDocument": {
       "type": "object",
-      "description": "Describes the properties of a run command parameter."
-    },
-    "RunCommandInput": {
+      "description": "Describes the properties of a Run Command.",
       "properties": {
-        "commandId": {
-          "type": "string",
-          "description": "The run command id."
-        },
         "script": {
           "type": "array",
+          "description": "The script to be executed.",
           "items": {
             "type": "string"
-          },
-          "description": "Optional. The script to be executed.  When this value is given, the given script will override the default script of the command."
+          }
         },
         "parameters": {
           "type": "array",
+          "description": "The parameters used by the script.",
           "items": {
-            "$ref": "#/definitions/RunCommandInputParameter"
+            "$ref": "#/definitions/RunCommandParameterDefinition"
           },
           "x-ms-identifiers": [
-            "name"
-          ],
-          "description": "The run command parameters."
+            "name",
+            "type"
+          ]
         }
       },
       "required": [
-        "commandId"
+        "script"
       ],
-      "type": "object",
-      "description": "Capture Virtual Machine parameters."
-    },
-    "RunCommandParameterDefinition": {
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "The run command parameter name."
-        },
-        "type": {
-          "type": "string",
-          "description": "The run command parameter type."
-        },
-        "defaultValue": {
-          "type": "string",
-          "description": "The run command parameter default value."
-        },
-        "required": {
-          "type": "boolean",
-          "description": "The run command parameter required.",
-          "default": false
+      "allOf": [
+        {
+          "$ref": "#/definitions/RunCommandDocumentBase"
         }
-      },
-      "required": [
-        "name",
-        "type"
-      ],
-      "type": "object",
-      "description": "Describes the properties of a run command parameter."
+      ]
     },
     "RunCommandDocumentBase": {
+      "type": "object",
+      "description": "Describes the properties of a Run Command metadata.",
       "properties": {
         "$schema": {
           "type": "string",
@@ -1036,50 +995,66 @@
         "osType",
         "label",
         "description"
-      ],
-      "type": "object",
-      "description": "Describes the properties of a Run Command metadata."
+      ]
     },
-    "RunCommandDocument": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/RunCommandDocumentBase"
-        }
-      ],
+    "RunCommandInput": {
+      "type": "object",
+      "description": "Capture Virtual Machine parameters.",
       "properties": {
+        "commandId": {
+          "type": "string",
+          "description": "The run command id."
+        },
         "script": {
           "type": "array",
+          "description": "Optional. The script to be executed.  When this value is given, the given script will override the default script of the command.",
           "items": {
             "type": "string"
-          },
-          "description": "The script to be executed."
+          }
         },
         "parameters": {
           "type": "array",
+          "description": "The run command parameters.",
           "items": {
-            "$ref": "#/definitions/RunCommandParameterDefinition"
+            "$ref": "#/definitions/RunCommandInputParameter"
           },
           "x-ms-identifiers": [
-            "name",
-            "type"
-          ],
-          "description": "The parameters used by the script."
+            "name"
+          ]
         }
       },
       "required": [
-        "script"
-      ],
+        "commandId"
+      ]
+    },
+    "RunCommandInputParameter": {
       "type": "object",
-      "description": "Describes the properties of a Run Command."
+      "description": "Describes the properties of a run command parameter.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The run command parameter name."
+        },
+        "value": {
+          "type": "string",
+          "description": "The run command parameter value."
+        }
+      },
+      "required": [
+        "name",
+        "value"
+      ]
     },
     "RunCommandListResult": {
+      "type": "object",
+      "description": "The List Virtual Machine operation response.",
       "properties": {
         "value": {
           "type": "array",
+          "description": "The list of virtual machine run commands.",
           "items": {
             "$ref": "#/definitions/RunCommandDocumentBase"
-          },
-          "description": "The list of virtual machine run commands."
+          }
         },
         "nextLink": {
           "type": "string",
@@ -1088,11 +1063,11 @@
       },
       "required": [
         "value"
-      ],
-      "type": "object",
-      "description": "The List Virtual Machine operation response."
+      ]
     },
     "RunCommandManagedIdentity": {
+      "type": "object",
+      "description": " Contains clientId or objectId (use only one, not both) of a user-assigned managed identity that has access to storage blob used in Run Command. Use an empty RunCommandManagedIdentity object in case of system-assigned identity. Make sure the Azure storage blob exists in case of scriptUri, and managed identity has been given access to blob's container with 'Storage Blob Data Reader' role assignment with scriptUri blob and 'Storage Blob Data Contributor' for Append blobs(outputBlobUri, errorBlobUri). In case of user assigned identity, make sure you add it under VM's identity. For more info on managed identity and Run Command, refer https://aka.ms/ManagedIdentity and https://aka.ms/RunCommandManaged.",
       "properties": {
         "clientId": {
           "type": "string",
@@ -1102,24 +1077,66 @@
           "type": "string",
           "description": "Object Id (GUID value) of the user-assigned managed identity. ClientId should not be used if this is provided."
         }
-      },
+      }
+    },
+    "RunCommandParameterDefinition": {
       "type": "object",
-      "description": " Contains clientId or objectId (use only one, not both) of a user-assigned managed identity that has access to storage blob used in Run Command. Use an empty RunCommandManagedIdentity object in case of system-assigned identity. Make sure the Azure storage blob exists in case of scriptUri, and managed identity has been given access to blob's container with 'Storage Blob Data Reader' role assignment with scriptUri blob and 'Storage Blob Data Contributor' for Append blobs(outputBlobUri, errorBlobUri). In case of user assigned identity, make sure you add it under VM's identity. For more info on managed identity and Run Command, refer https://aka.ms/ManagedIdentity and https://aka.ms/RunCommandManaged."
+      "description": "Describes the properties of a run command parameter.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The run command parameter name."
+        },
+        "type": {
+          "type": "string",
+          "description": "The run command parameter type."
+        },
+        "defaultValue": {
+          "type": "string",
+          "description": "The run command parameter default value."
+        },
+        "required": {
+          "type": "boolean",
+          "description": "The run command parameter required.",
+          "default": false
+        }
+      },
+      "required": [
+        "name",
+        "type"
+      ]
     },
     "RunCommandResult": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
+          "description": "Run command operation response.",
           "items": {
             "$ref": "./computeRPCommon.json#/definitions/InstanceViewStatus"
           },
-          "x-ms-identifiers": [],
-          "description": "Run command operation response."
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "VirtualMachineRunCommand": {
+      "type": "object",
+      "description": "Describes a Virtual Machine run command.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/VirtualMachineRunCommandProperties",
+          "x-ms-client-flatten": true
         }
       },
-      "type": "object"
+      "allOf": [
+        {
+          "$ref": "../../../common-types/v1/common.json#/definitions/Resource"
+        }
+      ]
     },
     "VirtualMachineRunCommandInstanceView": {
+      "type": "object",
+      "description": "The instance view of a virtual machine run command.",
       "properties": {
         "executionState": {
           "type": "string",
@@ -1167,39 +1184,17 @@
         },
         "statuses": {
           "type": "array",
+          "description": "The resource status information.",
           "items": {
             "$ref": "./computeRPCommon.json#/definitions/InstanceViewStatus"
           },
-          "x-ms-identifiers": [],
-          "description": "The resource status information."
+          "x-ms-identifiers": []
         }
-      },
-      "type": "object",
-      "description": "The instance view of a virtual machine run command."
-    },
-    "VirtualMachineRunCommandScriptSource": {
-      "properties": {
-        "script": {
-          "type": "string",
-          "description": "Specifies the script content to be executed on the VM."
-        },
-        "scriptUri": {
-          "type": "string",
-          "description": "Specifies the script download location. It can be either SAS URI of an Azure storage blob with read access or public URI."
-        },
-        "commandId": {
-          "type": "string",
-          "description": "Specifies a commandId of predefined built-in script."
-        },
-        "scriptUriManagedIdentity": {
-          "$ref": "#/definitions/RunCommandManagedIdentity",
-          "description": "User-assigned managed identity that has access to scriptUri in case of Azure storage blob. Use an empty object in case of system-assigned identity. Make sure the Azure storage blob exists, and managed identity has been given access to blob's container with 'Storage Blob Data Reader' role assignment. In case of user-assigned identity, make sure you add it under VM's identity. For more info on managed identity and Run Command, refer https://aka.ms/ManagedIdentity and https://aka.ms/RunCommandManaged."
-        }
-      },
-      "type": "object",
-      "description": "Describes the script sources for run command. Use only one of script, scriptUri, commandId."
+      }
     },
     "VirtualMachineRunCommandProperties": {
+      "type": "object",
+      "description": "Describes the properties of a Virtual Machine run command.",
       "properties": {
         "source": {
           "$ref": "#/definitions/VirtualMachineRunCommandScriptSource",
@@ -1207,23 +1202,23 @@
         },
         "parameters": {
           "type": "array",
+          "description": "The parameters used by the script.",
           "items": {
             "$ref": "#/definitions/RunCommandInputParameter"
           },
           "x-ms-identifiers": [
             "name"
-          ],
-          "description": "The parameters used by the script."
+          ]
         },
         "protectedParameters": {
           "type": "array",
+          "description": "The parameters used by the script.",
           "items": {
             "$ref": "#/definitions/RunCommandInputParameter"
           },
           "x-ms-identifiers": [
             "name"
-          ],
-          "description": "The parameters used by the script."
+          ]
         },
         "asyncExecution": {
           "type": "boolean",
@@ -1260,62 +1255,69 @@
           "description": "User-assigned managed identity that has access to errorBlobUri storage blob. Use an empty object in case of system-assigned identity. Make sure managed identity has been given access to blob's container with 'Storage Blob Data Contributor' role assignment. In case of user-assigned identity, make sure you add it under VM's identity. For more info on managed identity and Run Command, refer https://aka.ms/ManagedIdentity and https://aka.ms/RunCommandManaged "
         },
         "provisioningState": {
-          "readOnly": true,
           "type": "string",
-          "description": "The provisioning state, which only appears in the response. If treatFailureAsDeploymentFailure set to true, any failure in the script will fail the deployment and ProvisioningState will be marked as Failed. If treatFailureAsDeploymentFailure set to false, ProvisioningState would only reflect whether the run command was run or not by the extensions platform, it would not indicate whether script failed in case of script failures. See instance view of run command in case of script failures to see executionMessage, output, error: https://aka.ms/runcommandmanaged#get-execution-status-and-results "
+          "description": "The provisioning state, which only appears in the response. If treatFailureAsDeploymentFailure set to true, any failure in the script will fail the deployment and ProvisioningState will be marked as Failed. If treatFailureAsDeploymentFailure set to false, ProvisioningState would only reflect whether the run command was run or not by the extensions platform, it would not indicate whether script failed in case of script failures. See instance view of run command in case of script failures to see executionMessage, output, error: https://aka.ms/runcommandmanaged#get-execution-status-and-results ",
+          "readOnly": true
         },
         "instanceView": {
-          "readOnly": true,
           "$ref": "#/definitions/VirtualMachineRunCommandInstanceView",
-          "description": "The virtual machine run command instance view."
+          "description": "The virtual machine run command instance view.",
+          "readOnly": true
         },
         "treatFailureAsDeploymentFailure": {
           "type": "boolean",
           "description": "Optional. If set to true, any failure in the script will fail the deployment and ProvisioningState will be marked as Failed. If set to false, ProvisioningState would only reflect whether the run command was run or not by the extensions platform, it would not indicate whether script failed in case of script failures. See instance view of run command in case of script failures to see executionMessage, output, error: https://aka.ms/runcommandmanaged#get-execution-status-and-results ",
           "default": false
         }
-      },
-      "type": "object",
-      "description": "Describes the properties of a Virtual Machine run command."
+      }
     },
-    "VirtualMachineRunCommand": {
-      "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/VirtualMachineRunCommandProperties"
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../common-types/v1/common.json#/definitions/Resource"
-        }
-      ],
+    "VirtualMachineRunCommandScriptSource": {
       "type": "object",
-      "description": "Describes a Virtual Machine run command."
+      "description": "Describes the script sources for run command. Use only one of script, scriptUri, commandId.",
+      "properties": {
+        "script": {
+          "type": "string",
+          "description": "Specifies the script content to be executed on the VM."
+        },
+        "scriptUri": {
+          "type": "string",
+          "description": "Specifies the script download location. It can be either SAS URI of an Azure storage blob with read access or public URI."
+        },
+        "commandId": {
+          "type": "string",
+          "description": "Specifies a commandId of predefined built-in script."
+        },
+        "scriptUriManagedIdentity": {
+          "$ref": "#/definitions/RunCommandManagedIdentity",
+          "description": "User-assigned managed identity that has access to scriptUri in case of Azure storage blob. Use an empty object in case of system-assigned identity. Make sure the Azure storage blob exists, and managed identity has been given access to blob's container with 'Storage Blob Data Reader' role assignment. In case of user-assigned identity, make sure you add it under VM's identity. For more info on managed identity and Run Command, refer https://aka.ms/ManagedIdentity and https://aka.ms/RunCommandManaged."
+        }
+      }
     },
     "VirtualMachineRunCommandUpdate": {
+      "type": "object",
+      "description": "Describes a Virtual Machine run command.",
       "properties": {
         "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/VirtualMachineRunCommandProperties"
+          "$ref": "#/definitions/VirtualMachineRunCommandProperties",
+          "x-ms-client-flatten": true
         }
       },
       "allOf": [
         {
           "$ref": "./computeRPCommon.json#/definitions/UpdateResource"
         }
-      ],
-      "type": "object",
-      "description": "Describes a Virtual Machine run command."
+      ]
     },
     "VirtualMachineRunCommandsListResult": {
+      "type": "object",
+      "description": "The List run command operation response",
       "properties": {
         "value": {
           "type": "array",
+          "description": "The list of run commands",
           "items": {
             "$ref": "#/definitions/VirtualMachineRunCommand"
-          },
-          "description": "The list of run commands"
+          }
         },
         "nextLink": {
           "type": "string",
@@ -1324,9 +1326,7 @@
       },
       "required": [
         "value"
-      ],
-      "type": "object",
-      "description": "The List run command operation response"
+      ]
     }
   }
 }

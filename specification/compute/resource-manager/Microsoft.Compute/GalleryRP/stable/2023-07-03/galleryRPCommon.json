@@ -2,17 +2,17 @@
   "swagger": "2.0",
   "info": {
     "title": "ComputeManagementClient",
-    "description": "The Compute Management Client.",
-    "version": "2023-07-03"
+    "version": "2023-07-03",
+    "description": "The Compute Management Client."
   },
-  "host": "management.azure.com",
   "schemes": [
     "https"
   ],
-  "consumes": [
+  "host": "management.azure.com",
+  "produces": [
     "application/json"
   ],
-  "produces": [
+  "consumes": [
     "application/json"
   ],
   "security": [
@@ -25,9 +25,9 @@
   "securityDefinitions": {
     "azure_auth": {
       "type": "oauth2",
-      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
-      "flow": "implicit",
       "description": "Azure Active Directory OAuth2 Flow",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
       "scopes": {
         "user_impersonation": "impersonate your user account"
       }
@@ -35,7 +35,32 @@
   },
   "paths": {},
   "definitions": {
+    "Architecture": {
+      "type": "string",
+      "description": "The architecture of the image. Applicable to OS disks only.",
+      "enum": [
+        "x64",
+        "Arm64"
+      ],
+      "x-ms-enum": {
+        "name": "Architecture",
+        "modelAsString": true
+      }
+    },
+    "Disallowed": {
+      "description": "Describes the disallowed disk types.",
+      "properties": {
+        "diskTypes": {
+          "type": "array",
+          "description": "A list of disk types.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
     "GalleryImageFeature": {
+      "description": "A feature for gallery image.",
       "properties": {
         "name": {
           "type": "string",
@@ -45,10 +70,10 @@
           "type": "string",
           "description": "The value of the gallery image feature."
         }
-      },
-      "description": "A feature for gallery image."
+      }
     },
     "GalleryImageIdentifier": {
+      "description": "This is the gallery image definition identifier.",
       "properties": {
         "publisher": {
           "type": "string",
@@ -67,48 +92,10 @@
         "publisher",
         "offer",
         "sku"
-      ],
-      "description": "This is the gallery image definition identifier."
-    },
-    "RecommendedMachineConfiguration": {
-      "properties": {
-        "vCPUs": {
-          "$ref": "#/definitions/ResourceRange"
-        },
-        "memory": {
-          "$ref": "#/definitions/ResourceRange"
-        }
-      },
-      "description": "The properties describe the recommended machine configuration for this Image Definition. These properties are updatable."
-    },
-    "ResourceRange": {
-      "properties": {
-        "min": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The minimum number of the resource."
-        },
-        "max": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The maximum number of the resource."
-        }
-      },
-      "description": "Describes the resource range."
-    },
-    "Disallowed": {
-      "properties": {
-        "diskTypes": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "A list of disk types."
-        }
-      },
-      "description": "Describes the disallowed disk types."
+      ]
     },
     "ImagePurchasePlan": {
+      "description": "Describes the gallery image definition purchase plan. This is used by marketplace images.",
       "properties": {
         "name": {
           "type": "string",
@@ -122,38 +109,37 @@
           "type": "string",
           "description": "The product ID."
         }
-      },
-      "description": "Describes the gallery image definition purchase plan. This is used by marketplace images."
+      }
     },
-    "SharedGalleryImageVersionStorageProfile": {
-      "type": "object",
+    "RecommendedMachineConfiguration": {
+      "description": "The properties describe the recommended machine configuration for this Image Definition. These properties are updatable.",
       "properties": {
-        "osDiskImage": {
-          "$ref": "#/definitions/SharedGalleryOSDiskImage"
+        "vCPUs": {
+          "$ref": "#/definitions/ResourceRange"
         },
-        "dataDiskImages": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/SharedGalleryDataDiskImage"
-          },
-          "x-ms-identifiers": [
-            "lun"
-          ],
-          "description": "A list of data disk images."
+        "memory": {
+          "$ref": "#/definitions/ResourceRange"
         }
-      },
-      "description": "This is the storage profile of a Gallery Image Version."
+      }
     },
-    "SharedGalleryOSDiskImage": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/SharedGalleryDiskImage"
+    "ResourceRange": {
+      "description": "Describes the resource range.",
+      "properties": {
+        "min": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The minimum number of the resource."
+        },
+        "max": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum number of the resource."
         }
-      ],
-      "description": "This is the OS disk image."
+      }
     },
     "SharedGalleryDataDiskImage": {
       "type": "object",
+      "description": "This is the data disk image.",
       "properties": {
         "lun": {
           "type": "integer",
@@ -161,24 +147,24 @@
           "description": "This property specifies the logical unit number of the data disk. This value is used to identify data disks within the Virtual Machine and therefore must be unique for each data disk attached to the Virtual Machine."
         }
       },
+      "required": [
+        "lun"
+      ],
       "allOf": [
         {
           "$ref": "#/definitions/SharedGalleryDiskImage"
         }
-      ],
-      "required": [
-        "lun"
-      ],
-      "description": "This is the data disk image."
+      ]
     },
     "SharedGalleryDiskImage": {
       "type": "object",
+      "description": "This is the disk image base class.",
       "properties": {
         "diskSizeGB": {
-          "readOnly": true,
           "type": "integer",
           "format": "int32",
-          "description": "This property indicates the size of the VHD to be created."
+          "description": "This property indicates the size of the VHD to be created.",
+          "readOnly": true
         },
         "hostCaching": {
           "type": "string",
@@ -193,30 +179,44 @@
             "modelAsString": true
           }
         }
-      },
-      "description": "This is the disk image base class."
-    },
-    "Architecture": {
-      "type": "string",
-      "description": "The architecture of the image. Applicable to OS disks only.",
-      "enum": [
-        "x64",
-        "Arm64"
-      ],
-      "x-ms-enum": {
-        "name": "Architecture",
-        "modelAsString": true
       }
+    },
+    "SharedGalleryImageVersionStorageProfile": {
+      "type": "object",
+      "description": "This is the storage profile of a Gallery Image Version.",
+      "properties": {
+        "osDiskImage": {
+          "$ref": "#/definitions/SharedGalleryOSDiskImage"
+        },
+        "dataDiskImages": {
+          "type": "array",
+          "description": "A list of data disk images.",
+          "items": {
+            "$ref": "#/definitions/SharedGalleryDataDiskImage"
+          },
+          "x-ms-identifiers": [
+            "lun"
+          ]
+        }
+      }
+    },
+    "SharedGalleryOSDiskImage": {
+      "description": "This is the OS disk image.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SharedGalleryDiskImage"
+        }
+      ]
     }
   },
   "parameters": {
     "LocationNameParameter": {
       "name": "location",
       "in": "path",
+      "description": "Resource location.",
       "required": true,
       "type": "string",
-      "x-ms-parameter-location": "method",
-      "description": "Resource location."
+      "x-ms-parameter-location": "method"
     }
   }
 }

@@ -2,17 +2,17 @@
   "swagger": "2.0",
   "info": {
     "title": "DiskResourceProviderClient",
-    "description": "The Disk Resource Provider Client.",
-    "version": "2024-03-02"
+    "version": "2024-03-02",
+    "description": "The Disk Resource Provider Client."
   },
-  "host": "management.azure.com",
   "schemes": [
     "https"
   ],
-  "consumes": [
+  "host": "management.azure.com",
+  "produces": [
     "application/json"
   ],
-  "produces": [
+  "consumes": [
     "application/json"
   ],
   "security": [
@@ -25,21 +25,69 @@
   "securityDefinitions": {
     "azure_auth": {
       "type": "oauth2",
-      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
-      "flow": "implicit",
       "description": "Azure Active Directory OAuth2 Flow",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
       "scopes": {
         "user_impersonation": "impersonate your user account"
       }
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/restorePointCollections/{restorePointCollectionName}/restorePoints/{vmRestorePointName}/diskRestorePoints/{diskRestorePointName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/restorePointCollections/{restorePointCollectionName}/restorePoints/{vmRestorePointName}/diskRestorePoints": {
       "get": {
+        "operationId": "DiskRestorePoint_ListByRestorePoint",
         "tags": [
           "IncrementalRestorePoints"
         ],
+        "description": "Lists diskRestorePoints under a vmRestorePoint.",
+        "parameters": [
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "./diskRPCommon.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/RestorePointCollectionNameParameter"
+          },
+          {
+            "$ref": "#/parameters/VmRestorePointNameParameter"
+          },
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DiskRestorePointList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common-types/v1/common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get an incremental disk restorePoint resource.": {
+            "$ref": "./examples/diskRestorePointExamples/DiskRestorePoint_ListByVmRestorePoint.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/restorePointCollections/{restorePointCollectionName}/restorePoints/{vmRestorePointName}/diskRestorePoints/{diskRestorePointName}": {
+      "get": {
         "operationId": "DiskRestorePoint_Get",
+        "tags": [
+          "IncrementalRestorePoints"
+        ],
         "description": "Get disk restorePoint resource",
         "parameters": [
           {
@@ -85,60 +133,12 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/restorePointCollections/{restorePointCollectionName}/restorePoints/{vmRestorePointName}/diskRestorePoints": {
-      "get": {
-        "tags": [
-          "IncrementalRestorePoints"
-        ],
-        "operationId": "DiskRestorePoint_ListByRestorePoint",
-        "description": "Lists diskRestorePoints under a vmRestorePoint.",
-        "parameters": [
-          {
-            "$ref": "../../../common-types/v1/common.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "./diskRPCommon.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/RestorePointCollectionNameParameter"
-          },
-          {
-            "$ref": "#/parameters/VmRestorePointNameParameter"
-          },
-          {
-            "$ref": "../../../common-types/v1/common.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/DiskRestorePointList"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../common-types/v1/common.json#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get an incremental disk restorePoint resource.": {
-            "$ref": "./examples/diskRestorePointExamples/DiskRestorePoint_ListByVmRestorePoint.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/restorePointCollections/{restorePointCollectionName}/restorePoints/{vmRestorePointName}/diskRestorePoints/{diskRestorePointName}/beginGetAccess": {
       "post": {
+        "operationId": "DiskRestorePoint_GrantAccess",
         "tags": [
           "IncrementalRestorePoints"
         ],
-        "operationId": "DiskRestorePoint_GrantAccess",
         "description": "Grants access to a diskRestorePoint.",
         "parameters": [
           {
@@ -162,11 +162,11 @@
           {
             "name": "grantAccessData",
             "in": "body",
+            "description": "Access data object supplied in the body of the get disk access operation.",
             "required": true,
             "schema": {
               "$ref": "./diskRPCommon.json#/definitions/GrantAccessData"
-            },
-            "description": "Access data object supplied in the body of the get disk access operation."
+            }
           }
         ],
         "responses": {
@@ -186,23 +186,23 @@
             }
           }
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
         "x-ms-examples": {
           "Grants access to a diskRestorePoint.": {
             "$ref": "./examples/diskRestorePointExamples/DiskRestorePoint_BeginGetAccess.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/restorePointCollections/{restorePointCollectionName}/restorePoints/{vmRestorePointName}/diskRestorePoints/{diskRestorePointName}/endGetAccess": {
       "post": {
+        "operationId": "DiskRestorePoint_RevokeAccess",
         "tags": [
           "IncrementalRestorePoints"
         ],
-        "operationId": "DiskRestorePoint_RevokeAccess",
         "description": "Revokes access to a diskRestorePoint.",
         "parameters": [
           {
@@ -238,41 +238,42 @@
             }
           }
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
         "x-ms-examples": {
           "Revokes access to a diskRestorePoint.": {
             "$ref": "./examples/diskRestorePointExamples/DiskRestorePoint_EndGetAccess.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       }
     }
   },
   "definitions": {
     "DiskRestorePoint": {
+      "description": "Properties of disk restore point",
       "properties": {
         "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/DiskRestorePointProperties"
+          "$ref": "#/definitions/DiskRestorePointProperties",
+          "x-ms-client-flatten": true
         }
       },
       "allOf": [
         {
           "$ref": "#/definitions/ProxyOnlyResource"
         }
-      ],
-      "description": "Properties of disk restore point"
+      ]
     },
     "DiskRestorePointList": {
+      "description": "The List Disk Restore Points operation response.",
       "properties": {
         "value": {
           "type": "array",
+          "description": "A list of disk restore points.",
           "items": {
             "$ref": "#/definitions/DiskRestorePoint"
-          },
-          "description": "A list of disk restore points."
+          }
         },
         "nextLink": {
           "type": "string",
@@ -281,10 +282,10 @@
       },
       "required": [
         "value"
-      ],
-      "description": "The List Disk Restore Points operation response."
+      ]
     },
     "DiskRestorePointProperties": {
+      "description": "Properties of an incremental disk restore point",
       "properties": {
         "timeCreated": {
           "type": "string",
@@ -299,7 +300,6 @@
         },
         "osType": {
           "type": "string",
-          "readOnly": true,
           "description": "The Operating System type.",
           "enum": [
             "Windows",
@@ -308,7 +308,8 @@
           "x-ms-enum": {
             "name": "OperatingSystemTypes",
             "modelAsString": false
-          }
+          },
+          "readOnly": true
         },
         "hyperVGeneration": {
           "type": "string",
@@ -383,26 +384,25 @@
           "description": "Logical sector size in bytes for disk restore points of UltraSSD_LRS and PremiumV2_LRS disks. Supported values are 512 and 4096. 4096 is the default.",
           "readOnly": true
         }
-      },
-      "description": "Properties of an incremental disk restore point"
+      }
     },
     "ProxyOnlyResource": {
       "description": "The ProxyOnly Resource model definition.",
       "properties": {
         "id": {
-          "readOnly": true,
           "type": "string",
-          "description": "Resource Id"
+          "description": "Resource Id",
+          "readOnly": true
         },
         "name": {
-          "readOnly": true,
           "type": "string",
-          "description": "Resource name"
+          "description": "Resource name",
+          "readOnly": true
         },
         "type": {
-          "readOnly": true,
           "type": "string",
-          "description": "Resource type"
+          "description": "Resource type",
+          "readOnly": true
         }
       }
     }
@@ -411,25 +411,25 @@
     "DiskRestorePointNameParameter": {
       "name": "diskRestorePointName",
       "in": "path",
+      "description": "The name of the disk restore point created.",
       "required": true,
       "type": "string",
-      "description": "The name of the disk restore point created.",
       "x-ms-parameter-location": "method"
     },
     "RestorePointCollectionNameParameter": {
       "name": "restorePointCollectionName",
       "in": "path",
+      "description": "The name of the restore point collection that the disk restore point belongs.",
       "required": true,
       "type": "string",
-      "description": "The name of the restore point collection that the disk restore point belongs.",
       "x-ms-parameter-location": "method"
     },
     "VmRestorePointNameParameter": {
       "name": "vmRestorePointName",
       "in": "path",
+      "description": "The name of the vm restore point that the disk disk restore point belongs.",
       "required": true,
       "type": "string",
-      "description": "The name of the vm restore point that the disk disk restore point belongs.",
       "x-ms-parameter-location": "method"
     }
   }
