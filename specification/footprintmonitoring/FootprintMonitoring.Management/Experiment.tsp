@@ -35,7 +35,6 @@ interface Experiments {
   /**
    * Retrieves the information about a single Footprint experiment.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" ""
   @OpenAPI.extension(
     "x-ms-examples",
     {
@@ -57,7 +56,6 @@ interface Experiments {
   /**
    * Creates or updates a Footprint experiment with the specified properties.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" ""
   @OpenAPI.extension(
     "x-ms-examples",
     {
@@ -71,7 +69,6 @@ interface Experiments {
   /**
    * Deletes an existing Footprint experiment.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" ""
   @OpenAPI.extension(
     "x-ms-examples",
     {
@@ -93,7 +90,6 @@ interface Experiments {
   /**
    * Retrieves the information about all experiments under a Footprint profile.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" ""
   @OpenAPI.extension(
     "x-ms-examples",
     {
