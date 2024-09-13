@@ -181,7 +181,7 @@ input-file:
   - Microsoft.Network/stable/2024-03-01/vmssPublicIpAddress.json
   - Microsoft.Network/stable/2024-03-01/webapplicationfirewall.json
 
-  suppressions:
+suppressions:
   - code: PatchIdentityProperty
     from: networkWatcher.json
     reason: False alarm.
