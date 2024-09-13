@@ -15,22 +15,17 @@ using Azure.Core.Traits;
     {
       type: OAuth2FlowType.implicit,
       authorizationUrl: "https://login.microsoftonline.com/common/oauth2/v2.0/authorize",
-      scopes: ["https://management.azure.com/.default"],
+      scopes: ["https://ml.azure.com/.default"],
     }
   ]>
 )
 @service({
-  title: "Azure AI Runtime Service",
+  title: "Azure AI Project Services",
 })
 @server(
-  "{endpoint}/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}",
-  "Machinelearning AI Runtime APIs",
+  "https://management.azure.com/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}",
+  "Azure AI Project APIs",
   {
-    @doc("""
-      Supported Azure AI Runtime endpoint.
-      """)
-    endpoint: url,
-
     @doc("The ID of the target subscription.")
     subscriptionId: string,
 
@@ -42,11 +37,11 @@ using Azure.Core.Traits;
   }
 )
 @versioned(Versions)
-namespace Azure.Ai.Runtime;
+namespace Azure.Ai.Project;
 
-@doc("Azure AI Runtime Services api versions.")
+@doc("Azure Machine Learning Services api versions.")
 enum Versions {
-  @doc("Azure AI Runtime Service api version 2024-07-01-preview.")
+  @doc("Azure AI Project Services api version 2024-07-01-preview.")
   @useDependency(Azure.Core.Versions.v1_0_Preview_2)
-  v2024_07_01_preview: "2024-07-01-preview",
+  `2024-07-01-preview`,
 }
