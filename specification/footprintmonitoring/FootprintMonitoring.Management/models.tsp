@@ -15,22 +15,6 @@ interface Operations {
   @doc("List the operations for the provider")
   @segment("operations")
   @armResourceRead(Azure.ResourceManager.Foundations.OperationListResult)
-  @OpenAPI.extension(
-    "x-ms-examples",
-    {
-      `List all operations (maximum).`: {
-        $ref: "./examples/Operations_List_MaximumSet_Gen.json",
-      },
-    }
-  )
-  @OpenAPI.extension(
-    "x-ms-examples",
-    {
-      `List all operations (maximum).`: {
-        $ref: "./examples/Operations_List_MinimumSet_Gen.json",
-      },
-    }
-  )
   @get
   list(
     ...ApiVersionParameter,
@@ -240,9 +224,22 @@ model SubResource {
 }
 
 /**
+ * The model for tags on Footprint profile resources.
+ */
+model Tags {
+  /**
+   * The key for this resource.
+   */
+  key: string;
+
+  /**
+   * The value for this resource.
+   */
+  value: string;
+}
+/**
  * An Azure resource.
  */
-@OpenAPI.extension("x-ms-azure-resource", true)
 model Resource {
   /**
    * Fully qualified resource Id for the resource.
@@ -266,7 +263,7 @@ model Resource {
    * Tags for the resource.
    */
   @visibility("read", "create", "update")
-  tags?: Record<string>;
+  tags?: Tags;
 
   /**
    * Region where the Azure resource is located.
@@ -282,7 +279,7 @@ model ProfilePatch {
   /**
    * The tags for this resource.
    */
-  tags?: Record<string>;
+  tags?: Tags;
 }
 
 /**

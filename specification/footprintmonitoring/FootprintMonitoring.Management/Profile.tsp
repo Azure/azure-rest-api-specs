@@ -27,54 +27,23 @@ interface Profiles {
   /**
    * Retrieves the information about a single Footprint profile.
    */
-  @OpenAPI.extension(
-    "x-ms-examples",
-    {
-      `Get a Footprint profile (max).`: {
-        $ref: "./examples/Profiles_Get_MaximumSet_Gen.json",
-      },
-    }
-  )
   get is ArmResourceRead<Profile>;
 
   /**
    * Creates or updates a Footprint profile with the specified properties.
    */
-  @OpenAPI.extension(
-    "x-ms-examples",
-    {
-      `Create or update a Footprint profile (max).`: {
-        $ref: "./examples/Profiles_CreateOrUpdate_MaximumSet_Gen.json",
-      },
-    }
-  )
   createOrUpdate is ArmResourceCreateOrReplaceSync<Profile>;
 
   /**
    * Updates an existing Footprint profile resource.
    */
-  @OpenAPI.extension(
-    "x-ms-examples",
-    {
-      `Update a Footprint profile (max).`: {
-        $ref: "./examples/Profiles_Update_MaximumSet_Gen.json",
-      },
-    }
-  )
   @parameterVisibility
   update is ArmCustomPatchSync<Profile, ProfilePatch>;
 
   /**
    * Deletes an existing Footprint profile.
    */
-  @OpenAPI.extension(
-    "x-ms-examples",
-    {
-      `Delete a Footprint profile (max).`: {
-        $ref: "./examples/Profiles_Delete_MaximumSet_Gen.json",
-      },
-    }
-  )
+
   // @OpenAPI.extension(
   //   "x-ms-examples",
   //   {
@@ -88,27 +57,11 @@ interface Profiles {
   /**
    * Retrieves the information about all Footprint profiles under a resource group.
    */
-  @OpenAPI.extension(
-    "x-ms-examples",
-    {
-      `List all Footprint profiles under a resource group (max).`: {
-        $ref: "./examples/Profiles_ListByResourceGroup_MaximumSet_Gen.json",
-      },
-    }
-  )
-  listByResourceGroup is ArmResourceListByParent<Profile>;
+  resourceGroup is ArmResourceListByParent<Profile>;
 
   /**
    * Retrieves the information about all Footprint profiles under a subscription.
    */
-  @OpenAPI.extension(
-    "x-ms-examples",
-    {
-      `List all Footprint profiles under a subscription (max).`: {
-        $ref: "./examples/Profiles_ListBySubscription_MaximumSet_Gen.json",
-      },
-    }
-  )
   listBySubscription is ArmListBySubscription<Profile>;
 }
 

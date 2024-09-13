@@ -36,40 +36,17 @@ interface MeasurementEndpointConditions {
   /**
    * Retrieves the information about a single measurement endpoint condition under a Footprint measurement endpoint.
    */
-  @OpenAPI.extension(
-    "x-ms-examples",
-    {
-      `Get a Footprint measurement endpoint condition (max).`: {
-        $ref: "./examples/MeasurementEndpointConditions_Get_MaximumSet_Gen.json",
-      },
-    }
-  )
   get is ArmResourceRead<MeasurementEndpointCondition>;
 
   /**
    * Creates or updates a measurement endpoint condition under a Footprint measurement with the specified properties.
    */
-  @OpenAPI.extension(
-    "x-ms-examples",
-    {
-      `Create or update a Footprint measurement endpoint condition (max).`: {
-        $ref: "./examples/MeasurementEndpointConditions_CreateOrUpdate_MaximumSet_Gen.json",
-      },
-    }
-  )
   createOrUpdate is ArmResourceCreateOrReplaceSync<MeasurementEndpointCondition>;
 
   /**
    * Deletes an existing measurement endpoint condition under a Footprint measurement.
    */
-  @OpenAPI.extension(
-    "x-ms-examples",
-    {
-      `Delete a Footprint measurement endpoint condition (max).`: {
-        $ref: "./examples/MeasurementEndpointConditions_Delete_MaximumSet_Gen.json",
-      },
-    }
-  )
+
   // @OpenAPI.extension(
   //   "x-ms-examples",
   //   {
@@ -83,14 +60,6 @@ interface MeasurementEndpointConditions {
   /**
    * Retrieves the information about all measurement endpoint conditions under a Footprint measurement endpoint.
    */
-  @OpenAPI.extension(
-    "x-ms-examples",
-    {
-      `List all Footprint measurement endpoint conditions (max).`: {
-        $ref: "./examples/MeasurementEndpointConditions_ListByMeasurementEndpoint_MaximumSet_Gen.json",
-      },
-    }
-  )
   listByMeasurementEndpoint is ArmResourceListByParent<MeasurementEndpointCondition>;
 }
 
