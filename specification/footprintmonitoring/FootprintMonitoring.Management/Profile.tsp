@@ -27,6 +27,7 @@ interface Profiles {
   /**
    * Retrieves the information about a single Footprint profile.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" ""
   @OpenAPI.extension(
     "x-ms-examples",
     {
@@ -40,6 +41,7 @@ interface Profiles {
   /**
    * Creates or updates a Footprint profile with the specified properties.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" ""
   @OpenAPI.extension(
     "x-ms-examples",
     {
@@ -53,6 +55,7 @@ interface Profiles {
   /**
    * Updates an existing Footprint profile resource.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" ""
   @OpenAPI.extension(
     "x-ms-examples",
     {
@@ -67,6 +70,7 @@ interface Profiles {
   /**
    * Deletes an existing Footprint profile.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" ""
   @OpenAPI.extension(
     "x-ms-examples",
     {
@@ -75,19 +79,20 @@ interface Profiles {
       },
     }
   )
-  // @OpenAPI.extension(
-  //   "x-ms-examples",
-  //   {
-  //     `Delete a Footprint profile (min).`: {
-  //       $ref: "./examples/Profiles_Delete_MinimumSet_Gen.json",
-  //     },
-  //   }
-  // )
+  @OpenAPI.extension(
+    "x-ms-examples",
+    {
+      `Delete a Footprint profile (min).`: {
+        $ref: "./examples/Profiles_Delete_MinimumSet_Gen.json",
+      },
+    }
+  )
   delete is ArmResourceDeleteSync<Profile>;
 
   /**
    * Retrieves the information about all Footprint profiles under a resource group.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" ""
   @OpenAPI.extension(
     "x-ms-examples",
     {
@@ -101,6 +106,7 @@ interface Profiles {
   /**
    * Retrieves the information about all Footprint profiles under a subscription.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" ""
   @OpenAPI.extension(
     "x-ms-examples",
     {

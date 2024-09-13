@@ -36,6 +36,7 @@ interface MeasurementEndpoints {
   /**
    * Retrieves the information about a single measurement endpoint under a Footprint profile.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" ""
   @OpenAPI.extension(
     "x-ms-examples",
     {
@@ -49,6 +50,7 @@ interface MeasurementEndpoints {
   /**
    * Creates or updates a single measurement endpoint under a Footprint profile with the specified properties.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" ""
   @OpenAPI.extension(
     "x-ms-examples",
     {
@@ -62,6 +64,7 @@ interface MeasurementEndpoints {
   /**
    * Deletes an existing measurement endpoint under a Footprint profile.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" ""
   @OpenAPI.extension(
     "x-ms-examples",
     {
@@ -83,6 +86,7 @@ interface MeasurementEndpoints {
   /**
    * Retrieves the information about all measurement endpoints under a Footprint profile.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" ""
   @OpenAPI.extension(
     "x-ms-examples",
     {

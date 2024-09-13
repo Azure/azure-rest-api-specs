@@ -36,6 +36,7 @@ interface MeasurementEndpointConditions {
   /**
    * Retrieves the information about a single measurement endpoint condition under a Footprint measurement endpoint.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" ""
   @OpenAPI.extension(
     "x-ms-examples",
     {
@@ -49,6 +50,7 @@ interface MeasurementEndpointConditions {
   /**
    * Creates or updates a measurement endpoint condition under a Footprint measurement with the specified properties.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" ""
   @OpenAPI.extension(
     "x-ms-examples",
     {
@@ -62,6 +64,7 @@ interface MeasurementEndpointConditions {
   /**
    * Deletes an existing measurement endpoint condition under a Footprint measurement.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" ""
   @OpenAPI.extension(
     "x-ms-examples",
     {
@@ -83,6 +86,7 @@ interface MeasurementEndpointConditions {
   /**
    * Retrieves the information about all measurement endpoint conditions under a Footprint measurement endpoint.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" ""
   @OpenAPI.extension(
     "x-ms-examples",
     {

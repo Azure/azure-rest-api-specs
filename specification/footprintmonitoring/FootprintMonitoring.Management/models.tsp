@@ -10,6 +10,7 @@ using Azure.ResourceManager.Foundations;
 namespace Microsoft.FootprintMonitoring;
 
 interface Operations {
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" ""
   @tag("Operations")
   @autoRoute
   @doc("List the operations for the provider")
@@ -242,6 +243,7 @@ model SubResource {
 /**
  * An Azure resource.
  */
+#suppress "@azure-tools/typespec-azure-core/no-openapi" ""
 @OpenAPI.extension("x-ms-azure-resource", true)
 model Resource {
   /**
@@ -265,6 +267,7 @@ model Resource {
   /**
    * Tags for the resource.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" ""
   @visibility("read", "create", "update")
   tags?: Record<string>;
 
@@ -282,6 +285,7 @@ model ProfilePatch {
   /**
    * The tags for this resource.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" ""
   tags?: Record<string>;
 }
 
