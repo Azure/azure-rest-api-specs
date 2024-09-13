@@ -6,21 +6,43 @@
     "networkManagerName": "testNetworkManager",
     "configurationName": "myTestSecurityConfig",
     "ruleCollectionName": "testRuleCollection",
-    "ruleName": "SampleDefaultAdminRule",
+    "ruleName": "SampleAdminRule",
     "adminRule": {
-      "kind": "Default",
+      "kind": "Custom",
       "properties": {
-        "flag": "AllowVnetInbound"
+        "description": "This is Sample Admin Rule",
+        "protocol": "Tcp",
+        "sources": [
+          {
+            "addressPrefixType": "ServiceTag",
+            "addressPrefix": "Internet"
+          }
+        ],
+        "destinations": [
+          {
+            "addressPrefixType": "NetworkGroup",
+            "addressPrefix": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/networkManagers/testNetworkManager/networkGroups/ng1"
+          }
+        ],
+        "sourcePortRanges": [
+          "0-65535"
+        ],
+        "destinationPortRanges": [
+          "22"
+        ],
+        "access": "Deny",
+        "priority": 1,
+        "direction": "Inbound"
       }
     }
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/networkManagers/testNetworkManager/securityAdminConfigurations/myTestSecurityConfig/ruleCollections/testRuleCollection/rules/SampleDefaultAdminRule",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/networkManagers/testNetworkManager/securityAdminConfigurations/myTestSecurityConfig/ruleCollections/testRuleCollection/rules/SampleAdminRule",
         "type": "Microsoft.Network/networkManagers/securityAdminConfigurations/ruleCollections/rules",
-        "name": "SampleDefaultAdminRule",
-        "kind": "Default",
+        "name": "SampleAdminRule",
+        "kind": "Custom",
         "systemData": {
           "createdBy": "b69a9388-9488-4534-b470-7ec6d41beef5",
           "createdByType": "User",
@@ -30,8 +52,7 @@
           "lastModifiedAt": "2021-01-11T18:52:27Z"
         },
         "properties": {
-          "flag": "AllowVnetInbound",
-          "description": "This is Sample Default Admin Rule",
+          "description": "This is Sample Admin Rule using a network group as a source and destination.",
           "protocol": "Tcp",
           "sources": [
             {
@@ -54,17 +75,16 @@
           "access": "Deny",
           "priority": 1,
           "direction": "Inbound",
-          "provisioningState": "Succeeded",
-          "resourceGuid": "00000000-0000-0000-0000-000000000000"
+          "provisioningState": "Succeeded"
         }
       }
     },
     "201": {
       "body": {
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/networkManagers/testNetworkManager/securityAdminConfigurations/myTestSecurityConfig/ruleCollections/rules/SampleDefaultAdminRule",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/networkManagers/testNetworkManager/securityAdminConfigurations/myTestSecurityConfig/ruleCollections/testRuleCollection/rules/SampleAdminRule",
         "type": "Microsoft.Network/networkManagers/securityAdminConfigurations/ruleCollections/rules",
-        "name": "SampleDefaultAdminRule",
-        "kind": "Default",
+        "name": "SampleAdminRule",
+        "kind": "Custom",
         "systemData": {
           "createdBy": "b69a9388-9488-4534-b470-7ec6d41beef5",
           "createdByType": "User",
@@ -74,8 +94,7 @@
           "lastModifiedAt": "2021-01-11T18:52:27Z"
         },
         "properties": {
-          "flag": "AllowVnetInbound",
-          "description": "This is Sample Default Admin Rule",
+          "description": "This is Sample Admin Rule using a network group as a source and destination.",
           "protocol": "Tcp",
           "sources": [
             {
@@ -98,11 +117,9 @@
           "access": "Deny",
           "priority": 1,
           "direction": "Inbound",
-          "provisioningState": "Succeeded",
-          "resourceGuid": "00000000-0000-0000-0000-000000000000"
+          "provisioningState": "Succeeded"
         }
       }
     }
   }
 }
-
