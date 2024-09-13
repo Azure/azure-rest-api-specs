@@ -526,11 +526,11 @@
         "operationId": "AdminRules_CreateOrUpdate",
         "parameters": [
           {
-            "name": "adminRuleName",
+            "name": "adminRule",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/AdminRule"
+              "$ref": "#/definitions/BaseAdminRule"
             },
             "description": "The admin rule to create or update"
           }
@@ -803,9 +803,6 @@
     },
     "AdminRule": {
       "type": "object",
-      "required": [
-        "properties"
-      ],
       "properties": {
         "properties": {
           "$ref": "#/definitions/AdminPropertiesFormat",
