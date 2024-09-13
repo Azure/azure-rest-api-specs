@@ -67,7 +67,7 @@
     "/connections/{connectionName}/listsecrets": {
       "post": {
         "operationId": "Connections_ListSecrets",
-        "description": "Get next Index version as defined by the server. The server keeps track of all versions that are string-representations of integers. If one exists, the nextVersion will be a string representation of the highest integer value + 1. Otherwise, the nextVersion will default to '1'.",
+        "description": "List secrets for a given connection.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -78,6 +78,44 @@
             "description": "Connection Name",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "subscriptionId": {
+                  "type": "string",
+                  "description": "The ID of the target subscription."
+                },
+                "resourceGroupName": {
+                  "type": "string",
+                  "description": "The name of the Resource Group."
+                },
+                "workspaceName": {
+                  "type": "string",
+                  "description": "The name of the AzureML workspace or AI project."
+                },
+                "apiVersionInBody": {
+                  "type": "string",
+                  "description": "The api version.",
+                  "enum": [
+                    "2024-07-01-preview"
+                  ],
+                  "x-ms-enum": {
+                    "modelAsString": false
+                  }
+                }
+              },
+              "required": [
+                "subscriptionId",
+                "resourceGroupName",
+                "workspaceName",
+                "apiVersionInBody"
+              ]
+            }
           }
         ],
         "responses": {
