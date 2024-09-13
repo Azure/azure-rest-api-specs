@@ -1,0 +1,33 @@
+{
+  "parameters": {
+    "subscriptionId": "8e17e36c-42e9-4cd5-a078-7b44883414e0",
+    "location": "centralus",
+    "api-version": "2024-09-01",
+    "body": {
+      "appLocation": "eastus",
+      "environment": "Prod",
+      "sapProduct": "S4HANA",
+      "deploymentType": "ThreeTier",
+      "saps": 75000,
+      "dbMemory": 1024,
+      "databaseType": "HANA",
+      "dbScaleMethod": "ScaleUp",
+      "highAvailabilityType": "AvailabilitySet"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "deploymentType": "ThreeTier",
+        "applicationServerVmSku": "Standard_E16ds_v4",
+        "applicationServerInstanceCount": 3,
+        "centralServerVmSku": "Standard_E8ds_v4",
+        "centralServerInstanceCount": 2,
+        "dbVmSku": "Standard_M64s",
+        "databaseInstanceCount": 2
+      }
+    }
+  },
+  "operationId": "SapVirtualInstances_GetSizingRecommendations",
+  "title": "SAP sizing recommendations for HA with availability set."
+}

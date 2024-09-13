@@ -1,0 +1,13 @@
+output-dir: "{project-root}/../"
+emit:
+  - "@azure-tools/typespec-autorest"
+options:
+  "@azure-tools/typespec-autorest":
+    use-read-only-status-schema: true
+    azure-resource-provider-folder: "resource-manager"
+    emitter-output-dir: "{output-dir}"
+    output-file: "{azure-resource-provider-folder}/{service-name}/PublicCloud/{version-status}/{version}/publicCloud.json"
+    arm-types-dir: "../../../../../../common-types/resource-management"
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/resource-manager"
