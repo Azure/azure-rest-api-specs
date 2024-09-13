@@ -200,6 +200,7 @@ model ExperimentWorkspacePatch {
   /**
    * Resource tags.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing API"
   tags?: Record<string>;
 
   /**

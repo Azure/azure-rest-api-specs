@@ -1,7 +1,7 @@
 import "@typespec/rest";
 import "@typespec/http";
-import "@typespec/openapi";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@azure-tools/typespec-client-generator-core";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -65,7 +65,8 @@ model ModifyUpdate {
   /**
    * The updatable properties of the Update.
    */
-  @extension("x-ms-client-flatten", true)
+  #suppress "deprecated" "Legacy flattening"
+  @Azure.ClientGenerator.Core.flattenProperty
   properties?: ModifyUpdateProperties;
 }
 

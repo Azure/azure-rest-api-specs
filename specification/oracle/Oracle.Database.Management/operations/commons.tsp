@@ -51,6 +51,7 @@ interface OracleChildResource<
 
 @armResourceOperations
 interface ListActions {
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "TODO - Migrate to LRO pattern"
   @doc("Generic Async Get operation")
   @extension("x-ms-long-running-operation", true)
   @extension(
