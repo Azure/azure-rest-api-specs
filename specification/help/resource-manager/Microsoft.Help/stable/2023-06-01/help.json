@@ -1,0 +1,636 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "HelpRP",
+    "description": "Help RP provider",
+    "version": "2023-06-01"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/providers/Microsoft.Help/operations": {
+      "get": {
+        "tags": [
+          "operations"
+        ],
+        "description": "Returns list of operations.",
+        "operationId": "Operations_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operation details.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List All Operations": {
+            "$ref": "./examples/ListOperations.json"
+          }
+        }
+      }
+    },
+    "/{scope}/providers/Microsoft.Help/checkNameAvailability": {
+      "post": {
+        "tags": [
+          "diagnostics"
+        ],
+        "description": "This API is used to check the uniqueness of a resource name used for a diagnostic check.",
+        "operationId": "Diagnostics_CheckNameAvailability",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ScopeParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "CheckNameAvailabilityRequest",
+            "description": "The required parameters for availability check.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/CheckNameAvailabilityRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Response for the availability of the requested resource name.",
+            "schema": {
+              "$ref": "#/definitions/CheckNameAvailabilityResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Example when name is available for a Diagnostic resource": {
+            "$ref": "./examples/CheckNameAvailabilityForDiagnosticWhenNameIsAvailable.json"
+          },
+          "Example when name is not available for a Diagnostic resource": {
+            "$ref": "./examples/CheckNameAvailabilityForDiagnosticWhenNameIsNotAvailable.json"
+          }
+        }
+      }
+    },
+    "/{scope}/providers/Microsoft.Help/diagnostics/{diagnosticsResourceName}": {
+      "put": {
+        "tags": [
+          "diagnostics"
+        ],
+        "description": "Diagnostics tells you precisely the root cause of the issue and how to address it. You can get diagnostics once you discover and identify the relevant solution for your Azure issue.<br/><br/> You can create diagnostics using the ‘solutionId’  from Solution Discovery API response and ‘additionalParameters’ <br/><br/> <b>Note: </b>‘requiredParameterSets’ from Solutions Discovery API response must be passed via ‘additionalParameters’ as an input to Diagnostics API",
+        "operationId": "Diagnostics_Create",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ScopeParameter"
+          },
+          {
+            "$ref": "#/parameters/DiagnosticsResourceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "diagnosticResourceRequest",
+            "description": "The required request body for this insightResource invocation.",
+            "schema": {
+              "$ref": "#/definitions/DiagnosticResource"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Create diagnostics successfully (may contain errors).",
+            "schema": {
+              "$ref": "#/definitions/DiagnosticResource"
+            }
+          },
+          "200": {
+            "description": "Update diagnostics successfully (may contain errors).",
+            "schema": {
+              "$ref": "#/definitions/DiagnosticResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Creates a Diagnostic for a KeyVault resource": {
+            "$ref": "./examples/CreateDiagnosticForKeyVaultResource.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "diagnostics"
+        ],
+        "description": "Get the diagnostics using the 'diagnosticsResourceName' you chose while creating the diagnostic.",
+        "operationId": "Diagnostics_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ScopeParameter"
+          },
+          {
+            "$ref": "#/parameters/DiagnosticsResourceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful fetched insight diagnostic (may contain errors).",
+            "schema": {
+              "$ref": "#/definitions/DiagnosticResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets a Diagnostic for a KeyVault resource": {
+            "$ref": "./examples/GetDiagnosticForKeyVaultResource.json"
+          }
+        }
+      }
+    },
+    "/{scope}/providers/Microsoft.Help/discoverySolutions": {
+      "get": {
+        "tags": [
+          "discoverySolutions"
+        ],
+        "description": "Solutions Discovery is the initial point of entry within Help API, which helps you identify the relevant solutions for your Azure issue.<br/><br/> You can discover solutions using resourceUri OR resourceUri + problemClassificationId.<br/><br/>We will do our best in returning relevant diagnostics for your Azure issue.<br/><br/> Get the problemClassificationId(s) using this [reference](https://learn.microsoft.com/rest/api/support/problem-classifications/list?tabs=HTTP).<br/><br/> <b>Note: </b> ‘requiredParameterSets’ from Solutions Discovery API response must be passed via ‘additionalParameters’ as an input to Diagnostics API.",
+        "operationId": "DiscoverySolution_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ScopeParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/FilterParameter"
+          },
+          {
+            "$ref": "#/parameters/SkipTokenParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful fetched list of solution metadata.",
+            "schema": {
+              "$ref": "#/definitions/DiscoveryResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List DiscoverySolutions for a KeyVault resource": {
+            "$ref": "./examples/ListDiscoverySolutionsForKeyVaultResource.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "CheckNameAvailabilityResponse": {
+      "description": "Response for whether the requested resource name is available or not.",
+      "type": "object",
+      "properties": {
+        "nameAvailable": {
+          "description": "Returns true or false depending on the availability of the name",
+          "type": "boolean"
+        },
+        "reason": {
+          "description": "Reason for why value is not available. This field is returned if nameAvailable is false.",
+          "type": "string"
+        },
+        "message": {
+          "description": "Gets an error message explaining the 'reason' value with more details. This field is returned iif nameAvailable is false.",
+          "type": "string"
+        }
+      }
+    },
+    "DiagnosticInvocation": {
+      "description": "Solution Invocation with additional params needed for invocation.",
+      "type": "object",
+      "properties": {
+        "solutionId": {
+          "description": "Solution Id to invoke.",
+          "type": "string"
+        },
+        "additionalParameters": {
+          "description": "Additional parameters required to invoke the solutionId.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "DiagnosticResource": {
+      "description": "Diagnostic resource",
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/DiagnosticResourceProperties",
+          "description": "Diagnostic Resource properties."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "DiagnosticResourceProperties": {
+      "description": "Diagnostic resource properties.",
+      "type": "object",
+      "properties": {
+        "globalParameters": {
+          "description": "Global parameters that can be passed to all solutionIds.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "insights": {
+          "description": "SolutionIds that are needed to be invoked.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DiagnosticInvocation"
+          },
+          "x-ms-identifiers": [
+            "solutionId"
+          ]
+        },
+        "acceptedAt": {
+          "description": "Diagnostic Request Accepted time.",
+          "type": "string",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "description": "Status of diagnostic provisioning.",
+          "type": "string",
+          "readOnly": true,
+          "enum": [
+            "Succeeded",
+            "PartialComplete",
+            "Failed",
+            "Canceled"
+          ],
+          "x-ms-enum": {
+            "name": "provisioningState",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Succeeded",
+                "description": "All Diagnostics in the Batch succeeded."
+              },
+              {
+                "value": "PartialComplete",
+                "description": "Some Diagnostics are still running or failed."
+              },
+              {
+                "value": "Failed",
+                "description": "All Diagnostics failed to run."
+              },
+              {
+                "value": "Canceled",
+                "description": "When Diagnostic request gets canceled."
+              }
+            ]
+          }
+        },
+        "diagnostics": {
+          "description": "Array of Diagnostics.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/Diagnostic"
+          },
+          "x-ms-identifiers": [
+            "solutionId"
+          ]
+        }
+      }
+    },
+    "Diagnostic": {
+      "description": "Properties returned with in an insight.",
+      "type": "object",
+      "properties": {
+        "solutionId": {
+          "description": "Solution Id",
+          "type": "string"
+        },
+        "status": {
+          "$ref": "#/definitions/DiagnosticStatus"
+        },
+        "insights": {
+          "description": "The problems (if any) detected by this insight.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Insight"
+          },
+          "x-ms-identifiers": []
+        },
+        "error": {
+          "$ref": "#/definitions/Error"
+        }
+      }
+    },
+    "DiagnosticStatus": {
+      "description": "Denotes the status of the diagnostic resource.",
+      "type": "string",
+      "enum": [
+        "Failed",
+        "MissingInputs",
+        "Running",
+        "Succeeded",
+        "Timeout"
+      ],
+      "x-ms-enum": {
+        "name": "Status",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Failed",
+            "description": "Diagnostic creation failed."
+          },
+          {
+            "value": "MissingInputs",
+            "description": "Request is missing required inputs to run."
+          },
+          {
+            "value": "Running",
+            "description": "Diagnostic is still running."
+          },
+          {
+            "value": "Succeeded",
+            "description": "Diagnostic creation succeeded."
+          },
+          {
+            "value": "Timeout",
+            "description": "Diagnostic was timed out."
+          }
+        ]
+      }
+    },
+    "Insight": {
+      "description": "Detailed insights(s) obtained via the invocation of an insight diagnostic troubleshooter.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Article id.",
+          "type": "string"
+        },
+        "title": {
+          "description": "This insight's title.",
+          "type": "string"
+        },
+        "results": {
+          "description": "Detailed result content.",
+          "type": "string"
+        },
+        "importanceLevel": {
+          "description": "Importance level of the insight.",
+          "type": "string",
+          "enum": [
+            "Critical",
+            "Warning",
+            "Information"
+          ],
+          "x-ms-enum": {
+            "name": "importanceLevel",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Critical",
+                "description": "A critical insight has been found after running the diagnostic."
+              },
+              {
+                "value": "Warning",
+                "description": "A warning insight has been found after running the diagnostic."
+              },
+              {
+                "value": "Information",
+                "description": "An information insight has been found after running the diagnostic."
+              }
+            ]
+          }
+        }
+      }
+    },
+    "Error": {
+      "description": "Error definition.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "Service specific error code which serves as the substatus for the HTTP error code.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "Service specific error type which serves as additional context for the error herein.",
+          "type": "string",
+          "readOnly": true
+        },
+        "message": {
+          "description": "Description of the error.",
+          "type": "string",
+          "readOnly": true
+        },
+        "details": {
+          "description": "An array of additional nested error response info objects, as described by this contract.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Error"
+          },
+          "x-ms-identifiers": [
+            "type",
+            "message"
+          ]
+        }
+      }
+    },
+    "DiscoveryResponse": {
+      "description": "Discovery response.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The list of solution metadata.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SolutionMetadataResource"
+          }
+        },
+        "nextLink": {
+          "description": "The link used to get the next page of solution metadata.",
+          "type": "string"
+        }
+      }
+    },
+    "SolutionMetadataResource": {
+      "description": "Solution Metadata resource",
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SolutionMetadataProperties",
+          "description": "Solution metadata Resource properties."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "SolutionMetadataProperties": {
+      "description": "Diagnostic solution metadata.",
+      "type": "object",
+      "properties": {
+        "solutionId": {
+          "description": "Solution Id.",
+          "type": "string"
+        },
+        "solutionType": {
+          "description": "Solution Type.",
+          "type": "string"
+        },
+        "description": {
+          "description": "A detailed description of solution.",
+          "type": "string"
+        },
+        "requiredParameterSets": {
+          "description": "Required parameters for invoking this particular solution.",
+          "type": "array",
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "x-ms-identifiers": []
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    }
+  },
+  "parameters": {
+    "ScopeParameter": {
+      "name": "scope",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "This is an extension resource provider and only resource level extension is supported at the moment.",
+      "x-ms-parameter-location": "method",
+      "x-ms-skip-url-encoding": true
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "Client Api Version.",
+      "x-ms-parameter-location": "client"
+    },
+    "DiagnosticsResourceNameParameter": {
+      "name": "diagnosticsResourceName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 100,
+      "pattern": "^[A-Za-z0-9-+@()_]+$",
+      "description": "Unique resource name for insight resources",
+      "x-ms-parameter-location": "method"
+    },
+    "FilterParameter": {
+      "name": "$filter",
+      "description": "Can be used to filter solutionIds by 'ProblemClassificationId'. The filter supports only 'and' and 'eq' operators. Example: $filter=ProblemClassificationId eq '1ddda5b4-cf6c-4d4f-91ad-bc38ab0e811e' and ProblemClassificationId eq '0a9673c2-7af6-4e19-90d3-4ee2461076d9'.",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "x-ms-skip-url-encoding": true,
+      "x-ms-parameter-location": "method"
+    },
+    "SkipTokenParameter": {
+      "name": "$skiptoken",
+      "description": "Skiptoken is only used if a previous operation returned a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skiptoken parameter that specifies a starting point to use for subsequent calls.",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

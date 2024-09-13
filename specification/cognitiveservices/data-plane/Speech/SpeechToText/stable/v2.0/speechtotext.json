@@ -44,80 +44,13 @@
               }
             }
           },
-          "401": {
-            "description": "In case the user isn't authorized.",
+          "default": {
+            "description": "An error occurred.",
             "schema": {
-              "$ref": "#/definitions/ErrorContent"
-            },
-            "headers": {
-              "X-RateLimit-Limit": {
-                "description": "The limit of requests for the resource.",
-                "type": "integer"
-              },
-              "X-RateLimit-Remaining": {
-                "description": "The remaining number of requests until the rate limit is reached.",
-                "type": "integer"
-              },
-              "X-RateLimit-Reset": {
-                "description": "The timestamp when the rate limit will be reset formatted as ISO 8601 combined date and time in UTC.",
-                "type": "string"
-              }
-            },
-            "x-ms-error-response": true
-          },
-          "403": {
-            "description": "In case authorized user isn't known or doesn't have the required permissions.",
-            "schema": {
-              "$ref": "#/definitions/ErrorContent"
-            },
-            "headers": {
-              "X-RateLimit-Limit": {
-                "description": "The limit of requests for the resource.",
-                "type": "integer"
-              },
-              "X-RateLimit-Remaining": {
-                "description": "The remaining number of requests until the rate limit is reached.",
-                "type": "integer"
-              },
-              "X-RateLimit-Reset": {
-                "description": "The timestamp when the rate limit will be reset formatted as ISO 8601 combined date and time in UTC.",
-                "type": "string"
-              }
-            },
-            "x-ms-error-response": true
-          },
-          "429": {
-            "description": "In case the rate limit has been exceeded.",
-            "schema": {
-              "$ref": "#/definitions/ErrorContent"
-            },
-            "headers": {
-              "X-RateLimit-Limit": {
-                "description": "The limit of requests for the resource.",
-                "type": "integer"
-              },
-              "X-RateLimit-Remaining": {
-                "description": "The remaining number of requests until the rate limit is reached.",
-                "type": "integer"
-              },
-              "X-RateLimit-Reset": {
-                "description": "The timestamp when the rate limit will be reset formatted as ISO 8601 combined date and time in UTC.",
-                "type": "string"
-              },
-              "Retry-After": {
-                "description": "The minimum number of seconds to wait before not getting this response anymore.",
-                "type": "integer"
-              }
-            },
-            "x-ms-error-response": true
+              "$ref": "#/definitions/Error"
+            }
           }
         },
-        "security": [
-          {
-            "subscription_key": [],
-            "token": []
-          }
-        ],
         "x-ms-examples": {
           "Get all accuracy tests": {
             "$ref": "./examples/get_accuracy_tests.json"
@@ -148,80 +81,48 @@
           }
         ],
         "responses": {
-          "401": {
-            "description": "In case the user isn't authorized.",
-            "schema": {
-              "$ref": "#/definitions/ErrorContent"
-            },
+          "202": {
+            "description": "The request was accepted and the response contains the location of the entity.",
             "headers": {
-              "X-RateLimit-Limit": {
-                "description": "The limit of requests for the resource.",
-                "type": "integer"
-              },
-              "X-RateLimit-Remaining": {
-                "description": "The remaining number of requests until the rate limit is reached.",
-                "type": "integer"
-              },
-              "X-RateLimit-Reset": {
-                "description": "The timestamp when the rate limit will be reset formatted as ISO 8601 combined date and time in UTC.",
-                "type": "string"
-              }
-            },
-            "x-ms-error-response": true
-          },
-          "403": {
-            "description": "In case authorized user isn't known or doesn't have the required permissions.",
-            "schema": {
-              "$ref": "#/definitions/ErrorContent"
-            },
-            "headers": {
-              "X-RateLimit-Limit": {
-                "description": "The limit of requests for the resource.",
-                "type": "integer"
-              },
-              "X-RateLimit-Remaining": {
-                "description": "The remaining number of requests until the rate limit is reached.",
-                "type": "integer"
-              },
-              "X-RateLimit-Reset": {
-                "description": "The timestamp when the rate limit will be reset formatted as ISO 8601 combined date and time in UTC.",
-                "type": "string"
-              }
-            },
-            "x-ms-error-response": true
-          },
-          "429": {
-            "description": "In case the rate limit has been exceeded.",
-            "schema": {
-              "$ref": "#/definitions/ErrorContent"
-            },
-            "headers": {
-              "X-RateLimit-Limit": {
-                "description": "The limit of requests for the resource.",
-                "type": "integer"
-              },
-              "X-RateLimit-Remaining": {
-                "description": "The remaining number of requests until the rate limit is reached.",
-                "type": "integer"
-              },
-              "X-RateLimit-Reset": {
-                "description": "The timestamp when the rate limit will be reset formatted as ISO 8601 combined date and time in UTC.",
-                "type": "string"
-              },
               "Retry-After": {
-                "description": "The minimum number of seconds to wait before not getting this response anymore.",
+                "description": "The minimum number of seconds to wait before accessing the resource created in this operation.",
                 "type": "integer"
+              },
+              "X-RateLimit-Limit": {
+                "description": "The limit of requests for the resource.",
+                "type": "integer"
+              },
+              "X-RateLimit-Remaining": {
+                "description": "The remaining number of requests until the rate limit is reached.",
+                "type": "integer"
+              },
+              "X-RateLimit-Reset": {
+                "description": "The timestamp when the rate limit will be reset formatted as ISO 8601 combined date and time in UTC.",
+                "type": "string"
+              },
+              "Location": {
+                "description": "The location of the created resource.",
+                "type": "string",
+                "format": "uri"
+              },
+              "Operation-Location": {
+                "description": "The location of the created resource.",
+                "type": "string",
+                "format": "uri"
               }
-            },
-            "x-ms-error-response": true
+            }
+          },
+          "default": {
+            "description": "An error occurred.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
           }
         },
-        "security": [
-          {
-            "subscription_key": [],
-            "token": []
-          }
-        ],
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
         "x-ms-examples": {
           "Create an accuracy test": {
             "$ref": "./examples/create_accuracy_test.json"
@@ -274,101 +175,13 @@
               }
             }
           },
-          "401": {
-            "description": "In case the user isn't authorized.",
+          "default": {
+            "description": "An error occurred.",
             "schema": {
-              "$ref": "#/definitions/ErrorContent"
-            },
-            "headers": {
-              "X-RateLimit-Limit": {
-                "description": "The limit of requests for the resource.",
-                "type": "integer"
-              },
-              "X-RateLimit-Remaining": {
-                "description": "The remaining number of requests until the rate limit is reached.",
-                "type": "integer"
-              },
-              "X-RateLimit-Reset": {
-                "description": "The timestamp when the rate limit will be reset formatted as ISO 8601 combined date and time in UTC.",
-                "type": "string"
-              }
-            },
-            "x-ms-error-response": true
-          },
-          "403": {
-            "description": "In case authorized user isn't known or doesn't have the required permissions.",
-            "schema": {
-              "$ref": "#/definitions/ErrorContent"
-            },
-            "headers": {
-              "X-RateLimit-Limit": {
-                "description": "The limit of requests for the resource.",
-                "type": "integer"
-              },
-              "X-RateLimit-Remaining": {
-                "description": "The remaining number of requests until the rate limit is reached.",
-                "type": "integer"
-              },
-              "X-RateLimit-Reset": {
-                "description": "The timestamp when the rate limit will be reset formatted as ISO 8601 combined date and time in UTC.",
-                "type": "string"
-              }
-            },
-            "x-ms-error-response": true
-          },
-          "404": {
-            "description": "In case the specified entity doesn't exist",
-            "schema": {
-              "$ref": "#/definitions/ErrorContent"
-            },
-            "headers": {
-              "X-RateLimit-Limit": {
-                "description": "The limit of requests for the resource.",
-                "type": "integer"
-              },
-              "X-RateLimit-Remaining": {
-                "description": "The remaining number of requests until the rate limit is reached.",
-                "type": "integer"
-              },
-              "X-RateLimit-Reset": {
-                "description": "The timestamp when the rate limit will be reset formatted as ISO 8601 combined date and time in UTC.",
-                "type": "string"
-              }
-            },
-            "x-ms-error-response": true
-          },
-          "429": {
-            "description": "In case the rate limit has been exceeded.",
-            "schema": {
-              "$ref": "#/definitions/ErrorContent"
-            },
-            "headers": {
-              "X-RateLimit-Limit": {
-                "description": "The limit of requests for the resource.",
-                "type": "integer"
-              },
-              "X-RateLimit-Remaining": {
-                "description": "The remaining number of requests until the rate limit is reached.",
-                "type": "integer"
-              },
-              "X-RateLimit-Reset": {
-                "description": "The timestamp when the rate limit will be reset formatted as ISO 8601 combined date and time in UTC.",
-                "type": "string"
-              },
-              "Retry-After": {
-                "description": "The minimum number of seconds to wait before not getting this response anymore.",
-                "type": "integer"
-              }
-            },
-            "x-ms-error-response": true
+              "$ref": "#/definitions/Error"
+            }
           }
         },
-        "security": [
-          {
-            "subscription_key": [],
-            "token": []
-          }
-        ],
         "x-ms-examples": {
           "Get an accuracy test": {
             "$ref": "./examples/get_accuracy_test.json"
@@ -427,122 +240,13 @@
               }
             }
           },
-          "400": {
-            "description": "In case the operation cannot be performed successfully with the specified values.",
+          "default": {
+            "description": "An error occurred.",
             "schema": {
-              "$ref": "#/definitions/ErrorContent"
-            },
-            "headers": {
-              "X-RateLimit-Limit": {
-                "description": "The limit of requests for the resource.",
-                "type": "integer"
-              },
-              "X-RateLimit-Remaining": {
-                "description": "The remaining number of requests until the rate limit is reached.",
-                "type": "integer"
-              },
-              "X-RateLimit-Reset": {
-                "description": "The timestamp when the rate limit will be reset formatted as ISO 8601 combined date and time in UTC.",
-                "type": "string"
-              }
-            },
-            "x-ms-error-response": true
-          },
-          "401": {
-            "description": "In case the user isn't authorized.",
-            "schema": {
-              "$ref": "#/definitions/ErrorContent"
-            },
-            "headers": {
-              "X-RateLimit-Limit": {
-                "description": "The limit of requests for the resource.",
-                "type": "integer"
-              },
-              "X-RateLimit-Remaining": {
-                "description": "The remaining number of requests until the rate limit is reached.",
-                "type": "integer"
-              },
-              "X-RateLimit-Reset": {
-                "description": "The timestamp when the rate limit will be reset formatted as ISO 8601 combined date and time in UTC.",
-                "type": "string"
-              }
-            },
-            "x-ms-error-response": true
-          },
-          "403": {
-            "description": "In case authorized user isn't known or doesn't have the required permissions.",
-            "schema": {
-              "$ref": "#/definitions/ErrorContent"
-            },
-            "headers": {
-              "X-RateLimit-Limit": {
-                "description": "The limit of requests for the resource.",
-                "type": "integer"
-              },
-              "X-RateLimit-Remaining": {
-                "description": "The remaining number of requests until the rate limit is reached.",
-                "type": "integer"
-              },
-              "X-RateLimit-Reset": {
-                "description": "The timestamp when the rate limit will be reset formatted as ISO 8601 combined date and time in UTC.",
-                "type": "string"
-              }
-            },
-            "x-ms-error-response": true
-          },
-          "409": {
-            "description": "In case the specified entity doesn't exist",
-            "schema": {
-              "$ref": "#/definitions/ErrorContent"
-            },
-            "headers": {
-              "X-RateLimit-Limit": {
-                "description": "The limit of requests for the resource.",
-                "type": "integer"
-              },
-              "X-RateLimit-Remaining": {
-                "description": "The remaining number of requests until the rate limit is reached.",
-                "type": "integer"
-              },
-              "X-RateLimit-Reset": {
-                "description": "The timestamp when the rate limit will be reset formatted as ISO 8601 combined date and time in UTC.",
-                "type": "string"
-              }
-            },
-            "x-ms-error-response": true
-          },
-          "429": {
-            "description": "In case the rate limit has been exceeded.",
-            "schema": {
-              "$ref": "#/definitions/ErrorContent"
-            },
-            "headers": {
-              "X-RateLimit-Limit": {
-                "description": "The limit of requests for the resource.",
-                "type": "integer"
-              },
-              "X-RateLimit-Remaining": {
-                "description": "The remaining number of requests until the rate limit is reached.",
-                "type": "integer"
-              },
-              "X-RateLimit-Reset": {
-                "description": "The timestamp when the rate limit will be reset formatted as ISO 8601 combined date and time in UTC.",
-                "type": "string"
-              },
-              "Retry-After": {
-                "description": "The minimum number of seconds to wait before not getting this response anymore.",
-                "type": "integer"
-              }
-            },
-            "x-ms-error-response": true
+              "$ref": "#/definitions/Error"
+            }
           }
         },
-        "security": [
-          {
-            "subscription_key": [],
-            "token": []
-          }
-        ],
         "x-ms-examples": {
           "Update an accuracy test": {
             "$ref": "./examples/update_accuracy_test.json"
@@ -586,80 +290,13 @@
               }
             }
           },
-          "401": {
-            "description": "In case the user isn't authorized.",
+          "default": {
+            "description": "An error occurred.",
             "schema": {
-              "$ref": "#/definitions/ErrorContent"
-            },
-            "headers": {
-              "X-RateLimit-Limit": {
-                "description": "The limit of requests for the resource.",
-                "type": "integer"
-              },
-              "X-RateLimit-Remaining": {
-                "description": "The remaining number of requests until the rate limit is reached.",
-                "type": "integer"
-              },
-              "X-RateLimit-Reset": {
-                "description": "The timestamp when the rate limit will be reset formatted as ISO 8601 combined date and time in UTC.",
-                "type": "string"
-              }
-            },
-            "x-ms-error-response": true
-          },
-          "403": {
-            "description": "In case authorized user isn't known or doesn't have the required permissions.",
-            "schema": {
-              "$ref": "#/definitions/ErrorContent"
-            },
-            "headers": {
-              "X-RateLimit-Limit": {
-                "description": "The limit of requests for the resource.",
-                "type": "integer"
-              },
-              "X-RateLimit-Remaining": {
-                "description": "The remaining number of requests until the rate limit is reached.",
-                "type": "integer"
-              },
-              "X-RateLimit-Reset": {
-                "description": "The timestamp when the rate limit will be reset formatted as ISO 8601 combined date and time in UTC.",
-                "type": "string"
-              }
-            },
-            "x-ms-error-response": true
-          },
-          "429": {
-            "description": "In case the rate limit has been exceeded.",
-            "schema": {
-              "$ref": "#/definitions/ErrorContent"
-            },
-            "headers": {
-              "X-RateLimit-Limit": {
-                "description": "The limit of requests for the resource.",
-                "type": "integer"
-              },
-              "X-RateLimit-Remaining": {
-                "description": "The remaining number of requests until the rate limit is reached.",
-                "type": "integer"
-              },
-              "X-RateLimit-Reset": {
-                "description": "The timestamp when the rate limit will be reset formatted as ISO 8601 combined date and time in UTC.",
-                "type": "string"
-              },
-              "Retry-After": {
-                "description": "The minimum number of seconds to wait before not getting this response anymore.",
-                "type": "integer"
-              }
-            },
-            "x-ms-error-response": true
+              "$ref": "#/definitions/Error"
+            }
           }
         },
-        "security": [
-          {
-            "subscription_key": [],
-            "token": []
-          }
-        ],
         "x-ms-examples": {
           "Delete an accuracy test": {
             "$ref": "./examples/delete_accuracy_test.json"
@@ -672,7 +309,7 @@
         "tags": [
           "Custom Speech datasets for model adaptation:"
         ],
-        "summary": "Gets a list of supported locales for data imports.",
+        "summary": "Gets a list of supported locales for datasets.",
         "operationId": "GetSupportedLocalesForDatasets",
         "produces": [
           "application/json"
@@ -698,80 +335,13 @@
               }
             }
           },
-          "401": {
-            "description": "In case the user isn't authorized.",
+          "default": {
+            "description": "An error occurred.",
             "schema": {
-              "$ref": "#/definitions/ErrorContent"
-            },
-            "headers": {
-              "X-RateLimit-Limit": {
-                "description": "The limit of requests for the resource.",
-                "type": "integer"
-              },
-              "X-RateLimit-Remaining": {
-                "description": "The remaining number of requests until the rate limit is reached.",
-                "type": "integer"
-              },
-              "X-RateLimit-Reset": {
-                "description": "The timestamp when the rate limit will be reset formatted as ISO 8601 combined date and time in UTC.",
-                "type": "string"
-              }
-            },
-            "x-ms-error-response": true
-          },
-          "403": {
-            "description": "In case authorized user isn't known or doesn't have the required permissions.",
-            "schema": {
-              "$ref": "#/definitions/ErrorContent"
-            },
-            "headers": {
-              "X-RateLimit-Limit": {
-                "description": "The limit of requests for the resource.",
-                "type": "integer"
-              },
-              "X-RateLimit-Remaining": {
-                "description": "The remaining number of requests until the rate limit is reached.",
-                "type": "integer"
-              },
-              "X-RateLimit-Reset": {
-                "description": "The timestamp when the rate limit will be reset formatted as ISO 8601 combined date and time in UTC.",
-                "type": "string"
-              }
-            },
-            "x-ms-error-response": true
-          },
-          "429": {
-            "description": "In case the rate limit has been exceeded.",
-            "schema": {
-              "$ref": "#/definitions/ErrorContent"
-            },
-            "headers": {
-              "X-RateLimit-Limit": {
-                "description": "The limit of requests for the resource.",
-                "type": "integer"
-              },
-              "X-RateLimit-Remaining": {
-                "description": "The remaining number of requests until the rate limit is reached.",
-                "type": "integer"
-              },
-              "X-RateLimit-Reset": {
-                "description": "The timestamp when the rate limit will be reset formatted as ISO 8601 combined date and time in UTC.",
-                "type": "string"
-              },
-              "Retry-After": {
-                "description": "The minimum number of seconds to wait before not getting this response anymore.",
-                "type": "integer"
-              }
-            },
-            "x-ms-error-response": true
+              "$ref": "#/definitions/Error"
+            }
           }
         },
-        "security": [
-          {
-            "subscription_key": [],
-            "token": []
-          }
-        ],
         "x-ms-examples": {
           "Get the supported locales": {
             "$ref": "./examples/get_supported_dataset_locales.json"
@@ -813,80 +383,13 @@
               }
             }
           },
-          "401": {
-            "description": "In case the user isn't authorized.",
+          "default": {
+            "description": "An error occurred.",
             "schema": {
-              "$ref": "#/definitions/ErrorContent"
-            },
-            "headers": {
-              "X-RateLimit-Limit": {
-                "description": "The limit of requests for the resource.",
-                "type": "integer"
-              },
-              "X-RateLimit-Remaining": {
-                "description": "The remaining number of requests until the rate limit is reached.",
-                "type": "integer"
-              },
-              "X-RateLimit-Reset": {
-                "description": "The timestamp when the rate limit will be reset formatted as ISO 8601 combined date and time in UTC.",
-                "type": "string"
-              }
-            },
-            "x-ms-error-response": true
-          },
-          "403": {
-            "description": "In case authorized user isn't known or doesn't have the required permissions.",
-            "schema": {
-              "$ref": "#/definitions/ErrorContent"
-            },
-            "headers": {
-              "X-RateLimit-Limit": {
-                "description": "The limit of requests for the resource.",
-                "type": "integer"
-              },
-              "X-RateLimit-Remaining": {
-                "description": "The remaining number of requests until the rate limit is reached.",
-                "type": "integer"
-              },
-              "X-RateLimit-Reset": {
-                "description": "The timestamp when the rate limit will be reset formatted as ISO 8601 combined date and time in UTC.",
-                "type": "string"
-              }
-            },
-            "x-ms-error-response": true
-          },
-          "429": {
-            "description": "In case the rate limit has been exceeded.",
-            "schema": {
-              "$ref": "#/definitions/ErrorContent"
-            },
-            "headers": {
-              "X-RateLimit-Limit": {
-                "description": "The limit of requests for the resource.",
-                "type": "integer"
-              },
-              "X-RateLimit-Remaining": {
-                "description": "The remaining number of requests until the rate limit is reached.",
-                "type": "integer"
-              },
-              "X-RateLimit-Reset": {
-                "description": "The timestamp when the rate limit will be reset formatted as ISO 8601 combined date and time in UTC.",
-                "type": "string"
-              },
-              "Retry-After": {
-                "description": "The minimum number of seconds to wait before not getting this response anymore.",
-                "type": "integer"
-              }
-            },
-            "x-ms-error-response": true
+              "$ref": "#/definitions/Error"
+            }
           }
         },
-        "security": [
-          {
-            "subscription_key": [],
-            "token": []
-          }
-        ],
         "x-ms-examples": {
           "Get all datasets": {
             "$ref": "./examples/get_datasets.json"
@@ -939,101 +442,13 @@
               }
             }
           },
-          "401": {
-            "description": "In case the user isn't authorized.",
+          "default": {
+            "description": "An error occurred.",
             "schema": {
-              "$ref": "#/definitions/ErrorContent"
-            },
-            "headers": {
-              "X-RateLimit-Limit": {
-                "description": "The limit of requests for the resource.",
-                "type": "integer"
-              },
-              "X-RateLimit-Remaining": {
-                "description": "The remaining number of requests until the rate limit is reached.",
-                "type": "integer"
-              },
-              "X-RateLimit-Reset": {
-                "description": "The timestamp when the rate limit will be reset formatted as ISO 8601 combined date and time in UTC.",
-                "type": "string"
-              }
-            },
-            "x-ms-error-response": true
-          },
-          "403": {
-            "description": "In case authorized user isn't known or doesn't have the required permissions.",
-            "schema": {
-              "$ref": "#/definitions/ErrorContent"
-            },
-            "headers": {
-              "X-RateLimit-Limit": {
-                "description": "The limit of requests for the resource.",
-                "type": "integer"
-              },
-              "X-RateLimit-Remaining": {
-                "description": "The remaining number of requests until the rate limit is reached.",
-                "type": "integer"
-              },
-              "X-RateLimit-Reset": {
-                "description": "The timestamp when the rate limit will be reset formatted as ISO 8601 combined date and time in UTC.",
-                "type": "string"
-              }
-            },
-            "x-ms-error-response": true
-          },
-          "404": {
-            "description": "In case the specified entity doesn't exist",
-            "schema": {
-              "$ref": "#/definitions/ErrorContent"
-            },
-            "headers": {
-              "X-RateLimit-Limit": {
-                "description": "The limit of requests for the resource.",
-                "type": "integer"
-              },
-              "X-RateLimit-Remaining": {
-                "description": "The remaining number of requests until the rate limit is reached.",
-                "type": "integer"
-              },
-              "X-RateLimit-Reset": {
-                "description": "The timestamp when the rate limit will be reset formatted as ISO 8601 combined date and time in UTC.",
-                "type": "string"
-              }
-            },
-            "x-ms-error-response": true
-          },
-          "429": {
-            "description": "In case the rate limit has been exceeded.",
-            "schema": {
-              "$ref": "#/definitions/ErrorContent"
-            },
-            "headers": {
-              "X-RateLimit-Limit": {
-                "description": "The limit of requests for the resource.",
-                "type": "integer"
-              },
-              "X-RateLimit-Remaining": {
-                "description": "The remaining number of requests until the rate limit is reached.",
-                "type": "integer"
-              },
-              "X-RateLimit-Reset": {
-                "description": "The timestamp when the rate limit will be reset formatted as ISO 8601 combined date and time in UTC.",
-                "type": "string"
-              },
-              "Retry-After": {
-                "description": "The minimum number of seconds to wait before not getting this response anymore.",
-                "type": "integer"
-              }
-            },
-            "x-ms-error-response": true
+              "$ref": "#/definitions/Error"
+            }
           }
         },
-        "security": [
-          {
-            "subscription_key": [],
-            "token": []
-          }
-        ],
         "x-ms-examples": {
           "Get a dataset": {
             "$ref": "./examples/get_dataset.json"
@@ -1092,122 +507,13 @@
               }
             }
           },
-          "400": {
-            "description": "In case the operation cannot be performed successfully with the specified values.",
+          "default": {
+            "description": "An error occurred.",
             "schema": {
-              "$ref": "#/definitions/ErrorContent"
-            },
-            "headers": {
-              "X-RateLimit-Limit": {
-                "description": "The limit of requests for the resource.",
-                "type": "integer"
-              },
-              "X-RateLimit-Remaining": {
-                "description": "The remaining number of requests until the rate limit is reached.",
-                "type": "integer"
-              },
-              "X-RateLimit-Reset": {
-                "description": "The timestamp when the rate limit will be reset formatted as ISO 8601 combined date and time in UTC.",
-                "type": "string"
-              }
-            },
-            "x-ms-error-response": true
-          },
-          "401": {
-            "description": "In case the user isn't authorized.",
-            "schema": {
-              "$ref": "#/definitions/ErrorContent"
-            },
-            "headers": {
-              "X-RateLimit-Limit": {
-                "description": "The limit of requests for the resource.",
-                "type": "integer"
-              },
-              "X-RateLimit-Remaining": {
-                "description": "The remaining number of requests until the rate limit is reached.",
-                "type": "integer"
-              },
-              "X-RateLimit-Reset": {
-                "description": "The timestamp when the rate limit will be reset formatted as ISO 8601 combined date and time in UTC.",
-                "type": "string"
-              }
-            },
-            "x-ms-error-response": true
-          },
-          "403": {
-            "description": "In case authorized user isn't known or doesn't have the required permissions.",
-            "schema": {
-              "$ref": "#/definitions/ErrorContent"
-            },
-            "headers": {
-              "X-RateLimit-Limit": {
-                "description": "The limit of requests for the resource.",
-                "type": "integer"
-              },
-              "X-RateLimit-Remaining": {
-                "description": "The remaining number of requests until the rate limit is reached.",
-                "type": "integer"
-              },
-              "X-RateLimit-Reset": {
-                "description": "The timestamp when the rate limit will be reset formatted as ISO 8601 combined date and time in UTC.",
-                "type": "string"
-              }
-            },
-            "x-ms-error-response": true
-          },
-          "409": {
-            "description": "In case the specified entity doesn't exist",
-            "schema": {
-              "$ref": "#/definitions/ErrorContent"
-            },
-            "headers": {
-              "X-RateLimit-Limit": {
-                "description": "The limit of requests for the resource.",
-                "type": "integer"
-              },
-              "X-RateLimit-Remaining": {
-                "description": "The remaining number of requests until the rate limit is reached.",
-                "type": "integer"
-              },
-              "X-RateLimit-Reset": {
-                "description": "The timestamp when the rate limit will be reset formatted as ISO 8601 combined date and time in UTC.",
-                "type": "string"
-              }
-            },
-            "x-ms-error-response": true
-          },
-          "429": {
-            "description": "In case the rate limit has been exceeded.",
-            "schema": {
-              "$ref": "#/definitions/ErrorContent"
-            },
-            "headers": {
-              "X-RateLimit-Limit": {
-                "description": "The limit of requests for the resource.",
-                "type": "integer"
-              },
-              "X-RateLimit-Remaining": {
-                "description": "The remaining number of requests until the rate limit is reached.",
-                "type": "integer"
-              },
-              "X-RateLimit-Reset": {
-                "description": "The timestamp when the rate limit will be reset formatted as ISO 8601 combined date and time in UTC.",
-                "type": "string"
-              },
-              "Retry-After": {
-                "description": "The minimum number of seconds to wait before not getting this response anymore.",
-                "type": "integer"
-              }
-            },
-            "x-ms-error-response": true
+              "$ref": "#/definitions/Error"
+            }
           }
         },
-        "security": [
-          {
-            "subscription_key": [],
-            "token": []
-          }
-        ],
         "x-ms-examples": {
           "Update a dataset": {
             "$ref": "./examples/update_dataset.json"
@@ -1251,101 +557,13 @@
               }
             }
           },
-          "400": {
-            "description": "In case the operation cannot be performed successfully with the specified values.",
+          "default": {
+            "description": "An error occurred.",
             "schema": {
-              "$ref": "#/definitions/ErrorContent"
-            },
-            "headers": {
-              "X-RateLimit-Limit": {
-                "description": "The limit of requests for the resource.",
-                "type": "integer"
-              },
-              "X-RateLimit-Remaining": {
-                "description": "The remaining number of requests until the rate limit is reached.",
-                "type": "integer"
-              },
-              "X-RateLimit-Reset": {
-                "description": "The timestamp when the rate limit will be reset formatted as ISO 8601 combined date and time in UTC.",
-                "type": "string"
-              }
-            },
-            "x-ms-error-response": true
-          },
-          "401": {
-            "description": "In case the user isn't authorized.",
-            "schema": {
-              "$ref": "#/definitions/ErrorContent"
-            },
-            "headers": {
-              "X-RateLimit-Limit": {
-                "description": "The limit of requests for the resource.",
-                "type": "integer"
-              },
-              "X-RateLimit-Remaining": {
-                "description": "The remaining number of requests until the rate limit is reached.",
-                "type": "integer"
-              },
-              "X-RateLimit-Reset": {
-                "description": "The timestamp when the rate limit will be reset formatted as ISO 8601 combined date and time in UTC.",
-                "type": "string"
-              }
-            },
-            "x-ms-error-response": true
-          },
-          "403": {
-            "description": "In case authorized user isn't known or doesn't have the required permissions.",
-            "schema": {
-              "$ref": "#/definitions/ErrorContent"
-            },
-            "headers": {
-              "X-RateLimit-Limit": {
-                "description": "The limit of requests for the resource.",
-                "type": "integer"
-              },
-              "X-RateLimit-Remaining": {
-                "description": "The remaining number of requests until the rate limit is reached.",
-                "type": "integer"
-              },
-              "X-RateLimit-Reset": {
-                "description": "The timestamp when the rate limit will be reset formatted as ISO 8601 combined date and time in UTC.",
-                "type": "string"
-              }
-            },
-            "x-ms-error-response": true
-          },
-          "429": {
-            "description": "In case the rate limit has been exceeded.",
-            "schema": {
-              "$ref": "#/definitions/ErrorContent"
-            },
-            "headers": {
-              "X-RateLimit-Limit": {
-                "description": "The limit of requests for the resource.",
-                "type": "integer"
-              },
-              "X-RateLimit-Remaining": {
-                "description": "The remaining number of requests until the rate limit is reached.",
-                "type": "integer"
-              },
-              "X-RateLimit-Reset": {
-                "description": "The timestamp when the rate limit will be reset formatted as ISO 8601 combined date and time in UTC.",
-                "type": "string"
-              },
-              "Retry-After": {
-                "description": "The minimum number of seconds to wait before not getting this response anymore.",
-                "type": "integer"
-              }
-            },
-            "x-ms-error-response": true
+              "$ref": "#/definitions/Error"
+            }
           }
         },
-        "security": [
-          {
-            "subscription_key": [],
-            "token": []
-          }
-        ],
         "x-ms-examples": {
           "Delete a dataset": {
             "$ref": "./examples/delete_dataset.json"
@@ -1370,55 +588,55 @@
           {
             "in": "formData",
             "name": "name",
-            "description": "The name of this data import (always add this string for any import).",
+            "description": "The name of this dataset (always add this string for any dataset).",
             "type": "string"
           },
           {
             "in": "formData",
             "name": "description",
-            "description": "Optional description of this data import.",
+            "description": "Optional description of this dataset.",
             "type": "string"
           },
           {
             "in": "formData",
             "name": "locale",
-            "description": "The locale of this data import (always add this string for any import).",
+            "description": "The locale of this dataset (always add this string for any dataset).",
             "type": "string"
           },
           {
             "in": "formData",
             "name": "dataImportKind",
-            "description": "The kind of the data import (always add this string for any import). Possible values are \"Language\", \"Acoustic\", \"Pronunciation\".",
+            "description": "The kind of the dataset (always add this string for any dataset). Possible values are \"Language\", \"Acoustic\", \"Pronunciation\".",
             "type": "string"
           },
           {
             "in": "formData",
             "name": "properties",
-            "description": "Optional properties of this data import (json serialized object with key/values, where all values must be strings)",
+            "description": "Optional properties of this dataset (json serialized object with key/values, where all values must be strings)",
             "type": "string"
           },
           {
             "in": "formData",
             "name": "audiodata",
-            "description": "A zip file containing the audio data (this and the audio archive file for acoustic data imports).",
+            "description": "A zip file containing the audio data (this and the audio archive file for acoustic datasets).",
             "type": "file"
           },
           {
             "in": "formData",
             "name": "transcriptions",
-            "description": "A text file containing the transcriptions for the audio data (this and the transcriptions file for acoustic data imports).",
+            "description": "A text file containing the transcriptions for the audio data (this and the transcriptions file for acoustic datasets).",
             "type": "file"
           },
           {
             "in": "formData",
             "name": "languagedata",
-            "description": "A text file containing the language or pronunciation data (only this file for language data imports).",
+            "description": "A text file containing the language or pronunciation data (only this file for language datasets).",
             "type": "file"
           }
         ],
         "responses": {
           "202": {
-            "description": "The response contains the location of the entity as header.",
+            "description": "The request was accepted and the response contains the location of the entity.",
             "headers": {
               "Retry-After": {
                 "description": "The minimum number of seconds to wait before accessing the resource created in this operation.",
@@ -1448,122 +666,13 @@
               }
             }
           },
-          "400": {
-            "description": "In case the operation cannot be performed successfully with the specified values.",
+          "default": {
+            "description": "An error occurred.",
             "schema": {
-              "$ref": "#/definitions/ErrorContent"
-            },
-            "headers": {
-              "X-RateLimit-Limit": {
-                "description": "The limit of requests for the resource.",
-                "type": "integer"
-              },
-              "X-RateLimit-Remaining": {
-                "description": "The remaining number of requests until the rate limit is reached.",
-                "type": "integer"
-              },
-              "X-RateLimit-Reset": {
-                "description": "The timestamp when the rate limit will be reset formatted as ISO 8601 combined date and time in UTC.",
-                "type": "string"
-              }
-            },
-            "x-ms-error-response": true
-          },
-          "401": {
-            "description": "In case the user isn't authorized.",
-            "schema": {
-              "$ref": "#/definitions/ErrorContent"
-            },
-            "headers": {
-              "X-RateLimit-Limit": {
-                "description": "The limit of requests for the resource.",
-                "type": "integer"
-              },
-              "X-RateLimit-Remaining": {
-                "description": "The remaining number of requests until the rate limit is reached.",
-                "type": "integer"
-              },
-              "X-RateLimit-Reset": {
-                "description": "The timestamp when the rate limit will be reset formatted as ISO 8601 combined date and time in UTC.",
-                "type": "string"
-              }
-            },
-            "x-ms-error-response": true
-          },
-          "403": {
-            "description": "In case authorized user isn't known or doesn't have the required permissions.",
-            "schema": {
-              "$ref": "#/definitions/ErrorContent"
-            },
-            "headers": {
-              "X-RateLimit-Limit": {
-                "description": "The limit of requests for the resource.",
-                "type": "integer"
-              },
-              "X-RateLimit-Remaining": {
-                "description": "The remaining number of requests until the rate limit is reached.",
-                "type": "integer"
-              },
-              "X-RateLimit-Reset": {
-                "description": "The timestamp when the rate limit will be reset formatted as ISO 8601 combined date and time in UTC.",
-                "type": "string"
-              }
-            },
-            "x-ms-error-response": true
-          },
-          "415": {
-            "description": "In case the media type of a file part is not supported.",
-            "schema": {
-              "$ref": "#/definitions/ErrorContent"
-            },
-            "headers": {
-              "X-RateLimit-Limit": {
-                "description": "The limit of requests for the resource.",
-                "type": "integer"
-              },
-              "X-RateLimit-Remaining": {
-                "description": "The remaining number of requests until the rate limit is reached.",
-                "type": "integer"
-              },
-              "X-RateLimit-Reset": {
-                "description": "The timestamp when the rate limit will be reset formatted as ISO 8601 combined date and time in UTC.",
-                "type": "string"
-              }
-            },
-            "x-ms-error-response": true
-          },
-          "429": {
-            "description": "In case the rate limit has been exceeded.",
-            "schema": {
-              "$ref": "#/definitions/ErrorContent"
-            },
-            "headers": {
-              "X-RateLimit-Limit": {
-                "description": "The limit of requests for the resource.",
-                "type": "integer"
-              },
-              "X-RateLimit-Remaining": {
-                "description": "The remaining number of requests until the rate limit is reached.",
-                "type": "integer"
-              },
-              "X-RateLimit-Reset": {
-                "description": "The timestamp when the rate limit will be reset formatted as ISO 8601 combined date and time in UTC.",
-                "type": "string"
-              },
-              "Retry-After": {
-                "description": "The minimum number of seconds to wait before not getting this response anymore.",
-                "type": "integer"
-              }
-            },
-            "x-ms-error-response": true
+              "$ref": "#/definitions/Error"
+            }
           }
         },
-        "security": [
-          {
-            "subscription_key": [],
-            "token": []
-          }
-        ],
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
@@ -1609,80 +718,13 @@
               }
             }
           },
-          "401": {
-            "description": "In case the user isn't authorized.",
+          "default": {
+            "description": "An error occurred.",
             "schema": {
-              "$ref": "#/definitions/ErrorContent"
-            },
-            "headers": {
-              "X-RateLimit-Limit": {
-                "description": "The limit of requests for the resource.",
-                "type": "integer"
-              },
-              "X-RateLimit-Remaining": {
-                "description": "The remaining number of requests until the rate limit is reached.",
-                "type": "integer"
-              },
-              "X-RateLimit-Reset": {
-                "description": "The timestamp when the rate limit will be reset formatted as ISO 8601 combined date and time in UTC.",
-                "type": "string"
-              }
-            },
-            "x-ms-error-response": true
-          },
-          "403": {
-            "description": "In case authorized user isn't known or doesn't have the required permissions.",
-            "schema": {
-              "$ref": "#/definitions/ErrorContent"
-            },
-            "headers": {
-              "X-RateLimit-Limit": {
-                "description": "The limit of requests for the resource.",
-                "type": "integer"
-              },
-              "X-RateLimit-Remaining": {
-                "description": "The remaining number of requests until the rate limit is reached.",
-                "type": "integer"
-              },
-              "X-RateLimit-Reset": {
-                "description": "The timestamp when the rate limit will be reset formatted as ISO 8601 combined date and time in UTC.",
-                "type": "string"
-              }
-            },
-            "x-ms-error-response": true
-          },
-          "429": {
-            "description": "In case the rate limit has been exceeded.",
-            "schema": {
-              "$ref": "#/definitions/ErrorContent"
-            },
-            "headers": {
-              "X-RateLimit-Limit": {
-                "description": "The limit of requests for the resource.",
-                "type": "integer"
-              },
-              "X-RateLimit-Remaining": {
-                "description": "The remaining number of requests until the rate limit is reached.",
-                "type": "integer"
-              },
-              "X-RateLimit-Reset": {
-                "description": "The timestamp when the rate limit will be reset formatted as ISO 8601 combined date and time in UTC.",
-                "type": "string"
-              },
-              "Retry-After": {
-                "description": "The minimum number of seconds to wait before not getting this response anymore.",
-                "type": "integer"
-              }
-            },
-            "x-ms-error-response": true
+              "$ref": "#/definitions/Error"
+            }
           }
         },
-        "security": [
-          {
-            "subscription_key": [],
-            "token": []
-          }
-        ],
         "x-ms-examples": {
           "Get the supported locales": {
             "$ref": "./examples/get_supported_endpoint_locales.json"
@@ -1724,80 +766,13 @@
               }
             }
           },
-          "401": {
-            "description": "In case the user isn't authorized.",
+          "default": {
+            "description": "An error occurred.",
             "schema": {
-              "$ref": "#/definitions/ErrorContent"
-            },
-            "headers": {
-              "X-RateLimit-Limit": {
-                "description": "The limit of requests for the resource.",
-                "type": "integer"
-              },
-              "X-RateLimit-Remaining": {
-                "description": "The remaining number of requests until the rate limit is reached.",
-                "type": "integer"
-              },
-              "X-RateLimit-Reset": {
-                "description": "The timestamp when the rate limit will be reset formatted as ISO 8601 combined date and time in UTC.",
-                "type": "string"
-              }
-            },
-            "x-ms-error-response": true
-          },
-          "403": {
-            "description": "In case authorized user isn't known or doesn't have the required permissions.",
-            "schema": {
-              "$ref": "#/definitions/ErrorContent"
-            },
-            "headers": {
-              "X-RateLimit-Limit": {
-                "description": "The limit of requests for the resource.",
-                "type": "integer"
-              },
-              "X-RateLimit-Remaining": {
-                "description": "The remaining number of requests until the rate limit is reached.",
-                "type": "integer"
-              },
-              "X-RateLimit-Reset": {
-                "description": "The timestamp when the rate limit will be reset formatted as ISO 8601 combined date and time in UTC.",
-                "type": "string"
-              }
-            },
-            "x-ms-error-response": true
-          },
-          "429": {
-            "description": "In case the rate limit has been exceeded.",
-            "schema": {
-              "$ref": "#/definitions/ErrorContent"
-            },
-            "headers": {
-              "X-RateLimit-Limit": {
-                "description": "The limit of requests for the resource.",
-                "type": "integer"
-              },
-              "X-RateLimit-Remaining": {
-                "description": "The remaining number of requests until the rate limit is reached.",
-                "type": "integer"
-              },
-              "X-RateLimit-Reset": {
-                "description": "The timestamp when the rate limit will be reset formatted as ISO 8601 combined date and time in UTC.",
-                "type": "string"
-              },
-              "Retry-After": {
-                "description": "The minimum number of seconds to wait before not getting this response anymore.",
-                "type": "integer"
-              }
-            },
-            "x-ms-error-response": true
+              "$ref": "#/definitions/Error"
+            }
           }
         },
-        "security": [
-          {
-            "subscription_key": [],
-            "token": []
-          }
-        ],
         "x-ms-examples": {
           "Get all endpoints": {
             "$ref": "./examples/get_endpoints.json"
@@ -1829,7 +804,7 @@
         ],
         "responses": {
           "202": {
-            "description": "The response contains the location of the entity as header.",
+            "description": "The request was accepted and the response contains the location of the entity.",
             "headers": {
               "Retry-After": {
                 "description": "The minimum number of seconds to wait before accessing the resource created in this operation.",
@@ -1859,101 +834,13 @@
               }
             }
           },
-          "400": {
-            "description": "In case the operation cannot be performed successfully with the specified values.",
+          "default": {
+            "description": "An error occurred.",
             "schema": {
-              "$ref": "#/definitions/ErrorContent"
-            },
-            "headers": {
-              "X-RateLimit-Limit": {
-                "description": "The limit of requests for the resource.",
-                "type": "integer"
-              },
-              "X-RateLimit-Remaining": {
-                "description": "The remaining number of requests until the rate limit is reached.",
-                "type": "integer"
-              },
-              "X-RateLimit-Reset": {
-                "description": "The timestamp when the rate limit will be reset formatted as ISO 8601 combined date and time in UTC.",
-                "type": "string"
-              }
-            },
-            "x-ms-error-response": true
-          },
-          "401": {
-            "description": "In case the user isn't authorized.",
-            "schema": {
-              "$ref": "#/definitions/ErrorContent"
-            },
-            "headers": {
-              "X-RateLimit-Limit": {
-                "description": "The limit of requests for the resource.",
-                "type": "integer"
-              },
-              "X-RateLimit-Remaining": {
-                "description": "The remaining number of requests until the rate limit is reached.",
-                "type": "integer"
-              },
-              "X-RateLimit-Reset": {
-                "description": "The timestamp when the rate limit will be reset formatted as ISO 8601 combined date and time in UTC.",
-                "type": "string"
-              }
-            },
-            "x-ms-error-response": true
-          },
-          "403": {
-            "description": "In case authorized user isn't known or doesn't have the required permissions.",
-            "schema": {
-              "$ref": "#/definitions/ErrorContent"
-            },
-            "headers": {
-              "X-RateLimit-Limit": {
-                "description": "The limit of requests for the resource.",
-                "type": "integer"
-              },
-              "X-RateLimit-Remaining": {
-                "description": "The remaining number of requests until the rate limit is reached.",
-                "type": "integer"
-              },
-              "X-RateLimit-Reset": {
-                "description": "The timestamp when the rate limit will be reset formatted as ISO 8601 combined date and time in UTC.",
-                "type": "string"
-              }
-            },
-            "x-ms-error-response": true
-          },
-          "429": {
-            "description": "In case the rate limit has been exceeded.",
-            "schema": {
-              "$ref": "#/definitions/ErrorContent"
-            },
-            "headers": {
-              "X-RateLimit-Limit": {
-                "description": "The limit of requests for the resource.",
-                "type": "integer"
-              },
-              "X-RateLimit-Remaining": {
-                "description": "The remaining number of requests until the rate limit is reached.",
-                "type": "integer"
-              },
-              "X-RateLimit-Reset": {
-                "description": "The timestamp when the rate limit will be reset formatted as ISO 8601 combined date and time in UTC.",
-                "type": "string"
-              },
-              "Retry-After": {
-                "description": "The minimum number of seconds to wait before not getting this response anymore.",
-                "type": "integer"
-              }
-            },
-            "x-ms-error-response": true
+              "$ref": "#/definitions/Error"
+            }
           }
         },
-        "security": [
-          {
-            "subscription_key": [],
-            "token": []
-          }
-        ],
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
@@ -2010,101 +897,13 @@
               }
             }
           },
-          "401": {
-            "description": "In case the user isn't authorized.",
+          "default": {
+            "description": "An error occurred.",
             "schema": {
-              "$ref": "#/definitions/ErrorContent"
-            },
-            "headers": {
-              "X-RateLimit-Limit": {
-                "description": "The limit of requests for the resource.",
-                "type": "integer"
-              },
-              "X-RateLimit-Remaining": {
-                "description": "The remaining number of requests until the rate limit is reached.",
-                "type": "integer"
-              },
-              "X-RateLimit-Reset": {
-                "description": "The timestamp when the rate limit will be reset formatted as ISO 8601 combined date and time in UTC.",
-                "type": "string"
-              }
-            },
-            "x-ms-error-response": true
-          },
-          "403": {
-            "description": "In case authorized user isn't known or doesn't have the required permissions.",
-            "schema": {
-              "$ref": "#/definitions/ErrorContent"
-            },
-            "headers": {
-              "X-RateLimit-Limit": {
-                "description": "The limit of requests for the resource.",
-                "type": "integer"
-              },
-              "X-RateLimit-Remaining": {
-                "description": "The remaining number of requests until the rate limit is reached.",
-                "type": "integer"
-              },
-              "X-RateLimit-Reset": {
-                "description": "The timestamp when the rate limit will be reset formatted as ISO 8601 combined date and time in UTC.",
-                "type": "string"
-              }
-            },
-            "x-ms-error-response": true
-          },
-          "404": {
-            "description": "In case the specified entity doesn't exist",
-            "schema": {
-              "$ref": "#/definitions/ErrorContent"
-            },
-            "headers": {
-              "X-RateLimit-Limit": {
-                "description": "The limit of requests for the resource.",
-                "type": "integer"
-              },
-              "X-RateLimit-Remaining": {
-                "description": "The remaining number of requests until the rate limit is reached.",
-                "type": "integer"
-              },
-              "X-RateLimit-Reset": {
-                "description": "The timestamp when the rate limit will be reset formatted as ISO 8601 combined date and time in UTC.",
-                "type": "string"
-              }
-            },
-            "x-ms-error-response": true
-          },
-          "429": {
-            "description": "In case the rate limit has been exceeded.",
-            "schema": {
-              "$ref": "#/definitions/ErrorContent"
-            },
-            "headers": {
-              "X-RateLimit-Limit": {
-                "description": "The limit of requests for the resource.",
-                "type": "integer"
-              },
-              "X-RateLimit-Remaining": {
-                "description": "The remaining number of requests until the rate limit is reached.",
-                "type": "integer"
-              },
-              "X-RateLimit-Reset": {
-                "description": "The timestamp when the rate limit will be reset formatted as ISO 8601 combined date and time in UTC.",
-                "type": "string"
-              },
-              "Retry-After": {
-                "description": "The minimum number of seconds to wait before not getting this response anymore.",
-                "type": "integer"
-              }
-            },
-            "x-ms-error-response": true
+              "$ref": "#/definitions/Error"
+            }
           }
         },
-        "security": [
-          {
-            "subscription_key": [],
-            "token": []
-          }
-        ],
         "x-ms-examples": {
           "Get an endpoint": {
             "$ref": "./examples/get_endpoint.json"
@@ -2148,80 +947,13 @@
               }
             }
           },
-          "401": {
-            "description": "In case the user isn't authorized.",
+          "default": {
+            "description": "An error occurred.",
             "schema": {
-              "$ref": "#/definitions/ErrorContent"
-            },
-            "headers": {
-              "X-RateLimit-Limit": {
-                "description": "The limit of requests for the resource.",
-                "type": "integer"
-              },
-              "X-RateLimit-Remaining": {
-                "description": "The remaining number of requests until the rate limit is reached.",
-                "type": "integer"
-              },
-              "X-RateLimit-Reset": {
-                "description": "The timestamp when the rate limit will be reset formatted as ISO 8601 combined date and time in UTC.",
-                "type": "string"
-              }
-            },
-            "x-ms-error-response": true
-          },
-          "403": {
-            "description": "In case authorized user isn't known or doesn't have the required permissions.",
-            "schema": {
-              "$ref": "#/definitions/ErrorContent"
-            },
-            "headers": {
-              "X-RateLimit-Limit": {
-                "description": "The limit of requests for the resource.",
-                "type": "integer"
-              },
-              "X-RateLimit-Remaining": {
-                "description": "The remaining number of requests until the rate limit is reached.",
-                "type": "integer"
-              },
-              "X-RateLimit-Reset": {
-                "description": "The timestamp when the rate limit will be reset formatted as ISO 8601 combined date and time in UTC.",
-                "type": "string"
-              }
-            },
-            "x-ms-error-response": true
-          },
-          "429": {
-            "description": "In case the rate limit has been exceeded.",
-            "schema": {
-              "$ref": "#/definitions/ErrorContent"
-            },
-            "headers": {
-              "X-RateLimit-Limit": {
-                "description": "The limit of requests for the resource.",
-                "type": "integer"
-              },
-              "X-RateLimit-Remaining": {
-                "description": "The remaining number of requests until the rate limit is reached.",
-                "type": "integer"
-              },
-              "X-RateLimit-Reset": {
-                "description": "The timestamp when the rate limit will be reset formatted as ISO 8601 combined date and time in UTC.",
-                "type": "string"
-              },
-              "Retry-After": {
-                "description": "The minimum number of seconds to wait before not getting this response anymore.",
-                "type": "integer"
-              }
-            },
-            "x-ms-error-response": true
+              "$ref": "#/definitions/Error"
+            }
           }
         },
-        "security": [
-          {
-            "subscription_key": [],
-            "token": []
-          }
-        ],
         "x-ms-examples": {
           "Delete an endpoint": {
             "$ref": "./examples/delete_endpoint.json"
@@ -2280,122 +1012,13 @@
               }
             }
           },
-          "400": {
-            "description": "In case the operation cannot be performed successfully with the specified values.",
+          "default": {
+            "description": "An error occurred.",
             "schema": {
-              "$ref": "#/definitions/ErrorContent"
-            },
-            "headers": {
-              "X-RateLimit-Limit": {
-                "description": "The limit of requests for the resource.",
-                "type": "integer"
-              },
-              "X-RateLimit-Remaining": {
-                "description": "The remaining number of requests until the rate limit is reached.",
-                "type": "integer"
-              },
-              "X-RateLimit-Reset": {
-                "description": "The timestamp when the rate limit will be reset formatted as ISO 8601 combined date and time in UTC.",
-                "type": "string"
-              }
-            },
-            "x-ms-error-response": true
-          },
-          "401": {
-            "description": "In case the user isn't authorized.",
-            "schema": {
-              "$ref": "#/definitions/ErrorContent"
-            },
-            "headers": {
-              "X-RateLimit-Limit": {
-                "description": "The limit of requests for the resource.",
-                "type": "integer"
-              },
-              "X-RateLimit-Remaining": {
-                "description": "The remaining number of requests until the rate limit is reached.",
-                "type": "integer"
-              },
-              "X-RateLimit-Reset": {
-                "description": "The timestamp when the rate limit will be reset formatted as ISO 8601 combined date and time in UTC.",
-                "type": "string"
-              }
-            },
-            "x-ms-error-response": true
-          },
-          "403": {
-            "description": "In case authorized user isn't known or doesn't have the required permissions.",
-            "schema": {
-              "$ref": "#/definitions/ErrorContent"
-            },
-            "headers": {
-              "X-RateLimit-Limit": {
-                "description": "The limit of requests for the resource.",
-                "type": "integer"
-              },
-              "X-RateLimit-Remaining": {
-                "description": "The remaining number of requests until the rate limit is reached.",
-                "type": "integer"
-              },
-              "X-RateLimit-Reset": {
-                "description": "The timestamp when the rate limit will be reset formatted as ISO 8601 combined date and time in UTC.",
-                "type": "string"
-              }
-            },
-            "x-ms-error-response": true
-          },
-          "409": {
-            "description": "In case the specified entity doesn't exist",
-            "schema": {
-              "$ref": "#/definitions/ErrorContent"
-            },
-            "headers": {
-              "X-RateLimit-Limit": {
-                "description": "The limit of requests for the resource.",
-                "type": "integer"
-              },
-              "X-RateLimit-Remaining": {
-                "description": "The remaining number of requests until the rate limit is reached.",
-                "type": "integer"
-              },
-              "X-RateLimit-Reset": {
-                "description": "The timestamp when the rate limit will be reset formatted as ISO 8601 combined date and time in UTC.",
-                "type": "string"
-              }
-            },
-            "x-ms-error-response": true
-          },
-          "429": {
-            "description": "In case the rate limit has been exceeded.",
-            "schema": {
-              "$ref": "#/definitions/ErrorContent"
-            },
-            "headers": {
-              "X-RateLimit-Limit": {
-                "description": "The limit of requests for the resource.",
-                "type": "integer"
-              },
-              "X-RateLimit-Remaining": {
-                "description": "The remaining number of requests until the rate limit is reached.",
-                "type": "integer"
-              },
-              "X-RateLimit-Reset": {
-                "description": "The timestamp when the rate limit will be reset formatted as ISO 8601 combined date and time in UTC.",
-                "type": "string"
-              },
-              "Retry-After": {
-                "description": "The minimum number of seconds to wait before not getting this response anymore.",
-                "type": "integer"
-              }
-            },
-            "x-ms-error-response": true
+              "$ref": "#/definitions/Error"
+            }
           }
         },
-        "security": [
-          {
-            "subscription_key": [],
-            "token": []
-          }
-        ],
         "x-ms-examples": {
           "Update an endpoint": {
             "$ref": "./examples/update_endpoint.json"
@@ -2442,80 +1065,13 @@
               }
             }
           },
-          "401": {
-            "description": "In case the user isn't authorized.",
+          "default": {
+            "description": "An error occurred.",
             "schema": {
-              "$ref": "#/definitions/ErrorContent"
-            },
-            "headers": {
-              "X-RateLimit-Limit": {
-                "description": "The limit of requests for the resource.",
-                "type": "integer"
-              },
-              "X-RateLimit-Remaining": {
-                "description": "The remaining number of requests until the rate limit is reached.",
-                "type": "integer"
-              },
-              "X-RateLimit-Reset": {
-                "description": "The timestamp when the rate limit will be reset formatted as ISO 8601 combined date and time in UTC.",
-                "type": "string"
-              }
-            },
-            "x-ms-error-response": true
-          },
-          "403": {
-            "description": "In case authorized user isn't known or doesn't have the required permissions.",
-            "schema": {
-              "$ref": "#/definitions/ErrorContent"
-            },
-            "headers": {
-              "X-RateLimit-Limit": {
-                "description": "The limit of requests for the resource.",
-                "type": "integer"
-              },
-              "X-RateLimit-Remaining": {
-                "description": "The remaining number of requests until the rate limit is reached.",
-                "type": "integer"
-              },
-              "X-RateLimit-Reset": {
-                "description": "The timestamp when the rate limit will be reset formatted as ISO 8601 combined date and time in UTC.",
-                "type": "string"
-              }
-            },
-            "x-ms-error-response": true
-          },
-          "429": {
-            "description": "In case the rate limit has been exceeded.",
-            "schema": {
-              "$ref": "#/definitions/ErrorContent"
-            },
-            "headers": {
-              "X-RateLimit-Limit": {
-                "description": "The limit of requests for the resource.",
-                "type": "integer"
-              },
-              "X-RateLimit-Remaining": {
-                "description": "The remaining number of requests until the rate limit is reached.",
-                "type": "integer"
-              },
-              "X-RateLimit-Reset": {
-                "description": "The timestamp when the rate limit will be reset formatted as ISO 8601 combined date and time in UTC.",
-                "type": "string"
-              },
-              "Retry-After": {
-                "description": "The minimum number of seconds to wait before not getting this response anymore.",
-                "type": "integer"
-              }
-            },
-            "x-ms-error-response": true
+              "$ref": "#/definitions/Error"
+            }
           }
         },
-        "security": [
-          {
-            "subscription_key": [],
-            "token": []
-          }
-        ],
         "x-ms-examples": {
           "Delete the data for an endpoint": {
             "$ref": "./examples/delete_endpoint_data.json"
@@ -2565,101 +1121,13 @@
               }
             }
           },
-          "401": {
-            "description": "In case the user isn't authorized.",
+          "default": {
+            "description": "An error occurred.",
             "schema": {
-              "$ref": "#/definitions/ErrorContent"
-            },
-            "headers": {
-              "X-RateLimit-Limit": {
-                "description": "The limit of requests for the resource.",
-                "type": "integer"
-              },
-              "X-RateLimit-Remaining": {
-                "description": "The remaining number of requests until the rate limit is reached.",
-                "type": "integer"
-              },
-              "X-RateLimit-Reset": {
-                "description": "The timestamp when the rate limit will be reset formatted as ISO 8601 combined date and time in UTC.",
-                "type": "string"
-              }
-            },
-            "x-ms-error-response": true
-          },
-          "403": {
-            "description": "In case authorized user isn't known or doesn't have the required permissions.",
-            "schema": {
-              "$ref": "#/definitions/ErrorContent"
-            },
-            "headers": {
-              "X-RateLimit-Limit": {
-                "description": "The limit of requests for the resource.",
-                "type": "integer"
-              },
-              "X-RateLimit-Remaining": {
-                "description": "The remaining number of requests until the rate limit is reached.",
-                "type": "integer"
-              },
-              "X-RateLimit-Reset": {
-                "description": "The timestamp when the rate limit will be reset formatted as ISO 8601 combined date and time in UTC.",
-                "type": "string"
-              }
-            },
-            "x-ms-error-response": true
-          },
-          "404": {
-            "description": "In case the specified entity doesn't exist",
-            "schema": {
-              "$ref": "#/definitions/ErrorContent"
-            },
-            "headers": {
-              "X-RateLimit-Limit": {
-                "description": "The limit of requests for the resource.",
-                "type": "integer"
-              },
-              "X-RateLimit-Remaining": {
-                "description": "The remaining number of requests until the rate limit is reached.",
-                "type": "integer"
-              },
-              "X-RateLimit-Reset": {
-                "description": "The timestamp when the rate limit will be reset formatted as ISO 8601 combined date and time in UTC.",
-                "type": "string"
-              }
-            },
-            "x-ms-error-response": true
-          },
-          "429": {
-            "description": "In case the rate limit has been exceeded.",
-            "schema": {
-              "$ref": "#/definitions/ErrorContent"
-            },
-            "headers": {
-              "X-RateLimit-Limit": {
-                "description": "The limit of requests for the resource.",
-                "type": "integer"
-              },
-              "X-RateLimit-Remaining": {
-                "description": "The remaining number of requests until the rate limit is reached.",
-                "type": "integer"
-              },
-              "X-RateLimit-Reset": {
-                "description": "The timestamp when the rate limit will be reset formatted as ISO 8601 combined date and time in UTC.",
-                "type": "string"
-              },
-              "Retry-After": {
-                "description": "The minimum number of seconds to wait before not getting this response anymore.",
-                "type": "integer"
-              }
-            },
-            "x-ms-error-response": true
+              "$ref": "#/definitions/Error"
+            }
           }
         },
-        "security": [
-          {
-            "subscription_key": [],
-            "token": []
-          }
-        ],
         "x-ms-examples": {
           "Get all endpoint data exports": {
             "$ref": "./examples/get_endpoint_data_exports.json"
@@ -2729,122 +1197,13 @@
               }
             }
           },
-          "400": {
-            "description": "In case the operation cannot be performed successfully with the specified values.",
+          "default": {
+            "description": "An error occurred.",
             "schema": {
-              "$ref": "#/definitions/ErrorContent"
-            },
-            "headers": {
-              "X-RateLimit-Limit": {
-                "description": "The limit of requests for the resource.",
-                "type": "integer"
-              },
-              "X-RateLimit-Remaining": {
-                "description": "The remaining number of requests until the rate limit is reached.",
-                "type": "integer"
-              },
-              "X-RateLimit-Reset": {
-                "description": "The timestamp when the rate limit will be reset formatted as ISO 8601 combined date and time in UTC.",
-                "type": "string"
-              }
-            },
-            "x-ms-error-response": true
-          },
-          "401": {
-            "description": "In case the user isn't authorized.",
-            "schema": {
-              "$ref": "#/definitions/ErrorContent"
-            },
-            "headers": {
-              "X-RateLimit-Limit": {
-                "description": "The limit of requests for the resource.",
-                "type": "integer"
-              },
-              "X-RateLimit-Remaining": {
-                "description": "The remaining number of requests until the rate limit is reached.",
-                "type": "integer"
-              },
-              "X-RateLimit-Reset": {
-                "description": "The timestamp when the rate limit will be reset formatted as ISO 8601 combined date and time in UTC.",
-                "type": "string"
-              }
-            },
-            "x-ms-error-response": true
-          },
-          "403": {
-            "description": "In case authorized user isn't known or doesn't have the required permissions.",
-            "schema": {
-              "$ref": "#/definitions/ErrorContent"
-            },
-            "headers": {
-              "X-RateLimit-Limit": {
-                "description": "The limit of requests for the resource.",
-                "type": "integer"
-              },
-              "X-RateLimit-Remaining": {
-                "description": "The remaining number of requests until the rate limit is reached.",
-                "type": "integer"
-              },
-              "X-RateLimit-Reset": {
-                "description": "The timestamp when the rate limit will be reset formatted as ISO 8601 combined date and time in UTC.",
-                "type": "string"
-              }
-            },
-            "x-ms-error-response": true
-          },
-          "404": {
-            "description": "In case the specified entity doesn't exist",
-            "schema": {
-              "$ref": "#/definitions/ErrorContent"
-            },
-            "headers": {
-              "X-RateLimit-Limit": {
-                "description": "The limit of requests for the resource.",
-                "type": "integer"
-              },
-              "X-RateLimit-Remaining": {
-                "description": "The remaining number of requests until the rate limit is reached.",
-                "type": "integer"
-              },
-              "X-RateLimit-Reset": {
-                "description": "The timestamp when the rate limit will be reset formatted as ISO 8601 combined date and time in UTC.",
-                "type": "string"
-              }
-            },
-            "x-ms-error-response": true
-          },
-          "429": {
-            "description": "In case the rate limit has been exceeded.",
-            "schema": {
-              "$ref": "#/definitions/ErrorContent"
-            },
-            "headers": {
-              "X-RateLimit-Limit": {
-                "description": "The limit of requests for the resource.",
-                "type": "integer"
-              },
-              "X-RateLimit-Remaining": {
-                "description": "The remaining number of requests until the rate limit is reached.",
-                "type": "integer"
-              },
-              "X-RateLimit-Reset": {
-                "description": "The timestamp when the rate limit will be reset formatted as ISO 8601 combined date and time in UTC.",
-                "type": "string"
-              },
-              "Retry-After": {
-                "description": "The minimum number of seconds to wait before not getting this response anymore.",
-                "type": "integer"
-              }
-            },
-            "x-ms-error-response": true
+              "$ref": "#/definitions/Error"
+            }
           }
         },
-        "security": [
-          {
-            "subscription_key": [],
-            "token": []
-          }
-        ],
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
@@ -2902,101 +1261,13 @@
               }
             }
           },
-          "400": {
-            "description": "In case the operation cannot be performed successfully with the specified values.",
+          "default": {
+            "description": "An error occurred.",
             "schema": {
-              "$ref": "#/definitions/ErrorContent"
-            },
-            "headers": {
-              "X-RateLimit-Limit": {
-                "description": "The limit of requests for the resource.",
-                "type": "integer"
-              },
-              "X-RateLimit-Remaining": {
-                "description": "The remaining number of requests until the rate limit is reached.",
-                "type": "integer"
-              },
-              "X-RateLimit-Reset": {
-                "description": "The timestamp when the rate limit will be reset formatted as ISO 8601 combined date and time in UTC.",
-                "type": "string"
-              }
-            },
-            "x-ms-error-response": true
-          },
-          "401": {
-            "description": "In case the user isn't authorized.",
-            "schema": {
-              "$ref": "#/definitions/ErrorContent"
-            },
-            "headers": {
-              "X-RateLimit-Limit": {
-                "description": "The limit of requests for the resource.",
-                "type": "integer"
-              },
-              "X-RateLimit-Remaining": {
-                "description": "The remaining number of requests until the rate limit is reached.",
-                "type": "integer"
-              },
-              "X-RateLimit-Reset": {
-                "description": "The timestamp when the rate limit will be reset formatted as ISO 8601 combined date and time in UTC.",
-                "type": "string"
-              }
-            },
-            "x-ms-error-response": true
-          },
-          "403": {
-            "description": "In case authorized user isn't known or doesn't have the required permissions.",
-            "schema": {
-              "$ref": "#/definitions/ErrorContent"
-            },
-            "headers": {
-              "X-RateLimit-Limit": {
-                "description": "The limit of requests for the resource.",
-                "type": "integer"
-              },
-              "X-RateLimit-Remaining": {
-                "description": "The remaining number of requests until the rate limit is reached.",
-                "type": "integer"
-              },
-              "X-RateLimit-Reset": {
-                "description": "The timestamp when the rate limit will be reset formatted as ISO 8601 combined date and time in UTC.",
-                "type": "string"
-              }
-            },
-            "x-ms-error-response": true
-          },
-          "429": {
-            "description": "In case the rate limit has been exceeded.",
-            "schema": {
-              "$ref": "#/definitions/ErrorContent"
-            },
-            "headers": {
-              "X-RateLimit-Limit": {
-                "description": "The limit of requests for the resource.",
-                "type": "integer"
-              },
-              "X-RateLimit-Remaining": {
-                "description": "The remaining number of requests until the rate limit is reached.",
-                "type": "integer"
-              },
-              "X-RateLimit-Reset": {
-                "description": "The timestamp when the rate limit will be reset formatted as ISO 8601 combined date and time in UTC.",
-                "type": "string"
-              },
-              "Retry-After": {
-                "description": "The minimum number of seconds to wait before not getting this response anymore.",
-                "type": "integer"
-              }
-            },
-            "x-ms-error-response": true
+              "$ref": "#/definitions/Error"
+            }
           }
         },
-        "security": [
-          {
-            "subscription_key": [],
-            "token": []
-          }
-        ],
         "x-ms-examples": {
           "Delete a data export for an endpoint": {
             "$ref": "./examples/delete_endpoint_data_export.json"
@@ -3051,101 +1322,13 @@
               }
             }
           },
-          "401": {
-            "description": "In case the user isn't authorized.",
+          "default": {
+            "description": "An error occurred.",
             "schema": {
-              "$ref": "#/definitions/ErrorContent"
-            },
-            "headers": {
-              "X-RateLimit-Limit": {
-                "description": "The limit of requests for the resource.",
-                "type": "integer"
-              },
-              "X-RateLimit-Remaining": {
-                "description": "The remaining number of requests until the rate limit is reached.",
-                "type": "integer"
-              },
-              "X-RateLimit-Reset": {
-                "description": "The timestamp when the rate limit will be reset formatted as ISO 8601 combined date and time in UTC.",
-                "type": "string"
-              }
-            },
-            "x-ms-error-response": true
-          },
-          "403": {
-            "description": "In case authorized user isn't known or doesn't have the required permissions.",
-            "schema": {
-              "$ref": "#/definitions/ErrorContent"
-            },
-            "headers": {
-              "X-RateLimit-Limit": {
-                "description": "The limit of requests for the resource.",
-                "type": "integer"
-              },
-              "X-RateLimit-Remaining": {
-                "description": "The remaining number of requests until the rate limit is reached.",
-                "type": "integer"
-              },
-              "X-RateLimit-Reset": {
-                "description": "The timestamp when the rate limit will be reset formatted as ISO 8601 combined date and time in UTC.",
-                "type": "string"
-              }
-            },
-            "x-ms-error-response": true
-          },
-          "404": {
-            "description": "In case the specified entity doesn't exist",
-            "schema": {
-              "$ref": "#/definitions/ErrorContent"
-            },
-            "headers": {
-              "X-RateLimit-Limit": {
-                "description": "The limit of requests for the resource.",
-                "type": "integer"
-              },
-              "X-RateLimit-Remaining": {
-                "description": "The remaining number of requests until the rate limit is reached.",
-                "type": "integer"
-              },
-              "X-RateLimit-Reset": {
-                "description": "The timestamp when the rate limit will be reset formatted as ISO 8601 combined date and time in UTC.",
-                "type": "string"
-              }
-            },
-            "x-ms-error-response": true
-          },
-          "429": {
-            "description": "In case the rate limit has been exceeded.",
-            "schema": {
-              "$ref": "#/definitions/ErrorContent"
-            },
-            "headers": {
-              "X-RateLimit-Limit": {
-                "description": "The limit of requests for the resource.",
-                "type": "integer"
-              },
-              "X-RateLimit-Remaining": {
-                "description": "The remaining number of requests until the rate limit is reached.",
-                "type": "integer"
-              },
-              "X-RateLimit-Reset": {
-                "description": "The timestamp when the rate limit will be reset formatted as ISO 8601 combined date and time in UTC.",
-                "type": "string"
-              },
-              "Retry-After": {
-                "description": "The minimum number of seconds to wait before not getting this response anymore.",
-                "type": "integer"
-              }
-            },
-            "x-ms-error-response": true
+              "$ref": "#/definitions/Error"
+            }
           }
         },
-        "security": [
-          {
-            "subscription_key": [],
-            "token": []
-          }
-        ],
         "x-ms-examples": {
           "Get an endpoint data export": {
             "$ref": "./examples/get_endpoint_data_export.json"
@@ -3184,80 +1367,13 @@
               }
             }
           },
-          "401": {
-            "description": "In case the user isn't authorized.",
+          "default": {
+            "description": "An error occurred.",
             "schema": {
-              "$ref": "#/definitions/ErrorContent"
-            },
-            "headers": {
-              "X-RateLimit-Limit": {
-                "description": "The limit of requests for the resource.",
-                "type": "integer"
-              },
-              "X-RateLimit-Remaining": {
-                "description": "The remaining number of requests until the rate limit is reached.",
-                "type": "integer"
-              },
-              "X-RateLimit-Reset": {
-                "description": "The timestamp when the rate limit will be reset formatted as ISO 8601 combined date and time in UTC.",
-                "type": "string"
-              }
-            },
-            "x-ms-error-response": true
-          },
-          "403": {
-            "description": "In case authorized user isn't known or doesn't have the required permissions.",
-            "schema": {
-              "$ref": "#/definitions/ErrorContent"
-            },
-            "headers": {
-              "X-RateLimit-Limit": {
-                "description": "The limit of requests for the resource.",
-                "type": "integer"
-              },
-              "X-RateLimit-Remaining": {
-                "description": "The remaining number of requests until the rate limit is reached.",
-                "type": "integer"
-              },
-              "X-RateLimit-Reset": {
-                "description": "The timestamp when the rate limit will be reset formatted as ISO 8601 combined date and time in UTC.",
-                "type": "string"
-              }
-            },
-            "x-ms-error-response": true
-          },
-          "429": {
-            "description": "In case the rate limit has been exceeded.",
-            "schema": {
-              "$ref": "#/definitions/ErrorContent"
-            },
-            "headers": {
-              "X-RateLimit-Limit": {
-                "description": "The limit of requests for the resource.",
-                "type": "integer"
-              },
-              "X-RateLimit-Remaining": {
-                "description": "The remaining number of requests until the rate limit is reached.",
-                "type": "integer"
-              },
-              "X-RateLimit-Reset": {
-                "description": "The timestamp when the rate limit will be reset formatted as ISO 8601 combined date and time in UTC.",
-                "type": "string"
-              },
-              "Retry-After": {
-                "description": "The minimum number of seconds to wait before not getting this response anymore.",
-                "type": "integer"
-              }
-            },
-            "x-ms-error-response": true
+              "$ref": "#/definitions/Error"
+            }
           }
         },
-        "security": [
-          {
-            "subscription_key": [],
-            "token": []
-          }
-        ],
         "x-ms-examples": {
           "Get the supported locales": {
             "$ref": "./examples/get_supported_model_locales.json"
@@ -3299,80 +1415,13 @@
               }
             }
           },
-          "401": {
-            "description": "In case the user isn't authorized.",
+          "default": {
+            "description": "An error occurred.",
             "schema": {
-              "$ref": "#/definitions/ErrorContent"
-            },
-            "headers": {
-              "X-RateLimit-Limit": {
-                "description": "The limit of requests for the resource.",
-                "type": "integer"
-              },
-              "X-RateLimit-Remaining": {
-                "description": "The remaining number of requests until the rate limit is reached.",
-                "type": "integer"
-              },
-              "X-RateLimit-Reset": {
-                "description": "The timestamp when the rate limit will be reset formatted as ISO 8601 combined date and time in UTC.",
-                "type": "string"
-              }
-            },
-            "x-ms-error-response": true
-          },
-          "403": {
-            "description": "In case authorized user isn't known or doesn't have the required permissions.",
-            "schema": {
-              "$ref": "#/definitions/ErrorContent"
-            },
-            "headers": {
-              "X-RateLimit-Limit": {
-                "description": "The limit of requests for the resource.",
-                "type": "integer"
-              },
-              "X-RateLimit-Remaining": {
-                "description": "The remaining number of requests until the rate limit is reached.",
-                "type": "integer"
-              },
-              "X-RateLimit-Reset": {
-                "description": "The timestamp when the rate limit will be reset formatted as ISO 8601 combined date and time in UTC.",
-                "type": "string"
-              }
-            },
-            "x-ms-error-response": true
-          },
-          "429": {
-            "description": "In case the rate limit has been exceeded.",
-            "schema": {
-              "$ref": "#/definitions/ErrorContent"
-            },
-            "headers": {
-              "X-RateLimit-Limit": {
-                "description": "The limit of requests for the resource.",
-                "type": "integer"
-              },
-              "X-RateLimit-Remaining": {
-                "description": "The remaining number of requests until the rate limit is reached.",
-                "type": "integer"
-              },
-              "X-RateLimit-Reset": {
-                "description": "The timestamp when the rate limit will be reset formatted as ISO 8601 combined date and time in UTC.",
-                "type": "string"
-              },
-              "Retry-After": {
-                "description": "The minimum number of seconds to wait before not getting this response anymore.",
-                "type": "integer"
-              }
-            },
-            "x-ms-error-response": true
+              "$ref": "#/definitions/Error"
+            }
           }
         },
-        "security": [
-          {
-            "subscription_key": [],
-            "token": []
-          }
-        ],
         "x-ms-examples": {
           "Get all models": {
             "$ref": "./examples/get_models.json"
@@ -3404,7 +1453,7 @@
         ],
         "responses": {
           "202": {
-            "description": "The response contains the location of the entity as header.",
+            "description": "The request was accepted and the response contains the location of the entity.",
             "headers": {
               "Retry-After": {
                 "description": "The minimum number of seconds to wait before accessing the resource created in this operation.",
@@ -3434,101 +1483,13 @@
               }
             }
           },
-          "400": {
-            "description": "In case the operation cannot be performed successfully with the specified values.",
+          "default": {
+            "description": "An error occurred.",
             "schema": {
-              "$ref": "#/definitions/ErrorContent"
-            },
-            "headers": {
-              "X-RateLimit-Limit": {
-                "description": "The limit of requests for the resource.",
-                "type": "integer"
-              },
-              "X-RateLimit-Remaining": {
-                "description": "The remaining number of requests until the rate limit is reached.",
-                "type": "integer"
-              },
-              "X-RateLimit-Reset": {
-                "description": "The timestamp when the rate limit will be reset formatted as ISO 8601 combined date and time in UTC.",
-                "type": "string"
-              }
-            },
-            "x-ms-error-response": true
-          },
-          "401": {
-            "description": "In case the user isn't authorized.",
-            "schema": {
-              "$ref": "#/definitions/ErrorContent"
-            },
-            "headers": {
-              "X-RateLimit-Limit": {
-                "description": "The limit of requests for the resource.",
-                "type": "integer"
-              },
-              "X-RateLimit-Remaining": {
-                "description": "The remaining number of requests until the rate limit is reached.",
-                "type": "integer"
-              },
-              "X-RateLimit-Reset": {
-                "description": "The timestamp when the rate limit will be reset formatted as ISO 8601 combined date and time in UTC.",
-                "type": "string"
-              }
-            },
-            "x-ms-error-response": true
-          },
-          "403": {
-            "description": "In case authorized user isn't known or doesn't have the required permissions.",
-            "schema": {
-              "$ref": "#/definitions/ErrorContent"
-            },
-            "headers": {
-              "X-RateLimit-Limit": {
-                "description": "The limit of requests for the resource.",
-                "type": "integer"
-              },
-              "X-RateLimit-Remaining": {
-                "description": "The remaining number of requests until the rate limit is reached.",
-                "type": "integer"
-              },
-              "X-RateLimit-Reset": {
-                "description": "The timestamp when the rate limit will be reset formatted as ISO 8601 combined date and time in UTC.",
-                "type": "string"
-              }
-            },
-            "x-ms-error-response": true
-          },
-          "429": {
-            "description": "In case the rate limit has been exceeded.",
-            "schema": {
-              "$ref": "#/definitions/ErrorContent"
-            },
-            "headers": {
-              "X-RateLimit-Limit": {
-                "description": "The limit of requests for the resource.",
-                "type": "integer"
-              },
-              "X-RateLimit-Remaining": {
-                "description": "The remaining number of requests until the rate limit is reached.",
-                "type": "integer"
-              },
-              "X-RateLimit-Reset": {
-                "description": "The timestamp when the rate limit will be reset formatted as ISO 8601 combined date and time in UTC.",
-                "type": "string"
-              },
-              "Retry-After": {
-                "description": "The minimum number of seconds to wait before not getting this response anymore.",
-                "type": "integer"
-              }
-            },
-            "x-ms-error-response": true
+              "$ref": "#/definitions/Error"
+            }
           }
         },
-        "security": [
-          {
-            "subscription_key": [],
-            "token": []
-          }
-        ],
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
@@ -3585,101 +1546,13 @@
               }
             }
           },
-          "401": {
-            "description": "In case the user isn't authorized.",
+          "default": {
+            "description": "An error occurred.",
             "schema": {
-              "$ref": "#/definitions/ErrorContent"
-            },
-            "headers": {
-              "X-RateLimit-Limit": {
-                "description": "The limit of requests for the resource.",
-                "type": "integer"
-              },
-              "X-RateLimit-Remaining": {
-                "description": "The remaining number of requests until the rate limit is reached.",
-                "type": "integer"
-              },
-              "X-RateLimit-Reset": {
-                "description": "The timestamp when the rate limit will be reset formatted as ISO 8601 combined date and time in UTC.",
-                "type": "string"
-              }
-            },
-            "x-ms-error-response": true
-          },
-          "403": {
-            "description": "In case authorized user isn't known or doesn't have the required permissions.",
-            "schema": {
-              "$ref": "#/definitions/ErrorContent"
-            },
-            "headers": {
-              "X-RateLimit-Limit": {
-                "description": "The limit of requests for the resource.",
-                "type": "integer"
-              },
-              "X-RateLimit-Remaining": {
-                "description": "The remaining number of requests until the rate limit is reached.",
-                "type": "integer"
-              },
-              "X-RateLimit-Reset": {
-                "description": "The timestamp when the rate limit will be reset formatted as ISO 8601 combined date and time in UTC.",
-                "type": "string"
-              }
-            },
-            "x-ms-error-response": true
-          },
-          "404": {
-            "description": "In case the specified entity doesn't exist",
-            "schema": {
-              "$ref": "#/definitions/ErrorContent"
-            },
-            "headers": {
-              "X-RateLimit-Limit": {
-                "description": "The limit of requests for the resource.",
-                "type": "integer"
-              },
-              "X-RateLimit-Remaining": {
-                "description": "The remaining number of requests until the rate limit is reached.",
-                "type": "integer"
-              },
-              "X-RateLimit-Reset": {
-                "description": "The timestamp when the rate limit will be reset formatted as ISO 8601 combined date and time in UTC.",
-                "type": "string"
-              }
-            },
-            "x-ms-error-response": true
-          },
-          "429": {
-            "description": "In case the rate limit has been exceeded.",
-            "schema": {
-              "$ref": "#/definitions/ErrorContent"
-            },
-            "headers": {
-              "X-RateLimit-Limit": {
-                "description": "The limit of requests for the resource.",
-                "type": "integer"
-              },
-              "X-RateLimit-Remaining": {
-                "description": "The remaining number of requests until the rate limit is reached.",
-                "type": "integer"
-              },
-              "X-RateLimit-Reset": {
-                "description": "The timestamp when the rate limit will be reset formatted as ISO 8601 combined date and time in UTC.",
-                "type": "string"
-              },
-              "Retry-After": {
-                "description": "The minimum number of seconds to wait before not getting this response anymore.",
-                "type": "integer"
-              }
-            },
-            "x-ms-error-response": true
+              "$ref": "#/definitions/Error"
+            }
           }
         },
-        "security": [
-          {
-            "subscription_key": [],
-            "token": []
-          }
-        ],
         "x-ms-examples": {
           "Get a model": {
             "$ref": "./examples/get_model.json"
@@ -3738,122 +1611,13 @@
               }
             }
           },
-          "400": {
-            "description": "In case the operation cannot be performed successfully with the specified values.",
+          "default": {
+            "description": "An error occurred.",
             "schema": {
-              "$ref": "#/definitions/ErrorContent"
-            },
-            "headers": {
-              "X-RateLimit-Limit": {
-                "description": "The limit of requests for the resource.",
-                "type": "integer"
-              },
-              "X-RateLimit-Remaining": {
-                "description": "The remaining number of requests until the rate limit is reached.",
-                "type": "integer"
-              },
-              "X-RateLimit-Reset": {
-                "description": "The timestamp when the rate limit will be reset formatted as ISO 8601 combined date and time in UTC.",
-                "type": "string"
-              }
-            },
-            "x-ms-error-response": true
-          },
-          "401": {
-            "description": "In case the user isn't authorized.",
-            "schema": {
-              "$ref": "#/definitions/ErrorContent"
-            },
-            "headers": {
-              "X-RateLimit-Limit": {
-                "description": "The limit of requests for the resource.",
-                "type": "integer"
-              },
-              "X-RateLimit-Remaining": {
-                "description": "The remaining number of requests until the rate limit is reached.",
-                "type": "integer"
-              },
-              "X-RateLimit-Reset": {
-                "description": "The timestamp when the rate limit will be reset formatted as ISO 8601 combined date and time in UTC.",
-                "type": "string"
-              }
-            },
-            "x-ms-error-response": true
-          },
-          "403": {
-            "description": "In case authorized user isn't known or doesn't have the required permissions.",
-            "schema": {
-              "$ref": "#/definitions/ErrorContent"
-            },
-            "headers": {
-              "X-RateLimit-Limit": {
-                "description": "The limit of requests for the resource.",
-                "type": "integer"
-              },
-              "X-RateLimit-Remaining": {
-                "description": "The remaining number of requests until the rate limit is reached.",
-                "type": "integer"
-              },
-              "X-RateLimit-Reset": {
-                "description": "The timestamp when the rate limit will be reset formatted as ISO 8601 combined date and time in UTC.",
-                "type": "string"
-              }
-            },
-            "x-ms-error-response": true
-          },
-          "409": {
-            "description": "In case the specified entity doesn't exist",
-            "schema": {
-              "$ref": "#/definitions/ErrorContent"
-            },
-            "headers": {
-              "X-RateLimit-Limit": {
-                "description": "The limit of requests for the resource.",
-                "type": "integer"
-              },
-              "X-RateLimit-Remaining": {
-                "description": "The remaining number of requests until the rate limit is reached.",
-                "type": "integer"
-              },
-              "X-RateLimit-Reset": {
-                "description": "The timestamp when the rate limit will be reset formatted as ISO 8601 combined date and time in UTC.",
-                "type": "string"
-              }
-            },
-            "x-ms-error-response": true
-          },
-          "429": {
-            "description": "In case the rate limit has been exceeded.",
-            "schema": {
-              "$ref": "#/definitions/ErrorContent"
-            },
-            "headers": {
-              "X-RateLimit-Limit": {
-                "description": "The limit of requests for the resource.",
-                "type": "integer"
-              },
-              "X-RateLimit-Remaining": {
-                "description": "The remaining number of requests until the rate limit is reached.",
-                "type": "integer"
-              },
-              "X-RateLimit-Reset": {
-                "description": "The timestamp when the rate limit will be reset formatted as ISO 8601 combined date and time in UTC.",
-                "type": "string"
-              },
-              "Retry-After": {
-                "description": "The minimum number of seconds to wait before not getting this response anymore.",
-                "type": "integer"
-              }
-            },
-            "x-ms-error-response": true
+              "$ref": "#/definitions/Error"
+            }
           }
         },
-        "security": [
-          {
-            "subscription_key": [],
-            "token": []
-          }
-        ],
         "x-ms-examples": {
           "Update a model": {
             "$ref": "./examples/update_model.json"
@@ -3897,101 +1661,13 @@
               }
             }
           },
-          "400": {
-            "description": "In case the operation cannot be performed successfully with the specified values.",
+          "default": {
+            "description": "An error occurred.",
             "schema": {
-              "$ref": "#/definitions/ErrorContent"
-            },
-            "headers": {
-              "X-RateLimit-Limit": {
-                "description": "The limit of requests for the resource.",
-                "type": "integer"
-              },
-              "X-RateLimit-Remaining": {
-                "description": "The remaining number of requests until the rate limit is reached.",
-                "type": "integer"
-              },
-              "X-RateLimit-Reset": {
-                "description": "The timestamp when the rate limit will be reset formatted as ISO 8601 combined date and time in UTC.",
-                "type": "string"
-              }
-            },
-            "x-ms-error-response": true
-          },
-          "401": {
-            "description": "In case the user isn't authorized.",
-            "schema": {
-              "$ref": "#/definitions/ErrorContent"
-            },
-            "headers": {
-              "X-RateLimit-Limit": {
-                "description": "The limit of requests for the resource.",
-                "type": "integer"
-              },
-              "X-RateLimit-Remaining": {
-                "description": "The remaining number of requests until the rate limit is reached.",
-                "type": "integer"
-              },
-              "X-RateLimit-Reset": {
-                "description": "The timestamp when the rate limit will be reset formatted as ISO 8601 combined date and time in UTC.",
-                "type": "string"
-              }
-            },
-            "x-ms-error-response": true
-          },
-          "403": {
-            "description": "In case authorized user isn't known or doesn't have the required permissions.",
-            "schema": {
-              "$ref": "#/definitions/ErrorContent"
-            },
-            "headers": {
-              "X-RateLimit-Limit": {
-                "description": "The limit of requests for the resource.",
-                "type": "integer"
-              },
-              "X-RateLimit-Remaining": {
-                "description": "The remaining number of requests until the rate limit is reached.",
-                "type": "integer"
-              },
-              "X-RateLimit-Reset": {
-                "description": "The timestamp when the rate limit will be reset formatted as ISO 8601 combined date and time in UTC.",
-                "type": "string"
-              }
-            },
-            "x-ms-error-response": true
-          },
-          "429": {
-            "description": "In case the rate limit has been exceeded.",
-            "schema": {
-              "$ref": "#/definitions/ErrorContent"
-            },
-            "headers": {
-              "X-RateLimit-Limit": {
-                "description": "The limit of requests for the resource.",
-                "type": "integer"
-              },
-              "X-RateLimit-Remaining": {
-                "description": "The remaining number of requests until the rate limit is reached.",
-                "type": "integer"
-              },
-              "X-RateLimit-Reset": {
-                "description": "The timestamp when the rate limit will be reset formatted as ISO 8601 combined date and time in UTC.",
-                "type": "string"
-              },
-              "Retry-After": {
-                "description": "The minimum number of seconds to wait before not getting this response anymore.",
-                "type": "integer"
-              }
-            },
-            "x-ms-error-response": true
+              "$ref": "#/definitions/Error"
+            }
           }
         },
-        "security": [
-          {
-            "subscription_key": [],
-            "token": []
-          }
-        ],
         "x-ms-examples": {
           "Delete a model": {
             "$ref": "./examples/delete_model.json"
@@ -4033,80 +1709,13 @@
               }
             }
           },
-          "401": {
-            "description": "In case the user isn't authorized.",
+          "default": {
+            "description": "An error occurred.",
             "schema": {
-              "$ref": "#/definitions/ErrorContent"
-            },
-            "headers": {
-              "X-RateLimit-Limit": {
-                "description": "The limit of requests for the resource.",
-                "type": "integer"
-              },
-              "X-RateLimit-Remaining": {
-                "description": "The remaining number of requests until the rate limit is reached.",
-                "type": "integer"
-              },
-              "X-RateLimit-Reset": {
-                "description": "The timestamp when the rate limit will be reset formatted as ISO 8601 combined date and time in UTC.",
-                "type": "string"
-              }
-            },
-            "x-ms-error-response": true
-          },
-          "403": {
-            "description": "In case authorized user isn't known or doesn't have the required permissions.",
-            "schema": {
-              "$ref": "#/definitions/ErrorContent"
-            },
-            "headers": {
-              "X-RateLimit-Limit": {
-                "description": "The limit of requests for the resource.",
-                "type": "integer"
-              },
-              "X-RateLimit-Remaining": {
-                "description": "The remaining number of requests until the rate limit is reached.",
-                "type": "integer"
-              },
-              "X-RateLimit-Reset": {
-                "description": "The timestamp when the rate limit will be reset formatted as ISO 8601 combined date and time in UTC.",
-                "type": "string"
-              }
-            },
-            "x-ms-error-response": true
-          },
-          "429": {
-            "description": "In case the rate limit has been exceeded.",
-            "schema": {
-              "$ref": "#/definitions/ErrorContent"
-            },
-            "headers": {
-              "X-RateLimit-Limit": {
-                "description": "The limit of requests for the resource.",
-                "type": "integer"
-              },
-              "X-RateLimit-Remaining": {
-                "description": "The remaining number of requests until the rate limit is reached.",
-                "type": "integer"
-              },
-              "X-RateLimit-Reset": {
-                "description": "The timestamp when the rate limit will be reset formatted as ISO 8601 combined date and time in UTC.",
-                "type": "string"
-              },
-              "Retry-After": {
-                "description": "The minimum number of seconds to wait before not getting this response anymore.",
-                "type": "integer"
-              }
-            },
-            "x-ms-error-response": true
+              "$ref": "#/definitions/Error"
+            }
           }
         },
-        "security": [
-          {
-            "subscription_key": [],
-            "token": []
-          }
-        ],
         "x-ms-examples": {
           "Get the supported locales": {
             "$ref": "./examples/get_supported_transcription_locales.json"
@@ -4126,18 +1735,10 @@
         ],
         "parameters": [
           {
-            "in": "query",
-            "name": "skip",
-            "description": "Number of transcriptions that will be skipped.",
-            "type": "integer",
-            "format": "int32"
+            "$ref": "#/parameters/skipQueryParameter"
           },
           {
-            "in": "query",
-            "name": "take",
-            "description": "Number of transcriptions that will be included after skipping.",
-            "type": "integer",
-            "format": "int32"
+            "$ref": "#/parameters/takeQueryParameter"
           }
         ],
         "responses": {
@@ -4164,80 +1765,13 @@
               }
             }
           },
-          "401": {
-            "description": "In case the user isn't authorized.",
+          "default": {
+            "description": "An error occurred.",
             "schema": {
-              "$ref": "#/definitions/ErrorContent"
-            },
-            "headers": {
-              "X-RateLimit-Limit": {
-                "description": "The limit of requests for the resource.",
-                "type": "integer"
-              },
-              "X-RateLimit-Remaining": {
-                "description": "The remaining number of requests until the rate limit is reached.",
-                "type": "integer"
-              },
-              "X-RateLimit-Reset": {
-                "description": "The timestamp when the rate limit will be reset formatted as ISO 8601 combined date and time in UTC.",
-                "type": "string"
-              }
-            },
-            "x-ms-error-response": true
-          },
-          "403": {
-            "description": "In case authorized user isn't known or doesn't have the required permissions.",
-            "schema": {
-              "$ref": "#/definitions/ErrorContent"
-            },
-            "headers": {
-              "X-RateLimit-Limit": {
-                "description": "The limit of requests for the resource.",
-                "type": "integer"
-              },
-              "X-RateLimit-Remaining": {
-                "description": "The remaining number of requests until the rate limit is reached.",
-                "type": "integer"
-              },
-              "X-RateLimit-Reset": {
-                "description": "The timestamp when the rate limit will be reset formatted as ISO 8601 combined date and time in UTC.",
-                "type": "string"
-              }
-            },
-            "x-ms-error-response": true
-          },
-          "429": {
-            "description": "In case the rate limit has been exceeded.",
-            "schema": {
-              "$ref": "#/definitions/ErrorContent"
-            },
-            "headers": {
-              "X-RateLimit-Limit": {
-                "description": "The limit of requests for the resource.",
-                "type": "integer"
-              },
-              "X-RateLimit-Remaining": {
-                "description": "The remaining number of requests until the rate limit is reached.",
-                "type": "integer"
-              },
-              "X-RateLimit-Reset": {
-                "description": "The timestamp when the rate limit will be reset formatted as ISO 8601 combined date and time in UTC.",
-                "type": "string"
-              },
-              "Retry-After": {
-                "description": "The minimum number of seconds to wait before not getting this response anymore.",
-                "type": "integer"
-              }
-            },
-            "x-ms-error-response": true
+              "$ref": "#/definitions/Error"
+            }
           }
         },
-        "security": [
-          {
-            "subscription_key": [],
-            "token": []
-          }
-        ],
         "x-ms-examples": {
           "Get all transcriptions": {
             "$ref": "./examples/get_transcriptions.json"
@@ -4269,7 +1803,7 @@
         ],
         "responses": {
           "202": {
-            "description": "The response contains the location of the entity as header.",
+            "description": "The request was accepted and the response contains the location of the entity.",
             "headers": {
               "Retry-After": {
                 "description": "The minimum number of seconds to wait before accessing the resource created in this operation.",
@@ -4299,108 +1833,20 @@
               }
             }
           },
-          "400": {
-            "description": "In case the operation cannot be performed successfully with the specified values.",
+          "default": {
+            "description": "An error occurred.",
             "schema": {
-              "$ref": "#/definitions/ErrorContent"
-            },
-            "headers": {
-              "X-RateLimit-Limit": {
-                "description": "The limit of requests for the resource.",
-                "type": "integer"
-              },
-              "X-RateLimit-Remaining": {
-                "description": "The remaining number of requests until the rate limit is reached.",
-                "type": "integer"
-              },
-              "X-RateLimit-Reset": {
-                "description": "The timestamp when the rate limit will be reset formatted as ISO 8601 combined date and time in UTC.",
-                "type": "string"
-              }
-            },
-            "x-ms-error-response": true
-          },
-          "401": {
-            "description": "In case the user isn't authorized.",
-            "schema": {
-              "$ref": "#/definitions/ErrorContent"
-            },
-            "headers": {
-              "X-RateLimit-Limit": {
-                "description": "The limit of requests for the resource.",
-                "type": "integer"
-              },
-              "X-RateLimit-Remaining": {
-                "description": "The remaining number of requests until the rate limit is reached.",
-                "type": "integer"
-              },
-              "X-RateLimit-Reset": {
-                "description": "The timestamp when the rate limit will be reset formatted as ISO 8601 combined date and time in UTC.",
-                "type": "string"
-              }
-            },
-            "x-ms-error-response": true
-          },
-          "403": {
-            "description": "In case authorized user isn't known or doesn't have the required permissions.",
-            "schema": {
-              "$ref": "#/definitions/ErrorContent"
-            },
-            "headers": {
-              "X-RateLimit-Limit": {
-                "description": "The limit of requests for the resource.",
-                "type": "integer"
-              },
-              "X-RateLimit-Remaining": {
-                "description": "The remaining number of requests until the rate limit is reached.",
-                "type": "integer"
-              },
-              "X-RateLimit-Reset": {
-                "description": "The timestamp when the rate limit will be reset formatted as ISO 8601 combined date and time in UTC.",
-                "type": "string"
-              }
-            },
-            "x-ms-error-response": true
-          },
-          "429": {
-            "description": "In case the rate limit has been exceeded.",
-            "schema": {
-              "$ref": "#/definitions/ErrorContent"
-            },
-            "headers": {
-              "X-RateLimit-Limit": {
-                "description": "The limit of requests for the resource.",
-                "type": "integer"
-              },
-              "X-RateLimit-Remaining": {
-                "description": "The remaining number of requests until the rate limit is reached.",
-                "type": "integer"
-              },
-              "X-RateLimit-Reset": {
-                "description": "The timestamp when the rate limit will be reset formatted as ISO 8601 combined date and time in UTC.",
-                "type": "string"
-              },
-              "Retry-After": {
-                "description": "The minimum number of seconds to wait before not getting this response anymore.",
-                "type": "integer"
-              }
-            },
-            "x-ms-error-response": true
+              "$ref": "#/definitions/Error"
+            }
           }
         },
-        "security": [
-          {
-            "subscription_key": [],
-            "token": []
-          }
-        ],
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
         "x-ms-examples": {
-          "Create a transcription": {
-            "$ref": "./examples/create_transcription.json"
+          "Create a transcription for URIs": {
+            "$ref": "./examples/create_uri_transcription.json"
           }
         }
       }
@@ -4450,101 +1896,13 @@
               }
             }
           },
-          "401": {
-            "description": "In case the user isn't authorized.",
+          "default": {
+            "description": "An error occurred.",
             "schema": {
-              "$ref": "#/definitions/ErrorContent"
-            },
-            "headers": {
-              "X-RateLimit-Limit": {
-                "description": "The limit of requests for the resource.",
-                "type": "integer"
-              },
-              "X-RateLimit-Remaining": {
-                "description": "The remaining number of requests until the rate limit is reached.",
-                "type": "integer"
-              },
-              "X-RateLimit-Reset": {
-                "description": "The timestamp when the rate limit will be reset formatted as ISO 8601 combined date and time in UTC.",
-                "type": "string"
-              }
-            },
-            "x-ms-error-response": true
-          },
-          "403": {
-            "description": "In case authorized user isn't known or doesn't have the required permissions.",
-            "schema": {
-              "$ref": "#/definitions/ErrorContent"
-            },
-            "headers": {
-              "X-RateLimit-Limit": {
-                "description": "The limit of requests for the resource.",
-                "type": "integer"
-              },
-              "X-RateLimit-Remaining": {
-                "description": "The remaining number of requests until the rate limit is reached.",
-                "type": "integer"
-              },
-              "X-RateLimit-Reset": {
-                "description": "The timestamp when the rate limit will be reset formatted as ISO 8601 combined date and time in UTC.",
-                "type": "string"
-              }
-            },
-            "x-ms-error-response": true
-          },
-          "404": {
-            "description": "In case the specified entity doesn't exist",
-            "schema": {
-              "$ref": "#/definitions/ErrorContent"
-            },
-            "headers": {
-              "X-RateLimit-Limit": {
-                "description": "The limit of requests for the resource.",
-                "type": "integer"
-              },
-              "X-RateLimit-Remaining": {
-                "description": "The remaining number of requests until the rate limit is reached.",
-                "type": "integer"
-              },
-              "X-RateLimit-Reset": {
-                "description": "The timestamp when the rate limit will be reset formatted as ISO 8601 combined date and time in UTC.",
-                "type": "string"
-              }
-            },
-            "x-ms-error-response": true
-          },
-          "429": {
-            "description": "In case the rate limit has been exceeded.",
-            "schema": {
-              "$ref": "#/definitions/ErrorContent"
-            },
-            "headers": {
-              "X-RateLimit-Limit": {
-                "description": "The limit of requests for the resource.",
-                "type": "integer"
-              },
-              "X-RateLimit-Remaining": {
-                "description": "The remaining number of requests until the rate limit is reached.",
-                "type": "integer"
-              },
-              "X-RateLimit-Reset": {
-                "description": "The timestamp when the rate limit will be reset formatted as ISO 8601 combined date and time in UTC.",
-                "type": "string"
-              },
-              "Retry-After": {
-                "description": "The minimum number of seconds to wait before not getting this response anymore.",
-                "type": "integer"
-              }
-            },
-            "x-ms-error-response": true
+              "$ref": "#/definitions/Error"
+            }
           }
         },
-        "security": [
-          {
-            "subscription_key": [],
-            "token": []
-          }
-        ],
         "x-ms-examples": {
           "Get a transcription": {
             "$ref": "./examples/get_transcription.json"
@@ -4603,122 +1961,13 @@
               }
             }
           },
-          "400": {
-            "description": "In case the operation cannot be performed successfully with the specified values.",
+          "default": {
+            "description": "An error occurred.",
             "schema": {
-              "$ref": "#/definitions/ErrorContent"
-            },
-            "headers": {
-              "X-RateLimit-Limit": {
-                "description": "The limit of requests for the resource.",
-                "type": "integer"
-              },
-              "X-RateLimit-Remaining": {
-                "description": "The remaining number of requests until the rate limit is reached.",
-                "type": "integer"
-              },
-              "X-RateLimit-Reset": {
-                "description": "The timestamp when the rate limit will be reset formatted as ISO 8601 combined date and time in UTC.",
-                "type": "string"
-              }
-            },
-            "x-ms-error-response": true
-          },
-          "401": {
-            "description": "In case the user isn't authorized.",
-            "schema": {
-              "$ref": "#/definitions/ErrorContent"
-            },
-            "headers": {
-              "X-RateLimit-Limit": {
-                "description": "The limit of requests for the resource.",
-                "type": "integer"
-              },
-              "X-RateLimit-Remaining": {
-                "description": "The remaining number of requests until the rate limit is reached.",
-                "type": "integer"
-              },
-              "X-RateLimit-Reset": {
-                "description": "The timestamp when the rate limit will be reset formatted as ISO 8601 combined date and time in UTC.",
-                "type": "string"
-              }
-            },
-            "x-ms-error-response": true
-          },
-          "403": {
-            "description": "In case authorized user isn't known or doesn't have the required permissions.",
-            "schema": {
-              "$ref": "#/definitions/ErrorContent"
-            },
-            "headers": {
-              "X-RateLimit-Limit": {
-                "description": "The limit of requests for the resource.",
-                "type": "integer"
-              },
-              "X-RateLimit-Remaining": {
-                "description": "The remaining number of requests until the rate limit is reached.",
-                "type": "integer"
-              },
-              "X-RateLimit-Reset": {
-                "description": "The timestamp when the rate limit will be reset formatted as ISO 8601 combined date and time in UTC.",
-                "type": "string"
-              }
-            },
-            "x-ms-error-response": true
-          },
-          "409": {
-            "description": "In case the specified entity doesn't exist",
-            "schema": {
-              "$ref": "#/definitions/ErrorContent"
-            },
-            "headers": {
-              "X-RateLimit-Limit": {
-                "description": "The limit of requests for the resource.",
-                "type": "integer"
-              },
-              "X-RateLimit-Remaining": {
-                "description": "The remaining number of requests until the rate limit is reached.",
-                "type": "integer"
-              },
-              "X-RateLimit-Reset": {
-                "description": "The timestamp when the rate limit will be reset formatted as ISO 8601 combined date and time in UTC.",
-                "type": "string"
-              }
-            },
-            "x-ms-error-response": true
-          },
-          "429": {
-            "description": "In case the rate limit has been exceeded.",
-            "schema": {
-              "$ref": "#/definitions/ErrorContent"
-            },
-            "headers": {
-              "X-RateLimit-Limit": {
-                "description": "The limit of requests for the resource.",
-                "type": "integer"
-              },
-              "X-RateLimit-Remaining": {
-                "description": "The remaining number of requests until the rate limit is reached.",
-                "type": "integer"
-              },
-              "X-RateLimit-Reset": {
-                "description": "The timestamp when the rate limit will be reset formatted as ISO 8601 combined date and time in UTC.",
-                "type": "string"
-              },
-              "Retry-After": {
-                "description": "The minimum number of seconds to wait before not getting this response anymore.",
-                "type": "integer"
-              }
-            },
-            "x-ms-error-response": true
+              "$ref": "#/definitions/Error"
+            }
           }
         },
-        "security": [
-          {
-            "subscription_key": [],
-            "token": []
-          }
-        ],
         "x-ms-examples": {
           "Update a transcription": {
             "$ref": "./examples/update_transcription.json"
@@ -4762,101 +2011,13 @@
               }
             }
           },
-          "400": {
-            "description": "In case the operation cannot be performed successfully with the specified values.",
+          "default": {
+            "description": "An error occurred.",
             "schema": {
-              "$ref": "#/definitions/ErrorContent"
-            },
-            "headers": {
-              "X-RateLimit-Limit": {
-                "description": "The limit of requests for the resource.",
-                "type": "integer"
-              },
-              "X-RateLimit-Remaining": {
-                "description": "The remaining number of requests until the rate limit is reached.",
-                "type": "integer"
-              },
-              "X-RateLimit-Reset": {
-                "description": "The timestamp when the rate limit will be reset formatted as ISO 8601 combined date and time in UTC.",
-                "type": "string"
-              }
-            },
-            "x-ms-error-response": true
-          },
-          "401": {
-            "description": "In case the user isn't authorized.",
-            "schema": {
-              "$ref": "#/definitions/ErrorContent"
-            },
-            "headers": {
-              "X-RateLimit-Limit": {
-                "description": "The limit of requests for the resource.",
-                "type": "integer"
-              },
-              "X-RateLimit-Remaining": {
-                "description": "The remaining number of requests until the rate limit is reached.",
-                "type": "integer"
-              },
-              "X-RateLimit-Reset": {
-                "description": "The timestamp when the rate limit will be reset formatted as ISO 8601 combined date and time in UTC.",
-                "type": "string"
-              }
-            },
-            "x-ms-error-response": true
-          },
-          "403": {
-            "description": "In case authorized user isn't known or doesn't have the required permissions.",
-            "schema": {
-              "$ref": "#/definitions/ErrorContent"
-            },
-            "headers": {
-              "X-RateLimit-Limit": {
-                "description": "The limit of requests for the resource.",
-                "type": "integer"
-              },
-              "X-RateLimit-Remaining": {
-                "description": "The remaining number of requests until the rate limit is reached.",
-                "type": "integer"
-              },
-              "X-RateLimit-Reset": {
-                "description": "The timestamp when the rate limit will be reset formatted as ISO 8601 combined date and time in UTC.",
-                "type": "string"
-              }
-            },
-            "x-ms-error-response": true
-          },
-          "429": {
-            "description": "In case the rate limit has been exceeded.",
-            "schema": {
-              "$ref": "#/definitions/ErrorContent"
-            },
-            "headers": {
-              "X-RateLimit-Limit": {
-                "description": "The limit of requests for the resource.",
-                "type": "integer"
-              },
-              "X-RateLimit-Remaining": {
-                "description": "The remaining number of requests until the rate limit is reached.",
-                "type": "integer"
-              },
-              "X-RateLimit-Reset": {
-                "description": "The timestamp when the rate limit will be reset formatted as ISO 8601 combined date and time in UTC.",
-                "type": "string"
-              },
-              "Retry-After": {
-                "description": "The minimum number of seconds to wait before not getting this response anymore.",
-                "type": "integer"
-              }
-            },
-            "x-ms-error-response": true
+              "$ref": "#/definitions/Error"
+            }
           }
         },
-        "security": [
-          {
-            "subscription_key": [],
-            "token": []
-          }
-        ],
         "x-ms-examples": {
           "Delete a transcription": {
             "$ref": "./examples/delete_transcription.json"
@@ -4882,17 +2043,7 @@
           "type": "string"
         },
         "dataImportKind": {
-          "description": "The kind of the dataset (e.g. acoustic data, language data ...)",
-          "enum": [
-            "Language",
-            "Acoustic",
-            "Pronunciation"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "DatasetKind",
-            "modelAsString": false
-          }
+          "$ref": "#/definitions/DatasetKind"
         },
         "name": {
           "description": "The name of the object.",
@@ -4920,19 +2071,7 @@
           "readOnly": true
         },
         "status": {
-          "description": "The status of the object.",
-          "enum": [
-            "NotStarted",
-            "Running",
-            "Succeeded",
-            "Failed"
-          ],
-          "type": "string",
-          "readOnly": true,
-          "x-ms-enum": {
-            "name": "Status",
-            "modelAsString": false
-          }
+          "$ref": "#/definitions/Status"
         },
         "createdDateTime": {
           "format": "date-time",
@@ -4954,6 +2093,34 @@
           "description": "The identifier of this entity.",
           "type": "string"
         }
+      }
+    },
+    "DatasetKind": {
+      "title": "DatasetKind",
+      "description": "Kind of data import.",
+      "enum": [
+        "Language",
+        "Acoustic",
+        "Pronunciation"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "DatasetKind",
+        "modelAsString": false,
+        "values": [
+          {
+            "value": "Language",
+            "description": "A language dataset."
+          },
+          {
+            "value": "Acoustic",
+            "description": "An acoustic dataset."
+          },
+          {
+            "value": "Pronunciation",
+            "description": "A pronunciation dataset."
+          }
+        ]
       }
     },
     "DatasetLocales": {
@@ -5035,16 +2202,7 @@
           "readOnly": true
         },
         "endpointKind": {
-          "description": "The kind of this endpoint (e.g. custom speech).",
-          "enum": [
-            "SpeechRecognition",
-            "PronunciationScore"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "EndpointKind",
-            "modelAsString": false
-          }
+          "$ref": "#/definitions/EndpointKind"
         },
         "lastActionDateTime": {
           "format": "date-time",
@@ -5053,19 +2211,7 @@
           "readOnly": true
         },
         "status": {
-          "description": "The status of the object.",
-          "enum": [
-            "NotStarted",
-            "Running",
-            "Succeeded",
-            "Failed"
-          ],
-          "type": "string",
-          "readOnly": true,
-          "x-ms-enum": {
-            "name": "Status",
-            "modelAsString": false
-          }
+          "$ref": "#/definitions/Status"
         },
         "createdDateTime": {
           "format": "date-time",
@@ -5112,6 +2258,7 @@
           "type": "string"
         },
         "dataUrl": {
+          "format": "uri",
           "description": "The resulting data Url for the model deployment.",
           "type": "string"
         },
@@ -5122,19 +2269,7 @@
           "readOnly": true
         },
         "status": {
-          "description": "The status of the object.",
-          "enum": [
-            "NotStarted",
-            "Running",
-            "Succeeded",
-            "Failed"
-          ],
-          "type": "string",
-          "readOnly": true,
-          "x-ms-enum": {
-            "name": "Status",
-            "modelAsString": false
-          }
+          "$ref": "#/definitions/Status"
         },
         "createdDateTime": {
           "format": "date-time",
@@ -5174,6 +2309,28 @@
         }
       }
     },
+    "EndpointKind": {
+      "title": "EndpointKind",
+      "enum": [
+        "SpeechRecognition",
+        "PronunciationScore"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "EndpointKind",
+        "modelAsString": false,
+        "values": [
+          {
+            "value": "SpeechRecognition",
+            "description": "A SpeechRecognition model deployment."
+          },
+          {
+            "value": "PronunciationScore",
+            "description": "A PronunciationScore model deployment."
+          }
+        ]
+      }
+    },
     "EndpointMetadataUpdate": {
       "title": "EndpointMetadataUpdate",
       "required": [
@@ -5191,8 +2348,8 @@
         }
       }
     },
-    "ErrorContent": {
-      "title": "ErrorContent",
+    "Error": {
+      "title": "Error",
       "description": "The interface represents the content of an error response defined in the OneAPI v2.1 documentation.",
       "required": [
         "code",
@@ -5285,17 +2442,7 @@
           "type": "string"
         },
         "modelKind": {
-          "description": "The kind of this model (e.g. acoustic, language ...)",
-          "enum": [
-            "Acoustic",
-            "Language",
-            "AcousticAndLanguage"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "ModelKind",
-            "modelAsString": false
-          }
+          "$ref": "#/definitions/ModelKind"
         },
         "text": {
           "description": "The text used to adapt this language model.",
@@ -5329,19 +2476,7 @@
           "readOnly": true
         },
         "status": {
-          "description": "The status of the object.",
-          "enum": [
-            "NotStarted",
-            "Running",
-            "Succeeded",
-            "Failed"
-          ],
-          "type": "string",
-          "readOnly": true,
-          "x-ms-enum": {
-            "name": "Status",
-            "modelAsString": false
-          }
+          "$ref": "#/definitions/Status"
         },
         "createdDateTime": {
           "format": "date-time",
@@ -5363,6 +2498,34 @@
           "description": "The identifier of this entity.",
           "type": "string"
         }
+      }
+    },
+    "ModelKind": {
+      "title": "ModelKind",
+      "description": "Type of speech model.",
+      "enum": [
+        "Acoustic",
+        "Language",
+        "AcousticAndLanguage"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "ModelKind",
+        "modelAsString": false,
+        "values": [
+          {
+            "value": "Acoustic",
+            "description": "An acoustic model."
+          },
+          {
+            "value": "Language",
+            "description": "A language model."
+          },
+          {
+            "value": "AcousticAndLanguage",
+            "description": "An acoustic and language model."
+          }
+        ]
       }
     },
     "ModelLocales": {
@@ -5464,17 +2627,7 @@
       "type": "object",
       "properties": {
         "modelKind": {
-          "description": "The kind of this model (e.g. acoustic, language ...)",
-          "enum": [
-            "Acoustic",
-            "Language",
-            "AcousticAndLanguage"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "ModelKind",
-            "modelAsString": false
-          }
+          "$ref": "#/definitions/ModelKind"
         },
         "text": {
           "description": "The text used to adapt this language model.",
@@ -5511,6 +2664,40 @@
         }
       }
     },
+    "Status": {
+      "title": "Status",
+      "description": "Describe the current state of the API",
+      "enum": [
+        "NotStarted",
+        "Running",
+        "Succeeded",
+        "Failed"
+      ],
+      "type": "string",
+      "readOnly": true,
+      "x-ms-enum": {
+        "name": "Status",
+        "modelAsString": false,
+        "values": [
+          {
+            "value": "NotStarted",
+            "description": "The long running operation has not yet started."
+          },
+          {
+            "value": "Running",
+            "description": "The long running operation is currently processing."
+          },
+          {
+            "value": "Succeeded",
+            "description": "The long running operation has successfully completed."
+          },
+          {
+            "value": "Failed",
+            "description": "The long running operation has failed."
+          }
+        ]
+      }
+    },
     "Test": {
       "title": "Test",
       "required": [
@@ -5521,6 +2708,7 @@
       "type": "object",
       "properties": {
         "resultsUrl": {
+          "format": "uri",
           "description": "The URL that can be used to download the test results.\r\nEach line in the file represents a tab separated list of filename, reference transcription and decoder output.\r\n            \r\nThe URL will only be valid, if the test completed successfully.",
           "type": "string",
           "readOnly": true
@@ -5543,19 +2731,7 @@
           "readOnly": true
         },
         "status": {
-          "description": "The status of the object.",
-          "enum": [
-            "NotStarted",
-            "Running",
-            "Succeeded",
-            "Failed"
-          ],
-          "type": "string",
-          "readOnly": true,
-          "x-ms-enum": {
-            "name": "Status",
-            "modelAsString": false
-          }
+          "$ref": "#/definitions/Status"
         },
         "createdDateTime": {
           "format": "date-time",
@@ -5653,9 +2829,11 @@
       "type": "object",
       "properties": {
         "recordingsUrl": {
+          "format": "uri",
           "type": "string"
         },
         "reportFileUrl": {
+          "format": "uri",
           "type": "string",
           "readOnly": true
         },
@@ -5695,19 +2873,7 @@
           "readOnly": true
         },
         "status": {
-          "description": "The status of the object.",
-          "enum": [
-            "NotStarted",
-            "Running",
-            "Succeeded",
-            "Failed"
-          ],
-          "type": "string",
-          "readOnly": true,
-          "x-ms-enum": {
-            "name": "Status",
-            "modelAsString": false
-          }
+          "$ref": "#/definitions/Status"
         },
         "createdDateTime": {
           "format": "date-time",
@@ -5742,6 +2908,7 @@
       "type": "object",
       "properties": {
         "recordingsUrl": {
+          "format": "uri",
           "type": "string"
         },
         "models": {
@@ -5790,12 +2957,39 @@
       }
     }
   },
+  "parameters": {
+    "Endpoint": {
+      "in": "path",
+      "name": "Endpoint",
+      "description": "Supported Cognitive Services endpoints (protocol and hostname, for example: https://westus.api.cognitive.microsoft.com).",
+      "required": true,
+      "type": "string",
+      "x-ms-skip-url-encoding": true,
+      "x-ms-parameter-location": "client"
+    },
+    "skipQueryParameter": {
+      "in": "query",
+      "name": "skip",
+      "description": "Number of transcriptions that will be skipped.",
+      "type": "integer",
+      "format": "int32",
+      "x-ms-parameter-location": "method"
+    },
+    "takeQueryParameter": {
+      "in": "query",
+      "name": "take",
+      "description": "Number of transcriptions that will be included after skipping.",
+      "type": "integer",
+      "format": "int32",
+      "x-ms-parameter-location": "method"
+    }
+  },
   "securityDefinitions": {
-    "subscription_key": {
+    "api_key": {
       "type": "apiKey",
       "name": "Ocp-Apim-Subscription-Key",
       "in": "header",
-      "description": "Provide your cognitive services subscription key here."
+      "description": "Provide your cognitive services account key here."
     },
     "token": {
       "type": "apiKey",
@@ -5804,6 +2998,14 @@
       "description": "Provide an access token from the JWT returned by the STS of this region. Make sure to add the management scope to the token by adding the following query string to the STS URL: ?scope=speechservicesmanagement"
     }
   },
+  "security": [
+    {
+      "api_key": []
+    },
+    {
+      "token": []
+    }
+  ],
   "schemes": [
     "https"
   ],
@@ -5815,16 +3017,5 @@
         "$ref": "#/parameters/Endpoint"
       }
     ]
-  },
-  "parameters": {
-    "Endpoint": {
-      "name": "Endpoint",
-      "description": "Supported Cognitive Services endpoints (protocol and hostname, for example: https://westus.api.cognitive.microsoft.com).",
-      "x-ms-parameter-location": "client",
-      "required": true,
-      "type": "string",
-      "in": "path",
-      "x-ms-skip-url-encoding": true
-    }
   }
 }

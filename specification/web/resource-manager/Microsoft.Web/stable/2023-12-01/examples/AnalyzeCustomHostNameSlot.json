@@ -1,0 +1,33 @@
+{
+  "parameters": {
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
+    "resourceGroupName": "testrg123",
+    "name": "sitef6141",
+    "slot": "staging",
+    "api-version": "2023-12-01"
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testrg123/providers/Microsoft.Web/sites/sitef6141/slots/staging",
+        "name": "sitef6141/staging",
+        "type": "Microsoft.Web/sites/stagings",
+        "properties": {
+          "isHostnameAlreadyVerified": true,
+          "customDomainVerificationTest": "Passed",
+          "customDomainVerificationFailureInfo": {
+            "code": "07198",
+            "message": "Custom domain verification failed on conflicting CNAMEs."
+          },
+          "hasConflictOnScaleUnit": false,
+          "hasConflictAcrossSubscription": true,
+          "conflictingAppResourceId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testrg123/providers/Microsoft.Web/sites/siteog/slots/qa",
+          "cNameRecords": [
+            "siteog.azurewebsites.net"
+          ]
+        }
+      }
+    }
+  }
+}

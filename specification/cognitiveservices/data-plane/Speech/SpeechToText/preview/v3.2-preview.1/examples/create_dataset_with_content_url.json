@@ -1,0 +1,40 @@
+{
+  "parameters": {
+    "Endpoint": "https://westus.api.cognitive.microsoft.com/",
+    "Ocp-Apim-Subscription-Key": "{API Key}",
+    "dataset": {
+      "kind": "Acoustic",
+      "contentUrl": "https://contoso.com/location",
+      "locale": "en-US",
+      "displayName": "My speech dataset name",
+      "description": "My speech dataset description"
+    },
+    "Content-Type": "application/json"
+  },
+  "responses": {
+    "201": {
+      "headers": {
+        "Location": "https://westus.api.cognitive.microsoft.com/speechtotext/v3.2-preview1/datasets/9d5f4100-5f8e-4dd6-bd83-9bbbf50d57f1"
+      },
+      "body": {
+        "self": "https://westus.api.cognitive.microsoft.com/speechtotext/v3.2-preview1/datasets/9d5f4100-5f8e-4dd6-bd83-9bbbf50d57f1",
+        "kind": "Acoustic",
+        "contentUrl": "https://www.contoso.com/acousticdata/sourcelocation",
+        "links": {
+          "files": "https://westus.api.cognitive.microsoft.com/speechtotext/v3.2-preview1/datasets/9d5f4100-5f8e-4dd6-bd83-9bbbf50d57f1/files"
+        },
+        "properties": {
+          "textNormalizationKind": "Default",
+          "acceptedLineCount": 11,
+          "rejectedLineCount": 2,
+          "duration": "PT4M12S"
+        },
+        "lastActionDateTime": "2019-01-07T11:36:07Z",
+        "status": "Succeeded",
+        "createdDateTime": "2019-01-07T11:34:12Z",
+        "locale": "en-US",
+        "displayName": "Acoustic dataset"
+      }
+    }
+  }
+}

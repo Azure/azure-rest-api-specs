@@ -1,0 +1,45 @@
+{
+  "parameters": {
+    "subscriptionId": "6b052e15-03d3-4f17-b2e1-be7f07588291",
+    "resourceGroupName": "exampleRG",
+    "parentProviderNamespace": "Microsoft.Compute",
+    "parentResourceType": "virtualMachines",
+    "parentResourceName": "exampleVM",
+    "targetName": "Microsoft-Agent",
+    "api-version": "2023-09-01-preview",
+    "target": {
+      "properties": {
+        "identities": [
+          {
+            "type": "CertificateSubjectIssuer",
+            "subject": "CN=example.subject"
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "id": "/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/resourceGroups/exampleRG/providers/Microsoft.Compute/virtualMachines/exampleVM/providers/Microsoft.Chaos/targets/Microsoft-Agent",
+        "type": "Microsoft.Chaos/targets",
+        "name": "Microsoft-Agent",
+        "location": "centraluseuap",
+        "properties": {
+          "identities": [
+            {
+              "type": "CertificateSubjectIssuer",
+              "subject": "CN=example.subject"
+            }
+          ],
+          "agentProfileId": "ac4e8251-fdc9-4277-8e87-dc57fe5794cf"
+        },
+        "systemData": {
+          "createdAt": "2021-07-01T00:00:00.0Z",
+          "lastModifiedAt": "2021-07-01T00:00:00.0Z"
+        }
+      }
+    }
+  }
+}

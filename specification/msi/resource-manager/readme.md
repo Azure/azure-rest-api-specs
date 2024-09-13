@@ -26,15 +26,42 @@ These are the global settings for the Managed Service Identity API.
 
 ``` yaml
 openapi-type: arm
-tag: package-preview-2021-09
+tag: package-2023-01-31
+```
+
+### Tag: package-2023-07-31-preview
+
+These settings apply only when `--tag=package-2023-07-31-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2023-07-31-preview'
+input-file:
+- Microsoft.ManagedIdentity/preview/2023-07-31-preview/ManagedIdentity.json
+```
+
+### Tag: package-2023-01-31
+
+These settings apply only when `--tag=package-2023-01-31` is specified on the command line.
+
+``` yaml $(tag) == 'package-2023-01-31'
+input-file:
+- Microsoft.ManagedIdentity/stable/2023-01-31/ManagedIdentity.json
+```
+
+### Tag: package-preview-2022-01
+
+These settings apply only when `--tag=package-preview-2022-01` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2022-01'
+input-file:
+  - Microsoft.ManagedIdentity/preview/2022-01-31-preview/ManagedIdentity.json
 ```
 
 
-### Tag: package-preview-2021-09
+### Tag: package-preview-2021-09-30
 
-These settings apply only when `--tag=package-preview-2021-09` is specified on the command line.
+These settings apply only when `--tag=package-preview-2021-09-30` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2021-09'
+```yaml $(tag) == 'package-preview-2021-09-30'
 input-file:
   - Microsoft.ManagedIdentity/preview/2021-09-30-preview/ManagedIdentity.json
 ```
@@ -65,7 +92,7 @@ directive:
     where: $.definitions.SystemAssignedIdentity
     reason: The identity type exposed under any scope is not a tracked resource since it is an extension.
   - suppress: RequiredReadOnlySystemData
-    reason: User-assigned and system-assigned identities do not support systemData. 
+    reason: User-assigned and system-assigned identities do not support systemData.
 ```
 
 ---
@@ -79,20 +106,20 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-net
-  - repo: azure-sdk-for-python-track2
+  - repo: azure-sdk-for-net-track2
+  - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
-  - repo: azure-sdk-for-go-track2
   - repo: azure-sdk-for-ruby
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_msi']
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
   - repo: azure-resource-manager-schemas
+  - repo: azure-powershell
 ```
 
-## Pyhton
+## Python
 
 See configuration in [readme.python.md](./readme.python.md)
 

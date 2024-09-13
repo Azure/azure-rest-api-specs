@@ -1,0 +1,1318 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure Network Fabric Management Service API",
+    "description": "Self service experience for Azure Network Fabric API.",
+    "version": "2023-02-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedNetworkFabric/networkFabrics/{networkFabricName}": {
+      "put": {
+        "tags": [
+          "NetworkFabrics"
+        ],
+        "operationId": "NetworkFabrics_Create",
+        "summary": "Create Network Fabric.",
+        "description": "Create Network Fabric resource.",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "NetworkFabrics_Create_MaximumSet_Gen": {
+            "$ref": "./examples/NetworkFabrics_Create_MaximumSet_Gen.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "path",
+            "name": "networkFabricName",
+            "required": true,
+            "type": "string",
+            "description": "Name of the Network Fabric"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "description": "Request payload.",
+            "schema": {
+              "$ref": "#/definitions/NetworkFabric"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/NetworkFabric"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/NetworkFabric"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "The URL to retrieve the status of the asynchronous operation."
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "get": {
+        "tags": [
+          "NetworkFabrics"
+        ],
+        "operationId": "NetworkFabrics_Get",
+        "summary": "Gets a Network Fabric.",
+        "description": "Get Network Fabric resource details.",
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "NetworkFabrics_Get_MaximumSet_Gen": {
+            "$ref": "./examples/NetworkFabrics_Get_MaximumSet_Gen.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "path",
+            "name": "networkFabricName",
+            "required": true,
+            "type": "string",
+            "description": "Name of the Network Fabric"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/NetworkFabric"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "NetworkFabrics"
+        ],
+        "operationId": "NetworkFabrics_Update",
+        "summary": "Updates a Network Fabric.",
+        "description": "Update certain properties of the Network Fabric resource.",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "NetworkFabrics_Update_MaximumSet_Gen": {
+            "$ref": "./examples/NetworkFabrics_Update_MaximumSet_Gen.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "path",
+            "name": "networkFabricName",
+            "required": true,
+            "type": "string",
+            "description": "Name of the Network Fabric"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "description": "Network Fabric properties to update.",
+            "schema": {
+              "$ref": "#/definitions/NetworkFabricPatchParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/NetworkFabric"
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "description": "The URL to retrieve the status of the asynchronous operation.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      },
+      "delete": {
+        "tags": [
+          "NetworkFabrics"
+        ],
+        "operationId": "NetworkFabrics_Delete",
+        "summary": "Deletes a Network Fabric.",
+        "description": "Delete Network Fabric resource.",
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "NetworkFabrics_Delete_MaximumSet_Gen": {
+            "$ref": "./examples/NetworkFabrics_Delete_MaximumSet_Gen.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "path",
+            "name": "networkFabricName",
+            "required": true,
+            "type": "string",
+            "description": "Name of the Network Fabric"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "description": "The URL to retrieve the status of the asynchronous operation.",
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedNetworkFabric/networkFabrics": {
+      "get": {
+        "operationId": "NetworkFabrics_ListByResourceGroup",
+        "summary": "List NetworkFabrics by resource group.",
+        "description": "List all the Network Fabric resources in the given resource group.",
+        "x-ms-examples": {
+          "NetworkFabrics_ListByResourceGroup_MaximumSet_Gen": {
+            "$ref": "./examples/NetworkFabrics_ListByResourceGroup_MaximumSet_Gen.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lists all NetworkFabrics under the resource group.",
+            "schema": {
+              "$ref": "#/definitions/NetworkFabricsListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ManagedNetworkFabric/networkFabrics": {
+      "get": {
+        "operationId": "NetworkFabrics_ListBySubscription",
+        "summary": "List NetworkFabrics by subscription.",
+        "description": "List all the Network Fabric resources in the given subscription.",
+        "x-ms-examples": {
+          "NetworkFabrics_ListBySubscription_MaximumSet_Gen": {
+            "$ref": "./examples/NetworkFabrics_ListBySubscription_MaximumSet_Gen.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lists all NetworkFabrics under the subscription.",
+            "schema": {
+              "$ref": "#/definitions/NetworkFabricsListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedNetworkFabric/networkFabrics/{networkFabricName}/provision": {
+      "post": {
+        "tags": [
+          "NetworkFabrics"
+        ],
+        "operationId": "NetworkFabrics_provision",
+        "description": "Provisions the underlying resources in the given Network Fabric instance.",
+        "summary": "Implements the operation to the underlying resources.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "path",
+            "name": "networkFabricName",
+            "description": "Name of the NetworkFabric.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "description": "The URL to retrieve the status of the asynchronous operation.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "NetworkFabrics_provision_MaximumSet_Gen": {
+            "$ref": "./examples/NetworkFabrics_provision_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedNetworkFabric/networkFabrics/{networkFabricName}/deprovision": {
+      "post": {
+        "tags": [
+          "NetworkFabrics"
+        ],
+        "operationId": "NetworkFabrics_deprovision",
+        "description": "Deprovisions the underlying resources in the given Network Fabric instance.",
+        "summary": "Implements the operation to the underlying resources.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "path",
+            "name": "networkFabricName",
+            "description": "Name of the NetworkFabric.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "description": "The URL to retrieve the status of the asynchronous operation.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "NetworkFabrics_deprovision_MaximumSet_Gen": {
+            "$ref": "./examples/NetworkFabrics_deprovision_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedNetworkFabric/networkFabrics/{networkFabricName}/networkToNetworkInterconnects/{networkToNetworkInterconnectName}": {
+      "put": {
+        "tags": [
+          "NetworkToNetworkInterconnects"
+        ],
+        "operationId": "NetworkToNetworkInterconnects_Create",
+        "summary": "Configuration used to setup CE-PE connectivity.",
+        "description": "Configuration used to setup CE-PE connectivity PUT Method.",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "path",
+            "name": "networkFabricName",
+            "description": "Name of the NetworkFabric.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "networkToNetworkInterconnectName",
+            "required": true,
+            "type": "string",
+            "description": "Name of the NetworkToNetworkInterconnectName"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "description": "Request payload.",
+            "schema": {
+              "$ref": "#/definitions/NetworkToNetworkInterconnect"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/NetworkToNetworkInterconnect"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/NetworkToNetworkInterconnect"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "NetworkToNetworkInterconnects_Create_MaximumSet_Gen": {
+            "$ref": "./examples/NetworkToNetworkInterconnects_Create_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "NetworkToNetworkInterconnects"
+        ],
+        "operationId": "NetworkToNetworkInterconnects_Get",
+        "summary": "Configuration used to setup CE-PE connectivity.",
+        "description": "Implements NetworkToNetworkInterconnects GET method.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "path",
+            "name": "networkFabricName",
+            "description": "Name of the NetworkFabric.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "networkToNetworkInterconnectName",
+            "required": true,
+            "type": "string",
+            "description": "Name of the NetworkToNetworkInterconnect"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/NetworkToNetworkInterconnect"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NetworkToNetworkInterconnects_Get_MaximumSet_Gen": {
+            "$ref": "./examples/NetworkToNetworkInterconnects_Get_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "NetworkToNetworkInterconnects"
+        ],
+        "operationId": "NetworkToNetworkInterconnects_Delete",
+        "summary": "Deletes a NetworkToNetworkInterconnects.",
+        "description": "Implements NetworkToNetworkInterconnects DELETE method.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "path",
+            "name": "networkFabricName",
+            "description": "Name of the NetworkFabric.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "networkToNetworkInterconnectName",
+            "required": true,
+            "type": "string",
+            "description": "Name of the NetworkToNetworkInterconnectName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "NetworkToNetworkInterconnects_Delete_MaximumSet_Gen": {
+            "$ref": "./examples/NetworkToNetworkInterconnects_Delete_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedNetworkFabric/networkFabrics/{networkFabricName}/networkToNetworkInterconnects": {
+      "get": {
+        "operationId": "NetworkToNetworkInterconnects_List",
+        "summary": "Executes list operation to display Network To Network Interconnects within a Network Fabric.",
+        "description": "Implements Network To Network Interconnects list by Network Fabric GET method.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "path",
+            "name": "networkFabricName",
+            "description": "Name of the NetworkFabric.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lists all Network To Network Interconnects under the resource group.",
+            "schema": {
+              "$ref": "#/definitions/NetworkToNetworkInterconnectsList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "NetworkToNetworkInterconnects_List_MaximumSet_Gen": {
+            "$ref": "./examples/NetworkToNetworkInterconnects_List_MaximumSet_Gen.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "TerminalServerPatchParameters": {
+      "title": "Terminal server patch parameters",
+      "type": "object",
+      "properties": {
+        "terminalServerConfiguration": {
+          "description": "Network and credentials configuration already applied to terminal server.",
+          "$ref": "#/definitions/TerminalServerPatchableProperties"
+        }
+      }
+    },
+    "TerminalServerPatchableProperties": {
+      "type": "object",
+      "description": "Network and credential configuration currently applied on terminal server.",
+      "properties": {
+        "username": {
+          "type": "string",
+          "description": "Username for the terminal server connection."
+        },
+        "password": {
+          "type": "string",
+          "description": "Password for the terminal server connection.",
+          "x-ms-secret": true
+        },
+        "serialNumber": {
+          "type": "string",
+          "description": "Serial Number of Terminal server."
+        }
+      }
+    },
+    "NetworkFabricPatchableProperties": {
+      "title": "Network Fabric updatable properties",
+      "type": "object",
+      "properties": {
+        "racks": {
+          "type": "array",
+          "description": "List of NetworkRack resource IDs under the Network Fabric. The number of racks allowed depends on the Network Fabric SKU.",
+          "items": {
+            "description": "NetworkRack Azure resource ID.",
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "l2IsolationDomains": {
+          "type": "array",
+          "description": "List of L2IsolationDomain resource IDs under the Network Fabric.",
+          "items": {
+            "description": "L2IsolationDomain Azure resource ID.",
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "l3IsolationDomains": {
+          "type": "array",
+          "description": "List of L3IsolationDomain resource IDs under the Network Fabric.",
+          "items": {
+            "description": "L3IsolationDomain Azure resource ID.",
+            "type": "string"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "NetworkFabricProperties": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/AnnotationResource",
+          "description": "Common properties for annotated type."
+        },
+        {
+          "$ref": "#/definitions/NetworkFabricPatchableProperties",
+          "description": "Common patchable properties for Network Fabric."
+        }
+      ],
+      "properties": {
+        "networkFabricSku": {
+          "type": "string",
+          "description": "Supported Network Fabric SKU.Example: Compute / Aggregate racks. Once the user chooses a particular SKU, only supported racks can be added to the Network Fabric. The SKU determines whether it is a single / multi rack Network Fabric.",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "rackCount": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 2,
+          "maximum": 8,
+          "description": "Number of racks associated to Network Fabric.Possible values are from 2-8.",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "serverCountPerRack": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 1,
+          "maximum": 16,
+          "description": "Number of servers.Possible values are from 1-16.",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "ipv4Prefix": {
+          "type": "string",
+          "description": "IPv4Prefix for Management Network. Example: 10.1.0.0/19.",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "ipv6Prefix": {
+          "type": "string",
+          "description": "IPv6Prefix for Management Network. Example: 3FFE:FFFF:0:CD40::/59.",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "routerId": {
+          "type": "string",
+          "description": "Router Id of CE to be used for MP-BGP between PE and CE",
+          "readOnly": true
+        },
+        "fabricASN": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 1,
+          "maximum": 65535,
+          "description": "ASN of CE devices for CE/PE connectivity."
+        },
+        "networkFabricControllerId": {
+          "type": "string",
+          "description": "Azure resource ID for the NetworkFabricController the NetworkFabric belongs.",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "terminalServerConfiguration": {
+          "description": "Network and credentials configuration currently applied to terminal server.",
+          "$ref": "#/definitions/TerminalServerConfiguration"
+        },
+        "managementNetworkConfiguration": {
+          "description": "Configuration to be used to setup the management network.",
+          "$ref": "#/definitions/ManagementNetworkConfiguration"
+        },
+        "operationalState": {
+          "description": "Gets the operational state of the resource.",
+          "$ref": "#/definitions/NetworkFabricOperationalState"
+        },
+        "provisioningState": {
+          "description": "Gets the provisioning state of the resource.",
+          "$ref": "./common.json#/definitions/ProvisioningState"
+        }
+      },
+      "required": [
+        "networkFabricSku",
+        "rackCount",
+        "serverCountPerRack",
+        "networkFabricControllerId",
+        "fabricASN",
+        "terminalServerConfiguration",
+        "managementNetworkConfiguration"
+      ],
+      "description": "NetworkFabricProperties - define the resource properties."
+    },
+    "TerminalServerConnectivityState": {
+      "type": "string",
+      "description": "TerminalServerConnectivity state for the resource.",
+      "enum": [
+        "Ipv4Reachable",
+        "Ipv4Unreachable"
+      ],
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "TerminalServerConnectivityState"
+      }
+    },
+    "NetworkFabricOperationalState": {
+      "type": "string",
+      "description": "Operational state for the resource.",
+      "readOnly": true,
+      "enum": [
+        "Provisioning",
+        "Provisioned",
+        "ErrorProvisioning",
+        "Deprovisioning",
+        "Deprovisioned",
+        "ErrorDeprovisioning",
+        "DeferredControl"
+      ],
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "networkFabricOperationalState"
+      }
+    },
+    "NetworkFabric": {
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "description": "The NetworkFabric resource definition.",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Resource properties.",
+          "$ref": "#/definitions/NetworkFabricProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "NetworkFabricPatchParameters": {
+      "type": "object",
+      "description": "The NetworkFabric resource definition.",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Network Fabric Patch properties.",
+          "allOf": [
+            {
+              "$ref": "./common.json#/definitions/AnnotationResource"
+            },
+            {
+              "$ref": "#/definitions/TerminalServerPatchParameters"
+            },
+            {
+              "$ref": "#/definitions/NetworkFabricPatchableProperties"
+            }
+          ]
+        },
+        "tags": {
+          "description": "Azure resource tags that will replace the existing ones.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "NetworkFabricsListResult": {
+      "type": "object",
+      "description": "List of NetworkFabrics.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of NetworkFabric resources.",
+          "items": {
+            "$ref": "#/definitions/NetworkFabric"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Url to follow for getting next page of resources."
+        }
+      }
+    },
+    "NetworkToNetworkInterconnect": {
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "description": "The NetworkToNetworkInterconnect resource definition.",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Resource properties.",
+          "$ref": "#/definitions/NetworkToNetworkInterconnectProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "NetworkToNetworkInterconnectProperties": {
+      "type": "object",
+      "description": "Configuration used to setup CE-PE connectivity.",
+      "properties": {
+        "nniType": {
+          "type": "string",
+          "description": "Type of NNI used. Example: CE | NPB",
+          "default": "CE",
+          "enum": [
+            "CE",
+            "NPB"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "nniType"
+          }
+        },
+        "administrativeState": {
+          "description": "Gets the administrativeState of the resource. Example -Enabled/Disabled",
+          "$ref": "./common.json#/definitions/EnabledDisabledState"
+        },
+        "isManagementType": {
+          "description": "Configuration to use NNI for Infrastructure Management. Example: True/False.",
+          "$ref": "./common.json#/definitions/BooleanEnumProperty"
+        },
+        "useOptionB": {
+          "description": "Based on this parameter the layer2/layer3 is made as mandatory. Example: True/False",
+          "$ref": "./common.json#/definitions/BooleanEnumProperty"
+        },
+        "layer2Configuration": {
+          "description": "Common properties for Layer2Configuration.",
+          "$ref": "#/definitions/Layer2Configuration"
+        },
+        "layer3Configuration": {
+          "description": "Common properties for Layer3Configuration.",
+          "$ref": "#/definitions/Layer3Configuration"
+        },
+        "provisioningState": {
+          "description": "Gets the provisioning state of the resource.",
+          "$ref": "./common.json#/definitions/ProvisioningState"
+        }
+      },
+      "required": [
+        "isManagementType",
+        "useOptionB"
+      ]
+    },
+    "NetworkToNetworkInterconnectsList": {
+      "type": "object",
+      "description": "List of NetworkToNetworkInterconnects.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of NetworkToNetworkInterconnects resources.",
+          "items": {
+            "$ref": "#/definitions/NetworkToNetworkInterconnect"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Url to follow for getting next page of resources."
+        }
+      }
+    },
+    "OptionAProperties": {
+      "type": "object",
+      "description": "Peering optionA properties",
+      "properties": {
+        "mtu": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 1500,
+          "maximum": 9000,
+          "default": 1500,
+          "description": "MTU to use for option A peering."
+        },
+        "vlanId": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 501,
+          "maximum": 4095,
+          "description": "Vlan identifier. Example : 501"
+        },
+        "peerASN": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 1,
+          "maximum": 65535,
+          "description": "Peer ASN number.Example : 28"
+        },
+        "bfdConfiguration": {
+          "description": "BFD Configuration properties.",
+          "$ref": "#/definitions/FabricBfdConfiguration"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Layer3IpPrefixProperties"
+        }
+      ]
+    },
+    "OptionBProperties": {
+      "type": "object",
+      "description": "Option B configuration.",
+      "properties": {
+        "importRouteTargets": {
+          "type": "array",
+          "description": "Route Targets to be applied for incoming routes into CE.",
+          "items": {
+            "type": "string",
+            "description": "Import route target. Example: 65541:2001, 65542:2001."
+          }
+        },
+        "exportRouteTargets": {
+          "type": "array",
+          "description": "Route Targets to be applied for outgoing routes from CE.",
+          "items": {
+            "type": "string",
+            "description": "Export route target. Example: 65531, 65532."
+          }
+        }
+      },
+      "required": [
+        "importRouteTargets",
+        "exportRouteTargets"
+      ]
+    },
+    "Layer2Configuration": {
+      "type": "object",
+      "description": "layer2Configuration",
+      "properties": {
+        "portCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of ports connected between PE/CE. Maximum value depends on FabricSKU."
+        },
+        "mtu": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 1500,
+          "maximum": 9000,
+          "default": 1500,
+          "description": "MTU of the packets between PE & CE."
+        },
+        "interfaces": {
+          "type": "array",
+          "description": "List of network device interfaces resource IDs.",
+          "items": {
+            "type": "string",
+            "description": "Azure resource ID for the NetworkDevice/networkInterface."
+          },
+          "readOnly": true
+        }
+      },
+      "required": [
+        "mtu"
+      ]
+    },
+    "Layer3Configuration": {
+      "type": "object",
+      "description": "layer3Configuration",
+      "properties": {
+        "importRoutePolicyId": {
+          "type": "string",
+          "description": "importRoutePolicyId"
+        },
+        "exportRoutePolicyId": {
+          "type": "string",
+          "description": "exportRoutePolicyId"
+        },
+        "peerASN": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 1,
+          "maximum": 65535,
+          "description": "ASN of PE devices for CE/PE connectivity.Example : 28"
+        },
+        "vlanId": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 501,
+          "maximum": 4095,
+          "description": "VLAN for CE/PE Layer 3 connectivity.Example : 501"
+        },
+        "fabricASN": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 1,
+          "maximum": 65535,
+          "readOnly": true,
+          "description": "ASN of CE devices for CE/PE connectivity."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Layer3IpPrefixProperties"
+        }
+      ]
+    },
+    "Layer3IpPrefixProperties": {
+      "type": "object",
+      "description": "Layer 3 primary and secondary ip address prefixes.",
+      "properties": {
+        "primaryIpv4Prefix": {
+          "type": "string",
+          "description": "IPv4 Address Prefix of CE-PE interconnect links. Example: 172.31.0.0/31. The values can be specified at the time of creation or can be updated afterwards. Any update to the values post-provisioning may disrupt traffic. The 1st and 3rd IPs are to be configured on CE1 and CE2 for Option B interfaces. The 2nd and 4th IPs are to be configured on PE1 and PE2 for Option B interfaces."
+        },
+        "primaryIpv6Prefix": {
+          "type": "string",
+          "description": "IPv6 Address Prefix of CE-PE interconnect links. Example: 3FFE:FFFF:0:CD30::a0/126. The values can be specified at the time of creation or can be updated afterwards. Any update to the values post-provisioning may disrupt traffic. The 1st and 3rd IPs are to be configured on CE1 and CE2 for Option B interfaces. The 2nd and 4th IPs are to be configured on PE1 and PE2 for Option B interfaces."
+        },
+        "secondaryIpv4Prefix": {
+          "type": "string",
+          "description": "Secondary IPv4 Address Prefix of CE-PE interconnect links. Example: 172.31.0.20/31. The values can be specified at the time of creation or can be updated afterwards. Any update to the values post-provisioning may disrupt traffic. The 1st and 3rd IPs are to be configured on CE1 and CE2 for Option B interfaces. The 2nd and 4th IPs are to be configured on PE1 and PE2 for Option B interfaces."
+        },
+        "secondaryIpv6Prefix": {
+          "type": "string",
+          "description": "Secondary IPv6 Address Prefix of CE-PE interconnect links. Example: 3FFE:FFFF:0:CD30::a4/126. The values can be specified at the time of creation or can be updated afterwards. Any update to the values post-provisioning may disrupt traffic. The 1st and 3rd IPs are to be configured on CE1 and CE2 for Option B interfaces. The 2nd and 4th IPs are to be configured on PE1 and PE2 for Option B interfaces."
+        }
+      }
+    },
+    "ManagementNetworkConfiguration": {
+      "type": "object",
+      "description": "Configuration to be used to setup the management network.",
+      "required": [
+        "infrastructureVpnConfiguration",
+        "workloadVpnConfiguration"
+      ],
+      "properties": {
+        "infrastructureVpnConfiguration": {
+          "description": "Configuration for infrastructure vpn.",
+          "$ref": "#/definitions/VpnConfigurationProperties"
+        },
+        "workloadVpnConfiguration": {
+          "description": "Configuration for workload vpn.",
+          "$ref": "#/definitions/VpnConfigurationProperties"
+        }
+      }
+    },
+    "VpnConfigurationProperties": {
+      "type": "object",
+      "description": "Configuration for infrastructure vpn.",
+      "properties": {
+        "administrativeState": {
+          "description": "Indicates configuration state. Example: Enabled | Disabled.",
+          "$ref": "./common.json#/definitions/EnabledDisabledState"
+        },
+        "networkToNetworkInterconnectId": {
+          "type": "string",
+          "description": "Gets the networkToNetworkInterconnectId of the resource.",
+          "readOnly": true
+        },
+        "peeringOption": {
+          "$ref": "./common.json#/definitions/PeeringOption"
+        },
+        "optionBProperties": {
+          "description": "option B properties",
+          "$ref": "#/definitions/OptionBProperties"
+        },
+        "optionAProperties": {
+          "description": "option A properties",
+          "$ref": "#/definitions/OptionAProperties"
+        }
+      },
+      "required": [
+        "peeringOption"
+      ]
+    },
+    "FabricBfdConfiguration": {
+      "type": "object",
+      "description": "BFD Configuration properties.",
+      "properties": {
+        "interval": {
+          "type": "integer",
+          "format": "int32",
+          "description": "interval in seconds. Example: 300.",
+          "readOnly": true
+        },
+        "multiplier": {
+          "type": "integer",
+          "format": "int32",
+          "description": "multiplier. Example: 3.",
+          "readOnly": true
+        }
+      }
+    },
+    "TerminalServerConfiguration": {
+      "type": "object",
+      "description": "Network and credentials configuration currently applied to terminal server.",
+      "required": [
+        "username",
+        "password",
+        "primaryIpv4Prefix",
+        "secondaryIpv4Prefix"
+      ],
+      "properties": {
+        "networkDeviceId": {
+          "type": "string",
+          "description": "ARM Resource ID used for the NetworkDevice.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Layer3IpPrefixProperties"
+        },
+        {
+          "$ref": "#/definitions/TerminalServerPatchableProperties"
+        }
+      ]
+    }
+  },
+  "parameters": {}
+}

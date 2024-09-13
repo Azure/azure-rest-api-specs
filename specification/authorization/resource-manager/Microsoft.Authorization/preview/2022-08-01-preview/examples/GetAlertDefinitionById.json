@@ -1,0 +1,27 @@
+{
+  "parameters": {
+    "scope": "subscriptions/afa2a084-766f-4003-8ae1-c4aeb893a99f",
+    "alertDefinitionId": "TooManyPermanentOwnersAssignedToResource",
+    "api-version": "2022-08-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "displayName": "Too many permanent owners assigned to a resource",
+          "scope": "subscriptions/afa2a084-766f-4003-8ae1-c4aeb893a99f",
+          "description": "The number of users set to never expire is too high. To enhance the security of your resources, we recommend requiring activation for role use. Take a moment to review the list of users, and suggested changes here.",
+          "severityLevel": "Medium",
+          "securityImpact": "Providing users permanent access in a role may leave resources vulnerable to accidental or malicious activity.",
+          "mitigationSteps": "To mitigate this issue, require the user to activate the role before use.",
+          "howToPrevent": "Enable “Activation Required” in the role settings menu. This will ensure newly added users must activate their role.",
+          "isRemediatable": true,
+          "isConfigurable": true
+        },
+        "name": "TooManyPermanentOwnersAssignedToResource",
+        "id": "/subscriptions/afa2a084-766f-4003-8ae1-c4aeb893a99f/providers/Microsoft.Authorization/roleManagementAlertDefinitions/TooManyPermanentOwnersAssignedToResource",
+        "type": "Microsoft.Authorization/roleManagementAlertDefinitions"
+      }
+    }
+  }
+}

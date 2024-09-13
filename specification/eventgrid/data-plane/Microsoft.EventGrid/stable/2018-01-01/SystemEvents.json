@@ -1,0 +1,255 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2018-01-01",
+    "title": "EventGrid SystemEvents",
+    "description": "Azure EventGrid System Events"
+  },
+  "paths": {},
+  "definitions": {
+    "SubscriptionValidationEventData": {
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.EventGrid.SubscriptionValidationEvent event.",
+      "type": "object",
+      "properties": {
+        "validationCode": {
+          "description": "The validation code sent by Azure Event Grid to validate an event subscription. To complete the validation handshake, the subscriber must either respond with this validation code as part of the validation response, or perform a GET request on the validationUrl (available starting version 2018-05-01-preview).",
+          "type": "string",
+          "readOnly": true
+        },
+        "validationUrl": {
+          "description": "The validation URL sent by Azure Event Grid (available starting version 2018-05-01-preview). To complete the validation handshake, the subscriber must either respond with the validationCode as part of the validation response, or perform a GET request on the validationUrl (available starting version 2018-05-01-preview).",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "SubscriptionValidationResponse": {
+      "description": "To complete an event subscription validation handshake, a subscriber can use either the validationCode or the validationUrl received in a SubscriptionValidationEvent. When the validationCode is used, the SubscriptionValidationResponse can be used to build the response.",
+      "type": "object",
+      "properties": {
+        "validationResponse": {
+          "description": "The validation response sent by the subscriber to Azure Event Grid to complete the validation of an event subscription.",
+          "type": "string"
+        }
+      }
+    },
+    "SubscriptionDeletedEventData": {
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.EventGrid.SubscriptionDeletedEvent event.",
+      "type": "object",
+      "properties": {
+        "eventSubscriptionId": {
+          "description": "The Azure resource ID of the deleted event subscription.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "EventGridMQTTClientCreatedOrUpdatedEventData": {
+      "type": "object",
+      "description": "Event data for Microsoft.EventGrid.MQTTClientCreatedOrUpdated event.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/EventGridMQTTClientEventData"
+        }
+      ],
+      "properties": {
+        "state": {
+          "type": "string",
+          "description": "Configured state of the client. The value could be Enabled or Disabled",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "EventGridMqttClientState",
+            "modelAsString": true
+          }
+        },
+        "createdOn": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time the client resource is created based on the provider's UTC time."
+        },
+        "updatedOn": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time the client resource is last updated based on the provider's UTC time. If the client resource was never updated, this value is identical to the value of the 'createdOn' property."
+        },
+        "attributes": {
+          "type": "object",
+          "description": "The key-value attributes that are assigned to the client resource.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "x-ms-examples": {
+        "EventGridMQTTClientCreatedOrUpdatedCloudEventsSchema": {
+          "$ref": "./examples/cloud-events-schema/client_created_or_updated.json"
+        },
+        "EventGridMQTTClientCreatedOrUpdatedEventGridSchema": {
+          "$ref": "./examples/event-grid-schema/client_created_or_updated.json"
+        }
+      }
+    },
+    "EventGridMQTTClientDeletedEventData": {
+      "type": "object",
+      "description": "Event data for Microsoft.EventGrid.MQTTClientDeleted event.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/EventGridMQTTClientEventData"
+        }
+      ],
+      "properties": {},
+      "x-ms-examples": {
+        "EventGridMQTTClientDeletedCloudEventsSchema": {
+          "$ref": "./examples/cloud-events-schema/client_deleted.json"
+        },
+        "EventGridMQTTClientDeletedEventGridSchema": {
+          "$ref": "./examples/event-grid-schema/client_deleted.json"
+        }
+      }
+    },
+    "EventGridMQTTClientSessionConnectedEventData": {
+      "type": "object",
+      "description": "Event data for Microsoft.EventGrid.MQTTClientSessionConnected event.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/EventGridMQTTClientEventData"
+        }
+      ],
+      "properties": {
+        "clientSessionName": {
+          "type": "string",
+          "description": "Unique identifier for the MQTT client's session. This case-sensitive string can be up to 128 characters long, and supports UTF-8 characters."
+        },
+        "sequenceNumber": {
+          "type": "number",
+          "format": "int64",
+          "description": "A number that helps indicate order of MQTT client session connected or disconnected events. Latest event will have a sequence number that is higher than the previous event."
+        }
+      },
+      "x-ms-examples": {
+        "EventGridMQTTClientSessionConnectedCloudEventsSchema": {
+          "$ref": "./examples/cloud-events-schema/clientsession_connected.json"
+        },
+        "EventGridMQTTClientSessionConnectedEventGridSchema": {
+          "$ref": "./examples/event-grid-schema/clientsession_connected.json"
+        }
+      }
+    },
+    "EventGridMQTTClientSessionDisconnectedEventData": {
+      "type": "object",
+      "description": "Event data for Microsoft.EventGrid.MQTTClientSessionDisconnected event.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/EventGridMQTTClientEventData"
+        }
+      ],
+      "properties": {
+        "clientSessionName": {
+          "type": "string",
+          "description": "Unique identifier for the MQTT client's session. This case-sensitive string can be up to 128 characters long, and supports UTF-8 characters."
+        },
+        "sequenceNumber": {
+          "type": "integer",
+          "format": "int64",
+          "description": "A number that helps indicate order of MQTT client session connected or disconnected events. Latest event will have a sequence number that is higher than the previous event."
+        },
+        "disconnectionReason": {
+          "type": "string",
+          "description": "Reason for the disconnection of the MQTT client's session. The value could be one of the values in the disconnection reasons table.",
+          "enum": [
+            "ClientAuthenticationError",
+            "ClientAuthorizationError",
+            "ClientError",
+            "ClientInitiatedDisconnect",
+            "ConnectionLost",
+            "IpForbidden",
+            "QuotaExceeded",
+            "ServerError",
+            "ServerInitiatedDisconnect",
+            "SessionOverflow",
+            "SessionTakenOver"
+          ],
+          "x-ms-enum": {
+            "name": "EventGridMqttClientDisconnectionReason",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "ClientAuthenticationError",
+                "description": "The client got disconnected for any authentication reasons (for example, certificate expired, client got disabled, or client configuration changed)."
+              },
+              {
+                "value": "ClientAuthorizationError",
+                "description": "The client got disconnected for any authorization reasons (for example, because of a change in the configuration of topic spaces, permission bindings, or client groups)."
+              },
+              {
+                "value": "ClientError",
+                "description": "The client sent a bad request or used one of the unsupported features that resulted in a connection termination by the service."
+              },
+              {
+                "value": "ClientInitiatedDisconnect",
+                "description": "The client initiates a graceful disconnect through a DISCONNECT packet for MQTT or a close frame for MQTT over WebSocket."
+              },
+              {
+                "value": "ConnectionLost",
+                "description": "The client-server connection is lost. (EXCHANGE ONLINE PROTECTION)."
+              },
+              {
+                "value": "IpForbidden",
+                "description": "The client's IP address is blocked by IP filter or Private links configuration."
+              },
+              {
+                "value": "QuotaExceeded",
+                "description": "The client exceeded one or more of the throttling limits that resulted in a connection termination by the service."
+              },
+              {
+                "value": "ServerError",
+                "description": "The connection got terminated due to an unexpected server error."
+              },
+              {
+                "value": "ServerInitiatedDisconnect",
+                "description": "The server initiates a graceful disconnect for any operational reason."
+              },
+              {
+                "value": "SessionOverflow",
+                "description": "The client's queue for unacknowledged QoS1 messages reached its limit, which resulted in a connection termination by the server."
+              },
+              {
+                "value": "SessionTakenOver",
+                "description": "The client reconnected with the same authentication name, which resulted in the termination of the previous connection."
+              }
+            ]
+          }
+        }
+      },
+      "x-ms-examples": {
+        "EventGridMQTTClientSessionDisconnectedCloudEventsSchema": {
+          "$ref": "./examples/cloud-events-schema/clientsession_disconnected.json"
+        },
+        "EventGridMQTTClientSessionDisconnectedEventGridSchema": {
+          "$ref": "./examples/event-grid-schema/clientsession_disconnected.json"
+        }
+      }
+    },
+    "EventGridMQTTClientEventData": {
+      "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for MQTT Client state changes.",
+      "properties": {
+        "clientAuthenticationName": {
+          "type": "string",
+          "description": "Unique identifier for the MQTT client that the client presents to the service for authentication. This case-sensitive string can be up to 128 characters long, and supports UTF-8 characters."
+        },
+        "clientName": {
+          "type": "string",
+          "description": "Name of the client resource in the Event Grid namespace."
+        },
+        "namespaceName": {
+          "type": "string",
+          "description": "Name of the Event Grid namespace where the MQTT client was created or updated."
+        }
+      }
+    }
+  }
+}

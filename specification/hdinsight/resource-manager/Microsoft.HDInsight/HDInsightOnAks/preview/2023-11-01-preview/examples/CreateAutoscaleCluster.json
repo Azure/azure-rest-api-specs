@@ -1,0 +1,354 @@
+{
+  "parameters": {
+    "subscriptionId": "10e32bab-26da-4cc4-a441-52b318f824e6",
+    "resourceGroupName": "hiloResourcegroup",
+    "api-version": "2023-11-01-preview",
+    "clusterPoolName": "clusterpool1",
+    "clusterName": "cluster1",
+    "HDInsightCluster": {
+      "location": "West US 2",
+      "properties": {
+        "clusterType": "Trino",
+        "computeProfile": {
+          "nodes": [
+            {
+              "type": "Head",
+              "vmSize": "Standard_E8as_v5",
+              "count": 2
+            },
+            {
+              "type": "Worker",
+              "vmSize": "Standard_E8as_v5",
+              "count": 3
+            }
+          ]
+        },
+        "clusterProfile": {
+          "clusterVersion": "1.0.6",
+          "ossVersion": "0.410.0",
+          "identityProfile": {
+            "msiResourceId": "/subscriptions/subid/resourceGroups/hiloResourcegroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/test-msi",
+            "msiClientId": "de91f1d8-767f-460a-ac11-3cf103f74b34",
+            "msiObjectId": "40491351-c240-4042-91e0-f644a1d2b441"
+          },
+          "authorizationProfile": {
+            "userIds": [
+              "testuser1",
+              "testuser2"
+            ]
+          },
+          "trinoProfile": {},
+          "sshProfile": {
+            "count": 2
+          },
+          "autoscaleProfile": {
+            "enabled": true,
+            "autoscaleType": "ScheduleBased",
+            "gracefulDecommissionTimeout": 3600,
+            "scheduleBasedConfig": {
+              "defaultCount": 10,
+              "timeZone": "Cen. Australia Standard Time",
+              "schedules": [
+                {
+                  "days": [
+                    "Monday"
+                  ],
+                  "startTime": "00:00",
+                  "endTime": "12:00",
+                  "count": 20
+                },
+                {
+                  "days": [
+                    "Sunday"
+                  ],
+                  "startTime": "00:00",
+                  "endTime": "12:00",
+                  "count": 25
+                }
+              ]
+            },
+            "loadBasedConfig": {
+              "minNodes": 10,
+              "maxNodes": 20,
+              "pollInterval": 60,
+              "cooldownPeriod": 300,
+              "scalingRules": [
+                {
+                  "actionType": "scaleup",
+                  "evaluationCount": 3,
+                  "scalingMetric": "cpu",
+                  "comparisonRule": {
+                    "operator": "greaterThan",
+                    "threshold": 90
+                  }
+                },
+                {
+                  "actionType": "scaledown",
+                  "evaluationCount": 3,
+                  "scalingMetric": "cpu",
+                  "comparisonRule": {
+                    "operator": "lessThan",
+                    "threshold": 20
+                  }
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/subid/resourceGroups/hiloResourcegroup/providers/Microsoft.HDInsight/clusterPools/clusterpool1/clusters/cluster1",
+        "name": "cluster1",
+        "type": "Microsoft.HDInsight/clusterPools/clusters",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "clusterType": "Trino",
+          "deploymentId": "45cd32aead6e4a91b079a0cdbfac8c36",
+          "computeProfile": {
+            "nodes": [
+              {
+                "type": "Head",
+                "vmSize": "Standard_E8as_v5",
+                "count": 2
+              },
+              {
+                "type": "Worker",
+                "vmSize": "Standard_E8as_v5",
+                "count": 3
+              }
+            ]
+          },
+          "clusterProfile": {
+            "clusterVersion": "1.0.6",
+            "ossVersion": "0.410.0",
+            "components": [
+              {
+                "name": "Trino",
+                "version": "410"
+              },
+              {
+                "name": "Hive metastore",
+                "version": "3.1.2"
+              }
+            ],
+            "identityProfile": {
+              "msiResourceId": "/subscriptions/subid/resourceGroups/hiloResourcegroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/test-msi",
+              "msiClientId": "de91f1d8-767f-460a-ac11-3cf103f74b34",
+              "msiObjectId": "40491351-c240-4042-91e0-f644a1d2b441"
+            },
+            "authorizationProfile": {
+              "userIds": [
+                "testuser1",
+                "testuser2"
+              ]
+            },
+            "connectivityProfile": {
+              "web": {
+                "fqdn": "cluster1.clusterpool1.westus2.projecthilo.net"
+              },
+              "ssh": [
+                {
+                  "endpoint": "cluster1.clusterpool1.westus2.projecthilo.net/ssh/host/sshnode-0"
+                },
+                {
+                  "endpoint": "cluster1.clusterpool1.westus2.projecthilo.net/ssh/host/sshnode-1"
+                }
+              ]
+            },
+            "trinoProfile": {},
+            "sshProfile": {
+              "count": 2,
+              "podPrefix": "sshnode"
+            },
+            "autoscaleProfile": {
+              "enabled": true,
+              "autoscaleType": "ScheduleBased",
+              "gracefulDecommissionTimeout": 3600,
+              "scheduleBasedConfig": {
+                "defaultCount": 10,
+                "timeZone": "Cen. Australia Standard Time",
+                "schedules": [
+                  {
+                    "days": [
+                      "Monday"
+                    ],
+                    "startTime": "00:00",
+                    "endTime": "12:00",
+                    "count": 20
+                  },
+                  {
+                    "days": [
+                      "Sunday"
+                    ],
+                    "startTime": "00:00",
+                    "endTime": "12:00",
+                    "count": 25
+                  }
+                ]
+              },
+              "loadBasedConfig": {
+                "minNodes": 10,
+                "maxNodes": 20,
+                "pollInterval": 60,
+                "cooldownPeriod": 300,
+                "scalingRules": [
+                  {
+                    "actionType": "scaleup",
+                    "evaluationCount": 3,
+                    "scalingMetric": "cpu",
+                    "comparisonRule": {
+                      "operator": "greaterThan",
+                      "threshold": 90
+                    }
+                  },
+                  {
+                    "actionType": "scaledown",
+                    "evaluationCount": 3,
+                    "scalingMetric": "cpu",
+                    "comparisonRule": {
+                      "operator": "lessThan",
+                      "threshold": 20
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "systemData": {
+          "createdBy": "string",
+          "createdByType": "User",
+          "createdAt": "2020-02-03T01:01:01.1075056Z",
+          "lastModifiedBy": "string",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2020-02-04T02:03:01.1974346Z"
+        },
+        "location": "West US 2"
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/subid/resourceGroups/hiloResourcegroup/providers/Microsoft.HDInsight/clusterPools/clusterpool1/clusters/cluster1",
+        "name": "cluster1",
+        "type": "Microsoft.HDInsight/clusterPools/clusters",
+        "properties": {
+          "provisioningState": "Accepted",
+          "clusterType": "Trino",
+          "computeProfile": {
+            "nodes": [
+              {
+                "type": "Head",
+                "vmSize": "Standard_E8as_v5",
+                "count": 2
+              },
+              {
+                "type": "Worker",
+                "vmSize": "Standard_E8as_v5",
+                "count": 3
+              }
+            ]
+          },
+          "clusterProfile": {
+            "clusterVersion": "1.0.6",
+            "ossVersion": "0.410.0",
+            "identityProfile": {
+              "msiResourceId": "/subscriptions/subid/resourceGroups/hiloResourcegroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/test-msi",
+              "msiClientId": "de91f1d8-767f-460a-ac11-3cf103f74b34",
+              "msiObjectId": "40491351-c240-4042-91e0-f644a1d2b441"
+            },
+            "authorizationProfile": {
+              "userIds": [
+                "testuser1",
+                "testuser2"
+              ]
+            },
+            "connectivityProfile": {
+              "web": {
+                "fqdn": "cluster1.clusterpool1.westus2.projecthilo.net"
+              },
+              "ssh": [
+                {
+                  "endpoint": "cluster1.clusterpool1.westus2.projecthilo.net/ssh/host/sshnode-0"
+                },
+                {
+                  "endpoint": "cluster1.clusterpool1.westus2.projecthilo.net/ssh/host/sshnode-1"
+                }
+              ]
+            },
+            "trinoProfile": {},
+            "sshProfile": {
+              "count": 2,
+              "podPrefix": "sshnode"
+            },
+            "autoscaleProfile": {
+              "enabled": true,
+              "autoscaleType": "ScheduleBased",
+              "gracefulDecommissionTimeout": 3600,
+              "scheduleBasedConfig": {
+                "defaultCount": 10,
+                "timeZone": "Cen. Australia Standard Time",
+                "schedules": [
+                  {
+                    "days": [
+                      "Monday"
+                    ],
+                    "startTime": "00:00",
+                    "endTime": "12:00",
+                    "count": 20
+                  },
+                  {
+                    "days": [
+                      "Sunday"
+                    ],
+                    "startTime": "00:00",
+                    "endTime": "12:00",
+                    "count": 25
+                  }
+                ]
+              },
+              "loadBasedConfig": {
+                "minNodes": 10,
+                "maxNodes": 20,
+                "pollInterval": 60,
+                "cooldownPeriod": 300,
+                "scalingRules": [
+                  {
+                    "actionType": "scaleup",
+                    "evaluationCount": 3,
+                    "scalingMetric": "cpu",
+                    "comparisonRule": {
+                      "operator": "greaterThan",
+                      "threshold": 90
+                    }
+                  },
+                  {
+                    "actionType": "scaledown",
+                    "evaluationCount": 3,
+                    "scalingMetric": "cpu",
+                    "comparisonRule": {
+                      "operator": "lessThan",
+                      "threshold": 20
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "systemData": {
+          "createdBy": "string",
+          "createdByType": "User",
+          "createdAt": "2020-02-03T01:01:01.1075056Z",
+          "lastModifiedBy": "string",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2020-02-04T02:03:01.1974346Z"
+        },
+        "location": "West US 2"
+      }
+    }
+  }
+}

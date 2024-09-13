@@ -5,6 +5,7 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 
 
 ``` yaml $(python)
+title: NotificationHubsManagementClient
 azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
 package-name: azure-mgmt-notificationhubs

@@ -12,7 +12,7 @@
         "autoUpgradeMinorVersion": true,
         "releaseTrain": "Preview",
         "configurationSettings": {
-          "omsagent.secret.wsid": "a38cef99-5a89-52ed-b6db-22095c23664b",
+          "omsagent.secret.wsid": "fakeTokenPlaceholder",
           "omsagent.env.clusterName": "clusterName1"
         },
         "configurationProtectedSettings": {
@@ -22,6 +22,28 @@
     }
   },
   "responses": {
+    "200": {
+      "description": "Extension properties from not updating any property values.",
+      "body": {
+        "properties": {
+          "extensionType": "azuremonitor-containers",
+          "autoUpgradeMinorVersion": true,
+          "releaseTrain": "Preview",
+          "version": "0.1.4",
+          "scope": {
+            "cluster": {
+              "releaseNamespace": "kube-system"
+            }
+          },
+          "configurationSettings": {
+            "omsagent.secret.wsid": "fakeTokenPlaceholder",
+            "omsagent.env.clusterName": "clusterName1"
+          },
+          "provisioningState": "Succeeded",
+          "statuses": []
+        }
+      }
+    },
     "202": {
       "headers": {
         "Operation-Location": "/subscriptions/subId1/resourceGroups/rg1/providers/Microsoft.Kubernetes/connectedClusters/clusterName1/providers/Microsoft.KubernetesConfiguration/extensions/ClusterMonitor/operations/operationId",
@@ -41,7 +63,7 @@
             }
           },
           "configurationSettings": {
-            "omsagent.secret.wsid": "a38cef99-5a89-52ed-b6db-22095c23664b",
+            "omsagent.secret.wsid": "fakeTokenPlaceholder",
             "omsagent.env.clusterName": "clusterName1"
           },
           "provisioningState": "Updating",

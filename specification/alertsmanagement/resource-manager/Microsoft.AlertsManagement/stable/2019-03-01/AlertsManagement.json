@@ -49,6 +49,11 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "ListOperations": {
+            "$ref": "./examples/Operations_List.json"
+          }
         }
       }
     },
@@ -234,6 +239,9 @@
           },
           {
             "$ref": "#/parameters/newState"
+          },
+          {
+            "$ref": "#/parameters/comment"
           }
         ],
         "responses": {
@@ -269,7 +277,7 @@
             "$ref": "#/parameters/alertId"
           },
           {
-            "$ref": "#/parameters/api-version"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -387,7 +395,7 @@
       "in": "query",
       "required": true,
       "enum": [
-        "2018-05-05"
+        "2019-03-01"
       ],
       "x-ms-enum": {
         "name": "api-version",
@@ -505,6 +513,16 @@
       "x-ms-enum": {
         "name": "AlertState",
         "modelAsString": true
+      }
+    },
+    "comment": {
+      "description": "reason of change alert state",
+      "name": "comment",
+      "in": "body",
+      "x-ms-parameter-location": "method",
+      "required": false,
+      "schema": {
+        "$ref": "#/definitions/comments"
       }
     },
     "alertState": {
@@ -869,6 +887,15 @@
         },
         "egressConfig": {
           "$ref": "#/definitions/egressConfig"
+        }
+      }
+    },
+    "comments": {
+      "type": "object",
+      "description": "Change alert state reason",
+      "properties": {
+        "comments": {
+          "type": "string"
         }
       }
     },

@@ -1,0 +1,57 @@
+{
+  "parameters": {
+    "api-version": "2024-04-01",
+    "billingAccountName": "00000000-0000-0000-0000-000000000000:00000000-0000-0000-0000-000000000000_2019-05-31",
+    "billingSubscriptionName": "11111111-1111-1111-1111-111111111111",
+    "parameters": {
+      "targetProductTypeId": "XYZ56789",
+      "targetSkuId": "0001",
+      "quantity": 1,
+      "termDuration": "P1M",
+      "billingFrequency": "P1M"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/providers/Microsoft.Billing/billingAccounts/00000000-0000-0000-0000-000000000000:00000000-0000-0000-0000-000000000000_2019-05-31/billingSubscriptions/11111111-1111-1111-1111-111111111111",
+        "name": "11111111-1111-1111-1111-111111111111",
+        "properties": {
+          "autoRenew": "On",
+          "billingProfileId": "/providers/Microsoft.Billing/billingAccounts/00000000-0000-0000-0000-000000000000:00000000-0000-0000-0000-000000000000_2019-05-31/billingProfiles/xxxx-xxxx-xxx-xxx",
+          "billingProfileDisplayName": "Billing Profile Display Name",
+          "billingProfileName": "xxxx-xxxx-xxx-xxx",
+          "displayName": "Billing Subscription Display Name",
+          "invoiceSectionId": "/providers/Microsoft.Billing/billingAccounts/00000000-0000-0000-0000-000000000000:00000000-0000-0000-0000-000000000000_2019-05-31/billingProfiles/xxxx-xxxx-xxx-xxx/invoiceSections/yyyy-yyyy-yyy-yyy",
+          "invoiceSectionDisplayName": "Invoice Section Display Name",
+          "invoiceSectionName": "yyyy-yyyy-yyy-yyy",
+          "productCategory": "SeatBased",
+          "productType": "Seat-Based Product Type",
+          "productTypeId": "XYZ56789",
+          "purchaseDate": "2023-01-05T22:39:34.2606750Z",
+          "quantity": 1,
+          "skuId": "0001",
+          "skuDescription": "SKU Description",
+          "systemOverrides": {
+            "cancellationAllowedEndDate": "2023-02-01T22:39:34.2606750Z"
+          },
+          "termDuration": "P1M",
+          "termStartDate": "2023-01-05T22:39:34.2606750Z",
+          "termEndDate": "2023-02-05T22:39:34.2606750Z",
+          "status": "Active"
+        },
+        "type": "Microsoft.Billing/billingAccounts/billingSubscriptions",
+        "systemData": {
+          "createdAt": "2023-01-05T22:39:34.2606750Z",
+          "lastModifiedAt": "2023-01-25T22:39:34.2606750Z"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "location": "https://management.azure.com/providers/Microsoft.Billing/billingAccounts/00000000-0000-0000-0000-000000000000:00000000-0000-0000-0000-000000000000_2019-05-31/operationResults/splitBillingSubscription_11111111-1111-1111-1111-111111111111:22222222-2222-2222-2222-222222222222?api-version=2024-04-01",
+        "retry-after": "10"
+      }
+    }
+  }
+}

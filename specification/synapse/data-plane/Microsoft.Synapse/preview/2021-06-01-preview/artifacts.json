@@ -160,51 +160,6 @@
         "referenceName"
       ]
     },
-    "CloudError": {
-      "x-ms-external": true,
-      "description": "The object that defines the structure of an Azure Synapse error response.",
-      "type": "object",
-      "properties": {
-        "error": {
-          "x-ms-client-flatten": true,
-          "description": "Error data",
-          "$ref": "#/definitions/CloudErrorBody"
-        }
-      },
-      "required": [
-        "error"
-      ]
-    },
-    "CloudErrorBody": {
-      "x-ms-external": true,
-      "description": "The object that defines the structure of an Azure Synapse error.",
-      "type": "object",
-      "properties": {
-        "code": {
-          "description": "Error code.",
-          "type": "string"
-        },
-        "message": {
-          "description": "Error message.",
-          "type": "string"
-        },
-        "target": {
-          "description": "Property name/path in request associated with error.",
-          "type": "string"
-        },
-        "details": {
-          "description": "Array with additional error details.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/CloudError"
-          }
-        }
-      },
-      "required": [
-        "code",
-        "message"
-      ]
-    },
     "TriggerDependencyProvisioningStatus": {
       "description": "Defines the response of a provision trigger dependency operation.",
       "type": "object",
@@ -655,45 +610,6 @@
         "maxConcurrency"
       ]
     },
-    "RerunTriggerListResponse": {
-      "description": "A list of rerun triggers.",
-      "type": "object",
-      "required": [
-        "value"
-      ],
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "List of rerun triggers.",
-          "items": {
-            "$ref": "#/definitions/RerunTriggerResource"
-          }
-        },
-        "nextLink": {
-          "description": "The continuation token for getting the next page of results, if any remaining results exist, null otherwise.",
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
-    "RerunTriggerResource": {
-      "description": "RerunTrigger resource type.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/SubResource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "$ref": "./entityTypes/Trigger.json#/definitions/RerunTumblingWindowTrigger",
-          "description": "Properties of the rerun trigger."
-        }
-      },
-      "required": [
-        "properties"
-      ]
-    },
     "GetSsisObjectMetadataRequest": {
       "type": "object",
       "description": "The request payload of get SSIS object metadata.",
@@ -917,12 +833,13 @@
     },
     "Endpoint": {
       "name": "endpoint",
-      "description": "The workspace development endpoint, for example https://myworkspace.dev.azuresynapse.net.",
+      "description": "The workspace development endpoint, for example `https://myworkspace.dev.azuresynapse.net`.",
       "required": true,
       "type": "string",
       "in": "path",
       "x-ms-skip-url-encoding": true,
-      "x-ms-parameter-location": "client"
+      "x-ms-parameter-location": "client",
+      "format": "uri"
     }
   }
 }

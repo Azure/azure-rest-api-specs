@@ -17,12 +17,22 @@ batch:
   - package-managedapplications: true
   - package-templatespecs: true
   - package-subscriptions: true
+  - package-changes: true
+  - package-deploymentstacks: true
 ```
 
 ```yaml $(typescript) && $(package-features) && !$(profile-content)
 typescript:
   package-name: "@azure/arm-features"
   output-folder: "$(typescript-sdks-folder)/sdk/features/arm-features"
+```
+
+```yaml $(typescript) && $(package-deploymentstacks) && !$(profile-content)
+modelerfour:
+  flatten-models: false
+typescript:
+  package-name: "@azure/arm-resourcesdeploymentstacks"
+  output-folder: "$(typescript-sdks-folder)/sdk/resourcesdeploymentstacks/arm-resourcesdeploymentstacks"
 ```
 
 ```yaml $(typescript) && $(package-locks) && !$(profile-content)
@@ -35,6 +45,9 @@ typescript:
 typescript:
   package-name: "@azure/arm-policy"
   output-folder: "$(typescript-sdks-folder)/sdk/policy/arm-policy"
+
+modelerfour: 
+  treat-type-object-as-anything: true 
 ```
 
 ```yaml $(typescript) && $(package-resources) && !$(profile-content)
@@ -65,6 +78,12 @@ typescript:
 typescript:
   package-name: "@azure/arm-resources-subscriptions"
   output-folder: "$(typescript-sdks-folder)/sdk/resources-subscriptions/arm-resources-subscriptions"
+```
+
+```yaml $(typescript) && $(package-changes) && !$(profile-content)
+typescript:
+  package-name: "@azure/arm-changes"
+  output-folder: "$(typescript-sdks-folder)/sdk/changes/arm-changes"
 ```
 
 ```yaml $(tag)=='package-resources-2018-05' && $(profile-content)=='profile-hybrid-2019-03-01'

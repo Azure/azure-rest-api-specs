@@ -81,7 +81,7 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": "nextLink"
+          "nextLinkName": "@nextLink"
         },
         "x-ms-examples": {
           "ListManagementGroups": {
@@ -1073,7 +1073,7 @@
             "$ref": "#/definitions/ManagementGroupInfo"
           }
         },
-        "nextLink": {
+        "@nextLink": {
           "description": "The URL to use for getting the next set of results.",
           "type": "string",
           "readOnly": true
@@ -1356,6 +1356,18 @@
         "Microsoft.Management/managementGroups",
         "/subscriptions"
       ],
+      "x-ms-enum": {
+        "name": "ManagementGroupChildType",
+        "modelAsString": false,
+        "values": [
+          {
+            "value": "Microsoft.Management/managementGroups"
+          },
+          {
+            "value": "/subscriptions"
+          }
+        ]
+      },
       "description": "The type of child resource."
     },
     "OperationResults": {
@@ -1467,7 +1479,7 @@
             "$ref": "#/definitions/HierarchySettingsInfo"
           }
         },
-        "nextLink": {
+        "@nextLink": {
           "description": "The URL to use for getting the next set of results.",
           "type": "string",
           "readOnly": true
@@ -1926,6 +1938,24 @@
         "edit",
         "delete"
       ],
+      "x-ms-enum": {
+        "name": "Permissions",
+        "modelAsString": false,
+        "values": [
+          {
+            "value": "noaccess"
+          },
+          {
+            "value": "view"
+          },
+          {
+            "value": "edit"
+          },
+          {
+            "value": "delete"
+          }
+        ]
+      },
       "description": "The users specific permissions to this item."
     },
     "CheckNameAvailabilityRequest": {
