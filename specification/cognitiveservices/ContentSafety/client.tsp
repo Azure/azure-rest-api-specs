@@ -12,7 +12,7 @@ namespace Customizations;
   service: ContentSafety,
 })
 interface ContentSafetyClient {
-  analyzeImageForBreaking is ContentSafety.ImageOperations.analyzeImage;
+  analyzeImage is ContentSafety.ImageOperations.analyzeImage;
   analyzeText is ContentSafety.TextOperations.analyzeText;
   detectTextProtectedMaterial is ContentSafety.TextOperations.detectTextProtectedMaterial;
   shieldPrompt is ContentSafety.TextOperations.shieldPrompt;
