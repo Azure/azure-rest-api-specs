@@ -903,6 +903,36 @@
         "location"
       ]
     },
+    "IcebergDataset": {
+      "x-ms-discriminator-value": "Iceberg",
+      "description": "Iceberg dataset.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Dataset"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Iceberg dataset properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/IcebergDatasetTypeProperties"
+        }
+      }
+    },
+    "IcebergDatasetTypeProperties": {
+      "description": "Iceberg dataset properties.",
+      "type": "object",
+      "properties": {
+        "location": {
+          "$ref": "#/definitions/DatasetLocation",
+          "description": "The location of the iceberg storage. Setting a file name is not allowed for iceberg format."
+        }
+      },
+      "required": [
+        "location"
+      ]
+    },
     "AzureBlobDataset": {
       "x-ms-discriminator-value": "AzureBlob",
       "description": "The Azure Blob storage.",

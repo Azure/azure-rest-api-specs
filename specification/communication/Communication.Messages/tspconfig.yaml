@@ -27,7 +27,6 @@ options:
     output-file: "{azure-resource-provider-folder}/Messages/{version-status}/{version}/communicationservicesmessages.json"
     emitter-output-dir: "{project-root}/.."
     omit-unreachable-types: true
-    examples-directory: "{project-root}/examples"
   "@azure-tools/typespec-csharp":
     clear-output-folder: true
     model-namespace: false
@@ -43,6 +42,9 @@ options:
     package-name: "{package-dir}"
     package-version: 1.0.0
     flavor: azure
+    generate-test: true
+    generate-sample: true
+    examples-dir: "{project-root}/examples"
   "@azure-tools/typespec-java":
     package-dir: "azure-communication-messages"
     namespace: com.azure.communication.messages
