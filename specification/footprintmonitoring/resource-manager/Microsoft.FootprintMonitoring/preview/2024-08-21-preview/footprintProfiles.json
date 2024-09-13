@@ -83,8 +83,8 @@
           }
         },
         "x-ms-examples": {
-          "List all operations (maximum).": {
-            "$ref": "./examples/Operations_List_MaximumSet_Gen.json"
+          "Operations_List_Min": {
+            "$ref": "./examples/Operations_List_MinimumSet_Gen.json"
           }
         },
         "x-ms-pageable": {
@@ -122,7 +122,7 @@
           }
         },
         "x-ms-examples": {
-          "List all Footprint profiles under a subscription (max).": {
+          "Profiles_ListBySubscription": {
             "$ref": "./examples/Profiles_ListBySubscription_MaximumSet_Gen.json"
           }
         },
@@ -133,7 +133,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.FootprintMonitoring/profiles": {
       "get": {
-        "operationId": "Profiles_ListByResourceGroup",
+        "operationId": "Profiles_ResourceGroup",
         "tags": [
           "Profiles"
         ],
@@ -161,11 +161,6 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "List all Footprint profiles under a resource group (max).": {
-            "$ref": "./examples/Profiles_ListByResourceGroup_MaximumSet_Gen.json"
           }
         },
         "x-ms-pageable": {
@@ -216,7 +211,7 @@
           }
         },
         "x-ms-examples": {
-          "Get a Footprint profile (max).": {
+          "Profiles_Get": {
             "$ref": "./examples/Profiles_Get_MaximumSet_Gen.json"
           }
         }
@@ -278,7 +273,7 @@
           }
         },
         "x-ms-examples": {
-          "Create or update a Footprint profile (max).": {
+          "Profiles_CreateOrUpdate": {
             "$ref": "./examples/Profiles_CreateOrUpdate_MaximumSet_Gen.json"
           }
         }
@@ -334,7 +329,7 @@
           }
         },
         "x-ms-examples": {
-          "Update a Footprint profile (max).": {
+          "Profiles_Update": {
             "$ref": "./examples/Profiles_Update_MaximumSet_Gen.json"
           }
         }
@@ -381,8 +376,11 @@
           }
         },
         "x-ms-examples": {
-          "Delete a Footprint profile (max).": {
+          "Profiles_Delete": {
             "$ref": "./examples/Profiles_Delete_MaximumSet_Gen.json"
+          },
+          "Profiles_Delete_Min": {
+            "$ref": "./examples/Profiles_Delete_MinimumSet_Gen.json"
           }
         }
       }
@@ -670,7 +668,7 @@
           }
         },
         "x-ms-examples": {
-          "List all Footprint measurement endpoints (max).": {
+          "MeasurementEndpoints_ListByProfile": {
             "$ref": "./examples/MeasurementEndpoints_ListByProfile_MaximumSet_Gen.json"
           }
         },
@@ -732,7 +730,7 @@
           }
         },
         "x-ms-examples": {
-          "Get a Footprint measurement endpoint (max).": {
+          "MeasurementEndpoints_Get": {
             "$ref": "./examples/MeasurementEndpoints_Get_MaximumSet_Gen.json"
           }
         }
@@ -804,7 +802,7 @@
           }
         },
         "x-ms-examples": {
-          "Create or update a Footprint measurement endpoint (max).": {
+          "MeasurementEndpoints_CreateOrUpdate": {
             "$ref": "./examples/MeasurementEndpoints_CreateOrUpdate_MaximumSet_Gen.json"
           }
         }
@@ -861,8 +859,8 @@
           }
         },
         "x-ms-examples": {
-          "Delete a Footprint measurement endpoint (max).": {
-            "$ref": "./examples/MeasurementEndpoints_Delete_MaximumSet_Gen.json"
+          "MeasurementEndpoints_Delete_Min": {
+            "$ref": "./examples/MeasurementEndpoints_Delete_MinimumSet_Gen.json"
           }
         }
       }
@@ -920,7 +918,7 @@
           }
         },
         "x-ms-examples": {
-          "List all Footprint measurement endpoint conditions (max).": {
+          "MeasurementEndpointConditions_ListByMeasurementEndpoint": {
             "$ref": "./examples/MeasurementEndpointConditions_ListByMeasurementEndpoint_MaximumSet_Gen.json"
           }
         },
@@ -992,7 +990,7 @@
           }
         },
         "x-ms-examples": {
-          "Get a Footprint measurement endpoint condition (max).": {
+          "MeasurementEndpointConditions_Get": {
             "$ref": "./examples/MeasurementEndpointConditions_Get_MaximumSet_Gen.json"
           }
         }
@@ -1074,7 +1072,7 @@
           }
         },
         "x-ms-examples": {
-          "Create or update a Footprint measurement endpoint condition (max).": {
+          "MeasurementEndpointConditions_CreateOrUpdate": {
             "$ref": "./examples/MeasurementEndpointConditions_CreateOrUpdate_MaximumSet_Gen.json"
           }
         }
@@ -1141,8 +1139,8 @@
           }
         },
         "x-ms-examples": {
-          "Delete a Footprint measurement endpoint condition (max).": {
-            "$ref": "./examples/MeasurementEndpointConditions_Delete_MaximumSet_Gen.json"
+          "MeasurementEndpointConditions_Delete_Min": {
+            "$ref": "./examples/MeasurementEndpointConditions_Delete_MinimumSet_Gen.json"
           }
         }
       }
@@ -1539,11 +1537,8 @@
       "description": "The model for patches on Footprint profile resources.",
       "properties": {
         "tags": {
-          "type": "object",
-          "description": "The tags for this resource.",
-          "additionalProperties": {
-            "type": "string"
-          }
+          "$ref": "#/definitions/Tags",
+          "description": "The tags for this resource."
         }
       }
     },
@@ -1679,11 +1674,8 @@
           "readOnly": true
         },
         "tags": {
-          "type": "object",
+          "$ref": "#/definitions/Tags",
           "description": "Tags for the resource.",
-          "additionalProperties": {
-            "type": "string"
-          },
           "x-ms-mutability": [
             "read",
             "update",
@@ -1698,8 +1690,7 @@
             "create"
           ]
         }
-      },
-      "x-ms-azure-resource": true
+      }
     },
     "ResourceProviderOperationDefinition": {
       "type": "object",
@@ -1747,6 +1738,24 @@
           "readOnly": true
         }
       }
+    },
+    "Tags": {
+      "type": "object",
+      "description": "The model for tags on Footprint profile resources.",
+      "properties": {
+        "key": {
+          "type": "string",
+          "description": "The key for this resource."
+        },
+        "value": {
+          "type": "string",
+          "description": "The value for this resource."
+        }
+      },
+      "required": [
+        "key",
+        "value"
+      ]
     },
     "Type": {
       "type": "string",
