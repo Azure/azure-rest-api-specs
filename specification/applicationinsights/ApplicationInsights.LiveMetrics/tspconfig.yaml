@@ -1,6 +1,6 @@
 parameters:
   "service-dir":
-    default: "sdk/applicationinsights.livemetrics"
+    default: "sdk/applicationinsights"
   "dependencies":
     "additionalDirectories": []
     default: ""
@@ -15,9 +15,8 @@ options:
     omit-unreachable-types: true
     output-file: "{azure-resource-provider-folder}/LiveMetrics/{version-status}/{version}/livemetrics.json"
   "@azure-tools/typespec-python":
-    package-dir: "livemetrics"
+    package-dir: "azure-applicationinsights-livemetrics"
     package-name: "{package-dir}"
-    package-mode: dataplane
     flavor: azure
     generate-test: true
     generate-sample: true
@@ -37,8 +36,8 @@ options:
       description: "LiveMetrics Service"
     flavor: azure
   "@azure-tools/typespec-java":
-    package-dir: "livemetrics"
-    namespace: com.livemetrics
+    package-dir: "azure-applicationinsights-livemetrics"
+    namespace: "com.azure.applicationinsights.livemetrics"
     flavor: azure
 linter:
   extends:
