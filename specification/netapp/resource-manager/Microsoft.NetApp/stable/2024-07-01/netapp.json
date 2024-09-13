@@ -9321,7 +9321,15 @@
       "properties": {
         "backupPolicyId": {
           "type": "string",
-          "description": "Backup Policy Resource ID"
+          "description": "Backup Policy Resource ID",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.NetApp/netAppAccounts/backupPolicies"
+              }
+            ]
+          }
         },
         "policyEnforced": {
           "type": "boolean",
