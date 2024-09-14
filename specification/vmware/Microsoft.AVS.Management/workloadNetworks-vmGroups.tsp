@@ -63,7 +63,6 @@ interface WorkloadNetworkVmGroups {
 }
 
 @@clientName(WorkloadNetworkVmGroups.create::parameters.resource,
-  "application/json",
   "workloadNetworkVMGroup"
 );
 
