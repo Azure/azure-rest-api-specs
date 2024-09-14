@@ -276,8 +276,9 @@ model Operation {
 interface TranslationOperations {
   // LongRunningResourceCreateOrReplace will generate PUT, to align with CNV other creation operation.
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Because auto generated operation ID contains OrReplace(TranslationOperations_CreateOrReplaceTranslation), which will cause the operation title of the API doc's to be [Translation Operations - Create Or Replace Translation], because we don't support replace, specify the operation ID explicitly to avoid the misunderstanding API description."
-  @doc("Creates a translation.")
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "The same as @azure-tools/typespec-azure-core/no-operation-id, no-operation-id is warning by tsp compile while no-openapi is validation by PR TypeSpec Validation pipeline."
   @TypeSpec.OpenAPI.operationId("TranslationOperations_CreateTranslation")
+  @doc("Creates a translation.")
   @pollingOperation(OperationOperations.getOperation)
   createOrReplaceTranslation is ops.LongRunningResourceCreateOrReplace<
     Translation,
@@ -300,6 +301,7 @@ interface TranslationOperations {
 interface IterationOperations {
   // LongRunningResourceCreateOrReplace will generate PUT, to align with CNV other creation operation.
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Because auto generated operation ID contains OrReplace(IterationOperations_CreateOrReplaceIteration), which will cause the operation title of the API doc's to be [Iteration Operations - Create Or Replace Iteration], because we don't support replace, specify the operation ID explicitly to avoid the misunderstanding API description."
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "The same as @azure-tools/typespec-azure-core/no-operation-id, no-operation-id is warning by tsp compile while no-openapi is validation by PR TypeSpec Validation pipeline."
   @TypeSpec.OpenAPI.operationId("IterationOperations_CreateIteration")
   @doc("Creates an iteration.")
   @pollingOperation(OperationOperations.getOperation)
