@@ -170,7 +170,7 @@ model IterationResult {
 
 @doc("Iteration input.")
 model IterationInput {
-  @doc("Webvtt file for content editing.")
+  @doc("Webvtt file for content editing, this parameter is required from the second iteration creation request of the translation.")
   webvttFile?: WebvttFile;
 
   @doc("Number of speakers in the video.")
@@ -275,7 +275,10 @@ model Operation {
 
 interface TranslationOperations {
   // LongRunningResourceCreateOrReplace will generate PUT, to align with CNV other creation operation.
+  // Because auto generated operation ID contains OrReplace(TranslationOperations_CreateOrReplaceTranslation), which will cause the operation title of the API doc's to be "Translation Operations - Create Or Replace Translation"
+  // Because we don't support replace, specify the operation ID explicitly to avoid the misunderstanding API description.
   @doc("Creates a translation.")
+  @TypeSpec.OpenAPI.operationId("TranslationOperations_CreateTranslation")
   @pollingOperation(OperationOperations.getOperation)
   createOrReplaceTranslation is ops.LongRunningResourceCreateOrReplace<
     Translation,
@@ -297,8 +300,11 @@ interface TranslationOperations {
 
 interface IterationOperations {
   // LongRunningResourceCreateOrReplace will generate PUT, to align with CNV other creation operation.
+  // Because auto generated operation ID contains OrReplace(IterationOperations_CreateOrReplaceIteration), which will cause the operation title of the API doc's to be "Iteration Operations - Create Or Replace Iteration"
+  // Because we don't support replace, specify the operation ID explicitly to avoid the misunderstanding API description.
   @doc("Creates an iteration.")
   @pollingOperation(OperationOperations.getOperation)
+  @TypeSpec.OpenAPI.operationId("IterationOperations_CreateIteration")
   createOrReplaceIteration is ops.LongRunningResourceCreateOrReplace<
     Iteration,
     RequestHeadersTrait<OperationIdHeader>
