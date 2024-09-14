@@ -34,8 +34,8 @@ enum Versions {
   @doc("Public Preview Api version")
   v2024_05_01_preview: "2024-05-01-preview",
 
-  @useDependency(Azure.ResourceManager.Versions.v1_0_0)
-  @useDependency(Azure.Core.Versions.v1_0_0)
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
   @doc("Public Api version")
   v2024_10_01: "2024-10-01",
