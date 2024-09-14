@@ -18,6 +18,17 @@ options:
     clear-output-folder: true
     namespace: Azure.Sphere
     model-namespace: false
+  "@azure-tools/typespec-ts":
+    azureSdkForJs: true
+    isModularLibrary: true
+    generateMetadata: true
+    hierarchyClient: false
+    experimentalExtensibleEnums: true
+    enableOperationGroup: true
+    package-dir: "arm-sphere"
+    flavor: "azure"
+    packageDetails:
+      name: "@azure/arm-sphere"
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"

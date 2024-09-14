@@ -10,6 +10,17 @@ options:
     arm-resource-flattening: true
     output-file: "{azure-resource-provider-folder}/{service-name}/extensions/{version-status}/{version}/extensions.json"
     omit-unreachable-types: true
+  "@azure-tools/typespec-ts":
+    azureSdkForJs: true
+    isModularLibrary: true
+    generateMetadata: true
+    hierarchyClient: false
+    experimentalExtensibleEnums: true
+    enableOperationGroup: true
+    package-dir: "arm-portalservices"
+    flavor: "azure"
+    packageDetails:
+      name: "@azure/arm-portalservices"
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"
