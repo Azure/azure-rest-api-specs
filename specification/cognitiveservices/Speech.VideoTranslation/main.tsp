@@ -275,8 +275,7 @@ model Operation {
 
 interface TranslationOperations {
   // LongRunningResourceCreateOrReplace will generate PUT, to align with CNV other creation operation.
-  // Because auto generated operation ID contains OrReplace(TranslationOperations_CreateOrReplaceTranslation), which will cause the operation title of the API doc's to be "Translation Operations - Create Or Replace Translation"
-  // Because we don't support replace, specify the operation ID explicitly to avoid the misunderstanding API description.
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Because auto generated operation ID contains OrReplace(TranslationOperations_CreateOrReplaceTranslation), which will cause the operation title of the API doc's to be [Translation Operations - Create Or Replace Translation], because we don't support replace, specify the operation ID explicitly to avoid the misunderstanding API description."
   @doc("Creates a translation.")
   @TypeSpec.OpenAPI.operationId("TranslationOperations_CreateTranslation")
   @pollingOperation(OperationOperations.getOperation)
@@ -300,11 +299,10 @@ interface TranslationOperations {
 
 interface IterationOperations {
   // LongRunningResourceCreateOrReplace will generate PUT, to align with CNV other creation operation.
-  // Because auto generated operation ID contains OrReplace(IterationOperations_CreateOrReplaceIteration), which will cause the operation title of the API doc's to be "Iteration Operations - Create Or Replace Iteration"
-  // Because we don't support replace, specify the operation ID explicitly to avoid the misunderstanding API description.
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Because auto generated operation ID contains OrReplace(IterationOperations_CreateOrReplaceIteration), which will cause the operation title of the API doc's to be [Iteration Operations - Create Or Replace Iteration], because we don't support replace, specify the operation ID explicitly to avoid the misunderstanding API description."
+  @TypeSpec.OpenAPI.operationId("IterationOperations_CreateIteration")
   @doc("Creates an iteration.")
   @pollingOperation(OperationOperations.getOperation)
-  @TypeSpec.OpenAPI.operationId("IterationOperations_CreateIteration")
   createOrReplaceIteration is ops.LongRunningResourceCreateOrReplace<
     Iteration,
     RequestHeadersTrait<OperationIdHeader>
