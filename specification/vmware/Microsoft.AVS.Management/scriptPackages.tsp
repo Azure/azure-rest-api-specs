@@ -9,7 +9,7 @@ using TypeSpec.Versioning;
 
 @armResourceOperations
 interface ScriptPackages {
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Can not change existing operationId."
   @operationId("ScriptPackages_List")
   list is ArmResourceListByParent<
     ScriptPackage,

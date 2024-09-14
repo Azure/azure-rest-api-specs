@@ -9,7 +9,7 @@ using TypeSpec.Versioning;
 
 @armResourceOperations
 interface PlacementPolicies {
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Can not change existing operationId."
   @operationId("PlacementPolicies_List")
   list is ArmResourceListByParent<
     PlacementPolicy,
@@ -62,15 +62,7 @@ interface PlacementPolicies {
   delete is ArmResourceDeleteAsync<PlacementPolicy>;
 }
 
-@@encodedName(PlacementPolicies.createOrUpdate::parameters.resource,
-  "application/json",
-  "placementPolicy"
-);
 @@clientName(PlacementPolicies.createOrUpdate::parameters.resource,
-  "placementPolicy"
-);
-@@OpenAPI.extension(PlacementPolicies.createOrUpdate::parameters.resource,
-  "x-ms-client-name",
   "placementPolicy"
 );
 
@@ -162,8 +154,9 @@ model PlacementPolicyProperties {
 
 @doc("An update of a DRS placement policy resource")
 model PlacementPolicyUpdate {
+  #suppress "deprecated" "Legacy flatten"
   @doc("The properties of a placement policy resource that may be updated")
-  @extension("x-ms-client-flatten", true)
+  @Azure.ClientGenerator.Core.flattenProperty
   properties?: PlacementPolicyUpdateProperties;
 }
 

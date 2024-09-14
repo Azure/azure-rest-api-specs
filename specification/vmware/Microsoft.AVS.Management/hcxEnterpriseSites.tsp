@@ -9,7 +9,7 @@ using TypeSpec.Versioning;
 
 @armResourceOperations
 interface HcxEnterpriseSites {
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Can not change existing operationId."
   @operationId("HcxEnterpriseSites_List")
   list is ArmResourceListByParent<
     HcxEnterpriseSite,
@@ -23,15 +23,7 @@ interface HcxEnterpriseSites {
   delete is ArmResourceDeleteSync<HcxEnterpriseSite>;
 }
 
-@@encodedName(HcxEnterpriseSites.createOrUpdate::parameters.resource,
-  "application/json",
-  "hcxEnterpriseSite"
-);
 @@clientName(HcxEnterpriseSites.createOrUpdate::parameters.resource,
-  "hcxEnterpriseSite"
-);
-@@OpenAPI.extension(HcxEnterpriseSites.createOrUpdate::parameters.resource,
-  "x-ms-client-name",
   "hcxEnterpriseSite"
 );
 

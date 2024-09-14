@@ -11,18 +11,18 @@ using TypeSpec.Versioning;
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation"
 // @armResourceOperations
 interface WorkloadNetworkPublicIps {
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Can not change existing operationId."
   @operationId("WorkloadNetworks_ListPublicIPs")
   list is ArmResourceListByParent<
     WorkloadNetworkPublicIP,
     Response = ArmResponse<ResourceList<WorkloadNetworkPublicIP, "{name}sList">>
   >;
 
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Can not change existing operationId."
   @operationId("WorkloadNetworks_GetPublicIP")
   get is ArmResourceRead<WorkloadNetworkPublicIP>;
 
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Can not change existing operationId."
   #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "MUST CHANGE ON NEXT UPDATE"
   @operationId("WorkloadNetworks_CreatePublicIP")
   @Azure.Core.useFinalStateVia("azure-async-operation")
@@ -32,7 +32,7 @@ interface WorkloadNetworkPublicIps {
   >;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "PublicIPIdParameter should be last, but it is breaking to correct it."
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Can not change existing operationId."
   @operationId("WorkloadNetworks_DeletePublicIP")
   // delete is ArmResourceDeleteAsync<WorkloadNetworkPublicIP>;
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/workloadNetworks/default/publicIPs/{publicIPId}")
@@ -56,15 +56,7 @@ interface WorkloadNetworkPublicIps {
     | ErrorResponse;
 }
 
-@@encodedName(WorkloadNetworkPublicIps.create::parameters.resource,
-  "application/json",
-  "workloadNetworkPublicIP"
-);
 @@clientName(WorkloadNetworkPublicIps.create::parameters.resource,
-  "workloadNetworkPublicIP"
-);
-@@OpenAPI.extension(WorkloadNetworkPublicIps.create::parameters.resource,
-  "x-ms-client-name",
   "workloadNetworkPublicIP"
 );
 

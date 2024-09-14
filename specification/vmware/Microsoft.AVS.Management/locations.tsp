@@ -65,6 +65,7 @@ model Trial {
 
 @doc("Subscription quotas")
 model Quota {
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "existing API"
   @doc("Remaining hosts quota by sku type")
   @visibility("read")
   hostsRemaining?: Record<int32>;

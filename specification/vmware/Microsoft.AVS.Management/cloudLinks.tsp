@@ -9,7 +9,7 @@ using TypeSpec.Versioning;
 
 @armResourceOperations
 interface CloudLinks {
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Can not change existing operationId."
   @operationId("CloudLinks_List")
   list is ArmResourceListByParent<
     CloudLink,
@@ -30,15 +30,7 @@ interface CloudLinks {
   delete is ArmResourceDeleteAsync<CloudLink>;
 }
 
-@@encodedName(CloudLinks.createOrUpdate::parameters.resource,
-  "application/json",
-  "cloudLink"
-);
 @@clientName(CloudLinks.createOrUpdate::parameters.resource, "cloudLink");
-@@OpenAPI.extension(CloudLinks.createOrUpdate::parameters.resource,
-  "x-ms-client-name",
-  "cloudLink"
-);
 
 @doc("Cloud Link status")
 union CloudLinkStatus {

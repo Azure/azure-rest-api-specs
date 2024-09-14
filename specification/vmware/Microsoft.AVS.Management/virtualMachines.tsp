@@ -9,7 +9,7 @@ using TypeSpec.Versioning;
 
 @armResourceOperations
 interface VirtualMachines {
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Can not change existing operationId."
   @operationId("VirtualMachines_List")
   list is ArmResourceListByParent<
     VirtualMachine,

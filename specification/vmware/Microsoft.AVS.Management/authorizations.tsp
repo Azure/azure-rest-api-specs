@@ -9,7 +9,7 @@ using TypeSpec.Versioning;
 
 @armResourceOperations
 interface Authorizations {
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Can not change existing operationId."
   @operationId("Authorizations_List")
   list is ArmResourceListByParent<
     ExpressRouteAuthorization,
@@ -31,15 +31,7 @@ interface Authorizations {
   delete is ArmResourceDeleteAsync<ExpressRouteAuthorization>;
 }
 
-@@encodedName(Authorizations.createOrUpdate::parameters.resource,
-  "application/json",
-  "authorization"
-);
 @@clientName(Authorizations.createOrUpdate::parameters.resource,
-  "authorization"
-);
-@@OpenAPI.extension(Authorizations.createOrUpdate::parameters.resource,
-  "x-ms-client-name",
   "authorization"
 );
 

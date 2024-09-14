@@ -12,7 +12,7 @@ using TypeSpec.Versioning;
 // @armResourceOperations
 @doc("Workload Network Dns Services")
 interface WorkloadNetworkDnsServices {
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Can not change existing operationId."
   @operationId("WorkloadNetworks_ListDnsServices")
   list is ArmResourceListByParent<
     WorkloadNetworkDnsService,
@@ -22,11 +22,11 @@ interface WorkloadNetworkDnsServices {
     >>
   >;
 
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Can not change existing operationId."
   @operationId("WorkloadNetworks_GetDnsService")
   get is ArmResourceRead<WorkloadNetworkDnsService>;
 
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Can not change existing operationId."
   #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "MUST CHANGE ON NEXT UPDATE"
   @operationId("WorkloadNetworks_CreateDnsService")
   @Azure.Core.useFinalStateVia("azure-async-operation")
@@ -35,7 +35,7 @@ interface WorkloadNetworkDnsServices {
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader
   >;
 
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Can not change existing operationId."
   @operationId("WorkloadNetworks_UpdateDnsService")
   @parameterVisibility
   update is ArmCustomPatchAsync<
@@ -44,7 +44,7 @@ interface WorkloadNetworkDnsServices {
   >;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "DnsServiceIdParameter should be last, but it is breaking to correct it."
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Can not change existing operationId."
   @operationId("WorkloadNetworks_DeleteDnsService")
   // delete is ArmResourceDeleteAsync<WorkloadNetworkDnsService>;
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/workloadNetworks/default/dnsServices/{dnsServiceId}")
@@ -68,27 +68,11 @@ interface WorkloadNetworkDnsServices {
     | ErrorResponse;
 }
 
-@@encodedName(WorkloadNetworkDnsServices.create::parameters.resource,
-  "application/json",
-  "workloadNetworkDnsService"
-);
 @@clientName(WorkloadNetworkDnsServices.create::parameters.resource,
   "workloadNetworkDnsService"
 );
-@@OpenAPI.extension(WorkloadNetworkDnsServices.create::parameters.resource,
-  "x-ms-client-name",
-  "workloadNetworkDnsService"
-);
 
-@@encodedName(WorkloadNetworkDnsServices.update::parameters.properties,
-  "application/json",
-  "workloadNetworkDnsService"
-);
 @@clientName(WorkloadNetworkDnsServices.update::parameters.properties,
-  "workloadNetworkDnsService"
-);
-@@OpenAPI.extension(WorkloadNetworkDnsServices.update::parameters.properties,
-  "x-ms-client-name",
   "workloadNetworkDnsService"
 );
 

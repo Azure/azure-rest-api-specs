@@ -9,7 +9,7 @@ using TypeSpec.Versioning;
 
 @armResourceOperations
 interface Clusters {
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Can not change existing operationId."
   @operationId("Clusters_List")
   list is ArmResourceListByParent<
     Cluster,
@@ -27,6 +27,7 @@ interface Clusters {
 
   // This could be modeled with ArmCustomPatchAsync if a 202 response with no body is used instead of a 201.
   // update is ArmCustomPatchAsync<Cluster, ClusterUpdate>;
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "DO NOT COPY - TODO migrate to LRO apis"
   @doc("Update a Cluster")
   @extension("x-ms-long-running-operation", true)
   @extension(
@@ -63,14 +64,6 @@ interface Clusters {
   listZones is ArmResourceActionSyncNoRequestBody<Cluster, ClusterZoneList>;
 }
 
-@@encodedName(Clusters.createOrUpdate::parameters.resource,
-  "application/json",
-  "cluster"
-);
-@@OpenAPI.extension(Clusters.createOrUpdate::parameters.resource,
-  "x-ms-client-name",
-  "cluster"
-);
 @@clientName(Clusters.createOrUpdate::parameters.resource, "cluster");
 
 @doc("Cluster provisioning state")
@@ -130,8 +123,9 @@ model ClusterProperties {
 model ClusterUpdate {
   ...ResourceSkuProperty;
 
+  #suppress "deprecated" "Legacy flatten"
   @doc("The properties of a cluster resource that may be updated")
-  @extension("x-ms-client-flatten", true)
+  @Azure.ClientGenerator.Core.flattenProperty
   properties?: ClusterUpdateProperties;
 }
 

@@ -12,18 +12,18 @@ using TypeSpec.Versioning;
 // @armResourceOperations
 @doc("Workload Network Port Mirroring Profiles")
 interface WorkloadNetworkPortMirroringProfiles {
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Can not change existing operationId."
   @operationId("WorkloadNetworks_ListPortMirroring")
   list is ArmResourceListByParent<
     WorkloadNetworkPortMirroring,
     Response = ArmResponse<ResourceList<WorkloadNetworkPortMirroring>>
   >;
 
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Can not change existing operationId."
   @operationId("WorkloadNetworks_GetPortMirroring")
   get is ArmResourceRead<WorkloadNetworkPortMirroring>;
 
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Can not change existing operationId."
   #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "MUST CHANGE ON NEXT UPDATE"
   @operationId("WorkloadNetworks_CreatePortMirroring")
   @Azure.Core.useFinalStateVia("azure-async-operation")
@@ -32,7 +32,7 @@ interface WorkloadNetworkPortMirroringProfiles {
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader
   >;
 
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Can not change existing operationId."
   @operationId("WorkloadNetworks_UpdatePortMirroring")
   @parameterVisibility
   update is ArmCustomPatchAsync<
@@ -41,7 +41,7 @@ interface WorkloadNetworkPortMirroringProfiles {
   >;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "PortMirroringProfileParameter should be last, but it is breaking to correct it."
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Can not change existing operationId."
   @operationId("WorkloadNetworks_DeletePortMirroring")
   // delete is ArmResourceDeleteAsync<WorkloadNetworkPortMirroring>;
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/workloadNetworks/default/portMirroringProfiles/{portMirroringId}")
@@ -65,27 +65,11 @@ interface WorkloadNetworkPortMirroringProfiles {
     | ErrorResponse;
 }
 
-@@encodedName(WorkloadNetworkPortMirroringProfiles.create::parameters.resource,
-  "application/json",
-  "workloadNetworkPortMirroring"
-);
 @@clientName(WorkloadNetworkPortMirroringProfiles.create::parameters.resource,
   "workloadNetworkPortMirroring"
 );
-@@OpenAPI.extension(WorkloadNetworkPortMirroringProfiles.create::parameters.resource,
-  "x-ms-client-name",
-  "workloadNetworkPortMirroring"
-);
 
-@@encodedName(WorkloadNetworkPortMirroringProfiles.update::parameters.properties,
-  "application/json",
-  "workloadNetworkPortMirroring"
-);
 @@clientName(WorkloadNetworkPortMirroringProfiles.update::parameters.properties,
-  "workloadNetworkPortMirroring"
-);
-@@OpenAPI.extension(WorkloadNetworkPortMirroringProfiles.update::parameters.properties,
-  "x-ms-client-name",
   "workloadNetworkPortMirroring"
 );
 

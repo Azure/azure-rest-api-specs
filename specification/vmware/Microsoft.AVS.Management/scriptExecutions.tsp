@@ -9,7 +9,7 @@ using TypeSpec.Versioning;
 
 @armResourceOperations
 interface ScriptExecutions {
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Can not change existing operationId."
   @operationId("ScriptExecutions_List")
   list is ArmResourceListByParent<
     ScriptExecution,
@@ -43,15 +43,7 @@ interface ScriptExecutions {
   ): ArmResponse<ScriptExecution> | ErrorResponse;
 }
 
-@@encodedName(ScriptExecutions.createOrUpdate::parameters.resource,
-  "application/json",
-  "scriptExecution"
-);
 @@clientName(ScriptExecutions.createOrUpdate::parameters.resource,
-  "scriptExecution"
-);
-@@OpenAPI.extension(ScriptExecutions.createOrUpdate::parameters.resource,
-  "x-ms-client-name",
   "scriptExecution"
 );
 

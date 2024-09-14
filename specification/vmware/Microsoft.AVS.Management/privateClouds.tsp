@@ -10,7 +10,7 @@ using TypeSpec.Versioning;
 alias PrivateCloudList = ResourceList<PrivateCloud>;
 @armResourceOperations
 interface PrivateClouds {
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Can not change existing operationId."
   @operationId("PrivateClouds_List")
   list is ArmResourceListByParent<
     PrivateCloud,
@@ -33,6 +33,7 @@ interface PrivateClouds {
 
   // This could be modeled with ArmCustomPatchAsync if a 202 response with no body is used instead of a 201.
   // update is ArmCustomPatchAsync<PrivateCloud, PrivateCloudUpdate>;
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "DO NOT COPY - TODO migrate to LRO apis"
   @doc("Update a PrivateCloud")
   @extension("x-ms-long-running-operation", true)
   @extension(
@@ -80,14 +81,6 @@ interface PrivateClouds {
   >;
 }
 
-@@encodedName(PrivateClouds.createOrUpdate::parameters.resource,
-  "application/json",
-  "privateCloud"
-);
-@@OpenAPI.extension(PrivateClouds.createOrUpdate::parameters.resource,
-  "x-ms-client-name",
-  "privateCloud"
-);
 @@clientName(PrivateClouds.createOrUpdate::parameters.resource, "privateCloud");
 
 @doc("private cloud provisioning state")
@@ -215,8 +208,9 @@ model PrivateCloudUpdate {
   ...ResourceSkuProperty;
   ...ManagedSystemAssignedIdentityProperty;
 
+  #suppress "deprecated" "Legacy flatten"
   @doc("The updatable properties of a private cloud resource")
-  @extension("x-ms-client-flatten", true)
+  @Azure.ClientGenerator.Core.flattenProperty
   properties?: PrivateCloudUpdateProperties;
 }
 

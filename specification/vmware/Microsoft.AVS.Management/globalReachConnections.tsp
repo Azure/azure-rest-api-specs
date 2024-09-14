@@ -9,7 +9,7 @@ using TypeSpec.Versioning;
 
 @armResourceOperations
 interface GlobalReachConnections {
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Can not change existing operationId."
   @operationId("GlobalReachConnections_List")
   list is ArmResourceListByParent<
     GlobalReachConnection,
@@ -30,15 +30,7 @@ interface GlobalReachConnections {
   delete is ArmResourceDeleteAsync<GlobalReachConnection>;
 }
 
-@@encodedName(GlobalReachConnections.createOrUpdate::parameters.resource,
-  "application/json",
-  "globalReachConnection"
-);
 @@clientName(GlobalReachConnections.createOrUpdate::parameters.resource,
-  "globalReachConnection"
-);
-@@OpenAPI.extension(GlobalReachConnections.createOrUpdate::parameters.resource,
-  "x-ms-client-name",
   "globalReachConnection"
 );
 

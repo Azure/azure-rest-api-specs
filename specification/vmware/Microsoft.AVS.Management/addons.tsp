@@ -9,7 +9,7 @@ using TypeSpec.Versioning;
 
 @armResourceOperations
 interface Addons {
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Can not change existing operationId."
   @operationId("Addons_List")
   list is ArmResourceListByParent<
     Addon,
@@ -30,15 +30,7 @@ interface Addons {
   delete is ArmResourceDeleteAsync<Addon>;
 }
 
-@@encodedName(Addons.createOrUpdate::parameters.resource,
-  "application/json",
-  "addon"
-);
 @@clientName(Addons.createOrUpdate::parameters.resource, "addon");
-@@OpenAPI.extension(Addons.createOrUpdate::parameters.resource,
-  "x-ms-client-name",
-  "addon"
-);
 
 @doc("Addon provisioning state")
 union AddonProvisioningState {

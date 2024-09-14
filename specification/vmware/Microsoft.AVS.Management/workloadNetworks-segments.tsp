@@ -9,18 +9,18 @@ using TypeSpec.Versioning;
 
 @armResourceOperations
 interface WorkloadNetworkSegments {
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Can not change existing operationId."
   @operationId("WorkloadNetworks_ListSegments")
   list is ArmResourceListByParent<
     WorkloadNetworkSegment,
     Response = ArmResponse<ResourceList<WorkloadNetworkSegment, "{name}sList">>
   >;
 
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Can not change existing operationId."
   @operationId("WorkloadNetworks_GetSegment")
   get is ArmResourceRead<WorkloadNetworkSegment>;
 
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Can not change existing operationId."
   #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "MUST CHANGE ON NEXT UPDATE"
   @operationId("WorkloadNetworks_CreateSegments")
   @Azure.Core.useFinalStateVia("azure-async-operation")
@@ -29,34 +29,22 @@ interface WorkloadNetworkSegments {
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader
   >;
 
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Can not change existing operationId."
   @operationId("WorkloadNetworks_UpdateSegments")
   @parameterVisibility
   update is ArmCustomPatchAsync<WorkloadNetworkSegment, WorkloadNetworkSegment>;
 
   #suppress "deprecated"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes"
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Can not change existing operationId."
   @operationId("WorkloadNetworks_DeleteSegment")
   deleteSegment is ArmResourceDeleteAsync<WorkloadNetworkSegment>;
 }
 
-@@encodedName(WorkloadNetworkSegments.create::parameters.resource,
-  "application/json",
-  "workloadNetworkSegment"
-);
 @@clientName(WorkloadNetworkSegments.create::parameters.resource,
   "workloadNetworkSegment"
 );
-@@OpenAPI.extension(WorkloadNetworkSegments.create::parameters.resource,
-  "x-ms-client-name",
-  "workloadNetworkSegment"
-);
 
-@@encodedName(WorkloadNetworkSegments.update::parameters.properties,
-  "application/json",
-  "workloadNetworkSegment"
-);
 @@clientName(WorkloadNetworkSegments.update::parameters.properties,
   "application/json",
   "workloadNetworkSegment"
