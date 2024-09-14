@@ -85,21 +85,44 @@ interface FaceClient {
   verifyFromLargePersonGroup is FaceRecognitionOperations.verifyFromLargePersonGroup;
 }
 
-@client({
-  name: "administration.FaceAdministrationClient",
-  service: Face,
-})
+@client(
+  {
+    name: "administration.FaceAdministrationClient",
+    service: Face,
+  },
+  "java"
+)
+@client(
+  {
+    name: "FaceAdministrationClient",
+    service: Face,
+  },
+  "csharp,python,javascript,go"
+)
 namespace FaceAdministrationClient {
+  /**
+   * Client options for LargeFaceListClient
+   */
   model LargeFaceListClientOptions {
+    /**
+     * ID of LargeFaceList.
+     */
     largeFaceListId: collectionId;
   }
 
+  /**
+   * Client options for LargePersonGroupClient
+   */
   model LargePersonGroupOptions {
+    /**
+     * ID of LargePersonGroup.
+     */
     largePersonGroupId: collectionId;
   }
 
+  #suppress "@azure-tools/typespec-client-generator-core/client-service" "TCGC bug"
   @operationGroup
-  @clientInitialization(LargeFaceListClientOptions)
+  @clientInitialization(LargeFaceListClientOptions, "java")
   @clientName("LargeFaceListClientImpl", "csharp")
   interface LargeFaceList {
     @doc("Please refer to https://learn.microsoft.com/rest/api/face/face-list-operations/create-large-face-list for more details.")
@@ -135,8 +158,9 @@ namespace FaceAdministrationClient {
     getFaces is FaceListOperations.getLargeFaceListFaces;
   }
 
+  #suppress "@azure-tools/typespec-client-generator-core/client-service" "TCGC bug"
   @operationGroup
-  @clientInitialization(LargePersonGroupOptions)
+  @clientInitialization(LargePersonGroupOptions, "java")
   @clientName("LargePersonGroupClientImpl", "csharp")
   interface LargePersonGroup {
     @doc("Please refer to https://learn.microsoft.com/rest/api/face/person-group-operations/create-large-person-group for more details.")
