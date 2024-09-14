@@ -46,11 +46,6 @@ interface WorkloadNetworkSegments {
 );
 
 @@clientName(WorkloadNetworkSegments.update::parameters.properties,
-  "application/json",
-  "workloadNetworkSegment"
-);
-@@OpenAPI.extension(WorkloadNetworkSegments.update::parameters.properties,
-  "x-ms-client-name",
   "workloadNetworkSegment"
 );
 

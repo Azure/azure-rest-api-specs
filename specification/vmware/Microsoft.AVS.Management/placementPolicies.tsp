@@ -31,6 +31,7 @@ interface PlacementPolicies {
   // 202 response has a body, but it should not to match ArmCustomPatchAsync.
   // update is ArmCustomPatchAsync<PlacementPolicy, PlacementPolicyUpdate>;
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "DO NOT COPY - TODO migrate to LRO apis"
   @doc("Update a PlacementPolicy")
   @extension("x-ms-long-running-operation", true)
   @extension(
