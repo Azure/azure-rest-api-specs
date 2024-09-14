@@ -32,6 +32,18 @@ enum Versions {
   @useDependency(LiftrBase.Versions.v1_preview)
   @useDependency(LiftrBase.Data.Versions.v1_preview)
   v1: "2023-08-01",
+
+  @doc("Dependent on Azure.ResourceManager.Versions.v1_0_Preview_1, LiftrBase.Versions.v2024_08_27_preview, LiftrBase.Data.Versions.v2024_08_27_preview")
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  @useDependency(LiftrBase.Versions.v2024_08_27_preview)
+  @useDependency(LiftrBase.Data.Versions.v2024_08_27_preview)
+  v2024_08_27_preview: "2024-08-27-preview",
+
+  @doc("Dependent on Azure.ResourceManager.Versions.v1_0_Preview_1, LiftrBase.Versions.v2024_08_27, LiftrBase.Data.Versions.v2024_08_27")
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  @useDependency(LiftrBase.Versions.v2024_08_27)
+  @useDependency(LiftrBase.Data.Versions.v2024_08_27)
+  v2024_08_27: "2024-08-27",
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}
