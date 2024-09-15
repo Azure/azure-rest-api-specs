@@ -20,13 +20,17 @@ using TypeSpec.Versioning;
  * href="https://docs.microsoft.com/en-us/azure/cognitive-services/language-service/overview">https://docs.microsoft.com/en-us/azure/cognitive-services/language-service/overview</a>.
  */
 @useAuth(
-  AadOauth2Auth<["https://cognitiveservices.azure.com/.default"]> | ApiKeyAuth<
-    ApiKeyLocation.header,
-    "Ocp-Apim-Subscription-Key"
-  >
+  ApiKeyAuth<ApiKeyLocation.header, "Ocp-Apim-Subscription-Key"> | OAuth2Auth<[
+    {
+      type: OAuth2FlowType.authorizationCode,
+      authorizationUrl: "https://login.microsoftonline.com/common/oauth2/authorize",
+      tokenUrl: "https://login.microsoftonline.com/common/oauth2/token",
+      scopes: ["https://cognitiveservices.azure.com/.default"],
+    }
+  ]>
 )
 @service({
-  title: "Microsoft Cognitive Language Service",
+  title: "Microsoft Cognitive Language Service - Analyze Text Authoring",
 })
 @versioned(Versions)
 @server(
@@ -42,15 +46,19 @@ using TypeSpec.Versioning;
     Endpoint: string,
   }
 )
-namespace MicrosoftCognitiveLanguageService;
+namespace Language.Authoring;
 
 /**
  * The available API versions.
  */
 enum Versions {
+  /** Version 2023-04-01 */
+  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
+  v2023_04_01: "2023-04-01",
+
   /**
    * The 2023-04-15-preview API version.
    */
-  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
+  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   v2023_04_15_preview: "2023-04-15-preview",
 }

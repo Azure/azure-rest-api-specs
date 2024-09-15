@@ -1,13 +1,20 @@
 import "@azure-tools/typespec-azure-core";
 import "@typespec/rest";
 import "./models.tsp";
+import "@typespec/http";
+import "@typespec/versioning";
+import "@azure-tools/typespec-client-generator-core";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using Azure.Core;
+using Azure.Core.Traits;
+using Azure.ClientGenerator.Core;
+using TypeSpec.Versioning;
 
-namespace MicrosoftCognitiveLanguageService;
+namespace Language.Authoring;
 
-interface TextAnalysisAuthoringOperations {
+interface TextAnalysisAuthoring {
   /**
    * Lists the existing projects.
    */
@@ -79,9 +86,11 @@ interface TextAnalysisAuthoringOperations {
   /**
    * Deletes a project.
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @route("/authoring/analyze-text/projects/{projectName}")
   @delete
-  deleteProject is Azure.Core.Foundations.Operation<
+  @pollingOperation(TextAnalysisAuthoring.getProjectDeletionStatus)
+  deleteProject is Foundations.LongRunningOperation<
     {
       /**
        * The name of the project to use.
@@ -90,15 +99,19 @@ interface TextAnalysisAuthoringOperations {
       @path
       projectName: string;
     },
-    void
+    AcceptedResponse,
+    {},
+    ErrorResponse
   >;
 
   /**
    * Generates a copy project operation authorization to the current target Azure
    * resource.
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @route("/authoring/analyze-text/projects/{projectName}/:authorize-copy")
   @post
+  @added(Versions.v2023_04_15_preview)
   copyProjectAuthorization is Azure.Core.Foundations.Operation<
     {
       /**
@@ -114,15 +127,20 @@ interface TextAnalysisAuthoringOperations {
       @body
       body: CopyAuthorizationOptions;
     },
-    CopyProjectOptions
+    CopyProjectOptions,
+    {},
+    ErrorResponse
   >;
 
-  /**
+/**
    * Copies an existing project to another Azure resource.
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @route("/authoring/analyze-text/projects/{projectName}/:copy")
   @post
-  copyProject is Azure.Core.Foundations.Operation<
+  @pollingOperation(TextAnalysisAuthoring.getCopyProjectStatus)
+  @added(Versions.v2023_04_15_preview)
+  copyProject is Foundations.LongRunningOperation<
     {
       /**
        * The name of the project to use.
@@ -137,15 +155,19 @@ interface TextAnalysisAuthoringOperations {
       @body
       body: CopyProjectOptions;
     },
-    void
+    AcceptedResponse,
+    {},
+    ErrorResponse
   >;
 
-  /**
+/**
    * Triggers a job to export a project's data.
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @route("/authoring/analyze-text/projects/{projectName}/:export")
   @post
-  export is Azure.Core.Foundations.Operation<
+  @pollingOperation(TextAnalysisAuthoring.getExportStatus)
+  export is Foundations.LongRunningOperation<
     {
       /**
        * The name of the project to use.
@@ -174,16 +196,20 @@ interface TextAnalysisAuthoringOperations {
       @query("trainedModelLabel")
       trainedModelLabel?: string;
     },
-    void
+    AcceptedResponse,
+    {},
+    ErrorResponse
   >;
 
-  /**
+/**
    * Triggers a job to import a project. If a project with the same name already
    * exists, the data of that project is replaced.
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @route("/authoring/analyze-text/projects/{projectName}/:import")
   @post
-  `import` is Azure.Core.Foundations.Operation<
+  @pollingOperation(TextAnalysisAuthoring.getImportStatus)
+  `import` is Foundations.LongRunningOperation<
     {
       /**
        * The name of the project to use.
@@ -205,15 +231,19 @@ interface TextAnalysisAuthoringOperations {
       @body
       body: ExportedProject;
     },
-    void
+    AcceptedResponse,
+    {},
+    ErrorResponse
   >;
 
   /**
    * Triggers a training job for a project.
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @route("/authoring/analyze-text/projects/{projectName}/:train")
   @post
-  train is Azure.Core.Foundations.Operation<
+  @pollingOperation(TextAnalysisAuthoring.getTrainingStatus)
+  train is Foundations.LongRunningOperation<
     {
       /**
        * The name of the project to use.
@@ -228,7 +258,9 @@ interface TextAnalysisAuthoringOperations {
       @body
       body: TrainingJobOptions;
     },
-    void
+    AcceptedResponse,
+    {},
+    ErrorResponse
   >;
 
   /**
@@ -312,12 +344,14 @@ interface TextAnalysisAuthoringOperations {
     ProjectDeployment
   >;
 
-  /**
+   /**
    * Creates a new deployment or replaces an existing one.
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @route("/authoring/analyze-text/projects/{projectName}/deployments/{deploymentName}")
   @put
-  deployProject is Azure.Core.Foundations.Operation<
+  @pollingOperation(TextAnalysisAuthoring.getDeploymentStatus)
+  deployProject is Foundations.LongRunningOperation<
     {
       /**
        * The name of the project to use.
@@ -338,15 +372,19 @@ interface TextAnalysisAuthoringOperations {
       @body
       body: CreateDeploymentOptions;
     },
-    void
+    AcceptedResponse,
+    {},
+    ErrorResponse
   >;
 
   /**
    * Deletes a project deployment.
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @route("/authoring/analyze-text/projects/{projectName}/deployments/{deploymentName}")
   @delete
-  deleteDeployment is Azure.Core.Foundations.Operation<
+  @pollingOperation(TextAnalysisAuthoring.getDeploymentStatus)
+  deleteDeployment is Foundations.LongRunningOperation<
     {
       /**
        * The name of the project to use.
@@ -361,15 +399,22 @@ interface TextAnalysisAuthoringOperations {
       @path
       deploymentName: string;
     },
-    void
+    AcceptedResponse,
+    {},
+    ErrorResponse
   >;
 
-  /**
+ /**
    * Deletes a project deployment from the specified assigned resources.
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @route("/authoring/analyze-text/projects/{projectName}/deployments/{deploymentName}/:delete-from-resources")
   @post
-  deleteDeploymentFromResources is Azure.Core.Foundations.Operation<
+  @pollingOperation(
+    TextAnalysisAuthoring.getDeploymentDeleteFromResourcesStatus
+  )
+  @added(Versions.v2023_04_15_preview)
+  deleteDeploymentFromResources is Foundations.LongRunningOperation<
     {
       /**
        * The name of the project to use.
@@ -390,7 +435,9 @@ interface TextAnalysisAuthoringOperations {
       @body
       body: DeleteDeploymentOptions;
     },
-    void
+    AcceptedResponse,
+    {},
+    ErrorResponse
   >;
 
   /**
@@ -454,9 +501,11 @@ interface TextAnalysisAuthoringOperations {
   /**
    * Swaps two existing deployments with each other.
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @route("/authoring/analyze-text/projects/{projectName}/deployments/:swap")
   @post
-  swapDeployments is Azure.Core.Foundations.Operation<
+  @pollingOperation(TextAnalysisAuthoring.getSwapDeploymentsStatus)
+  swapDeployments is Foundations.LongRunningOperation<
     {
       /**
        * The name of the project to use.
@@ -471,7 +520,9 @@ interface TextAnalysisAuthoringOperations {
       @body
       body: SwapDeploymentsOptions;
     },
-    void
+    AcceptedResponse,
+    {},
+    ErrorResponse
   >;
 
   /**
@@ -582,9 +633,11 @@ interface TextAnalysisAuthoringOperations {
   /**
    * Creates a new exported model or replaces an existing one.
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @route("/authoring/analyze-text/projects/{projectName}/exported-models/{exportedModelName}")
   @put
-  createOrUpdateExportedModel is Azure.Core.Foundations.Operation<
+  @pollingOperation(TextAnalysisAuthoring.getExportedModelJobStatus)
+  createOrUpdateExportedModel is Foundations.LongRunningOperation<
     {
       /**
        * The name of the project to use.
@@ -605,15 +658,19 @@ interface TextAnalysisAuthoringOperations {
       @body
       body: ExportedModelOptions;
     },
-    void
+    AcceptedResponse,
+    {},
+    ErrorResponse
   >;
 
   /**
    * Deletes an existing exported model.
    */
+   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @route("/authoring/analyze-text/projects/{projectName}/exported-models/{exportedModelName}")
   @delete
-  deleteExportedModel is Azure.Core.Foundations.Operation<
+  @pollingOperation(TextAnalysisAuthoring.getExportedModelJobStatus)
+  deleteExportedModel is Foundations.LongRunningOperation<
     {
       /**
        * The name of the project to use.
@@ -628,7 +685,9 @@ interface TextAnalysisAuthoringOperations {
       @path
       exportedModelName: string;
     },
-    void
+    AcceptedResponse,
+    {},
+    ErrorResponse
   >;
 
   /**
@@ -790,9 +849,12 @@ interface TextAnalysisAuthoringOperations {
   /**
    * Triggers evaluation operation on a trained model.
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @route("/authoring/analyze-text/projects/{projectName}/models/{trainedModelLabel}/:evaluate")
   @post
-  evaluateModel is Azure.Core.Foundations.Operation<
+  @pollingOperation(TextAnalysisAuthoring.getEvaluationStatus)
+  @added(Versions.v2023_04_15_preview)
+  evaluateModel is Foundations.LongRunningOperation<
     {
       /**
        * The name of the project to use.
@@ -813,16 +875,16 @@ interface TextAnalysisAuthoringOperations {
       @body
       body: EvaluationOptions;
     },
-    void
+    AcceptedResponse,
+    {},
+    ErrorResponse
   >;
 
-  /**
-   * Restores the snapshot of this trained model to be the current working directory
-   * of the project.
-   */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @route("/authoring/analyze-text/projects/{projectName}/models/{trainedModelLabel}/:load-snapshot")
   @post
-  loadSnapshot is Azure.Core.Foundations.Operation<
+  @pollingOperation(TextAnalysisAuthoring.getLoadSnapshotStatus)
+  loadSnapshot is Foundations.LongRunningOperation<
     {
       /**
        * The name of the project to use.
@@ -837,7 +899,9 @@ interface TextAnalysisAuthoringOperations {
       @path
       trainedModelLabel: string;
     },
-    void
+    AcceptedResponse,
+    {},
+    ErrorResponse
   >;
 
   /**
@@ -1013,9 +1077,14 @@ interface TextAnalysisAuthoringOperations {
    * check here:
    * https://learn.microsoft.com/en-us/azure/cognitive-services/authentication?tabs=powershell#authenticate-with-azure-active-directory
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @route("/authoring/analyze-text/projects/{projectName}/resources/:assign")
   @post
-  assignDeploymentResources is Azure.Core.Foundations.Operation<
+  @pollingOperation(
+    TextAnalysisAuthoring.getAssignDeploymentResourcesStatus
+  )
+  @added(Versions.v2023_04_15_preview)
+  assignDeploymentResources is Foundations.LongRunningOperation<
     {
       /**
        * The name of the project to use.
@@ -1030,16 +1099,23 @@ interface TextAnalysisAuthoringOperations {
       @body
       body: AssignDeploymentResourcesOptions;
     },
-    void
+    AcceptedResponse,
+    {},
+    ErrorResponse
   >;
 
   /**
    * Unassign resources from a project. This disallows deploying new deployments to
    * these resources, and deletes existing deployments assigned to them.
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @route("/authoring/analyze-text/projects/{projectName}/resources/:unassign")
   @post
-  unassignDeploymentResources is Azure.Core.Foundations.Operation<
+  @pollingOperation(
+    TextAnalysisAuthoring.getUnassignDeploymentResourcesStatus
+  )
+  @added(Versions.v2023_04_15_preview)
+  unassignDeploymentResources is Foundations.LongRunningOperation<
     {
       /**
        * The name of the project to use.
@@ -1054,7 +1130,9 @@ interface TextAnalysisAuthoringOperations {
       @body
       body: UnassignDeploymentResourcesOptions;
     },
-    void
+    AcceptedResponse,
+    {},
+    ErrorResponse
   >;
 
   /**
@@ -1164,9 +1242,11 @@ interface TextAnalysisAuthoringOperations {
   /**
    * Triggers a cancellation for a running training job.
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @route("/authoring/analyze-text/projects/{projectName}/train/jobs/{jobId}/:cancel")
   @post
-  cancelTrainingJob is Azure.Core.Foundations.Operation<
+  @pollingOperation(TextAnalysisAuthoring.getTrainingStatus)
+  cancelTrainingJob is Foundations.LongRunningOperation<
     {
       /**
        * The name of the project to use.
@@ -1181,7 +1261,9 @@ interface TextAnalysisAuthoringOperations {
       @path
       jobId: string;
     },
-    void
+    AcceptedResponse,
+    {},
+    ErrorResponse
   >;
 
   /**
