@@ -4,7 +4,6 @@
 
 This is the AutoRest configuration file for EventGrid.
 
-
 Multiple Azure services publish events to Azure Event Grid. This is the configuration file for generating
 the Publish API and the schemas for those events. Each Azure service publishing to Azure Event Grid has its own tag OpenAPI specification
 that describes the schemas for its events.
