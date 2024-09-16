@@ -190,6 +190,8 @@ model TextAnalysisAuthoringProjectsMetadata {
 /**
  * Represents the metadata of a project.
  */
+@resource("authoring/analyze-text/projects")
+@clientName("ProjectMetadata", "csharp")
 model TextAnalysisAuthoringProjectMetadata {
   /**
    * Represents the project creation datetime.
@@ -223,6 +225,7 @@ model TextAnalysisAuthoringProjectMetadata {
   /**
    * The storage container name.
    */
+  @added(Versions.v2023_04_15_preview)
   storageInputContainerName: string;
 
   /**
@@ -233,6 +236,7 @@ model TextAnalysisAuthoringProjectMetadata {
   /**
    * The new project name.
    */
+  @key("projectName")
   projectName: string;
 
   /**

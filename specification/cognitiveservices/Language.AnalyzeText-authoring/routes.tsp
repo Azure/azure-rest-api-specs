@@ -60,27 +60,24 @@ interface TextAnalysisAuthoring {
     TextAnalysisAuthoringProjectMetadata
   >;
 
-  /**
-   * Creates a new project or updates an existing one.
-   */
-  @route("/authoring/analyze-text/projects/{projectName}")
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Need to rename the body"
+  //@pollingOperation(Widgets.getWidgetOperationStatus)
+  @createsOrUpdatesResource(TextAnalysisAuthoringProjectMetadata)
+  @parameterVisibility
   @patch
-  createProject is Azure.Core.Foundations.Operation<
+  createProject is Foundations.ResourceOperation<
+    TextAnalysisAuthoringProjectMetadata,
     {
-      /**
-       * The name of the project to use.
-       */
-      @maxLength(100)
-      @path
-      projectName: string;
+      @doc("This request has a JSON Merge Patch body.")
+      @TypeSpec.Http.header("Content-Type")
+      contentType: "application/merge-patch+json";
 
-      /**
-       * The project parameters.
-       */
-      @body
-      body: TextAnalysisAuthoringCreateProjectOptions;
+      /** The request body */
+      @bodyRoot body: TextAnalysisAuthoringCreateProjectOptions;
     },
-    TextAnalysisAuthoringProjectMetadata
+    Foundations.ResourceCreatedOrOkResponse<TextAnalysisAuthoringProjectMetadata>,
+    {},
+    ErrorResponse
   >;
 
   /**
