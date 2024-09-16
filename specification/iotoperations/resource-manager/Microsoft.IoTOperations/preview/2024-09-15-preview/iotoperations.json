@@ -3663,32 +3663,6 @@
         ]
       }
     },
-    "Components": {
-      "type": "object",
-      "description": "The configuration for components of the AIO Instance.",
-      "properties": {
-        "adr": {
-          "$ref": "#/definitions/AdrProperties",
-          "description": "The properties of the ADR instance."
-        },
-        "akri": {
-          "$ref": "#/definitions/AkriInstanceProperties",
-          "description": "The properties of the AKRI instance."
-        },
-        "connectors": {
-          "$ref": "#/definitions/ConnectorInstanceProperties",
-          "description": "The properties of the connectors instance."
-        },
-        "dataflows": {
-          "$ref": "#/definitions/DataflowInstanceProperties",
-          "description": "The properties of the dataflows instance."
-        },
-        "schemaRegistry": {
-          "$ref": "#/definitions/SchemaRegistryInstanceProperties",
-          "description": "The properties of the device provisioning instance."
-        }
-      }
-    },
     "ConnectorInstanceProperties": {
       "type": "object",
       "description": "The properties of a  Connector instance.",
@@ -5376,18 +5350,14 @@
           "description": "The Azure IoT Operations version.",
           "readOnly": true
         },
-        "schemaRegistryNamespace": {
+        "schemaRegistryId": {
           "type": "string",
           "description": "The reference to the Schema Registry for this AIO Instance.",
           "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
-        },
-        "components": {
-          "$ref": "#/definitions/Components",
-          "description": "The configuration for components of the AIO Instance."
         }
       },
       "required": [
-        "schemaRegistryNamespace"
+        "schemaRegistryId"
       ]
     },
     "InstanceResource": {
