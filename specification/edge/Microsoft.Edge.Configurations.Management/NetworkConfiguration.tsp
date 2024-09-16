@@ -28,7 +28,6 @@ interface NetworkConfigurations {
   listByConfiguration is ArmResourceListByParent<NetworkConfiguration>;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state"
 @doc("NetworkConfiguration Resource")
 @parentResource(Configuration)
 model NetworkConfiguration is ProxyResource<LanNetworkConfigurationProperties> {

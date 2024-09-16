@@ -50,7 +50,7 @@ model ConnectivityConfigurationProperties {
   @doc("Connectivity type")
   connectivityType: ConnectivityType;
 
-  @doc("Configuration for NTP Server. If the choice is set-to Custom then only need to set value for this.")
+  @doc("Proxy URL and Port Configuration")
   proxyConfiguration?: ProxyConfiguration;
 }
 

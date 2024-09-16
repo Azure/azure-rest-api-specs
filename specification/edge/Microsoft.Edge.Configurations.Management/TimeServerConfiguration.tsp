@@ -47,8 +47,7 @@ model TimeServerConfigurationProperties {
   @doc("Scenario in which this configuration is used")
   scenario: Scenario;
 
-  // TODO - check if this is supposed to be string or some other build-in type.
-  @doc("timezone value")
+  @doc("timezone value, the available list can be obtained by executing 'Get-TimeZone -ListAvailable' in PowerShell. An example of valid timezone id is 'Pacific Standard Time' or 'UTC'.")
   timezone: string;
 
   @doc("NTP Configuration choice")
