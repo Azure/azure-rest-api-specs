@@ -380,9 +380,6 @@ model DataflowEndpointMqttAuthentication {
 
   @doc("X.509 certificate authentication.")
   x509CertificateSettings?: DataflowEndpointAuthenticationX509;
-
-  @doc("Anonymous authentication.")
-  anonymousSettings?: DataflowEndpointAuthenticationAnonymous;
 }
 
 @doc("DataflowEndpoint Mqtt Authentication Method properties")

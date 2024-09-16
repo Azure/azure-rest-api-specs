@@ -3932,7 +3932,7 @@
           "description": "Reference to the Endpoint CR. Can be of Broker, Kafka, Fabric, ADLS, ADX type."
         },
         "dataDestination": {
-          "type": "string",
+          "$ref": "#/definitions/nonemptystring",
           "description": "Destination location, can be a topic or table name. Supports dynamic values with $topic, $systemProperties, $userProperties, $payload, $context, and $subscription."
         }
       },
@@ -3953,16 +3953,6 @@
       "required": [
         "secretRef"
       ]
-    },
-    "DataflowEndpointAuthenticationAnonymous": {
-      "type": "object",
-      "description": "DataflowEndpoint Anonymous Authentication Method properties",
-      "properties": {
-        "someKey": {
-          "type": "string",
-          "description": "Type of anonymous authentication."
-        }
-      }
     },
     "DataflowEndpointAuthenticationSasl": {
       "type": "object",
@@ -4757,10 +4747,6 @@
         "x509CertificateSettings": {
           "$ref": "#/definitions/DataflowEndpointAuthenticationX509",
           "description": "X.509 certificate authentication."
-        },
-        "anonymousSettings": {
-          "$ref": "#/definitions/DataflowEndpointAuthenticationAnonymous",
-          "description": "Anonymous authentication."
         }
       },
       "required": [
@@ -5148,7 +5134,7 @@
           "type": "array",
           "description": "List of source locations. Can be Broker or Kafka topics. Supports wildcards # and +.",
           "items": {
-            "type": "string"
+            "$ref": "#/definitions/nonemptystring"
           }
         }
       },
@@ -6704,6 +6690,11 @@
       "required": [
         "secretRef"
       ]
+    },
+    "nonemptystring": {
+      "type": "string",
+      "description": "A string with a minimum length of 1.",
+      "minLength": 1
     },
     "x509CertificateMethod": {
       "type": "string",
