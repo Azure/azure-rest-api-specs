@@ -965,6 +965,12 @@ model TextAnalysisAuthoringEvaluationResults {
  */
 @discriminator("projectKind")
 model TextAnalysisAuthoringDocumentEvaluationResult {
+
+  /**
+   * Represents the project kind.
+   */
+  projectKind: TextAnalysisAuthoringProjectKind;
+
   /**
    * Represents the document path.
    */
@@ -983,6 +989,12 @@ model TextAnalysisAuthoringDocumentEvaluationResult {
  */
 @discriminator("projectKind")
 model TextAnalysisAuthoringEvaluationSummary {
+  
+  /**
+   * Represents the project type that the evaluation ran on.
+   */
+  projectKind: TextAnalysisAuthoringProjectKind;
+
   /**
    * Represents the options used running the evaluation.
    */
