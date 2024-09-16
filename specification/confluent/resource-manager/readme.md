@@ -154,6 +154,7 @@ See configuration in [readme.ruby.md](./readme.ruby.md)
 ## TypeScript
 
 See configuration in [readme.typescript.md](./readme.typescript.md)
+
 ### AutoRest v3 Suppressions
 
 ``` yaml
