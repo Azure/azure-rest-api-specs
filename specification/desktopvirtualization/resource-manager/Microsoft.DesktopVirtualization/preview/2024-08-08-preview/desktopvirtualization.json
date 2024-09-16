@@ -8960,7 +8960,7 @@
         },
         "schedules": {
           "type": "array",
-          "description": "List of ScalingPlanPooledSchedule definitions.",
+          "description": "List of Pooled ScalingSchedule definitions.",
           "items": {
             "$ref": "#/definitions/ScalingSchedule"
           }
@@ -9176,6 +9176,11 @@
       "description": "A ScalingPlanPooledSchedule.",
       "type": "object",
       "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the ScalingPlanPooledSchedule.",
+          "readOnly": true
+        },
         "daysOfWeek": {
           "type": "array",
           "description": "Set of days of the week on which this schedule is active.",
@@ -9413,7 +9418,7 @@
         },
         "schedules": {
           "type": "array",
-          "description": "List of ScalingSchedule definitions.",
+          "description": "List Pooled ScalingSchedule definitions.",
           "items": {
             "$ref": "#/definitions/ScalingSchedule"
           }
