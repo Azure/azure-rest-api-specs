@@ -106,6 +106,12 @@ suppressions:
   - code: SystemDataDefinitionsCommonTypes
     from: networkVerifier.json
     reason: False alarm for common type errors.
+  - code: SystemDataDefinitionsCommonTypes
+    from: network.json
+    reason: False alarm.
+  - code: MissingSegmentsInNestedResourceListOperation
+    from: networkVerifier.json
+    reason: False alarm.
   - code: MissingSegmentsInNestedResourceListOperation
     from: ipAddressManager.json
     reason: False alarm.
