@@ -10,12 +10,19 @@ using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.Core.Traits;
 
+/* This is what I'm trying to do:
+curl -X POST -v "https://management.azure.com/subscriptions/%AZURE_SUBSCRIPTION%/resourceGroups/%AZURE_RESOURCE_GROUP%/providers/Microsoft.MachineLearningServices/workspaces/%AI_STUDIO_HUB%/connections/%AI_STUDIO_CONNECTION%/listsecrets?api-version=%API_VERSION%" ^
+-H "Content-Type: application/json" ^
+-H "Authorization: Bearer %ENTRA_ID_TOKEN%" ^
+-d "{\"subscriptionId\":\"%AZURE_SUBSCRIPTION%\",\"resourceGroupName\":\"%AZURE_RESOURCE_GROUP%\",\"workspaceName\":\"%AI_STUDIO_HUB%\",\"connectionName\":\"%AI_STUDIO_CONNECTION%\",\"api-version\":\"%API_VERSION%\"}"
+*/
+
 @useAuth(
   OAuth2Auth<[
     {
       type: OAuth2FlowType.implicit,
       authorizationUrl: "https://login.microsoftonline.com/common/oauth2/v2.0/authorize",
-      scopes: ["https://ml.azure.com/.default"],
+      scopes: ["https://management.azure.com/.default"],
     }
   ]>
 )
@@ -32,7 +39,7 @@ using Azure.Core.Traits;
     @doc("The name of the Resource Group.")
     resourceGroupName: string,
 
-    @doc("The name of the AzureML workspace or AI project.")
+    @doc("The name of the workspace (Azure AI Studio hub).")
     workspaceName: string,
   }
 )

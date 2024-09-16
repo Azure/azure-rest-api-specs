@@ -36,10 +36,10 @@ model ListSecretsPropertiesCredentials {
   key: string;
 }
 
-#suppress "@azure-tools/typespec-providerhub/no-inline-model" "Need to create reponses correctly"
-alias ResourceCreatedResponse<T extends TypeSpec.Reflection.Model> = TypeSpec.Http.Response<201> &
-  T;
+//#suppress "@azure-tools/typespec-providerhub/no-inline-model" "Need to create reponses correctly"
+//alias ResourceCreatedResponse<T extends TypeSpec.Reflection.Model> = TypeSpec.Http.Response<201> &
+//  T;
 
-#suppress "@azure-tools/typespec-providerhub/no-inline-model" "Need to create reponses correctly"
-alias ResourceCreatedOrOkResponse<T extends TypeSpec.Reflection.Model> = ResourceCreatedResponse<T> | (TypeSpec.Http.Response<200> &
-  T);
+//#suppress "@azure-tools/typespec-providerhub/no-inline-model" "Need to create reponses correctly"
+//alias ResourceCreatedOrOkResponse<T extends TypeSpec.Reflection.Model> = ResourceCreatedResponse<T> | (TypeSpec.Http.Response<200> &
+//  T);

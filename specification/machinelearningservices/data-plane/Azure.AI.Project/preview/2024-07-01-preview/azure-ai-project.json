@@ -33,7 +33,7 @@
       {
         "name": "workspaceName",
         "in": "path",
-        "description": "The name of the AzureML workspace or AI project.",
+        "description": "The name of the workspace (Azure AI Studio hub).",
         "required": true,
         "type": "string"
       }
@@ -48,7 +48,7 @@
   "security": [
     {
       "OAuth2Auth": [
-        "https://ml.azure.com/.default"
+        "https://management.azure.com/.default"
       ]
     }
   ],
@@ -58,22 +58,22 @@
       "flow": "implicit",
       "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/v2.0/authorize",
       "scopes": {
-        "https://ml.azure.com/.default": ""
+        "https://management.azure.com/.default": ""
       }
     }
   },
   "tags": [],
   "paths": {
-    "/connections/{connectionName}/listsecrets": {
+    "/connections/{connectionNameInUrl}/listsecrets": {
       "post": {
-        "operationId": "Connections_ListSecrets",
+        "operationId": "ListSecrets",
         "description": "List secrets for a given connection.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "connectionName",
+            "name": "connectionNameInUrl",
             "in": "path",
             "description": "Connection Name",
             "required": true,
@@ -86,6 +86,10 @@
             "schema": {
               "type": "object",
               "properties": {
+                "connectionName": {
+                  "type": "string",
+                  "description": "Connection Name"
+                },
                 "subscriptionId": {
                   "type": "string",
                   "description": "The ID of the target subscription."
@@ -96,20 +100,15 @@
                 },
                 "workspaceName": {
                   "type": "string",
-                  "description": "The name of the AzureML workspace or AI project."
+                  "description": "The name of the workspace (Azire AI Studio hub)."
                 },
                 "apiVersionInBody": {
                   "type": "string",
-                  "description": "The api version.",
-                  "enum": [
-                    "2024-07-01-preview"
-                  ],
-                  "x-ms-enum": {
-                    "modelAsString": false
-                  }
+                  "description": "The api version."
                 }
               },
               "required": [
+                "connectionName",
                 "subscriptionId",
                 "resourceGroupName",
                 "workspaceName",

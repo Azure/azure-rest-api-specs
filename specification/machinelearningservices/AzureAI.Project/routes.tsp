@@ -14,30 +14,29 @@ using Azure.Core.Foundations;
 
 namespace Azure.Ai.Project;
 
-interface Connections {
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Need to define route."
-  @doc("List secrets for a given connection.")
-  @route("connections/{connectionName}/listsecrets")
-  @post
-  listSecrets is Azure.Core.Foundations.Operation<
-    {
-      @doc("Connection Name")
-      connectionName: string;
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Need to define route."
+@doc("List secrets for a given connection.")
+@route("connections/{connectionNameInUrl}/listsecrets")
+@post
+op listSecrets is Azure.Core.Foundations.Operation<
+  {
+    @doc("Connection Name")
+    connectionNameInUrl: string;
 
-      @doc("The ID of the target subscription.")
-      subscriptionId: string;
+    @doc("Connection Name")
+    connectionName: string;
 
-      @doc("The name of the Resource Group.")
-      resourceGroupName: string;
+    @doc("The ID of the target subscription.")
+    subscriptionId: string;
 
-      @doc("The name of the AzureML workspace or AI project.")
-      workspaceName: string;
+    @doc("The name of the Resource Group.")
+    resourceGroupName: string;
 
-      // How can I take the already existing apiVersion value defined in Azure.Core.Foundations.Operation as query parameter?
-      @doc("The api version.")
-      @key("api-version")
-      apiVersionInBody: "2024-07-01-preview";
-    },
-    ListSecretsResponse
-  >;
-}
+    @doc("The name of the workspace (Azire AI Studio hub).")
+    workspaceName: string;
+
+    @doc("The api version.")
+    apiVersionInBody: string;
+  },
+  ListSecretsResponse
+>;
