@@ -1,0 +1,37 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "resourceGroupName": "rg1",
+    "locationName": "westeurope",
+    "$filter": "Properties/Operation eq 'StartManagedInstanceDatabaseMove'",
+    "onlyLastPerDatabase": "true",
+    "api-version": "2024-05-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "properties": {
+              "isCancellable": true,
+              "operation": "StartManagedInstanceDatabaseMove",
+              "operationFriendlyName": "Start Azure SQL Managed Instance database move",
+              "operationMode": "Copy",
+              "sourceDatabaseName": "db1",
+              "sourceManagedInstanceId": "subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/rg1/providers/Microsoft.Sql/managedInstances/mi1",
+              "sourceManagedInstanceName": "mi1",
+              "startTime": "2022-05-24T12:54:29.72Z",
+              "state": "InProgress",
+              "targetDatabaseName": "db1",
+              "targetManagedInstanceId": "subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/rg2/providers/Microsoft.Sql/managedInstances/mi2",
+              "targetManagedInstanceName": "mi2"
+            },
+            "id": "subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/rg1/providers/Microsoft.Sql/locations/westeurope/managedDatabaseMoveOperationResults/87654321-30a2-f39a-z171-b78695fg32a8",
+            "name": "87654321-30a2-f39a-z171-b78695fg32a8",
+            "type": "Microsoft.Sql/locations/managedDatabaseMoveOperationResults"
+          }
+        ]
+      }
+    }
+  }
+}
