@@ -1,0 +1,954 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft.AwsConnector",
+    "version": "2024-12-01",
+    "description": "Microsoft.AwsConnector Resource Provider management API.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "ElasticLoadBalancingV2ListenerRules"
+    }
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AwsConnector/elasticLoadBalancingV2ListenerRules": {
+      "get": {
+        "operationId": "ElasticLoadBalancingV2ListenerRules_ListBySubscription",
+        "tags": [
+          "ElasticLoadBalancingV2ListenerRules"
+        ],
+        "description": "List ElasticLoadBalancingV2ListenerRule resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ElasticLoadBalancingV2ListenerRuleListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ElasticLoadBalancingV2ListenerRules_ListBySubscription": {
+            "$ref": "./examples/ElasticLoadBalancingV2ListenerRules_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AwsConnector/elasticLoadBalancingV2ListenerRules": {
+      "get": {
+        "operationId": "ElasticLoadBalancingV2ListenerRules_ListByResourceGroup",
+        "tags": [
+          "ElasticLoadBalancingV2ListenerRules"
+        ],
+        "description": "List ElasticLoadBalancingV2ListenerRule resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ElasticLoadBalancingV2ListenerRuleListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ElasticLoadBalancingV2ListenerRules_ListByResourceGroup": {
+            "$ref": "./examples/ElasticLoadBalancingV2ListenerRules_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AwsConnector/elasticLoadBalancingV2ListenerRules/{name}": {
+      "get": {
+        "operationId": "ElasticLoadBalancingV2ListenerRules_Get",
+        "tags": [
+          "ElasticLoadBalancingV2ListenerRules"
+        ],
+        "description": "Get a ElasticLoadBalancingV2ListenerRule",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of ElasticLoadBalancingV2ListenerRule",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ElasticLoadBalancingV2ListenerRule"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ElasticLoadBalancingV2ListenerRules_Get": {
+            "$ref": "./examples/ElasticLoadBalancingV2ListenerRules_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "ElasticLoadBalancingV2ListenerRules_CreateOrUpdate",
+        "tags": [
+          "ElasticLoadBalancingV2ListenerRules"
+        ],
+        "description": "Create a ElasticLoadBalancingV2ListenerRule. Please note that end user resource creation is currently restricted, but it will be enabled in the future.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of ElasticLoadBalancingV2ListenerRule",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ElasticLoadBalancingV2ListenerRule"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'ElasticLoadBalancingV2ListenerRule' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ElasticLoadBalancingV2ListenerRule"
+            }
+          },
+          "201": {
+            "description": "Resource 'ElasticLoadBalancingV2ListenerRule' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ElasticLoadBalancingV2ListenerRule"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ElasticLoadBalancingV2ListenerRules_CreateOrUpdate": {
+            "$ref": "./examples/ElasticLoadBalancingV2ListenerRules_CreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "ElasticLoadBalancingV2ListenerRules_Update",
+        "tags": [
+          "ElasticLoadBalancingV2ListenerRules"
+        ],
+        "description": "Update a ElasticLoadBalancingV2ListenerRule",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of ElasticLoadBalancingV2ListenerRule",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ElasticLoadBalancingV2ListenerRuleTagsUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ElasticLoadBalancingV2ListenerRule"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ElasticLoadBalancingV2ListenerRules_Update": {
+            "$ref": "./examples/ElasticLoadBalancingV2ListenerRules_Update.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "ElasticLoadBalancingV2ListenerRules_Delete",
+        "tags": [
+          "ElasticLoadBalancingV2ListenerRules"
+        ],
+        "description": "Delete a ElasticLoadBalancingV2ListenerRule",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of ElasticLoadBalancingV2ListenerRule",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ElasticLoadBalancingV2ListenerRules_Delete": {
+            "$ref": "./examples/ElasticLoadBalancingV2ListenerRules_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "Action": {
+      "type": "object",
+      "description": "Definition of Action",
+      "properties": {
+        "authenticateCognitoConfig": {
+          "$ref": "#/definitions/AuthenticateCognitoConfig",
+          "description": "[HTTPS listeners] Information for using Amazon Cognito to authenticate users. Specify only when ``Type`` is ``authenticate-cognito``. Specifies information required when integrating with Amazon Cognito to authenticate users."
+        },
+        "authenticateOidcConfig": {
+          "$ref": "#/definitions/AuthenticateOidcConfig",
+          "description": "[HTTPS listeners] Information about an identity provider that is compliant with OpenID Connect (OIDC). Specify only when ``Type`` is ``authenticate-oidc``. Specifies information required using an identity provide (IdP) that is compliant with OpenID Connect (OIDC) to authenticate users."
+        },
+        "fixedResponseConfig": {
+          "$ref": "#/definitions/FixedResponseConfig",
+          "description": "[Application Load Balancer] Information for creating an action that returns a custom HTTP response. Specify only when ``Type`` is ``fixed-response``. Specifies information required when returning a custom HTTP response."
+        },
+        "forwardConfig": {
+          "$ref": "#/definitions/ForwardConfig",
+          "description": "Information for creating an action that distributes requests among one or more target groups. For Network Load Balancers, you can specify a single target group. Specify only when ``Type`` is ``forward``. If you specify both ``ForwardConfig`` and ``TargetGroupArn``, you can specify only one target group using ``ForwardConfig`` and it must be the same target group specified in ``TargetGroupArn``. Information for creating an action that distributes requests among one or more target groups. For Network Load Balancers, you can specify a single target group. Specify only when ``Type`` is ``forward``. If you specify both ``ForwardConfig`` and ``TargetGroupArn``, you can specify only one target group using ``ForwardConfig`` and it must be the same target group specified in ``TargetGroupArn``."
+        },
+        "order": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The order for the action. This value is required for rules with multiple actions. The action with the lowest value for order is performed first."
+        },
+        "redirectConfig": {
+          "$ref": "#/definitions/RedirectConfig",
+          "description": "[Application Load Balancer] Information for creating a redirect action. Specify only when ``Type`` is ``redirect``. Information about a redirect action. A URI consists of the following components: protocol://hostname:port/path?query. You must modify at least one of the following components to avoid a redirect loop: protocol, hostname, port, or path. Any components that you do not modify retain their original values. You can reuse URI components using the following reserved keywords:  +  #{protocol}  +  #{host}  +  #{port}  +  #{path} (the leading '/' is removed)  +  #{query}   For example, you can change the path to '/new/#{path}', the hostname to 'example.#{host}', or the query to '#{query}&value=xyz'."
+        },
+        "targetGroupArn": {
+          "type": "string",
+          "description": "The Amazon Resource Name (ARN) of the target group. Specify only when ``Type`` is ``forward`` and you want to route to a single target group. To route to one or more target groups, use ``ForwardConfig`` instead."
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of action."
+        }
+      }
+    },
+    "AuthenticateCognitoConfig": {
+      "type": "object",
+      "description": "Definition of AuthenticateCognitoConfig",
+      "properties": {
+        "authenticationRequestExtraParams": {
+          "type": "object",
+          "description": "The query parameters (up to 10) to include in the redirect request to the authorization endpoint.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "onUnauthenticatedRequest": {
+          "type": "string",
+          "description": "The behavior if the user is not authenticated. The following are possible values:  +  deny```` - Return an HTTP 401 Unauthorized error.  +  allow```` - Allow the request to be forwarded to the target.  +  authenticate```` - Redirect the request to the IdP authorization endpoint. This is the default value."
+        },
+        "scope": {
+          "type": "string",
+          "description": "The set of user claims to be requested from the IdP. The default is ``openid``. To verify which scope values your IdP supports and how to separate multiple values, see the documentation for your IdP."
+        },
+        "sessionCookieName": {
+          "type": "string",
+          "description": "The name of the cookie used to maintain session information. The default is AWSELBAuthSessionCookie."
+        },
+        "sessionTimeout": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum duration of the authentication session, in seconds. The default is 604800 seconds (7 days)."
+        },
+        "userPoolArn": {
+          "type": "string",
+          "description": "The Amazon Resource Name (ARN) of the Amazon Cognito user pool."
+        },
+        "userPoolClientId": {
+          "type": "string",
+          "description": "The ID of the Amazon Cognito user pool client."
+        },
+        "userPoolDomain": {
+          "type": "string",
+          "description": "The domain prefix or fully-qualified domain name of the Amazon Cognito user pool."
+        }
+      }
+    },
+    "AuthenticateOidcConfig": {
+      "type": "object",
+      "description": "Definition of AuthenticateOidcConfig",
+      "properties": {
+        "authenticationRequestExtraParams": {
+          "type": "object",
+          "description": "The query parameters (up to 10) to include in the redirect request to the authorization endpoint.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "authorizationEndpoint": {
+          "type": "string",
+          "description": "The authorization endpoint of the IdP. This must be a full URL, including the HTTPS protocol, the domain, and the path."
+        },
+        "clientId": {
+          "type": "string",
+          "description": "The OAuth 2.0 client identifier."
+        },
+        "clientSecret": {
+          "type": "string",
+          "description": "The OAuth 2.0 client secret. This parameter is required if you are creating a rule. If you are modifying a rule, you can omit this parameter if you set ``UseExistingClientSecret`` to true."
+        },
+        "issuer": {
+          "type": "string",
+          "description": "The OIDC issuer identifier of the IdP. This must be a full URL, including the HTTPS protocol, the domain, and the path."
+        },
+        "onUnauthenticatedRequest": {
+          "type": "string",
+          "description": "The behavior if the user is not authenticated. The following are possible values:  +  deny```` - Return an HTTP 401 Unauthorized error.  +  allow```` - Allow the request to be forwarded to the target.  +  authenticate```` - Redirect the request to the IdP authorization endpoint. This is the default value."
+        },
+        "scope": {
+          "type": "string",
+          "description": "The set of user claims to be requested from the IdP. The default is ``openid``. To verify which scope values your IdP supports and how to separate multiple values, see the documentation for your IdP."
+        },
+        "sessionCookieName": {
+          "type": "string",
+          "description": "The name of the cookie used to maintain session information. The default is AWSELBAuthSessionCookie."
+        },
+        "sessionTimeout": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum duration of the authentication session, in seconds. The default is 604800 seconds (7 days)."
+        },
+        "tokenEndpoint": {
+          "type": "string",
+          "description": "The token endpoint of the IdP. This must be a full URL, including the HTTPS protocol, the domain, and the path."
+        },
+        "useExistingClientSecret": {
+          "type": "boolean",
+          "description": "Indicates whether to use the existing client secret when modifying a rule. If you are creating a rule, you can omit this parameter or set it to false."
+        },
+        "userInfoEndpoint": {
+          "type": "string",
+          "description": "The user info endpoint of the IdP. This must be a full URL, including the HTTPS protocol, the domain, and the path."
+        }
+      }
+    },
+    "AwsElasticLoadBalancingV2ListenerRuleProperties": {
+      "type": "object",
+      "description": "Definition of awsElasticLoadBalancingV2ListenerRule",
+      "properties": {
+        "actions": {
+          "type": "array",
+          "description": "The actions. The rule must include exactly one of the following types of actions: ``forward``, ``fixed-response``, or ``redirect``, and it must be the last action to be performed. If the rule is for an HTTPS listener, it can also optionally include an authentication action.",
+          "items": {
+            "$ref": "#/definitions/Action"
+          },
+          "x-ms-identifiers": []
+        },
+        "conditions": {
+          "type": "array",
+          "description": "The conditions. The rule can optionally include up to one of each of the following conditions: ``http-request-method``, ``host-header``, ``path-pattern``, and ``source-ip``. A rule can also optionally include one or more of each of the following conditions: ``http-header`` and ``query-string``.",
+          "items": {
+            "$ref": "#/definitions/RuleCondition"
+          },
+          "x-ms-identifiers": []
+        },
+        "isDefault": {
+          "type": "boolean",
+          "description": "Property isDefault"
+        },
+        "listenerArn": {
+          "type": "string",
+          "description": "The Amazon Resource Name (ARN) of the listener."
+        },
+        "priority": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The rule priority. A listener can't have multiple rules with the same priority. If you try to reorder rules by updating their priorities, do not specify a new priority if an existing rule already uses this priority, as this can cause an error. If you need to reuse a priority with a different rule, you must remove it as a priority first, and then specify it in a subsequent update."
+        },
+        "ruleArn": {
+          "type": "string",
+          "description": "Property ruleArn"
+        }
+      }
+    },
+    "ElasticLoadBalancingV2ListenerRule": {
+      "type": "object",
+      "description": "A Microsoft.AwsConnector resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ElasticLoadBalancingV2ListenerRuleProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "ElasticLoadBalancingV2ListenerRuleListResult": {
+      "type": "object",
+      "description": "The response of a ElasticLoadBalancingV2ListenerRule list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ElasticLoadBalancingV2ListenerRule items on this page",
+          "items": {
+            "$ref": "#/definitions/ElasticLoadBalancingV2ListenerRule"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ElasticLoadBalancingV2ListenerRuleProperties": {
+      "type": "object",
+      "description": "Definition of ElasticLoadBalancingV2ListenerRule",
+      "properties": {
+        "awsProperties": {
+          "$ref": "#/definitions/AwsElasticLoadBalancingV2ListenerRuleProperties",
+          "description": "AWS Properties"
+        },
+        "publicCloudConnectorsResourceId": {
+          "type": "string",
+          "description": "Public Cloud Connectors Resource ID"
+        },
+        "awsAccountId": {
+          "type": "string",
+          "description": "AWS Account ID"
+        },
+        "arn": {
+          "type": "string",
+          "description": "Amazon Resource Name (ARN)"
+        },
+        "publicCloudResourceName": {
+          "type": "string",
+          "description": "Public Cloud Resource Name"
+        },
+        "awsSourceSchema": {
+          "type": "string",
+          "description": "AWS Source Schema"
+        },
+        "awsRegion": {
+          "type": "string",
+          "description": "AWS Region"
+        },
+        "awsTags": {
+          "type": "object",
+          "description": "AWS Tags",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        }
+      }
+    },
+    "ElasticLoadBalancingV2ListenerRuleTagsUpdate": {
+      "type": "object",
+      "description": "The type used for updating tags in ElasticLoadBalancingV2ListenerRule resources.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "FixedResponseConfig": {
+      "type": "object",
+      "description": "Definition of FixedResponseConfig",
+      "properties": {
+        "contentType": {
+          "type": "string",
+          "description": "The content type. Valid Values: text/plain | text/css | text/html | application/javascript | application/json"
+        },
+        "messageBody": {
+          "type": "string",
+          "description": "The message."
+        },
+        "statusCode": {
+          "type": "string",
+          "description": "The HTTP response code (2XX, 4XX, or 5XX)."
+        }
+      }
+    },
+    "ForwardConfig": {
+      "type": "object",
+      "description": "Definition of ForwardConfig",
+      "properties": {
+        "targetGroupStickinessConfig": {
+          "$ref": "#/definitions/TargetGroupStickinessConfig",
+          "description": "Information about the target group stickiness for a rule. Information about the target group stickiness for a rule."
+        },
+        "targetGroups": {
+          "type": "array",
+          "description": "Information about how traffic will be distributed between multiple target groups in a forward rule.",
+          "items": {
+            "$ref": "#/definitions/TargetGroupTuple"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "HostHeaderConfig": {
+      "type": "object",
+      "description": "Definition of HostHeaderConfig",
+      "properties": {
+        "values": {
+          "type": "array",
+          "description": "The host names. The maximum size of each name is 128 characters. The comparison is case insensitive. The following wildcard characters are supported: * (matches 0 or more characters) and ? (matches exactly 1 character). If you specify multiple strings, the condition is satisfied if one of the strings matches the host name.",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "HttpHeaderConfig": {
+      "type": "object",
+      "description": "Definition of HttpHeaderConfig",
+      "properties": {
+        "httpHeaderName": {
+          "type": "string",
+          "description": "The name of the HTTP header field. The maximum size is 40 characters. The header name is case insensitive. The allowed characters are specified by RFC 7230. Wildcards are not supported."
+        },
+        "values": {
+          "type": "array",
+          "description": "The strings to compare against the value of the HTTP header. The maximum size of each string is 128 characters. The comparison strings are case insensitive. The following wildcard characters are supported: * (matches 0 or more characters) and ? (matches exactly 1 character). If the same header appears multiple times in the request, we search them in order until a match is found. If you specify multiple strings, the condition is satisfied if one of the strings matches the value of the HTTP header. To require that all of the strings are a match, create one condition per string.",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "HttpRequestMethodConfig": {
+      "type": "object",
+      "description": "Definition of HttpRequestMethodConfig",
+      "properties": {
+        "values": {
+          "type": "array",
+          "description": "The name of the request method. The maximum size is 40 characters. The allowed characters are A-Z, hyphen (-), and underscore (_). The comparison is case sensitive. Wildcards are not supported; therefore, the method name must be an exact match. If you specify multiple strings, the condition is satisfied if one of the strings matches the HTTP request method. We recommend that you route GET and HEAD requests in the same way, because the response to a HEAD request may be cached.",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "PathPatternConfig": {
+      "type": "object",
+      "description": "Definition of PathPatternConfig",
+      "properties": {
+        "values": {
+          "type": "array",
+          "description": "The path patterns to compare against the request URL. The maximum size of each string is 128 characters. The comparison is case sensitive. The following wildcard characters are supported: * (matches 0 or more characters) and ? (matches exactly 1 character). If you specify multiple strings, the condition is satisfied if one of them matches the request URL. The path pattern is compared only to the path of the URL, not to its query string.",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of a resource.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Provisioning",
+        "Updating",
+        "Deleting",
+        "Accepted"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Provisioning",
+            "value": "Provisioning",
+            "description": "The resource is being provisioned"
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "The resource is updating"
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "The resource is being deleted"
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "The resource create request has been accepted"
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "QueryStringConfig": {
+      "type": "object",
+      "description": "Definition of QueryStringConfig",
+      "properties": {
+        "values": {
+          "type": "array",
+          "description": "The key/value pairs or values to find in the query string. The maximum size of each string is 128 characters. The comparison is case insensitive. The following wildcard characters are supported: * (matches 0 or more characters) and ? (matches exactly 1 character). To search for a literal '*' or '?' character in a query string, you must escape these characters in ``Values`` using a '\\' character. If you specify multiple key/value pairs or values, the condition is satisfied if one of them is found in the query string.",
+          "items": {
+            "$ref": "#/definitions/QueryStringKeyValue"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "QueryStringKeyValue": {
+      "type": "object",
+      "description": "Definition of QueryStringKeyValue",
+      "properties": {
+        "key": {
+          "type": "string",
+          "description": "The key. You can omit the key."
+        },
+        "value": {
+          "type": "string",
+          "description": "The value."
+        }
+      }
+    },
+    "RedirectConfig": {
+      "type": "object",
+      "description": "Definition of RedirectConfig",
+      "properties": {
+        "host": {
+          "type": "string",
+          "description": "The hostname. This component is not percent-encoded. The hostname can contain #{host}."
+        },
+        "path": {
+          "type": "string",
+          "description": "The absolute path, starting with the leading '/'. This component is not percent-encoded. The path can contain #{host}, #{path}, and #{port}."
+        },
+        "port": {
+          "type": "string",
+          "description": "The port. You can specify a value from 1 to 65535 or #{port}."
+        },
+        "protocol": {
+          "type": "string",
+          "description": "The protocol. You can specify HTTP, HTTPS, or #{protocol}. You can redirect HTTP to HTTP, HTTP to HTTPS, and HTTPS to HTTPS. You cannot redirect HTTPS to HTTP."
+        },
+        "query": {
+          "type": "string",
+          "description": "The query parameters, URL-encoded when necessary, but not percent-encoded. Do not include the leading '?', as it is automatically added. You can specify any of the reserved keywords."
+        },
+        "statusCode": {
+          "type": "string",
+          "description": "The HTTP redirect code. The redirect is either permanent (HTTP 301) or temporary (HTTP 302)."
+        }
+      }
+    },
+    "RuleCondition": {
+      "type": "object",
+      "description": "Definition of RuleCondition",
+      "properties": {
+        "field": {
+          "type": "string",
+          "description": "The field in the HTTP request. The following are the possible values:  +   ``http-header``   +   ``http-request-method``   +   ``host-header``   +   ``path-pattern``   +   ``query-string``   +   ``source-ip``"
+        },
+        "hostHeaderConfig": {
+          "$ref": "#/definitions/HostHeaderConfig",
+          "description": "Information for a host header condition. Specify only when ``Field`` is ``host-header``. Information about a host header condition."
+        },
+        "httpHeaderConfig": {
+          "$ref": "#/definitions/HttpHeaderConfig",
+          "description": "Information for an HTTP header condition. Specify only when ``Field`` is ``http-header``. Information about an HTTP header condition. There is a set of standard HTTP header fields. You can also define custom HTTP header fields."
+        },
+        "httpRequestMethodConfig": {
+          "$ref": "#/definitions/HttpRequestMethodConfig",
+          "description": "Information for an HTTP method condition. Specify only when ``Field`` is ``http-request-method``. Information about an HTTP method condition. HTTP defines a set of request methods, also referred to as HTTP verbs. For more information, see the [HTTP Method Registry](https://docs.aws.amazon.com/https://www.iana.org/assignments/http-methods/http-methods.xhtml). You can also define custom HTTP methods."
+        },
+        "pathPatternConfig": {
+          "$ref": "#/definitions/PathPatternConfig",
+          "description": "Information for a path pattern condition. Specify only when ``Field`` is ``path-pattern``. Information about a path pattern condition."
+        },
+        "queryStringConfig": {
+          "$ref": "#/definitions/QueryStringConfig",
+          "description": "Information for a query string condition. Specify only when ``Field`` is ``query-string``. Information about a query string condition. The query string component of a URI starts after the first '?' character and is terminated by either a '#' character or the end of the URI. A typical query string contains key/value pairs separated by '&' characters. The allowed characters are specified by RFC 3986. Any character can be percentage encoded."
+        },
+        "sourceIpConfig": {
+          "$ref": "#/definitions/SourceIpConfig",
+          "description": "Information for a source IP condition. Specify only when ``Field`` is ``source-ip``. Information about a source IP condition. You can use this condition to route based on the IP address of the source that connects to the load balancer. If a client is behind a proxy, this is the IP address of the proxy not the IP address of the client."
+        },
+        "values": {
+          "type": "array",
+          "description": "The condition value. Specify only when ``Field`` is ``host-header`` or ``path-pattern``. Alternatively, to specify multiple host names or multiple path patterns, use ``HostHeaderConfig`` or ``PathPatternConfig``. If ``Field`` is ``host-header`` and you're not using ``HostHeaderConfig``, you can specify a single host name (for example, my.example.com). A host name is case insensitive, can be up to 128 characters in length, and can contain any of the following characters.  +  A-Z, a-z, 0-9  +  - .  +  * (matches 0 or more characters)  +  ? (matches exactly 1 character)   If ``Field`` is ``path-pattern`` and you're not using ``PathPatternConfig``, you can specify a single path pattern (for example, /img/*). A path pattern is case-sensitive, can be up to 128 characters in length, and can contain any of the following characters.  +  A-Z, a-z, 0-9  +  _ - . $ / ~ ' ' @ : +  +  & (using &amp;)  +  * (matches 0 or more characters)  +  ? (matches exactly 1 character)",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "SourceIpConfig": {
+      "type": "object",
+      "description": "Definition of SourceIpConfig",
+      "properties": {
+        "values": {
+          "type": "array",
+          "description": "The source IP addresses, in CIDR format. You can use both IPv4 and IPv6 addresses. Wildcards are not supported. If you specify multiple addresses, the condition is satisfied if the source IP address of the request matches one of the CIDR blocks. This condition is not satisfied by the addresses in the X-Forwarded-For header.",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "TargetGroupStickinessConfig": {
+      "type": "object",
+      "description": "Definition of TargetGroupStickinessConfig",
+      "properties": {
+        "durationSeconds": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The time period, in seconds, during which requests from a client should be routed to the same target group. The range is 1-604800 seconds (7 days)."
+        },
+        "enabled": {
+          "type": "boolean",
+          "description": "Indicates whether target group stickiness is enabled."
+        }
+      }
+    },
+    "TargetGroupTuple": {
+      "type": "object",
+      "description": "Definition of TargetGroupTuple",
+      "properties": {
+        "targetGroupArn": {
+          "type": "string",
+          "description": "The Amazon Resource Name (ARN) of the target group."
+        },
+        "weight": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The weight. The range is 0 to 999."
+        }
+      }
+    }
+  },
+  "parameters": {}
+}
