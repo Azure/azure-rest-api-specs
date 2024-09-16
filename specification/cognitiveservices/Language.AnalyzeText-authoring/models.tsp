@@ -175,7 +175,17 @@ union TextAnalysisAuthoringCompositionSetting {
 /**
  * Represents a list of retrieved projects' metadata.
  */
-model TextAnalysisAuthoringProjectsMetadata is Azure.Core.Page<TextAnalysisAuthoringProjectMetadata>;
+model TextAnalysisAuthoringProjectsMetadata {
+  /**
+   * The list of projects.
+   */
+  value: TextAnalysisAuthoringProjectMetadata[];
+
+  /**
+   * The next page link.
+   */
+  nextLink?: string;
+}
 
 /**
  * Represents the metadata of a project.
@@ -594,7 +604,17 @@ model TextAnalysisAuthoringWarning {
 /**
  * Represents a list of retrieved deployments.
  */
-model TextAnalysisAuthoringProjectDeployments is Azure.Core.Page<TextAnalysisAuthoringProjectDeployment>;
+model TextAnalysisAuthoringProjectDeployments {
+  /**
+   * The list of projects.
+   */
+  value: TextAnalysisAuthoringProjectDeployment[];
+
+  /**
+   * The next page link.
+   */
+  nextLink?: string;
+}
 
 /**
  * Represents a project deployment.
@@ -717,7 +737,17 @@ model TextAnalysisAuthoringExportProjectJobState extends TextAnalysisAuthoringJo
 /**
  * Represents a list of exported trained models.
  */
-model TextAnalysisAuthoringExportedTrainedModels is Azure.Core.Page<TextAnalysisAuthoringExportedTrainedModel>;
+model TextAnalysisAuthoringExportedTrainedModels{
+  /**
+   * The list of projects.
+   */
+  value: TextAnalysisAuthoringExportedTrainedModel[];
+
+  /**
+   * The next page link.
+   */
+  nextLink?: string;
+}
 
 /**
  * Represents an exported trained model.
@@ -804,7 +834,17 @@ model TextAnalysisAuthoringImportProjectJobState extends TextAnalysisAuthoringJo
 /**
  * Represents a list of retrieved trained models.
  */
-model TextAnalysisAuthoringProjectTrainedModels is Azure.Core.Page<TextAnalysisAuthoringProjectTrainedModel>;
+model TextAnalysisAuthoringProjectTrainedModels {
+  /**
+   * The list of projects.
+   */
+  value: TextAnalysisAuthoringProjectTrainedModel[];
+
+  /**
+   * The next page link.
+   */
+  nextLink?: string;
+} 
 
 /**
  * Represents a trained model.
@@ -882,7 +922,17 @@ model TextAnalysisAuthoringEvaluationJobResult {
 /**
  * Represents a list of results for an evaluation operation.
  */
-model TextAnalysisAuthoringEvaluationResults is Azure.Core.Page<TextAnalysisAuthoringDocumentEvaluationResult>;
+model TextAnalysisAuthoringEvaluationResults {
+  /**
+   * The list of projects.
+   */
+  value: TextAnalysisAuthoringDocumentEvaluationResult[];
+
+  /**
+   * The next page link.
+   */
+  nextLink?: string;
+}
 
 /**
  * Represents the evaluation result of a document.
@@ -921,8 +971,17 @@ model TextAnalysisAuthoringLoadSnapshotJobState extends TextAnalysisAuthoringJob
 /**
  * Represents the assigned deployment resources.
  */
-model TextAnalysisAuthoringAssignedDeploymentResources
-  is Azure.Core.Page<TextAnalysisAuthoringAssignedDeploymentResource>;
+model TextAnalysisAuthoringAssignedDeploymentResources {
+  /**
+   * The list of projects.
+   */
+  value: TextAnalysisAuthoringAssignedDeploymentResource[];
+
+  /**
+   * The next page link.
+   */
+  nextLink?: string;
+}
 
 /**
  * Represents the assigned deployment resource.
@@ -987,7 +1046,17 @@ model TextAnalysisAuthoringDeploymentResourcesJobState extends TextAnalysisAutho
 /**
  * Represents a list of retrieved training jobs.
  */
-model TextAnalysisAuthoringTrainingJobs is Azure.Core.Page<TextAnalysisAuthoringTrainingJobState>;
+model TextAnalysisAuthoringTrainingJobs {
+  /**
+   * The list of projects.
+   */
+  value: TextAnalysisAuthoringTrainingJobState[];
+
+  /**
+   * The next page link.
+   */
+  nextLink?: string;
+}
 
 /**
  * Represents the state of a training job.
@@ -1065,8 +1134,17 @@ model TextAnalysisAuthoringProjectDeletionJobState extends TextAnalysisAuthoring
 /**
  * Represents the metadata for deployments assigned to a resource.
  */
-model TextAnalysisAuthoringAssignedResourceDeploymentsMetadata
-  is Azure.Core.Page<TextAnalysisAuthoringAssignedProjectDeploymentsMetadata>;
+model TextAnalysisAuthoringAssignedResourceDeploymentsMetadata {
+  /**
+   * The list of projects.
+   */
+  value: TextAnalysisAuthoringAssignedProjectDeploymentsMetadata[];
+
+  /**
+   * The next page link.
+   */
+  nextLink?: string;
+}
 
 /**
  * Represents the metadata for assigned deployments for a project.
@@ -1107,7 +1185,17 @@ model TextAnalysisAuthoringAssignedProjectDeploymentMetadata {
 /**
  * Represents a list of retrieved languages.
  */
-model TextAnalysisAuthoringSupportedLanguages is Azure.Core.Page<TextAnalysisAuthoringSupportedLanguage>;
+model TextAnalysisAuthoringSupportedLanguages {
+  /**
+   * The list of projects.
+   */
+  value: TextAnalysisAuthoringSupportedLanguage[];
+
+  /**
+   * The next page link.
+   */
+  nextLink?: string;
+}
 
 /**
  * Represents a supported language.
@@ -1128,7 +1216,17 @@ model TextAnalysisAuthoringSupportedLanguage {
 /**
  * Represents a list of the retrieved supported prebuilt entities.
  */
-model TextAnalysisAuthoringPrebuiltEntities is Azure.Core.Page<TextAnalysisAuthoringPrebuiltEntity>;
+model TextAnalysisAuthoringPrebuiltEntities {
+  /**
+   * The list of projects.
+   */
+  value: TextAnalysisAuthoringPrebuiltEntity[];
+
+  /**
+   * The next page link.
+   */
+  nextLink?: string;
+}
 
 /**
  * Represents a supported prebuilt entity.
@@ -1153,7 +1251,17 @@ model TextAnalysisAuthoringPrebuiltEntity {
 /**
  * Represents a list of training config versions.
  */
-model TextAnalysisAuthoringTrainingConfigVersions is Azure.Core.Page<TextAnalysisAuthoringTrainingConfigVersion>;
+model TextAnalysisAuthoringTrainingConfigVersions {
+  /**
+   * The list of projects.
+   */
+  value: TextAnalysisAuthoringTrainingConfigVersion[];
+
+  /**
+   * The next page link.
+   */
+  nextLink?: string;
+}
 
 /**
  * Represents a training config version.
