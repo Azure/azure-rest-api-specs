@@ -46,7 +46,10 @@ union SolutionVersionType {
 @resource("versions")
 @discriminator("kind")
 model SolutionVersion is ProxyResource<{}> {
-  ...ResourceNameParameter<SolutionVersion>;
+  ...ResourceNameParameter<
+  SolutionVersion,
+  NamePattern = "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+>;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" ""
   @doc("Kind of solution version")

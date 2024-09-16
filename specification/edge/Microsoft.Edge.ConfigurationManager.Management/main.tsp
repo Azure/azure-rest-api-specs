@@ -7,6 +7,7 @@ import "./CapabilityList.tsp";
 import "./DeploymentTarget.tsp";
 import "./DynamicSchema.tsp";
 import "./DynamicSchemaVersion.tsp";
+import "./HierarchyList.tsp";
 import "./Schema.tsp";
 import "./SchemaVersion.tsp";
 import "./SchemaReference.tsp";

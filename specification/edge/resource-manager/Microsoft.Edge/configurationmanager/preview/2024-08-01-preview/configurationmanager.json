@@ -58,6 +58,9 @@
       "name": "SchemaVersions"
     },
     {
+      "name": "HierarchyLists"
+    },
+    {
       "name": "SchemaReferences"
     },
     {
@@ -396,6 +399,45 @@
         "x-ms-examples": {
           "DeploymentTargets_ListBySubscription": {
             "$ref": "./examples/DeploymentTargets_ListBySubscription_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Edge/hierarchyLists": {
+      "get": {
+        "operationId": "HierarchyLists_ListBySubscription",
+        "tags": [
+          "HierarchyLists"
+        ],
+        "description": "List by subscription",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/HierarchyListListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "HierarchyLists_ListBySubscription": {
+            "$ref": "./examples/HierarchyLists_ListBySubscription_MaximumSet_Gen.json"
           }
         },
         "x-ms-pageable": {
@@ -1031,6 +1073,254 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Edge/hierarchyLists": {
+      "get": {
+        "operationId": "HierarchyLists_ListByResourceGroup",
+        "tags": [
+          "HierarchyLists"
+        ],
+        "description": "List by specified resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/HierarchyListListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "HierarchyLists_ListByResourceGroup": {
+            "$ref": "./examples/HierarchyLists_ListByResourceGroup_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Edge/hierarchyLists/{hierarchyListName}": {
+      "get": {
+        "operationId": "HierarchyLists_Get",
+        "tags": [
+          "HierarchyLists"
+        ],
+        "description": "Get a Hierarchy List Resource",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "hierarchyListName",
+            "in": "path",
+            "description": "The name of the HierarchyList",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/HierarchyList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "HierarchyLists_Get": {
+            "$ref": "./examples/HierarchyLists_Get_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "HierarchyLists_CreateOrUpdate",
+        "tags": [
+          "HierarchyLists"
+        ],
+        "description": "Create or update a Hierarchy List Resource",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "hierarchyListName",
+            "in": "path",
+            "description": "The name of the HierarchyList",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/HierarchyList"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'HierarchyList' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/HierarchyList"
+            }
+          },
+          "201": {
+            "description": "Resource 'HierarchyList' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/HierarchyList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "HierarchyLists_CreateOrUpdate": {
+            "$ref": "./examples/HierarchyLists_CreateOrUpdate_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "patch": {
+        "operationId": "HierarchyLists_Update",
+        "tags": [
+          "HierarchyLists"
+        ],
+        "description": "update a Hierarchy List Resource",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "hierarchyListName",
+            "in": "path",
+            "description": "The name of the HierarchyList",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/HierarchyListUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/HierarchyList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "HierarchyLists_Update": {
+            "$ref": "./examples/HierarchyLists_Update_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "HierarchyLists_Delete",
+        "tags": [
+          "HierarchyLists"
+        ],
+        "description": "Delete a Hierarchy List Resource",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "hierarchyListName",
+            "in": "path",
+            "description": "The name of the HierarchyList",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "HierarchyLists_Delete": {
+            "$ref": "./examples/HierarchyLists_Delete_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Edge/schemas": {
       "get": {
         "operationId": "Schemas_ListByResourceGroup",
@@ -1496,7 +1786,7 @@
             "description": "The name of the SchemaVersion",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
           }
         ],
         "responses": {
@@ -1601,7 +1891,7 @@
             "description": "The name of the SchemaVersion",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
           }
         ],
         "responses": {
@@ -1654,7 +1944,7 @@
             "description": "The name of the SchemaVersion",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
           },
           {
             "name": "resource",
@@ -1737,7 +2027,7 @@
             "description": "The name of the SchemaVersion",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
           },
           {
             "name": "properties",
@@ -1799,7 +2089,7 @@
             "description": "The name of the SchemaVersion",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
           }
         ],
         "responses": {
@@ -1888,7 +2178,7 @@
             "description": "The name of the SolutionBinding",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "pattern": "^[a-zA-Z0-9-]{3,60}$"
           }
         ],
         "responses": {
@@ -1933,7 +2223,7 @@
             "description": "The name of the SolutionBinding",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "pattern": "^[a-zA-Z0-9-]{3,60}$"
           },
           {
             "name": "resource",
@@ -2008,7 +2298,7 @@
             "description": "The name of the SolutionBinding",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "pattern": "^[a-zA-Z0-9-]{3,60}$"
           },
           {
             "name": "properties",
@@ -2062,7 +2352,7 @@
             "description": "The name of the SolutionBinding",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "pattern": "^[a-zA-Z0-9-]{3,60}$"
           }
         ],
         "responses": {
@@ -2109,7 +2399,7 @@
             "description": "The name of the SolutionBinding",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "pattern": "^[a-zA-Z0-9-]{3,60}$"
           },
           {
             "name": "body",
@@ -2177,7 +2467,7 @@
             "description": "The name of the SolutionBinding",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "pattern": "^[a-zA-Z0-9-]{3,60}$"
           },
           {
             "name": "body",
@@ -2251,7 +2541,7 @@
             "description": "The name of the SolutionBinding",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "pattern": "^[a-zA-Z0-9-]{3,60}$"
           },
           {
             "name": "body",
@@ -2325,7 +2615,7 @@
             "description": "The name of the SolutionBinding",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "pattern": "^[a-zA-Z0-9-]{3,60}$"
           }
         ],
         "responses": {
@@ -2375,7 +2665,7 @@
             "description": "The name of the SolutionBinding",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "pattern": "^[a-zA-Z0-9-]{3,60}$"
           },
           {
             "name": "solutionBindingConfigurationName",
@@ -2428,7 +2718,7 @@
             "description": "The name of the SolutionBinding",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "pattern": "^[a-zA-Z0-9-]{3,60}$"
           },
           {
             "name": "solutionBindingConfigurationName",
@@ -2511,7 +2801,7 @@
             "description": "The name of the SolutionBinding",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "pattern": "^[a-zA-Z0-9-]{3,60}$"
           },
           {
             "name": "solutionBindingConfigurationName",
@@ -2573,7 +2863,7 @@
             "description": "The name of the SolutionBinding",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "pattern": "^[a-zA-Z0-9-]{3,60}$"
           },
           {
             "name": "solutionBindingConfigurationName",
@@ -2628,7 +2918,7 @@
             "description": "The name of the SolutionBinding",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "pattern": "^[a-zA-Z0-9-]{3,60}$"
           }
         ],
         "responses": {
@@ -2678,7 +2968,7 @@
             "description": "The name of the SolutionBinding",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "pattern": "^[a-zA-Z0-9-]{3,60}$"
           },
           {
             "name": "solutionInstanceName",
@@ -2731,7 +3021,7 @@
             "description": "The name of the SolutionBinding",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "pattern": "^[a-zA-Z0-9-]{3,60}$"
           },
           {
             "name": "solutionInstanceName",
@@ -2814,7 +3104,7 @@
             "description": "The name of the SolutionBinding",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "pattern": "^[a-zA-Z0-9-]{3,60}$"
           },
           {
             "name": "solutionInstanceName",
@@ -2876,7 +3166,7 @@
             "description": "The name of the SolutionBinding",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "pattern": "^[a-zA-Z0-9-]{3,60}$"
           },
           {
             "name": "solutionInstanceName",
@@ -3252,7 +3542,7 @@
             "description": "The name of the SolutionVersion",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
           }
         ],
         "responses": {
@@ -3305,7 +3595,7 @@
             "description": "The name of the SolutionVersion",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
           },
           {
             "name": "resource",
@@ -3388,7 +3678,7 @@
             "description": "The name of the SolutionVersion",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
           }
         ],
         "responses": {
@@ -3677,6 +3967,10 @@
           },
           "x-ms-identifiers": []
         },
+        "hierarchyLevel": {
+          "type": "string",
+          "description": "Hierarchy level at which the deployment target needs to be created"
+        },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
           "description": "Provisioning state of resource",
@@ -3686,7 +3980,8 @@
       "required": [
         "displayName",
         "customLocation",
-        "capabilities"
+        "capabilities",
+        "hierarchyLevel"
       ]
     },
     "DeploymentTargetPropertiesUpdate": {
@@ -3708,6 +4003,10 @@
             "$ref": "#/definitions/Capability"
           },
           "x-ms-identifiers": []
+        },
+        "hierarchyLevel": {
+          "type": "string",
+          "description": "Hierarchy level at which the deployment target needs to be created"
         }
       }
     },
@@ -3864,6 +4163,111 @@
         "helmChartUri",
         "helmChartVersion",
         "configurationTemplate"
+      ]
+    },
+    "Hierarchy": {
+      "type": "object",
+      "description": "Hierarchy Properties",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of hierarchy level"
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of hierarchy level"
+        }
+      },
+      "required": [
+        "name",
+        "description"
+      ]
+    },
+    "HierarchyList": {
+      "type": "object",
+      "description": "Hierarchy List Resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/HierarchyListProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "HierarchyListListResult": {
+      "type": "object",
+      "description": "The response of a HierarchyList list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The HierarchyList items on this page",
+          "items": {
+            "$ref": "#/definitions/HierarchyList"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "HierarchyListProperties": {
+      "type": "object",
+      "description": "Hierarchy List Properties",
+      "properties": {
+        "hierarchyLevels": {
+          "type": "array",
+          "description": "List of hierarchy levels",
+          "items": {
+            "$ref": "#/definitions/Hierarchy"
+          },
+          "x-ms-identifiers": []
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Provisioning state of resource",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "hierarchyLevels"
+      ]
+    },
+    "HierarchyListPropertiesUpdate": {
+      "type": "object",
+      "description": "Hierarchy List Properties",
+      "properties": {
+        "hierarchyLevels": {
+          "type": "array",
+          "description": "List of hierarchy levels",
+          "items": {
+            "$ref": "#/definitions/Hierarchy"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "HierarchyListUpdate": {
+      "type": "object",
+      "description": "Hierarchy List Resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/HierarchyListPropertiesUpdate",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
+        }
       ]
     },
     "ProvisioningState": {
@@ -4291,19 +4695,23 @@
       "properties": {
         "solution": {
           "type": "string",
-          "description": "Solution of solution binding"
+          "description": "Solution of solution binding",
+          "readOnly": true
         },
         "deploymentTarget": {
           "type": "string",
-          "description": "Deployment Target of solution binding"
+          "description": "Deployment Target of solution binding",
+          "readOnly": true
         },
         "activeSolutionInstance": {
           "type": "string",
-          "description": "Active Solution Instance of solution binding"
+          "description": "Active Solution Instance of solution binding",
+          "readOnly": true
         },
         "scope": {
           "type": "string",
-          "description": "Scope of solution binding"
+          "description": "Scope of solution binding",
+          "readOnly": true
         },
         "configuredSolutionVersions": {
           "type": "array",
@@ -4319,34 +4727,6 @@
           "description": "Provisioning state of resource",
           "readOnly": true
         }
-      },
-      "required": [
-        "solution",
-        "deploymentTarget",
-        "activeSolutionInstance",
-        "scope"
-      ]
-    },
-    "SolutionBindingPropertiesUpdate": {
-      "type": "object",
-      "description": "Solution Binding Properties",
-      "properties": {
-        "solution": {
-          "type": "string",
-          "description": "Solution of solution binding"
-        },
-        "deploymentTarget": {
-          "type": "string",
-          "description": "Deployment Target of solution binding"
-        },
-        "activeSolutionInstance": {
-          "type": "string",
-          "description": "Active Solution Instance of solution binding"
-        },
-        "scope": {
-          "type": "string",
-          "description": "Scope of solution binding"
-        }
       }
     },
     "SolutionBindingUpdate": {
@@ -4354,7 +4734,7 @@
       "description": "Solution Binding Resource",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/SolutionBindingPropertiesUpdate",
+          "$ref": "#/definitions/SolutionBindingProperties",
           "description": "The resource-specific properties for this resource."
         }
       },

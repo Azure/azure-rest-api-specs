@@ -35,16 +35,20 @@ model SolutionConfigurationParameter {
 @doc("Solution Binding Properties")
 model SolutionBindingProperties {
   @doc("Solution of solution binding")
-  solution: string;
+  @visibility("read")
+  solution?: string;
 
   @doc("Deployment Target of solution binding")
-  deploymentTarget: string;
+  @visibility("read")
+  deploymentTarget?: string;
 
   @doc("Active Solution Instance of solution binding")
-  activeSolutionInstance: string;
+  @visibility("read")
+  activeSolutionInstance?: string;
 
   @doc("Scope of solution binding")
-  scope: string;
+  @visibility("read")
+  scope?: string;
 
   @doc("Array of configured solution versions")
   @visibility("read")
@@ -58,7 +62,10 @@ model SolutionBindingProperties {
 
 @doc("Solution Binding Resource")
 model SolutionBinding is TrackedResource<SolutionBindingProperties> {
-  ...ResourceNameParameter<SolutionBinding>;
+  ...ResourceNameParameter<
+  SolutionBinding,
+  NamePattern = "^[a-zA-Z0-9-]{3,60}$"
+  >;
 }
 
 @armResourceOperations
