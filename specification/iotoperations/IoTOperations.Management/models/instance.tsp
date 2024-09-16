@@ -54,31 +54,6 @@ model InstanceProperties {
   @doc("The reference to the Schema Registry for this AIO Instance.")
   @pattern("^[a-z0-9][a-z0-9-]*[a-z0-9]$")
   schemaRegistryNamespace: string;
-
-  @doc("The configuration for components of the AIO Instance.")
-  components?: Components = #{};
-}
-
-@doc("The configuration for components of the AIO Instance.")
-model Components {
-  @doc("The properties of the ADR instance.")
-  adr?: AdrProperties = #{ state: OperationalMode.Enabled };
-
-  @doc("The properties of the AKRI instance.")
-  akri?: AkriInstanceProperties = #{ state: OperationalMode.Enabled };
-
-  @doc("The properties of the connectors instance.")
-  connectors?: ConnectorInstanceProperties = #{
-    state: OperationalMode.Enabled,
-  };
-
-  @doc("The properties of the dataflows instance.")
-  dataflows?: DataflowInstanceProperties = #{ state: OperationalMode.Enabled };
-
-  @doc("The properties of the device provisioning instance.")
-  schemaRegistry?: SchemaRegistryInstanceProperties = #{
-    state: OperationalMode.Enabled,
-  };
 }
 
 @doc("The properties of an ADR instance.")
