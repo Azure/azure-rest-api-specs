@@ -46,10 +46,47 @@
       "name": "AutoActions"
     },
     {
+      "name": "AutoActionsExtension"
+    },
+    {
       "name": "Occurrences"
     }
   ],
   "paths": {
+    "/{resourceUri}/providers/Microsoft.ComputeSchedule/autoActionResources": {
+      "get": {
+        "operationId": "AutoActionsExtension_ListByVms",
+        "tags": [
+          "AutoActionsExtension"
+        ],
+        "description": "List AutoActionResources resources by parent",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AutoActionResourcesListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/{resourceUri}/providers/Microsoft.ComputeSchedule/autoActions": {
       "get": {
         "operationId": "AutoActions_ListByVms",
@@ -1779,6 +1816,42 @@
             "$ref": "#/definitions/AutoActionResource"
           },
           "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "AutoActionResources": {
+      "type": "object",
+      "description": "The auto action extension",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AutoActionProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "AutoActionResourcesListResult": {
+      "type": "object",
+      "description": "The response of a AutoActionResources list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The AutoActionResources items on this page",
+          "items": {
+            "$ref": "#/definitions/AutoActionResources"
+          }
         },
         "nextLink": {
           "type": "string",

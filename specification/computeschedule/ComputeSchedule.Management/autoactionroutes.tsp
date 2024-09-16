@@ -63,3 +63,9 @@ interface AutoActions {
     ErrorResponse
   >;
 }
+
+@added(Microsoft.ComputeSchedule.Versions.`2024-08-01-preview`)
+@armResourceOperations
+interface AutoActionsExtension {
+  listByVms is ArmResourceListByParent<AutoActionResources>;
+}
