@@ -9120,7 +9120,7 @@
         "properties": {
           "description": "Detailed properties for ScalingPlanPooledSchedule",
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/ScalingPlanPooledScheduleProperties"
+          "$ref": "#/definitions/ScalingPlanPooledSchedulePatchProperties"
         }
       }
     },
@@ -9164,6 +9164,150 @@
       }
     },
     "ScalingPlanPooledScheduleProperties": {
+      "description": "A ScalingPlanPooledSchedule.",
+      "type": "object",
+      "required": [
+        "daysOfWeek",
+        "rampUpStartTime",
+        "peakStartTime",
+        "rampDownStartTime",
+        "offPeakStartTime",
+        "rampDownCapacityThresholdPct",
+        "rampUpCapacityThresholdPct"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the ScalingPlanPooledSchedule.",
+          "readOnly": true
+        },
+        "daysOfWeek": {
+          "type": "array",
+          "description": "Set of days of the week on which this schedule is active.",
+          "items": {
+            "$ref": "#/definitions/DaysOfWeek"
+          }
+        },
+        "rampUpStartTime": {
+          "$ref": "#/definitions/Time",
+          "description": "Starting time for ramp up period."
+        },
+        "rampUpLoadBalancingAlgorithm": {
+          "enum": [
+            "BreadthFirst",
+            "DepthFirst"
+          ],
+          "x-ms-enum": {
+            "name": "SessionHostLoadBalancingAlgorithm",
+            "modelAsString": true
+          },
+          "type": "string",
+          "description": "Load balancing algorithm for ramp up period."
+        },
+        "rampUpMinimumHostsPct": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0,
+          "maximum": 100,
+          "description": "Minimum host percentage for ramp up period."
+        },
+        "rampUpCapacityThresholdPct": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 1,
+          "maximum": 100,
+          "description": "Capacity threshold for ramp up period."
+        },
+        "peakStartTime": {
+          "$ref": "#/definitions/Time",
+          "description": "Starting time for peak period."
+        },
+        "peakLoadBalancingAlgorithm": {
+          "enum": [
+            "BreadthFirst",
+            "DepthFirst"
+          ],
+          "x-ms-enum": {
+            "name": "SessionHostLoadBalancingAlgorithm",
+            "modelAsString": true
+          },
+          "type": "string",
+          "description": "Load balancing algorithm for peak period."
+        },
+        "rampDownStartTime": {
+          "$ref": "#/definitions/Time",
+          "description": "Starting time for ramp down period."
+        },
+        "rampDownLoadBalancingAlgorithm": {
+          "enum": [
+            "BreadthFirst",
+            "DepthFirst"
+          ],
+          "x-ms-enum": {
+            "name": "SessionHostLoadBalancingAlgorithm",
+            "modelAsString": true
+          },
+          "type": "string",
+          "description": "Load balancing algorithm for ramp down period."
+        },
+        "rampDownMinimumHostsPct": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0,
+          "maximum": 100,
+          "description": "Minimum host percentage for ramp down period."
+        },
+        "rampDownCapacityThresholdPct": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 1,
+          "maximum": 100,
+          "description": "Capacity threshold for ramp down period."
+        },
+        "rampDownForceLogoffUsers": {
+          "type": "boolean",
+          "description": "Should users be logged off forcefully from hosts."
+        },
+        "rampDownStopHostsWhen": {
+          "enum": [
+            "ZeroSessions",
+            "ZeroActiveSessions"
+          ],
+          "x-ms-enum": {
+            "name": "StopHostsWhen",
+            "modelAsString": true
+          },
+          "type": "string",
+          "description": "Specifies when to stop hosts during ramp down period."
+        },
+        "rampDownWaitTimeMinutes": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of minutes to wait to stop hosts during ramp down period."
+        },
+        "rampDownNotificationMessage": {
+          "type": "string",
+          "description": "Notification message for users during ramp down period."
+        },
+        "offPeakStartTime": {
+          "$ref": "#/definitions/Time",
+          "description": "Starting time for off-peak period."
+        },
+        "offPeakLoadBalancingAlgorithm": {
+          "enum": [
+            "BreadthFirst",
+            "DepthFirst"
+          ],
+          "x-ms-enum": {
+            "name": "SessionHostLoadBalancingAlgorithm",
+            "modelAsString": true
+          },
+          "type": "string",
+          "description": "Load balancing algorithm for off-peak period."
+        }
+      }
+    },
+    "ScalingPlanPooledSchedulePatchProperties": {
       "description": "A ScalingPlanPooledSchedule.",
       "type": "object",
       "properties": {
@@ -9504,7 +9648,7 @@
         "properties": {
           "description": "Detailed properties for ScalingPlanPersonalSchedule",
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/ScalingPlanPersonalScheduleProperties"
+          "$ref": "#/definitions/ScalingPlanPersonalSchedulePatchProperties"
         }
       }
     },
@@ -9548,6 +9692,273 @@
       }
     },
     "ScalingPlanPersonalScheduleProperties": {
+      "description": "A ScalingPlanPersonalSchedule.",
+      "type": "object",
+      "required": [
+        "daysOfWeek",
+        "rampUpStartTime",
+        "peakStartTime",
+        "rampDownStartTime",
+        "offPeakStartTime"
+      ],
+      "properties": {
+        "daysOfWeek": {
+          "type": "array",
+          "description": "Set of days of the week on which this schedule is active.",
+          "items": {
+            "$ref": "#/definitions/DaysOfWeek"
+          }
+        },
+        "rampUpStartTime": {
+          "$ref": "#/definitions/Time",
+          "description": "Starting time for ramp up period."
+        },
+        "rampUpAutoStartHosts": {
+          "enum": [
+            "None",
+            "WithAssignedUser",
+            "All"
+          ],
+          "x-ms-enum": {
+            "name": "StartupBehavior",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "None",
+                "description": "Session hosts will not be started by the service. This setting depends on Start VM on Connect to be enabled to start the session hosts."
+              },
+              {
+                "value": "WithAssignedUser",
+                "description": "Session hosts with an assigned user will be started during Ramp Up"
+              },
+              {
+                "value": "All",
+                "description": "All personal session hosts in the hostpool will be started during ramp up."
+              }
+            ]
+          },
+          "type": "string",
+          "description": "The desired startup behavior during the ramp up period for personal vms in the hostpool."
+        },
+        "rampUpStartVMOnConnect": {
+          "enum": [
+            "Enable",
+            "Disable"
+          ],
+          "x-ms-enum": {
+            "name": "SetStartVMOnConnect",
+            "modelAsString": true
+          },
+          "default": "Enable",
+          "type": "string",
+          "description": "The desired configuration of Start VM On Connect for the hostpool during the ramp up phase. If this is disabled, session hosts must be turned on using rampUpAutoStartHosts or by turning them on manually."
+        },
+        "rampUpActionOnDisconnect": {
+          "enum": [
+            "None",
+            "Deallocate",
+            "Hibernate"
+          ],
+          "x-ms-enum": {
+            "name": "SessionHandlingOperation",
+            "modelAsString": true
+          },
+          "type": "string",
+          "description": "Action to be taken after a user disconnect during the ramp up period."
+        },
+        "rampUpMinutesToWaitOnDisconnect": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0,
+          "description": "The time in minutes to wait before performing the desired session handling action when a user disconnects during the ramp up period."
+        },
+        "rampUpActionOnLogoff": {
+          "enum": [
+            "None",
+            "Deallocate",
+            "Hibernate"
+          ],
+          "x-ms-enum": {
+            "name": "SessionHandlingOperation",
+            "modelAsString": true
+          },
+          "type": "string",
+          "description": "Action to be taken after a logoff during the ramp up period."
+        },
+        "rampUpMinutesToWaitOnLogoff": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0,
+          "description": "The time in minutes to wait before performing the desired session handling action when a user logs off during the ramp up period."
+        },
+        "peakStartTime": {
+          "$ref": "#/definitions/Time",
+          "description": "Starting time for peak period."
+        },
+        "peakStartVMOnConnect": {
+          "enum": [
+            "Enable",
+            "Disable"
+          ],
+          "x-ms-enum": {
+            "name": "SetStartVMOnConnect",
+            "modelAsString": true
+          },
+          "default": "Enable",
+          "type": "string",
+          "description": "The desired configuration of Start VM On Connect for the hostpool during the peak phase."
+        },
+        "peakActionOnDisconnect": {
+          "enum": [
+            "None",
+            "Deallocate",
+            "Hibernate"
+          ],
+          "x-ms-enum": {
+            "name": "SessionHandlingOperation",
+            "modelAsString": true
+          },
+          "type": "string",
+          "description": "Action to be taken after a user disconnect during the peak period."
+        },
+        "peakMinutesToWaitOnDisconnect": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0,
+          "description": "The time in minutes to wait before performing the desired session handling action when a user disconnects during the peak period."
+        },
+        "peakActionOnLogoff": {
+          "enum": [
+            "None",
+            "Deallocate",
+            "Hibernate"
+          ],
+          "x-ms-enum": {
+            "name": "SessionHandlingOperation",
+            "modelAsString": true
+          },
+          "type": "string",
+          "description": "Action to be taken after a logoff during the peak period."
+        },
+        "peakMinutesToWaitOnLogoff": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0,
+          "description": "The time in minutes to wait before performing the desired session handling action when a user logs off during the peak period."
+        },
+        "rampDownStartTime": {
+          "$ref": "#/definitions/Time",
+          "description": "Starting time for ramp down period."
+        },
+        "rampDownStartVMOnConnect": {
+          "enum": [
+            "Enable",
+            "Disable"
+          ],
+          "x-ms-enum": {
+            "name": "SetStartVMOnConnect",
+            "modelAsString": true
+          },
+          "default": "Enable",
+          "type": "string",
+          "description": "The desired configuration of Start VM On Connect for the hostpool during the ramp down phase."
+        },
+        "rampDownActionOnDisconnect": {
+          "enum": [
+            "None",
+            "Deallocate",
+            "Hibernate"
+          ],
+          "x-ms-enum": {
+            "name": "SessionHandlingOperation",
+            "modelAsString": true
+          },
+          "type": "string",
+          "description": "Action to be taken after a user disconnect during the ramp down period."
+        },
+        "rampDownMinutesToWaitOnDisconnect": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0,
+          "description": "The time in minutes to wait before performing the desired session handling action when a user disconnects during the ramp down period."
+        },
+        "rampDownActionOnLogoff": {
+          "enum": [
+            "None",
+            "Deallocate",
+            "Hibernate"
+          ],
+          "x-ms-enum": {
+            "name": "SessionHandlingOperation",
+            "modelAsString": true
+          },
+          "type": "string",
+          "description": "Action to be taken after a logoff during the ramp down period."
+        },
+        "rampDownMinutesToWaitOnLogoff": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0,
+          "description": "The time in minutes to wait before performing the desired session handling action when a user logs off during the ramp down period."
+        },
+        "offPeakStartTime": {
+          "$ref": "#/definitions/Time",
+          "description": "Starting time for off-peak period."
+        },
+        "offPeakStartVMOnConnect": {
+          "enum": [
+            "Enable",
+            "Disable"
+          ],
+          "x-ms-enum": {
+            "name": "SetStartVMOnConnect",
+            "modelAsString": true
+          },
+          "default": "Enable",
+          "type": "string",
+          "description": "The desired configuration of Start VM On Connect for the hostpool during the off-peak phase."
+        },
+        "offPeakActionOnDisconnect": {
+          "enum": [
+            "None",
+            "Deallocate",
+            "Hibernate"
+          ],
+          "x-ms-enum": {
+            "name": "SessionHandlingOperation",
+            "modelAsString": true
+          },
+          "type": "string",
+          "description": "Action to be taken after a user disconnect during the off-peak period."
+        },
+        "offPeakMinutesToWaitOnDisconnect": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0,
+          "description": "The time in minutes to wait before performing the desired session handling action when a user disconnects during the off-peak period."
+        },
+        "offPeakActionOnLogoff": {
+          "enum": [
+            "None",
+            "Deallocate",
+            "Hibernate"
+          ],
+          "x-ms-enum": {
+            "name": "SessionHandlingOperation",
+            "modelAsString": true
+          },
+          "type": "string",
+          "description": "Action to be taken after a logoff during the off-peak period."
+        },
+        "offPeakMinutesToWaitOnLogoff": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0,
+          "description": "The time in minutes to wait before performing the desired session handling action when a user logs off during the off-peak period."
+        }
+      }
+    },
+    "ScalingPlanPersonalSchedulePatchProperties": {
       "description": "A ScalingPlanPersonalSchedule.",
       "type": "object",
       "properties": {
