@@ -32,9 +32,9 @@ tag: package-preview-2024-09-test
 
 ### Tag: package-preview-2024-09-test
 
-These settings apply only when `--tag=package-preview-2024-09` is specified on the command line.
+These settings apply only when `--tag=package-preview-2024-09-test` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2024-09'
+```yaml $(tag) == 'package-preview-2024-09-test'
 input-file:
   - Microsoft.DocumentDB/preview/2024-09-01-preview/cosmos-db.json
   - Microsoft.DocumentDB/preview/2024-09-01-preview/dataTransferService.json
