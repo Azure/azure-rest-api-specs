@@ -5351,9 +5351,8 @@
           "readOnly": true
         },
         "schemaRegistryId": {
-          "type": "string",
-          "description": "The reference to the Schema Registry for this AIO Instance.",
-          "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
+          "$ref": "#/definitions/SchemaRegistryID",
+          "description": "The reference to the Schema Registry for this AIO Instance."
         }
       },
       "required": [
@@ -5696,6 +5695,11 @@
           }
         ]
       }
+    },
+    "NonEmptyString": {
+      "type": "string",
+      "description": "A string with a minimum length of 1.",
+      "minLength": 1
     },
     "OpenTelemetryExportConfig": {
       "type": "object",
@@ -6055,6 +6059,18 @@
             "name": "Sasl",
             "value": "Sasl",
             "description": "Sasl Option"
+          }
+        ]
+      }
+    },
+    "SchemaRegistryID": {
+      "type": "string",
+      "format": "arm-id",
+      "description": "A type definition that refers the id to an Azure Resource Manager resource.",
+      "x-ms-arm-id-details": {
+        "allowedResources": [
+          {
+            "type": "Microsoft.DeviceRegistry/schemaRegistries"
           }
         ]
       }
@@ -6660,11 +6676,6 @@
       "required": [
         "secretRef"
       ]
-    },
-    "NonEmptyString": {
-      "type": "string",
-      "description": "A string with a minimum length of 1.",
-      "minLength": 1
     },
     "x509CertificateMethod": {
       "type": "string",

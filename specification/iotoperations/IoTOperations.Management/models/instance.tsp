@@ -52,8 +52,7 @@ model InstanceProperties {
   version?: string;
 
   @doc("The reference to the Schema Registry for this AIO Instance.")
-  @pattern("^[a-z0-9][a-z0-9-]*[a-z0-9]$")
-  schemaRegistryId: string;
+  schemaRegistryId: SchemaRegistryID;
 }
 
 @doc("The properties of an ADR instance.")

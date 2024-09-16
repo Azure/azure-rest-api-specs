@@ -247,3 +247,9 @@ union ServiceAccountTokenMethod {
   @doc("ServiceAccountToken Option")
   ServiceAccountToken: ServiceAccountToken,
 }
+
+scalar SchemaRegistryID extends Azure.Core.armResourceIdentifier<[
+  {
+    type: "Microsoft.DeviceRegistry/schemaRegistries";
+  }
+]>;
