@@ -13,6 +13,7 @@ using Azure.Core.Traits;
 
 namespace Language.Authoring;
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required"
 union TextAnalysisAuthoringProjectKind {
   string,
 
@@ -58,6 +59,7 @@ union TextAnalysisAuthoringProjectKind {
 /**
  * Human-readable error code.
  */
+#suppress "@azure-tools/typespec-azure-core/documentation-required"
 union ErrorCode {
   string,
   InvalidRequest: "InvalidRequest",
@@ -83,6 +85,7 @@ union ErrorCode {
 /**
  * Human-readable error code.
  */
+#suppress "@azure-tools/typespec-azure-core/documentation-required"
 union InnerErrorCode {
   string,
   InvalidRequest: "InvalidRequest",
@@ -101,6 +104,7 @@ union InnerErrorCode {
   InvalidCountryHint: "InvalidCountryHint",
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required"
 union TextAnalysisAuthoringStringIndexType {
   string,
 
@@ -112,6 +116,7 @@ union TextAnalysisAuthoringStringIndexType {
   Utf16CodeUnit: "Utf16CodeUnit",
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required"
 union TextAnalysisAuthoringEvaluationKind {
   string,
 
@@ -148,7 +153,7 @@ union TextAnalysisAuthoringJobStatus {
   partiallyCompleted: "partiallyCompleted",
 }
 
-
+#suppress "@azure-tools/typespec-azure-core/documentation-required"
 union TextAnalysisAuthoringSentiment {
   string,
   positive: "positive",
@@ -156,6 +161,7 @@ union TextAnalysisAuthoringSentiment {
   neutral: "neutral",
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required"
 union TextAnalysisAuthoringCompositionSetting {
   string,
 
@@ -237,6 +243,7 @@ model TextAnalysisAuthoringProjectMetadata {
    * The new project name.
    */
   @key("projectName")
+  @visibility
   projectName: string;
 
   /**
@@ -303,7 +310,6 @@ model ErrorResponse {
  * The error object.
  */
 model Error {
-  ...Record<unknown>;
 
   /**
    * One of a server-defined set of error codes.
@@ -495,7 +501,9 @@ model TextAnalysisAuthoringExportedProject {
  * Represents the assets of an exported project.
  */
 @discriminator("projectKind")
-model TextAnalysisAuthoringExportedProjectAssets {}
+model TextAnalysisAuthoringExportedProjectAssets {
+  projectKind: TextAnalysisAuthoringProjectKind;
+}
 
 /**
  * Represents the options for starting a new training job.
@@ -545,7 +553,9 @@ model TextAnalysisAuthoringEvaluationOptions {
 /**
  * Represents the state of a copy job.
  */
-model TextAnalysisAuthoringCopyProjectJobState extends TextAnalysisAuthoringJobState {}
+model TextAnalysisAuthoringCopyProjectJobState {
+  ...TextAnalysisAuthoringJobState;
+}
 
 /**
  * Represents a job's state.
@@ -711,7 +721,9 @@ model TextAnalysisAuthoringDeleteDeploymentOptions {
 /**
  * Represents the state of a deployment job.
  */
-model TextAnalysisAuthoringDeploymentJobState extends TextAnalysisAuthoringJobState {}
+model TextAnalysisAuthoringDeploymentJobState {
+  ...TextAnalysisAuthoringJobState;
+}
 
 /**
  * Represents the options for swapping two deployments together.
@@ -731,7 +743,9 @@ model TextAnalysisAuthoringSwapDeploymentsOptions {
 /**
  * Represents the state of an export job.
  */
-model TextAnalysisAuthoringExportProjectJobState extends TextAnalysisAuthoringJobState {
+model TextAnalysisAuthoringExportProjectJobState {
+
+  ...TextAnalysisAuthoringJobState;
   /**
    * The URL to use in order to download the exported project.
    */
@@ -803,7 +817,9 @@ model TextAnalysisAuthoringExportedModelOptions {
 /**
  * Represents the state of a job to create or updated an exported model.
  */
-model TextAnalysisAuthoringExportedModelJobState extends TextAnalysisAuthoringJobState {}
+model TextAnalysisAuthoringExportedModelJobState {
+  ...TextAnalysisAuthoringJobState;
+}
 
 /**
  * Represents the properties for the exported model manifest.
@@ -833,7 +849,9 @@ model TextAnalysisAuthoringModelFile {
 /**
  * Represents the state of an import job.
  */
-model TextAnalysisAuthoringImportProjectJobState extends TextAnalysisAuthoringJobState {}
+model TextAnalysisAuthoringImportProjectJobState {
+  ...TextAnalysisAuthoringJobState;
+}
 
 /**
  * Represents a list of retrieved trained models.
@@ -894,13 +912,17 @@ model TextAnalysisAuthoringProjectTrainedModel {
 /**
  * Represents the state of a evaluation job.
  */
-model TextAnalysisAuthoringEvaluationJobState extends TextAnalysisAuthoringJobState {
+model TextAnalysisAuthoringEvaluationJobState {
+
+  ...TextAnalysisAuthoringJobState;
+
   /**
    * Represents evaluation task detailed result.
    */
   result: TextAnalysisAuthoringEvaluationJobResult;
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required"
 model TextAnalysisAuthoringEvaluationJobResult {
   /**
    * Represents the options used running the evaluation.
@@ -970,7 +992,9 @@ model TextAnalysisAuthoringEvaluationSummary {
 /**
  * Represents the state of loading a snapshot job.
  */
-model TextAnalysisAuthoringLoadSnapshotJobState extends TextAnalysisAuthoringJobState {}
+model TextAnalysisAuthoringLoadSnapshotJobState {
+  ...TextAnalysisAuthoringJobState;
+}
 
 /**
  * Represents the assigned deployment resources.
@@ -1045,7 +1069,9 @@ model TextAnalysisAuthoringUnassignDeploymentResourcesOptions {
 /**
  * Represents the state of a deployment resources job.
  */
-model TextAnalysisAuthoringDeploymentResourcesJobState extends TextAnalysisAuthoringJobState {}
+model TextAnalysisAuthoringDeploymentResourcesJobState {
+  ...TextAnalysisAuthoringJobState;
+}
 
 /**
  * Represents a list of retrieved training jobs.
@@ -1065,7 +1091,9 @@ model TextAnalysisAuthoringTrainingJobs {
 /**
  * Represents the state of a training job.
  */
-model TextAnalysisAuthoringTrainingJobState extends TextAnalysisAuthoringJobState {
+model TextAnalysisAuthoringTrainingJobState {
+
+  ...TextAnalysisAuthoringJobState;
   /**
    * Represents training tasks detailed result.
    */
@@ -1133,7 +1161,9 @@ model TextAnalysisAuthoringSubTrainingJobState {
 /**
  * Represents the state of a project deletion job.
  */
-model TextAnalysisAuthoringProjectDeletionJobState extends TextAnalysisAuthoringJobState {}
+model TextAnalysisAuthoringProjectDeletionJobState {
+  ...TextAnalysisAuthoringJobState;
+}
 
 /**
  * Represents the metadata for deployments assigned to a resource.
@@ -2304,6 +2334,7 @@ model TextAnalysisAuthoringExportedCustomMultiLabelClassificationDocument {
 /**
  * Represents a classification label for a document.
  */
+#suppress "@azure-tools/typespec-azure-core/documentation-required"
 model TextAnalysisAuthoringExportedDocumentClass {
   category?: string;
 }
@@ -2381,6 +2412,7 @@ model TextAnalysisAuthoringExportedCustomSingleLabelClassificationProjectAssets
 /**
  * Represents an exported document for a custom text sentiment project.
  */
+#suppress "@azure-tools/typespec-azure-core/documentation-required"
 model TextAnalysisAuthoringExportedCustomTextSentimentDocument {
   sentimentSpans?: TextAnalysisAuthoringExportedDocumentSentimentLabel[];
 
