@@ -1954,26 +1954,10 @@
         "location": {
           "type": "string",
           "description": "ARM region of the IoT hub."
-        },
-        "authenticationType": {
-          "description": "IotHub MI authentication type: KeyBased, UserAssigned, SystemAssigned.",
-          "enum": [
-            "KeyBased",
-            "UserAssigned",
-            "SystemAssigned"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "IotHubAuthenticationType",
-            "modelAsString": true
-          }
-        },
-        "selectedUserAssignedIdentityResourceId": {
-          "type": "string",
-          "description": "Iot Hub selected user-assigned identity resource Id when AuthType is UserAssigned."
         }
       },
       "required": [
+        "connectionString",
         "location"
       ]
     },
