@@ -15,7 +15,6 @@ options:
     azure-resource-provider-folder: "data-plane"
     emit-lro-options: "none"
     emitter-output-dir: "{project-root}/.."
-    examples-directory: "examples"
     omit-unreachable-types: true
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/DocumentIntelligence.json"
   "@azure-tools/typespec-python":
@@ -24,6 +23,9 @@ options:
     package-name: "{package-dir}"
     package-version: 1.0.0b2
     flavor: azure
+    generate-test: true
+    generate-sample: true
+    examples-dir: "{project-root}/examples"
   "@azure-tools/typespec-java":
     package-dir: "azure-ai-documentintelligence"
     namespace: "com.azure.ai.documentintelligence"
