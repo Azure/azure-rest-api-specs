@@ -13,7 +13,7 @@ using Azure.Core.Traits;
 
 namespace Language.Authoring;
 
-union ProjectKind {
+union TextAnalysisAuthoringProjectKind {
   string,
 
   /**
@@ -101,7 +101,7 @@ union InnerErrorCode {
   InvalidCountryHint: "InvalidCountryHint",
 }
 
-union StringIndexType {
+union TextAnalysisAuthoringStringIndexType {
   string,
 
   /**
@@ -112,7 +112,7 @@ union StringIndexType {
   Utf16CodeUnit: "Utf16CodeUnit",
 }
 
-union EvaluationKind {
+union TextAnalysisAuthoringEvaluationKind {
   string,
 
   /**
@@ -127,25 +127,36 @@ union EvaluationKind {
   manual: "manual",
 }
 
-union JobStatus {
+#suppress "@azure-tools/typespec-azure-core/documentation-required"
+@lroStatus
+@clientName("JobStatus", "csharp")
+union TextAnalysisAuthoringJobStatus {
   string,
   notStarted: "notStarted",
   running: "running",
+
+  @lroSucceeded
   succeeded: "succeeded",
+
+  @lroFailed
   failed: "failed",
+
+  @lroCanceled
   cancelled: "cancelled",
+
   cancelling: "cancelling",
   partiallyCompleted: "partiallyCompleted",
 }
 
-union Sentiment {
+
+union TextAnalysisAuthoringSentiment {
   string,
   positive: "positive",
   negative: "negative",
   neutral: "neutral",
 }
 
-union CompositionSetting {
+union TextAnalysisAuthoringCompositionSetting {
   string,
 
   /**
@@ -164,12 +175,12 @@ union CompositionSetting {
 /**
  * Represents a list of retrieved projects' metadata.
  */
-model ProjectsMetadata is Azure.Core.Page<ProjectMetadata>;
+model TextAnalysisAuthoringProjectsMetadata is Azure.Core.Page<TextAnalysisAuthoringProjectMetadata>;
 
 /**
  * Represents the metadata of a project.
  */
-model ProjectMetadata {
+model TextAnalysisAuthoringProjectMetadata {
   /**
    * Represents the project creation datetime.
    */
@@ -197,7 +208,7 @@ model ProjectMetadata {
   /**
    * The project kind.
    */
-  projectKind: ProjectKind;
+  projectKind: TextAnalysisAuthoringProjectKind;
 
   /**
    * The storage container name.
@@ -207,7 +218,7 @@ model ProjectMetadata {
   /**
    * The project settings.
    */
-  settings?: ProjectSettings;
+  settings?: TextAnalysisAuthoringProjectSettings;
 
   /**
    * The new project name.
@@ -234,7 +245,7 @@ model ProjectMetadata {
 /**
  * Represents the settings used to define the project behavior.
  */
-model ProjectSettings {
+model TextAnalysisAuthoringProjectSettings {
   /**
    * The threshold of the class with the highest confidence, at which the prediction
    * will automatically be changed to "None". The value of the threshold should be
@@ -343,11 +354,11 @@ model InnerErrorModel {
 /**
  * Represents the options used to create or update a project.
  */
-model CreateProjectOptions {
+model TextAnalysisAuthoringCreateProjectOptions {
   /**
    * The project kind.
    */
-  projectKind: ProjectKind;
+  projectKind: TextAnalysisAuthoringProjectKind;
 
   /**
    * The storage container name.
@@ -357,7 +368,7 @@ model CreateProjectOptions {
   /**
    * The project settings.
    */
-  settings?: ProjectSettings;
+  settings?: TextAnalysisAuthoringProjectSettings;
 
   /**
    * The new project name.
@@ -385,11 +396,11 @@ model CreateProjectOptions {
  * Represents the options for authorizing a project copy to the current Azure
  * resource.
  */
-model CopyAuthorizationOptions {
+model TextAnalysisAuthoringCopyAuthorizationOptions {
   /**
    * Represents the project kind.
    */
-  projectKind: ProjectKind;
+  projectKind: TextAnalysisAuthoringProjectKind;
 
   /**
    * The name of the storage container.
@@ -407,11 +418,11 @@ model CopyAuthorizationOptions {
  * Represents the options for copying an existing project to another Azure
  * resource.
  */
-model CopyProjectOptions {
+model TextAnalysisAuthoringCopyProjectOptions {
   /**
    * Represents the project kind.
    */
-  projectKind: ProjectKind;
+  projectKind: TextAnalysisAuthoringProjectKind;
 
   /**
    * The project name to be copied-into.
@@ -443,7 +454,7 @@ model CopyProjectOptions {
 /**
  * Represents an exported project.
  */
-model ExportedProject {
+model TextAnalysisAuthoringExportedProject {
   /**
    * The version of the exported file.
    */
@@ -453,29 +464,29 @@ model ExportedProject {
    * Specifies the method used to interpret string offsets. For additional
    * information see https://aka.ms/text-analytics-offsets.
    */
-  stringIndexType: StringIndexType;
+  stringIndexType: TextAnalysisAuthoringStringIndexType;
 
   /**
    * Represents the project metadata.
    */
-  metadata: CreateProjectOptions;
+  metadata: TextAnalysisAuthoringCreateProjectOptions;
 
   /**
    * Represents the project assets.
    */
-  assets?: ExportedProjectAssets;
+  assets?: TextAnalysisAuthoringExportedProjectAssets;
 }
 
 /**
  * Represents the assets of an exported project.
  */
 @discriminator("projectKind")
-model ExportedProjectAssets {}
+model TextAnalysisAuthoringExportedProjectAssets {}
 
 /**
  * Represents the options for starting a new training job.
  */
-model TrainingJobOptions {
+model TextAnalysisAuthoringTrainingJobOptions {
   /**
    * Represents the output model label.
    */
@@ -491,18 +502,18 @@ model TrainingJobOptions {
    * percentage, with training split percentage as 80, and testing split percentage
    * as 20.
    */
-  evaluationOptions?: EvaluationOptions;
+  evaluationOptions?: TextAnalysisAuthoringEvaluationOptions;
 }
 
 /**
  * Represents the options used running the evaluation.
  */
-model EvaluationOptions {
+model TextAnalysisAuthoringEvaluationOptions {
   /**
    * Represents the evaluation kind. By default, the evaluation kind is set to
    * percentage.
    */
-  kind?: EvaluationKind;
+  kind?: TextAnalysisAuthoringEvaluationKind;
 
   /**
    * Represents the training dataset split percentage. Only needed in case the
@@ -520,12 +531,12 @@ model EvaluationOptions {
 /**
  * Represents the state of a copy job.
  */
-model CopyProjectJobState extends JobState {}
+model TextAnalysisAuthoringCopyProjectJobState extends TextAnalysisAuthoringJobState {}
 
 /**
  * Represents a job's state.
  */
-model JobState {
+model TextAnalysisAuthoringJobState {
   /**
    * The job ID.
    */
@@ -552,12 +563,12 @@ model JobState {
   /**
    * The job status.
    */
-  status: JobStatus;
+  status: TextAnalysisAuthoringJobStatus;
 
   /**
    * The warnings that were encountered while executing the job.
    */
-  warnings?: Warning[];
+  warnings?: TextAnalysisAuthoringWarning[];
 
   /**
    * The errors encountered while executing the job.
@@ -568,7 +579,7 @@ model JobState {
 /**
  * Represents a warning that was encountered while executing the request.
  */
-model Warning {
+model TextAnalysisAuthoringWarning {
   /**
    * The warning code.
    */
@@ -583,12 +594,12 @@ model Warning {
 /**
  * Represents a list of retrieved deployments.
  */
-model ProjectDeployments is Azure.Core.Page<ProjectDeployment>;
+model TextAnalysisAuthoringProjectDeployments is Azure.Core.Page<TextAnalysisAuthoringProjectDeployment>;
 
 /**
  * Represents a project deployment.
  */
-model ProjectDeployment {
+model TextAnalysisAuthoringProjectDeployment {
   /**
    * Represents deployment name.
    */
@@ -624,13 +635,13 @@ model ProjectDeployment {
   /**
    * Represents the metadata of the assigned Azure resources.
    */
-  assignedResources: DeploymentResource[];
+  assignedResources: TextAnalysisAuthoringDeploymentResource[];
 }
 
 /**
  * Represents an Azure resource assigned to a deployment.
  */
-model DeploymentResource {
+model TextAnalysisAuthoringDeploymentResource {
   /**
    * Represents the Azure resource Id.
    */
@@ -645,7 +656,7 @@ model DeploymentResource {
 /**
  * Represents the options for creating or updating a project deployment.
  */
-model CreateDeploymentOptions {
+model TextAnalysisAuthoringCreateDeploymentOptions {
   /**
    * Represents the trained model label.
    */
@@ -662,7 +673,7 @@ model CreateDeploymentOptions {
 /**
  * Represents the options for deleting a project deployment.
  */
-model DeleteDeploymentOptions {
+model TextAnalysisAuthoringDeleteDeploymentOptions {
   /**
    * Represents the resource IDs to delete the deployment from.
    *             If not provided, the deployment will be rolled out from all the
@@ -676,12 +687,12 @@ model DeleteDeploymentOptions {
 /**
  * Represents the state of a deployment job.
  */
-model DeploymentJobState extends JobState {}
+model TextAnalysisAuthoringDeploymentJobState extends TextAnalysisAuthoringJobState {}
 
 /**
  * Represents the options for swapping two deployments together.
  */
-model SwapDeploymentsOptions {
+model TextAnalysisAuthoringSwapDeploymentsOptions {
   /**
    * Represents the first deployment name.
    */
@@ -696,7 +707,7 @@ model SwapDeploymentsOptions {
 /**
  * Represents the state of an export job.
  */
-model ExportProjectJobState extends JobState {
+model TextAnalysisAuthoringExportProjectJobState extends TextAnalysisAuthoringJobState {
   /**
    * The URL to use in order to download the exported project.
    */
@@ -706,12 +717,12 @@ model ExportProjectJobState extends JobState {
 /**
  * Represents a list of exported trained models.
  */
-model ExportedTrainedModels is Azure.Core.Page<ExportedTrainedModel>;
+model TextAnalysisAuthoringExportedTrainedModels is Azure.Core.Page<TextAnalysisAuthoringExportedTrainedModel>;
 
 /**
  * Represents an exported trained model.
  */
-model ExportedTrainedModel {
+model TextAnalysisAuthoringExportedTrainedModel {
   /**
    * The exported model name.
    */
@@ -748,7 +759,7 @@ model ExportedTrainedModel {
 /**
  * Represents the options for creating or replacing an exported model.
  */
-model ExportedModelOptions {
+model TextAnalysisAuthoringExportedModelOptions {
   /**
    * The trained model label.
    */
@@ -758,22 +769,22 @@ model ExportedModelOptions {
 /**
  * Represents the state of a job to create or updated an exported model.
  */
-model ExportedModelJobState extends JobState {}
+model TextAnalysisAuthoringExportedModelJobState extends TextAnalysisAuthoringJobState {}
 
 /**
  * Represents the properties for the exported model manifest.
  */
-model ExportedModelManifest {
+model TextAnalysisAuthoringExportedModelManifest {
   /**
    * The model files belonging to this model.
    */
-  modelFiles: ModelFile[];
+  modelFiles: TextAnalysisAuthoringModelFile[];
 }
 
 /**
  * Represents the properties for the model file.
  */
-model ModelFile {
+model TextAnalysisAuthoringModelFile {
   /**
    * The name of the file.
    */
@@ -788,17 +799,17 @@ model ModelFile {
 /**
  * Represents the state of an import job.
  */
-model ImportProjectJobState extends JobState {}
+model TextAnalysisAuthoringImportProjectJobState extends TextAnalysisAuthoringJobState {}
 
 /**
  * Represents a list of retrieved trained models.
  */
-model ProjectTrainedModels is Azure.Core.Page<ProjectTrainedModel>;
+model TextAnalysisAuthoringProjectTrainedModels is Azure.Core.Page<TextAnalysisAuthoringProjectTrainedModel>;
 
 /**
  * Represents a trained model.
  */
-model ProjectTrainedModel {
+model TextAnalysisAuthoringProjectTrainedModel {
   /**
    * The trained model label.
    */
@@ -839,18 +850,18 @@ model ProjectTrainedModel {
 /**
  * Represents the state of a evaluation job.
  */
-model EvaluationJobState extends JobState {
+model TextAnalysisAuthoringEvaluationJobState extends TextAnalysisAuthoringJobState {
   /**
    * Represents evaluation task detailed result.
    */
-  result: EvaluationJobResult;
+  result: TextAnalysisAuthoringEvaluationJobResult;
 }
 
-model EvaluationJobResult {
+model TextAnalysisAuthoringEvaluationJobResult {
   /**
    * Represents the options used running the evaluation.
    */
-  evaluationOptions: EvaluationOptions;
+  evaluationOptions: TextAnalysisAuthoringEvaluationOptions;
 
   /**
    * Represents trained model label.
@@ -871,13 +882,13 @@ model EvaluationJobResult {
 /**
  * Represents a list of results for an evaluation operation.
  */
-model EvaluationResults is Azure.Core.Page<DocumentEvaluationResult>;
+model TextAnalysisAuthoringEvaluationResults is Azure.Core.Page<TextAnalysisAuthoringDocumentEvaluationResult>;
 
 /**
  * Represents the evaluation result of a document.
  */
 @discriminator("projectKind")
-model DocumentEvaluationResult {
+model TextAnalysisAuthoringDocumentEvaluationResult {
   /**
    * Represents the document path.
    */
@@ -895,28 +906,28 @@ model DocumentEvaluationResult {
  * Represents the summary for an evaluation operation.
  */
 @discriminator("projectKind")
-model EvaluationSummary {
+model TextAnalysisAuthoringEvaluationSummary {
   /**
    * Represents the options used running the evaluation.
    */
-  evaluationOptions: EvaluationOptions;
+  evaluationOptions: TextAnalysisAuthoringEvaluationOptions;
 }
 
 /**
  * Represents the state of loading a snapshot job.
  */
-model LoadSnapshotJobState extends JobState {}
+model TextAnalysisAuthoringLoadSnapshotJobState extends TextAnalysisAuthoringJobState {}
 
 /**
  * Represents the assigned deployment resources.
  */
-model AssignedDeploymentResources
-  is Azure.Core.Page<AssignedDeploymentResource>;
+model TextAnalysisAuthoringAssignedDeploymentResources
+  is Azure.Core.Page<TextAnalysisAuthoringAssignedDeploymentResource>;
 
 /**
  * Represents the assigned deployment resource.
  */
-model AssignedDeploymentResource {
+model TextAnalysisAuthoringAssignedDeploymentResource {
   /**
    * The resource ID.
    */
@@ -931,17 +942,17 @@ model AssignedDeploymentResource {
 /**
  * Represents the options for assigning Azure resources to a project.
  */
-model AssignDeploymentResourcesOptions {
+model TextAnalysisAuthoringAssignDeploymentResourcesOptions {
   /**
    * Represents the metadata for the resources to be assigned.
    */
-  resourcesMetadata: ResourceMetadata[];
+  resourcesMetadata: TextAnalysisAuthoringResourceMetadata[];
 }
 
 /**
  * Represents metadata for the Azure resource..
  */
-model ResourceMetadata {
+model TextAnalysisAuthoringResourceMetadata {
   /**
    * Represents the Azure resource ID.
    */
@@ -961,7 +972,7 @@ model ResourceMetadata {
 /**
  * Represents the options to unassign Azure resources from a project.
  */
-model UnassignDeploymentResourcesOptions {
+model TextAnalysisAuthoringUnassignDeploymentResourcesOptions {
   /**
    * Represents the assigned resource IDs to be unassigned.
    */
@@ -971,27 +982,27 @@ model UnassignDeploymentResourcesOptions {
 /**
  * Represents the state of a deployment resources job.
  */
-model DeploymentResourcesJobState extends JobState {}
+model TextAnalysisAuthoringDeploymentResourcesJobState extends TextAnalysisAuthoringJobState {}
 
 /**
  * Represents a list of retrieved training jobs.
  */
-model TrainingJobs is Azure.Core.Page<TrainingJobState>;
+model TextAnalysisAuthoringTrainingJobs is Azure.Core.Page<TextAnalysisAuthoringTrainingJobState>;
 
 /**
  * Represents the state of a training job.
  */
-model TrainingJobState extends JobState {
+model TextAnalysisAuthoringTrainingJobState extends TextAnalysisAuthoringJobState {
   /**
    * Represents training tasks detailed result.
    */
-  result: TrainingJobResult;
+  result: TextAnalysisAuthoringTrainingJobResult;
 }
 
 /**
  * Represents the output of a training job.
  */
-model TrainingJobResult {
+model TextAnalysisAuthoringTrainingJobResult {
   /**
    * Represents trained model label.
    */
@@ -1005,12 +1016,12 @@ model TrainingJobResult {
   /**
    * Represents model train status.
    */
-  trainingStatus: SubTrainingJobState;
+  trainingStatus: TextAnalysisAuthoringSubTrainingJobState;
 
   /**
    * Represents model evaluation status.
    */
-  evaluationStatus?: SubTrainingJobState;
+  evaluationStatus?: TextAnalysisAuthoringSubTrainingJobState;
 
   /**
    * Represents the estimate end date time for training and evaluation.
@@ -1022,7 +1033,7 @@ model TrainingJobResult {
 /**
  * Represents the detailed state of a training sub-operation.
  */
-model SubTrainingJobState {
+model TextAnalysisAuthoringSubTrainingJobState {
   /**
    * Represents progress percentage.
    */
@@ -1043,24 +1054,24 @@ model SubTrainingJobState {
   /**
    * Represents the status of the sub-operation.
    */
-  status: JobStatus;
+  status: TextAnalysisAuthoringJobStatus;
 }
 
 /**
  * Represents the state of a project deletion job.
  */
-model ProjectDeletionJobState extends JobState {}
+model TextAnalysisAuthoringProjectDeletionJobState extends TextAnalysisAuthoringJobState {}
 
 /**
  * Represents the metadata for deployments assigned to a resource.
  */
-model AssignedResourceDeploymentsMetadata
-  is Azure.Core.Page<AssignedProjectDeploymentsMetadata>;
+model TextAnalysisAuthoringAssignedResourceDeploymentsMetadata
+  is Azure.Core.Page<TextAnalysisAuthoringAssignedProjectDeploymentsMetadata>;
 
 /**
  * Represents the metadata for assigned deployments for a project.
  */
-model AssignedProjectDeploymentsMetadata {
+model TextAnalysisAuthoringAssignedProjectDeploymentsMetadata {
   /**
    * Represents the project name.
    */
@@ -1069,13 +1080,13 @@ model AssignedProjectDeploymentsMetadata {
   /**
    * Represents the resource region.
    */
-  deploymentsMetadata: AssignedProjectDeploymentMetadata[];
+  deploymentsMetadata: TextAnalysisAuthoringAssignedProjectDeploymentMetadata[];
 }
 
 /**
  * Represents the metadata for an assigned deployment
  */
-model AssignedProjectDeploymentMetadata {
+model TextAnalysisAuthoringAssignedProjectDeploymentMetadata {
   /**
    * Represents the deployment name.
    */
@@ -1096,12 +1107,12 @@ model AssignedProjectDeploymentMetadata {
 /**
  * Represents a list of retrieved languages.
  */
-model SupportedLanguages is Azure.Core.Page<SupportedLanguage>;
+model TextAnalysisAuthoringSupportedLanguages is Azure.Core.Page<TextAnalysisAuthoringSupportedLanguage>;
 
 /**
  * Represents a supported language.
  */
-model SupportedLanguage {
+model TextAnalysisAuthoringSupportedLanguage {
   /**
    * The language name.
    */
@@ -1117,12 +1128,12 @@ model SupportedLanguage {
 /**
  * Represents a list of the retrieved supported prebuilt entities.
  */
-model PrebuiltEntities is Azure.Core.Page<PrebuiltEntity>;
+model TextAnalysisAuthoringPrebuiltEntities is Azure.Core.Page<TextAnalysisAuthoringPrebuiltEntity>;
 
 /**
  * Represents a supported prebuilt entity.
  */
-model PrebuiltEntity {
+model TextAnalysisAuthoringPrebuiltEntity {
   /**
    * The prebuilt entity category.
    */
@@ -1142,12 +1153,12 @@ model PrebuiltEntity {
 /**
  * Represents a list of training config versions.
  */
-model TrainingConfigVersions is Azure.Core.Page<TrainingConfigVersion>;
+model TextAnalysisAuthoringTrainingConfigVersions is Azure.Core.Page<TextAnalysisAuthoringTrainingConfigVersion>;
 
 /**
  * Represents a training config version.
  */
-model TrainingConfigVersion {
+model TextAnalysisAuthoringTrainingConfigVersion {
   /**
    * Represents the version of the config.
    */
@@ -1162,7 +1173,7 @@ model TrainingConfigVersion {
 /**
  * Represents a cell in a confusion matrix.
  */
-model ConfusionMatrixCell {
+model TextAnalysisAuthoringConfusionMatrixCell {
   /**
    * Represents normalized value in percentages.
    */
@@ -1178,12 +1189,12 @@ model ConfusionMatrixCell {
  * Represents the document evaluation result for a custom entity recognition
  * project.
  */
-model CustomEntityRecognitionDocumentEvaluationResult
-  extends DocumentEvaluationResult {
+model TextAnalysisAuthoringCustomEntityRecognitionDocumentEvaluationResult
+  extends TextAnalysisAuthoringDocumentEvaluationResult {
   /**
    * Represents the evaluation prediction for entity recognition.
    */
-  customEntityRecognitionResult: DocumentEntityRecognitionEvaluationResult;
+  customEntityRecognitionResult: TextAnalysisAuthoringDocumentEntityRecognitionEvaluationResult;
 
   /**
    * Represents the project kind.
@@ -1194,27 +1205,27 @@ model CustomEntityRecognitionDocumentEvaluationResult
 /**
  * Represents the entity recognition evaluation result for a document.
  */
-model DocumentEntityRecognitionEvaluationResult {
+model TextAnalysisAuthoringDocumentEntityRecognitionEvaluationResult {
   /**
    * Represents the document labelled entities.
    */
-  entities: DocumentEntityRegionEvaluationResult[];
+  entities: TextAnalysisAuthoringDocumentEntityRegionEvaluationResult[];
 }
 
 /**
  * Represents the evaluation comparison between the expected and predicted
  * entities of a document region.
  */
-model DocumentEntityRegionEvaluationResult {
+model TextAnalysisAuthoringDocumentEntityRegionEvaluationResult {
   /**
    * Represents the region's expected entity labels.
    */
-  expectedEntities: DocumentEntityLabelEvaluationResult[];
+  expectedEntities: TextAnalysisAuthoringDocumentEntityLabelEvaluationResult[];
 
   /**
    * Represents the region's predicted entity labels.
    */
-  predictedEntities: DocumentEntityLabelEvaluationResult[];
+  predictedEntities: TextAnalysisAuthoringDocumentEntityLabelEvaluationResult[];
 
   /**
    * Represents the region offset.
@@ -1230,7 +1241,7 @@ model DocumentEntityRegionEvaluationResult {
 /**
  * Represents an evaluation result entity label.
  */
-model DocumentEntityLabelEvaluationResult {
+model TextAnalysisAuthoringDocumentEntityLabelEvaluationResult {
   /**
    * Represents the entity category.
    */
@@ -1250,11 +1261,11 @@ model DocumentEntityLabelEvaluationResult {
 /**
  * Represents the evaluation summary for a custom entity recognition project.
  */
-model CustomEntityRecognitionEvaluationSummary extends EvaluationSummary {
+model TextAnalysisAuthoringCustomEntityRecognitionEvaluationSummary extends TextAnalysisAuthoringEvaluationSummary {
   /**
    * Contains the data related to extraction evaluation.
    */
-  customEntityRecognitionEvaluation: EntityRecognitionEvaluationSummary;
+  customEntityRecognitionEvaluation: TextAnalysisAuthoringEntityRecognitionEvaluationSummary;
 
   /**
    * Represents the project type that the evaluation ran on.
@@ -1265,18 +1276,18 @@ model CustomEntityRecognitionEvaluationSummary extends EvaluationSummary {
 /**
  * Represents the evaluation summary for a custom entity recognition project.
  */
-model EntityRecognitionEvaluationSummary {
+model TextAnalysisAuthoringEntityRecognitionEvaluationSummary {
   /**
    * Represents the confusion matrix between two entities (the two entities can be
    * the same). The matrix is between the entity that was labelled and the entity
    * that was predicted.
    */
-  confusionMatrix: Record<Record<ConfusionMatrixCell>>;
+  confusionMatrix: Record<Record<TextAnalysisAuthoringConfusionMatrixCell>>;
 
   /**
    * Represents the entities evaluation
    */
-  entities: Record<EntityEvaluationSummary>;
+  entities: Record<TextAnalysisAuthoringEntityEvaluationSummary>;
 
   /**
    * Represents the micro F1. Expected value is a float between 0 and 1 inclusive.
@@ -1316,7 +1327,7 @@ model EntityRecognitionEvaluationSummary {
 /**
  * Represents the evaluation summary for an entity.
  */
-model EntityEvaluationSummary {
+model TextAnalysisAuthoringEntityEvaluationSummary {
   /**
    * Represents the model precision
    */
@@ -1357,12 +1368,12 @@ model EntityEvaluationSummary {
  * Represents the document evaluation result for a custom entity recognition
  * project.
  */
-model CustomHealthcareDocumentEvaluationResult
-  extends DocumentEvaluationResult {
+model TextAnalysisAuthoringCustomHealthcareDocumentEvaluationResult
+  extends TextAnalysisAuthoringDocumentEvaluationResult {
   /**
    * Represents the evaluation prediction for entity recognition.
    */
-  customHealthcareResult: DocumentHealthcareEvaluationResult;
+  customHealthcareResult: TextAnalysisAuthoringDocumentHealthcareEvaluationResult;
 
   /**
    * Represents the project kind.
@@ -1373,21 +1384,21 @@ model CustomHealthcareDocumentEvaluationResult
 /**
  * Represents the healthcare evaluation result for a document.
  */
-model DocumentHealthcareEvaluationResult {
+model TextAnalysisAuthoringDocumentHealthcareEvaluationResult {
   /**
    * Represents the document labelled entities.
    */
-  entities: DocumentEntityRegionEvaluationResult[];
+  entities: TextAnalysisAuthoringDocumentEntityRegionEvaluationResult[];
 }
 
 /**
  * Represents the evaluation summary for a custom health care project.
  */
-model CustomHealthcareEvaluationSummary extends EvaluationSummary {
+model TextAnalysisAuthoringCustomHealthcareEvaluationSummary extends TextAnalysisAuthoringEvaluationSummary {
   /**
    * Contains the data related to health care evaluation.
    */
-  customHealthcareEvaluation: EntityRecognitionEvaluationSummary;
+  customHealthcareEvaluation: TextAnalysisAuthoringEntityRecognitionEvaluationSummary;
 
   /**
    * Represents the project type that the evaluation ran on.
@@ -1399,12 +1410,12 @@ model CustomHealthcareEvaluationSummary extends EvaluationSummary {
  * Represents the document evaluation result for a custom multi-label
  * classification project.
  */
-model CustomMultiLabelClassificationDocumentEvaluationResult
-  extends DocumentEvaluationResult {
+model TextAnalysisAuthoringCustomMultiLabelClassificationDocumentEvaluationResult
+  extends TextAnalysisAuthoringDocumentEvaluationResult {
   /**
    * Represents the evaluation prediction for multi label classification.
    */
-  customMultiLabelClassificationResult: DocumentMultiLabelClassificationEvaluationResult;
+  customMultiLabelClassificationResult: TextAnalysisAuthoringDocumentMultiLabelClassificationEvaluationResult;
 
   /**
    * Represents the project kind.
@@ -1416,7 +1427,7 @@ model CustomMultiLabelClassificationDocumentEvaluationResult
  * Represents the comparison between the expected and predicted classes that are
  * result from the evaluation operation.
  */
-model DocumentMultiLabelClassificationEvaluationResult {
+model TextAnalysisAuthoringDocumentMultiLabelClassificationEvaluationResult {
   /**
    * Represents the document's expected classes.
    */
@@ -1432,12 +1443,12 @@ model DocumentMultiLabelClassificationEvaluationResult {
  * Represents the evaluation summary for a custom multi-label classification
  * project.
  */
-model CustomMultiLabelClassificationEvaluationSummary
-  extends EvaluationSummary {
+model TextAnalysisAuthoringCustomMultiLabelClassificationEvaluationSummary
+  extends TextAnalysisAuthoringEvaluationSummary {
   /**
    * Contains the data related to multi label classification evaluation.
    */
-  customMultiLabelClassificationEvaluation: MultiLabelClassificationEvaluationSummary;
+  customMultiLabelClassificationEvaluation: TextAnalysisAuthoringMultiLabelClassificationEvaluationSummary;
 
   /**
    * Represents the project type that the evaluation ran on.
@@ -1448,11 +1459,11 @@ model CustomMultiLabelClassificationEvaluationSummary
 /**
  * Represents the evaluation summary for a multi-label classification project.
  */
-model MultiLabelClassificationEvaluationSummary {
+model TextAnalysisAuthoringMultiLabelClassificationEvaluationSummary {
   /**
    * Represents the classes evaluation
    */
-  classes: Record<MultiLabelClassEvaluationSummary>;
+  classes: Record<TextAnalysisAuthoringMultiLabelClassEvaluationSummary>;
 
   /**
    * Represents the micro F1. Expected value is a float between 0 and 1 inclusive.
@@ -1493,7 +1504,7 @@ model MultiLabelClassificationEvaluationSummary {
  * Represents the evaluation summary of a class in a multi-label classification
  * project.
  */
-model MultiLabelClassEvaluationSummary {
+model TextAnalysisAuthoringMultiLabelClassEvaluationSummary {
   /**
    * Represents the model precision
    */
@@ -1534,12 +1545,12 @@ model MultiLabelClassEvaluationSummary {
  * Represents the document evaluation result for a custom single-label
  * classification project.
  */
-model CustomSingleLabelClassificationDocumentEvaluationResult
-  extends DocumentEvaluationResult {
+model TextAnalysisAuthoringCustomSingleLabelClassificationDocumentEvaluationResult
+  extends TextAnalysisAuthoringDocumentEvaluationResult {
   /**
    * Represents the evaluation prediction for single label classification.
    */
-  customSingleLabelClassificationResult: DocumentSingleLabelClassificationEvaluationResult;
+  customSingleLabelClassificationResult: TextAnalysisAuthoringDocumentSingleLabelClassificationEvaluationResult;
 
   /**
    * Represents the project kind.
@@ -1551,7 +1562,7 @@ model CustomSingleLabelClassificationDocumentEvaluationResult
  * Represents the comparison between the expected and predicted class that result
  * from an evaluation operation.
  */
-model DocumentSingleLabelClassificationEvaluationResult {
+model TextAnalysisAuthoringDocumentSingleLabelClassificationEvaluationResult {
   /**
    * Represents the document's expected class.
    */
@@ -1567,12 +1578,12 @@ model DocumentSingleLabelClassificationEvaluationResult {
  * Represents the evaluation summary for a custom single-label classification
  * project.
  */
-model CustomSingleLabelClassificationEvaluationSummary
-  extends EvaluationSummary {
+model TextAnalysisAuthoringCustomSingleLabelClassificationEvaluationSummary
+  extends TextAnalysisAuthoringEvaluationSummary {
   /**
    * Contains the data related to single label classification evaluation.
    */
-  customSingleLabelClassificationEvaluation: SingleLabelClassificationEvaluationSummary;
+  customSingleLabelClassificationEvaluation: TextAnalysisAuthoringSingleLabelClassificationEvaluationSummary;
 
   /**
    * Represents the project type that the evaluation ran on.
@@ -1584,18 +1595,18 @@ model CustomSingleLabelClassificationEvaluationSummary
  * Represents the evaluation summary for a custom single-label classification
  * project.
  */
-model SingleLabelClassificationEvaluationSummary {
+model TextAnalysisAuthoringSingleLabelClassificationEvaluationSummary {
   /**
    * Represents the confusion matrix between two classes (the two classes can be the
    * same). The matrix is between the class that was labelled and the class that was
    * predicted.
    */
-  confusionMatrix: Record<Record<ConfusionMatrixCell>>;
+  confusionMatrix: Record<Record<TextAnalysisAuthoringConfusionMatrixCell>>;
 
   /**
    * Represents the classes evaluation
    */
-  classes: Record<SingleLabelClassEvaluationSummary>;
+  classes: Record<TextAnalysisAuthoringSingleLabelClassEvaluationSummary>;
 
   /**
    * Represents the micro F1. Expected value is a float between 0 and 1 inclusive.
@@ -1636,7 +1647,7 @@ model SingleLabelClassificationEvaluationSummary {
  * Represents the evaluation summary for a class in a single-label classification
  * project.
  */
-model SingleLabelClassEvaluationSummary {
+model TextAnalysisAuthoringSingleLabelClassEvaluationSummary {
   /**
    * Represents the model precision
    */
@@ -1676,12 +1687,12 @@ model SingleLabelClassEvaluationSummary {
 /**
  * Represents the document evaluation result for a custom sentiment project.
  */
-model CustomTextSentimentDocumentEvaluationResult
-  extends DocumentEvaluationResult {
+model TextAnalysisAuthoringCustomTextSentimentDocumentEvaluationResult
+  extends TextAnalysisAuthoringDocumentEvaluationResult {
   /**
    * Represents the evaluation prediction for text sentiment.
    */
-  customTextSentimentResult: DocumentTextSentimentEvaluationResult;
+  customTextSentimentResult: TextAnalysisAuthoringDocumentTextSentimentEvaluationResult;
 
   /**
    * Represents the project kind.
@@ -1693,26 +1704,26 @@ model CustomTextSentimentDocumentEvaluationResult
  * Represents the comparison between the expected and predicted sentiment that
  * result from an evaluation operation.
  */
-model DocumentTextSentimentEvaluationResult {
+model TextAnalysisAuthoringDocumentTextSentimentEvaluationResult {
   /**
    * Represents the document's expected sentiment labels.
    */
-  expectedSentimentSpans: DocumentSentimentLabelEvaluationResult[];
+  expectedSentimentSpans: TextAnalysisAuthoringDocumentSentimentLabelEvaluationResult[];
 
   /**
    * Represents the document's predicted sentiment labels.
    */
-  predictedSentimentSpans: DocumentSentimentLabelEvaluationResult[];
+  predictedSentimentSpans: TextAnalysisAuthoringDocumentSentimentLabelEvaluationResult[];
 }
 
 /**
  * Represents an evaluation result Sentiment label.
  */
-model DocumentSentimentLabelEvaluationResult {
+model TextAnalysisAuthoringDocumentSentimentLabelEvaluationResult {
   /**
    * Represents the sentiment category.
    */
-  category: Sentiment;
+  category: TextAnalysisAuthoringSentiment;
 
   /**
    * Represents the sentiment offset index relative to the original text.
@@ -1728,11 +1739,11 @@ model DocumentSentimentLabelEvaluationResult {
 /**
  * Represents the evaluation summary for a custom text sentiment project.
  */
-model CustomTextSentimentEvaluationSummary extends EvaluationSummary {
+model TextAnalysisAuthoringCustomTextSentimentEvaluationSummary extends TextAnalysisAuthoringEvaluationSummary {
   /**
    * Contains the data related to custom sentiment evaluation.
    */
-  customTextSentimentEvaluation: TextSentimentEvaluationSummary;
+  customTextSentimentEvaluation: TextAnalysisAuthoringTextSentimentEvaluationSummary;
 
   /**
    * Represents the project type that the evaluation ran on.
@@ -1743,11 +1754,11 @@ model CustomTextSentimentEvaluationSummary extends EvaluationSummary {
 /**
  * Represents the evaluation summary for a custom text sentiment project.
  */
-model TextSentimentEvaluationSummary {
+model TextAnalysisAuthoringTextSentimentEvaluationSummary {
   /**
    * Represents evaluation of span level sentiments
    */
-  spanSentimentsEvaluation: SpanSentimentEvaluationSummary;
+  spanSentimentsEvaluation: TextAnalysisAuthoringSpanSentimentEvaluationSummary;
 
   /**
    * Represents the micro F1. Expected value is a float between 0 and 1 inclusive.
@@ -1787,18 +1798,18 @@ model TextSentimentEvaluationSummary {
 /**
  * Represents the evaluation summary for a custom sentiment project.
  */
-model SpanSentimentEvaluationSummary {
+model TextAnalysisAuthoringSpanSentimentEvaluationSummary {
   /**
    * Represents the confusion matrix between two sentiments (the two sentiments can
    * be the same). The matrix is between the sentiment that was labelled and the
    * sentiment that was predicted.
    */
-  confusionMatrix: Record<Record<ConfusionMatrixCell>>;
+  confusionMatrix: Record<Record<TextAnalysisAuthoringConfusionMatrixCell>>;
 
   /**
    * Represents the sentiment evaluation
    */
-  sentiments: Record<SentimentEvaluationSummary>;
+  sentiments: Record<TextAnalysisAuthoringSentimentEvaluationSummary>;
 
   /**
    * Represents the micro F1. Expected value is a float between 0 and 1 inclusive.
@@ -1838,7 +1849,7 @@ model SpanSentimentEvaluationSummary {
 /**
  * Represents the evaluation summary for a sentiment in a custom sentiment project.
  */
-model SentimentEvaluationSummary {
+model TextAnalysisAuthoringSentimentEvaluationSummary {
   /**
    * Represents the model precision
    */
@@ -1878,7 +1889,7 @@ model SentimentEvaluationSummary {
 /**
  * Represents a class of an exported project.
  */
-model ExportedClass {
+model TextAnalysisAuthoringExportedClass {
   /**
    * The class category.
    */
@@ -1888,21 +1899,21 @@ model ExportedClass {
 /**
  * Represents an entity in an exported project with composite entities enabled.
  */
-model ExportedCompositeEntity {
+model TextAnalysisAuthoringExportedCompositeEntity {
   /**
    * The behavior to follow when the entity's components overlap with each other.
    */
-  compositionSetting?: CompositionSetting;
+  compositionSetting?: TextAnalysisAuthoringCompositionSetting;
 
   /**
    * The list component of the entity.
    */
-  list?: ExportedEntityList;
+  list?: TextAnalysisAuthoringExportedEntityList;
 
   /**
    * The prebuilt entities components.
    */
-  prebuilts?: ExportedPrebuiltEntity[];
+  prebuilts?: TextAnalysisAuthoringExportedPrebuiltEntity[];
 
   /**
    * The entity category.
@@ -1913,17 +1924,17 @@ model ExportedCompositeEntity {
 /**
  * Represents a list component of an entity.
  */
-model ExportedEntityList {
+model TextAnalysisAuthoringExportedEntityList {
   /**
    * The sub-lists of the list component.
    */
-  sublists?: ExportedEntitySublist[];
+  sublists?: TextAnalysisAuthoringExportedEntitySublist[];
 }
 
 /**
  * Represents a sub-list inside a list component.
  */
-model ExportedEntitySublist {
+model TextAnalysisAuthoringExportedEntitySublist {
   /**
    * The key of the sub-list.
    */
@@ -1932,13 +1943,13 @@ model ExportedEntitySublist {
   /**
    * The phrases of that correspond to the sub-list.
    */
-  synonyms?: ExportedEntityListSynonym[];
+  synonyms?: TextAnalysisAuthoringExportedEntityListSynonym[];
 }
 
 /**
  * Represents a list of synonyms inside a list component
  */
-model ExportedEntityListSynonym {
+model TextAnalysisAuthoringExportedEntityListSynonym {
   /**
    * Represents the language of the synonyms. This is BCP-47 representation of a
    * language. For example, use "en" for English, "en-gb" for English (UK), "es" for
@@ -1955,7 +1966,7 @@ model ExportedEntityListSynonym {
 /**
  * Represents an exported prebuilt entity component
  */
-model ExportedPrebuiltEntity {
+model TextAnalysisAuthoringExportedPrebuiltEntity {
   /**
    * The prebuilt entity category.
    */
@@ -1965,7 +1976,7 @@ model ExportedPrebuiltEntity {
 /**
  * Represents an exported document for a custom abstractive summarization project.
  */
-model ExportedCustomAbstractiveSummarizationDocument {
+model TextAnalysisAuthoringExportedCustomAbstractiveSummarizationDocument {
   /**
    * Represents the summary file location in the blob store container associated
    * with the project.
@@ -1993,12 +2004,12 @@ model ExportedCustomAbstractiveSummarizationDocument {
 /**
  * Represents the exported assets for an abstractive summarization project.
  */
-model ExportedCustomAbstractiveSummarizationProjectAssets
-  extends ExportedProjectAssets {
+model TextAnalysisAuthoringExportedCustomAbstractiveSummarizationProjectAssets
+  extends TextAnalysisAuthoringExportedProjectAssets {
   /**
    * The list of documents belonging to this project.
    */
-  documents?: ExportedCustomAbstractiveSummarizationDocument[];
+  documents?: TextAnalysisAuthoringExportedCustomAbstractiveSummarizationDocument[];
 
   /**
    * The type of the project the assets belong to.
@@ -2009,11 +2020,11 @@ model ExportedCustomAbstractiveSummarizationProjectAssets
 /**
  * Represents an exported document for a custom entity recognition project.
  */
-model ExportedCustomEntityRecognitionDocument {
+model TextAnalysisAuthoringExportedCustomEntityRecognitionDocument {
   /**
    * The list of entity labels belonging to the document.
    */
-  entities?: ExportedDocumentEntityRegion[];
+  entities?: TextAnalysisAuthoringExportedDocumentEntityRegion[];
 
   /**
    * The location of the document in the storage.
@@ -2036,7 +2047,7 @@ model ExportedCustomEntityRecognitionDocument {
 /**
  * Represents a region in a document for entity labeling.
  */
-model ExportedDocumentEntityRegion {
+model TextAnalysisAuthoringExportedDocumentEntityRegion {
   /**
    * Start position for the region.
    */
@@ -2050,13 +2061,13 @@ model ExportedDocumentEntityRegion {
   /**
    * The list of entity labels belonging to this region.
    */
-  labels?: ExportedDocumentEntityLabel[];
+  labels?: TextAnalysisAuthoringExportedDocumentEntityLabel[];
 }
 
 /**
  * Represents an entity label for a document.
  */
-model ExportedDocumentEntityLabel {
+model TextAnalysisAuthoringExportedDocumentEntityLabel {
   /**
    * The entity category.
    */
@@ -2076,17 +2087,17 @@ model ExportedDocumentEntityLabel {
 /**
  * Represents the exported assets for a entity recognition project.
  */
-model ExportedCustomEntityRecognitionProjectAssets
-  extends ExportedProjectAssets {
+model TextAnalysisAuthoringExportedCustomEntityRecognitionProjectAssets
+  extends TextAnalysisAuthoringExportedProjectAssets {
   /**
    * The list of entities belonging to the project.
    */
-  entities?: ExportedEntity[];
+  entities?: TextAnalysisAuthoringExportedEntity[];
 
   /**
    * The list of documents belonging to the project.
    */
-  documents?: ExportedCustomEntityRecognitionDocument[];
+  documents?: TextAnalysisAuthoringExportedCustomEntityRecognitionDocument[];
 
   /**
    * The type of the project the assets belong to.
@@ -2097,7 +2108,7 @@ model ExportedCustomEntityRecognitionProjectAssets
 /**
  * Represents an entity in an exported project.
  */
-model ExportedEntity {
+model TextAnalysisAuthoringExportedEntity {
   /**
    * The entity category.
    */
@@ -2107,11 +2118,11 @@ model ExportedEntity {
 /**
  * Represents an exported document for a CustomHealthcare project.
  */
-model ExportedCustomHealthcareDocument {
+model TextAnalysisAuthoringExportedCustomHealthcareDocument {
   /**
    * The list of entity labels belonging to the document.
    */
-  entities?: ExportedDocumentEntityRegion[];
+  entities?: TextAnalysisAuthoringExportedDocumentEntityRegion[];
 
   /**
    * The location of the document in the storage.
@@ -2134,16 +2145,16 @@ model ExportedCustomHealthcareDocument {
 /**
  * Represents the exported assets for a CustomHealthcare project.
  */
-model ExportedCustomHealthcareProjectAssets extends ExportedProjectAssets {
+model TextAnalysisAuthoringExportedCustomHealthcareProjectAssets extends TextAnalysisAuthoringExportedProjectAssets {
   /**
    * The list of entities belonging to the project.
    */
-  entities?: ExportedCompositeEntity[];
+  entities?: TextAnalysisAuthoringExportedCompositeEntity[];
 
   /**
    * The list of documents belonging to the project.
    */
-  documents?: ExportedCustomHealthcareDocument[];
+  documents?: TextAnalysisAuthoringExportedCustomHealthcareDocument[];
 
   /**
    * The type of the project the assets belong to.
@@ -2154,11 +2165,11 @@ model ExportedCustomHealthcareProjectAssets extends ExportedProjectAssets {
 /**
  * Represents an exported document of a custom multi-label classification project.
  */
-model ExportedCustomMultiLabelClassificationDocument {
+model TextAnalysisAuthoringExportedCustomMultiLabelClassificationDocument {
   /**
    * The document classes.
    */
-  classes?: ExportedDocumentClass[];
+  classes?: TextAnalysisAuthoringExportedDocumentClass[];
 
   /**
    * The location of the document in the storage.
@@ -2181,24 +2192,24 @@ model ExportedCustomMultiLabelClassificationDocument {
 /**
  * Represents a classification label for a document.
  */
-model ExportedDocumentClass {
+model TextAnalysisAuthoringExportedDocumentClass {
   category?: string;
 }
 
 /**
  * Represents the exported assets for a custom multi-label classification project.
  */
-model ExportedCustomMultiLabelClassificationProjectAssets
-  extends ExportedProjectAssets {
+model TextAnalysisAuthoringExportedCustomMultiLabelClassificationProjectAssets
+  extends TextAnalysisAuthoringExportedProjectAssets {
   /**
    * The list of classes in the project.
    */
-  classes?: ExportedClass[];
+  classes?: TextAnalysisAuthoringExportedClass[];
 
   /**
    * The list of documents in the project.
    */
-  documents?: ExportedCustomMultiLabelClassificationDocument[];
+  documents?: TextAnalysisAuthoringExportedCustomMultiLabelClassificationDocument[];
 
   /**
    * The type of the project the assets belong to.
@@ -2210,11 +2221,11 @@ model ExportedCustomMultiLabelClassificationProjectAssets
  * Represents an exported document for a custom single-label classification
  * project.
  */
-model ExportedCustomSingleLabelClassificationDocument {
+model TextAnalysisAuthoringExportedCustomSingleLabelClassificationDocument {
   /**
    * The class of the documents.
    */
-  class?: ExportedDocumentClass;
+  class?: TextAnalysisAuthoringExportedDocumentClass;
 
   /**
    * The location of the document in the storage.
@@ -2237,17 +2248,17 @@ model ExportedCustomSingleLabelClassificationDocument {
 /**
  * Represents the exported assets for a single-label classification project.
  */
-model ExportedCustomSingleLabelClassificationProjectAssets
-  extends ExportedProjectAssets {
+model TextAnalysisAuthoringExportedCustomSingleLabelClassificationProjectAssets
+  extends TextAnalysisAuthoringExportedProjectAssets {
   /**
    * The list of classes belonging to this project.
    */
-  classes?: ExportedClass[];
+  classes?: TextAnalysisAuthoringExportedClass[];
 
   /**
    * The list of documents belonging to this project.
    */
-  documents?: ExportedCustomSingleLabelClassificationDocument[];
+  documents?: TextAnalysisAuthoringExportedCustomSingleLabelClassificationDocument[];
 
   /**
    * The type of the project the assets belong to.
@@ -2258,8 +2269,8 @@ model ExportedCustomSingleLabelClassificationProjectAssets
 /**
  * Represents an exported document for a custom text sentiment project.
  */
-model ExportedCustomTextSentimentDocument {
-  sentimentSpans?: ExportedDocumentSentimentLabel[];
+model TextAnalysisAuthoringExportedCustomTextSentimentDocument {
+  sentimentSpans?: TextAnalysisAuthoringExportedDocumentSentimentLabel[];
 
   /**
    * The location of the document in the storage.
@@ -2282,11 +2293,11 @@ model ExportedCustomTextSentimentDocument {
 /**
  * Represents an entity label for a document.
  */
-model ExportedDocumentSentimentLabel {
+model TextAnalysisAuthoringExportedDocumentSentimentLabel {
   /**
    * The sentiment category.
    */
-  category?: Sentiment;
+  category?: TextAnalysisAuthoringSentiment;
 
   /**
    * Start position for the sentiment text.
@@ -2302,11 +2313,11 @@ model ExportedDocumentSentimentLabel {
 /**
  * Represents the exported assets for a custom text sentiment project.
  */
-model ExportedCustomTextSentimentProjectAssets extends ExportedProjectAssets {
+model TextAnalysisAuthoringExportedCustomTextSentimentProjectAssets extends TextAnalysisAuthoringExportedProjectAssets {
   /**
    * The list of documents belonging to the project.
    */
-  documents?: ExportedCustomTextSentimentDocument[];
+  documents?: TextAnalysisAuthoringExportedCustomTextSentimentDocument[];
 
   /**
    * The type of the project the assets belong to.

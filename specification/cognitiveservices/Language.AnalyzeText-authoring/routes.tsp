@@ -40,7 +40,7 @@ interface TextAnalysisAuthoring {
       @query("maxpagesize")
       maxpagesize?: int32;
     },
-    ProjectsMetadata
+    TextAnalysisAuthoringProjectsMetadata
   >;
 
   /**
@@ -57,7 +57,7 @@ interface TextAnalysisAuthoring {
       @path
       projectName: string;
     },
-    ProjectMetadata
+    TextAnalysisAuthoringProjectMetadata
   >;
 
   /**
@@ -78,9 +78,9 @@ interface TextAnalysisAuthoring {
        * The project parameters.
        */
       @body
-      body: CreateProjectOptions;
+      body: TextAnalysisAuthoringCreateProjectOptions;
     },
-    ProjectMetadata
+    TextAnalysisAuthoringProjectMetadata
   >;
 
   /**
@@ -125,9 +125,9 @@ interface TextAnalysisAuthoring {
        * The copy project authorization info.
        */
       @body
-      body: CopyAuthorizationOptions;
+      body: TextAnalysisAuthoringCopyAuthorizationOptions;
     },
-    CopyProjectOptions,
+    TextAnalysisAuthoringCopyProjectOptions,
     {},
     ErrorResponse
   >;
@@ -153,7 +153,7 @@ interface TextAnalysisAuthoring {
        * The copy project info.
        */
       @body
-      body: CopyProjectOptions;
+      body: TextAnalysisAuthoringCopyProjectOptions;
     },
     AcceptedResponse,
     {},
@@ -181,7 +181,7 @@ interface TextAnalysisAuthoring {
        * information see https://aka.ms/text-analytics-offsets.
        */
       @query("stringIndexType")
-      stringIndexType: StringIndexType;
+      stringIndexType: TextAnalysisAuthoringStringIndexType;
 
       /**
        * Kind of asset to export.
@@ -229,7 +229,7 @@ interface TextAnalysisAuthoring {
        * The project data to import.
        */
       @body
-      body: ExportedProject;
+      body: TextAnalysisAuthoringExportedProject;
     },
     AcceptedResponse,
     {},
@@ -256,7 +256,7 @@ interface TextAnalysisAuthoring {
        * The training input parameters.
        */
       @body
-      body: TrainingJobOptions;
+      body: TextAnalysisAuthoringTrainingJobOptions;
     },
     AcceptedResponse,
     {},
@@ -283,7 +283,7 @@ interface TextAnalysisAuthoring {
       @path
       jobId: string;
     },
-    CopyProjectJobState
+    TextAnalysisAuthoringCopyProjectJobState
   >;
 
   /**
@@ -318,7 +318,7 @@ interface TextAnalysisAuthoring {
       @query("maxpagesize")
       maxpagesize?: int32;
     },
-    ProjectDeployments
+    TextAnalysisAuthoringProjectDeployments
   >;
 
   /**
@@ -341,7 +341,7 @@ interface TextAnalysisAuthoring {
       @path
       deploymentName: string;
     },
-    ProjectDeployment
+    TextAnalysisAuthoringProjectDeployment
   >;
 
    /**
@@ -370,7 +370,7 @@ interface TextAnalysisAuthoring {
        * The new deployment info.
        */
       @body
-      body: CreateDeploymentOptions;
+      body: TextAnalysisAuthoringCreateDeploymentOptions;
     },
     AcceptedResponse,
     {},
@@ -433,7 +433,7 @@ interface TextAnalysisAuthoring {
        * The options for deleting the deployment.
        */
       @body
-      body: DeleteDeploymentOptions;
+      body: TextAnalysisAuthoringDeleteDeploymentOptions;
     },
     AcceptedResponse,
     {},
@@ -466,7 +466,7 @@ interface TextAnalysisAuthoring {
       @path
       jobId: string;
     },
-    DeploymentJobState
+    TextAnalysisAuthoringDeploymentJobState
   >;
 
   /**
@@ -495,7 +495,7 @@ interface TextAnalysisAuthoring {
       @path
       jobId: string;
     },
-    DeploymentJobState
+    TextAnalysisAuthoringDeploymentJobState
   >;
 
   /**
@@ -518,7 +518,7 @@ interface TextAnalysisAuthoring {
        * The job object to swap two deployments.
        */
       @body
-      body: SwapDeploymentsOptions;
+      body: TextAnalysisAuthoringSwapDeploymentsOptions;
     },
     AcceptedResponse,
     {},
@@ -545,7 +545,7 @@ interface TextAnalysisAuthoring {
       @path
       jobId: string;
     },
-    DeploymentJobState
+    TextAnalysisAuthoringDeploymentJobState
   >;
 
   /**
@@ -569,7 +569,7 @@ interface TextAnalysisAuthoring {
       @path
       jobId: string;
     },
-    ExportProjectJobState
+    TextAnalysisAuthoringExportProjectJobState
   >;
 
   /**
@@ -604,7 +604,7 @@ interface TextAnalysisAuthoring {
       @query("maxpagesize")
       maxpagesize?: int32;
     },
-    ExportedTrainedModels
+    TextAnalysisAuthoringExportedTrainedModels
   >;
 
   /**
@@ -627,7 +627,7 @@ interface TextAnalysisAuthoring {
       @path
       exportedModelName: string;
     },
-    ExportedTrainedModel
+    TextAnalysisAuthoringExportedTrainedModel
   >;
 
   /**
@@ -656,7 +656,7 @@ interface TextAnalysisAuthoring {
        * The exported model info.
        */
       @body
-      body: ExportedModelOptions;
+      body: TextAnalysisAuthoringExportedModelOptions;
     },
     AcceptedResponse,
     {},
@@ -716,7 +716,7 @@ interface TextAnalysisAuthoring {
       @path
       jobId: string;
     },
-    ExportedModelJobState
+    TextAnalysisAuthoringExportedModelJobState
   >;
 
   /**
@@ -739,7 +739,7 @@ interface TextAnalysisAuthoring {
       @path
       exportedModelName: string;
     },
-    ExportedModelManifest
+    TextAnalysisAuthoringExportedModelManifest
   >;
 
   /**
@@ -762,7 +762,7 @@ interface TextAnalysisAuthoring {
       @path
       jobId: string;
     },
-    ImportProjectJobState
+    TextAnalysisAuthoringImportProjectJobState
   >;
 
   /**
@@ -797,7 +797,7 @@ interface TextAnalysisAuthoring {
       @query("maxpagesize")
       maxpagesize?: int32;
     },
-    ProjectTrainedModels
+    TextAnalysisAuthoringProjectTrainedModels
   >;
 
   /**
@@ -820,7 +820,7 @@ interface TextAnalysisAuthoring {
       @path
       trainedModelLabel: string;
     },
-    ProjectTrainedModel
+    TextAnalysisAuthoringProjectTrainedModel
   >;
 
   /**
@@ -873,7 +873,7 @@ interface TextAnalysisAuthoring {
        * The training input parameters.
        */
       @body
-      body: EvaluationOptions;
+      body: TextAnalysisAuthoringEvaluationOptions;
     },
     AcceptedResponse,
     {},
@@ -930,7 +930,7 @@ interface TextAnalysisAuthoring {
       @path
       jobId: string;
     },
-    EvaluationJobState
+    TextAnalysisAuthoringEvaluationJobState
   >;
 
   /**
@@ -959,7 +959,7 @@ interface TextAnalysisAuthoring {
        * information see https://aka.ms/text-analytics-offsets.
        */
       @query("stringIndexType")
-      stringIndexType: StringIndexType;
+      stringIndexType: TextAnalysisAuthoringStringIndexType;
 
       /**
        * The maximum number of resources to return from the collection.
@@ -979,7 +979,7 @@ interface TextAnalysisAuthoring {
       @query("maxpagesize")
       maxpagesize?: int32;
     },
-    EvaluationResults
+    TextAnalysisAuthoringEvaluationResults
   >;
 
   /**
@@ -1003,7 +1003,7 @@ interface TextAnalysisAuthoring {
       @path
       trainedModelLabel: string;
     },
-    EvaluationSummary
+    TextAnalysisAuthoringEvaluationSummary
   >;
 
   /**
@@ -1032,7 +1032,7 @@ interface TextAnalysisAuthoring {
       @path
       jobId: string;
     },
-    LoadSnapshotJobState
+    TextAnalysisAuthoringLoadSnapshotJobState
   >;
 
   /**
@@ -1067,7 +1067,7 @@ interface TextAnalysisAuthoring {
       @query("maxpagesize")
       maxpagesize?: int32;
     },
-    AssignedDeploymentResources
+    TextAnalysisAuthoringAssignedDeploymentResources
   >;
 
   /**
@@ -1097,7 +1097,7 @@ interface TextAnalysisAuthoring {
        * The new project resources info.
        */
       @body
-      body: AssignDeploymentResourcesOptions;
+      body: TextAnalysisAuthoringAssignDeploymentResourcesOptions;
     },
     AcceptedResponse,
     {},
@@ -1128,7 +1128,7 @@ interface TextAnalysisAuthoring {
        * The info for the deployment resources to be deleted.
        */
       @body
-      body: UnassignDeploymentResourcesOptions;
+      body: TextAnalysisAuthoringUnassignDeploymentResourcesOptions;
     },
     AcceptedResponse,
     {},
@@ -1155,7 +1155,7 @@ interface TextAnalysisAuthoring {
       @path
       jobId: string;
     },
-    DeploymentResourcesJobState
+    TextAnalysisAuthoringDeploymentResourcesJobState
   >;
 
   /**
@@ -1178,7 +1178,7 @@ interface TextAnalysisAuthoring {
       @path
       jobId: string;
     },
-    DeploymentResourcesJobState
+    TextAnalysisAuthoringDeploymentResourcesJobState
   >;
 
   /**
@@ -1213,7 +1213,7 @@ interface TextAnalysisAuthoring {
       @query("maxpagesize")
       maxpagesize?: int32;
     },
-    TrainingJobs
+    TextAnalysisAuthoringTrainingJobs
   >;
 
   /**
@@ -1236,7 +1236,7 @@ interface TextAnalysisAuthoring {
       @path
       jobId: string;
     },
-    TrainingJobState
+    TextAnalysisAuthoringTrainingJobState
   >;
 
   /**
@@ -1279,7 +1279,7 @@ interface TextAnalysisAuthoring {
       @path
       jobId: string;
     },
-    ProjectDeletionJobState
+    TextAnalysisAuthoringProjectDeletionJobState
   >;
 
   /**
@@ -1309,7 +1309,7 @@ interface TextAnalysisAuthoring {
       @query("maxpagesize")
       maxpagesize?: int32;
     },
-    AssignedResourceDeploymentsMetadata
+    TextAnalysisAuthoringAssignedResourceDeploymentsMetadata
   >;
 
   /**
@@ -1323,7 +1323,7 @@ interface TextAnalysisAuthoring {
        * The project kind, default value is CustomSingleLabelClassification.
        */
       @query("projectKind")
-      ProjectKind?: ProjectKind;
+      ProjectKind?: TextAnalysisAuthoringProjectKind;
 
       /**
        * The maximum number of resources to return from the collection.
@@ -1343,7 +1343,7 @@ interface TextAnalysisAuthoring {
       @query("maxpagesize")
       maxpagesize?: int32;
     },
-    SupportedLanguages
+    TextAnalysisAuthoringSupportedLanguages
   >;
 
   /**
@@ -1358,7 +1358,7 @@ interface TextAnalysisAuthoring {
        * The project kind, default value is CustomSingleLabelClassification.
        */
       @query("projectKind")
-      ProjectKind?: ProjectKind;
+      ProjectKind?: TextAnalysisAuthoringProjectKind;
 
       /**
        * The language to get supported prebuilt entities for. Required if multilingual
@@ -1393,7 +1393,7 @@ interface TextAnalysisAuthoring {
       @query("maxpagesize")
       maxpagesize?: int32;
     },
-    PrebuiltEntities
+    TextAnalysisAuthoringPrebuiltEntities
   >;
 
   /**
@@ -1407,7 +1407,7 @@ interface TextAnalysisAuthoring {
        * The project kind.
        */
       @query("projectKind")
-      ProjectKind: ProjectKind;
+      ProjectKind: TextAnalysisAuthoringProjectKind;
 
       /**
        * The maximum number of resources to return from the collection.
@@ -1427,6 +1427,6 @@ interface TextAnalysisAuthoring {
       @query("maxpagesize")
       maxpagesize?: int32;
     },
-    TrainingConfigVersions
+    TextAnalysisAuthoringTrainingConfigVersions
   >;
 }
