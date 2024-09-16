@@ -3906,7 +3906,7 @@
           "description": "Reference to the Endpoint CR. Can be of Broker, Kafka, Fabric, ADLS, ADX type."
         },
         "dataDestination": {
-          "$ref": "#/definitions/nonemptystring",
+          "$ref": "#/definitions/NonEmptyString",
           "description": "Destination location, can be a topic or table name. Supports dynamic values with $topic, $systemProperties, $userProperties, $payload, $context, and $subscription."
         }
       },
@@ -5108,7 +5108,7 @@
           "type": "array",
           "description": "List of source locations. Can be Broker or Kafka topics. Supports wildcards # and +.",
           "items": {
-            "$ref": "#/definitions/nonemptystring"
+            "$ref": "#/definitions/NonEmptyString"
           }
         }
       },
@@ -6661,7 +6661,7 @@
         "secretRef"
       ]
     },
-    "nonemptystring": {
+    "NonEmptyString": {
       "type": "string",
       "description": "A string with a minimum length of 1.",
       "minLength": 1

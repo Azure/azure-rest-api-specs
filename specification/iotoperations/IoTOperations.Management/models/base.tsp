@@ -6,7 +6,7 @@ namespace Microsoft.IoTOperations;
 
 @doc("A string with a minimum length of 1.")
 @minLength(1)
-scalar nonemptystring extends string;
+scalar NonEmptyString extends string;
 
 @doc("Extended location is an extension of Azure locations. They provide a way to use their Azure ARC enabled Kubernetes clusters as target locations for deploying Azure services instances.")
 model ExtendedLocation {
