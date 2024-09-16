@@ -2,7 +2,7 @@
   "parameters": {
     "provisioningServiceName": "myFirstProvisioningService",
     "resourceGroupName": "myResourceGroup",
-    "api-version": "2023-03-01-preview",
+    "api-version": "2025-02-01-preview",
     "subscriptionId": "91d12660-3dec-467a-be2a-213b5544ddc0",
     "location": "East US",
     "type": "Microsoft.Devices/ProvisioningServices",
@@ -24,7 +24,14 @@
           "serviceOperationsHostName": "myFirstProvisioningService.azure-devices-provisioning.net",
           "deviceProvisioningHostName": "global.azure-devices-provisioning.net",
           "idScope": "0ne00000012",
-          "portalOperationsHostName": "myFirstProvisioningService.services.azure-devices-provisioning.net"
+          "portalOperationsHostName": "myFirstProvisioningService.services.azure-devices-provisioning.net",
+          "iothubs": [
+            {
+              "location": "eastus",
+              "authenticationType": "UserAssigned",
+              "selectedUserAssignedIdentityResourceId": "myUserAssignedIdentityResourceId"
+            }
+          ]
         },
         "resourcegroup": "myResourceGroup",
         "type": "Microsoft.Devices/ProvisioningServices",

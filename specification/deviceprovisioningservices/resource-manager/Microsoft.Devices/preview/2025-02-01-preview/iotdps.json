@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2023-03-01-preview",
+    "version": "2025-02-01-preview",
     "x-ms-code-generation-settings": {
       "host": "management.azure.com"
     },
@@ -1954,10 +1954,26 @@
         "location": {
           "type": "string",
           "description": "ARM region of the IoT hub."
+        },
+        "authenticationType": {
+          "description": "IotHub MI authentication type: KeyBased, UserAssigned, SystemAssigned.",
+          "enum": [
+            "KeyBased",
+            "UserAssigned",
+            "SystemAssigned"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "IotHubAuthenticationType",
+            "modelAsString": true
+          }
+        },
+        "selectedUserAssignedIdentityResourceId": {
+          "type": "string",
+          "description": "Iot Hub selected user-assigned identity resource Id when AuthType is UserAssigned."
         }
       },
       "required": [
-        "connectionString",
         "location"
       ]
     },
