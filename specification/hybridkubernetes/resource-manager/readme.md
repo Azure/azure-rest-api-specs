@@ -27,13 +27,13 @@ These are the global settings for the Kubernetes Connect RP.
 ``` yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-preview-2024-12
+tag: package-2024-12-01-preview
 ```
-### Tag: package-preview-2024-12
+### Tag: package-2024-12-01-preview
 
-These settings apply only when `--tag=package-preview-2024-12` is specified on the command line.
+These settings apply only when `--tag=package-2024-12-01-preview` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2024-12'
+```yaml $(tag) == 'package-2024-12-01-preview'
 input-file:
   - Microsoft.Kubernetes/preview/2024-12-01-preview/connectedClusters.json
 ```
