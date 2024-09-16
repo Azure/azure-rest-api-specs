@@ -2632,8 +2632,7 @@
       "required": [
         "code",
         "message"
-      ],
-      "additionalProperties": {}
+      ]
     },
     "ErrorCode": {
       "type": "string",
@@ -3018,10 +3017,52 @@
     "TextAnalysisAuthoringCopyProjectJobState": {
       "type": "object",
       "description": "Represents the state of a copy job.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/TextAnalysisAuthoringJobState"
+      "properties": {
+        "jobId": {
+          "type": "string",
+          "description": "The job ID."
+        },
+        "createdDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The creation date time of the job."
+        },
+        "lastUpdatedDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The last date time the job was updated."
+        },
+        "expirationDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The expiration date time of the job."
+        },
+        "status": {
+          "$ref": "#/definitions/TextAnalysisAuthoringJobStatus",
+          "description": "The job status."
+        },
+        "warnings": {
+          "type": "array",
+          "description": "The warnings that were encountered while executing the job.",
+          "items": {
+            "$ref": "#/definitions/TextAnalysisAuthoringWarning"
+          },
+          "x-ms-identifiers": []
+        },
+        "errors": {
+          "type": "array",
+          "description": "The errors encountered while executing the job.",
+          "items": {
+            "$ref": "#/definitions/Error"
+          },
+          "x-ms-identifiers": []
         }
+      },
+      "required": [
+        "jobId",
+        "createdDateTime",
+        "lastUpdatedDateTime",
+        "status"
       ]
     },
     "TextAnalysisAuthoringCreateDeploymentOptions": {
@@ -3277,10 +3318,52 @@
     "TextAnalysisAuthoringDeploymentJobState": {
       "type": "object",
       "description": "Represents the state of a deployment job.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/TextAnalysisAuthoringJobState"
+      "properties": {
+        "jobId": {
+          "type": "string",
+          "description": "The job ID."
+        },
+        "createdDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The creation date time of the job."
+        },
+        "lastUpdatedDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The last date time the job was updated."
+        },
+        "expirationDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The expiration date time of the job."
+        },
+        "status": {
+          "$ref": "#/definitions/TextAnalysisAuthoringJobStatus",
+          "description": "The job status."
+        },
+        "warnings": {
+          "type": "array",
+          "description": "The warnings that were encountered while executing the job.",
+          "items": {
+            "$ref": "#/definitions/TextAnalysisAuthoringWarning"
+          },
+          "x-ms-identifiers": []
+        },
+        "errors": {
+          "type": "array",
+          "description": "The errors encountered while executing the job.",
+          "items": {
+            "$ref": "#/definitions/Error"
+          },
+          "x-ms-identifiers": []
         }
+      },
+      "required": [
+        "jobId",
+        "createdDateTime",
+        "lastUpdatedDateTime",
+        "status"
       ]
     },
     "TextAnalysisAuthoringDeploymentResource": {
@@ -3304,10 +3387,52 @@
     "TextAnalysisAuthoringDeploymentResourcesJobState": {
       "type": "object",
       "description": "Represents the state of a deployment resources job.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/TextAnalysisAuthoringJobState"
+      "properties": {
+        "jobId": {
+          "type": "string",
+          "description": "The job ID."
+        },
+        "createdDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The creation date time of the job."
+        },
+        "lastUpdatedDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The last date time the job was updated."
+        },
+        "expirationDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The expiration date time of the job."
+        },
+        "status": {
+          "$ref": "#/definitions/TextAnalysisAuthoringJobStatus",
+          "description": "The job status."
+        },
+        "warnings": {
+          "type": "array",
+          "description": "The warnings that were encountered while executing the job.",
+          "items": {
+            "$ref": "#/definitions/TextAnalysisAuthoringWarning"
+          },
+          "x-ms-identifiers": []
+        },
+        "errors": {
+          "type": "array",
+          "description": "The errors encountered while executing the job.",
+          "items": {
+            "$ref": "#/definitions/Error"
+          },
+          "x-ms-identifiers": []
         }
+      },
+      "required": [
+        "jobId",
+        "createdDateTime",
+        "lastUpdatedDateTime",
+        "status"
       ]
     },
     "TextAnalysisAuthoringDocumentEntityLabelEvaluationResult": {
@@ -3395,8 +3520,8 @@
       "description": "Represents the evaluation result of a document.",
       "properties": {
         "projectKind": {
-          "type": "string",
-          "description": "Discriminator property for TextAnalysisAuthoringDocumentEvaluationResult."
+          "$ref": "#/definitions/TextAnalysisAuthoringProjectKind",
+          "description": "Represents the project kind."
         },
         "location": {
           "type": "string",
@@ -3669,18 +3794,56 @@
       "type": "object",
       "description": "Represents the state of a evaluation job.",
       "properties": {
+        "jobId": {
+          "type": "string",
+          "description": "The job ID."
+        },
+        "createdDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The creation date time of the job."
+        },
+        "lastUpdatedDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The last date time the job was updated."
+        },
+        "expirationDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The expiration date time of the job."
+        },
+        "status": {
+          "$ref": "#/definitions/TextAnalysisAuthoringJobStatus",
+          "description": "The job status."
+        },
+        "warnings": {
+          "type": "array",
+          "description": "The warnings that were encountered while executing the job.",
+          "items": {
+            "$ref": "#/definitions/TextAnalysisAuthoringWarning"
+          },
+          "x-ms-identifiers": []
+        },
+        "errors": {
+          "type": "array",
+          "description": "The errors encountered while executing the job.",
+          "items": {
+            "$ref": "#/definitions/Error"
+          },
+          "x-ms-identifiers": []
+        },
         "result": {
           "$ref": "#/definitions/TextAnalysisAuthoringEvaluationJobResult",
           "description": "Represents evaluation task detailed result."
         }
       },
       "required": [
+        "jobId",
+        "createdDateTime",
+        "lastUpdatedDateTime",
+        "status",
         "result"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/TextAnalysisAuthoringJobState"
-        }
       ]
     },
     "TextAnalysisAuthoringEvaluationKind": {
@@ -3752,8 +3915,8 @@
       "description": "Represents the summary for an evaluation operation.",
       "properties": {
         "projectKind": {
-          "type": "string",
-          "description": "Discriminator property for TextAnalysisAuthoringEvaluationSummary."
+          "$ref": "#/definitions/TextAnalysisAuthoringProjectKind",
+          "description": "Represents the project type that the evaluation ran on."
         },
         "evaluationOptions": {
           "$ref": "#/definitions/TextAnalysisAuthoringEvaluationOptions",
@@ -3770,15 +3933,55 @@
       "type": "object",
       "description": "Represents the state of an export job.",
       "properties": {
+        "jobId": {
+          "type": "string",
+          "description": "The job ID."
+        },
+        "createdDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The creation date time of the job."
+        },
+        "lastUpdatedDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The last date time the job was updated."
+        },
+        "expirationDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The expiration date time of the job."
+        },
+        "status": {
+          "$ref": "#/definitions/TextAnalysisAuthoringJobStatus",
+          "description": "The job status."
+        },
+        "warnings": {
+          "type": "array",
+          "description": "The warnings that were encountered while executing the job.",
+          "items": {
+            "$ref": "#/definitions/TextAnalysisAuthoringWarning"
+          },
+          "x-ms-identifiers": []
+        },
+        "errors": {
+          "type": "array",
+          "description": "The errors encountered while executing the job.",
+          "items": {
+            "$ref": "#/definitions/Error"
+          },
+          "x-ms-identifiers": []
+        },
         "resultUrl": {
           "type": "string",
           "description": "The URL to use in order to download the exported project."
         }
       },
-      "allOf": [
-        {
-          "$ref": "#/definitions/TextAnalysisAuthoringJobState"
-        }
+      "required": [
+        "jobId",
+        "createdDateTime",
+        "lastUpdatedDateTime",
+        "status"
       ]
     },
     "TextAnalysisAuthoringExportedClass": {
@@ -4254,10 +4457,52 @@
     "TextAnalysisAuthoringExportedModelJobState": {
       "type": "object",
       "description": "Represents the state of a job to create or updated an exported model.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/TextAnalysisAuthoringJobState"
+      "properties": {
+        "jobId": {
+          "type": "string",
+          "description": "The job ID."
+        },
+        "createdDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The creation date time of the job."
+        },
+        "lastUpdatedDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The last date time the job was updated."
+        },
+        "expirationDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The expiration date time of the job."
+        },
+        "status": {
+          "$ref": "#/definitions/TextAnalysisAuthoringJobStatus",
+          "description": "The job status."
+        },
+        "warnings": {
+          "type": "array",
+          "description": "The warnings that were encountered while executing the job.",
+          "items": {
+            "$ref": "#/definitions/TextAnalysisAuthoringWarning"
+          },
+          "x-ms-identifiers": []
+        },
+        "errors": {
+          "type": "array",
+          "description": "The errors encountered while executing the job.",
+          "items": {
+            "$ref": "#/definitions/Error"
+          },
+          "x-ms-identifiers": []
         }
+      },
+      "required": [
+        "jobId",
+        "createdDateTime",
+        "lastUpdatedDateTime",
+        "status"
       ]
     },
     "TextAnalysisAuthoringExportedModelManifest": {
@@ -4335,8 +4580,7 @@
       "description": "Represents the assets of an exported project.",
       "properties": {
         "projectKind": {
-          "type": "string",
-          "description": "Discriminator property for TextAnalysisAuthoringExportedProjectAssets."
+          "$ref": "#/definitions/TextAnalysisAuthoringProjectKind"
         }
       },
       "discriminator": "projectKind",
@@ -4409,15 +4653,6 @@
     "TextAnalysisAuthoringImportProjectJobState": {
       "type": "object",
       "description": "Represents the state of an import job.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/TextAnalysisAuthoringJobState"
-        }
-      ]
-    },
-    "TextAnalysisAuthoringJobState": {
-      "type": "object",
-      "description": "Represents a job's state.",
       "properties": {
         "jobId": {
           "type": "string",
@@ -4515,10 +4750,52 @@
     "TextAnalysisAuthoringLoadSnapshotJobState": {
       "type": "object",
       "description": "Represents the state of loading a snapshot job.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/TextAnalysisAuthoringJobState"
+      "properties": {
+        "jobId": {
+          "type": "string",
+          "description": "The job ID."
+        },
+        "createdDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The creation date time of the job."
+        },
+        "lastUpdatedDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The last date time the job was updated."
+        },
+        "expirationDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The expiration date time of the job."
+        },
+        "status": {
+          "$ref": "#/definitions/TextAnalysisAuthoringJobStatus",
+          "description": "The job status."
+        },
+        "warnings": {
+          "type": "array",
+          "description": "The warnings that were encountered while executing the job.",
+          "items": {
+            "$ref": "#/definitions/TextAnalysisAuthoringWarning"
+          },
+          "x-ms-identifiers": []
+        },
+        "errors": {
+          "type": "array",
+          "description": "The errors encountered while executing the job.",
+          "items": {
+            "$ref": "#/definitions/Error"
+          },
+          "x-ms-identifiers": []
         }
+      },
+      "required": [
+        "jobId",
+        "createdDateTime",
+        "lastUpdatedDateTime",
+        "status"
       ]
     },
     "TextAnalysisAuthoringModelFile": {
@@ -4689,10 +4966,52 @@
     "TextAnalysisAuthoringProjectDeletionJobState": {
       "type": "object",
       "description": "Represents the state of a project deletion job.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/TextAnalysisAuthoringJobState"
+      "properties": {
+        "jobId": {
+          "type": "string",
+          "description": "The job ID."
+        },
+        "createdDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The creation date time of the job."
+        },
+        "lastUpdatedDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The last date time the job was updated."
+        },
+        "expirationDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The expiration date time of the job."
+        },
+        "status": {
+          "$ref": "#/definitions/TextAnalysisAuthoringJobStatus",
+          "description": "The job status."
+        },
+        "warnings": {
+          "type": "array",
+          "description": "The warnings that were encountered while executing the job.",
+          "items": {
+            "$ref": "#/definitions/TextAnalysisAuthoringWarning"
+          },
+          "x-ms-identifiers": []
+        },
+        "errors": {
+          "type": "array",
+          "description": "The errors encountered while executing the job.",
+          "items": {
+            "$ref": "#/definitions/Error"
+          },
+          "x-ms-identifiers": []
         }
+      },
+      "required": [
+        "jobId",
+        "createdDateTime",
+        "lastUpdatedDateTime",
+        "status"
       ]
     },
     "TextAnalysisAuthoringProjectDeployment": {
@@ -5488,18 +5807,56 @@
       "type": "object",
       "description": "Represents the state of a training job.",
       "properties": {
+        "jobId": {
+          "type": "string",
+          "description": "The job ID."
+        },
+        "createdDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The creation date time of the job."
+        },
+        "lastUpdatedDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The last date time the job was updated."
+        },
+        "expirationDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The expiration date time of the job."
+        },
+        "status": {
+          "$ref": "#/definitions/TextAnalysisAuthoringJobStatus",
+          "description": "The job status."
+        },
+        "warnings": {
+          "type": "array",
+          "description": "The warnings that were encountered while executing the job.",
+          "items": {
+            "$ref": "#/definitions/TextAnalysisAuthoringWarning"
+          },
+          "x-ms-identifiers": []
+        },
+        "errors": {
+          "type": "array",
+          "description": "The errors encountered while executing the job.",
+          "items": {
+            "$ref": "#/definitions/Error"
+          },
+          "x-ms-identifiers": []
+        },
         "result": {
           "$ref": "#/definitions/TextAnalysisAuthoringTrainingJobResult",
           "description": "Represents training tasks detailed result."
         }
       },
       "required": [
+        "jobId",
+        "createdDateTime",
+        "lastUpdatedDateTime",
+        "status",
         "result"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/TextAnalysisAuthoringJobState"
-        }
       ]
     },
     "TextAnalysisAuthoringTrainingJobs": {
