@@ -20,6 +20,7 @@ interface TextAnalysisAuthoring {
    */
   @route("/authoring/analyze-text/projects")
   @get
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   listProjects is Azure.Core.Foundations.Operation<
     {
       /**
@@ -48,6 +49,7 @@ interface TextAnalysisAuthoring {
    */
   @route("/authoring/analyze-text/projects/{projectName}")
   @get
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   getProject is Azure.Core.Foundations.Operation<
     {
       /**
@@ -265,6 +267,7 @@ interface TextAnalysisAuthoring {
    */
   @route("/authoring/analyze-text/projects/{projectName}/copy/jobs/{jobId}")
   @get
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   getCopyProjectStatus is Azure.Core.Foundations.Operation<
     {
       /**
@@ -288,6 +291,7 @@ interface TextAnalysisAuthoring {
    */
   @route("/authoring/analyze-text/projects/{projectName}/deployments")
   @get
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   listDeployments is Azure.Core.Foundations.Operation<
     {
       /**
@@ -323,6 +327,7 @@ interface TextAnalysisAuthoring {
    */
   @route("/authoring/analyze-text/projects/{projectName}/deployments/{deploymentName}")
   @get
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   getDeployment is Azure.Core.Foundations.Operation<
     {
       /**
@@ -442,6 +447,7 @@ interface TextAnalysisAuthoring {
    */
   @route("/authoring/analyze-text/projects/{projectName}/deployments/{deploymentName}/delete-from-resources/jobs/{jobId}")
   @get
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   getDeploymentDeleteFromResourcesStatus is Azure.Core.Foundations.Operation<
     {
       /**
@@ -471,6 +477,7 @@ interface TextAnalysisAuthoring {
    */
   @route("/authoring/analyze-text/projects/{projectName}/deployments/{deploymentName}/jobs/{jobId}")
   @get
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   getDeploymentStatus is Azure.Core.Foundations.Operation<
     {
       /**
@@ -527,6 +534,7 @@ interface TextAnalysisAuthoring {
    */
   @route("/authoring/analyze-text/projects/{projectName}/deployments/swap/jobs/{jobId}")
   @get
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   getSwapDeploymentsStatus is Azure.Core.Foundations.Operation<
     {
       /**
@@ -551,6 +559,7 @@ interface TextAnalysisAuthoring {
    */
   @route("/authoring/analyze-text/projects/{projectName}/export/jobs/{jobId}")
   @get
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   getExportStatus is Azure.Core.Foundations.Operation<
     {
       /**
@@ -574,6 +583,7 @@ interface TextAnalysisAuthoring {
    */
   @route("/authoring/analyze-text/projects/{projectName}/exported-models")
   @get
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   listExportedModels is Azure.Core.Foundations.Operation<
     {
       /**
@@ -609,6 +619,7 @@ interface TextAnalysisAuthoring {
    */
   @route("/authoring/analyze-text/projects/{projectName}/exported-models/{exportedModelName}")
   @get
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   getExportedModel is Azure.Core.Foundations.Operation<
     {
       /**
@@ -692,6 +703,7 @@ interface TextAnalysisAuthoring {
    */
   @route("/authoring/analyze-text/projects/{projectName}/exported-models/{exportedModelName}/jobs/{jobId}")
   @get
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   getExportedModelJobStatus is Azure.Core.Foundations.Operation<
     {
       /**
@@ -721,6 +733,7 @@ interface TextAnalysisAuthoring {
    */
   @route("/authoring/analyze-text/projects/{projectName}/exported-models/{exportedModelName}/manifest")
   @get
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   getExportedModelManifest is Azure.Core.Foundations.Operation<
     {
       /**
@@ -744,6 +757,7 @@ interface TextAnalysisAuthoring {
    */
   @route("/authoring/analyze-text/projects/{projectName}/import/jobs/{jobId}")
   @get
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   getImportStatus is Azure.Core.Foundations.Operation<
     {
       /**
@@ -767,6 +781,7 @@ interface TextAnalysisAuthoring {
    */
   @route("/authoring/analyze-text/projects/{projectName}/models")
   @get
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   listTrainedModels is Azure.Core.Foundations.Operation<
     {
       /**
@@ -802,6 +817,7 @@ interface TextAnalysisAuthoring {
    */
   @route("/authoring/analyze-text/projects/{projectName}/models/{trainedModelLabel}")
   @get
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   getTrainedModel is Azure.Core.Foundations.Operation<
     {
       /**
@@ -825,6 +841,7 @@ interface TextAnalysisAuthoring {
    */
   @route("/authoring/analyze-text/projects/{projectName}/models/{trainedModelLabel}")
   @delete
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   deleteTrainedModel is Azure.Core.Foundations.Operation<
     {
       /**
@@ -906,6 +923,7 @@ interface TextAnalysisAuthoring {
    */
   @route("/authoring/analyze-text/projects/{projectName}/models/{trainedModelLabel}/evaluate/jobs/{jobId}")
   @get
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   getEvaluationStatus is Azure.Core.Foundations.Operation<
     {
       /**
@@ -936,6 +954,7 @@ interface TextAnalysisAuthoring {
    */
   @route("/authoring/analyze-text/projects/{projectName}/models/{trainedModelLabel}/evaluation/result")
   @get
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   getModelEvaluationResults is Azure.Core.Foundations.Operation<
     {
       /**
@@ -985,6 +1004,7 @@ interface TextAnalysisAuthoring {
    */
   @route("/authoring/analyze-text/projects/{projectName}/models/{trainedModelLabel}/evaluation/summary-result")
   @get
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   getModelEvaluationSummary is Azure.Core.Foundations.Operation<
     {
       /**
@@ -1008,6 +1028,7 @@ interface TextAnalysisAuthoring {
    */
   @route("/authoring/analyze-text/projects/{projectName}/models/{trainedModelLabel}/load-snapshot/jobs/{jobId}")
   @get
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   getLoadSnapshotStatus is Azure.Core.Foundations.Operation<
     {
       /**
@@ -1037,6 +1058,7 @@ interface TextAnalysisAuthoring {
    */
   @route("/authoring/analyze-text/projects/{projectName}/resources")
   @get
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   listDeploymentResources is Azure.Core.Foundations.Operation<
     {
       /**
@@ -1137,6 +1159,7 @@ interface TextAnalysisAuthoring {
    */
   @route("/authoring/analyze-text/projects/{projectName}/resources/assign/jobs/{jobId}")
   @get
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   getAssignDeploymentResourcesStatus is Azure.Core.Foundations.Operation<
     {
       /**
@@ -1160,6 +1183,7 @@ interface TextAnalysisAuthoring {
    */
   @route("/authoring/analyze-text/projects/{projectName}/resources/unassign/jobs/{jobId}")
   @get
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   getUnassignDeploymentResourcesStatus is Azure.Core.Foundations.Operation<
     {
       /**
@@ -1183,6 +1207,7 @@ interface TextAnalysisAuthoring {
    */
   @route("/authoring/analyze-text/projects/{projectName}/train/jobs")
   @get
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   listTrainingJobs is Azure.Core.Foundations.Operation<
     {
       /**
@@ -1218,6 +1243,7 @@ interface TextAnalysisAuthoring {
    */
   @route("/authoring/analyze-text/projects/{projectName}/train/jobs/{jobId}")
   @get
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   getTrainingStatus is Azure.Core.Foundations.Operation<
     {
       /**
@@ -1268,6 +1294,7 @@ interface TextAnalysisAuthoring {
    */
   @route("/authoring/analyze-text/projects/global/deletion-jobs/{jobId}")
   @get
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   getProjectDeletionStatus is Azure.Core.Foundations.Operation<
     {
       /**
@@ -1286,6 +1313,7 @@ interface TextAnalysisAuthoring {
    */
   @route("/authoring/analyze-text/projects/global/deployments/resources")
   @get
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   listAssignedResourceDeployments is Azure.Core.Foundations.Operation<
     {
       /**
@@ -1314,12 +1342,14 @@ interface TextAnalysisAuthoring {
    */
   @route("/authoring/analyze-text/projects/global/languages")
   @get
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   getSupportedLanguages is Azure.Core.Foundations.Operation<
     {
       /**
        * The project kind, default value is CustomSingleLabelClassification.
        */
       @query("projectKind")
+      #suppress "@azure-tools/typespec-azure-core/casing-style"
       ProjectKind?: TextAnalysisAuthoringProjectKind;
 
       /**
@@ -1349,12 +1379,14 @@ interface TextAnalysisAuthoring {
    */
   @route("/authoring/analyze-text/projects/global/prebuilt-entities")
   @get
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   getSupportedPrebuiltEntities is Azure.Core.Foundations.Operation<
     {
       /**
        * The project kind, default value is CustomSingleLabelClassification.
        */
       @query("projectKind")
+      #suppress "@azure-tools/typespec-azure-core/casing-style"
       ProjectKind?: TextAnalysisAuthoringProjectKind;
 
       /**
@@ -1398,12 +1430,14 @@ interface TextAnalysisAuthoring {
    */
   @route("/authoring/analyze-text/projects/global/training-config-versions")
   @get
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   listTrainingConfigVersions is Azure.Core.Foundations.Operation<
     {
       /**
        * The project kind.
        */
       @query("projectKind")
+      #suppress "@azure-tools/typespec-azure-core/casing-style"
       ProjectKind: TextAnalysisAuthoringProjectKind;
 
       /**
