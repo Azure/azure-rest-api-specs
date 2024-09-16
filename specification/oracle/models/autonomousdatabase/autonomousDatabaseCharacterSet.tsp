@@ -25,5 +25,5 @@ model AutonomousDatabaseCharacterSetProperties {
   @doc("The Oracle Autonomous Database supported character sets.")
   @minLength(1)
   @maxLength(255)
-  characterSet?: string;
+  characterSet: string;
 }

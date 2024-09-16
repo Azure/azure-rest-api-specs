@@ -21,7 +21,7 @@ model DbNode is ProxyResource<DbNodeProperties> {
 @doc("The properties of DbNodeResource")
 model DbNodeProperties {
   @doc("DbNode OCID")
-  ocid?: Ocid;
+  ocid: Ocid;
 
   @doc("Additional information about the planned maintenance.")
   additionalDetails?: string;
@@ -45,7 +45,7 @@ model DbNodeProperties {
   dbServerId?: Ocid;
 
   @doc("The OCID of the DB system.")
-  dbSystemId?: Ocid;
+  dbSystemId: Ocid;
 
   @doc("The name of the Fault Domain the instance is contained in.")
   @minLength(1)

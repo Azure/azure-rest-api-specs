@@ -21,5 +21,5 @@ model GiVersionProperties {
   @doc("A valid Oracle Grid Infrastructure (GI) software version.")
   @minLength(1)
   @maxLength(255)
-  version?: string;
+  version: string;
 }

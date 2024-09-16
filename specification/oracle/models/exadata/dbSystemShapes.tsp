@@ -24,7 +24,7 @@ model DbSystemShapeProperties {
   shapeFamily?: string;
 
   @doc("The maximum number of CPU cores that can be enabled on the DB system for this shape.")
-  availableCoreCount?: int32;
+  availableCoreCount: int32;
 
   @doc("The minimum number of CPU cores that can be enabled on the DB system for this shape.")
   minimumCoreCount?: int32;

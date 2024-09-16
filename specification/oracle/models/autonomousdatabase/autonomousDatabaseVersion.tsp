@@ -25,7 +25,7 @@ model AutonomousDbVersionProperties {
   @doc("Supported Autonomous Db versions.")
   @minLength(1)
   @maxLength(255)
-  version?: string;
+  version: string;
 
   @doc("The Autonomous Database workload type")
   dbWorkload?: WorkloadType;
