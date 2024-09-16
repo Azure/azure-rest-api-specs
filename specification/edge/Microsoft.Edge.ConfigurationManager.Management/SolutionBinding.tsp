@@ -63,8 +63,8 @@ model SolutionBindingProperties {
 @doc("Solution Binding Resource")
 model SolutionBinding is TrackedResource<SolutionBindingProperties> {
   ...ResourceNameParameter<
-  SolutionBinding,
-  NamePattern = "^[a-zA-Z0-9-]{3,60}$"
+    SolutionBinding,
+    NamePattern = "^[a-zA-Z0-9-]{3,60}$"
   >;
 }
 
