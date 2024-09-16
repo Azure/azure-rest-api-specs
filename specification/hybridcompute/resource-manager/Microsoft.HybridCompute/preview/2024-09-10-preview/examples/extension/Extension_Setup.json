@@ -1,0 +1,24 @@
+{
+  "parameters": {
+    "subscriptionId": "{subscriptionId}",
+    "resourceGroupName": "myResourceGroup",
+    "machineName": "myMachine",
+    "api-version": "2024-09-10-preview",
+    "extensionParameters": {
+      "location": "eastus2euap",
+      "properties": {
+        "publisher": "Microsoft.Azure.Monitoring",
+        "type": "AzureMonitorAgentLinux"
+      }
+    }
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "Location": "{callbackUrl}",
+        "Retry-After": 200,
+        "Azure-AsyncOperation": "{callbackUri}"
+      }
+    }
+  }
+}
