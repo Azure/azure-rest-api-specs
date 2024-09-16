@@ -8986,16 +8986,7 @@
           "type": "array",
           "description": "Set of days of the week on which this schedule is active.",
           "items": {
-            "enum": [
-              "Sunday",
-              "Monday",
-              "Tuesday",
-              "Wednesday",
-              "Thursday",
-              "Friday",
-              "Saturday"
-            ],
-            "type": "string"
+            "$ref": "#/definitions/DaysOfWeek"
           }
         },
         "rampUpStartTime": {
@@ -9185,20 +9176,7 @@
           "type": "array",
           "description": "Set of days of the week on which this schedule is active.",
           "items": {
-            "enum": [
-              "Monday",
-              "Tuesday",
-              "Wednesday",
-              "Thursday",
-              "Friday",
-              "Saturday",
-              "Sunday"
-            ],
-            "type": "string",
-            "x-ms-enum": {
-              "name": "DayOfWeek",
-              "modelAsString": true
-            }
+            "$ref": "#/definitions/DaysOfWeek"
           }
         },
         "rampUpStartTime": {
@@ -9577,20 +9555,7 @@
           "type": "array",
           "description": "Set of days of the week on which this schedule is active.",
           "items": {
-            "enum": [
-              "Monday",
-              "Tuesday",
-              "Wednesday",
-              "Thursday",
-              "Friday",
-              "Saturday",
-              "Sunday"
-            ],
-            "type": "string",
-            "x-ms-enum": {
-              "name": "DayOfWeek",
-              "modelAsString": true
-            }
+            "$ref": "#/definitions/DaysOfWeek"
           }
         },
         "rampUpStartTime": {
@@ -9840,6 +9805,23 @@
           "minimum": 0,
           "description": "The time in minutes to wait before performing the desired session handling action when a user logs off during the off-peak period."
         }
+      }
+    },
+    "DaysOfWeek": {
+      "type": "string",
+      "description": "Day of the week.",
+      "enum": [
+        "Sunday",
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday"
+      ],
+      "x-ms-enum": {
+        "name": "DayOfWeek",
+        "modelAsString": true
       }
     }
   },
