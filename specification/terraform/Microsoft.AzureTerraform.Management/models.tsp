@@ -13,13 +13,6 @@ namespace Microsoft.AzureTerraform;
 interface Operations extends Azure.ResourceManager.Operations {}
 
 @doc("The parameter type")
-@extension(
-  "x-ms-enum",
-  {
-    name: "parameterType",
-    modelAsString: true,
-  }
-)
 union Type {
   string,
   ExportResource: "ExportResource",
@@ -28,13 +21,6 @@ union Type {
 }
 
 @doc("The target Azure Terraform Provider")
-@extension(
-  "x-ms-enum",
-  {
-    name: "targetProvider",
-    modelAsString: true,
-  }
-)
 union targetProvider {
   string,
 

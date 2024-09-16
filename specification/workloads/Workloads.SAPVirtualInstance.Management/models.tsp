@@ -2,6 +2,7 @@ import "@typespec/http";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 using Azure.ResourceManager;
 using Azure.ResourceManager.CommonTypes;
 
@@ -195,6 +196,12 @@ union SAPConfigurationType {
    * SAP system will be deployed by service. OS configurations will be done.
    */
   DeploymentWithOSConfig: "DeploymentWithOSConfig",
+
+  /**
+   * SAP system will be deployed by service using SAP Deployment automation framework.
+   */
+  @added(Versions.v2024_10_01_preview)
+  SdafDeployment: "SdafDeployment",
 }
 
 /**
@@ -2466,6 +2473,33 @@ model DeploymentWithOSConfiguration extends SAPConfiguration {
    * The configuration Type.
    */
   configurationType: SAPConfigurationType.DeploymentWithOSConfig;
+}
+
+/**
+ * Deployment along with OS Configuration.
+ */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "OS represents the Operation System."
+@added(Versions.v2024_10_01_preview)
+model SdafDeployment extends SAPConfiguration {
+  /**
+   * The workload zone variables blob.
+   */
+  workloadZoneVariablesBlob: string;
+
+  /**
+   * The sap system variables blob.
+   */
+  systemVariablesBlob: string;
+
+  /**
+   * The blob file path containing the custom resource names.
+   */
+  customResourceNamesBlob?: string;
+
+  /**
+   * The configuration Type.
+   */
+  configurationType: SAPConfigurationType.SdafDeployment;
 }
 
 /**

@@ -44,6 +44,7 @@ namespace Microsoft.Mission;
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-outside-interface" "This is a valid template"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "This is a valid template"
+#suppress "@azure-tools/typespec-azure-core/no-openapi" "TODO - migrate to LRO"
 @autoRoute
 @doc("Create a {name}", TResource)
 @OpenAPI.extension("x-ms-long-running-operation", true)
@@ -433,7 +434,10 @@ interface ExternalConnections {
 interface Approval {
   get is ArmResourceRead<ApprovalResource>;
   createOrUpdate is ArmResourceCreateOrUpdateAsync<ApprovalResource>;
+  listByParent is ArmResourceListByParent<ApprovalResource>;
   update is ArmResourcePatchAsync<ApprovalResource, ApprovalProperties>;
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "deprecated" "Backwards compatibility"
   delete is ArmResourceDeleteWithoutOkAsync<ApprovalResource>;
   @doc("Upon receiving approval or rejection from approver, this facilitates actions on approval resource")
   @armResourceAction(ApprovalResource)

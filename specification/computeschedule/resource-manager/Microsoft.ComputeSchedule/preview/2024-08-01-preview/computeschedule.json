@@ -1677,7 +1677,7 @@
           "readOnly": true
         },
         "provisioningState": {
-          "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
+          "$ref": "#/definitions/ProvisioningState",
           "description": "The status of the last provisioning operation performed on the resource.",
           "readOnly": true
         }
@@ -2749,6 +2749,43 @@
         ]
       }
     },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "Provisioning state",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Deleting"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "Resource is being deleted."
+          }
+        ]
+      },
+      "readOnly": true
+    },
     "ResourceOperation": {
       "type": "object",
       "description": "High level response from an operation on a resource",
@@ -2818,8 +2855,7 @@
                 "description": "Hibernate operations on the resources"
               }
             ]
-          },
-          "x-ms-enum.modelAsString": true
+          }
         },
         "subscriptionId": {
           "type": "string",
@@ -2859,8 +2895,7 @@
                 "description": "Complete the operation by the given deadline."
               }
             ]
-          },
-          "x-ms-enum.modelAsString": true
+          }
         },
         "state": {
           "type": "string",
@@ -2928,8 +2963,7 @@
               }
             ]
           },
-          "readOnly": true,
-          "x-ms-enum.modelAsString": true
+          "readOnly": true
         },
         "timeZone": {
           "type": "string",
@@ -3134,8 +3168,7 @@
                 "description": "Complete the operation by the given deadline."
               }
             ]
-          },
-          "x-ms-enum.modelAsString": true
+          }
         }
       },
       "required": [
