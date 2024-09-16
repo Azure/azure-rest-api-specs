@@ -673,23 +673,16 @@
       "type": "object"
     },
     "LedgerUserRole": {
-      "description": "Represents an assignable role.",
-      "type": "array",
-      "items": {
-        "$ref": "#/definitions/MultipleRolesList"
-      }
-    },
-    "MultipleRolesList": {
-      "description": "Represents list of roles for single user",
       "type": "string",
+      "description": "Represents an assignable role.",
       "enum": [
         "Administrator",
         "Contributor",
         "Reader"
       ],
       "x-ms-enum": {
-        "modelAsString": true,
-        "name": "ConfidentialLedgerUserRoleName"
+        "name": "ConfidentialLedgerUserRoleName",
+        "modelAsString": true
       }
     },
     "LedgerWriteResult": {
