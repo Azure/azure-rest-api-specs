@@ -120,7 +120,6 @@ input-file:
   - Microsoft.AwsConnector/stable/2024-12-01/networkFirewallFirewallPolicy.json
   - Microsoft.AwsConnector/stable/2024-12-01/networkFirewallRuleGroup.json
   - Microsoft.AwsConnector/stable/2024-12-01/openSearchDomainStatus.json
-  - Microsoft.AwsConnector/stable/2024-12-01/openSearchServiceDomain.json
   - Microsoft.AwsConnector/stable/2024-12-01/operations.json
   - Microsoft.AwsConnector/stable/2024-12-01/organizationsAccount.json
   - Microsoft.AwsConnector/stable/2024-12-01/organizationsOrganization.json
@@ -247,7 +246,6 @@ input-file:
   - Microsoft.AwsConnector/stable/2024-12-01/networkFirewallFirewallPolicy.json
   - Microsoft.AwsConnector/stable/2024-12-01/networkFirewallRuleGroup.json
   - Microsoft.AwsConnector/stable/2024-12-01/openSearchDomainStatus.json
-  - Microsoft.AwsConnector/stable/2024-12-01/openSearchServiceDomain.json
   - Microsoft.AwsConnector/stable/2024-12-01/operations.json
   - Microsoft.AwsConnector/stable/2024-12-01/organizationsAccount.json
   - Microsoft.AwsConnector/stable/2024-12-01/organizationsOrganization.json
