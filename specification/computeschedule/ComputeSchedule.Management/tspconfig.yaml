@@ -1,3 +1,6 @@
+parameters:
+  "service-dir":
+    default: "sdk/computeschedule"
 emit:
   - "@azure-tools/typespec-autorest"
 options:
@@ -5,7 +8,13 @@ options:
     emitter-output-dir: "{project-root}/.."
     azure-resource-provider-folder: "resource-manager"
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/computeschedule.json"
-    examples-directory: "{project-root}/examples"
+  "@azure-tools/typespec-python":
+    package-dir: "azure-mgmt-computeschedule"
+    package-name: "{package-dir}"
+    flavor: "azure"
+    generate-test: true
+    generate-sample: true
+    examples-dir: "{project-root}/examples"
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"
