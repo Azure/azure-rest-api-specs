@@ -648,6 +648,7 @@ interface TextAnalysisAuthoring {
   @route("/authoring/analyze-text/projects/{projectName}/exported-models/{exportedModelName}")
   @put
   @pollingOperation(TextAnalysisAuthoring.getExportedModelJobStatus)
+  @added(Versions.v2023_04_15_preview)
   createOrUpdateExportedModel is Foundations.LongRunningOperation<
     {
       /**
@@ -708,6 +709,7 @@ interface TextAnalysisAuthoring {
   @route("/authoring/analyze-text/projects/{projectName}/exported-models/{exportedModelName}/jobs/{jobId}")
   @get
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  @added(Versions.v2023_04_15_preview)
   getExportedModelJobStatus is Azure.Core.Foundations.Operation<
     {
       /**
@@ -738,6 +740,7 @@ interface TextAnalysisAuthoring {
   @route("/authoring/analyze-text/projects/{projectName}/exported-models/{exportedModelName}/manifest")
   @get
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  @added(Versions.v2023_04_15_preview)
   getExportedModelManifest is Azure.Core.Foundations.Operation<
     {
       /**
@@ -928,6 +931,7 @@ interface TextAnalysisAuthoring {
   @route("/authoring/analyze-text/projects/{projectName}/models/{trainedModelLabel}/evaluate/jobs/{jobId}")
   @get
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  @added(Versions.v2023_04_15_preview)
   getEvaluationStatus is Azure.Core.Foundations.Operation<
     {
       /**
@@ -1063,6 +1067,7 @@ interface TextAnalysisAuthoring {
   @route("/authoring/analyze-text/projects/{projectName}/resources")
   @get
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  @added(Versions.v2023_04_15_preview)
   listDeploymentResources is Azure.Core.Foundations.Operation<
     {
       /**
@@ -1164,6 +1169,7 @@ interface TextAnalysisAuthoring {
   @route("/authoring/analyze-text/projects/{projectName}/resources/assign/jobs/{jobId}")
   @get
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  @added(Versions.v2023_04_15_preview)
   getAssignDeploymentResourcesStatus is Azure.Core.Foundations.Operation<
     {
       /**
@@ -1188,6 +1194,7 @@ interface TextAnalysisAuthoring {
   @route("/authoring/analyze-text/projects/{projectName}/resources/unassign/jobs/{jobId}")
   @get
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  @added(Versions.v2023_04_15_preview)
   getUnassignDeploymentResourcesStatus is Azure.Core.Foundations.Operation<
     {
       /**
@@ -1318,6 +1325,7 @@ interface TextAnalysisAuthoring {
   @route("/authoring/analyze-text/projects/global/deployments/resources")
   @get
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  @added(Versions.v2023_04_15_preview)
   listAssignedResourceDeployments is Azure.Core.Foundations.Operation<
     {
       /**
@@ -1384,6 +1392,7 @@ interface TextAnalysisAuthoring {
   @route("/authoring/analyze-text/projects/global/prebuilt-entities")
   @get
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  @added(Versions.v2023_04_15_preview)
   getSupportedPrebuiltEntities is Azure.Core.Foundations.Operation<
     {
       /**
