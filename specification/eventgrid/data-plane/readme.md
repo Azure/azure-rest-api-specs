@@ -216,7 +216,7 @@ input-file:
 
 These settings apply only when `--tag=package-2023-11-01` is specified on the command line.
 
-``` yaml $(tag) == 'package-2023-06-01-preview'
+``` yaml $(tag) == 'package-2011-01'
 input-file:
 - Microsoft.Storage/stable/2018-01-01/Storage.json
 - Microsoft.EventHub/stable/2018-01-01/EventHub.json
