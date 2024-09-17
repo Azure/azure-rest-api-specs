@@ -225,6 +225,7 @@ interface TextAnalysisAuthoring {
        * The format of the project to import. The currently supported formats are json
        * and aml formats. If not provided, the default is set to json.
        */
+      @added(Versions.v2023_04_15_preview)
       @header
       format?: string;
 
