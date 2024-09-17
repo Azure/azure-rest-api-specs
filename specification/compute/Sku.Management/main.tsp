@@ -20,6 +20,7 @@ using TypeSpec.Versioning;
 /**
  * Compute Client
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "Already exist outside this subservice"
 @armProviderNamespace
 @useAuth(AadOauth2Auth<["user_impersonation"]>)
 @service({
@@ -37,5 +38,6 @@ enum Versions {
    */
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @useDependency(Azure.Core.Versions.v1_0_Preview_1)
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
   v2021_07_01: "2021-07-01",
 }

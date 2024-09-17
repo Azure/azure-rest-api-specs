@@ -10,8 +10,6 @@ using Azure.ResourceManager.Foundations;
 
 namespace Microsoft.Compute;
 
-interface Operations extends Azure.ResourceManager.Operations {}
-
 /**
  * The type of the extended location.
  */

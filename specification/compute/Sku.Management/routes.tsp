@@ -11,7 +11,7 @@ using Azure.ResourceManager;
 
 namespace Microsoft.Compute;
 
-interface ResourceSkusOperations {
+interface ResourceSkus {
   /**
    * Gets the list of Microsoft.Compute SKUs available for your Subscription.
    */
@@ -27,10 +27,14 @@ interface ResourceSkusOperations {
     @query("$filter")
     $filter?: string,
 
-    /**
-     * To Include Extended Locations information or not in the response.
-     */
-    @query("includeExtendedLocations")
-    includeExtendedLocations?: string,
+    ...IncludeExtendedLocationsParameter,
   ): ArmResponse<ResourceSkusResult> | ErrorResponse;
+}
+
+model IncludeExtendedLocationsParameter {
+  /**
+   * To Include Extended Locations information or not in the response.
+   */
+  @query("includeExtendedLocations")
+  includeExtendedLocations?: string;
 }
