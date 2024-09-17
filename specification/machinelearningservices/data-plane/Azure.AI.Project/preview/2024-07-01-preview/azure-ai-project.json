@@ -236,17 +236,21 @@
         },
         "credentials": {
           "$ref": "#/definitions/ListSecretsPropertiesCredentials",
-          "description": "to do"
+          "description": "Credentials will only be present for authType=ApiKey"
         },
         "target": {
           "type": "string",
+          "description": "to do"
+        },
+        "metadata": {
+          "$ref": "#/definitions/PropertiesMetadata",
           "description": "to do"
         }
       },
       "required": [
         "authType",
-        "credentials",
-        "target"
+        "target",
+        "metadata"
       ]
     },
     "ListSecretsPropertiesCredentials": {
@@ -274,6 +278,72 @@
       "required": [
         "properties"
       ]
+    },
+    "ModelType": {
+      "type": "string",
+      "description": "The type of AI model",
+      "enum": [
+        "embeddings",
+        "image_generation",
+        "text_generation",
+        "image_embeddings",
+        "audio_generation",
+        "chat_completion"
+      ],
+      "x-ms-enum": {
+        "name": "ModelType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "embeddings",
+            "value": "embeddings",
+            "description": "A model capable of generating embeddings from a text"
+          },
+          {
+            "name": "image_generation",
+            "value": "image_generation",
+            "description": "A model capable of generating images from an image and text description"
+          },
+          {
+            "name": "text_generation",
+            "value": "text_generation",
+            "description": "A text generation model"
+          },
+          {
+            "name": "image_embeddings",
+            "value": "image_embeddings",
+            "description": "A model capable of generating embeddings from an image"
+          },
+          {
+            "name": "audio_generation",
+            "value": "audio_generation",
+            "description": "A text-to-audio generative model"
+          },
+          {
+            "name": "chat_completion",
+            "value": "chat_completion",
+            "description": "A model capable of taking chat-formatted messages and generate responses"
+          }
+        ]
+      }
+    },
+    "PropertiesMetadata": {
+      "type": "object",
+      "description": "Metadata on the properties",
+      "properties": {
+        "model_name": {
+          "type": "string",
+          "description": "The name of the AI model. For example: `Phi21`"
+        },
+        "model_type": {
+          "$ref": "#/definitions/ModelType",
+          "description": "The type of the AI model. A Unique identifier for the profile."
+        },
+        "model_provider_name": {
+          "type": "string",
+          "description": "The model provider name. For example: `Microsoft Research`"
+        }
+      }
     }
   },
   "parameters": {
