@@ -40,7 +40,7 @@ input-file:
   - Microsoft.MachineLearningServices/stable/2024-10-01/mfe.json
   - Microsoft.MachineLearningServices/stable/2024-10-01/registries.json
   - Microsoft.MachineLearningServices/stable/2024-10-01/workspaceFeatures.json
-  - Microsoft.MachineLearningServices/stable/2024-07-01/workspaceRP.json
+  - Microsoft.MachineLearningServices/stable/2024-10-01/workspaceRP.json
 ```
 
 ### Tag: package-preview-2024-07
