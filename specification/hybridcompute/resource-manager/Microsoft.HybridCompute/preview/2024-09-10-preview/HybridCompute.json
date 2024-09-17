@@ -2751,12 +2751,15 @@
             "schema": {
               "$ref": "#/definitions/MachineExtensionSetup"
             },
-            "description": "Parameters supplied to the Upgrade Extensions operation."
+            "description": "Parameters supplied to the Setup Extensions operation."
           }
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/MachineExtensionSetup"
+            }
           },
           "202": {
             "description": "HTTP 202 (Accepted) if the operation was successfully started and will complete asynchronously.",
@@ -2784,7 +2787,7 @@
           }
         },
         "x-ms-examples": {
-          "Upgrade Machine Extensions": {
+          "Setup Machine Extensions": {
             "$ref": "./examples/extension/Extension_Setup.json"
           }
         },
@@ -5669,4 +5672,3 @@
     }
   }
 }
-
