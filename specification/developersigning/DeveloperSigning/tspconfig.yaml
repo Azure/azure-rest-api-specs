@@ -1,6 +1,6 @@
 parameters:
   "service-dir":
-    default: "sdk/developer-signing"
+    default: "sdk/developer"
 emit:
   - "@azure-tools/typespec-autorest"
 linter:
@@ -11,13 +11,15 @@ options:
     azure-resource-provider-folder: "data-plane"
     emit-lro-options: "none"
     emitter-output-dir: "{project-root}/.."
-    examples-directory: "examples"
     omit-unreachable-types: true
     output-file: "{azure-resource-provider-folder}/Azure.Developer.Signing/{version-status}/{version}/azure.developer.signing.json"
   "@azure-tools/typespec-python":
     package-dir: "azure-developer-signing"
     package-name: "{package-dir}"
     flavor: azure
+    generate-test: true
+    generate-sample: true
+    examples-dir: "{project-root}/examples"
   "@azure-tools/typespec-csharp":
     clear-output-folder: true
     package-dir: "Azure.Developer.Signing"
@@ -33,6 +35,6 @@ options:
       description: "Azure developer signing service"
     flavor: azure
   "@azure-tools/typespec-java":
-    package-dir: "com.azure.developer.signing"
-    namespace: Azure.Developer.Signing
+    package-dir: "azure-developer-signing"
+    namespace: "com.azure.developer.signing"
     flavor: azure
