@@ -190,6 +190,7 @@ input-file:
 - Microsoft.EventHub/stable/2018-01-01/EventHub.json
 - Microsoft.Resources/stable/2018-01-01/Resources.json
 - Microsoft.EventGrid/preview/2023-10-01-preview/EventGrid.json
+- Microsoft.EventGrid/stable/2018-01-01/SystemEvents.json
 - Microsoft.DataBox/stable/2018-01-01/DataBox.json
 - Microsoft.Devices/stable/2018-01-01/IotHub.json
 - Microsoft.ContainerRegistry/stable/2018-01-01/ContainerRegistry.json
@@ -221,6 +222,7 @@ input-file:
 - Microsoft.EventHub/stable/2018-01-01/EventHub.json
 - Microsoft.Resources/stable/2018-01-01/Resources.json
 - Microsoft.EventGrid/stable/2023-11-01/EventGrid.json
+- Microsoft.EventGrid/stable/2018-01-01/SystemEvents.json
 - Microsoft.DataBox/stable/2018-01-01/DataBox.json
 - Microsoft.Devices/stable/2018-01-01/IotHub.json
 - Microsoft.ContainerRegistry/stable/2018-01-01/ContainerRegistry.json
