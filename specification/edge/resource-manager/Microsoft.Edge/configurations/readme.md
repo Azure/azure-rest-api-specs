@@ -56,6 +56,8 @@ input-file:
 directive:
   - suppress: BodyTopLevelProperties
     reason: The BodyTopLevelProperties rule is mistakenly flagging paged responses https://github.com/Azure/azure-openapi-validator/issues/722
+    from:
+      - configurations.json
   - suppress: OperationsAPIImplementation
     from: 
       - configurations.json
