@@ -31,10 +31,8 @@ model DeidentificationJob {
   @doc("Data type of the input documents.")
   dataType?: DocumentDataType = DocumentDataType.Plaintext;
 
-  @maxLength(16)
-  @minLength(1)
-  @doc("Format of the redacted output. Only valid when Operation is Redact.")
-  redactionFormat?: string;
+  @doc("Customization parameters to override default service behaviors.")
+  customizations?: CustomizationOptions;
 
   // Readonly Properties
 
@@ -194,6 +192,30 @@ union OperationType {
   Tag: "Tag",
 
   string,
+}
+
+/*
+TODO: Name pending
+ServiceModifiers
+BehaviorOverrides
+DeidentificationOptions
+DeidentificationParameters
+*/
+@doc("Customizations options to override default service behaviors.")
+model CustomizationOptions {
+  @maxLength(16)
+  @minLength(1)
+  @doc("Format of the redacted output. Only valid when Operation is Redact.")
+  redactionFormat?: string;
+
+  @doc("When set to true during a job, the service will surrogate all documents individually.")
+  disableConsistency?: boolean = false;
+
+  @doc("When set to true during a job, the service will overwrite the output location if it already exists.")
+  overwrite?: boolean = false;
+
+  @doc("Language and Locale that the service should use.")
+  locale?: string = "en-US";
 }
 
 @doc("Request body for de-identification operation.")

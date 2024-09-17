@@ -586,6 +586,33 @@
       "type": "string",
       "description": "The ETag (or entity tag) HTTP response header is an identifier for a specific version of a resource.\nIt lets caches be more efficient and save bandwidth, as a web server does not need to resend a full response if the content was not changed.\n\nIt is a string of ASCII characters placed between double quotes, like \"675af34563dc-tr34\"."
     },
+    "CustomizationOptions": {
+      "type": "object",
+      "description": "Customizations options to override default service behaviors.",
+      "properties": {
+        "redactionFormat": {
+          "type": "string",
+          "description": "Format of the redacted output. Only valid when Operation is Redact.",
+          "minLength": 1,
+          "maxLength": 16
+        },
+        "disableConsistency": {
+          "type": "boolean",
+          "description": "When set to true during a job, the service will surrogate all documents individually.",
+          "default": false
+        },
+        "overwrite": {
+          "type": "boolean",
+          "description": "When set to true during a job, the service will overwrite the output location if it already exists.",
+          "default": false
+        },
+        "locale": {
+          "type": "string",
+          "description": "Language and Locale that the service should use.",
+          "default": "en-US"
+        }
+      }
+    },
     "DeidentificationContent": {
       "type": "object",
       "description": "Request body for de-identification operation.",
@@ -725,11 +752,9 @@
             ]
           }
         },
-        "redactionFormat": {
-          "type": "string",
-          "description": "Format of the redacted output. Only valid when Operation is Redact.",
-          "minLength": 1,
-          "maxLength": 16
+        "customizations": {
+          "$ref": "#/definitions/CustomizationOptions",
+          "description": "Customization parameters to override default service behaviors."
         },
         "status": {
           "$ref": "#/definitions/JobStatus",
