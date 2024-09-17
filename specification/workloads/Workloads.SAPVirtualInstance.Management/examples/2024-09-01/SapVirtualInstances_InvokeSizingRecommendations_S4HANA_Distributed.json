@@ -8,26 +8,25 @@
       "environment": "Prod",
       "sapProduct": "S4HANA",
       "deploymentType": "ThreeTier",
-      "saps": 75000,
+      "saps": 20000,
       "dbMemory": 1024,
       "databaseType": "HANA",
-      "dbScaleMethod": "ScaleUp",
-      "highAvailabilityType": "AvailabilitySet"
+      "dbScaleMethod": "ScaleUp"
     }
   },
   "responses": {
     "200": {
       "body": {
         "deploymentType": "ThreeTier",
-        "applicationServerVmSku": "Standard_E16ds_v4",
-        "applicationServerInstanceCount": 3,
-        "centralServerVmSku": "Standard_E8ds_v4",
-        "centralServerInstanceCount": 2,
+        "applicationServerVmSku": "Standard_E8ds_v4",
+        "applicationServerInstanceCount": 2,
+        "centralServerVmSku": "Standard_E4ds_v4",
+        "centralServerInstanceCount": 1,
         "dbVmSku": "Standard_M64s",
-        "databaseInstanceCount": 2
+        "databaseInstanceCount": 1
       }
     }
   },
-  "operationId": "SapVirtualInstances_GetSizingRecommendations",
-  "title": "SAP sizing recommendations for HA with availability set."
+  "operationId": "SapVirtualInstances_InvokeSizingRecommendations",
+  "title": "SAP sizing recommendations for non HA distributed system."
 }
