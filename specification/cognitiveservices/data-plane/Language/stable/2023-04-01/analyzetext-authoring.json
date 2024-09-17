@@ -1964,29 +1964,6 @@
         "message"
       ]
     },
-    "TextAnalysisAuthoringCompositionSetting": {
-      "type": "string",
-      "enum": [
-        "separateComponents",
-        "combineComponents"
-      ],
-      "x-ms-enum": {
-        "name": "TextAnalysisAuthoringCompositionSetting",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "separateComponents",
-            "value": "separateComponents",
-            "description": "Every component's match or prediction is returned as a separate instance of the\nentity."
-          },
-          {
-            "name": "combineComponents",
-            "value": "combineComponents",
-            "description": "When two or more components are found in the text and overlap, the components'\nspans are merged together into one span combining all of them."
-          }
-        ]
-      }
-    },
     "TextAnalysisAuthoringConfusionMatrix": {
       "type": "object",
       "additionalProperties": {
@@ -2117,44 +2094,6 @@
       ],
       "x-ms-discriminator-value": "CustomEntityRecognition"
     },
-    "TextAnalysisAuthoringCustomHealthcareDocumentEvaluationResult": {
-      "type": "object",
-      "description": "Represents the document evaluation result for a custom entity recognition\nproject.",
-      "properties": {
-        "customHealthcareResult": {
-          "$ref": "#/definitions/TextAnalysisAuthoringDocumentHealthcareEvaluationResult",
-          "description": "Represents the evaluation prediction for entity recognition."
-        }
-      },
-      "required": [
-        "customHealthcareResult"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/TextAnalysisAuthoringDocumentEvaluationResult"
-        }
-      ],
-      "x-ms-discriminator-value": "CustomHealthcare"
-    },
-    "TextAnalysisAuthoringCustomHealthcareEvaluationSummary": {
-      "type": "object",
-      "description": "Represents the evaluation summary for a custom health care project.",
-      "properties": {
-        "customHealthcareEvaluation": {
-          "$ref": "#/definitions/TextAnalysisAuthoringEntityRecognitionEvaluationSummary",
-          "description": "Contains the data related to health care evaluation."
-        }
-      },
-      "required": [
-        "customHealthcareEvaluation"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/TextAnalysisAuthoringEvaluationSummary"
-        }
-      ],
-      "x-ms-discriminator-value": "CustomHealthcare"
-    },
     "TextAnalysisAuthoringCustomMultiLabelClassificationDocumentEvaluationResult": {
       "type": "object",
       "description": "Represents the document evaluation result for a custom multi-label\nclassification project.",
@@ -2230,44 +2169,6 @@
         }
       ],
       "x-ms-discriminator-value": "CustomSingleLabelClassification"
-    },
-    "TextAnalysisAuthoringCustomTextSentimentDocumentEvaluationResult": {
-      "type": "object",
-      "description": "Represents the document evaluation result for a custom sentiment project.",
-      "properties": {
-        "customTextSentimentResult": {
-          "$ref": "#/definitions/TextAnalysisAuthoringDocumentTextSentimentEvaluationResult",
-          "description": "Represents the evaluation prediction for text sentiment."
-        }
-      },
-      "required": [
-        "customTextSentimentResult"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/TextAnalysisAuthoringDocumentEvaluationResult"
-        }
-      ],
-      "x-ms-discriminator-value": "CustomTextSentiment"
-    },
-    "TextAnalysisAuthoringCustomTextSentimentEvaluationSummary": {
-      "type": "object",
-      "description": "Represents the evaluation summary for a custom text sentiment project.",
-      "properties": {
-        "customTextSentimentEvaluation": {
-          "$ref": "#/definitions/TextAnalysisAuthoringTextSentimentEvaluationSummary",
-          "description": "Contains the data related to custom sentiment evaluation."
-        }
-      },
-      "required": [
-        "customTextSentimentEvaluation"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/TextAnalysisAuthoringEvaluationSummary"
-        }
-      ],
-      "x-ms-discriminator-value": "CustomTextSentiment"
     },
     "TextAnalysisAuthoringDeploymentJobState": {
       "type": "object",
@@ -2424,23 +2325,6 @@
         "language"
       ]
     },
-    "TextAnalysisAuthoringDocumentHealthcareEvaluationResult": {
-      "type": "object",
-      "description": "Represents the healthcare evaluation result for a document.",
-      "properties": {
-        "entities": {
-          "type": "array",
-          "description": "Represents the document labelled entities.",
-          "items": {
-            "$ref": "#/definitions/TextAnalysisAuthoringDocumentEntityRegionEvaluationResult"
-          },
-          "x-ms-identifiers": []
-        }
-      },
-      "required": [
-        "entities"
-      ]
-    },
     "TextAnalysisAuthoringDocumentMultiLabelClassificationEvaluationResult": {
       "type": "object",
       "description": "Represents the comparison between the expected and predicted classes that are\nresult from the evaluation operation.",
@@ -2465,31 +2349,6 @@
         "predictedClasses"
       ]
     },
-    "TextAnalysisAuthoringDocumentSentimentLabelEvaluationResult": {
-      "type": "object",
-      "description": "Represents an evaluation result Sentiment label.",
-      "properties": {
-        "category": {
-          "$ref": "#/definitions/TextAnalysisAuthoringSentiment",
-          "description": "Represents the sentiment category."
-        },
-        "offset": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Represents the sentiment offset index relative to the original text."
-        },
-        "length": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Represents the sentiment length."
-        }
-      },
-      "required": [
-        "category",
-        "offset",
-        "length"
-      ]
-    },
     "TextAnalysisAuthoringDocumentSingleLabelClassificationEvaluationResult": {
       "type": "object",
       "description": "Represents the comparison between the expected and predicted class that result\nfrom an evaluation operation.",
@@ -2506,32 +2365,6 @@
       "required": [
         "expectedClass",
         "predictedClass"
-      ]
-    },
-    "TextAnalysisAuthoringDocumentTextSentimentEvaluationResult": {
-      "type": "object",
-      "description": "Represents the comparison between the expected and predicted sentiment that\nresult from an evaluation operation.",
-      "properties": {
-        "expectedSentimentSpans": {
-          "type": "array",
-          "description": "Represents the document's expected sentiment labels.",
-          "items": {
-            "$ref": "#/definitions/TextAnalysisAuthoringDocumentSentimentLabelEvaluationResult"
-          },
-          "x-ms-identifiers": []
-        },
-        "predictedSentimentSpans": {
-          "type": "array",
-          "description": "Represents the document's predicted sentiment labels.",
-          "items": {
-            "$ref": "#/definitions/TextAnalysisAuthoringDocumentSentimentLabelEvaluationResult"
-          },
-          "x-ms-identifiers": []
-        }
-      },
-      "required": [
-        "expectedSentimentSpans",
-        "predictedSentimentSpans"
       ]
     },
     "TextAnalysisAuthoringEntityEvaluationSummary": {
@@ -2789,77 +2622,6 @@
         }
       }
     },
-    "TextAnalysisAuthoringExportedCompositeEntity": {
-      "type": "object",
-      "description": "Represents an entity in an exported project with composite entities enabled.",
-      "properties": {
-        "compositionSetting": {
-          "$ref": "#/definitions/TextAnalysisAuthoringCompositionSetting",
-          "description": "The behavior to follow when the entity's components overlap with each other."
-        },
-        "list": {
-          "$ref": "#/definitions/TextAnalysisAuthoringExportedEntityList",
-          "description": "The list component of the entity."
-        },
-        "prebuilts": {
-          "type": "array",
-          "description": "The prebuilt entities components.",
-          "items": {
-            "$ref": "#/definitions/TextAnalysisAuthoringExportedPrebuiltEntity"
-          },
-          "x-ms-identifiers": []
-        },
-        "category": {
-          "type": "string",
-          "description": "The entity category."
-        }
-      }
-    },
-    "TextAnalysisAuthoringExportedCustomAbstractiveSummarizationDocument": {
-      "type": "object",
-      "description": "Represents an exported document for a custom abstractive summarization project.",
-      "properties": {
-        "summaryLocation": {
-          "type": "string",
-          "description": "Represents the summary file location in the blob store container associated\nwith the project."
-        },
-        "location": {
-          "type": "string",
-          "description": "The location of the document in the storage."
-        },
-        "language": {
-          "type": "string",
-          "description": "Represents the document language. This is BCP-47 representation of a language.\nFor example, use \"en\" for English, \"en-gb\" for English (UK), \"es\" for Spanish\netc."
-        },
-        "dataset": {
-          "type": "string",
-          "description": "The dataset for this document. Allowed values are 'Train' and 'Test'."
-        }
-      },
-      "required": [
-        "summaryLocation"
-      ]
-    },
-    "TextAnalysisAuthoringExportedCustomAbstractiveSummarizationProjectAssets": {
-      "type": "object",
-      "description": "Represents the exported assets for an abstractive summarization project.",
-      "properties": {
-        "documents": {
-          "type": "array",
-          "description": "The list of documents belonging to this project.",
-          "items": {
-            "$ref": "#/definitions/TextAnalysisAuthoringExportedCustomAbstractiveSummarizationDocument"
-          },
-          "x-ms-identifiers": []
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/TextAnalysisAuthoringExportedProjectAssets"
-        }
-      ],
-      "x-ms-discriminator-value": "CustomAbstractiveSummarization"
-    },
     "TextAnalysisAuthoringExportedCustomEntityRecognitionDocument": {
       "type": "object",
       "description": "Represents an exported document for a custom entity recognition project.",
@@ -2913,60 +2675,6 @@
         }
       ],
       "x-ms-discriminator-value": "CustomEntityRecognition"
-    },
-    "TextAnalysisAuthoringExportedCustomHealthcareDocument": {
-      "type": "object",
-      "description": "Represents an exported document for a CustomHealthcare project.",
-      "properties": {
-        "entities": {
-          "type": "array",
-          "description": "The list of entity labels belonging to the document.",
-          "items": {
-            "$ref": "#/definitions/TextAnalysisAuthoringExportedDocumentEntityRegion"
-          },
-          "x-ms-identifiers": []
-        },
-        "location": {
-          "type": "string",
-          "description": "The location of the document in the storage."
-        },
-        "language": {
-          "type": "string",
-          "description": "Represents the document language. This is BCP-47 representation of a language.\nFor example, use \"en\" for English, \"en-gb\" for English (UK), \"es\" for Spanish\netc."
-        },
-        "dataset": {
-          "type": "string",
-          "description": "The dataset for this document. Allowed values are 'Train' and 'Test'."
-        }
-      }
-    },
-    "TextAnalysisAuthoringExportedCustomHealthcareProjectAssets": {
-      "type": "object",
-      "description": "Represents the exported assets for a CustomHealthcare project.",
-      "properties": {
-        "entities": {
-          "type": "array",
-          "description": "The list of entities belonging to the project.",
-          "items": {
-            "$ref": "#/definitions/TextAnalysisAuthoringExportedCompositeEntity"
-          },
-          "x-ms-identifiers": []
-        },
-        "documents": {
-          "type": "array",
-          "description": "The list of documents belonging to the project.",
-          "items": {
-            "$ref": "#/definitions/TextAnalysisAuthoringExportedCustomHealthcareDocument"
-          },
-          "x-ms-identifiers": []
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/TextAnalysisAuthoringExportedProjectAssets"
-        }
-      ],
-      "x-ms-discriminator-value": "CustomHealthcare"
     },
     "TextAnalysisAuthoringExportedCustomMultiLabelClassificationDocument": {
       "type": "object",
@@ -3072,51 +2780,6 @@
       ],
       "x-ms-discriminator-value": "CustomSingleLabelClassification"
     },
-    "TextAnalysisAuthoringExportedCustomTextSentimentDocument": {
-      "type": "object",
-      "description": "Represents an exported document for a custom text sentiment project.",
-      "properties": {
-        "sentimentSpans": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/TextAnalysisAuthoringExportedDocumentSentimentLabel"
-          },
-          "x-ms-identifiers": []
-        },
-        "location": {
-          "type": "string",
-          "description": "The location of the document in the storage."
-        },
-        "language": {
-          "type": "string",
-          "description": "Represents the document language. This is BCP-47 representation of a language.\nFor example, use \"en\" for English, \"en-gb\" for English (UK), \"es\" for Spanish\netc."
-        },
-        "dataset": {
-          "type": "string",
-          "description": "The dataset for this document. Allowed values are 'Train' and 'Test'."
-        }
-      }
-    },
-    "TextAnalysisAuthoringExportedCustomTextSentimentProjectAssets": {
-      "type": "object",
-      "description": "Represents the exported assets for a custom text sentiment project.",
-      "properties": {
-        "documents": {
-          "type": "array",
-          "description": "The list of documents belonging to the project.",
-          "items": {
-            "$ref": "#/definitions/TextAnalysisAuthoringExportedCustomTextSentimentDocument"
-          },
-          "x-ms-identifiers": []
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/TextAnalysisAuthoringExportedProjectAssets"
-        }
-      ],
-      "x-ms-discriminator-value": "CustomTextSentiment"
-    },
     "TextAnalysisAuthoringExportedDocumentClass": {
       "type": "object",
       "description": "Represents a classification label for a document.",
@@ -3170,26 +2833,6 @@
         }
       }
     },
-    "TextAnalysisAuthoringExportedDocumentSentimentLabel": {
-      "type": "object",
-      "description": "Represents an entity label for a document.",
-      "properties": {
-        "category": {
-          "$ref": "#/definitions/TextAnalysisAuthoringSentiment",
-          "description": "The sentiment category."
-        },
-        "offset": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Start position for the sentiment text."
-        },
-        "length": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Length for the sentiment text."
-        }
-      }
-    },
     "TextAnalysisAuthoringExportedEntity": {
       "type": "object",
       "description": "Represents an entity in an exported project.",
@@ -3199,68 +2842,6 @@
           "description": "The entity category."
         }
       }
-    },
-    "TextAnalysisAuthoringExportedEntityList": {
-      "type": "object",
-      "description": "Represents a list component of an entity.",
-      "properties": {
-        "sublists": {
-          "type": "array",
-          "description": "The sub-lists of the list component.",
-          "items": {
-            "$ref": "#/definitions/TextAnalysisAuthoringExportedEntitySublist"
-          },
-          "x-ms-identifiers": []
-        }
-      }
-    },
-    "TextAnalysisAuthoringExportedEntityListSynonym": {
-      "type": "object",
-      "description": "Represents a list of synonyms inside a list component",
-      "properties": {
-        "language": {
-          "type": "string",
-          "description": "Represents the language of the synonyms. This is BCP-47 representation of a\nlanguage. For example, use \"en\" for English, \"en-gb\" for English (UK), \"es\" for\nSpanish etc."
-        },
-        "values": {
-          "type": "array",
-          "description": "The list of synonyms.",
-          "items": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "TextAnalysisAuthoringExportedEntitySublist": {
-      "type": "object",
-      "description": "Represents a sub-list inside a list component.",
-      "properties": {
-        "listKey": {
-          "type": "string",
-          "description": "The key of the sub-list."
-        },
-        "synonyms": {
-          "type": "array",
-          "description": "The phrases of that correspond to the sub-list.",
-          "items": {
-            "$ref": "#/definitions/TextAnalysisAuthoringExportedEntityListSynonym"
-          },
-          "x-ms-identifiers": []
-        }
-      }
-    },
-    "TextAnalysisAuthoringExportedPrebuiltEntity": {
-      "type": "object",
-      "description": "Represents an exported prebuilt entity component",
-      "properties": {
-        "category": {
-          "type": "string",
-          "description": "The prebuilt entity category."
-        }
-      },
-      "required": [
-        "category"
-      ]
     },
     "TextAnalysisAuthoringExportedProject": {
       "type": "object",
@@ -3872,82 +3453,6 @@
         "value"
       ]
     },
-    "TextAnalysisAuthoringSentiment": {
-      "type": "string",
-      "enum": [
-        "positive",
-        "negative",
-        "neutral"
-      ],
-      "x-ms-enum": {
-        "name": "TextAnalysisAuthoringSentiment",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "positive",
-            "value": "positive"
-          },
-          {
-            "name": "negative",
-            "value": "negative"
-          },
-          {
-            "name": "neutral",
-            "value": "neutral"
-          }
-        ]
-      }
-    },
-    "TextAnalysisAuthoringSentimentEvaluationSummary": {
-      "type": "object",
-      "description": "Represents the evaluation summary for a sentiment in a custom sentiment project.",
-      "properties": {
-        "f1": {
-          "type": "number",
-          "format": "double",
-          "description": "Represents the model precision"
-        },
-        "precision": {
-          "type": "number",
-          "format": "double",
-          "description": "Represents the model recall"
-        },
-        "recall": {
-          "type": "number",
-          "format": "double",
-          "description": "Represents the model F1 score"
-        },
-        "truePositiveCount": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Represents the count of true positive"
-        },
-        "trueNegativeCount": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Represents the count of true negative"
-        },
-        "falsePositiveCount": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Represents the count of false positive"
-        },
-        "falseNegativeCount": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Represents the count of false negative"
-        }
-      },
-      "required": [
-        "f1",
-        "precision",
-        "recall",
-        "truePositiveCount",
-        "trueNegativeCount",
-        "falsePositiveCount",
-        "falseNegativeCount"
-      ]
-    },
     "TextAnalysisAuthoringSingleLabelClassEvaluationSummary": {
       "type": "object",
       "description": "Represents the evaluation summary for a class in a single-label classification\nproject.",
@@ -4047,63 +3552,6 @@
       "required": [
         "confusionMatrix",
         "classes",
-        "microF1",
-        "microPrecision",
-        "microRecall",
-        "macroF1",
-        "macroPrecision",
-        "macroRecall"
-      ]
-    },
-    "TextAnalysisAuthoringSpanSentimentEvaluationSummary": {
-      "type": "object",
-      "description": "Represents the evaluation summary for a custom sentiment project.",
-      "properties": {
-        "confusionMatrix": {
-          "$ref": "#/definitions/TextAnalysisAuthoringConfusionMatrix",
-          "description": "Represents the confusion matrix between two sentiments (the two sentiments can\nbe the same). The matrix is between the sentiment that was labelled and the\nsentiment that was predicted."
-        },
-        "sentiments": {
-          "type": "object",
-          "description": "Represents the sentiment evaluation",
-          "additionalProperties": {
-            "$ref": "#/definitions/TextAnalysisAuthoringSentimentEvaluationSummary"
-          }
-        },
-        "microF1": {
-          "type": "number",
-          "format": "float",
-          "description": "Represents the micro F1. Expected value is a float between 0 and 1 inclusive."
-        },
-        "microPrecision": {
-          "type": "number",
-          "format": "float",
-          "description": "Represents the micro precision. Expected value is a float between 0 and 1\ninclusive."
-        },
-        "microRecall": {
-          "type": "number",
-          "format": "float",
-          "description": "Represents the micro recall. Expected value is a float between 0 and 1\ninclusive."
-        },
-        "macroF1": {
-          "type": "number",
-          "format": "float",
-          "description": "Represents the macro F1. Expected value is a float between 0 and 1 inclusive."
-        },
-        "macroPrecision": {
-          "type": "number",
-          "format": "float",
-          "description": "Represents the macro precision. Expected value is a float between 0 and 1\ninclusive."
-        },
-        "macroRecall": {
-          "type": "number",
-          "format": "float",
-          "description": "Represents the macro recall. Expected value is a float between 0 and 1\ninclusive."
-        }
-      },
-      "required": [
-        "confusionMatrix",
-        "sentiments",
         "microF1",
         "microPrecision",
         "microRecall",
@@ -4213,55 +3661,6 @@
       "required": [
         "firstDeploymentName",
         "secondDeploymentName"
-      ]
-    },
-    "TextAnalysisAuthoringTextSentimentEvaluationSummary": {
-      "type": "object",
-      "description": "Represents the evaluation summary for a custom text sentiment project.",
-      "properties": {
-        "spanSentimentsEvaluation": {
-          "$ref": "#/definitions/TextAnalysisAuthoringSpanSentimentEvaluationSummary",
-          "description": "Represents evaluation of span level sentiments"
-        },
-        "microF1": {
-          "type": "number",
-          "format": "float",
-          "description": "Represents the micro F1. Expected value is a float between 0 and 1 inclusive."
-        },
-        "microPrecision": {
-          "type": "number",
-          "format": "float",
-          "description": "Represents the micro precision. Expected value is a float between 0 and 1\ninclusive."
-        },
-        "microRecall": {
-          "type": "number",
-          "format": "float",
-          "description": "Represents the micro recall. Expected value is a float between 0 and 1\ninclusive."
-        },
-        "macroF1": {
-          "type": "number",
-          "format": "float",
-          "description": "Represents the macro F1. Expected value is a float between 0 and 1 inclusive."
-        },
-        "macroPrecision": {
-          "type": "number",
-          "format": "float",
-          "description": "Represents the macro precision. Expected value is a float between 0 and 1\ninclusive."
-        },
-        "macroRecall": {
-          "type": "number",
-          "format": "float",
-          "description": "Represents the macro recall. Expected value is a float between 0 and 1\ninclusive."
-        }
-      },
-      "required": [
-        "spanSentimentsEvaluation",
-        "microF1",
-        "microPrecision",
-        "microRecall",
-        "macroF1",
-        "macroPrecision",
-        "macroRecall"
       ]
     },
     "TextAnalysisAuthoringTrainingConfigVersion": {

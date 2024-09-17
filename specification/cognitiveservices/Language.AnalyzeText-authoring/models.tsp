@@ -1535,6 +1535,7 @@ model TextAnalysisAuthoringEntityEvaluationSummary {
  * Represents the document evaluation result for a custom entity recognition
  * project.
  */
+@added(Versions.v2023_04_15_preview)
 model TextAnalysisAuthoringCustomHealthcareDocumentEvaluationResult
   extends TextAnalysisAuthoringDocumentEvaluationResult {
   /**
@@ -1561,6 +1562,7 @@ model TextAnalysisAuthoringDocumentHealthcareEvaluationResult {
 /**
  * Represents the evaluation summary for a custom health care project.
  */
+@added(Versions.v2023_04_15_preview)
 model TextAnalysisAuthoringCustomHealthcareEvaluationSummary extends TextAnalysisAuthoringEvaluationSummary {
   /**
    * Contains the data related to health care evaluation.
@@ -1854,6 +1856,7 @@ model TextAnalysisAuthoringSingleLabelClassEvaluationSummary {
 /**
  * Represents the document evaluation result for a custom sentiment project.
  */
+@added(Versions.v2023_04_15_preview)
 model TextAnalysisAuthoringCustomTextSentimentDocumentEvaluationResult
   extends TextAnalysisAuthoringDocumentEvaluationResult {
   /**
@@ -1906,6 +1909,7 @@ model TextAnalysisAuthoringDocumentSentimentLabelEvaluationResult {
 /**
  * Represents the evaluation summary for a custom text sentiment project.
  */
+@added(Versions.v2023_04_15_preview)
 model TextAnalysisAuthoringCustomTextSentimentEvaluationSummary extends TextAnalysisAuthoringEvaluationSummary {
   /**
    * Contains the data related to custom sentiment evaluation.
@@ -2171,6 +2175,7 @@ model TextAnalysisAuthoringExportedCustomAbstractiveSummarizationDocument {
 /**
  * Represents the exported assets for an abstractive summarization project.
  */
+@added(Versions.v2023_04_15_preview)
 model TextAnalysisAuthoringExportedCustomAbstractiveSummarizationProjectAssets
   extends TextAnalysisAuthoringExportedProjectAssets {
   /**
@@ -2312,6 +2317,7 @@ model TextAnalysisAuthoringExportedCustomHealthcareDocument {
 /**
  * Represents the exported assets for a CustomHealthcare project.
  */
+@added(Versions.v2023_04_15_preview)
 model TextAnalysisAuthoringExportedCustomHealthcareProjectAssets extends TextAnalysisAuthoringExportedProjectAssets {
   /**
    * The list of entities belonging to the project.
@@ -2482,6 +2488,7 @@ model TextAnalysisAuthoringExportedDocumentSentimentLabel {
 /**
  * Represents the exported assets for a custom text sentiment project.
  */
+@added(Versions.v2023_04_15_preview)
 model TextAnalysisAuthoringExportedCustomTextSentimentProjectAssets extends TextAnalysisAuthoringExportedProjectAssets {
   /**
    * The list of documents belonging to the project.
