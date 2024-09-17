@@ -43,12 +43,11 @@ input-file:
   - Microsoft.MachineLearningServices/preview/2024-10-01-preview/workspaceRP.json
 suppressions:
   -code: AvoidAdditionalProperties
-   reason: As discussed these are hyperparameters which can vary by model and fine tuning task types so cannot have
-           strictly typed properties.
+   reason: As discussed these are hyperparameters which can vary by model and fine tuning task types so cannot have strictly typed properties.
    where:
       - $.definitions["CustomModelFineTuning"].properties["hyperParameters"]
   -code: AvoidAdditionalProperties
-   reason: These schemas are already in production use,.
+   reason: These schemas are already in production use.
    where:
       - $.definitions.CustomKeysWorkspaceConnectionProperties.properties.credentials.properties.keys
       - $.definitions.CustomKeys.properties.keys
@@ -57,8 +56,7 @@ suppressions:
     where:
       - $.definitions.WorkspaceProperties.properties.enableServiceSideCMKEncryption
   - code: GuidUsage
-    reason: This property has always been a GUID, we just didn't mark its format before, this can't be change without
-            breaking the customer.
+    reason: This property has always been a GUID, we just didn't mark its format before, this can't be change without breaking the customer.
     where:
       - $.definitions.WorkspaceConnectionOAuth2.properties.clientId.format
   - code: PatchBodyParametersSchema
