@@ -4,6 +4,7 @@ import "@azure-tools/typespec-autorest";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "./common.tsp";
+import "./schedule_model.tsp";
 import "@typespec/openapi";
 
 using TypeSpec.OpenAPI;
@@ -133,6 +134,22 @@ model UpdateEvaluationRequest {
   description: string;
 }
 
+@doc("Extended Evaluation with additional fields.")
+model EvaluationSchedule extends Evaluation {
+  @doc("Recurrence pattern for the evaluation.")
+  recurrence: Recurrence;
+
+  @doc("Sampling strategy for the evaluation.")
+  samplingStrategy: SamplingStrategy;
+}
+
+model EvaluationScheduleResult {
+  @doc("The evaluation schedule.")
+  evaluationSchedule: EvaluationSchedule;
+
+  @doc("List of evaluations.")
+  evaluations: Evaluation[];
+}
 
 #suppress "@azure-tools/typespec-providerhub/no-inline-model" "Need to create reponses correctly"
 alias ResourceCreatedResponse<T extends TypeSpec.Reflection.Model> = TypeSpec.Http.Response<201> &

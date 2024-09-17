@@ -73,4 +73,34 @@ interface Evaluations {
     },
     OkResponse<Evaluation>
   >;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Waiting for bug fix: https://github.com/Azure/typespec-azure-pr/issues/3739."
+  @doc("Creates an evaluation schedule.")
+  @route("/evaluations/schedule/create")
+  @post
+  create is Azure.Core.Foundations.Operation<
+    {
+      @doc("Properties of Evaluation Schedule.")
+      @body
+      body: EvaluationSchedule;
+    },
+    ResourceCreatedResponse<EvaluationSchedule>
+  >;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Waiting for bug fix: https://github.com/Azure/typespec-azure-pr/issues/3739."
+  @doc("Get an evaluation schedule along with runs.")
+  @route("/evaluations/schedule/{id}")
+  @get
+  get is Azure.Core.Foundations.Operation<
+    {
+      @doc("Identifier of the evaluation schedule.")
+      @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_]*$")
+      @maxLength(254)
+      @path
+      id: string;
+
+    },
+    EvaluationScheduleResult
+  >;
+
 }
