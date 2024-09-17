@@ -268,6 +268,7 @@ interface TextAnalysisAuthoring {
   @route("/authoring/analyze-text/projects/{projectName}/copy/jobs/{jobId}")
   @get
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  @added(Versions.v2023_04_15_preview)
   getCopyProjectStatus is Azure.Core.Foundations.Operation<
     {
       /**
@@ -584,6 +585,7 @@ interface TextAnalysisAuthoring {
   @route("/authoring/analyze-text/projects/{projectName}/exported-models")
   @get
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  @added(Versions.v2023_04_15_preview)
   listExportedModels is Azure.Core.Foundations.Operation<
     {
       /**
@@ -620,6 +622,7 @@ interface TextAnalysisAuthoring {
   @route("/authoring/analyze-text/projects/{projectName}/exported-models/{exportedModelName}")
   @get
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  @added(Versions.v2023_04_15_preview)
   getExportedModel is Azure.Core.Foundations.Operation<
     {
       /**
@@ -678,6 +681,7 @@ interface TextAnalysisAuthoring {
   @route("/authoring/analyze-text/projects/{projectName}/exported-models/{exportedModelName}")
   @delete
   @pollingOperation(TextAnalysisAuthoring.getExportedModelJobStatus)
+  @added(Versions.v2023_04_15_preview)
   deleteExportedModel is Foundations.LongRunningOperation<
     {
       /**

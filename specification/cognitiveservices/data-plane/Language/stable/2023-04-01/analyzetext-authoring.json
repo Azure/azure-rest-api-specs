@@ -453,52 +453,6 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/authoring/analyze-text/projects/{projectName}/copy/jobs/{jobId}": {
-      "get": {
-        "operationId": "TextAnalysisAuthoring_GetCopyProjectStatus",
-        "description": "Gets the status of an existing copy project job.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "projectName",
-            "in": "path",
-            "description": "The name of the project to use.",
-            "required": true,
-            "type": "string",
-            "maxLength": 100
-          },
-          {
-            "name": "jobId",
-            "in": "path",
-            "description": "The job ID.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/TextAnalysisAuthoringCopyProjectJobState"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        }
-      }
-    },
     "/authoring/analyze-text/projects/{projectName}/deployments": {
       "get": {
         "operationId": "TextAnalysisAuthoring_ListDeployments",
@@ -993,114 +947,7 @@
         }
       }
     },
-    "/authoring/analyze-text/projects/{projectName}/exported-models": {
-      "get": {
-        "operationId": "TextAnalysisAuthoring_ListExportedModels",
-        "description": "Lists the exported models belonging to a project.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "projectName",
-            "in": "path",
-            "description": "The name of the project to use.",
-            "required": true,
-            "type": "string",
-            "maxLength": 100
-          },
-          {
-            "name": "top",
-            "in": "query",
-            "description": "The maximum number of resources to return from the collection.",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
-          },
-          {
-            "name": "skip",
-            "in": "query",
-            "description": "An offset into the collection of the first resource to be returned.",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
-          },
-          {
-            "name": "maxpagesize",
-            "in": "query",
-            "description": "The maximum number of resources to include in a single response.",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/TextAnalysisAuthoringExportedTrainedModels"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        }
-      }
-    },
     "/authoring/analyze-text/projects/{projectName}/exported-models/{exportedModelName}": {
-      "get": {
-        "operationId": "TextAnalysisAuthoring_GetExportedModel",
-        "description": "Gets the details of an exported model.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "projectName",
-            "in": "path",
-            "description": "The name of the project to use.",
-            "required": true,
-            "type": "string",
-            "maxLength": 100
-          },
-          {
-            "name": "exportedModelName",
-            "in": "path",
-            "description": "The exported model name.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/TextAnalysisAuthoringExportedTrainedModel"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        }
-      },
       "put": {
         "operationId": "TextAnalysisAuthoring_CreateOrUpdateExportedModel",
         "description": "Creates a new exported model or replaces an existing one.",
@@ -1131,49 +978,6 @@
             "schema": {
               "$ref": "#/definitions/TextAnalysisAuthoringExportedModelOptions"
             }
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "The request has been accepted for processing, but processing has not yet completed.",
-            "headers": {
-              "Operation-Location": {
-                "type": "string",
-                "format": "uri",
-                "description": "The location for monitoring the operation state."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-long-running-operation": true
-      },
-      "delete": {
-        "operationId": "TextAnalysisAuthoring_DeleteExportedModel",
-        "description": "Deletes an existing exported model.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "projectName",
-            "in": "path",
-            "description": "The name of the project to use.",
-            "required": true,
-            "type": "string",
-            "maxLength": 100
-          },
-          {
-            "name": "exportedModelName",
-            "in": "path",
-            "description": "The exported model name.",
-            "required": true,
-            "type": "string"
           }
         ],
         "responses": {
@@ -3064,57 +2868,6 @@
         "rawValue"
       ]
     },
-    "TextAnalysisAuthoringCopyProjectJobState": {
-      "type": "object",
-      "description": "Represents the state of a copy job.",
-      "properties": {
-        "jobId": {
-          "type": "string",
-          "description": "The job ID."
-        },
-        "createdDateTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The creation date time of the job."
-        },
-        "lastUpdatedDateTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The last date time the job was updated."
-        },
-        "expirationDateTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The expiration date time of the job."
-        },
-        "status": {
-          "$ref": "#/definitions/TextAnalysisAuthoringJobStatus",
-          "description": "The job status."
-        },
-        "warnings": {
-          "type": "array",
-          "description": "The warnings that were encountered while executing the job.",
-          "items": {
-            "$ref": "#/definitions/TextAnalysisAuthoringWarning"
-          },
-          "x-ms-identifiers": []
-        },
-        "errors": {
-          "type": "array",
-          "description": "The errors encountered while executing the job.",
-          "items": {
-            "$ref": "#/definitions/Error"
-          },
-          "x-ms-identifiers": []
-        }
-      },
-      "required": [
-        "jobId",
-        "createdDateTime",
-        "lastUpdatedDateTime",
-        "status"
-      ]
-    },
     "TextAnalysisAuthoringCreateDeploymentOptions": {
       "type": "object",
       "description": "Represents the options for creating or updating a project deployment.",
@@ -3414,24 +3167,6 @@
         "createdDateTime",
         "lastUpdatedDateTime",
         "status"
-      ]
-    },
-    "TextAnalysisAuthoringDeploymentResource": {
-      "type": "object",
-      "description": "Represents an Azure resource assigned to a deployment.",
-      "properties": {
-        "resourceId": {
-          "type": "string",
-          "description": "Represents the Azure resource Id."
-        },
-        "region": {
-          "type": "string",
-          "description": "Represents the resource region."
-        }
-      },
-      "required": [
-        "resourceId",
-        "region"
       ]
     },
     "TextAnalysisAuthoringDeploymentResourcesJobState": {
@@ -4638,68 +4373,6 @@
         "projectKind"
       ]
     },
-    "TextAnalysisAuthoringExportedTrainedModel": {
-      "type": "object",
-      "description": "Represents an exported trained model.",
-      "properties": {
-        "exportedModelName": {
-          "type": "string",
-          "description": "The exported model name."
-        },
-        "modelId": {
-          "type": "string",
-          "description": "The model ID."
-        },
-        "lastTrainedDateTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The last trained date time of the model."
-        },
-        "lastExportedModelDateTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The last exported date time of the model."
-        },
-        "modelExpirationDate": {
-          "type": "string",
-          "format": "date",
-          "description": "The model expiration date."
-        },
-        "modelTrainingConfigVersion": {
-          "type": "string",
-          "description": "The model training config version."
-        }
-      },
-      "required": [
-        "exportedModelName",
-        "modelId",
-        "lastTrainedDateTime",
-        "lastExportedModelDateTime",
-        "modelExpirationDate",
-        "modelTrainingConfigVersion"
-      ]
-    },
-    "TextAnalysisAuthoringExportedTrainedModels": {
-      "type": "object",
-      "description": "Represents a list of exported trained models.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The list of projects.",
-          "items": {
-            "$ref": "#/definitions/TextAnalysisAuthoringExportedTrainedModel"
-          },
-          "x-ms-identifiers": []
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "The next page link."
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
     "TextAnalysisAuthoringImportProjectJobState": {
       "type": "object",
       "description": "Represents the state of an import job.",
@@ -5094,14 +4767,6 @@
         "modelTrainingConfigVersion": {
           "type": "string",
           "description": "Represents model training config version."
-        },
-        "assignedResources": {
-          "type": "array",
-          "description": "Represents the metadata of the assigned Azure resources.",
-          "items": {
-            "$ref": "#/definitions/TextAnalysisAuthoringDeploymentResource"
-          },
-          "x-ms-identifiers": []
         }
       },
       "required": [
@@ -5110,8 +4775,7 @@
         "lastTrainedDateTime",
         "lastDeployedDateTime",
         "deploymentExpirationDate",
-        "modelTrainingConfigVersion",
-        "assignedResources"
+        "modelTrainingConfigVersion"
       ]
     },
     "TextAnalysisAuthoringProjectDeployments": {
@@ -5210,6 +4874,10 @@
           "$ref": "#/definitions/TextAnalysisAuthoringProjectKind",
           "description": "The project kind."
         },
+        "storageInputContainerName": {
+          "type": "string",
+          "description": "The storage container name."
+        },
         "settings": {
           "$ref": "#/definitions/TextAnalysisAuthoringProjectSettings",
           "description": "The project settings."
@@ -5235,6 +4903,7 @@
         "createdDateTime",
         "lastModifiedDateTime",
         "projectKind",
+        "storageInputContainerName",
         "projectName",
         "language"
       ]
