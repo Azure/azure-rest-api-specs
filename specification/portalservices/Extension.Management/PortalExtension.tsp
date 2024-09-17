@@ -51,6 +51,7 @@ interface PortalExtensions {
   /**
    * Deletes the portal extension.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Azure specs should not be using decorator " $extension " from @typespec/openapi or @azure-tools/typespec-autorest. They will not apply to other emitter."
   @OpenAPI.extension(
     "x-ms-long-running-operation-options",
     {
@@ -72,6 +73,7 @@ interface PortalExtensions {
   /**
    * Alters portal extension source files.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Azure specs should not be using decorator " $extension " from @typespec/openapi or @azure-tools/typespec-autorest. They will not apply to other emitter."
   @OpenAPI.extension(
     "x-ms-long-running-operation-options",
     {
@@ -92,6 +94,7 @@ interface PortalExtensions {
   /**
    * Exports the extension.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Azure specs should not be using decorator " $extension " from @typespec/openapi or @azure-tools/typespec-autorest. They will not apply to other emitter."
   @OpenAPI.extension(
     "x-ms-long-running-operation-options",
     {
@@ -131,35 +134,15 @@ interface PortalExtensions {
 );
 
 @@clientName(PortalExtensions.export::parameters.body, "portalExtensionExport");
-@@encodedName(PortalExtensions.export::parameters.body,
-  "application/json",
-  "portalExtensionExport"
-);
 
 @@clientName(PortalExtensions.compileFile::parameters.body,
   "portalExtensionCompileFile"
 );
-@@encodedName(PortalExtensions.compileFile::parameters.body,
-  "application/json",
-  "portalExtensionCompileFile"
-);
 
 @@clientName(PortalExtensions.alter::parameters.body, "portalExtensionAlter");
-@@encodedName(PortalExtensions.alter::parameters.body,
-  "application/json",
-  "portalExtensionAlter"
-);
 
 @@clientName(PortalExtensions.createOrUpdate::parameters.resource,
   "portalExtension"
 );
-@@encodedName(PortalExtensions.createOrUpdate::parameters.resource,
-  "application/json",
-  "portalExtension"
-);
 
 @@clientName(PortalExtensions.update::parameters.properties, "portalExtension");
-@@encodedName(PortalExtensions.update::parameters.properties,
-  "application/json",
-  "portalExtension"
-);

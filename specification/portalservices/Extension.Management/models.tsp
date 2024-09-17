@@ -300,6 +300,7 @@ model ArmCommonProperties {
   /**
    * Resource tags
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Model properties or operation parameters should not be of type Record. ARM requires Resource provider teams to define types explicitly."
   tags?: Record<string>;
 
   /**
@@ -326,6 +327,7 @@ model PatchablePortalExtension {
   /**
    * Resource tags
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Model properties or operation parameters should not be of type Record. ARM requires Resource provider teams to define types explicitly."
   tags?: Record<string>;
 }
 
@@ -357,6 +359,7 @@ model PortalExtensionAlterAlterationsItem {
   /**
    * The content of the file.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Model properties or operation parameters should not be of type Record. ARM requires Resource provider teams to define types explicitly."
   content?: Record<unknown>;
 
   /**
@@ -377,17 +380,20 @@ model PortalExtensionCompileFile {
   /**
    * The contents of the file.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Model properties or operation parameters should not be of type Record. ARM requires Resource provider teams to define types explicitly."
   contents?: Record<unknown>;
 
   /**
    * The contents of the string source.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Model properties or operation parameters should not be of type Record. ARM requires Resource provider teams to define types explicitly."
   stringSource?: Record<unknown>;
 }
 
 /**
  * The result of contents of the file to compile.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Model properties or operation parameters should not be of type Record. ARM requires Resource provider teams to define types explicitly."
 model PortalExtensionCompileFileResult is Record<unknown>;
 
 /**
@@ -427,11 +433,13 @@ model PortalExtensionListSourcesFolder {
   /**
    * The list of child folders
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Model properties or operation parameters should not be of type Record. ARM requires Resource provider teams to define types explicitly."
   folders?: Record<PortalExtensionListSourcesFolder>;
 
   /**
    * The list of child files
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Model properties or operation parameters should not be of type Record. ARM requires Resource provider teams to define types explicitly."
   files?: Record<PortalExtensionListSourcesFile>;
 }
 
@@ -515,6 +523,7 @@ model PatchableExtensionVersion {
   /**
    * Resource tags
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Model properties or operation parameters should not be of type Record. ARM requires Resource provider teams to define types explicitly."
   tags?: Record<string>;
 }
 
@@ -582,6 +591,7 @@ model PatchableExtensionDeployment {
   /**
    * Resource tags
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Model properties or operation parameters should not be of type Record. ARM requires Resource provider teams to define types explicitly."
   tags?: Record<string>;
 }
 
@@ -634,6 +644,7 @@ model PatchableExtensionSlot {
   /**
    * Resource tags
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Model properties or operation parameters should not be of type Record. ARM requires Resource provider teams to define types explicitly."
   tags?: Record<string>;
 }
 
@@ -667,6 +678,7 @@ model PortalTenantCompileFileProperties {
 /**
  * The contents of the file to compile.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Model properties or operation parameters should not be of type Record. ARM requires Resource provider teams to define types explicitly."
 model PortalTenantCompileFileResult is Record<unknown>;
 
 /**
