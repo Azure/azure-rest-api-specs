@@ -1427,6 +1427,16 @@ model TextAnalysisAuthoringCustomEntityRecognitionEvaluationSummary extends Text
   projectKind: "CustomEntityRecognition";
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required"
+@clientName("ConfusionMatrix", "csharp")
+model TextAnalysisAuthoringConfusionMatrix
+  is Record<TextAnalysisAuthoringConfusionMatrixRow>;
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required"
+@clientName("ConfusionMatrixRow", "csharp")
+model TextAnalysisAuthoringConfusionMatrixRow
+  is Record<TextAnalysisAuthoringConfusionMatrixCell>;
+
 /**
  * Represents the evaluation summary for a custom entity recognition project.
  */
@@ -1436,7 +1446,7 @@ model TextAnalysisAuthoringEntityRecognitionEvaluationSummary {
    * the same). The matrix is between the entity that was labelled and the entity
    * that was predicted.
    */
-  confusionMatrix: Record<Record<TextAnalysisAuthoringConfusionMatrixCell>>;
+  confusionMatrix: TextAnalysisAuthoringConfusionMatrix;
 
   /**
    * Represents the entities evaluation
@@ -1755,7 +1765,7 @@ model TextAnalysisAuthoringSingleLabelClassificationEvaluationSummary {
    * same). The matrix is between the class that was labelled and the class that was
    * predicted.
    */
-  confusionMatrix: Record<Record<TextAnalysisAuthoringConfusionMatrixCell>>;
+  confusionMatrix: TextAnalysisAuthoringConfusionMatrix;
 
   /**
    * Represents the classes evaluation
@@ -1958,7 +1968,7 @@ model TextAnalysisAuthoringSpanSentimentEvaluationSummary {
    * be the same). The matrix is between the sentiment that was labelled and the
    * sentiment that was predicted.
    */
-  confusionMatrix: Record<Record<TextAnalysisAuthoringConfusionMatrixCell>>;
+  confusionMatrix: TextAnalysisAuthoringConfusionMatrix;
 
   /**
    * Represents the sentiment evaluation

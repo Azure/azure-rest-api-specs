@@ -3447,6 +3447,12 @@
         ]
       }
     },
+    "TextAnalysisAuthoringConfusionMatrix": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/definitions/TextAnalysisAuthoringConfusionMatrixRow"
+      }
+    },
     "TextAnalysisAuthoringConfusionMatrixCell": {
       "type": "object",
       "description": "Represents a cell in a confusion matrix.",
@@ -3466,6 +3472,12 @@
         "normalizedValue",
         "rawValue"
       ]
+    },
+    "TextAnalysisAuthoringConfusionMatrixRow": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/definitions/TextAnalysisAuthoringConfusionMatrixCell"
+      }
     },
     "TextAnalysisAuthoringCopyAuthorizationOptions": {
       "type": "object",
@@ -4230,14 +4242,8 @@
       "description": "Represents the evaluation summary for a custom entity recognition project.",
       "properties": {
         "confusionMatrix": {
-          "type": "object",
-          "description": "Represents the confusion matrix between two entities (the two entities can be\nthe same). The matrix is between the entity that was labelled and the entity\nthat was predicted.",
-          "additionalProperties": {
-            "additionalProperties": {
-              "$ref": "#/definitions/TextAnalysisAuthoringConfusionMatrixCell"
-            },
-            "type": "object"
-          }
+          "$ref": "#/definitions/TextAnalysisAuthoringConfusionMatrix",
+          "description": "Represents the confusion matrix between two entities (the two entities can be\nthe same). The matrix is between the entity that was labelled and the entity\nthat was predicted."
         },
         "entities": {
           "type": "object",
@@ -5990,14 +5996,8 @@
       "description": "Represents the evaluation summary for a custom single-label classification\nproject.",
       "properties": {
         "confusionMatrix": {
-          "type": "object",
-          "description": "Represents the confusion matrix between two classes (the two classes can be the\nsame). The matrix is between the class that was labelled and the class that was\npredicted.",
-          "additionalProperties": {
-            "additionalProperties": {
-              "$ref": "#/definitions/TextAnalysisAuthoringConfusionMatrixCell"
-            },
-            "type": "object"
-          }
+          "$ref": "#/definitions/TextAnalysisAuthoringConfusionMatrix",
+          "description": "Represents the confusion matrix between two classes (the two classes can be the\nsame). The matrix is between the class that was labelled and the class that was\npredicted."
         },
         "classes": {
           "type": "object",
@@ -6053,14 +6053,8 @@
       "description": "Represents the evaluation summary for a custom sentiment project.",
       "properties": {
         "confusionMatrix": {
-          "type": "object",
-          "description": "Represents the confusion matrix between two sentiments (the two sentiments can\nbe the same). The matrix is between the sentiment that was labelled and the\nsentiment that was predicted.",
-          "additionalProperties": {
-            "additionalProperties": {
-              "$ref": "#/definitions/TextAnalysisAuthoringConfusionMatrixCell"
-            },
-            "type": "object"
-          }
+          "$ref": "#/definitions/TextAnalysisAuthoringConfusionMatrix",
+          "description": "Represents the confusion matrix between two sentiments (the two sentiments can\nbe the same). The matrix is between the sentiment that was labelled and the\nsentiment that was predicted."
         },
         "sentiments": {
           "type": "object",
