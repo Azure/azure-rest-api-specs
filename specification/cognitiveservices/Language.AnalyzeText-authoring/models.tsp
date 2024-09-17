@@ -41,18 +41,21 @@ union TextAnalysisAuthoringProjectKind {
    * For building an abstractive summarization models which are able to summarize
    * long documents.
    */
+  @added(Versions.v2023_04_15_preview)
   CustomAbstractiveSummarization: "CustomAbstractiveSummarization",
 
   /**
    * For building an text analytics for health model to identify your health domain
    * data.
    */
+  @added(Versions.v2023_04_15_preview)
   CustomHealthcare: "CustomHealthcare",
 
   /**
    * For building a sentiment models which are able to extract sentiment for long
    * documents.
    */
+  @added(Versions.v2023_04_15_preview)
   CustomTextSentiment: "CustomTextSentiment",
 }
 
