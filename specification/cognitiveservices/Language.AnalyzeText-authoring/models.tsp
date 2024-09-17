@@ -279,21 +279,25 @@ model TextAnalysisAuthoringProjectSettings {
   /**
    * The path to the AML connected project.
    */
+  @added(Versions.v2023_04_15_preview)
   amlProjectPath?: string;
 
   /**
    * Indicates whether the labeling experience can be modified or not.
    */
+  @added(Versions.v2023_04_15_preview)
   isLabelingLocked?: boolean;
 
   /**
    * Indicates whether to run GPT predictions or not.
    */
+  @added(Versions.v2023_04_15_preview)
   runGptPredictions?: boolean;
 
   /**
    * The predictive lookahead for GPT predictions that is specified by the user.
    */
+  @added(Versions.v2023_04_15_preview)
   gptPredictiveLookahead?: int32;
 }
 
