@@ -53,15 +53,6 @@ interface AutoActions {
     void,
     Occurrence
   >;
-
-  @doc("List auto actions associated to the resource. This is intended to be used for Microsoft.Compute/virtualMachines only")
-  @segment("autoActions")
-  listByVms is Azure.ResourceManager.Foundations.ArmReadOperation<
-    ResourceUriParameter &
-      Azure.ResourceManager.Foundations.TenantScope<AutoAction>,
-    ArmResponse<ResourceListResult<AutoAction>>,
-    ErrorResponse
-  >;
 }
 
 @added(Microsoft.ComputeSchedule.Versions.`2024-08-01-preview`)
