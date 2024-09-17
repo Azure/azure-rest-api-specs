@@ -60,12 +60,6 @@ union ProvisioningState {
 
   @doc("Update in progress.")
   Updating: "Updating",
-
-  @doc("Deletion in progress.")
-  Deleting: "Deleting",
-
-  @doc("Resource is being migrated from one subscription or resource group to another.")
-  Migrating: "Migrating",
 }
 
 @doc("Details of the Compute Fleet.")
