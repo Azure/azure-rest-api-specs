@@ -708,12 +708,14 @@ model TextAnalysisAuthoringCreateDeploymentOptions {
    *             If provided, the deployment will be rolled out to the resources
    * provided here as well as the original resource in which the project is created.
    */
+  @added(Versions.v2023_04_15_preview)
   assignedResourceIds?: string[];
 }
 
 /**
  * Represents the options for deleting a project deployment.
  */
+@added(Versions.v2023_04_15_preview)
 model TextAnalysisAuthoringDeleteDeploymentOptions {
   /**
    * Represents the resource IDs to delete the deployment from.
@@ -1078,6 +1080,7 @@ model TextAnalysisAuthoringResourceMetadata {
 /**
  * Represents the options to unassign Azure resources from a project.
  */
+@added(Versions.v2023_04_15_preview)
 model TextAnalysisAuthoringUnassignDeploymentResourcesOptions {
   /**
    * Represents the assigned resource IDs to be unassigned.
