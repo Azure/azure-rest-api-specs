@@ -202,12 +202,36 @@
         }
       }
     },
+    "ConnectionAuthType": {
+      "type": "string",
+      "description": "to do",
+      "enum": [
+        "ApiKey",
+        "AAD"
+      ],
+      "x-ms-enum": {
+        "name": "ConnectionAuthType",
+        "modelAsString": false,
+        "values": [
+          {
+            "name": "apiKey",
+            "value": "ApiKey",
+            "description": "to do"
+          },
+          {
+            "name": "aad",
+            "value": "AAD",
+            "description": "to do"
+          }
+        ]
+      }
+    },
     "ListSecretsProperties": {
       "type": "object",
       "description": "to do",
       "properties": {
         "authType": {
-          "type": "string",
+          "$ref": "#/definitions/ConnectionAuthType",
           "description": "to do"
         },
         "credentials": {

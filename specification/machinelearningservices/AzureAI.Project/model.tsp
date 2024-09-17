@@ -24,7 +24,7 @@ model ListSecretsResponse {
 @doc("to do")
 model ListSecretsProperties {
   @doc("to do")
-  authType: string;
+  authType: ConnectionAuthType;
 
   @doc("to do")
   credentials: ListSecretsPropertiesCredentials;
@@ -37,4 +37,14 @@ model ListSecretsProperties {
 model ListSecretsPropertiesCredentials {
   @doc("to do")
   key: string;
+}
+
+#suppress "@azure-tools/typespec-azure-core/no-enum" "Azure services should not use the enum keyword. Extensible enums should be defined as unions with `string` as an accepted variant"
+@doc("to do")
+enum ConnectionAuthType {
+  @doc("to do")
+  apiKey: "ApiKey",
+
+  @doc("to do")
+  aad: "AAD",
 }
