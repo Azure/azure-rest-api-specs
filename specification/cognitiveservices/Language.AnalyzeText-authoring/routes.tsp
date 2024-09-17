@@ -41,7 +41,9 @@ interface TextAnalysisAuthoring {
       @query("maxpagesize")
       maxpagesize?: int32;
     },
-    TextAnalysisAuthoringProjectsMetadata
+    TextAnalysisAuthoringProjectsMetadata,
+  {},
+    ErrorResponse
   >;
 
   /**
@@ -59,7 +61,9 @@ interface TextAnalysisAuthoring {
       @path
       projectName: string;
     },
-    TextAnalysisAuthoringProjectMetadata
+    TextAnalysisAuthoringProjectMetadata,
+  {},
+    ErrorResponse
   >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Need to rename the body"
@@ -284,7 +288,9 @@ interface TextAnalysisAuthoring {
       @path
       jobId: string;
     },
-    TextAnalysisAuthoringCopyProjectJobState
+    TextAnalysisAuthoringCopyProjectJobState,
+  {},
+    ErrorResponse
   >;
 
   /**
@@ -320,7 +326,9 @@ interface TextAnalysisAuthoring {
       @query("maxpagesize")
       maxpagesize?: int32;
     },
-    TextAnalysisAuthoringProjectDeployments
+    TextAnalysisAuthoringProjectDeployments,
+  {},
+    ErrorResponse
   >;
 
   /**
@@ -344,7 +352,9 @@ interface TextAnalysisAuthoring {
       @path
       deploymentName: string;
     },
-    TextAnalysisAuthoringProjectDeployment
+    TextAnalysisAuthoringProjectDeployment,
+  {},
+    ErrorResponse
   >;
 
    /**
@@ -470,7 +480,9 @@ interface TextAnalysisAuthoring {
       @path
       jobId: string;
     },
-    TextAnalysisAuthoringDeploymentJobState
+    TextAnalysisAuthoringDeploymentJobState,
+  {},
+    ErrorResponse
   >;
 
   /**
@@ -500,7 +512,9 @@ interface TextAnalysisAuthoring {
       @path
       jobId: string;
     },
-    TextAnalysisAuthoringDeploymentJobState
+    TextAnalysisAuthoringDeploymentJobState,
+  {},
+    ErrorResponse
   >;
 
   /**
@@ -551,7 +565,9 @@ interface TextAnalysisAuthoring {
       @path
       jobId: string;
     },
-    TextAnalysisAuthoringDeploymentJobState
+    TextAnalysisAuthoringDeploymentJobState,
+  {},
+    ErrorResponse
   >;
 
   /**
@@ -576,7 +592,9 @@ interface TextAnalysisAuthoring {
       @path
       jobId: string;
     },
-    TextAnalysisAuthoringExportProjectJobState
+    TextAnalysisAuthoringExportProjectJobState,
+  {},
+    ErrorResponse
   >;
 
   /**
@@ -613,7 +631,9 @@ interface TextAnalysisAuthoring {
       @query("maxpagesize")
       maxpagesize?: int32;
     },
-    TextAnalysisAuthoringExportedTrainedModels
+    TextAnalysisAuthoringExportedTrainedModels,
+  {},
+    ErrorResponse
   >;
 
   /**
@@ -638,7 +658,9 @@ interface TextAnalysisAuthoring {
       @path
       exportedModelName: string;
     },
-    TextAnalysisAuthoringExportedTrainedModel
+    TextAnalysisAuthoringExportedTrainedModel,
+  {},
+    ErrorResponse
   >;
 
   /**
@@ -731,7 +753,9 @@ interface TextAnalysisAuthoring {
       @path
       jobId: string;
     },
-    TextAnalysisAuthoringExportedModelJobState
+    TextAnalysisAuthoringExportedModelJobState,
+  {},
+    ErrorResponse
   >;
 
   /**
@@ -756,7 +780,9 @@ interface TextAnalysisAuthoring {
       @path
       exportedModelName: string;
     },
-    TextAnalysisAuthoringExportedModelManifest
+    TextAnalysisAuthoringExportedModelManifest,
+  {},
+    ErrorResponse
   >;
 
   /**
@@ -780,7 +806,9 @@ interface TextAnalysisAuthoring {
       @path
       jobId: string;
     },
-    TextAnalysisAuthoringImportProjectJobState
+    TextAnalysisAuthoringImportProjectJobState,
+  {},
+    ErrorResponse
   >;
 
   /**
@@ -816,7 +844,9 @@ interface TextAnalysisAuthoring {
       @query("maxpagesize")
       maxpagesize?: int32;
     },
-    TextAnalysisAuthoringProjectTrainedModels
+    TextAnalysisAuthoringProjectTrainedModels,
+  {},
+    ErrorResponse
   >;
 
   /**
@@ -840,7 +870,9 @@ interface TextAnalysisAuthoring {
       @path
       trainedModelLabel: string;
     },
-    TextAnalysisAuthoringProjectTrainedModel
+    TextAnalysisAuthoringProjectTrainedModel,
+  {},
+    ErrorResponse
   >;
 
   /**
@@ -864,7 +896,9 @@ interface TextAnalysisAuthoring {
       @path
       trainedModelLabel: string;
     },
-    void
+    void,
+  {},
+    ErrorResponse
   >;
 
   /**
@@ -953,7 +987,9 @@ interface TextAnalysisAuthoring {
       @path
       jobId: string;
     },
-    TextAnalysisAuthoringEvaluationJobState
+    TextAnalysisAuthoringEvaluationJobState,
+  {},
+    ErrorResponse
   >;
 
   /**
@@ -1003,7 +1039,9 @@ interface TextAnalysisAuthoring {
       @query("maxpagesize")
       maxpagesize?: int32;
     },
-    TextAnalysisAuthoringEvaluationResults
+    TextAnalysisAuthoringEvaluationResults,
+  {},
+    ErrorResponse
   >;
 
   /**
@@ -1028,7 +1066,9 @@ interface TextAnalysisAuthoring {
       @path
       trainedModelLabel: string;
     },
-    TextAnalysisAuthoringEvaluationSummary
+    TextAnalysisAuthoringEvaluationSummary,
+  {},
+    ErrorResponse
   >;
 
   /**
@@ -1058,7 +1098,9 @@ interface TextAnalysisAuthoring {
       @path
       jobId: string;
     },
-    TextAnalysisAuthoringLoadSnapshotJobState
+    TextAnalysisAuthoringLoadSnapshotJobState,
+  {},
+    ErrorResponse
   >;
 
   /**
@@ -1095,7 +1137,9 @@ interface TextAnalysisAuthoring {
       @query("maxpagesize")
       maxpagesize?: int32;
     },
-    TextAnalysisAuthoringAssignedDeploymentResources
+    TextAnalysisAuthoringAssignedDeploymentResources,
+  {},
+    ErrorResponse
   >;
 
   /**
@@ -1185,7 +1229,9 @@ interface TextAnalysisAuthoring {
       @path
       jobId: string;
     },
-    TextAnalysisAuthoringDeploymentResourcesJobState
+    TextAnalysisAuthoringDeploymentResourcesJobState,
+  {},
+    ErrorResponse
   >;
 
   /**
@@ -1210,7 +1256,9 @@ interface TextAnalysisAuthoring {
       @path
       jobId: string;
     },
-    TextAnalysisAuthoringDeploymentResourcesJobState
+    TextAnalysisAuthoringDeploymentResourcesJobState,
+  {},
+    ErrorResponse
   >;
 
   /**
@@ -1246,7 +1294,9 @@ interface TextAnalysisAuthoring {
       @query("maxpagesize")
       maxpagesize?: int32;
     },
-    TextAnalysisAuthoringTrainingJobs
+    TextAnalysisAuthoringTrainingJobs,
+  {},
+    ErrorResponse
   >;
 
   /**
@@ -1270,7 +1320,9 @@ interface TextAnalysisAuthoring {
       @path
       jobId: string;
     },
-    TextAnalysisAuthoringTrainingJobState
+    TextAnalysisAuthoringTrainingJobState,
+  {},
+    ErrorResponse
   >;
 
   /**
@@ -1314,7 +1366,9 @@ interface TextAnalysisAuthoring {
       @path
       jobId: string;
     },
-    TextAnalysisAuthoringProjectDeletionJobState
+    TextAnalysisAuthoringProjectDeletionJobState,
+  {},
+    ErrorResponse
   >;
 
   /**
@@ -1346,7 +1400,9 @@ interface TextAnalysisAuthoring {
       @query("maxpagesize")
       maxpagesize?: int32;
     },
-    TextAnalysisAuthoringAssignedResourceDeploymentsMetadata
+    TextAnalysisAuthoringAssignedResourceDeploymentsMetadata,
+  {},
+    ErrorResponse
   >;
 
   /**
@@ -1382,7 +1438,9 @@ interface TextAnalysisAuthoring {
       @query("maxpagesize")
       maxpagesize?: int32;
     },
-    TextAnalysisAuthoringSupportedLanguages
+    TextAnalysisAuthoringSupportedLanguages,
+  {},
+    ErrorResponse
   >;
 
   /**
@@ -1435,7 +1493,9 @@ interface TextAnalysisAuthoring {
       @query("maxpagesize")
       maxpagesize?: int32;
     },
-    TextAnalysisAuthoringPrebuiltEntities
+    TextAnalysisAuthoringPrebuiltEntities,
+  {},
+    ErrorResponse
   >;
 
   /**
@@ -1471,6 +1531,8 @@ interface TextAnalysisAuthoring {
       @query("maxpagesize")
       maxpagesize?: int32;
     },
-    TextAnalysisAuthoringTrainingConfigVersions
+    TextAnalysisAuthoringTrainingConfigVersions,
+  {},
+    ErrorResponse
   >;
 }
