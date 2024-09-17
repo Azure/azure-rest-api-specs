@@ -1,12 +1,10 @@
 import "@azure-tools/typespec-azure-core";
-import "@azure-tools/typespec-client-generator-core";
 import "@typespec/rest";
 import "./models.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.Core;
-using Azure.ClientGenerator.Core;
 
 namespace KeyVault;
 
@@ -318,9 +316,7 @@ op updateSetting is Azure.Core.Foundations.Operation<
     /**
      * The parameters to update an account setting.
      */
-    #suppress "deprecated" "Property flattening is supported for legacy scenarios like Key Vault's"
     @body
-    @flattenProperty
     parameters: UpdateSettingRequest;
   },
   Setting
