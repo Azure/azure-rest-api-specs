@@ -8,7 +8,8 @@
       "sapProduct": "S4HANA",
       "environment": "Prod",
       "databaseType": "HANA",
-      "deploymentType": "ThreeTier"
+      "deploymentType": "ThreeTier",
+      "highAvailabilityType": "AvailabilityZone"
     }
   },
   "responses": {
@@ -17,91 +18,71 @@
         "supportedSkus": [
           {
             "isAppServerCertified": true,
-            "isDatabaseCertified": false,
-            "vmSku": "Standard_E4ds_v4"
-          },
-          {
-            "isAppServerCertified": true,
-            "isDatabaseCertified": false,
-            "vmSku": "Standard_E8ds_v4"
-          },
-          {
-            "isAppServerCertified": true,
-            "isDatabaseCertified": false,
-            "vmSku": "Standard_E16ds_v4"
-          },
-          {
-            "isAppServerCertified": true,
-            "isDatabaseCertified": false,
-            "vmSku": "Standard_E20ds_v4"
-          },
-          {
-            "isAppServerCertified": true,
-            "isDatabaseCertified": false,
+            "isDatabaseCertified": true,
             "vmSku": "Standard_E32ds_v4"
           },
           {
             "isAppServerCertified": true,
-            "isDatabaseCertified": false,
+            "isDatabaseCertified": true,
             "vmSku": "Standard_E48ds_v4"
           },
           {
             "isAppServerCertified": true,
-            "isDatabaseCertified": false,
+            "isDatabaseCertified": true,
             "vmSku": "Standard_E64ds_v4"
           },
           {
-            "isAppServerCertified": false,
+            "isAppServerCertified": true,
             "isDatabaseCertified": true,
             "vmSku": "Standard_M32Is"
           },
           {
-            "isAppServerCertified": false,
+            "isAppServerCertified": true,
             "isDatabaseCertified": true,
             "vmSku": "Standard_M32ts"
           },
           {
-            "isAppServerCertified": false,
+            "isAppServerCertified": true,
             "isDatabaseCertified": true,
             "vmSku": "Standard_M64Is"
           },
           {
-            "isAppServerCertified": false,
+            "isAppServerCertified": true,
             "isDatabaseCertified": true,
             "vmSku": "Standard_M64ms"
           },
           {
-            "isAppServerCertified": false,
+            "isAppServerCertified": true,
             "isDatabaseCertified": true,
             "vmSku": "Standard_M64s"
           },
           {
-            "isAppServerCertified": false,
+            "isAppServerCertified": true,
             "isDatabaseCertified": true,
             "vmSku": "Standard_M128ms"
           },
           {
-            "isAppServerCertified": false,
+            "isAppServerCertified": true,
             "isDatabaseCertified": true,
             "vmSku": "Standard_M128s"
           },
           {
-            "isAppServerCertified": false,
+            "isAppServerCertified": true,
             "isDatabaseCertified": true,
             "vmSku": "Standard_M208ms_v2"
           },
           {
-            "isAppServerCertified": false,
+            "isAppServerCertified": true,
             "isDatabaseCertified": true,
             "vmSku": "Standard_M208s_v2"
           },
           {
-            "isAppServerCertified": false,
+            "isAppServerCertified": true,
             "isDatabaseCertified": true,
             "vmSku": "Standard_M416ms_v2"
           },
           {
-            "isAppServerCertified": false,
+            "isAppServerCertified": true,
             "isDatabaseCertified": true,
             "vmSku": "Standard_M416s_v2"
           }
@@ -109,6 +90,6 @@
       }
     }
   },
-  "operationId": "SapVirtualInstances_GetSapSupportedSku",
-  "title": "SAP supported SKUs for distributed Non HA environment."
+  "operationId": "SapVirtualInstances_InvokeSapSupportedSku",
+  "title": "SAP supported Skus for HA with availability zone."
 }
