@@ -28,6 +28,9 @@ model ListSecretsProperties {
 
   @doc("to do")
   credentials: ListSecretsPropertiesCredentials;
+
+  @doc("to do")
+  target: string;
 }
 
 @doc("to do")
@@ -35,11 +38,3 @@ model ListSecretsPropertiesCredentials {
   @doc("to do")
   key: string;
 }
-
-//#suppress "@azure-tools/typespec-providerhub/no-inline-model" "Need to create reponses correctly"
-//alias ResourceCreatedResponse<T extends TypeSpec.Reflection.Model> = TypeSpec.Http.Response<201> &
-//  T;
-
-//#suppress "@azure-tools/typespec-providerhub/no-inline-model" "Need to create reponses correctly"
-//alias ResourceCreatedOrOkResponse<T extends TypeSpec.Reflection.Model> = ResourceCreatedResponse<T> | (TypeSpec.Http.Response<200> &
-//  T);
