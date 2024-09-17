@@ -82,9 +82,6 @@ swagger-to-sdk:
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
-  - repo: azure-resource-manager-schemas
-  - repo: azure-cli-extensions
-  - repo: azure-powershell
 ```
 
 ## Az
