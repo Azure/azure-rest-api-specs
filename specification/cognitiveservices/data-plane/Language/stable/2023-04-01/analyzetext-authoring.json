@@ -653,58 +653,6 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/authoring/analyze-text/projects/{projectName}/deployments/{deploymentName}/delete-from-resources/jobs/{jobId}": {
-      "get": {
-        "operationId": "TextAnalysisAuthoring_GetDeploymentDeleteFromResourcesStatus",
-        "description": "Gets the status of an existing delete deployment from specific resources job.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "projectName",
-            "in": "path",
-            "description": "The name of the project to use.",
-            "required": true,
-            "type": "string",
-            "maxLength": 100
-          },
-          {
-            "name": "deploymentName",
-            "in": "path",
-            "description": "The name of the specific deployment of the project to use.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "jobId",
-            "in": "path",
-            "description": "The job ID.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/TextAnalysisAuthoringDeploymentJobState"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "SuccessfulGetDeploymentDeleteFromResourcesStatus": {
-            "$ref": "./examples/SuccessfulGetDeploymentDeleteFromResourcesStatus.json"
-          }
-        }
-      }
-    },
     "/authoring/analyze-text/projects/{projectName}/deployments/{deploymentName}/jobs/{jobId}": {
       "get": {
         "operationId": "TextAnalysisAuthoring_GetDeploymentStatus",

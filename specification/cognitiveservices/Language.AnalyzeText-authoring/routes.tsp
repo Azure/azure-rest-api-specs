@@ -458,6 +458,7 @@ interface TextAnalysisAuthoring {
    */
   @route("/authoring/analyze-text/projects/{projectName}/deployments/{deploymentName}/delete-from-resources/jobs/{jobId}")
   @get
+  @added(Versions.v2023_04_15_preview)
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   getDeploymentDeleteFromResourcesStatus is Azure.Core.Foundations.Operation<
     {
