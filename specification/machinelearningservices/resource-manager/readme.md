@@ -41,6 +41,45 @@ input-file:
   - Microsoft.MachineLearningServices/preview/2024-10-01-preview/registries.json
   - Microsoft.MachineLearningServices/preview/2024-10-01-preview/workspaceFeatures.json
   - Microsoft.MachineLearningServices/preview/2024-10-01-preview/workspaceRP.json
+suppressions:
+  -code: AvoidAdditionalProperties
+   reason: As discussed these are hyperparameters which can vary by model and fine tuning task types so cannot have 
+           strictly typed properties.
+   where:
+      - $.definitions["CustomModelFineTuning"].properties["hyperParameters"]
+  -code: AvoidAdditionalProperties
+   reason: These schemas are already in production use,.
+   where:
+      - $.definitions.CustomKeysWorkspaceConnectionProperties.properties.credentials.properties.keys
+      - $.definitions.CustomKeys.properties.keys
+  - code: DefinitionsPropertiesNamesCamelCase
+    reason: CMK is a short term and not violate the camel case rule.
+    where:
+      - $.definitions.WorkspaceProperties.properties.enableServiceSideCMKEncryption
+  - code: GuidUsage
+    reason: This property has always been a GUID, we just didn't mark its format before, this can't be change without 
+            breaking the customer.
+    where:
+      - $.definitions.WorkspaceConnectionOAuth2.properties.clientId.format
+  - code: PatchBodyParametersSchema
+    reason: This is already exist in preview version api version, the reason we have required mark for the property 
+       inside is those are the only format we allow user to update this whole encryption property.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}"].patch.parameters[4].schema.properties.properties
+  - code: PostResponseCodes
+    reason: This API is intend to align with Cognitive service API which has the same behavior https://github.com/Azure/azure-rest-api-specs/blob/efa7e41b82e82359fc76c0cda1856eb6e44448ec/specification/cognitiveservices/resource-manager/Microsoft.CognitiveServices/preview/2024-04-01-preview/cognitiveservices.json#L2717.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/connections/{connectionName}/raiBlocklists/{raiBlocklistName}/deleteRaiBlocklistItems"].post
+  - code: ProvisioningStateSpecifiedForLROPut
+    reason: Below APIs are created for migration, the existing API contract is like this and won't able to change, 
+      got exceptions from ARM reviewer.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/connections/{connectionName}/deployments/{deploymentName}"].put
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/connections/{connectionName}/raiPolicies/{raiPolicyName}"].put
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/endpoints/{endpointName}/raiPolicies/{raiPolicyName}"].put
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/connections/{connectionName}/raiBlocklists/{raiBlocklistName}/raiBlocklistItems/{raiBlocklistItemName}"].put
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/connections/{connectionName}/raiBlocklists/{raiBlocklistName}"].put
+
 ```
 
 ### Tag: package-preview-2024-07
