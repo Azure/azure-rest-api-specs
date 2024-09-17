@@ -6,7 +6,7 @@ using TypeSpec.Versioning;
 using DevCenterService;
 using Azure.ClientGenerator.Core;
 
-@useDependency(APIVersions.v2023_04_01)
+@useDependency(APIVersions.v2024_09_01_preview)
 namespace SdkCustomizations;
 
 @client({

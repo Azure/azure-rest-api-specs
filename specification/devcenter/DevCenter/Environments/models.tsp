@@ -279,10 +279,10 @@ model EnvironmentOperation {
   @doc("The object ID of the actor which initiated the operation.")
   createdByObjectId?: Azure.Core.uuid;
 
-  @doc("The time the operation started.")
+  @doc("The time the operation started, in RFC3339 format.")
   startTime?: utcDateTime;
 
-  @doc("The time the operation finished.")
+  @doc("The time the operation finished, in RFC3339 format.")
   endTime?: utcDateTime;
 
   #suppress "@azure-tools/typespec-azure-core/bad-record-type" "there is no build in type to describe object"
@@ -320,14 +320,14 @@ model EnvironmentAction {
   @visibility("read")
   lastModifiedBy?: Azure.Core.uuid;
 
-  @doc("Time the object was last modified.")
+  @doc("Time the object was last modified, in RFC3339 format.")
   lastModifiedAt?: utcDateTime;
 }
 
 @doc("Details about the next run of an action.")
 @added(APIVersions.v2024_02_01)
 model EnvironmentNextAction {
-  @doc("The time the action will be triggered (UTC).")
+  @doc("The time the action will be triggered (UTC), in RFC3339 format.")
   scheduledTime?: utcDateTime;
 }
 
