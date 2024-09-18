@@ -60,7 +60,7 @@ model Occurrence is ProxyResource<OccurrenceProperties> {
   ...ResourceNameParameter<
     Occurrence,
     KeyName = "occurrenceId",
-    NamePattern = "[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]4}-[0-9a-fA-F]{12}"
+    NamePattern = "[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}"
   >;
 }
 
