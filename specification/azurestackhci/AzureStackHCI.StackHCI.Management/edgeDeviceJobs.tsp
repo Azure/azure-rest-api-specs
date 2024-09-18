@@ -199,7 +199,7 @@ model AzureLinuxEdgeDeviceJobProperties {
   ...EdgeDeviceJobProperties;
 
   @doc("Job Type to support polymorphic resource.")
-  @extension("x-ms-mutability", ["create", "read"])
+  @visibility("create", "read")
   jobType: AzureLinuxEdgeDeviceJobType;
 }
 
@@ -209,7 +209,7 @@ model AzureLinuxRoeEdgeDeviceJobProperties {
   ...EdgeDeviceJobProperties;
 
   @doc("Job Type to support polymorphic resource.")
-  @extension("x-ms-mutability", ["create", "read"])
+  @visibility("create", "read")
   jobType: AzureLinuxRoeEdgeDeviceJobType;
 }
 
@@ -299,7 +299,7 @@ model AzureLinuxRoeProvisionOsJobProperties
 @doc("Represents a provisioning request.")
 model ProvisioningRequest {
   @doc("Target operating system to support polymorphic resource.")
-  @extension("x-ms-mutability", ["create", "read"])
+  @visibility("create", "read")
   target: ProvisioningOsType;
 }
 
@@ -360,7 +360,7 @@ union OnboardingResourceType {
 @doc("Onboarding configuration.")
 model OnboardingConfiguration {
   @doc("Type of the onboarding resource to support polymorphic resource.")
-  @extension("x-ms-mutability", ["create", "read"])
+  @visibility("create", "read")
   type: OnboardingResourceType;
 }
 
@@ -574,7 +574,7 @@ model HciEdgeDeviceJobProperties {
   ...EdgeDeviceJobProperties;
 
   @doc("Job Type to support polymorphic resource.")
-  @extension("x-ms-mutability", ["create", "read"])
+  @visibility("create", "read")
   jobType: HciEdgeDeviceJobType;
 }
 

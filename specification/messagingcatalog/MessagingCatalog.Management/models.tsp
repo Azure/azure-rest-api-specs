@@ -87,8 +87,9 @@ model MessagingCatalogUpdate {
   @doc("Resource tags.")
   tags?: Record<string>;
 
+  #suppress "deprecated" "Legacy flattening"
   @doc("The updatable properties of the Messaging Catalog.")
-  @extension("x-ms-client-flatten", true)
+  @Azure.ClientGenerator.Core.flattenProperty
   properties?: MessagingCatalogUpdateProperties;
 }
 

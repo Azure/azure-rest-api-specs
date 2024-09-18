@@ -43,7 +43,7 @@ interface PacketCoreControlPlaneVersionsTenantResource {
     BaseParameters = ApiVersionParameter
   >;
 
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "TypeSpec generated an Operation ID called PacketCoreControlPlaneVersionsTenantResource_ListBySubscription. Changed it to PacketCoreControlPlaneVersionsTenantResource_ListByTenant because this operation is for the tenant level only."
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "TypeSpec generated an Operation ID called PacketCoreControlPlaneVersionsTenantResource_ListBySubscription. Changed it to PacketCoreControlPlaneVersionsTenantResource_ListByTenant because this operation is for the tenant level only."
   @doc("Lists all supported packet core control planes versions.")
   @operationId("PacketCoreControlPlaneVersionsTenantResource_ListByTenant")
   listByTenant is ArmResourceListByParent<
