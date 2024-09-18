@@ -76,7 +76,7 @@ interface Evaluations {
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Waiting for bug fix: https://github.com/Azure/typespec-azure-pr/issues/3739."
   @doc("Creates an evaluation schedule.")
-  @route("/evaluations/schedule/create")
+  @route("/evaluations/schedules/create")
   @post
   create is Azure.Core.Foundations.Operation<
     {
@@ -89,7 +89,7 @@ interface Evaluations {
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Waiting for bug fix: https://github.com/Azure/typespec-azure-pr/issues/3739."
   @doc("Get an evaluation schedule along with runs.")
-  @route("/evaluations/schedule/{id}")
+  @route("/evaluations/schedules/{id}")
   @get
   get is Azure.Core.Foundations.Operation<
     {
@@ -100,7 +100,28 @@ interface Evaluations {
       id: string;
 
     },
-    EvaluationScheduleResult
+    EvaluationSchedule
   >;
 
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Waiting for bug fix: https://github.com/Azure/typespec-azure-pr/issues/3739."
+  @doc("List evaluations under a schedule")
+  @route("/evaluations/schedules/{id}/jobs")
+  @get
+  list is Azure.Core.Foundations.Operation<
+    {
+      ...StandardListQueryParameters;
+    },
+    PagedEvaluation
+  >;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Waiting for bug fix: https://github.com/Azure/typespec-azure-pr/issues/3739."
+  @doc("List evaluation schedules")
+  @route("/evaluations/schedules")
+  @get
+  list is Azure.Core.Foundations.Operation<
+    {
+      ...StandardListQueryParameters;
+    },
+    PagedEvaluationSchedule
+  >;
 }
