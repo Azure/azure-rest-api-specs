@@ -77,11 +77,24 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/SessionCodeExecutionResult"
+              "$ref": "#/definitions/SessionCodeExecutionResponse"
             }
           },
           "202": {
-            "description": "The request has been accepted for processing, but processing has not yet completed."
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "schema": {
+              "$ref": "#/definitions/SessionCodeExecutionResponse"
+            },
+            "headers": {
+              "location": {
+                "type": "string",
+                "description": "The location for monitoring the code execution state."
+              },
+              "operation-id": {
+                "type": "string",
+                "description": "The async code execution operation id."
+              }
+            }
           },
           "default": {
             "description": "An unexpected error response.",
@@ -125,7 +138,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/SessionCodeExecutionResult"
+              "$ref": "#/definitions/SessionCodeExecutionResponse"
             }
           },
           "default": {
@@ -277,6 +290,61 @@
         }
       }
     },
+    "/files/{fileName}:downloadFile": {
+      "post": {
+        "operationId": "SessionResourceFiles_DownloadFile",
+        "description": "Upload a file to a session.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "fileName",
+            "in": "path",
+            "description": "The name of the file.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/SessionIdentifier"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "content": {
+                  "type": "string",
+                  "format": "byte"
+                }
+              },
+              "required": [
+                "content"
+              ]
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SessionResourceFiles_DownloadFile": {
+            "$ref": "./examples/SessionResourceFiles_DownloadFile.json"
+          }
+        }
+      }
+    },
     "/files/{fileName}:uploadFile": {
       "post": {
         "operationId": "SessionResourceFiles_UploadFile",
@@ -329,49 +397,6 @@
         "x-ms-examples": {
           "SessionResourceFiles_UploadFile": {
             "$ref": "./examples/SessionResourceFiles_UploadFile.json"
-          }
-        }
-      }
-    },
-    "/files/{fileName}/download": {
-      "get": {
-        "operationId": "SessionResourceFiles_DownloadFile",
-        "description": "Download the file.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SessionResourceFileNameParameter"
-          },
-          {
-            "$ref": "#/parameters/SessionIdentifier"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "type": "string",
-              "format": "byte"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "SessionResourceFiles_DownloadFile": {
-            "$ref": "./examples/SessionResourceFiles_DownloadFile.json"
           }
         }
       }
@@ -587,6 +612,76 @@
         "value"
       ]
     },
+    "SessionCodeExecutionAsyncResponse": {
+      "type": "object",
+      "description": "The response of the async code execution.",
+      "properties": {
+        "codeInputType": {
+          "$ref": "#/definitions/CodeInputType",
+          "description": "The code input type of the code execution request."
+        },
+        "executionType": {
+          "$ref": "#/definitions/ExecutionType",
+          "description": "The execution type of the code execution request."
+        },
+        "networkStatus": {
+          "$ref": "#/definitions/NetworkStatus",
+          "description": "The network status of the code execution session."
+        },
+        "multiArrayStatus": {
+          "$ref": "#/definitions/MultiArrayStatus",
+          "description": "The multi array status of the code execution session."
+        },
+        "code": {
+          "type": "string",
+          "description": "The string of the code to execute, based on CodeInputType."
+        },
+        "timeoutInSeconds": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Code execution timeout in seconds."
+        },
+        "id": {
+          "type": "string",
+          "description": "Session code execution id.",
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "#/definitions/CodeExecutionStatus",
+          "description": "The status of the code execution, indicates whether succeeded or not."
+        },
+        "stdout": {
+          "type": "string",
+          "description": "The standard output of the code execution."
+        },
+        "stderr": {
+          "type": "string",
+          "description": "The standard error of the code execution."
+        },
+        "result": {
+          "description": "The result of the code execution."
+        },
+        "executionTimeInMilliseconds": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The execution time of the code in milliseconds."
+        }
+      },
+      "required": [
+        "codeInputType",
+        "executionType",
+        "networkStatus",
+        "multiArrayStatus",
+        "code",
+        "timeoutInSeconds",
+        "id",
+        "status",
+        "stdout",
+        "stderr",
+        "result",
+        "executionTimeInMilliseconds"
+      ]
+    },
     "SessionCodeExecutionRequest": {
       "type": "object",
       "description": "The request to execute code.",
@@ -626,9 +721,9 @@
         "timeoutInSeconds"
       ]
     },
-    "SessionCodeExecutionResult": {
+    "SessionCodeExecutionResponse": {
       "type": "object",
-      "description": "The result containing the result of the code execution.",
+      "description": "The response containing the result of the code execution.",
       "properties": {
         "codeInputType": {
           "$ref": "#/definitions/CodeInputType",
@@ -748,6 +843,19 @@
       "required": [
         "value"
       ]
+    },
+    "SessionResourceFileNameParameter": {
+      "type": "object",
+      "description": "The code execution name path parameter.",
+      "properties": {
+        "fileName": {
+          "type": "string",
+          "description": "The name of the file."
+        }
+      },
+      "required": [
+        "fileName"
+      ]
     }
   },
   "parameters": {
@@ -776,14 +884,6 @@
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "client"
-    },
-    "SessionResourceFileNameParameter": {
-      "name": "fileName",
-      "in": "path",
-      "description": "The name of the file.",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method"
     }
   }
 }
