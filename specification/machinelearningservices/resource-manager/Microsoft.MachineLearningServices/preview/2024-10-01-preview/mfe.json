@@ -9894,319 +9894,12 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/inferencePools/{poolName}/groups/{groupName}/deltaModels": {
-      "get": {
-        "tags": [
-          "InferenceDeltaModel"
-        ],
-        "summary": "List versions.",
-        "operationId": "InferenceGroups_List",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
-          },
-          {
-            "in": "path",
-            "name": "poolName",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "name": "groupName",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "name",
-            "description": "Container name.",
-            "type": "string"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "in": "query",
-            "name": "$orderBy",
-            "description": "Ordering of list.",
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "$top",
-            "description": "Maximum number of records to return.",
-            "type": "integer",
-            "format": "int32"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/PaginationParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/InferenceGroupResourceArmPaginatedResult"
-            }
-          },
-          "default": {
-            "description": "Error",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "List Workspace Inference Group.": {
-            "$ref": "./examples/Workspace/InferenceGroup/list.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/inferencePools/{poolName}/groups/{groupName}/deltaModels/{version}": {
-      "delete": {
-        "tags": [
-          "InferenceDeltaModel"
-        ],
-        "summary": "Delete version.",
-        "operationId": "InferenceGroups_Delete",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
-          },
-          {
-            "in": "path",
-            "name": "poolName",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "name": "groupName",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "name": "version",
-            "description": "Version identifier.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "name",
-            "description": "Container name.",
-            "type": "string"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success"
-          },
-          "204": {
-            "description": "No Content"
-          },
-          "default": {
-            "description": "Error",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Delete Workspace Inference Group.": {
-            "$ref": "./examples/Workspace/InferenceGroup/delete.json"
-          }
-        }
-      },
-      "get": {
-        "tags": [
-          "InferenceDeltaModel"
-        ],
-        "summary": "Get version.",
-        "operationId": "InferenceGroups_Get",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
-          },
-          {
-            "in": "path",
-            "name": "poolName",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "name": "groupName",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "name": "version",
-            "description": "Version identifier.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "name",
-            "description": "Container name.",
-            "type": "string"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/InferenceGroupResource"
-            }
-          },
-          "default": {
-            "description": "Error",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get Workspace Inference Group.": {
-            "$ref": "./examples/Workspace/InferenceGroup/get.json"
-          }
-        }
-      },
-      "put": {
-        "tags": [
-          "InferenceDeltaModel"
-        ],
-        "summary": "Create or update version.",
-        "operationId": "InferenceGroups_CreateOrUpdate",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
-          },
-          {
-            "in": "path",
-            "name": "poolName",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "name": "groupName",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "name": "version",
-            "description": "Version identifier.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "name",
-            "description": "Container name.",
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "in": "body",
-            "name": "body",
-            "description": "Version entity to create or update.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/InferenceGroupResource"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Create or update request is successful.",
-            "schema": {
-              "$ref": "#/definitions/InferenceGroupResource"
-            }
-          },
-          "201": {
-            "description": "Created",
-            "schema": {
-              "$ref": "#/definitions/InferenceGroupResource"
-            }
-          },
-          "default": {
-            "description": "Error",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "CreateOrUpdate Workspace Inference Group.": {
-            "$ref": "./examples/Workspace/InferenceGroup/createOrUpdate.json"
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/inferencePools/{poolName}/groups/{groupName}/deltaModels/getStatus": {
       "post": {
         "tags": [
           "InferenceDeltaModel"
         ],
-        "summary": "Retrieve status delta models associated with the InferenceGroup and the target base model.",
+        "summary": "InferenceGroups_GetDeltaModelsStatus",
         "consumes": [
           "application/json"
         ],
@@ -10265,8 +9958,8 @@
           }
         },
         "x-ms-examples": {
-          "GetDeltaModelsStatusAsync Workspace Inference Group.": {
-            "$ref": "./examples/Workspace/InferenceGroup/getDeltaModelsStatusAsync.json"
+          "GetDeltaModelsStatusAsync Inference Group.": {
+            "$ref": "./examples/InferenceGroup/getDeltaModelsStatusAsync.json"
           }
         }
       }
@@ -10276,7 +9969,7 @@
         "tags": [
           "InferenceDeltaModel"
         ],
-        "summary": "Retrieve status delta models associated with the InferenceGroup and the target base model.",
+        "summary": "InferenceGroups_ListDeltaModels",
         "consumes": [
           "application/json"
         ],
@@ -10335,8 +10028,8 @@
           }
         },
         "x-ms-examples": {
-          "ListDeltaModelsAsync Workspace Inference Group.": {
-            "$ref": "./examples/Workspace/InferenceGroup/listDeltaModelsAsync.json"
+          "ListDeltaModelsAsync Inference Group.": {
+            "$ref": "./examples/InferenceGroup/listDeltaModelsAsync.json"
           }
         },
         "x-ms-pageable": {
@@ -10349,8 +10042,7 @@
         "tags": [
           "InferenceDeltaModel"
         ],
-        "summary": "Retrieve status delta models associated with the InferenceGroup and the target base model.",
-        "operationId": "InferenceGroups_ModifyDeltaModelsAsync",
+        "summary": "InferenceGroups_ModifyDeltaModels",
         "consumes": [
           "application/json"
         ],
@@ -10406,8 +10098,8 @@
           }
         },
         "x-ms-examples": {
-          "ModifyDeltaModelsAsync Workspace Inference Group.": {
-            "$ref": "./examples/Workspace/InferenceGroup/modifyDeltaModelsAsync.json"
+          "ModifyDeltaModelsAsync Inference Group.": {
+            "$ref": "./examples/InferenceGroup/modifyDeltaModelsAsync.json"
           }
         }
       }
@@ -20378,44 +20070,6 @@
         }
       },
       "x-ms-client-name": "InferenceGroupProperties",
-      "additionalProperties": false
-    },
-    "InferenceGroupResource": {
-      "description": "Azure Resource Manager resource envelope.",
-      "required": [
-        "properties"
-      ],
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "description": "[Required] Additional attributes of the entity.",
-          "$ref": "#/definitions/InferenceGroup"
-        }
-      },
-      "x-ms-client-name": "InferenceGroup",
-      "additionalProperties": false
-    },
-    "InferenceGroupResourceArmPaginatedResult": {
-      "description": "A paginated list of InferenceGroup entities.",
-      "type": "object",
-      "properties": {
-        "nextLink": {
-          "description": "The link to the next page of InferenceGroup objects. If null, there are no additional pages.",
-          "type": "string"
-        },
-        "value": {
-          "description": "An array of objects of type InferenceGroup.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/InferenceGroupResource"
-          }
-        }
-      },
       "additionalProperties": false
     },
     "InferenceGroupTrackedResource": {
