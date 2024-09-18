@@ -9,17 +9,6 @@ options:
     # `arm-resource-flattening` is only used for back-compat for specs existed on July 2024. All new service spec should NOT use this flag
     arm-resource-flattening: true
     output-file: "{azure-resource-provider-folder}/{service-name}/operations/{version-status}/{version}/operations.json"
-  "@azure-tools/typespec-ts":
-    azureSdkForJs: true
-    isModularLibrary: true
-    generateMetadata: true
-    hierarchyClient: false
-    experimentalExtensibleEnums: true
-    enableOperationGroup: true
-    package-dir: "arm-workloads"
-    flavor: "azure"
-    packageDetails:
-      name: "@azure/arm-workloads"
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"
