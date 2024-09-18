@@ -195,7 +195,7 @@
             "description": "The name of the Compute Fleet",
             "required": true,
             "type": "string",
-            "pattern": "^[^_\\W][\\w-._]{0,79}(?<![-.])$"
+            "pattern": "^[^_\\W][\\w\\-._]{0,79}(?<![-.])$"
           }
         ],
         "responses": {
@@ -243,7 +243,7 @@
             "description": "The name of the Compute Fleet",
             "required": true,
             "type": "string",
-            "pattern": "^[^_\\W][\\w-._]{0,79}(?<![-.])$"
+            "pattern": "^[^_\\W][\\w\\-._]{0,79}(?<![-.])$"
           },
           {
             "name": "resource",
@@ -317,7 +317,7 @@
             "description": "The name of the Compute Fleet",
             "required": true,
             "type": "string",
-            "pattern": "^[^_\\W][\\w-._]{0,79}(?<![-.])$"
+            "pattern": "^[^_\\W][\\w\\-._]{0,79}(?<![-.])$"
           },
           {
             "name": "properties",
@@ -392,7 +392,7 @@
             "description": "The name of the Compute Fleet",
             "required": true,
             "type": "string",
-            "pattern": "^[^_\\W][\\w-._]{0,79}(?<![-.])$"
+            "pattern": "^[^_\\W][\\w\\-._]{0,79}(?<![-.])$"
           }
         ],
         "responses": {
@@ -457,7 +457,7 @@
             "description": "The name of the Fleet",
             "required": true,
             "type": "string",
-            "pattern": "^[^_\\W][\\w-._]{0,79}(?<![-.])$"
+            "pattern": "^[^_\\W][\\w\\-._]{0,79}(?<![-.])$"
           }
         ],
         "responses": {
@@ -700,6 +700,7 @@
         },
         "storageUri": {
           "type": "string",
+          "format": "uri",
           "description": "Uri of the storage account to use for placing the console output and\nscreenshot. If storageUri is not specified while enabling boot diagnostics,\nmanaged storage will be used."
         }
       }
@@ -1236,6 +1237,7 @@
       "properties": {
         "secretUrl": {
           "type": "string",
+          "format": "uri",
           "description": "The URL referencing a secret in a Key Vault."
         },
         "sourceVault": {
@@ -1448,7 +1450,7 @@
         "modelAsString": true,
         "values": [
           {
-            "name": "2020-11-01",
+            "name": "v2020_11_01",
             "value": "2020-11-01",
             "description": "Initial version supported. Later versions are supported as well."
           }
@@ -2260,6 +2262,7 @@
       "properties": {
         "certificateUrl": {
           "type": "string",
+          "format": "uri",
           "description": "This is the URL of a certificate that has been uploaded to Key Vault as a\nsecret. For adding a secret to the Key Vault, see [Add a key or secret to the\nkey\nvault](https://docs.microsoft.com/azure/key-vault/key-vault-get-started/#add).\nIn this case, your certificate needs to be It is the Base64 encoding of the\nfollowing JSON Object which is encoded in UTF-8: <br><br> {<br>\n\"data\":\"<Base64-encoded-certificate>\",<br>  \"dataType\":\"pfx\",<br>\n\"password\":\"<pfx-file-password>\"<br>} <br> To install certificates on a virtual\nmachine it is recommended to use the [Azure Key Vault virtual machine extension\nfor\nLinux](https://docs.microsoft.com/azure/virtual-machines/extensions/key-vault-linux)\nor the [Azure Key Vault virtual machine extension for\nWindows](https://docs.microsoft.com/azure/virtual-machines/extensions/key-vault-windows)."
         },
         "certificateStore": {
@@ -2294,6 +2297,7 @@
       "properties": {
         "uri": {
           "type": "string",
+          "format": "uri",
           "description": "Specifies the virtual hard disk's uri."
         }
       }
@@ -2987,6 +2991,7 @@
         },
         "certificateUrl": {
           "type": "string",
+          "format": "uri",
           "description": "This is the URL of a certificate that has been uploaded to Key Vault as a\nsecret. For adding a secret to the Key Vault, see [Add a key or secret to the\nkey\nvault](https://docs.microsoft.com/azure/key-vault/key-vault-get-started/#add).\nIn this case, your certificate needs to be the Base64 encoding of the following\nJSON Object which is encoded in UTF-8: <br><br> {<br>\n\"data\":\"<Base64-encoded-certificate>\",<br>  \"dataType\":\"pfx\",<br>\n\"password\":\"<pfx-file-password>\"<br>} <br> To install certificates on a virtual\nmachine it is recommended to use the [Azure Key Vault virtual machine extension\nfor\nLinux](https://docs.microsoft.com/azure/virtual-machines/extensions/key-vault-linux)\nor the [Azure Key Vault virtual machine extension for\nWindows](https://docs.microsoft.com/azure/virtual-machines/extensions/key-vault-windows)."
         }
       }

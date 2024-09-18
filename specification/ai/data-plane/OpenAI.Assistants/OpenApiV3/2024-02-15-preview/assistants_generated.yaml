@@ -36,6 +36,7 @@ paths:
             type: integer
             format: int32
             default: 20
+          explode: false
         - name: order
           in: query
           required: false
@@ -43,18 +44,21 @@ paths:
           schema:
             $ref: '#/components/schemas/ListSortOrder'
             default: desc
+          explode: false
         - name: after
           in: query
           required: false
           description: A cursor for use in pagination. after is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include after=obj_foo in order to fetch the next page of the list.
           schema:
             type: string
+          explode: false
         - name: before
           in: query
           required: false
           description: A cursor for use in pagination. before is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include before=obj_foo in order to fetch the previous page of the list.
           schema:
             type: string
+          explode: false
       responses:
         '200':
           description: The requested list of assistants.
@@ -159,6 +163,7 @@ paths:
           description: A value that, when provided, limits list results to files matching the corresponding purpose.
           schema:
             $ref: '#/components/schemas/FilePurpose'
+          explode: false
       responses:
         '200':
           description: The requested list of files.
@@ -391,6 +396,7 @@ paths:
             type: integer
             format: int32
             default: 20
+          explode: false
         - name: order
           in: query
           required: false
@@ -398,18 +404,21 @@ paths:
           schema:
             $ref: '#/components/schemas/ListSortOrder'
             default: desc
+          explode: false
         - name: after
           in: query
           required: false
           description: A cursor for use in pagination. after is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include after=obj_foo in order to fetch the next page of the list.
           schema:
             type: string
+          explode: false
         - name: before
           in: query
           required: false
           description: A cursor for use in pagination. before is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include before=obj_foo in order to fetch the previous page of the list.
           schema:
             type: string
+          explode: false
       responses:
         '200':
           description: The requested list of messages.
@@ -547,6 +556,7 @@ paths:
             type: integer
             format: int32
             default: 20
+          explode: false
         - name: order
           in: query
           required: false
@@ -554,18 +564,21 @@ paths:
           schema:
             $ref: '#/components/schemas/ListSortOrder'
             default: desc
+          explode: false
         - name: after
           in: query
           required: false
           description: A cursor for use in pagination. after is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include after=obj_foo in order to fetch the next page of the list.
           schema:
             type: string
+          explode: false
         - name: before
           in: query
           required: false
           description: A cursor for use in pagination. before is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include before=obj_foo in order to fetch the previous page of the list.
           schema:
             type: string
+          explode: false
       responses:
         '200':
           description: The requested list of thread runs.
@@ -709,6 +722,7 @@ paths:
             type: integer
             format: int32
             default: 20
+          explode: false
         - name: order
           in: query
           required: false
@@ -716,18 +730,21 @@ paths:
           schema:
             $ref: '#/components/schemas/ListSortOrder'
             default: desc
+          explode: false
         - name: after
           in: query
           required: false
           description: A cursor for use in pagination. after is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include after=obj_foo in order to fetch the next page of the list.
           schema:
             type: string
+          explode: false
         - name: before
           in: query
           required: false
           description: A cursor for use in pagination. before is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include before=obj_foo in order to fetch the previous page of the list.
           schema:
             type: string
+          explode: false
       responses:
         '200':
           description: The requested list of run steps.
@@ -2392,6 +2409,7 @@ components:
       enum:
         - 2024-02-15-preview
         - 2024-05-01-preview
+        - 2024-07-01-preview
       description: The known set of supported API versions.
     SubmitToolOutputsAction:
       type: object
