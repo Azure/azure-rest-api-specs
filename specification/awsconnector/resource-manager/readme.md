@@ -55,7 +55,6 @@ input-file:
   - Microsoft.AwsConnector/stable/2024-12-01/dynamoDBTable.json
   - Microsoft.AwsConnector/stable/2024-12-01/ec2AccountAttribute.json
   - Microsoft.AwsConnector/stable/2024-12-01/ec2Address.json
-  - Microsoft.AwsConnector/stable/2024-12-01/ec2CreateVolumePermission.json
   - Microsoft.AwsConnector/stable/2024-12-01/ec2FlowLog.json
   - Microsoft.AwsConnector/stable/2024-12-01/ec2Image.json
   - Microsoft.AwsConnector/stable/2024-12-01/ec2Instance.json
