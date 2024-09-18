@@ -32,22 +32,19 @@ op executeCode is Foundations.Operation<
     @body
     codeExecutionRequest: SessionCodeExecutionRequest;
   },
-  Foundations.AcceptedResponse | Foundations.ResourceOkResponse<SessionCodeExecutionResult>,
+  Foundations.AcceptedResponse<SessionCodeExecutionAsyncResponse> | Foundations.ResourceOkResponse<SessionCodeExecutionResponse>,
   {},
   Foundations.ErrorResponse
 >;
 
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations" ""
 @doc("Get the code execution result.")
 @route("/codeExecutionResult")
-op getCodeExecutionResult is Foundations.Operation<
+op getCodeExecutionResult is RpcOperation<
   {
     ...SessionIdentifier;
     ...CodeExecutionIdentifier;
   },
-  SessionCodeExecutionResult,
-  {},
-  Foundations.ErrorResponse
+  SessionCodeExecutionResponse
 >;
 
 interface SessionResourceFiles {
@@ -60,18 +57,13 @@ interface SessionResourceFiles {
   @doc("Delete the file.")
   deleteFile is SessionOperations.ResourceDelete<SessionResourceFile>;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" ""
-  @doc("Download the file.")
-  @get
-  @route("/files/{fileName}/download")
-  downloadFile is Foundations.Operation<
-    {
-      ...SessionResourceFileNameParameter;
-      ...SessionIdentifier;
-    },
-    bytes,
+  @doc("Upload a file to a session.")
+  downloadFile is SessionOperations.ResourceAction<
+    SessionResourceFile,
     {},
-    Foundations.ErrorResponse
+    {
+      content: bytes;
+    }
   >;
 
   #suppress "@azure-tools/typespec-azure-core/byos" ""

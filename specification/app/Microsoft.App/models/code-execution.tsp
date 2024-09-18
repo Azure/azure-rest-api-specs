@@ -25,8 +25,8 @@ model SessionCodeExecutionRequest {
   timeoutInSeconds: int64;
 }
 
-@doc("The result containing the result of the code execution.")
-model SessionCodeExecutionResult {
+@doc("The response containing the result of the code execution.")
+model SessionCodeExecutionResponse {
   ...SessionCodeExecutionRequest;
 
   @visibility("read")
@@ -48,6 +48,19 @@ model SessionCodeExecutionResult {
 
   @doc("The execution time of the code in milliseconds.")
   executionTimeInMilliseconds: int64;
+}
+
+@doc("The response of the async code execution.")
+model SessionCodeExecutionAsyncResponse {
+  ...SessionCodeExecutionResponse;
+
+  @header
+  @doc("The async code execution operation id.")
+  operationId: string;
+
+  @header
+  @doc("The location for monitoring the code execution state.")
+  location: string;
 }
 
 @doc("Code input type.")
