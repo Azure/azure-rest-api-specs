@@ -60,7 +60,6 @@ input-file:
   - Microsoft.AwsConnector/stable/2024-12-01/ec2Image.json
   - Microsoft.AwsConnector/stable/2024-12-01/ec2Instance.json
   - Microsoft.AwsConnector/stable/2024-12-01/ec2InstanceStatus.json
-  - Microsoft.AwsConnector/stable/2024-12-01/ec2InstanceTypeInfo.json
   - Microsoft.AwsConnector/stable/2024-12-01/ec2Ipam.json
   - Microsoft.AwsConnector/stable/2024-12-01/ec2KeyPair.json
   - Microsoft.AwsConnector/stable/2024-12-01/ec2NetworkAcl.json
@@ -96,9 +95,6 @@ input-file:
   - Microsoft.AwsConnector/stable/2024-12-01/iamInstanceProfile.json
   - Microsoft.AwsConnector/stable/2024-12-01/iamManagedPolicy.json
   - Microsoft.AwsConnector/stable/2024-12-01/iamPasswordPolicy.json
-  - Microsoft.AwsConnector/stable/2024-12-01/iamPolicyGroup.json
-  - Microsoft.AwsConnector/stable/2024-12-01/iamPolicyRole.json
-  - Microsoft.AwsConnector/stable/2024-12-01/iamPolicyUser.json
   - Microsoft.AwsConnector/stable/2024-12-01/iamPolicyVersion.json
   - Microsoft.AwsConnector/stable/2024-12-01/iamRole.json
   - Microsoft.AwsConnector/stable/2024-12-01/iamServerCertificate.json
@@ -186,7 +182,6 @@ input-file:
   - Microsoft.AwsConnector/stable/2024-12-01/ec2Image.json
   - Microsoft.AwsConnector/stable/2024-12-01/ec2Instance.json
   - Microsoft.AwsConnector/stable/2024-12-01/ec2InstanceStatus.json
-  - Microsoft.AwsConnector/stable/2024-12-01/ec2InstanceTypeInfo.json
   - Microsoft.AwsConnector/stable/2024-12-01/ec2Ipam.json
   - Microsoft.AwsConnector/stable/2024-12-01/ec2KeyPair.json
   - Microsoft.AwsConnector/stable/2024-12-01/ec2NetworkAcl.json
@@ -222,9 +217,6 @@ input-file:
   - Microsoft.AwsConnector/stable/2024-12-01/iamInstanceProfile.json
   - Microsoft.AwsConnector/stable/2024-12-01/iamManagedPolicy.json
   - Microsoft.AwsConnector/stable/2024-12-01/iamPasswordPolicy.json
-  - Microsoft.AwsConnector/stable/2024-12-01/iamPolicyGroup.json
-  - Microsoft.AwsConnector/stable/2024-12-01/iamPolicyRole.json
-  - Microsoft.AwsConnector/stable/2024-12-01/iamPolicyUser.json
   - Microsoft.AwsConnector/stable/2024-12-01/iamPolicyVersion.json
   - Microsoft.AwsConnector/stable/2024-12-01/iamRole.json
   - Microsoft.AwsConnector/stable/2024-12-01/iamServerCertificate.json
