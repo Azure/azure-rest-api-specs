@@ -1,0 +1,53 @@
+{
+  "title": "DataPreview SqlServerSourceConnector",
+  "operationId": "DataPreviewOperations_Preview",
+  "parameters": {
+    "api-version": "2024-09-01-preview",
+    "subscriptionId": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
+    "location": "Central US EUAP",
+    "body": {
+      "connectorProperties": {
+        "connectorType": "SqlServerSource",
+        "connectorDirection": "Source",
+        "maxTasks": 1,
+        "valueConverter": "JsonConverter",
+        "hostName": "hostName.SqlServerSource1.com",
+        "port": 8080,
+        "databaseName": "databaseName1",
+        "username": "username1",
+        "tableNames": "tableNames1",
+        "password": "",
+        "eventHubConfig": {
+          "namespaceHostName": "ns",
+          "eventHubName": "eh",
+          "connectionString": "connectionString1"
+        },
+        "converterConfig": {
+          "type": "JsonConverter"
+        }
+      },
+      "dataRange": {
+        "limit": 100,
+        "type": "Limit"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "count": 3,
+        "results": [
+          "value1",
+          "value2",
+          "value3"
+        ]
+      }
+    },
+    "202": {
+      "headers": {
+        "location": "example.url",
+        "retry-after": "15"
+      }
+    }
+  }
+}
