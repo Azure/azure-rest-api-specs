@@ -24,7 +24,7 @@ namespace Microsoft.MessagingConnectors;
 @doc("A Connector resource Azure")
 model MessagingConnector is TrackedResource<ResourceProperties> {
   @doc("Name of the Connector resource.")
-  @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{0,78}[a-zA-Z0-9_]")
+  @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{0,64}[a-zA-Z0-9_]")
   @path
   @key("name")
   @segment("connectors")

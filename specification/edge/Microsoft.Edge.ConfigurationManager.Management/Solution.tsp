@@ -28,7 +28,8 @@ model ConfigurationLink {
 @doc("Solution Properties")
 model SolutionProperties {
   @doc("Current Version of solution")
-  currentVersion: string;
+  @visibility("read")
+  currentVersion?: string;
 
   @doc("List of capabilities")
   @extension("x-ms-identifiers", [])

@@ -16,5 +16,6 @@ interface DelegatedIdentities {
   delete is ArmResourceDeleteSync<DelegatedIdentity>;
   get is ArmResourceRead<DelegatedIdentity>;
   listByResourceGroup is ArmResourceListByParent<DelegatedIdentity>;
+  listBySubscription is ArmListBySubscription<DelegatedIdentity>;
   update is ArmCustomPatchSync<DelegatedIdentity, DelegatedIdentityUpdate>;
 }

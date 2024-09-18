@@ -34,6 +34,7 @@ interface Clouds {
   @summary("Implements Clouds PUT method.")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<Cloud>;
   /** Updates the Clouds resource. */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "TODO migrate to LRO"
   @summary("Implements the Clouds PATCH method.")
   @extension(
     "x-ms-long-running-operation-options",
@@ -43,6 +44,7 @@ interface Clouds {
   )
   update is ArmTagsPatchAsync<Cloud>;
   /** Deregisters the ScVmm fabric cloud from Azure. */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "TODO migrate to LRO"
   @summary("Implements Cloud resource DELETE method.")
   @extension(
     "x-ms-long-running-operation-options",
