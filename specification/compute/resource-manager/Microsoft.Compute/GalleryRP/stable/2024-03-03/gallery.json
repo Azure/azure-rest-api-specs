@@ -1757,6 +1757,7 @@
             "in": "path",
             "required": true,
             "type": "string",
+            "pattern": "^[a-zA-Z0-9]+([_]?[a-zA-Z0-9]+)*$",
             "description": "The name of the Shared Image Gallery in which the InVMAccessControlProfile is to be created."
           },
           {
@@ -1764,6 +1765,7 @@
             "in": "path",
             "required": true,
             "type": "string",
+            "pattern": "^[a-zA-Z0-9]+([-._]?[a-zA-Z0-9]+)*$",
             "description": "The name of the gallery inVMAccessControlProfile to be created or updated. The allowed characters are alphabets and numbers with dots, dashes, and periods allowed in the middle. The maximum length is 80 characters."
           },
           {
@@ -1788,12 +1790,6 @@
           },
           "201": {
             "description": "Created",
-            "schema": {
-              "$ref": "#/definitions/GalleryInVMAccessControlProfile"
-            }
-          },
-          "202": {
-            "description": "Accepted",
             "schema": {
               "$ref": "#/definitions/GalleryInVMAccessControlProfile"
             }
@@ -1956,11 +1952,16 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK"
-          },
           "202": {
-            "description": "Accepted"
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
+                "type": "string"
+              }
+            }
           },
           "204": {
             "description": "No Content"
@@ -1999,6 +2000,7 @@
             "in": "path",
             "required": true,
             "type": "string",
+            "pattern": "^[a-zA-Z0-9]+([_]?[a-zA-Z0-9]+)*$",
             "description": "The name of the Shared Image Gallery in which the inVMAccessControlProfile resides."
           },
           {
@@ -2006,6 +2008,7 @@
             "in": "path",
             "required": true,
             "type": "string",
+            "pattern": "^[a-zA-Z0-9]+([-._]?[a-zA-Z0-9]+)*$",
             "description": "The name of the gallery inVMAccessControlProfile in which the inVMAccessControlProfile version is to be created."
           },
           {
@@ -2013,6 +2016,7 @@
             "in": "path",
             "required": true,
             "type": "string",
+            "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$",
             "description": "The name of the gallery inVMAccessControlProfile version to be created. Needs to follow semantic version name pattern: The allowed characters are digit and period. Digits must be within the range of a 32-bit integer. Format: <MajorVersion>.<MinorVersion>.<Patch>"
           },
           {
@@ -2037,12 +2041,6 @@
           },
           "201": {
             "description": "Created",
-            "schema": {
-              "$ref": "#/definitions/GalleryInVMAccessControlProfileVersion"
-            }
-          },
-          "202": {
-            "description": "Accepted",
             "schema": {
               "$ref": "#/definitions/GalleryInVMAccessControlProfileVersion"
             }
@@ -2226,11 +2224,16 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK"
-          },
           "202": {
-            "description": "Accepted"
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
+                "type": "string"
+              }
+            }
           },
           "204": {
             "description": "No Content"
@@ -2269,6 +2272,7 @@
             "in": "path",
             "required": true,
             "type": "string",
+            "pattern": "^[a-zA-Z0-9]+([_]?[a-zA-Z0-9]+)*$",
             "description": "The name of the Shared Image Gallery from which the InVMAccessControlProfiles are to be listed."
           },
           {
@@ -2318,6 +2322,7 @@
             "in": "path",
             "required": true,
             "type": "string",
+            "pattern": "^[a-zA-Z0-9]+([_]?[a-zA-Z0-9]+)*$",
             "description": "The name of the Shared Image Gallery in which the inVMAccessControlProfile resides."
           },
           {
@@ -2325,6 +2330,7 @@
             "in": "path",
             "required": true,
             "type": "string",
+            "pattern": "^[a-zA-Z0-9]+([-._]?[a-zA-Z0-9]+)*$",
             "description": "The name of the gallery inVMAccessControlProfile from which the inVMAccessControlProfile versions are to be listed."
           },
           {
@@ -3875,6 +3881,7 @@
       }
     },
     "GalleryInVMAccessControlProfile": {
+      "type": "object",
       "properties": {
         "properties": {
           "$ref": "#/definitions/GalleryInVMAccessControlProfileProperties"
@@ -3888,6 +3895,7 @@
       "description": "Specifies information about the gallery inVMAccessControlProfile that you want to create or update."
     },
     "GalleryInVMAccessControlProfileUpdate": {
+      "type": "object",
       "properties": {
         "properties": {
           "$ref": "#/definitions/GalleryInVMAccessControlProfileProperties"
@@ -3901,6 +3909,7 @@
       "description": "Specifies information about the gallery inVMAccessControlProfile that you want to update."
     },
     "GalleryInVMAccessControlProfileProperties": {
+      "type": "object",
       "properties": {
         "description": {
           "type": "string",
@@ -3931,13 +3940,29 @@
           }
         }
       },
+      "allOf": [
+        {
+          "$ref": "#/definitions/GalleryResourceProfilePropertiesBase"
+        }
+      ],
       "required": [
         "osType",
         "applicableHostEndpoint"
       ],
       "description": "Describes the properties of a gallery inVMAccessControlProfile."
     },
+    "GalleryResourceProfilePropertiesBase": {
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "readOnly": true,
+          "$ref": "#/definitions/GalleryProvisioningState"
+        }
+      },
+      "description": "The properties of a gallery ResourceProfile."
+    },
     "GalleryInVMAccessControlProfileVersion": {
+      "type": "object",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
@@ -3952,6 +3977,7 @@
       "description": "Specifies information about the gallery inVMAccessControlProfile version that you want to create or update."
     },
     "GalleryInVMAccessControlProfileVersionUpdate": {
+      "type": "object",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
@@ -3966,6 +3992,7 @@
       "description": "Specifies information about the gallery inVMAccessControlProfile version that you want to update."
     },
     "GalleryInVMAccessControlProfileVersionProperties": {
+      "type": "object",
       "properties": {
         "mode": {
           "type": "string",
@@ -4008,6 +4035,7 @@
       "description": "Describes the properties of an inVMAccessControlProfile version."
     },
     "AccessControlRules": {
+      "type": "object",
       "properties": {
         "privileges": {
           "type": "array",
@@ -4053,6 +4081,7 @@
       "description": "This is the Access Control Rules specification for an inVMAccessControlProfile version."
     },
     "AccessControlRulesPrivilege": {
+      "type": "object",
       "properties": {
         "name": {
           "type": "string",
@@ -4077,6 +4106,7 @@
       "description": "The properties of an Access Control Rule Privilege."
     },
     "AccessControlRulesRole": {
+      "type": "object",
       "properties": {
         "name": {
           "type": "string",
@@ -4097,6 +4127,7 @@
       "description": "The properties of an Access Control Rule Role."
     },
     "AccessControlRulesIdentity": {
+      "type": "object",
       "properties": {
         "name": {
           "type": "string",
@@ -4125,6 +4156,7 @@
       "description": "The properties of an Access Control Rule Identity."
     },
     "AccessControlRulesRoleAssignment": {
+      "type": "object",
       "properties": {
         "role": {
           "type": "string",
@@ -4145,6 +4177,7 @@
       "description": "The properties of an Access Control Rule RoleAssignment."
     },
     "GalleryResourceProfileVersionPropertiesBase": {
+      "type": "object",
       "properties": {
         "targetLocations": {
           "type": "array",
@@ -4178,6 +4211,7 @@
       "description": "The properties of a gallery ResourceProfile version."
     },
     "GalleryInVMAccessControlProfileList": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -4197,6 +4231,7 @@
       "description": "The List Gallery InVMAccessControlProfiles operation response."
     },
     "GalleryInVMAccessControlProfileVersionList": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
