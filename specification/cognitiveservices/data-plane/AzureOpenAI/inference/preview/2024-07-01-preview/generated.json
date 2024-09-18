@@ -4322,11 +4322,22 @@
           "type": "integer",
           "format": "int32",
           "description": "Index of the prompt to which the EmbeddingItem corresponds."
+        },
+        "object": {
+          "type": "string",
+          "description": "The object type which is always 'embedding'.",
+          "enum": [
+            "embedding"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
         }
       },
       "required": [
         "embedding",
-        "index"
+        "index",
+        "object"
       ]
     },
     "Embeddings": {
