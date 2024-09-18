@@ -1370,10 +1370,28 @@
       "type": "object"
     },
     "string_to_EndpointProperties": {
-      "additionalProperties": {
-        "$ref": "#/definitions/EndpointProperties"
+      "properties": {
+        "key": {
+          "$ref": "#/definitions/MethodEnum"
+        },
+        "value": {
+          "$ref": "#/definitions/EndpointProperties"
+        }
       },
       "type": "object"
+    },
+    "MethodEnum": {
+      "enum": [
+        "get",
+        "put",
+        "patch",
+        "delete"
+      ],
+      "x-ms-enum": {
+        "name": "MethodEnum",
+        "modelAsString": true
+      },
+      "type": "string"
     },
     "EndpointProperties": {
       "properties": {
