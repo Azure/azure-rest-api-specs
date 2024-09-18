@@ -316,7 +316,6 @@ model ErrorResponse {
  * The error object.
  */
 model Error {
-
   /**
    * One of a server-defined set of error codes.
    */
@@ -753,8 +752,8 @@ model TextAnalysisAuthoringSwapDeploymentsOptions {
  * Represents the state of an export job.
  */
 model TextAnalysisAuthoringExportProjectJobState {
-
   ...TextAnalysisAuthoringJobState;
+
   /**
    * The URL to use in order to download the exported project.
    */
@@ -764,7 +763,7 @@ model TextAnalysisAuthoringExportProjectJobState {
 /**
  * Represents a list of exported trained models.
  */
-model TextAnalysisAuthoringExportedTrainedModels{
+model TextAnalysisAuthoringExportedTrainedModels {
   /**
    * The list of projects.
    */
@@ -875,7 +874,7 @@ model TextAnalysisAuthoringProjectTrainedModels {
    * The next page link.
    */
   nextLink?: string;
-} 
+}
 
 /**
  * Represents a trained model.
@@ -922,7 +921,6 @@ model TextAnalysisAuthoringProjectTrainedModel {
  * Represents the state of a evaluation job.
  */
 model TextAnalysisAuthoringEvaluationJobState {
-
   ...TextAnalysisAuthoringJobState;
 
   /**
@@ -974,7 +972,6 @@ model TextAnalysisAuthoringEvaluationResults {
  */
 @discriminator("projectKind")
 model TextAnalysisAuthoringDocumentEvaluationResult {
-
   /**
    * Represents the project kind.
    */
@@ -998,7 +995,6 @@ model TextAnalysisAuthoringDocumentEvaluationResult {
  */
 @discriminator("projectKind")
 model TextAnalysisAuthoringEvaluationSummary {
-  
   /**
    * Represents the project type that the evaluation ran on.
    */
@@ -1114,8 +1110,8 @@ model TextAnalysisAuthoringTrainingJobs {
  * Represents the state of a training job.
  */
 model TextAnalysisAuthoringTrainingJobState {
-
   ...TextAnalysisAuthoringJobState;
+
   /**
    * Represents training tasks detailed result.
    */
@@ -1425,7 +1421,8 @@ model TextAnalysisAuthoringDocumentEntityLabelEvaluationResult {
 /**
  * Represents the evaluation summary for a custom entity recognition project.
  */
-model TextAnalysisAuthoringCustomEntityRecognitionEvaluationSummary extends TextAnalysisAuthoringEvaluationSummary {
+model TextAnalysisAuthoringCustomEntityRecognitionEvaluationSummary
+  extends TextAnalysisAuthoringEvaluationSummary {
   /**
    * Contains the data related to extraction evaluation.
    */
@@ -1570,7 +1567,8 @@ model TextAnalysisAuthoringDocumentHealthcareEvaluationResult {
  * Represents the evaluation summary for a custom health care project.
  */
 @added(Versions.v2023_04_15_preview)
-model TextAnalysisAuthoringCustomHealthcareEvaluationSummary extends TextAnalysisAuthoringEvaluationSummary {
+model TextAnalysisAuthoringCustomHealthcareEvaluationSummary
+  extends TextAnalysisAuthoringEvaluationSummary {
   /**
    * Contains the data related to health care evaluation.
    */
@@ -1917,7 +1915,8 @@ model TextAnalysisAuthoringDocumentSentimentLabelEvaluationResult {
  * Represents the evaluation summary for a custom text sentiment project.
  */
 @added(Versions.v2023_04_15_preview)
-model TextAnalysisAuthoringCustomTextSentimentEvaluationSummary extends TextAnalysisAuthoringEvaluationSummary {
+model TextAnalysisAuthoringCustomTextSentimentEvaluationSummary
+  extends TextAnalysisAuthoringEvaluationSummary {
   /**
    * Contains the data related to custom sentiment evaluation.
    */
@@ -2325,7 +2324,8 @@ model TextAnalysisAuthoringExportedCustomHealthcareDocument {
  * Represents the exported assets for a CustomHealthcare project.
  */
 @added(Versions.v2023_04_15_preview)
-model TextAnalysisAuthoringExportedCustomHealthcareProjectAssets extends TextAnalysisAuthoringExportedProjectAssets {
+model TextAnalysisAuthoringExportedCustomHealthcareProjectAssets
+  extends TextAnalysisAuthoringExportedProjectAssets {
   /**
    * The list of entities belonging to the project.
    */
@@ -2496,7 +2496,8 @@ model TextAnalysisAuthoringExportedDocumentSentimentLabel {
  * Represents the exported assets for a custom text sentiment project.
  */
 @added(Versions.v2023_04_15_preview)
-model TextAnalysisAuthoringExportedCustomTextSentimentProjectAssets extends TextAnalysisAuthoringExportedProjectAssets {
+model TextAnalysisAuthoringExportedCustomTextSentimentProjectAssets
+  extends TextAnalysisAuthoringExportedProjectAssets {
   /**
    * The list of documents belonging to the project.
    */
