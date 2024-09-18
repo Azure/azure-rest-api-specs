@@ -157,8 +157,8 @@ model InnerError {
   @doc("One of a server-defined set of error codes.")
   code?: string;
 
-  @doc("An object containing more specific information than the current object about the error.")
   #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "Property 'innererror' having the same name as its enclosing model will cause problems with C# code generation."
+  @doc("An object containing more specific information than the current object about the error.")
   innererror?: InnerError;
 }
 
