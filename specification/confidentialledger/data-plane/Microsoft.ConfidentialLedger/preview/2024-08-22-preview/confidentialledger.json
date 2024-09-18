@@ -1355,7 +1355,7 @@
     "Metadata": {
       "properties": {
         "endpoints": {
-          "$ref": "#/definitions/string_to_string_to_EndpointProperties"
+          "$ref": "#/definitions/path"
         }
       },
       "required": [
@@ -1363,35 +1363,28 @@
       ],
       "type": "object"
     },
-    "string_to_string_to_EndpointProperties": {
+    "path": {
       "additionalProperties": {
-        "$ref": "#/definitions/string_to_EndpointProperties"
+        "$ref": "#/definitions/method_to_EndpointProperties"
       },
       "type": "object"
     },
-    "string_to_EndpointProperties": {
+    "method_to_EndpointProperties": {
       "properties": {
-        "key": {
-          "$ref": "#/definitions/MethodEnum"
+        "get": {
+          "$ref": "#/definitions/EndpointProperties"
         },
-        "value": {
+        "put": {
+          "$ref": "#/definitions/EndpointProperties"
+        },
+        "patch": {
+          "$ref": "#/definitions/EndpointProperties"
+        },
+        "delete": {
           "$ref": "#/definitions/EndpointProperties"
         }
       },
       "type": "object"
-    },
-    "MethodEnum": {
-      "enum": [
-        "get",
-        "put",
-        "patch",
-        "delete"
-      ],
-      "x-ms-enum": {
-        "name": "MethodEnum",
-        "modelAsString": true
-      },
-      "type": "string"
     },
     "EndpointProperties": {
       "properties": {
