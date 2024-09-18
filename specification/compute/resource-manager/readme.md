@@ -278,6 +278,10 @@ suppressions:
   - code: LroPatch202
     reason: PATCH and PUT follow the same behavior and response codes in Compute. Keeping it for legacy reasons.
     from: gallery.json
+  - code: AvoidAdditionalProperties
+    reason: The backend service expects a string:string Dictionary for this property.
+    from: gallery.json
+    where: $.definitions.AccessControlRulesPrivilege.queryParameters
 ```
 
 ### Tag: package-2024-03-03
