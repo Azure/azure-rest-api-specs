@@ -48,7 +48,22 @@ enum Versions {
   /**
    * The 2024-05-01-preview API version.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-version-format" "Version name approved by reviewers"
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @useDependency(Azure.Core.Versions.v1_0_Preview_1)
   v2024_05_01_preview: "2024-05-01-preview",
+
+  /**
+   * The 2024-07-15-preview API version for internal testing only.
+   */
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
+  v2024_07_15_preview: "2024-07-15-preview",
+
+  /**
+   * The 2024-08-01-preview API version.
+   */
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
+  v2024_08_01_preview: "2024-08-01-preview",
 }
