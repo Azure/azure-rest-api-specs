@@ -13,7 +13,7 @@ using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.Core.Traits;
 
-namespace Azure.Ai.Project;
+namespace Azure.AI.Client;
 
 @doc("to do")
 model ListSecretsResponse {

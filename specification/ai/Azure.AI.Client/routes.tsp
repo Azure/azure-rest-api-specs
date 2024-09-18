@@ -12,7 +12,7 @@ using Azure.Core;
 using Azure.Core.Traits;
 using Azure.Core.Foundations;
 
-namespace Azure.Ai.Project;
+namespace Azure.AI.Client.Connections;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Need to define route."
 @doc("List secrets for a given connection.")

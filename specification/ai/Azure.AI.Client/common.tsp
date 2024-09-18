@@ -8,4 +8,4 @@ using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.Core;
 
-namespace Azure.Ai.Project;
+namespace Azure.AI.Client;
