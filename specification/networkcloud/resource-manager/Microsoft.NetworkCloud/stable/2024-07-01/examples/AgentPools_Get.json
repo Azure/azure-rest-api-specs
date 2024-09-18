@@ -1,6 +1,6 @@
 {
   "parameters": {
-    "api-version": "2024-06-01-preview",
+    "api-version": "2024-07-01",
     "subscriptionId": "123e4567-e89b-12d3-a456-426655440000",
     "resourceGroupName": "resourceGroupName",
     "kubernetesClusterName": "kubernetesClusterName",
@@ -79,13 +79,13 @@
           "taints": [
             {
               "key": "kubernetes.taint",
-              "value": "true"
+              "value": "true:NoSchedule"
             }
           ],
           "upgradeSettings": {
             "maxSurge": "1"
           },
-          "vmSkuName": "NC_XXXX",
+          "vmSkuName": "NC_P46_224_v1",
           "provisioningState": "Succeeded",
           "kubernetesVersion": "1.XX.Y",
           "detailedStatus": "Available",

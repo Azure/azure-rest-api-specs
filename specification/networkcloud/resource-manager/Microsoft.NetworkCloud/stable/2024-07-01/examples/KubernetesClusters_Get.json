@@ -1,6 +1,6 @@
 {
   "parameters": {
-    "api-version": "2024-06-01-preview",
+    "api-version": "2024-07-01",
     "subscriptionId": "123e4567-e89b-12d3-a456-426655440000",
     "resourceGroupName": "resourceGroupName",
     "kubernetesClusterName": "kubernetesClusterName"
@@ -93,13 +93,13 @@
               "taints": [
                 {
                   "key": "kubernetes.taint",
-                  "value": "true"
+                  "value": "true:NoSchedule"
                 }
               ],
               "upgradeSettings": {
                 "maxSurge": "1"
               },
-              "vmSkuName": "NC_XXXX",
+              "vmSkuName": "NC_P46_224_v1",
               "name": "SystemPool-1"
             }
           ],
@@ -118,7 +118,7 @@
               "3"
             ],
             "count": 3,
-            "vmSkuName": "NC_XXXX"
+            "vmSkuName": "NC_G6_28_v1"
           },
           "kubernetesVersion": "1.XX.Y",
           "managedResourceGroupConfiguration": {
@@ -227,41 +227,82 @@
               "agentPoolId": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/kubernetesClusters/kubernetesClusterName/agentPools/agentPoolName",
               "availabilityZone": "1",
               "bareMetalMachineId": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/bareMetalMachines/bareMetalMachineName",
-              "cpuCores": 20,
-              "detailedStatus": "Available",
-              "detailedStatusMessage": "No issues detected",
-              "diskSizeGB": 120,
-              "image": "myacr.azurecr.io/foobar:latest",
-              "kubernetesVersion": "1.XX.Y",
+              "cpuCores": 46,
+              "detailedStatus": "Running",
+              "detailedStatusMessage": "Running - virtual machine is running.",
+              "diskSizeGB": 300,
+              "image": "mariner-guest-image-qcow2-k8s-1.XX.Y",
+              "kubernetesVersion": "v1.XX.Y",
               "labels": [
                 {
                   "key": "kubernetes.label",
                   "value": "true"
                 }
               ],
-              "memorySizeGB": 256,
+              "memorySizeGB": 224,
               "mode": "System",
-              "name": "machine1",
+              "name": "kubernetesClusterName-SystemPool-1-md-cqjvd",
               "networkAttachments": [
                 {
-                  "networkAttachmentName": "netAttachName01",
+                  "networkAttachmentName": "cloudservices",
+                  "attachedNetworkId": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/cloudServicesNetworks/cloudServicesNetworkName",
+                  "ipAllocationMethod": "Dynamic",
+                  "ipv4Address": "169.254.8.4",
+                  "macAddress": "aa:bb:cc:06:79:2a",
+                  "defaultGateway": "False"
+                },
+                {
+                  "networkAttachmentName": "defaultcni",
                   "attachedNetworkId": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/l3Networks/l3NetworkName",
                   "ipAllocationMethod": "Dynamic",
-                  "ipv4Address": "198.51.100.1",
-                  "ipv6Address": "2001:0db8:0000:0000:0000:0000:0000:0000",
-                  "macAddress": "bf:1c:29:31:31:1f",
-                  "defaultGateway": "True"
+                  "ipv4Address": "10.14.48.12",
+                  "ipv6Address": "fda0:d59c:da0a:e30::a",
+                  "macAddress": "aa:bb:cc:ad:40:cf",
+                  "defaultGateway": "False"
+                }
+              ],
+              "powerState": "On",
+              "role": "Worker",
+              "taints": [
+                {
+                  "key": "kubernetes.taint",
+                  "value": "true:NoSchedule"
+                }
+              ],
+              "vmSkuName": "NC_P46_224_v1"
+            },
+            {
+              "bareMetalMachineId": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/bareMetalMachines/bareMetalMachineName",
+              "cpuCores": 6,
+              "detailedStatus": "Running",
+              "detailedStatusMessage": "Running - virtual machine is running.",
+              "diskSizeGB": 300,
+              "image": "mariner-guest-image-qcow2-k8s-1.XX.Y",
+              "kubernetesVersion": "v1.XX.Y",
+              "memorySizeGB": 28,
+              "name": "kubernetesClusterName-control-plane-7nsh2",
+              "networkAttachments": [
+                {
+                  "networkAttachmentName": "cloudservices",
+                  "attachedNetworkId": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/cloudServicesNetworks/cloudServicesNetworkName",
+                  "ipAllocationMethod": "Dynamic",
+                  "ipv4Address": "169.254.8.2",
+                  "macAddress": "aa:bb:cc:fa:91:71",
+                  "defaultGateway": "False"
+                },
+                {
+                  "networkAttachmentName": "defaultcni",
+                  "attachedNetworkId": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/l3Networks/l3NetworkName",
+                  "ipAllocationMethod": "Dynamic",
+                  "ipv4Address": "10.14.48.11",
+                  "ipv6Address": "fda0:d59c:da0a:e30::9",
+                  "macAddress": "aa:bb:cc:c8:a2:40",
+                  "defaultGateway": "False"
                 }
               ],
               "powerState": "On",
               "role": "ControlPlane",
-              "taints": [
-                {
-                  "key": "kubernetes.taint",
-                  "value": "true"
-                }
-              ],
-              "vmSkuName": "NC_XXXX"
+              "vmSkuName": "NC_G6_28_v1"
             }
           ]
         }
