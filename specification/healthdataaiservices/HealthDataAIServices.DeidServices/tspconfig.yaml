@@ -10,7 +10,6 @@ options:
   "@azure-tools/typespec-autorest":
     azure-resource-provider-folder: "data-plane"
     emitter-output-dir: "{project-root}/.."
-    examples-directory: "{project-root}/examples/"
     output-file: "{project-root}/../data-plane/{service-name}/{version-status}/{version}/{service-name}.json"
     omit-unreachable-types: true
   "@azure-tools/typespec-python":
@@ -18,6 +17,9 @@ options:
     package-name: "{package-dir}"
     package-mode: dataplane
     flavor: azure
+    generate-test: true
+    generate-sample: true
+    examples-dir: "{project-root}/examples"
   "@azure-tools/typespec-csharp":
     package-dir: "Azure.Health.Deidentification"
     namespace: "{package-dir}"

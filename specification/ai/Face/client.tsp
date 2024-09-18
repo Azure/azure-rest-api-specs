@@ -18,6 +18,13 @@ namespace ClientCustomizations;
 @@clientName(GroupingResult, "FaceGroupingResult");
 @@clientName(LivenessDecision, "FaceLivenessDecision");
 @@clientName(ImageType, "FaceImageType");
+@@clientName(OperationStatus, "FaceOperationStatus");
+@@clientName(TrainingResult, "FaceTrainingResult");
+@@clientName(IdentificationCandidate, "FaceIdentificationCandidate");
+@@clientName(IdentificationResult, "FaceIdentificationResult");
+@@clientName(CreateLivenessWithVerifySessionJsonContent,
+  "CreateLivenessWithVerifySessionContent"
+);
 
 @@access(DetectionModel, Access.public);
 @@access(RecognitionModel, Access.public);
@@ -70,52 +77,19 @@ interface FaceClient {
   @doc("Please refer to https://learn.microsoft.com/rest/api/face/face-recognition-operations/group for more details.")
   group is FaceRecognitionOperations.group;
 
-  @doc("Please refer to https://learn.microsoft.com/rest/api/face/face-recognition-operations/find-similar-from-face-list for more details.")
-  findSimilarFromFaceList is FaceRecognitionOperations.findSimilarFromFaceList;
   @doc("Please refer to https://learn.microsoft.com/rest/api/face/face-recognition-operations/find-similar-from-large-face-list for more details.")
   findSimilarFromLargeFaceList is FaceRecognitionOperations.findSimilarFromLargeFaceList;
   @doc("Please refer to https://learn.microsoft.com/rest/api/face/face-recognition-operations/identify-from-person-group for more details.")
-  identifyFromPersonGroup is FaceRecognitionOperations.identifyFromPersonGroup;
-  @doc("Please refer to https://learn.microsoft.com/rest/api/face/face-recognition-operations/identify-from-large-person-group for more details.")
   identifyFromLargePersonGroup is FaceRecognitionOperations.identifyFromLargePersonGroup;
-  @doc("Please refer to https://learn.microsoft.com/rest/api/face/face-recognition-operations/verify-from-person-group for more details.")
-  verifyFromPersonGroup is FaceRecognitionOperations.verifyFromPersonGroup;
   @doc("Please refer to https://learn.microsoft.com/rest/api/face/face-recognition-operations/verify-from-large-person-group for more details.")
   verifyFromLargePersonGroup is FaceRecognitionOperations.verifyFromLargePersonGroup;
 }
 
 @client({
-  name: "FaceServiceClient",
+  name: "FaceAdministrationClient",
   service: Face,
 })
-namespace FaceServiceClient {
-  @operationGroup
-  @clientName("FaceListClientImpl", "csharp")
-  interface FaceList {
-    @doc("Please refer to https://learn.microsoft.com/rest/api/face/face-list-operations/create-face-list for more details.")
-    create is FaceListOperations.createFaceList;
-    @doc("Please refer to https://learn.microsoft.com/rest/api/face/face-list-operations/delete-face-list for more details.")
-    delete is FaceListOperations.deleteFaceList;
-    @doc("Please refer to https://learn.microsoft.com/rest/api/face/face-list-operations/get-face-list for more details.")
-    get is FaceListOperations.getFaceList;
-    @doc("Please refer to https://learn.microsoft.com/rest/api/face/face-list-operations/update-face-list for more details.")
-    update is FaceListOperations.updateFaceList;
-    @doc("Please refer to https://learn.microsoft.com/rest/api/face/face-list-operations/get-face-lists for more details.")
-    getFaceLists is FaceListOperations.getFaceLists;
-
-    @access(Access.internal, "java,csharp")
-    @clientName("addFaceFromUrlImpl", "java,csharp")
-    @doc("Please refer to https://learn.microsoft.com/rest/api/face/face-list-operations/add-face-list-face-from-url for more details.")
-    addFaceFromUrl is FaceListOperations.addFaceListFaceFromUrl;
-    #suppress "@azure-tools/typespec-azure-core/byos" "It's an RPC call to detect face from an image, it doesn't store anything. There's a BYOS version of this call, but it's not this one."
-    @access(Access.internal, "java,csharp")
-    @clientName("addFaceImpl", "java,csharp")
-    @doc("Please refer to https://learn.microsoft.com/rest/api/face/face-list-operations/add-face-list-face for more details.")
-    addFace is FaceListOperations.addFaceListFace;
-    @doc("Please refer to https://learn.microsoft.com/rest/api/face/face-list-operations/delete-face-list-face for more details.")
-    deleteFace is FaceListOperations.deleteFaceListFace;
-  }
-
+namespace FaceAdministrationClient {
   @operationGroup
   @clientName("LargeFaceListClientImpl", "csharp")
   interface LargeFaceList {
@@ -150,50 +124,6 @@ namespace FaceServiceClient {
     updateFace is FaceListOperations.updateLargeFaceListFace;
     @doc("Please refer to https://learn.microsoft.com/rest/api/face/face-list-operations/get-large-face-list-faces for more details.")
     getFaces is FaceListOperations.getLargeFaceListFaces;
-  }
-
-  @operationGroup
-  @clientName("PersonGroupClientImpl", "csharp")
-  interface PersonGroup {
-    @doc("Please refer to https://learn.microsoft.com/rest/api/face/person-group-operations/create-person-group for more details.")
-    create is PersonGroupOperations.createPersonGroup;
-    @doc("Please refer to https://learn.microsoft.com/rest/api/face/person-group-operations/delete-person-group for more details.")
-    delete is PersonGroupOperations.deletePersonGroup;
-    @doc("Please refer to https://learn.microsoft.com/rest/api/face/person-group-operations/get-person-group for more details.")
-    get is PersonGroupOperations.getPersonGroup;
-    @doc("Please refer to https://learn.microsoft.com/rest/api/face/person-group-operations/update-person-group for more details.")
-    update is PersonGroupOperations.updatePersonGroup;
-    @doc("Please refer to https://learn.microsoft.com/rest/api/face/person-group-operations/get-person-groups for more details.")
-    getPersonGroups is PersonGroupOperations.getPersonGroups;
-    @doc("Please refer to https://learn.microsoft.com/rest/api/face/person-group-operations/get-person-group-training-status for more details.")
-    getTrainingStatus is PersonGroupOperations.getPersonGroupTrainingStatus;
-    @doc("Please refer to https://learn.microsoft.com/rest/api/face/person-group-operations/train-person-group for more details.")
-    train is PersonGroupOperations.trainPersonGroup;
-    @doc("Please refer to https://learn.microsoft.com/rest/api/face/person-group-operations/create-person-group-person for more details.")
-    createPerson is PersonGroupOperations.createPersonGroupPerson;
-    @doc("Please refer to https://learn.microsoft.com/rest/api/face/person-group-operations/delete-person-group-person for more details.")
-    deletePerson is PersonGroupOperations.deletePersonGroupPerson;
-    @doc("Please refer to https://learn.microsoft.com/rest/api/face/person-group-operations/get-person-group-person for more details.")
-    getPerson is PersonGroupOperations.getPersonGroupPerson;
-    @doc("Please refer to https://learn.microsoft.com/rest/api/face/person-group-operations/update-person-group-person for more details.")
-    updatePerson is PersonGroupOperations.updatePersonGroupPerson;
-    @doc("Please refer to https://learn.microsoft.com/rest/api/face/person-group-operations/get-person-group-persons for more details.")
-    getPersons is PersonGroupOperations.getPersonGroupPersons;
-    @access(Access.internal, "java,csharp")
-    @clientName("addFaceFromUrlImpl", "java,csharp")
-    @doc("Please refer to https://learn.microsoft.com/rest/api/face/person-group-operations/add-person-group-person-face-from-url for more details.")
-    addFaceFromUrl is PersonGroupOperations.addPersonGroupPersonFaceFromUrl;
-    #suppress "@azure-tools/typespec-azure-core/byos" "It's an RPC call to detect face from an image, it doesn't store anything. There's a BYOS version of this call, but it's not this one."
-    @access(Access.internal, "java,csharp")
-    @clientName("addFaceImpl", "java,csharp")
-    @doc("Please refer to https://learn.microsoft.com/rest/api/face/person-group-operations/add-person-group-person-face for more details.")
-    addFace is PersonGroupOperations.addPersonGroupPersonFace;
-    @doc("Please refer to https://learn.microsoft.com/rest/api/face/person-group-operations/delete-person-group-person-face for more details.")
-    deleteFace is PersonGroupOperations.deletePersonGroupPersonFace;
-    @doc("Please refer to https://learn.microsoft.com/rest/api/face/person-group-operations/get-person-group-person-face for more details.")
-    getFace is PersonGroupOperations.getPersonGroupPersonFace;
-    @doc("Please refer to https://learn.microsoft.com/rest/api/face/person-group-operations/update-person-group-person-face for more details.")
-    updateFace is PersonGroupOperations.updatePersonGroupPersonFace;
   }
 
   @operationGroup
