@@ -6,8 +6,8 @@ Please also specify `--typescript-sdks-folder=<path to root folder of your azure
 ```yaml $(typescript)
 typescript:
   azure-arm: true
-  package-name: "@azure/arm-mobilepacketcore"
-  output-folder: "$(typescript-sdks-folder)/mobilepacketcore/arm-mobilepacketcore"
+  package-name: "mobileCore"
+  output-folder: "$(typescript-sdks-folder)/packages/mobileCore"
   payload-flattening-threshold: 1
   generate-metadata: true
 ```
