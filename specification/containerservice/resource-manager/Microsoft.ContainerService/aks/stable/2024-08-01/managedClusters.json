@@ -1195,6 +1195,9 @@
           },
           {
             "$ref": "#/parameters/AgentPoolNameParameter"
+          },
+          {
+            "$ref": "#/parameters/IgnorePodDisruptionBudgetParameter"
           }
         ],
         "responses": {
@@ -7841,6 +7844,14 @@
       "in": "path",
       "required": true,
       "pattern": "^[a-zA-Z0-9][-_a-zA-Z0-9]{0,39}$",
+      "x-ms-parameter-location": "method"
+    },
+    "IgnorePodDisruptionBudgetParameter": {
+      "name": "ignore-pod-disruption-budget",
+      "in": "query",
+      "required": false,
+      "type": "boolean",
+      "description": "ignore-pod-disruption-budget=true to delete those pods on a node without considering Pod Disruption Budget",
       "x-ms-parameter-location": "method"
     }
   }
