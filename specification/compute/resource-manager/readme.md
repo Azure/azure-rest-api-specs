@@ -281,7 +281,7 @@ suppressions:
   - code: AvoidAdditionalProperties
     reason: The backend service expects a string:string Dictionary for this property.
     from: gallery.json
-    where: $.definitions.AccessControlRulesPrivilege.queryParameters
+    where: $.definitions.AccessControlRulesPrivilege.properties.queryParameters
 ```
 
 ### Tag: package-2024-03-03
