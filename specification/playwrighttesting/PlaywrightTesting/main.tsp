@@ -191,37 +191,20 @@ interface AccessTokens {
   // AccessToken Operations
 
   @doc("Creates an access-token with given access-token id in guid format.")
-  @Autorest.example(
-    "./AccessTokens_CreateAccessToken.json",
-    "AccessTokens_CreateAccessToken"
-  )
   createAccessToken is Operations.ResourceCreateOrReplace<AccessToken>;
 
   @doc("Get an access-token for given access-token id in guid format.")
-  @Autorest.example(
-    "./AccessTokens_GetAccessToken.json",
-    "AccessTokens_GetAccessToken"
-  )
   getAccessToken is Operations.ResourceRead<AccessToken>;
 
   @doc("Revoke an access-token with given access-token id in guid format.")
-  @Autorest.example(
-    "./AccessTokens_DeleteAccessToken.json",
-    "AccessTokens_DeleteAccessToken"
-  )
   deleteAccessToken is Operations.ResourceDelete<AccessToken>;
 
   @doc("List access-tokens for a given accountId.")
-  @Autorest.example(
-    "./AccessTokens_ListAccessTokens.json",
-    "AccessTokens_ListAccessTokens"
-  )
   listAccessTokens is Operations.ResourceList<AccessToken>;
 }
 
 interface Accounts {
   // Accounts Operations
   @doc("Get details of the ARM resource mapped to an account for the given accountId.")
-  @Autorest.example("./Accounts_GetAccount.json", "Accounts_GetAccount")
   getAccount is Operations.ResourceRead<Account>;
 }

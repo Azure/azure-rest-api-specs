@@ -12,6 +12,14 @@ enum Versions {
   @doc("Dependent on Azure.ResourceManager.Versions.v1_0_Preview_1")
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   v1_preview: "2023-06-01-preview",
+
+  @doc("Dependent on Azure.ResourceManager.Versions.v1_0_Preview_1")
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  v2024_08_27_preview: "2024-08-27-preview",
+
+  @doc("Dependent on Azure.ResourceManager.Versions.v1_0_Preview_1")
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  v2024_08_27: "2024-08-27",
 }
 
 @doc("Marketplace subscription status of a resource.")
@@ -29,6 +37,19 @@ union MarketplaceSubscriptionStatus {
 
   @doc("Customer has cancelled the subscription")
   Unsubscribed: "Unsubscribed",
+}
+
+@added(Versions.v2024_08_27_preview)
+@added(Versions.v2024_08_27)
+@doc("Subscription renewal mode")
+union RenewalMode {
+  string,
+
+  @doc("Automatic renewal")
+  Auto: "Auto",
+
+  @doc("Manual renewal")
+  Manual: "Manual",
 }
 
 @doc("A string that represents a URI.")
@@ -65,6 +86,17 @@ model OfferDetails {
 
   @doc("Plan Display Name for the marketplace offer")
   termId?: string;
+
+  @added(Versions.v2024_08_27_preview)
+  @added(Versions.v2024_08_27)
+  @doc("Subscription renewal mode")
+  renewalMode?: RenewalMode;
+
+  @added(Versions.v2024_08_27_preview)
+  @added(Versions.v2024_08_27)
+  @doc("Current subscription end date and time")
+  @visibility("read")
+  endDate?: utcDateTime;
 }
 
 @doc("Reusable representation of an email address.")
