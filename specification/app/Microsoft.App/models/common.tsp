@@ -7,7 +7,7 @@ using TypeSpec.Rest;
 namespace Microsoft.App.DynamicSessions;
 using OpenAPI;
 
-@doc("The code execution name path parameter.")
+@doc("The session resource file name parameter.")
 model SessionResourceFileNameParameter {
   @doc("The name of the file.")
   @path
@@ -28,4 +28,12 @@ model CodeExecutionIdentifier {
   @query
   @extension("x-ms-parameter-location", "client")
   executionId: string;
+}
+
+@doc("The session resource file path parameter.")
+model SessionresourceFilePathParameter {
+  @doc("The path of the file after uploaded.")
+  @query
+  @extension("x-ms-parameter-location", "client")
+  path: string;
 }

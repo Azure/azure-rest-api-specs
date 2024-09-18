@@ -345,9 +345,9 @@
         }
       }
     },
-    "/files/{fileName}:uploadFile": {
+    "/files/upload": {
       "post": {
-        "operationId": "SessionResourceFiles_UploadFile",
+        "operationId": "UploadFile",
         "description": "Upload a file to a session.",
         "consumes": [
           "multipart/form-data"
@@ -357,14 +357,10 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "fileName",
-            "in": "path",
-            "description": "The name of the file.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/SessionIdentifier"
           },
           {
-            "$ref": "#/parameters/SessionIdentifier"
+            "$ref": "#/parameters/SessionresourceFilePathParameter"
           },
           {
             "name": "file",
@@ -392,11 +388,6 @@
                 "description": "String error code indicating what went wrong."
               }
             }
-          }
-        },
-        "x-ms-examples": {
-          "SessionResourceFiles_UploadFile": {
-            "$ref": "./examples/SessionResourceFiles_UploadFile.json"
           }
         }
       }
@@ -846,7 +837,7 @@
     },
     "SessionResourceFileNameParameter": {
       "type": "object",
-      "description": "The code execution name path parameter.",
+      "description": "The session resource file name parameter.",
       "properties": {
         "fileName": {
           "type": "string",
@@ -881,6 +872,14 @@
       "name": "identifier",
       "in": "query",
       "description": "The identifier of the session.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "client"
+    },
+    "SessionresourceFilePathParameter": {
+      "name": "path",
+      "in": "query",
+      "description": "The path of the file after uploaded.",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "client"
