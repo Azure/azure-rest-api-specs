@@ -1,0 +1,763 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2024-08-01-preview",
+    "title": "DeveloperHubServiceClient",
+    "description": "The AKS Developer Hub Service Client"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DevHub/iacProfiles": {
+      "get": {
+        "tags": [
+          "IacProfile"
+        ],
+        "operationId": "IacProfiles_List",
+        "summary": "Gets a list of IacProfiles associated with the specified subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Describe the result of a successful operation.",
+            "schema": {
+              "$ref": "#/definitions/IacProfileListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List IacProfiles": {
+            "$ref": "./examples/IacProfile_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevHub/iacProfiles": {
+      "get": {
+        "tags": [
+          "IacProfile"
+        ],
+        "operationId": "IacProfiles_ListByResourceGroup",
+        "summary": "Gets a list of iacProfiles within a resource group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Describe the result of a successful operation.",
+            "schema": {
+              "$ref": "#/definitions/IacProfileListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List IacProfiles": {
+            "$ref": "./examples/IacProfile_ListByResourceGroup.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevHub/iacProfiles/{iacProfileName}": {
+      "get": {
+        "tags": [
+          "IacProfile"
+        ],
+        "operationId": "IacProfiles_Get",
+        "summary": "Gets a IacProfile.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/IacProfileParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/IacProfile"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get IacProfile": {
+            "$ref": "./examples/IacProfile_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "IacProfile"
+        ],
+        "operationId": "IacProfiles_CreateOrUpdate",
+        "summary": "Creates or updates a IacProfile",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/IacProfileParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/IacProfile"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/IacProfile"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/IacProfile"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create IacProfile": {
+            "$ref": "./examples/IacProfile_CreateOrUpdate.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "IacProfile"
+        ],
+        "operationId": "IacProfiles_Delete",
+        "summary": "Deletes a IacProfile",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/IacProfileParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "Successfully deleted the resource"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete IacProfile": {
+            "$ref": "./examples/IacProfile_Delete.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "IacProfile"
+        ],
+        "operationId": "IacProfiles_UpdateTags",
+        "summary": "Updates tags on a IacProfile.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/IacProfileParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "workflow.json#/definitions/TagsObject"
+            },
+            "description": "Parameters supplied to the Update TagsObject Tags operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/IacProfile"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update IacProfile Tags": {
+            "$ref": "./examples/IacProfile_UpdateTags.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevHub/iacProfiles/{iacProfileName}/export": {
+      "post": {
+        "tags": [
+          "IacProfile"
+        ],
+        "operationId": "IacProfiles_Export",
+        "summary": "Export a template",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/IacProfileParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ExportTemplateRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/prLinkResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create IacProfile": {
+            "$ref": "./examples/IacProfile_ExportTemplate.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevHub/iacProfiles/{iacProfileName}/scale": {
+      "post": {
+        "tags": [
+          "IacProfile"
+        ],
+        "operationId": "IacProfiles_Scale",
+        "summary": "Scale by template",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/IacProfileParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ScaleTemplateRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/prLinkResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create IacProfile": {
+            "$ref": "./examples/IacProfile_ScaleTemplate.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevHub/iacProfiles/{iacProfileName}/sync": {
+      "post": {
+        "tags": [
+          "IacProfile"
+        ],
+        "operationId": "IacProfiles_Sync",
+        "summary": "Sync template",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/IacProfileParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create IacProfile": {
+            "$ref": "./examples/IacProfile_SyncTemplate.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "IacProfile": {
+      "title": "IacProfile",
+      "description": "Resource representation of a IacProfile.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "Properties of a IacProfile.",
+          "$ref": "#/definitions/IacProfileProperties",
+          "x-ms-client-flatten": true
+        },
+        "etag": {
+          "readOnly": true,
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated."
+        }
+      }
+    },
+    "IacProfileProperties": {
+      "type": "object",
+      "description": "Properties of a IacProfile.",
+      "properties": {
+        "githubProfile": {
+          "description": "GitHub Profile of a IacProfile",
+          "$ref": "#/definitions/IacGitHubProfile",
+          "x-ms-client-flatten": true
+        },
+        "terraformProfile": {
+          "description": "Terraform Profile of a IacProfile",
+          "$ref": "#/definitions/TerraformProfile",
+          "x-ms-client-flatten": true
+        },
+        "stages": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/StageProperties"
+          }
+        },
+        "templates": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IacTemplateProperties"
+          }
+        }
+      }
+    },
+    "StageProperties": {
+      "type": "object",
+      "description": "Properties of a Stage.",
+      "properties": {
+        "stageName": {
+          "type": "string",
+          "title": "The name of the stage.",
+          "description": "Stage Name"
+        },
+        "dependencies": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "gitEnvironment": {
+          "type": "string"
+        }
+      }
+    },
+    "IacGitHubProfile": {
+      "type": "object",
+      "description": "GitHub Profile of a IacProfile.",
+      "properties": {
+        "repositoryName": {
+          "type": "string",
+          "title": "The name of the repository the IacProfile is associated with.",
+          "description": "Repository Name"
+        },
+        "repositoryMainBranch": {
+          "type": "string",
+          "title": "The name of the main branch of the repository the IacProfile is associated with.",
+          "description": "Repository Main Branch"
+        },
+        "repositoryOwner": {
+          "type": "string",
+          "title": "The owner of the repository the IacProfile is associated with.",
+          "description": "Repository Owner"
+        },
+        "authStatus": {
+          "$ref": "workflow.json#/definitions/AuthorizationStatus"
+        },
+        "pullNumber": {
+          "type": "integer",
+          "format": "int32",
+          "readOnly": true,
+          "description": "The number associated with the submitted pull request."
+        },
+        "prStatus": {
+          "$ref": "workflow.json#/definitions/PullRequestStatus"
+        },
+        "branchName": {
+          "type": "string",
+          "title": "The name of the branch current operation is associated with.",
+          "description": "Repository Branch Name"
+        }
+      }
+    },
+    "TerraformProfile": {
+      "type": "object",
+      "description": "Terraform backend profile.",
+      "properties": {
+        "storageAccountSubscription": {
+          "type": "string",
+          "title": "The subscription id of the storage account that save terraform state.",
+          "description": "Terraform Storage Account Subscription"
+        },
+        "storageAccountResourceGroup": {
+          "type": "string",
+          "title": "The resource group of the storage account that save terraform state.",
+          "description": "Terraform Storage Account Resource Group"
+        },
+        "storageAccountName": {
+          "type": "string",
+          "title": "The name of the storage account that save terraform state.",
+          "description": "Terraform Storage Account Name"
+        },
+        "storageContainerName": {
+          "type": "string",
+          "title": "The name of the container that save terraform state.",
+          "description": "Terraform Container Name"
+        }
+      }
+    },
+    "IacProfileListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IacProfile"
+          },
+          "description": "The list of IacProfiles."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to the next set of IacProfile results.",
+          "readOnly": true
+        }
+      }
+    },
+    "IacTemplateProperties": {
+      "type": "object",
+      "description": "Properties of a IacTemplate.",
+      "properties": {
+        "templateName": {
+          "type": "string",
+          "title": "The name of the template.",
+          "description": "Template Name"
+        },
+        "sourceResourceId": {
+          "type": "string",
+          "title": "The source resource Id of the template.",
+          "description": "the source store of the template"
+        },
+        "instanceStage": {
+          "type": "string",
+          "title": "The sample instance stage of the template.",
+          "description": "the source stage of the template"
+        },
+        "instanceName": {
+          "type": "string",
+          "title": "The sample instance name of the template.",
+          "description": "the sample instance name of the template"
+        },
+        "templateDetails": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IacTemplateDetails"
+          }
+        },
+        "quickStartTemplateType": {
+          "$ref": "#/definitions/QuickStartTemplateType"
+        }
+      }
+    },
+    "QuickStartTemplateType": {
+      "type": "string",
+      "enum": [
+        "None",
+        "HCI",
+        "HCIAKS",
+        "HCIARCVM"
+      ],
+      "readOnly": true,
+      "x-ms-enum": {
+        "name": "QuickStartTemplateType",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "None",
+            "description": "The template has not use quick start template"
+          },
+          {
+            "value": "HCI",
+            "description": "The template use quick start template of HCI"
+          },
+          {
+            "value": "HCIAKS",
+            "description": "The template use quick start template of HCI and AKS"
+          },
+          {
+            "value": "HCIARCVM",
+            "description": "The template use quick start template of HCI and ArcVM"
+          }
+        ]
+      },
+      "description": "Determines the authorization status of requests."
+    },
+    "IacTemplateDetails": {
+      "type": "object",
+      "properties": {
+        "productName": {
+          "type": "string",
+          "description": "The name of the products."
+        },
+        "count": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Count of the product"
+        },
+        "namingConvention": {
+          "type": "string",
+          "description": "Naming convention of this product"
+        }
+      }
+    },
+    "ExportTemplateRequest": {
+      "type": "object",
+      "properties": {
+        "templateName": {
+          "type": "string",
+          "title": "The name of the template.",
+          "description": "Template Name"
+        },
+        "resourceGroupIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "siteId": {
+          "type": "string"
+        },
+        "instanceName": {
+          "type": "string"
+        },
+        "instanceStage": {
+          "type": "string"
+        }
+      }
+    },
+    "ScaleTemplateRequest": {
+      "type": "object",
+      "properties": {
+        "templateName": {
+          "type": "string",
+          "title": "The name of the template.",
+          "description": "Template Name"
+        },
+        "scaleRequirement": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ScaleProperty"
+          }
+        }
+      }
+    },
+    "ScaleProperty": {
+      "type": "object",
+      "properties": {
+        "region": {
+          "type": "string",
+          "description": "The region of the store"
+        },
+        "stage": {
+          "type": "string",
+          "description": "The stage of the store"
+        },
+        "numberOfStore": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of the store"
+        }
+      }
+    },
+    "prLinkResponse": {
+      "type": "object",
+      "properties": {
+        "prLink": {
+          "type": "string",
+          "description": "The link of the pull request."
+        }
+      }
+    }
+  },
+  "parameters": {
+    "IacProfileParameter": {
+      "name": "iacProfileName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the IacProfile.",
+      "minLength": 1,
+      "maxLength": 63,
+      "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9]$",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}
