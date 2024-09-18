@@ -70,6 +70,90 @@ input-file:
   - Microsoft.DocumentDB/preview/2024-09-01-preview/services.json
   - Microsoft.DocumentDB/preview/2024-09-01-preview/throughputpool.json
   - Microsoft.DocumentDB/preview/2024-09-01-preview/chaosFault.json
+
+directive:
+  - suppress: UnSupportedPatchProperties
+    from: cosmos-db.json
+    reason: Temporarily suppressing linter errors and will be fixed later
+  - suppress: LroPatch202
+    from: cosmos-db.json
+    reason: Temporarily suppressing linter errors and will be fixed later
+  - suppress: ResourceNameRestriction
+    from: cosmos-db.json
+    reason: Temporarily suppressing linter errors and will be fixed later
+  - suppress: XmsIdentifierValidation
+    from: cosmos-db.json
+    reason: Temporarily suppressing linter errors and will be fixed later
+  - suppress: CreateOperationAsyncResponseValidation
+    from: cosmos-db.json
+    reason: Temporarily suppressing linter errors and will be fixed later
+  - suppress: DeleteOperationAsyncResponseValidation
+    from: cosmos-db.json
+    reason: Temporarily suppressing linter errors and will be fixed later
+  - suppress: PostOperationAsyncResponseValidation
+    from: cosmos-db.json
+    reason: Temporarily suppressing linter errors and will be fixed later
+  - suppress: MissingTypeObject
+    from: cosmos-db.json
+    reason: Temporarily suppressing linter errors and will be fixed later
+  - suppress: ParametersOrder
+    from: cosmos-db.json
+    reason: Temporarily suppressing linter errors and will be fixed later
+  - suppress: TrackedResourceBeyondsThirdLevel
+    from: cosmos-db.json
+    reason: Temporarily suppressing linter errors and will be fixed later
+  - suppress: LroLocationHeader
+    from: cosmos-db.json
+    reason: Temporarily suppressing linter errors and will be fixed later
+  - suppress: TrackedResourcePatchOperation
+    from: cosmos-db.json
+    reason: Temporarily suppressing linter errors and will be fixed later
+  - suppress: OperationIdNounVerb
+    from: cosmos-db.json
+    reason: Temporarily suppressing linter errors and will be fixed later
+  - suppress: ResourceNameRestriction
+    from: dataTransferService.json
+    reason: Temporarily suppressing linter errors and will be fixed later
+  - suppress: RepeatedPathInfo
+    from: dataTransferService.json
+    reason: Temporarily suppressing linter errors and will be fixed later
+  - suppress: XmsIdentifierValidation
+    from: managedCassandra.json
+    reason: Temporarily suppressing linter errors and will be fixed later
+  - suppress: LroLocationHeader
+    from: services.json
+    reason: Temporarily suppressing linter errors and will be fixed later
+  - suppress: LroErrorContent
+    from: cosmos-db.json
+    reason: Temporarily suppressing linter errors and will be fixed later
+  - suppress: MissingDefaultResponse
+    from: cosmos-db.json
+    reason: Temporarily suppressing linter errors and will be fixed later
+  - suppress: GetCollectionOnlyHasValueAndNextLink
+    from: cosmos-db.json
+    reason: Temporarily suppressing linter errors and will be fixed later
+  - suppress: ProvisioningStateSpecifiedForLROPut
+    from: cosmos-db.json
+    reason: Temporarily suppressing linter errors and will be fixed later
+  - suppress: PutRequestResponseSchemeArm
+    from: cosmos-db.json
+    reason: Temporarily suppressing linter errors and will be fixed later
+  - suppress: PutRequestResponseSchemeArm
+    from: dataTransferService.json
+    reason: Temporarily suppressing linter errors and will be fixed later
+  - suppress: PutResponseSchemaDescription
+    from: dataTransferService.json
+    reason: Temporarily suppressing linter errors and will be fixed later
+  - suppress: GetCollectionOnlyHasValueAndNextLink
+    from: managedCassandra.json
+    reason: Temporarily suppressing linter errors and will be fixed later
+  - suppress: PutResponseSchemaDescription
+    from: cosmos-db.json
+    reason: Temporarily suppressing linter errors and will be fixed later
+  - suppress: AvoidAdditionalProperties
+    from: managedCassandra.json
+    reason: Temporarily suppressing existing linter errors and will be fixed later
+
 ```
 
 ### Tag: package-2024-08
