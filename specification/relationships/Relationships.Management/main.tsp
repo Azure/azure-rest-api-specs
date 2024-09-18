@@ -40,7 +40,7 @@ model RelationshipMetadata {
   targetType: string;
 }
 
-@doc("The possible origins ofa relationship.")
+@doc("The possible origins of a relationship.")
 union RelationshipOrigins {
   @doc("The relationship was explicitly created by a system.")
   ServiceExplicitlyCreated: "ServiceExplicitlyCreated",
