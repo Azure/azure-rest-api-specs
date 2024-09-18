@@ -38,6 +38,12 @@ directive:
     from: subscriptions.json
     where: $.paths["/providers/Microsoft.Subscription/subscriptionOperations/{operationId}"].get.responses["202"]
     reason: This api will return 200 and 202 response.
+  - suppress: DeleteResponseCodes
+    from: subscriptions.json
+    reason: The delete subscription changed directory expected to return 200 on every user's request, once it's deleted it will return 404, since it's a change on the existing api with new version, but creating workitem - "https://msazure.visualstudio.com/One/_workitems/edit/29188912", to refactor the call on delete request and will return 204 as no content in such cases to take this item in future ref.
+  - suppress: DeleteOperationResponses
+    from: subscriptions.json
+    reason: The delete operation response for subscription changed directory expected to return 200 on every user's request, once it's deleted it will return 404, since it's a change on the existing api with new version, but creating workitem - "https://msazure.visualstudio.com/One/_workitems/edit/29188912", to refactor the call on delete request and will return 204 as no content in such cases to take this item in future ref.
 ```
 
 
