@@ -12,7 +12,7 @@ using Autorest;
 
 namespace Microsoft.AzureCis;
 
-@doc("PointerRecord properties")
+@doc("Pointer record properties")
 @added(Versions.v2024_06_24_preview)
 model PtrRecordResourceProperties {
   @doc("Gets or sets the DNS name")
@@ -32,7 +32,7 @@ model PtrRecordResourceProperties {
   provisioningState?: PtrRecordProvisioningState;
 }
 
-@doc("PointerRecord Resource")
+@doc("Pointer record resource")
 @added(Versions.v2024_06_24_preview)
 model PtrRecordResource is ProxyResource<PtrRecordResourceProperties> {
   @doc("The name of resource.")
