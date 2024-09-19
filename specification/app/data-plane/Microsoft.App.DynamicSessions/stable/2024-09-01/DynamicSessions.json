@@ -345,9 +345,9 @@
         }
       }
     },
-    "/files/upload": {
+    "/files:uploadFile": {
       "post": {
-        "operationId": "UploadFile",
+        "operationId": "SessionResourceFiles_UploadFile",
         "description": "Upload a file to a session.",
         "consumes": [
           "multipart/form-data"
@@ -357,10 +357,10 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SessionIdentifier"
+            "$ref": "#/parameters/SessionresourceFilePathParameter"
           },
           {
-            "$ref": "#/parameters/SessionresourceFilePathParameter"
+            "$ref": "#/parameters/SessionIdentifier"
           },
           {
             "name": "file",
@@ -388,6 +388,11 @@
                 "description": "String error code indicating what went wrong."
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "SessionResourceFiles_UploadFile": {
+            "$ref": "./examples/SessionResourceFiles_UploadFile.json"
           }
         }
       }

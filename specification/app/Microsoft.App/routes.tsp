@@ -66,23 +66,21 @@ interface SessionResourceFiles {
       content: bytes;
     }
   >;
+
+  #suppress "@azure-tools/typespec-azure-core/byos" ""
+  @doc("Upload a file to a session.")
+  uploadFile is SessionOperations.ResourceCollectionAction<
+    SessionResourceFile,
+    {
+      ...SessionresourceFilePathParameter;
+
+      @doc("The content type for the operation. Always multipart/form-data for this operation.")
+      @header("content-type")
+      contentType: "multipart/form-data";
+
+      @doc("The file to upload.")
+      file: bytes;
+    },
+    SessionResourceFile
+  >;
 }
-
-#suppress "@azure-tools/typespec-azure-core/byos" ""
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations" ""
-@doc("Upload a file to a session.")
-@route("files/upload")
-op uploadFile is Foundations.Operation<
-  {
-    ...SessionIdentifier;
-    ...SessionresourceFilePathParameter;
-
-    @doc("The content type for the operation. Always multipart/form-data for this operation.")
-    @header("content-type")
-    contentType: "multipart/form-data";
-
-    @doc("The file to upload.")
-    file: bytes;
-  },
-  SessionResourceFile
->;
