@@ -10,4 +10,5 @@ typescript:
   output-folder: "$(typescript-sdks-folder)/mobilepacketcore/arm-mobilepacketcore"
   payload-flattening-threshold: 1
   generate-metadata: true
+  clear-output-folder: true
 ```
