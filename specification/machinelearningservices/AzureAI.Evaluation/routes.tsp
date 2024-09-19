@@ -116,13 +116,18 @@ interface EvaluationSchedules {
     },
     PagedEvaluationSchedule
   >;
-  
+
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Waiting for bug fix: https://github.com/Azure/typespec-azure-pr/issues/3739."
   @doc("List evaluations under a schedule")
   @route("/evaluations/schedules/{id}/jobs")
   @get
   listScheduleEvaluations is Azure.Core.Foundations.Operation<
     {
+      @doc("Identifier of the evaluation schedule.")
+      @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_]*$")
+      @maxLength(254)
+      @path
+      id: string;
       ...StandardListQueryParameters;
     },
     PagedEvaluation
