@@ -3005,7 +3005,7 @@
           "V2WorkspaceConnectionResource"
         ],
         "summary": "Get models under the Azure ML workspace for all Azure OpenAI connections that the user can deploy.",
-        "operationId": "Connection_ListModels",
+        "operationId": "Connection_GetAllModels",
         "produces": [
           "application/json"
         ],
@@ -4077,7 +4077,8 @@
           "$ref": "#/definitions/EndpointDeploymentModel"
         },
         "raiPolicyName": {
-          "type": "string"
+          "type": "string",
+          "description": "The name of RAI policy."
         },
         "sku": {
           "$ref": "#/definitions/CognitiveServicesSku"
