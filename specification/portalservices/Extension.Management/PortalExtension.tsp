@@ -51,13 +51,6 @@ interface PortalExtensions {
   /**
    * Deletes the portal extension.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Azure specs should not be using decorator " $extension " from @typespec/openapi or @azure-tools/typespec-autorest. They will not apply to other emitter."
-  @OpenAPI.extension(
-    "x-ms-long-running-operation-options",
-    {
-      `final-state-via`: "azure-async-operation",
-    }
-  )
   delete is ArmResourceDeleteWithoutOkAsync<PortalExtension>;
 
   /**
@@ -73,13 +66,6 @@ interface PortalExtensions {
   /**
    * Alters portal extension source files.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Azure specs should not be using decorator " $extension " from @typespec/openapi or @azure-tools/typespec-autorest. They will not apply to other emitter."
-  @OpenAPI.extension(
-    "x-ms-long-running-operation-options",
-    {
-      `final-state-via`: "azure-async-operation",
-    }
-  )
   alter is ArmResourceActionAsync<PortalExtension, PortalExtensionAlter, never>;
 
   /**
@@ -94,13 +80,6 @@ interface PortalExtensions {
   /**
    * Exports the extension.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Azure specs should not be using decorator " $extension " from @typespec/openapi or @azure-tools/typespec-autorest. They will not apply to other emitter."
-  @OpenAPI.extension(
-    "x-ms-long-running-operation-options",
-    {
-      `final-state-via`: "azure-async-operation",
-    }
-  )
   export is ArmResourceActionAsync<
     PortalExtension,
     PortalExtensionExport,

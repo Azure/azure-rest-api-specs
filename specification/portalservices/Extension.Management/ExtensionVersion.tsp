@@ -52,13 +52,6 @@ interface PortalExtensionVersions {
   /**
    * Deletes the portal extension.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Azure specs should not be using decorator " $extension " from @typespec/openapi or @azure-tools/typespec-autorest. They will not apply to other emitter."
-  @OpenAPI.extension(
-    "x-ms-long-running-operation-options",
-    {
-      `final-state-via`: "azure-async-operation",
-    }
-  )
   delete is ArmResourceDeleteWithoutOkAsync<ExtensionVersion>;
 
   /**
