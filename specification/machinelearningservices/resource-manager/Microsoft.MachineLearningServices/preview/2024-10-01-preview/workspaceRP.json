@@ -4361,6 +4361,17 @@
       },
       "x-ms-discriminator-value": "CustomKeys"
     },
+    "DefaultActionType": {
+      "enum": [
+        "Deny",
+        "Allow"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "DefaultActionType",
+        "modelAsString": true
+      }
+    },
     "DefaultResourceProvisioningState": {
       "enum": [
         "NotStarted",
@@ -5145,6 +5156,18 @@
         }
       }
     },
+    "FirewallSku": {
+      "description": "Firewall Sku used for FQDN Rules",
+      "enum": [
+        "Standard",
+        "Basic"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "FirewallSku",
+        "modelAsString": true
+      }
+    },
     "FqdnOutboundRule": {
       "description": "FQDN Outbound Rule for the managed network of a machine learning workspace.",
       "type": "object",
@@ -5159,6 +5182,15 @@
         }
       },
       "x-ms-discriminator-value": "FQDN"
+    },
+    "IPRule": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "An IPv4 address range in CIDR notation, such as '124.56.78.91' (simple IP address) or '124.56.78.0/24' (all addresses that start with 124.56.78). Value could be 'Allow' or  'Deny'.",
+          "type": "string"
+        }
+      }
     },
     "IdentityForCmk": {
       "description": "Identity object used for encryption.",
@@ -5323,6 +5355,10 @@
       "description": "Managed Network settings for a machine learning workspace.",
       "type": "object",
       "properties": {
+        "firewallSku": {
+          "description": "Firewall Sku used for FQDN Rules",
+          "$ref": "#/definitions/FirewallSku"
+        },
         "isolationMode": {
           "description": "Isolation mode for the managed network of a machine learning workspace.",
           "$ref": "#/definitions/IsolationMode"
@@ -5453,6 +5489,31 @@
           "minLength": 1,
           "pattern": "[a-zA-Z0-9_]",
           "type": "string"
+        }
+      }
+    },
+    "NetworkAcls": {
+      "type": "object",
+      "properties": {
+        "bypass": {
+          "type": "string"
+        },
+        "defaultAction": {
+          "description": "The default action when no rule from ipRules and from virtualNetworkRules match. This is only used after the bypass property has been evaluated.",
+          "$ref": "#/definitions/DefaultActionType"
+        },
+        "ipRules": {
+          "description": "Rules governing the accessibility of a resource from a specific ip address or ip range.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IPRule"
+          }
+        },
+        "resourceAccessRules": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         }
       }
     },
@@ -7035,6 +7096,10 @@
             "read"
           ]
         },
+        "networkAcls": {
+          "description": "A set of rules governing the network accessibility of the workspace.",
+          "$ref": "#/definitions/NetworkAcls"
+        },
         "notebookInfo": {
           "description": "The notebook info of Azure ML workspace.",
           "$ref": "#/definitions/NotebookResourceInfo",
@@ -7211,6 +7276,10 @@
         },
         "managedNetwork": {
           "$ref": "#/definitions/ManagedNetworkSettings"
+        },
+        "networkAcls": {
+          "description": "A set of rules governing the network accessibility of the workspace.",
+          "$ref": "#/definitions/NetworkAcls"
         },
         "primaryUserAssignedIdentity": {
           "description": "The user assigned identity resource id that represents the workspace identity.",
