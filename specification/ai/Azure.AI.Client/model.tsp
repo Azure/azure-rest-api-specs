@@ -17,7 +17,10 @@ namespace Azure.AI.Client;
 
 @doc("to do")
 model ConnectionDetails {
-  @doc("to do")
+  @doc("The name of the resource")
+  name: string;
+
+  @doc("The properties of the resouce")
   properties: ConnectionProperties;
 }
 
