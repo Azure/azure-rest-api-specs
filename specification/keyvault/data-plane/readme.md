@@ -29,6 +29,23 @@ openapi-type: data-plane
 tag: package-False
 ```
 
+### Tag: package-preview-7.6-preview.2
+
+These settings apply only when `--tag=package-preview-7.6-preview.2` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-7.6-preview.2'
+input-file:
+  - Microsoft.KeyVault/preview/7.6-preview.2/backuprestore.json
+  - Microsoft.KeyVault/preview/7.6-preview.2/certificates.json
+  - Microsoft.KeyVault/preview/7.6-preview.2/common.json
+  - Microsoft.KeyVault/preview/7.6-preview.2/keys.json
+  - Microsoft.KeyVault/preview/7.6-preview.2/rbac.json
+  - Microsoft.KeyVault/preview/7.6-preview.2/secrets.json
+  - Microsoft.KeyVault/preview/7.6-preview.2/securitydomain.json
+  - Microsoft.KeyVault/preview/7.6-preview.2/settings.json
+  - Microsoft.KeyVault/preview/7.6-preview.2/storage.json
+```
+
 ### Tag: package-False
 
 These settings apply only when `--tag=package-False` is specified on the command line.
