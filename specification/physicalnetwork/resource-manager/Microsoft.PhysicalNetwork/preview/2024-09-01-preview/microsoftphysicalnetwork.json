@@ -224,6 +224,13 @@
           "type": "string",
           "description": "The device owner's Service Tree Id"
         },
+        "additionalIps": {
+          "type": "array",
+          "description": "Additional Device Interface IP addresses",
+          "items": {
+            "type": "string"
+          }
+        },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
           "description": "Provisioning state",
@@ -243,7 +250,8 @@
         "cloudType",
         "deploymentType",
         "dcRackLocation",
-        "serviceTreeId"
+        "serviceTreeId",
+        "additionalIps"
       ]
     },
     "NetworkDeviceResource": {
