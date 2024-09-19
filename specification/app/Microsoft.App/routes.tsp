@@ -23,7 +23,7 @@ alias SessionOperations = Azure.Core.ResourceOperations<SessionTraits>;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" ""
 @doc("Execute code in a session.")
-@route("/codeExecute")
+@route("/execute")
 op executeCode is Foundations.Operation<
   {
     ...SessionIdentifier;
@@ -37,9 +37,10 @@ op executeCode is Foundations.Operation<
   Foundations.ErrorResponse
 >;
 
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" ""
 @doc("Get the code execution result.")
-@route("/codeExecutionResult")
-op getCodeExecutionResult is RpcOperation<
+@route("/execute/{executionId}")
+op getCodeExecutionResult is Foundations.Operation<
   {
     ...SessionIdentifier;
     ...CodeExecutionIdentifier;

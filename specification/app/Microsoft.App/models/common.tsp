@@ -25,7 +25,7 @@ model SessionIdentifier {
 @doc("Session code execution identifier query parameter.")
 model CodeExecutionIdentifier {
   @doc("The identifier of code execution.")
-  @query
+  @path
   @extension("x-ms-parameter-location", "client")
   executionId: string;
 }

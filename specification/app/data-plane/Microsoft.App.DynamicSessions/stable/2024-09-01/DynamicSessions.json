@@ -52,7 +52,7 @@
   },
   "tags": [],
   "paths": {
-    "/codeExecute": {
+    "/execute": {
       "post": {
         "operationId": "ExecuteCode",
         "description": "Execute code in a session.",
@@ -119,7 +119,7 @@
         }
       }
     },
-    "/codeExecutionResult": {
+    "/execute/{executionId}": {
       "get": {
         "operationId": "GetCodeExecutionResult",
         "description": "Get the code execution result.",
@@ -862,7 +862,7 @@
     },
     "CodeExecutionIdentifier": {
       "name": "executionId",
-      "in": "query",
+      "in": "path",
       "description": "The identifier of code execution.",
       "required": true,
       "type": "string",
