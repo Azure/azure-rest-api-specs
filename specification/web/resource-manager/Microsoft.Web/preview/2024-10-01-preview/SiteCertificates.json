@@ -557,12 +557,22 @@
         "operationId": "SiteCertificates_UpdateSlot",
         "parameters": [
           {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
             "name": "siteName",
             "in": "path",
             "description": "Name of the site.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "slot",
+            "in": "path",
+            "description": "Name of the deployment slot. If a slot is not specified, the API will create a binding for the production slot.",
             "required": true,
             "type": "string"
           },
@@ -581,16 +591,6 @@
             "schema": {
               "$ref": "./CommonDefinitions.json#/definitions/CertificatePatchResource"
             }
-          },
-          {
-            "name": "slot",
-            "in": "path",
-            "description": "Name of the deployment slot. If a slot is not specified, the API will create a binding for the production slot.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
