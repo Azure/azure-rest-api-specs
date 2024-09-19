@@ -7,6 +7,48 @@
   },
   "paths": {},
   "definitions": {
+    "StorageBlobAccessTier": {
+      "type": "string",
+      "description": "The access tier of the blob.",
+      "enum": [
+        "Hot",
+        "Cool",
+        "Cold",
+        "Archive",
+        "Default"
+      ],
+      "x-ms-enum": {
+        "name": "StorageBlobAccessTier",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Hot",
+            "value": "Hot",
+            "description": "The blob is in access tier Hot"
+          },
+          {
+            "name": "Cool",
+            "value": "Cool",
+            "description": "The blob is in access tier Cool"
+          },
+          {
+            "name": "Cold",
+            "value": "Cold",
+            "description": "The blob is in access tier Cold"
+          },
+          {
+            "name": "Archive",
+            "value": "Archive",
+            "description": "The blob is in access tier Archive"
+          },
+          {
+            "name": "Default",
+            "value": "Default",
+            "description": "The blob is in access tier Default(Inferred)"
+          }
+        ]
+      }
+    },
     "StorageBlobCreatedEventData": {
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Storage.BlobCreated event.",
       "type": "object",
@@ -45,6 +87,10 @@
           "description": "The type of blob.",
           "type": "string"
         },
+        "accessTier": {
+          "$ref": "#/definitions/StorageBlobAccessTier",
+          "description": "The current tier of the blob."
+        },
         "url": {
           "description": "The path to the blob.",
           "type": "string"
@@ -61,7 +107,10 @@
           "description": "For service use only. Diagnostic data occasionally included by the Azure Storage service. This property should be ignored by event consumers.",
           "type": "object"
         }
-      }
+      },
+      "required": [
+        "accessTier"
+      ]
     },
     "StorageBlobDeletedEventData": {
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Storage.BlobDeleted event.",
@@ -271,6 +320,9 @@
         "tierToCoolSummary": {
           "$ref": "#/definitions/StorageLifecyclePolicyActionSummaryDetail"
         },
+        "tierToColdSummary": {
+          "$ref": "#/definitions/StorageLifecyclePolicyActionSummaryDetail"
+        },
         "tierToArchiveSummary": {
           "$ref": "#/definitions/StorageLifecyclePolicyActionSummaryDetail"
         }
@@ -325,6 +377,14 @@
           "description": "The type of blob.",
           "type": "string"
         },
+        "accessTier": {
+          "$ref": "#/definitions/StorageBlobAccessTier",
+          "description": "The current tier of the blob."
+        },
+        "previousTier": {
+          "$ref": "#/definitions/StorageBlobAccessTier",
+          "description": "The previous tier of the blob."
+        },
         "url": {
           "description": "The path to the blob.",
           "type": "string"
@@ -341,7 +401,11 @@
           "description": "For service use only. Diagnostic data occasionally included by the Azure Storage service. This property should be ignored by event consumers.",
           "type": "object"
         }
-      }
+      },
+      "required": [
+        "accessTier",
+        "previousTier"
+      ]
     },
     "StorageAsyncOperationInitiatedEventData": {
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Storage.AsyncOperationInitiated event.",
