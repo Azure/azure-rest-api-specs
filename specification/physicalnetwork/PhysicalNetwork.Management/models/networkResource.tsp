@@ -50,6 +50,10 @@ model NetworkDeviceProperties {
   @doc("The device owner's Service Tree Id")
   serviceTreeId: string;
 
+  @Versioning.added(Versions.v2024_09_01_preview)
+  @doc("Additional Device Interface IP addresses")
+  additionalIps: Array<string>;
+
   @doc("Provisioning state")
   @visibility("read")
   provisioningState?: ProvisioningState;
