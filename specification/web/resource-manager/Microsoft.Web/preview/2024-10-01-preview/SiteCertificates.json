@@ -31,7 +31,8 @@
             "in": "path",
             "description": "Name of the site.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9]*$"
           },
           {
             "$ref": "#/parameters/subscriptionIdParameter"
@@ -80,7 +81,8 @@
             "in": "path",
             "description": "Name of the site.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9]*$"
           },
           {
             "name": "name",
@@ -128,13 +130,6 @@
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "name": "siteName",
-            "in": "path",
-            "description": "Name of the site.",
-            "required": true,
-            "type": "string"
-          },
-          {
             "name": "name",
             "in": "path",
             "description": "Name of the certificate.",
@@ -159,6 +154,12 @@
         ],
         "responses": {
           "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/Certificate"
+            }
+          },
+          "201": {
             "description": "OK.",
             "schema": {
               "$ref": "./CommonDefinitions.json#/definitions/Certificate"
@@ -306,7 +307,8 @@
             "in": "path",
             "description": "Name of the site.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9]*$"
           },
           {
             "name": "slot",
@@ -337,7 +339,7 @@
           }
         },
         "x-ms-examples": {
-          "List Certificates by resource group": {
+          "List Certificates by resource group for a slot": {
             "$ref": "./examples/ListSiteCertificatesByResourceGroupSlot.json"
           }
         },
@@ -362,7 +364,8 @@
             "in": "path",
             "description": "Name of the site.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9]*$"
           },
           {
             "name": "slot",
@@ -414,12 +417,22 @@
         "operationId": "SiteCertificates_CreateOrUpdateSlot",
         "parameters": [
           {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
             "name": "siteName",
             "in": "path",
             "description": "Name of the site.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "slot",
+            "in": "path",
+            "description": "Name of the deployment slot. If a slot is not specified, the API will create a binding for the production slot.",
             "required": true,
             "type": "string"
           },
@@ -440,21 +453,17 @@
             }
           },
           {
-            "name": "slot",
-            "in": "path",
-            "description": "Name of the deployment slot. If a slot is not specified, the API will create a binding for the production slot.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
             "$ref": "#/parameters/apiVersionParameter"
           }
         ],
         "responses": {
           "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/Certificate"
+            }
+          },
+          "201": {
             "description": "OK.",
             "schema": {
               "$ref": "./CommonDefinitions.json#/definitions/Certificate"
@@ -468,7 +477,7 @@
           }
         },
         "x-ms-examples": {
-          "Create Or Update Certificate": {
+          "Create Or Update Certificate for slot": {
             "$ref": "./examples/CreateOrUpdateSiteCertificateSlot.json"
           }
         }
@@ -526,7 +535,7 @@
           }
         },
         "x-ms-examples": {
-          "Delete Certificate": {
+          "Delete Certificate for slot": {
             "$ref": "./examples/DeleteSiteCertificateSlot.json"
           }
         }
@@ -594,7 +603,7 @@
           }
         },
         "x-ms-examples": {
-          "Patch Certificate": {
+          "Patch Certificate for slot": {
             "$ref": "./examples/PatchSiteCertificateSlot.json"
           }
         }
@@ -608,7 +617,8 @@
       "in": "path",
       "description": "Your Azure subscription ID. This is a GUID-formatted string (e.g. 00000000-0000-0000-0000-000000000000).",
       "required": true,
-      "type": "string"
+      "type": "string",
+      "x-ms-parameter-location": "client"
     },
     "resourceGroupNameParameter": {
       "name": "resourceGroupName",
@@ -626,7 +636,8 @@
       "in": "query",
       "description": "API Version",
       "required": true,
-      "type": "string"
+      "type": "string",
+      "x-ms-parameter-location": "client"
     }
   },
   "securityDefinitions": {
