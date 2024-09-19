@@ -58,15 +58,6 @@ interface SessionResourceFiles {
   @doc("Delete the file.")
   deleteFile is SessionOperations.ResourceDelete<SessionResourceFile>;
 
-  @doc("Upload a file to a session.")
-  downloadFile is SessionOperations.ResourceAction<
-    SessionResourceFile,
-    {},
-    {
-      content: bytes;
-    }
-  >;
-
   #suppress "@azure-tools/typespec-azure-core/byos" ""
   @doc("Upload a file to a session.")
   uploadFile is SessionOperations.ResourceCollectionAction<
@@ -84,3 +75,16 @@ interface SessionResourceFiles {
     SessionResourceFile
   >;
 }
+
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" ""
+@doc("Upload a file to a session.")
+@route("/files/{fileName}/content")
+op downloadFile is Foundations.Operation<
+  {
+    ...SessionIdentifier;
+    ...SessionResourceFileNameParameter;
+  },
+  {
+    content: bytes;
+  }
+>;

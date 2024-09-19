@@ -290,23 +290,19 @@
         }
       }
     },
-    "/files/{fileName}:downloadFile": {
-      "post": {
-        "operationId": "SessionResourceFiles_DownloadFile",
+    "/files/{fileName}/content": {
+      "get": {
+        "operationId": "DownloadFile",
         "description": "Upload a file to a session.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "fileName",
-            "in": "path",
-            "description": "The name of the file.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/SessionIdentifier"
           },
           {
-            "$ref": "#/parameters/SessionIdentifier"
+            "$ref": "#/parameters/SessionResourceFileNameParameter"
           }
         ],
         "responses": {
@@ -339,8 +335,8 @@
           }
         },
         "x-ms-examples": {
-          "SessionResourceFiles_DownloadFile": {
-            "$ref": "./examples/SessionResourceFiles_DownloadFile.json"
+          "DownloadFile": {
+            "$ref": "./examples/DownloadFile.json"
           }
         }
       }
@@ -839,19 +835,6 @@
       "required": [
         "value"
       ]
-    },
-    "SessionResourceFileNameParameter": {
-      "type": "object",
-      "description": "The session resource file name parameter.",
-      "properties": {
-        "fileName": {
-          "type": "string",
-          "description": "The name of the file."
-        }
-      },
-      "required": [
-        "fileName"
-      ]
     }
   },
   "parameters": {
@@ -880,6 +863,14 @@
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "client"
+    },
+    "SessionResourceFileNameParameter": {
+      "name": "fileName",
+      "in": "path",
+      "description": "The name of the file.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
     },
     "SessionresourceFilePathParameter": {
       "name": "path",
