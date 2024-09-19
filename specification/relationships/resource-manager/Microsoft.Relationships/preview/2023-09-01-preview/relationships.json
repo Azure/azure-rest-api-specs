@@ -434,46 +434,6 @@
     }
   },
   "definitions": {
-    "BaseRelationshipProperties": {
-      "type": "object",
-      "description": "Base relationship properties.",
-      "properties": {
-        "sourceId": {
-          "type": "string",
-          "description": "The relationship source resource id.",
-          "readOnly": true
-        },
-        "targetId": {
-          "type": "string",
-          "description": "The relationship target resource id."
-        },
-        "targetTenant": {
-          "type": "string",
-          "description": "The relationship target tenant id."
-        },
-        "originInformation": {
-          "$ref": "#/definitions/RelationshipOriginInformation",
-          "description": "Information about the origin of the relationship.",
-          "readOnly": true
-        },
-        "metadata": {
-          "$ref": "#/definitions/RelationshipMetadata",
-          "description": "Metadata about the relationship.",
-          "readOnly": true
-        },
-        "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
-          "description": "The provisioning state of the relationship.",
-          "readOnly": true
-        }
-      },
-      "required": [
-        "sourceId",
-        "targetId",
-        "originInformation",
-        "metadata"
-      ]
-    },
     "DependencyOfRelationship": {
       "type": "object",
       "description": "Defines a dependencyOf relationship resource.",
@@ -495,11 +455,13 @@
       "properties": {
         "sourceId": {
           "type": "string",
+          "format": "arm-id",
           "description": "The relationship source resource id.",
           "readOnly": true
         },
         "targetId": {
           "type": "string",
+          "format": "arm-id",
           "description": "The relationship target resource id."
         },
         "targetTenant": {
@@ -679,12 +641,24 @@
       "properties": {
         "sourceId": {
           "type": "string",
+          "format": "arm-id",
           "description": "The relationship source resource id.",
           "readOnly": true
         },
         "targetId": {
           "type": "string",
-          "description": "The relationship target resource id."
+          "format": "arm-id",
+          "description": "The relationship target resource id.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Management/serviceGroups",
+                "scopes": [
+                  "tenant"
+                ]
+              }
+            ]
+          }
         },
         "targetTenant": {
           "type": "string",

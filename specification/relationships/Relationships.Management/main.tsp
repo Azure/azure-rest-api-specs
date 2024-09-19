@@ -21,6 +21,7 @@ namespace Microsoft.Relationships;
 enum Versions {
   /** 2023-09-01-preview version */
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
   `2023-09-01-preview`,
 }
@@ -89,13 +90,13 @@ union ProvisioningState {
 }
 
 @doc("Base relationship properties.")
-model BaseRelationshipProperties {
+model BaseRelationshipProperties<AllowedTargetResourceTypes extends ArmResourceIdentifierAllowedResource[] = never> {
   @doc("The relationship source resource id.")
   @visibility("read")
-  sourceId: string;
+  sourceId: armResourceIdentifier;
 
   @doc("The relationship target resource id.")
-  targetId: string;
+  targetId: armResourceIdentifier<AllowedTargetResourceTypes>;
 
   @doc("The relationship target tenant id.")
   targetTenant?: string;
@@ -137,7 +138,12 @@ model DependencyOfRelationship
  */
 
 @doc("ServiceGroupMember relationship properties.")
-model ServiceGroupMemberRelationshipProperties is BaseRelationshipProperties;
+model ServiceGroupMemberRelationshipProperties is BaseRelationshipProperties<[
+  {
+    type: "Microsoft.Management/serviceGroups";
+    scopes: ["tenant"];
+  }
+]> ;
 
 @doc("Defines a ServiceGroupMember relationship resource.")
 model ServiceGroupMemberRelationship
