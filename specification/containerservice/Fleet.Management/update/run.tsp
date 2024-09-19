@@ -361,7 +361,7 @@ interface UpdateRuns {
       IfMatchParameters<UpdateRun>
   >;
 
-  listByParent is ArmResourceListByParent<UpdateRun>;
+  listByFleet is ArmResourceListByParent<UpdateRun>;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "Existing API"
   @doc("Starts an UpdateRun.")

@@ -124,5 +124,5 @@ interface FleetMembers {
       IfMatchParameters<FleetMember>
   >;
 
-  listByParent is ArmResourceListByParent<FleetMember>;
+  listByFleet is ArmResourceListByParent<FleetMember>;
 }

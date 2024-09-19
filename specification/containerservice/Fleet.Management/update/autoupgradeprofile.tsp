@@ -122,5 +122,5 @@ interface AutoUpgradeProfiles {
     BaseParameters<AutoUpgradeProfile> & IfMatchParameters<AutoUpgradeProfile>
   >;
 
-  listByParent is ArmResourceListByParent<AutoUpgradeProfile>;
+  listByFleet is ArmResourceListByParent<AutoUpgradeProfile>;
 }

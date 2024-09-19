@@ -79,5 +79,5 @@ interface FleetUpdateStrategies {
       IfMatchParameters<FleetUpdateStrategy>
   >;
 
-  listByParent is ArmResourceListByParent<FleetUpdateStrategy>;
+  listByFleet is ArmResourceListByParent<FleetUpdateStrategy>;
 }
