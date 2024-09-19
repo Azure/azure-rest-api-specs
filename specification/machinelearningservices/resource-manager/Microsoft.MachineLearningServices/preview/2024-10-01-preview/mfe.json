@@ -18950,10 +18950,9 @@
         },
         "environmentVariables": {
           "description": "Environment variables configuration for the inference pool.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string",
-            "x-nullable": true
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/StringStringKeyValuePair"
           },
           "x-nullable": true
         },
@@ -23566,10 +23565,9 @@
         },
         "properties": {
           "description": "Property dictionary. Properties can be added, but not removed or altered.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string",
-            "x-nullable": true
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/StringStringKeyValuePair"
           },
           "x-nullable": true
         }
@@ -25537,6 +25535,18 @@
           "items": {
             "type": "string"
           }
+        }
+      },
+      "additionalProperties": false
+    },
+    "StringStringKeyValuePair": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string"
         }
       },
       "additionalProperties": false
