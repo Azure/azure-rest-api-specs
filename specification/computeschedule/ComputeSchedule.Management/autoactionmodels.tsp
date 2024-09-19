@@ -282,3 +282,9 @@ model AutoActionProperties {
 model AutoAction is TrackedResource<AutoActionProperties> {
   ...ResourceNameParameter<AutoAction>;
 }
+
+@added(Microsoft.ComputeSchedule.Versions.`2024-08-01-preview`)
+@doc("The auto action extension")
+model AutoActionResources is ExtensionResource<AutoActionProperties> {
+  ...ResourceNameParameter<AutoActionResources>;
+}
