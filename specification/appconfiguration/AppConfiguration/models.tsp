@@ -151,36 +151,6 @@ model Error {
   status?: int32;
 }
 
-@doc("An object containing specific information about an error.")
-@error
-model InnerError {
-  @doc("One of a server-defined set of error codes.")
-  code?: string;
-
-  #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "Property 'innererror' having the same name as its enclosing model will cause problems with C# code generation."
-  @doc("An object containing more specific information than the current object about the error.")
-  innererror?: InnerError;
-}
-
-@doc("The details of an error.")
-@error
-model ErrorDetail {
-  @doc("One of a server-defined set of error codes.")
-  code: string;
-
-  @doc("A human-readable representation of the error.")
-  message: string;
-
-  @doc("The target of the error.")
-  target?: string;
-
-  @doc("An array of details about specific errors that led to this reported error.")
-  details?: ErrorDetail[];
-
-  @doc("An object containing more specific information than the current object about the error.")
-  innererror?: InnerError;
-}
-
 @doc("The result of a list request.")
 @pagedResult
 model KeyValueListResult {
@@ -343,6 +313,8 @@ model Label {
   @doc("The name of the label.")
   name?: string;
 }
+
+model ErrorDetail is Foundations.Error;
 
 @doc("Details of a long running operation.")
 model OperationDetails {
