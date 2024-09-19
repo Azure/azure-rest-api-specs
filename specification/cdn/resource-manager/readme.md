@@ -42,8 +42,7 @@ input-file:
   - Microsoft.Cdn/stable/2024-09-01/cdn.json
   - Microsoft.Cdn/stable/2024-09-01/cdnwebapplicationfirewall.json
 suppressions:
-  - code: MissingResourceId
-    from: cdn.json
+  - code: MISSING_RESOURCE_ID
     reason: Keeping it for legacy tooling
 ```
 
