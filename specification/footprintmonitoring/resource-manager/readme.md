@@ -29,7 +29,16 @@ These are the global settings for the Footprint Monitoring API.
 openapi-type: arm
 title: FootprintMonitoringManagementClient
 openapi-subtype: rpaas
-tag: package-2024-08-21-preview
+tag: package-2024-09-16-preview
+```
+
+### Tag: package-2024-09-16-preview
+
+These settings apply only when `--tag=package-2024-09-16-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-09-16-preview'
+input-file:
+  - Microsoft.FootprintMonitoring/preview/2024-09-16-preview/footprintProfiles.json
 ```
 
 ### Tag: package-2024-08-21-preview

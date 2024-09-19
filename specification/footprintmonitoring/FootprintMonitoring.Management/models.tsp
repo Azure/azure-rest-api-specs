@@ -311,7 +311,7 @@ model MeasurementEndpointProperties {
    * The value of a measurement endpoint.
    */
   @maxLength(1024)
-  @pattern("^[a-z0-9\\*]+([\\-\\.]{1}[a-z0-9]+)*\\.[a-z]{2,5}(:[0-9]{1,5})?$")
+  @pattern("^[a-z0-9\\*]+([\\-\\.]{1}[a-z0-9]+)*\\.[a-z]{2,}(:[0-9]{1,5})?$")
   endpoint: string;
 
   /**
