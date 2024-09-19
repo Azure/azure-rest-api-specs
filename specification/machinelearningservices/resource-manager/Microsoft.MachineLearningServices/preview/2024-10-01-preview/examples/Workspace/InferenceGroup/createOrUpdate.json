@@ -9,9 +9,10 @@
     "body": {
       "properties": {
         "description": "string",
-        "properties": {
-          "string": "string"
-        },
+        "properties": [
+          { "string": "string" },
+          { "key1": "value1" }
+        ],
         "environmentConfiguration": {
           "environmentId": "azureml://registries/test-registry/models/enginefeed/versions/1",
           "environmentVariables": {
@@ -72,9 +73,10 @@
         "type": "string",
         "properties": {
           "description": "string",
-          "properties": {
-            "string": "string"
-          },
+          "properties": [
+            { "string": "string" },
+            { "key1": "value1" }
+          ],
           "provisioningState": "Updating",
           "environmentConfiguration": {
             "environmentId": "azureml://registries/test-registry/models/enginefeed/versions/1",
@@ -148,15 +150,17 @@
         "type": "string",
         "properties": {
           "description": "string",
-          "properties": {
-            "string": "string"
-          },
+          "properties": [
+            { "string": "string" },
+            { "key1": "value1" }
+          ],
           "provisioningState": "Deleting",
           "environmentConfiguration": {
             "environmentId": "azureml://registries/test-registry/models/enginefeed/versions/1",
-            "environmentVariables": {
-              "string": "string"
-            },
+            "environmentVariables": [
+              { "string": "string" },
+              { "key1": "value1" }
+            ],
             "livenessProbe": {
               "failureThreshold": 1,
               "successThreshold": 1,
