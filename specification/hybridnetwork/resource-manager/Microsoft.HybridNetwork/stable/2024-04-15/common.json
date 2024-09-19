@@ -1,0 +1,611 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "HybridNetworkManagementClient",
+    "description": "The definitions in this swagger specification will be used to manage the Hybrid Network resources.",
+    "version": "2024-04-15"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {},
+  "definitions": {
+    "ReferencedResource": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource ID."
+        }
+      },
+      "description": "Reference to another resource.",
+      "x-ms-azure-resource": true
+    },
+    "CustomLocationResourceId": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^/[sS][uU][bB][sS][cC][rR][iI][pP][tT][iI][oO][nN][sS]/[^/?#]+/[rR][eE][sS][oO][uU][rR][cC][eE][gG][rR][oO][uU][pP][sS]/[^/?#]+/[pP][rR][oO][vV][iI][dD][eE][rR][sS]/[mM][iI][cC][rR][oO][sS][oO][fF][tT]\\.[eE][xX][tT][eE][nN][dD][eE][dD][lL][oO][cC][aA][tT][iI][oO][nN]/[cC][uU][sS][tT][oO][mM][lL][oO][cC][aA][tT][iI][oO][nN][sS]/[^/?#]+$",
+          "description": "Azure ARC custom location resource ID."
+        }
+      },
+      "description": "Reference to an Azure ARC custom location resource.",
+      "x-ms-azure-resource": true
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "readOnly": true,
+      "description": "The current provisioning state.",
+      "enum": [
+        "Unknown",
+        "Succeeded",
+        "Accepted",
+        "Deleting",
+        "Failed",
+        "Canceled",
+        "Deleted",
+        "Converging"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true
+      }
+    },
+    "NetworkFunctionType": {
+      "type": "string",
+      "description": "The network function type.",
+      "enum": [
+        "Unknown",
+        "VirtualNetworkFunction",
+        "ContainerizedNetworkFunction"
+      ],
+      "x-ms-mutability": [
+        "read",
+        "create"
+      ],
+      "x-ms-enum": {
+        "name": "NetworkFunctionType",
+        "modelAsString": true
+      }
+    },
+    "NFVIType": {
+      "type": "string",
+      "description": "The NFVI type.",
+      "enum": [
+        "Unknown",
+        "AzureArcKubernetes",
+        "AzureCore",
+        "AzureOperatorNexus"
+      ],
+      "x-ms-enum": {
+        "name": "NFVIType",
+        "modelAsString": true
+      }
+    },
+    "backingResourcePublicNetworkAccess": {
+      "type": "string",
+      "x-ms-mutability": [
+        "read",
+        "create"
+      ],
+      "description": "The backing resource network access type.",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "backingResourcePublicNetworkAccess",
+        "modelAsString": true
+      }
+    },
+    "TagsObject": {
+      "type": "object",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags."
+        }
+      },
+      "description": "Tags object for patch operations."
+    },
+    "NetworkFunctionApplication": {
+      "description": "Network function application definition.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the network function application."
+        },
+        "dependsOnProfile": {
+          "description": "Depends on profile definition.",
+          "$ref": "#/definitions/DependsOnProfile"
+        }
+      }
+    },
+    "DependsOnProfile": {
+      "description": "Depends on profile definition.",
+      "type": "object",
+      "properties": {
+        "installDependsOn": {
+          "type": "array",
+          "description": "Application installation operation dependency.",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-identifiers": []
+        },
+        "uninstallDependsOn": {
+          "type": "array",
+          "description": "Application deletion operation dependency.",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-identifiers": []
+        },
+        "updateDependsOn": {
+          "type": "array",
+          "description": "Application update operation dependency.",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "ArtifactProfile": {
+      "description": "Artifact profile properties.",
+      "type": "object",
+      "properties": {
+        "artifactStore": {
+          "$ref": "#/definitions/ReferencedResource",
+          "description": "The reference to artifact store."
+        }
+      }
+    },
+    "MappingRuleProfile": {
+      "description": "Mapping rule profile properties.",
+      "type": "object",
+      "properties": {
+        "applicationEnablement": {
+          "type": "string",
+          "description": "The application enablement.",
+          "enum": [
+            "Unknown",
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "ApplicationEnablement",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "GenericParameters": {
+      "type": "object",
+      "description": "The parameters for the generic object."
+    },
+    "ConfigurationGroup": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object"
+      },
+      "description": "The configuration group in form of {key, value}."
+    },
+    "ConfigurationGroups": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/definitions/ConfigurationGroup"
+      },
+      "description": "The configuration object for the specified cluster."
+    },
+    "ManagedResourceGroupConfiguration": {
+      "description": "Managed resource group configuration.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Managed resource group name."
+        },
+        "location": {
+          "type": "string",
+          "description": "Managed resource group location."
+        }
+      }
+    },
+    "PublisherScope": {
+      "type": "string",
+      "description": "Publisher Scope.",
+      "enum": [
+        "Unknown",
+        "Private"
+      ],
+      "x-ms-enum": {
+        "name": "PublisherScope",
+        "modelAsString": true
+      }
+    },
+    "ArtifactAccessCredential": {
+      "description": "The artifact manifest credential definition.",
+      "type": "object",
+      "discriminator": "credentialType",
+      "required": [
+        "credentialType"
+      ],
+      "properties": {
+        "credentialType": {
+          "type": "string",
+          "description": "The credential type.",
+          "enum": [
+            "Unknown",
+            "AzureContainerRegistryScopedToken",
+            "AzureStorageAccountToken"
+          ],
+          "x-ms-enum": {
+            "name": "CredentialType",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "AzureContainerRegistryScopedTokenCredential": {
+      "description": "The azure container registry scoped token credential definition.",
+      "type": "object",
+      "x-ms-discriminator-value": "AzureContainerRegistryScopedToken",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ArtifactAccessCredential"
+        }
+      ],
+      "properties": {
+        "username": {
+          "type": "string",
+          "description": "The username of the credential."
+        },
+        "acrToken": {
+          "type": "string",
+          "description": "The credential value."
+        },
+        "acrServerUrl": {
+          "type": "string",
+          "description": "The Acr server url"
+        },
+        "repositories": {
+          "type": "array",
+          "description": "The repositories that could be accessed using the current credential.",
+          "items": {
+            "type": "string",
+            "description": "The repository that could be accessed using the current credential."
+          },
+          "x-ms-identifiers": []
+        },
+        "expiry": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The UTC time when credential will expire."
+        }
+      }
+    },
+    "AzureStorageAccountCredential": {
+      "description": "The azure storage account credential definition.",
+      "type": "object",
+      "x-ms-discriminator-value": "AzureStorageAccountToken",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ArtifactAccessCredential"
+        }
+      ],
+      "properties": {
+        "storageAccountId": {
+          "type": "string",
+          "description": "The storage account Id"
+        },
+        "containerCredentials": {
+          "type": "array",
+          "description": "The containers that could be accessed using the current credential.",
+          "items": {
+            "$ref": "#/definitions/AzureStorageAccountContainerCredential",
+            "description": "The container that could be accessed using the current credential."
+          },
+          "x-ms-identifiers": []
+        },
+        "expiry": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The UTC time when credential will expire."
+        }
+      }
+    },
+    "AzureStorageAccountContainerCredential": {
+      "description": "The azure storage account container credential definition.",
+      "type": "object",
+      "properties": {
+        "containerName": {
+          "type": "string",
+          "description": "The storage account container name"
+        },
+        "containerSasUri": {
+          "type": "string",
+          "description": "The storage account container sas uri"
+        }
+      }
+    },
+    "DeploymentResourceIdReference": {
+      "description": "The azure resource reference which is used for deployment.",
+      "type": "object",
+      "discriminator": "idType",
+      "required": [
+        "idType"
+      ],
+      "properties": {
+        "idType": {
+          "description": "The resource reference arm id type.",
+          "$ref": "#/definitions/IdType"
+        }
+      }
+    },
+    "SecretDeploymentResourceReference": {
+      "description": "Secret deployment resource id reference.",
+      "x-ms-discriminator-value": "Secret",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeploymentResourceIdReference"
+        }
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "x-ms-secret": true,
+          "description": "Resource ID.",
+          "x-ms-mutability": [
+            "create",
+            "update"
+          ]
+        }
+      }
+    },
+    "OpenDeploymentResourceReference": {
+      "description": "Non secret deployment resource id reference.",
+      "x-ms-discriminator-value": "Open",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeploymentResourceIdReference"
+        }
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource ID."
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "IdType": {
+      "type": "string",
+      "description": "The resource reference arm id type.",
+      "default": "Open",
+      "enum": [
+        "Unknown",
+        "Open",
+        "Secret"
+      ],
+      "x-ms-enum": {
+        "name": "idType",
+        "modelAsString": true
+      }
+    }
+  },
+  "parameters": {
+    "PublisherNameParameter": {
+      "name": "publisherName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$",
+      "maxLength": 64,
+      "description": "The name of the publisher.",
+      "x-ms-parameter-location": "method"
+    },
+    "SiteNameParameter": {
+      "name": "siteName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$",
+      "maxLength": 64,
+      "description": "The name of the network service site.",
+      "x-ms-parameter-location": "method"
+    },
+    "NetworkServiceDesignGroupNameParameter": {
+      "name": "networkServiceDesignGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$",
+      "maxLength": 64,
+      "description": "The name of the network service design group.",
+      "x-ms-parameter-location": "method"
+    },
+    "ConfigurationGroupValueNameParameter": {
+      "name": "configurationGroupValueName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$",
+      "maxLength": 64,
+      "description": "The name of the configuration group value.",
+      "x-ms-parameter-location": "method"
+    },
+    "ConfigurationGroupSchemaNameParameter": {
+      "name": "configurationGroupSchemaName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$",
+      "maxLength": 64,
+      "description": "The name of the configuration group schema.",
+      "x-ms-parameter-location": "method"
+    },
+    "NetworkServiceDesignVersionNameParameter": {
+      "name": "networkServiceDesignVersionName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)(?:-((?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\\.(?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\\+([0-9a-zA-Z-]+(?:\\.[0-9a-zA-Z-]+)*))?$",
+      "maxLength": 64,
+      "description": "The name of the network service design version. The name should conform to the SemVer 2.0.0 specification: https://semver.org/spec/v2.0.0.html.",
+      "x-ms-parameter-location": "method"
+    },
+    "SiteNetworkServiceNameParameter": {
+      "name": "siteNetworkServiceName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$",
+      "maxLength": 64,
+      "description": "The name of the site network service.",
+      "x-ms-parameter-location": "method"
+    },
+    "NetworkFunctionDefinitionGroupNameParameter": {
+      "name": "networkFunctionDefinitionGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$",
+      "maxLength": 64,
+      "description": "The name of the network function definition group.",
+      "x-ms-parameter-location": "method"
+    },
+    "NetworkFunctionDefinitionVersionNameParameter": {
+      "name": "networkFunctionDefinitionVersionName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)(?:-((?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\\.(?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\\+([0-9a-zA-Z-]+(?:\\.[0-9a-zA-Z-]+)*))?$",
+      "maxLength": 64,
+      "description": "The name of the network function definition version. The name should conform to the SemVer 2.0.0 specification: https://semver.org/spec/v2.0.0.html.",
+      "x-ms-parameter-location": "method"
+    },
+    "ArtifactStoreParameter": {
+      "name": "artifactStoreName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$",
+      "maxLength": 64,
+      "description": "The name of the artifact store.",
+      "x-ms-parameter-location": "method"
+    },
+    "ArtifactManifestParameter": {
+      "name": "artifactManifestName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[^\\s]*[^\\s]+[^\\s]*$",
+      "maxLength": 64,
+      "description": "The name of the artifact manifest.",
+      "x-ms-parameter-location": "method"
+    },
+    "PublisherScopeNameParameter": {
+      "name": "publisherScopeName",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$",
+      "maxLength": 64,
+      "description": "The name of the publisher scope.",
+      "x-ms-parameter-location": "method"
+    },
+    "PublisherLocationNameParameter": {
+      "name": "publisherLocationName",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$",
+      "maxLength": 64,
+      "description": "The name of the publisher location.",
+      "x-ms-parameter-location": "method"
+    },
+    "ProxyPublisherNameParameter": {
+      "name": "proxyPublisherName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$",
+      "maxLength": 64,
+      "description": "The name of the proxy publisher.",
+      "x-ms-parameter-location": "method"
+    },
+    "ArtifactNameParameter": {
+      "name": "artifactName",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "pattern": "^[^\\s]*[^\\s]+[^\\s]*$",
+      "maxLength": 64,
+      "description": "The name of the artifact.",
+      "x-ms-parameter-location": "method"
+    },
+    "ArtifactVersionNameParameter": {
+      "name": "artifactVersionName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[^\\s]*[^\\s]+[^\\s]*$",
+      "maxLength": 64,
+      "description": "The name of the artifact version.",
+      "x-ms-parameter-location": "method"
+    },
+    "NetworkFunctionNameParameter": {
+      "name": "networkFunctionName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[^\\s]*[^\\s]+[^\\s]*$",
+      "maxLength": 64,
+      "description": "The name of the network function.",
+      "x-ms-parameter-location": "method"
+    },
+    "NetworkFunctionComponentNameParameter": {
+      "name": "componentName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[^\\s]*[^\\s]+[^\\s]*$",
+      "maxLength": 64,
+      "description": "The name of the component.",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}
