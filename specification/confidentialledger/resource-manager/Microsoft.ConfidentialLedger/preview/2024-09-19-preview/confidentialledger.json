@@ -702,6 +702,18 @@
       "description": "CCF Property for the maximum size of the http request body: 1MB, 5MB, 10MB.",
       "title": "maxBodySizeInMb"
     },
+    "EnclavePlatform": {
+      "type": "string",
+      "description": "Object representing the enclave platform for the Confidential Ledger application. Defaults to IntelSgx.",
+      "enum": [
+        "IntelSgx",
+        "AmdSevSnp"
+      ],
+      "x-ms-enum": {
+        "name": "EnclavePlatform",
+        "modelAsString": true
+      }
+    },
     "LedgerProperties": {
       "type": "object",
       "description": "Additional Confidential Ledger properties.",
@@ -796,6 +808,11 @@
           "format": "int32",
           "readOnly": false,
           "description": "Number of additional threads processing incoming client requests in the enclave (modify with care!)"
+        },
+        "enclavePlatform": {
+          "description": "Enclave platform of Confidential Ledger.",
+          "readOnly": false,
+          "$ref": "#/definitions/EnclavePlatform"
         }
       }
     },
