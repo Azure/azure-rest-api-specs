@@ -21,6 +21,12 @@ model ConnectionDetails {
   properties: ConnectionProperties;
 }
 
+@doc("to do")
+model ConnectionDetailsList {
+  @doc("to do")
+  value: ConnectionDetails[];
+}
+
 #suppress "@azure-tools/typespec-azure-core/no-string-discriminator"
 @doc("to do")
 @discriminator("authType")

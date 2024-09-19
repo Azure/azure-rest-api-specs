@@ -21,7 +21,10 @@ namespace Azure.AI.Client.Connections;
 @doc("List the details of all the connections (not including their credentials)")
 @route("connections")
 @get
-op getConnections is Azure.Core.Foundations.Operation<{}, ConnectionDetails[]>;
+op getConnections is Azure.Core.Foundations.Operation<
+  {},
+  ConnectionDetailsList
+>;
 
 /*
  See https://learn.microsoft.com/rest/api/azureml/workspace-connections/list-secrets?view=rest-azureml-2024-04-01

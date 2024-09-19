@@ -77,11 +77,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/ConnectionDetails"
-              },
-              "x-ms-identifiers": []
+              "$ref": "#/definitions/ConnectionDetailsList"
             }
           },
           "default": {
@@ -302,6 +298,23 @@
       },
       "required": [
         "properties"
+      ]
+    },
+    "ConnectionDetailsList": {
+      "type": "object",
+      "description": "to do",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "to do",
+          "items": {
+            "$ref": "#/definitions/ConnectionDetails"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "value"
       ]
     },
     "ConnectionProperties": {
