@@ -17,7 +17,6 @@ options:
     # `arm-resource-flattening` is only used for back-compat for specs existed on July 2024. All new service spec should NOT use this flag
     arm-resource-flattening: true
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/azurefleet.json"
-    examples-directory: "examples"
   "@azure-tools/typespec-csharp":
     flavor: azure
     package-dir: "Azure.ResourceManager.ComputeFleet"
@@ -30,18 +29,18 @@ options:
     package-dir: "azure-mgmt-computefleet"
     package-name: "{package-dir}"
     generate-test: true
+    generate-sample: true
+    examples-dir: "{project-root}/examples"
     flavor: "azure"
   "@azure-tools/typespec-java":
     package-dir: "azure-resourcemanager-computefleet"
     namespace: com.azure.resourcemanager.computefleet
     service-name: Compute Fleet
-    examples-directory: "{project-root}/examples"
     flavor: azure
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/computefleet"
     package-dir: "armcomputefleet"
     module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
-    examples-directory: "{project-root}/examples"
     fix-const-stuttering: true
     flavor: "azure"
     generate-examples: true
