@@ -316,6 +316,53 @@
         }
       }
     },
+    "/keys/{key-name}/{key-version}/attestation": {
+      "get": {
+        "tags": [
+          "Keys"
+        ],
+        "operationId": "GetKeyAttestation",
+        "summary": "Gets the public part of a stored key along with its attestation",
+        "description": "The get key attestation operation returns the key along with its attestation blob. This operation requires the keys/get permission.",
+        "parameters": [
+          {
+            "name": "key-name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the key to attestation for."
+          },
+          {
+            "name": "key-version",
+            "in": "path",
+            "type": "string",
+            "description": "Adding the version parameter retrieves attestation blob for specific version of a key. This URI fragment is optional. If not specified, the latest version of the key attestation blob is returned."
+          },
+          {
+            "$ref": "common.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A key bundle containing the key, its attributes and attestation blob.",
+            "schema": {
+              "$ref": "#/definitions/KeyBundleAttestation"
+            }
+          },
+          "default": {
+            "description": "Key Vault error response describing why the operation failed.",
+            "schema": {
+              "$ref": "common.json#/definitions/KeyVaultError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get key attestation": {
+            "$ref": "./examples/GetKeyAttestation-example.json"
+          }
+        }
+      }
+    },
     "/keys/{key-name}/versions": {
       "get": {
         "tags": [
@@ -1410,6 +1457,41 @@
       },
       "description": "As of http://tools.ietf.org/html/draft-ietf-jose-json-web-key-18"
     },
+    "KeyAttributesWithAttestation": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/KeyAttributes"
+        }
+      ],
+      "type": "object",
+      "properties": {
+        "attestation": {
+          "$ref": "#/definitions/KeyAttestation",
+          "description": "The key or key version attestation."
+        }
+      },
+      "description": "The attributes of a key managed by the key vault service."
+    },
+    "KeyAttestation": {
+      "type": "object",
+      "properties": {
+        "certificates": {
+          "type": "string",
+          "format": "base64url",
+          "description": "This is a base64 url encoded certificate bundle. This bundle contains certificates used for validating key attestation blob."
+        },
+        "privateKeyAttestation": {
+          "type": "string",
+          "format": "base64url",
+          "description": "The attestation blob corresponding to private key."
+        },
+        "publicKeyAttestation": {
+          "type": "string",
+          "format": "base64url",
+          "description": "The attestation blob corresponding to public key in case of an asymmetric key."
+        }
+      }
+    },
     "KeyAttributes": {
       "allOf": [
         {
@@ -1484,15 +1566,12 @@
       },
       "description": "The attributes of a key managed by the key vault service."
     },
-    "KeyBundle": {
+    "BaseKeyBundle": {
+      "type": "object",
       "properties": {
         "key": {
           "$ref": "#/definitions/JsonWebKey",
           "description": "The Json web key."
-        },
-        "attributes": {
-          "$ref": "#/definitions/KeyAttributes",
-          "description": "The key management attributes."
         },
         "tags": {
           "type": "object",
@@ -1511,8 +1590,36 @@
           "x-nullable": true,
           "description": "The policy rules under which the key can be exported."
         }
+      }
+    },
+    "KeyBundle": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseKeyBundle"
+        }
+      ],
+      "properties": {
+        "attributes": {
+          "$ref": "#/definitions/KeyAttributes",
+          "description": "The key management attributes."
+        }
       },
       "description": "A KeyBundle consisting of a WebKey plus its attributes."
+    },
+    "KeyBundleAttestation": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseKeyBundle"
+        }
+      ],
+      "type": "object",
+      "properties": {
+        "attributes": {
+          "$ref": "#/definitions/KeyAttributesWithAttestation",
+          "description": "The key management attributes."
+        }
+      },
+      "description": "A KeyBundle consisting of a WebKey plus its attributes and attestation."
     },
     "KeyItem": {
       "properties": {
@@ -2255,7 +2362,3 @@
     }
   }
 }
-
-
-
-
