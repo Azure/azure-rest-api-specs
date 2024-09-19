@@ -26,7 +26,15 @@ These are the global settings for the KeyVault API.
 
 ``` yaml
 openapi-type: data-plane
-tag: package-preview-7.6-preview.1
+tag: package-False
+```
+
+### Tag: package-False
+
+These settings apply only when `--tag=package-False` is specified on the command line.
+
+```yaml $(tag) == 'package-False'
+input-file:
 ```
 
 ### Tag: package-preview-7.6-preview.1
