@@ -14,11 +14,23 @@ using Azure.Core.Foundations;
 
 namespace Azure.AI.Client.Connections;
 
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Need to define route."
-@doc("List secrets for a given connection.")
+/*
+ See https://learn.microsoft.com/rest/api/azureml/workspace-connections/list-secrets?view=rest-azureml-2024-04-01
+*/
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+@doc("List the details of all the connections (not including their credentials)")
+@route("connections")
+@get
+op getConnections is Azure.Core.Foundations.Operation<{}, ConnectionDetails[]>;
+
+/*
+ See https://learn.microsoft.com/rest/api/azureml/workspace-connections/list-secrets?view=rest-azureml-2024-04-01
+*/
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+@doc("Get the details of a single connection, includeing credential (if avaialble).")
 @route("connections/{connectionNameInUrl}/listsecrets")
 @post
-op listSecrets is Azure.Core.Foundations.Operation<
+op getConnectionSecrets is Azure.Core.Foundations.Operation<
   {
     @doc("Connection Name")
     connectionNameInUrl: string;
@@ -38,5 +50,5 @@ op listSecrets is Azure.Core.Foundations.Operation<
     @doc("The api version.")
     apiVersionInBody: string;
   },
-  ListSecretsResponse
+  ConnectionDetails
 >;

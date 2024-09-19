@@ -10,7 +10,7 @@ using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.Core.Traits;
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "Keep AI upper case"
+#suppress "@azure-tools/typespec-azure-core/casing-style"
 namespace Azure.AI {
 
 }

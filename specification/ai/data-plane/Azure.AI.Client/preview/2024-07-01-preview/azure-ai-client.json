@@ -64,10 +64,45 @@
   },
   "tags": [],
   "paths": {
+    "/connections": {
+      "get": {
+        "operationId": "Connections_GetConnections",
+        "description": "List the details of all the connections (not including their credentials)",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ConnectionDetails"
+              },
+              "x-ms-identifiers": []
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
     "/connections/{connectionNameInUrl}/listsecrets": {
       "post": {
-        "operationId": "Connections_ListSecrets",
-        "description": "List secrets for a given connection.",
+        "operationId": "Connections_GetConnectionSecrets",
+        "description": "Get the details of a single connection, includeing credential (if avaialble).",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -121,7 +156,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/ListSecretsResponse"
+              "$ref": "#/definitions/ConnectionDetails"
             }
           },
           "default": {
@@ -141,6 +176,36 @@
     }
   },
   "definitions": {
+    "AuthType": {
+      "type": "string",
+      "description": "to do",
+      "enum": [
+        "ApiKey",
+        "AAD",
+        "SAS"
+      ],
+      "x-ms-enum": {
+        "name": "AuthType",
+        "modelAsString": false,
+        "values": [
+          {
+            "name": "apiKey",
+            "value": "ApiKey",
+            "description": "to do"
+          },
+          {
+            "name": "AAD",
+            "value": "AAD",
+            "description": "to do"
+          },
+          {
+            "name": "SAS",
+            "value": "SAS",
+            "description": "to do"
+          }
+        ]
+      }
+    },
     "Azure.Core.Foundations.Error": {
       "type": "object",
       "description": "The error object.",
@@ -202,58 +267,140 @@
         }
       }
     },
-    "ConnectionAuthType": {
+    "ConnectionCategory": {
       "type": "string",
-      "description": "to do",
+      "description": "Category of the connection",
       "enum": [
-        "ApiKey",
-        "AAD"
+        "AzureOpenAI",
+        "Serverless"
       ],
       "x-ms-enum": {
-        "name": "ConnectionAuthType",
+        "name": "ConnectionCategory",
         "modelAsString": false,
         "values": [
           {
-            "name": "apiKey",
-            "value": "ApiKey",
-            "description": "to do"
+            "name": "AzureOpenAI",
+            "value": "AzureOpenAI",
+            "description": "Azure OpenAI"
           },
           {
-            "name": "aad",
-            "value": "AAD",
-            "description": "to do"
+            "name": "Serverless",
+            "value": "Serverless",
+            "description": "Serverless API"
           }
         ]
       }
     },
-    "ListSecretsProperties": {
+    "ConnectionDetails": {
+      "type": "object",
+      "description": "to do",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ConnectionProperties",
+          "description": "to do"
+        }
+      },
+      "required": [
+        "properties"
+      ]
+    },
+    "ConnectionProperties": {
       "type": "object",
       "description": "to do",
       "properties": {
         "authType": {
-          "$ref": "#/definitions/ConnectionAuthType",
+          "$ref": "#/definitions/AuthType",
+          "description": "Authentication type of the connection target"
+        }
+      },
+      "discriminator": "authType",
+      "required": [
+        "authType"
+      ]
+    },
+    "ConnectionPropertiesAADAuth": {
+      "type": "object",
+      "description": "Connection properties for connections with AAD authentication (aka `Entra ID passthrough`)",
+      "properties": {
+        "category": {
+          "$ref": "#/definitions/ConnectionCategory",
+          "description": "Category of the connection"
+        },
+        "target": {
+          "type": "string",
           "description": "to do"
+        }
+      },
+      "required": [
+        "category",
+        "target"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ConnectionProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "AAD"
+    },
+    "ConnectionPropertiesApiKeyAuth": {
+      "type": "object",
+      "description": "Connection properties for connections with API key authentication",
+      "properties": {
+        "category": {
+          "$ref": "#/definitions/ConnectionCategory",
+          "description": "Category of the connection"
         },
         "credentials": {
-          "$ref": "#/definitions/ListSecretsPropertiesCredentials",
+          "$ref": "#/definitions/CredentialsApiKeyAuth",
           "description": "Credentials will only be present for authType=ApiKey"
         },
         "target": {
           "type": "string",
           "description": "to do"
+        }
+      },
+      "required": [
+        "category",
+        "credentials",
+        "target"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ConnectionProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "ApiKey"
+    },
+    "ConnectionPropertiesSASAuth": {
+      "type": "object",
+      "description": "Connection properties for connections with SAS authentication",
+      "properties": {
+        "category": {
+          "$ref": "#/definitions/ConnectionCategory",
+          "description": "Category of the connection"
         },
-        "metadata": {
-          "$ref": "#/definitions/PropertiesMetadata",
+        "credentials": {
+          "$ref": "#/definitions/CredentialsSASAuth",
+          "description": "Credentials will only be present for authType=ApiKey"
+        },
+        "target": {
+          "type": "string",
           "description": "to do"
         }
       },
       "required": [
-        "authType",
-        "target",
-        "metadata"
-      ]
+        "category",
+        "credentials",
+        "target"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ConnectionProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "SAS"
     },
-    "ListSecretsPropertiesCredentials": {
+    "CredentialsApiKeyAuth": {
       "type": "object",
       "description": "to do",
       "properties": {
@@ -266,84 +413,18 @@
         "key"
       ]
     },
-    "ListSecretsResponse": {
+    "CredentialsSASAuth": {
       "type": "object",
       "description": "to do",
       "properties": {
-        "properties": {
-          "$ref": "#/definitions/ListSecretsProperties",
+        "SAS": {
+          "type": "string",
           "description": "to do"
         }
       },
       "required": [
-        "properties"
+        "SAS"
       ]
-    },
-    "ModelType": {
-      "type": "string",
-      "description": "The type of AI model",
-      "enum": [
-        "embeddings",
-        "image_generation",
-        "text_generation",
-        "image_embeddings",
-        "audio_generation",
-        "chat_completion"
-      ],
-      "x-ms-enum": {
-        "name": "ModelType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "embeddings",
-            "value": "embeddings",
-            "description": "A model capable of generating embeddings from a text"
-          },
-          {
-            "name": "image_generation",
-            "value": "image_generation",
-            "description": "A model capable of generating images from an image and text description"
-          },
-          {
-            "name": "text_generation",
-            "value": "text_generation",
-            "description": "A text generation model"
-          },
-          {
-            "name": "image_embeddings",
-            "value": "image_embeddings",
-            "description": "A model capable of generating embeddings from an image"
-          },
-          {
-            "name": "audio_generation",
-            "value": "audio_generation",
-            "description": "A text-to-audio generative model"
-          },
-          {
-            "name": "chat_completion",
-            "value": "chat_completion",
-            "description": "A model capable of taking chat-formatted messages and generate responses"
-          }
-        ]
-      }
-    },
-    "PropertiesMetadata": {
-      "type": "object",
-      "description": "Metadata on the properties",
-      "properties": {
-        "model_name": {
-          "type": "string",
-          "description": "The name of the AI model. For example: `Phi21`"
-        },
-        "model_type": {
-          "$ref": "#/definitions/ModelType",
-          "description": "The type of the AI model. A Unique identifier for the profile."
-        },
-        "model_provider_name": {
-          "type": "string",
-          "description": "The model provider name. For example: `Microsoft Research`"
-        }
-      }
     }
   },
   "parameters": {

@@ -16,43 +16,105 @@ using Azure.Core.Traits;
 namespace Azure.AI.Client;
 
 @doc("to do")
-model ListSecretsResponse {
+model ConnectionDetails {
   @doc("to do")
-  properties: ListSecretsProperties;
+  properties: ConnectionProperties;
 }
 
+#suppress "@azure-tools/typespec-azure-core/no-string-discriminator"
 @doc("to do")
-model ListSecretsProperties {
-  @doc("to do")
-  authType: ConnectionAuthType;
-
-  @doc("Credentials will only be present for authType=ApiKey")
-  credentials?: ListSecretsPropertiesCredentials;
-
-  @doc("to do")
-  target: string;
-
-  @doc("to do")
-  metadata: PropertiesMetadata;
+@discriminator("authType")
+model ConnectionProperties {
+  @doc("Authentication type of the connection target")
+  authType: AuthType;
 }
 
+#suppress "@azure-tools/typespec-azure-core/no-enum"
 @doc("to do")
-model ListSecretsPropertiesCredentials {
-  @doc("to do")
-  key: string;
-}
-
-#suppress "@azure-tools/typespec-azure-core/no-enum" "Azure services should not use the enum keyword. Extensible enums should be defined as unions with `string` as an accepted variant"
-@doc("to do")
-enum ConnectionAuthType {
+enum AuthType {
   @doc("to do")
   apiKey: "ApiKey",
 
   @doc("to do")
-  aad: "AAD",
+  AAD: "AAD",
+
+  @doc("to do")
+  SAS: "SAS",
 }
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use camelCase"
+@doc("Connection properties for connections with API key authentication")
+model ConnectionPropertiesApiKeyAuth extends ConnectionProperties {
+  @doc("Authentication type of the connection target")
+  authType: AuthType.apiKey;
+
+  @doc("Category of the connection")
+  category: ConnectionCategory;
+
+  @doc("Credentials will only be present for authType=ApiKey")
+  credentials: CredentialsApiKeyAuth;
+
+  @doc("to do")
+  target: string;
+
+  //@doc("to do")
+  //metadata: PropertiesMetadata;
+}
+
+#suppress "@azure-tools/typespec-azure-core/casing-style"
+@doc("Connection properties for connections with AAD authentication (aka `Entra ID passthrough`)")
+model ConnectionPropertiesAADAuth extends ConnectionProperties {
+  @doc("Authentication type of the connection target")
+  authType: AuthType.AAD;
+
+  @doc("Category of the connection")
+  category: ConnectionCategory;
+
+  @doc("to do")
+  target: string;
+}
+
+#suppress "@azure-tools/typespec-azure-core/casing-style"
+@doc("Connection properties for connections with SAS authentication")
+model ConnectionPropertiesSASAuth extends ConnectionProperties {
+  @doc("Authentication type of the connection target")
+  authType: AuthType.SAS;
+
+  @doc("Category of the connection")
+  category: ConnectionCategory;
+
+  @doc("Credentials will only be present for authType=ApiKey")
+  credentials: CredentialsSASAuth;
+
+  @doc("to do")
+  target: string;
+}
+
+@doc("to do")
+model CredentialsApiKeyAuth {
+  @doc("to do")
+  key: string;
+}
+
+#suppress "@azure-tools/typespec-azure-core/casing-style"
+@doc("to do")
+model CredentialsSASAuth {
+  @doc("to do")
+  SAS: string;
+}
+
+// https://learn.microsoft.com/rest/api/azureml/workspace-connections/list-secrets?view=rest-azureml-2024-04-01&tabs=HTTP#connectioncategory
+#suppress "@azure-tools/typespec-azure-core/no-enum"
+@doc("Category of the connection")
+enum ConnectionCategory {
+  @doc("Azure OpenAI")
+  AzureOpenAI: "AzureOpenAI",
+
+  @doc("Serverless API")
+  Serverless: "Serverless",
+}
+
+/*
+#suppress "@azure-tools/typespec-azure-core/casing-style"
 @doc("Metadata on the properties")
 model PropertiesMetadata {
   @doc("The name of the AI model. For example: `Phi21`")
@@ -64,6 +126,7 @@ model PropertiesMetadata {
   @doc("The model provider name. For example: `Microsoft Research`")
   model_provider_name?: string;
 }
+
 
 @doc("The type of AI model")
 union ModelType {
@@ -87,3 +150,4 @@ union ModelType {
   @doc("A model capable of taking chat-formatted messages and generate responses")
   chat_completion: "chat_completion",
 }
+*/
