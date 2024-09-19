@@ -72,7 +72,10 @@ interface Evaluations {
       body: UpdateEvaluationRequest;
     },
     OkResponse<Evaluation>
-  >;
+  >;  
+}
+
+interface EvaluationSchedules {
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Waiting for bug fix: https://github.com/Azure/typespec-azure-pr/issues/3739."
   @doc("Creates an evaluation schedule.")

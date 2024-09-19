@@ -190,7 +190,7 @@ model RecurrenceSchedule {
 
 @doc("SamplingStrategy Definition")
 model SamplingStrategy {
-    @doc(Sampling rate)
+    @doc("Sampling rate")
     rate: float32;
 }
 
