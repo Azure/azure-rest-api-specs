@@ -52,7 +52,13 @@ model InstanceProperties {
   version?: string;
 
   @doc("The reference to the Schema Registry for this AIO Instance.")
-  schemaRegistryId: SchemaRegistryID;
+  schemaRegistryRef: SchemaRegistryRef;
+}
+
+model SchemaRegistryRef {
+  @doc("The resource ID of the Schema Registry.")
+  @visibility("read")
+  resourceId: SchemaRegistryID;
 }
 
 @doc("The properties of an ADR instance.")
