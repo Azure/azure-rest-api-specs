@@ -1223,7 +1223,7 @@
         "tags": [
           "UploadFile:"
         ],
-        "summary": "Creates a new file entity by uploading data from a local machine. Uploaded files can, for example, be used for training or evaluating fine-tuned models.",
+        "summary": "An intermediate Upload object is created, allowing you to add Parts to it. Currently, an Upload size can be a maximum of 9 GB in total and will expire two hours after being created.\r\nAfter the Upload is completed a File object will be generated, containing all the uploaded parts. This File object can then be used across our platform just like any other file.",
         "operationId": "UploadFile_Start",
         "consumes": [
           "application/json",
@@ -1280,7 +1280,7 @@
         "tags": [
           "UploadFile:"
         ],
-        "summary": "Creates a new file entity by uploading data from a local machine. Uploaded files can, for example, be used for training or evaluating fine-tuned models.",
+        "summary": "Adds a Part to an Upload object, where each Part represents a segment of the file you are uploading.\r\nEach Part can be up to the standard size limit for file upload, based on the File Purpose. You can continue adding Parts until reaching the Upload size limit of 9 GB.",
         "operationId": "UploadFile_Cancel",
         "produces": [
           "application/json"
@@ -1323,7 +1323,7 @@
         "tags": [
           "UploadFile:"
         ],
-        "summary": "Creates a new file entity by uploading data from a local machine. Uploaded files can, for example, be used for training or evaluating fine-tuned models.",
+        "summary": "This completes the Upload, and the returned Upload object contains a nested File object that is ready for use across the platform.\r\nYou can define the order of the Parts by providing an ordered list of Part IDs.\r\nThe total number of bytes uploaded must match the size originally specified when creating the Upload object.\r\nAfter this operation no additional Parts can be added once the Upload is completed.",
         "operationId": "UploadFile_Complete",
         "consumes": [
           "application/json",
@@ -1380,7 +1380,7 @@
         "tags": [
           "UploadFile:"
         ],
-        "summary": "Creates a new file entity by uploading data from a local machine. Uploaded files can, for example, be used for training or evaluating fine-tuned models.",
+        "summary": "Cancels the Upload, and will lead to all uploaded parts to be deleted asynchronously.\r\nNo Parts may be added after an Upload is cancelled.",
         "operationId": "UploadFile_Part",
         "consumes": [
           "multipart/form-data"
