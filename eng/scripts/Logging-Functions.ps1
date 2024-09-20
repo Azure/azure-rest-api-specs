@@ -20,8 +20,7 @@ function LogNotice {
   }
 }
 
-function LogNoticeForFile($file, $noticeString)
-{
+function LogNoticeForFile($file, $noticeString) {
   if (Test-SupportsGitHubLogging) {
     Write-Host ("::notice file=$file,line=1,col=1::$noticeString" -replace "`n", "%0D%0A")
   }
@@ -43,8 +42,7 @@ function LogWarning {
   }
 }
 
-function LogErrorForFile($file, $errorString)
-{
+function LogErrorForFile($file, $errorString) {
   if (Test-SupportsDevOpsLogging) {
     Write-Host ("##vso[task.logissue type=error;sourcepath=$file;linenumber=1;columnnumber=1;]$errorString" -replace "`n", "%0D%0A")
   }
