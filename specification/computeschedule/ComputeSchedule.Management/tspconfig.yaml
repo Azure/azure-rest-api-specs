@@ -15,6 +15,13 @@ options:
     generate-test: true
     generate-sample: true
     examples-dir: "{project-root}/examples"
+  "@azure-tools/typespec-csharp":
+    flavor: azure
+    package-dir: "Azure.ResourceManager.ComputeSchedule"
+    clear-output-folder: true
+    model-namespace: false
+    namespace: "{package-dir}"
+    use-model-reader-writer: true
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"
