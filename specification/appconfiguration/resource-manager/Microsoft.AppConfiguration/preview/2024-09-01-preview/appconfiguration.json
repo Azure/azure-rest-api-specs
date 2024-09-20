@@ -568,7 +568,7 @@
           "200": {
             "description": "The request was successful; the request was well-formed and received properly.",
             "schema": {
-              "$ref": "#/definitions/ResetSasKindResult"
+              "$ref": "#/definitions/SasKindInfo"
             }
           },
           "default": {
@@ -2242,23 +2242,6 @@
       "x-ms-enum": {
         "name": "SasKind",
         "modelAsString": true
-      }
-    },
-    "ResetSasKindResult": {
-      "description": "The result of a request to reset SAS kind.",
-      "type": "object",
-      "properties": {
-        "name": {
-          "description": "The kind of the SAS token.",
-          "$ref": "#/definitions/SasKind",
-          "readOnly": true
-        },
-        "lastModifiedAt":{
-          "format": "date-time",
-          "description": "The last time a reset operation was performed on the given SAS kind.",
-          "type": "string",
-          "readOnly": true
-        }
       }
     },
     "KeyValueListResult": {
