@@ -168,7 +168,7 @@ else {
 
     if ($responseStatus -eq 200) {
       LogInfo "  Branch 'main' contains path '$servicePath/stable', so spec already exists and is not required to use TypeSpec"
-      LogNoticeForFile $path "Brownfield services will soon be required to convert from OpenAPI to TypeSpec.  See https://aka.ms/azsdk/typespec."
+      LogNoticeForFile $file "Brownfield services will soon be required to convert from OpenAPI to TypeSpec.  See https://aka.ms/azsdk/typespec."
     }
     elseif ($responseStatus -eq 404) {
       LogInfo "  Branch 'main' does not contain path '$servicePath/stable', so spec is new and must use TypeSpec"
