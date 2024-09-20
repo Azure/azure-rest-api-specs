@@ -1647,11 +1647,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "location",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The location of the Extension being received."
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/LocationParameter"
           },
           {
             "name": "publisher",
@@ -1708,11 +1704,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "location",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The location of the Extension being received."
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/LocationParameter"
           },
           {
             "name": "publisher",
@@ -1765,11 +1757,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "location",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The location of the Extension being received."
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/LocationParameter"
           },
           {
             "name": "publisher",
@@ -1815,11 +1803,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "location",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The location of the Extension being received."
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/LocationParameter"
           }
         ],
         "responses": {
@@ -3000,18 +2984,35 @@
     "ExtensionValueV2": {
       "type": "object",
       "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ExtensionValueV2Properties",
+          "description": "The single extension based on search criteria"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "description": "Describes a V2 Extension Metadata"
+    },
+    "ExtensionValueV2Properties": {
+      "type": "object",
+      "properties": {
         "extensionUris": {
           "type": "array",
           "readOnly": true,
           "items": {
-            "type": "string"
+            "type": "string",
+            "format": "uri"
           },
-          "description": "A list of locations where the extension packages can be found.",
-          "x-ms-identifiers": []
+          "description": "A list of locations where the extension packages can be found."
         },
         "extensionSignatureUri": {
           "type": "string",
           "readOnly": true,
+          "format": "uri",
           "description": "Location of the signature files for the extension."
         },
         "extensionPackageSizeMb": {
@@ -3023,12 +3024,12 @@
         "operatingSystem": {
           "type": "string",
           "readOnly": true,
-          "description": "Operating system that can support the extension."
+          "description": "The operating system (Windows, Linux, etc.) this extension supports."
         },
         "computeRole": {
           "type": "string",
           "readOnly": true,
-          "description": "Compute role that can support the extension. IaaS, PaaS or All."
+          "description": "The type of role (IaaS, PaaS, etc.) this extension supports."
         },
         "architecture": {
           "type": "array",
@@ -3036,16 +3037,15 @@
           "items": {
             "type": "string"
           },
-          "description": "Architectures that can support the extension.",
-          "x-ms-identifiers": []
-        }
+          "description": "Architectures (x64, arms64, etc.) that this extension supports."
+        },
+        "allOf": [
+          {
+            "$ref": "#/definitions/ExtensionValueProperties"
+          }
+        ]
       },
-      "allOf": [
-        {
-          "$ref": "#/definitions/ExtensionValue"
-        }
-      ],
-      "description": "Describes a V2 Extension Metadata"
+      "description": "Describes V2 Extension Metadata properties"
     },
     "ExtensionTypeListResult": {
       "type": "object",
