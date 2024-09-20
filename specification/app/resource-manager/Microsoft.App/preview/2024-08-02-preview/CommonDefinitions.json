@@ -1707,26 +1707,26 @@
       "description": "Targets - Container App Names, Revision Names, Labels.",
       "type": "object",
       "properties": {
-        "containerAppName":{
-          "description":"Container App Name to route requests to",
+        "containerAppName": {
+          "description": "Container App Name to route requests to",
           "type": "string"
         },
-        "revisionName":{
-          "description":"Revision to route requests to",
+        "revisionName": {
+          "description": "Revision to route requests to",
           "type": "string"
         },
-        "labelName":{
-          "description":"Label/Revision to route requests to",
+        "labelName": {
+          "description": "Label/Revision to route requests to",
           "type": "string"
         },
-        "weight":{
-          "description":"Weighted routing",
+        "weight": {
+          "description": "Weighted routing",
           "type": "integer",
           "format": "int32"
         }
       }
     },
-    "HttpRouteMatch":{
+    "HttpRouteMatch": {
       "description": "Criteria to match on",
       "type": "object",
       "properties": {
@@ -1742,13 +1742,13 @@
           "description": "match on all prefix's. Not exact",
           "type": "string"
         },
-        "caseSensitive":{
+        "caseSensitive": {
           "description": "path case sensitive, default is true",
           "type": "boolean"
         }
       }
     },
-    "HttpRouteAction":{
+    "HttpRouteAction": {
       "description": "Action to perform once matching of routes is done",
       "type": "object",
       "properties": {
@@ -1758,7 +1758,7 @@
         }
       }
     },
-    "HttpRoute":{
+    "HttpRoute": {
       "description": "Custom container configuration.",
       "type": "object",
       "properties": {
@@ -1779,7 +1779,7 @@
         "targets": {
           "description": "Targets- container apps, revisions, labels",
           "type": "array",
-          "items":{
+          "items": {
             "$ref": "#/definitions/HttpRouteTarget"
           },
           "x-ms-identifiers": [
@@ -1789,7 +1789,7 @@
         "routes": {
           "description": "Targets- container apps, revisions, labels",
           "type": "array",
-          "items":{
+          "items": {
             "$ref": "#/definitions/HttpRoute"
           },
           "x-ms-identifiers": [
