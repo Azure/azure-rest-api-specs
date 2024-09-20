@@ -1465,9 +1465,6 @@
     "DnsSecurityRuleAction": {
       "description": "The action to take on DNS requests that match the DNS security rule.",
       "type": "object",
-      "required": [
-        "actionType"
-      ],
       "properties": {
         "actionType": {
           "type": "string",
@@ -1694,6 +1691,7 @@
     "ProvisioningState": {
       "description": "The current provisioning state of the resource.",
       "type": "string",
+      "readOnly": true,
       "enum": [
         "Creating",
         "Updating",
