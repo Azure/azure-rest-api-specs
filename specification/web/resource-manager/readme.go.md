@@ -20,11 +20,23 @@ directive:
   where: $.definitions.Certificate
   transform:
     $["x-ms-client-name"] = "AppCertificate"
+- from: Certificates.json
+  where: $.definitions.Certificate
+  transform:
+    $["x-ms-client-name"] = "AppCertificate"
 - from: CommonDefinitions.json
   where: $.definitions.CertificateCollection
   transform:
     $["x-ms-client-name"] = "AppCertificateCollection"
+- from: Certificates.json
+  where: $.definitions.CertificateCollection
+  transform:
+    $["x-ms-client-name"] = "AppCertificateCollection"
 - from: CommonDefinitions.json
+  where: $.definitions.CertificatePatchResource
+  transform:
+    $["x-ms-client-name"] = "AppCertificatePatchResource"
+- from: Certificates.json
   where: $.definitions.CertificatePatchResource
   transform:
     $["x-ms-client-name"] = "AppCertificatePatchResource"
