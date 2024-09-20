@@ -248,8 +248,9 @@ union ServiceAccountTokenMethod {
   ServiceAccountToken: ServiceAccountToken,
 }
 
-scalar SchemaRegistryID extends Azure.Core.armResourceIdentifier<[
-  {
-    type: "Microsoft.DeviceRegistry/schemaRegistries";
-  }
-]>;
+scalar SchemaRegistryID
+  extends Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.DeviceRegistry/schemaRegistries",
+    }
+  ]>;
