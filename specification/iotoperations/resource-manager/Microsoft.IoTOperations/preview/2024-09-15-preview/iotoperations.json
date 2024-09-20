@@ -2571,23 +2571,6 @@
         ]
       }
     },
-    "AdrProperties": {
-      "type": "object",
-      "description": "The properties of an ADR instance.",
-      "properties": {
-        "state": {
-          "$ref": "#/definitions/OperationalMode",
-          "description": "This determines if the ADR service is enabled.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        }
-      },
-      "required": [
-        "state"
-      ]
-    },
     "AdvancedSettings": {
       "type": "object",
       "description": "Broker Advanced Settings",
@@ -2626,23 +2609,6 @@
           "description": "Certificate rotation and private key configuration."
         }
       }
-    },
-    "AkriInstanceProperties": {
-      "type": "object",
-      "description": "The properties of an AKRI instance.",
-      "properties": {
-        "state": {
-          "$ref": "#/definitions/OperationalMode",
-          "description": "This determines if the AKRI service is enabled.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        }
-      },
-      "required": [
-        "state"
-      ]
     },
     "AnonymousMethod": {
       "type": "string",
@@ -3662,23 +3628,6 @@
           }
         ]
       }
-    },
-    "ConnectorInstanceProperties": {
-      "type": "object",
-      "description": "The properties of a  Connector instance.",
-      "properties": {
-        "state": {
-          "$ref": "#/definitions/OperationalMode",
-          "description": "This determines if the Connector service is enabled.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        }
-      },
-      "required": [
-        "state"
-      ]
     },
     "DataExplorerAuthMethod": {
       "$ref": "#/definitions/ManagedIdentityMethod",
@@ -4814,23 +4763,6 @@
       },
       "required": [
         "value"
-      ]
-    },
-    "DataflowInstanceProperties": {
-      "type": "object",
-      "description": "The properties of an Dataflow instance.",
-      "properties": {
-        "state": {
-          "$ref": "#/definitions/OperationalMode",
-          "description": "This determines if the Dataflow service is enabled.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        }
-      },
-      "required": [
-        "state"
       ]
     },
     "DataflowMappingType": {
@@ -6075,31 +6007,13 @@
         ]
       }
     },
-    "SchemaRegistryInstanceProperties": {
-      "type": "object",
-      "description": "The properties of a Schema Registry instance.",
-      "properties": {
-        "state": {
-          "$ref": "#/definitions/OperationalMode",
-          "description": "This determines if the Schema Registry service is enabled.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        }
-      },
-      "required": [
-        "state"
-      ]
-    },
     "SchemaRegistryRef": {
       "type": "object",
       "description": "The reference to the Schema Registry for this AIO Instance.",
       "properties": {
         "resourceId": {
           "$ref": "#/definitions/SchemaRegistryID",
-          "description": "The resource ID of the Schema Registry.",
-          "readOnly": true
+          "description": "The resource ID of the Schema Registry."
         }
       },
       "required": [

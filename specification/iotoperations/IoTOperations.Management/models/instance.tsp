@@ -58,40 +58,5 @@ model InstanceProperties {
 @doc("The reference to the Schema Registry for this AIO Instance.")
 model SchemaRegistryRef {
   @doc("The resource ID of the Schema Registry.")
-  @visibility("read")
   resourceId: SchemaRegistryID;
-}
-
-@doc("The properties of an ADR instance.")
-model AdrProperties {
-  @doc("This determines if the ADR service is enabled.")
-  @visibility("create", "read")
-  state: OperationalMode;
-}
-@doc("The properties of an AKRI instance.")
-model AkriInstanceProperties {
-  @doc("This determines if the AKRI service is enabled.")
-  @visibility("create", "read")
-  state: OperationalMode;
-}
-
-@doc("The properties of a  Connector instance.")
-model ConnectorInstanceProperties {
-  @doc("This determines if the Connector service is enabled.")
-  @visibility("create", "read")
-  state: OperationalMode;
-}
-
-@doc("The properties of an Dataflow instance.")
-model DataflowInstanceProperties {
-  @doc("This determines if the Dataflow service is enabled.")
-  @visibility("create", "read")
-  state: OperationalMode;
-}
-
-@doc("The properties of a Schema Registry instance.")
-model SchemaRegistryInstanceProperties {
-  @doc("This determines if the Schema Registry service is enabled.")
-  @visibility("create", "read")
-  state: OperationalMode;
 }
