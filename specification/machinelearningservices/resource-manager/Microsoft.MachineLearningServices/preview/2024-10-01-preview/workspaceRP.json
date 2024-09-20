@@ -4413,11 +4413,6 @@
           "type": "object",
           "additionalProperties": {}
         },
-        "hub": {
-          "description": "Setting for diagnosing the hub",
-          "type": "object",
-          "additionalProperties": {}
-        },
         "keyVault": {
           "description": "Setting for diagnosing dependent key vault",
           "type": "object",
@@ -5185,6 +5180,7 @@
     },
     "IPRule": {
       "type": "object",
+      "description": "Contains an IPv4 address range in CIDR notation, such as '124.56.78.91' (simple IP address) or '124.56.78.0/24' (all addresses that start with 124.56.78). Value could be 'Allow' or  'Deny'.",
       "properties": {
         "value": {
           "description": "An IPv4 address range in CIDR notation, such as '124.56.78.91' (simple IP address) or '124.56.78.0/24' (all addresses that start with 124.56.78). Value could be 'Allow' or  'Deny'.",
@@ -5495,9 +5491,6 @@
     "NetworkAcls": {
       "type": "object",
       "properties": {
-        "bypass": {
-          "type": "string"
-        },
         "defaultAction": {
           "description": "The default action when no rule from ipRules and from virtualNetworkRules match. This is only used after the bypass property has been evaluated.",
           "$ref": "#/definitions/DefaultActionType"
@@ -5507,12 +5500,6 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/IPRule"
-          }
-        },
-        "resourceAccessRules": {
-          "type": "array",
-          "items": {
-            "type": "string"
           }
         }
       }
@@ -6981,6 +6968,7 @@
         "agentsEndpointUri": {
           "description": "The URI of agents endpoint associated with this workspace.",
           "type": "string",
+          "format": "arm-id",
           "readOnly": true,
           "x-ms-mutability": [
             "read"
@@ -7198,7 +7186,16 @@
         },
         "systemDatastoresAuthMode": {
           "description": "The auth mode used for accessing the system datastores of the workspace.",
-          "type": "string"
+          "type": "string",
+          "enum": [
+            "AccessKey",
+            "Identity",
+            "UserDelegationSAS"
+          ],
+          "x-ms-enum": {
+            "name": "systemDatastoresAuthMode",
+            "modelAsString": true
+          }
         },
         "tenantId": {
           "description": "The tenant id associated with this workspace.",
@@ -7304,7 +7301,16 @@
         },
         "systemDatastoresAuthMode": {
           "description": "The auth mode used for accessing the system datastores of the workspace.",
-          "type": "string"
+          "type": "string",
+          "enum": [
+            "AccessKey",
+            "Identity",
+            "UserDelegationSAS"
+          ],
+          "x-ms-enum": {
+            "name": "systemDatastoresAuthMode",
+            "modelAsString": true
+          }
         },
         "v1LegacyMode": {
           "description": "Enabling v1_legacy_mode may prevent you from using features provided by the v2 API.",
