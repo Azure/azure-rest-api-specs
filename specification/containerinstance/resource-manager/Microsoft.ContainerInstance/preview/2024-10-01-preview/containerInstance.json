@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2023-05-01",
+    "version": "2024-10-01-preview",
     "title": "ContainerInstanceManagementClient"
   },
   "host": "management.azure.com",
@@ -41,7 +41,7 @@
             "$ref": "./examples/ContainerGroupsList.json"
           }
         },
-        "summary": "Get a list of container group in the specified subscription.",
+        "summary": "Get a list of container groups in the specified subscription.",
         "description": "Get a list of container groups in the specified subscription. This operation returns properties of each container group including containers, image registry credentials, restart policy, IP address type, OS type, state, and volumes.",
         "parameters": [
           {
@@ -161,6 +161,9 @@
           "ContainerGroupsCreateOrUpdate": {
             "$ref": "./examples/ContainerGroupsCreateOrUpdate.json"
           },
+          "ContainerGroupsCreateOrUpdateSecretReference": {
+            "$ref": "./examples/ContainerGroupsCreateOrUpdateSecretReference.json"
+          },
           "ContainerGroupCreateWithExtensions": {
             "$ref": "./examples/ContainerGroupExtensions.json"
           },
@@ -169,6 +172,9 @@
           },
           "ConfidentialContainerGroup": {
             "$ref": "./examples/ContainerGroupCreateConfidential.json"
+          },
+          "ContainerGroupCreateOrUpdateWithStandbyPool": {
+            "$ref": "./examples/ContainerGroupCreateOrUpdateStandbyPool.json"
           },
           "ContainerGroupsCreateWithPriority": {
             "$ref": "./examples/ContainerGroupsCreatePriority.json"
@@ -833,6 +839,29 @@
     }
   },
   "definitions": {
+    "SecretReference": {
+      "description": "A secret reference",
+      "type": "object",
+      "required": [
+        "name",
+        "identity",
+        "secretReferenceUri"
+      ],
+      "properties": {
+        "name": {
+          "description": "The identifier of the secret reference",
+          "type": "string"
+        },
+        "identity": {
+          "description": "The resource id of the managed identity that has access to the secret in the key vault",
+          "type": "string"
+        },
+        "secretReferenceUri": {
+          "description": "",
+          "type": "string"
+        }
+      }
+    },
     "Container": {
       "description": "A container instance.",
       "type": "object",
@@ -951,6 +980,24 @@
         "securityContext": {
           "description": "The container security properties.",
           "$ref": "#/definitions/SecurityContextDefinition"
+        },
+        "configMap": {
+          "description": "The config map.",
+          "$ref": "#/definitions/ConfigMap"
+        }
+      }
+    },
+    "ConfigMap": {
+      "description": "The container config map.",
+      "type": "object",
+      "properties": {
+        "keyValuePairs": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string",
+            "description": "The list of key value pairs associated with the config map of the container."
+          },
+          "description": "The key value pairs dictionary in the config map."
         }
       }
     },
@@ -1193,6 +1240,10 @@
         "storageAccountKey": {
           "description": "The storage account access key used to access the Azure File share.",
           "type": "string"
+        },
+        "storageAccountKeyReference": {
+          "description": "The reference to the storage account access key used to access the Azure File share.",
+          "type": "string"
         }
       }
     },
@@ -1203,6 +1254,13 @@
     },
     "SecretVolume": {
       "description": "The secret volume.",
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
+    "SecretReferenceVolume": {
+      "description": "The secret reference volume.",
       "type": "object",
       "additionalProperties": {
         "type": "string"
@@ -1250,6 +1308,10 @@
         "secret": {
           "description": "The secret volume.",
           "$ref": "#/definitions/SecretVolume"
+        },
+        "secretReference": {
+          "description": "The secret reference volume.",
+          "$ref": "#/definitions/SecretReferenceVolume"
         },
         "gitRepo": {
           "description": "The git repo volume.",
@@ -1403,6 +1465,16 @@
               "type": "string",
               "description": "The provisioning state of the container group. This only appears in the response."
             },
+            "secrets": {
+              "type": "array",
+              "description": "The secret references that will be referenced within the container group.",
+              "items": {
+                "$ref": "#/definitions/SecretReference"
+              },
+              "x-ms-identifiers": [
+                "name"
+              ]
+            },
             "containers": {
               "type": "array",
               "description": "The containers within the container group.",
@@ -1544,12 +1616,56 @@
                 "name": "ContainerGroupPriority",
                 "modelAsString": true
               }
+            },
+            "containerGroupProfile": {
+              "description": "The reference container group profile properties.",
+              "$ref": "#/definitions/ContainerGroupProfileReferenceDefinition"
+            },
+            "standbyPoolProfile": {
+              "description": "The reference standby pool profile properties.",
+              "$ref": "#/definitions/StandbyPoolProfileDefinition"
+            },
+            "isCreatedFromStandbyPool": {
+              "readOnly": true,
+              "type": "boolean",
+              "description": "The flag indicating whether the container group is created by standby pool."
             }
           },
           "required": [
             "containers",
             "osType"
           ]
+        }
+      }
+    },
+    "ContainerGroupProfileReferenceDefinition": {
+      "description": "The container group profile reference.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The container group profile reference id.This will be an ARM resource id in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerInstance/containerGroupProfiles/{containerGroupProfileName}'."
+        },
+        "revision": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The container group profile reference revision."
+        }
+      }
+    },
+    "StandbyPoolProfileDefinition": {
+      "description": "The standby pool profile reference.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The standby pool profile reference id.This will be an ARM resource id in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StandbyPool/standbyContainerGroupPools/{standbyPoolName}'."
+        },
+        "failContainerGroupCreateOnReuseFailure": {
+          "type": "boolean",
+          "description": "The flag to determine whether ACI should fail the create request if the container group can not be obtained from standby pool."
         }
       }
     },
@@ -1662,6 +1778,10 @@
           "type": "string",
           "description": "The password for the private registry.",
           "x-ms-secret": true
+        },
+        "passwordReference": {
+          "type": "string",
+          "description": "The reference for the private registry password."
         },
         "identity": {
           "type": "string",
@@ -1875,6 +1995,10 @@
           "type": "string",
           "description": "The value of the secure environment variable.",
           "x-ms-secret": true
+        },
+        "secureValueReference": {
+          "type": "string",
+          "description": "The reference of the secure environment variable."
         }
       },
       "required": [
