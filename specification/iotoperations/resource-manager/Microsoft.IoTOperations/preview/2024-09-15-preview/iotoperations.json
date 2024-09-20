@@ -5350,12 +5350,13 @@
           "description": "The Azure IoT Operations version.",
           "readOnly": true
         },
-        "schemaRegistryId": {
+        "schemaRegistryRef": {
+          "$ref": "#/definitions/SchemaRegistryRef",
           "description": "The reference to the Schema Registry for this AIO Instance."
         }
       },
       "required": [
-        "schemaRegistryId"
+        "schemaRegistryRef"
       ]
     },
     "InstanceResource": {
@@ -6089,6 +6090,19 @@
       },
       "required": [
         "state"
+      ]
+    },
+    "SchemaRegistryRef": {
+      "type": "object",
+      "properties": {
+        "resourceId": {
+          "$ref": "#/definitions/SchemaRegistryID",
+          "description": "The resource ID of the Schema Registry.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "resourceId"
       ]
     },
     "SelfCheck": {
