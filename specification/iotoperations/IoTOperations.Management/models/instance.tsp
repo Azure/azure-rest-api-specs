@@ -55,6 +55,7 @@ model InstanceProperties {
   schemaRegistryRef: SchemaRegistryRef;
 }
 
+@doc("The reference to the Schema Registry for this AIO Instance.")
 model SchemaRegistryRef {
   @doc("The resource ID of the Schema Registry.")
   @visibility("read")
