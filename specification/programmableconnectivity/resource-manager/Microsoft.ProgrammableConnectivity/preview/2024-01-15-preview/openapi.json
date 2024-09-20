@@ -1,0 +1,1418 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "ProgrammableConnectivity",
+    "version": "2024-01-15-preview",
+    "description": "Azure Programmable Connectivity Provider management API.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Operations"
+    },
+    {
+      "name": "Gateways"
+    },
+    {
+      "name": "OperatorApiConnections"
+    },
+    {
+      "name": "OperatorApiPlans"
+    }
+  ],
+  "paths": {
+    "/providers/Microsoft.ProgrammableConnectivity/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Operations_List": {
+            "$ref": "./examples/Operations_List_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ProgrammableConnectivity/gateways": {
+      "get": {
+        "operationId": "Gateways_ListBySubscription",
+        "tags": [
+          "Gateways"
+        ],
+        "description": "List Gateway resources by subscription ID.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/GatewayListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gateways_ListBySubscription": {
+            "$ref": "./examples/Gateways_ListBySubscription_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ProgrammableConnectivity/operatorApiConnections": {
+      "get": {
+        "operationId": "OperatorApiConnections_ListBySubscription",
+        "tags": [
+          "OperatorApiConnections"
+        ],
+        "description": "List OperatorApiConnection resources by subscription ID.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/OperatorApiConnectionListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "OperatorApiConnections_ListBySubscription": {
+            "$ref": "./examples/OperatorApiConnections_ListBySubscription_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ProgrammableConnectivity/operatorApiPlans": {
+      "get": {
+        "operationId": "OperatorApiPlans_ListBySubscription",
+        "tags": [
+          "OperatorApiPlans"
+        ],
+        "description": "List OperatorApiPlan resources by subscription ID.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "An optional OData based filter expression to apply on the operation.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "filter"
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "description": "An optional query parameter which specifies the maximum number of records to be returned.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 20,
+            "x-ms-client-name": "top"
+          },
+          {
+            "name": "$skip",
+            "in": "query",
+            "description": "An optional query parameter which specifies the number of records to be skipped.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "x-ms-client-name": "skip"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/OperatorApiPlanListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "OperatorApiPlans_ListBySubscription": {
+            "$ref": "./examples/OperatorApiPlans_ListBySubscription_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ProgrammableConnectivity/operatorApiPlans/{operatorApiPlanName}": {
+      "get": {
+        "operationId": "OperatorApiPlans_Get",
+        "tags": [
+          "OperatorApiPlans"
+        ],
+        "description": "Get an OperatorApiPlan resource by name.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "operatorApiPlanName",
+            "in": "path",
+            "description": "APC Gateway Plan Name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/OperatorApiPlan"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "OperatorApiPlans_Get": {
+            "$ref": "./examples/OperatorApiPlans_Get_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ProgrammableConnectivity/gateways": {
+      "get": {
+        "operationId": "Gateways_ListByResourceGroup",
+        "tags": [
+          "Gateways"
+        ],
+        "description": "List Gateway resources by resource group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/GatewayListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gateways_ListByResourceGroup": {
+            "$ref": "./examples/Gateways_ListByResourceGroup_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ProgrammableConnectivity/gateways/{gatewayName}": {
+      "get": {
+        "operationId": "Gateways_Get",
+        "tags": [
+          "Gateways"
+        ],
+        "description": "Get a Gateway resource by name.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "gatewayName",
+            "in": "path",
+            "description": "Azure Programmable Connectivity Gateway Name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Gateway"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gateways_Get": {
+            "$ref": "./examples/Gateways_Get_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Gateways_CreateOrUpdate",
+        "tags": [
+          "Gateways"
+        ],
+        "description": "Create or update an APC Gateway.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "gatewayName",
+            "in": "path",
+            "description": "Azure Programmable Connectivity Gateway Name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Gateway"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'Gateway' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Gateway"
+            }
+          },
+          "201": {
+            "description": "Resource 'Gateway' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Gateway"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gateways_CreateOrUpdate": {
+            "$ref": "./examples/Gateways_CreateOrUpdate_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "Gateways_Update",
+        "tags": [
+          "Gateways"
+        ],
+        "description": "Update Gateway tags.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "gatewayName",
+            "in": "path",
+            "description": "Azure Programmable Connectivity Gateway Name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GatewayTagsUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Gateway"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gateways_Update": {
+            "$ref": "./examples/Gateways_Update_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "Gateways_Delete",
+        "tags": [
+          "Gateways"
+        ],
+        "description": "Delete a Gateway.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "gatewayName",
+            "in": "path",
+            "description": "Azure Programmable Connectivity Gateway Name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gateways_Delete": {
+            "$ref": "./examples/Gateways_Delete_MinimumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ProgrammableConnectivity/operatorApiConnections": {
+      "get": {
+        "operationId": "OperatorApiConnections_ListByResourceGroup",
+        "tags": [
+          "OperatorApiConnections"
+        ],
+        "description": "List OperatorApiConnection resources by resource group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/OperatorApiConnectionListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "OperatorApiConnections_ListByResourceGroup": {
+            "$ref": "./examples/OperatorApiConnections_ListByResourceGroup_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ProgrammableConnectivity/operatorApiConnections/{operatorApiConnectionName}": {
+      "get": {
+        "operationId": "OperatorApiConnections_Get",
+        "tags": [
+          "OperatorApiConnections"
+        ],
+        "description": "Get an Operator API Connection.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "operatorApiConnectionName",
+            "in": "path",
+            "description": "Azure Programmable Connectivity (APC) Operator API Connection Name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/OperatorApiConnection"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "OperatorApiConnections_Get": {
+            "$ref": "./examples/OperatorApiConnections_Get_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "OperatorApiConnections_Create",
+        "tags": [
+          "OperatorApiConnections"
+        ],
+        "description": "Create an Operator API Connection.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "operatorApiConnectionName",
+            "in": "path",
+            "description": "Azure Programmable Connectivity (APC) Operator API Connection Name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/OperatorApiConnection"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'OperatorApiConnection' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/OperatorApiConnection"
+            }
+          },
+          "201": {
+            "description": "Resource 'OperatorApiConnection' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/OperatorApiConnection"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "OperatorApiConnections_Create": {
+            "$ref": "./examples/OperatorApiConnections_Create_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "OperatorApiConnections_Update",
+        "tags": [
+          "OperatorApiConnections"
+        ],
+        "description": "Update an Operator API Connection.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "operatorApiConnectionName",
+            "in": "path",
+            "description": "Azure Programmable Connectivity (APC) Operator API Connection Name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/OperatorApiConnectionUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/OperatorApiConnection"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "OperatorApiConnections_Update": {
+            "$ref": "./examples/OperatorApiConnections_Update_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "OperatorApiConnections_Delete",
+        "tags": [
+          "OperatorApiConnections"
+        ],
+        "description": "Delete an Operator API Connection.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "operatorApiConnectionName",
+            "in": "path",
+            "description": "Azure Programmable Connectivity (APC) Operator API Connection Name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "OperatorApiConnections_Delete": {
+            "$ref": "./examples/OperatorApiConnections_Delete_MinimumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "AccountType": {
+      "type": "string",
+      "description": "The Account Type of the Operator API Connections.",
+      "enum": [
+        "AzureManaged",
+        "UserManaged"
+      ],
+      "x-ms-enum": {
+        "name": "AccountType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "AzureManaged",
+            "value": "AzureManaged",
+            "description": "Managed by Azure on-behalf-of the user."
+          },
+          {
+            "name": "UserManaged",
+            "value": "UserManaged",
+            "description": "Managed by the User themselves on the Operator end."
+          }
+        ]
+      }
+    },
+    "ApplicationProperties": {
+      "type": "object",
+      "description": "Details about the Application that would use the Operator's Network APIs.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the application. Example: Contoso App."
+        },
+        "applicationDescription": {
+          "type": "string",
+          "description": "Description of the application."
+        },
+        "applicationType": {
+          "type": "string",
+          "description": "The category that describes the application."
+        },
+        "legalName": {
+          "type": "string",
+          "description": "Legal name of the organization owning the application."
+        },
+        "organizationDescription": {
+          "type": "string",
+          "description": "A description of the organization owning the application."
+        },
+        "taxNumber": {
+          "type": "string",
+          "description": "Unique Tax Number for the user's organization in the country/region the APC Gateway is being purchased."
+        },
+        "privacyContactEmailAddress": {
+          "type": "string",
+          "description": "Email address of the Privacy contact or Data Protection officer of the organization."
+        }
+      }
+    },
+    "Gateway": {
+      "type": "object",
+      "description": "A Programmable Connectivity Gateway resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/GatewayProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "GatewayListResult": {
+      "type": "object",
+      "description": "The response of a Gateway list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Gateway items on this page",
+          "items": {
+            "$ref": "#/definitions/Gateway"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "GatewayProperties": {
+      "type": "object",
+      "description": "Gateway resource properties",
+      "properties": {
+        "operatorApiConnections": {
+          "type": "array",
+          "description": "List of Operator API Connections selected by the user",
+          "items": {
+            "type": "string",
+            "format": "arm-id",
+            "description": "A type definition that refers the id to an Azure Resource Manager resource.",
+            "x-ms-arm-id-details": {
+              "allowedResources": [
+                {
+                  "type": "Microsoft.ProgrammableConnectivity/operatorApiConnections"
+                }
+              ]
+            }
+          },
+          "readOnly": true
+        },
+        "gatewayBaseUrl": {
+          "type": "string",
+          "description": "Base URL of the Gateway resource. This is the URL that the users would use to make Open API Gateway requests to the Operators via Azure.",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation on the Gateway resource.",
+          "readOnly": true
+        }
+      }
+    },
+    "GatewayTagsUpdate": {
+      "type": "object",
+      "description": "The type used for updating tags in Gateway resources.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "MarketplaceProperties": {
+      "type": "object",
+      "description": "Azure marketplace properties for a plan.",
+      "properties": {
+        "offerId": {
+          "type": "string",
+          "description": "Azure marketplace Offer ID for this plan."
+        },
+        "legacyOfferId": {
+          "type": "string",
+          "description": "Azure marketplace Legacy Offer ID for this plan. This is used to fetch the details of the plan from the Azure marketplace."
+        },
+        "publisherId": {
+          "type": "string",
+          "description": "Azure marketplace Publisher ID for this plan."
+        },
+        "planId": {
+          "type": "string",
+          "description": "Azure marketplace Plan ID for this plan."
+        },
+        "termId": {
+          "type": "string",
+          "description": "Azure marketplace Term ID for this plan."
+        }
+      }
+    },
+    "OperatorApiConnection": {
+      "type": "object",
+      "description": "A Programmable Connectivity Operator API Connection resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/OperatorApiConnectionProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "OperatorApiConnectionListResult": {
+      "type": "object",
+      "description": "The response of a OperatorApiConnection list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The OperatorApiConnection items on this page",
+          "items": {
+            "$ref": "#/definitions/OperatorApiConnection"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "OperatorApiConnectionProperties": {
+      "type": "object",
+      "description": "Operator API Connection resource properties that cannot be updated once a resource has been created.",
+      "properties": {
+        "operatorApiPlanId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Reference to the Operator API Plan Resource ID.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ],
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.ProgrammableConnectivity/operatorApiPlans"
+              }
+            ]
+          }
+        },
+        "saasProperties": {
+          "$ref": "#/definitions/SaasProperties",
+          "description": "Details about the SaaS offer purchased from the marketplace.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "configuredApplication": {
+          "$ref": "#/definitions/ApplicationProperties",
+          "description": "Details about the Application that would use the Operator's Network APIs.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "appId": {
+          "type": "string",
+          "description": "Application ID of the App Developer that is registered with the Operator in a specific country/region.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "gatewayId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Reference to the APC Gateway resource ID.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.ProgrammableConnectivity/gateways"
+              }
+            ]
+          }
+        },
+        "accountType": {
+          "$ref": "#/definitions/AccountType",
+          "description": "Type of the account the user has with the Operator's Network API infrastructure. AzureManaged | UserManaged.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "appSecret": {
+          "type": "string",
+          "format": "password",
+          "description": "Application secret linked to the 'appId'. This should be stored securely and is not returned back when the resource information is read.",
+          "x-ms-mutability": [
+            "update",
+            "create"
+          ],
+          "x-ms-secret": true
+        },
+        "operatorName": {
+          "type": "string",
+          "description": "Name of the Operator in the linked Operator API Plan belongs to.",
+          "readOnly": true
+        },
+        "camaraApiName": {
+          "type": "string",
+          "description": "The Network API for the current operator in the country/region provided in the linked Operator API Plan.",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "#/definitions/Status",
+          "description": "The status of the OperatorApiConnection resource.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "operatorApiPlanId",
+        "gatewayId",
+        "accountType"
+      ]
+    },
+    "OperatorApiConnectionUpdate": {
+      "type": "object",
+      "description": "The type used for update operations of the OperatorApiConnection.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/OperatorApiConnectionUpdateProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "OperatorApiConnectionUpdateProperties": {
+      "type": "object",
+      "description": "The updatable properties of the OperatorApiConnection.",
+      "properties": {
+        "operatorApiPlanId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Reference to the Operator API Plan Resource ID.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ],
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.ProgrammableConnectivity/operatorApiPlans"
+              }
+            ]
+          }
+        },
+        "saasProperties": {
+          "$ref": "#/definitions/SaasProperties",
+          "description": "Details about the SaaS offer purchased from the marketplace.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "configuredApplication": {
+          "$ref": "#/definitions/ApplicationProperties",
+          "description": "Details about the Application that would use the Operator's Network APIs.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "appId": {
+          "type": "string",
+          "description": "Application ID of the App Developer that is registered with the Operator in a specific country/region.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "appSecret": {
+          "type": "string",
+          "format": "password",
+          "description": "Application secret linked to the 'appId'. This should be stored securely and is not returned back when the resource information is read.",
+          "x-ms-mutability": [
+            "update",
+            "create"
+          ],
+          "x-ms-secret": true
+        }
+      }
+    },
+    "OperatorApiPlan": {
+      "type": "object",
+      "description": "A Programmable Connectivity Operator API Plans resource. This is a readonly resource that indicates which Operator Network APIs are available in the user's subscription.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/OperatorApiPlanProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "OperatorApiPlanListResult": {
+      "type": "object",
+      "description": "The response of a OperatorApiPlan list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The OperatorApiPlan items on this page",
+          "items": {
+            "$ref": "#/definitions/OperatorApiPlan"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "OperatorApiPlanProperties": {
+      "type": "object",
+      "description": "Operator API Plan properties.",
+      "properties": {
+        "operatorName": {
+          "type": "string",
+          "description": "Name of the Operator this plan belongs to."
+        },
+        "camaraApiName": {
+          "type": "string",
+          "description": "Standardized Network API name defined by CAMARA specifications."
+        },
+        "supportedLocations": {
+          "type": "array",
+          "description": "List of Azure regions where this offer is supported.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "operatorRegions": {
+          "type": "array",
+          "description": "List of country/region names where this plan is being supported by the Operator.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "markets": {
+          "type": "array",
+          "description": "List of country/region names where this plan is being supported by Azure Marketplace.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "limits": {
+          "type": "string",
+          "description": "The limits, if any, will be imposed by the operator."
+        },
+        "marketplaceProperties": {
+          "$ref": "#/definitions/MarketplaceProperties",
+          "description": "Azure marketplace properties for this plan."
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation on the Gateway resource.",
+          "readOnly": true
+        }
+      }
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of a resource.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Provisioning",
+        "Updating",
+        "Deleting",
+        "Accepted"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Provisioning",
+            "value": "Provisioning",
+            "description": "The resource is being provisioned"
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "The resource is updating"
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "The resource is being deleted"
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "The resource create or update request has been accepted"
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "SaasProperties": {
+      "type": "object",
+      "description": "Details about the SaaS offer purchased from the marketplace.",
+      "properties": {
+        "saasSubscriptionId": {
+          "type": "string",
+          "description": "Subscription ID of the SaaS offer purchased from the marketplace."
+        },
+        "saasResourceId": {
+          "type": "string",
+          "description": "Resource ID of the SaaS offer purchased from the marketplace."
+        }
+      }
+    },
+    "Status": {
+      "type": "object",
+      "description": "Description of the current status of the OperatorApiConnection resource.",
+      "properties": {
+        "state": {
+          "type": "string",
+          "description": "Current state of the OperatorApiConnection resource."
+        },
+        "reason": {
+          "type": "string",
+          "description": "Explanation of the current state of the OperatorApiConnection resource."
+        }
+      }
+    }
+  },
+  "parameters": {}
+}

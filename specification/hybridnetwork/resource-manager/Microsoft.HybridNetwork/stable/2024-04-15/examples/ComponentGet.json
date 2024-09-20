@@ -1,0 +1,57 @@
+{
+  "parameters": {
+    "api-version": "2024-04-15",
+    "subscriptionId": "subid",
+    "resourceGroupName": "rg",
+    "networkFunctionName": "testNf",
+    "componentName": "testComponent"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/subid/resourcegroups/rg/providers/Microsoft.HybridNetwork/networkFunctions/testNf/components/testComponent",
+        "name": "testComponent",
+        "type": "Microsoft.HybridNetwork/networkFunctions/components",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "deploymentProfile": "{\"chart\":{\"name\":\"testChartName\",\"version\":\"v1.0.0\"},\"releaseName\":\"testReleaseName\",\"targetNamespace\":\"testTargetNameSpace\",\"values\":{\".repoBase\":\"testrepo.azurecr.io/\"}}",
+          "deploymentStatus": {
+            "status": "Installing",
+            "resources": {
+              "deployments": [
+                {
+                  "name": "nginix",
+                  "namespace": "core",
+                  "desired": 3,
+                  "ready": 3,
+                  "upToDate": 3,
+                  "available": 3,
+                  "creationTime": "2023-07-10T02:05:01.116+00:00"
+                }
+              ],
+              "pods": [
+                {
+                  "name": "nginix",
+                  "namespace": "core",
+                  "desired": 3,
+                  "ready": 3,
+                  "status": "Succeeded",
+                  "creationTime": "2023-07-10T02:05:01.116+00:00",
+                  "events": [
+                    {
+                      "type": "Normal",
+                      "reason": "Pulling",
+                      "message": "Pulling image nginx",
+                      "lastSeenTime": "2023-07-10T02:06:01.116+00:00"
+                    }
+                  ]
+                }
+              ]
+            },
+            "nextExpectedUpdateAt": "2023-07-10T02:06:01.116+00:00"
+          }
+        }
+      }
+    }
+  }
+}
