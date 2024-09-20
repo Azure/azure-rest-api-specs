@@ -895,7 +895,7 @@
           "ManagedEnvironments",
           "ManagedHttpRoutes"
         ],
-        "summary": "Get the specified Managed Certificate.",
+        "summary": "Get the specified Managed Http Route Config.",
         "operationId": "ManagedHttpRoutes_Get",
         "parameters": [
           {
@@ -1006,13 +1006,71 @@
             }
           }
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        },
         "x-ms-examples": {
           "Create or Update Certificate": {
             "$ref": "./examples/ManagedHttpRoutes_CreateOrUpdate.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "ManagedEnvironments",
+          "ManagedHttpRoutes"
+        ],
+        "summary": "Update tags of a manged http route object",
+        "description": "Patches an http route config resource. Only patching of tags is supported",
+        "operationId": "ManagedHttpRoutes_Update",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "environmentName",
+            "in": "path",
+            "description": "Name of the Managed Environment.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "httpRouteName",
+            "in": "path",
+            "description": "Name of the Http Route Config Resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "managedHttpRouteEnvelope",
+            "in": "body",
+            "required": true,
+            "description": "Properties of http route config that need to be updated",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/ManagedHttpRoutePatch"
+            }
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Managed Http Routes updated successfully.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/ManagedHttpRoute"
+            }
+          },
+          "default": {
+            "description": "Common error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Patch Managed Http Route": {
+            "$ref": "./examples/ManagedHttpRoutes_Patch.json"
           }
         }
       },
@@ -1021,7 +1079,7 @@
           "ManagedEnvironments",
           "ManagedHttpRoutes"
         ],
-        "summary": "Deletes the specified Managed Certificate.",
+        "summary": "Deletes the specified Managed Http Route.",
         "operationId": "ManagedHttpRoutes_Delete",
         "parameters": [
           {
@@ -1075,7 +1133,7 @@
           "ManagedEnvironments",
           "ManagedHttpRoutes"
         ],
-        "summary": "Get the Advanced ingress routes in a given managed environment.",
+        "summary": "Get the Managed Http Routes in a given managed environment.",
         "operationId": "ManagedHttpRoutes_List",
         "parameters": [
           {

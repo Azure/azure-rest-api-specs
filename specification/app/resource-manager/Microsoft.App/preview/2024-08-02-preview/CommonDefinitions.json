@@ -1614,6 +1614,19 @@
         }
       }
     },
+    "ManagedHttpRoutePatch": {
+      "description": "A managed http route to update",
+      "type": "object",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Application-specific metadata in the form of key-value pairs."
+        }
+      }
+    },
     "ManagedHttpRoute": {
       "description": "Managed certificates used for Custom Domain bindings of Container Apps in a Managed Environment",
       "type": "object",
@@ -1698,11 +1711,11 @@
           "description":"Container App Name to route requests to",
           "type": "string"
         },
-        "RevisionName":{
+        "revisionName":{
           "description":"Revision to route requests to",
           "type": "string"
         },
-        "Label":{
+        "labelName":{
           "description":"Label/Revision to route requests to",
           "type": "string"
         },

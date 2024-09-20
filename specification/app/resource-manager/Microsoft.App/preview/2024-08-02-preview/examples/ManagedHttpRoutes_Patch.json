@@ -4,7 +4,13 @@
     "resourceGroupName": "examplerg",
     "environmentName": "testcontainerenv",
     "httpRouteName": "httpRoute-firendly-name",
-    "api-version": "2024-08-02-preview"
+    "api-version": "2024-08-02-preview",
+    "managedHttpRouteEnvelope": {
+      "tags": {
+        "tag1": "value1",
+        "tag2": "value2"
+      }
+    }
   },
   "responses": {
     "200": {
@@ -15,7 +21,7 @@
           "location": "East US",
           "properties": {
             "fqdn": "app1.example.com",
-            "provisioningState": "Succeeded",
+            "provisioningState": "InProgress",
             "customDomains": [
               {
                 "name": "example.com",
@@ -34,7 +40,7 @@
                 "routes": [
                   {
                     "match": {
-                      "prefix": "/api",
+                      "path": "/v1",
                       "caseSensitive": true
                     },
                     "action": {
@@ -47,5 +53,6 @@
           }
         }
       }
-    }
   }
+}
+
