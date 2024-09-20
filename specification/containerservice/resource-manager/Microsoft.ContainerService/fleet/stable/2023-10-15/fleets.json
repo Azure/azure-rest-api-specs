@@ -1658,59 +1658,6 @@
     }
   },
   "definitions": {
-    "Azure.ResourceManager.Legacy.ManagedServiceIdentityType": {
-      "type": "string",
-      "description": "Type of managed service identity (where both SystemAssigned and UserAssigned types are allowed).",
-      "enum": [
-        "None",
-        "SystemAssigned",
-        "UserAssigned",
-        "SystemAssigned, UserAssigned"
-      ],
-      "x-ms-enum": {
-        "name": "ManagedServiceIdentityType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "None",
-            "value": "None",
-            "description": "No managed identity."
-          },
-          {
-            "name": "SystemAssigned",
-            "value": "SystemAssigned",
-            "description": "System assigned managed identity."
-          },
-          {
-            "name": "UserAssigned",
-            "value": "UserAssigned",
-            "description": "User assigned managed identity."
-          },
-          {
-            "name": "SystemAndUserAssigned",
-            "value": "SystemAssigned, UserAssigned",
-            "description": "System and user assigned managed identity."
-          }
-        ]
-      }
-    },
-    "Azure.ResourceManager.Legacy.ManagedServiceIdentityV4Update": {
-      "type": "object",
-      "description": "Managed service identity (system assigned and/or user assigned identities)",
-      "properties": {
-        "type": {
-          "$ref": "#/definitions/Azure.ResourceManager.Legacy.ManagedServiceIdentityType",
-          "description": "The type of managed identity assigned to this resource."
-        },
-        "userAssignedIdentities": {
-          "type": "object",
-          "description": "The identities assigned to this resource by the user.",
-          "additionalProperties": {
-            "$ref": "../../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/UserAssignedIdentity"
-          }
-        }
-      }
-    },
     "ClusterResourceId": {
       "type": "string",
       "format": "arm-id",
@@ -1729,7 +1676,8 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/FleetProperties",
-          "description": "The resource-specific properties for this resource."
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true
         },
         "eTag": {
           "type": "string",
@@ -1808,7 +1756,8 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/FleetMemberProperties",
-          "description": "The resource-specific properties for this resource."
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true
         },
         "eTag": {
           "type": "string",
@@ -1872,19 +1821,6 @@
         "clusterResourceId"
       ]
     },
-    "FleetMemberPropertiesUpdate": {
-      "type": "object",
-      "description": "A member of the Fleet. It contains a reference to an existing Kubernetes cluster on Azure.",
-      "properties": {
-        "group": {
-          "type": "string",
-          "description": "The group this member belongs to for multi-cluster update management.",
-          "minLength": 1,
-          "maxLength": 50,
-          "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
-        }
-      }
-    },
     "FleetMemberProvisioningState": {
       "type": "string",
       "description": "The provisioning state of the last accepted operation.",
@@ -1936,18 +1872,27 @@
     },
     "FleetMemberUpdate": {
       "type": "object",
-      "description": "A member of the Fleet. It contains a reference to an existing Kubernetes cluster on Azure.",
+      "description": "The type used for update operations of the FleetMember.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/FleetMemberPropertiesUpdate",
-          "description": "The resource-specific properties for this resource."
+          "$ref": "#/definitions/FleetMemberUpdateProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true
         }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+      }
+    },
+    "FleetMemberUpdateProperties": {
+      "type": "object",
+      "description": "The updatable properties of the FleetMember.",
+      "properties": {
+        "group": {
+          "type": "string",
+          "description": "The group this member belongs to for multi-cluster update management.",
+          "minLength": 1,
+          "maxLength": 50,
+          "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
         }
-      ]
+      }
     },
     "FleetPatch": {
       "type": "object",
@@ -1961,7 +1906,7 @@
           }
         },
         "identity": {
-          "$ref": "#/definitions/Azure.ResourceManager.Legacy.ManagedServiceIdentityV4Update",
+          "$ref": "../../../../../../common-types/resource-management/v4/managedidentity.json#/definitions/ManagedServiceIdentity",
           "description": "Managed identity."
         }
       }
@@ -2032,7 +1977,8 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/FleetUpdateStrategyProperties",
-          "description": "The resource-specific properties for this resource."
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true
         },
         "eTag": {
           "type": "string",
@@ -2347,7 +2293,8 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/UpdateRunProperties",
-          "description": "The resource-specific properties for this resource."
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true
         },
         "eTag": {
           "type": "string",

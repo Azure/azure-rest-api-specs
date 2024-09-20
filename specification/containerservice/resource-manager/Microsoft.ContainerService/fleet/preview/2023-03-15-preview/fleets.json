@@ -1344,7 +1344,8 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/FleetProperties",
-          "description": "The resource-specific properties for this resource."
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true
         },
         "eTag": {
           "type": "string",
@@ -1446,7 +1447,8 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/FleetMemberProperties",
-          "description": "The resource-specific properties for this resource."
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true
         },
         "eTag": {
           "type": "string",
@@ -1510,19 +1512,6 @@
         "clusterResourceId"
       ]
     },
-    "FleetMemberPropertiesUpdate": {
-      "type": "object",
-      "description": "A member of the Fleet. It contains a reference to an existing Kubernetes cluster on Azure.",
-      "properties": {
-        "group": {
-          "type": "string",
-          "description": "The group this member belongs to for multi-cluster update management.",
-          "minLength": 1,
-          "maxLength": 50,
-          "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
-        }
-      }
-    },
     "FleetMemberProvisioningState": {
       "type": "string",
       "description": "The provisioning state of the last accepted operation.",
@@ -1574,18 +1563,27 @@
     },
     "FleetMemberUpdate": {
       "type": "object",
-      "description": "A member of the Fleet. It contains a reference to an existing Kubernetes cluster on Azure.",
+      "description": "The type used for update operations of the FleetMember.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/FleetMemberPropertiesUpdate",
-          "description": "The resource-specific properties for this resource."
+          "$ref": "#/definitions/FleetMemberUpdateProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true
         }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+      }
+    },
+    "FleetMemberUpdateProperties": {
+      "type": "object",
+      "description": "The updatable properties of the FleetMember.",
+      "properties": {
+        "group": {
+          "type": "string",
+          "description": "The group this member belongs to for multi-cluster update management.",
+          "minLength": 1,
+          "maxLength": 50,
+          "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
         }
-      ]
+      }
     },
     "FleetPatch": {
       "type": "object",
@@ -1796,7 +1794,8 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/UpdateRunProperties",
-          "description": "The resource-specific properties for this resource."
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true
         },
         "eTag": {
           "type": "string",
