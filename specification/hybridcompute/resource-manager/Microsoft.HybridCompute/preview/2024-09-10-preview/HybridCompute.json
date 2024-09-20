@@ -2984,15 +2984,19 @@
     "ExtensionValueV2": {
       "type": "object",
       "properties": {
+        "location": {
+          "type": "string",
+          "description": "The location of the extension."
+        },
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/ExtensionValueV2Properties",
-          "description": "The single extension based on search criteria"
+          "description": "The single extension based on search criteria."
         }
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
       ],
       "description": "Describes a V2 Extension Metadata"
@@ -3038,13 +3042,13 @@
             "type": "string"
           },
           "description": "Architectures (x64, arms64, etc.) that this extension supports."
-        },
-        "allOf": [
-          {
-            "$ref": "#/definitions/ExtensionValueProperties"
-          }
-        ]
+        }
       },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ExtensionValueProperties"
+        }
+      ],
       "description": "Describes V2 Extension Metadata properties"
     },
     "ExtensionTypeListResult": {
