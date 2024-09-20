@@ -223,6 +223,12 @@ suppressions:
       - containerInstance.json
     where:
       - $.definitions.ConfigMap.properties.keyValuePairs
+  - code: AvoidAdditionalProperties
+    reason: additional feature addition to existing secretVolumes which is defined as a dictionary
+    from:
+      - containerInstance.json
+    where:
+      - $.definitions.SecretReferenceVolume
 ```
 
 ---
