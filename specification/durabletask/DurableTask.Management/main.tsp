@@ -92,7 +92,7 @@ model TaskHubProperties {
 
   @doc("URL of the durable task service dashboard")
   @visibility("read")
-  dashboardUrl?: string;
+  dashboardUrl?: url;
 }
 
 @doc("Update Task Hub")
