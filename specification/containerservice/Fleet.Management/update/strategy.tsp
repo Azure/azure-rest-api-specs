@@ -80,7 +80,6 @@ interface FleetUpdateStrategies {
       IfMatchParameters<FleetUpdateStrategy>
   >;
 
-
   /** List FleetUpdateStrategy resources by Fleet */
   listByFleet is ArmResourceListByParent<FleetUpdateStrategy>;
 }
