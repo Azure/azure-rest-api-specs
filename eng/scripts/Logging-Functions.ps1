@@ -12,7 +12,7 @@ function LogInfo {
 
 function LogNotice {
   if (Test-SupportsGitHubLogging) {
-    Write-Warning ("::notice::$args" -replace "`n", "%0D%0A")
+    Write-Host ("::notice::$args" -replace "`n", "%0D%0A")
   }
   else {
     # No equivalent for DevOps
@@ -23,7 +23,7 @@ function LogNotice {
 function LogNoticeForFile($file, $noticeString)
 {
   if (Test-SupportsGitHubLogging) {
-    Write-Warning ("::notice file=$file,line=1,col=1::$noticeString" -replace "`n", "%0D%0A")
+    Write-Host ("::notice file=$file,line=1,col=1::$noticeString" -replace "`n", "%0D%0A")
   }
   else {
     # No equivalent for DevOps
