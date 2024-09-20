@@ -5,8 +5,6 @@ using TypeSpec.Versioning;
 using Azure.ClientGenerator.Core;
 using Microsoft.LoadTestService;
 
-@useDependency(APIVersions.v2022_11_01)
-@useDependency(APIVersions.v2023_04_01_preview)
 @useDependency(APIVersions.v2024_05_01_preview)
 namespace Customizations;
 
@@ -56,8 +54,8 @@ interface TestRunOperations {
   listMetricNamespaces is LoadTestRun.listMetricNamespaces;
   listMetrics is LoadTestRun.listMetrics;
   listTestRuns is LoadTestRun.listTestRuns;
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id"
-  stopTestRun is LoadTestRun.stop;
+  @clientName("stopTestRun", "javascript,python,java,csharp,go")
+  stop is LoadTestRun.stop;
 }
 
 @client({
@@ -80,6 +78,6 @@ interface TestProfileRunOperations {
   deleteTestProfileRun is TestProfileRunAdministration.deleteTestProfileRun;
   getTestProfileRun is TestProfileRunAdministration.getTestProfileRun;
   listTestProfileRuns is TestProfileRunAdministration.listTestProfileRuns;
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id"
-  stopTestProfileRun is TestProfileRunAdministration.stop;
+  @clientName("stopTestProfileRun", "javascript,python,java,csharp,go")
+  stop is TestProfileRunAdministration.stop;
 }
