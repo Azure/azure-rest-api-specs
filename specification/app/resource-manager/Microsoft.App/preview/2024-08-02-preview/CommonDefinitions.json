@@ -1785,8 +1785,23 @@
         }
       }
     },
-    "HttpRouteProvisioningState":{
-
+    "HttpRouteProvisioningState": {
+      "type": "string",
+      "readOnly": true,
+      "description": "The current provisioning state.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Waiting",
+        "Updating",
+        "Deleting",
+        "Pending"
+      ],
+      "x-ms-enum": {
+        "name": "HttpRouteProvisioningState",
+        "modelAsString": true
+      }
     },
     "ManagedCertificateCollection": {
       "description": "Collection of Managed Certificates.",
