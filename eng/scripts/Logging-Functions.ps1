@@ -10,6 +10,27 @@ function LogInfo {
   Write-Host "$args"
 }
 
+function LogNotice {
+  if (Test-SupportsGitHubLogging) {
+    Write-Warning ("::notice::$args" -replace "`n", "%0D%0A")
+  }
+  else {
+    # No equivalent for DevOps
+    Write-Host "[Notice] $args"
+  }
+}
+
+function LogNoticeForFile($file, $noticeString)
+{
+  if (Test-SupportsGitHubLogging) {
+    Write-Warning ("::notice file=$file,line=1,col=1::$noticeString" -replace "`n", "%0D%0A")
+  }
+  else {
+    # No equivalent for DevOps
+    Write-Host "[Notice in file $file] $noticeString"
+  }
+}
+
 function LogWarning {
   if (Test-SupportsDevOpsLogging) {
     Write-Host ("##vso[task.LogIssue type=warning;]$args" -replace "`n", "%0D%0A")
@@ -31,7 +52,7 @@ function LogErrorForFile($file, $errorString)
     Write-Error ("::error file=$file,line=1,col=1::$errorString" -replace "`n", "%0D%0A")
   }
   else {
-    Write-Error "[Error in file $file]$errorString"
+    Write-Error "[Error in file $file] $errorString"
   }
 }
 function LogError {
