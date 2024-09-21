@@ -15,7 +15,7 @@
     "application/json"
   ],
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{siteName}/certificates": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/certificates": {
       "get": {
         "tags": [
           "SiteCertificates"
@@ -27,7 +27,7 @@
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "name": "siteName",
+            "name": "name",
             "in": "path",
             "description": "Name of the site.",
             "required": true,
@@ -65,7 +65,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{siteName}/certificates/{name}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/certificates/{certificateName}": {
       "get": {
         "tags": [
           "SiteCertificates"
@@ -77,7 +77,7 @@
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "name": "siteName",
+            "name": "name",
             "in": "path",
             "description": "Name of the site.",
             "required": true,
@@ -85,7 +85,7 @@
             "pattern": "^[A-z][A-z0-9]*$"
           },
           {
-            "name": "name",
+            "name": "certificateName",
             "in": "path",
             "description": "Name of the certificate.",
             "required": true,
@@ -299,7 +299,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{siteName}/slots/{slot}/certificates": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/certificates": {
       "get": {
         "tags": [
           "SiteCertificates"
@@ -311,7 +311,7 @@
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "name": "siteName",
+            "name": "name",
             "in": "path",
             "description": "Name of the site.",
             "required": true,
@@ -356,7 +356,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{siteName}/slots/{slot}/certificates/{name}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/certificates/{certificateName}": {
       "get": {
         "tags": [
           "SiteCertificates"
@@ -368,7 +368,7 @@
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "name": "siteName",
+            "name": "name",
             "in": "path",
             "description": "Name of the site.",
             "required": true,
@@ -383,7 +383,7 @@
             "type": "string"
           },
           {
-            "name": "name",
+            "name": "certificateName",
             "in": "path",
             "description": "Name of the certificate.",
             "required": true,
