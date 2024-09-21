@@ -271,7 +271,7 @@ model DeallocateResourceOperationResponse {
 
   @doc("The location of the deallocate request eg westus")
   @visibility("read", "create")
-  location: string;
+  location: Azure.Core.azureLocation;
 
   @extension("x-ms-identifiers", ["resourceId"])
   @doc("The results from the deallocate request if no errors exist")
@@ -304,7 +304,7 @@ model StartResourceOperationResponse {
 
   @doc("The location of the start request eg westus")
   @visibility("read", "create")
-  location: string;
+  location: Azure.Core.azureLocation;
 
   @extension("x-ms-identifiers", ["resourceId"])
   @doc("The results from the start request if no errors exist")
@@ -337,7 +337,7 @@ model HibernateResourceOperationResponse {
 
   @doc("The location of the Hibernate request eg westus")
   @visibility("read", "create")
-  location: string;
+  location: Azure.Core.azureLocation;
 
   @extension("x-ms-identifiers", ["resourceId"])
   @doc("The results from the Hibernate request if no errors exist")
