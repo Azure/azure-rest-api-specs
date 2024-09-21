@@ -35,11 +35,11 @@ directive:
 - from: CommonDefinitions.json
   where: $.definitions.CertificatePatchResource
   transform:
-    $["x-ms-client-name"] = "AppCertificatePatchResource"
+    $["x-ms-client-name"] = "AppCertificatePatch"
 - from: Certificates.json
   where: $.definitions.CertificatePatchResource
   transform:
-    $["x-ms-client-name"] = "AppCertificatePatchResource"
+    $["x-ms-client-name"] = "AppCertificatePatch"
 ```
 
 ### Go multi-api
