@@ -3,7 +3,7 @@
     "subscriptionId": "dd4bfc94-a096-412b-9c43-4bd13e35afbc",
     "resourceGroupName": "QueryResourceGroupName",
     "ruleName": "perf",
-    "api-version": "2022-08-01-preview",
+    "api-version": "2024-01-01-preview",
     "parameters": {
       "location": "eastus",
       "properties": {
@@ -12,7 +12,10 @@
         "enabled": true,
         "evaluationFrequency": "PT5M",
         "scopes": [
-          "/subscriptions/aaf177ed-1330-a9f2-80ea-fd3d7783b147/resourceGroups/scopeResourceGroup1/providers/Microsoft.Compute/virtualMachines/vm1"
+          "/subscriptions/aaf177ed-1330-a9f2-80ea-fd3d7783b147"
+        ],
+        "targetResourceTypes": [
+          "Microsoft.Compute/virtualMachines"
         ],
         "windowSize": "PT10M",
         "criteria": {
@@ -52,6 +55,10 @@
           "actionGroups": [
             "/subscriptions/1cf177ed-1330-4692-80ea-fd3d7783b147/resourcegroups/sqrapi/providers/microsoft.insights/actiongroups/myactiongroup"
           ],
+          "actionProperties": {
+            "Icm.TsgId": "https://tsg.url",
+            "Icm.Title": "Custom title in ICM"
+          },
           "customProperties": {
             "key11": "value11",
             "key12": "value12"
@@ -81,7 +88,10 @@
           "enabled": true,
           "evaluationFrequency": "PT5M",
           "scopes": [
-            "/subscriptions/aaf177ed-1330-a9f2-80ea-fd3d7783b147/resourceGroups/scopeResourceGroup1/providers/Microsoft.Compute/virtualMachines/vm1"
+            "/subscriptions/aaf177ed-1330-a9f2-80ea-fd3d7783b147"
+          ],
+          "targetResourceTypes": [
+            "Microsoft.Compute/virtualMachines"
           ],
           "windowSize": "PT10M",
           "criteria": {
@@ -121,6 +131,10 @@
             "actionGroups": [
               "/subscriptions/1cf177ed-1330-4692-80ea-fd3d7783b147/resourcegroups/sqrapi/providers/microsoft.insights/actiongroups/myactiongroup"
             ],
+            "actionProperties": {
+              "Icm.TsgId": "https://tsg.url",
+              "Icm.Title": "Custom title in ICM"
+            },
             "customProperties": {
               "key11": "value11",
               "key12": "value12"
@@ -150,7 +164,10 @@
           "enabled": true,
           "evaluationFrequency": "PT5M",
           "scopes": [
-            "/subscriptions/aaf177ed-1330-a9f2-80ea-fd3d7783b147/resourceGroups/scopeResourceGroup1/providers/Microsoft.Compute/virtualMachines/vm1"
+            "/subscriptions/aaf177ed-1330-a9f2-80ea-fd3d7783b147"
+          ],
+          "targetResourceTypes": [
+            "Microsoft.Compute/virtualMachines"
           ],
           "windowSize": "PT10M",
           "criteria": {
@@ -190,6 +207,10 @@
             "actionGroups": [
               "/subscriptions/1cf177ed-1330-4692-80ea-fd3d7783b147/resourcegroups/sqrapi/providers/microsoft.insights/actiongroups/myactiongroup"
             ],
+            "actionProperties": {
+              "Icm.TsgId": "https://tsg.url",
+              "Icm.Title": "Custom title in ICM"
+            },
             "customProperties": {
               "key11": "value11",
               "key12": "value12"
