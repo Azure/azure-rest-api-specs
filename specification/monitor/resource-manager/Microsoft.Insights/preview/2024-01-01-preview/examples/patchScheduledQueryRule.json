@@ -2,52 +2,43 @@
   "parameters": {
     "subscriptionId": "dd4bfc94-a096-412b-9c43-4bd13e35afbc",
     "resourceGroupName": "QueryResourceGroupName",
-    "ruleName": "perf",
-    "api-version": "2023-12-01"
+    "ruleName": "heartbeat",
+    "api-version": "2024-01-01-preview",
+    "parameters": {
+      "properties": {
+        "enabled": false
+      }
+    }
   },
   "responses": {
     "200": {
       "headers": {},
       "body": {
-        "id": "/subscriptions/dd4bfc94-a096-412b-9c43-4bd13e35afbc/resourcegroups/QueryResourceGroupName/providers/microsoft.insights/scheduledqueryrules/perf",
-        "name": "perf",
+        "id": "/subscriptions/dd4bfc94-a096-412b-9c43-4bd13e35afbc/resourcegroups/QueryResourceGroupName/providers/microsoft.insights/scheduledqueryrules/heartbeat",
+        "name": "heartbeat",
         "type": "microsoft.insights/scheduledqueryrules",
         "location": "eastus",
         "tags": {},
         "properties": {
-          "description": "Performance rule",
+          "description": "Health check rule",
           "severity": 4,
-          "enabled": true,
+          "enabled": false,
           "evaluationFrequency": "PT5M",
           "scopes": [
-            "/subscriptions/aaf177ed-1330-a9f2-80ea-fd3d7783b147/resourceGroups/scopeResourceGroup1/providers/Microsoft.Compute/virtualMachines/vm1"
+            "/subscriptions/aaf177ed-1330-a9f2-80ea-fd3d7783b147"
+          ],
+          "targetResourceTypes": [
+            "Microsoft.Compute/virtualMachines"
           ],
           "windowSize": "PT10M",
           "criteria": {
             "allOf": [
               {
-                "query": "Perf | where ObjectName == \"Processor\"",
-                "timeAggregation": "Average",
-                "metricMeasureColumn": "% Processor Time",
-                "resourceIdColumn": "resourceId",
-                "dimensions": [
-                  {
-                    "name": "ComputerIp",
-                    "operator": "Exclude",
-                    "values": [
-                      "192.168.1.1"
-                    ]
-                  },
-                  {
-                    "name": "OSType",
-                    "operator": "Include",
-                    "values": [
-                      "*"
-                    ]
-                  }
-                ],
+                "query": "Heartbeat",
+                "timeAggregation": "Count",
+                "dimensions": [],
                 "operator": "GreaterThan",
-                "threshold": 70,
+                "threshold": 360,
                 "failingPeriods": {
                   "numberOfEvaluationPeriods": 1,
                   "minFailingPeriodsToAlert": 1

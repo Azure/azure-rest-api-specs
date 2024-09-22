@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2021-02-01-preview",
+    "version": "2024-01-01-preview",
     "title": "Scheduled Query Rules API",
     "description": "Azure Monitor client to create/update/delete Scheduled Query Rules."
   },
@@ -59,12 +59,12 @@
           "default": {
             "description": "BadRequest",
             "schema": {
-              "$ref": "#/definitions/ErrorContract"
+              "$ref": "../../../../common-types/v2/commonMonitoringTypes.json#/definitions/ErrorContract"
             }
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": null
+          "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
           "List scheduled query rules by subscription": {
@@ -101,12 +101,12 @@
           "default": {
             "description": "BadRequest",
             "schema": {
-              "$ref": "#/definitions/ErrorContract"
+              "$ref": "../../../../common-types/v2/commonMonitoringTypes.json#/definitions/ErrorContract"
             }
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": null
+          "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
           "List scheduled query rules by resource group": {
@@ -146,7 +146,7 @@
           "default": {
             "description": "BadRequest",
             "schema": {
-              "$ref": "#/definitions/ErrorContract"
+              "$ref": "../../../../common-types/v2/commonMonitoringTypes.json#/definitions/ErrorContract"
             }
           }
         },
@@ -201,7 +201,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorContract"
+              "$ref": "../../../../common-types/v2/commonMonitoringTypes.json#/definitions/ErrorContract"
             }
           }
         },
@@ -256,7 +256,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorContract"
+              "$ref": "../../../../common-types/v2/commonMonitoringTypes.json#/definitions/ErrorContract"
             }
           }
         },
@@ -290,7 +290,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorContract"
+              "$ref": "../../../../common-types/v2/commonMonitoringTypes.json#/definitions/ErrorContract"
             }
           },
           "200": {
@@ -327,6 +327,29 @@
             "description": "The dictionary of custom properties to include with the post operation. These data are appended to the alert payload."
           },
           "description": "The properties of an alert payload."
+        },
+        "actionProperties": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string",
+            "description": "The dictionary of action properties to include with the post operation. This data customizes the actions."
+          },
+          "description": "The properties of an action properties."
+        }
+      }
+    },
+    "RuleResolveConfiguration": {
+      "type": "object",
+      "description": "TBD. Relevant only for rules of the kind LogAlert.",
+      "properties": {
+        "autoResolved": {
+          "type": "boolean",
+          "description": "The flag that indicates whether or not to auto resolve a fired alert."
+        },
+        "timeToResolve": {
+          "type": "string",
+          "format": "duration",
+          "description": "The duration a rule must evaluate as healthy before the fired alert is automatically resolved represented in ISO 8601 duration format."
         }
       }
     },
@@ -352,14 +375,15 @@
           "description": "The display name of the alert rule"
         },
         "severity": {
-          "type": "number",
+          "type": "integer",
+          "format": "int64",
           "description": "Severity of the alert. Should be an integer between [0-4]. Value of 0 is severest. Relevant and required only for rules of the kind LogAlert.",
           "enum": [
-            "0",
-            "1",
-            "2",
-            "3",
-            "4"
+            0,
+            1,
+            2,
+            3,
+            4
           ],
           "x-ms-enum": {
             "name": "AlertSeverity",
@@ -429,26 +453,67 @@
         "autoMitigate": {
           "type": "boolean",
           "description": "The flag that indicates whether the alert should be automatically resolved or not. The default is true. Relevant only for rules of the kind LogAlert."
+        },
+        "resolveConfiguration": {
+          "type": "object",
+          "$ref": "#/definitions/RuleResolveConfiguration",
+          "description": "Defines the configuration for resolving fired alerts. Relevant only for rules of the kind LogAlert."
         }
       },
       "description": "scheduled query rule Definition"
     },
     "ScheduledQueryRuleResource": {
       "type": "object",
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/TrackedResource"
-        }
-      ],
       "required": [
-        "properties"
+        "properties",
+        "location"
       ],
       "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}"
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The name of the resource"
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The type of the resource. E.g. \"Microsoft.Compute/virtualMachines\" or \"Microsoft.Storage/storageAccounts\""
+        },
+        "identity": {
+          "$ref": "#/definitions/Identity",
+          "description": "The identity of the resource."
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "create",
+            "update"
+          ],
+          "description": "Resource tags."
+        },
+        "location": {
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "description": "The geo-location where the resource lives"
+        },
         "kind": {
           "type": "string",
           "description": "Indicates the type of scheduled query rule. The default is LogAlert.",
           "enum": [
             "LogAlert",
+            "EventLogAlert",
             "LogToMetric"
           ],
           "x-ms-enum": {
@@ -477,11 +542,16 @@
           ]
         }
       },
-      "description": "The scheduled query rule resource."
+      "description": "The scheduled query rule resource.",
+      "x-ms-azure-resource": true
     },
     "ScheduledQueryRuleResourcePatch": {
       "type": "object",
       "properties": {
+        "identity": {
+          "$ref": "#/definitions/Identity",
+          "description": "The identity of the resource."
+        },
         "tags": {
           "type": "object",
           "additionalProperties": {
@@ -506,6 +576,11 @@
             "$ref": "#/definitions/ScheduledQueryRuleResource"
           },
           "description": "The values for the scheduled query rule resources."
+        },
+        "nextLink": {
+          "description": "Provides the link to retrieve the next set of elements.",
+          "type": "string",
+          "readOnly": true
         }
       },
       "description": "Represents a collection of scheduled query rule resources."
@@ -519,7 +594,8 @@
           "description": "A list of conditions to evaluate against the specified scopes",
           "items": {
             "$ref": "#/definitions/Condition"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -527,6 +603,18 @@
       "type": "object",
       "description": "A condition of the scheduled query rule.",
       "properties": {
+        "criterionType": {
+          "type": "string",
+          "enum": [
+            "StaticThresholdCriterion",
+            "DynamicThresholdCriterion"
+          ],
+          "x-ms-enum": {
+            "name": "criterionType",
+            "modelAsString": true
+          },
+          "description": "Specifies the type of threshold criteria"
+        },
         "query": {
           "type": "string",
           "description": "Log query alert"
@@ -559,7 +647,8 @@
           "items": {
             "$ref": "#/definitions/Dimension"
           },
-          "description": "List of Dimensions conditions"
+          "description": "List of Dimensions conditions",
+          "x-ms-identifiers": []
         },
         "operator": {
           "type": "string",
@@ -568,7 +657,8 @@
             "GreaterThan",
             "GreaterThanOrEqual",
             "LessThan",
-            "LessThanOrEqual"
+            "LessThanOrEqual",
+            "GreaterOrLessThan"
           ],
           "x-ms-enum": {
             "name": "conditionOperator",
@@ -579,7 +669,16 @@
         "threshold": {
           "type": "number",
           "format": "double",
-          "description": "the criteria threshold value that activates the alert. Relevant and required only for rules of the kind LogAlert."
+          "description": "the criteria threshold value that activates the alert. Relevant and required only for static threshold rules of the kind LogAlert."
+        },
+        "alertSensitivity": {
+          "type": "string",
+          "description": "The extent of deviation required to trigger an alert. Allowed values are 'Low', 'Medium' and 'High'. This will affect how tight the threshold is to the metric series pattern. Relevant and required only for dynamic threshold rules of the kind LogAlert."
+        },
+        "ignoreDataBefore": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Use this option to set the date from which to start learning the metric historical data and calculate the dynamic thresholds (in ISO8601 format). Relevant only for dynamic threshold rules of the kind LogAlert."
         },
         "failingPeriods": {
           "type": "object",
@@ -639,13 +738,58 @@
         "values"
       ]
     },
-    "ErrorContract": {
-      "description": "Describes the format of Error response.",
-      "type": "object",
+    "Identity": {
       "properties": {
-        "error": {
-          "description": "The error details.",
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
+        "principalId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The principal ID of resource identity."
+        },
+        "tenantId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The tenant ID of resource."
+        },
+        "type": {
+          "type": "string",
+          "description": "Type of managed service identity.",
+          "enum": [
+            "SystemAssigned",
+            "UserAssigned",
+            "None"
+          ],
+          "x-ms-enum": {
+            "name": "IdentityType",
+            "modelAsString": false
+          }
+        },
+        "userAssignedIdentities": {
+          "description": "The list of user identities associated with the resource. The user identity dictionary key references will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/UserIdentityProperties"
+          }
+        }
+      },
+      "required": [
+        "type"
+      ],
+      "type": "object",
+      "description": "Identity for the resource."
+    },
+    "UserIdentityProperties": {
+      "type": "object",
+      "description": "User assigned identity properties.",
+      "properties": {
+        "principalId": {
+          "readOnly": true,
+          "description": "The principal id of user assigned identity.",
+          "type": "string"
+        },
+        "clientId": {
+          "readOnly": true,
+          "description": "The client id of user assigned identity.",
+          "type": "string"
         }
       }
     }
