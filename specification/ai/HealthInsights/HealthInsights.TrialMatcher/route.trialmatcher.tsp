@@ -33,3 +33,18 @@ interface TrialMatcher {
     TrialMatcherInferenceResult
   >;
 }
+
+@TypeSpec.Versioning.removed(AzureHealthInsights.ApiVersion.v2024_08_01-preview)
+interface TrialMatcher {
+  @summary("Get Trial Matcher job details")
+  @tag("TrialMatcher")
+  @doc("Gets the status and details of the Trial Matcher job.")
+  @get
+  getJob is HealthInsightsOperations.ResourceRead<TrialMatcherJob>;
+
+  @summary("Create Trial Matcher job")
+  @tag("TrialMatcher")
+  @doc("Creates a Trial Matcher job with the given request body.")
+  @pollingOperation(TrialMatcher.getJob)
+  createJob is HealthInsightsOperations.LongRunningResourceCreateOrReplace<TrialMatcherJob>;
+}
