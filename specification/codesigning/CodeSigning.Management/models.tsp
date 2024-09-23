@@ -178,7 +178,7 @@ model CertificateProfileProperties {
 
   @removed(Versions.v2024_09_30_preview)
   @doc("Used as CN in the certificate subject name.")
-  @visibility("read")  
+  @visibility("read")
   commonName?: string;
 
   @removed(Versions.v2024_09_30_preview)
