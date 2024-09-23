@@ -701,6 +701,9 @@
           },
           "Update a simple Gallery Image Version without source id.": {
             "$ref": "./examples/galleryExamples/GalleryImageVersion_Update_WithoutSourceId.json"
+          },
+          "Restore a Soft Deleted Gallery Image Version": {
+            "$ref": "./examples/galleryExamples/GalleryImageVersion_Update_RestoreSoftDeleted.json"
           }
         }
       },
@@ -2435,6 +2438,10 @@
         },
         "securityProfile": {
           "$ref": "#/definitions/ImageVersionSecurityProfile"
+        },
+        "restore": {
+          "type": "boolean",
+          "description": "Indicates if this is a soft-delete resource restoration request."
         }
       },
       "required": [
