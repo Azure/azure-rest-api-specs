@@ -124,6 +124,9 @@ union ConnectorType {
   @doc("mysql source connector.")
   MySqlSource: "MySqlSource",
 
+  @doc("servicebus source connector.")
+  AzureServiceBusSource: "AzureServiceBusSource",
+
   string,
 }
 
@@ -278,6 +281,60 @@ model CsvSourceDataFormat extends SourceDataFormat {
   textCharset: string;
 }
 
+@doc("Base class for Converter config")
+@discriminator("type")
+model ConverterConfig {
+  @doc("Type of converter.")
+  type: ConverterType;
+}
+
+@doc("CsvConverter config")
+model CsvConverterConfig extends ConverterConfig {
+  @doc("Type of converter.")
+  type: ConverterType.CsvConverter;
+}
+
+@doc("AvroConverter config")
+model AvroConverterConfig extends ConverterConfig {
+  @doc("Type of converter.")
+  type: ConverterType.AvroConverter;
+}
+
+@doc("StringConverter config")
+model StringConverterConfig extends ConverterConfig {
+  @doc("Type of converter.")
+  type: ConverterType.StringConverter;
+}
+
+@doc("ByteArrayConverter config")
+model ByteArrayConverterConfig extends ConverterConfig {
+  @doc("Type of converter.")
+  type: ConverterType.ByteArrayConverter;
+}
+
+@doc("Json Decimal Format configuration")
+union JsonDecimalFormat {
+  @doc("Type of Base64.")
+  Base64: "Base64",
+
+  @doc("Type of Numeric.")
+  Numeric: "Numeric",
+
+  string,
+}
+
+@doc("JsonConverter config")
+model JsonConverterConfig extends ConverterConfig {
+  @doc("Type of converter.")
+  type: ConverterType.JsonConverter;
+
+  @doc("Whether schemas enabled.")
+  schemasEnabled?: boolean;
+
+  @doc("Format for Decimal type.")
+  decimalFormat?: JsonDecimalFormat;
+}
+
 @doc("Properties of one arm resource")
 model ResourceProperties {
   @doc("Properties of one Connector")
@@ -296,6 +353,9 @@ model ConnectorProperties {
 
   @doc("Type of the Connector.")
   valueConverter: ConverterType;
+
+  @doc("Type of the Connector.")
+  converterConfig: ConverterConfig;
 
   @doc("Direction of the Connector.")
   connectorDirection?: Direction;
@@ -403,6 +463,26 @@ model GooglePubSubSourceConnectorProperties extends ConnectorProperties {
   accountKey: string;
 }
 
+@doc("StartPosition types for Kinesis")
+union KinesisStartPositionType {
+  @doc("TrimHorizon type")
+  TrimHorizon: "TrimHorizon",
+
+  @doc("Latest type")
+  Latest: "Latest",
+
+  @doc("AtSequenceNumber type")
+  AtSequenceNumber: "AtSequenceNumber",
+
+  @doc("AfterSequenceNumber type")
+  AfterSequenceNumber: "AfterSequenceNumber",
+
+  @doc("AtTimestamp type")
+  AtTimestamp: "AtTimestamp",
+
+  string,
+}
+
 @doc("Configuration for KinesisSourceConnector")
 model KinesisSourceConnectorProperties extends ConnectorProperties {
   @doc("Type of KinesisSourceConnector")
@@ -423,6 +503,15 @@ model KinesisSourceConnectorProperties extends ConnectorProperties {
 
   @doc("StreamName in AWS Kinesis Server.")
   awsKinesisStreamName: string;
+
+  @doc("startPosition supported by Kinesis.")
+  startPosition: KinesisStartPositionType;
+
+  @doc("startSequence for startPosition.")
+  startSequence?: string;
+
+  @doc("startTime for startPosition.")
+  startTime?: utcDateTime;
 }
 
 @doc("Configuration for PostgreSqlSourceConnector")
@@ -513,6 +602,38 @@ model MySqlSourceConnectorProperties extends ConnectorProperties {
 
   @doc("Tables used as source.")
   tableNames: string;
+}
+
+@doc("Type of AzureServiceBusType")
+union AzureServiceBusType {
+  @doc("Topic type")
+  Topic: "Topic",
+
+  @doc("Queue type")
+  Queue: "Queue",
+
+  string,
+}
+
+@doc("Configuration for AzureServiceBusSourceConnector")
+model AzureServiceBusSourceConnectorProperties extends ConnectorProperties {
+  @doc("Type of AzureServiceBusSourceConnector")
+  connectorType: ConnectorType.AzureServiceBusSource;
+
+  @doc("Direction of the Source Connector.")
+  connectorDirection?: Direction = Direction.Source;
+
+  @doc("Name for topic Or Queue.")
+  topicOrQueueName: string;
+
+  @doc("Name for subscription.")
+  subscriptionName?: string;
+
+  @doc("connectionString for AzureServiceBusSource.")
+  connectionString: string;
+
+  @doc("AzureServiceBusSource type.")
+  serviceBusType: AzureServiceBusType;
 }
 
 @doc("Type of DataRange")
