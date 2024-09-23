@@ -3,7 +3,7 @@
   "info": {
     "title": "PostgreSQLServerManagementClient",
     "description": "The Microsoft Azure management API provides create, read, update, and delete functionality for Azure PostgreSQL resources including servers, databases, firewall rules, VNET rules, security alert policies, log files and configurations with new business model.",
-    "version": "2022-12-01"
+    "version": "2024-08-01"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -54,22 +54,25 @@
             "$ref": "./examples/ServerCreatePointInTimeRestore.json"
           },
           "Create a database as a geo-restore in geo-paired location": {
-            "$ref": "./examples/ServerCreateGeoRestore.json"
+            "$ref": "./examples/ServerCreateGeoRestoreWithDataEncryptionEnabled.json"
           },
           "ServerCreateReplica": {
             "$ref": "./examples/ServerCreateReplica.json"
+          },
+          "ServerCreateReviveDropped": {
+            "$ref": "./examples/ServerCreateReviveDropped.json"
           }
         },
         "description": "Creates a new server.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "../../../types/common-types.json#/parameters/ServerNameParameter"
@@ -108,7 +111,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -137,18 +140,30 @@
           },
           "ServerUpdateWithMajorVersionUpgrade": {
             "$ref": "./examples/ServerUpdateWithMajorVersionUpgrade.json"
+          },
+          "Promote a replica server as a Standalone server as planned, i.e. it will wait for replication to complete.": {
+            "$ref": "./examples/PromoteReplicaAsPlannedStandaloneServer.json"
+          },
+          "Promote a replica server as a Standalone server as forced, i.e. it will promote a replica server immediately without waiting for primary and replica to be in sync.": {
+            "$ref": "./examples/PromoteReplicaAsForcedStandaloneServer.json"
+          },
+          "SwitchOver a replica server as planned, i.e. it will wait for replication to complete before promoting replica as Primary and original primary as replica.": {
+            "$ref": "./examples/PromoteReplicaAsPlannedSwitchover.json"
+          },
+          "SwitchOver a replica server as forced, i.e. it will replica as Primary and original primary as replica immediately without waiting for primary and replica to be in sync.": {
+            "$ref": "./examples/PromoteReplicaAsForcedSwitchover.json"
           }
         },
         "description": "Updates an existing server. The request body can contain one to many of the properties present in the normal server definition.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "../../../types/common-types.json#/parameters/ServerNameParameter"
@@ -181,7 +196,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -203,13 +218,13 @@
         "description": "Deletes a server.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "../../../types/common-types.json#/parameters/ServerNameParameter"
@@ -233,7 +248,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -253,18 +268,21 @@
           },
           "ServerGetWithVnet": {
             "$ref": "./examples/ServerGetWithVnet.json"
+          },
+          "ServerGetWithPrivateEndpoints": {
+            "$ref": "./examples/ServerGetWithPrivateEndpoints.json"
           }
         },
         "description": "Gets information about a server.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "../../../types/common-types.json#/parameters/ServerNameParameter"
@@ -280,7 +298,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -300,13 +318,13 @@
         "description": "List all the servers in a given resource group.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           }
         ],
         "responses": {
@@ -319,7 +337,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -342,10 +360,10 @@
         "description": "List all the servers in a given subscription.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -358,7 +376,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -373,6 +391,8 @@
       "type": "string",
       "description": "The version of a server.",
       "enum": [
+        "16",
+        "15",
         "14",
         "13",
         "12",
@@ -381,6 +401,69 @@
       "x-ms-enum": {
         "name": "ServerVersion",
         "modelAsString": true
+      }
+    },
+    "Replica": {
+      "type": "object",
+      "description": "Replica properties of a server",
+      "properties": {
+        "role": {
+          "$ref": "#/definitions/ReplicationRole",
+          "description": "Used to indicate role of the server in replication set."
+        },
+        "capacity": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Replicas allowed for a server.",
+          "readOnly": true
+        },
+        "replicationState": {
+          "type": "string",
+          "enum": [
+            "Active",
+            "Catchup",
+            "Provisioning",
+            "Updating",
+            "Broken",
+            "Reconfiguring"
+          ],
+          "x-ms-enum": {
+            "name": "ReplicationState",
+            "modelAsString": true
+          },
+          "description": "Gets the replication state of a replica server. This property is returned only for replicas api call. Supported values are Active, Catchup, Provisioning, Updating, Broken, Reconfiguring",
+          "readOnly": true
+        },
+        "promoteMode": {
+          "type": "string",
+          "description": "Sets the promote mode for a replica server. This is a write only property.",
+          "enum": [
+            "standalone",
+            "switchover"
+          ],
+          "x-ms-enum": {
+            "name": "ReadReplicaPromoteMode",
+            "modelAsString": true
+          },
+          "x-ms-mutability": [
+            "update"
+          ]
+        },
+        "promoteOption": {
+          "type": "string",
+          "description": "Sets the promote options for a replica server. This is a write only property.",
+          "enum": [
+            "planned",
+            "forced"
+          ],
+          "x-ms-enum": {
+            "name": "ReplicationPromoteOption",
+            "modelAsString": true
+          },
+          "x-ms-mutability": [
+            "update"
+          ]
+        }
       }
     },
     "ServerProperties": {
@@ -484,7 +567,7 @@
               }
             ]
           },
-          "description": "The source server resource ID to restore from. It's required when 'createMode' is 'PointInTimeRestore' or 'GeoRestore' or 'Replica'. This property is returned only for Replica server",
+          "description": "The source server resource ID to restore from. It's required when 'createMode' is 'PointInTimeRestore' or 'GeoRestore' or 'Replica' or 'ReviveDropped'. This property is returned only for Replica server",
           "x-ms-mutability": [
             "create",
             "read"
@@ -493,7 +576,7 @@
         "pointInTimeUTC": {
           "type": "string",
           "format": "date-time",
-          "description": "Restore point creation time (ISO8601 format), specifying the time to restore from. It's required when 'createMode' is 'PointInTimeRestore' or 'GeoRestore'.",
+          "description": "Restore point creation time (ISO8601 format), specifying the time to restore from. It's required when 'createMode' is 'PointInTimeRestore' or 'GeoRestore' or 'ReviveDropped'.",
           "x-ms-mutability": [
             "create"
           ]
@@ -517,6 +600,14 @@
           "description": "Replicas allowed for a server.",
           "readOnly": true
         },
+        "replica": {
+          "$ref": "#/definitions/Replica",
+          "description": "Replica properties of a server. These Replica properties are required to be passed only in case you want to Promote a server.",
+          "x-ms-mutability": [
+            "read",
+            "update"
+          ]
+        },
         "createMode": {
           "type": "string",
           "description": "The mode to create a new PostgreSQL server.",
@@ -526,7 +617,8 @@
             "Update",
             "PointInTimeRestore",
             "GeoRestore",
-            "Replica"
+            "Replica",
+            "ReviveDropped"
           ],
           "x-ms-enum": {
             "name": "CreateMode",
@@ -536,6 +628,14 @@
             "create",
             "update"
           ]
+        },
+        "privateEndpointConnections": {
+          "type": "array",
+          "items": {
+            "$ref": "../../../../../common-types/resource-management/v5/privatelinks.json#/definitions/PrivateEndpointConnection"
+          },
+          "description": "List of private endpoint connections associated with the specified resource.",
+          "readOnly": true
         }
       },
       "description": "The properties of a server."
@@ -555,16 +655,11 @@
           "$ref": "#/definitions/ServerProperties",
           "x-ms-client-flatten": true,
           "description": "Properties of the server."
-        },
-        "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/systemData",
-          "readOnly": true,
-          "description": "The system metadata relating to this resource."
         }
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
         }
       ],
       "description": "Represents a server."
@@ -572,6 +667,14 @@
     "ServerPropertiesForUpdate": {
       "type": "object",
       "properties": {
+        "administratorLogin": {
+          "type": "string",
+          "description": "The administrator's login name of a server. Can only be specified when the server is trying to switch to password authentication and does not have default administrator login.",
+          "x-ms-mutability": [
+            "update",
+            "read"
+          ]
+        },
         "administratorLoginPassword": {
           "type": "string",
           "x-ms-secret": true,
@@ -583,7 +686,7 @@
         },
         "version": {
           "$ref": "#/definitions/ServerVersion",
-          "description": "PostgreSQL Server version."
+          "description": "PostgreSQL Server version. Version 16 is currently not supported for MVU."
         },
         "storage": {
           "$ref": "#/definitions/Storage",
@@ -637,6 +740,14 @@
         "replicationRole": {
           "$ref": "#/definitions/ReplicationRole",
           "description": "Replication role of the server"
+        },
+        "replica": {
+          "$ref": "#/definitions/Replica",
+          "description": "Replica properties of a server. These Replica properties are required to be passed only in case you want to Promote a server.",
+          "x-ms-mutability": [
+            "read",
+            "update"
+          ]
         },
         "network": {
           "$ref": "#/definitions/Network",
@@ -722,6 +833,64 @@
           "type": "integer",
           "format": "int32",
           "description": "Max storage allowed for a server."
+        },
+        "autoGrow": {
+          "type": "string",
+          "description": "Flag to enable / disable Storage Auto grow for flexible server.",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "StorageAutoGrow",
+            "modelAsString": true
+          }
+        },
+        "tier": {
+          "type": "string",
+          "description": "Name of storage tier for IOPS.",
+          "enum": [
+            "P1",
+            "P2",
+            "P3",
+            "P4",
+            "P6",
+            "P10",
+            "P15",
+            "P20",
+            "P30",
+            "P40",
+            "P50",
+            "P60",
+            "P70",
+            "P80"
+          ],
+          "x-ms-enum": {
+            "name": "AzureManagedDiskPerformanceTiers",
+            "modelAsString": true
+          }
+        },
+        "iops": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Storage tier IOPS quantity. This property is required to be set for storage Type PremiumV2_LRS"
+        },
+        "throughput": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Storage throughput for the server. This is required to be set for storage Type PremiumV2_LRS"
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "Premium_LRS",
+            "PremiumV2_LRS"
+          ],
+          "x-ms-enum": {
+            "name": "StorageType",
+            "modelAsString": true
+          },
+          "description": "Storage type for the server. Allowed values are Premium_LRS and PremiumV2_LRS, and default is Premium_LRS if not specified"
         }
       },
       "description": "Storage properties of a server"
@@ -767,11 +936,19 @@
       "properties": {
         "primaryKeyURI": {
           "type": "string",
-          "description": "URI for the key for data encryption for primary server."
+          "description": "URI for the key in keyvault for data encryption of the primary server."
         },
         "primaryUserAssignedIdentityId": {
           "type": "string",
-          "description": "Resource Id for the User assigned identity to be used for data encryption for primary server."
+          "description": "Resource Id for the User assigned identity to be used for data encryption of the primary server."
+        },
+        "geoBackupKeyURI": {
+          "type": "string",
+          "description": "URI for the key in keyvault for data encryption for geo-backup of server."
+        },
+        "geoBackupUserAssignedIdentityId": {
+          "type": "string",
+          "description": "Resource Id for the User assigned identity to be used for data encryption for geo-backup of server."
         },
         "type": {
           "type": "string",
@@ -782,6 +959,36 @@
           ],
           "x-ms-enum": {
             "name": "ArmServerKeyType",
+            "modelAsString": true
+          }
+        },
+        "primaryEncryptionKeyStatus": {
+          "type": "string",
+          "description": "Primary encryption key status for Data encryption enabled server.",
+          "x-ms-mutability": [
+            "read"
+          ],
+          "enum": [
+            "Valid",
+            "Invalid"
+          ],
+          "x-ms-enum": {
+            "name": "keyStatusEnum",
+            "modelAsString": true
+          }
+        },
+        "geoBackupEncryptionKeyStatus": {
+          "type": "string",
+          "description": "Geo-backup encryption key status for Data encryption enabled server.",
+          "x-ms-mutability": [
+            "read"
+          ],
+          "enum": [
+            "Valid",
+            "Invalid"
+          ],
+          "x-ms-enum": {
+            "name": "keyStatusEnum",
             "modelAsString": true
           }
         }
@@ -901,8 +1108,7 @@
           "x-ms-enum": {
             "name": "ServerPublicNetworkAccessState",
             "modelAsString": true
-          },
-          "readOnly": true
+          }
         },
         "delegatedSubnetResourceId": {
           "type": "string",

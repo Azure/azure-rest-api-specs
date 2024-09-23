@@ -3,7 +3,7 @@
   "info": {
     "title": "PostgreSQLServerManagementClient",
     "description": "The Microsoft Azure management API provides create, read, update, and delete functionality for Azure PostgreSQL resources including servers, databases, firewall rules, VNET rules, security alert policies, log files and configurations with new business model.",
-    "version": "2022-12-01"
+    "version": "2024-08-01"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -35,6 +35,119 @@
   },
   "paths": {
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{serverName}/backups/{backupName}": {
+      "put": {
+        "tags": [
+          "Backups"
+        ],
+        "operationId": "Backups_Create",
+        "x-ms-examples": {
+          "Create a new Backup for a flexible server": {
+            "$ref": "./examples/BackupCreate.json"
+          }
+        },
+        "description": "Create a specific backup for PostgreSQL flexible server.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../types/common-types.json#/parameters/ServerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/BackupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ServerBackup"
+            }
+          },
+          "201": {
+            "description": "Successfully created backup",
+            "schema": {
+              "$ref": "#/definitions/ServerBackup"
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "delete": {
+        "tags": [
+          "Backups"
+        ],
+        "operationId": "Backups_Delete",
+        "x-ms-examples": {
+          "Delete a specific backup": {
+            "$ref": "./examples/BackupDelete.json"
+          }
+        },
+        "description": "Deletes a specific backup.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../types/common-types.json#/parameters/ServerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/BackupNameParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "NoContent"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      },
       "get": {
         "tags": [
           "Backups"
@@ -48,13 +161,13 @@
         "description": "Get specific backup for a given server.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "../../../types/common-types.json#/parameters/ServerNameParameter"
@@ -73,7 +186,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -93,13 +206,13 @@
         "description": "List all the backups for a given server.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "../../../types/common-types.json#/parameters/ServerNameParameter"
@@ -115,7 +228,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -133,7 +246,8 @@
           "type": "string",
           "description": "Backup type.",
           "enum": [
-            "Full"
+            "Full",
+            "Customer On-Demand"
           ],
           "x-ms-enum": {
             "name": "Origin",
@@ -159,16 +273,11 @@
           "$ref": "#/definitions/ServerBackupProperties",
           "x-ms-client-flatten": true,
           "description": "The properties of a server backup."
-        },
-        "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/systemData",
-          "readOnly": true,
-          "description": "The system metadata relating to this resource."
         }
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
       ],
       "description": "Server backup properties"

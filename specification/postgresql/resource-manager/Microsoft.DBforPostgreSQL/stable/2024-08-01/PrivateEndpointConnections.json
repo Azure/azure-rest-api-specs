@@ -34,18 +34,13 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{serverName}/firewallRules/{firewallRuleName}": {
-      "put": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{serverName}/privateEndpointConnections/{privateEndpointConnectionName}": {
+      "get": {
         "tags": [
-          "FirewallRules"
+          "PrivateEndpointConnections"
         ],
-        "operationId": "FirewallRules_CreateOrUpdate",
-        "x-ms-examples": {
-          "FirewallRuleCreate": {
-            "$ref": "./examples/FirewallRuleCreate.json"
-          }
-        },
-        "description": "Creates a new firewall rule or updates an existing firewall rule.",
+        "description": "Gets a private endpoint connection.",
+        "operationId": "PrivateEndpointConnections_Get",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -60,29 +55,72 @@
             "$ref": "../../../types/common-types.json#/parameters/ServerNameParameter"
           },
           {
-            "$ref": "#/parameters/FirewallRuleNameParameter"
+            "$ref": "../../../types/common-types.json#/parameters/PrivateEndpointConnectionNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved a specified private endpoint connection.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/privatelinks.json#/definitions/PrivateEndpointConnection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets private endpoint connection.": {
+            "$ref": "./examples/PrivateEndpointConnectionGet.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "PrivateEndpointConnections"
+        ],
+        "description": "Approve or reject a private endpoint connection with a given name.",
+        "operationId": "PrivateEndpointConnection_Update",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../types/common-types.json#/parameters/ServerNameParameter"
+          },
+          {
+            "$ref": "../../../types/common-types.json#/parameters/PrivateEndpointConnectionNameParameter"
           },
           {
             "name": "parameters",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/FirewallRule"
+              "$ref": "../../../../../common-types/resource-management/v5/privatelinks.json#/definitions/PrivateEndpointConnection"
             },
-            "description": "The required parameters for creating or updating a firewall rule."
+            "description": "The required parameters for updating private endpoint connection."
           }
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "Successfully approved or rejected private endpoint connection.",
             "schema": {
-              "$ref": "#/definitions/FirewallRule"
+              "$ref": "../../../../../common-types/resource-management/v5/privatelinks.json#/definitions/PrivateEndpointConnection"
             }
           },
           "201": {
-            "description": "Created",
+            "description": "Successfully approved or rejected private endpoint connection.",
             "schema": {
-              "$ref": "#/definitions/FirewallRule"
+              "$ref": "../../../../../common-types/resource-management/v5/privatelinks.json#/definitions/PrivateEndpointConnection"
             }
           },
           "202": {
@@ -92,6 +130,55 @@
                 "type": "string"
               }
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Approve or reject a private endpoint connection with a given name.": {
+            "$ref": "./examples/PrivateEndpointConnectionUpdate.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "PrivateEndpointConnections"
+        ],
+        "description": "Deletes a private endpoint connection with a given name.",
+        "operationId": "PrivateEndpointConnection_Delete",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../types/common-types.json#/parameters/ServerNameParameter"
+          },
+          {
+            "$ref": "../../../types/common-types.json#/parameters/PrivateEndpointConnectionNameParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted and the operation will complete asynchronously.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "Private endpoint connection does not exist."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -103,119 +190,21 @@
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
-        }
-      },
-      "delete": {
-        "tags": [
-          "FirewallRules"
-        ],
-        "operationId": "FirewallRules_Delete",
+        },
         "x-ms-examples": {
-          "FirewallRuleDelete": {
-            "$ref": "./examples/FirewallRuleDelete.json"
-          }
-        },
-        "description": "Deletes a PostgreSQL server firewall rule.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "../../../types/common-types.json#/parameters/ServerNameParameter"
-          },
-          {
-            "$ref": "#/parameters/FirewallRuleNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "202": {
-            "description": "Accepted",
-            "headers": {
-              "Location": {
-                "type": "string"
-              }
-            }
-          },
-          "204": {
-            "description": "NoContent"
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        }
-      },
-      "get": {
-        "tags": [
-          "FirewallRules"
-        ],
-        "operationId": "FirewallRules_Get",
-        "x-ms-examples": {
-          "FirewallRuleList": {
-            "$ref": "./examples/FirewallRuleGet.json"
-          }
-        },
-        "description": "List all the firewall rules in a given server.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "../../../types/common-types.json#/parameters/ServerNameParameter"
-          },
-          {
-            "$ref": "#/parameters/FirewallRuleNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/FirewallRule"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
+          "Deletes a private endpoint connection with a given name.": {
+            "$ref": "./examples/PrivateEndpointConnectionDelete.json"
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{serverName}/firewallRules": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{serverName}/privateEndpointConnections": {
       "get": {
         "tags": [
-          "FirewallRules"
+          "PrivateEndpointConnections"
         ],
-        "operationId": "FirewallRules_ListByServer",
-        "x-ms-examples": {
-          "FirewallRuleList": {
-            "$ref": "./examples/FirewallRuleListByServer.json"
-          }
-        },
-        "description": "List all the firewall rules in a given PostgreSQL server.",
+        "description": "Gets all private endpoint connections on a server.",
+        "operationId": "PrivateEndpointConnections_ListByServer",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -232,9 +221,9 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "Successfully retrieved private endpoint connections.",
             "schema": {
-              "$ref": "#/definitions/FirewallRuleListResult"
+              "$ref": "#/definitions/PrivateEndpointConnectionListResult"
             }
           },
           "default": {
@@ -246,78 +235,36 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Gets list of private endpoint connections on a server.": {
+            "$ref": "./examples/PrivateEndpointConnectionList.json"
+          }
         }
       }
     }
   },
   "definitions": {
-    "FirewallRuleProperties": {
-      "type": "object",
-      "properties": {
-        "startIpAddress": {
-          "type": "string",
-          "pattern": "^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$",
-          "description": "The start IP address of the server firewall rule. Must be IPv4 format."
-        },
-        "endIpAddress": {
-          "type": "string",
-          "pattern": "^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$",
-          "description": "The end IP address of the server firewall rule. Must be IPv4 format."
-        }
-      },
-      "required": [
-        "startIpAddress",
-        "endIpAddress"
-      ],
-      "description": "The properties of a server firewall rule."
-    },
-    "FirewallRule": {
-      "type": "object",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/FirewallRuleProperties",
-          "x-ms-client-flatten": true,
-          "description": "The properties of a firewall rule."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
-        }
-      ],
-      "required": [
-        "properties"
-      ],
-      "description": "Represents a server firewall rule."
-    },
-    "FirewallRuleListResult": {
+    "PrivateEndpointConnectionListResult": {
+      "description": "A list of private endpoint connections.",
       "type": "object",
       "properties": {
         "value": {
+          "description": "Array of results.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/FirewallRule"
+            "$ref": "../../../../../common-types/resource-management/v5/privatelinks.json#/definitions/PrivateEndpointConnection"
           },
-          "description": "The list of firewall rules in a server."
+          "readOnly": true
         },
         "nextLink": {
-          "description": "The link used to get the next page of operations.",
-          "type": "string"
+          "description": "The URL to get the next set of results.",
+          "type": "string",
+          "format": "uri",
+          "readOnly": true
         }
-      },
-      "description": "A list of firewall rules."
+      }
     }
   },
-  "parameters": {
-    "FirewallRuleNameParameter": {
-      "name": "firewallRuleName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The name of the server firewall rule.",
-      "minLength": 1,
-      "pattern": "^[-\\w\\._]+$",
-      "x-ms-parameter-location": "method"
-    }
-  }
+  "parameters": {}
 }
