@@ -142,6 +142,18 @@ union StopOnDisconnectEnableStatus {
   string,
 }
 
+@doc("Stop on no connect enable or disable status.")
+@added(APIVersions.v2024_10_01_preview)
+union StopOnNoConnectEnableStatus {
+  @doc("Stop on no connect is enabled on the Dev Box.")
+  Enabled: "Enabled",
+
+  @doc("Stop on no connect is not enabled on the Dev Box.")
+  Disabled: "Disabled",
+
+  string,
+}
+
 @doc("Pool status indicating whether a pool is available to create Dev Boxes.")
 union PoolHealthStatus {
   @doc("The pool health status is not known.")
@@ -420,6 +432,10 @@ model Pool {
   @doc("Stop on disconnect configuration settings for Dev Boxes created in this pool.")
   stopOnDisconnect?: StopOnDisconnectConfiguration;
 
+  @doc("Stop on no connect configuration settings for Dev Boxes created in this pool.")
+  @added(APIVersions.v2024_10_01_preview)
+  stopOnNoConnect?: StopOnNoConnectConfiguration;
+
   @doc("""
     Overall health status of the Pool. Indicates whether or not the Pool is
     available to create Dev Boxes.
@@ -497,6 +513,18 @@ model StopOnDisconnectConfiguration {
     The specified time in minutes to wait before stopping a Dev Box once disconnect
     is detected.
     """)
+  gracePeriodMinutes?: int32;
+}
+
+@doc("Stop on no connect configuration settings for Dev Boxes created in this pool.")
+@added(APIVersions.v2024_10_01_preview)
+model StopOnNoConnectConfiguration {
+  @doc("""
+    Enables the feature to stop a started Dev Box when it has not been connected to, once the grace period has lapsed.
+    """)
+  status: StopOnNoConnectEnableStatus;
+
+  @doc("The specified time in minutes to wait before stopping a Dev Box if no connection is made.")
   gracePeriodMinutes?: int32;
 }
 
