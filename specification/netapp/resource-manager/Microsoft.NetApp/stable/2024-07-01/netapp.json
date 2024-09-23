@@ -8094,16 +8094,8 @@
       "properties": {
         "backupPolicyId": {
           "type": "string",
-          "format": "arm-id",
-          "x-ms-arm-id-details": {
-            "allowedResources": [
-              {
-                "type": "Microsoft.NetApp/netAppAccounts/backupPolicies"
-              }
-            ]
-          },
           "readOnly": true,
-          "description": "Backup Policy Resource ID"
+          "description": "Backup Policy GUID ID"
         },
         "provisioningState": {
           "type": "string",
@@ -9329,6 +9321,14 @@
       "properties": {
         "backupPolicyId": {
           "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.NetApp/netAppAccounts/backupPolicies"
+              }
+            ]
+          },
           "description": "Backup Policy Resource ID"
         },
         "policyEnforced": {
