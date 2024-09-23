@@ -2,7 +2,7 @@
   "parameters": {
     "serverName": "sourcepgservername",
     "resourceGroupName": "testrg",
-    "api-version": "2022-12-01",
+    "api-version": "2024-08-01",
     "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff"
   },
   "responses": {
@@ -22,7 +22,10 @@
               "state": "Ready",
               "availabilityZone": "2",
               "storage": {
-                "storageSizeGB": 512
+                "storageSizeGB": 512,
+                "autoGrow": "Disabled",
+                "tier": "P20",
+                "iops": 2300
               },
               "dataEncryption": {
                 "type": "SystemManaged"
@@ -50,7 +53,12 @@
                 "startMinute": 0
               },
               "replicationRole": "AsyncReplica",
-              "replicaCapacity": 0
+              "replicaCapacity": 0,
+              "replica": {
+                "role": "AsyncReplica",
+                "capacity": 0,
+                "replicationState": "Active"
+              }
             },
             "location": "westus",
             "tags": {

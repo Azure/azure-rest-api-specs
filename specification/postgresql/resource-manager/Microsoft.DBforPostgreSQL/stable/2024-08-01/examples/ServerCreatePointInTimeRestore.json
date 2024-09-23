@@ -2,7 +2,7 @@
   "parameters": {
     "serverName": "pgtestsvc5",
     "resourceGroupName": "testrg",
-    "api-version": "2022-12-01",
+    "api-version": "2024-08-01",
     "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
     "parameters": {
       "location": "westus",
@@ -28,7 +28,10 @@
           "state": "Ready",
           "availabilityZone": "2",
           "storage": {
-            "storageSizeGB": 512
+            "storageSizeGB": 512,
+            "autoGrow": "Disabled",
+            "tier": "P20",
+            "iops": 2300
           },
           "dataEncryption": {
             "type": "SystemManaged"
@@ -79,7 +82,10 @@
           "state": "Ready",
           "availabilityZone": "2",
           "storage": {
-            "storageSizeGB": 512
+            "storageSizeGB": 512,
+            "autoGrow": "Disabled",
+            "tier": "P20",
+            "iops": 2300
           },
           "dataEncryption": {
             "type": "SystemManaged"

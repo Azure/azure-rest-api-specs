@@ -2,7 +2,7 @@
   "parameters": {
     "serverName": "pgtestsvc4",
     "resourceGroupName": "testrg",
-    "api-version": "2022-12-01",
+    "api-version": "2024-08-01",
     "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
     "parameters": {
       "location": "westus",
@@ -25,10 +25,13 @@
         "dataEncryption": {
           "type": "AzureKeyVault",
           "primaryKeyURI": "https://test-kv.vault.azure.net/keys/test-key1/77f57315bab34b0189daa113fbc78787",
-          "primaryUserAssignedIdentityId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testresourcegroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/test-usermanagedidentity"
+          "primaryUserAssignedIdentityId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testresourcegroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/test-usermanagedidentity",
+          "geoBackupKeyURI": "",
+          "geoBackupUserAssignedIdentityId": ""
         },
         "storage": {
-          "storageSizeGB": 512
+          "storageSizeGB": 512,
+          "autoGrow": "Disabled"
         },
         "backup": {
           "backupRetentionDays": 7,
@@ -77,10 +80,14 @@
           "dataEncryption": {
             "type": "AzureKeyVault",
             "primaryKeyURI": "https://test-kv.vault.azure.net/keys/test-key1/77f57315bab34b0189daa113fbc78787",
-            "primaryUserAssignedIdentityId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testresourcegroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/test-usermanagedidentity"
+            "primaryUserAssignedIdentityId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testresourcegroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/test-usermanagedidentity",
+            "primaryEncryptionKeyStatus": "Valid"
           },
           "storage": {
-            "storageSizeGB": 512
+            "storageSizeGB": 512,
+            "autoGrow": "Disabled",
+            "tier": "P20",
+            "iops": 2300
           },
           "backup": {
             "backupRetentionDays": 7,
@@ -142,10 +149,14 @@
           "dataEncryption": {
             "type": "AzureKeyVault",
             "primaryKeyURI": "https://test-kv.vault.azure.net/keys/test-key1/77f57315bab34b0189daa113fbc78787",
-            "primaryUserAssignedIdentityId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testresourcegroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/test-usermanagedidentity"
+            "primaryUserAssignedIdentityId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testresourcegroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/test-usermanagedidentity",
+            "primaryEncryptionKeyStatus": "Valid"
           },
           "storage": {
-            "storageSizeGB": 512
+            "storageSizeGB": 512,
+            "autoGrow": "Disabled",
+            "tier": "P20",
+            "iops": 2300
           },
           "backup": {
             "backupRetentionDays": 7,

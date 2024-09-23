@@ -2,7 +2,7 @@
   "parameters": {
     "serverName": "pgtestsvc1",
     "resourceGroupName": "testrg",
-    "api-version": "2022-12-01",
+    "api-version": "2024-08-01",
     "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff"
   },
   "responses": {
@@ -20,7 +20,10 @@
           "state": "Ready",
           "availabilityZone": "1",
           "storage": {
-            "storageSizeGB": 512
+            "storageSizeGB": 512,
+            "autoGrow": "Disabled",
+            "tier": "P20",
+            "iops": 2300
           },
           "authConfig": {
             "activeDirectoryAuth": "Disabled",

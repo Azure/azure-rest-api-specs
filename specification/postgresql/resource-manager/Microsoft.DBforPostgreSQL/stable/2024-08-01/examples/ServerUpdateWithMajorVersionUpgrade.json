@@ -2,7 +2,7 @@
   "parameters": {
     "serverName": "pgtestsvc4",
     "resourceGroupName": "testrg",
-    "api-version": "2022-12-01",
+    "api-version": "2024-08-01",
     "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
     "parameters": {
       "properties": {
@@ -26,7 +26,10 @@
           "state": "Ready",
           "availabilityZone": "1",
           "storage": {
-            "storageSizeGB": 512
+            "storageSizeGB": 512,
+            "autoGrow": "Enabled",
+            "tier": "P20",
+            "iops": 2300
           },
           "dataEncryption": {
             "type": "SystemManaged"
@@ -68,8 +71,8 @@
     },
     "202": {
       "headers": {
-        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/providers/Microsoft.DBforPostgreSQL/locations/southeastasia/azureAsyncOperation/e276a03a-1770-4549-86f5-0edffae8997c?api-version=2022-12-01",
-        "Location": "https://management.azure.com/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/providers/Microsoft.DBforPostgreSQL/locations/southeastasia/operationResults/e276a03a-1770-4549-86f5-0edffae8997c?api-version=2022-12-01"
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/providers/Microsoft.DBforPostgreSQL/locations/southeastasia/azureAsyncOperation/e276a03a-1770-4549-86f5-0edffae8997c?api-version=2024-08-01",
+        "Location": "https://management.azure.com/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/providers/Microsoft.DBforPostgreSQL/locations/southeastasia/operationResults/e276a03a-1770-4549-86f5-0edffae8997c?api-version=2024-08-01"
       }
     }
   }
