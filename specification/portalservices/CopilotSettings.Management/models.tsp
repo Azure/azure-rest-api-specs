@@ -34,10 +34,12 @@ model CopilotSettingsProperties {
   accessControlEnabled: boolean;
 
   @added(Versions.v2024_08_01_preview)
+  @removed(Versions.v2024_09_01_preview)
   @doc("The setting for Multi-Factor Authentication enforcement when signing into this tenant in the Azure Portal.")
   portalMfaEnforcement?: MfaEnforcement;
 
   @added(Versions.v2024_08_01_preview)
+  @removed(Versions.v2024_09_01_preview)
   @doc("Justification for the value set for portalMfaEnforcement. Required when portalMfaEnforcement is set to a value other than 'Default'. Maximum length is 500 characters.")
   portalMfaEnforcementJustification?: string;
 
