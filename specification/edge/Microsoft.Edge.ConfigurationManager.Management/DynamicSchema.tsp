@@ -43,6 +43,15 @@ model DynamicSchema is ProxyResource<DynamicSchemaProperties> {
 interface DynamicSchemas {
   @doc("Get a DynamicSchema Resource")
   get is ArmResourceRead<DynamicSchema>;
+  
+  @doc("Create or update a DynamicSchema Resource")
+  createOrUpdate is ArmResourceCreateOrReplaceSync<DynamicSchema>;
+
+  @doc("update a DynamicSchema Resource")
+  update is ArmResourcePatchSync<DynamicSchema, DynamicSchemaProperties>;
+
+  @doc("Delete a DynamicSchema Resource")
+  delete is ArmResourceDeleteSync<DynamicSchema>;
 
   @doc("List by Schema")
   listBySchema is ArmResourceListByParent<DynamicSchema>;
