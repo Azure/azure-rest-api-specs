@@ -402,7 +402,7 @@
           "nextLinkName": "nextLink"
         },
         "summary": "Gets details on a list of users.",
-        "description": "All users' object IDs and roles will be returned.",
+        "description": "All users' object IDs and single role per user will be returned.",
         "parameters": [
           {
             "$ref": "common.json#/parameters/ApiVersionParameter"
@@ -413,6 +413,41 @@
             "description": "Users in the paged specified range.",
             "schema": {
               "$ref": "#/definitions/PagedUsers"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "common.json#/definitions/ConfidentialLedgerError"
+            }
+          }
+        }
+      }
+    },
+    "/app/userRoles": {
+      "get": {
+        "operationId": "ListUsers",
+        "x-ms-examples": {
+          "ListUserEntries": {
+            "$ref": "./examples/ledger/ListUserRoles.json"
+          }
+        },
+        "x-ms-pageable": {
+          "itemName": "ledgerUsers",
+          "nextLinkName": "nextLink"
+        },
+        "summary": "Gets details on a list of users.",
+        "description": "All users' object IDs and multiple roles will be returned.",
+        "parameters": [
+          {
+            "$ref": "common.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Users in the paged specified range.",
+            "schema": {
+              "$ref": "#/definitions/PagedUserRoles"
             }
           },
           "default": {
@@ -1070,7 +1105,36 @@
       },
       "type": "object"
     },
+    "LedgerUserRoles": {
+      "description": "Details about a Confidential Ledger user.",
+      "required": [
+        "assignedRoles"
+      ],
+      "properties": {
+        "assignedRoles": {
+          "$ref": "#/definitions/LedgerUserMultipleRoles"
+        },
+        "userId": {
+          "$ref": "#/definitions/UserId",
+          "readOnly": true
+        }
+      },
+      "type": "object"
+    },
     "LedgerUserRole": {
+      "type": "string",
+      "description": "Represents an assignable role.",
+      "enum": [
+        "Administrator",
+        "Contributor",
+        "Reader"
+      ],
+      "x-ms-enum": {
+        "name": "ConfidentialLedgerUserRoleName",
+        "modelAsString": true
+      }
+    },
+    "LedgerUserMultipleRoles": {
       "description": "Represents an assignable role.",
       "type": "array",
       "items": {
@@ -1269,6 +1333,22 @@
         "ledgerUsers": {
           "items": {
             "$ref": "#/definitions/LedgerUser"
+          },
+          "type": "array"
+        },
+        "nextLink": {
+          "description": "Path from which to retrieve the next page of results.",
+          "type": "string"
+        }
+      }
+    },
+    "PagedUserRoles": {
+      "description": "Paginated users returned in response to a query.",
+      "type": "object",
+      "properties": {
+        "ledgerUsers": {
+          "items": {
+            "$ref": "#/definitions/LedgerUserRoles"
           },
           "type": "array"
         },
