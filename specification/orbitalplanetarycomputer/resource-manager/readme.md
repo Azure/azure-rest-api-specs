@@ -37,4 +37,8 @@ These settings apply only when `--tag=package-2024-01-31-preview` is specified o
 ```yaml $(tag) == 'package-2024-01-31-preview'
 input-file:
   - Microsoft.Orbital/preview/2024-01-31-preview/aopc.json
+suppressions:
+  - code: AvoidAnonymousTypes
+    from: swagger-document
+    reason: Azure.ResourceManager.Foundations.ManagedServiceIdentity generated swagger
 ```
