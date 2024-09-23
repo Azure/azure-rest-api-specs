@@ -82,11 +82,8 @@ model GeoCatalogProperties {
   provisioningState?: ProvisioningState;
 }
 
-model UpdateableManagedIdentity
-  is UpdateableProperties<Azure.ResourceManager.Foundations.ManagedServiceIdentity>;
-
 model ManagedServiceIdentityUpdate
-  is OptionalProperties<UpdateableManagedIdentity>;
+  is OptionalProperties<UpdateableProperties<Azure.ResourceManager.Foundations.ManagedServiceIdentity>>;
 
 /** Patch request workaround for Swagger LintDiff. Typespec Bug: https://github.com/Azure/typespec-azure/issues/383 */
 model GeoCatalogUpdate {
