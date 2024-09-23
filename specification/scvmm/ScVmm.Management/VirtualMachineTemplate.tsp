@@ -35,6 +35,7 @@ interface VirtualMachineTemplates {
   @summary("Implements VirtualMachineTemplates PUT method.")
   createOrUpdate is ArmResourceCreateOrUpdateAsync<VirtualMachineTemplate>;
   /** Updates the VirtualMachineTemplate resource. */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "TODO migrate to LRO"
   @summary("Implements the VirtualMachineTemplate PATCH method.")
   @extension(
     "x-ms-long-running-operation-options",
@@ -44,6 +45,7 @@ interface VirtualMachineTemplates {
   )
   update is ArmTagsPatchAsync<VirtualMachineTemplate>;
   /** Deregisters the ScVmm VM Template from Azure. */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "TODO migrate to LRO"
   @summary("Implements VirtualMachineTemplate DELETE method.")
   @extension(
     "x-ms-long-running-operation-options",

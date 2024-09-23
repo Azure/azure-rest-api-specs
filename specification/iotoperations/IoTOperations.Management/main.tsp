@@ -102,7 +102,7 @@ interface DataFlow {
   get is ArmResourceRead<DataFlowResource>;
   createOrUpdate is ArmResourceCreateOrUpdateAsync<DataFlowResource>;
   delete is ArmResourceDeleteWithoutOkAsync<DataFlowResource>;
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "For backward compatibility"
   @operationId("DataFlow_ListByProfileResource")
   listByResourceGroup is ArmResourceListByParent<DataFlowResource>;
 }

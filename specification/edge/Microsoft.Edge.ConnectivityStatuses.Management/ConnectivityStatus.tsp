@@ -56,7 +56,7 @@ interface ConnectivityStatuses {
   /**
    * List ConnectivityStatus resources by parent
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "For backward compatibility"
   @operationId("ConnectivityStatuses_List")
   list is ArmResourceListByParent<ConnectivityStatus>;
 }

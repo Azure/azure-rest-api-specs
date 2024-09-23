@@ -12,6 +12,7 @@ using OpenAPI;
 namespace Microsoft.AzureTerraform;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "Cannot use @armResourceOperations decorator here, the auto-generated routes do not match feature requirements"
+#suppress "@azure-tools/typespec-azure-core/no-openapi" "TODO: migrate to LRO concepts DO NOT USE x-ms-long-running-operation-options"
 @doc("Exports the Terraform configuration of the specified resource(s).")
 @route("/subscriptions/{subscriptionId}/providers/Microsoft.AzureTerraform/exportTerraform")
 @post
@@ -29,7 +30,6 @@ op exportTerraform(
 
   @doc("The export parameter")
   @body
-  @extension("x-ms-parameter-location", "method")
   exportParameter: BaseExportModel,
 ): ArmAcceptedLroResponse<
   "Export request accepted.",

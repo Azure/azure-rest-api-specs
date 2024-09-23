@@ -338,6 +338,7 @@ model PatchableDashboard {
   @doc("The shared dashboard properties.")
   properties?: DashboardProperties;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing api"
   @doc("Resource tags")
   tags?: Record<string>;
 }

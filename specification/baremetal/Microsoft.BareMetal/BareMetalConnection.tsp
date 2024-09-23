@@ -38,7 +38,7 @@ interface BareMetalConnections {
   /**
    * List all BareMetalConnection objects in the resource group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Can not change existing operationId."
   @operationId("BareMetalConnections_ListResourceGroup")
   listResourceGroup is ArmResourceListByParent<BareMetalConnection>;
 
