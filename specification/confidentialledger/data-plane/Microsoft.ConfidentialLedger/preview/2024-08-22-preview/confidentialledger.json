@@ -426,7 +426,7 @@
     },
     "/app/userRoles": {
       "get": {
-        "operationId": "ListUserRoles.json",
+        "operationId": "ListUserRoles",
         "x-ms-examples": {
           "ListUserRolesEntries": {
             "$ref": "./examples/ledger/ListUserRoles.json"
@@ -1092,10 +1092,10 @@
     "LedgerUser": {
       "description": "Details about a Confidential Ledger user.",
       "required": [
-        "assignedRoles"
+        "assignedRole"
       ],
       "properties": {
-        "assignedRoles": {
+        "assignedRole": {
           "$ref": "#/definitions/LedgerUserRole"
         },
         "userId": {
