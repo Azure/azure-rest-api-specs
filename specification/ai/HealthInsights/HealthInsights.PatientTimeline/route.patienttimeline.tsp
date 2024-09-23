@@ -19,7 +19,7 @@ interface PatientTimeline {
   @doc("Gets the status and details of the Patient Timeline job.")
   @get
   @route("/patient-timeline/jobs/{id}")
-  getJob is HealthInsightsLongRunningPollOperation<PatientTimelineResult>;
+  getJob is HealthInsightsLongRunningPollOperation<BodyParameter<PatientTimelineResult>>;
 
   #suppress "@azure-tools/typespec-azure-core/long-running-polling-operation-required" "Polling through operation-location"
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "There is no long-running RPC template in Azure.Core"

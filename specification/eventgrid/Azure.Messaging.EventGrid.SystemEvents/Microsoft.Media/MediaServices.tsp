@@ -1,3 +1,7 @@
+import "@typespec/versioning";
+
+using TypeSpec.Versioning;
+
 /** Describes the schema of the Azure Media Services events published to Azure Event Grid. This corresponds to the Data property of an EventGridEvent. */
 namespace Microsoft.EventGrid.SystemEvents {
   /** State of a Media Job. */
@@ -101,9 +105,11 @@ namespace Microsoft.EventGrid.SystemEvents {
   */
   model MediaJobStateChangeEventData {
     /** The previous state of the Job. */
+    @madeRequired(ServiceApiVersions.v2024_01_01)
     previousState: MediaJobState;
 
     /** The new state of the Job. */
+    @madeRequired(ServiceApiVersions.v2024_01_01)
     state: MediaJobState;
 
     /** Gets the Job correlation data. */
@@ -113,15 +119,18 @@ namespace Microsoft.EventGrid.SystemEvents {
   /** Details of JobOutput errors. */
   model MediaJobError {
     /** Error code describing the error. */
+    @madeRequired(ServiceApiVersions.v2024_01_01)
     code: MediaJobErrorCode;
 
     /** A human-readable language-dependent representation of the error. */
     message?: string;
 
     /** Helps with categorization of errors. */
+    @madeRequired(ServiceApiVersions.v2024_01_01)
     category: MediaJobErrorCategory;
 
     /** Indicates that it may be possible to retry the Job. If retry is unsuccessful, please contact Azure support via Azure Portal. */
+    @madeRequired(ServiceApiVersions.v2024_01_01)
     retry: MediaJobRetry;
 
     /** An array of details about specific errors that led to this reported error. */
@@ -155,6 +164,7 @@ namespace Microsoft.EventGrid.SystemEvents {
     progress: int64;
 
     /** Gets the Job output state. */
+    @madeRequired(ServiceApiVersions.v2024_01_01)
     state: MediaJobState;
   }
 
@@ -189,6 +199,7 @@ namespace Microsoft.EventGrid.SystemEvents {
   */
   model MediaJobOutputStateChangeEventData {
     /** The previous state of the Job. */
+    @madeRequired(ServiceApiVersions.v2024_01_01)
     previousState: MediaJobState;
 
     /** Gets the output. */

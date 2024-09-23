@@ -543,7 +543,13 @@ interface DataTypes {
   get is ArmResourceRead<DataType>;
 
   @doc("Update data type resource.")
-  update is ArmResourcePatchAsync<DataType, DataTypeProperties>;
+  update is ArmCustomPatchAsync<
+    DataType,
+    Azure.ResourceManager.Foundations.ResourceUpdateModel<
+      DataType,
+      DataTypeProperties
+    >
+  >;
 
   @doc("Delete data type resource.")
   delete is ArmResourceDeleteWithoutOkAsync<DataType>;
@@ -560,7 +566,7 @@ interface DataTypes {
   >;
 
   @doc("List data type by parent resource.")
-  listByParent is ArmResourceListByParent<DataType>;
+  listByDataProduct is ArmResourceListByParent<DataType>;
 }
 
 @doc("Operations on data product resource.")
@@ -579,7 +585,13 @@ interface DataProducts {
   get is ArmResourceRead<DataProduct>;
 
   @doc("Update data product resource.")
-  update is ArmResourcePatchAsync<DataProduct, DataProductProperties>;
+  update is ArmCustomPatchAsync<
+    DataProduct,
+    Azure.ResourceManager.Foundations.ResourceUpdateModel<
+      DataProduct,
+      DataProductProperties
+    >
+  >;
 
   @doc("Delete data product resource.")
   delete is ArmResourceDeleteWithoutOkAsync<DataProduct>;
