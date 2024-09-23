@@ -30,7 +30,7 @@ model TrialMatcherModelConfiguration {
   clinicalTrials: ClinicalTrials;
 }
 
-@added(ApiVersion.v2024_08_01-preview)
+@added(ApiVersion.v2024_08_01_preview)
 @doc("Response for the Trial Matcher request.")
 @resource("trial-matcher/jobs")
 model TrialMatcherJob {
@@ -44,12 +44,6 @@ model TrialMatcherJob {
 
   ...HealthInsightsJobBase;
 }
-
-@removed(ApiVersion.v2024_08_01-preview)
-@resource("trial-matcher/jobs")
-@doc("The response for the Trial Matcher request.")
-model TrialMatcherResult
-  is HealthInsightsOperationStatus<TrialMatcherInferenceResult>;
 
 @doc("The inference results for the Trial Matcher request.")
 model TrialMatcherInferenceResult {
