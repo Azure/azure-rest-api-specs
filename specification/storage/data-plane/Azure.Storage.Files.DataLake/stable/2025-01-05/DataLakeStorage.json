@@ -913,6 +913,12 @@
           },
           {
             "$ref": "#/parameters/Body"
+          },
+          {
+            "$ref": "#/parameters/StructuredBodyPut"
+          },
+          {
+            "$ref": "#/parameters/StructuredContentLength"
           }
         ],
         "responses": {
@@ -1017,6 +1023,11 @@
                 "x-ms-client-name": "Version",
                 "description": "The version of the REST protocol used to process the request.",
                 "type": "string"
+              },
+              "x-ms-structured-body": {
+                "x-ms-client-name": "StructuredBodyType",
+                "type": "string",
+                "description": "Indicates the structured message body was accepted and mirrors back the message schema version and properties."
               }
             }
           },
@@ -2250,6 +2261,12 @@
           },
           {
             "$ref": "#/parameters/Flush"
+          },
+          {
+            "$ref": "#/parameters/StructuredBodyPut"
+          },
+          {
+            "$ref": "#/parameters/StructuredContentLength"
           }
         ],
         "responses": {
@@ -2304,6 +2321,11 @@
                 "x-ms-client-name": "LeaseRenewed",
                 "type": "boolean",
                 "description": "If the lease was auto-renewed with this request"
+              },
+              "x-ms-structured-body": {
+                "x-ms-client-name": "StructuredBodyType",
+                "type": "string",
+                "description": "Indicates the structured message body was accepted and mirrors back the message schema version and properties."
               }
             }
           },
@@ -2980,6 +3002,25 @@
       "format": "byte",
       "x-ms-parameter-location": "method",
       "description": "Specify the transactional crc64 for the body, to be validated by the service."
+    },
+    "StructuredBodyPut": {
+      "name": "x-ms-structured-body",
+      "x-ms-client-name": "StructuredBodyType",
+      "in": "header",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "description": "Required if the request body is a structured message. Specifies the message schema version and properties."
+    },
+    "StructuredContentLength": {
+      "name": "x-ms-structured-content-length",
+      "x-ms-client-name": "StructuredContentLength",
+      "in": "header",
+      "required": false,
+      "type": "integer",
+      "format": "int64",
+      "x-ms-parameter-location": "method",
+      "description": "Required if the request body is a structured message. Specifies the length of the blob/file content inside the message body. Will always be smaller than Content-Length."
     },
     "Umask": {
       "name": "x-ms-umask",

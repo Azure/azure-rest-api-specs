@@ -2662,6 +2662,9 @@
             "$ref": "#/parameters/GetRangeContentCRC64"
           },
           {
+            "$ref": "#/parameters/StructuredBodyGet"
+          },
+          {
             "$ref": "#/parameters/EncryptionKey"
           },
           {
@@ -2965,6 +2968,17 @@
                 "x-ms-client-name": "LegalHold",
                 "type": "boolean",
                 "description": "Indicates if a legal hold is present on the blob."
+              },
+              "x-ms-structured-body": {
+                "x-ms-client-name": "StructuredBodyType",
+                "type": "string",
+                "description": "Indicates the response body contains a structured message and specifies the message schema version and properties."
+              },
+              "x-ms-structured-content-length": {
+                "x-ms-client-name": "StructuredContentLength",
+                "type": "integer",
+                "format": "int64",
+                "description": "The length of the blob/file content inside the message body when the response body is returned as a structured message. Will always be smaller than Content-Length."
               }
             },
             "schema": {
@@ -3241,6 +3255,17 @@
                 "x-ms-client-name": "LegalHold",
                 "type": "boolean",
                 "description": "Indicates if a legal hold is present on the blob."
+              },
+              "x-ms-structured-body": {
+                "x-ms-client-name": "StructuredBodyType",
+                "type": "string",
+                "description": "Indicates the response body contains a structured message and specifies the message schema version and properties."
+              },
+              "x-ms-structured-content-length": {
+                "x-ms-client-name": "StructuredContentLength",
+                "type": "integer",
+                "format": "int64",
+                "description": "The length of the blob/file content inside the message body when the response body is returned as a structured message. Will always be smaller than Content-Length."
               }
             },
             "schema": {
@@ -4208,6 +4233,12 @@
           },
           {
             "$ref": "#/parameters/ContentCrc64"
+          },
+          {
+            "$ref": "#/parameters/StructuredBodyPut"
+          },
+          {
+            "$ref": "#/parameters/StructuredContentLength"
           }
         ],
         "responses": {
@@ -4267,6 +4298,11 @@
                 "x-ms-client-name": "EncryptionScope",
                 "type": "string",
                 "description": "Returns the name of the encryption scope used to encrypt the blob contents and application metadata.  Note that the absence of this header implies use of the default account encryption scope."
+              },
+              "x-ms-structured-body": {
+                "x-ms-client-name": "StructuredBodyType",
+                "type": "string",
+                "description": "Indicates the structured message body was accepted and mirrors back the message schema version and properties."
               }
             }
           },
@@ -6709,6 +6745,12 @@
           },
           {
             "$ref": "#/parameters/ClientRequestId"
+          },
+          {
+            "$ref": "#/parameters/StructuredBodyPut"
+          },
+          {
+            "$ref": "#/parameters/StructuredContentLength"
           }
         ],
         "responses": {
@@ -6759,6 +6801,11 @@
                 "x-ms-client-name": "EncryptionScope",
                 "type": "string",
                 "description": "Returns the name of the encryption scope used to encrypt the blob contents and application metadata.  Note that the absence of this header implies use of the default account encryption scope."
+              },
+              "x-ms-structured-body": {
+                "x-ms-client-name": "StructuredBodyType",
+                "type": "string",
+                "description": "Indicates the structured message body was accepted and mirrors back the message schema version and properties."
               }
             }
           },
@@ -7306,6 +7353,12 @@
           },
           {
             "$ref": "#/parameters/ClientRequestId"
+          },
+          {
+            "$ref": "#/parameters/StructuredBodyPut"
+          },
+          {
+            "$ref": "#/parameters/StructuredContentLength"
           }
         ],
         "responses": {
@@ -7371,6 +7424,11 @@
                 "x-ms-client-name": "EncryptionScope",
                 "type": "string",
                 "description": "Returns the name of the encryption scope used to encrypt the blob contents and application metadata.  Note that the absence of this header implies use of the default account encryption scope."
+              },
+              "x-ms-structured-body": {
+                "x-ms-client-name": "StructuredBodyType",
+                "type": "string",
+                "description": "Indicates the structured message body was accepted and mirrors back the message schema version and properties."
               }
             }
           },
@@ -8486,6 +8544,12 @@
           },
           {
             "$ref": "#/parameters/ClientRequestId"
+          },
+          {
+            "$ref": "#/parameters/StructuredBodyPut"
+          },
+          {
+            "$ref": "#/parameters/StructuredContentLength"
           }
         ],
         "responses": {
@@ -8555,6 +8619,11 @@
                 "x-ms-client-name": "EncryptionScope",
                 "type": "string",
                 "description": "Returns the name of the encryption scope used to encrypt the blob contents and application metadata.  Note that the absence of this header implies use of the default account encryption scope."
+              },
+              "x-ms-structured-body": {
+                "x-ms-client-name": "StructuredBodyType",
+                "type": "string",
+                "description": "Indicates the structured message body was accepted and mirrors back the message schema version and properties."
               }
             }
           },
@@ -11782,6 +11851,34 @@
       "type": "boolean",
       "x-ms-parameter-location": "method",
       "description": "When set to true and specified together with the Range, the service returns the CRC64 hash for the range, as long as the range is less than or equal to 4 MB in size."
+    },
+    "StructuredBodyGet": {
+      "name": "x-ms-structured-body",
+      "x-ms-client-name": "StructuredBodyType",
+      "in": "header",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "description": "Specifies the response content should be returned as a structured message and specifies the message schema version and properties."
+    },
+    "StructuredBodyPut": {
+      "name": "x-ms-structured-body",
+      "x-ms-client-name": "StructuredBodyType",
+      "in": "header",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "description": "Required if the request body is a structured message. Specifies the message schema version and properties."
+    },
+    "StructuredContentLength": {
+      "name": "x-ms-structured-content-length",
+      "x-ms-client-name": "StructuredContentLength",
+      "in": "header",
+      "required": false,
+      "type": "integer",
+      "format": "int64",
+      "x-ms-parameter-location": "method",
+      "description": "Required if the request body is a structured message. Specifies the length of the blob/file content inside the message body. Will always be smaller than Content-Length."
     },
     "IfMatch": {
       "name": "If-Match",
