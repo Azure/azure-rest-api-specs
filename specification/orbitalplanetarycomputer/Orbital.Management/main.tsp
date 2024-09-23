@@ -82,6 +82,7 @@ model GeoCatalogProperties {
   provisioningState?: ProvisioningState;
 }
 
+#suppress "@azure-tools/typespec-providerhub/AvoidAnonymousTypes" "Swagger generation might need to be updated to support this."
 model ManagedServiceIdentityUpdate
   is OptionalProperties<UpdateableProperties<Azure.ResourceManager.Foundations.ManagedServiceIdentity>>;
 
