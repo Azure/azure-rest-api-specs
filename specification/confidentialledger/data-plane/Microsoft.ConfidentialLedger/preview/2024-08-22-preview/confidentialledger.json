@@ -607,7 +607,7 @@
           "200": {
             "description": "Details about the specified user.",
             "schema": {
-              "$ref": "#/definitions/LedgerUserRoles"
+              "$ref": "#/definitions/LedgerUserMultipleRoles"
             }
           },
           "default": {
@@ -645,7 +645,7 @@
           "200": {
             "description": "User created or updated successfully.",
             "schema": {
-              "$ref": "#/definitions/LedgerUserRoles"
+              "$ref": "#/definitions/LedgerUserMultipleRoles"
             }
           },
           "default": {
@@ -1204,14 +1204,14 @@
       },
       "type": "object"
     },
-    "LedgerUserRoles": {
+    "LedgerUserMultipleRoles": {
       "description": "Details about a Confidential Ledger user.",
       "required": [
         "assignedRoles"
       ],
       "properties": {
         "assignedRoles": {
-          "$ref": "#/definitions/LedgerUserMultipleRoles"
+          "$ref": "#/definitions/LedgerUserMultipleRolesDef"
         },
         "userId": {
           "$ref": "#/definitions/UserId",
@@ -1233,7 +1233,7 @@
         "modelAsString": true
       }
     },
-    "LedgerUserMultipleRoles": {
+    "LedgerUserMultipleRolesDef": {
       "description": "Represents an assignable role.",
       "type": "array",
       "items": {
@@ -1447,7 +1447,7 @@
       "properties": {
         "ledgerUsers": {
           "items": {
-            "$ref": "#/definitions/LedgerUserRoles"
+            "$ref": "#/definitions/LedgerUserMultipleRoles"
           },
           "type": "array"
         },
