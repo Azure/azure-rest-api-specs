@@ -23,25 +23,8 @@ interface LibraryOperations {
 @armResourceOperations(Analysis)
 interface AnalysisOperations {
   get is ArmResourceRead<Analysis>;
-
-  @extension("x-ms-long-running-operation", true)
-  @extension(
-    "x-ms-long-running-operation-options",
-    {
-      `final-state-via`: "azure-async-operation",
-    }
-  )
   create is ArmResourceCreateOrUpdateAsync<Analysis>;
-
   update is ArmResourcePatchSync<Analysis, AnalysisProperties>;
-
-  @extension("x-ms-long-running-operation", true)
-  @extension(
-    "x-ms-long-running-operation-options",
-    {
-      `final-state-via`: "azure-async-operation",
-    }
-  )
   delete is ArmResourceDeleteWithoutOkAsync<Analysis>;
   listByParent is ArmResourceListByParent<Analysis>;
 }
@@ -53,14 +36,5 @@ interface SampleOperations {
   update is ArmResourcePatchSync<Sample, SampleProperties>;
   delete is ArmResourceDeleteSync<Sample>;
   listByParent is ArmResourceListByParent<Sample>;
-
-  @doc("Create a Metagenomics analysis of this sample")
-  @extension("x-ms-long-running-operation", true)
-  @extension(
-    "x-ms-long-running-operation-options",
-    {
-      `final-state-via`: "azure-async-operation",
-    }
-  )
   identify is ArmResourceActionAsync<Sample, IdentifyRequest, Analysis>;
 }
