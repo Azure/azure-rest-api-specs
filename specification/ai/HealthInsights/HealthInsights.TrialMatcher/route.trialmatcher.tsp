@@ -34,7 +34,7 @@ interface TrialMatcher {
   >;
 }
 
-@TypeSpec.Versioning.removed(AzureHealthInsights.ApiVersion.v2024_08_01-preview)
+@TypeSpec.Versioning.added(AzureHealthInsights.ApiVersion.v2024_08_01-preview)
 interface TrialMatcher {
   @summary("Get Trial Matcher job details")
   @tag("TrialMatcher")

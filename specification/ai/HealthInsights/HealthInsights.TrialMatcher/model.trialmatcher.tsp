@@ -45,6 +45,7 @@ model TrialMatcherJob {
   ...HealthInsightsJobBase;
 }
 
+@removed(ApiVersion.v2024_08_01-preview)
 @resource("trial-matcher/jobs")
 @doc("The response for the Trial Matcher request.")
 model TrialMatcherResult
