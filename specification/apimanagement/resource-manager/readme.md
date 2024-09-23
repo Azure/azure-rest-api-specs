@@ -28,7 +28,74 @@ These are the global settings for the ApiManagement API.
 title: ApiManagementClient
 description: ApiManagement Client
 openapi-type: arm
-tag: package-2024-05
+tag: package-2024-06
+```
+
+### Tag: package-2024-06
+
+These settings apply only when `--tag=package-2024-06` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-06'
+input-file:
+  - Microsoft.ApiManagement/stable/2024-06-01/apigateway.json
+  - Microsoft.ApiManagement/stable/2024-06-01/apimallpolicies.json
+  - Microsoft.ApiManagement/stable/2024-06-01/apimanagement.json
+  - Microsoft.ApiManagement/stable/2024-06-01/apimapis.json
+  - Microsoft.ApiManagement/stable/2024-06-01/apimapisByTags.json
+  - Microsoft.ApiManagement/stable/2024-06-01/apimapiversionsets.json
+  - Microsoft.ApiManagement/stable/2024-06-01/apimauthorizationproviders.json
+  - Microsoft.ApiManagement/stable/2024-06-01/apimauthorizationservers.json
+  - Microsoft.ApiManagement/stable/2024-06-01/apimbackends.json
+  - Microsoft.ApiManagement/stable/2024-06-01/apimcaches.json
+  - Microsoft.ApiManagement/stable/2024-06-01/apimcertificates.json
+  - Microsoft.ApiManagement/stable/2024-06-01/apimconnectivitycheck.json
+  - Microsoft.ApiManagement/stable/2024-06-01/apimcontenttypes.json
+  - Microsoft.ApiManagement/stable/2024-06-01/apimdeletedservices.json
+  - Microsoft.ApiManagement/stable/2024-06-01/apimdeployment.json
+  - Microsoft.ApiManagement/stable/2024-06-01/apimdiagnostics.json
+  - Microsoft.ApiManagement/stable/2024-06-01/apimdocumentations.json
+  - Microsoft.ApiManagement/stable/2024-06-01/apimemailtemplates.json
+  - Microsoft.ApiManagement/stable/2024-06-01/apimgatewayConfigConnections.json
+  - Microsoft.ApiManagement/stable/2024-06-01/apimgateways.json
+  - Microsoft.ApiManagement/stable/2024-06-01/apimgroups.json
+  - Microsoft.ApiManagement/stable/2024-06-01/apimidentityprovider.json
+  - Microsoft.ApiManagement/stable/2024-06-01/apimissues.json
+  - Microsoft.ApiManagement/stable/2024-06-01/apimloggers.json
+  - Microsoft.ApiManagement/stable/2024-06-01/apimnamedvalues.json
+  - Microsoft.ApiManagement/stable/2024-06-01/apimnetworkstatus.json
+  - Microsoft.ApiManagement/stable/2024-06-01/apimnotifications.json
+  - Microsoft.ApiManagement/stable/2024-06-01/apimopenidconnectproviders.json
+  - Microsoft.ApiManagement/stable/2024-06-01/apimoutbounddependency.json
+  - Microsoft.ApiManagement/stable/2024-06-01/apimpolicies.json
+  - Microsoft.ApiManagement/stable/2024-06-01/apimpolicydescriptions.json
+  - Microsoft.ApiManagement/stable/2024-06-01/apimpolicyfragments.json
+  - Microsoft.ApiManagement/stable/2024-06-01/apimpolicyrestrictions.json
+  - Microsoft.ApiManagement/stable/2024-06-01/apimpolicyrestrictionsvalidation.json
+  - Microsoft.ApiManagement/stable/2024-06-01/apimportalconfigs.json
+  - Microsoft.ApiManagement/stable/2024-06-01/apimportalrevisions.json
+  - Microsoft.ApiManagement/stable/2024-06-01/apimportalsettings.json
+  - Microsoft.ApiManagement/stable/2024-06-01/apimprivatelink.json
+  - Microsoft.ApiManagement/stable/2024-06-01/apimproducts.json
+  - Microsoft.ApiManagement/stable/2024-06-01/apimproductsByTags.json
+  - Microsoft.ApiManagement/stable/2024-06-01/apimquotas.json
+  - Microsoft.ApiManagement/stable/2024-06-01/apimregions.json
+  - Microsoft.ApiManagement/stable/2024-06-01/apimreports.json
+  - Microsoft.ApiManagement/stable/2024-06-01/apimschema.json
+  - Microsoft.ApiManagement/stable/2024-06-01/apimsettings.json
+  - Microsoft.ApiManagement/stable/2024-06-01/apimskus.json
+  - Microsoft.ApiManagement/stable/2024-06-01/apimsubscriptions.json
+  - Microsoft.ApiManagement/stable/2024-06-01/apimtagresources.json
+  - Microsoft.ApiManagement/stable/2024-06-01/apimtags.json
+  - Microsoft.ApiManagement/stable/2024-06-01/apimtenant.json
+  - Microsoft.ApiManagement/stable/2024-06-01/apimusers.json
+  - Microsoft.ApiManagement/stable/2024-06-01/apimworkspacebackends.json
+  - Microsoft.ApiManagement/stable/2024-06-01/apimworkspacecertificates.json
+  - Microsoft.ApiManagement/stable/2024-06-01/apimworkspacediagnostics.json
+  - Microsoft.ApiManagement/stable/2024-06-01/apimworkspacelinks.json
+  - Microsoft.ApiManagement/stable/2024-06-01/apimworkspaceloggers.json
+  - Microsoft.ApiManagement/stable/2024-06-01/apimworkspaces.json
+  - Microsoft.ApiManagement/stable/2024-06-01/definitions.json
+  - Microsoft.ApiManagement/stable/2024-06-01/operationStatuses.json
 ```
 
 
