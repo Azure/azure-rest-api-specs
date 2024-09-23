@@ -24,7 +24,7 @@ model ExtensionVersion
    */
   @maxLength(64)
   @minLength(3)
-  @pattern("^[a-zA-Z0-9]+$")
+  @pattern("^([A-Za-z0-9-]+(.){0,1})+$")
   @path
   @key("versionName")
   @segment("versions")
