@@ -82,7 +82,8 @@ model GeoCatalogProperties {
   provisioningState?: ProvisioningState;
 }
 
-model UpdateableManagedIdentity UpdateableProperties<Azure.ResourceManager.Foundations.ManagedServiceIdentity>
+model UpdateableManagedIdentity 
+  is UpdateableProperties<Azure.ResourceManager.Foundations.ManagedServiceIdentity>;
 
 model ManagedServiceIdentityUpdate
   is OptionalProperties<UpdateableManagedIdentity>;
