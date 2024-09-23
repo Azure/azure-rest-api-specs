@@ -82,9 +82,10 @@ model GeoCatalogProperties {
   provisioningState?: ProvisioningState;
 }
 
-#suppress "@azure-tools/typespec-providerhub/AvoidAnonymousTypes" "Swagger generation might need to be updated to support this."
+model UpdateableManagedIdentity UpdateableProperties<Azure.ResourceManager.Foundations.ManagedServiceIdentity>
+
 model ManagedServiceIdentityUpdate
-  is OptionalProperties<UpdateableProperties<Azure.ResourceManager.Foundations.ManagedServiceIdentity>>;
+  is OptionalProperties<UpdateableManagedIdentity>;
 
 /** Patch request workaround for Swagger LintDiff. Typespec Bug: https://github.com/Azure/typespec-azure/issues/383 */
 model GeoCatalogUpdate {
