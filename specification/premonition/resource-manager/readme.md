@@ -26,6 +26,7 @@ These are the global settings for the Premonition.
 
 ```yaml
 openapi-type: arm
+openapi-subtype: providerHub
 tag: package-2024-09-01-preview
 ```
 

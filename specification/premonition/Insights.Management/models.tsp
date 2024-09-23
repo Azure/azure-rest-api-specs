@@ -18,7 +18,7 @@ model Library is TrackedResource<LibraryProperties> {
 @doc("The properties of Library")
 model LibraryProperties {
   @doc("The blob container URL where data files are stored")
-  container: string;
+  container: url;
 
   @doc("Provisioning state of the resource")
   @visibility("read")
