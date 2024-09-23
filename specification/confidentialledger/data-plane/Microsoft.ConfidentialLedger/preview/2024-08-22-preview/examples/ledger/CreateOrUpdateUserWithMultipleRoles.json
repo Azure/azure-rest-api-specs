@@ -1,16 +1,22 @@
 {
   "parameters": {
-    "api-version": "2024-01-26-preview",
+    "api-version": "2024-08-22-preview",
     "ledgerUri": "myledger.confidentialledger.azure.com",
     "userId": "AAD object id",
     "userDetails": {
-      "assignedRole": "Reader"
+      "assignedRoles": [
+        "Reader",
+        "Writer"
+      ]
     }
   },
   "responses": {
     "200": {
       "body": {
-        "assignedRole": "Reader",
+        "assignedRoles": [
+          "Reader",
+          "Writer"
+        ],
         "userId": "AAD object id"
       }
     }

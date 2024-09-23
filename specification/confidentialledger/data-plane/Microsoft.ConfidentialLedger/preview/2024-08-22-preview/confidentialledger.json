@@ -558,6 +558,105 @@
         }
       }
     },
+    "/app/userRoles/{userId}": {
+      "delete": {
+        "operationId": "DeleteUserWithMultipleRoles",
+        "x-ms-examples": {
+          "DeleteUser": {
+            "$ref": "./examples/ledger/DeleteUser.json"
+          }
+        },
+        "summary": "Deletes a user with multiple roles from the Confidential Ledger.",
+        "parameters": [
+          {
+            "$ref": "common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/UserIdParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "The specified user is deleted."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "common.json#/definitions/ConfidentialLedgerError"
+            }
+          }
+        }
+      },
+      "get": {
+        "operationId": "GetUserWithMultipleRoles",
+        "x-ms-examples": {
+          "GetUser": {
+            "$ref": "./examples/ledger/GetUserWithMultipleRoles.json"
+          }
+        },
+        "summary": "Gets a user with multiple roles.",
+        "parameters": [
+          {
+            "$ref": "common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/UserIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Details about the specified user.",
+            "schema": {
+              "$ref": "#/definitions/LedgerUserRoles"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "common.json#/definitions/ConfidentialLedgerError"
+            }
+          }
+        }
+      },
+      "patch": {
+        "operationId": "CreateOrUpdateUserWithMultipleRoles",
+        "x-ms-examples": {
+          "CreateOrUpdateUser": {
+            "$ref": "./examples/ledger/CreateOrUpdateUserWithMultipleRoles.json"
+          }
+        },
+        "summary": "Adds a user or updates a user's fields.",
+        "description": "A JSON merge patch is applied for existing users",
+        "consumes": [
+          "application/merge-patch+json"
+        ],
+        "parameters": [
+          {
+            "$ref": "common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/UserIdParameter"
+          },
+          {
+            "$ref": "#/parameters/UserDetailsParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "User created or updated successfully.",
+            "schema": {
+              "$ref": "#/definitions/LedgerUserRoles"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "common.json#/definitions/ConfidentialLedgerError"
+            }
+          }
+        }
+      }
+    },
     "/app/userDefinedEndpoints": {
       "get": {
         "operationId": "GetUserDefinedEndpoint",
