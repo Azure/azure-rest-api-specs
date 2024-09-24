@@ -371,6 +371,10 @@ union DevBoxOperationKind {
   @added(APIVersions.v2024_09_01_preview)
   RestoreSnapshot: "RestoreSnapshot",
 
+  @doc("The operation represents a Dev Box manual snapshot creation.")
+  @added(APIVersions.v2024_10_01_preview)
+  CaptureSnapshot: "CaptureSnapshot",
+
   string,
 }
 
@@ -385,6 +389,18 @@ union DevBoxRepairOutcome {
 
   @doc("The service did not identify any issues on the Dev Box.")
   NoIssuesDetected: "NoIssuesDetected",
+
+  string,
+}
+
+@doc("The type of snapshot.")
+@added(APIVersions.v2024_10_01_preview)
+union SnapshotType {
+  @doc("The snapshot type indicates that this is a manually taken snapshot.")
+  Manual: "Manual",
+
+  @doc("The snapshot type indicates that this is an automatically taken snapshot.")
+  Automatic: "Automatic",
 
   string,
 }
@@ -831,6 +847,13 @@ model DevBoxRestoreSnapshotOperation extends DevBoxOperation {
   kind: DevBoxOperationKind.RestoreSnapshot;
 }
 
+@doc("Information about a snapshot creation operation on a Dev Box.")
+@added(APIVersions.v2024_10_01_preview)
+model DevBoxCaptureSnapshotOperation extends DevBoxOperation {
+  @doc("The kind of operation that occurred.")
+  kind: DevBoxOperationKind.CaptureSnapshot;
+}
+
 @doc("The Customization Task list result.")
 model PagedCustomizationTaskDefinition
   is Azure.Core.Page<CustomizationTaskDefinition>;
@@ -1009,4 +1032,14 @@ model DevBoxSnapshot {
   @doc("The datetime that the snapshot was created, in RFC3339 format.")
   @visibility("read")
   createdTime: utcDateTime;
+
+  @doc("The datetime when the snapshot expires, will only be shown for a manual snapshot, in RFC3339 format.")
+  @visibility("read")
+  @added(APIVersions.v2024_10_01_preview)
+  expirationTime?: utcDateTime;
+
+  @doc("The type of the snapshot indicates whether it is manual or automatic.")
+  @visibility("read")
+  @added(APIVersions.v2024_10_01_preview)
+  snapshotType: SnapshotType;
 }

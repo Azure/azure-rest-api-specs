@@ -1837,6 +1837,80 @@
         "x-ms-long-running-operation": true
       }
     },
+    "/projects/{projectName}/users/{userId}/devboxes/{devBoxName}:captureSnapshot": {
+      "post": {
+        "operationId": "DevBoxes_CaptureSnapshotDevBox",
+        "description": "Captures a manual snapshot of the Dev Box.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "Name of the project.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+          },
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "The AAD object id of the user. If value is 'me', the identity is taken from the authentication context.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 36,
+            "pattern": "^[a-zA-Z0-9]{8}-([a-zA-Z0-9]{4}-){3}[a-zA-Z0-9]{12}$|^me$"
+          },
+          {
+            "name": "devBoxName",
+            "in": "path",
+            "description": "Display name for the Dev Box.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            },
+            "headers": {
+              "Operation-Location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The location for monitoring the operation state."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Attempts to capture the manual snapshot for the Dev Box.": {
+            "$ref": "./examples/DevBoxes_CaptureSnapshotDevBox.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
     "/projects/{projectName}/users/{userId}/devboxes/{devBoxName}/actions": {
       "get": {
         "operationId": "DevBoxes_ListActions",
@@ -4600,6 +4674,16 @@
         ]
       }
     },
+    "DevBoxCaptureSnapshotOperation": {
+      "type": "object",
+      "description": "Information about a snapshot creation operation on a Dev Box.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DevBoxOperation"
+        }
+      ],
+      "x-ms-discriminator-value": "CaptureSnapshot"
+    },
     "DevBoxNextAction": {
       "type": "object",
       "description": "Details about the next run of an action.",
@@ -4674,7 +4758,8 @@
         "Stop",
         "Restart",
         "Repair",
-        "RestoreSnapshot"
+        "RestoreSnapshot",
+        "CaptureSnapshot"
       ],
       "x-ms-enum": {
         "name": "DevBoxOperationKind",
@@ -4704,6 +4789,11 @@
             "name": "RestoreSnapshot",
             "value": "RestoreSnapshot",
             "description": "The operation represents a Dev Box restore from snapshot."
+          },
+          {
+            "name": "CaptureSnapshot",
+            "value": "CaptureSnapshot",
+            "description": "The operation represents a Dev Box manual snapshot creation."
           }
         ]
       }
@@ -4899,11 +4989,23 @@
           "format": "date-time",
           "description": "The datetime that the snapshot was created, in RFC3339 format.",
           "readOnly": true
+        },
+        "expirationTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The datetime when the snapshot expires, will only be shown for a manual snapshot, in RFC3339 format.",
+          "readOnly": true
+        },
+        "snapshotType": {
+          "$ref": "#/definitions/SnapshotType",
+          "description": "The type of the snapshot indicates whether it is manual or automatic.",
+          "readOnly": true
         }
       },
       "required": [
         "snapshotId",
-        "createdTime"
+        "createdTime",
+        "snapshotType"
       ]
     },
     "DevBoxStartOperation": {
@@ -6895,6 +6997,30 @@
             "name": "general_a_32c128gb2048ssd_v2",
             "value": "general_a_32c128gb2048ssd_v2",
             "description": "AMD, 32 vCPU, 128 GB RAM, 2048 GB Storage."
+          }
+        ]
+      }
+    },
+    "SnapshotType": {
+      "type": "string",
+      "description": "The type of snapshot.",
+      "enum": [
+        "Manual",
+        "Automatic"
+      ],
+      "x-ms-enum": {
+        "name": "SnapshotType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Manual",
+            "value": "Manual",
+            "description": "The snapshot type indicates that this is a manually taken snapshot."
+          },
+          {
+            "name": "Automatic",
+            "value": "Automatic",
+            "description": "The snapshot type indicates that this is an automatically taken snapshot."
           }
         ]
       }
