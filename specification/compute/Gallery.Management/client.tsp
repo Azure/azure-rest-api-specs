@@ -8,16 +8,16 @@ using Microsoft.Compute;
 @@flattenProperty(GalleryUpdate.properties);
 
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(GalleryImageUpdate.properties);
-
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(GalleryImageVersionUpdate.properties);
-
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(GalleryApplicationUpdate.properties);
 
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(GalleryApplicationVersionUpdate.properties);
+
+#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+@@flattenProperty(GalleryImageUpdate.properties);
+
+#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+@@flattenProperty(GalleryImageVersionUpdate.properties);
 
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(SharedGallery.properties);
@@ -47,13 +47,13 @@ using Microsoft.Compute;
 @@flattenProperty(Gallery.properties);
 
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(GalleryImage.properties);
-
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(GalleryImageVersion.properties);
-
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(GalleryApplication.properties);
 
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(GalleryApplicationVersion.properties);
+
+#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+@@flattenProperty(GalleryImage.properties);
+
+#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+@@flattenProperty(GalleryImageVersion.properties);

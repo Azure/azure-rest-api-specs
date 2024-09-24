@@ -284,7 +284,13 @@ list-exception:
 These settings apply only when `--tag=package-2024-07-01` is specified on the command line.
 
 ``` yaml $(tag) == 'package-2024-07-01'
+isFullCompatible: true
+title: "Azure Compute resource management API."
+clear-output-folder: false
+guessResourceKey: false
+isAzureSpec: true
+namespace: "Microsoft.Compute"
 input-file:
-  - Microsoft.Compute/common-types/v1/common.json
-  - Microsoft.Compute/Skus/stable/2021-07-01/skus.json
+  - ../resource-manager/Microsoft.Compute/common-types/v1/common.json
+  - ../resource-manager/Microsoft.Compute/Skus/stable/2021-07-01/skus.json
 ```

@@ -13,8 +13,6 @@ using Azure.ResourceManager.Foundations;
 
 namespace Microsoft.Compute;
 
-interface Operations extends Azure.ResourceManager.Operations {}
-
 /**
  * Type of repair action (replace, restart, reimage) that will be used for repairing unhealthy virtual machines in the scale set. Default value is replace.
  */
@@ -535,7 +533,7 @@ union DiskControllerTypes {
 }
 
 /**
- * Available from Api-Version 2019-07-01 onwards, it represents whether the specific ipconfiguration is IPv4 or IPv6. Default is taken as IPv4. Possible values are: 'IPv4' and 'IPv6'.
+ * Available from Api-Version 2017-03-30 onwards, it represents whether the specific ipconfiguration is IPv4 or IPv6. Default is taken as IPv4.  Possible values are: 'IPv4' and 'IPv6'.
  */
 union IPVersions {
   string,
@@ -573,12 +571,12 @@ union PatchOperationStatus {
   CompletedWithWarnings: "CompletedWithWarnings",
 }
 
-union ExpandTypeForListVMs {
+union ExpandTypesForListVMs {
   string,
   instanceView: "instanceView",
 }
 
-union ExpandTypesForListVMs {
+union ExpandTypeForListVMs {
   string,
   instanceView: "instanceView",
 }
@@ -774,11 +772,6 @@ union RestorePointExpandOptions {
   instanceView: "instanceView",
 }
 
-union CapacityReservationGroupInstanceViewTypes {
-  string,
-  instanceView: "instanceView",
-}
-
 union ExpandTypesForGetCapacityReservationGroups {
   string,
   `virtualMachineScaleSetVMs/$ref`: "virtualMachineScaleSetVMs/$ref",
@@ -790,6 +783,11 @@ union ResourceIdOptionsForGetCapacityReservationGroups {
   CreatedInSubscription: "CreatedInSubscription",
   SharedWithSubscription: "SharedWithSubscription",
   All: "All",
+}
+
+union CapacityReservationGroupInstanceViewTypes {
+  string,
+  instanceView: "instanceView",
 }
 
 union CapacityReservationInstanceViewTypes {
@@ -882,14 +880,6 @@ enum StatusLevelTypes {
 }
 
 /**
- * The scale type applicable to the sku.
- */
-enum VirtualMachineScaleSetSkuScaleType {
-  Automatic,
-  None,
-}
-
-/**
  * Code indicating the current status of the upgrade.
  */
 enum UpgradeState {
@@ -924,6 +914,14 @@ enum RollingUpgradeStatusCode {
 enum RollingUpgradeActionType {
   Start,
   Cancel,
+}
+
+/**
+ * The scale type applicable to the sku.
+ */
+enum VirtualMachineScaleSetSkuScaleType {
+  Automatic,
+  None,
 }
 
 /**
@@ -3552,6 +3550,13 @@ model VirtualMachineScaleSetVMInstanceIDs {
   instanceIds?: string[];
 }
 
+model VMScaleSetConvertToSinglePlacementGroupInput {
+  /**
+   * Id of the placement group in which you want future virtual machine instances to be placed. To query placement group Id, please use Virtual Machine Scale Set VMs - Get API. If not provided, the platform will choose one with maximum number of virtual machine instances.
+   */
+  activePlacementGroupId?: string;
+}
+
 /**
  * Specifies a list of virtual machine instance IDs from the VM scale set.
  */
@@ -3560,6 +3565,46 @@ model VirtualMachineScaleSetVMInstanceRequiredIDs {
    * The virtual machine scale set instance ids.
    */
   instanceIds: string[];
+}
+
+/**
+ * Describes a Virtual Machine Scale Set Extension.
+ */
+model VirtualMachineScaleSetExtensionUpdate extends SubResourceReadOnly {
+  /**
+   * The name of the extension.
+   */
+  @visibility("read")
+  name?: string;
+
+  /**
+   * Resource type
+   */
+  @visibility("read")
+  type?: string;
+
+  /**
+   * Describes the properties of a Virtual Machine Scale Set Extension.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: VirtualMachineScaleSetExtensionProperties;
+}
+
+/**
+ * Response after calling a manual recovery walk
+ */
+model RecoveryWalkResponse {
+  /**
+   * Whether the recovery walk was performed
+   */
+  @visibility("read")
+  walkPerformed?: boolean;
+
+  /**
+   * The next update domain that needs to be walked. Null means walk spanning all update domains has been completed
+   */
+  @visibility("read")
+  nextPlatformUpdateDomain?: int32;
 }
 
 /**
@@ -3686,87 +3731,6 @@ model OrchestrationServiceSummary {
    */
   @visibility("read")
   serviceState?: OrchestrationServiceState;
-}
-
-/**
- * Describes a Virtual Machine Scale Set Extension.
- */
-model VirtualMachineScaleSetExtensionUpdate extends SubResourceReadOnly {
-  /**
-   * The name of the extension.
-   */
-  @visibility("read")
-  name?: string;
-
-  /**
-   * Resource type
-   */
-  @visibility("read")
-  type?: string;
-
-  /**
-   * Describes the properties of a Virtual Machine Scale Set Extension.
-   */
-  @extension("x-ms-client-flatten", true)
-  properties?: VirtualMachineScaleSetExtensionProperties;
-}
-
-/**
- * The Virtual Machine Scale Set List Skus operation response.
- */
-model VirtualMachineScaleSetListSkusResult
-  is Azure.Core.Page<VirtualMachineScaleSetSku>;
-
-/**
- * Describes an available virtual machine scale set sku.
- */
-model VirtualMachineScaleSetSku {
-  /**
-   * The type of resource the sku applies to.
-   */
-  @visibility("read")
-  resourceType?: string;
-
-  /**
-   * The Sku.
-   */
-  @visibility("read")
-  sku?: Sku;
-
-  /**
-   * Specifies the number of virtual machines in the scale set.
-   */
-  @visibility("read")
-  capacity?: VirtualMachineScaleSetSkuCapacity;
-}
-
-/**
- * Describes scaling information of a sku.
- */
-model VirtualMachineScaleSetSkuCapacity {
-  /**
-   * The minimum capacity.
-   */
-  @visibility("read")
-  minimum?: int64;
-
-  /**
-   * The maximum capacity that can be set.
-   */
-  @visibility("read")
-  maximum?: int64;
-
-  /**
-   * The default capacity.
-   */
-  @visibility("read")
-  defaultCapacity?: int64;
-
-  /**
-   * The scale type applicable to the sku.
-   */
-  @visibility("read")
-  scaleType?: VirtualMachineScaleSetSkuScaleType;
 }
 
 /**
@@ -4032,30 +3996,6 @@ model RollingUpgradeRunningStatus {
 }
 
 /**
- * Response after calling a manual recovery walk
- */
-model RecoveryWalkResponse {
-  /**
-   * Whether the recovery walk was performed
-   */
-  @visibility("read")
-  walkPerformed?: boolean;
-
-  /**
-   * The next update domain that needs to be walked. Null means walk spanning all update domains has been completed
-   */
-  @visibility("read")
-  nextPlatformUpdateDomain?: int32;
-}
-
-model VMScaleSetConvertToSinglePlacementGroupInput {
-  /**
-   * Id of the placement group in which you want future virtual machine instances to be placed. To query placement group Id, please use Virtual Machine Scale Set VMs - Get API. If not provided, the platform will choose one with maximum number of virtual machine instances.
-   */
-  activePlacementGroupId?: string;
-}
-
-/**
  * The input for OrchestrationServiceState
  */
 model OrchestrationServiceStateInput {
@@ -4071,184 +4011,61 @@ model OrchestrationServiceStateInput {
 }
 
 /**
- * Describes the properties of a Virtual Machine Extension.
+ * The Virtual Machine Scale Set List Skus operation response.
  */
-model VirtualMachineExtensionProperties {
-  /**
-   * How the extension handler should be forced to update even if the extension configuration has not changed.
-   */
-  forceUpdateTag?: string;
+model VirtualMachineScaleSetListSkusResult
+  is Azure.Core.Page<VirtualMachineScaleSetSku>;
 
+/**
+ * Describes an available virtual machine scale set sku.
+ */
+model VirtualMachineScaleSetSku {
   /**
-   * The name of the extension handler publisher.
-   */
-  publisher?: string;
-
-  /**
-   * Specifies the type of the extension; an example is "CustomScriptExtension".
-   */
-  type?: string;
-
-  /**
-   * Specifies the version of the script handler.
-   */
-  typeHandlerVersion?: string;
-
-  /**
-   * Indicates whether the extension should use a newer minor version if one is available at deployment time. Once deployed, however, the extension will not upgrade minor versions unless redeployed, even with this property set to true.
-   */
-  autoUpgradeMinorVersion?: boolean;
-
-  /**
-   * Indicates whether the extension should be automatically upgraded by the platform if there is a newer version of the extension available.
-   */
-  enableAutomaticUpgrade?: boolean;
-
-  /**
-   * Json formatted public settings for the extension.
-   */
-  settings?: Record<unknown>;
-
-  /**
-   * The extension can contain either protectedSettings or protectedSettingsFromKeyVault or no protected settings at all.
-   */
-  protectedSettings?: Record<unknown>;
-
-  /**
-   * The provisioning state, which only appears in the response.
+   * The type of resource the sku applies to.
    */
   @visibility("read")
-  provisioningState?: string;
+  resourceType?: string;
 
   /**
-   * The virtual machine extension instance view.
+   * The Sku.
    */
-  instanceView?: VirtualMachineExtensionInstanceView;
+  @visibility("read")
+  sku?: Sku;
 
   /**
-   * Indicates whether failures stemming from the extension will be suppressed (Operational failures such as not connecting to the VM will not be suppressed regardless of this value). The default is false.
+   * Specifies the number of virtual machines in the scale set.
    */
-  suppressFailures?: boolean;
-
-  /**
-   * The extensions protected settings that are passed by reference, and consumed from key vault
-   */
-  protectedSettingsFromKeyVault?: KeyVaultSecretReference;
-
-  /**
-   * Collection of extension names after which this extension needs to be provisioned.
-   */
-  provisionAfterExtensions?: string[];
+  @visibility("read")
+  capacity?: VirtualMachineScaleSetSkuCapacity;
 }
 
 /**
- * The instance view of a virtual machine extension.
+ * Describes scaling information of a sku.
  */
-model VirtualMachineExtensionInstanceView {
+model VirtualMachineScaleSetSkuCapacity {
   /**
-   * The virtual machine extension name.
-   */
-  name?: string;
-
-  /**
-   * Specifies the type of the extension; an example is "CustomScriptExtension".
-   */
-  type?: string;
-
-  /**
-   * Specifies the version of the script handler.
-   */
-  typeHandlerVersion?: string;
-
-  /**
-   * The resource status information.
-   */
-  @OpenAPI.extension("x-ms-identifiers", [])
-  substatuses?: InstanceViewStatus[];
-
-  /**
-   * The resource status information.
-   */
-  @OpenAPI.extension("x-ms-identifiers", [])
-  statuses?: InstanceViewStatus[];
-}
-
-/**
- * Describes a VMSS VM Extension.
- */
-model VirtualMachineScaleSetVMExtensionUpdate extends SubResourceReadOnly {
-  /**
-   * The name of the extension.
+   * The minimum capacity.
    */
   @visibility("read")
-  name?: string;
+  minimum?: int64;
 
   /**
-   * Resource type
+   * The maximum capacity that can be set.
    */
   @visibility("read")
-  type?: string;
+  maximum?: int64;
 
   /**
-   * Describes the properties of a Virtual Machine Extension.
+   * The default capacity.
    */
-  @extension("x-ms-client-flatten", true)
-  properties?: VirtualMachineExtensionUpdateProperties;
-}
-
-/**
- * Describes the properties of a Virtual Machine Extension.
- */
-model VirtualMachineExtensionUpdateProperties {
-  /**
-   * How the extension handler should be forced to update even if the extension configuration has not changed.
-   */
-  forceUpdateTag?: string;
+  @visibility("read")
+  defaultCapacity?: int64;
 
   /**
-   * The name of the extension handler publisher.
+   * The scale type applicable to the sku.
    */
-  publisher?: string;
-
-  /**
-   * Specifies the type of the extension; an example is "CustomScriptExtension".
-   */
-  type?: string;
-
-  /**
-   * Specifies the version of the script handler.
-   */
-  typeHandlerVersion?: string;
-
-  /**
-   * Indicates whether the extension should use a newer minor version if one is available at deployment time. Once deployed, however, the extension will not upgrade minor versions unless redeployed, even with this property set to true.
-   */
-  autoUpgradeMinorVersion?: boolean;
-
-  /**
-   * Indicates whether the extension should be automatically upgraded by the platform if there is a newer version of the extension available.
-   */
-  enableAutomaticUpgrade?: boolean;
-
-  /**
-   * Json formatted public settings for the extension.
-   */
-  settings?: Record<unknown>;
-
-  /**
-   * The extension can contain either protectedSettings or protectedSettingsFromKeyVault or no protected settings at all.
-   */
-  protectedSettings?: Record<unknown>;
-
-  /**
-   * Indicates whether failures stemming from the extension will be suppressed (Operational failures such as not connecting to the VM will not be suppressed regardless of this value). The default is false.
-   */
-  suppressFailures?: boolean;
-
-  /**
-   * The extensions protected settings that are passed by reference, and consumed from key vault
-   */
-  protectedSettingsFromKeyVault?: KeyVaultSecretReference;
+  @visibility("read")
+  scaleType?: VirtualMachineScaleSetSkuScaleType;
 }
 
 /**
@@ -4584,6 +4401,38 @@ model KeyVaultKeyReference {
    * The relative URL of the Key Vault containing the key.
    */
   sourceVault: SubResource;
+}
+
+/**
+ * The instance view of a virtual machine extension.
+ */
+model VirtualMachineExtensionInstanceView {
+  /**
+   * The virtual machine extension name.
+   */
+  name?: string;
+
+  /**
+   * Specifies the type of the extension; an example is "CustomScriptExtension".
+   */
+  type?: string;
+
+  /**
+   * Specifies the version of the script handler.
+   */
+  typeHandlerVersion?: string;
+
+  /**
+   * The resource status information.
+   */
+  @OpenAPI.extension("x-ms-identifiers", [])
+  substatuses?: InstanceViewStatus[];
+
+  /**
+   * The resource status information.
+   */
+  @OpenAPI.extension("x-ms-identifiers", [])
+  statuses?: InstanceViewStatus[];
 }
 
 /**
@@ -5189,6 +5038,77 @@ model VirtualMachineScaleSetVMProtectionPolicy {
 }
 
 /**
+ * Describes the properties of a Virtual Machine Extension.
+ */
+model VirtualMachineExtensionProperties {
+  /**
+   * How the extension handler should be forced to update even if the extension configuration has not changed.
+   */
+  forceUpdateTag?: string;
+
+  /**
+   * The name of the extension handler publisher.
+   */
+  publisher?: string;
+
+  /**
+   * Specifies the type of the extension; an example is "CustomScriptExtension".
+   */
+  type?: string;
+
+  /**
+   * Specifies the version of the script handler.
+   */
+  typeHandlerVersion?: string;
+
+  /**
+   * Indicates whether the extension should use a newer minor version if one is available at deployment time. Once deployed, however, the extension will not upgrade minor versions unless redeployed, even with this property set to true.
+   */
+  autoUpgradeMinorVersion?: boolean;
+
+  /**
+   * Indicates whether the extension should be automatically upgraded by the platform if there is a newer version of the extension available.
+   */
+  enableAutomaticUpgrade?: boolean;
+
+  /**
+   * Json formatted public settings for the extension.
+   */
+  settings?: Record<unknown>;
+
+  /**
+   * The extension can contain either protectedSettings or protectedSettingsFromKeyVault or no protected settings at all.
+   */
+  protectedSettings?: Record<unknown>;
+
+  /**
+   * The provisioning state, which only appears in the response.
+   */
+  @visibility("read")
+  provisioningState?: string;
+
+  /**
+   * The virtual machine extension instance view.
+   */
+  instanceView?: VirtualMachineExtensionInstanceView;
+
+  /**
+   * Indicates whether failures stemming from the extension will be suppressed (Operational failures such as not connecting to the VM will not be suppressed regardless of this value). The default is false.
+   */
+  suppressFailures?: boolean;
+
+  /**
+   * The extensions protected settings that are passed by reference, and consumed from key vault
+   */
+  protectedSettingsFromKeyVault?: KeyVaultSecretReference;
+
+  /**
+   * Collection of extension names after which this extension needs to be provisioned.
+   */
+  provisionAfterExtensions?: string[];
+}
+
+/**
  * The Resource model definition with location property as optional.
  */
 model ResourceWithOptionalLocation {
@@ -5251,26 +5171,81 @@ model VirtualMachineIdentity {
 }
 
 /**
- * The List Virtual Machine Scale Set VMs operation response.
+ * Describes a VMSS VM Extension.
  */
-model VirtualMachineScaleSetVMListResult
-  is Azure.Core.Page<VirtualMachineScaleSetVM>;
+model VirtualMachineScaleSetVMExtensionUpdate extends SubResourceReadOnly {
+  /**
+   * The name of the extension.
+   */
+  @visibility("read")
+  name?: string;
+
+  /**
+   * Resource type
+   */
+  @visibility("read")
+  type?: string;
+
+  /**
+   * Describes the properties of a Virtual Machine Extension.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: VirtualMachineExtensionUpdateProperties;
+}
 
 /**
- * The SAS URIs of the console screenshot and serial log blobs.
+ * Describes the properties of a Virtual Machine Extension.
  */
-model RetrieveBootDiagnosticsDataResult {
+model VirtualMachineExtensionUpdateProperties {
   /**
-   * The console screenshot blob URI
+   * How the extension handler should be forced to update even if the extension configuration has not changed.
    */
-  @visibility("read")
-  consoleScreenshotBlobUri?: string;
+  forceUpdateTag?: string;
 
   /**
-   * The serial console log blob URI.
+   * The name of the extension handler publisher.
    */
-  @visibility("read")
-  serialConsoleLogBlobUri?: string;
+  publisher?: string;
+
+  /**
+   * Specifies the type of the extension; an example is "CustomScriptExtension".
+   */
+  type?: string;
+
+  /**
+   * Specifies the version of the script handler.
+   */
+  typeHandlerVersion?: string;
+
+  /**
+   * Indicates whether the extension should use a newer minor version if one is available at deployment time. Once deployed, however, the extension will not upgrade minor versions unless redeployed, even with this property set to true.
+   */
+  autoUpgradeMinorVersion?: boolean;
+
+  /**
+   * Indicates whether the extension should be automatically upgraded by the platform if there is a newer version of the extension available.
+   */
+  enableAutomaticUpgrade?: boolean;
+
+  /**
+   * Json formatted public settings for the extension.
+   */
+  settings?: Record<unknown>;
+
+  /**
+   * The extension can contain either protectedSettings or protectedSettingsFromKeyVault or no protected settings at all.
+   */
+  protectedSettings?: Record<unknown>;
+
+  /**
+   * Indicates whether failures stemming from the extension will be suppressed (Operational failures such as not connecting to the VM will not be suppressed regardless of this value). The default is false.
+   */
+  suppressFailures?: boolean;
+
+  /**
+   * The extensions protected settings that are passed by reference, and consumed from key vault
+   */
+  protectedSettingsFromKeyVault?: KeyVaultSecretReference;
 }
 
 /**
@@ -5341,14 +5316,20 @@ model DataDisksToDetach {
 }
 
 /**
- * Describes a Virtual Machine Extension.
+ * The SAS URIs of the console screenshot and serial log blobs.
  */
-model VirtualMachineExtensionUpdate extends UpdateResource {
+model RetrieveBootDiagnosticsDataResult {
   /**
-   * Describes the properties of a Virtual Machine Extension.
+   * The console screenshot blob URI
    */
-  @extension("x-ms-client-flatten", true)
-  properties?: VirtualMachineExtensionUpdateProperties;
+  @visibility("read")
+  consoleScreenshotBlobUri?: string;
+
+  /**
+   * The serial console log blob URI.
+   */
+  @visibility("read")
+  serialConsoleLogBlobUri?: string;
 }
 
 /**
@@ -5743,57 +5724,6 @@ model LastPatchInstallationSummary {
 }
 
 /**
- * Capture Virtual Machine parameters.
- */
-model VirtualMachineCaptureParameters {
-  /**
-   * The captured virtual hard disk's name prefix.
-   */
-  vhdPrefix: string;
-
-  /**
-   * The destination container name.
-   */
-  destinationContainerName: string;
-
-  /**
-   * Specifies whether to overwrite the destination virtual hard disk, in case of conflict.
-   */
-  overwriteVhds: boolean;
-}
-
-/**
- * Output of virtual machine capture operation.
- */
-model VirtualMachineCaptureResult extends SubResource {
-  /**
-   * the schema of the captured virtual machine
-   */
-  @visibility("read")
-  @encodedName("application/json", "$schema")
-  schema?: string;
-
-  /**
-   * the version of the content
-   */
-  @visibility("read")
-  contentVersion?: string;
-
-  /**
-   * parameters of the captured virtual machine
-   */
-  @visibility("read")
-  parameters?: Record<unknown>;
-
-  /**
-   * a list of resource items of the captured virtual machine
-   */
-  @visibility("read")
-  @OpenAPI.extension("x-ms-identifiers", [])
-  resources?: Record<unknown>[];
-}
-
-/**
  * Describes a Virtual Machine Update.
  */
 model VirtualMachineUpdate extends UpdateResource {
@@ -5939,6 +5869,68 @@ model VirtualMachineSoftwarePatchProperties {
    */
   @visibility("read")
   assessmentState?: PatchAssessmentState;
+}
+
+/**
+ * Capture Virtual Machine parameters.
+ */
+model VirtualMachineCaptureParameters {
+  /**
+   * The captured virtual hard disk's name prefix.
+   */
+  vhdPrefix: string;
+
+  /**
+   * The destination container name.
+   */
+  destinationContainerName: string;
+
+  /**
+   * Specifies whether to overwrite the destination virtual hard disk, in case of conflict.
+   */
+  overwriteVhds: boolean;
+}
+
+/**
+ * Output of virtual machine capture operation.
+ */
+model VirtualMachineCaptureResult extends SubResource {
+  /**
+   * the schema of the captured virtual machine
+   */
+  @visibility("read")
+  @encodedName("application/json", "$schema")
+  schema?: string;
+
+  /**
+   * the version of the content
+   */
+  @visibility("read")
+  contentVersion?: string;
+
+  /**
+   * parameters of the captured virtual machine
+   */
+  @visibility("read")
+  parameters?: Record<unknown>;
+
+  /**
+   * a list of resource items of the captured virtual machine
+   */
+  @visibility("read")
+  @OpenAPI.extension("x-ms-identifiers", [])
+  resources?: Record<unknown>[];
+}
+
+/**
+ * Describes a Virtual Machine Extension.
+ */
+model VirtualMachineExtensionUpdate extends UpdateResource {
+  /**
+   * Describes the properties of a Virtual Machine Extension.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: VirtualMachineExtensionUpdateProperties;
 }
 
 /**
@@ -6143,6 +6135,32 @@ model PatchInstallationDetail {
 }
 
 /**
+ * Virtual machine image resource information.
+ */
+model VirtualMachineImageResource extends SubResource {
+  /**
+   * The name of the resource.
+   */
+  name: string;
+
+  /**
+   * The supported Azure location of the resource.
+   */
+  location: string;
+
+  /**
+   * Specifies the tags that are assigned to the virtual machine. For more information about using tags, see [Using tags to organize your Azure resources](https://docs.microsoft.com/azure/azure-resource-manager/resource-group-using-tags.md).
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  tags?: Record<string>;
+
+  /**
+   * The extended location of the Virtual Machine.
+   */
+  extendedLocation?: ExtendedLocation;
+}
+
+/**
  * Describes a Virtual Machine Image.
  */
 model VirtualMachineImage extends VirtualMachineImageResource {
@@ -6309,32 +6327,6 @@ model AlternativeOption {
    * Indicates the alternative option value specified by the Publisher. This is the Offer name when the type is Offer or the Plan name when the type is Plan.
    */
   value?: string;
-}
-
-/**
- * Virtual machine image resource information.
- */
-model VirtualMachineImageResource extends SubResource {
-  /**
-   * The name of the resource.
-   */
-  name: string;
-
-  /**
-   * The supported Azure location of the resource.
-   */
-  location: string;
-
-  /**
-   * Specifies the tags that are assigned to the virtual machine. For more information about using tags, see [Using tags to organize your Azure resources](https://docs.microsoft.com/azure/azure-resource-manager/resource-group-using-tags.md).
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
-  tags?: Record<string>;
-
-  /**
-   * The extended location of the Virtual Machine.
-   */
-  extendedLocation?: ExtendedLocation;
 }
 
 /**
@@ -7595,50 +7587,6 @@ model RunCommandParameterDefinition {
 }
 
 /**
- * Capture Virtual Machine parameters.
- */
-model RunCommandInput {
-  /**
-   * The run command id.
-   */
-  commandId: string;
-
-  /**
-   * Optional. The script to be executed.  When this value is given, the given script will override the default script of the command.
-   */
-  script?: string[];
-
-  /**
-   * The run command parameters.
-   */
-  @OpenAPI.extension("x-ms-identifiers", ["name"])
-  parameters?: RunCommandInputParameter[];
-}
-
-/**
- * Describes the properties of a run command parameter.
- */
-model RunCommandInputParameter {
-  /**
-   * The run command parameter name.
-   */
-  name: string;
-
-  /**
-   * The run command parameter value.
-   */
-  value: string;
-}
-
-model RunCommandResult {
-  /**
-   * Run command operation response.
-   */
-  @OpenAPI.extension("x-ms-identifiers", [])
-  value?: InstanceViewStatus[];
-}
-
-/**
  * Describes the properties of a Virtual Machine run command.
  */
 model VirtualMachineRunCommandProperties {
@@ -7758,6 +7706,21 @@ model RunCommandManagedIdentity {
 }
 
 /**
+ * Describes the properties of a run command parameter.
+ */
+model RunCommandInputParameter {
+  /**
+   * The run command parameter name.
+   */
+  name: string;
+
+  /**
+   * The run command parameter value.
+   */
+  value: string;
+}
+
+/**
  * The instance view of a virtual machine run command.
  */
 model VirtualMachineRunCommandInstanceView {
@@ -7814,4 +7777,33 @@ model VirtualMachineRunCommandUpdate extends UpdateResource {
    */
   @extension("x-ms-client-flatten", true)
   properties?: VirtualMachineRunCommandProperties;
+}
+
+/**
+ * Capture Virtual Machine parameters.
+ */
+model RunCommandInput {
+  /**
+   * The run command id.
+   */
+  commandId: string;
+
+  /**
+   * Optional. The script to be executed.  When this value is given, the given script will override the default script of the command.
+   */
+  script?: string[];
+
+  /**
+   * The run command parameters.
+   */
+  @OpenAPI.extension("x-ms-identifiers", ["name"])
+  parameters?: RunCommandInputParameter[];
+}
+
+model RunCommandResult {
+  /**
+   * Run command operation response.
+   */
+  @OpenAPI.extension("x-ms-identifiers", [])
+  value?: InstanceViewStatus[];
 }

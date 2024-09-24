@@ -176,6 +176,23 @@ interface CommunityGalleriesOperations {
 
 interface CommunityGalleryImagesOperations {
   /**
+   * List community gallery images inside a gallery.
+   */
+  @route("/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/communityGalleries/{publicGalleryName}/images")
+  @get
+  list(
+    ...ApiVersionParameter,
+    ...SubscriptionIdParameter,
+    ...LocationResourceParameter,
+
+    /**
+     * The public name of the community gallery.
+     */
+    @path
+    publicGalleryName: string,
+  ): ArmResponse<CommunityGalleryImageList> | ErrorResponse;
+
+  /**
    * Get a community gallery image.
    */
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/communityGalleries/{publicGalleryName}/images/{galleryImageName}")
@@ -197,11 +214,13 @@ interface CommunityGalleryImagesOperations {
     @path
     galleryImageName: string,
   ): ArmResponse<CommunityGalleryImage> | ErrorResponse;
+}
 
+interface CommunityGalleryImageVersionsOperations {
   /**
-   * List community gallery images inside a gallery.
+   * List community gallery image versions inside an image.
    */
-  @route("/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/communityGalleries/{publicGalleryName}/images")
+  @route("/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/communityGalleries/{publicGalleryName}/images/{galleryImageName}/versions")
   @get
   list(
     ...ApiVersionParameter,
@@ -213,10 +232,14 @@ interface CommunityGalleryImagesOperations {
      */
     @path
     publicGalleryName: string,
-  ): ArmResponse<CommunityGalleryImageList> | ErrorResponse;
-}
 
-interface CommunityGalleryImageVersionsOperations {
+    /**
+     * The name of the community gallery image definition.
+     */
+    @path
+    galleryImageName: string,
+  ): ArmResponse<CommunityGalleryImageVersionList> | ErrorResponse;
+
   /**
    * Get a community gallery image version.
    */
@@ -245,27 +268,4 @@ interface CommunityGalleryImageVersionsOperations {
     @path
     galleryImageVersionName: string,
   ): ArmResponse<CommunityGalleryImageVersion> | ErrorResponse;
-
-  /**
-   * List community gallery image versions inside an image.
-   */
-  @route("/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/communityGalleries/{publicGalleryName}/images/{galleryImageName}/versions")
-  @get
-  list(
-    ...ApiVersionParameter,
-    ...SubscriptionIdParameter,
-    ...LocationResourceParameter,
-
-    /**
-     * The public name of the community gallery.
-     */
-    @path
-    publicGalleryName: string,
-
-    /**
-     * The name of the community gallery image definition.
-     */
-    @path
-    galleryImageName: string,
-  ): ArmResponse<CommunityGalleryImageVersionList> | ErrorResponse;
 }

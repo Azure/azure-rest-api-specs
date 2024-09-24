@@ -284,20 +284,27 @@ list-exception:
 These settings apply only when `--tag=package-2024-07-01` is specified on the command line.
 
 ``` yaml $(tag) == 'package-2024-07-01'
+isFullCompatible: true
+title: "Azure Compute resource management API."
+clear-output-folder: false
+guessResourceKey: false
+isAzureSpec: true
+namespace: "Microsoft.Compute"
+
 input-file:
-  - Microsoft.Compute/common-types/v1/common.json
-  - Microsoft.Compute/ComputeRP/stable/2024-07-01/computeRPCommon.json
-  - Microsoft.Compute/ComputeRP/stable/2024-07-01/virtualMachineScaleSet.json
-  - Microsoft.Compute/ComputeRP/stable/2024-07-01/virtualMachine.json
-  - Microsoft.Compute/ComputeRP/stable/2024-07-01/virtualMachineImage.json
-  - Microsoft.Compute/ComputeRP/stable/2024-07-01/virtualMachineExtensionImage.json
-  - Microsoft.Compute/ComputeRP/stable/2024-07-01/availabilitySet.json
-  - Microsoft.Compute/ComputeRP/stable/2024-07-01/proximityPlacementGroup.json
-  - Microsoft.Compute/ComputeRP/stable/2024-07-01/dedicatedHost.json
-  - Microsoft.Compute/ComputeRP/stable/2024-07-01/sshPublicKey.json
-  - Microsoft.Compute/ComputeRP/stable/2024-07-01/image.json
-  - Microsoft.Compute/ComputeRP/stable/2024-07-01/restorePoint.json
-  - Microsoft.Compute/ComputeRP/stable/2024-07-01/capacityReservation.json
-  - Microsoft.Compute/ComputeRP/stable/2024-07-01/logAnalytic.json
-  - Microsoft.Compute/ComputeRP/stable/2024-07-01/runCommand.json 
+  - ../resource-manager/Microsoft.Compute/common-types/v1/common.json
+  - ../resource-manager/Microsoft.Compute/ComputeRP/stable/2024-07-01/computeRPCommon.json
+  - ../resource-manager/Microsoft.Compute/ComputeRP/stable/2024-07-01/virtualMachineScaleSet.json
+  - ../resource-manager/Microsoft.Compute/ComputeRP/stable/2024-07-01/virtualMachine.json
+  - ../resource-manager/Microsoft.Compute/ComputeRP/stable/2024-07-01/virtualMachineImage.json
+  - ../resource-manager/Microsoft.Compute/ComputeRP/stable/2024-07-01/virtualMachineExtensionImage.json
+  - ../resource-manager/Microsoft.Compute/ComputeRP/stable/2024-07-01/availabilitySet.json
+  - ../resource-manager/Microsoft.Compute/ComputeRP/stable/2024-07-01/proximityPlacementGroup.json
+  - ../resource-manager/Microsoft.Compute/ComputeRP/stable/2024-07-01/dedicatedHost.json
+  - ../resource-manager/Microsoft.Compute/ComputeRP/stable/2024-07-01/sshPublicKey.json
+  - ../resource-manager/Microsoft.Compute/ComputeRP/stable/2024-07-01/image.json
+  - ../resource-manager/Microsoft.Compute/ComputeRP/stable/2024-07-01/restorePoint.json
+  - ../resource-manager/Microsoft.Compute/ComputeRP/stable/2024-07-01/capacityReservation.json
+  - ../resource-manager/Microsoft.Compute/ComputeRP/stable/2024-07-01/logAnalytic.json
+  - ../resource-manager/Microsoft.Compute/ComputeRP/stable/2024-07-01/runCommand.json 
 ```

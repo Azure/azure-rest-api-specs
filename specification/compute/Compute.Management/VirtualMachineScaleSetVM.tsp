@@ -131,6 +131,59 @@ interface VirtualMachineScaleSetVMS {
   >;
 
   /**
+   * Gets a list of all virtual machines in a VM scale sets.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("VirtualMachineScaleSetVMs_List")
+  list is ArmResourceListByParent<
+    VirtualMachineScaleSetVM,
+    {
+      ...Azure.ResourceManager.Foundations.BaseParameters<VirtualMachineScaleSetVM>;
+
+      /**
+       * The name of the VM scale set.
+       */
+      @path
+      virtualMachineScaleSetName: string;
+
+      /**
+       * The filter to apply to the operation. Allowed values are 'startswith(instanceView/statuses/code, 'PowerState') eq true', 'properties/latestModelApplied eq true', 'properties/latestModelApplied eq false'.
+       */
+      @query("$filter")
+      $filter?: string;
+
+      /**
+       * The list parameters. Allowed values are 'instanceView', 'instanceView/statuses'.
+       */
+      @query("$select")
+      $select?: string;
+
+      /**
+       * The expand expression to apply to the operation. Allowed values are 'instanceView'.
+       */
+      @query("$expand")
+      $expand?: string;
+    }
+  >;
+
+  /**
+   * Approve upgrade on deferred rolling upgrade for OS disk on a VM scale set instance.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("VirtualMachineScaleSetVMs_ApproveRollingUpgrade")
+  approveRollingUpgrade is ArmResourceActionNoResponseContentAsync<
+    VirtualMachineScaleSetVM,
+    void
+  >;
+
+  /**
+   * Deallocates a specific virtual machine in a VM scale set. Shuts down the virtual machine and releases the compute resources it uses. You are not billed for the compute resources of this virtual machine once it is deallocated.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("VirtualMachineScaleSetVMs_Deallocate")
+  deallocate is ArmResourceActionAsync<VirtualMachineScaleSetVM, void, void>;
+
+  /**
    * Reimages (upgrade the operating system) a specific virtual machine in a VM scale set.
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
@@ -149,21 +202,36 @@ interface VirtualMachineScaleSetVMS {
   reimageAll is ArmResourceActionAsync<VirtualMachineScaleSetVM, void, void>;
 
   /**
-   * Approve upgrade on deferred rolling upgrade for OS disk on a VM scale set instance.
+   * The operation to simulate the eviction of spot virtual machine in a VM scale set.
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("VirtualMachineScaleSetVMs_ApproveRollingUpgrade")
-  approveRollingUpgrade is ArmResourceActionNoResponseContentAsync<
+  @operationId("VirtualMachineScaleSetVMs_SimulateEviction")
+  simulateEviction is ArmResourceActionNoContentSync<
     VirtualMachineScaleSetVM,
     void
   >;
 
   /**
-   * Deallocates a specific virtual machine in a VM scale set. Shuts down the virtual machine and releases the compute resources it uses. You are not billed for the compute resources of this virtual machine once it is deallocated.
+   * Attach and detach data disks to/from a virtual machine in a VM scale set.
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("VirtualMachineScaleSetVMs_Deallocate")
-  deallocate is ArmResourceActionAsync<VirtualMachineScaleSetVM, void, void>;
+  @operationId("VirtualMachineScaleSetVMs_AttachDetachDataDisks")
+  attachDetachDataDisks is ArmResourceActionAsync<
+    VirtualMachineScaleSetVM,
+    AttachDetachDataDisksRequest,
+    StorageProfile
+  >;
+
+  /**
+   * Performs maintenance on a virtual machine in a VM scale set.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("VirtualMachineScaleSetVMs_PerformMaintenance")
+  performMaintenance is ArmResourceActionAsync<
+    VirtualMachineScaleSetVM,
+    void,
+    void
+  >;
 
   /**
    * Power off (stop) a virtual machine in a VM scale set. Note that resources are still attached and you are getting charged for the resources. Instead, use deallocate to release resources and avoid charges.
@@ -186,25 +254,18 @@ interface VirtualMachineScaleSetVMS {
   >;
 
   /**
-   * Restarts a virtual machine in a VM scale set.
-   */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("VirtualMachineScaleSetVMs_Restart")
-  restart is ArmResourceActionAsync<VirtualMachineScaleSetVM, void, void>;
-
-  /**
-   * Starts a virtual machine in a VM scale set.
-   */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("VirtualMachineScaleSetVMs_Start")
-  start is ArmResourceActionAsync<VirtualMachineScaleSetVM, void, void>;
-
-  /**
    * Shuts down the virtual machine in the virtual machine scale set, moves it to a new node, and powers it back on.
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @operationId("VirtualMachineScaleSetVMs_Redeploy")
   redeploy is ArmResourceActionAsync<VirtualMachineScaleSetVM, void, void>;
+
+  /**
+   * Restarts a virtual machine in a VM scale set.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("VirtualMachineScaleSetVMs_Restart")
+  restart is ArmResourceActionAsync<VirtualMachineScaleSetVM, void, void>;
 
   /**
    * The operation to retrieve SAS URIs of boot diagnostic logs for a virtual machine in a VM scale set.
@@ -227,36 +288,11 @@ interface VirtualMachineScaleSetVMS {
   >;
 
   /**
-   * Performs maintenance on a virtual machine in a VM scale set.
+   * Starts a virtual machine in a VM scale set.
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("VirtualMachineScaleSetVMs_PerformMaintenance")
-  performMaintenance is ArmResourceActionAsync<
-    VirtualMachineScaleSetVM,
-    void,
-    void
-  >;
-
-  /**
-   * The operation to simulate the eviction of spot virtual machine in a VM scale set.
-   */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("VirtualMachineScaleSetVMs_SimulateEviction")
-  simulateEviction is ArmResourceActionNoContentSync<
-    VirtualMachineScaleSetVM,
-    void
-  >;
-
-  /**
-   * Attach and detach data disks to/from a virtual machine in a VM scale set.
-   */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("VirtualMachineScaleSetVMs_AttachDetachDataDisks")
-  attachDetachDataDisks is ArmResourceActionAsync<
-    VirtualMachineScaleSetVM,
-    AttachDetachDataDisksRequest,
-    StorageProfile
-  >;
+  @operationId("VirtualMachineScaleSetVMs_Start")
+  start is ArmResourceActionAsync<VirtualMachineScaleSetVM, void, void>;
 
   /**
    * Run command on a virtual machine in a VM scale set.

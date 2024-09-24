@@ -150,6 +150,23 @@ interface VirtualMachineScaleSets {
   listAll is ArmListBySubscription<VirtualMachineScaleSet>;
 
   /**
+   * Approve upgrade on deferred rolling upgrades for OS disks in the virtual machines in a VM scale set.
+   */
+  approveRollingUpgrade is ArmResourceActionNoResponseContentAsync<
+    VirtualMachineScaleSet,
+    VirtualMachineScaleSetVMInstanceIDs
+  >;
+
+  /**
+   * Converts SinglePlacementGroup property to false for a existing virtual machine scale set.
+   */
+  convertToSinglePlacementGroup is ArmResourceActionSync<
+    VirtualMachineScaleSet,
+    VMScaleSetConvertToSinglePlacementGroupInput,
+    void
+  >;
+
+  /**
    * Deallocates specific virtual machines in a VM scale set. Shuts down the virtual machines and releases the compute resources. You are not billed for the compute resources that this virtual machine scale set deallocates.
    */
   deallocate is ArmResourceActionAsync<
@@ -186,100 +203,6 @@ interface VirtualMachineScaleSets {
   >;
 
   /**
-   * Power off (stop) one or more virtual machines in a VM scale set. Note that resources are still attached and you are getting charged for the resources. Instead, use deallocate to release resources and avoid charges.
-   */
-  powerOff is ArmResourceActionAsync<
-    VirtualMachineScaleSet,
-    VirtualMachineScaleSetVMInstanceIDs,
-    void,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<VirtualMachineScaleSet>;
-
-      /**
-       * The parameter to request non-graceful VM shutdown. True value for this flag indicates non-graceful shutdown whereas false indicates otherwise. Default value for this flag is false if not specified
-       */
-      @query("skipShutdown")
-      skipShutdown?: boolean;
-    }
-  >;
-
-  /**
-   * Restarts one or more virtual machines in a VM scale set.
-   */
-  restart is ArmResourceActionAsync<
-    VirtualMachineScaleSet,
-    VirtualMachineScaleSetVMInstanceIDs,
-    void
-  >;
-
-  /**
-   * Starts one or more virtual machines in a VM scale set.
-   */
-  start is ArmResourceActionAsync<
-    VirtualMachineScaleSet,
-    VirtualMachineScaleSetVMInstanceIDs,
-    void
-  >;
-
-  /**
-   * Reapplies the Virtual Machine Scale Set Virtual Machine Profile to the Virtual Machine Instances
-   */
-  reapply is ArmResourceActionAsync<VirtualMachineScaleSet, void, void>;
-
-  /**
-   * Shuts down all the virtual machines in the virtual machine scale set, moves them to a new node, and powers them back on.
-   */
-  redeploy is ArmResourceActionAsync<
-    VirtualMachineScaleSet,
-    VirtualMachineScaleSetVMInstanceIDs,
-    void
-  >;
-
-  /**
-   * Perform maintenance on one or more virtual machines in a VM scale set. Operation on instances which are not eligible for perform maintenance will be failed. Please refer to best practices for more details: https://docs.microsoft.com/azure/virtual-machine-scale-sets/virtual-machine-scale-sets-maintenance-notifications
-   */
-  performMaintenance is ArmResourceActionAsync<
-    VirtualMachineScaleSet,
-    VirtualMachineScaleSetVMInstanceIDs,
-    void
-  >;
-
-  /**
-   * Upgrades one or more virtual machines to the latest SKU set in the VM scale set model.
-   */
-  updateInstances is ArmResourceActionAsync<
-    VirtualMachineScaleSet,
-    VirtualMachineScaleSetVMInstanceRequiredIDs,
-    void
-  >;
-
-  /**
-   * Reimages (upgrade the operating system) one or more virtual machines in a VM scale set which don't have a ephemeral OS disk, for virtual machines who have a ephemeral OS disk the virtual machine is reset to initial state.
-   */
-  reimage is ArmResourceActionAsync<
-    VirtualMachineScaleSet,
-    VirtualMachineScaleSetReimageParameters,
-    void
-  >;
-
-  /**
-   * Reimages all the disks ( including data disks ) in the virtual machines in a VM scale set. This operation is only supported for managed disks.
-   */
-  reimageAll is ArmResourceActionAsync<
-    VirtualMachineScaleSet,
-    VirtualMachineScaleSetVMInstanceIDs,
-    void
-  >;
-
-  /**
-   * Approve upgrade on deferred rolling upgrades for OS disks in the virtual machines in a VM scale set.
-   */
-  approveRollingUpgrade is ArmResourceActionNoResponseContentAsync<
-    VirtualMachineScaleSet,
-    VirtualMachineScaleSetVMInstanceIDs
-  >;
-
-  /**
    * Manual platform update domain walk to update virtual machines in a service fabric virtual machine scale set.
    */
   forceRecoveryServiceFabricPlatformUpdateDomainWalk is ArmResourceActionSync<
@@ -310,11 +233,79 @@ interface VirtualMachineScaleSets {
   >;
 
   /**
-   * Converts SinglePlacementGroup property to false for a existing virtual machine scale set.
+   * Upgrades one or more virtual machines to the latest SKU set in the VM scale set model.
    */
-  convertToSinglePlacementGroup is ArmResourceActionSync<
+  updateInstances is ArmResourceActionAsync<
     VirtualMachineScaleSet,
-    VMScaleSetConvertToSinglePlacementGroupInput,
+    VirtualMachineScaleSetVMInstanceRequiredIDs,
+    void
+  >;
+
+  /**
+   * Perform maintenance on one or more virtual machines in a VM scale set. Operation on instances which are not eligible for perform maintenance will be failed. Please refer to best practices for more details: https://docs.microsoft.com/azure/virtual-machine-scale-sets/virtual-machine-scale-sets-maintenance-notifications
+   */
+  performMaintenance is ArmResourceActionAsync<
+    VirtualMachineScaleSet,
+    VirtualMachineScaleSetVMInstanceIDs,
+    void
+  >;
+
+  /**
+   * Power off (stop) one or more virtual machines in a VM scale set. Note that resources are still attached and you are getting charged for the resources. Instead, use deallocate to release resources and avoid charges.
+   */
+  powerOff is ArmResourceActionAsync<
+    VirtualMachineScaleSet,
+    VirtualMachineScaleSetVMInstanceIDs,
+    void,
+    {
+      ...Azure.ResourceManager.Foundations.BaseParameters<VirtualMachineScaleSet>;
+
+      /**
+       * The parameter to request non-graceful VM shutdown. True value for this flag indicates non-graceful shutdown whereas false indicates otherwise. Default value for this flag is false if not specified
+       */
+      @query("skipShutdown")
+      skipShutdown?: boolean;
+    }
+  >;
+
+  /**
+   * Reapplies the Virtual Machine Scale Set Virtual Machine Profile to the Virtual Machine Instances
+   */
+  reapply is ArmResourceActionAsync<VirtualMachineScaleSet, void, void>;
+
+  /**
+   * Shuts down all the virtual machines in the virtual machine scale set, moves them to a new node, and powers them back on.
+   */
+  redeploy is ArmResourceActionAsync<
+    VirtualMachineScaleSet,
+    VirtualMachineScaleSetVMInstanceIDs,
+    void
+  >;
+
+  /**
+   * Reimages (upgrade the operating system) one or more virtual machines in a VM scale set which don't have a ephemeral OS disk, for virtual machines who have a ephemeral OS disk the virtual machine is reset to initial state.
+   */
+  reimage is ArmResourceActionAsync<
+    VirtualMachineScaleSet,
+    VirtualMachineScaleSetReimageParameters,
+    void
+  >;
+
+  /**
+   * Reimages all the disks ( including data disks ) in the virtual machines in a VM scale set. This operation is only supported for managed disks.
+   */
+  reimageAll is ArmResourceActionAsync<
+    VirtualMachineScaleSet,
+    VirtualMachineScaleSetVMInstanceIDs,
+    void
+  >;
+
+  /**
+   * Restarts one or more virtual machines in a VM scale set.
+   */
+  restart is ArmResourceActionAsync<
+    VirtualMachineScaleSet,
+    VirtualMachineScaleSetVMInstanceIDs,
     void
   >;
 
@@ -328,18 +319,13 @@ interface VirtualMachineScaleSets {
   >;
 
   /**
-   * Cancels the current virtual machine scale set rolling upgrade.
+   * Starts one or more virtual machines in a VM scale set.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("VirtualMachineScaleSetRollingUpgrades_Cancel")
-  cancel is ArmResourceActionAsync<VirtualMachineScaleSet, void, void>;
-
-  /**
-   * Starts a rolling upgrade to move all virtual machine scale set instances to the latest available Platform Image OS version. Instances which are already running the latest available OS version are not affected.
-   */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("VirtualMachineScaleSetRollingUpgrades_StartOSUpgrade")
-  startOSUpgrade is ArmResourceActionAsync<VirtualMachineScaleSet, void, void>;
+  start is ArmResourceActionAsync<
+    VirtualMachineScaleSet,
+    VirtualMachineScaleSetVMInstanceIDs,
+    void
+  >;
 
   /**
    * Starts a rolling upgrade to move all extensions for all virtual machine scale set instances to the latest available extension version. Instances which are already running the latest extension versions are not affected.
@@ -351,6 +337,20 @@ interface VirtualMachineScaleSets {
     void,
     void
   >;
+
+  /**
+   * Starts a rolling upgrade to move all virtual machine scale set instances to the latest available Platform Image OS version. Instances which are already running the latest available OS version are not affected.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("VirtualMachineScaleSetRollingUpgrades_StartOSUpgrade")
+  startOSUpgrade is ArmResourceActionAsync<VirtualMachineScaleSet, void, void>;
+
+  /**
+   * Cancels the current virtual machine scale set rolling upgrade.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("VirtualMachineScaleSetRollingUpgrades_Cancel")
+  cancel is ArmResourceActionAsync<VirtualMachineScaleSet, void, void>;
 
   /**
    * Gets the status of a VM scale set instance.
@@ -372,25 +372,6 @@ interface VirtualMachineScaleSets {
   ): ArmResponse<VirtualMachineScaleSetInstanceView> | ErrorResponse;
 
   /**
-   * Gets a list of SKUs available for your VM scale set, including the minimum and maximum VM instances allowed for each SKU.
-   */
-  // FIXME: VirtualMachineScaleSets_ListSkus could not be converted to a resource operation
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/skus")
-  @get
-  listSkus(
-    ...ApiVersionParameter,
-    ...ResourceGroupParameter,
-
-    /**
-     * The name of the VM scale set.
-     */
-    @path
-    vmScaleSetName: string,
-
-    ...SubscriptionIdParameter,
-  ): ArmResponse<VirtualMachineScaleSetListSkusResult> | ErrorResponse;
-
-  /**
    * Gets list of OS upgrades on a VM scale set instance.
    */
   // FIXME: VirtualMachineScaleSets_GetOSUpgradeHistory could not be converted to a resource operation
@@ -410,6 +391,25 @@ interface VirtualMachineScaleSets {
 
     ...SubscriptionIdParameter,
   ): ArmResponse<VirtualMachineScaleSetListOSUpgradeHistory> | ErrorResponse;
+
+  /**
+   * Gets a list of SKUs available for your VM scale set, including the minimum and maximum VM instances allowed for each SKU.
+   */
+  // FIXME: VirtualMachineScaleSets_ListSkus could not be converted to a resource operation
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/skus")
+  @get
+  listSkus(
+    ...ApiVersionParameter,
+    ...ResourceGroupParameter,
+
+    /**
+     * The name of the VM scale set.
+     */
+    @path
+    vmScaleSetName: string,
+
+    ...SubscriptionIdParameter,
+  ): ArmResponse<VirtualMachineScaleSetListSkusResult> | ErrorResponse;
 }
 
 @@doc(VirtualMachineScaleSet.name, "The name of the VM scale set.");
@@ -438,6 +438,28 @@ interface VirtualMachineScaleSets {
 @@doc(VirtualMachineScaleSets.update::parameters.properties,
   "The scale set object."
 );
+@@encodedName(VirtualMachineScaleSets.approveRollingUpgrade::parameters.body,
+  "application/json",
+  "vmInstanceIDs"
+);
+@@extension(VirtualMachineScaleSets.approveRollingUpgrade::parameters.body,
+  "x-ms-client-name",
+  "vmInstanceIDs"
+);
+@@doc(VirtualMachineScaleSets.approveRollingUpgrade::parameters.body,
+  "A list of virtual machine instance IDs from the VM scale set."
+);
+@@encodedName(VirtualMachineScaleSets.convertToSinglePlacementGroup::parameters.body,
+  "application/json",
+  "parameters"
+);
+@@extension(VirtualMachineScaleSets.convertToSinglePlacementGroup::parameters.body,
+  "x-ms-client-name",
+  "parameters"
+);
+@@doc(VirtualMachineScaleSets.convertToSinglePlacementGroup::parameters.body,
+  "The input object for ConvertToSinglePlacementGroup API."
+);
 @@encodedName(VirtualMachineScaleSets.deallocate::parameters.body,
   "application/json",
   "vmInstanceIDs"
@@ -460,48 +482,15 @@ interface VirtualMachineScaleSets {
 @@doc(VirtualMachineScaleSets.deleteInstances::parameters.body,
   "A list of virtual machine instance IDs from the VM scale set."
 );
-@@encodedName(VirtualMachineScaleSets.powerOff::parameters.body,
+@@encodedName(VirtualMachineScaleSets.updateInstances::parameters.body,
   "application/json",
   "vmInstanceIDs"
 );
-@@extension(VirtualMachineScaleSets.powerOff::parameters.body,
+@@extension(VirtualMachineScaleSets.updateInstances::parameters.body,
   "x-ms-client-name",
   "vmInstanceIDs"
 );
-@@doc(VirtualMachineScaleSets.powerOff::parameters.body,
-  "A list of virtual machine instance IDs from the VM scale set."
-);
-@@encodedName(VirtualMachineScaleSets.restart::parameters.body,
-  "application/json",
-  "vmInstanceIDs"
-);
-@@extension(VirtualMachineScaleSets.restart::parameters.body,
-  "x-ms-client-name",
-  "vmInstanceIDs"
-);
-@@doc(VirtualMachineScaleSets.restart::parameters.body,
-  "A list of virtual machine instance IDs from the VM scale set."
-);
-@@encodedName(VirtualMachineScaleSets.start::parameters.body,
-  "application/json",
-  "vmInstanceIDs"
-);
-@@extension(VirtualMachineScaleSets.start::parameters.body,
-  "x-ms-client-name",
-  "vmInstanceIDs"
-);
-@@doc(VirtualMachineScaleSets.start::parameters.body,
-  "A list of virtual machine instance IDs from the VM scale set."
-);
-@@encodedName(VirtualMachineScaleSets.redeploy::parameters.body,
-  "application/json",
-  "vmInstanceIDs"
-);
-@@extension(VirtualMachineScaleSets.redeploy::parameters.body,
-  "x-ms-client-name",
-  "vmInstanceIDs"
-);
-@@doc(VirtualMachineScaleSets.redeploy::parameters.body,
+@@doc(VirtualMachineScaleSets.updateInstances::parameters.body,
   "A list of virtual machine instance IDs from the VM scale set."
 );
 @@encodedName(VirtualMachineScaleSets.performMaintenance::parameters.body,
@@ -515,15 +504,26 @@ interface VirtualMachineScaleSets {
 @@doc(VirtualMachineScaleSets.performMaintenance::parameters.body,
   "A list of virtual machine instance IDs from the VM scale set."
 );
-@@encodedName(VirtualMachineScaleSets.updateInstances::parameters.body,
+@@encodedName(VirtualMachineScaleSets.powerOff::parameters.body,
   "application/json",
   "vmInstanceIDs"
 );
-@@extension(VirtualMachineScaleSets.updateInstances::parameters.body,
+@@extension(VirtualMachineScaleSets.powerOff::parameters.body,
   "x-ms-client-name",
   "vmInstanceIDs"
 );
-@@doc(VirtualMachineScaleSets.updateInstances::parameters.body,
+@@doc(VirtualMachineScaleSets.powerOff::parameters.body,
+  "A list of virtual machine instance IDs from the VM scale set."
+);
+@@encodedName(VirtualMachineScaleSets.redeploy::parameters.body,
+  "application/json",
+  "vmInstanceIDs"
+);
+@@extension(VirtualMachineScaleSets.redeploy::parameters.body,
+  "x-ms-client-name",
+  "vmInstanceIDs"
+);
+@@doc(VirtualMachineScaleSets.redeploy::parameters.body,
   "A list of virtual machine instance IDs from the VM scale set."
 );
 @@encodedName(VirtualMachineScaleSets.reimage::parameters.body,
@@ -548,27 +548,16 @@ interface VirtualMachineScaleSets {
 @@doc(VirtualMachineScaleSets.reimageAll::parameters.body,
   "A list of virtual machine instance IDs from the VM scale set."
 );
-@@encodedName(VirtualMachineScaleSets.approveRollingUpgrade::parameters.body,
+@@encodedName(VirtualMachineScaleSets.restart::parameters.body,
   "application/json",
   "vmInstanceIDs"
 );
-@@extension(VirtualMachineScaleSets.approveRollingUpgrade::parameters.body,
+@@extension(VirtualMachineScaleSets.restart::parameters.body,
   "x-ms-client-name",
   "vmInstanceIDs"
 );
-@@doc(VirtualMachineScaleSets.approveRollingUpgrade::parameters.body,
+@@doc(VirtualMachineScaleSets.restart::parameters.body,
   "A list of virtual machine instance IDs from the VM scale set."
-);
-@@encodedName(VirtualMachineScaleSets.convertToSinglePlacementGroup::parameters.body,
-  "application/json",
-  "parameters"
-);
-@@extension(VirtualMachineScaleSets.convertToSinglePlacementGroup::parameters.body,
-  "x-ms-client-name",
-  "parameters"
-);
-@@doc(VirtualMachineScaleSets.convertToSinglePlacementGroup::parameters.body,
-  "The input object for ConvertToSinglePlacementGroup API."
 );
 @@encodedName(VirtualMachineScaleSets.setOrchestrationServiceState::parameters.body,
   "application/json",
@@ -580,4 +569,15 @@ interface VirtualMachineScaleSets {
 );
 @@doc(VirtualMachineScaleSets.setOrchestrationServiceState::parameters.body,
   "The input object for SetOrchestrationServiceState API."
+);
+@@encodedName(VirtualMachineScaleSets.start::parameters.body,
+  "application/json",
+  "vmInstanceIDs"
+);
+@@extension(VirtualMachineScaleSets.start::parameters.body,
+  "x-ms-client-name",
+  "vmInstanceIDs"
+);
+@@doc(VirtualMachineScaleSets.start::parameters.body,
+  "A list of virtual machine instance IDs from the VM scale set."
 );

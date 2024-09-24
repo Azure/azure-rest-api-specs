@@ -174,6 +174,24 @@ interface VirtualMachines {
   listAll is ArmListBySubscription<VirtualMachine>;
 
   /**
+   * Assess patches on the VM.
+   */
+  assessPatches is ArmResourceActionAsync<
+    VirtualMachine,
+    void,
+    VirtualMachineAssessPatchesResult
+  >;
+
+  /**
+   * Attach and detach data disks to/from the virtual machine.
+   */
+  attachDetachDataDisks is ArmResourceActionAsync<
+    VirtualMachine,
+    AttachDetachDataDisksRequest,
+    StorageProfile
+  >;
+
+  /**
    * Captures the VM by copying virtual hard disks of the VM and outputs a template that can be used to create similar VMs.
    */
   capture is ArmResourceActionAsync<
@@ -211,6 +229,20 @@ interface VirtualMachines {
   generalize is ArmResourceActionSync<VirtualMachine, void, void>;
 
   /**
+   * Installs patches on the VM.
+   */
+  installPatches is ArmResourceActionAsync<
+    VirtualMachine,
+    VirtualMachineInstallPatchesParameters,
+    VirtualMachineInstallPatchesResult
+  >;
+
+  /**
+   * The operation to perform maintenance on a virtual machine.
+   */
+  performMaintenance is ArmResourceActionAsync<VirtualMachine, void, void>;
+
+  /**
    * The operation to power off (stop) a virtual machine. The virtual machine can be restarted with the same provisioned resources. You are still charged for this virtual machine.
    */
   powerOff is ArmResourceActionAsync<
@@ -234,16 +266,6 @@ interface VirtualMachines {
   reapply is ArmResourceActionAsync<VirtualMachine, void, void>;
 
   /**
-   * The operation to restart a virtual machine.
-   */
-  restart is ArmResourceActionAsync<VirtualMachine, void, void>;
-
-  /**
-   * The operation to start a virtual machine.
-   */
-  start is ArmResourceActionAsync<VirtualMachine, void, void>;
-
-  /**
    * Shuts down the virtual machine, moves it to a new node, and powers it back on.
    */
   redeploy is ArmResourceActionAsync<VirtualMachine, void, void>;
@@ -256,6 +278,11 @@ interface VirtualMachines {
     VirtualMachineReimageParameters,
     void
   >;
+
+  /**
+   * The operation to restart a virtual machine.
+   */
+  restart is ArmResourceActionAsync<VirtualMachine, void, void>;
 
   /**
    * The operation to retrieve SAS URIs for a virtual machine's boot diagnostic logs.
@@ -276,41 +303,14 @@ interface VirtualMachines {
   >;
 
   /**
-   * The operation to perform maintenance on a virtual machine.
-   */
-  performMaintenance is ArmResourceActionAsync<VirtualMachine, void, void>;
-
-  /**
    * The operation to simulate the eviction of spot virtual machine.
    */
   simulateEviction is ArmResourceActionNoContentSync<VirtualMachine, void>;
 
   /**
-   * Assess patches on the VM.
+   * The operation to start a virtual machine.
    */
-  assessPatches is ArmResourceActionAsync<
-    VirtualMachine,
-    void,
-    VirtualMachineAssessPatchesResult
-  >;
-
-  /**
-   * Installs patches on the VM.
-   */
-  installPatches is ArmResourceActionAsync<
-    VirtualMachine,
-    VirtualMachineInstallPatchesParameters,
-    VirtualMachineInstallPatchesResult
-  >;
-
-  /**
-   * Attach and detach data disks to/from the virtual machine.
-   */
-  attachDetachDataDisks is ArmResourceActionAsync<
-    VirtualMachine,
-    AttachDetachDataDisksRequest,
-    StorageProfile
-  >;
+  start is ArmResourceActionAsync<VirtualMachine, void, void>;
 
   /**
    * Run command on the VM.
@@ -386,6 +386,17 @@ interface VirtualMachines {
 @@doc(VirtualMachines.update::parameters.properties,
   "Parameters supplied to the Update Virtual Machine operation."
 );
+@@encodedName(VirtualMachines.attachDetachDataDisks::parameters.body,
+  "application/json",
+  "parameters"
+);
+@@extension(VirtualMachines.attachDetachDataDisks::parameters.body,
+  "x-ms-client-name",
+  "parameters"
+);
+@@doc(VirtualMachines.attachDetachDataDisks::parameters.body,
+  "Parameters supplied to the attach and detach data disks operation on the virtual machine."
+);
 @@encodedName(VirtualMachines.capture::parameters.body,
   "application/json",
   "parameters"
@@ -396,17 +407,6 @@ interface VirtualMachines {
 );
 @@doc(VirtualMachines.capture::parameters.body,
   "Parameters supplied to the Capture Virtual Machine operation."
-);
-@@encodedName(VirtualMachines.reimage::parameters.body,
-  "application/json",
-  "parameters"
-);
-@@extension(VirtualMachines.reimage::parameters.body,
-  "x-ms-client-name",
-  "parameters"
-);
-@@doc(VirtualMachines.reimage::parameters.body,
-  "Parameters supplied to the Reimage Virtual Machine operation."
 );
 @@encodedName(VirtualMachines.installPatches::parameters.body,
   "application/json",
@@ -419,16 +419,16 @@ interface VirtualMachines {
 @@doc(VirtualMachines.installPatches::parameters.body,
   "Input for InstallPatches as directly received by the API"
 );
-@@encodedName(VirtualMachines.attachDetachDataDisks::parameters.body,
+@@encodedName(VirtualMachines.reimage::parameters.body,
   "application/json",
   "parameters"
 );
-@@extension(VirtualMachines.attachDetachDataDisks::parameters.body,
+@@extension(VirtualMachines.reimage::parameters.body,
   "x-ms-client-name",
   "parameters"
 );
-@@doc(VirtualMachines.attachDetachDataDisks::parameters.body,
-  "Parameters supplied to the attach and detach data disks operation on the virtual machine."
+@@doc(VirtualMachines.reimage::parameters.body,
+  "Parameters supplied to the Reimage Virtual Machine operation."
 );
 @@encodedName(VirtualMachines.runCommand::parameters.body,
   "application/json",

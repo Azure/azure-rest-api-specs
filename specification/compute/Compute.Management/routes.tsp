@@ -50,44 +50,6 @@ interface VirtualMachineScaleSetsOperations {
   ): ArmResponse<ResourceListResult<VirtualMachineScaleSet>> | ErrorResponse;
 }
 
-interface VirtualMachineScaleSetVMsOperations {
-  /**
-   * Gets a list of all virtual machines in a VM scale sets.
-   */
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{virtualMachineScaleSetName}/virtualMachines")
-  @get
-  list(
-    ...ApiVersionParameter,
-    ...ResourceGroupParameter,
-
-    /**
-     * The name of the VM scale set.
-     */
-    @path
-    virtualMachineScaleSetName: string,
-
-    /**
-     * The filter to apply to the operation. Allowed values are 'startswith(instanceView/statuses/code, 'PowerState') eq true', 'properties/latestModelApplied eq true', 'properties/latestModelApplied eq false'.
-     */
-    @query("$filter")
-    $filter?: string,
-
-    /**
-     * The list parameters. Allowed values are 'instanceView', 'instanceView/statuses'.
-     */
-    @query("$select")
-    $select?: string,
-
-    /**
-     * The expand expression to apply to the operation. Allowed values are 'instanceView'.
-     */
-    @query("$expand")
-    $expand?: string,
-
-    ...SubscriptionIdParameter,
-  ): ArmResponse<VirtualMachineScaleSetVMListResult> | ErrorResponse;
-}
-
 interface VirtualMachinesOperations {
   /**
    * Gets all the virtual machines under the specified subscription for the specified location.
@@ -101,95 +63,41 @@ interface VirtualMachinesOperations {
   ): ArmResponse<ResourceListResult<VirtualMachine>> | ErrorResponse;
 }
 
-interface VirtualMachineImagesOperations {
+interface VirtualMachineImagesEdgeZoneOperations {
   /**
-   * Gets a virtual machine image.
+   * Gets a list of virtual machine image publishers for the specified Azure location and edge zone.
    */
-  @route("/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/publishers/{publisherName}/artifacttypes/vmimage/offers/{offer}/skus/{skus}/versions/{version}")
+  @route("/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/edgeZones/{edgeZone}/publishers")
   @get
-  get(
+  listPublishers(
     ...ApiVersionParameter,
     ...LocationResourceParameter,
 
     /**
-     * A valid image publisher.
+     * The name of the edge zone.
      */
     @path
-    publisherName: string,
-
-    /**
-     * A valid image publisher offer.
-     */
-    @path
-    offer: string,
-
-    /**
-     * A valid image SKU.
-     */
-    @path
-    skus: string,
-
-    /**
-     * A valid image SKU version.
-     */
-    @path
-    version: string,
-
-    ...SubscriptionIdParameter,
-  ): ArmResponse<VirtualMachineImage> | ErrorResponse;
-
-  /**
-   * Gets a list of all virtual machine image versions for the specified location, publisher, offer, and SKU.
-   */
-  @route("/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/publishers/{publisherName}/artifacttypes/vmimage/offers/{offer}/skus/{skus}/versions")
-  @get
-  list(
-    ...ApiVersionParameter,
-    ...LocationResourceParameter,
-
-    /**
-     * A valid image publisher.
-     */
-    @path
-    publisherName: string,
-
-    /**
-     * A valid image publisher offer.
-     */
-    @path
-    offer: string,
-
-    /**
-     * A valid image SKU.
-     */
-    @path
-    skus: string,
-
-    /**
-     * The expand expression to apply on the operation.
-     */
-    @query("$expand")
-    $expand?: string,
-
-    @query("$top")
-    $top?: int32,
-
-    @query("$orderby")
-    $orderby?: string,
+    edgeZone: string,
 
     ...SubscriptionIdParameter,
   ): ArmResponse<void> | ErrorResponse;
 
   /**
-   * Gets a list of virtual machine image offers for the specified location and publisher.
+   * Gets a list of virtual machine image offers for the specified location, edge zone and publisher.
    */
-  @route("/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/publishers/{publisherName}/artifacttypes/vmimage/offers")
+  @route("/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/edgeZones/{edgeZone}/publishers/{publisherName}/artifacttypes/vmimage/offers")
   @get
   listOffers(
     ...ApiVersionParameter,
     ...LocationResourceParameter,
 
     /**
+     * The name of the edge zone.
+     */
+    @path
+    edgeZone: string,
+
+    /**
      * A valid image publisher.
      */
     @path
@@ -199,26 +107,21 @@ interface VirtualMachineImagesOperations {
   ): ArmResponse<void> | ErrorResponse;
 
   /**
-   * Gets a list of virtual machine image publishers for the specified Azure location.
+   * Gets a list of virtual machine image SKUs for the specified location, edge zone, publisher, and offer.
    */
-  @route("/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/publishers")
-  @get
-  listPublishers(
-    ...ApiVersionParameter,
-    ...LocationResourceParameter,
-    ...SubscriptionIdParameter,
-  ): ArmResponse<void> | ErrorResponse;
-
-  /**
-   * Gets a list of virtual machine image SKUs for the specified location, publisher, and offer.
-   */
-  @route("/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/publishers/{publisherName}/artifacttypes/vmimage/offers/{offer}/skus")
+  @route("/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/edgeZones/{edgeZone}/publishers/{publisherName}/artifacttypes/vmimage/offers/{offer}/skus")
   @get
   listSkus(
     ...ApiVersionParameter,
     ...LocationResourceParameter,
 
     /**
+     * The name of the edge zone.
+     */
+    @path
+    edgeZone: string,
+
+    /**
      * A valid image publisher.
      */
     @path
@@ -232,68 +135,6 @@ interface VirtualMachineImagesOperations {
 
     ...SubscriptionIdParameter,
   ): ArmResponse<void> | ErrorResponse;
-
-  /**
-   * Gets a list of all virtual machine image versions for the specified edge zone
-   */
-  @route("/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/edgeZones/{edgeZone}/vmimages")
-  @get
-  listByEdgeZone(
-    ...ApiVersionParameter,
-    ...LocationResourceParameter,
-
-    /**
-     * The name of the edge zone.
-     */
-    @path
-    edgeZone: string,
-
-    ...SubscriptionIdParameter,
-  ): ArmResponse<VmImagesInEdgeZoneListResult> | ErrorResponse;
-}
-
-interface VirtualMachineImagesEdgeZoneOperations {
-  /**
-   * Gets a virtual machine image in an edge zone.
-   */
-  @route("/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/edgeZones/{edgeZone}/publishers/{publisherName}/artifacttypes/vmimage/offers/{offer}/skus/{skus}/versions/{version}")
-  @get
-  get(
-    ...ApiVersionParameter,
-    ...LocationResourceParameter,
-
-    /**
-     * The name of the edge zone.
-     */
-    @path
-    edgeZone: string,
-
-    /**
-     * A valid image publisher.
-     */
-    @path
-    publisherName: string,
-
-    /**
-     * A valid image publisher offer.
-     */
-    @path
-    offer: string,
-
-    /**
-     * A valid image SKU.
-     */
-    @path
-    skus: string,
-
-    /**
-     * A valid image SKU version.
-     */
-    @path
-    version: string,
-
-    ...SubscriptionIdParameter,
-  ): ArmResponse<VirtualMachineImage> | ErrorResponse;
 
   /**
    * Gets a list of all virtual machine image versions for the specified location, edge zone, publisher, offer, and SKU.
@@ -350,53 +191,11 @@ interface VirtualMachineImagesEdgeZoneOperations {
   ): ArmResponse<void> | ErrorResponse;
 
   /**
-   * Gets a list of virtual machine image offers for the specified location, edge zone and publisher.
+   * Gets a virtual machine image in an edge zone.
    */
-  @route("/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/edgeZones/{edgeZone}/publishers/{publisherName}/artifacttypes/vmimage/offers")
+  @route("/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/edgeZones/{edgeZone}/publishers/{publisherName}/artifacttypes/vmimage/offers/{offer}/skus/{skus}/versions/{version}")
   @get
-  listOffers(
-    ...ApiVersionParameter,
-    ...LocationResourceParameter,
-
-    /**
-     * The name of the edge zone.
-     */
-    @path
-    edgeZone: string,
-
-    /**
-     * A valid image publisher.
-     */
-    @path
-    publisherName: string,
-
-    ...SubscriptionIdParameter,
-  ): ArmResponse<void> | ErrorResponse;
-
-  /**
-   * Gets a list of virtual machine image publishers for the specified Azure location and edge zone.
-   */
-  @route("/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/edgeZones/{edgeZone}/publishers")
-  @get
-  listPublishers(
-    ...ApiVersionParameter,
-    ...LocationResourceParameter,
-
-    /**
-     * The name of the edge zone.
-     */
-    @path
-    edgeZone: string,
-
-    ...SubscriptionIdParameter,
-  ): ArmResponse<void> | ErrorResponse;
-
-  /**
-   * Gets a list of virtual machine image SKUs for the specified location, edge zone, publisher, and offer.
-   */
-  @route("/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/edgeZones/{edgeZone}/publishers/{publisherName}/artifacttypes/vmimage/offers/{offer}/skus")
-  @get
-  listSkus(
+  get(
     ...ApiVersionParameter,
     ...LocationResourceParameter,
 
@@ -418,8 +217,171 @@ interface VirtualMachineImagesEdgeZoneOperations {
     @path
     offer: string,
 
+    /**
+     * A valid image SKU.
+     */
+    @path
+    skus: string,
+
+    /**
+     * A valid image SKU version.
+     */
+    @path
+    version: string,
+
+    ...SubscriptionIdParameter,
+  ): ArmResponse<VirtualMachineImage> | ErrorResponse;
+}
+
+interface VirtualMachineImagesOperations {
+  /**
+   * Gets a list of all virtual machine image versions for the specified edge zone
+   */
+  @route("/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/edgeZones/{edgeZone}/vmimages")
+  @get
+  listByEdgeZone(
+    ...ApiVersionParameter,
+    ...LocationResourceParameter,
+
+    /**
+     * The name of the edge zone.
+     */
+    @path
+    edgeZone: string,
+
+    ...SubscriptionIdParameter,
+  ): ArmResponse<VmImagesInEdgeZoneListResult> | ErrorResponse;
+
+  /**
+   * Gets a list of virtual machine image publishers for the specified Azure location.
+   */
+  @route("/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/publishers")
+  @get
+  listPublishers(
+    ...ApiVersionParameter,
+    ...LocationResourceParameter,
     ...SubscriptionIdParameter,
   ): ArmResponse<void> | ErrorResponse;
+
+  /**
+   * Gets a list of virtual machine image offers for the specified location and publisher.
+   */
+  @route("/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/publishers/{publisherName}/artifacttypes/vmimage/offers")
+  @get
+  listOffers(
+    ...ApiVersionParameter,
+    ...LocationResourceParameter,
+
+    /**
+     * A valid image publisher.
+     */
+    @path
+    publisherName: string,
+
+    ...SubscriptionIdParameter,
+  ): ArmResponse<void> | ErrorResponse;
+
+  /**
+   * Gets a list of virtual machine image SKUs for the specified location, publisher, and offer.
+   */
+  @route("/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/publishers/{publisherName}/artifacttypes/vmimage/offers/{offer}/skus")
+  @get
+  listSkus(
+    ...ApiVersionParameter,
+    ...LocationResourceParameter,
+
+    /**
+     * A valid image publisher.
+     */
+    @path
+    publisherName: string,
+
+    /**
+     * A valid image publisher offer.
+     */
+    @path
+    offer: string,
+
+    ...SubscriptionIdParameter,
+  ): ArmResponse<void> | ErrorResponse;
+
+  /**
+   * Gets a list of all virtual machine image versions for the specified location, publisher, offer, and SKU.
+   */
+  @route("/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/publishers/{publisherName}/artifacttypes/vmimage/offers/{offer}/skus/{skus}/versions")
+  @get
+  list(
+    ...ApiVersionParameter,
+    ...LocationResourceParameter,
+
+    /**
+     * A valid image publisher.
+     */
+    @path
+    publisherName: string,
+
+    /**
+     * A valid image publisher offer.
+     */
+    @path
+    offer: string,
+
+    /**
+     * A valid image SKU.
+     */
+    @path
+    skus: string,
+
+    /**
+     * The expand expression to apply on the operation.
+     */
+    @query("$expand")
+    $expand?: string,
+
+    @query("$top")
+    $top?: int32,
+
+    @query("$orderby")
+    $orderby?: string,
+
+    ...SubscriptionIdParameter,
+  ): ArmResponse<void> | ErrorResponse;
+
+  /**
+   * Gets a virtual machine image.
+   */
+  @route("/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/publishers/{publisherName}/artifacttypes/vmimage/offers/{offer}/skus/{skus}/versions/{version}")
+  @get
+  get(
+    ...ApiVersionParameter,
+    ...LocationResourceParameter,
+
+    /**
+     * A valid image publisher.
+     */
+    @path
+    publisherName: string,
+
+    /**
+     * A valid image publisher offer.
+     */
+    @path
+    offer: string,
+
+    /**
+     * A valid image SKU.
+     */
+    @path
+    skus: string,
+
+    /**
+     * A valid image SKU version.
+     */
+    @path
+    version: string,
+
+    ...SubscriptionIdParameter,
+  ): ArmResponse<VirtualMachineImage> | ErrorResponse;
 }
 
 interface LogAnalyticsOperations {
@@ -502,6 +464,84 @@ interface VirtualMachineRunCommandsOperations {
 }
 
 interface VirtualMachineScaleSetVMRunCommandsOperations {
+  /**
+   * The operation to get all run commands of an instance in Virtual Machine Scaleset.
+   */
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualMachines/{instanceId}/runCommands")
+  @get
+  list(
+    ...ApiVersionParameter,
+    ...ResourceGroupParameter,
+
+    /**
+     * The name of the VM scale set.
+     */
+    @path
+    vmScaleSetName: string,
+
+    /**
+     * The instance ID of the virtual machine.
+     */
+    @path
+    instanceId: string,
+
+    /**
+     * The expand expression to apply on the operation.
+     */
+    @query("$expand")
+    $expand?: string,
+
+    ...SubscriptionIdParameter,
+
+    /**
+     * Accept header
+     */
+    @header
+    accept: "application/json, text/json",
+  ): ArmResponse<ResourceListResult<VirtualMachineRunCommand>> | ErrorResponse;
+
+  /**
+   * The operation to get the VMSS VM run command.
+   */
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualMachines/{instanceId}/runCommands/{runCommandName}")
+  @get
+  get(
+    ...ApiVersionParameter,
+    ...ResourceGroupParameter,
+
+    /**
+     * The name of the VM scale set.
+     */
+    @path
+    vmScaleSetName: string,
+
+    /**
+     * The instance ID of the virtual machine.
+     */
+    @path
+    instanceId: string,
+
+    /**
+     * The name of the virtual machine run command.
+     */
+    @path
+    runCommandName: string,
+
+    /**
+     * The expand expression to apply on the operation.
+     */
+    @query("$expand")
+    $expand?: string,
+
+    ...SubscriptionIdParameter,
+
+    /**
+     * Accept header
+     */
+    @header
+    accept: "application/json, text/json",
+  ): ArmResponse<VirtualMachineRunCommand> | ErrorResponse;
+
   /**
    * The operation to create or update the VMSS VM run command.
    */
@@ -621,82 +661,4 @@ interface VirtualMachineScaleSetVMRunCommandsOperations {
     @header
     accept: "application/json, text/json",
   ): ArmResponse<void> | ErrorResponse;
-
-  /**
-   * The operation to get the VMSS VM run command.
-   */
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualMachines/{instanceId}/runCommands/{runCommandName}")
-  @get
-  get(
-    ...ApiVersionParameter,
-    ...ResourceGroupParameter,
-
-    /**
-     * The name of the VM scale set.
-     */
-    @path
-    vmScaleSetName: string,
-
-    /**
-     * The instance ID of the virtual machine.
-     */
-    @path
-    instanceId: string,
-
-    /**
-     * The name of the virtual machine run command.
-     */
-    @path
-    runCommandName: string,
-
-    /**
-     * The expand expression to apply on the operation.
-     */
-    @query("$expand")
-    $expand?: string,
-
-    ...SubscriptionIdParameter,
-
-    /**
-     * Accept header
-     */
-    @header
-    accept: "application/json, text/json",
-  ): ArmResponse<VirtualMachineRunCommand> | ErrorResponse;
-
-  /**
-   * The operation to get all run commands of an instance in Virtual Machine Scaleset.
-   */
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualMachines/{instanceId}/runCommands")
-  @get
-  list(
-    ...ApiVersionParameter,
-    ...ResourceGroupParameter,
-
-    /**
-     * The name of the VM scale set.
-     */
-    @path
-    vmScaleSetName: string,
-
-    /**
-     * The instance ID of the virtual machine.
-     */
-    @path
-    instanceId: string,
-
-    /**
-     * The expand expression to apply on the operation.
-     */
-    @query("$expand")
-    $expand?: string,
-
-    ...SubscriptionIdParameter,
-
-    /**
-     * Accept header
-     */
-    @header
-    accept: "application/json, text/json",
-  ): ArmResponse<ResourceListResult<VirtualMachineRunCommand>> | ErrorResponse;
 }

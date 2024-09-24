@@ -10,10 +10,10 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "./models.tsp";
 import "./Gallery.tsp";
-import "./GalleryImage.tsp";
-import "./GalleryImageVersion.tsp";
 import "./GalleryApplication.tsp";
 import "./GalleryApplicationVersion.tsp";
+import "./GalleryImage.tsp";
+import "./GalleryImageVersion.tsp";
 import "./routes.tsp";
 
 using TypeSpec.Rest;

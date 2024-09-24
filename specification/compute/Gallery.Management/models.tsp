@@ -12,8 +12,6 @@ using Azure.ResourceManager.Foundations;
 
 namespace Microsoft.Compute;
 
-interface Operations extends Azure.ResourceManager.Operations {}
-
 /**
  * The provisioning state, which only appears in the response.
  */
@@ -69,24 +67,6 @@ union GalleryExpandParams {
 }
 
 /**
- * The hypervisor generation of the Virtual Machine. Applicable to OS disks only.
- */
-union HyperVGeneration {
-  string,
-  V1: "V1",
-  V2: "V2",
-}
-
-/**
- * The architecture of the image. Applicable to OS disks only.
- */
-union Architecture {
-  string,
-  x64: "x64",
-  Arm64: "Arm64",
-}
-
-/**
  * Specifies the storage account type to be used to store the image. This property is not updatable.
  */
 union StorageAccountType {
@@ -137,17 +117,6 @@ union EdgeZoneStorageAccountType {
 }
 
 /**
- * Describes the nature of the policy violation.
- */
-union PolicyViolationCategory {
-  string,
-  Other: "Other",
-  ImageFlaggedUnsafe: "ImageFlaggedUnsafe",
-  CopyrightValidation: "CopyrightValidation",
-  IpTheft: "IpTheft",
-}
-
-/**
  * This is the aggregated replication status based on all the regional replication status flags.
  */
 union AggregatedReplicationState {
@@ -169,6 +138,41 @@ union ReplicationState {
   Failed: "Failed",
 }
 
+union ReplicationStatusTypes {
+  string,
+  ReplicationStatus: "ReplicationStatus",
+  UefiSettings: "UefiSettings",
+}
+
+/**
+ * The hypervisor generation of the Virtual Machine. Applicable to OS disks only.
+ */
+union HyperVGeneration {
+  string,
+  V1: "V1",
+  V2: "V2",
+}
+
+/**
+ * The architecture of the image. Applicable to OS disks only.
+ */
+union Architecture {
+  string,
+  x64: "x64",
+  Arm64: "Arm64",
+}
+
+/**
+ * Describes the nature of the policy violation.
+ */
+union PolicyViolationCategory {
+  string,
+  Other: "Other",
+  ImageFlaggedUnsafe: "ImageFlaggedUnsafe",
+  CopyrightValidation: "CopyrightValidation",
+  IpTheft: "IpTheft",
+}
+
 /**
  * The name of the signature template that contains default UEFI keys.
  */
@@ -186,12 +190,6 @@ union UefiKeyType {
   string,
   sha256: "sha256",
   x509: "x509",
-}
-
-union ReplicationStatusTypes {
-  string,
-  ReplicationStatus: "ReplicationStatus",
-  UefiSettings: "UefiSettings",
 }
 
 /**
@@ -237,6 +235,15 @@ enum OperatingSystemTypes {
 }
 
 /**
+ * Specifies the type of the custom action parameter. Possible values are: String, ConfigurationDataBlob or LogOutputBlob
+ */
+enum GalleryApplicationCustomActionParameterType {
+  String,
+  ConfigurationDataBlob,
+  LogOutputBlob,
+}
+
+/**
  * This property allows the user to specify whether the virtual machines created under this image are 'Generalized' or 'Specialized'.
  */
 enum OperatingSystemStateTypes {
@@ -251,15 +258,6 @@ enum HostCaching {
   None,
   ReadOnly,
   ReadWrite,
-}
-
-/**
- * Specifies the type of the custom action parameter. Possible values are: String, ConfigurationDataBlob or LogOutputBlob
- */
-enum GalleryApplicationCustomActionParameterType {
-  String,
-  ConfigurationDataBlob,
-  LogOutputBlob,
 }
 
 /**
@@ -584,6 +582,478 @@ model UpdateResourceDefinition {
 }
 
 /**
+ * Describes the properties of a gallery Application Definition.
+ */
+model GalleryApplicationProperties {
+  /**
+   * The description of this gallery Application Definition resource. This property is updatable.
+   */
+  description?: string;
+
+  /**
+   * The Eula agreement for the gallery Application Definition.
+   */
+  eula?: string;
+
+  /**
+   * The privacy statement uri.
+   */
+  privacyStatementUri?: string;
+
+  /**
+   * The release note uri.
+   */
+  releaseNoteUri?: string;
+
+  /**
+   * The end of life date of the gallery Application Definition. This property can be used for decommissioning purposes. This property is updatable.
+   */
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  endOfLifeDate?: utcDateTime;
+
+  /**
+   * This property allows you to specify the supported type of the OS that application is built for. Possible values are: **Windows,** **Linux.**
+   */
+  supportedOSType: OperatingSystemTypes;
+
+  /**
+   * A list of custom actions that can be performed with all of the Gallery Application Versions within this Gallery Application.
+   */
+  @OpenAPI.extension("x-ms-identifiers", ["name"])
+  customActions?: GalleryApplicationCustomAction[];
+}
+
+/**
+ * A custom action that can be performed with a Gallery Application Version.
+ */
+model GalleryApplicationCustomAction {
+  /**
+   * The name of the custom action.  Must be unique within the Gallery Application Version.
+   */
+  name: string;
+
+  /**
+   * The script to run when executing this custom action.
+   */
+  script: string;
+
+  /**
+   * Description to help the users understand what this custom action does.
+   */
+  description?: string;
+
+  /**
+   * The parameters that this custom action uses
+   */
+  @OpenAPI.extension("x-ms-identifiers", ["name"])
+  parameters?: GalleryApplicationCustomActionParameter[];
+}
+
+/**
+ * The definition of a parameter that can be passed to a custom action of a Gallery Application Version.
+ */
+model GalleryApplicationCustomActionParameter {
+  /**
+   * The name of the custom action.  Must be unique within the Gallery Application Version.
+   */
+  name: string;
+
+  /**
+   * Indicates whether this parameter must be passed when running the custom action.
+   */
+  required?: boolean;
+
+  /**
+   * Specifies the type of the custom action parameter. Possible values are: String, ConfigurationDataBlob or LogOutputBlob
+   */
+  type?: GalleryApplicationCustomActionParameterType;
+
+  /**
+   * The default value of the parameter.  Only applies to string types
+   */
+  defaultValue?: string;
+
+  /**
+   * A description to help users understand what this parameter means
+   */
+  description?: string;
+}
+
+/**
+ * Specifies information about the gallery Application Definition that you want to update.
+ */
+model GalleryApplicationUpdate extends UpdateResourceDefinition {
+  /**
+   * Describes the properties of a gallery Application Definition.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: GalleryApplicationProperties;
+}
+
+/**
+ * Describes the properties of a gallery image version.
+ */
+model GalleryApplicationVersionProperties {
+  /**
+   * The publishing profile of a gallery image version.
+   */
+  publishingProfile: GalleryApplicationVersionPublishingProfile;
+
+  /**
+   * The safety profile of the Gallery Application Version.
+   */
+  safetyProfile?: GalleryApplicationVersionSafetyProfile;
+
+  /**
+   * The provisioning state, which only appears in the response.
+   */
+  @visibility("read")
+  provisioningState?: GalleryProvisioningState;
+
+  /**
+   * This is the replication status of the gallery image version.
+   */
+  @visibility("read")
+  replicationStatus?: ReplicationStatus;
+}
+
+/**
+ * The publishing profile of a gallery image version.
+ */
+model GalleryApplicationVersionPublishingProfile
+  extends GalleryArtifactPublishingProfileBase {
+  /**
+   * The source image from which the Image Version is going to be created.
+   */
+  source: UserArtifactSource;
+
+  manageActions?: UserArtifactManage;
+
+  /**
+   * Additional settings for the VM app that contains the target package and config file name when it is deployed to target VM or VM scale set.
+   */
+  settings?: UserArtifactSettings;
+
+  /**
+   * Optional. Additional settings to pass to the vm-application-manager extension. For advanced use only.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  advancedSettings?: Record<string>;
+
+  /**
+   * Optional. Whether or not this application reports health.
+   */
+  enableHealthCheck?: boolean;
+
+  /**
+   * A list of custom actions that can be performed with this Gallery Application Version.
+   */
+  @OpenAPI.extension("x-ms-identifiers", ["name"])
+  customActions?: GalleryApplicationCustomAction[];
+}
+
+/**
+ * The source image from which the Image Version is going to be created.
+ */
+model UserArtifactSource {
+  /**
+   * Required. The mediaLink of the artifact, must be a readable storage page blob.
+   */
+  mediaLink: string;
+
+  /**
+   * Optional. The defaultConfigurationLink of the artifact, must be a readable storage page blob.
+   */
+  defaultConfigurationLink?: string;
+}
+
+model UserArtifactManage {
+  /**
+   * Required. The path and arguments to install the gallery application. This is limited to 4096 characters.
+   */
+  install: string;
+
+  /**
+   * Required. The path and arguments to remove the gallery application. This is limited to 4096 characters.
+   */
+  remove: string;
+
+  /**
+   * Optional. The path and arguments to update the gallery application. If not present, then update operation will invoke remove command on the previous version and install command on the current version of the gallery application. This is limited to 4096 characters.
+   */
+  update?: string;
+}
+
+/**
+ * Additional settings for the VM app that contains the target package and config file name when it is deployed to target VM or VM scale set.
+ */
+model UserArtifactSettings {
+  /**
+   * Optional. The name to assign the downloaded package file on the VM. This is limited to 4096 characters. If not specified, the package file will be named the same as the Gallery Application name.
+   */
+  packageFileName?: string;
+
+  /**
+   * Optional. The name to assign the downloaded config file on the VM. This is limited to 4096 characters. If not specified, the config file will be named the Gallery Application name appended with "_config".
+   */
+  configFileName?: string;
+}
+
+/**
+ * Describes the basic gallery artifact publishing profile.
+ */
+model GalleryArtifactPublishingProfileBase {
+  /**
+   * The target regions where the Image Version is going to be replicated to. This property is updatable.
+   */
+  @OpenAPI.extension("x-ms-identifiers", ["name"])
+  targetRegions?: TargetRegion[];
+
+  /**
+   * The number of replicas of the Image Version to be created per region. This property would take effect for a region when regionalReplicaCount is not specified. This property is updatable.
+   */
+  replicaCount?: int32;
+
+  /**
+   * If set to true, Virtual Machines deployed from the latest version of the Image Definition won't use this Image Version.
+   */
+  excludeFromLatest?: boolean;
+
+  /**
+   * The timestamp for when the gallery image version is published.
+   */
+  @visibility("read")
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  publishedDate?: utcDateTime;
+
+  /**
+   * The end of life date of the gallery image version. This property can be used for decommissioning purposes. This property is updatable.
+   */
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  endOfLifeDate?: utcDateTime;
+
+  /**
+   * Specifies the storage account type to be used to store the image. This property is not updatable.
+   */
+  storageAccountType?: StorageAccountType;
+
+  /**
+   * Optional parameter which specifies the mode to be used for replication. This property is not updatable.
+   */
+  replicationMode?: ReplicationMode;
+
+  /**
+   * The target extended locations where the Image Version is going to be replicated to. This property is updatable.
+   */
+  @OpenAPI.extension("x-ms-identifiers", ["name", "extendedLocation/name"])
+  targetExtendedLocations?: GalleryTargetExtendedLocation[];
+}
+
+/**
+ * Describes the target region information.
+ */
+model TargetRegion {
+  /**
+   * The name of the region.
+   */
+  name: string;
+
+  /**
+   * The number of replicas of the Image Version to be created per region. This property is updatable.
+   */
+  regionalReplicaCount?: int32;
+
+  /**
+   * Specifies the storage account type to be used to store the image. This property is not updatable.
+   */
+  storageAccountType?: StorageAccountType;
+
+  /**
+   * Optional. Allows users to provide customer managed keys for encrypting the OS and data disks in the gallery artifact.
+   */
+  encryption?: EncryptionImages;
+
+  /**
+   * Contains the flag setting to hide an image when users specify version='latest'
+   */
+  excludeFromLatest?: boolean;
+}
+
+/**
+ * Optional. Allows users to provide customer managed keys for encrypting the OS and data disks in the gallery artifact.
+ */
+model EncryptionImages {
+  /**
+   * Contains encryption settings for an OS disk image.
+   */
+  osDiskImage?: OSDiskImageEncryption;
+
+  /**
+   * A list of encryption specifications for data disk images.
+   */
+  @OpenAPI.extension("x-ms-identifiers", ["lun"])
+  dataDiskImages?: DataDiskImageEncryption[];
+}
+
+/**
+ * Contains encryption settings for an OS disk image.
+ */
+model OSDiskImageEncryption extends DiskImageEncryption {
+  /**
+   * This property specifies the security profile of an OS disk image.
+   */
+  securityProfile?: OSDiskImageSecurityProfile;
+}
+
+/**
+ * Contains security profile for an OS disk image.
+ */
+model OSDiskImageSecurityProfile {
+  /**
+   * confidential VM encryption types
+   */
+  confidentialVMEncryptionType?: ConfidentialVMEncryptionType;
+
+  /**
+   * secure VM disk encryption set id
+   */
+  secureVMDiskEncryptionSetId?: string;
+}
+
+/**
+ * This is the disk image encryption base class.
+ */
+model DiskImageEncryption {
+  /**
+   * A relative URI containing the resource ID of the disk encryption set.
+   */
+  diskEncryptionSetId?: string;
+}
+
+/**
+ * Contains encryption settings for a data disk image.
+ */
+model DataDiskImageEncryption extends DiskImageEncryption {
+  /**
+   * This property specifies the logical unit number of the data disk. This value is used to identify data disks within the Virtual Machine and therefore must be unique for each data disk attached to the Virtual Machine.
+   */
+  lun: int32;
+}
+
+model GalleryTargetExtendedLocation {
+  /**
+   * The name of the region.
+   */
+  name?: string;
+
+  /**
+   * The name of the extended location.
+   */
+  extendedLocation?: GalleryExtendedLocation;
+
+  /**
+   * The number of replicas of the Image Version to be created per extended location. This property is updatable.
+   */
+  extendedLocationReplicaCount?: int32;
+
+  /**
+   * Specifies the storage account type to be used to store the image. This property is not updatable.
+   */
+  storageAccountType?: EdgeZoneStorageAccountType;
+
+  /**
+   * Optional. Allows users to provide customer managed keys for encrypting the OS and data disks in the gallery artifact.
+   */
+  encryption?: EncryptionImages;
+}
+
+/**
+ * The name of the extended location.
+ */
+model GalleryExtendedLocation {
+  name?: string;
+
+  /**
+   * It is type of the extended location.
+   */
+  type?: GalleryExtendedLocationType;
+}
+
+/**
+ * The safety profile of the Gallery Application Version.
+ */
+model GalleryApplicationVersionSafetyProfile
+  extends GalleryArtifactSafetyProfileBase {}
+
+/**
+ * This is the safety profile of the Gallery Artifact Version.
+ */
+model GalleryArtifactSafetyProfileBase {
+  /**
+   * Indicates whether or not removing this Gallery Image Version from replicated regions is allowed.
+   */
+  allowDeletionOfReplicatedLocations?: boolean;
+}
+
+/**
+ * This is the replication status of the gallery image version.
+ */
+model ReplicationStatus {
+  /**
+   * This is the aggregated replication status based on all the regional replication status flags.
+   */
+  @visibility("read")
+  aggregatedState?: AggregatedReplicationState;
+
+  /**
+   * This is a summary of replication status for each region.
+   */
+  @visibility("read")
+  @OpenAPI.extension("x-ms-identifiers", ["region"])
+  summary?: RegionalReplicationStatus[];
+}
+
+/**
+ * This is the regional replication status.
+ */
+model RegionalReplicationStatus {
+  /**
+   * The region to which the gallery image version is being replicated to.
+   */
+  @visibility("read")
+  region?: string;
+
+  /**
+   * This is the regional replication state.
+   */
+  @visibility("read")
+  state?: ReplicationState;
+
+  /**
+   * The details of the replication status.
+   */
+  @visibility("read")
+  details?: string;
+
+  /**
+   * It indicates progress of the replication job.
+   */
+  @visibility("read")
+  progress?: int32;
+}
+
+/**
+ * Specifies information about the gallery Application Version that you want to update.
+ */
+model GalleryApplicationVersionUpdate extends UpdateResourceDefinition {
+  /**
+   * Describes the properties of a gallery image version.
+   */
+  @extension("x-ms-client-flatten", true)
+  properties?: GalleryApplicationVersionProperties;
+}
+
+/**
  * Describes the properties of a gallery image definition.
  */
 model GalleryImageProperties {
@@ -816,186 +1286,6 @@ model GalleryImageVersionPublishingProfile
   extends GalleryArtifactPublishingProfileBase {}
 
 /**
- * Describes the basic gallery artifact publishing profile.
- */
-model GalleryArtifactPublishingProfileBase {
-  /**
-   * The target regions where the Image Version is going to be replicated to. This property is updatable.
-   */
-  @OpenAPI.extension("x-ms-identifiers", ["name"])
-  targetRegions?: TargetRegion[];
-
-  /**
-   * The number of replicas of the Image Version to be created per region. This property would take effect for a region when regionalReplicaCount is not specified. This property is updatable.
-   */
-  replicaCount?: int32;
-
-  /**
-   * If set to true, Virtual Machines deployed from the latest version of the Image Definition won't use this Image Version.
-   */
-  excludeFromLatest?: boolean;
-
-  /**
-   * The timestamp for when the gallery image version is published.
-   */
-  @visibility("read")
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  publishedDate?: utcDateTime;
-
-  /**
-   * The end of life date of the gallery image version. This property can be used for decommissioning purposes. This property is updatable.
-   */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  endOfLifeDate?: utcDateTime;
-
-  /**
-   * Specifies the storage account type to be used to store the image. This property is not updatable.
-   */
-  storageAccountType?: StorageAccountType;
-
-  /**
-   * Optional parameter which specifies the mode to be used for replication. This property is not updatable.
-   */
-  replicationMode?: ReplicationMode;
-
-  /**
-   * The target extended locations where the Image Version is going to be replicated to. This property is updatable.
-   */
-  @OpenAPI.extension("x-ms-identifiers", ["name", "extendedLocation/name"])
-  targetExtendedLocations?: GalleryTargetExtendedLocation[];
-}
-
-/**
- * Describes the target region information.
- */
-model TargetRegion {
-  /**
-   * The name of the region.
-   */
-  name: string;
-
-  /**
-   * The number of replicas of the Image Version to be created per region. This property is updatable.
-   */
-  regionalReplicaCount?: int32;
-
-  /**
-   * Specifies the storage account type to be used to store the image. This property is not updatable.
-   */
-  storageAccountType?: StorageAccountType;
-
-  /**
-   * Optional. Allows users to provide customer managed keys for encrypting the OS and data disks in the gallery artifact.
-   */
-  encryption?: EncryptionImages;
-
-  /**
-   * Contains the flag setting to hide an image when users specify version='latest'
-   */
-  excludeFromLatest?: boolean;
-}
-
-/**
- * Optional. Allows users to provide customer managed keys for encrypting the OS and data disks in the gallery artifact.
- */
-model EncryptionImages {
-  /**
-   * Contains encryption settings for an OS disk image.
-   */
-  osDiskImage?: OSDiskImageEncryption;
-
-  /**
-   * A list of encryption specifications for data disk images.
-   */
-  @OpenAPI.extension("x-ms-identifiers", ["lun"])
-  dataDiskImages?: DataDiskImageEncryption[];
-}
-
-/**
- * Contains encryption settings for an OS disk image.
- */
-model OSDiskImageEncryption extends DiskImageEncryption {
-  /**
-   * This property specifies the security profile of an OS disk image.
-   */
-  securityProfile?: OSDiskImageSecurityProfile;
-}
-
-/**
- * Contains security profile for an OS disk image.
- */
-model OSDiskImageSecurityProfile {
-  /**
-   * confidential VM encryption types
-   */
-  confidentialVMEncryptionType?: ConfidentialVMEncryptionType;
-
-  /**
-   * secure VM disk encryption set id
-   */
-  secureVMDiskEncryptionSetId?: string;
-}
-
-/**
- * This is the disk image encryption base class.
- */
-model DiskImageEncryption {
-  /**
-   * A relative URI containing the resource ID of the disk encryption set.
-   */
-  diskEncryptionSetId?: string;
-}
-
-/**
- * Contains encryption settings for a data disk image.
- */
-model DataDiskImageEncryption extends DiskImageEncryption {
-  /**
-   * This property specifies the logical unit number of the data disk. This value is used to identify data disks within the Virtual Machine and therefore must be unique for each data disk attached to the Virtual Machine.
-   */
-  lun: int32;
-}
-
-model GalleryTargetExtendedLocation {
-  /**
-   * The name of the region.
-   */
-  name?: string;
-
-  /**
-   * The name of the extended location.
-   */
-  extendedLocation?: GalleryExtendedLocation;
-
-  /**
-   * The number of replicas of the Image Version to be created per extended location. This property is updatable.
-   */
-  extendedLocationReplicaCount?: int32;
-
-  /**
-   * Specifies the storage account type to be used to store the image. This property is not updatable.
-   */
-  storageAccountType?: EdgeZoneStorageAccountType;
-
-  /**
-   * Optional. Allows users to provide customer managed keys for encrypting the OS and data disks in the gallery artifact.
-   */
-  encryption?: EncryptionImages;
-}
-
-/**
- * The name of the extended location.
- */
-model GalleryExtendedLocation {
-  name?: string;
-
-  /**
-   * It is type of the extended location.
-   */
-  type?: GalleryExtendedLocationType;
-}
-
-/**
  * This is the storage profile of a Gallery Image Version.
  */
 model GalleryImageVersionStorageProfile {
@@ -1127,63 +1417,6 @@ model PolicyViolation {
 }
 
 /**
- * This is the safety profile of the Gallery Artifact Version.
- */
-model GalleryArtifactSafetyProfileBase {
-  /**
-   * Indicates whether or not removing this Gallery Image Version from replicated regions is allowed.
-   */
-  allowDeletionOfReplicatedLocations?: boolean;
-}
-
-/**
- * This is the replication status of the gallery image version.
- */
-model ReplicationStatus {
-  /**
-   * This is the aggregated replication status based on all the regional replication status flags.
-   */
-  @visibility("read")
-  aggregatedState?: AggregatedReplicationState;
-
-  /**
-   * This is a summary of replication status for each region.
-   */
-  @visibility("read")
-  @OpenAPI.extension("x-ms-identifiers", ["region"])
-  summary?: RegionalReplicationStatus[];
-}
-
-/**
- * This is the regional replication status.
- */
-model RegionalReplicationStatus {
-  /**
-   * The region to which the gallery image version is being replicated to.
-   */
-  @visibility("read")
-  region?: string;
-
-  /**
-   * This is the regional replication state.
-   */
-  @visibility("read")
-  state?: ReplicationState;
-
-  /**
-   * The details of the replication status.
-   */
-  @visibility("read")
-  details?: string;
-
-  /**
-   * It indicates progress of the replication job.
-   */
-  @visibility("read")
-  progress?: int32;
-}
-
-/**
  * The security profile of a gallery image version
  */
 model ImageVersionSecurityProfile {
@@ -1262,241 +1495,6 @@ model GalleryImageVersionUpdate extends UpdateResourceDefinition {
    */
   @extension("x-ms-client-flatten", true)
   properties?: GalleryImageVersionProperties;
-}
-
-/**
- * Describes the properties of a gallery Application Definition.
- */
-model GalleryApplicationProperties {
-  /**
-   * The description of this gallery Application Definition resource. This property is updatable.
-   */
-  description?: string;
-
-  /**
-   * The Eula agreement for the gallery Application Definition.
-   */
-  eula?: string;
-
-  /**
-   * The privacy statement uri.
-   */
-  privacyStatementUri?: string;
-
-  /**
-   * The release note uri.
-   */
-  releaseNoteUri?: string;
-
-  /**
-   * The end of life date of the gallery Application Definition. This property can be used for decommissioning purposes. This property is updatable.
-   */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  endOfLifeDate?: utcDateTime;
-
-  /**
-   * This property allows you to specify the supported type of the OS that application is built for. Possible values are: **Windows,** **Linux.**
-   */
-  supportedOSType: OperatingSystemTypes;
-
-  /**
-   * A list of custom actions that can be performed with all of the Gallery Application Versions within this Gallery Application.
-   */
-  @OpenAPI.extension("x-ms-identifiers", ["name"])
-  customActions?: GalleryApplicationCustomAction[];
-}
-
-/**
- * A custom action that can be performed with a Gallery Application Version.
- */
-model GalleryApplicationCustomAction {
-  /**
-   * The name of the custom action.  Must be unique within the Gallery Application Version.
-   */
-  name: string;
-
-  /**
-   * The script to run when executing this custom action.
-   */
-  script: string;
-
-  /**
-   * Description to help the users understand what this custom action does.
-   */
-  description?: string;
-
-  /**
-   * The parameters that this custom action uses
-   */
-  @OpenAPI.extension("x-ms-identifiers", ["name"])
-  parameters?: GalleryApplicationCustomActionParameter[];
-}
-
-/**
- * The definition of a parameter that can be passed to a custom action of a Gallery Application Version.
- */
-model GalleryApplicationCustomActionParameter {
-  /**
-   * The name of the custom action.  Must be unique within the Gallery Application Version.
-   */
-  name: string;
-
-  /**
-   * Indicates whether this parameter must be passed when running the custom action.
-   */
-  required?: boolean;
-
-  /**
-   * Specifies the type of the custom action parameter. Possible values are: String, ConfigurationDataBlob or LogOutputBlob
-   */
-  type?: GalleryApplicationCustomActionParameterType;
-
-  /**
-   * The default value of the parameter.  Only applies to string types
-   */
-  defaultValue?: string;
-
-  /**
-   * A description to help users understand what this parameter means
-   */
-  description?: string;
-}
-
-/**
- * Specifies information about the gallery Application Definition that you want to update.
- */
-model GalleryApplicationUpdate extends UpdateResourceDefinition {
-  /**
-   * Describes the properties of a gallery Application Definition.
-   */
-  @extension("x-ms-client-flatten", true)
-  properties?: GalleryApplicationProperties;
-}
-
-/**
- * Describes the properties of a gallery image version.
- */
-model GalleryApplicationVersionProperties {
-  /**
-   * The publishing profile of a gallery image version.
-   */
-  publishingProfile: GalleryApplicationVersionPublishingProfile;
-
-  /**
-   * The safety profile of the Gallery Application Version.
-   */
-  safetyProfile?: GalleryApplicationVersionSafetyProfile;
-
-  /**
-   * The provisioning state, which only appears in the response.
-   */
-  @visibility("read")
-  provisioningState?: GalleryProvisioningState;
-
-  /**
-   * This is the replication status of the gallery image version.
-   */
-  @visibility("read")
-  replicationStatus?: ReplicationStatus;
-}
-
-/**
- * The publishing profile of a gallery image version.
- */
-model GalleryApplicationVersionPublishingProfile
-  extends GalleryArtifactPublishingProfileBase {
-  /**
-   * The source image from which the Image Version is going to be created.
-   */
-  source: UserArtifactSource;
-
-  manageActions?: UserArtifactManage;
-
-  /**
-   * Additional settings for the VM app that contains the target package and config file name when it is deployed to target VM or VM scale set.
-   */
-  settings?: UserArtifactSettings;
-
-  /**
-   * Optional. Additional settings to pass to the vm-application-manager extension. For advanced use only.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
-  advancedSettings?: Record<string>;
-
-  /**
-   * Optional. Whether or not this application reports health.
-   */
-  enableHealthCheck?: boolean;
-
-  /**
-   * A list of custom actions that can be performed with this Gallery Application Version.
-   */
-  @OpenAPI.extension("x-ms-identifiers", ["name"])
-  customActions?: GalleryApplicationCustomAction[];
-}
-
-/**
- * The source image from which the Image Version is going to be created.
- */
-model UserArtifactSource {
-  /**
-   * Required. The mediaLink of the artifact, must be a readable storage page blob.
-   */
-  mediaLink: string;
-
-  /**
-   * Optional. The defaultConfigurationLink of the artifact, must be a readable storage page blob.
-   */
-  defaultConfigurationLink?: string;
-}
-
-model UserArtifactManage {
-  /**
-   * Required. The path and arguments to install the gallery application. This is limited to 4096 characters.
-   */
-  install: string;
-
-  /**
-   * Required. The path and arguments to remove the gallery application. This is limited to 4096 characters.
-   */
-  remove: string;
-
-  /**
-   * Optional. The path and arguments to update the gallery application. If not present, then update operation will invoke remove command on the previous version and install command on the current version of the gallery application. This is limited to 4096 characters.
-   */
-  update?: string;
-}
-
-/**
- * Additional settings for the VM app that contains the target package and config file name when it is deployed to target VM or VM scale set.
- */
-model UserArtifactSettings {
-  /**
-   * Optional. The name to assign the downloaded package file on the VM. This is limited to 4096 characters. If not specified, the package file will be named the same as the Gallery Application name.
-   */
-  packageFileName?: string;
-
-  /**
-   * Optional. The name to assign the downloaded config file on the VM. This is limited to 4096 characters. If not specified, the config file will be named the Gallery Application name appended with "_config".
-   */
-  configFileName?: string;
-}
-
-/**
- * The safety profile of the Gallery Application Version.
- */
-model GalleryApplicationVersionSafetyProfile
-  extends GalleryArtifactSafetyProfileBase {}
-
-/**
- * Specifies information about the gallery Application Version that you want to update.
- */
-model GalleryApplicationVersionUpdate extends UpdateResourceDefinition {
-  /**
-   * Describes the properties of a gallery image version.
-   */
-  @extension("x-ms-client-flatten", true)
-  properties?: GalleryApplicationVersionProperties;
 }
 
 /**
@@ -1869,6 +1867,11 @@ model CommunityGalleryIdentifier {
 }
 
 /**
+ * The List Community Gallery Images operation response.
+ */
+model CommunityGalleryImageList is Azure.Core.Page<CommunityGalleryImage>;
+
+/**
  * Specifies information about the gallery image definition that you want to create or update.
  */
 model CommunityGalleryImage extends PirCommunityGalleryResource {
@@ -1978,6 +1981,12 @@ model CommunityGalleryImageIdentifier {
 }
 
 /**
+ * The List Community Gallery Image versions operation response.
+ */
+model CommunityGalleryImageVersionList
+  is Azure.Core.Page<CommunityGalleryImageVersion>;
+
+/**
  * Specifies information about the gallery image version that you want to create or update.
  */
 model CommunityGalleryImageVersion extends PirCommunityGalleryResource {
@@ -2025,17 +2034,6 @@ model CommunityGalleryImageVersionProperties {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   artifactTags?: Record<string>;
 }
-
-/**
- * The List Community Gallery Images operation response.
- */
-model CommunityGalleryImageList is Azure.Core.Page<CommunityGalleryImage>;
-
-/**
- * The List Community Gallery Image versions operation response.
- */
-model CommunityGalleryImageVersionList
-  is Azure.Core.Page<CommunityGalleryImageVersion>;
 
 model SubResource {
   /**

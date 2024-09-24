@@ -285,11 +285,11 @@ These settings apply only when `--tag=package-2024-07-01` is specified on the co
 
 ``` yaml $(tag) == 'package-2024-07-01'
 input-file:
-  - Microsoft.Compute/common-types/v1/common.json
-  - Microsoft.Compute/DiskRP/stable/2024-03-02/diskRPCommon.json
-  - Microsoft.Compute/DiskRP/stable/2024-03-02/disk.json
-  - Microsoft.Compute/DiskRP/stable/2024-03-02/diskAccess.json
-  - Microsoft.Compute/DiskRP/stable/2024-03-02/diskEncryptionSet.json
-  - Microsoft.Compute/DiskRP/stable/2024-03-02/diskRestorePoint.json
-  - Microsoft.Compute/DiskRP/stable/2024-03-02/snapshot.json
+  - ../resource-manager/Microsoft.Compute/common-types/v1/common.json
+  - ../resource-manager/Microsoft.Compute/DiskRP/stable/2024-03-02/diskRPCommon.json
+  - ../resource-manager/Microsoft.Compute/DiskRP/stable/2024-03-02/disk.json
+  - ../resource-manager/Microsoft.Compute/DiskRP/stable/2024-03-02/diskAccess.json
+  - ../resource-manager/Microsoft.Compute/DiskRP/stable/2024-03-02/diskEncryptionSet.json
+  - ../resource-manager/Microsoft.Compute/DiskRP/stable/2024-03-02/diskRestorePoint.json
+  - ../resource-manager/Microsoft.Compute/DiskRP/stable/2024-03-02/snapshot.json
 ```

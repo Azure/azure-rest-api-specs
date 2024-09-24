@@ -285,9 +285,9 @@ These settings apply only when `--tag=package-2024-07-01` is specified on the co
 
 ``` yaml $(tag) == 'package-2024-07-01'
 input-file:
-  - Microsoft.Compute/common-types/v1/common.json
-  - Microsoft.Compute/GalleryRP/stable/2023-07-03/galleryRPCommon.json
-  - Microsoft.Compute/GalleryRP/stable/2023-07-03/gallery.json
-  - Microsoft.Compute/GalleryRP/stable/2023-07-03/sharedGallery.json
-  - Microsoft.Compute/GalleryRP/stable/2023-07-03/communityGallery.json
+  - ../resource-manager/Microsoft.Compute/common-types/v1/common.json
+  - ../resource-manager/Microsoft.Compute/GalleryRP/stable/2023-07-03/galleryRPCommon.json
+  - ../resource-manager/Microsoft.Compute/GalleryRP/stable/2023-07-03/gallery.json
+  - ../resource-manager/Microsoft.Compute/GalleryRP/stable/2023-07-03/sharedGallery.json
+  - ../resource-manager/Microsoft.Compute/GalleryRP/stable/2023-07-03/communityGallery.json
 ```
