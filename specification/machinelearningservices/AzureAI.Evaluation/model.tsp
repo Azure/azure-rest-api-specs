@@ -27,11 +27,11 @@ model EvaluatorConfiguration {
   dataMapping?: Record<string>;
 }
 
-@doc("Abstract data class.")
+@doc("Abstract data class for input data configuration.")
 @discriminator("type")
 model InputData {
-  @doc("Evaluation input data")
-  id: string;
+  @doc("Type of the data.")
+  type: string;
 }
 
 @doc("Data Source for Application Insight.")
@@ -52,6 +52,9 @@ model AppInsightsConfiguration extends InputData {
 @doc("Dataset as source for evaluation.")
 model Dataset extends InputData {
   type: "dataset";
+
+  @doc("Input dataset id.")
+  id: string
 }
 
 @doc("Evaluation Definition")
