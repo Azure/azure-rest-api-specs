@@ -2,7 +2,6 @@ emit:
   - "@azure-tools/typespec-autorest"
 linter:
   extends:
-    - "@azure-tools/typespec-azure-rulesets/data-plane"
     - "@azure-tools/typespec-azure-rulesets/resource-manager"
 parameters:
   "service-directory-name":
@@ -14,7 +13,6 @@ options:
     # `arm-resource-flattening` is only used for back-compat for specs existed on July 2024. All new service spec should NOT use this flag
     arm-resource-flattening: true
     emitter-output-dir: "{project-root}/.."
-    examples-directory: ./examples
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/loadtestservice.json"
     omit-unreachable-types: true
     use-read-only-status-schema: true

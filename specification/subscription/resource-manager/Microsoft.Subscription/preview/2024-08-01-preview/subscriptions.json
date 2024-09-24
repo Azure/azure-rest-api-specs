@@ -625,6 +625,70 @@
             }
           }
         }
+      },
+      "delete": {
+        "operationId": "Subscriptions_DeleteTargetDirectory",
+        "x-ms-examples": {
+          "deleteTargetDirectory": {
+            "$ref": "./examples/deleteTargetDirectory.json"
+          }
+        },
+        "description": "The operation to delete Initiator Subscription Changed Request",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Deleted the Target Directory"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Subscription/changeTenantRequest": {
+      "get": {
+        "operationId": "Subscriptions_ListTargetDirectory",
+        "x-ms-examples": {
+          "listTargetDirectory": {
+            "$ref": "./examples/listTargetDirectory.json"
+          }
+        },
+        "description": "The operation to list Initiator Subscription Changed Request",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/TargetDirectoryListResult"
+            }
+          },
+          "default": {
+            "description": "Describes the error if the operation is not successful.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
       }
     },
     "/providers/Microsoft.Subscription/subscriptions/{subscriptionId}/acceptChangeTenant": {
@@ -1232,6 +1296,28 @@
         "status": {
           "description": "Subscription Status",
           "type": "string"
+        }
+      }
+    },
+    "TargetDirectoryListResult": {
+      "type": "object",
+      "description": "Subscription Response to list out Changed Target Directory.",
+      "properties": {
+        "value": {
+          "description": "The list of subscription response to changed target directory.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/TargetDirectoryResult"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "nextLink": {
+          "description": "The link (url) to the next page of results.",
+          "type": "string",
+          "readOnly": true
         }
       }
     },

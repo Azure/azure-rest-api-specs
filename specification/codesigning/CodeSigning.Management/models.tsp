@@ -3,6 +3,7 @@ import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
 import "@typespec/openapi";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@azure-tools/typespec-client-generator-core";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -144,11 +145,13 @@ model AccountSku {
 
 @doc("Parameters for creating or updating a trusted signing account.")
 model CodeSigningAccountPatch {
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "existing API"
   @doc("Resource tags.")
   tags?: Record<string>;
 
+  #suppress "deprecated" "Legacy flatten"
   @doc("Properties of the trusted signing account.")
-  @extension("x-ms-client-flatten", true)
+  @Azure.ClientGenerator.Core.flattenProperty
   properties?: CodeSigningAccountPatchProperties;
 }
 
@@ -225,10 +228,11 @@ model CertificateProfileProperties {
   @visibility("read")
   status?: CertificateProfileStatus;
 
+  #suppress "deprecated" "Legacy flatten"
   @doc("List of renewed certificates.")
   @visibility("read")
   @extension("x-ms-identifiers", [])
-  @extension("x-ms-client-flatten", true)
+  @Azure.ClientGenerator.Core.flattenProperty
   certificates?: Certificate[];
 }
 
@@ -252,8 +256,9 @@ model Certificate {
   @doc("Status of the certificate.")
   status?: CertificateStatus;
 
+  #suppress "deprecated" "Legacy flatten"
   @doc("Revocations history of a certificate.")
-  @extension("x-ms-client-flatten", true)
+  @Azure.ClientGenerator.Core.flattenProperty
   revocation?: Revocation;
 }
 
