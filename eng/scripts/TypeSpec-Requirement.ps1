@@ -168,14 +168,8 @@ else {
 
     if ($responseStatus -eq 200) {
       LogInfo "  Branch 'main' contains path '$servicePath/stable', so spec already exists and is not required to use TypeSpec"
-
-      $notice = "Brownfield services will soon be required to convert from OpenAPI to TypeSpec." +
-        " The TypeSpec team has developed a tool (https://azure.github.io/typespec-azure/docs/migrate-swagger/get-started)" +
-        " to assist with this transition." +
-        " By converting early, you'll receive hands-on assistance and provide valuable feedback to improve the tool." +
-        " Contact TypeSpec Onboarding Support (TypespecOnboard@microsoft.com) to join a select group of early adopters" +
-        " and ensure a smooth transition, or see https://aka.ms/azsdk/typespec."
-
+      
+      $notice = "Brownfield services will soon be required to convert from OpenAPI to TypeSpec. See https://aka.ms/azsdk/typespec."
       LogNoticeForFile $file $notice
 
       # Set output to be used later in /.github/workflows/TypeSpec-Requirement.yml
