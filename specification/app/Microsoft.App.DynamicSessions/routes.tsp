@@ -39,7 +39,7 @@ interface CodeExecution {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" ""
   @doc("Get the code execution result.")
   @route("/execute/{executionId}")
-  getCodeExecutionResult is Foundations.Operation<
+  getResult is Foundations.Operation<
     {
       ...SessionIdentifier;
       ...CodeExecutionIdentifier;
@@ -78,7 +78,7 @@ interface SessionResourceFiles {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" ""
   @doc("Upload a file to a session.")
   @route("/files/{fileName}/content")
-  downloadFile is Foundations.Operation<
+  getFileContent is Foundations.Operation<
     {
       ...SessionIdentifier;
       ...SessionResourceFileNameParameter;

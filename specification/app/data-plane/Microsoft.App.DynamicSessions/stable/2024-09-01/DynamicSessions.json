@@ -86,13 +86,13 @@
               "$ref": "#/definitions/SessionCodeExecutionResponse"
             },
             "headers": {
-              "location": {
-                "type": "string",
-                "description": "The location for monitoring the code execution state."
-              },
               "operation-id": {
                 "type": "string",
                 "description": "The async code execution operation id."
+              },
+              "operation-location": {
+                "type": "string",
+                "description": "The location for monitoring the code execution state."
               }
             }
           },
@@ -121,7 +121,7 @@
     },
     "/execute/{executionId}": {
       "get": {
-        "operationId": "CodeExecution_GetCodeExecutionResult",
+        "operationId": "CodeExecution_GetResult",
         "description": "Get the code execution result.",
         "parameters": [
           {
@@ -155,8 +155,8 @@
           }
         },
         "x-ms-examples": {
-          "CodeExecution_GetCodeExecutionResult": {
-            "$ref": "./examples/CodeExecution_GetCodeExecutionResult.json"
+          "CodeExecution_GetResult": {
+            "$ref": "./examples/CodeExecution_GetResult.json"
           }
         }
       }
@@ -292,7 +292,7 @@
     },
     "/files/{fileName}/content": {
       "get": {
-        "operationId": "SessionResourceFiles_DownloadFile",
+        "operationId": "SessionResourceFiles_GetFileContent",
         "description": "Upload a file to a session.",
         "parameters": [
           {
@@ -327,8 +327,8 @@
           }
         },
         "x-ms-examples": {
-          "SessionResourceFiles_DownloadFile": {
-            "$ref": "./examples/SessionResourceFiles_DownloadFile.json"
+          "SessionResourceFiles_GetFileContent": {
+            "$ref": "./examples/SessionResourceFiles_GetFileContent.json"
           }
         }
       }

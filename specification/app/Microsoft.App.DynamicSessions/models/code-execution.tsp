@@ -57,7 +57,7 @@ model SessionCodeExecutionAsyncResponse {
 
   @header
   @doc("The location for monitoring the code execution state.")
-  location: string;
+  operationLocation: string;
 }
 
 @doc("Code input type.")
