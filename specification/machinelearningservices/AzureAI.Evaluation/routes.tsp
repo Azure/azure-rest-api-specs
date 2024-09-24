@@ -119,7 +119,7 @@ interface EvaluationSchedules {
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Waiting for bug fix: https://github.com/Azure/typespec-azure-pr/issues/3739."
   @doc("List evaluations under a schedule")
-  @route("/evaluations/schedules/{id}/jobs")
+  @route("/evaluations/schedules/{id}/runs")
   @get
   listScheduleEvaluations is Azure.Core.Foundations.Operation<
     {
