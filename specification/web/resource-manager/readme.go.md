@@ -40,6 +40,31 @@ directive:
   where: $.definitions.CertificatePatchResource
   transform:
     $["x-ms-client-name"] = "AppCertificatePatchResource"
+- from: CommonDefinitions.json
+  where: $.definitions.Certificate
+  transform:
+    $["x-ms-client-name"] = "AppCertificate"
+- from: SiteCertificates.json
+  where: $.definitions.Certificate
+  transform:
+    $["x-ms-client-name"] = "AppCertificate"
+- from: CommonDefinitions.json
+  where: $.definitions.CertificateCollection
+  transform:
+    $["x-ms-client-name"] = "AppCertificateCollection"
+- from: SiteCertificates.json
+  where: $.definitions.CertificateCollection
+  transform:
+    $["x-ms-client-name"] = "AppCertificateCollection"
+- from: CommonDefinitions.json
+  where: $.definitions.CertificatePatchResource
+  transform:
+    $["x-ms-client-name"] = "AppCertificatePatchResource"
+- from: SiteCertificates.json
+  where: $.definitions.CertificatePatchResource
+  transform:
+    $["x-ms-client-name"] = "AppCertificatePatchResource"
+    
 ```
 
 ### Go multi-api
