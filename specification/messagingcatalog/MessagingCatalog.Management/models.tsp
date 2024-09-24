@@ -84,8 +84,7 @@ model ResourceLabel {
 
 @doc("The type used for update operations of the Messaging Catalog.")
 model MessagingCatalogUpdate {
-  @doc("Resource tags.")
-  tags?: Record<string>;
+  ...Azure.ResourceManager.Foundations.ArmTagsProperty;
 
   @doc("The updatable properties of the Messaging Catalog.")
   properties?: MessagingCatalogUpdateProperties;
