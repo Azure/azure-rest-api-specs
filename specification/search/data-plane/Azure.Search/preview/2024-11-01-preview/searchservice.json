@@ -9079,6 +9079,7 @@
       ]
     },
     "AIServicesAccountKey": {
+      "type": "object",
       "description": "The account key of an Azure AI service resource that's attached to a skillset, to be used with the resource's subdomain.",
       "x-ms-discriminator-value": "#Microsoft.Azure.Search.AIServicesByKey",
       "allOf": [
@@ -9102,6 +9103,7 @@
       ]
     },
     "AIServicesAccountIdentity": {
+      "type": "object",
       "description": "The multi-region account of an Azure AI service resource that's attached to a skillset.",
       "x-ms-discriminator-value": "#Microsoft.Azure.Search.AIServicesByIdentity",
       "allOf": [
@@ -9852,6 +9854,7 @@
       "description": "A skill that extracts content from a file within the enrichment pipeline."
     },
     "DocumentIntelligenceLayoutSkill": {
+      "type": "object",
       "x-ms-discriminator-value": "#Microsoft.Skills.Util.DocumentIntelligenceLayoutSkill",
       "allOf": [
         {
@@ -9878,7 +9881,7 @@
     "DocumentIntelligenceLayoutSkillOutputMode": {
       "type": "string",
       "enum": [
-        "oneToOne"
+        "oneToMany"
       ],
       "x-ms-enum": {
         "name": "DocumentIntelligenceLayoutSkillOutputMode",
