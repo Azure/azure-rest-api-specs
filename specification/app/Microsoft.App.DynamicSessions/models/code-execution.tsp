@@ -1,4 +1,5 @@
 import "./common.tsp";
+using Azure.Core;
 using TypeSpec.Http;
 using TypeSpec.Rest;
 
@@ -55,9 +56,7 @@ model SessionCodeExecutionAsyncResponse {
   @doc("The async code execution operation id.")
   operationId: string;
 
-  @header
-  @doc("The location for monitoring the code execution state.")
-  operationLocation: string;
+  ...Foundations.LongRunningStatusLocation;
 }
 
 @doc("Code input type.")

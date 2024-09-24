@@ -86,13 +86,14 @@
               "$ref": "#/definitions/SessionCodeExecutionResponse"
             },
             "headers": {
+              "Operation-Location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The location for monitoring the operation state."
+              },
               "operation-id": {
                 "type": "string",
                 "description": "The async code execution operation id."
-              },
-              "operation-location": {
-                "type": "string",
-                "description": "The location for monitoring the code execution state."
               }
             }
           },
@@ -116,7 +117,11 @@
           "CodeExecution_ExecuteCode_StandardOut": {
             "$ref": "./examples/CodeExecution_ExecuteCode_StandardOut.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "operation-location"
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/execute/{executionId}": {
