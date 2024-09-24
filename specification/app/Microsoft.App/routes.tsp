@@ -82,7 +82,5 @@ op downloadFile is Foundations.Operation<
     ...SessionIdentifier;
     ...SessionResourceFileNameParameter;
   },
-  {
-    content: bytes;
-  }
+  bytes
 >;

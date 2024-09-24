@@ -15,9 +15,6 @@ model SessionCodeExecutionRequest {
   @doc("The network status of the code execution session.")
   networkStatus: NetworkStatus;
 
-  @doc("The multi array status of the code execution session.")
-  multiArrayStatus: MultiArrayStatus;
-
   @doc("The string of the code to execute, based on CodeInputType.")
   code: string;
 
@@ -97,17 +94,6 @@ union NetworkStatus {
 
   @doc("Session egress disabled.")
   egressDisabled: "EgressDisabled",
-}
-
-@doc("Multi array status.")
-union MultiArrayStatus {
-  string,
-
-  @doc("Multi array enabled")
-  multiArrayEnabled: "MultiArrayEnabled",
-
-  @doc("Multi array disabled.")
-  multiArrayDisabled: "MultiArrayDisabled",
 }
 
 @doc("Code execution status.")
