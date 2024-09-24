@@ -30,7 +30,7 @@ These settings apply only when `--tag=package-2024-09-01` is specified on the co
 
 ```yaml $(tag) == 'package-2024-09-01'
 input-file:
-  - Microsoft.App/stable/2024-09-01/DynamicSessions.json
+  - Microsoft.App.DynamicSessions/stable/2024-09-01/DynamicSessions.json
 ```
 
 ---
