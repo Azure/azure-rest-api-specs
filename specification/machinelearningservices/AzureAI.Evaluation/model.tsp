@@ -199,8 +199,8 @@ model EvaluationSchedule extends Evaluation {
   @doc("Recurrence pattern for the evaluation.")
   recurrence: Recurrence;
 
-  // @doc ("Cron expression for the evaluation.") TODO: Confirm support for cron expressions
-  // cron: string;
+  @doc ("Cron expression for the evaluation.")
+  cronExpression: string;
 
   @doc("Sampling strategy for the evaluation.")
   samplingStrategy: SamplingStrategy;
