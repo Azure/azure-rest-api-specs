@@ -463,6 +463,9 @@ model LogicalNetworkArmReference {
   id?: armResourceIdentifier<[
     {
       type: "Microsoft.AzureStackHCI/logicalNetworks";
+    },
+    {
+      type: "Microsoft.NetworkCloud/cloudServicesNetworks";
     }
   ]>;
 }
