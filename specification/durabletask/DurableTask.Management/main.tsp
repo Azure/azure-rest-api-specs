@@ -89,6 +89,10 @@ model TaskHubProperties {
   @visibility("read")
   @doc("The status of the last operation.")
   provisioningState?: ProvisioningState;
+
+  @doc("URL of the durable task service dashboard")
+  @visibility("read")
+  dashboardUrl?: url;
 }
 
 @doc("Update Task Hub")
