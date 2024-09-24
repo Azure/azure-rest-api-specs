@@ -54,7 +54,7 @@ openapi-subtype: rpaas
 tag: package-2024-01
 ```
 
-### Tag: package-2024-06-01-preview
+### Tag: package-2024-09-23-preview
 
 These settings apply only when `--tag=2024-09-23-preview` is specified on the command line.
 
