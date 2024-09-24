@@ -36,7 +36,7 @@ model Activation is TrackedResource<ActivationProperties> {
   @doc("The name of the activation.")
   @maxLength(90)
   @minLength(1)
-  @pattern("^[a-z0-9]+(\\.[a-z0-9]+)*$")
+  @pattern("^[a-z0-9]([-a-z0-9]*[a-z0-9])?(\\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*$")
   @path
   @key("activationName")
   @segment("activations")
@@ -54,11 +54,11 @@ interface Activations {
   @doc("Returns the details of the activation.")
   get is Azure.ResourceManager.ArmResourceRead<Activation>;
   @doc("Creates a new or updates an existing activation.")
-  createOrUpdate is Azure.ResourceManager.ArmResourceCreateOrReplaceSync<Activation>;
+  createOrUpdate is Azure.ResourceManager.ArmResourceCreateOrReplaceAsync<Activation>;
   @doc("Updates an existing activation.")
-  update is ArmCustomPatchSync<Activation>;
+  update is ArmCustomPatchAsync<Activation>;
   @doc("Deletes a specified activation.")
-  delete is ArmResourceDeleteSync<Activation>;
+  delete is ArmResourceDeleteWithoutOkAsync<Activation>;
   @doc("Returns a collection of activations within the resource group.")
   listByResourceGroup is Azure.ResourceManager.ArmResourceListByParent<Activation>;
   @doc("Lists activations within an Azure subscription.")
