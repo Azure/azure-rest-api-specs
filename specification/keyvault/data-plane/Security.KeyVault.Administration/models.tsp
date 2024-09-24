@@ -246,8 +246,8 @@ union SettingTypeEnum {
 /**
  * An authentication method and location for the operation.
  */
-@friendlyName("SASTokenParameter")
-model SasTokenParameter {
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Model name has already shipped"
+model SASTokenParameter {
   /**
    * Azure Blob storage container Uri
    */
@@ -393,7 +393,7 @@ model PreRestoreOperationParameters {
   /**
    * A user-provided SAS token to an Azure blob storage container.
    */
-  sasTokenParameters?: SasTokenParameter;
+  sasTokenParameters?: SASTokenParameter;
 
   /**
    * The Folder name of the blob where the previous successful full backup was stored
@@ -445,7 +445,7 @@ model RestoreOperationParameters {
   /**
    * A user-provided SAS token to an Azure blob storage container.
    */
-  sasTokenParameters: SasTokenParameter;
+  sasTokenParameters: SASTokenParameter;
 
   /**
    * The Folder name of the blob where the previous successful full backup was stored
@@ -460,7 +460,7 @@ model SelectiveKeyRestoreOperationParameters {
   /**
    * A user-provided SAS token to an Azure blob storage container.
    */
-  sasTokenParameters: SasTokenParameter;
+  sasTokenParameters: SASTokenParameter;
 
   /**
    * The Folder name of the blob where the previous successful full backup was stored

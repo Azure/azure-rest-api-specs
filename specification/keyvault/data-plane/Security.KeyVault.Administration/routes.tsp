@@ -1,15 +1,16 @@
 import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-client-generator-core";
 import "@typespec/rest";
 import "./models.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.Core;
+using Azure.ClientGenerator.Core;
 
 namespace KeyVault;
 
 alias KeyVaultOperations = StandardResourceOperations;
-
 
 /**
  * Returns the status of full backup operation
@@ -42,7 +43,7 @@ op fullBackup is Azure.Core.Foundations.LongRunningOperation<
      * Azure blob shared access signature token pointing to a valid Azure blob container where full backup needs to be
      * stored. This token needs to be valid for at least next 24 hours from the time of making this call.
      */
-    @body azureStorageBlobContainerUri?: SasTokenParameter;
+    @body azureStorageBlobContainerUri?: SASTokenParameter;
   },
   {
     @statusCode _: 202;
@@ -251,7 +252,9 @@ op updateSetting is Azure.Core.Foundations.Operation<
     /**
      * The parameters to update an account setting.
      */
+    #suppress "deprecated" "Property flattening is supported for legacy scenarios like Key Vault's"
     @body
+    @flattenProperty
     parameters: UpdateSettingRequest;
   },
   Setting
