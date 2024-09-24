@@ -960,16 +960,16 @@
             "$ref": "./examples/ContainerGroupProfilesCreateOrUpdate.json"
           },
           "ContainerGroupProfileCreateWithExtensions": {
-            "$ref": "./examples/ContainerGroupProfileExtensions.json"
+            "$ref": "./examples/ContainerGroupProfileCreateOrUpdate_Extensions.json"
           },
           "ContainerGroupProfileWithEncryptionProperties": {
-            "$ref": "./examples/ContainerGroupProfileEncryptionProperties.json"
+            "$ref": "./examples/ContainerGroupProfileCreateOrUpdate_EncryptionProperties.json"
           },
           "ConfidentialContainerGroupProfile": {
-            "$ref": "./examples/ContainerGroupProfileCreateConfidential.json"
+            "$ref": "./examples/ContainerGroupProfileCreateOrUpdate_CreateConfidential.json"
           },
           "ContainerGroupsCreateWithPriority": {
-            "$ref": "./examples/ContainerGroupsProfileCreatePriority.json"
+            "$ref": "./examples/ContainerGroupsProfileCreateOrUpdate_CreatePriority.json"
           }
         },
         "summary": "Create or update container group profiles.",
@@ -1180,49 +1180,6 @@
             "schema": {
               "$ref": "#/definitions/ContainerGroupProfile"
             }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerInstance/containerGroupProfiles/{containerGroupProfileName}/revisions/{revisionNumber}/deregister": {
-      "post": {
-        "operationId": "ContainerGroupProfileRevision_Deregister",
-        "x-ms-examples": {
-          "ContainerGroupProfileRevisionDeregister": {
-            "$ref": "./examples/ContainerGroupProfileRevisionDeregister.json"
-          }
-        },
-        "summary": "Deregister the specified container group profile revision in the given subscription and resource group.",
-        "description": "Deregisters the specified container group profile revision in the given subscription and resource group.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ContainerGroupProfileNameParameter"
-          },
-          {
-            "$ref": "#/parameters/RevisionNumberParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK - Deregisteration started"
-          },
-          "204": {
-            "description": "No Content - the specified container group profile was not found."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
