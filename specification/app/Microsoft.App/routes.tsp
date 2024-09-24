@@ -32,9 +32,7 @@ op executeCode is Foundations.Operation<
     @body
     codeExecutionRequest: SessionCodeExecutionRequest;
   },
-  Foundations.AcceptedResponse<SessionCodeExecutionAsyncResponse> | Foundations.ResourceOkResponse<SessionCodeExecutionResponse>,
-  {},
-  Foundations.ErrorResponse
+  Foundations.AcceptedResponse<SessionCodeExecutionAsyncResponse> | Foundations.ResourceOkResponse<SessionCodeExecutionResponse>
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" ""

@@ -18,7 +18,6 @@ model SessionResourceFileNameParameter {
 model SessionIdentifier {
   @doc("The identifier of the session.")
   @query
-  @extension("x-ms-parameter-location", "client")
   identifier: string;
 }
 
@@ -26,7 +25,6 @@ model SessionIdentifier {
 model CodeExecutionIdentifier {
   @doc("The identifier of code execution.")
   @path
-  @extension("x-ms-parameter-location", "client")
   executionId: string;
 }
 
@@ -34,6 +32,5 @@ model CodeExecutionIdentifier {
 model SessionresourceFilePathParameter {
   @doc("The path of the file after uploaded.")
   @query
-  @extension("x-ms-parameter-location", "client")
   path: string;
 }
