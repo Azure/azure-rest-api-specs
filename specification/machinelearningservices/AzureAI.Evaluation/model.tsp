@@ -39,7 +39,7 @@ model AppInsightsConfiguration extends InputData {
 
   type: "app_insights";
 
-  @doc("Application Insight's resource_id")
+  @doc("LogAnalytic Workspace resourceID associated with AppInsights")
   resourceId: string;
 
   @doc("Query to fetch data.")
@@ -206,10 +206,10 @@ model EvaluationSchedule {
   ...Evaluation;
 
   @doc("Recurrence pattern for the evaluation.")
-  recurrence: Recurrence;
+  recurrence?: Recurrence;
 
   @doc ("Cron expression for the evaluation.")
-  cronExpression: string;
+  cronExpression?: string;
 
   @doc("Sampling strategy for the evaluation.")
   samplingStrategy: SamplingStrategy;
