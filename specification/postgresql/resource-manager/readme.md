@@ -65,6 +65,7 @@ input-file:
   - Microsoft.DBforPostgreSQL/preview/2024-11-01-preview/ServerLogs.json
   - Microsoft.DBforPostgreSQL/preview/2024-11-01-preview/ServerStartStopRestart.json
   - Microsoft.DBforPostgreSQL/preview/2024-11-01-preview/ThreatProtection.json
+  - Microsoft.DBforPostgreSQL/preview/2024-11-01-preview/TuningOptions.json
   - Microsoft.DBforPostgreSQL/preview/2024-11-01-preview/VirtualEndpoints.json
   - Microsoft.DBforPostgreSQL/preview/2024-11-01-preview/VirtualNetwork.json
 suppressions:
