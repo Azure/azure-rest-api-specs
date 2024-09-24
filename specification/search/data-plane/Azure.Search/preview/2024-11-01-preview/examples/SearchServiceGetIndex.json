@@ -4,7 +4,7 @@
   "parameters": {
     "endpoint": "https://previewexampleservice.search.windows.net",
     "indexName": "preview-test",
-    "api-version": "2024-09-01-preview",
+    "api-version": "2024-11-01-preview",
     "x-ms-client-request-id": "00000000-0000-0000-0000-000000000000"
   },
   "responses": {
@@ -303,19 +303,25 @@
             {
               "name": "mySQ8",
               "kind": "scalarQuantization",
-              "rerankWithOriginalVectors": true,
-              "defaultOversampling": 10.0,
               "truncationDimension": 2,
               "scalarQuantizationParameters": {
                 "quantizedDataType": "int8"
+              },
+              "rescoringOptions": {
+                "enableRescoring": true,
+                "defaultOversampling": 10.0,
+                "rescoreStorageMethod": "preserveOriginals"
               }
             },
             {
               "name": "myBQC",
               "kind": "binaryQuantization",
-              "rerankWithOriginalVectors": true,
-              "defaultOversampling": 10.0,
-              "truncationDimension": 2
+              "truncationDimension": 2,
+              "rescoringOptions": {
+                "enableRescoring": true,
+                "defaultOversampling": 10.0,
+                "rescoreStorageMethod": "preserveOriginals"
+              }
             }
           ]
         }

@@ -4,7 +4,7 @@
   "parameters": {
     "endpoint": "https://previewexampleservice.search.windows.net",
     "skillsetName": "myskillset",
-    "api-version": "2024-09-01-preview",
+    "api-version": "2024-11-01-preview",
     "x-ms-client-request-id": "00000000-0000-0000-0000-000000000000"
   },
   "responses": {
@@ -124,6 +124,26 @@
               }
             ],
             "httpHeaders": {}
+          },
+          {
+            "@odata.type": "#Microsoft.Skills.Util.DocumentIntelligenceLayoutSkill",
+            "name": "docIntelligenceLayoutSkill",
+            "context": "/document",
+            "outputMode": "oneToMany",
+            "markdownHeaderDepth": "h3",
+            "inputs": [
+              {
+                "name": "file_data",
+                "source": "/document/content",
+                "inputs": []
+              }
+            ],
+            "outputs": [
+              {
+                "name": "markdown_document",
+                "targetName": "markdown_document"
+              }
+            ]
           }
         ],
         "encryptionKey": {

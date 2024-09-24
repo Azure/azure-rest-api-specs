@@ -3,7 +3,7 @@
   "title": "SearchServiceCreateIndexer",
   "parameters": {
     "endpoint": "https://previewexampleservice.search.windows.net",
-    "api-version": "2024-09-01-preview",
+    "api-version": "2024-11-01-preview",
     "x-ms-client-request-id": "00000000-0000-0000-0000-000000000000",
     "indexer": {
       "name": "myindexer",
@@ -16,7 +16,11 @@
       },
       "parameters": {
         "maxFailedItems": 10,
-        "maxFailedItemsPerBatch": 5
+        "maxFailedItemsPerBatch": 5,
+        "configuration": {
+          "parsingMode": "markdown",
+          "markdownParsingSubmode": "oneToMany"
+        }
       },
       "fieldMappings": [],
       "outputFieldMappings": [],
@@ -48,7 +52,10 @@
         "parameters": {
           "maxFailedItems": 10,
           "maxFailedItemsPerBatch": 5,
-          "configuration": {}
+          "configuration": {
+            "parsingMode": "markdown",
+            "markdownParsingSubmode": "oneToMany"
+          }
         },
         "fieldMappings": [],
         "outputFieldMappings": [],

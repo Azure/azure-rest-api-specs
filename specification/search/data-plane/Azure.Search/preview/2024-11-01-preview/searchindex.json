@@ -1308,6 +1308,13 @@
           "x-nullable": true,
           "description": "The answers query results for the search operation; null if the answers query parameter was not specified or set to 'none'."
         },
+        "@search.debugInfo": {
+          "$ref": "#/definitions/DebugInfo",
+          "readOnly": true,
+          "x-ms-client-name": "DebugInfo",
+          "x-nullable": true,
+          "description": "Debug information that applies to the search results as a whole."
+        },
         "@search.nextPageParameters": {
           "$ref": "#/definitions/SearchRequest",
           "readOnly": true,
@@ -1340,6 +1347,12 @@
           "readOnly": true,
           "x-ms-client-name": "SemanticPartialResponseType",
           "description": "Type of partial response that was returned for a semantic ranking request."
+        },
+        "@search.semanticQueryRewriteResultType": {
+          "$ref": "#/definitions/SemanticQueryRewriteResultType",
+          "readOnly": true,
+          "x-ms-client-name": "SemanticQueryRewriteResultType",
+          "description": "Type of query rewrite that was used to retrieve documents."
         }
       },
       "required": [
@@ -1526,7 +1539,8 @@
         "disabled",
         "semantic",
         "vector",
-        "queryRewrites"
+        "queryRewrites",
+         "all"
       ],
       "x-ms-enum": {
         "name": "QueryDebugMode",
@@ -1551,6 +1565,11 @@
             "value": "queryRewrites",
             "name": "QueryRewrites",
             "description": "Allows the user to explore the list of query rewrites generated for their search request."
+          },
+          {
+            "value": "all",
+            "name": "All",
+            "description": "Turn on all debug options."
           }
         ]
       },
@@ -2571,6 +2590,10 @@
           "$ref": "#/definitions/Captions",
           "description": "A value that specifies whether captions should be returned as part of the search response."
         },
+        "queryRewrites": {
+          "$ref": "#/definitions/QueryRewrites",
+          "description": "A value that specifies whether query rewrites should be generated to augment the search query."
+        },
         "semanticFields": {
           "type": "string",
           "description": "The comma-separated list of field names used for semantic ranking."
@@ -2854,6 +2877,24 @@
       },
       "description": "Type of partial response that was returned for a semantic ranking request."
     },
+    "SemanticQueryRewriteResultType": {
+      "type": "string",
+      "enum": [
+        "originalQueryOnly"
+      ],
+      "x-ms-enum": {
+        "name": "SemanticQueryRewriteResultType",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "originalQueryOnly",
+            "name": "OriginalQueryOnly",
+            "description": "Query rewrites were not succesfully generated for this request. Only the original query was used to retrieve the results."
+          }
+        ]
+      },
+      "description": "Type of query rewrite that was used for this request."
+    },
     "SemanticErrorHandling": {
       "type": "string",
       "enum": [
@@ -2950,6 +2991,17 @@
       },
       "description": "When QueryRewrites is set to `generative`, the query terms are sent to a generate model which will produce 10 (default) rewrites to help increase the recall of the request. The requested count can be configured by appending the pipe character `|` followed by the `count-<number of rewrites>` option, such as `generative|count-3`. Defaults to `None`. This parameter is only valid if the query type is `semantic`."
     },
+    "DebugInfo": {
+      "type": "object",
+      "properties": {
+        "queryRewrites": {
+          "$ref": "#/definitions/QueryRewritesDebugInfo",
+          "readOnly": true,
+          "description": "Contains debugging information specific to query rewrites."
+        }
+      },
+      "description": "Contains debugging information that can be used to further explore your search results."
+    },
     "DocumentDebugInfo": {
       "type": "object",
       "properties": {
@@ -2962,11 +3014,6 @@
           "$ref": "#/definitions/VectorsDebugInfo",
           "readOnly": true,
           "description": "Contains debugging information specific to vector and hybrid search."
-        },
-        "queryRewrites": {
-          "$ref": "#/definitions/QueryRewritesDebugInfo",
-          "readOnly": true,
-          "description": "Contains debugging information specific to query rewrites."
         }
       },
       "description": "Contains debugging information that can be used to further explore your search results."

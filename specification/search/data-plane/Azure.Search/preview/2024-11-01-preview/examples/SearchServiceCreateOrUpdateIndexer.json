@@ -4,7 +4,7 @@
   "parameters": {
     "endpoint": "https://previewexampleservice.search.windows.net",
     "indexerName": "myindexer",
-    "api-version": "2024-09-01-preview",
+    "api-version": "2024-11-01-preview",
     "ignoreResetRequirements": null,
     "disableCacheReprocessingChangeDetection": null,
     "x-ms-client-request-id": "00000000-0000-0000-0000-000000000000",
@@ -22,7 +22,11 @@
       },
       "parameters": {
         "maxFailedItems": 10,
-        "maxFailedItemsPerBatch": 5
+        "maxFailedItemsPerBatch": 5,
+        "configuration": {
+          "parsingMode": "markdown",
+          "markdownParsingSubmode": "oneToOne"
+        }
       },
       "fieldMappings": [],
       "outputFieldMappings": [],
@@ -55,7 +59,10 @@
         "parameters": {
           "maxFailedItems": 10,
           "maxFailedItemsPerBatch": 5,
-          "configuration": {}
+          "configuration": {
+            "parsingMode": "markdown",
+            "markdownParsingSubmode": "oneToOne"
+          }
         },
         "fieldMappings": [],
         "outputFieldMappings": [],
@@ -86,7 +93,10 @@
         "parameters": {
           "maxFailedItems": 10,
           "maxFailedItemsPerBatch": 5,
-          "configuration": {}
+          "configuration": {
+            "parsingMode": "markdown",
+            "markdownParsingSubmode": "oneToOne"
+          }
         },
         "fieldMappings": [],
         "outputFieldMappings": [],

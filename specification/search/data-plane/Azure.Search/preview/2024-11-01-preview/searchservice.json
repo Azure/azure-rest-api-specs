@@ -7293,7 +7293,7 @@
           {
             "value": "markdown",
             "name": "Markdown",
-            "description": "Set to markdown to extract structured content from markdown files."
+            "description": "Set to markdown to extract content from markdown files."
           }
         ]
       },
@@ -7400,12 +7400,12 @@
           {
             "value": "oneToMany",
             "name": "OneToMany",
-            "description": "Indicates that markdown files will be parsed into one or more search documents. This is the default."
+            "description": "Indicates that each section of the markdown file (up to a specified depth) will be parsed into individual search documents. This can result in a single markdown file producing multiple search documents. This is the default sub-mode."
           },
           {
             "value": "oneToOne",
             "name": "OneToOne",
-            "description": "Indicates that markdown files will be parsed into exactly one search document."
+            "description": "Indicates that each markdown file will be parsed into a single search document."
           }
         ]
       },
@@ -9079,7 +9079,7 @@
       ]
     },
     "AIServicesAccountKey": {
-      "description": "The multi-region account key of an Azure AI service resource that's attached to a skillset.",
+      "description": "The account key of an Azure AI service resource that's attached to a skillset, to be used with the resource's subdomain.",
       "x-ms-discriminator-value": "#Microsoft.Azure.Search.AIServicesByKey",
       "allOf": [
         {
@@ -9850,6 +9850,98 @@
         "url": "https://learn.microsoft.com/azure/search/cognitive-search-skill-document-extraction"
       },
       "description": "A skill that extracts content from a file within the enrichment pipeline."
+    },
+    "DocumentIntelligenceLayoutSkill": {
+      "x-ms-discriminator-value": "#Microsoft.Skills.Util.DocumentIntelligenceLayoutSkill",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SearchIndexerSkill"
+        }
+      ],
+      "properties": {
+        "outputMode": {
+          "$ref": "#/definitions/DocumentIntelligenceLayoutSkillOutputMode",
+          "x-nullable": true,
+          "description": "Controls the cardinality of the output produced by the skill."
+        },
+        "markdownHeaderDepth": {
+          "$ref": "#/definitions/DocumentIntelligenceLayoutSkillMarkdownHeaderDepth",
+          "x-nullable": true,
+          "description": "The depth of headers in the markdown output. Default is h6"
+        }
+      },
+      "externalDocs": {
+        "url": "https://learn.microsoft.com/azure/search/cognitive-search-skill-document-extraction"
+      },
+      "description": "A skill that extracts content and layout information (as markdown), via Azure AI Services, from files within the enrichment pipeline."
+    },
+    "DocumentIntelligenceLayoutSkillOutputMode": {
+      "type": "string",
+      "enum": [
+        "oneToOne"
+      ],
+      "x-ms-enum": {
+        "name": "DocumentIntelligenceLayoutSkillOutputMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "oneToMany",
+            "name": "OneToMany",
+            "description": "Specify the deepest markdown header section to parse."
+          }
+        ]
+      },
+      "default": "oneToMany",
+      "description": "Controls the cardinality of the output produced by the skill."
+    },
+    "DocumentIntelligenceLayoutSkillMarkdownHeaderDepth": {
+      "type": "string",
+      "enum": [
+        "h1",
+        "h2",
+        "h3",
+        "h4",
+        "h5",
+        "h6"
+      ],
+      "x-ms-enum": {
+        "name": "DocumentIntelligenceLayoutSkillMarkdownHeaderDepth",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "h1",
+            "name": "H1",
+            "description": "Header level 1."
+          },
+          {
+            "value": "h2",
+            "name": "H2",
+            "description": "Header level 2."
+          },
+          {
+            "value": "h3",
+            "name": "H3",
+            "description": "Header level 3."
+          },
+          {
+            "value": "h4",
+            "name": "H4",
+            "description": "Header level 4."
+          },
+          {
+            "value": "h5",
+            "name": "H5",
+            "description": "Header level 5."
+          },
+          {
+            "value": "h6",
+            "name": "H6",
+            "description": "Header level 6."
+          }
+        ]
+      },
+      "default": "h6",
+      "description": "The depth of headers in the markdown output."
     },
     "WebApiSkill": {
       "x-ms-discriminator-value": "#Microsoft.Skills.Custom.WebApiSkill",
