@@ -525,12 +525,10 @@
             "in": "body",
             "description": "The database names to add to the SQL Server availability group resource.",
             "required": true,
-            "schema": {
-              "type": "array",
+            "type": "array",
               "items": {
                 "type": "string"
               }
-            }
           }
         ],
         "responses": {
@@ -583,7 +581,7 @@
             "description": "The database names to remove from the SQL Server availability group resource.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/databases"
+              "$ref": "#/definitions/Databases"
             }
           }
         ],
@@ -1155,7 +1153,7 @@
         }
       }
     },
-    "databases": {
+    "Databases": {
       "type": "array",
       "description": "List of database names.",
       "items": {
