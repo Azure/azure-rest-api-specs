@@ -21,30 +21,32 @@ alias SessionTraits = NoRepeatableRequests &
 
 alias SessionOperations = Azure.Core.ResourceOperations<SessionTraits>;
 
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations" ""
-@doc("Execute code in a session.")
-@route("/execute")
-op executeCode is Foundations.Operation<
-  {
-    ...SessionIdentifier;
+interface CodeExecution {
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" ""
+  @doc("Execute code in a session.")
+  @route("/execute")
+  executeCode is Foundations.Operation<
+    {
+      ...SessionIdentifier;
 
-    @doc("The request to execute code.")
-    @body
-    codeExecutionRequest: SessionCodeExecutionRequest;
-  },
-  Foundations.AcceptedResponse<SessionCodeExecutionAsyncResponse> | Foundations.ResourceOkResponse<SessionCodeExecutionResponse>
->;
+      @doc("The request to execute code.")
+      @body
+      codeExecutionRequest: SessionCodeExecutionRequest;
+    },
+    Foundations.AcceptedResponse<SessionCodeExecutionAsyncResponse> | Foundations.ResourceOkResponse<SessionCodeExecutionResponse>
+  >;
 
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations" ""
-@doc("Get the code execution result.")
-@route("/execute/{executionId}")
-op getCodeExecutionResult is Foundations.Operation<
-  {
-    ...SessionIdentifier;
-    ...CodeExecutionIdentifier;
-  },
-  SessionCodeExecutionResponse
->;
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" ""
+  @doc("Get the code execution result.")
+  @route("/execute/{executionId}")
+  getCodeExecutionResult is Foundations.Operation<
+    {
+      ...SessionIdentifier;
+      ...CodeExecutionIdentifier;
+    },
+    SessionCodeExecutionResponse
+  >;
+}
 
 interface SessionResourceFiles {
   @doc("List the file resources.")
@@ -72,15 +74,15 @@ interface SessionResourceFiles {
     },
     SessionResourceFile
   >;
-}
 
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations" ""
-@doc("Upload a file to a session.")
-@route("/files/{fileName}/content")
-op downloadFile is Foundations.Operation<
-  {
-    ...SessionIdentifier;
-    ...SessionResourceFileNameParameter;
-  },
-  bytes
->;
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" ""
+  @doc("Upload a file to a session.")
+  @route("/files/{fileName}/content")
+  downloadFile is Foundations.Operation<
+    {
+      ...SessionIdentifier;
+      ...SessionResourceFileNameParameter;
+    },
+    bytes
+  >;
+}

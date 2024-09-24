@@ -54,7 +54,7 @@
   "paths": {
     "/execute": {
       "post": {
-        "operationId": "ExecuteCode",
+        "operationId": "CodeExecution_ExecuteCode",
         "description": "Execute code in a session.",
         "parameters": [
           {
@@ -110,18 +110,18 @@
           }
         },
         "x-ms-examples": {
-          "ExecuteCode_Result": {
-            "$ref": "./examples/ExecuteCode_Result.json"
+          "CodeExecution_ExecuteCode_Result": {
+            "$ref": "./examples/CodeExecution_ExecuteCode_Result.json"
           },
-          "ExecuteCode_StandardOut": {
-            "$ref": "./examples/ExecuteCode_StandardOut.json"
+          "CodeExecution_ExecuteCode_StandardOut": {
+            "$ref": "./examples/CodeExecution_ExecuteCode_StandardOut.json"
           }
         }
       }
     },
     "/execute/{executionId}": {
       "get": {
-        "operationId": "GetCodeExecutionResult",
+        "operationId": "CodeExecution_GetCodeExecutionResult",
         "description": "Get the code execution result.",
         "parameters": [
           {
@@ -155,8 +155,8 @@
           }
         },
         "x-ms-examples": {
-          "GetCodeExecutionResult": {
-            "$ref": "./examples/GetCodeExecutionResult.json"
+          "CodeExecution_GetCodeExecutionResult": {
+            "$ref": "./examples/CodeExecution_GetCodeExecutionResult.json"
           }
         }
       }
@@ -292,7 +292,7 @@
     },
     "/files/{fileName}/content": {
       "get": {
-        "operationId": "DownloadFile",
+        "operationId": "SessionResourceFiles_DownloadFile",
         "description": "Upload a file to a session.",
         "parameters": [
           {
@@ -327,8 +327,8 @@
           }
         },
         "x-ms-examples": {
-          "DownloadFile": {
-            "$ref": "./examples/DownloadFile.json"
+          "SessionResourceFiles_DownloadFile": {
+            "$ref": "./examples/SessionResourceFiles_DownloadFile.json"
           }
         }
       }
