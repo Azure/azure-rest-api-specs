@@ -1389,6 +1389,45 @@
         "isEnabled"
       ]
     },
+    "WhatsAppChannel": {
+      "type": "object",
+      "description": "WhatsApp channel definition",
+      "x-ms-discriminator-value": "WhatsAppChannel",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Channel"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/WhatsAppChannelProperties",
+          "description": "The set of properties specific to bot WhatsAppChannel channel"
+        }
+      }
+    },
+    "WhatsAppChannelProperties": {
+      "properties": {
+        "verifyToken": {
+          "x-ms-secret": true,
+          "type": "string",
+          "readOnly": true,
+          "description": "Verify token. Value only returned through POST to the action Channel List API, otherwise empty."
+        },
+        "callbackUrl": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Callback Url"
+        },
+        "isEnabled": {
+          "type": "boolean",
+          "description": "Whether this channel is enabled for the bot"
+        }
+      },
+      "description": "The parameters to provide for the WhatsApp channel.",
+      "required": [
+        "isEnabled"
+      ]
+    },
     "FacebookChannel": {
       "type": "object",
       "description": "Facebook channel definition",
@@ -2479,6 +2518,7 @@
       "enum": [
         "AlexaChannel",
         "FacebookChannel",
+        "WhatsAppChannel",
         "EmailChannel",
         "KikChannel",
         "TelegramChannel",
@@ -2500,6 +2540,9 @@
           },
           {
             "value": "FacebookChannel"
+          },
+          {
+            "value": "WhatsAppChannel"
           },
           {
             "value": "EmailChannel"
