@@ -279,7 +279,7 @@ suppressions:
     reason: PATCH and PUT follow the same behavior and response codes in Compute. Keeping it for legacy reasons.
     from: gallery.json
   - code: AvoidAdditionalProperties
-    reason: The backend service expects a string:string Dictionary for this property.
+    reason: The gallery backend service just treats this as a bag of properties to pass to downstream services.
     from: gallery.json
     where: $.definitions.AccessControlRulesPrivilege.properties.queryParameters
 ```
