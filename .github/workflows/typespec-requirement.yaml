@@ -33,4 +33,12 @@ jobs:
             -BaseCommitish HEAD^ `
             -TargetCommitish HEAD `
             -SpecType ${{ matrix.spec-type }}
+        id: tsr-ps1
         shell: pwsh
+
+      - name: Add label "brownfield"
+        if: ${{ steps.tsr-ps1.outputs.SPEC_TYPE == 'brownfield' }}
+        uses: actions/github-script@v7
+        with:
+          script: |
+            // TODO
