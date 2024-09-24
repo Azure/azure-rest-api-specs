@@ -52,7 +52,49 @@
   },
   "tags": [],
   "paths": {
-    "/execute": {
+    "/execute/{executionId}": {
+      "get": {
+        "operationId": "CodeExecution_GetResult",
+        "description": "Get the code execution result.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SessionIdentifier"
+          },
+          {
+            "$ref": "#/parameters/CodeExecutionIdentifier"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/SessionCodeExecutionResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CodeExecution_GetResult": {
+            "$ref": "./examples/CodeExecution_GetResult.json"
+          }
+        }
+      }
+    },
+    "/execute:executeCode": {
       "post": {
         "operationId": "CodeExecution_ExecuteCode",
         "description": "Execute code in a session.",
@@ -119,48 +161,6 @@
           "final-state-via": "operation-location"
         },
         "x-ms-long-running-operation": true
-      }
-    },
-    "/execute/{executionId}": {
-      "get": {
-        "operationId": "CodeExecution_GetResult",
-        "description": "Get the code execution result.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SessionIdentifier"
-          },
-          {
-            "$ref": "#/parameters/CodeExecutionIdentifier"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/SessionCodeExecutionResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "CodeExecution_GetResult": {
-            "$ref": "./examples/CodeExecution_GetResult.json"
-          }
-        }
       }
     },
     "/files": {
@@ -455,7 +455,8 @@
       "description": "Code execution status.",
       "enum": [
         "Success",
-        "Failure"
+        "Failure",
+        "Canceled"
       ],
       "x-ms-enum": {
         "name": "CodeExecutionStatus",
@@ -470,6 +471,11 @@
             "name": "Failure",
             "value": "Failure",
             "description": "The code execution failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "The code execution canceled."
           }
         ]
       }
@@ -528,30 +534,6 @@
         ]
       }
     },
-    "NetworkStatus": {
-      "type": "string",
-      "description": "Network status.",
-      "enum": [
-        "EgressEnabled",
-        "EgressDisabled"
-      ],
-      "x-ms-enum": {
-        "name": "NetworkStatus",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "egressEnabled",
-            "value": "EgressEnabled",
-            "description": "Session egress enabled."
-          },
-          {
-            "name": "egressDisabled",
-            "value": "EgressDisabled",
-            "description": "Session egress disabled."
-          }
-        ]
-      }
-    },
     "PagedSessionResourceFile": {
       "type": "object",
       "description": "Paged collection of SessionResourceFile items",
@@ -586,10 +568,6 @@
           "$ref": "#/definitions/ExecutionType",
           "description": "The execution type of the code execution request."
         },
-        "networkStatus": {
-          "$ref": "#/definitions/NetworkStatus",
-          "description": "The network status of the code execution session."
-        },
         "code": {
           "type": "string",
           "description": "The string of the code to execute, based on CodeInputType."
@@ -628,7 +606,6 @@
       "required": [
         "codeInputType",
         "executionType",
-        "networkStatus",
         "code",
         "timeoutInSeconds",
         "id",
@@ -651,10 +628,6 @@
           "$ref": "#/definitions/ExecutionType",
           "description": "The execution type of the code execution request."
         },
-        "networkStatus": {
-          "$ref": "#/definitions/NetworkStatus",
-          "description": "The network status of the code execution session."
-        },
         "code": {
           "type": "string",
           "description": "The string of the code to execute, based on CodeInputType."
@@ -668,7 +641,6 @@
       "required": [
         "codeInputType",
         "executionType",
-        "networkStatus",
         "code",
         "timeoutInSeconds"
       ]
@@ -684,10 +656,6 @@
         "executionType": {
           "$ref": "#/definitions/ExecutionType",
           "description": "The execution type of the code execution request."
-        },
-        "networkStatus": {
-          "$ref": "#/definitions/NetworkStatus",
-          "description": "The network status of the code execution session."
         },
         "code": {
           "type": "string",
@@ -727,7 +695,6 @@
       "required": [
         "codeInputType",
         "executionType",
-        "networkStatus",
         "code",
         "timeoutInSeconds",
         "id",

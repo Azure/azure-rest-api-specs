@@ -13,9 +13,6 @@ model SessionCodeExecutionRequest {
   @doc("The execution type of the code execution request.")
   executionType: ExecutionType;
 
-  @doc("The network status of the code execution session.")
-  networkStatus: NetworkStatus;
-
   @doc("The string of the code to execute, based on CodeInputType.")
   code: string;
 
@@ -84,17 +81,6 @@ union ExecutionType {
   asynchronous: "Asynchronous",
 }
 
-@doc("Network status.")
-union NetworkStatus {
-  string,
-
-  @doc("Session egress enabled.")
-  egressEnabled: "EgressEnabled",
-
-  @doc("Session egress disabled.")
-  egressDisabled: "EgressDisabled",
-}
-
 @doc("Code execution status.")
 union CodeExecutionStatus {
   string,
@@ -104,4 +90,7 @@ union CodeExecutionStatus {
 
   @doc("The code execution failed.")
   Failure: "Failure",
+
+  @doc("The code execution canceled.")
+  Canceled: "Canceled",
 }
