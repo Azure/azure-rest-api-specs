@@ -122,7 +122,7 @@ namespace FaceAdministrationClient {
 
   #suppress "@azure-tools/typespec-client-generator-core/client-service" "TCGC bug"
   @operationGroup
-  @clientInitialization(LargeFaceListClientOptions, "java")
+  @clientInitialization(LargeFaceListClientOptions, "csharp,java")
   @clientName("LargeFaceListClientImpl", "csharp")
   interface LargeFaceList {
     @doc("Please refer to https://learn.microsoft.com/rest/api/face/face-list-operations/create-large-face-list for more details.")
@@ -160,7 +160,7 @@ namespace FaceAdministrationClient {
 
   #suppress "@azure-tools/typespec-client-generator-core/client-service" "TCGC bug"
   @operationGroup
-  @clientInitialization(LargePersonGroupOptions, "java")
+  @clientInitialization(LargePersonGroupOptions, "csharp,java")
   @clientName("LargePersonGroupClientImpl", "csharp")
   interface LargePersonGroup {
     @doc("Please refer to https://learn.microsoft.com/rest/api/face/person-group-operations/create-large-person-group for more details.")
