@@ -4065,6 +4065,10 @@
           "$ref": "#/definitions/HyperVGeneration",
           "description": "The hypervisor generation of the Virtual Machine [V1, V2]"
         },
+        "vmImageRepositoryCredentials": {
+          "$ref": "#/definitions/VmImageRepositoryCredentials",
+          "description": "The credentials used to login to the image repository that has access to the specified image"
+        },
         "identifier": {
           "$ref": "#/definitions/GalleryImageIdentifier",
           "description": "This is the gallery image definition identifier."
@@ -7161,6 +7165,26 @@
           "description": "The VM Config Agent running on the virtual machine."
         }
       }
+    },
+    "VmImageRepositoryCredentials": {
+      "type": "object",
+      "description": "The credentials used to login to the image repository that has access to the specified image",
+      "properties": {
+        "username": {
+          "type": "string",
+          "description": "Username for accessing image repository"
+        },
+        "password": {
+          "type": "string",
+          "format": "password",
+          "description": "Password for accessing image repository",
+          "x-ms-secret": true
+        }
+      },
+      "required": [
+        "username",
+        "password"
+      ]
     },
     "VmSizeEnum": {
       "type": "string",
