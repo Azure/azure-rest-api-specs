@@ -309,16 +309,8 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "type": "object",
-              "properties": {
-                "content": {
-                  "type": "string",
-                  "format": "byte"
-                }
-              },
-              "required": [
-                "content"
-              ]
+              "type": "string",
+              "format": "byte"
             }
           },
           "default": {
@@ -534,30 +526,6 @@
         ]
       }
     },
-    "MultiArrayStatus": {
-      "type": "string",
-      "description": "Multi array status.",
-      "enum": [
-        "MultiArrayEnabled",
-        "MultiArrayDisabled"
-      ],
-      "x-ms-enum": {
-        "name": "MultiArrayStatus",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "multiArrayEnabled",
-            "value": "MultiArrayEnabled",
-            "description": "Multi array enabled"
-          },
-          {
-            "name": "multiArrayDisabled",
-            "value": "MultiArrayDisabled",
-            "description": "Multi array disabled."
-          }
-        ]
-      }
-    },
     "NetworkStatus": {
       "type": "string",
       "description": "Network status.",
@@ -620,10 +588,6 @@
           "$ref": "#/definitions/NetworkStatus",
           "description": "The network status of the code execution session."
         },
-        "multiArrayStatus": {
-          "$ref": "#/definitions/MultiArrayStatus",
-          "description": "The multi array status of the code execution session."
-        },
         "code": {
           "type": "string",
           "description": "The string of the code to execute, based on CodeInputType."
@@ -663,7 +627,6 @@
         "codeInputType",
         "executionType",
         "networkStatus",
-        "multiArrayStatus",
         "code",
         "timeoutInSeconds",
         "id",
@@ -690,10 +653,6 @@
           "$ref": "#/definitions/NetworkStatus",
           "description": "The network status of the code execution session."
         },
-        "multiArrayStatus": {
-          "$ref": "#/definitions/MultiArrayStatus",
-          "description": "The multi array status of the code execution session."
-        },
         "code": {
           "type": "string",
           "description": "The string of the code to execute, based on CodeInputType."
@@ -708,7 +667,6 @@
         "codeInputType",
         "executionType",
         "networkStatus",
-        "multiArrayStatus",
         "code",
         "timeoutInSeconds"
       ]
@@ -728,10 +686,6 @@
         "networkStatus": {
           "$ref": "#/definitions/NetworkStatus",
           "description": "The network status of the code execution session."
-        },
-        "multiArrayStatus": {
-          "$ref": "#/definitions/MultiArrayStatus",
-          "description": "The multi array status of the code execution session."
         },
         "code": {
           "type": "string",
@@ -772,7 +726,6 @@
         "codeInputType",
         "executionType",
         "networkStatus",
-        "multiArrayStatus",
         "code",
         "timeoutInSeconds",
         "id",
