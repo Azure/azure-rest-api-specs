@@ -54,27 +54,6 @@ model Dataset extends InputData {
   type: "dataset";
 }
 
-@discriminator("type")
-@doc("Evaluation Target.")
-model EvaluationTarget {
-  @doc("Name of the evaluation target.")
-  name?: string;
-}
-
-@doc("Base Model and prompt for evaluation.")
-model BaseModel extends EvaluationTarget {
-  @doc("Base model for evaluation.")
-  model_config: Record<Record<unknown>>;
-
-  @doc("System prompt to be used with base model. This property will hold prompt asset id.")
-  prompt: string;
-
-  @doc("parameters for evaluation.")
-  parameters: Record<string>;
-
-  type: "base_model";
-}
-
 @doc("Evaluation Definition")
 model Evaluation {
   @doc("Identifier of the evaluation.")
@@ -105,9 +84,6 @@ model Evaluation {
 
   @doc("Evaluators to be used for the evaluation.")
   evaluators: Record<EvaluatorConfiguration>;
-
-  @doc("Evaluation Target.")
-  evaluationTarget?: EvaluationTarget;
 }
 
 @doc("Paged evaluation items")
