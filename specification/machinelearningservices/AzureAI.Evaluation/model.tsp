@@ -39,11 +39,14 @@ model AppInsightsConfiguration extends InputData {
 
   type: "app_insights";
 
-  @doc("Application Insight connection string.")
-  connectionString: string;
+  @doc("Application Insight's resource_id")
+  resourceId: string;
 
   @doc("Query to fetch data.")
   query: string;
+
+  @doc("Service name.")
+  serviceName: string
 }
 
 @doc("Dataset as source for evaluation.")
@@ -141,24 +144,28 @@ alias ResourceCreatedResponse<T extends TypeSpec.Reflection.Model> = TypeSpec.Ht
 alias OkResponse<T extends TypeSpec.Reflection.Model> = TypeSpec.Http.Response<200> &
   T;
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Need to add documentation"
 @doc("Frequency of the schedule - day, week, month, hour, minute")
-enum Frequency {
-    Month,
-    Week,
-    Day,
-    Hour,
-    Minute
+union Frequency {
+    Month: "Month",
+    Week:  "Week",
+    Day: "Day",
+    Hour: "Hour",
+    Minute: "Minute",
+    string
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Need to add documentation"
 @doc("WeekDay of the schedule - Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday")
-enum WeekDays {
-    Monday,
-    Tuesday,
-    Wednesday,
-    Thursday,
-    Friday,
-    Saturday,
-    Sunday
+union WeekDays {
+    Monday: "Monday",
+    Tuesday: "Tuesday",
+    Wednesday: "Wednesday",
+    Thursday: "Thursday",
+    Friday: "Friday",
+    Saturday: "Saturday",
+    Sunday: "Sunday",
+    string
 }
 
 @doc("Recurrence Definition")
@@ -195,7 +202,9 @@ model SamplingStrategy {
 }
 
 @doc("Evaluation Schedule Definition")
-model EvaluationSchedule extends Evaluation {
+model EvaluationSchedule {
+  ...Evaluation;
+
   @doc("Recurrence pattern for the evaluation.")
   recurrence: Recurrence;
 
