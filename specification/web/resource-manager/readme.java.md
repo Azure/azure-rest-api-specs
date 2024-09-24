@@ -73,6 +73,7 @@ input-file:
 - Microsoft.Web/stable/2018-02-01/Provider.json
 - Microsoft.Web/stable/2018-02-01/Recommendations.json
 - Microsoft.Web/stable/2018-02-01/ResourceProvider.json
+- Microsoft.Web/stable/2018-02-01/SiteCertificates.json
 - Microsoft.Web/stable/2018-02-01/WebApps.json
 - Microsoft.Web/stable/2018-02-01/AppServiceEnvironments.json
 - Microsoft.Web/stable/2018-02-01/AppServicePlans.json
