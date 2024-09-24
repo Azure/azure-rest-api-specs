@@ -511,52 +511,52 @@
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/businessApplicationAgents/{agentResourceName}/systems/{systemResourceName}/listActions": {
-      "parameters": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-        },
-        {
-          "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
-        },
-        {
-          "$ref": "../../../common/2.0/types.json#/parameters/ODataFilter"
-        },
-        {
-          "$ref": "../../../common/2.0/types.json#/parameters/ODataSkipToken"
-        },
-        {
-          "in": "path",
-          "name": "agentResourceName",
-          "description": "Business Application Agent Name",
-          "required": true,
-          "type": "string",
-          "pattern": "^[a-z0-9,-]*$",
-          "minLength": 3,
-          "maxLength": 63
-        },
-        {
-          "in": "path",
-          "name": "systemResourceName",
-          "description": "The name of the system.",
-          "required": true,
-          "type": "string",
-          "pattern": "^[a-z0-9,-]*$",
-          "minLength": 3,
-          "maxLength": 63
-        }
-      ],
       "post": {
         "tags": [
           "SystemsActions"
         ],
         "operationId": "Systems_ListActions",
         "description": "List of actions for a business application system.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/ODataFilter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/ODataSkipToken"
+          },
+          {
+            "in": "path",
+            "name": "agentResourceName",
+            "description": "Business Application Agent Name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z0-9,-]*$",
+            "minLength": 3,
+            "maxLength": 63
+          },
+          {
+            "in": "path",
+            "name": "systemResourceName",
+            "description": "The name of the system.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z0-9,-]*$",
+            "minLength": 3,
+            "maxLength": 63
+          }
+        ],
         "responses": {
           "200": {
             "description": "List actions for a business application system",
@@ -582,54 +582,54 @@
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/businessApplicationAgents/{agentResourceName}/systems/{systemResourceName}/undoAction": {
-      "parameters": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-        },
-        {
-          "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
-        },
-        {
-          "in": "path",
-          "name": "agentResourceName",
-          "description": "Business Application Agent Name",
-          "required": true,
-          "type": "string",
-          "pattern": "^[a-z0-9,-]*$",
-          "minLength": 3,
-          "maxLength": 63
-        },
-        {
-          "in": "path",
-          "name": "systemResourceName",
-          "description": "The name of the system.",
-          "required": true,
-          "type": "string",
-          "pattern": "^[a-z0-9,-]*$",
-          "minLength": 3,
-          "maxLength": 63
-        },
-        {
-          "in": "body",
-          "description": "Undo action, based on the actionId.",
-          "name": "payload",
-          "schema": {
-            "$ref": "#/definitions/UndoActionPayload"
-          }
-        }
-      ],
       "post": {
         "tags": [
           "SystemsActions"
         ],
         "operationId": "Systems_UndoAction",
         "description": "Undo action, based on the actionId.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "in": "path",
+            "name": "agentResourceName",
+            "description": "Business Application Agent Name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z0-9,-]*$",
+            "minLength": 3,
+            "maxLength": 63
+          },
+          {
+            "in": "path",
+            "name": "systemResourceName",
+            "description": "The name of the system.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z0-9,-]*$",
+            "minLength": 3,
+            "maxLength": 63
+          },
+          {
+            "in": "body",
+            "description": "Undo action, based on the actionId.",
+            "name": "payload",
+            "schema": {
+              "$ref": "#/definitions/UndoActionPayload"
+            }
+          }
+        ],
         "responses": {
           "204": {
             "description": "No Content"
@@ -649,54 +649,54 @@
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/businessApplicationAgents/{agentResourceName}/systems/{systemResourceName}/reportActionStatus": {
-      "parameters": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-        },
-        {
-          "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
-        },
-        {
-          "in": "path",
-          "name": "agentResourceName",
-          "description": "Business Application Agent Name",
-          "required": true,
-          "type": "string",
-          "pattern": "^[a-z0-9,-]*$",
-          "minLength": 3,
-          "maxLength": 63
-        },
-        {
-          "in": "path",
-          "name": "systemResourceName",
-          "description": "The name of the system.",
-          "required": true,
-          "type": "string",
-          "pattern": "^[a-z0-9,-]*$",
-          "minLength": 3,
-          "maxLength": 63
-        },
-        {
-          "in": "body",
-          "name": "payload",
-          "description": "Report a status of the action that was performed by the agent",
-          "schema": {
-            "$ref": "#/definitions/ReportActionStatusPayload"
-          }
-        }
-      ],
       "post": {
         "tags": [
           "SystemsActions"
         ],
         "operationId": "Systems_ReportActionStatus",
         "description": "Report the status of the action.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "in": "path",
+            "name": "agentResourceName",
+            "description": "Business Application Agent Name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z0-9,-]*$",
+            "minLength": 3,
+            "maxLength": 63
+          },
+          {
+            "in": "path",
+            "name": "systemResourceName",
+            "description": "The name of the system.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z0-9,-]*$",
+            "minLength": 3,
+            "maxLength": 63
+          },
+          {
+            "in": "body",
+            "name": "payload",
+            "description": "Report a status of the action that was performed by the agent",
+            "schema": {
+              "$ref": "#/definitions/ReportActionStatusPayload"
+            }
+          }
+        ],
         "responses": {
           "204": {
             "description": "No Content"
