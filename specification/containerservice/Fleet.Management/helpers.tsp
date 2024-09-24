@@ -48,13 +48,6 @@ op FleetCustomPatchSync<
 #suppress "@azure-tools/typespec-azure-core/no-openapi" "DO NOT COPY - TODO migrate to LRO apis"
 @autoRoute
 @doc("Create a {name}", TResource)
-@extension("x-ms-long-running-operation", true)
-@extension(
-  "x-ms-long-running-operation-options",
-  {
-    `final-state-via`: "azure-async-operation",
-  }
-)
 @armResourceCreateOrUpdate(TResource)
 @put
 op FleetArmResourceCreateOrUpdateAsync<

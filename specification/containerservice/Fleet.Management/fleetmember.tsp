@@ -104,12 +104,7 @@ interface FleetMembers {
   @sharedRoute
   @added(Versions.v2023_06_15_preview)
   @operationId("FleetMembers_Update")
-  @extension(
-    "x-ms-long-running-operation-options",
-    {
-      `final-state-via`: "original-uri",
-    }
-  )
+  @finalOperation(FleetMembers.get)
   updateAsync is ArmCustomPatchAsync<
     FleetMember,
     Azure.ResourceManager.Foundations.ResourceUpdateModel<
