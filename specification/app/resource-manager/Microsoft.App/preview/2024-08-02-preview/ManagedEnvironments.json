@@ -1448,6 +1448,10 @@
       "description": "Configuration of Open Telemetry traces",
       "type": "object",
       "properties": {
+        "includeDapr": {
+          "type": "boolean",
+          "description": "Boolean indicating if including dapr traces"
+        },
         "destinations": {
           "description": "Open telemetry traces destinations",
           "type": "array",
@@ -1474,6 +1478,10 @@
       "description": "Configuration of Open Telemetry metrics",
       "type": "object",
       "properties": {
+        "includeKeda": {
+          "type": "boolean",
+          "description": "Boolean indicating if including keda metrics"
+        },
         "destinations": {
           "description": "Open telemetry metrics destinations",
           "type": "array",
@@ -1820,6 +1828,11 @@
           "$ref": "./CommonDefinitions.json#/definitions/WorkloadProfileName",
           "description": "Workload profile type for the workloads to run on."
         },
+        "enableFips": {
+          "type": "boolean",
+          "default": false,
+          "description": "Whether to use a FIPS-enabled OS. Supported only for dedicated workload profiles."
+        },
         "workloadProfileType": {
           "$ref": "./CommonDefinitions.json#/definitions/WorkloadProfileType",
           "description": "Workload profile type for the workloads to run on."
@@ -1913,4 +1926,3 @@
     }
   ]
 }
-
