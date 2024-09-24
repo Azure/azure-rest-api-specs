@@ -61,7 +61,7 @@ interface SessionResourceFiles {
   uploadFile is SessionOperations.ResourceCollectionAction<
     SessionResourceFile,
     {
-      ...SessionresourceFilePathParameter;
+      ...SessionResourceFilePathParameter;
 
       @doc("The content type for the operation. Always multipart/form-data for this operation.")
       @header("content-type")
