@@ -39,6 +39,7 @@ interface VmmServers {
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader
   >;
   /** Updates the VmmServers resource. */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "DO NOT COPY - TODO migrate to LRO apis"
   @summary("Implements VmmServers PATCH method.")
   @extension(
     "x-ms-long-running-operation-options",
@@ -48,6 +49,7 @@ interface VmmServers {
   )
   update is ArmTagsPatchAsync<VmmServer>;
   /** Removes the SCVmm fabric from Azure. */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "DO NOT COPY - TODO migrate to LRO apis"
   @summary("Implements VmmServers DELETE method.")
   @extension(
     "x-ms-long-running-operation-options",
