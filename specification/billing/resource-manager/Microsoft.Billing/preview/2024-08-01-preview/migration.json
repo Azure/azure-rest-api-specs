@@ -74,10 +74,10 @@
           {
             "in": "body",
             "name": "parameters",
-            "description": "Migration mapping details.",
+            "description": "Migration details.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/MigrationMappingProperties"
+              "$ref": "#/definitions/MigrationDetails"
             }
           }
         ],
@@ -85,7 +85,7 @@
           "200": {
             "description": "Migration details.",
             "schema": {
-              "$ref": "#/definitions/MigrationResponse"
+              "$ref": "#/definitions/MigrationDetails"
             }
           },
           "default": {
@@ -107,79 +107,20 @@
     }
   },
   "definitions": {
-    "MigrationMappingProperties": {
-      "description": "Migration mapping properties.",
+    "MigrationDetails": {
+      "description": "Migration details.",
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "./types.json#/definitions/ProxyResourceWithTags"
+        }
+      ],
       "properties": {
-        "destinationBillingScope": {
-          "description": "Destination billing scope to be mapped.",
-          "type": "string"
-        },
-        "status": {
-          "description": "Migration Request status.",
-          "type": "string"
-        },
-        "locale": {
-          "description": "Locale for notifications.",
-          "type": "string"
-        }
-      }
-    },
-    "MigrationResponse": {
-      "description": "Response contains Migration details.",
-      "type": "object",
-       "properties": {
-        "id": {
-          "description": "Resource id",
-          "readOnly": true,
-          "type": "string"
-        },
-        "name": {
-          "description": "Resource name.",
-          "readOnly": true,
-          "type": "string"
-        },
-        "type": {
-          "description": "Resource type",
-          "readOnly": true,
-          "type": "string"
-        },
-        "properties": {
-          "destinationBillingScope": {
-            "description": "Destination billing scope to be mapped.",
-            "type": "string"
-          },
-          "status": {
-            "description": "Migration Status",
-            "type": "string"
-          },
-          "transferId": {
-            "description": "Transfer Id",
-            "type": "string"
-          },
-          "products":{
-            "productType": {
-              "description": "product type",
-              "type": "string"
-            },
-            "productId": {
-              "description": "product Id",
-              "type": "string"
-            },
-            "name": {
-              "description": "product name",
-              "type": "string"
-            },
-            "skuDescription": {
-              "description": "product sku description",
-              "type": "string"
-            },
-            "status": {
-              "description": "product transfer status",
-              "type": "string"
-            }
+        "allOf": [
+          {
+            "$ref": "./types.json#/definitions/MigrationDetails"
           }
-        }
+        ]
       }
     }
   },
