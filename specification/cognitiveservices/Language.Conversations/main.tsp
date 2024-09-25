@@ -100,15 +100,15 @@ model AnalyzeConversationTaskResult {
   kind: AnalyzeConversationTaskResultsKind;
 }
 
-/** The input for a custom conversation task. */
+/** The input for a conversation language understanding task. */
 model ConversationalTask extends AnalyzeConversationTask {
-  /** The input for a custom conversation task. */
+  /** Task kind. */
   kind: AnalyzeConversationTaskKind.Conversation;
 
   /** The input ConversationItem and its optional parameters */
   analysisInput: ConversationAnalysisOptions;
 
-  /** Input parameters necessary for a Conversation task. */
+  /** Input parameters necessary for a Conversation language understanding task. */
   parameters: ConversationTaskParameters;
 }
 
