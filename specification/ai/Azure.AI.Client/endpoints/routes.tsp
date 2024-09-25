@@ -28,7 +28,7 @@ op list is Azure.Core.Foundations.Operation<{}, ConnectionsListResponse>;
  See https://learn.microsoft.com/rest/api/azureml/workspace-connections/list-secrets
 */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-@doc("Get the details of a single connection, includeing credential (if avaialble).")
+@doc("Get the details of a single connection, including credential (if available).")
 @route("connections/{connectionNameInUrl}/listsecrets")
 @post
 op listSecrets is Azure.Core.Foundations.Operation<
@@ -45,7 +45,7 @@ op listSecrets is Azure.Core.Foundations.Operation<
     @doc("The name of the Resource Group.")
     resourceGroupName: string;
 
-    @doc("The name of the workspace (Azire AI Studio hub).")
+    @doc("The name of the workspace (Azure AI Studio hub).")
     workspaceName: string;
 
     @doc("The api version.")

@@ -19,7 +19,7 @@ model ConnectionsListSecretsResponse {
   @doc("The name of the resource")
   name: string;
 
-  @doc("The properties of the resouce")
+  @doc("The properties of the resource")
   properties: ConnectionProperties;
 }
 
