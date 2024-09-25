@@ -3,7 +3,7 @@ import "@typespec/rest";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "./endpoints/routes.tsp";
-import "./assistant/routes.tsp";
+import "./assistants/routes.tsp";
 import "./evaluations/routes.tsp";
 
 using TypeSpec.Http;
