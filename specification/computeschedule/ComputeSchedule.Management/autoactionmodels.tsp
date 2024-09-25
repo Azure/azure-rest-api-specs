@@ -228,6 +228,17 @@ model AutoActionResource {
   notificationSettings?: NotificationProperties[];
 }
 
+@doc("Provisioning state")
+@lroStatus
+union ProvisioningState {
+  ResourceProvisioningState,
+
+  @doc("Resource is being deleted.")
+  Deleting: "Deleting",
+
+  string,
+}
+
 @added(Microsoft.ComputeSchedule.Versions.`2024-08-01-preview`)
 @doc("Auto action properties")
 model AutoActionProperties {
@@ -263,11 +274,17 @@ model AutoActionProperties {
 
   @doc("The status of the last provisioning operation performed on the resource.")
   @visibility("read")
-  provisioningState?: ResourceProvisioningState;
+  provisioningState?: ProvisioningState;
 }
 
 @added(Microsoft.ComputeSchedule.Versions.`2024-08-01-preview`)
 @doc("The auto action resource")
 model AutoAction is TrackedResource<AutoActionProperties> {
   ...ResourceNameParameter<AutoAction>;
+}
+
+@added(Microsoft.ComputeSchedule.Versions.`2024-08-01-preview`)
+@doc("The auto action extension")
+model AutoActionResources is ExtensionResource<AutoActionProperties> {
+  ...ResourceNameParameter<AutoActionResources>;
 }

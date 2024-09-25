@@ -426,7 +426,11 @@
           "readOnly": true
         },
         "statusDetails": {
-          "$ref": "#/definitions/StatusDetail"
+          "type": "array",
+          "description": "The status of the IGVM components",
+          "items": {
+            "$ref": "#/definitions/StatusDetail"
+          }
         }
       }
     },
@@ -848,6 +852,11 @@
         "nicStatus": {
           "type": "string",
           "description": "The status of NIC, up, disconnected.",
+          "readOnly": true
+        },
+        "rdmaCapable": {
+          "type": "boolean",
+          "description": "True if the adapter is RDMA capable.",
           "readOnly": true
         }
       }

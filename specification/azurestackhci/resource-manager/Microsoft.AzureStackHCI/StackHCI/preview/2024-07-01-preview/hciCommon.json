@@ -177,6 +177,107 @@
         }
       }
     },
+    "IdentityProvider": {
+      "type": "string",
+      "description": "Identity Provider for the cluster",
+      "enum": [
+        "ActiveDirectory",
+        "LocalIdentity"
+      ],
+      "default": "ActiveDirectory",
+      "x-ms-enum": {
+        "name": "IdentityProvider",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ActiveDirectory",
+            "value": "ActiveDirectory",
+            "description": "Active Directory as the Identity Provider. This is the default option."
+          },
+          {
+            "name": "LocalIdentity",
+            "value": "LocalIdentity",
+            "description": "Use local identity with Azure Keyvault"
+          }
+        ]
+      }
+    },
+    "ClusterPattern": {
+      "type": "string",
+      "description": "Supported Storage Type for HCI Cluster",
+      "enum": [
+        "Standard",
+        "Stretch",
+        "RackAware"
+      ],
+      "x-ms-enum": {
+        "name": "ClusterPattern",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Standard",
+            "value": "Standard",
+            "description": "Standard cluster."
+          },
+          {
+            "name": "Stretch",
+            "value": "Stretch",
+            "description": "Stretch cluster."
+          },
+          {
+            "name": "RackAware",
+            "value": "RackAware",
+            "description": "RackAware cluster."
+          }
+        ]
+      }
+    },
+    "LocalAvailabilityZones": {
+      "type": "object",
+      "description": "Local Availability Zone information for HCI cluster",
+      "properties": {
+        "localAvailabilityZoneName": {
+          "type": "string",
+          "description": "Local Availability Zone name for HCI cluster"
+        },
+        "localAvailabilityZoneMode": {
+          "$ref": "#/definitions/LocalAvailabilityZoneMode",
+          "description": "Local Availability Zone Mode for HCI cluster. Can be active or passive."
+        },
+        "nodes": {
+          "type": "array",
+          "description": "Nodes belonging to a particular zone",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "LocalAvailabilityZoneMode": {
+      "type": "string",
+      "description": "Local Availability Zone Mode for HCI cluster.",
+      "enum": [
+        "Active",
+        "Passive"
+      ],
+      "x-ms-enum": {
+        "name": "LocalAvailabilityZoneMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Active",
+            "value": "Active",
+            "description": "Local Availability Zone in active mode."
+          },
+          {
+            "name": "Passive",
+            "value": "Passive",
+            "description": "Local Availability Zone in passive mode."
+          }
+        ]
+      }
+    },
     "EceSecrets": {
       "type": "string",
       "description": "Secret names allowed for Enterprise Cloud Engine (ECE) deployment.",

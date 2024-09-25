@@ -7,6 +7,7 @@ import "./solutions.tsp";
 import "./targets.tsp";
 import "./instances.tsp";
 import "./campaigns.tsp";
+import "./common.tsp";
 import "./activations.tsp";
 import "./catalogs.tsp";
 import "./solutionVersions.tsp";
@@ -14,6 +15,7 @@ import "./targetVersions.tsp";
 import "./instanceVersions.tsp";
 import "./catalogVersions.tsp";
 import "./campaignVersions.tsp";
+import "./diagnostics.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
@@ -29,10 +31,3 @@ using Azure.ResourceManager;
 @doc("Microsoft ToolchainOrchestrator Resource Provider.")
 @Azure.ResourceManager.armCommonTypesVersion("v5")
 namespace Microsoft.ToolchainOrchestrator;
-
-@doc("Versions info.")
-enum Versions {
-  /** 2024-04-01-preview preview version */
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-  `2024-04-01-preview`,
-}

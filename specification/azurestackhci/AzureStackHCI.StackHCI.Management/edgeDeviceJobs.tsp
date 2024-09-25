@@ -5,8 +5,6 @@ import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-resource-manager";
 
-import "./hciCommon.tsp";
-
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
@@ -70,6 +68,9 @@ union ProvisioningOsType {
 
   @doc("AzureLinux OS.")
   AzureLinux: "AzureLinux",
+
+  @doc("HCI OS.")
+  HCI: "HCI",
 }
 
 @doc("Job Type supported by Azure Linux Edge Devices.")
@@ -127,17 +128,7 @@ model AzureLinuxCollectLogJobProperties
 
 @doc("Represents the reported properties of a log collection job.")
 model LogCollectionReportedProperties {
-  @doc("The percentage of the job that is complete.")
-  @visibility("read")
-  percentComplete?: int32;
-
-  @doc("Validation status of job.")
-  @visibility("read")
-  validationStatus?: EceActionStatus;
-
-  @doc("Deployment status of job.")
-  @visibility("read")
-  deploymentStatus?: EceActionStatus;
+  ...JobReportedProperties;
 
   @doc("Details of the log collection session.")
   @visibility("read")
@@ -237,25 +228,6 @@ model EdgeDeviceJobProperties {
   @doc("Status of Edge device job.")
   @visibility("read")
   status?: JobStatus;
-
-  @doc("Reported properties for job")
-  @visibility("read")
-  reportedProperties?: EdgeDeviceJobReportedProperties;
-}
-
-@doc("Reported Properties for  job triggered from cloud.")
-model EdgeDeviceJobReportedProperties {
-  @doc("The percentage of the job that is complete.")
-  @visibility("read")
-  percentComplete?: int32;
-
-  @doc("Validation status of job.")
-  @visibility("read")
-  validationStatus?: EceActionStatus;
-
-  @doc("Deployment status of job.")
-  @visibility("read")
-  deploymentStatus?: EceActionStatus;
 }
 
 @doc("Edge device job for Azure Linux solution.")
@@ -293,6 +265,14 @@ model AzureLinuxRoeProvisionOsJobProperties
 
   @doc("Os Provisioning request.")
   provisioningRequest: ProvisioningRequest;
+
+  @doc("Reported Properties for Provision Os job")
+  reportedProperties?: ProvisionOsReportedProperties;
+}
+
+@doc("Reported Properties for Provision Os job")
+model ProvisionOsReportedProperties {
+  ...JobReportedProperties;
 }
 
 @discriminator("target")
@@ -307,6 +287,24 @@ model ProvisioningRequest {
 model AzureLinuxProvisioningRequest extends ProvisioningRequest {
   @doc("Target operating system type to support polymorphic resource.")
   target: ProvisioningOsType.AzureLinux;
+
+  @doc("Operating system profile.")
+  osProfile: OsProfile;
+
+  @doc("User configuration.")
+  userConfiguration: UserConfiguration;
+
+  @doc("Onboarding configuration.")
+  onboardingConfiguration: OnboardingConfiguration;
+
+  @doc("Device configuration.")
+  deviceConfiguration: DeviceConfiguration;
+}
+
+@doc("HCI provisioning request.")
+model HciProvisioningRequest extends ProvisioningRequest {
+  @doc("Target operating system type to support polymorphic resource.")
+  target: ProvisioningOsType.HCI;
 
   @doc("Operating system profile.")
   osProfile: OsProfile;
@@ -475,17 +473,7 @@ model TimeConfiguration {
 
 @doc("Represents the reported properties of a remote support job.")
 model RemoteSupportReportedProperties {
-  @doc("The percentage of the job that is complete.")
-  @visibility("read")
-  percentComplete?: int32;
-
-  @doc("Validation status of job.")
-  @visibility("read")
-  validationStatus?: EceActionStatus;
-
-  @doc("Deployment status of job.")
-  @visibility("read")
-  deploymentStatus?: EceActionStatus;
+  ...JobReportedProperties;
 
   @doc("Optional settings for configuring the node for remote support.")
   @visibility("read")
