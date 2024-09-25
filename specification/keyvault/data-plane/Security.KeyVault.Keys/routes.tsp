@@ -31,9 +31,9 @@ alias KeyVaultListParameters = ListQueryParametersTrait<{
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 @summary("""
-Creates a new key, stores it, then returns key parameters and attributes to the
-client.
-""")
+  Creates a new key, stores it, then returns key parameters and attributes to the
+  client.
+  """)
 @route("/keys/{keyName}/create")
 @post
 op createKey is Azure.Core.Foundations.Operation<
@@ -65,9 +65,9 @@ op createKey is Azure.Core.Foundations.Operation<
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 @summary("""
-Creates a new key version, stores it, then returns key parameters, attributes
-and policy to the client.
-""")
+  Creates a new key version, stores it, then returns key parameters, attributes
+  and policy to the client.
+  """)
 @route("/keys/{keyName}/rotate")
 @post
 op rotateKey is Azure.Core.Foundations.Operation<
@@ -90,9 +90,9 @@ op rotateKey is Azure.Core.Foundations.Operation<
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 @summary("""
-Imports an externally created key, stores it, and returns key parameters and
-attributes to the client.
-""")
+  Imports an externally created key, stores it, and returns key parameters and
+  attributes to the client.
+  """)
 @route("/keys/{keyName}")
 @put
 op importKey is Azure.Core.Foundations.Operation<
@@ -145,9 +145,9 @@ op deleteKey is Azure.Core.Foundations.Operation<
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 @summary("""
-The update key operation changes specified attributes of a stored key and can
-be applied to any key type and key version stored in Azure Key Vault.
-""")
+  The update key operation changes specified attributes of a stored key and can
+  be applied to any key type and key version stored in Azure Key Vault.
+  """)
 @route("/keys/{keyName}/{keyVersion}")
 @patch
 op updateKey is Azure.Core.Foundations.Operation<
@@ -313,9 +313,9 @@ op restoreKey is Azure.Core.Foundations.Operation<
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 @summary("""
-Encrypts an arbitrary sequence of bytes using an encryption key that is stored
-in a key vault.
-""")
+  Encrypts an arbitrary sequence of bytes using an encryption key that is stored
+  in a key vault.
+  """)
 @route("/keys/{keyName}/{keyVersion}/encrypt")
 @post
 op encrypt is Azure.Core.Foundations.Operation<
@@ -503,9 +503,9 @@ op wrapKey is Azure.Core.Foundations.Operation<
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 @summary("""
-Unwraps a symmetric key using the specified key that was initially used for
-wrapping that key.
-""")
+  Unwraps a symmetric key using the specified key that was initially used for
+  wrapping that key.
+  """)
 @route("/keys/{keyName}/{keyVersion}/unwrapkey")
 @post
 op unwrapKey is Azure.Core.Foundations.Operation<
