@@ -470,9 +470,9 @@ op deleteCertificateOperation is Azure.Core.Foundations.Operation<
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 @summary("""
-Merges a certificate or a certificate chain with a key pair existing on the
-server.
-""")
+  Merges a certificate or a certificate chain with a key pair existing on the
+  server.
+  """)
 @route("/certificates/{certificateName}/pending/merge")
 @post
 op mergeCertificate is Azure.Core.Foundations.Operation<
@@ -541,9 +541,9 @@ op restoreCertificate is Azure.Core.Foundations.Operation<
  * soft-delete enabled vaults.
  */
 @summary("""
-Lists the deleted certificates in the specified vault currently available for
-recovery.
-""")
+  Lists the deleted certificates in the specified vault currently available for
+  recovery.
+  """)
 op getDeletedCertificates is KeyVaultOperations.ResourceList<
   DeletedCertificateItem,
   KeyVaultListParameters
@@ -598,9 +598,9 @@ op purgeDeletedCertificate is Azure.Core.Foundations.Operation<
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 @summary("""
-Recovers the deleted certificate back to its current version under
-/certificates.
-""")
+  Recovers the deleted certificate back to its current version under
+  /certificates.
+  """)
 @route("/deletedcertificates/{certificateName}/recover")
 @post
 op recoverDeletedCertificate is Azure.Core.Foundations.Operation<
