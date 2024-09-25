@@ -31,6 +31,48 @@
       },
       "x-ms-azure-resource": true
     },
+    "Products":{
+      "description": "Product Details.",
+      "type": "object",
+      "properties": {
+        "productType": {
+          "description": "product type",
+          "type": "string",
+          "readOnly": true
+        },
+        "productId": {
+          "description": "product Id",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "product name",
+          "type": "string",
+          "readOnly": true
+        },
+        "skuDescription": {
+          "description": "product sku description",
+          "type": "string",
+          "readOnly": true
+        },
+        "status": {
+         "description": "product transfer status",
+         "enum": [
+            "NotStarted",
+            "InProgress",
+            "Completed",
+            "Failed"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "TransferProductStatus",
+            "modelAsString": true
+          }
+        }
+      },
+      "readOnly": true
+    },
     "MigrationDetails": {
       "description": "Migration Details.",
       "type": "object",
@@ -41,7 +83,15 @@
           },
           "status": {
             "description": "Migration Status",
-            "type": "string"
+            "enum": [
+              "Draft",
+              "InProgress"
+            ],
+            "type": "string",
+            "x-ms-enum": {
+              "name": "MigrationStatus",
+              "modelAsString": true
+            }
           },
           "locale": {
             "description": "Locale for notifications. Optional property, used only for migrate enrollment",
@@ -53,32 +103,8 @@
             "readOnly": true
           },
           "products":{
-            "productType": {
-              "description": "product type",
-              "type": "string",
-              "readOnly": true
-            },
-            "productId": {
-              "description": "product Id",
-              "type": "string",
-              "readOnly": true
-            },
-            "name": {
-              "description": "product name",
-              "type": "string",
-              "readOnly": true
-            },
-            "skuDescription": {
-              "description": "product sku description",
-              "type": "string",
-              "readOnly": true
-            },
-            "status": {
-              "description": "product transfer status",
-              "type": "string",
-              "readOnly": true
-            }
-         }
+            "$ref": "#/definitions/Products"
+          }
       }
     }
   },
