@@ -1970,7 +1970,15 @@
         },
         "selectedUserAssignedIdentityResourceId": {
           "type": "string",
-          "description": "Iot Hub selected user-assigned identity resource Id when authenticationType is UserAssigned."
+          "format": "arm-id",
+          "description": "The selected user-assigned identity resource Id associated with IoT Hub. This is required when authenticationType is UserAssigned.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.ManagedIdentity/userAssignedIdentities"
+              }
+            ]
+          }
         }
       },
       "required": [
