@@ -1,0 +1,1171 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "ServiceBusManagementClient",
+    "description": "Azure Service Bus client for managing Namespace",
+    "version": "2024-01-01"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ServiceBus/namespaces": {
+      "get": {
+        "tags": [
+          "Namespaces"
+        ],
+        "operationId": "Namespaces_List",
+        "x-ms-examples": {
+          "NameSpaceList": {
+            "$ref": "./examples/NameSpaces/SBNameSpaceList.json"
+          }
+        },
+        "description": "Gets all the available namespaces within the subscription, irrespective of the resource groups.",
+        "externalDocs": {
+          "url": "https://msdn.microsoft.com/en-us/library/azure/mt639412.aspx"
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Namespaces successfully returned.",
+            "schema": {
+              "$ref": "#/definitions/SBNamespaceListResult"
+            }
+          },
+          "default": {
+            "description": "ServiceBus error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces": {
+      "get": {
+        "tags": [
+          "Namespaces"
+        ],
+        "operationId": "Namespaces_ListByResourceGroup",
+        "x-ms-examples": {
+          "NameSpaceListByResourceGroup": {
+            "$ref": "./examples/NameSpaces/SBNameSpaceListByResourceGroup.json"
+          }
+        },
+        "description": "Gets the available namespaces within a resource group.",
+        "externalDocs": {
+          "url": "https://msdn.microsoft.com/en-us/library/azure/mt639412.aspx"
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Namespaces successfully returned.",
+            "schema": {
+              "$ref": "#/definitions/SBNamespaceListResult"
+            }
+          },
+          "default": {
+            "description": "ServiceBus error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}": {
+      "put": {
+        "tags": [
+          "Namespaces"
+        ],
+        "operationId": "Namespaces_CreateOrUpdate",
+        "x-ms-examples": {
+          "NameSpaceCreate": {
+            "$ref": "./examples/NameSpaces/SBNameSpaceCreate.json"
+          }
+        },
+        "description": "Creates or updates a service namespace. Once created, this namespace's resource manifest is immutable. This operation is idempotent.",
+        "externalDocs": {
+          "url": "https://msdn.microsoft.com/en-us/library/azure/mt639408.aspx"
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "namespaceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The namespace name."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SBNamespace"
+            },
+            "description": "Parameters supplied to create a namespace resource."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Namespace created successfully.",
+            "schema": {
+              "$ref": "#/definitions/SBNamespace"
+            }
+          },
+          "201": {
+            "description": "Namespace create request accepted.",
+            "schema": {
+              "$ref": "#/definitions/SBNamespace"
+            }
+          },
+          "202": {
+            "description": "Namespace create or update request accepted."
+          },
+          "default": {
+            "description": "ServiceBus error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "tags": [
+          "Namespaces"
+        ],
+        "operationId": "Namespaces_Delete",
+        "x-ms-examples": {
+          "NameSpaceDelete": {
+            "$ref": "./examples/NameSpaces/SBNameSpaceDelete.json"
+          }
+        },
+        "description": "Deletes an existing namespace. This operation also removes all associated resources under the namespace.",
+        "externalDocs": {
+          "url": "https://msdn.microsoft.com/en-us/library/azure/mt639389.aspx"
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/NamespaceNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Namespace successfully deleted."
+          },
+          "202": {
+            "description": "Namespace delete request accepted."
+          },
+          "204": {
+            "description": "No content."
+          },
+          "default": {
+            "description": "ServiceBus error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "get": {
+        "tags": [
+          "Namespaces"
+        ],
+        "operationId": "Namespaces_Get",
+        "x-ms-examples": {
+          "NameSpaceGet": {
+            "$ref": "./examples/NameSpaces/SBNameSpaceGet.json"
+          }
+        },
+        "description": "Gets a description for the specified namespace.",
+        "externalDocs": {
+          "url": "https://msdn.microsoft.com/en-us/library/azure/mt639379.aspx"
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/NamespaceNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Namespace successfully returned.",
+            "schema": {
+              "$ref": "#/definitions/SBNamespace"
+            }
+          },
+          "default": {
+            "description": "ServiceBus error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Namespaces"
+        ],
+        "operationId": "Namespaces_Update",
+        "x-ms-examples": {
+          "NameSpaceUpdate": {
+            "$ref": "./examples/NameSpaces/SBNameSpaceUpdate.json"
+          }
+        },
+        "description": "Updates a service namespace. Once created, this namespace's resource manifest is immutable. This operation is idempotent.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/NamespaceNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SBNamespaceUpdateParameters"
+            },
+            "description": "Parameters supplied to update a namespace resource."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Namespace updated successfully.",
+            "schema": {
+              "$ref": "#/definitions/SBNamespace"
+            }
+          },
+          "201": {
+            "description": "Namespace update request accepted.",
+            "schema": {
+              "$ref": "#/definitions/SBNamespace"
+            }
+          },
+          "202": {
+            "description": "Namespace update request accepted."
+          },
+          "default": {
+            "description": "ServiceBus error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/privateEndpointConnections": {
+      "get": {
+        "tags": [
+          "Namespaces PrivateEndpointConnections"
+        ],
+        "operationId": "PrivateEndpointConnections_List",
+        "x-ms-examples": {
+          "NameSpaceCreate": {
+            "$ref": "./examples/NameSpaces/PrivateEndPointConnectionList.json"
+          }
+        },
+        "description": "Gets the available PrivateEndpointConnections within a namespace.",
+        "externalDocs": {
+          "url": "https://msdn.microsoft.com/en-us/library/azure/mt639412.aspx"
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/NamespaceNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "PrivateEndpointConnections successfully returned.",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnectionListResult"
+            }
+          },
+          "default": {
+            "description": "ServiceBus error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/privateEndpointConnections/{privateEndpointConnectionName}": {
+      "put": {
+        "tags": [
+          "Namespaces PrivateEndpointConnections"
+        ],
+        "operationId": "PrivateEndpointConnections_CreateOrUpdate",
+        "x-ms-examples": {
+          "NameSpacePrivateEndPointConnectionCreate": {
+            "$ref": "./examples/NameSpaces/PrivateEndPointConnectionCreate.json"
+          }
+        },
+        "description": "Creates or updates PrivateEndpointConnections of service namespace.",
+        "externalDocs": {
+          "url": "https://msdn.microsoft.com/en-us/library/azure/mt639408.aspx"
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/NamespaceNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/PrivateEndpointConnectionNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnection"
+            },
+            "description": "Parameters supplied to update Status of PrivateEndPoint Connection to namespace resource."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Status of PrivateEndPoint Connection Created successfully.",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnection"
+            }
+          },
+          "201": {
+            "description": "Request to update Status of PrivateEndPoint Connection accepted.",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnection"
+            }
+          },
+          "202": {
+            "description": "Request to update Status of PrivateEndPoint Connection accepted.",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnection"
+            }
+          },
+          "default": {
+            "description": "ServiceBus error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Namespaces PrivateEndpointConnections"
+        ],
+        "operationId": "PrivateEndpointConnections_Delete",
+        "x-ms-examples": {
+          "NameSpacePrivateEndPointConnectionDelete": {
+            "$ref": "./examples/NameSpaces/PrivateEndPointConnectionDelete.json"
+          }
+        },
+        "description": "Deletes an existing Private Endpoint Connection.",
+        "externalDocs": {
+          "url": "https://msdn.microsoft.com/en-us/library/azure/mt639389.aspx"
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/NamespaceNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/PrivateEndpointConnectionNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Private Endpoint Connection successfully deleted."
+          },
+          "202": {
+            "description": "Private Endpoint Connection  delete request accepted."
+          },
+          "204": {
+            "description": "No content."
+          },
+          "default": {
+            "description": "ServiceBus error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "get": {
+        "tags": [
+          "Namespaces PrivateEndpointConnections"
+        ],
+        "operationId": "PrivateEndpointConnections_Get",
+        "x-ms-examples": {
+          "NameSpacePrivateEndPointConnectionGet": {
+            "$ref": "./examples/NameSpaces/PrivateEndPointConnectionGet.json"
+          }
+        },
+        "description": "Gets a description for the specified Private Endpoint Connection.",
+        "externalDocs": {
+          "url": "https://msdn.microsoft.com/en-us/library/azure/mt639379.aspx"
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/NamespaceNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/PrivateEndpointConnectionNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Description of Private Endpoint Connection returned successfully.",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnection"
+            }
+          },
+          "default": {
+            "description": "ServiceBus error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/privateLinkResources": {
+      "get": {
+        "tags": [
+          "Namespaces PrivateLinkResources"
+        ],
+        "operationId": "PrivateLinkResources_Get",
+        "x-ms-examples": {
+          "NameSpacePrivateLinkResourcesGet": {
+            "$ref": "./examples/NameSpaces/PrivateLinkResourcesGet.json"
+          }
+        },
+        "description": "Gets lists of resources that supports Privatelinks.",
+        "externalDocs": {
+          "url": "https://msdn.microsoft.com/en-us/library/azure/mt639379.aspx"
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/NamespaceNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Private Link resource List",
+            "schema": {
+              "$ref": "#/definitions/PrivateLinkResourcesListResult"
+            }
+          },
+          "default": {
+            "description": "ServiceBus error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ResourceNamespacePatch": {
+      "type": "object",
+      "properties": {
+        "location": {
+          "type": "string",
+          "description": "Resource location"
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../common/v1/definitions.json#/definitions/Resource"
+        }
+      ],
+      "description": "The Resource definition."
+    },
+    "SBNamespaceListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SBNamespace"
+          },
+          "description": "Result of the List Namespace operation."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Link to the next set of results. Not empty if Value contains incomplete list of Namespaces."
+        }
+      },
+      "description": "The response of the List Namespace operation."
+    },
+    "SBNamespace": {
+      "type": "object",
+      "properties": {
+        "sku": {
+          "$ref": "#/definitions/SBSku",
+          "description": "Properties of SKU"
+        },
+        "identity": {
+          "$ref": "#/definitions/Identity",
+          "description": "Properties of BYOK Identity description"
+        },
+        "systemData": {
+          "readOnly": true,
+          "description": "The system meta data relating to this resource.",
+          "$ref": "../../../common/v1/definitions.json#/definitions/systemData"
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SBNamespaceProperties",
+          "description": "Properties of the namespace."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../common/v1/definitions.json#/definitions/TrackedResource"
+        }
+      ],
+      "description": "Description of a namespace resource."
+    },
+    "SBNamespaceUpdateParameters": {
+      "type": "object",
+      "properties": {
+        "sku": {
+          "$ref": "#/definitions/SBSku",
+          "description": "Properties of SKU"
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SBNamespaceUpdateProperties",
+          "description": "Properties of the namespace."
+        },
+        "identity": {
+          "$ref": "#/definitions/Identity",
+          "description": "Properties of BYOK Identity description"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceNamespacePatch"
+        }
+      ],
+      "description": "Description of a namespace resource."
+    },
+    "SBNamespaceProperties": {
+      "type": "object",
+      "properties": {
+        "minimumTlsVersion": {
+          "type": "string",
+          "description": "The minimum TLS version for the cluster to support, e.g. '1.2'",
+          "enum": [
+            "1.0",
+            "1.1",
+            "1.2"
+          ],
+          "x-ms-enum": {
+            "name": "TlsVersion",
+            "modelAsString": true
+          }
+        },
+        "provisioningState": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Provisioning state of the namespace."
+        },
+        "status": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Status of the namespace."
+        },
+        "createdAt": {
+          "readOnly": true,
+          "format": "date-time",
+          "type": "string",
+          "description": "The time the namespace was created"
+        },
+        "updatedAt": {
+          "readOnly": true,
+          "format": "date-time",
+          "type": "string",
+          "description": "The time the namespace was updated."
+        },
+        "serviceBusEndpoint": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Endpoint you can use to perform Service Bus operations."
+        },
+        "metricId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Identifier for Azure Insights metrics"
+        },
+        "zoneRedundant": {
+          "type": "boolean",
+          "description": "Enabling this property creates a Premium Service Bus Namespace in regions supported availability zones.",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "encryption": {
+          "$ref": "#/definitions/Encryption",
+          "description": "Properties of BYOK Encryption description"
+        },
+        "privateEndpointConnections": {
+          "description": "List of private endpoint connections.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PrivateEndpointConnection"
+          }
+        },
+        "disableLocalAuth": {
+          "type": "boolean",
+          "description": "This property disables SAS authentication for the Service Bus namespace."
+        },
+        "alternateName": {
+          "type": "string",
+          "description": "Alternate name for namespace"
+        },
+        "publicNetworkAccess": {
+          "description": "This determines if traffic is allowed over public network. By default it is enabled.",
+          "enum": [
+            "Enabled",
+            "Disabled",
+            "SecuredByPerimeter"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "PublicNetworkAccess",
+            "modelAsString": true
+          },
+          "default": "Enabled"
+        },
+        "premiumMessagingPartitions": {
+          "format": "int32",
+          "type": "integer",
+          "description": "The number of partitions of a Service Bus namespace. This property is only applicable to Premium SKU namespaces. The default value is 1 and possible values are 1, 2 and 4"
+        }
+      },
+      "description": "Properties of the namespace."
+    },
+    "SBNamespaceUpdateProperties": {
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Provisioning state of the namespace."
+        },
+        "status": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Status of the namespace."
+        },
+        "createdAt": {
+          "readOnly": true,
+          "format": "date-time",
+          "type": "string",
+          "description": "The time the namespace was created"
+        },
+        "updatedAt": {
+          "readOnly": true,
+          "format": "date-time",
+          "type": "string",
+          "description": "The time the namespace was updated."
+        },
+        "serviceBusEndpoint": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Endpoint you can use to perform Service Bus operations."
+        },
+        "metricId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Identifier for Azure Insights metrics"
+        },
+        "encryption": {
+          "$ref": "#/definitions/Encryption",
+          "description": "Properties of BYOK Encryption description"
+        },
+        "privateEndpointConnections": {
+          "description": "List of private endpoint connections.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PrivateEndpointConnection"
+          }
+        },
+        "disableLocalAuth": {
+          "type": "boolean",
+          "description": "This property disables SAS authentication for the Service Bus namespace."
+        },
+        "alternateName": {
+          "type": "string",
+          "description": "Alternate name for namespace"
+        }
+      },
+      "description": "Properties of the namespace."
+    },
+    "SBSku": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of this SKU.",
+          "enum": [
+            "Basic",
+            "Standard",
+            "Premium"
+          ],
+          "x-ms-enum": {
+            "name": "SkuName",
+            "modelAsString": false
+          }
+        },
+        "tier": {
+          "type": "string",
+          "description": "The billing tier of this particular SKU.",
+          "enum": [
+            "Basic",
+            "Standard",
+            "Premium"
+          ],
+          "x-ms-enum": {
+            "name": "SkuTier",
+            "modelAsString": false
+          }
+        },
+        "capacity": {
+          "format": "int32",
+          "type": "integer",
+          "description": "Messaging units for your service bus premium namespace. Valid capacities are {1, 2, 4, 8, 16} multiples of your properties.premiumMessagingPartitions setting. For example, If properties.premiumMessagingPartitions is 1 then possible capacity values are 1, 2, 4, 8, and 16. If properties.premiumMessagingPartitions is 4 then possible capacity values are 4, 8, 16, 32 and 64"
+        }
+      },
+      "required": [
+        "name"
+      ],
+      "description": "SKU of the namespace."
+    },
+    "Identity": {
+      "type": "object",
+      "x-ms-client-flatten": true,
+      "properties": {
+        "principalId": {
+          "type": "string",
+          "description": "ObjectId from the KeyVault",
+          "readOnly": true
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "TenantId from the KeyVault",
+          "readOnly": true
+        },
+        "type": {
+          "description": "Type of managed service identity.",
+          "enum": [
+            "SystemAssigned",
+            "UserAssigned",
+            "SystemAssigned, UserAssigned",
+            "None"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ManagedServiceIdentityType",
+            "modelAsString": false
+          }
+        },
+        "userAssignedIdentities": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/UserAssignedIdentity"
+          },
+          "description": "Properties for User Assigned Identities"
+        }
+      },
+      "description": "Properties to configure User Assigned Identities for Bring your Own Keys"
+    },
+    "UserAssignedIdentity": {
+      "description": "Recognized Dictionary value.",
+      "type": "object",
+      "properties": {
+        "principalId": {
+          "description": "Principal Id of user assigned identity",
+          "type": "string",
+          "x-ms-client-name": "PrincipalId",
+          "readOnly": true
+        },
+        "clientId": {
+          "description": "Client Id of user assigned identity",
+          "type": "string",
+          "x-ms-client-name": "ClientId",
+          "readOnly": true
+        }
+      }
+    },
+    "Encryption": {
+      "type": "object",
+      "x-ms-client-flatten": true,
+      "properties": {
+        "keyVaultProperties": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/KeyVaultProperties"
+          },
+          "x-ms-client-name": "KeyVaultProperties",
+          "description": "Properties of KeyVault"
+        },
+        "keySource": {
+          "type": "string",
+          "description": "Enumerates the possible value of keySource for Encryption",
+          "default": "Microsoft.KeyVault",
+          "enum": [
+            "Microsoft.KeyVault"
+          ],
+          "x-ms-enum": {
+            "name": "keySource",
+            "modelAsString": false
+          }
+        },
+        "requireInfrastructureEncryption": {
+          "type": "boolean",
+          "description": "Enable Infrastructure Encryption (Double Encryption)"
+        }
+      },
+      "description": "Properties to configure Encryption"
+    },
+    "KeyVaultProperties": {
+      "type": "object",
+      "properties": {
+        "keyName": {
+          "type": "string",
+          "description": "Name of the Key from KeyVault"
+        },
+        "keyVaultUri": {
+          "type": "string",
+          "description": "Uri of KeyVault"
+        },
+        "keyVersion": {
+          "type": "string",
+          "description": "Version of KeyVault"
+        },
+        "identity": {
+          "$ref": "#/definitions/userAssignedIdentityProperties"
+        }
+      },
+      "description": "Properties to configure keyVault Properties"
+    },
+    "PrivateEndpointConnection": {
+      "type": "object",
+      "description": "Properties of the PrivateEndpointConnection.",
+      "allOf": [
+        {
+          "$ref": "../../../common/v2/definitions.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PrivateEndpointConnectionProperties",
+          "description": "Properties of the PrivateEndpointConnection.",
+          "x-ms-client-flatten": true
+        },
+        "systemData": {
+          "readOnly": true,
+          "description": "The system meta data relating to this resource.",
+          "$ref": "../../../common/v1/definitions.json#/definitions/systemData"
+        }
+      }
+    },
+    "PrivateEndpointConnectionProperties": {
+      "type": "object",
+      "description": "Properties of the private endpoint connection resource.",
+      "properties": {
+        "privateEndpoint": {
+          "$ref": "#/definitions/PrivateEndpoint",
+          "description": "The Private Endpoint resource for this Connection."
+        },
+        "privateLinkServiceConnectionState": {
+          "$ref": "#/definitions/ConnectionState",
+          "description": "Details about the state of the connection."
+        },
+        "provisioningState": {
+          "description": "Provisioning state of the Private Endpoint Connection.",
+          "enum": [
+            "Creating",
+            "Updating",
+            "Deleting",
+            "Succeeded",
+            "Canceled",
+            "Failed"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "EndPointProvisioningState",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "PrivateEndpoint": {
+      "type": "object",
+      "description": "PrivateEndpoint information.",
+      "properties": {
+        "id": {
+          "description": "The ARM identifier for Private Endpoint.",
+          "type": "string"
+        }
+      }
+    },
+    "ConnectionState": {
+      "type": "object",
+      "description": "ConnectionState information.",
+      "properties": {
+        "status": {
+          "description": "Status of the connection.",
+          "enum": [
+            "Pending",
+            "Approved",
+            "Rejected",
+            "Disconnected"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "PrivateLinkConnectionStatus",
+            "modelAsString": true
+          }
+        },
+        "description": {
+          "description": "Description of the connection state.",
+          "type": "string"
+        }
+      }
+    },
+    "PrivateEndpointConnectionListResult": {
+      "type": "object",
+      "description": "Result of the list of all private endpoint connections operation.",
+      "properties": {
+        "value": {
+          "description": "A collection of private endpoint connection resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PrivateEndpointConnection"
+          }
+        },
+        "nextLink": {
+          "description": "A link for the next page of private endpoint connection resources.",
+          "type": "string"
+        }
+      }
+    },
+    "PrivateLinkResource": {
+      "type": "object",
+      "description": "Information of the private link resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PrivateLinkResourceProperties",
+          "description": "Properties of the private link resource.",
+          "x-ms-client-flatten": true
+        },
+        "id": {
+          "description": "Fully qualified identifier of the resource.",
+          "type": "string"
+        },
+        "name": {
+          "description": "Name of the resource",
+          "type": "string"
+        },
+        "type": {
+          "description": "Type of the resource",
+          "type": "string"
+        }
+      }
+    },
+    "PrivateLinkResourceProperties": {
+      "type": "object",
+      "description": "Properties of PrivateLinkResource",
+      "properties": {
+        "groupId": {
+          "type": "string"
+        },
+        "requiredMembers": {
+          "type": "array",
+          "description": "Required Members",
+          "items": {
+            "type": "string"
+          }
+        },
+        "requiredZoneNames": {
+          "type": "array",
+          "description": "Required Zone Names",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "PrivateLinkResourcesListResult": {
+      "type": "object",
+      "description": "Result of the List private link resources operation.",
+      "properties": {
+        "value": {
+          "description": "A collection of private link resources",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PrivateLinkResource"
+          }
+        },
+        "nextLink": {
+          "description": "A link for the next page of private link resources.",
+          "type": "string"
+        }
+      }
+    },
+    "userAssignedIdentityProperties": {
+      "type": "object",
+      "x-ms-client-flatten": true,
+      "properties": {
+        "userAssignedIdentity": {
+          "type": "string",
+          "description": "ARM ID of user Identity selected for encryption"
+        }
+      }
+    }
+  },
+  "parameters": {}
+}

@@ -1,0 +1,9 @@
+suppressions:
+  azure-sdk-for-go:
+    - package: 'sdk/resourcemanager/hybridconnectivity/armhybridconnectivity'
+      breaking-changes:
+        - Function `NewClientFactory` parameter(s) have been changed from `(azcore.TokenCredential, *arm.ClientOptions)` to `(string, azcore.TokenCredential, *arm.ClientOptions)`
+  azure-sdk-for-python:
+    - package: azure-mgmt-hybridconnectivity
+      breaking-changes:
+        - "'HybridConnectivityMgmtClient.__init__' method inserted a 'positional_or_keyword' parameter 'subscription_id'"

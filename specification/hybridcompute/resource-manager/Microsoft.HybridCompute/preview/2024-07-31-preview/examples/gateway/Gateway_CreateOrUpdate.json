@@ -1,0 +1,60 @@
+{
+  "parameters": {
+    "subscriptionId": "ffd506c8-3415-42d3-9612-fdb423fb17df",
+    "resourceGroupName": "myResourceGroup",
+    "gatewayName": "{gatewayName}",
+    "api-version": "2024-07-31-preview",
+    "parameters": {
+      "location": "eastus2euap",
+      "properties": {
+        "gatewayType": "Public",
+        "allowedFeatures": [
+          "*"
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/ffd506c8-3415-42d3-9612-fdb423fb17df/resourceGroups/myResourceGroup/providers/Microsoft.HybridCompute/gateways/{gatewayName}",
+        "name": "{gatewayName}",
+        "type": "Microsoft.HybridCompute/gateways",
+        "location": "eastus2euap",
+        "tags": null,
+        "properties": {
+          "provisioningState": "Succeeded",
+          "gatewayId": "<generated Guid>",
+          "gatewayType": "Public",
+          "gatewayEndpoint": "https://uniqueValue.contoso.com",
+          "allowedFeatures": [
+            "*"
+          ]
+        }
+      }
+    },
+    "201": {
+      "headers": {
+        "Location": "{callbackUrl}",
+        "Retry-After": 200,
+        "Azure-AsyncOperation": "{callbackUri}"
+      },
+      "body": {
+        "id": "/subscriptions/ffd506c8-3415-42d3-9612-fdb423fb17df/resourceGroups/myResourceGroup/providers/Microsoft.HybridCompute/gateways/{gatewayName}",
+        "name": "{gatewayName}",
+        "type": "Microsoft.HybridCompute/gateways",
+        "location": "eastus2euap",
+        "tags": null,
+        "properties": {
+          "provisioningState": "Creating",
+          "gatewayId": "<generated Guid>",
+          "gatewayType": "Public",
+          "gatewayEndpoint": "https://uniqueValue.contoso.com",
+          "allowedFeatures": [
+            "*"
+          ]
+        }
+      }
+    }
+  }
+}

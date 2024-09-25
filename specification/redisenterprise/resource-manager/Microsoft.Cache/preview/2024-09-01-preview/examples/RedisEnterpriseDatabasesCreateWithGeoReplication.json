@@ -1,0 +1,93 @@
+{
+  "parameters": {
+    "databaseName": "default",
+    "clusterName": "cache1",
+    "resourceGroupName": "rg1",
+    "api-version": "2024-09-01-preview",
+    "subscriptionId": "e7b5a9d2-6b6a-4d2f-9143-20d9a10f5b8f",
+    "parameters": {
+      "properties": {
+        "clientProtocol": "Encrypted",
+        "clusteringPolicy": "EnterpriseCluster",
+        "evictionPolicy": "NoEviction",
+        "port": 10000,
+        "accessKeysAuthentication": "Enabled",
+        "geoReplication": {
+          "groupNickname": "groupName",
+          "linkedDatabases": [
+            {
+              "id": "/subscriptions/e7b5a9d2-6b6a-4d2f-9143-20d9a10f5b8f/resourceGroups/rg1/providers/Microsoft.Cache/redisEnterprise/cache1/databases/default"
+            },
+            {
+              "id": "/subscriptions/e7b5a9d2-6b6a-4d2f-9143-20d9a10f5b8e/resourceGroups/rg2/providers/Microsoft.Cache/redisEnterprise/cache2/databases/default"
+            }
+          ]
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/e7b5a9d2-6b6a-4d2f-9143-20d9a10f5b8f/resourceGroups/rg1/providers/Microsoft.Cache/redisEnterprise/cache1/databases/default",
+        "name": "cache1/default",
+        "type": "Microsoft.Cache/redisEnterprise/databases",
+        "properties": {
+          "provisioningState": "Updating",
+          "resourceState": "Updating",
+          "clientProtocol": "Encrypted",
+          "clusteringPolicy": "EnterpriseCluster",
+          "evictionPolicy": "NoEviction",
+          "port": 10000,
+          "geoReplication": {
+            "groupNickname": "groupName",
+            "linkedDatabases": [
+              {
+                "id": "/subscriptions/e7b5a9d2-6b6a-4d2f-9143-20d9a10f5b8e/resourceGroups/rg1/providers/Microsoft.Cache/redisEnterprise/cache1/databases/default",
+                "state": "Linking"
+              },
+              {
+                "id": "/subscriptions/e7b5a9d2-6b6a-4d2f-9143-20d9a10f5b8f2/resourceGroups/rg2/providers/Microsoft.Cache/redisEnterprise/cache2/databases/default",
+                "state": "Linking"
+              }
+            ]
+          },
+          "deferUpgrade": "NotDeferred",
+          "accessKeysAuthentication": "Enabled",
+          "redisVersion": "6.0"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/e7b5a9d2-6b6a-4d2f-9143-20d9a10f5b8f/resourceGroups/rg1/providers/Microsoft.Cache/redisEnterprise/cache1/databases/db1",
+        "name": "cache1/db1",
+        "type": "Microsoft.Cache/redisEnterprise/databases",
+        "properties": {
+          "provisioningState": "Creating",
+          "resourceState": "Creating",
+          "clientProtocol": "Plaintext",
+          "clusteringPolicy": "EnterpriseCluster",
+          "evictionPolicy": "NoEviction",
+          "port": 10000,
+          "geoReplication": {
+            "groupNickname": "groupName",
+            "linkedDatabases": [
+              {
+                "id": "/subscriptions/e7b5a9d2-6b6a-4d2f-9143-20d9a10f5b8e/resourceGroups/rg1/providers/Microsoft.Cache/redisEnterprise/cache1/databases/default",
+                "state": "Linking"
+              },
+              {
+                "id": "/subscriptions/e7b5a9d2-6b6a-4d2f-9143-20d9a10f5b8f2/resourceGroups/rg2/providers/Microsoft.Cache/redisEnterprise/cache2/databases/default",
+                "state": "Linking"
+              }
+            ]
+          },
+          "deferUpgrade": "NotDeferred",
+          "accessKeysAuthentication": "Enabled",
+          "redisVersion": "6.0"
+        }
+      }
+    }
+  }
+}

@@ -1033,7 +1033,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceNetworking/trafficControllers/{trafficControllerName}/securityPolicy": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceNetworking/trafficControllers/{trafficControllerName}/securityPolicies": {
       "get": {
         "operationId": "SecurityPoliciesInterface_ListByTrafficController",
         "tags": [
@@ -1083,7 +1083,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceNetworking/trafficControllers/{trafficControllerName}/securityPolicy/{securityPolicyName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceNetworking/trafficControllers/{trafficControllerName}/securityPolicies/{securityPolicyName}": {
       "get": {
         "operationId": "SecurityPoliciesInterface_Get",
         "tags": [
@@ -1617,7 +1617,8 @@
             "description": "Resource in Canceled State"
           }
         ]
-      }
+      },
+      "readOnly": true
     },
     "ResourceId": {
       "type": "object",
@@ -1707,10 +1708,7 @@
           "description": "Provisioning State of Traffic Controller SecurityPolicy Resource",
           "readOnly": true
         }
-      },
-      "required": [
-        "policyType"
-      ]
+      }
     },
     "SecurityPolicyUpdate": {
       "type": "object",

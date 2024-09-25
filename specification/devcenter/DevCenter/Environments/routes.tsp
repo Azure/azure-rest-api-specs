@@ -1,7 +1,9 @@
 import "@azure-tools/typespec-azure-core";
 import "@typespec/rest";
 import "./models.tsp";
+import "./parameters.tsp";
 import "../shared/routes.tsp";
+import "../shared/parameters.tsp";
 
 using Azure.Core;
 using TypeSpec.Versioning;
@@ -17,12 +19,7 @@ interface Environments {
   @get
   listEnvironments is Azure.Core.Foundations.Operation<
     {
-      @doc("The DevCenter Project upon which to execute operations.")
-      @maxLength(63)
-      @minLength(3)
-      @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
-      @path
-      projectName: string;
+      ...ProjectNameParameter;
     },
     EnvironmentListResult
   >;
@@ -36,19 +33,8 @@ interface Environments {
   @get
   listEnvironmentsByUser is Azure.Core.Foundations.Operation<
     {
-      @doc("The DevCenter Project upon which to execute operations.")
-      @maxLength(63)
-      @minLength(3)
-      @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
-      @path
-      projectName: string;
-
-      @doc("The AAD object id of the user. If value is 'me', the identity is taken from the authentication context.")
-      @maxLength(36)
-      @minLength(2)
-      @pattern("^[a-zA-Z0-9]{8}-([a-zA-Z0-9]{4}-){3}[a-zA-Z0-9]{12}$|^me$")
-      @path
-      userId: string;
+      ...ProjectNameParameter;
+      ...UserIdParameter;
     },
     EnvironmentListResult
   >;
@@ -65,26 +51,9 @@ interface Environments {
   @put
   createOrReplaceEnvironment is Azure.Core.Foundations.Operation<
     {
-      @doc("The DevCenter Project upon which to execute operations.")
-      @maxLength(63)
-      @minLength(3)
-      @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
-      @path
-      projectName: string;
-
-      @doc("The AAD object id of the user. If value is 'me', the identity is taken from the authentication context.")
-      @maxLength(36)
-      @minLength(2)
-      @pattern("^[a-zA-Z0-9]{8}-([a-zA-Z0-9]{4}-){3}[a-zA-Z0-9]{12}$|^me$")
-      @path
-      userId: string;
-
-      @doc("The name of the environment.")
-      @maxLength(63)
-      @minLength(3)
-      @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
-      @path
-      environmentName: string;
+      ...ProjectNameParameter;
+      ...UserIdParameter;
+      ...EnvironmentNameParameter;
 
       @doc("Represents an environment.")
       @bodyRoot
@@ -113,26 +82,9 @@ interface Environments {
       @header
       contentType: "application/merge-patch+json";
 
-      @doc("The DevCenter Project upon which to execute operations.")
-      @maxLength(63)
-      @minLength(3)
-      @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
-      @path
-      projectName: string;
-
-      @doc("The AAD object id of the user. If value is 'me', the identity is taken from the authentication context.")
-      @maxLength(36)
-      @minLength(2)
-      @pattern("^[a-zA-Z0-9]{8}-([a-zA-Z0-9]{4}-){3}[a-zA-Z0-9]{12}$|^me$")
-      @path
-      userId: string;
-
-      @doc("The name of the environment.")
-      @maxLength(63)
-      @minLength(3)
-      @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
-      @path
-      environmentName: string;
+      ...ProjectNameParameter;
+      ...UserIdParameter;
+      ...EnvironmentNameParameter;
 
       @doc("Represents an environment.")
       @body
@@ -149,26 +101,10 @@ interface Environments {
   @delete
   deleteEnvironment is Azure.Core.Foundations.Operation<
     {
-      @doc("The DevCenter Project upon which to execute operations.")
-      @maxLength(63)
-      @minLength(3)
-      @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
-      @path
-      projectName: string;
-
-      @doc("The AAD object id of the user. If value is 'me', the identity is taken from the authentication context.")
-      @maxLength(36)
-      @minLength(2)
-      @pattern("^[a-zA-Z0-9]{8}-([a-zA-Z0-9]{4}-){3}[a-zA-Z0-9]{12}$|^me$")
-      @path
-      userId: string;
-
-      @doc("The name of the environment.")
-      @maxLength(63)
-      @minLength(3)
-      @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
-      @path
-      environmentName: string;
+      ...ProjectNameParameter;
+      ...UserIdParameter;
+      ...EnvironmentNameParameter;
+      ...ForceDeleteEnvironmentQueryParameter;
     },
     {
       @statusCode
@@ -195,26 +131,9 @@ interface Environments {
   @added(APIVersions.v2024_02_01)
   getOutputs is Azure.Core.Foundations.Operation<
     {
-      @doc("The DevCenter Project upon which to execute operations.")
-      @maxLength(63)
-      @minLength(3)
-      @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
-      @path
-      projectName: string;
-
-      @doc("The AAD object id of the user. If value is 'me', the identity is taken from the authentication context.")
-      @maxLength(36)
-      @minLength(2)
-      @pattern("^[a-zA-Z0-9]{8}-([a-zA-Z0-9]{4}-){3}[a-zA-Z0-9]{12}$|^me$")
-      @path
-      userId: string;
-
-      @doc("The name of the environment.")
-      @maxLength(63)
-      @minLength(3)
-      @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
-      @path
-      environmentName: string;
+      ...ProjectNameParameter;
+      ...UserIdParameter;
+      ...EnvironmentNameParameter;
     },
     EnvironmentOutputs
   >;
@@ -234,26 +153,9 @@ interface Environments {
   @added(APIVersions.v2024_02_01)
   getLogsByOperation is Azure.Core.Foundations.Operation<
     {
-      @doc("The DevCenter Project upon which to execute operations.")
-      @maxLength(63)
-      @minLength(3)
-      @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
-      @path
-      projectName: string;
-
-      @doc("The AAD object id of the user. If value is 'me', the identity is taken from the authentication context.")
-      @maxLength(36)
-      @minLength(2)
-      @pattern("^[a-zA-Z0-9]{8}-([a-zA-Z0-9]{4}-){3}[a-zA-Z0-9]{12}$|^me$")
-      @path
-      userId: string;
-
-      @doc("The name of the environment.")
-      @maxLength(63)
-      @minLength(3)
-      @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
-      @path
-      environmentName: string;
+      ...ProjectNameParameter;
+      ...UserIdParameter;
+      ...EnvironmentNameParameter;
 
       @doc("The id of the operation on an environment.")
       @maxLength(36)
@@ -298,7 +200,7 @@ interface Environments {
   delayAction is StandardResourceOperations.ResourceAction<
     EnvironmentAction,
     {
-      @doc("The time to delay the Environment action until.")
+      @doc("The time to delay the Environment action until, in RFC3339 format.")
       @query("until")
       until: utcDateTime;
     },
@@ -317,12 +219,7 @@ interface Environments {
   @get
   listEnvironmentDefinitionsByProject is Azure.Core.Foundations.Operation<
     {
-      @doc("The DevCenter Project upon which to execute operations.")
-      @maxLength(63)
-      @minLength(3)
-      @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
-      @path
-      projectName: string;
+      ...ProjectNameParameter;
     },
     EnvironmentDefinitionListResult
   >;
@@ -336,12 +233,7 @@ interface Environments {
   @get
   listEnvironmentDefinitionsByCatalog is Azure.Core.Foundations.Operation<
     {
-      @doc("The DevCenter Project upon which to execute operations.")
-      @maxLength(63)
-      @minLength(3)
-      @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
-      @path
-      projectName: string;
+      ...ProjectNameParameter;
 
       @doc("The name of the catalog")
       @maxLength(63)
@@ -370,12 +262,7 @@ interface Environments {
   @added(APIVersions.v2024_05_01_preview)
   getEnvironmentTypeAbilities is Azure.Core.Foundations.Operation<
     {
-      @doc("The DevCenter Project upon which to execute operations.")
-      @maxLength(63)
-      @minLength(3)
-      @pattern("^[a-zA-Z0-9][a-zA-Z0-9-]{2,62}$")
-      @path
-      projectName: string;
+      ...ProjectNameParameter;
 
       @doc("The name of the environment type")
       @maxLength(63)
@@ -384,15 +271,7 @@ interface Environments {
       @path
       environmentTypeName: string;
 
-      @doc("""
-          The AAD object id of the user. If value is 'me', the identity is taken from the
-          authentication context.
-        """)
-      @maxLength(36)
-      @minLength(2)
-      @pattern("^[a-zA-Z0-9]{8}-([a-zA-Z0-9]{4}-){3}[a-zA-Z0-9]{12}$|^me$")
-      @path
-      userId: string;
+      ...UserIdParameter;
 
       @doc("The maximum number of resources to return from the operation. Example: 'top=10'.")
       @query

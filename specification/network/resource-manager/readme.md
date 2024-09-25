@@ -28,7 +28,85 @@ These are the global settings for the Network API.
 title: NetworkManagementClient
 description: Network Client
 openapi-type: arm
-tag: package-2024-01
+tag: package-2024-03
+```
+
+### Tag: package-2024-03
+
+These settings apply only when `--tag=package-2024-03` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-03'
+input-file:
+  - Microsoft.Network/stable/2024-03-01/applicationGateway.json
+  - Microsoft.Network/stable/2024-03-01/applicationGatewayWafDynamicManifests.json
+  - Microsoft.Network/stable/2024-03-01/applicationSecurityGroup.json
+  - Microsoft.Network/stable/2024-03-01/availableDelegations.json
+  - Microsoft.Network/stable/2024-03-01/availableServiceAliases.json
+  - Microsoft.Network/stable/2024-03-01/azureFirewall.json
+  - Microsoft.Network/stable/2024-03-01/azureFirewallFqdnTag.json
+  - Microsoft.Network/stable/2024-03-01/azureWebCategory.json
+  - Microsoft.Network/stable/2024-03-01/bastionHost.json
+  - Microsoft.Network/stable/2024-03-01/checkDnsAvailability.json
+  - Microsoft.Network/stable/2024-03-01/cloudServiceNetworkInterface.json
+  - Microsoft.Network/stable/2024-03-01/cloudServicePublicIpAddress.json
+  - Microsoft.Network/stable/2024-03-01/cloudServiceSwap.json
+  - Microsoft.Network/stable/2024-03-01/customIpPrefix.json
+  - Microsoft.Network/stable/2024-03-01/ddosCustomPolicy.json
+  - Microsoft.Network/stable/2024-03-01/ddosProtectionPlan.json
+  - Microsoft.Network/stable/2024-03-01/dscpConfiguration.json
+  - Microsoft.Network/stable/2024-03-01/endpointService.json
+  - Microsoft.Network/stable/2024-03-01/expressRouteCircuit.json
+  - Microsoft.Network/stable/2024-03-01/expressRouteCrossConnection.json
+  - Microsoft.Network/stable/2024-03-01/expressRoutePort.json
+  - Microsoft.Network/stable/2024-03-01/expressRouteProviderPort.json
+  - Microsoft.Network/stable/2024-03-01/firewallPolicy.json
+  - Microsoft.Network/stable/2024-03-01/ipAllocation.json
+  - Microsoft.Network/stable/2024-03-01/ipGroups.json
+  - Microsoft.Network/stable/2024-03-01/loadBalancer.json
+  - Microsoft.Network/stable/2024-03-01/natGateway.json
+  - Microsoft.Network/stable/2024-03-01/network.json
+  - Microsoft.Network/stable/2024-03-01/networkInterface.json
+  - Microsoft.Network/stable/2024-03-01/networkManager.json
+  - Microsoft.Network/stable/2024-03-01/networkManagerActiveConfiguration.json
+  - Microsoft.Network/stable/2024-03-01/networkManagerConnection.json
+  - Microsoft.Network/stable/2024-03-01/networkManagerConnectivityConfiguration.json
+  - Microsoft.Network/stable/2024-03-01/networkManagerEffectiveConfiguration.json
+  - Microsoft.Network/stable/2024-03-01/networkManagerGroup.json
+  - Microsoft.Network/stable/2024-03-01/networkManagerScopeConnection.json
+  - Microsoft.Network/stable/2024-03-01/networkManagerSecurityAdminConfiguration.json
+  - Microsoft.Network/stable/2024-03-01/networkManagerSecurityUserConfiguration.json
+  - Microsoft.Network/stable/2024-03-01/networkManagerRoutingConfiguration.json
+  - Microsoft.Network/stable/2024-03-01/networkProfile.json
+  - Microsoft.Network/stable/2024-03-01/networkSecurityGroup.json
+  - Microsoft.Network/stable/2024-03-01/networkVirtualAppliance.json
+  - Microsoft.Network/stable/2024-03-01/networkWatcher.json
+  - Microsoft.Network/stable/2024-03-01/operation.json
+  - Microsoft.Network/stable/2024-03-01/privateEndpoint.json
+  - Microsoft.Network/stable/2024-03-01/privateLinkService.json
+  - Microsoft.Network/stable/2024-03-01/publicIpAddress.json
+  - Microsoft.Network/stable/2024-03-01/publicIpPrefix.json
+  - Microsoft.Network/stable/2024-03-01/routeFilter.json
+  - Microsoft.Network/stable/2024-03-01/routeTable.json
+  - Microsoft.Network/stable/2024-03-01/securityPartnerProvider.json
+  - Microsoft.Network/stable/2024-03-01/serviceCommunity.json
+  - Microsoft.Network/stable/2024-03-01/serviceEndpointPolicy.json
+  - Microsoft.Network/stable/2024-03-01/serviceTags.json
+  - Microsoft.Network/stable/2024-03-01/usage.json
+  - Microsoft.Network/stable/2024-03-01/virtualNetwork.json
+  - Microsoft.Network/stable/2024-03-01/virtualNetworkGateway.json
+  - Microsoft.Network/stable/2024-03-01/virtualNetworkTap.json
+  - Microsoft.Network/stable/2024-03-01/virtualRouter.json
+  - Microsoft.Network/stable/2024-03-01/virtualWan.json
+  - Microsoft.Network/stable/2024-03-01/vmssNetworkInterface.json
+  - Microsoft.Network/stable/2024-03-01/vmssPublicIpAddress.json
+  - Microsoft.Network/stable/2024-03-01/webapplicationfirewall.json
+suppressions:
+  - code: PatchIdentityProperty
+    from: networkWatcher.json
+    reason: False alarm.
+  - code: PatchIdentityProperty
+    from: virtualNetworkGateway.json
+    reason: False alarm.
 ```
 
 ### Tag: package-2024-01-preview
@@ -3365,6 +3443,24 @@ directive:
   - suppress: RequiredPropertiesMissingInResourceModel
     from: networkManagerActiveConfiguration.json
     reason: name, id and type properties are inherited from the upper level
+  - suppress: DeleteResponseCodes
+    from: networkManagerRoutingConfiguration.json
+    reason: support response code 200 for delete operations 
+  - suppress: DeleteResponseCodes
+    from: networkManagerSecurityUserConfiguration.json
+    reason: support response code 200 for delete operations
+  - suppress: BodyTopLevelProperties
+    from: networkManagerSecurityUserConfiguration.json
+    reason: This is a false alarm for a list response. Arm documentation states 'Collection Get calls must only have "value" and "nextLink" as top level properties in its model.'
+  - suppress: BodyTopLevelProperties
+    from: networkManagerRoutingConfiguration.json
+    reason: This is a false alarm for a list response. Arm documentation states 'Collection Get calls must only have "value" and "nextLink" as top level properties in its model.'
+  - suppress: SystemDataDefinitionsCommonTypes
+    from: networkManagerSecurityUserConfiguration.json
+    reason: All microsoft.network specs reference a seperate systemData defined in networking file. If we use the common type, it causes duplicate schema error in dotnet sdk generation.
+  - suppress: SystemDataDefinitionsCommonTypes
+    from: networkManagerRoutingConfiguration.json
+    reason: All microsoft.network specs reference a seperate systemData defined in networking file. If we use the common type, it causes duplicate schema error in dotnet sdk generation.
   - suppress: RequiredPropertiesMissingInResourceModel
     from: applicationGateway.json
     reason: name, id and type properties are inherited from the upper level
@@ -3639,6 +3735,18 @@ suppressions:
     reason: The resource name parameter 'bastionHostName' is not defined with a 'pattern' restriction. Suppress it for now to avoid breaking change because it is referenced by all Bastion APIs. 
   - code: LroErrorContent
     reason: CloudError does not follow required error schema. Suppress it for now to avoid breaking change because it is referenced by many files.
+  - code: ResourceNameRestriction
+    from: virtualWan.json
+    reason: The resource name parameter 'gatewayName', 'connectionName', 'linkConnectionName' is not defined with a 'pattern' restriction. Suppress it for now to avoid breaking change because it is referenced by all vpn link connection APIs.
+    where:
+    - $.paths.["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/vpnGateways/{gatewayName}/vpnConnections/{connectionName}/vpnLinkConnections/{linkConnectionName}/sharedKeys"]
+    - $.paths.["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/vpnGateways/{gatewayName}/vpnConnections/{connectionName}/vpnLinkConnections/{linkConnectionName}/sharedKeys/default"]
+    - $.paths.["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/vpnGateways/{gatewayName}/vpnConnections/{connectionName}/vpnLinkConnections/{linkConnectionName}/sharedKeys/default/listSharedKey"]
+  - code: BodyTopLevelProperties
+    from: virtualWan.json
+    reason: False alarm.
+    where:
+    - $.definitions.ConnectionSharedKeyResultList
 ```
 
 ## Go

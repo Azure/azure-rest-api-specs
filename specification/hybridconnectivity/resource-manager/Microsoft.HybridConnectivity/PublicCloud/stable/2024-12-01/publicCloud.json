@@ -1,0 +1,1671 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Hybrid Connectivity Management API",
+    "version": "2024-12-01",
+    "description": "REST API for public clouds.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "GenerateAwsTemplate"
+    },
+    {
+      "name": "PublicCloudConnectors"
+    },
+    {
+      "name": "SolutionConfigurations"
+    },
+    {
+      "name": "Inventory"
+    },
+    {
+      "name": "SolutionTypes"
+    }
+  ],
+  "paths": {
+    "/{resourceUri}/providers/Microsoft.HybridConnectivity/solutionConfigurations": {
+      "get": {
+        "operationId": "SolutionConfigurations_List",
+        "tags": [
+          "SolutionConfigurations"
+        ],
+        "description": "List SolutionConfiguration resources by parent",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SolutionConfigurationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SolutionConfigurations_List": {
+            "$ref": "./examples/SolutionConfigurations_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/{resourceUri}/providers/Microsoft.HybridConnectivity/solutionConfigurations/{solutionConfiguration}": {
+      "get": {
+        "operationId": "SolutionConfigurations_Get",
+        "tags": [
+          "SolutionConfigurations"
+        ],
+        "description": "Get a SolutionConfiguration",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          },
+          {
+            "name": "solutionConfiguration",
+            "in": "path",
+            "description": "Represent Solution Configuration Resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,63}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SolutionConfiguration"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SolutionConfigurations_Get": {
+            "$ref": "./examples/SolutionConfigurations_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "SolutionConfigurations_CreateOrUpdate",
+        "tags": [
+          "SolutionConfigurations"
+        ],
+        "description": "Create a SolutionConfiguration",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          },
+          {
+            "name": "solutionConfiguration",
+            "in": "path",
+            "description": "Represent Solution Configuration Resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,63}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SolutionConfiguration"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'SolutionConfiguration' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/SolutionConfiguration"
+            }
+          },
+          "201": {
+            "description": "Resource 'SolutionConfiguration' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/SolutionConfiguration"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SolutionConfigurations_CreateOrUpdate": {
+            "$ref": "./examples/SolutionConfigurations_CreateOrUpdate.json"
+          }
+        }
+      },
+      "patch": {
+        "operationId": "SolutionConfigurations_Update",
+        "tags": [
+          "SolutionConfigurations"
+        ],
+        "description": "Update a SolutionConfiguration",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          },
+          {
+            "name": "solutionConfiguration",
+            "in": "path",
+            "description": "Represent Solution Configuration Resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,63}$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SolutionConfigurationUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SolutionConfiguration"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SolutionConfigurations_Update": {
+            "$ref": "./examples/SolutionConfigurations_Update.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "SolutionConfigurations_Delete",
+        "tags": [
+          "SolutionConfigurations"
+        ],
+        "description": "Delete a SolutionConfiguration",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          },
+          {
+            "name": "solutionConfiguration",
+            "in": "path",
+            "description": "Represent Solution Configuration Resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,63}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SolutionConfigurations_Delete": {
+            "$ref": "./examples/SolutionConfigurations_Delete.json"
+          }
+        }
+      }
+    },
+    "/{resourceUri}/providers/Microsoft.HybridConnectivity/solutionConfigurations/{solutionConfiguration}/inventory": {
+      "get": {
+        "operationId": "Inventory_ListByWidget",
+        "tags": [
+          "Inventory"
+        ],
+        "description": "List InventoryResource resources by SolutionConfiguration",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          },
+          {
+            "name": "solutionConfiguration",
+            "in": "path",
+            "description": "Represent Solution Configuration Resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,63}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/InventoryResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Inventory_ListByWidget": {
+            "$ref": "./examples/Inventory_ListByWidget.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/{resourceUri}/providers/Microsoft.HybridConnectivity/solutionConfigurations/{solutionConfiguration}/inventory/{inventoryId}": {
+      "get": {
+        "operationId": "Inventory_Get",
+        "tags": [
+          "Inventory"
+        ],
+        "description": "Get a InventoryResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          },
+          {
+            "name": "solutionConfiguration",
+            "in": "path",
+            "description": "Represent Solution Configuration Resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,63}$"
+          },
+          {
+            "name": "inventoryId",
+            "in": "path",
+            "description": "Inventory resource",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/InventoryResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Inventory_Get": {
+            "$ref": "./examples/Inventory_Get.json"
+          }
+        }
+      }
+    },
+    "/{resourceUri}/providers/Microsoft.HybridConnectivity/solutionConfigurations/{solutionConfiguration}/syncNow": {
+      "post": {
+        "operationId": "SolutionConfigurations_SyncNow",
+        "tags": [
+          "SolutionConfigurations"
+        ],
+        "description": "Trigger immediate sync with source cloud",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          },
+          {
+            "name": "solutionConfiguration",
+            "in": "path",
+            "description": "Represent Solution Configuration Resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,63}$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SolutionConfigurations_SyncNow": {
+            "$ref": "./examples/SolutionConfigurations_SyncNow.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.HybridConnectivity/generateAwsTemplate": {
+      "post": {
+        "operationId": "GenerateAwsTemplate_Post",
+        "tags": [
+          "GenerateAwsTemplate"
+        ],
+        "description": "Retrieve AWS Cloud Formation template",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "generateAwsTemplateRequest",
+            "in": "body",
+            "description": "ConnectorId and SolutionTypes and their properties to Generate AWS CFT Template.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GenerateAwsTemplateRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "type": "object"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GenerateAwsTemplate_Post": {
+            "$ref": "./examples/GenerateAwsTemplate_Post.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.HybridConnectivity/publicCloudConnectors": {
+      "get": {
+        "operationId": "PublicCloudConnectors_ListBySubscription",
+        "tags": [
+          "PublicCloudConnectors"
+        ],
+        "description": "List PublicCloudConnector resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PublicCloudConnectorListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PublicCloudConnectors_ListBySubscription": {
+            "$ref": "./examples/PublicCloudConnectors_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.HybridConnectivity/solutionTypes": {
+      "get": {
+        "operationId": "SolutionTypes_ListBySubscription",
+        "tags": [
+          "SolutionTypes"
+        ],
+        "description": "List SolutionTypeResource resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SolutionTypeResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SolutionTypes_ListBySubscription": {
+            "$ref": "./examples/SolutionTypes_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridConnectivity/publicCloudConnectors": {
+      "get": {
+        "operationId": "PublicCloudConnectors_ListByResourceGroup",
+        "tags": [
+          "PublicCloudConnectors"
+        ],
+        "description": "List PublicCloudConnector resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PublicCloudConnectorListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PublicCloudConnectors_ListByResourceGroup": {
+            "$ref": "./examples/PublicCloudConnectors_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridConnectivity/publicCloudConnectors/{publicCloudConnector}": {
+      "get": {
+        "operationId": "PublicCloudConnectors_Get",
+        "tags": [
+          "PublicCloudConnectors"
+        ],
+        "description": "Get a PublicCloudConnector",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "publicCloudConnector",
+            "in": "path",
+            "description": "Represent public cloud connectors resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,63}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PublicCloudConnector"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "publicCloudConnectors_Get": {
+            "$ref": "./examples/PublicCloudConnectors_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "PublicCloudConnectors_CreateOrUpdate",
+        "tags": [
+          "PublicCloudConnectors"
+        ],
+        "description": "Create a PublicCloudConnector",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "publicCloudConnector",
+            "in": "path",
+            "description": "Represent public cloud connectors resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,63}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PublicCloudConnector"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'PublicCloudConnector' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/PublicCloudConnector"
+            }
+          },
+          "201": {
+            "description": "Resource 'PublicCloudConnector' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/PublicCloudConnector"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PublicCloudConnectors_CreateOrUpdate": {
+            "$ref": "./examples/PublicCloudConnectors_CreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "PublicCloudConnectors_Update",
+        "tags": [
+          "PublicCloudConnectors"
+        ],
+        "description": "Update a PublicCloudConnector",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "publicCloudConnector",
+            "in": "path",
+            "description": "Represent public cloud connectors resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,63}$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PublicCloudConnectorUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PublicCloudConnector"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PublicCloudConnectors_Update": {
+            "$ref": "./examples/PublicCloudConnectors_Update.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "PublicCloudConnectors_Delete",
+        "tags": [
+          "PublicCloudConnectors"
+        ],
+        "description": "Delete a PublicCloudConnector",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "publicCloudConnector",
+            "in": "path",
+            "description": "Represent public cloud connectors resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,63}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PublicCloudConnectors_Delete": {
+            "$ref": "./examples/PublicCloudConnectors_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridConnectivity/publicCloudConnectors/{publicCloudConnector}/testPermissions": {
+      "post": {
+        "operationId": "PublicCloudConnectors_TestPermissions",
+        "tags": [
+          "PublicCloudConnectors"
+        ],
+        "description": "A long-running resource action.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "publicCloudConnector",
+            "in": "path",
+            "description": "Represent public cloud connectors resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,63}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/TestPermissionResult"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PublicCloudConnectors_TestPermissions": {
+            "$ref": "./examples/PublicCloudConnectors_TestPermissions.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridConnectivity/solutionTypes": {
+      "get": {
+        "operationId": "SolutionTypes_ListByResourceGroup",
+        "tags": [
+          "SolutionTypes"
+        ],
+        "description": "List SolutionTypeResource resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SolutionTypeResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SolutionTypes_ListByResourceGroup": {
+            "$ref": "./examples/SolutionTypes_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridConnectivity/solutionTypes/{solutionType}": {
+      "get": {
+        "operationId": "SolutionTypes_Get",
+        "tags": [
+          "SolutionTypes"
+        ],
+        "description": "Get a SolutionTypeResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "solutionType",
+            "in": "path",
+            "description": "Solution Type resource",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SolutionTypeResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SolutionTypes_Get": {
+            "$ref": "./examples/SolutionTypes_Get.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AwsCloudProfile": {
+      "type": "object",
+      "description": "cloud profile for AWS.",
+      "properties": {
+        "accountId": {
+          "type": "string",
+          "description": "Account id for the AWS account.",
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "excludedAccounts": {
+          "type": "array",
+          "description": "List of AWS accounts which need to be excluded.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "isOrganizationalAccount": {
+          "type": "boolean",
+          "description": "Boolean value that indicates whether the account is organizational or not. True represents organization account, whereas false represents a single account.",
+          "default": false,
+          "x-ms-mutability": [
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "accountId"
+      ]
+    },
+    "AwsCloudProfileUpdate": {
+      "type": "object",
+      "description": "cloud profile for AWS.",
+      "properties": {
+        "excludedAccounts": {
+          "type": "array",
+          "description": "List of AWS accounts which need to be excluded.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "Azure.ResourceManager.CommonTypes.TrackedResourceUpdate": {
+      "type": "object",
+      "description": "The resource model definition for an Azure Resource Manager tracked top level resource which has 'tags' and a 'location'",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
+        }
+      ]
+    },
+    "Azure.ResourceManager.ResourceProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of a resource type.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "ResourceProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "CloudNativeType": {
+      "type": "string",
+      "description": "Cloud Native Type enum.",
+      "enum": [
+        "ec2"
+      ],
+      "x-ms-enum": {
+        "name": "CloudNativeType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ec2",
+            "value": "ec2",
+            "description": "ec2 enum."
+          }
+        ]
+      }
+    },
+    "GenerateAwsTemplateRequest": {
+      "type": "object",
+      "description": "ConnectorId and SolutionTypes and their properties to Generate AWS CFT Template.",
+      "properties": {
+        "connectorId": {
+          "type": "string",
+          "description": "The name of public cloud connector"
+        },
+        "solutionTypes": {
+          "type": "array",
+          "description": "The list of solution types and their settings",
+          "items": {
+            "$ref": "#/definitions/SolutionTypeSettings"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "connectorId"
+      ]
+    },
+    "HostType": {
+      "type": "string",
+      "description": "Enum of host cloud the public cloud connector is referencing.",
+      "enum": [
+        "AWS"
+      ],
+      "x-ms-enum": {
+        "name": "HostType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "AWS",
+            "value": "AWS",
+            "description": "AWS state"
+          }
+        ]
+      }
+    },
+    "InventoryProperties": {
+      "type": "object",
+      "description": "Definition of inventory.",
+      "properties": {
+        "cloudNativeType": {
+          "$ref": "#/definitions/CloudNativeType",
+          "description": "Gets or sets the cloud native resource type."
+        },
+        "cloudNativeResourceId": {
+          "type": "string",
+          "description": "Gets or sets the cloud native resource name."
+        },
+        "azureResourceId": {
+          "type": "string",
+          "description": "Gets or sets the mapped azure resource id."
+        },
+        "status": {
+          "$ref": "#/definitions/SolutionConfigurationStatus",
+          "description": "Gets or sets the status of the inventory."
+        },
+        "statusDetails": {
+          "type": "string",
+          "description": "Gets or sets the status details."
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
+          "description": "The resource provisioning state.",
+          "readOnly": true
+        }
+      }
+    },
+    "InventoryResource": {
+      "type": "object",
+      "description": "Concrete proxy resource types can be created by aliasing this type using a specific property type.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/InventoryProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "InventoryResourceListResult": {
+      "type": "object",
+      "description": "The response of a InventoryResource list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The InventoryResource items on this page",
+          "items": {
+            "$ref": "#/definitions/InventoryResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PublicCloudConnector": {
+      "type": "object",
+      "description": "Public Cloud Connector",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PublicCloudConnectorProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "PublicCloudConnectorListResult": {
+      "type": "object",
+      "description": "The response of a PublicCloudConnector list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The PublicCloudConnector items on this page",
+          "items": {
+            "$ref": "#/definitions/PublicCloudConnector"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PublicCloudConnectorProperties": {
+      "type": "object",
+      "description": "Properties of public cloud connectors.",
+      "properties": {
+        "awsCloudProfile": {
+          "$ref": "#/definitions/AwsCloudProfile",
+          "description": "Cloud profile for AWS."
+        },
+        "hostType": {
+          "$ref": "#/definitions/HostType",
+          "description": "Host cloud the public cloud connector.",
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
+          "description": "The resource provisioning state.",
+          "readOnly": true
+        },
+        "connectorPrimaryIdentifier": {
+          "type": "string",
+          "description": "Connector primary identifier.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "awsCloudProfile",
+        "hostType"
+      ]
+    },
+    "PublicCloudConnectorPropertiesUpdate": {
+      "type": "object",
+      "description": "Properties of public cloud connectors.",
+      "properties": {
+        "awsCloudProfile": {
+          "$ref": "#/definitions/AwsCloudProfileUpdate",
+          "description": "Cloud profile for AWS."
+        }
+      }
+    },
+    "PublicCloudConnectorUpdate": {
+      "type": "object",
+      "description": "Public Cloud Connector",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PublicCloudConnectorPropertiesUpdate",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
+        }
+      ]
+    },
+    "SolutionConfiguration": {
+      "type": "object",
+      "description": "Solution Configuration",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SolutionConfigurationProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "SolutionConfigurationListResult": {
+      "type": "object",
+      "description": "The response of a SolutionConfiguration list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The SolutionConfiguration items on this page",
+          "items": {
+            "$ref": "#/definitions/SolutionConfiguration"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "SolutionConfigurationProperties": {
+      "type": "object",
+      "description": "Solution configuration resource.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
+          "description": "The resource provisioning state.",
+          "readOnly": true
+        },
+        "solutionType": {
+          "type": "string",
+          "description": "The type of the solution"
+        },
+        "solutionSettings": {
+          "$ref": "#/definitions/SolutionSettings",
+          "description": "Solution settings"
+        },
+        "status": {
+          "$ref": "#/definitions/SolutionConfigurationStatus",
+          "description": "The status of solution configurations",
+          "readOnly": true
+        },
+        "statusDetails": {
+          "type": "string",
+          "description": "The detailed message of status details",
+          "readOnly": true
+        },
+        "lastSyncTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The last time resources were inventoried",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "solutionType"
+      ]
+    },
+    "SolutionConfigurationPropertiesUpdate": {
+      "type": "object",
+      "description": "Solution configuration resource.",
+      "properties": {
+        "solutionType": {
+          "type": "string",
+          "description": "The type of the solution"
+        },
+        "solutionSettings": {
+          "$ref": "#/definitions/SolutionSettings",
+          "description": "Solution settings"
+        }
+      }
+    },
+    "SolutionConfigurationStatus": {
+      "type": "string",
+      "description": "Solution Configuration Status.",
+      "enum": [
+        "New",
+        "InProgress",
+        "Completed",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "name": "SolutionConfigurationStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "New",
+            "value": "New",
+            "description": "New status"
+          },
+          {
+            "name": "InProgress",
+            "value": "InProgress",
+            "description": "InProgress status"
+          },
+          {
+            "name": "Completed",
+            "value": "Completed",
+            "description": "Canceled status"
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Failed status"
+          }
+        ]
+      }
+    },
+    "SolutionConfigurationUpdate": {
+      "type": "object",
+      "description": "Solution Configuration",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SolutionConfigurationPropertiesUpdate",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "SolutionSettings": {
+      "type": "object",
+      "description": "Solution settings",
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
+    "SolutionTypeEnum": {
+      "type": "string",
+      "description": "Solution types.",
+      "enum": [
+        "Microsoft.AssetManagement",
+        "Microsoft.HybridCompute.Onboard",
+        "Microsoft.HybridNetwork.VWan.Provision"
+      ],
+      "x-ms-enum": {
+        "name": "SolutionTypeEnum",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Microsoft.AssetManagement",
+            "value": "Microsoft.AssetManagement",
+            "description": "Asset Management solution type"
+          },
+          {
+            "name": "Microsoft.HybridCompute.Onboard",
+            "value": "Microsoft.HybridCompute.Onboard",
+            "description": "Hybrid Compute Onboard solution type"
+          },
+          {
+            "name": "Microsoft.HybridNetwork.VWan.Provision",
+            "value": "Microsoft.HybridNetwork.VWan.Provision",
+            "description": "VWan Provisioning solution type"
+          }
+        ]
+      }
+    },
+    "SolutionTypePermissions": {
+      "type": "object",
+      "description": "Solution type permissions.",
+      "properties": {
+        "solutionType": {
+          "$ref": "#/definitions/SolutionTypeEnum",
+          "description": "The name of solution Type"
+        },
+        "status": {
+          "$ref": "#/definitions/Status",
+          "description": "The status"
+        },
+        "statusDetails": {
+          "type": "string",
+          "description": "The details of the status"
+        }
+      },
+      "required": [
+        "solutionType",
+        "status",
+        "statusDetails"
+      ]
+    },
+    "SolutionTypeProperties": {
+      "type": "object",
+      "description": "Definition of Solution type resource.",
+      "properties": {
+        "solutionType": {
+          "type": "string",
+          "description": "The name of the solution type."
+        },
+        "description": {
+          "type": "string",
+          "description": "Short description of solution type."
+        },
+        "supportedAzureRegions": {
+          "type": "array",
+          "description": "The locations this solution is supported in.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "solutionSettings": {
+          "type": "array",
+          "description": "Array of solution settings and its description.",
+          "items": {
+            "$ref": "#/definitions/SolutionTypeSettingsProperties"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "SolutionTypeResource": {
+      "type": "object",
+      "description": "Concrete proxy resource types can be created by aliasing this type using a specific property type.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SolutionTypeProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "SolutionTypeResourceListResult": {
+      "type": "object",
+      "description": "The response of a SolutionTypeResource list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The SolutionTypeResource items on this page",
+          "items": {
+            "$ref": "#/definitions/SolutionTypeResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "SolutionTypeSettings": {
+      "type": "object",
+      "description": "The properties of Solution Type",
+      "properties": {
+        "solutionType": {
+          "type": "string",
+          "description": "The type of the solution"
+        },
+        "solutionSettings": {
+          "$ref": "#/definitions/SolutionSettings",
+          "description": "Solution settings"
+        }
+      },
+      "required": [
+        "solutionType"
+      ]
+    },
+    "SolutionTypeSettingsProperties": {
+      "type": "object",
+      "description": "Represent Solution settings properties description array.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the solution setting property."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "The UI friendly name of the solution setting property."
+        },
+        "type": {
+          "type": "string",
+          "description": "Type of the solution setting property, represented as a string."
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of solution setting property."
+        },
+        "allowedValues": {
+          "type": "array",
+          "description": "Array of allowed values for this solution settings property.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "defaultValue": {
+          "type": "string",
+          "description": "Default value for this solution settings property."
+        }
+      },
+      "required": [
+        "name",
+        "displayName",
+        "type",
+        "description",
+        "allowedValues",
+        "defaultValue"
+      ]
+    },
+    "Status": {
+      "type": "string",
+      "description": "Connection status.",
+      "enum": [
+        "Connected",
+        "Disconnected"
+      ],
+      "x-ms-enum": {
+        "name": "Status",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Connected",
+            "value": "Connected",
+            "description": "Connected status"
+          },
+          {
+            "name": "Disconnected",
+            "value": "Disconnected",
+            "description": "Disconnected status"
+          }
+        ]
+      }
+    },
+    "TestPermissionResult": {
+      "type": "object",
+      "description": "Public connector permissions.",
+      "properties": {
+        "solutionTypes": {
+          "type": "array",
+          "description": "Solution type permissions.",
+          "items": {
+            "$ref": "#/definitions/SolutionTypePermissions"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "solutionTypes"
+      ]
+    }
+  },
+  "parameters": {
+    "Azure.ResourceManager.ResourceUriParameter": {
+      "name": "resourceUri",
+      "in": "path",
+      "description": "The fully qualified Azure Resource manager identifier of the resource.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "x-ms-skip-url-encoding": true
+    }
+  }
+}

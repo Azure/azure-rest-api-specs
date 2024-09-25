@@ -3289,6 +3289,7 @@
         "type"
       ]
     },
+    "ChatMessageContent": {},
     "ChatRequestAssistantMessage": {
       "type": "object",
       "description": "A request chat message representing response or action from the assistant.",
@@ -3419,6 +3420,7 @@
       "description": "A request chat message representing user input to the assistant.",
       "properties": {
         "content": {
+          "$ref": "#/definitions/ChatMessageContent",
           "description": "The contents of the user message, with available input types varying by selected model."
         },
         "name": {
@@ -4320,11 +4322,22 @@
           "type": "integer",
           "format": "int32",
           "description": "Index of the prompt to which the EmbeddingItem corresponds."
+        },
+        "object": {
+          "type": "string",
+          "description": "The object type which is always 'embedding'.",
+          "enum": [
+            "embedding"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
         }
       },
       "required": [
         "embedding",
-        "index"
+        "index",
+        "object"
       ]
     },
     "Embeddings": {

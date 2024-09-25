@@ -1,7 +1,9 @@
 import "@azure-tools/typespec-azure-core";
 import "@typespec/rest";
 import "./models.tsp";
+import "./parameters.tsp";
 import "../shared/routes.tsp";
+import "../shared/parameters.tsp";
 
 using Azure.Core;
 using Azure.Core.Traits;
@@ -34,12 +36,7 @@ interface DevBoxes {
   @get
   listAllDevBoxesByUser is Azure.Core.Foundations.Operation<
     {
-      @doc("The AAD object id of the user. If value is 'me', the identity is taken from the authentication context.")
-      @maxLength(36)
-      @minLength(2)
-      @pattern("^[a-zA-Z0-9]{8}-([a-zA-Z0-9]{4}-){3}[a-zA-Z0-9]{12}$|^me$")
-      @path
-      userId: string;
+      ...UserIdParameter;
     },
     DevBoxListResult
   >;
@@ -51,12 +48,7 @@ interface DevBoxes {
   @get
   listSchedulesByPool is Azure.Core.Foundations.Operation<
     {
-      @doc("The DevCenter Project upon which to execute operations.")
-      @maxLength(63)
-      @minLength(3)
-      @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
-      @path
-      projectName: string;
+      ...ProjectNameParameter;
 
       @doc("The name of a pool of Dev Boxes.")
       @maxLength(63)
@@ -78,12 +70,7 @@ interface DevBoxes {
   @added(APIVersions.v2024_02_01)
   listSchedulesByProject is Azure.Core.Foundations.Operation<
     {
-      @doc("The DevCenter Project upon which to execute operations.")
-      @maxLength(63)
-      @minLength(3)
-      @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
-      @path
-      projectName: string;
+      ...ProjectNameParameter;
     },
     ScheduleListResult
   >;
@@ -97,19 +84,8 @@ interface DevBoxes {
   @get
   listDevBoxesByUser is Azure.Core.Foundations.Operation<
     {
-      @doc("The DevCenter Project upon which to execute operations.")
-      @maxLength(63)
-      @minLength(3)
-      @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
-      @path
-      projectName: string;
-
-      @doc("The AAD object id of the user. If value is 'me', the identity is taken from the authentication context.")
-      @maxLength(36)
-      @minLength(2)
-      @pattern("^[a-zA-Z0-9]{8}-([a-zA-Z0-9]{4}-){3}[a-zA-Z0-9]{12}$|^me$")
-      @path
-      userId: string;
+      ...ProjectNameParameter;
+      ...UserIdParameter;
     },
     DevBoxListResult
   >;
@@ -135,26 +111,9 @@ interface DevBoxes {
   @put
   createDevBox is Azure.Core.Foundations.Operation<
     {
-      @doc("The DevCenter Project upon which to execute the operation.")
-      @maxLength(63)
-      @minLength(3)
-      @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
-      @path
-      projectName: string;
-
-      @doc("The AAD object id of the user. If value is 'me', the identity is taken from the authentication context.")
-      @maxLength(36)
-      @minLength(2)
-      @pattern("^[a-zA-Z0-9]{8}-([a-zA-Z0-9]{4}-){3}[a-zA-Z0-9]{12}$|^me$")
-      @path
-      userId: string;
-
-      @doc("The name of a Dev Box.")
-      @maxLength(63)
-      @minLength(3)
-      @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
-      @path
-      devBoxName: string;
+      ...ProjectNameParameter;
+      ...UserIdParameter;
+      ...DevBoxNameParameter;
 
       @doc("Represents the body request of a Dev Box creation. Dev Box Pool name is required. Optionally set the owner of the Dev Box as local administrator")
       @bodyRoot
@@ -182,26 +141,9 @@ interface DevBoxes {
   @delete
   deleteDevBox is Azure.Core.Foundations.Operation<
     {
-      @doc("The DevCenter Project upon which to execute operations.")
-      @maxLength(63)
-      @minLength(3)
-      @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
-      @path
-      projectName: string;
-
-      @doc("The AAD object id of the user. If value is 'me', the identity is taken from the authentication context.")
-      @maxLength(36)
-      @minLength(2)
-      @pattern("^[a-zA-Z0-9]{8}-([a-zA-Z0-9]{4}-){3}[a-zA-Z0-9]{12}$|^me$")
-      @path
-      userId: string;
-
-      @doc("The name of a Dev Box.")
-      @maxLength(63)
-      @minLength(3)
-      @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
-      @path
-      devBoxName: string;
+      ...ProjectNameParameter;
+      ...UserIdParameter;
+      ...DevBoxNameParameter;
     },
     {
       @statusCode statusCode: 202;
@@ -236,9 +178,7 @@ interface DevBoxes {
   stopDevBox is DevCenterOps.LongRunningResourceAction<
     DevBox,
     {
-      @doc("Optional parameter to hibernate the dev box.")
-      @query
-      hibernate?: boolean;
+      ...HibernateQueryParameter;
     },
     OperationStatus
   >;
@@ -301,29 +241,9 @@ interface DevBoxes {
   @added(APIVersions.v2024_05_01_preview)
   createCustomizationGroup is Azure.Core.Foundations.Operation<
     {
-      @doc("The DevCenter Project upon which to execute operations.")
-      @maxLength(63)
-      @minLength(3)
-      @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
-      @path
-      projectName: string;
-
-      @doc("""
-          The AAD object id of the user. If value is 'me', the identity is taken from the 
-          authentication context.
-        """)
-      @maxLength(36)
-      @minLength(2)
-      @pattern("^[a-zA-Z0-9]{8}-([a-zA-Z0-9]{4}-){3}[a-zA-Z0-9]{12}$|^me$")
-      @path
-      userId: string;
-
-      @doc("The name of a Dev Box.")
-      @maxLength(63)
-      @minLength(3)
-      @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
-      @path
-      devBoxName: string;
+      ...ProjectNameParameter;
+      ...UserIdParameter;
+      ...DevBoxNameParameter;
 
       @doc("A customization group name.")
       @maxLength(63)
@@ -346,29 +266,9 @@ interface DevBoxes {
   @added(APIVersions.v2024_05_01_preview)
   getCustomizationTaskLog is Azure.Core.Foundations.Operation<
     {
-      @doc("The DevCenter Project upon which to execute operations.")
-      @maxLength(63)
-      @minLength(3)
-      @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
-      @path
-      projectName: string;
-
-      @doc("""
-          The AAD object id of the user. If value is 'me', the identity is taken from the 
-          authentication context.
-        """)
-      @maxLength(36)
-      @minLength(2)
-      @pattern("^[a-zA-Z0-9]{8}-([a-zA-Z0-9]{4}-){3}[a-zA-Z0-9]{12}$|^me$")
-      @path
-      userId: string;
-
-      @doc("The name of a Dev Box.")
-      @maxLength(63)
-      @minLength(3)
-      @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
-      @path
-      devBoxName: string;
+      ...ProjectNameParameter;
+      ...UserIdParameter;
+      ...DevBoxNameParameter;
 
       @doc("A customization group name.")
       @maxLength(63)
@@ -401,12 +301,7 @@ interface DevBoxes {
   @added(APIVersions.v2024_05_01_preview)
   listCustomizationTaskDefinitionsByProject is Azure.Core.Foundations.Operation<
     {
-      @doc("The DevCenter Project upon which to execute operations.")
-      @maxLength(63)
-      @minLength(3)
-      @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
-      @path
-      projectName: string;
+      ...ProjectNameParameter;
     },
     PagedCustomizationTaskDefinition
   >;
@@ -422,12 +317,7 @@ interface DevBoxes {
   @added(APIVersions.v2024_05_01_preview)
   validateCustomizationTasksAction is Azure.Core.Foundations.Operation<
     {
-      @doc("The DevCenter Project upon which to execute operations.")
-      @maxLength(63)
-      @minLength(3)
-      @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
-      @path
-      projectName: string;
+      ...ProjectNameParameter;
 
       @doc("Customization tasks to validate.")
       @body
@@ -457,26 +347,9 @@ interface DevBoxes {
   @get
   getRemoteConnection is Azure.Core.Foundations.Operation<
     {
-      @doc("The DevCenter Project upon which to execute operations.")
-      @maxLength(63)
-      @minLength(3)
-      @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
-      @path
-      projectName: string;
-
-      @doc("The AAD object id of the user. If value is 'me', the identity is taken from the authentication context.")
-      @maxLength(36)
-      @minLength(2)
-      @pattern("^[a-zA-Z0-9]{8}-([a-zA-Z0-9]{4}-){3}[a-zA-Z0-9]{12}$|^me$")
-      @path
-      userId: string;
-
-      @doc("The name of a Dev Box.")
-      @maxLength(63)
-      @minLength(3)
-      @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
-      @path
-      devBoxName: string;
+      ...ProjectNameParameter;
+      ...UserIdParameter;
+      ...DevBoxNameParameter;
     },
     RemoteConnection
   >;
@@ -500,9 +373,7 @@ interface DevBoxes {
   delayAction is StandardResourceOperations.ResourceAction<
     DevBoxAction,
     {
-      @doc("The time to delay the Dev Box action or actions until.")
-      @query("until")
-      delayUntil: utcDateTime;
+      ...DelayUntilQueryParameter;
     },
     DevBoxAction
   >;
@@ -512,9 +383,7 @@ interface DevBoxes {
   delayActions is StandardResourceOperations.ResourceCollectionAction<
     DevBoxAction,
     {
-      @doc("The time to delay the Dev Box action or actions until.")
-      @query("until")
-      delayUntil: utcDateTime;
+      ...DelayUntilQueryParameter;
     },
     DevBoxActionsDelayMultipleResult
   >;
@@ -534,12 +403,7 @@ interface DevBoxes {
   @added(APIVersions.v2024_08_01_preview)
   getImagingTaskLog is Azure.Core.Foundations.Operation<
     {
-      @doc("The DevCenter Project upon which to execute operations.")
-      @maxLength(63)
-      @minLength(3)
-      @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
-      @path
-      projectName: string;
+      ...ProjectNameParameter;
 
       @doc("An imaging build log id.")
       @path
@@ -553,5 +417,26 @@ interface DevBoxes {
       @body
       body: string;
     }
+  >;
+
+  @doc("Lists snapshots for this Dev Box.")
+  @added(APIVersions.v2024_09_01_preview)
+  listSnapshots is StandardResourceOperations.ResourceList<DevBoxSnapshot>;
+
+  @doc("Gets a snapshot by snapshot id.")
+  @added(APIVersions.v2024_09_01_preview)
+  getSnapshot is StandardResourceOperations.ResourceRead<DevBoxSnapshot>;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Replacing Status Monitor"
+  @doc("Restores a Dev Box to a specified snapshot.")
+  @added(APIVersions.v2024_09_01_preview)
+  @pollingOperation(OperationStatuses.get)
+  @action("restoreSnapshot")
+  restoreSnapshotDevBox is DevCenterOps.LongRunningResourceAction<
+    DevBox,
+    {
+      ...SnapshotIdQueryParameter;
+    },
+    OperationStatus
   >;
 }

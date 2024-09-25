@@ -23,6 +23,7 @@ interface PurviewPolicies {
       ...SkipTokenParameter;
 
       /** Supported filters : $filter=policyType eq SelfService, $filter=policyType eq SqlDevops. Returns only the policies of the specified type. If not specified, all policies are returned. */
+      #suppress "@azure-tools/typespec-azure-core/no-openapi" "LEGACY - THIS shouldn't even be needed"
       @extension("x-ms-skip-url-encoding", true)
       @query("$filter")
       filter?: string;
@@ -33,7 +34,6 @@ interface PurviewPolicies {
 /** The skipToken parameter definition. */
 model SkipTokenParameter {
   /** Paging key to paginate to next page. */
-  @extension("x-ms-parameter-location", "method")
   @query
   skipToken?: string;
 }

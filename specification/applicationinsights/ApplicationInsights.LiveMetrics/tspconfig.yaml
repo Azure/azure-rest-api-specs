@@ -1,6 +1,6 @@
 parameters:
   "service-dir":
-    default: "sdk/applicationinsights.livemetrics"
+    default: "sdk/applicationinsights"
   "dependencies":
     "additionalDirectories": []
     default: ""
@@ -11,15 +11,16 @@ options:
     azure-resource-provider-folder: "data-plane"
     emit-lro-options: "none"
     emitter-output-dir: "{project-root}/.."
-    examples-directory: "{project-root}/examples"
     # omit the enum type Versions from being added to versioned swagger
     omit-unreachable-types: true
     output-file: "{azure-resource-provider-folder}/LiveMetrics/{version-status}/{version}/livemetrics.json"
   "@azure-tools/typespec-python":
-    package-dir: "livemetrics"
+    package-dir: "azure-applicationinsights-livemetrics"
     package-name: "{package-dir}"
-    package-mode: dataplane
     flavor: azure
+    generate-test: true
+    generate-sample: true
+    examples-dir: "{project-root}/examples"
   "@azure-tools/typespec-csharp":
     package-dir: "LiveMetrics"
     namespace: "{package-dir}"
@@ -35,8 +36,8 @@ options:
       description: "LiveMetrics Service"
     flavor: azure
   "@azure-tools/typespec-java":
-    package-dir: "livemetrics"
-    namespace: com.livemetrics
+    package-dir: "azure-applicationinsights-livemetrics"
+    namespace: "com.azure.applicationinsights.livemetrics"
     flavor: azure
 linter:
   extends:

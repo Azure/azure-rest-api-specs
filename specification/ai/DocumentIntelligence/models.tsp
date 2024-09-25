@@ -1265,7 +1265,6 @@ model AuthorizeCopyRequest {
   """)
 model CopyAuthorization {
   @doc("ID of the target Azure resource where the document model should be copied to.")
-  @extension("x-ms-azure-resource", true)
   targetResourceId: string;
 
   @doc("""
@@ -1310,7 +1309,6 @@ model AuthorizeClassifierCopyRequest {
   """)
 model ClassifierCopyAuthorization {
   @doc("ID of the target Azure resource where the document classifier should be copied to.")
-  @extension("x-ms-azure-resource", true)
   targetResourceId: string;
 
   @doc("""

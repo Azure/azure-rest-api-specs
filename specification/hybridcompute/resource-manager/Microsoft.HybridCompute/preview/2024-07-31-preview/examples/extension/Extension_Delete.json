@@ -1,0 +1,20 @@
+{
+  "parameters": {
+    "subscriptionId": "{subscriptionId}",
+    "resourceGroupName": "myResourceGroup",
+    "machineName": "myMachine",
+    "extensionName": "MMA",
+    "api-version": "2024-07-31-preview"
+  },
+  "responses": {
+    "200": {},
+    "202": {
+      "headers": {
+        "Location": "{callbackUrl}",
+        "Retry-After": 200,
+        "Azure-AsyncOperation": "{callbackUri}"
+      }
+    },
+    "204": {}
+  }
+}

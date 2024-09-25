@@ -355,6 +355,10 @@ union DevBoxOperationKind {
   @doc("The operation represents a Dev Box repair.")
   Repair: "Repair",
 
+  @doc("The operation represents a Dev Box restore from snapshot.")
+  @added(APIVersions.v2024_09_01_preview)
+  RestoreSnapshot: "RestoreSnapshot",
+
   string,
 }
 
@@ -476,7 +480,7 @@ model ImageReference {
   @visibility("read")
   osBuildNumber?: string;
 
-  @doc("The datetime that the backing image version was published.")
+  @doc("The datetime that the backing image version was published, in RFC3339 format.")
   @visibility("read")
   publishedDate?: utcDateTime;
 }
@@ -623,7 +627,7 @@ model DevBox {
   @visibility("read")
   imageReference?: ImageReference;
 
-  @doc("Creation time of this Dev Box.")
+  @doc("Creation time of this Dev Box, in RFC3339 format.")
   @visibility("read")
   createdTime?: utcDateTime;
 
@@ -675,7 +679,7 @@ model DevBoxAction {
   @added(APIVersions.v2024_02_01)
   sourceType: DevBoxActionSourceType;
 
-  @doc("The earliest time that the action could occur (UTC).")
+  @doc("The earliest time that the action could occur (UTC), in RFC3339 format.")
   suspendedUntil?: utcDateTime;
 
   @doc("Details about the next run of this action.")
@@ -684,7 +688,7 @@ model DevBoxAction {
 
 @doc("Details about the next run of an action.")
 model DevBoxNextAction {
-  @doc("The time the action will be triggered (UTC).")
+  @doc("The time the action will be triggered (UTC), in RFC3339 format.")
   scheduledTime: utcDateTime;
 }
 
@@ -735,10 +739,10 @@ model DevBoxOperation {
   @doc("The object ID of the actor which initiated the operation.")
   createdByObjectId?: Azure.Core.uuid;
 
-  @doc("he time the operation started.")
+  @doc("he time the operation started, in RFC3339 format.")
   startTime?: utcDateTime;
 
-  @doc("The time the operation finished.")
+  @doc("The time the operation finished, in RFC3339 format.")
   endTime?: utcDateTime;
 
   @doc("Provisioning or operation error details. Populated only for error states.")
@@ -787,6 +791,16 @@ model DevBoxRepairOperationResult {
 
   @doc("The result message associated with the repair operation.")
   message?: string;
+}
+
+@doc("Information about a restore from snapshot operation on a Dev Box.")
+@added(APIVersions.v2024_09_01_preview)
+model DevBoxRestoreSnapshotOperation extends DevBoxOperation {
+  @doc("Specifies the snapshot id that was used for the restore operation.")
+  snapshotId: string;
+
+  @doc("The kind of operation that occurred.")
+  kind: DevBoxOperationKind.RestoreSnapshot;
 }
 
 @doc("The Customization Task list result.")
@@ -879,11 +893,11 @@ model CustomizationTask {
   @visibility("read")
   status?: CustomizationTaskStatus;
 
-  @doc("Start time of the task.")
+  @doc("Start time of the task, in RFC3339 format.")
   @visibility("read")
   startTime?: utcDateTime;
 
-  @doc("End time of the task.")
+  @doc("End time of the task, in RFC3339 format.")
   @visibility("read")
   endTime?: utcDateTime;
 }
@@ -945,11 +959,26 @@ model CustomizationGroup {
   @visibility("read")
   status?: CustomizationGroupStatus;
 
-  @doc("Start time of the customization group.")
+  @doc("Start time of the customization group, in RFC3339 format.")
   @visibility("read")
   startTime?: utcDateTime;
 
-  @doc("End time of the customization group.")
+  @doc("End time of the customization group, in RFC3339 format.")
   @visibility("read")
   endTime?: utcDateTime;
+}
+
+@added(APIVersions.v2024_09_01_preview)
+@doc("A DevBox snapshot")
+@resource("snapshots")
+@parentResource(DevBox)
+model DevBoxSnapshot {
+  @key("snapshotId")
+  @doc("The id of the snapshot. Should be treated as opaque string.")
+  @visibility("read")
+  snapshotId: string;
+
+  @doc("The datetime that the snapshot was created, in RFC3339 format.")
+  @visibility("read")
+  createdTime: utcDateTime;
 }

@@ -106,6 +106,16 @@ tag: package-composite-v3
 
 The following packages may be composed from multiple api-versions.
 
+### Tag: package-2024-08
+
+These settings apply only when `--tag=package-2024-08` is specified on the command line.
+
+``` yaml $(tag) == 'package-2024-08'
+input-file:
+  - Microsoft.Security/stable/2024-08-01/securityStandards.json
+  - Microsoft.Security/stable/2024-08-01/standardAssignments.json
+  - Microsoft.Security/stable/2024-08-01/customRecommedations.json
+```
 
 ### Tag: package-preview-2024-05
 
@@ -534,6 +544,9 @@ input-file:
 - Microsoft.Security/stable/2023-05-01/ServerVulnerabilityAssessmentsSettings.json
 - Microsoft.Security/stable/2023-11-15/apiCollections.json
 - Microsoft.Security/stable/2024-01-01/pricings.json
+- Microsoft.Security/stable/2024-08-01/securityStandards.json
+- Microsoft.Security/stable/2024-08-01/standardAssignments.json
+- Microsoft.Security/stable/2024-08-01/customRecommedations.json
 
 # Autorest suppressions
 suppressions:
@@ -610,6 +623,9 @@ input-file:
 - Microsoft.Security/stable/2023-05-01/ServerVulnerabilityAssessmentsSettings.json
 - Microsoft.Security/stable/2023-11-15/apiCollections.json
 - Microsoft.Security/stable/2024-04-01/securityConnectorsDevOps.json
+- Microsoft.Security/stable/2024-08-01/standardAssignments.json
+- Microsoft.Security/stable/2024-08-01/securityStandards.json
+- Microsoft.Security/stable/2024-08-01/customRecommedations.json
 
 # Needed when there is more than one input file
 override-info:

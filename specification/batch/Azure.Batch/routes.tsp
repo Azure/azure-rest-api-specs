@@ -80,7 +80,7 @@ interface Pools {
         start time of the last aggregation interval currently available.
         """)
       @query
-      @clientName("starttime")
+      @clientName("starttime", "!autorest")
       startTime?: utcDateTime;
 
       @doc("""
@@ -96,7 +96,7 @@ interface Pools {
         https://docs.microsoft.com/en-us/rest/api/batchservice/odata-filters-in-batch#list-account-usage-metrics.
         """)
       @query
-      @clientName("filter")
+      @clientName("filter", "!autorest")
       $filter?: string;
     },
     BatchPoolListUsageMetricsResult
@@ -130,17 +130,17 @@ interface Pools {
         https://docs.microsoft.com/en-us/rest/api/batchservice/odata-filters-in-batch#list-pools.
         """)
       @query
-      @clientName("filter")
+      @clientName("filter", "!autorest")
       $filter?: string;
 
       @doc("An OData $select clause.")
       @query
-      @clientName("select")
+      @clientName("select", "!autorest")
       $select?: string[];
 
       @doc("An OData $expand clause.")
       @query
-      @clientName("expand")
+      @clientName("expand", "!autorest")
       $expand?: string[];
     },
     BatchPoolListResult
@@ -181,12 +181,12 @@ interface Pools {
     BatchPoolHeaders & {
       @doc("An OData $select clause.")
       @query
-      @clientName("select")
+      @clientName("select", "!autorest")
       $select?: string[];
 
       @doc("An OData $expand clause.")
       @query
-      @clientName("expand")
+      @clientName("expand", "!autorest")
       $expand?: string[];
     },
     BatchPool
@@ -353,7 +353,7 @@ interface Pools {
         https://docs.microsoft.com/en-us/rest/api/batchservice/odata-filters-in-batch#list-support-images.
         """)
       @query
-      @clientName("filter")
+      @clientName("filter", "!autorest")
       $filter?: string;
     },
     BatchAccountListSupportedImagesResult
@@ -373,7 +373,7 @@ interface Pools {
         https://docs.microsoft.com/en-us/rest/api/batchservice/odata-filters-in-batch#list-support-images.
         """)
       @query
-      @clientName("filter")
+      @clientName("filter", "!autorest")
       $filter?: string;
     },
     BatchPoolNodeCountsListResult
@@ -418,12 +418,12 @@ interface Jobs {
 
       @doc("An OData $select clause.")
       @query
-      @clientName("select")
+      @clientName("select", "!autorest")
       $select?: string[];
 
       @doc("An OData $expand clause.")
       @query
-      @clientName("expand")
+      @clientName("expand", "!autorest")
       $expand?: string[];
     },
     BatchJob
@@ -577,17 +577,17 @@ interface Jobs {
         https://docs.microsoft.com/en-us/rest/api/batchservice/odata-filters-in-batch#list-jobs.
         """)
       @query
-      @clientName("filter")
+      @clientName("filter", "!autorest")
       $filter?: string;
 
       @doc("An OData $select clause.")
       @query
-      @clientName("select")
+      @clientName("select", "!autorest")
       $select?: string[];
 
       @doc("An OData $expand clause.")
       @query
-      @clientName("expand")
+      @clientName("expand", "!autorest")
       $expand?: string[];
     },
     BatchJobListResult
@@ -608,17 +608,17 @@ interface Jobs {
         https://docs.microsoft.com/en-us/rest/api/batchservice/odata-filters-in-batch#list-jobs-in-a-job-schedule.
         """)
       @query
-      @clientName("filter")
+      @clientName("filter", "!autorest")
       $filter?: string;
 
       @doc("An OData $select clause.")
       @query
-      @clientName("select")
+      @clientName("select", "!autorest")
       $select?: string[];
 
       @doc("An OData $expand clause.")
       @query
-      @clientName("expand")
+      @clientName("expand", "!autorest")
       $expand?: string[];
     },
     BatchJobListResult
@@ -649,12 +649,12 @@ interface Jobs {
         https://docs.microsoft.com/en-us/rest/api/batchservice/odata-filters-in-batch#list-job-preparation-and-release-status.
         """)
       @query
-      @clientName("filter")
+      @clientName("filter", "!autorest")
       $filter?: string;
 
       @doc("An OData $select clause.")
       @query
-      @clientName("select")
+      @clientName("select", "!autorest")
       $select?: string[];
     },
     BatchJobPreparationAndReleaseTaskStatusListResult
@@ -730,12 +730,12 @@ interface JobSchedules {
 
       @doc("An OData $select clause.")
       @query
-      @clientName("select")
+      @clientName("select", "!autorest")
       $select?: string[];
 
       @doc("An OData $expand clause.")
       @query
-      @clientName("expand")
+      @clientName("expand", "!autorest")
       $expand?: string[];
     },
     BatchJobSchedule
@@ -850,17 +850,17 @@ interface JobSchedules {
         https://docs.microsoft.com/en-us/rest/api/batchservice/odata-filters-in-batch#list-job-schedules.
         """)
       @query
-      @clientName("filter")
+      @clientName("filter", "!autorest")
       $filter?: string;
 
       @doc("An OData $select clause.")
       @query
-      @clientName("select")
+      @clientName("select", "!autorest")
       $select?: string[];
 
       @doc("An OData $expand clause.")
       @query
-      @clientName("expand")
+      @clientName("expand", "!autorest")
       $expand?: string[];
     },
     BatchJobScheduleListResult
@@ -912,17 +912,17 @@ interface Tasks {
         https://docs.microsoft.com/en-us/rest/api/batchservice/odata-filters-in-batch#list-tasks.
         """)
       @query
-      @clientName("filter")
+      @clientName("filter", "!autorest")
       $filter?: string;
 
       @doc("An OData $select clause.")
       @query
-      @clientName("select")
+      @clientName("select", "!autorest")
       $select?: string[];
 
       @doc("An OData $expand clause.")
       @query
-      @clientName("expand")
+      @clientName("expand", "!autorest")
       $expand?: string[];
     },
     BatchTaskListResult
@@ -1007,12 +1007,12 @@ interface Tasks {
 
       @doc("An OData $select clause.")
       @query
-      @clientName("select")
+      @clientName("select", "!autorest")
       $select?: string[];
 
       @doc("An OData $expand clause.")
       @query
-      @clientName("expand")
+      @clientName("expand", "!autorest")
       $expand?: string[];
     },
     BatchTask & DataServiceResponseHeaders
@@ -1058,7 +1058,7 @@ interface Tasks {
 
       @doc("An OData $select clause.")
       @query
-      @clientName("select")
+      @clientName("select", "!autorest")
       $select?: string[];
     },
     BatchTaskListSubtasksResult
@@ -1187,7 +1187,7 @@ interface Tasks {
         https://docs.microsoft.com/en-us/rest/api/batchservice/odata-filters-in-batch#list-task-files.
         """)
       @query
-      @clientName("filter")
+      @clientName("filter", "!autorest")
       $filter?: string;
 
       @doc("""
@@ -1306,7 +1306,7 @@ interface Nodes {
 
       @doc("An OData $select clause.")
       @query
-      @clientName("select")
+      @clientName("select", "!autorest")
       $select?: string[];
     },
     BatchNode
@@ -1445,12 +1445,12 @@ interface Nodes {
         https://docs.microsoft.com/en-us/rest/api/batchservice/odata-filters-in-batch#list-nodes-in-a-pool.
         """)
       @query
-      @clientName("filter")
+      @clientName("filter", "!autorest")
       $filter?: string;
 
       @doc("An OData $select clause.")
       @query
-      @clientName("select")
+      @clientName("select", "!autorest")
       $select?: string[];
     },
     BatchNodeListResult
@@ -1478,7 +1478,7 @@ interface Nodes {
 
       @doc("An OData $select clause.")
       @query
-      @clientName("select")
+      @clientName("select", "!autorest")
       $select?: string[];
     },
     BatchNodeVMExtension
@@ -1500,7 +1500,7 @@ interface Nodes {
 
       @doc("An OData $select clause.")
       @query
-      @clientName("select")
+      @clientName("select", "!autorest")
       $select?: string[];
     },
     BatchNodeVMExtensionListResult
@@ -1580,7 +1580,7 @@ interface Nodes {
         https://docs.microsoft.com/en-us/rest/api/batchservice/odata-filters-in-batch#list-compute-node-files.
         """)
       @query
-      @clientName("filter")
+      @clientName("filter", "!autorest")
       $filter?: string;
 
       @doc("Whether to list children of a directory.")

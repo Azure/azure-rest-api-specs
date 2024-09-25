@@ -12,7 +12,6 @@ options:
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/contentsafety.json"
     azure-resource-provider-folder: "data-plane"
     emit-lro-options: "none"
-    examples-directory: ./examples
     omit-unreachable-types: true
   "@azure-tools/typespec-python":
     package-dir: "azure-ai-contentsafety"
@@ -20,6 +19,9 @@ options:
     package-name: "{package-dir}"
     package-pprint-name: '"Azure AI Content Safety"'
     flavor: azure
+    generate-test: true
+    generate-sample: true
+    examples-dir: "{project-root}/examples"
   "@azure-tools/typespec-csharp":
     package-dir: "Azure.AI.ContentSafety"
     namespace: "{package-dir}"
@@ -36,7 +38,6 @@ options:
   "@azure-tools/typespec-java":
     package-dir: "azure-ai-contentsafety"
     namespace: com.azure.ai.contentsafety
-    examples-directory: "{project-root}/examples"
     partial-update: true
     flavor: azure
     api-version: "2023-10-01"

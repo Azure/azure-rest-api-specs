@@ -1,0 +1,87 @@
+{
+  "parameters": {
+    "serviceName": "apimService1",
+    "resourceGroupName": "rg1",
+    "api-version": "2024-05-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "backendId": "sfbackend",
+    "parameters": {
+      "properties": {
+        "description": "Service Fabric Test App 1",
+        "protocol": "http",
+        "url": "fabric:/mytestapp/mytestservice",
+        "properties": {
+          "serviceFabricCluster": {
+            "managementEndpoints": [
+              "https://somecluster.com"
+            ],
+            "clientCertificateId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/certificates/cert1",
+            "serverX509Names": [
+              {
+                "name": "ServerCommonName1",
+                "issuerCertificateThumbprint": "IssuerCertificateThumbprint1"
+              }
+            ],
+            "maxPartitionResolutionRetries": 5
+          }
+        }
+      }
+    }
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/backends/sfbackend",
+        "type": "Microsoft.ApiManagement/service/backends",
+        "name": "sfbackend",
+        "properties": {
+          "description": "Service Fabric Test App 1",
+          "url": "fabric:/mytestapp/mytestservice",
+          "protocol": "http",
+          "properties": {
+            "serviceFabricCluster": {
+              "managementEndpoints": [
+                "https://somecluster.com"
+              ],
+              "clientCertificateId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/certificates/cert1",
+              "serverX509Names": [
+                {
+                  "name": "ServerCommonName1",
+                  "issuerCertificateThumbprint": "IssuerCertificateThumbprint1"
+                }
+              ],
+              "maxPartitionResolutionRetries": 5
+            }
+          }
+        }
+      }
+    },
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/backends/sfbackend",
+        "type": "Microsoft.ApiManagement/service/backends",
+        "name": "sfbackend",
+        "properties": {
+          "description": "Service Fabric Test App 1",
+          "url": "fabric:/mytestapp/mytestservice",
+          "protocol": "http",
+          "properties": {
+            "serviceFabricCluster": {
+              "managementEndpoints": [
+                "https://somecluster.com"
+              ],
+              "clientCertificateId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/certificates/cert1",
+              "serverX509Names": [
+                {
+                  "name": "ServerCommonName1",
+                  "issuerCertificateThumbprint": "IssuerCertificateThumbprint1"
+                }
+              ],
+              "maxPartitionResolutionRetries": 5
+            }
+          }
+        }
+      }
+    }
+  }
+}
