@@ -38,7 +38,7 @@ model SessionCodeExecutionResponse {
   stderr: string;
 
   #suppress "@azure-tools/typespec-azure-core/no-unknown" ""
-  @doc("The result of the code execution.")
+  @doc("The result of the code execution. The type of this field is same as the type of actual result of the code execution after being Json serialized.")
   result: unknown;
 
   @doc("The execution time of the code in milliseconds.")
