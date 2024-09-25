@@ -1019,14 +1019,14 @@
         }
       },
       "patch": {
-        "operationId": "ContainerGroupProfiles_Update",
+        "operationId": "ContainerGroupProfiles_Patch",
         "x-ms-examples": {
-          "ContainerGroupProfilesUpdate": {
-            "$ref": "./examples/ContainerGroupProfilesUpdate.json"
+          "ContainerGroupProfilesPatch": {
+            "$ref": "./examples/ContainerGroupProfilesPatch.json"
           }
         },
-        "summary": "Update container group profiles.",
-        "description": "Updates container group profile tags with specified values.",
+        "summary": "Patch container group profiles.",
+        "description": "Patches container group profile with specified properties.",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -1041,12 +1041,12 @@
             "$ref": "#/parameters/ContainerGroupProfileNameParameter"
           },
           {
-            "name": "Resource",
-            "description": "The container group profile resource with just the tags to be updated.",
+            "name": "properties",
+            "description": "The container group profile properties that need to be updated.",
             "required": true,
             "in": "body",
             "schema": {
-              "$ref": "#/definitions/Resource"
+              "$ref": "#/definitions/ContainerGroupProfilePatch"
             }
           }
         ],
@@ -2610,6 +2610,19 @@
         }
       }
     },
+    "ContainerGroupProfilePatch": {
+      "type": "object",
+      "description": "Properties of container group profile that need to be patched",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
     "Logs": {
       "description": "The logs.",
       "type": "object",
@@ -3102,6 +3115,9 @@
       "name": "containerGroupProfileName",
       "in": "path",
       "required": true,
+      "pattern": "^(?!.*--)[a-z0-9]([-a-z0-9]*[a-z0-9])?$",
+      "minLength": 1,
+      "maxLength": 63,
       "type": "string",
       "description": "The name of the container group profile.",
       "x-ms-parameter-location": "method"
@@ -3110,7 +3126,6 @@
       "name": "revisionNumber",
       "in": "path",
       "required": true,
-      "pattern": "^.*$",
       "type": "string",
       "description": "The revision number of the container group profile.",
       "x-ms-parameter-location": "method"
