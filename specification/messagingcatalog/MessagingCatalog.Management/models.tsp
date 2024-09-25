@@ -142,8 +142,8 @@ model AssociationDefinition {
   workspaceId?: string;
 
   @doc("The message group id to associate.")
-  messageGroupId?: int32;
+  messageGroupId?: string;
 
   @doc("The schema group id to associate.")
-  schemaGroupId?: int32;
+  schemaGroupId?: string;
 }
