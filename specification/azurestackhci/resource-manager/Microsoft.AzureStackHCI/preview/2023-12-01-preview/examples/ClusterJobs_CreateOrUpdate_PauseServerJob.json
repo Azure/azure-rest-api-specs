@@ -8,14 +8,16 @@
     "jobsName": "pausenode",
     "api-version": "2023-12-01-preview",
     "resource": {
-      "kind": "Windows",
+      "kind": "WindowsServer",
       "properties": {
         "jobType": "PauseServer",
-        "arcNodeResourceIds": [
-          "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/ArcInstance-rg/providers/Microsoft.HybridCompute/machines/Node-2"
-        ],
-        "serverName": "Node-2",
-        "deploymentMode": "Deploy"
+        "deploymentMode": "Deploy",
+        "pauseServerJobServerDetails": [
+          {
+            "serverName": "Node-2",
+            "arcNodeResourceId": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/ArcInstance-rg/providers/Microsoft.HybridCompute/machines/Node-2"
+          }
+        ]
       }
     }
   },
@@ -25,7 +27,7 @@
         "id": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/user-pvtrp-rg/providers/Microsoft.AzureStackHCI/clusters/hciclu3/jobs/pausenode",
         "name": "pausenode",
         "type": "Microsoft.AzureStackHCI/clusters/jobs",
-        "kind": "Windows",
+        "kind": "WindowsServer",
         "systemData": {
           "createdBy": "user@microsoft.com",
           "createdByType": "User",
@@ -36,8 +38,13 @@
         },
         "properties": {
           "jobType": "PauseServer",
-          "serverName": "Node-2",
           "deploymentMode": "Deploy",
+          "pauseServerJobServerDetails": [
+            {
+              "serverName": "Node-2",
+              "arcNodeResourceId": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/ArcInstance-rg/providers/Microsoft.HybridCompute/machines/Node-2"
+            }
+          ],
           "reportedProperties": {
             "validationStatus": {
               "status": "Error",
@@ -103,9 +110,6 @@
             }
           },
           "provisioningState": "Succeeded",
-          "arcNodeResourceIds": [
-            "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/ArcInstance-rg/providers/Microsoft.HybridCompute/machines/Node-2"
-          ],
           "status": "NotSpecified"
         }
       }
@@ -115,7 +119,7 @@
         "id": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/user-pvtrp-rg/providers/Microsoft.AzureStackHCI/clusters/hciclu3/jobs/pausenode",
         "name": "pausenode",
         "type": "Microsoft.azurestackhci/clusters/jobs",
-        "kind": "Windows",
+        "kind": "WindowsServer",
         "systemData": {
           "createdBy": "user@microsoft.com",
           "createdByType": "User",
@@ -126,8 +130,13 @@
         },
         "properties": {
           "jobType": "PauseServer",
-          "serverName": "Node-2",
           "deploymentMode": "Deploy",
+          "pauseServerJobServerDetails": [
+            {
+              "serverName": "Node-2",
+              "arcNodeResourceId": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/ArcInstance-rg/providers/Microsoft.HybridCompute/machines/Node-2"
+            }
+          ],
           "reportedProperties": {
             "validationStatus": {
               "status": "Error",
@@ -193,9 +202,6 @@
             }
           },
           "provisioningState": "Succeeded",
-          "arcNodeResourceIds": [
-            "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/ArcInstance-rg/providers/Microsoft.HybridCompute/machines/Node-2"
-          ],
           "status": "NotSpecified"
         }
       }

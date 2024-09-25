@@ -14,12 +14,14 @@
           {
             "properties": {
               "jobType": "AddServer",
-              "arcNodeResourceIds": [
-                "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/ArcInstance-rg/providers/Microsoft.HybridCompute/machines/Node-2"
-              ],
-              "serverName": "Node-2",
               "deploymentMode": "Deploy",
-              "hostIpv4Address": "192.168.10.10",
+              "addServerJobServerDetails": [
+                {
+                  "serverName": "Node-2",
+                  "hostIpv4Address": "192.168.10.10",
+                  "arcNodeResourceId": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/ArcInstance-rg/providers/Microsoft.HybridCompute/machines/Node-2"
+                }
+              ],
               "secrets": [
                 {
                   "secretName": "cluster1-LocalAdminCredential-f5bcc1d9-23af-4ae9-aca1-041d0f593a63",
@@ -33,7 +35,7 @@
                 }
               ]
             },
-            "kind": "Windows",
+            "kind": "WindowsServer",
             "id": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/test-rg/providers/Microsoft.AzureStackHCI/clusters/clu1/jobs/addServer",
             "name": "bxefc",
             "type": "Microsoft.AzureStackHCI/clusters/jobs",
