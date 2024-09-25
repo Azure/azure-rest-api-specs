@@ -562,6 +562,10 @@
     }
   },
   "definitions": {
+    "Azure.Core.azureLocation": {
+      "type": "string",
+      "description": "Represents an Azure geography region where supported resource providers live."
+    },
     "CancelOperationsRequest": {
       "type": "object",
       "description": "This is the request to cancel running operations in scheduled actions using the operation ids",
@@ -645,7 +649,7 @@
           "description": "The type of resources used in the deallocate request eg virtual machines"
         },
         "location": {
-          "type": "string",
+          "$ref": "#/definitions/Azure.Core.azureLocation",
           "description": "The location of the deallocate request eg westus",
           "x-ms-mutability": [
             "read",
@@ -840,7 +844,7 @@
           "description": "The type of resources used in the Hibernate request eg virtual machines"
         },
         "location": {
-          "type": "string",
+          "$ref": "#/definitions/Azure.Core.azureLocation",
           "description": "The location of the Hibernate request eg westus",
           "x-ms-mutability": [
             "read",
@@ -1391,7 +1395,7 @@
           "description": "The type of resources used in the start request eg virtual machines"
         },
         "location": {
-          "type": "string",
+          "$ref": "#/definitions/Azure.Core.azureLocation",
           "description": "The location of the start request eg westus",
           "x-ms-mutability": [
             "read",
