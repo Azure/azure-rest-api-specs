@@ -175,7 +175,6 @@ union ActionType {
 /**
  * The certificate list result.
  */
-@friendlyName("CertificateListResult")
 model CertificateListResult is Azure.Core.Page<CertificateItem>;
 
 /**
@@ -647,7 +646,6 @@ model Contact {
 /**
  * The certificate issuer list result.
  */
-@friendlyName("CertificateIssuerListResult")
 model CertificateIssuerListResult is Azure.Core.Page<CertificateIssuerItem>;
 
 /**
@@ -1030,7 +1028,6 @@ model CertificateRestoreParameters {
 /**
  * A list of certificates that have been deleted in this vault.
  */
-@friendlyName("DeletedCertificateListResult")
 model DeletedCertificateListResult is Azure.Core.Page<DeletedCertificateItem>;
 
 /**
