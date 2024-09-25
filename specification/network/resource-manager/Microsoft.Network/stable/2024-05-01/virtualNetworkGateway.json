@@ -1421,7 +1421,12 @@
         ],
         "responses": {
           "202": {
-            "description": "Accepted and the operation will complete asynchronously."
+            "description": "Accepted and the operation will complete asynchronously.",
+            "headers": {
+              "location": {
+                "type": "string"
+              }
+            }
           },
           "200": {
             "description": "Request successful. The operation start failover simulation started on virtual network gateway.",
@@ -1432,7 +1437,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "./network.json#/definitions/Error"
+              "$ref": "./network.json#/definitions/CloudError"
             }
           }
         },
@@ -1487,7 +1492,12 @@
         ],
         "responses": {
           "202": {
-            "description": "Accepted and the operation will complete asynchronously."
+            "description": "Accepted and the operation will complete asynchronously.",
+            "headers": {
+              "location": {
+                "type": "string"
+              }
+            }
           },
           "200": {
             "description": "Request successful. Started the operation stop failover simulation on virtual network gateway.",
@@ -1498,7 +1508,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "./network.json#/definitions/Error"
+              "$ref": "./network.json#/definitions/CloudError"
             }
           }
         },
@@ -4963,6 +4973,7 @@
       }
     },
     "ExpressRouteFailoverStopApiParameters": {
+      "type": "object",
       "properties": {
         "peeringLocation": {
           "type": "string",
