@@ -90,6 +90,32 @@ directive:
     reason: Retroactive addition of missing examples out of scope at this time.
 ```
 
+### Tag: package-2024-10-preview
+
+These settings apply only when `--tag=package-2024-10-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-10-preview'
+input-file:
+  - Microsoft.Web/preview/2024-10-01-preview/Certificates.json
+  - Microsoft.Web/preview/2024-10-01-preview/SiteCertificates.json
+  - Microsoft.Web/preview/2024-10-01-preview/CommonDefinitions.json
+directive:
+  # suppress each RPC 3016 error
+- suppress: R4009
+  from: CommonDefinitions.json
+  reason: SystemData will implement in next version.
+- suppress: D5001
+  reason: Will fix in next version
+- suppress: R1003
+  reason: Will fix in next version
+- suppress: R2001
+  reason: Will fix in next version
+- suppress: R2029
+  reason: Will fix in next version
+- suppress: R2063
+  reason: Will fix in next version
+```
+
 ### Tag: package-2023-12
 
 These settings apply only when `--tag=package-2023-12` is specified on the command line.
