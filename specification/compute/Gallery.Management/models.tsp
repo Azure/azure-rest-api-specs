@@ -1,7 +1,6 @@
 import "@typespec/rest";
 import "@typespec/http";
 import "@typespec/openapi";
-import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
@@ -1514,22 +1513,6 @@ model SharingUpdate {
 }
 
 /**
- * The List Shared Galleries operation response.
- */
-model SharedGalleryList is Azure.Core.Page<SharedGallery>;
-
-/**
- * Specifies information about the Shared Gallery that you want to create or update.
- */
-model SharedGallery extends PirSharedGalleryResource {
-  /**
-   * Specifies the properties of a shared gallery
-   */
-  @extension("x-ms-client-flatten", true)
-  properties?: SharedGalleryProperties;
-}
-
-/**
  * Specifies the properties of a shared gallery
  */
 model SharedGalleryProperties {
@@ -1577,22 +1560,6 @@ model PirResource {
    */
   @visibility("read")
   location?: string;
-}
-
-/**
- * The List Shared Gallery Images operation response.
- */
-model SharedGalleryImageList is Azure.Core.Page<SharedGalleryImage>;
-
-/**
- * Specifies information about the gallery image definition that you want to create or update.
- */
-model SharedGalleryImage extends PirSharedGalleryResource {
-  /**
-   * Describes the properties of a gallery image definition.
-   */
-  @extension("x-ms-client-flatten", true)
-  properties?: SharedGalleryImageProperties;
 }
 
 /**
@@ -1666,23 +1633,6 @@ model SharedGalleryImageProperties {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   artifactTags?: Record<string>;
-}
-
-/**
- * The List Shared Gallery Image versions operation response.
- */
-model SharedGalleryImageVersionList
-  is Azure.Core.Page<SharedGalleryImageVersion>;
-
-/**
- * Specifies information about the gallery image version that you want to create or update.
- */
-model SharedGalleryImageVersion extends PirSharedGalleryResource {
-  /**
-   * Describes the properties of a gallery image version.
-   */
-  @extension("x-ms-client-flatten", true)
-  properties?: SharedGalleryImageVersionProperties;
 }
 
 /**
@@ -1763,17 +1713,6 @@ model SharedGalleryDataDiskImage extends SharedGalleryDiskImage {
    * This property specifies the logical unit number of the data disk. This value is used to identify data disks within the Virtual Machine and therefore must be unique for each data disk attached to the Virtual Machine.
    */
   lun: int32;
-}
-
-/**
- * Specifies information about the Community Gallery that you want to create or update.
- */
-model CommunityGallery extends PirCommunityGalleryResource {
-  /**
-   * Describes the properties of a community gallery.
-   */
-  @extension("x-ms-client-flatten", true)
-  properties?: CommunityGalleryProperties;
 }
 
 /**
@@ -1864,22 +1803,6 @@ model CommunityGalleryIdentifier {
    * The unique id of this community gallery.
    */
   uniqueId?: string;
-}
-
-/**
- * The List Community Gallery Images operation response.
- */
-model CommunityGalleryImageList is Azure.Core.Page<CommunityGalleryImage>;
-
-/**
- * Specifies information about the gallery image definition that you want to create or update.
- */
-model CommunityGalleryImage extends PirCommunityGalleryResource {
-  /**
-   * Describes the properties of a gallery image definition.
-   */
-  @extension("x-ms-client-flatten", true)
-  properties?: CommunityGalleryImageProperties;
 }
 
 /**
@@ -1978,23 +1901,6 @@ model CommunityGalleryImageIdentifier {
    * The name of the gallery image definition SKU.
    */
   sku?: string;
-}
-
-/**
- * The List Community Gallery Image versions operation response.
- */
-model CommunityGalleryImageVersionList
-  is Azure.Core.Page<CommunityGalleryImageVersion>;
-
-/**
- * Specifies information about the gallery image version that you want to create or update.
- */
-model CommunityGalleryImageVersion extends PirCommunityGalleryResource {
-  /**
-   * Describes the properties of a gallery image version.
-   */
-  @extension("x-ms-client-flatten", true)
-  properties?: CommunityGalleryImageVersionProperties;
 }
 
 /**

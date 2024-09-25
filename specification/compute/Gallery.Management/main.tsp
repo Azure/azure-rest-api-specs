@@ -14,7 +14,12 @@ import "./GalleryApplication.tsp";
 import "./GalleryApplicationVersion.tsp";
 import "./GalleryImage.tsp";
 import "./GalleryImageVersion.tsp";
-import "./routes.tsp";
+import "./SharedGallery.tsp";
+import "./SharedGalleryImage.tsp";
+import "./SharedGalleryImageVersion.tsp";
+import "./CommunityGallery.tsp";
+import "./CommunityGalleryImage.tsp";
+import "./CommunityGalleryImageVersion.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
