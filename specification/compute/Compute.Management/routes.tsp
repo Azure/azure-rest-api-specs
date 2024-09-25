@@ -80,7 +80,7 @@ interface VirtualMachineImagesEdgeZoneOperations {
     edgeZone: string,
 
     ...SubscriptionIdParameter,
-  ): ArmResponse<void> | ErrorResponse;
+  ): ArmResponse<VirtualMachineImageResource[]> | ErrorResponse;
 
   /**
    * Gets a list of virtual machine image offers for the specified location, edge zone and publisher.
@@ -104,7 +104,7 @@ interface VirtualMachineImagesEdgeZoneOperations {
     publisherName: string,
 
     ...SubscriptionIdParameter,
-  ): ArmResponse<void> | ErrorResponse;
+  ): ArmResponse<VirtualMachineImageResource[]> | ErrorResponse;
 
   /**
    * Gets a list of virtual machine image SKUs for the specified location, edge zone, publisher, and offer.
@@ -134,7 +134,7 @@ interface VirtualMachineImagesEdgeZoneOperations {
     offer: string,
 
     ...SubscriptionIdParameter,
-  ): ArmResponse<void> | ErrorResponse;
+  ): ArmResponse<VirtualMachineImageResource[]> | ErrorResponse;
 
   /**
    * Gets a list of all virtual machine image versions for the specified location, edge zone, publisher, offer, and SKU.
@@ -188,7 +188,7 @@ interface VirtualMachineImagesEdgeZoneOperations {
     $orderby?: string,
 
     ...SubscriptionIdParameter,
-  ): ArmResponse<void> | ErrorResponse;
+  ): ArmResponse<VirtualMachineImageResource[]> | ErrorResponse;
 
   /**
    * Gets a virtual machine image in an edge zone.
@@ -261,7 +261,7 @@ interface VirtualMachineImagesOperations {
     ...ApiVersionParameter,
     ...LocationResourceParameter,
     ...SubscriptionIdParameter,
-  ): ArmResponse<void> | ErrorResponse;
+  ): ArmResponse<VirtualMachineImageResource[]> | ErrorResponse;
 
   /**
    * Gets a list of virtual machine image offers for the specified location and publisher.
@@ -279,7 +279,7 @@ interface VirtualMachineImagesOperations {
     publisherName: string,
 
     ...SubscriptionIdParameter,
-  ): ArmResponse<void> | ErrorResponse;
+  ): ArmResponse<VirtualMachineImageResource[]> | ErrorResponse;
 
   /**
    * Gets a list of virtual machine image SKUs for the specified location, publisher, and offer.
@@ -303,7 +303,7 @@ interface VirtualMachineImagesOperations {
     offer: string,
 
     ...SubscriptionIdParameter,
-  ): ArmResponse<void> | ErrorResponse;
+  ): ArmResponse<VirtualMachineImageResource[]> | ErrorResponse;
 
   /**
    * Gets a list of all virtual machine image versions for the specified location, publisher, offer, and SKU.
@@ -345,7 +345,7 @@ interface VirtualMachineImagesOperations {
     $orderby?: string,
 
     ...SubscriptionIdParameter,
-  ): ArmResponse<void> | ErrorResponse;
+  ): ArmResponse<VirtualMachineImageResource[]> | ErrorResponse;
 
   /**
    * Gets a virtual machine image.
@@ -400,7 +400,7 @@ interface LogAnalyticsOperations {
      */
     @body
     parameters: RequestRateByIntervalInput,
-  ): ArmResponse<LogAnalyticsOperationResult | void> | ErrorResponse;
+  ): ArmResponse<LogAnalyticsOperationResult | ArmAcceptedResponse> | ErrorResponse;
 
   /**
    * Export logs that show total throttled Api requests for this subscription in the given time window.
@@ -417,7 +417,7 @@ interface LogAnalyticsOperations {
      */
     @body
     parameters: ThrottledRequestsInput,
-  ): ArmResponse<LogAnalyticsOperationResult | void> | ErrorResponse;
+  ): ArmResponse<LogAnalyticsOperationResult | ArmAcceptedResponse> | ErrorResponse;
 }
 
 interface VirtualMachineRunCommandsOperations {
@@ -660,5 +660,5 @@ interface VirtualMachineScaleSetVMRunCommandsOperations {
      */
     @header
     accept: "application/json, text/json",
-  ): ArmResponse<void> | ErrorResponse;
+  ): OkResponse | ErrorResponse;
 }
