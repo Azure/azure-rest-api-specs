@@ -5479,7 +5479,7 @@
         },
         "registrationInfo": {
           "$ref": "#/definitions/RegistrationInfo",
-          "description": "The registration info of HostPool.",
+          "description": "The registration info of HostPool. This is not returned on GET. In order to get the registration token use the retrieveRegistrationToken or listRegistrationTokens POST calls.",
           "x-nullable": true
         },
         "vmTemplate": {
@@ -5754,7 +5754,7 @@
         },
         "registrationInfo": {
           "$ref": "#/definitions/RegistrationInfoPatch",
-          "description": "The registration info of HostPool.",
+          "description": "The registration info of HostPool.  This is not returned on GET. In order to get the registration token use the retrieveRegistrationToken or listRegistrationTokens POST calls.",
           "x-nullable": true
         },
         "vmTemplate": {
@@ -7120,7 +7120,7 @@
       "description": "Boot Diagnostics is a debugging feature which allows you to view Console Output and Screenshot to diagnose VM status. <br><br> You can easily view the output of your console log. <br><br> Azure also enables you to see a screenshot of the VM from the hypervisor."
     },
     "RegistrationInfo": {
-      "description": "Represents a RegistrationInfo definition.",
+      "description": "Represents a RegistrationInfo definition.  This is not returned on HostPool GET. In order to get the registration token use the retrieveRegistrationToken or listRegistrationTokens POST calls.",
       "type": "object",
       "properties": {
         "expirationTime": {
@@ -7150,7 +7150,7 @@
       }
     },
     "RegistrationInfoPatch": {
-      "description": "Represents a RegistrationInfo definition.",
+      "description": "Represents a RegistrationInfo definition.  This is not returned on HostPool GET. In order to get the registration token use the retrieveRegistrationToken or listRegistrationTokens POST calls.",
       "type": "object",
       "properties": {
         "expirationTime": {
