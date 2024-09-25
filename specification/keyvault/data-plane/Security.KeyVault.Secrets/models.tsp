@@ -298,7 +298,6 @@ model SecretUpdateParameters {
 /**
  * The secret list result.
  */
-@friendlyName("SecretListResult")
 model SecretListResult is Azure.Core.Page<SecretItem>;
 
 /**
@@ -309,6 +308,7 @@ model SecretItem {
   /**
    * Secret identifier.
    */
+  @visibility("read")
   @key // The ID isn't really the key; it should be the certificate name, but we don't have this attribute on the model
   id: string;
 
@@ -338,7 +338,6 @@ model SecretItem {
 /**
  * The deleted secret list result
  */
-@friendlyName("DeletedSecretListResult")
 model DeletedSecretListResult is Azure.Core.Page<DeletedSecretItem>;
 
 /**
