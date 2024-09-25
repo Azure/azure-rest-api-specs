@@ -355,6 +355,10 @@ model KeyCreateParameters {
   @encodedName("application/json", "public_exponent")
   publicExponent?: int32;
 
+  /**
+   * Json web key operations. For more information on possible key operations, see
+   * JsonWebKeyOperation.
+   */
   @encodedName("application/json", "key_ops")
   keyOps?: JsonWebKeyOperation[];
 
@@ -527,6 +531,10 @@ model JsonWebKey {
    */
   kty?: JsonWebKeyType;
 
+  /**
+   * Json web key operations. For more information on possible key operations, see
+   * JsonWebKeyOperation.
+   */
   @encodedName("application/json", "key_ops")
   keyOps?: string[];
 
@@ -736,7 +744,6 @@ model KeyUpdateParameters {
 /**
  * The key list result.
  */
-@friendlyName("KeyListResult")
 model KeyListResult is Azure.Core.Page<KeyItem>;
 
 /**
@@ -747,6 +754,7 @@ model KeyItem {
   /**
    * Key identifier.
    */
+  @visibility("read")
   @key // The ID isn't really the key; it should be the key name, but we don't have this attribute on the model
   kid: string;
 
@@ -802,6 +810,9 @@ model KeyOperationsParameters {
   @encodedName("application/json", "alg")
   algorithm: JsonWebKeyEncryptionAlgorithm;
 
+  /**
+   * The value to operate on.
+   */
   @encode("base64url")
   value: bytes;
 
@@ -837,20 +848,35 @@ model KeyOperationResult {
   @visibility("read")
   kid?: string;
 
+  /**
+   * The result of the operation.
+   */
   @visibility("read")
   @encodedName("application/json", "value")
   @encode("base64url")
   result?: bytes;
 
+  /**
+   * Cryptographically random, non-repeating initialization vector for symmetric
+   * algorithms.
+   */
   @visibility("read")
   @encode("base64url")
   iv?: bytes;
 
+  /**
+   * The tag to authenticate when performing decryption with an authenticated
+   * algorithm.
+   */
   @visibility("read")
   @encodedName("application/json", "tag")
   @encode("base64url")
   authenticationTag?: bytes;
 
+  /**
+   * Additional data to authenticate but not encrypt/decrypt when using
+   * authenticated crypto algorithms.
+   */
   @visibility("read")
   @encodedName("application/json", "aad")
   @encode("base64url")
@@ -868,6 +894,9 @@ model KeySignParameters {
   @encodedName("application/json", "alg")
   algorithm: JsonWebKeySignatureAlgorithm;
 
+  /**
+   * The value to operate on.
+   */
   @encode("base64url")
   value: bytes;
 }
@@ -944,7 +973,6 @@ model KeyReleaseResult {
 /**
  * A list of keys that have been deleted in this vault.
  */
-@friendlyName("DeletedKeyListResult")
 model DeletedKeyListResult is Azure.Core.Page<DeletedKeyItem>;
 
 /**
