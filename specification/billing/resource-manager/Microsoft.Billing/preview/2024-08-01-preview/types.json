@@ -31,7 +31,7 @@
       },
       "x-ms-azure-resource": true
     },
-    "Products":{
+    "Products": {
       "description": "Product Details.",
       "type": "object",
       "properties": {
@@ -56,8 +56,8 @@
           "readOnly": true
         },
         "status": {
-         "description": "product transfer status",
-         "enum": [
+          "description": "product transfer status",
+          "enum": [
             "NotStarted",
             "InProgress",
             "Completed",
@@ -73,38 +73,38 @@
       },
       "readOnly": true
     },
-    "MigrationDetails": {
+    "Migration": {
       "description": "Migration Details.",
       "type": "object",
       "properties": {
-         "destinationBillingScope": {
-            "description": "Destination billing scope to be mapped.",
-            "type": "string"
-          },
-          "status": {
-            "description": "Migration Status",
-            "enum": [
-              "Draft",
-              "InProgress"
-            ],
-            "type": "string",
-            "x-ms-enum": {
-              "name": "MigrationStatus",
-              "modelAsString": true
-            }
-          },
-          "locale": {
-            "description": "Locale for notifications. Optional property, used only for migrate enrollment",
-            "type": "string"
-          },
-          "transferId": {
-            "description": "Transfer Id",
-            "type": "string",
-            "readOnly": true
-          },
-          "products":{
-            "$ref": "#/definitions/Products"
+        "destinationBillingScope": {
+          "description": "Destination billing scope to be mapped.",
+          "type": "string"
+        },
+        "status": {
+          "description": "Migration Status",
+          "enum": [
+            "Draft",
+            "InProgress"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "MigrationStatus",
+            "modelAsString": true
           }
+        },
+        "locale": {
+          "description": "Locale for notifications. Optional property, used only for migrate enrollment",
+          "type": "string"
+        },
+        "transferId": {
+          "description": "Transfer Id",
+          "type": "string",
+          "readOnly": true
+        },
+        "products": {
+          "$ref": "#/definitions/Products"
+        }
       }
     }
   },
