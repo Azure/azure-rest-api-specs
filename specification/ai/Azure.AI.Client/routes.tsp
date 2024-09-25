@@ -15,30 +15,28 @@ using Azure.Core.Foundations;
 namespace Azure.AI.Client.Connections;
 
 /*
- See https://learn.microsoft.com/rest/api/azureml/workspace-connections/list-secrets?view=rest-azureml-2024-04-01
+ See https://learn.microsoft.com/rest/api/azureml/workspace-connections/list
 */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+#suppress "@azure-tools/typespec-azure-core/use-standard-names"
 @doc("List the details of all the connections (not including their credentials)")
 @route("connections")
 @get
-op getConnections is Azure.Core.Foundations.Operation<
-  {},
-  ConnectionDetailsList
->;
+op list is Azure.Core.Foundations.Operation<{}, ConnectionsListResponse>;
 
 /*
- See https://learn.microsoft.com/rest/api/azureml/workspace-connections/list-secrets?view=rest-azureml-2024-04-01
+ See https://learn.microsoft.com/rest/api/azureml/workspace-connections/list-secrets
 */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @doc("Get the details of a single connection, includeing credential (if avaialble).")
 @route("connections/{connectionNameInUrl}/listsecrets")
 @post
-op getConnectionSecrets is Azure.Core.Foundations.Operation<
+op listSecrets is Azure.Core.Foundations.Operation<
   {
     @doc("Connection Name")
     connectionNameInUrl: string;
 
-    @doc("Connection Name")
+    @doc("Connection Name (should be the same as the connection name in the URL path)")
     connectionName: string;
 
     @doc("The ID of the target subscription.")
@@ -53,5 +51,5 @@ op getConnectionSecrets is Azure.Core.Foundations.Operation<
     @doc("The api version.")
     apiVersionInBody: string;
   },
-  ConnectionDetails
+  ConnectionsListSecretsResponse
 >;

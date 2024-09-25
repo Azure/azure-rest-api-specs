@@ -16,7 +16,7 @@ using Azure.Core.Traits;
 namespace Azure.AI.Client;
 
 @doc("to do")
-model ConnectionDetails {
+model ConnectionsListSecretsResponse {
   @doc("The name of the resource")
   name: string;
 
@@ -25,9 +25,9 @@ model ConnectionDetails {
 }
 
 @doc("to do")
-model ConnectionDetailsList {
+model ConnectionsListResponse {
   @doc("to do")
-  value: ConnectionDetails[];
+  value: ConnectionsListSecretsResponse[];
 }
 
 #suppress "@azure-tools/typespec-azure-core/no-string-discriminator"
@@ -35,29 +35,29 @@ model ConnectionDetailsList {
 @discriminator("authType")
 model ConnectionProperties {
   @doc("Authentication type of the connection target")
-  authType: AuthType;
+  authType: AuthenticationType;
 }
 
 #suppress "@azure-tools/typespec-azure-core/no-enum"
 @doc("to do")
-enum AuthType {
-  @doc("to do")
+enum AuthenticationType {
+  @doc("API Key authentication")
   apiKey: "ApiKey",
 
-  @doc("to do")
+  @doc("Entra ID authentication")
   AAD: "AAD",
 
-  @doc("to do")
+  @doc("Shared Access Signature (SAS) authentication")
   SAS: "SAS",
 }
 
 @doc("Connection properties for connections with API key authentication")
 model ConnectionPropertiesApiKeyAuth extends ConnectionProperties {
   @doc("Authentication type of the connection target")
-  authType: AuthType.apiKey;
+  authType: AuthenticationType.apiKey;
 
   @doc("Category of the connection")
-  category: ConnectionCategory;
+  category: ConnectionType;
 
   @doc("Credentials will only be present for authType=ApiKey")
   credentials: CredentialsApiKeyAuth;
@@ -73,10 +73,10 @@ model ConnectionPropertiesApiKeyAuth extends ConnectionProperties {
 @doc("Connection properties for connections with AAD authentication (aka `Entra ID passthrough`)")
 model ConnectionPropertiesAADAuth extends ConnectionProperties {
   @doc("Authentication type of the connection target")
-  authType: AuthType.AAD;
+  authType: AuthenticationType.AAD;
 
   @doc("Category of the connection")
-  category: ConnectionCategory;
+  category: ConnectionType;
 
   @doc("to do")
   target: string;
@@ -86,10 +86,10 @@ model ConnectionPropertiesAADAuth extends ConnectionProperties {
 @doc("Connection properties for connections with SAS authentication")
 model ConnectionPropertiesSASAuth extends ConnectionProperties {
   @doc("Authentication type of the connection target")
-  authType: AuthType.SAS;
+  authType: AuthenticationType.SAS;
 
   @doc("Category of the connection")
-  category: ConnectionCategory;
+  category: ConnectionType;
 
   @doc("Credentials will only be present for authType=ApiKey")
   credentials: CredentialsSASAuth;
@@ -111,12 +111,12 @@ model CredentialsSASAuth {
   SAS: string;
 }
 
-// https://learn.microsoft.com/rest/api/azureml/workspace-connections/list-secrets?view=rest-azureml-2024-04-01&tabs=HTTP#connectioncategory
+// https://learn.microsoft.com/rest/api/azureml/workspace-connections/list-secrets?view=rest-azureml-2024-04-01&tabs=HTTP#ConnectionType
 #suppress "@azure-tools/typespec-azure-core/no-enum"
-@doc("Category of the connection")
-enum ConnectionCategory {
+@doc("The Type (or category) of the connection")
+enum ConnectionType {
   @doc("Azure OpenAI")
-  AzureOpenAI: "AzureOpenAI",
+  AzureOpenAI: "AzureOpenAI", //TODO: In Python this results in .AZURE_OPEN_AI. How do I make it .AZURE_OPENAI?
 
   @doc("Serverless API")
   Serverless: "Serverless",
