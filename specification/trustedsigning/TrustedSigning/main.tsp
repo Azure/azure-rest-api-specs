@@ -17,10 +17,10 @@ using Azure.Core;
   ]>
 )
 @service({
-  title: "Azure Developer Signing",
-  summary: "Azure Developer Signing is a service that provides managed artifact signing for all.",
+  title: "Azure Trusted Signing",
+  summary: "Azure Trusted Signing is a service that provides managed artifact signing for all.",
 })
-@versioned(Azure.Developer.Signing.Versions)
+@versioned(Azure.Developer.TrustedSigning.Versions)
 @server(
   "https://{region}.codesigning.azure.net/",
   "Sign and retrieve relevant information pertaining signing process.",
@@ -29,8 +29,8 @@ using Azure.Core;
     region: string,
   }
 )
-@doc("Azure Developer Signing is a service that provides managed artifact signing for all.")
-namespace Azure.Developer.Signing;
+@doc("Azure Trusted Signing is a service that provides managed artifact signing for all.")
+namespace Azure.Developer.TrustedSigning;
 
 @doc("Versions info.")
 enum Versions {
@@ -110,22 +110,22 @@ union SignatureAlgorithm {
   "ES256K",
 }
 
-@doc("Azure Developer Signing customer account created upon registration on the service.")
+@doc("Azure Trusted Signing customer account created upon registration on the service.")
 @resource("codesigningaccounts")
 model SigningAccount {
   @key("accountName")
   @visibility("read", "update")
-  @doc("Azure Developer Signing account name.")
+  @doc("Azure Trusted Signing account name.")
   accountName: string;
 }
 
-@doc("Azure Developer Signing certificate profile configured on an account.")
+@doc("Azure Trusted Signing certificate profile configured on an account.")
 @resource("certificateprofiles")
 @parentResource(SigningAccount)
 model CertificateProfileName {
   @key("certificateProfile")
   @visibility("read", "update")
-  @doc("Azure Developer Signing certificate profile name under an account.")
+  @doc("Azure Trusted Signing certificate profile name under an account.")
   certificateProfile: string;
 }
 
