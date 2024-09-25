@@ -55,7 +55,7 @@ interface TestRunOperations {
   listMetrics is LoadTestRun.listMetrics;
   listTestRuns is LoadTestRun.listTestRuns;
   @clientName("stopTestRun", "javascript,python,java,csharp,go")
-  stop is LoadTestRun.stop;
+  stop is LoadTestRun.stopTestRun;
 }
 
 @client({
@@ -79,5 +79,5 @@ interface TestProfileRunOperations {
   getTestProfileRun is TestProfileRunAdministration.getTestProfileRun;
   listTestProfileRuns is TestProfileRunAdministration.listTestProfileRuns;
   @clientName("stopTestProfileRun", "javascript,python,java,csharp,go")
-  stop is TestProfileRunAdministration.stop;
+  stop is TestProfileRunAdministration.stopTestProfileRun;
 }
