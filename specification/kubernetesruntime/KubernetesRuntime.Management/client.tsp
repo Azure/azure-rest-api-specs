@@ -5,4 +5,7 @@ using Azure.ClientGenerator.Core;
 using Azure.ResourceManager.CommonTypes;
 using Microsoft.KubernetesRuntime;
 
-@@access(Operations.list, Access.internal, "csharp");
+@@clientName(Microsoft.KubernetesRuntime,
+  "ContainerOrchestratorRuntimeMgmt",
+  "python"
+);
