@@ -424,12 +424,12 @@
         }
       }
     },
-    "/app/userRoles": {
+    "/app/ledgerUsers": {
       "get": {
-        "operationId": "ListUserRoles",
+        "operationId": "ListLedgerUsers",
         "x-ms-examples": {
-          "ListUserRolesEntries": {
-            "$ref": "./examples/ledger/ListUserRoles.json"
+          "ListLedgerUsersEntries": {
+            "$ref": "./examples/ledger/ListLedgerUsers.json"
           }
         },
         "x-ms-pageable": {
@@ -447,7 +447,7 @@
           "200": {
             "description": "Users in the paged specified range.",
             "schema": {
-              "$ref": "#/definitions/PagedUserRoles"
+              "$ref": "#/definitions/PagedLedgerUsers"
             }
           },
           "default": {
@@ -558,9 +558,9 @@
         }
       }
     },
-    "/app/userRoles/{userId}": {
+    "/app/ledgerUsers/{userId}": {
       "delete": {
-        "operationId": "DeleteUserWithMultipleRoles",
+        "operationId": "DeleteLedgerUsers",
         "x-ms-examples": {
           "DeleteUser": {
             "$ref": "./examples/ledger/DeleteUser.json"
@@ -588,10 +588,10 @@
         }
       },
       "get": {
-        "operationId": "GetUserWithMultipleRoles",
+        "operationId": "GetLedgerUsers",
         "x-ms-examples": {
-          "GetUserWithMultipleRoles": {
-            "$ref": "./examples/ledger/GetUserWithMultipleRoles.json"
+          "GetLedgerUsers": {
+            "$ref": "./examples/ledger/GetLedgerUsers.json"
           }
         },
         "summary": "Gets a user with multiple roles.",
@@ -619,10 +619,10 @@
         }
       },
       "patch": {
-        "operationId": "CreateOrUpdateUserWithMultipleRoles",
+        "operationId": "CreateOrUpdateLedgerUsers",
         "x-ms-examples": {
-          "CreateOrUpdateUserWithMultipleRoles": {
-            "$ref": "./examples/ledger/CreateOrUpdateUserWithMultipleRoles.json"
+          "CreateOrUpdateLedgerUsers": {
+            "$ref": "./examples/ledger/CreateOrUpdateLedgerUsers.json"
           }
         },
         "summary": "Adds a user or updates a user's fields.",
@@ -1438,7 +1438,7 @@
         }
       }
     },
-    "PagedUserRoles": {
+    "PagedLedgerUsers": {
       "description": "Paginated users returned in response to a query.",
       "type": "object",
       "properties": {
