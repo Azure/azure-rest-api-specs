@@ -17,6 +17,13 @@ options:
     flavor: "azure"
     namespace: "com.azure.resourcemanager.trustedsigning"
     service-name: "Trusted Signing"
+  "@azure-tools/typespec-python":
+    package-dir: "azure-mgmt-trustedsigning"
+    package-name: "{package-dir}"
+    flavor: "azure"
+    generate-test: true
+    generate-sample: true
+    examples-dir: "{project-root}/examples"
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"
