@@ -394,7 +394,7 @@ model RouterRule {
   @clientName("routerRuleKind", "java")
   kind: RouterRuleKind;
   
-  @clientName("kindInJava")
+  @clientName("kind", "java")
   routerRuleKind: string;
 }
 
