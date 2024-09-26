@@ -1,3 +1,6 @@
+parameters:
+  "service-dir":
+    default: "sdk/trustedsigning"
 emit:
   - "@azure-tools/typespec-autorest"
 options:
@@ -9,6 +12,11 @@ options:
     # `arm-resource-flattening` is only used for back-compat for specs existed on July 2024. All new service spec should NOT use this flag
     arm-resource-flattening: true
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/codeSigningAccount.json"
+  "@azure-tools/typespec-java":
+    package-dir: "azure-resourcemanager-trustedsigning"
+    flavor: "azure"
+    namespace: "com.azure.resourcemanager.trustedsigning"
+    service-name: "Trusted Signing"
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"
