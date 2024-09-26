@@ -37,9 +37,14 @@ These settings apply only when `--tag=package-preview-2024-10` is specified on t
 
 ```yaml $(tag) == 'package-preview-2024-10'
 input-file:
-  - Microsoft.Devcenter/preview/2024-10-01-preview/commonDefinitions.json
-  - Microsoft.Devcenter/preview/2024-10-01-preview/devcenter.json
-  - Microsoft.Devcenter/preview/2024-10-01-preview/vdi.json
+  - Microsoft.DevCenter/preview/2024-10-01-preview/commonDefinitions.json
+  - Microsoft.DevCenter/preview/2024-10-01-preview/devcenter.json
+  - Microsoft.DevCenter/preview/2024-10-01-preview/vdi.json
+suppressions:
+  - code: PatchBodyParametersSchema
+    from: vdi.json
+    reason: Patch Body comes from common-types v5 Sku object. Keeping here for consistency with existing parts of API to avoid breaking customers.
+
 ```
 
 ### Tag: package-preview-2024-08
