@@ -146,7 +146,7 @@ model CompletionsOptions {
    * Determinism is not guaranteed, and you should refer to the `system_fingerprint` response parameter to monitor changes in the backend.
    */
   @added(ServiceApiVersions.v2024_08_01_Preview)
-  seed: int32;
+  seed?: int32;
 }
 
 @doc("""
