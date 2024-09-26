@@ -466,6 +466,15 @@ model LogicalNetworkArmReference {
     },
     {
       type: "Microsoft.NetworkCloud/cloudServicesNetworks";
+    },
+    {
+      type: "Microsoft.NetworkCloud/l2Networks";
+    },
+    {
+      type: "Microsoft.NetworkCloud/l3Networks";
+    },
+    {
+      type: "Microsoft.NetworkCloud/trunkedNetworks";
     }
   ]>;
 }
