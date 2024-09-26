@@ -131,12 +131,7 @@
       "type": "string",
       "oneOf": [
         {
-          "enum": [
-            "ResourceGroup",
-            "Subscription",
-            "Tenant",
-            "None"
-          ],
+          "enum": ["ResourceGroup", "Subscription", "Tenant", "None"],
           "default": "ResourceGroup"
         },
         {
@@ -662,30 +657,16 @@
             },
             "principalType": {
               "type": "string",
-              "enum": [
-                "User",
-                "Group",
-                "ServicePrincipal",
-                "ForeignGroup",
-                "Device"
-              ],
+              "enum": ["User", "Group", "ServicePrincipal", "ForeignGroup", "Device"],
               "default": "ServicePrincipal"
             }
           },
           "oneOf": [
             {
-              "required": [
-                "roleName",
-                "principalId",
-                "scope"
-              ]
+              "required": ["roleName", "principalId", "scope"]
             },
             {
-              "required": [
-                "roleDefinitionId",
-                "principalId",
-                "scope"
-              ]
+              "required": ["roleDefinitionId", "principalId", "scope"]
             }
           ]
         },
@@ -693,9 +674,7 @@
         "description": {},
         "variables": {}
       },
-      "required": [
-        "roleAssignment"
-      ],
+      "required": ["roleAssignment"],
       "additionalProperties": false
     },
     "JsonPatchOp": {
