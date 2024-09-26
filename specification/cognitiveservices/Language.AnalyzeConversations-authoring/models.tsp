@@ -520,7 +520,6 @@ model ConversationalAnalysisAuthoringExportedProject {
 @discriminator("projectKind")
 @clientName("ExportedProjectAssets", "csharp")
 model ConversationalAnalysisAuthoringExportedProjectAssets {
-
   /**
    * The type of project containing the assets.
    */
