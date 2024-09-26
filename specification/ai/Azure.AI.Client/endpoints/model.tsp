@@ -56,7 +56,7 @@ model ConnectionPropertiesApiKeyAuth extends ConnectionProperties {
   authType: AuthenticationType.apiKey;
 
   @doc("Category of the connection")
-  category: ConnectionType;
+  category: EndpointType;
 
   @doc("Credentials will only be present for authType=ApiKey")
   credentials: CredentialsApiKeyAuth;
@@ -75,7 +75,7 @@ model ConnectionPropertiesAADAuth extends ConnectionProperties {
   authType: AuthenticationType.AAD;
 
   @doc("Category of the connection")
-  category: ConnectionType;
+  category: EndpointType;
 
   @doc("to do")
   target: string;
@@ -88,7 +88,7 @@ model ConnectionPropertiesSASAuth extends ConnectionProperties {
   authType: AuthenticationType.SAS;
 
   @doc("Category of the connection")
-  category: ConnectionType;
+  category: EndpointType;
 
   @doc("Credentials will only be present for authType=ApiKey")
   credentials: CredentialsSASAuth;
@@ -113,12 +113,17 @@ model CredentialsSASAuth {
 // https://learn.microsoft.com/rest/api/azureml/workspace-connections/list-secrets?view=rest-azureml-2024-04-01&tabs=HTTP#ConnectionType
 #suppress "@azure-tools/typespec-azure-core/no-enum"
 @doc("The Type (or category) of the connection")
-enum ConnectionType {
+enum EndpointType {
   @doc("Azure OpenAI")
   AzureOpenAI: "AzureOpenAI", //TODO: In Python this results in .AZURE_OPEN_AI. How do I make it .AZURE_OPENAI?
 
   @doc("Serverless API")
   Serverless: "Serverless",
+
+  // This is not part of the REST API, but client code returns the single Agent in the AI Project (if enabled)
+  // in the list of endpoints.
+  @doc("Agent")
+  Agent: "Agent",
 }
 
 /*

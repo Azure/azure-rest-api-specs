@@ -282,7 +282,7 @@
       "description": "Connection properties for connections with AAD authentication (aka `Entra ID passthrough`)",
       "properties": {
         "category": {
-          "$ref": "#/definitions/ConnectionType",
+          "$ref": "#/definitions/EndpointType",
           "description": "Category of the connection"
         },
         "target": {
@@ -306,7 +306,7 @@
       "description": "Connection properties for connections with API key authentication",
       "properties": {
         "category": {
-          "$ref": "#/definitions/ConnectionType",
+          "$ref": "#/definitions/EndpointType",
           "description": "Category of the connection"
         },
         "credentials": {
@@ -335,7 +335,7 @@
       "description": "Connection properties for connections with SAS authentication",
       "properties": {
         "category": {
-          "$ref": "#/definitions/ConnectionType",
+          "$ref": "#/definitions/EndpointType",
           "description": "Category of the connection"
         },
         "credentials": {
@@ -358,30 +358,6 @@
         }
       ],
       "x-ms-discriminator-value": "SAS"
-    },
-    "ConnectionType": {
-      "type": "string",
-      "description": "The Type (or category) of the connection",
-      "enum": [
-        "AzureOpenAI",
-        "Serverless"
-      ],
-      "x-ms-enum": {
-        "name": "ConnectionType",
-        "modelAsString": false,
-        "values": [
-          {
-            "name": "AzureOpenAI",
-            "value": "AzureOpenAI",
-            "description": "Azure OpenAI"
-          },
-          {
-            "name": "Serverless",
-            "value": "Serverless",
-            "description": "Serverless API"
-          }
-        ]
-      }
     },
     "ConnectionsListResponse": {
       "type": "object",
@@ -443,6 +419,36 @@
       "required": [
         "SAS"
       ]
+    },
+    "EndpointType": {
+      "type": "string",
+      "description": "The Type (or category) of the connection",
+      "enum": [
+        "AzureOpenAI",
+        "Serverless",
+        "Agent"
+      ],
+      "x-ms-enum": {
+        "name": "EndpointType",
+        "modelAsString": false,
+        "values": [
+          {
+            "name": "AzureOpenAI",
+            "value": "AzureOpenAI",
+            "description": "Azure OpenAI"
+          },
+          {
+            "name": "Serverless",
+            "value": "Serverless",
+            "description": "Serverless API"
+          },
+          {
+            "name": "Agent",
+            "value": "Agent",
+            "description": "Agent"
+          }
+        ]
+      }
     }
   },
   "parameters": {
