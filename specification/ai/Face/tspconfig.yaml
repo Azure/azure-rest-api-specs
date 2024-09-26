@@ -11,14 +11,17 @@ options:
     azure-resource-provider-folder: "data-plane"
     emit-lro-options: "none"
     emitter-output-dir: "{project-root}/.."
-    examples-directory: "examples"
     omit-unreachable-types: true
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/Face.json"
   "@azure-tools/typespec-python":
     package-dir: "azure-ai-vision-face"
     package-name: "{package-dir}"
+    package-version: 1.0.0b2
     package-mode: dataplane
     flavor: azure
+    generate-test: true
+    generate-sample: true
+    examples-dir: "{project-root}/examples"
   "@azure-tools/typespec-csharp":
     package-dir: "Azure.AI.Vision.Face"
     namespace: "{package-dir}"
