@@ -3,8 +3,8 @@
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "api-version": "2024-05-01-preview",
     "resourceGroupName": "demo",
-    "containerGroupName": "demo1",
-    "containerGroup": {
+    "containerGroupProfileName": "demo1",
+    "containerGroupProfile": {
       "properties": {
         "sku": "Standard",
         "containers": [
@@ -38,8 +38,6 @@
       "body": {
         "properties": {
           "sku": "Standard",
-          "isCreatedFromStandbyPool": false,
-          "provisioningState": "Succeeded",
           "containers": [
             {
               "name": "test-container-001",
@@ -64,15 +62,12 @@
           "initContainers": [],
           "restartPolicy": "Never",
           "osType": "Linux",
-          "instanceView": {
-            "events": [],
-            "state": "Succeeded"
-          },
-          "priority": "Spot"
+          "priority": "Spot",
+          "revision": 0
         },
-        "id": "/subscriptions/subId/resourceGroups/demo/providers/Microsoft.ContainerInstance/containerGroups/demo1",
+        "id": "/subscriptions/subId/resourceGroups/demo/providers/Microsoft.ContainerInstance/containerGroupProfiles/demo1",
         "name": "demo1",
-        "type": "Microsoft.ContainerInstance/containerGroups",
+        "type": "Microsoft.ContainerInstance/containerGroupProfiles",
         "location": "eastus"
       }
     },
@@ -80,8 +75,6 @@
       "body": {
         "properties": {
           "sku": "Standard",
-          "isCreatedFromStandbyPool": false,
-          "provisioningState": "Created",
           "containers": [
             {
               "name": "test-container-001",
@@ -106,15 +99,12 @@
           "initContainers": [],
           "restartPolicy": "Never",
           "osType": "Linux",
-          "instanceView": {
-            "events": [],
-            "state": "Created"
-          },
-          "priority": "Spot"
+          "priority": "Spot",
+          "revision": 1
         },
-        "id": "/subscriptions/subId/resourceGroups/demo/providers/Microsoft.ContainerInstance/containerGroups/demo1",
+        "id": "/subscriptions/subId/resourceGroups/demo/providers/Microsoft.ContainerInstance/containerGroupProfiles/demo1",
         "name": "demo1",
-        "type": "Microsoft.ContainerInstance/containerGroups",
+        "type": "Microsoft.ContainerInstance/containerGroupProfiles",
         "location": "eastus"
       }
     }

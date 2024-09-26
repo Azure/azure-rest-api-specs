@@ -3,8 +3,8 @@
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "api-version": "2024-05-01-preview",
     "resourceGroupName": "demoResource",
-    "containerGroupName": "demo1",
-    "Resource": {
+    "containerGroupProfileName": "demo1",
+    "properties": {
       "tags": {
         "tag1key": "tag1Value",
         "tag2key": "tag2Value"
@@ -14,15 +14,16 @@
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/subid/resourceGroups/demoResource/providers/Microsoft.ContainerInstance/containerGroups/demo1",
+        "id": "/subscriptions/subid/resourceGroups/demoResource/providers/Microsoft.ContainerInstance/containerGroupProfiles/demo1",
         "location": "WestUs",
         "name": "demo1",
-        "type": "Microsoft.ContainerInstance/containerGroups",
+        "type": "Microsoft.ContainerInstance/containerGroupProfiles",
         "tags": {
           "tag1key": "tag1Value",
           "tag2key": "tag2Value"
         },
         "properties": {
+          "sku": "Standard",
           "containers": [
             {
               "name": "demo1",
@@ -70,13 +71,9 @@
                 "protocol": "TCP"
               }
             ],
-            "type": "Public",
-            "dnsNameLabel": "dnsnamelabel1",
-            "fqdn": "dnsnamelabel1.azure-container.io"
+            "type": "Public"
           },
           "osType": "Linux",
-          "isCreatedFromStandbyPool": false,
-          "provisioningState": "Succeeded",
           "volumes": [
             {
               "name": "volume1",
@@ -93,7 +90,8 @@
               "name": "volume3",
               "secret": {}
             }
-          ]
+          ],
+          "revision": 2
         }
       }
     }

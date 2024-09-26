@@ -1,7 +1,6 @@
 {
   "parameters": {
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
-    "resourceGroupName": "demo",
     "api-version": "2024-05-01-preview"
   },
   "responses": {
@@ -9,13 +8,14 @@
       "body": {
         "value": [
           {
-            "id": "/subscriptions/subid/resourceGroups/demo/providers/Microsoft.ContainerInstance/containerGroups/demo1",
+            "id": "/subscriptions/subid/resourceGroups/demo/providers/Microsoft.ContainerInstance/containerGroupProfiles/demo1",
             "location": "WestUs",
             "zones": [
               "1"
             ],
             "name": "demo1",
             "properties": {
+              "sku": "Standard",
               "containers": [
                 {
                   "name": "demo1",
@@ -61,8 +61,6 @@
                 "type": "Public"
               },
               "osType": "Linux",
-              "isCreatedFromStandbyPool": false,
-              "provisioningState": "Succeeded",
               "volumes": [
                 {
                   "azureFile": {
@@ -72,9 +70,10 @@
                   },
                   "name": "volume1"
                 }
-              ]
+              ],
+              "revision": 1
             },
-            "type": "Microsoft.ContainerInstance/containerGroups"
+            "type": "Microsoft.ContainerInstance/containerGroupProfiles"
           }
         ]
       }
