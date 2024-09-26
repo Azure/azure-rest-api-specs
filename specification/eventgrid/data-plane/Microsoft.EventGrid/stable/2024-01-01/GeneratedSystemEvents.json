@@ -4321,7 +4321,15 @@
           "format": "int64",
           "description": "Sequence number of the DICOM Service within Azure Health Data Services. It is unique for every image creation and deletion within the service."
         }
-      }
+      },
+      "required": [
+        "partitionName",
+        "imageStudyInstanceUid",
+        "imageSeriesInstanceUid",
+        "imageSopInstanceUid",
+        "serviceHostName",
+        "sequenceNumber"
+      ]
     },
     "HealthcareDicomImageDeletedEventData": {
       "type": "object",
@@ -4352,7 +4360,15 @@
           "format": "int64",
           "description": "Sequence number of the DICOM Service within Azure Health Data Services. It is unique for every image creation and deletion within the service."
         }
-      }
+      },
+      "required": [
+        "partitionName",
+        "imageStudyInstanceUid",
+        "imageSeriesInstanceUid",
+        "imageSopInstanceUid",
+        "serviceHostName",
+        "sequenceNumber"
+      ]
     },
     "HealthcareDicomImageUpdatedEventData": {
       "type": "object",
@@ -4383,7 +4399,15 @@
           "format": "int64",
           "description": "Sequence number of the DICOM Service within Azure Health Data Services. It is unique for every image creation, updation and deletion within the service."
         }
-      }
+      },
+      "required": [
+        "partitionName",
+        "imageStudyInstanceUid",
+        "imageSeriesInstanceUid",
+        "imageSopInstanceUid",
+        "serviceHostName",
+        "sequenceNumber"
+      ]
     },
     "HealthcareFhirResourceCreatedEventData": {
       "type": "object",
@@ -4412,7 +4436,10 @@
         }
       },
       "required": [
-        "resourceType"
+        "resourceType",
+        "resourceFhirAccount",
+        "resourceFhirId",
+        "resourceVersionId"
       ]
     },
     "HealthcareFhirResourceDeletedEventData": {
@@ -4442,7 +4469,10 @@
         }
       },
       "required": [
-        "resourceType"
+        "resourceType",
+        "resourceFhirAccount",
+        "resourceFhirId",
+        "resourceVersionId"
       ]
     },
     "HealthcareFhirResourceType": {
@@ -5450,7 +5480,10 @@
         }
       },
       "required": [
-        "resourceType"
+        "resourceType",
+        "resourceFhirAccount",
+        "resourceFhirId",
+        "resourceVersionId"
       ]
     },
     "IotHubDeviceConnectedEventData": {
