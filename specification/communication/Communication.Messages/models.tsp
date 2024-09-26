@@ -142,6 +142,7 @@ model MediaNotificationContentBase {
 }
 
 @added(Versions.c2024_08_30)
+#deprecated "`MediaNotificationContent` is being deprecated, we encourage you to use the new `ImageNotificationContent` instead."
 @doc("A request to send an image notification.")
 model MediaNotificationContent extends NotificationContent {
   @doc("Message notification type is image.")
