@@ -15,13 +15,12 @@ namespace Microsoft.AzureCloudMetadata;
 
 /** Region resource. */
 @tenantResource
-@parentResource(Geography)
 model Region is ProxyResource<RegionProperties> {
   @doc("The region name")
   @segment("regions")
   @key("regionName")
   @visibility("read")
-  @pattern("^[a-zA-Z-]{3,24}$")
+  @pattern("^[a-zA-Z0-9-]{3,24}$")
   @path
   name: string;
 }
@@ -88,7 +87,7 @@ model RegionProperties {
   rnmDnsName?: string;
 
   /** Resource id of region's parent geography. */
-  geographyResourceId: ParentResourceId;
+  geographyResourceId: string;
 
   /** The provisioning state of resource. */
   @visibility("read")
@@ -173,5 +172,5 @@ union RegionState {
 @armResourceOperations
 interface Regions {
   get is ArmResourceRead<Region>;
-  listByGeography is ArmResourceListByParent<Region>;
+  list is ArmResourceListAtScope<Region>;
 }

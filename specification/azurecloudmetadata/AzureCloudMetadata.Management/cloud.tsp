@@ -32,7 +32,7 @@ model CloudProperties {
   environmentType: EnvironmentType;
 
   /** State of cloud. */
-  state: State;
+  state: CloudState;
 
   /** The provisioning state of resource. */
   @visibility("read")
@@ -53,8 +53,37 @@ union EnvironmentType {
   string,
 }
 
+/** The valid state of cloud. */
+union CloudState {
+  /** The resource is being proposed */
+  Proposed: "Proposed",
+
+  /** The resource is approved */
+  Approved: "Approved",
+
+  /** The resource is on hold */
+  OnHold: "On Hold",
+
+  /** The resource is in buildout */
+  Buildout: "Buildout",
+
+  /** The resource is ready in production with a Service-Level agreement */
+  ProductionSLA: "Production SLA",
+
+  /** The resource is in decommissioning */
+  Decommissioning: "Decommissioning",
+
+  /** The resource is retired */
+  Retired: "Retired",
+
+  /** The resource is cancelled */
+  Cancelled: "Cancelled",
+
+  string,
+}
+
 @armResourceOperations
 interface Clouds {
   get is ArmResourceRead<Cloud>;
-  list is ArmResourceListByParent<Cloud>;
+  list is ArmResourceListAtScope<Cloud>;
 }

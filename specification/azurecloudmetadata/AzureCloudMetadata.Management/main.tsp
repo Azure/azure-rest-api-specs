@@ -6,6 +6,9 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "./cloud.tsp";
 import "./geography.tsp";
 import "./region.tsp";
+import "./availabilityzone.tsp";
+import "./datacenter.tsp";
+import "./cluster.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
