@@ -73,6 +73,7 @@ interface OpenAIClient {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
   createUpload is Azure.OpenAI.createUpload;
 
+  #suppress "@azure-tools/typespec-azure-core/byos" "representation of existing multipart/form-data operation"
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
   addUploadPart is Azure.OpenAI.addUploadPart;
 
