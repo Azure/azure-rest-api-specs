@@ -3874,6 +3874,9 @@
           },
           "description": "Network dataplane used in the Kubernetes cluster."
         },
+        "advancedNetworking": {
+          "$ref": "#/definitions/AdvancedNetworking"
+        },
         "podCidr": {
           "type": "string",
           "pattern": "^([0-9]{1,3}\\.){3}[0-9]{1,3}(\\/([0-9]|[1-2][0-9]|3[0-2]))?$",
@@ -3992,6 +3995,42 @@
         }
       },
       "description": "Profile of network configuration."
+    },
+    "AdvancedNetworking": {
+      "type": "object",
+      "description": "Advanced Networking profile for enabling observability and security feature suite on a cluster. For more information see aka.ms/aksadvancednetworking.",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Indicates the enablement of Advanced Networking functionalities of observability and security on AKS clusters. When this is set to true, all observability and security features will be set to enabled unless explicitly disabled. If not specified, the default is false."
+        },
+        "observability": {
+          "$ref": "#/definitions/AdvancedNetworkingObservability"
+        },
+        "security": {
+          "$ref": "#/definitions/AdvancedNetworkingSecurity"
+        }
+      }
+    },
+    "AdvancedNetworkingObservability": {
+      "type": "object",
+      "description": "Observability profile to enable advanced network metrics and flow logs with historical contexts.",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Indicates the enablement of Advanced Networking observability functionalities on clusters."
+        }
+      }
+    },
+    "AdvancedNetworkingSecurity": {
+      "type": "object",
+      "description": "Security profile to enable security features on cilium based cluster.",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "This feature allows user to configure network policy based on DNS (FQDN) names. It can be enabled only on cilium based clusters. If not specified, the default is false."
+        }
+      }
     },
     "MaintenanceConfigurationListResult": {
       "type": "object",
