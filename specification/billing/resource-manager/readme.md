@@ -300,13 +300,15 @@ input-file:
   - Microsoft.Billing/preview/2024-08-01-preview/migration.json
   - Microsoft.Billing/preview/2024-08-01-preview/operation.json
   - Microsoft.Billing/preview/2024-08-01-preview/types.json
-directive:
-  - suppress: PutResponseCodes
-    from: Microsoft.Billing/preview/2024-08-01-preview/migration.json
+suppressions:
+  - code: PutResponseCodes
+    from: migration.json
     reason: 201 is returned as a part of response
-  - suppress: PutRequestResponseSchemeArm
-    from: Microsoft.Billing/preview/2024-08-01-preview/migration.json
+  - code: PutRequestResponseSchemeArm
+    from: migration.json
     reason: PATCH operation is not needed
+  - code: TenantLevelAPIsNotAllowed
+    reason: Specific validation rules do not apply to this service. Microsoft.Billing is a tenant level RP
 ```
 
 ### Tag: package-2020-11-preview
