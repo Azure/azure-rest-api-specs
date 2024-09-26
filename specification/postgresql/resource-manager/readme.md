@@ -69,35 +69,27 @@ suppressions:
   - code: PutResponseCodes
     from: PrivateEndpointConnections.json
     reason: FlexibleServers namespace is already returning 202 as response for PUT. These APIs are under same namespace and hence keeping it as-is.
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{serverName}/privateEndpointConnections/{privateEndpointConnectionName}"].put.responses["202"]
   - code: ProvisioningStateSpecifiedForLROPut
     from: ThreatProtection.json
     reason: FlexibleServers namespace is already returning 202 as response for PUT. These APIs are under same namespace and hence keeping it as-is.
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{serverName}/advancedThreatProtectionSettings/{threatProtectionName}"].put.responses
   - code: PutResponseCodes
     from: ThreatProtection.json
     reason: FlexibleServers namespace is already returning 202 as response for PUT. These APIs are under same namespace and hence keeping it as-is.
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{serverName}/advancedThreatProtectionSettings/{threatProtectionName}"].put.responses["202"]
   - code: ProvisioningStateSpecifiedForLROPut
     from: VirtualEndpoints.json
     reason: FlexibleServers namespace is already returning 202 as response for PUT. These APIs are under same namespace and hence keeping it as-is.
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{serverName}/virtualendpoints/{virtualEndpointName}"].put.responses
   - code: ProvisioningStateSpecifiedForLROPatch
     from: VirtualEndpoints.json
     reason: FlexibleServers namespace is already returning 202 as response for PUT. These APIs are under same namespace and hence keeping it as-is.
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{serverName}/virtualendpoints/{virtualEndpointName}"].patch.responses
   - code: PutResponseCodes
     from: VirtualEndpoints.json
     reason: FlexibleServers namespace is already returning 202 as response for PUT. These APIs are under same namespace and hence keeping it as-is.
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{serverName}/virtualendpoints/{virtualEndpointName}"].put.responses["202"]
   - code: PutResponseCodes
     from: Backups.json
     reason: FlexibleServers namespace is already returning 202 as response for PUT. These APIs are under same namespace and hence keeping it as-is.
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{serverName}/backups/{backupName}"].put.responses["202"]
   - code: ProvisioningStateSpecifiedForLROPut
     from: Backups.json
     reason: FlexibleServers namespace is already returning 202 as response for PUT. These APIs are under same namespace and hence keeping it as-is.
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{serverName}/backups/{backupName}"].put.responses
 ```
 
 ### Tag: package-flexibleserver-2024-03-preview
