@@ -65,7 +65,7 @@ model Upload {
   filename: string;
 
   /** The intended number of bytes to be uploaded. */
-  bytes: int32;
+  bytes: int64;
 
   /** The intended purpose of the file. [Please refer here](/docs/api-reference/files/object#files/object-purpose) for acceptable values. */
   purpose: string;
