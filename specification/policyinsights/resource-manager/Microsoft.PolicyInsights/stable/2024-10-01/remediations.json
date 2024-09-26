@@ -1190,7 +1190,7 @@
               },
               {
                 "value": "ReEvaluateCompliance",
-                "description": "Re-evaluate the compliance state of resources and then remediate the resources found to be non-compliant."
+                "description": "Re-evaluate the compliance state of resources and then remediate the resources found to be non-compliant. The resourceIds filter cannot be used in this mode."
               }
             ]
           },
@@ -1264,6 +1264,13 @@
             "type": "string"
           },
           "description": "The resource locations that will be remediated."
+        },
+        "resourceIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The IDs of the resources that will be remediated. Can specify at most 100 IDs. This filter cannot be used when ReEvaluateCompliance is set to ReEvaluateCompliance, and cannot be empty if provided."
         }
       },
       "description": "The filters that will be applied to determine which resources to remediate."
