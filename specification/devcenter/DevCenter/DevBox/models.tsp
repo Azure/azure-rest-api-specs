@@ -675,6 +675,11 @@ model DevBox {
   @visibility("read")
   createdTime?: utcDateTime;
 
+  @doc("Last time a user connected to this Dev Box, in RFC3339 format.")
+  @visibility("read")
+  @added(APIVersions.v2024_10_01_preview)
+  lastConnectedTime?: utcDateTime;
+
   @doc("Indicates whether the owner of the Dev Box is a local administrator.")
   @visibility("read", "create")
   localAdministrator?: LocalAdminStatus;
