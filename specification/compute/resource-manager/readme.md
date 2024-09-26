@@ -269,6 +269,15 @@ suppressions:
   - code: XmsPageableForListCalls
     reason: False positive error as API Path does not match ARM Lint check formatting, requesting to suppress due to approval from reviewer.
     from: diagnostic.json
+  - code: PatchResponseCodes
+    reason: PATCH and PUT follow the same behavior and response codes in Compute. Keeping it for legacy reasons.
+    from: gallery.json
+  - code: PatchBodyParametersSchema
+    reason: PATCH and PUT follow the same behavior and response codes in Compute. Keeping it for legacy reasons.
+    from: gallery.json
+  - code: LroPatch202
+    reason: PATCH and PUT follow the same behavior and response codes in Compute. Keeping it for legacy reasons.
+    from: gallery.json
   - code: AvoidAdditionalProperties
     reason: The gallery backend service just treats this as a bag of properties to pass to downstream services.
     from: gallery.json
