@@ -22,21 +22,24 @@ namespace Microsoft.EventGrid.SystemEvents {
 
   alias ServiceBusBaseEventData = {
     /** The namespace name of the Microsoft.ServiceBus resource. */
-    namespaceName?: string;
+    namespaceName: string;
 
     /** The endpoint of the Microsoft.ServiceBus resource. */
-    requestUri?: string;
+    requestUri: string;
 
     /** The entity type of the Microsoft.ServiceBus resource. Could be one of 'queue' or 'subscriber'. */
-    entityType?: string;
+    entityType: string;
 
+    #suppress "@azure-tools/typespec-azure-core/no-nullable" "Nullable backcompat with existing models"
     /** The name of the Microsoft.ServiceBus queue. If the entity type is of type 'subscriber', then this value will be null. */
-    queueName?: string;
+    queueName: string | null;
 
+    #suppress "@azure-tools/typespec-azure-core/no-nullable" "Nullable backcompat with existing models"
     /** The name of the Microsoft.ServiceBus topic. If the entity type is of type 'queue', then this value will be null. */
-    topicName?: string;
+    topicName: string | null;
 
+    #suppress "@azure-tools/typespec-azure-core/no-nullable" "Nullable backcompat with existing models"
     /** The name of the Microsoft.ServiceBus topic's subscription. If the entity type is of type 'queue', then this value will be null. */
-    subscriptionName?: string;
+    subscriptionName: string | null;
   };
 }
