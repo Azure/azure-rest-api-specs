@@ -8,6 +8,7 @@ Please copy the following configuration into `tspconfig.yaml` in your spec folde
     flavor: azure
     namespace: "{package-dir}"
 ```
-- `package-dir`: Name of your package directory.
+
+- `package-dir`: Name of your package directory. It should be several parts concatenated with `.` and all the paerts should be pascal case.
 - `flavor`: Always `azure` for Azure SDK.
-- `namespace`: Namespace of your generated SDK.
+- `namespace`: Should be the same as `package-dir`.
