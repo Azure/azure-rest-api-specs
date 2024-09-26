@@ -3749,6 +3749,34 @@
       ],
       "description": "Profile for Linux VMs in the container service cluster."
     },
+    "ManagedClusterNodeResourceGroupProfile": {
+      "type": "object",
+      "properties": {
+        "restrictionLevel": {
+          "type": "string",
+          "enum": [
+            "Unrestricted",
+            "ReadOnly"
+          ],
+          "x-ms-enum": {
+            "name": "RestrictionLevel",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Unrestricted",
+                "description": "All RBAC permissions are allowed on the managed node resource group"
+              },
+              {
+                "value": "ReadOnly",
+                "description": "Only */read RBAC permissions allowed on the managed node resource group"
+              }
+            ]
+          },
+          "description": "The restriction level applied to the cluster's node resource group. If not specified, the default is 'Unrestricted'"
+        }
+      },
+      "description": "Node resource group lockdown profile for a managed cluster."
+    },
     "ContainerServiceNetworkProfile": {
       "type": "object",
       "properties": {
@@ -4766,6 +4794,10 @@
         "nodeResourceGroup": {
           "type": "string",
           "description": "The name of the resource group containing agent pool nodes."
+        },
+        "nodeResourceGroupProfile": {
+          "$ref": "#/definitions/ManagedClusterNodeResourceGroupProfile",
+          "description": "Profile of the node resource group configuration."
         },
         "enableRBAC": {
           "type": "boolean",
