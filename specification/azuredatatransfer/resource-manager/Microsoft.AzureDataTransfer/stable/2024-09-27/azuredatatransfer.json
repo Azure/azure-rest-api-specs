@@ -502,6 +502,831 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureDataTransfer/connections/{connectionName}/flows/{flowName}/setPassphrase": {
+      "post": {
+        "description": "Sets the passphrase of the specified flow.",
+        "x-ms-examples": {
+          "Set the flow stream passphrase": {
+            "$ref": "examples/setFlowPassphrase.json"
+          }
+        },
+        "operationId": "Flows_SetPassphrase",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/connectionNameParameter"
+          },
+          {
+            "$ref": "#/parameters/flowNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "passphrase",
+            "description": "Passphrase to set",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "value": {
+                  "type": "string",
+                  "description": "The passphrase to set for the flow"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Sets a flow passphrase.",
+            "schema": {
+              "$ref": "#/definitions/flow"
+            }
+          },
+          "202": {
+            "description": "Sets a flow passphrase.",
+            "headers": {
+              "location": {
+                "description": "Location response header",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureDataTransfer/connections/{connectionName}/flows/{flowName}/generatePassphrase": {
+      "post": {
+        "description": "Generate a compliant passphrase for the specified flow.",
+        "x-ms-examples": {
+          "Generate a new compliant streaming passphrase": {
+            "$ref": "examples/generateFlowPassphrase.json"
+          }
+        },
+        "operationId": "Flows_GeneratePassphrase",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/connectionNameParameter"
+          },
+          {
+            "$ref": "#/parameters/flowNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Generate and set the flow passphrase.",
+            "schema": {
+              "$ref": "#/definitions/flow"
+            }
+          },
+          "202": {
+            "description": "Generate and set the flow passphrase.",
+            "headers": {
+              "location": {
+                "description": "Location response header",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureDataTransfer/connections/{connectionName}/flows/{flowName}/getSourceAddresses": {
+      "post": {
+        "description": "Get the source addresses for the specified flow.",
+        "x-ms-examples": {
+          "Get the flow stream source addresses": {
+            "$ref": "examples/getFlowSourceAddress.json"
+          }
+        },
+        "operationId": "Flows_GetSourceAddresses",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/connectionNameParameter"
+          },
+          {
+            "$ref": "#/parameters/flowNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The source addresses of the flow.",
+            "schema": {
+              "$ref": "#/definitions/streamSourceAddresses"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureDataTransfer/connections/{connectionName}/flows/{flowName}/setSourceAddresses": {
+      "post": {
+        "description": "Set the source addresses for the specified flow.",
+        "x-ms-examples": {
+          "Set the flow stream source addresses": {
+            "$ref": "examples/setFlowSourceAddresses.json"
+          }
+        },
+        "operationId": "Flows_SetSourceAddresses",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/connectionNameParameter"
+          },
+          {
+            "$ref": "#/parameters/flowNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "sourceAddresses",
+            "description": "Source addresses wanted",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "values": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Source addresses"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The source addresses of the flow.",
+            "schema": {
+              "$ref": "#/definitions/flow"
+            }
+          },
+          "202": {
+            "description": "The source addresses of the flow.",
+            "headers": {
+              "location": {
+                "description": "Location response header",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureDataTransfer/connections/{connectionName}/flows/{flowName}/getDestinationEndpoint": {
+      "post": {
+        "description": "Get the destination endpoint for the specified flow and stream ID.",
+        "x-ms-examples": {
+          "Get the flow stream destination endpoint": {
+            "$ref": "examples/getFlowDestinationEndpoint.json"
+          }
+        },
+        "operationId": "Flows_GetDestinationEndpoint",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/connectionNameParameter"
+          },
+          {
+            "$ref": "#/parameters/flowNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "streamIdDestinationEndpoint",
+            "description": "Stream ID destination endpoint wanted",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "streamId": {
+                "type": "string",
+                "description": "Stream ID"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The destination endpoint of the stream ID on this flow.",
+            "schema": {
+              "endpoint": {
+                "type": "string",
+                "description": "The specified stream ID destination endpoint"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureDataTransfer/connections/{connectionName}/flows/{flowName}/setDestinationEndpoint": {
+      "post": {
+        "description": "Set the destination endpoint for the specified flow and stream ID.",
+        "x-ms-examples": {
+          "Set the flow stream destination endpoint": {
+            "$ref": "examples/setFlowDestinationEndpoint.json"
+          }
+        },
+        "operationId": "Flows_SetDestinationEndpoint",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/connectionNameParameter"
+          },
+          {
+            "$ref": "#/parameters/flowNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "streamIdDestinationEndpoint",
+            "description": "Stream ID destination endpoint wanted",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "streamId": {
+                "type": "string",
+                "description": "Stream ID"
+              },
+              "endpoint": {
+                "type": "string",
+                "description": "The specified stream ID destination endpoint"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The destination endpoint of the stream ID on this flow.",
+            "schema": {
+              "$ref": "#/definitions/flow"
+            }
+          },
+          "202": {
+            "description": "The destination endpoint of the stream ID on this flow.",
+            "headers": {
+              "location": {
+                "description": "Location response header",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureDataTransfer/connections/{connectionName}/flows/{flowName}/getDestinationEndpointPort": {
+      "post": {
+        "description": "Get the destination endpoint port for the specified flow and stream ID.",
+        "x-ms-examples": {
+          "Get the flow stream destination endpoint port": {
+            "$ref": "examples/getFlowDestinationEndpointPort.json"
+          }
+        },
+        "operationId": "Flows_GetDestinationEndpoint",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/connectionNameParameter"
+          },
+          {
+            "$ref": "#/parameters/flowNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "streamIdDestinationEndpointPort",
+            "description": "Stream ID destination endpoint port wanted",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "streamId": {
+                "type": "string",
+                "description": "Stream ID"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The destination endpoint port of the stream ID on this flow.",
+            "schema": {
+              "endpoint": {
+                "type": "integer",
+                "format": "int64",
+                "description": "The specified stream ID destination endpoint port"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureDataTransfer/connections/{connectionName}/flows/{flowName}/setDestinationEndpointPort": {
+      "post": {
+        "description": "Set the destination endpoint port for the specified flow and stream ID.",
+        "x-ms-examples": {
+          "Set the flow stream destination endpoint port": {
+            "$ref": "examples/generateFlowPassphrase.json"
+          }
+        },
+        "operationId": "Flows_SetDestinationEndpointPort",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/connectionNameParameter"
+          },
+          {
+            "$ref": "#/parameters/flowNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "streamIdDestinationEndpointPort",
+            "description": "Stream ID destination endpoint port wanted",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "streamId": {
+                "type": "string",
+                "description": "Stream ID"
+              },
+              "port": {
+                "type": "integer",
+                "format": "int64",
+                "description": "The specified stream ID destination endpoint port"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The destination endpoint port of the stream ID on this flow.",
+            "schema": {
+              "$ref": "#/definitions/flow"
+            }
+          },
+          "202": {
+            "description": "The destination endpoint port of the stream ID on this flow.",
+            "headers": {
+              "location": {
+                "description": "Location response header",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureDataTransfer/connections/{connectionName}/flows/{flowName}/getFlowConnectionString": {
+      "post": {
+        "description": "Get the connection string for the specified flow.",
+        "x-ms-examples": {
+          "Get the flow stream connection string": {
+            "$ref": "examples/getFlowConnectionString.json"
+          }
+        },
+        "operationId": "Flows_GetConnectionString",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/connectionNameParameter"
+          },
+          {
+            "$ref": "#/parameters/flowNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get the connection string for the specified flow.",
+            "schema": {
+              "connectionString": {
+                "type": "string",
+                "description": "The connection string for the specified flow."
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureDataTransfer/connections/{connectionName}/flows/{flowName}/getStreamLatency": {
+      "post": {
+        "description": "Set the latency for the specified flow and stream ID.",
+        "x-ms-examples": {
+          "Set the flow stream latency": {
+            "$ref": "examples/getFlowStreamLatency.json"
+          }
+        },
+        "operationId": "Flows_GetStreamLatency",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/connectionNameParameter"
+          },
+          {
+            "$ref": "#/parameters/flowNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "streamIdLatency",
+            "description": "Stream ID latency wanted",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "streamId": {
+                "type": "string",
+                "description": "Stream ID"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get the connection string for the specified flow.",
+            "schema": {
+              "latency": {
+                "type": "integer",
+                "format": "int64",
+                "description": "The specified stream ID latency in milliseconds"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureDataTransfer/connections/{connectionName}/flows/{flowName}/setStreamLatency": {
+      "post": {
+        "description": "Set the latency for the specified flow and stream ID.",
+        "x-ms-examples": {
+          "Set the flow stream latency": {
+            "$ref": "examples/setFlowStreamLatency.json"
+          }
+        },
+        "operationId": "Flows_SetStreamLatency",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/connectionNameParameter"
+          },
+          {
+            "$ref": "#/parameters/flowNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "streamIdLatency",
+            "description": "Stream ID latency wanted",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "streamId": {
+                "type": "string",
+                "description": "Stream ID"
+              },
+              "latency": {
+                "type": "integer",
+                "format": "int64",
+                "description": "The specified stream ID latency in milliseconds"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The destination endpoint port of the stream ID on this flow.",
+            "schema": {
+              "$ref": "#/definitions/flow"
+            }
+          },
+          "202": {
+            "description": "The destination endpoint port of the stream ID on this flow.",
+            "headers": {
+              "location": {
+                "description": "Location response header",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureDataTransfer/connections/{connectionName}/flows/{flowName}/getStreamProtocol": {
+      "post": {
+        "description": "Get the protocol for the specified flow and stream ID.",
+        "x-ms-examples": {
+          "Get the flow stream protocol": {
+            "$ref": "examples/getFlowStreamProtocol.json"
+          }
+        },
+        "operationId": "Flows_GetStreamProtocol",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/connectionNameParameter"
+          },
+          {
+            "$ref": "#/parameters/flowNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "streamIdProtocol",
+            "description": "Stream ID protocol wanted",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "streamId": {
+                "type": "string",
+                "description": "Stream ID"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The protocol of the stream ID on this flow.",
+            "schema": {
+              "protocol": {
+                "$ref": "#/definitions/streamProtocol",
+                "description": "The specified stream ID protocol"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureDataTransfer/connections/{connectionName}/flows/{flowName}/setStreamProtocol": {
+      "post": {
+        "description": "Set the protocol for the specified flow and stream ID.",
+        "x-ms-examples": {
+          "Set the flow stream protocol": {
+            "$ref": "examples/setFlowStreamProtocol.json"
+          }
+        },
+        "operationId": "Flows_SetStreamProtocol",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/connectionNameParameter"
+          },
+          {
+            "$ref": "#/parameters/flowNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "streamIdProtocol",
+            "description": "Stream ID protocol wanted",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "stream": {
+                  "type": "string",
+                  "description": "Stream ID"
+                },
+                "protocol": {
+                  "$ref": "#/definitions/streamProtocol",
+                  "description": "The specified stream ID protocol"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The destination endpoint port of the stream ID on this flow.",
+            "schema": {
+              "$ref": "#/definitions/flow"
+            }
+          },
+          "202": {
+            "description": "The destination endpoint port of the stream ID on this flow.",
+            "headers": {
+              "location": {
+                "description": "Location response header",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureDataTransfer/connections/{connectionName}/flows": {
       "get": {
         "description": "Gets flows in a connection.",
@@ -1662,6 +2487,13 @@
           "type": "string",
           "format": "url",
           "description": "The URI to the customer managed key for this flow"
+        },
+        "streams": {
+          "type": "array",
+          "description": "The stream configurations for this flow",
+          "items": {
+            "$ref": "#/definitions/streamConfiguration"
+          }
         }
       },
       "description": "Properties of flow"
@@ -2390,6 +3222,70 @@
         }
       },
       "description": "The option associated with messaging flows."
+    },
+    "streamProtocol": {
+      "enum": [
+        "UDP",
+        "SRT",
+        "RTP"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "streamProtocol",
+        "modelAsString": true
+      }
+    },
+    "streamConfiguration": {
+      "type": "object",
+      "description": "Stream configurations.",
+      "properties": {
+        "streamId": {
+          "type": "string",
+          "description": "The stream identifier"
+        },
+        "protocol": {
+          "$ref": "#/definitions/streamProtocol",
+          "description": "The protocol of the stream"
+        },
+        "latency": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The latency of the stream in milliseconds"
+        },
+        "passphrase": {
+          "type": "string",
+          "description": "The passphrase used for SRT streams"
+        },
+        "sourceAddresses": {
+          "$ref": "#/definitions/streamSourceAddresses",
+          "description": "The source IP address and CIDR ranges of the stream"
+        },
+        "destinationEndpoint": {
+          "type": "string",
+          "description": "The destination endpoint for the stream"
+        },
+        "destinationPort": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The destination endpoint port for the stream"
+        }
+      }
+    },
+    "streamSourceAddresses": {
+      "type": "object",
+      "description": "The source IP address and CIDR ranges of the stream",
+      "x-ms-identifiers": [
+        "id"
+      ],
+      "properties": {
+        "sourceAddresses": {
+          "type": "array",
+          "description": "A source IP address or CIDR range",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
     }
   },
   "parameters": {
@@ -2428,4 +3324,3 @@
     }
   }
 }
-
