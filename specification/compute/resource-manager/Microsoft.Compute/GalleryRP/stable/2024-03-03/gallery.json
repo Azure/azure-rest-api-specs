@@ -1809,67 +1809,6 @@
           }
         }
       },
-      "patch": {
-        "tags": [
-          "GalleryInVMAccessControlProfiles"
-        ],
-        "operationId": "GalleryInVMAccessControlProfiles_Update",
-        "description": "Update a gallery inVMAccessControlProfile.",
-        "parameters": [
-          {
-            "$ref": "../../../common-types/v1/common.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "galleryName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Shared Image Gallery in which the InVMAccessControlProfile is to be updated."
-          },
-          {
-            "name": "inVMAccessControlProfileName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the gallery inVMAccessControlProfile to be updated. The allowed characters are alphabets and numbers with dots, dashes, and periods allowed in the middle. The maximum length is 80 characters."
-          },
-          {
-            "$ref": "../../../common-types/v1/common.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "name": "galleryInVMAccessControlProfile",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/GalleryInVMAccessControlProfileUpdate"
-            },
-            "description": "Parameters supplied to the update gallery inVMAccessControlProfile operation."
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/GalleryInVMAccessControlProfile"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../common-types/v1/common.json#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "Update a gallery inVMAccessControlProfile.": {
-            "$ref": "./examples/galleryResourceProfileExamples/GalleryInVMAccessControlProfile_Update.json"
-          }
-        }
-      },
       "get": {
         "tags": [
           "GalleryInVMAccessControlProfiles"
@@ -2058,74 +1997,6 @@
         "x-ms-examples": {
           "Create or update a Gallery InVMAccessControlProfile Version.": {
             "$ref": "./examples/galleryResourceProfileExamples/GalleryInVMAccessControlProfileVersion_Create.json"
-          }
-        }
-      },
-      "patch": {
-        "tags": [
-          "GalleryInVMAccessControlProfileVersions"
-        ],
-        "operationId": "GalleryInVMAccessControlProfileVersions_Update",
-        "description": "Update a gallery inVMAccessControlProfile version.",
-        "parameters": [
-          {
-            "$ref": "../../../common-types/v1/common.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "galleryName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Shared Image Gallery in which the inVMAccessControlProfile resides."
-          },
-          {
-            "name": "inVMAccessControlProfileName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the gallery inVMAccessControlProfile in which the inVMAccessControlProfile version is to be updated."
-          },
-          {
-            "name": "inVMAccessControlProfileVersionName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the gallery inVMAccessControlProfile version to be updated. Needs to follow semantic version name pattern: The allowed characters are digit and period. Digits must be within the range of a 32-bit integer. Format: <MajorVersion>.<MinorVersion>.<Patch>"
-          },
-          {
-            "$ref": "../../../common-types/v1/common.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "name": "galleryInVMAccessControlProfileVersion",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/GalleryInVMAccessControlProfileVersionUpdate"
-            },
-            "description": "Parameters supplied to the update gallery inVMAccessControlProfile version operation."
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/GalleryInVMAccessControlProfileVersion"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../common-types/v1/common.json#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "Update a Gallery InVMAccessControlProfile Version.": {
-            "$ref": "./examples/galleryResourceProfileExamples/GalleryInVMAccessControlProfileVersion_Update.json"
           }
         }
       },
@@ -3896,20 +3767,6 @@
       ],
       "description": "Specifies information about the gallery inVMAccessControlProfile that you want to create or update."
     },
-    "GalleryInVMAccessControlProfileUpdate": {
-      "type": "object",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/GalleryInVMAccessControlProfileProperties"
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/UpdateResourceDefinition"
-        }
-      ],
-      "description": "Specifies information about the gallery inVMAccessControlProfile that you want to update."
-    },
     "GalleryInVMAccessControlProfileProperties": {
       "type": "object",
       "properties": {
@@ -3977,21 +3834,6 @@
         }
       ],
       "description": "Specifies information about the gallery inVMAccessControlProfile version that you want to create or update."
-    },
-    "GalleryInVMAccessControlProfileVersionUpdate": {
-      "type": "object",
-      "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/GalleryInVMAccessControlProfileVersionProperties"
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/UpdateResourceDefinition"
-        }
-      ],
-      "description": "Specifies information about the gallery inVMAccessControlProfile version that you want to update."
     },
     "GalleryInVMAccessControlProfileVersionProperties": {
       "type": "object",
