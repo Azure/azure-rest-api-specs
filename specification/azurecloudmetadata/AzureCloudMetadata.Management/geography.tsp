@@ -4,7 +4,6 @@ import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "./common.tsp";
-import "./cloud.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
@@ -15,7 +14,6 @@ namespace Microsoft.AzureCloudMetadata;
 
 /** Geography resource. */
 @tenantResource
-@parentResource(Cloud)
 model Geography is ProxyResource<GeographyProperties> {
   @doc("The geography short id")
   @segment("geographies")
@@ -34,18 +32,47 @@ model GeographyProperties {
   fullName: string;
 
   /** State of geography. */
-  state: State;
+  state: GeographyState;
 
-  /** Resource Id of parent */
-  cloudResourceId: ParentResourceId;
+  /** Resource Id of parent cloud. */
+  cloudResourceId: string;
 
   /** The provisioning state of resource. */
   @visibility("read")
   provisioningState?: ResourceProvisioningState;
 }
 
+/** The valid state of geography. */
+union GeographyState {
+  /** The resource is being proposed */
+  Proposed: "Proposed",
+
+  /** The resource is approved */
+  Approved: "Approved",
+
+  /** The resource is on hold */
+  OnHold: "On Hold",
+
+  /** The resource is in buildout */
+  Buildout: "Buildout",
+
+  /** The resource is ready in production with a Service-Level agreement */
+  ProductionSLA: "Production SLA",
+
+  /** The resource is in decommissioning */
+  Decommissioning: "Decommissioning",
+
+  /** The resource is retired */
+  Retired: "Retired",
+
+  /** The resource is cancelled */
+  Cancelled: "Cancelled",
+
+  string,
+}
+
 @armResourceOperations
 interface Geographies {
   get is ArmResourceRead<Geography>;
-  listByCloud is ArmResourceListByParent<Geography>;
+  list is ArmResourceListAtScope<Geography>;
 }
