@@ -8,7 +8,7 @@ using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.Core;
 
-namespace Microsoft.MachineLearningServices;
+namespace Azure.AI.Client;
 
 @doc("Metadata pertaining to creation and last modification of the resource.")
 model SystemData {

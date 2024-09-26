@@ -3,8 +3,8 @@ import "@typespec/rest";
 import "@azure-tools/typespec-autorest";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
-import "../common.tsp";
 import "@typespec/openapi";
+import "../common.tsp";
 
 using TypeSpec.OpenAPI;
 using TypeSpec.Http;
@@ -20,6 +20,7 @@ model EvaluatorConfiguration {
   @doc("Identifier of the evaluator.")
   id: string;
 
+  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "https://github.com/Azure/typespec-azure/issues/1217"
   @doc("Initialization parameters of the evaluator.")
   initParams?: Record<unknown>;
 
@@ -27,6 +28,7 @@ model EvaluatorConfiguration {
   dataMapping?: Record<string>;
 }
 
+#suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Needed since suggestion is not supported to generate swagger in OpenAPIv2"
 @doc("Abstract data class.")
 @discriminator("type")
 model InputData {
@@ -48,13 +50,6 @@ model AppInsightsConfiguration extends InputData {
 @doc("Dataset as source for evaluation.")
 model Dataset extends InputData {
   type: "dataset";
-}
-
-@discriminator("type")
-@doc("Evaluation Target.")
-model EvaluationTarget {
-  @doc("Name of the evaluation target.")
-  name?: string;
 }
 
 @doc("Evaluation Definition")
