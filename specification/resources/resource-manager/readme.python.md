@@ -88,7 +88,7 @@ batch:
   - multiapiscript-deploymentstacks: true
   - tag: package-changes-2022-05
   - multiapiscript-changes: true
-  - package-databoundaries-2024-08
+  - tag: package-databoundaries-2024-08
   - multiapiscript-databoundaries: true
 ```
 
