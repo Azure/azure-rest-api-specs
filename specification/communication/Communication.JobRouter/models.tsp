@@ -390,6 +390,7 @@ model ClassificationPolicy {
 @discriminator("kind")
 model RouterRule {
   @doc("The type discriminator describing a sub-type of RouterRule")
+  @clientName("routerRuleKind", "java")
   kind: RouterRuleKind;
 }
 
@@ -953,6 +954,7 @@ model WorkerSelectorAttachment {
 @doc("A rule that return the same labels as the input labels.")
 model DirectMapRouterRule extends RouterRule {
   @doc("The type discriminator describing a sub-type of Rule.")
+  @clientName("routerRuleKind", "java")
   kind: RouterRuleKind.directMap;
 }
 
@@ -965,6 +967,7 @@ model ExpressionRouterRule extends RouterRule {
   expression: string;
 
   @doc("The type discriminator describing a sub-type of Rule.")
+  @clientName("routerRuleKind", "java")
   kind: RouterRuleKind.expression;
 }
 
@@ -977,6 +980,7 @@ model FunctionRouterRule extends RouterRule {
   credential?: FunctionRouterRuleCredential;
 
   @doc("The type discriminator describing a sub-type of Rule.")
+  @clientName("routerRuleKind", "java")
   kind: RouterRuleKind.function;
 }
 
@@ -1121,6 +1125,7 @@ model StaticRouterRule extends RouterRule {
   value?: unknown;
 
   @doc("The type discriminator describing a sub-type of Rule.")
+  @clientName("routerRuleKind", "java")
   kind: RouterRuleKind.static;
 }
 
@@ -1154,6 +1159,7 @@ model WebhookRouterRule extends RouterRule {
   webhookUri?: url;
 
   @doc("The type discriminator describing a sub-type of Rule.")
+  @clientName("routerRuleKind", "java")
   kind: RouterRuleKind.webhook;
 }
 
