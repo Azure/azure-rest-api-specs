@@ -28,20 +28,20 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/apiVersionParameter"
+            "$ref": "./types.json#/parameters/apiVersionParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "OK. The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/OperationListResult"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
             }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/OperationsErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationsErrorResponse"
             }
           }
         },
@@ -49,109 +49,6 @@
           "nextLinkName": "nextLink"
         }
       }
-    }
-  },
-  "definitions": {
-    "OperationListResult": {
-      "description": "The list of billing operations and a URL link to get the next set of results.",
-      "type": "object",
-      "properties": {
-        "value": {
-          "description": "The list of billing operations supported by the Microsoft.Billing resource provider.",
-          "type": "array",
-          "readOnly": true,
-          "items": {
-            "$ref": "#/definitions/Operation"
-          }
-        },
-        "nextLink": {
-          "description": "URL to get the next set of operation list results if there are any.",
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
-    "Operation": {
-      "description": "A Billing REST API operation.",
-      "type": "object",
-      "properties": {
-        "name": {
-          "description": "Operation name: {provider}/{resource}/{operation}.",
-          "type": "string",
-          "readOnly": true
-        },
-        "isDataAction": {
-          "description": "Identifies if the operation is a data operation.",
-          "type": "boolean",
-          "readOnly": true
-        },
-        "display": {
-          "description": "The object that represents the operation.",
-          "type": "object",
-          "properties": {
-            "provider": {
-              "description": "Service provider: Microsoft.Billing.",
-              "type": "string",
-              "readOnly": true
-            },
-            "resource": {
-              "description": "Resource on which the operation is performed such as invoice and billing subscription.",
-              "type": "string",
-              "readOnly": true
-            },
-            "operation": {
-              "description": "Operation type such as read, write and delete.",
-              "type": "string",
-              "readOnly": true
-            },
-            "description": {
-              "description": "Description of operation.",
-              "type": "string",
-              "readOnly": true
-            }
-          }
-        }
-      }
-    },
-    "OperationsErrorResponse": {
-      "description": "Error response indicates that the service is not able to process the incoming request. The reason is provided in the error message.",
-      "type": "object",
-      "properties": {
-        "error": {
-          "description": "The details of the error.",
-          "$ref": "#/definitions/OperationsErrorDetails"
-        }
-      }
-    },
-    "OperationsErrorDetails": {
-      "description": "The details of the error.",
-      "type": "object",
-      "properties": {
-        "code": {
-          "description": "Error code.",
-          "type": "string",
-          "readOnly": true
-        },
-        "message": {
-          "description": "Error message indicating why the operation failed.",
-          "type": "string",
-          "readOnly": true
-        },
-        "target": {
-          "description": "The target of the particular error.",
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    }
-  },
-  "parameters": {
-    "apiVersionParameter": {
-      "name": "api-version",
-      "in": "query",
-      "required": true,
-      "type": "string",
-      "description": "The version of the API to be used with the client request. The current version is 2020-05-01."
     }
   },
   "security": [
