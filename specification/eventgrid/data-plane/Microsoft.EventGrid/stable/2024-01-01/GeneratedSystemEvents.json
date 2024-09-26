@@ -4166,7 +4166,12 @@
           "type": "string",
           "description": "Name of the Event Grid namespace where the MQTT client was created or updated."
         }
-      }
+      },
+      "required": [
+        "clientAuthenticationName",
+        "clientName",
+        "namespaceName"
+      ]
     },
     "EventGridMQTTClientSessionConnectedEventData": {
       "type": "object",
@@ -4182,6 +4187,10 @@
           "description": "A number that helps indicate order of MQTT client session connected or\ndisconnected events. Latest event will have a sequence number that is higher\nthan the previous event."
         }
       },
+      "required": [
+        "clientSessionName",
+        "sequenceNumber"
+      ],
       "allOf": [
         {
           "$ref": "#/definitions/EventGridMQTTClientEventData"
@@ -4207,6 +4216,8 @@
         }
       },
       "required": [
+        "clientSessionName",
+        "sequenceNumber",
         "disconnectionReason"
       ],
       "allOf": [
@@ -8851,7 +8862,10 @@
           "type": "string",
           "description": "The Azure resource ID of the deleted event subscription."
         }
-      }
+      },
+      "required": [
+        "eventSubscriptionId"
+      ]
     },
     "SubscriptionValidationEventData": {
       "type": "object",
@@ -8865,7 +8879,11 @@
           "type": "string",
           "description": "The validation URL sent by Azure Event Grid (available starting version 2018-05-01-preview).\nTo complete the validation handshake, the subscriber must either respond with the validationCode as part of the validation response,\nor perform a GET request on the validationUrl (available starting version 2018-05-01-preview)."
         }
-      }
+      },
+      "required": [
+        "validationCode",
+        "validationUrl"
+      ]
     },
     "SubscriptionValidationResponse": {
       "type": "object",
@@ -8875,7 +8893,10 @@
           "type": "string",
           "description": "The validation response sent by the subscriber to Azure Event Grid to complete the validation of an event subscription."
         }
-      }
+      },
+      "required": [
+        "validationResponse"
+      ]
     },
     "WebAppServicePlanUpdatedEventData": {
       "type": "object",
