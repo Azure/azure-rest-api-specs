@@ -110,24 +110,8 @@ interface VirtualMachineScaleSetVMExtensions {
 @@doc(VirtualMachineScaleSetVMExtension.properties,
   "Describes the properties of a Virtual Machine Extension."
 );
-@@encodedName(VirtualMachineScaleSetVMExtensions.createOrUpdate::parameters.resource,
-  "application/json",
-  "extensionParameters"
-);
-@@extension(VirtualMachineScaleSetVMExtensions.createOrUpdate::parameters.resource,
-  "x-ms-client-name",
-  "extensionParameters"
-);
 @@doc(VirtualMachineScaleSetVMExtensions.createOrUpdate::parameters.resource,
   "Parameters supplied to the Create Virtual Machine Extension operation."
-);
-@@encodedName(VirtualMachineScaleSetVMExtensions.update::parameters.properties,
-  "application/json",
-  "extensionParameters"
-);
-@@extension(VirtualMachineScaleSetVMExtensions.update::parameters.properties,
-  "x-ms-client-name",
-  "extensionParameters"
 );
 @@doc(VirtualMachineScaleSetVMExtensions.update::parameters.properties,
   "Parameters supplied to the Update Virtual Machine Extension operation."

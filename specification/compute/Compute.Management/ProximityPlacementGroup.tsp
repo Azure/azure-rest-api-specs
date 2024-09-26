@@ -85,24 +85,8 @@ interface ProximityPlacementGroups {
 @@doc(ProximityPlacementGroup.properties,
   "Describes the properties of a Proximity Placement Group."
 );
-@@encodedName(ProximityPlacementGroups.createOrUpdate::parameters.resource,
-  "application/json",
-  "parameters"
-);
-@@extension(ProximityPlacementGroups.createOrUpdate::parameters.resource,
-  "x-ms-client-name",
-  "parameters"
-);
 @@doc(ProximityPlacementGroups.createOrUpdate::parameters.resource,
   "Parameters supplied to the Create Proximity Placement Group operation."
-);
-@@encodedName(ProximityPlacementGroups.update::parameters.properties,
-  "application/json",
-  "parameters"
-);
-@@extension(ProximityPlacementGroups.update::parameters.properties,
-  "x-ms-client-name",
-  "parameters"
 );
 @@doc(ProximityPlacementGroups.update::parameters.properties,
   "Parameters supplied to the Update Proximity Placement Group operation."

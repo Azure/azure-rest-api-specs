@@ -79,24 +79,8 @@ interface Images {
 
 @@doc(Image.name, "The name of the image.");
 @@doc(Image.properties, "Describes the properties of an Image.");
-@@encodedName(Images.createOrUpdate::parameters.resource,
-  "application/json",
-  "parameters"
-);
-@@extension(Images.createOrUpdate::parameters.resource,
-  "x-ms-client-name",
-  "parameters"
-);
 @@doc(Images.createOrUpdate::parameters.resource,
   "Parameters supplied to the Create Image operation."
-);
-@@encodedName(Images.update::parameters.properties,
-  "application/json",
-  "parameters"
-);
-@@extension(Images.update::parameters.properties,
-  "x-ms-client-name",
-  "parameters"
 );
 @@doc(Images.update::parameters.properties,
   "Parameters supplied to the Update Image operation."

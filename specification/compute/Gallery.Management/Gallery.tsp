@@ -93,35 +93,11 @@ interface Galleries {
 @@doc(Gallery.properties,
   "Describes the properties of a Shared Image Gallery."
 );
-@@encodedName(Galleries.createOrUpdate::parameters.resource,
-  "application/json",
-  "gallery"
-);
-@@extension(Galleries.createOrUpdate::parameters.resource,
-  "x-ms-client-name",
-  "gallery"
-);
 @@doc(Galleries.createOrUpdate::parameters.resource,
   "Parameters supplied to the create or update Shared Image Gallery operation."
 );
-@@encodedName(Galleries.update::parameters.properties,
-  "application/json",
-  "gallery"
-);
-@@extension(Galleries.update::parameters.properties,
-  "x-ms-client-name",
-  "gallery"
-);
 @@doc(Galleries.update::parameters.properties,
   "Parameters supplied to the update Shared Image Gallery operation."
-);
-@@encodedName(Galleries.gallerySharingProfileUpdate::parameters.body,
-  "application/json",
-  "sharingUpdate"
-);
-@@extension(Galleries.gallerySharingProfileUpdate::parameters.body,
-  "x-ms-client-name",
-  "sharingUpdate"
 );
 @@doc(Galleries.gallerySharingProfileUpdate::parameters.body,
   "Parameters supplied to the update gallery sharing profile."

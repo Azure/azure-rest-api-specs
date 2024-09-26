@@ -416,167 +416,47 @@ interface VirtualMachineScaleSets {
 @@doc(VirtualMachineScaleSet.properties,
   "Describes the properties of a Virtual Machine Scale Set."
 );
-@@encodedName(VirtualMachineScaleSets.createOrUpdate::parameters.resource,
-  "application/json",
-  "parameters"
-);
-@@extension(VirtualMachineScaleSets.createOrUpdate::parameters.resource,
-  "x-ms-client-name",
-  "parameters"
-);
 @@doc(VirtualMachineScaleSets.createOrUpdate::parameters.resource,
   "The scale set object."
-);
-@@encodedName(VirtualMachineScaleSets.update::parameters.properties,
-  "application/json",
-  "parameters"
-);
-@@extension(VirtualMachineScaleSets.update::parameters.properties,
-  "x-ms-client-name",
-  "parameters"
 );
 @@doc(VirtualMachineScaleSets.update::parameters.properties,
   "The scale set object."
 );
-@@encodedName(VirtualMachineScaleSets.approveRollingUpgrade::parameters.body,
-  "application/json",
-  "vmInstanceIDs"
-);
-@@extension(VirtualMachineScaleSets.approveRollingUpgrade::parameters.body,
-  "x-ms-client-name",
-  "vmInstanceIDs"
-);
 @@doc(VirtualMachineScaleSets.approveRollingUpgrade::parameters.body,
   "A list of virtual machine instance IDs from the VM scale set."
-);
-@@encodedName(VirtualMachineScaleSets.convertToSinglePlacementGroup::parameters.body,
-  "application/json",
-  "parameters"
-);
-@@extension(VirtualMachineScaleSets.convertToSinglePlacementGroup::parameters.body,
-  "x-ms-client-name",
-  "parameters"
 );
 @@doc(VirtualMachineScaleSets.convertToSinglePlacementGroup::parameters.body,
   "The input object for ConvertToSinglePlacementGroup API."
 );
-@@encodedName(VirtualMachineScaleSets.deallocate::parameters.body,
-  "application/json",
-  "vmInstanceIDs"
-);
-@@extension(VirtualMachineScaleSets.deallocate::parameters.body,
-  "x-ms-client-name",
-  "vmInstanceIDs"
-);
 @@doc(VirtualMachineScaleSets.deallocate::parameters.body,
   "A list of virtual machine instance IDs from the VM scale set."
-);
-@@encodedName(VirtualMachineScaleSets.deleteInstances::parameters.body,
-  "application/json",
-  "vmInstanceIDs"
-);
-@@extension(VirtualMachineScaleSets.deleteInstances::parameters.body,
-  "x-ms-client-name",
-  "vmInstanceIDs"
 );
 @@doc(VirtualMachineScaleSets.deleteInstances::parameters.body,
   "A list of virtual machine instance IDs from the VM scale set."
 );
-@@encodedName(VirtualMachineScaleSets.updateInstances::parameters.body,
-  "application/json",
-  "vmInstanceIDs"
-);
-@@extension(VirtualMachineScaleSets.updateInstances::parameters.body,
-  "x-ms-client-name",
-  "vmInstanceIDs"
-);
 @@doc(VirtualMachineScaleSets.updateInstances::parameters.body,
   "A list of virtual machine instance IDs from the VM scale set."
-);
-@@encodedName(VirtualMachineScaleSets.performMaintenance::parameters.body,
-  "application/json",
-  "vmInstanceIDs"
-);
-@@extension(VirtualMachineScaleSets.performMaintenance::parameters.body,
-  "x-ms-client-name",
-  "vmInstanceIDs"
 );
 @@doc(VirtualMachineScaleSets.performMaintenance::parameters.body,
   "A list of virtual machine instance IDs from the VM scale set."
 );
-@@encodedName(VirtualMachineScaleSets.powerOff::parameters.body,
-  "application/json",
-  "vmInstanceIDs"
-);
-@@extension(VirtualMachineScaleSets.powerOff::parameters.body,
-  "x-ms-client-name",
-  "vmInstanceIDs"
-);
 @@doc(VirtualMachineScaleSets.powerOff::parameters.body,
   "A list of virtual machine instance IDs from the VM scale set."
-);
-@@encodedName(VirtualMachineScaleSets.redeploy::parameters.body,
-  "application/json",
-  "vmInstanceIDs"
-);
-@@extension(VirtualMachineScaleSets.redeploy::parameters.body,
-  "x-ms-client-name",
-  "vmInstanceIDs"
 );
 @@doc(VirtualMachineScaleSets.redeploy::parameters.body,
   "A list of virtual machine instance IDs from the VM scale set."
 );
-@@encodedName(VirtualMachineScaleSets.reimage::parameters.body,
-  "application/json",
-  "vmScaleSetReimageInput"
-);
-@@extension(VirtualMachineScaleSets.reimage::parameters.body,
-  "x-ms-client-name",
-  "vmScaleSetReimageInput"
-);
 @@doc(VirtualMachineScaleSets.reimage::parameters.body,
   "Parameters for Reimaging VM ScaleSet."
-);
-@@encodedName(VirtualMachineScaleSets.reimageAll::parameters.body,
-  "application/json",
-  "vmInstanceIDs"
-);
-@@extension(VirtualMachineScaleSets.reimageAll::parameters.body,
-  "x-ms-client-name",
-  "vmInstanceIDs"
 );
 @@doc(VirtualMachineScaleSets.reimageAll::parameters.body,
   "A list of virtual machine instance IDs from the VM scale set."
 );
-@@encodedName(VirtualMachineScaleSets.restart::parameters.body,
-  "application/json",
-  "vmInstanceIDs"
-);
-@@extension(VirtualMachineScaleSets.restart::parameters.body,
-  "x-ms-client-name",
-  "vmInstanceIDs"
-);
 @@doc(VirtualMachineScaleSets.restart::parameters.body,
   "A list of virtual machine instance IDs from the VM scale set."
 );
-@@encodedName(VirtualMachineScaleSets.setOrchestrationServiceState::parameters.body,
-  "application/json",
-  "parameters"
-);
-@@extension(VirtualMachineScaleSets.setOrchestrationServiceState::parameters.body,
-  "x-ms-client-name",
-  "parameters"
-);
 @@doc(VirtualMachineScaleSets.setOrchestrationServiceState::parameters.body,
   "The input object for SetOrchestrationServiceState API."
-);
-@@encodedName(VirtualMachineScaleSets.start::parameters.body,
-  "application/json",
-  "vmInstanceIDs"
-);
-@@extension(VirtualMachineScaleSets.start::parameters.body,
-  "x-ms-client-name",
-  "vmInstanceIDs"
 );
 @@doc(VirtualMachineScaleSets.start::parameters.body,
   "A list of virtual machine instance IDs from the VM scale set."

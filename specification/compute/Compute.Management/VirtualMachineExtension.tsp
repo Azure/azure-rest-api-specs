@@ -90,24 +90,8 @@ interface VirtualMachineExtensions {
 @@doc(VirtualMachineExtension.properties,
   "Describes the properties of a Virtual Machine Extension."
 );
-@@encodedName(VirtualMachineExtensions.createOrUpdate::parameters.resource,
-  "application/json",
-  "extensionParameters"
-);
-@@extension(VirtualMachineExtensions.createOrUpdate::parameters.resource,
-  "x-ms-client-name",
-  "extensionParameters"
-);
 @@doc(VirtualMachineExtensions.createOrUpdate::parameters.resource,
   "Parameters supplied to the Create Virtual Machine Extension operation."
-);
-@@encodedName(VirtualMachineExtensions.update::parameters.properties,
-  "application/json",
-  "extensionParameters"
-);
-@@extension(VirtualMachineExtensions.update::parameters.properties,
-  "x-ms-client-name",
-  "extensionParameters"
 );
 @@doc(VirtualMachineExtensions.update::parameters.properties,
   "Parameters supplied to the Update Virtual Machine Extension operation."

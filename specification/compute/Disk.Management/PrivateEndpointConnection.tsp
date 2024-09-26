@@ -75,14 +75,6 @@ interface PrivateEndpointConnections {
   "The name of the private endpoint connection."
 );
 @@doc(PrivateEndpointConnection.properties, "Resource properties.");
-@@encodedName(PrivateEndpointConnections.updateAPrivateEndpointConnection::parameters.resource,
-  "application/json",
-  "privateEndpointConnection"
-);
-@@extension(PrivateEndpointConnections.updateAPrivateEndpointConnection::parameters.resource,
-  "x-ms-client-name",
-  "privateEndpointConnection"
-);
 @@doc(PrivateEndpointConnections.updateAPrivateEndpointConnection::parameters.resource,
   "private endpoint connection object supplied in the body of the Put private endpoint connection operation."
 );

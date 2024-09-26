@@ -86,24 +86,8 @@ interface AvailabilitySets {
 
 @@doc(AvailabilitySet.name, "The name of the availability set.");
 @@doc(AvailabilitySet.properties, "The instance view of a resource.");
-@@encodedName(AvailabilitySets.createOrUpdate::parameters.resource,
-  "application/json",
-  "parameters"
-);
-@@extension(AvailabilitySets.createOrUpdate::parameters.resource,
-  "x-ms-client-name",
-  "parameters"
-);
 @@doc(AvailabilitySets.createOrUpdate::parameters.resource,
   "Parameters supplied to the Create Availability Set operation."
-);
-@@encodedName(AvailabilitySets.update::parameters.properties,
-  "application/json",
-  "parameters"
-);
-@@extension(AvailabilitySets.update::parameters.properties,
-  "x-ms-client-name",
-  "parameters"
 );
 @@doc(AvailabilitySets.update::parameters.properties,
   "Parameters supplied to the Update Availability Set operation."

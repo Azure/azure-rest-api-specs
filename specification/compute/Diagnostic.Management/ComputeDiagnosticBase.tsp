@@ -79,24 +79,8 @@ interface ComputeDiagnosticBases {
 @@doc(ComputeDiagnosticBase.properties,
   "Contains additional properties of a diagnostic"
 );
-@@encodedName(ComputeDiagnosticBases.create::parameters.body,
-  "application/json",
-  "runDiskInspectionInput"
-);
-@@extension(ComputeDiagnosticBases.create::parameters.body,
-  "x-ms-client-name",
-  "runDiskInspectionInput"
-);
 @@doc(ComputeDiagnosticBases.create::parameters.body,
   "RunDiskInspection object supplied in the body of the Post run disk inspection operation."
-);
-@@encodedName(ComputeDiagnosticBases.register::parameters.body,
-  "application/json",
-  "storageConfigurationInput"
-);
-@@extension(ComputeDiagnosticBases.register::parameters.body,
-  "x-ms-client-name",
-  "storageConfigurationInput"
 );
 @@doc(ComputeDiagnosticBases.register::parameters.body,
   "Storage Configuration object supplied in the body of the Post to cache storageAccount for a given subscription."

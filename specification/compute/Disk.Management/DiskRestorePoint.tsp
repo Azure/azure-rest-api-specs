@@ -62,14 +62,6 @@ interface DiskRestorePoints {
 @@doc(DiskRestorePoint.properties,
   "Properties of an incremental disk restore point"
 );
-@@encodedName(DiskRestorePoints.grantAccess::parameters.body,
-  "application/json",
-  "grantAccessData"
-);
-@@extension(DiskRestorePoints.grantAccess::parameters.body,
-  "x-ms-client-name",
-  "grantAccessData"
-);
 @@doc(DiskRestorePoints.grantAccess::parameters.body,
   "Access data object supplied in the body of the get disk access operation."
 );

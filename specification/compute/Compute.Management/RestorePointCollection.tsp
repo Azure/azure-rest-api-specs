@@ -80,24 +80,8 @@ interface RestorePointCollections {
 @@doc(RestorePointCollection.properties,
   "The restore point collection properties."
 );
-@@encodedName(RestorePointCollections.createOrUpdate::parameters.resource,
-  "application/json",
-  "parameters"
-);
-@@extension(RestorePointCollections.createOrUpdate::parameters.resource,
-  "x-ms-client-name",
-  "parameters"
-);
 @@doc(RestorePointCollections.createOrUpdate::parameters.resource,
   "Parameters supplied to the Create or Update restore point collection operation."
-);
-@@encodedName(RestorePointCollections.update::parameters.properties,
-  "application/json",
-  "parameters"
-);
-@@extension(RestorePointCollections.update::parameters.properties,
-  "x-ms-client-name",
-  "parameters"
 );
 @@doc(RestorePointCollections.update::parameters.properties,
   "Parameters supplied to the Update restore point collection operation."

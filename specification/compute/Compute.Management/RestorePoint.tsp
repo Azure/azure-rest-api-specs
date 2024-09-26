@@ -59,14 +59,6 @@ interface RestorePoints {
 
 @@doc(RestorePoint.name, "The name of the restore point.");
 @@doc(RestorePoint.properties, "The restore point properties.");
-@@encodedName(RestorePoints.create::parameters.resource,
-  "application/json",
-  "parameters"
-);
-@@extension(RestorePoints.create::parameters.resource,
-  "x-ms-client-name",
-  "parameters"
-);
 @@doc(RestorePoints.create::parameters.resource,
   "Parameters supplied to the Create restore point operation."
 );

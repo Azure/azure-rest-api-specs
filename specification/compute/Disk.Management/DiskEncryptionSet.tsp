@@ -89,24 +89,8 @@ interface DiskEncryptionSets {
   "The name of the disk encryption set that is being created. The name can't be changed after the disk encryption set is created. Supported characters for the name are a-z, A-Z, 0-9, _ and -. The maximum name length is 80 characters."
 );
 @@doc(DiskEncryptionSet.properties, "");
-@@encodedName(DiskEncryptionSets.createOrUpdate::parameters.resource,
-  "application/json",
-  "diskEncryptionSet"
-);
-@@extension(DiskEncryptionSets.createOrUpdate::parameters.resource,
-  "x-ms-client-name",
-  "diskEncryptionSet"
-);
 @@doc(DiskEncryptionSets.createOrUpdate::parameters.resource,
   "disk encryption set object supplied in the body of the Put disk encryption set operation."
-);
-@@encodedName(DiskEncryptionSets.update::parameters.properties,
-  "application/json",
-  "diskEncryptionSet"
-);
-@@extension(DiskEncryptionSets.update::parameters.properties,
-  "x-ms-client-name",
-  "diskEncryptionSet"
 );
 @@doc(DiskEncryptionSets.update::parameters.properties,
   "disk encryption set object supplied in the body of the Patch disk encryption set operation."

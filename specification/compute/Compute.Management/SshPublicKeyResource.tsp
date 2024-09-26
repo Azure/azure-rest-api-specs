@@ -86,35 +86,11 @@ interface SshPublicKeyResources {
 
 @@doc(SshPublicKeyResource.name, "The name of the SSH public key.");
 @@doc(SshPublicKeyResource.properties, "Properties of the SSH public key.");
-@@encodedName(SshPublicKeyResources.create::parameters.resource,
-  "application/json",
-  "parameters"
-);
-@@extension(SshPublicKeyResources.create::parameters.resource,
-  "x-ms-client-name",
-  "parameters"
-);
 @@doc(SshPublicKeyResources.create::parameters.resource,
   "Parameters supplied to create the SSH public key."
 );
-@@encodedName(SshPublicKeyResources.update::parameters.properties,
-  "application/json",
-  "parameters"
-);
-@@extension(SshPublicKeyResources.update::parameters.properties,
-  "x-ms-client-name",
-  "parameters"
-);
 @@doc(SshPublicKeyResources.update::parameters.properties,
   "Parameters supplied to update the SSH public key."
-);
-@@encodedName(SshPublicKeyResources.generateKeyPair::parameters.body,
-  "application/json",
-  "parameters"
-);
-@@extension(SshPublicKeyResources.generateKeyPair::parameters.body,
-  "x-ms-client-name",
-  "parameters"
 );
 @@doc(SshPublicKeyResources.generateKeyPair::parameters.body,
   "Parameters supplied to generate the SSH public key."

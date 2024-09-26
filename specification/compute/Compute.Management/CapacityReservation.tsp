@@ -84,24 +84,8 @@ interface CapacityReservations {
 @@doc(CapacityReservation.properties,
   "Properties of the Capacity reservation."
 );
-@@encodedName(CapacityReservations.createOrUpdate::parameters.resource,
-  "application/json",
-  "parameters"
-);
-@@extension(CapacityReservations.createOrUpdate::parameters.resource,
-  "x-ms-client-name",
-  "parameters"
-);
 @@doc(CapacityReservations.createOrUpdate::parameters.resource,
   "Parameters supplied to the Create capacity reservation."
-);
-@@encodedName(CapacityReservations.update::parameters.properties,
-  "application/json",
-  "parameters"
-);
-@@extension(CapacityReservations.update::parameters.properties,
-  "x-ms-client-name",
-  "parameters"
 );
 @@doc(CapacityReservations.update::parameters.properties,
   "Parameters supplied to the Update capacity reservation operation."

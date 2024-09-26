@@ -337,46 +337,14 @@ interface VirtualMachineScaleSetVMS {
 @@doc(VirtualMachineScaleSetVM.properties,
   "Describes the properties of a virtual machine scale set virtual machine."
 );
-@@encodedName(VirtualMachineScaleSetVMS.update::parameters.resource,
-  "application/json",
-  "parameters"
-);
-@@extension(VirtualMachineScaleSetVMS.update::parameters.resource,
-  "x-ms-client-name",
-  "parameters"
-);
 @@doc(VirtualMachineScaleSetVMS.update::parameters.resource,
   "Parameters supplied to the Update Virtual Machine Scale Sets VM operation."
-);
-@@encodedName(VirtualMachineScaleSetVMS.reimage::parameters.body,
-  "application/json",
-  "vmScaleSetVMReimageInput"
-);
-@@extension(VirtualMachineScaleSetVMS.reimage::parameters.body,
-  "x-ms-client-name",
-  "vmScaleSetVMReimageInput"
 );
 @@doc(VirtualMachineScaleSetVMS.reimage::parameters.body,
   "Parameters for the Reimaging Virtual machine in ScaleSet."
 );
-@@encodedName(VirtualMachineScaleSetVMS.attachDetachDataDisks::parameters.body,
-  "application/json",
-  "parameters"
-);
-@@extension(VirtualMachineScaleSetVMS.attachDetachDataDisks::parameters.body,
-  "x-ms-client-name",
-  "parameters"
-);
 @@doc(VirtualMachineScaleSetVMS.attachDetachDataDisks::parameters.body,
   "Parameters supplied to the attach and detach data disks operation on a Virtual Machine Scale Sets VM."
-);
-@@encodedName(VirtualMachineScaleSetVMS.runCommand::parameters.body,
-  "application/json",
-  "parameters"
-);
-@@extension(VirtualMachineScaleSetVMS.runCommand::parameters.body,
-  "x-ms-client-name",
-  "parameters"
 );
 @@doc(VirtualMachineScaleSetVMS.runCommand::parameters.body,
   "Parameters supplied to the Run command operation."

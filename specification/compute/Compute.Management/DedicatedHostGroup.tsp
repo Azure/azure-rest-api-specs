@@ -78,24 +78,8 @@ interface DedicatedHostGroups {
 
 @@doc(DedicatedHostGroup.name, "The name of the dedicated host group.");
 @@doc(DedicatedHostGroup.properties, "Dedicated Host Group Properties.");
-@@encodedName(DedicatedHostGroups.createOrUpdate::parameters.resource,
-  "application/json",
-  "parameters"
-);
-@@extension(DedicatedHostGroups.createOrUpdate::parameters.resource,
-  "x-ms-client-name",
-  "parameters"
-);
 @@doc(DedicatedHostGroups.createOrUpdate::parameters.resource,
   "Parameters supplied to the Create Dedicated Host Group."
-);
-@@encodedName(DedicatedHostGroups.update::parameters.properties,
-  "application/json",
-  "parameters"
-);
-@@extension(DedicatedHostGroups.update::parameters.properties,
-  "x-ms-client-name",
-  "parameters"
 );
 @@doc(DedicatedHostGroups.update::parameters.properties,
   "Parameters supplied to the Update Dedicated Host Group operation."

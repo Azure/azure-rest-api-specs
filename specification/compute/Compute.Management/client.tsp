@@ -84,59 +84,207 @@ using Microsoft.Compute;
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(VirtualMachineRunCommandUpdate.properties);
 
+@@clientName(VirtualMachineScaleSets.update,
+  "VirtualMachineScaleSets.update::parameters.properties",
+  "parameters"
+);
+@@clientName(VirtualMachineScaleSets.approveRollingUpgrade,
+  "VirtualMachineScaleSets.approveRollingUpgrade::parameters.body",
+  "vmInstanceIDs"
+);
+@@clientName(VirtualMachineScaleSets.convertToSinglePlacementGroup,
+  "VirtualMachineScaleSets.convertToSinglePlacementGroup::parameters.body",
+  "parameters"
+);
+@@clientName(VirtualMachineScaleSets.deallocate,
+  "VirtualMachineScaleSets.deallocate::parameters.body",
+  "vmInstanceIDs"
+);
+@@clientName(VirtualMachineScaleSets.deleteInstances,
+  "VirtualMachineScaleSets.deleteInstances::parameters.body",
+  "vmInstanceIDs"
+);
+@@clientName(VirtualMachineScaleSets.updateInstances,
+  "VirtualMachineScaleSets.updateInstances::parameters.body",
+  "vmInstanceIDs"
+);
+@@clientName(VirtualMachineScaleSets.performMaintenance,
+  "VirtualMachineScaleSets.performMaintenance::parameters.body",
+  "vmInstanceIDs"
+);
+@@clientName(VirtualMachineScaleSets.powerOff,
+  "VirtualMachineScaleSets.powerOff::parameters.body",
+  "vmInstanceIDs"
+);
+@@clientName(VirtualMachineScaleSets.redeploy,
+  "VirtualMachineScaleSets.redeploy::parameters.body",
+  "vmInstanceIDs"
+);
+@@clientName(VirtualMachineScaleSets.reimage,
+  "VirtualMachineScaleSets.reimage::parameters.body",
+  "vmScaleSetReimageInput"
+);
+@@clientName(VirtualMachineScaleSets.reimageAll,
+  "VirtualMachineScaleSets.reimageAll::parameters.body",
+  "vmInstanceIDs"
+);
+@@clientName(VirtualMachineScaleSets.restart,
+  "VirtualMachineScaleSets.restart::parameters.body",
+  "vmInstanceIDs"
+);
+@@clientName(VirtualMachineScaleSets.setOrchestrationServiceState,
+  "VirtualMachineScaleSets.setOrchestrationServiceState::parameters.body",
+  "parameters"
+);
+@@clientName(VirtualMachineScaleSets.start,
+  "VirtualMachineScaleSets.start::parameters.body",
+  "vmInstanceIDs"
+);
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(VirtualMachineScaleSet.properties);
 
+@@clientName(VirtualMachineScaleSetExtensions.update,
+  "VirtualMachineScaleSetExtensions.update::parameters.properties",
+  "extensionParameters"
+);
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(VirtualMachineScaleSetExtension.properties);
 
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(RollingUpgradeStatusInfo.properties);
 
+@@clientName(VirtualMachineScaleSetVMS.reimage,
+  "VirtualMachineScaleSetVMS.reimage::parameters.body",
+  "vmScaleSetVMReimageInput"
+);
+@@clientName(VirtualMachineScaleSetVMS.attachDetachDataDisks,
+  "VirtualMachineScaleSetVMS.attachDetachDataDisks::parameters.body",
+  "parameters"
+);
+@@clientName(VirtualMachineScaleSetVMS.runCommand,
+  "VirtualMachineScaleSetVMS.runCommand::parameters.body",
+  "parameters"
+);
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(VirtualMachineScaleSetVM.properties);
 
+@@clientName(VirtualMachineExtensions.update,
+  "VirtualMachineExtensions.update::parameters.properties",
+  "extensionParameters"
+);
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(VirtualMachineExtension.properties);
 
+@@clientName(VirtualMachineScaleSetVMExtensions.update,
+  "VirtualMachineScaleSetVMExtensions.update::parameters.properties",
+  "extensionParameters"
+);
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(VirtualMachineScaleSetVMExtension.properties);
 
+@@clientName(VirtualMachines.update,
+  "VirtualMachines.update::parameters.properties",
+  "parameters"
+);
+@@clientName(VirtualMachines.attachDetachDataDisks,
+  "VirtualMachines.attachDetachDataDisks::parameters.body",
+  "parameters"
+);
+@@clientName(VirtualMachines.capture,
+  "VirtualMachines.capture::parameters.body",
+  "parameters"
+);
+@@clientName(VirtualMachines.installPatches,
+  "VirtualMachines.installPatches::parameters.body",
+  "installPatchesInput"
+);
+@@clientName(VirtualMachines.reimage,
+  "VirtualMachines.reimage::parameters.body",
+  "parameters"
+);
+@@clientName(VirtualMachines.runCommand,
+  "VirtualMachines.runCommand::parameters.body",
+  "parameters"
+);
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(VirtualMachine.properties);
 
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(VirtualMachineExtensionImage.properties);
 
+@@clientName(AvailabilitySets.update,
+  "AvailabilitySets.update::parameters.properties",
+  "parameters"
+);
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(AvailabilitySet.properties);
 
+@@clientName(ProximityPlacementGroups.update,
+  "ProximityPlacementGroups.update::parameters.properties",
+  "parameters"
+);
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(ProximityPlacementGroup.properties);
 
+@@clientName(DedicatedHostGroups.update,
+  "DedicatedHostGroups.update::parameters.properties",
+  "parameters"
+);
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(DedicatedHostGroup.properties);
 
+@@clientName(DedicatedHosts.update,
+  "DedicatedHosts.update::parameters.properties",
+  "parameters"
+);
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(DedicatedHost.properties);
 
+@@clientName(SshPublicKeyResources.update,
+  "SshPublicKeyResources.update::parameters.properties",
+  "parameters"
+);
+@@clientName(SshPublicKeyResources.generateKeyPair,
+  "SshPublicKeyResources.generateKeyPair::parameters.body",
+  "parameters"
+);
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(SshPublicKeyResource.properties);
 
+@@clientName(Images.update,
+  "Images.update::parameters.properties",
+  "parameters"
+);
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(Image.properties);
 
+@@clientName(RestorePointCollections.update,
+  "RestorePointCollections.update::parameters.properties",
+  "parameters"
+);
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(RestorePointCollection.properties);
 
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(RestorePoint.properties);
 
+@@clientName(CapacityReservationGroups.update,
+  "CapacityReservationGroups.update::parameters.properties",
+  "parameters"
+);
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(CapacityReservationGroup.properties);
 
+@@clientName(CapacityReservations.update,
+  "CapacityReservations.update::parameters.properties",
+  "parameters"
+);
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(CapacityReservation.properties);
 
+@@clientName(VirtualMachineRunCommands.update,
+  "VirtualMachineRunCommands.update::parameters.properties",
+  "runCommand"
+);
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(VirtualMachineRunCommand.properties);

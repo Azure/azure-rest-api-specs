@@ -5940,7 +5940,7 @@ model VirtualMachineInstallPatchesParameters {
   /**
    * Specifies the maximum amount of time that the operation will run. It must be an ISO 8601-compliant duration string such as PT4H (4 hours)
    */
-  maximumDuration?: string;
+  maximumDuration?: duration;
 
   /**
    * Defines when it is acceptable to reboot a VM during a software update operation.
@@ -6185,6 +6185,9 @@ model VirtualMachineImageProperties {
    */
   osDiskImage?: OSDiskImage;
 
+  /**
+   * The list of data disk images information.
+   */
   @OpenAPI.extension("x-ms-identifiers", ["lun"])
   dataDiskImages?: DataDiskImage[];
 
@@ -7037,8 +7040,9 @@ model RestorePointSourceVMStorageProfile {
   /**
    * Gets the data disks of the VM captured at the time of the restore point creation.
    */
+  @encodedName("application/json", "dataDisks")
   @OpenAPI.extension("x-ms-identifiers", ["lun"])
-  dataDisks?: RestorePointSourceVMDataDisk[];
+  dataDiskList?: RestorePointSourceVMDataDisk[];
 
   /**
    * Gets the disk controller type of the VM captured at the time of the restore point creation.
