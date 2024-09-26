@@ -24,14 +24,12 @@ union ConversationalAnalysisAuthoringProjectKind {
   Conversation: "Conversation",
 
   /**
-   * A project to connect and orchestrate Conversation, Custom question answering
-   * and LUIS projects together in one single project.
+   * A project to connect and orchestrate Conversation, Custom question answering and LUIS projects together in one single project.
    */
   Orchestration: "Orchestration",
 
   /**
-   * A project to build conversation summarization models which are able to
-   * summarize long conversations.
+   * A project to build conversation summarization models which are able to summarize long conversations.
    */
   @added(Versions.v2023_04_15_preview)
   CustomConversationSummarization: "CustomConversationSummarization",
@@ -294,8 +292,7 @@ model ConversationalAnalysisAuthoringProjectMetadata {
   description?: string;
 
   /**
-   * The project language. This is BCP-47 representation of a language. For example,
-   * use "en" for English, "en-gb" for English (UK), "es" for Spanish etc.
+   * The project language. This is BCP-47 representation of a language. For example, use "en" for English, "en-gb" for English (UK), "es" for Spanish etc.
    */
   @visibility("create", "read")
   language: string;
@@ -307,9 +304,7 @@ model ConversationalAnalysisAuthoringProjectMetadata {
 @clientName("ProjectSettings", "csharp")
 model ConversationalAnalysisAuthoringProjectSettings {
   /**
-   * The threshold of the intent with the highest confidence, at which the
-   * prediction will automatically be changed to "None". The value of the threshold
-   * should be between 0 and 1 inclusive.
+   * The threshold of the intent with the highest confidence, at which the prediction will automatically be changed to "None". The value of the threshold should be between 0 and 1 inclusive.
    */
   confidenceThreshold: float32;
 }
@@ -426,15 +421,13 @@ model ConversationalAnalysisAuthoringCreateProjectOptions {
   description?: string;
 
   /**
-   * The project language. This is BCP-47 representation of a language. For example,
-   * use "en" for English, "en-gb" for English (UK), "es" for Spanish etc.
+   * The project language. This is BCP-47 representation of a language. For example, use "en" for English, "en-gb" for English (UK), "es" for Spanish etc.
    */
   language: string;
 }
 
 /**
- * Represents the options for authorizing a project copy to the current Azure
- * resource.
+ * Represents the options for authorizing a project copy to the current Azure resource.
  */
 @added(Versions.v2023_04_15_preview)
 @clientName("CopyAuthorizationOptions", "csharp")
@@ -450,8 +443,7 @@ model ConversationalAnalysisAuthoringCopyAuthorizationOptions {
   storageInputContainerName?: string;
 
   /**
-   * Whether to allow an existing project to be overwritten using the resulting copy
-   * authorization.
+   * Whether to allow an existing project to be overwritten using the resulting copy authorization.
    */
   allowOverwrite?: boolean;
 }
@@ -528,6 +520,10 @@ model ConversationalAnalysisAuthoringExportedProject {
 @discriminator("projectKind")
 @clientName("ExportedProjectAssets", "csharp")
 model ConversationalAnalysisAuthoringExportedProjectAssets {
+
+  /**
+   * The type of project containing the assets.
+   */
   projectKind: ConversationalAnalysisAuthoringProjectKind;
 }
 

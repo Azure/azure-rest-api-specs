@@ -203,8 +203,7 @@ interface ConversationalAnalysisAuthoring {
       assetKind?: string;
 
       /**
-       * Trained model label to export. If the trainedModelLabel is null, the default
-       * behavior is to export the current working copy.
+       * Trained model label to export. If the trainedModelLabel is null, the default behavior is to export the current working copy.
        */
       @query("trainedModelLabel")
       trainedModelLabel?: string;
