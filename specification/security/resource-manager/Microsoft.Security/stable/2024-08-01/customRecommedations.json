@@ -1,0 +1,375 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft Defender for Cloud",
+    "description": "API spec for Microsoft.Security (Microsoft Defender for Cloud) resource provider",
+    "version": "2024-08-01"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/{scope}/providers/Microsoft.Security/customRecommendations": {
+      "get": {
+        "x-ms-examples": {
+          "List custom recommendations by subscription scope": {
+            "$ref": "./examples/CustomRecommendations/ListBySubscriptionCustomRecommendations_example.json"
+          },
+          "List custom recommendations by security connector scope": {
+            "$ref": "./examples/CustomRecommendations/ListBySecurityConnectorCustomRecommendations_example.json"
+          },
+          "List custom recommendations by management group scope": {
+            "$ref": "./examples/CustomRecommendations/ListByManagementGroupCustomRecommendations_example.json"
+          }
+        },
+        "tags": [
+          "CustomRecommendations"
+        ],
+        "description": "Get a list of all relevant custom recommendations over a scope",
+        "operationId": "CustomRecommendations_List",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Scope"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CustomRecommendationsList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/{scope}/providers/Microsoft.Security/customRecommendations/{customRecommendationName}": {
+      "get": {
+        "x-ms-examples": {
+          "Get a custom recommendation over subscription scope": {
+            "$ref": "./examples/CustomRecommendations/GetBySubscriptionCustomRecommendation_example.json"
+          },
+          "Get a custom recommendation over security connector scope": {
+            "$ref": "./examples/CustomRecommendations/GetBySecurityConnectorCustomRecommendation_example.json"
+          },
+          "Get a custom recommendation over management group scope": {
+            "$ref": "./examples/CustomRecommendations/GetByManagementGroupCustomRecommendation_example.json"
+          }
+        },
+        "tags": [
+          "CustomRecommendations"
+        ],
+        "description": "Get a specific custom recommendation for the requested scope by customRecommendationName",
+        "operationId": "CustomRecommendations_Get",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Scope"
+          },
+          {
+            "$ref": "#/parameters/customRecommendationName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CustomRecommendation"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "x-ms-examples": {
+          "Create or update custom recommendation over subscription scope": {
+            "$ref": "./examples/CustomRecommendations/PutBySubscriptionCustomRecommendation_example.json"
+          },
+          "Create or update custom recommendation over security connector scope": {
+            "$ref": "./examples/CustomRecommendations/PutBySecurityConnectorCustomRecommendation_example.json"
+          },
+          "Create or update custom recommendation over management group scope": {
+            "$ref": "./examples/CustomRecommendations/PutByManagementGroupCustomRecommendation_example.json"
+          }
+        },
+        "tags": [
+          "CustomRecommendations"
+        ],
+        "description": "Creates or updates a custom recommendation over a given scope",
+        "operationId": "CustomRecommendations_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Scope"
+          },
+          {
+            "$ref": "#/parameters/customRecommendationName"
+          },
+          {
+            "$ref": "#/parameters/customRecommendationBody"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/CustomRecommendation"
+            }
+          },
+          "200": {
+            "description": "OK - Updated",
+            "schema": {
+              "$ref": "#/definitions/CustomRecommendation"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "x-ms-examples": {
+          "Delete a custom recommendation over subscription scope": {
+            "$ref": "./examples/CustomRecommendations/DeleteBySubscriptionCustomRecommendation_example.json"
+          },
+          "Delete a custom recommendation over security connector scope": {
+            "$ref": "./examples/CustomRecommendations/DeleteBySecurityConnectorCustomRecommendation_example.json"
+          },
+          "Delete a custom recommendation over management group scope": {
+            "$ref": "./examples/CustomRecommendations/DeleteByManagementGroupCustomRecommendation_example.json"
+          }
+        },
+        "tags": [
+          "CustomRecommendations"
+        ],
+        "description": "Delete a custom recommendation over a given scope",
+        "operationId": "CustomRecommendations_Delete",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Scope"
+          },
+          {
+            "$ref": "#/parameters/customRecommendationName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - custom recommendation was deleted"
+          },
+          "204": {
+            "description": "No Content - custom recommendation does not exist"
+          },
+          "default": {
+            "description": "Error response that describes why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "CustomRecommendationsList": {
+      "type": "object",
+      "description": "A list of Custom Recommendations",
+      "properties": {
+        "value": {
+          "description": "Collection of Custom Recommendations",
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CustomRecommendation"
+          }
+        },
+        "nextLink": {
+          "description": "The link used to get the next page of operations.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "CustomRecommendation": {
+      "type": "object",
+      "description": "Custom Recommendation",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "describes Custom Recommendation properties.",
+          "$ref": "#/definitions/CustomRecommendationProperties"
+        },
+        "systemData": {
+          "readOnly": true,
+          "type": "object",
+          "description": "Azure Resource Manager metadata containing createdBy and modifiedBy information.",
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/systemData"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../common/v1/types.json#/definitions/Resource"
+        }
+      ]
+    },
+    "CustomRecommendationProperties": {
+      "type": "object",
+      "description": "describes the Custom Recommendation properties",
+      "properties": {
+        "query": {
+          "description": "KQL query representing the Recommendation results required.",
+          "type": "string"
+        },
+        "cloudProviders": {
+          "description": "List of all standard supported clouds.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RecommendationSupportedCloud"
+          }
+        },
+        "severity": {
+          "description": "The severity to relate to the assessments generated by this Recommendation.",
+          "type": "string",
+          "enum": [
+            "High",
+            "Medium",
+            "Low"
+          ],
+          "x-ms-enum": {
+            "name": "severityEnum",
+            "modelAsString": true
+          },
+          "x-ms-client-default": "Low"
+        },
+        "securityIssue": {
+          "description": "The severity to relate to the assessments generated by this Recommendation.",
+          "type": "string",
+          "enum": [
+            "Vulnerability",
+            "ExcessivePermissions",
+            "AnonymousAccess",
+            "NetworkExposure",
+            "TrafficEncryption",
+            "BestPractices"
+          ],
+          "x-ms-enum": {
+            "name": "securityIssue",
+            "modelAsString": true
+          },
+          "x-ms-client-default": "BestPractices"
+        },
+        "displayName": {
+          "description": "The display name of the assessments generated by this Recommendation.",
+          "type": "string"
+        },
+        "description": {
+          "description": "The description to relate to the assessments generated by this Recommendation.",
+          "type": "string"
+        },
+        "remediationDescription": {
+          "description": "The remediation description to relate to the assessments generated by this Recommendation.",
+          "type": "string"
+        },
+        "assessmentKey": {
+          "description": "The assessment metadata key used when an assessment is generated for this Recommendation.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "RecommendationSupportedCloud": {
+      "type": "string",
+      "description": "The cloud that the recommendation is supported on.",
+      "enum": [
+        "Azure",
+        "AWS",
+        "GCP"
+      ],
+      "x-ms-enum": {
+        "name": "RecommendationSupportedClouds",
+        "modelAsString": true
+      }
+    }
+  },
+  "parameters": {
+    "customRecommendationName": {
+      "name": "customRecommendationName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "[{]?[0-9a-fA-F]{8}-(?:[0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}[}]?$",
+      "description": "Name of the Custom Recommendation.",
+      "x-ms-parameter-location": "method"
+    },
+    "customRecommendationBody": {
+      "name": "customRecommendationBody",
+      "in": "body",
+      "description": "Custom Recommendation body",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/CustomRecommendation"
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "Scope": {
+      "name": "scope",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The scope of the custom recommendation. Valid scopes are: management group (format: 'providers/Microsoft.Management/managementGroups/{managementGroup}'), subscription (format: 'subscriptions/{subscriptionId}'), or security connector (format: 'subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/securityConnectors/{securityConnectorName})'",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

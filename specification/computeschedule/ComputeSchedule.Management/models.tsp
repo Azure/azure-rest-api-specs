@@ -114,14 +114,13 @@ model Schedule {
   timeZone: string;
 
   @doc("The deadlinetype of the operation, this can either be InitiateAt or CompleteBy")
-  @extension("x-ms-enum.modelAsString", true)
   deadlineType: DeadlineType = DeadlineType.Unknown;
 }
 
 @doc("The resources needed for the user request")
 model Resources {
   @doc("The resource ids used for the request")
-  ids: Array<Azure.Core.armResourceIdentifier>;
+  ids: Array<armResourceIdentifier>;
 }
 
 @doc("The retry policy for the user request")
@@ -157,10 +156,9 @@ model ResourceOperationDetails {
   operationId: string;
 
   @doc("Unique identifier for the resource involved in the operation, eg ArmId")
-  resourceId: Azure.Core.armResourceIdentifier;
+  resourceId: armResourceIdentifier;
 
   @doc("Type of operation performed on the resources")
-  @extension("x-ms-enum.modelAsString", true)
   opType: ResourceOperationType = ResourceOperationType.Unknown;
 
   @doc("Subscription id attached to the request")
@@ -171,11 +169,9 @@ model ResourceOperationDetails {
   deadline: offsetDateTime;
 
   @doc("Type of deadline of the operation")
-  @extension("x-ms-enum.modelAsString", true)
   deadlineType: DeadlineType = DeadlineType.Unknown;
 
   @doc("Current state of the operation")
-  @extension("x-ms-enum.modelAsString", true)
   state: OperationState = OperationState.Unknown;
 
   @doc("Timezone for the operation")
@@ -195,7 +191,7 @@ model ResourceOperationDetails {
 @doc("High level response from an operation on a resource")
 model ResourceOperation {
   @doc("Unique identifier for the resource involved in the operation, eg ArmId")
-  resourceId?: Azure.Core.armResourceIdentifier;
+  resourceId?: armResourceIdentifier;
 
   @doc("Resource level error code if it exists")
   errorCode?: string;
@@ -274,8 +270,8 @@ model DeallocateResourceOperationResponse {
   type: string;
 
   @doc("The location of the deallocate request eg westus")
-  @extension("x-ms-mutability", ["read", "create"])
-  location: string;
+  @visibility("read", "create")
+  location: azureLocation;
 
   @extension("x-ms-identifiers", ["resourceId"])
   @doc("The results from the deallocate request if no errors exist")
@@ -307,8 +303,8 @@ model StartResourceOperationResponse {
   type: string;
 
   @doc("The location of the start request eg westus")
-  @extension("x-ms-mutability", ["read", "create"])
-  location: string;
+  @visibility("read", "create")
+  location: azureLocation;
 
   @extension("x-ms-identifiers", ["resourceId"])
   @doc("The results from the start request if no errors exist")
@@ -340,8 +336,8 @@ model HibernateResourceOperationResponse {
   type: string;
 
   @doc("The location of the Hibernate request eg westus")
-  @extension("x-ms-mutability", ["read", "create"])
-  location: string;
+  @visibility("read", "create")
+  location: azureLocation;
 
   @extension("x-ms-identifiers", ["resourceId"])
   @doc("The results from the Hibernate request if no errors exist")
