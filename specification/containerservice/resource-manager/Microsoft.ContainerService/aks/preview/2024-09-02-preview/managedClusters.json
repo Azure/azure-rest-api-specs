@@ -8858,8 +8858,12 @@
     },
     "AdvancedNetworking": {
       "type": "object",
-      "description": "Advanced Networking profile for enabling observability on a cluster. Note that enabling advanced networking features may incur additional costs. For more information see aka.ms/aksadvancednetworking.",
+      "description": "Advanced Networking profile for enabling observability and security feature suite on a cluster. For more information see aka.ms/aksadvancednetworking.",
       "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Indicates the enablement of Advanced Networking functionalities of observability and security on AKS clusters. When this is set to true, all observability and security features will be set to enabled unless explicitly disabled. If not specified, the default is false."
+        },
         "observability": {
           "$ref": "#/definitions/AdvancedNetworkingObservability"
         },
@@ -8875,43 +8879,12 @@
         "enabled": {
           "type": "boolean",
           "description": "Indicates the enablement of Advanced Networking observability functionalities on clusters."
-        },
-        "tlsManagement": {
-          "type": "string",
-          "enum": [
-            "None",
-            "Managed"
-          ],
-          "x-ms-enum": {
-            "name": "TLSManagement",
-            "modelAsString": true,
-            "values": [
-              {
-                "value": "None",
-                "description": "Disable TLS management of certificates. This leaves the flow log endpoint unencrypted. It is strongly recommended when using this option that you configure your own encryption on top, for example by putting the flow logs endpoint behind an ingress controller."
-              },
-              {
-                "value": "Managed",
-                "description": "Enable TLS and cert rotation is managed by Azure."
-              }
-            ]
-          },
-          "description": "Management of TLS certificates for querying network flow logs via the flow log endpoint for Advanced Networking observability clusters. If not specified, the default is Managed. For more information see aka.ms/acnstls."
         }
       }
     },
     "AdvancedNetworkingSecurity": {
       "type": "object",
       "description": "Security profile to enable security features on cilium based cluster.",
-      "properties": {
-        "fqdnPolicy": {
-          "$ref": "#/definitions/AdvancedNetworkingFQDNPolicy"
-        }
-      }
-    },
-    "AdvancedNetworkingFQDNPolicy": {
-      "type": "object",
-      "description": "FQDNFiltering profile to enable FQDN Policy filtering on cilium based cluster.",
       "properties": {
         "enabled": {
           "type": "boolean",
