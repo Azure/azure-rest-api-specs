@@ -389,9 +389,13 @@ model ClassificationPolicy {
   """)
 @discriminator("kind")
 model RouterRule {
+
   @doc("The type discriminator describing a sub-type of RouterRule")
   @clientName("routerRuleKind", "java")
   kind: RouterRuleKind;
+  
+  @clientName("kindInJava")
+  routerRuleKind: string;
 }
 
 @resource("routing/distributionPolicies")
