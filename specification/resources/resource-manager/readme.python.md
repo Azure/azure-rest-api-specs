@@ -190,6 +190,7 @@ clear-output-folder: false
 ```
 
 ```yaml $(multiapiscript-databoundaries)
+title: DataBoundaryMgmtClient
 package-name: azure-mgmt-resource#databoundaries
 multiapiscript: true
 output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/databoundaries
@@ -204,6 +205,7 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 
 ``` yaml $(tag) == 'package-databoundaries-2024-08'
 default-api-version: "2024-08-01"
+title: DataBoundaryMgmtClient
 namespace: azure.mgmt.resource.databoundaries.v2024_08_01
 output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/databoundaries/v2024_08_01
 ```
