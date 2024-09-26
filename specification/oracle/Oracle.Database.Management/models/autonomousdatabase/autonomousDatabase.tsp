@@ -120,6 +120,10 @@ union DataBaseType {
   @doc("Clone DB")
   Clone: "Clone",
 
+  @added(Versions.v20240801_preview)
+  @doc("Clone DB from backup timestamp")
+  CloneFromBackupTimestamp: "CloneFromBackupTimestamp",
+
   string,
 }
 
@@ -628,6 +632,34 @@ model AutonomousDatabaseCloneProperties
   @doc("The time and date as an RFC3339 formatted string, e.g., 2022-01-01T12:00:00.000Z, to set the limit for a refreshable clone to be reconnected to its source database.")
   @visibility("read", "update")
   timeUntilReconnectCloneEnabled?: string;
+}
+
+@added(Versions.v20240801_preview)
+@doc("Autonomous Database From Backup Timestamp resource model.")
+model AutonomousDatabaseFromBackupTimestampProperties
+  extends AutonomousDatabaseBaseProperties {
+  @doc("Database type to be created.")
+  dataBaseType: DataBaseType.CloneFromBackupTimestamp;
+
+  @doc("The source of the database.")
+  @visibility("create")
+  source: SourceType.BackupFromTimestamp;
+
+  @doc("The ID of the source Autonomous Database that you will clone to create a new Autonomous Database.")
+  @visibility("create", "read")
+  sourceId: AutonomousDatabaseId;
+
+  @doc("The Autonomous Database clone type.")
+  @visibility("create")
+  cloneType: CloneType;
+
+  @doc("The timestamp specified for the point-in-time clone of the source Autonomous Database. The timestamp must be in the past.")
+  @visibility("create")
+  timestamp?: utcDateTime;
+
+  @doc("Clone from latest available backup timestamp.")
+  @visibility("create")
+  useLatestAvailableBackupTimeStamp?: boolean;
 }
 
 @discriminator("dataBaseType")

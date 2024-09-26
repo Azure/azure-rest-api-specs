@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Oracle Database Resource Manager",
-    "version": "2024-06-01-preview",
+    "version": "2024-08-01-preview",
     "x-typespec-generated": [
       {
         "emitter": "@azure-tools/typespec-autorest"
@@ -4920,6 +4920,66 @@
       ],
       "x-ms-discriminator-value": "Clone"
     },
+    "AutonomousDatabaseFromBackupTimestampProperties": {
+      "type": "object",
+      "description": "Autonomous Database From Backup Timestamp resource model.",
+      "properties": {
+        "source": {
+          "type": "string",
+          "description": "The source of the database.",
+          "enum": [
+            "BackupFromTimestamp"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          },
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "sourceId": {
+          "$ref": "#/definitions/AutonomousDatabaseId",
+          "description": "The ID of the source Autonomous Database that you will clone to create a new Autonomous Database.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "cloneType": {
+          "$ref": "#/definitions/CloneType",
+          "description": "The Autonomous Database clone type.",
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp specified for the point-in-time clone of the source Autonomous Database. The timestamp must be in the past.",
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "useLatestAvailableBackupTimeStamp": {
+          "type": "boolean",
+          "description": "Clone from latest available backup timestamp.",
+          "x-ms-mutability": [
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "source",
+        "sourceId",
+        "cloneType"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/AutonomousDatabaseBaseProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "CloneFromBackupTimestamp"
+    },
     "AutonomousDatabaseId": {
       "type": "string",
       "format": "arm-id",
@@ -6807,7 +6867,8 @@
       "description": "Database type enum",
       "enum": [
         "Regular",
-        "Clone"
+        "Clone",
+        "CloneFromBackupTimestamp"
       ],
       "x-ms-enum": {
         "name": "DataBaseType",
@@ -6822,6 +6883,11 @@
             "name": "Clone",
             "value": "Clone",
             "description": "Clone DB"
+          },
+          {
+            "name": "CloneFromBackupTimestamp",
+            "value": "CloneFromBackupTimestamp",
+            "description": "Clone DB from backup timestamp"
           }
         ]
       }
