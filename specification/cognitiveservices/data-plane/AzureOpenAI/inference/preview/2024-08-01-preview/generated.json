@@ -1,0 +1,4701 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure OpenAI API",
+    "version": "2024-08-01-preview",
+    "description": "Azure OpenAI APIs for completions and search",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{endpoint}/openai",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "name": "endpoint",
+        "in": "path",
+        "description": "Supported Cognitive Services endpoints (protocol and hostname, for example:\nhttps://westus.api.cognitive.microsoft.com).",
+        "required": true,
+        "type": "string"
+      }
+    ]
+  },
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "ApiKeyAuth": []
+    },
+    {
+      "OAuth2Auth": [
+        "https://cognitiveservices.azure.com/.default"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "ApiKeyAuth": {
+      "type": "apiKey",
+      "name": "api-key",
+      "in": "header"
+    },
+    "OAuth2Auth": {
+      "type": "oauth2",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/v2.0/authorize",
+      "scopes": {
+        "https://cognitiveservices.azure.com/.default": ""
+      }
+    }
+  },
+  "tags": [],
+  "paths": {
+    "/deployments/{deploymentId}/audio/speech": {
+      "post": {
+        "operationId": "GenerateSpeechFromText",
+        "description": "Generates text-to-speech audio from the input text.",
+        "produces": [
+          "application/octet-stream",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "deploymentId",
+            "in": "path",
+            "description": "Specifies either the model deployment name (when using Azure OpenAI) or model name (when using non-Azure OpenAI) to use for this request.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SpeechGenerationOptions"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "type": "file"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Generates text-to-speech audio from the input text.": {
+            "$ref": "./examples/generated_audio_speech.json"
+          }
+        }
+      }
+    },
+    "/deployments/{deploymentId}/audio/transcriptions": {
+      "post": {
+        "operationId": "GetAudioTranscriptionAsPlainText",
+        "description": "Gets transcribed text and associated metadata from provided spoken audio data. Audio will be transcribed in the\nwritten language corresponding to the language it was spoken in.",
+        "produces": [
+          "text/plain",
+          "application/json"
+        ],
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "deploymentId",
+            "in": "path",
+            "description": "Specifies either the model deployment name (when using Azure OpenAI) or model name (when using non-Azure OpenAI) to use for this request.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/AudioTranscriptionOptions.file"
+          },
+          {
+            "$ref": "#/parameters/AudioTranscriptionOptions.filename"
+          },
+          {
+            "$ref": "#/parameters/AudioTranscriptionOptions.responseFormat"
+          },
+          {
+            "$ref": "#/parameters/AudioTranscriptionOptions.language"
+          },
+          {
+            "$ref": "#/parameters/AudioTranscriptionOptions.prompt"
+          },
+          {
+            "$ref": "#/parameters/AudioTranscriptionOptions.temperature"
+          },
+          {
+            "$ref": "#/parameters/AudioTranscriptionOptions.timestampGranularities"
+          },
+          {
+            "$ref": "#/parameters/AudioTranscriptionOptions.model"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets transcribed text and associated metadata from provided spoken audio data.": {
+            "$ref": "./examples/generated_audio_transcription_text.json"
+          }
+        }
+      }
+    },
+    "/deployments/{deploymentId}/audio/translations": {
+      "post": {
+        "operationId": "GetAudioTranslationAsPlainText",
+        "description": "Gets English language transcribed text and associated metadata from provided spoken audio data.",
+        "produces": [
+          "text/plain",
+          "application/json"
+        ],
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "deploymentId",
+            "in": "path",
+            "description": "Specifies either the model deployment name (when using Azure OpenAI) or model name (when using non-Azure OpenAI) to use for this request.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/AudioTranslationOptions.file"
+          },
+          {
+            "$ref": "#/parameters/AudioTranslationOptions.filename"
+          },
+          {
+            "$ref": "#/parameters/AudioTranslationOptions.responseFormat"
+          },
+          {
+            "$ref": "#/parameters/AudioTranslationOptions.prompt"
+          },
+          {
+            "$ref": "#/parameters/AudioTranslationOptions.temperature"
+          },
+          {
+            "$ref": "#/parameters/AudioTranslationOptions.model"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets English language transcribed text and associated metadata from provided spoken audio data.": {
+            "$ref": "./examples/generated_audio_translation_text.json"
+          }
+        }
+      }
+    },
+    "/deployments/{deploymentId}/chat/completions": {
+      "post": {
+        "operationId": "GetChatCompletions",
+        "description": "Gets chat completions for the provided chat messages.\nCompletions support a wide variety of tasks and generate text that continues from or \"completes\"\nprovided prompt data.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "deploymentId",
+            "in": "path",
+            "description": "Specifies either the model deployment name (when using Azure OpenAI) or model name (when using non-Azure OpenAI) to use for this request.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ChatCompletionsOptions"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ChatCompletions"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Creates a completion based on Azure Cognitive Services data and system-assigned managed identity. Uses Azure OpenAI chat extensions.": {
+            "$ref": "./examples/generated_extensions_chat_completions_azure_search_minimum.json"
+          },
+          "Creates a completion based on Azure Cognitive Services image vector data. Uses Azure OpenAI chat extensions.": {
+            "$ref": "./examples/generated_extensions_chat_completions_azure_search_image_vector.json"
+          },
+          "Creates a completion based on Azure Cognitive Services vector data and user-assigned managed identity. Uses Azure OpenAI chat extensions.": {
+            "$ref": "./examples/generated_extensions_chat_completions_azure_search_advanced.json"
+          },
+          "Creates a completion for the provided AML index. Uses Azure OpenAI chat extensions.": {
+            "$ref": "./examples/generated_extensions_chat_completions_aml_index.json"
+          },
+          "Creates a completion for the provided Azure Cosmos DB. Uses Azure OpenAI chat extensions.": {
+            "$ref": "./examples/generated_extensions_chat_completions_cosmos_db.json"
+          },
+          "Creates a completion for the provided Elasticsearch. Uses Azure OpenAI chat extensions.": {
+            "$ref": "./examples/generated_extensions_chat_completions_elasticsearch.json"
+          },
+          "Creates a completion for the provided Pinecone resource. Uses Azure OpenAI chat extensions.": {
+            "$ref": "./examples/generated_extensions_chat_completions_pinecone.json"
+          },
+          "Creates a completion for the provided prompt, parameters and chosen model.": {
+            "$ref": "./examples/generated_chat_completions.json"
+          }
+        }
+      }
+    },
+    "/deployments/{deploymentId}/completions": {
+      "post": {
+        "operationId": "GetCompletions",
+        "description": "Gets completions for the provided input prompts.\nCompletions support a wide variety of tasks and generate text that continues from or \"completes\"\nprovided prompt data.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "deploymentId",
+            "in": "path",
+            "description": "Specifies either the model deployment name (when using Azure OpenAI) or model name (when using non-Azure OpenAI) to use for this request.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CompletionsOptions"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Completions"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Creates a completion for the provided prompt, parameters and chosen model.": {
+            "$ref": "./examples/generated_completions.json"
+          }
+        }
+      }
+    },
+    "/deployments/{deploymentId}/embeddings": {
+      "post": {
+        "operationId": "GetEmbeddings",
+        "description": "Return the embeddings for a given prompt.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "deploymentId",
+            "in": "path",
+            "description": "Specifies either the model deployment name (when using Azure OpenAI) or model name (when using non-Azure OpenAI) to use for this request.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EmbeddingsOptions"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Embeddings"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Return the embeddings for a given prompt.": {
+            "$ref": "./examples/generated_embeddings.json"
+          }
+        }
+      }
+    },
+    "/deployments/{deploymentId}/images/generations": {
+      "post": {
+        "operationId": "GetImageGenerations",
+        "description": "Creates an image given a prompt.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "deploymentId",
+            "in": "path",
+            "description": "Specifies either the model deployment name (when using Azure OpenAI) or model name (when using non-Azure OpenAI) to use for this request.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ImageGenerationOptions"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ImageGenerations"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Creates images given a prompt.": {
+            "$ref": "./examples/generated_image_generation.json"
+          }
+        }
+      }
+    }
+  },
+  "x-ms-paths": {
+    "/deployments/{deploymentId}/audio/transcriptions?_overload=getAudioTranscriptionAsResponseObject": {
+      "post": {
+        "operationId": "GetAudioTranscriptionAsResponseObject",
+        "description": "Gets transcribed text and associated metadata from provided spoken audio data. Audio will be transcribed in the\nwritten language corresponding to the language it was spoken in.",
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "deploymentId",
+            "in": "path",
+            "description": "Specifies either the model deployment name (when using Azure OpenAI) or model name (when using non-Azure OpenAI) to use for this request.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/AudioTranscriptionOptions.file"
+          },
+          {
+            "$ref": "#/parameters/AudioTranscriptionOptions.filename"
+          },
+          {
+            "$ref": "#/parameters/AudioTranscriptionOptions.responseFormat"
+          },
+          {
+            "$ref": "#/parameters/AudioTranscriptionOptions.language"
+          },
+          {
+            "$ref": "#/parameters/AudioTranscriptionOptions.prompt"
+          },
+          {
+            "$ref": "#/parameters/AudioTranscriptionOptions.temperature"
+          },
+          {
+            "$ref": "#/parameters/AudioTranscriptionOptions.timestampGranularities"
+          },
+          {
+            "$ref": "#/parameters/AudioTranscriptionOptions.model"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/AudioTranscription"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets transcribed text and associated metadata from provided spoken audio data.": {
+            "$ref": "./examples/generated_audio_transcription_object.json"
+          }
+        }
+      }
+    },
+    "/deployments/{deploymentId}/audio/translations?_overload=getAudioTranslationAsResponseObject": {
+      "post": {
+        "operationId": "GetAudioTranslationAsResponseObject",
+        "description": "Gets English language transcribed text and associated metadata from provided spoken audio data.",
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "deploymentId",
+            "in": "path",
+            "description": "Specifies either the model deployment name (when using Azure OpenAI) or model name (when using non-Azure OpenAI) to use for this request.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/AudioTranslationOptions.file"
+          },
+          {
+            "$ref": "#/parameters/AudioTranslationOptions.filename"
+          },
+          {
+            "$ref": "#/parameters/AudioTranslationOptions.responseFormat"
+          },
+          {
+            "$ref": "#/parameters/AudioTranslationOptions.prompt"
+          },
+          {
+            "$ref": "#/parameters/AudioTranslationOptions.temperature"
+          },
+          {
+            "$ref": "#/parameters/AudioTranslationOptions.model"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/AudioTranslation"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets English language transcribed text and associated metadata from provided spoken audio data.": {
+            "$ref": "./examples/generated_audio_translation_object.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AudioTaskLabel": {
+      "type": "string",
+      "description": "Defines the possible descriptors for available audio operation responses.",
+      "enum": [
+        "transcribe",
+        "translate"
+      ],
+      "x-ms-enum": {
+        "name": "AudioTaskLabel",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "transcribe",
+            "value": "transcribe",
+            "description": "Accompanying response data resulted from an audio transcription task."
+          },
+          {
+            "name": "translate",
+            "value": "translate",
+            "description": "Accompanying response data resulted from an audio translation task."
+          }
+        ]
+      }
+    },
+    "AudioTranscription": {
+      "type": "object",
+      "description": "Result information for an operation that transcribed spoken audio into written text.",
+      "properties": {
+        "text": {
+          "type": "string",
+          "description": "The transcribed text for the provided audio data."
+        },
+        "task": {
+          "$ref": "#/definitions/AudioTaskLabel",
+          "description": "The label that describes which operation type generated the accompanying response data."
+        },
+        "language": {
+          "type": "string",
+          "description": "The spoken language that was detected in the transcribed audio data.\nThis is expressed as a two-letter ISO-639-1 language code like 'en' or 'fr'."
+        },
+        "duration": {
+          "type": "number",
+          "format": "float",
+          "description": "The total duration of the audio processed to produce accompanying transcription information."
+        },
+        "segments": {
+          "type": "array",
+          "description": "A collection of information about the timing, probabilities, and other detail of each processed audio segment.",
+          "items": {
+            "$ref": "#/definitions/AudioTranscriptionSegment"
+          }
+        },
+        "words": {
+          "type": "array",
+          "description": "A collection of information about the timing of each processed word.",
+          "items": {
+            "$ref": "#/definitions/AudioTranscriptionWord"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "text"
+      ]
+    },
+    "AudioTranscriptionFormat": {
+      "type": "string",
+      "description": "Defines available options for the underlying response format of output transcription information.",
+      "enum": [
+        "json",
+        "verbose_json",
+        "text",
+        "srt",
+        "vtt"
+      ],
+      "x-ms-enum": {
+        "name": "AudioTranscriptionFormat",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "json",
+            "value": "json",
+            "description": "Use a response body that is a JSON object containing a single 'text' field for the transcription."
+          },
+          {
+            "name": "verbose_json",
+            "value": "verbose_json",
+            "description": "Use a response body that is a JSON object containing transcription text along with timing, segments, and other\nmetadata."
+          },
+          {
+            "name": "text",
+            "value": "text",
+            "description": "Use a response body that is plain text containing the raw, unannotated transcription."
+          },
+          {
+            "name": "srt",
+            "value": "srt",
+            "description": "Use a response body that is plain text in SubRip (SRT) format that also includes timing information."
+          },
+          {
+            "name": "vtt",
+            "value": "vtt",
+            "description": "Use a response body that is plain text in Web Video Text Tracks (VTT) format that also includes timing information."
+          }
+        ]
+      }
+    },
+    "AudioTranscriptionOptions": {
+      "type": "object",
+      "description": "The configuration information for an audio transcription request.",
+      "properties": {
+        "file": {
+          "type": "string",
+          "format": "byte",
+          "description": "The audio data to transcribe. This must be the binary content of a file in one of the supported media formats:\n flac, mp3, mp4, mpeg, mpga, m4a, ogg, wav, webm."
+        },
+        "filename": {
+          "type": "string",
+          "description": "The optional filename or descriptive identifier to associate with with the audio data."
+        },
+        "response_format": {
+          "$ref": "#/definitions/AudioTranscriptionFormat",
+          "description": "The requested format of the transcription response data, which will influence the content and detail of the result.",
+          "x-ms-client-name": "responseFormat"
+        },
+        "language": {
+          "type": "string",
+          "description": "The primary spoken language of the audio data to be transcribed, supplied as a two-letter ISO-639-1 language code\nsuch as 'en' or 'fr'.\nProviding this known input language is optional but may improve the accuracy and/or latency of transcription."
+        },
+        "prompt": {
+          "type": "string",
+          "description": "An optional hint to guide the model's style or continue from a prior audio segment. The written language of the\nprompt should match the primary spoken language of the audio data."
+        },
+        "temperature": {
+          "type": "number",
+          "format": "float",
+          "description": "The sampling temperature, between 0 and 1.\nHigher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic.\nIf set to 0, the model will use log probability to automatically increase the temperature until certain thresholds are hit."
+        },
+        "timestamp_granularities": {
+          "type": "array",
+          "description": "The timestamp granularities to populate for this transcription.\n`response_format` must be set `verbose_json` to use timestamp granularities.\nEither or both of these options are supported: `word`, or `segment`.\nNote: There is no additional latency for segment timestamps, but generating word timestamps incurs additional latency.",
+          "default": [
+            "segment"
+          ],
+          "items": {
+            "$ref": "#/definitions/AudioTranscriptionTimestampGranularity"
+          },
+          "x-ms-client-name": "timestampGranularities"
+        },
+        "model": {
+          "type": "string",
+          "description": "The model to use for this transcription request."
+        }
+      },
+      "required": [
+        "file"
+      ]
+    },
+    "AudioTranscriptionSegment": {
+      "type": "object",
+      "description": "Extended information about a single segment of transcribed audio data.\nSegments generally represent roughly 5-10 seconds of speech. Segment boundaries typically occur between words but not\nnecessarily sentences.",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The 0-based index of this segment within a transcription."
+        },
+        "start": {
+          "type": "number",
+          "format": "float",
+          "description": "The time at which this segment started relative to the beginning of the transcribed audio."
+        },
+        "end": {
+          "type": "number",
+          "format": "float",
+          "description": "The time at which this segment ended relative to the beginning of the transcribed audio."
+        },
+        "text": {
+          "type": "string",
+          "description": "The transcribed text that was part of this audio segment."
+        },
+        "temperature": {
+          "type": "number",
+          "format": "float",
+          "description": "The temperature score associated with this audio segment."
+        },
+        "avg_logprob": {
+          "type": "number",
+          "format": "float",
+          "description": "The average log probability associated with this audio segment.",
+          "x-ms-client-name": "avgLogprob"
+        },
+        "compression_ratio": {
+          "type": "number",
+          "format": "float",
+          "description": "The compression ratio of this audio segment.",
+          "x-ms-client-name": "compressionRatio"
+        },
+        "no_speech_prob": {
+          "type": "number",
+          "format": "float",
+          "description": "The probability of no speech detection within this audio segment.",
+          "x-ms-client-name": "noSpeechProb"
+        },
+        "tokens": {
+          "type": "array",
+          "description": "The token IDs matching the transcribed text in this audio segment.",
+          "items": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "seek": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The seek position associated with the processing of this audio segment.\nSeek positions are expressed as hundredths of seconds.\nThe model may process several segments from a single seek position, so while the seek position will never represent\na later time than the segment's start, the segment's start may represent a significantly later time than the\nsegment's associated seek position."
+        }
+      },
+      "required": [
+        "id",
+        "start",
+        "end",
+        "text",
+        "temperature",
+        "avg_logprob",
+        "compression_ratio",
+        "no_speech_prob",
+        "tokens",
+        "seek"
+      ]
+    },
+    "AudioTranscriptionTimestampGranularity": {
+      "type": "string",
+      "description": "Defines the timestamp granularities that can be requested on a verbose transcription response.",
+      "enum": [
+        "word",
+        "segment"
+      ],
+      "x-ms-enum": {
+        "name": "AudioTranscriptionTimestampGranularity",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "word",
+            "value": "word",
+            "description": "Indicates that responses should include timing information about each transcribed word. Note that generating word\ntimestamp information will incur additional response latency."
+          },
+          {
+            "name": "segment",
+            "value": "segment",
+            "description": "Indicates that responses should include timing and other information about each transcribed audio segment. Audio\nsegment timestamp information does not incur any additional latency."
+          }
+        ]
+      }
+    },
+    "AudioTranscriptionWord": {
+      "type": "object",
+      "description": "Extended information about a single transcribed word, as provided on responses when the 'word' timestamp granularity is provided.",
+      "properties": {
+        "word": {
+          "type": "string",
+          "description": "The textual content of the word."
+        },
+        "start": {
+          "type": "number",
+          "format": "float",
+          "description": "The start time of the word relative to the beginning of the audio, expressed in seconds."
+        },
+        "end": {
+          "type": "number",
+          "format": "float",
+          "description": "The end time of the word relative to the beginning of the audio, expressed in seconds."
+        }
+      },
+      "required": [
+        "word",
+        "start",
+        "end"
+      ]
+    },
+    "AudioTranslation": {
+      "type": "object",
+      "description": "Result information for an operation that translated spoken audio into written text.",
+      "properties": {
+        "text": {
+          "type": "string",
+          "description": "The translated text for the provided audio data."
+        },
+        "task": {
+          "$ref": "#/definitions/AudioTaskLabel",
+          "description": "The label that describes which operation type generated the accompanying response data."
+        },
+        "language": {
+          "type": "string",
+          "description": "The spoken language that was detected in the translated audio data.\nThis is expressed as a two-letter ISO-639-1 language code like 'en' or 'fr'."
+        },
+        "duration": {
+          "type": "number",
+          "format": "float",
+          "description": "The total duration of the audio processed to produce accompanying translation information."
+        },
+        "segments": {
+          "type": "array",
+          "description": "A collection of information about the timing, probabilities, and other detail of each processed audio segment.",
+          "items": {
+            "$ref": "#/definitions/AudioTranslationSegment"
+          }
+        }
+      },
+      "required": [
+        "text"
+      ]
+    },
+    "AudioTranslationFormat": {
+      "type": "string",
+      "description": "Defines available options for the underlying response format of output translation information.",
+      "enum": [
+        "json",
+        "verbose_json",
+        "text",
+        "srt",
+        "vtt"
+      ],
+      "x-ms-enum": {
+        "name": "AudioTranslationFormat",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "json",
+            "value": "json",
+            "description": "Use a response body that is a JSON object containing a single 'text' field for the translation."
+          },
+          {
+            "name": "verbose_json",
+            "value": "verbose_json",
+            "description": "Use a response body that is a JSON object containing translation text along with timing, segments, and other\nmetadata."
+          },
+          {
+            "name": "text",
+            "value": "text",
+            "description": "Use a response body that is plain text containing the raw, unannotated translation."
+          },
+          {
+            "name": "srt",
+            "value": "srt",
+            "description": "Use a response body that is plain text in SubRip (SRT) format that also includes timing information."
+          },
+          {
+            "name": "vtt",
+            "value": "vtt",
+            "description": "Use a response body that is plain text in Web Video Text Tracks (VTT) format that also includes timing information."
+          }
+        ]
+      }
+    },
+    "AudioTranslationOptions": {
+      "type": "object",
+      "description": "The configuration information for an audio translation request.",
+      "properties": {
+        "file": {
+          "type": "string",
+          "format": "byte",
+          "description": "The audio data to translate. This must be the binary content of a file in one of the supported media formats:\n flac, mp3, mp4, mpeg, mpga, m4a, ogg, wav, webm."
+        },
+        "filename": {
+          "type": "string",
+          "description": "The optional filename or descriptive identifier to associate with with the audio data."
+        },
+        "response_format": {
+          "$ref": "#/definitions/AudioTranslationFormat",
+          "description": "The requested format of the translation response data, which will influence the content and detail of the result.",
+          "x-ms-client-name": "responseFormat"
+        },
+        "prompt": {
+          "type": "string",
+          "description": "An optional hint to guide the model's style or continue from a prior audio segment. The written language of the\nprompt should match the primary spoken language of the audio data."
+        },
+        "temperature": {
+          "type": "number",
+          "format": "float",
+          "description": "The sampling temperature, between 0 and 1.\nHigher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic.\nIf set to 0, the model will use log probability to automatically increase the temperature until certain thresholds are hit."
+        },
+        "model": {
+          "type": "string",
+          "description": "The model to use for this translation request."
+        }
+      },
+      "required": [
+        "file"
+      ]
+    },
+    "AudioTranslationSegment": {
+      "type": "object",
+      "description": "Extended information about a single segment of translated audio data.\nSegments generally represent roughly 5-10 seconds of speech. Segment boundaries typically occur between words but not\nnecessarily sentences.",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The 0-based index of this segment within a translation."
+        },
+        "start": {
+          "type": "number",
+          "format": "float",
+          "description": "The time at which this segment started relative to the beginning of the translated audio."
+        },
+        "end": {
+          "type": "number",
+          "format": "float",
+          "description": "The time at which this segment ended relative to the beginning of the translated audio."
+        },
+        "text": {
+          "type": "string",
+          "description": "The translated text that was part of this audio segment."
+        },
+        "temperature": {
+          "type": "number",
+          "format": "float",
+          "description": "The temperature score associated with this audio segment."
+        },
+        "avg_logprob": {
+          "type": "number",
+          "format": "float",
+          "description": "The average log probability associated with this audio segment.",
+          "x-ms-client-name": "avgLogprob"
+        },
+        "compression_ratio": {
+          "type": "number",
+          "format": "float",
+          "description": "The compression ratio of this audio segment.",
+          "x-ms-client-name": "compressionRatio"
+        },
+        "no_speech_prob": {
+          "type": "number",
+          "format": "float",
+          "description": "The probability of no speech detection within this audio segment.",
+          "x-ms-client-name": "noSpeechProb"
+        },
+        "tokens": {
+          "type": "array",
+          "description": "The token IDs matching the translated text in this audio segment.",
+          "items": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "seek": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The seek position associated with the processing of this audio segment.\nSeek positions are expressed as hundredths of seconds.\nThe model may process several segments from a single seek position, so while the seek position will never represent\na later time than the segment's start, the segment's start may represent a significantly later time than the\nsegment's associated seek position."
+        }
+      },
+      "required": [
+        "id",
+        "start",
+        "end",
+        "text",
+        "temperature",
+        "avg_logprob",
+        "compression_ratio",
+        "no_speech_prob",
+        "tokens",
+        "seek"
+      ]
+    },
+    "Azure.Core.Foundations.Error": {
+      "type": "object",
+      "description": "The error object.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "One of a server-defined set of error codes."
+        },
+        "message": {
+          "type": "string",
+          "description": "A human-readable representation of the error."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the error."
+        },
+        "details": {
+          "type": "array",
+          "description": "An array of details about specific errors that led to this reported error.",
+          "items": {
+            "$ref": "#/definitions/Azure.Core.Foundations.Error"
+          },
+          "x-ms-identifiers": []
+        },
+        "innererror": {
+          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
+          "description": "An object containing more specific information than the current object about the error."
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
+    "Azure.Core.Foundations.ErrorResponse": {
+      "type": "object",
+      "description": "A response containing error details.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "description": "The error object."
+        }
+      },
+      "required": [
+        "error"
+      ]
+    },
+    "Azure.Core.Foundations.InnerError": {
+      "type": "object",
+      "description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "One of a server-defined set of error codes."
+        },
+        "innererror": {
+          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
+          "description": "Inner error."
+        }
+      }
+    },
+    "AzureChatEnhancementConfiguration": {
+      "type": "object",
+      "description": "A representation of the available Azure OpenAI enhancement configurations.",
+      "properties": {
+        "grounding": {
+          "$ref": "#/definitions/AzureChatGroundingEnhancementConfiguration",
+          "description": "A representation of the available options for the Azure OpenAI grounding enhancement."
+        },
+        "ocr": {
+          "$ref": "#/definitions/AzureChatOCREnhancementConfiguration",
+          "description": "A representation of the available options for the Azure OpenAI optical character recognition (OCR) enhancement."
+        }
+      }
+    },
+    "AzureChatEnhancements": {
+      "type": "object",
+      "description": "Represents the output results of Azure enhancements to chat completions, as configured via the matching input provided\nin the request.",
+      "properties": {
+        "grounding": {
+          "$ref": "#/definitions/AzureGroundingEnhancement",
+          "description": "The grounding enhancement that returns the bounding box of the objects detected in the image."
+        }
+      }
+    },
+    "AzureChatExtensionConfiguration": {
+      "type": "object",
+      "description": "  A representation of configuration data for a single Azure OpenAI chat extension. This will be used by a chat\n  completions request that should use Azure OpenAI chat extensions to augment the response behavior.\n  The use of this configuration is compatible only with Azure OpenAI.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/AzureChatExtensionType",
+          "description": "  The label for the type of an Azure chat extension. This typically corresponds to a matching Azure resource.\n  Azure chat extensions are only compatible with Azure OpenAI."
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "type"
+      ]
+    },
+    "AzureChatExtensionDataSourceResponseCitation": {
+      "type": "object",
+      "description": "A single instance of additional context information available when Azure OpenAI chat extensions are involved\nin the generation of a corresponding chat completions response. This context information is only populated when\nusing an Azure OpenAI request configured to use a matching extension.",
+      "properties": {
+        "content": {
+          "type": "string",
+          "description": "The content of the citation."
+        },
+        "title": {
+          "type": "string",
+          "description": "The title of the citation."
+        },
+        "url": {
+          "type": "string",
+          "description": "The URL of the citation."
+        },
+        "filepath": {
+          "type": "string",
+          "description": "The file path of the citation."
+        },
+        "chunk_id": {
+          "type": "string",
+          "description": "The chunk ID of the citation."
+        }
+      },
+      "required": [
+        "content"
+      ]
+    },
+    "AzureChatExtensionRetrieveDocumentFilterReason": {
+      "type": "string",
+      "description": "The reason for filtering the retrieved document.",
+      "enum": [
+        "score",
+        "rerank"
+      ],
+      "x-ms-enum": {
+        "name": "AzureChatExtensionRetrieveDocumentFilterReason",
+        "modelAsString": false,
+        "values": [
+          {
+            "name": "score",
+            "value": "score",
+            "description": "The document is filtered by original search score threshold defined by `strictness` configure."
+          },
+          {
+            "name": "rerank",
+            "value": "rerank",
+            "description": "The document is not filtered by original search score threshold, but is filtered by rerank score and `top_n_documents` configure."
+          }
+        ]
+      }
+    },
+    "AzureChatExtensionRetrievedDocument": {
+      "type": "object",
+      "description": "The retrieved document.",
+      "properties": {
+        "content": {
+          "type": "string",
+          "description": "The content of the citation."
+        },
+        "title": {
+          "type": "string",
+          "description": "The title of the citation."
+        },
+        "url": {
+          "type": "string",
+          "description": "The URL of the citation."
+        },
+        "filepath": {
+          "type": "string",
+          "description": "The file path of the citation."
+        },
+        "chunk_id": {
+          "type": "string",
+          "description": "The chunk ID of the citation."
+        },
+        "search_queries": {
+          "type": "array",
+          "description": "The search queries used to retrieve the document.",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-client-name": "searchQueries"
+        },
+        "data_source_index": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The index of the data source.",
+          "x-ms-client-name": "dataSourceIndex"
+        },
+        "original_search_score": {
+          "type": "number",
+          "format": "double",
+          "description": "The original search score of the retrieved document.",
+          "x-ms-client-name": "originalSearchScore"
+        },
+        "rerank_score": {
+          "type": "number",
+          "format": "double",
+          "description": "The rerank score of the retrieved document.",
+          "x-ms-client-name": "rerankScore"
+        },
+        "filter_reason": {
+          "$ref": "#/definitions/AzureChatExtensionRetrieveDocumentFilterReason",
+          "description": "Represents the rationale for filtering the document. If the document does not undergo filtering,\nthis field will remain unset.",
+          "x-ms-client-name": "filterReason"
+        }
+      },
+      "required": [
+        "content",
+        "search_queries",
+        "data_source_index"
+      ]
+    },
+    "AzureChatExtensionType": {
+      "type": "string",
+      "description": "  A representation of configuration data for a single Azure OpenAI chat extension. This will be used by a chat\n  completions request that should use Azure OpenAI chat extensions to augment the response behavior.\n  The use of this configuration is compatible only with Azure OpenAI.",
+      "enum": [
+        "azure_search",
+        "azure_ml_index",
+        "azure_cosmos_db",
+        "elasticsearch",
+        "pinecone"
+      ],
+      "x-ms-enum": {
+        "name": "AzureChatExtensionType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "azureSearch",
+            "value": "azure_search",
+            "description": "Represents the use of Azure AI Search as an Azure OpenAI chat extension."
+          },
+          {
+            "name": "azureMachineLearningIndex",
+            "value": "azure_ml_index",
+            "description": "Represents the use of Azure Machine Learning index as an Azure OpenAI chat extension."
+          },
+          {
+            "name": "azureCosmosDB",
+            "value": "azure_cosmos_db",
+            "description": "Represents the use of Azure Cosmos DB as an Azure OpenAI chat extension."
+          },
+          {
+            "name": "elasticsearch",
+            "value": "elasticsearch",
+            "description": "Represents the use of Elasticsearch® index as an Azure OpenAI chat extension."
+          },
+          {
+            "name": "pinecone",
+            "value": "pinecone",
+            "description": "Represents the use of Pinecone index as an Azure OpenAI chat extension."
+          }
+        ]
+      }
+    },
+    "AzureChatExtensionsMessageContext": {
+      "type": "object",
+      "description": "  A representation of the additional context information available when Azure OpenAI chat extensions are involved\n  in the generation of a corresponding chat completions response. This context information is only populated when\n  using an Azure OpenAI request configured to use a matching extension.",
+      "properties": {
+        "citations": {
+          "type": "array",
+          "description": "  The contextual information associated with the Azure chat extensions used for a chat completions request.\n  These messages describe the data source retrievals, plugin invocations, and other intermediate steps taken in the\n  course of generating a chat completions response that was augmented by capabilities from Azure OpenAI chat\n  extensions.",
+          "items": {
+            "$ref": "#/definitions/AzureChatExtensionDataSourceResponseCitation"
+          },
+          "x-ms-identifiers": []
+        },
+        "intent": {
+          "type": "string",
+          "description": "The detected intent from the chat history, used to pass to the next turn to carry over the context."
+        },
+        "all_retrieved_documents": {
+          "type": "array",
+          "description": "All the retrieved documents.",
+          "items": {
+            "$ref": "#/definitions/AzureChatExtensionRetrievedDocument"
+          },
+          "x-ms-client-name": "allRetrievedDocuments",
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "AzureChatGroundingEnhancementConfiguration": {
+      "type": "object",
+      "description": "A representation of the available options for the Azure OpenAI grounding enhancement.",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Specifies whether the enhancement is enabled."
+        }
+      },
+      "required": [
+        "enabled"
+      ]
+    },
+    "AzureChatOCREnhancementConfiguration": {
+      "type": "object",
+      "description": "A representation of the available options for the Azure OpenAI optical character recognition (OCR) enhancement.",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Specifies whether the enhancement is enabled."
+        }
+      },
+      "required": [
+        "enabled"
+      ]
+    },
+    "AzureCosmosDBChatExtensionConfiguration": {
+      "type": "object",
+      "description": "A specific representation of configurable options for Azure Cosmos DB when using it as an Azure OpenAI chat\nextension.",
+      "properties": {
+        "parameters": {
+          "$ref": "#/definitions/AzureCosmosDBChatExtensionParameters",
+          "description": "The parameters to use when configuring Azure OpenAI CosmosDB chat extensions."
+        }
+      },
+      "required": [
+        "parameters"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/AzureChatExtensionConfiguration"
+        }
+      ],
+      "x-ms-discriminator-value": "azure_cosmos_db"
+    },
+    "AzureCosmosDBChatExtensionParameters": {
+      "type": "object",
+      "description": "Parameters to use when configuring Azure OpenAI On Your Data chat extensions when using Azure Cosmos DB for\nMongoDB vCore. The supported authentication type is ConnectionString.",
+      "properties": {
+        "authentication": {
+          "$ref": "#/definitions/OnYourDataAuthenticationOptions",
+          "description": "The authentication method to use when accessing the defined data source.\nEach data source type supports a specific set of available authentication methods; please see the documentation of\nthe data source for supported mechanisms.\nIf not otherwise provided, On Your Data will attempt to use System Managed Identity (default credential)\nauthentication."
+        },
+        "top_n_documents": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The configured top number of documents to feature for the configured query.",
+          "x-ms-client-name": "topNDocuments"
+        },
+        "in_scope": {
+          "type": "boolean",
+          "description": "Whether queries should be restricted to use of indexed data.",
+          "x-ms-client-name": "inScope"
+        },
+        "strictness": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The configured strictness of the search relevance filtering. The higher of strictness, the higher of the precision but lower recall of the answer.",
+          "minimum": 1,
+          "maximum": 5
+        },
+        "role_information": {
+          "type": "string",
+          "description": "Give the model instructions about how it should behave and any context it should reference when generating a response. You can describe the assistant's personality and tell it how to format responses. There's a 100 token limit for it, and it counts against the overall token limit.",
+          "x-ms-client-name": "roleInformation"
+        },
+        "max_search_queries": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The max number of rewritten queries should be send to search provider for one user message. If not specified,\nthe system will decide the number of queries to send.",
+          "x-ms-client-name": "maxSearchQueries"
+        },
+        "allow_partial_result": {
+          "type": "boolean",
+          "description": "If specified as true, the system will allow partial search results to be used and the request fails if all the queries fail.\nIf not specified, or specified as false, the request will fail if any search query fails.",
+          "default": false,
+          "x-ms-client-name": "allowPartialResult"
+        },
+        "include_contexts": {
+          "type": "array",
+          "description": "The included properties of the output context. If not specified, the default value is `citations` and `intent`.",
+          "items": {
+            "$ref": "#/definitions/OnYourDataContextProperty"
+          },
+          "x-ms-client-name": "includeContexts"
+        },
+        "database_name": {
+          "type": "string",
+          "description": "The MongoDB vCore database name to use with Azure Cosmos DB.",
+          "x-ms-client-name": "databaseName"
+        },
+        "container_name": {
+          "type": "string",
+          "description": "The name of the Azure Cosmos DB resource container.",
+          "x-ms-client-name": "containerName"
+        },
+        "index_name": {
+          "type": "string",
+          "description": "The MongoDB vCore index name to use with Azure Cosmos DB.",
+          "x-ms-client-name": "indexName"
+        },
+        "fields_mapping": {
+          "$ref": "#/definitions/AzureCosmosDBFieldMappingOptions",
+          "description": "Customized field mapping behavior to use when interacting with the search index.",
+          "x-ms-client-name": "fieldsMapping"
+        },
+        "embedding_dependency": {
+          "$ref": "#/definitions/OnYourDataVectorizationSource",
+          "description": "The embedding dependency for vector search.",
+          "x-ms-client-name": "embeddingDependency"
+        }
+      },
+      "required": [
+        "database_name",
+        "container_name",
+        "index_name",
+        "fields_mapping",
+        "embedding_dependency"
+      ]
+    },
+    "AzureCosmosDBFieldMappingOptions": {
+      "type": "object",
+      "description": "Optional settings to control how fields are processed when using a configured Azure Cosmos DB resource.",
+      "properties": {
+        "title_field": {
+          "type": "string",
+          "description": "The name of the index field to use as a title.",
+          "x-ms-client-name": "titleField"
+        },
+        "url_field": {
+          "type": "string",
+          "description": "The name of the index field to use as a URL.",
+          "x-ms-client-name": "urlField"
+        },
+        "filepath_field": {
+          "type": "string",
+          "description": "The name of the index field to use as a filepath.",
+          "x-ms-client-name": "filepathField"
+        },
+        "content_fields": {
+          "type": "array",
+          "description": "The names of index fields that should be treated as content.",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-client-name": "contentFields"
+        },
+        "content_fields_separator": {
+          "type": "string",
+          "description": "The separator pattern that content fields should use.",
+          "x-ms-client-name": "contentFieldsSeparator"
+        },
+        "vector_fields": {
+          "type": "array",
+          "description": "The names of fields that represent vector data.",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-client-name": "vectorFields"
+        }
+      },
+      "required": [
+        "content_fields",
+        "vector_fields"
+      ]
+    },
+    "AzureGroundingEnhancement": {
+      "type": "object",
+      "description": "The grounding enhancement that returns the bounding box of the objects detected in the image.",
+      "properties": {
+        "lines": {
+          "type": "array",
+          "description": "The lines of text detected by the grounding enhancement.",
+          "items": {
+            "$ref": "#/definitions/AzureGroundingEnhancementLine"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "lines"
+      ]
+    },
+    "AzureGroundingEnhancementCoordinatePoint": {
+      "type": "object",
+      "description": "A representation of a single polygon point as used by the Azure grounding enhancement.",
+      "properties": {
+        "x": {
+          "type": "number",
+          "format": "float",
+          "description": "The x-coordinate (horizontal axis) of the point."
+        },
+        "y": {
+          "type": "number",
+          "format": "float",
+          "description": "The y-coordinate (vertical axis) of the point."
+        }
+      },
+      "required": [
+        "x",
+        "y"
+      ]
+    },
+    "AzureGroundingEnhancementLine": {
+      "type": "object",
+      "description": "A content line object consisting of an adjacent sequence of content elements, such as words and selection marks.",
+      "properties": {
+        "text": {
+          "type": "string",
+          "description": "The text within the line."
+        },
+        "spans": {
+          "type": "array",
+          "description": "An array of spans that represent detected objects and its bounding box information.",
+          "items": {
+            "$ref": "#/definitions/AzureGroundingEnhancementLineSpan"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "text",
+        "spans"
+      ]
+    },
+    "AzureGroundingEnhancementLineSpan": {
+      "type": "object",
+      "description": "A span object that represents a detected object and its bounding box information.",
+      "properties": {
+        "text": {
+          "type": "string",
+          "description": "The text content of the span that represents the detected object."
+        },
+        "offset": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The character offset within the text where the span begins. This offset is defined as the position of the first\ncharacter of the span, counting from the start of the text as Unicode codepoints."
+        },
+        "length": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The length of the span in characters, measured in Unicode codepoints."
+        },
+        "polygon": {
+          "type": "array",
+          "description": "An array of objects representing points in the polygon that encloses the detected object.",
+          "items": {
+            "$ref": "#/definitions/AzureGroundingEnhancementCoordinatePoint"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "text",
+        "offset",
+        "length",
+        "polygon"
+      ]
+    },
+    "AzureMachineLearningIndexChatExtensionConfiguration": {
+      "type": "object",
+      "description": "A specific representation of configurable options for Azure Machine Learning vector index when using it as an Azure\nOpenAI chat extension.",
+      "properties": {
+        "parameters": {
+          "$ref": "#/definitions/AzureMachineLearningIndexChatExtensionParameters",
+          "description": "The parameters for the Azure Machine Learning vector index chat extension."
+        }
+      },
+      "required": [
+        "parameters"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/AzureChatExtensionConfiguration"
+        }
+      ],
+      "x-ms-discriminator-value": "azure_ml_index"
+    },
+    "AzureMachineLearningIndexChatExtensionParameters": {
+      "type": "object",
+      "description": "Parameters for the Azure Machine Learning vector index chat extension. The supported authentication types are AccessToken, SystemAssignedManagedIdentity and UserAssignedManagedIdentity.",
+      "properties": {
+        "authentication": {
+          "$ref": "#/definitions/OnYourDataAuthenticationOptions",
+          "description": "The authentication method to use when accessing the defined data source.\nEach data source type supports a specific set of available authentication methods; please see the documentation of\nthe data source for supported mechanisms.\nIf not otherwise provided, On Your Data will attempt to use System Managed Identity (default credential)\nauthentication."
+        },
+        "top_n_documents": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The configured top number of documents to feature for the configured query.",
+          "x-ms-client-name": "topNDocuments"
+        },
+        "in_scope": {
+          "type": "boolean",
+          "description": "Whether queries should be restricted to use of indexed data.",
+          "x-ms-client-name": "inScope"
+        },
+        "strictness": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The configured strictness of the search relevance filtering. The higher of strictness, the higher of the precision but lower recall of the answer.",
+          "minimum": 1,
+          "maximum": 5
+        },
+        "role_information": {
+          "type": "string",
+          "description": "Give the model instructions about how it should behave and any context it should reference when generating a response. You can describe the assistant's personality and tell it how to format responses. There's a 100 token limit for it, and it counts against the overall token limit.",
+          "x-ms-client-name": "roleInformation"
+        },
+        "max_search_queries": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The max number of rewritten queries should be send to search provider for one user message. If not specified,\nthe system will decide the number of queries to send.",
+          "x-ms-client-name": "maxSearchQueries"
+        },
+        "allow_partial_result": {
+          "type": "boolean",
+          "description": "If specified as true, the system will allow partial search results to be used and the request fails if all the queries fail.\nIf not specified, or specified as false, the request will fail if any search query fails.",
+          "default": false,
+          "x-ms-client-name": "allowPartialResult"
+        },
+        "include_contexts": {
+          "type": "array",
+          "description": "The included properties of the output context. If not specified, the default value is `citations` and `intent`.",
+          "items": {
+            "$ref": "#/definitions/OnYourDataContextProperty"
+          },
+          "x-ms-client-name": "includeContexts"
+        },
+        "project_resource_id": {
+          "type": "string",
+          "description": "The resource ID of the Azure Machine Learning project.",
+          "x-ms-client-name": "projectResourceId"
+        },
+        "name": {
+          "type": "string",
+          "description": "The Azure Machine Learning vector index name."
+        },
+        "version": {
+          "type": "string",
+          "description": "The version of the Azure Machine Learning vector index."
+        },
+        "filter": {
+          "type": "string",
+          "description": "Search filter. Only supported if the Azure Machine Learning vector index is of type AzureSearch."
+        }
+      },
+      "required": [
+        "project_resource_id",
+        "name",
+        "version"
+      ]
+    },
+    "AzureSearchChatExtensionConfiguration": {
+      "type": "object",
+      "description": "A specific representation of configurable options for Azure Search when using it as an Azure OpenAI chat\nextension.",
+      "properties": {
+        "parameters": {
+          "$ref": "#/definitions/AzureSearchChatExtensionParameters",
+          "description": "The parameters to use when configuring Azure Search."
+        }
+      },
+      "required": [
+        "parameters"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/AzureChatExtensionConfiguration"
+        }
+      ],
+      "x-ms-discriminator-value": "azure_search"
+    },
+    "AzureSearchChatExtensionParameters": {
+      "type": "object",
+      "description": "Parameters for Azure Cognitive Search when used as an Azure OpenAI chat extension. The supported authentication types are APIKey, SystemAssignedManagedIdentity and UserAssignedManagedIdentity.",
+      "properties": {
+        "authentication": {
+          "$ref": "#/definitions/OnYourDataAuthenticationOptions",
+          "description": "The authentication method to use when accessing the defined data source.\nEach data source type supports a specific set of available authentication methods; please see the documentation of\nthe data source for supported mechanisms.\nIf not otherwise provided, On Your Data will attempt to use System Managed Identity (default credential)\nauthentication."
+        },
+        "top_n_documents": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The configured top number of documents to feature for the configured query.",
+          "x-ms-client-name": "topNDocuments"
+        },
+        "in_scope": {
+          "type": "boolean",
+          "description": "Whether queries should be restricted to use of indexed data.",
+          "x-ms-client-name": "inScope"
+        },
+        "strictness": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The configured strictness of the search relevance filtering. The higher of strictness, the higher of the precision but lower recall of the answer.",
+          "minimum": 1,
+          "maximum": 5
+        },
+        "role_information": {
+          "type": "string",
+          "description": "Give the model instructions about how it should behave and any context it should reference when generating a response. You can describe the assistant's personality and tell it how to format responses. There's a 100 token limit for it, and it counts against the overall token limit.",
+          "x-ms-client-name": "roleInformation"
+        },
+        "max_search_queries": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The max number of rewritten queries should be send to search provider for one user message. If not specified,\nthe system will decide the number of queries to send.",
+          "x-ms-client-name": "maxSearchQueries"
+        },
+        "allow_partial_result": {
+          "type": "boolean",
+          "description": "If specified as true, the system will allow partial search results to be used and the request fails if all the queries fail.\nIf not specified, or specified as false, the request will fail if any search query fails.",
+          "default": false,
+          "x-ms-client-name": "allowPartialResult"
+        },
+        "include_contexts": {
+          "type": "array",
+          "description": "The included properties of the output context. If not specified, the default value is `citations` and `intent`.",
+          "items": {
+            "$ref": "#/definitions/OnYourDataContextProperty"
+          },
+          "x-ms-client-name": "includeContexts"
+        },
+        "endpoint": {
+          "type": "string",
+          "format": "uri",
+          "description": "The absolute endpoint path for the Azure Cognitive Search resource to use."
+        },
+        "index_name": {
+          "type": "string",
+          "description": "The name of the index to use as available in the referenced Azure Cognitive Search resource.",
+          "x-ms-client-name": "indexName"
+        },
+        "fields_mapping": {
+          "$ref": "#/definitions/AzureSearchIndexFieldMappingOptions",
+          "description": "Customized field mapping behavior to use when interacting with the search index.",
+          "x-ms-client-name": "fieldsMapping"
+        },
+        "query_type": {
+          "$ref": "#/definitions/AzureSearchQueryType",
+          "description": "The query type to use with Azure Cognitive Search.",
+          "x-ms-client-name": "queryType"
+        },
+        "semantic_configuration": {
+          "type": "string",
+          "description": "The additional semantic configuration for the query.",
+          "x-ms-client-name": "semanticConfiguration"
+        },
+        "filter": {
+          "type": "string",
+          "description": "Search filter."
+        },
+        "embedding_dependency": {
+          "$ref": "#/definitions/OnYourDataVectorizationSource",
+          "description": "The embedding dependency for vector search.",
+          "x-ms-client-name": "embeddingDependency"
+        }
+      },
+      "required": [
+        "endpoint",
+        "index_name"
+      ]
+    },
+    "AzureSearchIndexFieldMappingOptions": {
+      "type": "object",
+      "description": "Optional settings to control how fields are processed when using a configured Azure Search resource.",
+      "properties": {
+        "title_field": {
+          "type": "string",
+          "description": "The name of the index field to use as a title.",
+          "x-ms-client-name": "titleField"
+        },
+        "url_field": {
+          "type": "string",
+          "description": "The name of the index field to use as a URL.",
+          "x-ms-client-name": "urlField"
+        },
+        "filepath_field": {
+          "type": "string",
+          "description": "The name of the index field to use as a filepath.",
+          "x-ms-client-name": "filepathField"
+        },
+        "content_fields": {
+          "type": "array",
+          "description": "The names of index fields that should be treated as content.",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-client-name": "contentFields"
+        },
+        "content_fields_separator": {
+          "type": "string",
+          "description": "The separator pattern that content fields should use.",
+          "x-ms-client-name": "contentFieldsSeparator"
+        },
+        "vector_fields": {
+          "type": "array",
+          "description": "The names of fields that represent vector data.",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-client-name": "vectorFields"
+        },
+        "image_vector_fields": {
+          "type": "array",
+          "description": "The names of fields that represent image vector data.",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-client-name": "imageVectorFields"
+        }
+      }
+    },
+    "AzureSearchQueryType": {
+      "type": "string",
+      "description": "The type of Azure Search retrieval query that should be executed when using it as an Azure OpenAI chat extension.",
+      "enum": [
+        "simple",
+        "semantic",
+        "vector",
+        "vector_simple_hybrid",
+        "vector_semantic_hybrid"
+      ],
+      "x-ms-enum": {
+        "name": "AzureSearchQueryType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "simple",
+            "value": "simple",
+            "description": "Represents the default, simple query parser."
+          },
+          {
+            "name": "semantic",
+            "value": "semantic",
+            "description": "Represents the semantic query parser for advanced semantic modeling."
+          },
+          {
+            "name": "vector",
+            "value": "vector",
+            "description": "Represents vector search over computed data."
+          },
+          {
+            "name": "vectorSimpleHybrid",
+            "value": "vector_simple_hybrid",
+            "description": "Represents a combination of the simple query strategy with vector data."
+          },
+          {
+            "name": "vectorSemanticHybrid",
+            "value": "vector_semantic_hybrid",
+            "description": "Represents a combination of semantic search and vector data querying."
+          }
+        ]
+      }
+    },
+    "ChatChoice": {
+      "type": "object",
+      "description": "The representation of a single prompt completion as part of an overall chat completions request.\nGenerally, `n` choices are generated per provided prompt with a default value of 1.\nToken limits and other settings may limit the number of choices generated.",
+      "properties": {
+        "message": {
+          "$ref": "#/definitions/ChatResponseMessage",
+          "description": "The chat message for a given chat completions prompt."
+        },
+        "logprobs": {
+          "type": "object",
+          "description": "The log probability information for this choice, as enabled via the 'logprobs' request option.",
+          "x-nullable": true,
+          "allOf": [
+            {
+              "$ref": "#/definitions/ChatChoiceLogProbabilityInfo"
+            }
+          ]
+        },
+        "index": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The ordered index associated with this chat completions choice."
+        },
+        "finish_reason": {
+          "$ref": "#/definitions/CompletionsFinishReason",
+          "description": "The reason that this chat completions choice completed its generated.",
+          "x-nullable": true,
+          "x-ms-client-name": "finishReason"
+        },
+        "finish_details": {
+          "$ref": "#/definitions/ChatFinishDetails",
+          "description": "The reason the model stopped generating tokens, together with any applicable details.\nThis structured representation replaces 'finish_reason' for some models.",
+          "x-ms-client-name": "finishDetails"
+        },
+        "delta": {
+          "$ref": "#/definitions/ChatResponseMessage",
+          "description": "The delta message content for a streaming response."
+        },
+        "content_filter_results": {
+          "$ref": "#/definitions/ContentFilterResultsForChoice",
+          "description": "Information about the content filtering category (hate, sexual, violence, self_harm), if it\nhas been detected, as well as the severity level (very_low, low, medium, high-scale that\ndetermines the intensity and risk level of harmful content) and if it has been filtered or not.",
+          "x-ms-client-name": "contentFilterResults"
+        },
+        "enhancements": {
+          "$ref": "#/definitions/AzureChatEnhancements",
+          "description": "Represents the output results of Azure OpenAI enhancements to chat completions, as configured via the matching input\nprovided in the request. This supplementary information is only available when using Azure OpenAI and only when the\nrequest is configured to use enhancements."
+        }
+      },
+      "required": [
+        "logprobs",
+        "index",
+        "finish_reason"
+      ]
+    },
+    "ChatChoiceLogProbabilityInfo": {
+      "type": "object",
+      "description": "Log probability information for a choice, as requested via 'logprobs' and 'top_logprobs'.",
+      "properties": {
+        "content": {
+          "type": "array",
+          "description": "The list of log probability information entries for the choice's message content tokens, as requested via the 'logprobs' option.",
+          "x-nullable": true,
+          "items": {
+            "$ref": "#/definitions/ChatTokenLogProbabilityResult"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "content"
+      ]
+    },
+    "ChatCompletions": {
+      "type": "object",
+      "description": "Representation of the response data from a chat completions request.\nCompletions support a wide variety of tasks and generate text that continues from or \"completes\"\nprovided prompt data.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "A unique identifier associated with this chat completions response."
+        },
+        "created": {
+          "type": "integer",
+          "format": "unixtime",
+          "description": "The first timestamp associated with generation activity for this completions response,\nrepresented as seconds since the beginning of the Unix epoch of 00:00 on 1 Jan 1970."
+        },
+        "choices": {
+          "type": "array",
+          "description": "The collection of completions choices associated with this completions response.\nGenerally, `n` choices are generated per provided prompt with a default value of 1.\nToken limits and other settings may limit the number of choices generated.",
+          "items": {
+            "$ref": "#/definitions/ChatChoice"
+          },
+          "x-ms-identifiers": []
+        },
+        "model": {
+          "type": "string",
+          "description": "The model name used for this completions request."
+        },
+        "prompt_filter_results": {
+          "type": "array",
+          "description": "Content filtering results for zero or more prompts in the request. In a streaming request,\nresults for different prompts may arrive at different times or in different orders.",
+          "items": {
+            "$ref": "#/definitions/ContentFilterResultsForPrompt"
+          },
+          "x-ms-client-name": "promptFilterResults",
+          "x-ms-identifiers": []
+        },
+        "system_fingerprint": {
+          "type": "string",
+          "description": "Can be used in conjunction with the `seed` request parameter to understand when backend changes have been made that\nmight impact determinism.",
+          "x-ms-client-name": "systemFingerprint"
+        },
+        "usage": {
+          "$ref": "#/definitions/CompletionsUsage",
+          "description": "Usage information for tokens processed and generated as part of this completions operation."
+        }
+      },
+      "required": [
+        "id",
+        "created",
+        "choices",
+        "usage"
+      ]
+    },
+    "ChatCompletionsFunctionToolCall": {
+      "type": "object",
+      "description": "A tool call to a function tool, issued by the model in evaluation of a configured function tool, that represents\na function invocation needed for a subsequent chat completions request to resolve.",
+      "properties": {
+        "function": {
+          "$ref": "#/definitions/FunctionCall",
+          "description": "The details of the function invocation requested by the tool call."
+        }
+      },
+      "required": [
+        "function"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ChatCompletionsToolCall"
+        }
+      ],
+      "x-ms-discriminator-value": "function"
+    },
+    "ChatCompletionsFunctionToolDefinition": {
+      "type": "object",
+      "description": "The definition information for a chat completions function tool that can call a function in response to a tool call.",
+      "properties": {
+        "function": {
+          "$ref": "#/definitions/FunctionDefinition",
+          "description": "The function definition details for the function tool."
+        }
+      },
+      "required": [
+        "function"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ChatCompletionsToolDefinition"
+        }
+      ],
+      "x-ms-discriminator-value": "function"
+    },
+    "ChatCompletionsJsonResponseFormat": {
+      "type": "object",
+      "description": "A response format for Chat Completions that restricts responses to emitting valid JSON objects.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ChatCompletionsResponseFormat"
+        }
+      ],
+      "x-ms-discriminator-value": "json_object"
+    },
+    "ChatCompletionsOptions": {
+      "type": "object",
+      "description": "The configuration information for a chat completions request.\nCompletions support a wide variety of tasks and generate text that continues from or \"completes\"\nprovided prompt data.",
+      "properties": {
+        "messages": {
+          "type": "array",
+          "description": "The collection of context messages associated with this chat completions request.\nTypical usage begins with a chat message for the System role that provides instructions for\nthe behavior of the assistant, followed by alternating messages between the User and\nAssistant roles.",
+          "items": {
+            "$ref": "#/definitions/ChatRequestMessage"
+          },
+          "x-ms-identifiers": []
+        },
+        "functions": {
+          "type": "array",
+          "description": "A list of functions the model may generate JSON inputs for.",
+          "items": {
+            "$ref": "#/definitions/FunctionDefinition"
+          },
+          "x-ms-identifiers": []
+        },
+        "function_call": {
+          "description": "Controls how the model responds to function calls. \"none\" means the model does not call a function,\nand responds to the end-user. \"auto\" means the model can pick between an end-user or calling a function.\n Specifying a particular function via `{\"name\": \"my_function\"}` forces the model to call that function.\n \"none\" is the default when no functions are present. \"auto\" is the default if functions are present.",
+          "x-ms-client-name": "functionCall"
+        },
+        "max_tokens": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum number of tokens to generate.",
+          "x-ms-client-name": "maxTokens"
+        },
+        "temperature": {
+          "type": "number",
+          "format": "float",
+          "description": "The sampling temperature to use that controls the apparent creativity of generated completions.\nHigher values will make output more random while lower values will make results more focused\nand deterministic.\nIt is not recommended to modify temperature and top_p for the same completions request as the\ninteraction of these two settings is difficult to predict."
+        },
+        "top_p": {
+          "type": "number",
+          "format": "float",
+          "description": "An alternative to sampling with temperature called nucleus sampling. This value causes the\nmodel to consider the results of tokens with the provided probability mass. As an example, a\nvalue of 0.15 will cause only the tokens comprising the top 15% of probability mass to be\nconsidered.\nIt is not recommended to modify temperature and top_p for the same completions request as the\ninteraction of these two settings is difficult to predict.",
+          "x-ms-client-name": "topP"
+        },
+        "logit_bias": {
+          "type": "object",
+          "description": "A map between GPT token IDs and bias scores that influences the probability of specific tokens\nappearing in a completions response. Token IDs are computed via external tokenizer tools, while\nbias scores reside in the range of -100 to 100 with minimum and maximum values corresponding to\na full ban or exclusive selection of a token, respectively. The exact behavior of a given bias\nscore varies by model.",
+          "additionalProperties": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "x-ms-client-name": "logitBias"
+        },
+        "user": {
+          "type": "string",
+          "description": "An identifier for the caller or end user of the operation. This may be used for tracking\nor rate-limiting purposes."
+        },
+        "n": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of chat completions choices that should be generated for a chat completions\nresponse.\nBecause this setting can generate many completions, it may quickly consume your token quota.\nUse carefully and ensure reasonable settings for max_tokens and stop."
+        },
+        "stop": {
+          "type": "array",
+          "description": "A collection of textual sequences that will end completions generation.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "presence_penalty": {
+          "type": "number",
+          "format": "float",
+          "description": "A value that influences the probability of generated tokens appearing based on their existing\npresence in generated text.\nPositive values will make tokens less likely to appear when they already exist and increase the\nmodel's likelihood to output new topics.",
+          "x-ms-client-name": "presencePenalty"
+        },
+        "frequency_penalty": {
+          "type": "number",
+          "format": "float",
+          "description": "A value that influences the probability of generated tokens appearing based on their cumulative\nfrequency in generated text.\nPositive values will make tokens less likely to appear as their frequency increases and\ndecrease the likelihood of the model repeating the same statements verbatim.",
+          "x-ms-client-name": "frequencyPenalty"
+        },
+        "stream": {
+          "type": "boolean",
+          "description": "A value indicating whether chat completions should be streamed for this request."
+        },
+        "model": {
+          "type": "string",
+          "description": "The model name to provide as part of this completions request.\nNot applicable to Azure OpenAI, where deployment information should be included in the Azure\nresource URI that's connected to."
+        },
+        "data_sources": {
+          "type": "array",
+          "description": "  The configuration entries for Azure OpenAI chat extensions that use them.\n  This additional specification is only compatible with Azure OpenAI.",
+          "items": {
+            "$ref": "#/definitions/AzureChatExtensionConfiguration"
+          },
+          "x-ms-client-name": "dataSources",
+          "x-ms-identifiers": []
+        },
+        "enhancements": {
+          "$ref": "#/definitions/AzureChatEnhancementConfiguration",
+          "description": "If provided, the configuration options for available Azure OpenAI chat enhancements."
+        },
+        "seed": {
+          "type": "integer",
+          "format": "int64",
+          "description": "If specified, the system will make a best effort to sample deterministically such that repeated requests with the\nsame seed and parameters should return the same result. Determinism is not guaranteed, and you should refer to the\nsystem_fingerprint response parameter to monitor changes in the backend.\""
+        },
+        "logprobs": {
+          "type": "boolean",
+          "description": "Whether to return log probabilities of the output tokens or not. If true, returns the log probabilities of each output token returned in the `content` of `message`. This option is currently not available on the `gpt-4-vision-preview` model.",
+          "default": false,
+          "x-nullable": true
+        },
+        "top_logprobs": {
+          "type": "integer",
+          "format": "int32",
+          "description": "An integer between 0 and 5 specifying the number of most likely tokens to return at each token position, each with an associated log probability. `logprobs` must be set to `true` if this parameter is used.",
+          "x-nullable": true
+        },
+        "response_format": {
+          "$ref": "#/definitions/ChatCompletionsResponseFormat",
+          "description": "An object specifying the format that the model must output. Used to enable JSON mode.",
+          "x-ms-client-name": "responseFormat"
+        },
+        "tools": {
+          "type": "array",
+          "description": "The available tool definitions that the chat completions request can use, including caller-defined functions.",
+          "items": {
+            "$ref": "#/definitions/ChatCompletionsToolDefinition"
+          },
+          "x-ms-identifiers": []
+        },
+        "tool_choice": {
+          "description": "If specified, the model will configure which of the provided tools it can use for the chat completions response.",
+          "x-ms-client-name": "toolChoice"
+        }
+      },
+      "required": [
+        "messages"
+      ]
+    },
+    "ChatCompletionsResponseFormat": {
+      "type": "object",
+      "description": "An abstract representation of a response format configuration usable by Chat Completions. Can be used to enable JSON\nmode.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The discriminated type for the response format."
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "type"
+      ]
+    },
+    "ChatCompletionsTextResponseFormat": {
+      "type": "object",
+      "description": "The standard Chat Completions response format that can freely generate text and is not guaranteed to produce response\ncontent that adheres to a specific schema.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ChatCompletionsResponseFormat"
+        }
+      ],
+      "x-ms-discriminator-value": "text"
+    },
+    "ChatCompletionsToolCall": {
+      "type": "object",
+      "description": "An abstract representation of a tool call that must be resolved in a subsequent request to perform the requested\nchat completion.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The object type."
+        },
+        "id": {
+          "type": "string",
+          "description": "The ID of the tool call."
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "type",
+        "id"
+      ]
+    },
+    "ChatCompletionsToolDefinition": {
+      "type": "object",
+      "description": "An abstract representation of a tool that can be used by the model to improve a chat completions response.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The object type."
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "type"
+      ]
+    },
+    "ChatFinishDetails": {
+      "type": "object",
+      "description": "An abstract representation of structured information about why a chat completions response terminated.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The object type."
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "type"
+      ]
+    },
+    "ChatRequestAssistantMessage": {
+      "type": "object",
+      "description": "A request chat message representing response or action from the assistant.",
+      "properties": {
+        "content": {
+          "type": "string",
+          "description": "The content of the message.",
+          "x-nullable": true
+        },
+        "name": {
+          "type": "string",
+          "description": "An optional name for the participant."
+        },
+        "tool_calls": {
+          "type": "array",
+          "description": "The tool calls that must be resolved and have their outputs appended to subsequent input messages for the chat\ncompletions request to resolve as configured.",
+          "items": {
+            "$ref": "#/definitions/ChatCompletionsToolCall"
+          },
+          "x-ms-client-name": "toolCalls"
+        },
+        "function_call": {
+          "$ref": "#/definitions/FunctionCall",
+          "description": "The function call that must be resolved and have its output appended to subsequent input messages for the chat\ncompletions request to resolve as configured.",
+          "x-ms-client-name": "functionCall"
+        }
+      },
+      "required": [
+        "content"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ChatRequestMessage"
+        }
+      ],
+      "x-ms-discriminator-value": "assistant"
+    },
+    "ChatRequestFunctionMessage": {
+      "type": "object",
+      "description": "A request chat message representing requested output from a configured function.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the function that was called to produce output."
+        },
+        "content": {
+          "type": "string",
+          "description": "The output of the function as requested by the function call.",
+          "x-nullable": true
+        }
+      },
+      "required": [
+        "name",
+        "content"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ChatRequestMessage"
+        }
+      ],
+      "x-ms-discriminator-value": "function"
+    },
+    "ChatRequestMessage": {
+      "type": "object",
+      "description": "An abstract representation of a chat message as provided in a request.",
+      "properties": {
+        "role": {
+          "$ref": "#/definitions/ChatRole",
+          "description": "The chat role associated with this message."
+        }
+      },
+      "discriminator": "role",
+      "required": [
+        "role"
+      ]
+    },
+    "ChatRequestSystemMessage": {
+      "type": "object",
+      "description": "A request chat message containing system instructions that influence how the model will generate a chat completions\nresponse.",
+      "properties": {
+        "content": {
+          "type": "string",
+          "description": "The contents of the system message."
+        },
+        "name": {
+          "type": "string",
+          "description": "An optional name for the participant."
+        }
+      },
+      "required": [
+        "content"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ChatRequestMessage"
+        }
+      ],
+      "x-ms-discriminator-value": "system"
+    },
+    "ChatRequestToolMessage": {
+      "type": "object",
+      "description": "A request chat message representing requested output from a configured tool.",
+      "properties": {
+        "content": {
+          "type": "string",
+          "description": "The content of the message.",
+          "x-nullable": true
+        },
+        "tool_call_id": {
+          "type": "string",
+          "description": "The ID of the tool call resolved by the provided content.",
+          "x-ms-client-name": "toolCallId"
+        }
+      },
+      "required": [
+        "content",
+        "tool_call_id"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ChatRequestMessage"
+        }
+      ],
+      "x-ms-discriminator-value": "tool"
+    },
+    "ChatRequestUserMessage": {
+      "type": "object",
+      "description": "A request chat message representing user input to the assistant.",
+      "properties": {
+        "content": {
+          "description": "The contents of the user message, with available input types varying by selected model."
+        },
+        "name": {
+          "type": "string",
+          "description": "An optional name for the participant."
+        }
+      },
+      "required": [
+        "content"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ChatRequestMessage"
+        }
+      ],
+      "x-ms-discriminator-value": "user"
+    },
+    "ChatResponseMessage": {
+      "type": "object",
+      "description": "A representation of a chat message as received in a response.",
+      "properties": {
+        "role": {
+          "$ref": "#/definitions/ChatRole",
+          "description": "The chat role associated with the message."
+        },
+        "content": {
+          "type": "string",
+          "description": "The content of the message.",
+          "x-nullable": true
+        },
+        "tool_calls": {
+          "type": "array",
+          "description": "The tool calls that must be resolved and have their outputs appended to subsequent input messages for the chat\ncompletions request to resolve as configured.",
+          "items": {
+            "$ref": "#/definitions/ChatCompletionsToolCall"
+          },
+          "x-ms-client-name": "toolCalls"
+        },
+        "function_call": {
+          "$ref": "#/definitions/FunctionCall",
+          "description": "The function call that must be resolved and have its output appended to subsequent input messages for the chat\ncompletions request to resolve as configured.",
+          "x-ms-client-name": "functionCall"
+        },
+        "context": {
+          "$ref": "#/definitions/AzureChatExtensionsMessageContext",
+          "description": "If Azure OpenAI chat extensions are configured, this array represents the incremental steps performed by those\nextensions while processing the chat completions request."
+        }
+      },
+      "required": [
+        "role",
+        "content"
+      ]
+    },
+    "ChatRole": {
+      "type": "string",
+      "description": "A description of the intended purpose of a message within a chat completions interaction.",
+      "enum": [
+        "system",
+        "assistant",
+        "user",
+        "function",
+        "tool"
+      ],
+      "x-ms-enum": {
+        "name": "ChatRole",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "system",
+            "value": "system",
+            "description": "The role that instructs or sets the behavior of the assistant."
+          },
+          {
+            "name": "assistant",
+            "value": "assistant",
+            "description": "The role that provides responses to system-instructed, user-prompted input."
+          },
+          {
+            "name": "user",
+            "value": "user",
+            "description": "The role that provides input for chat completions."
+          },
+          {
+            "name": "function",
+            "value": "function",
+            "description": "The role that provides function results for chat completions."
+          },
+          {
+            "name": "tool",
+            "value": "tool",
+            "description": "The role that represents extension tool activity within a chat completions operation."
+          }
+        ]
+      }
+    },
+    "ChatTokenLogProbabilityInfo": {
+      "type": "object",
+      "description": "A representation of the log probability information for a single message content token.",
+      "properties": {
+        "token": {
+          "type": "string",
+          "description": "The message content token."
+        },
+        "logprob": {
+          "type": "number",
+          "format": "float",
+          "description": "The log probability of the message content token."
+        },
+        "bytes": {
+          "type": "array",
+          "description": "A list of integers representing the UTF-8 bytes representation of the token. Useful in instances where characters are represented by multiple tokens and their byte representations must be combined to generate the correct text representation. Can be null if there is no bytes representation for the token.",
+          "x-nullable": true,
+          "items": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "required": [
+        "token",
+        "logprob",
+        "bytes"
+      ]
+    },
+    "ChatTokenLogProbabilityResult": {
+      "type": "object",
+      "description": "A representation of the log probability information for a single content token, including a list of most likely tokens if 'top_logprobs' were requested.",
+      "properties": {
+        "token": {
+          "type": "string",
+          "description": "The message content token."
+        },
+        "logprob": {
+          "type": "number",
+          "format": "float",
+          "description": "The log probability of the message content token."
+        },
+        "bytes": {
+          "type": "array",
+          "description": "A list of integers representing the UTF-8 bytes representation of the token. Useful in instances where characters are represented by multiple tokens and their byte representations must be combined to generate the correct text representation. Can be null if there is no bytes representation for the token.",
+          "x-nullable": true,
+          "items": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "top_logprobs": {
+          "type": "array",
+          "description": "The list of most likely tokens and their log probability information, as requested via 'top_logprobs'.",
+          "x-nullable": true,
+          "items": {
+            "$ref": "#/definitions/ChatTokenLogProbabilityInfo"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "token",
+        "logprob",
+        "bytes",
+        "top_logprobs"
+      ]
+    },
+    "Choice": {
+      "type": "object",
+      "description": "The representation of a single prompt completion as part of an overall completions request.\nGenerally, `n` choices are generated per provided prompt with a default value of 1.\nToken limits and other settings may limit the number of choices generated.",
+      "properties": {
+        "text": {
+          "type": "string",
+          "description": "The generated text for a given completions prompt."
+        },
+        "index": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The ordered index associated with this completions choice."
+        },
+        "content_filter_results": {
+          "$ref": "#/definitions/ContentFilterResultsForChoice",
+          "description": "Information about the content filtering category (hate, sexual, violence, self_harm), if it\nhas been detected, as well as the severity level (very_low, low, medium, high-scale that\ndetermines the intensity and risk level of harmful content) and if it has been filtered or not.",
+          "x-ms-client-name": "contentFilterResults"
+        },
+        "logprobs": {
+          "type": "object",
+          "description": "The log probabilities model for tokens associated with this completions choice.",
+          "x-nullable": true,
+          "allOf": [
+            {
+              "$ref": "#/definitions/CompletionsLogProbabilityModel"
+            }
+          ]
+        },
+        "finish_reason": {
+          "$ref": "#/definitions/CompletionsFinishReason",
+          "description": "Reason for finishing",
+          "x-nullable": true,
+          "x-ms-client-name": "finishReason"
+        }
+      },
+      "required": [
+        "text",
+        "index",
+        "logprobs",
+        "finish_reason"
+      ]
+    },
+    "Completions": {
+      "type": "object",
+      "description": "Representation of the response data from a completions request.\nCompletions support a wide variety of tasks and generate text that continues from or \"completes\"\nprovided prompt data.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "A unique identifier associated with this completions response."
+        },
+        "created": {
+          "type": "integer",
+          "format": "unixtime",
+          "description": "The first timestamp associated with generation activity for this completions response,\nrepresented as seconds since the beginning of the Unix epoch of 00:00 on 1 Jan 1970."
+        },
+        "prompt_filter_results": {
+          "type": "array",
+          "description": "Content filtering results for zero or more prompts in the request. In a streaming request,\nresults for different prompts may arrive at different times or in different orders.",
+          "items": {
+            "$ref": "#/definitions/ContentFilterResultsForPrompt"
+          },
+          "x-ms-client-name": "promptFilterResults",
+          "x-ms-identifiers": []
+        },
+        "choices": {
+          "type": "array",
+          "description": "The collection of completions choices associated with this completions response.\nGenerally, `n` choices are generated per provided prompt with a default value of 1.\nToken limits and other settings may limit the number of choices generated.",
+          "items": {
+            "$ref": "#/definitions/Choice"
+          },
+          "x-ms-identifiers": []
+        },
+        "usage": {
+          "$ref": "#/definitions/CompletionsUsage",
+          "description": "Usage information for tokens processed and generated as part of this completions operation."
+        }
+      },
+      "required": [
+        "id",
+        "created",
+        "choices",
+        "usage"
+      ]
+    },
+    "CompletionsFinishReason": {
+      "type": "string",
+      "description": "Representation of the manner in which a completions response concluded.",
+      "enum": [
+        "stop",
+        "length",
+        "content_filter",
+        "function_call",
+        "tool_calls"
+      ],
+      "x-ms-enum": {
+        "name": "CompletionsFinishReason",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "stopped",
+            "value": "stop",
+            "description": "Completions ended normally and reached its end of token generation."
+          },
+          {
+            "name": "tokenLimitReached",
+            "value": "length",
+            "description": "Completions exhausted available token limits before generation could complete."
+          },
+          {
+            "name": "contentFiltered",
+            "value": "content_filter",
+            "description": "Completions generated a response that was identified as potentially sensitive per content\nmoderation policies."
+          },
+          {
+            "name": "functionCall",
+            "value": "function_call",
+            "description": "Completion ended normally, with the model requesting a function to be called."
+          },
+          {
+            "name": "toolCalls",
+            "value": "tool_calls",
+            "description": "Completion ended with the model calling a provided tool for output."
+          }
+        ]
+      }
+    },
+    "CompletionsLogProbabilityModel": {
+      "type": "object",
+      "description": "Representation of a log probabilities model for a completions generation.",
+      "properties": {
+        "tokens": {
+          "type": "array",
+          "description": "The textual forms of tokens evaluated in this probability model.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "token_logprobs": {
+          "type": "array",
+          "description": "A collection of log probability values for the tokens in this completions data.",
+          "items": {
+            "type": "number",
+            "format": "float",
+            "x-nullable": true
+          },
+          "x-ms-client-name": "tokenLogprobs"
+        },
+        "top_logprobs": {
+          "type": "array",
+          "description": "A mapping of tokens to maximum log probability values in this completions data.",
+          "items": {
+            "type": "object",
+            "additionalProperties": {
+              "format": "float",
+              "type": "number",
+              "x-nullable": true
+            }
+          },
+          "x-ms-client-name": "topLogprobs",
+          "x-ms-identifiers": []
+        },
+        "text_offset": {
+          "type": "array",
+          "description": "The text offsets associated with tokens in this completions data.",
+          "items": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "x-ms-client-name": "textOffset"
+        }
+      },
+      "required": [
+        "tokens",
+        "token_logprobs",
+        "top_logprobs",
+        "text_offset"
+      ]
+    },
+    "CompletionsOptions": {
+      "type": "object",
+      "description": "The configuration information for a completions request.\nCompletions support a wide variety of tasks and generate text that continues from or \"completes\"\nprovided prompt data.",
+      "properties": {
+        "prompt": {
+          "type": "array",
+          "description": "The prompts to generate completions from.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "max_tokens": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum number of tokens to generate.",
+          "x-ms-client-name": "maxTokens"
+        },
+        "temperature": {
+          "type": "number",
+          "format": "float",
+          "description": "The sampling temperature to use that controls the apparent creativity of generated completions.\nHigher values will make output more random while lower values will make results more focused\nand deterministic.\nIt is not recommended to modify temperature and top_p for the same completions request as the\ninteraction of these two settings is difficult to predict."
+        },
+        "top_p": {
+          "type": "number",
+          "format": "float",
+          "description": "An alternative to sampling with temperature called nucleus sampling. This value causes the\nmodel to consider the results of tokens with the provided probability mass. As an example, a\nvalue of 0.15 will cause only the tokens comprising the top 15% of probability mass to be\nconsidered.\nIt is not recommended to modify temperature and top_p for the same completions request as the\ninteraction of these two settings is difficult to predict.",
+          "x-ms-client-name": "topP"
+        },
+        "logit_bias": {
+          "type": "object",
+          "description": "A map between GPT token IDs and bias scores that influences the probability of specific tokens\nappearing in a completions response. Token IDs are computed via external tokenizer tools, while\nbias scores reside in the range of -100 to 100 with minimum and maximum values corresponding to\na full ban or exclusive selection of a token, respectively. The exact behavior of a given bias\nscore varies by model.",
+          "additionalProperties": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "x-ms-client-name": "logitBias"
+        },
+        "user": {
+          "type": "string",
+          "description": "An identifier for the caller or end user of the operation. This may be used for tracking\nor rate-limiting purposes."
+        },
+        "n": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of completions choices that should be generated per provided prompt as part of an\noverall completions response.\nBecause this setting can generate many completions, it may quickly consume your token quota.\nUse carefully and ensure reasonable settings for max_tokens and stop."
+        },
+        "logprobs": {
+          "type": "integer",
+          "format": "int32",
+          "description": "A value that controls the emission of log probabilities for the provided number of most likely\ntokens within a completions response."
+        },
+        "suffix": {
+          "type": "string",
+          "description": "The suffix that comes after a completion of inserted text"
+        },
+        "echo": {
+          "type": "boolean",
+          "description": "A value specifying whether completions responses should include input prompts as prefixes to\ntheir generated output."
+        },
+        "stop": {
+          "type": "array",
+          "description": "A collection of textual sequences that will end completions generation.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "presence_penalty": {
+          "type": "number",
+          "format": "float",
+          "description": "A value that influences the probability of generated tokens appearing based on their existing\npresence in generated text.\nPositive values will make tokens less likely to appear when they already exist and increase the\nmodel's likelihood to output new topics.",
+          "x-ms-client-name": "presencePenalty"
+        },
+        "frequency_penalty": {
+          "type": "number",
+          "format": "float",
+          "description": "A value that influences the probability of generated tokens appearing based on their cumulative\nfrequency in generated text.\nPositive values will make tokens less likely to appear as their frequency increases and\ndecrease the likelihood of the model repeating the same statements verbatim.",
+          "x-ms-client-name": "frequencyPenalty"
+        },
+        "best_of": {
+          "type": "integer",
+          "format": "int32",
+          "description": "A value that controls how many completions will be internally generated prior to response\nformulation.\nWhen used together with n, best_of controls the number of candidate completions and must be\ngreater than n.\nBecause this setting can generate many completions, it may quickly consume your token quota.\nUse carefully and ensure reasonable settings for max_tokens and stop.",
+          "x-ms-client-name": "bestOf"
+        },
+        "stream": {
+          "type": "boolean",
+          "description": "A value indicating whether chat completions should be streamed for this request."
+        },
+        "model": {
+          "type": "string",
+          "description": "The model name to provide as part of this completions request.\nNot applicable to Azure OpenAI, where deployment information should be included in the Azure\nresource URI that's connected to."
+        }
+      },
+      "required": [
+        "prompt"
+      ]
+    },
+    "CompletionsUsage": {
+      "type": "object",
+      "description": "Representation of the token counts processed for a completions request.\nCounts consider all tokens across prompts, choices, choice alternates, best_of generations, and\nother consumers.",
+      "properties": {
+        "completion_tokens": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of tokens generated across all completions emissions.",
+          "x-ms-client-name": "completionTokens"
+        },
+        "prompt_tokens": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of tokens in the provided prompts for the completions request.",
+          "x-ms-client-name": "promptTokens"
+        },
+        "total_tokens": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The total number of tokens processed for the completions request and response.",
+          "x-ms-client-name": "totalTokens"
+        }
+      },
+      "required": [
+        "completion_tokens",
+        "prompt_tokens",
+        "total_tokens"
+      ]
+    },
+    "ContentFilterBlocklistIdResult": {
+      "type": "object",
+      "description": "Represents the outcome of an evaluation against a custom blocklist as performed by content filtering.",
+      "properties": {
+        "filtered": {
+          "type": "boolean",
+          "description": "A value indicating whether or not the content has been filtered."
+        },
+        "id": {
+          "type": "string",
+          "description": "The ID of the custom blocklist evaluated."
+        }
+      },
+      "required": [
+        "filtered",
+        "id"
+      ]
+    },
+    "ContentFilterCitedDetectionResult": {
+      "type": "object",
+      "description": "Represents the outcome of a detection operation against protected resources as performed by content filtering.",
+      "properties": {
+        "filtered": {
+          "type": "boolean",
+          "description": "A value indicating whether or not the content has been filtered."
+        },
+        "detected": {
+          "type": "boolean",
+          "description": "A value indicating whether detection occurred, irrespective of severity or whether the content was filtered."
+        },
+        "URL": {
+          "type": "string",
+          "format": "uri",
+          "description": "The internet location associated with the detection.",
+          "x-ms-client-name": "url"
+        },
+        "license": {
+          "type": "string",
+          "description": "The license description associated with the detection."
+        }
+      },
+      "required": [
+        "filtered",
+        "detected",
+        "license"
+      ]
+    },
+    "ContentFilterDetailedResults": {
+      "type": "object",
+      "description": "Represents a structured collection of result details for content filtering.",
+      "properties": {
+        "filtered": {
+          "type": "boolean",
+          "description": "A value indicating whether or not the content has been filtered."
+        },
+        "details": {
+          "type": "array",
+          "description": "The collection of detailed blocklist result information.",
+          "items": {
+            "$ref": "#/definitions/ContentFilterBlocklistIdResult"
+          }
+        }
+      },
+      "required": [
+        "filtered",
+        "details"
+      ]
+    },
+    "ContentFilterDetectionResult": {
+      "type": "object",
+      "description": "Represents the outcome of a detection operation performed by content filtering.",
+      "properties": {
+        "filtered": {
+          "type": "boolean",
+          "description": "A value indicating whether or not the content has been filtered."
+        },
+        "detected": {
+          "type": "boolean",
+          "description": "A value indicating whether detection occurred, irrespective of severity or whether the content was filtered."
+        }
+      },
+      "required": [
+        "filtered",
+        "detected"
+      ]
+    },
+    "ContentFilterResult": {
+      "type": "object",
+      "description": "Information about filtered content severity level and if it has been filtered or not.",
+      "properties": {
+        "filtered": {
+          "type": "boolean",
+          "description": "A value indicating whether or not the content has been filtered."
+        },
+        "severity": {
+          "$ref": "#/definitions/ContentFilterSeverity",
+          "description": "Ratings for the intensity and risk level of filtered content."
+        }
+      },
+      "required": [
+        "filtered",
+        "severity"
+      ]
+    },
+    "ContentFilterResultDetailsForPrompt": {
+      "type": "object",
+      "description": "Information about content filtering evaluated against input data to Azure OpenAI.",
+      "properties": {
+        "sexual": {
+          "$ref": "#/definitions/ContentFilterResult",
+          "description": "Describes language related to anatomical organs and genitals, romantic relationships,\n acts portrayed in erotic or affectionate terms, physical sexual acts, including\n those portrayed as an assault or a forced sexual violent act against one’s will,\n prostitution, pornography, and abuse."
+        },
+        "violence": {
+          "$ref": "#/definitions/ContentFilterResult",
+          "description": "Describes language related to physical actions intended to hurt, injure, damage, or\nkill someone or something; describes weapons, etc."
+        },
+        "hate": {
+          "$ref": "#/definitions/ContentFilterResult",
+          "description": "Describes language attacks or uses that include pejorative or discriminatory language\nwith reference to a person or identity group on the basis of certain differentiating\nattributes of these groups including but not limited to race, ethnicity, nationality,\ngender identity and expression, sexual orientation, religion, immigration status, ability\nstatus, personal appearance, and body size."
+        },
+        "self_harm": {
+          "$ref": "#/definitions/ContentFilterResult",
+          "description": "Describes language related to physical actions intended to purposely hurt, injure,\nor damage one’s body, or kill oneself.",
+          "x-ms-client-name": "selfHarm"
+        },
+        "profanity": {
+          "$ref": "#/definitions/ContentFilterDetectionResult",
+          "description": "Describes whether profanity was detected."
+        },
+        "custom_blocklists": {
+          "$ref": "#/definitions/ContentFilterDetailedResults",
+          "description": "Describes detection results against configured custom blocklists.",
+          "x-ms-client-name": "customBlocklists"
+        },
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "description": "Describes an error returned if the content filtering system is\ndown or otherwise unable to complete the operation in time."
+        },
+        "jailbreak": {
+          "$ref": "#/definitions/ContentFilterDetectionResult",
+          "description": "Whether a jailbreak attempt was detected in the prompt."
+        },
+        "indirect_attack": {
+          "$ref": "#/definitions/ContentFilterDetectionResult",
+          "description": "Whether an indirect attack was detected in the prompt.",
+          "x-ms-client-name": "indirectAttack"
+        }
+      }
+    },
+    "ContentFilterResultsForChoice": {
+      "type": "object",
+      "description": "Information about content filtering evaluated against generated model output.",
+      "properties": {
+        "sexual": {
+          "$ref": "#/definitions/ContentFilterResult",
+          "description": "Describes language related to anatomical organs and genitals, romantic relationships,\n acts portrayed in erotic or affectionate terms, physical sexual acts, including\n those portrayed as an assault or a forced sexual violent act against one’s will,\n prostitution, pornography, and abuse."
+        },
+        "violence": {
+          "$ref": "#/definitions/ContentFilterResult",
+          "description": "Describes language related to physical actions intended to hurt, injure, damage, or\nkill someone or something; describes weapons, etc."
+        },
+        "hate": {
+          "$ref": "#/definitions/ContentFilterResult",
+          "description": "Describes language attacks or uses that include pejorative or discriminatory language\nwith reference to a person or identity group on the basis of certain differentiating\nattributes of these groups including but not limited to race, ethnicity, nationality,\ngender identity and expression, sexual orientation, religion, immigration status, ability\nstatus, personal appearance, and body size."
+        },
+        "self_harm": {
+          "$ref": "#/definitions/ContentFilterResult",
+          "description": "Describes language related to physical actions intended to purposely hurt, injure,\nor damage one’s body, or kill oneself.",
+          "x-ms-client-name": "selfHarm"
+        },
+        "profanity": {
+          "$ref": "#/definitions/ContentFilterDetectionResult",
+          "description": "Describes whether profanity was detected."
+        },
+        "custom_blocklists": {
+          "$ref": "#/definitions/ContentFilterDetailedResults",
+          "description": "Describes detection results against configured custom blocklists.",
+          "x-ms-client-name": "customBlocklists"
+        },
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "description": "Describes an error returned if the content filtering system is\ndown or otherwise unable to complete the operation in time."
+        },
+        "protected_material_text": {
+          "$ref": "#/definitions/ContentFilterDetectionResult",
+          "description": "Information about detection of protected text material.",
+          "x-ms-client-name": "protectedMaterialText"
+        },
+        "protected_material_code": {
+          "$ref": "#/definitions/ContentFilterCitedDetectionResult",
+          "description": "Information about detection of protected code material.",
+          "x-ms-client-name": "protectedMaterialCode"
+        }
+      }
+    },
+    "ContentFilterResultsForPrompt": {
+      "type": "object",
+      "description": "Content filtering results for a single prompt in the request.",
+      "properties": {
+        "prompt_index": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The index of this prompt in the set of prompt results",
+          "x-ms-client-name": "promptIndex"
+        },
+        "content_filter_results": {
+          "$ref": "#/definitions/ContentFilterResultDetailsForPrompt",
+          "description": "Content filtering results for this prompt",
+          "x-ms-client-name": "contentFilterResults"
+        }
+      },
+      "required": [
+        "prompt_index",
+        "content_filter_results"
+      ]
+    },
+    "ContentFilterSeverity": {
+      "type": "string",
+      "description": "Ratings for the intensity and risk level of harmful content.",
+      "enum": [
+        "safe",
+        "low",
+        "medium",
+        "high"
+      ],
+      "x-ms-enum": {
+        "name": "ContentFilterSeverity",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "safe",
+            "value": "safe",
+            "description": "Content may be related to violence, self-harm, sexual, or hate categories but the terms\nare used in general, journalistic, scientific, medical, and similar professional contexts,\nwhich are appropriate for most audiences."
+          },
+          {
+            "name": "low",
+            "value": "low",
+            "description": "Content that expresses prejudiced, judgmental, or opinionated views, includes offensive\nuse of language, stereotyping, use cases exploring a fictional world (for example, gaming,\nliterature) and depictions at low intensity."
+          },
+          {
+            "name": "medium",
+            "value": "medium",
+            "description": "Content that uses offensive, insulting, mocking, intimidating, or demeaning language\ntowards specific identity groups, includes depictions of seeking and executing harmful\ninstructions, fantasies, glorification, promotion of harm at medium intensity."
+          },
+          {
+            "name": "high",
+            "value": "high",
+            "description": "Content that displays explicit and severe harmful instructions, actions,\ndamage, or abuse; includes endorsement, glorification, or promotion of severe\nharmful acts, extreme or illegal forms of harm, radicalization, or non-consensual\npower exchange or abuse."
+          }
+        ]
+      }
+    },
+    "ElasticsearchChatExtensionConfiguration": {
+      "type": "object",
+      "description": "A specific representation of configurable options for Elasticsearch when using it as an Azure OpenAI chat\nextension.",
+      "properties": {
+        "parameters": {
+          "$ref": "#/definitions/ElasticsearchChatExtensionParameters",
+          "description": "The parameters to use when configuring Elasticsearch®."
+        }
+      },
+      "required": [
+        "parameters"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/AzureChatExtensionConfiguration"
+        }
+      ],
+      "x-ms-discriminator-value": "elasticsearch"
+    },
+    "ElasticsearchChatExtensionParameters": {
+      "type": "object",
+      "description": "Parameters to use when configuring Elasticsearch® as an Azure OpenAI chat extension. The supported authentication types are KeyAndKeyId and EncodedAPIKey.",
+      "properties": {
+        "authentication": {
+          "$ref": "#/definitions/OnYourDataAuthenticationOptions",
+          "description": "The authentication method to use when accessing the defined data source.\nEach data source type supports a specific set of available authentication methods; please see the documentation of\nthe data source for supported mechanisms.\nIf not otherwise provided, On Your Data will attempt to use System Managed Identity (default credential)\nauthentication."
+        },
+        "top_n_documents": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The configured top number of documents to feature for the configured query.",
+          "x-ms-client-name": "topNDocuments"
+        },
+        "in_scope": {
+          "type": "boolean",
+          "description": "Whether queries should be restricted to use of indexed data.",
+          "x-ms-client-name": "inScope"
+        },
+        "strictness": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The configured strictness of the search relevance filtering. The higher of strictness, the higher of the precision but lower recall of the answer.",
+          "minimum": 1,
+          "maximum": 5
+        },
+        "role_information": {
+          "type": "string",
+          "description": "Give the model instructions about how it should behave and any context it should reference when generating a response. You can describe the assistant's personality and tell it how to format responses. There's a 100 token limit for it, and it counts against the overall token limit.",
+          "x-ms-client-name": "roleInformation"
+        },
+        "max_search_queries": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The max number of rewritten queries should be send to search provider for one user message. If not specified,\nthe system will decide the number of queries to send.",
+          "x-ms-client-name": "maxSearchQueries"
+        },
+        "allow_partial_result": {
+          "type": "boolean",
+          "description": "If specified as true, the system will allow partial search results to be used and the request fails if all the queries fail.\nIf not specified, or specified as false, the request will fail if any search query fails.",
+          "default": false,
+          "x-ms-client-name": "allowPartialResult"
+        },
+        "include_contexts": {
+          "type": "array",
+          "description": "The included properties of the output context. If not specified, the default value is `citations` and `intent`.",
+          "items": {
+            "$ref": "#/definitions/OnYourDataContextProperty"
+          },
+          "x-ms-client-name": "includeContexts"
+        },
+        "endpoint": {
+          "type": "string",
+          "format": "uri",
+          "description": "The endpoint of Elasticsearch®."
+        },
+        "index_name": {
+          "type": "string",
+          "description": "The index name of Elasticsearch®.",
+          "x-ms-client-name": "indexName"
+        },
+        "fields_mapping": {
+          "$ref": "#/definitions/ElasticsearchIndexFieldMappingOptions",
+          "description": "The index field mapping options of Elasticsearch®.",
+          "x-ms-client-name": "fieldsMapping"
+        },
+        "query_type": {
+          "$ref": "#/definitions/ElasticsearchQueryType",
+          "description": "The query type of Elasticsearch®.",
+          "x-ms-client-name": "queryType"
+        },
+        "embedding_dependency": {
+          "$ref": "#/definitions/OnYourDataVectorizationSource",
+          "description": "The embedding dependency for vector search.",
+          "x-ms-client-name": "embeddingDependency"
+        }
+      },
+      "required": [
+        "endpoint",
+        "index_name"
+      ]
+    },
+    "ElasticsearchIndexFieldMappingOptions": {
+      "type": "object",
+      "description": "Optional settings to control how fields are processed when using a configured Elasticsearch® resource.",
+      "properties": {
+        "title_field": {
+          "type": "string",
+          "description": "The name of the index field to use as a title.",
+          "x-ms-client-name": "titleField"
+        },
+        "url_field": {
+          "type": "string",
+          "description": "The name of the index field to use as a URL.",
+          "x-ms-client-name": "urlField"
+        },
+        "filepath_field": {
+          "type": "string",
+          "description": "The name of the index field to use as a filepath.",
+          "x-ms-client-name": "filepathField"
+        },
+        "content_fields": {
+          "type": "array",
+          "description": "The names of index fields that should be treated as content.",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-client-name": "contentFields"
+        },
+        "content_fields_separator": {
+          "type": "string",
+          "description": "The separator pattern that content fields should use.",
+          "x-ms-client-name": "contentFieldsSeparator"
+        },
+        "vector_fields": {
+          "type": "array",
+          "description": "The names of fields that represent vector data.",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-client-name": "vectorFields"
+        }
+      }
+    },
+    "ElasticsearchQueryType": {
+      "type": "string",
+      "description": "The type of Elasticsearch® retrieval query that should be executed when using it as an Azure OpenAI chat extension.",
+      "enum": [
+        "simple",
+        "vector"
+      ],
+      "x-ms-enum": {
+        "name": "ElasticsearchQueryType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "simple",
+            "value": "simple",
+            "description": "Represents the default, simple query parser."
+          },
+          {
+            "name": "vector",
+            "value": "vector",
+            "description": "Represents vector search over computed data."
+          }
+        ]
+      }
+    },
+    "EmbeddingItem": {
+      "type": "object",
+      "description": "Representation of a single embeddings relatedness comparison.",
+      "properties": {
+        "embedding": {
+          "type": "array",
+          "description": "List of embeddings value for the input prompt. These represent a measurement of the\nvector-based relatedness of the provided input.",
+          "items": {
+            "type": "number",
+            "format": "float"
+          }
+        },
+        "index": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Index of the prompt to which the EmbeddingItem corresponds."
+        }
+      },
+      "required": [
+        "embedding",
+        "index"
+      ]
+    },
+    "Embeddings": {
+      "type": "object",
+      "description": "Representation of the response data from an embeddings request.\nEmbeddings measure the relatedness of text strings and are commonly used for search, clustering,\nrecommendations, and other similar scenarios.",
+      "properties": {
+        "data": {
+          "type": "array",
+          "description": "Embedding values for the prompts submitted in the request.",
+          "items": {
+            "$ref": "#/definitions/EmbeddingItem"
+          },
+          "x-ms-identifiers": []
+        },
+        "usage": {
+          "$ref": "#/definitions/EmbeddingsUsage",
+          "description": "Usage counts for tokens input using the embeddings API."
+        }
+      },
+      "required": [
+        "data",
+        "usage"
+      ]
+    },
+    "EmbeddingsOptions": {
+      "type": "object",
+      "description": "The configuration information for an embeddings request.\nEmbeddings measure the relatedness of text strings and are commonly used for search, clustering,\nrecommendations, and other similar scenarios.",
+      "properties": {
+        "user": {
+          "type": "string",
+          "description": "An identifier for the caller or end user of the operation. This may be used for tracking\nor rate-limiting purposes."
+        },
+        "model": {
+          "type": "string",
+          "description": "The model name to provide as part of this embeddings request.\nNot applicable to Azure OpenAI, where deployment information should be included in the Azure\nresource URI that's connected to."
+        },
+        "input": {
+          "type": "array",
+          "description": "Input texts to get embeddings for, encoded as a an array of strings.\nEach input must not exceed 2048 tokens in length.\n\nUnless you are embedding code, we suggest replacing newlines (\\n) in your input with a single space,\nas we have observed inferior results when newlines are present.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "encoding_format": {
+          "type": "string",
+          "description": "The response encoding format to use for embedding data.",
+          "default": "float",
+          "enum": [
+            "float",
+            "base64"
+          ],
+          "x-ms-enum": {
+            "name": "EmbeddingEncodingFormat",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "float",
+                "value": "float",
+                "description": "Specifies that responses should provide arrays of floats for each embedding."
+              },
+              {
+                "name": "base64",
+                "value": "base64",
+                "description": "Specifies that responses should provide a base64-encoded string for each embedding."
+              }
+            ]
+          },
+          "x-ms-client-name": "encodingFormat"
+        },
+        "dimensions": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of dimensions the resulting output embeddings should have. Only supported in `text-embedding-3` and later models."
+        },
+        "input_type": {
+          "type": "string",
+          "description": "When using Azure OpenAI, specifies the input type to use for embedding search.",
+          "x-ms-client-name": "inputType"
+        }
+      },
+      "required": [
+        "input"
+      ]
+    },
+    "EmbeddingsUsage": {
+      "type": "object",
+      "description": "Measurement of the amount of tokens used in this request and response.",
+      "properties": {
+        "prompt_tokens": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of tokens sent in the original request.",
+          "x-ms-client-name": "promptTokens"
+        },
+        "total_tokens": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Total number of tokens transacted in this request/response.",
+          "x-ms-client-name": "totalTokens"
+        }
+      },
+      "required": [
+        "prompt_tokens",
+        "total_tokens"
+      ]
+    },
+    "FunctionCall": {
+      "type": "object",
+      "description": "The name and arguments of a function that should be called, as generated by the model.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the function to call."
+        },
+        "arguments": {
+          "type": "string",
+          "description": "The arguments to call the function with, as generated by the model in JSON format.\nNote that the model does not always generate valid JSON, and may hallucinate parameters\nnot defined by your function schema. Validate the arguments in your code before calling\nyour function."
+        }
+      },
+      "required": [
+        "name",
+        "arguments"
+      ]
+    },
+    "FunctionDefinition": {
+      "type": "object",
+      "description": "The definition of a caller-specified function that chat completions may invoke in response to matching user input.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the function to be called."
+        },
+        "description": {
+          "type": "string",
+          "description": "A description of what the function does. The model will use this description when selecting the function and\ninterpreting its parameters."
+        },
+        "parameters": {
+          "description": "The parameters the function accepts, described as a JSON Schema object."
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
+    "ImageGenerationContentFilterResults": {
+      "type": "object",
+      "description": "Describes the content filtering result for the image generation request.",
+      "properties": {
+        "sexual": {
+          "$ref": "#/definitions/ContentFilterResult",
+          "description": "Describes language related to anatomical organs and genitals, romantic relationships,\n acts portrayed in erotic or affectionate terms, physical sexual acts, including\n those portrayed as an assault or a forced sexual violent act against one’s will,\n prostitution, pornography, and abuse."
+        },
+        "violence": {
+          "$ref": "#/definitions/ContentFilterResult",
+          "description": "Describes language related to physical actions intended to hurt, injure, damage, or\nkill someone or something; describes weapons, etc."
+        },
+        "hate": {
+          "$ref": "#/definitions/ContentFilterResult",
+          "description": "Describes language attacks or uses that include pejorative or discriminatory language\nwith reference to a person or identity group on the basis of certain differentiating\nattributes of these groups including but not limited to race, ethnicity, nationality,\ngender identity and expression, sexual orientation, religion, immigration status, ability\nstatus, personal appearance, and body size."
+        },
+        "self_harm": {
+          "$ref": "#/definitions/ContentFilterResult",
+          "description": "Describes language related to physical actions intended to purposely hurt, injure,\nor damage one’s body, or kill oneself.",
+          "x-ms-client-name": "selfHarm"
+        }
+      }
+    },
+    "ImageGenerationData": {
+      "type": "object",
+      "description": "A representation of a single generated image, provided as either base64-encoded data or as a URL from which the image\nmay be retrieved.",
+      "properties": {
+        "url": {
+          "type": "string",
+          "format": "uri",
+          "description": "The URL that provides temporary access to download the generated image."
+        },
+        "b64_json": {
+          "type": "string",
+          "description": "The complete data for an image, represented as a base64-encoded string.",
+          "x-ms-client-name": "base64Data"
+        },
+        "content_filter_results": {
+          "$ref": "#/definitions/ImageGenerationContentFilterResults",
+          "description": "Information about the content filtering results.",
+          "x-ms-client-name": "contentFilterResults"
+        },
+        "revised_prompt": {
+          "type": "string",
+          "description": "The final prompt used by the model to generate the image.\nOnly provided with dall-3-models and only when revisions were made to the prompt.",
+          "x-ms-client-name": "revisedPrompt"
+        },
+        "prompt_filter_results": {
+          "$ref": "#/definitions/ImageGenerationPromptFilterResults",
+          "description": "Information about the content filtering category (hate, sexual, violence, self_harm), if\nit has been detected, as well as the severity level (very_low, low, medium, high-scale\nthat determines the intensity and risk level of harmful content) and if it has been\nfiltered or not. Information about jailbreak content and profanity, if it has been detected,\nand if it has been filtered or not. And information about customer block list, if it has\nbeen filtered and its id.",
+          "x-ms-client-name": "promptFilterResults"
+        }
+      }
+    },
+    "ImageGenerationOptions": {
+      "type": "object",
+      "description": "Represents the request data used to generate images.",
+      "properties": {
+        "model": {
+          "type": "string",
+          "description": "The model name or Azure OpenAI model deployment name to use for image generation. If not specified, dall-e-2 will be\ninferred as a default."
+        },
+        "prompt": {
+          "type": "string",
+          "description": "A description of the desired images."
+        },
+        "n": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of images to generate.\nDall-e-2 models support values between 1 and 10.\nDall-e-3 models only support a value of 1.",
+          "default": 1
+        },
+        "size": {
+          "type": "string",
+          "description": "The desired dimensions for generated images.\nDall-e-2 models support 256x256, 512x512, or 1024x1024.\nDall-e-3 models support 1024x1024, 1792x1024, or 1024x1792.",
+          "default": "1024x1024",
+          "enum": [
+            "256x256",
+            "512x512",
+            "1024x1024",
+            "1792x1024",
+            "1024x1792"
+          ],
+          "x-ms-enum": {
+            "name": "ImageSize",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "size256x256",
+                "value": "256x256",
+                "description": "Very small image size of 256x256 pixels.\nOnly supported with dall-e-2 models."
+              },
+              {
+                "name": "size512x512",
+                "value": "512x512",
+                "description": "A smaller image size of 512x512 pixels.\nOnly supported with dall-e-2 models."
+              },
+              {
+                "name": "size1024x1024",
+                "value": "1024x1024",
+                "description": "A standard, square image size of 1024x1024 pixels.\nSupported by both dall-e-2 and dall-e-3 models."
+              },
+              {
+                "name": "size1792x1024",
+                "value": "1792x1024",
+                "description": "A wider image size of 1024x1792 pixels.\nOnly supported with dall-e-3 models."
+              },
+              {
+                "name": "size1024x1792",
+                "value": "1024x1792",
+                "description": "A taller image size of 1792x1024 pixels.\nOnly supported with dall-e-3 models."
+              }
+            ]
+          }
+        },
+        "response_format": {
+          "type": "string",
+          "description": "The format in which image generation response items should be presented.",
+          "default": "url",
+          "enum": [
+            "url",
+            "b64_json"
+          ],
+          "x-ms-enum": {
+            "name": "ImageGenerationResponseFormat",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "url",
+                "value": "url",
+                "description": "Image generation response items should provide a URL from which the image may be retrieved."
+              },
+              {
+                "name": "base64",
+                "value": "b64_json",
+                "description": "Image generation response items should provide image data as a base64-encoded string."
+              }
+            ]
+          },
+          "x-ms-client-name": "responseFormat"
+        },
+        "quality": {
+          "type": "string",
+          "description": "The desired image generation quality level to use.\nOnly configurable with dall-e-3 models.",
+          "default": "standard",
+          "enum": [
+            "standard",
+            "hd"
+          ],
+          "x-ms-enum": {
+            "name": "ImageGenerationQuality",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "standard",
+                "value": "standard",
+                "description": "Requests image generation with standard, balanced characteristics of quality, cost, and speed."
+              },
+              {
+                "name": "hd",
+                "value": "hd",
+                "description": "Requests image generation with higher quality, higher cost and lower speed relative to standard."
+              }
+            ]
+          }
+        },
+        "style": {
+          "type": "string",
+          "description": "The desired image generation style to use.\nOnly configurable with dall-e-3 models.",
+          "default": "vivid",
+          "enum": [
+            "natural",
+            "vivid"
+          ],
+          "x-ms-enum": {
+            "name": "ImageGenerationStyle",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "natural",
+                "value": "natural",
+                "description": "Requests image generation in a natural style with less preference for dramatic and hyper-realistic characteristics."
+              },
+              {
+                "name": "vivid",
+                "value": "vivid",
+                "description": "Requests image generation in a vivid style with a higher preference for dramatic and hyper-realistic\ncharacteristics."
+              }
+            ]
+          }
+        },
+        "user": {
+          "type": "string",
+          "description": "A unique identifier representing your end-user, which can help to monitor and detect abuse."
+        }
+      },
+      "required": [
+        "prompt"
+      ]
+    },
+    "ImageGenerationPromptFilterResults": {
+      "type": "object",
+      "description": "Describes the content filtering results for the prompt of a image generation request.",
+      "properties": {
+        "sexual": {
+          "$ref": "#/definitions/ContentFilterResult",
+          "description": "Describes language related to anatomical organs and genitals, romantic relationships,\n acts portrayed in erotic or affectionate terms, physical sexual acts, including\n those portrayed as an assault or a forced sexual violent act against one’s will,\n prostitution, pornography, and abuse."
+        },
+        "violence": {
+          "$ref": "#/definitions/ContentFilterResult",
+          "description": "Describes language related to physical actions intended to hurt, injure, damage, or\nkill someone or something; describes weapons, etc."
+        },
+        "hate": {
+          "$ref": "#/definitions/ContentFilterResult",
+          "description": "Describes language attacks or uses that include pejorative or discriminatory language\nwith reference to a person or identity group on the basis of certain differentiating\nattributes of these groups including but not limited to race, ethnicity, nationality,\ngender identity and expression, sexual orientation, religion, immigration status, ability\nstatus, personal appearance, and body size."
+        },
+        "self_harm": {
+          "$ref": "#/definitions/ContentFilterResult",
+          "description": "Describes language related to physical actions intended to purposely hurt, injure,\nor damage one’s body, or kill oneself.",
+          "x-ms-client-name": "selfHarm"
+        },
+        "profanity": {
+          "$ref": "#/definitions/ContentFilterDetectionResult",
+          "description": "Describes whether profanity was detected."
+        },
+        "jailbreak": {
+          "$ref": "#/definitions/ContentFilterDetectionResult",
+          "description": "Whether a jailbreak attempt was detected in the prompt."
+        },
+        "custom_blocklists": {
+          "$ref": "#/definitions/ContentFilterDetailedResults",
+          "description": "Information about customer block lists and if something was detected the associated list ID.",
+          "x-ms-client-name": "customBlocklists"
+        }
+      }
+    },
+    "ImageGenerations": {
+      "type": "object",
+      "description": "The result of a successful image generation operation.",
+      "properties": {
+        "created": {
+          "type": "integer",
+          "format": "unixtime",
+          "description": "A timestamp representing when this operation was started.\nExpressed in seconds since the Unix epoch of 1970-01-01T00:00:00+0000."
+        },
+        "data": {
+          "type": "array",
+          "description": "The images generated by the operation.",
+          "items": {
+            "$ref": "#/definitions/ImageGenerationData"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "created",
+        "data"
+      ]
+    },
+    "MaxTokensFinishDetails": {
+      "type": "object",
+      "description": "A structured representation of a stop reason that signifies a token limit was reached before the model could naturally\ncomplete.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ChatFinishDetails"
+        }
+      ],
+      "x-ms-discriminator-value": "max_tokens"
+    },
+    "OnYourDataAccessTokenAuthenticationOptions": {
+      "type": "object",
+      "description": "The authentication options for Azure OpenAI On Your Data when using access token.",
+      "properties": {
+        "access_token": {
+          "type": "string",
+          "description": "The access token to use for authentication.",
+          "x-ms-client-name": "accessToken"
+        }
+      },
+      "required": [
+        "access_token"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/OnYourDataAuthenticationOptions"
+        }
+      ],
+      "x-ms-discriminator-value": "access_token"
+    },
+    "OnYourDataApiKeyAuthenticationOptions": {
+      "type": "object",
+      "description": "The authentication options for Azure OpenAI On Your Data when using an API key.",
+      "properties": {
+        "key": {
+          "type": "string",
+          "description": "The API key to use for authentication."
+        }
+      },
+      "required": [
+        "key"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/OnYourDataAuthenticationOptions"
+        }
+      ],
+      "x-ms-discriminator-value": "api_key"
+    },
+    "OnYourDataAuthenticationOptions": {
+      "type": "object",
+      "description": "The authentication options for Azure OpenAI On Your Data.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/OnYourDataAuthenticationType",
+          "description": "The authentication type."
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "type"
+      ]
+    },
+    "OnYourDataAuthenticationType": {
+      "type": "string",
+      "description": "The authentication types supported with Azure OpenAI On Your Data.",
+      "enum": [
+        "api_key",
+        "connection_string",
+        "key_and_key_id",
+        "encoded_api_key",
+        "access_token",
+        "system_assigned_managed_identity",
+        "user_assigned_managed_identity"
+      ],
+      "x-ms-enum": {
+        "name": "OnYourDataAuthenticationType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "apiKey",
+            "value": "api_key",
+            "description": "Authentication via API key."
+          },
+          {
+            "name": "connectionString",
+            "value": "connection_string",
+            "description": "Authentication via connection string."
+          },
+          {
+            "name": "keyAndKeyId",
+            "value": "key_and_key_id",
+            "description": "Authentication via key and key ID pair."
+          },
+          {
+            "name": "encodedApiKey",
+            "value": "encoded_api_key",
+            "description": "Authentication via encoded API key."
+          },
+          {
+            "name": "accessToken",
+            "value": "access_token",
+            "description": "Authentication via access token."
+          },
+          {
+            "name": "systemAssignedManagedIdentity",
+            "value": "system_assigned_managed_identity",
+            "description": "Authentication via system-assigned managed identity."
+          },
+          {
+            "name": "userAssignedManagedIdentity",
+            "value": "user_assigned_managed_identity",
+            "description": "Authentication via user-assigned managed identity."
+          }
+        ]
+      }
+    },
+    "OnYourDataConnectionStringAuthenticationOptions": {
+      "type": "object",
+      "description": "The authentication options for Azure OpenAI On Your Data when using a connection string.",
+      "properties": {
+        "connection_string": {
+          "type": "string",
+          "description": "The connection string to use for authentication.",
+          "x-ms-client-name": "connectionString"
+        }
+      },
+      "required": [
+        "connection_string"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/OnYourDataAuthenticationOptions"
+        }
+      ],
+      "x-ms-discriminator-value": "connection_string"
+    },
+    "OnYourDataContextProperty": {
+      "type": "string",
+      "description": "The context property.",
+      "enum": [
+        "citations",
+        "intent",
+        "all_retrieved_documents"
+      ],
+      "x-ms-enum": {
+        "name": "OnYourDataContextProperty",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "citations",
+            "value": "citations",
+            "description": "The `citations` property."
+          },
+          {
+            "name": "intent",
+            "value": "intent",
+            "description": "The `intent` property."
+          },
+          {
+            "name": "allRetrievedDocuments",
+            "value": "all_retrieved_documents",
+            "description": "The `all_retrieved_documents` property."
+          }
+        ]
+      }
+    },
+    "OnYourDataDeploymentNameVectorizationSource": {
+      "type": "object",
+      "description": "The details of a a vectorization source, used by Azure OpenAI On Your Data when applying vector search, that is based\non an internal embeddings model deployment name in the same Azure OpenAI resource.",
+      "properties": {
+        "deployment_name": {
+          "type": "string",
+          "description": "The embedding model deployment name within the same Azure OpenAI resource. This enables you to use vector search without Azure OpenAI api-key and without Azure OpenAI public network access.",
+          "x-ms-client-name": "deploymentName"
+        },
+        "dimensions": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of dimensions the embeddings should have. Only supported in `text-embedding-3` and later models."
+        }
+      },
+      "required": [
+        "deployment_name"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/OnYourDataVectorizationSource"
+        }
+      ],
+      "x-ms-discriminator-value": "deployment_name"
+    },
+    "OnYourDataEncodedApiKeyAuthenticationOptions": {
+      "type": "object",
+      "description": "The authentication options for Azure OpenAI On Your Data when using an Elasticsearch encoded API key.",
+      "properties": {
+        "encoded_api_key": {
+          "type": "string",
+          "description": "The encoded API key to use for authentication.",
+          "x-ms-client-name": "encodedApiKey"
+        }
+      },
+      "required": [
+        "encoded_api_key"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/OnYourDataAuthenticationOptions"
+        }
+      ],
+      "x-ms-discriminator-value": "encoded_api_key"
+    },
+    "OnYourDataEndpointVectorizationSource": {
+      "type": "object",
+      "description": "The details of a a vectorization source, used by Azure OpenAI On Your Data when applying vector search, that is based\non a public Azure OpenAI endpoint call for embeddings.",
+      "properties": {
+        "endpoint": {
+          "type": "string",
+          "format": "uri",
+          "description": "Specifies the resource endpoint URL from which embeddings should be retrieved. It should be in the format of https://YOUR_RESOURCE_NAME.openai.azure.com/openai/deployments/YOUR_DEPLOYMENT_NAME/embeddings. The api-version query parameter is not allowed."
+        },
+        "authentication": {
+          "$ref": "#/definitions/OnYourDataVectorSearchAuthenticationOptions",
+          "description": "Specifies the authentication options to use when retrieving embeddings from the specified endpoint."
+        }
+      },
+      "required": [
+        "endpoint",
+        "authentication"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/OnYourDataVectorizationSource"
+        }
+      ],
+      "x-ms-discriminator-value": "endpoint"
+    },
+    "OnYourDataKeyAndKeyIdAuthenticationOptions": {
+      "type": "object",
+      "description": "The authentication options for Azure OpenAI On Your Data when using an Elasticsearch key and key ID pair.",
+      "properties": {
+        "key": {
+          "type": "string",
+          "description": "The key to use for authentication."
+        },
+        "key_id": {
+          "type": "string",
+          "description": "The key ID to use for authentication.",
+          "x-ms-client-name": "keyId"
+        }
+      },
+      "required": [
+        "key",
+        "key_id"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/OnYourDataAuthenticationOptions"
+        }
+      ],
+      "x-ms-discriminator-value": "key_and_key_id"
+    },
+    "OnYourDataModelIdVectorizationSource": {
+      "type": "object",
+      "description": "The details of a a vectorization source, used by Azure OpenAI On Your Data when applying vector search, that is based\non a search service model ID. Currently only supported by Elasticsearch®.",
+      "properties": {
+        "model_id": {
+          "type": "string",
+          "description": "The embedding model ID build inside the search service. Currently only supported by Elasticsearch®.",
+          "x-ms-client-name": "modelId"
+        }
+      },
+      "required": [
+        "model_id"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/OnYourDataVectorizationSource"
+        }
+      ],
+      "x-ms-discriminator-value": "model_id"
+    },
+    "OnYourDataSystemAssignedManagedIdentityAuthenticationOptions": {
+      "type": "object",
+      "description": "The authentication options for Azure OpenAI On Your Data when using a system-assigned managed identity.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/OnYourDataAuthenticationOptions"
+        }
+      ],
+      "x-ms-discriminator-value": "system_assigned_managed_identity"
+    },
+    "OnYourDataUserAssignedManagedIdentityAuthenticationOptions": {
+      "type": "object",
+      "description": "The authentication options for Azure OpenAI On Your Data when using a user-assigned managed identity.",
+      "properties": {
+        "managed_identity_resource_id": {
+          "type": "string",
+          "description": "The resource ID of the user-assigned managed identity to use for authentication.",
+          "x-ms-client-name": "managedIdentityResourceId"
+        }
+      },
+      "required": [
+        "managed_identity_resource_id"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/OnYourDataAuthenticationOptions"
+        }
+      ],
+      "x-ms-discriminator-value": "user_assigned_managed_identity"
+    },
+    "OnYourDataVectorSearchAccessTokenAuthenticationOptions": {
+      "type": "object",
+      "description": "The authentication options for Azure OpenAI On Your Data vector search when using access token.",
+      "properties": {
+        "access_token": {
+          "type": "string",
+          "description": "The access token to use for authentication.",
+          "x-ms-client-name": "accessToken"
+        }
+      },
+      "required": [
+        "access_token"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/OnYourDataVectorSearchAuthenticationOptions"
+        }
+      ],
+      "x-ms-discriminator-value": "access_token"
+    },
+    "OnYourDataVectorSearchApiKeyAuthenticationOptions": {
+      "type": "object",
+      "description": "The authentication options for Azure OpenAI On Your Data when using an API key.",
+      "properties": {
+        "key": {
+          "type": "string",
+          "description": "The API key to use for authentication."
+        }
+      },
+      "required": [
+        "key"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/OnYourDataVectorSearchAuthenticationOptions"
+        }
+      ],
+      "x-ms-discriminator-value": "api_key"
+    },
+    "OnYourDataVectorSearchAuthenticationOptions": {
+      "type": "object",
+      "description": "The authentication options for Azure OpenAI On Your Data vector search.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/OnYourDataVectorSearchAuthenticationType",
+          "description": "The type of authentication to use."
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "type"
+      ]
+    },
+    "OnYourDataVectorSearchAuthenticationType": {
+      "type": "string",
+      "description": "The authentication types supported with Azure OpenAI On Your Data vector search.",
+      "enum": [
+        "api_key",
+        "access_token"
+      ],
+      "x-ms-enum": {
+        "name": "OnYourDataVectorSearchAuthenticationType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "apiKey",
+            "value": "api_key",
+            "description": "Authentication via API key."
+          },
+          {
+            "name": "accessToken",
+            "value": "access_token",
+            "description": "Authentication via access token."
+          }
+        ]
+      }
+    },
+    "OnYourDataVectorizationSource": {
+      "type": "object",
+      "description": "An abstract representation of a vectorization source for Azure OpenAI On Your Data with vector search.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/OnYourDataVectorizationSourceType",
+          "description": "The type of vectorization source to use."
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "type"
+      ]
+    },
+    "OnYourDataVectorizationSourceType": {
+      "type": "string",
+      "description": "Represents the available sources Azure OpenAI On Your Data can use to configure vectorization of data for use with\nvector search.",
+      "enum": [
+        "endpoint",
+        "deployment_name",
+        "model_id"
+      ],
+      "x-ms-enum": {
+        "name": "OnYourDataVectorizationSourceType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "endpoint",
+            "value": "endpoint",
+            "description": "Represents vectorization performed by public service calls to an Azure OpenAI embedding model."
+          },
+          {
+            "name": "deploymentName",
+            "value": "deployment_name",
+            "description": "Represents an Ada model deployment name to use. This model deployment must be in the same Azure OpenAI resource, but\nOn Your Data will use this model deployment via an internal call rather than a public one, which enables vector\nsearch even in private networks."
+          },
+          {
+            "name": "modelId",
+            "value": "model_id",
+            "description": "Represents a specific embedding model ID as defined in the search service.\nCurrently only supported by Elasticsearch®."
+          }
+        ]
+      }
+    },
+    "PineconeChatExtensionConfiguration": {
+      "type": "object",
+      "description": "A specific representation of configurable options for Pinecone when using it as an Azure OpenAI chat\nextension.",
+      "properties": {
+        "parameters": {
+          "$ref": "#/definitions/PineconeChatExtensionParameters",
+          "description": "The parameters to use when configuring Azure OpenAI chat extensions."
+        }
+      },
+      "required": [
+        "parameters"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/AzureChatExtensionConfiguration"
+        }
+      ],
+      "x-ms-discriminator-value": "pinecone"
+    },
+    "PineconeChatExtensionParameters": {
+      "type": "object",
+      "description": "Parameters for configuring Azure OpenAI Pinecone chat extensions. The supported authentication type is APIKey.",
+      "properties": {
+        "authentication": {
+          "$ref": "#/definitions/OnYourDataAuthenticationOptions",
+          "description": "The authentication method to use when accessing the defined data source.\nEach data source type supports a specific set of available authentication methods; please see the documentation of\nthe data source for supported mechanisms.\nIf not otherwise provided, On Your Data will attempt to use System Managed Identity (default credential)\nauthentication."
+        },
+        "top_n_documents": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The configured top number of documents to feature for the configured query.",
+          "x-ms-client-name": "topNDocuments"
+        },
+        "in_scope": {
+          "type": "boolean",
+          "description": "Whether queries should be restricted to use of indexed data.",
+          "x-ms-client-name": "inScope"
+        },
+        "strictness": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The configured strictness of the search relevance filtering. The higher of strictness, the higher of the precision but lower recall of the answer.",
+          "minimum": 1,
+          "maximum": 5
+        },
+        "role_information": {
+          "type": "string",
+          "description": "Give the model instructions about how it should behave and any context it should reference when generating a response. You can describe the assistant's personality and tell it how to format responses. There's a 100 token limit for it, and it counts against the overall token limit.",
+          "x-ms-client-name": "roleInformation"
+        },
+        "max_search_queries": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The max number of rewritten queries should be send to search provider for one user message. If not specified,\nthe system will decide the number of queries to send.",
+          "x-ms-client-name": "maxSearchQueries"
+        },
+        "allow_partial_result": {
+          "type": "boolean",
+          "description": "If specified as true, the system will allow partial search results to be used and the request fails if all the queries fail.\nIf not specified, or specified as false, the request will fail if any search query fails.",
+          "default": false,
+          "x-ms-client-name": "allowPartialResult"
+        },
+        "include_contexts": {
+          "type": "array",
+          "description": "The included properties of the output context. If not specified, the default value is `citations` and `intent`.",
+          "items": {
+            "$ref": "#/definitions/OnYourDataContextProperty"
+          },
+          "x-ms-client-name": "includeContexts"
+        },
+        "environment": {
+          "type": "string",
+          "description": "The environment name of Pinecone."
+        },
+        "index_name": {
+          "type": "string",
+          "description": "The name of the Pinecone database index.",
+          "x-ms-client-name": "indexName"
+        },
+        "fields_mapping": {
+          "$ref": "#/definitions/PineconeFieldMappingOptions",
+          "description": "Customized field mapping behavior to use when interacting with the search index.",
+          "x-ms-client-name": "fieldsMapping"
+        },
+        "embedding_dependency": {
+          "$ref": "#/definitions/OnYourDataVectorizationSource",
+          "description": "The embedding dependency for vector search.",
+          "x-ms-client-name": "embeddingDependency"
+        }
+      },
+      "required": [
+        "environment",
+        "index_name",
+        "fields_mapping",
+        "embedding_dependency"
+      ]
+    },
+    "PineconeFieldMappingOptions": {
+      "type": "object",
+      "description": "Optional settings to control how fields are processed when using a configured Pinecone resource.",
+      "properties": {
+        "title_field": {
+          "type": "string",
+          "description": "The name of the index field to use as a title.",
+          "x-ms-client-name": "titleField"
+        },
+        "url_field": {
+          "type": "string",
+          "description": "The name of the index field to use as a URL.",
+          "x-ms-client-name": "urlField"
+        },
+        "filepath_field": {
+          "type": "string",
+          "description": "The name of the index field to use as a filepath.",
+          "x-ms-client-name": "filepathField"
+        },
+        "content_fields": {
+          "type": "array",
+          "description": "The names of index fields that should be treated as content.",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-client-name": "contentFields"
+        },
+        "content_fields_separator": {
+          "type": "string",
+          "description": "The separator pattern that content fields should use.",
+          "x-ms-client-name": "contentFieldsSeparator"
+        }
+      },
+      "required": [
+        "content_fields"
+      ]
+    },
+    "SpeechGenerationOptions": {
+      "type": "object",
+      "description": "A representation of the request options that control the behavior of a text-to-speech operation.",
+      "properties": {
+        "input": {
+          "type": "string",
+          "description": "The text to generate audio for. The maximum length is 4096 characters.",
+          "maxLength": 4096
+        },
+        "voice": {
+          "$ref": "#/definitions/SpeechVoice",
+          "description": "The voice to use for text-to-speech."
+        },
+        "response_format": {
+          "type": "string",
+          "description": "The audio output format for the spoken text. By default, the MP3 format will be used.",
+          "default": "mp3",
+          "enum": [
+            "mp3",
+            "opus",
+            "aac",
+            "flac",
+            "wav",
+            "pcm"
+          ],
+          "x-ms-enum": {
+            "name": "SpeechGenerationResponseFormat",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "mp3",
+                "value": "mp3",
+                "description": "Use MP3 as the audio output format. MP3 is the default, general-purpose format."
+              },
+              {
+                "name": "opus",
+                "value": "opus",
+                "description": "Use Opus as the audio output format. Opus is optimized for internet streaming and low latency."
+              },
+              {
+                "name": "aac",
+                "value": "aac",
+                "description": "Use AAC as the audio output format. AAC is optimized for digital audio compression and is preferred by YouTube, Android, and iOS."
+              },
+              {
+                "name": "flac",
+                "value": "flac",
+                "description": "Use FLAC as the audio output format. FLAC is a fully lossless format optimized for maximum quality at the expense of size."
+              },
+              {
+                "name": "wav",
+                "value": "wav",
+                "description": "Use uncompressed WAV as the audio output format, suitable for low-latency applications to avoid decoding overhead."
+              },
+              {
+                "name": "pcm",
+                "value": "pcm",
+                "description": "Use uncompressed PCM as the audio output format, which is similar to WAV but contains raw samples in 24kHz (16-bit signed, low-endian), without the header."
+              }
+            ]
+          },
+          "x-ms-client-name": "responseFormat"
+        },
+        "speed": {
+          "type": "number",
+          "format": "float",
+          "description": "The speed of speech for generated audio. Values are valid in the range from 0.25 to 4.0, with 1.0 the default and higher values corresponding to faster speech.",
+          "default": 1,
+          "minimum": 0.25,
+          "maximum": 4
+        },
+        "model": {
+          "type": "string",
+          "description": "The model to use for this text-to-speech request."
+        }
+      },
+      "required": [
+        "input",
+        "voice"
+      ]
+    },
+    "SpeechVoice": {
+      "type": "string",
+      "description": "The available voices for text-to-speech.",
+      "enum": [
+        "alloy",
+        "echo",
+        "fable",
+        "onyx",
+        "nova",
+        "shimmer"
+      ],
+      "x-ms-enum": {
+        "name": "SpeechVoice",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "alloy",
+            "value": "alloy",
+            "description": "The Alloy voice."
+          },
+          {
+            "name": "echo",
+            "value": "echo",
+            "description": "The Echo voice."
+          },
+          {
+            "name": "fable",
+            "value": "fable",
+            "description": "The Fable voice."
+          },
+          {
+            "name": "onyx",
+            "value": "onyx",
+            "description": "The Onyx voice."
+          },
+          {
+            "name": "nova",
+            "value": "nova",
+            "description": "The Nova voice."
+          },
+          {
+            "name": "shimmer",
+            "value": "shimmer",
+            "description": "The Shimmer voice."
+          }
+        ]
+      }
+    },
+    "StopFinishDetails": {
+      "type": "object",
+      "description": "A structured representation of a stop reason that signifies natural termination by the model.",
+      "properties": {
+        "stop": {
+          "type": "string",
+          "description": "The token sequence that the model terminated with."
+        }
+      },
+      "required": [
+        "stop"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ChatFinishDetails"
+        }
+      ],
+      "x-ms-discriminator-value": "stop"
+    }
+  },
+  "parameters": {
+    "AudioTranscriptionOptions.file": {
+      "name": "file",
+      "in": "formData",
+      "description": "The audio data to transcribe. This must be the binary content of a file in one of the supported media formats:\n flac, mp3, mp4, mpeg, mpga, m4a, ogg, wav, webm.",
+      "required": true,
+      "type": "file",
+      "x-ms-parameter-location": "method"
+    },
+    "AudioTranscriptionOptions.filename": {
+      "name": "filename",
+      "in": "formData",
+      "description": "The optional filename or descriptive identifier to associate with with the audio data.",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "AudioTranscriptionOptions.language": {
+      "name": "language",
+      "in": "formData",
+      "description": "The primary spoken language of the audio data to be transcribed, supplied as a two-letter ISO-639-1 language code\nsuch as 'en' or 'fr'.\nProviding this known input language is optional but may improve the accuracy and/or latency of transcription.",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "AudioTranscriptionOptions.model": {
+      "name": "model",
+      "in": "formData",
+      "description": "The model to use for this transcription request.",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "AudioTranscriptionOptions.prompt": {
+      "name": "prompt",
+      "in": "formData",
+      "description": "An optional hint to guide the model's style or continue from a prior audio segment. The written language of the\nprompt should match the primary spoken language of the audio data.",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "AudioTranscriptionOptions.responseFormat": {
+      "name": "response_format",
+      "in": "formData",
+      "description": "The requested format of the transcription response data, which will influence the content and detail of the result.",
+      "required": false,
+      "type": "string",
+      "enum": [
+        "json",
+        "verbose_json",
+        "text",
+        "srt",
+        "vtt"
+      ],
+      "x-ms-enum": {
+        "name": "AudioTranscriptionFormat",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "json",
+            "value": "json",
+            "description": "Use a response body that is a JSON object containing a single 'text' field for the transcription."
+          },
+          {
+            "name": "verbose_json",
+            "value": "verbose_json",
+            "description": "Use a response body that is a JSON object containing transcription text along with timing, segments, and other\nmetadata."
+          },
+          {
+            "name": "text",
+            "value": "text",
+            "description": "Use a response body that is plain text containing the raw, unannotated transcription."
+          },
+          {
+            "name": "srt",
+            "value": "srt",
+            "description": "Use a response body that is plain text in SubRip (SRT) format that also includes timing information."
+          },
+          {
+            "name": "vtt",
+            "value": "vtt",
+            "description": "Use a response body that is plain text in Web Video Text Tracks (VTT) format that also includes timing information."
+          }
+        ]
+      },
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "responseFormat"
+    },
+    "AudioTranscriptionOptions.temperature": {
+      "name": "temperature",
+      "in": "formData",
+      "description": "The sampling temperature, between 0 and 1.\nHigher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic.\nIf set to 0, the model will use log probability to automatically increase the temperature until certain thresholds are hit.",
+      "required": false,
+      "type": "number",
+      "format": "float",
+      "x-ms-parameter-location": "method"
+    },
+    "AudioTranscriptionOptions.timestampGranularities": {
+      "name": "timestamp_granularities",
+      "in": "formData",
+      "description": "The timestamp granularities to populate for this transcription.\n`response_format` must be set `verbose_json` to use timestamp granularities.\nEither or both of these options are supported: `word`, or `segment`.\nNote: There is no additional latency for segment timestamps, but generating word timestamps incurs additional latency.",
+      "required": false,
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "word",
+          "segment"
+        ],
+        "x-ms-enum": {
+          "name": "AudioTranscriptionTimestampGranularity",
+          "modelAsString": true,
+          "values": [
+            {
+              "name": "word",
+              "value": "word",
+              "description": "Indicates that responses should include timing information about each transcribed word. Note that generating word\ntimestamp information will incur additional response latency."
+            },
+            {
+              "name": "segment",
+              "value": "segment",
+              "description": "Indicates that responses should include timing and other information about each transcribed audio segment. Audio\nsegment timestamp information does not incur any additional latency."
+            }
+          ]
+        }
+      },
+      "default": [
+        "segment"
+      ],
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "timestampGranularities"
+    },
+    "AudioTranslationOptions.file": {
+      "name": "file",
+      "in": "formData",
+      "description": "The audio data to translate. This must be the binary content of a file in one of the supported media formats:\n flac, mp3, mp4, mpeg, mpga, m4a, ogg, wav, webm.",
+      "required": true,
+      "type": "file",
+      "x-ms-parameter-location": "method"
+    },
+    "AudioTranslationOptions.filename": {
+      "name": "filename",
+      "in": "formData",
+      "description": "The optional filename or descriptive identifier to associate with with the audio data.",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "AudioTranslationOptions.model": {
+      "name": "model",
+      "in": "formData",
+      "description": "The model to use for this translation request.",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "AudioTranslationOptions.prompt": {
+      "name": "prompt",
+      "in": "formData",
+      "description": "An optional hint to guide the model's style or continue from a prior audio segment. The written language of the\nprompt should match the primary spoken language of the audio data.",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "AudioTranslationOptions.responseFormat": {
+      "name": "response_format",
+      "in": "formData",
+      "description": "The requested format of the translation response data, which will influence the content and detail of the result.",
+      "required": false,
+      "type": "string",
+      "enum": [
+        "json",
+        "verbose_json",
+        "text",
+        "srt",
+        "vtt"
+      ],
+      "x-ms-enum": {
+        "name": "AudioTranslationFormat",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "json",
+            "value": "json",
+            "description": "Use a response body that is a JSON object containing a single 'text' field for the translation."
+          },
+          {
+            "name": "verbose_json",
+            "value": "verbose_json",
+            "description": "Use a response body that is a JSON object containing translation text along with timing, segments, and other\nmetadata."
+          },
+          {
+            "name": "text",
+            "value": "text",
+            "description": "Use a response body that is plain text containing the raw, unannotated translation."
+          },
+          {
+            "name": "srt",
+            "value": "srt",
+            "description": "Use a response body that is plain text in SubRip (SRT) format that also includes timing information."
+          },
+          {
+            "name": "vtt",
+            "value": "vtt",
+            "description": "Use a response body that is plain text in Web Video Text Tracks (VTT) format that also includes timing information."
+          }
+        ]
+      },
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "responseFormat"
+    },
+    "AudioTranslationOptions.temperature": {
+      "name": "temperature",
+      "in": "formData",
+      "description": "The sampling temperature, between 0 and 1.\nHigher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic.\nIf set to 0, the model will use log probability to automatically increase the temperature until certain thresholds are hit.",
+      "required": false,
+      "type": "number",
+      "format": "float",
+      "x-ms-parameter-location": "method"
+    },
+    "Azure.Core.Foundations.ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "description": "The API version to use for this operation.",
+      "required": true,
+      "type": "string",
+      "minLength": 1,
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "apiVersion"
+    }
+  }
+}
