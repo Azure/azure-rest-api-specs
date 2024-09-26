@@ -267,6 +267,12 @@ directive:
   - suppress: R4009
     from: Microsoft.Billing/stable/2021-10-01/payment.json
     reason: systemData is not in this API version
+  - suppress: PutResponseCodes
+    from: Microsoft.Billing/preview/2024-08-01-preview/migration.json
+    reason: 201 is returned as a part of response
+  - suppress: PutRequestResponseSchemeArm
+    from: Microsoft.Billing/preview/2024-08-01-preview/migration.json
+    reason: PATCH operation is not needed
 ```
 
 ### Tag: package-2020-05
@@ -298,6 +304,7 @@ These settings apply only when `--tag=package-2024-08-preview` is specified on t
 ```yaml $(tag) == 'package-2024-08-preview'
 input-file:
   - Microsoft.Billing/preview/2024-08-01-preview/migration.json
+  - Microsoft.Billing/preview/2024-08-01-preview/operation.json
   - Microsoft.Billing/preview/2024-08-01-preview/types.json
 ```
 
