@@ -1,13 +1,13 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Speech Services API version 2024-05-15-preview",
-    "description": "Speech Services API version 2024-05-15-preview.",
+    "title": "Speech Services API version 2024-11-15",
+    "description": "Speech Services API version 2024-11-15.",
     "contact": {
       "name": "Cognitive Services - Speech Services",
       "url": "https://learn.microsoft.com/azure/cognitive-services/speech-service/support"
     },
-    "version": "2024-05-15-preview"
+    "version": "2024-11-15"
   },
   "paths": {
     "/datasets/locales": {
@@ -911,421 +911,6 @@
         "x-ms-examples": {
           "Update an endpoint": {
             "$ref": "./examples/update_endpoint.json"
-          }
-        }
-      }
-    },
-    "/endpoints/{id}/files/logs": {
-      "get": {
-        "tags": [
-          "Custom Speech endpoints:"
-        ],
-        "summary": "Gets the list of audio and transcription logs that have been stored for a given endpoint.",
-        "operationId": "Endpoints_ListLogs",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "id",
-            "description": "The identifier of the endpoint.",
-            "required": true,
-            "type": "string",
-            "format": "uuid"
-          },
-          {
-            "$ref": "#/parameters/sasValidityQueryParameter"
-          },
-          {
-            "in": "query",
-            "name": "skipToken",
-            "description": "Token to skip logs that were already retrieved in previous requests. Pagination starts from beginning when not defined.",
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/topQueryParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionQueryParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/PaginatedFiles"
-            },
-            "headers": {
-              "Retry-After": {
-                "description": "The minimum number of seconds to wait for a non terminal operation to complete.",
-                "type": "integer",
-                "format": "int32"
-              }
-            }
-          },
-          "default": {
-            "description": "An error occurred.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "itemName": "values",
-          "nextLinkName": "@nextLink"
-        },
-        "x-ms-examples": {
-          "Get all endpoint logs": {
-            "$ref": "./examples/get_endpoint_logs.json"
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "Custom Speech endpoints:"
-        ],
-        "summary": "Deletes the specified audio and transcription logs that have been stored for a given endpoint. It deletes all logs before (and including) a specific day.",
-        "description": "The deletion process is done asynchronously and can take up to one day depending on the amount of log files.",
-        "operationId": "Endpoints_DeleteLogs",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "id",
-            "description": "The identifier of the endpoint.",
-            "required": true,
-            "type": "string",
-            "format": "uuid"
-          },
-          {
-            "in": "query",
-            "name": "endDate",
-            "description": "The end date of the audio logs deletion (specific day, UTC).\r\n            Expected format: \"yyyy-mm-dd\". For instance, \"2023-03-15\" results in deleting all logs on March 15th, 2023 and before.\r\n            Deletes all existing logs when date is not specified.",
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/apiVersionQueryParameter"
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "The logs will be deleted."
-          },
-          "default": {
-            "description": "An error occurred.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Delete all endpoint logs": {
-            "$ref": "./examples/delete_endpoint_logs.json"
-          }
-        }
-      }
-    },
-    "/endpoints/{id}/files/logs/{logId}": {
-      "get": {
-        "tags": [
-          "Custom Speech endpoints:"
-        ],
-        "summary": "Gets a specific audio or transcription log for a given endpoint.",
-        "operationId": "Endpoints_GetLog",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "id",
-            "description": "The identifier of the endpoint.",
-            "required": true,
-            "type": "string",
-            "format": "uuid"
-          },
-          {
-            "in": "path",
-            "name": "logId",
-            "description": "The identifier of the log.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/sasValidityQueryParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionQueryParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/File"
-            }
-          },
-          "default": {
-            "description": "An error occurred.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get an endpoint log": {
-            "$ref": "./examples/get_endpoint_log.json"
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "Custom Speech endpoints:"
-        ],
-        "summary": "Deletes one audio or transcription log that have been stored for a given endpoint.",
-        "operationId": "Endpoints_DeleteLog",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "id",
-            "description": "The identifier of the endpoint.",
-            "required": true,
-            "type": "string",
-            "format": "uuid"
-          },
-          {
-            "in": "path",
-            "name": "logId",
-            "description": "The identifier of the log.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/apiVersionQueryParameter"
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "The log was successfully deleted."
-          },
-          "default": {
-            "description": "An error occurred.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Delete an endpoint log": {
-            "$ref": "./examples/delete_endpoint_log.json"
-          }
-        }
-      }
-    },
-    "/endpoints/base/{locale}/files/logs": {
-      "get": {
-        "tags": [
-          "Custom Speech endpoints:"
-        ],
-        "summary": "Gets the list of audio and transcription logs that have been stored when using the default base model of a given language.",
-        "operationId": "Endpoints_ListBaseModelLogs",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "locale",
-            "description": "The language used to select the default base model.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/sasValidityQueryParameter"
-          },
-          {
-            "in": "query",
-            "name": "skipToken",
-            "description": "Token to skip logs that were already retrieved in previous requests. Pagination starts from beginning when not defined.",
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/topQueryParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionQueryParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/PaginatedFiles"
-            }
-          },
-          "default": {
-            "description": "An error occurred.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "itemName": "values",
-          "nextLinkName": "@nextLink"
-        },
-        "x-ms-examples": {
-          "Get all base model logs": {
-            "$ref": "./examples/get_base_model_logs.json"
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "Custom Speech endpoints:"
-        ],
-        "summary": "Deletes the specified audio and transcription logs that have been stored when using the default base model of a given language. It deletes all logs before (and including) a specific day.",
-        "description": "Deletion process is done asynchronously and can take up to one day depending on the amount of log files.",
-        "operationId": "Endpoints_DeleteBaseModelLogs",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "locale",
-            "description": "The language used to select the default base model.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "endDate",
-            "description": "The end date of the audio logs deletion (specific day, UTC).\r\n            Expected format: \"yyyy-mm-dd\". For instance, \"2023-03-15\" results in deleting all logs on March 15th, 2023 and before.\r\n            Deletes all existing logs when date is not specified.",
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/apiVersionQueryParameter"
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "The logs will be deleted."
-          },
-          "default": {
-            "description": "An error occurred.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Delete all base model logs": {
-            "$ref": "./examples/delete_base_model_logs.json"
-          }
-        }
-      }
-    },
-    "/endpoints/base/{locale}/files/logs/{logId}": {
-      "get": {
-        "tags": [
-          "Custom Speech endpoints:"
-        ],
-        "summary": "Gets a specific audio or transcription log for the default base model in a given language.",
-        "operationId": "Endpoints_GetBaseModelLog",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "locale",
-            "description": "The language used to select the default base model.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "name": "logId",
-            "description": "The identifier of the log.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/sasValidityQueryParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionQueryParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/File"
-            }
-          },
-          "default": {
-            "description": "An error occurred.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get a base model log": {
-            "$ref": "./examples/get_base_model_log.json"
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "Custom Speech endpoints:"
-        ],
-        "summary": "Deletes one audio or transcription log that have been stored when using the default base model of a given language.",
-        "operationId": "Endpoints_DeleteBaseModelLog",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "locale",
-            "description": "The language used to select the default base model.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "name": "logId",
-            "description": "The identifier of the log.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/apiVersionQueryParameter"
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "The log was successfully deleted."
-          },
-          "default": {
-            "description": "An error occurred.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Delete a base model log": {
-            "$ref": "./examples/delete_base_model_log.json"
           }
         }
       }
@@ -2558,626 +2143,6 @@
         }
       }
     },
-    "/projects/locales": {
-      "get": {
-        "tags": [
-          "Custom Speech projects:"
-        ],
-        "summary": "Gets the list of supported locales.",
-        "operationId": "Projects_ListSupportedLocales",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/apiVersionQueryParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "type": "array",
-              "items": {
-                "type": "string"
-              }
-            }
-          },
-          "default": {
-            "description": "An error occurred.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get the supported locales": {
-            "$ref": "./examples/get_supported_project_locales.json"
-          }
-        }
-      }
-    },
-    "/projects": {
-      "get": {
-        "tags": [
-          "Custom Speech projects:"
-        ],
-        "summary": "Gets the list of projects for the authenticated subscription.",
-        "operationId": "Projects_List",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/skipQueryParameter"
-          },
-          {
-            "$ref": "#/parameters/topQueryParameter"
-          },
-          {
-            "in": "query",
-            "name": "filter",
-            "description": "A filtering expression for selecting a subset of the available projects.\r\n            - Supported properties: displayName, description, createdDateTime, locale.\r\n            - Operators:\r\n              - eq, ne are supported for all properties.\r\n              - gt, ge, lt, le are supported for createdDateTime.\r\n              - and, or, not are supported.\r\n            - Example:\r\n              filter=displayName eq 'My test'",
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/apiVersionQueryParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/PaginatedProjects"
-            }
-          },
-          "default": {
-            "description": "An error occurred.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "itemName": "values",
-          "nextLinkName": "@nextLink"
-        },
-        "x-ms-examples": {
-          "Get all projects": {
-            "$ref": "./examples/get_projects.json"
-          },
-          "Get all projects created in 2018 or 2019": {
-            "$ref": "./examples/get_projects_from_2018_and_2019.json"
-          }
-        }
-      },
-      "post": {
-        "tags": [
-          "Custom Speech projects:"
-        ],
-        "summary": "Creates a new project.",
-        "operationId": "Projects_Create",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/apiVersionQueryParameter"
-          },
-          {
-            "in": "body",
-            "name": "project",
-            "description": "The details of the project.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/Project"
-            }
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "The response contains information about the entity as payload and its location as header.",
-            "schema": {
-              "$ref": "#/definitions/Project"
-            },
-            "headers": {
-              "Location": {
-                "description": "The location of the created resource.",
-                "type": "string",
-                "format": "uri"
-              }
-            }
-          },
-          "default": {
-            "description": "An error occurred.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Create a project": {
-            "$ref": "./examples/create_project.json"
-          }
-        }
-      }
-    },
-    "/projects/{id}": {
-      "get": {
-        "tags": [
-          "Custom Speech projects:"
-        ],
-        "summary": "Gets the project identified by the given ID.",
-        "operationId": "Projects_Get",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "id",
-            "description": "The identifier of the project.",
-            "required": true,
-            "type": "string",
-            "format": "uuid"
-          },
-          {
-            "$ref": "#/parameters/apiVersionQueryParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/Project"
-            }
-          },
-          "default": {
-            "description": "An error occurred.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get a project": {
-            "$ref": "./examples/get_project.json"
-          }
-        }
-      },
-      "patch": {
-        "tags": [
-          "Custom Speech projects:"
-        ],
-        "summary": "Updates the project identified by the given ID.",
-        "operationId": "Projects_Update",
-        "consumes": [
-          "application/json",
-          "application/merge-patch+json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "id",
-            "description": "The identifier of the project.",
-            "required": true,
-            "type": "string",
-            "format": "uuid"
-          },
-          {
-            "$ref": "#/parameters/apiVersionQueryParameter"
-          },
-          {
-            "in": "body",
-            "name": "projectUpdate",
-            "description": "The updated values for the project.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ProjectUpdate"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/Project"
-            }
-          },
-          "default": {
-            "description": "An error occurred.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Update a project": {
-            "$ref": "./examples/update_project.json"
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "Custom Speech projects:"
-        ],
-        "summary": "Deletes the project identified by the given ID.",
-        "operationId": "Projects_Delete",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "id",
-            "description": "The identifier of the project.",
-            "required": true,
-            "type": "string",
-            "format": "uuid"
-          },
-          {
-            "$ref": "#/parameters/apiVersionQueryParameter"
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "The project was successfully deleted or did not exist."
-          },
-          "default": {
-            "description": "An error occurred.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Delete a project": {
-            "$ref": "./examples/delete_project.json"
-          }
-        }
-      }
-    },
-    "/projects/{id}/evaluations": {
-      "get": {
-        "tags": [
-          "Custom Speech projects:"
-        ],
-        "summary": "Gets the list of evaluations for specified project.",
-        "operationId": "Projects_ListEvaluations",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "id",
-            "description": "The identifier of the project.",
-            "required": true,
-            "type": "string",
-            "format": "uuid"
-          },
-          {
-            "$ref": "#/parameters/skipQueryParameter"
-          },
-          {
-            "$ref": "#/parameters/topQueryParameter"
-          },
-          {
-            "in": "query",
-            "name": "filter",
-            "description": "A filtering expression for selecting a subset of the available evaluations.\r\n            - Supported properties: displayName, description, createdDateTime, lastActionDateTime, status and locale.\r\n            - Operators:\r\n              - eq, ne are supported for all properties.\r\n              - gt, ge, lt, le are supported for createdDateTime and lastActionDateTime.\r\n              - and, or, not are supported.\r\n            - Example\r\n              filter=displayName eq 'My evaluation'",
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/apiVersionQueryParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/PaginatedEvaluations"
-            },
-            "headers": {
-              "Retry-After": {
-                "description": "The minimum number of seconds to wait for a non terminal operation to complete.",
-                "type": "integer",
-                "format": "int32"
-              }
-            }
-          },
-          "default": {
-            "description": "An error occurred.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "itemName": "values",
-          "nextLinkName": "@nextLink"
-        },
-        "x-ms-examples": {
-          "Get all evaluations": {
-            "$ref": "./examples/get_project_evaluations.json"
-          }
-        }
-      }
-    },
-    "/projects/{id}/datasets": {
-      "get": {
-        "tags": [
-          "Custom Speech projects:"
-        ],
-        "summary": "Gets the list of datasets for specified project.",
-        "operationId": "Projects_ListDatasets",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "id",
-            "description": "The identifier of the project.",
-            "required": true,
-            "type": "string",
-            "format": "uuid"
-          },
-          {
-            "$ref": "#/parameters/skipQueryParameter"
-          },
-          {
-            "$ref": "#/parameters/topQueryParameter"
-          },
-          {
-            "in": "query",
-            "name": "filter",
-            "description": "A filtering expression for selecting a subset of the available datasets.\r\n            - Supported properties: displayName, description, createdDateTime, lastActionDateTime, status, locale, kind.\r\n            - Operators:\r\n              - eq, ne are supported for all properties.\r\n              - gt, ge, lt, le are supported for createdDateTime and lastActionDateTime.\r\n              - and, or, not are supported.\r\n            - Example:\r\n              filter=createdDateTime gt 2022-02-01T11:00:00Z",
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/apiVersionQueryParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/PaginatedDatasets"
-            },
-            "headers": {
-              "Retry-After": {
-                "description": "The minimum number of seconds to wait for a non terminal operation to complete.",
-                "type": "integer",
-                "format": "int32"
-              }
-            }
-          },
-          "default": {
-            "description": "An error occurred.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "itemName": "values",
-          "nextLinkName": "@nextLink"
-        },
-        "x-ms-examples": {
-          "Get all datasets": {
-            "$ref": "./examples/get_project_datasets.json"
-          }
-        }
-      }
-    },
-    "/projects/{id}/endpoints": {
-      "get": {
-        "tags": [
-          "Custom Speech projects:"
-        ],
-        "summary": "Gets the list of endpoints for specified project.",
-        "operationId": "Projects_ListEndpoints",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "id",
-            "description": "The identifier of the project.",
-            "required": true,
-            "type": "string",
-            "format": "uuid"
-          },
-          {
-            "$ref": "#/parameters/skipQueryParameter"
-          },
-          {
-            "$ref": "#/parameters/topQueryParameter"
-          },
-          {
-            "in": "query",
-            "name": "filter",
-            "description": "A filtering expression for selecting a subset of the available endpoints.\r\n            - Supported properties: displayName, description, createdDateTime, lastActionDateTime, status, locale.\r\n            - Operators:\r\n              - eq, ne are supported for all properties.\r\n              - gt, ge, lt, le are supported for createdDateTime and lastActionDateTime.\r\n              - and, or, not are supported.\r\n            - Example:\r\n              filter=locale eq 'en-US'",
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/apiVersionQueryParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/PaginatedEndpoints"
-            },
-            "headers": {
-              "Retry-After": {
-                "description": "The minimum number of seconds to wait for a non terminal operation to complete.",
-                "type": "integer",
-                "format": "int32"
-              }
-            }
-          },
-          "default": {
-            "description": "An error occurred.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "itemName": "values",
-          "nextLinkName": "@nextLink"
-        },
-        "x-ms-examples": {
-          "Get all endpoints": {
-            "$ref": "./examples/get_project_endpoints.json"
-          }
-        }
-      }
-    },
-    "/projects/{id}/models": {
-      "get": {
-        "tags": [
-          "Custom Speech projects:"
-        ],
-        "summary": "Gets the list of models for specified project.",
-        "operationId": "Projects_ListModels",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "id",
-            "description": "The identifier of the project.",
-            "required": true,
-            "type": "string",
-            "format": "uuid"
-          },
-          {
-            "$ref": "#/parameters/skipQueryParameter"
-          },
-          {
-            "$ref": "#/parameters/topQueryParameter"
-          },
-          {
-            "in": "query",
-            "name": "filter",
-            "description": "A filtering expression for selecting a subset of the available models.\r\n            - Supported properties: displayName, description, createdDateTime, lastActionDateTime, status, locale.\r\n              - Operators:\r\n                - eq, ne are supported for all properties.\r\n                - gt, ge, lt, le are supported for createdDateTime and lastActionDateTime.\r\n                - and, or, not are supported.\r\n            - Example:\r\n              filter=status eq 'NotStarted' or status eq 'Running'",
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/apiVersionQueryParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/PaginatedCustomModels"
-            },
-            "headers": {
-              "Retry-After": {
-                "description": "The minimum number of seconds to wait for a non terminal operation to complete.",
-                "type": "integer",
-                "format": "int32"
-              }
-            }
-          },
-          "default": {
-            "description": "An error occurred.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "itemName": "values",
-          "nextLinkName": "@nextLink"
-        },
-        "x-ms-examples": {
-          "Get all models": {
-            "$ref": "./examples/get_project_models.json"
-          }
-        }
-      }
-    },
-    "/projects/{id}/transcriptions": {
-      "get": {
-        "tags": [
-          "Custom Speech projects:"
-        ],
-        "summary": "Gets the list of transcriptions for specified project.",
-        "operationId": "Projects_ListTranscriptions",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "id",
-            "description": "The identifier of the project.",
-            "required": true,
-            "type": "string",
-            "format": "uuid"
-          },
-          {
-            "$ref": "#/parameters/skipQueryParameter"
-          },
-          {
-            "$ref": "#/parameters/topQueryParameter"
-          },
-          {
-            "in": "query",
-            "name": "filter",
-            "description": "A filtering expression for selecting a subset of the available transcriptions.\r\n            - Supported properties: displayName, description, createdDateTime, lastActionDateTime, status, locale.\r\n            - Operators:\r\n              - eq, ne are supported for all properties.\r\n              - gt, ge, lt, le are supported for createdDateTime and lastActionDateTime.\r\n              - and, or, not are supported.\r\n            - Example:\r\n              filter=createdDateTime gt 2022-02-01T11:00:00Z",
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/apiVersionQueryParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/PaginatedTranscriptions"
-            },
-            "headers": {
-              "Retry-After": {
-                "description": "The minimum number of seconds to wait for a non terminal operation to complete.",
-                "type": "integer",
-                "format": "int32"
-              }
-            }
-          },
-          "default": {
-            "description": "An error occurred.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "itemName": "values",
-          "nextLinkName": "@nextLink"
-        },
-        "x-ms-examples": {
-          "Get all transcriptions": {
-            "$ref": "./examples/get_project_transcriptions.json"
-          }
-        }
-      }
-    },
     "/transcriptions/locales": {
       "get": {
         "tags": [
@@ -4191,13 +3156,6 @@
         "properties": {
           "$ref": "#/definitions/CustomModelProperties"
         },
-        "project": {
-          "$ref": "#/definitions/EntityReference"
-        },
-        "text": {
-          "description": "The text used to adapt this language model.",
-          "type": "string"
-        },
         "baseModel": {
           "$ref": "#/definitions/EntityReference"
         },
@@ -4283,10 +3241,6 @@
         "features": {
           "$ref": "#/definitions/CustomModelFeatures"
         },
-        "email": {
-          "description": "The email address to send email notifications to in case the operation completes.\r\nThe value will be removed after successfully sending the email.",
-          "type": "string"
-        },
         "error": {
           "$ref": "#/definitions/EntityError"
         }
@@ -4341,9 +3295,6 @@
           "description": "The locale of the contained data.",
           "minLength": 1,
           "type": "string"
-        },
-        "project": {
-          "$ref": "#/definitions/EntityReference"
         },
         "lastActionDateTime": {
           "format": "date-time",
@@ -4482,9 +3433,6 @@
       "title": "DatasetProperties",
       "type": "object",
       "properties": {
-        "textNormalizationKind": {
-          "$ref": "#/definitions/TextNormalizationKind"
-        },
         "acceptedLineCount": {
           "format": "int32",
           "description": "The number of lines accepted for this data set.",
@@ -4502,9 +3450,8 @@
           "type": "string",
           "readOnly": true
         },
-        "email": {
-          "description": "The email address to send email notifications to in case the operation completes.\r\nThe value will be removed after successfully sending the email.",
-          "type": "string"
+        "textNormalizationKind": {
+          "$ref": "#/definitions/TextNormalizationKind"
         },
         "error": {
           "$ref": "#/definitions/EntityError"
@@ -4529,9 +3476,6 @@
           "additionalProperties": {
             "type": "string"
           }
-        },
-        "project": {
-          "$ref": "#/definitions/EntityReference"
         }
       }
     },
@@ -4981,10 +3925,6 @@
           "description": "The description of the object.",
           "type": "string"
         },
-        "text": {
-          "description": "The text used to adapt a language model for this endpoint.",
-          "type": "string"
-        },
         "model": {
           "$ref": "#/definitions/EntityReference"
         },
@@ -5014,9 +3954,6 @@
           "description": "The time-stamp when the object was created.\r\nThe time stamp is encoded as ISO 8601 date and time format\r\n(\"YYYY-MM-DDThh:mm:ssZ\", see https://en.wikipedia.org/wiki/ISO_8601#Combined_date_and_time_representations).",
           "type": "string",
           "readOnly": true
-        },
-        "project": {
-          "$ref": "#/definitions/EntityReference"
         }
       }
     },
@@ -5024,45 +3961,9 @@
       "title": "EndpointLinks",
       "type": "object",
       "properties": {
-        "restInteractive": {
+        "webSocket": {
           "format": "uri",
-          "description": "The REST endpoint for short requests up to 15 seconds.",
-          "type": "string",
-          "readOnly": true
-        },
-        "restConversation": {
-          "format": "uri",
-          "description": "The REST endpoint for requests up to 60 seconds.",
-          "type": "string",
-          "readOnly": true
-        },
-        "restDictation": {
-          "format": "uri",
-          "description": "The REST endpoint for requests up to 60 seconds, supporting dictation of punctuation marks.",
-          "type": "string",
-          "readOnly": true
-        },
-        "webSocketInteractive": {
-          "format": "uri",
-          "description": "The Speech SDK endpoint for short requests up to 15 seconds with a single final result.",
-          "type": "string",
-          "readOnly": true
-        },
-        "webSocketConversation": {
-          "format": "uri",
-          "description": "The Speech SDK endpoint for long requests with multiple final results.",
-          "type": "string",
-          "readOnly": true
-        },
-        "webSocketDictation": {
-          "format": "uri",
-          "description": "The Speech SDK endpoint for long requests with multiple final results, supporting dictation of\r\npunctuation marks.",
-          "type": "string",
-          "readOnly": true
-        },
-        "logs": {
-          "format": "uri",
-          "description": "The audio and transcription logs for this endpoint.  See operation \"Endpoints_ListLogs\" for more details.",
+          "description": "The Speech SDK universal endpoint, that supports Interactive - Intended for short requests up to 15 seconds with a single final result,\r\nas well as Conversation/Dictation scenarios - Intended for long requests with multiple final results and optionally dictation of punctuation marks.",
           "type": "string",
           "readOnly": true
         }
@@ -5076,14 +3977,6 @@
         "loggingEnabled": {
           "description": "A value indicating whether content logging (audio & transcriptions) is being used for a deployment.",
           "type": "boolean"
-        },
-        "timeToLive": {
-          "description": "How long the endpoint will be kept in the system. Once the endpoint reaches the time to live\r\nafter completion (successful or failed) it will be automatically deleted. Not setting this value or setting\r\nto 0 will disable automatic deletion. The longest supported duration is 31 days.\r\nThe duration is encoded as ISO 8601 duration (\"PnYnMnDTnHnMnS\", see https://en.wikipedia.org/wiki/ISO_8601#Durations).",
-          "type": "string"
-        },
-        "email": {
-          "description": "The email address to send email notifications to in case the operation completes.\r\nThe value will be removed after successfully sending the email.",
-          "type": "string"
         },
         "error": {
           "$ref": "#/definitions/EntityError"
@@ -5124,9 +4017,6 @@
           "additionalProperties": {
             "type": "string"
           }
-        },
-        "project": {
-          "$ref": "#/definitions/EntityReference"
         }
       }
     },
@@ -5345,9 +4235,6 @@
           "description": "The locale of the contained data.",
           "minLength": 1,
           "type": "string"
-        },
-        "project": {
-          "$ref": "#/definitions/EntityReference"
         }
       }
     },
@@ -5542,10 +4429,6 @@
         "tokenErrors2": {
           "$ref": "#/definitions/TokenErrorDetails"
         },
-        "email": {
-          "description": "The email address to send email notifications to in case the operation completes.\r\nThe value will be removed after successfully sending the email.",
-          "type": "string"
-        },
         "error": {
           "$ref": "#/definitions/EntityError"
         }
@@ -5570,9 +4453,6 @@
           "additionalProperties": {
             "type": "string"
           }
-        },
-        "project": {
-          "$ref": "#/definitions/EntityReference"
         }
       }
     },
@@ -5903,9 +4783,6 @@
           "additionalProperties": {
             "type": "string"
           }
-        },
-        "project": {
-          "$ref": "#/definitions/EntityReference"
         }
       }
     },
@@ -6105,26 +4982,6 @@
         }
       }
     },
-    "PaginatedProjects": {
-      "title": "PaginatedProjects",
-      "type": "object",
-      "properties": {
-        "values": {
-          "description": "A list of entities limited by either the passed query parameters 'skip' and 'top' or their default values.\r\n            \r\nWhen iterating through a list using pagination and deleting entities in parallel, some entities will be skipped in the results.\r\nIt's recommended to build a list on the client and delete after the fetching of the complete list.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Project"
-          },
-          "readOnly": true
-        },
-        "@nextLink": {
-          "format": "uri",
-          "description": "A link to the next set of paginated results if there are more entities available; otherwise null.",
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
     "PaginatedTranscriptions": {
       "title": "PaginatedTranscriptions",
       "type": "object",
@@ -6196,110 +5053,6 @@
             "description": "Mask the profanity with * except of the first letter, e.g., f***"
           }
         ]
-      }
-    },
-    "Project": {
-      "title": "Project",
-      "required": [
-        "displayName",
-        "locale"
-      ],
-      "type": "object",
-      "properties": {
-        "links": {
-          "$ref": "#/definitions/ProjectLinks"
-        },
-        "self": {
-          "format": "uri",
-          "description": "The location of this entity.",
-          "type": "string",
-          "readOnly": true
-        },
-        "displayName": {
-          "description": "The display name of the object.",
-          "minLength": 1,
-          "type": "string"
-        },
-        "description": {
-          "description": "The description of the object.",
-          "type": "string"
-        },
-        "locale": {
-          "description": "The locale of the contained data.",
-          "minLength": 1,
-          "type": "string"
-        },
-        "customProperties": {
-          "description": "The custom properties of this entity. The maximum allowed key length is 64 characters, the maximum\r\nallowed value length is 256 characters and the count of allowed entries is 10.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "createdDateTime": {
-          "format": "date-time",
-          "description": "The time-stamp when the object was created.\r\nThe time stamp is encoded as ISO 8601 date and time format\r\n(\"YYYY-MM-DDThh:mm:ssZ\", see https://en.wikipedia.org/wiki/ISO_8601#Combined_date_and_time_representations).",
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
-    "ProjectLinks": {
-      "title": "ProjectLinks",
-      "type": "object",
-      "properties": {
-        "evaluations": {
-          "format": "uri",
-          "description": "The location to get a list of all evaluations of this project. See operation \"Projects_ListEvaluations\" for more details.",
-          "type": "string",
-          "readOnly": true
-        },
-        "datasets": {
-          "format": "uri",
-          "description": "The location to get a list of all datasets of this project. See operation \"Projects_ListDatasets\" for more details.",
-          "type": "string",
-          "readOnly": true
-        },
-        "models": {
-          "format": "uri",
-          "description": "The location to get a list of all models of this project. See operation \"Projects_ListModels\" for more details.",
-          "type": "string",
-          "readOnly": true
-        },
-        "endpoints": {
-          "format": "uri",
-          "description": "The location to get a list of all endpoints of this project. See operation \"Projects_ListEndpoints\" for more details.",
-          "type": "string",
-          "readOnly": true
-        },
-        "transcriptions": {
-          "format": "uri",
-          "description": "The location to get a list of all transcriptions of this project. See operation \"Projects_ListTranscriptions\" for more details.",
-          "type": "string",
-          "readOnly": true
-        }
-      },
-      "readOnly": true
-    },
-    "ProjectUpdate": {
-      "title": "ProjectUpdate",
-      "type": "object",
-      "properties": {
-        "displayName": {
-          "description": "The name of the object.",
-          "type": "string"
-        },
-        "description": {
-          "description": "The description of the object.",
-          "type": "string"
-        },
-        "customProperties": {
-          "description": "The custom properties of this entity. The maximum allowed key length is 64 characters, the maximum\r\nallowed value length is 256 characters and the count of allowed entries is 10.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
       }
     },
     "PunctuationMode": {
@@ -6571,9 +5324,6 @@
             "type": "string"
           }
         },
-        "project": {
-          "$ref": "#/definitions/EntityReference"
-        },
         "lastActionDateTime": {
           "format": "date-time",
           "description": "The time-stamp when the current status was entered.\r\nThe time stamp is encoded as ISO 8601 date and time format\r\n(\"YYYY-MM-DDThh:mm:ssZ\", see https://en.wikipedia.org/wiki/ISO_8601#Combined_date_and_time_representations).",
@@ -6665,10 +5415,6 @@
           "description": "How long the transcription will be kept in the system after it has completed. Once the\r\ntranscription reaches the time to live after completion (successful or failed) it will be automatically\r\ndeleted.\r\n            \r\nNote: When using BYOS (bring your own storage), the result files on the customer owned storage account\r\nwill also be deleted. Use either destinationContainerUrl to specify a separate container for result files\r\nwhich will not be deleted when the timeToLive expires, or retrieve the result files through the API and\r\nstore them as needed.\r\n            \r\nThe shortest supported duration is 6h, the longest supported duration is 31 days. 2 days (\"P2D\") is the recommended default value\r\nwhen data is consumed directly.\r\nThe duration is encoded as ISO 8601 duration (\"PnYnMnDTnHnMnS\", see https://en.wikipedia.org/wiki/ISO_8601#Durations).",
           "type": "string"
         },
-        "email": {
-          "description": "The email address to send email notifications to in case the operation completes.\r\nThe value will be removed after successfully sending the email.",
-          "type": "string"
-        },
         "error": {
           "$ref": "#/definitions/EntityError"
         },
@@ -6702,9 +5448,6 @@
           "additionalProperties": {
             "type": "string"
           }
-        },
-        "project": {
-          "$ref": "#/definitions/EntityReference"
         }
       }
     },
@@ -7136,7 +5879,7 @@
     "sasValidityQueryParameter": {
       "in": "query",
       "name": "sasValidityInSeconds",
-      "description": "The duration in seconds that an SAS url should be valid. The default duration is 12 hours. When using BYOS (https://learn.microsoft.com/en-us/azure/cognitive-services/speech-service/speech-encryption-of-data-at-rest#bring-your-own-storage-byos-for-customization-and-logging): A value of 0 means that a plain blob URI without SAS token will be generated.",
+      "description": "The duration in seconds that an SAS url should be valid. The default duration is 12 hours, a value of 0 means that a plain blob URI without SAS token will be generated.\r\n            When using BYOS (https://learn.microsoft.com/en-us/azure/cognitive-services/speech-service/speech-encryption-of-data-at-rest#bring-your-own-storage-byos-for-customization-and-logging):\r\n            no SAS url will be generated, unless a value greater than 0 is given.",
       "type": "integer",
       "format": "int32",
       "x-ms-parameter-location": "method"
@@ -7168,7 +5911,7 @@
     "https"
   ],
   "x-ms-parameterized-host": {
-    "hostTemplate": "{endpoint}/speechtotext",
+    "hostTemplate": "{endpoint}/speechtotext/",
     "useSchemePrefix": false,
     "parameters": [
       {
