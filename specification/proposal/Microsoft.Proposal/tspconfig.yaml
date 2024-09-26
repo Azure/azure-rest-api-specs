@@ -1,0 +1,19 @@
+output-dir: "{project-root}/../"
+emit:
+  - "@azure-tools/typespec-autorest"
+  - "@azure-tools/typespec-providerhub-controller"
+options:
+  "@azure-tools/typespec-autorest":
+    emitter-output-dir: "{output-dir}"
+    azure-resource-provider-folder: "resource-manager"
+    examples-dir: "{cwd}/examples"
+  "@azure-tools/typespec-providerhub-controller":
+    emitter-output-dir: "{output-dir}/generated"
+    code-kind: model
+    include-operation-controller: false
+    include-cancellation-token: true
+    include-subscription-lifecycle-controller: true
+    include-versioning-classes: true
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/resource-manager"
