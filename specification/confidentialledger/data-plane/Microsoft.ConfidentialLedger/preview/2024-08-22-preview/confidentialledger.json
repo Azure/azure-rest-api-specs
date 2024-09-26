@@ -793,6 +793,9 @@
         "parameters": [
           {
             "$ref": "common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ModuleNameParameter"
           }
         ],
         "responses": {
@@ -824,6 +827,9 @@
         "parameters": [
           {
             "$ref": "common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/RoleNameParameter"
           }
         ],
         "responses": {
@@ -1721,10 +1727,6 @@
         }
       }
     },
-    "RoleName": {
-      "description": "name of the user defined role",
-      "type": "string"
-    },
     "RoleActionDef": {
       "properties": {
         "roleActions": {
@@ -1819,6 +1821,15 @@
         "$ref": "#/definitions/Bundle"
       }
     },
+    "ModuleNameParameter": {
+      "name": "module",
+      "required": true,
+      "description": "module name of the user defined endpoint",
+      "in": "query",
+      "x-ms-parameter-location": "method",
+      "x-ms-skip-url-encoding": true,
+      "type": "string"
+    },
     "JSRuntimeOptionsParameter": {
       "name": "JSRuntimeOptions",
       "description": "JS runtime options",
@@ -1842,12 +1853,10 @@
     "RoleNameParameter": {
       "name": "roleName",
       "description": "user defined role name",
-      "in": "body",
+      "in": "query",
       "required": true,
       "x-ms-parameter-location": "method",
-      "schema": {
-        "$ref": "#/definitions/RoleName"
-      }
+      "type": "string"
     }
   }
 }
