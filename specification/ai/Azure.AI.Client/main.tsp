@@ -39,7 +39,7 @@ using Azure.Core.Traits;
   }
 )
 @versioned(Versions)
-namespace Azure.AI {
+namespace AzureAI {
   @doc("Azure AI API versions")
   enum Versions {
     @doc("Azure AI API version 2024-07-01-preview.")
