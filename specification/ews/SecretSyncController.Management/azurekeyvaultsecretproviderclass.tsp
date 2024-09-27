@@ -15,9 +15,14 @@ namespace Microsoft.SecretSyncController;
 @doc("The AzureKeyVaultSecretProviderClass resource.")
 model AzureKeyVaultSecretProviderClass
   is TrackedResource<AzureKeyVaultSecretProviderClassProperties> {
-  ...ResourceNameParameter<AzureKeyVaultSecretProviderClass>;
+  ...ResourceNameParameter<
+    AzureKeyVaultSecretProviderClass,
+    NamePattern="^[a-z0-9]([-a-z0-9]*[a-z0-9])?(\\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*$"
+  >;
   ...ExtendedLocationProperty;
 }
+
+@@maxLength(AzureKeyVaultSecretProviderClass.name, 253);
 
 @doc("The properties of the AzureKeyVaultSecretProviderClass.")
 model AzureKeyVaultSecretProviderClassProperties {
