@@ -238,17 +238,17 @@ union LocalStorageDiskType {
 
 @added(Versions.v2024_11_01)
 @doc("Gpu manufacturers supported by Azure VMs.")
-union LocalStorageDiskType {
+union GpuManufacturer {
   string,
 
   @doc("Intel GpuType")
-  HDD: "Intel",
+  Intel: "Intel",
 
   @doc("AMD GpuType")
-  SSD: "AMD",
+  AMD: "AMD",
   
   @doc("Nvidia GpuType")
-  SSD: "Nvidia",
+  Nvidia: "Nvidia"
 }
 
 @added(Versions.v2024_11_01)
@@ -259,7 +259,7 @@ model VMAttributes{
   localStorageDiskType: Array<LocalStorageDiskType>;
 
 @extension("x-ms-identifiers", [])
-  @doc("The GPU manufacturers specified as a list. gpuSupport should be set to Included or Required to use this VMAttribute. Default GPU manufacturers if not specified are "ANY" of the valid values.")
+  @doc("The GPU manufacturers specified as a list. gpuSupport should be set to Included or Required to use this VMAttribute. Default GPU manufacturers if not specified are ANY of the valid values.")
     gpuManufacturers: Array<GpuManufacturer>;
  
   @doc("The range of vCpuCount specified from Min to Max. Must be specified if VMAttributes are specified, either Min or Max is required if specified.")
