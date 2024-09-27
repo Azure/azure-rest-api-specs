@@ -217,11 +217,12 @@ union EvictionPolicy {
 @doc("While retrieving VMSizes from CRS, Min = 0 (uint.MinValue) if not specified, Max = 4294967295 (uint.MaxValue) if not specified. This allows to filter VMAttributes on all available VMSizes.")
 model VMAttributeMinMax
 {
+    #suppress "@azure-tools/typespec-azure-core/casing-style" "VMAttributeMinMax which does not follow camel casing"
     @doc("Min VMSize from CRS, Min = 0 (uint.MinValue) if not specified.")
-     min?: uint32;
+     min?: int32;
 
     @doc("Maz VMSize from CRS, Max = 4294967295 (uint.MaxValue) if not specified.")
-     max?: uint32;
+     max?: int32;
 }
 
 @added(Versions.v2024_11_01)
@@ -254,6 +255,7 @@ union GpuManufacturer {
 @added(Versions.v2024_11_01)
 @doc("VMAttributes that will be used to filter VMSizes which will be used to build Fleet.")
 model VMAttributes{
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "VMAttributes which does not follow camel casing"
   @extension("x-ms-identifiers", [])
   @doc("The local storage disk types specified as a list. If gpuSupport is Excluded, this VMAttribute can not be used.")
   localStorageDiskType: Array<LocalStorageDiskType>;
@@ -273,6 +275,7 @@ model VMAttributes{
 @doc("List of VMAttributes that will be used to filter VMSizes which will be used to build Fleet.")
 model VMAttributesList{
 @extension("x-ms-identifiers", [])
+ #suppress "@azure-tools/typespec-azure-core/casing-style" "VMAttributesList which does not follow camel casing"
   @doc("List of VMAttributes that will be used to filter VMSizes which will be used to build Fleet.")
   vmAttributes: Array<VMAttributes>
 }

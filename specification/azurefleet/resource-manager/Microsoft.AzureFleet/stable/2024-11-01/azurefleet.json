@@ -1140,6 +1140,36 @@
         }
       }
     },
+    "GpuManufacturer": {
+      "type": "string",
+      "description": "Gpu manufacturers supported by Azure VMs.",
+      "enum": [
+        "Intel",
+        "AMD",
+        "Nvidia"
+      ],
+      "x-ms-enum": {
+        "name": "GpuManufacturer",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Intel",
+            "value": "Intel",
+            "description": "Intel GpuType"
+          },
+          {
+            "name": "AMD",
+            "value": "AMD",
+            "description": "AMD GpuType"
+          },
+          {
+            "name": "Nvidia",
+            "value": "Nvidia",
+            "description": "Nvidia GpuType"
+          }
+        ]
+      }
+    },
     "IPVersion": {
       "type": "string",
       "description": "Available from Api-Version 2017-03-30 onwards, it represents whether the\nspecific ipconfiguration is IPv4 or IPv6. Default is taken as IPv4.  Possible\nvalues are: 'IPv4' and 'IPv6'.",
@@ -1375,6 +1405,30 @@
             "name": "AutomaticByPlatform",
             "value": "AutomaticByPlatform",
             "description": "The virtual machine will be automatically updated by the platform. The property provisionVMAgent must be true."
+          }
+        ]
+      }
+    },
+    "LocalStorageDiskType": {
+      "type": "string",
+      "description": "Different kind of Local storage disk types supported by Azure VMs.",
+      "enum": [
+        "HDD",
+        "SSD"
+      ],
+      "x-ms-enum": {
+        "name": "LocalStorageDiskType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "HDD",
+            "value": "HDD",
+            "description": "HDD DiskType."
+          },
+          {
+            "name": "SSD",
+            "value": "SSD",
+            "description": "SDD DiskType."
           }
         ]
       }
@@ -2187,6 +2241,75 @@
           "description": "Specifies whether vTPM should be enabled on the virtual machine. Minimum\napi-version: 2020-12-01."
         }
       }
+    },
+    "VMAttributeMinMax": {
+      "type": "object",
+      "description": "While retrieving VMSizes from CRS, Min = 0 (uint.MinValue) if not specified, Max = 4294967295 (uint.MaxValue) if not specified. This allows to filter VMAttributes on all available VMSizes.",
+      "properties": {
+        "min": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Min VMSize from CRS, Min = 0 (uint.MinValue) if not specified."
+        },
+        "max": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Maz VMSize from CRS, Max = 4294967295 (uint.MaxValue) if not specified."
+        }
+      }
+    },
+    "VMAttributes": {
+      "type": "object",
+      "description": "VMAttributes that will be used to filter VMSizes which will be used to build Fleet.",
+      "properties": {
+        "localStorageDiskType": {
+          "type": "array",
+          "description": "The local storage disk types specified as a list. If gpuSupport is Excluded, this VMAttribute can not be used.",
+          "items": {
+            "$ref": "#/definitions/LocalStorageDiskType"
+          },
+          "x-ms-identifiers": []
+        },
+        "gpuManufacturers": {
+          "type": "array",
+          "description": "The GPU manufacturers specified as a list. gpuSupport should be set to Included or Required to use this VMAttribute. Default GPU manufacturers if not specified are ANY of the valid values.",
+          "items": {
+            "$ref": "#/definitions/GpuManufacturer"
+          },
+          "x-ms-identifiers": []
+        },
+        "vCpuCount": {
+          "$ref": "#/definitions/VMAttributeMinMax",
+          "description": "The range of vCpuCount specified from Min to Max. Must be specified if VMAttributes are specified, either Min or Max is required if specified."
+        },
+        "memoryInMiB": {
+          "$ref": "#/definitions/VMAttributeMinMax",
+          "description": "The range of memory in MiB specified from Min to Max. Must be specified if VMAttributes are specified, either Min or Max is required if specified."
+        }
+      },
+      "required": [
+        "localStorageDiskType",
+        "gpuManufacturers",
+        "vCpuCount",
+        "memoryInMiB"
+      ]
+    },
+    "VMAttributesList": {
+      "type": "object",
+      "description": "List of VMAttributes that will be used to filter VMSizes which will be used to build Fleet.",
+      "properties": {
+        "vmAttributes": {
+          "type": "array",
+          "description": "List of VMAttributes that will be used to filter VMSizes which will be used to build Fleet.",
+          "items": {
+            "$ref": "#/definitions/VMAttributes"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "vmAttributes"
+      ]
     },
     "VMDiskSecurityProfile": {
       "type": "object",
