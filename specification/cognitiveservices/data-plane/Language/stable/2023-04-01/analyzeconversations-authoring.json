@@ -75,35 +75,23 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "top",
-            "in": "query",
-            "description": "The maximum number of resources to return from the collection.",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
+            "$ref": "#/parameters/Azure.Core.TopQueryParameter"
           },
           {
-            "name": "skip",
-            "in": "query",
-            "description": "An offset into the collection of the first resource to be returned.",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
+            "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
           },
           {
-            "name": "maxpagesize",
-            "in": "query",
-            "description": "The maximum number of resources to include in a single response.",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
+            "$ref": "#/parameters/Azure.Core.MaxPageSizeQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.SelectQueryParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/ConversationalAnalysisAuthoringProjectsMetadata"
+              "$ref": "#/definitions/PagedConversationalAnalysisAuthoringProjectMetadata"
             }
           },
           "default": {
@@ -117,6 +105,9 @@
           "Successful List Projects": {
             "$ref": "./examples/SuccessfulListProjects.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -131,7 +122,7 @@
           {
             "name": "projectName",
             "in": "path",
-            "description": "The name of the project to use.",
+            "description": "The new project name.",
             "required": true,
             "type": "string",
             "maxLength": 100
@@ -172,7 +163,8 @@
             "in": "path",
             "description": "The new project name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "maxLength": 100
           },
           {
             "name": "body",
@@ -220,7 +212,7 @@
           {
             "name": "projectName",
             "in": "path",
-            "description": "The name of the project to use.",
+            "description": "The new project name.",
             "required": true,
             "type": "string",
             "maxLength": 100
@@ -229,6 +221,28 @@
         "responses": {
           "202": {
             "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "schema": {
+              "type": "object",
+              "description": "Provides status details for long running operations.",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "description": "The unique ID of the operation."
+                },
+                "status": {
+                  "$ref": "#/definitions/Azure.Core.Foundations.OperationState",
+                  "description": "The status of the operation"
+                },
+                "error": {
+                  "$ref": "#/definitions/Azure.Core.Foundations.Error",
+                  "description": "Error object that describes the error when status is \"Failed\"."
+                }
+              },
+              "required": [
+                "id",
+                "status"
+              ]
+            },
             "headers": {
               "Operation-Location": {
                 "type": "string",
@@ -1753,6 +1767,96 @@
     }
   },
   "definitions": {
+    "Azure.Core.Foundations.Error": {
+      "type": "object",
+      "description": "The error object.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "One of a server-defined set of error codes."
+        },
+        "message": {
+          "type": "string",
+          "description": "A human-readable representation of the error."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the error."
+        },
+        "details": {
+          "type": "array",
+          "description": "An array of details about specific errors that led to this reported error.",
+          "items": {
+            "$ref": "#/definitions/Azure.Core.Foundations.Error"
+          },
+          "x-ms-identifiers": []
+        },
+        "innererror": {
+          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
+          "description": "An object containing more specific information than the current object about the error."
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
+    "Azure.Core.Foundations.InnerError": {
+      "type": "object",
+      "description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "One of a server-defined set of error codes."
+        },
+        "innererror": {
+          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
+          "description": "Inner error."
+        }
+      }
+    },
+    "Azure.Core.Foundations.OperationState": {
+      "type": "string",
+      "description": "Enum describing allowed operation states.",
+      "enum": [
+        "NotStarted",
+        "Running",
+        "Succeeded",
+        "Failed",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "OperationState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NotStarted",
+            "value": "NotStarted",
+            "description": "The operation has not started."
+          },
+          {
+            "name": "Running",
+            "value": "Running",
+            "description": "The operation is in progress."
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "The operation has completed successfully."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "The operation has failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "The operation has been canceled by the user."
+          }
+        ]
+      }
+    },
     "Azure.Core.uuid": {
       "type": "string",
       "format": "uuid",
@@ -3153,6 +3257,7 @@
         "projectName": {
           "type": "string",
           "description": "The new project name.",
+          "maxLength": 100,
           "x-ms-mutability": [
             "read",
             "create"
@@ -3260,27 +3365,6 @@
           "description": "The list of trained models.",
           "items": {
             "$ref": "#/definitions/ConversationalAnalysisAuthoringProjectTrainedModel"
-          },
-          "x-ms-identifiers": []
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "The next page link."
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
-    "ConversationalAnalysisAuthoringProjectsMetadata": {
-      "type": "object",
-      "description": "Represents a list of retrieved projects' metadata.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The list of projects.",
-          "items": {
-            "$ref": "#/definitions/ConversationalAnalysisAuthoringProjectMetadata"
           },
           "x-ms-identifiers": []
         },
@@ -3959,6 +4043,28 @@
         "message"
       ]
     },
+    "PagedConversationalAnalysisAuthoringProjectMetadata": {
+      "type": "object",
+      "description": "Paged collection of ConversationalAnalysisAuthoringProjectMetadata items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ConversationalAnalysisAuthoringProjectMetadata items on this page",
+          "items": {
+            "$ref": "#/definitions/ConversationalAnalysisAuthoringProjectMetadata"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
     "Warning": {
       "type": "object",
       "description": "Represents a warning that was encountered while executing the request.",
@@ -3988,6 +4094,46 @@
       "minLength": 1,
       "x-ms-parameter-location": "method",
       "x-ms-client-name": "apiVersion"
+    },
+    "Azure.Core.MaxPageSizeQueryParameter": {
+      "name": "maxpagesize",
+      "in": "query",
+      "description": "The maximum number of result items per page.",
+      "required": false,
+      "type": "integer",
+      "format": "int32",
+      "x-ms-parameter-location": "method"
+    },
+    "Azure.Core.SelectQueryParameter": {
+      "name": "select",
+      "in": "query",
+      "description": "Select the specified fields to be included in the response.",
+      "required": false,
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "collectionFormat": "multi",
+      "x-ms-parameter-location": "method"
+    },
+    "Azure.Core.SkipQueryParameter": {
+      "name": "skip",
+      "in": "query",
+      "description": "The number of result items to skip.",
+      "required": false,
+      "type": "integer",
+      "format": "int32",
+      "default": 0,
+      "x-ms-parameter-location": "method"
+    },
+    "Azure.Core.TopQueryParameter": {
+      "name": "top",
+      "in": "query",
+      "description": "The number of result items to return.",
+      "required": false,
+      "type": "integer",
+      "format": "int32",
+      "x-ms-parameter-location": "method"
     }
   }
 }

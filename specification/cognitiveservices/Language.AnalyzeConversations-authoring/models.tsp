@@ -277,6 +277,7 @@ model ConversationalAnalysisAuthoringProjectMetadata {
    */
   @key("projectName")
   @visibility("create", "read")
+  @maxLength(100)
   projectName: string;
 
   /**

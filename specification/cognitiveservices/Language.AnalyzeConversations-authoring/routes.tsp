@@ -14,63 +14,33 @@ using TypeSpec.Versioning;
 
 namespace Language.Authoring;
 
+
+alias ServiceTraits = NoRepeatableRequests &
+  NoConditionalRequests &
+  NoClientRequestId;
+
+alias languageOperations = ResourceOperations<ServiceTraits, ErrorResponse>;
+
+
 interface ConversationalAnalysisAuthoring {
+
   /**
    * Lists the existing projects.
    */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  @route("/authoring/analyze-conversations/projects")
-  @get
-  listProjects is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * The maximum number of resources to return from the collection.
-       */
-      @query("top")
-      top?: int32;
-
-      /**
-       * An offset into the collection of the first resource to be returned.
-       */
-      @query("skip")
-      skip?: int32;
-
-      /**
-       * The maximum number of resources to include in a single response.
-       */
-      @query("maxpagesize")
-      maxpagesize?: int32;
-    },
-    ConversationalAnalysisAuthoringProjectsMetadata,
-    {},
-    ErrorResponse
+  listProjects is languageOperations.ResourceList<
+    ConversationalAnalysisAuthoringProjectMetadata,
+    ListQueryParametersTrait<StandardListQueryParameters & SelectQueryParameter>
   >;
 
   /**
    * Gets the details of a project.
    */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  @route("/authoring/analyze-conversations/projects/{projectName}")
-  @get
-  getProject is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * The name of the project to use.
-       */
-      @maxLength(100)
-      @path
-      projectName: string;
-    },
-    ConversationalAnalysisAuthoringProjectMetadata,
-    {},
-    ErrorResponse
-  >;
+  getProject is languageOperations.ResourceRead<ConversationalAnalysisAuthoringProjectMetadata>;
 
   /**
    * Creates a new project or updates an existing one.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Need to rename the body"
-  //@pollingOperation(Widgets.getWidgetOperationStatus)
   @createsOrUpdatesResource(ConversationalAnalysisAuthoringProjectMetadata)
   @parameterVisibility
   @patch
@@ -92,78 +62,30 @@ interface ConversationalAnalysisAuthoring {
   /**
    * Deletes a project.
    */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  @route("/authoring/analyze-conversations/projects/{projectName}")
-  @delete
   @pollingOperation(ConversationalAnalysisAuthoring.getProjectDeletionStatus)
-  deleteProject is Foundations.LongRunningOperation<
-    {
-      /**
-       * The name of the project to use.
-       */
-      @maxLength(100)
-      @path
-      projectName: string;
-    },
-    AcceptedResponse,
-    {},
-    ErrorResponse
-  >;
+  deleteProject is languageOperations.LongRunningResourceDelete<ConversationalAnalysisAuthoringProjectMetadata>;
 
   /**
    * Generates a copy project operation authorization to the current target Azure
    * resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  @route("/authoring/analyze-conversations/projects/{projectName}/:authorize-copy")
+  #suppress "@azure-tools/typespec-azure-core/casing-style"
   @post
   @added(Versions.v2023_04_15_preview)
-  copyProjectAuthorization is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * The name of the project to use.
-       */
-      @maxLength(100)
-      @path
-      projectName: string;
-
-      /**
-       * The copy project authorization info.
-       */
-      @body
-      body: ConversationalAnalysisAuthoringCopyAuthorizationOptions;
-    },
-    ConversationalAnalysisAuthoringCopyProjectOptions,
-    {},
-    ErrorResponse
-  >;
+  @actionSeparator("/:")
+  `authorize-copy` is languageOperations.ResourceAction<ConversationalAnalysisAuthoringProjectMetadata,
+  ConversationalAnalysisAuthoringCopyAuthorizationOptions,ConversationalAnalysisAuthoringCopyProjectOptions>;
 
   /**
    * Copies an existing project to another Azure resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  @route("/authoring/analyze-conversations/projects/{projectName}/:copy")
   @post
   @pollingOperation(ConversationalAnalysisAuthoring.getCopyProjectStatus)
   @added(Versions.v2023_04_15_preview)
-  copyProject is Foundations.LongRunningOperation<
-    {
-      /**
-       * The name of the project to use.
-       */
-      @maxLength(100)
-      @path
-      projectName: string;
-
-      /**
-       * The copy project info.
-       */
-      @body
-      body: ConversationalAnalysisAuthoringCopyProjectOptions;
-    },
-    AcceptedResponse,
-    {},
-    ErrorResponse
+  copy is languageOperations.LongRunningResourceAction<
+    ConversationalAnalysisAuthoringProjectMetadata,
+    ConversationalAnalysisAuthoringCopyProjectOptions,
+   ConversationalAnalysisAuthoringCopyProjectOptions & RequestIdResponseHeader
   >;
 
   /**
