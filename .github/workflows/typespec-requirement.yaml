@@ -1,16 +1,22 @@
 name: TypeSpec Requirement
 
-on: pull_request
+on: pull_request_target
 
 jobs:
-  TypeSpec-Requirement:
+  typespec-requirement:
     name: TypeSpec Requirement
     strategy:
       fail-fast: false
       matrix:
         spec-type: [data-plane, resource-manager]
 
+    permissions:
+      contents: read
+
     runs-on: ubuntu-latest
+
+    outputs:
+      spec-lifecycle: ${{ steps.tsr-ps1.outputs.spec-lifecycle }}
 
     steps:
       - uses: actions/checkout@v4
@@ -33,4 +39,29 @@ jobs:
             -BaseCommitish HEAD^ `
             -TargetCommitish HEAD `
             -SpecType ${{ matrix.spec-type }}
+        id: tsr-ps1
         shell: pwsh
+
+  add-label:
+    name: Add Label "brownfield"
+
+    needs: typespec-requirement
+
+    if: ${{ success() && needs.typespec-requirement.outputs.spec-lifecycle == 'brownfield'}}
+
+    permissions:
+      pull-requests: write
+    
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Add label "brownfield"
+      uses: actions/github-script@v7
+      with:
+        script: |
+          await github.rest.issues.addLabels({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            issue_number: context.payload.pull_request.number,
+            labels: ["brownfield"],
+          });
