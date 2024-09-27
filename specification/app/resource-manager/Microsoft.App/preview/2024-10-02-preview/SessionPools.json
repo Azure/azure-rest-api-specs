@@ -641,32 +641,42 @@
             },
             "managedIdentitySettings": {
               "description": "Optional settings for a Managed Identity that is assigned to the Session pool.",
-              "type": "object",
-              "required": [
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ManagedIdentitySetting"
+              },
+              "x-ms-identifiers": [
                 "identity"
-              ],
-              "properties": {
-                "identity": {
-                  "description": "The resource ID of a user-assigned managed identity that is assigned to the Session pool, or 'system' for system-assigned identity.",
-                  "type": "string"
-                },
-                "lifecycle": {
-                  "description": "Use to select the lifecycle stages of a Session pool during which the Managed Identity should be available.",
-                  "enum": [
-                    "None",
-                    "Main"
-                  ],
-                  "type": "string",
-                  "default": "All",
-                  "x-ms-enum": {
-                    "name": "IdentitySettingsLifeCycle",
-                    "modelAsString": true
-                  }
-                }
-              }
+              ]
             }
           },
           "x-ms-client-flatten": true
+        }
+      }
+    },
+    "ManagedIdentitySetting": {
+      "description": "Optional settings for a Managed Identity that is assigned to the Session pool.",
+      "type": "object",
+      "required": [
+        "identity"
+      ],
+      "properties": {
+        "identity": {
+          "description": "The resource ID of a user-assigned managed identity that is assigned to the Session Pool, or 'system' for system-assigned identity.",
+          "type": "string"
+        },
+        "lifecycle": {
+          "description": "Use to select the lifecycle stages of a Session Pool during which the Managed Identity should be available.",
+          "enum": [
+            "None",
+            "Main"
+          ],
+          "type": "string",
+          "default": "None",
+          "x-ms-enum": {
+            "name": "IdentitySettingsLifeCycle",
+            "modelAsString": true
+          }
         }
       }
     },
