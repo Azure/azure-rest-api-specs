@@ -2443,92 +2443,20 @@
         }
       }
     },
-    "TagRule": {
-      "description": "The definition of a filtering tag. Filtering tags are used for capturing resources and include/exclude them from being monitored.",
+    "AgentRules": {
+      "description": "Set of rules for manging agents for the Monitor resource.",
       "type": "object",
       "properties": {
-        "name": {
-          "description": "The name (also known as the key) of the tag.",
-          "type": "string"
-        },
-        "value": {
-          "description": "The value of the tag.",
-          "type": "string"
-        }
-      }
-    },
-    "MonitoringType": {
-      "description": "The type of monitoring to be enabled. Allowed values: logs, metrics and agents.",
-      "enum": [
-        "Agents"
-      ],
-      "type": "string",
-      "x-ms-enum": {
-        "modelAsString": true,
-        "name": "MonitoringType"
-      }
-    },
-    "AzureResourceType": {
-      "description": "The resource types to be monitored. Currently supported: virtual machines.",
-      "enum": [
-        "virtualMachines"
-      ],
-      "type": "string",
-      "x-ms-enum": {
-        "modelAsString": true,
-        "name": "AzureResourceType"
-      }
-    },
-    "MonitoringTags": {
-      "description": "Tag rules for based on resource types for the monitor resource.",
-      "type": "object",
-      "properties": {
-        "monitoringType": {
-          "description": "Logs, metrics or agent monitoring",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/MonitoringType"
-          }
-        },
-        "azureResourceType": {
-          "description": "List of resource types to be used for monitoring with defined filtering tags. If empty, all resources will be captured.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/AzureResourceType"
-          }
-        },
-        "filteringTags": {
-          "description": "List of filtering tags to be used for installing agents. If empty, all resources will be captured.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/TagRule"
-          }
-        }
-      }
-    },
-    "TagRulesSet": {
-      "description": "Set of rules for installing agents for the monitor resource.",
-      "type": "object",
-      "properties": {
-        "enableAgents": {
-          "description": "Flag specifying if agent be installed on Azure resource for the monitor resource.",
+        "enableAgentMonitoring": {
+          "description": "Flag specifying if agent monitoring should be enabled for the Monitor resource.",
           "type": "boolean"
         },
-        "includeRuleSet": {
-          "description": "List of filtering tags to be included for agent monitoring based on resource types provided.",
+        "filteringTags": {
+          "description": "List of filtering tags to be used for capturing metrics. If empty, all resources will be captured. If only Exclude action is specified, the rules will apply to the list of all available resources. If Include actions are specified, the rules will only include resources with the associated tags.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/MonitoringTags"
-          },
-          "x-ms-identifiers": []
-        },
-        "excludeRuleSet": {
-          "description": "List of filtering tags to be excluded for agent monitoring based on resource types provided.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/MonitoringTags"
-          },
-          "x-ms-identifiers": []
+            "$ref": "#/definitions/FilteringTag"
+          }
         }
       }
     },
@@ -2545,6 +2473,9 @@
         "metricRules": {
           "$ref": "#/definitions/MetricRules"
         },
+        "agentRules": {
+          "$ref": "#/definitions/AgentRules"
+        },
         "automuting": {
           "description": "Configuration to enable/disable auto-muting flag",
           "type": "boolean"
@@ -2552,9 +2483,6 @@
         "customMetrics": {
           "description": "Configuration to enable/disable custom metrics. If enabled, custom metrics from app insights will be sent.",
           "type": "boolean"
-        },
-        "tagRulesSet": {
-          "$ref": "#/definitions/TagRulesSet"
         }
       }
     },

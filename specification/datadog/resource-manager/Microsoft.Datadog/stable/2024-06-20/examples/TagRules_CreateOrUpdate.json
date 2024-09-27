@@ -27,43 +27,23 @@
         "metricRules": {
           "filteringTags": []
         },
-        "automuting": true,
-        "customMetrics": false,
-        "tagRulesSet": {
-          "enableAgents": true,
-          "includeRuleSet": [
+        "agentRules": {
+          "enableAgentMonitoring": true,
+          "filteringTags": [
             {
-              "monitoringType": [
-                "agent"
-              ],
-              "azureResourceType": [
-                "virtualMachines"
-              ],
-              "filteringTags": [
-                {
-                  "name": "Environment",
-                  "value": "Prod"
-                }
-              ]
-            }
-          ],
-          "excludeRuleSet": [
+              "name": "Environment",
+              "value": "Prod",
+              "action": "Include"
+            },
             {
-              "monitoringType": [
-                "agent"
-              ],
-              "azureResourceType": [
-                "virtualMachines"
-              ],
-              "filteringTags": [
-                {
-                  "name": "Environment",
-                  "value": "Non-prod"
-                }
-              ]
+              "name": "Environment",
+              "value": "Dev",
+              "action": "Exclude"
             }
           ]
-        }
+        },
+        "automuting": true,
+        "customMetrics": false
       }
     }
   },
@@ -94,43 +74,23 @@
           "metricRules": {
             "filteringTags": []
           },
-          "automuting": true,
-          "customMetrics": false,
-          "tagRulesSet": {
-            "enableAgents": true,
-            "includeRuleSet": [
+          "agentRules": {
+            "enableAgentMonitoring": true,
+            "filteringTags": [
               {
-                "monitoringType": [
-                  "agent"
-                ],
-                "azureResourceType": [
-                  "virtualMachines"
-                ],
-                "filteringTags": [
-                  {
-                    "name": "Environment",
-                    "value": "Prod"
-                  }
-                ]
-              }
-            ],
-            "excludeRuleSet": [
+                "name": "Environment",
+                "value": "Prod",
+                "action": "Include"
+              },
               {
-                "monitoringType": [
-                  "agent"
-                ],
-                "azureResourceType": [
-                  "virtualMachines"
-                ],
-                "filteringTags": [
-                  {
-                    "name": "Environment",
-                    "value": "Non-prod"
-                  }
-                ]
+                "name": "Environment",
+                "value": "Dev",
+                "action": "Exclude"
               }
             ]
-          }
+          },
+          "automuting": true,
+          "customMetrics": false
         }
       }
     }
