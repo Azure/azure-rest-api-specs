@@ -22,7 +22,7 @@
           "MaintenanceConfigurations"
         ],
         "operationId": "MaintenanceConfigurations_ListByManagedEnvironmentResource",
-        "description": "Gets all maintenance configurations in the specified Managed Environment (there is only one).",
+        "description": "Gets all maintenance configurations in the specified Managed Environment.",
         "x-ms-examples": {
           "ManagedEnvironmentMaintenanceConfigurationsList": {
             "$ref": "./examples/ManagedEnvironment_MaintenanceConfigurations_List.json"
@@ -50,13 +50,7 @@
           "200": {
             "description": "Successfully got the current maintenance configurations",
             "schema": {
-              "$ref": "#/definitions/MaintenanceConfigurationScheduleListResult"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/MaintenanceConfigurationCollection"
             }
           }
         },
@@ -104,7 +98,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ScheduleEntries"
+              "$ref": "#/definitions/ManagedEnvironmentScheduleList"
             },
             "description": "Parameters to set the maintenance configuration for ManagedEnvironment ."
           },
@@ -116,13 +110,13 @@
           "200": {
             "description": "The maintenance configuration was successfully updated.",
             "schema": {
-              "$ref": "#/definitions/ScheduleEntry"
+              "$ref": "#/definitions/ManagedEnvironmentScheduleList"
             }
           },
           "201": {
             "description": "The maintenance configuration was successfully created.",
             "schema": {
-              "$ref": "#/definitions/ScheduleEntry"
+              "$ref": "#/definitions/ManagedEnvironmentScheduleList"
             }
           },
           "default": {
@@ -226,7 +220,7 @@
           "200": {
             "description": "Response of get maintenance configurations.",
             "schema": {
-              "$ref": "#/definitions/ScheduleEntries"
+              "$ref": "#/definitions/ManagedEnvironmentScheduleList"
             }
           },
           "default": {
@@ -240,6 +234,41 @@
     }
   },
   "definitions": {
+    "ManagedEnvironmentSchedule": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ScheduleEntries",
+          "description": "List of maintenance schedules for a Managed Environment."
+        }
+      },
+      "required": [
+        "properties"
+      ],
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "description": "Response to put/get maintenance schedules for Managed Environment."
+    },
+    "ManagedEnvironmentScheduleList": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ManagedEnvironmentSchedule"
+          },
+          "description": "Results of the list patch schedules operation."
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Link for next page of results."
+        }
+      },
+      "description": "The response of list maintenance schedules Managed Environment operation."
+    },
     "ScheduleEntry": {
       "properties": {
         "dayOfWeek": {
@@ -318,14 +347,14 @@
       ],
       "description": "Response to put/get maintenance schedules for managed environment."
     },
-    "MaintenanceConfigurationScheduleListResult": {
+    "MaintenanceConfigurationScheduleList": {
       "properties": {
         "value": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/MaintenanceConfigurationSchedule"
           },
-          "description": "Results of the list maintenance schedules operation."
+          "description": "Results of the list maintenance schedules."
         },
         "nextLink": {
           "type": "string",
@@ -333,7 +362,44 @@
           "description": "Link for next page of results."
         }
       },
-      "description": "The response of list maintenance schedules Redis operation."
+      "description": "The response of list maintenance schedules."
+    },
+    "MaintenanceConfigurationResource": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/MaintenanceConfigurationScheduleList",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "description": "Information about the Maintenance Configuration resource.",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "MaintenanceConfigurationCollection": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MaintenanceConfigurationResource"
+          },
+          "description": "Results of the list maintenance configuration resources."
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Link for next page of results."
+        }
+      },
+      "description": "The response of list maintenance configuration resources."
     }
   },
   "securityDefinitions": {
