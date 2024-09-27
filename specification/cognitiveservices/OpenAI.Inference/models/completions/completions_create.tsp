@@ -142,7 +142,7 @@ model CompletionsOptions {
 
   /**
    * If specified, our system will make a best effort to sample deterministically, such that repeated requests with the same `seed` and parameters should return the same result.
-   * 
+   *
    * Determinism is not guaranteed, and you should refer to the `system_fingerprint` response parameter to monitor changes in the backend.
    */
   @added(ServiceApiVersions.v2024_08_01_Preview)
@@ -188,7 +188,7 @@ model Completions {
 
   /**
    * This fingerprint represents the backend configuration that the model runs with.
-   * 
+   *
    * Can be used in conjunction with the `seed` request parameter to understand when backend changes have been made that might impact determinism.
    */
   @encodedName("application/json", "system_fingerprint")

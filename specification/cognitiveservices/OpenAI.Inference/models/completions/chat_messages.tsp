@@ -147,10 +147,7 @@ model ChatRequestAssistantMessage extends ChatRequestMessage {
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "explicitly nullable in mirrored API"
   #suppress "@azure-tools/typespec-autorest/union-unsupported" "OpenAPI v2 support deferred"
   @doc("The content of the message.")
-  @typeChangedFrom(
-    ServiceApiVersions.v2024_08_01_Preview,
-    string | null
-  )
+  @typeChangedFrom(ServiceApiVersions.v2024_08_01_Preview, string | null)
   content:
     | string
     | ChatMessageTextContentItem[]
@@ -176,10 +173,10 @@ model ChatRequestAssistantMessage extends ChatRequestMessage {
     """)
   functionCall?: FunctionCall;
 
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "explicitly nullable in mirrored API"
   /**
    * The refusal message by the assistant.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "explicitly nullable in mirrored API"
   @added(ServiceApiVersions.v2024_08_01_Preview)
   refusal?: string | null;
 }
