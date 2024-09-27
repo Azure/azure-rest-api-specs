@@ -11,4 +11,4 @@ using Azure.Core;
 using Azure.Core.Traits;
 using Azure.Core.Foundations;
 
-namespace Azure.AI.Client.Agents;
+namespace AzureAI.Agents;
