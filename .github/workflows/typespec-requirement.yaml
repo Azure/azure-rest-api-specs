@@ -49,10 +49,9 @@ jobs:
     needs: typespec-requirement
 
     if: |
-      ${{ success() &&
-          (needs.typespec-requirement.outputs.spec-lifecycle-data-plane == 'brownfield' ||
-           needs.typespec-requirement.outputs.spec-lifecycle-resource-manager == 'brownfield')
-      }}
+      success() &&
+      (needs.typespec-requirement.outputs.spec-lifecycle-data-plane == 'brownfield' ||
+       needs.typespec-requirement.outputs.spec-lifecycle-resource-manager == 'brownfield')
 
     permissions:
       pull-requests: write
