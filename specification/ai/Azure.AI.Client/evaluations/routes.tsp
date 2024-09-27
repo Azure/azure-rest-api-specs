@@ -37,7 +37,7 @@ interface Evaluations {
     {
       @doc("Properties of Evaluation.")
       @body
-      body: Evaluation;
+      evaluation: Evaluation;
     },
     ResourceCreatedResponse<Evaluation>
   >;
