@@ -519,8 +519,7 @@
         }
       },
       "required": [
-        "networkManagerScopes",
-        "networkManagerScopeAccesses"
+        "networkManagerScopes"
       ],
       "description": "Properties of Managed Network"
     },
@@ -713,6 +712,7 @@
       "in": "path",
       "required": true,
       "type": "string",
+      "pattern": "^[a-zA-Z0-9-]*$",
       "description": "The name of the network manager.",
       "x-ms-parameter-location": "method"
     },
@@ -753,4 +753,3 @@
     }
   }
 }
-

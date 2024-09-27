@@ -48,10 +48,10 @@
             "$ref": "./network.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "./networkManager.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/NetworkManagerNameParameter"
+            "$ref": "./networkManager.json#/parameters/NetworkManagerNameParameter"
           },
           {
             "$ref": "#/parameters/ListTopParameter"
@@ -70,7 +70,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "./network.json#/definitions/CloudError"
+              "$ref": "./network.json#/definitions/CommonErrorResponse"
             }
           }
         },
@@ -93,10 +93,10 @@
           "$ref": "./network.json#/parameters/SubscriptionIdParameter"
         },
         {
-          "$ref": "#/parameters/ResourceGroupNameParameter"
+          "$ref": "./networkManager.json#/parameters/ResourceGroupNameParameter"
         },
         {
-          "$ref": "#/parameters/NetworkManagerNameParameter"
+          "$ref": "./networkManager.json#/parameters/NetworkManagerNameParameter"
         },
         {
           "$ref": "#/parameters/SecurityConfigurationParameter"
@@ -118,7 +118,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "./network.json#/definitions/CloudError"
+              "$ref": "./network.json#/definitions/CommonErrorResponse"
             }
           }
         },
@@ -161,13 +161,16 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "./network.json#/definitions/CloudError"
+              "$ref": "./network.json#/definitions/CommonErrorResponse"
             }
           }
         },
         "x-ms-examples": {
           "Create network manager security admin configuration": {
             "$ref": "./examples/NetworkManagerSecurityAdminConfigurationPut.json"
+          },
+          "Create manual-mode security admin configuration": {
+            "$ref": "./examples/NetworkManagerSecurityAdminConfigurationPut_ManualAggregation.json"
           }
         }
       },
@@ -201,7 +204,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "./network.json#/definitions/CloudError"
+              "$ref": "./network.json#/definitions/CommonErrorResponse"
             }
           }
         },
@@ -231,10 +234,10 @@
             "$ref": "./network.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "./networkManager.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/NetworkManagerNameParameter"
+            "$ref": "./networkManager.json#/parameters/NetworkManagerNameParameter"
           },
           {
             "$ref": "#/parameters/SecurityConfigurationParameter"
@@ -256,7 +259,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "./network.json#/definitions/CloudError"
+              "$ref": "./network.json#/definitions/CommonErrorResponse"
             }
           }
         },
@@ -279,10 +282,10 @@
           "$ref": "./network.json#/parameters/SubscriptionIdParameter"
         },
         {
-          "$ref": "#/parameters/ResourceGroupNameParameter"
+          "$ref": "./networkManager.json#/parameters/ResourceGroupNameParameter"
         },
         {
-          "$ref": "#/parameters/NetworkManagerNameParameter"
+          "$ref": "./networkManager.json#/parameters/NetworkManagerNameParameter"
         },
         {
           "$ref": "#/parameters/SecurityConfigurationParameter"
@@ -307,7 +310,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "./network.json#/definitions/CloudError"
+              "$ref": "./network.json#/definitions/CommonErrorResponse"
             }
           }
         },
@@ -350,7 +353,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "./network.json#/definitions/CloudError"
+              "$ref": "./network.json#/definitions/CommonErrorResponse"
             }
           }
         },
@@ -390,7 +393,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "./network.json#/definitions/CloudError"
+              "$ref": "./network.json#/definitions/CommonErrorResponse"
             }
           }
         },
@@ -414,10 +417,10 @@
           "$ref": "./network.json#/parameters/SubscriptionIdParameter"
         },
         {
-          "$ref": "#/parameters/ResourceGroupNameParameter"
+          "$ref": "./networkManager.json#/parameters/ResourceGroupNameParameter"
         },
         {
-          "$ref": "#/parameters/NetworkManagerNameParameter"
+          "$ref": "./networkManager.json#/parameters/NetworkManagerNameParameter"
         },
         {
           "$ref": "#/parameters/SecurityConfigurationParameter"
@@ -448,7 +451,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "./network.json#/definitions/CloudError"
+              "$ref": "./network.json#/definitions/CommonErrorResponse"
             }
           }
         },
@@ -471,10 +474,10 @@
           "$ref": "./network.json#/parameters/SubscriptionIdParameter"
         },
         {
-          "$ref": "#/parameters/ResourceGroupNameParameter"
+          "$ref": "./networkManager.json#/parameters/ResourceGroupNameParameter"
         },
         {
-          "$ref": "#/parameters/NetworkManagerNameParameter"
+          "$ref": "./networkManager.json#/parameters/NetworkManagerNameParameter"
         },
         {
           "$ref": "#/parameters/SecurityConfigurationParameter"
@@ -502,7 +505,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "./network.json#/definitions/CloudError"
+              "$ref": "./network.json#/definitions/CommonErrorResponse"
             }
           }
         },
@@ -548,7 +551,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "./network.json#/definitions/CloudError"
+              "$ref": "./network.json#/definitions/CommonErrorResponse"
             }
           }
         },
@@ -556,8 +559,8 @@
           "Create an admin rule": {
             "$ref": "./examples/NetworkManagerAdminRulePut.json"
           },
-          "Create a default admin rule": {
-            "$ref": "./examples/NetworkManagerDefaultAdminRulePut.json"
+          "Create a admin rule with network group as source or destination": {
+            "$ref": "./examples/NetworkManagerAdminRulePut_NetworkGroupSource.json"
           }
         }
       },
@@ -591,7 +594,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "./network.json#/definitions/CloudError"
+              "$ref": "./network.json#/definitions/CommonErrorResponse"
             }
           }
         },
@@ -624,7 +627,7 @@
       },
       "allOf": [
         {
-          "$ref": "./network.json#/definitions/ChildResource"
+          "$ref": "./network.json#/definitions/CommonProxyResource"
         }
       ],
       "description": "Defines the security admin configuration"
@@ -643,9 +646,14 @@
           },
           "description": "Enum list of network intent policy based services."
         },
+        "networkGroupAddressSpaceAggregationOption": {
+          "type": "string",
+          "$ref": "#/definitions/AddressSpaceAggregationOption",
+          "description": "Determine update behavior for changes to network groups referenced within the rules in this configuration."
+        },
         "provisioningState": {
           "readOnly": true,
-          "$ref": "./network.json#/definitions/ProvisioningState",
+          "$ref": "#/definitions/ProvisioningState",
           "description": "The provisioning state of the resource."
         },
         "resourceGuid": {
@@ -723,7 +731,7 @@
       },
       "allOf": [
         {
-          "$ref": "./network.json#/definitions/ChildResource"
+          "$ref": "./network.json#/definitions/CommonProxyResource"
         }
       ],
       "description": "Defines the admin rule collection."
@@ -747,7 +755,7 @@
         },
         "provisioningState": {
           "readOnly": true,
-          "$ref": "./network.json#/definitions/ProvisioningState",
+          "$ref": "#/definitions/ProvisioningState",
           "description": "The provisioning state of the resource."
         },
         "resourceGuid": {
@@ -784,7 +792,7 @@
       },
       "allOf": [
         {
-          "$ref": "./network.json#/definitions/ChildResource"
+          "$ref": "./network.json#/definitions/CommonProxyResource"
         }
       ],
       "required": [
@@ -875,7 +883,7 @@
         },
         "provisioningState": {
           "readOnly": true,
-          "$ref": "./network.json#/definitions/ProvisioningState",
+          "$ref": "#/definitions/ProvisioningState",
           "description": "The provisioning state of the resource."
         },
         "resourceGuid": {
@@ -985,7 +993,7 @@
         },
         "provisioningState": {
           "readOnly": true,
-          "$ref": "./network.json#/definitions/ProvisioningState",
+          "$ref": "#/definitions/ProvisioningState",
           "description": "The provisioning state of the resource."
         },
         "resourceGuid": {
@@ -995,6 +1003,23 @@
         }
       },
       "description": "Security default admin rule resource."
+    },
+    "ProvisioningState": {
+      "description": "Provisioning states of a resource.",
+      "enum": [
+        "Failed",
+        "Succeeded",
+        "Canceled",
+        "Creating",
+        "Updating",
+        "Deleting"
+      ],
+      "type": "string",
+      "readOnly": true,
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "ProvisioningState"
+      }
     },
     "SecurityConfigurationRuleAccess": {
       "type": "string",
@@ -1062,7 +1087,8 @@
           "description": "Address prefix type.",
           "enum": [
             "IPPrefix",
-            "ServiceTag"
+            "ServiceTag",
+            "NetworkGroup"
           ],
           "x-ms-enum": {
             "name": "AddressPrefixType",
@@ -1082,6 +1108,18 @@
       ],
       "x-ms-enum": {
         "name": "NetworkIntentPolicyBasedService",
+        "modelAsString": true
+      }
+    },
+    "AddressSpaceAggregationOption": {
+      "type": "string",
+      "description": "Option indicating the update behavior of a resource's address prefixes referenced within a network manager configuration.",
+      "enum": [
+        "None",
+        "Manual"
+      ],
+      "x-ms-enum": {
+        "name": "AddressSpaceAggregationOption",
         "modelAsString": true
       }
     }
@@ -1109,22 +1147,6 @@
       "description": "The name of the rule.",
       "required": true,
       "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "ResourceGroupNameParameter": {
-      "name": "resourceGroupName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The name of the resource group.",
-      "x-ms-parameter-location": "method"
-    },
-    "NetworkManagerNameParameter": {
-      "name": "networkManagerName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The name of the network manager.",
       "x-ms-parameter-location": "method"
     },
     "ListTopParameter": {
@@ -1156,4 +1178,3 @@
     }
   }
 }
-
