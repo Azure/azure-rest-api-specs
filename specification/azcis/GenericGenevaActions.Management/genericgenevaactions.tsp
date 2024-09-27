@@ -33,17 +33,22 @@ model GenericGenevaActionsResourceProperties {
   @doc("The input mode for geneva action (single/batch)")
   inputMode?: string;
 
-  @doc("The Azure location")
   @added(Versions.v2024_06_24_preview)
+  @doc("The Azure location")
   armLocation?: string;
 
   @doc("The parameter list for geneva action")
   @extension("x-ms-identifiers", [])
   parameters?: Array<Parameter>;
 
-  @doc("Provisioning state")
+  @doc("Provisioning status of the resource.")
   @visibility("read")
   provisioningState?: GenericGenevaActionsProvisioningState;
+
+  @added(Versions.v2024_06_24_preview)
+  @doc("Resource event argument result; a part of provisioning ResultData output.")
+  @visibility("read") // A part of provisioning ResultData output, gets PATCHed back from FRP.
+  genericGenevaActionsOpResult?: string;
 }
 
 @doc("genericGenevaActions Resource")
