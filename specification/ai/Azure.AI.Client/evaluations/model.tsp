@@ -13,7 +13,7 @@ using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.Core.Traits;
 
-namespace Azure.AI.Client.Evaluations;
+namespace AzureAI;
 
 @doc("Evaluator Configuration")
 model EvaluatorConfiguration {
