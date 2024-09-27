@@ -1,6 +1,6 @@
-# azureaccess
+# accesspoint
 
-This is the AutoRest configuration file for azureaccess.
+This is the AutoRest configuration file for accesspoint.
 
 <!-- Need to disable the linter for the next line so it doesn't mess up the "magic string" -->
 <!-- markdownlint-disable-next-line -->
@@ -24,7 +24,7 @@ For other options on installation see [Installing AutoRest](https://aka.ms/autor
 
 ### Basic Information
 
-These are the global settings for the azureaccess.
+These are the global settings for the accesspoint.
 
 ``` yaml
 openapi-type: arm
