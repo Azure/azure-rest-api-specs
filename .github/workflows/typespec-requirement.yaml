@@ -16,7 +16,8 @@ jobs:
     runs-on: ubuntu-latest
 
     outputs:
-      spec-lifecycle: ${{ steps.tsr-ps1.outputs.spec-lifecycle }}
+      spec-lifecycle-data-plane: ${{ steps.tsr-ps1.outputs.spec-lifecycle-data-plane }}
+      spec-lifecycle-resource-manager: ${{ steps.tsr-ps1.outputs.spec-lifecycle-resource-manager }}
 
     steps:
       - uses: actions/checkout@v4
@@ -47,7 +48,11 @@ jobs:
 
     needs: typespec-requirement
 
-    if: ${{ success() && needs.typespec-requirement.outputs.spec-lifecycle == 'brownfield'}}
+    if: |
+      ${{ success() &&
+          (needs.typespec-requirement.outputs.spec-lifecycle-data-plane == 'brownfield' ||
+           needs.typespec-requirement.outputs.spec-lifecycle-resource-manager == 'brownfield')
+      }}
 
     permissions:
       pull-requests: write
