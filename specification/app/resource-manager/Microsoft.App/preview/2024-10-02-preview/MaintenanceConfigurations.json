@@ -278,12 +278,12 @@
         "startHourUtc": {
           "type": "integer",
           "format": "int32",
-          "description": "Start hour after which managed environment patching can start."
+          "description": "Start hour after which managed environment maintenance can start from 0 to 23 hour."
         },
-        "maintenanceWindow": {
-          "type": "string",
-          "format": "duration",
-          "description": "ISO8601 timespan specifying how much time managed environment patching can take."
+        "durationHours": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Length of maintenance window range from 8 to 24 hours."
         }
       },
       "required": [
