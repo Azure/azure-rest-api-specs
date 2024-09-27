@@ -211,20 +211,71 @@ union EvictionPolicy {
   Deallocate: "Deallocate",
 }
 
+
+
+@added(Versions.v2024_11_01)
 @doc("While retrieving VMSizes from CRS, Min = 0 (uint.MinValue) if not specified, Max = 4294967295 (uint.MaxValue) if not specified. This allows to filter VMAttributes on all available VMSizes.")
-model: VMAttributeMinMax
+model VMAttributeMinMax
 {
     @doc("Min VMSize from CRS, Min = 0 (uint.MinValue) if not specified.")
-     min?: uint;
+     min?: uint32;
 
     @doc("Maz VMSize from CRS, Max = 4294967295 (uint.MaxValue) if not specified.")
-     max?: uint;
+     max?: uint32;
 }
 
-@doc("VMAttributes that will be used to filter VMSizes which will be used to build Fleet.)
-model:
+@added(Versions.v2024_11_01)
+@doc("Different kind of Local storage disk types supported by Azure VMs.")
+union LocalStorageDiskType {
+  string,
 
-@doc("List of VMAttributes that will be used to filter VMSizes which will be used to build Fleet.)
+  @doc("HDD DiskType.")
+  HDD: "HDD",
+
+  @doc("SDD DiskType.")
+  SSD: "SSD",
+}
+
+@added(Versions.v2024_11_01)
+@doc("Gpu manufacturers supported by Azure VMs.")
+union LocalStorageDiskType {
+  string,
+
+  @doc("Intel GpuType")
+  HDD: "Intel",
+
+  @doc("AMD GpuType")
+  SSD: "AMD",
+  
+  @doc("Nvidia GpuType")
+  SSD: "Nvidia",
+}
+
+@added(Versions.v2024_11_01)
+@doc("VMAttributes that will be used to filter VMSizes which will be used to build Fleet.")
+model VMAttributes{
+  @extension("x-ms-identifiers", [])
+  @doc("The local storage disk types specified as a list. If gpuSupport is Excluded, this VMAttribute can not be used.")
+  localStorageDiskType: Array<LocalStorageDiskType>;
+
+@extension("x-ms-identifiers", [])
+  @doc("The GPU manufacturers specified as a list. gpuSupport should be set to Included or Required to use this VMAttribute. Default GPU manufacturers if not specified are "ANY" of the valid values.")
+    gpuManufacturers: Array<GpuManufacturer>;
+ 
+  @doc("The range of vCpuCount specified from Min to Max. Must be specified if VMAttributes are specified, either Min or Max is required if specified.")
+    vCpuCount: VMAttributeMinMax;
+
+  @doc("The range of memory in MiB specified from Min to Max. Must be specified if VMAttributes are specified, either Min or Max is required if specified.")
+    memoryInMiB: VMAttributeMinMax;
+}
+
+@added(Versions.v2024_11_01)
+@doc("List of VMAttributes that will be used to filter VMSizes which will be used to build Fleet.")
+model VMAttributesList{
+@extension("x-ms-identifiers", [])
+  @doc("List of VMAttributes that will be used to filter VMSizes which will be used to build Fleet.")
+  vmAttributes: Array<VMAttributes>
+}
 
 @armResourceOperations
 interface Fleets {
