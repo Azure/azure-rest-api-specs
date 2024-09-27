@@ -28,17 +28,8 @@ These are the global settings for the Datadog API.
 title: DatadogManagementClient
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2024-06
+tag: package-2024-03
 ```
-
-### Tag: package-2024-06
-
-These settings apply only when `--tag=package-2024-06` is specified on the command line.
-
-```yaml $(tag) == 'package-2024-06'
-input-file:
-  - Microsoft.Datadog/stable/2024-06-20/swagger.json
-  ```
 
 ### Tag: package-2024-03
 
@@ -57,6 +48,7 @@ These settings apply only when `--tag=package-2023-07` is specified on the comma
 input-file:
   - Microsoft.Datadog/stable/2023-07-07/swagger.json
 ```
+
 ### Tag: package-2021-03
 
 These settings apply only when `--tag=package-2021-03` is specified on the command line.
