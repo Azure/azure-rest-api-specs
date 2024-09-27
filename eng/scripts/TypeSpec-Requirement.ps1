@@ -174,7 +174,7 @@ else {
 
       if ($env:GITHUB_OUTPUT) {
         # Set output to be used later in /.github/workflows/TypeSpec-Requirement.yml
-        Add-Content -Path $env:GITHUB_OUTPUT -Value "spec-lifecycle=brownfield"
+        Add-Content -Path $env:GITHUB_OUTPUT -Value "spec-lifecycle-$SpecType=brownfield"
       }
     }
     elseif ($responseStatus -eq 404) {
