@@ -12,6 +12,7 @@ using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.Core.Traits;
 
+#supress "@azure-tools/typespec-azure-core/casing-style"
 @useAuth(
   OAuth2Auth<[
     {
