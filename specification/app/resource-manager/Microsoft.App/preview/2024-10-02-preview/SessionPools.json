@@ -404,7 +404,7 @@
       "description": "Session pool private registry credentials.",
       "type": "object",
       "properties": {
-        "registryServer": {
+        "server": {
           "description": "Container registry server.",
           "type": "string"
         },
@@ -414,6 +414,10 @@
         },
         "passwordSecretRef": {
           "description": "The name of the secret that contains the registry login password",
+          "type": "string"
+        },
+        "identity": {
+          "description": "A Managed Identity to use to authenticate with Azure Container Registry. For user-assigned identities, use the full user-assigned identity Resource ID. For system-assigned identities, use 'system'",
           "type": "string"
         }
       }
@@ -633,6 +637,32 @@
               "x-ms-enum": {
                 "name": "SessionPoolProvisioningState",
                 "modelAsString": true
+              }
+            },
+            "managedIdentitySettings": {
+              "description": "Optional settings for a Managed Identity that is assigned to the Session pool.",
+              "type": "object",
+              "required": [
+                "identity"
+              ],
+              "properties": {
+                "identity": {
+                  "description": "The resource ID of a user-assigned managed identity that is assigned to the Session pool, or 'system' for system-assigned identity.",
+                  "type": "string"
+                },
+                "lifecycle": {
+                  "description": "Use to select the lifecycle stages of a Session pool during which the Managed Identity should be available.",
+                  "enum": [
+                    "None",
+                    "Main"
+                  ],
+                  "type": "string",
+                  "default": "All",
+                  "x-ms-enum": {
+                    "name": "IdentitySettingsLifeCycle",
+                    "modelAsString": true
+                  }
+                }
               }
             }
           },
