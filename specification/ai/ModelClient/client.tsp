@@ -39,12 +39,12 @@ namespace Customizations; // The actual name here doesn't matter and is here for
 @@access(AI.Model.ChatRole, Access.public);
 @@access(AI.Model.CompletionsFinishReason, Access.public);
 @@access(AI.Model.CompletionsUsage, Access.public);
-@@access(AI.Model.EmbeddingEncodingFormat, Access.public, "python");
-@@access(AI.Model.EmbeddingInput, Access.public, "python");
-@@access(AI.Model.EmbeddingInputType, Access.public, "python");
-@@access(AI.Model.EmbeddingItem, Access.public, "python");
-@@access(AI.Model.EmbeddingsResult, Access.public, "python");
-@@access(AI.Model.EmbeddingsUsage, Access.public, "python");
+@@access(AI.Model.EmbeddingEncodingFormat, Access.public, "python,csharp");
+@@access(AI.Model.EmbeddingInput, Access.public, "python,csharp");
+@@access(AI.Model.EmbeddingInputType, Access.public, "python,csharp");
+@@access(AI.Model.EmbeddingItem, Access.public, "python,csharp");
+@@access(AI.Model.EmbeddingsResult, Access.public, "python,csharp");
+@@access(AI.Model.EmbeddingsUsage, Access.public, "python,csharp");
 @@access(AI.Model.FunctionCall, Access.public);
 @@access(AI.Model.FunctionDefinition, Access.public);
 @@access(AI.Model.ModelInfo, Access.public);
@@ -54,15 +54,15 @@ namespace Customizations; // The actual name here doesn't matter and is here for
 @@access(AI.Model.ChatMessageImageContentItem, Access.public);
 @@access(AI.Model.ChatMessageImageUrl, Access.public);
 @@access(AI.Model.ChatMessageImageDetailLevel, Access.public);
-@@access(AI.Model.StreamingChatCompletionsUpdate, Access.public, "python");
-@@access(AI.Model.StreamingChatChoiceUpdate, Access.public, "python");
-@@access(AI.Model.StreamingChatResponseMessageUpdate, Access.public, "python");
-@@access(AI.Model.StreamingChatResponseToolCallUpdate, Access.public, "python");
+@@access(AI.Model.StreamingChatCompletionsUpdate, Access.public, "python,csharp");
+@@access(AI.Model.StreamingChatChoiceUpdate, Access.public, "python,csharp");
+@@access(AI.Model.StreamingChatResponseMessageUpdate, Access.public, "python,csharp");
+@@access(AI.Model.StreamingChatResponseToolCallUpdate, Access.public, "python,csharp");
 
 // The operators need to be hidden, since we hand-write the public versions of those
 @@access(AI.Model.getChatCompletions, Access.internal);
-@@access(AI.Model.getEmbeddings, Access.internal);
-@@access(AI.Model.getImageEmbeddings, Access.internal);
+@@access(AI.Model.getEmbeddings, Access.internal, "python");
+@@access(AI.Model.getImageEmbeddings, Access.internal, "python");
 @@access(AI.Model.getModelInfo, Access.internal, "python");
 
 // We use shorter names in the Python client library
@@ -99,7 +99,7 @@ interface Client1 {
     name: "EmbeddingsClient",
     service: AI.Model,
   },
-  "python"
+  "python,csharp"
 )
 interface Client2 {
   embed is AI.Model.getEmbeddings;
