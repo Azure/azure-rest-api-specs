@@ -585,6 +585,8 @@ model ConversationalAnalysisAuthoringEvaluationOptions {
  */
 @added(Versions.v2023_04_15_preview)
 @clientName("CopyProjectJobState", "csharp")
+@resource("copy/jobs")
+@parentResource(ConversationalAnalysisAuthoringProjectMetadata)
 model ConversationalAnalysisAuthoringCopyProjectJobState {
   ...ConversationalAnalysisAuthoringJobState;
 }
@@ -597,6 +599,8 @@ model ConversationalAnalysisAuthoringJobState {
   /**
    * The job ID.
    */
+  @key("jobId")
+  @visibility("read")
   jobId: string;
 
   /**

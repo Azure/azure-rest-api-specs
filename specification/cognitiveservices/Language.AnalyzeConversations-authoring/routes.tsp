@@ -200,29 +200,8 @@ interface ConversationalAnalysisAuthoring {
   /**
    * Gets the status of an existing copy project job.
    */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  @route("/authoring/analyze-conversations/projects/{projectName}/copy/jobs/{jobId}")
-  @get
   @added(Versions.v2023_04_15_preview)
-  getCopyProjectStatus is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * The name of the project to use.
-       */
-      @maxLength(100)
-      @path
-      projectName: string;
-
-      /**
-       * The job ID.
-       */
-      @path
-      jobId: string;
-    },
-    ConversationalAnalysisAuthoringCopyProjectJobState,
-    {},
-    ErrorResponse
-  >;
+  getCopyProjectStatus is languageOperations.ResourceRead<ConversationalAnalysisAuthoringCopyProjectJobState>;
 
   /**
    * Lists the deployments belonging to a project.
