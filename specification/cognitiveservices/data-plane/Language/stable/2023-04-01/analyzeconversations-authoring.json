@@ -515,41 +515,29 @@
           {
             "name": "projectName",
             "in": "path",
-            "description": "The name of the project to use.",
+            "description": "The new project name.",
             "required": true,
             "type": "string",
             "maxLength": 100
           },
           {
-            "name": "top",
-            "in": "query",
-            "description": "The maximum number of resources to return from the collection.",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
+            "$ref": "#/parameters/Azure.Core.TopQueryParameter"
           },
           {
-            "name": "skip",
-            "in": "query",
-            "description": "An offset into the collection of the first resource to be returned.",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
+            "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
           },
           {
-            "name": "maxpagesize",
-            "in": "query",
-            "description": "The maximum number of resources to include in a single response.",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
+            "$ref": "#/parameters/Azure.Core.MaxPageSizeQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.SelectQueryParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/ConversationalAnalysisAuthoringProjectDeployments"
+              "$ref": "#/definitions/PagedConversationalAnalysisAuthoringProjectDeployment"
             }
           },
           "default": {
@@ -563,6 +551,9 @@
           "Successful List Deployments": {
             "$ref": "./examples/SuccessfulListDeployments.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -3135,7 +3126,8 @@
       "properties": {
         "deploymentName": {
           "type": "string",
-          "description": "Represents deployment name."
+          "description": "Represents deployment name.",
+          "readOnly": true
         },
         "modelId": {
           "type": "string",
@@ -3168,27 +3160,6 @@
         "lastDeployedDateTime",
         "deploymentExpirationDate",
         "modelTrainingConfigVersion"
-      ]
-    },
-    "ConversationalAnalysisAuthoringProjectDeployments": {
-      "type": "object",
-      "description": "Represents a list of retrieved deployments.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The list of retrieved deployments.",
-          "items": {
-            "$ref": "#/definitions/ConversationalAnalysisAuthoringProjectDeployment"
-          },
-          "x-ms-identifiers": []
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "The next page link."
-        }
-      },
-      "required": [
-        "value"
       ]
     },
     "ConversationalAnalysisAuthoringProjectKind": {
@@ -4041,6 +4012,28 @@
       "required": [
         "code",
         "message"
+      ]
+    },
+    "PagedConversationalAnalysisAuthoringProjectDeployment": {
+      "type": "object",
+      "description": "Paged collection of ConversationalAnalysisAuthoringProjectDeployment items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ConversationalAnalysisAuthoringProjectDeployment items on this page",
+          "items": {
+            "$ref": "#/definitions/ConversationalAnalysisAuthoringProjectDeployment"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
       ]
     },
     "PagedConversationalAnalysisAuthoringProjectMetadata": {

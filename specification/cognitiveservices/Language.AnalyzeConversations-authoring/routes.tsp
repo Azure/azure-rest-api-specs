@@ -227,40 +227,11 @@ interface ConversationalAnalysisAuthoring {
   /**
    * Lists the deployments belonging to a project.
    */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  @route("/authoring/analyze-conversations/projects/{projectName}/deployments")
-  @get
-  listDeployments is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * The name of the project to use.
-       */
-      @maxLength(100)
-      @path
-      projectName: string;
-
-      /**
-       * The maximum number of resources to return from the collection.
-       */
-      @query("top")
-      top?: int32;
-
-      /**
-       * An offset into the collection of the first resource to be returned.
-       */
-      @query("skip")
-      skip?: int32;
-
-      /**
-       * The maximum number of resources to include in a single response.
-       */
-      @query("maxpagesize")
-      maxpagesize?: int32;
-    },
-    ConversationalAnalysisAuthoringProjectDeployments,
-    {},
-    ErrorResponse
+  listDeployments is languageOperations.ResourceList<
+    ConversationalAnalysisAuthoringProjectDeployment,
+    ListQueryParametersTrait<StandardListQueryParameters & SelectQueryParameter>
   >;
+
 
   /**
    * Gets the details of a deployment.

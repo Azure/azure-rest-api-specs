@@ -668,10 +668,14 @@ model ConversationalAnalysisAuthoringProjectDeployments {
  * Represents a project deployment.
  */
 @clientName("ProjectDeployment", "csharp")
+@resource("deployments")
+@parentResource(ConversationalAnalysisAuthoringProjectMetadata)
 model ConversationalAnalysisAuthoringProjectDeployment {
   /**
    * Represents deployment name.
    */
+  @key("deploymentName")
+  @visibility("read")
   deploymentName: string;
 
   /**
