@@ -60,6 +60,7 @@ input-file:
   - Microsoft.Network/stable/2024-05-01/expressRoutePort.json
   - Microsoft.Network/stable/2024-05-01/expressRouteProviderPort.json
   - Microsoft.Network/stable/2024-05-01/firewallPolicy.json
+  - Microsoft.Network/stable/2024-05-01/ipAddressManager.json
   - Microsoft.Network/stable/2024-05-01/ipAllocation.json
   - Microsoft.Network/stable/2024-05-01/ipGroups.json
   - Microsoft.Network/stable/2024-05-01/loadBalancer.json
@@ -78,6 +79,7 @@ input-file:
   - Microsoft.Network/stable/2024-05-01/networkManagerSecurityUserConfiguration.json
   - Microsoft.Network/stable/2024-05-01/networkProfile.json
   - Microsoft.Network/stable/2024-05-01/networkSecurityGroup.json
+  - Microsoft.Network/stable/2024-05-01/networkVerifier.json
   - Microsoft.Network/stable/2024-05-01/networkVirtualAppliance.json
   - Microsoft.Network/stable/2024-05-01/networkWatcher.json
   - Microsoft.Network/stable/2024-05-01/operation.json
@@ -100,6 +102,19 @@ input-file:
   - Microsoft.Network/stable/2024-05-01/vmssNetworkInterface.json
   - Microsoft.Network/stable/2024-05-01/vmssPublicIpAddress.json
   - Microsoft.Network/stable/2024-05-01/webapplicationfirewall.json
+suppressions:
+  - code: SystemDataDefinitionsCommonTypes
+    from: networkVerifier.json
+    reason: False alarm for common type errors.
+  - code: SystemDataDefinitionsCommonTypes
+    from: network.json
+    reason: False alarm.
+  - code: MissingSegmentsInNestedResourceListOperation
+    from: networkVerifier.json
+    reason: False alarm.
+  - code: MissingSegmentsInNestedResourceListOperation
+    from: ipAddressManager.json
+    reason: False alarm.
 ```
 
 ### Tag: package-2024-03
@@ -171,6 +186,7 @@ input-file:
   - Microsoft.Network/stable/2024-03-01/vmssNetworkInterface.json
   - Microsoft.Network/stable/2024-03-01/vmssPublicIpAddress.json
   - Microsoft.Network/stable/2024-03-01/webapplicationfirewall.json
+
 suppressions:
   - code: PatchIdentityProperty
     from: networkWatcher.json

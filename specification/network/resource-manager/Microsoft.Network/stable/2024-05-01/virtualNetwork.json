@@ -236,6 +236,9 @@
           },
           "Create virtual network with encryption": {
             "$ref": "./examples/VirtualNetworkCreateWithEncryption.json"
+          },
+          "Create virtual network with ipamPool": {
+            "$ref": "./examples/VirtualNetworkCreateWithIpamPool.json"
           }
         }
       },
@@ -1677,6 +1680,13 @@
         "defaultOutboundAccess": {
           "type": "boolean",
           "description": "Set this property to false to disable default outbound connectivity for all VMs in the subnet. This property can only be set at the time of subnet creation and cannot be updated for an existing subnet."
+        },
+        "ipamPoolPrefixAllocations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IpamPoolPrefixAllocation"
+          },
+          "description": "A list of IPAM Pools for allocating IP address prefixes."
         }
       },
       "description": "Properties of the subnet."
@@ -2078,6 +2088,13 @@
             "type": "string"
           },
           "description": "A list of address blocks reserved for this virtual network in CIDR notation."
+        },
+        "ipamPoolPrefixAllocations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IpamPoolPrefixAllocation"
+          },
+          "description": "A list of IPAM Pools allocating IP address prefixes."
         }
       },
       "description": "AddressSpace contains an array of IP address ranges that can be used by subnets of the virtual network."
@@ -2302,7 +2319,36 @@
         }
       },
       "description": "Response for GetVirtualNetworkDdosProtectionStatusOperation."
+    },
+    "IpamPoolPrefixAllocation": {
+      "type": "object",
+      "properties": {
+        "pool": {
+          "type": "object",
+          "x-ms-client-flatten": true,
+          "properties": {
+            "id": {
+              "type": "string",
+              "format": "arm-id",
+              "description": "Resource id of the associated Azure IpamPool resource.",
+              "minLength": 1
+            }
+          }
+        },
+        "numberOfIpAddresses": {
+          "type": "string",
+          "description": "Number of IP addresses to allocate."
+        },
+        "allocatedAddressPrefixes": {
+          "description": "List of assigned IP address prefixes in the IpamPool of the associated resource.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        }
+      },
+      "description": "IpamPool prefix allocation reference."
     }
   }
 }
-
