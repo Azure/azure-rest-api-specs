@@ -165,6 +165,13 @@ model ChatRequestAssistantMessage extends ChatRequestMessage {
     completions request to resolve as configured.
     """)
   functionCall?: FunctionCall;
+
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "explicitly nullable in mirrored API"
+  /**
+   * The refusal message by the assistant.
+   */
+  @added(ServiceApiVersions.v2024_08_01_Preview)
+  refusal?: string | null;
 }
 
 @added(ServiceApiVersions.v2024_02_15_Preview)

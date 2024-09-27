@@ -3404,6 +3404,11 @@
           "$ref": "#/definitions/FunctionCall",
           "description": "The function call that must be resolved and have its output appended to subsequent input messages for the chat\ncompletions request to resolve as configured.",
           "x-ms-client-name": "functionCall"
+        },
+        "refusal": {
+          "type": "string",
+          "description": "The refusal message by the assistant.",
+          "x-nullable": true
         }
       },
       "required": [
@@ -3560,6 +3565,7 @@
       },
       "required": [
         "role",
+        "refusal",
         "content"
       ]
     },
@@ -3768,6 +3774,11 @@
         "usage": {
           "$ref": "#/definitions/CompletionsUsage",
           "description": "Usage information for tokens processed and generated as part of this completions operation."
+        },
+        "system_fingerprint": {
+          "type": "string",
+          "description": "This fingerprint represents the backend configuration that the model runs with.\n\nCan be used in conjunction with the `seed` request parameter to understand when backend changes have been made that might impact determinism.",
+          "x-ms-client-name": "systemFingerprint"
         }
       },
       "required": [
@@ -3962,6 +3973,11 @@
         "model": {
           "type": "string",
           "description": "The model name to provide as part of this completions request.\nNot applicable to Azure OpenAI, where deployment information should be included in the Azure\nresource URI that's connected to."
+        },
+        "seed": {
+          "type": "integer",
+          "format": "int32",
+          "description": "If specified, our system will make a best effort to sample deterministically, such that repeated requests with the same `seed` and parameters should return the same result.\n\nDeterminism is not guaranteed, and you should refer to the `system_fingerprint` response parameter to monitor changes in the backend."
         }
       },
       "required": [
@@ -4464,11 +4480,22 @@
           "type": "integer",
           "format": "int32",
           "description": "Index of the prompt to which the EmbeddingItem corresponds."
+        },
+        "object": {
+          "type": "string",
+          "description": "The object type which is always 'embedding'.",
+          "enum": [
+            "embedding"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
         }
       },
       "required": [
         "embedding",
-        "index"
+        "index",
+        "object"
       ]
     },
     "Embeddings": {
@@ -5117,6 +5144,10 @@
           "type": "string",
           "description": "The app name for MongoDB."
         },
+        "index_name": {
+          "type": "string",
+          "description": "The name of the MongoDB index."
+        },
         "fields_mapping": {
           "type": "object",
           "description": "Field mappings to apply to data used by the MongoDB data source.\nNote that content and vector field mappings are required for MongoDB.",
@@ -5160,6 +5191,7 @@
         "collection_name",
         "database_name",
         "app_name",
+        "index_name",
         "fields_mapping",
         "embedding_dependency"
       ]
@@ -5966,7 +5998,7 @@
         },
         "bytes": {
           "type": "integer",
-          "format": "int32",
+          "format": "int64",
           "description": "The intended number of bytes to be uploaded."
         },
         "purpose": {

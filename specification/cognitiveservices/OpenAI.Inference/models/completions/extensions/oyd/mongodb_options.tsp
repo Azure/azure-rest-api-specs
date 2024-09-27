@@ -42,6 +42,9 @@ model MongoDBChatExtensionParameters {
   @doc("The app name for MongoDB.")
   app_name: string;
 
+  /** The name of the MongoDB index. */
+  index_name: string;
+  
   /**
    * Field mappings to apply to data used by the MongoDB data source.
    * Note that content and vector field mappings are required for MongoDB.
