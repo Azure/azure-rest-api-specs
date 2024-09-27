@@ -25,8 +25,8 @@ union CommunicationMessageKind {
   image: "image",
 
   @added(Versions.c2024_08_30)
-  @doc("Image message type.")
-  image_v2: "image_v2",
+  @doc("Image message type. Legacy image type for `MediaNotificationContent` which is being deprecated")
+  image_v0: "image_v0",
 
   @added(Versions.c2024_08_30)
   @doc("Document message type.")
@@ -146,7 +146,7 @@ model MediaNotificationContentBase {
 @doc("A request to send an image notification.")
 model MediaNotificationContent extends NotificationContent {
   @doc("Message notification type is image.")
-  kind: CommunicationMessageKind.image_v2;
+  kind: CommunicationMessageKind.image_v0;
 
   @doc("Optional text content.")
   content?: string;

@@ -392,7 +392,7 @@
       "enum": [
         "text",
         "image",
-        "image_v2",
+        "image_v0",
         "document",
         "video",
         "audio",
@@ -413,9 +413,9 @@
             "description": "Image message type."
           },
           {
-            "name": "image_v2",
-            "value": "image_v2",
-            "description": "Image message type."
+            "name": "image_v0",
+            "value": "image_v0",
+            "description": "Image message type. Legacy image type for `MediaNotificationContent` which is being deprecated"
           },
           {
             "name": "document",
@@ -533,7 +533,7 @@
           "$ref": "#/definitions/NotificationContent"
         }
       ],
-      "x-ms-discriminator-value": "image_v2"
+      "x-ms-discriminator-value": "image_v0"
     },
     "MessageReceipt": {
       "type": "object",
