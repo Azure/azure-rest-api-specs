@@ -1,8 +1,8 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "SecurityPlatformMgmtClient",
-    "version": "2023-12-01-preview",
+    "title": "SecurityPlatformClient",
+    "version": "2024-10-01-preview",
     "description": "SecurityPlatform Resource Provider management API.",
     "x-typespec-generated": [
       {
@@ -43,7 +43,7 @@
       "name": "Operations"
     },
     {
-      "name": "Capacities"
+      "name": "AccountLinks"
     }
   ],
   "paths": {
@@ -61,7 +61,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
             }
@@ -86,13 +86,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.SecurityPlatform/capacities": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.SecurityPlatform/accountLinks": {
       "get": {
-        "operationId": "Capacities_ListBySubscription",
+        "operationId": "AccountLinks_ListBySubscription",
         "tags": [
-          "Capacities"
+          "AccountLinks"
         ],
-        "description": "List Capacity resources by subscription ID",
+        "description": "List AccountLink resources by subscription ID",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -103,9 +103,9 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/CapacityListResult"
+              "$ref": "#/definitions/AccountLinkListResult"
             }
           },
           "default": {
@@ -116,8 +116,8 @@
           }
         },
         "x-ms-examples": {
-          "Capacities_ListBySubscription_MaximumSet_Gen": {
-            "$ref": "./examples/Capacities_ListBySubscription_MaximumSet_Gen.json"
+          "AccountLinks_ListBySubscription_MaximumSet_Gen": {
+            "$ref": "./examples/AccountLinks_ListBySubscription_MaximumSet_Gen.json"
           }
         },
         "x-ms-pageable": {
@@ -125,13 +125,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SecurityPlatform/capacities": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SecurityPlatform/accountLinks": {
       "get": {
-        "operationId": "Capacities_ListByResourceGroup",
+        "operationId": "AccountLinks_ListByResourceGroup",
         "tags": [
-          "Capacities"
+          "AccountLinks"
         ],
-        "description": "List Capacity resources by resource group",
+        "description": "List AccountLink resources by resource group",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -145,9 +145,9 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/CapacityListResult"
+              "$ref": "#/definitions/AccountLinkListResult"
             }
           },
           "default": {
@@ -158,8 +158,8 @@
           }
         },
         "x-ms-examples": {
-          "Capacities_ListByResourceGroup_MaximumSet_Gen": {
-            "$ref": "./examples/Capacities_ListByResourceGroup_MaximumSet_Gen.json"
+          "AccountLinks_ListByResourceGroup_MaximumSet_Gen": {
+            "$ref": "./examples/AccountLinks_ListByResourceGroup_MaximumSet_Gen.json"
           }
         },
         "x-ms-pageable": {
@@ -167,13 +167,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SecurityPlatform/capacities/{name}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SecurityPlatform/accountLinks/{name}": {
       "get": {
-        "operationId": "Capacities_Get",
+        "operationId": "AccountLinks_Get",
         "tags": [
-          "Capacities"
+          "AccountLinks"
         ],
-        "description": "Get a Capacity",
+        "description": "Get a AccountLink",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -187,7 +187,7 @@
           {
             "name": "name",
             "in": "path",
-            "description": "Name of capacity unit",
+            "description": "Name of AccountLink Resource",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9-]{3,63}$"
@@ -195,9 +195,9 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/Capacity"
+              "$ref": "#/definitions/AccountLink"
             }
           },
           "default": {
@@ -208,17 +208,17 @@
           }
         },
         "x-ms-examples": {
-          "Capacities_Get_MaximumSet_Gen": {
-            "$ref": "./examples/Capacities_Get_MaximumSet_Gen.json"
+          "AccountLinks_Get_MaximumSet_Gen": {
+            "$ref": "./examples/AccountLinks_Get_MaximumSet_Gen.json"
           }
         }
       },
       "put": {
-        "operationId": "Capacities_CreateOrUpdate",
+        "operationId": "AccountLinks_CreateOrUpdate",
         "tags": [
-          "Capacities"
+          "AccountLinks"
         ],
-        "description": "Create a Capacity",
+        "description": "Create a AccountLink",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -232,7 +232,7 @@
           {
             "name": "name",
             "in": "path",
-            "description": "Name of capacity unit",
+            "description": "Name of AccountLink Resource",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9-]{3,63}$"
@@ -243,21 +243,21 @@
             "description": "Resource create parameters.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Capacity"
+              "$ref": "#/definitions/AccountLink"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "Resource 'Capacity' update operation succeeded",
+            "description": "Resource 'AccountLink' update operation succeeded",
             "schema": {
-              "$ref": "#/definitions/Capacity"
+              "$ref": "#/definitions/AccountLink"
             }
           },
           "201": {
-            "description": "Resource 'Capacity' create operation succeeded",
+            "description": "Resource 'AccountLink' create operation succeeded",
             "schema": {
-              "$ref": "#/definitions/Capacity"
+              "$ref": "#/definitions/AccountLink"
             }
           },
           "default": {
@@ -268,17 +268,17 @@
           }
         },
         "x-ms-examples": {
-          "Capacities_CreateOrUpdate_MaximumSet_Gen": {
-            "$ref": "./examples/Capacities_CreateOrUpdate_MaximumSet_Gen.json"
+          "AccountLinks_CreateOrUpdate_MaximumSet_Gen": {
+            "$ref": "./examples/AccountLinks_CreateOrUpdate_MaximumSet_Gen.json"
           }
         }
       },
       "patch": {
-        "operationId": "Capacities_Update",
+        "operationId": "AccountLinks_Update",
         "tags": [
-          "Capacities"
+          "AccountLinks"
         ],
-        "description": "Update a Capacity",
+        "description": "Update a AccountLink",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -292,7 +292,7 @@
           {
             "name": "name",
             "in": "path",
-            "description": "Name of capacity unit",
+            "description": "Name of AccountLink Resource",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9-]{3,63}$"
@@ -303,15 +303,15 @@
             "description": "The resource properties to be updated.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/CapacityUpdate"
+              "$ref": "#/definitions/AccountLinkUpdate"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/Capacity"
+              "$ref": "#/definitions/AccountLink"
             }
           },
           "default": {
@@ -322,17 +322,17 @@
           }
         },
         "x-ms-examples": {
-          "Capacities_Update_MaximumSet_Gen": {
-            "$ref": "./examples/Capacities_Update_MaximumSet_Gen.json"
+          "AccountLinks_Update_MaximumSet_Gen": {
+            "$ref": "./examples/AccountLinks_Update_MaximumSet_Gen.json"
           }
         }
       },
       "delete": {
-        "operationId": "Capacities_Delete",
+        "operationId": "AccountLinks_Delete",
         "tags": [
-          "Capacities"
+          "AccountLinks"
         ],
-        "description": "Delete a Capacity",
+        "description": "Delete a AccountLink",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -346,7 +346,7 @@
           {
             "name": "name",
             "in": "path",
-            "description": "Name of capacity unit",
+            "description": "Name of AccountLink Resource",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9-]{3,63}$"
@@ -357,7 +357,7 @@
             "description": "Resource deleted successfully."
           },
           "204": {
-            "description": "Resource deleted successfully."
+            "description": "Resource does not exist."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -367,29 +367,28 @@
           }
         },
         "x-ms-examples": {
-          "Capacities_Delete_MaximumSet_Gen": {
-            "$ref": "./examples/Capacities_Delete_MaximumSet_Gen.json"
+          "AccountLinks_Delete_MaximumSet_Gen": {
+            "$ref": "./examples/AccountLinks_Delete_MaximumSet_Gen.json"
           },
-          "Capacities_Delete_MinimumSet_Gen": {
-            "$ref": "./examples/Capacities_Delete_MinimumSet_Gen.json"
+          "AccountLinks_Delete_MinimumSet_Gen": {
+            "$ref": "./examples/AccountLinks_Delete_MinimumSet_Gen.json"
           }
         }
       }
     }
   },
   "definitions": {
-    "Capacity": {
+    "AccountLink": {
       "type": "object",
-      "description": "A Capacity resource",
+      "description": "An AccountLink resource",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/CapacityProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "$ref": "#/definitions/AccountLinkProperties",
+          "description": "The resource-specific properties for this resource."
+        },
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The managed service identities assigned to this resource."
         }
       },
       "allOf": [
@@ -398,15 +397,15 @@
         }
       ]
     },
-    "CapacityListResult": {
+    "AccountLinkListResult": {
       "type": "object",
-      "description": "The response of a Capacity list operation.",
+      "description": "The response of a AccountLink list operation.",
       "properties": {
         "value": {
           "type": "array",
-          "description": "The Capacity items on this page",
+          "description": "The AccountLink items on this page",
           "items": {
-            "$ref": "#/definitions/Capacity"
+            "$ref": "#/definitions/AccountLink"
           }
         },
         "nextLink": {
@@ -419,88 +418,55 @@
         "value"
       ]
     },
-    "CapacityProperties": {
+    "AccountLinkProperties": {
       "type": "object",
-      "description": "Capacity properties",
+      "description": "AccountLink properties",
       "properties": {
-        "numberOfUnits": {
-          "type": "integer",
-          "format": "int64",
-          "description": "No of Units",
-          "minimum": 1,
-          "maximum": 999
-        },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
           "description": "The status of the last operation.",
           "readOnly": true
-        },
-        "crossRegionCompute": {
-          "$ref": "#/definitions/IsAllowed",
-          "description": "Is cross region compute allowed"
         }
-      },
-      "required": [
-        "numberOfUnits",
-        "crossRegionCompute"
-      ]
+      }
     },
-    "CapacityUpdate": {
+    "AccountLinkUpdate": {
       "type": "object",
-      "description": "The type used for update operations of the Capacity.",
+      "description": "The type used for update operations of the AccountLink.",
       "properties": {
+        "identity": {
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.ManagedServiceIdentityUpdate",
+          "description": "The managed service identities assigned to this resource."
+        },
         "tags": {
           "type": "object",
           "description": "Resource tags.",
           "additionalProperties": {
             "type": "string"
           }
-        },
-        "properties": {
-          "$ref": "#/definitions/CapacityUpdateProperties",
-          "x-ms-client-flatten": true
         }
       }
     },
-    "CapacityUpdateProperties": {
+    "Azure.ResourceManager.CommonTypes.ManagedServiceIdentityUpdate": {
       "type": "object",
-      "description": "The updatable properties of the Capacity.",
+      "description": "Managed service identity (system assigned and/or user assigned identities)",
       "properties": {
-        "numberOfUnits": {
-          "type": "integer",
-          "format": "int64",
-          "description": "No of Units",
-          "minimum": 1,
-          "maximum": 999
+        "type": {
+          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentityType",
+          "description": "The type of managed identity assigned to this resource."
         },
-        "crossRegionCompute": {
-          "$ref": "#/definitions/IsAllowed",
-          "description": "Is cross region compute allowed"
-        }
-      }
-    },
-    "IsAllowed": {
-      "type": "string",
-      "description": "Enum to represent Allowed or NotAllowed",
-      "enum": [
-        "Allowed",
-        "NotAllowed"
-      ],
-      "x-ms-enum": {
-        "name": "IsAllowed",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Allowed",
-            "value": "Allowed",
-            "description": "Allowed to do"
-          },
-          {
-            "name": "NotAllowed",
-            "value": "NotAllowed",
-            "description": "Not allowed to do"
+        "userAssignedIdentities": {
+          "type": "object",
+          "description": "The identities assigned to this resource by the user.",
+          "additionalProperties": {
+            "allOf": [
+              {
+                "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/UserAssignedIdentity"
+              }
+            ],
+            "type": "object",
+            "x-nullable": true
           }
-        ]
+        }
       }
     },
     "ProvisioningState": {
@@ -512,9 +478,6 @@
         "Canceled",
         "Unknown",
         "Creating",
-        "Moving",
-        "SoftDeleting",
-        "SoftDeleted",
         "Updating",
         "Deleting",
         "Accepted"
@@ -547,21 +510,6 @@
             "name": "Creating",
             "value": "Creating",
             "description": "The resource is creating"
-          },
-          {
-            "name": "Moving",
-            "value": "Moving",
-            "description": "The resource is moving"
-          },
-          {
-            "name": "SoftDeleting",
-            "value": "SoftDeleting",
-            "description": "The resource is soft deleting"
-          },
-          {
-            "name": "SoftDeleted",
-            "value": "SoftDeleted",
-            "description": "The resource is soft deleted"
           },
           {
             "name": "Updating",
