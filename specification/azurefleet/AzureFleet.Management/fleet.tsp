@@ -211,6 +211,21 @@ union EvictionPolicy {
   Deallocate: "Deallocate",
 }
 
+@doc("While retrieving VMSizes from CRS, Min = 0 (uint.MinValue) if not specified, Max = 4294967295 (uint.MaxValue) if not specified. This allows to filter VMAttributes on all available VMSizes.")
+model: VMAttributeMinMax
+{
+    @doc("Min VMSize from CRS, Min = 0 (uint.MinValue) if not specified.")
+     min?: uint;
+
+    @doc("Maz VMSize from CRS, Max = 4294967295 (uint.MaxValue) if not specified.")
+     max?: uint;
+}
+
+@doc("VMAttributes that will be used to filter VMSizes which will be used to build Fleet.)
+model:
+
+@doc("List of VMAttributes that will be used to filter VMSizes which will be used to build Fleet.)
+
 @armResourceOperations
 interface Fleets {
   get is ArmResourceRead<Fleet>;
