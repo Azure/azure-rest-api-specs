@@ -11,7 +11,7 @@ using Azure.Core;
 using Azure.Core.Traits;
 using Azure.Core.Foundations;
 
-namespace Azure.AI.Client.Endpoints;
+namespace AzureAI;
 
 /*
  See https://learn.microsoft.com/rest/api/azureml/workspace-connections/list
