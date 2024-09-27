@@ -3411,7 +3411,10 @@
         }
       },
       "required": [
+        "id",
         "timestamp",
+        "action",
+        "location",
         "target",
         "connectedRegistry"
       ]
@@ -3449,7 +3452,11 @@
           "type": "string",
           "description": "The version of the artifact."
         }
-      }
+      },
+      "required": [
+        "mediaType",
+        "repository"
+      ]
     },
     "ContainerRegistryChartDeletedEventData": {
       "type": "object",
@@ -3487,7 +3494,10 @@
           "type": "string",
           "description": "The name of the connected registry that generated this event."
         }
-      }
+      },
+      "required": [
+        "name"
+      ]
     },
     "ContainerRegistryEventData": {
       "type": "object",
@@ -3532,12 +3542,11 @@
         }
       },
       "required": [
+        "id",
         "timestamp",
-        "target",
-        "request",
-        "actor",
-        "source",
-        "connectedRegistry"
+        "action",
+        "location",
+        "target"
       ]
     },
     "ContainerRegistryEventRequest": {
@@ -3564,7 +3573,12 @@
           "type": "string",
           "description": "The user agent header of the request."
         }
-      }
+      },
+      "required": [
+        "id",
+        "host",
+        "method"
+      ]
     },
     "ContainerRegistryEventSource": {
       "type": "object",
@@ -3614,7 +3628,11 @@
           "type": "string",
           "description": "The tag name."
         }
-      }
+      },
+      "required": [
+        "mediaType",
+        "repository"
+      ]
     },
     "ContainerRegistryImageDeletedEventData": {
       "type": "object",
