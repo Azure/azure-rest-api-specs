@@ -785,10 +785,7 @@
           "200": {
             "description": "The destination endpoint of the stream ID on this flow.",
             "schema": {
-              "endpoint": {
-                "type": "string",
-                "description": "The specified stream ID destination endpoint"
-              }
+              "$ref": "#/definitions/getDestinationEndpointResult"
             }
           },
           "default": {
@@ -917,11 +914,7 @@
           "200": {
             "description": "The destination endpoint port of the stream ID on this flow.",
             "schema": {
-              "endpoint": {
-                "type": "integer",
-                "format": "int64",
-                "description": "The specified stream ID destination endpoint port"
-              }
+              "$ref": "#/definitions/getDestinationEndpointPortResult"
             }
           },
           "default": {
@@ -1039,10 +1032,7 @@
           "200": {
             "description": "Get the connection string for the specified flow.",
             "schema": {
-              "connectionString": {
-                "type": "string",
-                "description": "The connection string for the specified flow."
-              }
+              "$ref": "#/definitions/getFlowConnectionStringResult"
             }
           },
           "default": {
@@ -1100,11 +1090,7 @@
           "200": {
             "description": "Get the connection string for the specified flow.",
             "schema": {
-              "latency": {
-                "type": "integer",
-                "format": "int64",
-                "description": "The specified stream ID latency in milliseconds"
-              }
+              "$ref": "#/definitions/getStreamLatencyResult"
             }
           },
           "default": {
@@ -1234,10 +1220,7 @@
           "200": {
             "description": "The protocol of the stream ID on this flow.",
             "schema": {
-              "protocol": {
-                "$ref": "#/definitions/streamProtocol",
-                "description": "The specified stream ID protocol"
-              }
+              "$ref": "#/definitions/getStreamProtocolResult"
             }
           },
           "default": {
@@ -3284,6 +3267,53 @@
           "items": {
             "type": "string"
           }
+        }
+      }
+    },
+    "getDestinationEndpointResult": {
+      "type": "object",
+      "properties": {
+        "endpoint": {
+          "type": "string",
+          "description": "The destination endpoint for the flow stream"
+        }
+      }
+    },
+    "getDestinationEndpointPortResult": {
+      "type": "object",
+      "properties": {
+        "port": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The destination endpoint port for the flow stream"
+        }
+      }
+    },
+    "getFlowConnectionStringResult": {
+      "type": "object",
+      "properties": {
+        "connectionString": {
+          "type": "string",
+          "description": "The connection string for the specified streaming flow"
+        }
+      }
+    },
+    "getStreamLatencyResult": {
+      "type": "object",
+      "properties": {
+        "latency": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The latency of the stream in milliseconds"
+        }
+      }
+    },
+    "getStreamProtocolResult": {
+      "type": "object",
+      "properties": {
+        "protocol": {
+          "$ref": "#/definitions/streamProtocol",
+          "description": "The protocol of the stream"
         }
       }
     }
