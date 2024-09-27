@@ -31,7 +31,7 @@ model EnvironmentResourceProperties {
 
   @doc("The Azure location")
   @added(Versions.v2024_06_24_preview)
-  armLocation?: string;
+  azureLocation?: string;
 
   @doc("Provisioning state")
   @visibility("read")
@@ -62,15 +62,6 @@ interface Environment {
   listBySubscription is ArmListBySubscription<EnvironmentResource>;
   listByResourceGroup is ArmResourceListByParent<EnvironmentResource>;
   get is ArmResourceRead<EnvironmentResource>;
-}
-
-@doc("Provisioning status of the resource.")
-union EnvironmentProvisioningState {
-  string,
-  ResourceProvisioningState,
-
-  @doc("The resource create request has been accepted")
-  Accepted: "Accepted",
 }
 
 @doc("The EnvironmentMode indicates which files will be cloned to the new environment.")
