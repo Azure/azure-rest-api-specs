@@ -160,6 +160,7 @@ model ImageNotificationContent extends NotificationContent {
   @doc("Message notification type is image.")
   kind: CommunicationMessageKind.image;
 
+  @clientName("caption")
   @doc("Optional text content.")
   content?: string;
 
@@ -172,6 +173,7 @@ model DocumentNotificationContent extends NotificationContent {
   @doc("Message notification type is image.")
   kind: CommunicationMessageKind.document;
 
+  @clientName("caption")
   @doc("Optional text content.")
   content?: string;
 
@@ -186,7 +188,8 @@ model DocumentNotificationContent extends NotificationContent {
 model VideoNotificationContent extends NotificationContent {
   @doc("Message notification type is image.")
   kind: CommunicationMessageKind.video;
-
+  
+  @clientName("caption")
   @doc("Optional text content.")
   content?: string;
 
