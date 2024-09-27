@@ -20,10 +20,12 @@ jobs:
       spec-lifecycle-resource-manager: ${{ steps.tsr-ps1.outputs.spec-lifecycle-resource-manager }}
 
     steps:
+      # TODO: checkout refs/pull/12345/merge
       - uses: actions/checkout@v4
         with:
           # Required since "HEAD^" is passed to TypeSpec-Requirement.ps1
           fetch-depth: 2
+          ref: refs/pull/${{ github.event.pull_request.number }}/merge
 
       - name: Use Node 20.0
         uses: actions/setup-node@v4
