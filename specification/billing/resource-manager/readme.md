@@ -307,6 +307,9 @@ suppressions:
   - code: PutRequestResponseSchemeArm
     from: migration.json
     reason: PATCH operation is not needed
+  - code: OperationsApiSchemaUsesCommonTypes
+    from: operation.json
+    reason: Service design that generates API definition. Type defined in local types.json
   - code: TenantLevelAPIsNotAllowed
     reason: Specific validation rules do not apply to this service. Microsoft.Billing is a tenant level RP
 ```
