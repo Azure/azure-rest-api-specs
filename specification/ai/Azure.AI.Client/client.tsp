@@ -3,5 +3,3 @@ import "./main.tsp";
 import "./endpoints/client.tsp";
 import "./agents/client.tsp";
 import "./evaluations/client.tsp";
-
-@@clientName(Client, "AzureAIClient");
