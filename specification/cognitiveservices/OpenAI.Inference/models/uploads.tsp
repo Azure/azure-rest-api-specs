@@ -107,4 +107,10 @@ model UploadPart {
     The object type, which is always `upload.part`.
     """)
   object: "upload.part";
+
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "this represents the case-sensitive wire format"
+  @doc("""
+    Azure only field.
+    """)
+  azure_block_id?: string;
 }
