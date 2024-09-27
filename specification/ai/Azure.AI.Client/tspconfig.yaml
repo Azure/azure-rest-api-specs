@@ -1,6 +1,8 @@
 parameters:
   "service-dir":
     default: "sdk/ai"
+  "service-name":
+    default: "Azure AI"
 emit:
   - "@azure-tools/typespec-autorest"
 options:
@@ -17,6 +19,7 @@ options:
     generate-test: true
     generate-sample: true
     examples-dir: "{project-root}/examples"
+    client-name: "{service-name}Client"
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/data-plane"
