@@ -142,7 +142,7 @@ model MediaNotificationContentBase {
 }
 
 @added(Versions.c2024_08_30)
-#deprecated "`MediaNotificationContent` is being deprecated, we encourage you to use the new `ImageNotificationContent` instead."
+#deprecated "`MediaNotificationContent` is being deprecated, we encourage you to use the new `ImageNotificationContent` for sending images instead."
 @doc("A request to send an image notification.")
 model MediaNotificationContent extends NotificationContent {
   @doc("Message notification type is image.")
@@ -160,9 +160,13 @@ model ImageNotificationContent extends NotificationContent {
   @doc("Message notification type is image.")
   kind: CommunicationMessageKind.image;
 
-  @clientName("caption")
+  @removed(Versions.c2024_08_30)
   @doc("Optional text content.")
   content?: string;
+
+  @added(Versions.c2024_08_30)
+  @doc("Optional text content.")
+  caption?: string;
 
   ...MediaNotificationContentBase;
 }
