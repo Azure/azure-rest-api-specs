@@ -25,8 +25,20 @@ To see additional help and options, run:
 These are the global settings for the DNS resolver API.
 
 ``` yaml
+title: DnsResolverManagementClient
+description: DNS Resolver Client
 openapi-type: arm
-tag: package-2022-07
+tag: package-preview-2023-07
+```
+
+### Tag: package-preview-2023-07
+
+These settings apply only when `--tag=package-preview-2023-07` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2023-07'
+input-file:
+  - Microsoft.Network/preview/2023-07-01-preview/dnsresolver.json
+  - Microsoft.Network/preview/2023-07-01-preview/dnsresolverpolicy.json
 ```
 
 ### Tag: package-2022-07
@@ -57,7 +69,7 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-net-track2
-  - repo: azure-sdk-for-python
+  - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-go
   - repo: azure-powershell
 ```
@@ -129,4 +141,3 @@ uncomment the  `exclude-file` section below and add the file paths.
 #exclude-file:
 #  - $(this-folder)/Microsoft.Example/stable/2010-01-01/somefile.json
 ```
-
