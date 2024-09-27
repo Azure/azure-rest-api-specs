@@ -149,7 +149,7 @@ model ChatRequestAssistantMessage extends ChatRequestMessage {
   @doc("The content of the message.")
   @typeChangedFrom(
     ServiceApiVersions.v2024_08_01_Preview,
-    string | ChatMessageTextContentItem[] | null
+    string | null
   )
   content:
     | string
