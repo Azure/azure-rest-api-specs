@@ -25,6 +25,10 @@ union CommunicationMessageKind {
   image: "image",
 
   @added(Versions.c2024_08_30)
+  @doc("Image message type. Legacy image type for `MediaNotificationContent` which is being deprecated")
+  image_v0: "image_v0",
+
+  @added(Versions.c2024_08_30)
   @doc("Document message type.")
   document: "document",
 
@@ -131,10 +135,23 @@ model TextNotificationContent extends NotificationContent {
 
 @added(Versions.c2024_08_30)
 @doc("A request to send a media notification. Could be an image, document or video.")
-model MediaNotificationContent {
+model MediaNotificationContentBase {
   @clientName("mediaUrl", "java")
   @doc("A media url for the file. Required if the type is one of the supported media types, e.g. image")
   mediaUri: url;
+}
+
+@added(Versions.c2024_08_30)
+#deprecated "`MediaNotificationContent` is being deprecated, we encourage you to use the new `ImageNotificationContent` for sending images instead."
+@doc("A request to send an image notification.")
+model MediaNotificationContent extends NotificationContent {
+  @doc("Message notification type is image.")
+  kind: CommunicationMessageKind.image_v0;
+
+  @doc("Optional text content.")
+  content?: string;
+
+  ...MediaNotificationContentBase;
 }
 
 @renamedFrom(Versions.c2024_08_30, "MediaNotificationContent")
@@ -143,10 +160,15 @@ model ImageNotificationContent extends NotificationContent {
   @doc("Message notification type is image.")
   kind: CommunicationMessageKind.image;
 
+  @removed(Versions.c2024_08_30)
   @doc("Optional text content.")
   content?: string;
 
-  ...MediaNotificationContent;
+  @added(Versions.c2024_08_30)
+  @doc("Optional text content.")
+  caption?: string;
+
+  ...MediaNotificationContentBase;
 }
 
 @added(Versions.c2024_08_30)
@@ -155,13 +177,14 @@ model DocumentNotificationContent extends NotificationContent {
   @doc("Message notification type is image.")
   kind: CommunicationMessageKind.document;
 
+  @clientName("caption")
   @doc("Optional text content.")
   content?: string;
 
   @doc("Optional name for the file.")
   fileName?: string;
 
-  ...MediaNotificationContent;
+  ...MediaNotificationContentBase;
 }
 
 @added(Versions.c2024_08_30)
@@ -169,11 +192,12 @@ model DocumentNotificationContent extends NotificationContent {
 model VideoNotificationContent extends NotificationContent {
   @doc("Message notification type is image.")
   kind: CommunicationMessageKind.video;
-
+  
+  @clientName("caption")
   @doc("Optional text content.")
   content?: string;
 
-  ...MediaNotificationContent;
+  ...MediaNotificationContentBase;
 }
 
 @added(Versions.c2024_08_30)
@@ -182,7 +206,7 @@ model AudioNotificationContent extends NotificationContent {
   @doc("Message notification type is audio.")
   kind: CommunicationMessageKind.audio;
 
-  ...MediaNotificationContent;
+  ...MediaNotificationContentBase;
 }
 
 @doc("A request to send a template notification.")

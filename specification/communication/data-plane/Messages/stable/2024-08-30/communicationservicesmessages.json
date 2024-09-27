@@ -392,6 +392,7 @@
       "enum": [
         "text",
         "image",
+        "image_v0",
         "document",
         "video",
         "audio",
@@ -410,6 +411,11 @@
             "name": "image",
             "value": "image",
             "description": "Image message type."
+          },
+          {
+            "name": "image_v0",
+            "value": "image_v0",
+            "description": "Image message type. Legacy image type for `MediaNotificationContent` which is being deprecated"
           },
           {
             "name": "document",
@@ -458,7 +464,8 @@
       "properties": {
         "content": {
           "type": "string",
-          "description": "Optional text content."
+          "description": "Optional text content.",
+          "x-ms-client-name": "caption"
         },
         "fileName": {
           "type": "string",
@@ -484,7 +491,7 @@
       "type": "object",
       "description": "A request to send an image notification.",
       "properties": {
-        "content": {
+        "caption": {
           "type": "string",
           "description": "Optional text content."
         },
@@ -503,6 +510,30 @@
         }
       ],
       "x-ms-discriminator-value": "image"
+    },
+    "MediaNotificationContent": {
+      "type": "object",
+      "description": "A request to send an image notification.",
+      "properties": {
+        "content": {
+          "type": "string",
+          "description": "Optional text content."
+        },
+        "mediaUri": {
+          "type": "string",
+          "format": "uri",
+          "description": "A media url for the file. Required if the type is one of the supported media types, e.g. image"
+        }
+      },
+      "required": [
+        "mediaUri"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/NotificationContent"
+        }
+      ],
+      "x-ms-discriminator-value": "image_v0"
     },
     "MessageReceipt": {
       "type": "object",
@@ -984,7 +1015,8 @@
       "properties": {
         "content": {
           "type": "string",
-          "description": "Optional text content."
+          "description": "Optional text content.",
+          "x-ms-client-name": "caption"
         },
         "mediaUri": {
           "type": "string",
