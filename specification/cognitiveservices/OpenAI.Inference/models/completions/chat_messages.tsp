@@ -13,6 +13,16 @@ using TypeSpec.Versioning;
 
 namespace Azure.OpenAI;
 
+#suppress "@azure-tools/typespec-autorest/union-unsupported" "External API shape is defined in OpenAPI 3.0 as oneOf."
+@removed(ServiceApiVersions.v2024_08_01_Preview)
+@doc("The contents of the user message, with available input types varying by selected model.")
+union ChatMessageContent {
+  string,
+
+  @added(ServiceApiVersions.v2024_02_15_Preview)
+  ChatMessageContentItem[],
+}
+
 @added(ServiceApiVersions.v2024_02_15_Preview)
 @doc("An abstract representation of a structured content item within a chat message.")
 @discriminator("type")
@@ -121,7 +131,7 @@ model ChatRequestUserMessage extends ChatRequestMessage {
 
   #suppress "@azure-tools/typespec-autorest/union-unsupported" "OpenAPI v2 support deferred"
   @doc("The contents of the user message, with available input types varying by selected model.")
-  @typeChangedFrom(ServiceApiVersions.v2024_08_01_Preview, string | ChatMessageContentItem[])
+  @typeChangedFrom(ServiceApiVersions.v2024_08_01_Preview, ChatMessageContent)
   content: string | ChatMessageTextContentItem[] | ChatMessageImageContentItem[];
 
   @doc("An optional name for the participant.")
