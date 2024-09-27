@@ -1,0 +1,371 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2024-10-02-preview",
+    "title": "ContainerApps API Client"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/managedEnvironments/{environmentName}/maintenanceConfigurations": {
+      "get": {
+        "tags": [
+          "ManagedEnvironment",
+          "MaintenanceConfigurations"
+        ],
+        "operationId": "MaintenanceConfigurations_ListByManagedEnvironmentResource",
+        "description": "Gets all maintenance configurations in the specified Managed Environment (there is only one).",
+        "x-ms-examples": {
+          "ManagedEnvironmentMaintenanceConfigurationsList": {
+            "$ref": "./examples/ManagedEnvironment_MaintenanceConfigurations_List.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "environmentName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Managed Environment."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully got the current maintenance configurations",
+            "schema": {
+              "$ref": "#/definitions/ManagedEnvironmentMaintenanceConfigurationListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft./ManagedEnvironment/{environmentName}/MaintenanceConfigurations/{configName}": {
+      "put": {
+        "tags": [
+          "ManagedEnvironment",
+          "MaintenanceConfigurations"
+        ],
+        "operationId": "MaintenanceConfigurations_CreateOrUpdate",
+        "x-ms-examples": {
+          "ManagedEnvironmentMaintenanceConfigurationsCreateOrUpdate": {
+            "$ref": "./examples/ManagedEnvironment_MaintenanceConfigurations_CreateOrUpdate.json"
+          }
+        },
+        "description": "Create or replace the maintenance configuration for ManagedEnvironment.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "environmentName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the ManagedEnvironment."
+          },
+          {
+            "name": "configName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the maintenance configuration."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ManagedEnvironmentMaintenanceConfiguration"
+            },
+            "description": "Parameters to set the maintenance configuration for ManagedEnvironment ."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The maintenance configuration was successfully updated.",
+            "schema": {
+              "$ref": "#/definitions/ManagedEnvironmentMaintenanceConfiguration"
+            }
+          },
+          "201": {
+            "description": "The maintenance configuration was successfully created.",
+            "schema": {
+              "$ref": "#/definitions/ManagedEnvironmentMaintenanceConfiguration"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "ManagedEnvironment",
+          "MaintenanceConfigurations"
+        ],
+        "operationId": "MaintenanceConfigurations_Delete",
+        "x-ms-examples": {
+          "ManagedEnvironmentMaintenanceConfigurationsDelete": {
+            "$ref": "./examples/ManagedEnvironment_MaintenanceConfigurations_Delete.json"
+          }
+        },
+        "description": "Deletes the maintenance configuration of a ManagedEnvironment .",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the ManagedEnvironment."
+          },
+          {
+            "name": "configName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the maintenance configuration."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success."
+          },
+          "204": {
+            "description": "Success."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "ManagedEnvironment",
+          "MaintenanceConfigurations"
+        ],
+        "operationId": "MaintenanceConfigurations_Get",
+        "x-ms-examples": {
+          "ManagedEnvironmentMaintenanceConfigurationsGet": {
+            "$ref": "./examples/ManagedEnvironment_MaintenanceConfigurations_Get.json"
+          }
+        },
+        "description": "Gets the maintenance configuration of a ManagedEnvironment .",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the ManagedEnvironment."
+          },
+          {
+            "name": "configName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the maintenance configuration."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Response of get maintenance configurations.",
+            "schema": {
+              "$ref": "#/definitions/ManagedEnvironmentMaintenanceConfiguration"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "ScheduleEntry": {
+      "properties": {
+        "dayOfWeek": {
+          "type": "string",
+          "description": "Day of the week when a managed environment can be patched.",
+          "enum": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+            "Sunday",
+            "Everyday",
+            "Weekend"
+          ],
+          "x-ms-enum": {
+            "name": "DayOfWeek",
+            "modelAsString": false
+          }
+        },
+        "startHourUtc": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Start hour after which managed environment patching can start."
+        },
+        "maintenanceWindow": {
+          "type": "string",
+          "format": "duration",
+          "description": "ISO8601 timespan specifying how much time managed environment patching can take."
+        }
+      },
+      "required": [
+        "dayOfWeek",
+        "startHourUtc"
+      ],
+      "description": "Maintenance schedule entry for a managed environment."
+    },
+    "ScheduleEntries": {
+      "properties": {
+        "scheduleEntries": {
+          "x-ms-client-name": "ScheduleEntries",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ScheduleEntry"
+          },
+          "x-ms-identifiers": [],
+          "description": "List of maintenance schedules for a managed environment."
+        }
+      },
+      "required": [
+        "scheduleEntries"
+      ],
+      "description": "List of maintenance schedules for a managed environment."
+    },
+    "MaintenanceConfigurationSchedule": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ScheduleEntries",
+          "description": "List of maintenance schedules for a managed environment."
+        },
+        "location": {
+          "type": "string",
+          "description": "The geo-location where the resource lives",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "properties"
+      ],
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "description": "Response to put/get maintenance schedules for managed environment."
+    },
+    "MaintenanceConfigurationScheduleListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MaintenanceConfigurationSchedule"
+          },
+          "description": "Results of the list maintenance schedules operation."
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Link for next page of results."
+        }
+      },
+      "description": "The response of list maintenance schedules Redis operation."
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ]
+}
