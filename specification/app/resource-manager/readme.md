@@ -57,6 +57,7 @@ input-file:
   - Microsoft.App/preview/2024-10-02-preview/JavaComponents.json
   - Microsoft.App/preview/2024-10-02-preview/Jobs.json
   - Microsoft.App/preview/2024-10-02-preview/LogicAppsExtension.json
+  - Microsoft.App/preview/2024-10-02-preview/MaintenanceConfigurations.json
   - Microsoft.App/preview/2024-10-02-preview/ManagedEnvironments.json
   - Microsoft.App/preview/2024-10-02-preview/ManagedEnvironmentsDaprComponentResiliencyPolicies.json
   - Microsoft.App/preview/2024-10-02-preview/ManagedEnvironmentsDaprComponents.json
