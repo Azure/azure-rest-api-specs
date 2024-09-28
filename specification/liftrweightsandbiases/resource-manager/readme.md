@@ -36,5 +36,5 @@ These settings apply only when `--tag=package-2024-09-18-preview` is specified o
 
 ```yaml $(tag) == 'package-2024-09-18-preview'
 input-file:
-  - Microsoft.WeightsAndBiases/stable/2024-09-18-preview/openapi.json
+  - Microsoft.WeightsAndBiases/preview/2024-09-18-preview/openapi.json
 ```
