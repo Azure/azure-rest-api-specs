@@ -27,35 +27,34 @@ enum Versions {
   @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
   @useDependency(LiftrBase.Versions.v1_preview)
-  v2021_10_01_preview: "2024-09-18",
+  v2024_09_18_preview: "2024-09-18-preview",
 }
 
 /** The available regions */
 union Region {
   string,
 
-  @doc("eastus")
+  @doc("eastus region")
   eastus: "eastus",
 
-  @doc("centralus")
+  @doc("centralus region")
   centralus: "centralus",
 
-  @doc("westus")
+  @doc("westus region")
   westus: "westus",
 
-  @doc("westeurope")
+  @doc("westeurope region")
   westeurope: "westeurope",
 
-  @doc("japaneast")
+  @doc("japaneast region")
   japaneast: "japaneast",
 
-  @doc("koreacentral")
+  @doc("koreacentral region")
   koreacentral: "koreacentral",
 }
 
 @doc("Partner's specific Properties")
 model PartnerProperties {
-  /** TODO: Add custom properties */
   @doc("The region of the instance")
   region: Region;
 
