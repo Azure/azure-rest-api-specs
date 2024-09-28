@@ -36,10 +36,11 @@
           },
           {
             "name": "environmentName",
+            "description": "The name of the Managed Environment.",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the Managed Environment."
+            "pattern": "^[-\\w\\._\\(\\)]+$"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -51,6 +52,12 @@
             "schema": {
               "$ref": "#/definitions/MaintenanceConfigurationCollection"
             }
+          },
+          "default": {
+            "description": "Common error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
           }
         },
         "x-ms-pageable": {
@@ -58,7 +65,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/ManagedEnvironment/{environmentName}/MaintenanceConfigurations/{configName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/managedEnvironment/{environmentName}/maintenanceConfigurations/{configName}": {
       "put": {
         "tags": [
           "MaintenanceConfigurations"
@@ -79,17 +86,19 @@
           },
           {
             "name": "environmentName",
+            "description": "The name of the Managed Environment.",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the ManagedEnvironment."
+            "pattern": "^[-\\w\\._\\(\\)]+$"
           },
           {
             "name": "configName",
+            "description": "The name of the maintenance configuration.",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the maintenance configuration."
+            "pattern": "^[-\\w\\._\\(\\)]+$"
           },
           {
             "name": "parameters",
@@ -118,9 +127,9 @@
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed.",
+            "description": "Common error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
             }
           }
         }
@@ -145,17 +154,19 @@
           },
           {
             "name": "environmentName",
+            "description": "The name of the Managed Environment.",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the ManagedEnvironment."
+            "pattern": "^[-\\w\\._\\(\\)]+$"
           },
           {
             "name": "configName",
+            "description": "The name of the maintenance configuration.",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the maintenance configuration."
+            "pattern": "^[-\\w\\._\\(\\)]+$"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -169,9 +180,9 @@
             "description": "Success."
           },
           "default": {
-            "description": "Error response describing why the operation failed.",
+            "description": "Common error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
             }
           }
         }
@@ -196,17 +207,19 @@
           },
           {
             "name": "environmentName",
+            "description": "The name of the Managed Environment.",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the ManagedEnvironment."
+            "pattern": "^[-\\w\\._\\(\\)]+$"
           },
           {
             "name": "configName",
+            "description": "The name of the maintenance configuration.",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the maintenance configuration."
+            "pattern": "^[-\\w\\._\\(\\)]+$"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -220,9 +233,9 @@
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed.",
+            "description": "Common error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
             }
           }
         }
@@ -231,6 +244,8 @@
   },
   "definitions": {
     "ScheduleEntry": {
+      "type": "object",
+      "description": "Maintenance schedule entry for a managed environment.",
       "properties": {
         "dayOfWeek": {
           "type": "string",
@@ -265,10 +280,11 @@
       "required": [
         "dayOfWeek",
         "startHourUtc"
-      ],
-      "description": "Maintenance schedule entry for a managed environment."
+      ]
     },
     "ScheduleEntries": {
+      "type": "object",
+      "description": "List of maintenance schedules for a managed environment.",
       "properties": {
         "scheduleEntries": {
           "x-ms-client-name": "ScheduleEntries",
@@ -282,8 +298,7 @@
       },
       "required": [
         "scheduleEntries"
-      ],
-      "description": "List of maintenance schedules for a managed environment."
+      ]
     },
     "MaintenanceConfigurationResource": {
       "type": "object",
@@ -306,6 +321,8 @@
       }
     },
     "MaintenanceConfigurationCollection": {
+      "type": "object",
+      "description": "The response of list maintenance configuration resources."
       "properties": {
         "value": {
           "type": "array",
@@ -319,8 +336,7 @@
           "readOnly": true,
           "description": "Link for next page of results."
         }
-      },
-      "description": "The response of list maintenance configuration resources."
+      }
     }
   },
   "securityDefinitions": {
