@@ -53,6 +53,9 @@ namespace AzureAI {
   "https://{region}.api.azureml.ms/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}",
   "Azure AI",
   {
+    @doc("The region of the workspace.")
+    region: string,
+    
     @doc("The ID of the target subscription.")
     subscriptionId: string,
 
