@@ -55,7 +55,7 @@ namespace AzureAI {
   {
     @doc("The region of the workspace.")
     region: string,
-    
+
     @doc("The ID of the target subscription.")
     subscriptionId: string,
 
@@ -68,5 +68,11 @@ namespace AzureAI {
 )
 @versioned(Versions)
 namespace AzureAI.Evaluations {
+  @doc("Azure AI API versions")
+  enum Versions {
+    @doc("Azure AI API version 2024-07-01-preview.")
+    @useDependency(Azure.Core.Versions.v1_0_Preview_2)
+    `2024-07-01-preview`,
+  }
 }
 
