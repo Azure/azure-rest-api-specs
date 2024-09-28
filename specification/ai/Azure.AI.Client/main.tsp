@@ -35,5 +35,6 @@ namespace AzureAI {
   }
 
   using AzureAI.Evaluations;
+  using AzureAI.Agents;
 
 }
