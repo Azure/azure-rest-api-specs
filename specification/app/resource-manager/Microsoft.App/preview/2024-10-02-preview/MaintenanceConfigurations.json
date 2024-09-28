@@ -98,7 +98,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ManagedEnvironmentScheduleList"
+              "$ref": "#/definitions/ManagedEnvironmentSchedule"
             },
             "description": "Parameters to set the maintenance configuration for ManagedEnvironment ."
           },
@@ -110,13 +110,13 @@
           "200": {
             "description": "The maintenance configuration was successfully updated.",
             "schema": {
-              "$ref": "#/definitions/ManagedEnvironmentScheduleList"
+              "$ref": "#/definitions/ManagedEnvironmentSchedule"
             }
           },
           "201": {
             "description": "The maintenance configuration was successfully created.",
             "schema": {
-              "$ref": "#/definitions/ManagedEnvironmentScheduleList"
+              "$ref": "#/definitions/ManagedEnvironmentSchedule"
             }
           },
           "default": {
@@ -220,7 +220,7 @@
           "200": {
             "description": "Response of get maintenance configurations.",
             "schema": {
-              "$ref": "#/definitions/ManagedEnvironmentScheduleList"
+              "$ref": "#/definitions/ManagedEnvironmentSchedule"
             }
           },
           "default": {
@@ -251,23 +251,6 @@
         }
       ],
       "description": "Response to put/get maintenance schedules for Managed Environment."
-    },
-    "ManagedEnvironmentScheduleList": {
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ManagedEnvironmentSchedule"
-          },
-          "description": "Results of the list patch schedules operation."
-        },
-        "nextLink": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Link for next page of results."
-        }
-      },
-      "description": "The response of list maintenance schedules Managed Environment operation."
     },
     "ScheduleEntry": {
       "properties": {
