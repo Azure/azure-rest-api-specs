@@ -27,14 +27,14 @@ These are the global settings for the WeightsAndBiases service.
 ```yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2024-09-18
+tag: package-2024-09-18-preview
 ```
 
-### Tag: package-2024-09-18
+### Tag: package-2024-09-18-preview
 
-These settings apply only when `--tag=package-2024-09-18` is specified on the command line.
+These settings apply only when `--tag=package-2024-09-18-preview` is specified on the command line.
 
-```yaml $(tag) == 'package-2024-09-18'
+```yaml $(tag) == 'package-2024-09-18-preview'
 input-file:
-  - Microsoft.WeightsAndBiases/stable/2024-09-18/openapi.json
+  - Microsoft.WeightsAndBiases/stable/2024-09-18-preview/openapi.json
 ```
