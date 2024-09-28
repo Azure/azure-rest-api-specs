@@ -39,27 +39,6 @@ using Azure.Core.Traits;
     workspaceName: string,
   }
 )
-@route("/connections")
-
-@server(
-  "https://{region}.api.azureml.ms/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}",
-  "Azure AI",
-  {
-    @doc("The region of the workspace.")
-    region: string,
-
-    @doc("The ID of the target subscription.")
-    subscriptionId: string,
-
-    @doc("The name of the Resource Group.")
-    resourceGroupName: string,
-
-    @doc("The name of the workspace (Azure AI Studio hub).")
-    workspaceName: string,
-  }
-)
-@route("/evaluations")
-
 @versioned(Versions)
 namespace AzureAI {
   @doc("Azure AI API versions")
