@@ -11,16 +11,33 @@ using Azure.Core;
 using Azure.Core.Traits;
 using Azure.Core.Foundations;
 
-namespace AzureAI.Evaluations;
+@server(
+    "https://{region}.api.azureml.ms/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}",
+    "Azure AI Evaluations",
+    {
+      @doc("The region of the workspace.")
+      region: string,
 
-@post
-@route("/evaluations/create")
-@doc("Creates an evaluation.")
-op create is Azure.Core.Foundations.Operation<
-  {
-    @doc("Properties of Evaluation.")
-    @body
-    evaluation: Evaluation;
-  },
-  ResourceCreatedResponse<Evaluation>
->;
+      @doc("The ID of the target subscription.")
+      subscriptionId: string,
+
+      @doc("The name of the Resource Group.")
+      resourceGroupName: string,
+
+      @doc("The name of the workspace (Azure AI Studio hub).")
+      workspaceName: string,
+    }
+  )
+namespace AzureAI.Evaluations {
+    @post
+    @route("/evaluations/create")
+    @doc("Creates an evaluation.")
+    op create is Azure.Core.Foundations.Operation<
+      {
+        @doc("Properties of Evaluation.")
+        @body
+        evaluation: Evaluation;
+      },
+      ResourceCreatedResponse<Evaluation>
+    >;
+}
