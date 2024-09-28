@@ -11,8 +11,20 @@ using Azure.Core;
 using Azure.Core.Traits;
 using Azure.Core.Foundations;
 
-namespace AzureAI;
+namespace AzureAI.Evaluations;
 
+@post
+@route("/evaluations/create")
+@doc("Creates an evaluation.")
+operation create is Azure.Core.Foundations.Operation<
+  {
+    @doc("Properties of Evaluation.")
+    @body
+    evaluation: Evaluation;
+  },
+  ResourceCreatedResponse<Evaluation>
+
+/**
 interface Evaluations {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Waiting for bug fix: https://github.com/Azure/typespec-azure-pr/issues/3739."
   @doc("Get an evaluation.")
@@ -72,3 +84,4 @@ interface Evaluations {
     OkResponse<Evaluation>
   >;
 }
+**/
