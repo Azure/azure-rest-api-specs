@@ -906,7 +906,7 @@ model NetworkInterfaceProperties {
   @doc("NetworkSecurityGroup - Network Security Group attached to the network interface.")
   networkSecurityGroup?: NetworkSecurityGroupArmReference;
 
-  @added(Versions.v2024_07_15_preview)
+  @added(Versions.v2024_09_01_preview)
   @doc("Boolean indicating whether this is a local network interface or if one should be created.")
   createFromLocal?: boolean = false;
 }
@@ -1168,11 +1168,11 @@ model VirtualHardDiskProperties {
   @secret
   downloadUrl?: string;
 
-  @added(Versions.v2024_07_15_preview)
+  @added(Versions.v2024_09_01_preview)
   @doc("Boolean indicating whether this is a local hard disk or if one should be created.")
   createFromLocal?: boolean = false;
 
-  @added(Versions.v2024_07_15_preview)
+  @added(Versions.v2024_09_01_preview)
   @doc("Operating system type of the OS disk. Possible values are: Windows, Linux.")
   osType?: OperatingSystemTypes;
 
@@ -1319,7 +1319,7 @@ model VirtualMachineInstanceProperties {
   @doc("Unique identifier defined by ARC to identify the guest of the VM.")
   resourceUid?: string;
 
-  @added(Versions.v2024_07_15_preview)
+  @added(Versions.v2024_09_01_preview)
   @doc("Boolean indicating whether this is a local virtual machine or if one should be created.")
   createFromLocal?: boolean = false;
 }
