@@ -266,125 +266,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/authoring/analyze-conversations/projects/{projectName}:copy": {
-      "post": {
-        "operationId": "ConversationalAnalysisAuthoring_Copy",
-        "description": "Copies an existing project to another Azure resource.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "projectName",
-            "in": "path",
-            "description": "The new project name.",
-            "required": true,
-            "type": "string",
-            "maxLength": 100
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ConversationalAnalysisAuthoringCopyProjectOptions"
-            }
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "The request has been accepted for processing, but processing has not yet completed.",
-            "schema": {
-              "type": "object",
-              "description": "Provides status details for long running operations.",
-              "properties": {
-                "id": {
-                  "type": "string",
-                  "description": "The unique ID of the operation."
-                },
-                "status": {
-                  "$ref": "#/definitions/Azure.Core.Foundations.OperationState",
-                  "description": "The status of the operation"
-                },
-                "error": {
-                  "$ref": "#/definitions/Azure.Core.Foundations.Error",
-                  "description": "Error object that describes the error when status is \"Failed\"."
-                },
-                "result": {
-                  "$ref": "#/definitions/ConversationalAnalysisAuthoringCopyProjectOptions",
-                  "description": "The result of the operation."
-                }
-              },
-              "required": [
-                "id",
-                "status"
-              ]
-            },
-            "headers": {
-              "Operation-Location": {
-                "type": "string",
-                "format": "uri",
-                "description": "The location for monitoring the operation state."
-              },
-              "x-ms-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, server-generated string identifier for the request."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-long-running-operation": true
-      }
-    },
-    "/authoring/analyze-conversations/projects/{projectName}/:authorize-copy": {
-      "post": {
-        "operationId": "ConversationalAnalysisAuthoring_AuthorizeCopy",
-        "description": "Generates a copy project operation authorization to the current target Azure\nresource.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "projectName",
-            "in": "path",
-            "description": "The new project name.",
-            "required": true,
-            "type": "string",
-            "maxLength": 100
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ConversationalAnalysisAuthoringCopyAuthorizationOptions"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/ConversationalAnalysisAuthoringCopyProjectOptions"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
-    },
-    "/authoring/analyze-conversations/projects/{projectName}/:export": {
+    "/authoring/analyze-conversations/projects/{projectName}:export": {
       "post": {
         "operationId": "ConversationalAnalysisAuthoring_Export",
         "description": "Triggers a job to export a project's data.",
@@ -395,7 +277,7 @@
           {
             "name": "projectName",
             "in": "path",
-            "description": "The name of the project to use.",
+            "description": "The new project name.",
             "required": true,
             "type": "string",
             "maxLength": 100
@@ -425,8 +307,7 @@
                   "description": "Specifies the format for an application that was exported from LUIS."
                 }
               ]
-            },
-            "x-ms-client-name": "ExportedProjectFormat"
+            }
           },
           {
             "name": "stringIndexType",
@@ -467,6 +348,32 @@
         "responses": {
           "202": {
             "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "schema": {
+              "type": "object",
+              "description": "Provides status details for long running operations.",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "description": "The unique ID of the operation."
+                },
+                "status": {
+                  "$ref": "#/definitions/Azure.Core.Foundations.OperationState",
+                  "description": "The status of the operation"
+                },
+                "error": {
+                  "$ref": "#/definitions/Azure.Core.Foundations.Error",
+                  "description": "Error object that describes the error when status is \"Failed\"."
+                },
+                "result": {
+                  "$ref": "#/definitions/ConversationalAnalysisAuthoringProjectMetadata",
+                  "description": "The result of the operation."
+                }
+              },
+              "required": [
+                "id",
+                "status"
+              ]
+            },
             "headers": {
               "Operation-Location": {
                 "type": "string",
@@ -490,7 +397,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/authoring/analyze-conversations/projects/{projectName}/:import": {
+    "/authoring/analyze-conversations/projects/{projectName}:import": {
       "post": {
         "operationId": "ConversationalAnalysisAuthoring_Import",
         "description": "Triggers a job to import a project. If a project with the same name already\nexists, the data of that project is replaced.",
@@ -501,7 +408,7 @@
           {
             "name": "projectName",
             "in": "path",
-            "description": "The name of the project to use.",
+            "description": "The new project name.",
             "required": true,
             "type": "string",
             "maxLength": 100
@@ -547,6 +454,32 @@
         "responses": {
           "202": {
             "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "schema": {
+              "type": "object",
+              "description": "Provides status details for long running operations.",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "description": "The unique ID of the operation."
+                },
+                "status": {
+                  "$ref": "#/definitions/Azure.Core.Foundations.OperationState",
+                  "description": "The status of the operation"
+                },
+                "error": {
+                  "$ref": "#/definitions/Azure.Core.Foundations.Error",
+                  "description": "Error object that describes the error when status is \"Failed\"."
+                },
+                "result": {
+                  "$ref": "#/definitions/ConversationalAnalysisAuthoringProjectMetadata",
+                  "description": "The result of the operation."
+                }
+              },
+              "required": [
+                "id",
+                "status"
+              ]
+            },
             "headers": {
               "Operation-Location": {
                 "type": "string",
@@ -570,7 +503,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/authoring/analyze-conversations/projects/{projectName}/:train": {
+    "/authoring/analyze-conversations/projects/{projectName}:train": {
       "post": {
         "operationId": "ConversationalAnalysisAuthoring_Train",
         "description": "Triggers a training job for a project.",
@@ -581,7 +514,7 @@
           {
             "name": "projectName",
             "in": "path",
-            "description": "The name of the project to use.",
+            "description": "The new project name.",
             "required": true,
             "type": "string",
             "maxLength": 100
@@ -589,7 +522,6 @@
           {
             "name": "body",
             "in": "body",
-            "description": "The training input parameters.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/ConversationalAnalysisAuthoringTrainingJobOptions"
@@ -599,6 +531,32 @@
         "responses": {
           "202": {
             "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "schema": {
+              "type": "object",
+              "description": "Provides status details for long running operations.",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "description": "The unique ID of the operation."
+                },
+                "status": {
+                  "$ref": "#/definitions/Azure.Core.Foundations.OperationState",
+                  "description": "The status of the operation"
+                },
+                "error": {
+                  "$ref": "#/definitions/Azure.Core.Foundations.Error",
+                  "description": "Error object that describes the error when status is \"Failed\"."
+                },
+                "result": {
+                  "$ref": "#/definitions/ConversationalAnalysisAuthoringProjectMetadata",
+                  "description": "The result of the operation."
+                }
+              },
+              "required": [
+                "id",
+                "status"
+              ]
+            },
             "headers": {
               "Operation-Location": {
                 "type": "string",
@@ -617,6 +575,124 @@
         "x-ms-examples": {
           "Successful Train Project": {
             "$ref": "./examples/SuccessfulTrainProject.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/authoring/analyze-conversations/projects/{projectName}/:authorize-copy": {
+      "post": {
+        "operationId": "ConversationalAnalysisAuthoring_CopyProjectAuthorization",
+        "description": "Generates a copy project operation authorization to the current target Azure\nresource.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "The new project name.",
+            "required": true,
+            "type": "string",
+            "maxLength": 100
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ConversationalAnalysisAuthoringCopyAuthorizationOptions"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ConversationalAnalysisAuthoringCopyProjectOptions"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Copy Project Authorization": {
+            "$ref": "./examples/SuccessfulCopyProjectAuthorization.json"
+          }
+        }
+      }
+    },
+    "/authoring/analyze-conversations/projects/{projectName}/:copy": {
+      "post": {
+        "operationId": "ConversationalAnalysisAuthoring_Copy",
+        "description": "Copies an existing project to another Azure resource.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "The new project name.",
+            "required": true,
+            "type": "string",
+            "maxLength": 100
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ConversationalAnalysisAuthoringCopyProjectOptions"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "schema": {
+              "type": "object",
+              "description": "Provides status details for long running operations.",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "description": "The unique ID of the operation."
+                },
+                "status": {
+                  "$ref": "#/definitions/Azure.Core.Foundations.OperationState",
+                  "description": "The status of the operation"
+                },
+                "error": {
+                  "$ref": "#/definitions/Azure.Core.Foundations.Error",
+                  "description": "Error object that describes the error when status is \"Failed\"."
+                },
+                "result": {
+                  "$ref": "#/definitions/ConversationalAnalysisAuthoringProjectMetadata",
+                  "description": "The result of the operation."
+                }
+              },
+              "required": [
+                "id",
+                "status"
+              ]
+            },
+            "headers": {
+              "Operation-Location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The location for monitoring the operation state."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-long-running-operation": true
@@ -731,7 +807,7 @@
           {
             "name": "projectName",
             "in": "path",
-            "description": "The name of the project to use.",
+            "description": "The new project name.",
             "required": true,
             "type": "string",
             "maxLength": 100
@@ -739,7 +815,7 @@
           {
             "name": "deploymentName",
             "in": "path",
-            "description": "The name of the specific deployment of the project to use.",
+            "description": "Represents deployment name.",
             "required": true,
             "type": "string"
           }

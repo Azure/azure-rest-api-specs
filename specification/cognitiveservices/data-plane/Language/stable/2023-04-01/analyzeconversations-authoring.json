@@ -266,7 +266,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/authoring/analyze-conversations/projects/{projectName}/:export": {
+    "/authoring/analyze-conversations/projects/{projectName}:export": {
       "post": {
         "operationId": "ConversationalAnalysisAuthoring_Export",
         "description": "Triggers a job to export a project's data.",
@@ -277,7 +277,7 @@
           {
             "name": "projectName",
             "in": "path",
-            "description": "The name of the project to use.",
+            "description": "The new project name.",
             "required": true,
             "type": "string",
             "maxLength": 100
@@ -307,8 +307,7 @@
                   "description": "Specifies the format for an application that was exported from LUIS."
                 }
               ]
-            },
-            "x-ms-client-name": "ExportedProjectFormat"
+            }
           },
           {
             "name": "stringIndexType",
@@ -349,6 +348,32 @@
         "responses": {
           "202": {
             "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "schema": {
+              "type": "object",
+              "description": "Provides status details for long running operations.",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "description": "The unique ID of the operation."
+                },
+                "status": {
+                  "$ref": "#/definitions/Azure.Core.Foundations.OperationState",
+                  "description": "The status of the operation"
+                },
+                "error": {
+                  "$ref": "#/definitions/Azure.Core.Foundations.Error",
+                  "description": "Error object that describes the error when status is \"Failed\"."
+                },
+                "result": {
+                  "$ref": "#/definitions/ConversationalAnalysisAuthoringProjectMetadata",
+                  "description": "The result of the operation."
+                }
+              },
+              "required": [
+                "id",
+                "status"
+              ]
+            },
             "headers": {
               "Operation-Location": {
                 "type": "string",
@@ -372,7 +397,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/authoring/analyze-conversations/projects/{projectName}/:import": {
+    "/authoring/analyze-conversations/projects/{projectName}:import": {
       "post": {
         "operationId": "ConversationalAnalysisAuthoring_Import",
         "description": "Triggers a job to import a project. If a project with the same name already\nexists, the data of that project is replaced.",
@@ -383,7 +408,7 @@
           {
             "name": "projectName",
             "in": "path",
-            "description": "The name of the project to use.",
+            "description": "The new project name.",
             "required": true,
             "type": "string",
             "maxLength": 100
@@ -429,6 +454,32 @@
         "responses": {
           "202": {
             "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "schema": {
+              "type": "object",
+              "description": "Provides status details for long running operations.",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "description": "The unique ID of the operation."
+                },
+                "status": {
+                  "$ref": "#/definitions/Azure.Core.Foundations.OperationState",
+                  "description": "The status of the operation"
+                },
+                "error": {
+                  "$ref": "#/definitions/Azure.Core.Foundations.Error",
+                  "description": "Error object that describes the error when status is \"Failed\"."
+                },
+                "result": {
+                  "$ref": "#/definitions/ConversationalAnalysisAuthoringProjectMetadata",
+                  "description": "The result of the operation."
+                }
+              },
+              "required": [
+                "id",
+                "status"
+              ]
+            },
             "headers": {
               "Operation-Location": {
                 "type": "string",
@@ -452,7 +503,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/authoring/analyze-conversations/projects/{projectName}/:train": {
+    "/authoring/analyze-conversations/projects/{projectName}:train": {
       "post": {
         "operationId": "ConversationalAnalysisAuthoring_Train",
         "description": "Triggers a training job for a project.",
@@ -463,7 +514,7 @@
           {
             "name": "projectName",
             "in": "path",
-            "description": "The name of the project to use.",
+            "description": "The new project name.",
             "required": true,
             "type": "string",
             "maxLength": 100
@@ -471,7 +522,6 @@
           {
             "name": "body",
             "in": "body",
-            "description": "The training input parameters.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/ConversationalAnalysisAuthoringTrainingJobOptions"
@@ -481,6 +531,32 @@
         "responses": {
           "202": {
             "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "schema": {
+              "type": "object",
+              "description": "Provides status details for long running operations.",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "description": "The unique ID of the operation."
+                },
+                "status": {
+                  "$ref": "#/definitions/Azure.Core.Foundations.OperationState",
+                  "description": "The status of the operation"
+                },
+                "error": {
+                  "$ref": "#/definitions/Azure.Core.Foundations.Error",
+                  "description": "Error object that describes the error when status is \"Failed\"."
+                },
+                "result": {
+                  "$ref": "#/definitions/ConversationalAnalysisAuthoringProjectMetadata",
+                  "description": "The result of the operation."
+                }
+              },
+              "required": [
+                "id",
+                "status"
+              ]
+            },
             "headers": {
               "Operation-Location": {
                 "type": "string",
@@ -568,7 +644,7 @@
           {
             "name": "projectName",
             "in": "path",
-            "description": "The name of the project to use.",
+            "description": "The new project name.",
             "required": true,
             "type": "string",
             "maxLength": 100
@@ -576,7 +652,7 @@
           {
             "name": "deploymentName",
             "in": "path",
-            "description": "The name of the specific deployment of the project to use.",
+            "description": "Represents deployment name.",
             "required": true,
             "type": "string"
           }

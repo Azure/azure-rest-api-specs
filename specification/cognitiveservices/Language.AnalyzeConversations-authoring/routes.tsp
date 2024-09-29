@@ -73,7 +73,8 @@ interface ConversationalAnalysisAuthoring {
   @post
   @added(Versions.v2023_04_15_preview)
   @actionSeparator("/:")
-  `authorize-copy` is languageOperations.ResourceAction<ConversationalAnalysisAuthoringProjectMetadata,
+  @action("authorize-copy")
+  copyProjectAuthorization is languageOperations.ResourceAction<ConversationalAnalysisAuthoringProjectMetadata,
   ConversationalAnalysisAuthoringCopyAuthorizationOptions,ConversationalAnalysisAuthoringCopyProjectOptions>;
 
   /**
@@ -82,77 +83,59 @@ interface ConversationalAnalysisAuthoring {
   @post
   @pollingOperation(ConversationalAnalysisAuthoring.getCopyProjectStatus)
   @added(Versions.v2023_04_15_preview)
+  @actionSeparator("/:")
   copy is languageOperations.LongRunningResourceAction<
     ConversationalAnalysisAuthoringProjectMetadata,
     ConversationalAnalysisAuthoringCopyProjectOptions,
-   ConversationalAnalysisAuthoringCopyProjectOptions & RequestIdResponseHeader
+   ConversationalAnalysisAuthoringProjectMetadata
   >;
 
   /**
    * Triggers a job to export a project's data.
    */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  @route("/authoring/analyze-conversations/projects/{projectName}/:export")
   @post
   @pollingOperation(ConversationalAnalysisAuthoring.getExportStatus)
-  export is Foundations.LongRunningOperation<
+  export is languageOperations.LongRunningResourceAction<
+    ConversationalAnalysisAuthoringProjectMetadata,
     {
-      /**
-       * The name of the project to use.
-       */
-      @maxLength(100)
-      @path
-      projectName: string;
-
       /**
        * The format of the exported project file to use.
        */
-      #suppress "@azure-tools/typespec-azure-core/casing-style"
-      @query("format")
-      ExportedProjectFormat?: ConversationalAnalysisAuthoringExportedProjectFormat;
+      @query
+      format?: ConversationalAnalysisAuthoringExportedProjectFormat;
 
       /**
        * Specifies the method used to interpret string offsets. For additional
        * information see https://aka.ms/text-analytics-offsets.
        */
-      @query("stringIndexType")
+      @query
       stringIndexType: ConversationalAnalysisAuthoringStringIndexType;
 
       /**
        * Kind of asset to export.
        */
-      @query("assetKind")
+      @query
       assetKind?: string;
 
       /**
        * Trained model label to export. If the trainedModelLabel is null, the default behavior is to export the current working copy.
        */
-      @query("trainedModelLabel")
+      @query
       trainedModelLabel?: string;
     },
-    AcceptedResponse,
-    {},
-    ErrorResponse
+   ConversationalAnalysisAuthoringProjectMetadata
   >;
 
   /**
    * Triggers a job to import a project. If a project with the same name already
    * exists, the data of that project is replaced.
    */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  @route("/authoring/analyze-conversations/projects/{projectName}/:import")
   @post
   @pollingOperation(ConversationalAnalysisAuthoring.getImportStatus)
-  `import` is Foundations.LongRunningOperation<
+  `import` is languageOperations.LongRunningResourceAction<
+    ConversationalAnalysisAuthoringProjectMetadata,
     {
-      /**
-       * The name of the project to use.
-       */
-      @maxLength(100)
-      @path
-      projectName: string;
-
-      /**
+     /**
        * The format of the exported project file to use.
        */
       #suppress "@azure-tools/typespec-azure-core/casing-style"
@@ -165,36 +148,18 @@ interface ConversationalAnalysisAuthoring {
       @body
       body: ConversationalAnalysisAuthoringExportedProject;
     },
-    AcceptedResponse,
-    {},
-    ErrorResponse
+   ConversationalAnalysisAuthoringProjectMetadata
   >;
 
   /**
    * Triggers a training job for a project.
    */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  @route("/authoring/analyze-conversations/projects/{projectName}/:train")
   @post
   @pollingOperation(ConversationalAnalysisAuthoring.getTrainingStatus)
-  train is Foundations.LongRunningOperation<
-    {
-      /**
-       * The name of the project to use.
-       */
-      @maxLength(100)
-      @path
-      projectName: string;
-
-      /**
-       * The training input parameters.
-       */
-      @body
-      body: ConversationalAnalysisAuthoringTrainingJobOptions;
-    },
-    AcceptedResponse,
-    {},
-    ErrorResponse
+  train is languageOperations.LongRunningResourceAction<
+    ConversationalAnalysisAuthoringProjectMetadata,
+    ConversationalAnalysisAuthoringTrainingJobOptions,
+    ConversationalAnalysisAuthoringProjectMetadata
   >;
 
   /**
@@ -215,28 +180,8 @@ interface ConversationalAnalysisAuthoring {
   /**
    * Gets the details of a deployment.
    */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  @route("/authoring/analyze-conversations/projects/{projectName}/deployments/{deploymentName}")
   @get
-  getDeployment is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * The name of the project to use.
-       */
-      @maxLength(100)
-      @path
-      projectName: string;
-
-      /**
-       * The name of the specific deployment of the project to use.
-       */
-      @path
-      deploymentName: string;
-    },
-    ConversationalAnalysisAuthoringProjectDeployment,
-    {},
-    ErrorResponse
-  >;
+  getDeployment is languageOperations.ResourceRead<ConversationalAnalysisAuthoringProjectDeployment>;
 
   /**
    * Creates a new deployment or replaces an existing one.
