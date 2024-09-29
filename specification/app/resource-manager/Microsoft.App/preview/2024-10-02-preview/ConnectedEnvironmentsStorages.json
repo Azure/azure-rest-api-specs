@@ -122,6 +122,10 @@
         "summary": "Create or update storage for a connectedEnvironment.",
         "description": "Create or update storage for a connectedEnvironment.",
         "operationId": "ConnectedEnvironmentsStorages_CreateOrUpdate",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -189,6 +193,10 @@
         "summary": "Delete storage for a connectedEnvironment.",
         "description": "Delete storage for a connectedEnvironment.",
         "operationId": "ConnectedEnvironmentsStorages_Delete",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -326,4 +334,3 @@
     }
   ]
 }
-

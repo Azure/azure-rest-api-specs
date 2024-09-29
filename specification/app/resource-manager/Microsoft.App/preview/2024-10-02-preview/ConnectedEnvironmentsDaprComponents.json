@@ -123,6 +123,10 @@
         "summary": "Creates or updates a Dapr Component.",
         "description": "Creates or updates a Dapr Component in a connected environment.",
         "operationId": "ConnectedEnvironmentsDaprComponents_CreateOrUpdate",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -177,7 +181,6 @@
             }
           }
         },
-        "x-ms-long-running-operation": false,
         "x-ms-examples": {
           "Create or update dapr component": {
             "$ref": "./examples/ConnectedEnvironmentsDaprComponents_CreateOrUpdate.json"
@@ -191,6 +194,10 @@
         "summary": "Delete a Dapr Component.",
         "description": "Delete a Dapr Component from a connected environment.",
         "operationId": "ConnectedEnvironmentsDaprComponents_Delete",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -242,8 +249,7 @@
           "Delete dapr component": {
             "$ref": "./examples/ConnectedEnvironmentsDaprComponents_Delete.json"
           }
-        },
-        "x-ms-long-running-operation": false
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/connectedEnvironments/{connectedEnvironmentName}/daprComponents/{componentName}/listSecrets": {
@@ -299,7 +305,7 @@
         }
       }
     }
-  },  
+  },
   "definitions": {
     "ConnectedEnvironmentDaprComponentsCollection": {
       "description": "Collection of Dapr Components for Environments",
@@ -328,29 +334,29 @@
       "properties": {
         "properties": {
           "provisioningState": {
-              "description": "Provisioning state of the Connected Environment Dapr Component.",
-              "enum": [
-                "Succeeded",
-                "Failed",
-                "Canceled",
-                "InProgress"
-              ],
-              "type": "string",
-              "readOnly": true,
-              "x-ms-enum": {
-                "name": "ConnectedEnvironmentDaprComponentProvisioningState",
-                "modelAsString": true
-              }
-            },
-            "deploymentErrors": {
-              "description": "Any errors that occurred during deployment or deployment validation",
-              "type": "string",
-              "readOnly": true
+            "description": "Provisioning state of the Connected Environment Dapr Component.",
+            "enum": [
+              "Succeeded",
+              "Failed",
+              "Canceled",
+              "InProgress"
+            ],
+            "type": "string",
+            "readOnly": true,
+            "x-ms-enum": {
+              "name": "ConnectedEnvironmentDaprComponentProvisioningState",
+              "modelAsString": true
             }
+          },
+          "deploymentErrors": {
+            "description": "Any errors that occurred during deployment or deployment validation",
+            "type": "string",
+            "readOnly": true
           }
         }
       }
-    },
+    }
+  },
   "securityDefinitions": {
     "azure_auth": {
       "type": "oauth2",
@@ -370,4 +376,3 @@
     }
   ]
 }
-

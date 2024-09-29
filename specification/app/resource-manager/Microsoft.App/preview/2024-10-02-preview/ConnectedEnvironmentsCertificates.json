@@ -125,6 +125,10 @@
         ],
         "summary": "Create or Update a Certificate.",
         "operationId": "ConnectedEnvironmentsCertificates_CreateOrUpdate",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -191,6 +195,10 @@
         ],
         "summary": "Deletes the specified Certificate.",
         "operationId": "ConnectedEnvironmentsCertificates_Delete",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -252,6 +260,10 @@
         "summary": "Update properties of a certificate",
         "description": "Patches a certificate. Currently only patching of tags is supported",
         "operationId": "ConnectedEnvironmentsCertificates_Update",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -335,4 +347,3 @@
     }
   ]
 }
-
