@@ -163,6 +163,12 @@
               "$ref": "#/definitions/ConnectedEnvironmentStorage"
             }
           },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/ConnectedEnvironmentStorage"
+            }
+          },
           "default": {
             "description": "Common error response.",
             "schema": {
@@ -212,6 +218,14 @@
           "200": {
             "description": "OK"
           },
+          "202": {
+            "description": "Delete operation is accepted",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
           "204": {
             "description": "Storage does not exist"
           },
@@ -260,6 +274,26 @@
           "description": "Storage properties",
           "type": "object",
           "properties": {
+            "provisioningState": {
+              "description": "Provisioning state of the storage.",
+              "enum": [
+                "Succeeded",
+                "Failed",
+                "Canceled",
+                "InProgress"
+              ],
+              "type": "string",
+              "readOnly": true,
+              "x-ms-enum": {
+                "name": "ConnectedEnvironmentStorageProvisioningState",
+                "modelAsString": true
+              }
+            },
+            "deploymentErrors": {
+              "description": "Any errors that occurred during deployment or deployment validation",
+              "type": "string",
+              "readOnly": true
+            },
             "azureFile": {
               "$ref": "./CommonDefinitions.json#/definitions/AzureFileProperties",
               "description": "Azure file properties"

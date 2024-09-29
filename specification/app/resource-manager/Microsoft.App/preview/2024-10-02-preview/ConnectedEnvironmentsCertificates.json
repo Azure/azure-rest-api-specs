@@ -165,6 +165,12 @@
               "$ref": "./CommonDefinitions.json#/definitions/Certificate"
             }
           },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/Certificate"
+            }
+          },
           "default": {
             "description": "Error response.",
             "schema": {
@@ -216,6 +222,14 @@
           },
           "204": {
             "description": "Certificate does not exist"
+          },
+          "202": {
+            "description": "Delete operation is accepted",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "Error response.",
@@ -277,6 +291,14 @@
             "description": "Certificate updated successfully.",
             "schema": {
               "$ref": "./CommonDefinitions.json#/definitions/Certificate"
+            }
+          },
+          "202": {
+            "description": "Patch operation is in progress.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
             }
           },
           "default": {
