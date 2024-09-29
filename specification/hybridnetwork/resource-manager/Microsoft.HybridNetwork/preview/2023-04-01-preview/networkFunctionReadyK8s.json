@@ -1,0 +1,463 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "HybridNetworkManagementClient",
+    "description": "The resources in this swagger specification will be used to manage the hybrid network network function ready K8s.",
+    "version": "2023-04-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridNetwork/networkFunctionReadyK8s/{networkFunctionReadyK8sName}": {
+      "delete": {
+        "tags": [
+          "NetworkFunctionReadyK8s"
+        ],
+        "operationId": "NetworkFunctionReadyK8s_Delete",
+        "description": "Deletes the specified network function ready K8s.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/NetworkFunctionReadyK8sNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Delete successful."
+          },
+          "202": {
+            "description": "Accepted. Sets 'Deleting' provisioningState until the operation completes. Returns an operation URI that can be queried to find the current state of the operation."
+          },
+          "204": {
+            "description": "Request successful. Resource does not exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete NetworkFunctionReadyK8s": {
+            "$ref": "./examples/NetworkFunctionReadyK8s/NetworkFunctionReadyK8sDelete.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      },
+      "get": {
+        "tags": [
+          "NetworkFunctionReadyK8s"
+        ],
+        "operationId": "NetworkFunctionReadyK8s_Get",
+        "description": "Gets information about the specified network function ready K8s.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/NetworkFunctionReadyK8sNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation returns the resulting network function ready K8s.",
+            "schema": {
+              "$ref": "#/definitions/NetworkFunctionReadyK8s"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get NetworkFunctionReadyK8s": {
+            "$ref": "./examples/NetworkFunctionReadyK8s/NetworkFunctionReadyK8sGet.json"
+          },
+          "Get NetworkFunctionReadyK8s with UAMI": {
+            "$ref": "./examples/NetworkFunctionReadyK8s/NetworkFunctionReadyK8sGetWithUAMI.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "NetworkFunctionReadyK8s"
+        ],
+        "operationId": "NetworkFunctionReadyK8s_CreateOrUpdate",
+        "description": "Creates or updates a network function ready K8s.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/NetworkFunctionReadyK8sNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NetworkFunctionReadyK8s"
+            },
+            "description": "Parameters supplied to the create or update network function ready K8s operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Update successful. The operation returns the resulting network site resource.",
+            "schema": {
+              "$ref": "#/definitions/NetworkFunctionReadyK8s"
+            }
+          },
+          "201": {
+            "description": "Create successful. The operation returns the resulting network site resource.",
+            "schema": {
+              "$ref": "#/definitions/NetworkFunctionReadyK8s"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create NetworkFunctionReadyK8s": {
+            "$ref": "./examples/NetworkFunctionReadyK8s/NetworkFunctionReadyK8sCreate.json"
+          },
+          "Create NetworkFunctionReadyK8s with UAMI": {
+            "$ref": "./examples/NetworkFunctionReadyK8s/NetworkFunctionReadyK8sCreateWithUAMI.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "patch": {
+        "tags": [
+          "NetworkFunctionReadyK8s"
+        ],
+        "operationId": "NetworkFunctionReadyK8s_UpdateTags",
+        "description": "Updates a network function ready K8s update tags.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/NetworkFunctionReadyK8sNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "./common.json#/definitions/TagsObject"
+            },
+            "description": "Parameters supplied to update network function ready K8s tags."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Update successful. The operation returns the resulting network function ready K8s.",
+            "schema": {
+              "$ref": "#/definitions/NetworkFunctionReadyK8s"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update NetworkFunctionReadyK8s tags": {
+            "$ref": "./examples/NetworkFunctionReadyK8s/NetworkFunctionReadyK8sUpdateTags.json"
+          },
+          "Update NetworkFunctionReadyK8s tags with UAMI": {
+            "$ref": "./examples/NetworkFunctionReadyK8s/NetworkFunctionReadyK8sUpdateTagsWithUAMI.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.HybridNetwork/networkFunctionReadyK8s": {
+      "get": {
+        "tags": [
+          "NetworkFunctionReadyK8s"
+        ],
+        "operationId": "NetworkFunctionReadyK8s_ListBySubscription",
+        "description": "Lists all network function ready K8s in a subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request is successful. The operation returns a list of hybrid network site resources.",
+            "schema": {
+              "$ref": "#/definitions/NetworkFunctionReadyK8sListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List all hybrid NetworkFunctionReadyK8s in a subscription.": {
+            "$ref": "./examples/NetworkFunctionReadyK8s/NetworkFunctionReadyK8sListBySubscription.json"
+          },
+          "List all hybrid NetworkFunctionReadyK8s in a subscription with UAMI.": {
+            "$ref": "./examples/NetworkFunctionReadyK8s/NetworkFunctionReadyK8sListBySubscriptionWithUAMI.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridNetwork/networkFunctionReadyK8s": {
+      "get": {
+        "tags": [
+          "NetworkFunctionReadyK8s"
+        ],
+        "operationId": "NetworkFunctionReadyK8s_ListByResourceGroup",
+        "description": "Lists all network function ready K8s in the resource group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation returns a list of network function ready K8s.",
+            "schema": {
+              "$ref": "#/definitions/NetworkFunctionReadyK8sListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List all NetworkFunctionReadyK8s in an RG": {
+            "$ref": "./examples/NetworkFunctionReadyK8s/NetworkFunctionReadyK8sListByResourceGroup.json"
+          },
+          "List all NetworkFunctionReadyK8s in an RG with UAMI": {
+            "$ref": "./examples/NetworkFunctionReadyK8s/NetworkFunctionReadyK8sListByResourceGroupWithUAMI.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "NetworkFunctionReadyK8s": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/NetworkFunctionReadyK8sPropertiesFormat",
+          "description": "NetworkFunctionReadyK8s properties."
+        },
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The managed identity of the NetworkFunctionReadyK8s, if configured."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "description": "NetworkFunctionReadyK8s resource."
+    },
+    "NetworkFunctionReadyK8sPropertiesFormat": {
+      "type": "object",
+      "description": "NetworkFunctionReadyK8s properties.",
+      "discriminator": "clusterType",
+      "required": [
+        "clusterReference",
+        "clusterType"
+      ],
+      "properties": {
+        "provisioningState": {
+          "readOnly": true,
+          "$ref": "./common.json#/definitions/ProvisioningState",
+          "description": "The provisioning state of the NetworkFunctionReadyK8s resource."
+        },
+        "clusterType": {
+          "type": "string",
+          "description": "The cluster type.",
+          "enum": [
+            "AzureKubernetesService",
+            "ArcConnectedK8s",
+            "HybridAKS"
+          ],
+          "x-ms-enum": {
+            "name": "clusterType",
+            "modelAsString": true
+          }
+        },
+        "clusterReference": {
+          "$ref": "./common.json#/definitions/ReferencedResource",
+          "description": "The k8s/Connected cluster ARM id"
+        },
+        "customLocationReference": {
+          "readOnly": true,
+          "$ref": "./common.json#/definitions/ReferencedResource",
+          "description": "The read only custom location ARM id"
+        }
+      }
+    },
+    "AzureKubernetesServiceNetworkFunctionReadyK8s": {
+      "description": "Azure based kubernetes service cluster prerequisite properties.",
+      "x-ms-discriminator-value": "AzureKubernetesService",
+      "type": "object",
+      "required": [
+        "userAssignedManagedIdentity"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/NetworkFunctionReadyK8sPropertiesFormat"
+        }
+      ],
+      "properties": {
+        "userAssignedManagedIdentity": {
+          "$ref": "./common.json#/definitions/ReferencedResource",
+          "description": "The  User Assigned Managed Identity ARM id enabled on the AKS cluster"
+        }
+      }
+    },
+    "ArcConnectedK8sNetworkFunctionReadyK8s": {
+      "description": "Arc Connected kubernetes cluster prerequisite properties.",
+      "x-ms-discriminator-value": "ArcConnectedK8s",
+      "type": "object",
+      "required": [
+        "userAssignedManagedIdentity"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/NetworkFunctionReadyK8sPropertiesFormat"
+        }
+      ],
+      "properties": {
+        "userAssignedManagedIdentity": {
+          "$ref": "./common.json#/definitions/ReferencedResource",
+          "description": "The  User Assigned Managed Identity ARM id which has access to the connected cluster."
+        }
+      }
+    },
+    "HybridAKSNetworkFunctionReadyK8s": {
+      "description": "Azure based kubernetes service cluster prerequisite properties.",
+      "x-ms-discriminator-value": "HybridAKS",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/NetworkFunctionReadyK8sPropertiesFormat"
+        }
+      ],
+      "properties": {
+        "userAssignedManagedIdentity": {
+          "$ref": "./common.json#/definitions/ReferencedResource",
+          "description": "The  User Assigned Managed Identity ARM id giving access to the HybridAKS cluster if outside AOSM flow"
+        }
+      }
+    },
+    "NetworkFunctionReadyK8sListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NetworkFunctionReadyK8s"
+          },
+          "description": "A list of network function ready K8s."
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The URL to get the next set of results."
+        }
+      },
+      "description": "Response for NetworkFunctionReadyK8s API service call."
+    }
+  }
+}

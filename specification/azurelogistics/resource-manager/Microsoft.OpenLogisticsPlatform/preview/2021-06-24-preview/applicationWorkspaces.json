@@ -1,0 +1,425 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "OSCPControlPlaneServiceAPI",
+    "description": "REST APIs for Azure Open Supply Chain Platform's Control Plane Service",
+    "version": "2021-06-24-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OpenLogisticsPlatform/applicationWorkspaces/{applicationWorkspaceName}": {
+      "get": {
+        "tags": [
+          "ApplicationWorkspace"
+        ],
+        "description": "Gets an applicationWorkspace.",
+        "operationId": "ApplicationWorkspace_Get",
+        "x-ms-examples": {
+          "ApplicationWorkspace Get": {
+            "$ref": "./examples/ApplicationWorkspace_Get.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApplicationWorkspaceNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ApplicationWorkspace"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "ApplicationWorkspace"
+        ],
+        "description": "Creates or updates a applicationWorkspace",
+        "operationId": "ApplicationWorkspace_Put",
+        "x-ms-examples": {
+          "ApplicationWorkspace Put": {
+            "$ref": "./examples/ApplicationWorkspace_Put.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApplicationWorkspaceNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "applicationWorkspace",
+            "in": "body",
+            "description": "The applicationWorkspace's content to apply.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ApplicationWorkspace"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "x-nullable": false,
+            "description": "Returned when the operation is successful.",
+            "schema": {
+              "$ref": "#/definitions/ApplicationWorkspace"
+            }
+          },
+          "default": {
+            "x-nullable": false,
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "ApplicationWorkspace"
+        ],
+        "operationId": "ApplicationWorkspace_Delete",
+        "x-ms-examples": {
+          "ApplicationWorkspace Delete": {
+            "$ref": "./examples/ApplicationWorkspace_Delete.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApplicationWorkspaceNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returned when the operation is successful."
+          },
+          "202": {
+            "description": "Returned when the operation is accepted."
+          },
+          "204": {
+            "description": "Returned when the operation returns no content."
+          },
+          "default": {
+            "x-nullable": false,
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "patch": {
+        "tags": [
+          "ApplicationWorkspace"
+        ],
+        "description": "Patches applicationWorkspace properties.",
+        "operationId": "ApplicationWorkspace_Update",
+        "x-ms-examples": {
+          "ApplicationWorkspace Update": {
+            "$ref": "./examples/ApplicationWorkspace_Update.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ApplicationWorkspaceNameParameter"
+          },
+          {
+            "name": "applicationWorkspacePatchResource",
+            "description": "applicationWorkspace patch properties.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ApplicationWorkspacePatchResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returned when the operation is successful.",
+            "schema": {
+              "$ref": "#/definitions/ApplicationWorkspace"
+            }
+          },
+          "default": {
+            "x-nullable": false,
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OpenLogisticsPlatform/applicationWorkspaces": {
+      "get": {
+        "tags": [
+          "ApplicationWorkspace"
+        ],
+        "description": "Lists a collection of applicationWorkspaces under the given resource group.",
+        "operationId": "ApplicationWorkspace_List",
+        "x-ms-examples": {
+          "ApplicationWorkspace List": {
+            "$ref": "./examples/ApplicationWorkspace_List.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "x-nullable": false,
+            "description": "Returned when the operation is successful.",
+            "schema": {
+              "$ref": "#/definitions/ApplicationWorkspaceList"
+            }
+          },
+          "default": {
+            "x-nullable": false,
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.OpenLogisticsPlatform/applicationWorkspaces": {
+      "get": {
+        "tags": [
+          "ApplicationWorkspace"
+        ],
+        "description": "Lists a collection of applicationWorkspaces under the given Azure Subscription ID.",
+        "operationId": "ApplicationWorkspace_ListAll",
+        "x-ms-examples": {
+          "ApplicationWorkspace ListAll": {
+            "$ref": "./examples/ApplicationWorkspace_ListAll.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "x-nullable": false,
+            "description": "Returned when the operation is successful.",
+            "schema": {
+              "$ref": "#/definitions/ApplicationWorkspaceList"
+            }
+          },
+          "default": {
+            "x-nullable": false,
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ApplicationWorkspaceProvisioningState": {
+      "type": "string",
+      "readOnly": true,
+      "description": "The current provisioning state.",
+      "enum": [
+        "Accepted",
+        "Succeeded",
+        "Creating",
+        "Deleting",
+        "Failed"
+      ]
+    },
+    "ApplicationWorkspace": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "properties": {
+        "etag": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Resource Etag."
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
+        },
+        "properties": {
+          "type": "object",
+          "properties": {
+            "applicationWorkspaceId": {
+              "type": "string",
+              "description": "ApplicationWorkspace identifier.",
+              "readOnly": true
+            },
+            "provisioningState": {
+              "description": "Provisioning state of the applicationWorkspace.",
+              "readOnly": true,
+              "$ref": "#/definitions/ApplicationWorkspaceProvisioningState"
+            }
+          }
+        }
+      }
+    },
+    "ApplicationWorkspacePatchResource": {
+      "type": "object",
+      "description": "ApplicationWorkspace patch properties",
+      "allOf": [
+        {
+          "$ref": "workspaces.json#/definitions/TrackedResourceUpdate"
+        }
+      ]
+    },
+    "ApplicationWorkspaceList": {
+      "description": "The list of applicationWorkspace resources.",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The link used to get the next page of applicationWorkspace resources list.",
+          "type": "string"
+        },
+        "value": {
+          "description": "The list of applicationWorkspaces.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApplicationWorkspace"
+          }
+        }
+      }
+    },
+    "UnavailableReason": {
+      "type": "string",
+      "enum": [
+        "None",
+        "InvalidName",
+        "SubscriptionIsDisabled",
+        "NameInUse",
+        "NameInLockdown",
+        "TooManyNamespaceInCurrentSubscription"
+      ],
+      "x-ms-enum": {
+        "name": "UnavailableReason",
+        "modelAsString": false
+      },
+      "description": "Specifies the reason for the unavailability of the service."
+    },
+    "CheckNameAvailabilityResult": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The detailed info regarding the reason associated with the Namespace."
+        },
+        "nameAvailable": {
+          "type": "boolean",
+          "description": "Value indicating Namespace is availability, true if the Namespace is available; otherwise, false."
+        },
+        "reason": {
+          "$ref": "#/definitions/UnavailableReason",
+          "description": "The reason for unavailability of a Namespace."
+        }
+      },
+      "description": "The Result of the CheckNameAvailability operation"
+    }
+  },
+  "parameters": {
+    "ApplicationWorkspaceNameParameter": {
+      "type": "string",
+      "name": "applicationWorkspaceName",
+      "description": "The name of resource. This is the name of your Azure Supply Chain Service's applicationWorkspace.",
+      "in": "path",
+      "required": true,
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

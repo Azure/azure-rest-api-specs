@@ -1,0 +1,96 @@
+{
+  "parameters": {
+    "api-version": "2022-04-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myResourceGroup",
+    "accountName": "myAccount",
+    "account": {
+      "sku": {
+        "name": "F1"
+      },
+      "location": "westus",
+      "tags": {},
+      "identity": {
+        "type": "UserAssigned",
+        "userAssignedIdentities": {
+          "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contoso/providers/Microsoft.ManagedIdentity/userAssignedIdentities/id1": {}
+        }
+      },
+      "properties": {
+        "applicationInsightsResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/microsoft.insights/components/application-insights-telemetry"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.AzurePercept/accounts/myAccount",
+        "name": "myAccount",
+        "type": "Microsoft.AzurePercept/accounts",
+        "sku": {
+          "name": "F1",
+          "tier": "Free"
+        },
+        "location": "westus",
+        "systemData": {
+          "createdBy": "user1",
+          "createdByType": "User",
+          "createdAt": "2020-01-01T17:18:19.1234567Z",
+          "lastModifiedBy": "user2",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2020-01-02T17:18:19.1234567Z"
+        },
+        "tags": {},
+        "identity": {
+          "type": "UserAssigned",
+          "userAssignedIdentities": {
+            "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contoso/providers/Microsoft.ManagedIdentity/userAssignedIdentities/id1": {
+              "principalId": "00000000-0000-0000-0000-000000000000",
+              "clientId": "00000000-0000-0000-0000-000000000000"
+            }
+          }
+        },
+        "properties": {
+          "applicationInsightsResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/microsoft.insights/components/application-insights-telemetry",
+          "provisioningState": "Succeeded"
+        }
+      }
+    },
+    "201": {
+      "Location": "https://management.azure.com/subscriptions/{subscriptionId}/providers/Microsoft.AzurePrecept/locations/{region}/operationsStatuses/{OperationId}",
+      "azure-asyncoperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.AzurePercept/locations/WESTUS/operationStatuses/00000000-0000-0000-0000-000000000000*0000000000000000000000000000000000000000000000000000000000000000?api-version=2022-04-01-preview",
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.AzurePercept/accounts/myAccount",
+        "name": "myAccount",
+        "type": "Microsoft.AzurePercept/accounts",
+        "sku": {
+          "name": "F1",
+          "tier": "Free"
+        },
+        "location": "westus",
+        "systemData": {
+          "createdBy": "user1",
+          "createdByType": "User",
+          "createdAt": "2020-01-01T17:18:19.1234567Z",
+          "lastModifiedBy": "user2",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2020-01-02T17:18:19.1234567Z"
+        },
+        "tags": {},
+        "identity": {
+          "type": "UserAssigned",
+          "userAssignedIdentities": {
+            "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contoso/providers/Microsoft.ManagedIdentity/userAssignedIdentities/id1": {
+              "principalId": "00000000-0000-0000-0000-000000000000",
+              "clientId": "00000000-0000-0000-0000-000000000000"
+            }
+          }
+        },
+        "properties": {
+          "applicationInsightsResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/microsoft.insights/components/application-insights-telemetry",
+          "provisioningState": "Succeeded"
+        }
+      }
+    }
+  }
+}

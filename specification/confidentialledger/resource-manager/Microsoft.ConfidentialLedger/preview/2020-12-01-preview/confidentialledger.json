@@ -166,6 +166,9 @@
         "description": "Creates a  Confidential Ledger with the specified ledger parameters.",
         "operationId": "Ledger_Create",
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -530,7 +533,7 @@
       "description": "Cert based security principal with Ledger RoleName",
       "properties": {
         "cert": {
-          "description": "Public key of the user cert (.pem or .cer)",
+          "description": "Base64 encoded public key of the user cert (.pem or .cer)",
           "type": "string"
         },
         "ledgerRoleName": {

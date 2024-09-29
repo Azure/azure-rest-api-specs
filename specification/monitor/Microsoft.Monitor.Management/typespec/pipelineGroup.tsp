@@ -16,6 +16,7 @@ using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.ResourceManager;
+using Azure.ResourceManager.Private;
 using OpenAPI;
 
 namespace Microsoft.Monitor;
@@ -23,16 +24,13 @@ namespace Microsoft.Monitor;
 @doc("A pipeline group definition.")
 model PipelineGroup is TrackedResource<PipelineGroupProperties> {
   @doc("The name of pipeline group. The name is case insensitive.")
-  @pattern("^(?!-)[a-zA-Z0-9-]{3,10}[^-]$")
+  @pattern("^(?!-)[a-zA-Z0-9-]{3,32}[^-]$")
   @key("pipelineGroupName")
   @path
   @segment("pipelineGroups")
   name: string;
 
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Extended location is not included in TrackedResource yet."
-  @doc("The extended location for given pipeline group.")
-  @visibility("read", "create")
-  extendedLocation?: CommonTypes.ExtendedLocation;
+  ...ExtendedLocationProperty;
 }
 
 @doc("Properties that need to be specified to create a new pipeline group instance.")
@@ -188,8 +186,14 @@ model Pipeline {
 union PipelineType {
   string,
 
+  @added(Versions.v2024_10_01)
   @doc("Pipeline for logs telemetry.")
-  Logs: "logs",
+  Logs: "Logs",
+
+  @removed(Versions.v2024_10_01)
+  @renamedFrom(Versions.v2024_10_01, "Logs")
+  @doc("Pipeline for logs telemetry.")
+  LogsPreview: "logs",
 }
 
 @doc("Networking configuration for the pipeline group instance.")
@@ -245,26 +249,14 @@ interface PipelineGroups {
   @doc("Returns the specific pipeline group instance.")
   get is ArmResourceRead<PipelineGroup>;
 
-  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "MUST CHANGE ON NEXT UPDATE"
   @doc("Create or update a pipeline group instance.")
-  @Azure.Core.useFinalStateVia("azure-async-operation")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<
-    PipelineGroup,
-    LroHeaders = Azure.Core.Foundations.RetryAfterHeader
-  >;
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<PipelineGroup>;
 
   @doc("Delete a pipeline group instance.")
   delete is ArmResourceDeleteWithoutOkAsync<PipelineGroup>;
 
   @doc("Updates a pipeline group instance")
-  @parameterVisibility
-  update is ArmCustomPatchAsync<
-    PipelineGroup,
-    Azure.ResourceManager.Foundations.ResourceUpdateModel<
-      PipelineGroup,
-      PipelineGroupProperties
-    >
-  >;
+  update is ArmResourcePatchAsync<PipelineGroup, PipelineGroupProperties>;
 
   @doc("Lists all workspaces in the specified resource group")
   listByResourceGroup is ArmResourceListByParent<PipelineGroup>;

@@ -37,7 +37,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileNetwork/packetCoreControlPlanes/{packetCoreControlPlaneName}/packetCoreDataPlanes/{packetCoreDataPlaneName}": {
       "delete": {
         "tags": [
-          "PacketCoreDataPlanes"
+          "PacketCoreDataPlane"
         ],
         "operationId": "PacketCoreDataPlanes_Delete",
         "description": "Deletes the specified packet core data plane.",
@@ -87,7 +87,7 @@
       },
       "get": {
         "tags": [
-          "PacketCoreDataPlanes"
+          "PacketCoreDataPlane"
         ],
         "operationId": "PacketCoreDataPlanes_Get",
         "description": "Gets information about the specified packet core data plane.",
@@ -130,10 +130,10 @@
       },
       "put": {
         "tags": [
-          "PacketCoreDataPlanes"
+          "PacketCoreDataPlane"
         ],
         "operationId": "PacketCoreDataPlanes_CreateOrUpdate",
-        "description": "Creates or updates a PacketCoreDataPlane.",
+        "description": "Creates or updates a packet core data plane.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -192,10 +192,10 @@
       },
       "patch": {
         "tags": [
-          "PacketCoreDataPlanes"
+          "PacketCoreDataPlane"
         ],
         "operationId": "PacketCoreDataPlanes_UpdateTags",
-        "description": "Updates a PacketCoreDataPlane update tags.",
+        "description": "Updates packet core data planes tags.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -213,7 +213,7 @@
             "schema": {
               "$ref": "./common.json#/definitions/TagsObject"
             },
-            "description": "Parameters supplied to update PacketCoreDataPlane tags."
+            "description": "Parameters supplied to update packet core data plane tags."
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -249,7 +249,7 @@
           "PacketCoreDataPlanes"
         ],
         "operationId": "PacketCoreDataPlanes_ListByPacketCoreControlPlane",
-        "description": "Lists all the packetCoreDataPlanes associated with a packetCoreControlPlane.",
+        "description": "Lists all the packet core data planes associated with a packet core control plane.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -316,7 +316,7 @@
       "description": "Packet core data plane resource."
     },
     "PacketCoreDataPlanePropertiesFormat": {
-      "description": "PacketCoreDataPlane properties.",
+      "description": "Packet core data plane properties.",
       "type": "object",
       "properties": {
         "provisioningState": {
@@ -326,7 +326,7 @@
         },
         "userPlaneAccessInterface": {
           "$ref": "./common.json#/definitions/InterfaceProperties",
-          "description": "The user plane interface on the access network. In 5G networks this is called as N3 interface whereas in 4G networks this is called the S1-U interface."
+          "description": "The user plane interface on the access network. For 5G networks, this is the N3 interface. For 4G networks, this is the S1-U interface."
         }
       },
       "required": [

@@ -13,7 +13,7 @@ using OpenAPI;
 
 namespace Microsoft.DeviceRegistry;
 
-@added(Versions.v2024_09_01_preview)
+@added(Versions.v2024_07_01_preview)
 @doc("Schema registry definition.")
 model SchemaRegistry is TrackedResource<SchemaRegistryProperties> {
   @doc("Schema registry name parameter.")
@@ -28,7 +28,7 @@ model SchemaRegistry is TrackedResource<SchemaRegistryProperties> {
   ...ManagedSystemAssignedIdentityProperty;
 }
 
-@added(Versions.v2024_09_01_preview)
+@added(Versions.v2024_07_01_preview)
 @doc("Defines the schema registry properties.")
 model SchemaRegistryProperties {
   @doc("Globally unique, immutable, non-reusable id.")
@@ -56,7 +56,7 @@ model SchemaRegistryProperties {
   provisioningState?: ProvisioningState;
 }
 
-@added(Versions.v2024_09_01_preview)
+@added(Versions.v2024_07_01_preview)
 @parentResource(SchemaRegistry)
 @doc("Schema definition.")
 model Schema is ProxyResource<SchemaProperties> {
@@ -70,7 +70,7 @@ model Schema is ProxyResource<SchemaProperties> {
   name: string;
 }
 
-@added(Versions.v2024_09_01_preview)
+@added(Versions.v2024_07_01_preview)
 @doc("Defines the schema properties.")
 model SchemaProperties {
   @doc("Globally unique, immutable, non-reusable id.")
@@ -101,7 +101,7 @@ model SchemaProperties {
   tags?: Record<string>;
 }
 
-@added(Versions.v2024_09_01_preview)
+@added(Versions.v2024_07_01_preview)
 @doc("Defines the schema format.")
 union Format {
   @doc("JSON Schema version draft 7 format")
@@ -113,7 +113,7 @@ union Format {
   string,
 }
 
-@added(Versions.v2024_09_01_preview)
+@added(Versions.v2024_07_01_preview)
 @doc("Defines the schema type.")
 union SchemaType {
   @doc("Message Schema schema type")
@@ -122,7 +122,7 @@ union SchemaType {
   string,
 }
 
-@added(Versions.v2024_09_01_preview)
+@added(Versions.v2024_07_01_preview)
 @parentResource(Schema)
 @doc("Schema version's definition.")
 model SchemaVersion is ProxyResource<SchemaVersionProperties> {
@@ -136,7 +136,7 @@ model SchemaVersion is ProxyResource<SchemaVersionProperties> {
   name: string;
 }
 
-@added(Versions.v2024_09_01_preview)
+@added(Versions.v2024_07_01_preview)
 @doc("Defines the schema version properties.")
 model SchemaVersionProperties {
   @doc("Globally unique, immutable, non-reusable id.")
@@ -159,34 +159,18 @@ model SchemaVersionProperties {
   provisioningState?: ProvisioningState;
 }
 
-// The updateable properties of the Schema Registry.
-// This is a workaround to fix the patch payload that otherwise will expose the 'location' field (not present in patch),
-// since otherwise it extends the ARM TrackedResource type.
-alias SchemaRegistriesPropertiesUpdate = {
-  ...OptionalProperties<UpdateableProperties<SchemaRegistryProperties>>;
-};
-
-@added(Versions.v2024_09_01_preview)
+@added(Versions.v2024_07_01_preview)
 @armResourceOperations
 interface SchemaRegistries {
   get is ArmResourceRead<SchemaRegistry>;
   createOrReplace is ArmResourceCreateOrReplaceAsync<SchemaRegistry>;
-  // Using 'ArmCustomPatchAsync' instead of 'ArmResourcePatchAsync' to define the correct patch payload for the resource.
-  // This is a workaround to fix the patch payload that otherwise will expose the 'location' field (not present in patch),
-  // since otherwise it extends the ARM TrackedResource type.
-  update is ArmCustomPatchAsync<
-    SchemaRegistry,
-    Azure.ResourceManager.Foundations.ResourceUpdateModel<
-      SchemaRegistry,
-      SchemaRegistriesPropertiesUpdate
-    >
-  >;
+  update is ArmResourcePatchAsync<SchemaRegistry, SchemaRegistryProperties>;
   delete is ArmResourceDeleteWithoutOkAsync<SchemaRegistry>;
   listByResourceGroup is ArmResourceListByParent<SchemaRegistry>;
   listBySubscription is ArmListBySubscription<SchemaRegistry>;
 }
 
-@added(Versions.v2024_09_01_preview)
+@added(Versions.v2024_07_01_preview)
 @armResourceOperations
 interface Schemas {
   get is ArmResourceRead<Schema>;
@@ -195,7 +179,7 @@ interface Schemas {
   listBySchemaRegistry is ArmResourceListByParent<Schema>;
 }
 
-@added(Versions.v2024_09_01_preview)
+@added(Versions.v2024_07_01_preview)
 @armResourceOperations
 interface SchemaVersions {
   get is ArmResourceRead<SchemaVersion>;

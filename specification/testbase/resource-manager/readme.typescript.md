@@ -9,5 +9,6 @@ typescript:
   package-name: "@azure/arm-testbase"
   output-folder: "$(typescript-sdks-folder)/sdk/testbase/arm-testbase"
   payload-flattening-threshold: 1
+  clear-output-folder: true
   generate-metadata: true
 ```

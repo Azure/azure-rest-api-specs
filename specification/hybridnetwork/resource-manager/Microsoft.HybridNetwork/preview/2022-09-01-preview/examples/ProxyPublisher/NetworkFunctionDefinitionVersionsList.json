@@ -1,0 +1,44 @@
+{
+  "parameters": {
+    "api-version": "2022-09-01-preview",
+    "subscriptionId": "subid",
+    "publisherScopeName": "public",
+    "publisherLocationName": "eastus",
+    "proxyPublisherName": "TestPublisher",
+    "networkFunctionDefinitionGroupName": "TestSkuGroup"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "1.0.0",
+            "id": "/subscriptions/subid/providers/Microsoft.HybridNetwork/proxyPublishers/TestPublisher/networkfunctiondefinitiongroups/TestNetworkServiceDesignGroupName/networkfunctiondefinitionversions/1.0.0",
+            "type": "Microsoft.HybridNetwork/proxyPublishers/networkServiceDesignGroups/networkfunctiondefinitionversions",
+            "properties": {
+              "networkFunctionType": "ContainerizedNetworkFunction",
+              "nfviType": "AzureArcKubernetes",
+              "versionState": "Preview",
+              "deployParameters": "{\"releaseName\":{\"type\":\"string\"},\"namespace\":{\"type\":\"string\"}}",
+              "networkFunctionApplications": [
+                {
+                  "name": "TestApp",
+                  "artifactType": "HelmPackage",
+                  "deployParametersMappingRuleProfile": {
+                    "applicationEnablement": "Enabled",
+                    "helmMappingRuleProfile": {
+                      "releaseNamespace": "{deployParameters.namesapce}",
+                      "releaseName": "{deployParameters.releaseName}",
+                      "helmPackageVersion": "2.1.3",
+                      "values": ""
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  }
+}

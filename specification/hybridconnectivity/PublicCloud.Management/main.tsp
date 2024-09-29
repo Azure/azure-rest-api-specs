@@ -23,10 +23,10 @@ namespace Microsoft.HybridConnectivity;
 
 @doc("Hybrid Connectivity Management service version.")
 enum Versions {
-  @doc("Version 2024-12-01")
+  @doc("Version 2024-08-01-preview")
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @useDependency(Azure.Core.Versions.v1_0_Preview_2)
-  v2024_12_01: "2024-12-01",
+  v2024_08_01: "2024-08-01-preview",
 }
 
 //---------------------------------------------- Models ----------------------------------------------
@@ -55,7 +55,7 @@ model SolutionTypeSettings {
 //------------------- Test Permissions -------------------
 
 @doc("Public connector permissions.")
-model TestPermissionResult {
+model TestPermissionResponse {
   #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers"
   @doc("Solution type permissions.")
   solutionTypes: Array<SolutionTypePermissions>;
@@ -341,7 +341,7 @@ interface PublicCloudConnectors {
   testPermissions is ArmResourceActionAsync<
     PublicCloudConnector,
     void,
-    TestPermissionResult
+    TestPermissionResponse
   >;
 }
 

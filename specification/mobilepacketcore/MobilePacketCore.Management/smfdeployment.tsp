@@ -1,6 +1,17 @@
+import "@typespec/http";
+import "@typespec/rest";
+import "@typespec/openapi";
+import "@typespec/versioning";
+import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-resource-manager";
+
 using TypeSpec.Http;
 using TypeSpec.Rest;
+using TypeSpec.Versioning;
 using Azure.ResourceManager;
+using Azure.ResourceManager.Foundations;
+using Azure.Core;
+using OpenAPI;
 
 namespace Microsoft.MobilePacketCore;
 
@@ -8,7 +19,7 @@ namespace Microsoft.MobilePacketCore;
 @resource("smfDeployments")
 model SmfDeploymentResource
   is TrackedResource<SmfDeploymentResourceProperties> {
-  @doc("The name of the SmfDeployment")
+  @doc("The name of the SMF Deployment")
   @pattern("^[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]$")
   @minLength(1)
   @maxLength(63)
@@ -30,6 +41,7 @@ model SmfDeploymentResourceProperties {
 
   @doc("Azure for Operators 5G Core SMF secrets parameters")
   @secret
+  @visibility("create", "update")
   secretsParameters?: ComponentDeploymentSecrets;
 
   @doc("Reference to cluster where the Network Function is deployed")

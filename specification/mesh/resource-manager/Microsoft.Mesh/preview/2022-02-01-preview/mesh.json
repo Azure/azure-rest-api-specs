@@ -1,0 +1,2912 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "MeshManagementClient",
+    "description": "Mesh Resource Provider",
+    "version": "2022-02-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Mesh/worlds/{worldName}/events/{eventId}/accessPolicies/{accessPolicyName}": {
+      "get": {
+        "tags": [
+          "EventAccessPolicies"
+        ],
+        "description": "Returns access policy resource for a given name.",
+        "operationId": "EventAccessPolicy_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorldNameParameter"
+          },
+          {
+            "$ref": "#/parameters/EventIdParameter"
+          },
+          {
+            "$ref": "#/parameters/AccessPolicyNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Default response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Access policy details.",
+            "schema": {
+              "$ref": "#/definitions/AccessPolicyResource"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "EventAccessPolicy_Get": {
+            "$ref": "./examples/EventAccessPolicy_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "EventAccessPolicies"
+        ],
+        "description": "Update an access policy resource.",
+        "operationId": "EventAccessPolicy_Update",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorldNameParameter"
+          },
+          {
+            "$ref": "#/parameters/EventIdParameter"
+          },
+          {
+            "$ref": "#/parameters/AccessPolicyNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/AccessPolicyResource"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Default response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Access policy updated.",
+            "schema": {
+              "$ref": "#/definitions/AccessPolicyResource"
+            }
+          },
+          "201": {
+            "description": "Access policy created.",
+            "schema": {
+              "$ref": "#/definitions/AccessPolicyResource"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "EventAccessPolicy_Update": {
+            "$ref": "./examples/EventAccessPolicy_Update.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Mesh/worlds/{worldName}/events": {
+      "get": {
+        "tags": [
+          "Events"
+        ],
+        "description": "Returns list of events.",
+        "operationId": "Event_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorldNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Default response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Event details.",
+            "schema": {
+              "$ref": "#/definitions/EventResourceList"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Event_List": {
+            "$ref": "./examples/Event_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Mesh/worlds/{worldName}/events/{eventId}": {
+      "get": {
+        "tags": [
+          "Events"
+        ],
+        "description": "Returns event resource for a given id.",
+        "operationId": "Event_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorldNameParameter"
+          },
+          {
+            "$ref": "#/parameters/EventIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Default response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Event details.",
+            "schema": {
+              "$ref": "#/definitions/EventResource"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Event_Get": {
+            "$ref": "./examples/Event_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Events"
+        ],
+        "description": "Create event resource.",
+        "operationId": "Event_Create",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorldNameParameter"
+          },
+          {
+            "$ref": "#/parameters/EventIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/EventResource"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Default response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Event updated.",
+            "schema": {
+              "$ref": "#/definitions/EventResource"
+            }
+          },
+          "201": {
+            "description": "Event created.",
+            "schema": {
+              "$ref": "#/definitions/EventResource"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "Event_Create": {
+            "$ref": "./examples/Event_Create.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Events"
+        ],
+        "description": "Update an event resource.",
+        "operationId": "Event_Update",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorldNameParameter"
+          },
+          {
+            "$ref": "#/parameters/EventIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/EventPatchResource"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Default response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Successful.",
+            "schema": {
+              "$ref": "#/definitions/EventResource"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Event_Update": {
+            "$ref": "./examples/Event_Update.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Events"
+        ],
+        "description": "Deletes event resource for a given id.",
+        "operationId": "Event_Delete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorldNameParameter"
+          },
+          {
+            "$ref": "#/parameters/EventIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Default response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Deletes the event."
+          },
+          "204": {
+            "description": "The event doesn't exist."
+          }
+        },
+        "x-ms-examples": {
+          "Event_Delete": {
+            "$ref": "./examples/Event_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Mesh/worlds/{worldName}/events/{eventId}/uploadImage": {
+      "post": {
+        "tags": [
+          "Events"
+        ],
+        "description": "Upload an image and return its corresponding image id.",
+        "operationId": "Event_UploadImage",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorldNameParameter"
+          },
+          {
+            "$ref": "#/parameters/EventIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/ImageData"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Default response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Successful.",
+            "schema": {
+              "$ref": "#/definitions/ImageReference"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Event_UploadImage": {
+            "$ref": "./examples/Event_UploadImage.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Mesh/worlds/{worldName}/events/{eventId}/previewImage": {
+      "post": {
+        "tags": [
+          "Events"
+        ],
+        "description": "Preview an image.",
+        "operationId": "Event_PreviewImage",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorldNameParameter"
+          },
+          {
+            "$ref": "#/parameters/EventIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/ImageReference"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Default response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Successful.",
+            "schema": {
+              "$ref": "#/definitions/ImageData"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Event_PreviewImage": {
+            "$ref": "./examples/Event_PreviewImage.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Mesh/worlds/{worldName}/events/{eventId}/listSasUri": {
+      "post": {
+        "tags": [
+          "Events"
+        ],
+        "description": "List a SAS uri that can be used to upload and download a file from a managed storage account.",
+        "operationId": "Event_ListSasUri",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorldNameParameter"
+          },
+          {
+            "$ref": "#/parameters/EventIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/SasRequest"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Default response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Successful.",
+            "schema": {
+              "$ref": "#/definitions/SasData"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Event_ListSasUri": {
+            "$ref": "./examples/Event_ListSasUri.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Mesh/worlds/{worldName}": {
+      "get": {
+        "tags": [
+          "World"
+        ],
+        "description": "Returns world resource for a given id.",
+        "operationId": "World_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorldNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Default response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "World details.",
+            "schema": {
+              "$ref": "#/definitions/WorldResource"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "World_Get": {
+            "$ref": "./examples/World_Get.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "World"
+        ],
+        "description": "Deletes world resource for a given id.",
+        "operationId": "World_Delete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorldNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Default response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Deletes the world."
+          },
+          "202": {
+            "description": "Long-running."
+          },
+          "204": {
+            "description": "The world doesn't exist."
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "World_Delete": {
+            "$ref": "./examples/World_Delete.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "World"
+        ],
+        "description": "Create world resource.",
+        "operationId": "World_Create",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorldNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/WorldResource"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Default response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Successful.",
+            "schema": {
+              "$ref": "#/definitions/WorldResource"
+            }
+          },
+          "201": {
+            "description": "Long-running.",
+            "schema": {
+              "$ref": "#/definitions/WorldResource"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "World_Create": {
+            "$ref": "./examples/World_Create.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "World"
+        ],
+        "description": "Update a world resource.",
+        "operationId": "World_Update",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorldNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/WorldPatchResource"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Default response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Successful.",
+            "schema": {
+              "$ref": "#/definitions/WorldResource"
+            }
+          },
+          "202": {
+            "description": "Long-running."
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "World_Update": {
+            "$ref": "./examples/World_Update.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Mesh/worlds": {
+      "get": {
+        "tags": [
+          "World"
+        ],
+        "description": "Returns list of worlds.",
+        "operationId": "World_ListBySubscription",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Default response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "World details.",
+            "schema": {
+              "$ref": "#/definitions/WorldResourceList"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "World_ListBySubscription": {
+            "$ref": "./examples/World_ListBySubscription.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Mesh/worlds": {
+      "get": {
+        "tags": [
+          "World"
+        ],
+        "description": "Returns list of worlds.",
+        "operationId": "World_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Default response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "World details.",
+            "schema": {
+              "$ref": "#/definitions/WorldResourceList"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "World_List": {
+            "$ref": "./examples/World_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Mesh/worlds/{worldName}/uploadImage": {
+      "post": {
+        "tags": [
+          "World"
+        ],
+        "description": "Upload an image and return its corresponding image id.",
+        "operationId": "World_UploadImage",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorldNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/ImageData"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Default response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Successful.",
+            "schema": {
+              "$ref": "#/definitions/ImageReference"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "World_UploadImage": {
+            "$ref": "./examples/World_UploadImage.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Mesh/worlds/{worldName}/previewImage": {
+      "post": {
+        "tags": [
+          "World"
+        ],
+        "description": "Preview an image.",
+        "operationId": "World_PreviewImage",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorldNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/ImageReference"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Default response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Successful.",
+            "schema": {
+              "$ref": "#/definitions/ImageData"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "World_PreviewImage": {
+            "$ref": "./examples/World_PreviewImage.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Mesh/worlds/{worldName}/listSasUri": {
+      "post": {
+        "tags": [
+          "World"
+        ],
+        "description": "List a SAS uri that can be used to upload and download a file from a managed storage account.",
+        "operationId": "World_ListSasUri",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorldNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/SasRequest"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Default response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Successful.",
+            "schema": {
+              "$ref": "#/definitions/SasData"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "World_ListSasUri": {
+            "$ref": "./examples/World_ListSasUri.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Mesh/worlds/{worldName}/spaces/{spaceId}/accessPolicies": {
+      "get": {
+        "tags": [
+          "SpaceAccessPolicies"
+        ],
+        "description": "Returns list of access policies.",
+        "operationId": "SpaceAccessPolicy_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorldNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SpaceIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Default response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Access policy details.",
+            "schema": {
+              "$ref": "#/definitions/AccessPolicyResourceList"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "SpaceAccessPolicy_List": {
+            "$ref": "./examples/SpaceAccessPolicy_List.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Mesh/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "description": "Returns list of operations.",
+        "operationId": "Operations_List",
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Default response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Operation details.",
+            "schema": {
+              "$ref": "#/definitions/OperationsList"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Operations_List": {
+            "$ref": "./examples/Operations_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Mesh/worlds/{worldName}/spaces/{spaceId}/accessPolicies/{accessPolicyName}": {
+      "get": {
+        "tags": [
+          "SpaceAccessPolicies"
+        ],
+        "description": "Returns access policy resource for a given name.",
+        "operationId": "SpaceAccessPolicy_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorldNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SpaceIdParameter"
+          },
+          {
+            "$ref": "#/parameters/AccessPolicyNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Default response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Access policy details.",
+            "schema": {
+              "$ref": "#/definitions/AccessPolicyResource"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SpaceAccessPolicy_Get": {
+            "$ref": "./examples/SpaceAccessPolicy_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "SpaceAccessPolicies"
+        ],
+        "description": "Update an access policy resource.",
+        "operationId": "SpaceAccessPolicy_Update",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorldNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SpaceIdParameter"
+          },
+          {
+            "$ref": "#/parameters/AccessPolicyNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/AccessPolicyResource"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Default response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Access policy updated.",
+            "schema": {
+              "$ref": "#/definitions/AccessPolicyResource"
+            }
+          },
+          "201": {
+            "description": "Access policy created.",
+            "schema": {
+              "$ref": "#/definitions/AccessPolicyResource"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "SpaceAccessPolicy_Update": {
+            "$ref": "./examples/SpaceAccessPolicy_Update.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Mesh/worlds/{worldName}/spaces": {
+      "get": {
+        "tags": [
+          "Spaces"
+        ],
+        "description": "Returns list of spaces.",
+        "operationId": "Space_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorldNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Default response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Space details.",
+            "schema": {
+              "$ref": "#/definitions/SpaceResourceList"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Space_List": {
+            "$ref": "./examples/Space_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Mesh/worlds/{worldName}/spaces/{spaceId}": {
+      "get": {
+        "tags": [
+          "Spaces"
+        ],
+        "description": "Returns space resource for a given id.",
+        "operationId": "Space_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorldNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SpaceIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Default response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Space details.",
+            "schema": {
+              "$ref": "#/definitions/SpaceResource"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Space_Get": {
+            "$ref": "./examples/Space_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Spaces"
+        ],
+        "description": "Create space resource.",
+        "operationId": "Space_Create",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorldNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SpaceIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/SpaceResource"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Default response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Space updated.",
+            "schema": {
+              "$ref": "#/definitions/SpaceResource"
+            }
+          },
+          "201": {
+            "description": "Space created.",
+            "schema": {
+              "$ref": "#/definitions/SpaceResource"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "Space_Create": {
+            "$ref": "./examples/Space_Create.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Spaces"
+        ],
+        "description": "Update a space resource.",
+        "operationId": "Space_Update",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorldNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SpaceIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/SpacePatchResource"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Default response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Successful.",
+            "schema": {
+              "$ref": "#/definitions/SpaceResource"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Space_Update": {
+            "$ref": "./examples/Space_Update.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Spaces"
+        ],
+        "description": "Deletes space resource for a given id.",
+        "operationId": "Space_Delete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorldNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SpaceIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Default response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Deletes the space."
+          },
+          "204": {
+            "description": "The space does not exist."
+          }
+        },
+        "x-ms-examples": {
+          "Space_Delete": {
+            "$ref": "./examples/Space_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Mesh/worlds/{worldName}/templates": {
+      "get": {
+        "tags": [
+          "SpaceTemplates"
+        ],
+        "description": "Returns list of templates.",
+        "operationId": "Template_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorldNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Default response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "List of templates.",
+            "schema": {
+              "$ref": "#/definitions/SpaceTemplateResourceList"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Template_List": {
+            "$ref": "./examples/Template_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Mesh/worlds/{worldName}/templates/{templateId}": {
+      "get": {
+        "tags": [
+          "SpaceTemplates"
+        ],
+        "description": "Returns template resource for a given id.",
+        "operationId": "Template_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorldNameParameter"
+          },
+          {
+            "$ref": "#/parameters/TemplateIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Default response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Template details.",
+            "schema": {
+              "$ref": "#/definitions/SpaceTemplateResource"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Template_Get": {
+            "$ref": "./examples/Template_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "SpaceTemplates"
+        ],
+        "description": "Create a template resource.",
+        "operationId": "Template_Create",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorldNameParameter"
+          },
+          {
+            "$ref": "#/parameters/TemplateIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/SpaceTemplateResource"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Default response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Template policy updated.",
+            "schema": {
+              "$ref": "#/definitions/SpaceTemplateResource"
+            }
+          },
+          "201": {
+            "description": "Template policy created.",
+            "schema": {
+              "$ref": "#/definitions/SpaceTemplateResource"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "Template_Create": {
+            "$ref": "./examples/Template_Create.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "SpaceTemplates"
+        ],
+        "description": "Update a template resource.",
+        "operationId": "Template_Update",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorldNameParameter"
+          },
+          {
+            "$ref": "#/parameters/TemplateIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/SpaceTemplatePatchResource"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Default response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Template policy updated.",
+            "schema": {
+              "$ref": "#/definitions/SpaceTemplateResource"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Template_Update": {
+            "$ref": "./examples/Template_Update.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Mesh/worlds/{worldName}/templates/{templateId}/uploadImage": {
+      "post": {
+        "tags": [
+          "SpaceTemplates"
+        ],
+        "description": "Upload an image and return its corresponding image id.",
+        "operationId": "Template_UploadImage",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorldNameParameter"
+          },
+          {
+            "$ref": "#/parameters/TemplateIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/ImageData"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Default response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Successful.",
+            "schema": {
+              "$ref": "#/definitions/ImageReference"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Template_UploadImage": {
+            "$ref": "./examples/Template_UploadImage.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Mesh/worlds/{worldName}/templates/{templateId}/previewImage": {
+      "post": {
+        "tags": [
+          "SpaceTemplates"
+        ],
+        "description": "Preview an image.",
+        "operationId": "Template_PreviewImage",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorldNameParameter"
+          },
+          {
+            "$ref": "#/parameters/TemplateIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/ImageReference"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Default response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Successful.",
+            "schema": {
+              "$ref": "#/definitions/ImageData"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Template_PreviewImage": {
+            "$ref": "./examples/Template_PreviewImage.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Mesh/worlds/{worldName}/templates/{templateId}/listSasUri": {
+      "post": {
+        "tags": [
+          "SpaceTemplates"
+        ],
+        "description": "List a SAS uri that can be used to upload and download a file from a managed storage account.",
+        "operationId": "Template_ListSasUri",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorldNameParameter"
+          },
+          {
+            "$ref": "#/parameters/TemplateIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/SasRequest"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Default response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Successful.",
+            "schema": {
+              "$ref": "#/definitions/SasData"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Template_ListSasUri": {
+            "$ref": "./examples/Template_ListSasUri.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Mesh/worlds/{worldName}/templates/{templateId}/accessPolicies": {
+      "get": {
+        "tags": [
+          "TemplateAccessPolicies"
+        ],
+        "description": "Returns list of access policies.",
+        "operationId": "TemplateAccessPolicy_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorldNameParameter"
+          },
+          {
+            "$ref": "#/parameters/TemplateIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Default response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Access policy details.",
+            "schema": {
+              "$ref": "#/definitions/AccessPolicyResourceList"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "TemplateAccessPolicy_List": {
+            "$ref": "./examples/TemplateAccessPolicy_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Mesh/worlds/{worldName}/templates/{templateId}/accessPolicies/{accessPolicyName}": {
+      "get": {
+        "tags": [
+          "TemplateAccessPolicies"
+        ],
+        "description": "Returns access policy resource for a given name.",
+        "operationId": "TemplateAccessPolicy_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorldNameParameter"
+          },
+          {
+            "$ref": "#/parameters/TemplateIdParameter"
+          },
+          {
+            "$ref": "#/parameters/AccessPolicyNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Default response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Access policy details.",
+            "schema": {
+              "$ref": "#/definitions/AccessPolicyResource"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "TemplateAccessPolicy_Get": {
+            "$ref": "./examples/TemplateAccessPolicy_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "TemplateAccessPolicies"
+        ],
+        "description": "Update an access policy resource.",
+        "operationId": "TemplateAccessPolicy_Update",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorldNameParameter"
+          },
+          {
+            "$ref": "#/parameters/TemplateIdParameter"
+          },
+          {
+            "$ref": "#/parameters/AccessPolicyNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/AccessPolicyResource"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Default response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Access policy updated.",
+            "schema": {
+              "$ref": "#/definitions/AccessPolicyResource"
+            }
+          },
+          "201": {
+            "description": "Access policy created.",
+            "schema": {
+              "$ref": "#/definitions/AccessPolicyResource"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "TemplateAccessPolicy_Update": {
+            "$ref": "./examples/TemplateAccessPolicy_Update.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Mesh/worlds/{worldName}/events/{eventId}/accessPolicies": {
+      "get": {
+        "tags": [
+          "EventAccessPolicies"
+        ],
+        "description": "Returns list of access policies.",
+        "operationId": "EventAccessPolicy_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorldNameParameter"
+          },
+          {
+            "$ref": "#/parameters/EventIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Default response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Access policy details.",
+            "schema": {
+              "$ref": "#/definitions/AccessPolicyResourceList"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "EventAccessPolicy_List": {
+            "$ref": "./examples/EventAccessPolicy_List.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AccessPolicyBase": {
+      "type": "object",
+      "properties": {
+        "members": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AccessPolicyMember"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "AccessPolicyMember": {
+      "type": "object",
+      "properties": {
+        "objectId": {
+          "type": "string"
+        },
+        "roleName": {
+          "type": "string"
+        }
+      }
+    },
+    "AccessPolicyProperties": {
+      "required": [
+        "accessScope"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AccessPolicyBase"
+        }
+      ],
+      "properties": {
+        "accessScope": {
+          "$ref": "#/definitions/AccessScope"
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState"
+        }
+      }
+    },
+    "AccessPolicyResource": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AccessPolicyProperties"
+        }
+      }
+    },
+    "AccessPolicyResourceList": {
+      "description": "The list of access policies.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AccessPolicyResource"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string"
+        }
+      }
+    },
+    "AccessScope": {
+      "enum": [
+        "Private",
+        "Public"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "AccessScope"
+      }
+    },
+    "ContentContributor": {
+      "type": "object",
+      "properties": {
+        "objectId": {
+          "description": "The content contributor's object id. This is not an Azure Resource Manager id.",
+          "type": "string"
+        },
+        "role": {
+          "description": "The content contributor's role.",
+          "type": "string"
+        }
+      }
+    },
+    "EventBase": {
+      "type": "object",
+      "properties": {
+        "eventName": {
+          "description": "The name of the event.",
+          "type": "string"
+        },
+        "eventType": {
+          "description": "The type of the event.",
+          "type": "string"
+        },
+        "startTime": {
+          "format": "date-time",
+          "description": "The start time of the event.",
+          "type": "string"
+        },
+        "endTime": {
+          "format": "date-time",
+          "description": "The end time of the event.",
+          "type": "string"
+        },
+        "defaultPrimaryUrl": {
+          "description": "The default primary URL of the event.",
+          "type": "string"
+        },
+        "description": {
+          "description": "The description of the event.",
+          "type": "string"
+        },
+        "code": {
+          "description": "The code of the event.",
+          "type": "string"
+        },
+        "instructions": {
+          "description": "The instructions to join the event.",
+          "type": "string"
+        },
+        "openTime": {
+          "format": "date-time",
+          "description": "The open time of the event.",
+          "type": "string"
+        },
+        "closeTime": {
+          "format": "date-time",
+          "description": "The close time of the event.",
+          "type": "string"
+        },
+        "tagList": {
+          "description": "The mesh tag list associated with the event.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-identifiers": []
+        },
+        "spaceTemplateId": {
+          "description": "The id of the template associated with the event.",
+          "type": "string"
+        },
+        "isInternalTemplate": {
+          "description": "Whether or not the template is internal.",
+          "type": "boolean"
+        },
+        "supportedPlatform": {
+          "description": "The supported platform of the event.",
+          "type": "string"
+        },
+        "titleImage": {
+          "description": "The title image of the event.",
+          "type": "string"
+        },
+        "bannerImage": {
+          "description": "The banner image of the event.",
+          "type": "string"
+        },
+        "roomCapacity": {
+          "format": "int32",
+          "description": "The room capacity of the event.",
+          "type": "integer"
+        },
+        "sessionCapacity": {
+          "format": "int32",
+          "description": "The session capacity of the event.",
+          "type": "integer"
+        },
+        "enableStageBroadcast": {
+          "description": "The enable stage broadcast flag of the event",
+          "type": "boolean"
+        },
+        "worldId": {
+          "description": "The id of the world associated with the event.",
+          "type": "string"
+        }
+      }
+    },
+    "EventPatchResource": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/EventProperties"
+        }
+      }
+    },
+    "EventProperties": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/EventBase"
+        }
+      ],
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState"
+        }
+      }
+    },
+    "EventResource": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/WorldChildResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/EventProperties"
+        }
+      }
+    },
+    "EventResourceList": {
+      "description": "The list of events.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EventResource"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string"
+        }
+      }
+    },
+    "ImageData": {
+      "description": "Contains data for an image upload request.",
+      "type": "object",
+      "properties": {
+        "base64Image": {
+          "description": "The base-64 encoded contents of the image.",
+          "type": "string"
+        },
+        "imageType": {
+          "description": "The type of the image. For example, \"icon\", \"background\", etc.",
+          "type": "string"
+        }
+      }
+    },
+    "ImageReference": {
+      "description": "Contains an image id reference. This is not an Azure Resource Manager reference.",
+      "type": "object",
+      "properties": {
+        "imageId": {
+          "description": "A unique identifier for the image. This is not an Azure Resource Manager identifier.",
+          "type": "string"
+        }
+      }
+    },
+    "ManagedResourceGroupConfiguration": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The resource group name.",
+          "type": "string"
+        },
+        "location": {
+          "description": "The resource group location.",
+          "type": "string"
+        }
+      }
+    },
+    "Operation": {
+      "description": "Operation provided by provider.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the operation.",
+          "type": "string"
+        },
+        "display": {
+          "$ref": "#/definitions/OperationBase"
+        },
+        "isDataAction": {
+          "type": "boolean"
+        }
+      }
+    },
+    "OperationBase": {
+      "type": "object",
+      "properties": {
+        "provider": {
+          "description": "Provider name.",
+          "type": "string"
+        },
+        "resource": {
+          "description": "Resource name.",
+          "type": "string"
+        },
+        "operation": {
+          "description": "Operation name.",
+          "type": "string"
+        },
+        "description": {
+          "description": "Description of the operation.",
+          "type": "string"
+        }
+      }
+    },
+    "OperationsList": {
+      "description": "Lists the operations available.",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Array of operations.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "description": "Url to follow for getting next page of operations.",
+          "type": "string"
+        }
+      }
+    },
+    "ProvisioningState": {
+      "enum": [
+        "Accepted",
+        "Creating",
+        "Updating",
+        "Deleting",
+        "Succeeded",
+        "Failed",
+        "Canceled"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "ProvisioningState"
+      }
+    },
+    "SasData": {
+      "description": "Contains a SAS URI.",
+      "type": "object",
+      "properties": {
+        "sasUri": {
+          "description": "A SAS URI that can be used for uploading files to a managed storage account. This is not an Azure Resource Manager identifier.",
+          "type": "string"
+        },
+        "headers": {
+          "description": "Blob headers that should be used when uploading files.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "x-ms-secret": true
+    },
+    "SasRequest": {
+      "type": "object",
+      "properties": {
+        "blobName": {
+          "description": "The name of the blob to be accessed in the managed storage account. This is not an Azure Resource Manager identifier.",
+          "type": "string"
+        }
+      }
+    },
+    "SpaceBase": {
+      "type": "object",
+      "properties": {
+        "spaceId": {
+          "description": "Space ID.",
+          "type": "string"
+        },
+        "spaceName": {
+          "description": "Space name.",
+          "type": "string"
+        },
+        "description": {
+          "description": "Space description.",
+          "type": "string"
+        },
+        "templateId": {
+          "description": "Space template id.",
+          "type": "string"
+        },
+        "isInternalTemplate": {
+          "description": "Whether or not the template is internal.",
+          "type": "boolean"
+        },
+        "author": {
+          "type": "string"
+        },
+        "roomCapacity": {
+          "format": "int32",
+          "description": "Space Room Capacity",
+          "type": "integer"
+        },
+        "sessionCapacity": {
+          "format": "int32",
+          "description": "Space Session Capacity",
+          "type": "integer"
+        },
+        "enableStageBroadcast": {
+          "description": "Space Enable Stage Broadcast Flag",
+          "type": "boolean"
+        },
+        "worldId": {
+          "description": "ID of the world corresponding to the space.",
+          "type": "string"
+        }
+      }
+    },
+    "SpacePatchResource": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SpaceProperties"
+        }
+      }
+    },
+    "SpaceProperties": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SpaceBase"
+        }
+      ],
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState"
+        }
+      }
+    },
+    "SpaceResource": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/WorldChildResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SpaceProperties"
+        }
+      }
+    },
+    "SpaceResourceList": {
+      "description": "The list of spaces.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SpaceResource"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string"
+        }
+      }
+    },
+    "SpaceTemplatePatchResource": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SpaceTemplateProperties"
+        }
+      }
+    },
+    "SpaceTemplateProperties": {
+      "type": "object",
+      "properties": {
+        "creator": {
+          "description": "The creator of the template.",
+          "type": "string"
+        },
+        "title": {
+          "description": "The title of the template.",
+          "type": "string"
+        },
+        "description": {
+          "description": "The description of the template.",
+          "type": "string"
+        },
+        "imageInfo": {
+          "description": "The image information of the template.",
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            }
+          },
+          "x-ms-identifiers": []
+        },
+        "assetInfo": {
+          "description": "The asset information of the template.",
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            }
+          },
+          "x-ms-identifiers": []
+        },
+        "capacity": {
+          "format": "int32",
+          "description": "The capacity of the template.",
+          "type": "integer"
+        },
+        "entitySpecificMetadata": {
+          "description": "The entity specific metadata of the template.",
+          "type": "object",
+          "additionalProperties": {}
+        },
+        "meshTags": {
+          "description": "The mesh tags of the template.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-identifiers": []
+        },
+        "displayName": {
+          "description": "The display name of the template.",
+          "type": "string"
+        },
+        "state": {
+          "$ref": "#/definitions/TemplateCreationState"
+        },
+        "tenantsVisibleTo": {
+          "description": "Ids of tenants that the template is visible to.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-identifiers": []
+        },
+        "isGlobal": {
+          "description": "Whether or not the template is global.",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState"
+        }
+      }
+    },
+    "SpaceTemplateResource": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/WorldChildResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SpaceTemplateProperties"
+        }
+      }
+    },
+    "SpaceTemplateResourceList": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SpaceTemplateResource"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string"
+        }
+      }
+    },
+    "TemplateCreationState": {
+      "description": "The states for a space template's creation.",
+      "enum": [
+        "Completed",
+        "InProgress",
+        "Failed"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "TemplateCreationState"
+      }
+    },
+    "WorldBase": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "description": "World title.",
+          "type": "string"
+        },
+        "layout": {
+          "description": "World layout.",
+          "type": "string"
+        },
+        "description": {
+          "description": "World description.",
+          "type": "string"
+        },
+        "iconImageId": {
+          "description": "The id for the world icon image. This is not an Azure Resource Manager id.",
+          "type": "string"
+        },
+        "backgroundImageId": {
+          "description": "The id for the world background image. This is not an Azure Resource Manager id.",
+          "type": "string"
+        },
+        "contentContributors": {
+          "description": "The list of content contributors.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ContentContributor"
+          },
+          "x-ms-identifiers": []
+        },
+        "worldId": {
+          "description": "The id for the world. This is not an Azure Resource Manager id.",
+          "type": "string"
+        }
+      }
+    },
+    "WorldChildResource": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "etag": {
+          "description": "Gets or sets the etag.",
+          "type": "string",
+          "readOnly": true
+        },
+        "tags": {
+          "description": "Resource tags.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "WorldPatchResource": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/WorldProperties"
+        }
+      }
+    },
+    "WorldProperties": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/WorldBase"
+        }
+      ],
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState"
+        },
+        "managedResourceGroupConfiguration": {
+          "$ref": "#/definitions/ManagedResourceGroupConfiguration"
+        }
+      }
+    },
+    "WorldResource": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/WorldProperties"
+        }
+      }
+    },
+    "WorldResourceList": {
+      "description": "The list of worlds.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/WorldResource"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "WorldNameParameter": {
+      "in": "path",
+      "name": "worldName",
+      "description": "The name referring to the world resource.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "EventIdParameter": {
+      "in": "path",
+      "name": "eventId",
+      "description": "The id referring to the event resource. This id must be a GUID.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "TemplateIdParameter": {
+      "in": "path",
+      "name": "templateId",
+      "description": "The id referring to the template resource. This id must be a GUID.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "SpaceIdParameter": {
+      "in": "path",
+      "name": "spaceId",
+      "description": "The id referring to the space resource. This id must be a GUID.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "AccessPolicyNameParameter": {
+      "in": "path",
+      "name": "accessPolicyName",
+      "description": "The name of the access policy.",
+      "required": true,
+      "type": "string",
+      "enum": [
+        "default"
+      ],
+      "x-ms-parameter-location": "method",
+      "x-ms-enum": {
+        "name": "AccessPolicyName"
+      }
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      },
+      "description": "Azure Active Directory OAuth2 Flow."
+    }
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ]
+}

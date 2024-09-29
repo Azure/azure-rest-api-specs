@@ -1,0 +1,312 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2020-09-01-privatepreview",
+    "title": "ApplicationAssessment",
+    "description": "Application assessments when migrating to Azure or upgrading to new OS versions"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppAssessment/migrateProjects/{projectName}/assessments/{assessmentName}/assessedMachines": {
+      "get": {
+        "tags": [
+          "migrateProjectsAssessment"
+        ],
+        "operationId": "assessedMachines_listByMigrateAssessment",
+        "description": "Gets the machines that were assessed in an assessment",
+        "x-ms-examples": {
+          "migrateAssessment_listAssessedMachines": {
+            "$ref": "./examples/migrateAssessment_listAssessedMachines.json"
+          }
+        },
+        "x-ms-pageable": {
+          "itemName": "value",
+          "nextLinkName": "nextLink"
+        },
+        "parameters": [
+          {
+            "$ref": "definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the project"
+          },
+          {
+            "name": "assessmentName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the assessment"
+          },
+          {
+            "$ref": "definitions.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "definitions.json#/parameters/TopParameter"
+          },
+          {
+            "$ref": "definitions.json#/parameters/FilterParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Assessment was found",
+            "schema": {
+              "$ref": "#/definitions/assessedMachineList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppAssessment/migrateProjects/{projectName}/assessments/{assessmentName}/assessedMachines/{machineId}": {
+      "get": {
+        "tags": [
+          "migrateProjectsAssessment"
+        ],
+        "operationId": "assessedMachines_getById",
+        "description": "Gets the assessed machine in an assessment by id",
+        "x-ms-examples": {
+          "migrateAssessment_getAssessedMachine": {
+            "$ref": "./examples/migrateAssessment_getAssessedMachine.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the project"
+          },
+          {
+            "name": "assessmentName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the assessment"
+          },
+          {
+            "name": "machineId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The id of the assessed machine"
+          },
+          {
+            "$ref": "definitions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Assessed machine was found",
+            "schema": {
+              "$ref": "#/definitions/assessedMachine"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppAssessment/migrateProjects/{projectName}/assessments/{assessmentName}/assessedApplications/{applicationId}/machines": {
+      "get": {
+        "tags": [
+          "migrateProjectsAssessment"
+        ],
+        "operationId": "assessedMachines_listForAssessedApplication",
+        "description": "Gets the machines that had a given assessed machine installed",
+        "x-ms-examples": {
+          "assessedMachines_listForAssessedApplication": {
+            "$ref": "./examples/migrateAssessment_listAssessedApplicationMachines.json"
+          }
+        },
+        "x-ms-pageable": {
+          "itemName": "value",
+          "nextLinkName": "nextLink"
+        },
+        "parameters": [
+          {
+            "$ref": "definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the project"
+          },
+          {
+            "name": "assessmentName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the assessment"
+          },
+          {
+            "name": "applicationId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The id of the assessed application"
+          },
+          {
+            "$ref": "definitions.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "definitions.json#/parameters/TopParameter"
+          },
+          {
+            "$ref": "definitions.json#/parameters/FilterParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Assessment was found",
+            "schema": {
+              "$ref": "#/definitions/assessedMachineList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "assessedMachine": {
+      "type": "object",
+      "description": "Info for machine that was part of the assessment",
+      "allOf": [
+        {
+          "$ref": "definitions.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "type": "object",
+          "description": "The properties of the resource",
+          "x-ms-client-flatten": true,
+          "properties": {
+            "machineId": {
+              "type": "string",
+              "description": "The ARM Id of the input machine i.e. the id of the machine under a specific site the user selected"
+            },
+            "discoveredApplications": {
+              "type": "integer",
+              "format": "int32",
+              "description": "The number of discovered applications in this machine"
+            },
+            "applicationReadiness": {
+              "type": "object",
+              "description": "The readiness count of the program across all the machines where the program is install for the machines in the assessment",
+              "$ref": "migrateAssessments.json#/definitions/readiness"
+            },
+            "osDetails": {
+              "type": "object",
+              "description": "Operating system details",
+              "properties": {
+                "family": {
+                  "type": "string",
+                  "description": "Family of the OS will be Windows or Linux."
+                },
+                "skuName": {
+                  "type": "string",
+                  "description": "The OS sku name of the machine",
+                  "readOnly": true
+                },
+                "version": {
+                  "type": "string",
+                  "description": "The version of the OS",
+                  "readOnly": true
+                },
+                "buildNumber": {
+                  "type": "string",
+                  "description": "The build number of the OS",
+                  "readOnly": true
+                }
+              }
+            },
+            "provisioningState": {
+              "type": "string",
+              "readOnly": true,
+              "description": "The provisioning state of the resource in Azure"
+            }
+          }
+        }
+      }
+    },
+    "assessedMachineList": {
+      "type": "object",
+      "description": "List of assessed machines",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "Array of assessedMachines",
+          "items": {
+            "$ref": "#/definitions/assessedMachine"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Link to next page of results, null if at end of results"
+        }
+      }
+    }
+  }
+}

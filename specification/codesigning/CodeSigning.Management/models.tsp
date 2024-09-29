@@ -1,9 +1,8 @@
 import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
-import "@typespec/openapi";
-import "@azure-tools/typespec-azure-resource-manager";
 import "@azure-tools/typespec-client-generator-core";
+import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -43,20 +42,23 @@ union ProvisioningState {
 union ProfileType {
   string,
 
-  @doc("Used for signing files which are distributed publicly.")
+  @doc("Used for signing code files which are distributed publicly.")
   PublicTrust: "PublicTrust",
 
-  @doc("Used for signing files which are distributed internally within organization or group boundary.")
+  @doc("Used for signing code files which are distributed internally within organization or group boundary.")
   PrivateTrust: "PrivateTrust",
 
   @doc("Used for signing CI policy files.")
   PrivateTrustCIPolicy: "PrivateTrustCIPolicy",
 
-  @doc("Used for signing files which are run in secure vbs enclave.")
+  @doc("Used for signing code files which are run in secure vbs enclave.")
   VBSEnclave: "VBSEnclave",
 
-  @doc("Used for signing files for testing purpose.")
+  @doc("Used for signing code files for testing purpose.")
   PublicTrustTest: "PublicTrustTest",
+
+  @doc("Used for signing content files.")
+  C2PAContentCredentials: "C2PAContentCredentials",
 }
 
 @doc("Status of the certificate profiles.")
@@ -145,11 +147,11 @@ model AccountSku {
 
 @doc("Parameters for creating or updating a trusted signing account.")
 model CodeSigningAccountPatch {
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "existing API"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing api"
   @doc("Resource tags.")
   tags?: Record<string>;
 
-  #suppress "deprecated" "Legacy flatten"
+  #suppress "deprecated" "Legacy flattening"
   @doc("Properties of the trusted signing account.")
   @Azure.ClientGenerator.Core.flattenProperty
   properties?: CodeSigningAccountPatchProperties;
@@ -228,7 +230,7 @@ model CertificateProfileProperties {
   @visibility("read")
   status?: CertificateProfileStatus;
 
-  #suppress "deprecated" "Legacy flatten"
+  #suppress "deprecated" "Legacy flattening"
   @doc("List of renewed certificates.")
   @visibility("read")
   @extension("x-ms-identifiers", [])
@@ -256,7 +258,7 @@ model Certificate {
   @doc("Status of the certificate.")
   status?: CertificateStatus;
 
-  #suppress "deprecated" "Legacy flatten"
+  #suppress "deprecated" "Legacy flattening"
   @doc("Revocations history of a certificate.")
   @Azure.ClientGenerator.Core.flattenProperty
   revocation?: Revocation;

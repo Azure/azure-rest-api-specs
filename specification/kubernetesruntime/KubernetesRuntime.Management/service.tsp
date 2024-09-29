@@ -33,5 +33,5 @@ interface Services {
   get is ArmResourceRead<ServiceResource>;
   createOrUpdate is ArmResourceCreateOrReplaceSync<ServiceResource>;
   delete is ArmResourceDeleteSync<ServiceResource>;
-  list is ArmResourceListByParent<ServiceResource>;
+  listByParent is ArmResourceListByParent<ServiceResource>;
 }

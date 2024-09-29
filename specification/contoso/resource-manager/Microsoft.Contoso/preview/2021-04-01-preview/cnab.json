@@ -1,0 +1,601 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "CNAB",
+    "description": "The Microsoft.Contoso Rest API spec. for CNAB Type",
+    "version": "2021-04-01-preview",
+    "x-ms-code-generation-settings": {
+      "name": "CNABClient"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Contoso/installations/{installationsName}": {
+      "get": {
+        "x-ms-examples": {
+          "Gets an installation resource": {
+            "$ref": "examples/getInstallation.json"
+          }
+        },
+        "operationId": "installations_Retrieve",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/installationsNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieves the installations resource.",
+            "schema": {
+              "$ref": "#/definitions/installations"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "installations_CreateOrUpdate",
+        "x-ms-examples": {
+          "Creates or updates the installation resource": {
+            "$ref": "examples/createOrUpdateInstallation.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/installationsNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "installations",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/installations"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Updates the installations resource.",
+            "schema": {
+              "$ref": "#/definitions/installations"
+            }
+          },
+          "201": {
+            "description": "Creates the installations resource.",
+            "schema": {
+              "$ref": "#/definitions/installations"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "x-ms-examples": {
+          "Updates the installation resource": {
+            "$ref": "examples/deleteInstallation.json"
+          }
+        },
+        "operationId": "installations_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/installationsNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Deletes the installations resource."
+          },
+          "204": {
+            "description": "Deletes the installations resource."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "patch": {
+        "x-ms-examples": {
+          "Updates the installation resource": {
+            "$ref": "examples/patchInstallation.json"
+          }
+        },
+        "operationId": "installations_Update",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/installationsNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "installations",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/installationsPatch"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Updates the installations resource.",
+            "schema": {
+              "$ref": "#/definitions/installations"
+            }
+          },
+          "201": {
+            "description": "Updates the installations resource.",
+            "schema": {
+              "$ref": "#/definitions/installations"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Contoso/installations": {
+      "get": {
+        "x-ms-examples": {
+          "Gets installations in a resource group": {
+            "$ref": "examples/listInstallationsByResourceGroup.json"
+          }
+        },
+        "operationId": "installations_ListByResourceGroup",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lists all installations under the resource group.",
+            "schema": {
+              "$ref": "#/definitions/installationsListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Contoso/installations": {
+      "get": {
+        "x-ms-examples": {
+          "Gets installations in a subscription": {
+            "$ref": "examples/listInstallationsBySubscription.json"
+          }
+        },
+        "operationId": "installations_ListBySubscription",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lists all installations under the subscription.",
+            "schema": {
+              "$ref": "#/definitions/installationsListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Contoso/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Describe the result of a successful operation.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderOperationList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "installationsProperties": {
+      "type": "object",
+      "properties": {
+        "action": {
+          "type": "string",
+          "description": "Action defined in the bundle to execute. If unspecified, Porter will run an install if the installation does not exist, or an upgrade otherwise."
+        },
+        "agentConfig": {
+          "type": "object",
+          "properties": {
+            "porterRepository": {
+              "type": "string",
+              "description": "PorterRepository is the repository for the Porter Agent image. Defaults to ghcr.io/getporter/porter"
+            },
+            "porterVersion": {
+              "type": "string",
+              "description": "PorterVersion is the tag for the Porter Agent image. Defaults to latest."
+            },
+            "pullPolicy": {
+              "type": "string",
+              "description": "PullPolicy specifies when to pull the Porter Agent image. The default is to use PullAlways when the tag is canary or latest, and PullIfNotPresent otherwise."
+            },
+            "serviceAccount": {
+              "type": "string",
+              "description": "ServiceAccount is the service account to run the Porter Agent under."
+            },
+            "volumeSize": {
+              "description": "VolumeSize is the size of the persistent volume that Porter will request when running the Porter Agent. It is used to share data between the Porter Agent and the bundle invocation image. It must be large enough to store any files used by the bundle including credentials, parameters and outputs.",
+              "pattern": "^(\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\\+|-)?(([0-9]+(\\.[0-9]*)?)|(\\.[0-9]+))))?$",
+              "type": "string",
+              "x-kubernetes-int-or-string": "true"
+            }
+          },
+          "description": "AgentConfig overrides the Porter Agent configuration defined at the namespace or system level."
+        },
+        "credentialSets": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "CredentialSets is a list of credential set names."
+        },
+        "parameterSets": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "ParameterSets is a list of parameter set names."
+        },
+        "parameters": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Parameters is a list of parameter set names."
+        },
+        "reference": {
+          "type": "string",
+          "description": "Reference to the bundle in an OCI Registry, e.g. getporter/porter-hello:v0.1.1."
+        },
+        "provisioningState": {
+          "type": "string"
+        },
+        "status": {
+          "type": "object",
+          "properties": {
+            "activeJob": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "description": "Name of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names TODO: Add other useful fields. apiVersion, kind, uid?"
+                }
+              },
+              "description": "INSERT ADDITIONAL STATUS FIELD - define observed state of cluster Important: Run \"make\" to regenerate code after modifying this file"
+            },
+            "lastJob": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "description": "Name of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names TODO: Add other useful fields. apiVersion, kind, uid?"
+                }
+              },
+              "description": "LocalObjectReference contains enough information to let you locate the referenced object inside the same namespace."
+            }
+          },
+          "description": "InstallationStatus defines the observed state of Installation"
+        }
+      },
+      "required": [
+        "action",
+        "reference"
+      ],
+      "description": "InstallationSpec defines the desired state of Installation"
+    },
+    "installations": {
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/installationsProperties"
+        },
+        "id": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Resource Id"
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Resource Name"
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Resource Type"
+        },
+        "location": {
+          "type": "string",
+          "description": "The resource location"
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
+        },
+        "extendedLocation": {
+          "type": "object",
+          "properties": {
+            "type": {
+              "type": "string",
+              "description": "The extended location type."
+            },
+            "name": {
+              "type": "string",
+              "description": "The extended location name."
+            }
+          }
+        }
+      },
+      "required": [
+        "location"
+      ],
+      "description": "The installations resource definition."
+    },
+    "installationsPatch": {
+      "type": "object",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
+        }
+      },
+      "description": "The installations resource patch definition."
+    },
+    "installationsListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/installations"
+          }
+        },
+        "nextLink": {
+          "type": "string"
+        }
+      }
+    },
+    "ResourceProviderOperationList": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ResourceProviderOperation"
+          }
+        },
+        "nextLink": {
+          "type": "string"
+        }
+      },
+      "description": "Results of the request to list operations."
+    },
+    "ResourceProviderOperation": {
+      "type": "object",
+      "properties": {
+        "isDataAction": {
+          "type": "string",
+          "description": "Indicates whether the operation applies to data-plane."
+        },
+        "name": {
+          "type": "string",
+          "description": "Operation name, in format of {provider}/{resource}/{operation}"
+        },
+        "display": {
+          "type": "object",
+          "properties": {
+            "provider": {
+              "type": "string",
+              "description": "The resource provider."
+            },
+            "resource": {
+              "type": "string",
+              "description": "Resource on which the operation is performed."
+            },
+            "operation": {
+              "type": "string",
+              "description": "Type of operation: get, read, delete, etc."
+            },
+            "description": {
+              "type": "string",
+              "description": "Description of this operation."
+            }
+          },
+          "description": "Display metadata associated with the operation."
+        }
+      },
+      "description": "Results of the request to list operations."
+    },
+    "ErrorResponse": {
+      "description": "Error response.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ErrorDefinition",
+          "description": "The error details."
+        }
+      }
+    },
+    "ErrorDefinition": {
+      "description": "Error definition.",
+      "properties": {
+        "code": {
+          "description": "Service specific error code which serves as the substatus for the HTTP error code.",
+          "type": "string",
+          "readOnly": true
+        },
+        "message": {
+          "description": "Description of the error.",
+          "type": "string",
+          "readOnly": true
+        },
+        "details": {
+          "description": "Internal error details.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ErrorDefinition"
+          },
+          "readOnly": true
+        }
+      }
+    }
+  },
+  "parameters": {
+    "installationsNameParameter": {
+      "x-ms-parameter-location": "client",
+      "name": "installationsName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "maxLength": 64,
+      "minLength": 3
+    },
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The Azure subscription ID. This is a GUID-formatted string (e.g. 00000000-0000-0000-0000-000000000000)"
+    },
+    "ResourceGroupNameParameter": {
+      "x-ms-parameter-location": "client",
+      "name": "resourceGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the resource group."
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "The API version to be used with the HTTP request (e.g. YYYY-MM-DD)."
+    }
+  }
+}

@@ -28,7 +28,7 @@ These are the global settings for the adp.
 title: AdpManagementClient
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2021-11-01-preview
+tag: package-2022-09-01-preview
 ```
 
 ### Tag: package-2020-07-01-preview
@@ -58,6 +58,36 @@ input-file:
   - Microsoft.AutonomousDevelopmentPlatform/preview/2021-11-01-preview/adp.json
 ```
 
+### Tag: package-2022-03-01-preview
+
+```yaml $(tag) == 'package-2022-03-01-preview'
+version: 2022-03-01-preview
+version-with-underscores: 2022_03_01_preview
+input-file:
+  - Microsoft.AutonomousDevelopmentPlatform/preview/2022-03-01-preview/adp.json
+  - Microsoft.AutonomousDevelopmentPlatform/preview/2022-03-01-preview/workspaces.json
+```
+
+### Tag: package-2022-09-01-preview
+
+```yaml $(tag) == 'package-2022-09-01-preview'
+version: 2022-09-01-preview
+version-with-underscores: 2022_09_01_preview
+input-file:
+  - Microsoft.AutonomousDevelopmentPlatform/preview/2022-09-01-preview/adp.json
+  - Microsoft.AutonomousDevelopmentPlatform/preview/2022-09-01-preview/workspaces.json
+```
+
+### Tag: package-2022-02-01-privatepreview
+
+```yaml $(tag) == 'package-2022-02-01-privatepreview'
+version: 2022-02-01-privatepreview
+version-with-underscores: 2022_05_01_privatepreview
+input-file:
+  - Microsoft.AutonomousDevelopmentPlatform/preview/2022-02-01-privatepreview/workspaces.json
+  - Microsoft.AutonomousDevelopmentPlatform/preview/2022-02-01-privatepreview/eventGridFilters.json
+```
+
 ---
 
 # Code Generation
@@ -69,13 +99,18 @@ This is not used by Autorest itself.
 
 ```yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-python
+  - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
   - repo: azure-cli-extensions
   - repo: azure-resource-manager-schemas
   - repo: azure-powershell
+```
+
+``` yaml
+modelerfour:
+  lenient-model-deduplication: true
 ```
 
 ## Go

@@ -23,6 +23,7 @@ These are the global settings for the containerstorage.
 
 ```yaml
 openapi-type: arm
+openapi-subtype: providerHub
 tag: 2021-10-01-preview
 ```
 
@@ -36,3 +37,9 @@ input-file:
 ```
 
 ---
+
+``` yaml
+suppressions:
+  - code: BodyTopLevelProperties
+    reason: This lintdiff error showing is bug, same issue raised on https://github.com/Azure/azure-openapi-validator/issues/722
+```

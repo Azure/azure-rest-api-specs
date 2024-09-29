@@ -16,7 +16,7 @@ using OpenAPI;
 namespace Microsoft.DeviceRegistry;
 
 @doc("Discovered Asset Endpoint Profile definition.")
-@added(Versions.v2024_09_01_preview)
+@added(Versions.v2024_07_01_preview)
 model DiscoveredAssetEndpointProfile
   is TrackedResource<DiscoveredAssetEndpointProfileProperties> {
   @doc("Discovered Asset Endpoint Profile name parameter.")
@@ -36,7 +36,7 @@ model DiscoveredAssetEndpointProfile
 }
 
 @doc("Defines the Discovered Asset Endpoint Profile properties.")
-@added(Versions.v2024_09_01_preview)
+@added(Versions.v2024_07_01_preview)
 model DiscoveredAssetEndpointProfileProperties {
   @doc("The local valid URI specifying the network address/DNS name of a southbound device. The scheme part of the targetAddress URI specifies the type of the device. The additionalConfiguration field holds further connector type specific configuration.")
   targetAddress: url;
@@ -62,27 +62,14 @@ model DiscoveredAssetEndpointProfileProperties {
   provisioningState?: ProvisioningState;
 }
 
-// The updateable properties of the Discovered Asset Endpoint Profile.
-// This is a workaround to fix the patch payload that otherwise will expose the 'location' field (not present in patch),
-// since otherwise it extends the ARM TrackedResource type.
-alias DiscoveredAssetEndpointProfilePropertiesUpdate = {
-  ...OptionalProperties<UpdateableProperties<DiscoveredAssetEndpointProfileProperties>>;
-};
-
 @armResourceOperations
-@added(Versions.v2024_09_01_preview)
+@added(Versions.v2024_07_01_preview)
 interface DiscoveredAssetEndpointProfiles {
   get is ArmResourceRead<DiscoveredAssetEndpointProfile>;
   createOrReplace is ArmResourceCreateOrReplaceAsync<DiscoveredAssetEndpointProfile>;
-  // Using 'ArmCustomPatchAsync' instead of 'ArmResourcePatchAsync' to define the correct patch payload for the resource.
-  // This is a workaround to fix the patch payload that otherwise will expose the 'location' field (not present in patch),
-  // since otherwise it extends the ARM TrackedResource type.
-  update is ArmCustomPatchAsync<
+  update is ArmResourcePatchAsync<
     DiscoveredAssetEndpointProfile,
-    Azure.ResourceManager.Foundations.ResourceUpdateModel<
-      DiscoveredAssetEndpointProfile,
-      DiscoveredAssetEndpointProfilePropertiesUpdate
-    >
+    DiscoveredAssetEndpointProfileProperties
   >;
   delete is ArmResourceDeleteWithoutOkAsync<DiscoveredAssetEndpointProfile>;
   listByResourceGroup is ArmResourceListByParent<DiscoveredAssetEndpointProfile>;

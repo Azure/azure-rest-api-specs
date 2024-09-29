@@ -1,0 +1,40 @@
+{
+  "parameters": {
+    "subscriptionId": "subscriptionId",
+    "resourceGroupName": "resourceGroupName",
+    "api-version": "2022-01-15-privatepreview",
+    "l3IsolationDomainName": "example-l3domain"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "properties": {
+              "mtu": 1500,
+              "vlanId": 1001,
+              "fabricASN": 65048,
+              "peerASN": 65047,
+              "administrativeState": "null",
+              "provisioningState": "Succeeded",
+              "primaryIpv4Prefix": "10.1.1.0/30",
+              "secondaryIpv4Prefix": "10.1.1.4/30q"
+            },
+            "id": "/subscriptions/xxxxxx/resourceGroups/resourcegroupname/providers/Microsoft.ManagedNetworkFabric/example-l3domain/externalNetworks/example-externalnetwork",
+            "name": "example-externalnetwork",
+            "type": "microsoft.managednetworkfabric/example-externalnetwork",
+            "systemData": {
+              "createdBy": "email@address.com",
+              "createdByType": "User",
+              "createdAt": "2022-09-21T02:12:15.668Z",
+              "lastModifiedBy": "UserId",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2022-09-21T02:12:15.668Z"
+            }
+          }
+        ],
+        "nextLink": "next link url"
+      }
+    }
+  }
+}

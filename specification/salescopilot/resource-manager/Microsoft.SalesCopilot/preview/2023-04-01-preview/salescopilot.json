@@ -1,0 +1,548 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "SalesCopilot",
+    "description": "Sales Copilot resource provider",
+    "version": "2023-04-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "scopes": {
+        "user_impersonation": "Impersonate your user account."
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.SalesCopilot/checkNameAvailability": {
+      "post": {
+        "operationId": "ConversationIntelligenceRecordingAccounts_CheckNameAvailability",
+        "description": "Checks that the SalesCopilot ConversationIntelligenceRecordingAccount name is valid and is not already in use.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "description": "Check name availability request details.",
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/CheckNameAvailabilityRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful. The response describes the name availability.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/CheckNameAvailabilityResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Check name availability of SalesCopilot ConversationIntelligenceRecordingAccount - name available": {
+            "$ref": "./examples/ConversationIntelligenceRecordingAccounts_CheckNameAvailabilityAvailable.json"
+          },
+          "Check name availability of SalesCopilot ConversationIntelligenceRecordingAccount - name unavailable": {
+            "$ref": "./examples/ConversationIntelligenceRecordingAccounts_CheckNameAvailabilityUnavailable.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.SalesCopilot/conversationIntelligenceRecordingAccounts": {
+      "get": {
+        "operationId": "ConversationIntelligenceRecordingAccounts_ListBySubscription",
+        "description": "Returns list of SalesCopilot ConversationIntelligenceRecordingAccount resources.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ConversationIntelligenceRecordingAccount resources list.",
+            "schema": {
+              "$ref": "#/definitions/ConversationIntelligenceRecordingAccountResourceList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Get SalesCopilot ConversationIntelligenceRecordingAccount resources by subscription": {
+            "$ref": "./examples/ConversationIntelligenceRecordingAccounts_ListBySubscription.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SalesCopilot/conversationIntelligenceRecordingAccounts": {
+      "get": {
+        "operationId": "ConversationIntelligenceRecordingAccounts_ListByResourceGroup",
+        "description": "Returns list of SalesCopilot ConversationIntelligenceRecordingAccount resources.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ConversationIntelligenceRecordingAccount resources list.",
+            "schema": {
+              "$ref": "#/definitions/ConversationIntelligenceRecordingAccountResourceList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Get SalesCopilot ConversationIntelligenceRecordingAccount resources by resource group": {
+            "$ref": "./examples/ConversationIntelligenceRecordingAccounts_ListByResourceGroup.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SalesCopilot/conversationIntelligenceRecordingAccounts/{accountName}": {
+      "get": {
+        "operationId": "ConversationIntelligenceRecordingAccounts_Get",
+        "description": "Returns ConversationIntelligenceRecordingAccount resource for a given name.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ConversationIntelligenceRecordingAccountNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ConversationIntelligenceRecordingAccount details.",
+            "schema": {
+              "$ref": "#/definitions/ConversationIntelligenceRecordingAccountResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get ConversationIntelligenceRecordingAccount resource": {
+            "$ref": "./examples/ConversationIntelligenceRecordingAccounts_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "ConversationIntelligenceRecordingAccounts_CreateOrUpdate",
+        "description": "Creates or updates ConversationIntelligenceRecordingAccount resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ConversationIntelligenceRecordingAccountNameParameter"
+          },
+          {
+            "description": "ConversationIntelligenceRecordingAccount details.",
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ConversationIntelligenceRecordingAccountResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful.",
+            "schema": {
+              "$ref": "#/definitions/ConversationIntelligenceRecordingAccountResource"
+            }
+          },
+          "201": {
+            "description": "ConversationIntelligenceRecordingAccount resource is being created or updated.",
+            "schema": {
+              "$ref": "#/definitions/ConversationIntelligenceRecordingAccountResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or update ConversationIntelligenceRecordingAccount resource": {
+            "$ref": "./examples/ConversationIntelligenceRecordingAccounts_CreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "patch": {
+        "operationId": "ConversationIntelligenceRecordingAccounts_Update",
+        "description": "Updates ConversationIntelligenceRecordingAccount details.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ConversationIntelligenceRecordingAccountNameParameter"
+          },
+          {
+            "description": "ConversationIntelligenceRecordingAccount resource patch details.",
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ConversationIntelligenceRecordingAccountPatchResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful.",
+            "schema": {
+              "$ref": "#/definitions/ConversationIntelligenceRecordingAccountResource"
+            }
+          },
+          "202": {
+            "description": "ConversationIntelligenceRecordingAccount resource is being updated.",
+            "headers": {
+              "Location": {
+                "description": "The Location header contains the URL where the status of the long running operation can be checked.",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/ConversationIntelligenceRecordingAccountResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update existing ConversationIntelligenceRecordingAccount resource": {
+            "$ref": "./examples/ConversationIntelligenceRecordingAccounts_Update.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "delete": {
+        "operationId": "ConversationIntelligenceRecordingAccounts_Delete",
+        "description": "Deletes ConversationIntelligenceRecordingAccount resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ConversationIntelligenceRecordingAccountNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ConversationIntelligenceRecordingAccount resource deleted successfully."
+          },
+          "202": {
+            "description": "ConversationIntelligenceRecordingAccount resource is being deleted.",
+            "headers": {
+              "Location": {
+                "description": "The Location header contains the URL where the status of the long running operation can be checked.",
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "ConversationIntelligenceRecordingAccount resource does not exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete ConversationIntelligenceRecordingAccount resource": {
+            "$ref": "./examples/ConversationIntelligenceRecordingAccounts_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
+    "/providers/Microsoft.SalesCopilot/locations/{location}/operationStatuses/{operationId}": {
+      "get": {
+        "operationId": "OperationStatuses_Get",
+        "description": "Returns the current status of an async operation.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/OperationIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Requested operation status",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationStatusResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get operation status": {
+            "$ref": "./examples/OperationStatuses_Get.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.SalesCopilot/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "description": "Returns list of operations.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operation details.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Get all SalesCopilot operations": {
+            "$ref": "./examples/Operations_List.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Tags": {
+      "description": "Resource tags.",
+      "type": "object",
+      "readOnly": false,
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
+    "ProvisioningState": {
+      "description": "The resource provisioning state.",
+      "type": "string",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Provisioning",
+        "Updating",
+        "Deleting",
+        "Accepted"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true
+      }
+    },
+    "ConversationIntelligenceRecordingAccountResource": {
+      "description": "ConversationIntelligenceRecordingAccount resource details.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "ConversationIntelligenceRecordingAccount resource properties.",
+          "type": "object",
+          "properties": {
+            "seatsNumber": {
+              "description": "ConversationIntelligenceRecordingAccount seats number. This can only be set at ConversationIntelligenceRecordingAccount creation.",
+              "type": "integer",
+              "x-ms-mutability": [
+                "read",
+                "create"
+              ],
+              "format": "int32",
+              "minimum": 1
+            },
+            "organizationType": {
+              "description": "The account organization type.",
+              "type": "string",
+              "enum": [
+                "Prod",
+                "NonProd"
+              ],
+              "x-ms-enum": {
+                "name": "organizationType",
+                "modelAsString": true
+              }
+            },
+            "provisioningState": {
+              "$ref": "#/definitions/ProvisioningState",
+              "description": "The resource provisioning state.",
+              "readOnly": true
+            }
+          }
+        },
+        "systemData": {
+          "description": "Metadata pertaining to creation and last modification of the resource.",
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData"
+        }
+      }
+    },
+    "ConversationIntelligenceRecordingAccountResourceList": {
+      "description": "The list of ConversationIntelligenceRecordingAccount resources.",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The link used to get the next page of ConversationIntelligenceRecordingAccount resources list.",
+          "type": "string"
+        },
+        "value": {
+          "description": "The list of ConversationIntelligenceRecordingAccount resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ConversationIntelligenceRecordingAccountResource"
+          }
+        }
+      }
+    },
+    "ConversationIntelligenceRecordingAccountPatchResource": {
+      "description": "ConversationIntelligenceRecordingAccount resource patch details.",
+      "type": "object",
+      "properties": {
+        "tags": {
+          "description": "Resource tags.",
+          "$ref": "#/definitions/Tags"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "ConversationIntelligenceRecordingAccountNameParameter": {
+      "description": "The name of the SalesCopilot ConversationIntelligenceRecordingAccount resource.",
+      "type": "string",
+      "name": "accountName",
+      "in": "path",
+      "required": true,
+      "x-ms-parameter-location": "method",
+      "pattern": "^[a-f0-9]+$"
+    }
+  }
+}

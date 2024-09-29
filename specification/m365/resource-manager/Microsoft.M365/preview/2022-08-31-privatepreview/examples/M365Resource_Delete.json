@@ -1,0 +1,46 @@
+{
+  "parameters": {
+    "api-version": "2022-08-31-privatepreview",
+    "m365ResourceName": "myResourceName",
+    "subscriptionId": "{subscriptionId}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/{subscriptionId}/providers/Microsoft.M365/m365Resources/myResourceName",
+        "name": "myResourceName",
+        "type": "Microsoft.M365/m365Resources",
+        "properties": {
+          "autoRenew": "On",
+          "billingFrequency": "P1M",
+          "billingProfileId": "/providers/Microsoft.Billing/billingAccounts/564d3dc9-2aef-5837-0cda-8f059067eb56:20a4b8e0-09e9-475a-9aa8-e86c01cb9097_2019-05-31/billingProfiles/3OII-YOOB-BG7-TGB",
+          "billingProfileDisplayName": "test_test_ppeE5purchasetest",
+          "invoiceSectionId": "/providers/Microsoft.Billing/billingAccounts/564d3dc9-2aef-5837-0cda-8f059067eb56:20a4b8e0-09e9-475a-9aa8-e86c01cb9097_2019-05-31/billingProfiles/3OII-YOOB-BG7-TGB/invoiceSections/AMZN-NMY2-PJA-TGB",
+          "invoiceSectionDisplayName": "test_test_ppeE5purchasetest",
+          "productCategory": "SeatBased",
+          "productType": "Microsoft 365 E5",
+          "productTypeId": "CFQ7TTC0LFLZ",
+          "provisioningState": "Updating",
+          "purchaseDate": "2022-04-29T07:52:28.3067751-07:00",
+          "quantity": 20,
+          "skuId": "0002",
+          "skuDescription": "Microsoft 365 E5",
+          "systemOverrides": {
+            "cancellationAllowedEndDate": "2022-05-06T07:54:48-07:00"
+          },
+          "termDuration": "P1Y",
+          "termStartDate": "2022-04-28T17:00:00-07:00",
+          "termEndDate": "2023-04-27T17:00:00-07:00",
+          "status": "Active"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/{subscriptionId}/providers/Microsoft.M365/locations/global/operationStatuses/{operationId}?api-version=2022-08-31-privatepreview",
+        "Retry-After": "60"
+      }
+    },
+    "204": {}
+  }
+}

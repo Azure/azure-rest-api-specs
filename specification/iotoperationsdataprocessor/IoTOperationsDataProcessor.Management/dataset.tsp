@@ -1,6 +1,7 @@
 import "@typespec/http";
 import "@typespec/rest";
 import "@typespec/versioning";
+import "@azure-tools/typespec-providerhub";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "./common.tsp";
@@ -45,7 +46,6 @@ model DatasetProperties {
   @doc("Time to live for individual records.")
   ttl?: string;
 
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "existing API"
   @doc("List of keys that can be used for joining on enrich.")
   keys?: Record<DatasetPropertyKey>;
 
@@ -66,12 +66,7 @@ model DatasetPropertyKey {
 @armResourceOperations
 interface Datasets {
   get is ArmResourceRead<Dataset>;
-  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "MUST CHANGE ON NEXT UPDATE"
-  @Azure.Core.useFinalStateVia("azure-async-operation")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<
-    Dataset,
-    LroHeaders = Azure.Core.Foundations.RetryAfterHeader
-  >;
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<Dataset>;
   update is ArmCustomPatchSync<Dataset>;
   delete is ArmResourceDeleteWithoutOkAsync<Dataset>;
   listByInstance is ArmResourceListByParent<Dataset>;

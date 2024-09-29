@@ -1,0 +1,66 @@
+{
+  "parameters": {
+    "recipeName": "testRecipe",
+    "resourceUri": "subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRG/providers/Microsoft.HybridCompute/machines/testMachines",
+    "api-version": "2020-01-01-preview",
+    "resourceGroupName": "testRG",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "Recipes": {
+      "location": "East US",
+      "properties": {
+        "origin": "4kKhtDPJdJ",
+        "dishType": "L4ovFNkznxBdWAMBm_R6J0POYyyLxLHYTbOc4dTRp5KapsOmFiWtoCP3dx7l5Yy4X",
+        "group": "YXY3memR7tN7SZMxy6TJccDN5HALUscKvIY7zU",
+        "ingredients": {}
+      },
+      "extendedLocation": {
+        "type": "Custom",
+        "name": "name"
+      }
+    }
+  },
+  "responses": {
+    "201": {
+      "headers": {
+        "Azure-AsyncOperation": "https://contoso.com/operationstatus",
+        "Location": "location"
+      },
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRG/providers/Microsoft.HybridCompute/machines/testMachines/providers/Microsoft.Contoso/extensionRecipes/testRecipe",
+        "name": "testRecipe",
+        "type": "microsoft.contoso/Recipes",
+        "location": "East US",
+        "properties": {
+          "origin": "1P",
+          "dishType": "qCSyWAs4EZHwvOix4gYzn.9LMGZd",
+          "group": "JXPZHIhEVpBm8csRjWrXYWTuC",
+          "ingredients": {}
+        },
+        "provisioningState": "string",
+        "extendedLocation": {
+          "type": "Custom",
+          "name": "name"
+        }
+      }
+    },
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRG/providers/Microsoft.HybridCompute/machines/testMachines/providers/Microsoft.Contoso/extensionRecipes/testRecipe",
+        "name": "testRecipe",
+        "type": "microsoft.contoso/Recipes",
+        "location": "East US",
+        "properties": {
+          "origin": "d0DHgXb4BGFdP8T-OKE45UoM2_5XiGDSKBxCGXL5HCgDBHAsMpUst1VjQ.84pAzWPiCZJ5FB9dyEUUOGewP_-8mMYZY",
+          "dishType": "Xgj0kMc1JiCgBu_eMDflebNcW4whENuW3bQN-6LFAMO.IcanTvexylg",
+          "group": "F-9hmoRmowLwdybyq_dq2j7CUc4QAO",
+          "ingredients": {},
+          "provisioningState": "string"
+        },
+        "extendedLocation": {
+          "type": "Custom",
+          "name": "name"
+        }
+      }
+    }
+  }
+}

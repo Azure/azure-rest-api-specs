@@ -1,0 +1,112 @@
+{
+  "parameters": {
+    "api-version": "2022-07-15-preview",
+    "subscriptionId": "3f753bd1-b08e-4473-965c-0397c16d9789",
+    "resourceGroupName": "rgplayfab",
+    "titleName": "DevPlayers",
+    "automationRuleName": "WandererDemo"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "matchCondition": {
+            "nodeType": "LogicalOperator",
+            "operation": "Or",
+            "children": [
+              {
+                "nodeType": "LogicalOperator",
+                "operation": "And",
+                "children": [
+                  {
+                    "nodeType": "Comparison",
+                    "operation": "IsEqualTo",
+                    "left": {
+                      "nodeType": "PropertyAccess",
+                      "propertyPath": "BanReason",
+                      "type": "BooleanType"
+                    },
+                    "right": {
+                      "nodeType": "Constant",
+                      "value": false
+                    }
+                  },
+                  {
+                    "nodeType": "Comparison",
+                    "operation": "IsEqualTo",
+                    "left": {
+                      "nodeType": "PropertyAccess",
+                      "propertyPath": "BanReason",
+                      "type": "NumberType"
+                    },
+                    "right": {
+                      "nodeType": "Constant",
+                      "value": 12345
+                    }
+                  }
+                ]
+              },
+              {
+                "nodeType": "LogicalOperator",
+                "operation": "And",
+                "children": [
+                  {
+                    "nodeType": "Comparison",
+                    "operation": "IsEqualTo",
+                    "left": {
+                      "nodeType": "PropertyAccess",
+                      "propertyPath": "BanReason",
+                      "type": "StringType"
+                    },
+                    "right": {
+                      "nodeType": "Constant",
+                      "value": "1234"
+                    }
+                  },
+                  {
+                    "nodeType": "Comparison",
+                    "operation": "IsEqualTo",
+                    "left": {
+                      "nodeType": "PropertyAccess",
+                      "propertyPath": "BanReason",
+                      "type": "DateTimeType"
+                    },
+                    "right": {
+                      "nodeType": "Constant",
+                      "value": "2022-07-21T08:10:27.553Z"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "eventTrigger": {
+            "eventNamespace": "com.playfab",
+            "eventName": "player_banned"
+          },
+          "actions": [
+            {
+              "actionType": "ExecuteFunction",
+              "actionParameters": {
+                "functionName": "testFunction",
+                "generatePlayStreamEvent": "true"
+              }
+            }
+          ],
+          "provisioningState": "NotSpecified"
+        },
+        "systemData": {
+          "createdBy": "magzyjdlprdia",
+          "createdByType": "User",
+          "createdAt": "2022-07-21T10:35:07.843Z",
+          "lastModifiedBy": "pneupdhwysyhphhxyspngdnoabamjs",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2022-07-21T10:35:07.843Z"
+        },
+        "id": "/subscriptions/3f753bd1-b08e-4473-965c-0397c16d9789/resourceGroups/rgplayfab/providers/Microsoft.PlayFab/titles/DevPlayers/automationRules/WandererDemo",
+        "name": "WandererDemo",
+        "type": "microsoft.playfab/titles/automationrules"
+      }
+    }
+  }
+}

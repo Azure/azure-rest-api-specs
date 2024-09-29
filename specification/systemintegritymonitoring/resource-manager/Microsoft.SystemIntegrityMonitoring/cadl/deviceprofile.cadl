@@ -1,0 +1,44 @@
+import "@cadl-lang/rest";
+import "@azure-tools/cadl-providerhub";
+import "@azure-tools/cadl-azure-core";
+import "@azure-tools/cadl-azure-resource-manager";
+import "./provisioningstate.cadl";
+import "./resourceconnection.cadl";
+
+enum MeasurementProfileStateValues {
+  Staged,
+  Approved,
+}
+
+@doc("SIM Device Profile properties.")
+model DeviceProfileProperties {
+  @doc("The status of the last operation.")
+  @visibility("read")
+  provisioningState?: ProvisioningStateValues;
+
+  @doc("List of every measurement version that was created for the given IoT device profile.")
+  @visibility("read")
+  measurementProfileVersions?: MeasurementProfileProperties[];
+}
+
+@doc("Definition for a set of measurements that were taken from a clean room device. Once approved, field devices can use it to match their measurements against and get attested if the matching succeeds.")
+model MeasurementProfileProperties {
+  @doc("The version of this measurement.")
+  @visibility("read")
+  version?: string;
+
+  @doc("The values that this measurement profile holds. Used for field devices to attest against.")
+  values: Record<string>;
+
+  @doc("The scopes where this measurement profile should be applied on.")
+  scopes: MeasurementProfileResourceConnection[];
+}
+
+@doc("Scope where a measurement profile applies to.")
+model MeasurementProfileResourceConnection {
+  @doc("Resource of the scope. Expected to match any linked resources under SIM Hub.")
+  resourceId: string;
+
+  @doc("The current state of the measurement in the specific scope.")
+  state: MeasurementProfileStateValues;
+}

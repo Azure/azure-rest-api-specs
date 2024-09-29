@@ -357,6 +357,30 @@ union AttestHealthStatusEnum {
   string,
 }
 
+@added(Versions.v2024_08_01_preview)
+@doc("Defines type of hardware platform from attestation token.")
+union AttestHWPlatformEnum {
+  @doc("AttestHWPlatform is Secure Encrypted Virtualization Secure Nested Paging (SEVSNP)")
+  SEVSNP: "SEVSNP",
+
+  @doc("AttestHWPlatform is unknown")
+  Unknown: "Unknown",
+
+  string,
+}
+
+@added(Versions.v2024_08_01_preview)
+@doc("Defines type of managed disk security encryption type from attestation token.")
+union AttestDiskSecurityEncryptionTypeEnum {
+  @doc("Disk security encryption type is non-persisted Trusted Platform Module (TPM)")
+  NonPersistedTPM: "NonPersistedTPM",
+
+  @doc("Disk security encryption type is unknown")
+  Unknown: "Unknown",
+
+  string,
+}
+
 @doc("Defines the different types of operations for guest agent.")
 union ProvisioningAction {
   @doc("Install guest agent")
@@ -378,6 +402,15 @@ union OperatingSystemTypes {
 
   @doc("Linux operating system")
   Linux: "Linux",
+
+  string,
+}
+
+@added(Versions.v2024_08_01_preview)
+@doc("Encryption type of the managed disk enum.")
+union SecurityEncryptionType {
+  @doc("Non-persisted TPM encryption type")
+  NonPersistedTPM: "NonPersistedTPM",
 
   string,
 }
@@ -619,7 +652,7 @@ model ExtendedLocation {
 
 @doc("The gallery images resource patch definition.")
 model GalleryImagesUpdateRequest {
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "existing API"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing api"
   @doc("Resource tags")
   tags?: Record<string>;
 }
@@ -706,7 +739,7 @@ model RouteTable {
   @visibility("read")
   type?: string;
 
-  #suppress "deprecated" "LEGACY flattening"
+  #suppress "deprecated" "Legacy flattening"
   @doc("Properties of the route table.")
   @Azure.ClientGenerator.Core.flattenProperty
   properties?: RouteTableProperties;
@@ -721,7 +754,7 @@ model RouteTableProperties {
 
 @doc("Route - Route resource.")
 model Route {
-  #suppress "deprecated" "Legacy flattend property"
+  #suppress "deprecated" "Legacy flattening"
   @doc("Properties of the route.")
   @Azure.ClientGenerator.Core.flattenProperty
   properties?: RouteProperties;
@@ -845,9 +878,14 @@ model NetworkInterfaceProperties {
 
   @doc("NetworkSecurityGroup - Network Security Group attached to the network interface.")
   networkSecurityGroup?: NetworkSecurityGroupArmReference;
+
+  @added(Versions.v2024_07_15_preview)
+  @doc("Boolean indicating whether this is a local network interface or if one should be created.")
+  createFromLocal?: boolean = false;
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "IP is a short form. The casing is correct."
+#suppress "deprecated" "Legacy flattening"
 @doc("InterfaceIPConfiguration IPConfiguration in a network interface.")
 model IPConfiguration {
   @doc("Name - The name of the resource that is unique within a resource group. This name can be used to access the resource.")
@@ -888,6 +926,7 @@ model InterfaceDNSSettings {
   dnsServers?: string[];
 }
 
+#suppress "deprecated" "Legacy flattening"
 @doc("The observed state of network interfaces")
 model NetworkInterfaceStatus {
   @doc("NetworkInterface provisioning error code")
@@ -909,6 +948,7 @@ model NetworkInterfaceStatusProvisioningStatus {
   status?: Status;
 }
 
+#suppress "deprecated" "Legacy flattening"
 @doc("The observed state of logical networks")
 model LogicalNetworkStatus {
   @doc("LogicalNetwork provisioning error code")
@@ -932,7 +972,7 @@ model LogicalNetworkStatusProvisioningStatus {
 
 @doc("The logical network resource patch definition.")
 model LogicalNetworksUpdateRequest {
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "existing API"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing api"
   @doc("Resource tags")
   tags?: Record<string>;
 }
@@ -971,6 +1011,7 @@ model MarketplaceGalleryImageProperties {
   status?: MarketplaceGalleryImageStatus;
 }
 
+#suppress "deprecated" "Legacy flattening"
 @doc("The observed state of marketplace gallery images")
 model MarketplaceGalleryImageStatus {
   @doc("MarketplaceGalleryImage provisioning error code")
@@ -1007,21 +1048,21 @@ model MarketplaceGalleryImageStatusDownloadStatus {
 
 @doc("The marketplace gallery image resource patch definition.")
 model MarketplaceGalleryImagesUpdateRequest {
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "existing API"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing api"
   @doc("Resource tags")
   tags?: Record<string>;
 }
 
 @doc("The network interface resource patch definition.")
 model NetworkInterfacesUpdateRequest {
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "existing API"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing api"
   @doc("Resource tags")
   tags?: Record<string>;
 }
 
 @doc("Tags object for patch operations.")
 model TagsObject {
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "existing API"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing api"
   @doc("Resource tags.")
   tags?: Record<string>;
 }
@@ -1040,6 +1081,7 @@ model StorageContainerProperties {
   status?: StorageContainerStatus;
 }
 
+#suppress "deprecated" "Legacy flattening"
 @doc("The observed state of storage containers")
 model StorageContainerStatus {
   @doc("StorageContainer provisioning error code")
@@ -1071,7 +1113,7 @@ model StorageContainerStatusProvisioningStatus {
 
 @doc("The storage container resource patch definition.")
 model StorageContainersUpdateRequest {
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "existing API"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing api"
   @doc("Resource tags")
   tags?: Record<string>;
 }
@@ -1099,6 +1141,14 @@ model VirtualHardDiskProperties {
   @secret
   downloadUrl?: string;
 
+  @added(Versions.v2024_07_15_preview)
+  @doc("Boolean indicating whether this is a local hard disk or if one should be created.")
+  createFromLocal?: boolean = false;
+
+  @added(Versions.v2024_07_15_preview)
+  @doc("Operating system type of the OS disk. Possible values are: Windows, Linux.")
+  osType?: OperatingSystemTypes;
+
   #suppress "@azure-tools/typespec-azure-core/casing-style" "HyperV is the correct case."
   @doc("The hypervisor generation of the Virtual Machine [V1, V2]")
   hyperVGeneration?: HyperVGeneration;
@@ -1122,6 +1172,7 @@ model VirtualHardDiskProperties {
   status?: VirtualHardDiskStatus;
 }
 
+#suppress "deprecated" "Legacy flattening"
 @doc("The observed state of virtual hard disks")
 model VirtualHardDiskStatus {
   @doc("VirtualHardDisk provisioning error code")
@@ -1172,7 +1223,7 @@ model VirtualHardDiskUploadStatus {
 
 @doc("The virtual hard disk resource patch definition.")
 model VirtualHardDisksUpdateRequest {
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "existing API"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing api"
   @doc("Resource tags")
   tags?: Record<string>;
 }
@@ -1240,6 +1291,10 @@ model VirtualMachineInstanceProperties {
 
   @doc("Unique identifier defined by ARC to identify the guest of the VM.")
   resourceUid?: string;
+
+  @added(Versions.v2024_07_15_preview)
+  @doc("Boolean indicating whether this is a local virtual machine or if one should be created.")
+  createFromLocal?: boolean = false;
 }
 
 @doc("HardwareProfile - Specifies the hardware settings for the virtual machine instance.")
@@ -1417,6 +1472,25 @@ model VirtualMachineInstancePropertiesStorageProfileOsDisk
   is VirtualHardDiskArmReference {
   @doc("This property allows you to specify the type of the OS that is included in the disk if creating a VM from user-image or a specialized VHD. Possible values are: Windows, Linux.")
   osType?: OperatingSystemTypes;
+
+  @added(Versions.v2024_08_01_preview)
+  @doc("The managed disk parameters.")
+  managedDisk?: VirtualMachineInstanceManagedDiskParameters;
+}
+
+@added(Versions.v2024_08_01_preview)
+@doc("The parameters of a managed disk.")
+model VirtualMachineInstanceManagedDiskParameters {
+  @doc("Specifies the security profile for the managed disk.")
+  securityProfile?: VMDiskSecurityProfile;
+}
+
+#suppress "@azure-tools/typespec-azure-core/casing-style" "VM is a short form. It is the correct case."
+@added(Versions.v2024_08_01_preview)
+@doc("Specifies the security profile settings for the managed disk. NOTE: It can only be set for Confidential VMs")
+model VMDiskSecurityProfile {
+  @doc("Specifies the EncryptionType of the managed disk. It is set to NonPersistedTPM for not persisting firmware state in the VMGuestState blob. NOTE: It can be set for only Confidential VMs.")
+  securityEncryptionType?: SecurityEncryptionType;
 }
 
 @doc("HTTP Proxy configuration for the VM.")
@@ -1471,6 +1545,7 @@ model InstanceViewStatus {
   time?: utcDateTime;
 }
 
+#suppress "deprecated" "Legacy flattening"
 @doc("The observed state of virtual machine instances")
 model VirtualMachineInstanceStatus {
   @doc("VirtualMachine provisioning error code")
@@ -1673,6 +1748,16 @@ model AttestationStatusProperties {
   @doc("Provisioning state of the virtual machine instance.")
   @visibility("read")
   provisioningState?: ProvisioningStateEnum;
+
+  @doc("The hardware platform information from attestation token. This only applies to Confidential VM.")
+  @visibility("read")
+  @added(Versions.v2024_08_01_preview)
+  attestHardwarePlatform?: AttestHWPlatformEnum;
+
+  @added(Versions.v2024_08_01_preview)
+  @doc("The managed disk security encryption type from attestation token. This only applies to Confidential VM.")
+  @visibility("read")
+  attestDiskSecurityEncryptionType?: AttestDiskSecurityEncryptionTypeEnum;
 }
 
 @doc("Defines the resource properties.")

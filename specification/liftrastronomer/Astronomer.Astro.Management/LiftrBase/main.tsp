@@ -12,20 +12,10 @@ enum Versions {
   @doc("Dependent on Azure.ResourceManager.Versions.v1_0_Preview_1")
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   v1_preview: "2023-06-01-preview",
-
-  @doc("Dependent on Azure.ResourceManager.Versions.v1_0_Preview_1")
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-  v2024_08_27_preview: "2024-08-27-preview",
-
-  @doc("Dependent on Azure.ResourceManager.Versions.v1_0_Preview_1")
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-  v2024_08_27: "2024-08-27",
 }
 
 @doc("Marketplace subscription status of a resource.")
-union MarketplaceSubscriptionStatus {
-  string,
-
+enum MarketplaceSubscriptionStatus {
   @doc("Purchased but not yet activated")
   PendingFulfillmentStart: "PendingFulfillmentStart",
 
@@ -39,26 +29,13 @@ union MarketplaceSubscriptionStatus {
   Unsubscribed: "Unsubscribed",
 }
 
-@added(Versions.v2024_08_27_preview)
-@added(Versions.v2024_08_27)
-@doc("Subscription renewal mode")
-union RenewalMode {
-  string,
-
-  @doc("Automatic renewal")
-  Auto: "Auto",
-
-  @doc("Manual renewal")
-  Manual: "Manual",
-}
-
 @doc("A string that represents a URI.")
 scalar Uri extends string;
 
 @doc("Marketplace details for an organization")
 model MarketplaceDetails {
   @doc("Azure subscription id for the the marketplace offer is purchased from")
-  subscriptionId?: string;
+  subscriptionId: string;
 
   @doc("Marketplace subscription status")
   subscriptionStatus?: MarketplaceSubscriptionStatus;
@@ -86,17 +63,6 @@ model OfferDetails {
 
   @doc("Plan Display Name for the marketplace offer")
   termId?: string;
-
-  @added(Versions.v2024_08_27_preview)
-  @added(Versions.v2024_08_27)
-  @doc("Subscription renewal mode")
-  renewalMode?: RenewalMode;
-
-  @added(Versions.v2024_08_27_preview)
-  @added(Versions.v2024_08_27)
-  @doc("Current subscription end date and time")
-  @visibility("read")
-  endDate?: utcDateTime;
 }
 
 @doc("Reusable representation of an email address.")
@@ -155,15 +121,13 @@ model SingleSignOnProperties {
 }
 
 @doc("Various states of the SSO resource")
-union SingleSignOnStates {
-  string,
-
+enum SingleSignOnStates {
   @doc("Initial state of the SSO resource")
-  "Initial",
+  Initial,
 
   @doc("State of the SSO resource when it is enabled")
-  "Enable",
+  Enable,
 
   @doc("State of the SSO resource when it is disabled")
-  "Disable",
+  Disable,
 }

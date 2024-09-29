@@ -1,0 +1,77 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2023-01-01-preview",
+    "title": "SaaSHubManagementClient",
+    "description": "SaaSHub mgmt client provides access to SaaSHub resources for Azure subscriptions."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/providers/Microsoft.SaaSHub/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "operationId": "Operations_List",
+        "description": "Lists the available SaaSHub REST API operations.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/SaaSHub/"
+        },
+        "x-ms-examples": {
+          "ListOperations": {
+            "$ref": "./examples/Operations_List.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "Resource Provider error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "operationId": "DeviceRegistrations_ListByCatalog",
+  "title": "DeviceRegistrations_ListByCatalog",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "MyResourceGroup1",
+    "catalogName": "MyCatalog1",
+    "api-version": "2022-09-01-privatepreview"
+  },
+  "responses": {
+    "200": {
+      "description": "List of Azure Sphere device registrations by resource group.",
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/MyResourceGroup1/providers/Microsoft.AzureSphereV2/catalogs/MyCatalog1/deviceRegistrations/MyNetworkDeviceId1",
+            "name": "MyNetworkDeviceId1",
+            "type": "Microsoft.AzureSphereV2/catalogs/deviceRegistrations",
+            "location": "eastus",
+            "properties": {
+              "provisioningPackageName": "MyProvisioningPackage1",
+              "attestationPublicKey": "MyNetworkDeviceId1AttestationPublicKey",
+              "deviceType": "IMXP8ULP"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

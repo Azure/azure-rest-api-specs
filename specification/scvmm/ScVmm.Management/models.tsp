@@ -1,14 +1,11 @@
 import "@typespec/rest";
 import "@typespec/http";
 import "@typespec/openapi";
-import "@typespec/versioning";
-import "./main.tsp";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
-using TypeSpec.Versioning;
 using Azure.ResourceManager;
 
 namespace Microsoft.ScVmm;
@@ -35,7 +32,7 @@ model QueryForceDelete {
 }
 
 /** The provisioning state of the resource. */
-union ProvisioningState {
+union ResourceProvisioningState {
   string,
   Azure.ResourceManager.ResourceProvisioningState,
 
@@ -203,7 +200,7 @@ model VmmServerProperties {
 
   /** Provisioning state of the resource. */
   @visibility("read")
-  provisioningState?: ProvisioningState;
+  provisioningState?: Microsoft.ScVmm.ResourceProvisioningState;
 }
 
 /** Credentials to connect to VmmServer. */
@@ -257,7 +254,7 @@ model CloudProperties {
 
   /** Provisioning state of the resource. */
   @visibility("read")
-  provisioningState?: ProvisioningState;
+  provisioningState?: Microsoft.ScVmm.ResourceProvisioningState;
 }
 
 /** Cloud Capacity model */
@@ -312,7 +309,7 @@ model VirtualNetworkProperties {
 
   /** Provisioning state of the resource. */
   @visibility("read")
-  provisioningState?: ProvisioningState;
+  provisioningState?: Microsoft.ScVmm.ResourceProvisioningState;
 }
 
 /** Defines the resource properties. */
@@ -390,7 +387,7 @@ model VirtualMachineTemplateProperties {
 
   /** Provisioning state of the resource. */
   @visibility("read")
-  provisioningState?: ProvisioningState;
+  provisioningState?: Microsoft.ScVmm.ResourceProvisioningState;
 }
 
 /** Network Interface model */
@@ -513,7 +510,7 @@ model AvailabilitySetProperties {
 
   /** Provisioning state of the resource. */
   @visibility("read")
-  provisioningState?: ProvisioningState;
+  provisioningState?: Microsoft.ScVmm.ResourceProvisioningState;
 }
 
 /** The inventory type */
@@ -553,7 +550,7 @@ model InventoryItemProperties {
 
   /** Provisioning state of the resource. */
   @visibility("read")
-  provisioningState?: ProvisioningState;
+  provisioningState?: Microsoft.ScVmm.ResourceProvisioningState;
 }
 
 /** Defines the resource properties. */
@@ -583,7 +580,7 @@ model VirtualMachineInstanceProperties {
 
   /** Provisioning state of the resource. */
   @visibility("read")
-  provisioningState?: ProvisioningState;
+  provisioningState?: Microsoft.ScVmm.ResourceProvisioningState;
 }
 
 /** Virtual Machine Instance Properties Update model */
@@ -645,35 +642,26 @@ model OsProfileForVmInstance {
   osVersion?: string;
 
   /** Gets or sets the domain name. */
-  @added(Versions.v2024_06_01)
   domainName?: string;
 
   /** Gets or sets the domain username. */
-  @added(Versions.v2024_06_01)
   domainUsername?: string;
 
   /** Password of the domain the VM has to join. */
   @visibility("create", "update")
   @secret
-  @added(Versions.v2024_06_01)
   domainPassword?: string;
 
   /** Gets or sets the workgroup. */
-  @added(Versions.v2024_06_01)
   workgroup?: string;
 
   /** Gets or sets the product key.Input format xxxxx-xxxxx-xxxxx-xxxxx-xxxxx */
-  @visibility("create")
-  @secret
-  @added(Versions.v2024_06_01)
   productKey?: string;
 
   /** Gets or sets the index value of the timezone. */
-  @added(Versions.v2024_06_01)
   timezone?: int32;
 
   /** Get or sets the commands to be run once at the time of creation separated by semicolons. */
-  @added(Versions.v2024_06_01)
   runOnceCommands?: string;
 }
 
@@ -834,7 +822,7 @@ model VmInstanceHybridIdentityMetadataProperties {
 
   /** Provisioning state of the resource. */
   @visibility("read")
-  provisioningState?: ProvisioningState;
+  provisioningState?: Microsoft.ScVmm.ResourceProvisioningState;
 }
 
 /** Defines the create checkpoint action properties. */
@@ -883,10 +871,9 @@ model GuestAgentProperties {
 
   /** Provisioning state of the resource. */
   @visibility("read")
-  provisioningState?: ProvisioningState;
+  provisioningState?: Microsoft.ScVmm.ResourceProvisioningState;
 
   /** The resource id of the private link scope this machine is assigned to, if any. */
-  @added(Versions.v2024_06_01)
   privateLinkScopeResourceId?: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.HybridCompute/privateLinkScopes";

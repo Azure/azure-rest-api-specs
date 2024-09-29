@@ -187,6 +187,10 @@
               "$ref": "#/definitions/VirtualMachineInstance"
             },
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -480,6 +484,10 @@
               "$ref": "#/definitions/GuestAgent"
             },
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -1277,6 +1285,10 @@
               "$ref": "#/definitions/GalleryImage"
             },
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -1569,6 +1581,10 @@
               "$ref": "#/definitions/LogicalNetwork"
             },
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -1861,6 +1877,10 @@
               "$ref": "#/definitions/MarketplaceGalleryImage"
             },
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -2153,6 +2173,10 @@
               "$ref": "#/definitions/NetworkInterface"
             },
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -2445,6 +2469,10 @@
               "$ref": "#/definitions/NetworkSecurityGroup"
             },
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -2761,6 +2789,10 @@
               "$ref": "#/definitions/SecurityRule"
             },
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -2989,6 +3021,10 @@
               "$ref": "#/definitions/StorageContainer"
             },
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -3281,6 +3317,10 @@
               "$ref": "#/definitions/VirtualHardDisk"
             },
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -3437,6 +3477,80 @@
         },
         "x-ms-long-running-operation": true
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/virtualHardDisks/{virtualHardDiskName}/upload": {
+      "post": {
+        "operationId": "VirtualHardDisks_Upload",
+        "tags": [
+          "VirtualHardDisks"
+        ],
+        "description": "The operation to upload a virtual hard disk.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "virtualHardDiskName",
+            "in": "path",
+            "description": "Name of the virtual hard disk",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,62}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/VirtualHardDiskUploadRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/VirtualHardDiskUploadResponse"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "UploadVirtualHardDisk": {
+            "$ref": "./examples/VirtualHardDisks_Upload.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
     }
   },
   "definitions": {
@@ -3572,8 +3686,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/AttestationStatusProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "description": "The resource-specific properties for this resource."
         }
       },
       "allOf": [
@@ -3840,8 +3953,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/GalleryImageProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "description": "The resource-specific properties for this resource."
         },
         "extendedLocation": {
           "$ref": "#/definitions/ExtendedLocation",
@@ -4126,8 +4238,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/GuestAgentProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "description": "The resource-specific properties for this resource."
         }
       },
       "allOf": [
@@ -4300,8 +4411,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/HybridIdentityMetadataProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "description": "The resource-specific properties for this resource."
         }
       },
       "allOf": [
@@ -4610,8 +4720,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/LogicalNetworkProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "description": "The resource-specific properties for this resource."
         },
         "extendedLocation": {
           "$ref": "#/definitions/ExtendedLocation",
@@ -4760,8 +4869,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/MarketplaceGalleryImageProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "description": "The resource-specific properties for this resource."
         },
         "extendedLocation": {
           "$ref": "#/definitions/ExtendedLocation",
@@ -4931,8 +5039,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/NetworkInterfaceProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "description": "The resource-specific properties for this resource."
         },
         "extendedLocation": {
           "$ref": "#/definitions/ExtendedLocation",
@@ -5099,8 +5206,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/NetworkSecurityGroupProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "description": "The resource-specific properties for this resource."
         },
         "extendedLocation": {
           "$ref": "#/definitions/ExtendedLocation",
@@ -5489,8 +5595,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/SecurityRuleProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "description": "The resource-specific properties for this resource."
         },
         "extendedLocation": {
           "$ref": "#/definitions/ExtendedLocation",
@@ -5826,8 +5931,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/StorageContainerProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "description": "The resource-specific properties for this resource."
         },
         "extendedLocation": {
           "$ref": "#/definitions/ExtendedLocation",
@@ -6087,8 +6191,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/VirtualHardDiskProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "description": "The resource-specific properties for this resource."
         },
         "extendedLocation": {
           "$ref": "#/definitions/ExtendedLocation",
@@ -6378,8 +6481,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/VirtualMachineInstanceProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "description": "The resource-specific properties for this resource."
         },
         "extendedLocation": {
           "$ref": "#/definitions/ExtendedLocation",

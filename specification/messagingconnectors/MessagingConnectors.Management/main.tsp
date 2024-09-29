@@ -1,0 +1,9 @@
+import "@typespec/http";
+import "@typespec/rest";
+import "@typespec/versioning";
+import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-resource-manager";
+import "./connectors.tsp";
+import "./dataPreview.tsp";
+import "./models.tsp";
+import "./common.tsp";

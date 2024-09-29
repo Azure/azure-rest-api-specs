@@ -1,0 +1,567 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Consumption Billing Interfaces",
+    "description": "Consumption Billing provider to enable different billing models such as Pay-as-you-go ( PAYG) for resource usage",
+    "version": "2022-04-07-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ScimConsumptionBilling/billingResources": {
+      "get": {
+        "description": "Returns list of billing models for privacy.",
+        "operationId": "BillingResources_list",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Billing model details.",
+            "schema": {
+              "$ref": "#/definitions/BillingModelPageableList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "BillingResources_list_MaximumSet_Gen": {
+            "$ref": "./examples/BillingResources_list_MaximumSet_Gen.json"
+          },
+          "BillingResources_list_MinimumSet_Gen": {
+            "$ref": "./examples/BillingResources_list_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ScimConsumptionBilling/billingResources": {
+      "get": {
+        "description": "Returns list of billing models for privacy.",
+        "operationId": "ResourceGroupBillingResources_list",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Billing model details.",
+            "schema": {
+              "$ref": "#/definitions/BillingModelPageableList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "ResourceGroupBillingResources_list_MaximumSet_Gen": {
+            "$ref": "./examples/ResourceGroupBillingResources_list_MaximumSet_Gen.json"
+          },
+          "ResourceGroupBillingResources_list_MinimumSet_Gen": {
+            "$ref": "./examples/ResourceGroupBillingResources_list_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ScimConsumptionBilling/billingResources/{billingResourceName}": {
+      "get": {
+        "description": "Returns Billing model enabled for the resource.",
+        "operationId": "BillingResources_Get",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/BillingResourceParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Billing model enabled or not.",
+            "schema": {
+              "$ref": "#/definitions/BillingModel"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "BillingResources_Get_MaximumSet_Gen": {
+            "$ref": "./examples/BillingResources_Get_MaximumSet_Gen.json"
+          },
+          "BillingResources_Get_MinimumSet_Gen": {
+            "$ref": "./examples/BillingResources_Get_MinimumSet_Gen.json"
+          }
+        }
+      },
+      "delete": {
+        "description": "Deletes Billing model enabled for the resource.",
+        "operationId": "BillingResources_Delete",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/BillingResourceParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Deletes the Billing model enabled.",
+            "schema": {
+              "$ref": "#/definitions/BillingModel"
+            }
+          },
+          "204": {
+            "description": "Successful; Billing model does not exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "BillingResources_Delete_MaximumSet_Gen": {
+            "$ref": "./examples/BillingResources_Delete_MaximumSet_Gen.json"
+          },
+          "BillingResources_Delete_MinimumSet_Gen": {
+            "$ref": "./examples/BillingResources_Delete_MinimumSet_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "description": "Create or update billing model resource.",
+        "operationId": "BillingResources_CreateAndUpdate",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/BillingResourceParameter"
+          },
+          {
+            "name": "Billing Details",
+            "description": "Billing details of the solution and meter.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BillingModel"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful.",
+            "schema": {
+              "$ref": "#/definitions/BillingModel"
+            }
+          },
+          "201": {
+            "description": "Long running operation.",
+            "schema": {
+              "$ref": "#/definitions/BillingModel"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "BillingResources_CreateAndUpdate_MaximumSet_Gen": {
+            "$ref": "./examples/BillingResources_CreateAndUpdate_MaximumSet_Gen.json"
+          },
+          "BillingResources_CreateAndUpdate_MinimumSet_Gen": {
+            "$ref": "./examples/BillingResources_CreateAndUpdate_MinimumSet_Gen.json"
+          }
+        }
+      },
+      "patch": {
+        "description": "patch billing model resource.",
+        "operationId": "BillingResources_Update",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/BillingResourceParameter"
+          },
+          {
+            "name": "Billing Details",
+            "description": "Billing details of the solution and meter.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BillingModel"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful.",
+            "schema": {
+              "$ref": "#/definitions/BillingModel"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "BillingResources_Update_MaximumSet_Gen": {
+            "$ref": "./examples/BillingResources_Update_MaximumSet_Gen.json"
+          },
+          "BillingResources_Update_MinimumSet_Gen": {
+            "$ref": "./examples/BillingResources_Update_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.ScimConsumptionBilling/operations": {
+      "get": {
+        "description": "Returns list of operations.",
+        "operationId": "BillingResourcesOperation_List",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operation Success."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-examples": {
+          "BillingResourcesOperation_List_MaximumSet_Gen": {
+            "$ref": "./examples/BillingResourcesOperation_List_MaximumSet_Gen.json"
+          },
+          "BillingResourcesOperation_List_MinimumSet_Gen": {
+            "$ref": "./examples/BillingResourcesOperation_List_MinimumSet_Gen.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Resource": {
+      "description": "An Azure resource.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Azure resource Id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "Azure resource name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "Azure resource type.",
+          "type": "string",
+          "readOnly": true
+        },
+        "location": {
+          "description": "Location of the resource.",
+          "type": "string",
+          "readOnly": false
+        },
+        "systemData": {
+          "description": "system data",
+          "title": "system data",
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
+        },
+        "tags": {
+          "description": "resource tags.",
+          "type": "object",
+          "readOnly": false,
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "ProvisioningState": {
+      "description": "The provisioning state of resource.",
+      "enum": [
+        "Unknown",
+        "Validating",
+        "Processing",
+        "Deleting",
+        "Accepted",
+        "Canceled",
+        "Completed",
+        "Succeeded",
+        "Failed",
+        "Deleted"
+      ],
+      "type": "string",
+      "readOnly": true,
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true
+      }
+    },
+    "BillingModelPageableList": {
+      "description": "The billing models",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "Gets or sets the URL (link) to the next result set.",
+          "type": "string"
+        },
+        "value": {
+          "description": "Gets or sets the values to emit from this list.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BillingModel"
+          }
+        }
+      }
+    },
+    "BillingModelPropertiesFormat": {
+      "description": "Billing Model properties.",
+      "type": "object",
+      "required": [
+        "billingModelName",
+        "billingMeterName",
+        "billingSolutionName"
+      ],
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Gets the status of the billing model at the time the operation was called"
+        },
+        "status": {
+          "description": "Status of the Billing Model to Enable",
+          "type": "string",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "default": "Disabled",
+          "x-ms-enum": {
+            "name": "status",
+            "modelAsString": true
+          }
+        },
+        "billingModelName": {
+          "description": "Billing Model Name which is enabled",
+          "enum": [
+            "PayG",
+            "PayGAfterCapacity"
+          ],
+          "type": "string",
+          "default": "PayG",
+          "x-ms-enum": {
+            "name": "billingModelName",
+            "modelAsString": true
+          }
+        },
+        "billingMeterName": {
+          "description": "Billing meter name",
+          "enum": [
+            "DSR"
+          ],
+          "type": "string",
+          "default": "DSR",
+          "x-ms-enum": {
+            "name": "billingMeterName",
+            "modelAsString": true
+          }
+        },
+        "billingSolutionName": {
+          "description": "Billing Solution Name which is enabled",
+          "enum": [
+            "Privacy"
+          ],
+          "type": "string",
+          "default": "Privacy",
+          "x-ms-enum": {
+            "name": "billingSolutionName",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "BillingModel": {
+      "description": "Billing Model resource",
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/BillingModelPropertiesFormat",
+          "description": "Billing Model properties."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ]
+    },
+    "Error": {
+      "description": "Error definition.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "Service specific error code which serves as the substatus for the HTTP error code.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "Service specific error type which serves as additional context for the error herein.",
+          "type": "string",
+          "readOnly": true
+        },
+        "message": {
+          "description": "Description of the error.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ErrorResponse": {
+      "description": "Error response.",
+      "type": "object",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/Error"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "BillingSolutionParameter": {
+      "name": "billingSolutionName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The Security and Compliance Identity Management (SCIM) solution name.",
+      "x-ms-parameter-location": "method"
+    },
+    "BillingResourceParameter": {
+      "name": "billingResourceName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the billing resource.",
+      "x-ms-parameter-location": "method"
+    },
+    "BillingMeterParameter": {
+      "name": "billingMeterName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the billing meter.",
+      "x-ms-parameter-location": "method"
+    },
+    "BillingModelParameter": {
+      "name": "billingModelName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The Billing model of the resource.",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

@@ -1,0 +1,240 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure Network Fabric Management Service API",
+    "description": "Self service experience for Azure Network Fabric API.",
+    "version": "2022-01-15-privatepreview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ManagedNetworkFabric/networkRackSkus/{networkRackSkuName}": {
+      "get": {
+        "tags": [
+          "NetworkRackSkus"
+        ],
+        "operationId": "NetworkRackSkus_Get",
+        "summary": "Gets a Network Rack Sku.",
+        "description": "Get Network Rack SKU resource.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "path",
+            "name": "networkRackSkuName",
+            "required": true,
+            "type": "string",
+            "description": "Name of the Network Rack Sku"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/NetworkRackSku"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NetworkRackSkus_Get_MaximumSet_Gen": {
+            "$ref": "./examples/NetworkRackSkus_Get_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ManagedNetworkFabric/networkRackSkus": {
+      "get": {
+        "operationId": "NetworkRackSkus_ListBySubscription",
+        "summary": "List NetworkRackSkus by subscription.",
+        "description": "List all Network Rack SKUs in the given subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lists all NetworkRackSkus under the subscription.",
+            "schema": {
+              "$ref": "#/definitions/NetworkRackSkusListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "NetworkRackSkus_ListBySubscription_MaximumSet_Gen": {
+            "$ref": "./examples/NetworkRackSkus_ListBySubscription_MaximumSet_Gen.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "NetworkRackSkuProperties": {
+      "type": "object",
+      "properties": {
+        "roleName": {
+          "type": "string",
+          "description": "The role of the Network Rack: Aggregate or Compute.",
+          "enum": [
+            "ComputeRack",
+            "AggregateRack"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "networkRackRoleName"
+          }
+        },
+        "maximumServerCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Maximum number of servers available for this SKU."
+        },
+        "maximumStorageCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Maximum number of storage devices available for this SKU."
+        },
+        "maximumUplinks": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Maximum number of network uplinks available for this SKU."
+        },
+        "networkDevices": {
+          "type": "array",
+          "description": "List of network device properties / role for the Network Rack.",
+          "x-ms-identifiers": [
+            "networkDeviceSkuName"
+          ],
+          "items": {
+            "description": "Network device properties / role for the Network Rack.",
+            "type": "object",
+            "properties": {
+              "networkDeviceSkuName": {
+                "type": "string",
+                "description": "Name of the associated Network Device SKU."
+              },
+              "roleType": {
+                "type": "string",
+                "description": "Role for the network device.",
+                "enum": [
+                  "CE",
+                  "ToR",
+                  "NPB",
+                  "TS",
+                  "Management"
+                ],
+                "x-ms-enum": {
+                  "modelAsString": true,
+                  "name": "networkDeviceRackRoleType"
+                }
+              },
+              "rackSlot": {
+                "type": "integer",
+                "format": "int32",
+                "description": "Rack slot for the network device."
+              }
+            }
+          }
+        },
+        "provisioningState": {
+          "description": "Gets the provisioning state of the resource.",
+          "$ref": "./common.json#/definitions/ProvisioningState",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "roleName"
+      ],
+      "description": "NetworkRackSkuProperties define the resource properties."
+    },
+    "NetworkRackSku": {
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Resource properties.",
+          "$ref": "#/definitions/NetworkRackSkuProperties"
+        }
+      },
+      "required": [
+        "properties"
+      ],
+      "description": "The NetworkRackSku resource definition."
+    },
+    "NetworkRackSkusListResult": {
+      "type": "object",
+      "description": "List of NetworkRackSkus.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of NetworkRackSku resources.",
+          "items": {
+            "$ref": "#/definitions/NetworkRackSku"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Url to follow for getting next page of resources."
+        }
+      }
+    }
+  },
+  "parameters": {}
+}

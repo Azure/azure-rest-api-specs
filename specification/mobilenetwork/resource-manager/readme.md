@@ -24,10 +24,29 @@ For other options on installation see [Installing AutoRest](https://aka.ms/autor
 
 These are the global settings for the mobilenetwork.
 
-``` yaml
+```yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2024-04
+tag: package-preview-2024-05-15
+```
+
+
+### Tag: package-preview-2024-05-15
+
+These settings apply only when `--tag=package-preview-2024-05-15` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2024-05-15'
+input-file:
+  - Microsoft.MobileNetwork/preview/2024-05-15-preview/mobileNetwork.json
+```
+
+### Tag: package-preview-2024-05
+
+These settings apply only when `--tag=package-preview-2024-05` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2024-05'
+input-file:
+  - Microsoft.MobileNetwork/preview/2024-05-01-preview/mobileNetwork.json
 ```
 
 ### Tag: package-2024-04
@@ -55,11 +74,41 @@ input-file:
   - Microsoft.MobileNetwork/stable/2024-04-01/ueInfo.json
 ```
 
+### Tag: package-preview-2024-03
+
+These settings apply only when `--tag=package-preview-2024-03` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2024-03'
+input-file:
+  - Microsoft.MobileNetwork/preview/2024-03-01-preview/attachedDataNetwork.json
+  - Microsoft.MobileNetwork/preview/2024-03-01-preview/attachedWifiSsid.json
+  - Microsoft.MobileNetwork/preview/2024-03-01-preview/common.json
+  - Microsoft.MobileNetwork/preview/2024-03-01-preview/dataNetwork.json
+  - Microsoft.MobileNetwork/preview/2024-03-01-preview/diagnosticsPackage.json
+  - Microsoft.MobileNetwork/preview/2024-03-01-preview/edgeNetworkSecurityGroup.json
+  - Microsoft.MobileNetwork/preview/2024-03-01-preview/edgeVirtualNetwork.json
+  - Microsoft.MobileNetwork/preview/2024-03-01-preview/mobileNetwork.json
+  - Microsoft.MobileNetwork/preview/2024-03-01-preview/operation.json
+  - Microsoft.MobileNetwork/preview/2024-03-01-preview/packetCapture.json
+  - Microsoft.MobileNetwork/preview/2024-03-01-preview/packetCoreControlPlane.json
+  - Microsoft.MobileNetwork/preview/2024-03-01-preview/packetCoreDataPlane.json
+  - Microsoft.MobileNetwork/preview/2024-03-01-preview/radioAccessNetwork.json
+  - Microsoft.MobileNetwork/preview/2024-03-01-preview/service.json
+  - Microsoft.MobileNetwork/preview/2024-03-01-preview/sim.json
+  - Microsoft.MobileNetwork/preview/2024-03-01-preview/simGroup.json
+  - Microsoft.MobileNetwork/preview/2024-03-01-preview/simPolicy.json
+  - Microsoft.MobileNetwork/preview/2024-03-01-preview/site.json
+  - Microsoft.MobileNetwork/preview/2024-03-01-preview/slice.json
+  - Microsoft.MobileNetwork/preview/2024-03-01-preview/ts29571.json
+  - Microsoft.MobileNetwork/preview/2024-03-01-preview/ueInfo.json
+  - Microsoft.MobileNetwork/preview/2024-03-01-preview/wifiSsid.json
+```
+
 ### Tag: package-2024-02
 
 These settings apply only when `--tag=package-2024-02` is specified on the command line.
 
-``` yaml $(tag) == 'package-2024-02'
+```yaml $(tag) == 'package-2024-02'
 input-file:
   - Microsoft.MobileNetwork/stable/2024-02-01/attachedDataNetwork.json
   - Microsoft.MobileNetwork/stable/2024-02-01/common.json
@@ -80,11 +129,41 @@ input-file:
   - Microsoft.MobileNetwork/stable/2024-02-01/ueInfo.json
 ```
 
+### Tag: package-preview-2023-10
+
+These settings apply only when `--tag=package-preview-2023-10` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2023-10'
+input-file:
+  - Microsoft.MobileNetwork/preview/2023-10-01-preview/attachedDataNetwork.json
+  - Microsoft.MobileNetwork/preview/2023-10-01-preview/attachedWifiSsid.json
+  - Microsoft.MobileNetwork/preview/2023-10-01-preview/common.json
+  - Microsoft.MobileNetwork/preview/2023-10-01-preview/dataNetwork.json
+  - Microsoft.MobileNetwork/preview/2023-10-01-preview/diagnosticsPackage.json
+  - Microsoft.MobileNetwork/preview/2023-10-01-preview/edgeNetworkSecurityGroup.json
+  - Microsoft.MobileNetwork/preview/2023-10-01-preview/edgeVirtualNetwork.json
+  - Microsoft.MobileNetwork/preview/2023-10-01-preview/mobileNetwork.json
+  - Microsoft.MobileNetwork/preview/2023-10-01-preview/operation.json
+  - Microsoft.MobileNetwork/preview/2023-10-01-preview/packetCapture.json
+  - Microsoft.MobileNetwork/preview/2023-10-01-preview/packetCoreControlPlane.json
+  - Microsoft.MobileNetwork/preview/2023-10-01-preview/packetCoreDataPlane.json
+  - Microsoft.MobileNetwork/preview/2023-10-01-preview/radioAccessNetwork.json
+  - Microsoft.MobileNetwork/preview/2023-10-01-preview/service.json
+  - Microsoft.MobileNetwork/preview/2023-10-01-preview/sim.json
+  - Microsoft.MobileNetwork/preview/2023-10-01-preview/simGroup.json
+  - Microsoft.MobileNetwork/preview/2023-10-01-preview/simPolicy.json
+  - Microsoft.MobileNetwork/preview/2023-10-01-preview/site.json
+  - Microsoft.MobileNetwork/preview/2023-10-01-preview/slice.json
+  - Microsoft.MobileNetwork/preview/2023-10-01-preview/ts29571.json
+  - Microsoft.MobileNetwork/preview/2023-10-01-preview/ueInfo.json
+  - Microsoft.MobileNetwork/preview/2023-10-01-preview/wifiSsid.json
+```
+
 ### Tag: package-2023-09
 
 These settings apply only when `--tag=package-2023-09` is specified on the command line.
 
-``` yaml $(tag) == 'package-2023-09'
+```yaml $(tag) == 'package-2023-09'
 input-file:
   - Microsoft.MobileNetwork/stable/2023-09-01/attachedDataNetwork.json
   - Microsoft.MobileNetwork/stable/2023-09-01/common.json
@@ -103,11 +182,42 @@ input-file:
   - Microsoft.MobileNetwork/stable/2023-09-01/slice.json
   - Microsoft.MobileNetwork/stable/2023-09-01/ts29571.json
 ```
+
+### Tag: package-preview-2023-07
+
+These settings apply only when `--tag=package-preview-2023-07` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2023-07'
+input-file:
+  - Microsoft.MobileNetwork/preview/2023-07-01-preview/attachedDataNetwork.json
+  - Microsoft.MobileNetwork/preview/2023-07-01-preview/attachedWifiSsid.json
+  - Microsoft.MobileNetwork/preview/2023-07-01-preview/common.json
+  - Microsoft.MobileNetwork/preview/2023-07-01-preview/dataNetwork.json
+  - Microsoft.MobileNetwork/preview/2023-07-01-preview/diagnosticsPackage.json
+  - Microsoft.MobileNetwork/preview/2023-07-01-preview/edgeNetworkSecurityGroup.json
+  - Microsoft.MobileNetwork/preview/2023-07-01-preview/edgeVirtualNetwork.json
+  - Microsoft.MobileNetwork/preview/2023-07-01-preview/mobileNetwork.json
+  - Microsoft.MobileNetwork/preview/2023-07-01-preview/operation.json
+  - Microsoft.MobileNetwork/preview/2023-07-01-preview/packetCapture.json
+  - Microsoft.MobileNetwork/preview/2023-07-01-preview/packetCoreControlPlane.json
+  - Microsoft.MobileNetwork/preview/2023-07-01-preview/packetCoreDataPlane.json
+  - Microsoft.MobileNetwork/preview/2023-07-01-preview/radioAccessNetwork.json
+  - Microsoft.MobileNetwork/preview/2023-07-01-preview/service.json
+  - Microsoft.MobileNetwork/preview/2023-07-01-preview/sim.json
+  - Microsoft.MobileNetwork/preview/2023-07-01-preview/simGroup.json
+  - Microsoft.MobileNetwork/preview/2023-07-01-preview/simPolicy.json
+  - Microsoft.MobileNetwork/preview/2023-07-01-preview/site.json
+  - Microsoft.MobileNetwork/preview/2023-07-01-preview/slice.json
+  - Microsoft.MobileNetwork/preview/2023-07-01-preview/ts29571.json
+  - Microsoft.MobileNetwork/preview/2023-07-01-preview/ueInfo.json
+  - Microsoft.MobileNetwork/preview/2023-07-01-preview/wifiSsid.json
+```
+
 ### Tag: package-2023-06
 
 These settings apply only when `--tag=package-2023-06` is specified on the command line.
 
-``` yaml $(tag) == 'package-2023-06'
+```yaml $(tag) == 'package-2023-06'
 input-file:
   - Microsoft.MobileNetwork/stable/2023-06-01/attachedDataNetwork.json
   - Microsoft.MobileNetwork/stable/2023-06-01/common.json
@@ -127,11 +237,34 @@ input-file:
   - Microsoft.MobileNetwork/stable/2023-06-01/ts29571.json
 ```
 
+### Tag: package-2022-12-01-privatepreview
+
+These settings apply only when `--tag=package-2022-12-01-privatepreview` is specified on the command line.
+
+```yaml $(tag) == 'package-2022-12-01-privatepreview'
+input-file:
+  - Microsoft.MobileNetwork/preview/2022-12-01-privatepreview/attachedDataNetwork.json
+  - Microsoft.MobileNetwork/preview/2022-12-01-privatepreview/common.json
+  - Microsoft.MobileNetwork/preview/2022-12-01-privatepreview/dataNetwork.json
+  - Microsoft.MobileNetwork/preview/2022-12-01-privatepreview/mobileNetwork.json
+  - Microsoft.MobileNetwork/preview/2022-12-01-privatepreview/operation.json
+  - Microsoft.MobileNetwork/preview/2022-12-01-privatepreview/packetCoreControlPlane.json
+  - Microsoft.MobileNetwork/preview/2022-12-01-privatepreview/packetCoreDataPlane.json
+  - Microsoft.MobileNetwork/preview/2022-12-01-privatepreview/service.json
+  - Microsoft.MobileNetwork/preview/2022-12-01-privatepreview/sim.json
+  - Microsoft.MobileNetwork/preview/2022-12-01-privatepreview/simGroup.json
+  - Microsoft.MobileNetwork/preview/2022-12-01-privatepreview/simPolicy.json
+  - Microsoft.MobileNetwork/preview/2022-12-01-privatepreview/site.json
+  - Microsoft.MobileNetwork/preview/2022-12-01-privatepreview/slice.json
+  - Microsoft.MobileNetwork/preview/2022-12-01-privatepreview/ts29571.json
+  - Microsoft.MobileNetwork/preview/2022-12-01-privatepreview/radioAccessNetwork.json
+```
+
 ### Tag: package-2022-11-01
 
 These settings apply only when `--tag=package-2022-11-01` is specified on the command line.
 
-``` yaml $(tag) == 'package-2022-11-01'
+```yaml $(tag) == 'package-2022-11-01'
 input-file:
   - Microsoft.MobileNetwork/stable/2022-11-01/attachedDataNetwork.json
   - Microsoft.MobileNetwork/stable/2022-11-01/common.json
@@ -153,7 +286,7 @@ input-file:
 
 These settings apply only when `--tag=package-2022-04-01-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-2022-04-01-preview'
+```yaml $(tag) == 'package-2022-04-01-preview'
 input-file:
   - Microsoft.MobileNetwork/preview/2022-04-01-preview/attachedDataNetwork.json
   - Microsoft.MobileNetwork/preview/2022-04-01-preview/common.json
@@ -172,7 +305,7 @@ input-file:
 
 These settings apply only when `--tag=package-2022-03-01-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-2022-03-01-preview'
+```yaml $(tag) == 'package-2022-03-01-preview'
 input-file:
   - Microsoft.MobileNetwork/preview/2022-03-01-preview/attachedDataNetwork.json
   - Microsoft.MobileNetwork/preview/2022-03-01-preview/common.json
@@ -187,6 +320,25 @@ input-file:
   - Microsoft.MobileNetwork/preview/2022-03-01-preview/ts29571.json
 ```
 
+### Tag: package-2021-04-01-preview
+
+These settings apply only when `--tag=package-2021-04-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2021-04-01-preview'
+input-file:
+  - Microsoft.MobileNetwork/preview/2021-04-01-preview/attachedDataNetwork.json
+  - Microsoft.MobileNetwork/preview/2021-04-01-preview/common.json
+  - Microsoft.MobileNetwork/preview/2021-04-01-preview/dataNetwork.json
+  - Microsoft.MobileNetwork/preview/2021-04-01-preview/mobileNetwork.json
+  - Microsoft.MobileNetwork/preview/2021-04-01-preview/operation.json
+  - Microsoft.MobileNetwork/preview/2021-04-01-preview/packetCoreControlPlane.json
+  - Microsoft.MobileNetwork/preview/2021-04-01-preview/packetCoreDataPlane.json
+  - Microsoft.MobileNetwork/preview/2021-04-01-preview/service.json
+  - Microsoft.MobileNetwork/preview/2021-04-01-preview/simPolicy.json
+  - Microsoft.MobileNetwork/preview/2021-04-01-preview/slice.json
+  - Microsoft.MobileNetwork/preview/2021-04-01-preview/ts29571.json
+```
+
 ---
 
 # Code Generation
@@ -196,7 +348,7 @@ input-file:
 This section describes what SDK should be generated by the automatic system.
 This is not used by Autorest itself.
 
-``` yaml $(swagger-to-sdk)
+```yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
@@ -227,7 +379,3 @@ See configuration in [readme.typescript.md](./readme.typescript.md)
 ## CSharp
 
 See configuration in [readme.csharp.md](./readme.csharp.md)
-
-## Java
-
-See configuration in [readme.java.md](./readme.java.md)

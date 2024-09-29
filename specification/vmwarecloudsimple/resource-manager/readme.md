@@ -55,7 +55,6 @@ swagger-to-sdk:
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-ruby
   - repo: azure-sdk-for-net
-  - repo: azure-resource-manager-schemas
   - repo: azure-powershell
 ```
 
@@ -82,5 +81,3 @@ See configuration in [readme.csharp.md](./readme.csharp.md)
 ## Java
 
 See configuration in [readme.java.md](./readme.java.md)
-
-

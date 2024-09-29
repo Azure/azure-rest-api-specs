@@ -1,0 +1,157 @@
+import "@cadl-lang/rest";
+import "@cadl-lang/versioning";
+import "@azure-tools/cadl-providerhub";
+import "@azure-tools/cadl-azure-core";
+import "@azure-tools/cadl-azure-resource-manager";
+
+using Cadl.Http;
+using Cadl.Rest;
+using Cadl.Versioning;
+using Azure.ResourceManager;
+
+@armProviderNamespace("Microsoft.FixMe")
+@service({
+  title: "Microsoft.FixMe",
+  version: "2023-03-01-preview",
+})
+@versionedDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+namespace Microsoft.FixMe;
+
+interface Operations extends Azure.ResourceManager.Operations {}
+
+#suppress "@azure-tools/cadl-azure-resource-manager/arm-resource-path-segment-invalid-chars" "Existing Template"
+#suppress "@azure-tools/cadl-azure-resource-manager/arm-resource-key-invalid-chars" "Existing template"
+@doc("A FixMeProviderHub resource")
+model FixMeInstance is TrackedResource<FixMeInstanceProperties> {
+  @doc("FixMe Instance name")
+  @key("fixMeInstanceName")
+  @segment("fixMeInstances")
+  @path
+  name: string;
+}
+
+@doc("The status of the current operation.")
+@Azure.Core.lroStatus
+enum ProvisioningState {
+  ...ResourceProvisioningState,
+  Provisioning,
+  Updating,
+  Deleting,
+  Accepted,
+}
+
+@doc("Details of the FixMe FixMeInstance.")
+model FixMeInstanceProperties {
+  @visibility("read")
+  @doc("The status of the last operation.")
+  provisioningState?: ProvisioningState;
+
+  @doc("FixMeInstance Unique Prefix.")
+  @visibility("read", "create")
+  prefix:string;
+
+  @visibility("read", "create")
+  @doc("Profile of Apim Resource created.")
+  apimProfile: ApimProfile;
+
+  @visibility("read", "create")
+  @doc("Profile of SQL Resource created.")
+  sqlProfile: SqlProfile;
+
+  @visibility("read", "create")
+  @doc("Profile of Synapse Resource created.")
+  synapseProfile: SynapseProfile;
+
+  @visibility("read", "create")
+  @doc("Profile of M365 Resources created.")
+  m365Profile?: M365Profile;
+
+}
+
+@doc("The properties related to Azure SQL Resource")
+model SqlProfile {
+  @secret
+  @doc("The administrator password of the SQL logical server.")
+  @visibility("create")
+  administratorLoginPassword: string;
+
+  @doc("Administrator Id of SQL Database")
+  @visibility("create")
+  administratorId: string;
+
+}
+
+@doc("The properties related to Azure Synapse Resource")
+model SynapseProfile {
+  @doc("Synapse Administrator Login")
+  @visibility("read", "create")
+  synapseAdminLogin: string;
+
+  @doc("Synapse Administrator Tenant")
+  @visibility("read", "create")
+  synapseAdminTenant: string;
+
+  @doc("Synapse Administrator Sid")
+  @visibility("read", "create")
+  synapseAdminSid: string;
+
+}
+
+@doc("The properties related to Microsoft 365 Resources")
+model M365Profile {
+  @doc("Power Platform Administrator User Name.")
+  @visibility("read", "create")
+  adminUserName: string;
+
+  @doc("Power Platform Administrator Password.")
+  @secret
+  @visibility("create")
+  adminPassword: string;
+
+  @doc("Power Platform Access Policy User Id.")
+  @visibility("read", "create")
+  accessPolicyUserId: string;
+
+  @doc("Power Platform Access Target Tenant Id.")
+  @visibility("read", "create")
+  targetTenantId: string;
+
+  @doc("Power Platform Helpdesk User Name.")
+  @visibility("read", "create")
+  helpDeskUserName: string;
+
+  @doc("Power Platform Helpdesk User Password.")
+  @secret
+  @visibility("read", "create")
+  helpDeskUserPassword: string;
+
+  @doc("Power Platform Target Environment.")
+  @visibility("read", "create")
+  targetEnvironment: string;
+
+  @doc("Power Platform SQL Connection Id.")
+  @visibility("read", "create")
+  sqlConnectionId: string;
+
+  @doc("Power Platform One Drive Connection Id.")
+  @visibility("read", "create")
+  oneDriveConnectionId: string;
+
+  @doc("Power Platform Teams Connection Id.")
+  @visibility("read", "create")
+  teamsConnectionId: string;
+}
+
+@doc("The properties related to Apim")
+model ApimProfile {
+  @doc("Name of publisher.")
+  @visibility("read", "create")
+  publisherName:string;
+
+  @doc("Publisher Email.")
+  @visibility("read", "create")
+  publisherEmail:string;
+}
+
+@armResourceOperations
+interface FixMeInstances extends ResourceOperations<FixMeInstance, FixMeInstanceProperties> {}

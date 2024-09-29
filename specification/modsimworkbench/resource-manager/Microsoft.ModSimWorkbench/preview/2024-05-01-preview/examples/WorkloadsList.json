@@ -1,0 +1,49 @@
+{
+  "operationId": "Workloads_List",
+  "title": "Workloads_List",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "resourceGroupName",
+    "api-version": "2024-05-01-preview",
+    "workbenchName": "test-workbench",
+    "chamberName": "test-chamber"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "test-workload1",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ModSimWorkbench/workbenches/test-workbench1/chambers/test-chamber1/workloads/test-workload1",
+            "type": "Microsoft.ModSimWorkbench/workbenches/chambers/workloads",
+            "location": "Central US",
+            "zones": [
+              "1"
+            ],
+            "properties": {
+              "provisioningState": "Succeeded",
+              "edaType": "Semiconductor",
+              "restartAt": "2023-03-01T08:00:00Z",
+              "vmSize": "Standard_D4d_v4"
+            }
+          },
+          {
+            "name": "test-workload2",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg2/providers/Microsoft.ModSimWorkbench/workbenches/test-workbench2/chambers/test-chamber2/workloads/test-workload2",
+            "type": "Microsoft.ModSimWorkbench/workbenches/chambers/workloads",
+            "location": "Central US",
+            "zones": [
+              "1"
+            ],
+            "properties": {
+              "provisioningState": "Succeeded",
+              "edaType": "Semiconductor",
+              "restartAt": "2023-03-01T08:00:00Z",
+              "vmSize": "Standard_D4d_v4"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

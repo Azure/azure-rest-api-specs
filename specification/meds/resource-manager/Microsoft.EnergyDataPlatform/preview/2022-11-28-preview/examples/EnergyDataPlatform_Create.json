@@ -1,0 +1,94 @@
+{
+  "parameters": {
+    "api-version": "2022-11-28-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000001",
+    "resourceGroupName": "dummyResourceGroupName",
+    "energyServiceName": "dummyResourceName",
+    "resource": {
+      "location": "West US",
+      "tags": {
+        "additionalProps1": "additional properties"
+      },
+      "properties": {
+        "managedResourceGroupConfiguration": {
+          "name": "mrg-sample1"
+        },
+        "settings": {
+          "applicationId": "sample-id",
+          "dataPartitionNames": [
+            {
+              "name": "dataPartition1"
+            },
+            {
+              "name": "dataPartition2"
+            }
+          ],
+          "clusterSize": "CostOptimised"
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000001/resourceGroups/examplerg/providers/Microsoft.EnergyDataPlatform/energyServices/exampleresourceName",
+        "name": "sample",
+        "type": "Microsoft.EnergyDataPlatform/energyServices",
+        "location": "west us",
+        "tags": {
+          "additionalProps1": "additional properties"
+        },
+        "properties": {
+          "managedResourceGroupConfiguration": {
+            "name": "mrg-sample1",
+            "location": "centraluseuap"
+          },
+          "settings": {
+            "applicationId": "sample-id",
+            "dataPartitionNames": [
+              {
+                "name": "dataPartition1"
+              },
+              {
+                "name": "dataPartition2"
+              }
+            ],
+            "clusterSize": "CostOptimised"
+          }
+        }
+      }
+    },
+    "201": {
+      "headers": {
+        "Azure-AsyncOperation": "https://foo.com/operationstatus"
+      },
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000001/resourceGroups/examplerg/providers/Microsoft.EnergyDataPlatform/energyServices/exampleresourceName",
+        "name": "sample",
+        "type": "Microsoft.EnergyDataPlatform/energyServices",
+        "location": "west us",
+        "tags": {
+          "additionalProps1": "additional properties"
+        },
+        "properties": {
+          "managedResourceGroupConfiguration": {
+            "name": "mrg-sample1",
+            "location": "centraluseuap"
+          },
+          "settings": {
+            "applicationId": "sample-id",
+            "dataPartitionNames": [
+              {
+                "name": "dataPartition1"
+              },
+              {
+                "name": "dataPartition2"
+              }
+            ],
+            "clusterSize": "CostOptimised"
+          }
+        }
+      }
+    }
+  }
+}

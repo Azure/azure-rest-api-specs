@@ -26,17 +26,17 @@ These are the global settings for the windowsesu.
 
 ```yaml
 openapi-type: arm
-openapi-subtype: rpaas
-tag: package-2019-09-16-preview
+openapi-subtype: providerHub
+tag: package-2019-09-16
 ```
 
-### Tag: package-2019-09-16-preview
+### Tag: package-2019-09-16
 
-These settings apply only when `--tag=package-2019-09-16-preview` is specified on the command line.
+These settings apply only when `--tag=package-2019-09-16` is specified on the command line.
 
-```yaml $(tag) == 'package-2019-09-16-preview'
+```yaml $(tag) == 'package-2019-09-16'
 input-file:
-  - Microsoft.WindowsESU/preview/2019-09-16-preview/windowsesu.json
+  - Microsoft.WindowsESU/preview/2019-09-16/windowsesu.json
 ```
 
 ---
@@ -57,7 +57,6 @@ swagger-to-sdk:
   - repo: azure-sdk-for-ruby
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_windowsesu']
-  - repo: azure-resource-manager-schemas
   - repo: azure-powershell
 ```
 
@@ -80,6 +79,3 @@ See configuration in [readme.typescript.md](./readme.typescript.md)
 ## CSharp
 
 See configuration in [readme.csharp.md](./readme.csharp.md)
-
-
-

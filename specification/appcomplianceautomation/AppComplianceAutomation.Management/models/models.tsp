@@ -420,6 +420,9 @@ union Rule {
   @doc("The question answer should be a PublicSOX.")
   PublicSOX: "PublicSOX",
 
+  @doc("The question answer should be a FismaFedramp.")
+  FismaFedramp: "FismaFedramp",
+
   @doc("The question answer should be a CreditCardPCI.")
   CreditCardPCI: "CreditCardPCI",
 
@@ -735,7 +738,7 @@ model StorageInfo {
 /**
  * Report's properties.
  */
-alias ReportBaseProperties = {
+model ReportBaseProperties {
   /**
    * Report status.
    */
@@ -802,7 +805,7 @@ alias ReportBaseProperties = {
    */
   @visibility("read")
   provisioningState?: ProvisioningState;
-};
+}
 
 /**
  * Create Report's properties.

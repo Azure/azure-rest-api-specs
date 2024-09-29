@@ -45,21 +45,25 @@ directive:
   - suppress: AvoidAdditionalProperties
     where: $.definitions.VolumeClaimSpecSelector.properties.matchLabels
     reason: User defined properties that are not subject to any validations.
-  - suppress: BodyTopLevelProperties
-    reason: Temporary suppression due to failing pipeline.
-  - suppress: PatchBodyParametersSchema
-    reason: Type is required because it is a part of managed identity.
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IoTOperations/instances/{instanceName}"].patch.parameters[4].schema.properties.identity
 ```
 
 ### Basic Information
 
-These are the global settings for the IoTOperations.
+These are the global settings for the IoTOperationsOrchestrator.
 
 ```yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2024-08-15-preview
+tag: package-2024-07-01-preview
+```
+
+### Tag: package-2024-06-01-preview
+
+These settings apply only when `--tag=package-2024-06-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-06-01-preview'
+input-file:
+  - Microsoft.IoTOperations/preview/2024-06-01-preview/iotoperations.json
 ```
 
 ### Tag: package-2024-07-01-preview
@@ -69,13 +73,4 @@ These settings apply only when `--tag=package-2024-07-01-preview` is specified o
 ```yaml $(tag) == 'package-2024-07-01-preview'
 input-file:
   - Microsoft.IoTOperations/preview/2024-07-01-preview/iotoperations.json
-```
-
-### Tag: package-2024-08-15-preview
-
-These settings apply only when `--tag=package-2024-08-15-preview` is specified on the command line.
-
-```yaml $(tag) == 'package-2024-08-15-preview'
-input-file:
-  - Microsoft.IoTOperations/preview/2024-08-15-preview/iotoperations.json
 ```

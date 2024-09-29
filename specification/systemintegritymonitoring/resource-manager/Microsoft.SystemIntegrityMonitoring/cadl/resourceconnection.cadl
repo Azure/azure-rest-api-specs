@@ -1,0 +1,12 @@
+@doc("Resource Connection properties.")
+model ResourceConnectionProperties {
+  @doc("Resource identifier of the connected azure resource.")
+  resourceId: string;
+
+  @doc("Connection string used to connect to the resource, if needed.")
+  @secret
+  connectionString?: string;
+
+  @doc("Location where the resource is provisioned at.")
+  location: string;
+}

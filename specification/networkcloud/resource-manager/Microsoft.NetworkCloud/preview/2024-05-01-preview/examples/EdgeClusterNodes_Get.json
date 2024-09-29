@@ -1,0 +1,67 @@
+{
+  "parameters": {
+    "api-version": "2024-05-01-preview",
+    "subscriptionId": "123e4567-e89b-12d3-a456-426655440000",
+    "resourceGroupName": "resourceGroupName",
+    "edgeClusterName": "edgeClusterName",
+    "nodeName": "nodeName"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/edgeClusters/edgeClusterName/nodes/nodeName",
+        "name": "nodeName",
+        "systemData": {
+          "createdAt": "2021-01-22T13:27:03.008Z",
+          "createdBy": "identityA",
+          "createdByType": "Application",
+          "lastModifiedAt": "2021-01-22T13:29:03.001Z",
+          "lastModifiedBy": "identityB",
+          "lastModifiedByType": "User"
+        },
+        "type": "Microsoft.NetworkCloud/edgeClusters/nodes",
+        "location": "location",
+        "tags": {
+          "key1": "myvalue1",
+          "key2": "myvalue2"
+        },
+        "properties": {
+          "machineSkuId": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/edgeClusterMachineSkus/edgeClusterMachineSkuName",
+          "nodeMatchingIdentifiers": [
+            {
+              "name": "ProductSerialNumber",
+              "value": "productSerialNumber"
+            }
+          ],
+          "registrationHubMachineId": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/registrationHubMachines/registrationHubMachineName",
+          "schedulingLabels": [
+            {
+              "key": "schedulingLabel1",
+              "value": "schedulingLabel1"
+            }
+          ],
+          "infrastructureResourceIds": [
+            "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/kubernetesClusters/kubernetesClusterName",
+            "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/l2Networks/l2NetworkName",
+            "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/l3Networks/l3NetworkName",
+            "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/trunkedNetworks/trunkedNetworkName",
+            "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/virtualMachines/virtualMachineName"
+          ],
+          "kubernetesVersion": "1.XX.Y",
+          "lifecycleStatus": "PlatformReady",
+          "networkInterfaces": [
+            {
+              "name": "enp1s0.100",
+              "ipv4Address": "198.51.100.1",
+              "ipv6Address": "2001:0db8:0000:0000:0000:0000:0000:0000",
+              "macAddress": "00:00:4e:00:58:af"
+            }
+          ],
+          "runtimeVersionId": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/edgeClusterRuntimeVersions/edgeClusterRuntimeVersionName",
+          "stagedRuntimeVersionId": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/edgeClusterRuntimeVersions/edgeClusterRuntimeVersionName2",
+          "provisioningState": "Succeeded"
+        }
+      }
+    }
+  }
+}

@@ -53,34 +53,6 @@ suppressions:
       - $.definitions.VirtualMachineInstance
 ```
 
-### Tag: package-preview-2023-03
-
-These settings apply only when `--tag=package-preview-2023-03` is specified on the command line.
-
-``` yaml $(tag) == 'package-preview-2023-03'
-input-file:
-  - Microsoft.ConnectedVMwarevSphere/preview/2023-03-01-preview/connectedvmware.json
-suppressions:    
-  - code: LroPostReturn
-    reason: All POST actions are long running operations and never return 200 in the response.
-    where:
-      - $.paths["/{resourceUri}/providers/Microsoft.ConnectedVMwarevSphere/virtualMachineInstances/default/stop"].post
-      - $.paths["/{resourceUri}/providers/Microsoft.ConnectedVMwarevSphere/virtualMachineInstances/default/start"].post
-      - $.paths["/{resourceUri}/providers/Microsoft.ConnectedVMwarevSphere/virtualMachineInstances/default/restart"].post
-
-  - code: GetCollectionOnlyHasValueAndNextLink
-    reason: GET instance API for ARM extension resources are being flagged as Get Collection APIs.
-    where:
-      - $.paths["/{resourceUri}/providers/Microsoft.ConnectedVMwarevSphere/virtualMachineInstances/default"].get.responses["200"].schema.properties
-      - $.paths["/{resourceUri}/providers/Microsoft.ConnectedVMwarevSphere/virtualMachineInstances/default/hybridIdentityMetadata/default"].get.responses["200"].schema.properties
-      - $.paths["/{resourceUri}/providers/Microsoft.ConnectedVMwarevSphere/virtualMachineInstances/default/guestAgents/default"].get.responses["200"].schema.properties
-    
-  - code:  TopLevelResourcesListBySubscription
-    reason: VirtualMachineInstance resource is an ARM extension resource and does not support List by subscription API.  
-    where:
-      - $.definitions.VirtualMachineInstance
-```
-
 ### Tag: package-2020-10-01-preview
 
 These settings apply only when `--tag=package-2020-10-01-preview` is specified on the command line.
@@ -108,6 +80,15 @@ input-file:
   - Microsoft.ConnectedVMwarevSphere/preview/2022-07-15-preview/connectedvmware.json
 ```
 
+### Tag: package-2023-03-01-preview
+
+These settings apply only when `--tag=package-2023-03-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2023-03-01-preview'
+input-file:
+  - Microsoft.ConnectedVMwarevSphere/preview/2023-03-01-preview/connectedvmware.json
+```
+
 ---
 
 # Code Generation
@@ -119,7 +100,7 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-python
+  - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js

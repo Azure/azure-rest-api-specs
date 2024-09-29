@@ -40,7 +40,7 @@
           "NetworkFunctions"
         ],
         "operationId": "NetworkFunctions_Delete",
-        "description": "Deletes the specified network function resource. This operation can take up to 1 hour to complete. This is expected service behavior.",
+        "description": "Deletes the specified network function resource.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
@@ -135,7 +135,7 @@
           "NetworkFunctions"
         ],
         "operationId": "NetworkFunctions_CreateOrUpdate",
-        "description": "Creates or updates a network function resource. This operation can take up to 6 hours to complete. This is expected service behavior.",
+        "description": "Creates or updates a network function resource.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
@@ -425,11 +425,11 @@
         },
         "device": {
           "$ref": "./common.json#/definitions/SubResource",
-          "description": "The reference to the device resource. Once set, it cannot be updated."
+          "description": "The reference to the device resource."
         },
         "skuName": {
           "type": "string",
-          "description": "The sku name for the network function. Once set, it cannot be updated."
+          "description": "The sku name for the network function."
         },
         "skuType": {
           "readOnly": true,
@@ -438,7 +438,7 @@
         },
         "vendorName": {
           "type": "string",
-          "description": "The vendor name for the network function. Once set, it cannot be updated."
+          "description": "The vendor name for the network function."
         },
         "serviceKey": {
           "type": "string",
@@ -468,7 +468,6 @@
           "items": {
             "$ref": "#/definitions/NetworkFunctionUserConfiguration"
           },
-          "x-ms-identifiers": [],
           "description": "The network function configurations from the user."
         }
       }
@@ -507,7 +506,6 @@
           "items": {
             "$ref": "./common.json#/definitions/NetworkInterface"
           },
-          "x-ms-identifiers": [],
           "description": "The network interface configuration."
         },
         "osProfile": {

@@ -1,0 +1,191 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Foundational ARM Client",
+    "description": "DsmsAllowlist Provider",
+    "version": "2021-08-10-privatepreview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureCIS/dsmsAllowlists/{resourceName}": {
+      "put": {
+        "description": "Add Dsms Folder Allowlists",
+        "x-ms-examples": {
+          "Create a DsmsAllowlist": {
+            "$ref": "./examples/CreateDsmsAllowlist.json"
+          }
+        },
+        "operationId": "DsmsAllowlist_Create",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          },
+          {
+            "name": "DsmsAllowlist",
+            "description": "DsmsAllowlist details.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DsmsAllowlistModel"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "DsmsAllowlist Resource updated successfully.",
+            "schema": {
+              "$ref": "#/definitions/DsmsAllowlistModel"
+            }
+          },
+          "201": {
+            "description": "DsmsAllowlist Resource created successfully.",
+            "schema": {
+              "$ref": "#/definitions/DsmsAllowlistModel"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "DsmsAllowlistResource": {
+      "required": [
+        "folderName"
+      ],
+      "type": "object",
+      "description": "DsmsAllowlist properties",
+      "properties": {
+        "folderName": {
+          "type": "string",
+          "description": " The name of the folder to apply allowlist changes to. This should be the full folder path starting with a '$', with '$' replacing all '/' characters. Example: '/my-folder/root-folder' should be passed as '$my-folder$root-folder'"
+        },
+        "targetDsmsEndpoints": {
+          "type": "array",
+          "description": "The dSMS endpoints to apply allowlist changes to. The folder specified in FolderName will be updated on each of the TargetDsmsEndpoints. If this is left null, this will default to all the dSMS endpoints used for the root folder.",
+          "items": {
+            "type": "string",
+            "description": "A dSMS endpoint to apply allowlist changes to"
+          }
+        },
+        "dnsPatterns": {
+          "type": "array",
+          "description": "Dns domain patterns in the allowlist. Patterns with '*' are accepted values here.",
+          "items": {
+            "type": "string",
+            "description": "A DNS domain pattern"
+          }
+        },
+        "deploymentSubscriptions": {
+          "type": "array",
+          "description": "Guids of Azure deployment subscriptions in allowlist.",
+          "items": {
+            "type": "string",
+            "description": "An Azure deployment subscription in allowlist"
+          }
+        },
+        "storageSubscriptions": {
+          "type": "array",
+          "description": "Guids of Azure storage subscriptions in allowlist.",
+          "items": {
+            "type": "string",
+            "description": "An Azure storage subscription in allowlist"
+          }
+        }
+      }
+    },
+    "DsmsAllowlistModel": {
+      "type": "object",
+      "description": "DsmsAllowlist Response",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "DsmsAllowlist properties with provisioning state",
+          "type": "object",
+          "properties": {
+            "provisioningState": {
+              "$ref": "#/definitions/ProvisioningState",
+              "description": "The provisioning State of the resource."
+            }
+          },
+          "allOf": [
+            {
+              "$ref": "#/definitions/DsmsAllowlistResource"
+            }
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "ProvisioningState": {
+      "description": "Provisioning status of the resource.",
+      "readOnly": true,
+      "enum": [
+        "Failed",
+        "Succeeded",
+        "Canceled",
+        "Accepted"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true
+      }
+    }
+  },
+  "parameters": {
+    "ResourceNameParameter": {
+      "name": "resourceName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of resource.",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

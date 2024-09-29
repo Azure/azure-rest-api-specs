@@ -95,7 +95,7 @@
           "VendorNetworkFunctions"
         ],
         "operationId": "VendorNetworkFunctions_CreateOrUpdate",
-        "description": "Creates or updates a vendor network function. This operation can take up to 6 hours to complete. This is expected service behavior.",
+        "description": "Creates or updates a vendor network function.",
         "parameters": [
           {
             "name": "locationName",
@@ -610,7 +610,7 @@
         "skuName": {
           "readOnly": true,
           "type": "string",
-          "description": "The name of the sku. Once set, it cannot be updated."
+          "description": "The name of the sku."
         },
         "skuType": {
           "$ref": "./common.json#/definitions/SkuType",
@@ -622,7 +622,6 @@
           "items": {
             "$ref": "#/definitions/NetworkFunctionVendorConfiguration"
           },
-          "x-ms-identifiers": [],
           "description": "An array of network function vendor configurations."
         }
       }
@@ -648,7 +647,6 @@
           "items": {
             "$ref": "./common.json#/definitions/NetworkInterface"
           },
-          "x-ms-identifiers": [],
           "description": "The network interface configurations."
         }
       },

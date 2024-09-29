@@ -1,0 +1,608 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2020-10-01-privatepreview",
+    "title": "iotLocations",
+    "description": "The iotLocations Rest API spec."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/providers/Microsoft.ExtendedLocation/operations": {
+      "get": {
+        "tags": [
+          "iotLocations"
+        ],
+        "operationId": "iotLocations_ListOperations",
+        "description": "Lists all available Iot Locations operations.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operation details.",
+            "schema": {
+              "$ref": "#/definitions/iotLocationOperationsList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List Iot Locations operations": {
+            "$ref": "./examples/IotLocationsListOperations.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ExtendedLocation/iotLocations": {
+      "get": {
+        "tags": [
+          "iotLocations"
+        ],
+        "operationId": "iotLocations_ListBySubscription",
+        "summary": "Gets a list of Iot Locations in a subscription.",
+        "description": "Gets a list of Iot Locations in the specified subscription. The operation returns properties of each Iot Location",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/iotLocationListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List Iot Locations by subscription": {
+            "$ref": "./examples/IotLocationsListBySubscription.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ExtendedLocation/iotLocations": {
+      "get": {
+        "tags": [
+          "iotLocations"
+        ],
+        "operationId": "iotLocations_ListByResourceGroup",
+        "summary": "Gets a list of Iot Locations in the specified subscription and resource group.",
+        "description": "Gets a list of Iot Locations in the specified subscription and resource group. The operation returns properties of each Iot Location.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/iotLocationListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List Iot Locations by resource group": {
+            "$ref": "./examples/IotLocationsListByResourceGroup.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ExtendedLocation/iotLocations/{resourceName}": {
+      "get": {
+        "tags": [
+          "iotLocations"
+        ],
+        "operationId": "iotLocations_Get",
+        "summary": "Gets a Iot Location.",
+        "description": "Gets the details of the iotLocation with a specified resource group and name.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/iotLocation"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Iot Location": {
+            "$ref": "./examples/IotLocationsGet.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "iotLocations"
+        ],
+        "operationId": "iotLocations_CreateOrUpdate",
+        "summary": "Creates or updates a Iot Location.",
+        "description": "Creates or updates a Iot Location in the specified Subscription and Resource Group",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/iotLocation"
+            },
+            "description": "Parameters supplied to create or update a Iot Location."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/iotLocation"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/iotLocation"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "Create/Update Iot Location": {
+            "$ref": "./examples/IotLocationsCreate_Update.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "iotLocations"
+        ],
+        "operationId": "iotLocations_Delete",
+        "summary": "Deletes a Iot Location.",
+        "description": "Deletes the Iot Location with the specified Resource Name, Resource Group and Subscription Id.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok."
+          },
+          "202": {
+            "description": "Accepted. The response indicates the delete operation is performed asynchronously."
+          },
+          "204": {
+            "description": "NoContent."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "Delete Iot Location": {
+            "$ref": "./examples/IotLocationsDelete.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "iotLocations"
+        ],
+        "operationId": "iotLocations_Update",
+        "summary": "Updates a Iot Location.",
+        "description": "Updates a Iot Location with the specified Resource Name in the specified Resource Group and Subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "x-ms-client-flatten": true,
+            "schema": {
+              "$ref": "#/definitions/patchableIotLocations"
+            },
+            "description": "The updatable fields of an existing Iot Location."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/iotLocation"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update Iot Location": {
+            "$ref": "./examples/IotLocationsPatch.json"
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "ResourceNameParameter": {
+      "name": "resourceName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "minLength": 1,
+      "maxLength": 63,
+      "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9]$",
+      "description": "Iot Locations name."
+    }
+  },
+  "definitions": {
+    "EventHubConfiguration": {
+      "description": "Eventhub configuration definition.",
+      "required": [
+        "eventHubConnectionString"
+      ],
+      "type": "object",
+      "properties": {
+        "eventHubConnectionString": {
+          "description": "The eventhub connection string.",
+          "type": "string"
+        }
+      }
+    },
+    "HydrationInformation": {
+      "description": "Hydration information definition.",
+      "type": "object",
+      "properties": {
+        "destinationResourceGroupId": {
+          "description": "The fully qualified id for destination resource group.",
+          "type": "string"
+        },
+        "location": {
+          "description": "The location.",
+          "type": "string"
+        },
+        "providerNameSpace": {
+          "description": "The provider namespace.",
+          "type": "string"
+        }
+      }
+    },
+    "IotHubConfiguration": {
+      "description": "Iothub configuration definition.",
+      "required": [
+        "iotHubConnectionString"
+      ],
+      "type": "object",
+      "properties": {
+        "iotHubConnectionString": {
+          "description": "The iothub connection string.",
+          "type": "string"
+        }
+      }
+    },
+    "iotLocation": {
+      "description": "Iot Locations definition.",
+      "required": [
+        "properties"
+      ],
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/iotLocationProperties",
+          "description": "The set of properties specific to a Iot Location",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "iotLocationListResult": {
+      "description": "The List Iot Locations operation response.",
+      "properties": {
+        "nextLink": {
+          "description": "The URL to use for getting the next set of results.",
+          "type": "string",
+          "readOnly": true
+        },
+        "value": {
+          "description": "The list of Iot Locations.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/iotLocation"
+          }
+        }
+      }
+    },
+    "iotLocationOperation": {
+      "description": "Iot Locations operation.",
+      "properties": {
+        "display": {
+          "$ref": "#/definitions/iotLocationOperationValueDisplay",
+          "description": "Describes the properties of a Iot Locations Operation Value Display.",
+          "x-ms-client-flatten": true
+        },
+        "isDataAction": {
+          "description": "Is this Operation a data plane operation",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "name": {
+          "description": "The name of the compute operation.",
+          "type": "string",
+          "readOnly": true
+        },
+        "origin": {
+          "description": "The origin of the compute operation.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "iotLocationOperationValueDisplay": {
+      "description": "Describes the properties of a Iot Locations Operation Value Display.",
+      "properties": {
+        "description": {
+          "description": "The description of the operation.",
+          "type": "string",
+          "readOnly": true
+        },
+        "operation": {
+          "description": "The display name of the operation.",
+          "type": "string",
+          "readOnly": true
+        },
+        "provider": {
+          "description": "The resource provider for the operation.",
+          "type": "string",
+          "readOnly": true
+        },
+        "resource": {
+          "description": "The display name of the resource the operation applies to.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "iotLocationOperationsList": {
+      "description": "Lists of Iot Locations operations.",
+      "required": [
+        "value"
+      ],
+      "properties": {
+        "nextLink": {
+          "description": "Next page of operations.",
+          "type": "string"
+        },
+        "value": {
+          "description": "Array of iotLocationOperation",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/iotLocationOperation"
+          }
+        }
+      }
+    },
+    "iotLocationPatchableProperties": {
+      "description": "Patchable properties for iot location.",
+      "type": "object",
+      "properties": {
+        "eventHubConfiguration": {
+          "$ref": "#/definitions/EventHubConfiguration",
+          "description": "The eventhub configuration.",
+          "x-ms-client-flatten": true
+        },
+        "hydrationInformation": {
+          "$ref": "#/definitions/HydrationInformation",
+          "description": "The hydration information.",
+          "x-ms-client-flatten": true
+        },
+        "iotHubConfiguration": {
+          "$ref": "#/definitions/IotHubConfiguration",
+          "description": "The iothub configuration.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "iotLocationProperties": {
+      "description": "Properties for iot location.",
+      "required": [
+        "iotHubConfiguration"
+      ],
+      "type": "object",
+      "properties": {
+        "eventHubConfiguration": {
+          "$ref": "#/definitions/EventHubConfiguration",
+          "description": "The eventhub configuration.",
+          "x-ms-client-flatten": true
+        },
+        "hydrationInformation": {
+          "$ref": "#/definitions/HydrationInformation",
+          "description": "The hydration information.",
+          "x-ms-client-flatten": true
+        },
+        "iotHubConfiguration": {
+          "$ref": "#/definitions/IotHubConfiguration",
+          "description": "The iothub configuration.",
+          "x-ms-client-flatten": true
+        },
+        "provisioningState": {
+          "description": "Provisioning state (Accepted, etc...).",
+          "type": "string",
+          "enum": [
+            "NotSpecified",
+            "Accepted",
+            "Creating",
+            "Created",
+            "Deleting",
+            "Deleted",
+            "Failed",
+            "Succeeded",
+            "Updating"
+          ],
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "patchableIotLocations": {
+      "description": "The Iot Locations patchable resource definition.",
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "x-ms-client-flatten": true,
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/iotLocationPatchableProperties",
+          "description": "The Iot Locations patchable properties.",
+          "x-ms-client-flatten": true
+        },
+        "tags": {
+          "description": "Resource tags",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

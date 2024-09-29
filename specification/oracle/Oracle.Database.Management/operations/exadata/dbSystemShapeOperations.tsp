@@ -1,4 +1,4 @@
-import "../../../models/exadata/dbSystemShapes.tsp";
+import "../../models/exadata/dbSystemShapes.tsp";
 
 using Azure.ResourceManager;
 using Autorest;
@@ -7,10 +7,6 @@ namespace Oracle.Database;
 
 @armResourceOperations
 interface DbSystemShapes extends OracleLocationBasedResource<DbSystemShape> {}
-
-@@doc(DbSystemShapes.listByLocation,
-  "List DbSystemShape resources by Location"
-);
 
 #suppress "@azure-tools/typespec-azure-core/no-openapi" "TODO FIX - DO NOT COPY - BAD PATTERN"
 @@Autorest.example(DbSystemShapes.listByLocation,

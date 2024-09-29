@@ -28,7 +28,7 @@ model Target is ProxyResource<TargetProperties> {
   name: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
+#suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "legacy"
 @doc("The generic properties of a target.")
 @discriminator("targetType")
 model TargetProperties {
@@ -41,6 +41,9 @@ model TargetProperties {
   @doc("The server name to use in the connection string when connecting to a target. Port number and instance name must be specified separately.")
   @maxLength(200)
   connectionServerName: string;
+
+  @doc("The target collection status.")
+  targetCollectionStatus?: TargetCollectionStatus;
 
   @visibility("read")
   @doc("The provisioning state of the resource.")
@@ -57,12 +60,21 @@ model VaultSecret {
   ]>;
 
   @doc("The path to the Key Vault secret storing the login name (aka user name, aka account name) for authentication to a target.")
-  @pattern("^[a-zA-Z0-9-]{1,127}$")
   akvTargetUser?: string;
 
   @doc("The path to the Key Vault secret storing the password for authentication to a target.")
-  @pattern("^[a-zA-Z0-9-]{1,127}$")
   akvTargetPassword?: string;
+}
+
+@doc("The target states.")
+union TargetCollectionStatus {
+  string,
+
+  @doc("Denotes a target that is enabled.")
+  Enabled: "Enabled",
+
+  @doc("Denotes a target that is disabled.")
+  Disabled: "Disabled",
 }
 
 @doc("The type of authentication to use when connecting to a target.")

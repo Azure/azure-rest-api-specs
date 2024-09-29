@@ -1,6 +1,17 @@
+import "@typespec/http";
+import "@typespec/rest";
+import "@typespec/openapi";
+import "@typespec/versioning";
+import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-resource-manager";
+
 using TypeSpec.Http;
 using TypeSpec.Rest;
+using TypeSpec.Versioning;
 using Azure.ResourceManager;
+using Azure.ResourceManager.Foundations;
+using Azure.Core;
+using TypeSpec.OpenAPI;
 
 namespace Microsoft.MobilePacketCore;
 
@@ -8,7 +19,7 @@ namespace Microsoft.MobilePacketCore;
 model NetworkFunctionResource
   is TrackedResource<NetworkFunctionResourceProperties> {
   @doc("The name of the network function")
-  @pattern("^[a-z0-9]([-a-z0-9]*[a-z0-9])?$")
+  @pattern("^[a-zA-Z0-9]([a-zA-Z0-9_-]*[a-zA-Z0-9])?$")
   @minLength(1)
   @maxLength(63)
   @key("networkFunctionName")
@@ -54,15 +65,43 @@ model NetworkFunctionResourceProperties {
   provisioningState?: ProvisioningState;
 }
 
+/** Compliant create or update template */
+/**
+ * A long-running resource CreateOrUpdate (PUT)
+ * @template TResource the resource being patched
+ * @template TBaseParameters Optional. Allows overriding the operation parameters
+ */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "This is a valid template"
+@autoRoute
+@doc("Create a {name}", TResource)
+@TypeSpec.OpenAPI.extension("x-ms-long-running-operation", true)
+@TypeSpec.OpenAPI.extension(
+  "x-ms-long-running-operation-options",
+  {
+    `final-state-via`: "azure-async-operation",
+  }
+)
+@armResourceCreateOrUpdate(TResource)
+@put
+op ArmResourceCreateOrUpdate2Async<
+  TResource extends Azure.ResourceManager.Foundations.ArmResource,
+  TBaseParameters = Azure.ResourceManager.Foundations.BaseParameters<TResource>
+>(
+  ...ResourceInstanceParameters<TResource, TBaseParameters>,
+
+  @doc("Resource create parameters.")
+  @body
+  resource: TResource,
+): ArmUpdatedResponse<TResource> | ArmCreatedResponse<TResource> | ErrorResponse;
+
+@doc("ARM resource update successful")
+model ArmUpdatedResponse<TResource extends Azure.ResourceManager.Foundations.ArmResource>
+  is ArmResponse<TResource>;
+
 @armResourceOperations(NetworkFunctionResource)
 interface NetworkFunctions {
   get is ArmResourceRead<NetworkFunctionResource>;
-  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "MUST CHANGE ON NEXT UPDATE"
-  @Azure.Core.useFinalStateVia("azure-async-operation")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<
-    NetworkFunctionResource,
-    LroHeaders = Azure.Core.Foundations.RetryAfterHeader
-  >;
+  createOrUpdate is ArmResourceCreateOrUpdate2Async<NetworkFunctionResource>;
   updateTags is ArmTagsPatchSync<NetworkFunctionResource>;
   delete is ArmResourceDeleteSync<NetworkFunctionResource>;
   listByResourceGroup is ArmResourceListByParent<NetworkFunctionResource>;
@@ -70,112 +109,88 @@ interface NetworkFunctions {
 }
 
 @doc("SKU Definitions")
-union SkuDefinitions {
-  string,
-
+enum SkuDefinitions {
   @doc("Azure Lab SKU")
-  "AzureLab",
+  AzureLab,
 
   @doc("Azure Production SKU")
-  "AzureProduction",
+  AzureProduction,
 
   @doc("Nexus Lab SKU")
-  "NexusLab",
+  NexusLab,
 
   @doc("Nexus Production SKU")
-  "NexusProduction",
+  NexusProduction,
 }
 
 @doc("Type of Network Function")
-union NetworkFunctionType {
-  string,
-
+enum NetworkFunctionType {
   @doc("Access and Mobility Function")
-  "AMF",
+  AMF,
 
   @doc("Session Management Function")
-  "SMF",
+  SMF,
 
   @doc("User Plane Function")
-  "UPF",
+  UPF,
 
   @doc("Network Repository Function")
-  "NRF",
+  NRF,
 
   @doc("Network Slice Selection Function")
-  "NSSF",
+  NSSF,
 
   @doc("Mobility Management Entity")
-  "MME",
-
-  @doc("System Architecture Evolution Gateway Control Plane, control and user plane separation (CUPS) architecture")
-  "SaegwControlPlane",
-
-  @doc("System Architecture Evolution Gateway User Plane, control and user plane separation (CUPS) architecture")
-  "SaegwUserPlane",
-
-  @doc("System Architecture Evolution Gateway.  This combines the Serving Gateway (SGW) and the Packet Data Network Gateway (PGW) functionality")
-  "Saegw",
-
-  @doc("Evolved Packet Data Gateway")
-  "ePDG",
-
-  @doc("Non-3GPP Interworking Function")
-  "N3IWF",
+  MME,
 
   @doc("Remote Platform As A Service Components")
-  "RemotePaaS",
+  RemotePaaS,
 
   @doc("Element Management System")
-  "EMS",
+  EMS,
 
   @doc("Operations and Policy Manager")
-  "OperationsPolicyManager",
+  OperationsPolicyManager,
 }
 
 @doc("Network Function Administrative State enumerations")
-union NetworkFunctionAdministrativeState {
-  string,
-
+enum NetworkFunctionAdministrativeState {
   @doc("Resource has been commissioned")
-  "Commissioned",
+  Commissioned,
 
   @doc("Resource has been decommissioned")
-  "Decommissioned",
+  Decommissioned,
 }
 
 @doc("Network Function Operational Status enumerations")
-union NetworkFunctionOperationalStatus {
-  string,
-
+enum NetworkFunctionOperationalStatus {
   @doc("Resource is inactive")
-  "Inactive",
+  Inactive,
 
   @doc("Resource has been deployed, awaiting provisioning")
-  "InstantiatedNotProvisioned",
+  InstantiatedNotProvisioned,
 
   @doc("Resource has been deployed and provisioned, awaiting testing")
-  "InstantiatedProvisioned",
+  InstantiatedProvisioned,
 
   @doc("Resource is fully deployed and operational")
-  "Active",
+  Active,
 }
 
 @doc("Provisioning state of the resource")
 @Azure.Core.lroStatus
-union ProvisioningState {
-  string,
-  ResourceProvisioningState,
+enum ProvisioningState {
+  ...ResourceProvisioningState,
 
   @doc("Resource is getting provisioned")
-  Provisioning: "Provisioning",
+  Provisioning,
 
   @doc("Resource is updating")
-  Updating: "Updating",
+  Updating,
 
   @doc("Resource is getting deleted")
-  Deleting: "Deleting",
+  Deleting,
 
   @doc("Resource has been accepted")
-  Accepted: "Accepted",
+  Accepted,
 }

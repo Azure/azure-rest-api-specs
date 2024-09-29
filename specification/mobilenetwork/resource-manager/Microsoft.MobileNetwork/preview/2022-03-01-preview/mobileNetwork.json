@@ -37,7 +37,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileNetwork/mobileNetworks/{mobileNetworkName}": {
       "delete": {
         "tags": [
-          "MobileNetworks"
+          "MobileNetwork"
         ],
         "operationId": "MobileNetworks_Delete",
         "description": "Deletes the specified mobile network.",
@@ -84,7 +84,7 @@
       },
       "get": {
         "tags": [
-          "MobileNetworks"
+          "MobileNetwork"
         ],
         "operationId": "MobileNetworks_Get",
         "description": "Gets information about the specified mobile network.",
@@ -124,7 +124,7 @@
       },
       "put": {
         "tags": [
-          "MobileNetworks"
+          "MobileNetwork"
         ],
         "operationId": "MobileNetworks_CreateOrUpdate",
         "description": "Creates or updates a mobile network.",
@@ -183,10 +183,10 @@
       },
       "patch": {
         "tags": [
-          "MobileNetworks"
+          "MobileNetwork"
         ],
         "operationId": "MobileNetworks_UpdateTags",
-        "description": "Updates a mobile network update tags.",
+        "description": "Updates mobile network tags.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -315,10 +315,10 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileNetwork/mobileNetworks/{mobileNetworkName}/listSimIds": {
       "post": {
         "tags": [
-          "MobileNetworks"
+          "MobileNetworkSIMIDs"
         ],
         "operationId": "MobileNetworks_ListSimIds",
-        "description": "List sim ids under a mobile network.",
+        "description": "Lists the IDs of all provisioned SIMs in a mobile network",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -335,7 +335,7 @@
         ],
         "responses": {
           "200": {
-            "description": "List sim profile ids successful.",
+            "description": "List SIM IDs successful.",
             "schema": {
               "$ref": "#/definitions/SimIdListResult"
             }
@@ -354,7 +354,7 @@
           }
         },
         "x-ms-examples": {
-          "List sim profile ids by network": {
+          "List the IDs of all provisioned SIMs in a mobile network": {
             "$ref": "./examples/SimIdListByMobileNetwork.json"
           }
         },
@@ -367,7 +367,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileNetwork/mobileNetworks/{mobileNetworkName}/sites/{siteName}": {
       "delete": {
         "tags": [
-          "Sites"
+          "Site"
         ],
         "operationId": "Sites_Delete",
         "description": "Deletes the specified mobile network site.",
@@ -417,7 +417,7 @@
       },
       "get": {
         "tags": [
-          "Sites"
+          "Site"
         ],
         "operationId": "Sites_Get",
         "description": "Gets information about the specified mobile network site.",
@@ -460,7 +460,7 @@
       },
       "put": {
         "tags": [
-          "Sites"
+          "Site"
         ],
         "operationId": "Sites_CreateOrUpdate",
         "description": "Creates or updates a mobile network site.",
@@ -522,10 +522,10 @@
       },
       "patch": {
         "tags": [
-          "Sites"
+          "Site"
         ],
         "operationId": "Sites_UpdateTags",
-        "description": "Updates a site update tags.",
+        "description": "Updates site tags.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -621,10 +621,10 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileNetwork/sims/{simName}": {
       "delete": {
         "tags": [
-          "Sims"
+          "SIM"
         ],
         "operationId": "Sims_Delete",
-        "description": "Deletes the specified sim.",
+        "description": "Deletes the specified SIM.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -657,7 +657,7 @@
           }
         },
         "x-ms-examples": {
-          "Delete sim": {
+          "Delete SIM": {
             "$ref": "./examples/SimDelete.json"
           }
         },
@@ -668,10 +668,10 @@
       },
       "get": {
         "tags": [
-          "Sims"
+          "SIM"
         ],
         "operationId": "Sims_Get",
-        "description": "Gets information about the specified sim.",
+        "description": "Gets information about the specified SIM.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -688,7 +688,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Request successful. The operation returns the resulting sim resource.",
+            "description": "Request successful. The operation returns the resulting SIM resource.",
             "schema": {
               "$ref": "#/definitions/Sim"
             }
@@ -701,17 +701,17 @@
           }
         },
         "x-ms-examples": {
-          "Get sim": {
+          "Get SIM": {
             "$ref": "./examples/SimGet.json"
           }
         }
       },
       "put": {
         "tags": [
-          "Sims"
+          "SIM"
         ],
         "operationId": "Sims_CreateOrUpdate",
-        "description": "Creates or updates a Sim.",
+        "description": "Creates or updates a SIM.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -732,18 +732,18 @@
             "schema": {
               "$ref": "#/definitions/Sim"
             },
-            "description": "Parameters supplied to the create or update sim operation."
+            "description": "Parameters supplied to the create or update SIM operation."
           }
         ],
         "responses": {
           "200": {
-            "description": "Update successful. The operation returns the resulting sim resource.",
+            "description": "Update successful. The operation returns the resulting SIM resource.",
             "schema": {
               "$ref": "#/definitions/Sim"
             }
           },
           "201": {
-            "description": "Create successful. The operation returns the resulting sim resource.",
+            "description": "Create successful. The operation returns the resulting SIM resource.",
             "schema": {
               "$ref": "#/definitions/Sim"
             }
@@ -756,7 +756,7 @@
           }
         },
         "x-ms-examples": {
-          "Create sim": {
+          "Create SIM": {
             "$ref": "./examples/SimCreate.json"
           }
         },
@@ -767,10 +767,10 @@
       },
       "patch": {
         "tags": [
-          "Sims"
+          "SIM"
         ],
         "operationId": "Sims_UpdateTags",
-        "description": "Updates a sim update tags.",
+        "description": "Updates SIM tags.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -791,12 +791,12 @@
             "schema": {
               "$ref": "./common.json#/definitions/TagsObject"
             },
-            "description": "Parameters supplied to update sim tags."
+            "description": "Parameters supplied to update SIM tags."
           }
         ],
         "responses": {
           "200": {
-            "description": "Update successful. The operation returns the resulting sim resource.",
+            "description": "Update successful. The operation returns the resulting SIM resource.",
             "schema": {
               "$ref": "#/definitions/Sim"
             }
@@ -809,7 +809,7 @@
           }
         },
         "x-ms-examples": {
-          "Update sim tags": {
+          "Update SIM tags": {
             "$ref": "./examples/SimUpdateTags.json"
           }
         }
@@ -818,10 +818,10 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.MobileNetwork/sims": {
       "get": {
         "tags": [
-          "Sims"
+          "SIMs"
         ],
         "operationId": "Sims_ListBySubscription",
-        "description": "Gets all the sims in a subscription.",
+        "description": "Gets all the SIMs in a subscription.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -832,7 +832,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Request successful. The operation returns a list of sim resources.",
+            "description": "Request successful. The operation returns a list of SIM resources.",
             "schema": {
               "$ref": "#/definitions/SimListResult"
             }
@@ -845,7 +845,7 @@
           }
         },
         "x-ms-examples": {
-          "List sims in a subscription": {
+          "List SIMs in a subscription": {
             "$ref": "./examples/SimListBySubscription.json"
           }
         },
@@ -857,10 +857,10 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileNetwork/sims": {
       "get": {
         "tags": [
-          "Sims"
+          "SIMs"
         ],
         "operationId": "Sims_ListByResourceGroup",
-        "description": "Gets all the Sims in a subscription.",
+        "description": "Gets all the SIMs in a resource group.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -874,7 +874,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Request successful. The operation returns a list of sim resources.",
+            "description": "Request successful. The operation returns a list of SIM resources.",
             "schema": {
               "$ref": "#/definitions/SimListResult"
             }
@@ -887,7 +887,7 @@
           }
         },
         "x-ms-examples": {
-          "List sims in a resource group": {
+          "List SIMs in a resource group": {
             "$ref": "./examples/SimListByResourceGroup.json"
           }
         },
@@ -934,7 +934,7 @@
         },
         "publicLandMobileNetworkIdentifier": {
           "$ref": "./ts29571.json#/definitions/PlmnId",
-          "description": "The unique public land mobile network identifier for the network. This is made up of the Mobile Country Code and Mobile Network Code, as defined in https://www.itu.int/rec/T-REC-E.212. The values 001-01 and 001-001 can be used for testing and the values 999-99 and 999-999 can be used on internal private networks."
+          "description": "The unique public land mobile network identifier for the network. This is made up of the mobile country code and mobile network code, as defined in https://www.itu.int/rec/T-REC-E.212. The values 001-01 and 001-001 can be used for testing and the values 999-99 and 999-999 can be used on internal private networks."
         },
         "serviceKey": {
           "type": "string",
@@ -970,7 +970,7 @@
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/SimPropertiesFormat",
-          "description": "Sim Properties."
+          "description": "SIM Properties."
         },
         "systemData": {
           "x-ms-client-flatten": true,
@@ -987,21 +987,26 @@
       "required": [
         "properties"
       ],
-      "description": "Sim resource."
+      "description": "SIM resource."
     },
     "SimPropertiesFormat": {
       "type": "object",
-      "description": "Sim properties.",
+      "description": "SIM properties.",
       "properties": {
         "provisioningState": {
           "readOnly": true,
           "$ref": "./common.json#/definitions/ProvisioningState",
-          "description": "The provisioning state of the sim resource."
+          "description": "The provisioning state of the SIM resource."
         },
         "simState": {
           "readOnly": true,
           "$ref": "./common.json#/definitions/SimState",
-          "description": "The state of the sim resource."
+          "description": "The state of the SIM resource."
+        },
+        "activationState": {
+          "readOnly": true,
+          "$ref": "./common.json#/definitions/ActivationState",
+          "description": "The activation state of the SIM resource."
         },
         "internationalMobileSubscriberIdentity": {
           "type": "string",
@@ -1010,12 +1015,12 @@
             "create",
             "read"
           ],
-          "description": "The International Mobile Subscriber Identity (IMSI) for the sim."
+          "description": "The international mobile subscriber identity (IMSI) for the SIM."
         },
         "integratedCircuitCardIdentifier": {
           "type": "string",
           "pattern": "^89[0-9]{17,18}$",
-          "description": "The Integrated Circuit Card ID (ICC Id) for the sim."
+          "description": "The integrated circuit card ID (ICCID) for the SIM."
         },
         "authenticationKey": {
           "type": "string",
@@ -1025,7 +1030,7 @@
             "create",
             "update"
           ],
-          "description": "The ki value for the sim."
+          "description": "The Ki value for the SIM."
         },
         "operatorKeyCode": {
           "type": "string",
@@ -1035,19 +1040,19 @@
             "create",
             "update"
           ],
-          "description": "The Opc value for the sim."
+          "description": "The Opc value for the SIM."
         },
         "mobileNetwork": {
           "$ref": "./common.json#/definitions/MobileNetworkResourceId",
-          "description": "Mobile network that this sim belongs to"
+          "description": "Mobile network that this SIM belongs to"
         },
         "deviceType": {
           "type": "string",
-          "description": "An optional free-form text field that can be used to record the device type this sim is associated with, for example 'Video camera'. The Azure portal allows Sims to be grouped and filtered based on this value."
+          "description": "An optional free-form text field that can be used to record the device type this SIM is associated with, for example 'Video camera'. The Azure portal allows SIMs to be grouped and filtered based on this value."
         },
         "simPolicy": {
           "$ref": "./common.json#/definitions/SimPolicyResourceId",
-          "description": "The simPolicy used by this sim."
+          "description": "The SIM policy used by this SIM."
         },
         "staticIpConfiguration": {
           "type": "array",
@@ -1056,7 +1061,7 @@
           },
           "minItems": 1,
           "uniqueItems": true,
-          "description": "A list of static IP addresses assigned to this sim. Each address is assigned at a defined network scope, made up of {attached data network, slice}.",
+          "description": "A list of static IP addresses assigned to this SIM. Each address is assigned at a defined network scope, made up of {attached data network, slice}.",
           "x-ms-identifiers": [
             "attachedDataNetwork",
             "slice"
@@ -1069,23 +1074,23 @@
     },
     "SimStaticIpProperties": {
       "type": "object",
-      "description": "Static IP configuration for a sim, scoped to a particular attached data network and slice.",
+      "description": "Static IP configuration for a SIM, scoped to a particular attached data network and slice.",
       "properties": {
         "attachedDataNetwork": {
           "$ref": "./common.json#/definitions/AttachedDataNetworkResourceId",
-          "description": "The attached data network on which the static IP address will be used. The combination of attachedDataNetwork and slice defines the network scope of the IP address."
+          "description": "The attached data network on which the static IP address will be used. The combination of attached data network and slice defines the network scope of the IP address."
         },
         "slice": {
           "$ref": "./common.json#/definitions/SliceResourceId",
-          "description": "The network slice on which the static IP address will be used. The combination of attachedDataNetwork and slice defines the network scope of the IP address."
+          "description": "The network slice on which the static IP address will be used. The combination of attached data network and slice defines the network scope of the IP address."
         },
         "staticIp": {
           "type": "object",
-          "description": "The static IP configuration for the sim to use at the defined network scope.",
+          "description": "The static IP configuration for the SIM to use at the defined network scope.",
           "properties": {
             "ipv4Address": {
               "$ref": "./ts29571.json#/definitions/Ipv4Addr",
-              "description": "The IPv4 address assigned to the sim at this network scope. This address must be in the userEquipmentStaticAddressPoolPrefix defined in the attachedDataNetwork."
+              "description": "The IPv4 address assigned to the SIM at this network scope. This address must be in the userEquipmentStaticAddressPoolPrefix defined in the attached data network."
             }
           }
         }
@@ -1099,7 +1104,7 @@
           "items": {
             "$ref": "./common.json#/definitions/SubResource"
           },
-          "description": "A list of sim profile ids in a resource group."
+          "description": "A list of SIM IDs."
         },
         "nextLink": {
           "type": "string",
@@ -1107,7 +1112,7 @@
           "description": "The URL to get the next set of results."
         }
       },
-      "description": "Response for list sim ids API service call."
+      "description": "Response for list SIM IDs API service call."
     },
     "SimListResult": {
       "type": "object",
@@ -1117,7 +1122,7 @@
           "items": {
             "$ref": "#/definitions/Sim"
           },
-          "description": "A list of Sims in a resource group."
+          "description": "A list of SIMs in a resource group."
         },
         "nextLink": {
           "type": "string",
@@ -1125,7 +1130,7 @@
           "description": "The URL to get the next set of results."
         }
       },
-      "description": "Response for list Sims API service call."
+      "description": "Response for list SIMs API service call."
     },
     "Site": {
       "type": "object",
@@ -1156,14 +1161,14 @@
         "provisioningState": {
           "readOnly": true,
           "$ref": "./common.json#/definitions/ProvisioningState",
-          "description": "The provisioning state of the site resource. **TODO**: Confirm if this is needed"
+          "description": "The provisioning state of the site resource."
         },
         "networkFunctions": {
           "type": "array",
           "items": {
             "$ref": "./common.json#/definitions/SubResource"
           },
-          "description": "An array of ids of the network functions deployed on the site, maintained by the user."
+          "description": "An array of IDs of the network functions deployed on the site, maintained by the user."
         }
       }
     },
@@ -1175,7 +1180,7 @@
           "items": {
             "$ref": "#/definitions/Site"
           },
-          "description": "A list of sites in a resource group."
+          "description": "A list of sites in a mobile network."
         },
         "nextLink": {
           "type": "string",

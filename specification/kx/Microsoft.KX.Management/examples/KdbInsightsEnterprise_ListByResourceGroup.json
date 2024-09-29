@@ -1,0 +1,53 @@
+{
+  "operationId": "KdbInsightsEnterprise_ListByResourceGroup",
+  "title": "KdbInsightsEnterprise_ListByResourceGroup_3",
+  "parameters": {
+    "api-version": "2023-09-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "apiTest-uukzdc"
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/apiTest-uukzdc/providers/Microsoft.KX/kdbInsightsEnterprise/kdblufscy",
+            "name": "kdblufscy",
+            "type": "Microsoft.KX/kdbInsightsEnterprise",
+            "location": "west us",
+            "tags": {},
+            "properties": {
+              "provisioningState": "Succeeded",
+              "uiUsername": "kdbuser01",
+              "emailAddress": "kdbuser01@email.com",
+              "systemNodePoolVmSize": "Standard_D4d_v4",
+              "systemNodePoolVmCount": 3,
+              "userNodePoolVmSize": "Standard_D16ds_v4",
+              "userNodePoolVmCount": 3,
+              "isRookCeph": false,
+              "securityMonitoringEnabled": false,
+              "isPremiumStorageEnabled": false,
+              "vnetAddressSpace": "10.0.0.0/16",
+              "authorizedIpRanges": "20.38.1.0/24",
+              "readWriteManyStorageClass": "azurefile-premium-kxi-nfs",
+              "clientNotificationAddress": "kdbuser01@email.com",
+              "aksContainerInsightsRetentionDays": 30,
+              "aksLogRetentionDays": 30,
+              "aksMetricsRetentionDays": 30,
+              "availabilityZones": [
+                "1",
+                "2",
+                "3"
+              ],
+              "managedResourceGroupConfiguration": {
+                "name": "managedRG",
+                "location": "eastus"
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

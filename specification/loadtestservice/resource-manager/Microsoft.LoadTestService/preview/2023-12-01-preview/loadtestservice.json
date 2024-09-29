@@ -2,24 +2,24 @@
   "swagger": "2.0",
   "info": {
     "title": "LoadTest Client",
-    "version": "2023-12-01-preview",
     "description": "LoadTest client provides access to LoadTest Resource and it's status operations.",
-    "x-typespec-generated": [
-      {
-        "emitter": "@azure-tools/typespec-autorest"
-      }
-    ]
+    "version": "2023-12-01-preview"
   },
+  "host": "management.azure.com",
   "schemes": [
     "https"
   ],
-  "host": "management.azure.com",
-  "produces": [
-    "application/json"
-  ],
-  "consumes": [
-    "application/json"
-  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      },
+      "description": "Azure Active Directory OAuth2"
+    }
+  },
   "security": [
     {
       "azure_auth": [
@@ -27,659 +27,131 @@
       ]
     }
   ],
-  "securityDefinitions": {
-    "azure_auth": {
-      "type": "oauth2",
-      "description": "Azure Active Directory OAuth2 Flow.",
-      "flow": "implicit",
-      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
-      "scopes": {
-        "user_impersonation": "impersonate your user account"
-      }
-    }
-  },
-  "tags": [
-    {
-      "name": "Operations"
-    },
-    {
-      "name": "LoadTests"
-    },
-    {
-      "name": "Quotas"
-    },
-    {
-      "name": "LoadTestMappings"
-    },
-    {
-      "name": "LoadTestProfileMappings"
-    }
-  ],
   "paths": {
-    "/{resourceUri}/providers/Microsoft.LoadTestService/loadTestMappings": {
-      "get": {
-        "operationId": "LoadTestMappings_List",
-        "tags": [
-          "LoadTestMappings"
-        ],
-        "description": "List LoadTestMappingResource resources by parent",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/LoadTestMappingResourceListResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "List all Load Test Mappings by Source Resource Id": {
-            "$ref": "./examples/LoadTestMappings_List.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/{resourceUri}/providers/Microsoft.LoadTestService/loadTestMappings/{loadTestMappingName}": {
-      "get": {
-        "operationId": "LoadTestMappings_Get",
-        "tags": [
-          "LoadTestMappings"
-        ],
-        "description": "Get a LoadTestMappingResource",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
-          },
-          {
-            "name": "loadTestMappingName",
-            "in": "path",
-            "description": "Load Test Mapping name",
-            "required": true,
-            "type": "string",
-            "pattern": "^[A-Za-z0-9]+(-[A-Za-z0-9]+)*$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/LoadTestMappingResource"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get a Load Test Mapping Resource": {
-            "$ref": "./examples/LoadTestMappings_Get.json"
-          }
-        }
-      },
-      "put": {
-        "operationId": "LoadTestMappings_CreateOrUpdate",
-        "tags": [
-          "LoadTestMappings"
-        ],
-        "description": "Create a LoadTestMappingResource",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
-          },
-          {
-            "name": "loadTestMappingName",
-            "in": "path",
-            "description": "Load Test Mapping name",
-            "required": true,
-            "type": "string",
-            "pattern": "^[A-Za-z0-9]+(-[A-Za-z0-9]+)*$"
-          },
-          {
-            "name": "resource",
-            "in": "body",
-            "description": "Resource create parameters.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/LoadTestMappingResource"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Resource 'LoadTestMappingResource' update operation succeeded",
-            "schema": {
-              "$ref": "#/definitions/LoadTestMappingResource"
-            }
-          },
-          "201": {
-            "description": "Resource 'LoadTestMappingResource' create operation succeeded",
-            "schema": {
-              "$ref": "#/definitions/LoadTestMappingResource"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Create a Load Test Mapping Resource": {
-            "$ref": "./examples/LoadTestMappings_CreateOrUpdate.json"
-          }
-        }
-      },
-      "patch": {
-        "operationId": "LoadTestMappings_Update",
-        "tags": [
-          "LoadTestMappings"
-        ],
-        "description": "Update a LoadTestMappingResource",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
-          },
-          {
-            "name": "loadTestMappingName",
-            "in": "path",
-            "description": "Load Test Mapping name",
-            "required": true,
-            "type": "string",
-            "pattern": "^[A-Za-z0-9]+(-[A-Za-z0-9]+)*$"
-          },
-          {
-            "name": "properties",
-            "in": "body",
-            "description": "The resource properties to be updated.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/LoadTestMappingResourceUpdate"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/LoadTestMappingResource"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Update a load test mapping": {
-            "$ref": "./examples/LoadTestMappings_Update.json"
-          }
-        }
-      },
-      "delete": {
-        "operationId": "LoadTestMappings_Delete",
-        "tags": [
-          "LoadTestMappings"
-        ],
-        "description": "Delete a LoadTestMappingResource",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
-          },
-          {
-            "name": "loadTestMappingName",
-            "in": "path",
-            "description": "Load Test Mapping name",
-            "required": true,
-            "type": "string",
-            "pattern": "^[A-Za-z0-9]+(-[A-Za-z0-9]+)*$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Resource deleted successfully."
-          },
-          "204": {
-            "description": "Resource does not exist."
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Delete a Load Test Mapping Resource": {
-            "$ref": "./examples/LoadTestMappings_Delete.json"
-          }
-        }
-      }
-    },
-    "/{resourceUri}/providers/Microsoft.LoadTestService/loadTestProfileMappings": {
-      "get": {
-        "operationId": "LoadTestProfileMappings_List",
-        "tags": [
-          "LoadTestProfileMappings"
-        ],
-        "description": "List LoadTestProfileMappingResource resources by parent",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/LoadTestProfileMappingResourceListResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "List Load Test Profile Mappings by Source Resource Id": {
-            "$ref": "./examples/LoadTestProfileMappings_List.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/{resourceUri}/providers/Microsoft.LoadTestService/loadTestProfileMappings/{loadTestProfileMappingName}": {
-      "get": {
-        "operationId": "LoadTestProfileMappings_Get",
-        "tags": [
-          "LoadTestProfileMappings"
-        ],
-        "description": "Get a LoadTestProfileMappingResource",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
-          },
-          {
-            "name": "loadTestProfileMappingName",
-            "in": "path",
-            "description": "Load Test Profile Mapping name",
-            "required": true,
-            "type": "string",
-            "pattern": "^[A-Za-z0-9]+(-[A-Za-z0-9]+)*$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/LoadTestProfileMappingResource"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get a Load Test Profile Mapping Resource": {
-            "$ref": "./examples/LoadTestProfileMappings_Get.json"
-          }
-        }
-      },
-      "put": {
-        "operationId": "LoadTestProfileMappings_CreateOrUpdate",
-        "tags": [
-          "LoadTestProfileMappings"
-        ],
-        "description": "Create a LoadTestProfileMappingResource",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
-          },
-          {
-            "name": "loadTestProfileMappingName",
-            "in": "path",
-            "description": "Load Test Profile Mapping name",
-            "required": true,
-            "type": "string",
-            "pattern": "^[A-Za-z0-9]+(-[A-Za-z0-9]+)*$"
-          },
-          {
-            "name": "resource",
-            "in": "body",
-            "description": "Resource create parameters.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/LoadTestProfileMappingResource"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Resource 'LoadTestProfileMappingResource' update operation succeeded",
-            "schema": {
-              "$ref": "#/definitions/LoadTestProfileMappingResource"
-            }
-          },
-          "201": {
-            "description": "Resource 'LoadTestProfileMappingResource' create operation succeeded",
-            "schema": {
-              "$ref": "#/definitions/LoadTestProfileMappingResource"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Create a Load Test Profile Mappings resource": {
-            "$ref": "./examples/LoadTestProfileMappings_CreateOrUpdate.json"
-          }
-        }
-      },
-      "patch": {
-        "operationId": "LoadTestProfileMappings_Update",
-        "tags": [
-          "LoadTestProfileMappings"
-        ],
-        "description": "Update a LoadTestProfileMappingResource",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
-          },
-          {
-            "name": "loadTestProfileMappingName",
-            "in": "path",
-            "description": "Load Test Profile Mapping name",
-            "required": true,
-            "type": "string",
-            "pattern": "^[A-Za-z0-9]+(-[A-Za-z0-9]+)*$"
-          },
-          {
-            "name": "properties",
-            "in": "body",
-            "description": "The resource properties to be updated.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/LoadTestProfileMappingResourceUpdate"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/LoadTestProfileMappingResource"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Update a Load Test Profile Mapping": {
-            "$ref": "./examples/LoadTestProfileMappings_Update.json"
-          }
-        }
-      },
-      "delete": {
-        "operationId": "LoadTestProfileMappings_Delete",
-        "tags": [
-          "LoadTestProfileMappings"
-        ],
-        "description": "Delete a LoadTestProfileMappingResource",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
-          },
-          {
-            "name": "loadTestProfileMappingName",
-            "in": "path",
-            "description": "Load Test Profile Mapping name",
-            "required": true,
-            "type": "string",
-            "pattern": "^[A-Za-z0-9]+(-[A-Za-z0-9]+)*$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Resource deleted successfully."
-          },
-          "204": {
-            "description": "Resource does not exist."
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Delete a Load Test Profile Mapping Resource": {
-            "$ref": "./examples/LoadTestProfileMappings_Delete.json"
-          }
-        }
-      }
-    },
     "/providers/Microsoft.LoadTestService/operations": {
       "get": {
-        "operationId": "Operations_List",
         "tags": [
           "Operations"
         ],
-        "description": "List the operations for the provider",
+        "description": "Lists all the available API operations for Load Test Resource.",
+        "operationId": "Operations_List",
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "Success",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "Resource provider error response about the failure.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
         "x-ms-examples": {
-          "List the operations for the provider.": {
+          "Operations_List": {
             "$ref": "./examples/Operations_List.json"
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.LoadTestService/loadTests": {
-      "get": {
-        "operationId": "LoadTests_ListBySubscription",
-        "tags": [
-          "LoadTests"
-        ],
-        "description": "List LoadTestResource resources by subscription ID",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/LoadTestResourceListResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "List LoadTestResource resources by subscription ID.": {
-            "$ref": "./examples/LoadTests_ListBySubscription.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.LoadTestService/locations/{location}/quotas": {
       "get": {
-        "operationId": "Quotas_List",
         "tags": [
           "Quotas"
         ],
-        "description": "List quotas for a given subscription Id.",
+        "description": "Lists all the available quota per region per subscription.",
+        "operationId": "Quotas_List",
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/LocationParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "Success",
             "schema": {
-              "$ref": "#/definitions/QuotaResourceListResult"
+              "$ref": "#/definitions/QuotaResourceList"
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "Resource provider error response about the failure.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "List quotas for a given subscription Id.": {
-            "$ref": "./examples/Quotas_List.json"
           }
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Quotas_List": {
+            "$ref": "./examples/Quotas_List.json"
+          }
         }
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.LoadTestService/locations/{location}/quotas/{quotaBucketName}": {
       "get": {
-        "operationId": "Quotas_Get",
         "tags": [
           "Quotas"
         ],
         "description": "Get the available quota for a quota bucket per region per subscription.",
+        "operationId": "Quotas_Get",
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/LocationParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "quotaBucketName",
-            "in": "path",
-            "description": "The quota name.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/QuotaBucketNameParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "Success",
             "schema": {
               "$ref": "#/definitions/QuotaResource"
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "Resource provider error response about the failure.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
-          "Get the available quota for a quota bucket per region per subscription.": {
+          "Quotas_Get": {
             "$ref": "./examples/Quotas_Get.json"
           }
         }
@@ -687,400 +159,879 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.LoadTestService/locations/{location}/quotas/{quotaBucketName}/checkAvailability": {
       "post": {
-        "operationId": "Quotas_CheckAvailability",
         "tags": [
           "Quotas"
         ],
         "description": "Check Quota Availability on quota bucket per region per subscription.",
+        "operationId": "Quotas_CheckAvailability",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/LocationParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "quotaBucketName",
-            "in": "path",
-            "description": "The quota name.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/QuotaBucketNameParameter"
           },
           {
-            "name": "QuotaBucketRequest",
             "in": "body",
-            "description": "The content of the action request",
+            "name": "QuotaBucketRequest",
+            "description": "Quota Bucket Request data",
             "required": true,
             "schema": {
               "$ref": "#/definitions/QuotaBucketRequest"
-            },
-            "x-ms-client-name": "body"
+            }
           }
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "Success",
             "schema": {
               "$ref": "#/definitions/CheckQuotaAvailabilityResponse"
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "Resource provider error response about the failure.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
-          "Check Quota Availability on quota bucket per region per subscription.": {
+          "Quotas_CheckAvailability": {
             "$ref": "./examples/Quotas_CheckAvailability.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.LoadTestService/loadTests": {
+      "get": {
+        "tags": [
+          "LoadTests"
+        ],
+        "description": "Lists loadtests resources in a subscription.",
+        "operationId": "LoadTests_ListBySubscription",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/LoadTestResourcePageList"
+            }
+          },
+          "default": {
+            "description": "Resource provider error response about the failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "LoadTests_ListBySubscription": {
+            "$ref": "./examples/LoadTests_ListBySubscription.json"
           }
         }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.LoadTestService/loadTests": {
       "get": {
-        "operationId": "LoadTests_ListByResourceGroup",
         "tags": [
           "LoadTests"
         ],
-        "description": "List LoadTestResource resources by resource group",
+        "description": "Lists loadtest resources in a resource group.",
+        "operationId": "LoadTests_ListByResourceGroup",
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "OK -- list of loadtests resources retrieved",
             "schema": {
-              "$ref": "#/definitions/LoadTestResourceListResult"
+              "$ref": "#/definitions/LoadTestResourcePageList"
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "Resource provider error response about the failure.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "List LoadTestResource resources by resource group.": {
-            "$ref": "./examples/LoadTests_ListByResourceGroup.json"
           }
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "LoadTests_ListByResourceGroup": {
+            "$ref": "./examples/LoadTests_ListByResourceGroup.json"
+          }
         }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.LoadTestService/loadTests/{loadTestName}": {
       "get": {
-        "operationId": "LoadTests_Get",
         "tags": [
           "LoadTests"
         ],
-        "description": "Get a LoadTestResource",
+        "description": "Get a LoadTest resource.",
+        "operationId": "LoadTests_Get",
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "loadTestName",
-            "in": "path",
-            "description": "Load Test name",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/LoadTestNameParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "OK -- loadtest resource retrieved",
             "schema": {
               "$ref": "#/definitions/LoadTestResource"
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "Resource provider error response about the failure.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
-          "Get a LoadTestResource.": {
+          "LoadTests_Get": {
             "$ref": "./examples/LoadTests_Get.json"
           }
         }
       },
       "put": {
-        "operationId": "LoadTests_CreateOrUpdate",
         "tags": [
           "LoadTests"
         ],
-        "description": "Create a LoadTestResource",
+        "description": "Create or update LoadTest resource.",
+        "operationId": "LoadTests_CreateOrUpdate",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "loadTestName",
-            "in": "path",
-            "description": "Load Test name",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/LoadTestNameParameter"
           },
           {
-            "name": "LoadTestResource",
             "in": "body",
-            "description": "Resource create parameters.",
+            "name": "LoadTestResource",
+            "description": "LoadTest resource data",
             "required": true,
             "schema": {
               "$ref": "#/definitions/LoadTestResource"
-            },
-            "x-ms-client-name": "resource"
+            }
           }
         ],
         "responses": {
           "200": {
-            "description": "Resource 'LoadTestResource' update operation succeeded",
+            "description": "Success",
             "schema": {
               "$ref": "#/definitions/LoadTestResource"
             }
           },
           "201": {
-            "description": "Resource 'LoadTestResource' create operation succeeded",
+            "description": "Created -- LoadTest resource created",
             "schema": {
               "$ref": "#/definitions/LoadTestResource"
-            },
-            "headers": {
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "description": "A link to the status monitor"
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "Resource provider error response about the failure.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
-          "Create a LoadTestResource": {
+          "LoadTests_CreateOrUpdate": {
             "$ref": "./examples/LoadTests_CreateOrUpdate.json"
           }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        },
-        "x-ms-long-running-operation": true
+        }
       },
       "patch": {
-        "operationId": "LoadTests_Update",
         "tags": [
           "LoadTests"
         ],
-        "description": "Update a LoadTestResource",
+        "description": "Update a loadtest resource.",
+        "operationId": "LoadTests_Update",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "loadTestName",
-            "in": "path",
-            "description": "Load Test name",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/LoadTestNameParameter"
           },
           {
-            "name": "LoadTestResourcePatchRequestBody",
             "in": "body",
-            "description": "The resource properties to be updated.",
+            "name": "LoadTestResourcePatchRequestBody",
+            "description": "LoadTest resource update data",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/LoadTestResourceUpdate"
-            },
-            "x-ms-client-name": "properties"
+              "$ref": "#/definitions/LoadTestResourcePatchRequestBody"
+            }
           }
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "OK -- resource updated",
             "schema": {
               "$ref": "#/definitions/LoadTestResource"
             }
           },
           "202": {
-            "description": "Resource update request accepted.",
-            "headers": {
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "description": "A link to the status monitor"
-              },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
+            "description": "Accepted -- LoadTest resource patch request accepted"
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "Resource provider error response about the failure.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
-          "Update a LoadTestResource.": {
+          "LoadTests_Update": {
             "$ref": "./examples/LoadTests_Update.json"
           }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-long-running-operation": true
+        }
       },
       "delete": {
-        "operationId": "LoadTests_Delete",
         "tags": [
           "LoadTests"
         ],
-        "description": "Delete a LoadTestResource",
+        "description": "Delete a LoadTest resource.",
+        "operationId": "LoadTests_Delete",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "loadTestName",
-            "in": "path",
-            "description": "Load Test name",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/LoadTestNameParameter"
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK -- resource deleted"
+          },
           "202": {
-            "description": "Resource deletion accepted.",
-            "headers": {
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
+            "description": "Accepted -- LoadTest resource delete request accepted"
           },
           "204": {
-            "description": "Resource does not exist."
+            "description": "No Content -- resource deleted"
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "Resource provider error response about the failure.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
-          "Delete a LoadTestResource.": {
+          "LoadTests_Delete": {
             "$ref": "./examples/LoadTests_Delete.json"
           }
+        }
+      }
+    },
+    "/{scope}/providers/Microsoft.LoadTestService/loadTestMappings/{loadTestMappingName}": {
+      "get": {
+        "tags": [
+          "LoadTestMappings"
+        ],
+        "description": "Get a LoadTest mapping resource.",
+        "operationId": "LoadTestMappings_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ScopeParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/LoadTestMappingNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- loadtest mapping resource retrieved",
+            "schema": {
+              "$ref": "#/definitions/LoadTestMappingResource"
+            }
+          },
+          "default": {
+            "description": "Resource provider error response about the failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
         },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+        "x-ms-examples": {
+          "LoadTestMappings_Get": {
+            "$ref": "./examples/LoadTestMappings_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "LoadTestMappings"
+        ],
+        "description": "Create or update LoadTest mapping resource.",
+        "operationId": "LoadTestMappings_CreateOrUpdate",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ScopeParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/LoadTestMappingNameParameter"
+          },
+          {
+            "in": "body",
+            "name": "LoadTestMappingResourceBody",
+            "description": "LoadTest mapping resource data",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LoadTestMappingResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/LoadTestMappingResource"
+            }
+          },
+          "201": {
+            "description": "Created -- LoadTest mapping resource created",
+            "schema": {
+              "$ref": "#/definitions/LoadTestMappingResource"
+            }
+          },
+          "default": {
+            "description": "Resource provider error response about the failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-examples": {
+          "LoadTestMappings_CreateOrUpdate": {
+            "$ref": "./examples/LoadTestMappings_CreateOrUpdate.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "LoadTestMappings"
+        ],
+        "description": "Update a loadtest mapping resource.",
+        "operationId": "LoadTestMappings_Update",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ScopeParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/LoadTestMappingNameParameter"
+          },
+          {
+            "in": "body",
+            "name": "LoadTestMappingResourcePatchRequestBody",
+            "description": "LoadTest mapping resource update data",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LoadTestMappingResourcePatchRequestBody"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- resource updated",
+            "schema": {
+              "$ref": "#/definitions/LoadTestMappingResource"
+            }
+          },
+          "default": {
+            "description": "Resource provider error response about the failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "LoadTestMappings_Update": {
+            "$ref": "./examples/LoadTestMappings_Update.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "LoadTestMappings"
+        ],
+        "description": "Delete a LoadTest mapping resource.",
+        "operationId": "LoadTestMappings_Delete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ScopeParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/LoadTestMappingNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- resource deleted"
+          },
+          "204": {
+            "description": "No Content -- resource deleted"
+          },
+          "default": {
+            "description": "Resource provider error response about the failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "LoadTestMappings_Delete": {
+            "$ref": "./examples/LoadTestMappings_Delete.json"
+          }
+        }
+      }
+    },
+    "/{scope}/providers/Microsoft.LoadTestService/loadTestMappings": {
+      "get": {
+        "tags": [
+          "LoadTestMappings"
+        ],
+        "description": "Lists loadtest mapping resources.",
+        "operationId": "LoadTestMappings_ListBySourceResourceId",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ScopeParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- list of loadtest mapping resources retrieved",
+            "schema": {
+              "$ref": "#/definitions/LoadTestMappingResourcePageList"
+            }
+          },
+          "default": {
+            "description": "Resource provider error response about the failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "LoadTestMappings_ListBySourceResourceId": {
+            "$ref": "./examples/LoadTestMappings_ListBySourceResourceId.json"
+          }
+        }
+      }
+    },
+    "/{scope}/providers/Microsoft.LoadTestService/loadTestProfileMappings/{loadTestProfileMappingName}": {
+      "get": {
+        "tags": [
+          "LoadTestProfileMappings"
+        ],
+        "description": "Get a LoadTest profile mapping resource.",
+        "operationId": "LoadTestProfileMappings_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ScopeParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/LoadTestProfileMappingNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- loadtest profile mapping resource retrieved",
+            "schema": {
+              "$ref": "#/definitions/LoadTestProfileMappingResource"
+            }
+          },
+          "default": {
+            "description": "Resource provider error response about the failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "LoadTestProfileMappings_Get": {
+            "$ref": "./examples/LoadTestProfileMappings_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "LoadTestProfileMappings"
+        ],
+        "description": "Create or update LoadTest profile mapping resource.",
+        "operationId": "LoadTestProfileMappings_CreateOrUpdate",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ScopeParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/LoadTestProfileMappingNameParameter"
+          },
+          {
+            "in": "body",
+            "name": "LoadTestProfileMappingResourceBody",
+            "description": "LoadTest profile mapping resource data",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LoadTestProfileMappingResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/LoadTestProfileMappingResource"
+            }
+          },
+          "201": {
+            "description": "Created -- LoadTest profile mapping resource created",
+            "schema": {
+              "$ref": "#/definitions/LoadTestProfileMappingResource"
+            }
+          },
+          "default": {
+            "description": "Resource provider error response about the failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "LoadTestProfileMappings_CreateOrUpdate": {
+            "$ref": "./examples/LoadTestProfileMappings_CreateOrUpdate.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "LoadTestProfileMappings"
+        ],
+        "description": "Update a loadtest profile mapping resource.",
+        "operationId": "LoadTestProfileMappings_Update",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ScopeParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/LoadTestProfileMappingNameParameter"
+          },
+          {
+            "in": "body",
+            "name": "LoadTestProfileMappingResourcePatchRequestBody",
+            "description": "LoadTest profile mapping resource update data",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LoadTestProfileMappingResourcePatchRequestBody"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- resource updated",
+            "schema": {
+              "$ref": "#/definitions/LoadTestProfileMappingResource"
+            }
+          },
+          "default": {
+            "description": "Resource provider error response about the failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "LoadTestProfileMappings_Update": {
+            "$ref": "./examples/LoadTestProfileMappings_Update.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "LoadTestProfileMappings"
+        ],
+        "description": "Delete a LoadTest profile mapping resource.",
+        "operationId": "LoadTestProfileMappings_Delete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ScopeParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/LoadTestProfileMappingNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- resource deleted"
+          },
+          "204": {
+            "description": "No Content -- resource deleted"
+          },
+          "default": {
+            "description": "Resource provider error response about the failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "LoadTestProfileMappings_Delete": {
+            "$ref": "./examples/LoadTestProfileMappings_Delete.json"
+          }
+        }
+      }
+    },
+    "/{scope}/providers/Microsoft.LoadTestService/loadTestProfileMappings": {
+      "get": {
+        "tags": [
+          "LoadTestMappings"
+        ],
+        "description": "Lists loadtest Profile mapping resources.",
+        "operationId": "LoadTestProfileMappings_ListBySourceResourceId",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ScopeParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- list of loadtest profile mapping resources retrieved",
+            "schema": {
+              "$ref": "#/definitions/LoadTestProfileMappingResourcePageList"
+            }
+          },
+          "default": {
+            "description": "Resource provider error response about the failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "LoadTestProfileMappings_ListBySourceResourceId": {
+            "$ref": "./examples/LoadTestProfileMappings_ListBySourceResourceId.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.LoadTestService/loadTests/{loadTestName}/outboundNetworkDependenciesEndpoints": {
       "get": {
-        "operationId": "LoadTests_ListOutboundNetworkDependenciesEndpoints",
         "tags": [
-          "LoadTests"
+          "LoadTest"
         ],
+        "operationId": "LoadTests_ListOutboundNetworkDependenciesEndpoints",
         "description": "Lists the endpoints that agents may call as part of load testing.",
+        "x-ms-examples": {
+          "ListOutboundNetworkDependencies": {
+            "$ref": "./examples/LoadTests_ListOutboundNetworkDependenciesEndpoints.json"
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "loadTestName",
-            "in": "path",
-            "description": "Load Test name",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/LoadTestNameParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The operation was successful. The response contains a list of outbound network dependency endpoints.",
             "schema": {
-              "$ref": "#/definitions/PagedOutboundEnvironmentEndpoint"
+              "$ref": "#/definitions/OutboundEnvironmentEndpointCollection"
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Lists the endpoints that agents may call as part of load testing.": {
-            "$ref": "./examples/LoadTests_ListOutboundNetworkDependenciesEndpoints.json"
           }
         },
         "x-ms-pageable": {
@@ -1090,62 +1041,131 @@
     }
   },
   "definitions": {
-    "CheckQuotaAvailabilityResponse": {
+    "LoadTestResourcePageList": {
+      "description": "List of resources page result.",
       "type": "object",
-      "description": "Check quota availability response object.",
       "properties": {
-        "id": {
-          "type": "string",
-          "description": "Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}",
-          "readOnly": true
+        "value": {
+          "description": "List of resources in current page.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LoadTestResource"
+          }
         },
-        "type": {
-          "type": "string",
-          "description": "The type of the resource. E.g. \"Microsoft.Compute/virtualMachines\" or \"Microsoft.Storage/storageAccounts\"",
-          "readOnly": true
-        },
-        "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData",
-          "description": "Azure Resource Manager metadata containing createdBy and modifiedBy information.",
-          "readOnly": true
-        },
-        "name": {
-          "type": "string",
-          "description": "The name of the resource.",
-          "readOnly": true
-        },
+        "nextLink": {
+          "description": "Link to next page of resources.",
+          "type": "string"
+        }
+      }
+    },
+    "LoadTestResource": {
+      "type": "object",
+      "description": "LoadTest details",
+      "properties": {
         "properties": {
-          "$ref": "#/definitions/CheckQuotaAvailabilityResponseProperties",
-          "description": "Check quota availability response properties.",
+          "description": "Load Test resource properties",
+          "$ref": "#/definitions/LoadTestProperties",
           "x-ms-client-flatten": true
+        },
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The type of identity used for the resource."
         }
       },
-      "required": [
-        "id",
-        "type"
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
       ]
     },
-    "CheckQuotaAvailabilityResponseProperties": {
+    "LoadTestResourcePatchRequestBody": {
+      "description": "LoadTest resource patch request body.",
       "type": "object",
-      "description": "Check quota availability response properties.",
       "properties": {
-        "isAvailable": {
-          "type": "boolean",
-          "description": "True/False indicating whether the quota request be granted based on availability."
+        "tags": {
+          "description": "Resource tags.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-nullable": true
         },
-        "availabilityStatus": {
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The type of identity used for the resource."
+        },
+        "properties": {
+          "description": "Load Test resource properties",
+          "type": "object",
+          "x-ms-client-flatten": true,
+          "properties": {
+            "description": {
+              "description": "Description of the resource.",
+              "maxLength": 512,
+              "type": "string"
+            },
+            "encryption": {
+              "description": "CMK Encryption property.",
+              "type": "object",
+              "$ref": "#/definitions/EncryptionProperties"
+            }
+          }
+        }
+      }
+    },
+    "LoadTestProperties": {
+      "description": "LoadTest resource properties.",
+      "type": "object",
+      "properties": {
+        "description": {
+          "description": "Description of the resource.",
+          "maxLength": 512,
+          "type": "string"
+        },
+        "provisioningState": {
+          "description": "Resource provisioning state.",
+          "$ref": "#/definitions/ResourceState",
+          "readOnly": true
+        },
+        "dataPlaneURI": {
+          "description": "Resource data plane URI.",
+          "maxLength": 2083,
           "type": "string",
-          "description": "Message indicating additional details to add to quota support request."
+          "readOnly": true
+        },
+        "encryption": {
+          "description": "CMK Encryption property.",
+          "type": "object",
+          "$ref": "#/definitions/EncryptionProperties"
         }
       }
     },
     "EncryptionProperties": {
+      "description": "Key and identity details for Customer Managed Key encryption of load test resource",
       "type": "object",
-      "description": "Key and identity details for Customer Managed Key encryption of load test resource.",
       "properties": {
         "identity": {
-          "$ref": "#/definitions/EncryptionPropertiesIdentity",
-          "description": "All identity configuration for Customer-managed key settings defining which identity should be used to auth to Key Vault."
+          "type": "object",
+          "description": "All identity configuration for Customer-managed key settings defining which identity should be used to auth to Key Vault.",
+          "properties": {
+            "type": {
+              "type": "string",
+              "enum": [
+                "SystemAssigned",
+                "UserAssigned"
+              ],
+              "x-ms-enum": {
+                "name": "type",
+                "modelAsString": true
+              },
+              "description": "Managed identity type to use for accessing encryption key Url"
+            },
+            "resourceId": {
+              "type": "string",
+              "description": "user assigned identity to use for accessing key encryption key Url. Ex: /subscriptions/fa5fc227-a624-475e-b696-cdd604c735bc/resourceGroups/<resource group>/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myId",
+              "x-nullable": true
+            }
+          }
         },
         "keyUrl": {
           "type": "string",
@@ -1153,443 +1173,39 @@
         }
       }
     },
-    "EncryptionPropertiesIdentity": {
-      "type": "object",
-      "description": "All identity configuration for Customer-managed key settings defining which identity should be used to auth to Key Vault.",
-      "properties": {
-        "type": {
-          "$ref": "#/definitions/type",
-          "description": "Managed identity type to use for accessing encryption key Url."
-        },
-        "resourceId": {
-          "type": "string",
-          "description": "User assigned identity to use for accessing key encryption key Url. Ex: /subscriptions/fa5fc227-a624-475e-b696-cdd604c735bc/resourceGroups/<resource group>/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myId.",
-          "x-nullable": true
-        }
+    "ResourceState": {
+      "description": "Resources provisioning states.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Deleted"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "ResourceState",
+        "modelAsString": true
       }
     },
-    "EndpointDependency": {
+    "QuotaResourceList": {
+      "description": "List of quota bucket objects. It contains a URL link to get the next set of results.",
       "type": "object",
-      "description": "A domain name and connection details used to access a dependency.",
       "properties": {
-        "domainName": {
-          "type": "string",
-          "description": "The domain name of the dependency. Domain names may be fully qualified or may contain a * wildcard.",
-          "readOnly": true
-        },
-        "description": {
-          "type": "string",
-          "description": "Human-readable supplemental information about the dependency and when it is applicable.",
-          "readOnly": true
-        },
-        "endpointDetails": {
+        "value": {
           "type": "array",
-          "description": "The list of connection details for this endpoint.",
           "items": {
-            "$ref": "#/definitions/EndpointDetail"
+            "$ref": "#/definitions/QuotaResource"
           },
-          "readOnly": true,
           "x-ms-identifiers": [
-            "port"
-          ]
-        }
-      },
-      "required": [
-        "domainName"
-      ]
-    },
-    "EndpointDetail": {
-      "type": "object",
-      "description": "Details about the connection between the Batch service and the endpoint.",
-      "properties": {
-        "port": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The port an endpoint is connected to.",
+            "name"
+          ],
+          "description": "List of quota bucket objects provided by the loadtestservice.",
           "readOnly": true
-        }
-      }
-    },
-    "LoadTestMappingProperties": {
-      "type": "object",
-      "description": "Azure LoadTest mapping resource properties.",
-      "properties": {
-        "sourceResourceId": {
-          "type": "string",
-          "description": "Mapped source resource Id.",
-          "maxLength": 1024
-        },
-        "azureLoadTestingResourceId": {
-          "type": "string",
-          "description": "Mapped Azure Load Test resource Id.",
-          "maxLength": 1024
-        },
-        "testId": {
-          "type": "string",
-          "description": "Mapped Azure Load Test resource test-id.",
-          "maxLength": 256
-        }
-      }
-    },
-    "LoadTestMappingResource": {
-      "type": "object",
-      "description": "LoadTest mapping resource details",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/LoadTestMappingProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
-        }
-      ]
-    },
-    "LoadTestMappingResourceListResult": {
-      "type": "object",
-      "description": "The response of a LoadTestMappingResource list operation.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The LoadTestMappingResource items on this page",
-          "items": {
-            "$ref": "#/definitions/LoadTestMappingResource"
-          }
         },
         "nextLink": {
           "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
-    "LoadTestMappingResourceUpdate": {
-      "type": "object",
-      "description": "The type used for update operations of the LoadTestMappingResource.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/LoadTestMappingResourceUpdateProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
-        }
-      }
-    },
-    "LoadTestMappingResourceUpdateProperties": {
-      "type": "object",
-      "description": "The updatable properties of the LoadTestMappingResource.",
-      "properties": {
-        "sourceResourceId": {
-          "type": "string",
-          "description": "Mapped source resource Id.",
-          "maxLength": 1024
-        },
-        "azureLoadTestingResourceId": {
-          "type": "string",
-          "description": "Mapped Azure Load Test resource Id.",
-          "maxLength": 1024
-        },
-        "testId": {
-          "type": "string",
-          "description": "Mapped Azure Load Test resource test-id.",
-          "maxLength": 256
-        }
-      }
-    },
-    "LoadTestProfileMappingProperties": {
-      "type": "object",
-      "description": "Azure LoadTest profile mapping resource properties.",
-      "properties": {
-        "sourceResourceId": {
-          "type": "string",
-          "description": "Mapped source resource Id.",
-          "maxLength": 1024
-        },
-        "azureLoadTestingResourceId": {
-          "type": "string",
-          "description": "Mapped Azure Load Test resource Id.",
-          "maxLength": 1024
-        },
-        "testProfileId": {
-          "type": "string",
-          "description": "Mapped Azure Load Test resource test-profile-id.",
-          "maxLength": 60
-        }
-      }
-    },
-    "LoadTestProfileMappingResource": {
-      "type": "object",
-      "description": "LoadTest profile mapping resource details",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/LoadTestProfileMappingProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
-        }
-      ]
-    },
-    "LoadTestProfileMappingResourceListResult": {
-      "type": "object",
-      "description": "The response of a LoadTestProfileMappingResource list operation.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The LoadTestProfileMappingResource items on this page",
-          "items": {
-            "$ref": "#/definitions/LoadTestProfileMappingResource"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
-    "LoadTestProfileMappingResourceUpdate": {
-      "type": "object",
-      "description": "The type used for update operations of the LoadTestProfileMappingResource.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/LoadTestProfileMappingResourceUpdateProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
-        }
-      }
-    },
-    "LoadTestProfileMappingResourceUpdateProperties": {
-      "type": "object",
-      "description": "The updatable properties of the LoadTestProfileMappingResource.",
-      "properties": {
-        "sourceResourceId": {
-          "type": "string",
-          "description": "Mapped source resource Id.",
-          "maxLength": 1024
-        },
-        "azureLoadTestingResourceId": {
-          "type": "string",
-          "description": "Mapped Azure Load Test resource Id.",
-          "maxLength": 1024
-        },
-        "testProfileId": {
-          "type": "string",
-          "description": "Mapped Azure Load Test resource test-profile-id.",
-          "maxLength": 60
-        }
-      }
-    },
-    "LoadTestProperties": {
-      "type": "object",
-      "description": "LoadTest resource properties.",
-      "properties": {
-        "description": {
-          "type": "string",
-          "description": "Description of the resource.",
-          "maxLength": 512
-        },
-        "provisioningState": {
-          "$ref": "#/definitions/ResourceState",
-          "description": "Resource provisioning state.",
+          "description": "URL to get the next set of quota bucket objects results (if there are any).",
           "readOnly": true
-        },
-        "dataPlaneURI": {
-          "type": "string",
-          "description": "Resource data plane URI.",
-          "maxLength": 2083,
-          "readOnly": true
-        },
-        "encryption": {
-          "$ref": "#/definitions/EncryptionProperties",
-          "description": "CMK Encryption property."
-        }
-      }
-    },
-    "LoadTestResource": {
-      "type": "object",
-      "description": "LoadTest details.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/LoadTestProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
-        },
-        "identity": {
-          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
-          "description": "The managed service identities assigned to this resource."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
-        }
-      ]
-    },
-    "LoadTestResourceListResult": {
-      "type": "object",
-      "description": "The response of a LoadTestResource list operation.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The LoadTestResource items on this page",
-          "items": {
-            "$ref": "#/definitions/LoadTestResource"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
-    "LoadTestResourceUpdate": {
-      "type": "object",
-      "description": "The type used for update operations of the LoadTestResource.",
-      "properties": {
-        "identity": {
-          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
-          "description": "The managed service identities assigned to this resource."
-        },
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "properties": {
-          "$ref": "#/definitions/LoadTestResourceUpdateProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
-        }
-      }
-    },
-    "LoadTestResourceUpdateProperties": {
-      "type": "object",
-      "description": "The updatable properties of the LoadTestResource.",
-      "properties": {
-        "description": {
-          "type": "string",
-          "description": "Description of the resource.",
-          "maxLength": 512
-        },
-        "encryption": {
-          "$ref": "#/definitions/EncryptionProperties",
-          "description": "CMK Encryption property."
-        }
-      }
-    },
-    "OutboundEnvironmentEndpoint": {
-      "type": "object",
-      "description": "A collection of related endpoints from the same service for which the Batch service requires outbound access.",
-      "properties": {
-        "category": {
-          "type": "string",
-          "description": "The type of service that Azure Load Testing connects to.",
-          "readOnly": true
-        },
-        "endpoints": {
-          "type": "array",
-          "description": "The endpoints for this service to which the Batch service makes outbound calls.",
-          "items": {
-            "$ref": "#/definitions/EndpointDependency"
-          },
-          "readOnly": true,
-          "x-ms-identifiers": [
-            "domainName"
-          ]
-        }
-      }
-    },
-    "PagedOutboundEnvironmentEndpoint": {
-      "type": "object",
-      "description": "Values returned by the List operation.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The OutboundEnvironmentEndpoint items on this page",
-          "items": {
-            "$ref": "#/definitions/OutboundEnvironmentEndpoint"
-          },
-          "x-ms-identifiers": []
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
-    "QuotaBucketRequest": {
-      "type": "object",
-      "description": "Request object of new quota for a quota bucket.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/QuotaBucketRequestProperties",
-          "description": "Request object of new quota for a quota bucket.",
-          "x-ms-client-flatten": true
-        }
-      }
-    },
-    "QuotaBucketRequestProperties": {
-      "type": "object",
-      "description": "New quota request request properties.",
-      "properties": {
-        "currentUsage": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Current quota usage of the quota bucket.",
-          "minimum": 0
-        },
-        "currentQuota": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Current quota limit of the quota bucket.",
-          "minimum": 0
-        },
-        "newQuota": {
-          "type": "integer",
-          "format": "int32",
-          "description": "New quota limit of the quota bucket.",
-          "minimum": 0
-        },
-        "dimensions": {
-          "$ref": "#/definitions/QuotaBucketRequestPropertiesDimensions",
-          "description": "Dimensions for new quota request."
-        }
-      }
-    },
-    "QuotaBucketRequestPropertiesDimensions": {
-      "type": "object",
-      "description": "Dimensions for new quota request.",
-      "properties": {
-        "subscriptionId": {
-          "type": "string",
-          "description": "Subscription Id dimension for new quota request of the quota bucket.",
-          "minLength": 1
-        },
-        "location": {
-          "type": "string",
-          "description": "Location dimension for new quota request of the quota bucket.",
-          "minLength": 1
         }
       }
     },
@@ -1598,132 +1214,418 @@
       "description": "Quota bucket details object.",
       "properties": {
         "properties": {
+          "description": "Quota bucket resource properties.",
           "$ref": "#/definitions/QuotaResourceProperties",
-          "description": "The resource-specific properties for this resource.",
           "x-ms-client-flatten": true
         }
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
         }
-      ]
-    },
-    "QuotaResourceListResult": {
-      "type": "object",
-      "description": "The response of a QuotaResource list operation.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The QuotaResource items on this page",
-          "items": {
-            "$ref": "#/definitions/QuotaResource"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
       ]
     },
     "QuotaResourceProperties": {
-      "type": "object",
       "description": "Quota bucket resource properties.",
+      "type": "object",
       "properties": {
         "limit": {
-          "type": "integer",
-          "format": "int32",
           "description": "Current quota limit of the quota bucket.",
-          "minimum": 0
+          "type": "integer",
+          "minimum": 0,
+          "format": "int32"
         },
         "usage": {
-          "type": "integer",
-          "format": "int32",
           "description": "Current quota usage of the quota bucket.",
-          "minimum": 0
+          "type": "integer",
+          "minimum": 0,
+          "format": "int32"
         },
         "provisioningState": {
-          "$ref": "#/definitions/ResourceState",
           "description": "Resource provisioning state.",
+          "$ref": "#/definitions/ResourceState",
           "readOnly": true
         }
       }
     },
-    "ResourceState": {
-      "type": "string",
-      "description": "Resources provisioning states.",
-      "enum": [
-        "Succeeded",
-        "Failed",
-        "Canceled",
-        "Deleted"
-      ],
-      "x-ms-enum": {
-        "name": "ResourceState",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Succeeded",
-            "value": "Succeeded",
-            "description": "Resource has been created."
-          },
-          {
-            "name": "Failed",
-            "value": "Failed",
-            "description": "Resource creation failed."
-          },
-          {
-            "name": "Canceled",
-            "value": "Canceled",
-            "description": "Resource creation was canceled."
-          },
-          {
-            "name": "Deleted",
-            "value": "Deleted",
-            "description": "Deleted state."
-          }
-        ]
+    "CheckQuotaAvailabilityResponse": {
+      "description": "Check quota availability response object.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "description": "Check quota availability response properties.",
+          "$ref": "#/definitions/CheckQuotaAvailabilityResponseProperties",
+          "x-ms-client-flatten": true
+        }
       },
-      "readOnly": true
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
+        }
+      ]
     },
-    "type": {
-      "type": "string",
-      "description": "Managed identity type to use for accessing encryption key Url.",
-      "enum": [
-        "SystemAssigned",
-        "UserAssigned"
-      ],
-      "x-ms-enum": {
-        "name": "type",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "SystemAssigned",
-            "value": "SystemAssigned",
-            "description": "System assigned identity."
-          },
-          {
-            "name": "UserAssigned",
-            "value": "UserAssigned",
-            "description": "User assigned identity."
-          }
-        ]
+    "CheckQuotaAvailabilityResponseProperties": {
+      "description": "Check quota availability response properties.",
+      "type": "object",
+      "properties": {
+        "isAvailable": {
+          "description": "True/False indicating whether the quota request be granted based on availability.",
+          "type": "boolean"
+        },
+        "availabilityStatus": {
+          "description": "Message indicating additional details to add to quota support request.",
+          "type": "string"
+        }
       }
+    },
+    "QuotaBucketRequest": {
+      "description": "Request object of new quota for a quota bucket.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "description": "New quota request request properties.",
+          "$ref": "#/definitions/QuotaBucketRequestProperties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
+        }
+      ]
+    },
+    "QuotaBucketRequestProperties": {
+      "description": "New quota request request properties.",
+      "type": "object",
+      "properties": {
+        "currentUsage": {
+          "description": "Current quota usage of the quota bucket.",
+          "type": "integer",
+          "minimum": 0,
+          "format": "int32"
+        },
+        "currentQuota": {
+          "description": "Current quota limit of the quota bucket.",
+          "type": "integer",
+          "minimum": 0,
+          "format": "int32"
+        },
+        "newQuota": {
+          "description": "New quota limit of the quota bucket.",
+          "type": "integer",
+          "minimum": 0,
+          "format": "int32"
+        },
+        "dimensions": {
+          "description": "Dimensions for new quota request.",
+          "type": "object",
+          "properties": {
+            "subscriptionId": {
+              "description": "Subscription Id dimension for new quota request of the quota bucket.",
+              "type": "string",
+              "minLength": 1
+            },
+            "location": {
+              "description": "Location dimension for new quota request of the quota bucket.",
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        }
+      }
+    },
+    "LoadTestMappingResourcePageList": {
+      "description": "List of resources page result.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "List of resources in current page.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LoadTestMappingResource"
+          }
+        },
+        "nextLink": {
+          "description": "Link to next page of resources.",
+          "type": "string"
+        }
+      }
+    },
+    "LoadTestMappingResource": {
+      "type": "object",
+      "description": "LoadTest mapping resource details",
+      "properties": {
+        "properties": {
+          "description": "Load Test mapping resource properties",
+          "$ref": "#/definitions/LoadTestMappingProperties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "LoadTestMappingProperties": {
+      "description": "Azure LoadTest mapping resource properties.",
+      "type": "object",
+      "properties": {
+        "sourceResourceId": {
+          "description": "Mapped source resource Id.",
+          "type": "string",
+          "maxLength": 1024
+        },
+        "azureLoadTestingResourceId": {
+          "description": "Mapped Azure Load Test resource Id.",
+          "type": "string",
+          "maxLength": 1024
+        },
+        "testId": {
+          "description": "Mapped Azure Load Test resource test-id.",
+          "type": "string",
+          "maxLength": 256
+        }
+      }
+    },
+    "LoadTestMappingResourcePatchRequestBody": {
+      "description": "LoadTest mapping resource patch request body.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "description": "LoadTest mapping resource properties",
+          "type": "object",
+          "x-ms-client-flatten": true,
+          "properties": {
+            "sourceResourceId": {
+              "description": "Mapped source resource Id.",
+              "type": "string",
+              "maxLength": 1024
+            },
+            "azureLoadTestingResourceId": {
+              "description": "Mapped Azure Load Test resource Id.",
+              "type": "string",
+              "maxLength": 1024
+            },
+            "testId": {
+              "description": "Mapped Azure Load Test resource test Id.",
+              "type": "string",
+              "maxLength": 256
+            }
+          }
+        }
+      }
+    },
+    "LoadTestProfileMappingResourcePageList": {
+      "description": "List of LoadTest profile mappings page result.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "List of LoadTest profile mappings in current page.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LoadTestProfileMappingResource"
+          }
+        },
+        "nextLink": {
+          "description": "Link to next page of LoadTest profile mappings.",
+          "type": "string"
+        }
+      }
+    },
+    "LoadTestProfileMappingResource": {
+      "type": "object",
+      "description": "LoadTest profile mapping resource details",
+      "properties": {
+        "properties": {
+          "description": "Load Test profile mapping resource properties",
+          "$ref": "#/definitions/LoadTestProfileMappingProperties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "LoadTestProfileMappingProperties": {
+      "description": "Azure LoadTest profile mapping resource properties.",
+      "type": "object",
+      "properties": {
+        "sourceResourceId": {
+          "description": "Mapped source resource Id.",
+          "type": "string",
+          "maxLength": 1024,
+          "readOnly": true
+        },
+        "azureLoadTestingResourceId": {
+          "description": "Mapped Azure Load Test resource Id.",
+          "type": "string",
+          "maxLength": 1024
+        },
+        "testProfileId": {
+          "description": "Mapped Azure Load Test resource test-profile-id.",
+          "type": "string",
+          "maxLength": 60
+        }
+      }
+    },
+    "LoadTestProfileMappingResourcePatchRequestBody": {
+      "description": "LoadTest profile mapping resource patch request body.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "description": "LoadTest profile mapping resource properties",
+          "type": "object",
+          "x-ms-client-flatten": true,
+          "properties": {
+            "sourceResourceId": {
+              "description": "Mapped source resource Id.",
+              "type": "string",
+              "maxLength": 1024,
+              "readOnly": true
+            },
+            "azureLoadTestingResourceId": {
+              "description": "Mapped Azure Load Test resource Id.",
+              "type": "string",
+              "maxLength": 1024
+            },
+            "testProfileId": {
+              "description": "Mapped Azure Load Test resource test-profile Id.",
+              "type": "string",
+              "maxLength": 60
+            }
+          }
+        }
+      }
+    },
+    "OutboundEnvironmentEndpointCollection": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/OutboundEnvironmentEndpoint"
+          },
+          "x-ms-identifiers": [],
+          "description": "The collection of outbound network dependency endpoints returned by the listing operation."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The continuation token."
+        }
+      },
+      "description": "Values returned by the List operation."
+    },
+    "OutboundEnvironmentEndpoint": {
+      "type": "object",
+      "properties": {
+        "category": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The type of service that Azure Load Testing connects to."
+        },
+        "endpoints": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/EndpointDependency"
+          },
+          "x-ms-identifiers": [
+            "domainName"
+          ],
+          "description": "The endpoints for this service to which the Batch service makes outbound calls."
+        }
+      },
+      "description": "A collection of related endpoints from the same service for which the Batch service requires outbound access."
+    },
+    "EndpointDependency": {
+      "type": "object",
+      "properties": {
+        "domainName": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The domain name of the dependency. Domain names may be fully qualified or may contain a * wildcard."
+        },
+        "description": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Human-readable supplemental information about the dependency and when it is applicable."
+        },
+        "endpointDetails": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/EndpointDetail"
+          },
+          "x-ms-identifiers": [
+            "port"
+          ],
+          "description": "The list of connection details for this endpoint."
+        }
+      },
+      "description": "A domain name and connection details used to access a dependency."
+    },
+    "EndpointDetail": {
+      "type": "object",
+      "properties": {
+        "port": {
+          "type": "integer",
+          "format": "int32",
+          "readOnly": true,
+          "description": "The port an endpoint is connected to."
+        }
+      },
+      "description": "Details about the connection between the Batch service and the endpoint."
     }
   },
   "parameters": {
-    "Azure.ResourceManager.ResourceUriParameter": {
-      "name": "resourceUri",
+    "LoadTestNameParameter": {
       "in": "path",
-      "description": "The fully qualified Azure Resource manager identifier of the resource.",
+      "name": "loadTestName",
+      "description": "Load Test name.",
+      "required": true,
+      "x-ms-parameter-location": "method",
+      "type": "string"
+    },
+    "LoadTestMappingNameParameter": {
+      "in": "path",
+      "name": "loadTestMappingName",
+      "description": "Load Test mapping name.",
+      "required": true,
+      "x-ms-parameter-location": "method",
+      "pattern": "^[A-Za-z0-9]+(-[A-Za-z0-9]+)*$",
+      "type": "string"
+    },
+    "LoadTestProfileMappingNameParameter": {
+      "in": "path",
+      "name": "loadTestProfileMappingName",
+      "description": "Load Test profile mapping name.",
+      "required": true,
+      "x-ms-parameter-location": "method",
+      "pattern": "^[A-Za-z0-9]+(-[A-Za-z0-9]+)*$",
+      "type": "string"
+    },
+    "ScopeParameter": {
+      "name": "scope",
+      "in": "path",
       "required": true,
       "type": "string",
+      "description": "The scope at which the operation is performed.",
+      "minLength": 1,
+      "maxLength": 200,
       "x-ms-parameter-location": "method",
       "x-ms-skip-url-encoding": true
+    },
+    "QuotaBucketNameParameter": {
+      "in": "path",
+      "name": "quotaBucketName",
+      "description": "Quota Bucket name.",
+      "required": true,
+      "x-ms-parameter-location": "method",
+      "type": "string"
     }
   }
 }

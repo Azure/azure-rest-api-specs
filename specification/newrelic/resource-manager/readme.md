@@ -27,7 +27,7 @@ These are the global settings for the newrelic.
 ```yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2024-10-01
+tag: package-2022-07-01-preview
 ```
 
 ### Tag: package-2022-07-01-preview
@@ -37,69 +37,6 @@ These settings apply only when `--tag=package-2022-07-01-preview` is specified o
 ```yaml $(tag) == 'package-2022-07-01-preview'
 input-file:
   - NewRelic.Observability/preview/2022-07-01-preview/NewRelic.json
-```
-
-### Tag: package-2022-07-01
-
-These settings apply only when `--tag=package-2022-07-01` is specified on the command line.
-
-```yaml $(tag) == 'package-2022-07-01'
-input-file:
-  - NewRelic.Observability/stable/2022-07-01/NewRelic.json
-```
-
-### Tag: package-2023-10-01-preview
-
-These settings apply only when `--tag=package-2023-10-01-preview` is specified on the command line.
-
-```yaml $(tag) == 'package-2023-10-01-preview'
-input-file:
-  - NewRelic.Observability/preview/2023-10-01-preview/NewRelic.json
-```
-
-### Tag: package-2023-11-01-preview
-
-These settings apply only when `--tag=package-2023-11-01-preview` is specified on the command line.
-
-```yaml $(tag) == 'package-2023-11-01-preview'
-input-file:
-  - NewRelic.Observability/preview/2023-11-01-preview/NewRelic.json
-```
-
-### Tag: package-2024-01-01-preview
-
-These settings apply only when `--tag=package-2024-01-01-preview` is specified on the command line.
-
-```yaml $(tag) == 'package-2024-01-01-preview'
-input-file:
-  - NewRelic.Observability/preview/2024-01-01-preview/NewRelic.json
-```
-
-### Tag: package-2024-01-01
-
-These settings apply only when `--tag=package-2024-01-01` is specified on the command line.
-
-```yaml $(tag) == 'package-2024-01-01'
-input-file:
-  - NewRelic.Observability/stable/2024-01-01/NewRelic.json
-```
-
-### Tag: package-2024-03-01
-
-These settings apply only when `--tag=package-2024-03-01` is specified on the command line.
-
-```yaml $(tag) == 'package-2024-03-01'
-input-file:
-  - NewRelic.Observability/stable/2024-03-01/NewRelic.json
-```
-
-### Tag: package-2024-10-01
-
-These settings apply only when `--tag=package-2024-10-01` is specified on the command line.
-
-```yaml $(tag) == 'package-2024-10-01'
-input-file:
-  - NewRelic.Observability/stable/2024-10-01/NewRelic.json
 ```
 
 ---

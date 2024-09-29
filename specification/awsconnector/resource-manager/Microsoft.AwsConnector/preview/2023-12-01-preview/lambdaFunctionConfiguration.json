@@ -1,0 +1,1706 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft.AwsConnector",
+    "version": "2023-12-01-preview",
+    "description": "Microsoft.AwsConnector Resource Provider management API.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "LambdaFunctionConfigurations"
+    }
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AwsConnector/lambdaFunctionConfigurations": {
+      "get": {
+        "operationId": "LambdaFunctionConfigurations_ListBySubscription",
+        "tags": [
+          "LambdaFunctionConfigurations"
+        ],
+        "description": "List LambdaFunctionConfiguration resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/LambdaFunctionConfigurationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "LambdaFunctionConfigurations_ListBySubscription": {
+            "$ref": "./examples/LambdaFunctionConfigurations_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AwsConnector/lambdaFunctionConfigurations": {
+      "get": {
+        "operationId": "LambdaFunctionConfigurations_ListByResourceGroup",
+        "tags": [
+          "LambdaFunctionConfigurations"
+        ],
+        "description": "List LambdaFunctionConfiguration resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/LambdaFunctionConfigurationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "LambdaFunctionConfigurations_ListByResourceGroup": {
+            "$ref": "./examples/LambdaFunctionConfigurations_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AwsConnector/lambdaFunctionConfigurations/{name}": {
+      "get": {
+        "operationId": "LambdaFunctionConfigurations_Get",
+        "tags": [
+          "LambdaFunctionConfigurations"
+        ],
+        "description": "Get a LambdaFunctionConfiguration",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of LambdaFunctionConfiguration",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/LambdaFunctionConfiguration"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "LambdaFunctionConfigurations_Get": {
+            "$ref": "./examples/LambdaFunctionConfigurations_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "LambdaFunctionConfigurations_CreateOrUpdate",
+        "tags": [
+          "LambdaFunctionConfigurations"
+        ],
+        "description": "Create a LambdaFunctionConfiguration. Please note that end user resource creation is currently restricted, but it will be enabled in the future.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of LambdaFunctionConfiguration",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LambdaFunctionConfiguration"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'LambdaFunctionConfiguration' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/LambdaFunctionConfiguration"
+            }
+          },
+          "201": {
+            "description": "Resource 'LambdaFunctionConfiguration' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/LambdaFunctionConfiguration"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "LambdaFunctionConfigurations_CreateOrUpdate": {
+            "$ref": "./examples/LambdaFunctionConfigurations_CreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "LambdaFunctionConfigurations_Update",
+        "tags": [
+          "LambdaFunctionConfigurations"
+        ],
+        "description": "Update a LambdaFunctionConfiguration",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of LambdaFunctionConfiguration",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LambdaFunctionConfigurationTagsUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/LambdaFunctionConfiguration"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "LambdaFunctionConfigurations_Update": {
+            "$ref": "./examples/LambdaFunctionConfigurations_Update.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "LambdaFunctionConfigurations_Delete",
+        "tags": [
+          "LambdaFunctionConfigurations"
+        ],
+        "description": "Delete a LambdaFunctionConfiguration",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of LambdaFunctionConfiguration",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource deleted successfully."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "LambdaFunctionConfigurations_Delete": {
+            "$ref": "./examples/LambdaFunctionConfigurations_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "Architecture": {
+      "type": "string",
+      "description": "Architecture enum",
+      "enum": [
+        "arm64",
+        "x86_64"
+      ],
+      "x-ms-enum": {
+        "name": "Architecture",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Arm64",
+            "value": "arm64",
+            "description": "Architecture enum arm64"
+          },
+          {
+            "name": "X86_64",
+            "value": "x86_64",
+            "description": "Architecture enum x86_64"
+          }
+        ]
+      }
+    },
+    "ArchitectureEnumValue": {
+      "type": "object",
+      "description": "Definition of ArchitectureEnumValue",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/Architecture",
+          "description": "Gets and sets the property value. "
+        }
+      }
+    },
+    "AwsCommonProperties": {
+      "type": "object",
+      "description": "Definition of AwsCommon",
+      "properties": {
+        "publicCloudConnectorsResourceId": {
+          "type": "string",
+          "description": "Gets and sets the property publicCloudConnectorsResourceId. "
+        },
+        "awsAccountId": {
+          "type": "string",
+          "description": "Gets and sets the property awsAccountId. "
+        },
+        "awsResourceName": {
+          "type": "string",
+          "description": "Gets and sets the property awsResourceName. "
+        },
+        "awsSdkVersion": {
+          "type": "string",
+          "description": "Gets and sets the property awsSdkVersion. "
+        },
+        "awsRegion": {
+          "type": "string",
+          "description": "Gets and sets the property awsRegion. "
+        },
+        "awsTags": {
+          "type": "object",
+          "description": "Gets and sets the property awsTags. ",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Gets and sets the property provisioningState. The status of the last operation.",
+          "readOnly": true
+        }
+      }
+    },
+    "AwsLambdaFunctionConfigurationProperties": {
+      "type": "object",
+      "description": "Definition of awsLambdaFunctionConfiguration",
+      "properties": {
+        "architectures": {
+          "type": "array",
+          "description": "Gets and sets the property architectures. <p>The instruction set architecture that the function supports. Architecture is a string array with one of the valid values. The default architecture value is <code>x86_64</code>.</p>",
+          "items": {
+            "$ref": "#/definitions/Architecture"
+          },
+          "x-ms-identifiers": []
+        },
+        "codeSha256": {
+          "type": "string",
+          "description": "Gets and sets the property codeSha256. <p>The SHA256 hash of the function's deployment package.</p>"
+        },
+        "codeSize": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Gets and sets the property codeSize. <p>The size of the function's deployment package, in bytes.</p>"
+        },
+        "deadLetterConfig": {
+          "$ref": "#/definitions/DeadLetterConfig",
+          "description": "Gets and sets the property deadLetterConfig. <p>The function's dead letter queue.</p>"
+        },
+        "description": {
+          "type": "string",
+          "description": "Gets and sets the property description. <p>The function's description.</p>"
+        },
+        "environment": {
+          "$ref": "#/definitions/EnvironmentResponse",
+          "description": "Gets and sets the property environment. <p>The function's <a href='https://docs.aws.amazon.com/lambda/latest/dg/configuration-envvars.html'>environment variables</a>. Omitted from CloudTrail logs.</p>"
+        },
+        "ephemeralStorage": {
+          "$ref": "#/definitions/EphemeralStorage",
+          "description": "Gets and sets the property ephemeralStorage. <p>The size of the function’s <code>/tmp</code> directory in MB. The default value is 512, but it can be any whole number between 512 and 10,240 MB.</p>"
+        },
+        "fileSystemConfigs": {
+          "type": "array",
+          "description": "Gets and sets the property fileSystemConfigs. <p>Connection settings for an <a href='https://docs.aws.amazon.com/lambda/latest/dg/configuration-filesystem.html'>Amazon EFS file system</a>.</p>",
+          "items": {
+            "$ref": "#/definitions/FileSystemConfig"
+          },
+          "x-ms-identifiers": []
+        },
+        "functionArn": {
+          "type": "string",
+          "description": "Gets and sets the property functionArn. <p>The function's Amazon Resource Name (ARN).</p>"
+        },
+        "functionName": {
+          "type": "string",
+          "description": "Gets and sets the property functionName. <p>The name of the function.</p>"
+        },
+        "handler": {
+          "type": "string",
+          "description": "Gets and sets the property handler. <p>The function that Lambda calls to begin running your function.</p>"
+        },
+        "imageConfigResponse": {
+          "$ref": "#/definitions/ImageConfigResponse",
+          "description": "Gets and sets the property imageConfigResponse. <p>The function's image configuration values.</p>"
+        },
+        "kMSKeyArn": {
+          "type": "string",
+          "description": "Gets and sets the property kMSKeyArn. <p>The KMS key that's used to encrypt the function's <a href='https://docs.aws.amazon.com/lambda/latest/dg/configuration-envvars.html#configuration-envvars-encryption'>environment variables</a>. When <a href='https://docs.aws.amazon.com/lambda/latest/dg/snapstart-security.html'>Lambda SnapStart</a> is activated, this key is also used to encrypt the function's snapshot. This key is returned only if you've configured a customer managed key.</p>"
+        },
+        "lastModified": {
+          "type": "string",
+          "description": "Gets and sets the property lastModified. <p>The date and time that the function was last updated, in <a href='https://www.w3.org/TR/NOTE-datetime'>ISO-8601 format</a> (YYYY-MM-DDThh:mm:ss.sTZD).</p>"
+        },
+        "lastUpdateStatus": {
+          "$ref": "#/definitions/LastUpdateStatusEnumValue",
+          "description": "Gets and sets the property lastUpdateStatus. <p>The status of the last update that was performed on the function. This is first set to <code>Successful</code> after function creation completes.</p>"
+        },
+        "lastUpdateStatusReason": {
+          "type": "string",
+          "description": "Gets and sets the property lastUpdateStatusReason. <p>The reason for the last update that was performed on the function.</p>"
+        },
+        "lastUpdateStatusReasonCode": {
+          "$ref": "#/definitions/LastUpdateStatusReasonCodeEnumValue",
+          "description": "Gets and sets the property lastUpdateStatusReasonCode. <p>The reason code for the last update that was performed on the function.</p>"
+        },
+        "layers": {
+          "type": "array",
+          "description": "Gets and sets the property layers. <p>The function's <a href='https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html'>layers</a>.</p>",
+          "items": {
+            "$ref": "#/definitions/Layer"
+          },
+          "x-ms-identifiers": []
+        },
+        "masterArn": {
+          "type": "string",
+          "description": "Gets and sets the property masterArn. <p>For Lambda@Edge functions, the ARN of the main function.</p>"
+        },
+        "memorySize": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets and sets the property memorySize. <p>The amount of memory available to the function at runtime.</p>"
+        },
+        "packageType": {
+          "$ref": "#/definitions/PackageTypeEnumValue",
+          "description": "Gets and sets the property packageType. <p>The type of deployment package. Set to <code>Image</code> for container image and set <code>Zip</code> for .zip file archive.</p>"
+        },
+        "revisionId": {
+          "type": "string",
+          "description": "Gets and sets the property revisionId. <p>The latest updated revision of the function or alias.</p>"
+        },
+        "role": {
+          "type": "string",
+          "description": "Gets and sets the property role. <p>The function's execution role.</p>"
+        },
+        "runtime": {
+          "$ref": "#/definitions/RuntimeEnumValue",
+          "description": "Gets and sets the property runtime. <p>The identifier of the function's <a href='https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html'>runtime</a>. Runtime is required if the deployment package is a .zip file archive.</p> <p>The following list includes deprecated runtimes. For more information, see <a href='https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html#runtime-support-policy'>Runtime deprecation policy</a>.</p>"
+        },
+        "runtimeVersionConfig": {
+          "$ref": "#/definitions/RuntimeVersionConfig",
+          "description": "Gets and sets the property runtimeVersionConfig. <p>The ARN of the runtime and any errors that occured.</p>"
+        },
+        "signingJobArn": {
+          "type": "string",
+          "description": "Gets and sets the property signingJobArn. <p>The ARN of the signing job.</p>"
+        },
+        "signingProfileVersionArn": {
+          "type": "string",
+          "description": "Gets and sets the property signingProfileVersionArn. <p>The ARN of the signing profile version.</p>"
+        },
+        "snapStart": {
+          "$ref": "#/definitions/SnapStartResponse",
+          "description": "Gets and sets the property snapStart. <p>Set <code>ApplyOn</code> to <code>PublishedVersions</code> to create a snapshot of the initialized execution environment when you publish a function version. For more information, see <a href='https://docs.aws.amazon.com/lambda/latest/dg/snapstart.html'>Improving startup performance with Lambda SnapStart</a>.</p>"
+        },
+        "state": {
+          "$ref": "#/definitions/StateEnumValue",
+          "description": "Gets and sets the property state. <p>The current state of the function. When the state is <code>Inactive</code>, you can reactivate the function by invoking it.</p>"
+        },
+        "stateReason": {
+          "type": "string",
+          "description": "Gets and sets the property stateReason. <p>The reason for the function's current state.</p>"
+        },
+        "stateReasonCode": {
+          "$ref": "#/definitions/StateReasonCodeEnumValue",
+          "description": "Gets and sets the property stateReasonCode. <p>The reason code for the function's current state. When the code is <code>Creating</code>, you can't invoke or modify the function.</p>"
+        },
+        "timeout": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets and sets the property timeout. <p>The amount of time in seconds that Lambda allows a function to run before stopping it.</p>"
+        },
+        "tracingConfig": {
+          "$ref": "#/definitions/TracingConfigResponse",
+          "description": "Gets and sets the property tracingConfig. <p>The function's X-Ray tracing configuration.</p>"
+        },
+        "version": {
+          "type": "string",
+          "description": "Gets and sets the property version. <p>The version of the Lambda function.</p>"
+        },
+        "vpcConfig": {
+          "$ref": "#/definitions/VpcConfigResponse",
+          "description": "Gets and sets the property vpcConfig. <p>The function's networking configuration.</p>"
+        }
+      }
+    },
+    "DeadLetterConfig": {
+      "type": "object",
+      "description": "Definition of DeadLetterConfig",
+      "properties": {
+        "targetArn": {
+          "type": "string",
+          "description": "Gets and sets the property targetArn. <p>The Amazon Resource Name (ARN) of an Amazon SQS queue or Amazon SNS topic.</p>"
+        }
+      }
+    },
+    "EnvironmentError": {
+      "type": "object",
+      "description": "Definition of EnvironmentError",
+      "properties": {
+        "errorCode": {
+          "type": "string",
+          "description": "Gets and sets the property errorCode. <p>The error code.</p>"
+        },
+        "message": {
+          "type": "string",
+          "description": "Gets and sets the property message. <p>The error message.</p>"
+        }
+      }
+    },
+    "EnvironmentResponse": {
+      "type": "object",
+      "description": "Definition of EnvironmentResponse",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/EnvironmentError",
+          "description": "Gets and sets the property error. <p>Error messages for environment variables that couldn't be applied.</p>"
+        },
+        "variables": {
+          "type": "object",
+          "description": "Gets and sets the property variables. <p>Environment variable key-value pairs. Omitted from CloudTrail logs.</p>",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "EphemeralStorage": {
+      "type": "object",
+      "description": "Definition of EphemeralStorage",
+      "properties": {
+        "size": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets and sets the property size. <p>The size of the function's <code>/tmp</code> directory.</p>"
+        }
+      }
+    },
+    "FileSystemConfig": {
+      "type": "object",
+      "description": "Definition of FileSystemConfig",
+      "properties": {
+        "arn": {
+          "type": "string",
+          "description": "Gets and sets the property arn. <p>The Amazon Resource Name (ARN) of the Amazon EFS access point that provides access to the file system.</p>"
+        },
+        "localMountPath": {
+          "type": "string",
+          "description": "Gets and sets the property localMountPath. <p>The path where the function can access the file system, starting with <code>/mnt/</code>.</p>"
+        }
+      }
+    },
+    "ImageConfig": {
+      "type": "object",
+      "description": "Definition of ImageConfig",
+      "properties": {
+        "command": {
+          "type": "array",
+          "description": "Gets and sets the property command. <p>Specifies parameters that you want to pass in with ENTRYPOINT.</p>",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-identifiers": []
+        },
+        "entryPoint": {
+          "type": "array",
+          "description": "Gets and sets the property entryPoint. <p>Specifies the entry point to their application, which is typically the location of the runtime executable.</p>",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-identifiers": []
+        },
+        "workingDirectory": {
+          "type": "string",
+          "description": "Gets and sets the property workingDirectory. <p>Specifies the working directory.</p>"
+        }
+      }
+    },
+    "ImageConfigError": {
+      "type": "object",
+      "description": "Definition of ImageConfigError",
+      "properties": {
+        "errorCode": {
+          "type": "string",
+          "description": "Gets and sets the property errorCode. <p>Error code.</p>"
+        },
+        "message": {
+          "type": "string",
+          "description": "Gets and sets the property message. <p>Error message.</p>"
+        }
+      }
+    },
+    "ImageConfigResponse": {
+      "type": "object",
+      "description": "Definition of ImageConfigResponse",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ImageConfigError",
+          "description": "Gets and sets the property error. <p>Error response to <code>GetFunctionConfiguration</code>.</p>"
+        },
+        "imageConfig": {
+          "$ref": "#/definitions/ImageConfig",
+          "description": "Gets and sets the property imageConfig. <p>Configuration values that override the container image Dockerfile.</p>"
+        }
+      }
+    },
+    "LambdaFunctionConfiguration": {
+      "type": "object",
+      "description": "A Microsoft.AwsConnector resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/LambdaFunctionConfigurationProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "LambdaFunctionConfigurationListResult": {
+      "type": "object",
+      "description": "The response of a LambdaFunctionConfiguration list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The LambdaFunctionConfiguration items on this page",
+          "items": {
+            "$ref": "#/definitions/LambdaFunctionConfiguration"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "LambdaFunctionConfigurationProperties": {
+      "type": "object",
+      "description": "Definition of LambdaFunctionConfiguration",
+      "properties": {
+        "awsProperties": {
+          "$ref": "#/definitions/AwsLambdaFunctionConfigurationProperties",
+          "description": "Gets and sets the property awsProperties. "
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/AwsCommonProperties"
+        }
+      ]
+    },
+    "LambdaFunctionConfigurationTagsUpdate": {
+      "type": "object",
+      "description": "The type used for updating tags in LambdaFunctionConfiguration resources.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "LastUpdateStatus": {
+      "type": "string",
+      "description": "LastUpdateStatus enum",
+      "enum": [
+        "Failed",
+        "InProgress",
+        "Successful"
+      ],
+      "x-ms-enum": {
+        "name": "LastUpdateStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "LastUpdateStatus enum Failed"
+          },
+          {
+            "name": "Inprogress",
+            "value": "InProgress",
+            "description": "LastUpdateStatus enum InProgress"
+          },
+          {
+            "name": "Successful",
+            "value": "Successful",
+            "description": "LastUpdateStatus enum Successful"
+          }
+        ]
+      }
+    },
+    "LastUpdateStatusEnumValue": {
+      "type": "object",
+      "description": "Definition of LastUpdateStatusEnumValue",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/LastUpdateStatus",
+          "description": "Gets and sets the property value. "
+        }
+      }
+    },
+    "LastUpdateStatusReasonCode": {
+      "type": "string",
+      "description": "LastUpdateStatusReasonCode enum",
+      "enum": [
+        "DisabledKMSKey",
+        "EFSIOError",
+        "EFSMountConnectivityError",
+        "EFSMountFailure",
+        "EFSMountTimeout",
+        "EniLimitExceeded",
+        "FunctionError",
+        "ImageAccessDenied",
+        "ImageDeleted",
+        "InsufficientRolePermissions",
+        "InternalError",
+        "InvalidConfiguration",
+        "InvalidImage",
+        "InvalidRuntime",
+        "InvalidSecurityGroup",
+        "InvalidStateKMSKey",
+        "InvalidSubnet",
+        "InvalidZipFileException",
+        "KMSKeyAccessDenied",
+        "KMSKeyNotFound",
+        "SubnetOutOfIPAddresses"
+      ],
+      "x-ms-enum": {
+        "name": "LastUpdateStatusReasonCode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Disabledkmskey",
+            "value": "DisabledKMSKey",
+            "description": "LastUpdateStatusReasonCode enum DisabledKMSKey"
+          },
+          {
+            "name": "Efsioerror",
+            "value": "EFSIOError",
+            "description": "LastUpdateStatusReasonCode enum EFSIOError"
+          },
+          {
+            "name": "Efsmountconnectivityerror",
+            "value": "EFSMountConnectivityError",
+            "description": "LastUpdateStatusReasonCode enum EFSMountConnectivityError"
+          },
+          {
+            "name": "Efsmountfailure",
+            "value": "EFSMountFailure",
+            "description": "LastUpdateStatusReasonCode enum EFSMountFailure"
+          },
+          {
+            "name": "Efsmounttimeout",
+            "value": "EFSMountTimeout",
+            "description": "LastUpdateStatusReasonCode enum EFSMountTimeout"
+          },
+          {
+            "name": "Enilimitexceeded",
+            "value": "EniLimitExceeded",
+            "description": "LastUpdateStatusReasonCode enum EniLimitExceeded"
+          },
+          {
+            "name": "Functionerror",
+            "value": "FunctionError",
+            "description": "LastUpdateStatusReasonCode enum FunctionError"
+          },
+          {
+            "name": "Imageaccessdenied",
+            "value": "ImageAccessDenied",
+            "description": "LastUpdateStatusReasonCode enum ImageAccessDenied"
+          },
+          {
+            "name": "Imagedeleted",
+            "value": "ImageDeleted",
+            "description": "LastUpdateStatusReasonCode enum ImageDeleted"
+          },
+          {
+            "name": "Insufficientrolepermissions",
+            "value": "InsufficientRolePermissions",
+            "description": "LastUpdateStatusReasonCode enum InsufficientRolePermissions"
+          },
+          {
+            "name": "Internalerror",
+            "value": "InternalError",
+            "description": "LastUpdateStatusReasonCode enum InternalError"
+          },
+          {
+            "name": "Invalidconfiguration",
+            "value": "InvalidConfiguration",
+            "description": "LastUpdateStatusReasonCode enum InvalidConfiguration"
+          },
+          {
+            "name": "Invalidimage",
+            "value": "InvalidImage",
+            "description": "LastUpdateStatusReasonCode enum InvalidImage"
+          },
+          {
+            "name": "Invalidruntime",
+            "value": "InvalidRuntime",
+            "description": "LastUpdateStatusReasonCode enum InvalidRuntime"
+          },
+          {
+            "name": "Invalidsecuritygroup",
+            "value": "InvalidSecurityGroup",
+            "description": "LastUpdateStatusReasonCode enum InvalidSecurityGroup"
+          },
+          {
+            "name": "Invalidstatekmskey",
+            "value": "InvalidStateKMSKey",
+            "description": "LastUpdateStatusReasonCode enum InvalidStateKMSKey"
+          },
+          {
+            "name": "Invalidsubnet",
+            "value": "InvalidSubnet",
+            "description": "LastUpdateStatusReasonCode enum InvalidSubnet"
+          },
+          {
+            "name": "Invalidzipfileexception",
+            "value": "InvalidZipFileException",
+            "description": "LastUpdateStatusReasonCode enum InvalidZipFileException"
+          },
+          {
+            "name": "Kmskeyaccessdenied",
+            "value": "KMSKeyAccessDenied",
+            "description": "LastUpdateStatusReasonCode enum KMSKeyAccessDenied"
+          },
+          {
+            "name": "Kmskeynotfound",
+            "value": "KMSKeyNotFound",
+            "description": "LastUpdateStatusReasonCode enum KMSKeyNotFound"
+          },
+          {
+            "name": "Subnetoutofipaddresses",
+            "value": "SubnetOutOfIPAddresses",
+            "description": "LastUpdateStatusReasonCode enum SubnetOutOfIPAddresses"
+          }
+        ]
+      }
+    },
+    "LastUpdateStatusReasonCodeEnumValue": {
+      "type": "object",
+      "description": "Definition of LastUpdateStatusReasonCodeEnumValue",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/LastUpdateStatusReasonCode",
+          "description": "Gets and sets the property value. "
+        }
+      }
+    },
+    "Layer": {
+      "type": "object",
+      "description": "Definition of Layer",
+      "properties": {
+        "arn": {
+          "type": "string",
+          "description": "Gets and sets the property arn. <p>The Amazon Resource Name (ARN) of the function layer.</p>"
+        },
+        "codeSize": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Gets and sets the property codeSize. <p>The size of the layer archive in bytes.</p>"
+        },
+        "signingJobArn": {
+          "type": "string",
+          "description": "Gets and sets the property signingJobArn. <p>The Amazon Resource Name (ARN) of a signing job.</p>"
+        },
+        "signingProfileVersionArn": {
+          "type": "string",
+          "description": "Gets and sets the property signingProfileVersionArn. <p>The Amazon Resource Name (ARN) for a signing profile version.</p>"
+        }
+      }
+    },
+    "PackageType": {
+      "type": "string",
+      "description": "PackageType enum",
+      "enum": [
+        "Image",
+        "Zip"
+      ],
+      "x-ms-enum": {
+        "name": "PackageType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Image",
+            "value": "Image",
+            "description": "PackageType enum Image"
+          },
+          {
+            "name": "Zip",
+            "value": "Zip",
+            "description": "PackageType enum Zip"
+          }
+        ]
+      }
+    },
+    "PackageTypeEnumValue": {
+      "type": "object",
+      "description": "Definition of PackageTypeEnumValue",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/PackageType",
+          "description": "Gets and sets the property value. "
+        }
+      }
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of a resource.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Provisioning",
+        "Updating",
+        "Deleting",
+        "Accepted"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Provisioning",
+            "value": "Provisioning",
+            "description": "The resource is being provisioned"
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "The resource is updating"
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "The resource is being deleted"
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "The resource create request has been accepted"
+          }
+        ]
+      }
+    },
+    "Runtime": {
+      "type": "string",
+      "description": "Runtime enum",
+      "enum": [
+        "dotnet6",
+        "dotnetcore1.0",
+        "dotnetcore2.0",
+        "dotnetcore2.1",
+        "dotnetcore3.1",
+        "go1.x",
+        "java11",
+        "java17",
+        "java8",
+        "java8.al2",
+        "nodejs",
+        "nodejs10.x",
+        "nodejs12.x",
+        "nodejs14.x",
+        "nodejs16.x",
+        "nodejs18.x",
+        "nodejs4.3",
+        "nodejs4.3-edge",
+        "nodejs6.10",
+        "nodejs8.10",
+        "provided",
+        "provided.al2",
+        "python2.7",
+        "python3.10",
+        "python3.6",
+        "python3.7",
+        "python3.8",
+        "python3.9",
+        "ruby2.5",
+        "ruby2.7",
+        "ruby3.2"
+      ],
+      "x-ms-enum": {
+        "name": "Runtime",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Dotnet6",
+            "value": "dotnet6",
+            "description": "Runtime enum dotnet6"
+          },
+          {
+            "name": "Dotnetcore10",
+            "value": "dotnetcore1.0",
+            "description": "Runtime enum dotnetcore1.0"
+          },
+          {
+            "name": "Dotnetcore20",
+            "value": "dotnetcore2.0",
+            "description": "Runtime enum dotnetcore2.0"
+          },
+          {
+            "name": "Dotnetcore21",
+            "value": "dotnetcore2.1",
+            "description": "Runtime enum dotnetcore2.1"
+          },
+          {
+            "name": "Dotnetcore31",
+            "value": "dotnetcore3.1",
+            "description": "Runtime enum dotnetcore3.1"
+          },
+          {
+            "name": "Go1x",
+            "value": "go1.x",
+            "description": "Runtime enum go1.x"
+          },
+          {
+            "name": "Java11",
+            "value": "java11",
+            "description": "Runtime enum java11"
+          },
+          {
+            "name": "Java17",
+            "value": "java17",
+            "description": "Runtime enum java17"
+          },
+          {
+            "name": "Java8",
+            "value": "java8",
+            "description": "Runtime enum java8"
+          },
+          {
+            "name": "Java8al2",
+            "value": "java8.al2",
+            "description": "Runtime enum java8.al2"
+          },
+          {
+            "name": "Nodejs",
+            "value": "nodejs",
+            "description": "Runtime enum nodejs"
+          },
+          {
+            "name": "Nodejs10x",
+            "value": "nodejs10.x",
+            "description": "Runtime enum nodejs10.x"
+          },
+          {
+            "name": "Nodejs12x",
+            "value": "nodejs12.x",
+            "description": "Runtime enum nodejs12.x"
+          },
+          {
+            "name": "Nodejs14x",
+            "value": "nodejs14.x",
+            "description": "Runtime enum nodejs14.x"
+          },
+          {
+            "name": "Nodejs16x",
+            "value": "nodejs16.x",
+            "description": "Runtime enum nodejs16.x"
+          },
+          {
+            "name": "Nodejs18x",
+            "value": "nodejs18.x",
+            "description": "Runtime enum nodejs18.x"
+          },
+          {
+            "name": "Nodejs43",
+            "value": "nodejs4.3",
+            "description": "Runtime enum nodejs4.3"
+          },
+          {
+            "name": "Nodejs43edge",
+            "value": "nodejs4.3-edge",
+            "description": "Runtime enum nodejs4.3-edge"
+          },
+          {
+            "name": "Nodejs610",
+            "value": "nodejs6.10",
+            "description": "Runtime enum nodejs6.10"
+          },
+          {
+            "name": "Nodejs810",
+            "value": "nodejs8.10",
+            "description": "Runtime enum nodejs8.10"
+          },
+          {
+            "name": "Provided",
+            "value": "provided",
+            "description": "Runtime enum provided"
+          },
+          {
+            "name": "Providedal2",
+            "value": "provided.al2",
+            "description": "Runtime enum provided.al2"
+          },
+          {
+            "name": "Python27",
+            "value": "python2.7",
+            "description": "Runtime enum python2.7"
+          },
+          {
+            "name": "Python310",
+            "value": "python3.10",
+            "description": "Runtime enum python3.10"
+          },
+          {
+            "name": "Python36",
+            "value": "python3.6",
+            "description": "Runtime enum python3.6"
+          },
+          {
+            "name": "Python37",
+            "value": "python3.7",
+            "description": "Runtime enum python3.7"
+          },
+          {
+            "name": "Python38",
+            "value": "python3.8",
+            "description": "Runtime enum python3.8"
+          },
+          {
+            "name": "Python39",
+            "value": "python3.9",
+            "description": "Runtime enum python3.9"
+          },
+          {
+            "name": "Ruby25",
+            "value": "ruby2.5",
+            "description": "Runtime enum ruby2.5"
+          },
+          {
+            "name": "Ruby27",
+            "value": "ruby2.7",
+            "description": "Runtime enum ruby2.7"
+          },
+          {
+            "name": "Ruby32",
+            "value": "ruby3.2",
+            "description": "Runtime enum ruby3.2"
+          }
+        ]
+      }
+    },
+    "RuntimeEnumValue": {
+      "type": "object",
+      "description": "Definition of RuntimeEnumValue",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/Runtime",
+          "description": "Gets and sets the property value. "
+        }
+      }
+    },
+    "RuntimeVersionConfig": {
+      "type": "object",
+      "description": "Definition of RuntimeVersionConfig",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/RuntimeVersionError",
+          "description": "Gets and sets the property error. <p>Error response when Lambda is unable to retrieve the runtime version for a function.</p>"
+        },
+        "runtimeVersionArn": {
+          "type": "string",
+          "description": "Gets and sets the property runtimeVersionArn. <p>The ARN of the runtime version you want the function to use.</p>"
+        }
+      }
+    },
+    "RuntimeVersionError": {
+      "type": "object",
+      "description": "Definition of RuntimeVersionError",
+      "properties": {
+        "errorCode": {
+          "type": "string",
+          "description": "Gets and sets the property errorCode. <p>The error code.</p>"
+        },
+        "message": {
+          "type": "string",
+          "description": "Gets and sets the property message. <p>The error message.</p>"
+        }
+      }
+    },
+    "SnapStartApplyOn": {
+      "type": "string",
+      "description": "SnapStartApplyOn enum",
+      "enum": [
+        "None",
+        "PublishedVersions"
+      ],
+      "x-ms-enum": {
+        "name": "SnapStartApplyOn",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "None",
+            "value": "None",
+            "description": "SnapStartApplyOn enum None"
+          },
+          {
+            "name": "Publishedversions",
+            "value": "PublishedVersions",
+            "description": "SnapStartApplyOn enum PublishedVersions"
+          }
+        ]
+      }
+    },
+    "SnapStartApplyOnEnumValue": {
+      "type": "object",
+      "description": "Definition of SnapStartApplyOnEnumValue",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/SnapStartApplyOn",
+          "description": "Gets and sets the property value. "
+        }
+      }
+    },
+    "SnapStartOptimizationStatus": {
+      "type": "string",
+      "description": "SnapStartOptimizationStatus enum",
+      "enum": [
+        "Off",
+        "On"
+      ],
+      "x-ms-enum": {
+        "name": "SnapStartOptimizationStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Off",
+            "value": "Off",
+            "description": "SnapStartOptimizationStatus enum Off"
+          },
+          {
+            "name": "On",
+            "value": "On",
+            "description": "SnapStartOptimizationStatus enum On"
+          }
+        ]
+      }
+    },
+    "SnapStartOptimizationStatusEnumValue": {
+      "type": "object",
+      "description": "Definition of SnapStartOptimizationStatusEnumValue",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/SnapStartOptimizationStatus",
+          "description": "Gets and sets the property value. "
+        }
+      }
+    },
+    "SnapStartResponse": {
+      "type": "object",
+      "description": "Definition of SnapStartResponse",
+      "properties": {
+        "applyOn": {
+          "$ref": "#/definitions/SnapStartApplyOnEnumValue",
+          "description": "Gets and sets the property applyOn. <p>When set to <code>PublishedVersions</code>, Lambda creates a snapshot of the execution environment when you publish a function version.</p>"
+        },
+        "optimizationStatus": {
+          "$ref": "#/definitions/SnapStartOptimizationStatusEnumValue",
+          "description": "Gets and sets the property optimizationStatus. <p>When you provide a <a href='https://docs.aws.amazon.com/lambda/latest/dg/configuration-versions.html#versioning-versions-using'>qualified Amazon Resource Name (ARN)</a>, this response element indicates whether SnapStart is activated for the specified function version.</p>"
+        }
+      }
+    },
+    "State": {
+      "type": "string",
+      "description": "State enum",
+      "enum": [
+        "Active",
+        "Failed",
+        "Inactive",
+        "Pending"
+      ],
+      "x-ms-enum": {
+        "name": "State",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Active",
+            "value": "Active",
+            "description": "State enum Active"
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "State enum Failed"
+          },
+          {
+            "name": "Inactive",
+            "value": "Inactive",
+            "description": "State enum Inactive"
+          },
+          {
+            "name": "Pending",
+            "value": "Pending",
+            "description": "State enum Pending"
+          }
+        ]
+      }
+    },
+    "StateEnumValue": {
+      "type": "object",
+      "description": "Definition of StateEnumValue",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/State",
+          "description": "Gets and sets the property value. "
+        }
+      }
+    },
+    "StateReasonCode": {
+      "type": "string",
+      "description": "StateReasonCode enum",
+      "enum": [
+        "Creating",
+        "DisabledKMSKey",
+        "EFSIOError",
+        "EFSMountConnectivityError",
+        "EFSMountFailure",
+        "EFSMountTimeout",
+        "EniLimitExceeded",
+        "FunctionError",
+        "Idle",
+        "ImageAccessDenied",
+        "ImageDeleted",
+        "InsufficientRolePermissions",
+        "InternalError",
+        "InvalidConfiguration",
+        "InvalidImage",
+        "InvalidRuntime",
+        "InvalidSecurityGroup",
+        "InvalidStateKMSKey",
+        "InvalidSubnet",
+        "InvalidZipFileException",
+        "KMSKeyAccessDenied",
+        "KMSKeyNotFound",
+        "Restoring",
+        "SubnetOutOfIPAddresses"
+      ],
+      "x-ms-enum": {
+        "name": "StateReasonCode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Creating",
+            "value": "Creating",
+            "description": "StateReasonCode enum Creating"
+          },
+          {
+            "name": "Disabledkmskey",
+            "value": "DisabledKMSKey",
+            "description": "StateReasonCode enum DisabledKMSKey"
+          },
+          {
+            "name": "Efsioerror",
+            "value": "EFSIOError",
+            "description": "StateReasonCode enum EFSIOError"
+          },
+          {
+            "name": "Efsmountconnectivityerror",
+            "value": "EFSMountConnectivityError",
+            "description": "StateReasonCode enum EFSMountConnectivityError"
+          },
+          {
+            "name": "Efsmountfailure",
+            "value": "EFSMountFailure",
+            "description": "StateReasonCode enum EFSMountFailure"
+          },
+          {
+            "name": "Efsmounttimeout",
+            "value": "EFSMountTimeout",
+            "description": "StateReasonCode enum EFSMountTimeout"
+          },
+          {
+            "name": "Enilimitexceeded",
+            "value": "EniLimitExceeded",
+            "description": "StateReasonCode enum EniLimitExceeded"
+          },
+          {
+            "name": "Functionerror",
+            "value": "FunctionError",
+            "description": "StateReasonCode enum FunctionError"
+          },
+          {
+            "name": "Idle",
+            "value": "Idle",
+            "description": "StateReasonCode enum Idle"
+          },
+          {
+            "name": "Imageaccessdenied",
+            "value": "ImageAccessDenied",
+            "description": "StateReasonCode enum ImageAccessDenied"
+          },
+          {
+            "name": "Imagedeleted",
+            "value": "ImageDeleted",
+            "description": "StateReasonCode enum ImageDeleted"
+          },
+          {
+            "name": "Insufficientrolepermissions",
+            "value": "InsufficientRolePermissions",
+            "description": "StateReasonCode enum InsufficientRolePermissions"
+          },
+          {
+            "name": "Internalerror",
+            "value": "InternalError",
+            "description": "StateReasonCode enum InternalError"
+          },
+          {
+            "name": "Invalidconfiguration",
+            "value": "InvalidConfiguration",
+            "description": "StateReasonCode enum InvalidConfiguration"
+          },
+          {
+            "name": "Invalidimage",
+            "value": "InvalidImage",
+            "description": "StateReasonCode enum InvalidImage"
+          },
+          {
+            "name": "Invalidruntime",
+            "value": "InvalidRuntime",
+            "description": "StateReasonCode enum InvalidRuntime"
+          },
+          {
+            "name": "Invalidsecuritygroup",
+            "value": "InvalidSecurityGroup",
+            "description": "StateReasonCode enum InvalidSecurityGroup"
+          },
+          {
+            "name": "Invalidstatekmskey",
+            "value": "InvalidStateKMSKey",
+            "description": "StateReasonCode enum InvalidStateKMSKey"
+          },
+          {
+            "name": "Invalidsubnet",
+            "value": "InvalidSubnet",
+            "description": "StateReasonCode enum InvalidSubnet"
+          },
+          {
+            "name": "Invalidzipfileexception",
+            "value": "InvalidZipFileException",
+            "description": "StateReasonCode enum InvalidZipFileException"
+          },
+          {
+            "name": "Kmskeyaccessdenied",
+            "value": "KMSKeyAccessDenied",
+            "description": "StateReasonCode enum KMSKeyAccessDenied"
+          },
+          {
+            "name": "Kmskeynotfound",
+            "value": "KMSKeyNotFound",
+            "description": "StateReasonCode enum KMSKeyNotFound"
+          },
+          {
+            "name": "Restoring",
+            "value": "Restoring",
+            "description": "StateReasonCode enum Restoring"
+          },
+          {
+            "name": "Subnetoutofipaddresses",
+            "value": "SubnetOutOfIPAddresses",
+            "description": "StateReasonCode enum SubnetOutOfIPAddresses"
+          }
+        ]
+      }
+    },
+    "StateReasonCodeEnumValue": {
+      "type": "object",
+      "description": "Definition of StateReasonCodeEnumValue",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/StateReasonCode",
+          "description": "Gets and sets the property value. "
+        }
+      }
+    },
+    "TracingConfigResponse": {
+      "type": "object",
+      "description": "Definition of TracingConfigResponse",
+      "properties": {
+        "mode": {
+          "$ref": "#/definitions/TracingModeEnumValue",
+          "description": "Gets and sets the property mode. <p>The tracing mode.</p>"
+        }
+      }
+    },
+    "TracingMode": {
+      "type": "string",
+      "description": "TracingMode enum",
+      "enum": [
+        "Active",
+        "PassThrough"
+      ],
+      "x-ms-enum": {
+        "name": "TracingMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Active",
+            "value": "Active",
+            "description": "TracingMode enum Active"
+          },
+          {
+            "name": "Passthrough",
+            "value": "PassThrough",
+            "description": "TracingMode enum PassThrough"
+          }
+        ]
+      }
+    },
+    "TracingModeEnumValue": {
+      "type": "object",
+      "description": "Definition of TracingModeEnumValue",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/TracingMode",
+          "description": "Gets and sets the property value. "
+        }
+      }
+    },
+    "VpcConfigResponse": {
+      "type": "object",
+      "description": "Definition of VpcConfigResponse",
+      "properties": {
+        "securityGroupIds": {
+          "type": "array",
+          "description": "Gets and sets the property securityGroupIds. <p>A list of VPC security group IDs.</p>",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-identifiers": []
+        },
+        "subnetIds": {
+          "type": "array",
+          "description": "Gets and sets the property subnetIds. <p>A list of VPC subnet IDs.</p>",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-identifiers": []
+        },
+        "vpcId": {
+          "type": "string",
+          "description": "Gets and sets the property vpcId. <p>The ID of the VPC.</p>"
+        }
+      }
+    }
+  },
+  "parameters": {}
+}

@@ -1,0 +1,33 @@
+{
+  "parameters": {
+    "resourceGroupName": "testRG",
+    "portalExtensionName": "storage",
+    "api-version": "2023-01-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "properties": {
+              "provisioningState": "InProgress",
+              "source": {
+                "kind": "BuildArtifactUri",
+                "value": "https://someuri/someBuildArtifact/1.2.3.4.zip?sas"
+              }
+            },
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRG/providers/Microsoft.PortalServices/extensions/storage/versions/sometextFeature",
+            "name": "sometextFeature",
+            "type": "Microsoft.PortalServices/extensions/versions",
+            "location": "eastus",
+            "tags": {
+              "aKey": "aValue",
+              "anotherKey": "anotherValue"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

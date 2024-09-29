@@ -1,0 +1,30 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "MyResourceGroup1",
+    "catalogName": "MyCatalog1",
+    "deviceId": "MyDeviceId1",
+    "api-version": "2021-02-01-preview",
+    "resource": {}
+  },
+  "responses": {
+    "200": {
+      "description": "The Azure Sphere device was claimed successfully.",
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/MyResourceGroup1/providers/Microsoft.AzureSphere/catalogs/MyCatalog1/devices/MyDeviceId1",
+        "name": "MyDeviceId1",
+        "properties": {
+          "chipSku": "MyChipSku1"
+        }
+      }
+    },
+    "201": {
+      "description": "The Azure Sphere device requested to be claimed successfully.",
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/MyResourceGroup1/providers/Microsoft.AzureSphere/catalogs/MyCatalog1/devices/MyDeviceId1",
+        "name": "MyDeviceId1",
+        "type": "Microsoft.AzureSphere/catalogs/devices"
+      }
+    }
+  }
+}

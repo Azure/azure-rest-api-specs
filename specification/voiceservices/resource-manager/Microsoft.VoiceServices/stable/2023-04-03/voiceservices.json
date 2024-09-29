@@ -3,9 +3,9 @@
   "info": {
     "title": "Microsoft.VoiceServices",
     "version": "2023-04-03",
-    "x-cadl-generated": [
+    "x-typespec-generated": [
       {
-        "emitter": "@azure-tools/cadl-autorest"
+        "emitter": "@azure-tools/typespec-autorest"
       }
     ]
   },
@@ -51,10 +51,10 @@
   "paths": {
     "/providers/Microsoft.VoiceServices/operations": {
       "get": {
+        "operationId": "Operations_List",
         "tags": [
           "Operations"
         ],
-        "operationId": "Operations_List",
         "description": "List the operations for the provider",
         "parameters": [
           {
@@ -63,7 +63,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
             }
@@ -75,22 +75,22 @@
             }
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
         "x-ms-examples": {
           "OperationsList": {
             "$ref": "./examples/Operations_List.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.VoiceServices/communicationsGateways": {
       "get": {
+        "operationId": "CommunicationsGateways_ListBySubscription",
         "tags": [
           "CommunicationsGateways"
         ],
-        "operationId": "CommunicationsGateways_ListBySubscription",
         "description": "List CommunicationsGateway resources by subscription ID",
         "parameters": [
           {
@@ -102,7 +102,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/CommunicationsGatewayListResult"
             }
@@ -114,13 +114,13 @@
             }
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
         "x-ms-examples": {
           "ListCommunicationsGatewayResourceSub": {
             "$ref": "./examples/CommunicationsGateways_ListBySubscription.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -132,8 +132,8 @@
           {
             "name": "location",
             "in": "path",
-            "required": true,
             "description": "The location in which uniqueness will be verified.",
+            "required": true,
             "type": "string"
           },
           {
@@ -145,8 +145,8 @@
           {
             "name": "body",
             "in": "body",
-            "required": true,
             "description": "The check availability request body.",
+            "required": true,
             "schema": {
               "$ref": "#/definitions/CheckNameAvailabilityRequest"
             }
@@ -175,10 +175,10 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.VoiceServices/communicationsGateways": {
       "get": {
+        "operationId": "CommunicationsGateways_ListByResourceGroup",
         "tags": [
           "CommunicationsGateways"
         ],
-        "operationId": "CommunicationsGateways_ListByResourceGroup",
         "description": "List CommunicationsGateway resources by resource group",
         "parameters": [
           {
@@ -193,7 +193,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/CommunicationsGatewayListResult"
             }
@@ -205,22 +205,22 @@
             }
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
         "x-ms-examples": {
           "ListCommunicationsGatewayResource": {
             "$ref": "./examples/CommunicationsGateways_ListByResourceGroup.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.VoiceServices/communicationsGateways/{communicationsGatewayName}": {
       "get": {
+        "operationId": "CommunicationsGateways_Get",
         "tags": [
           "CommunicationsGateways"
         ],
-        "operationId": "CommunicationsGateways_Get",
         "description": "Get a CommunicationsGateway",
         "parameters": [
           {
@@ -235,15 +235,15 @@
           {
             "name": "communicationsGatewayName",
             "in": "path",
-            "required": true,
             "description": "Unique identifier for this deployment",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
-            "type": "string"
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
           }
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/CommunicationsGateway"
             }
@@ -262,10 +262,10 @@
         }
       },
       "put": {
+        "operationId": "CommunicationsGateways_CreateOrUpdate",
         "tags": [
           "CommunicationsGateways"
         ],
-        "operationId": "CommunicationsGateways_CreateOrUpdate",
         "description": "Create a CommunicationsGateway",
         "parameters": [
           {
@@ -280,16 +280,16 @@
           {
             "name": "communicationsGatewayName",
             "in": "path",
-            "required": true,
             "description": "Unique identifier for this deployment",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
-            "type": "string"
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
           },
           {
             "name": "resource",
             "in": "body",
-            "required": true,
             "description": "Resource create parameters.",
+            "required": true,
             "schema": {
               "$ref": "#/definitions/CommunicationsGateway"
             }
@@ -297,22 +297,22 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Resource 'CommunicationsGateway' update operation succeeded",
             "schema": {
               "$ref": "#/definitions/CommunicationsGateway"
             }
           },
           "201": {
-            "description": "ARM create operation completed successfully.",
-            "headers": {
-              "Retry-After": {
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
-                "type": "integer",
-                "format": "int32"
-              }
-            },
+            "description": "Resource 'CommunicationsGateway' create operation succeeded",
             "schema": {
               "$ref": "#/definitions/CommunicationsGateway"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
             }
           },
           "default": {
@@ -332,70 +332,11 @@
         },
         "x-ms-long-running-operation": true
       },
-      "delete": {
-        "tags": [
-          "CommunicationsGateways"
-        ],
-        "operationId": "CommunicationsGateways_Delete",
-        "description": "Delete a CommunicationsGateway",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "communicationsGatewayName",
-            "in": "path",
-            "required": true,
-            "description": "Unique identifier for this deployment",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Resource deleted successfully."
-          },
-          "202": {
-            "description": "Resource deletion accepted.",
-            "headers": {
-              "Retry-After": {
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
-                "type": "integer",
-                "format": "int32"
-              }
-            }
-          },
-          "204": {
-            "description": "Resource deleted successfully."
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "DeleteCommunicationsGatewayResource": {
-            "$ref": "./examples/CommunicationsGateways_Delete.json"
-          }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        },
-        "x-ms-long-running-operation": true
-      },
       "patch": {
+        "operationId": "CommunicationsGateways_Update",
         "tags": [
           "CommunicationsGateways"
         ],
-        "operationId": "CommunicationsGateways_Update",
         "description": "Update a CommunicationsGateway",
         "parameters": [
           {
@@ -410,16 +351,16 @@
           {
             "name": "communicationsGatewayName",
             "in": "path",
-            "required": true,
             "description": "Unique identifier for this deployment",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
-            "type": "string"
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
           },
           {
             "name": "properties",
             "in": "body",
-            "required": true,
             "description": "The resource properties to be updated.",
+            "required": true,
             "schema": {
               "$ref": "#/definitions/CommunicationsGatewayUpdate"
             }
@@ -427,7 +368,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/CommunicationsGateway"
             }
@@ -444,14 +385,77 @@
             "$ref": "./examples/CommunicationsGateways_Update.json"
           }
         }
+      },
+      "delete": {
+        "operationId": "CommunicationsGateways_Delete",
+        "tags": [
+          "CommunicationsGateways"
+        ],
+        "description": "Delete a CommunicationsGateway",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "communicationsGatewayName",
+            "in": "path",
+            "description": "Unique identifier for this deployment",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DeleteCommunicationsGatewayResource": {
+            "$ref": "./examples/CommunicationsGateways_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.VoiceServices/communicationsGateways/{communicationsGatewayName}/testLines": {
       "get": {
+        "operationId": "TestLines_ListByCommunicationsGateway",
         "tags": [
           "TestLines"
         ],
-        "operationId": "TestLines_ListByCommunicationsGateway",
         "description": "List TestLine resources by CommunicationsGateway",
         "parameters": [
           {
@@ -466,15 +470,15 @@
           {
             "name": "communicationsGatewayName",
             "in": "path",
-            "required": true,
             "description": "Unique identifier for this deployment",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
-            "type": "string"
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
           }
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/TestLineListResult"
             }
@@ -486,22 +490,22 @@
             }
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
         "x-ms-examples": {
           "ListTestLineResource": {
             "$ref": "./examples/TestLines_ListByCommunicationsGateway.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.VoiceServices/communicationsGateways/{communicationsGatewayName}/testLines/{testLineName}": {
       "get": {
+        "operationId": "TestLines_Get",
         "tags": [
           "TestLines"
         ],
-        "operationId": "TestLines_Get",
         "description": "Get a TestLine",
         "parameters": [
           {
@@ -516,23 +520,23 @@
           {
             "name": "communicationsGatewayName",
             "in": "path",
-            "required": true,
             "description": "Unique identifier for this deployment",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
-            "type": "string"
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
           },
           {
             "name": "testLineName",
             "in": "path",
-            "required": true,
             "description": "Unique identifier for this test line",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
-            "type": "string"
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
           }
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/TestLine"
             }
@@ -551,10 +555,10 @@
         }
       },
       "put": {
+        "operationId": "TestLines_CreateOrUpdate",
         "tags": [
           "TestLines"
         ],
-        "operationId": "TestLines_CreateOrUpdate",
         "description": "Create a TestLine",
         "parameters": [
           {
@@ -569,24 +573,24 @@
           {
             "name": "communicationsGatewayName",
             "in": "path",
-            "required": true,
             "description": "Unique identifier for this deployment",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
-            "type": "string"
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
           },
           {
             "name": "testLineName",
             "in": "path",
-            "required": true,
             "description": "Unique identifier for this test line",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
-            "type": "string"
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
           },
           {
             "name": "resource",
             "in": "body",
-            "required": true,
             "description": "Resource create parameters.",
+            "required": true,
             "schema": {
               "$ref": "#/definitions/TestLine"
             }
@@ -594,22 +598,22 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Resource 'TestLine' update operation succeeded",
             "schema": {
               "$ref": "#/definitions/TestLine"
             }
           },
           "201": {
-            "description": "ARM create operation completed successfully.",
-            "headers": {
-              "Retry-After": {
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
-                "type": "integer",
-                "format": "int32"
-              }
-            },
+            "description": "Resource 'TestLine' create operation succeeded",
             "schema": {
               "$ref": "#/definitions/TestLine"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
             }
           },
           "default": {
@@ -629,78 +633,11 @@
         },
         "x-ms-long-running-operation": true
       },
-      "delete": {
-        "tags": [
-          "TestLines"
-        ],
-        "operationId": "TestLines_Delete",
-        "description": "Delete a TestLine",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "communicationsGatewayName",
-            "in": "path",
-            "required": true,
-            "description": "Unique identifier for this deployment",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
-            "type": "string"
-          },
-          {
-            "name": "testLineName",
-            "in": "path",
-            "required": true,
-            "description": "Unique identifier for this test line",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Resource deleted successfully."
-          },
-          "202": {
-            "description": "Resource deletion accepted.",
-            "headers": {
-              "Retry-After": {
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
-                "type": "integer",
-                "format": "int32"
-              }
-            }
-          },
-          "204": {
-            "description": "Resource deleted successfully."
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "DeleteTestLineResource": {
-            "$ref": "./examples/TestLines_Delete.json"
-          }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        },
-        "x-ms-long-running-operation": true
-      },
       "patch": {
+        "operationId": "TestLines_Update",
         "tags": [
           "TestLines"
         ],
-        "operationId": "TestLines_Update",
         "description": "Update a TestLine",
         "parameters": [
           {
@@ -715,24 +652,24 @@
           {
             "name": "communicationsGatewayName",
             "in": "path",
-            "required": true,
             "description": "Unique identifier for this deployment",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
-            "type": "string"
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
           },
           {
             "name": "testLineName",
             "in": "path",
-            "required": true,
             "description": "Unique identifier for this test line",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
-            "type": "string"
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
           },
           {
             "name": "properties",
             "in": "body",
-            "required": true,
             "description": "The resource properties to be updated.",
+            "required": true,
             "schema": {
               "$ref": "#/definitions/TestLineUpdate"
             }
@@ -740,7 +677,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/TestLine"
             }
@@ -757,28 +694,84 @@
             "$ref": "./examples/TestLines_Update.json"
           }
         }
+      },
+      "delete": {
+        "operationId": "TestLines_Delete",
+        "tags": [
+          "TestLines"
+        ],
+        "description": "Delete a TestLine",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "communicationsGatewayName",
+            "in": "path",
+            "description": "Unique identifier for this deployment",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "testLineName",
+            "in": "path",
+            "description": "Unique identifier for this test line",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DeleteTestLineResource": {
+            "$ref": "./examples/TestLines_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       }
     }
   },
   "definitions": {
     "ApiBridgeProperties": {
       "type": "object",
-      "properties": {},
-      "description": "Details of API bridge functionality."
-    },
-    "AutoGeneratedDomainNameLabelScope": {
-      "type": "string",
-      "description": "Available auto-generated domain name scopes.",
-      "enum": [
-        "TenantReuse",
-        "SubscriptionReuse",
-        "ResourceGroupReuse",
-        "NoReuse"
-      ],
-      "x-ms-enum": {
-        "name": "AutoGeneratedDomainNameLabelScope",
-        "modelAsString": true
-      }
+      "description": "Configuration of the API Bridge."
     },
     "CheckNameAvailabilityReason": {
       "type": "string",
@@ -789,11 +782,24 @@
       ],
       "x-ms-enum": {
         "name": "CheckNameAvailabilityReason",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Invalid",
+            "value": "Invalid",
+            "description": "Name not available if the name is invalid."
+          },
+          {
+            "name": "AlreadyExists",
+            "value": "AlreadyExists",
+            "description": "Name not available if the name is already in use."
+          }
+        ]
       }
     },
     "CheckNameAvailabilityRequest": {
       "type": "object",
+      "description": "The check availability request body.",
       "properties": {
         "name": {
           "type": "string",
@@ -803,11 +809,11 @@
           "type": "string",
           "description": "The resource type."
         }
-      },
-      "description": "The check availability request body."
+      }
     },
     "CheckNameAvailabilityResponse": {
       "type": "object",
+      "description": "The check availability result.",
       "properties": {
         "nameAvailable": {
           "type": "boolean",
@@ -821,11 +827,11 @@
           "type": "string",
           "description": "Detailed reason why the given name is not available."
         }
-      },
-      "description": "The check availability result."
+      }
     },
     "CommunicationsGateway": {
       "type": "object",
+      "description": "A CommunicationsGateway resource",
       "properties": {
         "properties": {
           "$ref": "#/definitions/CommunicationsGatewayProperties",
@@ -841,7 +847,6 @@
           "description": "The managed service identities assigned to this resource."
         }
       },
-      "description": "A CommunicationsGateway resource",
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
@@ -850,32 +855,31 @@
     },
     "CommunicationsGatewayListResult": {
       "type": "object",
+      "description": "The response of a CommunicationsGateway list operation.",
       "properties": {
         "value": {
           "type": "array",
+          "description": "The CommunicationsGateway items on this page",
           "items": {
             "$ref": "#/definitions/CommunicationsGateway"
-          },
-          "x-cadl-name": "CommunicationsGateway[]",
-          "description": "The CommunicationsGateway items on this page"
+          }
         },
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items",
-          "x-cadl-name": "Rest.ResourceLocation"
+          "description": "The link to the next page of items"
         }
       },
-      "description": "The response of a CommunicationsGateway list operation.",
       "required": [
         "value"
       ]
     },
     "CommunicationsGatewayProperties": {
       "type": "object",
+      "description": "Details of the CommunicationsGateway resource.",
       "properties": {
         "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
+          "$ref": "#/definitions/ResourceProvisioningState",
           "description": "Resource provisioning state.",
           "readOnly": true
         },
@@ -886,14 +890,13 @@
         },
         "serviceLocations": {
           "type": "array",
+          "description": "The regions in which to deploy the resources needed for Teams Calling",
           "items": {
             "$ref": "#/definitions/ServiceRegionProperties"
           },
           "x-ms-identifiers": [
             "name"
           ],
-          "x-cadl-name": "ServiceRegionProperties[]",
-          "description": "The regions in which to deploy the resources needed for Teams Calling",
           "x-ms-mutability": [
             "read",
             "update",
@@ -902,7 +905,7 @@
         },
         "connectivity": {
           "$ref": "#/definitions/Connectivity",
-          "description": "How to connect back to the operator network, e.g. MAPS",
+          "description": "How to connect back to the Operator Network, e.g. MAPS",
           "x-ms-mutability": [
             "read",
             "create"
@@ -910,11 +913,10 @@
         },
         "codecs": {
           "type": "array",
+          "description": "Voice codecs to support",
           "items": {
             "$ref": "#/definitions/TeamsCodecs"
           },
-          "x-cadl-name": "TeamsCodecs[]",
-          "description": "Voice codecs to support",
           "x-ms-mutability": [
             "read",
             "update",
@@ -932,12 +934,11 @@
         },
         "platforms": {
           "type": "array",
+          "description": "What platforms to support",
+          "minItems": 1,
           "items": {
             "$ref": "#/definitions/CommunicationsPlatform"
           },
-          "x-cadl-name": "CommunicationsPlatform[]",
-          "description": "What platforms to support",
-          "minItems": 1,
           "x-ms-mutability": [
             "read",
             "update",
@@ -954,9 +955,41 @@
           ]
         },
         "autoGeneratedDomainNameLabelScope": {
-          "$ref": "#/definitions/AutoGeneratedDomainNameLabelScope",
+          "type": "string",
           "description": "The scope at which the auto-generated domain name can be re-used",
           "default": "TenantReuse",
+          "enum": [
+            "TenantReuse",
+            "SubscriptionReuse",
+            "ResourceGroupReuse",
+            "NoReuse"
+          ],
+          "x-ms-enum": {
+            "name": "AutoGeneratedDomainNameLabelScope",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "TenantReuse",
+                "value": "TenantReuse",
+                "description": "Generated domain name label depends on resource name and tenant ID."
+              },
+              {
+                "name": "SubscriptionReuse",
+                "value": "SubscriptionReuse",
+                "description": "Generated domain name label depends on resource name, tenant ID and subscription ID."
+              },
+              {
+                "name": "ResourceGroupReuse",
+                "value": "ResourceGroupReuse",
+                "description": "Generated domain name label depends on resource name, tenant ID, subscription ID and resource group name."
+              },
+              {
+                "name": "NoReuse",
+                "value": "NoReuse",
+                "description": "Generated domain name label is always unique."
+              }
+            ]
+          },
           "x-ms-mutability": [
             "read",
             "create"
@@ -998,15 +1031,14 @@
         },
         "emergencyDialStrings": {
           "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "x-cadl-name": "string[]",
           "description": "A list of dial strings used for emergency calling.",
           "default": [
             "911",
             "933"
           ],
+          "items": {
+            "type": "string"
+          },
           "x-ms-mutability": [
             "read",
             "update",
@@ -1014,7 +1046,6 @@
           ]
         }
       },
-      "description": "Details of the CommunicationsGateway resource.",
       "required": [
         "serviceLocations",
         "connectivity",
@@ -1025,6 +1056,7 @@
     },
     "CommunicationsGatewayUpdate": {
       "type": "object",
+      "description": "The type used for update operations of the CommunicationsGateway.",
       "properties": {
         "identity": {
           "$ref": "../../../../../common-types/resource-management/v4/managedidentity.json#/definitions/ManagedServiceIdentity",
@@ -1032,14 +1064,12 @@
         },
         "tags": {
           "type": "object",
+          "description": "Resource tags.",
           "additionalProperties": {
             "type": "string"
-          },
-          "x-cadl-name": "Record<string>",
-          "description": "Resource tags."
+          }
         }
-      },
-      "description": "The type used for update operations of the CommunicationsGateway."
+      }
     },
     "CommunicationsPlatform": {
       "type": "string",
@@ -1050,12 +1080,24 @@
       ],
       "x-ms-enum": {
         "name": "CommunicationsPlatform",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "OperatorConnect",
+            "value": "OperatorConnect",
+            "description": "Operator Connect"
+          },
+          {
+            "name": "TeamsPhoneMobile",
+            "value": "TeamsPhoneMobile",
+            "description": "Teams Phone Mobile"
+          }
+        ]
       }
     },
     "Connectivity": {
       "type": "string",
-      "description": "How this deployment connects back to the operator network",
+      "description": "How this deployment connects back to the Operator Network",
       "enum": [
         "PublicAddress"
       ],
@@ -1066,7 +1108,7 @@
           {
             "name": "PublicAddress",
             "value": "PublicAddress",
-            "description": "This deployment connects to the operator network using a Public IP address, e.g. when using MAPS"
+            "description": "This deployment connects to the Operator Network using a Public IP address, e.g. when using MAPS"
           }
         ]
       }
@@ -1097,14 +1139,14 @@
     },
     "PrimaryRegionProperties": {
       "type": "object",
+      "description": "The configuration used in this region as primary, and other regions as backup.",
       "properties": {
         "operatorAddresses": {
           "type": "array",
+          "description": "IP address to use to contact the Operator Network from this region",
           "items": {
             "type": "string"
           },
-          "x-cadl-name": "string[]",
-          "description": "IP address to use to contact the operator network from this region",
           "x-ms-mutability": [
             "read",
             "update",
@@ -1113,11 +1155,10 @@
         },
         "esrpAddresses": {
           "type": "array",
+          "description": "IP address to use to contact the ESRP from this region",
           "items": {
             "type": "string"
           },
-          "x-cadl-name": "string[]",
-          "description": "IP address to use to contact the ESRP from this region",
           "x-ms-mutability": [
             "read",
             "update",
@@ -1126,12 +1167,11 @@
         },
         "allowedSignalingSourceAddressPrefixes": {
           "type": "array",
+          "description": "The allowed source IP addresses or CIDR ranges for signaling",
+          "default": [],
           "items": {
             "type": "string"
           },
-          "x-cadl-name": "string[]",
-          "description": "The allowed source IP address or CIDR ranges for signaling",
-          "default": [],
           "x-ms-mutability": [
             "read",
             "update",
@@ -1140,12 +1180,11 @@
         },
         "allowedMediaSourceAddressPrefixes": {
           "type": "array",
+          "description": "The allowed source IP addresses or CIDR ranges for media",
+          "default": [],
           "items": {
             "type": "string"
           },
-          "x-cadl-name": "string[]",
-          "description": "The allowed source IP address or CIDR ranges for media",
-          "default": [],
           "x-ms-mutability": [
             "read",
             "update",
@@ -1153,26 +1192,43 @@
           ]
         }
       },
-      "description": "The configuration used in this region as primary, and other regions as backup.",
       "required": [
         "operatorAddresses"
       ]
     },
-    "ProvisioningState": {
+    "ResourceProvisioningState": {
       "type": "string",
-      "description": "Provisioning state of the resource.",
+      "description": "The provisioning state of a resource type.",
       "enum": [
         "Succeeded",
         "Failed",
         "Canceled"
       ],
       "x-ms-enum": {
-        "name": "ProvisioningState",
-        "modelAsString": true
+        "name": "ResourceProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          }
+        ]
       }
     },
     "ServiceRegionProperties": {
       "type": "object",
+      "description": "The service region configuration needed for Teams Callings.",
       "properties": {
         "name": {
           "type": "string",
@@ -1192,7 +1248,6 @@
           ]
         }
       },
-      "description": "The service region configuration needed for Teams Callings.",
       "required": [
         "name",
         "primaryRegionProperties"
@@ -1235,11 +1290,44 @@
       ],
       "x-ms-enum": {
         "name": "TeamsCodecs",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "PCMA",
+            "value": "PCMA",
+            "description": "Pulse code modulation(PCM) U-law narrowband audio codec(G.711u)"
+          },
+          {
+            "name": "PCMU",
+            "value": "PCMU",
+            "description": "Pulse code modulation(PCM) U-law narrowband audio codec(G.711u)"
+          },
+          {
+            "name": "G722",
+            "value": "G722",
+            "description": "G.722 wideband audio codec"
+          },
+          {
+            "name": "G722_2",
+            "value": "G722_2",
+            "description": "G.722.2 wideband audio codec"
+          },
+          {
+            "name": "SILK_8",
+            "value": "SILK_8",
+            "description": "SILK/8000 narrowband audio codec"
+          },
+          {
+            "name": "SILK_16",
+            "value": "SILK_16",
+            "description": "SILK/16000 wideband audio codec"
+          }
+        ]
       }
     },
     "TestLine": {
       "type": "object",
+      "description": "A TestLine resource",
       "properties": {
         "properties": {
           "$ref": "#/definitions/TestLineProperties",
@@ -1251,7 +1339,6 @@
           ]
         }
       },
-      "description": "A TestLine resource",
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
@@ -1260,32 +1347,31 @@
     },
     "TestLineListResult": {
       "type": "object",
+      "description": "The response of a TestLine list operation.",
       "properties": {
         "value": {
           "type": "array",
+          "description": "The TestLine items on this page",
           "items": {
             "$ref": "#/definitions/TestLine"
-          },
-          "x-cadl-name": "TestLine[]",
-          "description": "The TestLine items on this page"
+          }
         },
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items",
-          "x-cadl-name": "Rest.ResourceLocation"
+          "description": "The link to the next page of items"
         }
       },
-      "description": "The response of a TestLine list operation.",
       "required": [
         "value"
       ]
     },
     "TestLineProperties": {
       "type": "object",
+      "description": "Details of the TestLine resource.",
       "properties": {
         "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
+          "$ref": "#/definitions/ResourceProvisioningState",
           "description": "Resource provisioning state.",
           "readOnly": true
         },
@@ -1308,7 +1394,6 @@
           ]
         }
       },
-      "description": "Details of the TestLine resource.",
       "required": [
         "phoneNumber",
         "purpose"
@@ -1323,22 +1408,33 @@
       ],
       "x-ms-enum": {
         "name": "TestLinePurpose",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Manual",
+            "value": "Manual",
+            "description": "The test line is used for manual testing"
+          },
+          {
+            "name": "Automated",
+            "value": "Automated",
+            "description": "The test line is used for automated testing"
+          }
+        ]
       }
     },
     "TestLineUpdate": {
       "type": "object",
+      "description": "The type used for update operations of the TestLine.",
       "properties": {
         "tags": {
           "type": "object",
+          "description": "Resource tags.",
           "additionalProperties": {
             "type": "string"
-          },
-          "x-cadl-name": "Record<string>",
-          "description": "Resource tags."
+          }
         }
-      },
-      "description": "The type used for update operations of the TestLine."
+      }
     }
   },
   "parameters": {}

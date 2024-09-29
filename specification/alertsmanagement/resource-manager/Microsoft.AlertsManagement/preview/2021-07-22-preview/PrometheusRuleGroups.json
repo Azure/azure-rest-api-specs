@@ -60,8 +60,8 @@
           "nextLinkName": null
         },
         "x-ms-examples": {
-          "ListSubscriptionResourcePrometheusRuleGroups": {
-            "$ref": "./examples/listSubscriptionPrometheusRuleGroups.json"
+          "ListResourcePrometheusRuleGroups": {
+            "$ref": "./examples/listPrometheusRuleGroups.json"
           }
         }
       }
@@ -180,13 +180,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK (Updated).",
-            "schema": {
-              "$ref": "#/definitions/PrometheusRuleGroupResource"
-            }
-          },
-          "201": {
-            "description": "Created (New Alert rule was created).",
+            "description": "OK",
             "schema": {
               "$ref": "#/definitions/PrometheusRuleGroupResource"
             }
@@ -293,6 +287,40 @@
           }
         }
       }
+    },
+    "/providers/Microsoft.AlertsManagement/operations": {
+      "get": {
+        "description": "Returns list of operations for Microsoft.DeviceUpdate resource provider.",
+        "operationId": "Operations_List",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operation details.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DeletePrometheusRuleGroup": {
+            "$ref": "./examples/listOperationsPrometheusRuleGroup.json"
+          }
+        },
+        "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
     }
   },
   "definitions": {
@@ -302,7 +330,7 @@
       "properties": {
         "actionGroupId": {
           "type": "string",
-          "description": "The resource id of the action group to use."
+          "description": "the id of the action group to use."
         },
         "actionProperties": {
           "type": "object",
@@ -352,6 +380,11 @@
           },
           "x-ms-identifiers": [],
           "description": "defines the rules in the Prometheus rule group."
+        },
+        "provisioningState": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The provisioning state of the resource in Azure"
         }
       },
       "description": "An alert rule."
@@ -371,6 +404,10 @@
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/PrometheusRuleGroupProperties",
           "description": "The Prometheus rule group properties of the resource."
+        },
+        "systemData": {
+          "description": "Action rule system data",
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
         }
       },
       "description": "The Prometheus rule group resource."
@@ -385,14 +422,18 @@
           },
           "description": "Resource tags"
         },
+        "location": {
+          "type": "string",
+          "description": "Resource location",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
         "properties": {
-          "type": "object",
-          "properties": {
-            "enabled": {
-              "type": "boolean",
-              "description": "the flag that indicates whether the Prometheus rule group is enabled."
-            }
-          }
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/PrometheusRuleGroupProperties",
+          "description": "The alert rule properties of the resource."
         }
       },
       "description": "The Prometheus rule group resource for patch operations."

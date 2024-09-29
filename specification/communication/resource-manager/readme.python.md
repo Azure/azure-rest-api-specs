@@ -11,11 +11,9 @@ license-header: MICROSOFT_MIT_NO_VERSION
 package-name: azure-mgmt-communication
 namespace: azure.mgmt.communication
 package-version: 1.0.0
-clear-output-folder: true
 ```
 
 ```yaml $(python)
 no-namespace-folders: true
 output-folder: $(python-sdks-folder)/communication/azure-mgmt-communication/azure/mgmt/communication
 ```
-

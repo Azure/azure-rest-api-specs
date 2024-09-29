@@ -5,8 +5,9 @@ import "@typespec/openapi";
 import "./models/models.tsp";
 
 using TypeSpec.Rest;
-using TypeSpec.Http;
 using Azure.ResourceManager;
+using Azure.ResourceManager.Foundations;
+using TypeSpec.Http;
 using OpenAPI;
 using Azure.Core;
 using Azure.Core.Traits;
@@ -15,7 +16,10 @@ namespace Microsoft.AppComplianceAutomation;
 
 interface Operations extends Azure.ResourceManager.Operations {}
 
-alias PlaceholderResource = Azure.ResourceManager.Foundations.ProxyResource;
+alias PlaceholderResource = {
+  id: string;
+  type: string;
+};
 
 alias ArmProviderActionAsync<
   Request extends {} | void,
@@ -23,7 +27,7 @@ alias ArmProviderActionAsync<
   Parameters extends {} = {},
   LroHeaders extends TypeSpec.Reflection.Model = ArmLroLocationHeader &
     Azure.Core.Foundations.RetryAfterHeader
-> = Azure.ResourceManager.ArmResourceActionAsync<
+> = ArmResourceActionAsync<
   PlaceholderResource,
   Request,
   Response | ArmAcceptedLroResponse<"Accepted", LroHeaders>,
@@ -36,7 +40,7 @@ alias ArmProviderActionSync<
   Request extends {} | void,
   Response extends {} | void,
   Parameters extends {} = {}
-> = Azure.ResourceManager.ArmResourceActionSync<
+> = ArmResourceActionSync<
   PlaceholderResource,
   Request,
   Response,
@@ -49,8 +53,8 @@ alias ArmProviderActionSync<
 interface ProviderActions {
   @doc("Check if the given name is available for a report.")
   checkNameAvailability is ArmProviderActionSync<
-    Azure.ResourceManager.Foundations.CheckNameAvailabilityRequest,
-    Azure.ResourceManager.Foundations.CheckNameAvailabilityResponse
+    CheckNameAvailabilityRequest,
+    CheckNameAvailabilityResponse
   >;
 
   @doc("Get the count of reports.")
@@ -80,12 +84,11 @@ interface ProviderActions {
     ListInUseStorageAccountsResponse
   >;
 }
-#suppress "deprecated" "LEGACY - DO NOT COPY - FIX"
+
 @@encodedName(ArmProviderActionAsync::parameters.body,
   "application/json",
   "parameters"
 );
-#suppress "deprecated" "LEGACY - DO NOT COPY - FIX"
 @@encodedName(ArmProviderActionSync::parameters.body,
   "application/json",
   "parameters"

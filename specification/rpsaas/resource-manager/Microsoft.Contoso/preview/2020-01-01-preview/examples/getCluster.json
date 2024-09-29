@@ -1,0 +1,32 @@
+{
+  "parameters": {
+    "clustersName": "testCluster",
+    "resourceGroupName": "testRG",
+    "api-version": "2020-01-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRG/providers/Microsoft.Contoso/clusters/testCluster",
+        "name": "testCluster",
+        "type": "microsoft.contoso/clusters",
+        "location": "East US",
+        "extendedLocation": {
+          "name": "/subscriptions/59341aac-5917-4ae1-90b3-75f41394d9e2/resourceGroups/BridgeRunner-eus/providers/Microsoft.ExtendedLocation/customLocations/bridgerunnercl-eus",
+          "type": "CustomLocation"
+        },
+        "properties": {
+          "provisioningState": "Succeeded",
+          "cluster": "test-cluster",
+          "datacenter": "dc1",
+          "dummyVolume": {
+            "sizeLimit": "1Gi"
+          },
+          "serviceAccountName": "cassandra",
+          "nodes": 3
+        }
+      }
+    }
+  }
+}

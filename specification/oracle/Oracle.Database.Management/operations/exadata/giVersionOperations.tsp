@@ -1,4 +1,4 @@
-import "../../../models/exadata/giVersions.tsp";
+import "../../models/exadata/giVersions.tsp";
 
 using Azure.ResourceManager;
 using Autorest;
@@ -7,8 +7,6 @@ namespace Oracle.Database;
 
 @armResourceOperations
 interface GiVersions extends OracleLocationBasedResource<GiVersion> {}
-
-@@doc(GiVersions.listByLocation, "List GiVersion resources by Location");
 
 #suppress "@azure-tools/typespec-azure-core/no-openapi" "TODO FIX - DO NOT COPY - BAD PATTERN"
 @@Autorest.example(GiVersions.listByLocation,

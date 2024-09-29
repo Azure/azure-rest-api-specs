@@ -1,0 +1,1767 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "PaloAltoNetworks.Cloudngfw",
+    "version": "2022-04-19-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Firewalls"
+    },
+    {
+      "name": "GlobalRulestack"
+    },
+    {
+      "name": "LocalRulestacks"
+    },
+    {
+      "name": "Operations"
+    }
+  ],
+  "paths": {
+    "/providers/PaloAltoNetworks.Cloudngfw/globalRulestacks": {
+      "get": {
+        "tags": [
+          "GlobalRulestack"
+        ],
+        "operationId": "GlobalRulestack_List",
+        "description": "List GlobalRulestackResource resources by Tenant",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/GlobalRulestackResourceListResult"
+            }
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "GlobalRulestack_List_MaximumSet_Gen": {
+            "$ref": "./examples/GlobalRulestack_List_MaximumSet_Gen.json"
+          },
+          "GlobalRulestack_List_MinimumSet_Gen": {
+            "$ref": "./examples/GlobalRulestack_List_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/providers/PaloAltoNetworks.Cloudngfw/globalRulestacks/{globalRulestackName}": {
+      "get": {
+        "tags": [
+          "GlobalRulestack"
+        ],
+        "operationId": "GlobalRulestack_Get",
+        "description": "Get a GlobalRulestackResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/GlobalRulestackResource.globalRulestackName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/GlobalRulestackResource"
+            }
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GlobalRulestack_Get_MaximumSet_Gen": {
+            "$ref": "./examples/GlobalRulestack_Get_MaximumSet_Gen.json"
+          },
+          "GlobalRulestack_Get_MinimumSet_Gen": {
+            "$ref": "./examples/GlobalRulestack_Get_MinimumSet_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "GlobalRulestack"
+        ],
+        "operationId": "GlobalRulestack_CreateOrUpdate",
+        "description": "Create a GlobalRulestackResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/GlobalRulestackResource.globalRulestackName"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "required": true,
+            "description": "Resource create parameters.",
+            "schema": {
+              "$ref": "#/definitions/GlobalRulestackResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/GlobalRulestackResource"
+            }
+          },
+          "201": {
+            "description": "Created. The ARM operation will complete asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/GlobalRulestackResource"
+            }
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "GlobalRulestack_CreateOrUpdate_MaximumSet_Gen": {
+            "$ref": "./examples/GlobalRulestack_CreateOrUpdate_MaximumSet_Gen.json"
+          },
+          "GlobalRulestack_CreateOrUpdate_MinimumSet_Gen": {
+            "$ref": "./examples/GlobalRulestack_CreateOrUpdate_MinimumSet_Gen.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "GlobalRulestack"
+        ],
+        "operationId": "GlobalRulestack_Update",
+        "description": "Update a GlobalRulestackResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/GlobalRulestackResource.globalRulestackName"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "required": true,
+            "description": "The resource properties to be updated.",
+            "schema": {
+              "$ref": "#/definitions/GlobalRulestackResourceUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/GlobalRulestackResource"
+            }
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GlobalRulestack_Update_MaximumSet_Gen": {
+            "$ref": "./examples/GlobalRulestack_Update_MaximumSet_Gen.json"
+          },
+          "GlobalRulestack_Update_MinimumSet_Gen": {
+            "$ref": "./examples/GlobalRulestack_Update_MinimumSet_Gen.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "GlobalRulestack"
+        ],
+        "operationId": "GlobalRulestack_Delete",
+        "description": "Delete a GlobalRulestackResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/GlobalRulestackResource.globalRulestackName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "202": {
+            "description": "Resource deletion accepted."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "GlobalRulestack_Delete_MaximumSet_Gen": {
+            "$ref": "./examples/GlobalRulestack_Delete_MaximumSet_Gen.json"
+          },
+          "GlobalRulestack_Delete_MinimumSet_Gen": {
+            "$ref": "./examples/GlobalRulestack_Delete_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/providers/PaloAltoNetworks.Cloudngfw/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "operationId": "Operations_List",
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Operations_List_MaximumSet_Gen": {
+            "$ref": "./examples/Operations_List_MaximumSet_Gen.json"
+          },
+          "Operations_List_MinimumSet_Gen": {
+            "$ref": "./examples/Operations_List_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/PaloAltoNetworks.Cloudngfw/firewalls": {
+      "get": {
+        "tags": [
+          "Firewalls"
+        ],
+        "operationId": "Firewalls_ListBySubscription",
+        "description": "List FirewallResource resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/FirewallResourceListResult"
+            }
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Firewalls_ListBySubscription_MaximumSet_Gen": {
+            "$ref": "./examples/Firewalls_ListBySubscription_MaximumSet_Gen.json"
+          },
+          "Firewalls_ListBySubscription_MinimumSet_Gen": {
+            "$ref": "./examples/Firewalls_ListBySubscription_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/PaloAltoNetworks.Cloudngfw/localRulestacks": {
+      "get": {
+        "tags": [
+          "LocalRulestacks"
+        ],
+        "operationId": "LocalRulestacks_ListBySubscription",
+        "description": "List LocalRulestackResource resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/LocalRulestackResourceListResult"
+            }
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "LocalRulestacks_ListBySubscription_MaximumSet_Gen": {
+            "$ref": "./examples/LocalRulestacks_ListBySubscription_MaximumSet_Gen.json"
+          },
+          "LocalRulestacks_ListBySubscription_MinimumSet_Gen": {
+            "$ref": "./examples/LocalRulestacks_ListBySubscription_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/PaloAltoNetworks.Cloudngfw/firewalls": {
+      "get": {
+        "tags": [
+          "Firewalls"
+        ],
+        "operationId": "Firewalls_ListByResourceGroup",
+        "description": "List FirewallResource resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/FirewallResourceListResult"
+            }
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Firewalls_ListByResourceGroup_MaximumSet_Gen": {
+            "$ref": "./examples/Firewalls_ListByResourceGroup_MaximumSet_Gen.json"
+          },
+          "Firewalls_ListByResourceGroup_MinimumSet_Gen": {
+            "$ref": "./examples/Firewalls_ListByResourceGroup_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/PaloAltoNetworks.Cloudngfw/firewalls/{firewallName}": {
+      "get": {
+        "tags": [
+          "Firewalls"
+        ],
+        "operationId": "Firewalls_Get",
+        "description": "Get a FirewallResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/FirewallResource.firewallName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/FirewallResource"
+            }
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Firewalls_Get_MaximumSet_Gen": {
+            "$ref": "./examples/Firewalls_Get_MaximumSet_Gen.json"
+          },
+          "Firewalls_Get_MinimumSet_Gen": {
+            "$ref": "./examples/Firewalls_Get_MinimumSet_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Firewalls"
+        ],
+        "operationId": "Firewalls_CreateOrUpdate",
+        "description": "Create a FirewallResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/FirewallResource.firewallName"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "required": true,
+            "description": "Resource create parameters.",
+            "schema": {
+              "$ref": "#/definitions/FirewallResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/FirewallResource"
+            }
+          },
+          "201": {
+            "description": "Created. The ARM operation will complete asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/FirewallResource"
+            }
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Firewalls_CreateOrUpdate_MaximumSet_Gen": {
+            "$ref": "./examples/Firewalls_CreateOrUpdate_MaximumSet_Gen.json"
+          },
+          "Firewalls_CreateOrUpdate_MinimumSet_Gen": {
+            "$ref": "./examples/Firewalls_CreateOrUpdate_MinimumSet_Gen.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Firewalls"
+        ],
+        "operationId": "Firewalls_Update",
+        "description": "Update a FirewallResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/FirewallResource.firewallName"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "required": true,
+            "description": "The resource properties to be updated.",
+            "schema": {
+              "$ref": "#/definitions/FirewallResourceUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/FirewallResource"
+            }
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Firewalls_Update_MaximumSet_Gen": {
+            "$ref": "./examples/Firewalls_Update_MaximumSet_Gen.json"
+          },
+          "Firewalls_Update_MinimumSet_Gen": {
+            "$ref": "./examples/Firewalls_Update_MinimumSet_Gen.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Firewalls"
+        ],
+        "operationId": "Firewalls_Delete",
+        "description": "Delete a FirewallResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/FirewallResource.firewallName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "202": {
+            "description": "Resource deletion accepted."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Firewalls_Delete_MaximumSet_Gen": {
+            "$ref": "./examples/Firewalls_Delete_MaximumSet_Gen.json"
+          },
+          "Firewalls_Delete_MinimumSet_Gen": {
+            "$ref": "./examples/Firewalls_Delete_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/PaloAltoNetworks.Cloudngfw/localRulestacks": {
+      "get": {
+        "tags": [
+          "LocalRulestacks"
+        ],
+        "operationId": "LocalRulestacks_ListByResourceGroup",
+        "description": "List LocalRulestackResource resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/LocalRulestackResourceListResult"
+            }
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "LocalRulestacks_ListByResourceGroup_MaximumSet_Gen": {
+            "$ref": "./examples/LocalRulestacks_ListByResourceGroup_MaximumSet_Gen.json"
+          },
+          "LocalRulestacks_ListByResourceGroup_MinimumSet_Gen": {
+            "$ref": "./examples/LocalRulestacks_ListByResourceGroup_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/PaloAltoNetworks.Cloudngfw/localRulestacks/{localRulestackName}": {
+      "get": {
+        "tags": [
+          "LocalRulestacks"
+        ],
+        "operationId": "LocalRulestacks_Get",
+        "description": "Get a LocalRulestackResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/LocalRulestackResource.localRulestackName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/LocalRulestackResource"
+            }
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "LocalRulestacks_Get_MaximumSet_Gen": {
+            "$ref": "./examples/LocalRulestacks_Get_MaximumSet_Gen.json"
+          },
+          "LocalRulestacks_Get_MinimumSet_Gen": {
+            "$ref": "./examples/LocalRulestacks_Get_MinimumSet_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "LocalRulestacks"
+        ],
+        "operationId": "LocalRulestacks_CreateOrUpdate",
+        "description": "Create a LocalRulestackResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/LocalRulestackResource.localRulestackName"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "required": true,
+            "description": "Resource create parameters.",
+            "schema": {
+              "$ref": "#/definitions/LocalRulestackResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/LocalRulestackResource"
+            }
+          },
+          "201": {
+            "description": "Created. The ARM operation will complete asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/LocalRulestackResource"
+            }
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "LocalRulestacks_CreateOrUpdate_MaximumSet_Gen": {
+            "$ref": "./examples/LocalRulestacks_CreateOrUpdate_MaximumSet_Gen.json"
+          },
+          "LocalRulestacks_CreateOrUpdate_MinimumSet_Gen": {
+            "$ref": "./examples/LocalRulestacks_CreateOrUpdate_MinimumSet_Gen.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "LocalRulestacks"
+        ],
+        "operationId": "LocalRulestacks_Update",
+        "description": "Update a LocalRulestackResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/LocalRulestackResource.localRulestackName"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "required": true,
+            "description": "The resource properties to be updated.",
+            "schema": {
+              "$ref": "#/definitions/LocalRulestackResourceUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/LocalRulestackResource"
+            }
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "LocalRulestacks_Update_MaximumSet_Gen": {
+            "$ref": "./examples/LocalRulestacks_Update_MaximumSet_Gen.json"
+          },
+          "LocalRulestacks_Update_MinimumSet_Gen": {
+            "$ref": "./examples/LocalRulestacks_Update_MinimumSet_Gen.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "LocalRulestacks"
+        ],
+        "operationId": "LocalRulestacks_Delete",
+        "description": "Delete a LocalRulestackResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/LocalRulestackResource.localRulestackName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "202": {
+            "description": "Resource deletion accepted."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "LocalRulestacks_Delete_MaximumSet_Gen": {
+            "$ref": "./examples/LocalRulestacks_Delete_MaximumSet_Gen.json"
+          },
+          "LocalRulestacks_Delete_MinimumSet_Gen": {
+            "$ref": "./examples/LocalRulestacks_Delete_MinimumSet_Gen.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Azure.ResourceManager.ManagedIdentityProperties": {
+      "type": "object",
+      "properties": {
+        "tenantId": {
+          "type": "string",
+          "description": "The Active Directory tenant id of the principal.",
+          "readOnly": true
+        },
+        "principalId": {
+          "type": "string",
+          "description": "The active directory identifier of this principal.",
+          "readOnly": true
+        },
+        "type": {
+          "$ref": "#/definitions/Azure.ResourceManager.ManagedIdentityType",
+          "description": "The type of managed identity assigned to this resource."
+        },
+        "userAssignedIdentities": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/Azure.ResourceManager.UserAssignedIdentity"
+          },
+          "description": "The identities assigned to this resource by the user."
+        }
+      },
+      "description": "The properties of the managed service identities assigned to this resource.",
+      "required": [
+        "type"
+      ]
+    },
+    "Azure.ResourceManager.ManagedIdentityType": {
+      "type": "string",
+      "description": "The kind of managed identity assigned to this resource.",
+      "enum": [
+        "None",
+        "SystemAssigned",
+        "UserAssigned",
+        "SystemAssigned,UserAssigned"
+      ],
+      "x-ms-enum": {
+        "name": "ManagedIdentityType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "None",
+            "value": "None"
+          },
+          {
+            "name": "SystemAssigned",
+            "value": "SystemAssigned"
+          },
+          {
+            "name": "UserAssigned",
+            "value": "UserAssigned"
+          },
+          {
+            "name": "SystemAndUserAssigned",
+            "value": "SystemAssigned,UserAssigned"
+          }
+        ]
+      }
+    },
+    "Azure.ResourceManager.UserAssignedIdentity": {
+      "type": "object",
+      "properties": {
+        "clientId": {
+          "type": "string",
+          "description": "The active directory client identifier for this principal."
+        },
+        "principalId": {
+          "type": "string",
+          "description": "The active directory identifier for this principal."
+        }
+      },
+      "description": "A managed identity assigned by the user.",
+      "required": [
+        "clientId",
+        "principalId"
+      ]
+    },
+    "BillingCycle": {
+      "type": "string",
+      "description": "Billing cycle",
+      "enum": [
+        "WEEKLY",
+        "MONTHLY"
+      ],
+      "x-ms-enum": {
+        "name": "BillingCycle",
+        "modelAsString": true
+      }
+    },
+    "DNSProxy": {
+      "type": "string",
+      "description": "DNS Proxy",
+      "enum": [
+        "DISABLED",
+        "ENABLED"
+      ],
+      "x-ms-enum": {
+        "name": "DNSProxy",
+        "modelAsString": true
+      }
+    },
+    "DNSSettings": {
+      "type": "object",
+      "properties": {
+        "enableDnsProxy": {
+          "$ref": "#/definitions/DNSProxy",
+          "description": "Enable DNS proxy, disabled by default"
+        },
+        "dnsServers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IPAddress"
+          },
+          "x-ms-identifiers": [],
+          "x-cadl-name": "IPAddress[]",
+          "description": "List of IPs associated with the Firewall"
+        }
+      },
+      "description": "DNS Proxy settings for Firewall"
+    },
+    "EgressNat": {
+      "type": "string",
+      "description": "Egress NAT",
+      "enum": [
+        "DISABLED",
+        "ENABLED"
+      ],
+      "x-ms-enum": {
+        "name": "EgressNat",
+        "modelAsString": true
+      }
+    },
+    "FirewallDeploymentProperties": {
+      "type": "object",
+      "properties": {
+        "networkProfile": {
+          "$ref": "#/definitions/NetworkProfile",
+          "description": "Network settings"
+        },
+        "associatedRulestack": {
+          "type": "string",
+          "description": "Associated Rulestack"
+        },
+        "dnsSettings": {
+          "$ref": "#/definitions/DNSSettings",
+          "description": "DNS settings for Firewall"
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Provisioning state of the resource.",
+          "readOnly": true
+        },
+        "planData": {
+          "$ref": "#/definitions/PlanData",
+          "description": "Billing plan information."
+        },
+        "marketplaceDetails": {
+          "$ref": "#/definitions/MarketplaceDetails",
+          "description": "Marketplace details"
+        }
+      },
+      "description": "Properties specific to the Firewall resource deployment.",
+      "required": [
+        "networkProfile"
+      ]
+    },
+    "FirewallResource": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/FirewallDeploymentProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "x-ms-client-flatten": true
+        },
+        "identity": {
+          "$ref": "#/definitions/Azure.ResourceManager.ManagedIdentityProperties",
+          "description": "The managed service identities assigned to this resource."
+        }
+      },
+      "description": "PaloAltoNetworks Firewall",
+      "required": [
+        "properties"
+      ],
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "FirewallResourceListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FirewallResource"
+          },
+          "x-cadl-name": "FirewallResource[]",
+          "description": "The items on this page"
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The link to the next page of items"
+        }
+      },
+      "description": "The response of a FirewallResource list operation.",
+      "required": [
+        "value"
+      ]
+    },
+    "FirewallResourceUpdate": {
+      "type": "object",
+      "properties": {
+        "identity": {
+          "$ref": "#/definitions/Azure.ResourceManager.ManagedIdentityProperties",
+          "description": "The managed service identities assigned to this resource."
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags."
+        },
+        "properties": {
+          "$ref": "#/definitions/FirewallResourceUpdateProperties"
+        }
+      },
+      "description": "The type used for update operations of the FirewallResource."
+    },
+    "FirewallResourceUpdateProperties": {
+      "type": "object",
+      "properties": {
+        "networkProfile": {
+          "$ref": "#/definitions/NetworkProfile",
+          "description": "Network settings"
+        },
+        "associatedRulestack": {
+          "type": "string",
+          "description": "Associated Rulestack"
+        },
+        "dnsSettings": {
+          "$ref": "#/definitions/DNSSettings",
+          "description": "DNS settings for Firewall"
+        },
+        "planData": {
+          "$ref": "#/definitions/PlanData",
+          "description": "Billing plan information."
+        },
+        "marketplaceDetails": {
+          "$ref": "#/definitions/MarketplaceDetails",
+          "description": "Marketplace details"
+        }
+      },
+      "description": "The updatable properties of the FirewallResource."
+    },
+    "GlobalRulestackResource": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/RulestackProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "x-ms-client-flatten": true
+        },
+        "identity": {
+          "$ref": "#/definitions/Azure.ResourceManager.ManagedIdentityProperties",
+          "description": "The managed service identities assigned to this resource."
+        }
+      },
+      "description": "PaloAltoNetworks GlobalRulestack",
+      "required": [
+        "properties"
+      ],
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "GlobalRulestackResourceListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/GlobalRulestackResource"
+          },
+          "x-cadl-name": "GlobalRulestackResource[]",
+          "description": "The items on this page"
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The link to the next page of items"
+        }
+      },
+      "description": "The response of a GlobalRulestackResource list operation.",
+      "required": [
+        "value"
+      ]
+    },
+    "GlobalRulestackResourceUpdate": {
+      "type": "object",
+      "properties": {
+        "identity": {
+          "$ref": "#/definitions/Azure.ResourceManager.ManagedIdentityProperties",
+          "description": "The managed service identities assigned to this resource."
+        },
+        "properties": {
+          "$ref": "#/definitions/GlobalRulestackResourceUpdateProperties"
+        }
+      },
+      "description": "The type used for update operations of the GlobalRulestackResource."
+    },
+    "GlobalRulestackResourceUpdateProperties": {
+      "type": "object",
+      "properties": {
+        "rulestackName": {
+          "type": "string",
+          "description": "PAN Rulestack Name"
+        },
+        "panLocation": {
+          "type": "string",
+          "description": "PAN Location"
+        },
+        "stackType": {
+          "$ref": "#/definitions/StackType",
+          "description": "Rulestack Type"
+        },
+        "scope": {
+          "$ref": "#/definitions/Scope",
+          "description": "subscription scope of rulestack"
+        },
+        "description": {
+          "type": "string",
+          "description": "rulestack description"
+        },
+        "minAppIdVersion": {
+          "type": "string",
+          "description": "minimum version"
+        },
+        "securityProfiles": {
+          "$ref": "#/definitions/securityProfile",
+          "description": "Security Profile"
+        },
+        "panTagInfo": {
+          "$ref": "#/definitions/PANTagInfo",
+          "description": "PAN Tag Info"
+        }
+      },
+      "description": "The updatable properties of the GlobalRulestackResource."
+    },
+    "IPAddress": {
+      "type": "object",
+      "properties": {
+        "armId": {
+          "type": "string",
+          "description": "Arm Id"
+        },
+        "address": {
+          "type": "string",
+          "description": "Address value"
+        }
+      },
+      "description": "IP Address"
+    },
+    "IPAddressSpace": {
+      "type": "object",
+      "properties": {
+        "armId": {
+          "type": "string",
+          "description": "Arm Id"
+        },
+        "addressSpace": {
+          "type": "string",
+          "description": "Address Space"
+        }
+      },
+      "description": "IP Address Space"
+    },
+    "LocalRulestackResource": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/RulestackProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "x-ms-client-flatten": true
+        },
+        "identity": {
+          "$ref": "#/definitions/Azure.ResourceManager.ManagedIdentityProperties",
+          "description": "The managed service identities assigned to this resource."
+        }
+      },
+      "description": "PaloAltoNetworks LocalRulestack",
+      "required": [
+        "properties"
+      ],
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "LocalRulestackResourceListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LocalRulestackResource"
+          },
+          "x-cadl-name": "LocalRulestackResource[]",
+          "description": "The items on this page"
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The link to the next page of items"
+        }
+      },
+      "description": "The response of a LocalRulestackResource list operation.",
+      "required": [
+        "value"
+      ]
+    },
+    "LocalRulestackResourceUpdate": {
+      "type": "object",
+      "properties": {
+        "identity": {
+          "$ref": "#/definitions/Azure.ResourceManager.ManagedIdentityProperties",
+          "description": "The managed service identities assigned to this resource."
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags."
+        },
+        "properties": {
+          "$ref": "#/definitions/LocalRulestackResourceUpdateProperties"
+        }
+      },
+      "description": "The type used for update operations of the LocalRulestackResource."
+    },
+    "LocalRulestackResourceUpdateProperties": {
+      "type": "object",
+      "properties": {
+        "rulestackName": {
+          "type": "string",
+          "description": "PAN Rulestack Name"
+        },
+        "panLocation": {
+          "type": "string",
+          "description": "PAN Location"
+        },
+        "stackType": {
+          "$ref": "#/definitions/StackType",
+          "description": "Rulestack Type"
+        },
+        "scope": {
+          "$ref": "#/definitions/Scope",
+          "description": "subscription scope of rulestack"
+        },
+        "description": {
+          "type": "string",
+          "description": "rulestack description"
+        },
+        "minAppIdVersion": {
+          "type": "string",
+          "description": "minimum version"
+        },
+        "securityProfiles": {
+          "$ref": "#/definitions/securityProfile",
+          "description": "Security Profile"
+        },
+        "panTagInfo": {
+          "$ref": "#/definitions/PANTagInfo",
+          "description": "PAN Tag Info"
+        }
+      },
+      "description": "The updatable properties of the LocalRulestackResource."
+    },
+    "MarketplaceDetails": {
+      "type": "object",
+      "properties": {
+        "marketplaceSubscriptionId": {
+          "type": "string",
+          "description": "Marketplace Subscription Id"
+        },
+        "planId": {
+          "type": "string",
+          "description": "Plan Id"
+        },
+        "offerId": {
+          "type": "string",
+          "description": "Offer Id"
+        },
+        "publisherId": {
+          "type": "string",
+          "description": "Publisher Id"
+        }
+      },
+      "description": "MarketplaceDetails of PAN Firewall resource"
+    },
+    "MediumString": {
+      "type": "string",
+      "description": "Shorthand for setting length limit.",
+      "maxLength": 50
+    },
+    "NetworkProfile": {
+      "type": "object",
+      "properties": {
+        "vnetConfiguration": {
+          "$ref": "#/definitions/VnetConfiguration",
+          "description": "Vnet configurations"
+        },
+        "vwanConfiguration": {
+          "$ref": "#/definitions/VwanConfiguration",
+          "description": "Vwan configurations"
+        },
+        "networkType": {
+          "$ref": "#/definitions/NetworkType",
+          "description": "vnet or vwan, cannot be updated"
+        },
+        "publicIps": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IPAddress"
+          },
+          "x-ms-identifiers": [],
+          "x-cadl-name": "IPAddress[]",
+          "description": "List of IPs associated with the Firewall"
+        },
+        "enableServiceChain": {
+          "$ref": "#/definitions/ServiceChain",
+          "description": "Enable service chaining, disabled by default"
+        },
+        "enableEgressNat": {
+          "$ref": "#/definitions/EgressNat",
+          "description": "Enable egress NAT, enabled by default"
+        },
+        "egressNatIp": {
+          "$ref": "#/definitions/IPAddress",
+          "description": "Egress nat IP to use"
+        }
+      },
+      "description": "Network settings for Firewall",
+      "required": [
+        "networkType"
+      ]
+    },
+    "NetworkType": {
+      "type": "string",
+      "description": "NetworkType Enum",
+      "enum": [
+        "VNET",
+        "VWAN"
+      ],
+      "x-ms-enum": {
+        "name": "NetworkType",
+        "modelAsString": true
+      }
+    },
+    "PANTag": {
+      "type": "object",
+      "properties": {
+        "tagId": {
+          "type": "string",
+          "description": "tag id"
+        },
+        "tagValue": {
+          "type": "string",
+          "description": "tag value"
+        }
+      },
+      "description": "PAN Tag",
+      "required": [
+        "tagId",
+        "tagValue"
+      ]
+    },
+    "PANTagInfo": {
+      "type": "object",
+      "properties": {
+        "panTags": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PANTag"
+          },
+          "x-ms-identifiers": [],
+          "x-cadl-name": "PANTag[]",
+          "description": "List of PAN Tags"
+        }
+      },
+      "description": "PAN Tag Info",
+      "required": [
+        "panTags"
+      ]
+    },
+    "PlanData": {
+      "type": "object",
+      "properties": {
+        "usageType": {
+          "$ref": "#/definitions/UsageType",
+          "description": "different usage type like PAYG/COMMITTED"
+        },
+        "billingCycle": {
+          "$ref": "#/definitions/BillingCycle",
+          "description": "different billing cycles like MONTHLY/WEEKLY"
+        },
+        "planId": {
+          "$ref": "#/definitions/MediumString",
+          "description": "plan id as published by Liftr.PAN"
+        },
+        "effectiveDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "date when plan was applied",
+          "readOnly": true
+        }
+      },
+      "description": "Billing plan information."
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "Provisioning state of the firewall resource.",
+      "enum": [
+        "Accepted",
+        "Creating",
+        "Updating",
+        "Deleting",
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Deleted",
+        "NotSpecified"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true
+      }
+    },
+    "RulestackProperties": {
+      "type": "object",
+      "properties": {
+        "rulestackName": {
+          "type": "string",
+          "description": "PAN Rulestack Name"
+        },
+        "panLocation": {
+          "type": "string",
+          "description": "PAN Location"
+        },
+        "stackType": {
+          "$ref": "#/definitions/StackType",
+          "description": "Rulestack Type"
+        },
+        "scope": {
+          "$ref": "#/definitions/Scope",
+          "description": "subscription scope of rulestack"
+        },
+        "description": {
+          "type": "string",
+          "description": "rulestack description"
+        },
+        "minAppIdVersion": {
+          "type": "string",
+          "description": "minimum version"
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Provisioning state of the resource.",
+          "readOnly": true
+        },
+        "securityProfiles": {
+          "$ref": "#/definitions/securityProfile",
+          "description": "Security Profile"
+        },
+        "panTagInfo": {
+          "$ref": "#/definitions/PANTagInfo",
+          "description": "PAN Tag Info"
+        }
+      },
+      "description": "PAN Rulestack Describe Object",
+      "required": [
+        "panLocation"
+      ]
+    },
+    "Scope": {
+      "type": "object",
+      "properties": {
+        "subscriptionIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-cadl-name": "string[]",
+          "description": "List of subscriptions"
+        }
+      },
+      "description": "subscription scope of rulestack",
+      "required": [
+        "subscriptionIds"
+      ]
+    },
+    "ServiceChain": {
+      "type": "string",
+      "description": "Service Chain",
+      "enum": [
+        "DISABLED",
+        "ENABLED"
+      ],
+      "x-ms-enum": {
+        "name": "ServiceChain",
+        "modelAsString": true
+      }
+    },
+    "StackType": {
+      "type": "string",
+      "description": "Rulestack Type",
+      "enum": [
+        "LOCAL",
+        "GLOBAL"
+      ],
+      "x-ms-enum": {
+        "name": "StackType",
+        "modelAsString": true
+      }
+    },
+    "UsageType": {
+      "type": "string",
+      "description": "Usage Type",
+      "enum": [
+        "PAYG",
+        "COMMITTED"
+      ],
+      "x-ms-enum": {
+        "name": "UsageType",
+        "modelAsString": true
+      }
+    },
+    "VnetConfiguration": {
+      "type": "object",
+      "properties": {
+        "vnet": {
+          "$ref": "#/definitions/IPAddressSpace",
+          "description": "Azure Virtual Network"
+        },
+        "trustSubnet": {
+          "$ref": "#/definitions/IPAddressSpace",
+          "description": "Trust Subnet"
+        },
+        "unTrustSubnet": {
+          "$ref": "#/definitions/IPAddressSpace",
+          "description": "Untrust Subnet"
+        }
+      },
+      "description": "VnetInfo for Firewall Networking"
+    },
+    "VwanConfiguration": {
+      "type": "object",
+      "properties": {
+        "networkVirtualApplianceId": {
+          "type": "string",
+          "description": "Network Virtual Appliance ARM resource ID "
+        },
+        "hubAddressSpace": {
+          "$ref": "#/definitions/IPAddressSpace",
+          "description": "Address Space"
+        }
+      },
+      "description": "VwanInfo for Firewall Networking"
+    },
+    "securityProfile": {
+      "type": "object",
+      "properties": {
+        "ipsVulnerabilityProfile": {
+          "type": "string",
+          "description": "IPs Vulnerability Profile Data"
+        },
+        "antiSpywareProfile": {
+          "type": "string",
+          "description": "Anti spyware Profile data"
+        },
+        "antiVirusProfile": {
+          "type": "string",
+          "description": "anti virus profile data"
+        },
+        "urlFilteringProfile": {
+          "type": "string",
+          "description": "URL filtering profile data"
+        },
+        "fileBlockingProfile": {
+          "type": "string",
+          "description": "File blocking profile data"
+        },
+        "dnsSubscription": {
+          "type": "boolean",
+          "description": "DNS Subscription profile data"
+        },
+        "outboundUnTrustCertificate": {
+          "type": "string",
+          "description": "Untrusted Egress Decryption profile data"
+        },
+        "outboundTrustCertificate": {
+          "type": "string",
+          "description": "Trusted Egress Decryption profile data"
+        }
+      },
+      "description": "security profile",
+      "required": [
+        "ipsVulnerabilityProfile",
+        "antiSpywareProfile",
+        "antiVirusProfile",
+        "urlFilteringProfile",
+        "fileBlockingProfile",
+        "dnsSubscription"
+      ]
+    }
+  },
+  "parameters": {
+    "FirewallResource.firewallName": {
+      "name": "firewallName",
+      "in": "path",
+      "required": true,
+      "description": "Firewall resource name",
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "GlobalRulestackResource.globalRulestackName": {
+      "name": "globalRulestackName",
+      "in": "path",
+      "required": true,
+      "description": "GlobalRulestack resource name",
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "LocalRulestackResource.localRulestackName": {
+      "name": "localRulestackName",
+      "in": "path",
+      "required": true,
+      "description": "LocalRulestack resource name",
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

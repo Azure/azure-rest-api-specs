@@ -1,0 +1,122 @@
+{
+  "parameters": {
+    "subscriptionId": "{subscriptionId}",
+    "resourceGroupName": "contoso-k8sRg",
+    "api-version": "2020-12-01-preview",
+    "deploymentDetailId": "4d480919-e257-4927-9c4b-68dd9d9501e2",
+    "createOperationParameters": {
+      "properties": {
+        "targetResource": {
+          "id": "/subscriptions/5e531950-9b90-4deb-b69f-3bf3b79dfb31/resourceGroups/contoso-k8sRg/providers/Microsoft.ContainerService/managedClusters/contoso-k8s-cluster",
+          "type": "Microsoft.ContainerService/ManagedClusters",
+          "properties": {
+            "namespace": "prod-wcus"
+          }
+        },
+        "workflowRun": {
+          "provider": "GitHub",
+          "workflow": {
+            "repository": "contoso/contoso-app",
+            "name": "Prod deployment",
+            "ref": "refs/heads/release",
+            "authorization": {
+              "authorizationType": "personalAccessToken",
+              "parameters": {
+                "token": "mypat"
+              }
+            },
+            "bootstrapConfiguration": {
+              "pipelineTemplateId": "ms.vss-continuous-delivery-pipeline-templates.aks-cd-with-dockerfile-github",
+              "pipelineTemplateParameters": {
+                "reuseACR": "false",
+                "existingContainerRegistryId": "",
+                "existingContainerRegistryResourceGroupLocation": "",
+                "subscriptionId": "00000000-0000-0000-0000-000000000000",
+                "clusterId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/test/providers/Microsoft.ContainerService/managedClusters/test-cluster",
+                "resourceGroup": "test-rg",
+                "httpApplicationRoutingEnabled": "false",
+                "httpApplicationRoutingDomain": "",
+                "kubernetesVersion": "1.12.7",
+                "containerRegistryName": "testacr",
+                "acrResourceGroup": "test-rg",
+                "containerRegistrySKU": "Standard",
+                "containerRegistryLocation": "South Central US",
+                "dockerFilePath": "Dockerfile",
+                "containerPort": "8080",
+                "dockerContext": ".",
+                "armAuthToken": "Bearer xxxxxx",
+                "azureAuth": "{\"scheme\":\"ServicePrincipal\",\"parameters\":{\"serviceprincipalid\":\"00000000-0000-0000-0000-000000000000\",\"serviceprincipalkey\":\"xxx%xxx%xxx#xxx(xx(\",\"subscriptionId\":\"00000000-0000-0000-0000-000000000000\",\"tenantid\":\"00000000-0000-0000-0000-000000000000\"}}"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "description": "The creation or update of workflow deployment detail completed successfully.",
+      "body": {
+        "name": "b0e3f6e4-2bf8-492b-8715-529314a2148d",
+        "id": "/subscriptions/{subscriptionId}/resourceGroups/contoso-k8sRg/providers/Microsoft.DevOps/deploymentDetails/b0e3f6e4-2bf8-492b-8715-529314a2148d",
+        "type": "Microsoft.DevOps/deploymentDetails",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "targetResource": {
+            "id": "/subscriptions/5e531950-9b90-4deb-b69f-3bf3b79dfb31/resourceGroups/k8sRg/providers/Microsoft.ContainerService/managedClusters/contoso-k8s-cluster",
+            "type": "Microsoft.ContainerService/ManagedClusters",
+            "properties": {
+              "namespace": "prod-wcus"
+            }
+          },
+          "workflowRun": {
+            "provider": "GitHub",
+            "workflow": {
+              "repository": "contoso/contoso-app",
+              "name": "Prod deployment",
+              "path": "./github/workflow/cd.yml",
+              "ref": "refs/heads/release",
+              "bootstrapConfiguration": {
+                "pipelineTemplateId": "ms.vss-continuous-delivery-pipeline-templates.aks-cd-with-dockerfile-github",
+                "pipelineTemplateParameters": {}
+              }
+            },
+            "commit": "870d8ae5d7558661d59c1d805d41fd53e43a9a6c"
+          }
+        }
+      }
+    },
+    "201": {
+      "description": "The creation or update of workflow deployment detail started.",
+      "body": {
+        "name": "b0e3f6e4-2bf8-492b-8715-529314a2148d",
+        "id": "/subscriptions/{subscriptionId}/resourceGroups/contoso-k8sRg/providers/Microsoft.DevOps/deploymentDetails/b0e3f6e4-2bf8-492b-8715-529314a2148d",
+        "type": "Microsoft.DevOps/deploymentDetails",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "targetResource": {
+            "id": "/subscriptions/5e531950-9b90-4deb-b69f-3bf3b79dfb31/resourceGroups/k8sRg/providers/Microsoft.ContainerService/managedClusters/contoso-k8s-cluster",
+            "type": "Microsoft.ContainerService/ManagedClusters",
+            "properties": {
+              "namespace": "prod-wcus"
+            }
+          },
+          "workflowRun": {
+            "provider": "GitHub",
+            "workflow": {
+              "repository": "contoso/contoso-app",
+              "name": "Prod deployment",
+              "path": "./github/workflow/cd.yml",
+              "ref": "refs/heads/release",
+              "bootstrapConfiguration": {
+                "pipelineTemplateId": "ms.vss-continuous-delivery-pipeline-templates.aks-cd-with-dockerfile-github",
+                "pipelineTemplateParameters": {}
+              }
+            },
+            "commit": "870d8ae5d7558661d59c1d805d41fd53e43a9a6c"
+          }
+        }
+      }
+    }
+  }
+}

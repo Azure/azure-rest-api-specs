@@ -294,7 +294,7 @@
         }
       }
     },
-    "DeploymentCluster": {
+    "Cluster": {
       "type": "object",
       "description": "AzureStackHCI Cluster deployment properties.",
       "properties": {
@@ -346,7 +346,7 @@
       "description": "The Deployment data of AzureStackHCI Cluster.",
       "properties": {
         "securitySettings": {
-          "$ref": "#/definitions/DeploymentSecuritySettings",
+          "$ref": "#/definitions/SecuritySettings",
           "description": "SecuritySettings to deploy AzureStackHCI Cluster."
         },
         "observability": {
@@ -354,7 +354,7 @@
           "description": "Observability config to deploy AzureStackHCI Cluster."
         },
         "cluster": {
-          "$ref": "#/definitions/DeploymentCluster",
+          "$ref": "#/definitions/Cluster",
           "description": "Observability config to deploy AzureStackHCI Cluster."
         },
         "storage": {
@@ -523,7 +523,7 @@
           "type": "array",
           "description": "List of steps of AzureStackHCI Cluster Deployment.",
           "items": {
-            "$ref": "#/definitions/DeploymentStep"
+            "$ref": "#/definitions/Step"
           },
           "readOnly": true,
           "x-ms-identifiers": []
@@ -820,7 +820,7 @@
         "url": "https://learn.microsoft.com/en-us/azure-stack/hci/deploy/deployment-tool-existing-file"
       }
     },
-    "DeploymentSecuritySettings": {
+    "SecuritySettings": {
       "type": "object",
       "description": "The SecuritySettings of AzureStackHCI Cluster.",
       "properties": {
@@ -876,7 +876,7 @@
         }
       }
     },
-    "DeploymentStep": {
+    "Step": {
       "type": "object",
       "description": "The Step of AzureStackHCI Cluster.",
       "properties": {
@@ -914,7 +914,7 @@
           "type": "array",
           "description": "List of nested steps of AzureStackHCI Cluster Deployment.",
           "items": {
-            "$ref": "#/definitions/DeploymentStep"
+            "$ref": "#/definitions/Step"
           },
           "readOnly": true,
           "x-ms-identifiers": []
@@ -972,7 +972,7 @@
           "type": "array",
           "description": "List of steps of AzureStackHCI Cluster Deployment.",
           "items": {
-            "$ref": "#/definitions/DeploymentStep"
+            "$ref": "#/definitions/Step"
           },
           "readOnly": true,
           "x-ms-identifiers": []

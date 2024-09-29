@@ -3,8 +3,7 @@ import "@azure-tools/typespec-client-generator-core";
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
-using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
+using TypeSpec.Versioning;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint"
 namespace Microsoft.Workloads;
@@ -12,6 +11,7 @@ namespace Microsoft.Workloads;
 /**
  * Defines the provisioning states.
  */
+@Azure.Core.lroStatus
 union ProvisioningState {
   string,
 
@@ -38,6 +38,38 @@ union ProvisioningState {
 
   /** The provisioning state Unknown. */
   Unknown: "Unknown",
+}
+
+/**
+ * Defines the import entities operation status.
+ */
+@added(Versions.v2024_06_01_preview)
+union ImportEntitiesOperationStatus {
+  string,
+
+  /** The import operation status - Accepted. */
+  Accepted: "Accepted",
+
+  /** The import operation status - AwaitingFile. */
+  AwaitingFile: "AwaitingFile",
+
+  /** The import operation status - ProcessingFile. */
+  ProcessingFile: "ProcessingFile",
+
+  /** The import operation status - Succeeded. */
+  Succeeded: "Succeeded",
+
+  /** The import operation status - UploadingErrorExcel. */
+  UploadingErrorExcel: "UploadingErrorExcel",
+
+  /** The import operation status - PartiallySucceeded. */
+  PartiallySucceeded: "PartiallySucceeded",
+
+  /** The import operation status - Failed. */
+  Failed: "Failed",
+
+  /** The import operation status - Canceled. */
+  Canceled: "Canceled",
 }
 
 /**
@@ -94,6 +126,37 @@ union SapInstanceType {
 }
 
 /**
+ * This is server type of the host server which is running.
+ */
+@added(Versions.v2024_06_01_preview)
+union ServerType {
+  string,
+
+  /** The type of server- Physical. */
+  Physical: "Physical",
+
+  /** The type of server- Virtual. */
+  Virtual: "Virtual",
+}
+
+/**
+ * This is Hypervisor/virtualization type of the host server which is running.
+ */
+@added(Versions.v2024_06_01_preview)
+union HyperVisorType {
+  string,
+
+  /** The type of hypervisor virtualization- VMware. */
+  VMware: "VMware",
+
+  /** The type of hypervisor virtualization- Hyper-V. */
+  HyperV: "HyperV",
+
+  /** The other type of hypervisor virtualization- not VMware and HyperV. */
+  Other: "Other",
+}
+
+/**
  * This is Operating System on which the host server is running.
  */
 union OperatingSystem {
@@ -116,6 +179,23 @@ union OperatingSystem {
 
   /** The type of Operating system- WindowsServer. */
   WindowsServer: "WindowsServer",
+}
+
+/**
+ * This is the type of the Operating System on which the host server is running.
+ */
+@added(Versions.v2024_06_01_preview)
+union OperatingSystemType {
+  string,
+
+  /** The type of Operating system- Linux. */
+  Linux: "Linux",
+
+  /** The type of Operating system- Windows. */
+  Windows: "Windows",
+
+  /** The type of Operating system- Other. */
+  Other: "Other",
 }
 
 /**
@@ -201,7 +281,7 @@ model SAPMigrateError {
   /**
    * The SAP Discovery site resource error body.
    */
-  #suppress "deprecated" "Legacy flatten"
+  #suppress "deprecated" "Legacy flattening"
   @Azure.ClientGenerator.Core.flattenProperty
   properties?: ErrorDefinition;
 }
@@ -328,10 +408,24 @@ model ServerInstanceProperties {
   sapProductVersion?: string;
 
   /**
-   * This is Operating System on which the host server is running.
+   * This is name of the Operating System on which the host server is running.
    */
   @visibility("read")
   operatingSystem?: OperatingSystem;
+
+  /**
+   * This is the version of the Operating System on which the host server is running.
+   */
+  @added(Versions.v2024_06_01_preview)
+  @visibility("read")
+  operatingSystemVersion?: string;
+
+  /**
+   * This is the type of the Operating System on which the host server is running.
+   */
+  @added(Versions.v2024_06_01_preview)
+  @visibility("read")
+  operatingSystemType?: OperatingSystemType;
 
   /**
    * Configuration data for this server instance.
@@ -379,6 +473,14 @@ model ConfigurationData {
   saps?: int32;
 
   /**
+   * Provide the cores per cpu for each server of the SAP system. This should be a non-zero value. For example, 4.
+   */
+  @added(Versions.v2024_06_01_preview)
+  @visibility("read")
+  @minValue(0)
+  coresPerCpu?: int32;
+
+  /**
    * Provide the CPU value of the server. For example, 16, 32 etc.
    */
   @visibility("read")
@@ -389,6 +491,13 @@ model ConfigurationData {
    */
   @visibility("read")
   cpuType?: string;
+
+  /**
+   * Provide the hypervisor/virtualization type for each server of the SAP system. For example, VMware, Hyper-V.
+   */
+  @added(Versions.v2024_06_01_preview)
+  @visibility("read")
+  hyperVisorType?: HyperVisorType;
 
   /**
    * Provide the CPU clock speed of the server in MHz. This should be a non-zero value. For example, 2100.
@@ -410,9 +519,12 @@ model ConfigurationData {
 
   /**
    * Specify if the Hardware is a physical server or virtual machine.
+   * For example, Physical, Virtual.
    */
+  @renamedFrom(Versions.v2024_06_01_preview, "model")
+  @typeChangedFrom(Versions.v2024_06_01_preview, string)
   @visibility("read")
-  `model`?: string;
+  serverType?: ServerType;
 
   /**
    * Provide the total disk volume capacity in GB. Add the disk volume for each individual disks and provide the total sum in this field.
@@ -481,4 +593,41 @@ model NativePerformanceData extends PerformanceData {
    * The data source for this resource.
    */
   dataSource: DataSource.Native;
+}
+
+@doc("Import entities Operation Status Result model by extending OperationStatusResult as per SAP Discovery.")
+@added(Versions.v2024_06_01_preview)
+model ImportOperationStatusResult {
+  ...Azure.ResourceManager.Foundations.OperationStatusResult;
+
+  @doc("The resource ID of the SAP Discovery site.")
+  resourceId?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.Workloads/sapDiscoverySites";
+    }
+  ]>;
+
+  @doc("Additional properties applicable for SAP Discovery import entities operation status result")
+  properties?: ImportOperationStatusProperties;
+}
+
+@doc("Import Entities operation status properties as per SAP Discovery.")
+@added(Versions.v2024_06_01_preview)
+model ImportOperationStatusProperties {
+  @doc("The SAS URI of the Excel file containing the discovery data.")
+  discoveryExcelSasUri?: url;
+
+  @doc("Import status of the discovery request.")
+  status?: ImportEntitiesOperationStatus;
+
+  @doc("The SAS URI of the Excel file containing the error data.")
+  errorExcelSasUri?: url;
+
+  @doc("The number of rows imported.")
+  @minValue(0)
+  rowsImported?: int32;
+
+  @doc("The total number of rows.")
+  @minValue(0)
+  totalRows?: int32;
 }

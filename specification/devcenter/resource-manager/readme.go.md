@@ -17,24 +17,13 @@ output-folder: $(go-sdk-folder)/$(module-name)
 azure-arm: true
 directive:
 - rename-model:
-    from: DevCenterSku
-    to: SkuInfo
+    from: 'DevCenterSku'
+    to: 'SkuForDevCenter'
 - from: vdi.json
-  where: "$.definitions.SkuListResult.properties.value.items"
-  transform: >-
-    return {
-            "$ref": "commonDefinitions.json#/definitions/SkuInfo"
-          }
-- rename-model:
-    from: DevCenterProjectCatalogSettings
-    to: ProjectCatalogSettingsInfo
-- from: devcenter.json
-  where: "$.definitions.DevCenterUpdateProperties.properties.projectCatalogSettings"
-  transform: >-
-    return {
-           "$ref": "#/definitions/ProjectCatalogSettingsInfo",
-           "description": "Dev Center settings to be used when associating a project with a catalog."
-          }
+  where: 
+    - $.definitions.SkuListResult.properties.value.items
+  transform: > 
+    $['$ref'] = "commonDefinitions.json#/definitions/SkuForDevCenter";
 ```
 
 ### Go multi-api

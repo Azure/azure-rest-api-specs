@@ -1,4 +1,4 @@
-# Trusted Signing
+# Code Signing
 
 > see https://aka.ms/autorest
 
@@ -29,6 +29,25 @@ openapi-subtype: rpaas
 tag: package-2024-02-05-preview
 ```
 
+
+### Tag: package-2020-12-14-preview
+
+These settings apply only when `--tag=package-2020-12-14-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2020-12-14-preview'
+input-file:
+- Microsoft.CodeSigning/preview/2020-12-14-preview/codeSigningAccount.json
+```
+
+### Tag: package-2023-04-30-preview
+
+These settings apply only when `--tag=package-2023-04-30-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2023-04-30-preview'
+input-file:
+- Microsoft.CodeSigning/preview/2023-04-30-preview/codeSigningAccount.json
+```
+
 ### Tag: package-2024-02-05-preview
 
 These settings apply only when `--tag=package-2024-02-05-preview` is specified on the command line.
@@ -49,7 +68,7 @@ This is not used by Autorest itself.
 
 ```yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-python
+  - repo: azure-sdk-for-python-track2
   - repo: azure-cli-extensions
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-net-track2

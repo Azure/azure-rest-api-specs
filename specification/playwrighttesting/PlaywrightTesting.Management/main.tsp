@@ -7,28 +7,28 @@ import "@azure-tools/typespec-azure-resource-manager";
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
-using Azure.Core;
 using Azure.ResourceManager;
+using Azure.Core;
 
 @armProviderNamespace("Microsoft.AzurePlaywrightService")
 @service({
   title: "Microsoft AzurePlaywrightService Management API",
 })
-@doc("Microsoft.AzurePlaywrightService Resource Provider Management API.")
 @versioned(Versions)
+@doc("Microsoft.AzurePlaywrightService Resource Provider management API.")
 namespace Microsoft.AzurePlaywrightService;
 
 @doc("Microsoft.AzurePlaywrightService Management API Versions.")
 enum Versions {
-  /** 2024-08-01-preview version */
+  @doc("API Version 2024-08-01-preview.")
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
-  `2024-08-01-preview`,
+  v2024_08_01_preview: "2024-08-01-preview",
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}
 
-@doc("A Playwright service account resource.")
+@doc("An account resource.")
 model Account is TrackedResource<AccountProperties> {
   @doc("Name of account.")
   @minLength(3)
@@ -40,7 +40,7 @@ model Account is TrackedResource<AccountProperties> {
   name: string;
 }
 
-@doc("Account resource properties.")
+@doc("Account properties.")
 model AccountProperties {
   @visibility("read")
   @doc("The Playwright testing dashboard URI for the account resource.")
@@ -65,28 +65,28 @@ model AccountProperties {
 
 @doc("The enablement status of a feature.")
 union EnablementStatus {
-  string,
-
   @doc("The feature is Enabled.")
   Enabled: "Enabled",
 
   @doc("The feature is Disabled.")
   Disabled: "Disabled",
+
+  string,
 }
 
 @doc("The status of the current operation.")
-@lroStatus
+@Azure.Core.lroStatus
 union ProvisioningState {
   string,
   ResourceProvisioningState,
 
-  @doc("Creation in progress..")
+  @doc("Creation in progress")
   Creating: "Creating",
 
-  @doc("Deletion in progress..")
+  @doc("Deletion in progress")
   Deleting: "Deleting",
 
-  @doc("Change accepted for processing..")
+  @doc("Change accepted for processing")
   Accepted: "Accepted",
 }
 
@@ -95,12 +95,6 @@ interface Accounts
   extends TrackedResourceOperations<Account, AccountProperties> {
   @doc("Adds check global name availability operation, normally used if a resource name must be globally unique.")
   checkNameAvailability is checkGlobalNameAvailability;
-  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "MUST REMOVE AT NEXT API VERSION UPDATE"
-  @Azure.Core.useFinalStateVia("azure-async-operation")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<
-    Account,
-    LroHeaders = Azure.Core.Foundations.RetryAfterHeader
-  >;
 
   delete is ArmResourceDeleteWithoutOkAsync<Account>;
 
@@ -113,7 +107,7 @@ interface Accounts
   >;
 }
 
-@doc("The location of subscription quota resource.")
+@doc("The location of quota resource.")
 @subscriptionResource
 model Location {
   @doc("The location of quota in ARM Normalized format like eastus, southeastasia etc.")
@@ -124,7 +118,7 @@ model Location {
   name: string;
 }
 
-@doc("A subscription quota resource.")
+@doc("A quota resource.")
 @parentResource(Location)
 model Quota is ProxyResource<QuotaProperties> {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-name-pattern" "existing api"
@@ -135,20 +129,20 @@ model Quota is ProxyResource<QuotaProperties> {
   name: QuotaNames;
 }
 
-@doc("The enum for quota name.")
+@doc("The quota name.")
 union QuotaNames {
-  string,
-
   @doc("The quota details for scalable execution feature. When enabled, Playwright client workers can connect to cloud-hosted browsers. This can increase the number of parallel workers for a test run, significantly minimizing test completion durations.")
-  "ScalableExecution",
+  ScalableExecution: "ScalableExecution",
 
   @doc("The quota details for reporting feature. When enabled, Playwright client will be able to upload and display test results, including artifacts like traces and screenshots, in the Playwright portal. This enables faster and more efficient troubleshooting.")
   Reporting: "Reporting",
+
+  string,
 }
 
-@doc("The subscription quota resource properties.")
+@doc("Quota properties.")
 model QuotaProperties {
-  @doc("The subscription quota resource free-trial properties.")
+  @doc("The free-trial quota.")
   freeTrial?: FreeTrialProperties;
 
   @doc("Indicates the offering type for the subscription.")
@@ -160,9 +154,9 @@ model QuotaProperties {
   provisioningState?: ProvisioningState;
 }
 
-@doc("The subscription quota resource free-trial properties.")
+@doc("The free-trial properties.")
 model FreeTrialProperties {
-  @doc("The Playwright service account id.")
+  @doc("The playwright account id.")
   @visibility("read")
   accountId: string;
 
@@ -171,20 +165,20 @@ model FreeTrialProperties {
   state: FreeTrialState;
 }
 
-@doc("A quota resource for a Playwright service account.")
+@doc("A quota resource for an account.")
 @parentResource(Account)
 model AccountQuota is ProxyResource<AccountQuotaProperties> {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-name-pattern" "existing api"
-  @doc("The Playwright service account quota name.")
+  @doc("The quota name.")
   @key("quotaName")
   @path
   @segment("quotas")
   name: QuotaNames;
 }
 
-@doc("The Playwright service account quota resource properties.")
+@doc("Quota properties for an account.")
 model AccountQuotaProperties {
-  @doc("The Playwright service account quota resource free-trial properties.")
+  @doc("The free-trial quota.")
   freeTrial?: AccountFreeTrialProperties;
 
   @visibility("read")
@@ -192,7 +186,7 @@ model AccountQuotaProperties {
   provisioningState?: ProvisioningState;
 }
 
-@doc("The Playwright service account quota resource free-trial properties.")
+@doc("The free-trial properties for an account.")
 model AccountFreeTrialProperties {
   @doc("The free-trial createdAt utcDateTime.")
   @visibility("read")
@@ -219,41 +213,41 @@ model AccountFreeTrialProperties {
 
 @doc("The free-trial state.")
 union FreeTrialState {
-  string,
-
   @doc("The free-trial is Active.")
-  "Active",
+  Active: "Active",
 
   @doc("The free-trial is Expired.")
-  "Expired",
+  Expired: "Expired",
 
   @doc("The free-trial is Not Eligible.")
-  "NotEligible",
+  NotEligible: "NotEligible",
 
   @doc("The free-trial is Not Registered.")
-  "NotRegistered",
+  NotRegistered: "NotRegistered",
+
+  string,
 }
 
 @doc("Offering type state.")
 union OfferingType {
-  string,
-
   @doc("The offeringType is NotApplicable.")
-  "NotApplicable",
+  NotApplicable: "NotApplicable",
 
   @doc("The offeringType is PrivatePreview.")
-  "PrivatePreview",
+  PrivatePreview: "PrivatePreview",
 
   @doc("The offeringType is PublicPreview.")
-  "PublicPreview",
+  PublicPreview: "PublicPreview",
 
   @doc("The offeringType is GeneralAvailability.")
-  "GeneralAvailability",
+  GeneralAvailability: "GeneralAvailability",
+
+  string,
 }
 
 @armResourceOperations
 interface Quotas {
-  @doc("Get subscription quota by name.")
+  @doc("Get quota by name.")
   get is ArmResourceRead<Quota>;
 
   @doc("List quotas for a given subscription Id.")

@@ -1,0 +1,68 @@
+{
+  "title": "JobTemplates_Get",
+  "operationId": "JobTemplates_Get",
+  "parameters": {
+    "api-version": "2023-01-31-preview",
+    "subscriptionId": "BC7AE30F-7480-4B55-86CA-F243AF924107",
+    "resourceGroupName": "rgazurelinuxtestingservice",
+    "jobTemplateName": "storage-test-template"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "provisioningState": "Succeeded",
+          "templateTags": [
+            "storage-tests"
+          ],
+          "region": [
+            "westus3"
+          ],
+          "vmSize": [
+            "Standard_D32pds_v5"
+          ],
+          "selections": [
+            {
+              "caseName": [
+                "hot_add_disk_serial_premium_ssd"
+              ],
+              "caseArea": [
+                "storage"
+              ],
+              "caseCategory": [
+                "functional"
+              ],
+              "casePriority": [
+                3
+              ],
+              "caseTags": [
+                "storage"
+              ],
+              "action": "Include",
+              "testIterations": 1,
+              "retryCount": 0,
+              "useNewEnvironment": true,
+              "ignoreFailure": false
+            }
+          ],
+          "concurrency": 2
+        },
+        "tags": {
+          "test-type": "storage"
+        },
+        "location": "westus3",
+        "id": "r",
+        "name": "storage-test-template",
+        "type": "Microsoft.AzureLinuxTestingService/jobTemplates",
+        "systemData": {
+          "createdBy": "oqxy",
+          "createdByType": "User",
+          "createdAt": "2023-01-31T21:52:10.285Z",
+          "lastModifiedBy": "qhlfaiiouwppdvipxhlcn",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2023-01-31T21:52:10.286Z"
+        }
+      }
+    }
+  }
+}

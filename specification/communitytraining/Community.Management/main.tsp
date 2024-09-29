@@ -9,6 +9,7 @@ using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.ResourceManager;
 
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-common-types-version" "legacy"
 @armProviderNamespace("Microsoft.Community")
 @service({
   title: "Microsoft.Community",
@@ -16,11 +17,9 @@ using Azure.ResourceManager;
 @versioned(Versions)
 namespace Microsoft.Community;
 
-/** Api versions */
 enum Versions {
-  /** 2023-11-01 api version */
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-  `2023-11-01`,
+  `2023-08-01-preview`,
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}
@@ -42,7 +41,6 @@ model CommunityTraining is TrackedResource<CommunityTrainingProperties> {
 @doc("The status of the current operation.")
 @Azure.Core.lroStatus
 union ProvisioningState {
-  string,
   ResourceProvisioningState,
 
   @doc("Initial provisioning in progress")
@@ -109,10 +107,6 @@ model CommunityTrainingProperties {
   portalAdminEmailAddress: string;
 
   @visibility("read", "create")
-  @doc("The organization name of the portal owner")
-  portalOwnerOrganizationName: string;
-
-  @visibility("read", "create")
   @doc("The email address of the portal owner. Will be used as the primary contact")
   portalOwnerEmailAddress: string;
 
@@ -133,17 +127,10 @@ model CommunityTrainingProperties {
   provisioningState?: ProvisioningState;
 }
 
-#suppress "deprecated" "Existing API"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "Existing API"
 @armResourceOperations
 interface CommunityTrainings {
   get is ArmResourceRead<CommunityTraining>;
-  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "MUST CHANGE ON NEXT UPDATE"
-  @Azure.Core.useFinalStateVia("azure-async-operation")
-  create is ArmResourceCreateOrUpdateAsync<
-    CommunityTraining,
-    LroHeaders = Azure.Core.Foundations.RetryAfterHeader
-  >;
+  create is ArmResourceCreateOrUpdateAsync<CommunityTraining>;
   update is ArmCustomPatchAsync<
     CommunityTraining,
     Azure.ResourceManager.Foundations.ResourceUpdateModel<
@@ -151,6 +138,8 @@ interface CommunityTrainings {
       CommunityTrainingProperties
     >
   >;
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "legacy"
+  #suppress "deprecated" "legacy"
   delete is ArmResourceDeleteAsync<CommunityTraining>;
   listByResourceGroup is ArmResourceListByParent<CommunityTraining>;
   listBySubscription is ArmListBySubscription<CommunityTraining>;

@@ -1,0 +1,1829 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure API for managing SCOM managed instances and monitored resources.",
+    "description": "Azure Monitor Operations Manager Managed Instance (SCOM MI) management APIs",
+    "version": "2023-10-30",
+    "x-ms-code-generation-settings": {
+      "name": "scomClient"
+    }
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "parameters": {
+    "instanceName": {
+      "name": "instanceName",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]*$",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Name of the Azure Monitor Operations Manager Managed Instance (SCOM MI)",
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "paths": {
+    "/providers/Microsoft.Scom/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "description": "Lists all available operations on SCOM managed instance (SCOM MI)",
+        "operationId": "Operations_ListV2",
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An error response providing a description of the reason for the operation's failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Operations_List": {
+            "$ref": "./examples/Operations_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Scom/managedInstances": {
+      "get": {
+        "operationId": "Instances_ListByResourceGroup",
+        "description": "Lists all SCOM managed instances in a resource group",
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "tags": [
+          "SCOM instance"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/MonitoringInstanceList"
+            }
+          },
+          "default": {
+            "description": "An error response providing a description of the reason for the operation's failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Instances_ListByResourceGroup": {
+            "$ref": "./examples/Instances_ListByResourceGroup.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Scom/managedInstances": {
+      "get": {
+        "operationId": "Instances_ListBySubscription",
+        "description": "Lists all SCOM managed instances in a subscription ",
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "tags": [
+          "SCOM Instances"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/MonitoringInstanceList"
+            }
+          },
+          "default": {
+            "description": "An error response providing a description of the reason for the operation's failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Instances_ListBySubscription": {
+            "$ref": "./examples/Instances_ListBySubscription.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Scom/managedInstances/{instanceName}": {
+      "get": {
+        "operationId": "Instances_Get",
+        "description": "Get SCOM managed instance details",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/instanceName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ManagedInstance"
+            }
+          },
+          "default": {
+            "description": "An error response providing a description of the reason for the operation's failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Instances_Get": {
+            "$ref": "./examples/Instance_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Instances_CreateOrUpdate",
+        "description": "Create or update SCOM managed instance",
+        "tags": [
+          "SCOM Instances"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/instanceName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "ManagedInstance",
+            "description": "SCOM Managed Instance",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ManagedInstance"
+            }
+          },
+          {
+            "in": "query",
+            "name": "validationMode",
+            "description": "Validation mode for the SCOM managed instance",
+            "required": false,
+            "type": "boolean"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Managed instance update successful.",
+            "schema": {
+              "$ref": "#/definitions/ManagedInstance"
+            }
+          },
+          "201": {
+            "description": "Managed instance create request successful.",
+            "schema": {
+              "$ref": "#/definitions/ManagedInstance"
+            }
+          },
+          "default": {
+            "description": "An error response providing a description of the reason for the operation's failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "Instances_CreateOrUpdate": {
+            "$ref": "./examples/Instance_Create.json"
+          }
+        }
+      },
+      "patch": {
+        "operationId": "Instances_Update",
+        "description": "Patch SCOM managed instance",
+        "tags": [
+          "SCOM Instance"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/instanceName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "ManagedInstance",
+            "description": "SCOM managed instance properties update",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/MonitoringInstancePatch"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ManagedInstance"
+            }
+          },
+          "202": {
+            "description": "accepted operation",
+            "schema": {
+              "$ref": "#/definitions/ManagedInstance"
+            },
+            "headers": {
+              "Location": {
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "The URL to retrieve the status of the asynchronous operation."
+              }
+            }
+          },
+          "default": {
+            "description": "An error response providing a description of the reason for the operation's failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "Instances_Patch": {
+            "$ref": "./examples/Instance_Update.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "Instances_Delete",
+        "description": "Delete a SCOM managed instance",
+        "tags": [
+          "SCOM Instances"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/instanceName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted. The deletion will be processed asynchronously.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "The URL to retrieve the status of the asynchronous operation."
+              }
+            }
+          },
+          "204": {
+            "description": "No content. No managed instance to delete."
+          },
+          "default": {
+            "description": "An error response providing a description of the reason for the operation's failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "Instances_Delete": {
+            "$ref": "./examples/Instance_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Scom/managedInstances/{instanceName}/setServerCount": {
+      "post": {
+        "operationId": "Instances_Scale",
+        "description": "Scaling SCOM managed instance.",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/instanceName"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ScalingProperties"
+            }
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The Scaling has completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/setServerCountResponseProperties"
+            }
+          },
+          "202": {
+            "description": "Accepted. The Scaling will complete asyncronously.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "The URL to retrieve the status of the asynchronous operation."
+              }
+            }
+          },
+          "default": {
+            "description": "An error response providing a description of the reason for the operation's failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "Instances_Scale": {
+            "$ref": "./examples/Instance_Scale.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Scom/managedInstances/{instanceName}/getResourceSummary": {
+      "post": {
+        "operationId": "Resource_Summary",
+        "description": "Getting the summary of monitored resources and manage gateway attached to a SCOM managed instance.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/instanceName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/GetResourceSummaryResponseProperties"
+            }
+          },
+          "default": {
+            "description": "An error response providing a description of the reason for the operation's failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Instances_Get": {
+            "$ref": "./examples/Resource_Summary.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Scom/managedInstances/{instanceName}/getResourcesList": {
+      "post": {
+        "operationId": "Resource_List",
+        "description": "Getting the List of specified type of resource attached to a SCOM managed instance based on filter and sorting conditions.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/instanceName"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GetResourceListProperties"
+            }
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/GetResourcesListResponseProperties"
+            }
+          },
+          "default": {
+            "description": "An error response providing a description of the reason for the operation's failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Instances_Get": {
+            "$ref": "./examples/Resource_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Scom/managedInstances/{instanceName}/onboardGateway": {
+      "post": {
+        "operationId": "Onboard_Gateway",
+        "description": "Gateway approval for onboarding gateway.",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/instanceName"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GatewayOnboardingProperties"
+            }
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The gateway approval for onboarding has completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CommonResponseProperties"
+            }
+          },
+          "202": {
+            "description": "Accepted. The approval for onboarding will complete asyncronously.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "The URL to retrieve the status of the asynchronous operation."
+              }
+            }
+          },
+          "default": {
+            "description": "An error response providing a description of the reason for the operation's failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "Instances_Scale": {
+            "$ref": "./examples/Gateway_Onboard.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Scom/managedInstances/{instanceName}/offboardGateway": {
+      "post": {
+        "operationId": "Offboard_Gateway",
+        "description": "Gateway removal approval for deleting gateway.",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/instanceName"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GatewayOnboardingProperties"
+            }
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The remove gateway approval for deleting has completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CommonResponseProperties"
+            }
+          },
+          "202": {
+            "description": "Accepted. The remove approval for deleting will complete asyncronously.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "The URL to retrieve the status of the asynchronous operation."
+              }
+            }
+          },
+          "default": {
+            "description": "An error response providing a description of the reason for the operation's failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "Instances_Scale": {
+            "$ref": "./examples/Gateway_Offboard.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Scom/managedInstances/{instanceName}/offboardMonitoredResource": {
+      "post": {
+        "operationId": "Offboard_MonitoredResource",
+        "description": "Api to remove monitored resource from management server.",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/instanceName"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MonitoredResourceOffboardingProperties"
+            }
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The removal of monitored resource from management server before unregister has completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CommonResponseProperties"
+            }
+          },
+          "202": {
+            "description": "Accepted. The removal of monitored resource from management server before unregister will complete asyncronously.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "The URL to retrieve the status of the asynchronous operation."
+              }
+            }
+          },
+          "default": {
+            "description": "An error response providing a description of the reason for the operation's failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "Instances_Scale": {
+            "$ref": "./examples/MonitoredResource_Offboard.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Scom/managedInstances/{instanceName}/patchServers": {
+      "post": {
+        "operationId": "Instances_PatchServers",
+        "description": "Update SCOM servers with latest scom software.",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/instanceName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The update process for SCOM Servers has been completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/patchServersResponseProperties"
+            }
+          },
+          "202": {
+            "description": "Accepted. The Updating of SCOM Servers will complete asyncronously.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "The URL to retrieve the status of the asynchronous operation."
+              }
+            }
+          },
+          "default": {
+            "description": "An error response providing a description of the reason for the operation's failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "Instances_PatchServers": {
+            "$ref": "./examples/Instances_PatchServers.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Scom/managedInstances/{instanceName}/linkLogAnalytics": {
+      "post": {
+        "operationId": "Instances_LinkLogAnalytics",
+        "description": "Link Log Analytics workspace for SCOM monitoring instance",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/instanceName"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LogAnalyticsConfiguration"
+            }
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The Log Analytics linking has completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/LogAnalyticsConfiguration"
+            }
+          },
+          "202": {
+            "description": "Accepted. The Log Analytics linking will complete asyncronously.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "The URL to retrieve the status of the asynchronous operation."
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "Instances_LinkLogAnalytics": {
+            "$ref": "./examples/Instance_LinkLogAnalytics.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Scom/managedInstances/{instanceName}/unlinkLogAnalytics": {
+      "post": {
+        "operationId": "Instances_UnlinkLogAnalytics",
+        "description": "Unlink Log Analytics workspace for SCOM monitoring instance",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/instanceName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. Unlinked Log Analytics association with managed instance successfully.",
+            "schema": {
+              "$ref": "#/definitions/UnlinkLogAnalyticsResponseProperties"
+            }
+          },
+          "202": {
+            "description": "Accepted. Disabling Log Analytics association with managed instance will complete asyncronously.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "The URL to retrieve the status of the asynchronous operation."
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "Instances_UnlinkLogAnalytics": {
+            "$ref": "./examples/Instance_UnlinkLogAnalytics.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Scom/managedInstances/{instanceName}/updateLogAnalytics": {
+      "post": {
+        "operationId": "Instances_UpdateLogAnalytics",
+        "description": "Update configuration for log analytics linking for SCOM monitoring instance",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/instanceName"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LogAnalyticsUpdateConfiguration"
+            }
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The Log Analytics configuration update has completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/LogAnalyticsUpdateConfiguration"
+            }
+          },
+          "202": {
+            "description": "Accepted. The Log Analytics configuration update will complete asyncronously.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "The URL to retrieve the status of the asynchronous operation."
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "Instances_UpdateLogAnalytics": {
+            "$ref": "./examples/Instance_UpdateLogAnalytics.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ManagedInstance": {
+      "type": "object",
+      "description": "A SCOM instance resource",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "The properties of a SCOM instance resource",
+          "$ref": "#/definitions/MonitoringInstanceProperties"
+        },
+        "identity": {
+          "description": "The Azure Active Directory identity of the SCOM instance",
+          "$ref": "#/definitions/ManagedIdentity",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        }
+      }
+    },
+    "MonitoringInstanceProperties": {
+      "description": "The properties of a SCOM instance resource",
+      "type": "object",
+      "properties": {
+        "productVersion": {
+          "description": "SCOM product version to be installed on instance",
+          "type": "string",
+          "readOnly": true
+        },
+        "vNetSubnetId": {
+          "description": "Virtual Network subnet id on which Aquila instance will be provisioned",
+          "type": "string"
+        },
+        "managementEndpoints": {
+          "description": "List of management server endpoints",
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ManagementServerProperties"
+          },
+          "x-ms-identifiers": []
+        },
+        "databaseInstance": {
+          "description": "The database instance where the SCOM Operational and Warehouse databases will be stored.",
+          "$ref": "#/definitions/DatabaseInstanceProperties"
+        },
+        "domainController": {
+          "description": "Domain controller details",
+          "$ref": "#/definitions/DomainControllerProperties"
+        },
+        "domainUserCredentials": {
+          "description": "Domain user which will be used to join VMs to domain and login to VMs.",
+          "$ref": "#/definitions/DomainUserCredentials"
+        },
+        "gmsaDetails": {
+          "description": "Gmsa Details for load balancer and vmss",
+          "$ref": "#/definitions/GmsaDetails"
+        },
+        "azureHybridBenefit": {
+          "description": "The properties to enable Azure Hybrid benefit for various SCOM infrastructure license.",
+          "$ref": "#/definitions/AzureHybridBenefitProperties"
+        },
+        "provisioningState": {
+          "description": "Gets the provisioning state.",
+          "type": "string",
+          "enum": [
+            "Succeeded",
+            "Failed",
+            "Canceled",
+            "Creating",
+            "Updating",
+            "Scaling",
+            "LinkingOrUpdatingLogAnalytics",
+            "UnlinkingLogAnalytics",
+            "GatewayOnboard"
+          ],
+          "x-ms-enum": {
+            "name": "provisioningState",
+            "modelAsString": true
+          },
+          "readOnly": true
+        },
+        "logAnalyticsProperties": {
+          "description": "Details of Log Analytics workspace and data being ingested.",
+          "readOnly": true,
+          "$ref": "#/definitions/LogAnalyticsConfiguration"
+        },
+        "operationsStatus": {
+          "description": "Gets status of current and latest SCOM managed instance operations.",
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ManagedInstanceOperationStatus"
+          },
+          "x-ms-identifiers": [
+            "id"
+          ]
+        }
+      }
+    },
+    "ManagedInstanceOperationStatus": {
+      "description": "Gets status of current and latest SCOM managed instance operation.",
+      "type": "object",
+      "properties": {
+        "operationName": {
+          "description": "Operation Name",
+          "type": "string",
+          "readOnly": true
+        },
+        "operationState": {
+          "description": "Operation status",
+          "type": "string",
+          "readOnly": true
+        },
+        "id": {
+          "description": "Operation id",
+          "type": "string",
+          "readOnly": true
+        },
+        "operationMessage": {
+          "description": "Operation message",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ManagementServerProperties": {
+      "description": "The properties of management server",
+      "type": "object",
+      "properties": {
+        "serverName": {
+          "description": "Management server Name",
+          "type": "string",
+          "readOnly": true
+        },
+        "vmResId": {
+          "description": "Azure VM Resource Id of the Management server.",
+          "type": "string",
+          "readOnly": true
+        },
+        "fqdn": {
+          "description": "Management server Fully Qualified Domain Name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "serverRoles": {
+          "description": "Represent whether the Server is a Management Server and/or Web Console Server.",
+          "type": "string",
+          "readOnly": true
+        },
+        "healthState": {
+          "description": "Management server health state.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "DomainControllerProperties": {
+      "description": "The properties of domain controller to which SCOM and SQL servers join for AuthN/AuthZ.",
+      "type": "object",
+      "properties": {
+        "domainName": {
+          "description": "Fully qualified domain name",
+          "type": "string"
+        },
+        "dnsServer": {
+          "description": "IP address of DNS server ",
+          "type": "string"
+        },
+        "ouPath": {
+          "description": "Organizational Unit path in which the SCOM servers will be present",
+          "type": "string",
+          "default": ""
+        }
+      }
+    },
+    "DomainUserCredentials": {
+      "description": "Domain user name and password",
+      "type": "object",
+      "properties": {
+        "keyVaultUrl": {
+          "description": "Key vault url to get the domain username and password (not used)",
+          "type": "string"
+        },
+        "userNameSecret": {
+          "description": "Domain user name",
+          "type": "string"
+        },
+        "passwordSecret": {
+          "description": "Domain password",
+          "type": "string",
+          "format": "password",
+          "x-ms-secret": true
+        }
+      }
+    },
+    "GmsaDetails": {
+      "description": "Gmsa Details",
+      "type": "object",
+      "properties": {
+        "loadBalancerIP": {
+          "description": "Frontend IP configuration for Load Balancer, which should be an available IP in customer VNet",
+          "type": "string"
+        },
+        "gmsaAccount": {
+          "description": "gMSA account under which context all Management Server services will run",
+          "type": "string"
+        },
+        "managementServerGroupName": {
+          "description": "OnPrem AD Computer Group where we will join VMs for ease of management",
+          "type": "string"
+        },
+        "dnsName": {
+          "description": "Frontend DNS name for Load Balancer which will be used by Agents to initiate communication",
+          "type": "string"
+        }
+      }
+    },
+    "DatabaseInstanceProperties": {
+      "description": "The properties of database instance",
+      "type": "object",
+      "properties": {
+        "databaseInstanceId": {
+          "description": "Resource Id of existing database instance",
+          "type": "string"
+        },
+        "databaseFqdn": {
+          "description": "Fully qualified domain name of public endpoint of existing database instance.",
+          "type": "string"
+        },
+        "dwDatabaseName": {
+          "description": "Name of warehouse database on database instance",
+          "type": "string",
+          "readOnly": true
+        },
+        "operationalDatabaseId": {
+          "description": "Resource Id of operational database on database instance",
+          "type": "string",
+          "readOnly": true
+        },
+        "dwDatabaseId": {
+          "description": "Resource Id of warehouse database on database instance",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "UserIdentity": {
+      "description": "Azure Active Directory identity configuration for a resource.",
+      "type": "object",
+      "properties": {
+        "principalId": {
+          "description": "The Azure Active Directory principal id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "clientId": {
+          "description": "The Azure Active Directory client id.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ManagedIdentity": {
+      "description": "Azure Active Directory identity configuration for a resource.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "The identity type",
+          "enum": [
+            "None",
+            "UserAssigned",
+            "SystemAssigned",
+            "SystemAssigned,UserAssigned"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ManagedIdentityType",
+            "modelAsString": true
+          }
+        },
+        "principalId": {
+          "description": "System Assigned Identity ObjectId.",
+          "type": "string",
+          "readOnly": true
+        },
+        "tenantId": {
+          "description": "The Azure Active Directory tenant id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "userAssignedIdentities": {
+          "description": "The resource ids of the user assigned identities to use",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/UserIdentity"
+          }
+        }
+      }
+    },
+    "LicenseTypeEnum": {
+      "description": "The license type associated with different SCOM infrastructure components.",
+      "type": "string",
+      "enum": [
+        "None",
+        "AzureHybridBenefit"
+      ],
+      "x-ms-enum": {
+        "name": "hybridLicenseType",
+        "modelAsString": true
+      }
+    },
+    "AzureHybridBenefitProperties": {
+      "type": "object",
+      "description": "The properties to maximize savings by using Azure Hybrid Benefit",
+      "properties": {
+        "scomLicenseType": {
+          "description": "SCOM license type. Maximize savings by using license you already own",
+          "$ref": "#/definitions/LicenseTypeEnum"
+        },
+        "windowsServerLicenseType": {
+          "description": "Specifies that the image or disk that is being used was licensed on-premises. <br><br> For more information, see [Azure Hybrid Use Benefit for Windows Server](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-hybrid-use-benefit-licensing?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json)",
+          "$ref": "#/definitions/LicenseTypeEnum"
+        },
+        "sqlServerLicenseType": {
+          "description": "SQL Server license type. Maximize savings by using Azure Hybrid Benefit for SQL Server with license you already own",
+          "$ref": "#/definitions/LicenseTypeEnum"
+        }
+      }
+    },
+    "MonitoringInstanceList": {
+      "description": "A paged list of SCOM managed instances",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The items on the page",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/ManagedInstance"
+          }
+        },
+        "nextLink": {
+          "description": "URL to get the next page if any",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "MonitoringInstancePatch": {
+      "description": "Object containing updates for patch operations.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "type": "object",
+          "description": "The properties of a SCOM instance resource",
+          "properties": {
+            "domainUserCredentials": {
+              "description": "Domain user which will be used to join VMs to domain and login to VMs.",
+              "$ref": "#/definitions/DomainUserCredentials"
+            }
+          }
+        },
+        "identity": {
+          "description": "The Azure Active Directory identity of the SCOM instance",
+          "$ref": "#/definitions/ManagedIdentity",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags."
+        }
+      }
+    },
+    "ScalingProperties": {
+      "type": "object",
+      "description": "Properties for Scaling",
+      "properties": {
+        "serverCount": {
+          "description": "Required management server count",
+          "type": "integer",
+          "format": "int64",
+          "maximum": 100,
+          "minimum": 1
+        }
+      }
+    },
+    "GetResourceListProperties": {
+      "type": "object",
+      "description": "Properties for filtering resource list.",
+      "properties": {
+        "filterProperties": {
+          "description": "Filter properties for resource list.",
+          "$ref": "#/definitions/FilterProperties"
+        }
+      }
+    },
+    "FilterProperties": {
+      "description": "List of filter properties to be applied while fetching the resource list.",
+      "type": "object",
+      "properties": {
+        "skip": {
+          "description": "skip count.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "take": {
+          "description": "number of resources to be displayed.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "resourceType": {
+          "description": "Resource Type of various types to be used for filtering",
+          "type": "string"
+        },
+        "name": {
+          "description": "Name to be used for filtering",
+          "type": "string"
+        },
+        "subscription": {
+          "description": "Subscription List to be used for filtering",
+          "type": "array",
+          "items": {
+            "description": "subscription Id.",
+            "type": "string"
+          }
+        },
+        "resourcegroup": {
+          "description": "ResourceGroupName List to be used for filtering",
+          "type": "array",
+          "items": {
+            "description": "Resource Group Name.",
+            "type": "string"
+          }
+        },
+        "location": {
+          "description": "Location list to be used for filtering",
+          "type": "array",
+          "items": {
+            "description": "Location.",
+            "type": "string"
+          }
+        },
+        "healthStatus": {
+          "description": "Health status list to be used for filtering",
+          "type": "array",
+          "items": {
+            "description": "Health status.",
+            "type": "string"
+          }
+        },
+        "autoUpgrade": {
+          "description": "AutoUpgrade list to be used for filtering",
+          "type": "array",
+          "items": {
+            "description": "AutoUpgrade values.",
+            "type": "string"
+          }
+        },
+        "machineType": {
+          "description": "machine types list to be used for filtering",
+          "type": "array",
+          "items": {
+            "description": "machine type.",
+            "type": "string"
+          }
+        }
+      }
+    },
+    "GetResourceSummaryResponseProperties": {
+      "type": "object",
+      "description": "Properties for get resources summary operation",
+      "properties": {
+        "monitoredResources": {
+          "description": "Monitored resource summary",
+          "$ref": "#/definitions/getResourceSummary"
+        },
+        "gateways": {
+          "description": "gateway summary",
+          "$ref": "#/definitions/getResourceSummary"
+        }
+      }
+    },
+    "getResourceSummary": {
+      "type": "object",
+      "description": "Properties for get resources count operation",
+      "properties": {
+        "count": {
+          "description": "resource total count summary.",
+          "$ref": "#/definitions/getResourceCountProperties"
+        }
+      }
+    },
+    "getResourceCountProperties": {
+      "type": "object",
+      "description": "Properties for resource count.",
+      "properties": {
+        "total": {
+          "description": "resource total count",
+          "type": "integer",
+          "format": "int64"
+        },
+        "healthy": {
+          "description": "total healthy resource count",
+          "type": "integer",
+          "format": "int64"
+        },
+        "unhealthy": {
+          "description": "azure Virtual Machine count",
+          "type": "integer",
+          "format": "int64"
+        },
+        "arcMachines": {
+          "description": "Arc Machine count",
+          "type": "integer",
+          "format": "int64"
+        },
+        "azureMachines": {
+          "description": "azure Machine count",
+          "type": "integer",
+          "format": "int64"
+        }
+      }
+    },
+    "GetResourcesListResponseProperties": {
+      "type": "object",
+      "description": "ResourceList based on filters.",
+      "properties": {
+        "value": {
+          "description": "The list of the resources based on the selected filters.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/NexusResourcesProperties"
+          }
+        },
+        "totalRecords": {
+          "description": "Total number of records present in Db to be used in pagination.",
+          "type": "integer",
+          "format": "int64"
+        }
+      }
+    },
+    "NexusResourcesProperties": {
+      "type": "object",
+      "description": "Resource properties.",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "The properties of a filtered resource.",
+          "$ref": "#/definitions/FilteredResourcesResponseProperties"
+        }
+      }
+    },
+    "FilteredResourcesResponseProperties": {
+      "type": "object",
+      "description": "The properties of a filtered resource.",
+      "properties": {
+        "resourceId": {
+          "description": "ArmId of the filtered resource.",
+          "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Compute/virtualMachines"
+              },
+              {
+                "type": "Microsoft.SCVMM/VirtualMachines"
+              },
+              {
+                "type": "microsoft.scvmm/vmmservers"
+              },
+              {
+                "type": "Microsoft.HybridCompute/machines"
+              }
+            ]
+          }
+        },
+        "resourceLocation": {
+          "description": "Location of the filtered resource.",
+          "type": "string"
+        },
+        "computerName": {
+          "description": "ComputerName of the filtered resource.",
+          "type": "string"
+        },
+        "domainName": {
+          "description": "The domain name associated with the filtered resource.",
+          "type": "string"
+        },
+        "onboardingStatus": {
+          "description": "The status of the resource onboarding process that is being installed.",
+          "$ref": "commonTypes.json#/definitions/OnboardingStatusProperties"
+        },
+        "managementServerEndpoint": {
+          "description": "The management server endpoint to which the filtered resource is directed.",
+          "type": "string",
+          "readOnly": true
+        },
+        "healthStatus": {
+          "description": "The health status of the filtered resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "connectionStatus": {
+          "description": "The connection status of the filtered resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "installType": {
+          "description": "Install type of filtered resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "autoUpgrade": {
+          "description": "Update type of filtered resource.",
+          "type": "string",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "autoUpgrade",
+            "modelAsString": true
+          },
+          "readOnly": true
+        },
+        "operatingSystem": {
+          "description": "operatingSystem of filtered resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "machineType": {
+          "description": "machineType of filtered resource.",
+          "type": "string",
+          "enum": [
+            "Azure Virtual Machine",
+            "Azure Arc Machine",
+            "On-premise Machine"
+          ],
+          "x-ms-enum": {
+            "name": "machineType",
+            "modelAsString": true
+          },
+          "readOnly": true
+        },
+        "resourceAdditionalProperties": {
+          "description": "The additional properties of filtered resource.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "setServerCountResponseProperties": {
+      "type": "object",
+      "description": "Properties for set server count operation",
+      "properties": {
+        "serverCount": {
+          "description": "Management server count",
+          "type": "integer",
+          "format": "int64"
+        }
+      }
+    },
+    "GatewayOnboardingProperties": {
+      "type": "object",
+      "description": "Properties for approval of gateway",
+      "properties": {
+        "scomGateway": {
+          "description": "computer name or fqdn of the machine which is onboarded as gateway.",
+          "type": "string"
+        },
+        "resourceId": {
+          "description": "ArmId of the gateway resource.",
+          "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Compute/virtualMachines"
+              },
+              {
+                "type": "Microsoft.SCVMM/VirtualMachines"
+              },
+              {
+                "type": "microsoft.scvmm/vmmservers"
+              },
+              {
+                "type": "Microsoft.HybridCompute/machines"
+              }
+            ]
+          }
+        }
+      }
+    },
+    "CommonResponseProperties": {
+      "type": "object",
+      "description": "Properties for gateway onboarding operation.",
+      "properties": {
+        "status": {
+          "description": "Status of the gateway onboard operation.",
+          "type": "string",
+          "enum": [
+            "Started",
+            "Progress",
+            "Completed",
+            "Succeeded",
+            "Failed"
+          ],
+          "x-ms-enum": {
+            "name": "status",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "MonitoredResourceOffboardingProperties": {
+      "type": "object",
+      "description": "Properties for offboarding of monitored resources.",
+      "properties": {
+        "computerName": {
+          "description": "computer name or fqdn of the monitored resource which is being offboard.",
+          "type": "string"
+        },
+        "resourceId": {
+          "description": "ArmId of the monitored resource.",
+          "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Compute/virtualMachines"
+              },
+              {
+                "type": "Microsoft.SCVMM/VirtualMachines"
+              },
+              {
+                "type": "microsoft.scvmm/vmmservers"
+              },
+              {
+                "type": "Microsoft.HybridCompute/machines"
+              }
+            ]
+          }
+        }
+      }
+    },
+    "patchServersResponseProperties": {
+      "type": "object",
+      "description": "Properties for patching servers",
+      "properties": {
+        "status": {
+          "description": "Status of the patch operation",
+          "type": "string"
+        }
+      }
+    },
+    "LogAnalyticsConfiguration": {
+      "type": "object",
+      "description": "Configuration for Log Analytics linking to SCOM managed instance.",
+      "properties": {
+        "workspaceId": {
+          "description": "The resource ID of the Log Analytics workspace to be used.",
+          "type": "string"
+        },
+        "dataTypes": {
+          "description": "The types of data to be ingested to Log Analytics workspace.",
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "State",
+              "Performance",
+              "Event",
+              "Audit"
+            ],
+            "x-ms-enum": {
+              "name": "DataType",
+              "modelAsString": true
+            }
+          }
+        },
+        "importData": {
+          "description": "A one-time optional parameter to import data of last 7 days.",
+          "default": false,
+          "type": "boolean"
+        }
+      }
+    },
+    "LogAnalyticsUpdateConfiguration": {
+      "type": "object",
+      "description": "Updated configuration for Log Analytics linking",
+      "properties": {
+        "dataTypes": {
+          "description": "The types of data to be ingested to Log Analytics workspace.",
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "State",
+              "Performance",
+              "Event",
+              "Audit"
+            ],
+            "x-ms-enum": {
+              "name": "DataType",
+              "modelAsString": true
+            }
+          }
+        }
+      }
+    },
+    "UnlinkLogAnalyticsResponseProperties": {
+      "type": "object",
+      "description": "Properties for unlinking log analytics",
+      "properties": {
+        "status": {
+          "description": "Status of the unlink operation",
+          "type": "string"
+        }
+      }
+    }
+  }
+}

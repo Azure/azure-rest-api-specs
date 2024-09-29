@@ -1,0 +1,37 @@
+{
+  "parameters": {
+    "subscriptionId": "12345",
+    "resourceGroupName": "MyResourceGroup",
+    "emailServiceName": "MyEmailServiceResource",
+    "domainName": "mydomain.com",
+    "api-version": "2022-10-01-preview",
+    "parameters": {
+      "validSenderUsername": "test",
+      "addressInfoList": [
+        {
+          "email": "abc@xyz.com",
+          "firstName": "FirstName",
+          "lastName": "LastName",
+          "notes": "Notes from C1 customer."
+        },
+        {
+          "email": "defg@xyz.com",
+          "firstName": "FirstName",
+          "lastName": "LastName",
+          "notes": "Notes from C1 customer."
+        }
+      ]
+    }
+  },
+  "responses": {
+    "200": {},
+    "default": {
+      "body": {
+        "error": {
+          "code": "ResourceNotFound",
+          "message": "The requested resource was not found"
+        }
+      }
+    }
+  }
+}

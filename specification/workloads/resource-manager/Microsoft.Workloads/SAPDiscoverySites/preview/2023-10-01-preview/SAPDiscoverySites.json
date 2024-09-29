@@ -224,6 +224,10 @@
               "$ref": "#/definitions/SAPDiscoverySite"
             },
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -540,7 +544,7 @@
         "tags": [
           "SAPInstances"
         ],
-        "description": "Creates the SAP Instance resource. <br><br>This will be used by service only. PUT operation on this resource by end user will return a Bad Request error.",
+        "description": "Creates the SAP Instance resource. This will be used by service only. PUT operation on this resource by end user will return a Bad Request error.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -590,6 +594,10 @@
               "$ref": "#/definitions/SAPInstance"
             },
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -681,7 +689,7 @@
         "tags": [
           "SAPInstances"
         ],
-        "description": "Deletes the SAP Instance resource. <br><br>This will be used by service only. Delete operation on this resource by end user will return a Bad Request error. You can delete the parent resource, which is the SAP Migration discovery site resource, using the delete operation on it.",
+        "description": "Deletes the SAP Instance resource. This will be used by service only. Delete operation on this resource by end user will return a Bad Request error. You can delete the parent resource, which is the SAP Migration discovery site resource, using the delete operation on it.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -873,7 +881,7 @@
         "tags": [
           "ServerInstances"
         ],
-        "description": "Creates the Server Instance resource. <br><br>;This will be used by service only. PUT operation on this resource by end user will return a Bad Request error.",
+        "description": "Creates the Server Instance resource. This will be used by service only. PUT operation on this resource by end user will return a Bad Request error.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -931,6 +939,10 @@
               "$ref": "#/definitions/ServerInstance"
             },
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -1030,7 +1042,7 @@
         "tags": [
           "ServerInstances"
         ],
-        "description": "Deletes the Server Instance resource. <br><br>;This will be used by service only. Delete operation on this resource by end user will return a Bad Request error. You can delete the parent resource, which is the SAP Migration discovery site resource, using the delete operation on it.",
+        "description": "Deletes the Server Instance resource. This will be used by service only. Delete operation on this resource by end user will return a Bad Request error. You can delete the parent resource, which is the SAP Migration discovery site resource, using the delete operation on it.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -1147,7 +1159,7 @@
         },
         "model": {
           "type": "string",
-          "description": "Specify if the Hardware is a physical server or virtual machine.",
+          "description": "Specify if the Hardware is a physical server or virtual machine.\nFor example, Physical, Virtual.",
           "readOnly": true
         },
         "totalDiskSizeGB": {
@@ -1815,7 +1827,7 @@
         },
         "operatingSystem": {
           "$ref": "#/definitions/OperatingSystem",
-          "description": "This is Operating System on which the host server is running.",
+          "description": "This is name of the Operating System on which the host server is running.",
           "readOnly": true
         },
         "configurationData": {

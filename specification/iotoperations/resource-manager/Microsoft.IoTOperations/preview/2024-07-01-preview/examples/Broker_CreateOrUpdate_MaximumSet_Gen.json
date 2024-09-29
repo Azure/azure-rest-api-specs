@@ -5,50 +5,167 @@
     "api-version": "2024-07-01-preview",
     "subscriptionId": "9265A271-C9EC-4648-9AF8-B575759AB43E",
     "resourceGroupName": "rgiotoperations",
-    "instanceName": "aio-instance",
-    "brokerName": "aio-broker",
+    "instanceName": "resource-name123",
+    "brokerName": "resource-name123",
     "resource": {
       "properties": {
-        "memoryProfile": "Medium",
-        "generateResourceLimits": {
-          "cpu": "Disabled"
+        "advanced": {
+          "clients": {
+            "maxSessionExpirySeconds": 8980,
+            "maxMessageExpirySeconds": 4070,
+            "maxPacketSizeBytes": 9140,
+            "subscriberQueueLimit": {
+              "length": 27,
+              "strategy": "None"
+            },
+            "maxReceiveMaximum": 7597,
+            "maxKeepAliveSeconds": 2264
+          },
+          "encryptInternalTraffic": "Enabled",
+          "internalCerts": {
+            "duration": "mbuzbxzzvaeow",
+            "renewBefore": "uveyjmvgxedobfsnudwp",
+            "privateKey": {
+              "algorithm": "Ec256",
+              "rotationPolicy": "Always"
+            }
+          }
         },
         "cardinality": {
           "backendChain": {
-            "partitions": 2,
-            "workers": 2,
-            "redundancyFactor": 2
+            "partitions": 10,
+            "redundancyFactor": 4,
+            "workers": 2
           },
           "frontend": {
-            "replicas": 2,
+            "replicas": 4,
             "workers": 2
           }
         },
-        "advanced": {
-          "encryptInternalTraffic": "Enabled"
-        },
         "diagnostics": {
           "logs": {
-            "level": "info"
+            "opentelemetryExportConfig": {
+              "otlpGrpcEndpoint": "oyembrvhzogggkodr",
+              "intervalSeconds": 23,
+              "level": "tmcrcih"
+            },
+            "level": "tpjixxzdjmkvfnctjbkycswmyrnskf"
           },
           "metrics": {
-            "prometheusPort": 9600
+            "opentelemetryExportConfig": {
+              "otlpGrpcEndpoint": "dngpjdmfecwmrheyzc",
+              "intervalSeconds": 207
+            },
+            "prometheusPort": 87
           },
           "selfCheck": {
-            "intervalSeconds": 30,
             "mode": "Enabled",
-            "timeoutSeconds": 15
+            "intervalSeconds": 136,
+            "timeoutSeconds": 18
           },
           "traces": {
-            "cacheSizeMegabytes": 16,
             "mode": "Enabled",
-            "selfTracing": {
-              "intervalSeconds": 30,
-              "mode": "Enabled"
+            "opentelemetryExportConfig": {
+              "otlpGrpcEndpoint": "dngpjdmfecwmrheyzc",
+              "intervalSeconds": 207
             },
-            "spanChannelCapacity": 1000
+            "cacheSizeMegabytes": 69,
+            "selfTracing": {
+              "mode": "Enabled",
+              "intervalSeconds": 290
+            },
+            "spanChannelCapacity": 6083
           }
-        }
+        },
+        "diskBackedMessageBuffer": {
+          "maxSize": "500M",
+          "ephemeralVolumeClaimSpec": {
+            "volumeName": "rtcwnl",
+            "volumeMode": "okijxud",
+            "storageClassName": "sdidejnhpdeickiowrwnuqdthbuto",
+            "accessModes": [
+              "hfsrutijzeymyvcvomq"
+            ],
+            "dataSource": {
+              "apiGroup": "bi",
+              "kind": "opiekgewvltli",
+              "name": "hmzeclkrckkvflbuwejvael"
+            },
+            "dataSourceRef": {
+              "apiGroup": "ijxtvgdpmfsidjllzhfezleicqazg",
+              "kind": "ztgklwne",
+              "name": "vlgbalrnjuksdxtclhlmlfvx",
+              "namespace": "uvjwhpdpfelibhrzhbnfcpmlu"
+            },
+            "resources": {
+              "limits": {
+                "key2700": "bgqvrfll"
+              },
+              "requests": {
+                "key1544": "imdgrglgisgnmgffyubokbsbcycsk"
+              }
+            },
+            "selector": {
+              "matchExpressions": [
+                {
+                  "key": "smuxyuxautqizhqpoqptao",
+                  "operator": "In",
+                  "values": [
+                    "gwwdwkwiifcwkubcwzgc"
+                  ]
+                }
+              ],
+              "matchLabels": {
+                "key3277": "yrorgczpgmwujcxdcgkhbwxb"
+              }
+            }
+          },
+          "persistentVolumeClaimSpec": {
+            "volumeName": "rtcwnl",
+            "volumeMode": "okijxud",
+            "storageClassName": "sdidejnhpdeickiowrwnuqdthbuto",
+            "accessModes": [
+              "hfsrutijzeymyvcvomq"
+            ],
+            "dataSource": {
+              "apiGroup": "bi",
+              "kind": "opiekgewvltli",
+              "name": "hmzeclkrckkvflbuwejvael"
+            },
+            "dataSourceRef": {
+              "apiGroup": "ijxtvgdpmfsidjllzhfezleicqazg",
+              "kind": "ztgklwne",
+              "name": "vlgbalrnjuksdxtclhlmlfvx",
+              "namespace": "uvjwhpdpfelibhrzhbnfcpmlu"
+            },
+            "resources": {
+              "limits": {
+                "key2700": "bgqvrfll"
+              },
+              "requests": {
+                "key1544": "imdgrglgisgnmgffyubokbsbcycsk"
+              }
+            },
+            "selector": {
+              "matchExpressions": [
+                {
+                  "key": "smuxyuxautqizhqpoqptao",
+                  "operator": "In",
+                  "values": [
+                    "gwwdwkwiifcwkubcwzgc"
+                  ]
+                }
+              ],
+              "matchLabels": {
+                "key3277": "yrorgczpgmwujcxdcgkhbwxb"
+              }
+            }
+          }
+        },
+        "generateResourceLimits": {
+          "cpu": "Enabled"
+        },
+        "memoryProfile": "Tiny"
       },
       "extendedLocation": {
         "name": "ycsyubcxttlusbhfdqaynmkaatnbyv",
@@ -60,46 +177,164 @@
     "200": {
       "body": {
         "properties": {
-          "memoryProfile": "Medium",
-          "generateResourceLimits": {
-            "cpu": "Disabled"
+          "advanced": {
+            "clients": {
+              "maxSessionExpirySeconds": 8980,
+              "maxMessageExpirySeconds": 4070,
+              "maxPacketSizeBytes": 9140,
+              "subscriberQueueLimit": {
+                "length": 27,
+                "strategy": "None"
+              },
+              "maxReceiveMaximum": 7597,
+              "maxKeepAliveSeconds": 2264
+            },
+            "encryptInternalTraffic": "Enabled",
+            "internalCerts": {
+              "duration": "mbuzbxzzvaeow",
+              "renewBefore": "uveyjmvgxedobfsnudwp",
+              "privateKey": {
+                "algorithm": "Ec256",
+                "rotationPolicy": "Always"
+              }
+            }
           },
           "cardinality": {
             "backendChain": {
-              "partitions": 2,
-              "workers": 2,
-              "redundancyFactor": 2
+              "partitions": 10,
+              "redundancyFactor": 4,
+              "workers": 2
             },
             "frontend": {
-              "replicas": 2,
+              "replicas": 4,
               "workers": 2
             }
           },
-          "advanced": {
-            "encryptInternalTraffic": "Enabled"
-          },
           "diagnostics": {
             "logs": {
-              "level": "info"
+              "opentelemetryExportConfig": {
+                "otlpGrpcEndpoint": "oyembrvhzogggkodr",
+                "intervalSeconds": 23,
+                "level": "tmcrcih"
+              },
+              "level": "tpjixxzdjmkvfnctjbkycswmyrnskf"
             },
             "metrics": {
-              "prometheusPort": 9600
+              "opentelemetryExportConfig": {
+                "otlpGrpcEndpoint": "dngpjdmfecwmrheyzc",
+                "intervalSeconds": 207
+              },
+              "prometheusPort": 87
             },
             "selfCheck": {
-              "intervalSeconds": 30,
               "mode": "Enabled",
-              "timeoutSeconds": 15
+              "intervalSeconds": 136,
+              "timeoutSeconds": 18
             },
             "traces": {
-              "cacheSizeMegabytes": 16,
               "mode": "Enabled",
-              "selfTracing": {
-                "intervalSeconds": 30,
-                "mode": "Enabled"
+              "opentelemetryExportConfig": {
+                "otlpGrpcEndpoint": "dngpjdmfecwmrheyzc",
+                "intervalSeconds": 207
               },
-              "spanChannelCapacity": 1000
+              "cacheSizeMegabytes": 69,
+              "selfTracing": {
+                "mode": "Enabled",
+                "intervalSeconds": 290
+              },
+              "spanChannelCapacity": 6083
             }
-          }
+          },
+          "diskBackedMessageBuffer": {
+            "maxSize": "500M",
+            "ephemeralVolumeClaimSpec": {
+              "volumeName": "rtcwnl",
+              "volumeMode": "okijxud",
+              "storageClassName": "sdidejnhpdeickiowrwnuqdthbuto",
+              "accessModes": [
+                "hfsrutijzeymyvcvomq"
+              ],
+              "dataSource": {
+                "apiGroup": "bi",
+                "kind": "opiekgewvltli",
+                "name": "hmzeclkrckkvflbuwejvael"
+              },
+              "dataSourceRef": {
+                "apiGroup": "ijxtvgdpmfsidjllzhfezleicqazg",
+                "kind": "ztgklwne",
+                "name": "vlgbalrnjuksdxtclhlmlfvx",
+                "namespace": "uvjwhpdpfelibhrzhbnfcpmlu"
+              },
+              "resources": {
+                "limits": {
+                  "key2700": "bgqvrfll"
+                },
+                "requests": {
+                  "key1544": "imdgrglgisgnmgffyubokbsbcycsk"
+                }
+              },
+              "selector": {
+                "matchExpressions": [
+                  {
+                    "key": "smuxyuxautqizhqpoqptao",
+                    "operator": "In",
+                    "values": [
+                      "gwwdwkwiifcwkubcwzgc"
+                    ]
+                  }
+                ],
+                "matchLabels": {
+                  "key3277": "yrorgczpgmwujcxdcgkhbwxb"
+                }
+              }
+            },
+            "persistentVolumeClaimSpec": {
+              "volumeName": "rtcwnl",
+              "volumeMode": "okijxud",
+              "storageClassName": "sdidejnhpdeickiowrwnuqdthbuto",
+              "accessModes": [
+                "hfsrutijzeymyvcvomq"
+              ],
+              "dataSource": {
+                "apiGroup": "bi",
+                "kind": "opiekgewvltli",
+                "name": "hmzeclkrckkvflbuwejvael"
+              },
+              "dataSourceRef": {
+                "apiGroup": "ijxtvgdpmfsidjllzhfezleicqazg",
+                "kind": "ztgklwne",
+                "name": "vlgbalrnjuksdxtclhlmlfvx",
+                "namespace": "uvjwhpdpfelibhrzhbnfcpmlu"
+              },
+              "resources": {
+                "limits": {
+                  "key2700": "bgqvrfll"
+                },
+                "requests": {
+                  "key1544": "imdgrglgisgnmgffyubokbsbcycsk"
+                }
+              },
+              "selector": {
+                "matchExpressions": [
+                  {
+                    "key": "smuxyuxautqizhqpoqptao",
+                    "operator": "In",
+                    "values": [
+                      "gwwdwkwiifcwkubcwzgc"
+                    ]
+                  }
+                ],
+                "matchLabels": {
+                  "key3277": "yrorgczpgmwujcxdcgkhbwxb"
+                }
+              }
+            }
+          },
+          "generateResourceLimits": {
+            "cpu": "Enabled"
+          },
+          "memoryProfile": "Tiny",
+          "provisioningState": "Succeeded"
         },
         "extendedLocation": {
           "name": "ycsyubcxttlusbhfdqaynmkaatnbyv",
@@ -124,46 +359,164 @@
       },
       "body": {
         "properties": {
-          "memoryProfile": "Medium",
-          "generateResourceLimits": {
-            "cpu": "Disabled"
+          "advanced": {
+            "clients": {
+              "maxSessionExpirySeconds": 8980,
+              "maxMessageExpirySeconds": 4070,
+              "maxPacketSizeBytes": 9140,
+              "subscriberQueueLimit": {
+                "length": 27,
+                "strategy": "None"
+              },
+              "maxReceiveMaximum": 7597,
+              "maxKeepAliveSeconds": 2264
+            },
+            "encryptInternalTraffic": "Enabled",
+            "internalCerts": {
+              "duration": "mbuzbxzzvaeow",
+              "renewBefore": "uveyjmvgxedobfsnudwp",
+              "privateKey": {
+                "algorithm": "Ec256",
+                "rotationPolicy": "Always"
+              }
+            }
           },
           "cardinality": {
             "backendChain": {
-              "partitions": 2,
-              "workers": 2,
-              "redundancyFactor": 2
+              "partitions": 10,
+              "redundancyFactor": 4,
+              "workers": 2
             },
             "frontend": {
-              "replicas": 2,
+              "replicas": 4,
               "workers": 2
             }
           },
-          "advanced": {
-            "encryptInternalTraffic": "Enabled"
-          },
           "diagnostics": {
             "logs": {
-              "level": "info"
+              "opentelemetryExportConfig": {
+                "otlpGrpcEndpoint": "oyembrvhzogggkodr",
+                "intervalSeconds": 23,
+                "level": "tmcrcih"
+              },
+              "level": "tpjixxzdjmkvfnctjbkycswmyrnskf"
             },
             "metrics": {
-              "prometheusPort": 9600
+              "opentelemetryExportConfig": {
+                "otlpGrpcEndpoint": "dngpjdmfecwmrheyzc",
+                "intervalSeconds": 207
+              },
+              "prometheusPort": 87
             },
             "selfCheck": {
-              "intervalSeconds": 30,
               "mode": "Enabled",
-              "timeoutSeconds": 15
+              "intervalSeconds": 136,
+              "timeoutSeconds": 18
             },
             "traces": {
-              "cacheSizeMegabytes": 16,
               "mode": "Enabled",
-              "selfTracing": {
-                "intervalSeconds": 30,
-                "mode": "Enabled"
+              "opentelemetryExportConfig": {
+                "otlpGrpcEndpoint": "dngpjdmfecwmrheyzc",
+                "intervalSeconds": 207
               },
-              "spanChannelCapacity": 1000
+              "cacheSizeMegabytes": 69,
+              "selfTracing": {
+                "mode": "Enabled",
+                "intervalSeconds": 290
+              },
+              "spanChannelCapacity": 6083
             }
-          }
+          },
+          "diskBackedMessageBuffer": {
+            "maxSize": "500M",
+            "ephemeralVolumeClaimSpec": {
+              "volumeName": "rtcwnl",
+              "volumeMode": "okijxud",
+              "storageClassName": "sdidejnhpdeickiowrwnuqdthbuto",
+              "accessModes": [
+                "hfsrutijzeymyvcvomq"
+              ],
+              "dataSource": {
+                "apiGroup": "bi",
+                "kind": "opiekgewvltli",
+                "name": "hmzeclkrckkvflbuwejvael"
+              },
+              "dataSourceRef": {
+                "apiGroup": "ijxtvgdpmfsidjllzhfezleicqazg",
+                "kind": "ztgklwne",
+                "name": "vlgbalrnjuksdxtclhlmlfvx",
+                "namespace": "uvjwhpdpfelibhrzhbnfcpmlu"
+              },
+              "resources": {
+                "limits": {
+                  "key2700": "bgqvrfll"
+                },
+                "requests": {
+                  "key1544": "imdgrglgisgnmgffyubokbsbcycsk"
+                }
+              },
+              "selector": {
+                "matchExpressions": [
+                  {
+                    "key": "smuxyuxautqizhqpoqptao",
+                    "operator": "In",
+                    "values": [
+                      "gwwdwkwiifcwkubcwzgc"
+                    ]
+                  }
+                ],
+                "matchLabels": {
+                  "key3277": "yrorgczpgmwujcxdcgkhbwxb"
+                }
+              }
+            },
+            "persistentVolumeClaimSpec": {
+              "volumeName": "rtcwnl",
+              "volumeMode": "okijxud",
+              "storageClassName": "sdidejnhpdeickiowrwnuqdthbuto",
+              "accessModes": [
+                "hfsrutijzeymyvcvomq"
+              ],
+              "dataSource": {
+                "apiGroup": "bi",
+                "kind": "opiekgewvltli",
+                "name": "hmzeclkrckkvflbuwejvael"
+              },
+              "dataSourceRef": {
+                "apiGroup": "ijxtvgdpmfsidjllzhfezleicqazg",
+                "kind": "ztgklwne",
+                "name": "vlgbalrnjuksdxtclhlmlfvx",
+                "namespace": "uvjwhpdpfelibhrzhbnfcpmlu"
+              },
+              "resources": {
+                "limits": {
+                  "key2700": "bgqvrfll"
+                },
+                "requests": {
+                  "key1544": "imdgrglgisgnmgffyubokbsbcycsk"
+                }
+              },
+              "selector": {
+                "matchExpressions": [
+                  {
+                    "key": "smuxyuxautqizhqpoqptao",
+                    "operator": "In",
+                    "values": [
+                      "gwwdwkwiifcwkubcwzgc"
+                    ]
+                  }
+                ],
+                "matchLabels": {
+                  "key3277": "yrorgczpgmwujcxdcgkhbwxb"
+                }
+              }
+            }
+          },
+          "generateResourceLimits": {
+            "cpu": "Enabled"
+          },
+          "memoryProfile": "Tiny",
+          "provisioningState": "Succeeded"
         },
         "extendedLocation": {
           "name": "ycsyubcxttlusbhfdqaynmkaatnbyv",
