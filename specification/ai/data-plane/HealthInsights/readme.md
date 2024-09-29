@@ -56,15 +56,13 @@ directive:
     reason: The spec is auto-generated. Tracking issue to fix is https://github.com/Azure/typespec-azure-pr/issues/3349
 ```
 
-### Release 2024-08-01-preview
+### Release package-2024-08-01-preview
 
 ```yaml
 directive:
   - suppress: AvoidAnonymousTypes
     reason: The spec is auto-generated. Tracking issue to fix is https://github.com/Azure/typespec-azure-pr/issues/3349
 ```
-
-### Release package-2024-08-01-preview
 
 These settings apply only when `--tag=package-2024-08-01-preview` is specified on the command line.
 
