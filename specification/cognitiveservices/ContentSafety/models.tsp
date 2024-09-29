@@ -24,6 +24,10 @@ union TextCategory {
 
   @doc("The harm category for Text - Violence.")
   "Violence",
+
+  @added(ContentSafety.Versions.v2024_09_01)
+  @doc("The harm category for Text - Violence.")
+  "Drugs",
 }
 
 @doc("The harm category supported in Image content analysis.")
@@ -41,6 +45,10 @@ union ImageCategory {
 
   @doc("The harm category for Image - Violence.")
   "Violence",
+
+  @added(ContentSafety.Versions.v2024_09_01)
+  @doc("The harm category for Image - Violence.")
+  "Drugs",
 }
 
 @doc("The type of text analysis output.")
