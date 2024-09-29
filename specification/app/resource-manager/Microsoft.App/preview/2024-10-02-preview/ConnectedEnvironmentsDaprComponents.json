@@ -177,7 +177,7 @@
           "default": {
             "description": "Common error response.",
             "schema": {
-              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -224,9 +224,6 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Delete operation completed"
-          },
           "202": {
             "description": "Delete operation is accepted",
             "headers": {
@@ -241,7 +238,7 @@
           "default": {
             "description": "Common error response.",
             "schema": {
-              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -320,6 +317,11 @@
           "items": {
             "$ref": "#/definitions/ConnectedEnvironmentDaprComponent"
           }
+        },
+        "nextLink": {
+          "description": "Link to next page of resources.",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -333,26 +335,31 @@
       ],
       "properties": {
         "properties": {
-          "provisioningState": {
-            "description": "Provisioning state of the Connected Environment Dapr Component.",
-            "enum": [
-              "Succeeded",
-              "Failed",
-              "Canceled",
-              "InProgress"
-            ],
-            "type": "string",
-            "readOnly": true,
-            "x-ms-enum": {
-              "name": "ConnectedEnvironmentDaprComponentProvisioningState",
-              "modelAsString": true
+          "description": "Dapr component properties",
+          "type": "object",
+          "properties": {
+            "provisioningState": {
+              "description": "Provisioning state of the Connected Environment Dapr Component.",
+              "enum": [
+                "Succeeded",
+                "Failed",
+                "Canceled",
+                "InProgress"
+              ],
+              "type": "string",
+              "readOnly": true,
+              "x-ms-enum": {
+                "name": "ConnectedEnvironmentDaprComponentProvisioningState",
+                "modelAsString": true
+              }
+            },
+            "deploymentErrors": {
+              "description": "Any errors that occurred during deployment or deployment validation",
+              "type": "string",
+              "readOnly": true
             }
           },
-          "deploymentErrors": {
-            "description": "Any errors that occurred during deployment or deployment validation",
-            "type": "string",
-            "readOnly": true
-          }
+          "x-ms-client-flatten": true
         }
       }
     }
