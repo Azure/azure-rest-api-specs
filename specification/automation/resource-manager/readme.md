@@ -524,7 +524,7 @@ directive:
     reason: This error format is already part of the previous api, cannot change it as it will result in breaking change.
   - suppress: DefaultErrorResponseSchema
     from: account.json
-    reason: This error format is already part of the previous api, cannot change it as it will result in breaking change.  
+    reason: This error format is already part of the previous api, cannot change it as it will result in breaking change.
   - suppress: DefaultErrorResponseSchema
     from: certificate.json
     reason: This error format is already part of the previous api, cannot change it as it will result in breaking change.
@@ -533,55 +533,55 @@ directive:
     reason: This error format is already part of the previous api, cannot change it as it will result in breaking change.
   - suppress: DefaultErrorResponseSchema
     from: connectionType.json
-    reason: This error format is already part of the previous api, cannot change it as it will result in breaking change.  
+    reason: This error format is already part of the previous api, cannot change it as it will result in breaking change.
   - suppress: DefaultErrorResponseSchema
     from: credential.json
-    reason: This error format is already part of the previous api, cannot change it as it will result in breaking change.    
+    reason: This error format is already part of the previous api, cannot change it as it will result in breaking change.
   - suppress: DefaultErrorResponseSchema
     from: dscConfiguration.json
-    reason: This error format is already part of the previous api, cannot change it as it will result in breaking change. 
+    reason: This error format is already part of the previous api, cannot change it as it will result in breaking change.
   - suppress: DefaultErrorResponseSchema
     from: dscNodeConfiguration.json
-    reason: This error format is already part of the previous api, cannot change it as it will result in breaking change. 
+    reason: This error format is already part of the previous api, cannot change it as it will result in breaking change.
   - suppress: DefaultErrorResponseSchema
     from: job.json
-    reason: This error format is already part of the previous api, cannot change it as it will result in breaking change. 
+    reason: This error format is already part of the previous api, cannot change it as it will result in breaking change.
   - suppress: DefaultErrorResponseSchema
     from: jobSchedule.json
-    reason: This error format is already part of the previous api, cannot change it as it will result in breaking change. 
+    reason: This error format is already part of the previous api, cannot change it as it will result in breaking change.
   - suppress: DefaultErrorResponseSchema
     from: linkedWorkspace.json
-    reason: This error format is already part of the previous api, cannot change it as it will result in breaking change. 
+    reason: This error format is already part of the previous api, cannot change it as it will result in breaking change.
   - suppress: DefaultErrorResponseSchema
     from: module.json
-    reason: This error format is already part of the previous api, cannot change it as it will result in breaking change. 
+    reason: This error format is already part of the previous api, cannot change it as it will result in breaking change.
   - suppress: DefaultErrorResponseSchema
     from: python2package.json
-    reason: This error format is already part of the previous api, cannot change it as it will result in breaking change. 
+    reason: This error format is already part of the previous api, cannot change it as it will result in breaking change.
   - suppress: DefaultErrorResponseSchema
     from: runbook.json
-    reason: This error format is already part of the previous api, cannot change it as it will result in breaking change. 
+    reason: This error format is already part of the previous api, cannot change it as it will result in breaking change.
   - suppress: DefaultErrorResponseSchema
     from: schedule.json
-    reason: This error format is already part of the previous api, cannot change it as it will result in breaking change. 
+    reason: This error format is already part of the previous api, cannot change it as it will result in breaking change.
   - suppress: DefaultErrorResponseSchema
     from: softwareUpdateConfigurationMachineRun.json
-    reason: This error format is already part of the previous api, cannot change it as it will result in breaking change. 
+    reason: This error format is already part of the previous api, cannot change it as it will result in breaking change.
   - suppress: DefaultErrorResponseSchema
     from: softwareUpdateConfigurationRun.json
-    reason: This error format is already part of the previous api, cannot change it as it will result in breaking change. 
+    reason: This error format is already part of the previous api, cannot change it as it will result in breaking change.
   - suppress: DefaultErrorResponseSchema
     from: sourceControl.json
-    reason: This error format is already part of the previous api, cannot change it as it will result in breaking change. 
+    reason: This error format is already part of the previous api, cannot change it as it will result in breaking change.
   - suppress: DefaultErrorResponseSchema
     from: sourceControlSyncJob.json
-    reason: This error format is already part of the previous api, cannot change it as it will result in breaking change. 
+    reason: This error format is already part of the previous api, cannot change it as it will result in breaking change.
   - suppress: DefaultErrorResponseSchema
     from: sourceControlSyncJobStreams.json
-    reason: This error format is already part of the previous api, cannot change it as it will result in breaking change. 
+    reason: This error format is already part of the previous api, cannot change it as it will result in breaking change.
   - suppress: DefaultErrorResponseSchema
     from: variable.json
-    reason: This error format is already part of the previous api, cannot change it as it will result in breaking change. 
+    reason: This error format is already part of the previous api, cannot change it as it will result in breaking change.
   - suppress: DefaultErrorResponseSchema
     from: runbook.json
     reason: This error format is already part of the previous api, cannot change it as it will result in breaking change.
@@ -590,40 +590,43 @@ directive:
     reason: This error format is already part of the previous api, cannot change it as it will result in breaking change.
   - suppress: ResourceNameRestriction
     from: runtimeEnvironment.json
-    reason: This Automation account name is part of the previous api, cannot change it as it will result in breaking change.     
+    reason: This Automation account name is part of the previous api, cannot change it as it will result in breaking change.
   - suppress: DeleteOperationResponses
     from: credential.json
     reason: This error format is already part of the previous api, cannot change it as it will result in breaking change.
   - suppress: DeleteOperationResponses
     from: certificate.json
-    reason: This error format is already part of the previous api, cannot change it as it will result in breaking change. 
+    reason: This error format is already part of the previous api, cannot change it as it will result in breaking change.
   - suppress: DeleteOperationResponses
     from: dscNodeConfiguration.json
-    reason: This error format is already part of the previous api, cannot change it as it will result in breaking change. 
+    reason: This error format is already part of the previous api, cannot change it as it will result in breaking change.
   - suppress: DeleteOperationResponses
     from: hybridRunbookWorkerGroup.json
-    reason: This error format is already part of the previous api, cannot change it as it will result in breaking change. 
+    reason: This error format is already part of the previous api, cannot change it as it will result in breaking change.
   - suppress: DeleteOperationResponses
     from: module.json
-    reason: This error format is already part of the previous api, cannot change it as it will result in breaking change. 
+    reason: This error format is already part of the previous api, cannot change it as it will result in breaking change.
   - suppress: DeleteOperationResponses
     from: python2package.json
     reason: This error format is already part of the previous api, cannot change it as it will result in breaking change.
   - suppress: DeleteOperationResponses
     from: schedule.json
-    reason: This error format is already part of the previous api, cannot change it as it will result in breaking change.  
+    reason: This error format is already part of the previous api, cannot change it as it will result in breaking change.
   - suppress: DeleteOperationResponses
     from: sourceControl.json
-    reason: This error format is already part of the previous api, cannot change it as it will result in breaking change.  
+    reason: This error format is already part of the previous api, cannot change it as it will result in breaking change.
   - suppress: DeleteOperationResponses
     from: variable.json
-    reason: This error format is already part of the previous api, cannot change it as it will result in breaking change.  
+    reason: This error format is already part of the previous api, cannot change it as it will result in breaking change.
   - suppress: DeleteOperationResponses
     from: python2package.json
     reason: This error format is already part of the previous api, cannot change it as it will result in breaking change.
   - suppress: PutRequestResponseSchemeArm
     from: powershell72Module.json
-    reason: This error format is inherited from previous api, cannot change it as it will result in inconsistency.      
+    reason: This error format is inherited from previous api, cannot change it as it will result in inconsistency.
+suppressions:
+  - code: LroErrorContent
+    reason: CloudError does not follow required error schema. Suppress it for now to avoid breaking change because it is referenced by many files.
 
 ```
 
@@ -705,9 +708,3 @@ java:
 regenerate-manager: true
 generate-interface: true
 ```
-
-
-
-
-
-
