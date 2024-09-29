@@ -5,12 +5,14 @@ import "@azure-tools/typespec-azure-core";
 import "./endpoints/routes.tsp";
 import "./agents/routes.tsp";
 import "./evaluations/routes.tsp";
+import "@azure-tools/typespec-client-generator-core";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.Core.Traits;
+using Azure.ClientGenerator.Core;
 
 #suppress "@azure-tools/typespec-azure-core/casing-style"
 @useAuth(
@@ -26,6 +28,7 @@ using Azure.Core.Traits;
   title: "Azure AI",
 })
 @versioned(Versions)
+@clientName("MyClient")
 namespace AzureAI {
   @doc("Azure AI API versions")
   enum Versions {
@@ -36,5 +39,4 @@ namespace AzureAI {
 
   using AzureAI.Evaluations;
   using AzureAI.Agents;
-
 }
