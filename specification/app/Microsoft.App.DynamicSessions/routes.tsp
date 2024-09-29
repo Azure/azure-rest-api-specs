@@ -60,8 +60,8 @@ interface SessionResourceFiles {
 
   #suppress "@azure-tools/typespec-azure-core/byos" ""
   @doc("Upload a file to a session.")
-  uploadFile is SessionOperations.ResourceCollectionAction<
-    SessionResourceFile,
+  @route("/files")
+  uploadFile is RpcOperation<
     {
       ...SessionResourceFilePathParameter;
 

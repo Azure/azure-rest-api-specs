@@ -203,6 +203,53 @@
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
+      },
+      "post": {
+        "operationId": "SessionResourceFiles_UploadFile",
+        "description": "Upload a file to a session.",
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SessionResourceFilePathParameter"
+          },
+          {
+            "name": "file",
+            "in": "formData",
+            "description": "The file to upload.",
+            "required": true,
+            "type": "file"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/SessionResourceFile"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SessionResourceFiles_UploadFile": {
+            "$ref": "./examples/SessionResourceFiles_UploadFile.json"
+          }
+        }
       }
     },
     "/files/{fileName}": {
@@ -331,58 +378,6 @@
         "x-ms-examples": {
           "SessionResourceFiles_GetFileContent": {
             "$ref": "./examples/SessionResourceFiles_GetFileContent.json"
-          }
-        }
-      }
-    },
-    "/files:uploadFile": {
-      "post": {
-        "operationId": "SessionResourceFiles_UploadFile",
-        "description": "Upload a file to a session.",
-        "consumes": [
-          "multipart/form-data"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SessionResourceFilePathParameter"
-          },
-          {
-            "$ref": "#/parameters/SessionIdentifier"
-          },
-          {
-            "name": "file",
-            "in": "formData",
-            "description": "The file to upload.",
-            "required": true,
-            "type": "file"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/SessionResourceFile"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "SessionResourceFiles_UploadFile": {
-            "$ref": "./examples/SessionResourceFiles_UploadFile.json"
           }
         }
       }
