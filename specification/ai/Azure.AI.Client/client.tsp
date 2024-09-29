@@ -3,3 +3,8 @@ import "./main.tsp";
 import "./endpoints/client.tsp";
 import "./agents/client.tsp";
 import "./evaluations/client.tsp";
+import "@azure-tools/typespec-client-generator-core";
+
+using Azure.ClientGenerator.Core;
+
+@@clientName(AzureAI, "MyClientName");

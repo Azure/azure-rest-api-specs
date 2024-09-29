@@ -28,7 +28,6 @@ using Azure.ClientGenerator.Core;
   title: "Azure AI",
 })
 @versioned(Versions)
-@clientName("MyClient")
 namespace AzureAI {
   @doc("Azure AI API versions")
   enum Versions {
