@@ -30,9 +30,12 @@ namespace Azure.AI {
   title: "Azure AI",
 })
 @server(
-  "https://management.azure.com/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}",
+  "{endpoint}/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}",
   "Azure AI",
   {
+    @doc("Azure AI Project endpoint.")
+    endpoint: url = "https://management.azure.com",
+
     @doc("The ID of the target subscription.")
     subscriptionId: string,
 
