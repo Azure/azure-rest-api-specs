@@ -22,8 +22,6 @@ model SessionCodeExecutionRequest {
 
 @doc("The response containing the result of the code execution.")
 model SessionCodeExecutionResponse {
-  ...SessionCodeExecutionRequest;
-
   @visibility("read")
   @doc("Session code execution id.")
   id: string;

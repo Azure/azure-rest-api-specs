@@ -560,23 +560,6 @@
       "type": "object",
       "description": "The response of the async code execution.",
       "properties": {
-        "codeInputType": {
-          "$ref": "#/definitions/CodeInputType",
-          "description": "The code input type of the code execution request."
-        },
-        "executionType": {
-          "$ref": "#/definitions/ExecutionType",
-          "description": "The execution type of the code execution request."
-        },
-        "code": {
-          "type": "string",
-          "description": "The string of the code to execute, based on CodeInputType."
-        },
-        "timeoutInSeconds": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Code execution timeout in seconds."
-        },
         "id": {
           "type": "string",
           "description": "Session code execution id.",
@@ -604,10 +587,6 @@
         }
       },
       "required": [
-        "codeInputType",
-        "executionType",
-        "code",
-        "timeoutInSeconds",
         "id",
         "status",
         "stdout",
@@ -649,23 +628,6 @@
       "type": "object",
       "description": "The response containing the result of the code execution.",
       "properties": {
-        "codeInputType": {
-          "$ref": "#/definitions/CodeInputType",
-          "description": "The code input type of the code execution request."
-        },
-        "executionType": {
-          "$ref": "#/definitions/ExecutionType",
-          "description": "The execution type of the code execution request."
-        },
-        "code": {
-          "type": "string",
-          "description": "The string of the code to execute, based on CodeInputType."
-        },
-        "timeoutInSeconds": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Code execution timeout in seconds."
-        },
         "id": {
           "type": "string",
           "description": "Session code execution id.",
@@ -693,10 +655,6 @@
         }
       },
       "required": [
-        "codeInputType",
-        "executionType",
-        "code",
-        "timeoutInSeconds",
         "id",
         "status",
         "stdout",
