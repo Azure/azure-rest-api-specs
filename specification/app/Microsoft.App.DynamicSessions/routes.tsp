@@ -24,7 +24,7 @@ alias SessionOperations = Azure.Core.ResourceOperations<SessionTraits>;
 interface CodeExecution {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" ""
   @doc("Execute code in a session.")
-  @route("/execute:executeCode")
+  @route("/execute")
   executeCode is Foundations.Operation<
     {
       ...SessionIdentifier;

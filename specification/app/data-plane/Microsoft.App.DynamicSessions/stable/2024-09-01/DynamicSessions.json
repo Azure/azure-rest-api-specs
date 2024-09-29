@@ -52,49 +52,7 @@
   },
   "tags": [],
   "paths": {
-    "/execute/{executionId}": {
-      "get": {
-        "operationId": "CodeExecution_GetResult",
-        "description": "Get the code execution result.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SessionIdentifier"
-          },
-          {
-            "$ref": "#/parameters/CodeExecutionIdentifier"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/SessionCodeExecutionResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "CodeExecution_GetResult": {
-            "$ref": "./examples/CodeExecution_GetResult.json"
-          }
-        }
-      }
-    },
-    "/execute:executeCode": {
+    "/execute": {
       "post": {
         "operationId": "CodeExecution_ExecuteCode",
         "description": "Execute code in a session.",
@@ -161,6 +119,48 @@
           "final-state-via": "operation-location"
         },
         "x-ms-long-running-operation": true
+      }
+    },
+    "/execute/{executionId}": {
+      "get": {
+        "operationId": "CodeExecution_GetResult",
+        "description": "Get the code execution result.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SessionIdentifier"
+          },
+          {
+            "$ref": "#/parameters/CodeExecutionIdentifier"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/SessionCodeExecutionResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CodeExecution_GetResult": {
+            "$ref": "./examples/CodeExecution_GetResult.json"
+          }
+        }
       }
     },
     "/files": {
