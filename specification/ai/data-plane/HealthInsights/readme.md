@@ -58,15 +58,15 @@ directive:
 
 ### Release package-2024-08-01-preview
 
-```yaml
-directive:
-  - suppress: AvoidAnonymousTypes
-    reason: The spec is auto-generated. Tracking issue to fix is https://github.com/Azure/typespec-azure-pr/issues/3349
-```
-
 These settings apply only when `--tag=package-2024-08-01-preview` is specified on the command line.
 
 ```yaml $(tag) == 'package-2024-08-01-preview'
 input-file:
   - preview/2024-08-01-preview/openapi.json
+```
+
+```yaml
+directive:
+  - suppress: AvoidAnonymousTypes
+    reason: The spec is auto-generated. Tracking issue to fix is https://github.com/Azure/typespec-azure-pr/issues/3349
 ```
