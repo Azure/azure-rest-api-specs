@@ -15,7 +15,7 @@ model ProposalExtResource is ExtensionResource<ProposalExtResourceProperties> {
     @doc("The name of the proposal")
     @pattern("^[a-zA-Z0-9-]{3,24}$")
     @key("proposalProductCode")
-    @segment("proposals")
+    @segment("proposalsCode")
     @path
     name: string;
   }
