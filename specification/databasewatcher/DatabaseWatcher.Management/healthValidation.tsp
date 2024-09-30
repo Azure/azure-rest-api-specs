@@ -18,7 +18,7 @@ interface HealthValidations {
   startValidation is ArmResourceActionAsync<
     HealthValidation,
     void,
-    HealthValidation,
+    HealthValidation
   >;
 }
 
@@ -49,9 +49,9 @@ model HealthValidationProperties {
   status: validationStatus;
 
   @visibility("read")
-  @extension("x-ms-identifiers", ["name"])
+  @OpenAPI.extension("x-ms-identifiers", ["category"])
   @doc("The list of issues generated from the health validation.")
-  issues: validationIssue[]
+  issues: ValidationIssue[];
 
   @visibility("read")
   @doc("The provisioning state of the health validation resource.")
@@ -79,12 +79,12 @@ union validationStatus {
   Canceled: "Canceled",
 
   @doc("The health validation has timed out.")
-  TimedOut: "TimedOut",
+  TimedOut: "TimedOut"
 }
 
 @doc("The model of the issue generated from the health validation.")
 @added(Versions.v2024_10_01_preview)
-model validationIssue {
+model ValidationIssue {
   @visibility("read")
   @doc("The category of the issue.")
   category: string;

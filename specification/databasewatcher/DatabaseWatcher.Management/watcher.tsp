@@ -2,6 +2,7 @@ import "@typespec/rest";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "./alertRuleResources.tsp";
+import "./healthValidation.tsp";
 import "./sqlDbDatabaseTarget.tsp";
 import "./sqlDbElasticPoolTarget.tsp";
 import "./sqlMiTarget.tsp";
