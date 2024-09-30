@@ -628,10 +628,11 @@
           ]
         },
         "activeRevisionsMode": {
-          "description": "ActiveRevisionsMode controls how active revisions are handled for the Container app:\n<list><item>Multiple: multiple revisions can be active.</item><item>Single: Only one revision can be active at a time. Revision weights can not be used in this mode. If no value if provided, this is the default.</item></list>",
+          "description": "ActiveRevisionsMode controls how active revisions are handled for the Container app:\n<list><item>Single: Only one revision can be active at a time. Traffic weights cannot be used. This is the default.</item><item>Multiple: Multiple revisions can be active, including optional traffic weights and labels.</item><item>Labels: Only revisions with labels are active. Traffic weights can be applied to labels.</item></list>",
           "enum": [
             "Multiple",
-            "Single"
+            "Single",
+            "Labels"
           ],
           "type": "string",
           "default": "Single",
