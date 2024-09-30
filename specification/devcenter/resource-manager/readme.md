@@ -44,7 +44,9 @@ suppressions:
   - code: PatchBodyParametersSchema
     from: vdi.json
     reason: Patch Body comes from common-types v5 Sku object. Keeping here for consistency with existing parts of API to avoid breaking customers.
-
+  - code: OBJECT_ADDITIONAL_PROPERTIES
+    where: $.definitions["ImageValidationErrorDetails"].properties
+    reason: Pre-existing model in use by customers. Keeping here for consistency with existing parts of API to avoid breaking customers.
 ```
 
 ### Tag: package-preview-2024-08
