@@ -674,7 +674,7 @@ interface ContainerAccountInfoService {
   } | StorageError;
 }
 
-@route("/{containerName}/{+blob}")
+@route("/{containerName}/{blob}")
 interface BlobService {
   /** The Download operation reads or downloads a blob from the system, including its metadata and properties. You can also call Download to read a snapshot. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
