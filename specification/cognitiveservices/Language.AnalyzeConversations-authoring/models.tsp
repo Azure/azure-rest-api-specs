@@ -930,14 +930,29 @@ model ConversationalAnalysisAuthoringEvaluationResults {
   nextLink: string;
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required"
+model StringIndexTypeQueryParameter{
+  /**
+       * Specifies the method used to interpret string offsets. For additional
+       * information see https://aka.ms/text-analytics-offsets.
+       */
+      @query("stringIndexType")
+      stringIndexType: ConversationalAnalysisAuthoringStringIndexType;
+}
+
+
 /**
  * Represents the evaluation result for an utterance.
  */
 @clientName("UtteranceEvaluationResult", "csharp")
+@resource("evaluation/result")
+@parentResource(ConversationalAnalysisAuthoringProjectTrainedModel)
 model ConversationalAnalysisAuthoringUtteranceEvaluationResult {
   /**
    * Represents the utterance text.
    */
+  @key
+  @visibility("read")
   text: string;
 
   /**
@@ -1250,6 +1265,8 @@ model ConversationalAnalysisAuthoringIntentEvaluationSummary {
  * Represents the state of loading a snapshot job.
  */
 @clientName("LoadSnapshotJobState", "csharp")
+@resource("load-snapshot/jobs")
+@parentResource(ConversationalAnalysisAuthoringProjectTrainedModel)
 model ConversationalAnalysisAuthoringLoadSnapshotJobState {
   ...ConversationalAnalysisAuthoringJobState;
 }

@@ -421,53 +421,11 @@ interface ConversationalAnalysisAuthoring {
    * Gets the detailed results of the evaluation for a trained model. This includes
    * the raw inference results for the data included in the evaluation process.
    */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  @route("/authoring/analyze-conversations/projects/{projectName}/models/{trainedModelLabel}/evaluation/result")
-  @get
-  getModelEvaluationResults is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * The name of the project to use.
-       */
-      @maxLength(100)
-      @path
-      projectName: string;
-
-      /**
-       * The trained model label.
-       */
-      @path
-      trainedModelLabel: string;
-
-      /**
-       * Specifies the method used to interpret string offsets. For additional
-       * information see https://aka.ms/text-analytics-offsets.
-       */
-      @query("stringIndexType")
-      stringIndexType: ConversationalAnalysisAuthoringStringIndexType;
-
-      /**
-       * The maximum number of resources to return from the collection.
-       */
-      @query("top")
-      top?: int32;
-
-      /**
-       * An offset into the collection of the first resource to be returned.
-       */
-      @query("skip")
-      skip?: int32;
-
-      /**
-       * The maximum number of resources to include in a single response.
-       */
-      @query("maxpagesize")
-      maxpagesize?: int32;
-    },
-    ConversationalAnalysisAuthoringEvaluationResults,
-    {},
-    ErrorResponse
+  getModelEvaluationResults is languageOperations.ResourceList<
+    ConversationalAnalysisAuthoringUtteranceEvaluationResult,
+    ListQueryParametersTrait<StandardListQueryParameters & StringIndexTypeQueryParameter>
   >;
+ 
 
   /**
    * Gets the evaluation summary of a trained model. The summary includes high level
@@ -476,7 +434,7 @@ interface ConversationalAnalysisAuthoring {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @route("/authoring/analyze-conversations/projects/{projectName}/models/{trainedModelLabel}/evaluation/summary-result")
   @get
-  getModelEvaluationSummary is Azure.Core.Foundations.Operation<
+  getModelEvaluationSummary is Foundations.Operation<
     {
       /**
        * The name of the project to use.
@@ -499,34 +457,7 @@ interface ConversationalAnalysisAuthoring {
   /**
    * Gets the status for loading a snapshot.
    */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  @route("/authoring/analyze-conversations/projects/{projectName}/models/{trainedModelLabel}/load-snapshot/jobs/{jobId}")
-  @get
-  getLoadSnapshotStatus is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * The name of the project to use.
-       */
-      @maxLength(100)
-      @path
-      projectName: string;
-
-      /**
-       * The trained model label.
-       */
-      @path
-      trainedModelLabel: string;
-
-      /**
-       * The job ID.
-       */
-      @path
-      jobId: string;
-    },
-    ConversationalAnalysisAuthoringLoadSnapshotJobState,
-    {},
-    ErrorResponse
-  >;
+  getLoadSnapshotStatus is languageOperations.ResourceRead<ConversationalAnalysisAuthoringLoadSnapshotJobState>;
 
   /**
    * Lists the deployments resources assigned to the project.
