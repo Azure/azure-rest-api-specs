@@ -688,6 +688,10 @@
       "description": "Container App session pool updatable properties.",
       "type": "object",
       "properties": {
+        "identity": {
+          "description": "Managed identities needed by a container app job to interact with other Azure services to not maintain any secrets or credentials in code.",
+          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity"
+        },
         "properties": {
           "description": "Session pool resource specific updatable properties.",
           "type": "object",
