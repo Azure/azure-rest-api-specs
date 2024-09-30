@@ -586,6 +586,30 @@
         }
       }
     },
+    "ArchitectureType": {
+      "type": "string",
+      "description": "Architecture types supported by Azure VMs.",
+      "enum": [
+        "Intel",
+        "AMD"
+      ],
+      "x-ms-enum": {
+        "name": "ArchitectureType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Intel",
+            "value": "Intel",
+            "description": "Intel"
+          },
+          {
+            "name": "AMD",
+            "value": "AMD",
+            "description": "AMD"
+          }
+        ]
+      }
+    },
     "BasePriorityProfile": {
       "type": "object",
       "description": "Contains common properties that are applicable to both Spot and Regular.",
@@ -748,6 +772,30 @@
       "required": [
         "baseVirtualMachineProfile"
       ]
+    },
+    "CpuManufacturer": {
+      "type": "string",
+      "description": "Architecture types supported by Azure VMs.",
+      "enum": [
+        "Intel",
+        "AMD"
+      ],
+      "x-ms-enum": {
+        "name": "CpuManufacturer",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Intel",
+            "value": "Intel",
+            "description": "Intel."
+          },
+          {
+            "name": "AMD",
+            "value": "AMD",
+            "description": "AMD."
+          }
+        ]
+      }
     },
     "DeleteOptions": {
       "type": "string",
@@ -2258,10 +2306,52 @@
         }
       }
     },
+    "VMAttributeSupport": {
+      "type": "string",
+      "description": "VMSizes supported by Azure VMs. Included is a union of Excluded and Required.",
+      "enum": [
+        "Excluded",
+        "Included",
+        "Required"
+      ],
+      "x-ms-enum": {
+        "name": "VMAttributeSupport",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Excluded",
+            "value": "Excluded",
+            "description": "All VMSizes having the feature support will be excluded."
+          },
+          {
+            "name": "Included",
+            "value": "Included",
+            "description": "SDD DiskType."
+          },
+          {
+            "name": "Required",
+            "value": "Required",
+            "description": "VMSizes that have the feature support and that do not have the feature support will be used."
+          }
+        ]
+      }
+    },
     "VMAttributes": {
       "type": "object",
       "description": "VMAttributes that will be used to filter VMSizes which will be used to build Fleet.",
       "properties": {
+        "vCpuCount": {
+          "$ref": "#/definitions/VMAttributeMinMax",
+          "description": "The range of vCpuCount specified from Min to Max. Must be specified if VMAttributes are specified, either Min or Max is required if specified."
+        },
+        "memoryInMiB": {
+          "$ref": "#/definitions/VMAttributeMinMax",
+          "description": "The range of memory specified from Min to Max. Must be specified if VMAttributes are specified, either Min or Max is required if specified."
+        },
+        "localStorageSupport": {
+          "$ref": "#/definitions/VMAttributeSupport",
+          "description": "Specifies whether the VMSize supporting local storage should be used to build Fleet or not."
+        },
         "localStorageDiskType": {
           "type": "array",
           "description": "The local storage disk types specified as a list. If gpuSupport is Excluded, this VMAttribute can not be used.",
@@ -2269,6 +2359,42 @@
             "$ref": "#/definitions/LocalStorageDiskType"
           },
           "x-ms-identifiers": []
+        },
+        "localStorageInGB": {
+          "$ref": "#/definitions/VMAttributeMinMax",
+          "description": "The range of local storage in GB specified from Min to Max."
+        },
+        "localStorageDiskTypes": {
+          "type": "array",
+          "description": "The local storage disk types specified as a list.",
+          "items": {
+            "$ref": "#/definitions/LocalStorageDiskType"
+          },
+          "x-ms-identifiers": []
+        },
+        "dataDiskCount": {
+          "$ref": "#/definitions/VMAttributeMinMax",
+          "description": "The range of data disk count specified from Min to Max. Optional paramater. Either Min or Max is required if specified."
+        },
+        "networkInterfaceCount": {
+          "$ref": "#/definitions/VMAttributeMinMax",
+          "description": "The range of network interface count specified from Min to Max. Optional paramater. Either Min or Max is required if specified."
+        },
+        "networkBandwidthInMbps": {
+          "$ref": "#/definitions/VMAttributeMinMax",
+          "description": "The range of network bandwidth in Mbps specified from Min to Max. Optional paramater. Either Min or Max is required if specified."
+        },
+        "rdmaSupport": {
+          "$ref": "#/definitions/VMAttributeSupport",
+          "description": "Specifies whether the VMSize supporting RDMA (Remote Direct Memory Access) should be used to build Fleet or not."
+        },
+        "rdmaNetworkInterfaceCount": {
+          "$ref": "#/definitions/VMAttributeMinMax",
+          "description": "The range of RDMA (Remote Direct Memory Access) network interface count specified from Min to Max. Optional paramater. Either Min or Max is required if specified."
+        },
+        "gpuSupport": {
+          "$ref": "#/definitions/VMAttributeSupport",
+          "description": "pecifies whether the VMSize supporting GPU should be used to build Fleet or not."
         },
         "gpuManufacturers": {
           "type": "array",
@@ -2278,20 +2404,58 @@
           },
           "x-ms-identifiers": []
         },
-        "vCpuCount": {
-          "$ref": "#/definitions/VMAttributeMinMax",
-          "description": "The range of vCpuCount specified from Min to Max. Must be specified if VMAttributes are specified, either Min or Max is required if specified."
+        "vmCategories": {
+          "type": "array",
+          "description": "The VM category specified as a list. Optional parameter.",
+          "items": {
+            "$ref": "#/definitions/VMCategory"
+          },
+          "x-ms-identifiers": []
         },
-        "memoryInMiB": {
-          "$ref": "#/definitions/VMAttributeMinMax",
-          "description": "The range of memory in MiB specified from Min to Max. Must be specified if VMAttributes are specified, either Min or Max is required if specified."
+        "architectureTypes": {
+          "type": "array",
+          "description": "The VM architecture types specified as a list. Optional parameter.",
+          "items": {
+            "$ref": "#/definitions/ArchitectureType"
+          },
+          "x-ms-identifiers": []
+        },
+        "cpuManufacturers": {
+          "type": "array",
+          "description": "The VM CPU manufacturers specified as a list. Optional parameter.",
+          "items": {
+            "$ref": "#/definitions/CpuManufacturer"
+          },
+          "x-ms-identifiers": []
+        },
+        "burstableSupport": {
+          "$ref": "#/definitions/VMAttributeSupport",
+          "description": "Specifies whether the VMSize supporting burstable capability should be used to build Fleet or not."
+        },
+        "excludedVMSizes": {
+          "type": "array",
+          "description": "Specifies which VMSizes should be excluded while building Fleet. Optional parameter.",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-identifiers": []
         }
       },
       "required": [
-        "localStorageDiskType",
-        "gpuManufacturers",
         "vCpuCount",
-        "memoryInMiB"
+        "memoryInMiB",
+        "localStorageDiskType",
+        "localStorageInGB",
+        "localStorageDiskTypes",
+        "dataDiskCount",
+        "networkInterfaceCount",
+        "networkBandwidthInMbps",
+        "rdmaNetworkInterfaceCount",
+        "gpuManufacturers",
+        "vmCategories",
+        "architectureTypes",
+        "cpuManufacturers",
+        "excludedVMSizes"
       ]
     },
     "VMAttributesList": {
@@ -2310,6 +2474,54 @@
       "required": [
         "vmAttributes"
       ]
+    },
+    "VMCategory": {
+      "type": "string",
+      "description": "VMCategories defined for Azure VMs.",
+      "enum": [
+        "GeneralPurpose",
+        "ComputeOptimized",
+        "MemoryOptimized",
+        "StorageOptimized",
+        "GpuAccelerated",
+        "FpgaAccelerated"
+      ],
+      "x-ms-enum": {
+        "name": "VMCategory",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "GeneralPurpose",
+            "value": "GeneralPurpose",
+            "description": "GeneralPurpose VM."
+          },
+          {
+            "name": "ComputeOptimized",
+            "value": "ComputeOptimized",
+            "description": "ComputeOptimized VM."
+          },
+          {
+            "name": "MemoryOptimized",
+            "value": "MemoryOptimized",
+            "description": "MemoryOptimized VM."
+          },
+          {
+            "name": "StorageOptimized",
+            "value": "StorageOptimized",
+            "description": "StorageOptimized VM."
+          },
+          {
+            "name": "GpuAccelerated",
+            "value": "GpuAccelerated",
+            "description": "GpuAccelerated VM."
+          },
+          {
+            "name": "FpgaAccelerated",
+            "value": "FpgaAccelerated",
+            "description": "FpgaAccelerated VM."
+          }
+        ]
+      }
     },
     "VMDiskSecurityProfile": {
       "type": "object",

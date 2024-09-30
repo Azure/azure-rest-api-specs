@@ -226,6 +226,57 @@ model VMAttributeMinMax
 }
 
 @added(Versions.v2024_11_01)
+@doc("VMSizes supported by Azure VMs. Included is a union of Excluded and Required.")
+union VMAttributeSupport {
+  string,
+
+  @doc("All VMSizes having the feature support will be excluded.")
+  Excluded: "Excluded",
+
+  @doc("SDD DiskType.")
+  Included: "Included",
+
+  @doc("VMSizes that have the feature support and that do not have the feature support will be used.")
+  Required: "Required",
+}
+
+@added(Versions.v2024_11_01)
+@doc("VMCategories defined for Azure VMs.")
+union VMCategory {
+  string,
+  
+  @doc("GeneralPurpose VM.")
+  GeneralPurpose: "GeneralPurpose",
+
+  @doc("ComputeOptimized VM.")
+  ComputeOptimized: "ComputeOptimized",
+
+  @doc("MemoryOptimized VM.")
+  MemoryOptimized: "MemoryOptimized",
+
+  @doc("StorageOptimized VM.")
+  StorageOptimized: "StorageOptimized",
+
+  @doc("GpuAccelerated VM.")
+  GpuAccelerated: "GpuAccelerated",
+
+  @doc("FpgaAccelerated VM.")
+  FpgaAccelerated: "FpgaAccelerated",
+}
+
+@added(Versions.v2024_11_01)
+@doc("Architecture types supported by Azure VMs.")
+union CpuManufacturer {
+  string,
+
+  @doc("Intel.")
+  Intel: "Intel",
+
+  @doc("AMD.")
+  AMD: "AMD",
+}
+
+@added(Versions.v2024_11_01)
 @doc("Different kind of Local storage disk types supported by Azure VMs.")
 union LocalStorageDiskType {
   string,
@@ -235,6 +286,18 @@ union LocalStorageDiskType {
 
   @doc("SDD DiskType.")
   SSD: "SSD",
+}
+
+@added(Versions.v2024_11_01)
+@doc("Architecture types supported by Azure VMs.")
+union ArchitectureType {
+  string,
+
+  @doc("Intel")
+  Intel: "Intel",
+
+  @doc("AMD")
+  AMD: "AMD",
 }
 
 @added(Versions.v2024_11_01)
@@ -256,19 +319,66 @@ union GpuManufacturer {
 @doc("VMAttributes that will be used to filter VMSizes which will be used to build Fleet.")
 #suppress "@azure-tools/typespec-azure-core/casing-style" "VMAttributes which does not follow camel casing"
 model VMAttributes{
+  @doc("The range of vCpuCount specified from Min to Max. Must be specified if VMAttributes are specified, either Min or Max is required if specified.")
+    vCpuCount: VMAttributeMinMax;
+
+  @doc("The range of memory specified from Min to Max. Must be specified if VMAttributes are specified, either Min or Max is required if specified.")
+  memoryInMiB: VMAttributeMinMax;
+
+  @doc("Specifies whether the VMSize supporting local storage should be used to build Fleet or not.")
+  localStorageSupport?: VMAttributeSupport;
+
   @extension("x-ms-identifiers", [])
   @doc("The local storage disk types specified as a list. If gpuSupport is Excluded, this VMAttribute can not be used.")
   localStorageDiskType: Array<LocalStorageDiskType>;
 
+  @doc("The range of local storage in GB specified from Min to Max.")
+  localStorageInGB: VMAttributeMinMax;
+
+  @extension("x-ms-identifiers", [])
+  @doc("The local storage disk types specified as a list.")
+  localStorageDiskTypes: Array<LocalStorageDiskType>;
+
+  @doc("The range of data disk count specified from Min to Max. Optional paramater. Either Min or Max is required if specified.")
+  dataDiskCount: VMAttributeMinMax;
+
+  @doc("The range of network interface count specified from Min to Max. Optional paramater. Either Min or Max is required if specified.")
+  networkInterfaceCount: VMAttributeMinMax;
+
+  @doc("The range of network bandwidth in Mbps specified from Min to Max. Optional paramater. Either Min or Max is required if specified.")
+  networkBandwidthInMbps: VMAttributeMinMax;
+
+  @doc("Specifies whether the VMSize supporting RDMA (Remote Direct Memory Access) should be used to build Fleet or not.")
+  rdmaSupport?:  VMAttributeSupport;
+
+  @doc("The range of RDMA (Remote Direct Memory Access) network interface count specified from Min to Max. Optional paramater. Either Min or Max is required if specified.")
+  rdmaNetworkInterfaceCount: VMAttributeMinMax;
+
+  @doc("pecifies whether the VMSize supporting GPU should be used to build Fleet or not.")
+  gpuSupport?: VMAttributeSupport;
+
 @extension("x-ms-identifiers", [])
   @doc("The GPU manufacturers specified as a list. gpuSupport should be set to Included or Required to use this VMAttribute. Default GPU manufacturers if not specified are ANY of the valid values.")
     gpuManufacturers: Array<GpuManufacturer>;
- 
-  @doc("The range of vCpuCount specified from Min to Max. Must be specified if VMAttributes are specified, either Min or Max is required if specified.")
-    vCpuCount: VMAttributeMinMax;
 
-  @doc("The range of memory in MiB specified from Min to Max. Must be specified if VMAttributes are specified, either Min or Max is required if specified.")
-    memoryInMiB: VMAttributeMinMax;
+    @extension("x-ms-identifiers", [])
+  @doc("The VM category specified as a list. Optional parameter.")
+  vmCategories: Array<VMCategory>;
+
+  @extension("x-ms-identifiers", [])
+  @doc("The VM architecture types specified as a list. Optional parameter.")
+  architectureTypes: Array<ArchitectureType>;
+
+  @extension("x-ms-identifiers", [])
+  @doc("The VM CPU manufacturers specified as a list. Optional parameter.")
+  cpuManufacturers: Array<CpuManufacturer>;
+
+  @doc("Specifies whether the VMSize supporting burstable capability should be used to build Fleet or not.")
+  burstableSupport?: VMAttributeSupport;
+
+  @extension("x-ms-identifiers", [])
+  @doc("Specifies which VMSizes should be excluded while building Fleet. Optional parameter.")
+  excludedVMSizes:  Array<string>;
 }
 
 @added(Versions.v2024_11_01)
