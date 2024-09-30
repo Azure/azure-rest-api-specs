@@ -393,9 +393,6 @@ model RouterRule {
   @doc("The type discriminator describing a sub-type of RouterRule")
   @clientName("routerRuleKind", "java")
   kind: RouterRuleKind;
-  
-  @clientName("kind", "java")
-  routerRuleKind: string;
 }
 
 @resource("routing/distributionPolicies")
@@ -431,6 +428,7 @@ model DistributionMode {
   bypassSelectors?: boolean = false;
 
   @doc("The type discriminator describing a sub-type of DistributionMode.")
+  @clientName("distributionModeKind", "java")
   kind: DistributionModeKind;
 }
 
@@ -467,6 +465,7 @@ model ExceptionRule {
 @discriminator("kind")
 model ExceptionTrigger {
   @doc("The type discriminator describing a sub-type of ExceptionTrigger.")
+  @clientName("exceptionTriggerKind", "java")
   kind: ExceptionTriggerKind;
 }
 
@@ -603,6 +602,7 @@ model RouterJobAssignment {
 @discriminator("kind")
 model JobMatchingMode {
   @doc("The type discriminator describing a sub-type of JobMatchingMode.")
+  @clientName("jobMatchingModeKind", "java")
   kind: JobMatchingModeKind;
 }
 
@@ -612,18 +612,21 @@ model ScheduleAndSuspendMode extends JobMatchingMode {
   scheduleAt: utcDateTime;
 
   @doc("The type discriminator describing ScheduleAndSuspendMode")
+  @clientName("jobMatchingModeKind", "java")
   kind: JobMatchingModeKind.scheduleAndSuspend;
 }
 
 @doc("Describes a matching mode where matching worker to a job is automatically started after job is queued successfully.")
 model QueueAndMatchMode extends JobMatchingMode {
   @doc("The type discriminator describing QueueAndMatchMode")
+  @clientName("jobMatchingModeKind", "java")
   kind: JobMatchingModeKind.queueAndMatch;
 }
 
 @doc("Describes a matching mode where matching worker to a job is suspended.")
 model SuspendMode extends JobMatchingMode {
   @doc("The type discriminator describing SuspendMode")
+  @clientName("jobMatchingModeKind", "java")
   kind: JobMatchingModeKind.suspend;
 }
 
@@ -861,6 +864,7 @@ model BestWorkerMode extends DistributionMode {
   scoringRuleOptions?: ScoringRuleOptions;
 
   @doc("The type discriminator describing a sub-type of Mode")
+  @clientName("distributionModeKind", "java")
   kind: DistributionModeKind.bestWorker;
 }
 
@@ -891,6 +895,7 @@ model CancelExceptionAction extends ExceptionAction {
   dispositionCode?: string;
 
   @doc("The type discriminator describing a sub-type of ExceptionAction.")
+  @clientName("exceptionActionKind", "java")
   kind: ExceptionActionKind.cancel;
 }
 
@@ -901,6 +906,7 @@ model ExceptionAction {
   id?: string;
 
   @doc("The type discriminator describing a sub-type of ExceptionAction.")
+  @clientName("exceptionActionKind", "java")
   kind: ExceptionActionKind;
 }
 
@@ -913,6 +919,7 @@ model ConditionalQueueSelectorAttachment extends QueueSelectorAttachment {
   queueSelectors: RouterQueueSelector[];
 
   @doc("The type discriminator describing the type of queue selector attachment.")
+  @clientName("queueSelectorAttachmentKind", "java")
   kind: QueueSelectorAttachmentKind.conditional;
 }
 
@@ -933,6 +940,7 @@ model RouterQueueSelector {
 @discriminator("kind")
 model QueueSelectorAttachment {
   @doc("The type discriminator describing a sub-type of QueueSelectorAttachment.")
+  @clientName("queueSelectorAttachmentKind", "java")
   kind: QueueSelectorAttachmentKind;
 }
 
@@ -945,6 +953,7 @@ model ConditionalWorkerSelectorAttachment extends WorkerSelectorAttachment {
   workerSelectors: RouterWorkerSelector[];
 
   @doc("The type discriminator describing the type of worker selector attachment.")
+  @clientName("workerSelectorAttachmentKind", "java")
   kind: WorkerSelectorAttachmentKind.conditional;
 }
 
@@ -952,6 +961,7 @@ model ConditionalWorkerSelectorAttachment extends WorkerSelectorAttachment {
 @discriminator("kind")
 model WorkerSelectorAttachment {
   @doc("The type discriminator describing a sub-type of WorkerSelectorAttachment.")
+  @clientName("workerSelectorAttachmentKind", "java")
   kind: WorkerSelectorAttachmentKind;
 }
 
@@ -1003,6 +1013,7 @@ model FunctionRouterRuleCredential {
 @doc("Jobs are directed to the worker who has been idle longest.")
 model LongestIdleMode extends DistributionMode {
   @doc("The type discriminator describing a sub-type of Mode.")
+  @clientName("distributionModeKind", "java")
   kind: DistributionModeKind.longestIdle;
 }
 
@@ -1018,6 +1029,7 @@ model ManualReclassifyExceptionAction extends ExceptionAction {
   workerSelectors?: RouterWorkerSelector[];
 
   @doc("The type discriminator describing a sub-type of ExceptionAction.")
+  @clientName("exceptionActionKind", "java")
   kind: ExceptionActionKind.manualReclassify;
 }
 
@@ -1040,6 +1052,7 @@ model PassThroughQueueSelectorAttachment extends QueueSelectorAttachment {
   labelOperator: LabelOperator;
 
   @doc("The type discriminator describing the type of queue selector attachment.")
+  @clientName("queueSelectorAttachmentKind", "java")
   kind: QueueSelectorAttachmentKind.passThrough;
 }
 
@@ -1055,6 +1068,7 @@ model PassThroughWorkerSelectorAttachment extends WorkerSelectorAttachment {
   expiresAfterSeconds?: float64;
 
   @doc("The type discriminator describing the type of worker selector attachment.")
+  @clientName("workerSelectorAttachmentKind", "java")
   kind: WorkerSelectorAttachmentKind.passThrough;
 }
 
@@ -1064,6 +1078,7 @@ model QueueLengthExceptionTrigger extends ExceptionTrigger {
   threshold: int32;
 
   @doc("The type discriminator describing a sub-type of ExceptionTrigger.")
+  @clientName("exceptionTriggerKind", "java")
   kind: ExceptionTriggerKind.queueLength;
 }
 
@@ -1086,12 +1101,14 @@ model ReclassifyExceptionAction extends ExceptionAction {
   labelsToUpsert?: Record<unknown>;
 
   @doc("The type discriminator describing a sub-type of ExceptionAction.")
+  @clientName("exceptionActionKind", "java")
   kind: ExceptionActionKind.reclassify;
 }
 
 @doc("Jobs are distributed in order to workers, starting with the worker that is after the last worker to receive a job.")
 model RoundRobinMode extends DistributionMode {
   @doc("The type discriminator describing a sub-type of Mode.")
+  @clientName("distributionModeKind", "java")
   kind: DistributionModeKind.roundRobin;
 }
 
@@ -1101,6 +1118,7 @@ model RuleEngineQueueSelectorAttachment extends QueueSelectorAttachment {
   rule: RouterRule;
 
   @doc("The type discriminator describing the type of queue selector attachment.")
+  @clientName("queueSelectorAttachmentKind", "java")
   kind: QueueSelectorAttachmentKind.ruleEngine;
 }
 
@@ -1110,6 +1128,7 @@ model RuleEngineWorkerSelectorAttachment extends WorkerSelectorAttachment {
   rule: RouterRule;
 
   @doc("The type discriminator describing the type of worker selector attachment.")
+  @clientName("workerSelectorAttachmentKind", "java")
   kind: WorkerSelectorAttachmentKind.ruleEngine;
 }
 
@@ -1119,6 +1138,7 @@ model StaticQueueSelectorAttachment extends QueueSelectorAttachment {
   queueSelector: RouterQueueSelector;
 
   @doc("The type discriminator describing the type of queue selector attachment.")
+  @clientName("queueSelectorAttachmentKind", "java")
   kind: QueueSelectorAttachmentKind.static;
 }
 
@@ -1139,6 +1159,7 @@ model StaticWorkerSelectorAttachment extends WorkerSelectorAttachment {
   workerSelector: RouterWorkerSelector;
 
   @doc("The type discriminator describing the type of worker selector attachment.")
+  @clientName("workerSelectorAttachmentKind", "java")
   kind: WorkerSelectorAttachmentKind.static;
 }
 
@@ -1148,6 +1169,7 @@ model WaitTimeExceptionTrigger extends ExceptionTrigger {
   thresholdSeconds: float64;
 
   @doc("The type discriminator describing a sub-type of ExceptionTrigger.")
+  @clientName("exceptionTriggerKind", "java")
   kind: ExceptionTriggerKind.waitTime;
 }
 
@@ -1174,6 +1196,7 @@ model WeightedAllocationQueueSelectorAttachment
   allocations: QueueWeightedAllocation[];
 
   @doc("The type discriminator describing the type of queue selector attachment.")
+  @clientName("queueSelectorAttachmentKind", "java")
   kind: QueueSelectorAttachmentKind.weightedAllocation;
 }
 
@@ -1184,6 +1207,7 @@ model WeightedAllocationWorkerSelectorAttachment
   allocations: WorkerWeightedAllocation[];
 
   @doc("The type discriminator describing the type of worker selector attachment.")
+  @clientName("workerSelectorAttachmentKind", "java")
   kind: WorkerSelectorAttachmentKind.weightedAllocation;
 }
 
