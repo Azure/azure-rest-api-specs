@@ -777,6 +777,27 @@ model ConversationalAnalysisAuthoringDeploymentJobState {
 }
 
 /**
+ * Represents the state of an existing delete deployment from specific resources job.
+ */
+@clientName("DeploymentDeleteFromResourcesJobState", "csharp")
+@parentResource(ConversationalAnalysisAuthoringProjectDeployment)
+@resource("delete-from-resources/jobs")
+model ConversationalAnalysisAuthoringDeploymentDeleteFromResourcesJobState {
+  ...ConversationalAnalysisAuthoringJobState;
+}
+
+/**
+ * Represents the state of a deployment job.
+ */
+@clientName("SwapDeploymentsJobState", "csharp")
+@parentResource(ConversationalAnalysisAuthoringProjectMetadata)
+@resource("deployments/swap/jobs")
+model ConversationalAnalysisAuthoringSwapDeploymentsJobState {
+  ...ConversationalAnalysisAuthoringJobState;
+}
+
+
+/**
  * Represents the options for swapping two deployments together.
  */
 @clientName("SwapDeploymentsOptions", "csharp")

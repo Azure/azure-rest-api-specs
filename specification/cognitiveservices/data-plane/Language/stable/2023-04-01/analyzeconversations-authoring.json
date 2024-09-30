@@ -939,7 +939,7 @@
           {
             "name": "projectName",
             "in": "path",
-            "description": "The name of the project to use.",
+            "description": "The new project name.",
             "required": true,
             "type": "string",
             "maxLength": 100
@@ -956,7 +956,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/ConversationalAnalysisAuthoringDeploymentJobState"
+              "$ref": "#/definitions/ConversationalAnalysisAuthoringSwapDeploymentsJobState"
             }
           },
           "default": {
@@ -3509,6 +3509,58 @@
       },
       "required": [
         "value"
+      ]
+    },
+    "ConversationalAnalysisAuthoringSwapDeploymentsJobState": {
+      "type": "object",
+      "description": "Represents the state of a deployment job.",
+      "properties": {
+        "jobId": {
+          "type": "string",
+          "description": "The job ID.",
+          "readOnly": true
+        },
+        "createdDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The creation date time of the job."
+        },
+        "lastUpdatedDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The last date time the job was updated."
+        },
+        "expirationDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The expiration date time of the job."
+        },
+        "status": {
+          "$ref": "#/definitions/ConversationalAnalysisAuthoringJobStatus",
+          "description": "The job status."
+        },
+        "warnings": {
+          "type": "array",
+          "description": "The warnings that were encountered while executing the job.",
+          "items": {
+            "$ref": "#/definitions/Warning"
+          },
+          "x-ms-identifiers": []
+        },
+        "errors": {
+          "type": "array",
+          "description": "The errors encountered while executing the job.",
+          "items": {
+            "$ref": "#/definitions/Error"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "jobId",
+        "createdDateTime",
+        "lastUpdatedDateTime",
+        "status"
       ]
     },
     "ConversationalAnalysisAuthoringSwapDeploymentsOptions": {

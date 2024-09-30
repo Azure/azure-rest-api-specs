@@ -165,7 +165,6 @@ interface ConversationalAnalysisAuthoring {
   /**
    * Gets the status of an existing copy project job.
    */
-// ToDo
   @added(Versions.v2023_04_15_preview)
   getCopyProjectStatus is languageOperations.ResourceRead<ConversationalAnalysisAuthoringCopyProjectJobState>;
 
@@ -252,35 +251,8 @@ interface ConversationalAnalysisAuthoring {
   /**
    * Gets the status of an existing delete deployment from specific resources job.
    */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  @route("/authoring/analyze-conversations/projects/{projectName}/deployments/{deploymentName}/delete-from-resources/jobs/{jobId}")
-  @get
   @added(Versions.v2023_04_15_preview)
-  getDeploymentDeleteFromResourcesStatus is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * The name of the project to use.
-       */
-      @maxLength(100)
-      @path
-      projectName: string;
-
-      /**
-       * The name of the specific deployment of the project to use.
-       */
-      @path
-      deploymentName: string;
-
-      /**
-       * The job ID.
-       */
-      @path
-      jobId: string;
-    },
-    ConversationalAnalysisAuthoringDeploymentJobState,
-    {},
-    ErrorResponse
-  >;
+  getDeploymentDeleteFromResourcesStatus is languageOperations.ResourceRead<ConversationalAnalysisAuthoringDeploymentDeleteFromResourcesJobState>;
 
   /**
    * Gets the status of an existing deployment job.
@@ -291,28 +263,7 @@ interface ConversationalAnalysisAuthoring {
   /**
    * Gets the status of an existing swap deployment job.
    */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  @route("/authoring/analyze-conversations/projects/{projectName}/deployments/swap/jobs/{jobId}")
-  @get
-  getSwapDeploymentsStatus is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * The name of the project to use.
-       */
-      @maxLength(100)
-      @path
-      projectName: string;
-
-      /**
-       * The job ID.
-       */
-      @path
-      jobId: string;
-    },
-    ConversationalAnalysisAuthoringDeploymentJobState,
-    {},
-    ErrorResponse
-  >;
+  getSwapDeploymentsStatus is languageOperations.ResourceRead<ConversationalAnalysisAuthoringSwapDeploymentsJobState>;
 
   /**
    * Gets the status of an export job. Once job completes, returns the project
