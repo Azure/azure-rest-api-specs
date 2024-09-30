@@ -364,22 +364,22 @@ model VMAttributes {
   @doc("The local storage disk types specified as a list.")
   localStorageDiskTypes: Array<LocalStorageDiskType>;
 
-  @doc("The range of data disk count specified from Min to Max. Optional paramater. Either Min or Max is required if specified.")
+  @doc("The range of data disk count specified from Min to Max. Optional parameter. Either Min or Max is required if specified.")
   dataDiskCount: VMAttributeMinMax;
 
-  @doc("The range of network interface count specified from Min to Max. Optional paramater. Either Min or Max is required if specified.")
+  @doc("The range of network interface count specified from Min to Max. Optional parameter. Either Min or Max is required if specified.")
   networkInterfaceCount: VMAttributeMinMax;
 
-  @doc("The range of network bandwidth in Mbps specified from Min to Max. Optional paramater. Either Min or Max is required if specified.")
+  @doc("The range of network bandwidth in Mbps specified from Min to Max. Optional parameter. Either Min or Max is required if specified.")
   networkBandwidthInMbps: VMAttributeMinMax;
 
   @doc("Specifies whether the VMSize supporting RDMA (Remote Direct Memory Access) should be used to build Fleet or not.")
   rdmaSupport?: VMAttributeSupport;
 
-  @doc("The range of RDMA (Remote Direct Memory Access) network interface count specified from Min to Max. Optional paramater. Either Min or Max is required if specified.")
+  @doc("The range of RDMA (Remote Direct Memory Access) network interface count specified from Min to Max. Optional parameter. Either Min or Max is required if specified.")
   rdmaNetworkInterfaceCount: VMAttributeMinMax;
 
-  @doc("pecifies whether the VMSize supporting GPU should be used to build Fleet or not.")
+  @doc("Specifies whether the VMSize supporting GPU should be used to build Fleet or not.")
   gpuSupport?: VMAttributeSupport;
 
   @extension("x-ms-identifiers", [])
