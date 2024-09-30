@@ -5,7 +5,7 @@
     "api-version": "2024-11-01",
     "subscriptionId": "subid",
     "parameters": {
-      "location": "West US",
+      "location": "East US",
       "zones": [
         "1"
       ],
@@ -54,6 +54,7 @@
           "replicasPerMaster": 2,
           "replicasPerPrimary": 2,
           "updateChannel": "Stable",
+          "zonalAllocationPolicy": "UserDefined",
           "redisConfiguration": {
             "maxmemory-policy": "allkeys-lru"
           },
@@ -140,6 +141,7 @@
           "replicasPerMaster": 2,
           "replicasPerPrimary": 2,
           "updateChannel": "Stable",
+          "zonalAllocationPolicy": "UserDefined",
           "redisConfiguration": {
             "maxclients": "1000",
             "maxmemory-reserved": "50",
