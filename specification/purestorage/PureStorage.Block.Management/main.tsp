@@ -184,10 +184,10 @@ interface StoragePools {
     ...ResourceInstanceParameters<StoragePool>,
   ): ArmResponse<HealthResponse> | ErrorResponse;
 
+  @removed(Versions.v4_preview)
   @doc("Lists AVS properties for specific Storage Pool.")
   @armResourceAction(StoragePool)
   @action("getAvsParameters")
-  @removed(Versions.v4_preview)
   @post
   getAvsParameters(
     ...ResourceInstanceParameters<StoragePool>,
@@ -212,6 +212,7 @@ interface StoragePools {
   ): ArmResponse<AvsStatus> | ErrorResponse;
 
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "TODO - Migrate to LRO pattern"
+  @removed(Versions.v4_preview)
   @doc("Enable AVS on storage pool")
   @armResourceAction(StoragePool)
   @action("enableAvs")
@@ -259,6 +260,7 @@ interface StoragePools {
   > | ErrorResponse;
 
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "TODO - Migrate to LRO pattern"
+  @removed(Versions.v4_preview)
   @doc("Disable AVS on storage pool")
   @armResourceAction(StoragePool)
   @action("disableAvs")
@@ -298,6 +300,7 @@ interface StoragePools {
   > | ErrorResponse;
 
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "TODO - Migrate to LRO pattern"
+  @removed(Versions.v4_preview)
   @doc("Finalize AVS on storage pool")
   @armResourceAction(StoragePool)
   @action("finalizeAvs")
@@ -361,6 +364,7 @@ interface StoragePools {
   > | ErrorResponse;
 
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "TODO - Migrate to LRO pattern"
+  @removed(Versions.v4_preview)
   @doc("Enable VSphere plugin on storage pool")
   @armResourceAction(StoragePool)
   @action("enableVspherePlugin")
@@ -384,6 +388,7 @@ interface StoragePools {
   > | ErrorResponse;
 
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "TODO - Migrate to LRO pattern"
+  @removed(Versions.v4_preview)
   @doc("Disable VSphere plugin on storage pool")
   @armResourceAction(StoragePool)
   @action("disableVspherePlugin")
@@ -403,6 +408,7 @@ interface StoragePools {
   > | ErrorResponse;
 
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "TODO - Migrate to LRO pattern"
+  @removed(Versions.v4_preview)
   @doc("Upgrade VSphere plugin on storage pool")
   @armResourceAction(StoragePool)
   @action("upgradeVspherePlugin")
@@ -481,8 +487,8 @@ model RangeLimits {
   max: int64;
 }
 
-@doc("AVS (Azure VMware Solution) related properties.")
 @removed(Versions.v4_preview)
+@doc("AVS (Azure VMware Solution) related properties.")
 model AvsDetails {
   @doc("Flag which tells if the AVS support is enabled.")
   avsEnabled: boolean;
@@ -640,6 +646,7 @@ union AlertLevel {
   string,
 }
 
+@removed(Versions.v4_preview)
 @doc("Storage Pool enable AVS")
 model StoragePoolEnableAvs {
   @doc("Resource id pointing at the AVS SDDC the pool is configured with.")
@@ -720,6 +727,7 @@ model StoragePoolFinalizeAvsConnectionPost {
   serviceInitializationData?: ServiceInitializationData;
 }
 
+@removed(Versions.v4_preview)
 @doc("Storage Pool enable VSphere plugins")
 model StoragePoolEnableVspherePlugin {
   @doc("Storage Pool Vsphere IP")
