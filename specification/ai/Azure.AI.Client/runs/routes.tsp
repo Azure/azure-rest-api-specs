@@ -25,7 +25,7 @@ namespace Azure.AI.Client.Agents;
 #suppress "@azure-tools/typespec-azure-core/no-operation-id" "non-standard operations"
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
 @post
-@route("/openai/threads/{threadId}/runs")
+@route("/threads/{threadId}/runs")
 @doc("Creates a new run for an agent thread.")
 @added(ServiceApiVersions.v2024_02_15_preview)
 op createRun is Azure.Core.RpcOperation<
@@ -51,7 +51,7 @@ op createRun is Azure.Core.RpcOperation<
 #suppress "@azure-tools/typespec-azure-core/no-operation-id" "non-standard operations"
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
 @get
-@route("/openai/threads/{threadId}/runs")
+@route("/threads/{threadId}/runs")
 @added(ServiceApiVersions.v2024_02_15_preview)
 op listRuns is Azure.Core.RpcOperation<
   {
@@ -73,7 +73,7 @@ op listRuns is Azure.Core.RpcOperation<
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
 #suppress "@azure-tools/typespec-azure-core/use-standard-names" "mirrored API name parity"
 @get
-@route("/openai/threads/{threadId}/runs/{runId}")
+@route("/threads/{threadId}/runs/{runId}")
 @added(ServiceApiVersions.v2024_02_15_preview)
 op getRun is Azure.Core.RpcOperation<
   {
@@ -94,7 +94,7 @@ op getRun is Azure.Core.RpcOperation<
 #suppress "@azure-tools/typespec-azure-core/no-operation-id" "non-standard operations"
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
 @post
-@route("/openai/threads/{threadId}/runs/{runId}")
+@route("/threads/{threadId}/runs/{runId}")
 @added(ServiceApiVersions.v2024_02_15_preview)
 op updateRun is Azure.Core.RpcOperation<
   {
@@ -118,7 +118,7 @@ op updateRun is Azure.Core.RpcOperation<
 #suppress "@azure-tools/typespec-azure-core/no-operation-id" "non-standard operations"
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
 @post
-@route("/openai/threads/{threadId}/runs/{runId}/submit_tool_outputs")
+@route("/threads/{threadId}/runs/{runId}/submit_tool_outputs")
 @added(ServiceApiVersions.v2024_02_15_preview)
 op submitToolOutputsToRun is Azure.Core.RpcOperation<
   {
@@ -145,7 +145,7 @@ op submitToolOutputsToRun is Azure.Core.RpcOperation<
 #suppress "@azure-tools/typespec-azure-core/no-operation-id" "non-standard operations"
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
 @post
-@route("/openai/threads/{threadId}/runs/{runId}/cancel")
+@route("/threads/{threadId}/runs/{runId}/cancel")
 @added(ServiceApiVersions.v2024_02_15_preview)
 op cancelRun is Azure.Core.RpcOperation<
   {
@@ -164,7 +164,7 @@ op cancelRun is Azure.Core.RpcOperation<
 #suppress "@azure-tools/typespec-azure-core/no-operation-id" "non-standard operations"
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
 @post
-@route("/openai/threads/runs")
+@route("/threads/runs")
 @doc("Creates a new agent thread and immediately starts a run using that new thread.")
 @added(ServiceApiVersions.v2024_02_15_preview)
 op createThreadAndRun is Azure.Core.RpcOperation<

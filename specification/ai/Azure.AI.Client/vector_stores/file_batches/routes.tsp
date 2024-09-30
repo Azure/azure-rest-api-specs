@@ -18,7 +18,7 @@ namespace Azure.AI.Client.Agents;
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
 @post
-@route("/openai/vector_stores/{vectorStoreId}/file_batches")
+@route("/vector_stores/{vectorStoreId}/file_batches")
 @added(ServiceApiVersions.v2024_05_01_preview)
 op createVectorStoreFileBatch is Azure.Core.RpcOperation<
   {
@@ -46,7 +46,7 @@ op createVectorStoreFileBatch is Azure.Core.RpcOperation<
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
 @get
-@route("/openai/vector_stores/{vectorStoreId}/file_batches/{batchId}")
+@route("/vector_stores/{vectorStoreId}/file_batches/{batchId}")
 @added(ServiceApiVersions.v2024_05_01_preview)
 op getVectorStoreFileBatch is Azure.Core.RpcOperation<
   {
@@ -66,7 +66,7 @@ op getVectorStoreFileBatch is Azure.Core.RpcOperation<
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
 @post
-@route("/openai/vector_stores/{vectorStoreId}/file_batches/{batchId}/cancel")
+@route("/vector_stores/{vectorStoreId}/file_batches/{batchId}/cancel")
 @added(ServiceApiVersions.v2024_05_01_preview)
 op cancelVectorStoreFileBatch is Azure.Core.RpcOperation<
   {
@@ -86,7 +86,7 @@ op cancelVectorStoreFileBatch is Azure.Core.RpcOperation<
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
 @get
-@route("/openai/vector_stores/{vectorStoreId}/file_batches/{batchId}/files")
+@route("/vector_stores/{vectorStoreId}/file_batches/{batchId}/files")
 @added(ServiceApiVersions.v2024_05_01_preview)
 op listVectorStoreFileBatchFiles is Azure.Core.RpcOperation<
   {

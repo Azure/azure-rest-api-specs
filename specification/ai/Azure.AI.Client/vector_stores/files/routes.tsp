@@ -18,7 +18,7 @@ namespace Azure.AI.Client.Agents;
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
 @get
-@route("/openai/vector_stores/{vectorStoreId}/files")
+@route("/vector_stores/{vectorStoreId}/files")
 @added(ServiceApiVersions.v2024_05_01_preview)
 op listVectorStoreFiles is Azure.Core.RpcOperation<
   {
@@ -40,7 +40,7 @@ op listVectorStoreFiles is Azure.Core.RpcOperation<
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
 @post
-@route("/openai/vector_stores/{vectorStoreId}/files")
+@route("/vector_stores/{vectorStoreId}/files")
 @added(ServiceApiVersions.v2024_05_01_preview)
 op createVectorStoreFile is Azure.Core.RpcOperation<
   {
@@ -66,7 +66,7 @@ op createVectorStoreFile is Azure.Core.RpcOperation<
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
 @get
-@route("/openai/vector_stores/{vectorStoreId}/files/{fileId}")
+@route("/vector_stores/{vectorStoreId}/files/{fileId}")
 @added(ServiceApiVersions.v2024_05_01_preview)
 op getVectorStoreFile is Azure.Core.RpcOperation<
   {
@@ -87,7 +87,7 @@ op getVectorStoreFile is Azure.Core.RpcOperation<
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
 @delete
-@route("/openai/vector_stores/{vectorStoreId}/files/{fileId}")
+@route("/vector_stores/{vectorStoreId}/files/{fileId}")
 @added(ServiceApiVersions.v2024_05_01_preview)
 op deleteVectorStoreFile is Azure.Core.RpcOperation<
   {

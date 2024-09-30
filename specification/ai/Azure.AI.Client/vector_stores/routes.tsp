@@ -19,7 +19,7 @@ namespace Azure.AI.Client.Agents;
 #suppress "@azure-tools/typespec-azure-core/no-operation-id" "non-standard operations"
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
 @get
-@route("/openai/vector_stores")
+@route("/vector_stores")
 @added(ServiceApiVersions.v2024_05_01_preview)
 op listVectorStores is Azure.Core.RpcOperation<
   {
@@ -35,7 +35,7 @@ op listVectorStores is Azure.Core.RpcOperation<
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
 @post
-@route("/openai/vector_stores")
+@route("/vector_stores")
 @added(ServiceApiVersions.v2024_05_01_preview)
 op createVectorStore is Azure.Core.RpcOperation<
   {
@@ -54,7 +54,7 @@ op createVectorStore is Azure.Core.RpcOperation<
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
 @get
-@route("/openai/vector_stores/{vectorStoreId}")
+@route("/vector_stores/{vectorStoreId}")
 @added(ServiceApiVersions.v2024_05_01_preview)
 op getVectorStore is Azure.Core.RpcOperation<
   {
@@ -71,7 +71,7 @@ op getVectorStore is Azure.Core.RpcOperation<
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
 @post
-@route("/openai/vector_stores/{vectorStoreId}")
+@route("/vector_stores/{vectorStoreId}")
 @added(ServiceApiVersions.v2024_05_01_preview)
 op modifyVectorStore is Azure.Core.RpcOperation<
   {
@@ -93,7 +93,7 @@ op modifyVectorStore is Azure.Core.RpcOperation<
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
 @delete
-@route("/openai/vector_stores/{vectorStoreId}")
+@route("/vector_stores/{vectorStoreId}")
 @added(ServiceApiVersions.v2024_05_01_preview)
 op deleteVectorStore is Azure.Core.RpcOperation<
   {

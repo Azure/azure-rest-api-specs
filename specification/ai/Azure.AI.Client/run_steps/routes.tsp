@@ -22,7 +22,7 @@ namespace Azure.AI.Client.Agents;
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
 #suppress "@azure-tools/typespec-azure-core/use-standard-names" "mirrored API name parity"
 @get
-@route("/openai/threads/{threadId}/runs/{runId}/steps/{stepId}")
+@route("/threads/{threadId}/runs/{runId}/steps/{stepId}")
 @added(ServiceApiVersions.v2024_02_15_preview)
 op getRunStep is Azure.Core.RpcOperation<
   {
@@ -45,7 +45,7 @@ op getRunStep is Azure.Core.RpcOperation<
 #suppress "@azure-tools/typespec-azure-core/no-operation-id" "non-standard operations"
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
 @get
-@route("/openai/threads/{threadId}/runs/{runId}/steps")
+@route("/threads/{threadId}/runs/{runId}/steps")
 @added(ServiceApiVersions.v2024_02_15_preview)
 op listRunSteps is Azure.Core.RpcOperation<
   {

@@ -26,7 +26,7 @@ namespace Azure.AI.Client.Agents;
 #suppress "@azure-tools/typespec-azure-core/no-operation-id" "non-standard operations"
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
 @post
-@route("/openai/threads/{threadId}/messages")
+@route("/threads/{threadId}/messages")
 @added(ServiceApiVersions.v2024_02_15_preview)
 op createMessage is Azure.Core.RpcOperation<
   {
@@ -49,7 +49,7 @@ op createMessage is Azure.Core.RpcOperation<
 #suppress "@azure-tools/typespec-azure-core/no-operation-id" "non-standard operations"
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
 @get
-@route("/openai/threads/{threadId}/messages")
+@route("/threads/{threadId}/messages")
 @added(ServiceApiVersions.v2024_02_15_preview)
 op listMessages is Azure.Core.RpcOperation<
   {
@@ -77,7 +77,7 @@ op listMessages is Azure.Core.RpcOperation<
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
 #suppress "@azure-tools/typespec-azure-core/use-standard-names" "mirrored API name parity"
 @get
-@route("/openai/threads/{threadId}/messages/{messageId}")
+@route("/threads/{threadId}/messages/{messageId}")
 @added(ServiceApiVersions.v2024_02_15_preview)
 op getMessage is Azure.Core.RpcOperation<
   {
@@ -98,7 +98,7 @@ op getMessage is Azure.Core.RpcOperation<
 #suppress "@azure-tools/typespec-azure-core/no-operation-id" "non-standard operations"
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
 @post
-@route("/openai/threads/{threadId}/messages/{messageId}")
+@route("/threads/{threadId}/messages/{messageId}")
 @added(ServiceApiVersions.v2024_02_15_preview)
 op updateMessage is Azure.Core.RpcOperation<
   {

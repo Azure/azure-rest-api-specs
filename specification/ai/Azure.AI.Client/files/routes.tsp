@@ -23,7 +23,7 @@ namespace Azure.AI.Client.Agents;
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
 @get
 @added(ServiceApiVersions.v2024_02_15_preview)
-@route("/openai/files")
+@route("/files")
 op listFiles is Azure.Core.RpcOperation<
   {
     @query purpose?: FilePurpose
@@ -46,7 +46,7 @@ op listFiles is Azure.Core.RpcOperation<
 #suppress "@azure-tools/typespec-azure-core/byos" "mirrored API"
 @post
 @added(ServiceApiVersions.v2024_02_15_preview)
-@route("/openai/files")
+@route("/files")
 op uploadFile is Azure.Core.RpcOperation<
   {
     @header contentType: "multipart/form-data",
@@ -70,7 +70,7 @@ op uploadFile is Azure.Core.RpcOperation<
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
 @delete
 @doc("Delete a previously uploaded file.")
-@route("/openai/files/{fileId}")
+@route("/files/{fileId}")
 op deleteFile is Azure.Core.RpcOperation<
   {
     @doc("The ID of the file to delete.")
@@ -86,7 +86,7 @@ op deleteFile is Azure.Core.RpcOperation<
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
 #suppress "@azure-tools/typespec-azure-core/use-standard-names" "mirrored API name parity"
 @get
-@route("/openai/files/{fileId}")
+@route("/files/{fileId}")
 @doc("Returns information about a specific file. Does not retrieve file content.")
 op getFile is Azure.Core.RpcOperation<
   {
@@ -101,7 +101,7 @@ op getFile is Azure.Core.RpcOperation<
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
 @get
-@route("/openai/files/{fileId}/content")
+@route("/files/{fileId}/content")
 @doc("Returns information about a specific file. Does not retrieve file content.")
 op getFileContent is Azure.Core.RpcOperation<
   {

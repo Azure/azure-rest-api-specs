@@ -19,7 +19,7 @@ namespace Azure.AI.Client.Agents;
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
 @post
 @added(ServiceApiVersions.v2024_02_15_preview)
-@route("/openai/threads")
+@route("/threads")
 op createThread is Azure.Core.RpcOperation<
   {
     /**
@@ -43,7 +43,7 @@ op createThread is Azure.Core.RpcOperation<
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
 #suppress "@azure-tools/typespec-azure-core/use-standard-names" "mirrored API name parity"
 @get
-@route("/openai/threads/{threadId}")
+@route("/threads/{threadId}")
 @added(ServiceApiVersions.v2024_02_15_preview)
 op getThread is Azure.Core.RpcOperation<
   {
@@ -63,7 +63,7 @@ op getThread is Azure.Core.RpcOperation<
 #suppress "@azure-tools/typespec-azure-core/no-operation-id" "non-standard operations"
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
 @post
-@route("/openai/threads/{threadId}")
+@route("/threads/{threadId}")
 @added(ServiceApiVersions.v2024_02_15_preview)
 op updateThread is Azure.Core.RpcOperation<
   {
