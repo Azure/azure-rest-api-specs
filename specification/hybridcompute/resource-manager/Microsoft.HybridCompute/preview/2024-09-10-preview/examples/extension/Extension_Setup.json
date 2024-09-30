@@ -4,37 +4,22 @@
     "resourceGroupName": "myResourceGroup",
     "machineName": "myMachine",
     "api-version": "2024-09-10-preview",
-    "extensionParameters": [
-      {
-        "properties": {
+    "extensionSetupBody": {
+      "value": [
+        {
           "publisher": "Microsoft.Azure.Monitoring",
           "type": "AzureMonitorAgentLinux"
-        }
-      },
-      {
-        "properties": {
+        },
+        {
           "publisher": "<extension_publisher>",
           "type": "<extension_type>"
         }
-      }
-    ]
+      ]
+    }
   },
   "responses": {
     "200": {
-      "body": [
-        {
-          "properties": {
-            "publisher": "Microsoft.Azure.Monitoring",
-            "type": "AzureMonitorAgentLinux"
-          }
-        },
-        {
-          "properties": {
-            "publisher": "<extension_publisher>",
-            "type": "<extension_type>"
-          }
-        }
-      ]
+      "body": {}
     },
     "202": {
       "headers": {

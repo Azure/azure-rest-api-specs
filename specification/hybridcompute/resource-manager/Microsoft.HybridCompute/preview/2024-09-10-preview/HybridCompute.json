@@ -2745,7 +2745,7 @@
             "description": "The name of the hybrid machine."
           },
           {
-            "name": "extensionParameters",
+            "name": "extensionSetupBody",
             "in": "body",
             "required": true,
             "schema": {
@@ -5569,11 +5569,12 @@
       }
     },
     "MachineExtensionSetup": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/MachineExtension"
+            "$ref": "#/definitions/MachineExtensionProperties"
           },
           "description": "The list of extensions"
         }
