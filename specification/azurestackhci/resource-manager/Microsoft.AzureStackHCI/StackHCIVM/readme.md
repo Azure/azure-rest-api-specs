@@ -72,16 +72,6 @@ input-file:
   - ../operations/preview/2024-08-01-preview/operations.json
 ```
 
-### Tag: package-preview-2024-07-15
-
-These settings apply only when `--tag=package-preview-2024-07-15` is specified on the command line.
-
-```yaml $(tag) == 'package-preview-2024-02-01'
-input-file:
-  - preview/2024-07-15-preview/stackhcivm.json
-  - ../operations/preview/2024-07-15-preview/operations.json
-```
-
 ### Tag: package-preview-2024-05
 
 These settings apply only when `--tag=package-preview-2024-05-01-preview` is specified on the command line.
