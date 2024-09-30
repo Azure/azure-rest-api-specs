@@ -126,14 +126,14 @@ model ComputeProfile {
     This property cannot be updated.
     """)
   platformFaultDomainCount?: int32;
-  
- @added(Versions.v2024_11_01)
+
+  @added(Versions.v2024_11_01)
   @doc("""
-  Specifies VMSS and VM API entity models support two additional capabilities as of today: ultraSSDEnabled and hibernationEnabled.
-  ultraSSDEnabled: Enables UltraSSD_LRS storage account type on the VMSS VMs.
-  hibernationEnabled: Enables the hibernation capability on the VMSS VMs.
-  Default value is null if not specified. This property cannot be updated once set.
-  """)
+    Specifies VMSS and VM API entity models support two additional capabilities as of today: ultraSSDEnabled and hibernationEnabled.
+    ultraSSDEnabled: Enables UltraSSD_LRS storage account type on the VMSS VMs.
+    hibernationEnabled: Enables the hibernation capability on the VMSS VMs.
+    Default value is null if not specified. This property cannot be updated once set.
+    """)
   additionalVirtualMachineCapabilities?: AdditionalCapabilities;
 }
 
@@ -230,8 +230,7 @@ union EvictionPolicy {
 
 @added(Versions.v2024_11_01)
 @doc("AdditionalCapabilities for VM.")
-model AdditionalCapabilities
-{
+model AdditionalCapabilities {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "ultraSSDEnabled which does not follow camel casing"
   @doc("The flag that enables or disables a capability to have one or more managed data disks with UltraSSD_LRS storage account type on the VM or VMSS. Managed disks with storage account type UltraSSD_LRS can be added to a virtual machine or virtual machine scale set only if this property is enabled.")
   ultraSSDEnabled?: boolean;
@@ -240,16 +239,15 @@ model AdditionalCapabilities
   hibernationEnabled?: boolean;
 }
 
+#suppress "@azure-tools/typespec-azure-core/casing-style" "VMAttributeMinMax which does not follow camel casing"
 @added(Versions.v2024_11_01)
 @doc("While retrieving VMSizes from CRS, Min = 0 (uint.MinValue) if not specified, Max = 4294967295 (uint.MaxValue) if not specified. This allows to filter VMAttributes on all available VMSizes.")
-#suppress "@azure-tools/typespec-azure-core/casing-style" "VMAttributeMinMax which does not follow camel casing"
-model VMAttributeMinMax
-{
-    @doc("Min VMSize from CRS, Min = 0 (uint.MinValue) if not specified.")
-     min?: int32;
+model VMAttributeMinMax {
+  @doc("Min VMSize from CRS, Min = 0 (uint.MinValue) if not specified.")
+  min?: int32;
 
-    @doc("Maz VMSize from CRS, Max = 4294967295 (uint.MaxValue) if not specified.")
-     max?: int32;
+  @doc("Maz VMSize from CRS, Max = 4294967295 (uint.MaxValue) if not specified.")
+  max?: int32;
 }
 
 @added(Versions.v2024_11_01)
@@ -271,7 +269,7 @@ union VMAttributeSupport {
 @doc("VMCategories defined for Azure VMs.")
 union VMCategory {
   string,
-  
+
   @doc("GeneralPurpose VM.")
   GeneralPurpose: "GeneralPurpose",
 
@@ -337,17 +335,17 @@ union GpuManufacturer {
 
   @doc("AMD GpuType")
   AMD: "AMD",
-  
+
   @doc("Nvidia GpuType")
-  Nvidia: "Nvidia"
+  Nvidia: "Nvidia",
 }
 
+#suppress "@azure-tools/typespec-azure-core/casing-style" "VMAttributes which does not follow camel casing"
 @added(Versions.v2024_11_01)
 @doc("VMAttributes that will be used to filter VMSizes which will be used to build Fleet.")
-#suppress "@azure-tools/typespec-azure-core/casing-style" "VMAttributes which does not follow camel casing"
-model VMAttributes{
+model VMAttributes {
   @doc("The range of vCpuCount specified from Min to Max. Must be specified if VMAttributes are specified, either Min or Max is required if specified.")
-    vCpuCount: VMAttributeMinMax;
+  vCpuCount: VMAttributeMinMax;
 
   @doc("The range of memory specified from Min to Max. Must be specified if VMAttributes are specified, either Min or Max is required if specified.")
   memoryInMiB: VMAttributeMinMax;
@@ -376,7 +374,7 @@ model VMAttributes{
   networkBandwidthInMbps: VMAttributeMinMax;
 
   @doc("Specifies whether the VMSize supporting RDMA (Remote Direct Memory Access) should be used to build Fleet or not.")
-  rdmaSupport?:  VMAttributeSupport;
+  rdmaSupport?: VMAttributeSupport;
 
   @doc("The range of RDMA (Remote Direct Memory Access) network interface count specified from Min to Max. Optional paramater. Either Min or Max is required if specified.")
   rdmaNetworkInterfaceCount: VMAttributeMinMax;
@@ -384,11 +382,11 @@ model VMAttributes{
   @doc("pecifies whether the VMSize supporting GPU should be used to build Fleet or not.")
   gpuSupport?: VMAttributeSupport;
 
-@extension("x-ms-identifiers", [])
+  @extension("x-ms-identifiers", [])
   @doc("The GPU manufacturers specified as a list. gpuSupport should be set to Included or Required to use this VMAttribute. Default GPU manufacturers if not specified are ANY of the valid values.")
-    gpuManufacturers: Array<GpuManufacturer>;
+  gpuManufacturers: Array<GpuManufacturer>;
 
-    @extension("x-ms-identifiers", [])
+  @extension("x-ms-identifiers", [])
   @doc("The VM category specified as a list. Optional parameter.")
   vmCategories: Array<VMCategory>;
 
@@ -405,36 +403,36 @@ model VMAttributes{
 
   @extension("x-ms-identifiers", [])
   @doc("Specifies which VMSizes should be excluded while building Fleet. Optional parameter.")
-  excludedVMSizes:  Array<string>;
+  excludedVMSizes: Array<string>;
 }
 
 @added(Versions.v2024_11_01)
 @doc("Represents the profile for a single additional location in the Fleet. The location and the (optional).")
-model LocationProfile{
+model LocationProfile {
   @doc("The ARM location name of the additional region.")
   location: string;
 
   @doc("""
-  Base Virtual Machine Profile Properties to be specified according to "specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/{computeApiVersion}/virtualMachineScaleSet.json#/definitions/VirtualMachineScaleSetVMProfile"
-  """)
+    Base Virtual Machine Profile Properties to be specified according to "specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/{computeApiVersion}/virtualMachineScaleSet.json#/definitions/VirtualMachineScaleSetVMProfile"
+    """)
   virtualMachineProfileOverride: BaseVirtualMachineProfile;
 }
 
 @added(Versions.v2024_11_01)
 @doc("Represents the configuration for additional locations where Fleet resources may be deployed.")
-model AdditionalLocationsProfile{
+model AdditionalLocationsProfile {
   @extension("x-ms-identifiers", [])
   @doc("The list of location profiles.")
-  locationProfiles: Array<LocationProfile>
+  locationProfiles: Array<LocationProfile>;
 }
 
+#suppress "@azure-tools/typespec-azure-core/casing-style" "VMAttributesList which does not follow camel casing"
 @added(Versions.v2024_11_01)
 @doc("List of VMAttributes that will be used to filter VMSizes which will be used to build Fleet.")
-#suppress "@azure-tools/typespec-azure-core/casing-style" "VMAttributesList which does not follow camel casing"
-model VMAttributesList{
-@extension("x-ms-identifiers", [])
+model VMAttributesList {
+  @extension("x-ms-identifiers", [])
   @doc("List of VMAttributes that will be used to filter VMSizes which will be used to build Fleet.")
-  vmAttributes: Array<VMAttributes>
+  vmAttributes: Array<VMAttributes>;
 }
 
 @armResourceOperations
