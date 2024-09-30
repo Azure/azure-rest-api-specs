@@ -33,6 +33,60 @@ model SkillContextResponse {
 
   @doc("User id of user that invoked the skill")
   userId: string;
+
+  @doc("Current session ID")
+  sessionId: string;
+
+  @doc("Current prompt ID")
+  promptId: string;
+
+  @doc("Current evaluation ID")
+  evaluationId: string;
+
+  @doc("Compliance flags for logging.")
+  complianceFlags: ComplianceFlags;
+
+  @doc("Fidelis Workspace Id")
+  workspaceId: string;
+
+  @doc("Originating source tag for the evaluation (i.e. Immersive, Logic Apps, etc.)")
+  source: string;
+
+  @doc("Indicates whether the evaluation is user driven or automated")
+  InvocationType: EvaluationInvocationType;
+
+  @doc("Indicates whether the evaluation is from a Prompt or a Promptbook")
+  InvocationCategory: EvaluationInvocationCategory;
+
+  @doc("Username of the user that invoked the skill")
+  userName: string;
+}
+
+@doc("Evaluation Invocation Type")
+enum EvaluationInvocationType {
+  @doc("Manual generation")
+  Manual,
+
+  @doc("Automated generation")
+  Automated,
+}
+
+@doc("Evaluation Invocation Category")
+enum EvaluationInvocationCategory {
+  @doc("Generated from a Prompt")
+  UserPrompt,
+
+  @doc("Generated from a Promptbook")
+  Promptbooks,
+}
+
+@doc("ComplianceFlags")
+model ComplianceFlags {
+  @doc("Whether to record logs in Geneva and Kusto for this user")
+  RecordLog: boolean;
+
+  @doc("Locked down tables not required and non-customer content table does not have to be redacted")
+  CustomerOptedInToEyesOnProductImprovement: boolean;
 }
 
 @doc("Skill Variable")
@@ -63,6 +117,41 @@ model InvokeSkillRequest {
 model OutputSkillVariable extends SkillVariable {
   @doc("Array of cited sources that were fetched by a skill and that impacted the output of the skill evaluation")
   sources: Array<SkillSource> | null;
+
+  @doc("Suggested prompts providing assistance to users in understanding what prompts work well with CFS")
+  suggestedPrompts: Array<SuggestedPrompt> | null;
+
+  @doc("Skill name")
+  skillName: string | null;
+
+  @doc("Skill inputs that were used in generating the output of the skill evaluation")
+  skillInputs: Record<string> | null;
+
+  @doc("Enum indicating the output type of the skill. Supports StructuredOutput and Primitive")
+  outputType: SkillOutputType;
+}
+
+@doc("Auth Location")
+enum AuthLocationEnum {
+  @doc("Using Header")
+  Header,
+
+  @doc("Using QueryParams")
+  QueryParams,
+}
+
+@doc("Skill Output type enum. Supports StructuredOutput and Primitive")
+enum SkillOutputType {
+  @doc("Primitive")
+  Primitive,
+  @doc("Structured Components")
+  StructuredComponents,
+}
+
+@doc("Suggested prompts providing assistance to users in understanding what prompts work well with CFS")
+model SuggestedPrompt {
+  @doc("Prompt text")
+  prompt: string;
 }
 
 @doc("Source that is fetched during the evaluation of a skill. Provides visibility to users as to what data/information was used in generating the output of a skill")
@@ -156,4 +245,10 @@ model SetInputRequest {
 model AddSourcesRequest {
   @doc("List of SkillSource")
   sources: Array<SkillSource>;
+}
+
+@doc("AddSourceRequest")
+model AddSourceRequest {
+  @doc("SkillSource")
+  source: SkillSource;
 }
