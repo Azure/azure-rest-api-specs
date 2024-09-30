@@ -15,6 +15,7 @@ using Azure.ResourceManager;
   title: "Microsoft.ManufacturingPlatform",
 })
 @versioned(Microsoft.ManufacturingPlatform.Versions)
+@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
 namespace Microsoft.ManufacturingPlatform;
 
 @doc("Supported API versions for the Microsoft.ManufacturingPlatform resource provider.")
@@ -50,20 +51,27 @@ model MdsResource is TrackedResource<MdsResourceProperties> {
 @Azure.Core.lroStatus
 union ProvisioningState {
   string,
+
   /** Resource has been created. */
-  Succeeded:"Succeeded",
+  Succeeded: "Succeeded",
+
   /** Resource creation failed. */
-  Failed:"Failed",
+  Failed: "Failed",
+
   /** Resource creation was canceled. */
-  Canceled:"Canceled",
+  Canceled: "Canceled",
+
   /** The resource is being provisioned */
-  Provisioning:"Provisioning",
+  Provisioning: "Provisioning",
+
   /** The resource is updating */
-  Updating:"Updating",
+  Updating: "Updating",
+
   /** The resource is being deleted */
-  Deleting:"Deleting",
+  Deleting: "Deleting",
+
   /** The resource create request has been accepted */
-  Accepted:"Accepted"
+  Accepted: "Accepted",
 }
 
 @doc("Details of the ManufacturingPlatform MdsResource.")
@@ -84,6 +92,11 @@ model MdsResourceProperties {
   @doc("Enable Copilot.")
   enableCopilot?: boolean;
 
+  @visibility("read", "create", "update")
+  @added(Versions.v2024_02_01_preview)
+  @doc("Enable Diagnostic Settings.")
+  enableDiagnosticSettings?: boolean;
+
   @visibility("read", "create")
   @doc("AAD Application Id.")
   @pattern("^[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}$")
@@ -91,7 +104,7 @@ model MdsResourceProperties {
 
   @visibility("read", "create")
   @doc("AKS Admin Group Id.")
-  @pattern("^[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}$")
+  @pattern("^[{]?[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}[}]?$|^$")
   @madeOptional(Microsoft.ManufacturingPlatform.Versions.v2024_02_01_preview)
   aksAdminGroupId?: string = "00000000-0000-0000-0000-000000000000";
 
@@ -155,7 +168,7 @@ model MdsResourceProperties {
   functionAppProfile?: FunctionAppProfile;
 
   #suppress "@azure-tools/typespec-azure-core/casing-style" "AI is a well-known abbreviation"
-  @visibility("read","create", "update")
+  @visibility("read", "create", "update")
   @doc("Profile of OpenAI Resource.")
   openAIProfile?: OpenAIProfile;
 
@@ -198,6 +211,11 @@ model MdsResourceProperties {
   @added(Microsoft.ManufacturingPlatform.Versions.v2024_02_01_preview)
   @visibility("read", "create", "update")
   userManagedOpenAIProfile?: UserManagedOpenAIProfile;
+
+  @doc("Deny Assignments exclusion list.")
+  @added(Microsoft.ManufacturingPlatform.Versions.v2024_02_01_preview)
+  @visibility("read", "update")
+  denyAssignmentExclusions?: DenyAssignmentExclusion[];
 }
 
 @doc("The properties related to Aks Resource")
@@ -388,6 +406,18 @@ model OpenAIProfile {
   embeddingModelCapacity?: int32;
 }
 
+@added(Microsoft.ManufacturingPlatform.Versions.v2024_02_01_preview)
+@doc("The properties related to Deny Assignment Exclusions")
+model DenyAssignmentExclusion {
+  @doc("Object Id of Identity")
+  @visibility("read", "update")
+  id: string;
+
+  @doc("Type of Identity")
+  @visibility("read", "update")
+  type: string;
+}
+
 @doc("Configuration of the managed resource group associated with the resource.")
 model ManagedResourceGroupConfiguration {
   @doc("The resource group name.")
@@ -464,17 +494,25 @@ model UserManagedOpenAIProfile {
   @doc("Embedding Model Deployment Name")
   @visibility("read", "create", "update")
   embeddingModelDeploymentName: string;
-  
+
   @doc("Embedding Model Type")
-  @visibility("read", "create")
-  embeddingModelType: string;
+  @visibility("read")
+  embeddingModelType?: string;
 }
 
 @armResourceOperations(MdsResource)
 interface ManufacturingDataServices {
   get is ArmResourceRead<MdsResource>;
   createOrUpdate is ArmResourceCreateOrUpdateAsync<MdsResource>;
-  update is ArmResourcePatchAsync<MdsResource, MdsResourceProperties>;
+  // update is ArmResourcePatchAsync<MdsResource, MdsResourceProperties>;
+  //temporary fix until typespec fix the issue of generating update classes
+  update is ArmCustomPatchAsync<
+    MdsResource,
+    Azure.ResourceManager.Foundations.ResourceUpdateModel<
+      MdsResource,
+      MdsResourceProperties
+    >
+  >;
   delete is ArmResourceDeleteWithoutOkAsync<MdsResource>;
   listByResourceGroup is ArmResourceListByParent<MdsResource>;
   listBySubscription is ArmListBySubscription<MdsResource>;
@@ -516,4 +554,7 @@ model ApplicationVersion {
 
   @doc("Is Preview")
   isPreview: boolean;
+
+  @doc("Is Deprecated")
+  isDeprecated: boolean;
 }

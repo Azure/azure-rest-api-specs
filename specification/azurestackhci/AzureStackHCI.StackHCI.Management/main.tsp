@@ -5,6 +5,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "./edgeDeviceJobs.tsp";
 import "./clusterJobs.tsp";
 import "./cluster.tsp";
+import "./gpus.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
