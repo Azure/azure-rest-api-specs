@@ -2,7 +2,7 @@ import "@azure-tools/typespec-azure-core";
 import "@typespec/rest";
 import "@typespec/versioning";
 
-import "./agents/main.tsp";
+import "./agents/routes.tsp";
 import "./endpoints/routes.tsp";
 import "./evaluations/routes.tsp";
 import "./vector_stores/main.tsp";
