@@ -20,7 +20,7 @@ These settings apply only when `--tag=package-preview-2023-10` is specified on t
 
 ```yaml $(tag) == 'package-preview-2023-10'
 input-file:
-  - 2023-10-01-preview/migrate.json
+  - preview/2023-10-01-preview/migrate.json
 ```
 
 ### Tag: package-2023-06
