@@ -34,6 +34,7 @@ interface MongoClusters {
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader
   >;
   /** Updates an existing mongo cluster. The request body can contain one to many of the properties present in the normal mongo cluster definition. */
+  @parameterVisibility
   update is ArmCustomPatchAsync<
     MongoCluster,
     Azure.ResourceManager.Foundations.ResourceUpdateModel<
@@ -90,12 +91,18 @@ model MongoClusterProperties {
 
   /** The administrator's login for the mongo cluster. */
   @visibility("read", "create", "update")
+  @removed(Versions.v2024_07_01)
   administratorLogin?: string;
 
   /** The password of the administrator login. */
   @visibility("create", "update")
+  @removed(Versions.v2024_07_01)
   @secret
   administratorLoginPassword?: string;
+
+  /** The local administrator properties for the mongo cluster. */
+  @added(Versions.v2024_07_01)
+  administrator?: AdministratorProperties;
 
   /** The Mongo DB server version. Defaults to the latest available version if not specified. */
   serverVersion?: string;
@@ -106,6 +113,7 @@ model MongoClusterProperties {
 
   /** Earliest restore timestamp in UTC ISO8601 format. */
   @visibility("read")
+  @removed(Versions.v2024_07_01)
   earliestRestoreTime?: string;
 
   /** The provisioning state of the mongo cluster. */
@@ -121,7 +129,28 @@ model MongoClusterProperties {
 
   /** The list of node group specs in the cluster. */
   @extension("x-ms-identifiers", [])
+  @removed(Versions.v2024_07_01)
   nodeGroupSpecs?: NodeGroupSpec[];
+
+  /** The high availability properties of the mongo cluster. */
+  @added(Versions.v2024_07_01)
+  highAvailability?: HighAvailabilityProperties;
+
+  /** The storage properties of the mongo cluster. */
+  @added(Versions.v2024_07_01)
+  storage?: StorageProperties;
+
+  /** The sharding properties of the mongo cluster. */
+  @added(Versions.v2024_07_01)
+  sharding?: ShardingProperties;
+
+  /** The compute properties of the mongo cluster. */
+  @added(Versions.v2024_07_01)
+  compute?: ComputeProperties;
+
+  /** The backup properties of the mongo cluster. */
+  @added(Versions.v2024_07_01)
+  backup?: BackupProperties;
 
   /** List of private endpoint connections. */
   @visibility("read")
@@ -161,14 +190,6 @@ union CreateMode {
   "Replica",
 }
 
-/** The kind of the node on the cluster. */
-union NodeKind {
-  string,
-
-  /** The node is a shard kind. */
-  "Shard",
-}
-
 /** Parameters used for restore operations */
 model MongoClusterRestoreParameters {
   /** UTC point in time to restore a mongo cluster */
@@ -180,26 +201,48 @@ model MongoClusterRestoreParameters {
   sourceResourceId?: MongoClusterResourceId;
 }
 
-/** Specification for a node group. */
-model NodeGroupSpec is NodeGroupProperties {
-  /** The node type deployed in the node group. */
-  kind?: NodeKind;
-
-  /** The number of nodes in the node group. */
-  nodeCount?: int32;
+/** The compute properties of the cluster. This includes the virtual-cores/memory and scaling options applied to servers in the cluster. */
+@added(Versions.v2024_07_01)
+model ComputeProperties {
+  /** The compute tier to assign to the cluster, where each tier maps to a virtual-core and memory size. Example values: 'M30', 'M40'. */
+  tier?: string;
 }
 
-/** The properties of the node group on a cluster. */
-model NodeGroupProperties {
-  /** The resource sku for the node group. This defines the size of CPU and memory that is provisioned for each node. Example values: 'M30', 'M40'. */
-  sku?: string;
+/** The storage properties of the cluster. This includes the data storage size and scaling applied to servers in the cluster. */
+@added(Versions.v2024_07_01)
+model StorageProperties {
+  /** The size of the data disk assigned to each server. */
+  sizeGb?: int64;
+}
 
-  /** The disk storage size for the node group in GB. Example values: 128, 256, 512, 1024. */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Capitialized acronym in the property name."
-  diskSizeGB?: int64;
+/** The sharding properties of the cluster. This includes the shard count and scaling options for the cluster. */
+@added(Versions.v2024_07_01)
+model ShardingProperties {
+  /** Number of shards to provision on the cluster. */
+  shardCount?: int32;
+}
 
-  /** Whether high availability is enabled on the node group. */
-  enableHa?: boolean;
+/** The high availability modes for a cluster. */
+@added(Versions.v2024_07_01)
+union HighAvailabilityMode {
+  string,
+
+  /** High availability mode is disabled. This mode is can see availability impact during faults or maintenance and is not recommended for production. */
+  "Disabled",
+
+  /** High availability mode is enabled, where each server in a shard is placed in the same availability zone. */
+  "SameZone",
+
+  /** High availability mode is enabled and preferences ZoneRedundant if availability zones capacity is available in the region, otherwise falls-back to provisioning with SameZone. */
+  "ZoneRedundantPreferred",
+}
+
+/** The backup properties of the cluster. This includes the earliest restore time and retention settings. */
+@added(Versions.v2024_07_01)
+model BackupProperties {
+  /** Earliest restore timestamp in UTC ISO8601 format. */
+  @visibility("read")
+  earliestRestoreTime?: string;
 }
 
 /** The connection strings for the given mongo cluster. */
@@ -221,6 +264,11 @@ model ConnectionString {
   /** Description of the connection string */
   @visibility("read")
   description?: string;
+
+  /** Name of the connection string. */
+  @visibility("read")
+  @added(Versions.v2024_07_01)
+  name?: string;
 }
 
 /** The status of the Mongo cluster resource. */
@@ -361,4 +409,57 @@ union ReplicationState {
 
   /** Replication link is re-configuring due to a promotion event. */
   "Reconfiguring",
+}
+
+/** Specification for a node group. */
+@removed(Versions.v2024_07_01)
+model NodeGroupSpec is NodeGroupProperties {
+  /** The node type deployed in the node group. */
+  kind?: NodeKind;
+
+  /** The number of nodes in the node group. */
+  nodeCount?: int32;
+}
+
+/** The properties of the node group on a cluster. */
+@removed(Versions.v2024_07_01)
+model NodeGroupProperties {
+  /** The resource sku for the node group. This defines the size of CPU and memory that is provisioned for each node. Example values: 'M30', 'M40'. */
+  sku?: string;
+
+  /** The disk storage size for the node group in GB. Example values: 128, 256, 512, 1024. */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Capitialized acronym in the property name."
+  diskSizeGB?: int64;
+
+  /** Whether high availability is enabled on the node group. */
+  enableHa?: boolean;
+}
+
+/** The high availability properties of the cluster. */
+@added(Versions.v2024_07_01)
+model HighAvailabilityProperties {
+  /** The target high availability mode requested for the cluster. */
+  targetMode?: HighAvailabilityMode;
+}
+
+/** The kind of the node on the cluster. */
+@removed(Versions.v2024_07_01)
+union NodeKind {
+  string,
+
+  /** The node is a shard kind. */
+  "Shard",
+}
+
+/** The local administrator login properties. */
+@added(Versions.v2024_07_01)
+model AdministratorProperties {
+  /** The administrator user name. */
+  @visibility("read", "create", "update")
+  userName?: string;
+
+  /** The administrator password. */
+  @visibility("create", "update")
+  @secret
+  password?: string;
 }

@@ -189,8 +189,6 @@ interface BlockOps
       NoConditionalRequests &
       NoClientRequestId> {}
 
-@@clientName(Azure.Core.Foundations.ResourceBody.resource, "options");
-
 interface TextBlocklists {
   @summary("Get Text Blocklist By blocklistName")
   @doc("Returns text blocklist details.")
