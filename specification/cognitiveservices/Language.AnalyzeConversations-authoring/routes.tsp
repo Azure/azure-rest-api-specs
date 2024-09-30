@@ -14,16 +14,13 @@ using TypeSpec.Versioning;
 
 namespace Language.Authoring;
 
-
 alias ServiceTraits = NoRepeatableRequests &
   NoConditionalRequests &
   NoClientRequestId;
 
 alias languageOperations = ResourceOperations<ServiceTraits, ErrorResponse>;
 
-
 interface ConversationalAnalysisAuthoring {
-
   /**
    * Lists the existing projects.
    */
@@ -74,8 +71,11 @@ interface ConversationalAnalysisAuthoring {
   @added(Versions.v2023_04_15_preview)
   @actionSeparator("/:")
   @action("authorize-copy")
-  copyProjectAuthorization is languageOperations.ResourceAction<ConversationalAnalysisAuthoringProjectMetadata,
-  ConversationalAnalysisAuthoringCopyAuthorizationOptions,ConversationalAnalysisAuthoringCopyProjectOptions>;
+  copyProjectAuthorization is languageOperations.ResourceAction<
+    ConversationalAnalysisAuthoringProjectMetadata,
+    ConversationalAnalysisAuthoringCopyAuthorizationOptions,
+    ConversationalAnalysisAuthoringCopyProjectOptions
+  >;
 
   /**
    * Copies an existing project to another Azure resource.
@@ -88,7 +88,7 @@ interface ConversationalAnalysisAuthoring {
   copyProject is languageOperations.LongRunningResourceAction<
     ConversationalAnalysisAuthoringProjectMetadata,
     ConversationalAnalysisAuthoringCopyProjectOptions,
-   ConversationalAnalysisAuthoringProjectMetadata
+    ConversationalAnalysisAuthoringProjectMetadata
   >;
 
   /**
@@ -124,7 +124,7 @@ interface ConversationalAnalysisAuthoring {
       @query
       trainedModelLabel?: string;
     },
-   ConversationalAnalysisAuthoringProjectMetadata
+    ConversationalAnalysisAuthoringProjectMetadata
   >;
 
   /**
@@ -136,7 +136,7 @@ interface ConversationalAnalysisAuthoring {
   `import` is languageOperations.LongRunningResourceAction<
     ConversationalAnalysisAuthoringProjectMetadata,
     {
-     /**
+      /**
        * The format of the exported project file to use.
        */
       #suppress "@azure-tools/typespec-azure-core/casing-style"
@@ -149,7 +149,7 @@ interface ConversationalAnalysisAuthoring {
       @body
       body: ConversationalAnalysisAuthoringExportedProject;
     },
-   ConversationalAnalysisAuthoringProjectMetadata
+    ConversationalAnalysisAuthoringProjectMetadata
   >;
 
   /**
@@ -177,17 +177,17 @@ interface ConversationalAnalysisAuthoring {
     ListQueryParametersTrait<StandardListQueryParameters>
   >;
 
-   /**
+  /**
    * Swaps two existing deployments with each other.
    */
   @pollingOperation(ConversationalAnalysisAuthoring.getSwapDeploymentsStatus)
   @actionSeparator("/:")
   @action("swap")
   swapDeployments is languageOperations.LongRunningResourceCollectionAction<
-  ConversationalAnalysisAuthoringProjectDeployment,
-  ConversationalAnalysisAuthoringSwapDeploymentsOptions,
-  ConversationalAnalysisAuthoringProjectDeployment
->;
+    ConversationalAnalysisAuthoringProjectDeployment,
+    ConversationalAnalysisAuthoringSwapDeploymentsOptions,
+    ConversationalAnalysisAuthoringProjectDeployment
+  >;
 
   /**
    * Gets the details of a deployment.
@@ -244,10 +244,10 @@ interface ConversationalAnalysisAuthoring {
   @actionSeparator("/:")
   @added(Versions.v2023_04_15_preview)
   deleteDeploymentFromResources is languageOperations.LongRunningResourceAction<
-  ConversationalAnalysisAuthoringProjectDeployment,
-  ConversationalAnalysisAuthoringDeleteDeploymentOptions,
-  ConversationalAnalysisAuthoringProjectDeployment
->;
+    ConversationalAnalysisAuthoringProjectDeployment,
+    ConversationalAnalysisAuthoringDeleteDeploymentOptions,
+    ConversationalAnalysisAuthoringProjectDeployment
+  >;
 
   /**
    * Gets the status of an existing delete deployment from specific resources job.
@@ -259,7 +259,6 @@ interface ConversationalAnalysisAuthoring {
    * Gets the status of an existing deployment job.
    */
   getDeploymentStatus is languageOperations.ResourceRead<ConversationalAnalysisAuthoringDeploymentJobState>;
-
 
   /**
    * Gets the status of an existing swap deployment job.
@@ -280,7 +279,7 @@ interface ConversationalAnalysisAuthoring {
   /**
    * Lists the trained models belonging to a project.
    */
-  listTrainedModels  is languageOperations.ResourceList<
+  listTrainedModels is languageOperations.ResourceList<
     ConversationalAnalysisAuthoringProjectTrainedModel,
     ListQueryParametersTrait<StandardListQueryParameters>
   >;
@@ -303,10 +302,10 @@ interface ConversationalAnalysisAuthoring {
   @pollingOperation(ConversationalAnalysisAuthoring.getEvaluationStatus)
   @added(Versions.v2023_04_15_preview)
   evaluateModel is languageOperations.LongRunningResourceAction<
-  ConversationalAnalysisAuthoringProjectTrainedModel,
-  ConversationalAnalysisAuthoringEvaluationOptions,
-  ConversationalAnalysisAuthoringProjectTrainedModel
->;
+    ConversationalAnalysisAuthoringProjectTrainedModel,
+    ConversationalAnalysisAuthoringEvaluationOptions,
+    ConversationalAnalysisAuthoringProjectTrainedModel
+  >;
 
   /**
    * Restores the snapshot of this trained model to be the current working directory
@@ -316,10 +315,10 @@ interface ConversationalAnalysisAuthoring {
   @actionSeparator("/:")
   @pollingOperation(ConversationalAnalysisAuthoring.getLoadSnapshotStatus)
   loadSnapshot is languageOperations.LongRunningResourceAction<
-  ConversationalAnalysisAuthoringProjectTrainedModel,
-  {},
-  ConversationalAnalysisAuthoringProjectTrainedModel
->;
+    ConversationalAnalysisAuthoringProjectTrainedModel,
+    {},
+    ConversationalAnalysisAuthoringProjectTrainedModel
+  >;
 
   /**
    * Gets the status for an evaluation job.
@@ -333,9 +332,9 @@ interface ConversationalAnalysisAuthoring {
    */
   getModelEvaluationResults is languageOperations.ResourceList<
     ConversationalAnalysisAuthoringUtteranceEvaluationResult,
-    ListQueryParametersTrait<StandardListQueryParameters & StringIndexTypeQueryParameter>
+    ListQueryParametersTrait<StandardListQueryParameters &
+      StringIndexTypeQueryParameter>
   >;
- 
 
   /**
    * Gets the evaluation summary of a trained model. The summary includes high level
@@ -373,8 +372,10 @@ interface ConversationalAnalysisAuthoring {
    * Lists the deployments resources assigned to the project.
    */
   @added(Versions.v2023_04_15_preview)
-  listDeploymentResources is languageOperations.ResourceList<ConversationalAnalysisAuthoringAssignedDeploymentResource,
-ListQueryParametersTrait<StandardListQueryParameters>>;
+  listDeploymentResources is languageOperations.ResourceList<
+    ConversationalAnalysisAuthoringAssignedDeploymentResource,
+    ListQueryParametersTrait<StandardListQueryParameters>
+  >;
 
   /**
    * Assign new Azure resources to a project to allow deploying new deployments to
@@ -389,10 +390,11 @@ ListQueryParametersTrait<StandardListQueryParameters>>;
     ConversationalAnalysisAuthoring.getAssignDeploymentResourcesStatus
   )
   @added(Versions.v2023_04_15_preview)
-  assignDeploymentResources is languageOperations.LongRunningResourceCollectionAction<ConversationalAnalysisAuthoringAssignedDeploymentResource,
-ConversationalAnalysisAuthoringAssignDeploymentResourcesOptions,
-ConversationalAnalysisAuthoringAssignedDeploymentResource
->;
+  assignDeploymentResources is languageOperations.LongRunningResourceCollectionAction<
+    ConversationalAnalysisAuthoringAssignedDeploymentResource,
+    ConversationalAnalysisAuthoringAssignDeploymentResourcesOptions,
+    ConversationalAnalysisAuthoringAssignedDeploymentResource
+  >;
 
   /**
    * Unassign resources from a project. This disallows deploying new deployments to
@@ -404,10 +406,11 @@ ConversationalAnalysisAuthoringAssignedDeploymentResource
   @added(Versions.v2023_04_15_preview)
   @action("unassign")
   @actionSeparator("/:")
-  unassignDeploymentResources is languageOperations.LongRunningResourceCollectionAction<ConversationalAnalysisAuthoringAssignedDeploymentResource,
-ConversationalAnalysisAuthoringUnassignDeploymentResourcesOptions,
-ConversationalAnalysisAuthoringAssignedDeploymentResource
->;
+  unassignDeploymentResources is languageOperations.LongRunningResourceCollectionAction<
+    ConversationalAnalysisAuthoringAssignedDeploymentResource,
+    ConversationalAnalysisAuthoringUnassignDeploymentResourcesOptions,
+    ConversationalAnalysisAuthoringAssignedDeploymentResource
+  >;
 
   /**
    * Gets the status of an existing assign deployment resources job.
@@ -445,8 +448,10 @@ ConversationalAnalysisAuthoringAssignedDeploymentResource
   /**
    * Lists the non-expired training jobs created for a project.
    */
-  listTrainingJobs is languageOperations.ResourceList<ConversationalAnalysisAuthoringTrainingJobState,
-ListQueryParametersTrait<StandardListQueryParameters>>;
+  listTrainingJobs is languageOperations.ResourceList<
+    ConversationalAnalysisAuthoringTrainingJobState,
+    ListQueryParametersTrait<StandardListQueryParameters>
+  >;
 
   /**
    * Gets the status for a training job.
@@ -460,10 +465,10 @@ ListQueryParametersTrait<StandardListQueryParameters>>;
   @action("cancel")
   @pollingOperation(ConversationalAnalysisAuthoring.getTrainingStatus)
   cancelTrainingJob is languageOperations.LongRunningResourceAction<
-  ConversationalAnalysisAuthoringTrainingJobState,
-  {},
-  ConversationalAnalysisAuthoringTrainingJobState
->;
+    ConversationalAnalysisAuthoringTrainingJobState,
+    {},
+    ConversationalAnalysisAuthoringTrainingJobState
+  >;
 
   /**
    * Gets the status for a project deletion job.

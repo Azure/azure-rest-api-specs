@@ -796,7 +796,6 @@ model ConversationalAnalysisAuthoringSwapDeploymentsJobState {
   ...ConversationalAnalysisAuthoringJobState;
 }
 
-
 /**
  * Represents the options for swapping two deployments together.
  */
@@ -956,15 +955,14 @@ model ConversationalAnalysisAuthoringEvaluationResults {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
-model StringIndexTypeQueryParameter{
+model StringIndexTypeQueryParameter {
   /**
-       * Specifies the method used to interpret string offsets. For additional
-       * information see https://aka.ms/text-analytics-offsets.
-       */
-      @query("stringIndexType")
-      stringIndexType: ConversationalAnalysisAuthoringStringIndexType;
+   * Specifies the method used to interpret string offsets. For additional
+   * information see https://aka.ms/text-analytics-offsets.
+   */
+  @query("stringIndexType")
+  stringIndexType: ConversationalAnalysisAuthoringStringIndexType;
 }
-
 
 /**
  * Represents the evaluation result for an utterance.
