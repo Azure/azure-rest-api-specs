@@ -146,6 +146,27 @@ model ImageData {
   blobUrl?: url;
 }
 
+@added(ContentSafety.Versions.v2024_09_15_Preview)
+@doc("The request of detecting potential protected material present in the given text.")
+model DetectImageProtectedMaterialOptions {
+  @doc("The image to be analyzed, which may contain protected material.")
+  image: ImageData;
+}
+
+@added(ContentSafety.Versions.v2024_09_15_Preview)
+@doc("The combined detection results of potential protected material.")
+model DetectImageProtectedMaterialResult {
+  @doc("Analysis result for the given image.")
+  protectedMaterialAnalysis: ImageProtectedMaterialAnalysisResult;
+}
+
+@added(ContentSafety.Versions.v2024_09_15_Preview)
+@doc("The individual detection result of potential protected material.")
+model ImageProtectedMaterialAnalysisResult {
+  @doc("Whether potential protected material is detected or not.")
+  detected: boolean;
+}
+
 @doc("The image analysis response.")
 model AnalyzeImageResult {
   @doc("Analysis result for categories.")

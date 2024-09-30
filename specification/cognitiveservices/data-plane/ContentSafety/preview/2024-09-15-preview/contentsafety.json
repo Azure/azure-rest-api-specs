@@ -695,6 +695,47 @@
         }
       }
     },
+    "/image:detectProtectedMaterial": {
+      "post": {
+        "operationId": "ImageOperations_DetectImageProtectedMaterial",
+        "summary": "Detect Protected Material for Image",
+        "description": "A synchronous API for detecting protected material in the given image.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The request body to be detected, which may contain protected material.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DetectImageProtectedMaterialOptions"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DetectImageProtectedMaterialResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
     "/imageWithText:analyze": {
       "post": {
         "operationId": "ImageWithTextOperations_AnalyzeImageWithText",
@@ -3085,6 +3126,32 @@
         "protectedMaterialAnalysis"
       ]
     },
+    "DetectImageProtectedMaterialOptions": {
+      "type": "object",
+      "description": "The request of detecting potential protected material present in the given text.",
+      "properties": {
+        "image": {
+          "$ref": "#/definitions/ImageData",
+          "description": "The image to be analyzed, which may contain protected material."
+        }
+      },
+      "required": [
+        "image"
+      ]
+    },
+    "DetectImageProtectedMaterialResult": {
+      "type": "object",
+      "description": "The combined detection results of potential protected material.",
+      "properties": {
+        "protectedMaterialAnalysis": {
+          "$ref": "#/definitions/ImageProtectedMaterialAnalysisResult",
+          "description": "Analysis result for the given image."
+        }
+      },
+      "required": [
+        "protectedMaterialAnalysis"
+      ]
+    },
     "DetectIncidentsResult": {
       "type": "object",
       "description": "The response of analyzing given content with content safety incidents defined.",
@@ -3343,6 +3410,19 @@
       },
       "required": [
         "incidentSampleId"
+      ]
+    },
+    "ImageProtectedMaterialAnalysisResult": {
+      "type": "object",
+      "description": "The individual detection result of potential protected material.",
+      "properties": {
+        "detected": {
+          "type": "boolean",
+          "description": "Whether potential protected material is detected or not."
+        }
+      },
+      "required": [
+        "detected"
       ]
     },
     "ImageWithTextCategoriesAnalysis": {

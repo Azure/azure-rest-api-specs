@@ -166,6 +166,23 @@ interface ImageOperations {
     },
     DetectIncidentsResult
   >;
+
+  @added(ContentSafety.Versions.v2024_09_15_Preview)
+  @summary("Detect Protected Material for Image")
+  @doc("A synchronous API for detecting protected material in the given image.")
+  @route("/image:detectProtectedMaterial")
+  @post
+  detectImageProtectedMaterial is Azure.Core.RpcOperation<
+    {
+      @bodyRoot
+      @doc("The request body to be detected, which may contain protected material.")
+      @clientName("options", "csharp")
+      @clientName("options", "python")
+      @clientName("options", "java")
+      body: DetectImageProtectedMaterialOptions;
+    },
+    DetectImageProtectedMaterialResult
+  >;
 }
 
 @added(ContentSafety.Versions.v2024_09_15_Preview)
