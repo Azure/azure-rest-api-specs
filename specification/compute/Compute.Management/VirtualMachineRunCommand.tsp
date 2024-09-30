@@ -32,9 +32,7 @@ interface VirtualMachineRunCommands {
    */
   getByVirtualMachine is ArmResourceRead<
     VirtualMachineRunCommand,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<VirtualMachineRunCommand>;
-
+    Parameters = {
       /**
        * The expand expression to apply on the operation.
        */
@@ -68,13 +66,9 @@ interface VirtualMachineRunCommands {
   /**
    * The operation to get all run commands of a Virtual Machine.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("VirtualMachineRunCommands_ListByVirtualMachine")
   listByVirtualMachine is ArmResourceListByParent<
     VirtualMachineRunCommand,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<VirtualMachineRunCommand>;
-
+    Parameters = {
       /**
        * The expand expression to apply on the operation.
        */

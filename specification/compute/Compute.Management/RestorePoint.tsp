@@ -32,9 +32,7 @@ interface RestorePoints {
    */
   get is ArmResourceRead<
     RestorePoint,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<RestorePoint>;
-
+    Parameters = {
       /**
        * The expand expression to apply on the operation. 'InstanceView' retrieves information about the run-time state of a restore point.
        */

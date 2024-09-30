@@ -30,9 +30,7 @@ interface RestorePointCollections {
    */
   get is ArmResourceRead<
     RestorePointCollection,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<RestorePointCollection>;
-
+    Parameters = {
       /**
        * The expand expression to apply on the operation. If expand=restorePoints, server will return all contained restore points in the restorePointCollection.
        */
@@ -66,8 +64,6 @@ interface RestorePointCollections {
   /**
    * Gets the list of restore point collections in a resource group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("RestorePointCollections_List")
   list is ArmResourceListByParent<RestorePointCollection>;
 
   /**

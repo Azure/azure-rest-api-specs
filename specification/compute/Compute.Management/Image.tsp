@@ -34,9 +34,7 @@ interface Images {
    */
   get is ArmResourceRead<
     Image,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<Image>;
-
+    Parameters = {
       /**
        * The expand expression to apply on the operation.
        */
@@ -67,8 +65,6 @@ interface Images {
   /**
    * Gets the list of images under a resource group. Use nextLink property in the response to get the next page of Images. Do this till nextLink is null to fetch all the Images.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("Images_ListByResourceGroup")
   listByResourceGroup is ArmResourceListByParent<Image>;
 
   /**

@@ -42,21 +42,21 @@ interface PrivateEndpointConnections {
   /**
    * Gets information about a private endpoint connection under a disk access resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("DiskAccesses_GetAPrivateEndpointConnection")
   getAPrivateEndpointConnection is ArmResourceRead<PrivateEndpointConnection>;
 
   /**
    * Approve or reject a private endpoint connection under disk access resource, this can't be used to create a new private endpoint connection.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("DiskAccesses_UpdateAPrivateEndpointConnection")
   updateAPrivateEndpointConnection is ArmResourceCreateOrReplaceAsync<PrivateEndpointConnection>;
 
   /**
    * Deletes a private endpoint connection under a disk access resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "deprecated" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
@@ -66,7 +66,7 @@ interface PrivateEndpointConnections {
   /**
    * List information about private endpoint connections under a disk access resource
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("DiskAccesses_ListPrivateEndpointConnections")
   listPrivateEndpointConnections is ArmResourceListByParent<PrivateEndpointConnection>;
 }

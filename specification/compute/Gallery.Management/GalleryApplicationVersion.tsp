@@ -32,9 +32,7 @@ interface GalleryApplicationVersions {
    */
   get is ArmResourceRead<
     GalleryApplicationVersion,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<GalleryApplicationVersion>;
-
+    Parameters = {
       /**
        * The expand expression to apply on the operation.
        */
@@ -68,8 +66,6 @@ interface GalleryApplicationVersions {
   /**
    * List gallery Application Versions in a gallery Application Definition.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("GalleryApplicationVersions_ListByGalleryApplication")
   listByGalleryApplication is ArmResourceListByParent<GalleryApplicationVersion>;
 }
 

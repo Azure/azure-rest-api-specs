@@ -59,6 +59,7 @@ union DiskStorageAccountTypes {
  */
 union ExtendedLocationTypes {
   string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   EdgeZone: "EdgeZone",
 }
 
@@ -67,7 +68,9 @@ union ExtendedLocationTypes {
  */
 union HyperVGeneration {
   string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   V1: "V1",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   V2: "V2",
 }
 
@@ -76,7 +79,9 @@ union HyperVGeneration {
  */
 union Architecture {
   string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   x64: "x64",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Arm64: "Arm64",
 }
 
@@ -147,7 +152,9 @@ union DiskCreateOption {
  */
 union ProvisionedBandwidthCopyOption {
   string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   None: "None",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Enhanced: "Enhanced",
 }
 
@@ -313,8 +320,11 @@ union DataAccessAuthMode {
  */
 union AccessLevel {
   string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   None: "None",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Read: "Read",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Write: "Write",
 }
 
@@ -340,8 +350,11 @@ union FileFormat {
  */
 union PrivateEndpointServiceConnectionStatus {
   string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Pending: "Pending",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Approved: "Approved",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Rejected: "Rejected",
 }
 
@@ -351,9 +364,13 @@ union PrivateEndpointServiceConnectionStatus {
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
 union PrivateEndpointConnectionProvisioningState {
   string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Succeeded: "Succeeded",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Creating: "Creating",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Deleting: "Deleting",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Failed: "Failed",
 }
 
@@ -362,9 +379,13 @@ union PrivateEndpointConnectionProvisioningState {
  */
 union DiskEncryptionSetIdentityType {
   string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   SystemAssigned: "SystemAssigned",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   UserAssigned: "UserAssigned",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   `SystemAssigned, UserAssigned`: "SystemAssigned, UserAssigned",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   None: "None",
 }
 
@@ -427,6 +448,7 @@ union CopyCompletionErrorReason {
 /**
  * The Operating System type.
  */
+#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
 enum OperatingSystemTypes {
   Windows,
   Linux,

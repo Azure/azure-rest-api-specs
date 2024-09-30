@@ -37,9 +37,7 @@ interface DedicatedHosts {
    */
   get is ArmResourceRead<
     DedicatedHost,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<DedicatedHost>;
-
+    Parameters = {
       /**
        * The expand expression to apply on the operation. 'InstanceView' will retrieve the list of instance views of the dedicated host. 'UserData' is not supported for dedicated host.
        */
@@ -70,8 +68,6 @@ interface DedicatedHosts {
   /**
    * Lists all of the dedicated hosts in the specified dedicated host group. Use the nextLink property in the response to get the next page of dedicated hosts.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("DedicatedHosts_ListByHostGroup")
   listByHostGroup is ArmResourceListByParent<DedicatedHost>;
 
   /**

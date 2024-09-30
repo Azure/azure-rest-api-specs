@@ -35,9 +35,7 @@ interface ProximityPlacementGroups {
    */
   get is ArmResourceRead<
     ProximityPlacementGroup,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<ProximityPlacementGroup>;
-
+    Parameters = {
       /**
        * includeColocationStatus=true enables fetching the colocation status of all the resources in the proximity placement group.
        */
@@ -69,8 +67,6 @@ interface ProximityPlacementGroups {
   /**
    * Lists all proximity placement groups in a resource group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("ProximityPlacementGroups_ListByResourceGroup")
   listByResourceGroup is ArmResourceListByParent<ProximityPlacementGroup>;
 
   /**

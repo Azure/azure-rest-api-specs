@@ -14,7 +14,9 @@ namespace Microsoft.Compute;
  */
 union ResultStatus {
   string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Success: "Success",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Failed: "Failed",
 }
 

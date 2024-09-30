@@ -67,8 +67,6 @@ interface Snapshots {
   /**
    * Lists snapshots under a resource group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("Snapshots_ListByResourceGroup")
   listByResourceGroup is ArmResourceListByParent<Snapshot>;
 
   /**

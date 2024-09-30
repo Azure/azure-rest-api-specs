@@ -4,10 +4,12 @@ import "@azure-tools/typespec-azure-core";
 import "@typespec/rest";
 import "./models.tsp";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.ResourceManager;
+using TypeSpec.OpenAPI;
 
 namespace Microsoft.Compute;
 
@@ -15,6 +17,8 @@ interface UsageOperations {
   /**
    * Gets, for the specified location, the current compute resource usage information as well as the limits for compute resources under the subscription.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("Usage_List")
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/usages")
   @get
   list(
@@ -28,6 +32,8 @@ interface VirtualMachineSizesOperations {
   /**
    * This API is deprecated. Use [Resources Skus](https://docs.microsoft.com/rest/api/compute/resourceskus/list)
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("VirtualMachineSizes_List")
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/vmSizes")
   @get
   list(
@@ -41,6 +47,8 @@ interface VirtualMachineScaleSetsOperations {
   /**
    * Gets all the VM scale sets under the specified subscription for the specified location.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("VirtualMachineScaleSets_ListByLocation")
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/virtualMachineScaleSets")
   @get
   listByLocation(
@@ -54,6 +62,8 @@ interface VirtualMachinesOperations {
   /**
    * Gets all the virtual machines under the specified subscription for the specified location.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("VirtualMachines_ListByLocation")
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/virtualMachines")
   @get
   listByLocation(
@@ -67,6 +77,8 @@ interface VirtualMachineImagesEdgeZoneOperations {
   /**
    * Gets a list of virtual machine image publishers for the specified Azure location and edge zone.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("VirtualMachineImagesEdgeZone_ListPublishers")
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/edgeZones/{edgeZone}/publishers")
   @get
   listPublishers(
@@ -85,6 +97,8 @@ interface VirtualMachineImagesEdgeZoneOperations {
   /**
    * Gets a list of virtual machine image offers for the specified location, edge zone and publisher.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("VirtualMachineImagesEdgeZone_ListOffers")
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/edgeZones/{edgeZone}/publishers/{publisherName}/artifacttypes/vmimage/offers")
   @get
   listOffers(
@@ -109,6 +123,8 @@ interface VirtualMachineImagesEdgeZoneOperations {
   /**
    * Gets a list of virtual machine image SKUs for the specified location, edge zone, publisher, and offer.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("VirtualMachineImagesEdgeZone_ListSkus")
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/edgeZones/{edgeZone}/publishers/{publisherName}/artifacttypes/vmimage/offers/{offer}/skus")
   @get
   listSkus(
@@ -139,6 +155,8 @@ interface VirtualMachineImagesEdgeZoneOperations {
   /**
    * Gets a list of all virtual machine image versions for the specified location, edge zone, publisher, offer, and SKU.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("VirtualMachineImagesEdgeZone_List")
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/edgeZones/{edgeZone}/publishers/{publisherName}/artifacttypes/vmimage/offers/{offer}/skus/{skus}/versions")
   @get
   list(
@@ -193,6 +211,8 @@ interface VirtualMachineImagesEdgeZoneOperations {
   /**
    * Gets a virtual machine image in an edge zone.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("VirtualMachineImagesEdgeZone_Get")
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/edgeZones/{edgeZone}/publishers/{publisherName}/artifacttypes/vmimage/offers/{offer}/skus/{skus}/versions/{version}")
   @get
   get(
@@ -237,6 +257,8 @@ interface VirtualMachineImagesOperations {
   /**
    * Gets a list of all virtual machine image versions for the specified edge zone
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("VirtualMachineImages_ListByEdgeZone")
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/edgeZones/{edgeZone}/vmimages")
   @get
   listByEdgeZone(
@@ -255,6 +277,8 @@ interface VirtualMachineImagesOperations {
   /**
    * Gets a list of virtual machine image publishers for the specified Azure location.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("VirtualMachineImages_ListPublishers")
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/publishers")
   @get
   listPublishers(
@@ -266,6 +290,8 @@ interface VirtualMachineImagesOperations {
   /**
    * Gets a list of virtual machine image offers for the specified location and publisher.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("VirtualMachineImages_ListOffers")
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/publishers/{publisherName}/artifacttypes/vmimage/offers")
   @get
   listOffers(
@@ -284,6 +310,8 @@ interface VirtualMachineImagesOperations {
   /**
    * Gets a list of virtual machine image SKUs for the specified location, publisher, and offer.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("VirtualMachineImages_ListSkus")
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/publishers/{publisherName}/artifacttypes/vmimage/offers/{offer}/skus")
   @get
   listSkus(
@@ -308,6 +336,8 @@ interface VirtualMachineImagesOperations {
   /**
    * Gets a list of all virtual machine image versions for the specified location, publisher, offer, and SKU.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("VirtualMachineImages_List")
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/publishers/{publisherName}/artifacttypes/vmimage/offers/{offer}/skus/{skus}/versions")
   @get
   list(
@@ -350,6 +380,8 @@ interface VirtualMachineImagesOperations {
   /**
    * Gets a virtual machine image.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("VirtualMachineImages_Get")
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/publishers/{publisherName}/artifacttypes/vmimage/offers/{offer}/skus/{skus}/versions/{version}")
   @get
   get(
@@ -388,6 +420,8 @@ interface LogAnalyticsOperations {
   /**
    * Export logs that show Api requests made by this subscription in the given time window to show throttling activities.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("LogAnalytics_ExportRequestRateByInterval")
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/logAnalytics/apiAccess/getRequestRateByInterval")
   @post
   exportRequestRateByInterval(
@@ -405,6 +439,8 @@ interface LogAnalyticsOperations {
   /**
    * Export logs that show total throttled Api requests for this subscription in the given time window.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("LogAnalytics_ExportThrottledRequests")
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/logAnalytics/apiAccess/getThrottledRequests")
   @post
   exportThrottledRequests(
@@ -424,6 +460,8 @@ interface VirtualMachineRunCommandsOperations {
   /**
    * Lists all available run commands for a subscription in a location.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("VirtualMachineRunCommands_List")
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/runCommands")
   @get
   list(
@@ -441,6 +479,8 @@ interface VirtualMachineRunCommandsOperations {
   /**
    * Gets specific run command for a subscription in a location.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("VirtualMachineRunCommands_Get")
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/runCommands/{commandId}")
   @get
   get(
@@ -467,6 +507,8 @@ interface VirtualMachineScaleSetVMRunCommandsOperations {
   /**
    * The operation to get all run commands of an instance in Virtual Machine Scaleset.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("VirtualMachineScaleSetVMRunCommands_List")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualMachines/{instanceId}/runCommands")
   @get
   list(
@@ -503,6 +545,8 @@ interface VirtualMachineScaleSetVMRunCommandsOperations {
   /**
    * The operation to get the VMSS VM run command.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("VirtualMachineScaleSetVMRunCommands_Get")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualMachines/{instanceId}/runCommands/{runCommandName}")
   @get
   get(
@@ -545,6 +589,8 @@ interface VirtualMachineScaleSetVMRunCommandsOperations {
   /**
    * The operation to create or update the VMSS VM run command.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("VirtualMachineScaleSetVMRunCommands_CreateOrUpdate")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualMachines/{instanceId}/runCommands/{runCommandName}")
   @put
   createOrUpdate(
@@ -587,6 +633,8 @@ interface VirtualMachineScaleSetVMRunCommandsOperations {
   /**
    * The operation to update the VMSS VM run command.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("VirtualMachineScaleSetVMRunCommands_Update")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualMachines/{instanceId}/runCommands/{runCommandName}")
   @patch
   update(
@@ -629,6 +677,8 @@ interface VirtualMachineScaleSetVMRunCommandsOperations {
   /**
    * The operation to delete the VMSS VM run command.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("VirtualMachineScaleSetVMRunCommands_Delete")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualMachines/{instanceId}/runCommands/{runCommandName}")
   @delete
   delete(

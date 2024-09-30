@@ -57,8 +57,6 @@ interface DiskEncryptionSets {
   /**
    * Lists all the disk encryption sets under a resource group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("DiskEncryptionSets_ListByResourceGroup")
   listByResourceGroup is ArmResourceListByParent<DiskEncryptionSet>;
 
   /**

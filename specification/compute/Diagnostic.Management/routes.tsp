@@ -4,10 +4,12 @@ import "@azure-tools/typespec-azure-core";
 import "@typespec/rest";
 import "./models.tsp";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.ResourceManager;
+using TypeSpec.OpenAPI;
 
 namespace Microsoft.Compute;
 
@@ -15,6 +17,8 @@ interface DiagnosticOperationsOperations {
   /**
    * Gets status of a Diagnostic operation issued for Disk Inspection.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("DiagnosticOperations_Read")
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/diagnosticOperations/{operationId}")
   @get
   read(
@@ -35,6 +39,8 @@ interface SpotPlacementRecommenderOperations {
   /**
    * [SOON TO BE DEPRECATED] Gets Spot Placement Recommender diagnostic metadata.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("SpotPlacementRecommender_Get")
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/diagnostics/spotPlacementRecommender")
   @get
   get(
@@ -46,6 +52,8 @@ interface SpotPlacementRecommenderOperations {
   /**
    * [SOON TO BE DEPRECATED] Generates placement scores for Spot VM skus.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("SpotPlacementRecommender_Post")
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/diagnostics/spotPlacementRecommender/generate")
   @post
   post(
@@ -65,6 +73,8 @@ interface SpotPlacementScoresOperations {
   /**
    * Gets Spot Placement Scores metadata.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("SpotPlacementScores_Get")
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/placementScores/spot")
   @get
   get(
@@ -76,6 +86,8 @@ interface SpotPlacementScoresOperations {
   /**
    * Generates placement scores for Spot VM skus.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("SpotPlacementScores_Post")
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/placementScores/spot/generate")
   @post
   post(

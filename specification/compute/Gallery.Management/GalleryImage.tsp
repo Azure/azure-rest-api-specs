@@ -54,8 +54,6 @@ interface GalleryImages {
   /**
    * List gallery image definitions in a gallery.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("GalleryImages_ListByGallery")
   listByGallery is ArmResourceListByParent<GalleryImage>;
 }
 

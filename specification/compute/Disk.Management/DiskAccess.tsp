@@ -57,8 +57,6 @@ interface DiskAccesses {
   /**
    * Lists all the disk access resources under a resource group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("DiskAccesses_ListByResourceGroup")
   listByResourceGroup is ArmResourceListByParent<DiskAccess>;
 
   /**

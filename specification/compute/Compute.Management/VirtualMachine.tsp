@@ -68,9 +68,7 @@ interface VirtualMachines {
    */
   get is ArmResourceRead<
     VirtualMachine,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<VirtualMachine>;
-
+    Parameters = {
       /**
        * The expand expression to apply on the operation. 'InstanceView' retrieves a snapshot of the runtime properties of the virtual machine that is managed by the platform and can change outside of control plane operations. 'UserData' retrieves the UserData property as part of the VM model view that was provided by the user during the VM Create/Update operation.
        */
@@ -84,9 +82,7 @@ interface VirtualMachines {
    */
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     VirtualMachine,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<VirtualMachine>;
-
+    Parameters = {
       /**
        * The ETag of the transformation. Omit this value to always overwrite the current resource. Specify the last-seen ETag value to prevent accidentally overwriting concurrent changes.
        */
@@ -108,9 +104,7 @@ interface VirtualMachines {
   update is ArmCustomPatchAsync<
     VirtualMachine,
     VirtualMachineUpdate,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<VirtualMachine>;
-
+    Parameters = {
       /**
        * The ETag of the transformation. Omit this value to always overwrite the current resource. Specify the last-seen ETag value to prevent accidentally overwriting concurrent changes.
        */
@@ -133,9 +127,7 @@ interface VirtualMachines {
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   delete is ArmResourceDeleteAsync<
     VirtualMachine,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<VirtualMachine>;
-
+    Parameters = {
       /**
        * Optional parameter to force delete virtual machines.
        */
@@ -147,13 +139,9 @@ interface VirtualMachines {
   /**
    * Lists all of the virtual machines in the specified resource group. Use the nextLink property in the response to get the next page of virtual machines.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("VirtualMachines_List")
   list is ArmResourceListByParent<
     VirtualMachine,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<VirtualMachine>;
-
+    Parameters = {
       /**
        * The system query option to filter VMs returned in the response. Allowed value is 'virtualMachineScaleSet/id' eq /subscriptions/{subId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmssName}'
        */
@@ -171,7 +159,28 @@ interface VirtualMachines {
   /**
    * Lists all of the virtual machines in the specified subscription. Use the nextLink property in the response to get the next page of virtual machines.
    */
-  listAll is ArmListBySubscription<VirtualMachine>;
+  listAll is ArmListBySubscription<
+    VirtualMachine,
+    Parameters = {
+      /**
+       * statusOnly=true enables fetching run time status of all Virtual Machines in the subscription.
+       */
+      @query("statusOnly")
+      statusOnly?: string;
+
+      /**
+       * The system query option to filter VMs returned in the response. Allowed value is 'virtualMachineScaleSet/id' eq /subscriptions/{subId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmssName}'
+       */
+      @query("$filter")
+      $filter?: string;
+
+      /**
+       * The expand expression to apply on operation. 'instanceView' enables fetching run time status of all Virtual Machines, this can only be specified if a valid $filter option is specified
+       */
+      @query("$expand")
+      $expand?: ExpandTypesForListVMs;
+    }
+  >;
 
   /**
    * Assess patches on the VM.
@@ -212,9 +221,7 @@ interface VirtualMachines {
     VirtualMachine,
     void,
     void,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<VirtualMachine>;
-
+    Parameters = {
       /**
        * Optional parameter to hibernate a virtual machine.
        */
@@ -249,9 +256,7 @@ interface VirtualMachines {
     VirtualMachine,
     void,
     void,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<VirtualMachine>;
-
+    Parameters = {
       /**
        * The parameter to request non-graceful VM shutdown. True value for this flag indicates non-graceful shutdown whereas false indicates otherwise. Default value for this flag is false if not specified
        */
@@ -291,9 +296,7 @@ interface VirtualMachines {
     VirtualMachine,
     void,
     RetrieveBootDiagnosticsDataResult,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<VirtualMachine>;
-
+    Parameters = {
       /**
        * Expiration duration in minutes for the SAS URIs with a value between 1 to 1440 minutes. **Note:** If not specified, SAS URIs will be generated with a default expiration duration of 120 minutes.
        */

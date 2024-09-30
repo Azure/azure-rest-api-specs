@@ -31,47 +31,56 @@ interface ComputeDiagnosticBases {
   /**
    * Gets a specific Compute diagnostic for a subscription in a location.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("DiskInspection_Get")
-  get is ArmResourceRead<ComputeDiagnosticBase>;
+  get is ArmResourceRead<
+    ComputeDiagnosticBase,
+    Azure.ResourceManager.Foundations.SubscriptionBaseParameters
+  >;
 
   /**
    * Lists all available Compute diagnostics for a subscription in a location.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Diagnostics_List")
-  list is ArmResourceListByParent<ComputeDiagnosticBase>;
+  list is ArmResourceListByParent<
+    ComputeDiagnosticBase,
+    Azure.ResourceManager.Foundations.SubscriptionBaseParameters
+  >;
 
   /**
    * Creates a request for executing disk Inspection.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("DiskInspection_Create")
   create is ArmResourceActionNoResponseContentAsync<
     ComputeDiagnosticBase,
-    RunDiskInspectionInput
+    RunDiskInspectionInput,
+    Azure.ResourceManager.Foundations.SubscriptionBaseParameters
   >;
 
   /**
    * Register a storageAccount for a subscription used for DiskInspection
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("DiskInspectionStorageConfiguration_Register")
   register is ArmResourceActionSync<
     ComputeDiagnosticBase,
     StorageConfigurationInput,
-    void
+    void,
+    Azure.ResourceManager.Foundations.SubscriptionBaseParameters
   >;
 
   /**
    * Validate if a storageAccount configuration exists for a subscription used for DiskInspection.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("DiskInspectionStorageConfiguration_Validate")
   validate is ArmResourceActionSync<
     ComputeDiagnosticBase,
     void,
-    StorageConfigurationResponse
+    StorageConfigurationResponse,
+    Azure.ResourceManager.Foundations.SubscriptionBaseParameters
   >;
 }
 

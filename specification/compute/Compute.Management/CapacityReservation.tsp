@@ -42,9 +42,7 @@ interface CapacityReservations {
    */
   get is ArmResourceRead<
     CapacityReservation,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<CapacityReservation>;
-
+    Parameters = {
       /**
        * The expand expression to apply on the operation. 'InstanceView' retrieves a snapshot of the runtime properties of the capacity reservation that is managed by the platform and can change outside of control plane operations.
        */
@@ -75,8 +73,6 @@ interface CapacityReservations {
   /**
    * Lists all of the capacity reservations in the specified capacity reservation group. Use the nextLink property in the response to get the next page of capacity reservations.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("CapacityReservations_ListByCapacityReservationGroup")
   listByCapacityReservationGroup is ArmResourceListByParent<CapacityReservation>;
 }
 

@@ -29,9 +29,7 @@ interface Galleries {
    */
   get is ArmResourceRead<
     Gallery,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<Gallery>;
-
+    Parameters = {
       /**
        * The select expression to apply on the operation.
        */
@@ -68,8 +66,6 @@ interface Galleries {
   /**
    * List galleries under a resource group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("Galleries_ListByResourceGroup")
   listByResourceGroup is ArmResourceListByParent<Gallery>;
 
   /**
@@ -80,7 +76,7 @@ interface Galleries {
   /**
    * Update sharing profile of a gallery.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("GallerySharingProfile_Update")
   gallerySharingProfileUpdate is ArmResourceActionAsync<
     Gallery,

@@ -18,8 +18,11 @@ namespace Microsoft.Compute;
  */
 union RepairAction {
   string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Replace: "Replace",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Restart: "Restart",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Reimage: "Reimage",
 }
 
@@ -28,8 +31,11 @@ union RepairAction {
  */
 union WindowsVMGuestPatchMode {
   string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Manual: "Manual",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   AutomaticByOS: "AutomaticByOS",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   AutomaticByPlatform: "AutomaticByPlatform",
 }
 
@@ -38,7 +44,9 @@ union WindowsVMGuestPatchMode {
  */
 union WindowsPatchAssessmentMode {
   string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   ImageDefault: "ImageDefault",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   AutomaticByPlatform: "AutomaticByPlatform",
 }
 
@@ -47,9 +55,13 @@ union WindowsPatchAssessmentMode {
  */
 union WindowsVMGuestPatchAutomaticByPlatformRebootSetting {
   string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Unknown: "Unknown",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   IfRequired: "IfRequired",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Never: "Never",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Always: "Always",
 }
 
@@ -58,7 +70,9 @@ union WindowsVMGuestPatchAutomaticByPlatformRebootSetting {
  */
 union LinuxVMGuestPatchMode {
   string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   ImageDefault: "ImageDefault",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   AutomaticByPlatform: "AutomaticByPlatform",
 }
 
@@ -67,7 +81,9 @@ union LinuxVMGuestPatchMode {
  */
 union LinuxPatchAssessmentMode {
   string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   ImageDefault: "ImageDefault",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   AutomaticByPlatform: "AutomaticByPlatform",
 }
 
@@ -76,9 +92,13 @@ union LinuxPatchAssessmentMode {
  */
 union LinuxVMGuestPatchAutomaticByPlatformRebootSetting {
   string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Unknown: "Unknown",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   IfRequired: "IfRequired",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Never: "Never",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Always: "Always",
 }
 
@@ -87,10 +107,15 @@ union LinuxVMGuestPatchAutomaticByPlatformRebootSetting {
  */
 union DiskCreateOptionTypes {
   string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   FromImage: "FromImage",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Empty: "Empty",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Attach: "Attach",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Copy: "Copy",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Restore: "Restore",
 }
 
@@ -99,6 +124,7 @@ union DiskCreateOptionTypes {
  */
 union DiffDiskOptions {
   string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Local: "Local",
 }
 
@@ -107,8 +133,11 @@ union DiffDiskOptions {
  */
 union DiffDiskPlacement {
   string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   CacheDisk: "CacheDisk",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   ResourceDisk: "ResourceDisk",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   NvmeDisk: "NvmeDisk",
 }
 
@@ -117,12 +146,19 @@ union DiffDiskPlacement {
  */
 union StorageAccountTypes {
   string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Standard_LRS: "Standard_LRS",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Premium_LRS: "Premium_LRS",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   StandardSSD_LRS: "StandardSSD_LRS",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   UltraSSD_LRS: "UltraSSD_LRS",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Premium_ZRS: "Premium_ZRS",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   StandardSSD_ZRS: "StandardSSD_ZRS",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   PremiumV2_LRS: "PremiumV2_LRS",
 }
 
@@ -131,8 +167,11 @@ union StorageAccountTypes {
  */
 union SecurityEncryptionTypes {
   string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   VMGuestStateOnly: "VMGuestStateOnly",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   DiskWithVMGuestState: "DiskWithVMGuestState",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   NonPersistedTPM: "NonPersistedTPM",
 }
 
@@ -141,7 +180,9 @@ union SecurityEncryptionTypes {
  */
 union DiskDeleteOptionTypes {
   string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Delete: "Delete",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Detach: "Detach",
 }
 
@@ -150,9 +191,13 @@ union DiskDeleteOptionTypes {
  */
 union DomainNameLabelScopeTypes {
   string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   TenantReuse: "TenantReuse",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   SubscriptionReuse: "SubscriptionReuse",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   ResourceGroupReuse: "ResourceGroupReuse",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   NoReuse: "NoReuse",
 }
 
@@ -161,7 +206,9 @@ union DomainNameLabelScopeTypes {
  */
 union IPVersion {
   string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   IPv4: "IPv4",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   IPv6: "IPv6",
 }
 
@@ -170,7 +217,9 @@ union IPVersion {
  */
 union DeleteOptions {
   string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Delete: "Delete",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Detach: "Detach",
 }
 
@@ -179,7 +228,9 @@ union DeleteOptions {
  */
 union PublicIPAddressSkuName {
   string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Basic: "Basic",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Standard: "Standard",
 }
 
@@ -188,7 +239,9 @@ union PublicIPAddressSkuName {
  */
 union PublicIPAddressSkuTier {
   string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Regional: "Regional",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Global: "Global",
 }
 
@@ -197,8 +250,11 @@ union PublicIPAddressSkuTier {
  */
 union NetworkInterfaceAuxiliaryMode {
   string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   None: "None",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   AcceleratedConnections: "AcceleratedConnections",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Floating: "Floating",
 }
 
@@ -207,10 +263,15 @@ union NetworkInterfaceAuxiliaryMode {
  */
 union NetworkInterfaceAuxiliarySku {
   string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   None: "None",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   A1: "A1",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   A2: "A2",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   A4: "A4",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   A8: "A8",
 }
 
@@ -219,6 +280,7 @@ union NetworkInterfaceAuxiliarySku {
  */
 union NetworkApiVersion {
   string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   `2020-11-01`: "2020-11-01",
 }
 
@@ -227,7 +289,9 @@ union NetworkApiVersion {
  */
 union SecurityTypes {
   string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   TrustedLaunch: "TrustedLaunch",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   ConfidentialVM: "ConfidentialVM",
 }
 
@@ -236,7 +300,9 @@ union SecurityTypes {
  */
 union Mode {
   string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Audit: "Audit",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Enforce: "Enforce",
 }
 
@@ -245,8 +311,11 @@ union Mode {
  */
 union VirtualMachinePriorityTypes {
   string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Regular: "Regular",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Low: "Low",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Spot: "Spot",
 }
 
@@ -255,14 +324,20 @@ union VirtualMachinePriorityTypes {
  */
 union VirtualMachineEvictionPolicyTypes {
   string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Deallocate: "Deallocate",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Delete: "Delete",
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 union VirtualMachineScaleSetScaleInRules {
   string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Default: "Default",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   OldestVM: "OldestVM",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   NewestVM: "NewestVM",
 }
 
@@ -271,7 +346,9 @@ union VirtualMachineScaleSetScaleInRules {
  */
 union OrchestrationMode {
   string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Uniform: "Uniform",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Flexible: "Flexible",
 }
 
@@ -280,7 +357,9 @@ union OrchestrationMode {
  */
 union ZonalPlatformFaultDomainAlignMode {
   string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Aligned: "Aligned",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Unaligned: "Unaligned",
 }
 
@@ -289,7 +368,9 @@ union ZonalPlatformFaultDomainAlignMode {
  */
 union AllocationStrategy {
   string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   LowestPrice: "LowestPrice",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   CapacityOptimized: "CapacityOptimized",
 }
 
@@ -298,11 +379,14 @@ union AllocationStrategy {
  */
 union ExtendedLocationTypes {
   string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   EdgeZone: "EdgeZone",
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 union ExpandTypesForGetVMScaleSets {
   string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   userData: "userData",
 }
 
@@ -311,6 +395,7 @@ union ExpandTypesForGetVMScaleSets {
  */
 union OrchestrationServiceNames {
   string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   AutomaticRepairs: "AutomaticRepairs",
 }
 
@@ -319,8 +404,11 @@ union OrchestrationServiceNames {
  */
 union OrchestrationServiceState {
   string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   NotRunning: "NotRunning",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Running: "Running",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Suspended: "Suspended",
 }
 
@@ -329,7 +417,9 @@ union OrchestrationServiceState {
  */
 union OrchestrationServiceStateAction {
   string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Resume: "Resume",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Suspend: "Suspend",
 }
 
@@ -338,7 +428,9 @@ union OrchestrationServiceStateAction {
  */
 union HyperVGeneration {
   string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   V1: "V1",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   V2: "V2",
 }
 
@@ -347,171 +439,337 @@ union HyperVGeneration {
  */
 union VirtualMachineSizeTypes {
   string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Basic_A0: "Basic_A0",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Basic_A1: "Basic_A1",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Basic_A2: "Basic_A2",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Basic_A3: "Basic_A3",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Basic_A4: "Basic_A4",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Standard_A0: "Standard_A0",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Standard_A1: "Standard_A1",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Standard_A2: "Standard_A2",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Standard_A3: "Standard_A3",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Standard_A4: "Standard_A4",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Standard_A5: "Standard_A5",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Standard_A6: "Standard_A6",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Standard_A7: "Standard_A7",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Standard_A8: "Standard_A8",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Standard_A9: "Standard_A9",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Standard_A10: "Standard_A10",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Standard_A11: "Standard_A11",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Standard_A1_v2: "Standard_A1_v2",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Standard_A2_v2: "Standard_A2_v2",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Standard_A4_v2: "Standard_A4_v2",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Standard_A8_v2: "Standard_A8_v2",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Standard_A2m_v2: "Standard_A2m_v2",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Standard_A4m_v2: "Standard_A4m_v2",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Standard_A8m_v2: "Standard_A8m_v2",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Standard_B1s: "Standard_B1s",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Standard_B1ms: "Standard_B1ms",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Standard_B2s: "Standard_B2s",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Standard_B2ms: "Standard_B2ms",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Standard_B4ms: "Standard_B4ms",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Standard_B8ms: "Standard_B8ms",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Standard_D1: "Standard_D1",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Standard_D2: "Standard_D2",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Standard_D3: "Standard_D3",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Standard_D4: "Standard_D4",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Standard_D11: "Standard_D11",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Standard_D12: "Standard_D12",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Standard_D13: "Standard_D13",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Standard_D14: "Standard_D14",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Standard_D1_v2: "Standard_D1_v2",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Standard_D2_v2: "Standard_D2_v2",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Standard_D3_v2: "Standard_D3_v2",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Standard_D4_v2: "Standard_D4_v2",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Standard_D5_v2: "Standard_D5_v2",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Standard_D2_v3: "Standard_D2_v3",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Standard_D4_v3: "Standard_D4_v3",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Standard_D8_v3: "Standard_D8_v3",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Standard_D16_v3: "Standard_D16_v3",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Standard_D32_v3: "Standard_D32_v3",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Standard_D64_v3: "Standard_D64_v3",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Standard_D2s_v3: "Standard_D2s_v3",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Standard_D4s_v3: "Standard_D4s_v3",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Standard_D8s_v3: "Standard_D8s_v3",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Standard_D16s_v3: "Standard_D16s_v3",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Standard_D32s_v3: "Standard_D32s_v3",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Standard_D64s_v3: "Standard_D64s_v3",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Standard_D11_v2: "Standard_D11_v2",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Standard_D12_v2: "Standard_D12_v2",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Standard_D13_v2: "Standard_D13_v2",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Standard_D14_v2: "Standard_D14_v2",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Standard_D15_v2: "Standard_D15_v2",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Standard_DS1: "Standard_DS1",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Standard_DS2: "Standard_DS2",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Standard_DS3: "Standard_DS3",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Standard_DS4: "Standard_DS4",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Standard_DS11: "Standard_DS11",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Standard_DS12: "Standard_DS12",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Standard_DS13: "Standard_DS13",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Standard_DS14: "Standard_DS14",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Standard_DS1_v2: "Standard_DS1_v2",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Standard_DS2_v2: "Standard_DS2_v2",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Standard_DS3_v2: "Standard_DS3_v2",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Standard_DS4_v2: "Standard_DS4_v2",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Standard_DS5_v2: "Standard_DS5_v2",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Standard_DS11_v2: "Standard_DS11_v2",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Standard_DS12_v2: "Standard_DS12_v2",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Standard_DS13_v2: "Standard_DS13_v2",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Standard_DS14_v2: "Standard_DS14_v2",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Standard_DS15_v2: "Standard_DS15_v2",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   `Standard_DS13-4_v2`: "Standard_DS13-4_v2",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   `Standard_DS13-2_v2`: "Standard_DS13-2_v2",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   `Standard_DS14-8_v2`: "Standard_DS14-8_v2",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   `Standard_DS14-4_v2`: "Standard_DS14-4_v2",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Standard_E2_v3: "Standard_E2_v3",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Standard_E4_v3: "Standard_E4_v3",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Standard_E8_v3: "Standard_E8_v3",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Standard_E16_v3: "Standard_E16_v3",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Standard_E32_v3: "Standard_E32_v3",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Standard_E64_v3: "Standard_E64_v3",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Standard_E2s_v3: "Standard_E2s_v3",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Standard_E4s_v3: "Standard_E4s_v3",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Standard_E8s_v3: "Standard_E8s_v3",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Standard_E16s_v3: "Standard_E16s_v3",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Standard_E32s_v3: "Standard_E32s_v3",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Standard_E64s_v3: "Standard_E64s_v3",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   `Standard_E32-16_v3`: "Standard_E32-16_v3",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   `Standard_E32-8s_v3`: "Standard_E32-8s_v3",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   `Standard_E64-32s_v3`: "Standard_E64-32s_v3",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   `Standard_E64-16s_v3`: "Standard_E64-16s_v3",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Standard_F1: "Standard_F1",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Standard_F2: "Standard_F2",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Standard_F4: "Standard_F4",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Standard_F8: "Standard_F8",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Standard_F16: "Standard_F16",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Standard_F1s: "Standard_F1s",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Standard_F2s: "Standard_F2s",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Standard_F4s: "Standard_F4s",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Standard_F8s: "Standard_F8s",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Standard_F16s: "Standard_F16s",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Standard_F2s_v2: "Standard_F2s_v2",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Standard_F4s_v2: "Standard_F4s_v2",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Standard_F8s_v2: "Standard_F8s_v2",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Standard_F16s_v2: "Standard_F16s_v2",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Standard_F32s_v2: "Standard_F32s_v2",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Standard_F64s_v2: "Standard_F64s_v2",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Standard_F72s_v2: "Standard_F72s_v2",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Standard_G1: "Standard_G1",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Standard_G2: "Standard_G2",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Standard_G3: "Standard_G3",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Standard_G4: "Standard_G4",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Standard_G5: "Standard_G5",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Standard_GS1: "Standard_GS1",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Standard_GS2: "Standard_GS2",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Standard_GS3: "Standard_GS3",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Standard_GS4: "Standard_GS4",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Standard_GS5: "Standard_GS5",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   `Standard_GS4-8`: "Standard_GS4-8",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   `Standard_GS4-4`: "Standard_GS4-4",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   `Standard_GS5-16`: "Standard_GS5-16",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   `Standard_GS5-8`: "Standard_GS5-8",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Standard_H8: "Standard_H8",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Standard_H16: "Standard_H16",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Standard_H8m: "Standard_H8m",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Standard_H16m: "Standard_H16m",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Standard_H16r: "Standard_H16r",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Standard_H16mr: "Standard_H16mr",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Standard_L4s: "Standard_L4s",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Standard_L8s: "Standard_L8s",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Standard_L16s: "Standard_L16s",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Standard_L32s: "Standard_L32s",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Standard_M64s: "Standard_M64s",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Standard_M64ms: "Standard_M64ms",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Standard_M128s: "Standard_M128s",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Standard_M128ms: "Standard_M128ms",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   `Standard_M64-32ms`: "Standard_M64-32ms",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   `Standard_M64-16ms`: "Standard_M64-16ms",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   `Standard_M128-64ms`: "Standard_M128-64ms",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   `Standard_M128-32ms`: "Standard_M128-32ms",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Standard_NC6: "Standard_NC6",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Standard_NC12: "Standard_NC12",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Standard_NC24: "Standard_NC24",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Standard_NC24r: "Standard_NC24r",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Standard_NC6s_v2: "Standard_NC6s_v2",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Standard_NC12s_v2: "Standard_NC12s_v2",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Standard_NC24s_v2: "Standard_NC24s_v2",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Standard_NC24rs_v2: "Standard_NC24rs_v2",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Standard_NC6s_v3: "Standard_NC6s_v3",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Standard_NC12s_v3: "Standard_NC12s_v3",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Standard_NC24s_v3: "Standard_NC24s_v3",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Standard_NC24rs_v3: "Standard_NC24rs_v3",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Standard_ND6s: "Standard_ND6s",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Standard_ND12s: "Standard_ND12s",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Standard_ND24s: "Standard_ND24s",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Standard_ND24rs: "Standard_ND24rs",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Standard_NV6: "Standard_NV6",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Standard_NV12: "Standard_NV12",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Standard_NV24: "Standard_NV24",
 }
 
@@ -520,6 +778,7 @@ union VirtualMachineSizeTypes {
  */
 union DiskDetachOptionTypes {
   string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   ForceDetach: "ForceDetach",
 }
 
@@ -528,7 +787,9 @@ union DiskDetachOptionTypes {
  */
 union DiskControllerTypes {
   string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   SCSI: "SCSI",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   NVMe: "NVMe",
 }
 
@@ -537,7 +798,9 @@ union DiskControllerTypes {
  */
 union IPVersions {
   string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   IPv4: "IPv4",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   IPv6: "IPv6",
 }
 
@@ -546,7 +809,9 @@ union IPVersions {
  */
 union PublicIPAllocationMethod {
   string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Dynamic: "Dynamic",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Static: "Static",
 }
 
@@ -555,7 +820,9 @@ union PublicIPAllocationMethod {
  */
 union HyperVGenerationType {
   string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   V1: "V1",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   V2: "V2",
 }
 
@@ -564,20 +831,29 @@ union HyperVGenerationType {
  */
 union PatchOperationStatus {
   string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Unknown: "Unknown",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   InProgress: "InProgress",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Failed: "Failed",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Succeeded: "Succeeded",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   CompletedWithWarnings: "CompletedWithWarnings",
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 union ExpandTypesForListVMs {
   string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   instanceView: "instanceView",
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 union ExpandTypeForListVMs {
   string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   instanceView: "instanceView",
 }
 
@@ -586,9 +862,13 @@ union ExpandTypeForListVMs {
  */
 union VMGuestPatchRebootBehavior {
   string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Unknown: "Unknown",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   NeverReboots: "NeverReboots",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   AlwaysRequiresReboot: "AlwaysRequiresReboot",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   CanRequestReboot: "CanRequestReboot",
 }
 
@@ -597,7 +877,9 @@ union VMGuestPatchRebootBehavior {
  */
 union PatchAssessmentState {
   string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Unknown: "Unknown",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Available: "Available",
 }
 
@@ -606,27 +888,43 @@ union PatchAssessmentState {
  */
 union VMGuestPatchRebootSetting {
   string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   IfRequired: "IfRequired",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Never: "Never",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Always: "Always",
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 union VMGuestPatchClassificationWindows {
   string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Critical: "Critical",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Security: "Security",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   UpdateRollUp: "UpdateRollUp",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   FeaturePack: "FeaturePack",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   ServicePack: "ServicePack",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Definition: "Definition",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Tools: "Tools",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Updates: "Updates",
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 union VMGuestPatchClassificationLinux {
   string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Critical: "Critical",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Security: "Security",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Other: "Other",
 }
 
@@ -635,11 +933,17 @@ union VMGuestPatchClassificationLinux {
  */
 union VMGuestPatchRebootStatus {
   string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Unknown: "Unknown",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   NotNeeded: "NotNeeded",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Required: "Required",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Started: "Started",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Failed: "Failed",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Completed: "Completed",
 }
 
@@ -648,11 +952,17 @@ union VMGuestPatchRebootStatus {
  */
 union PatchInstallationState {
   string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Unknown: "Unknown",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Installed: "Installed",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Failed: "Failed",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Excluded: "Excluded",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   NotSelected: "NotSelected",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Pending: "Pending",
 }
 
@@ -661,7 +971,9 @@ union PatchInstallationState {
  */
 union HyperVGenerationTypes {
   string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   V1: "V1",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   V2: "V2",
 }
 
@@ -670,7 +982,9 @@ union HyperVGenerationTypes {
  */
 union VmDiskTypes {
   string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   None: "None",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Unmanaged: "Unmanaged",
 }
 
@@ -679,7 +993,9 @@ union VmDiskTypes {
  */
 union ArchitectureTypes {
   string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   x64: "x64",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Arm64: "Arm64",
 }
 
@@ -688,8 +1004,11 @@ union ArchitectureTypes {
  */
 union ImageState {
   string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Active: "Active",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   ScheduledForDeprecation: "ScheduledForDeprecation",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Deprecated: "Deprecated",
 }
 
@@ -698,8 +1017,11 @@ union ImageState {
  */
 union AlternativeType {
   string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   None: "None",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Offer: "Offer",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Plan: "Plan",
 }
 
@@ -708,7 +1030,9 @@ union AlternativeType {
  */
 union ProximityPlacementGroupType {
   string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Standard: "Standard",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Ultra: "Ultra",
 }
 
@@ -717,7 +1041,9 @@ union ProximityPlacementGroupType {
  */
 union SshEncryptionTypes {
   string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   RSA: "RSA",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Ed25519: "Ed25519",
 }
 
@@ -726,7 +1052,9 @@ union SshEncryptionTypes {
  */
 union OperatingSystemType {
   string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Windows: "Windows",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Linux: "Linux",
 }
 
@@ -757,41 +1085,59 @@ union RestorePointEncryptionType {
  */
 union ConsistencyModeTypes {
   string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   CrashConsistent: "CrashConsistent",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   FileSystemConsistent: "FileSystemConsistent",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   ApplicationConsistent: "ApplicationConsistent",
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 union RestorePointCollectionExpandOptions {
   string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   restorePoints: "restorePoints",
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 union RestorePointExpandOptions {
   string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   instanceView: "instanceView",
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 union ExpandTypesForGetCapacityReservationGroups {
   string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   `virtualMachineScaleSetVMs/$ref`: "virtualMachineScaleSetVMs/$ref",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   `virtualMachines/$ref`: "virtualMachines/$ref",
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 union ResourceIdOptionsForGetCapacityReservationGroups {
   string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   CreatedInSubscription: "CreatedInSubscription",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   SharedWithSubscription: "SharedWithSubscription",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   All: "All",
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 union CapacityReservationGroupInstanceViewTypes {
   string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   instanceView: "instanceView",
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 union CapacityReservationInstanceViewTypes {
   string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   instanceView: "instanceView",
 }
 
@@ -800,12 +1146,19 @@ union CapacityReservationInstanceViewTypes {
  */
 union ExecutionState {
   string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Unknown: "Unknown",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Pending: "Pending",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Running: "Running",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Failed: "Failed",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Succeeded: "Succeeded",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   TimedOut: "TimedOut",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Canceled: "Canceled",
 }
 
@@ -814,13 +1167,16 @@ union ExecutionState {
  */
 union AvailabilitySetSkuTypes {
   string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Classic: "Classic",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Aligned: "Aligned",
 }
 
 /**
  * Specifies the mode of an upgrade to virtual machines in the scale set.<br /><br /> Possible values are:<br /><br /> **Manual** - You  control the application of updates to virtual machines in the scale set. You do this by using the manualUpgrade action.<br /><br /> **Automatic** - All virtual machines in the scale set are  automatically updated at the same time.
  */
+#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
 enum UpgradeMode {
   Automatic,
   Manual,
@@ -830,6 +1186,7 @@ enum UpgradeMode {
 /**
  * Specifies the name of the setting to which the content applies. Possible values are: FirstLogonCommands and AutoLogon.
  */
+#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
 enum SettingNames {
   AutoLogon,
   FirstLogonCommands,
@@ -838,6 +1195,7 @@ enum SettingNames {
 /**
  * Specifies the protocol of WinRM listener. Possible values are: **http,** **https.**
  */
+#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
 enum ProtocolTypes {
   Http,
   Https,
@@ -846,6 +1204,7 @@ enum ProtocolTypes {
 /**
  * Specifies the caching requirements. Possible values are: **None,** **ReadOnly,** **ReadWrite.** The default values are: **None for Standard storage. ReadOnly for Premium storage**
  */
+#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
 enum CachingTypes {
   None,
   ReadOnly,
@@ -855,6 +1214,7 @@ enum CachingTypes {
 /**
  * This property allows you to specify the type of the OS that is included in the disk if creating a VM from user-image or a specialized VHD. Possible values are: **Windows,** **Linux.**
  */
+#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
 enum OperatingSystemTypes {
   Windows,
   Linux,
@@ -863,6 +1223,7 @@ enum OperatingSystemTypes {
 /**
  * The type of identity used for the virtual machine scale set. The type 'SystemAssigned, UserAssigned' includes both an implicitly created identity and a set of user assigned identities. The type 'None' will remove any identities from the virtual machine scale set.
  */
+#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
 enum ResourceIdentityType {
   SystemAssigned,
   UserAssigned,
@@ -873,6 +1234,7 @@ enum ResourceIdentityType {
 /**
  * The level code.
  */
+#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
 enum StatusLevelTypes {
   Info,
   Warning,
@@ -882,6 +1244,7 @@ enum StatusLevelTypes {
 /**
  * Code indicating the current status of the upgrade.
  */
+#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
 enum UpgradeState {
   RollingForward,
   Cancelled,
@@ -892,6 +1255,7 @@ enum UpgradeState {
 /**
  * Invoker of the Upgrade Operation
  */
+#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
 enum UpgradeOperationInvoker {
   Unknown,
   User,
@@ -901,6 +1265,7 @@ enum UpgradeOperationInvoker {
 /**
  * Code indicating the current status of the upgrade.
  */
+#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
 enum RollingUpgradeStatusCode {
   RollingForward,
   Cancelled,
@@ -911,6 +1276,7 @@ enum RollingUpgradeStatusCode {
 /**
  * The last action performed on the rolling upgrade.
  */
+#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
 enum RollingUpgradeActionType {
   Start,
   Cancel,
@@ -919,6 +1285,7 @@ enum RollingUpgradeActionType {
 /**
  * The scale type applicable to the sku.
  */
+#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
 enum VirtualMachineScaleSetSkuScaleType {
   Automatic,
   None,
@@ -927,6 +1294,7 @@ enum VirtualMachineScaleSetSkuScaleType {
 /**
  * The Last Maintenance Operation Result Code.
  */
+#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
 enum MaintenanceOperationResultCodeTypes {
   None,
   RetryLater,
@@ -934,6 +1302,8 @@ enum MaintenanceOperationResultCodeTypes {
   MaintenanceCompleted,
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
 enum InstanceViewTypes {
   instanceView,
   userData,
@@ -942,6 +1312,7 @@ enum InstanceViewTypes {
 /**
  * Specifies the software license type that will be applied to the VMs deployed on the dedicated host. Possible values are: **None,** **Windows_Server_Hybrid,** **Windows_Server_Perpetual.** The default value is: **None.**
  */
+#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
 enum DedicatedHostLicenseTypes {
   None,
   Windows_Server_Hybrid,
@@ -951,6 +1322,7 @@ enum DedicatedHostLicenseTypes {
 /**
  * The OS State. For managed images, use Generalized.
  */
+#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
 enum OperatingSystemStateTypes {
   /**
    * Generalized image. Needs to be provisioned during deployment time.
@@ -966,6 +1338,7 @@ enum OperatingSystemStateTypes {
 /**
  * Interval value in minutes used to create LogAnalytics call rate logs.
  */
+#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
 enum IntervalInMins {
   ThreeMins,
   FiveMins,

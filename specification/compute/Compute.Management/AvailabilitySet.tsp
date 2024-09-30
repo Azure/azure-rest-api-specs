@@ -55,14 +55,21 @@ interface AvailabilitySets {
   /**
    * Lists all availability sets in a resource group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("AvailabilitySets_List")
   list is ArmResourceListByParent<AvailabilitySet>;
 
   /**
    * Lists all availability sets in a subscription.
    */
-  listBySubscription is ArmListBySubscription<AvailabilitySet>;
+  listBySubscription is ArmListBySubscription<
+    AvailabilitySet,
+    Parameters = {
+      /**
+       * The expand expression to apply to the operation. Allowed values are 'instanceView'.
+       */
+      @query("$expand")
+      $expand?: string;
+    }
+  >;
 
   /**
    * Lists all available virtual machine sizes that can be used to create a new virtual machine in an existing availability set.

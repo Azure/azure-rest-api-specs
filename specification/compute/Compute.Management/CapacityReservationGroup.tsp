@@ -35,9 +35,7 @@ interface CapacityReservationGroups {
    */
   get is ArmResourceRead<
     CapacityReservationGroup,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<CapacityReservationGroup>;
-
+    Parameters = {
       /**
        * The expand expression to apply on the operation. 'InstanceView' will retrieve the list of instance views of the capacity reservations under the capacity reservation group which is a snapshot of the runtime properties of a capacity reservation that is managed by the platform and can change outside of control plane operations.
        */
@@ -69,13 +67,9 @@ interface CapacityReservationGroups {
   /**
    * Lists all of the capacity reservation groups in the specified resource group. Use the nextLink property in the response to get the next page of capacity reservation groups.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("CapacityReservationGroups_ListByResourceGroup")
   listByResourceGroup is ArmResourceListByParent<
     CapacityReservationGroup,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<CapacityReservationGroup>;
-
+    Parameters = {
       /**
        * The expand expression to apply on the operation. Based on the expand param(s) specified we return Virtual Machine or ScaleSet VM Instance or both resource Ids which are associated to capacity reservation group in the response.
        */
@@ -87,7 +81,22 @@ interface CapacityReservationGroups {
   /**
    * Lists all of the capacity reservation groups in the subscription. Use the nextLink property in the response to get the next page of capacity reservation groups.
    */
-  listBySubscription is ArmListBySubscription<CapacityReservationGroup>;
+  listBySubscription is ArmListBySubscription<
+    CapacityReservationGroup,
+    Parameters = {
+      /**
+       * The expand expression to apply on the operation. Based on the expand param(s) specified we return Virtual Machine or ScaleSet VM Instance or both resource Ids which are associated to capacity reservation group in the response.
+       */
+      @query("$expand")
+      $expand?: ExpandTypesForGetCapacityReservationGroups;
+
+      /**
+       * The query option to fetch Capacity Reservation Group Resource Ids. <br> 'CreatedInSubscription' enables fetching Resource Ids for all capacity reservation group resources created in the subscription. <br> 'SharedWithSubscription' enables fetching Resource Ids for all capacity reservation group resources shared with the subscription. <br> 'All' enables fetching Resource Ids for all capacity reservation group resources shared with the subscription and created in the subscription.
+       */
+      @query("resourceIdsOnly")
+      resourceIdsOnly?: ResourceIdOptionsForGetCapacityReservationGroups;
+    }
+  >;
 }
 
 @@doc(CapacityReservationGroup.name,

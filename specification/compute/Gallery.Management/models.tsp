@@ -17,11 +17,17 @@ namespace Microsoft.Compute;
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
 union GalleryProvisioningState {
   string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Creating: "Creating",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Updating: "Updating",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Failed: "Failed",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Succeeded: "Succeeded",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Deleting: "Deleting",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Migrating: "Migrating",
 }
 
@@ -30,8 +36,11 @@ union GalleryProvisioningState {
  */
 union GallerySharingPermissionTypes {
   string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Private: "Private",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Groups: "Groups",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Community: "Community",
 }
 
@@ -40,7 +49,9 @@ union GallerySharingPermissionTypes {
  */
 union SharingProfileGroupTypes {
   string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Subscriptions: "Subscriptions",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   AADTenants: "AADTenants",
 }
 
@@ -49,19 +60,27 @@ union SharingProfileGroupTypes {
  */
 union SharingState {
   string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Succeeded: "Succeeded",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   InProgress: "InProgress",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Failed: "Failed",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Unknown: "Unknown",
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 union SelectPermissions {
   string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Permissions: "Permissions",
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 union GalleryExpandParams {
   string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   `SharingProfile/Groups`: "SharingProfile/Groups",
 }
 
@@ -70,8 +89,11 @@ union GalleryExpandParams {
  */
 union StorageAccountType {
   string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Standard_LRS: "Standard_LRS",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Standard_ZRS: "Standard_ZRS",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Premium_LRS: "Premium_LRS",
 }
 
@@ -80,9 +102,13 @@ union StorageAccountType {
  */
 union ConfidentialVMEncryptionType {
   string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   EncryptedVMGuestStateOnlyWithPmk: "EncryptedVMGuestStateOnlyWithPmk",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   EncryptedWithPmk: "EncryptedWithPmk",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   EncryptedWithCmk: "EncryptedWithCmk",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   NonPersistedTPM: "NonPersistedTPM",
 }
 
@@ -91,7 +117,9 @@ union ConfidentialVMEncryptionType {
  */
 union ReplicationMode {
   string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Full: "Full",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Shallow: "Shallow",
 }
 
@@ -100,7 +128,9 @@ union ReplicationMode {
  */
 union GalleryExtendedLocationType {
   string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   EdgeZone: "EdgeZone",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Unknown: "Unknown",
 }
 
@@ -109,9 +139,13 @@ union GalleryExtendedLocationType {
  */
 union EdgeZoneStorageAccountType {
   string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Standard_LRS: "Standard_LRS",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Standard_ZRS: "Standard_ZRS",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   StandardSSD_LRS: "StandardSSD_LRS",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Premium_LRS: "Premium_LRS",
 }
 
@@ -120,9 +154,13 @@ union EdgeZoneStorageAccountType {
  */
 union AggregatedReplicationState {
   string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Unknown: "Unknown",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   InProgress: "InProgress",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Completed: "Completed",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Failed: "Failed",
 }
 
@@ -131,15 +169,22 @@ union AggregatedReplicationState {
  */
 union ReplicationState {
   string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Unknown: "Unknown",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Replicating: "Replicating",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Completed: "Completed",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Failed: "Failed",
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 union ReplicationStatusTypes {
   string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   ReplicationStatus: "ReplicationStatus",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   UefiSettings: "UefiSettings",
 }
 
@@ -148,7 +193,9 @@ union ReplicationStatusTypes {
  */
 union HyperVGeneration {
   string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   V1: "V1",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   V2: "V2",
 }
 
@@ -157,7 +204,9 @@ union HyperVGeneration {
  */
 union Architecture {
   string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   x64: "x64",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Arm64: "Arm64",
 }
 
@@ -166,9 +215,13 @@ union Architecture {
  */
 union PolicyViolationCategory {
   string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Other: "Other",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   ImageFlaggedUnsafe: "ImageFlaggedUnsafe",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   CopyrightValidation: "CopyrightValidation",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   IpTheft: "IpTheft",
 }
 
@@ -177,8 +230,11 @@ union PolicyViolationCategory {
  */
 union UefiSignatureTemplateName {
   string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   NoSignatureTemplate: "NoSignatureTemplate",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   MicrosoftUefiCertificateAuthorityTemplate: "MicrosoftUefiCertificateAuthorityTemplate",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   MicrosoftWindowsTemplate: "MicrosoftWindowsTemplate",
 }
 
@@ -187,7 +243,9 @@ union UefiSignatureTemplateName {
  */
 union UefiKeyType {
   string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   sha256: "sha256",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   x509: "x509",
 }
 
@@ -196,14 +254,20 @@ union UefiKeyType {
  */
 union SharingUpdateOperationTypes {
   string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Add: "Add",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Remove: "Remove",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Reset: "Reset",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   EnableCommunity: "EnableCommunity",
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 union SharedToValues {
   string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   tenant: "tenant",
 }
 
@@ -212,8 +276,11 @@ union SharedToValues {
  */
 union SharedGalleryHostCaching {
   string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   None: "None",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   ReadOnly: "ReadOnly",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   ReadWrite: "ReadWrite",
 }
 
@@ -222,12 +289,14 @@ union SharedGalleryHostCaching {
  */
 union ExtendedLocationTypes {
   string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   EdgeZone: "EdgeZone",
 }
 
 /**
  * This property allows you to specify the supported type of the OS that application is built for. Possible values are: **Windows,** **Linux.**
  */
+#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
 enum OperatingSystemTypes {
   Windows,
   Linux,
@@ -236,6 +305,7 @@ enum OperatingSystemTypes {
 /**
  * Specifies the type of the custom action parameter. Possible values are: String, ConfigurationDataBlob or LogOutputBlob
  */
+#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
 enum GalleryApplicationCustomActionParameterType {
   String,
   ConfigurationDataBlob,
@@ -245,6 +315,7 @@ enum GalleryApplicationCustomActionParameterType {
 /**
  * This property allows the user to specify whether the virtual machines created under this image are 'Generalized' or 'Specialized'.
  */
+#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
 enum OperatingSystemStateTypes {
   Generalized,
   Specialized,
@@ -253,6 +324,7 @@ enum OperatingSystemStateTypes {
 /**
  * The host caching of the disk. Valid values are 'None', 'ReadOnly', and 'ReadWrite'
  */
+#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
 enum HostCaching {
   None,
   ReadOnly,

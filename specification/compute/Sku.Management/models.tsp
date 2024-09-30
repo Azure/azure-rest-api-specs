@@ -15,6 +15,7 @@ namespace Microsoft.Compute;
  */
 union ExtendedLocationType {
   string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   EdgeZone: "EdgeZone",
 }
 
@@ -23,12 +24,14 @@ union ExtendedLocationType {
  */
 union ExtendedLocationTypes {
   string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   EdgeZone: "EdgeZone",
 }
 
 /**
  * The scale type applicable to the sku.
  */
+#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
 enum ResourceSkuCapacityScaleType {
   Automatic,
   Manual,
@@ -38,6 +41,7 @@ enum ResourceSkuCapacityScaleType {
 /**
  * The type of restrictions.
  */
+#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
 enum ResourceSkuRestrictionsType {
   Location,
   Zone,
@@ -46,6 +50,7 @@ enum ResourceSkuRestrictionsType {
 /**
  * The reason for restriction.
  */
+#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
 enum ResourceSkuRestrictionsReasonCode {
   QuotaId,
   NotAvailableForSubscription,

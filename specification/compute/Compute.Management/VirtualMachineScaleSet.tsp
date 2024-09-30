@@ -61,9 +61,7 @@ interface VirtualMachineScaleSets {
    */
   get is ArmResourceRead<
     VirtualMachineScaleSet,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<VirtualMachineScaleSet>;
-
+    Parameters = {
       /**
        * The expand expression to apply on the operation. 'UserData' retrieves the UserData property of the VM scale set that was provided by the user during the VM scale set Create/Update operation
        */
@@ -77,9 +75,7 @@ interface VirtualMachineScaleSets {
    */
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     VirtualMachineScaleSet,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<VirtualMachineScaleSet>;
-
+    Parameters = {
       /**
        * The ETag of the transformation. Omit this value to always overwrite the current resource. Specify the last-seen ETag value to prevent accidentally overwriting concurrent changes.
        */
@@ -101,9 +97,7 @@ interface VirtualMachineScaleSets {
   update is ArmCustomPatchAsync<
     VirtualMachineScaleSet,
     VirtualMachineScaleSetUpdate,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<VirtualMachineScaleSet>;
-
+    Parameters = {
       /**
        * The ETag of the transformation. Omit this value to always overwrite the current resource. Specify the last-seen ETag value to prevent accidentally overwriting concurrent changes.
        */
@@ -126,9 +120,7 @@ interface VirtualMachineScaleSets {
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   delete is ArmResourceDeleteAsync<
     VirtualMachineScaleSet,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<VirtualMachineScaleSet>;
-
+    Parameters = {
       /**
        * Optional parameter to force delete a VM scale set. (Feature in Preview)
        */
@@ -140,8 +132,6 @@ interface VirtualMachineScaleSets {
   /**
    * Gets a list of all VM scale sets under a resource group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("VirtualMachineScaleSets_List")
   list is ArmResourceListByParent<VirtualMachineScaleSet>;
 
   /**
@@ -173,9 +163,7 @@ interface VirtualMachineScaleSets {
     VirtualMachineScaleSet,
     VirtualMachineScaleSetVMInstanceIDs,
     void,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<VirtualMachineScaleSet>;
-
+    Parameters = {
       /**
        * Optional parameter to hibernate a virtual machine from the VM scale set. (This feature is available for VMSS with Flexible OrchestrationMode only)
        */
@@ -191,9 +179,7 @@ interface VirtualMachineScaleSets {
     VirtualMachineScaleSet,
     VirtualMachineScaleSetVMInstanceRequiredIDs,
     void,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<VirtualMachineScaleSet>;
-
+    Parameters = {
       /**
        * Optional parameter to force delete virtual machines from the VM scale set. (Feature in Preview)
        */
@@ -209,9 +195,7 @@ interface VirtualMachineScaleSets {
     VirtualMachineScaleSet,
     void,
     RecoveryWalkResponse,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<VirtualMachineScaleSet>;
-
+    Parameters = {
       /**
        * The platform update domain for which a manual recovery walk is requested
        */
@@ -257,9 +241,7 @@ interface VirtualMachineScaleSets {
     VirtualMachineScaleSet,
     VirtualMachineScaleSetVMInstanceIDs,
     void,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<VirtualMachineScaleSet>;
-
+    Parameters = {
       /**
        * The parameter to request non-graceful VM shutdown. True value for this flag indicates non-graceful shutdown whereas false indicates otherwise. Default value for this flag is false if not specified
        */
@@ -330,7 +312,7 @@ interface VirtualMachineScaleSets {
   /**
    * Starts a rolling upgrade to move all extensions for all virtual machine scale set instances to the latest available extension version. Instances which are already running the latest extension versions are not affected.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("VirtualMachineScaleSetRollingUpgrades_StartExtensionUpgrade")
   startExtensionUpgrade is ArmResourceActionAsync<
     VirtualMachineScaleSet,
@@ -341,14 +323,14 @@ interface VirtualMachineScaleSets {
   /**
    * Starts a rolling upgrade to move all virtual machine scale set instances to the latest available Platform Image OS version. Instances which are already running the latest available OS version are not affected.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("VirtualMachineScaleSetRollingUpgrades_StartOSUpgrade")
   startOSUpgrade is ArmResourceActionAsync<VirtualMachineScaleSet, void, void>;
 
   /**
    * Cancels the current virtual machine scale set rolling upgrade.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("VirtualMachineScaleSetRollingUpgrades_Cancel")
   cancel is ArmResourceActionAsync<VirtualMachineScaleSet, void, void>;
 
@@ -375,7 +357,7 @@ interface VirtualMachineScaleSets {
    * Gets list of OS upgrades on a VM scale set instance.
    */
   // FIXME: VirtualMachineScaleSets_GetOSUpgradeHistory could not be converted to a resource operation
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("VirtualMachineScaleSets_GetOSUpgradeHistory")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/osUpgradeHistory")
   @get

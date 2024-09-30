@@ -32,9 +32,7 @@ interface VirtualMachineExtensions {
    */
   get is ArmResourceRead<
     VirtualMachineExtension,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<VirtualMachineExtension>;
-
+    Parameters = {
       /**
        * The expand expression to apply on the operation.
        */
@@ -68,13 +66,9 @@ interface VirtualMachineExtensions {
   /**
    * The operation to get all extensions of a Virtual Machine.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("VirtualMachineExtensions_List")
   list is ArmResourceListByParent<
     VirtualMachineExtension,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<VirtualMachineExtension>;
-
+    Parameters = {
       /**
        * The expand expression to apply on the operation.
        */

@@ -38,9 +38,7 @@ interface VirtualMachineScaleSetExtensions {
    */
   get is ArmResourceRead<
     VirtualMachineScaleSetExtension,
-    {
-      ...Azure.ResourceManager.Foundations.BaseParameters<VirtualMachineScaleSetExtension>;
-
+    Parameters = {
       /**
        * The expand expression to apply on the operation.
        */
@@ -74,8 +72,6 @@ interface VirtualMachineScaleSetExtensions {
   /**
    * Gets a list of all extensions in a VM scale set.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("VirtualMachineScaleSetExtensions_List")
   list is ArmResourceListByParent<VirtualMachineScaleSetExtension>;
 }
 
