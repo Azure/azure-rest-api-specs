@@ -20,7 +20,7 @@ These settings apply only when `--tag=package-preview-2023-10` is specified on t
 
 ```yaml $(tag) == 'package-preview-2023-10'
 input-file:
-  - Microsoft.OffAzure/preview/2023-10-01-preview/migrate.json
+  - 2023-10-01-preview/migrate.json
 ```
 
 ### Tag: package-2023-06
@@ -29,7 +29,7 @@ These settings apply only when `--tag=package-2023-06` is specified on the comma
 
 ```yaml $(tag) == 'package-2023-06'
 input-file:
-  - Microsoft.OffAzure/stable/2023-06-06/migrate.json
+  - stable/2023-06-06/migrate.json
 ```
 
 ### Tag: package-migrate-2020-01 and java
@@ -87,7 +87,7 @@ These settings apply only when `--tag=package-migrate-2020-01` is specified on t
 
 ``` yaml $(tag) == 'package-migrate-2020-01'
 input-file:
-- Microsoft.OffAzure/stable/2020-01-01/migrate.json
+- stable/2020-01-01/migrate.json
 ```
 
 ### Tag: package-migrate-2020-07
@@ -96,7 +96,7 @@ These settings apply only when `--tag=package-migrate-2020-07` is specified on t
 
 ``` yaml $(tag) == 'package-migrate-2020-07'
 input-file:
-- Microsoft.OffAzure/stable/2020-07-07/migrate.json
+- stable/2020-07-07/migrate.json
 ```
 
 # Code Generation

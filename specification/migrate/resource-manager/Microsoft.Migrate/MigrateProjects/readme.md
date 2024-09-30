@@ -69,7 +69,7 @@ These settings apply only when `--tag=package-hubmigrate-2020-05` is specified o
 
 ``` yaml $(tag) == 'package-hubmigrate-2020-05'
 input-file:
-- Microsoft.Migrate/MigrateProjects/stable/2020-05-01/hubmigrate.json
+- stable/2020-05-01/hubmigrate.json
 ```
 
 ### Tag: package-hubmigrate-2023-01
@@ -78,7 +78,7 @@ These settings apply only when `--tag=package-hubmigrate-2023-01` is specified o
 
 ``` yaml $(tag) == 'package-hubmigrate-2023-01'
 input-file:
-- Microsoft.Migrate/MigrateProjects/stable/2023-01-01/hubmigrate.json
+- stable/2023-01-01/hubmigrate.json
 ```
 
 # Code Generation

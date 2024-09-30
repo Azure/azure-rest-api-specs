@@ -21,7 +21,7 @@ These settings apply only when `--tag=package-migrate-2023-04` is specified on t
 
 ```yaml $(tag) == 'package-migrate-2023-04'
 input-file:
-  - Microsoft.Migrate/AssessmentProjects/preview/2023-04-01-preview/migrate.json
+  - preview/2023-04-01-preview/migrate.json
 suppressions:
   - code: AvoidAdditionalProperties
     reason: Migrate feature is widely adopted and requires additionalProperties for these swagger properties.
@@ -33,7 +33,7 @@ These settings apply only when `--tag=package-migrate-2023-03` is specified on t
 
 ```yaml $(tag) == 'package-migrate-2023-03'
 input-file:
-  - Microsoft.Migrate/AssessmentProjects/stable/2023-03-15/migrate.json
+  - stable/2023-03-15/migrate.json
 ```
 
 ### Tag: package-migrate-2018-02 and java
@@ -104,7 +104,7 @@ These settings apply only when `--tag=package-migrate-2023-03` is specified on t
 
 ```yaml $(tag) == 'package-migrate-2023-03'
 input-file:
-  - Microsoft.Migrate/AssessmentProjects/stable/2023-03-15/migrate.json
+  - stable/2023-03-15/migrate.json
 ```
 
 ### Tag: package-migrate-2023-04
@@ -113,7 +113,7 @@ These settings apply only when `--tag=package-migrate-2023-04` is specified on t
 
 ```yaml $(tag) == 'package-migrate-2023-04'
 input-file:
-  - Microsoft.Migrate/AssessmentProjects/preview/2023-04-01-preview/migrate.json
+  - preview/2023-04-01-preview/migrate.json
 ```
 
 ### Tag: package-migrate-2018-02
@@ -122,7 +122,7 @@ These settings apply only when `--tag=package-migrate-2018-02` is specified on t
 
 ``` yaml $(tag) == 'package-migrate-2018-02'
 input-file:
-- Microsoft.Migrate/AssessmentProjects/stable/2018-02-02/migrate.json
+- stable/2018-02-02/migrate.json
 ```
 
 ### Tag: package-migrate-2019-10
@@ -131,7 +131,7 @@ These settings apply only when `--tag=package-migrate-2019-10` is specified on t
 
 ``` yaml $(tag) == 'package-migrate-2019-10'
 input-file:
-- Microsoft.Migrate/AssessmentProjects/stable/2019-10-01/migrate.json
+- stable/2019-10-01/migrate.json
 ```
 
 ### Tag: package-migrate-2017-11
@@ -140,7 +140,7 @@ These settings apply only when `--tag=package-migrate-2017-11` is specified on t
 
 ``` yaml $(tag) == 'package-migrate-2017-11'
 input-file:
-- Microsoft.Migrate/AssessmentProjects/preview/2017-11-11-preview/migrate.json
+- preview/2017-11-11-preview/migrate.json
 ```
 
 ## Suppression
