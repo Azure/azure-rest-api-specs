@@ -1293,10 +1293,14 @@ model ConversationalAnalysisAuthoringAssignedDeploymentResources {
  */
 @added(Versions.v2023_04_15_preview)
 @clientName("AssignedDeploymentResource", "csharp")
+@resource("resources")
+@parentResource(ConversationalAnalysisAuthoringProjectMetadata)
 model ConversationalAnalysisAuthoringAssignedDeploymentResource {
   /**
    * The resource ID.
    */
+  @key
+  @visibility("read")
   azureResourceId: string;
 
   /**

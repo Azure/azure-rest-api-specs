@@ -29,7 +29,7 @@ interface ConversationalAnalysisAuthoring {
    */
   listProjects is languageOperations.ResourceList<
     ConversationalAnalysisAuthoringProjectMetadata,
-    ListQueryParametersTrait<StandardListQueryParameters & SelectQueryParameter>
+    ListQueryParametersTrait<StandardListQueryParameters>
   >;
 
   /**
@@ -174,7 +174,7 @@ interface ConversationalAnalysisAuthoring {
    */
   listDeployments is languageOperations.ResourceList<
     ConversationalAnalysisAuthoringProjectDeployment,
-    ListQueryParametersTrait<StandardListQueryParameters & SelectQueryParameter>
+    ListQueryParametersTrait<StandardListQueryParameters>
   >;
 
    /**
@@ -372,7 +372,7 @@ interface ConversationalAnalysisAuthoring {
    */
   listTrainedModels  is languageOperations.ResourceList<
     ConversationalAnalysisAuthoringProjectTrainedModel,
-    ListQueryParametersTrait<StandardListQueryParameters & SelectQueryParameter>
+    ListQueryParametersTrait<StandardListQueryParameters>
   >;
 
   /**
@@ -462,41 +462,9 @@ interface ConversationalAnalysisAuthoring {
   /**
    * Lists the deployments resources assigned to the project.
    */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  @route("/authoring/analyze-conversations/projects/{projectName}/resources")
-  @get
   @added(Versions.v2023_04_15_preview)
-  listDeploymentResources is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * The name of the project to use.
-       */
-      @maxLength(100)
-      @path
-      projectName: string;
-
-      /**
-       * The maximum number of resources to return from the collection.
-       */
-      @query("top")
-      top?: int32;
-
-      /**
-       * An offset into the collection of the first resource to be returned.
-       */
-      @query("skip")
-      skip?: int32;
-
-      /**
-       * The maximum number of resources to include in a single response.
-       */
-      @query("maxpagesize")
-      maxpagesize?: int32;
-    },
-    ConversationalAnalysisAuthoringAssignedDeploymentResources,
-    {},
-    ErrorResponse
-  >;
+  listDeploymentResources is languageOperations.ResourceList<ConversationalAnalysisAuthoringAssignedDeploymentResource,
+ListQueryParametersTrait<StandardListQueryParameters>>;
 
   /**
    * Assign new Azure resources to a project to allow deploying new deployments to
@@ -505,63 +473,31 @@ interface ConversationalAnalysisAuthoring {
    * check here:
    * https://learn.microsoft.com/en-us/azure/cognitive-services/authentication?tabs=powershell#authenticate-with-azure-active-directory
    */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  @route("/authoring/analyze-conversations/projects/{projectName}/resources/:assign")
-  @post
+  @action("assign")
+  @actionSeparator("/:")
   @pollingOperation(
     ConversationalAnalysisAuthoring.getAssignDeploymentResourcesStatus
   )
   @added(Versions.v2023_04_15_preview)
-  assignDeploymentResources is Foundations.LongRunningOperation<
-    {
-      /**
-       * The name of the project to use.
-       */
-      @maxLength(100)
-      @path
-      projectName: string;
-
-      /**
-       * The new project resources info.
-       */
-      @body
-      body: ConversationalAnalysisAuthoringAssignDeploymentResourcesOptions;
-    },
-    AcceptedResponse,
-    {},
-    ErrorResponse
-  >;
+  assignDeploymentResources is languageOperations.LongRunningResourceCollectionAction<ConversationalAnalysisAuthoringAssignedDeploymentResource,
+ConversationalAnalysisAuthoringAssignDeploymentResourcesOptions,
+ConversationalAnalysisAuthoringAssignedDeploymentResource
+>;
 
   /**
    * Unassign resources from a project. This disallows deploying new deployments to
    * these resources, and deletes existing deployments assigned to them.
    */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  @route("/authoring/analyze-conversations/projects/{projectName}/resources/:unassign")
-  @post
   @pollingOperation(
     ConversationalAnalysisAuthoring.getUnassignDeploymentResourcesStatus
   )
   @added(Versions.v2023_04_15_preview)
-  unassignDeploymentResources is Foundations.LongRunningOperation<
-    {
-      /**
-       * The name of the project to use.
-       */
-      @maxLength(100)
-      @path
-      projectName: string;
-
-      /**
-       * The info for the deployment resources to be deleted.
-       */
-      @body
-      body: ConversationalAnalysisAuthoringUnassignDeploymentResourcesOptions;
-    },
-    AcceptedResponse,
-    {},
-    ErrorResponse
-  >;
+  @action("unassign")
+  @actionSeparator("/:")
+  unassignDeploymentResources is languageOperations.LongRunningResourceCollectionAction<ConversationalAnalysisAuthoringAssignedDeploymentResource,
+ConversationalAnalysisAuthoringUnassignDeploymentResourcesOptions,
+ConversationalAnalysisAuthoringAssignedDeploymentResource
+>;
 
   /**
    * Gets the status of an existing assign deployment resources job.
