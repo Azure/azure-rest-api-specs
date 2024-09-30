@@ -1,7 +1,7 @@
-import "@typespec/http";
+import "@azure-tools/typespec-azure-core";
 import "@typespec/rest";
 import "@typespec/versioning";
-import "@azure-tools/typespec-azure-core";
+
 import "./agents/main.tsp";
 import "./threads/main.tsp";
 import "./messages/main.tsp";
@@ -17,7 +17,6 @@ using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.Core;
-using Azure.Core.Traits;
 
 #suppress "@azure-tools/typespec-azure-core/casing-style"
 namespace Azure.AI {

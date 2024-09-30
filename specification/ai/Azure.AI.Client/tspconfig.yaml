@@ -3,6 +3,10 @@ parameters:
     default: "sdk/ai"
 emit:
   - "@azure-tools/typespec-autorest"
+  - "@typespec/openapi3"
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/data-plane"
 options:
   "@azure-tools/typespec-autorest":
     emitter-output-dir: "{project-root}/.."
@@ -13,11 +17,9 @@ options:
     package-mode: "dataplane"
     package-dir: "azure-ai-client"
     package-name: "{package-dir}"
-    package-version: "1.0.0b7"
+    package-version: "1.0.0b8"
+    generate-sample-project: false
     flavor: azure
-    generate-test: true
-    generate-sample: true
-    examples-dir: "{project-root}/examples"
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/data-plane"
