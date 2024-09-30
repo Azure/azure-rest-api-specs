@@ -350,39 +350,39 @@
     },
     "MalwareScanStatus": {
       "type": "object",
-      "readOnly": true,
       "description": "Describes the status of a malware scan operation.",
       "properties": {
-        "scanId": {
-          "type": "string",
-          "description": "The identifier of the scan."
-        },
-        "scanStatus": {
-          "type": "string",
-          "description": "A status code of the scan operation."
-        },
-        "scanStatusMessage": {
-          "type": "string",
-          "description": "A description of the status of the scan."
-        },
-        "scanStartTime": {
-          "type": "string",
-          "description": "The time at which the scan had been initiated."
-        },
-        "scanEndTime": {
-          "type": "string",
-          "description": "The time at which the scan has ended. Only available for a scan which has terminated."
-        },
-        "scanSummary": {
-          "type": "object",
-          "$ref": "#/definitions/ScanSummary",
-          "description": "A summary of the scan results."
+        "properties": {
+          "scanId": {
+            "type": "string",
+            "description": "The identifier of the scan."
+          },
+          "scanStatus": {
+            "type": "string",
+            "description": "A status code of the scan operation."
+          },
+          "scanStatusMessage": {
+            "type": "string",
+            "description": "A description of the status of the scan."
+          },
+          "scanStartTime": {
+            "type": "string",
+            "description": "The time at which the scan had been initiated."
+          },
+          "scanEndTime": {
+            "type": "string",
+            "description": "The time at which the scan has ended. Only available for a scan which has terminated."
+          },
+          "scanSummary": {
+            "type": "object",
+            "$ref": "#/definitions/ScanSummary",
+            "description": "A summary of the scan results."
+          }
         }
       }
     },
     "ScanSummary": {
       "type": "object",
-      "readOnly": true,
       "description": "A summary of the scan results.",
       "properties": {
         "blobs": {
@@ -399,7 +399,6 @@
     },
     "BlobsScanSummary": {
       "type": "object",
-      "readOnly": true,
       "description": "A summary of the scan results of the blobs that were scanned.",
       "properties": {
         "totalBlobsScanned": {
