@@ -693,6 +693,9 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ProxyApiVersion"
           }
         ],
         "responses": {
@@ -747,6 +750,9 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ProxyApiVersion"
           }
         ],
         "responses": {
@@ -865,6 +871,9 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
+            "$ref": "#/parameters/ProxyApiVersion"
+          },
+          {
             "in": "body",
             "name": "body",
             "description": "deployment object",
@@ -978,6 +987,9 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ProxyApiVersion"
           }
         ],
         "responses": {
@@ -1029,6 +1041,9 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ProxyApiVersion"
           }
         ],
         "responses": {
@@ -1083,6 +1098,9 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ProxyApiVersion"
           }
         ],
         "responses": {
@@ -1199,6 +1217,9 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ProxyApiVersion"
           },
           {
             "in": "body",
@@ -1367,6 +1388,20 @@
           }
         ],
         "responses": {
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "description": "URI to poll for asynchronous operation result.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "Duration the client should wait between requests, in seconds.",
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          },
           "204": {
             "description": "No Content"
           },
@@ -1416,6 +1451,9 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ProxyApiVersion"
           }
         ],
         "responses": {
@@ -1473,6 +1511,9 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ProxyApiVersion"
           }
         ],
         "responses": {
@@ -1597,6 +1638,9 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
+            "$ref": "#/parameters/ProxyApiVersion"
+          },
+          {
             "in": "body",
             "name": "body",
             "required": true,
@@ -1661,6 +1705,9 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ProxyApiVersion"
           }
         ],
         "responses": {
@@ -1715,6 +1762,9 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ProxyApiVersion"
           }
         ],
         "responses": {
@@ -1831,6 +1881,9 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ProxyApiVersion"
           },
           {
             "in": "body",
@@ -2099,7 +2152,19 @@
           },
           {
             "in": "query",
-            "name": "includeInferenceEndpoints",
+            "name": "includeOnlineEndpoints",
+            "type": "boolean",
+            "default": false
+          },
+          {
+            "in": "query",
+            "name": "includeServerlessEndpoints",
+            "type": "boolean",
+            "default": false
+          },
+          {
+            "in": "query",
+            "name": "includeConnections",
             "type": "boolean",
             "default": false
           },
@@ -2341,6 +2406,9 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ProxyApiVersion"
           }
         ],
         "responses": {
@@ -2631,6 +2699,9 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ProxyApiVersion"
           }
         ],
         "responses": {
@@ -2685,6 +2756,9 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ProxyApiVersion"
           }
         ],
         "responses": {
@@ -2803,6 +2877,9 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
+            "$ref": "#/parameters/ProxyApiVersion"
+          },
+          {
             "in": "body",
             "name": "body",
             "required": true,
@@ -2907,7 +2984,7 @@
           "V2WorkspaceConnectionResource"
         ],
         "summary": "Get models under the Azure ML workspace for all Azure OpenAI connections that the user can deploy.",
-        "operationId": "Connection_ListModels",
+        "operationId": "Connection_GetAllModels",
         "produces": [
           "application/json"
         ],
@@ -3982,6 +4059,9 @@
           "type": "string",
           "description": "The name of RAI policy."
         },
+        "sku": {
+          "$ref": "#/definitions/CognitiveServicesSku"
+        },
         "versionUpgradeOption": {
           "description": "Deployment model version upgrade option.",
           "type": "string",
@@ -4105,6 +4185,7 @@
         "Sybase",
         "Teradata",
         "Vertica",
+        "Pinecone",
         "Cassandra",
         "Couchbase",
         "MongoDbV2",
@@ -4149,10 +4230,12 @@
         "Xero",
         "Zoho",
         "GenericContainerRegistry",
+        "Elasticsearch",
         "OpenAI",
         "Serp",
         "BingLLMSearch",
-        "Serverless"
+        "Serverless",
+        "ManagedOnlineEndpoint"
       ],
       "type": "string",
       "x-ms-enum": {
@@ -4256,6 +4339,17 @@
         }
       },
       "x-ms-discriminator-value": "CustomKeys"
+    },
+    "DefaultActionType": {
+      "enum": [
+        "Deny",
+        "Allow"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "DefaultActionType",
+        "modelAsString": true
+      }
     },
     "DefaultResourceProvisioningState": {
       "enum": [
@@ -5036,6 +5130,18 @@
         }
       }
     },
+    "FirewallSku": {
+      "description": "Firewall Sku used for FQDN Rules",
+      "enum": [
+        "Standard",
+        "Basic"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "FirewallSku",
+        "modelAsString": true
+      }
+    },
     "FqdnOutboundRule": {
       "description": "FQDN Outbound Rule for the managed network of a machine learning workspace.",
       "type": "object",
@@ -5050,6 +5156,16 @@
         }
       },
       "x-ms-discriminator-value": "FQDN"
+    },
+    "IPRule": {
+      "type": "object",
+      "description": "Contains an IPv4 address range in CIDR notation, such as '124.56.78.91' (simple IP address) or '124.56.78.0/24' (all addresses that start with 124.56.78). Value could be 'Allow' or  'Deny'.",
+      "properties": {
+        "value": {
+          "description": "An IPv4 address range in CIDR notation, such as '124.56.78.91' (simple IP address) or '124.56.78.0/24' (all addresses that start with 124.56.78). Value could be 'Allow' or  'Deny'.",
+          "type": "string"
+        }
+      }
     },
     "IdentityForCmk": {
       "description": "Identity object used for encryption.",
@@ -5214,6 +5330,10 @@
       "description": "Managed Network settings for a machine learning workspace.",
       "type": "object",
       "properties": {
+        "firewallSku": {
+          "description": "Firewall Sku used for FQDN Rules",
+          "$ref": "#/definitions/FirewallSku"
+        },
         "isolationMode": {
           "description": "Isolation mode for the managed network of a machine learning workspace.",
           "$ref": "#/definitions/IsolationMode"
@@ -5344,6 +5464,22 @@
           "minLength": 1,
           "pattern": "[a-zA-Z0-9_]",
           "type": "string"
+        }
+      }
+    },
+    "NetworkAcls": {
+      "type": "object",
+      "properties": {
+        "defaultAction": {
+          "description": "The default action when no rule from ipRules and from virtualNetworkRules match. This is only used after the bypass property has been evaluated.",
+          "$ref": "#/definitions/DefaultActionType"
+        },
+        "ipRules": {
+          "description": "Rules governing the accessibility of a resource from a specific ip address or ip range.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IPRule"
+          }
         }
       }
     },
@@ -6808,6 +6944,15 @@
       "description": "The properties of a machine learning workspace.",
       "type": "object",
       "properties": {
+        "agentsEndpointUri": {
+          "description": "The URI of agents endpoint associated with this workspace.",
+          "type": "string",
+          "format": "url",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
         "allowPublicAccessWhenBehindVnet": {
           "description": "The flag to indicate whether to allow public access when behind VNet.",
           "type": "boolean"
@@ -6914,6 +7059,10 @@
             "read"
           ]
         },
+        "networkAcls": {
+          "description": "A set of rules governing the network accessibility of the workspace.",
+          "$ref": "#/definitions/NetworkAcls"
+        },
         "notebookInfo": {
           "description": "The notebook info of Azure ML workspace.",
           "$ref": "#/definitions/NotebookResourceInfo",
@@ -6948,6 +7097,10 @@
           "x-ms-mutability": [
             "read"
           ]
+        },
+        "provisionNetworkNow": {
+          "description": "Set to trigger the provisioning of the managed VNet with the default Options when creating a Workspace with the managed VNet enabled, or else it does nothing.",
+          "type": "boolean"
         },
         "provisioningState": {
           "description": "The current deployment state of workspace resource. The provisioningState is to indicate states for resource provisioning.",
@@ -7012,7 +7165,16 @@
         },
         "systemDatastoresAuthMode": {
           "description": "The auth mode used for accessing the system datastores of the workspace.",
-          "type": "string"
+          "type": "string",
+          "enum": [
+            "AccessKey",
+            "Identity",
+            "UserDelegationSAS"
+          ],
+          "x-ms-enum": {
+            "name": "systemDatastoresAuthMode",
+            "modelAsString": true
+          }
         },
         "tenantId": {
           "description": "The tenant id associated with this workspace.",
@@ -7091,6 +7253,10 @@
         "managedNetwork": {
           "$ref": "#/definitions/ManagedNetworkSettings"
         },
+        "networkAcls": {
+          "description": "A set of rules governing the network accessibility of the workspace.",
+          "$ref": "#/definitions/NetworkAcls"
+        },
         "primaryUserAssignedIdentity": {
           "description": "The user assigned identity resource id that represents the workspace identity.",
           "type": "string"
@@ -7111,6 +7277,19 @@
           "format": "int32",
           "description": "Retention time in days after workspace get soft deleted.",
           "type": "integer"
+        },
+        "systemDatastoresAuthMode": {
+          "description": "The auth mode used for accessing the system datastores of the workspace.",
+          "type": "string",
+          "enum": [
+            "AccessKey",
+            "Identity",
+            "UserDelegationSAS"
+          ],
+          "x-ms-enum": {
+            "name": "systemDatastoresAuthMode",
+            "modelAsString": true
+          }
         },
         "v1LegacyMode": {
           "description": "Enabling v1_legacy_mode may prevent you from using features provided by the v2 API.",
@@ -7276,6 +7455,13 @@
       "name": "privateEndpointConnectionName",
       "description": "NRP Private Endpoint Connection Name",
       "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "ProxyApiVersion": {
+      "in": "query",
+      "name": "proxy-api-version",
+      "description": "Api version used by proxy call",
       "type": "string",
       "x-ms-parameter-location": "method"
     }
