@@ -833,10 +833,14 @@ model ConversationalAnalysisAuthoringProjectTrainedModels {
  * Represents a trained model.
  */
 @clientName("ProjectTrainedModel", "csharp")
+@resource("models")
+@parentResource(ConversationalAnalysisAuthoringProjectMetadata)
 model ConversationalAnalysisAuthoringProjectTrainedModel {
   /**
    * The trained model label.
    */
+  @key("trainedModelLabel")
+  @visibility("read")
   label: string;
 
   /**
@@ -875,6 +879,8 @@ model ConversationalAnalysisAuthoringProjectTrainedModel {
  * Represents the state of a evaluation job.
  */
 @clientName("EvaluationJobState", "csharp")
+@resource("evaluate/jobs")
+@parentResource(ConversationalAnalysisAuthoringProjectTrainedModel)
 model ConversationalAnalysisAuthoringEvaluationJobState {
   ...ConversationalAnalysisAuthoringJobState;
 

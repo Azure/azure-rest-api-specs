@@ -370,187 +370,52 @@ interface ConversationalAnalysisAuthoring {
   /**
    * Lists the trained models belonging to a project.
    */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  @route("/authoring/analyze-conversations/projects/{projectName}/models")
-  @get
-  listTrainedModels is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * The name of the project to use.
-       */
-      @maxLength(100)
-      @path
-      projectName: string;
-
-      /**
-       * The maximum number of resources to return from the collection.
-       */
-      @query("top")
-      top?: int32;
-
-      /**
-       * An offset into the collection of the first resource to be returned.
-       */
-      @query("skip")
-      skip?: int32;
-
-      /**
-       * The maximum number of resources to include in a single response.
-       */
-      @query("maxpagesize")
-      maxpagesize?: int32;
-    },
-    ConversationalAnalysisAuthoringProjectTrainedModels,
-    {},
-    ErrorResponse
+  listTrainedModels  is languageOperations.ResourceList<
+    ConversationalAnalysisAuthoringProjectTrainedModel,
+    ListQueryParametersTrait<StandardListQueryParameters & SelectQueryParameter>
   >;
 
   /**
    * Gets the details of a trained model.
    */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  @route("/authoring/analyze-conversations/projects/{projectName}/models/{trainedModelLabel}")
-  @get
-  getTrainedModel is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * The name of the project to use.
-       */
-      @maxLength(100)
-      @path
-      projectName: string;
-
-      /**
-       * The trained model label.
-       */
-      @path
-      trainedModelLabel: string;
-    },
-    ConversationalAnalysisAuthoringProjectTrainedModel,
-    {},
-    ErrorResponse
-  >;
+  getTrainedModel is languageOperations.ResourceRead<ConversationalAnalysisAuthoringProjectTrainedModel>;
 
   /**
    * Deletes an existing trained model.
    */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  @route("/authoring/analyze-conversations/projects/{projectName}/models/{trainedModelLabel}")
-  @delete
-  deleteTrainedModel is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * The name of the project to use.
-       */
-      @maxLength(100)
-      @path
-      projectName: string;
-
-      /**
-       * The trained model label.
-       */
-      @path
-      trainedModelLabel: string;
-    },
-    void,
-    {},
-    ErrorResponse
-  >;
+  deleteTrainedModel is languageOperations.ResourceDelete<ConversationalAnalysisAuthoringProjectTrainedModel>;
 
   /**
    * Triggers evaluation operation on a trained model.
    */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  @route("/authoring/analyze-conversations/projects/{projectName}/models/{trainedModelLabel}/:evaluate")
-  @post
+  @action("evaluate")
+  @actionSeparator("/:")
   @pollingOperation(ConversationalAnalysisAuthoring.getEvaluationStatus)
   @added(Versions.v2023_04_15_preview)
-  evaluateModel is Foundations.LongRunningOperation<
-    {
-      /**
-       * The name of the project to use.
-       */
-      @maxLength(100)
-      @path
-      projectName: string;
-
-      /**
-       * The trained model label.
-       */
-      @path
-      trainedModelLabel: string;
-
-      /**
-       * The training input parameters.
-       */
-      @body
-      body: ConversationalAnalysisAuthoringEvaluationOptions;
-    },
-    AcceptedResponse,
-    {},
-    ErrorResponse
-  >;
+  evaluateModel is languageOperations.LongRunningResourceAction<
+  ConversationalAnalysisAuthoringProjectTrainedModel,
+  ConversationalAnalysisAuthoringEvaluationOptions,
+  ConversationalAnalysisAuthoringProjectTrainedModel
+>;
 
   /**
    * Restores the snapshot of this trained model to be the current working directory
    * of the project.
    */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  @route("/authoring/analyze-conversations/projects/{projectName}/models/{trainedModelLabel}/:load-snapshot")
-  @post
+  @action("load-snapshot")
+  @actionSeparator("/:")
   @pollingOperation(ConversationalAnalysisAuthoring.getLoadSnapshotStatus)
-  loadSnapshot is Foundations.LongRunningOperation<
-    {
-      /**
-       * The name of the project to use.
-       */
-      @maxLength(100)
-      @path
-      projectName: string;
-
-      /**
-       * The trained model label.
-       */
-      @path
-      trainedModelLabel: string;
-    },
-    AcceptedResponse,
-    {},
-    ErrorResponse
-  >;
+  loadSnapshot is languageOperations.LongRunningResourceAction<
+  ConversationalAnalysisAuthoringProjectTrainedModel,
+  {},
+  ConversationalAnalysisAuthoringProjectTrainedModel
+>;
 
   /**
    * Gets the status for an evaluation job.
    */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  @route("/authoring/analyze-conversations/projects/{projectName}/models/{trainedModelLabel}/evaluate/jobs/{jobId}")
-  @get
   @added(Versions.v2023_04_15_preview)
-  getEvaluationStatus is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * The name of the project to use.
-       */
-      @maxLength(100)
-      @path
-      projectName: string;
-
-      /**
-       * The trained model label.
-       */
-      @path
-      trainedModelLabel: string;
-
-      /**
-       * The job ID.
-       */
-      @path
-      jobId: string;
-    },
-    ConversationalAnalysisAuthoringEvaluationJobState,
-    {},
-    ErrorResponse
-  >;
+  getEvaluationStatus is languageOperations.ResourceRead<ConversationalAnalysisAuthoringEvaluationJobState>;
 
   /**
    * Gets the detailed results of the evaluation for a trained model. This includes

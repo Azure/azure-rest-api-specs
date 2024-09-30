@@ -1379,41 +1379,29 @@
           {
             "name": "projectName",
             "in": "path",
-            "description": "The name of the project to use.",
+            "description": "The new project name.",
             "required": true,
             "type": "string",
             "maxLength": 100
           },
           {
-            "name": "top",
-            "in": "query",
-            "description": "The maximum number of resources to return from the collection.",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
+            "$ref": "#/parameters/Azure.Core.TopQueryParameter"
           },
           {
-            "name": "skip",
-            "in": "query",
-            "description": "An offset into the collection of the first resource to be returned.",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
+            "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
           },
           {
-            "name": "maxpagesize",
-            "in": "query",
-            "description": "The maximum number of resources to include in a single response.",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
+            "$ref": "#/parameters/Azure.Core.MaxPageSizeQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.SelectQueryParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/ConversationalAnalysisAuthoringProjectTrainedModels"
+              "$ref": "#/definitions/PagedConversationalAnalysisAuthoringProjectTrainedModel"
             }
           },
           "default": {
@@ -1427,6 +1415,9 @@
           "Successful List Models": {
             "$ref": "./examples/SuccessfulListModels.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -1441,7 +1432,7 @@
           {
             "name": "projectName",
             "in": "path",
-            "description": "The name of the project to use.",
+            "description": "The new project name.",
             "required": true,
             "type": "string",
             "maxLength": 100
@@ -1484,7 +1475,7 @@
           {
             "name": "projectName",
             "in": "path",
-            "description": "The name of the project to use.",
+            "description": "The new project name.",
             "required": true,
             "type": "string",
             "maxLength": 100
@@ -1526,7 +1517,7 @@
           {
             "name": "projectName",
             "in": "path",
-            "description": "The name of the project to use.",
+            "description": "The new project name.",
             "required": true,
             "type": "string",
             "maxLength": 100
@@ -1541,7 +1532,6 @@
           {
             "name": "body",
             "in": "body",
-            "description": "The training input parameters.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/ConversationalAnalysisAuthoringEvaluationOptions"
@@ -1551,6 +1541,32 @@
         "responses": {
           "202": {
             "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "schema": {
+              "type": "object",
+              "description": "Provides status details for long running operations.",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "description": "The unique ID of the operation."
+                },
+                "status": {
+                  "$ref": "#/definitions/Azure.Core.Foundations.OperationState",
+                  "description": "The status of the operation"
+                },
+                "error": {
+                  "$ref": "#/definitions/Azure.Core.Foundations.Error",
+                  "description": "Error object that describes the error when status is \"Failed\"."
+                },
+                "result": {
+                  "$ref": "#/definitions/ConversationalAnalysisAuthoringProjectTrainedModel",
+                  "description": "The result of the operation."
+                }
+              },
+              "required": [
+                "id",
+                "status"
+              ]
+            },
             "headers": {
               "Operation-Location": {
                 "type": "string",
@@ -1585,7 +1601,7 @@
           {
             "name": "projectName",
             "in": "path",
-            "description": "The name of the project to use.",
+            "description": "The new project name.",
             "required": true,
             "type": "string",
             "maxLength": 100
@@ -1601,6 +1617,32 @@
         "responses": {
           "202": {
             "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "schema": {
+              "type": "object",
+              "description": "Provides status details for long running operations.",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "description": "The unique ID of the operation."
+                },
+                "status": {
+                  "$ref": "#/definitions/Azure.Core.Foundations.OperationState",
+                  "description": "The status of the operation"
+                },
+                "error": {
+                  "$ref": "#/definitions/Azure.Core.Foundations.Error",
+                  "description": "Error object that describes the error when status is \"Failed\"."
+                },
+                "result": {
+                  "$ref": "#/definitions/ConversationalAnalysisAuthoringProjectTrainedModel",
+                  "description": "The result of the operation."
+                }
+              },
+              "required": [
+                "id",
+                "status"
+              ]
+            },
             "headers": {
               "Operation-Location": {
                 "type": "string",
@@ -1635,7 +1677,7 @@
           {
             "name": "projectName",
             "in": "path",
-            "description": "The name of the project to use.",
+            "description": "The new project name.",
             "required": true,
             "type": "string",
             "maxLength": 100
@@ -4585,7 +4627,8 @@
       "properties": {
         "label": {
           "type": "string",
-          "description": "The trained model label."
+          "description": "The trained model label.",
+          "readOnly": true
         },
         "modelId": {
           "type": "string",
@@ -4623,27 +4666,6 @@
         "modelExpirationDate",
         "modelTrainingConfigVersion",
         "hasSnapshot"
-      ]
-    },
-    "ConversationalAnalysisAuthoringProjectTrainedModels": {
-      "type": "object",
-      "description": "Represents a list of retrieved trained models.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The list of trained models.",
-          "items": {
-            "$ref": "#/definitions/ConversationalAnalysisAuthoringProjectTrainedModel"
-          },
-          "x-ms-identifiers": []
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "The next page link."
-        }
-      },
-      "required": [
-        "value"
       ]
     },
     "ConversationalAnalysisAuthoringResourceMetadata": {
@@ -5383,6 +5405,28 @@
           "description": "The ConversationalAnalysisAuthoringProjectMetadata items on this page",
           "items": {
             "$ref": "#/definitions/ConversationalAnalysisAuthoringProjectMetadata"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PagedConversationalAnalysisAuthoringProjectTrainedModel": {
+      "type": "object",
+      "description": "Paged collection of ConversationalAnalysisAuthoringProjectTrainedModel items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ConversationalAnalysisAuthoringProjectTrainedModel items on this page",
+          "items": {
+            "$ref": "#/definitions/ConversationalAnalysisAuthoringProjectTrainedModel"
           },
           "x-ms-identifiers": []
         },
