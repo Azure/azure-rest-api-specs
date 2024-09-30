@@ -1122,6 +1122,10 @@
           "description": "Stop on disconnect configuration settings for Dev Boxes created in this pool.",
           "$ref": "#/definitions/StopOnDisconnectConfiguration"
         },
+        "stopOnNoConnect": {
+          "description": "Stop on no connect configuration settings for Dev Boxes created in this pool.",
+          "$ref": "#/definitions/StopOnNoConnectConfiguration"
+        },
         "singleSignOnStatus": {
           "description": "Indicates whether Dev Boxes in this pool are created with single sign on enabled. The also requires that single sign on be enabled on the tenant.",
           "$ref": "#/definitions/SingleSignOnStatus"
@@ -1320,6 +1324,33 @@
       "type": "string",
       "x-ms-enum": {
         "name": "StopOnDisconnectEnableStatus",
+        "modelAsString": true
+      }
+    },
+    "StopOnNoConnectConfiguration": {
+      "type": "object",
+      "description": "Stop on no connect configuration settings for Dev Boxes created in this pool.",
+      "properties": {
+        "status": {
+          "description": "Enables the feature to stop a started Dev Box when it has not been connected to, once the grace period has lapsed.",
+          "$ref": "#/definitions/StopOnNoConnectEnableStatus"
+        },
+        "gracePeriodMinutes": {
+          "description": "The specified time in minutes to wait before stopping a Dev Box if no connection is made.",
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "StopOnNoConnectEnableStatus": {
+      "description": "Stop on no connect enable or disable status.",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "StopOnNoConnectEnableStatus",
         "modelAsString": true
       }
     },
@@ -1956,4 +1987,3 @@
     }
   }
 }
-

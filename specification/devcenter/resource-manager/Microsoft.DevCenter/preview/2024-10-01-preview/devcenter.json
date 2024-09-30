@@ -1458,6 +1458,277 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevCenter/devcenters/{devCenterName}/projectPolicies": {
+      "get": {
+        "tags": [
+          "Project Policies"
+        ],
+        "description": "Lists all project policies in the dev center",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DevCenterNameParameter"
+          },
+          {
+            "$ref": "commonDefinitions.json#/parameters/TopParameter"
+          }
+        ],
+        "operationId": "ProjectPolicies_ListByDevCenter",
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ProjectPolicyListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ProjectPolicies_ListByDevCenter": {
+            "$ref": "./examples/ProjectPolicies_ListByDevCenter.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevCenter/devcenters/{devCenterName}/projectPolicies/{projectPolicyName}": {
+      "get": {
+        "tags": [
+          "Project Policies"
+        ],
+        "description": "Gets a specific project policy.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DevCenterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ProjectPolicyNameParameter"
+          }
+        ],
+        "operationId": "ProjectPolicies_Get",
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ProjectPolicy"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ProjectPolicies_Get": {
+            "$ref": "./examples/ProjectPolicies_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Project Policies"
+        ],
+        "description": "Creates or updates an project policy.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DevCenterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ProjectPolicyNameParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Represents an project policy.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ProjectPolicy"
+            }
+          }
+        ],
+        "operationId": "ProjectPolicies_CreateOrUpdate",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "responses": {
+          "200": {
+            "description": "Succeeded",
+            "schema": {
+              "$ref": "#/definitions/ProjectPolicy"
+            }
+          },
+          "201": {
+            "description": "Accepted. Operation will complete asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/ProjectPolicy"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ProjectPolicies_CreateOrUpdate": {
+            "$ref": "./examples/ProjectPolicies_Put.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Project Policies"
+        ],
+        "description": "Partially updates an project policy.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DevCenterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ProjectPolicyNameParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Updatable project policy properties.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ProjectPolicyUpdate"
+            }
+          }
+        ],
+        "operationId": "ProjectPolicies_Update",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "responses": {
+          "200": {
+            "description": "Succeeded",
+            "schema": {
+              "$ref": "#/definitions/ProjectPolicy"
+            }
+          },
+          "202": {
+            "description": "Accepted. Operation will complete asynchronously.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ProjectPolicies_Update": {
+            "$ref": "./examples/ProjectPolicies_Patch.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Project Policies"
+        ],
+        "description": "Deletes an project policy.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DevCenterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ProjectPolicyNameParameter"
+          }
+        ],
+        "operationId": "ProjectPolicies_Delete",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "responses": {
+          "202": {
+            "description": "Accepted. Operation will complete asynchronously.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ProjectPolicies_Delete": {
+            "$ref": "./examples/ProjectPolicies_Delete.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.DevCenter/projects": {
       "get": {
         "tags": [
@@ -5310,13 +5581,13 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevCenter/projects/{projectName}/catalogs/{catalogName}/imageDefinitions/{imageDefinitionName}/buildImage": {
       "parameters": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
         },
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
         },
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
         },
         {
           "$ref": "#/parameters/ProjectNameParameter"
@@ -5368,13 +5639,13 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevCenter/projects/{projectName}/catalogs/{catalogName}/imageDefinitions/{imageDefinitionName}/builds": {
       "parameters": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
         },
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
         },
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
         },
         {
           "$ref": "#/parameters/ProjectNameParameter"
@@ -5420,13 +5691,13 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevCenter/projects/{projectName}/catalogs/{catalogName}/imageDefinitions/{imageDefinitionName}/builds/{buildName}": {
       "parameters": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
         },
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
         },
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
         },
         {
           "$ref": "#/parameters/ProjectNameParameter"
@@ -5472,13 +5743,13 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevCenter/projects/{projectName}/catalogs/{catalogName}/imageDefinitions/{imageDefinitionName}/builds/{buildName}/cancel": {
       "parameters": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
         },
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
         },
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
         },
         {
           "$ref": "#/parameters/ProjectNameParameter"
@@ -5539,13 +5810,13 @@
         "operationId": "ProjectCatalogImageDefinitionBuild_GetBuildDetails",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/ProjectNameParameter"
@@ -5637,6 +5908,11 @@
     "PlanMemberProperties": {
       "description": "Properties of the devcenter plan member.",
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/PlanMemberUpdateProperties"
+        }
+      ],
       "properties": {
         "memberId": {
           "description": "The unique id of the member.",
@@ -5659,14 +5935,20 @@
           "$ref": "#/definitions/PlanMemberSyncStatus",
           "readOnly": true
         },
-        "tags": {
-          "$ref": "commonDefinitions.json#/definitions/Tags",
-          "description": "Resource tags."
-        },
         "provisioningState": {
           "description": "The provisioning state of the resource.",
           "$ref": "commonDefinitions.json#/definitions/ProvisioningState",
           "readOnly": true
+        }
+      }
+    },
+    "PlanMemberUpdateProperties": {
+      "description": "Properties of the devcenter plan member.",
+      "type": "object",
+      "properties": {
+        "tier": {
+          "description": "The tier of the member.",
+          "type": "string"
         }
       }
     },
@@ -5706,6 +5988,11 @@
       "description": "The devcenter plan member resource for partial updates. Properties not provided in the update request will not be changed.",
       "type": "object",
       "properties": {
+        "properties": {
+          "description": "Plan member update properties",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/PlanMemberUpdateProperties"
+        },
         "tags": {
           "$ref": "commonDefinitions.json#/definitions/Tags",
           "description": "Resource tags."
@@ -5782,7 +6069,7 @@
           "description": "Settings to be used in the provisioning of all Dev Boxes that belong to this dev center."
         },
         "restrictedResourceTypes": {
-          "description": "Indicates the resource types that are restricted from being accessed by a project unless allowed by a curation profile.",
+          "description": "Indicates the resource types that are restricted from being accessed by a project unless allowed by a project policy.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/DevCenterResourceType"
@@ -6297,7 +6584,7 @@
       "type": "object",
       "properties": {
         "resources": {
-          "description": "Resources that are included and shared as a part of a curation profile.",
+          "description": "Resources that are included and shared as a part of a prject policy.",
           "type": "string"
         },
         "filter": {
@@ -6314,6 +6601,88 @@
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/CurationProfileUpdateProperties",
           "description": "Properties of an curation profile to be updated."
+        }
+      }
+    },
+    "ProjectPolicyListResult": {
+      "description": "Results of the project policy list operation.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Current page of results.",
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ProjectPolicy"
+          }
+        },
+        "nextLink": {
+          "description": "URL to get the next set of results if there are any.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ProjectPolicy": {
+      "description": "Represents an project policy resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ProjectPolicyProperties",
+          "description": "Properties of an project policy."
+        }
+      }
+    },
+    "ProjectPolicyProperties": {
+      "description": "Properties of an project policy.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProjectPolicyUpdateProperties"
+        }
+      ],
+      "properties": {
+        "provisioningState": {
+          "description": "The provisioning state of the resource.",
+          "$ref": "commonDefinitions.json#/definitions/ProvisioningState",
+          "readOnly": true
+        }
+      }
+    },
+    "ProjectPolicyUpdateProperties": {
+      "description": "Properties of an project policy. These properties can be updated after the resource has been created.",
+      "type": "object",
+      "properties": {
+        "resourcePolicies": {
+          "description": "Resource policies that are a part of this project policy.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ResourcePolicy"
+          }
+        },
+        "scopes": {
+          "description": "Resources that have access to the shared resources that are a part of this cproject policy.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ProjectPolicyUpdate": {
+      "description": "The project policy properties for partial update. Properties not provided in the update request will not be changed.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ProjectPolicyUpdateProperties",
+          "description": "Properties of an project policy to be updated."
         }
       }
     },
@@ -7734,6 +8103,26 @@
         "latestBuild": {
           "$ref": "#/definitions/LatestImageBuild",
           "description": "Details about the latest build."
+        },
+        "imageValidationStatus": {
+          "description": "Validation status of the configured image.",
+          "$ref": "vdi.json#/definitions/ImageValidationStatus",
+          "readOnly": true
+        },
+        "imageValidationErrorDetails": {
+          "description": "Details for image validator error. Populated when the image validation is not successful.",
+          "$ref": "vdi.json#/definitions/ImageValidationErrorDetails",
+          "readOnly": true
+        },
+        "validationStatus": {
+          "description": "Validation status for the Image Definition.",
+          "$ref": "vdi.json#/definitions/CatalogResourceValidationStatus",
+          "readOnly": true
+        },
+        "activeImageReference": {
+          "$ref": "vdi.json#/definitions/ImageReference",
+          "description": "Image reference information for the currently active image (only populated during updates).",
+          "readOnly": true
         }
       }
     },
@@ -8089,6 +8478,17 @@
       "minLength": 3,
       "maxLength": 63
     },
+    "ProjectPolicyNameParameter": {
+      "name": "projectPolicyName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the project policy.",
+      "x-ms-parameter-location": "method",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$",
+      "minLength": 3,
+      "maxLength": 63
+    },
     "ProjectNameParameter": {
       "name": "projectName",
       "in": "path",
@@ -8258,4 +8658,3 @@
     }
   }
 }
-
