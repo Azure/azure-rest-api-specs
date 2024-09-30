@@ -6,16 +6,16 @@ using Azure.ClientGenerator.Core;
 namespace Azure.AI.Client.Agents {
   // Trivial response value containers should treat these containers as internal details and instead surface a shimmed
   // operation that exposes the underlying data directly.
-  @@clientName(AssistantDeletionStatus,
-    "InternalAssistantDeletionStatus",
+  @@clientName(AgentDeletionStatus,
+    "InternalAgentDeletionStatus",
     "csharp"
   );
-  @@access(deleteAssistant, Access.internal, "csharp");
-  @@clientName(deleteAssistant, "InternalDeleteAssistant", "csharp");
+  @@access(deleteAgent, Access.internal, "csharp");
+  @@clientName(deleteAgent, "InternalDeleteAgent", "csharp");
   @@access(deleteThread, Access.internal, "csharp");
   @@clientName(deleteThread, "InternalDeleteThread", "csharp");
-  @@access(listAssistants, Access.internal, "csharp");
-  @@clientName(listAssistants, "InternalGetAssistants", "csharp");
+  @@access(listAgents, Access.internal, "csharp");
+  @@clientName(listAgents, "InternalGetAgents", "csharp");
   @@access(listRunSteps, Access.internal, "csharp");
   @@clientName(listRunSteps, "InternalGetRunSteps", "csharp");
   @@access(listMessages, Access.internal, "csharp");
@@ -185,8 +185,8 @@ namespace Azure.AI.Client.Agents {
 
   // Stream events : made public to expose documentation and make class casting for strongly typed languages easier
 
-  @@usage(AssistantStreamEvent, Usage.output);
-  @@access(AssistantStreamEvent, Access.public);
+  @@usage(AgentStreamEvent, Usage.output);
+  @@access(AgentStreamEvent, Access.public);
 
   @@usage(ThreadStreamEvent, Usage.output);
   @@access(ThreadStreamEvent, Access.public);
@@ -243,15 +243,15 @@ namespace Azure.AI.Client.Agents {
     "csharp"
   );
   @@clientName(CreateAndRunThreadOptions.tools, "OverrideTools", "csharp");
-  // From https://platform.openai.com/docs/assistants/how-it-works
-  // "Note that deleting an AssistantFile doesn’t delete the original File object, it simply deletes the association
-  // between that File and the Assistant."
+  // From https://platform.openai.com/docs/agents/how-it-works
+  // "Note that deleting an AgentFile doesn’t delete the original File object, it simply deletes the association
+  // between that File and the Agent."
 
-  //@override(Azure.AI.Assistants.createAssistant, "java")
-  //op createAssistantCustomization(createAssistantOptions: CreateAssistantOptions): Assistant;
+  //@override(Azure.AI.Agents.createAgent, "java")
+  //op createAgentCustomization(createAgentOptions: CreateAgentOptions): Agent;
   
-  //@@clientName(updateAssistant::parameters.body,
-  //  "updateAssistantOptions",
+  //@@clientName(updateAgent::parameters.body,
+  //  "updateAgentOptions",
   //  "java"
   //);
   //@@clientName(createThreadAndRun::parameters.body,
@@ -259,11 +259,11 @@ namespace Azure.AI.Client.Agents {
   //  "java"
   //);
   //@@clientName(createThread::parameters.body,
-  //  "assistantThreadCreationOptions",
+  //  "agentThreadCreationOptions",
   //  "java"
   //);
   ///@@clientName(updateThread::parameters.body,
-  //  "updateAssistantThreadOptions",
+  //  "updateAgentThreadOptions",
   //  "java"
   //);
   //@@clientName(createVectorStore::parameters.body,
