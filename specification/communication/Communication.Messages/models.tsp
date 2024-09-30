@@ -141,8 +141,9 @@ model MediaNotificationContentBase {
   mediaUri: url;
 }
 
-@added(Versions.c2024_08_30)
 #deprecated "`MediaNotificationContent` is being deprecated, we encourage you to use the new `ImageNotificationContent` for sending images instead."
+@access(Access.internal, "python")
+@added(Versions.c2024_08_30)
 @doc("A request to send an image notification.")
 model MediaNotificationContent extends NotificationContent {
   @doc("Message notification type is image.")
@@ -192,7 +193,7 @@ model DocumentNotificationContent extends NotificationContent {
 model VideoNotificationContent extends NotificationContent {
   @doc("Message notification type is image.")
   kind: CommunicationMessageKind.video;
-  
+
   @clientName("caption")
   @doc("Optional text content.")
   content?: string;
