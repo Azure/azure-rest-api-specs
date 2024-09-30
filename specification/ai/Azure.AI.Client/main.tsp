@@ -30,7 +30,7 @@ namespace Azure.AI {
   title: "Azure AI",
 })
 @server(
-  "{endpoint}/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}",
+  "{endpoint}",
   "Azure AI",
   {
     @doc("Azure AI Project endpoint.")
