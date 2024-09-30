@@ -10,99 +10,86 @@ using TypeSpec.Versioning;
 namespace Azure.AI.Client.Agents;
 
 /**
- * Creates a new agent.
+ * Creates a new thread. Threads contain messages and can be run by agents.
  *
- * @returns The new agent instance.
+ * @returns Information about the newly created thread.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
 #suppress "@azure-tools/typespec-azure-core/no-operation-id" "non-standard operations"
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
 @post
 @added(ServiceApiVersions.v2024_02_15_preview)
-@route("/agents")
-op createAgent is Azure.Core.RpcOperation<
+@route("/threads")
+op createThread is Azure.Core.RpcOperation<
   {
-    ...CreateAgentOptions
+    /**
+     * The details used to create a new agent thread.
+     */
+    ...AgentThreadCreationOptions
   },
-  Agent
+  AgentThread
 >;
 
-/**
- * Gets a list of agents that were previously created.
- *
- * @returns The requested list of agents.
- */
-#suppress "@azure-tools/typespec-azure-core/use-standard-names" "mirrored API responds with a container"
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
-#suppress "@azure-tools/typespec-azure-core/no-operation-id" "non-standard operations"
-#suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
-@get
-@added(ServiceApiVersions.v2024_02_15_preview)
-@route("/agents")
-op listAgents is Azure.Core.RpcOperation<
-  {
-    ...OpenAIListRequestOptions
-  },
-  OpenAIPageableListOf<Agent>
->;
+// list threads?
 
 /**
- * Retrieves an existing agent.
+ * Gets information about an existing thread.
  *
- * @param agentId The ID of the agent to retrieve.
- * @returns The requested agent instance.
+ * @param threadId The ID of the thread to retrieve information about.
+ * @returns Information about the requested thread.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
 #suppress "@azure-tools/typespec-azure-core/no-operation-id" "non-standard operations"
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
 #suppress "@azure-tools/typespec-azure-core/use-standard-names" "mirrored API name parity"
 @get
-@route("/agents/{agentId}")
+@route("/threads/{threadId}")
 @added(ServiceApiVersions.v2024_02_15_preview)
-op getAgent is Azure.Core.RpcOperation<
+op getThread is Azure.Core.RpcOperation<
   {
-    @path agentId: string
+    @path threadId: string
   },
-  Agent
+  AgentThread
 >;
 
 /**
- * Modifies an existing agent.
+ * Modifies an existing thread.
  *
- * @param updateAgentOptions The details of the modification to perform on a specified agent.
- * @returns The updated agent instance.
+ * @param threadId The ID of the thread to modify.
+ * @param updateAgentThreadOptions The details of the modification to perform on a specified thread.
+ * @returns Information about the modified thread.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
 #suppress "@azure-tools/typespec-azure-core/no-operation-id" "non-standard operations"
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
 @post
-@route("/agents/{agentId}")
+@route("/threads/{threadId}")
 @added(ServiceApiVersions.v2024_02_15_preview)
-op updateAgent is Azure.Core.RpcOperation<
+op updateThread is Azure.Core.RpcOperation<
   {
     /**
-     * The request details to use when modifying an existing agent.
+     * The details used to update an existing agent thread.
      */
-    ...UpdateAgentOptions
+    ...UpdateAgentThreadOptions
   },
-  Agent
+  AgentThread
 >;
 
 /**
- * Deletes an agent.
+ * Deletes an existing thread.
  *
- * @param agentId The ID of the agent to delete.
- * @returns Status information about the requested deletion operation.
+ * @param threadId The ID of the thread to delete.
+ * @returns Status information about the requested thread deletion operation.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
 #suppress "@azure-tools/typespec-azure-core/no-operation-id" "non-standard operations"
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
 @delete
-@route("/agents/{agentId}")
+@route("/threads/{threadId}")
 @added(ServiceApiVersions.v2024_02_15_preview)
-op deleteAgent is Azure.Core.RpcOperation<
+op deleteThread is Azure.Core.RpcOperation<
   {
-    @path agentId: string
+    @path threadId: string
   },
-  AgentDeletionStatus
+  ThreadDeletionStatus
 >;
