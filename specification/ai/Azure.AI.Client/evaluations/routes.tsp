@@ -15,19 +15,10 @@ namespace Azure.AI.Client.Evaluations;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Waiting for bug fix: https://github.com/Azure/typespec-azure-pr/issues/3739."
 @doc("Creates an evaluation.")
-@route("raisvc/v1.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/evaluations/create")
+@route("{endpoint}/raisvc/v1.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/evaluations/create")
 @post
 op create is Azure.Core.Foundations.Operation<
   {
-    @path
-    subscriptionId: string;
-
-    @path
-    resourceGroupName: string;
-
-    @path
-    workspaceName: string;
-
     @doc("Properties of Evaluation.")
     @evaluation
     body: Evaluation;
@@ -37,19 +28,10 @@ op create is Azure.Core.Foundations.Operation<
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Waiting for bug fix: https://github.com/Azure/typespec-azure-pr/issues/3739."
 @doc("List evaluations")
-@route("raisvc/v1.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/evaluations")
+@route("{endpoint}/raisvc/v1.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/evaluations")
 @get
 op list is Azure.Core.Foundations.Operation<
   {
-    @path
-    subscriptionId: string;
-
-    @path
-    resourceGroupName: string;
-
-    @path
-    workspaceName: string;
-
     ...StandardListQueryParameters;
   },
   PagedEvaluation
@@ -57,19 +39,10 @@ op list is Azure.Core.Foundations.Operation<
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Waiting for bug fix: https://github.com/Azure/typespec-azure-pr/issues/3739."
 @doc("Update an evaluation.")
-@route("raisvc/v1.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/evaluations/{id}")
+@route("{endpoint}/raisvc/v1.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/evaluations/{id}")
 @patch
 op update is Azure.Core.Foundations.Operation<
   {
-    @path
-    subscriptionId: string;
-
-    @path
-    resourceGroupName: string;
-
-    @path
-    workspaceName: string;
-
     @doc("Identifier of the evaluation.")
     @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_]*$")
     @maxLength(254)
