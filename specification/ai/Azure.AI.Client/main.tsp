@@ -2,9 +2,10 @@ import "@typespec/http";
 import "@typespec/rest";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
+import "./agents/main.tsp";
 import "./endpoints/routes.tsp";
-import "./agents/routes.tsp";
 import "./evaluations/routes.tsp";
+import "./vector_stores/main.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
