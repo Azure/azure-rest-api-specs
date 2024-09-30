@@ -26,7 +26,16 @@ These are the global settings for the ContainerInstance API.
 
 ``` yaml
 openapi-type: arm
-tag: package-preview-2024-05
+tag: package-preview-2024-10
+```
+
+### Tag: package-preview-2024-10
+
+These settings apply only when `--tag=package-preview-2024-10` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2024-10'
+input-file:
+  - Microsoft.ContainerInstance/preview/2024-10-01-preview/containerInstance.json
 ```
 
 ### Tag: package-preview-2024-05
@@ -214,6 +223,12 @@ suppressions:
       - containerInstance.json
     where:
       - $.definitions.ConfigMap.properties.keyValuePairs
+  - code: AvoidAdditionalProperties
+    reason: additional feature addition to existing secretVolumes which is defined as a dictionary
+    from:
+      - containerInstance.json
+    where:
+      - $.definitions.SecretReferenceVolume
 ```
 
 ---
