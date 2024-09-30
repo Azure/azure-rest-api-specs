@@ -54,8 +54,8 @@ namespace Azure.AI.Client {
 }
 
 @versioned(ServiceApiVersions)
-@doc("Azure APIs for Assistants.")
-namespace Azure.AI.Client.Assistants {
+@doc("Azure APIs for Agents.")
+namespace Azure.AI.Client.Agents {
   @doc("The known set of supported API versions.")
   enum ServiceApiVersions {
     @useDependency(Azure.Core.Versions.v1_0_Preview_2)
