@@ -35,15 +35,6 @@ namespace Azure.AI {
   {
     @doc("Azure AI Project endpoint.")
     endpoint: url = "https://management.azure.com",
-
-    @doc("The ID of the target subscription.")
-    subscriptionId: string,
-
-    @doc("The name of the Resource Group.")
-    resourceGroupName: string,
-
-    @doc("The name of the workspace (Azure AI Studio hub).")
-    workspaceName: string,
   }
 )
 @versioned(Versions)
