@@ -58,6 +58,6 @@ union ProposalStatus {
   @doc("Completed - status when a proposal is successfully transacted by purchase.")
   Completed: "Completed",
 
-  @doc("Ended")
+  @doc("Ended - status when a proposal is ended by the consumer.")
   Ended: "Ended",
 }
