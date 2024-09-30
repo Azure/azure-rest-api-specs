@@ -71,7 +71,7 @@
           "default": {
             "description": "Error response.",
             "schema": {
-              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -113,7 +113,7 @@
           "default": {
             "description": "Error response.",
             "schema": {
-              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -158,7 +158,7 @@
           "default": {
             "description": "Common error response.",
             "schema": {
-              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -214,7 +214,7 @@
           "default": {
             "description": "Common error response.",
             "schema": {
-              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -276,7 +276,7 @@
           "default": {
             "description": "Common error response.",
             "schema": {
-              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -326,7 +326,7 @@
           "default": {
             "description": "Common error response.",
             "schema": {
-              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -404,7 +404,7 @@
       "description": "Session pool private registry credentials.",
       "type": "object",
       "properties": {
-        "registryServer": {
+        "server": {
           "description": "Container registry server.",
           "type": "string"
         },
@@ -414,6 +414,10 @@
         },
         "passwordSecretRef": {
           "description": "The name of the secret that contains the registry login password",
+          "type": "string"
+        },
+        "identity": {
+          "description": "A Managed Identity to use to authenticate with Azure Container Registry. For user-assigned identities, use the full user-assigned identity Resource ID. For system-assigned identities, use 'system'",
           "type": "string"
         }
       }
