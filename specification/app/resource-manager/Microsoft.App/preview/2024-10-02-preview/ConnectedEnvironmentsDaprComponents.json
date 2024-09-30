@@ -326,17 +326,22 @@
       }
     },
     "ConnectedEnvironmentDaprComponent": {
-      "description": "Dapr component resource for connectedEnvironment.",
+      "description": "Dapr Component.",
       "type": "object",
       "allOf": [
         {
-          "$ref": "./CommonDefinitions.json#/definitions/DaprComponent"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
       ],
       "properties": {
         "properties": {
           "description": "Dapr component properties",
           "type": "object",
+          "allOf": [
+            {
+              "$ref": "./CommonDefinitions.json#/definitions/DaprComponentProperties"
+            }
+          ],
           "properties": {
             "provisioningState": {
               "description": "Provisioning state of the Connected Environment Dapr Component.",
