@@ -1,11 +1,15 @@
 import "@typespec/rest";
-import "@typespec/http";
+import "@azure-tools/typespec-autorest";
 import "@typespec/versioning";
+import "@azure-tools/typespec-azure-core";
 import "./models.tsp";
 
-using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.Rest;
 using TypeSpec.Versioning;
+using Azure.Core;
+using Azure.Core.Traits;
+using Azure.Core.Foundations;
 
 namespace Azure.AI.Client.Agents;
 
