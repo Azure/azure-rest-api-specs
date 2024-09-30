@@ -13,8 +13,8 @@ using Azure.ClientGenerator.Core;
 @useDependency(Azure.Core.Versions.v1_0_Preview_1)
 namespace Azure.Storage.Blob;
 
-@error
 /** The error response. */
+@error
 model StorageError {
   /** The error message. */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API"
@@ -28,13 +28,18 @@ model StorageError {
 model BlockLookupList {
   /** The committed blocks */
   @Xml.unwrapped
-  @Xml.name("Committed") committed: string[];
+  @Xml.name("Committed")
+  committed: string[];
+
   /** The uncommitted blocks */
   @Xml.unwrapped
-  @Xml.name("Uncommitted") uncommitted: string[];
+  @Xml.name("Uncommitted")
+  uncommitted: string[];
+
   /** The latest blocks */
   @Xml.unwrapped
-  @Xml.name("Latest") latest: string[];
+  @Xml.name("Latest")
+  latest: string[];
 }
 
 /** Represents an array of signed identifiers */
@@ -44,6 +49,7 @@ alias SignedIdentifiers = Array<SignedIdentifier>;
 model SignedIdentifier {
   /** The unique ID for the signed identifier. */
   @Xml.name("Id") id: string;
+
   /** The access policy for the signed identifier. */
   @Xml.name("AccessPolicy") accessPolicy: AccessPolicy;
 }
@@ -52,7 +58,8 @@ model SignedIdentifier {
 model FilterBlobSegment {
   /** The service endpoint. */
   @Xml.attribute
-  @Xml.name("ServiceEndpoint") serviceEndpoint: string;
+  @Xml.name("ServiceEndpoint")
+  serviceEndpoint: string;
 
   /** The filter for the blobs. */
   @Xml.name("Where") where: string;
@@ -87,42 +94,54 @@ model FilterBlobItem {
 union FilterBlobsIncludes {
   /** The filter includes no versions. */
   None: "none",
+
   /** The filter includes n versions. */
   Versions: "versions",
+
   /** Extensible */
-  string
+  string,
 }
 
 /** The account kind. */
 union AccountKind {
   /** The storage account is a general-purpose account. */
   Storage: "Storage",
+
   /** The storage account is a blob storage account. */
   BlobStorage: "BlobStorage",
+
   /** The storage account is a storage V2 account. */
   StorageV2: "StorageV2",
+
   /** The storage account is a file storage account. */
   FileStorage: "FileStorage",
+
   /** The storage account is a block blob storage account. */
   BlockBlobStorage: "BlockBlobStorage",
+
   /** Extensible */
-  string
+  string,
 }
 
 /** The SKU types */
 union SkuName {
   /** The standard LRS SKU. */
   StandardLRS: "Standard_LRS",
+
   /** The standard GRS SKU. */
   StandardGRS: "tandard_GRS",
+
   /** The standard RAGRS SKU. */
   StandardRAGRS: "Standard_RAGRS",
+
   /** The standard ZRS SKU. */
   StandardZRS: "Standard_ZRS",
+
   /** The premium LRS SKU. */
   PremiumLRS: "Premium_LRS",
+
   /** Extensible */
-  string
+  string,
 }
 
 /** The list container segement response */
@@ -130,7 +149,8 @@ union SkuName {
 model ListContainersSegmentResponse {
   /** The service endpoint. */
   @Xml.attribute
-  @Xml.name("ServiceEndpoint") serviceEndpoint: string; 
+  @Xml.name("ServiceEndpoint")
+  serviceEndpoint: string;
 
   /** The prefix of the containers. */
   @Xml.name("Prefix") prefix?: string;
@@ -170,14 +190,16 @@ model ContainerItem {
 /** The properties of a container. */
 model ContainerProperties {
   /** The date-time the container was created in RFC1123 format. */
-  @encode("date-time-rfc1123")
   #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
-  @Xml.name("Creation-Time") creationTime?: utcDateTime;
+  @encode("date-time-rfc1123")
+  @Xml.name("Creation-Time")
+  creationTime?: utcDateTime;
 
   /** The date-time the container was last modified in RFC1123 format. */
-  @encode("date-time-rfc1123")
   #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
-  @Xml.name("Last-Modified") lastModified: utcDateTime;
+  @encode("date-time-rfc1123")
+  @Xml.name("Last-Modified")
+  lastModified: utcDateTime;
 
   /** The ETag of the container. */
   @Xml.name("ETag") eTag: string;
@@ -202,31 +224,35 @@ model ContainerProperties {
 
   /** Whether to prevent encryption scope override. */
   @clientName("PreventEncryptionScopeOverride")
-  @Xml.name("DenyEncryptionScopeOverride") denyEncryptionScopeOverride?: boolean;
+  @Xml.name("DenyEncryptionScopeOverride")
+  denyEncryptionScopeOverride?: boolean;
 
   /** The has legal hold status of the container. */
   @Xml.name("HasLegalHold") hasLegalHold?: boolean;
 
   /** The deleted time of the container. */
-  @encode("date-time-rfc1123")
   #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
-  @Xml.name("DeletedTime") deletedTime?: utcDateTime;
+  @encode("date-time-rfc1123")
+  @Xml.name("DeletedTime")
+  deletedTime?: utcDateTime;
 
   /** The remaining retention days of the container. */
   @Xml.name("RemainingRetentionDays") remainingRetentionDays?: int32;
 
   /** Whether immutable storage with versioning is enabled. */
   @clientName("IsImmutableStorageWithVersioningEnabled")
-  @Xml.name("ImmutableStorageWithVersioningEnabled") immutableStorageWithVersioningEnabled?: boolean;
+  @Xml.name("ImmutableStorageWithVersioningEnabled")
+  immutableStorageWithVersioningEnabled?: boolean;
 }
 
 /** The metadata of a container. */
-@Xml.name("Metadata")
 #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Existing API"
+@Xml.name("Metadata")
 model ContainerMetadata is Record<string> {
   /** Whether the metadata is encrypted. */
   @Xml.attribute
-  @Xml.name("Encrypted") encrypted: string;
+  @Xml.name("Encrypted")
+  encrypted: string;
 }
 
 /** Stats for the storage service. */
@@ -239,6 +265,7 @@ model StorageServiceStats {
 model GeoReplication {
   /** The georeplication status. */
   @Xml.name("Status") status: GeoReplicationStatus;
+
   /** The last sync time. */
   @Xml.name("LastSyncTime") lastSyncTime: string;
 }
@@ -247,19 +274,22 @@ model GeoReplication {
 union GeoReplicationStatus {
   /** The geo replication is live. */
   Live: "live",
+
   /** The geo replication is bootstrap. */
   Bootstrap: "bootstrap",
+
   /** The geo replication is unavailable. */
   Unavailable: "unavailable",
+
   /** Extensible */
-  string
+  string,
 }
 
 /** Key information */
 model KeyInfo {
   /** The date-time the key is active. */
   @Xml.name("Start") start: string;
-  
+
   /** The date-time the key expires. */
   @Xml.name("Expiry") expiry: string;
 }
@@ -292,70 +322,85 @@ model UserDelegationKey {
 union PublicAccessType {
   /** Blob access. */
   Blob: "blob",
+
   /** Container access. */
   Container: "container",
+
   /** Extensible */
-  string
+  string,
 }
 
 /** The copy status. */
 union CopyStatus {
   /** The copy operation is pending. */
   Pending: "pending",
+
   /** The copy operation succeeded. */
   Success: "success",
+
   /** The copy operation failed. */
   Failed: "failed",
+
   /** The copy operation is aborted. */
   Aborted: "aborted",
+
   /** Extensible */
-  string
+  string,
 }
 
 /** The lease duration. */
 union LeaseDuration {
   /** The lease is of infinite duration. */
   Infinite: "infinite",
+
   /** The lease is of fixed duration. */
   Fixed: "fixed",
+
   /** Extensible */
-  string
+  string,
 }
 
 /** The lease state. */
 union LeaseState {
   /** The lease is available. */
   Available: "available",
+
   /** The lease is currently leased. */
   Leased: "leased",
+
   /** The lease is expired. */
   Expired: "expired",
+
   /** The lease is breaking. */
   Breaking: "breaking",
+
   /** The lease is broken. */
   Broken: "broken",
+
   /** Extensible */
-  string
+  string,
 }
 
 /** The lease status. */
 union LeaseStatus {
   /** The lease is unlocked. */
   Unlocked: "unlocked",
+
   /** The lease is locked. */
   Locked: "locked",
+
   /** Extensible */
-  string
+  string,
 }
 
 /** Represents an access policy. */
 model AccessPolicy {
   /** The date-time the policy is active. */
   @Xml.name("Start") start: utcDateTime;
-  
+
   /** The date-time the policy expires. */
   @Xml.name("Expiry") expiry: utcDateTime;
-  
+
   /** The permissions for acl the policy. */
   @Xml.name("Permission") permission: string;
 }
@@ -364,48 +409,66 @@ model AccessPolicy {
 union AccessTier {
   /** The hot P4 tier. */
   P4: "P4",
+
   /** The hot P6 tier. */
   P6: "P6",
+
   /** The hot P10 tier. */
   P10: "P10",
+
   /** The hot P15 tier. */
   P15: "P15",
+
   /** The hot P20 tier. */
   P20: "P20",
+
   /** The hot P30 tier. */
   P30: "P30",
+
   /** The hot P40 tier. */
   P40: "P40",
+
   /** The hot P50 tier. */
   P50: "P50",
+
   /** The hot P60 tier. */
   P60: "P60",
+
   /** The hot P70 tier. */
   P70: "P70",
+
   /** The hot P80 tier. */
   P80: "P80",
+
   /** The hot access tier. */
   Hot: "Hot",
+
   /** The cool access tier. */
   Cool: "Cool",
+
   /** The archive access tier. */
   Archive: "Archive",
+
   /** Extensible */
-  string
+  string,
 }
 
 /** The archive status. */
 union ArchiveStatus {
   /** The archive status is rehydrating pending to hot. */
   RehydratePendingToHot: "rehydrate-pending-to-hot",
+
   /** The archive status is rehydrating pending to cool. */
   RehydratePendingToCool: "rehydrate-pending-to-cool",
+
   /** The archive status is rehydrating pending to archive. */
   RehydratePendingToArchive: "rehydrate-pending-to-archive",
+
   /** The archive status is rehydrating pending to expired. */
   RehydratePendingToExpired: "rehydrate-pending-to-expired",
+
   /** Extensible */
-  string
+  string,
 }
 
 /** An Azure Storage Blob */
@@ -436,7 +499,8 @@ model BlobItemInternal {
   @Xml.name("BlobTags") blobTags?: BlobTag[];
 
   /** The object replication metadata of the blob. */
-  @Xml.name("ObjectReplicationMetadata") objectReplicationMetadata?: ObjectReplicationMetadata;
+  @Xml.name("ObjectReplicationMetadata")
+  objectReplicationMetadata?: ObjectReplicationMetadata;
 
   /** Whether the blog has versions only. */
   @Xml.name("HasVersionsOnly") hasVersionsOnly?: boolean;
@@ -446,14 +510,16 @@ model BlobItemInternal {
 @Xml.name("Properties")
 model BlobPropertiesInternal {
   /** The date-time the blob was created in RFC1123 format. */
-  @encode("date-time-rfc1123")
   #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
-  @Xml.name("Creation-Time") creationTime?: utcDateTime;
+  @encode("date-time-rfc1123")
+  @Xml.name("Creation-Time")
+  creationTime?: utcDateTime;
 
   /** The date-time the blob was last modified in RFC1123 format. */
-  @encode("date-time-rfc1123")
   #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
-  @Xml.name("Last-Modified") lastModified: utcDateTime;
+  @encode("date-time-rfc1123")
+  @Xml.name("Last-Modified")
+  lastModified: utcDateTime;
 
   /** The blog ETag. */
   @Xml.name("ETag") eTag: string;
@@ -507,9 +573,10 @@ model BlobPropertiesInternal {
   @Xml.name("CopyProgress") copyProgress?: string;
 
   /** The copy completion time of the blob. */
-  @encode("date-time-rfc1123")
   #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
-  @Xml.name("CopyCompletionTime") copyCompletionTime?: utcDateTime;
+  @encode("date-time-rfc1123")
+  @Xml.name("CopyCompletionTime")
+  copyCompletionTime?: utcDateTime;
 
   /** The copy status description of the blob. */
   @Xml.name("CopyStatusDescription") copyStatusDescription?: string;
@@ -524,9 +591,10 @@ model BlobPropertiesInternal {
   @Xml.name("DestinationSnapshot") destinationSnapshot?: string;
 
   /** The time the blob was deleted. */
-  @encode("date-time-rfc1123")
   #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
-  @Xml.name("DeletedTime") deletedTime?: utcDateTime;
+  @encode("date-time-rfc1123")
+  @Xml.name("DeletedTime")
+  deletedTime?: utcDateTime;
 
   /** The remaining retention days of the blob. */
   @Xml.name("RemainingRetentionDays") remainingRetentionDays?: int32;
@@ -544,39 +612,45 @@ model BlobPropertiesInternal {
   @Xml.name("EncryptionScope") encryptionScope?: string;
 
   /** The access tier change time of the blob. */
-  @encode("date-time-rfc1123")
   #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
-  @Xml.name("AccessTierChangeTime") accessTierChangeTime?: utcDateTime;
+  @encode("date-time-rfc1123")
+  @Xml.name("AccessTierChangeTime")
+  accessTierChangeTime?: utcDateTime;
 
   /** The number of tags for the blob. */
   @Xml.name("TagCount") tagCount?: int32;
 
-  @clientName("ExpiresOn")
   /** The expire time of the blob. */
-  @encode("date-time-rfc1123")
   #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
-  @Xml.name("Expiry-Time") expiryTime?: utcDateTime;
+  @clientName("ExpiresOn")
+  @encode("date-time-rfc1123")
+  @Xml.name("Expiry-Time")
+  expiryTime?: utcDateTime;
 
-  @clientName("IsSealed")
   /** Whether the blob is sealed. */
-  @Xml.name("Sealed") sealed?: boolean;
+  @clientName("IsSealed")
+  @Xml.name("Sealed")
+  sealed?: boolean;
 
   /** The rehydrate priority of the blob. */
   @Xml.name("RehydratePriority") rehydratePriority?: RehydratePriority;
 
   /** The last access time of the blob. */
-  @encode("date-time-rfc1123")
   #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
-  @Xml.name("LastAccessTime") lastAccessTime?: utcDateTime;
+  @encode("date-time-rfc1123")
+  @Xml.name("LastAccessTime")
+  lastAccessTime?: utcDateTime;
 
   /** The immutability policy until time of the blob. */
+  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
   @clientName("ImmutabilityPolicyExpiresOn")
   @encode("date-time-rfc1123")
-  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
-  @Xml.name("ImmutabilityPolicyUntilDate") immutabilityPolicyUntilDate?: utcDateTime;
+  @Xml.name("ImmutabilityPolicyUntilDate")
+  immutabilityPolicyUntilDate?: utcDateTime;
 
   /** The immutability policy mode of the blob. */
-  @Xml.name("ImmutabilityPolicyMode") immutabilityPolicyMode?: BlobImmutabilityPolicyMode;
+  @Xml.name("ImmutabilityPolicyMode")
+  immutabilityPolicyMode?: BlobImmutabilityPolicyMode;
 
   /** Whether the blob is under legal hold. */
   @Xml.name("LegalHold") legalHold?: boolean;
@@ -586,24 +660,30 @@ model BlobPropertiesInternal {
 union BlobImmutabilityPolicyMode {
   /** The immutability policy is mutable. */
   Mutable: "Mutable",
+
   /** The immutability policy is locked. */
   Locked: "Locked",
+
   /** The immutability policy is unlocked. */
   Unlocked: "Unlocked",
+
   /** Extensible */
-  string
+  string,
 }
 
 /** The blob type. */
 union BlobType {
   /** The blob is a block blob. */
   BlockBlob: "BlockBlob",
+
   /** The blob is a page blob. */
   PageBlob: "PageBlob",
+
   /** The blob is an append blob. */
   AppendBlob: "AppendBlob",
+
   /** Extensible */
-  string
+  string,
 }
 
 /** The rehydrate priority. */
@@ -611,10 +691,12 @@ union BlobType {
 union RehydratePriority {
   /** The rehydrate priority is high. */
   High: "High",
+
   /** The rehydrate priority is standard. */
   Standard: "Standard",
+
   /** Extensible */
-  string
+  string,
 }
 
 /** The blob metadata. */
@@ -622,13 +704,15 @@ union RehydratePriority {
 model BlobMetadata is Record<string> {
   /** Whether the blob metadata is encrypted. */
   @Xml.attribute
-  @Xml.name("Encrypted") encrypted: string;
+  @Xml.name("Encrypted")
+  encrypted: string;
 }
 
 /** The blob tags. */
 model BlobTag {
   /** The key of the tag. */
   @Xml.name("Key") key: string;
+
   /** The value of the tag. */
   @Xml.name("Value") value: string;
 }
@@ -642,16 +726,22 @@ model ObjectReplicationMetadata is Record<string>;
 model StorageServiceProperties {
   /** The logging properties. */
   @Xml.name("Logging") logging?: Logging;
+
   /** The hour metrics properties. */
   @Xml.name("HourMetrics") hourMetrics?: Metrics;
+
   /** The minute metrics properties. */
   @Xml.name("MinuteMetrics") minuteMetrics?: Metrics;
+
   /** The CORS properties. */
   @Xml.name("Cors") cors?: CorsRule[];
+
   /** The default service version. */
   @Xml.name("DefaultServiceVersion") defaultServiceVersion?: string;
+
   /** The delete retention policy. */
   @Xml.name("DeleteRetentionPolicy") deleteRetentionPolicy?: RetentionPolicy;
+
   /** The static website properties. */
   @Xml.name("StaticWebsite") staticWebsite?: StaticWebsite;
 }
@@ -660,6 +750,7 @@ model StorageServiceProperties {
 model StaticWebsite {
   /** The index document. */
   @Xml.name("IndexDocument") indexDocument?: string;
+
   /** The error document. */
   @Xml.name("ErrorDocument") errorDocument?: string;
 }
@@ -668,12 +759,16 @@ model StaticWebsite {
 model CorsRule {
   /** The allowed origins. */
   @Xml.name("AllowedOrigins") allowedOrigins: string;
+
   /** The allowed methods. */
   @Xml.name("AllowedMethods") allowedMethods: string;
+
   /** The allowed headers. */
   @Xml.name("AllowedHeaders") allowedHeaders: string;
+
   /** The exposed headers. */
   @Xml.name("ExposedHeaders") exposedHeaders: string;
+
   /** The maximum age in seconds. */
   @Xml.name("MaxAgeInSeconds") maxAgeInSeconds: int32;
 }
@@ -682,12 +777,16 @@ model CorsRule {
 model Metrics {
   /** The version of the metrics properties. */
   @Xml.name("Version") version?: string;
+
   /** Whether it is enabled. */
   @Xml.name("Enabled") enabled: boolean;
+
   /** Whether to include API in the metrics. */
   @Xml.name("IncludeAPIs") includeApis?: boolean;
+
   /** The retention policy of the metrics. */
   @Xml.name("RetentionPolicy") retentionPolicy?: RetentionPolicy;
+
   /** The service properties of the metrics. */
   @Xml.name("ServiceProperties") serviceProperties?: MetricsServiceProperties;
 }
@@ -696,6 +795,7 @@ model Metrics {
 model MetricsServiceProperties {
   /** The hour metrics properties. */
   @Xml.name("HourMetrics") hourMetrics: MetricsProperties;
+
   /** The minute metrics properties. */
   @Xml.name("MinuteMetrics") minuteMetrics: MetricsProperties;
 }
@@ -704,8 +804,10 @@ model MetricsServiceProperties {
 model MetricsProperties {
   /** Whether to include API in the metrics. */
   @Xml.name("Enabled") enabled: boolean;
+
   /** The version of the metrics properties. */
   @Xml.name("Version") version: string;
+
   /** The retention policy of the metrics. */
   @Xml.name("RetentionPolicy") retentionPolicy: RetentionPolicy;
 }
@@ -714,12 +816,16 @@ model MetricsProperties {
 model Logging {
   /** The version of the logging properties. */
   @Xml.name("Version") version: string;
+
   /** Whether delete operation is logged. */
   @Xml.name("Delete") delete: boolean;
+
   /** Whether read operation is logged. */
   @Xml.name("Read") read: boolean;
+
   /** Whether write operation is logged. */
   @Xml.name("Write") write: boolean;
+
   /** The retention policy of the logs. */
   @Xml.name("RetentionPolicy") retentionPolicy: RetentionPolicy;
 }
@@ -728,8 +834,10 @@ model Logging {
 model RetentionPolicy {
   /** Whether to enable the retention policy. */
   @Xml.name("Enabled") enabled: boolean;
+
   /** The number of days to retain the logs. */
   @Xml.name("Days") days: int32;
+
   /** Whether to allow permanent delete. */
   @Xml.name("AllowPermanentDelete") allowPermanentDelete: boolean;
 }
@@ -741,11 +849,13 @@ model RetentionPolicy {
 model ListBlobsFlatSegmentResponse {
   /** The service endpoint. */
   @Xml.attribute
-  @Xml.name("ServiceEndpoint") serviceEndpoint: string;
+  @Xml.name("ServiceEndpoint")
+  serviceEndpoint: string;
 
   /** The container name. */
   @Xml.attribute
-  @Xml.name("ContainerName") containerName: string;
+  @Xml.name("ContainerName")
+  containerName: string;
 
   /** The prefix of the blobs. */
   @Xml.name("Prefix") rrefix?: string;
@@ -819,8 +929,9 @@ model BlobTags {
 union QueryRequestTypeSqlOnly {
   /** The SQL request query type. */
   SQL: "SQL",
+
   /** Extensible */
-  string
+  string,
 }
 
 /** Groups the set of query request settings. */
@@ -851,10 +962,12 @@ model QueryFormat {
   @Xml.name("Type") type: QueryType;
 
   /** The delimited text configuration. */
-  @Xml.name("DelimitedTextConfiguration") delimitedTextConfiguration?: DelimitedTextConfiguration;
+  @Xml.name("DelimitedTextConfiguration")
+  delimitedTextConfiguration?: DelimitedTextConfiguration;
 
   /** The JSON text configuration. */
-  @Xml.name("JsonTextConfiguration") jsonTextConfiguration?: JsonTextConfiguration;
+  @Xml.name("JsonTextConfiguration")
+  jsonTextConfiguration?: JsonTextConfiguration;
 
   /** The Apache Arrow configuration. */
   @Xml.name("ArrowConfiguration") arrowConfiguration?: ArrowConfiguration;
@@ -902,10 +1015,13 @@ model ArrowConfiguration {
 model ArrowField {
   /** The arrow field type. */
   @Xml.name("Type") type: string;
+
   /** The arrow field name. */
   @Xml.name("Name") name?: string;
+
   /** The arrow field precision. */
   @Xml.name("Precision") precision?: int32;
+
   /** The arrow field scale. */
   @Xml.name("Scale") scale?: int32;
 }
@@ -920,16 +1036,19 @@ model ParquetConfiguration is Record<unknown>;
 union QueryType {
   /** The query format type is delimited. */
   Delimited: "delimited",
+
   /** The query format type is JSON. */
   JSON: "json",
+
   /** The query format type is Apache Arrow. */
   Arrow: "arrow",
+
   /** The query format type is Parquet. */
   Parquet: "parquet",
-  /** Extensible */
-  string
-}
 
+  /** Extensible */
+  string,
+}
 
 /// Parameters
 
@@ -937,7 +1056,8 @@ union QueryType {
 alias BlobContentMd5ResponseHeader = {
   /** If the blob has a MD5 hash, and if request contains range header (Range or x-ms-range), this response header is returned with the value of the whole blob's MD5 value. This value may or may not be equal to the value returned in Content-MD5 header, with the latter calculated from the requested range */
   @clientName("BlobContentMD5")
-  @header("x-ms-blob-content-md5") blobContentMd5: string;
+  @header("x-ms-blob-content-md5")
+  blobContentMd5: string;
 };
 
 /** The query request body parameter. */
@@ -951,54 +1071,63 @@ alias QueryRequestParameter = {
 alias BlobAppendOffsetResponseHeader = {
   /** This response header is returned only for append operations. It returns the offset at which the block was committed, in bytes. */
   @clientName("BlobAppendOffset")
-  @header("x-ms-blob-append-offset") blobAppendOffset: int64;
+  @header("x-ms-blob-append-offset")
+  blobAppendOffset: int64;
 };
 
 /** The blob condition append position parameter. */
 alias BlobConditionAppendPosParameter = {
   /** Optional conditional header, used only for the Append Block operation. A number indicating the byte offset to compare. Append Block will succeed only if the append position is equal to this number. If it is not, the request will fail with the AppendPositionConditionNotMet error (HTTP status code 412 - Precondition Failed). */
   @clientName("appendPosition")
-  @header("x-ms-blob-condition-appendpos") blobConditionAppendPosition: int64;
+  @header("x-ms-blob-condition-appendpos")
+  blobConditionAppendPosition: int64;
 };
 
 /** The blob condition max size parameter. */
 alias BlobConditionMaxSizeParameter = {
   /** Optional conditional header. The max length in bytes permitted for the append blob. If the Append Block operation would cause the blob to exceed that limit or if the blob size is already greater than the value specified in this header, the request will fail with MaxBlobSizeConditionNotMet error (HTTP status code 412 - Precondition Failed). */
   @clientName("maxSize")
-  @header("x-ms-blob-condition-maxsize") blobConditionMaxSize: int64;
+  @header("x-ms-blob-condition-maxsize")
+  blobConditionMaxSize: int64;
 };
 
 /** The sequence number action parameter. */
 alias SequenceNumberActionParameter = {
   /** Required if the x-ms-blob-sequence-number header is set for the request. This property applies to page blobs only. This property indicates how the service should modify the blob's sequence number */
   @clientName("sequenceNumberAction")
-  @header("x-ms-sequence-number-action") sequenceNumberAction: SequenceNumberActionType;
+  @header("x-ms-sequence-number-action")
+  sequenceNumberAction: SequenceNumberActionType;
 };
 
 /** The sequence number actions. */
 union SequenceNumberActionType {
   /** Increment the sequence number. */
   Increment: "increment",
+
   /** Set the maximum for the sequence number. */
   Max: "max",
+
   /** Update the sequence number. */
   Update: "update",
+
   /** Extensible */
-  string
+  string,
 }
 
 /** The sequence number parameter. */
 alias SequenceNumberParameter = {
   /** Set for page blobs only. The sequence number is a user-controlled value that you can use to track requests. The value of the sequence number must be between 0 and 2^63 - 1. */
   @clientName("blobSequenceNumber")
-  @header("x-ms-blob-sequence-number") blobSequenceNumber : int64;
+  @header("x-ms-blob-sequence-number")
+  blobSequenceNumber: int64;
 };
 
 /** The blob content length required parameter. */
 alias BlobContentLengthRequired = {
   /** This header specifies the maximum size for the page blob, up to 1 TB. The page blob size must be aligned to a 512-byte boundary. */
   @clientName("blobContentLength")
-  @header("x-ms-blob-content-length") blobContentLength: int64;
+  @header("x-ms-blob-content-length")
+  blobContentLength: int64;
 };
 
 /** The previous snapshot parameter. */
@@ -1012,148 +1141,168 @@ alias PrevSnapshotParameter = {
 alias PrevSnapshotUrlParameter = {
   /** Optional. This header is only supported in service versions 2019-04-19 and after and specifies the URL of a previous snapshot of the target blob. The response will only contain pages that were changed between the target blob and its previous snapshot. */
   @clientName("prevSnapshotUrl")
-  @header("x-ms-previous-snapshot-url") previousSnapshotUrl: string;
+  @header("x-ms-previous-snapshot-url")
+  previousSnapshotUrl: string;
 };
 
 /** The is immutable storage with versioning enable response header. */
 alias IsImmutableStorageWithVersioningEnabledResponseHeader = {
   /** Indicates whether version level worm is enabled on a container */
   @clientName("IsImmutableStorageWithVersioningEnabled")
-  @header("x-ms-immutable-storage-with-versioning-enabled") immutableStorageWithVersioningEnabled: boolean;
+  @header("x-ms-immutable-storage-with-versioning-enabled")
+  immutableStorageWithVersioningEnabled: boolean;
 };
 
 /** The deny encryption scope override response header. */
 alias DenyEncryptionScopeOverrideResponseHeader = {
   /** If a blob has a lease and the lease is of infinite duration then the value of this header is set to true, otherwise it is set to false. */
   @clientName("DenyEncryptionScopeOverride")
-  @header("x-ms-deny-encryption-scope-override") denyEncryptionScopeOverride: boolean;
+  @header("x-ms-deny-encryption-scope-override")
+  denyEncryptionScopeOverride: boolean;
 };
 
 /** The default encryption scope response header. */
 alias DefaultEncryptionScopeResponseHeader = {
   /** The default encryption scope for the container. */
   @clientName("DefaultEncryptionScope")
-  @header("x-ms-default-encryption-scope") defaultEncryptionScope: string;
+  @header("x-ms-default-encryption-scope")
+  defaultEncryptionScope: string;
 };
 
 /** The has legal hold response header. */
 alias HasLegalHoldResponseHeader = {
   /** Indicates if a blob has a legal hold. */
   @clientName("HasLegalHold")
-  @header("x-ms-legal-hold") legalHold: boolean;
+  @header("x-ms-legal-hold")
+  legalHold: boolean;
 };
 
 /** The has immutability policy response header. */
 alias HasImmutabilityPolicyResponseHeader = {
   /** Indicates if a blob has an active immutability policy. */
   @clientName("HasImmutabilityPolicy")
-  @header("x-ms-has-immutability-policy") hasImmutabilityPolicy: boolean;
+  @header("x-ms-has-immutability-policy")
+  hasImmutabilityPolicy: boolean;
 };
 
 /** The public access response header. */
 alias PublicAccessResponseHeader = {
   /** The public access setting for the container. */
   @clientName("PublicAccess")
-  @header("x-ms-blob-public-access") publicAccess: PublicAccessType;
+  @header("x-ms-blob-public-access")
+  publicAccess: PublicAccessType;
 };
 
 /** The rehydrate priority response header. */
 alias RehydratePriorityResponseHeader = {
   /** If an object is in rehydrate pending state then this header is returned with priority of rehydrate. Valid values are High and Standard. */
   @clientName("RehydratePriority")
-  @header("x-ms-rehydrate-priority") rehydratePriority: RehydratePriority;
+  @header("x-ms-rehydrate-priority")
+  rehydratePriority: RehydratePriority;
 };
 
 /** The expires on response header. */
 alias ExpiresOnResponseHeader = {
   /** UTC date/time value generated by the service that indicates the time at which the blob will expire. */
+  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
   @clientName("ExpiresOn")
   @encode("date-time-rfc1123")
-  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
-  @header("x-ms-expiry-time") expiryTime: utcDateTime;
+  @header("x-ms-expiry-time")
+  expiryTime: utcDateTime;
 };
 
 /** The access tier change time response header. */
 alias AccessTierChangeTimeResponseHeader = {
   /** The time the tier was changed on the object. This is only returned if the tier on the block blob was ever set. */
+  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
   @encode("date-time-rfc1123")
   @clientName("AccessTierChangeTime")
-  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
-  @header("x-ms-access-tier-change-time") accessTierChangeTime: utcDateTime;
+  @header("x-ms-access-tier-change-time")
+  accessTierChangeTime: utcDateTime;
 };
 
 /** The archive status response header. */
 alias ArchiveStatusResponseHeader = {
   /** For blob storage LRS accounts, valid values are rehydrate-pending-to-hot/rehydrate-pending-to-cool. If the blob is being rehydrated and is not complete then this header is returned indicating that rehydrate is pending and also tells the destination tier. */
   @clientName("ArchiveStatus")
-  @header("x-ms-archive-status") archiveStatus: ArchiveStatus;
+  @header("x-ms-archive-status")
+  archiveStatus: ArchiveStatus;
 };
 
 /** The access tier inferred response header. */
 alias AccessTierInferredResponseHeader = {
   /** For page blobs on a premium storage account only. If the access tier is not explicitly set on the blob, the tier is inferred based on its content length and this header will be returned with true value. */
   @clientName("AccessTierInferred")
-  @header("x-ms-access-tier-inferred") accessTierInferred: boolean;
+  @header("x-ms-access-tier-inferred")
+  accessTierInferred: boolean;
 };
 
 /** The access tier response header. */
 alias AccessTierResponseHeader = {
   /** The tier of page blob on a premium storage account or tier of block blob on blob storage LRS accounts. For a list of allowed premium page blob tiers, see https://docs.microsoft.com/en-us/azure/virtual-machines/windows/premium-storage#features. For blob storage LRS accounts, valid values are Hot/Cool/Archive. */
   @clientName("AccessTier")
-  @header("x-ms-access-tier") accessTier: AccessTier;
+  @header("x-ms-access-tier")
+  accessTier: AccessTier;
 };
 
 /** The destination snapshot response header. */
 alias DestinationSnapshotResponseHeader = {
   /** Included if the blob is incremental copy blob or incremental copy snapshot, if x-ms-copy-status is success. Snapshot time of the last successful incremental copy snapshot for this blob. */
   @clientName("DestinationSnapshot")
-  @header("x-ms-copy-destination-snapshot") copyDestinationSnapshot: string;
+  @header("x-ms-copy-destination-snapshot")
+  copyDestinationSnapshot: string;
 };
 
 /** The is incremental copy response header. */
 alias IsIncrementalCopyResponseHeader = {
   /** Included if the blob is incremental copy blob. */
   @clientName("IsIncrementalCopy")
-  @header("x-ms-incremental-copy") incrementalCopy: boolean;
+  @header("x-ms-incremental-copy")
+  incrementalCopy: boolean;
 };
 
 /** The immutability policy expires on response header. */
 alias ImmutabilityPolicyExpiresOnResponseHeader = {
   /** UTC date/time value generated by the service that indicates the time at which the blob immutability policy will expire. */
+  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
   @clientName("ImmutabilityPolicyExpiresOn")
   @encode("date-time-rfc1123")
-  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
-  @header("x-ms-immutability-policy-until-date") immutabilityPolicyUntilDate: utcDateTime;
+  @header("x-ms-immutability-policy-until-date")
+  immutabilityPolicyUntilDate: utcDateTime;
 };
 
 /** The last accessed response header. */
 alias LastAccessedResponseHeader = {
   /** UTC date/time value generated by the service that indicates the time at which the blob was last read or written to */
+  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
   @clientName("LastAccessed")
   @encode("date-time-rfc1123")
-  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
-  @header("x-ms-last-access-time") lastAccessTime: utcDateTime;
+  @header("x-ms-last-access-time")
+  lastAccessTime: utcDateTime;
 };
 
 /** The is sealed response header. */
 alias IsSealedResponseHeader = {
   /** If this blob has been sealed */
   @clientName("IsSealed")
-  @header("x-ms-blob-sealed") blobSealed: boolean;
+  @header("x-ms-blob-sealed")
+  blobSealed: boolean;
 };
 
 /** The tag count response header. */
 alias TagCountResponseHeader = {
   /** The number of tags associated with the blob */
   @clientName("TagCount")
-  @header("x-ms-tag-count") tagCount: int64;
+  @header("x-ms-tag-count")
+  tagCount: int64;
 };
 
 /** The blob committed block count response header. */
 alias BlobCommittedBlockCountResponseHeader = {
   /** The number of committed blocks present in the blob. This header is returned only for append blobs. */
   @clientName("BlobCommittedBlockCount")
-  @header("x-ms-blob-committed-block-count") blobCommittedBlockCount: int32;
+  @header("x-ms-blob-committed-block-count")
+  blobCommittedBlockCount: int32;
 };
 
 /** The accept ranges response header. */
@@ -1166,114 +1315,130 @@ alias AcceptRangesResponseHeader = {
 alias IsCurrentVersionResponseHeader = {
   /** The value of this header indicates whether version of this blob is a current version, see also x-ms-version-id header. */
   @clientName("IsCurrentVersion")
-  @header("x-ms-is-current-version") isCurrentVersion: boolean;
+  @header("x-ms-is-current-version")
+  isCurrentVersion: boolean;
 };
 
 /** The lease status response header. */
 alias LeaseStatusResponseHeader = {
   /** The lease status of the blob. */
   @clientName("LeaseStatus")
-  @header("x-ms-lease-status") leaseStatus: LeaseStatus;
+  @header("x-ms-lease-status")
+  leaseStatus: LeaseStatus;
 };
 
 /** The lease state response header. */
 alias LeaseStateResponseHeader = {
   /** Lease state of the blob. */
   @clientName("LeaseState")
-  @header("x-ms-lease-state") leaseState: LeaseState;
+  @header("x-ms-lease-state")
+  leaseState: LeaseState;
 };
 
 /** The lease duration response header. */
 alias LeaseDurationResponseHeader = {
   /** When a blob is leased, specifies whether the lease is of infinite or fixed duration. */
   @clientName("LeaseDuration")
-  @header("x-ms-lease-duration") leaseDuration: LeaseDuration;
+  @header("x-ms-lease-duration")
+  leaseDuration: LeaseDuration;
 };
 
 /** The copy source response header. */
 alias CopySourceResponseHeader = {
   /** URL up to 2 KB in length that specifies the source blob or file used in the last attempted Copy Blob operation where this blob was the destination blob. This header does not appear if this blob has never been the destination in a Copy Blob operation, or if this blob has been modified after a concluded Copy Blob operation using Set Blob Properties, Put Blob, or Put Block List. */
   @clientName("CopySource")
-  @header("x-ms-copy-source") copySource: string;
+  @header("x-ms-copy-source")
+  copySource: string;
 };
 
 /** The copy progress response header. */
 alias CopyProgressResponseHeader = {
   /** Contains the number of bytes copied and the total bytes in the source in the last attempted Copy Blob operation where this blob was the destination blob. Can show between 0 and Content-Length bytes copied. This header does not appear if this blob has never been the destination in a Copy Blob operation, or if this blob has been modified after a concluded Copy Blob operation using Set Blob Properties, Put Blob, or Put Block List */
   @clientName("CopyProgress")
-  @header("x-ms-copy-progress") copyProgress: string;
+  @header("x-ms-copy-progress")
+  copyProgress: string;
 };
 
 /** The copy status description response header. */
 alias CopyStatusDescriptionResponseHeader = {
   /** Only appears when x-ms-copy-status is failed or pending. Describes the cause of the last fatal or non-fatal copy operation failure. This header does not appear if this blob has never been the destination in a Copy Blob operation, or if this blob has been modified after a concluded Copy Blob operation using Set Blob Properties, Put Blob, or Put Block List */
   @clientName("CopyStatusDescription")
-  @header("x-ms-copy-status-description") copyStatusDescription: string;
+  @header("x-ms-copy-status-description")
+  copyStatusDescription: string;
 };
 
 /** The copy completion time response header. */
 alias CopyCompletionTimeResponseHeader = {
   /** Conclusion time of the last attempted Copy Blob operation where this blob was the destination blob. This value can specify the time of a completed, aborted, or failed copy attempt. This header does not appear if a copy is pending, if this blob has never been the destination in a Copy Blob operation, or if this blob has been modified after a concluded Copy Blob operation using Set Blob Properties, Put Blob, or Put Block List. */
+  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
   @clientName("CopyCompletionTime")
   @encode("date-time-rfc1123")
-  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
-  @header("x-ms-copy-completion-time") copyCompletionTime: utcDateTime;
+  @header("x-ms-copy-completion-time")
+  copyCompletionTime: utcDateTime;
 };
 
 /** The blob type response header. */
 alias BlobTypeResponseHeader = {
   /** The type of the blob. */
   @clientName("BlobType")
-  @header("x-ms-blob-type") blobType: BlobType;
+  @header("x-ms-blob-type")
+  blobType: BlobType;
 };
 
 /** The object replication policy response header. */
 alias ObjectReplicationPolicyIdResponseHeader = {
   /** Optional. Only valid when Object Replication is enabled for the storage container and on the destination blob of the replication. */
   @clientName("ObjectReplicationPolicyId")
-  @header("x-ms-or-policy-id") objectReplicationPolicyId: string;
+  @header("x-ms-or-policy-id")
+  objectReplicationPolicyId: string;
 };
 
 /** The range required put page from URL parameter. */
 alias RangeRequiredPutPageFromUrlParameter = {
   /** Bytes of source data in the specified range. The length of this range should match the ContentLength header and x-ms-range/Range destination range header. */
   @clientName("range")
-  @header("x-ms-range") range: string;
+  @header("x-ms-range")
+  range: string;
 };
 
 /** The source range required put page from URL parameter. */
 alias SourceRangeRequiredPutPageFromUrlParameter = {
   /** Bytes of source data in the specified range. The length of this range should match the ContentLength header and x-ms-range/Range destination range header. */
   @clientName("sourceRange")
-  @header("x-ms-source-range") sourceRange: string;
+  @header("x-ms-source-range")
+  sourceRange: string;
 };
 
 /** The if seuqnce number equal to parameter. */
 alias IfSequenceNumberEqualToParameter = {
   /** Specify this header value to operate only on a blob if it has the specified sequence number. */
   @clientName("ifSequenceNumberEqualTo")
-  @header("x-ms-if-sequence-number-eq") ifSequenceNumberEqualTo?: int64;
+  @header("x-ms-if-sequence-number-eq")
+  ifSequenceNumberEqualTo?: int64;
 };
 
 /** THe if sequence number less than parameter. */
 alias IfSequenceNumberLessThanParameter = {
   /** Specify this header value to operate only on a blob if it has a sequence number less than the specified. */
   @clientName("ifSequenceNumberLessThan")
-  @header("x-ms-if-sequence-number-lt") ifSequenceNumberLessThan?: int64;
+  @header("x-ms-if-sequence-number-lt")
+  ifSequenceNumberLessThan?: int64;
 };
 
 /** The if sequence number less than or equal to parameter. */
 alias IfSequenceNumberLessThanOrEqualToParameter = {
   /** Specify this header value to operate only on a blob if it has a sequence number less than or equal to the specified. */
   @clientName("ifSequenceNumberLessThanOrEqualTo")
-  @header("x-ms-if-sequence-number-le") ifSequenceNumberLessThanOrEqualTo?: int64;
+  @header("x-ms-if-sequence-number-le")
+  ifSequenceNumberLessThanOrEqualTo?: int64;
 };
 
 /** The blob content-length response header. */
 alias BlobContentLengthResponseHeader = {
   /** The size of the blob in bytes. */
   @clientName("blobContentLength")
-  @header("x-ms-blob-content-length") blobContentLength: int64;
+  @header("x-ms-blob-content-length")
+  blobContentLength: int64;
 };
 
 /** The block list type parameter. */
@@ -1288,12 +1453,15 @@ alias BlockListTypeParameter = {
 union BlockListType {
   /** The list of committed blocks. */
   Committed: "committed",
+
   /** The list of uncommitted blocks. */
   Uncomitted: "uncommitted",
+
   /** Both lists together. */
   All: "all",
+
   /** Extensible */
-  string
+  string,
 }
 
 /** The blob blocks body parameter. */
@@ -1306,21 +1474,24 @@ alias BlobBlocksParameter = {
 alias SourceContentCrc64Parameter = {
   /** Specify the crc64 calculated for the range of bytes that must be read from the copy source. */
   @clientName("sourceContentCrc64")
-  @header("x-ms-source-content-crc64") sourceContentCrc64?: string;
+  @header("x-ms-source-content-crc64")
+  sourceContentCrc64?: string;
 };
 
 /** The source range parameter. */
 alias SourceRangeParameter = {
   /** Bytes of source data in the specified range. */
   @clientName("sourceRange")
-  @header("x-ms-source-range") sourceRange: string;
+  @header("x-ms-source-range")
+  sourceRange: string;
 };
 
 /** The source URL parameter. */
 alias SourceUrlParameter = {
   /** Specify a URL to the copy source. */
   @clientName("sourceUrl")
-  @header("x-ms-source-url") sourceUrl: string;
+  @header("x-ms-source-url")
+  sourceUrl: string;
 };
 
 /** The Block ID parameter. */
@@ -1335,200 +1506,230 @@ alias BlockIdParameter = {
 alias IsHierarchicalNamespaceEnabledResponseHeader = {
   /** Version 2019-07-07 and newer. Indicates if the account has a hierarchical namespace enabled. */
   @clientName("IsHierarchicalNamespaceEnabled")
-  @header("x-ms-is-hns-enabled") isHierarchicalNamespaceEnabled: boolean;
+  @header("x-ms-is-hns-enabled")
+  isHierarchicalNamespaceEnabled: boolean;
 };
 
 /** The account kind response header. */
 alias AccountKindResponseHeader = {
   /** Identifies the account kind */
   @clientName("AccountKind")
-  @header("x-ms-account-kind") accountKind: AccountKind;
+  @header("x-ms-account-kind")
+  accountKind: AccountKind;
 };
 
 /** The SKU name response header. */
 alias SkuNameResponseHeader = {
   /** Identifies the sku name of the account */
   @clientName("SkuName")
-  @header("x-ms-sku-name") skuName: SkuName;
+  @header("x-ms-sku-name")
+  skuName: SkuName;
 };
 
 /** The access tier required parameter. */
 alias AccessTierRequiredParameter = {
   /** Indicates the tier to be set on the blob. */
   @clientName("AccessTier")
-  @header("x-ms-access-tier") accessTier: AccessTier;
+  @header("x-ms-access-tier")
+  accessTier: AccessTier;
 };
 
 /** The copy ID parameter. */
 alias CopyIdParameter = {
   /** The copy identifier provided in the x-ms-copy-id header of the original Copy Blob operation. */
   @clientName("CopyId")
-  @header("x-ms-copy-id") copyId: string;
+  @header("x-ms-copy-id")
+  copyId: string;
 };
 
 /** The content CRC 64 response header. */
 alias ContentCrc64ResponseHeader = {
   /** This response header is returned so that the client can check for the integrity of the copied content. */
   @clientName("ContentCrc64")
-  @header("x-ms-content-crc64") contentCrc64: string;
+  @header("x-ms-content-crc64")
+  contentCrc64: string;
 };
 
 /** The copy status response header. */
 alias CopyStatusResponseHeader = {
   /** State of the copy operation identified by x-ms-copy-id. */
   @clientName("CopyStatus")
-  @header("x-ms-copy-status") copyStatus: CopyStatus;
+  @header("x-ms-copy-status")
+  copyStatus: CopyStatus;
 };
 
 /** The copy ID response header. */
 alias CopyIdResponseHeader = {
   /** String identifier for this copy operation. Use with Get Blob Properties to check the status of this copy operation, or pass to Abort Copy Blob to abort a pending copy. */
   @clientName("CopyId")
-  @header("x-ms-copy-id") copyId: string;
+  @header("x-ms-copy-id")
+  copyId: string;
 };
 
 /** The seal blob parameter. */
 alias SealBlobParameter = {
   /** Overrides the sealed state of the destination blob.  Service version 2019-12-12 and newer. */
   @clientName("SealBlob")
-  @header("x-ms-seal-blob") sealBlob?: boolean;
+  @header("x-ms-seal-blob")
+  sealBlob?: boolean;
 };
 
 /** The source if unmodified since parameter. */
 alias SourceIfUnmodifiedSinceParameter = {
   /** Specify this header value to operate only on a blob if it has not been modified since the specified date/time. */
+  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
   @clientName("sourceIfUnmodifiedSince")
   @encode("date-time-rfc1123")
-  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
-  @header("x-ms-source-if-unmodified-since") sourceIfUnmodifiedSince?: utcDateTime;
+  @header("x-ms-source-if-unmodified-since")
+  sourceIfUnmodifiedSince?: utcDateTime;
 };
 
 /** The rehydrate priority parameter. */
 alias RehydratePriorityParameter = {
   /** Optional: Indicates the priority with which to rehydrate an archived blob. */
   @clientName("rehydratePriority")
-  @header("x-ms-rehydrate-priority") rehydratePriority?: RehydratePriority;
+  @header("x-ms-rehydrate-priority")
+  rehydratePriority?: RehydratePriority;
 };
 
 /** The snapshot response header. */
 alias SnapshotResponseHeader = {
   /** Uniquely identifies the snapshot and indicates the snapshot version. It may be used in subsequent requests to access the snapshot. */
   @clientName("Snapshot")
-  @header("x-ms-snapshot") snapshot: string;
+  @header("x-ms-snapshot")
+  snapshot: string;
 };
 
 /** The lease time response header. */
 alias LeaseTimeResponseHeader = {
   /** Approximate time remaining in the lease period, in seconds. */
   @clientName("LeaseTime")
-  @header("x-ms-lease-time") leaseTime: int32;
+  @header("x-ms-lease-time")
+  leaseTime: int32;
 };
 
 /** The lease break period parameter. */
 alias LeaseBreakPeriodParameter = {
   /** For a break operation, proposed duration the lease should continue before it is broken, in seconds, between 0 and 60. This break period is only used if it is shorter than the time remaining on the lease. If longer, the time remaining on the lease is used. A new lease will not be available before the break period has expired, but the lease may be held for longer than the break period. If this header does not appear with a break operation, a fixed-duration lease breaks after the remaining lease period elapses, and an infinite lease breaks immediately. */
   @clientName("breakPeriod")
-  @header("x-ms-lease-break-period") leaseBreakPeriod?: int32;
+  @header("x-ms-lease-break-period")
+  leaseBreakPeriod?: int32;
 };
 
 /** The lease ID required parameter. */
 alias LeaseIdRequiredParameter = {
   /** Required.  A lease ID for the source path. If specified, the source path must have an active lease and the lease ID must match. */
   @clientName("leaseId")
-  @header("x-ms-lease-id") leaseId: string;
+  @header("x-ms-lease-id")
+  leaseId: string;
 };
 
 /** The lease ID response header. */
 alias LeaseIdResponseHeader = {
   /** Uniquely identifies a blobs' lease */
   @clientName("LeaseId")
-  @header("x-ms-lease-id") leaseId: string;
+  @header("x-ms-lease-id")
+  leaseId: string;
 };
 
 /** The encryption scope response header. */
 alias EncryptionScopeResponseHeader = {
   /** If the blob has a MD5 hash, and if request contains range header (Range or x-ms-range), this response header is returned with the value of the whole blob's MD5 value. This value may or may not be equal to the value returned in Content-MD5 header, with the latter calculated from the requested range */
   @clientName("EncryptionScope")
-  @header("x-ms-encryption-scope") encryptionScope: string;
+  @header("x-ms-encryption-scope")
+  encryptionScope: string;
 };
 
 /** The encryption key SHA256 response header. */
 alias EncryptionKeySha256ResponseHeader = {
   /** The SHA-256 hash of the encryption key used to encrypt the blob. This header is only returned when the blob was encrypted with a customer-provided key. */
   @clientName("EncryptionKeySha256")
-  @header("x-ms-encryption-key-sha256") encryptionKeySha256: string;
+  @header("x-ms-encryption-key-sha256")
+  encryptionKeySha256: string;
 };
 
 /** The is server encrypted response header. */
 alias IsServerEncryptedResponseHeader = {
   /** The value of this header is set to true if the contents of the request are successfully encrypted using the specified algorithm, and false otherwise. */
   @clientName("isServerEncrypted")
-  @header("x-ms-request-server-encrypted") requestServerEncrypted?: boolean;
+  @header("x-ms-request-server-encrypted")
+  requestServerEncrypted?: boolean;
 };
 
 /** The legal hold response header. */
 alias LegalHoldResponseHeader = {
   /** Specifies the legal hold status to set on the blob. */
   @clientName("legalHold")
-  @header("x-ms-legal-hold") legalHold: boolean;
+  @header("x-ms-legal-hold")
+  legalHold: boolean;
 };
 
 /** The legal hold required parameter. */
 alias LegalHoldRequiredParameter = {
   /** Required.  Specifies the legal hold status to set on the blob. */
   @clientName("legalHold")
-  @header("x-ms-legal-hold") legalHold: boolean;
+  @header("x-ms-legal-hold")
+  legalHold: boolean;
 };
 
 /** The immutability policy mode response header. */
 alias ImmutabilityPolicyModeResponseHeader = {
   /** Indicates the immutability policy mode of the blob. */
   @clientName("ImmutabilityPolicyMode")
-  @header("x-ms-immutability-policy-mode") immutabilityPolicyMode: BlobImmutabilityPolicyMode;
+  @header("x-ms-immutability-policy-mode")
+  immutabilityPolicyMode: BlobImmutabilityPolicyMode;
 };
 
 /** The immutability policy expiration response header. */
 alias ImmutabilityPolicyExpiryResponseHeader = {
   /** Indicates the time the immutability policy will expire. */
+  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
   @encode("date-time-rfc1123")
   @clientName("ImmutabilityPolicyExpiry")
-  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
-  @header("x-ms-immutability-policy-until-date") immutabilityPolicyUntilDate: utcDateTime;
+  @header("x-ms-immutability-policy-until-date")
+  immutabilityPolicyUntilDate: utcDateTime;
 };
 
 /** The blob sequence number response header. */
 alias BlobSequenceNumberResponseHeader = {
   /** The current sequence number for a page blob. This header is not returned for block blobs or append blobs. */
   @clientName("BlobSequenceNumber")
-  @header("x-ms-blob-sequence-number") blobSequenceNumber: int64;
+  @header("x-ms-blob-sequence-number")
+  blobSequenceNumber: int64;
 };
 
 /** The blob expiration time parameter. */
 alias BlobExpiryTimeParameter = {
   /** The time to set the blob to expiry. */
   @clientName("ExpiresOn")
-  @header("x-ms-expiry-time") expiryTime: string;
+  @header("x-ms-expiry-time")
+  expiryTime: string;
 };
 
 /** The blob expiration options parameter. */
 alias BlobExpiryOptionsParameter = {
   /** Required. Indicates mode of the expiry time */
   @clientName("ExpiryOptions")
-  @header("x-ms-expiry-option") expiryOptions: BlobExpiryOptions;
+  @header("x-ms-expiry-option")
+  expiryOptions: BlobExpiryOptions;
 };
 
 /** The blob expiration options. */
 union BlobExpiryOptions {
   /** Never expire. */
   NeverExpire: "NeverExpire",
+
   /** Relative to creation time. */
   RelativeToCreation: "RelativeToCreation",
+
   /** Relative to now. */
   RelativeToNow: "RelativeToNow",
+
   /** Absolute time. */
   Absolute: "Absolute",
+
   /** Extensible */
-  string
+  string,
 }
 
 /** The Content-Language response header. */
@@ -1577,53 +1778,60 @@ alias ContentLengthResponseHeader = {
 alias VersionIdResponseHeader = {
   /** A DateTime value returned by the service that uniquely identifies the blob. The value of this header indicates the blob version, and may be used in subsequent requests to access this version of the blob. */
   @clientName("VersionId")
-  @header("x-ms-version-id") versionId: string;
+  @header("x-ms-version-id")
+  versionId: string;
 };
 
 /** The version response header. */
 alias VersionResponseHeader = {
   /** Indicates the version of the Blob service used to execute the request. This header is returned for requests made against version 2009-09-19 and above. */
   @clientName("Version")
-  @header("x-ms-version") version: string;
+  @header("x-ms-version")
+  version: string;
 };
 
 /** The creation time response header. */
 alias CreationTimeResponseHeader = {
   /** Returns the date and time the blob was created. */
+  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
   @encode("date-time-rfc1123")
   @clientName("CreationTime")
-  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
-  @header("x-ms-creation-time") creationTime: utcDateTime;
+  @header("x-ms-creation-time")
+  creationTime: utcDateTime;
 };
 
 /** The last modified response header */
 alias LastModifiedResponseHeader = {
   /** The date/time that the container was last modified. */
-  @encode("date-time-rfc1123")
   #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
-  @header("Last-Modified") lastModified: utcDateTime;
+  @encode("date-time-rfc1123")
+  @header("Last-Modified")
+  lastModified: utcDateTime;
 };
 
 /** The request ID response header. */
 alias RequestIdResponseHeader = {
   /** This header uniquely identifies the request that was made and can be used for troubleshooting the request. */
   @clientName("RequestId")
-  @header("x-ms-request-id") requestId: string;
+  @header("x-ms-request-id")
+  requestId: string;
 };
 
 /** The client request ID response header. */
 alias ClientRequestIdResponseHeader = {
   /** If a client request id header is sent in the request, this header will be present in the response with the same value. */
   @clientName("ClientRequestId")
-  @header("x-ms-client-request-id") clientRequestId?: string;
+  @header("x-ms-client-request-id")
+  clientRequestId?: string;
 };
 
 /** The Date response header */
 alias DateResponseHeader = {
   /** UTC date/time value generated by the service that indicates the time at which the response was initiated */
-  @encode("date-time-rfc1123")
   #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
-  @header("Date") date: utcDateTime;
+  @encode("date-time-rfc1123")
+  @header("Date")
+  date: utcDateTime;
 };
 
 /** The ETag response header */
@@ -1636,17 +1844,20 @@ alias EtagResponseHeader = {
 alias CopySourceTagsParameter = {
   /** Optional, default 'replace'.  Indicates if source tags should be copied or replaced with the tags specified by x-ms-tags. */
   @clientName("copySourceTags")
-  @header("x-ms-copy-source-tags") copySourceTags?: string;
+  @header("x-ms-copy-source-tags")
+  copySourceTags?: string;
 };
 
 /** The blob copy source tags types. */
 union BlobCopySourceTags {
   /** The replace blob source tags option. */
   Replace: "REPLACE",
+
   /** The copy blob source tags option. */
   Copy: "COPY",
+
   /** Extensible */
-  string
+  string,
 }
 
 /** The copy source authorization header parameter */
@@ -1708,10 +1919,10 @@ alias SourceIfNoneMatchParameter = {
 /** The source if modified since parameter. */
 alias SourceIfModifiedSinceParameter = {
   /** Specify this header value to operate only on a blob if it has been modified since the specified date/time. */
+  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
   @header("x-ms-source-if-modified-since")
   @clientName("sourceIfModifiedSince")
   @encode("date-time-rfc1123")
-  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
   sourceIfModifiedSince?: utcDateTime;
 };
 
@@ -1719,149 +1930,177 @@ alias SourceIfModifiedSinceParameter = {
 alias ContentCrc64Parameter = {
   /** Specify the transactional crc64 for the body, to be validated by the service. */
   @clientName("transactionalContentCrc64")
-  @header("x-ms-content-crc64") contentCrc64?: string;
+  @header("x-ms-content-crc64")
+  contentCrc64?: string;
 };
 
 /** The access tier optional parameter. */
 alias AccessTierOptionalParameter = {
   /** Optional.  The tier to be set on the blob. */
   @clientName("tier")
-  @header("x-ms-access-tier") accessTier?: AccessTier;
+  @header("x-ms-access-tier")
+  accessTier?: AccessTier;
 };
 
 /** The content MD5 parameter. */
 alias ContentMd5Parameter = {
   /** Optional. An MD5 hash of the blob content. Note that this hash is not validated, as the hashes for the individual blocks were validated when each was uploaded. */
   @clientName("transactionalContentMD5")
-  @header("Content-MD5") contentMd5?: string;
+  @header("Content-MD5")
+  contentMd5?: string;
 };
 
 /** The legal hold optional parameter. */
 alias LegalHoldOptionalParameter = {
   /** Specified if a legal hold should be set on the blob. */
   @clientName("legalHold")
-  @header("x-ms-legal-hold") legalHold?: boolean;
+  @header("x-ms-legal-hold")
+  legalHold?: boolean;
 };
 
 /** The immutability policy mode parameter. */
 alias ImmutabilityPolicyModeParameter = {
   /** Specifies the immutability policy mode to set on the blob. */
   @clientName("immutabilityPolicyMode")
-  @header("x-ms-immutability-policy-mode") immutabilityPolicyMode?: BlobImmutabilityPolicyMode;
+  @header("x-ms-immutability-policy-mode")
+  immutabilityPolicyMode?: BlobImmutabilityPolicyMode;
 };
 
 /** The immutability policy expiration parameter. */
 alias ImmutabilityPolicyExpiryParameter = {
   /** Specifies the date time when the blobs immutability policy is set to expire. */
+  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
   @clientName("immutabilityPolicyExpiry")
   @encode("date-time-rfc1123")
-  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
-  @header("x-ms-immutability-policy-until-date") immutabilityPolicyExpiry?: string;
+  @header("x-ms-immutability-policy-until-date")
+  immutabilityPolicyExpiry?: string;
 };
 
 /** The blobs tags header parameter. */
 alias BlobTagsHeaderParameter = {
   /** Optional.  Used to set blob tags in various blob operations. */
   @clientName("BlobTagsString")
-  @header("x-ms-tags") blobTags?: string;
+  @header("x-ms-tags")
+  blobTags?: string;
 };
 
 /** The blob sequence number parameter. */
 alias BlobSequenceNumberParameter = {
   /** Optional.  The sequence number is a user-controlled property that you can use to track requests. The value of the sequence number must be between 0 and 2^63 - 1. The default value is 0. */
   @clientName("blobSequenceNumber")
-  @header("x-ms-blob-sequence-number") blobSequenceNumber?: int64;
+  @header("x-ms-blob-sequence-number")
+  blobSequenceNumber?: int64;
 };
 
 /** The blob content length parameter. */
 alias BlobContentLengthRequiredParameter = {
   /** This header specifies the maximum size for the page blob, up to 1 TB. The page blob size must be aligned to a 512-byte boundary. */
   @clientName("blobContentLength")
-  @header("x-ms-blob-content-length") blobContentLength: int64;
+  @header("x-ms-blob-content-length")
+  blobContentLength: int64;
 };
 
 /** The encryption scope parameter. */
 alias EncryptionScopeParameter = {
   /** Optional.  Version 2019-07-07 and later.  Specifies the encryption scope to use to encrypt the data provided in the request. If not specified, the request will be encrypted with the root account key. */
   @clientName("encryptionScope")
-  @header("x-ms-encryption-scope") encryptionScope?: string;
+  @header("x-ms-encryption-scope")
+  encryptionScope?: string;
 };
 
 /** The blob content disposition parameter. */
 alias BlobContentDispositionParameter = {
   /** Optional. Sets the blob's content disposition. If specified, this property is stored with the blob and returned with a read request. */
   @clientName("blobContentDisposition")
-  @header("x-ms-blob-content-disposition") blobContentDisposition?: string;
+  @header("x-ms-blob-content-disposition")
+  blobContentDisposition?: string;
 };
 
 /** The blob cache control parameter. */
 alias BlobCacheControlParameter = {
   /** Optional. Sets the blob's cache control. If specified, this property is stored with the blob and returned with a read request. */
   @clientName("blobCacheControl")
-  @header("x-ms-blob-cache-control") blobCacheControl?: string;
+  @header("x-ms-blob-cache-control")
+  blobCacheControl?: string;
 };
 
 /** The blob content MD5 parameter. */
 alias BlobContentMd5Parameter = {
   /** Optional. An MD5 hash of the blob content. Note that this hash is not validated, as the hashes for the individual blocks were validated when each was uploaded. */
   @clientName("blobContentMD5")
-  @header("x-ms-blob-content-md5") blobContentMd5?: string;
+  @header("x-ms-blob-content-md5")
+  blobContentMd5?: string;
 };
 
 /** The blob content type parameter. */
 alias BlobContentLanguageParameter = {
   /** Optional. Set the blob's content language. If specified, this property is stored with the blob and returned with a read request. */
   @clientName("blobContentLanguage")
-  @header("x-ms-blob-content-language") blobContentLanguage?: string;
+  @header("x-ms-blob-content-language")
+  blobContentLanguage?: string;
 };
 
 /** The blob content type parameter. */
 alias BlobContentEncodingParameter = {
   /** Optional. Sets the blob's content encoding. If specified, this property is stored with the blob and returned with a read request. */
   @clientName("blobContentEncoding")
-  @header("x-ms-blob-content-encoding") blobContentEncoding?: string;
+  @header("x-ms-blob-content-encoding")
+  blobContentEncoding?: string;
 };
 
 /** The blob content type parameter. */
 alias BlobContentTypeParameter = {
   /** Optional. Sets the blob's content type. If specified, this property is stored with the blob and returned with a read request. */
   @clientName("blobContentType")
-  @header("x-ms-blob-content-type") blobContentType?: string;
+  @header("x-ms-blob-content-type")
+  blobContentType?: string;
 };
 
 /** The optional premium page blob access tier parameter. */
 model PremiumPageBlobAccessTierOptional {
   /** Optional. Indicates the tier to be set on the page blob. */
   @clientName("tier")
-  @header("x-ms-access-tier") accessTier?: PremiumPageBlobAccessTier;
-};
+  @header("x-ms-access-tier")
+  accessTier?: PremiumPageBlobAccessTier;
+}
 
 /** The premium page blob access tier types. */
 union PremiumPageBlobAccessTier {
   /** The premium page blob access tier is P4. */
   P4: "P4",
+
   /** The premium page blob access tier is P6. */
   P6: "P6",
+
   /** The premium page blob access tier is P10. */
   P10: "P10",
+
   /** The premium page blob access tier is P15. */
   P15: "P15",
+
   /** The premium page blob access tier is P20. */
   P20: "P20",
+
   /** The premium page blob access tier is P30. */
   P30: "P30",
+
   /** The premium page blob access tier is P40. */
   P40: "P40",
+
   /** The premium page blob access tier is P50. */
   P50: "P50",
+
   /** The premium page blob access tier is P60. */
   P60: "P60",
+
   /** The premium page blob access tier is P70. */
   P70: "P70",
+
   /** The premium page blob access tier is P80. */
   P80: "P80",
+
   /** Extensible */
-  string
+  string,
 }
 
 /** The blob name parameter. */
@@ -1886,67 +2125,77 @@ alias BlobDeleteTypeParameter = {
 union BlobDeleteType {
   /** Permanently delete the blob. */
   Permanent: "Permanent",
+
   /** Extensible */
-  string
+  string,
 }
 
 /** The delete snapshot parameter. */
 alias DeleteSnapshotsParameter = {
   /** Required if the blob has associated snapshots. Specify one of the following two options: include: Delete the base blob and all of its snapshots. only: Delete only the blob's snapshots and not the blob itself */
   @clientName("deleteSnapshots")
-  @header("x-ms-delete-snapshots") deleteSnapshots?: DeleteSnapshotsOptionType;
+  @header("x-ms-delete-snapshots")
+  deleteSnapshots?: DeleteSnapshotsOptionType;
 };
 
 /** The delete snapshots option type. */
 union DeleteSnapshotsOptionType {
   /** The delete snapshots include option is not specified. */
   Nonne: "none",
+
   /** The delete snapshots include option is include. */
   Include: "include",
+
   /** Extensible */
-  string
-};
+  string,
+}
 
 /** The encryption algorithm parameter. */
 alias EncryptionAlgorithmParameter = {
   /** Optional.  Version 2019-07-07 and later.  Specifies the algorithm to use for encryption. If not specified, the default is AES256. */
   @clientName("encryptionAlgorithm")
-  @header("x-ms-encryption-algorithm") encryptionAlgorithm?: string;
+  @header("x-ms-encryption-algorithm")
+  encryptionAlgorithm?: string;
 };
 
 /** The encryption key SHA256 hash parameter. */
 alias EncryptionKeySha256Parameter = {
   /** Optional.  Version 2019-07-07 and later.  Specifies the SHA256 hash of the encryption key used to encrypt the data provided in the request. This header is only used for encryption with a customer-provided key. If the request is authenticated with a client token, this header should be specified using the SHA256 hash of the encryption key. */
   @clientName("encryptionKeySha256")
-  @header("x-ms-encryption-key-sha256") encryptionKeySha256?: string;
+  @header("x-ms-encryption-key-sha256")
+  encryptionKeySha256?: string;
 };
 
 /** The encryption key parameter. */
 alias EncryptionKeyParameter = {
   /** Optional.  Version 2019-07-07 and later.  Specifies the encryption key to use to encrypt the data provided in the request. If not specified, the request will be encrypted with the root account key. */
   @clientName("encryptionKey")
-  @header("x-ms-encryption-key") encryptionKey?: string;
+  @header("x-ms-encryption-key")
+  encryptionKey?: string;
 };
 
 /** The If-Tags parameters. */
 alias IfTagsParameter = {
   /** Specify a SQL where clause on blob tags to operate only on blobs with a matching value. */
   @clientName("ifTags")
-  @header("x-ms-if-tags") ifTags?: string;
+  @header("x-ms-if-tags")
+  ifTags?: string;
 };
 
 /** The If-Match parameter. */
 alias IfMatchParameter = {
   /** A condition that must be met in order for the request to be processed. */
   @clientName("ifMatch")
-  @header("If-Match") ifMatch?: string;
+  @header("If-Match")
+  ifMatch?: string;
 };
 
 /** The If-None-Match parameter. */
 alias IfNoneMatchParameter = {
   /** A condition that must be met in order for the request to be processed. */
   @clientName("ifNoneMatch")
-  @header("If-None-Match") ifNoneMatch?: string;
+  @header("If-None-Match")
+  ifNoneMatch?: string;
 };
 
 /** The get range content CRC64 parameter. */
@@ -1965,7 +2214,8 @@ alias GetRangeContentMd5Parameter = {
 alias RangeParameter = {
   /** Return only the bytes of the blob in the specified range. */
   @clientName("range")
-  @header("x-ms-range") range?: string;
+  @header("x-ms-range")
+  range?: string;
 };
 
 /** The version ID parameter. */
@@ -1987,7 +2237,8 @@ alias SnapshotParameter = {
 model BlobName {
   /** Whether the blob name is encoded. */
   @Xml.attribute
-  @Xml.name("Encoded") encoded: boolean;
+  @Xml.name("Encoded")
+  encoded: boolean;
 
   /** The blob name. */
   @Xml.unwrapped content: string;
@@ -2014,11 +2265,13 @@ model BlobHierarchyListSegment {
 model ListBlobsHierarchySegmentResponse {
   /** The service endpoint. */
   @Xml.attribute
-  @Xml.name("ServiceEndpoint") serviceEndpoint: string;
+  @Xml.name("ServiceEndpoint")
+  serviceEndpoint: string;
 
   /** The container name. */
   @Xml.attribute
-  @Xml.name("ContainerName") containerName: string;
+  @Xml.name("ContainerName")
+  containerName: string;
 
   /** The delimiter of the blobs. */
   @Xml.name("Delimiter") delimiter?: string;
@@ -2048,74 +2301,92 @@ alias DelimiterParameter = {
 /** The list blob includes parameter. */
 alias ListBlobsIncludeParameter = {
   /** Include this parameter to specify one or more datasets to include in the response. */
-  @query({ format: "csv" }) include?: ListBlobsIncludes[];
+  @query({
+    format: "csv",
+  })
+  include?: ListBlobsIncludes[];
 };
 
 /** The list blob includes parameter values. */
 union ListBlobsIncludes {
   /** The include copies. */
   Copies: "copies",
+
   /** The include deleted blobs. */
   Deleted: "deleted",
+
   /** The include metadata. */
   Metadata: "metadata",
+
   /** The include snapshots. */
   Snapshots: "snapshots",
+
   /** The include uncommitted blobs. */
   UncommittedBlobs: "uncommittedblobs",
+
   /** The include versions. */
   Versions: "versions",
+
   /** The include tags. */
   Tags: "tags",
+
   /** The include immutable policy. */
   ImmutabilityPolicy: "immutabilitypolicy",
+
   /** The include legal hold. */
   LegalHold: "legalhold",
+
   /** The include deleted with versions. */
   DeletedWithVersions: "deletedwithversions",
+
   /** Extensible */
-  string
+  string,
 }
 
 /** The lease duration parameter. */
 alias LeaseDurationParameter = {
   /** Specifies the duration of the lease, in seconds, or negative one (-1) for a lease that never expires. A non-infinite lease can be between 15 and 60 seconds. A lease duration cannot be changed using renew or change. */
   @clientName("duration")
-  @header("x-ms-lease-duration") leaseDuration: int32;
+  @header("x-ms-lease-duration")
+  leaseDuration: int32;
 };
 
 /** The source lease ID header parameter. */
 alias SourceLeaseIdParameter = {
   /** A lease ID for the source path. If specified, the source path must have an active lease and the lease ID must match. */
   @clientName("sourceLeaseId")
-  @header("x-ms-source-lease-id") sourceLeaseId?: string;
+  @header("x-ms-source-lease-id")
+  sourceLeaseId?: string;
 };
 
 /** The source container name header parameter. */
 alias SourceContainerNameParameter = {
   /** Required.  Specifies the name of the container to rename. */
   @clientName("SourceContainerName")
-  @header("x-ms-source-container-name") sourceContainerName: string;
+  @header("x-ms-source-container-name")
+  sourceContainerName: string;
 };
 
 /** The deleted container name header. */
 alias DeletedContainerNameParameter = {
   /** Optional.  Version 2019-12-12 and later.  Specifies the name of the deleted container to restore. */
   @clientName("DeletedContainerName")
-  @header("x-ms-deleted-container-name") deletedContainerName?: string;
+  @header("x-ms-deleted-container-name")
+  deletedContainerName?: string;
 };
 
 /** The deleted container version header. */
 alias DeletedContainerVersionParameter = {
   /** Optional.  Version 2019-12-12 and later.  Specifies the version of the deleted container to restore. */
   @clientName("DeletedContainerVersion")
-  @header("x-ms-deleted-container-version") deletedContainerVersion?: string;
+  @header("x-ms-deleted-container-version")
+  deletedContainerVersion?: string;
 };
 
 /** The container ACL parameter. */
 alias ContainerAclParameter = {
-  #suppress "@azure-tools/typespec-azure-core/request-body-problem" "Existing API"
   /** The access control list for the container. */
+  #suppress "@azure-tools/typespec-azure-core/request-body-problem" "Existing API"
   @body
   acl: SignedIdentifiers;
 };
@@ -2130,19 +2401,21 @@ alias ContainerNameParameter = {
 /** The If-Unmodified-Since header. */
 alias IfUnmodifiedSinceParameter = {
   /** A date-time value. A request is made under the condition that the resource has not been modified since the specified date-time. */
+  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
   @encode("date-time-rfc1123")
   @clientName("ifUnmodifiedSince")
-  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
-  @header("If-Unmodified-Since") ifUnmodifiedSince?: utcDateTime;
+  @header("If-Unmodified-Since")
+  ifUnmodifiedSince?: utcDateTime;
 };
 
 /** The If-Modified-Since header. */
 alias IfModifiedSinceParameter = {
   /** A date-time value. A request is made under the condition that the resource has been modified since the specified date-time. */
+  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
   @encode("date-time-rfc1123")
   @clientName("ifModifiedSince")
-  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
-  @header("If-Modified-Since") ifModifiedSince?: utcDateTime;
+  @header("If-Modified-Since")
+  ifModifiedSince?: utcDateTime;
 };
 
 /** The lease ID parameter. */
@@ -2154,7 +2427,8 @@ alias LeaseIdOptionalParameter = {
 /** The deny encryption scope override parameter. */
 alias DenyEncryptionScopeOverrideParameter = {
   /** Optional.  Version 2019-07-07 and later.  Specifies that the request will fail if the target container does not have the same encryption scope as the source container. */
-  @header("x-ms-deny-encryption-scope-override") denyEncryptionScopeOverride?: boolean;
+  @header("x-ms-deny-encryption-scope-override")
+  denyEncryptionScopeOverride?: boolean;
 };
 
 /** The default encryption scope parameter. */
@@ -2167,25 +2441,29 @@ alias DefaultEncryptionScopeParameter = {
 alias BlobPublicAccessParameter = {
   /** Specifies whether data in the container may be accessed publicly and the level of access. Possible values include: 'container', 'blob'. */
   @clientName("access")
-  @header("x-ms-blob-public-access") publicAccess?: PublicAccessType;
+  @header("x-ms-blob-public-access")
+  publicAccess?: PublicAccessType;
 };
 
 // TODO: Figure out how to better represent this
 /** Optional. Specifies a user-defined name-value pair associated with the blob. If no name-value pairs are specified, the operation will copy the metadata from the source blob or file to the destination blob. If one or more name-value pairs are specified, the destination blob is created with the specified metadata, and metadata is not copied from the source blob or file. Note that beginning with version 2009-09-19, metadata names must adhere to the naming rules for C# identifiers. See Naming and Referencing Containers, Blobs, and Metadata for more information. */
-// @header("x-ms-meta") meta?: string; 
+// @header("x-ms-meta") meta?: string;
 #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Existing API"
 alias MetadataParameter = Record<string>;
 
 // TODO: Figure out how to better represent this
 /** Optional. Specifies a user-defined name-value pair associated with the blob. If no name-value pairs are specified, the operation will copy the metadata from the source blob or file to the destination blob. If one or more name-value pairs are specified, the destination blob is created with the specified metadata, and metadata is not copied from the source blob or file. Note that beginning with version 2009-09-19, metadata names must adhere to the naming rules for C# identifiers. See Naming and Referencing Containers, Blobs, and Metadata for more information. */
-// @header("x-ms-meta") meta?: string; 
+// @header("x-ms-meta") meta?: string;
 #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Existing API"
 alias MetadataResponseHeader = Record<string>;
 
 /** The filter blobs include parameter. */
 alias FilterBlobsIncludeParameter = {
   /** Include this parameter to specify one or more datasets to include in the response. */
-  @query({ format: "csv" }) include?: FilterBlobsIncludes[];
+  @query({
+    format: "csv",
+  })
+  include?: FilterBlobsIncludes[];
 };
 
 /** The filter blobs where parameter. */
@@ -2223,13 +2501,15 @@ alias PrefixParameter = {
 alias ClientRequestIdParameter = {
   /** Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled. */
   @clientName("requestId")
-  @header("x-ms-client-request-id") clientRequestId?: string;
+  @header("x-ms-client-request-id")
+  clientRequestId?: string;
 };
 
 /** The timeout parameter. */
 alias TimeoutParameter = {
   @doc("The timeout parameter is expressed in seconds. For more information, see <a href=\"https://docs.microsoft.com/en-us/rest/api/storageservices/fileservices/setting-timeouts-for-blob-service-operations\">Setting Timeouts for Blob Service Operations.</a>")
-  @query timeout?: int32;
+  @query
+  timeout?: int32;
 };
 
 /** The API version parameter. */

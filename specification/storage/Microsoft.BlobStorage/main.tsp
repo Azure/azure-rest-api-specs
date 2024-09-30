@@ -35,18 +35,23 @@ enum Versions {
   @useDependency(Azure.Core.Versions.v1_0_Preview_1)
   @doc("The 2020-10-02-preview version of the Azure.Storage.Blob service.")
   `2020-10-02-preview`,
+
   @doc("The 2020-12-06-preview version of the Azure.Storage.Blob service.")
   @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   `2020-12-06-preview`,
+
   @doc("The 2021-02-12-preview version of the Azure.Storage.Blob service.")
   @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   `2021-02-12-preview`,
+
   @doc("The 2021-04-10-preview version of the Azure.Storage.Blob service.")
   @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   `2021-04-10-preview`,
+
   @doc("The 2021-08-06-preview version of the Azure.Storage.Blob service.")
   @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   `2021-08-06-preview`,
+
   @doc("The 2021-12-02-preview version of the Azure.Storage.Blob service.")
   @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   `2021-12-02-preview`,
