@@ -84,6 +84,14 @@ model FleetProperties {
   @doc("List of VM sizes supported for Compute Fleet")
   vmSizesProfile: Array<VmSizeProfile>;
 
+  @added(Versions.v2024_11_01)
+  @doc("Attribute based Fleet.")
+  vmAttributes: VMAttributes;
+
+  @added(Versions.v2024_11_01)
+  @doc("Represents the configuration for additional locations where Fleet resources may be deployed.")
+  additionalLocationsProfile: AdditionalLocationsProfile;
+
   @doc("Compute Profile to use for running user's workloads.")
   computeProfile: ComputeProfile;
 
@@ -379,6 +387,21 @@ model VMAttributes{
   @extension("x-ms-identifiers", [])
   @doc("Specifies which VMSizes should be excluded while building Fleet. Optional parameter.")
   excludedVMSizes:  Array<string>;
+}
+
+@added(Versions.v2024_11_01)
+@doc("Represents the profile for a single additional location in the Fleet. The location and the (optional).")
+model LocationProfile{
+  @doc("The ARM location name of the additional region.")
+  location: string;
+}
+
+@added(Versions.v2024_11_01)
+@doc("Represents the configuration for additional locations where Fleet resources may be deployed.")
+model AdditionalLocationsProfile{
+  @extension("x-ms-identifiers", [])
+  @doc("The list of location profiles.")
+  locationProfiles: Array<LocationProfile>
 }
 
 @added(Versions.v2024_11_01)

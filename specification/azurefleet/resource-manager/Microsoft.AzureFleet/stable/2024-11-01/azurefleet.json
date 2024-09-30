@@ -468,6 +468,23 @@
     }
   },
   "definitions": {
+    "AdditionalLocationsProfile": {
+      "type": "object",
+      "description": "Represents the configuration for additional locations where Fleet resources may be deployed.",
+      "properties": {
+        "locationProfiles": {
+          "type": "array",
+          "description": "The list of location profiles.",
+          "items": {
+            "$ref": "#/definitions/LocationProfile"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "locationProfiles"
+      ]
+    },
     "AdditionalUnattendContent": {
       "type": "object",
       "description": "Specifies additional XML formatted information that can be included in the\nUnattend.xml file, which is used by Windows Setup. Contents are defined by\nsetting name, component name, and the pass in which the content is applied.",
@@ -1142,6 +1159,14 @@
           },
           "x-ms-identifiers": []
         },
+        "vmAttributes": {
+          "$ref": "#/definitions/VMAttributes",
+          "description": "Attribute based Fleet."
+        },
+        "additionalLocationsProfile": {
+          "$ref": "#/definitions/AdditionalLocationsProfile",
+          "description": "Represents the configuration for additional locations where Fleet resources may be deployed."
+        },
         "computeProfile": {
           "$ref": "#/definitions/ComputeProfile",
           "description": "Compute Profile to use for running user's workloads."
@@ -1160,6 +1185,8 @@
       },
       "required": [
         "vmSizesProfile",
+        "vmAttributes",
+        "additionalLocationsProfile",
         "computeProfile"
       ]
     },
@@ -1480,6 +1507,19 @@
           }
         ]
       }
+    },
+    "LocationProfile": {
+      "type": "object",
+      "description": "Represents the profile for a single additional location in the Fleet. The location and the (optional).",
+      "properties": {
+        "location": {
+          "type": "string",
+          "description": "The ARM location name of the additional region."
+        }
+      },
+      "required": [
+        "location"
+      ]
     },
     "ManagedServiceIdentityUpdate": {
       "type": "object",
