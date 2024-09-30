@@ -79,3 +79,15 @@ using Microsoft.ComputeSchedule;
   "csharp"
 );
 @@clientName(StartResourceOperationResponse.type, "ResourceType", "csharp");
+
+@@clientName(SubmitDeallocateRequest.correlationid, "correlationId", "csharp");
+@@clientName(SubmitStartRequest.correlationid, "correlationId", "csharp");
+@@clientName(SubmitHibernateRequest.correlationid, "correlationId", "csharp");
+@@clientName(ExecuteDeallocateRequest.correlationid, "correlationId", "csharp");
+@@clientName(ExecuteHibernateRequest.correlationid, "correlationId", "csharp");
+@@clientName(ExecuteStartRequest.correlationid, "correlationId", "csharp");
+@@clientName(GetOperationStatusRequest.correlationid,
+  "correlationId",
+  "csharp"
+);
+@@clientName(CancelOperationsRequest.correlationid, "correlationId", "csharp");
