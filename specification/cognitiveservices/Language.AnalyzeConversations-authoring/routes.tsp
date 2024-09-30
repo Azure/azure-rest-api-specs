@@ -84,7 +84,8 @@ interface ConversationalAnalysisAuthoring {
   @pollingOperation(ConversationalAnalysisAuthoring.getCopyProjectStatus)
   @added(Versions.v2023_04_15_preview)
   @actionSeparator("/:")
-  copy is languageOperations.LongRunningResourceAction<
+  @action("copy")
+  copyProject is languageOperations.LongRunningResourceAction<
     ConversationalAnalysisAuthoringProjectMetadata,
     ConversationalAnalysisAuthoringCopyProjectOptions,
    ConversationalAnalysisAuthoringProjectMetadata

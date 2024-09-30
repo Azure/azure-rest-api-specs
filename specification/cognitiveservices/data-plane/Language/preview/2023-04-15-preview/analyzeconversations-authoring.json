@@ -625,7 +625,7 @@
     },
     "/authoring/analyze-conversations/projects/{projectName}/:copy": {
       "post": {
-        "operationId": "ConversationalAnalysisAuthoring_Copy",
+        "operationId": "ConversationalAnalysisAuthoring_CopyProject",
         "description": "Copies an existing project to another Azure resource.",
         "parameters": [
           {
@@ -690,6 +690,11 @@
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Copy Project": {
+            "$ref": "./examples/SuccessfulCopyProject.json"
           }
         },
         "x-ms-long-running-operation": true
