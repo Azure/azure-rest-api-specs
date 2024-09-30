@@ -126,6 +126,15 @@ model ComputeProfile {
     This property cannot be updated.
     """)
   platformFaultDomainCount?: int32;
+  
+ @added(Versions.v2024_11_01)
+  @doc("""
+  Specifies VMSS and VM API entity models support two additional capabilities as of today: ultraSSDEnabled and hibernationEnabled.
+  ultraSSDEnabled: Enables UltraSSD_LRS storage account type on the VMSS VMs.
+  hibernationEnabled: Enables the hibernation capability on the VMSS VMs.
+  Default value is null if not specified. This property cannot be updated once set.
+  """)
+  additionalVirtualMachineCapabilities?: AdditionalCapabilities;
 }
 
 @doc("Specifications about a VM Size. This will also contain the corresponding rank and weight in future.")
@@ -219,7 +228,17 @@ union EvictionPolicy {
   Deallocate: "Deallocate",
 }
 
+@added(Versions.v2024_11_01)
+@doc("AdditionalCapabilities for VM.")
+model AdditionalCapabilities
+{
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "ultraSSDEnabled which does not follow camel casing"
+  @doc("The flag that enables or disables a capability to have one or more managed data disks with UltraSSD_LRS storage account type on the VM or VMSS. Managed disks with storage account type UltraSSD_LRS can be added to a virtual machine or virtual machine scale set only if this property is enabled.")
+  ultraSSDEnabled?: boolean;
 
+  @doc("The flag that enables or disables hibernation capability on the VM.")
+  hibernationEnabled?: boolean;
+}
 
 @added(Versions.v2024_11_01)
 @doc("While retrieving VMSizes from CRS, Min = 0 (uint.MinValue) if not specified, Max = 4294967295 (uint.MaxValue) if not specified. This allows to filter VMAttributes on all available VMSizes.")
@@ -394,6 +413,11 @@ model VMAttributes{
 model LocationProfile{
   @doc("The ARM location name of the additional region.")
   location: string;
+
+  @doc("""
+  Base Virtual Machine Profile Properties to be specified according to "specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/{computeApiVersion}/virtualMachineScaleSet.json#/definitions/VirtualMachineScaleSetVMProfile"
+  """)
+  virtualMachineProfileOverride: BaseVirtualMachineProfile;
 }
 
 @added(Versions.v2024_11_01)

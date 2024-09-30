@@ -468,6 +468,20 @@
     }
   },
   "definitions": {
+    "AdditionalCapabilities": {
+      "type": "object",
+      "description": "AdditionalCapabilities for VM.",
+      "properties": {
+        "ultraSSDEnabled": {
+          "type": "boolean",
+          "description": "The flag that enables or disables a capability to have one or more managed data disks with UltraSSD_LRS storage account type on the VM or VMSS. Managed disks with storage account type UltraSSD_LRS can be added to a virtual machine or virtual machine scale set only if this property is enabled."
+        },
+        "hibernationEnabled": {
+          "type": "boolean",
+          "description": "The flag that enables or disables hibernation capability on the VM."
+        }
+      }
+    },
     "AdditionalLocationsProfile": {
       "type": "object",
       "description": "Represents the configuration for additional locations where Fleet resources may be deployed.",
@@ -784,6 +798,10 @@
           "type": "integer",
           "format": "int32",
           "description": "Specifies the number of fault domains to use when creating the underlying VMSS.\nA fault domain is a logical group of hardware within an Azure datacenter.\nVMs in the same fault domain share a common power source and network switch.\nIf not specified, defaults to 1, which represents \"Max Spreading\" (using as many fault domains as possible).\nThis property cannot be updated."
+        },
+        "additionalVirtualMachineCapabilities": {
+          "$ref": "#/definitions/AdditionalCapabilities",
+          "description": "Specifies VMSS and VM API entity models support two additional capabilities as of today: ultraSSDEnabled and hibernationEnabled.\nultraSSDEnabled: Enables UltraSSD_LRS storage account type on the VMSS VMs.\nhibernationEnabled: Enables the hibernation capability on the VMSS VMs.\nDefault value is null if not specified. This property cannot be updated once set."
         }
       },
       "required": [
@@ -1515,10 +1533,15 @@
         "location": {
           "type": "string",
           "description": "The ARM location name of the additional region."
+        },
+        "virtualMachineProfileOverride": {
+          "$ref": "#/definitions/BaseVirtualMachineProfile",
+          "description": "Base Virtual Machine Profile Properties to be specified according to \"specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/{computeApiVersion}/virtualMachineScaleSet.json#/definitions/VirtualMachineScaleSetVMProfile\""
         }
       },
       "required": [
-        "location"
+        "location",
+        "virtualMachineProfileOverride"
       ]
     },
     "ManagedServiceIdentityUpdate": {
