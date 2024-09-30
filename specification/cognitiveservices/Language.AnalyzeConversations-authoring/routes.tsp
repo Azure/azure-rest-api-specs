@@ -502,29 +502,8 @@ ConversationalAnalysisAuthoringAssignedDeploymentResource
   /**
    * Gets the status of an existing assign deployment resources job.
    */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  @route("/authoring/analyze-conversations/projects/{projectName}/resources/assign/jobs/{jobId}")
-  @get
   @added(Versions.v2023_04_15_preview)
-  getAssignDeploymentResourcesStatus is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * The name of the project to use.
-       */
-      @maxLength(100)
-      @path
-      projectName: string;
-
-      /**
-       * The job ID.
-       */
-      @path
-      jobId: string;
-    },
-    ConversationalAnalysisAuthoringDeploymentResourcesJobState,
-    {},
-    ErrorResponse
-  >;
+  getAssignDeploymentResourcesStatus is languageOperations.ResourceRead<ConversationalAnalysisAuthoringDeploymentResourcesJobState>;
 
   /**
    * Gets the status of an existing unassign deployment resources job.
@@ -556,93 +535,25 @@ ConversationalAnalysisAuthoringAssignedDeploymentResource
   /**
    * Lists the non-expired training jobs created for a project.
    */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  @route("/authoring/analyze-conversations/projects/{projectName}/train/jobs")
-  @get
-  listTrainingJobs is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * The name of the project to use.
-       */
-      @maxLength(100)
-      @path
-      projectName: string;
-
-      /**
-       * The maximum number of resources to return from the collection.
-       */
-      @query("top")
-      top?: int32;
-
-      /**
-       * An offset into the collection of the first resource to be returned.
-       */
-      @query("skip")
-      skip?: int32;
-
-      /**
-       * The maximum number of resources to include in a single response.
-       */
-      @query("maxpagesize")
-      maxpagesize?: int32;
-    },
-    ConversationalAnalysisAuthoringTrainingJobs,
-    {},
-    ErrorResponse
-  >;
+  listTrainingJobs is languageOperations.ResourceList<ConversationalAnalysisAuthoringTrainingJobState,
+ListQueryParametersTrait<StandardListQueryParameters>>;
 
   /**
    * Gets the status for a training job.
    */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  @route("/authoring/analyze-conversations/projects/{projectName}/train/jobs/{jobId}")
-  @get
-  getTrainingStatus is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * The name of the project to use.
-       */
-      @maxLength(100)
-      @path
-      projectName: string;
-
-      /**
-       * The job ID.
-       */
-      @path
-      jobId: string;
-    },
-    ConversationalAnalysisAuthoringTrainingJobState,
-    {},
-    ErrorResponse
-  >;
+  getTrainingStatus is languageOperations.ResourceRead<ConversationalAnalysisAuthoringTrainingJobState>;
 
   /**
    * Triggers a cancellation for a running training job.
    */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  @route("/authoring/analyze-conversations/projects/{projectName}/train/jobs/{jobId}/:cancel")
-  @post
+  @actionSeparator("/:")
+  @action("cancel")
   @pollingOperation(ConversationalAnalysisAuthoring.getTrainingStatus)
-  cancelTrainingJob is Foundations.LongRunningOperation<
-    {
-      /**
-       * The name of the project to use.
-       */
-      @maxLength(100)
-      @path
-      projectName: string;
-
-      /**
-       * The job ID.
-       */
-      @path
-      jobId: string;
-    },
-    AcceptedResponse,
-    {},
-    ErrorResponse
-  >;
+  cancelTrainingJob is languageOperations.LongRunningResourceAction<
+  ConversationalAnalysisAuthoringTrainingJobState,
+  {},
+  ConversationalAnalysisAuthoringTrainingJobState
+>;
 
   /**
    * Gets the status for a project deletion job.

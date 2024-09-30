@@ -1359,6 +1359,8 @@ model ConversationalAnalysisAuthoringUnassignDeploymentResourcesOptions {
  */
 @added(Versions.v2023_04_15_preview)
 @clientName("DeploymentResourcesJobState", "csharp")
+@resource("resources/assign/jobs")
+@parentResource(ConversationalAnalysisAuthoringProjectMetadata)
 model ConversationalAnalysisAuthoringDeploymentResourcesJobState {
   ...ConversationalAnalysisAuthoringJobState;
 }
@@ -1383,6 +1385,8 @@ model ConversationalAnalysisAuthoringTrainingJobs {
  * Represents the state of a training job.
  */
 @clientName("TrainingJobState", "csharp")
+@resource("train/jobs")
+@parentResource(ConversationalAnalysisAuthoringProjectMetadata)
 model ConversationalAnalysisAuthoringTrainingJobState {
   ...ConversationalAnalysisAuthoringJobState;
 
