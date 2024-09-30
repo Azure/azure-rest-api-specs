@@ -3,7 +3,7 @@ import "@typespec/versioning";
 import "@azure-tools/typespec-azure-resource-manager";
 
 import "./proposal.tsp";
-import "./proposalExt.tsp";
+import "./product.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Versioning;

@@ -45,17 +45,17 @@
       "name": "Operations"
     },
     {
-      "name": "ProposalExtResources"
+      "name": "ProductResources"
     }
   ],
   "paths": {
-    "/{resourceUri}/providers/Microsoft.Proposal/proposalsCode": {
+    "/{resourceUri}/providers/Microsoft.Proposal/products": {
       "get": {
-        "operationId": "ProposalExtResources_ListByParent",
+        "operationId": "ProductResources_ListByParent",
         "tags": [
-          "ProposalExtResources"
+          "ProductResources"
         ],
-        "description": "List ProposalExtResource resources by parent",
+        "description": "List ProductResource resources by parent",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -68,7 +68,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ProposalExtResourceListResult"
+              "$ref": "#/definitions/ProductResourceListResult"
             }
           },
           "default": {
@@ -79,11 +79,8 @@
           }
         },
         "x-ms-examples": {
-          "ProposalExtResources_ListByParent": {
-            "$ref": "./examples/ProposalExtResources_ListByParent_MaximumSet_Gen.json"
-          },
-          "ProposalExtResources_ListByParent_MaximumSet_Gen": {
-            "$ref": "./examples/ProposalExtResources_ListByParent_MaximumSet_Gen.json"
+          "ProductResources_ListByParent": {
+            "$ref": "./examples/ProductResources_ListByParent_MaximumSet_Gen.json"
           }
         },
         "x-ms-pageable": {
@@ -91,13 +88,13 @@
         }
       }
     },
-    "/{resourceUri}/providers/Microsoft.Proposal/proposalsCode/{proposalProductCode}": {
+    "/{resourceUri}/providers/Microsoft.Proposal/products/{productCode}": {
       "get": {
-        "operationId": "ProposalExtResources_Get",
+        "operationId": "ProductResources_Get",
         "tags": [
-          "ProposalExtResources"
+          "ProductResources"
         ],
-        "description": "Get a ProposalExtResource",
+        "description": "Get a ProductResource",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -106,9 +103,9 @@
             "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
           },
           {
-            "name": "proposalProductCode",
+            "name": "productCode",
             "in": "path",
-            "description": "The name of the proposal",
+            "description": "The name of the product",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9-]{3,24}$"
@@ -118,7 +115,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ProposalExtResource"
+              "$ref": "#/definitions/ProductResource"
             }
           },
           "default": {
@@ -129,20 +126,17 @@
           }
         },
         "x-ms-examples": {
-          "ProposalExtResources_Get": {
-            "$ref": "./examples/ProposalExtResources_Get_MaximumSet_Gen.json"
-          },
-          "ProposalExtResources_Get_MaximumSet_Gen": {
-            "$ref": "./examples/ProposalExtResources_Get_MaximumSet_Gen.json"
+          "ProductResources_Get": {
+            "$ref": "./examples/ProductResources_Get_MaximumSet_Gen.json"
           }
         }
       },
       "put": {
-        "operationId": "ProposalExtResources_CreateOrUpdate",
+        "operationId": "ProductResources_CreateOrUpdate",
         "tags": [
-          "ProposalExtResources"
+          "ProductResources"
         ],
-        "description": "Create a ProposalExtResource",
+        "description": "Create a ProductResource",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -151,9 +145,9 @@
             "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
           },
           {
-            "name": "proposalProductCode",
+            "name": "productCode",
             "in": "path",
-            "description": "The name of the proposal",
+            "description": "The name of the product",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9-]{3,24}$"
@@ -164,21 +158,21 @@
             "description": "Resource create parameters.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ProposalExtResource"
+              "$ref": "#/definitions/ProductResource"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "Resource 'ProposalExtResource' update operation succeeded",
+            "description": "Resource 'ProductResource' update operation succeeded",
             "schema": {
-              "$ref": "#/definitions/ProposalExtResource"
+              "$ref": "#/definitions/ProductResource"
             }
           },
           "201": {
-            "description": "Resource 'ProposalExtResource' create operation succeeded",
+            "description": "Resource 'ProductResource' create operation succeeded",
             "schema": {
-              "$ref": "#/definitions/ProposalExtResource"
+              "$ref": "#/definitions/ProductResource"
             },
             "headers": {
               "Azure-AsyncOperation": {
@@ -200,11 +194,8 @@
           }
         },
         "x-ms-examples": {
-          "ProposalExtResources_CreateOrUpdate": {
-            "$ref": "./examples/ProposalExtResources_CreateOrUpdate_MaximumSet_Gen.json"
-          },
-          "ProposalExtResources_CreateOrUpdate_MaximumSet_Gen": {
-            "$ref": "./examples/ProposalExtResources_CreateOrUpdate_MaximumSet_Gen.json"
+          "ProductResources_CreateOrUpdate": {
+            "$ref": "./examples/ProductResources_CreateOrUpdate_MaximumSet_Gen.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -212,66 +203,12 @@
         },
         "x-ms-long-running-operation": true
       },
-      "patch": {
-        "operationId": "ProposalExtResources_Update",
-        "tags": [
-          "ProposalExtResources"
-        ],
-        "description": "Update a ProposalExtResource",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
-          },
-          {
-            "name": "proposalProductCode",
-            "in": "path",
-            "description": "The name of the proposal",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
-          },
-          {
-            "name": "properties",
-            "in": "body",
-            "description": "The resource properties to be updated.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ProposalExtResourceUpdate"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/ProposalExtResource"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "ProposalExtResources_Update": {
-            "$ref": "./examples/ProposalExtResources_Update_MaximumSet_Gen.json"
-          },
-          "ProposalExtResources_Update_MaximumSet_Gen": {
-            "$ref": "./examples/ProposalExtResources_Update_MaximumSet_Gen.json"
-          }
-        }
-      },
       "delete": {
-        "operationId": "ProposalExtResources_Delete",
+        "operationId": "ProductResources_Delete",
         "tags": [
-          "ProposalExtResources"
+          "ProductResources"
         ],
-        "description": "Delete a ProposalExtResource",
+        "description": "Delete a ProductResource",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -280,9 +217,9 @@
             "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
           },
           {
-            "name": "proposalProductCode",
+            "name": "productCode",
             "in": "path",
-            "description": "The name of the proposal",
+            "description": "The name of the product",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9-]{3,24}$"
@@ -303,11 +240,8 @@
           }
         },
         "x-ms-examples": {
-          "ProposalExtResources_Delete": {
-            "$ref": "./examples/ProposalExtResources_Delete_MaximumSet_Gen.json"
-          },
-          "ProposalExtResources_Delete_MaximumSet_Gen": {
-            "$ref": "./examples/ProposalExtResources_Delete_MaximumSet_Gen.json"
+          "ProductResources_Delete": {
+            "$ref": "./examples/ProductResources_Delete_MaximumSet_Gen.json"
           }
         }
       }
@@ -340,9 +274,6 @@
         },
         "x-ms-examples": {
           "Operations_List": {
-            "$ref": "./examples/Operations_List_MaximumSet_Gen.json"
-          },
-          "Operations_List_MaximumSet_Gen": {
             "$ref": "./examples/Operations_List_MaximumSet_Gen.json"
           }
         },
@@ -382,9 +313,6 @@
         },
         "x-ms-examples": {
           "ProposalResources_ListBySubscription": {
-            "$ref": "./examples/ProposalResources_ListBySubscription_MaximumSet_Gen.json"
-          },
-          "ProposalResources_ListBySubscription_MaximumSet_Gen": {
             "$ref": "./examples/ProposalResources_ListBySubscription_MaximumSet_Gen.json"
           }
         },
@@ -427,9 +355,6 @@
         },
         "x-ms-examples": {
           "ProposalResources_ListByResourceGroup": {
-            "$ref": "./examples/ProposalResources_ListByResourceGroup_MaximumSet_Gen.json"
-          },
-          "ProposalResources_ListByResourceGroup_MaximumSet_Gen": {
             "$ref": "./examples/ProposalResources_ListByResourceGroup_MaximumSet_Gen.json"
           }
         },
@@ -480,9 +405,6 @@
         },
         "x-ms-examples": {
           "ProposalResources_Get": {
-            "$ref": "./examples/ProposalResources_Get_MaximumSet_Gen.json"
-          },
-          "ProposalResources_Get_MaximumSet_Gen": {
             "$ref": "./examples/ProposalResources_Get_MaximumSet_Gen.json"
           }
         }
@@ -555,9 +477,6 @@
         "x-ms-examples": {
           "ProposalResources_CreateOrUpdate": {
             "$ref": "./examples/ProposalResources_CreateOrUpdate_MaximumSet_Gen.json"
-          },
-          "ProposalResources_CreateOrUpdate_MaximumSet_Gen": {
-            "$ref": "./examples/ProposalResources_CreateOrUpdate_MaximumSet_Gen.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -616,9 +535,6 @@
         "x-ms-examples": {
           "ProposalResources_Update": {
             "$ref": "./examples/ProposalResources_Update_MaximumSet_Gen.json"
-          },
-          "ProposalResources_Update_MaximumSet_Gen": {
-            "$ref": "./examples/ProposalResources_Update_MaximumSet_Gen.json"
           }
         }
       },
@@ -664,9 +580,6 @@
         "x-ms-examples": {
           "ProposalResources_Delete": {
             "$ref": "./examples/ProposalResources_Delete_MaximumSet_Gen.json"
-          },
-          "ProposalResources_Delete_MaximumSet_Gen": {
-            "$ref": "./examples/ProposalResources_Delete_MaximumSet_Gen.json"
           }
         }
       }
@@ -691,12 +604,12 @@
         }
       ]
     },
-    "ProposalExtResource": {
+    "ProductResource": {
       "type": "object",
       "description": "Concrete extension resource types can be created by aliasing this type using a specific property type.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/ProposalExtResourceProperties",
+          "$ref": "#/definitions/ProductResourceProperties",
           "description": "The resource-specific properties for this resource."
         }
       },
@@ -706,15 +619,15 @@
         }
       ]
     },
-    "ProposalExtResourceListResult": {
+    "ProductResourceListResult": {
       "type": "object",
-      "description": "The response of a ProposalExtResource list operation.",
+      "description": "The response of a ProductResource list operation.",
       "properties": {
         "value": {
           "type": "array",
-          "description": "The ProposalExtResource items on this page",
+          "description": "The ProductResource items on this page",
           "items": {
-            "$ref": "#/definitions/ProposalExtResource"
+            "$ref": "#/definitions/ProductResource"
           }
         },
         "nextLink": {
@@ -727,9 +640,9 @@
         "value"
       ]
     },
-    "ProposalExtResourceProperties": {
+    "ProductResourceProperties": {
       "type": "object",
-      "description": "Details of the Proposal ProposalExtResource.",
+      "description": "Details of the Proposal Product Item.",
       "properties": {
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
@@ -741,21 +654,6 @@
           "description": "The proposal status."
         }
       }
-    },
-    "ProposalExtResourceUpdate": {
-      "type": "object",
-      "description": "Concrete extension resource types can be created by aliasing this type using a specific property type.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/ProposalExtResourceProperties",
-          "description": "The resource-specific properties for this resource."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
-        }
-      ]
     },
     "ProposalResource": {
       "type": "object",
