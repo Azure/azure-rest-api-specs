@@ -15,6 +15,22 @@ batch:
   - tag: package-migrate-2017-11
 ```
 
+### Tag: package-preview-2023-05
+
+These settings apply only when `--tag=package-preview-2023-05` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2023-05'
+input-file:
+  - Microsoft.Migrate/AssessmentProjects/preview/2023-05-01-preview/migrate.json
+suppressions:
+  - code: AvoidAdditionalProperties
+    reason: Migrate feature is widely adopted and requires additionalProperties for these swagger properties.
+  - code: ProvisioningStateMustBeReadOnly
+    reason: The current swagger version only modifies the resources which do not have Provisioning states as readOnly and not introducing any new Resources, These are incorrectly flagged for previous versions.
+  - code: UnSupportedPatchProperties
+    reason: There is no patch operation that is introduced in this swagger version where it is not readOnly. This is incorrectly flagged for previous versions. 
+```
+
 ### Tag: package-migrate-2023-04
 
 These settings apply only when `--tag=package-migrate-2023-04` is specified on the command line.
@@ -96,6 +112,22 @@ These are the global settings for the API.
 ``` yaml
 openapi-type: arm
 tag: package-migrate-2023-04
+```
+
+### Tag: package-preview-2023-05
+
+These settings apply only when `--tag=package-preview-2023-05` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2023-05'
+input-file:
+  - Microsoft.Migrate/AssessmentProjects/preview/2023-05-01-preview/migrate.json
+suppressions:
+  - code: AvoidAdditionalProperties
+    reason: Migrate feature is widely adopted and requires additionalProperties for these swagger properties.
+  - code: ProvisioningStateMustBeReadOnly
+    reason: The current swagger version only modifies the resources which do not have Provisioning states as readOnly and not introducing any new Resources, These are incorrectly flagged for previous versions.
+  - code: UnSupportedPatchProperties
+    reason: There is no patch operation that is introduced in this swagger version where it is not readOnly. This is incorrectly flagged for previous versions. 
 ```
 
 ### Tag: package-migrate-2023-03
