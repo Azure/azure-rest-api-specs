@@ -1,14 +1,24 @@
+import "@typespec/http";
+import "@typespec/rest";
+import "@azure-tools/typespec-autorest";
 import "@typespec/versioning";
+import "@azure-tools/typespec-azure-core";
+import "@typespec/openapi";
 
 import "../common/models.tsp";
 import "../tools/models.tsp";
 import "../tools/tool_resources.tsp";
 import "../main.tsp";
 
-namespace Azure.AI.Client.Agents;
-
+using TypeSpec.OpenAPI;
 using TypeSpec.Http;
+using TypeSpec.Rest;
 using TypeSpec.Versioning;
+using Azure.Core;
+using Azure.Core.Traits;
+
+
+namespace Azure.AI.Client.Agents;
 
 @doc("Represents an agent that can call the model and use tools.")
 @added(ServiceApiVersions.v2024_02_15_preview)
