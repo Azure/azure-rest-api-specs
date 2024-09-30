@@ -27,11 +27,6 @@ op listVectorStores is Azure.Core.RpcOperation<
   },
   OpenAIPageableListOf<VectorStore>
 >;
-/*
-op listVectorStores(
-  ...OpenAIListRequestOptions,
-): OpenAIPageableListOf<VectorStore>;
-*/
 
 /**
  * Creates a vector store.
@@ -51,11 +46,6 @@ op createVectorStore is Azure.Core.RpcOperation<
   },
   VectorStore
 >;
-/*
-op createVectorStore(
-  ...VectorStoreOptions
-): VectorStore;
-*/
 
 /**
  * Returns the vector store object matching the specified ID.
@@ -73,11 +63,6 @@ op getVectorStore is Azure.Core.RpcOperation<
   },
   VectorStore
 >;
-/*
-op getVectorStore(
-  @path vectorStoreId: string,
-): VectorStore;
-*/
 
 /**
  * The ID of the vector store to modify.
@@ -100,13 +85,6 @@ op modifyVectorStore is Azure.Core.RpcOperation<
   },
   VectorStore
 >;
-/*
-op modifyVectorStore(
-  @path vectorStoreId: string,
-
-  ...VectorStoreUpdateOptions
-): VectorStore;
-*/
 
 /**
  * Deletes the vector store object matching the specified ID.
@@ -124,8 +102,3 @@ op deleteVectorStore is Azure.Core.RpcOperation<
   },
   VectorStoreDeletionStatus
 >;
-/*
-op deleteVectorStore(
-  @path vectorStoreId: string,
-): VectorStoreDeletionStatus;
-*/

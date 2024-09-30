@@ -32,13 +32,6 @@ op getRunStep is Azure.Core.RpcOperation<
   },
   RunStep
 >;
-/*
-op getRunStep(
-  @path threadId: string,
-  @path runId: string,
-  @path stepId: string,
-): RunStep;
-*/
 
 /**
  * Gets a list of run steps from a thread run.
@@ -62,10 +55,3 @@ op listRunSteps is Azure.Core.RpcOperation<
   },
   OpenAIPageableListOf<RunStep>
 >;
-/*
-op listRunSteps(
-  @path threadId: string,
-  @path runId: string,
-  ...OpenAIListRequestOptions,
-): OpenAIPageableListOf<RunStep>;
-*/

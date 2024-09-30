@@ -26,9 +26,6 @@ op createAssistant is Azure.Core.RpcOperation<
   },
   Assistant
 >;
-/*op createAssistant(
-  ...CreateAssistantOptions
-): Assistant;*/
 
 /**
  * Gets a list of assistants that were previously created.
@@ -48,9 +45,6 @@ op listAssistants is Azure.Core.RpcOperation<
   },
   OpenAIPageableListOf<Assistant>
 >;
-/*
-op listAssistants(...OpenAIListRequestOptions): OpenAIPageableListOf<Assistant>;
-*/
 
 /**
  * Retrieves an existing assistant.
@@ -71,9 +65,6 @@ op getAssistant is Azure.Core.RpcOperation<
   },
   Assistant
 >;
-/*
-op getAssistant(@path assistantId: string): Assistant;
-*/
 
 /**
  * Modifies an existing assistant.
@@ -96,11 +87,6 @@ op updateAssistant is Azure.Core.RpcOperation<
   },
   Assistant
 >;
-/*
-op updateAssistant(
-  ...UpdateAssistantOptions
-): Assistant;
-*/
 
 /**
  * Deletes an assistant.
@@ -120,6 +106,3 @@ op deleteAssistant is Azure.Core.RpcOperation<
   },
   AssistantDeletionStatus
 >;
-/*
-op deleteAssistant(@path assistantId: string): AssistantDeletionStatus;
-*/

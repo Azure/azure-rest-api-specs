@@ -29,11 +29,6 @@ op createThread is Azure.Core.RpcOperation<
   },
   AssistantThread
 >;
-/*
-op createThread(
-  ...AssistantThreadCreationOptions
-): AssistantThread;
-*/
 
 // list threads?
 
@@ -56,9 +51,6 @@ op getThread is Azure.Core.RpcOperation<
   },
   AssistantThread
 >;
-/*
-op getThread(@path threadId: string): AssistantThread;
-*/
 
 /**
  * Modifies an existing thread.
@@ -82,11 +74,6 @@ op updateThread is Azure.Core.RpcOperation<
   },
   AssistantThread
 >;
-/*
-op updateThread(
-  ...UpdateAssistantThreadOptions
-): AssistantThread;
-*/
 
 /**
  * Deletes an existing thread.
@@ -106,6 +93,3 @@ op deleteThread is Azure.Core.RpcOperation<
   },
   ThreadDeletionStatus
 >;
-/*
-op deleteThread(@path threadId: string): ThreadDeletionStatus;
-*/

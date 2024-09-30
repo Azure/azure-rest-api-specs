@@ -37,13 +37,6 @@ op createMessage is Azure.Core.RpcOperation<
   },
   ThreadMessage
 >;
-/*
-op createMessage(
-  @path threadId: string,
-
-  ...ThreadMessageOptions
-): ThreadMessage;
-*/
 
 /**
  * Gets a list of messages that exist on a thread.
@@ -71,17 +64,6 @@ op listMessages is Azure.Core.RpcOperation<
   },
   OpenAIPageableListOf<ThreadMessage>
 >;
-/*
-op listMessages(
-  @path threadId: string,
-
-  @added(ServiceApiVersions.v2024_05_01_preview)
-  @query
-  runId?: string,
-
-  ...OpenAIListRequestOptions,
-): OpenAIPageableListOf<ThreadMessage>;
-*/
 
 /**
  * Gets an existing message from an existing thread.
@@ -104,9 +86,6 @@ op getMessage is Azure.Core.RpcOperation<
   },
   ThreadMessage
 >;
-/*
-op getMessage(@path threadId: string, @path messageId: string): ThreadMessage;
-*/
 
 /**
  * Modifies an existing message on an existing thread.
@@ -129,10 +108,3 @@ op updateMessage is Azure.Core.RpcOperation<
   },
   ThreadMessage
 >;
-/*
-op updateMessage(
-  @path threadId: string,
-  @path messageId: string,
-  ...OptionalNullableMetadata,
-): ThreadMessage;
-*/

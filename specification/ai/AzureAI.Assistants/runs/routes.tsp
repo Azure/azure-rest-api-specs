@@ -39,13 +39,6 @@ op createRun is Azure.Core.RpcOperation<
   },
   ThreadRun
 >;
-/*
-op createRun(
-  @path threadId: string,
-
-  ...CreateRunOptions
-): ThreadRun;
-*/
 
 /**
  * Gets a list of runs for a specified thread.
@@ -67,12 +60,6 @@ op listRuns is Azure.Core.RpcOperation<
   },
   OpenAIPageableListOf<ThreadRun>
 >;
-/*
-op listRuns(
-  @path threadId: string,
-  ...OpenAIListRequestOptions,
-): OpenAIPageableListOf<ThreadRun>;
-*/
 
 /**
  * Gets an existing run from an existing thread.
@@ -95,9 +82,6 @@ op getRun is Azure.Core.RpcOperation<
   },
   ThreadRun
 >;
-/*
-op getRun(@path threadId: string, @path runId: string): ThreadRun;
-*/
 
 /**
  * Modifies an existing thread run.
@@ -120,13 +104,6 @@ op updateRun is Azure.Core.RpcOperation<
   },
   ThreadRun
 >;
-/*
-op updateRun(
-  @path threadId: string,
-  @path runId: string,
-  ...OptionalNullableMetadata,
-): ThreadRun;
-*/
 
 /**
  * Submits outputs from tools as requested by tool calls in a run. Runs that need submitted tool outputs will have a status of 'requires_action' with a required_action.type of 'submit_tool_outputs'.
@@ -156,18 +133,6 @@ op submitToolOutputsToRun is Azure.Core.RpcOperation<
   },
   ThreadRun
 >;
-/*
-op submitToolOutputsToRun(
-  @path threadId: string,
-  @path runId: string,
-
-  @encodedName("application/json", "tool_outputs")
-  toolOutputs: ToolOutput[],
-
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
-  stream?: boolean | null,
-): ThreadRun;
-*/
 
 /**
  * Cancels a run of an in progress thread.
@@ -189,9 +154,6 @@ op cancelRun is Azure.Core.RpcOperation<
   },
   ThreadRun
 >;
-/*
-op cancelRun(@path threadId: string, @path runId: string): ThreadRun;
-*/
 
 /**
  * Creates a new thread and immediately starts a run of that thread.
@@ -214,8 +176,3 @@ op createThreadAndRun is Azure.Core.RpcOperation<
   },
   ThreadRun
 >;
-/*
-op createThreadAndRun(
-  ...CreateAndRunThreadOptions
-): ThreadRun;
-*/

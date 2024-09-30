@@ -32,15 +32,6 @@ op listVectorStoreFiles is Azure.Core.RpcOperation<
   },
   OpenAIPageableListOf<VectorStoreFile>
 >;
-/*
-op listVectorStoreFiles(
-  @path vectorStoreId: string,
-
-  @query filter?: VectorStoreFileStatusFilter,
-
-  ...OpenAIListRequestOptions,
-): OpenAIPageableListOf<VectorStoreFile>;
-*/
 
 /**
  * Create a vector store file by attaching a file to a vector store.
@@ -67,18 +58,6 @@ op createVectorStoreFile is Azure.Core.RpcOperation<
   },
   VectorStoreFile
 >;
-/*
-op createVectorStoreFile(
-  @path vectorStoreId: string,
-
-  @encodedName("application/json", "file_id")
-  fileId: string,
-
-  @encodedName("application/json", "chunking_strategy")
-  @added(ServiceApiVersions.v2024_07_01_preview)
-  chunkingStrategy?: VectorStoreChunkingStrategyRequest,
-): VectorStoreFile;
-*/
 
 /**
  * Retrieves a vector store file.
@@ -99,13 +78,6 @@ op getVectorStoreFile is Azure.Core.RpcOperation<
   },
   VectorStoreFile
 >;
-/*
-op getVectorStoreFile(
-  @path vectorStoreId: string,
-
-  @path fileId: string,
-): VectorStoreFile;
-*/
 
 /**
  * Delete a vector store file. This will remove the file from the vector store but the file itself will not be deleted.
@@ -127,10 +99,3 @@ op deleteVectorStoreFile is Azure.Core.RpcOperation<
   },
   VectorStoreFileDeletionStatus
 >;
-/*
-op deleteVectorStoreFile(
-  @path vectorStoreId: string,
-
-  @path fileId: string,
-): VectorStoreFileDeletionStatus;
-*/

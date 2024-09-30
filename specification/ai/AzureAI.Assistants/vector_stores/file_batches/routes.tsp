@@ -38,20 +38,6 @@ op createVectorStoreFileBatch is Azure.Core.RpcOperation<
   },
   VectorStoreFileBatch
 >;
-/*
-op createVectorStoreFileBatch(
-  @path vectorStoreId: string,
-
-  @minItems(1)
-  @maxItems(500)
-  @encodedName("application/json", "file_ids")
-  fileIds: string[],
-
-  @encodedName("application/json", "chunking_strategy")
-  @added(ServiceApiVersions.v2024_07_01_preview)
-  chunkingStrategy?: VectorStoreChunkingStrategyRequest,
-): VectorStoreFileBatch;
-*/
 
 /**
  * Retrieve a vector store file batch.
@@ -72,13 +58,6 @@ op getVectorStoreFileBatch is Azure.Core.RpcOperation<
   },
   VectorStoreFileBatch
 >;
-/*
-op getVectorStoreFileBatch(
-  @path vectorStoreId: string,
-
-  @path batchId: string,
-): VectorStoreFileBatch;
-*/
 
 /**
  * Cancel a vector store file batch. This attempts to cancel the processing of files in this batch as soon as possible.
@@ -99,13 +78,6 @@ op cancelVectorStoreFileBatch is Azure.Core.RpcOperation<
   },
   VectorStoreFileBatch
 >;
-/*
-op cancelVectorStoreFileBatch(
-  @path vectorStoreId: string,
-
-  @path batchId: string,
-): VectorStoreFileBatch;
-*/
 
 /**
  * Returns a list of vector store files in a batch.
@@ -131,14 +103,3 @@ op listVectorStoreFileBatchFiles is Azure.Core.RpcOperation<
   },
   OpenAIPageableListOf<VectorStoreFile>
 >;
-/*
-op listVectorStoreFileBatchFiles(
-  @path vectorStoreId: string,
-
-  @path batchId: string,
-
-  @query filter?: VectorStoreFileStatusFilter,
-
-  ...OpenAIListRequestOptions,
-): OpenAIPageableListOf<VectorStoreFile>;
-*/

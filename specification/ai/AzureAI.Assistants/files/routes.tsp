@@ -30,9 +30,6 @@ op listFiles is Azure.Core.RpcOperation<
   },
   FileListResponse
 >;
-/*
-op listFiles(@query purpose?: FilePurpose): FileListResponse;
-*/
 
 /**
  * Uploads a file for use by other operations.
@@ -67,15 +64,6 @@ op uploadFile is Azure.Core.RpcOperation<
   },
   OpenAIFile
 >;
-/*
-op uploadFile(
-  @header contentType: "multipart/form-data",
-  @clientName("Data", "csharp") file: bytes,
-  purpose: FilePurpose,
-
-  filename?: string,
-): OpenAIFile;
-*/
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
 #suppress "@azure-tools/typespec-azure-core/no-operation-id" "non-standard operations"
@@ -92,14 +80,6 @@ op deleteFile is Azure.Core.RpcOperation<
   },
   FileDeletionStatus
 >;
-/*
-op deleteFile(
-  @doc("The ID of the file to delete.")
-  @encodedName("application/json", "file_id")
-  @path
-  fileId: string,
-): FileDeletionStatus;
-*/
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
 #suppress "@azure-tools/typespec-azure-core/no-operation-id" "non-standard operations"
@@ -117,14 +97,6 @@ op getFile is Azure.Core.RpcOperation<
   },
   OpenAIFile
 >;
-/*
-op getFile(
-  @doc("The ID of the file to retrieve.")
-  @path
-  @encodedName("application/json", "file_id")
-  fileId: string,
-): OpenAIFile;
-*/
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
@@ -140,11 +112,3 @@ op getFileContent is Azure.Core.RpcOperation<
   },
   FileContentResponse
 >;
-/*
-op getFileContent(
-  @doc("The ID of the file to retrieve.")
-  @path
-  @encodedName("application/json", "file_id")
-  fileId: string,
-): bytes;
-*/
