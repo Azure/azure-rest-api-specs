@@ -165,6 +165,7 @@ interface ConversationalAnalysisAuthoring {
   /**
    * Gets the status of an existing copy project job.
    */
+// ToDo
   @added(Versions.v2023_04_15_preview)
   getCopyProjectStatus is languageOperations.ResourceRead<ConversationalAnalysisAuthoringCopyProjectJobState>;
 
@@ -176,6 +177,17 @@ interface ConversationalAnalysisAuthoring {
     ListQueryParametersTrait<StandardListQueryParameters & SelectQueryParameter>
   >;
 
+   /**
+   * Swaps two existing deployments with each other.
+   */
+  @pollingOperation(ConversationalAnalysisAuthoring.getSwapDeploymentsStatus)
+  @actionSeparator("/:")
+  @action("swap")
+  swapDeployments is languageOperations.LongRunningResourceCollectionAction<
+  ConversationalAnalysisAuthoringProjectDeployment,
+  ConversationalAnalysisAuthoringSwapDeploymentsOptions,
+  ConversationalAnalysisAuthoringProjectDeployment
+>;
 
   /**
    * Gets the details of a deployment.
@@ -219,65 +231,23 @@ interface ConversationalAnalysisAuthoring {
   /**
    * Deletes a project deployment.
    */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  @route("/authoring/analyze-conversations/projects/{projectName}/deployments/{deploymentName}")
-  @delete
   @pollingOperation(ConversationalAnalysisAuthoring.getDeploymentStatus)
-  deleteDeployment is Foundations.LongRunningOperation<
-    {
-      /**
-       * The name of the project to use.
-       */
-      @maxLength(100)
-      @path
-      projectName: string;
-
-      /**
-       * The name of the specific deployment of the project to use.
-       */
-      @path
-      deploymentName: string;
-    },
-    AcceptedResponse,
-    {},
-    ErrorResponse
-  >;
+  deleteDeployment is languageOperations.LongRunningResourceDelete<ConversationalAnalysisAuthoringProjectDeployment>;
 
   /**
    * Deletes a project deployment from the specified assigned resources.
    */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  @route("/authoring/analyze-conversations/projects/{projectName}/deployments/{deploymentName}/:delete-from-resources")
-  @post
   @pollingOperation(
     ConversationalAnalysisAuthoring.getDeploymentDeleteFromResourcesStatus
   )
+  @action("delete-from-resources")
+  @actionSeparator("/:")
   @added(Versions.v2023_04_15_preview)
-  deleteDeploymentFromResources is Foundations.LongRunningOperation<
-    {
-      /**
-       * The name of the project to use.
-       */
-      @maxLength(100)
-      @path
-      projectName: string;
-
-      /**
-       * The name of the specific deployment of the project to use.
-       */
-      @path
-      deploymentName: string;
-
-      /**
-       * The options for deleting the deployment.
-       */
-      @body
-      body: ConversationalAnalysisAuthoringDeleteDeploymentOptions;
-    },
-    AcceptedResponse,
-    {},
-    ErrorResponse
-  >;
+  deleteDeploymentFromResources is languageOperations.LongRunningResourceAction<
+  ConversationalAnalysisAuthoringProjectDeployment,
+  ConversationalAnalysisAuthoringDeleteDeploymentOptions,
+  ConversationalAnalysisAuthoringProjectDeployment
+>;
 
   /**
    * Gets the status of an existing delete deployment from specific resources job.
@@ -315,61 +285,8 @@ interface ConversationalAnalysisAuthoring {
   /**
    * Gets the status of an existing deployment job.
    */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  @route("/authoring/analyze-conversations/projects/{projectName}/deployments/{deploymentName}/jobs/{jobId}")
-  @get
-  getDeploymentStatus is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * The name of the project to use.
-       */
-      @maxLength(100)
-      @path
-      projectName: string;
+  getDeploymentStatus is languageOperations.ResourceRead<ConversationalAnalysisAuthoringDeploymentJobState>;
 
-      /**
-       * The name of the specific deployment of the project to use.
-       */
-      @path
-      deploymentName: string;
-
-      /**
-       * The job ID.
-       */
-      @path
-      jobId: string;
-    },
-    ConversationalAnalysisAuthoringDeploymentJobState,
-    {},
-    ErrorResponse
-  >;
-
-  /**
-   * Swaps two existing deployments with each other.
-   */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  @route("/authoring/analyze-conversations/projects/{projectName}/deployments/:swap")
-  @post
-  @pollingOperation(ConversationalAnalysisAuthoring.getSwapDeploymentsStatus)
-  swapDeployments is Foundations.LongRunningOperation<
-    {
-      /**
-       * The name of the project to use.
-       */
-      @maxLength(100)
-      @path
-      projectName: string;
-
-      /**
-       * The job object to swap two deployments.
-       */
-      @body
-      body: ConversationalAnalysisAuthoringSwapDeploymentsOptions;
-    },
-    AcceptedResponse,
-    {},
-    ErrorResponse
-  >;
 
   /**
    * Gets the status of an existing swap deployment job.

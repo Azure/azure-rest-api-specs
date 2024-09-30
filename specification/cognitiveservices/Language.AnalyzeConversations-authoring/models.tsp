@@ -770,6 +770,8 @@ model ConversationalAnalysisAuthoringDeleteDeploymentOptions {
  * Represents the state of a deployment job.
  */
 @clientName("DeploymentJobState", "csharp")
+@parentResource(ConversationalAnalysisAuthoringProjectDeployment)
+@resource("jobs")
 model ConversationalAnalysisAuthoringDeploymentJobState {
   ...ConversationalAnalysisAuthoringJobState;
 }

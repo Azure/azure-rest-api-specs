@@ -744,7 +744,7 @@
           {
             "name": "projectName",
             "in": "path",
-            "description": "The name of the project to use.",
+            "description": "The new project name.",
             "required": true,
             "type": "string",
             "maxLength": 100
@@ -752,7 +752,7 @@
           {
             "name": "deploymentName",
             "in": "path",
-            "description": "The name of the specific deployment of the project to use.",
+            "description": "Represents deployment name.",
             "required": true,
             "type": "string"
           }
@@ -760,6 +760,28 @@
         "responses": {
           "202": {
             "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "schema": {
+              "type": "object",
+              "description": "Provides status details for long running operations.",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "description": "The unique ID of the operation."
+                },
+                "status": {
+                  "$ref": "#/definitions/Azure.Core.Foundations.OperationState",
+                  "description": "The status of the operation"
+                },
+                "error": {
+                  "$ref": "#/definitions/Azure.Core.Foundations.Error",
+                  "description": "Error object that describes the error when status is \"Failed\"."
+                }
+              },
+              "required": [
+                "id",
+                "status"
+              ]
+            },
             "headers": {
               "Operation-Location": {
                 "type": "string",
@@ -794,7 +816,7 @@
           {
             "name": "projectName",
             "in": "path",
-            "description": "The name of the project to use.",
+            "description": "The new project name.",
             "required": true,
             "type": "string",
             "maxLength": 100
@@ -802,7 +824,7 @@
           {
             "name": "deploymentName",
             "in": "path",
-            "description": "The name of the specific deployment of the project to use.",
+            "description": "Represents deployment name.",
             "required": true,
             "type": "string"
           },
@@ -846,7 +868,7 @@
           {
             "name": "projectName",
             "in": "path",
-            "description": "The name of the project to use.",
+            "description": "The new project name.",
             "required": true,
             "type": "string",
             "maxLength": 100
@@ -854,7 +876,6 @@
           {
             "name": "body",
             "in": "body",
-            "description": "The job object to swap two deployments.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/ConversationalAnalysisAuthoringSwapDeploymentsOptions"
@@ -864,6 +885,32 @@
         "responses": {
           "202": {
             "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "schema": {
+              "type": "object",
+              "description": "Provides status details for long running operations.",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "description": "The unique ID of the operation."
+                },
+                "status": {
+                  "$ref": "#/definitions/Azure.Core.Foundations.OperationState",
+                  "description": "The status of the operation"
+                },
+                "error": {
+                  "$ref": "#/definitions/Azure.Core.Foundations.Error",
+                  "description": "Error object that describes the error when status is \"Failed\"."
+                },
+                "result": {
+                  "$ref": "#/definitions/ConversationalAnalysisAuthoringProjectDeployment",
+                  "description": "The result of the operation."
+                }
+              },
+              "required": [
+                "id",
+                "status"
+              ]
+            },
             "headers": {
               "Operation-Location": {
                 "type": "string",
