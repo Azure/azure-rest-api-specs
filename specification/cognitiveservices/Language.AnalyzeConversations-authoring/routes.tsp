@@ -269,54 +269,12 @@ interface ConversationalAnalysisAuthoring {
    * Gets the status of an export job. Once job completes, returns the project
    * metadata, and assets.
    */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  @route("/authoring/analyze-conversations/projects/{projectName}/export/jobs/{jobId}")
-  @get
-  getExportStatus is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * The name of the project to use.
-       */
-      @maxLength(100)
-      @path
-      projectName: string;
-
-      /**
-       * The job ID.
-       */
-      @path
-      jobId: string;
-    },
-    ConversationalAnalysisAuthoringExportProjectJobState,
-    {},
-    ErrorResponse
-  >;
+  getExportStatus is languageOperations.ResourceRead<ConversationalAnalysisAuthoringExportProjectJobState>;
 
   /**
    * Gets the status for an import.
    */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  @route("/authoring/analyze-conversations/projects/{projectName}/import/jobs/{jobId}")
-  @get
-  getImportStatus is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * The name of the project to use.
-       */
-      @maxLength(100)
-      @path
-      projectName: string;
-
-      /**
-       * The job ID.
-       */
-      @path
-      jobId: string;
-    },
-    ConversationalAnalysisAuthoringImportProjectJobState,
-    {},
-    ErrorResponse
-  >;
+  getImportStatus is languageOperations.ResourceRead<ConversationalAnalysisAuthoringImportProjectJobState>;
 
   /**
    * Lists the trained models belonging to a project.

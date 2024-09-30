@@ -817,6 +817,8 @@ model ConversationalAnalysisAuthoringSwapDeploymentsOptions {
  * Represents the state of an export job.
  */
 @clientName("ExportProjectJobState", "csharp")
+@resource("export/jobs")
+@parentResource(ConversationalAnalysisAuthoringProjectMetadata)
 model ConversationalAnalysisAuthoringExportProjectJobState {
   ...ConversationalAnalysisAuthoringJobState;
 
@@ -830,6 +832,8 @@ model ConversationalAnalysisAuthoringExportProjectJobState {
  * Represents the state of an import job.
  */
 @clientName("ImportProjectJobState", "csharp")
+@resource("import/jobs")
+@parentResource(ConversationalAnalysisAuthoringProjectMetadata)
 model ConversationalAnalysisAuthoringImportProjectJobState {
   ...ConversationalAnalysisAuthoringJobState;
 }
