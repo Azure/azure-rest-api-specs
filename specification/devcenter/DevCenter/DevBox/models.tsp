@@ -540,7 +540,7 @@ model StopOnNoConnectConfiguration {
     """)
   status: StopOnNoConnectEnableStatus;
 
-  @doc("The specified time in minutes to wait before stopping a Dev Box if no connection is made. This will be set to null if stop on no connect is disabled.")
+  @doc("The specified time in minutes to wait before stopping a Dev Box if no connection is made. This will only be set if stop on no connect is enabled.")
   gracePeriodMinutes?: int32;
 }
 
