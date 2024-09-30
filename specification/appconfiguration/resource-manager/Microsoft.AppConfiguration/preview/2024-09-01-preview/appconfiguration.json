@@ -539,7 +539,7 @@
         "tags": [
           "ConfigurationStores"
         ],
-        "description": "Reset all SAS tokens of a given kind (primary/secondary).",
+        "description": "Reset SAS kind to invalidate all previously generated SAS tokens of the specified kind.",
         "operationId": "ConfigurationStores_ResetSasKind",
         "parameters": [
           {
@@ -1497,7 +1497,7 @@
         "tags": [
           "Snapshots"
         ],
-        "description": "Gets the properties of the specified snapshot. NOTE: This operation is intended for use in ARM Template deployments. For all other scenarios involving App Configuration snapshots the data plane API should be used instead.",
+        "description": "Gets the properties of the specified snapshot. NOTE: This operation is intended for use in Azure Resource Manager (ARM) Template deployments. For all other scenarios involving App Configuration snapshots the data plane API should be used instead.",
         "operationId": "Snapshots_Get",
         "parameters": [
           {
@@ -1540,7 +1540,7 @@
         "tags": [
           "Snapshots"
         ],
-        "description": "Creates a snapshot. NOTE: This operation is intended for use in ARM Template deployments. For all other scenarios involving App Configuration snapshots the data plane API should be used instead.",
+        "description": "Creates a snapshot. NOTE: This operation is intended for use in Azure Resource Manager (ARM) Template deployments. For all other scenarios involving App Configuration snapshots the data plane API should be used instead.",
         "operationId": "Snapshots_Create",
         "parameters": [
           {
@@ -1812,13 +1812,13 @@
               },
               {
                 "value": "Pass-through",
-                "description": "The pass-through authentication mode. User identity will be passed through from ARM, requiring user to have data plane action permissions (Available via App Configuration Data Owner/ App Configuration Data Reader)."
+                "description": "The pass-through authentication mode. User identity will be passed through from Azure Resource Manager (ARM), requiring user to have data plane action permissions (Available via App Configuration Data Owner/ App Configuration Data Reader)."
               }
             ]
           }
         },
         "privateLinkDelegation": {
-          "description": "The data plane proxy private link delegation. This property manages if a request from delegated ARM private link is allowed when the data plane resource requires private link.",
+          "description": "The data plane proxy private link delegation. This property manages if a request from delegated Azure Resource Manager (ARM) private link is allowed when the data plane resource requires private link.",
           "enum": [
             "Enabled",
             "Disabled"
@@ -1830,7 +1830,7 @@
             "values": [
               {
                 "value": "Enabled",
-                "description": "ARM private endpoint is required if the resource requires private link."
+                "description": "Azure Resource Manager (ARM) private endpoint is required if the resource requires private link."
               },
               {
                 "value": "Disabled",
@@ -3129,7 +3129,7 @@
           "readOnly": true
         },
         "tags": {
-          "description": "The tags of the snapshot. NOTE: These are data plane tags, not ARM tags.",
+          "description": "The tags of the snapshot. NOTE: These are data plane tags, not Azure Resource Manager (ARM) tags.",
           "type": "object",
           "additionalProperties": {
             "type": "string"
