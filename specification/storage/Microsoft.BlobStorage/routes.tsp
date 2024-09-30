@@ -704,6 +704,7 @@ interface BlobService {
     ...ClientRequestIdParameter,
     ...ApiVersionParameter,
   ): {
+    #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Following standard pattern"
     @statusCode statusCode: 200 | 206;
     ...BodyParameter;
 
@@ -2330,6 +2331,7 @@ interface BlobQueryService {
     ...ApiVersionParameter,
     ...ClientRequestIdParameter,
   ): {
+    #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Following standard pattern"
     @statusCode statusCode: 200 | 206;
     ...BodyParameter;
 

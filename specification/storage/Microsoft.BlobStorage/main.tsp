@@ -30,6 +30,8 @@ using Azure.Core;
 )
 namespace Azure.Storage.Blob;
 
+#suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Following standard typespec recommendation"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "Following standard typespec recommendation"
 @doc("The Azure.Storage.Blob service versions.")
 enum Versions {
   @useDependency(Azure.Core.Versions.v1_0_Preview_1)
