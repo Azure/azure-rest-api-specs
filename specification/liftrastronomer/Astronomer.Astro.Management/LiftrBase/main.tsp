@@ -124,7 +124,7 @@ model UserDetails {
 @doc("Base resource properties that can be extended for arm resources.")
 model BaseResourceProperties {
   @doc("Marketplace details of the resource.")
-  @visibility("create", "read")
+  @visibility("create", "read", "update")
   marketplace: MarketplaceDetails;
 
   @doc("Details of the user.")
