@@ -34,7 +34,7 @@ namespace Azure.Storage.Blob;
 #suppress "@azure-tools/typespec-azure-core/no-enum" "Following standard typespec recommendation"
 @doc("The Azure.Storage.Blob service versions.")
 enum Versions {
-  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
+  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   @doc("The 2020-10-02-preview version of the Azure.Storage.Blob service.")
   `2020-10-02-preview`,
 
