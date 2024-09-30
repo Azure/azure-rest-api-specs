@@ -12,30 +12,28 @@ using Azure.ResourceManager;
 namespace Microsoft.Proposal;
 
 model ProductResource is ExtensionResource<ProductResourceProperties> {
-    @doc("The name of the product")
-    @pattern("^[a-zA-Z0-9-]{3,24}$")
-    @key("productCode")
-    @segment("products")
-    @path
-    name: string;
-  }
-  
-  @doc("Details of the Proposal Product Item.")
-  model ProductResourceProperties {
-    @visibility("read")
-    @doc("The status of the last operation.")
-    provisioningState?: ProvisioningState;
-  
-    @doc("The proposal status.")
-    status?: ProposalStatus
-  }
-  
-  @armResourceOperations(ProductResource)
-  interface ProductResources {
-    get is ArmResourceRead<ProductResource>;
-    createOrUpdate is ArmResourceCreateOrReplaceAsync<ProductResource>;
-    delete is ArmResourceDeleteSync<ProductResource>;
-    listByParent is ArmResourceListByParent<ProductResource>;
-  }
-  
-  
+  @doc("The name of the product")
+  @pattern("^[a-zA-Z0-9-]{3,24}$")
+  @key("productCode")
+  @segment("products")
+  @path
+  name: string;
+}
+
+@doc("Details of the Proposal Product Item.")
+model ProductResourceProperties {
+  @visibility("read")
+  @doc("The status of the last operation.")
+  provisioningState?: ProvisioningState;
+
+  @doc("The proposal status.")
+  status?: ProposalStatus;
+}
+
+@armResourceOperations(ProductResource)
+interface ProductResources {
+  get is ArmResourceRead<ProductResource>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<ProductResource>;
+  delete is ArmResourceDeleteSync<ProductResource>;
+  listByParent is ArmResourceListByParent<ProductResource>;
+}
