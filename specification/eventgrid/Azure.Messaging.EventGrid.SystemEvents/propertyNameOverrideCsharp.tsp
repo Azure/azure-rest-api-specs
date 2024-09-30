@@ -23,14 +23,6 @@ using Microsoft.EventGrid.SystemEvents;
   "csharp"
 );
 
-@@clientName(AcsEmailDeliveryReportReceivedEventData.deliveryAttemptTimeStamp,
-  "deliveryAttemptTimestamp",
-  "csharp"
-);
-@@clientName(AcsEmailEngagementTrackingReportReceivedEventData.userActionTimeStamp,
-  "userActionTimestamp",
-  "csharp"
-);
 @@clientName(AcsEmailEngagementTrackingReportReceivedEventData.engagementType,
   "engagement",
   "csharp"
@@ -198,6 +190,48 @@ using Microsoft.EventGrid.SystemEvents;
 
 @@clientName(AcsRecordingFileStatusUpdatedEventData.recordingChannelType,
   "recordingChannelKind",
+  "csharp"
+);
+
+@@clientName(EventGridMQTTClientCreatedOrUpdatedEventData,
+  "EventGridMqttClientCreatedOrUpdatedEventData",
+  "csharp"
+);
+
+@@clientName(EventGridMQTTClientDeletedEventData,
+  "EventGridMqttClientDeletedEventData",
+  "csharp"
+);
+
+@@clientName(EventGridMQTTClientSessionConnectedEventData,
+  "EventGridMqttClientSessionConnectedEventData",
+  "csharp"
+);
+
+@@clientName(EventGridMQTTClientSessionDisconnectedEventData,
+  "EventGridMqttClientSessionDisconnectedEventData",
+  "csharp"
+);
+
+@@clientName(EventGridMQTTClientEventData,
+  "EventGridMqttClientEventData",
+  "csharp"
+);
+
+@@clientName(EventGridMQTTClientState, "EventGridMqttClientState", "csharp");
+
+@@clientName(EventGridMQTTClientDisconnectionReason,
+  "EventGridMqttClientDisconnectionReason",
+  "csharp"
+);
+
+@@clientName(RedisImportRDBCompletedEventData,
+  "RedisImportRdbCompletedEventData",
+  "csharp"
+);
+
+@@clientName(RedisExportRDBCompletedEventData,
+  "RedisExportRdbCompletedEventData",
   "csharp"
 );
 

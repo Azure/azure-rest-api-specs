@@ -26,7 +26,7 @@ model DbSystemShapeProperties {
 
   @doc("The maximum number of CPU cores that can be enabled on the DB system for this shape.")
   @visibility("read")
-  availableCoreCount: int32;
+  availableCoreCount?: int32;
 
   @doc("The minimum number of CPU cores that can be enabled on the DB system for this shape.")
   @visibility("read")

@@ -496,9 +496,9 @@ model TestInputArtifacts {
 
 @doc("File info")
 model FileInfo {
+  #suppress "@azure-tools/typespec-azure-core/key-visibility-required" "model is output only"
   @doc("Name of the file.")
   @key
-  @visibility
   fileName: string;
 
   @doc("File URL.")
@@ -993,7 +993,6 @@ model DimensionFilter {
 }
 
 @doc("The response to a metrics query.")
-@friendlyName("Metrics")
 // using friendlyName to change the name of the model due to issue in using projectedName '@encodedName("application/json", "Metrics")' https://github.com/microsoft/typespec/issues/2276
 model Metrics is Azure.Core.Page<TimeSeriesElement>;
 

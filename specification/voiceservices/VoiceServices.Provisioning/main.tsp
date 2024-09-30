@@ -633,7 +633,6 @@ model BatchNumbersDelete {
   numbers: NumberIdentifier[];
 }
 
-@friendlyName("PagedNumberList")
 model PagedNumberList is Azure.Core.Page<NumberResource>;
 
 /*
@@ -781,6 +780,18 @@ model CountOfRecordsHeader {
   countOfRecords?: int32;
 }
 
+alias BodyParameter<
+  T,
+  TName extends valueof string = "body",
+  TDoc extends valueof string = "Body parameter."
+> = {
+  #suppress "@azure-tools/typespec-azure-core/friendly-name" "Legacy"
+  @doc(TDoc)
+  @friendlyName(TName)
+  @bodyRoot
+  body: T;
+};
+
 alias FilterQueryParameters = QueryParametersTrait<{
   ...FilterQueryParameter;
 }>;
@@ -843,7 +854,11 @@ interface Accounts {
   @doc("Create or update up to 100 Numbers on the specified account.")
   createOrUpdateNumbers is Operations.ResourceAction<
     AccountResource,
-    BatchNumbers,
+    BodyParameter<
+      BatchNumbers,
+      "body",
+      "Batch of numbers to create or replace."
+    >,
     BatchNumbers
   >;
 
@@ -852,7 +867,7 @@ interface Accounts {
   @doc("Delete up to 100 Numbers on the specified account.")
   deleteNumbers is Operations.ResourceAction<
     AccountResource,
-    BatchNumbersDelete,
+    BodyParameter<BatchNumbersDelete, "body", "Batch numbers to delete.">,
     NoContentResponse
   >;
 
@@ -893,7 +908,11 @@ interface Accounts {
   @doc("Get a list of Teams Available Capabilities on the specified account.")
   getTeamsAvailableCapabilities is Operations.ResourceAction<
     AccountResource,
-    NumberIdentifiers,
+    BodyParameter<
+      NumberIdentifiers,
+      "body",
+      "List identifiers for a Number resource"
+    >,
     TeamsAvailableCapabilities
   >;
 
@@ -936,22 +955,11 @@ interface TeamsRequestsForInformation {
 @get
 @readsResource(NumberResource)
 @doc("List all the Numbers associated with this Communications Gateway.")
-@OpenAPI.extension(
-  "x-ms-pageable",
-  {
-    nextLinkName: "nextLink",
-  }
-)
 op listNumbers is RpcOperation<
   {
     ...StandardListQueryParameters;
     ...FilterQueryParameter;
     ...RecordCountQueryParameter;
   },
-  {
-    @statusCode statusCode: 200;
-    @header contentType: "application/json";
-    @bodyRoot success: PagedNumberList;
-    ...CountOfRecordsHeader;
-  }
+  PagedNumberList & CountOfRecordsHeader
 >;

@@ -125,7 +125,7 @@ interface Indexes {
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Need to define route."
   @doc("List the latest version of each index. Latest is defined by most recent created by date.")
-  @route("/indexes/")
+  @route("/indexes")
   @get
   listLatest is Azure.Core.Foundations.Operation<
     {
@@ -240,7 +240,7 @@ interface Prompts {
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Need to define route."
   @doc("List the latest version of each prompt. Latest is defined by most recent created by date.")
-  @route("/prompts/")
+  @route("/prompts")
   @get
   listLatest is Azure.Core.Foundations.Operation<
     {

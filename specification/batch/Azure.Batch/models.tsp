@@ -1051,7 +1051,7 @@ model FileProperties {
   lastModified: utcDateTime;
 
   @doc("The length of the file.")
-  contentLength: int64;
+  contentLength: string;
 
   @doc("The content type of the file.")
   contentType?: string;
@@ -3767,6 +3767,12 @@ model VirtualMachineInfo {
 model BatchNodeRebootContent {
   @doc("When to reboot the Compute Node and what to do with currently running Tasks. The default value is requeue.")
   nodeRebootOption?: BatchNodeRebootOption;
+}
+
+@doc("Parameters for reimaging an Azure Batch Compute Node.")
+model BatchNodeReimageContent {
+  @doc("When to reimage the Compute Node and what to do with currently running Tasks. The default value is requeue.")
+  nodeReimageOption?: BatchNodeReimageOption;
 }
 
 @doc("Parameters for disabling scheduling on an Azure Batch Compute Node.")

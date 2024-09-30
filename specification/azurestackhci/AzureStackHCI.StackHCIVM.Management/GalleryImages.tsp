@@ -12,9 +12,9 @@ using TypeSpec.OpenAPI;
 namespace Microsoft.AzureStackHCI;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-openapi" "x-ms-azure-resource legacy"
 @doc("The gallery images resource definition.")
 @extension("x-ms-azure-resource", true)
-@extension("x-ms-client-flatten", true)
 model GalleryImage is TrackedResource<GalleryImageProperties> {
   @doc("Name of the gallery image")
   @pattern("^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,62}[a-zA-Z0-9]$")
@@ -49,7 +49,7 @@ interface GalleryImages {
   delete is ArmResourceDeleteWithoutOkAsync<GalleryImage>;
 
   @doc("Lists all of the gallery images in the specified resource group. Use the nextLink property in the response to get the next page of gallery images.")
-  list is ArmResourceListByParent<GalleryImage>;
+  listByResourceGroup is ArmResourceListByParent<GalleryImage>;
 
   @doc("Lists all of the gallery images in the specified subscription. Use the nextLink property in the response to get the next page of gallery images.")
   listAll is ArmListBySubscription<GalleryImage>;
