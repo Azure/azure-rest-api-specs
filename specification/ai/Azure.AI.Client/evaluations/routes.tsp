@@ -20,8 +20,8 @@ namespace Azure.AI.Client.Evaluations;
 op create is Azure.Core.Foundations.Operation<
   {
     @doc("Properties of Evaluation.")
-    @evaluation
-    body: Evaluation;
+    @body
+    evaluation: Evaluation;
   },
   ResourceCreatedResponse<Evaluation>
 >;
@@ -43,6 +43,7 @@ op list is Azure.Core.Foundations.Operation<
 @patch
 op update is Azure.Core.Foundations.Operation<
   {
+
     @doc("Identifier of the evaluation.")
     @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_]*$")
     @maxLength(254)
