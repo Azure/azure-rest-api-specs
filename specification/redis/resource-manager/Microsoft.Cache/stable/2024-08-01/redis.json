@@ -184,6 +184,15 @@
           },
           "RedisCacheCreate": {
             "$ref": "./examples/RedisCacheCreate.json"
+          },
+          "RedisCacheCreateAutomaticZonalAllocationPolicy": {
+            "$ref": "./examples/RedisCacheCreateAutomaticZonalAllocationPolicy.json"
+          },
+          "RedisCacheCreateNoZonesZonalAllocationPolicy": {
+            "$ref": "./examples/RedisCacheCreateNoZonesZonalAllocationPolicy.json"
+          },
+          "RedisCacheCreateUserDefinedZonalAllocationPolicy": {
+            "$ref": "./examples/RedisCacheCreateUserDefinedZonalAllocationPolicy.json"
           }
         },
         "description": "Create or replace (overwrite/recreate, with potential downtime) an existing Redis cache.",
@@ -2393,11 +2402,23 @@
           "type": "boolean",
           "description": "Authentication to Redis through access keys is disabled when set as true. Default value is false.",
           "default": false
-        }
+        },
+        "zonalAllocationPolicy": {
+          "type": "string",
+          "description": "Optional: Specifies how availability zones are allocated to the Redis cache. 'Automatic' enables zone redundancy and Azure will automatically select zones based on regional availability and capacity. 'UserDefined' will select availability zones passed in by you using the 'zones' parameter. 'NoZones' will produce a non-zonal cache. If 'zonalAllocationPolicy' is not passed, it will be set to 'UserDefined' when zones are passed in, otherwise, it will be set to 'Automatic' in regions where zones are supported and 'NoZones' in regions where zones are not supported.",
+          "enum": [
+            "Automatic",
+            "UserDefined",
+            "NoZones"
+          ],
+          "x-ms-enum": {
+            "name": "ZonalAllocationPolicy",
+            "modelAsString": true
+          }
+        },
+        "description": "Create/Update/Get common properties of the redis cache.",
+        "x-ms-external": true
       },
-      "description": "Create/Update/Get common properties of the redis cache.",
-      "x-ms-external": true
-    },
     "RedisCreateProperties": {
       "properties": {
         "sku": {
