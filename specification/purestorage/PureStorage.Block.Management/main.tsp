@@ -37,6 +37,12 @@ enum Versions {
   @useDependency(LiftrBase.Versions.v3_preview)
   @useDependency(LiftrBase.Storage.Versions.v1_preview)
   v3_preview: "2024-08-01-preview",
+
+  @doc("Version 4 preview.")
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  @useDependency(LiftrBase.Versions.v4_preview)
+  @useDependency(LiftrBase.Storage.Versions.v1_preview)
+  v4_preview: "2024-10-01-preview",
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}
@@ -181,6 +187,7 @@ interface StoragePools {
   @doc("Lists AVS properties for specific Storage Pool.")
   @armResourceAction(StoragePool)
   @action("getAvsParameters")
+  @removed(Versions.v4_preview)
   @post
   getAvsParameters(
     ...ResourceInstanceParameters<StoragePool>,
@@ -475,6 +482,7 @@ model RangeLimits {
 }
 
 @doc("AVS (Azure VMware Solution) related properties.")
+@removed(Versions.v4_preview)
 model AvsDetails {
   @doc("Flag which tells if the AVS support is enabled.")
   avsEnabled: boolean;
