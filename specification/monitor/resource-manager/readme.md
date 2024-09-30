@@ -64,7 +64,6 @@ input-file:
   - Microsoft.Insights/stable/2022-10-01/autoscale_API.json
   - Microsoft.Insights/stable/2015-04-01/operations_API.json
   - Microsoft.Insights/stable/2016-03-01/alertRulesIncidents_API.json
-  - Microsoft.Insights/stable/2016-03-01/alertRules_API.json
   - Microsoft.Insights/stable/2016-03-01/logProfiles_API.json
   - Microsoft.Insights/preview/2021-05-01-preview/diagnosticsSettings_API.json
   - Microsoft.Insights/preview/2021-05-01-preview/diagnosticsSettingsCategories_API.json
@@ -98,7 +97,6 @@ input-file:
   - Microsoft.Insights/stable/2022-10-01/autoscale_API.json
   - Microsoft.Insights/stable/2015-04-01/operations_API.json
   - Microsoft.Insights/stable/2016-03-01/alertRulesIncidents_API.json
-  - Microsoft.Insights/stable/2016-03-01/alertRules_API.json
   - Microsoft.Insights/stable/2016-03-01/logProfiles_API.json
   - Microsoft.Insights/preview/2021-05-01-preview/diagnosticsSettings_API.json
   - Microsoft.Insights/preview/2021-05-01-preview/diagnosticsSettingsCategories_API.json
@@ -131,7 +129,6 @@ input-file:
   - Microsoft.Insights/stable/2022-10-01/autoscale_API.json
   - Microsoft.Insights/stable/2015-04-01/operations_API.json
   - Microsoft.Insights/stable/2016-03-01/alertRulesIncidents_API.json
-  - Microsoft.Insights/stable/2016-03-01/alertRules_API.json
   - Microsoft.Insights/stable/2016-03-01/logProfiles_API.json
   - Microsoft.Insights/preview/2021-05-01-preview/diagnosticsSettings_API.json
   - Microsoft.Insights/preview/2021-05-01-preview/diagnosticsSettingsCategories_API.json
@@ -165,7 +162,6 @@ input-file:
   - Microsoft.Insights/stable/2022-10-01/autoscale_API.json
   - Microsoft.Insights/stable/2015-04-01/operations_API.json
   - Microsoft.Insights/stable/2016-03-01/alertRulesIncidents_API.json
-  - Microsoft.Insights/stable/2016-03-01/alertRules_API.json
   - Microsoft.Insights/stable/2016-03-01/logProfiles_API.json
   - Microsoft.Insights/preview/2021-05-01-preview/diagnosticsSettings_API.json
   - Microsoft.Insights/preview/2021-05-01-preview/diagnosticsSettingsCategories_API.json
@@ -205,7 +201,6 @@ input-file:
   - Microsoft.Insights/stable/2022-10-01/autoscale_API.json
   - Microsoft.Insights/stable/2015-04-01/operations_API.json
   - Microsoft.Insights/stable/2016-03-01/alertRulesIncidents_API.json
-  - Microsoft.Insights/stable/2016-03-01/alertRules_API.json
   - Microsoft.Insights/stable/2016-03-01/logProfiles_API.json
   - Microsoft.Insights/preview/2021-05-01-preview/diagnosticsSettings_API.json
   - Microsoft.Insights/preview/2021-05-01-preview/diagnosticsSettingsCategories_API.json
@@ -248,7 +243,6 @@ input-file:
   - Microsoft.Insights/stable/2022-10-01/autoscale_API.json
   - Microsoft.Insights/stable/2015-04-01/operations_API.json
   - Microsoft.Insights/stable/2016-03-01/alertRulesIncidents_API.json
-  - Microsoft.Insights/stable/2016-03-01/alertRules_API.json
   - Microsoft.Insights/stable/2016-03-01/logProfiles_API.json
   - Microsoft.Insights/preview/2021-05-01-preview/diagnosticsSettings_API.json
   - Microsoft.Insights/preview/2021-05-01-preview/diagnosticsSettingsCategories_API.json
@@ -280,7 +274,6 @@ input-file:
   - Microsoft.Insights/stable/2022-10-01/autoscale_API.json
   - Microsoft.Insights/stable/2015-04-01/operations_API.json
   - Microsoft.Insights/stable/2016-03-01/alertRulesIncidents_API.json
-  - Microsoft.Insights/stable/2016-03-01/alertRules_API.json
   - Microsoft.Insights/stable/2016-03-01/logProfiles_API.json
   - Microsoft.Insights/preview/2021-05-01-preview/diagnosticsSettings_API.json
   - Microsoft.Insights/preview/2021-05-01-preview/diagnosticsSettingsCategories_API.json
@@ -361,7 +354,6 @@ input-file:
   - Microsoft.Insights/stable/2022-10-01/autoscale_API.json
   - Microsoft.Insights/stable/2015-04-01/operations_API.json
   - Microsoft.Insights/stable/2016-03-01/alertRulesIncidents_API.json
-  - Microsoft.Insights/stable/2016-03-01/alertRules_API.json
   - Microsoft.Insights/stable/2016-03-01/logProfiles_API.json
   - Microsoft.Insights/preview/2021-05-01-preview/diagnosticsSettings_API.json
   - Microsoft.Insights/preview/2021-05-01-preview/diagnosticsSettingsCategories_API.json
@@ -395,7 +387,6 @@ input-file:
   - Microsoft.Insights/stable/2022-10-01/autoscale_API.json
   - Microsoft.Insights/stable/2015-04-01/operations_API.json
   - Microsoft.Insights/stable/2016-03-01/alertRulesIncidents_API.json
-  - Microsoft.Insights/stable/2016-03-01/alertRules_API.json
   - Microsoft.Insights/stable/2016-03-01/logProfiles_API.json
   - Microsoft.Insights/preview/2021-05-01-preview/diagnosticsSettings_API.json
   - Microsoft.Insights/preview/2021-05-01-preview/diagnosticsSettingsCategories_API.json
@@ -428,7 +419,6 @@ input-file:
   - Microsoft.Insights/stable/2022-10-01/autoscale_API.json
   - Microsoft.Insights/stable/2015-04-01/operations_API.json
   - Microsoft.Insights/stable/2016-03-01/alertRulesIncidents_API.json
-  - Microsoft.Insights/stable/2016-03-01/alertRules_API.json
   - Microsoft.Insights/stable/2016-03-01/logProfiles_API.json
   - Microsoft.Insights/preview/2021-05-01-preview/diagnosticsSettings_API.json
   - Microsoft.Insights/preview/2021-05-01-preview/diagnosticsSettingsCategories_API.json
@@ -461,7 +451,6 @@ input-file:
   - Microsoft.Insights/stable/2022-10-01/autoscale_API.json
   - Microsoft.Insights/stable/2015-04-01/operations_API.json
   - Microsoft.Insights/stable/2016-03-01/alertRulesIncidents_API.json
-  - Microsoft.Insights/stable/2016-03-01/alertRules_API.json
   - Microsoft.Insights/stable/2016-03-01/logProfiles_API.json
   - Microsoft.Insights/preview/2017-05-01-preview/diagnosticsSettings_API.json
   - Microsoft.Insights/preview/2017-05-01-preview/diagnosticsSettingsCategories_API.json
@@ -492,7 +481,6 @@ input-file:
   - Microsoft.Insights/stable/2022-10-01/autoscale_API.json
   - Microsoft.Insights/stable/2015-04-01/operations_API.json
   - Microsoft.Insights/stable/2016-03-01/alertRulesIncidents_API.json
-  - Microsoft.Insights/stable/2016-03-01/alertRules_API.json
   - Microsoft.Insights/stable/2016-03-01/logProfiles_API.json
   - Microsoft.Insights/preview/2017-05-01-preview/diagnosticsSettings_API.json
   - Microsoft.Insights/preview/2017-05-01-preview/diagnosticsSettingsCategories_API.json
@@ -532,7 +520,6 @@ input-file:
   - Microsoft.Insights/stable/2015-04-01/autoscale_API.json
   - Microsoft.Insights/stable/2015-04-01/operations_API.json
   - Microsoft.Insights/stable/2016-03-01/alertRulesIncidents_API.json
-  - Microsoft.Insights/stable/2016-03-01/alertRules_API.json
   - Microsoft.Insights/stable/2016-03-01/logProfiles_API.json
   - Microsoft.Insights/preview/2017-05-01-preview/diagnosticsSettings_API.json
   - Microsoft.Insights/preview/2017-05-01-preview/diagnosticsSettingsCategories_API.json
@@ -592,7 +579,6 @@ These settings apply only when `--tag=package-2016-03-preview-monitorlegacy` is 
 ```yaml $(tag) == 'package-2016-03-preview-monitorlegacy'
 input-file:
   - Microsoft.Insights/stable/2015-04-01/eventCategories_API.json
-  - Microsoft.Insights/stable/2016-03-01/alertRules_API.json
   - Microsoft.Insights/stable/2016-03-01/alertRulesIncidents_API.json
   - Microsoft.Insights/stable/2016-03-01/logProfiles_API.json
   - Microsoft.Insights/preview/2018-11-27-preview/vmInsightsOnboarding_API.json
@@ -681,7 +667,6 @@ input-file:
   - Microsoft.Insights/stable/2015-04-01/autoscale_API.json
   - Microsoft.Insights/stable/2015-04-01/operations_API.json
   - Microsoft.Insights/stable/2016-03-01/alertRulesIncidents_API.json
-  - Microsoft.Insights/stable/2016-03-01/alertRules_API.json
   - Microsoft.Insights/stable/2016-03-01/logProfiles_API.json
   - Microsoft.Insights/preview/2017-05-01-preview/diagnosticsSettings_API.json
   - Microsoft.Insights/preview/2017-05-01-preview/diagnosticsSettingsCategories_API.json
@@ -730,7 +715,6 @@ input-file:
   - Microsoft.Insights/stable/2015-04-01/autoscale_API.json
   - Microsoft.Insights/stable/2015-04-01/operations_API.json
   - Microsoft.Insights/stable/2016-03-01/alertRulesIncidents_API.json
-  - Microsoft.Insights/stable/2016-03-01/alertRules_API.json
   - Microsoft.Insights/stable/2016-03-01/logProfiles_API.json
   - Microsoft.Insights/preview/2017-05-01-preview/diagnosticsSettings_API.json
   - Microsoft.Insights/preview/2017-05-01-preview/diagnosticsSettingsCategories_API.json
@@ -770,7 +754,6 @@ input-file:
   - Microsoft.Insights/stable/2015-04-01/autoscale_API.json
   - Microsoft.Insights/stable/2015-04-01/operations_API.json
   - Microsoft.Insights/stable/2016-03-01/alertRulesIncidents_API.json
-  - Microsoft.Insights/stable/2016-03-01/alertRules_API.json
   - Microsoft.Insights/stable/2016-03-01/logProfiles_API.json
   - Microsoft.Insights/preview/2017-05-01-preview/diagnosticsSettings_API.json
   - Microsoft.Insights/preview/2017-05-01-preview/diagnosticsSettingsCategories_API.json
@@ -870,7 +853,6 @@ input-file:
   - Microsoft.Insights/stable/2015-04-01/autoscale_API.json
   - Microsoft.Insights/stable/2015-04-01/operations_API.json
   - Microsoft.Insights/stable/2016-03-01/alertRulesIncidents_API.json
-  - Microsoft.Insights/stable/2016-03-01/alertRules_API.json
   - Microsoft.Insights/stable/2016-03-01/logProfiles_API.json
   - Microsoft.Insights/preview/2017-05-01-preview/diagnosticsSettings_API.json
   - Microsoft.Insights/preview/2017-05-01-preview/diagnosticsSettingsCategories_API.json
@@ -898,7 +880,6 @@ input-file:
   - Microsoft.Insights/stable/2015-04-01/autoscale_API.json
   - Microsoft.Insights/stable/2015-04-01/operations_API.json
   - Microsoft.Insights/stable/2016-03-01/alertRulesIncidents_API.json
-  - Microsoft.Insights/stable/2016-03-01/alertRules_API.json
   - Microsoft.Insights/stable/2016-03-01/logProfiles_API.json
   - Microsoft.Insights/preview/2017-05-01-preview/diagnosticsSettings_API.json
   - Microsoft.Insights/preview/2017-05-01-preview/subscriptionDiagnosticsSettings_API.json
@@ -946,7 +927,6 @@ input-file:
   - Microsoft.Insights/stable/2015-04-01/autoscale_API.json
   - Microsoft.Insights/stable/2015-04-01/operations_API.json
   - Microsoft.Insights/stable/2016-03-01/alertRulesIncidents_API.json
-  - Microsoft.Insights/stable/2016-03-01/alertRules_API.json
   - Microsoft.Insights/stable/2016-03-01/logProfiles_API.json
   - Microsoft.Insights/preview/2017-05-01-preview/diagnosticsSettings_API.json
   - Microsoft.Insights/preview/2017-05-01-preview/diagnosticsSettingsCategories_API.json
@@ -973,7 +953,6 @@ input-file:
   - Microsoft.Insights/stable/2015-04-01/autoscale_API.json
   - Microsoft.Insights/stable/2015-04-01/operations_API.json
   - Microsoft.Insights/stable/2016-03-01/alertRulesIncidents_API.json
-  - Microsoft.Insights/stable/2016-03-01/alertRules_API.json
   - Microsoft.Insights/stable/2016-03-01/logProfiles_API.json
   - Microsoft.Insights/preview/2017-05-01-preview/diagnosticsSettings_API.json
   - Microsoft.Insights/preview/2017-05-01-preview/diagnosticsSettingsCategories_API.json
@@ -1000,7 +979,6 @@ input-file:
   - Microsoft.Insights/stable/2015-04-01/autoscale_API.json
   - Microsoft.Insights/stable/2015-04-01/operations_API.json
   - Microsoft.Insights/stable/2016-03-01/alertRulesIncidents_API.json
-  - Microsoft.Insights/stable/2016-03-01/alertRules_API.json
   - Microsoft.Insights/stable/2016-03-01/logProfiles_API.json
   - Microsoft.Insights/preview/2017-05-01-preview/diagnosticsSettings_API.json
   - Microsoft.Insights/preview/2017-05-01-preview/diagnosticsSettingsCategories_API.json
@@ -1026,7 +1004,6 @@ input-file:
   - Microsoft.Insights/stable/2015-04-01/autoscale_API.json
   - Microsoft.Insights/stable/2015-04-01/operations_API.json
   - Microsoft.Insights/stable/2016-03-01/alertRulesIncidents_API.json
-  - Microsoft.Insights/stable/2016-03-01/alertRules_API.json
   - Microsoft.Insights/stable/2016-03-01/logProfiles_API.json
   - Microsoft.Insights/preview/2017-05-01-preview/diagnosticsSettings_API.json
   - Microsoft.Insights/preview/2017-05-01-preview/diagnosticsSettingsCategories_API.json
@@ -1051,7 +1028,6 @@ input-file:
   - Microsoft.Insights/stable/2015-04-01/autoscale_API.json
   - Microsoft.Insights/stable/2015-04-01/operations_API.json
   - Microsoft.Insights/stable/2016-03-01/alertRulesIncidents_API.json
-  - Microsoft.Insights/stable/2016-03-01/alertRules_API.json
   - Microsoft.Insights/stable/2016-03-01/logProfiles_API.json
   - Microsoft.Insights/preview/2017-05-01-preview/diagnosticsSettings_API.json
   - Microsoft.Insights/preview/2017-05-01-preview/diagnosticsSettingsCategories_API.json
@@ -1075,7 +1051,6 @@ input-file:
   - Microsoft.Insights/stable/2015-04-01/autoscale_API.json
   - Microsoft.Insights/stable/2015-04-01/operations_API.json
   - Microsoft.Insights/stable/2016-03-01/alertRulesIncidents_API.json
-  - Microsoft.Insights/stable/2016-03-01/alertRules_API.json
   - Microsoft.Insights/stable/2016-03-01/logProfiles_API.json
   - Microsoft.Insights/preview/2017-05-01-preview/diagnosticsSettings_API.json
   - Microsoft.Insights/preview/2017-05-01-preview/diagnosticsSettingsCategories_API.json
@@ -1097,7 +1072,6 @@ input-file:
   - Microsoft.Insights/stable/2015-04-01/autoscale_API.json
   - Microsoft.Insights/stable/2015-04-01/operations_API.json
   - Microsoft.Insights/stable/2016-03-01/alertRulesIncidents_API.json
-  - Microsoft.Insights/stable/2016-03-01/alertRules_API.json
   - Microsoft.Insights/stable/2016-03-01/logProfiles_API.json
   - Microsoft.Insights/preview/2017-05-01-preview/diagnosticsSettings_API.json
   - Microsoft.Insights/preview/2017-05-01-preview/diagnosticsSettingsCategories_API.json
@@ -1119,7 +1093,6 @@ input-file:
   - Microsoft.Insights/stable/2015-04-01/autoscale_API.json
   - Microsoft.Insights/stable/2015-04-01/operations_API.json
   - Microsoft.Insights/stable/2016-03-01/alertRulesIncidents_API.json
-  - Microsoft.Insights/stable/2016-03-01/alertRules_API.json
   - Microsoft.Insights/stable/2016-03-01/logProfiles_API.json
   - Microsoft.Insights/preview/2017-05-01-preview/diagnosticsSettings_API.json
   - Microsoft.Insights/preview/2017-05-01-preview/diagnosticsSettingsCategories_API.json
@@ -1152,7 +1125,6 @@ input-file:
   - Microsoft.Insights/stable/2015-04-01/autoscale_API.json
   - Microsoft.Insights/stable/2015-04-01/operations_API.json
   - Microsoft.Insights/stable/2016-03-01/alertRulesIncidents_API.json
-  - Microsoft.Insights/stable/2016-03-01/alertRules_API.json
   - Microsoft.Insights/stable/2016-03-01/logProfiles_API.json
   - Microsoft.Insights/preview/2017-05-01-preview/diagnosticsSettings_API.json
   - Microsoft.Insights/preview/2017-05-01-preview/diagnosticsSettingsCategories_API.json
@@ -1324,7 +1296,6 @@ These settings apply only when `--tag=package-2016-03-01-only` is specified on t
 ```yaml $(tag) == 'package-2016-03-01-only'
 input-file:
   - Microsoft.Insights/stable/2016-03-01/alertRulesIncidents_API.json
-  - Microsoft.Insights/stable/2016-03-01/alertRules_API.json
   - Microsoft.Insights/stable/2016-03-01/logProfiles_API.json
   - Microsoft.Insights/stable/2016-03-01/metricDefinitions_API.json
 ```
@@ -1337,7 +1308,6 @@ These settings apply only when `--tag=package-2015-07-01-only` is specified on t
 input-file:
   - Microsoft.Insights/stable/2015-07-01/serviceDiagnosticsSettings_API.json
   - Microsoft.Insights/stable/2015-07-01/metricDefinitions_API.json
-  - Microsoft.Insights/stable/2014-04-01/alertRules_API.json
   - Microsoft.Insights/stable/2015-07-01/operations_API.json
 ```
 
@@ -1363,7 +1333,6 @@ input-file:
   - Microsoft.Insights/stable/2015-04-01/eventCategories_API.json
   - Microsoft.Insights/stable/2015-04-01/operations_API.json
   - Microsoft.Insights/stable/2015-04-01/tenantActivityLogs_API.json
-  - Microsoft.Insights/stable/2014-04-01/alertRules_API.json
 ```
 
 ### Tag: package-2015-04-01-python-only
@@ -1385,7 +1354,6 @@ These settings apply only when `--tag=package-2014-04-01-only` is specified on t
 
 ```yaml $(tag) == 'package-2014-04-01-only'
 input-file:
-  - Microsoft.Insights/stable/2014-04-01/alertRules_API.json
   - Microsoft.Insights/stable/2014-04-01/autoscale_API.json
 ```
 
