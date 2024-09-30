@@ -29,7 +29,7 @@ op create is Azure.Core.Foundations.Operation<
     workspaceName: string;
 
     @doc("Properties of Evaluation.")
-    @body
+    @evaluation
     body: Evaluation;
   },
   ResourceCreatedResponse<Evaluation>
