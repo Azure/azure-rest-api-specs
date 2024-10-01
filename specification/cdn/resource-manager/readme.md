@@ -29,9 +29,33 @@ These are the global settings for the Cdn API.
 title: CdnManagementClient
 description: Cdn Management Client
 openapi-type: arm
-tag: package-2024-02
+tag: package-2024-09
 ```
 
+### Tag: package-2024-09
+
+These settings apply only when `--tag=package-2024-09` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-09'
+input-file:
+  - Microsoft.Cdn/stable/2024-09-01/afdx.json
+  - Microsoft.Cdn/stable/2024-09-01/cdn.json
+  - Microsoft.Cdn/stable/2024-09-01/cdnwebapplicationfirewall.json
+suppressions:
+  - code: MISSING_RESOURCE_ID
+    reason: Keeping it for legacy tooling
+```
+
+### Tag: package-preview-2024-06
+
+These settings apply only when `--tag=package-preview-2024-06` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2024-06'
+input-file:
+  - Microsoft.Cdn/preview/2024-06-01-preview/afdx.json
+  - Microsoft.Cdn/preview/2024-06-01-preview/cdn.json
+  - Microsoft.Cdn/preview/2024-06-01-preview/cdnwebapplicationfirewall.json
+```
 
 ### Tag: package-preview-2024-05
 

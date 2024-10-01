@@ -5,12 +5,13 @@ import { ExpectStatic, test } from "vitest";
 
 const repoRoot = join(__dirname, "..", "..", "..", "..");
 
-async function tspClient(...args: string[]) {
-  const allArgs = ["exec", "--no", "--", "tsp-client"].concat(args);
-
+async function npmExec(...args: string[]) {
+  const allArgs = ["exec", "--no", "--"].concat(args);
   console.log(`${repoRoot}$ npm ${allArgs.join(" ")}`);
 
-  return await execa("npm", allArgs, { all: true, cwd: repoRoot, reject: false });
+  const result = await execa("npm", allArgs, { all: true, cwd: repoRoot, reject: false });
+  console.log(result.all);
+  return result;
 }
 
 async function convert(expect: ExpectStatic, readme: string) {
@@ -26,7 +27,8 @@ async function convert(expect: ExpectStatic, readme: string) {
   }
 
   try {
-    const { stdout, all, exitCode } = await tspClient(
+    let { stdout, all, exitCode } = await npmExec(
+      "tsp-client",
       "convert",
       "--no-prompt",
       "--swagger-readme",
@@ -46,6 +48,12 @@ async function convert(expect: ExpectStatic, readme: string) {
     const mainTsp = join(outputFolder, "main.tsp");
     await access(mainTsp, constants.R_OK);
     console.log(`File exists: ${mainTsp}`);
+
+    // Use "--no-emit" to avoid generating output files that would need to be cleaned up
+    ({ stdout, all, exitCode } = await npmExec("tsp", "compile", "--no-emit", outputFolder));
+
+    expect(stdout).toContain("TypeSpec compiler");
+    expect(exitCode, all).toBe(0);
   } finally {
     await rm(outputFolder, { recursive: true, force: true });
   }
@@ -55,9 +63,9 @@ async function convert(expect: ExpectStatic, readme: string) {
 }
 
 test.concurrent("Usage", async ({ expect }) => {
-  const { stdout, exitCode } = await tspClient();
+  const { all, exitCode } = await npmExec("tsp-client");
 
-  expect(stdout).toContain("Usage");
+  expect(all).toContain("Usage");
   expect(exitCode).not.toBe(0);
 });
 
