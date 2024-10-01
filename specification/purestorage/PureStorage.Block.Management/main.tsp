@@ -157,6 +157,7 @@ model AzureVmwareService {
   @doc("Resource id pointing at the AVS SDDC the pool is configured with.")
   sddcResourceId?: string;
 
+  @removed(Versions.v4_preview)
   @doc("Immutable identifier for the vSpherePlugin provided by Pure Storage. The value is available if the vSpherePlugin has been enabled for the storage pool.")
   vSpherePluginKey?: string;
 }
@@ -789,9 +790,11 @@ model AvsStorageContainerProperties {
 
 @armResourceOperations
 interface AvsStorageContainers {
+  @removed(Versions.v4_preview)
   create is ArmResourceCreateOrUpdateAsync<AvsStorageContainer>;
   get is ArmResourceRead<AvsStorageContainer>;
   delete is ArmResourceDeleteWithoutOkAsync<AvsStorageContainer>;
+  @removed(Versions.v4_preview)
   update is ArmCustomPatchAsync<
     AvsStorageContainer,
     Azure.ResourceManager.Foundations.ResourceUpdateModel<
