@@ -7,7 +7,7 @@
  * @param {import('github-script').AsyncFunctionArguments} AsyncFunctionArguments
  */
 module.exports = async ({ github, context, core }) => {
-  console.log("context: " + JSON.stringify(context));
+  console.log("context: " + JSON.stringify(context, null, 2));
 
   if (context.eventName !== "workflow_run" || context.action == "completed" ) {
     throw new Error(`Invalid context: '${context.eventName}:${context.action}'.  Expected 'workflow_run:completed'.`);
@@ -21,7 +21,7 @@ module.exports = async ({ github, context, core }) => {
     run_id: payload.workflow_run.id,
   });
 
-  console.log("artifacts: " + JSON.stringify(artifacts));
+  console.log("artifacts: " + JSON.stringify(artifacts, null, 2));
 
   // const specLifecycleDataPlaneBrownfield = existsSync("spec-lifecycle-data-plane-brownfield");
   // const specLifecycleResourceManagerBrownfield = existsSync("spec-lifecycle-resource-manager-brownfield");
