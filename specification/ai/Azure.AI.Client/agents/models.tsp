@@ -1,14 +1,9 @@
-import "@typespec/http";
 import "@typespec/rest";
 import "@azure-tools/typespec-autorest";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@typespec/openapi";
-
-import "../common/models.tsp";
-import "../tools/models.tsp";
-import "../tools/tool_resources.tsp";
-import "../main.tsp";
+import "@typespec/versioning";
 
 using TypeSpec.OpenAPI;
 using TypeSpec.Http;
