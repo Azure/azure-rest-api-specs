@@ -13,7 +13,11 @@ model CreateUploadRequest {
   filename: string;
 
   // Reference: https://platform.openai.com/docs/api-reference/files/create#files-create-purpose
-  /** The intended purpose of the uploaded file. */
+  /** 
+   * The intended purpose of the uploaded file. 
+   * 
+   * Use 'assistants' for Assistants and Message files, 'vision' for Assistants image file inputs, 'batch' for Batch API, and 'fine-tune' for Fine-tuning.
+   */
   purpose: string | "assistants" | "batch" | "fine-tune" | "vision";
 
   /** The number of bytes in the file you are uploading. */
