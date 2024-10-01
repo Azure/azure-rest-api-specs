@@ -1,0 +1,86 @@
+{
+  "name": "@azure/arm-computefleet",
+  "sdk-type": "mgmt",
+  "author": "Microsoft Corporation",
+  "description": "A generated SDK for MicrosoftAzureFleet.",
+  "version": "1.0.0-beta.1",
+  "engines": { "node": ">=18.0.0" },
+  "dependencies": {
+    "@azure/core-lro": "^2.5.4",
+    "@azure/abort-controller": "^2.1.2",
+    "@azure/core-paging": "^1.2.0",
+    "@azure/core-client": "^1.7.0",
+    "@azure/core-auth": "^1.6.0",
+    "@azure/core-rest-pipeline": "^1.14.0",
+    "tslib": "^2.2.0"
+  },
+  "keywords": ["node", "azure", "typescript", "browser", "isomorphic"],
+  "license": "MIT",
+  "main": "./dist/index.js",
+  "module": "./dist-esm/index.js",
+  "types": "./types/arm-computefleet.d.ts",
+  "devDependencies": {
+    "@microsoft/api-extractor": "^7.31.1",
+    "mkdirp": "^3.0.1",
+    "typescript": "~5.5.3",
+    "uglify-js": "^3.4.9",
+    "rimraf": "^5.0.0",
+    "dotenv": "^16.0.0",
+    "@azure/dev-tool": "^1.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Azure/azure-sdk-for-js.git"
+  },
+  "bugs": { "url": "https://github.com/Azure/azure-sdk-for-js/issues" },
+  "files": [
+    "dist/**/*.js",
+    "dist/**/*.js.map",
+    "dist/**/*.d.ts",
+    "dist/**/*.d.ts.map",
+    "dist-esm/**/*.js",
+    "dist-esm/**/*.js.map",
+    "dist-esm/**/*.d.ts",
+    "dist-esm/**/*.d.ts.map",
+    "src/**/*.ts",
+    "README.md",
+    "LICENSE",
+    "tsconfig.json",
+    "review/*",
+    "CHANGELOG.md",
+    "types/*"
+  ],
+  "scripts": {
+    "build": "npm run clean && tsc && dev-tool run bundle && npm run minify && mkdirp ./review && npm run extract-api",
+    "minify": "uglifyjs -c -m --comments --source-map \"content='./dist/index.js.map'\" -o ./dist/index.min.js ./dist/index.js",
+    "prepack": "npm run build",
+    "pack": "npm pack 2>&1",
+    "extract-api": "dev-tool run extract-api",
+    "lint": "echo skipped",
+    "clean": "rimraf --glob dist dist-browser dist-esm test-dist temp types *.tgz *.log",
+    "build:node": "echo skipped",
+    "build:browser": "echo skipped",
+    "build:test": "echo skipped",
+    "build:samples": "echo skipped.",
+    "check-format": "echo skipped",
+    "execute:samples": "echo skipped",
+    "format": "echo skipped",
+    "test": "echo skipped",
+    "test:node": "echo skipped",
+    "test:browser": "echo skipped",
+    "unit-test": "echo skipped",
+    "unit-test:node": "echo skipped",
+    "unit-test:browser": "echo skipped",
+    "integration-test": "echo skipped",
+    "integration-test:node": "echo skipped",
+    "integration-test:browser": "echo skipped"
+  },
+  "sideEffects": false,
+  "//metadata": {
+    "constantPaths": [
+      { "path": "src/microsoftAzureFleet.ts", "prefix": "packageDetails" }
+    ]
+  },
+  "autoPublish": true,
+  "homepage": "https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/computefleet/arm-computefleet"
+}
