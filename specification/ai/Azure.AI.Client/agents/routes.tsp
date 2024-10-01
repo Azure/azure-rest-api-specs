@@ -51,26 +51,6 @@ op listAgents is Azure.Core.RpcOperation<
 >;
 
 /**
- * Retrieves an existing agent.
- *
- * @param agentId The ID of the agent to retrieve.
- * @returns The requested agent instance.
- */
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
-#suppress "@azure-tools/typespec-azure-core/no-operation-id" "non-standard operations"
-#suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
-#suppress "@azure-tools/typespec-azure-core/use-standard-names" "mirrored API name parity"
-@get
-@route("/agents/{agentId}")
-@added(ServiceApiVersions.v2024_02_15_preview)
-op getAgent is Azure.Core.RpcOperation<
-  {
-    @path agentId: string
-  },
-  Agent
->;
-
-/**
  * Modifies an existing agent.
  *
  * @param updateAgentOptions The details of the modification to perform on a specified agent.
@@ -90,23 +70,4 @@ op updateAgent is Azure.Core.RpcOperation<
     ...UpdateAgentOptions
   },
   Agent
->;
-
-/**
- * Deletes an agent.
- *
- * @param agentId The ID of the agent to delete.
- * @returns Status information about the requested deletion operation.
- */
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
-#suppress "@azure-tools/typespec-azure-core/no-operation-id" "non-standard operations"
-#suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
-@delete
-@route("/agents/{agentId}")
-@added(ServiceApiVersions.v2024_02_15_preview)
-op deleteAgent is Azure.Core.RpcOperation<
-  {
-    @path agentId: string
-  },
-  AgentDeletionStatus
 >;
