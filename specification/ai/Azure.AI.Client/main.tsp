@@ -47,16 +47,8 @@ namespace Azure.AI {
 namespace Azure.AI.Client {
   @doc("Azure AI API versions")
   enum Versions {
-    @doc("The version of Azure AI Assistants that corresponds to functionality in OpenAI's first beta release.")
-    @useDependency(Azure.Core.Versions.v1_0_Preview_2)
-    v2024_02_15_preview: "2024-02-15-preview",
-
-    @doc("The version of Azure AI Assistants that corresponds to first availability of assistants V2.")
-    @useDependency(Azure.Core.Versions.v1_0_Preview_2)
-    v2024_05_01_preview: "2024-05-01-preview",
-
     @doc("Azure AI API version 2024-07-01-preview.")
     @useDependency(Azure.Core.Versions.v1_0_Preview_2)
-    v2024_07_01_preview: "2024-07-01-preview",
+    `2024-07-01-preview`,
   }
 }

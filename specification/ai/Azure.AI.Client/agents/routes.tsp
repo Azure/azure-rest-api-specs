@@ -14,19 +14,18 @@ using Azure.Core.Foundations;
 namespace Azure.AI.Client.Agents;
 
 /**
- * Creates a new assistant.
+ * Creates a new agent.
  *
- * @returns The new assistant instance.
+ * @returns The new agent instance.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
 #suppress "@azure-tools/typespec-azure-core/no-operation-id" "non-standard operations"
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
 @route("/assistants")
 @post
-@added(Versions.v2024_02_15_preview)
-op createAssistant is Azure.Core.RpcOperation<
+op createAgent is Azure.Core.RpcOperation<
   {
-    ...CreateAssistantOptions
+    ...CreateAgentOptions
   },
-  Assistant
+  Agent
 >;
