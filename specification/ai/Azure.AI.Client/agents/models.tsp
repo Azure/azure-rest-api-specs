@@ -155,6 +155,71 @@ model CreateAgentOptions {
   ...OptionalNullableMetadata;
 }
 
+@doc("The request details to use when modifying an existing agent.")
+@added(ServiceApiVersions.v2024_02_15_preview)
+model UpdateAgentOptions {
+  @path
+  @doc("The ID of the agent to modify.")
+  agentId: string;
+
+  @doc("The ID of the model to use.")
+  `model`?: string;
+
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
+  @doc("The modified name for the agent to use.")
+  name?: string | null;
+
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
+  @doc("The modified description for the agent to use.")
+  description?: string | null;
+
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
+  @doc("The modified system instructions for the new agent to use.")
+  instructions?: string | null;
+
+  @doc("The modified collection of tools to enable for the agent.")
+  tools?: ToolDefinition[] = #[];
+
+  /**
+   * A set of resources that are used by the agent's tools. The resources are specific to the type of tool. For example,
+   * the `code_interpreter` tool requires a list of file IDs, while the `file_search` tool requires a list of vector store IDs.
+   */
+  @encodedName("application/json", "tool_resources")
+  @added(ServiceApiVersions.v2024_05_01_preview)
+  toolResources?: ToolResources;
+
+  /**
+   * What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output more random,
+   * while lower values like 0.2 will make it more focused and deterministic.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
+  @added(ServiceApiVersions.v2024_05_01_preview)
+  @minValue(0)
+  @maxValue(2)
+  temperature?: float32 | null = 1;
+
+  /**
+   * An alternative to sampling with temperature, called nucleus sampling, where the model considers the results of the tokens with top_p probability mass.
+   * So 0.1 means only the tokens comprising the top 10% probability mass are considered.
+   *
+   * We generally recommend altering this or temperature but not both.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
+  @added(ServiceApiVersions.v2024_05_01_preview)
+  @minValue(0)
+  @maxValue(1)
+  @encodedName("application/json", "top_p")
+  topP?: float32 | null = 1;
+
+  /** The response format of the tool calls used by this agent. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
+  @encodedName("application/json", "response_format")
+  @added(ServiceApiVersions.v2024_05_01_preview)
+  responseFormat?: AgentsApiResponseFormatOption | null;
+
+  ...OptionalNullableMetadata;
+}
+
 @doc("The status of an agent deletion operation.")
 @added(ServiceApiVersions.v2024_02_15_preview)
 model AgentDeletionStatus {

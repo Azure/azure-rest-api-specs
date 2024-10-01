@@ -3,24 +3,19 @@ parameters:
     default: "sdk/ai"
 emit:
   - "@azure-tools/typespec-autorest"
-  - "@typespec/openapi3"
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/data-plane"
 options:
   "@azure-tools/typespec-autorest":
-    emitter-output-dir: "{project-root}/../"
+    emitter-output-dir: "{project-root}/.."
     azure-resource-provider-folder: "data-plane"
-    omit-unreachable-types: true
     emit-lro-options: "none"
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/azure-ai-client.json"
-  "@typespec/openapi3"	:
-    emitter-output-dir: "{project-root}/../"
-    output-file: "{output-folder-base}/OpenApiV3/{version}/agents_generated.yaml"
   "@azure-tools/typespec-python":
     package-mode: "dataplane"
     package-dir: "azure-ai-client"
     package-name: "{package-dir}"
-    package-version: "1.0.0b23"
+    package-version: "1.0.0b25"
     generate-sample-project: false
     flavor: azure
