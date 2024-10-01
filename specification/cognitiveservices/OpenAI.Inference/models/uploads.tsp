@@ -13,9 +13,9 @@ model CreateUploadRequest {
   filename: string;
 
   // Reference: https://platform.openai.com/docs/api-reference/files/create#files-create-purpose
-  /** 
-   * The intended purpose of the uploaded file. 
-   * 
+  /**
+   * The intended purpose of the uploaded file.
+   *
    * Use 'assistants' for Assistants and Message files, 'vision' for Assistants image file inputs, 'batch' for Batch API, and 'fine-tune' for Fine-tuning.
    */
   purpose: string | "assistants" | "batch" | "fine-tune" | "vision";
@@ -70,7 +70,15 @@ model Upload {
 
   // Reference: https://platform.openai.com/docs/api-reference/files/object#files/object-purpose
   /** The intended purpose of the file. */
-  purpose: string | "batch" | "batch_output" | "fine-tune" | "fine-tune-results" | "assistants" | "assistants_output" | "vision";
+  purpose:
+    | string
+    | "batch"
+    | "batch_output"
+    | "fine-tune"
+    | "fine-tune-results"
+    | "assistants"
+    | "assistants_output"
+    | "vision";
 
   /** The status of the Upload. */
   status: string | "pending" | "completed" | "cancelled" | "expired";
