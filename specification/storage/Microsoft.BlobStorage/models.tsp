@@ -2301,9 +2301,7 @@ alias DelimiterParameter = {
 /** The list blob includes parameter. */
 alias ListBlobsIncludeParameter = {
   /** Include this parameter to specify one or more datasets to include in the response. */
-  @query({
-    format: "csv",
-  })
+  @query
   include?: ListBlobsIncludes[];
 };
 
@@ -2460,9 +2458,7 @@ alias MetadataResponseHeader = Record<string>;
 /** The filter blobs include parameter. */
 alias FilterBlobsIncludeParameter = {
   /** Include this parameter to specify one or more datasets to include in the response. */
-  @query({
-    format: "csv",
-  })
+  @query
   include?: FilterBlobsIncludes[];
 };
 
