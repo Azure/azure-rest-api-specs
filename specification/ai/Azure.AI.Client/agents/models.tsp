@@ -16,6 +16,7 @@ using Azure.Core.Traits;
 namespace Azure.AI.Client.Agents;
 
 @doc("Represents an assistant that can call the model and use tools.")
+@added(Versions.v2024_02_15_preview)
 model Assistant {
   @doc("The identifier, which can be referenced in API endpoints.")
   id: string;
@@ -48,6 +49,7 @@ model Assistant {
    * while lower values like 0.2 will make it more focused and deterministic.
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
+  @added(Versions.v2024_05_01_preview)
   @minValue(0)
   @maxValue(2)
   temperature: float32 | null = 1;
@@ -59,6 +61,7 @@ model Assistant {
    * We generally recommend altering this or temperature but not both.
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
+  @added(Versions.v2024_05_01_preview)
   @minValue(0)
   @maxValue(1)
   @encodedName("application/json", "top_p")
@@ -67,12 +70,14 @@ model Assistant {
   /** The response format of the tool calls used by this assistant. */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
   @encodedName("application/json", "response_format")
+  @added(Versions.v2024_05_01_preview)
   responseFormat?: AssistantsApiResponseFormatOption | null;
 
   ...RequiredNullableMetadata;
 }
 
 @doc("The request details to use when creating a new assistant.")
+@added(Versions.v2024_02_15_preview)
 model CreateAssistantOptions {
   @doc("The ID of the model to use.")
   `model`: string;
@@ -94,6 +99,7 @@ model CreateAssistantOptions {
    * while lower values like 0.2 will make it more focused and deterministic.
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
+  @added(Versions.v2024_05_01_preview)
   @minValue(0)
   @maxValue(2)
   temperature?: float32 | null = 1;
@@ -105,6 +111,7 @@ model CreateAssistantOptions {
    * We generally recommend altering this or temperature but not both.
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
+  @added(Versions.v2024_05_01_preview)
   @minValue(0)
   @maxValue(1)
   @encodedName("application/json", "top_p")
@@ -113,6 +120,7 @@ model CreateAssistantOptions {
   /** The response format of the tool calls used by this assistant. */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
   @encodedName("application/json", "response_format")
+  @added(Versions.v2024_05_01_preview)
   responseFormat?: AssistantsApiResponseFormatOption | null;
 
   ...OptionalNullableMetadata;

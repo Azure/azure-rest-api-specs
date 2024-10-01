@@ -23,7 +23,8 @@ namespace Azure.AI.Client.Agents;
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
 @route("/assistants")
 @post
-op createAssistant is Azure.Core.Foundations.Operation<
+@added(Versions.v2024_02_15_preview)
+op createAssistant is Azure.Core.RpcOperation<
   {
     ...CreateAssistantOptions
   },
