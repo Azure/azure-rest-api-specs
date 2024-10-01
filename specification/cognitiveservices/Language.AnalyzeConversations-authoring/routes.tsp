@@ -96,6 +96,7 @@ interface ConversationalAnalysisAuthoring {
    */
   @post
   @pollingOperation(ConversationalAnalysisAuthoring.getExportStatus)
+  @actionSeparator("/:")
   export is languageOperations.LongRunningResourceAction<
     ConversationalAnalysisAuthoringProjectMetadata,
     {
@@ -133,6 +134,7 @@ interface ConversationalAnalysisAuthoring {
    */
   @post
   @pollingOperation(ConversationalAnalysisAuthoring.getImportStatus)
+  @actionSeparator("/:")
   `import` is languageOperations.LongRunningResourceAction<
     ConversationalAnalysisAuthoringProjectMetadata,
     {
@@ -157,6 +159,7 @@ interface ConversationalAnalysisAuthoring {
    */
   @post
   @pollingOperation(ConversationalAnalysisAuthoring.getTrainingStatus)
+  @actionSeparator("/:")
   train is languageOperations.LongRunningResourceAction<
     ConversationalAnalysisAuthoringProjectMetadata,
     ConversationalAnalysisAuthoringTrainingJobOptions,
