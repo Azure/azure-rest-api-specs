@@ -3359,11 +3359,6 @@
           "type": "string",
           "description": "Timestamp when Resource will be eradicated. Present only if `destroyed` is true.",
           "readOnly": true
-        },
-        "previousResourceId": {
-          "type": "string",
-          "description": "Set to the previous volumeResourceId for this volume if destroyed is true, and this used to be a VolumeGroup/Volume, the former Azure resourceId for that VolumeGroup/Volume before it was delete.",
-          "readOnly": true
         }
       },
       "required": [
@@ -3736,35 +3731,16 @@
         "vnetId"
       ]
     },
-    "VolumeConsistencyGroup": {
-      "type": "object",
-      "description": "Consistency Group the Volume belongs to.",
-      "properties": {
-        "consistencyGroupId": {
-          "type": "string",
-          "description": "ID for the Consistency Group the Volume belongs to."
-        }
-      },
-      "required": [
-        "consistencyGroupId"
-      ]
-    },
     "VolumeContainerType": {
       "type": "string",
       "description": "Volume container types.",
       "enum": [
-        "azure",
         "avs"
       ],
       "x-ms-enum": {
         "name": "VolumeContainerType",
         "modelAsString": true,
         "values": [
-          {
-            "name": "Azure",
-            "value": "azure",
-            "description": "Azure Volume Container Type"
-          },
           {
             "name": "AVS",
             "value": "avs",
@@ -3784,19 +3760,6 @@
       },
       "required": [
         "provisionedSize"
-      ]
-    },
-    "VolumePerformancePolicy": {
-      "type": "object",
-      "description": "Name of the Performance Policy applied to the Volume",
-      "properties": {
-        "policyResourceId": {
-          "type": "string",
-          "description": "Resource id of the Performance Policy"
-        }
-      },
-      "required": [
-        "policyResourceId"
       ]
     },
     "VolumeProperties": {
@@ -3828,11 +3791,6 @@
           "description": "Contains properties related to used Flash space",
           "readOnly": true
         },
-        "performancePolicy": {
-          "$ref": "#/definitions/VolumePerformancePolicy",
-          "description": "Name of the Performance Policy applied to the Volume.",
-          "readOnly": true
-        },
         "softDeletion": {
           "$ref": "#/definitions/SoftDeletion",
           "description": "Shows if Resource is destroyed and when eradication will happen.",
@@ -3840,11 +3798,6 @@
             "read",
             "update"
           ]
-        },
-        "consistencyGroup": {
-          "$ref": "#/definitions/VolumeConsistencyGroup",
-          "description": "Consistency Group the Volume belongs to.",
-          "readOnly": true
         },
         "createdTimestamp": {
           "type": "string",
@@ -3867,11 +3820,6 @@
           "description": "AVS details.",
           "readOnly": true
         },
-        "azure": {
-          "$ref": "#/definitions/AzureProperties",
-          "description": "Azure Volume Group assigned to the volume.",
-          "readOnly": true
-        },
         "provisioningState": {
           "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
           "description": "Provisioning state of the resource.",
@@ -3886,18 +3834,12 @@
       "type": "string",
       "description": "Volume types.",
       "enum": [
-        "azure",
         "avs"
       ],
       "x-ms-enum": {
         "name": "VolumeType",
         "modelAsString": true,
         "values": [
-          {
-            "name": "Azure",
-            "value": "azure",
-            "description": "Azure Volume Type"
-          },
           {
             "name": "AVS",
             "value": "avs",
