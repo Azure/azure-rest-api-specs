@@ -170,3 +170,15 @@ model AssistantsApiResponseFormat {
   /** Must be one of `text` or `json_object`. */
   type?: ApiResponseFormat = ApiResponseFormat.text;
 }
+
+/** Possible API response formats. */
+@added(ServiceApiVersions.v2024_05_01_preview)
+union ApiResponseFormat {
+  string,
+
+  /** `text` format should be used for requests involving any sort of ToolCall. */
+  text: "text",
+
+  /** Using `json_object` format will limit the usage of ToolCall to only functions. */
+  jsonObject: "json_object",
+}
