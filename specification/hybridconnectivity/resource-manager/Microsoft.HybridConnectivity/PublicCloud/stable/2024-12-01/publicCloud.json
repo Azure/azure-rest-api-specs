@@ -291,7 +291,7 @@
     },
     "/{resourceUri}/providers/Microsoft.HybridConnectivity/solutionConfigurations/{solutionConfiguration}/inventory": {
       "get": {
-        "operationId": "Inventory_ListByWidget",
+        "operationId": "Inventory_ListBySolutionConfiguration",
         "tags": [
           "Inventory"
         ],
@@ -327,8 +327,8 @@
           }
         },
         "x-ms-examples": {
-          "Inventory_ListByWidget": {
-            "$ref": "./examples/Inventory_ListByWidget.json"
+          "Inventory_ListBySolutionConfiguration": {
+            "$ref": "./examples/Inventory_ListBySolutionConfiguration.json"
           }
         },
         "x-ms-pageable": {
@@ -649,7 +649,7 @@
           }
         },
         "x-ms-examples": {
-          "publicCloudConnectors_Get": {
+          "PublicCloudConnectors_Get": {
             "$ref": "./examples/PublicCloudConnectors_Get.json"
           }
         }
@@ -992,6 +992,7 @@
           "type": "string",
           "description": "Account id for the AWS account.",
           "x-ms-mutability": [
+            "read",
             "create"
           ]
         },
@@ -1007,6 +1008,7 @@
           "description": "Boolean value that indicates whether the account is organizational or not. True represents organization account, whereas false represents a single account.",
           "default": false,
           "x-ms-mutability": [
+            "read",
             "create"
           ]
         }
@@ -1249,6 +1251,7 @@
           "$ref": "#/definitions/HostType",
           "description": "Host cloud the public cloud connector.",
           "x-ms-mutability": [
+            "read",
             "create"
           ]
         },
