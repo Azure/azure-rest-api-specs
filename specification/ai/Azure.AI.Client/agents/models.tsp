@@ -4,10 +4,7 @@ import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@typespec/openapi";
 import "@typespec/versioning";
-
-import "../common/models.tsp";
-import "../tools/models.tsp";
-import "../tools/tool_resources.tsp";
+import "../common.tsp";
 
 using TypeSpec.OpenAPI;
 using TypeSpec.Http;
@@ -15,7 +12,6 @@ using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.Core.Traits;
-
 
 namespace Azure.AI.Client.Agents;
 
@@ -47,18 +43,6 @@ model Agent {
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
   @doc("The system instructions for the agent to use.")
   instructions: string | null;
-
-  @doc("The collection of tools enabled for the agent.")
-  tools: ToolDefinition[] = #[];
-
-  /**
-   * A set of resources that are used by the agent's tools. The resources are specific to the type of tool. For example, the `code_interpreter`
-   * tool requires a list of file IDs, while the `file_search` tool requires a list of vector store IDs.
-   */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
-  @encodedName("application/json", "tool_resources")
-  @added(ServiceApiVersions.v2024_05_01_preview)
-  toolResources: ToolResources | null;
 
   /**
    * What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output more random,
@@ -110,19 +94,6 @@ model CreateAgentOptions {
   @doc("The system instructions for the new agent to use.")
   instructions?: string | null;
 
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
-  @doc("The collection of tools to enable for the new agent.")
-  tools?: ToolDefinition[] = #[];
-
-  /**
-   * A set of resources that are used by the agent's tools. The resources are specific to the type of tool. For example, the `code_interpreter`
-   * tool requires a list of file IDs, while the `file_search` tool requires a list of vector store IDs.
-   */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
-  @encodedName("application/json", "tool_resources")
-  @added(ServiceApiVersions.v2024_05_01_preview)
-  toolResources?: ToolResources | null;
-
   /**
    * What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output more random,
    * while lower values like 0.2 will make it more focused and deterministic.
@@ -155,76 +126,58 @@ model CreateAgentOptions {
   ...OptionalNullableMetadata;
 }
 
-@doc("The request details to use when modifying an existing agent.")
-@added(ServiceApiVersions.v2024_02_15_preview)
-model UpdateAgentOptions {
-  @path
-  @doc("The ID of the agent to modify.")
-  agentId: string;
+/**
+ * Specifies the format that the model must output. Compatible with GPT-4 Turbo and all GPT-3.5 Turbo models since `gpt-3.5-turbo-1106`.
+ *
+ * Setting to `{ "type": "json_object" }` enables JSON mode, which guarantees the message the model generates is valid JSON.
+ *
+ * **Important:** when using JSON mode, you **must** also instruct the model to produce JSON yourself via a system or user message.
+ * Without this, the model may generate an unending stream of whitespace until the generation reaches the token limit,
+ * resulting in a long-running and seemingly "stuck" request. Also note that the message content may be partially cut off
+ * if `finish_reason="length"`, which indicates the generation exceeded `max_tokens` or the conversation exceeded the max context length.
+ */
+#suppress "@azure-tools/typespec-autorest/union-unsupported" "This union is defined according to the OpenAI API"
+@added(ServiceApiVersions.v2024_05_01_preview)
+union AgentsApiResponseFormatOption {
+  string,
 
-  @doc("The ID of the model to use.")
-  `model`?: string;
+  /** The model will handle the return format. */
+  AgentsApiResponseFormatMode,
 
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
-  @doc("The modified name for the agent to use.")
-  name?: string | null;
-
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
-  @doc("The modified description for the agent to use.")
-  description?: string | null;
-
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
-  @doc("The modified system instructions for the new agent to use.")
-  instructions?: string | null;
-
-  @doc("The modified collection of tools to enable for the agent.")
-  tools?: ToolDefinition[] = #[];
-
-  /**
-   * A set of resources that are used by the agent's tools. The resources are specific to the type of tool. For example,
-   * the `code_interpreter` tool requires a list of file IDs, while the `file_search` tool requires a list of vector store IDs.
-   */
-  @encodedName("application/json", "tool_resources")
-  @added(ServiceApiVersions.v2024_05_01_preview)
-  toolResources?: ToolResources;
-
-  /**
-   * What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output more random,
-   * while lower values like 0.2 will make it more focused and deterministic.
-   */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
-  @added(ServiceApiVersions.v2024_05_01_preview)
-  @minValue(0)
-  @maxValue(2)
-  temperature?: float32 | null = 1;
-
-  /**
-   * An alternative to sampling with temperature, called nucleus sampling, where the model considers the results of the tokens with top_p probability mass.
-   * So 0.1 means only the tokens comprising the top 10% probability mass are considered.
-   *
-   * We generally recommend altering this or temperature but not both.
-   */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
-  @added(ServiceApiVersions.v2024_05_01_preview)
-  @minValue(0)
-  @maxValue(1)
-  @encodedName("application/json", "top_p")
-  topP?: float32 | null = 1;
-
-  /** The response format of the tool calls used by this agent. */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
-  @encodedName("application/json", "response_format")
-  @added(ServiceApiVersions.v2024_05_01_preview)
-  responseFormat?: AgentsApiResponseFormatOption | null;
-
-  ...OptionalNullableMetadata;
+  /** Sets the format of the output of the model when a ToolCall is returned. */
+  AgentsApiResponseFormat,
 }
 
-@doc("The status of an agent deletion operation.")
-@added(ServiceApiVersions.v2024_02_15_preview)
-model AgentDeletionStatus {
-  ...DeletionStatus;
+/** Represents the mode in which the model will handle the return format of a tool call. */
+@added(ServiceApiVersions.v2024_05_01_preview)
+union AgentsApiResponseFormatMode {
+  string,
 
-  @doc("The object type, which is always 'assistant.deleted'.")
-  object: "assistant.deleted";
+  /** Default value. Let the model handle the return format. */
+  "auto",
+
+  /** Setting the value to `none`, will result in a 400 Bad request. */
+  "none",
+}
+
+/**
+ * An object describing the expected output of the model. If `json_object` only `function` type `tools` are allowed to be passed to the Run.
+ * If `text` the model can return text or any value needed.
+ */
+@added(ServiceApiVersions.v2024_05_01_preview)
+model AgentsApiResponseFormat {
+  /** Must be one of `text` or `json_object`. */
+  type?: ApiResponseFormat = ApiResponseFormat.text;
+}
+
+/** Possible API response formats. */
+@added(ServiceApiVersions.v2024_05_01_preview)
+union ApiResponseFormat {
+  string,
+
+  /** `text` format should be used for requests involving any sort of ToolCall. */
+  text: "text",
+
+  /** Using `json_object` format will limit the usage of ToolCall to only functions. */
+  jsonObject: "json_object",
 }
