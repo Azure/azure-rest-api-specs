@@ -28,6 +28,7 @@ using Azure.Core;
     endpoint: url,
   }
 )
+@versioned(Versions)
 namespace Azure.Storage.Blob;
 
 #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Following standard typespec recommendation"
