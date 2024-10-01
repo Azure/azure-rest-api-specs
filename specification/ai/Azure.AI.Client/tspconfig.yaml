@@ -1,6 +1,12 @@
 parameters:
   "service-dir":
     default: "sdk/ai"
+  "output-folder-base":
+    default: "OpenAI.Assistants"
+  "version-status":
+    default: "preview"
+  "version":
+    default: "2024-07-01-preview"
 
 emit:
   - "@azure-tools/typespec-autorest#client"
@@ -10,27 +16,27 @@ emit:
 options:
   "@azure-tools/typespec-autorest#client":
     emitter-output-dir: "{project-root}/.."
-    azure-resource-provider-folder: "data-plane"
+    azure-resource-provider-folder: "data-plane/Azure.AI.Client"
     emit-lro-options: "none"
-    output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/azure-ai-client.json"
+    output-file: "{azure-resource-provider-folder}/{version-status}/{version}/azure-ai-client.json"
 
   "@azure-tools/typespec-autorest#assistants":
-    emitter-output-dir: "{project-root}/../"
-    azure-resource-provider-folder: "data-plane"
+    emitter-output-dir: "{project-root}/.."
+    azure-resource-provider-folder: "data-plane/{output-folder-base}/OpenApiV2"
     examples-directory: "{project-root}/examples"
-    output-file: "{output-folder-base}/OpenApiV2/{version-status}/{version}/assistants_generated.json"
+    output-file: "{azure-resource-provider-folder}/{version-status}/{version}/assistants_generated.json"
     omit-unreachable-types: true
     emit-lro-options: "none"
-   
+
   "@typespec/openapi3#assistants":
-    emitter-output-dir: "{project-root}/../"
-    output-file: "{output-folder-base}/OpenApiV3/{version}/assistants_generated.yaml"
+    emitter-output-dir: "{project-root}/.."
+    output-file: "data-plane/{output-folder-base}/OpenApiV3/{version-status}/{version}/assistants_generated.yaml"
 
   "@azure-tools/typespec-python":
     package-mode: "dataplane"
     package-dir: "azure-ai-client"
     package-name: "{package-dir}"
-    package-version: "1.0.0b25"
+    package-version: "1.0.0b26"
     flavor: azure
     generate-test: true
     generate-sample: true
