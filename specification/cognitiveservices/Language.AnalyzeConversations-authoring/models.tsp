@@ -679,7 +679,7 @@ model ConversationalAnalysisAuthoringProjectDeployment {
    * Represents deployment name.
    */
   @key("deploymentName")
-  @visibility("read")
+  @visibility
   deploymentName: string;
 
   /**
@@ -864,7 +864,7 @@ model ConversationalAnalysisAuthoringProjectTrainedModel {
    * The trained model label.
    */
   @key("trainedModelLabel")
-  @visibility("read")
+  @visibility
   label: string;
 
   /**
@@ -975,7 +975,7 @@ model ConversationalAnalysisAuthoringUtteranceEvaluationResult {
    * Represents the utterance text.
    */
   @key
-  @visibility("read")
+  @visibility
   text: string;
 
   /**
@@ -1323,7 +1323,7 @@ model ConversationalAnalysisAuthoringAssignedDeploymentResource {
    * The resource ID.
    */
   @key
-  @visibility("read")
+  @visibility
   azureResourceId: string;
 
   /**
